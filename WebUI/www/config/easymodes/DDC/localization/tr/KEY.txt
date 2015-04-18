@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda kapi acilir. Tusa uzun s&uuml;re basildiginda <b>Kapiyi ac / OTOMATIK kapat<b> fonksiyonunu uygular.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda kapi kapanir. Tusa uzun s&uuml;re basildiginda <b>Kapiyi ac / OTOMATIK kapat<b> fonksiyonunu uygular.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda kapi acilir. Kapi tahrikinden ayarlanabilen bir s&uuml;re dolduktan sonra kapi kendiliginden kapanir.</span><br/><br/>",
+"description_4" : "",

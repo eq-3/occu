@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">In case of humidity the chime will be triggered according to the selected operating mode.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The water sensor is deactivated.</span><br/><br/>",
+"subset_1" : "Humidity - on / dry - off",
+"subset_2" : "Humidity - off / dry - on",

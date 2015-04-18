@@ -1,0 +1,148 @@
+<%
+  system.SetSessionVar("sessionTAB", "favorites");
+  boolean bShowFavs = true;
+%>
+<script type="text/javascript">
+  //setPath("<span onclick='WebUI.enter(ControlPage);'>Status und Bedienung</span> &gt; Favoriten");
+  setPath("<span onclick='WebUI.enter(ControlPage);'>"+translateKey('menuControlPage') +"</span> &gt; "+translateKey('submenuFavorites'));
+  sButton = "<td align='center' valign='middle'><div onclick='NewFavoriteList();' class='FooterButton'>"+translateKey('footerBtnNew') +"</div></td>";
+</script>
+
+
+
+<table id="tblNoFavs" class="CLASS05600" cellpadding="0" cellspacing="0" style="display:none;">
+<tr>
+<td class="CLASS05601"></td>
+<td class="CLASS05602"></td>
+</tr>
+<tr>
+ <td colspan="2" class="CLASS05603">${noFavoritesAvailable}</td>
+
+
+</tr>
+<tr>
+<td class="CLASS05601"></td>
+<td class="CLASS05602"></td>
+</tr>
+</table>
+
+<%
+  object oFavorites = dom.GetObject( ID_FAVORITES );
+  if( oFavorites )
+  {
+    object oUserFavorites = dom.GetObject( "_USER"#system.GetSessionVar("sessionUserID") );
+    if( oUserFavorites )
+    {
+      string id;
+      Write('<table class="CLASS05610" id="tblFavs" cellpadding="0" cellspacing="0" style="display:none;">');
+      Write('<tr>');
+      integer i = 0;
+      foreach( id, oUserFavorites.EnumEnabledVisibleIDs() )
+      { 
+        object oFav = dom.GetObject( id );
+        if( oFav )
+        {
+          if( (oFav.Name().Substr(0,5) != "_USER") && (oFav.EnCopyID() == ID_ERROR))
+          {
+            i = i + 1;
+            Write('<script type="text/javascript">sButton="";</script>');
+            string sInfo = oFav.EnumInfo();
+            if( !sInfo.Length() ) { sInfo = "${noDescription}"; }
+              string sName = oFav.Name();
+              Write('<td>');
+                Write('<table cellpadding="0" cellspacing="0" class="CLASS05604">');
+                Write('<tr>');
+                  Write('<td class="CLASS05605"></td>');
+                  Write('<td class="CLASS05606"></td>');
+                Write('</tr>');
+                Write('<tr>');
+                !  string lineHeight= "74px";
+                !  if (sName.Length() > 14) {
+                !    lineHeight = "37px";
+                !  }
+                !  if (sName.Length() > 28) {
+                !    lineHeight = "26px";
+                !  }
+                  integer iLength = 14;
+                  !Call("/esp/datapointconfigurator.fn::StringCut()");
+                  !Write('<td class="CLASS05607"><div id="fav_'#oFav.ID()#'" class="CLASS05608" style="line-height:' # lineHeight # ';" onclick="WebUI.enter(ControlFavoritePage, '#oFav.ID()#');">'#sName#'</div></td>');
+                  Write('<td class="CLASS05607"><div id="fav_'#oFav.ID()#'" class="CLASS05608" onclick="WebUI.enter(ControlFavoritePage, '#oFav.ID()#');">'#sName#'</div></td>');
+                  Write('<td class="CLASS05609">'#sInfo#'</td>');
+                Write('</tr>');
+                Write('<tr>');
+                  Write('<td class="CLASS05605"></td>');
+                  Write('<td class="CLASS05606"></td>');
+                Write('</tr>');
+                Write('</table>');
+              Write('</td>');
+              if( !(i%2) )
+              {
+                Write( "</tr><tr>" );
+              }
+            }
+          }
+          Write("<script type='text/javascript'>");
+            Write("var lineHeight = 74;");
+            Write("var favID = 'fav_'+"#oFav.ID()#";");
+            Write("var elemID = favID;");
+            Write("var sName = translateString(jQuery('#'+elemID).text());");
+            Write("if((sName.length > 20) && (sName.length <=28)) {lineHeight = 37;}");
+            Write("if(sName.length > 28) {lineHeight = 26;}");
+            Write("sName = sName.replace(/(.{19})/g,'$1<br/>');");
+            Write("jQuery('#'+elemID).html(sName);");
+            Write("jQuery('#'+elemID).css('line-height',lineHeight+'px');");
+          Write("</script>");
+        }
+      }
+      Write('</tr>');
+      Write('</table>');
+    }
+  }
+
+%>
+
+<script type="text/javascript">
+  var s = "";
+  s += "<table cellspacing='8'>";
+  s += "<tr>";
+  s += sButton;
+  s += "</tr>";
+  s += "</table>";
+  
+  setFooter(s);
+  
+  loadEditFav = function()
+  {
+    doClearTempView = true;
+    loadNewFav();
+  };
+  
+  NewFavoriteList = function()
+  {
+    var url = '/esp/favorites.htm?sid='+SessionId;
+    var pb = '';
+    pb += 'string action = "NewFavoriteList";';
+    var opt =
+    {
+      postBody: pb,
+      onComplete: function(t)
+      {
+        loadEditFav();
+        translatePage('#idName');
+      }
+    };
+    new Ajax.Request(url,opt);
+  };
+  
+  var iFavCount = <% Write(i);%>;
+  if (iFavCount > 0)
+  {
+    $("tblFavs").show();
+    translatePage("#tblFavs");
+  }
+  else
+  {
+    $("tblNoFavs").show();
+    translatePage("#tblNoFavs");
+  }
+</script>

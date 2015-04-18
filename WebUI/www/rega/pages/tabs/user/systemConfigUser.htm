@@ -1,0 +1,46 @@
+<%
+  system.SetSessionVar("sessionTAB", "systemconfigUser");
+%>
+<script type="text/javascript">
+  setPath("Einstellungen");
+</script>
+
+<table class="StdTable" cellspacing="20">
+  <colgroup>
+    <col width="25%" />
+    <col width="25%" />
+    <col width="25%" />
+    <col width="25%" />
+  </colgroup>
+  <tr class="CLASS06100">
+    <!-- Favoriten -->
+    <td>
+      <div class="StdTableBtn" onclick="WebUI.enter(FavoriteListPage);">Favoriten</div>
+      <ul>
+        <li>&Uuml;bersicht über die dem angemeldeten Benutzer zugeordneten Favoriten</li>
+        <li>Anlegen und Bearbeiten neuer Favoriten</li>
+        <li>L&ouml;schen von Favoriten</li>
+      </ul>
+    </td>
+    
+    <!-- Benutzerverwaltung -->
+    <td>
+      <div  class="StdTableBtn" onclick="WebUI.enter(UserAdminPageUser);">Benutzerverwaltung</div>
+      <ul>
+        <li>Bearbeiten des eigenen Benutzerkontos mit Ändern des Kennwortes</li>
+      </ul>
+    </td>
+    <td class="CLASS06101"></td>
+    <td class="CLASS06101"></td>
+  </tr>
+  <tr>
+    <td class="CLASS06101"></td>
+    <td class="CLASS06101"></td>
+    <td class="CLASS06101"></td>
+    <td class="CLASS06101"></td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+setFooter("");
+</script>

@@ -1,0 +1,13 @@
+[
+	{
+		"noLinksAvailable" : "G&uuml;clendirici baglanti yok.",
+		"linksDeviceCCU" : "<u>Cihaz ve merkez arasinda g&uuml;clendirici baglanti var</u>",
+		"REPEATER_chooseLinks" : "G&uuml;clendirici baglantiyi secin.",
+		"REPEATER_sender" : "Verici",
+		"REPEATER_receiver" : "Alici",
+		"REPEATER_description" : "Tanim",
+		"REPEATER_amplification" : "Takviye",
+		"REPEATER_broadcast" : "Ortak ileti",
+		"REPEATER_broadcastOnly" : "Sadece ortak iletilere m&uuml;saade eden sicaklik / nem sens&ouml;rleri",
+	}
+]

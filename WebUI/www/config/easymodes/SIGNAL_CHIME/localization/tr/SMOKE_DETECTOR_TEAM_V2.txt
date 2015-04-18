@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Duman alarmi devreye girdiginde gong etkinlesir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Duman alarmi etkin degil.</span>",

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html>
+<head>
+  <title>HomeMatic WebUI PDA</title>
+  <style type="text/css"><%=[includeStyle]%></style>
+		<script type="text/javascript">
+	
+		gotoUrl = function(url)
+		{
+			window.location.href = url;
+		};
+	
+	</script>
+</head>
+<body>
+  <div class="page">
+  <table cellspacing="0" cellpadding="0">
+    <tr><td class="title">HomeMatic WebUI PDA</td></tr>
+    <tr><td class="status_top">&nbsp;</td></tr>
+    <tr><td class="status">
+			<div class="caption">Die Sitzung ist ungültig.</div>
+    </td></tr>
+    <tr><td class="status_bottom">&nbsp;</td></tr>
+		<%=[changeViewButton "$UI_URLBASE/main.cgi?sid=$sid"]%>
+		<%=[systemButton "Erneut anmelden" "$UI_URLBASE/?uiStyle=[getUIStyle]"]%>
+  </table>
+  </div>
+</body>
+</html>

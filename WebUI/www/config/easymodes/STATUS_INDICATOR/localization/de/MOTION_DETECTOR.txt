@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Display mindestens f&uuml;r die festgelegte Zeit eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, wird es erst nach Ablauf dieser Zeit geschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Bewegungsmelder ist nicht aktiv</span>",
+"md_on_time" : "Einschaltdauer (Verweildauer im Zustand \"ein\")",
+"md_min_on_time" : "Mindest-Einschaltdauer",
+"hint0a" : "<b>ACHTUNG!</b> Die gew&auml;hlte Einschaltdauer des Aktors ist kleiner als der Mindestsendeabstand von  ",
+"hint0b" : "s.",
+"hint1a" : "Da die n&auml;chste Bewegung erst in",
+"hint1b" : "s gesendet wird, schaltet sich der Aktor vorher ab.",

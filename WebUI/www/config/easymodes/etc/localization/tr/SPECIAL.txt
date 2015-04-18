@@ -1,0 +1,9 @@
+[
+	{
+		"expert" : "Uzmanlar",
+		"hint_no_expert" : "<span class=\"translated\">Bu baglanti ayarlanabilir parametre algilayamadi.</span>",
+		"hint_no_profile" : "<span class=\"translated\">Bu baglanti icin profil bulunamadi. L&uuml;tfen uzmanlik modunu kullanin.</span>",
+		"no_userProfile" : "Bu profil, profil taslagi olarak kaydedilemez",
+		"no_profile" : "Profil yok",
+	}
+]

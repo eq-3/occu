@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda gongun sinyal lambasi secilen moda g&ouml;re degisir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Tus etkin degildir.</span>",
+"group_description_1" : "<span class=\"translated\">Eger sinyal lambasi istenmeden yanip s&ouml;nerse, lamba bu tusla kapatilabilir.</span>",
+"group_description_2" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda gongun sinyal lambasi secilen moda g&ouml;re degisir.</span><br/><br/>",
+"group_description_3" : "<span class=\"translated\">Tus etkin degil.</span><br/><br/>",
+"subset_1" : "ac",
+"subset_2" : "ac/kapat",

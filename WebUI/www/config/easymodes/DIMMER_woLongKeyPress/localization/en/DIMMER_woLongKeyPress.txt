@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">With a short or long button press the light changes betwee the set brightness value and &quot;off&quot;.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a short or long button press the light will be switched on for the set time. During the off-delay the warning level will be slightly lowered to dim slowly to the status &quot;off&quot; afterwards.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a short or long button press the light will be switched on to the defined brightness value and afterwards dimmed slowly to &quot;off&quot;.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">The light will be switched off by a short or long button press.</span><br/><br/>",

@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Bir yangin alarmi durumunda pencere belirlenen s&uuml;re boyunca acilir ve secilen bu s&uuml;re dolduktan veya tetikleyicideki alarma ya da ayni gruptaki duman alarmina basildiktan sonra otomatik olarak tekrar kapanir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bir yangin alarmi halinde pencere hemen kapanir.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bu baglanti devre disi birakilir.</span>",
+"subset_1" : "sadece tetikleyen duman alarmi",
+"subset_2" : "Ayni gruba ait duman alarmi",

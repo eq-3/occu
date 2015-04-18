@@ -1,0 +1,530 @@
+<script type="text/javascript" language="javascript">
+
+  <%
+    system.SetSessionVar("sessionTAB", "programs");
+    object oOrigPrg = dom.GetObject( system.GetSessionVar("sessionORIGPRGID") );
+    object oPrg = dom.GetObject( system.GetSessionVar("sessionPRGID") );
+    if( (!oPrg) || (!oOrigPrg) )
+    {
+      Write( 'conError("Load program: Failed to get program objects.");' );
+    }
+    string sFirstRule = oPrg.Rule().ID();
+  %>
+
+  !setPath("<span onclick='WebUI.enter(LinksAndProgramsPage);'>Programme &amp; Verkn&uuml;pfungen</span> &gt; <span onclick='WebUI.enter(ProgramListPage);'>Programme</span> &gt; Programmerstellung");
+  setPath("<span onclick='WebUI.enter(LinksAndProgramsPage);'>"+ translateKey("menuProgramsLinksPage") +"</span> &gt; <span onclick='WebUI.enter(ProgramListPage);'>"+ translateKey("submenuPrograms") +"</span> &gt; "+ translateKey("programsCreateProgram") );
+
+  ConvertValueToPercent = function(id) {
+    var sourceElm = jQuery("#source"+id),
+      destElm = jQuery("#dest"+id),
+      sourceVal = sourceElm.val();
+    destElm.val(sourceVal);
+    destElm.change();
+  };
+
+  SetSysVarDestValue = function( id, value, min, max, unit)
+  {
+    var iPos = value.indexOf(":");
+    if( iPos == -1 )
+    {
+      if (!unit) {
+        unit = '';
+      }
+      if( (value >= min) && (value <= max) )
+      {
+        //alert( id +'.........'+ value );
+        iseSingleDestination.reload = true;
+        iseSingleDestination.SetValue( id, value, unit );
+      }
+      else
+      {
+        //if(dbg)alert("Wert außerhalb des möglichen Eingabebereichs!");
+        if(dbg)alert(translateKey("alertValOutOfRange"));
+        ReloadSingleDestination(id);
+      }
+    }
+    else
+    {
+      //alert( value.substr(0,iPos) +'::::::'+ value.substr(iPos+1) );
+      iseSingleDestination.reload = true;
+      //value.substr(0,iPos)
+      iseSingleDestination.SetValue( id, value.substr(iPos+1), '' );
+    }    
+  };
+  
+  SetSysVarDestStrValue = function(id, value)
+  {
+    iseSingleDestination.reload = true;
+    iseSingleDestination.SetValue( id, value, 'STRING' );
+  };
+
+  ChangeDestinationValue = function(sdid)
+  {
+    iseSingleDestination.reload = false;
+    dlgResult = "";
+    CreatePopup(ID_INSERT_VALUE, "X:"+sdid);
+    PopupClose = function()
+    {
+      dlgPopup.hide();
+      ReloadSingleDestination(sdid);
+    };
+  };
+  
+  ChangeOULED16Value = function(sdid)
+  {
+    iseSingleDestination.reload = false;
+    dlgResult = "";
+    CreatePopup(ID_CHOOSE_LED, "X:"+sdid);
+    PopupClose = function()
+    {
+      dlgPopup.hide();
+      ReloadSingleDestination(sdid);
+    };
+  };  
+ 
+  // MP3 Funkgong
+  ChangeOUCFMValue = function(sdid)
+  {
+    iseSingleDestination.reload = false;
+    dlgResult = "";
+    CreatePopup(ID_SET_OUCFM_MODE, "X:"+sdid);
+    PopupClose = function()
+    {
+      dlgPopup.hide();
+      ReloadSingleDestination(sdid);
+    };
+  };  
+
+  // Heating thermostate
+  SetPartyMode = function(elm) {
+    var url = "/pages/msg/setPartyMode.htm";
+    var inputElm = jQuery(elm).prev(), // this is the element which contains the relevant string to transmit
+    curVal = inputElm.val().split(","),
+    devData = {};
+
+    devData.stPartyTemp = curVal[0];
+    devData.stPartyStartTime = curVal[1];
+    devData.stPartyStartDay = curVal[2];
+    devData.stPartyStartMonth = curVal[3];
+    devData.stPartyStartYear = curVal[4];
+    devData.stPartyStopTime = curVal[5];
+    devData.stPartyStopDay = curVal[6];
+    devData.stPartyStopMonth = curVal[7];
+    devData.stPartyStopYear = curVal[8];
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+     var partyModeDialog = new PartyModeDialog(translateKey("partyModeDialogTitle"), htmlContent, devData ,function(result) {
+        if (result == 1) {
+          var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+          var oPartyMode = this.getPartyModeObject();
+          var sPartyMode = "";
+
+          sPartyMode += oPartyMode.temp + ",";
+          sPartyMode += oPartyMode.startMinutesSinceMidnight + ",";
+          sPartyMode += oPartyMode.startDay + ",";
+          sPartyMode += oPartyMode.startMonth + ",";
+          sPartyMode += oPartyMode.startYear + ",";
+          sPartyMode += oPartyMode.stopMinutesSinceMidnight + ",";
+          sPartyMode += oPartyMode.stopDay + ",";
+          sPartyMode += oPartyMode.stopMonth + ",";
+          sPartyMode += oPartyMode.stopYear;
+
+          jQuery(inputElm).val(sPartyMode).change();
+        }
+      }, "html");
+    });
+  };
+
+  SetStatusDisplay = function(regaDialogID) {
+    var elm = jQuery("#setStatusDisplay" + regaDialogID);
+    jQuery(elm).prop("disabled", true);
+
+    var url = "/pages/msg/setStatusDisplay.htm";
+    var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+    req.done(function(htmlContent) {
+      var statusDisplayDialog = new StatusDisplayDialog(translateKey("statusDisplayDialogTitle"), htmlContent, jQuery(inputElm).val(), function(result) {
+        jQuery(elm).prop("disabled", false);
+        if (result == 1) {
+          conInfo("SetStatusDisplay: Yes pressed");
+          var inputElm = jQuery(elm).prev();
+          var result = this.getDisplayConfigString();
+          conInfo(result);
+          inputElm.val(result); //.change();
+          encodeStringStatusDisplay(inputElm.prop("id"));
+          inputElm.change();
+        }
+      }, "html");
+    });
+  };
+
+  ChangeDelayUnit = function( sdid )
+  {
+    SetDelay( sdid, $F("delay"+sdid) );
+  };
+
+  SetDelay = function( sdid, tmval)
+  {
+    tmval = parseInt(tmval);
+    var iHours = 0;
+    var iMins = 0;
+    var iSecs = 0;
+    
+    switch($('tm'+sdid+'unit').selectedIndex)
+    {
+      case 0:
+        iSecs = tmval;
+        break;
+      case 1:
+        iMins = tmval;
+        break;
+      case 2:
+        iHours = tmval;
+        break;
+    }
+    iMins = iMins + Math.floor(iSecs/60);
+    iSecs = iSecs % 60;
+    iHours = iHours + Math.floor(iMins/60);
+    iMins = iMins % 60;
+    if( iSecs < 10 ) iSecs = "0" + iSecs;
+    if( iMins < 10 ) iMins = "0" + iMins;
+    if( iHours < 10 ) iHours = "0" + iHours;
+    var paramDelay = iHours+":"+iMins+":"+iSecs;
+    iseSingleDestination.SetValueParam(sdid,paramDelay);
+  };
+    
+  EditScript = function( sdid )
+  {
+    dlgResult = "";
+    CreatePopup(ID_EDIT_SCRIPT, sdid);
+    PopupClose = function()
+    {
+      dlgPopup.hide();
+      if( dlgResult != "" )
+      {
+        iseSingleDestination.SetScript(sdid,dlgResult);
+      }
+    };
+  };
+
+  SetLeftValue = function(scid,dpid)
+  {
+    var iPosColon = dpid.indexOf(":");
+    if( iPosColon >= 0 )
+    {
+      var sDPID = dpid.substr(0,iPosColon);
+      var sIDX = dpid.substr(iPosColon+1);
+      iseSingleCondition.SetLeftAndRightValue(scid,sDPID,sIDX);
+      //iseSingleCondition.SetRightValue(scid,sIDX);
+      //iseSingleCondition.SetLeftValue(scid,sDPID);
+    }
+  };
+  ShowTimeEditor = function(scid,tmid)
+  {
+    dlgResult = "";
+    CreatePopup(ID_TIMEMODULE,tmid);
+    PopupClose = function()
+    {
+      dlgPopup.hide();
+      if( dlgResult != "" )
+      {
+        if(dbg){alert( "New TimeModule: "+dlgResult);}
+        iseSingleCondition.SetTimeModule(scid,dlgResult);
+      }
+    };
+  };
+  ShowSysVarChooser = function(scid)
+  {
+    dlgResult = "";
+    CreatePopup(ID_SYS_VARS_SELECTION,1);
+    PopupClose = function()
+    {
+      dlgPopup.hide();
+      if( dlgResult != "" )
+      {
+        iseSingleCondition.SetLeftValue(scid,dlgResult);
+      }
+    };
+  };
+  ShowDestinationSysVarChooser = function(sdid)
+  {
+    dlgResult = "";
+    CreatePopup(ID_SYS_VARS_SELECTION,0);
+    PopupClose = function()
+    {
+      dlgPopup.hide();
+      if( dlgResult != "" )
+      {
+        iseSingleDestination.SetDP(sdid,dlgResult);
+      }
+    };
+  };
+
+  ShowDestinationChannelChooser2 = function(scid)
+  {
+    var callback = function ( result )
+    {
+      if (result) { iseSingleDestination.SetChannel(scid, result); }
+    };
+
+    ChannelChooser.show(callback, ChannelChooser.SHOW_WRITABLE);
+  };
+
+  ShowChannelChooser2 = function(scid)
+  {
+    var callback = function ( result )
+    {
+      if (result) { iseSingleCondition.SetChannel(scid, result); }
+    };
+    ChannelChooser.show(callback, ChannelChooser.SHOW_READABLE | ChannelChooser.SHOW_EVENTABLE);
+  };
+
+  SetDestinationDPSelectChange = function(chid,elem)
+  {
+    var dpid = elem.value.split("|")[0];
+    var iPosColon = dpid.indexOf(":");
+    if( iPosColon >= 0 )
+    {
+      var sDPID = dpid.substr(0,iPosColon);
+      var sIDX = dpid.substr(iPosColon+1);
+      iseSingleDestination.reload = false;
+      iseSingleDestination.SetValueAndDP(chid,sIDX,sDPID, elem);
+      //iseSingleDestination.SetDP(chid,sDPID);
+    }   
+  };
+  DestinationParamSelectChange = function(idx,sdid)
+  {
+    switch( idx )
+    {
+      case 0:
+        iseSingleDestination.SetParam(sdid,<% Write(ivtEmpty); %>);
+        break;
+      case 1:
+        iseSingleDestination.SetParam(sdid,<% Write(ivtObjectId); %>);
+        break;
+      case 2:
+        iseSingleDestination.SetParam(sdid,<% Write(ivtSystemId); %>);
+        break;
+      case 3:
+        iseSingleDestination.SetParam(sdid,<% Write(ivtString); %>);
+        break;
+    }
+  };
+  LeftValSelectChange = function(idx,scid)
+  {
+    switch( idx )
+    {
+      case 0:
+        iseSingleCondition.SetLeftValType(scid,<% Write(ivtEmpty); %>);
+        break;
+      case 1:
+        iseSingleCondition.SetLeftValType(scid,<% Write(ivtObjectId); %>);
+        break;
+      case 2:
+        iseSingleCondition.SetLeftValType(scid,<% Write(ivtSystemId); %>);
+        break;
+      case 3:
+        iseSingleCondition.SetLeftValType(scid,<% Write(ivtCurrentDate); %>);
+        break;
+    }
+  };
+  AddSingleCondition = function(rid,id)
+  {
+    isePrograms.AddSingleCondition( rid, id );
+  };
+  ChangeOperatorType = function(id,value)
+  {
+    isePrograms.OperatorType( id, (value+1) );
+  };
+  CancelProgramEdit = function(copy)
+  {
+    isePrograms.Delete(copy);
+  };
+  SaveProgramEdit = function(orig,copy)
+  {  
+    setTimeout( "isePrograms.Restore("+orig+","+copy+")", 500 );
+  };
+  CopyToNewProgram = function(copy)
+  {
+    setTimeout( "isePrograms.CopyToNewProgram("+copy+")", 500 );
+  };
+  AddSubRuleSelectChange = function(idx,rid)
+  {
+    if( idx == 1 )
+    {
+      isePrograms.AddNewElseRule(rid);
+      if(dbg){alert(rid);}
+    }
+  };
+  DeleteSubRuleSelectChange = function(idx,rid)
+  {
+    if( idx == 0 )
+    {
+      isePrograms.DeleteSubRule(rid);
+    }
+  };
+
+  setConditionBlockColor = function()
+  {
+    var elem = jQuery("#prgrulecontent > div");
+    elem.filter(":even").addClass("conditionEven");
+    elem.filter(":odd").addClass("conditionOdd");
+  };
+
+  TranslatePrgRulePage = function()
+  {
+      var buttons =
+      "ruleConditionButtonDeviceList, ruleConditionButtonSystemVar, ruleConditionButtonTimeModul," +
+      "ruleActivityButtonDeviceList, ruleActivityButtonSystemState, ruleActivityButtonCreateScript";
+
+      // Erst aktivieren, wenn benötigt.
+      setConditionBlockColor();
+      translatePage('#prgrulecontent');
+      translateButtons(buttons);
+  };
+
+  ReloadSiDeCallback = function(t)
+  {
+    iseRefr(true);
+    TranslatePrgRulePage();
+  };
+  ReloadSingleDestination = function(sdid)
+  {
+    iseRefr(false);
+    var url = "/esp/side.htm?sid="+SessionId;
+    var pb = '';
+    pb += 'string action = "ReloadSiDe";';
+    pb += 'string id = "'+sdid+'";';
+    var opts = { postBody: pb, onComplete: ReloadSiDeCallback };
+    new Ajax.Updater("side"+sdid,url,opts);
+  };
+  ReloadSiCoCallback = function(t)
+  {
+    iseRefr(true);
+    TranslatePrgRulePage();
+  };
+  ReloadSingleCondition = function(scid)
+  {
+    iseRefr(true);
+    var url = "/esp/sico.htm?sid="+SessionId;
+    var pb = '';
+    pb += 'string action = "ReloadSiCo";';
+    pb += 'string id = "'+scid+'";';
+    var opts = { postBody: pb, onComplete: ReloadSiCoCallback }
+    new Ajax.Updater("sico"+scid,url,opts);
+  };
+  LoadRuleCallback = function(t)
+  {
+    if(dbg)alert("LoadRuleCallback");
+    var res = t.responseText;
+    var posSeparator = res.indexOf("|");
+    if( posSeparator != -1 )
+    {
+      var sLastRule = res.substr(0,posSeparator);
+      res = res.substr(posSeparator+1);
+      if( sLastRule == "false" )
+      {
+        posSeparator = res.indexOf("|");
+        if( posSeparator != -1 )
+        {
+          var sNextRule = res.substr(0,posSeparator);
+          res = res.substr(posSeparator+1);
+          LoadRule("0",sNextRule);
+        }
+      }
+      else
+      {
+        iseSingleDestination.reload = true;
+        iseRefr(true);
+      }
+      $('prgrulecontent').innerHTML += res;
+      TranslatePrgRulePage();
+    }
+  };
+  ReloadRuleCallback = function(t)
+  {
+    if(dbg)alert( t.responseText );
+    iseRefr(true);
+    TranslatePrgRulePage();
+  };
+  ReloadRule = function(rid)
+  {
+    iseRefr(false);
+    var url = "/esp/programs.htm?sid="+SessionId;
+    var pb = '';
+    pb += 'string action = "ReloadRule";';
+    pb += 'string rid = "'+rid+'";';
+    var opt = { postBody: pb, onComplete: ReloadRuleCallback }
+    new Ajax.Updater("rule"+rid,url,opt);
+  };
+  LoadRule = function(pid,rid)
+  {
+    iseRefr(false);
+    if(dbg)alert("LoadRule(P"+pid+"R"+rid+")");
+    var url = "/esp/programs.htm?sid="+SessionId;
+    var pb = '';
+    pb += 'string action = "LoadRule";';
+    pb += 'string pid = "'+pid+'";';
+    pb += 'string rid = "'+rid+'";';
+    var opt = { postBody: pb, onComplete: LoadRuleCallback }
+    new Ajax.Request(url,opt);
+  };
+  LoadRule(<% Write(oPrg.ID()); %>, <% Write(sFirstRule); %>);
+
+  var s = "";
+  s += "<table cellspacing='8'>";
+  s += "<tr>";
+    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='CancelProgramEdit(<% Write(oPrg.ID()); %>);'>${footerBtnCancel}</div></td>";
+    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='SaveProgramEdit(<% Write(oOrigPrg.ID()); %>,<% Write(oPrg.ID()); %>);'>${footerBtnOk}</div></td>";
+    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04800' onclick='CopyToNewProgram(<% Write(oPrg.ID()); %>);' >${footerBtnSaveNewProgram}</div></td>";
+    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04801' onclick='new HMScriptExecutor();'>${footerBtnTestScript}</div></td>";
+    if(dbg)
+    {
+      s += "<td align='center' valign='middle'><div class='FooterButton' onclick='reloadPage();'>Aktualisieren</div></td>";
+    }
+  s += "</tr>";
+  s += "</table>";
+  
+  setFooter(s);
+  
+</script>
+
+<div id="prgcontent">
+  <table id="ProgramTable" class="filterTable tTable j_translate" border="0" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <td class="thCell CLASS04802" >${thName}</td>
+        <td class="thCell CLASS04802" >${thDescription}</td>
+        <td class="thCell CLASS04802" >${thProgramCondition}</td>
+        <td class="thCell CLASS04802" >${thProgramActivity}</td>
+        <td class="thCell CLASS04802" >${thAction}</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="CLASS04803">
+        <td class="tBodyCell bgWhite taCenter" id="prg<% Write(oPrg.ID()); %>name" onclick="textEdit('prg<% Write(oPrg.ID()); %>name', <% Write(oPrg.ID()); %>);"><% Write( oPrg.Name() ); %></td>
+        <td class="tBodyCell bgWhite taCenter" id="prg<% Write(oPrg.ID()); %>desc" onclick="textEditInfo('prg<% Write(oPrg.ID()); %>desc', <% Write(oPrg.ID()); %>,true);"><% Write( oPrg.PrgInfo() ); %></td>
+        <td class="tBodyCell"><% object oPrgID = oPrg.ID(); string sRet = ""; Call("/esp/programs.fn::WriteConditionText()"); Write(sRet); %></td>
+        <td class="tBodyCell"><% object oPrgID = oPrg.ID(); string sRet = ""; Call("/esp/programs.fn::WriteDestinationText()"); Write(sRet); %></td>
+        <td class="tBodyCell bgWhite"><input type="checkbox" onchange="isePrograms.SetVisibility(<% Write(oPrg.ID()); %>,this.checked);" id="p<% Write(oPrg.ID()); %>_systeminternal" <% if( oPrg.Internal() ) { Write( "checked" ); } %> /><label for="p<% Write(oPrg.ID()); %>_systeminternal">${lblSystemIntern}</label></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+          <div id="prgrulecontent"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>
+
+<script>translatePage('#ProgramTable')</script>

@@ -1,0 +1,6 @@
+"description_1_s" : "<span class=\"translated\">When the switch is activated",
+"description_1_e" : "changes to the other status for the selected time.</span><br/><br/>",
+"description_2_s" : "<span class=\"translated\">When the switch is activated",
+"description_2_e" : "will be switched on for the set time.</span><br/><br/>",
+"description_3_s" : "<span class=\"translated\">When the switch contact is activated",
+"description_3_e" : "will be switched off immediately.</span><br/><br/>",

@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">The signal lamp of the chime will flash when the switching command is triggered. If a delay is set the lamp will flash after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The sensor is deactivated.</span>",

@@ -1,0 +1,7 @@
+"description_1"	:	"<span class=\"translated\">Bei Regen wird der Schalter f&uuml;r die eingestellte Zeit je nach gew&auml;hlter Schaltrichtung geschaltet. </span><br/><br/>",
+"description_2"	:	"<span class=\"translated\">Bei Regen wird der Schalter f&uuml;r die eingestellte Zeit eingeschaltet. </span><br/><br/>",
+"description_3"	:	"<span class=\"translated\">Bei Regen wird der Schalter f&uuml;r die eingestellte Zeit ausgeschaltet. </span><br/><br/>",
+
+"subset_1"		:	"Trocken-Ein / Regen-Aus",
+"subset_2"		:	"Trocken-Aus / Regen-Ein",
+

@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Beim Bet&auml;tigen des Schalters wird die  T&uuml;r  ge&ouml;ffnet. Nach der festgelegten Zeit wird sie wieder verriegelt.</span>",
+"description_2" : "<span class=\"translated\">Beim Bet&auml;tigen des Schalters wird die  T&uuml;r  entriegelt. Nach der festgelegten Zeit wird sie wieder verriegelt.</span>",
+"description_3" : "<span class=\"translated\">Beim Bet&auml;tigen des Schalters wird die  T&uuml;r  verriegelt.</span>",
+"description_4" : "<span class=\"translated\">Beim Bet&auml;tigen des Schalters wird die T&uuml;r, je nach aktuellem Zustand, entweder ent- oder verriegelt.</span>",

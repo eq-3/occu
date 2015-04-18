@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Beim Bet&auml;tigen des Schaltkontakts wechselt der Schalter f&uuml;r die festgelegte Zeit in den jeweils anderen Zustand.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim Bet&auml;tigen des Schaltkontakts schaltet der Schalter das Licht f&uuml;r die festgelegte Zeit ein. Wird der Schaltkontakt w&auml;hrend der ein-Phase nochmal bet&auml;tigt, beginnt sie von vorne.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Bet&auml;tigen des Schaltkontakts wird der Schalter f&uuml;r eine bestimmte Zeit eingeschaltet.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Beim Bet&auml;tigen des Schaltkontakts wird der Schalter f&uuml;r eine bestimmte Zeit ausgeschaltet.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Der Schaltkontakt arbeitet als gew&ouml;hnlicher Schalter</span><br/><br/>",

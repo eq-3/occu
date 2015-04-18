@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">With a short or long button press the heating thermostat will be switched to the selected operation mode </span><br/><br/>",

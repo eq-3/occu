@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Rauchmelders wird der Gong aktiviert.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Rauchmelder ist deaktiviert.</span>",

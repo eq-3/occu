@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Salter komutu iletildiginde gongun sinyal lambasi etkinlesir. Bir gecikme s&uuml;resi ayarlanmissa, bu lamba bu s&uuml;re dolduktan sonra yanmaya baslar.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Sens&ouml;r etkin degil.</span>",

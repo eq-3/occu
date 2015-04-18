@@ -1,0 +1,6 @@
+"description_1" : "<span class=\"translated\">In case of fire alarm the light will be switched on for the set time to the defined brightness value. If the alarm will be confirmed by the triggering device or a smoke detector of the same group the light will be switched off again.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The connected light gives an alarm for the set time. If the alarm will be confirmed by the triggering device or a smoke detector of the same group the alarm will be stopped.</span><br/><br/>",
+"subset_1" : "only triggering smoke detector",
+"subset_2" : "smoke detector of the same group",
+"subset_3" : "only triggering smoke detector",
+"subset_4" : "smoke detector of the same group",

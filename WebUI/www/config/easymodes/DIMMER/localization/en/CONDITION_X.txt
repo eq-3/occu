@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">When the upper limit is received the light will be switched on to the set brightness values.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the lower limit is received the light will be switched off to the defined brightness value.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the upper limit is received the light will be switched on, when the lower limit is received it will be turned off. This function is equal to a classic master/slave application.</span><br/><br/>",
+"descrHint" : "<span class=\"translated\">You can define a time for sending a switching command via the switch actuator at the corresponding channel.</span><br/><br/>",
+"descrHintMS" : "<span class=\"translated\">To activate the profile, please define for the corresponding channel of the switch actuator that a switching command will be send if the selected value will be exceeded or falls below the threshold.</span><br/><br/>",

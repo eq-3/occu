@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">When the switching command is transmitted the switch will be switched on for the time set. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the switching command is transmitted the switch will be switched off for the time set. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the switching command is transmitted the switch will be switched on or off for the time set (toggle function). If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">When the switching command is transmitted the switch will be switched on for the time set.</span><br/><br/>",

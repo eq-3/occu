@@ -1,0 +1,8 @@
+"door_lock" : "T&uuml;r verriegeln",
+"door_lock_proof" : "T&uuml;r verriegeln (sabotagesicher)",
+"door_lock_unlock" : "verriegeln / entriegeln",
+"door_lock_open" : "verriegeln / &ouml;ffnen",
+"door_lock_toggle" : "Verriegelung toggeln",
+"door_open" : "T&uuml;r &ouml;ffnen",
+"door_unlock" : "T&uuml;r entriegeln",
+"door_unlock_open" : "entriegeln / &ouml;ffnen",

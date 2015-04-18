@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Beim Bet&auml;tigen des Fensters wird der Gong entsprechend der gew&auml;hlten Richtung geschaltet.<span/><br/><br/>",
+"description_2" : "<span class=\"translated\">Diese Verkn&uuml;pfung wird deaktiviert.</span><br/><br/>",
+"subset_1" : "Offen - ein / Zu - aus",
+"subset_2" : "Offen - aus / Zu - ein",
+"subset_3" : "Offen - ein",
+"subset_4" : "Zu - ein",
+"subset_5" : "&Auml;nderung - ein",
