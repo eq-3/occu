@@ -1,0 +1,153 @@
+!*******************************************************************************
+!* cache.fn
+!* Cache-Funktionen für diverse Listen.
+!*
+!*     Liste    | Interner Name | Schlüssel  | Cache-Schlüssel
+!* -------------+---------------+------------+----------------- 
+!* Geräteliste  | DeviceList    | devlist    | devlist_cache
+!* Gerwekeliste | FunctionList  | funclist   | funclist_cache
+!* Raumliste    | RoomList      | roomlist   | roomlist_cache
+!* -------------+---------------+------------+----------------
+!* Posteingang  | NewDeviceList | <Cache wird nicht verwendet>
+!*
+!* Autor      : Falk Werner
+!* Erstellt am: 06.08.20008
+!*******************************************************************************
+
+!###############################################################################
+!# Allgemeine Funktionen                                                       #
+!###############################################################################
+
+!*******************************************************************************
+!* Versucht eine Anfrage aus dem Cache zu beantworten.
+!* Die Funktion unterstützt sowohl client- als auch serverseitiges Caching.
+!*
+!* Paramter (globale Variable, MÜSSEN angegeben sein):
+!*   key      : Schlüssel der Ressource
+!*   key_cache: Schlüssel der Ressource im Server-Cache
+!*******************************************************************************
+function ::TryRespond()
+{
+  var cur_version = dom.GetTimestamp(key);
+  if ("" == cur_version) { cur_version = dom.SetTimestamp(key); }
+  web.SetRespHeaderItem("ETag", cur_version);
+!  web.SetRespHeaderItem("Cache-Control", "");
+  
+  ! clientseitiges Caching
+  var client_version = web.GetReqHeaderItem("If-None-Match");
+  if (client_version == cur_version)
+  {
+    web.SetRespStatus(304);
+    quit;
+  }
+  
+  ! serverseitiges Caching
+  if ( web.TryRespondFromCache(key_cache, cur_version) ) { quit; } 
+}
+
+!###############################################################################
+!# Geräteliste (DeviceList)                                                    #
+!###############################################################################
+
+!*******************************************************************************
+!* Legt die Schlüssel der Geräteliste in den Variablen key und key_cache ab.
+!*******************************************************************************
+function ::GetDeviceListKeys()
+{
+  var key       = "devlist";
+  var key_cache = "devlist_cache";
+}
+
+!*******************************************************************************
+!* Versucht eine Anfrage auf die Geräteliste aus dem Cache zu beantworten.
+!* Im Erfolgsfall kehrt diese Funktion nicht mehr zum Aufrufer zurück.
+!*******************************************************************************
+function ::TryRespondDeviceList()
+{
+  var key;
+  var key_cache;
+  Call("/xml-api/cache.fn::GetDeviceListKeys()");
+  Call("/xml-api/cache.fn::TryRespond()");
+}
+
+!*******************************************************************************
+!* Markiert die Geräteliste als "aktualisiert" und erklärt damit die Caches
+!* in Client und Server für ungültig.
+!*******************************************************************************
+function ::InvalidateDeviceList()
+{
+  var key;
+  Call("/xml-api/cache.fn::GetDeviceListKeys()");
+  dom.SetTimestamp(key);
+}
+
+!###############################################################################
+!# Gerwerkeliste (FunctionList)                                                #
+!###############################################################################
+
+!*******************************************************************************
+!* Legt die Schlüssel der Gewerkeliste in den Variablen key und key_cache ab.
+!*******************************************************************************
+function ::GetFunctionListKeys()
+{
+  var key       = "funclist";
+  var key_cache = "funclist_cache";}
+
+!*******************************************************************************
+!* Versucht eine Anfrage auf die Gewerkeliste aus dem Cache zu beantworten.
+!* Im Erfolgsfall kehrt diese Funktion nicht mehr zum Aufrufer zurück.
+!*******************************************************************************
+function ::TryRespondFunctionList()
+{
+  var key;
+  var key_cache;
+  Call("/xml-api/cache.fn::GetFunctionListKeys()");
+  Call("/xml-api/cache.fn::TryRespond()");
+}
+
+!*******************************************************************************
+!* Markiert die Gewerkeliste als "aktualisiert" und macht so die Kopie im
+!* Cache von Server und Client ungültig.
+!*******************************************************************************
+function ::InvalidateFunctionList()
+{
+  var key;
+  Call("/xml-api/cache.fn::GetFunctionListKeys()");
+  dom.SetTimestamp(key);  
+}
+
+!###############################################################################
+!# Raumliste (RoomList)                                                        #
+!###############################################################################
+
+!*******************************************************************************
+!* Legt die Schlüssel der Raumliste in den Variablen key und key_cache ab.
+!*******************************************************************************
+function ::GetRoomListKeys()
+{
+  var key       = "roomlist";
+  var key_cache = "roomlist_cache";
+}
+
+!*******************************************************************************
+!* Versucht eine Anfrage auf die Raumliste aus dem Cache zu beantworten.
+!* Im Erfolgsfall kehrt diese Funktion nicht mehr zum Aufrufer zurück.
+!*******************************************************************************
+function ::TryRespondRoomList()
+{
+  var key;
+  var key_cache;
+  Call("/xml-api/cache.fn::GetRoomListKeys()");
+  Call("/xml-api/cache.fn::TryRespond()");
+}
+
+!*******************************************************************************
+!* Markiert die Raumliste als "aktualisiert" und macht so die Kopie im
+!* Cache von Server und Client ungültig.
+!*******************************************************************************
+function ::InvalidateRoomList()
+{
+  var key;
+  Call("/xml-api/cache.fn::GetRoomListKeys()");
+  dom.SetTimestamp(key);  
+}

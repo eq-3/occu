@@ -1,0 +1,9 @@
+[
+	{
+		"expert" : "Experte",
+		"hint_no_expert" : "<span class=\"translated\">Diese Verkn&uuml;pfung kennt keine einstellbaren Parameter.</span>",
+		"hint_no_profile" : "<span class=\"translated\">F&uuml;r diese Verkn&uuml;pfung gibt es kein Profil. Verwenden Sie bitte den Expertenmodus.</span>",
+		"no_userProfile" : "Dieses Profil kann nicht als Profilvorlage gespeichert werden",
+		"no_profile" : "Kein Profil vorhanden",
+	}
+]

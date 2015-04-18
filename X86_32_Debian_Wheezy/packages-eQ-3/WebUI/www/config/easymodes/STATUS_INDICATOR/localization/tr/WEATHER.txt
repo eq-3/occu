@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Siddetli r&uuml;zgar durumunda g&ouml;sterge acilir, zayif r&uuml;zgarda ise kapatilir. Bu fonksiyon tersine de cevrilebilir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Belirlenen r&uuml;zgar hizina ulasildiginda g&ouml;sterge belirlenen s&uuml;re boyunca acik kalir.</span><br/><br/>",
+"subset_1" : "R&uuml;zgar siddetli - kapali / r&uuml;zgar zayif - acik",
+"subset_2" : "R&uuml;zgar siddetli - acik / r&uuml;zgar zayif - kapali",

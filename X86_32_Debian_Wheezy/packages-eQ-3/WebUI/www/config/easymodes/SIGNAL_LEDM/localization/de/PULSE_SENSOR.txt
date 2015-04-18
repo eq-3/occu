@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Beim Senden des Schaltbefehls wird die Signalleuchte des Gongs eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, wird die Leuchte erst nach Ablauf dieser Zeit geschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Sensor ist deaktiviert.</span>",

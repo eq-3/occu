@@ -1,0 +1,24 @@
+<%
+  if( action == "ReceiptAlarm" ) { Call("functions.fn::ReceiptAlarm()"); }
+  if (action == "changeFunctionName") {
+    Call("functions.fn::changeFunctionName()");
+  }
+  if (action == "createFunctionRetId") {
+    Call("functions.fn::createFunctionRetId()");
+  }
+  if (action == "deleteFunction") {
+    Call("functions.fn::deleteFunction()");
+  }
+  if (action == "changeFunctionColor") {
+    Call("functions.fn::changeFunctionColor()");
+  }
+  if (action == "changeFunctionComment") {
+    Call("functions.fn::changeFunctionComment()");
+  }
+  if (action == "changeFunctionSymbol") {
+    Call("functions.fn::changeFunctionSymbol()");
+  }
+  if (action == "buildFuncOverlay") {
+    Call("functions.fn::buildFuncOverlay()");
+  }
+%>

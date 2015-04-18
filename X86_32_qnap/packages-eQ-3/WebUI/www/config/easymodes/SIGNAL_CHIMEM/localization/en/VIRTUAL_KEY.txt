@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">With a long or short button press the chime will sound. If a delay is set the chime will be triggered after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The virtual button is deactivated.</span><br/><br/>",

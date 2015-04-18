@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Beim Senden des Schaltbefehls ert&ouml;nt der Gong. Ist eine Verz&ouml;gerungszeit eingestellt, wird der Gong erst nach Ablauf dieser Zeit geschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Sensor ist deaktiviert.</span>",

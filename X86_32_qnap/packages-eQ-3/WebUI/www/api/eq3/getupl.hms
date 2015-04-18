@@ -1,0 +1,13 @@
+!##
+!# Liefert die Privilegstufe eines Nutzers
+!##
+
+var upl = 0;
+if ( system.IsVar("_session_id_") )
+{
+	var id = system.GetVar("_session_id_");
+	var s  = system.GetSessionVarStr(id);
+	if (s) { upl = s.StrValueByIndex(";", 1); }
+}
+
+Write(upl);

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<fullname><%
+  string sUsername = "Unbekannt";
+  object oUser = dom.GetObject( system.GetSessionVar("sessionUserID") );
+  if( oUser )
+  {
+    sUsername = oUser.UserFirstName()#" "#oUser.UserLastName();
+    if( sUsername == " " )
+    {
+      sUsername = oUser.Name();
+    }
+  }
+  Write( sUsername );
+%></fullname>

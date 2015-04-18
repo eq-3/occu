@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda durum g&ouml;stergesinin ekrani secilen moda g&ouml;re acilir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda durum g&ouml;stergesinin ekrani secilen moda g&ouml;re kapanir.</span><br/><br/>",

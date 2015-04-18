@@ -1,0 +1,8 @@
+[
+	{
+		"title_kind_of" : "",
+		"help_kind_of" : "",
+		"title_brightness" : "",
+		"help_brightness" : "",
+	}
+]

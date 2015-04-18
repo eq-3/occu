@@ -1,0 +1,7 @@
+"signal_led_chime_active" : "Gong etkin",
+"signal_led_chime_non_active" : "Gong etkin degil",
+"signal_led_chime_on" : "Gong acik",
+"signal_led_chime_off" : "Gong kapali",
+"signal_kind" : "Sinyal t&uuml;r&uuml;",
+"signal_kind_count" : "Sinyal sayisi",
+"button_inactive" : "Tus etkin degil",

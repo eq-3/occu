@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Bei erh&ouml;htem CO2-Gehalt der Raumluft wird das Fenster in L&uuml;ftungsstellung (100%) ge&ouml;ffnet und nach Ablauf der gew&auml;hlten Zeit automatisch wieder geschlossen.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Diese Verkn&uuml;pfung wird deaktiviert.</span><br/><br/>",
+"CO2_low" : "leicht erh&ouml;hte CO2-Konzentration",
+"CO2_high" : "stark erh&ouml;hte CO2-Konzentration",

@@ -1,0 +1,97 @@
+! [id], [newname]
+function ::changeRoomName() {
+  object obj = dom.GetObject(system.GetVar("id"));
+  if (obj) {
+    obj.Name(system.GetVar("newname"));
+    ! - - - wernerf - - - 
+    Call("/xml-api/cache.fn::InvalidateRoomList()");
+    ! - - - wernerf - - - 
+  }
+}
+
+! [name]
+function ::createRoomRetId() {
+  if( system.IsVar( "name" ) ) {
+    object o = dom.CreateObject( OT_ENUM, system.GetVar( "name" ) );
+    if( o ) {
+      o.EnumType( etRoom );
+      boolean res = dom.GetObject( ID_ROOMS ).Add( o );
+      if( !res ) {
+        Write("-1");
+        dom.DeleteObject( o.ID() );
+      }
+      else {
+        Write(o.ID());
+        ! - - - wernerf - - - 
+        Call("/xml-api/cache.fn::InvalidateRoomList()");
+        ! - - - wernerf - - -     
+      }
+    }
+    else {
+      Write("-1");
+    }
+  }
+}
+
+! [id]
+function ::deleteRoom() {
+}
+
+! [id], [newcolor]
+function ::changeRoomColor() {
+  object obj = dom.GetObject(system.GetVar("id"));
+  if (obj) {
+    
+  }
+}
+
+! [id], [newcomment]
+function ::changeRoomComment() {
+  object obj = dom.GetObject(system.GetVar("id"));
+  if (obj) {
+    obj.EnumInfo(system.GetVar("newcomment"));
+    ! - - - wernerf - - - 
+    Call("/xml-api/cache.fn::InvalidateRoomList()");
+    ! - - - wernerf - - -     
+  }
+}
+
+! [id], [newsymbol]
+function ::changeRoomSymbol() {
+  object obj = dom.GetObject(system.GetVar("id"));
+  if (obj) {
+    
+  }
+}
+
+function ::buildRoomOverlay() {
+  object rooms = dom.GetObject(ID_ROOMS);
+  string s = "";
+  if (rooms) {
+    string tmp = "";
+    s = s#"<table>";
+    foreach( tmp, rooms.EnumEnabledIDs() ) {
+       object room = dom.GetObject(tmp);
+       s = s# "<tr>";
+       s = s# "<td>"# room.Name() # "</td>";
+       s = s#"<td><input id='chk"#room.ID()#"' type='checkbox' onclick='addRoom(id, "#tmp#")' /></td>";
+       s = s# "</tr>";
+    }
+    s = s # "<tr>";
+      s = s # "<td colspan='2'>";
+        !s = s # "<div align='center' class='CLASS02000' onclick='editRooms();'>Neu...</div>";
+        s = s # "<div align='center' class='CLASS02000' onclick='editRooms();'>${btnSelectRoomOrFunctionNew}</div>";
+      s = s # "</td>";
+    s = s # "</tr>";
+    
+    s = s # "<tr>";
+      s = s # "<td colspan='2'>";
+        !s = s # "<div align='center' class='CLASS02000' onclick='$(\"roomOverlay\").hide();specialReloadPage();'>Schliessen</div>";
+        s = s # "<div align='center' class='CLASS02000' onclick='$(\"roomOverlay\").hide();specialReloadPage();'>${btnSelectRoomOrFunctionClose}</div>";
+      s = s # "</td>";
+    s = s # "</tr>";
+    
+    s = s#"</table>";
+  }
+  Write(s);
+}

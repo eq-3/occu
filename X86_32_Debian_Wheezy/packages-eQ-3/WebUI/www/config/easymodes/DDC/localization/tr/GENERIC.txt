@@ -1,0 +1,4 @@
+"switch_off" : "Kapiyi kapat",
+"switch_on" : "Kapiyi ac",
+"switch_on_off" : "Kapiyi ac / OTOMATIK kapat",
+"switch_on_off_toggle" : "",

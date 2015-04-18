@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Salter kontagina basildiginda gong secilen moda g&ouml;re calmaya baslar.<span/><br/><br/>",
+"description_2" : "<span class=\"translated\">Salter aray&uuml;z&uuml; etkin degil.</span><br/><br/>",
+"subset_1" : "ac/kapat",
+"subset_2" : "ac",

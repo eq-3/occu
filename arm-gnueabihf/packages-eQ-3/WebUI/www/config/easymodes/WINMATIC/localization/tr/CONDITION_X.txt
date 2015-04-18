@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">&Uuml;st sinir degere ulasildiginda pencere ayarlanan hizda belirlenen mesafeye devrilir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Alt sinir degere ulasildiginda pencere ayarlanan hizda kapatilir.</span><br/><br/>",
+"descrHint" : "<span class=\"translated\">Salter akt&uuml;at&ouml;r&uuml; tarafindan uygun performans &ouml;lc&uuml;m&uuml;yle degistirme komutunun iletim zamani, ilgili kanaldan ayarlanir.</span><br/><br/>",
+"descrHintMS" : "<span class=\"translated\">Profilin etkili olabilmesi icin performans &ouml;lc&uuml;m&uuml;ne sahip salter akt&uuml;at&ouml;r&uuml;n&uuml;n ilgili kanali, secilen deger asildiginda ya da bunun altinda kalindiginda bir degistirme komutu iletilecek sekilde ayarlanmalidir.</span><br/><br/>",

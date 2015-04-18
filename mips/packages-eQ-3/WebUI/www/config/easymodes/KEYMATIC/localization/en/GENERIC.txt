@@ -1,0 +1,8 @@
+"door_lock" : "lock door",
+"door_lock_proof" : "lock door (sabotage-proof)",
+"door_lock_unlock" : "lock / unlock",
+"door_lock_open" : "lock / open",
+"door_lock_toggle" : "toggle locking",
+"door_open" : "open door",
+"door_unlock" : "unlock door",
+"door_unlock_open" : "unlock / open",

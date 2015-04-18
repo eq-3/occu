@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">With a short or long button press the window is tilt to the defined opening position in the set rate.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a short or long button press the window is closed/locked in the set rate.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a short or long button press the window is tilt to the defined closing or tilt position in the set rate (toggle function).</span><br/><br/>",
+"description_4" : "<span class=\"translated\">With a short or long button press the window is tilt open to the defined position in the set rate. It can be closed/locked again after a desired time.</span><br/><br/>",

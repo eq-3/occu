@@ -1,0 +1,12 @@
+"mode" : "Betriebsart",
+"option0" : "Keine Aktion",
+"option1" : "Raumtemperatur",
+"option2" : "Automodus",
+"option3" : "Automodus + Temperatur",
+"option4" : "Manuell",
+"option5" : "Boost",
+"option6" : "Toggle",
+
+"SetPointTemperature" : "Temperatur",
+
+"hintKeyPressIgnored" : "Der Heizungssteller ist so konfiguriert, dass er nicht auf Tastendr&uuml;cke reagiert!<br/><br/>Siehe Konfig-Parameter Manu-/Party-Modus Priorisierung",

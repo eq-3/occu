@@ -1,0 +1,12 @@
+[
+	{
+		"profile_overwrite" : "Attention: The name of the profile description already exists. Please enter a unique identifier.",
+		"title" : "Save new profile template",
+		"origProfile" : "Default profile",
+		"insertDescr" : "Please enter a name for the new profile template.",
+		"newDescr" : "New name",
+		"userdefined" : "custom",
+		"save" : "Save",
+		"cancel" : "Cancel",
+	}
+]

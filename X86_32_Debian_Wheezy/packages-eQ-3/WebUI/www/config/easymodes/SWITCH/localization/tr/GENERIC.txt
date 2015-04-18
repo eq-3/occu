@@ -1,0 +1,4 @@
+"switch_off" : "Salteri kapat",
+"switch_on" : "Salteri ac",
+"switch_on_off" : "Salteri ac/kapat",
+"switch_on_off_toggle" : "Salteri ac/kapat/toggle",

@@ -1,0 +1,6 @@
+[
+	{
+		"hintCaseForm" : "Hinweise zur Beh&auml;lterform",
+		"lblActive" : "aktiv",
+	}
+]

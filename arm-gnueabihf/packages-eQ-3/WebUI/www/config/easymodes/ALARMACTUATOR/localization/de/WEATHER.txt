@@ -1,0 +1,2 @@
+"description_1_s" : "<span class=\"translated\">Wenn die gew&auml;hlte Windgeschwindigkeit erreicht wird, schaltet",
+"description_1_e" : "f&uuml;r die festgelegte Zeit ein.</span><br/><br/>",

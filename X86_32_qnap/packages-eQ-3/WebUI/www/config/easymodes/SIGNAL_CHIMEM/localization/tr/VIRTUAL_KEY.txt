@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda gong calar.  Bir gecikme s&uuml;resi ayarlanmissa, gong bu s&uuml;re dolduktan sonra calmaya baslar.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">G&ouml;rsel tus etkin degildir.</span>",

@@ -1,0 +1,12 @@
+[
+	{
+		"profile_overwrite" : "Achtung: Diese Profilvorlagen-Bezeichnung gibt es bereits. Bitte geben Sie einen eindeutigen Bezeichner ein.",
+		"title" : "Neue Profilvorlage speichern",
+		"origProfile" : "Ausgangsprofil",
+		"insertDescr" : "Bitte geben Sie eine Bezeichnung f&uuml;r die neue Profilvorlage ein.",
+		"newDescr" : "Neue Bezeichnung",
+		"userdefined" : "benutzerdefiniert",
+		"save" : "Speichern",
+		"cancel" : "Abbruch",
+	}
+]

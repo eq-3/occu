@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">Wenn der maximale F&uuml;llstand &uuml;ber- oder unterschritten wird, kann entsprechend geschaltet werden.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Wenn der minimale F&uuml;llstand &uuml;ber- oder unterschritten wird, kann entsprechend geschaltet werden.</span><br/><br/>",
+"subset_1" : "unterschritten - ein / &uuml;berschritten - aus",
+"subset_2" : "unterschritten - aus / &uuml;berschritten - ein",
+"subset_3" : "unterschritten - ein / &uuml;berschritten - aus",
+"subset_4" : "unterschritten - aus / &uuml;berschritten - ein",
+"upperFillLevel" : "Oberer F&uuml;llstand",
+"lowerFillLevel" : "Unterer F&uuml;llstand",

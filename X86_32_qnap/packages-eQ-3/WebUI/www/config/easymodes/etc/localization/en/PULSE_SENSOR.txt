@@ -1,0 +1,10 @@
+[
+	{
+		"triggerNecessary" : "How often shall the headlight flasher be operated before triggering the actuator?",
+		"notActive" : "inactive",
+		"one" : "once",
+		"two" : "twice",
+		"three" : "three times",
+		"expert" : "Expert",
+	}
+]

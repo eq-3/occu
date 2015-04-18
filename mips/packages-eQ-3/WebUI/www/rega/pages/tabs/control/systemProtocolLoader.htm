@@ -1,0 +1,111 @@
+<script type="text/javascript">
+  arTempHistoryData = new Array();
+<%
+    integer iLastGroupIndex = 1;
+    string sCollectedNames = "";
+    string sCollectedValues = "";
+    string sCollectedDateTimes = "";
+    string s;
+    integer iStart = system.GetVar("sStart").ToInteger();
+    integer iCount = system.GetVar("sCount").ToInteger();
+    integer iIndex = iStart;
+    integer rCount;
+    foreach( s, dom.GetHistoryData( iStart, iCount, &rCount ) )
+    {
+      integer iGroupIndex = s.StrValueByIndex(";",0).ToInteger();
+      string sDatapointId = s.StrValueByIndex(";",1);
+      string sRecordedValue = s.StrValueByIndex(";",2);
+      string sDateTime = s.StrValueByIndex(";",3);
+      
+      string sDatapointName = "";
+      object oHistDP = dom.GetObject( sDatapointId );
+      if( oHistDP )
+      {
+        object oDP = dom.GetObject( oHistDP.ArchiveDP() );
+        if( oDP )
+        {
+          sDatapointName = oDP.Name();
+          boolean bSysVar = (oDP.IsTypeOf(OT_VARDP) || oDP.IsTypeOf(OT_ALARMDP));
+          if( !bSysVar )
+          {
+            object oCH = dom.GetObject( oDP.Channel() );
+            if( oCH )
+            {
+              sDatapointName = oCH.Name();
+            }            
+          }
+          
+          if( iLastGroupIndex != iGroupIndex )
+          {
+            string stmpDate = sCollectedDateTimes.StrValueByIndex(" ",0);
+            string stmpTime = sCollectedDateTimes.StrValueByIndex(" ",1);
+            string stmpYear = stmpDate.StrValueByIndex("-",0);
+            string stmpMonth = stmpDate.StrValueByIndex("-",1);
+            string stmpDay = stmpDate.StrValueByIndex("-",2);
+            string selvDate = stmpDay#"."#stmpMonth#"."#stmpYear;
+            Write("var tmp = new Object();");
+            Write("tmp['trid'] = 'hd"#iIndex#"';");
+            Write("tmp['name'] = '"#sCollectedNames#"';");
+            Write("tmp['value'] = '"#sCollectedValues#"';");
+            Write("tmp['datetime'] = '"#sCollectedDateTimes#"';");
+            Write("tmp['sqldate'] = '"#stmpDate#"';");
+            Write("tmp['date'] = '"#selvDate#"';");
+            Write("tmp['time'] = '"#stmpTime#"';");
+            Write("tmp['arhdIdx'] = arTempHistoryData.length;");
+            Write("tmp['arhdIdx']['date'] = '"#selvDate#"';");
+            Write("tmp['arhdIdx']['time'] = '"#stmpTime#"';");
+            Write("arTempHistoryData[arTempHistoryData.length] = tmp;");
+            Write("arHistoryData[arHistoryData.length] = tmp;");
+            sCollectedNames = "";
+            sCollectedValues = "";
+            iLastGroupIndex = iGroupIndex;
+          }
+          
+          string id = oDP.ID();
+          string sRet = "";
+          string sValue = sRecordedValue;
+          Call("/esp/functions.fn::WriteDPText()");
+          sRecordedValue = system.GetVar("sRet");
+          
+          sCollectedNames = sDatapointName;
+          sCollectedDateTimes = sDateTime;
+
+          if( !sCollectedValues.Length() )
+          {
+            sCollectedValues = sRecordedValue;
+          }
+          else
+          {
+            sCollectedValues = sCollectedValues#", "#sRecordedValue;
+          }
+          
+        }
+      }
+      iIndex = iIndex + 1;
+    }
+    if( sCollectedValues.Length() )
+    {
+      string stmpDate = sCollectedDateTimes.StrValueByIndex(" ",0);
+      string stmpTime = sCollectedDateTimes.StrValueByIndex(" ",1);
+      string stmpYear = stmpDate.StrValueByIndex("-",0);
+      string stmpMonth = stmpDate.StrValueByIndex("-",1);
+      string stmpDay = stmpDate.StrValueByIndex("-",2);
+      string selvDate = stmpDay#"."#stmpMonth#"."#stmpYear;
+      Write("var tmp = new Object();");
+      Write("tmp['name'] = '"#sCollectedNames#"';");
+      Write("tmp['trid'] = 'hd"#iIndex#"';");
+      Write("tmp['value'] = '"#sCollectedValues#"';");
+      Write("tmp['datetime'] = '"#sCollectedDateTimes#"';");
+      Write("tmp['sqldate'] = '"#stmpDate#"';");
+      Write("tmp['date'] = '"#selvDate#"';");
+      Write("tmp['time'] = '"#stmpTime#"';");
+      Write("tmp['arhdIdx'] = arTempHistoryData.length;");
+      Write("tmp['arhdIdx']['date'] = '"#selvDate#"';");
+      Write("tmp['arhdIdx']['time'] = '"#stmpTime#"';");
+      Write("arTempHistoryData[arTempHistoryData.length] = tmp;");
+      Write("arHistoryData[arHistoryData.length] = tmp;");
+    }
+  %>
+  
+</script>
+<% Write( rCount );  %>

@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">When the switch contact is operated the signal lamp of the chime will be triggered according to the selected direction.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The tilt sensor is deactivated.</span><br/><br/>",
+"subset_1" : "Open - on / Closed - off",
+"subset_2" : "Open - off / Closed - on",
+"subset_3" : "Open",
+"subset_4" : "Close",
+"subset_5" : "Change",

@@ -1,0 +1,152 @@
+<script language="javascript">
+var tmpChns = new Array();
+<%
+
+object oUser = dom.GetObject( system.GetSessionVar("sessionUserID") );
+
+if(oUser)
+{
+  oUser.UserTempViewIDs2().RemoveAll();
+  oUser.UserTempViewIDs().RemoveAll();
+}
+
+Write("tmpChns = new Array();");
+
+integer iCount = 0;
+
+object oChns = dom.GetObject(ID_CHANNELS);
+if ( oChns ) 
+{
+  string sID;
+  foreach( sID, oChns.EnumEnabledIDs() ) 
+  {
+    object chn = dom.GetObject(sID);
+    if (chn) 
+    {
+      object oDev = dom.GetObject(chn.Device());
+      if( chn.DefaultDP( OPERATION_READ | OPERATION_EVENT ) != ID_ERROR )
+      {
+        if ( (chn.Name() != "") && (oDev.ReadyConfig() == false) && (chn.Internal() == false) ) 
+        {
+          iCount = iCount + 1;
+          object dev = dom.GetObject(chn.Device());
+          string sIface = "";
+          integer iface = dev.Interface();
+          if (iface != ID_ERROR) {
+            sIface = dom.GetObject(iface).Name();
+          }
+          Write("var tmp = new Object();");
+          Write("tmp['name'] = '"#chn.Name()#"';");
+          Write("tmp['id'] = "#chn.ID()#";");
+          Write("tmp['type'] = '"#chn.Label()#"';");
+          Write("tmp['desc'] = DEV_getDescription('"#dev.Label()#"');");     
+          Write("tmp['sn'] = '"#chn.Address()#"';");
+          string category = "";
+          if (chn.ChnDirection() == 1) {category = '${lblSender}';}
+          if (chn.ChnDirection() == 2) {category = '${lblReceiver}';}
+          Write("tmp['iface'] = '"#category#"';");
+          Write("tmp['trans'] = ("#chn.ChnAESActive()#" ? '${lblSecured}' : '${lblStandard}');");
+          string functions = "";
+          string funcTmp = "";
+          foreach(funcTmp, chn.ChnFunction())
+          {
+            object objTmp = dom.GetObject(funcTmp);
+            functions = functions#objTmp.Name()#" ";
+          }
+          Write("tmp['func'] = '"#functions#"';");
+          string rooms = "";
+          string roomTmp = "";
+          foreach(roomTmp, chn.ChnRoom())
+          {
+            object objTmp = dom.GetObject(roomTmp);
+            rooms = rooms#objTmp.Name()#" ";
+          }
+          Write("tmp['room'] = '"#rooms#"';");
+          Write("tmpChns[tmpChns.length] = tmp;");
+        }
+      }
+    }
+  }
+}
+%>
+
+// Methode wird erst aufgerufen wenn alles sortiert wurde
+GetAllChannels = function() {
+  new newDevChnLoader( <%Write(iCount); %>);
+}
+
+<%
+  Write('IseSort2(tmpChns,"'#system.GetSessionVar("sessionLS")#'",false,true);');
+%>
+</script>
+<div id="dummy" style="display:none"></div>
+<div class= "CLASS04600">
+<table id="newDevChnTbl" class="tblList" cellpadding="0">
+<colgroup>
+  <col width="7%" />
+  <col width="3%" />
+  <col width="7%" />
+  <col width="7%" />
+  <col width="7%" />
+  <col width="7%" />
+  <col width="7%" />
+  <col width="7%" />
+  <col width="7%" />
+  <col width="7%" />
+  <col width="17%" />
+  <col width="7%" />
+</colgroup>
+<tbody id="tblNewDevChns">
+<tr class="j_translate">
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="type"){sCssName="SortSelected";} %>
+  <th class="CLASS04601"><div class="<%Write(sCssName); %>" onclick="NewDevSort('type');">${thTypeDescriptor}</div></th>
+  <th>${thPicture}</th>
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="desc"){sCssName="SortSelected";} %>
+  <th><div class="<%Write(sCssName); %>" onclick="NewDevSort('desc');">${thDescriptor}</div></th>
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="sn"){sCssName="SortSelected";} %>
+  <th><div  class="<%Write(sCssName); %>" onclick="NewDevSort('sn');">${thSerialNumber}</div></th>
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="iface"){sCssName="SortSelected";} %>
+  <th><div  class="<%Write(sCssName); %>" onclick="NewDevSort('iface');">${thInterfaceCategory}</div></th>
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="trans"){sCssName="SortSelected";} %>
+  <th><div  class="<%Write(sCssName); %>" onclick="NewDevSort('trans');">${thTransmitMode}</div></th>
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="name"){sCssName="SortSelected";} %>
+  <th><div  class="pt11 <%Write(sCssName); %>" onclick="NewDevSort('name');">${thName}</div></th>
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="func"){sCssName="SortSelected";} %>
+  <th><div  class="pt11 <%Write(sCssName); %>" onclick="NewDevSort('func');">${thFunc}</div></th>
+  <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="room"){sCssName="SortSelected";} %>
+  <th><div  class="pt11 <%Write(sCssName); %>" onclick="NewDevSort('room');">${thRoom}</div></th>
+  <th>${thFunctionTest}</th>
+  <th>${thAction}</th>
+  <th>${thReady}</th>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="RoomFuncChooser CLASS04602" id="roomOverlay" style="display:none;"></div>
+<div class="RoomFuncChooser CLASS04602" id="funcOverlay" style="display:none;"></div>
+
+<script type="text/javascript">
+
+  NewDevSort = function (colName)
+  {
+    updateContent("/pages/tabs/admin/views/newdevicechannels.htm", null, "system.SetSessionVar('sessionLS', '" + colName + "');");
+  }
+ 
+  if($("btnStructure"))
+  {
+    hide("btnStructure");
+  }
+  iseRooms.buildRoomOverlay();
+  iseFunctions.buildFuncOverlay();  
+  
+  var s = "";
+  
+  s += "<table cellspacing='8'>";
+  s += "<tr>";
+    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack()'>${footerBtnPageBack}</div></td>";
+    s += "<td align='center' valign='middle'><div id='btnStructure' class='FooterButton CLASS04603' onclick='WebUI.enter(NewDeviceListPage);'>${footerBtnRestoreTree}</div></td>";
+  s += "</tr>";
+  s += "</table>";
+  setFooter(s);
+  translatePage("#tblNewDevChns", "#footer");
+</script>

@@ -1,0 +1,3 @@
+"dimmer_off" : "Dimmer off",
+"dimmer_on_off" : "Dimmer on / off",
+"sleep_well" : "Sleep light",

@@ -1,0 +1,35 @@
+//
+// Automatically generated list for Buildroot manual.
+//
+
+[width="100%",cols="^1,4",options="header"]
+|===================================================
+| Features                                 <| Location
+
+| AVR32                                    <| Target options -> Target Architecture
+| mips I (generic)                         <| Target options -> Target Architecture Variant
+| mips II                                  <| Target options -> Target Architecture Variant
+| mips III                                 <| Target options -> Target Architecture Variant
+| mips IV                                  <| Target options -> Target Architecture Variant
+| sstrip                                   <| Build options -> strip command for binaries on target
+| Linux 3.0.x kernel headers               <| Toolchain -> Kernel Headers
+| Linux 3.11.x kernel headers              <| Toolchain -> Kernel Headers
+| Linux 3.13.x kernel headers              <| Toolchain -> Kernel Headers
+| Linux 3.15.x kernel headers              <| Toolchain -> Kernel Headers
+| Enable Objective-C support               <| Toolchain
+| Enable Fortran support                   <| Toolchain
+| Xilinx Little Endian Microblaze GNU Tools 14.3 <| Toolchain -> Toolchain
+| Xilinx Little Endian Microblaze GNU Tools v2 <| Toolchain -> Toolchain
+| Xilinx Big Endian Microblaze GNU Tools   <| Toolchain -> Toolchain
+| Xilinx Big Endian Microblaze GNU Tools   <| Toolchain -> Toolchain
+| bison                                    <| Target packages -> Development tools
+| distcc                                   <| Target packages -> Development tools
+| Install flex binary on target            <| Target packages -> Development tools
+| m4                                       <| Target packages -> Development tools
+| gob2                                     <| Target packages -> Graphic libraries and applications (graphic/text)
+| blackbox                                 <| Target packages -> Graphic libraries and applications (graphic/text)
+| v 0.8.x                                  <| Target packages -> Interpreter languages and scripting -> Haserl version
+| Custom Network Settings                  <| Bootloaders
+
+|===================================================
+

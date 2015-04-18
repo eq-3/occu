@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">When the entered wind strength is reached the awning / shutter will be moved up for the set time.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the entered wind strength is reached the awning / shutter will be moved down for the set time.</span><br/><br/>",

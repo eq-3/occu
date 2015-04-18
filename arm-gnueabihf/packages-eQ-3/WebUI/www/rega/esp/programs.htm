@@ -1,0 +1,37 @@
+<%
+
+  if( action == "SetBreakOnRestart" ) { Call("programs.fn::SetBreakOnRestart()"); }  
+  if( action == "SetActive" ) { Call("programs.fn::SetActive()"); }
+  if( action == "SetVisible" ) { Call("programs.fn::SetVisible()"); }
+  if( action == "SetOperate" ) { Call("programs.fn::SetOperate()"); }
+  if( action == "ProgramUpdate" ) { Call("programs.fn::ProgramUpdate()"); }
+
+  if( action == "LoadProgramListXML" ) { Call("programs.fn::LoadProgramListXML()"); }
+  if( action == "DeleteProgram" ) { Call("programs.fn::DeleteProgram()"); }
+  if( action == "RestoreProgram" ) { Call("programs.fn::RestoreProgram()"); }
+  if( action == "CopyToNewProgram" ) { Call("programs.fn::CopyToNewProgram()"); }
+  if( action == "SetProgram" ) { Call("programs.fn::SetProgram()"); }
+  if( action == "NewProgram" ) { Call("programs.fn::NewProgram()"); }
+  if( action == "ShowNonVisiblePrograms" ) { Call("programs.fn::ShowNonVisiblePrograms()"); }
+ 
+  if( action == "LoadRule" ) { Call("programs.fn::LoadRule()"); }
+  if( action == "ReloadRule" ) { Call("programs.fn::ReloadRule()"); }
+  
+  if( action == "AddCondition" ) { Call("programs.fn::AddCondition()"); }
+  if( action == "DeleteCondition" ) { Call("programs.fn::DeleteCondition()"); }
+  
+  if( action == "AddSingleCondition" ) { Call("programs.fn::AddSingleCondition()"); }
+  if( action == "DeleteSingleCondition" ) { Call("programs.fn::DeleteSingleCondition()"); }
+  
+  if( action == "AddSingleDestination" ) { Call("programs.fn::AddSingleDestination()"); }
+  if( action == "DeleteSingleDestination" ) { Call("programs.fn::DeleteSingleDestination()"); }
+  
+  if( action == "AddSubRule" ) { Call("programs.fn::AddSubRule()"); }
+  if( action == "AddSubRuleDest" ) { Call("programs.fn::AddSubRuleDest()"); }
+  if( action == "AddSubRuleBOR" ) { Call("programs.fn::AddSubRuleBOR()"); }
+  if( action == "AddNewElseRule" ) { Call("programs.fn::AddNewElseRule()"); }
+  if( action == "DeleteSubRule" ) { Call("programs.fn::DeleteSubRule()"); }
+  
+  if( action == "SetOperatorType" ) { Call("programs.fn::SetOperatorType()"); }
+  if( action == "SetVisibility" ) { Call("programs.fn::SetVisibility()"); }
+%>

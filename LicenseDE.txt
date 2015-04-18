@@ -1,0 +1,76 @@
+WICHTIGER HINWEIS: 
+BITTE LESEN SIE DIESE HOMEMATIC SOFTWARE LIZENZ (HMSL) SORGFÄLTIG DURCH UND STELLEN SIE SICHER, DASS SIE SIE VERSTANDEN HABEN, BEVOR SIE IHRE BESTIMMUNGEN AKZEPTIEREN. 
+
+eQ-3 IST NUR DANN BEREIT, NUTZUNGSRECHTE FÜR DIE NACHFOLGEND DEFINIERTE SOFTWARE AN SIE EINZURÄUMEN, WENN SIE ALLE BESTIMMUNGEN DIESER HMSL AKZEPTIEREN. INDEM SIE A) AUF DEN BUTTON „ICH STIMME ZU“ ODER „JA“ KLICKEN, B) INDEM SIE DIE SOFTWARE LADEN ODER ENTGEGEN NEHMEN; ODER C) INDEM SIE AUF SONSTIGE WEISE – BEISPIELSWEISE DURCH DIE NUTZUNG ODER WEITERGABE – IHRE ZUSTIMMUNG ZUM AUSDRUCK BRINGEN, AKZEPTIEREN SIE DIESE HMSL, UND DIESE HMSL WIRD EIN RECHTSGÜLTIGER UND ANWENDBARER VERTRAG ZWISCHEN eQ-3 UND IHNEN. WENN SIE DIESEN BESTIMMUNGEN NICHT ZUSTIMMEN, DÜRFEN SIE DIE SOFTWARE NICHT VERWENDEN.
+SOLLTEN SIE DIE SOFTWARE BEREITS INSTALLIERT HABEN UND AKZEPTIEREN DIESE HMSL NICHT, SIND SIE VERPFLICHTET, EINE NUTZNG DER SOFTWARE ZU UNTERLASSEN UND DIESE SOFTWARE ZU LÖSCHEN. 
+
+HomeMatic Software Lizenzbedingungen (HMSL)
+Die von eQ-3 mit bzw. für die CCU2 oder andere HomeMatic Produkte gelieferte oder zum Download bereit gestellte Software zum Ablauf auf dem Linux Betriebssystem wird unter den folgenden Bedingungen zur Nutzung überlassen. Der entsprechende Nutzungsvertrag kommt zwischen Ihnen und der eQ-3 AG, Maiburger Straße 29, 26789 Leer, Deutschland – im Folgenden „eQ-3“ genannt –  zustande.
+Ein gesondertes Entgelt wird von eQ-3 hierfür nicht in Rechnung gestellt, sofern und solange die Bedingungen dieser HMSL eingehalten werden.
+Sie können diese HMSL nur abschließen, wenn für Sie das Recht eines der Mitgliedstaaten der EU, der Schweiz oder Norwegens gilt oder wenn die Bestimmung zur Wahl des Rechts und Gerichtsstands in Abschnitt 9 dieser HMSL uneingeschränkt, unwiderruflich und zweifelsfrei Anwendung finden wird.
+Diese HMSL betrifft die Einräumung von Nutzungsrechten für Software und jede zugehörige Dokumentation durch eQ-3 an Sie. Diese HMSL gilt auch für alle Updates und Upgrades, soweit eQ-3 Ihnen nach der Installation der Software Updates und/oder Upgrades zur Verfügung stellt.
+
+1. Begriffsbestimmungen
+1. eQ-3 –  bezeichnet die eQ-3 AG, Maiburger Straße 29, D-26789 Leer.
+2. HomeMatic-Software – bezeichnet folgende mit bzw. für die CCU2 gelieferte oder zum Download bereit gestellte Komponenten: „RFD“ (HomeMatic Protokoll Service mit XMLRPC Schnittstelle), „RS485D“, Programm- und Script-Engine, Web-Oberfläche, Java HMServer; nicht jedoch die Bestandteile bzw. Ergänzungen des Linux Betriebssystems und der JAVA Plattform; d.h. selbst auch dann nicht, wenn diese mit der HomeMatic Software zusammen geliefert wurden.
+3. Dokumentation – bezeichnet schriftliche Materialien, in gedruckter oder elektronischer Form, die die Funktionen der Software und/oder der Updates und Upgrades beschreiben und die dazu dienen, Sie bei der effektiven Nutzung der Software, der Updates und/oder Upgrades zu unterstützen. Eine solche Dokumentation ändert nicht die Bestimmungen dieser HMSL.
+4. Updates und Upgrades – bezeichnet die Aktualisierung der Software. Die Klassifizierung der Aktualisierung als Update oder Upgrade liegt im alleinigen Ermessen von eQ-3.
+5. Update-Service – bezeichnet die laufende Aktualisierung einer Software durch Updates und/oder Upgrades und die Zurverfügungstellung dieser Updates und Upgrades an Sie durch eQ-3. Manche Software erfordert den Update-Service zur funktionalen Nutzung. eQ-3 kann Leistungen im Rahmen ihres Update-Service nach alleinigem Ermessen als Update oder Upgrade zur Verfügung stellen.
+
+2. Eigentumsrechte
+Die Software ist durch nationale und internationale Urheberrechtsgesetze, -verträge und andere Gesetze geschützt. eQ-3 und ihre Lizenzgeber besitzen und behalten alle Rechte, das Eigentum und alle Ansprüche an der Software, einschließlich aller Urheberrechte, Patente, Betriebs- und Geschäftsgeheimnisse, Marken und sonstiger geistiger Eigentumsrechte. Diese HMSL überträgt Ihnen kein Eigentum an der Software. 
+
+Mit der CCU2 bzw. mit Images oder Software, die für den Download zur Verfügung gestellt wird, kann andere Software ausgeliefert werden, deren Nutzungsrechte nicht durch diese HMSL übertragen werden, sondern durch gesonderte Vertragsbedingungen. Diese Vertragsbedingungen finden Sie in HM-ThirdParty-Software-Licenses.txt.
+
+3. Nutzungsbestimmungen
+1. eQ-3 gewährt Ihnen das Recht, die HomeMatic Software auf einer Hardware von eQ-3 oder auf einer anderen Hardware selbst zu nutzen oder Dritten zur Nutzung zu überlassen, sofern Sie diese Dritten auch zur Einhaltung dieser HMSL verpflichten.
+2. eQ-3 gewährt Ihnen das Recht, die Software zu ergänzen und zu modifizieren, soweit
+a) diese Änderungen und Modifikationen von Ihnen im Source Code veröffentlicht und kostenlos zur Verfügung gestellt werden und
+b) dies unter der Eclipse Public License (EPL) oder Apache License geschieht.
+3. eQ-3 gewährt Ihnen das Recht, Kopien der Software zu verbreiten, sofern
+a) Sie den Empfänger und Nutzer der Kopie der Software auch zur Einhaltung dieser HMSL verpflichten und
+b) diese Vertragsbestimmungen, sowie alle anderen Verweise auf Rechte von eQ-3 auch in die Kopien der Software einfügen, bzw. diese nicht entfernen.
+4. Sie erhalten im Rahmen der HMSL nicht das Recht, in Binär- bzw. Objektform gelieferte Software zu decompilieren bzw. ein Reverse-Engineering durchzuführen, wenn die Voraussetzungen des §69e UrhG nicht gegeben sind. Sofern Sie zur Herstellung der Interoperabilität der Software mit davon unabhängig geschaffenen Programmen Informationen benötigen, müssen Sie sich zuerst an eQ-3 wenden. eQ-3 behält sich vor, Ihnen diese wahlweise unentgeltlich oder gegen Entgelt auf Basis eines separaten Vertrags zur Verfügung zu stellen.
+Diese Einschränkung betrifft ausdrücklich nicht Bestandteile der Software, die in Skript-Sprachen und/oder im Source Code geliefert wurden.
+5. Durch diese HMSL erhalten Sie keine Nutzungsrechte an Marken, Warenzeichen, Geschmacks- und Gebrauchsmustern, Patenten, sowie anderen gewerblichen Schutzrechten von eQ-3.  
+6. Die zur Nutzung überlassene Software ist für den Gebrauch in Bereichen mit besonderem Risiko nicht geeignet. 
+Es ist weder Ihnen gestattet noch dürfe Sie anderen Person gestatten, die Software in Bereichen mit besonderem Risiko verwenden, die einen fehlerfreien Dauerbetrieb relevanter Systeme erfordern und / oder  in denen ein Ausfall der Software zu einer unmittelbaren Gefahr für Leben, Körper oder Gesundheit oder zu erheblichen Sach- oder Umweltschäden führen kann, z.B. Tätigkeiten mit hohem Risiko und Tätigkeiten mit hoher Verfügbarkeit, insbesondere im Zusammenhang mit dem Betrieb von Kernkraftanlagen, Waffensystemen, Flugnavigations- oder Flugkommunikationssystemen, lebenserhaltenden Systemen oder Geräten, Maschinen- und Produktionsprozessen bei der Herstellung von Pharmazeutika und Lebensmitteln). 
+7. eQ-3 behält sich alle Rechte vor, um eine unbefugte Nutzung der Software durch Sie oder Dritte zu untersagen oder zu unterbinden, insbesondere Ansprüche auf Unterlassung und Schadensersatz. Eine unbefugte Nutzung Ihrerseits kann zu strafrechtlicher Verfolgung gemäß den einschlägigen Gesetzen führen. 
+8. Die Einrichtung einer funktionsfähigen Hardware- und Softwareumgebung für die Software liegt allein in Ihrer Verantwortung. Das gleiche gilt für regelmäßige Datensicherungen. 
+9. Die Nutzungsbestimmungen über die Vervielfältigung und Offenlegung gelten ebenso für die Benutzerhandbücher und andere Unterlagen, die die von eQ-3 zur Verfügung gestellte Software betreffen.
+
+4. Technischer Support 
+eQ-3 bietet technische Support-Dienstleistungen an. Siehe www.eQ-3.com. 
+Die Erbringung von technischem Support liegt im Ermessen von eQ-3 und ist mit keinerlei Garantie oder Gewährleistung verbunden. Es liegt in Ihrer Verantwortung, alle Ihre vorhandenen Daten, Software und Programme zu sichern, bevor Sie von eQ-3 technischen Support erfragen und erhalten. 
+
+5. Beschränkte Gewährleistung und Gewährleistungsausschluss
+1. eQ-3 räumt die Nutzungsrechte kostenfrei ein. Sie wird dabei „wie besehen“ zur Verfügung gestellt und eQ-3 schließt sämtliche Garantie- oder Haftungsgewährleistungen bezüglich ihrer Verwendung und Leistungsfähigkeit aus. eQ-3 und seine Lieferanten gewähren keine Garantien, Zusicherungen, Bestimmungen oder Bedingungen - ausdrücklicher oder stillschweigender Natur, die entweder aus einer Geschäftsbeziehung oder einem Handelsbrauch entstehen oder aus gesetzlichen, gewohnheitsrechtlichen oder anderen Vorschriften abgeleitet werden - hinsichtlich Funktion, technischer Eignung, Zuverlässigkeit, Marktgängigkeit, Rechtsmängelfreiheit, Beachtung von Schutzrechten und Geistigen Eigentumsrechten, Integrierbarkeit oder Brauchbarkeit für bestimmte Zwecke, es sei denn, derartige Garantien, Zusicherungen, Bestimmungen oder Bedingungen sind gemäß geltendem Recht vorgeschrieben und können nicht eingeschränkt oder ausgeschlossen werden.
+2. Sie haben eQ-3 unverzüglich zu unterrichten, wenn ein Dritter Ihnen gegenüber Ansprüche aus einer Verletzung geistiger Eigentumsrechte durch die Software („Rechtsmangel“) geltend macht.
+3. Im Falle rechtmäßiger Ansprüche Dritter kann eQ-3 Sie nach eigener Wahl von den Kosten, die durch die Geltendmachung solcher Ansprüche Dritter entstanden sind (Anwaltskosten - sofern anwendbar – dabei auf die Honorare nach dem Rechtsanwaltsvergütungsgesetz beschränkt) freistellen, sofern Sie i) eQ-3 die alleinige Verteidigung gegen solche Ansprüche überlassen, ii) eQ-3 in der Verteidigung bestmöglich unterstützen, iii) ohne vorherige Freigabe von eQ-3 keine Angaben an den betreffenden Dritten machen, UND iv) ohne Freigabe von eQ-3 keine Vereinbarungen treffen, die direkt oder indirekt einen Einfluss auf die Verteidigung haben könnten.
+
+6. HAFTUNGSBESCHRÄNKUNG
+1. eQ-3 haftet für alle Schäden, die Ihnen aufgrund grob fahrlässigen oder vorsätzlichen Verhaltens von eQ-3 oder durch eine schuldhafte Verletzung von Leben, Körper oder Gesundheit entstehen, für die eQ-3 eine Garantie übernommen hat oder für die eQ-3 nach dem Produkthaftungsgesetz haftet.
+In allen anderen Fällen ist die Schadenersatzpflicht von eQ-3 auf die Verletzung wesentlicher Vertragspflichten beschränkt. Wesentliche Pflichten sind nur solche, deren Erfüllung die ordnungsgemäße Ausführung des Vertrags erst ermöglicht und auf deren Erfüllung Sie vertrauen dürfen. 
+Die Haftung von eQ-3 für Datenverlust ist auf die typischen, für die Wiederherstellung erforderlichen Aufwendungen beschränkt, die normal und üblich sind, wenn Sicherungskopien erstellt wurden. Es wird auf Ihre Pflicht zur regelmäßigen Datensicherung gemäß Paragraph 3.8 verwiesen. 
+2. Im Falle einer fahrlässigen Verletzung wesentlicher Vertragspflichten durch eQ-3 ist die Haftung von eQ-3 auf vorhersehbare und vertragstypische Schäden beschränkt.
+3. Eine verschuldensunabhängige Haftung der eQ-3 für bei Abschluss dieser HMSL bestehende Mängel gemäß § 536a Abs.1 BGB wird hiermit ausdrücklich ausgeschlossen. 
+4. Die vorstehenden Haftungsbeschränkungen gelten auch in Bezug auf alle Vertreter von eQ-3, insbesondere in Bezug auf ihre Vertretungsorgane, Prokuristen, gesetzlichen Vertreter, Mitarbeiter und sonstigen Erfüllungsgehilfen.
+
+7. Erhebung bestimmter Systeminformationen
+eQ-3 verwendet über seine Webseite und innerhalb der Software bestimmte Anwendungen und Tools zum Abrufen von Informationen über Ihr Computersystem, um eQ-3 beim Support der Software zu unterstützen. eQ-3 verwendet und versendet hierbei keine personenbezogenen Daten.
+
+8. Kündigung oder des Ablaufs der Lizenz
+eQ-3 wird die HMSL nicht kündigen, sofern nicht eine Situation eintritt, aus der heraus eQ-3 selbst eine oder mehrere Komponenten der Software nicht kostenfrei zur Verfügung stellen darf.
+Die Kündigung oder ein Ablauf dieser HMSL führt zum Ende Ihres Rechts auf Nutzung der Software und der Updates und Upgrades. 
+Eine Kündigung durch eQ-3 erfolgt per Mitteilung auf der Internet-Homepage von eQ-3 und wird, sofern auf der Internet-Homepage von eQ-3 keine andere Angabe gemacht wird, zum Monatsende des sechsten (6.) auf die Ankündigung folgenden Kalendermonats, wirksam, so dass der Vertrag zu diesem Zeitpunkt beendet wird. Eine Kündigung dieser HSML wird eQ-3 stets mindestens 6 Monate zuvor auf der Internet-Homepage von eQ-3 bekannt geben.
+
+9. Geltendes Recht und Gerichtsstand 
+Für diese HMSL gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist Leer.  
+
+10. Sonstige Vereinbarungen 
+1. Diese HMSL und die Geschäftsbedingungen im Sinne obiger Definition, die Bestandteil dieser Vereinbarung sind, legen alle Ihre Rechte zur Nutzung der Software fest und bilden die gesamte Vereinbarung zwischen den Parteien. Diese HMSL und die Geschäftsbedingungen setzen alle anderen Mitteilungen, Zusicherungen oder Werbeaussagen in Bezug auf die vertragsgegenständliche Software außer Kraft.
+2. Ein Verzicht auf Bestimmungen dieser Vereinbarung gilt nur dann als erfolgt, wenn eine schriftliche, von einem bevollmächtigten Vertreter von eQ-3 unterzeichnete Verzichtserklärung vorliegt. 
+3. Sollten einzelne Bestimmungen dieser Vereinbarung unwirksam oder undurchführbar sein oder nach Vertragsschluss unwirksam oder undurchführbar werden, bleibt davon die Wirksamkeit der Vereinbarung im Übrigen unberührt. An die Stelle der unwirksamen oder undurchführbaren Bestimmung soll diejenige wirksame und durchführbare Regelung treten, deren Wirkungen der wirtschaftlichen Zielsetzung am nächsten kommen, die die Vertragsparteien mit der unwirksamen bzw. undurchführbaren Bestimmung verfolgt haben. Die vorstehenden Bestimmungen gelten entsprechend für den Fall, dass sich der Vertrag als lückenhaft erweist.
+4. Alle nicht ausdrücklich in dieser HMSL festgelegten Rechte bleiben von eQ-3 vorbehalten.
+5. Die beschreibenden Überschriften in dieser HMSL wurden der leichteren Lesbarkeit wegen eingefügt, und die Auslegung dieser HMSL wird durch sie nicht eingeschränkt oder auf sonstige Weise berührt.
+6. Sie dürfen Ihre Rechte aus dieser HMSL ohne ausdrückliche schriftliche Genehmigung von eQ-3 nicht abtreten. eQ-3 wird diese nicht ohne wichtigen Grund verweigern. Eine Abtretung einzelner Rechte aus der Vereinbarung ist ausgeschlossen. Die Vereinbarung kann nur als Ganzes übertragen werden.  

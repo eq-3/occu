@@ -1,0 +1,4 @@
+"switch_off" : "Salter - kapat",
+"switch_on" : "Salter - ac",
+"switch_on_off" : "Salter - ac/kapat",
+"switch_on_off_toggle" : "Salter - ac/kapat/toggle",

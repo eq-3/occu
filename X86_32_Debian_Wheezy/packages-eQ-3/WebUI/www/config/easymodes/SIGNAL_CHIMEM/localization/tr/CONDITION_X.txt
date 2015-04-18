@@ -1,0 +1,3 @@
+"description_1" : "<span class=\"translated\">Degistirme komutu iletildiginde gong calar. Bir gecikme s&uuml;resi ayarlanmissa, gong bu s&uuml;re dolduktan sonra calmaya baslar.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Sens&ouml;r etkin degil.</span>",
+"descrHint" : "<span class=\"translated\">Salter akt&uuml;at&ouml;r&uuml; tarafindan uygun performans &ouml;lc&uuml;m&uuml;yle degistirme komutunun iletim zamani, ilgili kanaldan ayarlanir.</span><br/><br/>",

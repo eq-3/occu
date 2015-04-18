@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">When the window is operated the chime will be triggered according to the selected direction.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">This direct link will be deactivated.</span><br/><br/>",
+"subset_1" : "Open - on / Closed - off",
+"subset_2" : "Open - off / Closed - on",
+"subset_3" : "Open - on",
+"subset_4" : "Closed - on",
+"subset_5" : "Change - on",

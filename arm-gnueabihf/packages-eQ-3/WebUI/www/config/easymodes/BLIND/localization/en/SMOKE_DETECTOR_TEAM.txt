@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">When the smoke detector is triggered the awning / shutter will be moved up completely for the time set. If a delay is set the awning / shutter will be moved to the desired position after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the smoke detector is triggered the awning / shutter will be moved down completely for the time set. If a delay is set the awning / shutter will be moved to the desired position after the delay time has expired.</span><br/><br/>",

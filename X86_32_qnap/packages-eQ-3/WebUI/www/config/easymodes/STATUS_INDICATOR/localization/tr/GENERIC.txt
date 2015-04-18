@@ -1,0 +1,4 @@
+"switch_off" : "G&ouml;sterge - kapat",
+"switch_on" : "G&ouml;sterge - ac",
+"switch_on_off" : "G&ouml;sterge - ac/kapat",
+"switch_on_off_toggle" : "G&ouml;sterge - ac/kapat/toggle",

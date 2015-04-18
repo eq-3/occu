@@ -1,0 +1,9 @@
+[
+	{
+		"SD_QuestionGroup" : "Zu welcher Gruppe geh&ouml;rt der Rauchmelder?",
+		"SD_Reset" : "Grundeinstellung",
+		"SD_HintMailbox" : " siehe Posteingang",
+		"SD_GroupMember" : "Gruppenmitglieder",
+		"SD_LblSmokeDetectorSN" : "Rauchmelder SN:",
+	}
+]

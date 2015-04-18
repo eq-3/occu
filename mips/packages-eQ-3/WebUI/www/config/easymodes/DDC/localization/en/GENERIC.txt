@@ -1,0 +1,4 @@
+"switch_off" : "Door open",
+"switch_on" : "Door closed",
+"switch_on_off" : "Door open / AUTO closed",
+"switch_on_off_toggle" : "",

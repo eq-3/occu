@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda kapinin kilidi acilir. Belirlenen s&uuml;re sonunda kapi otomatik olarak tekrar kilitlenir.</span>",
+"description_2" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda kapi kilitlenir.</span>",
+"description_3" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda kapi acilir. Belirlenen s&uuml;re sonunda kapi otomatik olarak tekrar kilitlenir.</span>",
+"description_4" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda kapi kilitlenir. Tusa uzun s&uuml;re basildiktan sonra kapinin kilidi acilir. Belirlenen s&uuml;re sonunda kapi otomatik olarak tekrar kilitlenir.</span>",
+"description_5" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda kapi kilitlenir. Tusa uzun s&uuml;re basildiginda kapi acilir. Belirlenen s&uuml;re sonunda kapi otomatik olarak tekrar kilitlenir.</span>",
+"description_6" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda kapinin kilidi acilir. Tusa uzun s&uuml;re basildiginda kapi acilir. Belirlenen s&uuml;re sonunda kapi otomatik olarak tekrar kilitlenir.</span>",
+"description_7" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda kapi g&uuml;ncel duruma g&ouml;re ya kilitlenir ya da kilit acilir.</span>",

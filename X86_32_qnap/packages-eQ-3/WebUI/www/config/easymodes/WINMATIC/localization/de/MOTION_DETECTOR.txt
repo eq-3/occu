@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Fenster mit der eingestellten Geschwindigkeit auf die festgelegte Weite gekippt.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Bewegungsmelder ist nicht aktiv</span>",
+"help_title_WINMATIC" : "Hilfe zur Einschaltdauer (Verweildauer im Zustand &quot;Gekippt&quot;)",
+"help_WINMATIC" :
+  "<div style=&quot;padding:10&quot;>Wenn die Einschaltdauer k&uuml;rzer eingestellt ist, als der Sendeabstand des Bewegungsmelders,&nbsp;"+
+  "kann es vorkommen, dass das Fenster nach Ablauf der Einschaltdauer erneut gekippt wird.&nbsp;<br/><br/>"+
+  "Der Sendeabstand des Bewegungsmelders ist mindestens so gro&szlig;, wie der in den Kanalparametern&nbsp;des Bewegungsmelders festgelegte Mindestsendeabstand. "+
+  "Er kann je nach H&auml;ufigkeit der&nbsp;Bewegungserkennung bis zu 10 Minuten betragen.<br/><br/>"+
+  "Um dieses Verhalten zu vermeiden, sollte eine Einschaltdauer von mindestens 10 Minuten eingestellt werden.<br/><br/>"+
+  "<span class=&quot;CLASS20400&quot;>Weitere Informationen entnehmen Sie bitte der Dokumentation.</span></div>",

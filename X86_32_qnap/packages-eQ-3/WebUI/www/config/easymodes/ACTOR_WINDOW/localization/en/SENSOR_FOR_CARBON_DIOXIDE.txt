@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">In case of increased CO2 concentrations in the room air the window will open 100% for ventilation and will close automatically after the selected time elapsed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">This direct link will be deactivated.</span><br/><br/>",
+"CO2_low" : "slightly increased CO2 concentration",
+"CO2_high" : "heavily increased CO2 concentration",

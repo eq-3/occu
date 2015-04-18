@@ -1,0 +1,46 @@
+<%
+  !*****************************************************************************
+  ! functionlist.fn
+  ! Gibt die Gewerkeliste als XML-Datei zurück.
+  !
+  ! Zugriff: Gast oder höher
+  !
+  ! Autor      : Falk Werner
+  ! Erstellt am: 19.05.2008
+  !*****************************************************************************
+
+  var request = "functionList";
+  var level   = iulGuest;
+  Call("/xml-api/session.fn::checkRequest()");  
+  Call("/xml-api/cache.fn::TryRespondFunctionList()");
+  
+  !#############################################################################
+  !# Gewerkeliste erzeugen                                                     #
+  !#############################################################################
+  
+  WriteLine("<?" # "xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>");
+  WriteLine("<functionList>");
+  
+  string sFuncId;
+  string sChnId;
+
+  foreach(sFuncId, dom.GetObject(ID_FUNCTIONS).EnumUsedIDs())
+  {
+    var oFunc = dom.GetObject(sFuncId);
+  
+    Write("<function");
+    Write(" id='");WriteXML(sFuncId);Write("'");
+    Write(" name='");WriteXML(oFunc.Name())Write("'");
+    Write(" description='");WriteXML(oFunc.EnumInfo());Write("'");
+    Write(">");
+  
+    foreach(sChnId, oFunc.EnumUsedIDs())
+    {
+      Write("<channel id='");WriteXML(sChnId);Write("'/>");
+    }
+  
+    Write("</function>");
+  }
+  
+  Write("</functionList>");
+%>

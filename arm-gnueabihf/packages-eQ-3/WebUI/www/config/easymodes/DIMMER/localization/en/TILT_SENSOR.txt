@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">When e.g. the garage door is opened the light will be switched on to the defined brightness value and switched off when the garage door is closed. This function can be reversed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When opening or closing, the light will be switched on for the set time to the defined brightness value.</span><br/><br/> Whenever the status is changed the time starts again.</span><br/><br/>",
+"subset_1" : "Open - off / Closed - on",
+"subset_2" : "Open - on / Closed - off",
+"subset_3" : "Close",
+"subset_4" : "Open",
+"subset_5" : "Change",
+"at" : "<span class=\"translated\">on</span>",

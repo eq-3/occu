@@ -1,0 +1,6 @@
+#!/bin/tclsh
+
+set PROFILE_23(UI_MAP) 1
+set PROFILE_24(UI_MAP) 2
+set PROFILE_25(UI_MAP) 3
+set PROFILE_26(UI_MAP) 4

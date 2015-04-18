@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">The chime will sound when a switching command is transmitted. If a delay is set the chime will be triggered after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The sensor is deactivated.</span>",

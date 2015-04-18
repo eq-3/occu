@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">By pressing the switch contact the chime will be triggered according to the selected mode.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The switching interface is deactivated.</span><br/><br/>",
+"subset_1" : "on / off",
+"subset_2" : "on",

@@ -1,0 +1,780 @@
+
+function ::Test()
+{
+  if( system.IsVar("ids")  )
+  {
+    Write( "Starting test routine for" );
+    string s;
+    foreach( s, system.GetVar("ids") )
+    {
+      object o = dom.GetObject( s );
+      if( o )
+      {
+        if( o.IsTypeOf( OT_DEVICE ) )
+        {
+          Write( " "#o.ID() );
+          o.DevStartComTest();
+        }
+        if( o.IsTypeOf( OT_CHANNEL ) )
+        {
+          Write( " "#o.ID() );
+          o.ChnStartComTest();
+        }
+      }
+    }
+    Write( "." );
+  }
+  return;
+}
+
+! [chnId], [state]
+function ::setReadyConfig() {
+  WriteLine( '<script type="text/javascript">' );
+    
+  object chn = dom.GetObject(system.GetVar("chnId"));
+  if (chn) {
+    if (system.GetVar("state") == 0)
+    {
+      WriteLine("setChannelReadyConfig('" # chnId # "',  false);"); 
+      chn.ReadyConfig(false);
+    }
+    else
+    {
+      WriteLine("setChannelReadyConfig('" # chnId # "',  true);"); 
+      chn.ReadyConfig(true);
+    }
+    
+    if (chn.ChnGroupPartnerId() != ID_ERROR) {
+      object oChnParnter = dom.GetObject(chn.ChnGroupPartnerId());
+      boolean ready1 = false;
+      if (chn.ReadyConfig()) { ready1 = true; }
+      string ready2 = false;
+      if (oChnParnter.ReadyConfig()) { ready2 = true; }
+      
+      string sCellId = "ready" # chn.ID() # oChnParnter.ID();
+      Write("if ($('"#sCellId#"'))\n");
+        Write(" $('"#sCellId#"').checked = "#(ready1 && ready2)#"\n;");
+      string sCellId = "ready" # oChnParnter.ID() # chn.ID();
+      Write("if ($('"#sCellId#"'))\n");
+        Write(" $('"#sCellId#"').checked = "#(ready1 && ready2)#";");
+    }
+    
+    
+    object dev = dom.GetObject( chn.Device() );
+    if( dev )
+    {
+      if( dev.ReadyConfigChns() )
+      {
+        WriteLine("setDeviceReadyConfig('" # dev.ID() # "', true);");
+      }
+      else
+      {
+        WriteLine("setDeviceReadyConfig('" # dev.ID() # "', false);");
+      }
+    }
+    Write( '</script>' );
+  }
+  
+  return;
+}
+
+! [chnId], [iHandling]
+function ::setHandling()
+{
+  Write( '<script type="text/javascript">' );
+  string sCI = "setHandling: ";
+  if( system.IsVar("chnId") )
+  {
+    boolean bFoundOne = false;
+    boolean bHandling = false;
+    integer iTmp = iarRead;
+    if( system.GetVar("iHandling") == "1" )
+    {
+      bHandling = true;
+      iTmp = iarFullAccess;
+    }
+    object chn = dom.GetObject( system.GetVar("chnId") );
+    if( chn )
+    {
+      chn.UserAccessRights(iulOtherThanAdmin, iTmp);
+      Write("setHandlingIfExist("#chn.ID()#", "#bHandling#");");
+      
+      object dev = dom.GetObject( chn.Device() );
+      if( dev )
+      {
+        string tmp = "";
+        foreach( tmp, dev.EnumChannelGroups(true) )
+        {
+          object oc = dom.GetObject(tmp);
+          if( oc )
+          {
+            if( !oc.Internal() )
+            {
+              if( oc.UserAccessRights(iulOtherThanAdmin) == iarFullAccess )
+              {
+                object oDpTmp = dom.GetObject( oc.DefaultDPWrite() );
+                if( oDpTmp )
+                {
+                  if( (!oDpTmp.IsTypeOf( OT_VARDP )) && (!oDpTmp.IsTypeOf( OT_ALARMDP )) )
+                  {
+                    Write("conInfo('----- >FoundOne: "#oc.ID()#"');");
+                    bFoundOne = true;
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        string tmp = "";
+        foreach( tmp, dev.EnumChannelGroups(false) )
+        {
+          object oc = dom.GetObject(tmp);
+          if( oc )
+          {
+            if( !oc.Internal() )
+            {
+              if( oc.UserAccessRights(iulOtherThanAdmin) == iarFullAccess )
+              {
+                object oDpTmp = dom.GetObject( oc.DefaultDPWrite() );
+                if( oDpTmp )
+                {
+                  if( (!oDpTmp.IsTypeOf( OT_VARDP )) && (!oDpTmp.IsTypeOf( OT_ALARMDP )) )
+                  {
+                    Write("conInfo('----- >FoundOne: "#oc.ID()#"');");
+                    bFoundOne = true;
+                  }
+                }
+              }
+            }
+          }
+        }
+        
+        dev.UserAccessRights(iulOtherThanAdmin,iTmp);
+        Write("setHandlingIfExist("#dev.ID()#", "#bFoundOne#");");
+      }
+    }
+    else
+    {
+      sCI = sCI#" Failed to get object ["#system.GetVar("chnId")#"]";
+    }
+  }
+  else
+  {
+    sCI = sCI#" Parameter missing";
+  }
+  sCI = sCI#".";
+  Write( 'conInfo("'#sCI#'");' );
+  Write( '</script>' );
+  
+  ! - - - wernerf - - -
+  Call("/xml-api/cache.fn::InvalidateDeviceList()");
+  ! - - - wernerf - - -   
+  
+  return;
+}
+
+! [chnId], [iVis]
+function ::setVisible()
+{
+  Write( '<script type="text/javascript">' );
+  string sCI = "CHANNEL.setVisible: ";
+  if( system.IsVar("chnId") )
+  {
+    boolean bFoundOne = false;
+    boolean bVisible = false;
+    if( system.GetVar("iVis") == "1" )
+    {
+      bVisible = true;
+    }
+    object chn = dom.GetObject( system.GetVar("chnId") );
+    if( chn )
+    {
+      chn.Visible(bVisible);   
+      Write("setVisibleIfExist("#chn.ID()#", "#bVisible#");");
+      sCI = sCI#" Set channel ["#chn.ID()#"] visibility to "#bVisible#", ";
+      
+      object dev = dom.GetObject( chn.Device() );
+      if( dev )
+      {
+        string tmp = "";
+        foreach( tmp, dev.EnumChannelGroups(true) )
+        {
+          object oc = dom.GetObject(tmp);
+          if( oc )
+          {
+            if( !oc.Internal() )
+            {
+              if( oc.Visible() )
+              {
+                bFoundOne = true;
+              }
+            }
+          }
+        }
+        
+        string tmp = "";
+        foreach( tmp, dev.EnumChannelGroups(false) )
+        {
+          object oc = dom.GetObject(tmp);
+          if( oc )
+          {
+            if( !oc.Internal() )
+            {
+              if( oc.Visible() )
+              {
+                bFoundOne = true;
+              }
+            }
+          }
+        }
+        
+        dev.Visible(bFoundOne);
+        Write("setVisibleIfExist("#dev.ID()#", "#bFoundOne#");");
+        sCI = sCI#" Set device ["#dev.ID()#"] visibility to "#bFoundOne#", ";
+      }
+    }
+    else
+    {
+      sCI = sCI#" Failed to get object ["#system.GetVar("chnId")#"]";
+    }
+  }
+  else
+  {
+    sCI = sCI#" Parameter missing";
+  }
+  sCI = sCI#".";
+  Write( 'conInfo("'#sCI#'");' );
+  Write( '</script>' );
+
+  ! - - - wernerf - - -
+  Call("/xml-api/cache.fn::InvalidateDeviceList()");
+  ! - - - wernerf - - -     
+  
+  return;
+}
+
+! [chnId], [iProto]
+function ::setProto()
+{
+  Write( '<script type="text/javascript">' );
+  string sCI = "setProto: ";
+  if( system.IsVar("chnId") )
+  {
+    boolean bFoundOne = false;
+    boolean bProto = false;
+    if( system.GetVar("iProto") == "1" )
+    {
+      bProto = true;
+    }
+    object chn = dom.GetObject( system.GetVar("chnId") );
+    if( chn )
+    {
+      chn.ChnArchive(bProto);
+      Write('setProtoIfExist('#chn.ID()#', '#bProto#');');
+      
+      object dev = dom.GetObject( chn.Device() );
+      if( dev )
+      {
+        string tmp = "";
+        foreach( tmp, dev.EnumChannelGroups(true) )
+        {
+          object oc = dom.GetObject(tmp);
+          if( oc )
+          {
+            if( !oc.Internal() )
+            {
+              if( oc.ChnArchive() )
+              {
+                bFoundOne = true;
+              }
+            }
+          }
+        }
+        
+        string tmp = "";
+        foreach( tmp, dev.EnumChannelGroups(false) )
+        {
+          object oc = dom.GetObject(tmp);
+          if( oc )
+          {
+            if( !oc.Internal() )
+            {
+              if( oc.ChnArchive() )
+              {
+                bFoundOne = true;
+              }
+            }
+          }
+        }
+        
+        Write('setProtoIfExist('#dev.ID()#', '#bFoundOne#');');
+      }
+    }
+    else
+    {
+      sCI = sCI#" Failed to get object ["#system.GetVar("chnId")#"]";
+    }
+  }
+  else
+  {
+    sCI = sCI#" Parameter missing";
+  }
+  sCI = sCI#".";
+  Write( 'conInfo("'#sCI#'");' );
+  Write( '</script>' );
+  
+  ! - - - wernerf - - -
+  Call("/xml-api/cache.fn::InvalidateDeviceList()");
+  ! - - - wernerf - - -   
+  
+  return;
+}
+
+! [chnId], [iAES]
+function ::setTransMode() {
+  object oChn = dom.GetObject(system.GetVar("chnId"));
+  if (oChn) {
+    oChn.ChnAESActive(system.GetVar("iAES"));
+
+    if (oChn.ChnGroupPartnerId() != ID_ERROR) {
+      object oChnParnter = dom.GetObject(oChn.ChnGroupPartnerId());
+      string s1 = "${lblStandard}";
+      if (oChn.ChnAESActive()) { s1 = "${lblSecured}"; }
+      string s2 = "${lblStandard}";
+      if (oChnParnter.ChnAESActive()) { s2 = "${lblSecured}"; }
+
+      string sCellId = "trans" # oChn.ID() # oChnParnter.ID();
+      Write("<script type='text/javascript'>");
+        Write("if ($('"#sCellId#"'))");
+          Write(" $('"#sCellId#"').innerHTML = removeDuplicates('"#s1#"', '"#s2#"', '', true);");
+        string sCellId = "trans" # oChnParnter.ID() # oChn.ID();
+        Write("if ($('"#sCellId#"'))");
+          Write(" $('"#sCellId#"').innerHTML = removeDuplicates('"#s1#"', '"#s2#"', '', true);");
+
+        string sCellId = "transParent" # oChn.Device();
+        Write("if ($('"#sCellId#"'))");
+          Write(" $('"#sCellId#"').innerHTML = removeDuplicates('"#s1#"', '"#s2#"', '', true);");
+
+        Write("translatePage('#tblNewDevices')");
+      Write("</script>");
+    } else {
+      Write("<script type='text/javascript'>");
+        string s1 = "${lblStandard}";
+        if (oChn.ChnAESActive()) { s1 = "${lblSecured}"; }
+
+        string sCellId = "transParent" # oChn.Device();
+        Write("if ($('"#sCellId#"'))");
+          Write(" $('"#sCellId#"').innerHTML = '" #s1# "';");
+        Write("translatePage('#tblNewDevices')");
+      Write("</script>");
+    }
+  }
+  Write(system.GetVar("iAES"));
+  
+  ! - - - wernerf - - -
+  Call("/xml-api/cache.fn::InvalidateDeviceList()");
+  ! - - - wernerf - - -   
+  
+  return;
+}
+
+! [chnId], [roomId], [iAdd]
+function ::chnToRoom() {
+  
+  !Update channel table cell
+
+  object room = dom.GetObject(system.GetVar("roomId"));
+  object chn = dom.GetObject(system.GetVar("chnId"));
+  if (system.GetVar("iAdd") == 1) {
+    room.Add(chn.ID());  
+  }
+  else {
+    room.Remove(chn.ID());
+  }
+
+  string sRooms = "";
+  string roomTmp = "";
+  string sGroupRoomIds = "";
+  foreach(roomTmp, chn.ChnRoom()) {
+    object objTmp = dom.GetObject(roomTmp);
+    sRooms = sRooms # objTmp.Name() # "<br />";
+    sGroupRoomIds = sGroupRoomIds # roomTmp # "\t";
+  }
+  Write("<script type='text/javascript'>");
+  Write("$('roomsDiv"#chn.ID()#"').innerHTML = '"#sRooms#"';");
+  
+  !Update group table cell
+  
+  if (chn.ChnGroupPartnerId() != ID_ERROR) {
+    object oGrPartner = dom.GetObject(chn.ChnGroupPartnerId());
+    if (oGrPartner) {
+      string sGrPartnerTmp = "";
+      foreach(sGrPartnerTmp, oGrPartner.ChnRoom()) {
+        boolean bFound = false;
+        string sGrPRTmp = "";
+        foreach(sGrPRTmp, sGroupRoomIds) {
+          if (sGrPRTmp == sGrPartnerTmp) {
+            bFound = true;
+          }
+        }
+        if (!bFound) {
+          sGroupRoomIds = sGroupRoomIds # sGrPartnerTmp # "\t";
+        }
+      }
+      string tmp = "";
+      string sGroupRooms = "";
+      foreach (tmp, sGroupRoomIds) {
+        object oGroupRoom = dom.GetObject(tmp);
+        sGroupRooms = sGroupRooms # oGroupRoom.Name() # "<br />";
+      }
+      Write("updateGroupCell('rooms', "#chn.ID()#", "#oGrPartner.ID()#", '"#sGroupRooms#"');");
+    }
+  }
+  
+  !Update device table cell
+
+  if (chn.Device() != ID_ERROR) {
+    object oDev = dom.GetObject(chn.Device());
+    string sDevRoomsIds = "";
+    string chnTmp = "";
+    foreach (chnTmp, oDev.Channels()) {
+      object oChnTmp = dom.GetObject(chnTmp);
+      if (oChnTmp) {
+        string roomTmp = "";
+        foreach(roomTmp, oChnTmp.ChnRoom()) {
+          string sDriTmp = "";
+          boolean bFound = false;
+          foreach (sDriTmp, sDevRoomsIds) {
+            if (sDriTmp == roomTmp) {
+              bFound = true;
+            }
+          }
+          if (!bFound) {
+            sDevRoomsIds = sDevRoomsIds # roomTmp # "\t";
+          }
+        }
+      }
+    }
+    string tmp = "";
+    string sDevRooms = "";
+    foreach (tmp, sDevRoomsIds) {
+      object oRoomTmp = dom.GetObject(tmp);
+      sDevRooms = sDevRooms # oRoomTmp.Name() # "<br />";
+    }
+    Write("if($('rooms"#oDev.ID()#"'))");
+    Write("$('rooms"#oDev.ID()#"').innerHTML = '"#sDevRooms#"';");
+  }
+  Write("translatePage('#content')");
+  Write("</script>");
+  
+  ! - - - wernerf - - - 
+  Call("/xml-api/cache.fn::InvalidateRoomList()");
+  ! - - - wernerf - - - 
+  
+  
+  return;
+}
+
+! [chnId], [funcId], [iAdd]
+function ::chnToFunc() {
+  
+  !Update channel table cell
+  
+  object func = dom.GetObject(system.GetVar("funcId"));
+  object chn = dom.GetObject(system.GetVar("chnId"));
+  if (system.GetVar("iAdd") == 1) {
+    func.Add(chn.ID());  
+  }
+  else {
+    func.Remove(chn.ID());
+  }
+  string sFuncs = "";
+  string funcTmp = "";
+  string sGroupFuncIds = "";
+  foreach(funcTmp, chn.ChnFunction()) {
+    object objTmp = dom.GetObject(funcTmp);
+    sFuncs = sFuncs # objTmp.Name() # "<br />";
+    sGroupFuncIds = sGroupFuncIds # funcTmp # "\t";
+  }
+  Write("<script type='text/javascript'>");
+  Write("$('funcsDiv"#chn.ID()#"').innerHTML = '"#sFuncs#"';");
+
+  !Update group table cell
+  
+  if (chn.ChnGroupPartnerId() != ID_ERROR) {
+    object oGrPartner = dom.GetObject(chn.ChnGroupPartnerId());
+    if (oGrPartner) {
+      string sGrPartnerTmp = "";
+      foreach(sGrPartnerTmp, oGrPartner.ChnFunction()) {
+        boolean bFound = false;
+        string sGrPRTmp = "";
+        foreach(sGrPRTmp, sGroupFuncIds) {
+          if (sGrPRTmp == sGrPartnerTmp) {
+            bFound = true;
+          }
+        }
+        if (!bFound) {
+          sGroupFuncIds = sGroupFuncIds # sGrPartnerTmp # "\t";
+        }
+      }
+      string tmp = "";
+      string sGroupFuncs = "";
+      foreach (tmp, sGroupFuncIds) {
+        object oGroupFunc = dom.GetObject(tmp);
+        sGroupFuncs = sGroupFuncs # oGroupFunc.Name() # "<br />";
+      }
+      Write("updateGroupCell('funcs', "#chn.ID()#", "#oGrPartner.ID()#", '"#sGroupFuncs#"');");
+    }
+  }
+  
+  !Update device table cell
+
+  if (chn.Device() != ID_ERROR) {
+    object oDev = dom.GetObject(chn.Device());
+    string sDevFuncsIds = "";
+    string chnTmp = "";
+    foreach (chnTmp, oDev.Channels()) {
+      object oChnTmp = dom.GetObject(chnTmp);
+      if (oChnTmp) {
+        string funcTmp = "";
+        foreach(funcTmp, oChnTmp.ChnFunction()) {
+          string sDfiTmp = "";
+          boolean bFound = false;
+          foreach (sDfiTmp, sDevFuncsIds) {
+            if (sDfiTmp == funcTmp) {
+              bFound = true;
+            }
+          }
+          if (!bFound) {
+            sDevFuncsIds = sDevFuncsIds # funcTmp # "\t";
+          }
+        }
+      }
+    }
+    string tmp = "";
+    string sDevFuncs = "";
+    foreach (tmp, sDevFuncsIds) {
+      object oFuncTmp = dom.GetObject(tmp);
+      sDevFuncs = sDevFuncs # oFuncTmp.Name() # "<br />";
+    }
+    Write("if($('funcs"#oDev.ID()#"'))");
+    Write("$('funcs"#oDev.ID()#"').innerHTML = '"#sDevFuncs#"';");
+  }
+  Write("translatePage('#content')");
+  Write("</script>");
+  
+  ! - - - wernerf - - - 
+  Call("/xml-api/cache.fn::InvalidateFunctionList()");
+  ! - - - wernerf - - - 
+  
+  return;
+}
+
+! [chnId], [baseId]
+function ::showOverlay() {
+  object chn = dom.GetObject(system.GetVar("chnId"));
+
+  Write("<script type='text/javascript'>");
+  object base = dom.GetObject(system.GetVar("baseId"));
+  string tmp = "";
+  
+  foreach (tmp, base.EnumEnabledIDs()) {
+    Write("$('chk"#tmp#"').checked = false;");
+  }
+  
+  string tmp = "";
+  if (system.GetVar("baseId") == ID_ROOMS) {
+    foreach(tmp, chn.ChnRoom()) {
+      Write("$('chk"#tmp#"').checked = true;");
+    }
+  }
+  else {
+    foreach(tmp, chn.ChnFunction()) {
+      Write("$('chk"#tmp#"').checked = true;");
+    }
+  }
+
+  if (system.GetVar("baseId") == ID_ROOMS) {
+    Write("$('roomOverlay').show();");
+  }
+  else {
+    Write("$('funcOverlay').show();");
+  }
+  Write("</script>");
+  return;
+}
+
+! [arChn], [destId], [clearAll]
+function ::addChnsToID() 
+{
+  Write("addChnsToID|");
+  if( system.IsVar("destId") && system.IsVar("arChn") && system.IsVar("clearAll") )
+  {
+    object obj = dom.GetObject(system.GetVar("destId"));
+    if (obj) 
+    {
+      string tmp = "";
+      string ids = system.GetVar("arChn");
+      if(system.GetVar("clearAll"))
+      {
+        obj.RemoveAll();
+        Write("Removed all|");
+      }
+      foreach(tmp, ids) 
+      {
+        obj.Add(tmp);
+        Write("Added "#tmp#"|");
+      }
+     ! - - - wernerf - - -
+     Call("/xml-api/cache.fn::InvalidateRoomList()");
+     Call("/xml-api/cache.fn::InvalidateFunctionList()");
+     ! - - - wernerf - - -
+    }
+  }
+  else
+  {
+    Write("Parameter missing");
+  }
+  return;
+}
+
+! [chnId], [destId]
+function ::delChnFromID() {
+  object obj = dom.GetObject(system.GetVar("destId"));
+  if (obj) {
+    obj.Remove(system.GetVar("chnId"));
+   ! - - - wernerf - - -
+   Call("/xml-api/cache.fn::InvalidateRoomList()");
+   Call("/xml-api/cache.fn::InvalidateFunctionList()");
+   ! - - - wernerf - - -
+   }
+  return;
+}
+
+! [chnId]
+function ::delChnFromAllRooms()
+{
+  object oRooms = dom.GetObject( ID_ROOMS );
+  if( oRooms )
+  {
+    string sID;
+    foreach( sID, oRooms.EnumIDs() )
+    {
+      object oRoom = dom.GetObject( sID );
+      if(oRoom)
+      {
+        oRoom.Remove(system.GetVar("chnId"));
+        ! - - - wernerf - - -
+        Call("/xml-api/cache.fn::InvalidateRoomList()");
+        ! - - - wernerf - - -      }
+    }
+  }
+  return;
+}
+
+! [chnId]
+function ::delChnFromAllFunctions()
+{
+  object oFunctions = dom.GetObject( ID_FUNCTIONS );
+  if( oFunctions )
+  {
+    string sID;
+    foreach( sID, oFunctions.EnumIDs() )
+    {
+      object oFunction = dom.GetObject( sID );
+      if(oFunction)
+      {
+        oFunction.Remove(system.GetVar("chnId"));
+        ! - - - wernerf - - -
+        Call("/xml-api/cache.fn::InvalidateFunctionList()");
+        ! - - - wernerf - - -      
+      }
+    }
+  }
+  return;
+}
+
+![chnId]
+function ::saveDisplayValues()
+{
+  string sCI = "saveDisplayValues: ";
+  object chnDisp = dom.GetObject( system.GetVar("chnId") );
+  if( chnDisp )
+  {
+    if( system.IsVar("StateEnum") )
+    {
+      string s;
+      foreach( s, system.GetVar("StateEnum") )
+      {
+        sCI=sCI#"SetState "#s#" ";
+        object obj = chnDisp.DPByControl("RC19_DISPLAY."#s);
+        if( obj )
+        {
+          var val = 1;
+          if( system.IsVar("var"#s) ) { val = system.GetVar("var"#s); }
+          sCI=sCI#"to ("#val.Type()#"):["#val#"] ";
+          if( obj.State(val) )
+          {
+            sCI=sCI#"OK";
+          }
+          else
+          {
+            sCI=sCI#"FAILED";
+          }
+        }
+        else
+        {
+          sCI=sCI#"FAILED TO GET ["#s#"]";
+        }
+        sCI=sCI#", ";
+      }
+    }
+    else
+    {
+      sCI=sCI#"Error: Enum not found";
+    }
+  }
+  else
+  {
+    sCI=sCI#"Error: GetObject ["#system.GetVar("chnId")#"] failed";
+  }
+  sCI=sCI#".";
+  Write( sCI );
+  return;
+}
+
+! [chnId]
+function ::dimmerOldVal()
+{
+  object chn = dom.GetObject( system.GetVar("chnId") );
+  if (chn)
+  {
+    object oOL = chn.DPByControl("DIMMER.OLD_LEVEL");
+    object oL = chn.DPByControl("DIMMER.LEVEL");
+    if( oL && oOL )
+    {
+      oOL.State(1);
+    }
+  }
+  return;
+}
+
+! [chnId]
+! --> bhasReadDPs
+function ::chnHasReadDPs() {
+  boolean bHasReadDPs = false;
+  object oChn = dom.GetObject(system.GetVar("chnId"));
+  if (oChn) {
+    string tmp = "";
+    foreach(tmp, oChn.DPs()) {
+      object oDP = dom.GetObject(tmp);
+      if (oDP) {
+        if (oDP.Operations() & OPERATION_READ) {
+          bHasReadDPs = true;
+        }
+      }
+    }
+  }
+  return;
+}

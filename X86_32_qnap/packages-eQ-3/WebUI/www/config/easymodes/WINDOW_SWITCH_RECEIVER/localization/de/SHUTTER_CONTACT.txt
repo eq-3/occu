@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen des Kontakts wird die Absenktemperatur aktiviert.</span><br/><br/>",

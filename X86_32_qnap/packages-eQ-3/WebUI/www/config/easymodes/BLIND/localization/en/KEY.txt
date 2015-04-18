@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">With a short button press the awning / shutter will be moved up completely for the time set. If a delay is set the awning / shutter will be moved up after the delay time has expired. With a long button press the awning / shutter will be moved up as long as the button will be pressed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a short button press the awning / shutter will be moved down completely for the time set. If a delay is set the awning / shutter will be moved up after the delay time has expired. With a long button press the awning / shutter will be moved down as long as the button will be pressed.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a short button press the awning / shutter will be moved up or down completely (toggle function) for the time set. If a delay is set the awning / shutter will be moved up after the delay time has expired. With a long button press the awning / shutter will be moved for as long as the button will be pressed.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">With a short button press the awning / shutter will be moved to the desired position for the time set. If a delay is set the awning / shutter will be moved to the desired position after the delay time has expired. With a long button press the awning / shutter will be moved for as long as the button will be pressed.</span><br/><br/>",
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",

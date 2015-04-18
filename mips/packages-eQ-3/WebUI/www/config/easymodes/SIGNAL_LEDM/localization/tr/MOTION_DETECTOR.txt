@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Sens&ouml;r devreye girdiginde gongun sinyal lambasi yanmaya baslar. Eger bir gecikme zamani ayarlanmissa, lamba bu s&uuml;re dolduktan sonra yanar.<br/><br/>Hareket alarminda (kanal parametresi) iletim araligi secenegi <b>dinamik</b> konumunda olmali ve en az <b>15s'lik</b> bir minimum aralik ayarlanmalidir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Hareket alarmi devre disi.</span>",

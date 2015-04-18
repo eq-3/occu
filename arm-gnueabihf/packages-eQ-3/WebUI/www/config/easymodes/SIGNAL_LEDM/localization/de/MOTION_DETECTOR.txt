@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird die Signalleuchte des Gongs eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, wird die Leuchte erst nach Ablauf dieser Zeit geschaltet.<br/><br/>Beim Bewegungsmelder (Kanalparameter) wird ein Sendeabstande von <b>dynamisch</b> und ein Mindestsendeabstand von <b>15s</b> empfohlen.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Bewegungsmelder ist deaktiviert.</span>",

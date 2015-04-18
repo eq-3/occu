@@ -1,0 +1,6 @@
+[
+	{
+		"title_brightness" : "Further information regarding brightness threshold",
+		"help_brightness" : "<div style=\"padding:10\">If the brightness value determined by the sensor is less than the value entered here, the actuator will be active. If it is brighter, the actuator will stay inactive also after a recognized movement.<br/><br/>The valid value range is from " +min+ " - " +max+ "<br/><br/>If the value is " +max+ " the actuator will always be active, if the value is 0 the actuator will be inactive.<br/><br/>As the motion detector has not yet received a data packet<br/>the current brightness value is not available at the moment.<br/><br/><span style=\"background-color:rgb(200,200,200)\">You will find further information in the corresponding documentation.</span></div>",
+	}
+]

@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Bei erh&ouml;htem CO2-Gehalt der Raumluft wird die Markise / der Rollladen f&uuml;r die festgelegte Zeit hochgefahren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der CO2-Sensor ist nicht aktiv.</span><br/><br/>",
+"CO2_low" : "leicht erh&ouml;hter CO2-Gehalt",
+"CO2_high" : "stark erh&ouml;hter CO2-Gehalt",

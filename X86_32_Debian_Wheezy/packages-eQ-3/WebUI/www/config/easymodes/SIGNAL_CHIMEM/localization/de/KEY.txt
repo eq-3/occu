@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird der Gong entsprechend des gew&auml;hlten Modus geschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Die Taste ist deaktiviert.</span>",
+"group_description_1" : "<span class=\"translated\">Falls der Gong unerw&uuml;nscht ausgel&ouml;st wurde, kann er mit dieser Taste ausgeschaltet werden.</span>",
+"group_description_2" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird der Gong entsprechend des gew&auml;hlten Modus geschaltet.</span><br/><br/>",
+"group_description_3" : "<span class=\"translated\">Die Taste ist deaktiviert.</span><br/><br/>",
+"subset_1" : "ein",
+"subset_2" : "ein / aus",

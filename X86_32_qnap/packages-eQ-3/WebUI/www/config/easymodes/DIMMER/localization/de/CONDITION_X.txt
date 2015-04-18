@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Das Licht wird bei Empfang des oberen Grenzwerts auf den festgelegten Helligkeitswert eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Das Licht wird bei Empfang des unteren Grenzwerts auf den festgelegten Helligkeitswert ausgeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Das Licht wird bei Empfang des oberen Grenzwerts ein-, bei Empfang des unteren Grenzwerts ausgeschaltet.&nbsp;Diese Funktion entspricht der klassischen Master/Slave-Anwendung.</span><br/><br/>",
+"descrHint" : "<span class=\"translated\">Wann der Schaltbefehl vom Schaltaktor mit Leistungsmessung gesendet wird, wird am entsprechenden Kanal eingestellt.</span><br/><br/>",
+"descrHintMS" : "<span class=\"translated\">Damit das Profil wirksam wird, muss der enstprechende Kanal des Schaltaktors mit Leistungsmessung so eingestellt werden, da&szlig; bei &Uuml;ber- und Unterschreiten des gew&auml;hlten Wertes ein Schaltbefehl gesendet wird.</span><br/><br/>",

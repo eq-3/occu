@@ -1,0 +1,12 @@
+"mode" : "Operation mode",
+"option0" : "No action",
+"option1" : "Room temperature",
+"option2" : "Auto mode",
+"option3" : "Auto mode + temperature",
+"option4" : "Manuel",
+"option5" : "Boost",
+"option6" : "Toggle",
+
+"SetPointTemperature" : "Temperature",
+
+"hintKeyPressIgnored" : "The heating device has been configured that it will not react to a remote control!<br/><br/>See config parameter Manu-/Party mode prioritization",

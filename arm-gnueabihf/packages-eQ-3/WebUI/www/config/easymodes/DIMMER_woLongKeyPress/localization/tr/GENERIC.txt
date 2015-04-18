@@ -1,0 +1,3 @@
+"dimmer_off" : "Isik ayar salterini kapat",
+"dimmer_on_off" : "Isik ayar salterini ac/kapat",
+"sleep_well" : "Uyku isigi",

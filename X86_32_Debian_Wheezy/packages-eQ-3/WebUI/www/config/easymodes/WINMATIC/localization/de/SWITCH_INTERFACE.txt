@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Beim Bet&auml;tigen des Schalters wird das Fenster verschlossen.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei, Bet&auml;tigen des Schalters wird das Fenster auf die festgelegte Weite gekippt.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Bet&auml;tigen des Schalters schlie&szlig;t oder &ouml;ffnet das Fenster. Beim Bet&auml;tigen des Schalters w&auml;hrend der Bewegung, wird die Bewegungsrichtung umgekehrt.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Beim Bet&auml;tigen des Schalters wird das Fenster auf die festgelegte Weite gekippt und nach der eingestellten Zeit wieder geschlossen bzw. verriegelt.</span><br/><br/>",

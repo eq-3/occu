@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen des Fensters wird die Absenktemperatur aktiviert.</span><br/><br/>",

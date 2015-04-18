@@ -1,0 +1,6 @@
+"description_1" : "<span class=\"translated\">Bei Feueralarm wird das Licht f&uuml;r die festgelegte Zeit auf den festgelegten Helligkeitswert eingeschaltet.  Erfolgt die Best&auml;tigung des Alarms am Ausl&ouml;senden oder einem Rauchmelder der gleichen Gruppe, wird das Licht wieder ausgeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Die angeschlossene Leuchte gibt f&uuml;r die festgelegte Zeit Alarm.  Erfolgt die Best&auml;tigung des Alarms am Ausl&ouml;senden oder einem Rauchmelder der gleichen Gruppe, wird die Alarmmeldung beendet.</span><br/><br/>",
+"subset_1" : "nur ausl&ouml;sender Rauchmelder",
+"subset_2" : "Rauchmelder der gleichen Gruppe",
+"subset_3" : "nur ausl&ouml;sender Rauchmelder",
+"subset_4" : "Rauchmelder der gleichen Gruppe",

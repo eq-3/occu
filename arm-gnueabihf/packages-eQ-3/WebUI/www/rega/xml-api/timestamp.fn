@@ -1,0 +1,60 @@
+!*******************************************************************************
+!* timestamp.fn
+!* Hilfsfunktionen für Zeitstempel.
+!*
+!* Autor      : Falk Werner
+!* Erstellt am: 16.06.2008
+!*******************************************************************************
+
+!*******************************************************************************
+!* ::Create()
+!* Erstellt einen Zeitstempel und legt diesen in sTimestamp ab.
+!*
+!*                               0000000001111111111
+!*                               0123456789012345678
+!* Zeitangabe mit system.Date(): hh:mm:ss DD.MM.YYYY
+!*                               |  |  |  |  |  +- sYear   = Substr(15,4)
+!*                               |  |  |  |  +---- sMonth  = Substr(12,2)
+!*                               |  |  |  +------- sDay    = SubStr( 9,2)
+!*                               |  |  +---------- sSecond = SubStr( 6,2)
+!*                               |  +------------- sMinute = Substr( 3,2)
+!*                               +---------------- sHour   = Substr( 0,2)
+!* Format des Zeitstempels: YYYY-MM-DD hh:mm:ss
+!*******************************************************************************
+function ::Create()
+{
+  if (system.IsVar("sTimestamp"))
+  {
+    string sNow    = system.Date().ToString();
+    
+    string sHour   = sNow.Substr(0,2);
+    string sMinute = sNow.Substr(3,2);
+    string sSecond = sNow.Substr(6,2);
+    string sDay    = sNow.Substr(9,2);
+    string sMonth  = sNow.Substr(12,2);
+    string sYear   = sNow.Substr(15,4);
+
+    string sTime = sHour # ":" # sMinute # ":" # sSecond;
+    string sDate = sYear # "-" # sMonth  # "-" # sDay;
+  
+    sTimestamp = sDate # " " # sTime;
+  }
+}
+
+!*******************************************************************************
+!* ::GetTime
+!* Reduziert einen Zeitstempel auf die Angabe der Uhrzeit.
+!*
+!*                             0000000001111111111
+!*                             0123456789012345678
+!* Format eines Zeitstempels:  YYYY-MM-DD hh:mm:ss
+!*                                        +- Substr(11,8)
+!*******************************************************************************
+function ::GetTime()
+{
+  if (system.IsVar("sTimestamp"))
+  {
+    string sTemp = sTimestamp.ToString();
+    sTimestamp   = sTemp.Substr(11,8);
+  }
+}

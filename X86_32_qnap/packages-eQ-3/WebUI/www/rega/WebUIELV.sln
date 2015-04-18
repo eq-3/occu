@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\ELV\", "..\ELV", "{20D8AA38-F5E7-4E74-AA78-033ABBF5D4FB}"
+	ProjectSection(WebsiteProperties) = preProject
+		SccProjectName = ""$/ise-Gateway/WebUI/ELV", ZDHBAAAA"
+		SccAuxPath = ""
+		SccLocalPath = "."
+		SccProvider = "MSSCCI:Microsoft Visual SourceSafe"
+		Debug.AspNetCompiler.VirtualPath = "/ELV"
+		Debug.AspNetCompiler.PhysicalPath = "..\ELV\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ELV\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ELV"
+		Release.AspNetCompiler.PhysicalPath = "..\ELV\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ELV\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1276"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccLocalPath0 = .
+		SccWebProject1 = true
+		SccProjectUniqueName1 = .
+		SccLocalPath1 = C:\\VSS\\iseGateway\\ise-Gateway\\WebUI\\ELV
+		SccProjectEnlistmentChoice1 = 2
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{20D8AA38-F5E7-4E74-AA78-033ABBF5D4FB}.Debug|.NET.ActiveCfg = Debug|.NET
+		{20D8AA38-F5E7-4E74-AA78-033ABBF5D4FB}.Debug|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">With a short or long button press the chime will be triggered according to the selected mode.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The button is deactivated.</span><br/><br/>",
+"group_description_1" : "<span class=\"translated\">If the chime is triggered accidentally it can be turned off with this button.</span>",
+"group_description_2" : "<span class=\"translated\">With a short or long button press the chime will be triggered according to the selected mode.</span><br/><br/>",
+"group_description_3" : "<span class=\"translated\">The button is deactivated.</span><br/><br/>",
+"subset_1" : "on",
+"subset_2" : "on / off",

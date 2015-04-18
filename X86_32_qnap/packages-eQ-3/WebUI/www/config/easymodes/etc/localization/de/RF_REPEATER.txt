@@ -1,0 +1,13 @@
+[
+	{
+		"noLinksAvailable" : "Es sind keine zu verst&auml;rkenden Verkn&uuml;pfungen vorhanden.",
+		"linksDeviceCCU" : "<u>Verst&auml;rkende Verkn&uuml;pfung zwischen Ger&auml;t und Zentrale</u>",
+		"REPEATER_chooseLinks" : "W&auml;hlen Sie die zu verst&auml;rkenden Verkn&uuml;pfung.",
+		"REPEATER_sender" : "Sender",
+		"REPEATER_receiver" : "Empf&auml;nger",
+		"REPEATER_description" : "Beschreibung",
+		"REPEATER_amplification" : "Verst&auml;rkung",
+		"REPEATER_broadcast" : "Rundsendung",
+		"REPEATER_broadcastOnly" : "Temperatur- / Feuchtigkeits-Sensoren, die nur Rundsendungen erlauben",
+	}
+]

@@ -1,0 +1,44 @@
+Der Ausgangspegel des Aktors wird durch eine Verknüpfung der 3 Kanäle nach folgender Regel bestimmt:
+
+
+Ausgangspegel = (((0 o A) o B) o C) 
+Es gilt dabei folgende Definition:
+
+  A = Pegel von Ch:1
+  B = Pegel von Ch:2
+  C = Pegel von Ch:3
+  o = Verknüpfungsregel des zugehörigen Kanals
+  Klammern werden von innen nach aussen abgearbeitet
+  
+Bedeutung der einzelnen Verknüpfungsregeln:
+  
+  * INACTIV: Der Kanal nicht aktiv.
+  * OR: Das Verknüpfungsergebnis ist der höhere Pegel der verknüpften Kanäle.
+  * AND: Das Verknüpfungsergebnis ist der niedrigere Pegel der verknüpften Kanäle.
+  * XOR: Das Verknüpfungsergebnis ist 0, wenn beide Kanäle AN oder AUS sind. Ist nur ein Kanal an,
+         ist das Ergebnis der Pegel dieses Kanals.
+  * NOR: Es wird die Verknüpfung OR ausgeführt und das Ergebnis anschließend invertiert (100% - Pegel).
+  * NAND: Es wird die Verknüpfung AND ausgeführt und das Ergebnis anschließend invertiert (100% - Pegel).
+  * OR_INVERS: Der zu verknüpfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und
+               anschließend die Verknüpfung OR ausgeführt.
+  * AND_INVERS: Der zu verknüpfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und
+               anschließend die Verknüpfung AND ausgeführt.
+  * PLUS: Die beiden Pegel werden addiert (max. 100%)
+  * MINUS: Die beiden Pegel werden subtrahiert (min. 0%)
+  
+  Beispiel:
+  
+  A = 70%, B = 25%, C = 80%
+  
+  Verknüpfung: (((0 OR A) NOR B) AND_INVERS C)
+  
+  0 OR A = 70%
+  
+  70% NOR B = 30%
+  
+  30% AND_INVERS C = 20%
+
+  Der Ausgangspegel ergibt hier 20%
+  
+  
+  

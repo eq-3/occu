@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Nemli havada gongun sinyal lambasi secilen y&ouml;ne g&ouml;re yanar.<span/><br/><br/>",
+"description_2" : "<span class=\"translated\">Su alarmi etkin degil.</span><br/><br/>",
+"subset_1" : "Nemli hava- ac/kuru hava - kapat",
+"subset_2" : "Nemli hava- kapat /kuru hava - ac",

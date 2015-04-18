@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">In case of increased CO2 concentrations in the room air the awning / shutter will be moved up for the set time.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The CO2 sensor is not active.</span><br/><br/>",
+"CO2_low" : "slightly increased CO2 concentration",
+"CO2_high" : "heavily increased CO2 concentration",

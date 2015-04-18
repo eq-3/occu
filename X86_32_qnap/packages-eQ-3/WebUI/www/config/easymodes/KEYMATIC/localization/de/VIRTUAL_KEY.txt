@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird die T&uuml;r entriegelt. Nach der festgelegten Zeit wird die T&uuml;r automatisch wieder verriegelt.</span>",
+"description_2" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird die T&uuml;r verriegelt.</span>",
+"description_3" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird die T&uuml;r ge&ouml;ffnet. Nach der festgelegten Zeit wird die T&uuml;r automatisch wieder verriegelt.</span>",
+"description_4" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird die T&uuml;r verriegelt. Mit einem langen Tastendruck wird die T&uuml;r entriegelt. Nach der festgelegten Zeit wird die T&uuml;r automatisch wieder verriegelt.</span>",
+"description_5" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird die T&uuml;r verriegelt. Mit einem langen Tastendruck wird die T&uuml;r ge&ouml;ffnet. Nach der festgelegten Zeit wird die T&uuml;r automatisch wieder verriegelt.</span>",
+"description_6" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird die T&uuml;r entriegelt. Mit einem langen Tastendruck wird die T&uuml;r ge&ouml;ffnet. Nach der festgelegten Zeit wird die T&uuml;r automatisch wieder verriegelt.</span>",
+"description_7" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird die T&uuml;r, je nach aktuellem Zustand, entweder ent- oder verriegelt.</span>",

@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">When the maximum fill level will be exceeded or falls below switching can be performed accordingly.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the minimum fill level will be exceeded or falls below switching can be performed accordingly.</span><br/><br/>",
+"subset_1" : "fallen below - on / exceeded - off",
+"subset_2" : "fallen below - off / exceeded - on",
+"subset_3" : "fallen below - on / exceeded - off",
+"subset_4" : "fallen below - off / exceeded - on",
+"upperFillLevel" : "Upper fill level",
+"lowerFillLevel" : "Lower fill level",

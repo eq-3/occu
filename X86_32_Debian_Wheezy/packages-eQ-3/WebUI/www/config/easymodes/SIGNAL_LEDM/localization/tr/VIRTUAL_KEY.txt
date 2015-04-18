@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda gongun sinyal lambasi yanar. Bir gecikme s&uuml;resi ayarlanmissa, bu lamba bu s&uuml;re dolduktan sonra yanmaya baslar.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">G&ouml;rsel tus etkin degildir.</span>",

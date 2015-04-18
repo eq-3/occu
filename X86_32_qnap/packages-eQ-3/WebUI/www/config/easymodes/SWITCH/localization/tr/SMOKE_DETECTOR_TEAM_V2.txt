@@ -1,0 +1,3 @@
+"description_1" : "<span class=\"translated\">Yangin alarmi durumunda salter, belirlenen s&uuml;re boyunca acik kalir. Alarm, tetikleyenden ya da ayni gruptaki bir duman alarmindan onaylanirsa, salter tekrar kapanir.</span><br/><br/>",
+"subset_1" : "sadece tetikleyen duman alarmi",
+"subset_2" : "Ayni gruba ait duman alarmi",

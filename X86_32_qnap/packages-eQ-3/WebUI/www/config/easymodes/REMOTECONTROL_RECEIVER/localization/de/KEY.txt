@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird der Heizungsregler in die gew&auml;hlte Betriebsart geschaltet.</span><br/><br/>",

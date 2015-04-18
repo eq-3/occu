@@ -1,0 +1,11 @@
+"security_on" : "L&uuml;ftungssperre Ein",
+"security_off" : "L&uuml;ftungssperre Aus",
+"security_toggle" : "L&uuml;ftungssperre Ein / Aus",
+
+"paramDescr" : "Modus&nbsp;&nbsp;",
+
+"mode0" : "Ignoriere Schaltbefehl",
+"mode1" : "Ein",
+"mode2" : "Aus",
+
+

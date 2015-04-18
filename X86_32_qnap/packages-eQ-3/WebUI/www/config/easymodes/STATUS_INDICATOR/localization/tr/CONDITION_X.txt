@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Durum g&ouml;stergesinin ekrani &uuml;st sinir degere ulasildiginda acilir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Durum g&ouml;stergesinin ekrani alt sinir degere ulasildiginda kapanir.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Durum g&ouml;stergesinin ekrani &uuml;st sinir degere ulasildiginda acilir, alt sinir degere ulasildiginda ise kapanir.&nbsp;Bu fonksiyon klasik Master/Slave uygulamasiyla aynidir.</span><br/><br/>",
+"descrHint" : "<span class=\"translated\">Salter akt&uuml;at&ouml;r&uuml; tarafindan uygun performans &ouml;lc&uuml;m&uuml;yle degistirme komutunun iletim zamani, ilgili kanaldan ayarlanir.</span><br/><br/>",
+"descrHintMS" : "<span class=\"translated\">Profilin etkili olabilmesi icin performans &ouml;lc&uuml;m&uuml;ne sahip salter akt&uuml;at&ouml;r&uuml;n&uuml;n ilgili kanali, secilen deger asildiginda ya da bunun altinda kalindiginda bir degistirme komutu iletilecek sekilde ayarlanmalidir.</span><br/><br/>",

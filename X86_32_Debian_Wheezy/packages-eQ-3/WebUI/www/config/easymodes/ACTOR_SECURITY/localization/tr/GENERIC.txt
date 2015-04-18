@@ -1,0 +1,7 @@
+"security_on" : "Havalandirma kilidini ac",
+"security_off" : "Havalandirma kilidini kapat",
+"security_toggle" : "Havalandirma kilidini ac/kapat",
+"paramDescr" : "Mod&nbsp;&nbsp;",
+"mode0" : "Degistirme komutunu yoksay",
+"mode1" : "Ac",
+"mode2" : "Kapali",

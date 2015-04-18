@@ -1,0 +1,41 @@
+<script type="text/javascript">
+<%
+  if( system.IsVar("iCurrentIndex") )
+  {
+    integer iCurrentIdx = system.GetVar("iCurrentIndex").ToInteger();
+    object oEnum = dom.GetObject(ID_PROGRAMS);
+    integer iRetCount = 0;
+    string s;
+    foreach (s,oEnum.EnumUsedIDs(iCurrentIdx,5,&iRetCount))
+    {
+      object oSysVar = dom.GetObject( s );
+      if( oSysVar && (oSysVar.IsTypeOf( OT_PROGRAM )) && (oSysVar.ProgramCopyID()==ID_ERROR))
+      {
+        Write("var tmp = new Object();");
+        Write("tmp['id'] = '"#oSysVar.ID()#"';");
+        Write("tmp['trid'] = 'svd"#oSysVar.ID()#"';");
+        Write("tmp['name'] = '"#oSysVar.Name()#"';");
+        Write("tmp['prginfo'] = '"#oSysVar.PrgInfo()#"';");              
+        string oPrgID = oSysVar.ID();
+        string sRet = "";
+        Call( "/esp/programs.fn::WriteDestinationText()" );
+        Write("tmp['active'] = '"#sRet#"';");            
+        Write("arProgs[arProgs.length] = tmp;");
+      }
+    }
+  }
+%>
+</script>
+<%
+  if( system.IsVar("iRetCount") )
+  {
+    if( system.GetVar("iRetCount").ToInteger() < 5 )
+    {
+      Write( "false" );
+    }
+    else
+    {
+      Write( "true" );
+    }
+  }
+%>

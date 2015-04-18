@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Bei Feueralarm wird das Fenster f&uuml;r die festgelegte Zeit ge&ouml;ffnet und nach Ablauf der gew&auml;hlten Zeit oder nach Best&auml;tigung des Alarms am Ausl&ouml;senden oder einem Rauchmelder der gleichen Gruppe, automatisch wieder geschlossen.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Feueralarm wird das Fenster sofort geschlossen.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Diese Verkn&uuml;pfung wird deaktiviert</span>",
+"subset_1" : "nur ausl&ouml;sender Rauchmelder",
+"subset_2" : "Rauchmelder der gleichen Gruppe",

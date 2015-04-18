@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Kilit kontagi kapatildiginda havalandirma kilidi (g&uuml;venlik) etkinlestirilir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Kilit kontagi kapatildiginda havalandirma kilidi (g&uuml;venlik) devre disi birakilir.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Kilit kontagi kapatildiginda havalandirma kilidi (g&uuml;venlik) etkinlestirilir. Kilit kontagi acildiginda havalandirma kilidi devre disi birakilir.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Bu direkt baglanti devre disi birakilir.</span><br/><br/>",

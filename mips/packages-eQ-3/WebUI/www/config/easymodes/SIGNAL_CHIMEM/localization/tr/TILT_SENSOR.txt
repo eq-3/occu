@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Salter kontagina basildiginda gong secilen y&ouml;ne g&ouml;re calmaya baslar.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Egim sens&ouml;r&uuml; etkin degil.</span><br/><br/>",
+"subset_1" : "Acik - ac/kapali - kapat",
+"subset_2" : "Acik - kapat/kapali - ac",
+"subset_3" : "Acma",
+"subset_4" : "Kapat",
+"subset_5" : "Degistir",

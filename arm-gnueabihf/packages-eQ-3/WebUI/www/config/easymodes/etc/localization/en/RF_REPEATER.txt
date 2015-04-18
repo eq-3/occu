@@ -1,0 +1,13 @@
+[
+	{
+		"noLinksAvailable" : "There are no connections available that need to be amplified.",
+		"linksDeviceCCU" : "<u>Amplifying connection between device and CCU</u>",
+		"REPEATER_chooseLinks" : "Please select the connection that has to be amplified",
+		"REPEATER_sender" : "Transmitter",
+		"REPEATER_receiver" : "Receiver",
+		"REPEATER_description" : "Description",
+		"REPEATER_amplification" : "Amplification",
+		"REPEATER_broadcast" : "Broadcast",
+		"REPEATER_broadcastOnly" : "Temperature / humidity sensors that permit broadcasts only",
+	}
+]

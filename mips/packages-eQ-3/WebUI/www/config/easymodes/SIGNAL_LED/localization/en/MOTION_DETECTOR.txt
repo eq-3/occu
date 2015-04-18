@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">The signal lamp of the chime will flash when the sensor is triggered. If a delay time is set, the flash will be triggered after the time has expired.<br/><br/>The transmission interval of the motion detector (channel parameter) should be set to <b>dynamic</b> and the minimum transmission interval should be <b>15s</b> .</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The motion detector is deactivated.</span>",

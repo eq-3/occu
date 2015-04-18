@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><device version="2"><supported_types><type name="RS485 generic" id="HMW-Generic" priority="0"><parameter/></type></supported_types><paramset type="MASTER" id="HMW-GENERIC_dev_master"/></device>

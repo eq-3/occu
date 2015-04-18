@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Ayarlanan r&uuml;zgar siddeti asilirsa havalandirma kilidi (g&uuml;venlik) etkinlesir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Ayarlanan r&uuml;zgar siddetine ulasilmazsa havalandirma kilidi (g&uuml;venlik) devre disi kalir.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Ayarlanan r&uuml;zgar siddeti asilirsa havalandirma kilidi (g&uuml;venlik) etkinlesir. Ayarlanan r&uuml;zgar siddetine yine ulasilmazsa havalandirma kilidi (g&uuml;venlik) devre disi kalir.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Bu direkt baglanti devre disi birakilir.</span><br/><br/>",

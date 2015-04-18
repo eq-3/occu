@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen, z.B des Garagentores, wird das Licht auf den festgelegten Helligkeitswert ein- und beim Schlie&szlig;en ausgeschaltet. Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim &Ouml;ffnen oder Schlie&szlig;en wird das Licht f&uuml;r eine bestimmte Zeit auf den festgelegten Helligkeitswert eingeschaltet. Bei jedem Zustandswechsel beginnt diese Zeit erneut von vorne.</span><br/><br/>",
+"subset_1" : "Offen - aus / Zu - ein",
+"subset_2" : "Offen - ein / Zu - aus",
+"subset_3" : "Schlie&szlig;en",
+"subset_4" : "&Ouml;ffnen",
+"subset_5" : "&Auml;ndern",
+"at" : "<span class=\"translated\">beim</span>",

@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Bei Feuchtigkeit wird der Gong entsprechend der gew&auml;hlten Richtung geschaltet.<span/><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Wassermelder ist deaktiviert.</span><br/><br/>",
+"subset_1" : "Feuchtigkeit - ein / Trocken - aus",
+"subset_2" : "Feuchtigkeit - aus / Trocken - ein",

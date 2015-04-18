@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda isik belirlenen aydinlik derecesiyle &quot;kapat&quot; konumu arasinda degisir.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Tusa kisa bir s&uuml;re basildiginda isik belirlenen aydinlik derecesinde acilir. Isigi yavasca kapanana kadar kismak icin &ouml;n uyari seviyesi kapatma gecikmesinde hafifce d&uuml;s&uuml;r&uuml;l&uuml;r.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Tusa kisa bir s&uuml;re basildiginda isik belirlenen aydinlik derecesinde acilir ve belirlenen s&uuml;re sonunda da yavasca &quot;kapat&quot; konumuna kadar kisilir.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda isik kapanir.</span><br/><br/>",

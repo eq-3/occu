@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Beim Bet&auml;tigen des Schaltkontakts wird der Gong entsprechend der gew&auml;hlten Richtung geschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Tiltsensor ist deaktiviert.</span><br/><br/>",
+"subset_1" : "Offen - ein / Zu - aus",
+"subset_2" : "Offen - aus / Zu - ein",
+"subset_3" : "&Ouml;ffnen",
+"subset_4" : "Schlie&szlig;en",
+"subset_5" : "&Auml;ndern",

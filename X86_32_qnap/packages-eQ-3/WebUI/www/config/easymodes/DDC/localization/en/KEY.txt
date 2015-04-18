@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">With a short button press the door will be opened. A long button press will activate the function <b>Door open / AUTO closed<b>.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a short button press the door will be closed. A long button press will activate the function <b>Door open / AUTO closed<b>.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a short or long button press the door will be opened. The door will be closed automatically according to a defined time that can be adjusted via the door lock drive.</span><br/><br/>",
+"description_4" : "",

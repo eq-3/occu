@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">The signal lamp of the chime will flash when the smoke detector is triggered.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The smoke detector is deactivated.</span>",

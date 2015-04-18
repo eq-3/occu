@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Body>
+    <GetMagnetometerStationResponse xmlns="http://tempuri.org/">
+      <GetMagnetometerStationResult>
+        <StationName>Boulder</StationName>
+        <Latitude>49</Latitude>
+        <Longitude>42</Longitude>
+        <CurrentKIndex>1</CurrentKIndex>
+        <CurrentAIndex>1</CurrentAIndex>
+      </GetMagnetometerStationResult>
+    </GetMagnetometerStationResponse>
+  </soap:Body>
+</soap:Envelope>

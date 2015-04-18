@@ -1,0 +1,8 @@
+"mode" : "Isletim modu",
+"option0" : "Eylem yok",
+"option1" : "Oda sicakligi",
+"option2" : "Otomatik mod",
+"option3" : "Otomatik mod + sicaklik",
+"option4" : "Man&uuml;el",
+"option5" : "Boost",
+"option6" : "Toggle",

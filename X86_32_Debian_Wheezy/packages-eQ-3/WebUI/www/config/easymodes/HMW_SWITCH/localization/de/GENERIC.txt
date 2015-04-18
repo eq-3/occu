@@ -1,0 +1,4 @@
+"switch_off" : "Schalter - aus",
+"switch_on" : "Schalter - ein",
+"switch_on_off" : "Schalter - ein / aus",
+"switch_on_off_toggle" : "Schalter - ein / aus / Toggle",

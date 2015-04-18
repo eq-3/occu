@@ -1,0 +1,10 @@
+[
+	{
+		"triggerNecessary" : "Wie oft soll die Lichthupe zum Ausl&ouml;sen des Aktors bet&auml;tigt werden?",
+		"notActive" : "nicht aktiv",
+		"one" : "einmal",
+		"two" : "zweimal",
+		"three" : "dreimal",
+		"expert" : "Experte",
+	}
+]

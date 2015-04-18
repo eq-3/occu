@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Beim Schlie&szlig;en des Schlie&szlig;erkontaktes wird die L&uuml;ftungssperre (Sicherheit) aktiviert</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim Schlie&szlig;en des Schlie&szlig;erkontaktes wird die L&uuml;ftungssperre (Sicherheit) deaktiviert.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Schlie&szlig;en des Schlie&szlig;erkontaktes wird die L&uuml;ftungssperre (Sicherheit) aktiviert. Beim &Ouml;ffnen des Schlie&szlig;erkontaktes wird die L&uuml;ftungssperre deaktiviert.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Diese Direktverkn&uuml;pfung wird deaktiviert.</span><br/><br/>",

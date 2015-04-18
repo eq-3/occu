@@ -1,0 +1,10 @@
+[
+	{
+		"triggerNecessary" : "Akt&uuml;at&ouml;r&uuml; tetiklemek icin isikli sirene ne kadar siklikla basilmalidir?",
+		"notActive" : "etkin degil",
+		"one" : "bir kere",
+		"two" : "iki kere",
+		"three" : "&uuml;c kere",
+		"expert" : "Uzmanlar",
+	}
+]

@@ -1,0 +1,78 @@
+<div class="popupTitle">
+  &nbsp;&nbsp;
+  <%
+  Write(system.GetVar("title"));
+  %>
+</div>
+
+<div class="CLASS01400">
+  <table class="popupTableScript CLASS01401" cellpadding="0" cellspacing="0">
+    <tr>
+    <th class="TblHeaderUserConfig">${thChooseUser}</th>
+    <th class="TblHeaderUserConfig">${thSafetyNote}</th>
+    </tr>
+    <tr>
+    <td class="CLASS01402">
+    <select id="cbPC"><option value="0">${lblNoUserSelected}</option>
+
+    <%
+    object obj = dom.GetObject(ID_USERS);
+      string tmp = "";
+      foreach(tmp, obj.EnumEnabledIDs())
+      {
+        object user = dom.GetObject(tmp);
+        if (user.Visible())
+        {
+          string sSelected = "";
+          if (user.ID() == obj.UsersDefaultLogin(dwcPC)) {
+            sSelected = "selected";
+          }
+          Write("<option value='"#user.ID()#"' "#sSelected#">")
+          string sUserFullName = user.UserFirstName()#' '#user.UserLastName();
+          if( sUserFullName == ' ' ){ sUserFullName = user.Name(); }
+          Write(sUserFullName);
+          Write("</option>")
+        }
+      }
+  %>
+
+  </select>
+    </td>
+    <td class="CLASS01403">
+      <!--<span class="CLASS01404">Achtung!</span> <br />
+      <span class="CLASS01405">Die Auswahl eines Benutzers für die automatische Anmeldung ermöglicht die Systemanmeldung
+        ohne Benutzername- und Kennworteingabe. <br />
+      </span>
+      <span class="CLASS01404">Der ausgewählte Benutzer wird automatisch ohne weitere Legitimationsprüfung angemeldet. Das System ist somit nicht
+      mehr gegen externen Zugriff geschützt. <br />
+      </span>
+      <span class="CLASS01405">Der Zugriff auf andere Benutzerkonten erfolgt über "Abmelden" und entsprechender Neuanmeldung mit Benutzernamen-
+      und Kennworteingabe.<br />
+      </span>-->
+    <span class="CLASS01404">${hintUsrAutoLoginRow1}</span> <br />
+    <span class="CLASS01405">${hintUsrAutoLoginRow2}</span>
+    <span class="CLASS01404">${hintUsrAutoLoginRow3}</span>
+    <span class="CLASS01405">${hintUsrAutoLoginRow4}</span>
+
+    </td>
+    </tr>
+
+    <tr class="popupTableRow">
+    <td class="CLASS01406" colspan="3">
+      <table>
+      <tr>
+        <td align='center' valign='middle'><div class="FooterButton CLASS01407" onclick="saveAutoLogin();" >${footerBtnOk}</div></td>
+        <td align='center' valign='middle'><div class="FooterButton CLASS01408" onclick="PopupClose();">${footerBtnCancel}</div></td>
+      </tr>
+      </table>
+    </td>
+    </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  saveAutoLogin = function() {
+    var alPC = $("cbPC")[$("cbPC").selectedIndex].value;
+    var alPDA = "0";
+    iseUser.setAutoLogin(alPC, alPDA);
+  }
+</script>

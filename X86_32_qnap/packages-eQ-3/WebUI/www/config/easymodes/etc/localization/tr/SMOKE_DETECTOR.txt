@@ -1,0 +1,9 @@
+[
+	{
+		"SD_QuestionGroup" : "Duman alarmi hangi gruba ait?",
+		"SD_Reset" : "Temel ayar",
+		"SD_HintMailbox" : " gelen kutusuna bakiniz",
+		"SD_GroupMember" : "Grup &uuml;yeleri",
+		"SD_LblSmokeDetectorSN" : "Duman alarmi SN:",
+	}
+]

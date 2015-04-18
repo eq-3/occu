@@ -1,0 +1,3 @@
+"description_1" : "<span class=\"translated\">Bei Regen wird die Anzeige je nach Schaltrichtung gesetzt.</span><br/><br/>",
+"subset_1" : "Trocken - Zustand 0 / Regen - Zustand 1",
+"subset_2" : "Trocken - Zustand 1 / Regen - Zustand 0",
