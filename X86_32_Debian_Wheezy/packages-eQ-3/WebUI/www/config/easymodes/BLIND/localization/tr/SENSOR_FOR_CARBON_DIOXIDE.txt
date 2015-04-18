@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Odadaki havanin CO2 orani y&uuml;kselmisse tente / panjur belirlenen s&uuml;re boyunca yukari kalkar.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">CO2 sens&ouml;r&uuml; etkin degil.</span><br/><br/>",
-"CO2_low" : "hafif y&uuml;kselmis CO2 orani",
-"CO2_high" : "cok y&uuml;kselmis CO2 orani",

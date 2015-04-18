@@ -1,4 +1,0 @@
-"switch_off" : "Zeige - aus",
-"switch_on" : "Zeige - ein",
-"switch_on_off" : "Zeige - ein / aus",
-"switch_on_off_toggle" : "Zeige - ein / aus / Toggle",

@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">Degistirme komutu iletildiginde isik en azindan belirlenen s&uuml;re boyunca belirlenen aydinlik derecesinde acik kalir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Degistirme komutu iletildiginde isik belirlenen gecikmeden sonra kapanir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Degistirme komutu iletildiginde isik ya acilir ya da kapanir.</span><br/><br/>",

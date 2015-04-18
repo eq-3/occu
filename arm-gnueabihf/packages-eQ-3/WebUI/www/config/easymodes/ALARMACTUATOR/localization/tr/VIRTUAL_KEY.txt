@@ -1,6 +1,0 @@
-"description_1_s" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda",
-"description_1_e" : "ayarlanan s&uuml;re icin devreye girer.</span><br/><br/>",
-"description_2_s" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda",
-"description_2_e" : "acilir veya kapanir (Toggle fonksiyonu).</span><br/><br/>",
-"description_3_s" : "<span class=\"translated\">Tusa kisa s&uuml;re basildiginda",
-"description_3_e" : "hemen kapanir.</span><br/><br/>",

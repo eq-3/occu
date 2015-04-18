@@ -1,1 +1,0 @@
-/opt/hm/www/tcl/extern/cgi.tcl

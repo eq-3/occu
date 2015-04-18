@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">Saltere basildiginda isik diger duruma gecer. Saltere rampa s&uuml;resinde tekrar basildiginda hemen belirlenen aydinlik degerinde acilir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Saltere basildiginda isik belirlenen s&uuml;re boyunca belirlenen aydinlik derecesinde acik kalir. Bu profil merdiven boslugu aydinlatmasi olarak da kullanilabilir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Saltere basildiginda isik kapanir.</span><br/><br/>",

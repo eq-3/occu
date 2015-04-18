@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Saltere basildiginda kapi acilir. Belirlenen s&uuml;re sonunda ise tekrar kilitlenir.</span>",
-"description_2" : "<span class=\"translated\">Saltere basildiginda kapinin kildi acilir. Belirlenen s&uuml;re sonunda ise tekrar kilitlenir.</span>",
-"description_3" : "<span class=\"translated\">Saltere basildiginda kapi kilitlenir.</span>",
-"description_4" : "<span class=\"translated\">Saltere basildiginda kapi g&uuml;ncel duruma g&ouml;re ya kilitlenir ya da kilit acilir.</span>",

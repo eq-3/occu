@@ -1,6 +1,0 @@
-[
-	{
-		"hintCaseForm" : "Information about product design",
-		"lblActive" : "active",
-	}
-]

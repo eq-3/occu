@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">When the sensor detects movement the window will open 100%. After the selected time elapsed the window will be closed automatically.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">When the sensor detects movement the window will stop immediately.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">This direct link will be deactivated.</span><br/><br/>",

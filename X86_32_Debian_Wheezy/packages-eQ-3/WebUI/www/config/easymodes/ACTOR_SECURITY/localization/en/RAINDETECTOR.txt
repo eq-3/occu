@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">When it starts raining, the ventilation lock (security) will be activated</span><br/><br/>",
-"description_2" : "<span class=\"translated\">When it starts raining, the ventilation lock (security) will be deactivated.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">When it starts raining, the ventilation lock (security) will be activated. When the rain detector is drain again, the ventilation lock will be deactivated.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">This direct link is deactivated.</span><br/><br/>",

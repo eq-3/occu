@@ -1,1 +1,0 @@
-"description_1" : "<span class=\"translated\">NIL</span><br/><br/>",

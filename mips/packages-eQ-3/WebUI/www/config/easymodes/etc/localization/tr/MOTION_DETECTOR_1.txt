@@ -1,8 +1,0 @@
-[
-	{
-		"title_kind_of" : "Bekleme s&uuml;resi icin yardim",
-		"help_kind_of" : "<div style=\"padding:10\"><span style=" +font_bold+ ">\"minimum\"</span> ayarinda gercek bekleme s&uuml;resi<br/>en azindan hareket alarminin iletim araligiyla ayni kapsamdadir.<br/><br/>Bu mesafe ise <span style=" +font_underline+ ">en azindan</span> hareket alarminin kanal parametrelerinde<br/>belirlenen minimum iletim araligiyla ayni kapsama sahiptir ve hareket algisi<br/>sikligina g&ouml;re yaklasik 10 dakikayi bulabilir.<br/><br/>Akt&uuml;at&ouml;r, burada belirlenen minimum bekleme s&uuml;resinden<br/>daha genis bir bekleme s&uuml;resinde bulunuyorsa etkin bekleme<br/>s&uuml;resi degismez.<br/><br/><span style=" +font_bold+ ">\"mutlak\"</span> ayarinda akt&uuml;at&ouml;r&uuml;n bekleme<br/>s&uuml;resi sonraki alana girilen degerle aynidir.<br/><br/><span style=\"background-color:rgb(200,200,200)\">Daha fazla bilgiyi dok&uuml;mantasyonda bulabilirsiniz.</span></div>",
-		"title_brightness" : "Aydinlik esigi icin yardim",
-		"help_brightness" : "<div style=\"padding:10\">Sens&ouml;r tarafindan algilanan aydinlik derecesi burada belirtilen degerden k&uuml;c&uuml;kse, akt&uuml;at&ouml;r etkindir. Eger daha aydinliksa, akt&uuml;at&ouml;r bir hareket algilandiginda devre disi kalir.<br/><br/>Gecerli aralik " +min+ " - " +max+ " arasindadir<br/><br/>Deger " +max+ " ise akt&uuml;at&ouml;r daima etkindir, 0 ise devre disidir.<br/><br/>Tespit edilen aydinlik derecesi suanda "+brightness+"'dir. Yani akt&uuml;at&ouml;r " +active+ " konumundadir.<br/><br/><span style=\"background-color:rgb(200,200,200)\">Daha fazla bilgiyi dok&uuml;mantasyonda bulabilirsiniz.</span></div>",
-	}
-]

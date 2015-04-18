@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Ayarlanan r&uuml;zgar siddeti asilirsa havalandirma pencere kapanir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Ayarlanan r&uuml;zgar siddetine ulasilmazsa pencere acilir ve secilen s&uuml;re dolduktan sonra da otomatik olarak tekrar kapanir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Ayarlanan r&uuml;zgar siddeti asilirsa pencere acilir ve secilen s&uuml;re dolduktan sonra da otomatik olarak tekrar kapanir.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Bu baglanti devre disi birakilir.</span><br/><br/>",

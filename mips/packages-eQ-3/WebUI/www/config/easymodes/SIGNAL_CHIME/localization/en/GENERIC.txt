@@ -1,7 +1,0 @@
-"signal_led_chime_active" : "Chime active",
-"signal_led_chime_non_active" : "Chime inactive",
-"signal_led_chime_on" : "Chime on",
-"signal_led_chime_off" : "Chime off",
-"signal_kind" : "Signal type",
-"signal_kind_count" : "Number of signals",
-"button_inactive" : "Deactivate button",

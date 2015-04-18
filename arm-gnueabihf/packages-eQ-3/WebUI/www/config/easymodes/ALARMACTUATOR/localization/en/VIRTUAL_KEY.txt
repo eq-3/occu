@@ -1,6 +1,0 @@
-"description_1_s" : "<span class=\"translated\">With a long or short button press",
-"description_1_e" : "will be switched on for the set time.</span><br/><br/>",
-"description_2_s" : "<span class=\"translated\">With a long or short button press",
-"description_2_e" : "will be switched on or off (toggle function).</span><br/><br/>",
-"description_3_s" : "<span class=\"translated\">With a long or short button press",
-"description_3_e" : "will be switched off immediately.</span><br/><br/>",

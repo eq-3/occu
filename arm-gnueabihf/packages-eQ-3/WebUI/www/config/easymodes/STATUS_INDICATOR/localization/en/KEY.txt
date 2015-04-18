@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">With a short or long button press the display of the status display will be switched on.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">With a short or long button press the display of the status display will be switched off.</span><br/><br/>",

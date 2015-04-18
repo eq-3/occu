@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Salter kontagina basildiginda salter istenen s&uuml;re boyunca diger duruma gecer. Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Salter kontagina basildiginda isik istenen s&uuml;re boyunca acilir. Eger salter kontagina bir-fazinda tekrar basilirsa, zaman sayaci bastan saymaya baslar.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Salter kontagina basildiginda salter istenen s&uuml;re boyunca acilir. Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Salter kontagina basildiginda salter istenen s&uuml;re boyunca kapatilir. Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",

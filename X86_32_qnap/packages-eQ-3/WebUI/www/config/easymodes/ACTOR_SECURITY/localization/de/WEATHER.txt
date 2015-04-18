@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Wird die eingestellte Windst&auml;rke &uuml;berschritten, wird die L&uuml;ftungssperre (Sicherheit) aktiviert.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Wird die eingestellte Windst&auml;rke unterschritten, wird die L&uuml;ftungssperre (Sicherheit) deaktiviert.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Wird die eingestellte Windst&auml;rke &uuml;berschritten, wird die L&uuml;ftungssperre (Sicherheit) aktiviert. Wird die Windst&auml;rke wieder unterschritten, wird die L&uuml;ftungssperre (Sicherheit) deaktiviert.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Diese Direktverkn&uuml;pfung wird deaktiviert.</span><br/><br/>",

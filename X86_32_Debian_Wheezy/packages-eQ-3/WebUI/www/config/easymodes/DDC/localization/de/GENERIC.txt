@@ -1,4 +1,0 @@
-"switch_off" : "T&uuml;r zu",
-"switch_on" : "T&uuml;r auf",
-"switch_on_off" : "T&uuml;r auf / AUTO zu",
-"switch_on_off_toggle" : "",

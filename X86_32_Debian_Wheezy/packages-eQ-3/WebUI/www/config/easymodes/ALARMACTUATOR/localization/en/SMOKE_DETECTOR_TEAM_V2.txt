@@ -1,4 +1,0 @@
-"description_1_s" : "<span class=\"translated\">In case of fire alarm",
-"description_1_e" : "will be switched on for the selected time. If the alarm will be confirmed by the triggering device or a smoke detector of the same group it will be turned off.</span><br/><br/>",
-"subset_1" : "only triggering smoke detector",
-"subset_2" : "smoke detector of the same group",

@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">Die WinMatic wird durch den Fenster-Drehgriff-Kontakt (RHS) gesteuert, so da&szlig; das Fenster beim Ausl&ouml;sen des RHS ge&ouml;ffnet bzw. geschlossen wird.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Der Fenster-Drehgriff-Kontakt ist nicht aktiv</span>",

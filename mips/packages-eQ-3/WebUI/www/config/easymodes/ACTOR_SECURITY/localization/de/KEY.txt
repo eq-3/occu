@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Mit einem Tastendruck wird die L&uuml;ftungssperre (Sicherheit) aktiviert.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Mit einem Tastendruck wird die L&uuml;ftungssperre (Sicherheit) deaktiviert.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Mit einem Tastendruck wird der Zustand der L&uuml;ftungssperre (Sicherheit) umgekehrt.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Diese Direktverkn&uuml;pfung wird deaktiviert.</span>",

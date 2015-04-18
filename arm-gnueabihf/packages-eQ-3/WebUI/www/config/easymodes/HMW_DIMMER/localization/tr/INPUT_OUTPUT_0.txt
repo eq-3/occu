@@ -1,7 +1,0 @@
-"description_1" : "<span class=\"translated\">Salter kontagina basildiginda isik diger duruma gecer.&nbsp;Rampa s&uuml;resinde buna tekrar basildiginda hemen ilgili uc deger ayarlanir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Salter kontagina basildiginda isik belirlenen s&uuml;re boyunca istenen aydinlik degerine ayarlanir.&nbsp;Rampa s&uuml;resinde buna tekrar basildiginda hemen ilgili uc deger ayarlanir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Salter kontagina basildiginda isik belirlenen gecikme s&uuml;resinden sonra kapanir.&nbsp;Rampa s&uuml;resinde buna tekrar basildiginda ise isik hemen kapatilir.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Salter kontagina basildiginda isik belirlenen s&uuml;re boyunca acik kalir.&nbsp; Daha sonra tekrar &quot;kapat&quot; konumuna yavasca kisilmasi icin kapatma gecikmesinde &ouml;n uyari seviyesi hafif d&uuml;s&uuml;r&uuml;l&uuml;r.</span><br/><br/>",
-"description_5" : "<span class=\"translated\">Salter kontagina basildiginda isik belirlenen aydinlik derecesinde acilir ve belirlenen s&uuml;re sonunda da yavasca &quot;kapat&quot; konumuna kadar kisilir.</span><br/><br/>",
-"description_6" : "<span class=\"translated\">Salter kontagina basildiginda isik belirlenen s&uuml;re boyunca aydinlatilir.</span><br/><br/>",
-"description_7" : "<span class=\"translated\">Isik belirlenen d&ouml;ng&uuml;de iki aydinlik derecesi arasinda s&uuml;rekli degisir.</span><br/><br/>",

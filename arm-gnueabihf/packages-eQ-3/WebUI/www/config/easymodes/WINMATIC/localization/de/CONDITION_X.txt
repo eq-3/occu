@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Bei Empfang des oberen Grenzwerts wird das Fenster mit der eingestellten Geschwindigkeit auf die festgelegte Weite gekippt.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Bei Empfang des unteren Grenzwerts wird das Fenster mit der eingestellten Geschwindigkeit geschlossen.</span><br/><br/>",
-"descrHint" : "<span class=\"translated\">Wann der Schaltbefehl vom Schaltaktor mit Leistungsmessung gesendet wird, wird am entsprechenden Kanal eingestellt.</span><br/><br/>",
-"descrHintMS" : "<span class=\"translated\">Damit das Profil wirksam wird, muss der enstprechende Kanal des Schaltaktors mit Leistungsmessung so eingestellt werden, da&szlig; bei &Uuml;ber- und Unterschreiten des gew&auml;hlten Wertes ein Schaltbefehl gesendet wird.</span><br/><br/>",

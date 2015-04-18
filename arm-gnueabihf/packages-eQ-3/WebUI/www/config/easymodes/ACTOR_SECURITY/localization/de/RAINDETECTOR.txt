@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Beginnt es zu regnen, wird die L&uuml;ftungssperre (Sicherheit) aktiviert.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Beginnt es zu regnen, wird die L&uuml;ftungssperre (Sicherheit) deaktiviert.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Beginnt es zu regnen, wird die L&uuml;ftungssperre (Sicherheit) aktiviert. Sobald der Regensensor wieder trocken ist, wird die L&uuml;ftungssperre deaktiviert.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Diese Direktverkn&uuml;pfung wird deaktiviert.</span><br/><br/>",

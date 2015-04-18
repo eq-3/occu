@@ -1,6 +1,0 @@
-"description_1_s" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird",
-"description_1_e" : "f%FCr die gew%E4hlte Zeit eingeschaltet.</span><br/><br/>",
-"description_2_s" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird",
-"description_2_e" : "ein- oder ausgeschaltet (Toggle-Funktion).</span><br/><br/>",
-"description_3_s" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird",
-"description_3_e" : "sofort ausgeschaltet.</span><br/><br/>",

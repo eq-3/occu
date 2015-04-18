@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">By pressing the switch contact the switch changes for the set time to the other status. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">By pressing the switch contact the light will be switched on for the set time. If the switch contact is pressed again while the light is switched on, the time count begins anew./span><br/><br/>",
-"description_3" : "<span class=\"translated\">By pressing the switch contact the switch will be toggled on for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">By pressing the switch contact the switch will be toggled off for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",

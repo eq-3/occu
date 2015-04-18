@@ -1,9 +1,0 @@
-[
-	{
-		"SD_QuestionGroup" : "To which group does the smoke detector belong?",
-		"SD_Reset" : "Default settings",
-		"SD_HintMailbox" : " See inbox",
-		"SD_GroupMember" : "Group members",
-		"SD_LblSmokeDetectorSN" : "Smoke detector SN:",
-	}
-]

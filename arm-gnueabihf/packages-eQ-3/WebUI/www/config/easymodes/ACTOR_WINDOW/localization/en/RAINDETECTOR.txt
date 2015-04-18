@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">When it starts raining, the window will be closed. An optional delay time will delay the closing.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">When it starts raining, the window will be opened and closed automatically after the selected time elapsed.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">This direct link will be deactivated.</span><br/><br/>",

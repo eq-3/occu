@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Odadaki havada CO2 orani y&uuml;ksekse pencere havalandirma konumunda (%100) acilir ve secilen s&uuml;re dolduktan sonra da otomatik olarak tekrar kapanir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Bu baglanti devre disi birakilir.</span><br/><br/>",
-"CO2_low" : "hafif artmis CO2 konsantrasyonu",
-"CO2_high" : "cok artmis CO2 konsantrasyonu",

@@ -1,1 +1,0 @@
-"temperature_lowering_value" : "Absenktemperatur",

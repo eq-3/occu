@@ -1,1 +1,0 @@
-"temperature_lowering_value" : "D&uuml;s&uuml;rme sicakligi",

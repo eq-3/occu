@@ -1,8 +1,0 @@
-"door_lock" : "Kapiyi kilitle",
-"door_lock_proof" : "Kapiyi kilitle (sabotaja karsi g&uuml;venli)",
-"door_lock_unlock" : "kilitle / kilidi ac",
-"door_lock_open" : "kilitle / ac",
-"door_lock_toggle" : "Kilitlemeyi tetikle",
-"door_open" : "Kapiyi acma",
-"door_unlock" : "Kapi kilidini ac",
-"door_unlock_open" : "kildi ac / ac",

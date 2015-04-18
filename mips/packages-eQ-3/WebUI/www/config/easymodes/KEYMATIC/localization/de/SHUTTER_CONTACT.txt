@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">Nach dem Schlie&szlig;en der T&uuml;r wird sie unverz&uuml;glich verriegelt. Die T&uuml;r kann durch Entfernen des Kontakts ge&ouml;ffnet werden (nicht sabotagesicher).</span>",
-"description_2" : "<span class=\"translated\">Nach dem Schlie&szlig;en der T&uuml;r wird sie unverz&uuml;glich verriegelt. Die T&uuml;r kann durch Entfernen des Kontakts nicht ge&ouml;ffnet werden (sabotagesicher).</span>",
-"description_3" : "<span class=\"translated\">Der Kontakt ist au&szlig;er Betrieb.</span>",

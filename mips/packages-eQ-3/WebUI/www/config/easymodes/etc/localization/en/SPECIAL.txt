@@ -1,9 +1,0 @@
-[
-	{
-		"expert" : "Expert",
-		"hint_no_expert" : "<span class=\"translated\">This connection does not contain parameters that can be adjusted.</span>",
-		"hint_no_profile" : "<span class=\"translated\">There is no profile for this connection. Please try again in expert mode.</span>",
-		"no_userProfile" : "This profile can not be saved as profile template.",
-		"no_profile" : "No profile available",
-	}
-]

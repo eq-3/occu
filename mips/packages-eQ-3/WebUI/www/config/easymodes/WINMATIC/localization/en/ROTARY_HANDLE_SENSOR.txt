@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">The WinMatic is controlled by the Rotary Handle Sensor (RHS). Thus, the window will be opened or closed if the RHS is triggered.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">The Rotary Handle Sensor is not active.</span><br/><br/>",

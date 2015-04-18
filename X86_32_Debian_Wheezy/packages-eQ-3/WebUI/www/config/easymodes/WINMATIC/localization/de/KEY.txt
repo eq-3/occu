@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird das Fenster mit der eingestellten Geschwindigkeit auf die festgelegte Weite gekippt.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird das Fenster mit der eingestellten Geschwindigkeit geschlossen und, je nach Einstellung, auch verriegelt.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird das Fenster mit der eingestellten Geschwindigkeit auf die festgelegte Weite gekippt oder geschlossen (Toggle-Funktion).</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird das Fenster mit der eingestellten Geschwindigkeit auf die festgelegte Weite gekippt und nach der gew&uuml;nschten Zeit wieder geschlossen (je nach Einstellung auch verriegelt).</span><br/><br/>",

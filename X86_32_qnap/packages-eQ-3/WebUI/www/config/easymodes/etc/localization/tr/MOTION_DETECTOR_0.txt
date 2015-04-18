@@ -1,6 +1,0 @@
-[
-	{
-		"title_brightness" : "Aydinlik esigi icin yardim",
-		"help_brightness" : "<div style=\"padding:10\">Sens&ouml;r tarafindan algilanan aydinlik derecesi burada belirtilen degerden k&uuml;c&uuml;kse, akt&uuml;at&ouml;r etkindir. Eger daha aydinliksa, akt&uuml;at&ouml;r bir hareket algilandiginda devre disi kalir.<br/><br/>Gecerli aralik " +min+ " - " +max+ " arasindadir<br/><br/>Deger " +max+ " ise akt&uuml;at&ouml;r daima etkindir, 0 ise devre disidir.<br/><br/>Hareket alarmi tarafindan hen&uuml;z bir veri paketi alinmadigindan,<br/>suan ki g&uuml;ncel aydinlik derecesi kullanilamaz.<br/><br/><span style=\"background-color:rgb(200,200,200)\">Daha fazla bilgi icin l&uuml;tfen dok&uuml;mantasyona bakiniz.</span></div>",
-	}
-]

@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">Yagmur yagdiginda isik belirlenen aydinlik derecesinde acilir ve hava kuru oldugunda kapanir. Bu fonksiyon tersine de cevrilebilir.</span><br/><br/>",
-"subset_1" : "Kuru hava - ac / yagmur - kapat",
-"subset_2" : "Kuru hava - kapat / yagmur - ac",

@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Wird die eingestellte Windst&auml;rke &uuml;berschritten, schlie&szlig;t das Fenster.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Wird die eingestellte Windst&auml;rke unterschritten, wird das Fenster ge&ouml;ffnet und nach Ablauf der gew&auml;hlten Zeit automatisch wieder geschlossen.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Wird die eingestellte Windst&auml;rke &uuml;berschritten, wird das Fenster ge&ouml;ffnet und nach Ablauf der gew&auml;hlten Zeit automatisch wieder geschlossen.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Diese Verkn&uuml;pfung wird deaktiviert</span><br/><br/>",

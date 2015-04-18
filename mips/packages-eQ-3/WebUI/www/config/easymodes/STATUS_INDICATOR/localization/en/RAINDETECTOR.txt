@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">In case of rain, the display will be set according to the switching direction.</span><br/><br/>",
-"subset_1" : "Dry - condition 0 / Rain - condition 1",
-"subset_2" : "Dry - condition 1 / Rain - condition 0",

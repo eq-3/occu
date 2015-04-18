@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird die T&uuml;r ge&ouml;ffnet. Ein langer Tastendruck f&uuml;hrt die Funktion <b>T&uuml;r Auf / AUTO zu<b> aus.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird die T&uuml;r geschlossen. Ein langer Tastendruck f&uuml;hrt die Funktion <b>T&uuml;r Auf / AUTO zu<b> aus.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird die T&uuml;r ge&ouml;ffnet. Nach einer am T&uuml;rantrieb einstellbaren Zeit, schie&szlig;t die T&uuml;r selbst&auml;ndig.</span><br/><br/>",
-"description_4" : "",

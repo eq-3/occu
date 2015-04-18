@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Cihaz tusuna bir kere basilarak salter belirlenen s&uuml;re icin acik konumuna getirilir. Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Cihaz tusuna bir kere basilarak salter belirlenen s&uuml;re icin kapali konumuna getirilir. Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Cihaz tusuna bir kere basilarak salter belirlenen s&uuml;re icin acik veya kapali konumuna getirilir (Toggle fonksiyonu). Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Cihaz tusuna bir kere basilarak salter belirlenen s&uuml;re icin acik konumuna getirilir.</span><br/><br/>",

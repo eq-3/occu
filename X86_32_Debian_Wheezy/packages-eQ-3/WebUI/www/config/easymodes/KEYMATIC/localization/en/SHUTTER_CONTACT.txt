@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">After the door is closed it will be locked immediately. The door can be opened by removing the contact (not sabotage-proof).</span>",
-"description_2" : "<span class=\"translated\">After the door is closed it will be locked immediately. The door can not be opened by removing the contact (sabotage-proof).</span>",
-"description_3" : "<span class=\"translated\">The contact is out of operation.</span>",

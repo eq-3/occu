@@ -1,7 +1,0 @@
-"description_1" : "<span class=\"translated\">With a short or long button press the door will be unlocked. The door will be locked again automatically after the time set.</span>",
-"description_2" : "<span class=\"translated\">With a short or long button press the door will be locked.</span>",
-"description_3" : "<span class=\"translated\">With a short or long button press the door will be opened. The door will be locked again automatically after the time set.</span>",
-"description_4" : "<span class=\"translated\">With a short button press the door will be locked. With a long button press the door will be unlocked. The door will be locked again automatically after the time set.</span>",
-"description_5" : "<span class=\"translated\">With a short button press the door will be locked. With a long button press the door will be opened. The door will be locked again automatically after the time set.</span>",
-"description_6" : "<span class=\"translated\">With a short button press the door will be unlocked. With a long button press the door will be opened. The door will be locked again automatically after the time set.</span>",
-"description_7" : "<span class=\"translated\">With a short or long button press the door will be locked or unlocked, depending on the current status.</span>",

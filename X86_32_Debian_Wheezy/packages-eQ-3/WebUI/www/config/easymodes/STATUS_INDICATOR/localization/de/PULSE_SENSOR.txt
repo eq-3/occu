@@ -1,3 +1,0 @@
-"description_1" : "<span class=\"translated\">Beim Senden des Schaltbefehls wird das Display f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Beim Senden des Schaltbefehls wird das Display f&uuml;r die festgelegte Zeit ausgeschaltet.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Beim Senden des Schaltbefehls wird das Display f&uuml;r die festgelegte Zeit ein- oder ausgeschaltet (Toggle-Funktion).</span><br/><br/>",

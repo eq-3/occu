@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">When the entered wind strength is reached, the ventilation lock (security) will be activated.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Below the entered wind strength, the ventilation lock (security) will be deactivated.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">When the entered wind strength is reached, the ventilation lock (security) will be activated. Below the entered wind strength, the ventilation lock (security) will be deactivated again.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">This direct link is deactivated.</span><br/><br/>",

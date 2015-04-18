@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda pencere ayarlanan hizda belirlenen mesafeye devrilir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda pencere ayarlanan hizda kapanir veya kilitlenir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda pencere ayarlanan hizda belirlenen mesafeye devrilir veya kapatilir ya da kilitlenir (Toggle fonksiyonu).</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Tusa kisa veya uzun s&uuml;re basildiginda pencere ayarlanan hizda belirlenen mesafeye devrilir ve istenen s&uuml;re sonunda da tekrar kapatilir veya kilitlenir.</span><br/><br/>",

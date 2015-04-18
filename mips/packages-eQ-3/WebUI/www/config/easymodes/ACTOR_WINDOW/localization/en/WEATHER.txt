@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">When the entered wind strength is reached the window will be closed.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Below the entered wind strength the window will be opened. After the selected time elapsed the window will be closed automatically.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">When the entered wind strength is reached the window will be opened. After the selected time elapsed the window will be closed automatically.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">This direct link will be deactivated.</span><br/><br/>",

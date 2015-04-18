@@ -1,1 +1,0 @@
-"description_1" : "<span class=\"translated\">When the window is opened the reduction temperature will be activated.</span><br/><br/>",

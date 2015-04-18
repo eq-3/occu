@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Closing the shutter contact will activate the ventilation lock (security)</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Closing the shutter contact will deactivate the ventilation lock (security).</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Closing the shutter contact will activate the ventilation lock (security). Opening the shutter contact will deactivate the ventilation lock</span><br/><br/>",
-"description_4" : "<span class=\"translated\">This direct link is deactivated.</span><br/><br/>",

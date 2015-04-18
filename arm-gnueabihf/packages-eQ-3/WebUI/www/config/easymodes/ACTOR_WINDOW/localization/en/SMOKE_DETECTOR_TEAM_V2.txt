@@ -1,5 +1,0 @@
-"description_1" : "<span class=\"translated\">In case of fire alarm the window will open.  After the selected time elapsed or after confirmation of the alarm on any smoke detector of the same group, the window will be closed automatically.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">In case of fire alarm the window will close immediately.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">This direct link will be deactivated.</span>",
-"subset_1" : "only triggering smoke detector",
-"subset_2" : "smoke detector of the same group",

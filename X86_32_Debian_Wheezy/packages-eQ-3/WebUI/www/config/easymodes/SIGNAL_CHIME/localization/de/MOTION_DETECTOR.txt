@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Bewegungsmelders ert&ouml;nt der Gong. Ist eine Verz&oumlgerungszeit eingestellt, so geschieht dies erst nach Ablauf der Zeit.<br/><br/>Beim Bewegungsmelder (Kanalparameter) sollte die Wahl des Sendeabstandes auf <b>dynamisch</b> stehen und ein Mindestsendeabstand von <b>15s</b> eingestellt werden.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Der Bewegungsmelder ist deaktiviert.</span>",

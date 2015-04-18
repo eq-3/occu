@@ -1,4 +1,0 @@
-"description_1_s" : "<span class=\"translated\">Bei Feueralarm schaltet",
-"description_1_e" : "f%FCr die gew%E4hlte Zeit ein. Erfolgt die Best%E4tigung des Alarms am Ausl%F6senden oder einem Rauchmelder der gleichen Gruppe, wird er ausgeschaltet.</span><br/><br/>",
-"subset_1" : "nur ausl&ouml;sender Rauchmelder",
-"subset_2" : "Rauchmelder der gleichen Gruppe",

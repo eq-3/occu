@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">By operating the switch the door will be opened. It will be locked again after the time set.</span>",
-"description_2" : "<span class=\"translated\">By operating the switch the door will be unlocked. It will be locked again after the time set.</span>",
-"description_3" : "<span class=\"translated\">By operating the switch the door will be locked.",
-"description_4" : "<span class=\"translated\">By operating the switch the door will be locked or unlocked, depending on the current status.</span>",

@@ -1,8 +1,0 @@
-"description_1" : "<span class=\"translated\">&Ouml;rn. garaj kapisi acildiginda isik belirlenen aydinlik derecesinde acilir ve kapi kapatildiginda da kapanir. Bu fonksiyon tersine de cevrilebilir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Acilip kapatildiginda isik belli bir s&uuml;re boyunca belirlenen aydinlik derecesinde acik kalir. Her durum degisiminde bu s&uuml;re yeniden en basindan baglar.</span><br/><br/>",
-"subset_1" : "Acik - kapat/kapali - ac",
-"subset_2" : "Acik - ac/kapali - kapat",
-"subset_3" : "Kapat",
-"subset_4" : "Acma",
-"subset_5" : "Degistir",
-"at" : "<span class=\"translated\">'da</span>",

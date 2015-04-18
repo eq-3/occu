@@ -1,5 +1,0 @@
-"description_1" : "<span class=\"translated\">Salter kontagina basildiginda salter belirlenen s&uuml;re boyunca diger duruma gecer.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Salter kontagina basildiginda salter isigi belirlenen s&uuml;re icin acar. Eger salter kontagina bir fazinda tekrar basilirsa, bastan baslar.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Salter kontagina basildiginda salter belirlenen s&uuml;re boyunca acik kalir.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Salter kontagina basildiginda salter belirlenen s&uuml;re boyunca kapali kalir.</span><br/><br/>",
-"description_5" : "<span class=\"translated\">SWI-3 normal salter seklinde calisir</span><br/><br/>",

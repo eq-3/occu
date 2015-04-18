@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">By operating the switch the window will be closed.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">By operating the switch the window will be tilt open to the defined position.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">By operating the switch the window will be opened or closed.</span><br/><br/> By operating the switch during the movement the direction will be reversed.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">By operating the switch the window will be tilt open to the defined position and closed/locked after the set time.</span><br/><br/>",

@@ -1,8 +1,0 @@
-"description_1" : "<span class=\"translated\">Maksimum dolum seviyesi asildiginda veya buna ulasilamadiginda duruma g&ouml;re anahtarlama yapilabilir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Minimum dolum seviyesi asildiginda veya buna ulasilamadiginda duruma g&ouml;re anahtarlama yapilabilir.</span><br/><br/>",
-"subset_1" : "ulasilamadi - acik / asildi - kapali",
-"subset_2" : "ulasilamadi - kapali / asildi - acik",
-"subset_3" : "ulasilamadi - acik / asildi - kapali",
-"subset_4" : "ulasilamadi - kapali / asildi - acik",
-"upperFillLevel" : "&Uuml;st dolum seviyesi",
-"lowerFillLevel" : "Alt dolum seviyesi",

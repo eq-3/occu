@@ -1,4 +1,0 @@
-"switch_off" : "Show - off",
-"switch_on" : "Show - on",
-"switch_on_off" : "Show - on / off",
-"switch_on_off_toggle" : "Show - on / off / toggle",

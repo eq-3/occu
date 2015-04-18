@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">Duman alarmi calmaya basladiginda tente / panjur belirlenen s&uuml;re boyunca tamamen yukari kalkar. Bir gecikme s&uuml;resi ayarlanmissa, g&uuml;neslik bu s&uuml;re dolduktan sonra hareket ettirilir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Duman alarmi calmaya basladiginda tente / panjur belirlenen s&uuml;re boyunca tamamen asagi iner. Bir gecikme s&uuml;resi ayarlanmissa, g&uuml;neslik bu s&uuml;re dolduktan sonra hareket ettirilir.</span><br/><br/>",

@@ -1,6 +1,0 @@
-"description_1_s" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wechselt",
-"description_1_e" : "f%FCr die gew%E4hlte Zeit in den jeweils anderen Zustand.</span><br/><br/>",
-"description_2_s" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird",
-"description_2_e" : "f%FCr die gew%E4hlte Zeit eingeschaltet.</span><br/><br/>",
-"description_3_s" : "<span class=\"translated\">Bei Bet%E4tigung des Schaltkontakts wird",
-"description_3_e" : "sofort ausgeschaltet.</span><br/><br/>",

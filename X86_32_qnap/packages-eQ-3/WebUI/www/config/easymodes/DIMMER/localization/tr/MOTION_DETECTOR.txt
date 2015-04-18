@@ -1,8 +1,0 @@
-"description_1" : "<span class=\"translated\">Sens&ouml;r devreye girdiginde isik en azindan belirlenen s&uuml;re boyunca acik kalir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Hareket alarmi etkin degil.</span>",
-"md_on_time" : "Acik kalma s&uuml;resi (\"acik\" durumunda ki bekleme s&uuml;resi)",
-"md_min_on_time" : "Minimum-acik kalma s&uuml;resi",
-"hint0a" : "<b>DIKKAT!</b>Akt&uuml;at&ouml;r&uuml;n secilen acik kalma s&uuml;resi su minimum iletim araligindan daha k&uuml;c&uuml;kt&uuml;r  ",
-"hint0b" : "s. Bu mesafeden daha b&uuml;y&uuml;k bir deger secin.",
-"hint1a" : "Sonraki hareket ilk olarak ",
-"hint1b" : "s'ye iletildiginden, akt&uuml;at&ouml;r &ouml;nce kendini kapatir ve minimum iletim araligi dolduktan sonra tekrar devreye girer.",

@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">In case of strong winds the display will be switched on. In case of light winds it will be switched off. This function can be reversed.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">When the defined wind velocity is reached the display will be switched on for the time set.</span><br/><br/>",
-"subset_1" : "Strong wind - off / light wind - on",
-"subset_2" : "Strong wind - on / light wind - off",

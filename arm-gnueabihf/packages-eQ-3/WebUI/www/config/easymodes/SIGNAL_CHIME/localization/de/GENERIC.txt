@@ -1,7 +1,0 @@
-"signal_led_chime_active" : "Gong aktiv",
-"signal_led_chime_non_active" : "Gong nicht aktiv",
-"signal_led_chime_on" : "Gong ein",
-"signal_led_chime_off" : "Gong aus",
-"signal_kind" : "Signalart",
-"signal_kind_count" : "Anzahl der Signale",
-"button_inactive" : "Taste deaktiviert",

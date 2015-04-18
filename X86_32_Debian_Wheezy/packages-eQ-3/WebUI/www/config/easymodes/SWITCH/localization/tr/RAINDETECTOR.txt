@@ -1,5 +1,0 @@
-"description_1" : "<span class=\"translated\">Yagmur yagdiginda salter ayarlanan s&uuml;re boyunca istenen salter y&ouml;n&uuml;ne g&ouml;re konumlandirilir. </span><br/><br/>",
-"description_2" : "<span class=\"translated\">Yagmurlu havada salter ayarlanan s&uuml;re boyunca acik kalir. </span><br/><br/>",
-"description_3" : "<span class=\"translated\">Yagmurlu havada salter ayarlanan s&uuml;re boyunca kapali kalir. </span><br/><br/>",
-"subset_1" : "Kuru - acik / yagmurlu - kapali",
-"subset_2" : "Kuru - kapali / yagmurlu - acik",
