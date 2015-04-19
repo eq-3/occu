@@ -38,7 +38,7 @@ Each CPU subfolder contains the following binary packages:
 
 - subfolder packages-eQ-3/RFD: Radio Frequence Daemon 
 - subfolder packages-eQ-3/HS485D: (wired) HS485 Daemon
-- subfolder packages-eQ-3/WebUI: pre alpha many CCU2 spezific functions must be replace
+- subfolder packages-eQ-3/WebUI: pre alpha many CCU2 specific functions must be replace
 - subfolder packages/lighttpd: preconfigured http daemon
 
 CCU2 Toolchain
