@@ -20,7 +20,7 @@ subfolder arm-gnueabihf:
 - Cubietruck (Cubian)
 
 subfolder X86_32:
- -Debian Wheezy
+- Debian Wheezy
 
 subfolder mips:
 - vu+ solo² with vti Image
