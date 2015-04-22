@@ -2,11 +2,12 @@ HomeMatic-Open-Central-Control-Unit-SDK (HM-OCCU-SDK)
 
 Content
 =======
-	- CPU Support
-	- Binary Packages
-	- CCU2 Toolchain 
-	- Support
-	- Version History
+
+- CPU Support
+- Binary Packages
+- CCU2 Toolchain 
+- Support
+- Version History
 
 CPU Support
 ===========
@@ -15,14 +16,14 @@ The HM-OCCU-SDK contains several binary packages for different CPU architectures
 The CPU architectures are tested on the following hardware:
 
 subfolder arm-gnueabihf: 
-	Raspberry Pi 
-	Cubietruck (Cubian)
+- Raspberry Pi 
+- Cubietruck (Cubian)
 
 subfolder X86_32:
-	Debian Wheezy
+- Debian Wheezy
 
 subfolder mips:
-	vu+ solo² with vti Image
+- vu+ solo² with vti Image
 
 The script install.sh in the cpu specific subfolder copies all binary packages to /opt/hm. 
 This script is just an example and may be enhanced by the community. Some Linux distributions
@@ -35,11 +36,10 @@ Binary Packages
 =============== 
 Each CPU subfolder contains the following binary packages:
 
-	- subfolder packages-eQ-3/RFD: Radio Frequence Daemon 
-	- subfolder packages-eQ-3/HS485D: (wired) HS485 Daemon
-	- subfolder packages-eQ-3/WebUI: pre alpha
-			   many CCU2 spezific functions must be replace
-	- subfolder packages/lighttpd: preconfigured http daemon
+- subfolder packages-eQ-3/RFD: Radio Frequence Daemon 
+- subfolder packages-eQ-3/HS485D: (wired) HS485 Daemon
+- subfolder packages-eQ-3/WebUI: pre alpha many CCU2 specific functions must be replace
+- subfolder packages/lighttpd: preconfigured http daemon
 
 CCU2 Toolchain
 ==============
