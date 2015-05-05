@@ -5,6 +5,7 @@ Content
 
 - CPU Support
 - Binary Packages
+- Supported communication devices
 - CCU2 Toolchain 
 - Support
 - Version History
@@ -43,6 +44,12 @@ Each CPU subfolder contains the following binary packages:
 - subfolder packages-eQ-3/HS485D: (wired) HS485 Daemon
 - subfolder packages-eQ-3/WebUI: pre-alpha many CCU2 specific functions must be replaced
 - subfolder packages/lighttpd: preconfigured HTTP daemon
+
+Supported communication devices
+===============================
+- HM-LGW-O-TW-W-EU LAN Gateway
+- HMW-LGW-O-DR-GS-EU Wired LAN Gateway
+- HM-Cfg-USB-2 (experimental, not official supported)
 
 CCU2 Toolchain
 ==============
