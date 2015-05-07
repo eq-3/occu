@@ -1,0 +1,566 @@
+[
+	{
+		"id" : "1",
+		"name" : "${diagramTemplate1}",
+		"description" : "${diagramTemplateDescription1}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#e6edff",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 'ne',
+				placement: 'insideGrid',
+				xoffset: 12,
+				yoffset: 12,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 1,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	},
+	{
+		"id" : "2",
+		"name" : "${diagramTemplate2}",
+		"description" : "${diagramTemplateDescription2}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#fff6ed",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 'ne',
+				placement: 'insideGrid',
+				xoffset: 12,
+				yoffset: 12,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 1,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	},
+	{
+		"id" : "3",
+		"name" : "${diagramTemplate3}",
+		"description" : "${diagramTemplateDescription3}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#e6edff",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 'ne',
+				placement: 'insideGrid',
+				xoffset: 12,
+				yoffset: 12,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 2,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	},
+	{
+		"id" : "4",
+		"name" : "${diagramTemplate4}",
+		"description" : "${diagramTemplateDescription4}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#fff6ed",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 'ne',
+				placement: 'insideGrid',
+				xoffset: 12,
+				yoffset: 12,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 2,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	},
+	{
+		"id" : "5",
+		"name" : "${diagramTemplate5}",
+		"description" : "${diagramTemplateDescription5}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#e6edff",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 's',
+				placement: 'outside',
+				xoffset: 12,
+				yoffset: 85,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					numberColumns: 4,
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 1,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	},
+	{
+		"id" : "6",
+		"name" : "${diagramTemplate6}",
+		"description" : "${diagramTemplateDescription6}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#fff6ed",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 's',
+				placement: 'outside',
+				xoffset: 12,
+				yoffset: 85,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					numberColumns: 4,
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 1,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	},
+	{
+		"id" : "7",
+		"name" : "${diagramTemplate7}",
+		"description" : "${diagramTemplateDescription7}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#e6edff",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 's',
+				placement: 'outside',
+				xoffset: 12,
+				yoffset: 85,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					numberColumns: 4,
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 2,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	},
+	{
+		"id" : "8",
+		"name" : "${diagramTemplate8}",
+		"description" : "${diagramTemplateDescription8}",
+		"seriesTemplate" : 
+		{
+			grid: {
+				drawGridlines: true,
+				gridLineColor: "#cccccc",
+				gridLineWidth: 1,
+				backgroundColor: "#fff6ed",
+				borderColor: "#999999",
+				borderWidth: 2,
+				shadow: true
+			},
+			animate : false,
+			animateReplot: false,
+			axes :
+			{
+				xaxis :
+				{
+					tickOptions :
+					{
+						formatString : '%d.%m.%y %H:%M',
+						angle : 37
+					}
+				}
+			},
+			cursor:
+			{
+				show: true,
+				zoom: true, 
+				showTooltip: true
+			},
+			legend:
+			{
+				show: true,
+				location: 's',
+				placement: 'outside',
+				xoffset: 12,
+				yoffset: 85,
+				rendererOptions:
+				{
+					seriesToggle: 'normal',
+					numberColumns: 4,
+					seriesToggleReplot:
+					{
+						resetAxes: false
+					}
+				}
+			},
+			seriesDefaults :
+			{
+				markerOptions :
+				{
+					style: 'filledCircle'
+				}
+			},
+			series :
+			[
+				{
+					lineWidth: 2,
+					showMarker: false,
+					rendererOptions:
+					{
+						smooth: true
+					}
+				}
+			]
+		}
+	}
+]
