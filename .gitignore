@@ -1,0 +1,4 @@
+*.o *.a *.so
+CCU2/download/xmlrpc/
+*.swp
+
