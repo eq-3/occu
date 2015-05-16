@@ -1,4 +1,4 @@
-*.o *.a *.so
+*.o *.a
 CCU2/download/xmlrpc/
 *.swp
-
+.idea
