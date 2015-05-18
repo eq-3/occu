@@ -8,6 +8,7 @@ Content
 - Supported communication devices
 - CCU2 Toolchain 
 - Support
+- OCCU based Community Projects
 - Version History
 
 CPU Support
@@ -64,6 +65,11 @@ Support
 =======
 The HM-OCCU-SDK is provided free of charge. If you want any commercial support
 pleace contact support@eq-3.de.
+
+
+OCCU based Community Projects
+=============================
+ * [Hmcon](https://github.com/hobbyquaker/hmcon) - Installer Script for rfd, hs485d and Homematic Manager. "The ReGa-less CCU" for use with Software like OpenHAB, ioBroker, ...
 
 Version History
 ===============
