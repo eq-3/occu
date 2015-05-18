@@ -1,7 +1,6 @@
-HomeMatic-Open-Central-Control-Unit-SDK (HM-OCCU-SDK)
+# HomeMatic-Open-Central-Control-Unit-SDK (HM-OCCU-SDK)
 
-Content
-=======
+## Content
 
 - CPU Support
 - Binary Packages
@@ -11,9 +10,7 @@ Content
 - OCCU based Community Projects
 - Version History
 
-CPU Support
-===========
-
+## CPU Support
 The HM-OCCU-SDK contains several binary packages for different CPU
 architectures. 
 The CPU architectures are tested on the following hardware:
@@ -37,8 +34,8 @@ installation script must be changed (replace /opt/hm by /storage/hm).
 Further CPU specific information can be found in the CPU architecture specific
 subfolder.
 
-Binary Packages
-=============== 
+## Binary Packages
+ 
 Each CPU subfolder contains the following binary packages:
 
 - subfolder packages-eQ-3/RFD: Radio Frequency Daemon 
@@ -46,14 +43,14 @@ Each CPU subfolder contains the following binary packages:
 - subfolder packages-eQ-3/WebUI: pre-alpha many CCU2 specific functions must be replaced
 - subfolder packages/lighttpd: preconfigured HTTP daemon
 
-Supported communication devices
-===============================
+## Supported communication devices
+
 - HM-LGW-O-TW-W-EU LAN Gateway
 - HMW-LGW-O-DR-GS-EU Wired LAN Gateway
 - HM-Cfg-USB-2 (experimental, not official supported)
 
-CCU2 Toolchain
-==============
+## CCU2 Toolchain
+
 With the CCU2 toolchain it is possible to compile C/C++ programms and build
 installable CCU2 add-ons. 
 It is also possible to build CCU2 images with additional software, e.g. the
@@ -61,18 +58,18 @@ Email add-on, which can be installed as normal CCU2 updates. A tutorial on how
 to create a customized CCU2 Image will be published after the "HomeMatic User
 Treffen 2015" (April 18th/19th 2015).
 
-Support
-=======
+## Support
+
 The HM-OCCU-SDK is provided free of charge. If you want any commercial support
 pleace contact support@eq-3.de.
 
 
-OCCU based Community Projects
-=============================
+## OCCU based Community Projects
+
  * [Hmcon](https://github.com/hobbyquaker/hmcon) - Installer Script for rfd, hs485d and Homematic Manager. "The ReGa-less CCU" for use with Software like OpenHAB, ioBroker, ...
 
-Version History
-===============
+## Version History
+
 
 2015-04-02: Version 1.0.0
 - First initial version, no change history.
