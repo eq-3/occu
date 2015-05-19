@@ -49,6 +49,7 @@ Each CPU subfolder contains the following binary packages:
 Supported communication devices
 ===============================
 - HM-LGW-O-TW-W-EU LAN Gateway
+- HM-CFG-LAN (limited support, OTAU (Over The Air Updates) not possible)
 - HMW-LGW-O-DR-GS-EU Wired LAN Gateway
 - HM-Cfg-USB-2 (experimental, not official supported)
 
