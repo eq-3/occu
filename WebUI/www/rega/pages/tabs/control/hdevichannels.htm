@@ -62,9 +62,9 @@
   <td class="CLASS03501">
     <div id="btnFilterName" class="FilterBtn">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterNameSub" style="display:none">
-        <input id="ftName" type="text" size="15" class="CLASS03503" />
-        <div class='FilterSetButton CLASS03504' onclick="setSFilter(fltHD, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
+        <input id="ftName" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetNameBtn', 'ftCancelNameBtn')" type="text" size="15" class="CLASS03503" />
+        <div id="ftSetNameBtn" class='FilterSetButton CLASS03504' onclick="setSFilter(fltHD, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
+        <div id="ftCancelNameBtn" class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
     </div>
   </td>
   <td class="CLASS03501">
@@ -259,5 +259,10 @@
   new iseSubMenuControl("btnFilterRoom", "btnFilterRoomSub", "divRTD",  {d:2}, mouseOpts, false, true);
   new iseSubMenuControl("btnFilterName", "btnFilterNameSub", "divRTD",  {d:2}, mouseOpts, false, true);
   new iseSubMenuControl("btnFilterFunc", "btnFilterFuncSub", "divRTD",  {d:2}, mouseOpts, false, true);
+
+  jQuery("#btnFilterName").click(function(){
+    jQuery("#ftName").focus();
+  });
+
   translatePage("#tblHDeviChannel");
 </script>

@@ -1045,7 +1045,10 @@ jQuery.extend(true,langJSON, {
     "Turkey": "Turkey",
     "Ukraine" : "Ukraine",
     "USA" : "USA",
-    "dummy" : "dummy"
+    "dummy" : "dummy",
+
+    "optionLastValue" : "Last value",
+    "optionNone" : "None"
   }
 });
 

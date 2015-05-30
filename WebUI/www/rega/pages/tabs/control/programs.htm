@@ -59,9 +59,9 @@ setPath("<span onclick='WebUI.enter(ControlPage);'>"+translateKey('menuControlPa
           <td class="CLASS03706">
             <div id="btnFilterName" class="FilterBtn CLASS03707" >${thFilter}</div>
             <div class="FilterSubMenu" id="btnFilterNameSub" style="display:none">
-                <input id="ftName" type="text" size="15" class="CLASS03708" NAME="ftName"/>
-                <div class='FilterSetButton CLASS03709' onclick="setSFilter(fltHR, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
-                <div class='FilterSetButton' onclick="$('btnFilterNameSub').hide()">${filterClose}</div>
+                <input id="ftName" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetNameBtn', 'ftCancelNameBtn')" type="text" size="15" class="CLASS03708" NAME="ftName"/>
+                <div id="ftSetNameBtn" class='FilterSetButton CLASS03709' onclick="setSFilter(fltHR, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
+                <div id="ftCancelNameBtn" class='FilterSetButton' onclick="$('btnFilterNameSub').hide()">${filterClose}</div>
             </div>
           </td>
           <td class="CLASS03706"></td>
@@ -160,7 +160,11 @@ setPath("<span onclick='WebUI.enter(ControlPage);'>"+translateKey('menuControlPa
     }
   };
   new iseSubMenuControl("btnFilterName", "btnFilterNameSub", "ProgramListTable", {d: 16, r: 8}, mouseOpts, false, true);
-  
+
+  jQuery("#btnFilterName").click(function(){
+    jQuery("#ftName").focus();
+  });
+
   updateTable = function()
   {
     colorFilterBtns(fltHR);

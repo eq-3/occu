@@ -1102,6 +1102,15 @@ DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"] = new Object();
 DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1"] = [2, 0.192, 0.660, 0.524, 0.12];
 DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["2"] = [2, 0.192, 0.252, 0.524, 0.12];
 DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HMW-LC-Bl1-DR-2');
+DEV_DESCRIPTION["HMW-LC-Bl1-DR-2"] = "HMW-LC-Bl1-DR";
+DEV_PATHS["HMW-LC-Bl1-DR-2"] = new Object();
+DEV_PATHS["HMW-LC-Bl1-DR-2"]["50"] = "/config/img/devices/50/27_hmw-lc-bl1-dr_thumb.png";
+DEV_PATHS["HMW-LC-Bl1-DR-2"]["250"] = "/config/img/devices/250/27_hmw-lc-bl1-dr.png";
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"] = new Object();
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["1"] = [2, 0.452, 0.772, 0.044, 0.06];
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["2"] = [2, 0.5, 0.772, 0.048, 0.06];
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["3"] = [2, 0.452, 0.388, 0.096, 0.06];
 DEV_LIST.push('ZEL STG RM HS 4');
 DEV_DESCRIPTION["ZEL STG RM HS 4"] = "ZEL_STG_RM_HS_4";
 DEV_PATHS["ZEL STG RM HS 4"] = new Object();
@@ -1145,6 +1154,15 @@ DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["3"] = [5, '3_Arrow', '3_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["4"] = [5, '4_Arrow', '4_Key'];
+DEV_LIST.push('HM-LC-RGBW-WM');
+DEV_DESCRIPTION["HM-LC-RGBW-WM"] = "HM-LC-RGBW-WM";
+DEV_PATHS["HM-LC-RGBW-WM"] = new Object();
+DEV_PATHS["HM-LC-RGBW-WM"]["50"] = "/config/img/devices/50/111_hm-lc-rgbw-wm_thumb.png";
+DEV_PATHS["HM-LC-RGBW-WM"]["250"] = "/config/img/devices/250/111_hm-lc-rgbw-wm.png";
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["1"] = [1, 0.124, 0.292, 0.028];
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["2"] = [1, 0.124, 0.384, 0.028];
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["3"] = [1, 0.124, 0.472, 0.028];
 DEV_LIST.push('ZEL STG RM FEP 230V');
 DEV_DESCRIPTION["ZEL STG RM FEP 230V"] = "ZEL_STG_RM_FEP_230V";
 DEV_PATHS["ZEL STG RM FEP 230V"] = new Object();
@@ -1860,6 +1878,12 @@ DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["1"] = [2, 0.448, 0.764, 0.048, 0.064];
 DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["2"] = [2, 0.496, 0.764, 0.052, 0.068];
 DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["3"] = [2, 0.232, 0.384, 0.104, 0.068];
 DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["4"] = [2, 0.448, 0.384, 0.104, 0.068];
+DEV_LIST.push('HM-LC-Dim1T-FM-LF');
+DEV_DESCRIPTION["HM-LC-Dim1T-FM-LF"] = "HM-LC-Dim1T-FM";
+DEV_PATHS["HM-LC-Dim1T-FM-LF"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-FM-LF"]["50"] = "/config/img/devices/50/114_hm-lc-dim1t-fm-lf_thumb_3.png";
+DEV_PATHS["HM-LC-Dim1T-FM-LF"]["250"] = "/config/img/devices/250/114_hm-lc-dim1t-fm-lf_3.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-FM-LF"] = new Object();
 DEV_LIST.push('HMW-IO-12-FM');
 DEV_DESCRIPTION["HMW-IO-12-FM"] = "HMW-IO-12-FM";
 DEV_PATHS["HMW-IO-12-FM"] = new Object();
@@ -4758,8 +4782,9 @@ StringFilter = function(name, callback)
   {
     if (false === isSet()) { return true; }
     
-    var patternList = m_value.toLowerCase().split("|");
-    text            = text.toLowerCase();
+    //var patternList = m_value.toLowerCase().split("|");
+    var patternList = m_value.split("|");
+    //text            = text.toLowerCase();
     
     for (var i = 0, len = patternList.length; i < len; i++)
     {
@@ -7010,6 +7035,7 @@ Device = Class.create({
       this.typeName = deviceType.name;
       this.typeDescription = deviceType.description;
       this.isDeletable = deviceType.isDeletable();
+      this.isOperateGroupOnly = (data["operateGroupOnly"] == "true") ? true : false;
     
       this.channels = new Array();
       this.groups = new Array();
@@ -10816,7 +10842,7 @@ StatusDisplayDialog = Class.create({
 
 
   // PUBLIC
-  getDisplayConfigString: function() {
+  getConfigString: function() {
     return this.configString;
   },
 
@@ -10837,6 +10863,432 @@ StatusDisplayDialog = Class.create({
     this.close(YesNoDialog.RESULT_NO);
   }
   
+});
+
+YesNoDialog.RESULT_NO = 0;
+YesNoDialog.RESULT_YES = 1;
+/**
+ * rgbwcontrollerdialog.js
+ **/
+
+/**
+ * Dialogbox mit den Schaltflächen "Ja" und "Neine"
+ * Normalerweise wird als content Text übergeben,
+ * wenn contentType 'html' gesetzt ist, kann auch HTML übergeben werden.
+ * Die Höhe des Dialoges sollte sich dynamisch der Contentgröße anpassen.
+ **/
+RGBWControllerDialog = Class.create({
+
+  initialize: function (title, content, param, curValue, callback, contentType) {
+    var _this_ = this;
+
+    this.DEFAULTBRIGHTNESS = 200;
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer";
+    this.param = param;
+    this.curValues = curValue.split(",");
+    this.configString = "not initialized";
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    titleElement.appendChild(document.createTextNode(title));
+    titleElement.onmousedown = function (event) {
+      new Drag(this.parentNode, event);
+    };
+    dialog.appendChild(titleElement);
+
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className = "YesNoDialogFooter";
+
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('btnOk')));
+    yesButton.onclick = function () {
+      _this_.yes();
+    };
+    footer.appendChild(yesButton);
+
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('dialogBack')));
+    noButton.onclick = function () {
+      _this_.no();
+    };
+    footer.appendChild(noButton);
+
+    dialog.appendChild(footer);
+
+    this.m_layer.appendChild(dialog);
+
+    Layer.add(this.m_layer);
+
+    this.__activateSubDialog();
+
+    //AG sorgt dafür, daß die Dialoghöhe sich dynamisch dem Content anpasst.
+    jQuery(".YesNoDialog").css("height", jQuery(".YesNoDialogContentWrapper").height() + 78);
+    jQuery(".YesNoDialogFooter").css("top", jQuery(".YesNoDialogContentWrapper").height() + 26);
+
+    translatePage('#RGBWControllerColor, #RGBWControllerProgram');
+
+  },
+
+  // This creates the content of the dialog.
+  __activateSubDialog: function () {
+    switch (this.param) {
+      /*
+       case "BRIGHTNESS" :
+       jQuery("#RGBWControllerBrightness").show();
+       break;
+       */
+      case "COLOR" :
+        /*
+         Array curValues
+         0 Color val
+         1 Brightness
+         2 Ramptime
+         3 OnTime
+         */
+        var elmBrightness = jQuery("#colorRGBControllerBrightness"),
+          elmRampTime = jQuery("#colorRGBControllerRampTime"),
+          elmOnTime = jQuery("#colorRGBControllerOnTime"),
+          elmFreeRampTimeContainer = jQuery("#colorRGBEnterFreeRampTimeContainer"),
+          elmFreeOnTimeContainer = jQuery("#colorRGBEnterFreeOnTimeContainer");
+
+        elmBrightness.val(this.curValues[1] || this.DEFAULTBRIGHTNESS);
+
+        // RampTime
+        if (this.curValues[2]) {
+          elmRampTime.val(this.__setTimeValue("colorRGBControllerRampTime", this.curValues[2]));
+        } else {
+          elmRampTime.val(0.5);
+        }
+
+        // OnTime
+        if (this.curValues[3]) {
+          elmOnTime.val(this.__setTimeValue("colorRGBControllerOnTime", this.curValues[3]));
+        } else {
+          elmOnTime.val(118000);
+        }
+        elmRampTime.change(function (e) {
+          if (jQuery(this).val() == "99999999") {
+            elmFreeRampTimeContainer.show();
+          } else {
+            elmFreeRampTimeContainer.hide();
+          }
+        });
+
+        elmOnTime.change(function (e) {
+          if (jQuery(this).val() == "99999999") {
+            elmFreeOnTimeContainer.show();
+          } else {
+            elmFreeOnTimeContainer.hide();
+          }
+        });
+
+        jQuery("#RGBWControllerColor").show();
+        this.__activateColorPicker();
+        break;
+      case "AUTOMATIC":
+        /*
+         Array curValues
+         0 Program
+         1 Brightness
+         2 Ramptime
+         3 OnTime
+         4 Color Min
+         5 Color Max
+         */
+        var
+          self = this,
+          elmProgram = jQuery("#prgRGBControllerProgram"),
+          elmBrightness = jQuery("#prgRGBControllerBrightness"),
+          elmRampTime = jQuery("#prgRGBControllerRampTime"),
+          elmOnTime = jQuery("#prgRGBControllerOnTime"),
+          elmFreeRampTimeContainer = jQuery("#prgRGBEnterFreeRampTimeContainer"),
+          elmFreeOnTimeContainer = jQuery("#prgRGBEnterFreeOnTimeContainer"),
+          elmMinColorActive = jQuery("#prgRGBControllerMinColorActive"),
+          elmMaxColorActive = jQuery("#prgRGBControllerMaxColorActive");
+
+        elmProgram.val(this.curValues[0] || 0);
+        elmBrightness.val(this.curValues[1] || this.DEFAULTBRIGHTNESS);
+
+        // RampTime
+        if (this.curValues[2]) {
+          elmRampTime.val(this.__setTimeValue("prgRGBControllerRampTime", this.curValues[2]));
+        } else {
+          elmRampTime.val(0.5);
+        }
+
+        // OnTime
+        if (this.curValues[3]) {
+          elmOnTime.val(this.__setTimeValue("prgRGBControllerOnTime", this.curValues[3]));
+        } else {
+          elmOnTime.val(118000);
+        }
+
+        elmRampTime.change(function (e) {
+          if (jQuery(this).val() == "99999999") {
+            elmFreeRampTimeContainer.show();
+          } else {
+            elmFreeRampTimeContainer.hide();
+          }
+        });
+
+        elmOnTime.change(function (e) {
+          if (jQuery(this).val() == "99999999") {
+            elmFreeOnTimeContainer.show();
+          } else {
+            elmFreeOnTimeContainer.hide();
+          }
+        });
+
+        elmMinColorActive.change(function (e) {
+          if (jQuery(this).prop("checked")) {
+            if (self.curValues[4] == 255) {
+              jQuery("#prgRGBControllerMinColor").spectrum("set", "hsv(0,100%,100%)");
+            }
+            jQuery("#prgRGBControllerMinColor").spectrum("enable");
+          } else {
+            jQuery("#prgRGBControllerMinColor").spectrum("disable");
+          }
+        });
+
+        elmMaxColorActive.change(function (e) {
+          if (jQuery(this).prop("checked")) {
+            if (self.curValues[5] == 255) {
+              jQuery("#prgRGBControllerMaxColor").spectrum("set", "hsv(359,100%,100%)");
+            }
+            jQuery("#prgRGBControllerMaxColor").spectrum("enable");
+          } else {
+            jQuery("#prgRGBControllerMaxColor").spectrum("disable");
+          }
+        });
+
+        jQuery("#RGBWControllerProgram").show();
+        this.__activateColorPickerMinMax("min");
+        this.__activateColorPickerMinMax("max");
+        break;
+    }
+  },
+
+  // PUBLIC
+  getConfigString: function () {
+    return this.configString;
+  },
+
+
+  __setTimeValue: function (strTimeElem, value) {
+    var maxValue = 85825945;
+    var optionAvailable = false;
+    var fullSeconds = (value <= maxValue) ? value : maxValue;
+
+    jQuery("#" + strTimeElem + " > option").each(function () {
+      if (this.value == fullSeconds) {
+        optionAvailable = true;
+      }
+    });
+
+    if (!optionAvailable) {
+      var days = Math.floor(fullSeconds / 86400);
+      var hours = Math.floor(fullSeconds / 3600) % 24;
+      var minutes = Math.floor((fullSeconds - (hours * 3600)) / 60) % 60;
+      var seconds = fullSeconds - ((days * 86400) + (hours * 3600) + (minutes * 60));
+      var sHour = (hours < 10) ? "0" + hours : hours,
+        sMinutes = (minutes < 10) ? "0" + minutes : minutes,
+        sSeconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      if (days > 0) {
+        jQuery("#" + strTimeElem).append("<option value='" + fullSeconds + "'>" + days + " days - " + sHour + ":" + sMinutes + ":" + sSeconds + "</value>");
+      } else {
+        jQuery("#" + strTimeElem).append("<option value='" + fullSeconds + "'>" + sHour + ":" + sMinutes + ":" + sSeconds + "</value>");
+      }
+    }
+    return fullSeconds;
+  },
+
+
+  __getBrightness: function () {
+  },
+
+  __getColor: function () {
+    var color = jQuery("#colorRGBControllerColor").val(),
+      brightness = jQuery("#colorRGBControllerBrightness").val(),
+      rampTime = jQuery("#colorRGBControllerRampTime").val(),
+      onTime = jQuery("#colorRGBControllerOnTime").val();
+    return color + "," + brightness + "," + rampTime + "," + onTime;
+  },
+
+  __getProgram: function () {
+    var program = jQuery("#prgRGBControllerProgram").val(),
+      brightness = jQuery("#prgRGBControllerBrightness").val(),
+      rampTime = jQuery("#prgRGBControllerRampTime").val(),
+      onTime = jQuery("#prgRGBControllerOnTime").val(),
+      minColor = jQuery("#prgRGBControllerMinColor").val(),
+      maxColor = jQuery("#prgRGBControllerMaxColor").val(),
+      elmMinColorActive = jQuery("#prgRGBControllerMinColorActive"),
+      elmMaxColorActive = jQuery("#prgRGBControllerMaxColorActive");
+
+    if (!elmMinColorActive.prop("checked")) {
+      minColor = 255;
+    }
+    if (!elmMaxColorActive.prop("checked")) {
+      maxColor = 255;
+    }
+    return program + "," + brightness + "," + rampTime + "," + onTime + "," + minColor + "," + maxColor;
+  },
+
+  __setConfigString: function () {
+    switch (this.param) {
+      case "BRIGHTNESS" :
+        this.configString = this.__getBrightness();
+        break;
+      case "COLOR" :
+        var freeRampTimeHour = jQuery("#colorRGBEnterFreeRampTimeHour").val(),
+          freeRampTimeMin = jQuery("#colorRGBEnterFreeRampTimeMin").val(),
+          freeRampTimeSec = jQuery("#colorRGBEnterFreeRampTimeSec").val();
+
+        var freeOnTimeHour = jQuery("#colorRGBEnterFreeOnTimeHour").val(),
+          freeOnTimeMin = jQuery("#colorRGBEnterFreeOnTimeMin").val(),
+          freeOnTimeSec = jQuery("#colorRGBEnterFreeOnTimeSec").val();
+
+        if (jQuery("#colorRGBEnterFreeRampTimeContainer").css("display") != "none") {
+          var userValRampTime = parseInt(freeRampTimeHour * 3600) + parseInt(freeRampTimeMin * 60) + parseInt(freeRampTimeSec);
+          jQuery("#colorRGBControllerRampTime").append("<option value='" + userValRampTime + "'>" + userValRampTime + "</value>");
+          jQuery("#colorRGBControllerRampTime").val(userValRampTime);
+        }
+
+        if (jQuery("#colorRGBEnterFreeOnTimeContainer").css("display") != "none") {
+          var userValOnTime = parseInt(freeOnTimeHour * 3600) + parseInt(freeOnTimeMin * 60) + parseInt(freeOnTimeSec);
+          jQuery("#colorRGBControllerOnTime").append("<option value='" + userValOnTime + "'>" + userValOnTime + "</value>");
+          jQuery("#colorRGBControllerOnTime").val(userValOnTime);
+        }
+
+        this.configString = this.__getColor();
+        break;
+      case "AUTOMATIC":
+
+        var freeRampTimeHour = jQuery("#prgRGBEnterFreeRampTimeHour").val(),
+          freeRampTimeMin = jQuery("#prgRGBEnterFreeRampTimeMin").val(),
+          freeRampTimeSec = jQuery("#prgRGBEnterFreeRampTimeSec").val();
+
+        var freeOnTimeHour = jQuery("#prgRGBEnterFreeOnTimeHour").val(),
+          freeOnTimeMin = jQuery("#prgRGBEnterFreeOnTimeMin").val(),
+          freeOnTimeSec = jQuery("#prgRGBEnterFreeOnTimeSec").val();
+
+        if (jQuery("#prgRGBEnterFreeRampTimeContainer").css("display") != "none") {
+          var userValRampTime = parseInt(freeRampTimeHour * 3600) + parseInt(freeRampTimeMin * 60) + parseInt(freeRampTimeSec);
+          jQuery("#prgRGBControllerRampTime").append("<option value='" + userValRampTime + "'>" + userValRampTime + "</value>");
+          jQuery("#prgRGBControllerRampTime").val(userValRampTime);
+        }
+
+        if (jQuery("#prgRGBEnterFreeOnTimeContainer").css("display") != "none") {
+          var userValOnTime = parseInt(freeOnTimeHour * 3600) + parseInt(freeOnTimeMin * 60) + parseInt(freeOnTimeSec);
+          jQuery("#prgRGBControllerOnTime").append("<option value='" + userValOnTime + "'>" + userValOnTime + "</value>");
+          jQuery("#prgRGBControllerOnTime").val(userValOnTime);
+        }
+
+        this.configString = this.__getProgram();
+        break;
+    }
+  },
+
+  __activateColorPicker: function () {
+    var saturation = "100%";
+    if (this.curValues[0] > 199) {
+      this.curValues[0] = 200;
+      saturation = "0%";
+    }
+    var hsvVal = parseInt(this.curValues[0] / 199 * 360);
+    jQuery("#colorRGBControllerColor").val(this.curValues[0]);
+
+    jQuery("#colorRGBControllerColor").spectrum({
+      preferredFormat: "convert360To200",
+      showInput: false,
+      color: "hsv(" + hsvVal + "," + saturation + ",100%)",
+      showPalette: true,
+      palette: ["white"],
+      cancelText: translateKey("btnCancel"),
+      chooseText: translateKey("btnOk")
+    });
+  },
+
+  __activateColorPickerMinMax: function (mode) {
+    var strColorElm,
+      strColorActiveElm,
+      curValue,
+      pickerState;
+
+    if (mode == "min") {
+      strColorElm = "#prgRGBControllerMinColor";
+      strColorActiveElm = "#prgRGBControllerMinColorActive";
+      curValue = (this.curValues[4]) ? this.curValues[4] : 0;
+    } else {
+      strColorElm = "#prgRGBControllerMaxColor";
+      strColorActiveElm = "#prgRGBControllerMaxColorActive";
+      curValue = (this.curValues[5]) ? this.curValues[5] : 199;
+    }
+
+    if (curValue == 255) {
+      jQuery(strColorActiveElm).prop("checked", false);
+    } else {
+      jQuery(strColorActiveElm).prop("checked", true);
+    }
+
+    pickerState = (curValue == 255) ? true : false;
+
+    var saturation = "100%";
+    var hsvVal = parseInt(curValue / 199 * 360);
+    jQuery(strColorElm).val(curValue);
+
+    jQuery(strColorElm).spectrum({
+      preferredFormat: "convert360To200",
+      showInput: false,
+      color: "hsv(" + hsvVal + "," + saturation + ",100%)",
+      showPalette: true,
+      disabled: pickerState,
+      palette: [],
+      cancelText: translateKey("btnCancel"),
+      chooseText: translateKey("btnOk")
+    });
+  },
+
+  close: function (result) {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) {
+      this.m_callback(result);
+    }
+  },
+
+  yes: function () {
+    this.__setConfigString();
+    this.close(YesNoDialog.RESULT_YES);
+  },
+
+  no: function () {
+    this.close(YesNoDialog.RESULT_NO);
+  }
+
 });
 
 YesNoDialog.RESULT_NO = 0;
@@ -11715,7 +12167,7 @@ if (PLATFORM == "Central") {
   {
     return ((this.NameFilter.match(channel.name))                        &&
             (this.TypeNameFilter.match(channel.typeName))                &&
-            (this.DescriptionFilter.match(channel.typeDescription))      &&
+            (this.DescriptionFilter.match(translateKey(channel.typeDescription)))      &&
             (this.AddressFilter.match(channel.address))                  &&
             (this.CategoryFilter.matchString(channel.category))          &&
             (this.ModeFilter.matchStringArray(channel.mode)) &&
@@ -11741,7 +12193,7 @@ if (PLATFORM == "Central") {
   {
     return ((this.NameFilter.match(device.name))                         &&
             (this.TypeNameFilter.match(device.typeName))                 &&
-            (this.DescriptionFilter.match(device.typeDescription))       &&
+            (this.DescriptionFilter.match(translateKey(device.typeDescription)))       &&
             (this.AddressFilter.match(device.address))                   &&
             (this.InterfaceFilter.matchString(device.interfaceName))     &&
             (this.ModeFilter.matchStringArray(device.modes)) &&
@@ -20811,7 +21263,8 @@ iseFilter.prototype = {
       if (typeof obj['name'] != 'undefined')
       {
         if (obj['name'] === "")                      { return false; }
-        if (obj['name'].indexOf(this.filName) == -1) { return false; }
+        var transName = translateString(obj['name']);
+        if (transName.indexOf(this.filName) == -1) { return false; }
       }
     }
     if (this.filSn !== "")
@@ -20880,7 +21333,7 @@ iseFilter.prototype = {
       if (this.varTypeFilterSet()) {
         var bRet = false;
         if (this.bTypeLogic) {
-          if (obj['type'] == "bool") { bRet = true; }
+          if ((obj['type'] == "bool") || (obj['type'] == "boolean") ) { bRet = true; }
         }
         if (this.bTypeValueList) {
           if (obj['type'] == "enum")
@@ -21025,6 +21478,10 @@ iseFilter.prototype = {
     this.bPDA = false;
     this.bCentral = false;
     this.filUsers  = "";
+    this.bTypeLogic = false;
+    this.bTypeValueList = false;
+    this.bTypeNumber = false;
+    this.bTypeAlarm = false;
     conInfo("Alle Filter wurden zurückgesetzt.");
   }
 };
@@ -23558,7 +24015,7 @@ shutterControl = Class.create();
 
 shutterControl.prototype = {
 
-  m_color: WebUI.getColor("active"),
+  m_color: WebUI.getColor("shutterOpeningDegree"),
   
   /*
    * id = id of div containing shutter-image

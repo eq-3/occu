@@ -27,8 +27,16 @@ set deviceDescrScript {
     Write(" ADDRESS {" # device.Address() # "}"); 
     Write(" INTERFACE {"# interface.Name() # "}"); 
 !   Write(" DEVICE_TYPE {"# device.HssType() # "}"); 
-    Write(" DEVICE_TYPE {"# device.Label() # "}"); 
-  
+    Write(" DEVICE_TYPE {"# device.Label() # "}");
+
+    if (device.MetaData("operateGroupOnly") == null) {
+      device.AddMetaData("operateGroupOnly", false);
+    }
+
+    Write(" GROUP_ONLY {"# device.MetaData("operateGroupOnly") # "}");
+
+
+
     Write(" CHANNELS {"); 
     var first = true;
     string channelId;
@@ -128,8 +136,9 @@ set deviceIdsScript {
   }
 }
 
-# exec echo "Start devicelistdetail: " > /tmp/devicelistdetail.log
 
+
+# exec echo "Start devicelistdetail: " > /tmp/devicelistdetail.log
 
 set deviceIds [hmscript $deviceIdsScript args]
 
@@ -164,6 +173,8 @@ foreach id $deviceIds {
 	append result ",\"address\":[json_toString $device(ADDRESS)]"
 	append result ",\"interface\":[json_toString $device(INTERFACE)]"
 	append result ",\"type\":[json_toString $device(DEVICE_TYPE)]"
+	append result ",\"operateGroupOnly\":[json_toString $device(GROUP_ONLY)]"
+
 #
 # channesl
 #

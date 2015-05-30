@@ -55,4 +55,4 @@ self.SWITCH_subset_descr = function(id, subset)
 	}
 
 	$(id).firstChild.data = unescape(replacement[$(subset).selectedIndex]);
-}
+};

@@ -77,15 +77,14 @@ proc jsonrpc_response {result} {
   
   puts "CONTENT-TYPE: application/json; charset=utf-8"
   puts ""
-  
-  if { $JSONRPC(ID_USED) } then {
-    puts -nonewline "\"id\": $JSONRPC(ID),"          
-  }
 
-  puts -nonewline "\{"      
+
+  puts -nonewline "\{"
+  if { $JSONRPC(ID_USED) } then {
+    puts -nonewline "\"id\": $JSONRPC(ID),"
+  }
   puts -nonewline "\"version\": \"1.1\","    
   puts -nonewline "\"result\": $result," 
   puts -nonewline "\"error\": null"   
   puts -nonewline "\}"
-  
 }

@@ -92,18 +92,18 @@ Bitte w&auml;hlen Sie "Neu", um einen Favoriten anzulegen.</td>
     <td class="CLASS06405">
       <div id="btnFilterName" class="FilterBtn">${thFilter}</div>
       <div class="FilterSubMenu" id="btnFilterNameSub" style="display:none">
-          <input id="ftName" type="text" size="15" class="CLASS06409" />
-          <div class='FilterSetButton CLASS06410' onclick="setSFilter(fltFO, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
-          <div class='FilterSetButton' onclick='$("btnFilterNameSub").hide();'>${filterClose}</div>
+          <input id="ftName" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetNameBtn', 'ftCancelNameBtn')" type="text" size="15" class="CLASS06409" />
+          <div id="ftSetNameBtn" class='FilterSetButton CLASS06410' onclick="setSFilter(fltFO, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
+          <div id="ftCancelNameBtn" class='FilterSetButton' onclick='$("btnFilterNameSub").hide();'>${filterClose}</div>
       </div>
     </td>
     <td class="CLASS06408">&nbsp;</td>
     <td class="CLASS06405">
       <div id="btnFilterUnit" class="FilterBtn">${thFilter}</div>
       <div class="FilterSubMenu" id="btnFilterUnitSub" style="display:none">
-          <input id="ftUnit" type="text" size="15" class="CLASS06409" />
-          <div class="FilterSetButton CLASS06410" onclick="setSFilter(fltFO, 'ftUnit', FIL_UNIT);updateTable();$('btnFilterUnitSub').hide();" >${filterSet}</div>
-          <div class='FilterSetButton' onclick='$("btnFilterUnitSub").hide();'>${filterClose}</div>
+          <input id="ftUnit" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetUnitBtn', 'ftCancelUnitBtn')" type="text" size="15" class="CLASS06409" />
+          <div id="ftSetUnitBtn" class="FilterSetButton CLASS06410" onclick="setSFilter(fltFO, 'ftUnit', FIL_UNIT);updateTable();$('btnFilterUnitSub').hide();" >${filterSet}</div>
+          <div id="ftCancelUnitBtn" class='FilterSetButton' onclick='$("btnFilterUnitSub").hide();'>${filterClose}</div>
       </div>
     </td>
     <td class="CLASS06405">
@@ -272,7 +272,7 @@ Bitte w&auml;hlen Sie "Neu", um einen Favoriten anzulegen.</td>
           integer iFavColumnCount = oFav.FavColumnCount();
           if( iFavColumnCount == 0 )
           {
-            Write("tmp['unit'] = 'auto.';");
+            Write("tmp['unit'] = 'Auto.';");
           }
           else
           {
@@ -337,7 +337,15 @@ Bitte w&auml;hlen Sie "Neu", um einen Favoriten anzulegen.</td>
   new iseSubMenuControl("btnFilterNamePos", "btnFilterNamePosSub", "tblFavs",  {d:22, r:15}, mouseOpts, false, true);
 //  new iseSubMenuControl("btnFilterEndDev", "btnFilterEndDevSub", "tblFavs",  {d:22, r:15}, mouseOpts, false, true);
   new iseSubMenuControl("btnFilterUsers", "btnFilterUsersSub", "tblFavs",  {d:22, r:15}, mouseOpts, false, true);
-  
+
+  jQuery("#btnFilterName").click(function(){
+    jQuery("#ftName").focus();
+  });
+
+  jQuery("#btnFilterUnit").click(function(){
+    jQuery("#ftUnit").focus();
+  });
+
   var s = "";
 
   s += "<table cellspacing='8'>";

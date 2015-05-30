@@ -161,6 +161,11 @@
                         self.groupList.remove(group);
                         var devicesToConfigureFromGroup = JSON.parse('{"devices" : '+response.content+'}');
                         ko.utils.arrayForEach(devicesToConfigureFromGroup.devices, function(item){
+                            homematic("Device.getReGaIDByAddress", {address:item.id}, function(result) {
+                               homematic("Device.setOperateGroupOnly", {id:result, mode: false}, function() {
+                                 DeviceList.devices[result].isOperateGroupOnly = false;
+                              });
+                            })
                             self.addDeviceToList(item.id, item.name, item.type);
                         });
                         translatePage(".toTranslate");

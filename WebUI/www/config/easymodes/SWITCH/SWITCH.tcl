@@ -170,9 +170,21 @@ set PROFILE_4(UI_DESCRIPTION)	"Mit einem kurzen oder langen Tastendruck wird der
 set PROFILE_4(UI_TEMPLATE)		$PROFILE_4(UI_DESCRIPTION)
 set PROFILE_4(UI_HINT)	4
 
+proc isGarageDoorActor {devType} {
+  set validDevices {"HM-LC-Sw1-Pl-CT-R1"}
+  set result "false"
+  foreach val $validDevices {
+    if {$val == $devType} {
+      set result "true"
+      break
+    }
+  }
+  return $result
+}
+
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-	global dev_descr_sender
+	global dev_descr dev_descr_sender
 
 	upvar PROFILES_MAP  PROFILES_MAP
 	upvar HTML_PARAMS   HTML_PARAMS
@@ -182,7 +194,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	set device $dev_descr_sender(TYPE)
 	set ch $dev_descr_sender(INDEX)
-	
+
+	set devType $dev_descr(TYPE)
+
 	foreach pro [array names PROFILES_MAP] {
 		upvar PROFILE_$pro PROFILE_$pro
 	}
@@ -191,6 +205,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #	die Texte der Platzhalter einlesen
 	puts "<script type=\"text/javascript\">getLangInfo('$device', '$device');</script>"
+
 
 
 ## ----------- hier beginnt die interne Tastenkonfiguration -----------
@@ -217,6 +232,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
+	if {[isGarageDoorActor $devType] == "true"} {garageDoorExtension}
 	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -261,6 +277,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
+	if {[isGarageDoorActor $devType] == "true"} {garageDoorExtension}
 	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
