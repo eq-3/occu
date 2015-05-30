@@ -4,6 +4,7 @@
   string hm_oucmpcb = "HM-OU-CM-PCB";
   string hm_partyDialog = "HM-CC-RT-DN HM-TC-IT-WM-W-EU HM-CC-VG-1";
   string hm_statusDisplay = "HM-Dis-WM55";
+  string hm_rgbw_controller = "HM-LC-RGBW-WM";
 
   string excludePARTY = "PARTY_";
   string includePARTY = "PARTY_MODE_SUBMIT";
@@ -338,19 +339,36 @@
             integer x3 = chLabel.Find(hm_oucmpcb);
             integer x4 = hm_partyDialog.Find(chLabel);
             integer x5 = hm_statusDisplay.Find(chLabel);
+            integer x6 = chLabel.Find(hm_rgbw_controller);
 
-            Write( ' <i>${ruleDescrSetValueA}</i> ' );
-            if (x5 == -1) {
-              Write( '<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
-            }  else {
-              if(iV == "0") {
-                ! This is the correct string for 'all channels not used'
-                iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x0A,0x03";
+            if ((x5 != -1) || (x6 != -1)){
+              if (x5 != -1) {
+                if(iV == "0") {
+                  ! This is the correct string for 'all channels not used'
+                  iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x0A,0x03";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
-              Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              if (x6 != -1) {
+
+                if (iV == "0") {
+                  iV = "0,200,0.5,0,0,199"; ! default
+
+                  if (oCH.HSSID() == "COLOR") {
+                    iV = "0,200,0.5,0";
+                  }
+
+                  if (oCH.HSSID() == "AUTOMATIC") {
+                    iV = "0,200,0.5,0,0,199";
+                  }
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetRGBWController('#oSD.ID()#',\''#oCH.HSSID()#'\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+            } else {
+              Write( '<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
             }
 
-            if((x1 == -1) && (x2 == -1) && (x3 == -1) && (x4 == -1) && (x5 == -1)) {
+            if((x1 == -1) && (x2 == -1) && (x3 == -1) && (x4 == -1) && (x5 == -1) && (x6 == -1)) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
               if(x1 != -1) {      
@@ -364,6 +382,9 @@
               }
               if (x5 != -1) {
                 Write( '<span id="setStatusDisplay'#oSD.ID()#'" class="CLASS02401" onclick="SetStatusDisplay('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+              }
+               if (x6 != -1) {
+                Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="SetRGBWController('#oSD.ID()#',\''#oCH.HSSID()#'\');"><img src="/ise/img/notepad.png" /></span>' );
               }
             }
           }

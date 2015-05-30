@@ -1,0 +1,188 @@
+<div id="RGBWControllerBrightness" class="hidden" style="margin: 0 auto;">
+  This dialog is obsolete
+</div>
+
+<div id="RGBWControllerColor" class="hidden" style="margin: 0 auto;">
+  <table>
+    <tbody>
+      <tr>
+        <td>${lblColorValue}:</td>
+        <td><input id="colorRGBControllerColor" type="text" class="basic"></td>
+       </tr>
+      <tr>
+        <td>${lblBrightnessLevel}:</td>
+        <td>
+          <select id="colorRGBControllerBrightness" type="text">
+            <option value="20">10%</option>
+            <option value="40">20%</option>
+            <option value="60">30%</option>
+            <option value="80">40%</option>
+            <option value="100">50%</option>
+            <option value="120">60%</option>
+            <option value="140">70%</option>
+            <option value="160">80%</option>
+            <option value="180">90%</option>
+            <option value="200">100%</option>
+            <option value="255">${optionLastValue}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>${lblRampTime}:</td>
+        <td>
+          <select id="colorRGBControllerRampTime" type="text">
+            <option value="0">${optionNone}</option>
+            <option value="0.2">0.2s</option>
+            <option value="0.5">0.5s</option>
+            <option value="1">1s</option>
+            <option value="2">2s</option>
+            <option value="5">5s</option>
+            <option value="10">10s</option>
+            <option value="20">20s</option>
+            <option value="30">30s</option>
+            <option value="99999999">${stringTableEnterValue}</option>
+          </select>
+        </td>
+        <td>
+          <div id="colorRGBEnterFreeRampTimeContainer" class="hidden">
+            <input id="colorRGBEnterFreeRampTimeHour" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+            <input id="colorRGBEnterFreeRampTimeMin" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+            <input id="colorRGBEnterFreeRampTimeSec" type="text" value="00" size="2" style="text-align: center">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>${lblOnTime}:</td>
+        <td>
+          <select id="colorRGBControllerOnTime" type="text">
+            <option value="0">${optionNone}</option>
+            <option value="600">10min</option>
+            <option value="1200">20min</option>
+            <option value="1800">30min</option>
+            <option value="3600">1h</option>
+            <option value="7200">2h</option>
+            <option value="10800">3h</option>
+            <option value="18000">5h</option>
+            <option value="28800">8h</option>
+            <option value="43200">12h</option>
+            <option value="86400">24h</option>
+            <option value="99999999">${stringTableEnterValue}</option>
+          </select>
+        </td>
+        <td>
+          <div id="colorRGBEnterFreeOnTimeContainer" class="hidden">
+            <input id="colorRGBEnterFreeOnTimeHour" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+            <input id="colorRGBEnterFreeOnTimeMin" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+            <input id="colorRGBEnterFreeOnTimeSec" type="text" value="00" size="2" style="text-align: center">
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="RGBWControllerProgram" class="hidden" style="margin: 0 auto;">
+  <table>
+    <tbody>
+    <tr>
+      <td>${lblProgram}:</td>
+      <td>
+        <select id="prgRGBControllerProgram">
+          <option value="0">Prg 0</option>
+          <option value="1">Prg 1</option>
+          <option value="2">Prg 2</option>
+          <option value="3">Prg 3</option>
+          <option value="4">Prg 4</option>
+          <option value="5">Prg 5</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>${lblBrightnessLevel}:</td>
+      <td>
+        <select id="prgRGBControllerBrightness" type="text">
+          <option value="20">10%</option>
+          <option value="40">20%</option>
+          <option value="60">30%</option>
+          <option value="80">40%</option>
+          <option value="100">50%</option>
+          <option value="120">60%</option>
+          <option value="140">70%</option>
+          <option value="160">80%</option>
+          <option value="180">90%</option>
+          <option value="200">100%</option>
+          <option value="255">${optionLastValue}</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>${lblRampTime}:</td>
+      <td>
+        <select id="prgRGBControllerRampTime" type="text">
+          <option value="0">${optionNone}</option>
+          <option value="0.2">0.2s</option>
+          <option value="0.5">0.5s</option>
+          <option value="1">1s</option>
+          <option value="2">2s</option>
+          <option value="5">5s</option>
+          <option value="10">10s</option>
+          <option value="20">20s</option>
+          <option value="30">30s</option>
+          <option value="99999999">${stringTableEnterValue}</option>
+        </select>
+      </td>
+      <td>
+        <div id="prgRGBEnterFreeRampTimeContainer" class="hidden">
+          <input id="prgRGBEnterFreeRampTimeHour" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+          <input id="prgRGBEnterFreeRampTimeMin" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+          <input id="prgRGBEnterFreeRampTimeSec" type="text" value="00" size="2" style="text-align: center">
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>${lblOnTime}:</td>
+      <td>
+        <select id="prgRGBControllerOnTime" type="text">
+          <option value="0">${optionNone}</option>
+          <option value="600">10min</option>
+          <option value="1200">20min</option>
+          <option value="1800">30min</option>
+          <option value="3600">1h</option>
+          <option value="7200">2h</option>
+          <option value="10800">3h</option>
+          <option value="18000">5h</option>
+          <option value="28800">8h</option>
+          <option value="43200">12h</option>
+          <option value="86400">24h</option>
+          <option value="99999999">${stringTableEnterValue}</option>
+        </select>
+      </td>
+      <td>
+        <div id="prgRGBEnterFreeOnTimeContainer" class="hidden">
+          <input id="prgRGBEnterFreeOnTimeHour" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+          <input id="prgRGBEnterFreeOnTimeMin" type="text" value="00" size="2" style="text-align: center">&nbsp;:
+          <input id="prgRGBEnterFreeOnTimeSec" type="text" value="00" size="2" style="text-align: center">
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td>${lblColorValueMin}:</td>
+      <td><input id="prgRGBControllerMinColor" type="text" class="basic"></td>
+      <td><input id="prgRGBControllerMinColorActive" type="checkbox"><label for="prgRGBControllerMinColorActive">${lblActiv}</label></td>
+      <td></td>
+    </tr>
+
+    <tr>
+      <td>${lblcolorValueMax}:</td>
+      <td><input id="prgRGBControllerMaxColor" type="text" class="basic"></td>
+      <td><input id="prgRGBControllerMaxColorActive" type="checkbox"><label for="prgRGBControllerMaxColorActive">${lblActiv}</label></td>
+      <td></td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

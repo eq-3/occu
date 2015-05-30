@@ -188,6 +188,11 @@ proc recycle_easymodes {pPROFILES_MAP pHTML_PARAMS special_input_id cur_profile 
   
   set u_subset ""
 
+  if {! [session_is_expert]} {
+   unset PROFILES_MAP(0)
+  }
+
+
   foreach pnr [array names PROFILES_MAP] {
 
   if {[regexp {^([0-9]+)\.[0-9]+$} $pnr dummy base_pnr]} then {
@@ -649,7 +654,9 @@ proc put_channel_parameters {} {
       set ch_paramid [getExistingParamId $paramids]
       set ch_PARAMIDS $paramids
       global ch_ps ch_ps_descr
+      array_clear ch_ps
       array set ch_ps [xmlrpc $iface_url($iface) getParamset [list string $ch_address] [list string MASTER]]
+      array_clear ch_ps_descr
       array set ch_ps_descr [xmlrpc $iface_url($iface) getParamsetDescription [list string $ch_address] [list string MASTER]]
     }
     #=====

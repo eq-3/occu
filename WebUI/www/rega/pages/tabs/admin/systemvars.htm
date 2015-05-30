@@ -75,9 +75,9 @@
   <td class="CLASS05202">
     <div id="btnFilterName" class="FilterBtn">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterNameSub" style="display:none">
-        <input id="ftName" type="text" size="15" class="CLASS05203" />
-        <div class='FilterSetButton CLASS05204' onclick="setSFilter(fltSYV, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
+        <input id="ftName" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetNameBtn', 'ftCancelNameBtn')" type="text" size="15" class="CLASS05203" />
+        <div id="ftSetNameBtn" class='FilterSetButton CLASS05204' onclick="setSFilter(fltSYV, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
+        <div id="ftCancelNameBtn" class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
     </div>
   </td>
   <td class="CLASS05205"></td>
@@ -110,17 +110,17 @@
   <td class="CLASS05202">
     <div id="btnFilterUnit" class="FilterBtn">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterUnitSub" style="display:none">
-        <input id="ftUnit" type="text" size="15" class="CLASS05203" />
-        <div class="FilterSetButton CLASS05204" onclick="setSFilter(fltSYV, 'ftUnit', FIL_UNIT);updateTable();$('btnFilterUnitSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterUnitSub').hide();">${filterClose}</div>
+        <input id="ftUnit" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetUnitBtn', 'ftCancelUnitBtn')" type="text" size="15" class="CLASS05203" />
+        <div id="ftSetUnitBtn" class="FilterSetButton CLASS05204" onclick="setSFilter(fltSYV, 'ftUnit', FIL_UNIT);updateTable();$('btnFilterUnitSub').hide();" >${filterSet}</div>
+        <div id="ftCancelUnitBtn" class='FilterSetButton' onclick="$('btnFilterUnitSub').hide();">${filterClose}</div>
     </div>
   </td>
   <td class="CLASS05202">
     <div id="btnFilterChn" class="FilterBtn">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterChnSub" style="display:none">
-        <input id="ftChn" type="text" size="15" class="CLASS05203" />
-        <div class="FilterSetButton CLASS05204" onclick="setSFilter(fltSYV, 'ftChn', FIL_CHN);updateTable();$('btnFilterChnSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterChnSub').hide();">${filterClose}</div>
+        <input id="ftChn" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetChnBtn', 'ftCancelChnBtn')" type="text" size="15" class="CLASS05203" />
+        <div id="ftSetChnBtn" class="FilterSetButton CLASS05204" onclick="setSFilter(fltSYV, 'ftChn', FIL_CHN);updateTable();$('btnFilterChnSub').hide();" >${filterSet}</div>
+        <div id="ftCancelChnBtn" class='FilterSetButton' onclick="$('btnFilterChnSub').hide();">${filterClose}</div>
     </div>
   </td>
   <td class="CLASS05202">
@@ -312,7 +312,19 @@
     s += "<td align='center' valign='middle'><div class='FooterButton' onclick='newSysVar()'>${footerBtnNew}</div></td>";
   s += "</tr>";
   s += "</table>";
-  
+
+  jQuery("#btnFilterName").click(function(){
+    jQuery("#ftName").focus();
+  });
+
+  jQuery("#btnFilterUnit").click(function(){
+    jQuery("#ftUnit").focus();
+  });
+
+  jQuery("#btnFilterChn").click(function(){
+    jQuery("#ftChn").focus();
+  });
+
   setFooter(s);
   
   newSysVar = function() {

@@ -183,3 +183,9 @@ proc option {type} {
     }
 	}
 }
+
+proc garageDoorExtension {} {
+  upvar options options
+	upvar #0 unit_sec s
+  set options(0.4) "0.4$s"
+}

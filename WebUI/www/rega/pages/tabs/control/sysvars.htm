@@ -63,9 +63,9 @@
    <td class="CLASS03304">
       <div id="btnFilterName" class="FilterBtn">${thFilter}</div>
       <div class="FilterSubMenu" id="btnFilterNameSub" style="display:none">
-          <input id="ftName" type="text" size="15" class="CLASS03307" NAME="ftName"/>
-          <div class='FilterSetButton CLASS03308' onclick="setSFilter(fltVR, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
-          <div class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
+          <input id="ftName" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetNameBtn', 'ftCancelNameBtn')" type="text" size="15" class="CLASS03307" NAME="ftName"/>
+          <div id="ftSetNameBtn" class='FilterSetButton CLASS03308' onclick="setSFilter(fltVR, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
+          <div id="ftCancelNameBtn" class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
       </div>
   </td>
   <td class="CLASS03304"></td>
@@ -129,8 +129,13 @@ var s = "";
       selectFilters(fltVR, divToShow);
     }
   };
+
   new iseSubMenuControl("btnFilterName", "btnFilterNameSub", "sysvarsListTable", {d:28, r:18}, mouseOpts, false, true);
-  
+
+  jQuery("#btnFilterName").click(function(){
+    jQuery("#ftName").focus();
+  });
+
   s += "<table cellspacing='8'>";
   s += "<tr>";
     s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack()'>"+translateKey('footerBtnPageBack')+"</div></td>";

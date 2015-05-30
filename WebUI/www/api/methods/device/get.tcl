@@ -32,7 +32,8 @@ set script {
     Write(" ADDRESS {" # device.Address() # "}"); 
     Write(" INTERFACE {"# interface.Name() # "}"); 
 !   Write(" DEVICE_TYPE {"# device.HssType() # "}"); 
-    Write(" DEVICE_TYPE {"# device.Label() # "}"); 
+    Write(" DEVICE_TYPE {"# device.Label() # "}");
+    Write(" GROUP_ONLY {"# device.MetaData("operateGroupOnly") # "}");
   
     Write(" CHANNELS {"); 
     var first = true;
@@ -132,6 +133,7 @@ append result ",\"name\":[json_toString $device(NAME)]"
 append result ",\"address\":[json_toString $device(ADDRESS)]"
 append result ",\"interface\":[json_toString $device(INTERFACE)]"
 append result ",\"type\":[json_toString $device(DEVICE_TYPE)]"
+append result ",\"operateGroupOnly\":[json_toString $device(GROUP_ONLY)]"
 
 set first 1
 append result ",\"channels\":\["

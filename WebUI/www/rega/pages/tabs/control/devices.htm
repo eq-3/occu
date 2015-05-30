@@ -60,7 +60,7 @@
                           }
                         }
                       }
-                      if( devs.Visible() && devs.ReadyConfig() && devs.HssType() )
+                      if( devs.Visible() && devs.ReadyConfig() && devs.HssType() && (! devs.MetaData("operateGroupOnly") == "true" ))
                       {
                         if( sFirstId == "" )
                         {

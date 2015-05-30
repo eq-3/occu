@@ -962,7 +962,10 @@ jQuery.extend(true,langJSON, {
     "Turkey": "T%FCrkei",
     "Ukraine" : "Ukraine",
     "USA" : "USA",
-    "dummy" : "dummy"
+    "dummy" : "dummy",
+
+    "optionLastValue" : "Letzter Wert",
+    "optionNone" : "Keine"
   }
 });
 

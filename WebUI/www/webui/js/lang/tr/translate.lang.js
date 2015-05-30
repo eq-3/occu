@@ -964,7 +964,9 @@ jQuery.extend(true,langJSON, {
     "Ukraine" : "Ukrayna",
     "USA" : "ABD",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContent" : "",
-    "dialogNewDevicesErrorSecKeyLbl1b " : ""
+    "dialogNewDevicesErrorSecKeyLbl1b " : "",
+    "optionLastValue" : "Son deger",
+    "optionNone" : "yok"
   }
 });
 

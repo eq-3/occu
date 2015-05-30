@@ -38,6 +38,11 @@
             <input style="margin: 5px; display: block" type="button" name="btnVirtualDeviceConfiguration" value="btnVirtualDeviceConfiguration" class="StdButton CLASS04907" data-bind="click: configureVirtualDevice"/>
         </td>
     </tr>
+
+    <tr>
+      <td class="tBodyCell">${"$"}{lblAllowOnlyGroupOperation}</td>
+      <td class="tBodyCell" colspan="2"><input id="allowOnlyGroupOperation"  data-bind="checked: isSingleOperationForbidden" type="checkbox" ></td>
+    </tr>
 	
   </tbody>
  </table>
@@ -187,7 +192,6 @@
         self.regaId = "${addedRegaId}"
 
         self.virtualDeviceSerialNumber = ko.observable("");
-
         if(self.isNew())
         {
             self.groupName = ko.observable(translateKey('newGroupInputField'));
@@ -199,6 +203,7 @@
             self.virtualDeviceSerialNumber(temp);
         }
 
+        self.isSingleOperationForbidden = ${isSingleOperationForbidden}
         self.isSaving = ko.observable(false);
 
         self.possibleGroupTypes = new Array();
@@ -424,7 +429,7 @@
         data.groupId = viewModel.groupId;
         data.groupName = escape(viewModel.groupName());
         data.groupTypeId = viewModel.groupType().id;
-
+        data.forbidSingleOperation = viewModel.isSingleOperationForbidden;
         data.assignedDevicesIds = new Array();
         data.isNewGroup = viewModel.isNew();
 
@@ -447,12 +452,14 @@
                         iseDevices.setReadyConfig(viewModel.regaId);
                     }
                     ko.utils.arrayForEach(viewModel.assignedDevices(), function(item) {
+                        SetOperateGroupOnly(item, jQuery("#allowOnlyGroupOperation").prop("checked"));
                         if(item.getConfigPending())
                         {
                             viewModel.devicesInConfigPending.push(item);
                         }
                     });
                     ko.utils.arrayForEach(viewModel.assignableDevices(), function(item) {
+                        SetOperateGroupOnly(item, false)
                         if(item.getConfigPending())
                         {
                             viewModel.devicesInConfigPending.push(item);
@@ -479,6 +486,13 @@
 
         new Ajax.Request(url,opt);
     }
+
+    SetOperateGroupOnly = function(item, mode) {
+      homematic("Device.setOperateGroupOnly", {id:item.device.id, mode: mode}, function() {
+        DeviceList.devices[item.device.id].isOperateGroupOnly = mode;
+      });
+    }
+
 
   var s = "";
   s += "<table cellspacing='8'>";

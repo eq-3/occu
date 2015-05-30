@@ -309,6 +309,7 @@ function ::UpdateUI()
     {
       if( oSV.IsTypeOf( OT_ALARMDP ) )
       {
+        !if( oSV.AlState() == asOncoming )
         if( (oSV.AlState() == asOncoming) && (oSV.State() == true) )
         {
           iAlCount = iAlCount + 1;
