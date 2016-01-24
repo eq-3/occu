@@ -1,0 +1,17 @@
+"inc_Program" : "Increase program number",
+"dec_Program" : "Decrease program number",
+"set_Program" : "Set program",
+
+"lblColorValueMin" : "Color value start",
+"lblColorValueMax" : "Color value end",
+
+"lblShortKeyPress" : "Short keypress",
+"lblLongKeyPress" : "Long keypress",
+
+"optionPrg0" : "Off",
+"optionPrg1" : "Slow cycle",
+"optionPrg2" : "Normal cycle",
+"optionPrg3" : "Fast cycle",
+"optionPrg4" : "Bonfire",
+"optionPrg5" : "Waterfall",
+"optionPrg6" : "TV-Simulation",

@@ -629,6 +629,22 @@ jQuery.extend(true,langJSON, {
     "stringTableDevRptCntMax" : "max. repeater level",
 
     "stringTableButtonResponseWithoutChannelChooser": "Immediate reaction to keypress<br/>without choosing a channel",
-    "stringTableWakeupDefaultChannel" : "Initial channel when activating"
+    "stringTableWakeupDefaultChannel" : "Initial channel when activating",
+
+    "stringTablePowerOn" : "switch on",
+
+    "stringTableRGBWColorChangeSpeed" : "Color change speed",
+    "stringTableRGBWWhiteAdjustmentBlue" : "White balance blue",
+    "stringTableRGBWWhiteAdjustmentGreen" : "White balance green",
+    "stringTableRGBWWhiteAdjustmentRed" : "White balance red",
+    "stringTableRGBWColorValue" : "Color value",
+    "stringTableRGBWProgram" : "Program number",
+    "stringTableRGBWAutomaticTitle" : "RGBW controller program",
+    "stringTableRGBWColorTitle" : "RGBW controller color",
+
+    "ATTENTION" : "NOT YET TRANSLATED",
+
+    "stringTableSwitchTransmitTwoPointHysteresis" : "Hysteresis"
+
   }
 });

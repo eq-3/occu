@@ -268,6 +268,15 @@ proc setInternalKeysOnOff {status address iface defaultOn isVisible} {
   }
 }
 
+proc treatSpecialValue {devType param} {
+  if {[string first "HM-LC-Dim1T-FM-LF" $devType] != - 1} {
+    if {$param == "POWERUP_ON"} {
+      set param "\${stringTablePowerOn}"
+    }
+  }
+  return $param
+}
+
 proc check_RF_links {device iface address channel ch_type name} {
   if {$device == "HM-MOD-EM-8"} {
     puts "<script type=\"text/javascript\">arModEM8\[parseInt($channel)\] = false;ShowHintIfProgramExists('$name', '$channel')</script>"
@@ -448,7 +457,10 @@ proc put_orig_channel_parameter {address ch} {
         
           set loop 0  
           foreach val $param_descr(VALUE_LIST) {
-            if {$loop == $value} { 
+
+            set val [treatSpecialValue $dev_descr_sender(PARENT_TYPE) $val]
+
+            if {$loop == $value} {
               append s1 "<option selected class=\"stringtable_value\" value=\"$loop\">$val</option>"
             } else {
               append s1 "<option class=\"stringtable_value\" value=\"$loop\">$val</option>"

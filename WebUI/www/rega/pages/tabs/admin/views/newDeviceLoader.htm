@@ -379,7 +379,7 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
         }
                 
         td = Builder.node('td', {className: 'WhiteBkg border1px'}, '');
-        
+
         writeTestField(td, GroupsArray[i][x]['id'].toString(),GroupsArray[i][x]['testtime'],GroupsArray[i][x]['comtestdp'],GroupsArray[i][x]['testrunning']);
         
         tr.appendChild(td);
@@ -503,9 +503,11 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
         }
       
         td = Builder.node('td', {className: 'WhiteBkg border1px'}, '');
-      
-        writeTestField(td, chns[i]['id'].toString(),chns[i]['testtime'],chns[i]['comtestdp'],chns[i]['testrunning']);
-      
+
+        if (chns[i]['type'].match(/Team/g) == null ) {
+          writeTestField(td, chns[i]['id'].toString(), chns[i]['testtime'], chns[i]['comtestdp'], chns[i]['testrunning']);
+        }
+
         tr.appendChild(td);
         td = Builder.node('td', {className: 'WhiteBkg border1px'}, '');
         writeDeviceAction(td, true, false, false, chns[i]);

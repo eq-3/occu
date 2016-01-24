@@ -1953,9 +1953,18 @@ background-color: $_(inactiveBackground);
 	background-color: $_(activeBackground);
 }
 #ic_setprofiles .SetProfLinkTbl .WhiteHeader input {
-	width: 95%;
-    margin-left: 3px;
+	/*
+  width: 95%;
+  margin-left: 3px;
+  */
 }
+
+#ic_setprofiles .SetProfLinkTbl .WhiteHeader span {
+  position: absolute;
+  padding: 0px;
+  margin-left: 5px;
+}
+
 #ic_setprofiles .SetProfLinkTbl td {
 	border: 1px solid $_(black); /* black */
 }
@@ -2081,6 +2090,10 @@ html, body {
 
 .alignLeft {
   text-align: left;
+}
+
+.diagramHelpCustomModeLi1 {
+  margin-bottom: 10px;
 }
 
 .firmwareAvailable {
@@ -3545,6 +3558,12 @@ application {
   padding: 0;
 */
   overflow: hidden;
+}
+
+.UILink {
+  color: $_(link);
+  text-decoration: underline;
+	cursor: pointer;
 }
 
 * {
@@ -7526,7 +7545,7 @@ color: $_(textColorA); /* white */
 }
 
 .CLASS20006 {
-	width:78% !	important;
+	width:85% !	important;
 }
 
 .CLASS20007 {

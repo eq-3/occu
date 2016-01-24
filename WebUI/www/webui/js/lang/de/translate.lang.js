@@ -24,7 +24,7 @@ jQuery.extend(true,langJSON, {
     "date" : "Datum",
     "sunrise" : "Sonnenaufgang",
     "sunset" : "Sonnenuntergang",
-    "update" : "Update",
+    "update" : HMIdentifier.de.CCUShortName +"-Update:",
     "firmware" : "Firmware",
     "isAvailable" : "ist verf%FCgbar",
     "newFirmwareAvailable" : "Neue Firmware verf%FCgbar",

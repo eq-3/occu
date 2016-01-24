@@ -163,7 +163,11 @@
             bShowChannel = false;
           }
 
-         
+          if(chn.HssType().Find("SWITCH_TRANSMIT") != -1) {
+            ! channel 7 of the ThermalControl-IndoorTemperatureSensor (e. g. HM-TC-IT-WM-W-EU)
+            bShowChannel = false;
+          }
+
           if( bShow && chn.ReadyConfig() && oDev.ReadyConfig() && bShowChannel )
           {
             string trId = device.ID()#tmp;

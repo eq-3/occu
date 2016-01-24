@@ -593,11 +593,6 @@ jQuery.extend(true,langJSON, {
     "stringTablePartyModeSubmit" : "Tatil modu",
     "partyModeEndTime" : "Tatil modu sonu:",
 
-    "comment": "translate.lang.diagram.js",
-    "btnDiagramPeriodLastHour" : "Son saati secgin",
-    "diagramPeriodLastHour" : "Son saat",
-    "diagramConsolidationFunctionTotal" : "%D6zet",
-
     "changeTimeZoneHint" : "Saat dilimini degistirmek icgin "+HMIdentifier.tr.CCUShortName+" sisteminin yeniden baslatilmasi gereklidir.",
     "tdPowerCost" : "kWh basina %FCcret",
     "lblPowerCost" : "%DCcret/kWh",
@@ -663,7 +658,81 @@ jQuery.extend(true,langJSON, {
     "lblGeneralSettingsConditionNumber" : "Cevrim katsayisi",
 
     "lblInfoStatusControlGas" : "T%FCketim",
-    "lblInfoDimmerLevelReal" : "G%FCncel dege"
+    "lblInfoDimmerLevelReal" : "G%FCncel dege",
+
+    "optionRGBWControllerPrg0" : "Kapali",
+    "optionRGBWControllerPrg1" : "Yavas gecis",
+    "optionRGBWControllerPrg2" : "Normal gecis",
+    "optionRGBWControllerPrg3" : "Hizli gecis",
+    "optionRGBWControllerPrg4" : "Kamp atesi",
+    "optionRGBWControllerPrg5" : "Selale",
+    "optionRGBWControllerPrg6" : "TV canlandirmasi",
+
+    "titleRGBWControllerDialogTitle" : "Konfig%FCrasyon diyalogu",
+    "lblProgram": "Program",
+    "lblColorValue" : "Renk degeri",
+    "lblBrightnessLevel" : "Aydinlik degeri",
+    "lblRampTime" : "Rampa s%FCresi",
+    "lblOnTime" : "Acik kalma s%FCresi",
+    "lblColorValueMin" : "Renk degeri baslangic",
+    "lblcolorValueMax" : "Renk degeri bitis",
+
+    "lblAllowOnlyGroupOperation" : "Ayri cihaz kumandalarini aktif halden cikart",
+    "lblAttentionGroupNameChange" : "DIKKAT, sanal cihaz / kanal isimlerinin %FCst%FCne yazilir!",
+
+    "dialogRenameVirtualGroupDeviceTitle" : "Sanal cihazin adinin degistirilmesi",
+    "dialogVirtualGroupDeviceContent" : "Grubun sanal cihazinin ve ayrica ilgili kanallarin %FCst%FCne grup adini yazmak istiyor musunuz?",
+
+    "lblNewDeviceFirmwareAvailable" : "Yeni cihaz yazilim donanimlari mevcut",
+    "dialogShowDeviceFirmwareTitle" : "Cihaz yazilim donanimlari g%FCncellemeleri mevcut",
+    "dialogShowDeviceFirmwareTHDevice": "Cihaz",
+    "dialogShowDeviceFirmwareTHCurFw": "G%FCncel",
+    "dialogShowDeviceFirmwareTHNewFw": "Yeni",
+    "dialogShowDeviceFirmwareLinkDownload": "Download alanina git",
+
+    "stringTablePowerOn" : "Ac",
+
+
+    "diagramHelpCustomModeTitle" : "Daha b%FCy%FCk zaman s%FCreleri icin degerlerin aciklamasi",
+
+    "diagramHelpCustomModeContent" :
+      "<ul>" +
+       "<li class='diagramHelpCustomModeLi1'>Ortalama degerler" +
+          "<ul>" +
+            "<li>Bu ekranda alt kategorideki zaman s%FCrelerine ait ortalama degerler g%F6sterilir.</li>" +
+          "</ul>"+
+        "</li>" +
+
+        "<li class='diagramHelpCustomModeLi1'>Minimum degerler" +
+           "<ul>" +
+             "<li>Bu ekranda daima alt kategorideki zaman s%FCrelerine ait minimum degerler g%F6sterilir.</li>" +
+           "</ul>"+
+         "</li>" +
+
+        "<li class='diagramHelpCustomModeLi1'>Maksimum degerler" +
+           "<ul>" +
+             "<li>Bu ekranda daima alt kategorideki zaman s%FCrelerine ait maksimum degerler g%F6sterilir.</li>" +
+           "</ul>"+
+         "</li>" +
+      "</ul>" +
+      "<div>Bu ayar sadece b%FCy%FCk zaman s%FCrelerini etkiler (Hafta/Ay/Yil).</div>",
+
+    "lblSettingsDeviceFirmware0" : "Y%FCklenen cihaz yazilim donanimi verilerine genel bakis",
+    "lblSettingsDeviceFirmware1" : "Cihaz yazilim donanimi ekle",
+    "lblSettingsDeviceFirmware2" : "Cihaz yazilim donanimini kaldir",
+    "lblSettingsDeviceFirmware3" : "Cihaz yazilim donaniminin degisim g%FCnl%FCg%FCne bak",
+
+    "hintDevFwAlreadyUploaded" : "" +
+      "Aygitin en guncel yazilimini surada bulabilirsiniz " + HMIdentifier.de.CCUShortName + ".\n"+
+      "Lutfen aygit guncellemesini konfig%FCrasyon sayfasinda onceden aliniz.\n\n",
+
+    "lblRGBWControllerDimmer" : "Isik ayar salteri",
+    "lblRGBWControllerColor" : "Renk",
+    "lblRGBWControllerAutomatic" : "Program",
+
+    "deviceUpdate" : "Aygit Guncellemesi:",
+
+    "theEnd" : ""
   }
 });
 

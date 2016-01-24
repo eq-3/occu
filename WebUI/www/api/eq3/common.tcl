@@ -104,7 +104,9 @@ proc lock_tryget {filename} {
 # Gibt eine Sperre frei
 ##
 proc lock_release {filename} {
-	file delete -force -- $filename
+  if {[file exists $filename]} {
+    catch {file delete -force -- $filename}
+  }
 }
 
 ############################
@@ -131,3 +133,18 @@ proc _lrmdups { _list_ } {
   
   return $result;
 }
+
+##
+# Entfernt eventuell doppelt vorkommende Programm-Ids
+##
+proc rmDoublePrgIds { _list_ } {
+  if {[llength _list_] == 0} then { return "" }
+  set t {}
+  foreach i $_list_ {
+    if {[lsearch $t $i] == -1} {
+      lappend t $i
+    }
+  }
+  return $t;
+}
+

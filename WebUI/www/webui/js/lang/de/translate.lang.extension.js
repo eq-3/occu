@@ -625,10 +625,6 @@ jQuery.extend(true,langJSON, {
     "stringTablePartyModeSubmit" : "Urlaubsmodus",
     "partyModeEndTime" : "Ende Urlaubsmodus:",
 
-    "comment": "translate.lang.diagram.js",
-    "btnDiagramPeriodLastHour" : "Letzte Stunde ausw%E4hlen",
-    "diagramPeriodLastHour" : "Letzte Stunde",
-    "diagramConsolidationFunctionTotal" : "Summe",
 
     "changeTimeZoneHint" : "Zum %C4ndern der Zeitzone ist ein Neustart der "+HMIdentifier.de.CCUShortName+" n%F6tig.",
 
@@ -697,7 +693,80 @@ jQuery.extend(true,langJSON, {
     "lblGeneralSettingsConditionNumber" : "Zustandszahl",
 
     "lblInfoStatusControlGas" : "Verbrauch",
-    "lblInfoDimmerLevelReal" : "Realer Wert"
+    "lblInfoDimmerLevelReal" : "Realer Wert",
+
+    "optionRGBWControllerPrg0" : "Aus",
+    "optionRGBWControllerPrg1" : "Langsamer Durchlauf",
+    "optionRGBWControllerPrg2" : "Normaler Durchlauf",
+    "optionRGBWControllerPrg3" : "Schneller Durchlauf",
+    "optionRGBWControllerPrg4" : "Lagerfeuer",
+    "optionRGBWControllerPrg5" : "Wasserfall",
+    "optionRGBWControllerPrg6" : "TV-Simulation",
+
+    "titleRGBWControllerDialogTitle" : "Konfigurationsdialog",
+    "lblProgram": "Programm",
+    "lblColorValue" : "Farbwert",
+    "lblBrightnessLevel" : "Helligkeitswert",
+    "lblRampTime" : "Rampenzeit",
+    "lblOnTime" : "Einschaltdauer",
+    "lblColorValueMin" : "Farbwert Start",
+    "lblcolorValueMax" : "Farbwert Ende",
+
+    "lblAllowOnlyGroupOperation": "Einzelne Ger&auml;tebedienung deaktivieren",
+    "lblAttentionGroupNameChange" : "ACHTUNG, virtuelle Ger%E4te-/Kanalnamen werden %DCberschrieben!",
+
+    "dialogRenameVirtualGroupDeviceTitle" : "Umbenennung des virtuellen Ger%E4tes",
+    "dialogVirtualGroupDeviceContent" : "M%F6chten Sie das virtuelle Ger%e4t der Gruppe sowie die entsprechenden Kan%E4le mit dem Gruppennamen %FCberschreiben?",
+
+    "lblNewDeviceFirmwareAvailable" : "Neue Ger%E4te-Firmware verf%FCgbar",
+    "dialogShowDeviceFirmwareTitle" : "Es stehen Ger%E4te-Firmware-Updates zur Verf%FCgung",
+    "dialogShowDeviceFirmwareTHDevice": "Ger%E4t",
+    "dialogShowDeviceFirmwareTHCurFw": "Aktuell",
+    "dialogShowDeviceFirmwareTHNewFw": "Neu",
+    "dialogShowDeviceFirmwareLinkDownload": "Zum Downloadbereich",
+
+
+    "diagramHelpCustomModeTitle" : "Beschreibung der Werte f%FCr gr%F6%DFere Zeitr%E4ume",
+
+    "diagramHelpCustomModeContent" :
+      "<ul>" +
+       "<li class='diagramHelpCustomModeLi1'>Durchschnittswerte" +
+          "<ul>" +
+            "<li>Bei dieser Ansicht werden die Durchschnittswerte von untergeordneten Zeitr%E4umen dargestellt.</li>" +
+          "</ul>"+
+        "</li>" +
+
+        "<li class='diagramHelpCustomModeLi1'>Minimalwerte" +
+           "<ul>" +
+             "<li>Bei dieser Ansicht werden immer die minimalen Werte von untergeordneten Zeitr%E4umen dargestellt.</li>" +
+           "</ul>"+
+         "</li>" +
+
+        "<li class='diagramHelpCustomModeLi1'>Maximalwerte" +
+           "<ul>" +
+             "<li>Bei dieser Ansicht werden immer die maximalen Werte von untergeordneten Zeitr%E4umen dargestellt.</li>" +
+           "</ul>"+
+         "</li>" +
+      "</ul>" +
+      "<div>Diese Einstellung hat nur Auswirkungen auf gro&szlig;e Zeitr%E4ume (Woche/Monat/Jahr)</div>",
+
+    "lblSettingsDeviceFirmware0" : "%DCbersicht installierter Ger%E4te-Firmware-Dateien",
+    "lblSettingsDeviceFirmware1" : "Ger%E4te-Firmware hinzuf%FCgen",
+    "lblSettingsDeviceFirmware2" : "Ger%E4te-Firmware enfernen",
+    "lblSettingsDeviceFirmware3" : "Changelog der Ger%E4te-Firmware betrachten",
+
+    "hintDevFwAlreadyUploaded" : "" +
+      "Die aktuellste Firmware des Ger%E4tes befindet sich bereits auf der " + HMIdentifier.de.CCUShortName + ".\n"+
+      "Bitte nehmen Sie das Firmwareupdate auf der Konfigurationsseite vor.\n\n",
+
+    "lblRGBWControllerDimmer" : "Dimmer",
+    "lblRGBWControllerColor" : "Farbe",
+    "lblRGBWControllerAutomatic" : "Programm",
+
+    "deviceUpdate" : "Ger%E4te-Update:",
+
+    "theEnd" : ""
+
 
   }
 });

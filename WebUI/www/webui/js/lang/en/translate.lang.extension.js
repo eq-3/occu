@@ -619,11 +619,6 @@ jQuery.extend(true, langJSON, {
     "stringTablePartyModeSubmit" : "Holiday mode",
     "partyModeEndTime" : "End holiday mode:",
 
-    "comment" : "translate.lang.diagram.js",
-    "btnDiagramPeriodLastHour" : "Select last hour",
-    "diagramPeriodLastHour" : "Last hour",
-    "diagramConsolidationFunctionTotal" : "Total",
-
     "changeTimeZoneHint" : "To change the timezone the "+HMIdentifier.en.CCUShortName+" needs a restart.",
 
     "tdPowerCost" : "Price per kWh",
@@ -690,7 +685,78 @@ jQuery.extend(true, langJSON, {
     "lblGeneralSettingsConditionNumber" : "Condition number",
 
     "lblInfoStatusControlGas" : "Consumption",
-    "lblInfoDimmerLevelReal" : "Actual value"
+    "lblInfoDimmerLevelReal" : "Actual value",
+
+    "optionRGBWControllerPrg0" : "Off",
+    "optionRGBWControllerPrg1" : "Slow cycle",
+    "optionRGBWControllerPrg2" : "Normal cycle",
+    "optionRGBWControllerPrg3" : "Fast cycle",
+    "optionRGBWControllerPrg4" : "Bonfire",
+    "optionRGBWControllerPrg5" : "Waterfall",
+    "optionRGBWControllerPrg6" : "TV simulation",
+
+    "titleRGBWControllerDialogTitle" : "Configuration dialog",
+    "lblProgram": "Program",
+    "lblColorValue" : "Color",
+    "lblBrightnessLevel" : "Brightness",
+    "lblRampTime" : "Ramp time",
+    "lblOnTime" : "Switch-on time",
+    "lblColorValueMin" : "Color value start",
+    "lblcolorValueMax" : "Color value end",
+
+    "lblAllowOnlyGroupOperation": "Deactivate single device operation",
+    "lblAttentionGroupNameChange" : "Attention, the virtual device-/channel names will be overwritten!",
+
+    "dialogRenameVirtualGroupDeviceTitle" : "Rename the virtual device",
+    "dialogVirtualGroupDeviceContent" : "Would you like to rename the virtual device of the group and its channels to the group name?",
+
+    "lblNewDeviceFirmwareAvailable" : "New device firmware available",
+    "dialogShowDeviceFirmwareTitle" : "There are new device firmware updates available",
+    "dialogShowDeviceFirmwareTHDevice": "Device",
+    "dialogShowDeviceFirmwareTHCurFw": "Current",
+    "dialogShowDeviceFirmwareTHNewFw": "New",
+    "dialogShowDeviceFirmwareLinkDownload": "To download area",
+
+    "diagramHelpCustomModeTitle" : "Description of the values for longer periods",
+
+    "diagramHelpCustomModeContent" :
+      "<ul>" +
+       "<li class='diagramHelpCustomModeLi1'>Average values" +
+          "<ul>" +
+            "<li>In the view, the average values of subordinated time periods are displayed.</li>" +
+          "</ul>"+
+        "</li>" +
+
+        "<li class='diagramHelpCustomModeLi1'>Minimum values" +
+           "<ul>" +
+             "<li>In the view, the minimum values of subordinated time periods are displayed.</li>" +
+           "</ul>"+
+         "</li>" +
+
+        "<li class='diagramHelpCustomModeLi1'>Maximum values" +
+           "<ul>" +
+             "<li>In the view, the maximum values of subordinated time periods are displayed.</li>" +
+           "</ul>"+
+         "</li>" +
+      "</ul>" +
+      "<div>This setting only effects larger time periods (week/month/year).</div>",
+
+    "lblSettingsDeviceFirmware0" : "Overview of the installed device firmware files",
+    "lblSettingsDeviceFirmware1" : "Add device firmware",
+    "lblSettingsDeviceFirmware2" : "Delete device firmware",
+    "lblSettingsDeviceFirmware3" : "View changelog of the firmware",
+
+    "hintDevFwAlreadyUploaded" : "" +
+      "The latest firmware version of the device is alreay installed on the  " + HMIdentifier.de.CCUShortName + ".\n"+
+          "Please perform the firmware update on the configuration page.\n\n",
+
+    "lblRGBWControllerDimmer" : "Dimmer",
+    "lblRGBWControllerColor" : "Colour",
+    "lblRGBWControllerAutomatic" : "Program",
+
+    "deviceUpdate" : "Device update:",
+
+    "theEnd" : ""
   }
 });
 

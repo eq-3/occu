@@ -1,5 +1,13 @@
 jQuery.extend(true,langJSON, {
   "tr" : {
+    "HM-ES-PMSw1-SM" : "G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC",
+    "OLIGO.smart.iq.HM" : "Kablosuz dimmer akt%FCat%F6r%FC",
+    "WRC2" : "HmIP Kablosuz duvar tus takimi 2 kanal",
+    "TRV" : "HmIP Kablosuz radyat%F6r termostati",
+    "WTH" : "HmIP Kablosuz duvar termostati",
+    "PS" : "HmIP Kablosuz salter akt%FCat%F6r%FC 1 kanal, adapt%F6r",
+    "SWD" : "HmIP Kablosuz pencere/kapi kontagi optik",
+    "HM-LC-Sw1-Pl-CT-R1" : "Kablosuz salter akt%FCat%F6r%FC 1 kanalli, klemens baglantili",
     "HM-ES-PMSw1-DR" : "G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC, baslikli raya montaj",
     "HM-LC-Sw1-DR" : "1%B4li kablosuz salter akt%FCat%F6r%FC, baslikli raya montaj",
     "HM-RC-Dis-H-x-EU" : "G%F6stergeli kablosuz uzaktan kumanda",

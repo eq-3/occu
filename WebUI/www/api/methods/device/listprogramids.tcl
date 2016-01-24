@@ -30,7 +30,7 @@ set script {
   }
 }
 
-set ids [_lrmdups [hmscript $script args]]
+set ids [rmDoublePrgIds [hmscript $script args]]
 
 set result "\["
 set first 1

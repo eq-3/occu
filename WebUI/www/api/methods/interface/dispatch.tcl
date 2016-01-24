@@ -84,6 +84,9 @@ proc getDeviceDescription { deviceString } {
     if { [info exists device(AVAILABLE_FIRMWARE)] } then {
       append result ",\"availableFirmware\":[json_toString $device(AVAILABLE_FIRMWARE)]"
     }
+    if { [info exists device(UPDATABLE)] } then {
+      append result ",\"updatable\":[json_toString $device(UPDATABLE)]"
+    }
   } else {
     # Felder für Kanäle
     append result ",\"parent\":[json_toString $device(PARENT)]"

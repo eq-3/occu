@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Sendet der Wandthermostat den Heiz-/K&uuml;hlbefehl, schaltet das Licht f&uuml;r die gew&uuml;nschte Zeit auf den festgelegten Helligkeitswert. Wird das Ende der Heiz-/K&uuml;hlphase gesendet, schaltet das Licht aus.</span><br/><br/>",

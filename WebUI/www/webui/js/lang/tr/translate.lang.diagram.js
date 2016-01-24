@@ -113,7 +113,11 @@ jQuery.extend(true, langJSON, {
     "diagramComparisonYesterday" : "d%FCn",
     "diagramComparisonLastWeek" : "gecen hafta",
     "diagramComparisonLastMonth": "gecen ay",
-    "diagramComparisonLastYear" : "gecen sene"
+    "diagramComparisonLastYear" : "gecen sene",
+
+    "btnDiagramPeriodLastHour" : "Son saati secgin",
+    "diagramPeriodLastHour" : "Son saat",
+    "diagramConsolidationFunctionTotal" : "%D6zet"
   }
 });
 

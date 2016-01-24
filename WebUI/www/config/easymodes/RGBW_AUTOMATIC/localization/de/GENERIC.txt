@@ -1,0 +1,17 @@
+"inc_Program" : "Erh&ouml;he Programmnummer",
+"dec_Program" : "Verringere Programmnummer",
+"set_Program" : "Setze Programmnummer",
+
+"lblColorValueMin" : "Farbwert Start",
+"lblColorValueMax" : "Farbwert Ende",
+
+"lblShortKeyPress" : "Kurzer Tastendruck",
+"lblLongKeyPress" : "Langer Tastendruck",
+
+"optionPrg0" : "Aus",
+"optionPrg1" : "Langsamer Durchlauf",
+"optionPrg2" : "Normaler Durchlauf",
+"optionPrg3" : "Schneller Durchlauf",
+"optionPrg4" : "Lagerfeuer",
+"optionPrg5" : "Wasserfall",
+"optionPrg6" : "TV-Simulation",

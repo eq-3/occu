@@ -114,7 +114,11 @@ jQuery.extend(true, langJSON, {
     "diagramComparisonYesterday" : "gestern",
     "diagramComparisonLastWeek" : "vorige Woche",
     "diagramComparisonLastMonth": "voriger Monat",
-    "diagramComparisonLastYear" : "voriges Jahr"
+    "diagramComparisonLastYear" : "voriges Jahr",
+
+    "btnDiagramPeriodLastHour" : "Letzte Stunde ausw%E4hlen",
+    "diagramPeriodLastHour" : "Letzte Stunde",
+    "diagramConsolidationFunctionTotal" : "Summe"
 
 
   }

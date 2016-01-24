@@ -352,14 +352,15 @@
               if (x6 != -1) {
 
                 if (iV == "0") {
-                  iV = "0,200,0.5,0,0,199"; ! default
 
-                  if (oCH.HSSID() == "COLOR") {
-                    iV = "0,200,0.5,0";
+                  if (oCH.HSSID() == "RGBW_COLOR") {
+                    ! deprecated iV = "0,200,0.5,0";
+                    iV = "{'ACT_HSV_COLOR_VALUE_STORE':0,'ACT_BRIGHTNESS_STORE':200,'RAMP_TIME_STORE':0.5,'ON_TIME_STORE':0}";
                   }
 
-                  if (oCH.HSSID() == "AUTOMATIC") {
-                    iV = "0,200,0.5,0,0,199";
+                  if (oCH.HSSID() == "RGBW_AUTOMATIC") {
+                    ! deprecated iV = "0,200,0.5,0,0,199";
+                    iV = "{'ACT_COLOR_PROGRAM_STORE':0,'ACT_BRIGHTNESS_STORE':200,'RAMP_TIME_STORE':0.5,'ON_TIME_STORE':0, 'ACT_MIN_BORDER_STORE':0, 'ACT_MAX_BORDER_STORE':199}";
                   }
                 }
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetRGBWController('#oSD.ID()#',\''#oCH.HSSID()#'\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );

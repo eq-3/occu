@@ -629,7 +629,6 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
 			array set dev_descr [lindex $devlist $i]
 			array set dev_descr_group ""
 			set has_group 0
-			
 			catch {
 				set dummy $dev_descr(GROUP)
 				set has_group 1
@@ -674,9 +673,14 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
 				continue
 			}
 
+      catch {
+        #Nur Kanäle anzeigen, die keiner Gruppe zugeordnet sind
+        if {[metaData_isGroupOnly $ise_CHANNELNAMES($iface_loop;$dev_descr(ADDRESS))] == "true"} {
+          continue
+        }
+      }
 			array set SENTRY ""
-			
-			if { [catch { set SENTRY(NAME) $ise_CHANNELNAMES($iface_loop;$dev_descr(ADDRESS))} ] } then {
+			if { ([catch { set SENTRY(NAME) $ise_CHANNELNAMES($iface_loop;$dev_descr(ADDRESS))} ])} then {
 				set SENTRY(NAME) "$iface_loop"
 				append SENTRY(NAME) ".$dev_descr(ADDRESS)"
 			}
@@ -858,10 +862,10 @@ cgi_eval {
 		#allg. globale Parameter
 		set step 1
 		array set dev_descr_sender       ""
-	    array set dev_descr_receiver     ""
-	    array set dev_descr_sender_group ""
+	  array set dev_descr_receiver     ""
+	  array set dev_descr_sender_group ""
 		set sender_group                 ""
-   		set receiver_links               ""
+   	set receiver_links               ""
 		
 		#URL-Parameter
 		set iface             ""
@@ -881,7 +885,7 @@ cgi_eval {
 		catch {import group_description}
 		#-----------------------------------------
 
-        http_head
+    http_head
     
 		if { $iface != "" && $sender_address != "" && $receiver_address != "" } then {
 			

@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">If the wall thermostat sends the command for heating or cooling, the switch actuator will be switched on for the defined time. If the end of the heating/cooling period is send, the switch actuator will be switched off.</span><br/><br/>",

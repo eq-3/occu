@@ -222,7 +222,7 @@ proc ise_getChannelNames {p_ise_CHANNELNAMES} {
 	append isecmd "  ch_addr = channel.Address();"
 	append isecmd "  ch_name = channel.Name();"
 	append isecmd "  ch_iface_id = channel.Interface();"
-    append isecmd "  ch_iface    = dom.GetObject(ch_iface_id).Name();"
+  append isecmd "  ch_iface    = dom.GetObject(ch_iface_id).Name();"
 	append isecmd "  if (ch_addr != '')"
 	append isecmd "  {"
 	append isecmd "    Write(ch_iface # ';' # ch_addr # ' ' # ch_name # '\n');"
@@ -235,7 +235,7 @@ proc ise_getChannelNames {p_ise_CHANNELNAMES} {
 	append isecmd "  ch_addr = channel.Address();"
 	append isecmd "  ch_name = channel.Name();"
 	append isecmd "  ch_iface_id = channel.Interface();"
-    append isecmd "  ch_iface    = dom.GetObject(ch_iface_id).Name();"
+  append isecmd "  ch_iface    = dom.GetObject(ch_iface_id).Name();"
 	append isecmd "  if (ch_addr != '')"
 	append isecmd "  {"
 	append isecmd "    Write(ch_iface # ';' # ch_addr # ' ' # ch_name # '\n');"
@@ -498,6 +498,18 @@ proc metadata_getReadyConfig { iface device } {
     }
 }
 
+  proc metaData_isGroupOnly {chName} {
+
+    set isecmd ""
+    append isecmd "object ch = dom.GetObject('$chName');"
+    append isecmd "object dev = dom.GetObject(ch.Device());"
+    append isecmd "var GROUP = dev.MetaData('operateGroupOnly');"
+
+	  if { [catch { array set result [rega_script $isecmd]} ] } then { return }
+	  if { [catch {set dummy $result(GROUP)      } ] } then { return }
+    return $result(GROUP);
+  }
+
 } else {
     #No ReGaHss available. Get Metadata from BidCoS-Service
     
@@ -566,4 +578,10 @@ proc ise_getProgramCount {p_ise_PROGRAMCOUNT} {
 proc metadata_getReadyConfig { iface device } {
     return 1
 }
+
+  proc metaData_isGroupOnly {chName} {
+    # ToDo MetaData operateGroupOnly des Gerätes (nicht des Kanals) zurück geben.
+    return false;
+  }
+
 }

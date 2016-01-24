@@ -624,8 +624,22 @@ jQuery.extend(true, langJSON, {
     "stringTableDevRptCntMax": "maks. Yineleyici seviyesi",
 
     "stringTableButtonResponseWithoutChannelChooser": "Tusa basilir basilmaz reaksiyon<br/>%F6nceden kanal secimi yapilmaksizin",
-    "stringTableWakeupDefaultChannel": "Etkinlestirme sirasinda baslangic kanali"
+    "stringTableWakeupDefaultChannel": "Etkinlestirme sirasinda baslangic kanali",
 
+    "stringTablePowerOn" : "Ac",
+
+    "stringTableRGBWColorChangeSpeed" : "Renk degisimi hizi",
+    "stringTableRGBWWhiteAdjustmentBlue" : "Su dengelemesi Mavi",
+    "stringTableRGBWWhiteAdjustmentGreen" : "Su dengelemesi Yesil",
+    "stringTableRGBWWhiteAdjustmentRed" : "Su dengelemesi Kirmizi",
+    "stringTableRGBWColorValue" : "Renk degeri",
+    "stringTableRGBWProgram" : "Program numarasi",
+    "stringTableRGBWAutomaticTitle" : "RGBW kontrol programi",
+    "stringTableRGBWColorTitle" : "RGBW kontrol rengi",
+
+    "ATTENTION" : "NOT YET TRANSLATED",
+
+    "stringTableSwitchTransmitTwoPointHysteresis" : "Histerezis"
 
   }
 });

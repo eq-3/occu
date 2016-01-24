@@ -495,7 +495,6 @@ jQuery.extend(true,langJSON, {
     "stringTableWDSStateDry" : "Trocken",
     "stringTableWDSStateWater" : "Wasserstand erkannt",
     "stringTableWDSStateWet" : "Feuchtigkeit erkannt",
-    "stringTableWDSEventFilterTime" : "Filterzeit",
     "stringTableWeatherTitle" : "Wettersensor",
     "stringTableWeatherAirPressure" : "Luftdruck",
     "stringTableWeatherBrightness" : "Helligkeit",
@@ -627,6 +626,24 @@ jQuery.extend(true,langJSON, {
     "stringTableSmokeDetectorSmokeChamberFailure" : "Rauchkammer fehlerhaft",
     "stringTableDevRptCntMax" : "max. Repeaterstufe",
     "stringTableButtonResponseWithoutChannelChooser": "Sofortige Reaktion auf Tastendruck<br/>ohne vorherige Kanalauswahl",
-    "stringTableWakeupDefaultChannel" : "Initialer Kanal bei Aktivierung"
+    "stringTableWakeupDefaultChannel" : "Initialer Kanal bei Aktivierung",
+
+    "stringTablePowerOn" : "Einschalten",
+
+    "stringTableRGBWColorChangeSpeed" : "Geschwindigkeit Farbwechsel",
+    "stringTableRGBWWhiteAdjustmentBlue" : "Weissabgleich Blau",
+    "stringTableRGBWWhiteAdjustmentGreen" : "Weissabgleich Gr%FCn",
+    "stringTableRGBWWhiteAdjustmentRed" : "Weissableich Rot",
+    "stringTableRGBWColorValue" : "Farbwert",
+    "stringTableRGBWProgram" : "Programmnummer",
+    "stringTableRGBWAutomaticTitle" : "RGBW-Controller Programm",
+    "stringTableRGBWColorTitle" : "RGBW-Controller Farbe",
+
+
+    "ATTENTION" : "NOT YET TRANSLATED",
+
+    "stringTableSwitchTransmitTwoPointHysteresis" : "Hysterese"
+
+
   }
 });

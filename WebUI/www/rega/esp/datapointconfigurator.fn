@@ -119,6 +119,8 @@ function ::dcCreate()
     var CN_HEATING_CONTROL          = "HEATING_CONTROL.";
     var CN_POWERMETER          = "POWERMETER.";
     var CN_POWERMETER_IGL          = "POWERMETER_IGL.";
+    var CN_RGBW_COLOR          = "RGBW_COLOR.";
+    var CN_RGBW_AUTOMATIC          = "RGBW_AUTOMATIC.";
 
     var CN_EVENT_INTERFACE = "EVENT_INTERFACE.";
     var CN_NOT_ACTIVE = "CHANNEL_NOT_ACTIVE";
@@ -362,6 +364,26 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_POWERMETER_IGL;
             Call("/esp/datapointconfigurator.fn::CreatePowermeterIGLControl()");
+          }
+
+          !# CN_RGBW_COLOR
+          bIsControl = ( sControlName.Find(CN_RGBW_COLOR) > -1 );
+          if( bIsControl && (sLastControlName != CN_RGBW_COLOR) )
+          {
+            WriteLine( "<script>conInfo('Control CN_RGBW_COLOR found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_RGBW_COLOR;
+            Call("/esp/datapointconfigurator.fn::CreateRGBWColorControl()");
+          }
+
+          !# CN_RGBW_AUTOMATIC
+          bIsControl = ( sControlName.Find(CN_RGBW_AUTOMATIC) > -1 );
+          if( bIsControl && (sLastControlName != CN_RGBW_AUTOMATIC) )
+          {
+            WriteLine( "<script>conInfo('Control CN_RGBW_AUTOMATIC found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_RGBW_AUTOMATIC;
+            Call("/esp/datapointconfigurator.fn::CreateRGBWAutomaticControl()");
           }
 
           !# EVENT_INTERFACE
@@ -2078,6 +2100,140 @@ function ::CreatePowermeterIGLControl() {
   WriteLine("</script>")
 
   return;
+}
+
+
+function ::CreateRGBWColorControl() {
+ object oColor = cObj.DPByControl("RGBW_COLOR.COLOR");
+ WriteLine("<tr>");
+   WriteLine("<td>");
+     WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+         WriteLine("<tr>");
+           WriteLine("<td>");
+             WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+               WriteLine("<tr>");
+                 WriteLine("<td>");
+                 WriteLine("<span>${lblColorValue}</span>");
+                 WriteLine("</td>");
+                 WriteLine("<td>");
+                   !WriteLine("<input type='text' onchange='conInfo(\"COLOR:  "#oColor.Value()#"\"); setDpState("#oColor.ID()#",this.value)' id='"#chnId#"'></input>");
+                   WriteLine("<input type='text' id='"#chnId#"'></input>");
+                 WriteLine("</td>");
+               WriteLine("</tr>");
+             WriteLine("</table>");
+           WriteLine("</td>");
+         WriteLine("</tr>");
+     WriteLine("</table>");
+   WriteLine("</td>");
+ WriteLine("</tr>");
+
+ WriteLine("<script type='text/javascript'>");
+   WriteLine(" conInfo('COLOR:  "#oColor.Value()#"');" );
+   WriteLine( "var saturation = '100%'; " );
+   WriteLine( "var colorVal = "#oColor.Value()#";");
+
+   WriteLine( "if (colorVal > 199) {colorVal = 200; saturation = '0%'}");
+   WriteLine( "var convertedValue = parseInt(colorVal / 199 * 360); " );
+
+
+
+   WriteLine(" conInfo('COLOR:  "#oColor.Value()#" - convertedValue: ' + convertedValue); ");
+   !WriteLine(" jQuery('#"+chnId#"').spectrum({id: 'rgbwBtnColor"#chnId#"', color:'hsv("#oColor.Value()#",100,100)', preferredFormat: 'convert360To200', showPalette: true, palette: ['white'],cancelText: translateKey('btnCancel'),chooseText: translateKey('btnOk'), _change: function(color){setDpState("#oColor.ID()#", color);}}) ");
+   WriteLine(" jQuery('#"+chnId#"').spectrum({id: 'rgbwBtnColor"#chnId#"', color:'hsv('+convertedValue+','+saturation+',100)', preferredFormat: 'convert360To200', showPalette: true, palette: ['white'],cancelText: translateKey('btnCancel'),chooseText: translateKey('btnOk'), _change: function(color){setDpState("#oColor.ID()#", color);}}) ");
+   !WriteLine(" jQuery('.sp-container #rgbwBtnColor"#chnId#"').on('click',function(){var color = jQuery('#"#chnId#"').spectrum('get'); conInfo('color: ' + color); setDpState("#oColor.ID()#", color); }); ");
+   WriteLine(" jQuery('.sp-container #rgbwBtnColor"#chnId#"').on('click',function(){var color = jQuery('#"#chnId#"').val(); if (!color) {color = 0;} conInfo('color: ' + color); setDpState("#oColor.ID()#", color); }); ");
+ WriteLine("</script>");
+}
+
+function ::CreateRGBWAutomaticControl() {
+ object oProgram = cObj.DPByControl("RGBW_AUTOMATIC.PROGRAM");
+ !object oMinBorder = cObj.DPByControl("RGBW_AUTOMATIC.MIN_BOARDER");
+ !object oMaxBorder = cObj.DPByControl("RGBW_AUTOMATIC.MAX_BOARDER");
+ !object oOnTime = cObj.DPByControl("RGBW_AUTOMATIC.ON_TIME");
+ !object oRampTime = cObj.DPByControl("RGBW_AUTOMATIC.RAMP_TIME");
+ !object oBrightness = cObj.DPByControl("RGBW_AUTOMATIC.BRIGHTNESS");
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+          WriteLine("<tr>");
+            WriteLine("<td>");
+              WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                WriteLine("<tr>");
+                  WriteLine("<td>");
+                  WriteLine("<span>${lblProgram}</span>");
+                  WriteLine("</td>");
+                  WriteLine("<td>");
+                    ! WriteLine("<div id='"#chnId#"' class='ControlBtnOff CLASS02545 j_translate'>CLICK ME</div>");
+                    WriteLine("<select id='"#chnId#"' onchange='setDpState("#oProgram.ID()#",this.value)'>");
+                      WriteLine("<option value='0'>${optionRGBWControllerPrg0}</option>");
+                      WriteLine("<option value='1'>${optionRGBWControllerPrg1}</option>");
+                      WriteLine("<option value='2'>${optionRGBWControllerPrg2}</option>");
+                      WriteLine("<option value='3'>${optionRGBWControllerPrg3}</option>");
+                      WriteLine("<option value='4'>${optionRGBWControllerPrg4}</option>");
+                      WriteLine("<option value='5'>${optionRGBWControllerPrg5}</option>");
+                      WriteLine("<option value='6'>${optionRGBWControllerPrg6}</option>");
+                    WriteLine("</select>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+
+                ! MIN BORDER
+                !WriteLine("<tr>");
+                ! WriteLine("<td>");
+                ! WriteLine("<span>${lblColorValueMin}</span>");
+                ! WriteLine("</td>");
+                ! WriteLine("<td>");
+                !   WriteLine("<input type='text' id='minBorder"#chnId#"' _onchange='setDpState("#oMinBorder.ID()#",this.value)'></input>");
+                ! WriteLine("</td>");
+                !WriteLine("</tr>");
+
+                ! MAX BORDER
+                !WriteLine("<tr>");
+                ! WriteLine("<td>");
+                ! WriteLine("<span>${lblColorValueMin}</span>");
+                ! WriteLine("</td>");
+                ! WriteLine("<td>");
+                !   WriteLine("<input type='text' id='maxBorder"#chnId#"' _onchange='setDpState("#oMaxBorder.ID()#",this.value)'></input>");
+                ! WriteLine("</td>");
+                !WriteLine("</tr>");
+
+              WriteLine("</table>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+  WriteLine("<script type='text/javascript'>");
+
+  !WriteLine("var opts = {};");
+  !WriteLine("opts.idProgram = "#oProgram.ID()#";");
+  !WriteLine("opts.valProgram = "#oProgram.Value()#";");
+  !WriteLine("opts.idMinBorder = "#oMinBorder.ID()#";");
+  !WriteLine("opts.valMinBorder = "#oMinBorder.Value()#";");
+  !WriteLine("opts.idMaxBorder = "#oMaxBorder.ID()#";");
+  !WriteLine("opts.valMaxBorder = "#oMaxBorder.Value()#";");
+  !WriteLine("opts.idOnTime = "#oOnTime.ID()#";");
+  !WriteLine("opts.valOnTime = "#oOnTime.Value()#";");
+  !WriteLine("opts.idRampTime = "#oRampTime.ID()#";");
+  !WriteLine("opts.valRampTime = "#oRampTime.Value()#";");
+  !WriteLine("opts.idBrightness = "#oBrightness.ID()#";");
+  !WriteLine("opts.valBrightness = "#oBrightness.Value()#";");
+  !WriteLine("opts.dialog = 'RGBW_AUTOMATIC'");
+
+    ! Set selectbox to the active program
+    WriteLine("jQuery('#"+chnId#"').val("#oProgram.Value()#");");
+
+    !WriteLine("var hsvValMin =  parseInt("#oMinBorder.Value()#" / 199 * 360); ");
+    !WriteLine("var hsvValMax =  parseInt("#oMaxBorder.Value()#" / 199 * 360); ");
+
+    !WriteLine("jQuery('#minBorder"#chnId#"').spectrum({id: 'rgbwBtnMin"#chnId#"',color:'hsv('+hsvValMin+',100,100)', preferredFormat: 'convert360To200'}) ");
+    !WriteLine("jQuery('#maxBorder"#chnId#"').spectrum({id: 'rgbwBtnMax"#chnId#"',color:'hsv('+hsvValMax+',100,100)', preferredFormat: 'convert360To200'}) ");
+
+    !WriteLine("jQuery('#rgbwBtnMin"#chnId#"').bind('click',function(){var color = jQuery('#minBorder"#chnId#"').val(); setDpState("#oMinBorder.ID()#", color); conInfo('Farbwert min: ' + color); }); ");
+    !WriteLine("jQuery('#rgbwBtnMax"#chnId#"').bind('click',function(){var color = jQuery('#maxBorder"#chnId#"').val(); setDpState("#oMaxBorder.ID()#", color); conInfo('Farbwert max: ' + color); }); ");
+    !WriteLine("ipm"#chnId#" = new iseRGBWController("#chnId#", opts);");
+  WriteLine("</script>");
+
 }
 
 function ::CreateKeyMatic() {

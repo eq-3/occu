@@ -113,7 +113,11 @@ jQuery.extend(true, langJSON, {
     "diagramComparisonYesterday" : "yesterday",
     "diagramComparisonLastWeek" : "last week",
     "diagramComparisonLastMonth": "last month",
-    "diagramComparisonLastYear" : "last year"
+    "diagramComparisonLastYear" : "last year",
+
+    "btnDiagramPeriodLastHour" : "Select last hour",
+    "diagramPeriodLastHour" : "Last hour",
+    "diagramConsolidationFunctionTotal" : "Total"
   }
 });
 

@@ -1,5 +1,12 @@
 jQuery.extend(true,langJSON, {
   "de" : {
+    "HM-ES-PMSw1-SM" : "Funk-Schaltaktor mit Leistungsmessung",
+    "OLIGO.smart.iq.HM" : "Funk-Dimmaktor",
+    "WRC2" : "HmIP Funk-Wandtaster 2-fach",
+    "TRV" : "HmIP Funk-Heizk%F6rperthermostat",
+    "WTH" : "HmIP Funk-Wandthermostat",
+    "PS" : "HmIP Funk-Schaltaktor 1-fach, Zwischenstecker",
+    "SWD" : "HmIP Funk- T%FCr-/Fensterkontakt optisch",
     "HM-LC-Sw1-Pl-CT-R1" : "Funk-Schaltaktor 1-fach mit Klemmanschluss",
     "HM-ES-PMSw1-DR" : "Funk-Schaltaktor mit Leistungsmessung, Hutschienenmontage",
     "HM-LC-Sw1-DR" : "Funk-Schaltaktor 1-fach, Hutschienenmontage",

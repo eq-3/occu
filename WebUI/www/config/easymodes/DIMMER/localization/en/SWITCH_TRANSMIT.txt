@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">If the wall thermostat sends the command for heating or cooling, the light will be switched for the desired time to the defined brightness value. If the end of the heating/cooling period is being send, the light will be switched off.</span><br/><br/>",

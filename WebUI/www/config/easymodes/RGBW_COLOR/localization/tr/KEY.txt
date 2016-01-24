@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Burada tusun modunu ayarlayabilirsiniz. Asagidaki secenekler mevcut: Renk degerini y%FCkselt, renk degerini azalt ve renk degerini degisimli olarak y%FCkselt veya azalt, tus basimi sayacina bagli.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Burada kisa ve uzun tus basimi icin bir tusu bir renkle atayabilirsiniz.</span><br/><br/>",

@@ -3,17 +3,16 @@ jQuery.extend(true,langJSON, {
   "tr" : {
     "comment" : "ATTENTION **** not yet translated **** ATTENTION",
 
-    "HM-LC-Sw1-Pl-CT-R1" : "tr Wireless Switch Actuator 1-channel with clamp terminal",
+    "hintDevFwAlreadyUploaded" : "" +
+      "Aygitin en guncel yazilimini surada bulabilirsiniz " + HMIdentifier.de.CCUShortName + ".\n"+
+      "Lutfen aygit guncellemesini konfig%FCrasyon sayfasinda onceden aliniz.\n\n",
 
-    "titleRGBWControllerDialogTitle" : "tr Configuration dialog",
-    "lblProgram": "tr Program",
-    "lblColorValue" : "tr Color",
-    "lblBrightnessLevel" : "tr Brightness",
-    "lblRampTime" : "tr Ramp time",
-    "lblOnTime" : "tr Switch-on time",
-    "lblColorValueMin" : "tr Start color value",
-    "lblcolorValueMax" : "tr End color value ",
+    "lblRGBWControllerDimmer" : "Isik ayar salteri",
+    "lblRGBWControllerColor" : "Renk",
+    "lblRGBWControllerAutomatic" : "Program",
 
-    "lblAllowOnlyGroupOperation" : "tr Forbid single device operation"
+    "deviceUpdate" : "Aygit Guncellemesi:",
+
+    "noMoreKeys" : ""
   }
 });

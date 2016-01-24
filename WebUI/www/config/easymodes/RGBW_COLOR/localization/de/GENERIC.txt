@@ -1,0 +1,11 @@
+"choose_Mode" : "W&auml;hle Modus",
+"jumpToColor" : "Setze Farbe",
+
+"lblShortKeyPress" : "Kurzer Tastendruck",
+"lblLongKeyPress" : "Langer Tastendruck",
+
+"lblMode" : "Modus",
+
+"optionIncColor" : "Erh&ouml;he Farbwert",
+"optionDecColor" : "Verringere Farbwert",
+"optionToggleColor" : "Erh&ouml;he / verringere Farbwert",

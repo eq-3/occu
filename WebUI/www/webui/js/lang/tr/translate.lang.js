@@ -26,7 +26,7 @@ jQuery.extend(true,langJSON, {
     "date" : "Tarih",
     "sunrise" : "G%FCnes dogusu",
     "sunset" : "G%FCnes batisi",
-    "update" : "G%FCncelleme",
+    "update" : HMIdentifier.en.CCUShortName + " G%FCncelleme:",
     "firmware" : "Yazilim",
     "isAvailable" : "mevcut",
     "newFirmwareAvailable" : "Yeni yazilim mevcut",

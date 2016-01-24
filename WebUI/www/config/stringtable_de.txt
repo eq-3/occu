@@ -514,6 +514,16 @@ RESTART_LAST	${stringTableRestartLast}
 RESTART_BUTTONPRESS	${stringTableRestartButtonPress}
 RESTART_BUTTONPRESS_IF_WAS_ON	${stringTableRestartButtonPressIfWasOn}
 REMOTECONTROL_RECEIVER	${stringTableRemoteControlReceiver}
+
+RGBW_AUTOMATIC	${stringTableRGBWAutomaticTitle}
+RGBW_AUTOMATIC|PROGRAM	${stringTableRGBWProgram}
+RGBW_AUTOMATIC|COLOR_CHANGE_SPEED	${stringTableRGBWColorChangeSpeed}
+
+RGBW_COLOR	${stringTableRGBWColorTitle}
+RGBW_COLOR|COLOR	${stringTableRGBWColorValue}
+RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_BLUE	${stringTableRGBWWhiteAdjustmentBlue}
+RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_GREEN	${stringTableRGBWWhiteAdjustmentGreen}
+RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_RED	${stringTableRGBWWhiteAdjustmentRed}
 ROTARY_HANDLE_SENSOR	${stringTableRHSTitle}
 ROTARY_HANDLE_SENSOR|ERROR=SABOTAGE	${stringTableRHSErrorSabotage}
 ROTARY_HANDLE_SENSOR|EVENT_DELAYTIME	${stringTableRHSEventDelayTime}
@@ -658,6 +668,7 @@ SWITCH_INTERFACE|STATE=FALSE	${stringTableSwitchInterfaceStateFalse}
 SWITCH_INTERFACE|STATE=TRUE	${stringTableSwitchInterfaceStateTrue}
 
 SWITCH_TRANSMIT	${stringTableSwitchTransmitTitle}
+SWITCH_TRANSMIT|TWO_POINT_HYSTERESIS	${stringTableSwitchTransmitTwoPointHysteresis}
 
 TEMPERATURE_COMFORT	${stringTableTemperatureComfort}
 TEMPERATURE_LOWERING	${stringTableTemperatureLowering}
@@ -684,6 +695,8 @@ TILT_SENSOR|STATE=FALSE	${stringTableTiltSensorStateFalse}
 TILT_SENSOR|STATE=TRUE	 ${stringTableTiltSensorStateTrue}
 TRANSMIT_TRY_MAX	${stringTableTransmitTryMax}
 TRANSMIT_DEV_TRY_MAX	${stringTableTransmitDevTryMax}
+USER_COLOR	${stringTableSubmit}
+USER_PROGRAM	${stringTableSubmit}
 VENT_CLOSED	${stringTableVentClosed}
 VENT_OPEN	${stringTableVentOpen}
 VIRTUAL_DIMMER	${stringTableVirtualDimmerTitle}

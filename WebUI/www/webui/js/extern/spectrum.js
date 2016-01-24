@@ -30,6 +30,7 @@
         hide: noop,
 
         // Options
+        id: null,
         color: false,
         flat: false,
         showInput: false,
@@ -480,6 +481,10 @@
             var paletteEvent = IE ? "mousedown.spectrum" : "click.spectrum touchstart.spectrum";
             paletteContainer.delegate(".sp-thumb-el", paletteEvent, paletteElementClick);
             initialColorContainer.delegate(".sp-thumb-el:nth-child(1)", paletteEvent, { ignore: true }, paletteElementClick);
+
+            if (opts.id != null) {
+              chooseButton.prop("id", opts.id);
+            }
         }
 
         function updateSelectionPaletteFromStorage() {

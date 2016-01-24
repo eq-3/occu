@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Duvar termostatina isitma-/sogutma komutunu gonderir, salter aktuatorunu belirlenen sure boyunca devreye alir. Isitma -/sogutma faz sonu gonderilirse, salter aktuatorunu kapatir.</span><br/><br/>",

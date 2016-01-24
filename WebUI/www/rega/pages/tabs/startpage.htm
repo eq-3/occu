@@ -199,11 +199,18 @@
             </tr>
 
             <tr id="updateRow" style="display:none;">
-              <!-- Update -->
-              <td>${update}:</td>
+              <!-- CCU2-Update -->
+              <td>${update}</td>
                <!-- Firmware ist verf&uuml;gbar -->
               <td colspan="3" id="updateCol">${newFirmwareAvailable}</td>
             </tr>
+
+            <!-- Device-Firmware -->
+            <tr id="devFwAvailable" class="hidden">
+              <td>${deviceUpdate}</td>
+              <td class="firmwareAvailable">${lblNewDeviceFirmwareAvailable}&nbsp;<span id="devFwAvailableCounter"></span></td>
+            </tr>
+
             <%
               object oUser = dom.GetObject( system.GetSessionVar('sessionUserID') );
               if (oUser.UserPwd() == "")
@@ -239,7 +246,6 @@
                   Write("</tr>");
                 }
               }
-              !Write("</tr><tr><td>${TEST}</td><td></td></td></tr>");
              %>
           </table>
           </td>
@@ -265,6 +271,7 @@
       jQuery("#favView").show();
       StartPage.showUpdate();
       StartPage.showCurrentFirmware();
+      StartPage.showAllDeviceFirmware();
   }
   translatePage();
   jQuery("#loadingGif").hide();

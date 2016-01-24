@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Sendet der Wandthermostat den Heiz-/K&uuml;hlbefehl, schaltet der Schaltaktor f&uuml;r die festgelegte Zeit ein. Wird das Ende der Heiz-/K&uuml;hlphase gesendet, schaltet der Schaltaktor aus.</span><br/><br/>",

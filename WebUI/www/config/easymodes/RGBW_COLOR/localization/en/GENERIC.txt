@@ -1,0 +1,11 @@
+"choose_Mode" : "Select mode",
+"jumpToColor" : "Set color",
+
+"lblShortKeyPress" : "Short key press",
+"lblLongKeyPress" : "Long key press",
+
+"lblMode" : "Mode",
+
+"optionIncColor" : "Increase color value",
+"optionDecColor" : "Decrease color value",
+"optionToggleColor" : "Increase / decrease color value",

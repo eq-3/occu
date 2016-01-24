@@ -379,11 +379,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$DEVICE\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
-    # left
-    incr prn
-    set param TWO_POINT_HYSTERESIS
-    append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTwoPointHysteresis}</td>"
-    append HTML_PARAMS(separate_1)  "<td>[getTextField $DEVICE '$param' $ps($param) $prn]&nbsp;[getUnit psDescr $param]&nbsp;[getMinMaxValueDescr psDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    set comment {
+      # left
+      incr prn
+      set param TWO_POINT_HYSTERESIS
+      append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTwoPointHysteresis}</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getTextField $DEVICE '$param' $ps($param) $prn]&nbsp;[getUnit psDescr $param]&nbsp;[getMinMaxValueDescr psDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    }
 
     # left
     incr prn

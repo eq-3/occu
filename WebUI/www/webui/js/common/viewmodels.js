@@ -29,7 +29,7 @@ function GroupDevice(id, serialNumber, type)
 		{
 			return false;
 		}
-	}
+	};
 	
 	self.imagePath = ko.computed(function() {
 		if(this.type == "unknown")
@@ -46,12 +46,12 @@ function GroupDevice(id, serialNumber, type)
 	self.showDevicePicture = function(groupdevice, mouseoverevent)
 	{
 		picDivShow(jg_250, self.type, 250, -1, mouseoverevent.currentTarget);
-	}
+	};
 	
 	self.hideDevicePicture = function()
 	{
 		picDivHide(jg_250);
-	}
+	};
 }
 
 function Header(title, propertyName)
@@ -72,7 +72,7 @@ function padLeft(nr, n, str){
 }
 
 function createVirtualDeviceSerialNumber (id) {
-		return virtualDevicePrefix+padLeft(id,7)
+		return virtualDevicePrefix+padLeft(id,7);
 }
 
 function retryGetDeviceAndDeviceName(group, tries) {
@@ -84,11 +84,13 @@ function retryGetDeviceAndDeviceName(group, tries) {
 				retryGetDeviceAndDeviceName(group, tries - 1);
 			} else {
 				group.virtualDeviceName("");
+        group.groupDeviceName("");
 			}
 		}
 		else
 		{
 			group.virtualDeviceName(group.device.getName());
+      group.groupDeviceName(group.device.getName());
 		}
 	}	
 	
@@ -100,18 +102,20 @@ function VirtualGroup(id, name, groupTypeLabel, virtualDeviceType)
 	var selfGroup = this;
 	selfGroup.id = id;
 	selfGroup.name = name;
-	var temp = createVirtualDeviceSerialNumber(selfGroup.id);
+  var temp = createVirtualDeviceSerialNumber(selfGroup.id);
 	selfGroup.virtualDeviceSerialNumber = temp;
 	selfGroup.device = DeviceList.getDeviceByAddress(temp);
 	selfGroup.groupTypeLabel = groupTypeLabel;
-	selfGroup.virtualDeviceName = ko.observable("");
-	if(typeof selfGroup.device === "undefined")
+	selfGroup.virtualDeviceName = ko.observable(""); // Todo check if this is still in use somewhere
+	selfGroup.groupDeviceName = ko.observable("");
+  if(typeof selfGroup.device === "undefined")
 	{
 		retryGetDeviceAndDeviceName(selfGroup, 3);
 	}
 	else
 	{
-		selfGroup.virtualDeviceName(selfGroup.device.getName());
+    selfGroup.virtualDeviceName(selfGroup.device.getName());
+    selfGroup.groupDeviceName(selfGroup.device.getName());
 	}
 
 	selfGroup.configureVirtualDevice = function()
@@ -125,12 +129,11 @@ function VirtualGroup(id, name, groupTypeLabel, virtualDeviceType)
 			HideWaitAnim();
 			jQuery("#content").html(data);
 		});
-	}
+	};
 
 	selfGroup.operateVirtualDevice = function()
 	{
 		var virtualDevice = new GroupDevice(selfGroup.virtualDeviceSerialNumber,selfGroup.virtualDeviceSerialNumber);
-		console.log(virtualDevice);
 		var url = '/pages/tabs/control/devices.htm?sid='+SessionId;
 		var pb = "{}";
 		var opt =
@@ -150,7 +153,7 @@ function VirtualGroup(id, name, groupTypeLabel, virtualDeviceType)
 
 				jQuery("#content").html(newContent);
 			}
-		}
+		};
 		new Ajax.Request(url,opt);
-	}
+	};
 }

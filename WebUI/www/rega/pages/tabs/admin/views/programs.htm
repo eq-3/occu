@@ -168,29 +168,29 @@
   };
 
   SetRGBWController = function(regaDialogID, param) {
-    var elm = jQuery("#setRGBWController" + regaDialogID), // this is the element which contains the relevant string to transmit
-    url = "/pages/msg/setRGBWController.htm";
-    jQuery(elm).prop("disabled", true);
-    var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+      var elm = jQuery("#setRGBWController" + regaDialogID), // this is the element which contains the relevant string to transmit
+      url = "/pages/msg/setRGBWController.htm";
+      jQuery(elm).prop("disabled", true);
+      var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
 
-    var req = jQuery.ajax({
-      url : url +"?sid=" + SessionId,
-      dataType: "html"
-    });
-    req.done(function(htmlContent) {
-      var rgbwControllerDialog = new RGBWControllerDialog(translateKey("titleRGBWControllerDialogTitle"), htmlContent, param, jQuery(inputElm).val(), function(result) {
-        jQuery(elm).prop("disabled", false);
-        if (result == 1) {
-          conInfo("SetRGBWController: Yes pressed");
-          var inputElm = jQuery(elm).prev();
-          var cfgString = this.getConfigString();
-          conInfo(cfgString);
-          inputElm.val(cfgString); //.change();
-          inputElm.change();
-        }
-      }, "html");
-    });
-  };
+      var req = jQuery.ajax({
+        url : url +"?sid=" + SessionId,
+        dataType: "html"
+      });
+      req.done(function(htmlContent) {
+        var rgbwControllerDialog = new RGBWControllerDialog(translateKey("titleRGBWControllerDialogTitle"), htmlContent, param, jQuery(inputElm).val(), function(result) {
+          jQuery(elm).prop("disabled", false);
+          if (result == 1) {
+            conInfo("SetRGBWController: Yes pressed");
+            var inputElm = jQuery(elm).prev();
+            var cfgString = this.getConfigString();
+            conInfo(cfgString);
+            inputElm.val(cfgString); //.change();
+            inputElm.change();
+          }
+        }, "html");
+      });
+    };
 
   ChangeDelayUnit = function( sdid )
   {

@@ -1,5 +1,12 @@
 jQuery.extend(true,langJSON, {
   "en" : {
+    "HM-ES-PMSw1-SM" : "Wireless Switch actuator with power measurement",
+    "OLIGO.smart.iq.HM" : "Wireless Dimming Actuator",
+    "WRC2" : "HmIP Wireless Push-button 2-channel",
+    "TRV" : "HmIP Wireless Heating Thermostat",
+    "WTH" : "HmIP Wireless Wall Thermostat",
+    "PS" : "HmIP Wireless Switch, 1-channel",
+    "SWD" : "HmIP Wireless Door/Window Contact optical",
     "HM-LC-Sw1-Pl-CT-R1" : "Wireless Switch Actuator 1-channel with clamp terminal",
     "HM-ES-PMSw1-DR" : "Wireless Switch actuator with power measurement, DIN rail mount ",
     "HM-LC-Sw1-DR" : "Wireless Switch Actuator 1-channel, DIN rail mount",

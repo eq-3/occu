@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">You can define the mode of the button here. There are the following options: increase the color value, decrease the color value and - depending on the button press counter -  alternate between increasing and decreasing of the color value.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">You can set the button for activating a particular color value here. You can set a color value for the short and for the long button press separately. </span><br/><br/>",
