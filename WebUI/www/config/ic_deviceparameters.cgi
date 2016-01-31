@@ -652,7 +652,8 @@ proc put_channel_parameters {} {
     
     array set ch_descr_orig [array get ch_descr]
 
-    if {$ch_descr(INDEX) == 0} then { continue }
+    # Für HmIP Kanal 0 aktivieren
+    if {($ch_descr(INDEX) == 0) && ($iface != "HmIP-RF")} then { continue }
 
     if { [catch { set ch_name $ise_CHANNELNAMES($iface;$ch_descr(ADDRESS)) } ] } then {
         set ch_name "${iface}.$ch_descr(ADDRESS)"
@@ -890,6 +891,7 @@ proc put_Header {} {
   global dev_descr
   global MODE
 
+  set HmIPIdentifier "HmIP-RF"
   set type $dev_descr(TYPE)
 
   array set SENTRY ""
@@ -917,22 +919,53 @@ proc put_Header {} {
   #append SENTRY(FIRMWARE) "<tr><td>Version:</td><td class=\"CLASS22006\">$dev_descr(FIRMWARE)</td></tr>"
   append SENTRY(FIRMWARE) "<tr><td>\${lblFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(FIRMWARE)</td></tr>"
   if {$MODE == "DEVICEPARAMETERS"} then {
-    
     set fw_update_rows ""
-    
-    catch {
-      if {$dev_descr(AVAILABLE_FIRMWARE) != $dev_descr(FIRMWARE)} then {
-        #set    fw_update_rows "<tr><td>Verf&uuml;gbare Version:</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
-        set    fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
-        #append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">Update</span></td></tr>"
-        append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+    if {$iface != $HmIPIdentifier} {
+      catch {
+        if {$dev_descr(AVAILABLE_FIRMWARE) != $dev_descr(FIRMWARE)} then {
+          #set    fw_update_rows "<tr><td>Verf&uuml;gbare Version:</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
+          set    fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
+          #append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">Update</span></td></tr>"
+          append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+        } else {
+          #set fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22008\">(Aktuelle Firmwareversion)</td></tr>"
+          set fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22008\">\${lblActualFirmwareVersion}</td></tr>"
+        }
+      }
+    } else {
+      # This is a HmIP device
+      if {[catch {set firmwareUpdateState $dev_descr(FIRMWARE_UPDATE_STATE)}] == 0} {
+
+        switch $firmwareUpdateState {
+          "PERFORMING_UPDATE" {
+            set fw_update_rows "<tr><td class=\"CLASS22006\">\${lblDeviceFwPerformUpdate}</td></tr>"
+          }
+
+          "DELIVER_FIRMWARE_IMAGE" {
+            set fw_update_rows "<tr><td class=\"CLASS22008\"><div>\${lblDeviceFwDeliverFwImage}</div><div class=\"StdTableBtnHelp\"><img id=\"hmIPDeliverFirmwareHelp\" height=\"24\" width=\"24\"src=\"/ise/img/help.png\"></div></td></tr>"
+          }
+
+          "READY_FOR_UPDATE" {
+            set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
+            append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+          }
+        }
       } else {
-        #set fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22008\">(Aktuelle Firmwareversion)</td></tr>"
-        set fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22008\">\${lblActualFirmwareVersion}</td></tr>"
+        # This should never be reached....
+        puts "<script type=\"text/javascript\">conInfo(\"HmIP - FIRMWARE_UPDATE_STATE unknown error\");</script>"
       }
     }
-
     append SENTRY(FIRMWARE) $fw_update_rows
+
+        puts {
+          <script type="text/javascript">
+            var tooltipHTML = "<div>"+translateKey("tooltipHmIPDeliverFirmwareImage");+"</div>",
+            tooltipElem = jQuery("#hmIPDeliverFirmwareHelp") ;
+            tooltipElem.data('powertip', tooltipHTML);
+            tooltipElem.powerTip({placement: 'sw', followMouse: false});
+          </script>
+        }
+
   }
   append SENTRY(FIRMWARE) "</table>"
 
@@ -1062,7 +1095,7 @@ cgi_eval {
       set paramids [xmlrpc $iface_url($iface) getParamsetId $address MASTER]
       set dev_paramid [getExistingParamId $paramids]
       set dev_PARAMIDS $paramids
-      array set dev_ps [xmlrpc $iface_url($iface) getParamset [list string $address] [list string MASTER]]
+      catch {array set dev_ps [xmlrpc $iface_url($iface) getParamset [list string $address] [list string MASTER]]}
       #==========
       
     } else {

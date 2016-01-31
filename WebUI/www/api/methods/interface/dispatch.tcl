@@ -87,6 +87,9 @@ proc getDeviceDescription { deviceString } {
     if { [info exists device(UPDATABLE)] } then {
       append result ",\"updatable\":[json_toString $device(UPDATABLE)]"
     }
+    if { [info exists device(FIRMWARE_UPDATE_STATE)] } then {
+      append result ",\"firmwareUpdateState\":[json_toString $device(FIRMWARE_UPDATE_STATE)]"
+    }
   } else {
     # Felder für Kanäle
     append result ",\"parent\":[json_toString $device(PARENT)]"
@@ -128,6 +131,7 @@ proc getDeviceDescription { deviceString } {
 ##
 proc checkXmlRpcStatus { status } {
   if { 0 != $status } then {
+
     switch -exact -- $status {
        1      { jsonrpc_error 601 "TCL error" }
        2      { jsonrpc_error 602 "TCL return" }
@@ -139,6 +143,7 @@ proc checkXmlRpcStatus { status } {
       -4      { jsonrpc_error 504 "XML-RPC: device address expected" }
       -5      { jsonrpc_error 505 "XML-RPC: unknown argument or value" }
       -6      { jsonrpc_error 506 "XML-RPC: operation not supported" }
+      -10     { jsonrpc_error 507 "Transmission pending in HmIP Legacy API" }
       default { jsonrpc_error 599 "unknown error ($status)" }
     }
   }

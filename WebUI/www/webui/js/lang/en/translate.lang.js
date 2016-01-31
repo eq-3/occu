@@ -1,11 +1,18 @@
 jQuery.extend(true,HMIdentifier , {
   "en" : {
-    "CCUFullName" : "HomeMatic CCU",
+    "CCUFullNameHeader" : "HomeMatic CCU2",
+    "CCUFullNameText" : "Homematic CCU",
     "CCUShortName" : "CCU",
     "BidCosRF" : "BidCos-RF",
     "BidCosWired" : "BidCos-Wired",
     "VirtualDevices" : "VirtualDevices",
-    "HomeMaticCFGAdapter" : "HomeMatic Configuration-Adapter"
+    "HomeMaticCFGAdapter" : "HomeMatic Configuration-Adapter",
+    "LabelHomeMatic" : "HomeMatic",
+    "LabelHomematic" : "Homematic",
+    "LabelHomematicWiredHeader" : "HomeMatic Wired",
+    "LabelHomematicWiredText" : "Homematic Wired",
+    "LabelHomematicIPHeader" : "HomeMatic IP",
+    "LabelHomematicIPText" : "Homematic IP"
   }
 });
 
@@ -15,7 +22,7 @@ jQuery.extend(true,langJSON, {
     "BidCosRF" : HMIdentifier.en.BidCosRF,
     "BidCosWired" : HMIdentifier.en.BidCosWired,
     "VirtualDevices" : HMIdentifier.en.VirtualDevices,
-    "ccuNotReady" : "The " + HMIdentifier.en.CCUFullName + " is not yet ready",
+    "ccuNotReady" : "The " + HMIdentifier.en.CCUFullNameText + " is not yet ready",
     "ccuNotReadyHint" : "Please wait. You will automatically be redirected to the home page.",
     "loadWebUI" : "Loading...",
     "noFav" : "No favourites available",
@@ -248,7 +255,7 @@ jQuery.extend(true,langJSON, {
     "lblCreateProgramsAndLinks6" : "Edit time / sequence programs",
     "lblCreateProgramsAndLinks7" : "Delete time / sequence programs",
     "lblCreateProgramsAndLinks8" : "Create new time / sequence programs",
-    "hintCreateProgramsAndLinks1" : HMIdentifier.en.CCUShortName +" controlled device connections connect two or more devices via the " + HMIdentifier.en.CCUShortName + ". The transmitter and receiver only communicate with the " + HMIdentifier.en.CCUShortName + ", there is no direct connection between the individual devices. All control tasks are performed by the " + HMIdentifier.en.CCUFullName + ".",
+    "hintCreateProgramsAndLinks1" : HMIdentifier.en.CCUShortName +" controlled device connections connect two or more devices via the " + HMIdentifier.en.CCUShortName + ". The transmitter and receiver only communicate with the " + HMIdentifier.en.CCUShortName + ", there is no direct connection between the individual devices. All control tasks are performed by the " + HMIdentifier.en.CCUFullNameText + ".",
     "hintCreateProgramsAndLinks2" : "The benefits are advanced programming possibilities (e.g. time control or external access to the system).",
     "hintCreateProgramsAndLinks3" : "Example for a central connection:",
     "hintMultiChannelChooserNoChannelsAvailable" : "No channels available",
@@ -312,7 +319,7 @@ jQuery.extend(true,langJSON, {
     "lblSettingsFavorites2" : "Create and edit new favourites for:",
     "lblSettingsFavorites2a" : "all users (global favourites)",
     "lblSettingsFavorites2b" : "single users",
-    "lblSettingsFavorites2c" : "the " + HMIdentifier.en.CCUFullName,
+    "lblSettingsFavorites2c" : "the " + HMIdentifier.en.CCUFullNameText,
     "lblSettingsFavorites3" : "delete favourites",
     "commentSettingsBtnFavoritesEnd" : "***********************************************",
     "commentSettingsBtnUserAdministration" : "***********************************************",
@@ -372,7 +379,7 @@ jQuery.extend(true,langJSON, {
     "dialogQuestionRemoveCFG" : "Do you really want to delete the " + HMIdentifier.en.HomeMaticCFGAdapter + "?",
     "dialogQuestionRemoveExtraSoftware" : "Do you really want to delete the additional software?",
     "dialogQuestionRestart" : "Please click here to perform the restart?",
-    "dialogQuestionRestartSafeMode" : "Do you really want to start the " + HMIdentifier.en.CCUFullName + " in the safe mode?",
+    "dialogQuestionRestartSafeMode" : "Do you really want to start the " + HMIdentifier.en.CCUFullNameText + " in the safe mode?",
     "dialogUserAccountTitle" : "User account configuration",
     "dialogProgChoseSysVar" : "Programs - system variable selection",
     "dialogEditRoom" : "Edit room",
@@ -420,8 +427,8 @@ jQuery.extend(true,langJSON, {
     "lblMenuStatusControlSysProtocolChannelSysvar" : "Channel / system variable",
     "lblMenuStatusControlSysProtocolActivity" : "Activity",
     "btnSysConfCentralMaintenace" : "CCU maintenance",
-    "lblSysConfCentralMaintenance1" : "Software update for " + HMIdentifier.en.CCUFullName,
-    "lblSysConfCentralMaintenance2" : "Restart " + HMIdentifier.en.CCUFullName,
+    "lblSysConfCentralMaintenance1" : "Software update for " + HMIdentifier.en.CCUFullNameText,
+    "lblSysConfCentralMaintenance2" : "Restart " + HMIdentifier.en.CCUFullNameText,
     "lblSysConfCentralMaintenance3" : "Configure error log",
     "commentSettingsDialogMaintenance" : "***********************************************",
     "dialogSettingsCMTitle" : HMIdentifier.en.CCUShortName + " maintenance",
@@ -585,9 +592,9 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsNetworkIPSettingsLblUseDNS" : "Use the following DNS server address: ",
     "dialogSettingsNetworkIPSettingsLblDNS1" : "Preferred DNS server: ",
     "dialogSettingsNetworkIPSettingsLblDNS2" : "Alternative DNS server: ",
-    "dialogSettingsNetworkHintIPSettingsP1" : "Please define the basic IP settings of your " + HMIdentifier.en.CCUFullName + ".",
-    "dialogSettingsNetworkHintIPSettingsP2" : "You can assign a name to your " + HMIdentifier.en.CCUFullName + " via the host name.",
-    "dialogSettingsNetworkHintIPSettingsP3" : "The " + HMIdentifier.en.CCUFullName + " gets the IP address and all corresponding settings from a DHCP server. If your network does not have a DHCP server or if you would like to use your own settings, you can manually configure an own IP address here.",
+    "dialogSettingsNetworkHintIPSettingsP1" : "Please define the basic IP settings of your " + HMIdentifier.en.CCUFullNameText + ".",
+    "dialogSettingsNetworkHintIPSettingsP2" : "You can assign a name to your " + HMIdentifier.en.CCUFullNameText + " via the host name.",
+    "dialogSettingsNetworkHintIPSettingsP3" : "The " + HMIdentifier.en.CCUFullNameText + " gets the IP address and all corresponding settings from a DHCP server. If your network does not have a DHCP server or if you would like to use your own settings, you can manually configure an own IP address here.",
     "dialogSettingsNetworkCertificateLblStep1" : "Step 1: Enter data",
     "dialogSettingsNetworkCertificateLblHostname" : "Host name",
     "dialogSettingsNetworkCertificateLblEMail" : "Email address",
@@ -597,13 +604,13 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsNetworkCertificateLblStep4" : "Step 4: Restart CCU",
     "dialogSettingsNetworkCertificateBtnCreateCert" : "Create certificate",
     "dialogSettingsNetworkCertificateLblUpload" : "Upload",
-    "dialogSettingsNetworkHintCertificateP1" : "To enable secure remote access to your " + HMIdentifier.en.CCUFullName + ", you can create a certificate here.",
+    "dialogSettingsNetworkHintCertificateP1" : "To enable secure remote access to your " + HMIdentifier.en.CCUFullNameText + ", you can create a certificate here.",
     "dialogSettingsNetworkHintCertificateP2" : "You can create a certificate in four steps:",
     "dialogSettingsNetworkHintCertificateP2a" : "Step 1: Create certificate",
     "dialogSettingsNetworkHintCertificateP2b" : "Step 2: Select downloaded certificate",
     "dialogSettingsNetworkHintCertificateP2c" : "Step 3: Upload certificate to CCU",
-    "dialogSettingsNetworkHintCertificateP2d" : "Step 4: Restart " + HMIdentifier.en.CCUFullName,
-    "dialogSettingsNetworkHintCertificateP3" : "In the first step, the certificate will be created online on www.homematic.com. Therefore, an active internet connection is required. Then please select the created certificate and transfer it to your " + HMIdentifier.en.CCUFullName + ". After restarting your " + HMIdentifier.en.CCUFullName + " you can access the CCU via a secure connection.",
+    "dialogSettingsNetworkHintCertificateP2d" : "Step 4: Restart " + HMIdentifier.en.CCUFullNameText,
+    "dialogSettingsNetworkHintCertificateP3" : "In the first step, the certificate will be created online on www.homematic.com. Therefore, an active internet connection is required. Then please select the created certificate and transfer it to your " + HMIdentifier.en.CCUFullNameText + ". After restarting your " + HMIdentifier.en.CCUFullNameText + " you can access the CCU via a secure connection.",
     "dialogSettingsNetworkMessageCertificateTitle" : "Network security",
     "dialogSettingsNetworkMessageCertificateUploadError" : "Certificate invalid or not successfully uploaded to CCU",
     "dialogSettingsNetworkMessageCertificateUploadSucceed" : "Certificate uploaded. Please restart your CCU now.",
@@ -1048,7 +1055,8 @@ jQuery.extend(true,langJSON, {
     "dummy" : "dummy",
 
     "optionLastValue" : "Last value",
-    "optionNone" : "None"
+    "optionNone" : "None",
+    "optionNotActive" : "Not active"
   }
 });
 

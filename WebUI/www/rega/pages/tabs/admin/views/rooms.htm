@@ -213,26 +213,26 @@ arSortRObj[arSortRObj.length] = tmpRoom;
   <td class="CLASS04109" style="height:20px">
     <div id="btnFilterName" class="FilterBtn CLASS00203">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterNameSub" style="display:none">
-        <input id="ftName" type="text" size="15" class='CLASS04112' />
-        <div class='FilterSetButton CLASS04113' onclick="setSFilter(fltSR, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
+        <input id="ftName" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetNameBtn', 'ftCancelNameBtn')" type="text" size="15" class='CLASS04112' />
+        <div id="ftSetNameBtn" class='FilterSetButton CLASS04113' onclick="setSFilter(fltSR, 'ftName', FIL_NAME);updateTable();$('btnFilterNameSub').hide();" >${filterSet}</div>
+        <div id="ftCancelNameBtn" class='FilterSetButton' onclick="$('btnFilterNameSub').hide();">${filterClose}</div>
     </div>
   </td>
   <td class="CLASS04109" style="height:20px">
     <div id="btnFilterType" class="FilterBtn CLASS00203">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterTypeSub" style="display:none">
-        <input id="ftType" type="text" size="15" class='CLASS04112' />
-        <div class="FilterSetButton CLASS04113" onclick="setSFilter(fltSR, 'ftType', FIL_TYPE);updateTable();$('btnFilterTypeSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterTypeSub').hide();">${filterClose}</div>
+        <input id="ftType" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetTypeBtn', 'ftCancelTypeBtn')" type="text" size="15" class='CLASS04112' />
+        <div id="ftSetTypeBtn" class="FilterSetButton CLASS04113" onclick="setSFilter(fltSR, 'ftType', FIL_TYPE);updateTable();$('btnFilterTypeSub').hide();" >${filterSet}</div>
+        <div id="ftCancelTypeBtn" class='FilterSetButton' onclick="$('btnFilterTypeSub').hide();">${filterClose}</div>
     </div>
   </td>
   <td class="CLASS04104" style="height:20px"></td>
   <td class="CLASS04109" style="height:20px">
     <div id="btnFilterDesc" class="FilterBtn CLASS00203">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterDescSub" style="display:none">
-        <input id="ftDesc" type="text" size="15" class='CLASS04112' />
-        <div class="FilterSetButton CLASS04113" onclick="setSFilter(fltSR, 'ftDesc', FIL_DESC);updateTable();$('btnFilterDescSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterDescSub').hide();">${filterClose}</div>
+        <input id="ftDesc" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetDescBtn', 'ftCancelDescBtn')" type="text" size="15" class='CLASS04112' />
+        <div id="ftSetDescBtn" class="FilterSetButton CLASS04113" onclick="setSFilter(fltSR, 'ftDesc', FIL_DESC);updateTable();$('btnFilterDescSub').hide();" >${filterSet}</div>
+        <div id="ftCancelDescBtn" class='FilterSetButton' onclick="$('btnFilterDescSub').hide();">${filterClose}</div>
     </div>
   </td>
   
@@ -240,9 +240,9 @@ arSortRObj[arSortRObj.length] = tmpRoom;
   <td class="CLASS04109" style="height:20px">
     <div id="btnFilterSN" class="FilterBtn CLASS00203">${thFilter}</div>
     <div class="FilterSubMenu" id="btnFilterSNSub" style="display:none">
-        <input id="ftSN" type="text" size="15" class='CLASS04112' />
-        <div class="FilterSetButton CLASS04113" onclick="setSFilter(fltSR, 'ftSN', FIL_SN);updateTable();$('btnFilterSNSub').hide();" >${filterSet}</div>
-        <div class='FilterSetButton' onclick="$('btnFilterSNSub').hide();">${filterClose}</div>
+        <input id="ftSN" onkeypress="iseSFilterCheckEnterEsc(event.keyCode, 'ftSetSNBtn', 'ftCancelSNBtn')" type="text" size="15" class='CLASS04112' />
+        <div id="ftSetSNBtn" class="FilterSetButton CLASS04113" onclick="setSFilter(fltSR, 'ftSN', FIL_SN);updateTable();$('btnFilterSNSub').hide();" >${filterSet}</div>
+        <div id="ftCancelSNBtn" class='FilterSetButton' onclick="$('btnFilterSNSub').hide();">${filterClose}</div>
     </div>
   </td>
   <td class="CLASS04109" style="height:20px">
@@ -718,7 +718,23 @@ if ( oUser )
     s += "<td align='center'><div class='FooterButton' onclick='editRooms();'>${footerBtnEdit}</div></td>";
   s += "</tr>";
   s += "</table>";
-  
+
+  jQuery("#btnFilterName").click(function(){
+    jQuery("#ftName").focus();
+  });
+
+  jQuery("#btnFilterType").click(function(){
+    jQuery("#ftType").focus();
+  });
+
+  jQuery("#btnFilterDesc").click(function(){
+    jQuery("#ftDesc").focus();
+  });
+
+  jQuery("#btnFilterSN").click(function(){
+    jQuery("#ftSN").focus();
+  });
+
   setFooter(s);
   
   editRooms = function() {

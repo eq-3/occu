@@ -1,0 +1,109 @@
+function ::CreateWinMatic()
+{
+  object oLevel = cObj.DPByControl("WINDOW.LEVEL");
+  object oUncertain = cObj.DPByControl("WINDOW.UNCERTAIN");
+  object oStop = cObj.DPByControl("WINDOW.STOP");
+
+  WriteLine("<td id='"#chnId#"Circle'></td>");
+  WriteLine("<td>");
+    WriteLine("<div class='PercBtn' >");
+      WriteLine("<table width='100%'>");
+        WriteLine("<tr class='CLASS02531'>");
+          string sReadOnly = "";
+          if( system.GetVar("iStatusOnly") )
+          {
+            sReadOnly = "readonly";
+          }
+          WriteLine("<td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td></tr>");
+        WriteLine("<tr>");
+          WriteLine("<td align='center'>");
+          WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+          WriteLine("</td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</div>");
+  WriteLine("</td>");
+
+  WriteLine("<td>");
+    WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' >${actionStatusControlStop}</div>");
+  WriteLine("</td>");
+
+  WriteLine("<td>");
+    WriteLine("<table width='100%' height='100%' cellspacing='4'>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Open' >");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/window/open_v.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                WriteLine("${actionStatusControlOpen}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Close' >");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/window/closed.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                WriteLine("${actionStatusControlClose}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  WriteLine("<td>");
+    WriteLine("<table width='100%' height='100%' cellspacing='5'>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+
+          WriteLine("<table class='ControlBtnOff CLASS02554' id='"#chnId#"Locked' >");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/lock/closed.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td class='CLASS02555' >");
+                WriteLine("${actionStatusControlLocked}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnOff CLASS02556' id='"#chnId#"Unknown'>${infoStatusControlStateUnknown}</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  if( oLevel && oUncertain && oStop )
+  {
+    string sCtrlId = chnId#"Circle";
+    WriteLine('<script type="text/javascript">');
+
+      WriteLine("var opts = {");
+      WriteLine(" idLevel: "#oLevel.ID()#",");
+      WriteLine(" idStop: "#oStop.ID()#",");
+      WriteLine(" idUncertain: "#oUncertain.ID()#",");
+      WriteLine(" stLevel: "#oLevel.Value()#",");
+      WriteLine(" stStop: '"#oStop.Value()#"',");
+      WriteLine(" stUncertain: "#oUncertain.Value());
+      WriteLine("};");
+
+      WriteLine("ibwm"#cObj.ID()#" = new iseButtonsWinMatic("#cObj.ID()#", opts, " #system.GetVar("iStatusOnly")# ");");
+      !WriteLine("new iseButtonsWinMatic("#cObj.ID()#", 0, false);");
+      WriteLine("translatePage('#ctrl"#chnId#"tbl');");
+    WriteLine('</script>');
+  }
+  return;
+}

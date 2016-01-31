@@ -22,6 +22,7 @@ proc cmd_removeLink {} {
   catch { import receiver_address }
 
   set url $iface_url($iface)
+  set HmIPIdentifier "HmIP-RF"
 
   if { ![info exist env(IC_OPTIONS)] || ([string first NO_PROFILE_MAPPING $env(IC_OPTIONS)] < 0) } {
 
@@ -47,9 +48,10 @@ proc cmd_removeLink {} {
   }
     
   #cgi_debug -on
-  
-  
-  if { ! [catch { xmlrpc $url removeLink [list string $sender_address] [list string $receiver_address] } e ] } then {
+
+  set errorCode [catch {xmlrpc $url removeLink [list string $sender_address] [list string $receiver_address]}]
+
+   if { (! $errorCode) || ($iface == $HmIPIdentifier) } then {
     #puts "<script type=\"text/javascript\">alert('Loeschen der Verknuepfung war erfolgreich!');</script>"
     cmd_ShowConfigPendingMsg
   } else {
@@ -101,6 +103,8 @@ proc cmd_addLink {} {
   set group_description  ""
   set redirect_url       ""
 
+  set HmIPIdentifier "HmIP-RF"
+
   catch { import iface }
   catch { import sender_address }
   catch { import sender_group }
@@ -112,9 +116,11 @@ proc cmd_addLink {} {
   catch { import redirect_url }
 
   set url $iface_url($iface)
-  
-  if { ! [catch { xmlrpc $url addLink [list string $sender_address] [list string $receiver_address] } ] } then {
-    
+
+  set errorCode [catch { xmlrpc $url addLink [list string $sender_address] [list string $receiver_address] }]
+
+  if { ! $errorCode } then {
+
     #Verknüpfung erfolgreich angelegt. Namen und Beschreibungen noch nicht gesetzt.
     set ret 1
     
@@ -150,13 +156,14 @@ proc cmd_addLink {} {
   puts "<script type=\"text/javascript\">if (ProgressBar) ProgressBar.IncCounter(translateKey(\"dialogCreateLinkSuccessProgressBar\"));</script>"
   cmd_ShowConfigPendingMsg
 }
-
 proc cmd_ShowConfigPendingMsg {} {
 
   global iface_url sid sidname dev_descr_sender  
   
   array set ise_CHANNELNAMES ""
   ise_getChannelNames ise_CHANNELNAMES
+
+  set HmIPIdentifier "HmIP-RF"
 
   set iface            ""
   set sender_address   ""
@@ -194,7 +201,7 @@ proc cmd_ShowConfigPendingMsg {} {
       #set sendername "Unbenanntes Ger&auml;t"
       set sendername "\${lblUnknownDevice}"
     }
-  
+
     array set valueset_sender [xmlrpc $url getParamset [list string $sender_parent:0] [list string VALUES]]
     set sender_configpending [expr {$valueset_sender(CONFIG_PENDING)?"1":"0"} ]
 
@@ -254,10 +261,10 @@ proc cmd_ShowConfigPendingMsg {} {
 
     puts "ConfigPendingFrm.setReturnURL('$sidname', '$sid', '$redirect_url', $go_back);"
     puts "ConfigPendingFrm.show();"
-   } else {
+  } else {
       puts "var data = '{ \"virtualDeviceSerialNumber\" : \"$sender_address\" }';"
       puts "CreateCPPopup(\"/pages/jpages/group/configureDevices\", data);"
-   }
+  }
   puts "</script>"
 }
 
@@ -307,12 +314,19 @@ proc cmd_firmware_update {} {
   set iface   ""
   set address ""
 
+  set HmIPIdentifier "HmIP-RF"
+
   catch { import iface }
   catch { import address }
 
   set url $iface_url($iface)
 
-  catch { xmlrpc $url updateFirmware [list string $address] } result
+  if {$iface != $HmIPIdentifier} {
+    catch {xmlrpc $url updateFirmware [list string $address]} result
+  } else {
+    # HmIP device
+    catch {xmlrpc $url installFirmware [list string $address]} result
+  }
 
   puts "<script type=\"text/javascript\">if (ProgressBar) ProgressBar.IncCounter(translateKey(\"dialogFirmwareUpdateCheckSuccess\"));</script>"
   
@@ -361,6 +375,7 @@ proc cmd_set_profile {} {
   set ps_type ""
   set paramid ""
   set pnr     ""
+  set HmIPIdentifier "HmIP-RF"
 
   catch { import iface }
   catch { import address }
@@ -390,7 +405,8 @@ proc cmd_set_profile {} {
   set ret [base_put_profile $iface $address $pnr $peer $ps_type 0]
     
   puts "<script type=\"text/javascript\">"
-  if {$ret == -1} then {
+
+  if {$ret == -1 && $iface != $HmIPIdentifier} then {
     
     #Kein ConfigPending anzeigen nach dem Laufbalken (sinnlos, weil keine Übertragung erfolgte):
     puts "ProgressBar.OnFinish = function () \{ return; \}"
@@ -522,7 +538,7 @@ cgi_eval {
       }
       body {
         puts "<script src=\"/config/js/ic_common.js\" type=\"text/javascript\"></script>"
-        cmd_$cmd
+          cmd_$cmd
       }
     }
   }

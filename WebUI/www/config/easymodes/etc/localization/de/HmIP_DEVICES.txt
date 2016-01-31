@@ -1,0 +1,26 @@
+[
+  {
+    "optionNotActive" : "Nicht aktiv",
+    "optionUnit100MS" : "100ms",
+    "optionUnit1S": "1 Sekunde",
+    "optionUnit2S": "2 Sekunden",
+    "optionUnit3S": "3 Sekunden",
+    "optionUnit5S": "5 Sekunden",
+    "optionUnit10S": "10 Sekunden",
+    "optionUnit30S": "30 Sekunden",
+    "optionUnit1M": "1 Minute",
+    "optionUnit2M": "2 Minuten",
+    "optionUnit5M": "5 Minuten",
+    "optionUnit10M": "10 Minuten",
+    "optionUnit30M": "30 Minuten",
+    "optionUnit1H": "1 Stunde",
+    "optionUnit2H": "2 Stunden",
+    "optionUnit3H": "3 Stunden",
+    "optionUnit5H": "5 Stunden",
+    "optionUnit8H": "8 Stunden",
+    "optionUnit12H": "12 Stunden",
+    "optionUnit24H": "24 Stunden",
+    "stringTablePermanent" : "dauerhaft",
+    "stringTableEnterValue" : "Wert eingeben",
+  }
+]

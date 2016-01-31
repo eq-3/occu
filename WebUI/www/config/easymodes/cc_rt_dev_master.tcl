@@ -493,7 +493,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       set param VALVE_OFFSET
       append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableValveOffset}</td>"
-      append HTML_PARAMS(separate_1)  "<td name=\"expertParam\" class=\"hidden\">[getTextField $DEVICE $param $ps($param) $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+      append HTML_PARAMS(separate_1)  "<td name=\"expertParam\" class=\"hidden\">[getTextField $DEVICE $param $ps($param) $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight + 40]]</td>"
 
       # mid
       incr prn

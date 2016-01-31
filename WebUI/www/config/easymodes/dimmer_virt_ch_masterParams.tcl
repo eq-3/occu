@@ -5,7 +5,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 
 set PROFILE_PNAME(LOAD_APPEAR_BEHAVIOUR) "\${stringTableDimmerLoadAppearBehaviour}"
-set PROFILE_PNAME(LOGIC_COMBINATION) "\${stringTableDimmerLogicCombination}"
+set PROFILE_PNAME(LOGIC_COMBINATION) "\${stringTableLogicCombination}"
 set PROFILE_PNAME(POWERUP_ACTION) "\${stringTableDimmerPowerUpAction}"
 set PROFILE_PNAME(STATUSINFO_MINDELAY) "\${stringTableDimmerStatusInfoMinDelay}"
 set PROFILE_PNAME(STATUSINFO_RANDOM) "\${stringTableDimmerStatusInfoRandom}"

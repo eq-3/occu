@@ -167,7 +167,6 @@ CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=COMMUNICATION_ERROR	${stringTableC
 CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=LOWBAT	${stringTableClimateControlRTTransceiverLowBat}
 CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=VALVE_ERROR_POSITION	${stringTableClimateControlRTTransceiverValveErrorPosition}
 
-
 CONDITION_CURRENT	${stringTableConditionCurrentTitle}
 CONDITION_FREQUENCY	${stringTableConditionFrequencyTitle}
 CONDITION_POWER	${stringTableConditionPowerTitle}
@@ -221,7 +220,7 @@ DIMMER|LEVEL	${stringTableDimmerLevel}
 LEVEL_REAL	${stringTableDimmerLevelReal}
 DIMMER|LOAD_ERROR_CALIB	${stringTableDimmerLoadErrorCal}
 DIMMER|LOAD_APPEAR_BEHAVIOUR	${stringTableDimmerLoadAppearBehaviour}
-DIMMER|LOGIC_COMBINATION	${stringTableDimmerLogicCombination}
+DIMMER|LOGIC_COMBINATION	${stringTableLogicCombination}
 DIMMER|OLD_LEVEL	${stringTableDimmerOldLevel}
 DIMMER|ON_TIME	${stringTableDimmerOnTime}
 DIMMER|OVERTEMP_LEVEL	${stringTableDimmerOverTempLevel}
@@ -303,6 +302,18 @@ DISPLAY|UNIT=PERCENT	${stringTableDisplayUnitPercent}
 DISPLAY|UNIT=WATT	${stringTableDisplayUnitWatt}
 DISPLAY_ENERGYOPTIONS	${stringTableDisplayEnergyOptions}
 DISPLAY_BRIGHTNESS	${stringTableDisplayBrightness}
+
+ENERGIE_METER_TRANSMITTER|AVERAGING	${stringTablePowerMeterAveraging}
+ENERGIE_METER_TRANSMITTER|TX_THRESHOLD_POWER	${stringTablePowerMeterTxThresholdPower}
+
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
+ENERGIE_METER_TRANSMITTER|CURRENT	${stringTablePowerMeterCurrent}
+ENERGIE_METER_TRANSMITTER|FREQUENCY	${stringTablePowerMeterFrequency}
+ENERGIE_METER_TRANSMITTER|POWER	${stringTablePowerMeterPower}
+ENERGIE_METER_TRANSMITTER|VOLTAGE	${stringTablePowerMeterVoltage}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=FALSE	${stringTablePowerMeterOverflowFalse}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=TRUE	${stringTablePowerMeterOverflowTrue}
+
 ERROR	${stringTableError}
 ERROR_BATTERY=TRUE	${stringTableBatteryOk}
 ERROR_BATTERY=FALSE	${stringTableBatteryFailure}
@@ -334,6 +345,42 @@ INPUT_OUTPUT|LONGPRESS_TIME	${stringTableInputOutputLongPressA}
 INPUT_OUTPUT|LONG_PRESS_TIME	${stringTableInputOutputLongPressB}
 INPUT_OUTPUT|STATE=FALSE	${stringTableInputOutputStateFalse}
 INPUT_OUTPUT|STATE=TRUE	${stringTableInputOutputStateTrue}
+
+
+
+
+HEATING_CLIMATECONTROL_RECEIVER	${stringTableClimateControlReceiverTitle}
+HEATING_CLIMATECONTROL_CL_RECEIVER	${stringTableClimateControlCLReceiverTitle}
+
+HEATING_KEY_RECEIVER	${stringTableHeatingKeyReceiverTitle}
+
+HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER	${stringTableHeatingClimateControlSwitchTransmitterTitle}
+
+HEATING_CLIMATECONTROL_TRANSCEIVER	${stringTableClimateControlTransceiverTitle}
+HEATING_CLIMATECONTROL_TRANSCEIVER|ACTIVE_PROFILE	${stringTableActiveProfile}
+HEATING_CLIMATECONTROL_TRANSCEIVER|CONTROL_MODE	${stringTableControlMode}
+HEATING_CLIMATECONTROL_TRANSCEIVER|FROST_PROTECTION=FALSE	${stringTableFrostProtectFalse}
+HEATING_CLIMATECONTROL_TRANSCEIVER|FROST_PROTECTION=TRUE	${stringTableFrostProtectTrue}
+HEATING_CLIMATECONTROL_TRANSCEIVER|LEVEL	${stringTableHeatingLevel}
+HEATING_CLIMATECONTROL_TRANSCEIVER|HUMIDITY	${stringTableHeatingHumidity}
+HEATING_CLIMATECONTROL_TRANSCEIVER|PARTY_MODE=FALSE	${stringTablePartyModeFalse}
+HEATING_CLIMATECONTROL_TRANSCEIVER|PARTY_MODE=TRUE	${stringTablePartyModeTrue}
+HEATING_CLIMATECONTROL_TRANSCEIVER|SET_POINT_MODE	${stringTableSetPointMode}
+HEATING_CLIMATECONTROL_TRANSCEIVER|SET_POINT_TEMPERATURE	${stringTableSetPointTemperature}
+HEATING_CLIMATECONTROL_TRANSCEIVER|SWITCH_POINT_OCCURED=FALSE	${stringTableSwitchPointOccuredFalse}
+HEATING_CLIMATECONTROL_TRANSCEIVER|SWITCH_POINT_OCCURED=TRUE	${stringTableSwitchPointOccurredTrue}
+HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=FALSE	${stringTableValveAdaptionFalse}
+HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=TRUE	${stringTableValveAdaptionTrue}
+HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=CLOSED	${stringTableWindowStateClosed}
+HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=OPEN	${stringTableWindowStateOpen}
+HEATING_CLIMATECONTROL_TRANSCEIVER|DURATION_UNIT	${stringTableDurationUnit}
+HEATING_CLIMATECONTROL_TRANSCEIVER|DURATION_VALUE	${stringTableDurationValue}
+
+HEATING_CLIMATECONTROL_CL_TRANSMITTER	${stringTableHeatingClimateControlCLTransmitterTitle}
+HEATING_ROOM_TH_RECEIVER	${stringTableHeatingRoomTHReceiverTitle}
+HEATING_ROOM_TH_TRANSCEIVER	${stringTableHeatingRoomTHTransceiverTitle}
+HEATING_SHUTTER_CONTACT_RECEIVER	${stringTableHeatingShutterContactReceiverTitle}
+
 KEYMATIC	${stringTableKeyMaticTitle}
 KEYMATIC|ANGLE_LOCKED	${stringTableKeyMaticAngleLocked}
 KEYMATIC|ANGLE_MAX	${stringTableKeyMaticAngleMax}
@@ -384,6 +431,11 @@ KEY|TEXT1	${stringTableKeyText1}
 KEY|TEXT2	${stringTableKeyText2}
 KEY|TEXTLINE_1	${stringTableKeyTextLine}
 KEY|TEXTLINE_2	${stringTableKeyTextLine}
+
+KEY_TRANSCEIVER	${stringTableKeyTranseiverTitle}
+KEY_TRANSCEIVER|DBL_PRESS_TIME	${stringTableKeyDblPressTime}
+KEY_TRANSCEIVER|LONG_PRESS_TIME	${stringTableKeyLongPressTimeA}
+
 LANGUAGE	${stringTableLanguage}
 LANGUAGE=ENGLISH	${stringTableLanguageEnglish}
 LANGUAGE=GERMAN	${stringTableLanguageGerman}
@@ -420,7 +472,9 @@ LOGIC_INVERSMINUS	${stringTableLogicINVERSMINUS}
 LOGIC_INVERSMUL	${stringTableLogicINVERSMUL}
 LOW_BAT_LIMIT	${stringTableBatteryLowBatLimit}
 LOWBAT=FALSE	${stringTableBatteryOk}
+LOW_BAT=FALSE	${stringTableBatteryOk}
 LOWBAT=TRUE	${stringTableBatteryEmpty}
+LOW_BAT=TRUE	${stringTableBatteryEmpty}
 MAINTENANCE|ERROR_BATTERY=BATTERY_DEFECT	${stringTableBatteryFailure}
 MAINTENANCE|ERROR_BATTERY=NO_ERROR	${stringTableBatteryOk}
 MAINTENANCE|CONFIG_PENDING	${stringTableConfigPending}
@@ -440,6 +494,8 @@ MOTION_DETECTOR	${stringTableMotionDetectorTitle}
 MOTION_DETECTOR|BRIGHTNESS	${stringTableMotionDetectorBrightness}
 MOTION_DETECTOR|BRIGHTNESS_FILTER	${stringTableMotionDetectorBrightnessFilter}
 MOTION_DETECTOR|ERROR=SABOTAGE	${stringTableMotionDetectorErrorSabotage}
+MOTION_DETECTOR|ERROR=0	${stringTableSabotageContactOk}
+MOTION_DETECTOR|ERROR=7	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|EVENT_FILTER_NUMBER	${stringTableMotionDetectorEventFilterNumber}
 MOTION_DETECTOR|EVENT_FILTER_PERIOD	${stringTableMotionDetectorEventFilterPeriod}
 MOTION_DETECTOR|MIN_INTERVAL	${stringTableMotionDetectorMinInterval}
@@ -605,7 +661,6 @@ SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_SHEV_TURN	${stringTableSensorWindowType_5}
 SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_SHEV_TILT	${stringTableSensorWindowType_6}
 SHUTTER_CONTACT	${stringTableShutterContactTitle}
 SHUTTER_CONTACT|ERROR=SABOTAGE	${stringTableShutterContactErrorSabotage}
-SHUTTER_CONTACT|EVENT_DELAYTIME	${stringTableShutterContactEventDelayTime}
 SHUTTER_CONTACT|MSG_FOR_POS_A	${stringTableShutterContactMsgPosA0}
 SHUTTER_CONTACT|MSG_FOR_POS_A=CLOSED	${stringTableShutterContactMsgPosA1}
 SHUTTER_CONTACT|MSG_FOR_POS_A=NO_MSG	${stringTableShutterContactMsgPosA2}
@@ -616,6 +671,22 @@ SHUTTER_CONTACT|MSG_FOR_POS_B=NO_MSG	${stringTableShutterContactMsgPosB2}
 SHUTTER_CONTACT|MSG_FOR_POS_B=OPEN	${stringTableShutterContactMsgPosB3}
 SHUTTER_CONTACT|STATE=FALSE	${stringTableShutterContactStateFalse}
 SHUTTER_CONTACT|STATE=TRUE	${stringTableShutterContactStateTrue}
+SHUTTER_CONTACT|STATE=CLOSED	${stringTableShutterContactStateFalse}
+SHUTTER_CONTACT|STATE=OPEN	${stringTableShutterContactStateTrue}
+SHUTTER_CONTACT_HMIP	${stringTableShutterContactTitle}
+SHUTTER_CONTACT_HMIP|ERROR=SABOTAGE	${stringTableShutterContactErrorSabotage}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_A	${stringTableShutterContactHmIPMsgPosA0}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_A=CLOSED	${stringTableShutterContactHmMsgPosA1}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_A=NO_MSG	${stringTableShutterContactMsgPosA2}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_A=OPEN	${stringTableShutterContactMsgPosA3}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B	${stringTableShutterContactHmIPMsgPosB0}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B=CLOSED	${stringTableShutterContactMsgPosB1}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B=NO_MSG	${stringTableShutterContactMsgPosB2}
+SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B=OPEN	${stringTableShutterContactMsgPosB3}
+SHUTTER_CONTACT_HMIP|STATE=FALSE	${stringTableShutterContactStateFalse}
+SHUTTER_CONTACT_HMIP|STATE=TRUE	${stringTableShutterContactStateTrue}
+SHUTTER_CONTACT_HMIP|STATE=CLOSED	${stringTableShutterContactStateFalse}
+SHUTTER_CONTACT_HMIP|STATE=OPEN	${stringTableShutterContactStateTrue}
 SIGNAL	${stringTableSignal}
 SIGNAL_TONE	${stringTableSignalTone}
 SIGNAL_TONE=HIGH	${stringTableSignalToneHigh}
@@ -640,12 +711,16 @@ SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=NO_ERROR	${stringTableSmokeDetectorSmokeChamb
 SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=DEGRADED_SMOKE_CHAMBER	${stringTableSmokeDetectorSmokeChamberFailure}
 SMOKE_DETECTOR|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
+
+SMOKE_DETECTOR|REPEAT_ENABLE	${stringTableSmokeDetectorRepeatEnable}
+
 SMOKE_DETECTOR_TEAM	${stringTableSmokeDetectorTitle}
 SMOKE_DETECTOR_TEAM|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR_TEAM|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
 SMOKE_DETECTOR_TEAM_V2	${stringTableSmokeDetectorTitle}
 SMOKE_DETECTOR_TEAM_V2|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR_TEAM_V2|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
+SPEED_MULTIPLIER	${stringTableSpeedMultiplier}
 STANDBY_TIME	${stringTableStandByTime}
 STATUS_INDICATOR	${stringTableStatusIndicatorTitle}
 STATUS_INDICATOR|STATE=TRUE	${stringTableStatusIndicatorStateTrue}
@@ -669,6 +744,8 @@ SWITCH_INTERFACE|STATE=TRUE	${stringTableSwitchInterfaceStateTrue}
 
 SWITCH_TRANSMIT	${stringTableSwitchTransmitTitle}
 SWITCH_TRANSMIT|TWO_POINT_HYSTERESIS	${stringTableSwitchTransmitTwoPointHysteresis}
+
+SWITCH_VIRTUAL_RECEIVER	${stringTableSwitchVirtualReceiverTitle}
 
 TEMPERATURE_COMFORT	${stringTableTemperatureComfort}
 TEMPERATURE_LOWERING	${stringTableTemperatureLowering}
@@ -704,7 +781,7 @@ VIRTUAL_DIMMER|ERROR=LOAD_FAILURE	${stringTableVirtualDimmerErrorLoadFailure}
 VIRTUAL_DIMMER|ERROR_OVERLOAD	${stringTableDimmerErrorOverload}
 VIRTUAL_DIMMER|ERROR_OVERHEAT	${stringTableDimmerErrorOverheat}
 VIRTUAL_DIMMER|ERROR_REDUCED	${stringTableDimmerErrorReduced}
-VIRTUAL_DIMMER|LOGIC_COMBINATION	${stringTableVirtualDimmerLogicCombination}
+VIRTUAL_DIMMER|LOGIC_COMBINATION	${stringTableLogicCombination}
 VIRTUAL_DIMMER|POWERUP_ACTION	${stringTableVirtualDimmerPowerUpAction}
 VIRTUAL_DIMMER|STATUSINFO_MINDELAY	${stringTableVirtualDimmerStatusInfoMinDelay}
 VIRTUAL_DIMMER|STATUSINFO_RANDOM	${stringTableVirtualDimmerStatusInfoRandom}
@@ -756,6 +833,11 @@ WEATHER|TEMPERATURE	${stringTableWeatherTemperature}
 WEATHER|WIND_DIRECTION	${stringTableWeatherWindDir}
 WEATHER|WIND_DIRECTION_RANGE	${stringTableWeatherWindDirRange}
 WEATHER|WIND_SPEED	${stringTableWeatherWindSpeed}
+
+WEATHER|WIND_SPEED_RESULT_SOURCE	${stringTableWeatherWindSpeedResultSource}
+WEATHER|WIND_SPEED_RESULT_SOURCE=AVERAGE_VALUE	${stringTableWeatherWindSpeedResultSourceAverage}
+WEATHER|WIND_SPEED_RESULT_SOURCE=MAX_VALUE	${stringTableWeatherWindSpeedResultSourceMax}
+
 WEATHER_RECEIVER	${stringTableWeatherReceiver}
 
 WEATHER_TRANSMIT|TEMPERATURE	${stringTableWeatherTemperature}
@@ -787,6 +869,8 @@ ACTUAL_HUMIDITY	${stringTableWeatherHumidity}
 ACTUAL_TEMPERATURE	${stringTableClimateControlRTTransceiverActualTemp}
 BATTERY_STATE	${stringTableClimateControlRTTransceiverBatteryState}
 BOOST_MODE	${stringTableClimateControlRTTransceiverBoostMode}
+BOOST_MODE=FALSE	${stringTableBoostModeFalse}
+BOOST_MODE=TRUE	${stringTableBoostModeTrue}
 BOOST_STATE	${stringTableBoostState}
 COMFORT_MODE	${stringTableClimateControlRTTransceiverComfortMode}
 COMMUNICATION_REPORTING	${stringTableCommunicatingReporting}
@@ -796,15 +880,36 @@ CONTROL_MODE=AUTO-MODE	${stringTableClimateControlRTTransceiverAutoMode}
 CONTROL_MODE=BOOST-MODE	${stringTableClimateControlRTTransceiverBoostMode}
 CONTROL_MODE=MANU-MODE	${stringTableClimateControlRTTransceiverManuMode}
 CONTROL_MODE=PARTY-MODE	${stringTableClimateControlRTTransceiverPartyMode}
+DAYLIGHT_SAVINGS_TIME	${stringTableDST}
 DEVICE_IN_BOOTLOADER	${stringTableDeviceInBootloader}
+DUTY_CYCLE=FALSE	${stringTableDutyCycleFalse}
+DUTY_CYCLE=TRUE	${stringTableDutyCycleTrue}
 ERROR_POWER=NO_ERROR	${stringTablePowerAvailable}
 ERROR_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
 ERROR_SABOTAGE=NO_ERROR	${stringTableSabotageContactOk}
 ERROR_SABOTAGE=SABOTAGE	${stringTableSabotage}
+EVENT_DELAYTIME	${stringTableEventDelay}
+EVENT_DELAY_UNIT	${stringTableEventDelayUnit}
+EVENT_DELAY_UNIT=100MS	${optionUnit100MS}
+EVENT_DELAY_UNIT=S	${optionUnitS}
+EVENT_DELAY_UNIT=M	${optionUnitM}
+EVENT_DELAY_UNIT=H	${optionUnitH}
+EVENT_DELAY_VALUE	${stringTableEventDelayValue}
+
+EVENT_RANDOMTIME_VALUE	${stringTableStatusInfoRandom}
+EVENT_RANDOMTIME_UNIT	${stringTableEventRandomTimeUnit}
+EVENT_RANDOMTIME_UNIT=100MS	${optionUnit100MS}
+EVENT_RANDOMTIME_UNIT=S	${optionUnitS}
+EVENT_RANDOMTIME_UNIT=M	${optionUnitM}
+EVENT_RANDOMTIME_UNIT=H	${optionUnitH}
+
 EXPECT_AES	${stringTableExpectAES}
 LED_ONTIME	${stringTableLEDOnTime}
 LEVEL	${stringTableDimmerLevel}
 LEVEL_REAL	${stringTableDimmerLevelReal}
+
+LOGIC_COMBINATION	${stringTableLogicCombination}
+
 LOWBAT_REPORTING	${stringTableLowbatReporting}
 LOWBAT_REPORTING=FALSE	${stringTableLowbatReportingFalse}
 LOWBAT_REPORTING=TRUE	${stringTableLowbatReportingTrue}
@@ -813,6 +918,8 @@ MANU_MODE	${stringTableClimateControlRTTransceiverManuMode}
 NOT_USED	${stringTableNotUsed}
 OLD_LEVEL	${stringTableDimmerOldLevel}
 ON_TIME	${stringTableDimmerOnTime}
+
+OPERATING_VOLTAGE	${stringTableOperationVoltage}
 
 PARTY_MODE_SUBMIT	${stringTablePartyModeSubmit}
 PARTY_START_DAY	${stringTablePartyStartDay}
@@ -827,17 +934,68 @@ PARTY_TEMPERATURE	${stringTablePartyTemperature}
 
 PEER_NEEDS_BURST	${stringTablePeerNeedsBurst}
 POWERUP_ACTION	${stringTableDimmerPowerUpAction}
+POWERUP_JUMPTARGET	${stringTableDimmerPowerUpAction}
+
+POWERUP_ONDELAY_UNIT	${stringTableOnDelayUnit}
+POWERUP_ONDELAY_UNIT=1S	${optionUnit1S}
+POWERUP_ONDELAY_UNIT=5S	${optionUnit5S}
+POWERUP_ONDELAY_UNIT=10S	${optionUnit10S}
+POWERUP_ONDELAY_UNIT=1M	${optionUnit1M}
+POWERUP_ONDELAY_UNIT=5M	${optionUnit5M}
+POWERUP_ONDELAY_UNIT=10M	${optionUnit10M}
+POWERUP_ONDELAY_VALUE	${stringTableEventDelayValue}
+
+POWERUP_ONTIME_UNIT	${stringTableOnTimeUnit}
+POWERUP_ONTIME_UNIT=1S	${optionUnit1S}
+POWERUP_ONTIME_UNIT=5S	${optionUnit5S}
+POWERUP_ONTIME_UNIT=10S	${optionUnit10S}
+POWERUP_ONTIME_UNIT=1M	${optionUnit1M}
+POWERUP_ONTIME_UNIT=5M	${optionUnit5M}
+POWERUP_ONTIME_UNIT=10M	${optionUnit10M}
+POWERUP_ONTIME_VALUE	${stringTableOnTimeValue}
+
+PROCESS=STABLE	${stringTableProcessStable}
+PROCESS=NOT_STABLE	${stringTableProcessNotStable}
+
 RAMP_TIME	${stringTableDimmerRampTime}
 SET_TEMPERATURE	${stringTableClimateControlRTTransceiverSetTemperature}
+
+SECTION	${stringTableSection}
+
+STATE=FALSE	${stringTableStateFalse}
+STATE=TRUE	${stringTableStateTrue}
+
+TX_MINDELAY_UNIT	${stringTableTxMinDelayUnit}
+TX_MINDELAY_UNIT=100MS	${optionUnit100MS}
+TX_MINDELAY_UNIT=S	${optionUnitS}
+TX_MINDELAY_UNIT=M	${optionUnitM}
+TX_MINDELAY_UNIT=H	${optionUnitH}
+TX_MINDELAY_VALUE	${stringTableTxMinDelayValue}
+
+UNREACH=FALSE	${stringTableUnreachFalse}
+UNREACH=TRUE	${stringTableUnreachTrue}
+
 UPDATE_PENDING	${stringTableUpdatePending}
+
 VALVE_STATE	${stringTableClimateControlRTTransceiverVentPos}
+
+VALVE_STATE=STATE_NOT_AVAILABLE	${stringTableValveStateNotAvailable}
+VALVE_STATE=RUN_TO_START	${stringTableValveStateRunToStart}
+VALVE_STATE=WAIT_FOR_ADAPTION	${stringTableValveStateWaitForAdaption}
+VALVE_STATE=ADAPTION_IN_PROGRESS	${stringTableValveStateAdaptionInProgress}
+VALVE_STATE=ADAPTION_DONE	${stringTableValveStateAdaptionDone}
+VALVE_STATE=TOO_TIGHT	${stringTableValveStateToTight}
+VALVE_STATE=ADJUSTMENT_TOO_BIG	${stringTableValveStateAdjTooBig}
+VALVE_STATE=ADJUSTMENT_TOO_SMALL	${stringTableValveStateAdjToSmall}
+VALVE_STATE=ERROR_POSITION	${stringTableValveStateErrorPosition}
+
 WAKEUP_DEFAULT_CHANNEL	${stringTableWakeupDefaultChannel}
 WAKEUP_BEHAVIOUR	${stringTableButtonResponseWithoutChannelChooser}
 
 WINDOW_OPEN_REPORTING	${stringTableWindowOpenReporting}
 WINDOW_OPEN_REPORTING=FALSE	${stringTableWindowOpenReportingFalse}
 WINDOW_OPEN_REPORTING=TRUE	${stringTableWindowOpenReportingTrue}
+WINDOW_STATE	${stringTableWindowState}
+
 WS_CS	${stringTableWSCS}
 WS_TH	${stringTableWSTH}
-
-

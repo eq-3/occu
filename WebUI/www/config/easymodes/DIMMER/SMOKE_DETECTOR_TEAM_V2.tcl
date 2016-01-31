@@ -43,7 +43,7 @@ set PROFILE_1(SHORT_OFF_TIME)   111600.0
 set PROFILE_1(SHORT_OFF_TIME_MODE)  0
 set PROFILE_1(SHORT_ONDELAY_MODE) 0
 set PROFILE_1(SHORT_ONDELAY_TIME) 0.0
-set PROFILE_1(SHORT_ON_LEVEL)   1.0
+set PROFILE_1(SHORT_ON_LEVEL)   {1.0 1.005}
 set PROFILE_1(SHORT_ON_LEVEL_PRIO)  0
 set PROFILE_1(SHORT_ON_MIN_LEVEL) 0.1
 set PROFILE_1(SHORT_ON_TIME)    111600.0
@@ -104,6 +104,7 @@ set SUBSET_1(SUBSET_OPTION_VALUE) 1
 set SUBSET_1SHORT_CT_RAMPON)    2
 set SUBSET_1(SHORT_CT_ONDELAY)    2
 set SUBSET_1(SHORT_CT_ON)     2
+set SUBSET_1(SHORT_COND_VALUE_LO) 1
 set SUBSET_1(SHORT_COND_VALUE_HI) 180
 
 #set SUBSET_2(NAME)                     "Rauchmelder der gleichen Gruppe"
@@ -112,17 +113,20 @@ set SUBSET_2(SUBSET_OPTION_VALUE) 2
 set SUBSET_2(SHORT_CT_RAMPON)   3
 set SUBSET_2(SHORT_CT_ONDELAY)    3
 set SUBSET_2(SHORT_CT_ON)     3
-set SUBSET_2(SHORT_COND_VALUE_HI) 200
+set SUBSET_2(SHORT_COND_VALUE_LO) 2
+set SUBSET_2(SHORT_COND_VALUE_HI) 180
 
 #set SUBSET_3(NAME)                     "nur auslösender Rauchmelder" ;# Subset für Alarmblinken
 set SUBSET_3(NAME)                      "\${subset_3}"
 set SUBSET_3(SUBSET_OPTION_VALUE) 3
+set SUBSET_3(SHORT_COND_VALUE_LO) 1
 set SUBSET_3(SHORT_COND_VALUE_HI) 180
 
 #set SUBSET_4(NAME)                     "Rauchmelder der gleichen Gruppe" ;# Subset für Alarmblinken
 set SUBSET_4(NAME)                      "\${subset_4}"
 set SUBSET_4(SUBSET_OPTION_VALUE) 4
-set SUBSET_4(SHORT_COND_VALUE_HI) 200
+set SUBSET_4(SHORT_COND_VALUE_LO) 2
+set SUBSET_4(SHORT_COND_VALUE_HI) 180
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -186,7 +190,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_$prn) "</td></tr><tr><td>"
   append HTML_PARAMS(separate_$prn) "<tr><td>\${DEF_ACK_ALARM}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn] 
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_2 SUBSET_1} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
   
   incr pref ;# 2
@@ -243,7 +247,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   append HTML_PARAMS(separate_$prn) "<tr><td>\${DEF_ACK_ALARM}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn] 
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_4 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   incr pref ;# 2

@@ -351,8 +351,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   array set chDescr [xmlrpc $url getParamset [list string $sender_address] [list string "MASTER"]]
   catch {array set chGrpDescr [xmlrpc $url getParamset [list string $sender_group] [list string "MASTER"]]}
 
-  set valLONG_MAX_TIME_FIRST_DIR 0.5
-  if {$chDescr(AES_ACTIVE) == 1 || $chGrpDescr(AES_ACTIVE) == 1} {
+  set valLONG_MAX_TIME_FIRST_DIR $ps(LONG_MAX_TIME_FIRST_DIR)
+  if {(($chDescr(AES_ACTIVE) == 1) || ($chGrpDescr(AES_ACTIVE) == 1)) && ([format "%.2f" $ps(LONG_MAX_TIME_FIRST_DIR)] < 0.8) } {
     set valLONG_MAX_TIME_FIRST_DIR 0.8
   }
 

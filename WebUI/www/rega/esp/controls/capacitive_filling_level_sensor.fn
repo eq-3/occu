@@ -1,0 +1,107 @@
+function ::CreateCapacitiveFillingSensor()
+{
+  ! WriteLine("<script>conInfo('Within Control CAPACITIVE FILLING SENSOR');</script>" );
+  string sEnum = "";
+  string sParamName = "";
+  integer sFillingLevel = "0";
+
+  sEnum = cObj.DPs().EnumEnabledVisibleIDs();
+  WriteLine('<script>conInfo("enum: '#sEnum#'");</script>' );
+
+  WriteLine("<td class='CLASS02519'>");
+  WriteLine("<table cellspacing='10'>");
+
+  string s;
+  foreach( s, sEnum )
+  {
+    object oDP = dom.GetObject( s );
+    if( oDP )
+    {
+      var value = oDP.Value();
+
+      string sUnit = oDP.ValueUnit();
+      sParamName = web.webKeyFromStringTable( "CAPACITIVE_FILLING_LEVEL_SENSOR|"#oDP.HSSID() );
+      if (!sParamName)
+      {
+        sParamName = oDP.HSSID();
+      }
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnInfo CLASS02532'>"#sParamName#": "#value#""#sUnit#"</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+      if (oDP.HSSID() == "FILLING_LEVEL")
+      {
+       sFillingLevel = value;
+      }
+
+    }
+  }
+
+  object oDevice = dom.GetObject(cObj.Device());
+  object oChannel = dom.GetObject(oDevice.Channels().GetAt(1));
+  ! WriteLine('conInfo("Interface: '#oChannel.Interface()#'");' );
+
+  ! ToDo - check why the next line doesn´t work
+  !string sCalculateFillingLevel = web.webKeyFromStringTable( "CAPACITIVE_FILLING_LEVEL_SENSOR|CONTROLTEXT_CALC_FILLINGLEVEL" );
+
+  !string sCalculateFillingLevel = "Berechne Füllmenge...";
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      !WriteLine("<div id='volume' class='ControlBtnInfo CLASS02532'>"#sCalculateFillingLevel#"</div>");
+      WriteLine("<div id='volume' class='ControlBtnInfo CLASS02532'></div>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+  WriteLine("</table>");
+  WriteLine("</td>");
+
+  string address = oChannel.Address();
+  WriteLine("<script>");
+    WriteLine("$('volume').innerHTML = translateKey('infoStatusControlCalculateFillingLevel');");
+    WriteLine("var address = '"#address#"';");
+    WriteLine("var BidCosRF = 'BidCos-RF';");
+    WriteLine("var volume;");
+    WriteLine('var caseDesign = homematic("Interface.getMasterValue", {"interface": BidCosRF, "address": address, "valueKey": "CASE_DESIGN"});');
+    WriteLine('var caseHeight = homematic("Interface.getMasterValue", {"interface": BidCosRF, "address": address, "valueKey": "CASE_HIGH"});');
+    WriteLine('var caseWidth = homematic("Interface.getMasterValue", {"interface": BidCosRF, "address": address, "valueKey": "CASE_WIDTH"});');
+    WriteLine('var fillingLevel = '#sFillingLevel#';');
+
+    ! WriteLine('conInfo("caseDesign: " + caseDesign);');
+    ! WriteLine('conInfo("caseHeight: " + caseHeight);');
+    ! WriteLine('conInfo("caseWidth: " + caseWidth);');
+
+    WriteLine('switch(caseDesign){');
+      WriteLine("case '0':");
+        WriteLine('var caseRadius = caseWidth / 2;');
+        WriteLine('var v1 = Math.PI * Math.pow(caseRadius, 2) * (caseHeight * (fillingLevel / 100));');
+        WriteLine('volume = Math.round(v1 / 1000) + " Liter";');
+        WriteLine('break;');
+      WriteLine("case '1':");
+        WriteLine('var fillLevel = homematic("Interface.getMasterValue", {"interface": BidCosRF, "address": address, "valueKey": "FILL_LEVEL"});');
+        WriteLine('var caseRadius = caseHeight / 2;');
+        !WriteLine('var fillingHeight = fillLevel * (fillingLevel / 100)');
+        ! WriteLine("var v2 = Math.pow(caseRadius, 2) * caseWidth * (Math.acos((caseRadius - fillingHeight) / caseRadius) - (caseRadius - fillingHeight) * (Math.sqrt((2 * caseRadius * fillingHeight) - Math.pow(fillingHeight,2)) / Math.pow(caseRadius,2)))  ;");
+        WriteLine("var v100Percent = Math.pow(caseRadius, 2) * caseWidth * (Math.acos((caseRadius - fillLevel) / caseRadius) - (caseRadius - fillLevel) * (Math.sqrt((2 * caseRadius * fillLevel) - Math.pow(fillLevel,2)) / Math.pow(caseRadius,2)))  ;");
+        WriteLine("var v2 = v100Percent * (fillingLevel / 100)  ;");
+        WriteLine('volume = Math.round(v2 / 1000) + " Liter";');
+        WriteLine('break;');
+      WriteLine("case '2':");
+        WriteLine('var caseLength = homematic("Interface.getMasterValue", {"interface": BidCosRF, "address": address, "valueKey": "CASE_LENGTH"});');
+        WriteLine('var v3 = (caseHeight * (fillingLevel / 100)) * caseWidth * caseLength;');
+        WriteLine('volume = Math.round(v3 / 1000) + " Liter";');
+        WriteLine('break;');
+    WriteLine('}');
+
+    ! ToDo - check why the next line doesn´t work
+    ! string sFillingLevel = web.webKeyFromStringTable( "CAPACITIVE_FILLING_LEVEL_SENSOR|CONTROLTEXT_FILLINGLEVEL" );
+
+    !WriteLine("$('volume').innerHTML = 'Füllmenge:&nbsp;' + volume;");
+    WriteLine("$('volume').innerHTML = translateKey('infoStatusControlFillingLevel') + '&nbsp;' + volume;");
+
+  WriteLine("</script>");
+
+
+  return;
+}

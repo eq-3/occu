@@ -39,5 +39,5 @@
 
   ]},
   {id: "menuHelpPage"          , align: "right", action: function() { WebUI.enter(HelpPage); }, submenu: [ ]},
-  {id: "menuNewDevicesPage", align: "right", action: function() { ConfigData.check(function() { showAddDeviceCP(true); }); }, submenu: [ ]}
+  {id: "menuNewDevicesPage", align: "right", action: function() { ConfigData.check(function() { showAddDeviceCP(false);/*true activates the install mode when entering the page*/ }); }, submenu: [ ]}
 ]

@@ -1,11 +1,18 @@
 jQuery.extend(true,HMIdentifier , {
   "tr" : {
-    "CCUFullName" : "HomeMatic CCU",
+    "CCUFullNameHeader" : "HomeMatic CCU2",
+    "CCUFullNameText" : "Homematic CCU",
     "CCUShortName" : "CCU",
     "BidCosRF" : "BidCos-RF",
     "BidCosWired" : "BidCos-Wired",
     "VirtualDevices" : "VirtualDevices",
-    "HomeMaticCFGAdapter" : "HomeMatic Konfig%FCrasyon Adapt%F6r%FC"
+    "HomeMaticCFGAdapter" : "HomeMatic Konfig%FCrasyon Adapt%F6r%FC",
+    "LabelHomeMatic" : "HomeMatic",
+    "LabelHomematic" : "Homematic",
+    "LabelHomematicWiredHeader" : "HomeMatic Wired",
+    "LabelHomematicWiredText" : "Homematic Wired",
+    "LabelHomematicIPHeader" : "HomeMatic IP",
+    "LabelHomematicIPText" : "Homematic IP"
   }
 });
 
@@ -17,7 +24,7 @@ jQuery.extend(true,langJSON, {
     "BidCosRF" : HMIdentifier.tr.BidCosRF,
     "BidCosWired" : HMIdentifier.tr.BidCosWired,
     "VirtualDevices" : HMIdentifier.tr.VirtualDevices,
-    "ccuNotReady" : HMIdentifier.tr.CCUFullName + " hen%FCz hazir degil",
+    "ccuNotReady" : HMIdentifier.tr.CCUFullNameText + " hen%FCz hazir degil",
     "ccuNotReadyHint" : "L%FCtfen bekleyin. Otomatik olarak baslangic sayfasina iletiliyorsunuz.",
     "loadWebUI" : "Y%FCkle...",
     "noFav" : "Favori yok",
@@ -250,7 +257,7 @@ jQuery.extend(true,langJSON, {
     "lblCreateProgramsAndLinks6" : "Zaman / seyir programlarini d%FCzenle",
     "lblCreateProgramsAndLinks7" : "Zaman / seyir programlarini sil",
     "lblCreateProgramsAndLinks8" : "Yeni zaman / seyir programi olustur",
-    "hintCreateProgramsAndLinks1" : "Merkezden kontrol edilen cihaz baglantilari iki veya daha fazla cihazi " + HMIdentifier.tr.CCUShortName + " %FCzerinden birbirine baglar. Verici ve alici sadece" + HMIdentifier.tr.CCUShortName + "ile iletisim kurar, aralarinda direkt baglanti yoktur. " + HMIdentifier.tr.CCUFullName + " t%FCm kontrol islemini %FCstlenir.",
+    "hintCreateProgramsAndLinks1" : "Merkezden kontrol edilen cihaz baglantilari iki veya daha fazla cihazi " + HMIdentifier.tr.CCUShortName + " %FCzerinden birbirine baglar. Verici ve alici sadece" + HMIdentifier.tr.CCUShortName + "ile iletisim kurar, aralarinda direkt baglanti yoktur. " + HMIdentifier.tr.CCUFullNameText + " t%FCm kontrol islemini %FCstlenir.",
     "hintCreateProgramsAndLinks2" : "Bunun avantajlari %F6rn. zaman kontroll%FC gelismis programlama imkanlari ve kontrol birimine harici erisim imkanidir.",
     "hintCreateProgramsAndLinks3" : "Merkezi baglanti %F6rnekleri:",
     "hintMultiChannelChooserNoChannelsAvailable" : "Kanal mevcut degil",
@@ -314,7 +321,7 @@ jQuery.extend(true,langJSON, {
     "lblSettingsFavorites2" : "Yeni favori olustur ve sunlar icin d%FCzenle:",
     "lblSettingsFavorites2a" : "t%FCm kullanicilar (global favoriler)",
     "lblSettingsFavorites2b" : "tek tek kullanicilar",
-    "lblSettingsFavorites2c" : HMIdentifier.tr.CCUFullName,
+    "lblSettingsFavorites2c" : HMIdentifier.tr.CCUFullNameText,
     "lblSettingsFavorites3" : "Favorileri sil",
     "commentSettingsBtnFavoritesEnd" : "***********************************************",
     "commentSettingsBtnUserAdministration" : "***********************************************",
@@ -374,7 +381,7 @@ jQuery.extend(true,langJSON, {
     "dialogQuestionRemoveCFG" : HMIdentifier.tr.HomeMaticCFGAdapter + " gercekten silmek istiyor musunuz?",
     "dialogQuestionRemoveExtraSoftware" : "Ek yazilimi gercekten kaldirmak istiyor musunuz?",
     "dialogQuestionRestart" : "Sistemi yeniden baslatmak icin buradan onaylayin.",
-    "dialogQuestionRestartSafeMode" : HMIdentifier.tr.CCUFullName + "'yi gercekten g%FCvenli modda baslatmak istiyor musunuz?",
+    "dialogQuestionRestartSafeMode" : HMIdentifier.tr.CCUFullNameText + "'yi gercekten g%FCvenli modda baslatmak istiyor musunuz?",
     "dialogUserAccountTitle" : "Kullanici hesabi konfig%FCrasyonu",
     "dialogProgChoseSysVar" : "Programlar - sistem degiskeni sec",
     "dialogEditRoom" : "Odayi d%FCzenle",
@@ -422,8 +429,8 @@ jQuery.extend(true,langJSON, {
     "lblMenuStatusControlSysProtocolChannelSysvar" : "Kanal/sistem degiskeni",
     "lblMenuStatusControlSysProtocolActivity" : "Etkinlik",
     "btnSysConfCentralMaintenace" : "Merkezler<br/>bakim",
-    "lblSysConfCentralMaintenance1" : HMIdentifier.tr.CCUFullName + " yazilim g%FCncellemesi",
-    "lblSysConfCentralMaintenance2" : HMIdentifier.tr.CCUFullName + " yeniden baslat",
+    "lblSysConfCentralMaintenance1" : HMIdentifier.tr.CCUFullNameText + " yazilim g%FCncellemesi",
+    "lblSysConfCentralMaintenance2" : HMIdentifier.tr.CCUFullNameText + " yeniden baslat",
     "lblSysConfCentralMaintenance3" : "Hata protokol%FCn%FC konfig%FCre et",
     "commentSettingsDialogMaintenance" : "***********************************************",
     "dialogSettingsCMTitle" : HMIdentifier.tr.CCUShortName + "-Bakim",
@@ -585,9 +592,9 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsNetworkIPSettingsLblUseDNS" : "Su DNS sunucusu adreslerini kullanin: ",
     "dialogSettingsNetworkIPSettingsLblDNS1" : "Tercih edilen DNS sunucusu: ",
     "dialogSettingsNetworkIPSettingsLblDNS2" : "Alternatif DNS sunucusu: ",
-    "dialogSettingsNetworkHintIPSettingsP1" : HMIdentifier.tr.CCUFullName + "'nin temel IP ayarlarini belirleyin.",
-    "dialogSettingsNetworkHintIPSettingsP2" : "Host ismi %FCzerinden" + HMIdentifier.tr.CCUFullName + "'e bir isim verebilirsiniz.",
-    "dialogSettingsNetworkHintIPSettingsP3" : HMIdentifier.tr.CCUFullName + " IP adresinizi ve buna bagli olan t%FCm ayarlari bir DHCP sunucusundan alir. Network'%FCn%FCzde bu t%FCr bir sunucu bulunmuyorsa veya baska nedenlerden dolayi kendi ayarlarinizi kullanmak istiyorsaniz burada man%FCel IP adresi girebilirsiniz.",
+    "dialogSettingsNetworkHintIPSettingsP1" : HMIdentifier.tr.CCUFullNameText + "'nin temel IP ayarlarini belirleyin.",
+    "dialogSettingsNetworkHintIPSettingsP2" : "Host ismi %FCzerinden" + HMIdentifier.tr.CCUFullNameText + "'e bir isim verebilirsiniz.",
+    "dialogSettingsNetworkHintIPSettingsP3" : HMIdentifier.tr.CCUFullNameText + " IP adresinizi ve buna bagli olan t%FCm ayarlari bir DHCP sunucusundan alir. Network'%FCn%FCzde bu t%FCr bir sunucu bulunmuyorsa veya baska nedenlerden dolayi kendi ayarlarinizi kullanmak istiyorsaniz burada man%FCel IP adresi girebilirsiniz.",
     "dialogSettingsNetworkCertificateLblStep1" : "Adim 1: Bilgileri girin",
     "dialogSettingsNetworkCertificateLblHostname" : "Host ismi",
     "dialogSettingsNetworkCertificateLblEMail" : "E-posta adresi",
@@ -597,13 +604,13 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsNetworkCertificateLblStep4" : "Adim 4: Merkezi yeniden baslatin",
     "dialogSettingsNetworkCertificateBtnCreateCert" : "Sertifika olusturun",
     "dialogSettingsNetworkCertificateLblUpload" : "Y%FCkle",
-    "dialogSettingsNetworkHintCertificateP1" : HMIdentifier.tr.CCUFullName + "'e g%FCvenli uzaktan erisim saglamak icin buradan bir sertifika olusturabilirsiniz.",
+    "dialogSettingsNetworkHintCertificateP1" : HMIdentifier.tr.CCUFullNameText + "'e g%FCvenli uzaktan erisim saglamak icin buradan bir sertifika olusturabilirsiniz.",
     "dialogSettingsNetworkHintCertificateP2" : "Sertifika d%F6rt adimda olusturulabilir:",
     "dialogSettingsNetworkHintCertificateP2a" : "Adim 1: Sertifika olusturun",
     "dialogSettingsNetworkHintCertificateP2b" : "Adim 2: Indirilen sertifikaya tiklayin",
-    "dialogSettingsNetworkHintCertificateP2c" : "Adim 3: Sertifikayi " + HMIdentifier.tr.CCUFullName + "'e aktarin",
-    "dialogSettingsNetworkHintCertificateP2d" : "Adim 4: " + HMIdentifier.tr.CCUFullName + " yeniden baslat",
-    "dialogSettingsNetworkHintCertificateP3" : "Sertifika %F6nce www.homematic.com adresinde olusturulur. Bunun icin etkin bir Internet baglantisina ihtiyaciniz var. Daha sonra olusturulan sertifikaya tiklayin ve bunu " + HMIdentifier.tr.CCUFullName + "'e aktarin. " + HMIdentifier.tr.CCUFullName + "'yi yeniden baslattiktan sonra g%FCvenli bir baglanti %FCzerinden merkeze erisebilirsiniz.",
+    "dialogSettingsNetworkHintCertificateP2c" : "Adim 3: Sertifikayi " + HMIdentifier.tr.CCUFullNameText + "'e aktarin",
+    "dialogSettingsNetworkHintCertificateP2d" : "Adim 4: " + HMIdentifier.tr.CCUFullNameText + " yeniden baslat",
+    "dialogSettingsNetworkHintCertificateP3" : "Sertifika %F6nce www.homematic.com adresinde olusturulur. Bunun icin etkin bir Internet baglantisina ihtiyaciniz var. Daha sonra olusturulan sertifikaya tiklayin ve bunu " + HMIdentifier.tr.CCUFullNameText + "'e aktarin. " + HMIdentifier.tr.CCUFullNameText + "'yi yeniden baslattiktan sonra g%FCvenli bir baglanti %FCzerinden merkeze erisebilirsiniz.",
     "dialogSettingsNetworkMessageCertificateTitle" : "Ag g%FCvenligi",
     "dialogSettingsNetworkMessageCertificateUploadError" : "Sertifika gecersiz veya merkeze aktarimi basarisiz",
     "dialogSettingsNetworkMessageCertificateUploadSucceed" : "Sertifikayi merkeze aktarin. Merkezi yeniden baslatin.",
@@ -966,7 +973,8 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContent" : "",
     "dialogNewDevicesErrorSecKeyLbl1b " : "",
     "optionLastValue" : "Son deger",
-    "optionNone" : "yok"
+    "optionNone" : "yok",
+    "optionNotActive" : "Etkin degil"
   }
 });
 

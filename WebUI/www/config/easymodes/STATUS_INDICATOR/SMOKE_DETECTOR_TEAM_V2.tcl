@@ -37,14 +37,14 @@ set PROFILE_1(UI_HINT)	1
 #set SUBSET_1(NAME)					"nur auslösender Rauchmelder"
 set SUBSET_1(NAME)					"\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)	1
-set SUBSET_1(SHORT_COND_VALUE_LO)	50
+set SUBSET_1(SHORT_COND_VALUE_LO)	1
 set SUBSET_1(SHORT_COND_VALUE_HI)	180
 set SUBSET_1(SHORT_CT_ON)			2
 
 set SUBSET_2(NAME)					"\${subset_2}"
 set SUBSET_2(SUBSET_OPTION_VALUE)	2
-set SUBSET_2(SHORT_COND_VALUE_LO)	0
-set SUBSET_2(SHORT_COND_VALUE_HI)	200
+set SUBSET_2(SHORT_COND_VALUE_LO)	2
+set SUBSET_2(SHORT_COND_VALUE_HI)	180
 set SUBSET_2(SHORT_CT_ON)	4
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
@@ -88,7 +88,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${DEF_ACK_ALARM}</td><td>"
-	append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn] 
+	append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_2 SUBSET_1} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2

@@ -1,19 +1,20 @@
 #!/bin/sh
 #
-# Starts rfd.
+# Starts multimacd.
 #
 
 LOGLEVEL_RFD=5
 CFG_TEMPLATE_DIR=/etc/config_templates
+PIDFILE=/var/run/multimacd.pid
 
 update() {        
 	if [ ! -e /etc/config/no-coprocessor-update ] ; then
 		echo "checking if firmware update is needed..."
-		/bin/eq3configcmd update-coprocessor -p "/dev/ttyAPP0" -u
+		/bin/eq3configcmd update-coprocessor -p "/dev/mxs_auart_raw.0" -u
 		if ! [ $? -eq 0 ] ; then
 			echo "error while updating coprocessor, recovering..."
 			avrprog --bo
-			/bin/eq3configcmd update-coprocessor -p "/dev/ttyAPP0" -u -f
+			/bin/eq3configcmd update-coprocessor -p "/dev/mxs_auart_raw.0" -u -f
 		else
 			echo "done"
 		fi
@@ -31,20 +32,10 @@ check_bo(){
 
 init() {
 	export TZ=`cat /etc/config/TZ`
-
-	if [ ! -d /etc/config/rfd ] ; then
-  		mkdir /etc/config/rfd
+	
+	if [ ! -e /etc/config/multimacd.conf ] ; then
+		cp $CFG_TEMPLATE_DIR/multimacd.conf /etc/config
 	fi
-	if [ ! -e /etc/config/rfd.conf ] ; then
-		cp $CFG_TEMPLATE_DIR/rfd.conf /etc/config
-	fi
-
-        # Bug fix
-        grep "/etc/config/rfd/keys" /etc/config/rfd.conf
-        if [ $? == 0 ] ; then
-                echo "Copy rfd files"
-		cp $CFG_TEMPLATE_DIR/rfd.conf /etc/config
-        fi
 
 	if [ ! -e /etc/config/syslog ] ; then
 		cp $CFG_TEMPLATE_DIR/syslog /etc/config
@@ -52,19 +43,26 @@ init() {
 	if [ -e /etc/config/syslog ] ; then
   		. /etc/config/syslog
 	fi
+
 }
 
 start() {
-	echo -n "Starting rfd: "
+	echo -n "Starting multimacd: "
 	init
-	check_bo
-	update
-	start-stop-daemon -S -q -p /var/run/rfd.pid --exec /bin/rfd -- -d -f /etc/config/rfd.conf -l $LOGLEVEL_RFD
+	if [ ! -e $PIDFILE ] ; then
+		check_bo
+		update
+	else
+		echo "Skipping coprocessor update because multimacd is running."
+	fi
+	init
+	start-stop-daemon -S -q -b -m -p $PIDFILE --exec /bin/multimacd -- -f /etc/config/multimacd.conf -l $LOGLEVEL_RFD
 	echo "OK"
-}
+	}
 stop() {
-	echo -n "Stopping rfd: "
-	start-stop-daemon -K -q -p /var/run/rfd.pid
+	echo -n "Stopping multimacd: "
+	start-stop-daemon -K -q -p $PIDFILE
+	rm -f $PIDFILE
 	echo "OK"
 }
 restart() {

@@ -129,7 +129,7 @@ jQuery.extend(true, langJSON, {
     "stringTableDimmerLevelReal": "S%F6nd%FCrme degeri gercek kanal",
     "stringTableDimmerLoadErrorCal": "Y%FCk ariza kalibrasyonu",
     "stringTableDimmerLoadAppearBehaviour": "Geri d%F6nen y%FCkte yapilacak eylem",
-    "stringTableDimmerLogicCombination": "Baglanti kurali",
+    "stringTableLogicCombination": "Baglanti kurali",
     "stringTableDimmerOldLevel": "Son s%F6nd%FCrme degeri",
     "stringTableDimmerOnTime": "Acik kalma s%FCresi",
     "stringTableDimmerOverTempLevel": "Kapatma esigi y%FCksek sicaklik",
@@ -394,10 +394,12 @@ jQuery.extend(true, langJSON, {
     "stringTableShutterContactErrorSabotage": "Sabotaj",
     "stringTableShutterContactEventDelayTime": "Bildiri gecikmesi",
     "stringTableShutterContactMsgPosA0": "Bildiri bu pozisyonda kapatildi",
+    "stringTableShutterContactHmIPMsgPosA0" : "Bildiri bu pozisyonda acildi",
     "stringTableShutterContactMsgPosA1": "kapali",
     "stringTableShutterContactMsgPosA2": "bildiri yok",
     "stringTableShutterContactMsgPosA3": "acik",
     "stringTableShutterContactMsgPosB0": "Bildiri bu pozisyonda acildi",
+    "stringTableShutterContactHmIPMsgPosB0" : "Bildiri bu pozisyonda kapatildi",
     "stringTableShutterContactMsgPosB1": "kapali",
     "stringTableShutterContactMsgPosB2": "bildiri yok",
     "stringTableShutterContactMsgPosB3": "acik",
@@ -459,7 +461,6 @@ jQuery.extend(true, langJSON, {
     "stringTableVentOpen": "Valfi ac",
     "stringTableVirtualDimmerTitle": "dimmer akt%FCat%F6r%FC",
     "stringTableVirtualDimmerErrorLoadFailure": "Y%FCk hatasi",
-    "stringTableVirtualDimmerLogicCombination": "Baglanti kurali",
     "stringTableVirtualDimmerPowerUpAction": "Voltaj beslemesinde yapilacak eylem",
     "stringTableVirtualDimmerStatusInfoMinDelay": "Minimum gecikmelerde durum bildirileri",
     "stringTableVirtualDimmerStatusInfoRandom": "Tesad%FCf oraninda durum bildirileri",
@@ -579,7 +580,7 @@ jQuery.extend(true, langJSON, {
     "stringTableClimateControlRTTransceiverActualTemp": "Gercek sicaklik",
     "stringTableClimateControlRTTransceiverSetTemperature": "Hedef sicaklik",
     "stringTableSwitchStatusInfoMinDelay": "Minimum gecikmede durum bildirileri",
-    "stringTablePowerMeterAveraging": "Averaging ????",
+    "stringTablePowerMeterAveraging": "orta deger olusumu ... kadar",
     "stringTablePowerMeterTxMinDelay": "TX Mindelay ????",
     "stringTablePowerMeterTxThresholdPower": "TX farki g%FCc",
     "stringTablePowerMeterTxThresholdCurrent": "TX farki akim",
@@ -618,7 +619,7 @@ jQuery.extend(true, langJSON, {
     "stringTableGasConsumption": "Gaz t%FCketimi",
 
     "stringTableSmokeDetectorAlarmTestOK": "Alarm testi OK",
-    "stringTableSmokeDetectorAlarmTestFailure": "tr Alarm test failure",
+    "stringTableSmokeDetectorAlarmTestFailure": "Alarm testi hatali",
     "stringTableSmokeDetectorSmokeChamberOK": "Duman h%FCcresi OK",
     "stringTableSmokeDetectorSmokeChamberFailure": "Duman h%FCcresi hatali",
     "stringTableDevRptCntMax": "maks. Yineleyici seviyesi",
@@ -637,7 +638,12 @@ jQuery.extend(true, langJSON, {
     "stringTableRGBWAutomaticTitle" : "RGBW kontrol programi",
     "stringTableRGBWColorTitle" : "RGBW kontrol rengi",
 
-    "ATTENTION" : "NOT YET TRANSLATED",
+    "stringTableLogicCombination": "Baglanti kurali",
+
+    "stringTableStateFalse" : "Salter durumu: Kapali",
+    "stringTableStateTrue" : "Salter durumu: Acik",
+
+    "stringTablePermanent" : "s%FCrekli",
 
     "stringTableSwitchTransmitTwoPointHysteresis" : "Histerezis"
 

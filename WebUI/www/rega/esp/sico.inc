@@ -1,5 +1,10 @@
 <%
-  string excludePARTY =  "PARTY_";
+  string excludeParty = "PARTY_";
+  string includeParty = "PARTY_MODE";
+  string excludeHmIPSection =  "SECTION";
+  string excludeHmIPProcess =  "PROCESS";
+  string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
+  string excludeHmIPValveState =  "VALVE_STATE";
 
   integer iLV = oSC.LeftVal();
   integer iLVT = oSC.LeftValType();
@@ -101,27 +106,30 @@
                 foreach( sVLKey, system.GenerateEnum(0,iVLCount) )
                 {
                   string sVLValue = web.webGetValueFromList( oDP.ValueList(), sVLKey );
-                  if( sVLValue.Length() )
+                  if( sVLValue.Length())
                   {
-                    if( (oDP.ID() == iLV) && (iRV1 == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
-                    Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
-                    string sValue = oDP.Name()#": "#sVLValue;
-                    if( !oDP.IsTypeOf( OT_VARDP ) )
-                    {
-                      string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"="#sVLValue;
-                      string sShortKey = oDP.HSSID()#"="#sVLValue;
-                      sValue = web.webKeyFromStringTable(sLongKey);
-                      if( !sValue.Length() )
+                    ! Some parameters shouldn't be visible
+                    if ((oDP.HSSID().Find(excludeHmIPProcess) == -1) && (oDP.HSSID().Find(excludeHmIPValveState) == -1)) {
+                      if( (oDP.ID() == iLV) && (iRV1 == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
+                      Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
+                      string sValue = oDP.Name()#": "#sVLValue;
+                      if( !oDP.IsTypeOf( OT_VARDP ) )
                       {
-                        string sValue = web.webKeyFromStringTable(sShortKey);
+                        string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"="#sVLValue;
+                        string sShortKey = oDP.HSSID()#"="#sVLValue;
+                        sValue = web.webKeyFromStringTable(sLongKey);
                         if( !sValue.Length() )
                         {
-                          sValue = sShortKey;
+                          string sValue = web.webKeyFromStringTable(sShortKey);
+                          if( !sValue.Length() )
+                          {
+                            sValue = sShortKey;
+                          }
                         }
                       }
+                      Write( sValue );
+                      Write( '</option>' );
                     }
-                    Write( sValue );
-                    Write( '</option>' );
                   }
                 }
               }
@@ -170,9 +178,8 @@
                 }
                 else
                 {
-                  ! Party mode params of the heating thermostats should not be visible
-                  ! For this params exists an own param type so that we are able to use a nice dialog
-                  if( oDP.HSSID().Find(excludePARTY) == -1 ) {
+                  ! Some parameter shouldn´t be visible
+                  if( ((oDP.HSSID().Find(excludeParty) == -1) || (oDP.HSSID().Find(includeParty) != -1)) && (oDP.HSSID().Find(excludeHmIPSection) == -1) && (oDP.HSSID().Find(excludeHmIPCDT) == -1)) {
                     if( oDP.ID() == iLV ) { sSelected = " selected"; } else { sSelected = ""; }
                     Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
                     string sValue = oDP.Name();

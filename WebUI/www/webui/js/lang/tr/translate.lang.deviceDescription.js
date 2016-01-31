@@ -1,11 +1,15 @@
 jQuery.extend(true,langJSON, {
   "tr" : {
+
+    "HM-OU-CFM-TW" : "Sinyal lambali MP3 kablosuz gong, batarya",
     "HM-ES-PMSw1-SM" : "G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC",
     "OLIGO.smart.iq.HM" : "Kablosuz dimmer akt%FCat%F6r%FC",
+    "KRC4" : "HmIP Kablosuz uzaktan kumanda 4 butonlu",
     "WRC2" : "HmIP Kablosuz duvar tus takimi 2 kanal",
     "TRV" : "HmIP Kablosuz radyat%F6r termostati",
     "WTH" : "HmIP Kablosuz duvar termostati",
-    "PS" : "HmIP Kablosuz salter akt%FCat%F6r%FC 1 kanal, adapt%F6r",
+    "PS" : "HmIP Kablosuz salter akt%FCat%F6r%FC, 1 kanal",
+    "PSM" : "HmIP G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC, 1 kanal",
     "SWD" : "HmIP Kablosuz pencere/kapi kontagi optik",
     "HM-LC-Sw1-Pl-CT-R1" : "Kablosuz salter akt%FCat%F6r%FC 1 kanalli, klemens baglantili",
     "HM-ES-PMSw1-DR" : "G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC, baslikli raya montaj",

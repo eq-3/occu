@@ -534,11 +534,11 @@ proc put_profile_body { PEERPART } {
         if {$profile_visible == 0} then { append SENTRY(RECEIVER_PROFILE) "<script type=\"text/javascript\">RemoveProfile('receivergroup', $pnr);</script>" }
       }
     }
-      
+
     destructor
-    
+
     #Ausgewählten Eintrag sichtbar schalten:
-    append SENTRY(RECEIVER_PROFILE) "<script type=\"text/javascript\">ShowEasyMode(\$('${special_input_id}_profiles'));</script>"
+    append SENTRY(RECEIVER_PROFILE) "<script type=\"text/javascript\">window.setTimeout(function() {ShowEasyMode(\$('${special_input_id}_profiles'));},500);</script>"
 
   } else {
 
@@ -851,26 +851,29 @@ cgi_eval {
 
     #Informationen über den Sender_Group (falls vorhanden)----------
     if { ! [catch { set sender_group $dev_descr_sender(GROUP) } ] } then {
-      
-      #Wir haben ein Tastenpaar vorliegen!
-      
-      if { ! [catch {array set sendergroup_receiver_linkinfo [encoding convertfrom [xmlrpc $url getLinkInfo [list string $sender_group] [list string $receiver_address]]] } ] } then {
-      
-        #Hier gilt: Mit dem Tastenpaar ist auch eine Verknüpfung angelegt!
-        
-        #Verknüpfung 2---
-        array set sendergroup_ps   [xmlrpc $url getParamset [list string $sender_group]     [list string $receiver_address]]
-        array set receivergroup_ps [xmlrpc $url getParamset [list string $receiver_address] [list string $sender_group]]
-      
-        array set dev_descr_sender_group [xmlrpc $url getDeviceDescription   [list string $sender_group]]
-        #array set ps_descr_sender_group  [xmlrpc $url getParamsetDescription [list string $sender_group] [list string "LINK"]]
-        #set paramids [xmlrpc $url getParamsetId $sender_group LINK]
-        #set sender_group_paramid [getExistingParamId $paramids]
 
-      } else {
+      # This if condition is necessary for HmIP devices
+      if {$sender_group != ""} {
+        #Wir haben ein Tastenpaar vorliegen!
 
-        #So tun, als ob es kein Tastenpaar gibt!
-        set sender_group ""
+        if {! [catch {array set sendergroup_receiver_linkinfo [encoding convertfrom [xmlrpc $url getLinkInfo [list string $sender_group] [list string $receiver_address]]] } ] } then {
+
+          #Hier gilt: Mit dem Tastenpaar ist auch eine Verknüpfung angelegt!
+
+          #Verknüpfung 2---
+          array set sendergroup_ps   [xmlrpc $url getParamset [list string $sender_group]     [list string $receiver_address]]
+          array set receivergroup_ps [xmlrpc $url getParamset [list string $receiver_address] [list string $sender_group]]
+
+          array set dev_descr_sender_group [xmlrpc $url getDeviceDescription   [list string $sender_group]]
+          #array set ps_descr_sender_group  [xmlrpc $url getParamsetDescription [list string $sender_group] [list string "LINK"]]
+          #set paramids [xmlrpc $url getParamsetId $sender_group LINK]
+          #set sender_group_paramid [getExistingParamId $paramids]
+
+        } else {
+
+          #So tun, als ob es kein Tastenpaar gibt!
+          set sender_group ""
+        }
       }
     }
     #---------------------------------------------------------------

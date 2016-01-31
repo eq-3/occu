@@ -1,0 +1,27 @@
+function ::CreateDoorOpener() {
+  var iId = 0;
+  var oDoorOpener = cObj.DPByControl("DOOROPENER.STATE");
+
+  if (oDoorOpener) { iId = oDoorOpener.ID(); }
+
+  WriteLine("<td class='CLASS02515'>");
+    WriteLine("<table class='ControlBtnOff CLASS02511' id='" # chnId # "DoorOpener' >");
+    WriteLine("<tr>");
+      WriteLine("<td  class='CLASS02513'>");
+        WriteLine("<div align='center'>");
+          WriteLine("<img src='/ise/img/door/open.png' width='80' height='80' />");
+        WriteLine("</div>");
+      WriteLine("</td>");
+    WriteLine("</tr>");
+    WriteLine("<tr><td>${actionStatusControlOpenDoor}</td></tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+  WriteLine("<td></td><td></td><td></td>");
+
+  WriteLine("<script type='text/javascript'>");
+  WriteLine("ibk" # cObj.ID() # " = new DoorOpenerControl(" # cObj.ID() # ", " #iId# ",  " # system.GetVar("iStatusOnly") # ");");
+  WriteLine("translatePage('#ctrl"#chnId#"tbl');");
+  WriteLine("</script>");
+
+  return;
+}

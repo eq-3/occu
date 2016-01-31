@@ -1,0 +1,26 @@
+function ::CreateBinaryActuator()
+{
+  object objState = cObj.DPByControl("SWITCH.STATE");
+  if( objState )
+  {
+    WriteLine("<td class='CLASS02521'>");
+      !WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02522'>Aus</div>");
+      WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02522 j_translate'>${actionStatusControlLblOff}</div>");
+    WriteLine("</td>");
+
+    WriteLine("<td class='CLASS02521'>");
+      !WriteLine("<div id='"#chnId#"On' class='ControlBtnOff CLASS02522'>Ein</div>");
+      WriteLine("<div id='"#chnId#"On' class='ControlBtnOff CLASS02522 j_translate'>${actionStatusControlLblOn}</div>");
+    WriteLine("</td>");
+    WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
+
+    WriteLine("<script type='text/javascript'>");
+      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", " #system.GetVar("iStatusOnly")# ");");
+
+      Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlLblOff')).show();");
+      Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlLblOn')).show();");
+
+    WriteLine("</script>");
+  }
+  return;
+}

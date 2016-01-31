@@ -1,0 +1,254 @@
+function ::CreateDisplay()
+{
+  integer chnId = cObj.ID();
+  object oDoor      = cObj.DPByControl("RC19_DISPLAY.DOOR");
+  object oBulb      = cObj.DPByControl("RC19_DISPLAY.BULB");
+  object oSwitch    = cObj.DPByControl("RC19_DISPLAY.SWITCH");
+  object oWindow    = cObj.DPByControl("RC19_DISPLAY.WINDOW");
+  object oBlind     = cObj.DPByControl("RC19_DISPLAY.BLIND");
+  object oScene     = cObj.DPByControl("RC19_DISPLAY.SCENE");
+  object oPhone     = cObj.DPByControl("RC19_DISPLAY.PHONE");
+  object oBell      = cObj.DPByControl("RC19_DISPLAY.BELL");
+  object oArrUp     = cObj.DPByControl("RC19_DISPLAY.ARROW_UP");
+  object oArrDown   = cObj.DPByControl("RC19_DISPLAY.ARROW_DOWN");
+  object oClock     = cObj.DPByControl("RC19_DISPLAY.CLOCK");
+  object oText      = cObj.DPByControl("RC19_DISPLAY.TEXT");
+  object oUnit      = cObj.DPByControl("RC19_DISPLAY.UNIT");
+  object oBacklight = cObj.DPByControl("RC19_DISPLAY.BACKLIGHT");
+  object oBeep      = cObj.DPByControl("RC19_DISPLAY.BEEP");
+  object oSubmit    = cObj.DPByControl("RC19_DISPLAY.SUBMIT");
+  string sReadOnly;
+  string s1;
+  foreach( s1, cObj.DPs().EnumIDs() )
+  {
+    object o1 = dom.GetObject( s1 );
+    if( o1 )
+    {
+      WriteLine( '<script>conInfo("GOT OBJECT ['#o1.Name()#']");</script>' );
+    }
+  }
+  if( system.GetVar("iStatusOnly") == 1 )
+  {
+    sReadOnly = "disabled";
+  }
+  if( oDoor && oBulb && oSwitch && oWindow && oBlind && oScene && oPhone && oBell && oArrUp && oArrDown && oClock && oText && oUnit && oBeep && oSubmit )
+  {
+    WriteLine("<td colspan='5' class='CLASS02553'>");
+      WriteLine("<table class='ControlBtnOff'>");
+      WriteLine("<tr class='CLASS02546'>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/lamp.png' /></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cBulb"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/switch.png' /></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cSwitch"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/open.png' /></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cWnd"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/door.png' /></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cDoor"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/shutter.png' "#sReadOnly#"/></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cBlind"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/scene.png' "#sReadOnly#"/></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cScene"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/phone.png' "#sReadOnly#"/></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cPhone"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/bell.png' "#sReadOnly#"/></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cBell"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td></td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        WriteLine("<td colspan='2'><input class='CLASS02547'  type='text' id='txt"#chnId#"' "#sReadOnly#"/></td>");
+        WriteLine("<td colspan='2'>");
+          WriteLine("<select class='CLASS02547' id='selUnit"#chnId#"'"#sReadOnly#">");
+          integer iVLCount = web.webGetValueListCount( oUnit.ValueList() );
+          iVLCount = iVLCount - 1;
+          string sVLKey;
+          foreach( sVLKey, system.GenerateEnum(0,iVLCount) )
+          {
+            string sVLValue = web.webGetValueFromList( oUnit.ValueList(), sVLKey );
+            if( sVLValue.Length() )
+            {
+              string sLongKey = cObj.ChnLabel()#"|"#oUnit.HSSID()#"="#sVLValue;
+              string sShortKey = oUnit.HSSID()#"="#sVLValue;
+              string sValue = web.webKeyFromStringTable(sLongKey);
+              if( !sValue.Length() )
+              {
+                string sValue = web.webKeyFromStringTable(sShortKey);
+                if( !sValue.Length() )
+                {
+                  sValue = sShortKey;
+                }
+              }
+              WriteLine( "<option>"#sValue#"</option>" );
+            }
+          }
+          WriteLine("</select>");
+        WriteLine("</td>");
+        WriteLine("<td colspan='2'>");
+        WriteLine("<select class='CLASS02547' id='selLight"#chnId#"'"#sReadOnly#">");
+        if( oBacklight )
+        {
+          integer iVLCount = web.webGetValueListCount( oBacklight.ValueList() );
+          iVLCount = iVLCount - 1;
+          string sVLKey;
+          foreach( sVLKey, system.GenerateEnum(0,iVLCount) )
+          {
+            string sVLValue = web.webGetValueFromList( oBacklight.ValueList(), sVLKey );
+            if( sVLValue.Length() )
+            {
+              string sLongKey = cObj.ChnLabel()#"|"#oBacklight.HSSID()#"="#sVLValue;
+              string sShortKey = oBacklight.HSSID()#"="#sVLValue;
+              string sValue = web.webKeyFromStringTable(sLongKey);
+              if( !sValue.Length() )
+              {
+                string sValue = web.webKeyFromStringTable(sShortKey);
+                if( !sValue.Length() )
+                {
+                  sValue = sShortKey;
+                }
+              }
+              WriteLine( "<option>"#sValue#"</option>" );
+            }
+          }
+        }
+        WriteLine("</select>");
+        WriteLine("</td>");
+        WriteLine("<td colspan='2'>");
+        WriteLine("<select class='CLASS02547' id='selBeep"#chnId#"'"#sReadOnly#">");
+          integer iVLCount = web.webGetValueListCount( oBeep.ValueList() );
+          iVLCount = iVLCount - 1;
+          string sVLKey;
+          foreach( sVLKey, system.GenerateEnum(0,iVLCount) )
+          {
+            string sVLValue = web.webGetValueFromList( oBeep.ValueList(), sVLKey );
+            if( sVLValue.Length() )
+            {
+              string sLongKey = cObj.ChnLabel()#"|"#oBeep.HSSID()#"="#sVLValue;
+              string sShortKey = oBeep.HSSID()#"="#sVLValue;
+              string sValue = web.webKeyFromStringTable(sLongKey);
+              if( !sValue.Length() )
+              {
+                string sValue = web.webKeyFromStringTable(sShortKey);
+                if( !sValue.Length() )
+                {
+                  sValue = sShortKey;
+                }
+              }
+              WriteLine( "<option>"#sValue#"</option>" );
+            }
+          }
+          WriteLine("</select>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        WriteLine("<td colspan='4'></td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/clock.png' /></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cClock"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/arrow_up.png' /></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cArrUp"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<table class='CLASS02518'>");
+            WriteLine("<tr>");
+              WriteLine("<td rowspan='3'><img src='/ise/img/rc19/arrow_down.png' "#sReadOnly#"/></td>");
+              WriteLine("<td></td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td><input type='checkbox' id='cArrDown"#chnId#"' "#sReadOnly#"/></td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        WriteLine("<td><img src='/ise/img/rc19/disp_enter.png' onclick='iseChannels.saveDisplayValues("#chnId#")' height='25px' width='70px' ></td>");
+      WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
+  return;
+}

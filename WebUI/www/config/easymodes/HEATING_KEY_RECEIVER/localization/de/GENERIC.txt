@@ -1,0 +1,7 @@
+"switch_temp" : "Gew&uuml;nschte Temperatur",
+"switch_auto" : "Auto-Modus",
+"switch_manu" : "Manu-Modus",
+"switch_off" : "Thermostat \"aus\"",
+"switch_on" : "Thermostat \"ein\"",
+"boost_on_off" : "Boostmodus \"ein \\ aus\"",
+

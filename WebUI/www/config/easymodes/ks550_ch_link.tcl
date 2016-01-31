@@ -9,10 +9,9 @@ set PROFILE_0(UI_HINT)	0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE) "Expertenprofil"
 
-set range {1 2 5 12 25 29 39 50 62 75 89 103 118}
+set range {1 2 5 12 15 25 29 39 50 62 75 89 103 118}
 set PROFILE_1(STORM_UPPER_THRESHOLD) $range
 set PROFILE_1(STORM_LOWER_THRESHOLD) $range
-# set PROFILE_1(UI_DESCRIPTION) "<br>Windst&auml;rke in Beaufort"
 set PROFILE_1(UI_DESCRIPTION) "<br>\${windInBeaufort}"
 set PROFILE_1(UI_TEMPLATE)	"Windst&auml;rke in Beaufort"
 set PROFILE_1(UI_HINT)	1

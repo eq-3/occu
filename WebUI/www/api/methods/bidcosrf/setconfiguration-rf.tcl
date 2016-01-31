@@ -13,41 +13,26 @@
 ##
 
 set result true
+
+# Read header of current rfd.conf until [Interface 1] (exclusive)
+set fd [open /etc/config/rfd.conf r]
+while { [gets $fd line] >= 0 } {
+        if {  ![regexp {.*\[Interface [1-9]*\].*} $line ] } then {
+                append header $line "\n"
+        } else {
+                break
+        }
+}
+close $fd
+
+
+# Write new file
 set fd [open /etc/config/rfd.conf w]
   
-# HM-CFG-LAN verwenden
+# Write back header and [Interface 0] section
+puts $fd $header
 
-puts $fd "# This File was automatically generated"
-puts $fd "# TCP Port for XmlRpc connections"
-puts $fd "Listen Port = 2001"
-puts $fd ""
-puts $fd "Log Destination = Syslog"
-puts $fd "Log Identifier = rfd"
-puts $fd ""
-puts $fd "Persist Keys = 1"
-puts $fd ""
-puts $fd "#PID File = /var/rfd.pid"
-puts $fd "#UDS File = /var/socket_rfd"
-puts $fd ""
-puts $fd "Device Description Dir = /firmware/rftypes"
-puts $fd "Device Files Dir = /etc/config/rfd"
-puts $fd "Address File = /etc/config/ids"
-puts $fd "Key File = /etc/config/keys"
-puts $fd "Firmware Dir = /firmware"
-puts $fd "Replacemap File = /firmware/rftypes/replaceMap/rfReplaceMap.xml"
-puts $fd ""
-puts $fd ""	
-
-#CCU2 Koprozessor
-puts $fd "\[Interface 0\]"
-puts $fd "Type = CCU2"
-puts $fd "Description = CCU2-Coprocessor"
-puts $fd "ComPortFile = /dev/ttyAPP0"
-puts $fd "AccessFile = /dev/null"
-puts $fd "ResetFile = /dev/ccu2-ic200"
-puts $fd ""
-
-#Lan Interfaces (RF)
+#Write Lan Interface sections (if any)
 set i 1
   
 if { [catch {

@@ -31,6 +31,8 @@ foreach _gateway $gateways {
 	append result ",\"dutyCycle\":[json_toString $gateway(DUTY_CYCLE)]"
 	append result ",\"isConnected\":[toJSONBoolean $gateway(CONNECTED)]"
 	append result ",\"isDefault\":[toJSONBoolean $gateway(DEFAULT)]"
+	append result ",\"fwVersion\":[json_toString $gateway(FIRMWARE_VERSION)]"
+	append result ",\"type\":[json_toString $gateway(TYPE)]"
 	append result "\}"
 	
 	array_clear gateway

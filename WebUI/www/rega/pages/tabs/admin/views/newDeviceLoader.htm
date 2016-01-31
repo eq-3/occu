@@ -149,8 +149,8 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
   foreach(chnTmp, dev.EnumChannelGroups(false)) {
     string trId = dev.ID() # chnTmp;
     object chn = dom.GetObject(chnTmp);
-    !if (chn && (chn.ChnNumber() != 0)) {
-    if (chn) {
+    !if (chn) {
+    if (chn && (chn.HssType() != "MAINTENANCE")) {
       Write("deviceData['hasSubs'] = true;");
       Write('var tmp = new Object();');
       Write("tmp['id'] = "#chn.ID()#";");
@@ -278,7 +278,7 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
       Element.addClassName(td, "CLASS04402");
       tr.appendChild(td);
       
-      td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(DEV_getDescription(deviceData['type']))); tr.appendChild(td);
+      td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(strCut(DEV_getDescription(deviceData['type']))) ); tr.appendChild(td);
       td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(GroupsArray[i][0]['sn'] + " " + GroupsArray[i][1]['sn'])); tr.appendChild(td);
       var sIface = (GroupsArray[i][0]['iface'] != GroupsArray[i][1]['iface'] ? GroupsArray[i][0]['iface'] + " " +  GroupsArray[i][1]['iface'] : GroupsArray[i][0]['iface']);
       td = Builder.node('td', {className: 'GrayBkg border1px'}, sIface); tr.appendChild(td);
@@ -333,7 +333,7 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
         }
         Element.addClassName(td, "CLASS04402");
         tr.appendChild(td);
-        td = Builder.node('td', {className: 'GrayBkg border1px'}, GroupsArray[i][x]['desc']); tr.appendChild(td);
+        td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(GroupsArray[i][x]['desc']) ); tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(GroupsArray[i][x]['sn'])); tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, GroupsArray[i][x]['iface']); tr.appendChild(td);
         var trsId = "trs" + GroupsArray[i][x]['id'];
@@ -456,7 +456,7 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
         Element.addClassName(td, "CLASS04402");
         tr.appendChild(td);
        
-        td = Builder.node('td', {className: 'GrayBkg border1px'}, chns[i]['desc']); tr.appendChild(td);
+        td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(chns[i]['desc'])); tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(chns[i]['sn'])); tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, chns[i]['iface']); tr.appendChild(td);
         var trsId = "trs" + chns[i]['id'];

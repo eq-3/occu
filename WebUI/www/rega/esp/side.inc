@@ -1,6 +1,7 @@
 <%
   string hm_ouled16 =  "HM-OU-LED16";
   string hm_oucfm = "HM-OU-CFM-Pl";
+  string hm_oucfmTW = "HM-OU-CFM-TW";
   string hm_oucmpcb = "HM-OU-CM-PCB";
   string hm_partyDialog = "HM-CC-RT-DN HM-TC-IT-WM-W-EU HM-CC-VG-1";
   string hm_statusDisplay = "HM-Dis-WM55";
@@ -8,6 +9,8 @@
 
   string excludePARTY = "PARTY_";
   string includePARTY = "PARTY_MODE_SUBMIT";
+
+  string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
 
   integer iDP = oSD.DestinationDP();
   integer iCH = oSD.DestinationChannel();
@@ -30,7 +33,7 @@
   !Write( '<option'#sSelected#'>Skript</option>' );
   Write( '<option'#sSelected#'>${ruleActivitySelectScript}</option>' );
   Write( '</select>' );
-  
+
   if( (iP == ivtObjectId) || ( iP == ivtSystemId ) )
   {
     if( iP == ivtObjectId )
@@ -214,9 +217,8 @@
               }
               else
               {
-                ! Party mode params of the heating thermostats should not be visible
-                ! For this params exists an own param type so that we are able to use a nice dialog
-                if( (oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1) ) {
+                ! Some parameter shouldn´t be visible
+                if( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1)) && (oDP.HSSID().Find(excludeHmIPCDT) == -1) ) {
                   Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
                   string sValue = oDP.Name();
                   if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
@@ -274,7 +276,7 @@
         iVP = oSD.DestinationValueParam();
         iVPT = oSD.DestinationValueParamType();
       }
-      
+
       object oDP = dom.GetObject( iDP );
       if( oDP )
       {
@@ -282,28 +284,28 @@
         {
           !Write( "SD:["#oSD.ID()#"] " );
           !Write( "DP:["#oDP.ID()#"] " );
-          
+
           integer iDPvt = oDP.ValueType();
           integer iDPst = oDP.ValueSubType();
-          
+
           !Write( "VT:["#iDPvt#"] " );
           !Write( "ST:["#iDPst#"] " );
-          
+
           if( ((iVT == ivtInteger) && (iDPst == istEnum)) || (iVT == ivtBinary) )
           {
             !Write( "i" );
           }
-          
+
           if( (iVT == ivtInteger) || (iVT == ivtFloat) || (iVT == ivtScaling) || (iVT == ivtRelScaling) || (iVT == ivtBitMask) || (iVT == ivtWord) || (iVT == ivtDWord) )
           {
             if( iDPst != istEnum )
             {
               Write( ' <i>${ruleDescrSetValueA}</i> ' );
               string sUnit = oDP.ValueUnit().ToString();
-            
+
               real rMin = oDP.ValueMin();
               real rMax = oDP.ValueMax();
-              
+
               integer iPercentPos = sUnit.Find("%");
 
               if( iPercentPos != -1 )
@@ -314,42 +316,43 @@
 
               if( iV.Type() == "real" )
               {
-                if( iV < rMin) 
-                { 
+                if( iV < rMin)
+                {
                   iV = rMin.ToInteger().ToString() + rMin.ToString().Substr(rMin.Find("."),3);
                 }
                 iV = iV.ToString(2);
               }
-      
-              string sRange = " (" + rMin.ToInteger().ToString() + rMin.ToString().Substr(rMin.Find("."),3) + " - " + rMax.ToInteger().ToString() + rMax.ToString().Substr(rMax.Find("."),3) + ")"; 
-              
+
+              string sRange = " (" + rMin.ToInteger().ToString() + rMin.ToString().Substr(rMin.Find("."),3) + " - " + rMax.ToInteger().ToString() + rMax.ToString().Substr(rMax.Find("."),3) + ")";
+
               Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
               Write( sUnit );
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             }
-          }        
-          
+          }
+
           if( iVT == ivtString )
           {
             ! Label() presents the type id of the channel, e.g. HM-OU-LED16 or  HM-OU-CFM-Pl
             string chLabel = oCH.Label();
 
-            integer x1 = chLabel.Find(hm_ouled16);
-            integer x2 = chLabel.Find(hm_oucfm);
-            integer x3 = chLabel.Find(hm_oucmpcb);
-            integer x4 = hm_partyDialog.Find(chLabel);
-            integer x5 = hm_statusDisplay.Find(chLabel);
-            integer x6 = chLabel.Find(hm_rgbw_controller);
+            integer ouled16 = chLabel.Find(hm_ouled16);
+            integer oucfm = chLabel.Find(hm_oucfm);
+            integer oucfmTW = chLabel.Find(hm_oucfmTW);
+            integer oucmpcb = chLabel.Find(hm_oucmpcb);
+            integer partyDialogDevice = hm_partyDialog.Find(chLabel);
+            integer statusDisplayDevice = hm_statusDisplay.Find(chLabel);
+            integer rgbw_controller = chLabel.Find(hm_rgbw_controller);
 
-            if ((x5 != -1) || (x6 != -1)){
-              if (x5 != -1) {
+            if ((statusDisplayDevice != -1) || (rgbw_controller != -1)){
+              if (statusDisplayDevice != -1) {
                 if(iV == "0") {
                   ! This is the correct string for 'all channels not used'
                   iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x0A,0x03";
                 }
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
-              if (x6 != -1) {
+              if (rgbw_controller != -1) {
 
                 if (iV == "0") {
 
@@ -369,22 +372,22 @@
               Write( '<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
             }
 
-            if((x1 == -1) && (x2 == -1) && (x3 == -1) && (x4 == -1) && (x5 == -1) && (x6 == -1)) {
+            if((ouled16 == -1) && (oucfm == -1) && (oucfmTW == -1) && (oucmpcb == -1) && (partyDialogDevice == -1) && (statusDisplayDevice == -1) && (rgbw_controller == -1)) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
-              if(x1 != -1) {      
+              if(ouled16 != -1) {
                 Write( '<span class="CLASS02401" onclick="ChangeOULED16Value('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
               }
-              if((x2 != -1) || (x3 != -1)) {
+              if((oucfm != -1) || (oucfmTW != -1) || (oucmpcb != -1)) {
                 Write( '<span class="CLASS02401" onclick="ChangeOUCFMValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
               }
-              if (x4 != -1) {
+              if (partyDialogDevice != -1) {
                 Write( '<span id="setPartyMode" class="CLASS02401" onclick="SetPartyMode(this);"><img src="/ise/img/notepad.png" /></span>' );
               }
-              if (x5 != -1) {
+              if (statusDisplayDevice != -1) {
                 Write( '<span id="setStatusDisplay'#oSD.ID()#'" class="CLASS02401" onclick="SetStatusDisplay('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
               }
-               if (x6 != -1) {
+               if (rgbw_controller != -1) {
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="SetRGBWController('#oSD.ID()#',\''#oCH.HSSID()#'\');"><img src="/ise/img/notepad.png" /></span>' );
               }
             }

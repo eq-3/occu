@@ -1,0 +1,130 @@
+function ::CreateWin_SC_SENSOR()
+{
+  object oLevel = cObj.DPByControl("WIN_SC_SENSOR.LEVEL");
+  object oRelease = cObj.DPByControl("WIN_SC_SENSOR.RELEASE");
+  object oTipTronicState = cObj.DPByControl("WIN_SC_SENSOR.TIPTRONIC_STATE");
+  object oWindowType = cObj.DPByControl("WIN_SC_SENSOR.WINDOW_TYPE");
+
+
+  WriteLine("<div class='hidden' id='"#chnId#"Circle'></div>");
+  WriteLine("<div class='hidden' id='"#chnId#"Stop' >${actionStatusControlStop}</div>");
+  WriteLine("<input id='"#chnId#"Perc' type='text' value='0' size='3' class='hidden'/>");
+  WriteLine("<img id='"#chnId#"PercUp' src='/ise/img/up.png' class='hidden'/>");
+  WriteLine("<img id='"#chnId#"PercDown' src='/ise/img/down.png' class='hidden' />");
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+    WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<span id='"#chnId#"windowType'>Type unknown</span>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td class='hidden'>");
+          WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Open' >");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/window/open_v.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                WriteLine("${actionStatusControlOpen}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img id='"#chnId#"stateIndicatorImg' src='/ise/img/window/open_h.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td style='text-align:left'>");
+                WriteLine("<span id='"#chnId#"stateIndicatorDescr'>State unknown</span>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<span id='"#chnId#"stateDescr'>State unknown</span>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+        WriteLine("<td class='hidden'>");
+          WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Close' >");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/window/closed.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                WriteLine("${actionStatusControlClose}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  WriteLine("<td>");
+    WriteLine("<table width='100%' _height='100%' cellspacing='5'>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnOff CLASS02554 hidden' id='"#chnId#"Locked' >");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/lock/closed.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td class='CLASS02555'>");
+                WriteLine("${actionStatusControlLocked}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+      !WriteLine("<tr>");
+      !  WriteLine("<td>");
+      !    WriteLine("<div class='ControlBtnOff CLASS02556' id='"#chnId#"Unknown'>${infoStatusControlStateUnknown}</div>");
+      !  WriteLine("</td>");
+      !WriteLine("</tr>");
+    WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+  if( oLevel && oRelease && oTipTronicState && oWindowType)
+  {
+    string sCtrlId = chnId#"Circle";
+    WriteLine('<script type="text/javascript">');
+      WriteLine("var opts = {};");
+      WriteLine("opts.idLevel = "#oLevel.ID()#";");
+      WriteLine("opts.stLevel = "#oLevel.Value()#";");
+      WriteLine("opts.idRelease = "#oRelease.ID()#";");
+      WriteLine("opts.stRelease = "#oRelease.Value()#";");
+      WriteLine("opts.idWindowType = "#oWindowType.ID()#";");
+      WriteLine("opts.stWindowType = "#oWindowType.Value()#";");
+      WriteLine("opts.idTipTronicState = "#oTipTronicState.ID()#";");
+      WriteLine("opts.stTipTronicState = "#oTipTronicState.Value()#";");
+
+      WriteLine("ibwm"#cObj.ID()#" = new iseButtonsWin_SC_SENSOR("#cObj.ID()#", opts, " #system.GetVar("iStatusOnly")# ");");
+      WriteLine("translatePage('#ctrl"#chnId#"tbl');");
+    WriteLine('</script>');
+  }
+  return;
+}

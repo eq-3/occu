@@ -2092,6 +2092,10 @@ html, body {
   text-align: left;
 }
 
+.borderWidth2Px {
+  border-width: 2px !important;
+}
+
 .diagramHelpCustomModeLi1 {
   margin-bottom: 10px;
 }
@@ -6081,6 +6085,7 @@ color: $_(textColorA); /* white */
 
 .CLASS04104 {
 	background-color:$_(clickable);
+  height:20px;
 }
 
 .CLASS04105 {
@@ -6103,6 +6108,7 @@ color: $_(textColorA); /* white */
 .CLASS04109 {
 	background-color:$_(clickable);
 	color: $_(textColorA) ! important; /* white */
+  height:20px;
 }
 
 .CLASS04110 {
@@ -8033,6 +8039,7 @@ color: $_(textColorA); /* white */
   vertical-align: top;
  	color: $_(textColorB); /* black */
   background-color: $_(inactiveBackground);
+  padding: 5px;
 }
 
 .CLASS21209 {

@@ -287,15 +287,18 @@ self.setMinMaxTemp = function(optionElemId, tmpElemId) {
   jQuery("#" + tmpElemId).val(parseFloat(selectedVal));
 };
 
+
 self.isEcoLTComfort = function(elmName) {
   // elmName should be e. g. TEMPERATURE_COMFORT
   var arName = elmName.split("_"),
   elmType = arName[1], // e.g.COMFORT
   isComfort = (elmType == "COMFORT") ? true : false,
   comfElm = jQuery("input[name='"+arName[0]+"_COMFORT']"),
+  comfValIsValid = (comfElm.attr("valvalid") == "true") ? true : false,
   ecoElm = jQuery("input[name='"+arName[0]+"_LOWERING']"),
-  comfVal = jQuery(comfElm[0]).val(),
-  ecoVal = jQuery(ecoElm[0]).val(),
+  ecoValIsValid = (ecoElm.attr("valvalid") == "true") ? true : false,
+  comfVal = parseInt(jQuery(comfElm[0]).val()),
+  ecoVal = parseInt(jQuery(ecoElm[0]).val()),
   comfOldElm = jQuery("#comfortOld"),
   ecoOldElm = jQuery("#ecoOld"),
   errorRow = jQuery("#errorRow"),
@@ -304,21 +307,31 @@ self.isEcoLTComfort = function(elmName) {
   errorMsg = translateKey("errorComfortLTEco"),
   fadeOutTime = 3500;
 
+  console.log("comfValIsValid: " + comfValIsValid + " - ecoValIsValid: " + ecoValIsValid);
+
   switch (elmType) {
     case "COMFORT":
-      if (comfVal < ecoVal) {
+      if (comfValIsValid) {
+        if (comfVal < ecoVal) {
+          jQuery(comfElm[0]).val(parseFloat(jQuery(comfOldElm).val()).toFixed(2));
+          errorRow.show();
+          errorComfElm.html(errorMsg).show();
+          errorComfElm.fadeOut(fadeOutTime);
+        }
+      } else {
         jQuery(comfElm[0]).val(parseFloat(jQuery(comfOldElm).val()).toFixed(2));
-        errorRow.show();
-        errorComfElm.html(errorMsg).show();
-        errorComfElm.fadeOut(fadeOutTime);
       }
       break;
     case "LOWERING":
-      if (ecoVal > comfVal) {
+      if (ecoValIsValid) {
+        if (ecoValIsValid && (ecoVal > comfVal)) {
+          jQuery(ecoElm[0]).val(parseFloat(jQuery(ecoOldElm).val()).toFixed(2));
+          errorRow.show();
+          errorEcoElm.html(errorMsg).show();
+          errorEcoElm.fadeOut(fadeOutTime);
+        }
+      } else {
         jQuery(ecoElm[0]).val(parseFloat(jQuery(ecoOldElm).val()).toFixed(2));
-        errorRow.show();
-        errorEcoElm.html(errorMsg).show();
-        errorEcoElm.fadeOut(fadeOutTime);
       }
       break;
   }

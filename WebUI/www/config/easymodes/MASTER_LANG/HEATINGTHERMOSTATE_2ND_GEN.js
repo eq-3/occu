@@ -1,7 +1,5 @@
 jQuery.extend(true,langJSON, {
   "de" : {
-    "stringTableButtonLock" : "Lokale Bediensperre",
-    "stringTableGlobalButtonLock" : "Globale Bediensperre",
     "stringTableModusButtonLock" : "Modus Bediensperre",
     "stringTableButtonResponseWithoutBacklight" : "Sofortige Reaktion auf Tastendruck<br/>ohne vorherige Hintergrundbeleuchtung",
     "stringTableTemperatureComfort" : "Komfort-Temperatur",
@@ -93,8 +91,6 @@ jQuery.extend(true,langJSON, {
   },
 
   "en" : {
-    "stringTableButtonLock" : "Local operating lock",
-    "stringTableGlobalButtonLock" : "Global operating lock",
     "stringTableModusButtonLock" : "Mode operating lock",
     "stringTableButtonResponseWithoutBacklight" : "Immediate reaction to keypress<br/>without previous display backlight",
     "stringTableTemperatureComfort" : "Comfort temperature",
@@ -186,8 +182,6 @@ jQuery.extend(true,langJSON, {
   },
 
   "tr" : {
-    "stringTableGlobalButtonLock" : "Global kumanda kilidi",
-    "stringTableModusButtonLock" : "Mod kumanda kilidi",
     "stringTableButtonResponseWithoutBacklight" : "Immediate reaction to keypress<br/>without previous display backlight",
     "stringTableTemperatureComfort" : "Konforlu sicaklik",
     "stringTableTemperatureLowering" : "Eco sicaklik",

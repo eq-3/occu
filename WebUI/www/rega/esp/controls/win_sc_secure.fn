@@ -1,0 +1,41 @@
+function ::CreateWin_SC_SECURE()
+{
+  object objState = cObj.DPByControl("WIN_SC_SECURE.STATE");
+  if( objState )
+  {
+    ! WriteLine("<table width='100%' _height='100%' cellspacing='8' class='ctrlTbl CLASS02520'>");
+      WriteLine("<tr>");
+
+        WriteLine("<td class='CLASS02521'>");
+        !WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02522a j_translate'>${actionStatusControlSecurityChannelOff}</div>");
+           WriteLine("<table class='ControlBtnOff CLASS02522a' id='"#chnId#"Off' >");
+             WriteLine("<tr>");
+               WriteLine("<td>");
+                WriteLine("<div>${actionStatusControlSecurityChannelOff}</div>");
+               WriteLine("</td>");
+             WriteLine("</tr>");
+           WriteLine("</table>");
+        WriteLine("</td>");
+
+        WriteLine("<td class='CLASS02521'>");
+          !WriteLine("<div id='"#chnId#"On' class='ControlBtnOff CLASS02522a j_translate'>${actionStatusControlSecurityChannelOn}</div>");
+           WriteLine("<table class='ControlBtnOff CLASS02522a' id='"#chnId#"On' >");
+             WriteLine("<tr>");
+               WriteLine("<td>");
+                WriteLine("<div>${actionStatusControlSecurityChannelOn}</div>");
+               WriteLine("</td>");
+             WriteLine("</tr>");
+           WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    ! WriteLine("</table>");
+
+    WriteLine("<script type='text/javascript'>");
+      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", " #system.GetVar("iStatusOnly")# ");");
+
+      Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlSecurityChannelOff')).show();");
+      Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlSecurityChannelOn')).show();");
+    WriteLine("</script>");
+  }
+  return;
+}

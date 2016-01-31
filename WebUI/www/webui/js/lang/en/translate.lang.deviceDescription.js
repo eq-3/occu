@@ -1,12 +1,16 @@
 jQuery.extend(true,langJSON, {
   "en" : {
+
+    "HM-OU-CFM-TW" : "MP3 Wireless Chime with light flash, battery",
     "HM-ES-PMSw1-SM" : "Wireless Switch actuator with power measurement",
     "OLIGO.smart.iq.HM" : "Wireless Dimming Actuator",
-    "WRC2" : "HmIP Wireless Push-button 2-channel",
-    "TRV" : "HmIP Wireless Heating Thermostat",
-    "WTH" : "HmIP Wireless Wall Thermostat",
-    "PS" : "HmIP Wireless Switch, 1-channel",
-    "SWD" : "HmIP Wireless Door/Window Contact optical",
+    "KRC4" : "Homematic IP Key Ring Remote Control - 4 buttons",
+    "WRC2" : "Homematic IP Wall-mount Remote Control 2 buttons",
+    "TRV" : "Homematic IP Radiator Thermostat",
+    "WTH" : "Homematic IP Wall Thermostat",
+    "PS" : "Homematic IP Pluggable Switch",
+    "PSM" : "Homematic IP Pluggable Switch and Meter",
+    "SWD" : "Homematic IP Window/Door Contact optical",
     "HM-LC-Sw1-Pl-CT-R1" : "Wireless Switch Actuator 1-channel with clamp terminal",
     "HM-ES-PMSw1-DR" : "Wireless Switch actuator with power measurement, DIN rail mount ",
     "HM-LC-Sw1-DR" : "Wireless Switch Actuator 1-channel, DIN rail mount",

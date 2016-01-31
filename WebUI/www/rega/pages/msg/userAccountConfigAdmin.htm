@@ -346,6 +346,7 @@
 
     // Activate user language
     user.language = $("userLanguage")[$("userLanguage").selectedIndex].value;
+    userIsNoExpert = user.simple;
     return user;
   };
   
@@ -416,7 +417,8 @@
     {
       olduserlevel = <% Write(oUser.UserLevel()); %>;
     }
-    
+
+
     var url = "/esp/system.htm?sid="+SessionId;
     var pb = "string action = 'saveUser';";
     pb += "integer iUserid = " + iUserId + ";";

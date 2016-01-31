@@ -4,6 +4,7 @@
 #
 # Writes /etc/config/InterfacesList.xml
 # It must be started before webserver!
+# It does NOT start hs485d itself! 
 #
 
 LOGLEVEL_HS485D=5

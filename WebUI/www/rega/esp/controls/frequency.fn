@@ -1,0 +1,53 @@
+function ::CreateFrequency()
+{
+  integer iLvlDpId = 0;
+  integer iState = 0;
+  integer iMin = 0;
+  integer iMax = 50000;
+  string sUnit = "<i>mHz</i>";
+  integer iReadOnlyState = 0;
+
+  object oFreq = cObj.DPByControl("DIGITAL_ANALOG_OUTPUT.FREQUENCY");
+
+  if( oFreq )
+  {
+    iLvlDpId = oFreq.ID();
+    iState = oFreq.Value();
+    sUnit = oFreq.ValueUnit();
+    iMin = oFreq.MetaData("MIN").ToInteger();
+    iMax = oFreq.MetaData("MAX").ToInteger();
+  }
+
+  iMax = oFreq.ValueMax();
+
+  string sReadOnly = "";
+
+  integer iInvalidState = 0;
+
+  if( ( system.GetVar("iStatusOnly" ) == 1) || iInvalidState )
+  {
+    sReadOnly = "disabled";
+    iReadOnlyState = 1;
+  }
+  WriteLine("<td colspan='3' id='slidCtrl"#cObj.ID()#"' class='CLASS02529'></td>");
+  WriteLine("<td class='CLASS02529'>");
+    WriteLine("  <div id='button"#chnId#"' class='PercBtn' >");
+    WriteLine("  <table width='100%' height='100%' class='CLASS02530'>");
+    WriteLine("    <tr class='CLASS02531'>");
+    WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Deg' type='text' value='"#iState.ToString(2)#"' size='8' class='CLASS02542' "#sReadOnly#" /><b>"#sUnit#"</b></td></tr>");
+    WriteLine("      <input id='"#chnId#"Perc' type='hidden' value='"#iState.ToString(2)#"' />");
+    WriteLine("      <td align='center' class='CLASS02548'>");
+    WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"Up' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543' /></td></tr><tr><td><img id='"#chnId#"Down' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+    WriteLine("      </td><td align='center' class='CLASS02548'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+    WriteLine("    </tr>");
+    WriteLine("  </table>");
+    WriteLine("  </div>");
+  WriteLine("</td>");
+  WriteLine("<td width='35%'>&nbsp;</td>");
+  string sCtrlId = "slidCtrl"#chnId;
+  WriteLine("<script type='text/javascript'>");
+  WriteLine("ifs"#chnId#" = new iseFrequency("#chnId#", "#iState#", "#iLvlDpId#", "#iMin#", "#iMax#", " #system.GetVar("iReadOnlyState")#", "#system.GetVar('bSliderFlag')#");");
+  WriteLine("</script>");
+
+  return;
+}

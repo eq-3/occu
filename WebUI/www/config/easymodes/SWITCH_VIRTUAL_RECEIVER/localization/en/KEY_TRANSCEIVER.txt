@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">With a short or long button press the switch will be switched on for the set time.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a short or long button press the switch will be switched off for the set time.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a short or long button press the switch will be switched on or off for the set time (toggle function).</span><br/><br/>",
+"description_4" : "<span class=\"translated\">With a short or long button press the switch will be switched on or off for the set time.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">With a short or long button press the switch will be switched on or off for the set time.</span><br/><br/>",

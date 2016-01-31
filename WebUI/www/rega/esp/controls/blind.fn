@@ -1,0 +1,86 @@
+function ::CreateShutterActuator()
+{
+  object oLvl = cObj.DPByControl("BLIND.LEVEL");
+  object oStop = cObj.DPByControl("BLIND.STOP");
+  integer oLvlId = 0;
+  integer oStopId = 0;
+  integer iLvl = 0;
+  if (oLvl)
+  {
+    oLvlId = oLvl.ID();
+    iLvl = oLvl.Value();
+    if( oLvl.ValueUnit() == "100%" )
+    {
+      iLvl = iLvl * 100;
+    }
+  }
+  if (oStop)
+  {
+    oStopId = oStop.ID();
+  }
+
+  WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+  WriteLine("<td>");
+    WriteLine("  <div class='PercBtn'>");
+    WriteLine("  <table width='100%' height='100%'>");
+    WriteLine("    <tr class='CLASS02531'>");
+    string sReadOnly = "";
+    if (system.GetVar("iStatusOnly")) {
+      sReadOnly = "readonly";
+    }
+    WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td></tr>");
+    WriteLine("    <tr>");
+    WriteLine("      <td align='center'>");
+    WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+    WriteLine("      </td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+    WriteLine("    </tr>");
+    WriteLine("  </table>");
+    WriteLine("  </div>");
+  WriteLine("</td>");
+
+  WriteLine("<td>");
+    ! WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' >Stopp</div>");
+    WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' >${actionStatusControlStop}</div>");
+  WriteLine("</td>");
+  WriteLine("<td>");
+    WriteLine("<table width='100%' height='100%' cellspacing='10'>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Up' >");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/up.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                ! WriteLine("Auf");
+                WriteLine("${actionStatusControlUp}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Down'>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<img src='/ise/img/down.png' width='40' height='30' class='CLASS02552' />");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                !WriteLine("Ab");
+                WriteLine("${actionStatusControlDown}");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  string sCtrlId = "shutter"#chnId;
+  WriteLine("<script type='text/javascript'>");
+  WriteLine("ibs"#cObj.ID()#" = new iseButtonsShutter(" # chnId # ", " # iLvl # ", " # oLvlId # ", " # oStopId # ", " #system.GetVar("iStatusOnly")# " );" );
+  WriteLine("translatePage('#ctrl"#chnId#"tbl');");
+  WriteLine("</script>");
+  return;
+}

@@ -1096,12 +1096,17 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
     set default_value $param_descr(DEFAULT)
     set type $param_descr(TYPE)
     #set unit [cgi_quote_html $param_descr(UNIT)]
-    set unit $param_descr(UNIT)
+    set unit ""
+    catch {set unit $param_descr(UNIT)}
     set min  $param_descr(MIN)
     set max  $param_descr(MAX)
     set flags $param_descr(FLAGS)
     set operations $param_descr(OPERATIONS)
     set value ""
+
+    if {[info exists unit] == 0} {
+     set unit ""
+    }
 
     # omit internal and invisible parameters
     if { (!($flags & 1)) || ($flags & 2) } then { continue }
@@ -1529,6 +1534,7 @@ proc ConvTemp {value} {
 proc get_ComboBox2 {val_arr name id selectedvalue {extraparam ""}} {
   upvar $val_arr arr
   set doppelt "false"
+  set selectedActive 0
 
   set selectedvalue [lindex $selectedvalue 0]
   
@@ -1549,8 +1555,9 @@ proc get_ComboBox2 {val_arr name id selectedvalue {extraparam ""}} {
   }  
   set s "<select class=\"$selectedvalue\" name=\"$name\" id=\"$id\" $extraparam [expr {[array size arr]<=1?"disabled=\"disabled\" ":" "} ]>"
   foreach value [lsort -real [array names arr]] {
-    if { [expr $value == [lindex $selectedvalue 0]] } then {
+    if { ([expr $value == [lindex $selectedvalue 0]]) && ($selectedActive == 0) } then {
       append s "<option value=\"$value\" selected=\"selected\">$arr($value)</option>"
+      set selectedActive 1
     } else {
       append s "<option value=\"$value\">$arr($value)</option>"
     }

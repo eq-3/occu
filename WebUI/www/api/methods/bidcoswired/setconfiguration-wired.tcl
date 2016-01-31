@@ -13,31 +13,37 @@
 ##
 
 set result true
+
+
+set header ""
+# Read contents of current hs485d.conf until first interface section
+set configexists [file exists /etc/config/hs485d.conf ]
+if { $configexists == 1 } then { 
+	set fd [open /etc/config/hs485d.conf r]
+	while { [gets $fd line] >= 0 } {
+	        if {  ![regexp {.*\[Interface [0-9]*\].*} $line ] } then {
+	                append header $line "\n"
+	        } else {
+	                break
+	        }
+	}
+	close $fd
+} else {
+	append header "# This File was automatically generated\n" 
+	append header "# TCP Port for XmlRpc connections\n"
+	append header "Listen Port = 2000\n"
+	append header "\n"
+	append header "Log Destination = Syslog\n"
+	append header "Log Identifier = hs485d\n"
+	append header "\n"
+}
+
+#Write configuration data read above
 set fd [open /etc/config/hs485d.conf w]
-  
-# HM-CFG-LAN verwenden
 
-puts $fd "# This File was automatically generated"
-puts $fd "# TCP Port for XmlRpc connections"
-puts $fd "Listen Port = 2000"
-puts $fd ""
-puts $fd "Log Destination = Syslog"
-puts $fd "Log Identifier = hs485d"
-puts $fd ""
-#puts $fd "Persist Keys = 1"
-#puts $fd ""
-#puts $fd "#PID File = /var/rfd.pid"
-#puts $fd "#UDS File = /var/socket_rfd"
-puts $fd ""
-#puts $fd "Device Description Dir = /firmware/rftypes"
-#puts $fd "Device Files Dir = /etc/config/rfd"
-#puts $fd "Address File = /etc/config/ids"
-#puts $fd "Key File = /etc/config/keys"
-#puts $fd ""
-#puts $fd ""	
+puts $fd $header
 
-
-#Lan Interfaces (Wired)
+#Write Lan Interfaces (Wired)
 set i 0
   
 if { [catch {

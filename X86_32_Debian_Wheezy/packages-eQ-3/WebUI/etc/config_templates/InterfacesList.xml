@@ -10,4 +10,9 @@
 	 	<url>xmlrpc://127.0.0.1:9292/groups</url> 
 	 	<info>Virtual Devices</info> 
 	</ipc>
+	<ipc>
+	 	<name>HmIP-RF</name>
+	 	<url>xmlrpc://127.0.0.1:2010</url>
+	 	<info>HmIP-RF</info>
+	</ipc>
 </interfaces>

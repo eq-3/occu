@@ -252,7 +252,7 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsCMDialogHintPerformFirmwareUploadTitle" : "Bilgi!",
     "dialogSettingsCMDialogHintPerformFirmwareUploadContent" : "Yazilim g%FCncellemesi suraya aktariliyor: " + HMIdentifier.tr.CCUShortName + ".<br/><br/>L%FCtfen biraz sabredin.",
     "commentSettingsDialogMaintenancePerformSoftwareUpdateEnd" : "***********************************************",
-    "forcedUpdateHint" : "Yeni " + HMIdentifier.tr.CCUFullName + "'nin kusursuz calisabilmesi icin %F6nce g%FCncelleme yapmalisiniz. Bunun icin \"g%FCncelleme\" d%FCgmesine tiklayin ve dosyalari y%FCkleyin. Daha sonra " + HMIdentifier.tr.CCUShortName + "'nin t%FCm\nfonksiyonlarini kullanabilirsiniz.",
+    "forcedUpdateHint" : "Yeni " + HMIdentifier.tr.CCUFullNameText + "'nin kusursuz calisabilmesi icin %F6nce g%FCncelleme yapmalisiniz. Bunun icin \"g%FCncelleme\" d%FCgmesine tiklayin ve dosyalari y%FCkleyin. Daha sonra " + HMIdentifier.tr.CCUShortName + "'nin t%FCm\nfonksiyonlarini kullanabilirsiniz.",
     "forcedUpdateBtn" : "G%FCncelleme",
     "replaceDeviceDlgConfirmTitle" : "Cihazi degistirme",
     "replaceDeviceDlgConfirmHeader" : "Su cihazlari degistirmek istiyorsunuz:<br/><br/>",
@@ -731,6 +731,13 @@ jQuery.extend(true,langJSON, {
     "lblRGBWControllerAutomatic" : "Program",
 
     "deviceUpdate" : "Aygit Guncellemesi:",
+
+    "weeklyProfile1" : "1",
+    "weeklyProfile2" : "2",
+    "weeklyProfile3" : "3",
+
+    "stringTableGlobalButtonLock" : "Global kumanda kilidi",
+    "stringTableModusButtonLock" : "Mod kumanda kilidi",
 
     "theEnd" : ""
   }

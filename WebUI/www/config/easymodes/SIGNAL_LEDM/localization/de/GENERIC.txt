@@ -10,4 +10,18 @@
 "signal_option_green_short" : "Gr&uuml;n - kurz",
 "signal_option_orange_long" : "Orange - lang",
 "signal_option_orange_short" : "Orange - kurz",
+
+"signal_option_yellow_long" : "Gelb - lang",
+"signal_option_yellow_short" : "Gelb - kurz",
+
+"signal_option_blue_long" : "Blau - lang",
+"signal_option_blue_short" : "Blau - kurz",
+"signal_option_purple_long" : "Violett - lang",
+"signal_option_purple_short" : "Violett - kurz",
+"signal_option_cyan_long" : "Cyan - lang",
+"signal_option_cyan_short" : "Cyan - kurz",
+"signal_option_white_long" : "Wei&szlig; - lang",
+"signal_option_white_short" : "Wei&szlig; - kurz",
+
 "button_inactive" : "Taste deaktiviert",
+

@@ -1,0 +1,83 @@
+function ::CreateDimmingActuator()
+{
+   ! Necessary for checking if the expert mode is active
+   object oUser = dom.GetObject( system.GetSessionVar('sessionUserID'));
+   integer userID = oUser.ID();
+   object user = dom.GetObject(userID);
+
+  integer iLvlDpId = 0;
+  integer iOldLvlDpId = 0;
+  integer iState = 0;
+  real rLevelReal = -1.0;
+  string sLevelReal;
+
+  if( cObj.ChannelType() == ictHSSDimmingActuator )
+  {
+    object oLevel = cObj.DPByControl("DIMMER.LEVEL");
+    object oLevelReal = cObj.DPByControl("DIMMER.LEVEL_REAL");
+    if( oLevel )
+    {
+      iLvlDpId = oLevel.ID();
+      iState = oLevel.Value() * 100;
+    }
+    if ( oLevelReal ) {
+      rLevelReal = oLevelReal.Value() * 100;
+      sLevelReal = rLevelReal.ToString();
+    }
+    object oOldLevel = cObj.DPByControl("DIMMER.OLD_LEVEL");
+    if( oOldLevel )
+    {
+      iOldLvlDpId = oOldLevel.ID();
+    }
+  }
+  WriteLine("<td>");
+    WriteLine("<table>");
+      WriteLine("<tr>");
+        !****************
+        WriteLine("<td colspan='3' id='slidCtrl"#cObj.ID()#"' class='CLASS02529'></td>");
+        WriteLine("<td class='CLASS02529'>");
+          WriteLine("<div class='PercBtn' >");
+            WriteLine("<table width='100%' height='100%'>");
+              WriteLine("<tr class='CLASS02531'>");
+                string sReadOnly = "";
+                if( system.GetVar("iStatusOnly") == 1 )
+                {
+                  sReadOnly = "readonly";
+                }
+                WriteLine("<td colspan='2' class='CLASS02541'><input id='"#chnId#"Perc' type='text' value='"#iState#"' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td>");
+              WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td align='center' class='CLASS02544'>");
+                WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"Up' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"Down' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+                WriteLine("</td><td align='center' class='CLASS02544'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</div>");
+        WriteLine("</td>");
+
+        WriteLine("<td class='CLASS02529'>");
+          WriteLine("<table width='100%' height='100%' cellspacing='10'>");
+            WriteLine("<tr><td><div id='"#chnId#"On'  class='ControlBtnOn CLASS02545 j_translate'>${actionStatusControlLblOn}</div></td></tr>");
+            WriteLine("<tr><td><div id='"#chnId#"Off' class='ControlBtnOff CLASS02545 j_translate'>${actionStatusControlLblOff}</div></td></tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+        !****************
+      WriteLine("</tr>");
+      if ( (rLevelReal != -1.0) && (user.UserEasyLinkMode() != true) ) {
+        WriteLine("<tr>");
+          WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white'>${lblInfoDimmerLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>")
+        WriteLine("</tr>");
+      }
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  string sCtrlId = "slidCtrl"#chnId;
+  WriteLine("<script type='text/javascript'>");
+    WriteLine("ibd"#chnId#" = new iseButtonsDimmer("#chnId#", "#iState#", "#iLvlDpId#", "#iOldLvlDpId#", "#system.GetVar("iStatusOnly")#", "#system.GetVar('bSliderFlag')#");");
+
+    Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlLblOff')).show();");
+    Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlLblOn')).show();");
+  WriteLine("</script>");
+
+  return;
+}

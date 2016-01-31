@@ -301,7 +301,7 @@
       if (result) { iseSingleDestination.SetChannel(scid, result); }
     };
 
-    ChannelChooser.show(callback, ChannelChooser.SHOW_WRITABLE);
+    ChannelChooser.show(callback, ChannelChooser.SHOW_WRITABLE, ChannelChooser.PRG_ACTIVITY);
   };
 
   ShowChannelChooser2 = function(scid)
@@ -310,7 +310,7 @@
     {
       if (result) { iseSingleCondition.SetChannel(scid, result); }
     };
-    ChannelChooser.show(callback, ChannelChooser.SHOW_READABLE | ChannelChooser.SHOW_EVENTABLE);
+    ChannelChooser.show(callback, ChannelChooser.SHOW_READABLE | ChannelChooser.SHOW_EVENTABLE, ChannelChooser.PRG_CONDITION);
   };
 
   SetDestinationDPSelectChange = function(chid,elem)

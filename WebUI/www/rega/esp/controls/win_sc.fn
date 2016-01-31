@@ -1,0 +1,240 @@
+function ::CreateWin_SC()
+{
+  object oLevel = cObj.DPByControl("WIN_SC.LEVEL");
+  object oStop = cObj.DPByControl("WIN_SC.STOP");
+  object oLEDMode = cObj.DPByControl("WIN_SC.HANDLE_LED_MODE");
+  object oWinterMode = cObj.DPByControl("WIN_SC.WINTER_MODE");
+  object oHandleLock = cObj.DPByControl("WIN_SC.HANDLE_LOCK");
+  object oRelease = cObj.DPByControl("WIN_SC.RELEASE");
+
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table>");
+        WriteLine("<tr>");
+          WriteLine("<td id='"#chnId#"Circle'></td>");
+          WriteLine("<td>");
+            WriteLine("<div class='PercBtn' style='float:left'>");
+              WriteLine("<table width='100%'>");
+                WriteLine("<tr class='CLASS02531'>");
+                  string sReadOnly = "";
+                  if( system.GetVar("iStatusOnly") )
+                  {
+                    sReadOnly = "readonly";
+                  }
+                  WriteLine("<td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542 j_winSC_Perc' "#sReadOnly#" /><b>%</b></td>");
+                WriteLine("</tr>");
+                WriteLine("<tr>");
+                   WriteLine("<td align='center'>");
+                  WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+                  WriteLine("</td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</div>");
+          WriteLine("</td>");
+
+
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02550a j_winSC_Open' id='"#chnId#"Open' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<img src='/ise/img/window/open_v.png' width='40' height='30' class='CLASS02552' />");
+                      WriteLine("</td>");
+                      WriteLine("<td style='text-align:left'>");
+                        WriteLine("${actionStatusControlOpen}");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02550a j_winSC_Close' id='"#chnId#"Close' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<img src='/ise/img/window/closed.png' width='40' height='30' class='CLASS02552' />");
+                      WriteLine("</td>");
+                      WriteLine("<td style='text-align:left'>");
+                        WriteLine("${actionStatusControlClose}");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+
+
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+               WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02550a' id='"#chnId#"Stop' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<div>${actionStatusControlStop}</div>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02550a j_winSC_Release' id='"#chnId#"Release' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<img src='/ise/img/window/open_h.png' width='40' height='30' class='CLASS02552' />");
+                      WriteLine("</td>");
+                      WriteLine("<td style='text-align:left'>");
+                        WriteLine("${actionStatusControlReleased}");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+        ! new table row
+        WriteLine("<tr>");
+          WriteLine("<td colspan='2'>");
+            WriteLine("<table width='215px' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<div class='ControlBtnOff _CLASS02550a' style='line-height:17px;' id='"#chnId#"SummerMode' >${actionStatusControlSummerMode}</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<div class='ControlBtnOff _CLASS02550a' style='line-height:17px;' id='"#chnId#"WinterMode' >${actionStatusControlWinterMode}</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  !WriteLine("<div class='ControlBtnOff CLASS02550a' style='height:17px; line-height:17px;' id='"#chnId#"LEDMode1' >${actionStatusControlLEDModeOff}</div>");
+                  WriteLine("<table class='ControlBtnOff CLASS02551a' style='height:17px; line-height:17px;' id='"#chnId#"LEDMode1' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                      WriteLine("<div>${actionStatusControlLEDModeOff}</div>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  !WriteLine("<div class='ControlBtnOff CLASS02550a' style='height:17px; line-height:17px;' id='"#chnId#"LEDMode2' >${actionStatusControlLEDModeDim}</div>");
+                  WriteLine("<table class='ControlBtnOff CLASS02551a' style='height:17px; line-height:17px;' id='"#chnId#"LEDMode2' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                      WriteLine("<div>${actionStatusControlLEDModeDim}</div>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  !WriteLine("<div class='ControlBtnOff CLASS02550a' style='height:17px; line-height:17px;' id='"#chnId#"LEDMode3' >${actionStatusControlLEDModeOn}</div>");
+                  WriteLine("<table class='ControlBtnOff CLASS02551a' style='height:17px; line-height:17px;' id='"#chnId#"LEDMode3' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                      WriteLine("<div>${actionStatusControlLEDModeOn}</div>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+
+         ! UNLOCK
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02551a' id='"#chnId#"HandleUnlock' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<div>${actionStatusControlHandleUnlock}</div>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02551a' id='"#chnId#"HandleLock' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<div>${actionStatusControlHandleLock}</div>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+               WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='5'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+
+                  WriteLine("<table class='ControlBtnOff CLASS02554 hidden' id='"#chnId#"Locked' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<img src='/ise/img/lock/closed.png' width='40' height='30' class='CLASS02552' />");
+                      WriteLine("</td>");
+                      WriteLine("<td class='CLASS02555'>");
+                        WriteLine("${actionStatusControlLocked}");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+
+  if( oLevel && oStop && oLEDMode && oWinterMode && oHandleLock && oRelease)
+  {
+    string sCtrlId = chnId#"Circle";
+    WriteLine('<script type="text/javascript">');
+      WriteLine("var opts = {};");
+      if(oLevel.Value()) {
+        WriteLine("opts.idLevel = "#oLevel.ID()#";");
+        WriteLine("opts.stLevel = "#oLevel.Value()#";");
+      }
+      WriteLine("opts.idStop = "#oStop.ID()#";");
+      ! WriteLine("opts.stStop = "#oStop.Value()#";");
+      WriteLine("opts.idLEDMode = "#oLEDMode.ID()#";");
+      WriteLine("opts.stLEDMode = "#oLEDMode.Value()#";");
+      WriteLine("opts.idWinterMode = "#oWinterMode.ID()#";");
+      WriteLine("opts.stWinterMode = "#oWinterMode.Value()#";");
+      WriteLine("opts.idHandleLock = "#oHandleLock.ID()#";");
+      WriteLine("opts.stHandleLock = "#oHandleLock.Value()#";");
+      WriteLine("opts.idRelease = "#oRelease.ID()#";");
+      ! WriteLine("opts.stRelease = "#oRelease.Value()#";");
+
+
+      WriteLine("ibwm"#cObj.ID()#" = new iseButtonsWin_SC("#cObj.ID()#", opts, " #system.GetVar("iStatusOnly")# ");");
+      WriteLine("translatePage('#ctrl"#chnId#"tbl');");
+    WriteLine('</script>');
+  }
+  return;
+}

@@ -10,4 +10,16 @@
 "signal_option_green_short" : "Green - short",
 "signal_option_orange_long" : "Orange - long",
 "signal_option_orange_short" : "Orange - short",
+
+"signal_option_yellow_long" : "Yellow - long",
+"signal_option_yellow_short" : "Yellow - short",
+"signal_option_blue_long" : "Blue - long",
+"signal_option_blue_short" : "Blue - short",
+"signal_option_purple_long" : "Purple - long",
+"signal_option_purple_short" : "Purple - short",
+"signal_option_cyan_long" : "Cyan - short",
+"signal_option_cyan_short" : "Cyan - short",
+"signal_option_white_long" : "White - long",
+"signal_option_white_short" : "White - short",
+
 "button_inactive" : "Button deactivated",

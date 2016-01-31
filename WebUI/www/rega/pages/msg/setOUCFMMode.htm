@@ -61,7 +61,7 @@
   if( iVT == ivtSpecialValue ) { sT = "ivtSpecialValue"; }
   Write( 'conInfo("DestinationValueType = '#sT#'");' );
   boolean bIsString = ( oDP.ValueType() == ivtString );
-  Write( '$("pTitle").innerHTML = "Modus einstellen!"; conInfo("InsertValue: Set OU_CFM_MODE .");' );
+  Write( '$("pTitle").innerHTML = translateKey("lblSetMode"); conInfo("InsertValue: Set OU_CFM_MODE .");' );
   %>
 
 </script>
@@ -72,36 +72,45 @@
       <%
         Write('<tbody style="text-align:left">');    
           Write('<tr>');
-            Write('<td colspan="6" class="OUCFMprop"><span>Kanal Aktiv / Inaktiv:</span></td>'); 
-            Write('<td colspan="5"><select id="ouCFMLevelLED">'); 
-              Write('<option value="0">Inaktiv</option>'); 
-              Write('<option value="1">Aktiv</option>'); 
+            ! Write('<td colspan="6" class="OUCFMprop"><span>Kanal Aktiv / Inaktiv:</span></td>');
+            Write('<td colspan="6" class="OUCFMprop"><span>${lblChannelActivInactiv}</span></td>');
+            Write('<td colspan="5"><select id="ouCFMLevelLED">');
+              ! Inaktiv
+              Write('<option value="0">${optionInactiv}</option>');
+              ! Aktiv
+              Write('<option value="1">${optionActiv}</option>');
             Write('</select></td>');
           Write('</tr>');
 
           Write('</tr>');
-            Write('<td colspan="6" class="OUCFMprop"><span>Wiederholungen <span class="hintMinMaxCount"></span></span></td>'); 
-            Write('<td colspan="5"><input id="ouCFMCountLED" type="text" style="text-align:center;" size="3"></td>'); 
+            ! Wiederholungen
+            Write('<td colspan="6" class="OUCFMprop"><span>${lblRepetition} <span class="hintMinMaxCount"></span></span></td>');
+            Write('<td colspan="5"><input id="ouCFMCountLED" type="text" style="text-align:center;" size="3"></td>');
           Write('</tr>');
           
           Write('<tr">');
-            Write('<td colspan="6" class="OUCFMprop"><span>Abspieldauer</span></td>'); 
+            ! Abspieldauer
+            Write('<td colspan="6" class="OUCFMprop"><span>${lblPlayingTime}</span></td>');
             Write('<td colspan="5" style="color:#000000">');
               Write('<select id="changeDurationModeLED" name="DurationLED" onchange="changeDurMode(this)">');
-                Write('<option value="false">Normale L&auml;nge</option>');
-                Write('<option value="true">L&auml;nge angeben</option>');
+                ! Write('<option value="false">Normale L&auml;nge</option>');
+                Write('<option value="false">${optionNormalLength}</option>');
+                ! Write('<option value="true">L&auml;nge angeben</option>');
+                Write('<option value="true">${optionSetLength}</option>');
               Write('</select>');
             Write('</td>'); 
           Write('</tr>');
 
           Write('<tr id="manualDurationLED" style="visibility:hidden">');
-            Write('<td colspan="6" style="color:#000000"><span>Dauer hh:mm:ss </span></td>'); 
-            Write('<td colspan="5" style="color:#000000"><input id="ouCFMDurationHHLED" type="text" style="text-align:center;" size="3">:<input id="ouCFMDurationMMLED" type="text" style="text-align:center;" size="3">:<input id="ouCFMDurationSSLED" type="text" style="text-align:center;" size="3"></td>'); 
+            ! Dauer hh:mm:ss
+            Write('<td colspan="6"  class="OUCFMprop"><span>${lblDurationHHmmSS} </span></td>');
+            Write('<td colspan="5" style="color:#000000"><input id="ouCFMDurationHHLED" type="text" style="text-align:center;" size="3">:<input id="ouCFMDurationMMLED" type="text" style="text-align:center;" size="3">:<input id="ouCFMDurationSSLED" type="text" style="text-align:center;" size="3"></td>');
           Write('</tr>');
 
           
           Write('<tr>');
-            Write('<td colspan="11" class="OUCFMcenter">Wahl der Blinkfolge</td>'); 
+            ! Write('<td colspan="11" class="OUCFMcenter">Wahl der Blinkfolge</td>');
+            Write('<td colspan="11" class="OUCFMcenter">${selectFlashSequence}</td>');
           Write('</tr>');
           Write('<tr>');
             Write('<td style="color:#000000; text-align:center;"></td>');
@@ -117,7 +126,8 @@
             Write('<td style="color:#000000; text-align:center;">10</td>');
           Write('</tr>');
           Write('<tr id="allOff" class="OUCFMcenter">');
-            Write('<td class="OUCFMprop">Aus</td>');
+            ! Aus
+            Write('<td class="OUCFMprop">${lblOff}</td>');
               Write('<td><input type="radio" name="r0" value="0" checked="checked" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="0" checked="checked" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="0" checked="checked" onclick="isValueValid(this)"></td>');
@@ -131,7 +141,8 @@
             Write('</td>');
           Write('</tr>');
           Write('<tr class="OUCFMcenter">');
-            Write('<td class="OUCFMprop"">Orange kurz</td>');
+            ! Orange kurz
+            Write('<td id="lblOrangeShort" class="OUCFMprop">${lblOrangeShort}</td>');
               Write('<td><input type="radio" name="r0" value="31" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="31" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="31" onclick="isValueValid(this)"></td>');
@@ -145,7 +156,7 @@
             Write('</td>');
           Write('</tr>');
            Write('<tr class="OUCFMcenter">');
-            Write('<td class="OUCFMprop">Orange lang</td>');
+            Write('<td id="lblOrangeLong" class="OUCFMprop">${lblOrangeLong}</td>');
               Write('<td><input type="radio" name="r0" value="32" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="32" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="32" onclick="isValueValid(this)"></td>');
@@ -159,7 +170,7 @@
             Write('</td>');
           Write('</tr>');
           Write('<tr class="OUCFMcenter">');
-            Write('<td class="OUCFMprop">Rot kurz</td>');
+            Write('<td class="OUCFMprop">${lblRedShort}</td>');
               Write('<td><input type="radio" name="r0" value="11" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="11" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="11" onclick="isValueValid(this)"></td>');
@@ -173,7 +184,7 @@
             Write('</td>');
           Write('</tr>');
           Write('<tr class="OUCFMcenter">');
-            Write('<td class="OUCFMprop">Rot lang</td>');
+            Write('<td class="OUCFMprop">${lblRedLong}</td>');
               Write('<td><input type="radio" name="r0" value="12" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="12" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="12" onclick="isValueValid(this)"></td>');
@@ -187,7 +198,7 @@
             Write('</td>');
           Write('</tr>');
           Write('<tr class="OUCFMcenter">');
-            Write('<td class="OUCFMprop">Gr&uuml;n kurz</td>');
+            Write('<td class="OUCFMprop">${lblGreenShort}</td>');
               Write('<td><input type="radio" name="r0" value="21" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="21" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="21" onclick="isValueValid(this)"></td>');
@@ -201,7 +212,7 @@
             Write('</td>');
           Write('</tr>');
           Write('<tr class="OUCFMcenter">');  
-            Write('<td class="OUCFMprop">Gr&uuml;n lang</td>');
+            Write('<td class="OUCFMprop">${lblGreenLong}</td>');
               Write('<td><input type="radio" name="r0" value="22" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="22" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="22" onclick="isValueValid(this)"></td>');
@@ -214,8 +225,131 @@
               Write('<td><input type="radio" name="r9" value="22" onclick="isValueValid(this)"></td>');
             Write('</td>');
           Write('</tr>');
+
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblBlueShort}</td>');
+              Write('<td><input type="radio" name="r0" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="41" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="41" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblBlueLong}</td>');
+              Write('<td><input type="radio" name="r0" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="42" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="42" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblPurpleShort}</td>');
+              Write('<td><input type="radio" name="r0" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="51" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="51" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblPurpleLong}</td>');
+              Write('<td><input type="radio" name="r0" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="52" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="52" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblCyanShort}</td>');
+              Write('<td><input type="radio" name="r0" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="61" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="61" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblCyanLong}</td>');
+              Write('<td><input type="radio" name="r0" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="62" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="62" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblWhiteShort}</td>');
+              Write('<td><input type="radio" name="r0" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="71" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="71" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
+          Write('<tr class="OUCFMcenter j_extendedColor hidden">');
+            Write('<td class="OUCFMprop">${lblWhiteLong}</td>');
+              Write('<td><input type="radio" name="r0" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r1" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r2" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r3" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r4" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r5" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r6" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r7" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r8" value="72" onclick="isValueValid(this)"></td>');
+              Write('<td><input type="radio" name="r9" value="72" onclick="isValueValid(this)"></td>');
+            Write('</td>');
+          Write('</tr>');
+
           Write('<tr class="OUCFMcenter">');
-            Write('<td class="OUCFMprop">Pause</td>');
+            Write('<td class="OUCFMprop">${lblBreak}</td>');
               Write('<td><input type="radio" name="r0" value="2" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r1" value="2" onclick="isValueValid(this)"></td>');
               Write('<td><input type="radio" name="r2" value="2" onclick="isValueValid(this)"></td>');
@@ -239,9 +373,9 @@
       <%
         Write('<tbody style="text-align:left">');    
           Write('<tr>');
-           Write('<td class="OUCFMprop" style="color:#000000"><span>Lautst&auml;rke</span></td>'); 
+           Write('<td class="OUCFMprop" style="color:#000000"><span>${lblVolume}</span></td>');
             Write('<td><select id="ouCFMLevel">'); 
-              Write('<option value="0">Aus</option>'); 
+              Write('<option value="0">${lblOff}</option>');
               Write('<option value="1">10%</option>'); 
               Write('<option value="2">20%</option>'); 
               Write('<option value="3">30%</option>'); 
@@ -256,29 +390,30 @@
           Write('</tr>');
 
           Write('</tr>');
-           Write('<td class="OUCFMprop" ><span>Wiederholungen <span class="hintMinMaxCount"></span></span></td>'); 
+           Write('<td class="OUCFMprop" ><span>${lblRepetition} <span class="hintMinMaxCount"></span></span></td>');
            Write('<td><input id="ouCFMCount" type="text" style="text-align:center;" size="3"></td>'); 
           Write('</tr>');
           
           Write('<tr">');
-            Write('<td class="OUCFMprop"><span>Abspieldauer</span></td>'); 
+            Write('<td class="OUCFMprop"><span>${lblPlayingTime}</span></td>');
             Write('<td>');
               Write('<select id="changeDurationMode" name="Duration" onchange="changeDurMode(this)">');
-                Write('<option value="false">Dateil&auml;nge</option>');
-                Write('<option value="true">L&auml;nge angeben</option>');
+                Write('<option value="false">${optionFileLength}</option>');
+                Write('<option value="true">${optionSetLength}</option>');
               Write('</select>');
             Write('</td>'); 
           Write('</tr>');
 
           Write('<tr id="manualDuration" style="visibility:hidden">');
-            Write('<td class="OUCFMprop"><span>Dauer hh:mm:ss </span></td>'); 
+            Write('<td class="OUCFMprop"><span>${lblDurationHHmmSS}</span></td>');
             Write('<td style="color:#000000"><input id="ouCFMDurationHH" type="text" style="text-align:center;" size="3">:<input id="ouCFMDurationMM" type="text" style="text-align:center;" size="3">:<input id="ouCFMDurationSS" type="text" style="text-align:center;" size="3"></td>'); 
           Write('</tr>');
 
           
           Write('<tr>');
-            Write('<td class="OUCFMprop">max. <span class="hintMinMaxAction"></span><span>&nbsp; MP3-Files ( z. B. 1, 4, 5, 24)</span></td>'); 
-            Write('<td><input id="ouCFMAction" type="text" size="20"></td>'); 
+            ! Write('<td class="OUCFMprop">max. <span class="hintMinMaxAction"></span><span>&nbsp; MP3-Files ( z. B. 1, 4, 5, 24)</span></td>');
+            Write('<td class="OUCFMprop">${lblMaximalShort} <span class="hintMinMaxAction"></span><span>&nbsp; ${lblMP3SelectHelp}</span></td>');
+            Write('<td><input id="ouCFMAction" type="text" size="20"></td>');
           Write('</tr>');
         Write('</tbody>');
       %>
@@ -287,10 +422,10 @@
     <table class="popupTableScript" class="01201">
       <tr class="popupTableRow">
         <td class="CLASS01210">
-          <div class="FooterButton" onclick="PopupClose()" class="CLASS01211">Abbrechen</div>
+          <div class="FooterButton" onclick="PopupClose()" class="CLASS01211">${btnCancel}</div>
         </td>
         <td class="CLASS01210">
-          <div class="FooterButton" class="CLASS01211" style="float:right" onclick="SaveOUCFMModeSettings();">OK</div>
+          <div class="FooterButton" class="CLASS01211" style="float:right" onclick="SaveOUCFMModeSettings();">${btnOk}</div>
         </td>
       </tr>
     </table>
@@ -325,10 +460,12 @@
   %>
 function init()  {
   var channelType = getChannelType();
+
   showRelevantTbl(channelType); 
   
   switch (channelType) {
     case "SIGNAL_LED":
+      checkAndActivateExtendedColors();
       setChannel1();
       break;
     case "SIGNAL_CHIME":
@@ -338,6 +475,7 @@ function init()  {
       alert("Fehler"); // sollte nie auftreten
       break; 
   }
+  dlgPopup.readaptSize();
 };
 
 function setChannel1() {
@@ -518,6 +656,10 @@ function getChannelType() {
   return '<% Write( dom.GetObject(oCH).HssType()); %>'; 
 };
 
+function getChannelLabel() {
+  return '<% Write( dom.GetObject(oCH).Label()); %>';
+}
+
 function showRelevantTbl(chType) {
   var tblID = {};
 
@@ -528,6 +670,14 @@ function showRelevantTbl(chType) {
   tbl.style.display = "table";
 };
 
+function checkAndActivateExtendedColors(channelLabel) {
+  if (getChannelLabel() == "HM-OU-CFM-TW") {
+    jQuery("#lblOrangeShort").text(translateKey("lblYellowShort"));
+    jQuery("#lblOrangeLong").text(translateKey("lblYellowLong"));
+    jQuery(".j_extendedColor").show();
+  }
+};
+
 function showManualDurationElem(mode, name) {
   var manualDurationElm = document.getElementById("manual" + name);
 
@@ -536,7 +686,6 @@ function showManualDurationElem(mode, name) {
   } else {
     manualDurationElm.style.visibility = "hidden";
   }
-
 };
   
 function getMaxValues() {
@@ -586,7 +735,7 @@ function getUserTime(ch) {
   
   var LED = "";
   if (ch == "1") {
-    LED = "LED"
+    LED = "LED";
   }
     
   var newTime = 0;

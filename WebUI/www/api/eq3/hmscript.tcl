@@ -5,6 +5,8 @@
 # Autor: Falk Werner
 ##
 
+package require HomeMatic
+
 proc hmscript {script {p_args -}} {
   set _script_ ""
   
