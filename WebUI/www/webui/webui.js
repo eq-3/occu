@@ -1127,6 +1127,12 @@ DEV_PATHS["HM-Sec-Key"] = new Object();
 DEV_PATHS["HM-Sec-Key"]["50"] = "/config/img/devices/50/14_hm-sec-key_thumb.png";
 DEV_PATHS["HM-Sec-Key"]["250"] = "/config/img/devices/250/14_hm-sec-key.png";
 DEV_HIGHLIGHT["HM-Sec-Key"] = new Object();
+DEV_LIST.push('HM-Sen-LI-O');
+DEV_DESCRIPTION["HM-Sen-LI-O"] = "HM-Sen-LI-O";
+DEV_PATHS["HM-Sen-LI-O"] = new Object();
+DEV_PATHS["HM-Sen-LI-O"]["50"] = "/config/img/devices/50/126_hm-sen-li-o_thumb.png";
+DEV_PATHS["HM-Sen-LI-O"]["250"] = "/config/img/devices/250/126_hm-sen-li-o.png";
+DEV_HIGHLIGHT["HM-Sen-LI-O"] = new Object();
 DEV_LIST.push('HMW-IO-12-Sw7-DR');
 DEV_DESCRIPTION["HMW-IO-12-Sw7-DR"] = "HMW-IO-12-Sw7-DR";
 DEV_PATHS["HMW-IO-12-Sw7-DR"] = new Object();
@@ -1709,6 +1715,12 @@ DEV_HIGHLIGHT["HM-RC-Key4-3"]["3"] = [5, '4_Arrow'];
 DEV_HIGHLIGHT["HM-RC-Key4-3"]["4"] = [5, '3_Arrow'];
 DEV_HIGHLIGHT["HM-RC-Key4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
 DEV_HIGHLIGHT["HM-RC-Key4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HM-Sec-Sir-WM');
+DEV_DESCRIPTION["HM-Sec-Sir-WM"] = "HM-Sec-Sir-WM";
+DEV_PATHS["HM-Sec-Sir-WM"] = new Object();
+DEV_PATHS["HM-Sec-Sir-WM"]["50"] = "/config/img/devices/50/117_hm-sec-sir-wm_thumb.png";
+DEV_PATHS["HM-Sec-Sir-WM"]["250"] = "/config/img/devices/250/117_hm-sec-sir-wm.png";
+DEV_HIGHLIGHT["HM-Sec-Sir-WM"] = new Object();
 DEV_LIST.push('ZEL STG RM FEP 230V');
 DEV_DESCRIPTION["ZEL STG RM FEP 230V"] = "ZEL_STG_RM_FEP_230V";
 DEV_PATHS["ZEL STG RM FEP 230V"] = new Object();
@@ -2568,6 +2580,12 @@ DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_1"] = [6, 0.75, 0.7, 0.832, 0.632, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_2"] = [6, 0.75, 0.748, 0.832, 0.748, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_3"] = [6, 0.75, 0.796, 0.832, 0.86, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["2"] = [5, 'SP_1', 'SP_2', 'SP_3', 'SP_4', 'SP_5', 'SP_6', 'SP_7', 'SP_beam_1', 'SP_beam_2', 'SP_beam_3'];
+DEV_LIST.push('HM-WDS30-OT2-SM-2');
+DEV_DESCRIPTION["HM-WDS30-OT2-SM-2"] = "HM-WDS30-OT2-SM";
+DEV_PATHS["HM-WDS30-OT2-SM-2"] = new Object();
+DEV_PATHS["HM-WDS30-OT2-SM-2"]["50"] = "/config/img/devices/50/127_hm-wds30-ot2-sm-2_thumb.png";
+DEV_PATHS["HM-WDS30-OT2-SM-2"]["250"] = "/config/img/devices/250/127_hm-wds30-ot2-sm-2.png";
+DEV_HIGHLIGHT["HM-WDS30-OT2-SM-2"] = new Object();
 DEV_LIST.push('HM-OU-CFM-TW');
 DEV_DESCRIPTION["HM-OU-CFM-TW"] = "HM-OU-CFM-TW";
 DEV_PATHS["HM-OU-CFM-TW"] = new Object();
@@ -2806,22 +2824,24 @@ elvST['ALARMACTUATOR|ON_TIME'] = '${stringTableAlarmActuatorOnTime}';
 elvST['ALARMACTUATOR|SABOTAGE_MSG'] = '${stringTableAlarmActuatorSabotageMsg}';
 elvST['ALARMACTUATOR|STATE=FALSE'] = '${stringTableAlarmActuatorStateFalse}';
 elvST['ALARMACTUATOR|STATE=TRUE'] = '${stringTableAlarmActuatorStateTrue}';
-elvST['ALL_LEDS'] = '${stringTableAllLEDs}';
-elvST['ANALOG_INPUT'] = '${stringTableAnalog}';
-elvST['ANALOG_OUTPUT'] = '${stringTableAnalog}';
-elvST['BACKLIGHT_AT_CHARGE'] = '${stringTableBackLightAtCharge}';
-elvST['BACKLIGHT_AT_KEYSTROKE'] = '${stringTableBackLightAtKeystroke}';
-elvST['BACKLIGHT_AT_MOTION'] = '${stringTableBackLightAtMotion}';
-elvST['BACKLIGHT_ON_TIME'] = '${stringTableBackLightOnTime}';
-elvST['BAT_DEFECT_LIMIT'] = '${stringTableBatDefectLimit}';
+elvST['ARMING|ACOUSTIC_MULTI_DELAY_ARM'] = '${stringTableAcousticMultiDelayArm}';
+elvST['ARMING|ACOUSTIC_ALLSENS_ARM'] = '${stringTableAcousticAllSensArm}';
+elvST['ARMING|ACOUSTIC_ALLSENS_DELAY_ARM'] = '${stringTableAcousticAllsensDelayArm}';
+elvST['ARMING|ACOUSTIC_EXTSENS_ARM'] = '${stringTableAcousticExtsensArm}';
+elvST['ARMING|ACOUSTIC_EXTSENS_DELAY_ARM'] = '${stringTableAcousticExtsensDelayArm}';
+elvST['ARMING|ACOUSTIC_DISARM'] = '${stringTableAcousticDisarm}';
+elvST['ARMING|OPTIC_MULTI_DELAY_ARM'] = '${stringTableOpticMultiDelayArm}';
+elvST['ARMING|OPTIC_ALLSENS_ARM'] = '${stringTableOpticAllSensArm}';
+elvST['ARMING|OPTIC_ALLSENS_DELAY_ARM'] = '${stringTableOpticAllSensDelayArm}';
+elvST['ARMING|OPTIC_EXTSENS_ARM'] = '${stringTableOpticExtsensArm}';
+elvST['ARMING|OPTIC_EXTSENS_DELAY_ARM'] = '${stringTableOpticExtsensDelayArm}';
+elvST['ARMING|OPTIC_DISARM'] = '${stringTableOpticDisarm}';
 elvST['BLIND'] = '${stringTableBlindTitle}';
 elvST['BLIND|CHANGE_OVER_DELAY'] = '${stringTableBlindChangeOverDelay}';
 elvST['BLIND|LEVEL'] = '${stringTableBlindLevel}';
 elvST['BLIND|REFERENCE_RUNNING_TIME_BOTTOM_TOP'] = '${stringTableBlindRunnintTimeBottomTop}';
 elvST['BLIND|REFERENCE_RUNNING_TIME_TOP_BOTTOM'] = '${stringTableBlindRunningTimeTopBottom}';
 elvST['BLIND|REFERENCE_RUN_COUNTER'] = '${stringTableBlindRefRunCounter}';
-elvST['BLIND|STATUSINFO_MINDELAY'] = '${stringTableStatusInfoMinDelay}';
-elvST['BLIND|STATUSINFO_RANDOM'] = '${stringTableStatusInfoRandom}';
 elvST['BLIND|STOP'] = '${stringTableBlindStop}';
 elvST['BURST_RX'] = '${stringTableBurstRX}';
 elvST['BUTTON_LOCK'] = '${stringTableButtonLock}';
@@ -2960,10 +2980,8 @@ elvST['DIMMER|RAMP_TIME'] = '${stringTableDimmerRampTime}';
 elvST['DIMMER|RAMP_STOP'] = '${stringTableDimmerRampStop}';
 elvST['DIMMER|REDUCE_LEVEL'] = '${stringTableDimmerReduceLevel}';
 elvST['DIMMER|REDUCE_TEMP_LEVEL'] = '${stringTableDimmerReduceTempLevel}';
-elvST['DIMMER|STATUSINFO_MINDELAY'] = '${stringTableDimmerStatusInfoMinDelay}';
 elvST['DIMMER|ERROR_OVERLOAD'] = '${stringTableDimmerErrorOverload}';
 elvST['DIMMER|ERROR_OVERHEAT'] = '${stringTableDimmerErrorOverheat}';
-elvST['DIMMER|STATUSINFO_RANDOM'] = '${stringTableStatusInfoRandom}';
 elvST['DIMMER|ERROR_REDUCED'] = '${stringTableDimmerErrorReduced}';
 elvST['DISPLAY|ALARM_COUNT'] = '${stringTableDisplayAlarmCount}';
 elvST['DISPLAY|ARROW_DOWN'] = '${stringTableDisplayArrowDown}';
@@ -3246,6 +3264,14 @@ elvST['POWERMETER_IGL|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}'
 elvST['POWERMETER_IGL|GAS_ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounterGas}';
 elvST['POWERMETER_IGL|POWER'] = '${stringTablePowerMeterPower}';
 elvST['POWERMETER_IGL|GAS_POWER'] = '${stringTableGasConsumption}';
+elvST['POWERMETER_IEC1|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
+elvST['POWERMETER_IEC1|GAS_ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounterGas}';
+elvST['POWERMETER_IEC1|POWER'] = '${stringTablePowerMeterPower}';
+elvST['POWERMETER_IEC1|GAS_POWER'] = '${stringTableGasConsumption}';
+elvST['POWERMETER_IEC1|IEC_ENERGY_COUNTER'] = '${stringTablePowerMeterIECEnergyCounter}';
+elvST['POWERMETER_IEC1|IEC_POWER'] = '${stringTableIECPowerMeterPower}';
+elvST['POWERMETER_IEC2|IEC_ENERGY_COUNTER'] = '${stringTablePowerMeterIECEnergyCounter}';
+elvST['POWERMETER_IEC2|IEC_POWER'] = '${stringTableIECPowerMeterPower}';
 elvST['POWERUP_OFF'] = '${stringTablePowerUpOFF} ';
 elvST['POWERUP_ON'] = '${stringTablePowerUpON}';
 elvST['PRESS_LONG'] = '${stringTableKeyPressLong}';
@@ -3440,8 +3466,6 @@ elvST['SWITCH|AES_ACTIVE'] = '${stringTableSwitchAESActive}';
 elvST['SWITCH|ON_TIME'] = '${stringTableSwitchOnTime}';
 elvST['SWITCH|STATE=FALSE'] = '${stringTableSwitchStateFalse}';
 elvST['SWITCH|STATE=TRUE'] = '${stringTableSwitchStateTrue}';
-elvST['SWITCH|STATUSINFO_MINDELAY'] = '${stringTableSwitchStatusInfoMinDelay}';
-elvST['SWITCH|STATUSINFO_RANDOM'] = '${stringTableStatusInfoRandom}';
 elvST['SWITCH|STATUSINFO_RANDOM_A'] = '${stringTableStatusInfoRandomA}';
 elvST['SWITCH_INTERFACE'] = '${stringTableSwitchInterfaceTitle}';
 elvST['SWITCH_INTERFACE|PRESS'] = '${stringTableSwitchInterfacePress}';
@@ -3473,6 +3497,7 @@ elvST['TILT_SENSOR|STATE=FALSE'] = '${stringTableTiltSensorStateFalse}';
 elvST['TILT_SENSOR|STATE=TRUE'] = ' ${stringTableTiltSensorStateTrue}';
 elvST['TRANSMIT_TRY_MAX'] = '${stringTableTransmitTryMax}';
 elvST['TRANSMIT_DEV_TRY_MAX'] = '${stringTableTransmitDevTryMax}';
+elvST['TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
 elvST['USER_COLOR'] = '${stringTableSubmit}';
 elvST['USER_PROGRAM'] = '${stringTableSubmit}';
 elvST['VENT_CLOSED'] = '${stringTableVentClosed}';
@@ -3484,7 +3509,6 @@ elvST['VIRTUAL_DIMMER|ERROR_OVERHEAT'] = '${stringTableDimmerErrorOverheat}';
 elvST['VIRTUAL_DIMMER|ERROR_REDUCED'] = '${stringTableDimmerErrorReduced}';
 elvST['VIRTUAL_DIMMER|LOGIC_COMBINATION'] = '${stringTableLogicCombination}';
 elvST['VIRTUAL_DIMMER|POWERUP_ACTION'] = '${stringTableVirtualDimmerPowerUpAction}';
-elvST['VIRTUAL_DIMMER|STATUSINFO_MINDELAY'] = '${stringTableVirtualDimmerStatusInfoMinDelay}';
 elvST['VIRTUAL_DIMMER|STATUSINFO_RANDOM'] = '${stringTableVirtualDimmerStatusInfoRandom}';
 elvST['VIRTUAL_DIMMER|RAMP_STOP'] = '${stringTableDimmerRampStop}';
 elvST['VIRTUAL_KEY'] = '${stringTableVirtualKeyTitle}';
@@ -3558,9 +3582,18 @@ elvST['WINMATIC|STATE_UNCERTAIN=FALSE'] = '${stringTableWinMaticStateUncertainFa
 elvST['WINMATIC|STATE_UNCERTAIN=TRUE'] = '${stringTableWinMaticStateUncertainTrue}';
 elvST['WINMATIC|STOP'] = '${stringTableWinMaticStop}';
 elvST['WINMATIC|TILT_MAX'] = '${stringTableWinMaticTiltMax}';
+elvST['ALL_LEDS'] = '${stringTableAllLEDs}';
+elvST['ANALOG_INPUT'] = '${stringTableAnalog}';
+elvST['ANALOG_OUTPUT'] = '${stringTableAnalog}';
 elvST['AUTO_MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
 elvST['ACTUAL_HUMIDITY'] = '${stringTableWeatherHumidity}';
 elvST['ACTUAL_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverActualTemp}';
+elvST['ALARMTIME_MAX'] = '${stringTableAlarmTimeMax}';
+elvST['BACKLIGHT_AT_CHARGE'] = '${stringTableBackLightAtCharge}';
+elvST['BACKLIGHT_AT_KEYSTROKE'] = '${stringTableBackLightAtKeystroke}';
+elvST['BACKLIGHT_AT_MOTION'] = '${stringTableBackLightAtMotion}';
+elvST['BACKLIGHT_ON_TIME'] = '${stringTableBackLightOnTime}';
+elvST['BAT_DEFECT_LIMIT'] = '${stringTableBatDefectLimit}';
 elvST['BATTERY_STATE'] = '${stringTableClimateControlRTTransceiverBatteryState}';
 elvST['BOOST_MODE'] = '${stringTableClimateControlRTTransceiverBoostMode}';
 elvST['BOOST_MODE=FALSE'] = '${stringTableBoostModeFalse}';
@@ -3603,7 +3636,9 @@ elvST['LOGIC_COMBINATION'] = '${stringTableLogicCombination}';
 elvST['LOWBAT_REPORTING'] = '${stringTableLowbatReporting}';
 elvST['LOWBAT_REPORTING=FALSE'] = '${stringTableLowbatReportingFalse}';
 elvST['LOWBAT_REPORTING=TRUE'] = '${stringTableLowbatReportingTrue}';
+elvST['LOWBAT_SIGNAL'] = '${stringTableLowbatSignal}';
 elvST['LOWERING_MODE'] = '${stringTableClimateControlRTTransceiverLoweringMode}';
+elvST['LUX'] = '${stringTableLux}';
 elvST['MANU_MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
 elvST['NOT_USED'] = '${stringTableNotUsed}';
 elvST['OLD_LEVEL'] = '${stringTableDimmerOldLevel}';
@@ -3643,14 +3678,19 @@ elvST['PROCESS=NOT_STABLE'] = '${stringTableProcessNotStable}';
 elvST['RAMP_TIME'] = '${stringTableDimmerRampTime}';
 elvST['SET_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverSetTemperature}';
 elvST['SECTION'] = '${stringTableSection}';
+elvST['SOUND_ID'] = '${stringTableSoundID}';
 elvST['STATE=FALSE'] = '${stringTableStateFalse}';
 elvST['STATE=TRUE'] = '${stringTableStateTrue}';
+elvST['STATUSINFO_MINDELAY'] = '${stringTableStatusInfoMinDelay}';
+elvST['STATUSINFO_RANDOM'] = '${stringTableStatusInfoRandom}';
+elvST['TX_MINDELAY'] = '${stringTableTxMinDelay}';
 elvST['TX_MINDELAY_UNIT'] = '${stringTableTxMinDelayUnit}';
 elvST['TX_MINDELAY_UNIT=100MS'] = '${optionUnit100MS}';
 elvST['TX_MINDELAY_UNIT=S'] = '${optionUnitS}';
 elvST['TX_MINDELAY_UNIT=M'] = '${optionUnitM}';
 elvST['TX_MINDELAY_UNIT=H'] = '${optionUnitH}';
 elvST['TX_MINDELAY_VALUE'] = '${stringTableTxMinDelayValue}';
+elvST['TX_THRESHOLD_PERCENT'] = '${stringTableTxThresholdPercent}';
 elvST['UNREACH=FALSE'] = '${stringTableUnreachFalse}';
 elvST['UNREACH=TRUE'] = '${stringTableUnreachTrue}';
 elvST['UPDATE_PENDING'] = '${stringTableUpdatePending}';
@@ -9034,19 +9074,6 @@ MultiChannelChooser = Singleton.create({
       (this.FuncFilter.matchArray(channel.subsections)));     
   },
   
-  /**
-   * Filtert eine Kanalliste
-   **/
-  _filter: function(channels)
-  {
-    var result = new Array();
-    
-    channels.each(function(channel) {
-      if (this.match(channel)) { result.push(channel); }
-    }, this);
-    
-    return result;    
-  },
 
   filterHmIPChannels: function(channel, result) {
     conInfo("filterHmIPChannels");
@@ -10125,7 +10152,7 @@ DeleteDeviceDialog = Class.create({
     var result = {"id": 0, "address" : "", "type": "" };
     try {
       jQuery.each(this.m_device.channels, function(index, channel) {
-        if ((channel.channelType == "POWERMETER") || (channel.channelType == "POWERMETER_IGL") || (channel.channelType == "ENERGIE_METER_TRANSMITTER")) {
+        if ((channel.channelType == "POWERMETER") || (channel.channelType == "POWERMETER_IEC1") || (channel.channelType == "ENERGIE_METER_TRANSMITTER")) {
           result.id = channel.id;
           result.address = channel.address;
           result.type = channel.channelType;
@@ -10144,6 +10171,7 @@ DeleteDeviceDialog = Class.create({
           homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
             homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
               homematic("Program.deleteProgramByName", {"name": "prgEnergyCounter_" + chId + "_" + chAddress}, function () {
+                conInfo(chAddress + "ProgSysvarPOWERMETER deleted - next: save ObjectModel");
                 homematic("system.saveObjectModel", {}, function () {
                   conInfo("ObjectModel saved");
                 });
@@ -10163,6 +10191,7 @@ DeleteDeviceDialog = Class.create({
           homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
             homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
               homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterGAS_" + chId + "_" + chAddress}, function () {
+                conInfo(chAddress + "ProgSysvarPOWERMETER_IGL deleted - next to delete: ProgSysvarPOWERMETER");
                 self.m_deleteProgSysvarPOWERMETER(chId, chAddress);
               });
             });
@@ -10171,6 +10200,19 @@ DeleteDeviceDialog = Class.create({
       });
     });
   },
+
+  m_deleteProgSysvarPOWERMETER_IEC: function(chId, chAddress) {
+    var self = this;
+    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
+        homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIECOldVal_" + chId}, function () {
+          homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
+            conInfo(chAddress + " ProgSysvarPOWERMETER_IEC deleted - next to delete: ProgSysvarPOWERMETER_IGL");
+            self.m_deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
+          });
+        });
+    });
+  },
+
   m_onDeviceDeleted: function(errorCode)
   {
 
@@ -10187,6 +10229,8 @@ DeleteDeviceDialog = Class.create({
           this.m_deleteProgSysvarPOWERMETER(chId, chAddress);
         } else if (oEnergyCounter.type == "POWERMETER_IGL")  {
           this.m_deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
+        } else if (oEnergyCounter.type == "POWERMETER_IEC1") {
+          this.m_deleteProgSysvarPOWERMETER_IEC(chId, chAddress);
         }
       }
       if (this.m_callback) { this.m_callback(true); }
@@ -10370,178 +10414,172 @@ HMScriptExecutor.CONTENT_HEIGHT = 485;
 /**
  * firewallconfigdialog.js
  **/
- 
+
 FirewallConfigDialog = Class.create({
 
   /**
    * @constructor
    * Erzeugt einen neuen FirewallConfigDialog
    **/
-  initialize: function()
-  {
-    var screenWidth  = WebUI.getWidth();
+  initialize: function () {
+    var screenWidth = WebUI.getWidth();
     var screenHeight = WebUI.getHeight();
-    var frameWidth   = FirewallConfigDialog.CONTENT_WIDTH;
-    var frameHeight  = FirewallConfigDialog.CONTENT_HEIGHT;
-    var frameX       = parseInt((screenWidth  - frameWidth)  / 2);
-    var frameY       = parseInt((screenHeight - frameHeight) / 2);
-    
+    var frameWidth = FirewallConfigDialog.CONTENT_WIDTH;
+    var frameHeight = FirewallConfigDialog.CONTENT_HEIGHT;
+    var frameX = parseInt((screenWidth - frameWidth) / 2);
+    var frameY = parseInt((screenHeight - frameHeight) / 2);
+
     this.m_layer = document.createElement("div");
     this.m_layer.className = "DialogLayer";
-    
-		this.m_xmlrpcListBox = new UI.ListBox()
-			.setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, 10)
-			.setWidth(150)
-			//.add({id: "full"      , name: "Vollzugriff"})
-			//.add({id: "restricted", name: "eingeschränkt"})
-			//.add({id: "none"      , name: "kein Zugriff"});
-      .add({id: "full"      , name: translateKey("dialogSettingsFirewallLblFullAccess")})
+
+    this.m_xmlrpcListBox = new UI.ListBox()
+      .setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, 10)
+      .setWidth(150)
+      //.add({id: "full"      , name: "Vollzugriff"})
+      //.add({id: "restricted", name: "eingeschränkt"})
+      //.add({id: "none"      , name: "kein Zugriff"});
+      .add({id: "full", name: translateKey("dialogSettingsFirewallLblFullAccess")})
       .add({id: "restricted", name: translateKey("dialogSettingsFirewallLblRestrictedAccess")})
-      .add({id: "none"      , name: translateKey("dialogSettingsFirewallLblNoAccess")});
-      
-		
-		this.m_hmscriptListBox = new UI.ListBox()
-			.setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, 80)
-			.setWidth(150)
-			//.add({id: "full"      , name: "Vollzugriff"})
-			//.add({id: "restricted", name: "eingeschränkt"})
-			//.add({id: "none"      , name: "kein Zugriff"});
-      .add({id: "full"      , name: translateKey("dialogSettingsFirewallLblFullAccess")})
+      .add({id: "none", name: translateKey("dialogSettingsFirewallLblNoAccess")});
+
+
+    this.m_hmscriptListBox = new UI.ListBox()
+      .setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, 80)
+      .setWidth(150)
+      //.add({id: "full"      , name: "Vollzugriff"})
+      //.add({id: "restricted", name: "eingeschränkt"})
+      //.add({id: "none"      , name: "kein Zugriff"});
+      .add({id: "full", name: translateKey("dialogSettingsFirewallLblFullAccess")})
       .add({id: "restricted", name: translateKey("dialogSettingsFirewallLblRestrictedAccess")})
-      .add({id: "none"      , name: translateKey("dialogSettingsFirewallLblNoAccess")});
-		
-		this.m_ipTextArea = new UI.Textarea()
-			.setPosition(10, 180)
-			.setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
-			.setHeight(100)
-			.setWrap(true);
-		
+      .add({id: "none", name: translateKey("dialogSettingsFirewallLblNoAccess")});
+
+    this.m_ipTextArea = new UI.Textarea()
+      .setPosition(10, 180)
+      .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+      .setHeight(100)
+      .setWrap(true);
+
     this.m_frame = new UI.Frame()
       //.setTitle("Firewall Konfiguration")
       .setTitle(translateKey("dialogSettingsFirewallTitle"))
       .setContentSize(frameWidth, frameHeight)
       .setPosition(frameX, frameY)
-			.add(new UI.Text()
-				.setPosition(10, 10)
-				//.setHtml("<b>HomeMatic XML-RPC API:</b>")
-				.setHtml(translateKey("dialogSettingsFirewallLblXMLRPCAPI"))
-			)
-			.add(new UI.Text()
-				.setPosition(10, 40)
-				.setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
-				//.setText("Ermöglicht den direkten Zugriff auf angelernte HomeMatic Geräte")
+      .add(new UI.Text()
+        .setPosition(10, 10)
+        //.setHtml("<b>HomeMatic XML-RPC API:</b>")
+        .setHtml(translateKey("dialogSettingsFirewallLblXMLRPCAPI"))
+    )
+      .add(new UI.Text()
+        .setPosition(10, 40)
+        .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+        //.setText("Ermöglicht den direkten Zugriff auf angelernte HomeMatic Geräte")
         .setText(translateKey("dialogSettingsFirewallLblHintXMLRPCAPI"))
-        
-			)
-			.add(this.m_xmlrpcListBox)
-			.add(new UI.Text()
-				.setPosition(10, 80)
-				//.setHtml("<b>Remote HomeMatic-Script API:</b>")
+    )
+      .add(this.m_xmlrpcListBox)
+      .add(new UI.Text()
+        .setPosition(10, 80)
+        //.setHtml("<b>Remote HomeMatic-Script API:</b>")
         .setHtml(translateKey("dialogSettingsFirewallLblScriptAPI"))
-			)
-			.add(new UI.Text()
-				.setPosition(10, 110)
-				.setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
-				//.setText("Ermöglicht den Zugriff auf die Logikschicht der HomeMatic Zentrale")
+    )
+      .add(new UI.Text()
+        .setPosition(10, 110)
+        .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+        //.setText("Ermöglicht den Zugriff auf die Logikschicht der HomeMatic Zentrale")
         .setText(translateKey("dialogSettingsFirewallLblHintScriptAPI"))
-        
-			)
-			.add(this.m_hmscriptListBox)
-			.add(new UI.Text()
-				.setPosition(10, 150)
-				//.setHtml("<b>IP-Adressen für den eingeschränkten Zugriff:</b>")
+    )
+      .add(this.m_hmscriptListBox)
+      .add(new UI.Text()
+        .setPosition(10, 150)
+        //.setHtml("<b>IP-Adressen für den eingeschränkten Zugriff:</b>")
         .setHtml(translateKey("dialogSettingsFirewallLblIPAddresses"))
-			)
-			.add(this.m_ipTextArea)
-			.add(new UI.Text()
-				.setPosition(10, 290)
-				.setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
-				//.setText("Sie können den Zugriff wahlweise für einzelne IP-Adressen (z.B. 192.168.0.1) oder ganze Adressbereiche (z.B. 192.168.0.0/16) freigeben.")
+    )
+      .add(this.m_ipTextArea)
+      .add(new UI.Text()
+        .setPosition(10, 290)
+        .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+        //.setText("Sie können den Zugriff wahlweise für einzelne IP-Adressen (z.B. 192.168.0.1) oder ganze Adressbereiche (z.B. 192.168.0.0/16) freigeben.")
         .setText(translateKey("dialogSettingsFirewallLblHintIPAddresses"))
-      )
+    )
       .add(new UI.Button()
         .setPosition(10, FirewallConfigDialog.CONTENT_HEIGHT - 30)
         //.setText("Abbrechen")
         .setText(translateKey("btnCancel"))
-        
+
         .setAction(this.close, this)
-      )
+    )
       .add(new UI.Button()
         .setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, FirewallConfigDialog.CONTENT_HEIGHT - 30)
         //.setText("OK")
         .setText(translateKey("btnOk"))
         .setAction(this.ok, this)
-      );
+    );
 
-		this.loadConfiguration();
+    this.loadConfiguration();
 
     this.m_layer.appendChild(this.m_frame.getElement());
     Layer.add(this.m_layer);
   },
-  
-	loadConfiguration: function()
-	{
-		
-		var response = homematic("Firewall.getConfiguration");
-		if (null != response)
-		{
-			var services     = response.services;
-			var ips          = response.ips.join(";\n");
-			var xmlrpcAccess = "full";
-			var hmscriptAccess   = "full";
-			
-			for (var i = 0, len = services.length; i < len; i++)
-			{
-				var service = services[i];
-				if (service.id == "XMLRPC") { xmlrpcAccess   = service.access; }
-				if (service.id == "REGA"  ) { hmscriptAccess = service.access; }
-			}
-			
-			this.m_xmlrpcListBox.selectItemById(xmlrpcAccess);
-			this.m_hmscriptListBox.selectItemById(hmscriptAccess);
-			this.m_ipTextArea.setText(ips);
-		}
-	},
-	
+
+  loadConfiguration: function () {
+
+    var response = homematic("Firewall.getConfiguration");
+    if (null != response) {
+      var services = response.services;
+      var ips = response.ips.join(";\n");
+      var xmlrpcAccess = "full";
+      var hmscriptAccess = "full";
+
+      for (var i = 0, len = services.length; i < len; i++) {
+        var service = services[i];
+        if (service.id == "XMLRPC") {
+          xmlrpcAccess = service.access;
+        }
+        if (service.id == "REGA") {
+          hmscriptAccess = service.access;
+        }
+      }
+
+      this.m_xmlrpcListBox.selectItemById(xmlrpcAccess);
+      this.m_hmscriptListBox.selectItemById(hmscriptAccess);
+      this.m_ipTextArea.setText(ips);
+    }
+  },
+
   /**
    * Schließt den FirewallConfigDialog ohne Änderungen zu übernehmen.
    **/
-  close: function()
-  {
+  close: function () {
     Layer.remove(this.m_layer);
   },
-  
+
   /**
    * Übernimmt die Änderungen und schließt den FirewallConfigDialog anschließend.
    **/
-  ok: function()
-  {
-		var xmlrpcAccess   = this.m_xmlrpcListBox.getSelectedItem().id;
-		var hmscriptAccess = this.m_hmscriptListBox.getSelectedItem().id;
-		var ips  = this.m_ipTextArea.getText().replace(/\s+/g,'').split(";");
-		var isOk = true;
-		for (var i = 0, len = ips.length; i < len; i++)
-		{
-			var ip = ips[i];
-			if (!ip.match(/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\/[0-9]+)?$/)) { isOk = false; }
-		}
-		
-		if (isOk)
-		{
-			homematic("Firewall.setConfiguration", {
-				services: 
-				[
-					{name: "XMLRPC", access: xmlrpcAccess},
-					{name: "REGA", access: hmscriptAccess}
-				],
-				ips: ips
-			});
-			this.close();
-		}
-		else
-		{
-			//MessageBox.show("Eingabefehler", "Verwenden Sie bitte nur IP-Adressen im Format \"1.2.3.4\" und Adressgruppen im Format \"1.2.3.0/8\". Separieren Sie die einzelnen Adressen durch Semikola.");
-			MessageBox.show(translateKey("dialogSettingsFirewallErrorMsgTitle"), translateKey("dialogSettingsFirewallErrorMsgContent"));
+  ok: function () {
+    var xmlrpcAccess = this.m_xmlrpcListBox.getSelectedItem().id;
+    var hmscriptAccess = this.m_hmscriptListBox.getSelectedItem().id;
+    var ips = this.m_ipTextArea.getText().replace(/\s+/g, '').split(";");
+    var isOk = true;
+    for (var i = 0, len = ips.length; i < len; i++) {
+      var ip = ips[i];
+      if (!ip.match(/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\/[0-9]+)?$/)) {
+        isOk = false;
+      }
+    }
+
+    if (isOk) {
+      homematic("Firewall.setConfiguration", {
+        services: [
+          {name: "XMLRPC", access: xmlrpcAccess},
+          {name: "REGA", access: hmscriptAccess}
+        ],
+        ips: ips
+      });
+      this.close();
+    }
+    else {
+      //MessageBox.show("Eingabefehler", "Verwenden Sie bitte nur IP-Adressen im Format \"1.2.3.4\" und Adressgruppen im Format \"1.2.3.0/8\". Separieren Sie die einzelnen Adressen durch Semikola.");
+      MessageBox.show(translateKey("dialogSettingsFirewallErrorMsgTitle"), translateKey("dialogSettingsFirewallErrorMsgContent"));
 
     }
   }
@@ -20135,6 +20173,7 @@ writeReadyField = function(tdParent, obj) {
 };
 
 writeDeviceAction = function(tdParent, includeChecks, bIsDev, bDelBtn, obj, bIsGroup) {
+  var HmIPIfaceSelector = "HmIP-RF";
   var id = 0;
   if (obj) { id = obj['id']; }
   var tbl = Builder.node('table', {width: '100%', cellpadding: '0'}, [
@@ -20181,7 +20220,7 @@ writeDeviceAction = function(tdParent, includeChecks, bIsDev, bDelBtn, obj, bIsG
   tbodySub.appendChild(trSub);
 
   /* Geraetetausch */
-  if (bIsDev && bDelBtn) {
+  if (bIsDev && bDelBtn && (obj['iface'] != HmIPIfaceSelector)) {
     //divSub = Builder.node('div', {className: 'StdButton', onclick: 'loadDevicesToChange(\''+obj['sn']+'\',\''+obj['type']+'\')'}, translateKey('replaceDeviceBtn'));
     divSub = Builder.node('div', {className: 'StdButton', onclick: 'loadDevicesToChange(\''+obj['sn']+'\',\''+obj['type']+'\',\''+obj['id']+'\')'}, translateKey('replaceDeviceBtn'));
     tdSub.appendChild(divSub);
@@ -21916,6 +21955,25 @@ getExtendedDescription = function(type, ch) {
                 break;
             }
             break;
+
+    // Radio-controlled indoor siren
+    case "HM-Sec-Sir-WM":
+      switch (ch) {
+        case 1 :
+          result = translateKey("lblIndoorSirenInternAlarm");
+          break;
+        case 2 :
+          result = translateKey("lblIndoorSirenExternAlarm");
+          break;
+        case 3 :
+          result = translateKey("lblIndoorSirenPanicAlarm");
+          break;
+        case 4 :
+          result = translateKey("lblIndoorSirenArming");
+          break;
+        default: result = "";
+      }
+     break;
 
   }
   return result;
@@ -26201,60 +26259,115 @@ isePowerMeter.prototype = {
   initialize: function(id, opts) {
     conInfo("PowerMeter");
     var self = this;
-    // 0 = Gas-Sensor, 1 = Electricity (IR-Sensor), 2 = Electricity (LED-Sensor), 3 = Unknown
-    this.arMeasurementTypes = ["Gas", "Electricity", "Electricity", "Unknown"];
+    this.arMeasurementTypes = [];
+    this.sensorTypeID = {};
+    this.sensorTypeID.gas = "Gas";
+    this.sensorTypeID.eletricity = "Electricity";
+    this.sensorTypeID.iec = "IEC";
+    this.sensorTypeID.unknown = "Unknown";
+    this.kiloPrefix = "";
+
     this.id = id;
     this.opts = opts;
-    this.EnergyCounterID = "svEnergyCounter_" + this.id + "_" + this.opts.chAddress;
-    this.EnergyCounterRESETID = "svEnergyCounter_" + this.id + "_" + this.opts.chAddress + "_RESET";
-    this.EnergyCounterOldValID = "svEnergyCounterOldVal_" + this.id;
-    this.EnergyPrice = "unknown";
     this.summedUpEnergy = 0.0;
-    this.measurementType = this.arMeasurementTypes[1]; // Default set to 'Electricity'
-    this.bindEvents();
+    this.measurementType = this.getSensorType();
+    conInfo("Identified sensor: " + this.measurementType);
 
-    if (opts.chType == "POWERMETER_IGL") {
-      this.measurementType = this.getSensorType();
-      this.setGenericInfoPanels(["Power"]);
+    this.panel2Show = null;
+
+    // Channel 2 is only visible when a IEC-Sensor is attached
+    if (this.opts.chType == "POWERMETER_IEC2") {
+      switch (this.measurementType) {
+        case this.sensorTypeID.iec:
+          this.panel2Show = this.getJElemsByName("channelActiv");
+          break;
+        default: this.panel2Show = this.getJElemByID("channelNotActiv");
+      }
+      this.panel2Show.show();
     } else {
-      this.setGenericInfoPanels(["Voltage", "Current", "Power", "Frequency"]);
+      this.panel2Show = this.getJElemsByName("channelActiv");
+      this.panel2Show.show();
     }
 
+    this.EnergyCounterID = "svEnergyCounter" + this.getSensorExtension() + "_" + this.id + "_" + this.opts.chAddress;
+    this.EnergyCounterRESETID = "svEnergyCounter_" + this.id + "_" + this.opts.chAddress + "_RESET";
+    this.EnergyCounterOldValID = "svEnergyCounter" + this.getSensorExtension() + "OldVal_" + this.id;
+    this.EnergyPrice = "unknown";
+
+    this.bindEvents();
+
+    this.setGenericInfoPanels(this.getVisibleInfoPanels());
+
     // When gas sensor change the unit from Wh to m^3 and change the EnergyCounterID
-    if (this.measurementType == this.arMeasurementTypes[0]) {
+    if (this.measurementType == this.sensorTypeID.gas) {
       this.opts.unitEnergyCounter = "m<sup>3</sup>";
       this.EnergyCounterID = "svEnergyCounterGas_" + this.id + "_" + this.opts.chAddress;
       this.EnergyCounterRESETID = "svEnergyCounterGas_" + this.id + "_" + this.opts.chAddress + "_RESET";
       this.EnergyCounterOldValID = "svEnergyCounterGasOldVal_" + this.id;
-    } else if (this.measurementType == this.arMeasurementTypes[3]) {
+    } else if (this.measurementType == this.sensorTypeID.unknown) {
       // Unknown sensor
       this.opts.unitEnergyCounter = "";
+    } else if (this.measurementType == this.sensorTypeID.iec) {
+      this.opts.unitEnergyCounter = this.opts.unitEnergyCounterIEC;
     }
-    jQuery("[name = '"+ this.id + "EnergyCostDeviceUnit']").html(this.opts.unitEnergyCounter).show();
+    jQuery("[name = '" + this.id + "EnergyCostDeviceUnit']").html(this.opts.unitEnergyCounter).show();
     this.setEnergyCounterPanel();
 
-    this.energyConfig = homematic("system.getEnergyPrice", {}, function(result){
+    this.energyConfig = homematic("system.getEnergyPrice", {}, function (result) {
       self.energyConfig = result;
       // When the energy price config is available and it´s a known sensor (electricity or gas)
       // then show the energy cost
-      if (result && (self.measurementType != self.arMeasurementTypes[3])) {
+      if (result && (self.measurementType != self.sensorTypeID.unknown)) {
         self.showEnergyCost();
       }
     });
-    jQuery("[name = '"+this.id+"sensor"+this.getGasExtension()+"']").show();
+    jQuery("[name = '" + this.id + "sensor" + this.getSensorExtension() + "']").show();
     conInfo("Interface: " + this.opts.iface);
     conInfo("MeasurementType: " + this.measurementType);
+
+  },
+
+  getVisibleInfoPanels: function() {
+    switch (this.opts.chType) {
+      //Wireless sender for power meter sensor
+      case "POWERMETER_IGL":
+      case "POWERMETER_IEC1":
+      case "POWERMETER_IEC2":
+        return ["Power"];
+      default:
+        // POWERMETER - power meter switch actuator
+        return ["Voltage", "Current", "Power", "Frequency"];
+    }
   },
 
   getSensorType: function() {
-      // Determine the type of measurement (gas or electicity)
-      var paramSet = homematic("Interface.getParamset", {"interface": this.opts.iface, "address" : this.opts.chAddress, "paramsetKey" :"MASTER"});
-      //METER_TYPE can be
-      // 0 = Gas-Sensor
-      // 1 = Electricity (IR-Sensor)
-      // 2 = Electricity (LED-Sensor)
-      // 3 = Unknown
-      return this.arMeasurementTypes[parseInt(paramSet.METER_TYPE)];
+    // Determine the type of measurement (gas or electicity)
+    var paramSet = homematic("Interface.getParamset", {"interface": this.opts.iface, "address" : this.opts.chAddress, "paramsetKey" :"MASTER"});
+
+    /* No meter type available
+       The device is an ordinary powermeter
+    */
+    if (paramSet.METER_TYPE == undefined) {
+      return this.sensorTypeID.eletricity;
+    }
+
+    // No IEC Sensor
+    // 0 = Gas-Sensor, 1 = Electricity (IR-Sensor), 2 = Electricity (LED-Sensor), 3 = Unknown
+
+    // IEC-Sensor
+    // 0 = Gas-Sensor, 1 = Electricity (IR-Sensor), 2 = Electricity (LED-Sensor), 3 = IEC-Sensor, 4 = Unknown
+
+    switch (this.opts.chType) {
+      case "POWERMETER":
+      case "POWERMETER_IGL":
+        this.arMeasurementTypes = ["Gas", "Electricity", "Electricity", "Unknown"];
+        break;
+      case "POWERMETER_IEC1":
+      case "POWERMETER_IEC2":
+        this.arMeasurementTypes = ["Gas", "Electricity", "Electricity", "IEC", "Unknown"];
+        break;
+    }
+    return this.arMeasurementTypes[parseInt(paramSet.METER_TYPE)];
 
   },
 
@@ -26280,6 +26393,40 @@ isePowerMeter.prototype = {
       self.setEnergyCounterPanel();
       self.showEnergyCost();
     });
+
+    /*
+    jQuery("#"+ this.id + "setEnergyCounter").bind("click", function(){
+      conInfo("Set EnergyCounter");
+      var dlgContent = "<table align='center'><tr><td><input type='text' id='meterReading'></td></tr></table>",
+        valMeterReading;
+
+      setEnergyCounterDlg = new YesNoDialog("trans Enter meter readings", dlgContent, function(result) {
+        if (result == YesNoDialog.RESULT_YES) {
+          valMeterReading = jQuery("#meterReading").val();
+          // TODO check if the value is a valid float
+
+          // This removes the dialog from the screen
+          Layer.remove(this.m_layer);
+
+          // This sets the new value of the power meter
+          homematic("SysVar.setFloat", {"name" : self.EnergyCounterID, "value" : valMeterReading}, function() {
+            self.setEnergyCounterPanel();
+            self.showEnergyCost();
+          });
+        } else {
+          // NO pressed
+          // This removes the dialog from the screen
+          Layer.remove(this.m_layer);
+        }
+      }, "html");
+
+      // Overwrites the original close method
+      setEnergyCounterDlg.close = function(result) {
+        if (this.m_callback) { this.m_callback(result); }
+      };
+
+    });
+    */
   },
 
   /**
@@ -26297,64 +26444,116 @@ isePowerMeter.prototype = {
    * @param {string} elem The name of the desired element
    * @return {object} The desired element
    */
-  getJElem: function(elem) {
+  getJElemByID: function(elem) {
     return jQuery("#" + this.id + elem);
   },
 
-  getGasExtension: function() {
-    return (this.measurementType == this.arMeasurementTypes[0]) ? this.arMeasurementTypes[0] : "";
+  getJElemsByName: function(elem) {
+    return jQuery("[name='" + this.id + elem + "']");
+  },
+
+  getSensorExtension: function() {
+    switch (this.measurementType) {
+      case  this.sensorTypeID.gas:
+        return this.sensorTypeID.gas;
+      case this.sensorTypeID.iec:
+        return this.sensorTypeID.iec;
+      default: return "";
+    }
   },
   /**
    * Sets the text (value + unit) of the desired element
    * @param {string} panel The name of the desired element
    */
   setGenericPanel: function(panel) {
-    var gasExtension = this.getGasExtension();
-    var j_panel = this.getJElem(panel),
-      value = this.opts["val" + panel + gasExtension],
-      unit = this.opts["unit" + panel + gasExtension];
-    j_panel.text(value.toFixed(2) + " " + unit);
+    var sensorExtension = this.getSensorExtension();
+    var j_panel = this.getJElemByID(panel),
+      value = this.opts["val" + panel + sensorExtension],
+      unit = this.opts["unit" + panel + sensorExtension];
+    if (value && unit) {
+      j_panel.text(value.toFixed(2) + " " + unit);
+    }
+  },
+
+  changeToKilo: function() {
+    return (this.summedUpEnergy/1000).toFixed(3);
   },
 
   setEnergyCounterPanel: function() {
-    var j_panel = this.getJElem("EnergyCounter");
+    var j_panel = this.getJElemByID("EnergyCounter");
     this.summedUpEnergy = parseFloat(homematic("SysVar.getValue", {"id" : this.EnergyCounterID})).toFixed(2);
-    j_panel.html(this.summedUpEnergy + " " + this.opts.unitEnergyCounter);
+    conInfo("setEnergyCounterPanel - this.summedUpEnergy: " + this.summedUpEnergy);
+
+    if (this.summedUpEnergy >= 1000.0 && (this.measurementType != this.sensorTypeID.gas) && (this.measurementType != this.sensorTypeID.iec)) {
+      this.kiloPrefix = "k";
+      this.summedUpEnergy = this.changeToKilo();
+    }
+
+    j_panel.html(this.summedUpEnergy + " " + this.kiloPrefix + this.opts.unitEnergyCounter);
   },
 
   getEnergyConsumption: function(sType) {
     // Electricity sensor
-    if ((this.measurementType == this.arMeasurementTypes[1])) {
+    if ((this.measurementType == this.sensorTypeID.eletricity )) {
       if (sType == "CCU")  return this.summedUpEnergy;
       if (sType == "Device") return this.opts.valEnergyCounter;
     }
 
     // Gas sensor
-    if (this.measurementType == this.arMeasurementTypes[0]) {
+    if (this.measurementType == this.sensorTypeID.gas) {
       if (sType == "CCU")  return (this.summedUpEnergy * this.energyConfig.gasHeatingValue * this.energyConfig.gasConditionNumber) ;
-      if (sType == "Device") return (this.opts.valEnergyCounter * this.energyConfig.gasHeatingValue * this.energyConfig.gasConditionNumber);
+      if (sType == "Device") return (this.opts.valEnergyCounterGas * this.energyConfig.gasHeatingValue * this.energyConfig.gasConditionNumber);
     }
+
+    // IEC sensor
+    if ((this.measurementType == this.sensorTypeID.iec)) {
+      if (sType == "CCU")  return this.summedUpEnergy;
+      if (sType == "Device") return this.opts["valEnergyCounter" + this.getSensorExtension()];
+    }
+
+  },
+
+  // Some channels aren't allowed to show the energy cost
+  // E. g. the channel POWERMETER_IEC2 measures the energy which a client feeds into the power supply system (solar, wind or so)
+  isChannelValid2ShowEnergyCost: function() {
+    switch (this.opts.chType) {
+      case "POWERMETER_IEC2":
+        return false;
+      default: return true;
+    }
+
   },
 
   showEnergyCost: function() {
-    if (this.energyConfig && (this.measurementType != this.arMeasurementTypes[3])) {
-      var unitFactor = 1000,
+    if (this.energyConfig && (this.measurementType != this.sensorTypeID.unknown) && ( this.isChannelValid2ShowEnergyCost()) ) {
+      var unitFactorCCU = 1000,
+        unitFactorDevice = 1000,
         kWh = " kWh";
 
-      if (this.measurementType == this.arMeasurementTypes[0]) {
-        this.EnergyPrice = this.energyConfig.gasPrice;
-        unitFactor = 1;
+      if (this.kiloPrefix == "k") {
+        unitFactorCCU = 1;
       }
-      if (this.measurementType == this.arMeasurementTypes[1]) this.EnergyPrice = this.energyConfig.curPrice;
+
+      if ((this.measurementType == this.sensorTypeID.iec)) {
+        unitFactorCCU = 1;
+        unitFactorDevice = 1;
+      }
+
+      if (this.measurementType == this.sensorTypeID.gas) {
+        this.EnergyPrice = this.energyConfig.gasPrice;
+        unitFactorCCU = 1;
+        unitFactorDevice = 1;
+      }
+      if (this.measurementType == this.sensorTypeID.eletricity || this.measurementType == this.sensorTypeID.iec) this.EnergyPrice = this.energyConfig.curPrice;
 
       if (this.EnergyPrice != "unknown" && this.energyConfig.currency != null) {
-        var j_energyCostCCU = this.getJElem("EnergyCostCCU"),
-          j_energyCostDevice = this.getJElem("EnergyCostDevice"),
+        var j_energyCostCCU = this.getJElemByID("EnergyCostCCU"),
+          j_energyCostDevice = this.getJElemByID("EnergyCostDevice"+this.getSensorExtension()),
           energyConsumptionCCU = this.getEnergyConsumption("CCU"),
           energyConsumptionDevice = this.getEnergyConsumption("Device"),
-          energyCostCCU = ((energyConsumptionCCU * this.EnergyPrice) / unitFactor).toFixed(2) + " " + this.energyConfig.currency,
-          energyCostDevice = ((energyConsumptionDevice * this.EnergyPrice) / unitFactor).toFixed(2) + " " + this.energyConfig.currency;
-        if (this.measurementType == this.arMeasurementTypes[0]) {
+          energyCostCCU = ((energyConsumptionCCU * this.EnergyPrice) / unitFactorCCU).toFixed(2) + " " + this.energyConfig.currency,
+          energyCostDevice = ((energyConsumptionDevice * this.EnergyPrice) / unitFactorDevice).toFixed(2) + " " + this.energyConfig.currency;
+        if (this.measurementType == this.sensorTypeID.gas) {
           j_energyCostCCU.text(energyConsumptionCCU.toFixed(1) + kWh + " = " + energyCostCCU).show();
           j_energyCostDevice.text(energyConsumptionDevice.toFixed(1) + kWh + " = " + energyCostDevice).show();
         } else {
@@ -26441,6 +26640,167 @@ iseRGBWController.prototype = {
     });
   }
 
+};/**
+ * ise/iseButtonsSwitch.js
+ **/
+
+/**
+ * @fileOverview ?
+ * @author ise
+ **/
+
+/**
+ * @class
+ **/
+iseSmokeDetectorHmIP = Class.create();
+
+iseSmokeDetectorHmIP.prototype = {
+
+  initialize: function(id, controlID, dangerState) {
+
+    this.id = id;
+    this.state = parseInt(dangerState);
+    this.divOn = $(this.id + "On");
+    this.divOff = $(this.id + "Off");
+    this.idDpState = controlID;
+    
+    if (this.state == 2) { ControlBtn.on(this.divOn); }
+    else  { ControlBtn.on(this.divOff); }
+      
+    // Add event handlers
+    this.clickOff = this.onClickOff.bindAsEventListener(this);
+    Event.observe(this.divOff, 'mousedown', this.clickOff);
+
+    this.clickOn = this.onClickOn.bindAsEventListener(this);
+    Event.observe(this.divOn, 'mousedown', this.clickOn);
+
+
+  },
+  
+  onClickOff: function() {
+    ControlBtn.pushed(this.divOff);
+    setDpState(this.idDpState, 1, false);
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      t.refresh();
+      pe.stop();
+    }, 1);
+  },
+ 
+  onClickOn: function() {
+    ControlBtn.pushed(this.divOn);
+    setDpState(this.idDpState, 2, false);
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      t.refresh();
+      pe.stop();
+    }, 1);
+  },
+ 
+  
+  refresh: function() {
+    if (this.state == 2) {
+      ControlBtn.on(this.divOn);
+      ControlBtn.off(this.divOff);
+    }
+    else {
+      ControlBtn.off(this.divOn);
+      ControlBtn.on(this.divOff);
+    }
+  }
+};
+
+/**
+ * @class
+ **/
+iseArmAlarmSiren = Class.create();
+
+iseArmAlarmSiren.prototype = {
+
+  initialize: function(id, initState, idDpState) {
+    console.log("id: " + id + " - initState: " + initState + " - idDpState: " + idDpState);
+    this.id = id;
+    this.state = initState;
+    this.divOff = $(this.id + "Off");
+    this.divExtern = $(this.id + "Extern");
+    this.divIntern = $(this.id + "Intern");
+    this.divBlocked = $(this.id + "Blocked");
+    this.idDpState = idDpState;
+
+    this.initAllElements();
+
+    // Add event handlers
+    this.clickOff = this.onClickOff.bindAsEventListener(this);
+    Event.observe(this.divOff, 'mousedown', this.clickOff);
+
+    this.clickExtern = this.onClickExtern.bindAsEventListener(this);
+    Event.observe(this.divExtern, 'mousedown', this.clickExtern);
+
+    this.clickIntern = this.onClickIntern.bindAsEventListener(this);
+    Event.observe(this.divIntern, 'mousedown', this.clickIntern);
+
+  },
+
+  initAllElements: function() {
+    ControlBtn.off(this.divOff);
+    ControlBtn.off(this.divExtern);
+    ControlBtn.off(this.divIntern);
+    ControlBtn.off(this.divBlocked);
+    switch(this.state) {
+      case 0:
+        ControlBtn.on(this.divOff);
+        break;
+      case 1:
+        ControlBtn.on(this.divExtern);
+        break;
+      case 2:
+        ControlBtn.on(this.divIntern);
+        break;
+      case 3:
+        ControlBtn.on(this.divBlocked);
+    }
+  },
+
+  onClickOff: function() {
+    ControlBtn.pushed(this.divOff);
+    setDpState(this.idDpState, 0, false);
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      t.refresh();
+      pe.stop();
+    }, 1);
+  },
+
+  onClickExtern: function() {
+    ControlBtn.pushed(this.divExtern);
+    setDpState(this.idDpState, 1, false);
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      t.refresh();
+      pe.stop();
+    }, 1);
+  },
+
+  onClickIntern: function() {
+    ControlBtn.pushed(this.divIntern);
+    setDpState(this.idDpState, 2, false);
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      t.refresh();
+      pe.stop();
+    }, 1);
+  },
+
+  refresh: function() {
+    if (this.state) {
+      ControlBtn.on(this.divOn);
+      ControlBtn.off(this.divOff);
+    }
+    else {
+      ControlBtn.off(this.divOn);
+      ControlBtn.on(this.divOff);
+    }
+  }
 };/**
  * ic_gd.js
  **/
@@ -32268,26 +32628,77 @@ WEATHER_change_thres = function(id)
 
 WEATHER_check_dir = function()
 {
+  var newSensor = "HM-WDS100-C6-O-2";
+  var sensorTypeDesc = jQuery("#weatherSensor").val();
+  var selectedWindDirection = jQuery("[name=\"subset_1_1\"]").prop("selectedIndex");
+
   var ein;
   var aus;
   //1 
-  
-  if (switch_dir) 
-  {  
-    //ein = document.createTextNode("Einschaltschwelle");
-    ein = document.createTextNode(translateKey("upperStormThreshold"));
-    //aus = document.createTextNode("Ausschaltschwelle");
-    aus = document.createTextNode(translateKey("lowerStormThreshold"));
+
+  if (sensorTypeDesc != newSensor) {
+    if (switch_dir) {
+      //ein = document.createTextNode("Einschaltschwelle");
+      ein = document.createTextNode(translateKey("upperStormThreshold"));
+      //aus = document.createTextNode("Ausschaltschwelle");
+      aus = document.createTextNode(translateKey("lowerStormThreshold"));
+    }
+    else {
+      //ein = document.createTextNode("Ausschaltschwelle");
+      ein = document.createTextNode(translateKey("lowerStormThreshold"));
+      //aus = document.createTextNode("Einschaltschwelle");
+      aus = document.createTextNode(translateKey("upperStormThreshold"));
+    }
+  } else {
+    // new Sensor
+    var ctON = jQuery("[name=\"SHORT_CT_ON\"]").prop("selectedIndex");
+    var ctOFF = jQuery("[name=\"SHORT_CT_OFF\"]").prop("selectedIndex");
+
+    if (switch_dir == 1) {
+      //ein = document.createTextNode("Einschaltschwelle");
+      ein = document.createTextNode(translateKey("upperStormThreshold"));
+      //aus = document.createTextNode("Ausschaltschwelle");
+      aus = document.createTextNode(translateKey("lowerStormThreshold"));
+      $('ein').replaceChild(ein, $('ein').firstChild);
+      $('aus').replaceChild(aus, $('aus').firstChild);
+      return;
+    }
+    else if (switch_dir == 0) {
+      //ein = document.createTextNode("Ausschaltschwelle");
+      ein = document.createTextNode(translateKey("lowerStormThreshold"));
+      //aus = document.createTextNode("Einschaltschwelle");
+      aus = document.createTextNode(translateKey("upperStormThreshold"));
+      $('ein').replaceChild(ein, $('ein').firstChild);
+      $('aus').replaceChild(aus, $('aus').firstChild);
+      return;
+    }
+
+    // X GE LO = 0
+    // X GE HI = 1
+    // X LT LO = 2
+    // X LT HI = 3
+    // Starker Wind EIN, schwacher Wind AUS / oder EIN nur bei starkem Wind, nicht aus (2. Profil)
+    if ((ctON == 2 && ctOFF == 1) || (ctON == 1 && ctOFF == 1)) {
+      //ein = document.createTextNode("Einschaltschwelle");
+      ein = document.createTextNode(translateKey("upperStormThreshold"));
+      //aus = document.createTextNode("Ausschaltschwelle");
+      aus = document.createTextNode(translateKey("lowerStormThreshold"));
+    }
+    // Starker Wind AUS, schwacher Wind EIN
+    if (ctON == 1 && ctOFF == 2) {
+      //ein = document.createTextNode("Ausschaltschwelle");
+      ein = document.createTextNode(translateKey("lowerStormThreshold"));
+      //aus = document.createTextNode("Einschaltschwelle");
+      aus = document.createTextNode(translateKey("upperStormThreshold"));
+    }
+
+
+
   }
-  else 
-  {
-    //ein = document.createTextNode("Ausschaltschwelle");
-    ein = document.createTextNode(translateKey("lowerStormThreshold"));
-    //aus = document.createTextNode("Einschaltschwelle");
-    aus = document.createTextNode(translateKey("upperStormThreshold"));
-  }  
-  $('ein').replaceChild(ein, $('ein').firstChild);
-  $('aus').replaceChild(aus, $('aus').firstChild);
+  try {
+    $('ein').replaceChild(ein, $('ein').firstChild);
+    $('aus').replaceChild(aus, $('aus').firstChild);
+  } catch (e) {}
 };
 
 WEATHER_check_expert = function()

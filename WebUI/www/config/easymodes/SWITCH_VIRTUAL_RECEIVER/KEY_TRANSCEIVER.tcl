@@ -10,8 +10,8 @@ set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${switch_on}"
 set PROFILES_MAP(2)  "\${switch_off}"
 set PROFILES_MAP(3)  "\${switch_on_off}"
-set PROFILES_MAP(4)  "\${switch_shortOn_longOff}"
-set PROFILES_MAP(5)  "\${switch_shortOff_longOn}"
+#set PROFILES_MAP(4)  "\${switch_shortOn_longOff}"
+#set PROFILES_MAP(5)  "\${switch_shortOff_longOn}"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)    "Expertenprofil"
@@ -611,6 +611,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
+set comment {
 #4
   incr prn
   set pref 1
@@ -772,7 +773,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<tr id=\"timeFactor\_$prn\_$pref\" class=\"hidden\"><td>\${ON_TIME_FACTOR}</td>"
   append HTML_PARAMS(separate_$prn) "<td>[get_InputElem LONG_ON_TIME_FACTOR separate_${special_input_id}_$prn\_$pref ps LONG_ON_TIME_FACTOR ]</td>"
   append HTML_PARAMS(separate_$prn) "</tr>"
-
+}
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 }
 

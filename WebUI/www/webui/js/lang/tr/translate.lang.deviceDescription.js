@@ -1,6 +1,8 @@
 jQuery.extend(true,langJSON, {
   "tr" : {
-
+    "HM-WDS30-OT2-SM" : "Wireless Temperature Difference Sensor",
+    "HM-Sec-Sir-WM" : "Wireless Indoor Siren",
+    "HM-Sen-LI-O" : "Wireless Light Intensity Sensor, outdoor",
     "HM-OU-CFM-TW" : "Sinyal lambali MP3 kablosuz gong, batarya",
     "HM-ES-PMSw1-SM" : "G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC",
     "OLIGO.smart.iq.HM" : "Kablosuz dimmer akt%FCat%F6r%FC",

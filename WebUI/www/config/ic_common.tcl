@@ -23,10 +23,10 @@ set GL_FLAG_SENDER_UNKNOWN       0x4
 set GL_FLAG_RECEIVER_UNKNOWN     0x8
 
 set HTMLTITLE "HomeMatic Interne Konfiguration"
-set INTERFACES_FILE "/etc/config/InterfacesList.xml"
+set INTERFACES_FILE "/opt/hm/etc/config/InterfacesList.xml"
 
 if { ![info exists env(CONFIG_ROOT)] } {
-    set env(CONFIG_ROOT) "/etc/config"
+    set env(CONFIG_ROOT) "/opt/hm/etc/config"
 }
 
 set USERPROFILESPATH "$env(CONFIG_ROOT)/userprofiles"
@@ -1210,15 +1210,15 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
                 array set sv $_sv
                 set sv_value [expr $sv(VALUE) * $factor]
 
-                                if {$ps_type == "MASTER" && $parent_type == "" } then {
-                                    set v "<span class=\"stringtable_value\">${param_id}=$sv(ID)</span>"
-                                } elseif {$ps_type == "MASTER" || $ps_type == "VALUES"} then {
-                                    set v "<span class=\"stringtable_value\">$channel_type|${param_id}=$sv(ID)</span>"
-                                } else {
-                                    set v $sv(ID)
-                                }
+                if {$ps_type == "MASTER" && $parent_type == "" } then {
+                    set v "<span class=\"stringtable_value\">${param_id}=$sv(ID)</span>"
+                } elseif {$ps_type == "MASTER" || $ps_type == "VALUES"} then {
+                    set v "<span class=\"stringtable_value\">$channel_type|${param_id}=$sv(ID)</span>"
+                } else {
+                    set v $sv(ID)
+                }
 
-                                if { $sv_value == $value } then {
+                if { $sv_value == $value } then {
                   set selected selected=\"selected\"
                 } else  {
                   set selected ""

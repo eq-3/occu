@@ -5,6 +5,8 @@
 
 LOGLEVEL_HMServer=5
 CFG_TEMPLATE_DIR=/etc/config_templates
+PIDFILE=/var/run/HMIPServer.pid
+STARTWAITFILE=/var/status/HMServerStarted
 
 init() {
 	export TZ=`cat /etc/config/TZ | cut -d'-' -f1 | cut -d'+' -f1`
@@ -18,13 +20,16 @@ init() {
 start() {
 	echo -n "Starting HMServer: "
 	init
-	start-stop-daemon -S -q -p /var/run/HMServer.pid --exec java -- -Xmx32m -Dlog4j.configuration=file:///etc/config/log4j.xml -Dfile.encoding=ISO-8859-1 -jar /opt/HMServer/HMServer.jar &
-	sleep 135
+	start-stop-daemon -S -q -m -p $PIDFILE --exec java -- -Xmx64m -Dlog4j.configuration=file:///etc/config/log4j.xml -Dfile.encoding=ISO-8859-1 -jar /opt/HMServer/HMIPServer.jar /etc/crRFD.conf &
+	echo "Waiting for HMServer to get ready"
+	eq3configcmd wait-for-file -f $STARTWAITFILE -p 5 -t 135
 	echo "OK"
 }
 stop() {
 	echo -n "Stopping HMServer: "
-	start-stop-daemon -K -q -p /var/run/HMServer.pid
+	rm -f $STARTWAITFILE
+	start-stop-daemon -K -q -p $PIDFILE
+	rm -f $PIDFILE
 	echo "OK"
 }
 restart() {

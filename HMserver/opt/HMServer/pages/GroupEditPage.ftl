@@ -20,7 +20,8 @@
   	<tr>
   		<td class="tBodyCell">${"$"}{groupGroupName}</td>
         <td class="tBodyCell" colspan="2">
-        	<input type="text" onchange="checkGroupName()" id="group_name" data-bind="value: groupName" size="50"/>
+        	<input type="text" onchange="checkGroupName();" onclick="storeGroupName();" id="group_name" data-bind="value: groupName" size="50"/>
+        	<div id="attentionDeviceNameChange" class='hidden attention'>${"$"}{lblAttentionGroupNameChange}</div>
         </td>
     </tr>
   	<tr>
@@ -32,14 +33,15 @@
     </tr>
     <tr data-bind="visible: !isNew()">
         <td class="tBodyCell">${"$"}{virtualDeviceSerialNumber}</td>
-        <td class="tBodyCell" data-bind="text: virtualDeviceSerialNumber"></td>
+        <!-- <td id="virtualDeviceSerialNumber" class="tBodyCell" data-bind="text: virtualDeviceSerialNumber"></td> -->
+        <td class="tBodyCell" data-bind="text: groupDeviceName"></td>
         <td class="tBodyCell" style="width: 0px">
             <input style="margin: 5px; display: block" type="button" name="btnVirtualDeviceStateAndOperating" value="btnVirtualDeviceStateAndOperating" class="StdButton CLASS04907" data-bind="click: operateVirtualDevice"/>
             <input style="margin: 5px; display: block" type="button" name="btnVirtualDeviceConfiguration" value="btnVirtualDeviceConfiguration" class="StdButton CLASS04907" data-bind="click: configureVirtualDevice"/>
         </td>
     </tr>
 
-    <tr>
+    <tr class="hidden">
       <td class="tBodyCell">${"$"}{lblAllowOnlyGroupOperation}</td>
       <td class="tBodyCell" colspan="2"><input id="allowOnlyGroupOperation"  data-bind="checked: isSingleOperationForbidden" type="checkbox" ></td>
     </tr>
@@ -159,11 +161,19 @@
 
 <script type="text/javascript">
 
+     this.groupNameHasChanged = false;
     // TWIST-589
     // Replaces the char " by '
     function checkGroupName() {
       var groupNameElem = jQuery("#group_name");
       groupNameElem.val(groupNameElem.val().replace(/"/g, "'"));
+      this.groupNameHasChanged = true;
+    }
+
+    function storeGroupName() {
+      if (viewModel.origGroupName == "") {
+        viewModel.origGroupName = viewModel.groupName() + " " + viewModel.virtualDeviceSerialNumber();
+      }
     }
 
     var sessionTimeoutErrorCode = "42";
@@ -179,19 +189,18 @@
     function GroupViewModel()
     {
         var self = this;
-
-        self.groupId = ${object.id}
-
-
+        self.changeVirtualDeviceName = true;
+        self.origGroupName = "";
+        self.groupId = ${object.id};
         self.isNew = ko.observable(${isNewGroup?c});
-
-
         /*self.executeDeviceRefresh = true;
         self.regaId = "2082"*/
         self.executeDeviceRefresh = ${executeDeviceRefresh?c};
         self.regaId = "${addedRegaId}"
 
         self.virtualDeviceSerialNumber = ko.observable("");
+        self.groupDeviceName = ko.observable("");
+
         if(self.isNew())
         {
             self.groupName = ko.observable(translateKey('newGroupInputField'));
@@ -201,8 +210,14 @@
             self.groupName = ko.observable("${object.name}");
             var temp = createVirtualDeviceSerialNumber(${object.id});
             self.virtualDeviceSerialNumber(temp);
-        }
 
+            <#if object.groupDeviceName??>
+              self.groupDeviceName("${object.groupDeviceName}");
+            <#else>
+               self.groupDeviceName("");
+            </#if>
+        }
+        self.device = DeviceList.getDeviceByAddress(self.virtualDeviceSerialNumber());
         self.isSingleOperationForbidden = ${isSingleOperationForbidden}
         self.isSaving = ko.observable(false);
 
@@ -288,7 +303,6 @@
         self.operateVirtualDevice = function()
         {
             var virtualDevice = new GroupDevice(self.virtualDeviceSerialNumber(),self.virtualDeviceSerialNumber(), "VirtualDevice");
-            console.log(virtualDevice);
             var url = '/pages/tabs/control/devices.htm?sid='+SessionId;
             var pb = "{}";
             var opt =
@@ -403,24 +417,85 @@
         new Ajax.Request(url,opt);
     }
 
-    refreshDeviceFromHomematic = function(serialNumberParam) {
-        homematic("Device.listAllDetail", null, function(deviceList) {
-            jQuery.each(deviceList, function (index, data) {
-                if (data !== null)
-                {
-                    var serialNumber = data["address"];
-                    if(serialNumber == serialNumberParam)
-                    {
-                        DeviceList.beginUpdateDevice(data["id"]);
-                    }
-                }
+    adaptChannelNames = function(id, groupName) {
+      var device = DeviceList.getDevice(id);
+      if (device) {
+        jQuery.each(device.channels, function(index, channel) {
+          homematic("Channel.setName", {id: channel.id, name: groupName+":"+(index+1)}, function(result) {
+            if (index+1 == device.channels.length) {
+              DeviceList.beginUpdateDevice(id, function() {
+                conInfo("Device list actualized");
+              });
+            }
+          });
+        });
+      }
+    };
 
-            });
+    refreshDeviceFromHomematic = function(serialNumberParam, groupName) {
+        var changeVirtualDevice = viewModel.changeVirtualDeviceName;
+        homematic("Device.getReGaIDByAddress",{address:serialNumberParam}, function(result) {
+            if(changeVirtualDevice) {
+              // Set Name of the device
+              homematic("Device.setName", {id: result, name: groupName}, function() {
+                  homematic("Device.listAllDetail", null, function(deviceList) {
+                      jQuery.each(deviceList, function (index, data) {
+                          if (data !== null)
+                          {
+                              var serialNumber = data["address"];
+                              if(serialNumber == serialNumberParam)
+                              {
+                                DeviceList.beginUpdateDevice(data["id"], function() {
+                                  //change the channelnames of the new created device
+                                   adaptChannelNames(data["id"], groupName) ;
+                                });
+                              }
+                          }
+                      });
+                      window.setTimeout(function() {
+                        WebUI.enter(CreateGroupPage);
+                        homematic("system.saveObjectModel", {}, function () {
+                          conInfo("ObjectModel saved");
+                        });
+                      }, 2500);
+
+                  });
+              });
+            }
         });
     }
 
-    SaveGroup = function()
+    SaveGroup = function() {
+      var showMessage = false;
+
+      if ( !viewModel.isNew() && (viewModel.origGroupName != "") && (viewModel.origGroupName != viewModel.groupDeviceName())) {
+        showMessage = true;
+      }
+
+      if (viewModel.device && !viewModel.isNew()) {
+        jQuery.each(viewModel.device.channels, function(index,channel) {
+          if (((viewModel.origGroupName != "")) && viewModel.origGroupName + ":" + (index + 1) != channel.name) {
+            showMessage = true;
+          }
+        });
+      }
+      if (showMessage) {
+        new YesNoDialog(translateKey("dialogRenameVirtualGroupDeviceTitle"), translateKey("dialogVirtualGroupDeviceContent"), function(result) {
+          viewModel.changeVirtualDeviceName = false;
+          if (result == YesNoDialog.RESULT_YES)
+          {
+            viewModel.changeVirtualDeviceName = true;
+          }
+          _SaveGroup();
+
+        });
+      } else { _SaveGroup();}
+    }
+
+    _SaveGroup = function()
     {
+
+        var self = this;
         viewModel.isSaving(true);
         var url = '/pages/jpages/group/save?sid='+SessionId;
 
@@ -432,6 +507,7 @@
         data.forbidSingleOperation = viewModel.isSingleOperationForbidden;
         data.assignedDevicesIds = new Array();
         data.isNewGroup = viewModel.isNew();
+        data.groupDeviceName = jQuery("#group_name").val() + " " + viewModel.virtualDeviceSerialNumber();
 
         ko.utils.arrayForEach(viewModel.assignedDevices(), function(item) {
             data.assignedDevicesIds.push(item.id);
@@ -449,17 +525,25 @@
                 {
                     if(viewModel.executeDeviceRefresh && viewModel.regaId != "")
                     {
+                        //iseDevices.setOperateGroupOnly(jQuery("#allowOnlyGroupOperation").prop("checked"));
                         iseDevices.setReadyConfig(viewModel.regaId);
                     }
+
                     ko.utils.arrayForEach(viewModel.assignedDevices(), function(item) {
-                        SetOperateGroupOnly(item, jQuery("#allowOnlyGroupOperation").prop("checked"));
+                       if(item.device != undefined) {
+                        //SetOperateGroupOnly(item, jQuery("#allowOnlyGroupOperation").prop("checked"));
+                       }
                         if(item.getConfigPending())
                         {
                             viewModel.devicesInConfigPending.push(item);
                         }
                     });
+
                     ko.utils.arrayForEach(viewModel.assignableDevices(), function(item) {
-                        SetOperateGroupOnly(item, false)
+                        if(item.device != undefined) {
+                          //SetOperateGroupOnly(item, false)
+                        }
+
                         if(item.getConfigPending())
                         {
                             viewModel.devicesInConfigPending.push(item);
@@ -468,8 +552,15 @@
 
                     if(viewModel.isNew()) {
                         var virtualSerialNumber = createVirtualDeviceSerialNumber(response.content);
-                        refreshDeviceFromHomematic(virtualSerialNumber);
+                        refreshDeviceFromHomematic(virtualSerialNumber, viewModel.groupName() + " " + virtualSerialNumber);
                     }
+
+                    if ((! viewModel.isNew()) && (self.groupNameHasChanged)){
+                        var virtualSerialNumber = viewModel.virtualDeviceSerialNumber();
+                        var newGroupName = (viewModel.changeVirtualDeviceName) ? jQuery("#group_name").val() + " " + virtualSerialNumber : viewModel.groupDeviceName();
+                        refreshDeviceFromHomematic(virtualSerialNumber, newGroupName);
+                      }
+
                     viewModel.isSaving(false);
                     ReturnToListAfterSave(viewModel.devicesInConfigPending());
                 }
@@ -488,11 +579,12 @@
     }
 
     SetOperateGroupOnly = function(item, mode) {
-      homematic("Device.setOperateGroupOnly", {id:item.device.id, mode: mode}, function() {
-        DeviceList.devices[item.device.id].isOperateGroupOnly = mode;
+      homematic("Device.setOperateGroupOnly", {id:item.device.id, mode: mode}, function(result) {
+        if (DeviceList.devices[item.device.id]) {
+          DeviceList.devices[item.device.id].isOperateGroupOnly = mode;
+        }
       });
     }
-
 
   var s = "";
   s += "<table cellspacing='8'>";

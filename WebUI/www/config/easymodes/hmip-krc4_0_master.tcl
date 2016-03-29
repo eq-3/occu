@@ -28,11 +28,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+    set chn 0
     set prn 1
     set param LOCAL_RESET_DISABLED
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableLocalResetDisable}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $prn]</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
   append HTML_PARAMS(separate_1) "</table>"

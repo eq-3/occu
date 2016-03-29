@@ -21,10 +21,9 @@
         <td class="tBodyCell" data-bind="text: name"></td>
         <td class="tBodyCell" data-bind="text: groupTypeLabel"></td>
 
-
-
         <td class="tBodyCell" data-bind="text: virtualDeviceSerialNumber"></td>
-        <td class="tBodyCell" data-bind="text: virtualDeviceName"></td>
+        <!--<td class="tBodyCell" data-bind="text: virtualDeviceName"></td>-->
+        <td class="tBodyCell" data-bind="text: groupDeviceName"></td>
         <td class="tBodyCell"  style="width: 0; padding-left: 10px; padding-right: 10px">
             <input style="margin: 5px; display: block" type="button" name="btnVirtualDeviceStateAndOperating" value="btnVirtualDeviceStateAndOperating" class="StdButton CLASS04907" data-bind="click: operateVirtualDevice"/>
             <input style="margin: 5px; display: block" type="button" name="btnVirtualDeviceConfiguration" value="btnVirtualDeviceConfiguration" class="StdButton CLASS04907" data-bind="click: configureVirtualDevice"/>
@@ -86,7 +85,7 @@
         });
 
         self.groupList = ko.observableArray();
-        <#list objectList as group>self.groupList.push(new VirtualGroup("${group.getId()}", "${group.getName()}", translateKey("${group.getGroupDefinition().getGroupType().getLabel()}"), "${group.getGroupDefinition().getGroupType().getId()}"));</#list>
+        <#list objectList as group>self.groupList.push(new VirtualGroup("${group.getId()}", "${group.getName()}",  translateKey("${group.getGroupDefinition().getGroupType().getLabel()}"), "${group.getGroupDefinition().getGroupType().getId()}"));</#list>
 
         self.groupListHeaders = new Array();
         self.groupListHeaders.push(new Header(translateKey('groupID'), 'id'));
@@ -120,7 +119,9 @@
             var url = '/pages/jpages/group/edit?sid='+SessionId;
             var data = new Object();
             data.groupId = group.id;
+            data.groupDeviceName = (group.device != undefined) ? group.device.getName() : "";
             var pb = JSON.stringify(data);
+
             var opt = {
                 postBody: pb,
                 onComplete: function(t)
@@ -211,7 +212,6 @@
 
         self.checkConfigurePending = function(group)
         {
-            console.log(group);
             var data = '{ "virtualDeviceSerialNumber" : "' + group.virtualDeviceSerialNumber + '" }';
             CreateCPPopup("/pages/jpages/group/configureDevices", data);
         };

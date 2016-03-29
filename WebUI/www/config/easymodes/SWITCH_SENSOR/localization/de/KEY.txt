@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird der Alarm f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Alarm erst nach Ablauf dieser Zeit eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird der Alarm ausgeschaltet. Ist eine Ausschaltverz&ouml;gerungszeit eingestellt, so wird der Alarm erst nach Ablauf dieser Zeit ausgeschaltet</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird der Alarm je nach aktuellem Zustand f&uuml;r die eingestellte Zeit ein- oder ausgeschaltet (Togglefunktion). Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Alarm erst nach Ablauf dieser Zeit eingeschaltet.</span><br/><br/>",
+

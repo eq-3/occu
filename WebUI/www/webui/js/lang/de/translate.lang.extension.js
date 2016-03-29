@@ -884,6 +884,17 @@ jQuery.extend(true,langJSON, {
     "stringTableButtonLock" : "Lokale Bediensperre",
     "stringTableGlobalButtonLock" : "Globale Bediensperre",
 
+    "stringTableTxThresholdPercent" : "N%F6tige %C4nderung in %25 f%FCr erneute Statusmitteilung",
+    "stringTableLux" : "Helligkeit",
+
+    "optionBaud300" : "300 Baud",
+    "optionBaud600" : "600 Baud",
+    "optionBaud1200" : "1200 Baud",
+    "optionBaud2400" : "2400 Baud",
+    "optionBaud4800" : "4800 Baud",
+    "optionBaud9600" : "9600 Baud",
+    "optionBaud19200" : "19200 Baud",
+
     "theEnd" : ""
 
 

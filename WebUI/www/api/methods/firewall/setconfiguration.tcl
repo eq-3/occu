@@ -25,19 +25,19 @@ Firewall_loadConfiguration
 set Firewall_IPS $ips
 
 foreach _service $services {
-	array set service $_service
-	
-	set name   $service(name)
-	set access $service(access)
-	
-	if { [info exists Firewall_SERVICES($name)] } then {
-		array set knownService  $Firewall_SERVICES($name)
-		set knownService(ACCESS) $access
-		set Firewall_SERVICES($name) [array get knownService]
-		array_clear knownService
-	}
-	
-	array_clear service
+  array set service $_service
+  
+  set name   $service(name)
+  set access $service(access)
+  
+  if { [info exists Firewall_SERVICES($name)] } then {
+    array set knownService  $Firewall_SERVICES($name)
+    set knownService(ACCESS) $access
+    set Firewall_SERVICES($name) [array get knownService]
+    array_clear knownService
+  }
+  
+  array_clear service
 }
 
 Firewall_saveConfiguration

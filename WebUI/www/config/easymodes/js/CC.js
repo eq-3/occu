@@ -307,7 +307,7 @@ self.isEcoLTComfort = function(elmName) {
   errorMsg = translateKey("errorComfortLTEco"),
   fadeOutTime = 3500;
 
-  console.log("comfValIsValid: " + comfValIsValid + " - ecoValIsValid: " + ecoValIsValid);
+  //console.log("comfValIsValid: " + comfValIsValid + " - ecoValIsValid: " + ecoValIsValid);
 
   switch (elmType) {
     case "COMFORT":

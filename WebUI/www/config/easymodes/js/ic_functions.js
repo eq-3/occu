@@ -1180,26 +1180,77 @@ WEATHER_change_thres = function(id)
 
 WEATHER_check_dir = function()
 {
+  var newSensor = "HM-WDS100-C6-O-2";
+  var sensorTypeDesc = jQuery("#weatherSensor").val();
+  var selectedWindDirection = jQuery("[name=\"subset_1_1\"]").prop("selectedIndex");
+
   var ein;
   var aus;
   //1 
-  
-  if (switch_dir) 
-  {  
-    //ein = document.createTextNode("Einschaltschwelle");
-    ein = document.createTextNode(translateKey("upperStormThreshold"));
-    //aus = document.createTextNode("Ausschaltschwelle");
-    aus = document.createTextNode(translateKey("lowerStormThreshold"));
+
+  if (sensorTypeDesc != newSensor) {
+    if (switch_dir) {
+      //ein = document.createTextNode("Einschaltschwelle");
+      ein = document.createTextNode(translateKey("upperStormThreshold"));
+      //aus = document.createTextNode("Ausschaltschwelle");
+      aus = document.createTextNode(translateKey("lowerStormThreshold"));
+    }
+    else {
+      //ein = document.createTextNode("Ausschaltschwelle");
+      ein = document.createTextNode(translateKey("lowerStormThreshold"));
+      //aus = document.createTextNode("Einschaltschwelle");
+      aus = document.createTextNode(translateKey("upperStormThreshold"));
+    }
+  } else {
+    // new Sensor
+    var ctON = jQuery("[name=\"SHORT_CT_ON\"]").prop("selectedIndex");
+    var ctOFF = jQuery("[name=\"SHORT_CT_OFF\"]").prop("selectedIndex");
+
+    if (switch_dir == 1) {
+      //ein = document.createTextNode("Einschaltschwelle");
+      ein = document.createTextNode(translateKey("upperStormThreshold"));
+      //aus = document.createTextNode("Ausschaltschwelle");
+      aus = document.createTextNode(translateKey("lowerStormThreshold"));
+      $('ein').replaceChild(ein, $('ein').firstChild);
+      $('aus').replaceChild(aus, $('aus').firstChild);
+      return;
+    }
+    else if (switch_dir == 0) {
+      //ein = document.createTextNode("Ausschaltschwelle");
+      ein = document.createTextNode(translateKey("lowerStormThreshold"));
+      //aus = document.createTextNode("Einschaltschwelle");
+      aus = document.createTextNode(translateKey("upperStormThreshold"));
+      $('ein').replaceChild(ein, $('ein').firstChild);
+      $('aus').replaceChild(aus, $('aus').firstChild);
+      return;
+    }
+
+    // X GE LO = 0
+    // X GE HI = 1
+    // X LT LO = 2
+    // X LT HI = 3
+    // Starker Wind EIN, schwacher Wind AUS / oder EIN nur bei starkem Wind, nicht aus (2. Profil)
+    if ((ctON == 2 && ctOFF == 1) || (ctON == 1 && ctOFF == 1)) {
+      //ein = document.createTextNode("Einschaltschwelle");
+      ein = document.createTextNode(translateKey("upperStormThreshold"));
+      //aus = document.createTextNode("Ausschaltschwelle");
+      aus = document.createTextNode(translateKey("lowerStormThreshold"));
+    }
+    // Starker Wind AUS, schwacher Wind EIN
+    if (ctON == 1 && ctOFF == 2) {
+      //ein = document.createTextNode("Ausschaltschwelle");
+      ein = document.createTextNode(translateKey("lowerStormThreshold"));
+      //aus = document.createTextNode("Einschaltschwelle");
+      aus = document.createTextNode(translateKey("upperStormThreshold"));
+    }
+
+
+
   }
-  else 
-  {
-    //ein = document.createTextNode("Ausschaltschwelle");
-    ein = document.createTextNode(translateKey("lowerStormThreshold"));
-    //aus = document.createTextNode("Einschaltschwelle");
-    aus = document.createTextNode(translateKey("upperStormThreshold"));
-  }  
-  $('ein').replaceChild(ein, $('ein').firstChild);
-  $('aus').replaceChild(aus, $('aus').firstChild);
+  try {
+    $('ein').replaceChild(ein, $('ein').firstChild);
+    $('aus').replaceChild(aus, $('aus').firstChild);
+  } catch (e) {}
 };
 
 WEATHER_check_expert = function()

@@ -1,6 +1,8 @@
 jQuery.extend(true,langJSON, {
   "en" : {
-
+    "HM-WDS30-OT2-SM" : "Wireless Temperature Difference Sensor",
+    "HM-Sec-Sir-WM" : "Wireless Indoor Siren",
+    "HM-Sen-LI-O" : "Wireless Light Intensity Sensor, outdoor",
     "HM-OU-CFM-TW" : "MP3 Wireless Chime with light flash, battery",
     "HM-ES-PMSw1-SM" : "Wireless Switch actuator with power measurement",
     "OLIGO.smart.iq.HM" : "Wireless Dimming Actuator",

@@ -29,25 +29,25 @@ set result "\{"
 set first 1
 append result "\"services\": \["
 foreach id [array names Firewall_SERVICES] {
-	array set service $Firewall_SERVICES($id)
-	
-	if { 0 == $first } then { append result "," } else { set first 0 }
-	
-	append result "\{"
-	append result "\"id\": [json_toString $id],"
-	append result "\"access\": [json_toString $service(ACCESS)],"
-	
-	set _first 1
-	append result "\"ports\": \["
-	foreach port $service(PORTS) {
-		if { 0 == $_first } then { append result "," } else { set _first 0 }
-		append result $port
-	}
-	append result "\]"
-	
-	append result "\}"
-	
-	array_clear service
+  array set service $Firewall_SERVICES($id)
+  
+  if { 0 == $first } then { append result "," } else { set first 0 }
+  
+  append result "\{"
+  append result "\"id\": [json_toString $id],"
+  append result "\"access\": [json_toString $service(ACCESS)],"
+  
+  set _first 1
+  append result "\"ports\": \["
+  foreach port $service(PORTS) {
+    if { 0 == $_first } then { append result "," } else { set _first 0 }
+    append result $port
+  }
+  append result "\]"
+  
+  append result "\}"
+  
+  array_clear service
 }
 append result "\],"
 
@@ -56,8 +56,8 @@ append result "\],"
 set first 1
 append result "\"ips\": \["
 foreach ip $Firewall_IPS {
-	if { 0 == $first } then { append result "," } else { set first 0 }
-	append result [json_toString $ip]
+  if { 0 == $first } then { append result "," } else { set first 0 }
+  append result [json_toString $ip]
 }
 append result "\]"
 

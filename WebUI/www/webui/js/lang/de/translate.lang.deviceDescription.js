@@ -1,5 +1,8 @@
 jQuery.extend(true,langJSON, {
   "de" : {
+    "HM-WDS30-OT2-SM" : "Funk-Temperaturdifferenz-Sensor",
+    "HM-Sec-Sir-WM" : "Funk-Innensirene",
+    "HM-Sen-LI-O" : "Funk-Helligkeitsensor f%FCr Au%DFenmontage",
     "HM-OU-CFM-TW" : "MP3 Funk-Gong mit Signalleuchte f%FCr Batteriebetrieb",
     "HM-ES-PMSw1-SM" : "Funk-Schaltaktor mit Leistungsmessung",
     "OLIGO.smart.iq.HM" : "Funk-Dimmaktor",

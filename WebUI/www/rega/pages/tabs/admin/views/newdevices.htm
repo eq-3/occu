@@ -751,102 +751,6 @@ CreateSysVarEnergyCounterScript = function(chn) {
 // Current/Gas EnergyCounter
 CreateSysVarEnergyCounterScriptIGL = function (chn, channelType, sensorType) {
 
-
-  //Standard EnergyCounter
-  CreateSysVarEnergyCounterScript = function(chn) {
-
-    var sysVarIds = getSysVarEnergyCounterIds(chn);
-    var sysVarId = sysVarIds.counterId,
-      sysVarOldValId = sysVarIds.tmpCounterId;
-
-    var updateScript =
-    "object chn = dom.GetObject('"+chn.id+"');\n" +
-    "object oBoot = chn.DPByControl('POWERMETER.BOOT');\n" +
-    "object oEnergyCounter = chn.DPByControl('POWERMETER.ENERGY_COUNTER');\n" +
-    "object oSysVarEnergyCounter = dom.GetObject('"+sysVarId+"');\n" +
-    "object oSysVarEnergyCounterOldVal = dom.GetObject('"+sysVarOldValId+"');\n" +
-
-    "boolean bootFlag = oBoot.Value();\n" +
-    "real devVal = oEnergyCounter.Value();\n" +
-    "real devValMax = oEnergyCounter.ValueMax();\n" +
-    "real oldDevVal = oSysVarEnergyCounterOldVal.Value();\n" +
-    "real diffVal = 0.0;\n" +
-    "real sysVarVal = oSysVarEnergyCounter.Value();\n" +
-    "integer tmp_devVal = (devVal.ToString().ToFloat() * 100000).ToInteger();\n" +
-    "integer tmp_oldDevVal = (oldDevVal.ToString().ToFloat() * 100000).ToInteger();\n" +
-
-
-    "if (oldDevVal <= 0) {\n" +
-      "oSysVarEnergyCounterOldVal.State(devVal);\n" +
-      "oSysVarEnergyCounter.State(devVal);\n" +
-    "} else {\n" +
-      "if ( ( bootFlag == true ) && ( tmp_devVal < tmp_oldDevVal ) ) {\n" +
-        "diffVal = devVal;\n" +
-      "} else {\n" +
-        "if (tmp_devVal >= tmp_oldDevVal) {\n" +
-          "diffVal = devVal - oldDevVal;\n" +
-        "}\n"+
-
-        "if ((tmp_devVal > 0) && (tmp_devVal < tmp_oldDevVal)) {\n" +
-          "diffVal = (devVal + devValMax) - oldDevVal;\n" +
-        "}\n" +
-      "}\n"+
-      "if (devVal > 0) {\n" +
-        "oSysVarEnergyCounterOldVal.State(devVal);\n" +
-      "}\n" +
-      "oSysVarEnergyCounter.State(sysVarVal + diffVal);\n" +
-    "}\n";
-
-    var script =
-    "var sysVarId = '"+sysVarId+"';\n" +
-    "var channel = dom.GetObject('"+chn.id+"');\n" +
-    "var channelId = channel.ID();\n" +
-    "var paramId = channel.DPByControl('POWERMETER.ENERGY_COUNTER').ID();\n"+
-    "var _script = \""+updateScript+"\";\n" +
-
-    "var DP_VALUE_CHECK_UPDATE = 13;"+
-
-    "var programs = dom.GetObject(ID_PROGRAMS);"+
-    "var program  = dom.CreateObject(OT_PROGRAM);"+
-    "program.Name('prgEnergyCounter_"+ chn.id +"_"+chn.address+"');"+
-    "program.Internal(true);"+
-    "programs.Add(program.ID());"+
-
-
-    "var rule = program.Rule();"+
-    "rule.RuleOperatorType(OPERATOR_NONE);"+
-
-    "var condition = rule.RuleAddCondition();"+
-    "condition.CndOperatorType(OPERATOR_NONE);"+
-
-    "var singleCondition = condition.CndAddSingle();"+
-    "singleCondition.OperatorType(OPERATOR_NONE);"+
-    "singleCondition.ConditionType(9);"+
-    "singleCondition.ConditionType2(DP_VALUE_CHECK_UPDATE);"+
-    "singleCondition.LeftValType(ivtObjectId);"+
-    "singleCondition.LeftVal(paramId);"+
-    "singleCondition.RightVal1ValType(ivtFloat);"+
-    "singleCondition.RightVal1(0.0);"+
-    "singleCondition.RightVal2ValType(ivtFloat);"+
-    "singleCondition.RightVal2(0.0);"+
-
-    "singleCondition.ConditionChannel(channelId);"+
-
-    "var destination = rule.RuleDestination();"+
-    "var action = destination.DestAddSingle();"+
-    "action.DestinationParam(ivtString);"+
-    "action.DestinationValueType(ivtString);"+
-    "action.DestinationValue(_script);"+
-
-    "program.Active(true);"+
-    "dom.RTUpdate(0);";
-
-    homematic("ReGa.runScript", {"script": script});
-  };
-
-  // channelType = POWERMETER or POWERMETER_IGS
-  // sensorType = "GAS" or "CURRENT"
-
   var sysVarIds = (sensorType == "CURRENT") ? getSysVarEnergyCounterIds(chn) : getSysVarEnergyCounterGasIds(chn);
   var sysVarId = sysVarIds.counterId,
     sysVarOldValId = sysVarIds.tmpCounterId;
@@ -1068,6 +972,87 @@ CreateSysVarEnergyCounterScriptPSM = function(chn) {
   homematic("ReGa.runScript", {"script": script});
 };
 
+//POWERMETER_IEC1
+CreateSysVarEnergyCounterScriptIEC = function(chn) {
+
+  var sysVarIds = getSysVarEnergyCounterIECIds(chn);
+  var sysVarId = sysVarIds.counterId,
+    sysVarOldValId = sysVarIds.tmpCounterId;
+
+  var updateScript =
+  "object chn = dom.GetObject('"+chn.id+"');\n" +
+  "object oEnergyCounter = chn.DPByControl('POWERMETER_IEC1.IEC_ENERGY_COUNTER');\n" +
+  "object oSysVarEnergyCounter = dom.GetObject('"+sysVarId+"');\n" +
+  "object oSysVarEnergyCounterOldVal = dom.GetObject('"+sysVarOldValId+"');\n" +
+
+  "real devVal = oEnergyCounter.Value();\n" +
+  "real devValMax = oEnergyCounter.ValueMax();\n" +
+  "real oldDevVal = oSysVarEnergyCounterOldVal.Value();\n" +
+  "real diffVal = 0.0;\n" +
+  "real sysVarVal = oSysVarEnergyCounter.Value();\n" +
+  "integer tmp_devVal = (devVal.ToString().ToFloat() * 1000).ToInteger();\n" +
+  "integer tmp_oldDevVal = (oldDevVal.ToString().ToFloat() * 1000).ToInteger();\n" +
+
+
+    "!overFlow is true\n" +
+    "if (tmp_oldDevVal > tmp_devVal) {\n" +
+      "! An device overflow has occured\n" +
+      "diffVal = (devVal + devValMax) - oldDevVal;\n" +
+    "} else {\n" +
+      "! This is the normal condition\n" +
+      "diffVal = devVal - oldDevVal;\n" +
+    "}\n" +
+
+  "oSysVarEnergyCounterOldVal.State(devVal);\n" +
+  "oSysVarEnergyCounter.State(sysVarVal + diffVal);\n";
+
+  var script =
+  "var sysVarId = '"+sysVarId+"';\n" +
+  "var channel = dom.GetObject('"+chn.id+"');\n" +
+  "var channelId = channel.ID();\n" +
+  "var paramId = channel.DPByControl('POWERMETER_IEC1.IEC_ENERGY_COUNTER').ID();\n"+
+  "var _script = \""+updateScript+"\";\n" +
+
+  "var DP_VALUE_CHECK_UPDATE = 13;"+
+
+  "var programs = dom.GetObject(ID_PROGRAMS);"+
+  "var program  = dom.CreateObject(OT_PROGRAM);"+
+  "program.Name('prgEnergyCounterIEC_"+ chn.id +"_"+chn.address+"');"+
+  "program.Internal(true);"+
+  "programs.Add(program.ID());"+
+
+
+  "var rule = program.Rule();"+
+  "rule.RuleOperatorType(OPERATOR_NONE);"+
+
+  "var condition = rule.RuleAddCondition();"+
+  "condition.CndOperatorType(OPERATOR_NONE);"+
+
+  "var singleCondition = condition.CndAddSingle();"+
+  "singleCondition.OperatorType(OPERATOR_NONE);"+
+  "singleCondition.ConditionType(9);"+
+  "singleCondition.ConditionType2(DP_VALUE_CHECK_UPDATE);"+
+  "singleCondition.LeftValType(ivtObjectId);"+
+  "singleCondition.LeftVal(paramId);"+
+  "singleCondition.RightVal1ValType(ivtFloat);"+
+  "singleCondition.RightVal1(0.0);"+
+  "singleCondition.RightVal2ValType(ivtFloat);"+
+  "singleCondition.RightVal2(0.0);"+
+
+  "singleCondition.ConditionChannel(channelId);"+
+
+  "var destination = rule.RuleDestination();"+
+  "var action = destination.DestAddSingle();"+
+  "action.DestinationParam(ivtString);"+
+  "action.DestinationValueType(ivtString);"+
+  "action.DestinationValue(_script);"+
+
+  "program.Active(true);"+
+  "dom.RTUpdate(0);";
+
+  homematic("ReGa.runScript", {"script": script});
+};
+
 getSysVarEnergyCounterIds = function (chn) {
   return {"counterId": "svEnergyCounter_" + chn.id + "_" + chn.address, "tmpCounterId": "svEnergyCounterOldVal_" + chn.id};
 };
@@ -1076,12 +1061,16 @@ getSysVarEnergyCounterGasIds = function (chn) {
   return {"counterId": "svEnergyCounterGas_" + chn.id + "_" + chn.address, "tmpCounterId": "svEnergyCounterGasOldVal_" + chn.id};
 };
 
+getSysVarEnergyCounterIECIds = function (chn) {
+  return {"counterId": "svEnergyCounterIEC_" + chn.id + "_" + chn.address, "tmpCounterId": "svEnergyCounterIECOldVal_" + chn.id};
+};
+
 CheckAndCreateSysVarEnergyCounter = function(chn) {
   var sysVarIds = getSysVarEnergyCounterIds(chn);
   var SysVarEnergyCounterId = sysVarIds.counterId,
    SysVarEnergyCounterOldValId = sysVarIds.tmpCounterId;
 
-   oSysVarEnergyCounter = homematic("SysVar.get", {"id" : SysVarEnergyCounterId});
+  var oSysVarEnergyCounter = homematic("SysVar.get", {"id" : SysVarEnergyCounterId});
 
   // SysVar svEnergyCounter_xxxx doesn´t exist
   if (!oSysVarEnergyCounter) {
@@ -1099,12 +1088,37 @@ CheckAndCreateSysVarEnergyCounter = function(chn) {
   }
 };
 
+//***
+
+CheckAndCreateSysVarEnergyCounterIEC = function(chn) {
+  conInfo("CheckAndCreateSysVarEnergyCounterIEC");
+  var sysVarIds = getSysVarEnergyCounterIECIds(chn);
+  var SysVarEnergyCounterId = sysVarIds.counterId,
+   SysVarEnergyCounterOldValId = sysVarIds.tmpCounterId;
+
+   var oSysVarEnergyCounter = homematic("SysVar.get", {"id" : SysVarEnergyCounterId});
+
+  // SysVar svEnergyCounter_xxxx doesn´t exist
+  if (!oSysVarEnergyCounter) {
+    conInfo("create system variable: " + SysVarEnergyCounterId);
+    oSysVarEnergyCounter = CreateSysVarEnergyCounter(SysVarEnergyCounterId, "float");
+    CreateSysVarEnergyCounter(SysVarEnergyCounterOldValId, "float");
+    conInfo("CreateSysVarEnergyCounterScriptIEC");
+    CreateSysVarEnergyCounterScriptIEC(chn);
+    readEnergyCounter = true; // sorgt dafür, daß die Liste der EnergyCounter aktualisiert wird.
+  }
+};
+
+//***
+
+
 CheckAndCreateSysVarEnergyCounterIGL = function (chn, channelType) {
+  conInfo("CheckAndCreateSysVarEnergyCounterIGL");
   var sysVarIds = getSysVarEnergyCounterIds(chn);
   var SysVarEnergyCounterId = sysVarIds.counterId,
     SysVarEnergyCounterOldValId = sysVarIds.tmpCounterId;
 
-  oSysVarEnergyCounter = homematic("SysVar.get", {"id": SysVarEnergyCounterId});
+  var oSysVarEnergyCounter = homematic("SysVar.get", {"id": SysVarEnergyCounterId});
 
   // SysVar svEnergyCounter_xxxx doesn´t exist
   if (!oSysVarEnergyCounter) {
@@ -1120,11 +1134,12 @@ CheckAndCreateSysVarEnergyCounterIGL = function (chn, channelType) {
 };
 
 CheckAndCreateSysVarEnergyCounterGasIGL = function (chn, channelType) {
+  conInfo("CheckAndCreateSysVarEnergyCounterGasIGL");
   var sysVarIds = getSysVarEnergyCounterGasIds(chn);
   var SysVarEnergyCounterId = sysVarIds.counterId,
     SysVarEnergyCounterOldValId = sysVarIds.tmpCounterId;
 
-  oSysVarEnergyCounterGas = homematic("SysVar.get", {"id": SysVarEnergyCounterId});
+  var oSysVarEnergyCounterGas = homematic("SysVar.get", {"id": SysVarEnergyCounterId});
 
   // SysVar svEnergyCounterGas_xxxx doesn´t exist
   if (!oSysVarEnergyCounterGas) {
@@ -1142,6 +1157,7 @@ CheckAndCreateSysVarEnergyCounterGasIGL = function (chn, channelType) {
 CheckIfDevHasPowerMeter = function (devId) {
   var oDevice = homematic("Device.get", {"id": devId});
   if (oDevice) {
+    ShowWaitAnim();
     jQuery.each(oDevice.channels, function (index, channel) {
       var channelType = GetChannelType(channel);
       if (channelType == "POWERMETER") {
@@ -1156,7 +1172,15 @@ CheckIfDevHasPowerMeter = function (devId) {
       if (channelType == "ENERGIE_METER_TRANSMITTER") {
         CheckAndCreateSysVarEnergyCounter(channel);
       }
+
+      if (channelType == "POWERMETER_IEC1") {
+        // IEC Sensor 1
+        CheckAndCreateSysVarEnergyCounterIGL(channel, channelType);
+        CheckAndCreateSysVarEnergyCounterGasIGL(channel, channelType);
+        CheckAndCreateSysVarEnergyCounterIEC(channel);
+      }
     });
+    HideWaitAnim();
   }
 };
 

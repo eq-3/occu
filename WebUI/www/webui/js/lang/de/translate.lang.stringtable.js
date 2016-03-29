@@ -581,8 +581,6 @@ jQuery.extend(true,langJSON, {
     "stringTableClimateControlRTTransceiverActualTemp" : "Ist-Temperatur",
     "stringTableClimateControlRTTransceiverSetTemperature" : "Soll-Temperatur",
 
-    "stringTableSwitchStatusInfoMinDelay" : "Statusmeldungen Mindestverz%F6gerung",
-
     "stringTablePowerMeterAveraging" : "Mittelwertbildung &uuml;ber",
     "stringTablePowerMeterTxMinDelay" : "Statusmeldung Mindestverz&ouml;gerung",
     "stringTablePowerMeterTxThresholdPower" : "TX Differenz Leistung",
@@ -590,7 +588,9 @@ jQuery.extend(true,langJSON, {
     "stringTablePowerMeterTxThresholdVoltage" : "TX Differenz Spannung",
     "stringTablePowerMeterTxThresholdFrequency" : "TX Differenz Frequenz",
     "stringTablePowerMeterEnergyCounter": "Energie-Z%E4hler Ger%E4t",
+    "stringTablePowerMeterIECEnergyCounter": "IEC Energie-Z%E4hler Ger%E4t",
     "stringTablePowerMeterPower": "Leistung",
+    "stringTableIECPowerMeterPower": "IEC Leistung",
     "stringTablePowerMeterCurrent": "Strom",
     "stringTablePowerMeterVoltage": "Spannung",
     "stringTablePowerMeterFrequency": "Frequenz",

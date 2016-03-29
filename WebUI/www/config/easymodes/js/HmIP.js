@@ -16,7 +16,7 @@ HmIpTest = function(sTime) {
       result = parseInt(tmpVal),
       remainder = (tmpVal * 100) % 100; // Nachkommastellen
 
-    console.log("val: " + val + " - result: " + result + " - remainder: " + remainder);
+    //console.log("val: " + val + " - result: " + result + " - remainder: " + remainder);
 
   });
 };

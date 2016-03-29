@@ -64,6 +64,7 @@
                     MessageBox.show("Delete firmware", translateString(response.content));
                     WebUI.reload();
                     var ok = homematic("Interface.refreshDeployedDeviceFirmwareList", {"interface": "BidCos-RF"});
+                    homematic("Interface.refreshDeployedDeviceFirmwareList", {"interface": "HmIP-RF"});
                     conInfo("Delete firmware - refreshing device firmware list: " + ok);
                 }
               }
@@ -107,6 +108,7 @@
                 MessageBox.show(translateKey("dialogInfo"),translateString(result), null,"320", "80");
                 WebUI.reload();
                 var ok = homematic("Interface.refreshDeployedDeviceFirmwareList", {"interface": "BidCos-RF"});
+                homematic("Interface.refreshDeployedDeviceFirmwareList", {"interface": "HmIP-RF"});
                 conInfo("Add firmware - refreshing device firmware list: " + ok);
               },
               error: function(error) {
@@ -147,6 +149,7 @@
             MessageBox.show(translateKey("dialogInfo"),translateString(response), null,"320", "80");
             WebUI.reload();
             var ok = homematic("Interface.refreshDeployedDeviceFirmwareList", {"interface": "BidCos-RF"});
+            homematic("Interface.refreshDeployedDeviceFirmwareList", {"interface": "HmIP-RF"});
             conInfo("Add firmware - refreshing device firmware list: " + ok);
           }
         };

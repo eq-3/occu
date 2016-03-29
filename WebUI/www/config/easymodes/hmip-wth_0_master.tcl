@@ -29,39 +29,40 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+    set chn 0
     set prn 1
     set param CYCLIC_INFO_MSG
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableCyclicInfoMsg}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getTextField $param $ps($param) $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
     incr prn
     set param CYCLIC_INFO_MSG_DIS
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableCyclicInfoMsgDis}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getTextField $param $ps($param) $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
     incr prn
     set param DAYLIGHT_SAVINGS_TIME
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableDST}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $prn]</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
     incr prn
     set param GLOBAL_BUTTON_LOCK
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableGlobalButtonLock}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $prn]</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
     incr prn
     set param LOCAL_RESET_DISABLED
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableLocalResetDisable}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $prn]</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
   append HTML_PARAMS(separate_1) "</table>"

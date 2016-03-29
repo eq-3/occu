@@ -111,20 +111,23 @@ function ::dcCreate()
     var CN_DOOR_SENSOR     = "DOOR_SENSOR.";
     var CN_RHS             = "RHS.";
     var CN_THERMO          = "TEMP.";
-    var CN_DIGITAL_ANALOG_OUTPUT            = "DIGITAL_ANALOG_OUTPUT.";
+    var CN_DIGITAL_ANALOG_OUTPUT      = "DIGITAL_ANALOG_OUTPUT.";
     var CN_CAPACITIVE_FILLING_SENSOR  = "CAPACITIVE_FILLING_LEVEL_SENSOR.";
     var CN_DANGER          = "DANGER.";
     var CN_WIN_SC          = "WIN_SC.";
-    var CN_WIN_SC_SENSOR          = "WIN_SC_SENSOR.";
-    var CN_WIN_SC_SECURE          = "WIN_SC_SECURE.";
-    var CN_HEATING_CONTROL          = "HEATING_CONTROL.";
+    var CN_WIN_SC_SENSOR   = "WIN_SC_SENSOR.";
+    var CN_WIN_SC_SECURE   = "WIN_SC_SECURE.";
+    var CN_HEATING_CONTROL = "HEATING_CONTROL.";
     var CN_HEATING_CONTROL_HMIP     = "HEATING_CONTROL_HMIP.";
-    var CN_POWERMETER          = "POWERMETER.";
-    var CN_POWERMETER_IGL          = "POWERMETER_IGL.";
-    var CN_POWERMETER_PSM          = "POWERMETER_PSM.";
-    var CN_RGBW_COLOR          = "RGBW_COLOR.";
-    var CN_RGBW_AUTOMATIC          = "RGBW_AUTOMATIC.";
-    var CN_SMOKE_DETECTOR          = "SMOKE_DETECTOR.";
+    var CN_POWERMETER      = "POWERMETER.";
+    var CN_POWERMETER_IGL  = "POWERMETER_IGL.";
+    var CN_POWERMETER_PSM  = "POWERMETER_PSM.";
+    var CN_POWERMETER_IEC1  = "POWERMETER_IEC1.";
+    var CN_POWERMETER_IEC2  = "POWERMETER_IEC2.";
+    var CN_RGBW_COLOR      = "RGBW_COLOR.";
+    var CN_RGBW_AUTOMATIC  = "RGBW_AUTOMATIC.";
+    var CN_SMOKE_DETECTOR  = "SMOKE_DETECTOR.";
+    var CN_ARMING          = "ARMING.";
 
     var CN_EVENT_INTERFACE = "EVENT_INTERFACE.";
     var CN_NOT_ACTIVE = "CHANNEL_NOT_ACTIVE";
@@ -313,7 +316,7 @@ function ::dcCreate()
 
 
          !# DANGER
-          bIsControl = ( sControlName.Find(CN_DANGER) > -1 );     !#### Attention: workaround!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+          bIsControl = ( sControlName.Find(CN_DANGER) > -1 );
           if( bIsControl && (sLastControlName!=CN_DANGER) )
           {
             WriteLine( "<script>conInfo('Control DANGER-Sensor found.');</script>" );
@@ -402,6 +405,26 @@ function ::dcCreate()
             Call("/esp/controls/powermeter.fn::CreatePowermeterPSMControl()");
           }
 
+          !# POWERMETER_IEC1
+          bIsControl = ( sControlName.Find(CN_POWERMETER_IEC1) > -1 );
+          if( bIsControl && (sLastControlName != CN_POWERMETER_IEC1) )
+          {
+            WriteLine( "<script>conInfo('Control CN_POWERMETER_IEC1 found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_POWERMETER_IEC1;
+            Call("/esp/controls/powermeter.fn::CreatePowermeterIECControl()");
+          }
+
+          !# POWERMETER_IEC2
+          bIsControl = ( sControlName.Find(CN_POWERMETER_IEC2) > -1 );
+          if( bIsControl && (sLastControlName != CN_POWERMETER_IEC2) )
+          {
+            WriteLine( "<script>conInfo('Control CN_POWERMETER_IEC2 found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_POWERMETER_IEC2;
+            Call("/esp/controls/powermeter.fn::CreatePowermeterIECControl()");
+          }
+
           !# CN_RGBW_COLOR
           bIsControl = ( sControlName.Find(CN_RGBW_COLOR) > -1 );
           if( bIsControl && (sLastControlName != CN_RGBW_COLOR) )
@@ -431,6 +454,17 @@ function ::dcCreate()
             sLastControlName = CN_SMOKE_DETECTOR;
             Call("/esp/controls/smokedetector.fn::CreateSmokeDetectorControl()");
           }
+
+          !# CN_ARMING
+          bIsControl = ( sControlName.Find(CN_ARMING) > -1 );
+          if( bIsControl && (sLastControlName != CN_ARMING) )
+          {
+            WriteLine( "<script>conInfo('Control CN_ARMING found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_ARMING;
+            Call("/esp/controls/alarmsirene.fn::CreateAlarmArmingControl()");
+          }
+
 
           !# EVENT_INTERFACE
           bIsControl = ( sControlName.Find(CN_EVENT_INTERFACE) > -1 );
@@ -645,12 +679,16 @@ function ::CreateUnknown()
               string sShortKey = oDP.HSSID();
               if( (oDP.ValueType() == ivtInteger) && (oDP.ValueSubType() == istEnum) )
               {
-                ! TODO Current HmIP devices don`t work properly with web.webGetValueFromList
-                ! Therefore for testing reasons this is deactivated
-                !sLongKey = sLongKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
-                sLongKey = sLongKey#"="#value;
-                !sShortKey = sShortKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
-                sShortKey = sShortKey#"="#value;
+                ! Current HmIP devices don`t work properly with web.webGetValueFromList
+                ! Therefore this is deactivated
+                if ( (oEName.Find("HmIP-RF.") == -1) ) {
+                 sLongKey = sLongKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
+                 sShortKey = sShortKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
+                } else {
+                  sLongKey = sLongKey#"="#value;
+                  sShortKey = sShortKey#"="#value;
+                }
+
                 bHideValue = true;
               }
               if( (oDP.ValueType() == ivtBinary ) && ((oDP.ValueSubType() == istGeneric)||(oDP.ValueSubType() == istBool)||(oDP.ValueSubType() == istSwitch)) )

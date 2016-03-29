@@ -183,6 +183,48 @@ jQuery.extend(true,langJSON, {
     "lblTeachInKEY" : "KEY",
     "lblIntrusionAlarm" : "Burglar alarm",
 
+    "stringTableTxThresholdPercent" : "Necessary change in %25 for state report",
+    "stringTableLux" : "Brightness",
+
+    "actionAlarmControlLblOff" : "Alarm<br />off",
+    "actionAlarmControlLblExtern" : "External<br />Alarm",
+    "actionAlarmControlLblIntern" : "Internal<br />Alarm",
+    "actionAlarmControlLblBlocked" : "Alarm<br />blocked",
+
+    "lblSabotageUnknown" : "Sabotage contact:<br >State unknown",
+    "lblSabotage_0" : "Sabotage contact: OK",
+    "lblSabotage_1" : "Sabotage contact<br />Open",
+
+    "stringTableSoundID" : "Alarm signal",
+    "stringTableLowbatSignal" : "Low battery signal",
+    "stringTableAlarmTimeMax" : "Max. alarm duration",
+
+    "stringTableAcousticMultiDelayArm" : "tr Akustische Signale für verzögerte Scharfschaltungtr mehrfach ausgeben",
+    "stringTableAcousticAllSensArm" : "tr Akustisches Signal für Scharfschaltung extern",
+    "stringTableAcousticAllsensDelayArm" : "tr Akustisches Signal für Scharfschaltverzögerung extern",
+    "stringTableAcousticExtsensArm" : "tr Akustisches Signal für Scharfschaltung intern",
+    "stringTableAcousticExtsensDelayArm" : "tr Akustisches Signal für Scharfschaltverzögerung intern",
+    "stringTableAcousticDisarm" : "tr Akustisches Signal für Unscharfschaltung",
+
+    "stringTableOpticMultiDelayArm" : "tr Optische Signale für verzögerte Scharfschaltungtr mehrfach ausgeben",
+    "stringTableOpticAllSensArm" : "tr Optisches Signal für Scharfschaltung extern",
+    "stringTableOpticAllSensDelayArm" : "tr Optisches Signal für Scharfschaltverzögerung extern",
+    "stringTableOpticExtsensArm" : "tr Optisches Signal für Scharfschaltung intern",
+    "stringTableOpticExtsensDelayArm" : "tr Optisches Signal für Scharfschaltverzögerung intern",
+    "stringTableOpticDisarm" : "tr Optisches Signal für Unscharfschaltung",
+
+    "lblIndoorSirenInternAlarm" : "tr Interner Alarm",
+    "lblIndoorSirenExternAlarm" : "tr Externer Alarm",
+    "lblIndoorSirenPanicAlarm" : "tr Panik Alarm",
+    "lblIndoorSirenArming" : "tr Scharfschalten",
+
+    "optionBaud300" : "300 baud",
+    "optionBaud600" : "600 baud",
+    "optionBaud1200" : "1200 baud",
+    "optionBaud2400" : "2400 baud",
+    "optionBaud4800" : "4800 baud",
+    "optionBaud9600" : "9600 baud",
+    "optionBaud19200" : "19200 baud",
     "noMoreKeys" : ""
   }
 });

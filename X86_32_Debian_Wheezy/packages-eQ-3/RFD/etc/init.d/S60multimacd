@@ -29,7 +29,15 @@ check_bo(){
 	avrprog --bo
 	fi
 }
-
+check_rf_address(){
+        sed 1q /sys/module/plat_eq3ccu2/parameters/radio_mac > /var/log/rf_address
+        /bin/eq3configcmd read-default-rf-address -l 0 -v -h -f /dev/mxs_auart_raw.0 | grep -q -F -f /var/log/rf_address
+        if ! [ 0 -eq $? ];
+        then
+        avrprog --bo
+        fi
+        rm /var/log/rf_address
+}
 init() {
 	export TZ=`cat /etc/config/TZ`
 	
@@ -51,6 +59,7 @@ start() {
 	init
 	if [ ! -e $PIDFILE ] ; then
 		check_bo
+                check_rf_address
 		update
 	else
 		echo "Skipping coprocessor update because multimacd is running."

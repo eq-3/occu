@@ -875,6 +875,17 @@ jQuery.extend(true, langJSON, {
     "stringTableButtonLock" : "Local operating lock",
     "stringTableGlobalButtonLock" : "Global operating lock",
 
+    "stringTableTxThresholdPercent" : "Necessary change in %25 for state report",
+    "stringTableLux" : "Brightness",
+
+    "optionBaud300" : "300 baud",
+    "optionBaud600" : "600 baud",
+    "optionBaud1200" : "1200 baud",
+    "optionBaud2400" : "2400 baud",
+    "optionBaud4800" : "4800 baud",
+    "optionBaud9600" : "9600 baud",
+    "optionBaud19200" : "19200 baud",
+
     "theEnd" : ""
   }
 });

@@ -59,6 +59,7 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeTEMPERATURE": "Sicaklik",
     "diagramValueTypeHUMIDITY": "Havadaki nem",
     "diagramValueTypeBRIGHTNESS": "Aydinlik",
+    "diagramValueTypeLUX": "Aydinlik",
     "diagramValueTypeWIND_SPEED": "R%FCzgar hizi",
     "diagramValueTypeWIND_DIRECTION": "R%FCzgar y%F6n%FC",
     "diagramValueTypeRAINING": "Yagmur durumu",

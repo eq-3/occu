@@ -70,22 +70,27 @@ ALARMACTUATOR|ON_TIME	${stringTableAlarmActuatorOnTime}
 ALARMACTUATOR|SABOTAGE_MSG	${stringTableAlarmActuatorSabotageMsg}
 ALARMACTUATOR|STATE=FALSE	${stringTableAlarmActuatorStateFalse}
 ALARMACTUATOR|STATE=TRUE	${stringTableAlarmActuatorStateTrue}
-ALL_LEDS	${stringTableAllLEDs}
-ANALOG_INPUT	${stringTableAnalog}
-ANALOG_OUTPUT	${stringTableAnalog}
-BACKLIGHT_AT_CHARGE	${stringTableBackLightAtCharge}
-BACKLIGHT_AT_KEYSTROKE	${stringTableBackLightAtKeystroke}
-BACKLIGHT_AT_MOTION	${stringTableBackLightAtMotion}
-BACKLIGHT_ON_TIME	${stringTableBackLightOnTime}
-BAT_DEFECT_LIMIT	${stringTableBatDefectLimit}
+
+ARMING|ACOUSTIC_MULTI_DELAY_ARM	${stringTableAcousticMultiDelayArm}
+ARMING|ACOUSTIC_ALLSENS_ARM	${stringTableAcousticAllSensArm}
+ARMING|ACOUSTIC_ALLSENS_DELAY_ARM	${stringTableAcousticAllsensDelayArm}
+ARMING|ACOUSTIC_EXTSENS_ARM	${stringTableAcousticExtsensArm}
+ARMING|ACOUSTIC_EXTSENS_DELAY_ARM	${stringTableAcousticExtsensDelayArm}
+ARMING|ACOUSTIC_DISARM	${stringTableAcousticDisarm}
+
+ARMING|OPTIC_MULTI_DELAY_ARM	${stringTableOpticMultiDelayArm}
+ARMING|OPTIC_ALLSENS_ARM	${stringTableOpticAllSensArm}
+ARMING|OPTIC_ALLSENS_DELAY_ARM	${stringTableOpticAllSensDelayArm}
+ARMING|OPTIC_EXTSENS_ARM	${stringTableOpticExtsensArm}
+ARMING|OPTIC_EXTSENS_DELAY_ARM	${stringTableOpticExtsensDelayArm}
+ARMING|OPTIC_DISARM	${stringTableOpticDisarm}
+
 BLIND	${stringTableBlindTitle}
 BLIND|CHANGE_OVER_DELAY	${stringTableBlindChangeOverDelay}
 BLIND|LEVEL	${stringTableBlindLevel}
 BLIND|REFERENCE_RUNNING_TIME_BOTTOM_TOP	${stringTableBlindRunnintTimeBottomTop}
 BLIND|REFERENCE_RUNNING_TIME_TOP_BOTTOM	${stringTableBlindRunningTimeTopBottom}
 BLIND|REFERENCE_RUN_COUNTER	${stringTableBlindRefRunCounter}
-BLIND|STATUSINFO_MINDELAY	${stringTableStatusInfoMinDelay}
-BLIND|STATUSINFO_RANDOM	${stringTableStatusInfoRandom}
 BLIND|STOP	${stringTableBlindStop}
 BURST_RX	${stringTableBurstRX}
 BUTTON_LOCK	${stringTableButtonLock}
@@ -229,10 +234,8 @@ DIMMER|RAMP_TIME	${stringTableDimmerRampTime}
 DIMMER|RAMP_STOP	${stringTableDimmerRampStop}
 DIMMER|REDUCE_LEVEL	${stringTableDimmerReduceLevel}
 DIMMER|REDUCE_TEMP_LEVEL	${stringTableDimmerReduceTempLevel}
-DIMMER|STATUSINFO_MINDELAY	${stringTableDimmerStatusInfoMinDelay}
 DIMMER|ERROR_OVERLOAD	${stringTableDimmerErrorOverload}
 DIMMER|ERROR_OVERHEAT	${stringTableDimmerErrorOverheat}
-DIMMER|STATUSINFO_RANDOM	${stringTableStatusInfoRandom}
 DIMMER|ERROR_REDUCED	${stringTableDimmerErrorReduced}
 DISPLAY|ALARM_COUNT	${stringTableDisplayAlarmCount}
 DISPLAY|ARROW_DOWN	${stringTableDisplayArrowDown}
@@ -536,6 +539,16 @@ POWERMETER_IGL|GAS_ENERGY_COUNTER	${stringTablePowerMeterEnergyCounterGas}
 POWERMETER_IGL|POWER	${stringTablePowerMeterPower}
 POWERMETER_IGL|GAS_POWER	${stringTableGasConsumption}
 
+POWERMETER_IEC1|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
+POWERMETER_IEC1|GAS_ENERGY_COUNTER	${stringTablePowerMeterEnergyCounterGas}
+POWERMETER_IEC1|POWER	${stringTablePowerMeterPower}
+POWERMETER_IEC1|GAS_POWER	${stringTableGasConsumption}
+POWERMETER_IEC1|IEC_ENERGY_COUNTER	${stringTablePowerMeterIECEnergyCounter}
+POWERMETER_IEC1|IEC_POWER	${stringTableIECPowerMeterPower}
+
+POWERMETER_IEC2|IEC_ENERGY_COUNTER	${stringTablePowerMeterIECEnergyCounter}
+POWERMETER_IEC2|IEC_POWER	${stringTableIECPowerMeterPower}
+
 POWERUP_OFF	${stringTablePowerUpOFF} 
 POWERUP_ON	${stringTablePowerUpON}
 PRESS_LONG	${stringTableKeyPressLong}
@@ -734,8 +747,6 @@ SWITCH|AES_ACTIVE	${stringTableSwitchAESActive}
 SWITCH|ON_TIME	${stringTableSwitchOnTime}
 SWITCH|STATE=FALSE	${stringTableSwitchStateFalse}
 SWITCH|STATE=TRUE	${stringTableSwitchStateTrue}
-SWITCH|STATUSINFO_MINDELAY	${stringTableSwitchStatusInfoMinDelay}
-SWITCH|STATUSINFO_RANDOM	${stringTableStatusInfoRandom}
 SWITCH|STATUSINFO_RANDOM_A	${stringTableStatusInfoRandomA}
 SWITCH_INTERFACE	${stringTableSwitchInterfaceTitle}
 SWITCH_INTERFACE|PRESS	${stringTableSwitchInterfacePress}
@@ -772,6 +783,7 @@ TILT_SENSOR|STATE=FALSE	${stringTableTiltSensorStateFalse}
 TILT_SENSOR|STATE=TRUE	 ${stringTableTiltSensorStateTrue}
 TRANSMIT_TRY_MAX	${stringTableTransmitTryMax}
 TRANSMIT_DEV_TRY_MAX	${stringTableTransmitDevTryMax}
+TX_THRESHOLD_POWER	${stringTablePowerMeterTxThresholdPower}
 USER_COLOR	${stringTableSubmit}
 USER_PROGRAM	${stringTableSubmit}
 VENT_CLOSED	${stringTableVentClosed}
@@ -783,7 +795,6 @@ VIRTUAL_DIMMER|ERROR_OVERHEAT	${stringTableDimmerErrorOverheat}
 VIRTUAL_DIMMER|ERROR_REDUCED	${stringTableDimmerErrorReduced}
 VIRTUAL_DIMMER|LOGIC_COMBINATION	${stringTableLogicCombination}
 VIRTUAL_DIMMER|POWERUP_ACTION	${stringTableVirtualDimmerPowerUpAction}
-VIRTUAL_DIMMER|STATUSINFO_MINDELAY	${stringTableVirtualDimmerStatusInfoMinDelay}
 VIRTUAL_DIMMER|STATUSINFO_RANDOM	${stringTableVirtualDimmerStatusInfoRandom}
 VIRTUAL_DIMMER|RAMP_STOP	${stringTableDimmerRampStop}
 VIRTUAL_KEY	${stringTableVirtualKeyTitle}
@@ -864,9 +875,18 @@ WINMATIC|STOP	${stringTableWinMaticStop}
 WINMATIC|TILT_MAX	${stringTableWinMaticTiltMax}
 
 
+ALL_LEDS	${stringTableAllLEDs}
+ANALOG_INPUT	${stringTableAnalog}
+ANALOG_OUTPUT	${stringTableAnalog}
 AUTO_MODE	${stringTableClimateControlRTTransceiverAutoMode}
 ACTUAL_HUMIDITY	${stringTableWeatherHumidity}
 ACTUAL_TEMPERATURE	${stringTableClimateControlRTTransceiverActualTemp}
+ALARMTIME_MAX	${stringTableAlarmTimeMax}
+BACKLIGHT_AT_CHARGE	${stringTableBackLightAtCharge}
+BACKLIGHT_AT_KEYSTROKE	${stringTableBackLightAtKeystroke}
+BACKLIGHT_AT_MOTION	${stringTableBackLightAtMotion}
+BACKLIGHT_ON_TIME	${stringTableBackLightOnTime}
+BAT_DEFECT_LIMIT	${stringTableBatDefectLimit}
 BATTERY_STATE	${stringTableClimateControlRTTransceiverBatteryState}
 BOOST_MODE	${stringTableClimateControlRTTransceiverBoostMode}
 BOOST_MODE=FALSE	${stringTableBoostModeFalse}
@@ -913,7 +933,11 @@ LOGIC_COMBINATION	${stringTableLogicCombination}
 LOWBAT_REPORTING	${stringTableLowbatReporting}
 LOWBAT_REPORTING=FALSE	${stringTableLowbatReportingFalse}
 LOWBAT_REPORTING=TRUE	${stringTableLowbatReportingTrue}
+LOWBAT_SIGNAL	${stringTableLowbatSignal}
 LOWERING_MODE	${stringTableClimateControlRTTransceiverLoweringMode}
+
+LUX	${stringTableLux}
+
 MANU_MODE	${stringTableClimateControlRTTransceiverManuMode}
 NOT_USED	${stringTableNotUsed}
 OLD_LEVEL	${stringTableDimmerOldLevel}
@@ -962,15 +986,23 @@ SET_TEMPERATURE	${stringTableClimateControlRTTransceiverSetTemperature}
 
 SECTION	${stringTableSection}
 
+SOUND_ID	${stringTableSoundID}
+
 STATE=FALSE	${stringTableStateFalse}
 STATE=TRUE	${stringTableStateTrue}
 
+STATUSINFO_MINDELAY	${stringTableStatusInfoMinDelay}
+STATUSINFO_RANDOM	${stringTableStatusInfoRandom}
+
+TX_MINDELAY	${stringTableTxMinDelay}
 TX_MINDELAY_UNIT	${stringTableTxMinDelayUnit}
 TX_MINDELAY_UNIT=100MS	${optionUnit100MS}
 TX_MINDELAY_UNIT=S	${optionUnitS}
 TX_MINDELAY_UNIT=M	${optionUnitM}
 TX_MINDELAY_UNIT=H	${optionUnitH}
 TX_MINDELAY_VALUE	${stringTableTxMinDelayValue}
+
+TX_THRESHOLD_PERCENT	${stringTableTxThresholdPercent}
 
 UNREACH=FALSE	${stringTableUnreachFalse}
 UNREACH=TRUE	${stringTableUnreachTrue}

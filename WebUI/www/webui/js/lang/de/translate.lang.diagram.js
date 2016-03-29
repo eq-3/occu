@@ -60,6 +60,7 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeTEMPERATURE": "Temperatur",
     "diagramValueTypeHUMIDITY": "Luftfeuchtigkeit",
     "diagramValueTypeBRIGHTNESS": "Helligkeit",
+    "diagramValueTypeLUX": "Helligkeit",
     "diagramValueTypeWIND_SPEED": "Windgeschwindigkeit",
     "diagramValueTypeWIND_DIRECTION": "Windrichtung",
     "diagramValueTypeRAINING": "Regenzustand",

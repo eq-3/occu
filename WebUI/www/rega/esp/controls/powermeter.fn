@@ -1,8 +1,7 @@
 !POWERMETER
 function ::CreatePowermeterControl() {
-  object oDevice = dom.GetObject(cObj.Device());
-  ! TODO Kanalnummer nach Kanaltype ermitteln und nicht fix 2 annehmen, auch wenn es im Moment passt
-  object oChannel = dom.GetObject(oDevice.Channels().GetAt(2));
+
+  object oChannel = dom.GetObject(chnId);
   string chAddress = oChannel.Address();
 
   object oEnergyCounter = cObj.DPByControl("POWERMETER.ENERGY_COUNTER");
@@ -222,9 +221,8 @@ function ::CreatePowermeterControl() {
 
 !POWERMETER_IGL
 function ::CreatePowermeterIGLControl() {
-  object oDevice = dom.GetObject(cObj.Device());
-  ! TODO Kanalnummer nach Kanaltype ermitteln und nicht fix 1 annehmen, auch wenn es im Moment passt
-  object oChannel = dom.GetObject(oDevice.Channels().GetAt(1));
+
+  object oChannel = dom.GetObject(chnId);
   string chAddress = oChannel.Address();
   string chType = oChannel.ChannelType();
 
@@ -377,11 +375,10 @@ function ::CreatePowermeterIGLControl() {
   return;
 }
 
-POWERMETER_PSM
+! POWERMETER_PSM
 function ::CreatePowermeterPSMControl() {
-  object oDevice = dom.GetObject(cObj.Device());
-  ! TODO Kanalnummer nach Kanaltype ermitteln und nicht fix 6 annehmen, auch wenn es im Moment passt
-  object oChannel = dom.GetObject(oDevice.Channels().GetAt(6));
+
+  object oChannel = dom.GetObject(chnId);
   string chAddress = oChannel.Address();
 
   object oEnergyCounter = cObj.DPByControl("POWERMETER_PSM.ENERGY_COUNTER");
@@ -594,6 +591,218 @@ function ::CreatePowermeterPSMControl() {
     WriteLine("opts.idFrequency = "#oFrequency.ID()#";");
     WriteLine("opts.valFrequency = "#oFrequency.Value()#";");
     WriteLine("opts.unitFrequency = '"#oFrequency.ValueUnit()#"';");
+
+    WriteLine("ipm"#chnId#" = new isePowerMeter("#chnId#",opts);");
+
+  WriteLine("</script>")
+
+  return;
+}
+
+!CN_POWERMETER_IEC
+function ::CreatePowermeterIECControl() {
+
+  !# sLastControlName = POWERMETER_IEC1 or POWERMETER_IEC2
+
+  !object oDevice = dom.GetObject(cObj.Device());
+  ! object oChannel = dom.GetObject(oDevice.Channels().GetAt(1));
+
+  object oChannel = dom.GetObject(chnId);
+  string chAddress = oChannel.Address();
+  string chType = oChannel.ChannelType();
+
+  if (sLastControlName == "POWERMETER_IEC1.") {
+    object oEnergyCounter = cObj.DPByControl("POWERMETER_IEC1.ENERGY_COUNTER");
+    object oEnergyCounterGas = cObj.DPByControl("POWERMETER_IEC1.GAS_ENERGY_COUNTER");
+    object oPower = cObj.DPByControl("POWERMETER_IEC1.POWER");
+    object oPowerGas = cObj.DPByControl("POWERMETER_IEC1.GAS_POWER");
+    object oBoot = cObj.DPByControl("POWERMETER_IEC1.BOOT");
+
+    object oEnergyCounterIEC = cObj.DPByControl("POWERMETER_IEC1.IEC_ENERGY_COUNTER");
+    object oPowerIEC = cObj.DPByControl("POWERMETER_IEC1.IEC_POWER");
+  }
+
+  if (sLastControlName == "POWERMETER_IEC2.") {
+    ! WriteLine( "<script>jQuery('#dpc"#chnId#"').parent().hide();</script>" );
+    object oEnergyCounterIEC = cObj.DPByControl("POWERMETER_IEC2.IEC_ENERGY_COUNTER");
+    object oPowerIEC = cObj.DPByControl("POWERMETER_IEC2.IEC_POWER");
+  }
+
+  object sysVarEnergyCounter = dom.GetObject("svEnergyCounter_"#chnId#"_"#chAddress);
+
+  ! Determine the name of the interface
+  integer iFaceID = cObj.Interface();
+  object oIface = dom.GetObject(iFaceID);
+  string sInterface = oIface.Name();
+
+  var energyCounter = "unknown";
+
+  if (sysVarEnergyCounter) {
+    energyCounter = sysVarEnergyCounter.Value().ToString(2);
+  }
+
+
+  ! html
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table>");
+      if (sLastControlName == "POWERMETER_IEC1.") {
+        ! EnergyCounter
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>${lblInfoStatusControlEnergyCounter}</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span id='"#chnId#"EnergyCounter'>&nbsp;</span><br/><span id='"#chnId#"EnergyCostCCU' class='hidden'></span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+
+         ! Reset EnergyCounter
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px' id='"#chnId#"resetEnergyCounter' >Reset</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+      ! Energy counter of the device
+      WriteLine("<tr name='"#chnId#"channelActiv' class='hidden'>");
+        WriteLine("<td>");
+          WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>${lblInfoStatusControlDevice}</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+
+                      if (sLastControlName != "POWERMETER_IEC2.") {
+                        WriteLine("<div name='"#chnId#"sensor' id='"#chnId#"CounterDevice' class ='hidden'><span>"#oEnergyCounter.Value().ToString(2)#"</span>&nbsp;<span name='"#chnId#"EnergyCostDeviceUnit' class='hidden'>"#oEnergyCounter.ValueUnit()#"</span><br/><span id='"#chnId#"EnergyCostDevice' class='hidden'></span></div>");
+                        WriteLine("<div name='"#chnId#"sensorGas' id='"#chnId#"CounterDeviceGas' class='hidden'><span>"#oEnergyCounterGas.Value().ToString(2)#"</span>&nbsp;<span name='"#chnId#"EnergyCostDeviceUnit' class='hidden'>"#oEnergyCounterGas.ValueUnit()#"</span><br/><span id='"#chnId#"EnergyCostDeviceGas' class='hidden'></span></div>");
+                      }
+                      WriteLine("<div name='"#chnId#"sensorIEC' id='"#chnId#"CounterDeviceIEC' class ='hidden'><span>"#oEnergyCounterIEC.Value().ToString(2)#"</span>&nbsp;<span name='"#chnId#"EnergyCostDeviceUnit' class='hidden'>"#oEnergyCounterIEC.ValueUnit()#"</span><br/><span id='"#chnId#"EnergyCostDeviceIEC' class='hidden'></span></div>");
+
+
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+    ! Power
+      WriteLine("<tr name='"#chnId#"channelActiv' class='hidden'>");
+        WriteLine("<td>");
+          WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                  WriteLine("<tr>");
+                    WriteLine("<td>");
+                      WriteLine("<span name='"#chnId#"sensor' class='hidden'>${lblInfoStatusControlPower}</span>");
+                      WriteLine("<span name='"#chnId#"sensorIEC' class='hidden'>${lblInfoStatusControlPower}</span>");
+                      WriteLine("<span name='"#chnId#"sensorGas' class='hidden'>${lblInfoStatusControlGas}</span>");
+                    WriteLine("</td>");
+                  WriteLine("</tr>");
+                  WriteLine("<tr>");
+                    WriteLine("<td>");
+                      if (sLastControlName != "POWERMETER_IEC2.") {
+                        WriteLine("<div name='"#chnId#"sensor' class='hidden'><span id='"#chnId#"Power'>"#oPower.Value().ToString(2)#" "#oPower.ValueUnit()#"</span></div>");
+                        WriteLine("<div name='"#chnId#"sensorGas' class='hidden'><span id='"#chnId#"PowerGas'>"#oPowerGas.Value().ToString(2)#" m<sup>3</span></div>");
+                      }
+                      WriteLine("<div name='"#chnId#"sensorIEC' class='hidden'><span id='"#chnId#"PowerIEC'>"#oPowerIEC.Value().ToString(2)#" "#oPowerIEC.ValueUnit()#"</span></div>");
+
+                    WriteLine("</td>");
+                  WriteLine("</tr>");
+                WriteLine("</table>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+  WriteLine("<tr id='"#chnId#"channelNotActiv' class='hidden'>");
+    WriteLine("<td>");
+      WriteLine("<table class=\"ControlBtnInfo\">");
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<div>");
+              WriteLine("${controlChannelHasNoFunction}");
+            WriteLine("</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+  ! end html
+
+
+  WriteLine("<script type='text/javascript'>");
+    WriteLine("var opts = {};");
+
+    WriteLine("var chType =  '"#sLastControlName#"';");
+    WriteLine("opts.chType =  chType.split('.')[0];");
+    WriteLine("opts.iface = '"#sInterface#"';");
+    WriteLine("opts.chAddress = '"#chAddress#"';");
+
+    if (sLastControlName == "POWERMETER_IEC1.") {
+      WriteLine("opts.bootFlag = "#oBoot.Value()#";");
+      WriteLine("opts.idEnergyCounter = "#oEnergyCounter.ID()#";");
+      WriteLine("opts.valEnergyCounter = "#oEnergyCounter.Value()#";");
+      WriteLine("opts.unitEnergyCounter = '"#oEnergyCounter.ValueUnit()#"';");
+      WriteLine("opts.maxValEnergyCounter = '"#oEnergyCounter.ValueMax()#"';");
+      WriteLine("opts.minValEnergyCounter = '"#oEnergyCounter.ValueMin()#"';");
+      WriteLine("opts.idPower = "#oPower.ID()#";");
+      WriteLine("opts.valPower = "#oPower.Value()#";");
+      WriteLine("opts.unitPower = '"#oPower.ValueUnit()#"';");
+      WriteLine("opts.idEnergyCounterGas = "#oEnergyCounterGas.ID()#";");
+      WriteLine("opts.valEnergyCounterGas = "#oEnergyCounterGas.Value()#";");
+      WriteLine("opts.unitEnergyCounterGas = '"#oEnergyCounterGas.ValueUnit()#"';");
+      WriteLine("opts.maxValEnergyCounterGas = '"#oEnergyCounterGas.ValueMax()#"';");
+      WriteLine("opts.minValEnergyCounterGas = '"#oEnergyCounterGas.ValueMin()#"';");
+      WriteLine("opts.idPowerGas = "#oPowerGas.ID()#";");
+      WriteLine("opts.valPowerGas = "#oPowerGas.Value()#";");
+      WriteLine("opts.unitPowerGas = '"#oPowerGas.ValueUnit()#"';");
+    }
+    if (oEnergyCounterIEC) {
+      WriteLine("opts.idEnergyCounterIEC = "#oEnergyCounterIEC.ID()#";");
+      WriteLine("opts.valEnergyCounterIEC = "#oEnergyCounterIEC.Value()#";");
+      WriteLine("opts.unitEnergyCounterIEC = '"#oEnergyCounterIEC.ValueUnit()#"';");
+    }
+
+    if (oPowerIEC) {
+      WriteLine("opts.idPowerIEC = "#oPowerIEC.ID()#";");
+      WriteLine("opts.valPowerIEC = "#oPowerIEC.Value()#";");
+      WriteLine("opts.unitPowerIEC = '"#oPowerIEC.ValueUnit()#"';");
+    }
 
     WriteLine("ipm"#chnId#" = new isePowerMeter("#chnId#",opts);");
 

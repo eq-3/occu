@@ -1,0 +1,69 @@
+function ::CreateAlarmArmingControl()
+{
+  object objState = cObj.DPByControl("ARMING.ARMSTATE");
+  object oSabotage = cObj.DPByControl("DEVICE.SABOTAGE");
+  object oLowBat = cObj.DPByControl("DEVICE.LOWBAT");
+  string lblSabotage = "${lblSabotageUnknown}";
+  string lblLowBat = "${stringTableAccuStateUnkown}";
+
+  if( oLowBat) {
+    boolean lowBat = oLowBat.Value();
+    if(lowBat == true) {
+      lblLowBat = "${stringTableBatteryEmpty}";
+    } else {
+      lblLowBat = "${stringTableBatteryOk}";
+    }
+  }
+  if( oSabotage ) {
+    lblSabotage = "${lblSabotage_"#oSabotage.Value()#"}";
+  }
+
+  if( objState )
+  {
+    WriteLine("<td>");
+      WriteLine("<table>");
+
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            !Alarm Aus");
+            WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02551 j_translate'>${actionAlarmControlLblOff}</div>");
+          WriteLine("</td>");
+
+          WriteLine("<td>");
+            !Extern scharf
+            WriteLine("<div id='"#chnId#"Extern' class='ControlBtnOff CLASS02551 j_translate'>${actionAlarmControlLblExtern}</div>");
+          WriteLine("</td>");
+
+          WriteLine("<td>");
+            !Intern scharf
+            WriteLine("<div id='"#chnId#"Intern' class='ControlBtnOff CLASS02551 j_translate'>${actionAlarmControlLblIntern}</div>");
+          WriteLine("</td>");
+
+          WriteLine("<td>");
+            !Alarm blocked
+            WriteLine("<div id='"#chnId#"Blocked' class='ControlBtnOff CLASS02551 j_translate' style='border-style: solid; border-color: #89989b; cursor:default'>${actionAlarmControlLblBlocked}</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+        WriteLine("<tr style='height:40px; color:black'><td colspan='4'><hr></td></tr>");
+
+        WriteLine("<tr class='ControlBtnInfo' style='height:40px;'>");
+
+          WriteLine("<td id='"#chnId#"lowBat' colspan='2'>");
+            WriteLine(lblLowBat);
+          WriteLine("</td>");
+
+          WriteLine("<td id='"#chnId#"sabotage' colspan='2'>");
+            WriteLine(lblSabotage);
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+      WriteLine("</table>");
+    WriteLine("</td>");
+
+      WriteLine("<script type='text/javascript'>");
+        WriteLine("ibs"#cObj.ID()#" = new iseArmAlarmSiren("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#");");
+      WriteLine("</script>");
+  }
+  return;
+}
