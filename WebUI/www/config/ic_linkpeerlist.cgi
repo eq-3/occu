@@ -23,6 +23,15 @@ set keypair 0
 
 #Interface des übergebenen channels
 set ch_iface ""
+set hmIPIdentifier "HmIP-RF"
+
+proc isHmIP {} {
+  global iface hmIPIdentifier
+  if {$iface == $hmIPIdentifier} {
+    return "true"
+  }
+  return "false"
+}
 
 proc put_page {} {
 
@@ -119,24 +128,29 @@ proc isWired {senderDescription receiverDescription} {
 # Some internal links are visible within the page "Direct device connections"
 proc isInExceptionList {senderType receiverType} {
 
-  array set exceptions {
-    CONDITION_POWER SWITCH
-    CONDITION_CURRENT SWITCH
-    CONDITION_VOLTAGE SWITCH
-    CONDITION_FREQUENCY SWITCH
-  }
+  if {[isHmIP] == "true"} {return 1}
 
-  foreach val [array names exceptions] {
-   if {$senderType == $val && $receiverType == $exceptions($val)} {
-    #puts "$val : $exceptions($val)<br/>"
-    return 1
-   }
+  # show all internal keys of HmIP devices
+  set comment {
+    array set exceptions {
+      CONDITION_POWER SWITCH
+      CONDITION_CURRENT SWITCH
+      CONDITION_VOLTAGE SWITCH
+      CONDITION_FREQUENCY SWITCH
+    }
+
+    foreach val [array names exceptions] {
+      if {$senderType == $val && $receiverType == $exceptions($val)} {
+      #puts "$val : $exceptions($val)<br/>"
+      return 1
+      }
+    }
   }
   return 0
 }
 
 proc put_tablebody {} {
-  global iface_url sortby ch_iface channel keypair GL_FLAG_GROUP GL_FLAG_SENDER_DESCRIPTION GL_FLAG_RECEIVER_DESCRIPTION
+  global iface iface_url sortby ch_iface channel keypair GL_FLAG_GROUP GL_FLAG_SENDER_DESCRIPTION GL_FLAG_RECEIVER_DESCRIPTION
   global GL_FLAG_SENDER_BROKEN GL_FLAG_RECEIVER_BROKEN
   global GL_FLAG_SENDER_UNKNOWN GL_FLAG_RECEIVER_UNKNOWN
 
@@ -160,7 +174,7 @@ proc put_tablebody {} {
       }
     }
 
-      set url $iface_url($iface)
+    set url $iface_url($iface)
     
     #check if the interface supports links. failure of this call will throw us out of here
     if { [ catch { xmlrpc $url system.methodHelp getLinks } ] } { continue }
@@ -343,7 +357,14 @@ proc put_tablebody {} {
       foreach tr $tablestruct {
       
         array set SENTRY $tr
-        
+
+        # This is for the link of a internal device key which is visible at the page direct links (HmIP devices)
+        # instead as channel parameter (BidCos-RF and BidCos-Wired)
+        if {[string first "NO_DESCRIPTION" $SENTRY(LINKDESC)] == 0} {
+           set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
+           append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
+        }
+
         puts "<tr>"
         puts "<td class=\"CLASS22106\">$SENTRY(SENDERNAME_DISPLAY)<br/><br/><span id=\"senderNameExtension_$loop\"></span></td>"
         puts "<td class=\"CLASS22106\">$SENTRY(SENDERADDR_DISPLAY)</td>"

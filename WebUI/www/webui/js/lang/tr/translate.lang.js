@@ -367,6 +367,8 @@ jQuery.extend(true,langJSON, {
     "btnLogin" : "Oturum ac",
     "btnNewLogin" : "Yeni oturum ac",
     "btnNewStart" : "Yeniden baslat",
+    "btnReset" : "Reset",
+    "btnSet" : "Set",
     "dialogYes" : "Evet",
     "dialogNo" : "Hayir",
     "dialogBack" : "Geri",

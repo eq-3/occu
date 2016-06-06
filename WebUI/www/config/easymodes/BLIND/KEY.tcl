@@ -332,7 +332,7 @@ set SUBSET_3(SHORT_JT_REFON)		4
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	
-	global iface_url sender_address receiver_address dev_descr_sender dev_descr_receiver
+	global iface_url sender_address receiver_address sender_group receiver_group dev_descr_sender dev_descr_receiver
 	upvar PROFILES_MAP  PROFILES_MAP
 	upvar HTML_PARAMS   HTML_PARAMS
 	upvar PROFILE_PNAME PROFILE_PNAME
@@ -342,6 +342,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	foreach pro [array names PROFILES_MAP] {
 		upvar PROFILE_$pro PROFILE_$pro
 	}
+
+  set chn [lindex [split $special_input_id _] 1]
+
 
   set url $iface_url($iface)
 
@@ -353,14 +356,20 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set valLONG_MAX_TIME_FIRST_DIR $ps(LONG_MAX_TIME_FIRST_DIR)
   if {(($chDescr(AES_ACTIVE) == 1) || ($chGrpDescr(AES_ACTIVE) == 1)) && ([format "%.2f" $ps(LONG_MAX_TIME_FIRST_DIR)] < 0.8) } {
+
     set valLONG_MAX_TIME_FIRST_DIR 0.8
+    set param  "{LONG_MAX_TIME_FIRST_DIR {$valLONG_MAX_TIME_FIRST_DIR}}"
+
+    if {$chn == 1} {
+      puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"
+      set ps(LONG_MAX_TIME_FIRST_DIR) $valLONG_MAX_TIME_FIRST_DIR
+    } else {
+      catch {puts "[xmlrpc $url putParamset [list string $receiver_group] [list string $sender_group] [list struct $param]]"}
+      set ps(LONG_MAX_TIME_FIRST_DIR) $valLONG_MAX_TIME_FIRST_DIR
+    }
+
+
   }
-
-  set param  "{LONG_MAX_TIME_FIRST_DIR {$valLONG_MAX_TIME_FIRST_DIR}}"
-  puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"
-  catch {puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_group] [list struct $param]]"}
-  set ps(LONG_MAX_TIME_FIRST_DIR) $valLONG_MAX_TIME_FIRST_DIR
-
   # END TWIST-441
 
 	set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]

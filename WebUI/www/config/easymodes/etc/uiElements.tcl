@@ -68,14 +68,47 @@ proc getTextField {param value chn prn} {
   return $s
 }
 
-proc getCheckBox {param value chn prn} {
+proc getOptionBox {param options value chn prn {extraparam ""}} {
+  upvar $options optionValues
+
+  set s "<select id='separate_CHANNEL\_$chn\_$prn' name=$param $extraparam>"
+  set select ""
+  foreach val [lsort -real [array names optionValues]] {
+
+     if {$val == $value} {
+      set select "selected=\"selected\""
+     } else {
+      set select ""
+     }
+
+     append s "<option value=$val $select>$optionValues($val)</option>"
+  }
+
+  append s "</select>"
+
+  return $s
+}
+
+proc getCheckBox {param value chn prn {extraparam ""}} {
   set checked ""
   if { $value } then { set checked "checked=\"checked\"" }
-  set s "<input id='separate_CHANNEL\_$chn\_$prn' type='checkbox' $checked value='dummy' name=$param/>"
+  set s "<input id='separate_CHANNEL\_$chn\_$prn' type='checkbox' $checked value='dummy' name=$param $extraparam/>"
   return $s
+}
+
+proc getButton {id btnTxt callBack} {
+  set s "&nbsp<input id='$id' type=button onclick=$callBack>"
+  # This translates the text of the button to the parameter btnTxt
+  puts "<script type=\"text/javascript\">translateAttribute(\"#$id\", \"value\", $btnTxt);</script>"
+  return $s
+}
+
+proc getHorizontalLine {} {
+  return "<tr><td colspan=\"2\"><hr></td></tr>"
 }
 
 proc getHelpIcon {topic x y} {
   set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
   return $ret
 }
+

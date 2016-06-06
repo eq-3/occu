@@ -1,0 +1,12 @@
+"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen des Fensters wird der Alarm f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Alarm erst nach Ablauf dieser Zeit eingeschaltet. Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Wechseln des Fensterzustands wird der Alarm f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Alarm erst nach Ablauf dieser Zeit eingeschaltet</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim &Ouml;ffnen des Fensterss wird der Alarm f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Alarm erst nach Ablauf dieser Zeit eingeschaltet. Beim Schlie&szlig;en des Kontaktes wird der Alarm ausgeschaltet. Die Schaltzuordnung l&auml;sst sich auch umkehren.</span><br/><br/>",
+
+"subset_1" : "Offen - ein",
+"subset_2" : "Zu - ein",
+"subset_3" : "&Ouml;ffnen",
+"subset_4" : "Schlie&szlig;en",
+"subset_5" : "&Auml;ndern",
+"subset_6" : "Offen - ein",
+"subset_7" : "Zu - ein",
+"at" : "<span class=\"translated\">beim</span>",

@@ -71,6 +71,7 @@ ALARMACTUATOR|SABOTAGE_MSG	${stringTableAlarmActuatorSabotageMsg}
 ALARMACTUATOR|STATE=FALSE	${stringTableAlarmActuatorStateFalse}
 ALARMACTUATOR|STATE=TRUE	${stringTableAlarmActuatorStateTrue}
 
+ARMING	${stringTableSirenArmingTitle}
 ARMING|ACOUSTIC_MULTI_DELAY_ARM	${stringTableAcousticMultiDelayArm}
 ARMING|ACOUSTIC_ALLSENS_ARM	${stringTableAcousticAllSensArm}
 ARMING|ACOUSTIC_ALLSENS_DELAY_ARM	${stringTableAcousticAllsensDelayArm}
@@ -84,6 +85,11 @@ ARMING|OPTIC_ALLSENS_DELAY_ARM	${stringTableOpticAllSensDelayArm}
 ARMING|OPTIC_EXTSENS_ARM	${stringTableOpticExtsensArm}
 ARMING|OPTIC_EXTSENS_DELAY_ARM	${stringTableOpticExtsensDelayArm}
 ARMING|OPTIC_DISARM	${stringTableOpticDisarm}
+
+ARMSTATE=DISARMED	${stringTableAlarmDisarmed}
+ARMSTATE=EXTSENS_ARMED	${stringTableAlarmExtSensArmed}
+ARMSTATE=ALLSENS_ARMED	${stringTableAlarmAllSensArmed}
+ARMSTATE=ALARM_BLOCKED	${stringTableAlarmBlocked}
 
 BLIND	${stringTableBlindTitle}
 BLIND|CHANGE_OVER_DELAY	${stringTableBlindChangeOverDelay}
@@ -185,14 +191,26 @@ COND_TX_DECISION_ABOVE	${stringTableCondTxDecisionAbove}
 COND_TX_DECISION_BELOW	${stringTableCondTxDecisionBelow}
 COND_TX_FALLING	${stringTableCondTxFalling}
 COND_TX_RISING	${stringTableCondTxRising}
+
+COND_TX_THRESHOLD_LO	${stringTableCondThresholdLo}
+
 COND_TX_THRESHOLD_HI_POWER	${stringTableCondThresholdHiPower}
 COND_TX_THRESHOLD_LO_POWER	${stringTableCondThresholdLoPower}
 
 COMPATIBILITY_MODE	${stringTableCompatibilityMode}
 CONF_BUTTON_TIME	${stringTableConfButtonTime}
 CONF_BUTTON_TIME=PERMANENT	${stringTableConfButtonTimePermanent}
+
+CURRENTDETECTION_BEHAVIOR	${stringTableCurrentDetectionBehavior}
+CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_ACTIVE"	${stringTableCurrentDetectionBehaviorActive}
+CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_1"	${stringTableCurrentDetectionBehaviorOutput1}
+CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_2"	${stringTableCurrentDetectionBehaviorOutput2}
+
+
 CYCLIC_INFO_MSG	${stringTableCyclicInfoMsg}
 CYCLIC_INFO_MSG_DIS	${stringTableCyclicInfoMsgDis}
+CYCLIC_INFO_MSG_DIS_UNCHANGED	${stringTableCyclicInfoMsgDisUnChanged}
+CYCLIC_INFO_MSG_OVERDUE_THRESHOLD	${stringTableCyclicInfoMsgOverdueThreshold}
 CYCLIC_INFO_MSG_PAUSE	${stringTableCyclicInfoMsgPause}
 DDC|STATE	${stringTableDDCState}
 DEV_RPT_CNT_MAX	${stringTableDevRptCntMax}
@@ -439,6 +457,9 @@ KEY_TRANSCEIVER	${stringTableKeyTranseiverTitle}
 KEY_TRANSCEIVER|DBL_PRESS_TIME	${stringTableKeyDblPressTime}
 KEY_TRANSCEIVER|LONG_PRESS_TIME	${stringTableKeyLongPressTimeA}
 
+KEY_TRANSCEIVER|REPEATED_LONG_PRESS_TIMEOUT_UNIT	${stringTableKeyLongPressTimeOutUnit}
+KEY_TRANSCEIVER|REPEATED_LONG_PRESS_TIMEOUT_VALUE	${stringTableKeyLongPressTimeOutValue}
+
 LANGUAGE	${stringTableLanguage}
 LANGUAGE=ENGLISH	${stringTableLanguageEnglish}
 LANGUAGE=GERMAN	${stringTableLanguageGerman}
@@ -450,6 +471,7 @@ LED_STATUS=GREEN	${stringTableLEDStatusGreen}
 LED_STATUS=ORANGE	${stringTableLEDStatusOrange}
 LIVE_MODE_RX	${stringTableLiveModeRX}
 LOCAL_RESET_DISABLE	${stringTableLocalResetDisable}
+LOCAL_RESET_DISABLED	${stringTableLocalResetDisable}
 LOGGING	${stringTableLogging}
 LOGGING=FALSE	${stringTableLoggingFalse}
 LOGGING=OFF	${stringTableLoggingOff}
@@ -480,8 +502,11 @@ LOWBAT=TRUE	${stringTableBatteryEmpty}
 LOW_BAT=TRUE	${stringTableBatteryEmpty}
 MAINTENANCE|ERROR_BATTERY=BATTERY_DEFECT	${stringTableBatteryFailure}
 MAINTENANCE|ERROR_BATTERY=NO_ERROR	${stringTableBatteryOk}
+MAINTENANCE|ERROR_OVERHEAT	${stringTableErrorOverheatTrue}
 MAINTENANCE|CONFIG_PENDING	${stringTableConfigPending}
 MAINTENANCE|LOWBAT	${stringTableBatteryLow}
+MAINTENANCE|LOW_BAT	${stringTableBatteryLow}
+MAINTENANCE|SABOTAGE	${stringTableSabotage}
 MAINTENANCE|STICKY_BATTERY=BATTERY_DEFECT	${stringTableBatteryFailure}
 MAINTENANCE|STICKY_BATTERY=BATTERY_WAS_DEFECT	${stringTableBatteryWasDefect}
 MAINTENANCE|STICKY_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
@@ -493,24 +518,30 @@ MAINTENANCE|HMW_STICKY_UNREACH	${stringTableStickyUnreach}
 MAINTENANCE|UNREACH	${stringTableUnreach}
 minutes	${stringTableMinute}
 MODUS_BUTTON_LOCK	${stringTableModusButtonLock}
+
 MOTION_DETECTOR	${stringTableMotionDetectorTitle}
-MOTION_DETECTOR|BRIGHTNESS	${stringTableMotionDetectorBrightness}
-MOTION_DETECTOR|BRIGHTNESS_FILTER	${stringTableMotionDetectorBrightnessFilter}
+MOTION_DETECTOR	${stringTableMotionDetectorTitle}
 MOTION_DETECTOR|ERROR=SABOTAGE	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|ERROR=0	${stringTableSabotageContactOk}
 MOTION_DETECTOR|ERROR=7	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|EVENT_FILTER_NUMBER	${stringTableMotionDetectorEventFilterNumber}
 MOTION_DETECTOR|EVENT_FILTER_PERIOD	${stringTableMotionDetectorEventFilterPeriod}
 MOTION_DETECTOR|MIN_INTERVAL	${stringTableMotionDetectorMinInterval}
-MOTION_DETECTOR|MOTION=FALSE	${stringTableMotionDetectorMotionFalse}
-MOTION_DETECTOR|MOTION=TRUE	${stringTableMotionDetectorMotionTrue}
 MOTION_DETECTOR|CAPTURE_WITHIN_INTERVAL	${stringTableMotionDetectorCaptureWithinInterval}
+
+MOTIONDETECTOR_TRANSCEIVER	${stringTableMotionDetectorTitle}
+
 PARAM_SELECT	${stringTableParamSelect}
 PARAM_SELECT=INACTIVE	${stringTableParamSelectInactive}
 PARAM_SELECT=T1	${stringTableParamSelectT1}
 PARAM_SELECT=T2	${stringTableParamSelectT2}
 PARAM_SELECT=T1-T2	${stringTableParamSelectT1MinusT2}
 PARAM_SELECT=T2-T1	${stringTableParamSelectT2MinusT1}
+
+PARTY_SET_POINT_TEMPERATURE	${stringTableClimateControlRegPartyValue}
+PARTY_TIME_END	${stringTableClimateControlRegPartyEndTime}
+PARTY_TIME_START	${stringTableClimateControlRegPartyStartTime}
+
 POWER|BAT_LEVEL	${stringTableBatteryCapacity}
 POWER|LOWBAT=FALSE	${stringTableBatteryOk}
 POWER|LOWBAT=TRUE	${stringTableBatteryEmpty}
@@ -718,6 +749,8 @@ SIGNAL_CHIME|ACT_TYP	${stringTableSignalChimeActType}
 SIGNAL_CHIME|ON_TIME	${stringTableSignalChimeOnTime}
 SIGNAL_CHIME|STATE=TRUE	${stringTableSignalChimeStateTrue}
 SIGNAL_CHIME|STATE=FALSE	${stringTableSignalChimeStateFalse}
+
+
 SMOKE_DETECTOR|ERROR_ALARM_TEST=NO_ERROR	${stringTableSmokeDetectorAlarmTestOK}
 SMOKE_DETECTOR|ERROR_ALARM_TEST=ALARM_TEST_FAILED	${stringTableSmokeDetectorAlarmTestFailure}
 SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=NO_ERROR	${stringTableSmokeDetectorSmokeChamberOK}
@@ -727,12 +760,39 @@ SMOKE_DETECTOR|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
 
 SMOKE_DETECTOR|REPEAT_ENABLE	${stringTableSmokeDetectorRepeatEnable}
 
+SMOKE_DETECTOR_ALARM_STATUS=IDLE_OFF	${stringTableStateIdleOff}
+SMOKE_DETECTOR_ALARM_STATUS=INTRUSION_ALARM	${stringTableStateIntrusionAlarm}
+SMOKE_DETECTOR_ALARM_STATUS=PRIMARY_ALARM	${stringTableStatePrimaryAlarm}
+SMOKE_DETECTOR_ALARM_STATUS=SECONDARY_ALARM	${stringTableStateSecondaryAlarm}
+
+SMOKE_DETECTOR_COMMAND=INTRUSION_ALARM	${stringTableCommandIntrusionAlarm}
+SMOKE_DETECTOR_COMMAND=INTRUSION_ALARM_OFF	${stringTableCommandIntrusionAlarmOff}
+SMOKE_DETECTOR_COMMAND=SMOKE_TEST	${stringTableCommandSmokeTest}
+SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST	${stringTableCommandCommunicationTest}
+SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST_REPEATED	${stringTableCommandCommunicationTestRepeated}
+
+SMOKE_DETECTOR_EVENT=ALARM_OFF	${stringTableEventAlarmOff}
+SMOKE_DETECTOR_EVENT=ALARM_OFF_REPEATED	${stringTableEventAlarmOffRepeated}
+SMOKE_DETECTOR_EVENT=INTRUSION_ALARM	${stringTableEventIntrusionAlarm}
+SMOKE_DETECTOR_EVENT=INTRUSION_ALARM_REPEATED	${stringTableEventIntrusionAlarmRepeated}
+SMOKE_DETECTOR_EVENT=LOW_BAT	${stringTableEventLowBat}
+SMOKE_DETECTOR_EVENT=LOW_BAT_REPEATED	${stringTableEventLowBatRepeated}
+SMOKE_DETECTOR_EVENT=PRIMARY_ALARM	${stringTableEventPrimaryAlarm}
+SMOKE_DETECTOR_EVENT=SECONDARY_ALARM	${stringTableEventSecondaryAlarm}
+
 SMOKE_DETECTOR_TEAM	${stringTableSmokeDetectorTitle}
 SMOKE_DETECTOR_TEAM|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR_TEAM|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
 SMOKE_DETECTOR_TEAM_V2	${stringTableSmokeDetectorTitle}
 SMOKE_DETECTOR_TEAM_V2|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR_TEAM_V2|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
+
+SMOKE_DETECTOR_TEST_RESULT=COMMUNICATION_TEST_SENT	${stringTableCommunicatingTestSent}
+SMOKE_DETECTOR_TEST_RESULT=COMMUNICATION_TEST_OK	${stringTableCommunicatingTestOK}
+SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_OK	${stringTableSystemTestOK}
+SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_FAILED	${stringTableSystemTestFailure}
+SMOKE_DETECTOR_TEST_RESULT=NONE	${stringTableSystemTestNone}
+
 SPEED_MULTIPLIER	${stringTableSpeedMultiplier}
 STANDBY_TIME	${stringTableStandByTime}
 STATUS_INDICATOR	${stringTableStatusIndicatorTitle}
@@ -753,6 +813,9 @@ SWITCH_INTERFACE|PRESS	${stringTableSwitchInterfacePress}
 SWITCH_INTERFACE|STATE=FALSE	${stringTableSwitchInterfaceStateFalse}
 SWITCH_INTERFACE|STATE=TRUE	${stringTableSwitchInterfaceStateTrue}
 
+SWITCH_PANIC	${stringTableSirenSwitchPanicTitle}
+
+SWITCH_SENSOR	${stringTableSwitchSensorTitle}
 SWITCH_TRANSMIT	${stringTableSwitchTransmitTitle}
 SWITCH_TRANSMIT|TWO_POINT_HYSTERESIS	${stringTableSwitchTransmitTwoPointHysteresis}
 
@@ -882,28 +945,41 @@ AUTO_MODE	${stringTableClimateControlRTTransceiverAutoMode}
 ACTUAL_HUMIDITY	${stringTableWeatherHumidity}
 ACTUAL_TEMPERATURE	${stringTableClimateControlRTTransceiverActualTemp}
 ALARMTIME_MAX	${stringTableAlarmTimeMax}
+ARR_TIMEOUT	${stringTableArrTimeout}
 BACKLIGHT_AT_CHARGE	${stringTableBackLightAtCharge}
 BACKLIGHT_AT_KEYSTROKE	${stringTableBackLightAtKeystroke}
 BACKLIGHT_AT_MOTION	${stringTableBackLightAtMotion}
 BACKLIGHT_ON_TIME	${stringTableBackLightOnTime}
 BAT_DEFECT_LIMIT	${stringTableBatDefectLimit}
+
+BATTERY_POWERED	${stringTableBatteryPowered}
+
 BATTERY_STATE	${stringTableClimateControlRTTransceiverBatteryState}
 BOOST_MODE	${stringTableClimateControlRTTransceiverBoostMode}
 BOOST_MODE=FALSE	${stringTableBoostModeFalse}
 BOOST_MODE=TRUE	${stringTableBoostModeTrue}
 BOOST_STATE	${stringTableBoostState}
+BRIGHTNESS	${stringTableBrightness}
+BRIGHTNESS_FILTER	${stringTableBrightnessFilter}
 COMFORT_MODE	${stringTableClimateControlRTTransceiverComfortMode}
 COMMUNICATION_REPORTING	${stringTableCommunicatingReporting}
 COMMUNICATION_REPORTING=TRUE	${stringTableCommunicatingReportingTrue}
 COMMUNICATION_REPORTING=FALSE	${stringTableCommunicatingReportingFalse}
+
 CONTROL_MODE=AUTO-MODE	${stringTableClimateControlRTTransceiverAutoMode}
 CONTROL_MODE=BOOST-MODE	${stringTableClimateControlRTTransceiverBoostMode}
 CONTROL_MODE=MANU-MODE	${stringTableClimateControlRTTransceiverManuMode}
 CONTROL_MODE=PARTY-MODE	${stringTableClimateControlRTTransceiverPartyMode}
 DAYLIGHT_SAVINGS_TIME	${stringTableDST}
 DEVICE_IN_BOOTLOADER	${stringTableDeviceInBootloader}
+DISPLAY_INVERTING	${stringTableDisplayInverting}
 DUTY_CYCLE=FALSE	${stringTableDutyCycleFalse}
 DUTY_CYCLE=TRUE	${stringTableDutyCycleTrue}
+DUTYCYCLE_LIMIT	${stringTableDutyCycleLimit}
+ENABLE_ROUTING	${stringTableEnableRouting}
+
+ERROR_CODE	${stringTableErrorCode}
+
 ERROR_POWER=NO_ERROR	${stringTablePowerAvailable}
 ERROR_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
 ERROR_SABOTAGE=NO_ERROR	${stringTableSabotageContactOk}
@@ -924,6 +1000,9 @@ EVENT_RANDOMTIME_UNIT=M	${optionUnitM}
 EVENT_RANDOMTIME_UNIT=H	${optionUnitH}
 
 EXPECT_AES	${stringTableExpectAES}
+
+ILLUMINATION	${stringTableBrightness}
+
 LED_ONTIME	${stringTableLEDOnTime}
 LEVEL	${stringTableDimmerLevel}
 LEVEL_REAL	${stringTableDimmerLevelReal}
@@ -938,7 +1017,16 @@ LOWERING_MODE	${stringTableClimateControlRTTransceiverLoweringMode}
 
 LUX	${stringTableLux}
 
+MAINS_POWERED	${stringTableMainsPowered}
+
 MANU_MODE	${stringTableClimateControlRTTransceiverManuMode}
+
+MOTION=FALSE	${stringTableMotionDetectorMotionFalse}
+MOTION=TRUE	${stringTableMotionDetectorMotionTrue}
+
+MOTION_DETECTION_ACTIVE=FALSE	${stringTableMotionDetectorMotionDetectionActiveFalse}
+MOTION_DETECTION_ACTIVE=TRUE	${stringTableMotionDetectorMotionDetectionActiveTrue}
+
 NOT_USED	${stringTableNotUsed}
 OLD_LEVEL	${stringTableDimmerOldLevel}
 ON_TIME	${stringTableDimmerOnTime}
@@ -957,6 +1045,9 @@ PARTY_STOP_YEAR	${stringTablePartyStopYear}
 PARTY_TEMPERATURE	${stringTablePartyTemperature}
 
 PEER_NEEDS_BURST	${stringTablePeerNeedsBurst}
+
+PIR_OPERATION_MODE	${stringTablePirOperationMode}
+
 POWERUP_ACTION	${stringTableDimmerPowerUpAction}
 POWERUP_JUMPTARGET	${stringTableDimmerPowerUpAction}
 
@@ -967,7 +1058,7 @@ POWERUP_ONDELAY_UNIT=10S	${optionUnit10S}
 POWERUP_ONDELAY_UNIT=1M	${optionUnit1M}
 POWERUP_ONDELAY_UNIT=5M	${optionUnit5M}
 POWERUP_ONDELAY_UNIT=10M	${optionUnit10M}
-POWERUP_ONDELAY_VALUE	${stringTableEventDelayValue}
+POWERUP_ONDELAY_VALUE	${stringTableOnDelayValue}
 
 POWERUP_ONTIME_UNIT	${stringTableOnTimeUnit}
 POWERUP_ONTIME_UNIT=1S	${optionUnit1S}
@@ -978,10 +1069,16 @@ POWERUP_ONTIME_UNIT=5M	${optionUnit5M}
 POWERUP_ONTIME_UNIT=10M	${optionUnit10M}
 POWERUP_ONTIME_VALUE	${stringTableOnTimeValue}
 
+POWER_SUPPLY	${stringTablePowerSupply}
+
 PROCESS=STABLE	${stringTableProcessStable}
 PROCESS=NOT_STABLE	${stringTableProcessNotStable}
 
 RAMP_TIME	${stringTableDimmerRampTime}
+
+SABOTAGE=FALSE	${stringTableSabotageContactOk}
+SABOTAGE=TRUE	${stringTableSabotageContactWasActive}
+
 SET_TEMPERATURE	${stringTableClimateControlRTTransceiverSetTemperature}
 
 SECTION	${stringTableSection}
@@ -993,6 +1090,8 @@ STATE=TRUE	${stringTableStateTrue}
 
 STATUSINFO_MINDELAY	${stringTableStatusInfoMinDelay}
 STATUSINFO_RANDOM	${stringTableStatusInfoRandom}
+
+TIME_OF_OPERATION	${stringTableTimeOfOperation}
 
 TX_MINDELAY	${stringTableTxMinDelay}
 TX_MINDELAY_UNIT	${stringTableTxMinDelayUnit}
@@ -1023,6 +1122,10 @@ VALVE_STATE=ERROR_POSITION	${stringTableValveStateErrorPosition}
 
 WAKEUP_DEFAULT_CHANNEL	${stringTableWakeupDefaultChannel}
 WAKEUP_BEHAVIOUR	${stringTableButtonResponseWithoutChannelChooser}
+
+WAKEUP_BEHAVIOUR_STATUS_MSG_CONFIRMATION	${stringTableBehaviourStatusMsgConfirmation}
+WAKEUP_BEHAVIOUR_STATUS_SIGNALIZATION_CONFIRMATION	${stringTableBehaviourStatusSignalizationConfirmation}
+
 
 WINDOW_OPEN_REPORTING	${stringTableWindowOpenReporting}
 WINDOW_OPEN_REPORTING=FALSE	${stringTableWindowOpenReportingFalse}

@@ -1,0 +1,13 @@
+"description_1" : "<span class=\"translated\">When the contact is opened the alarm will be switched on for the time set. This function can be reversed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The alarm will be switched on for the time set if the change signal is recognized.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the contact is opened the alarm will be switched on for the time set. When the contact is closed the alarm will be switched off. This function can be reversed.</span><br/><br/>",
+
+"subset_1" : "Open - on",
+"subset_2" : "Closed - on",
+"subset_3" : "Open",
+"subset_4" : "Close",
+"subset_5" : "Change",
+"subset_6" : "Open - on",
+"subset_7" : "Closed - on",
+"at" : "<span class=\"translated\">on</span>",
+

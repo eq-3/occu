@@ -12,12 +12,12 @@ set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)    "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)      "Expertenprofil"
 
-set PROFILE_1(SHORT_CT_OFFDELAY)  {0 1}
-set PROFILE_1(SHORT_CT_ONDELAY)   {0 1}
-set PROFILE_1(SHORT_CT_OFF)      {0 1}
-set PROFILE_1(SHORT_CT_ON)      {0 1}
-set PROFILE_1(SHORT_COND_VALUE_LO)  {50 range 0 - 200}
-set PROFILE_1(SHORT_COND_VALUE_HI)  {0 range 0 - 100}
+set PROFILE_1(SHORT_CT_OFFDELAY)  0
+set PROFILE_1(SHORT_CT_ONDELAY)    0
+set PROFILE_1(SHORT_CT_OFF)      0
+set PROFILE_1(SHORT_CT_ON)      0
+set PROFILE_1(SHORT_COND_VALUE_LO)  {50 200}
+set PROFILE_1(SHORT_COND_VALUE_HI)  {0 100}
 set PROFILE_1(SHORT_ONDELAY_TIME)  0
 set PROFILE_1(SHORT_ON_TIME)    {120 300}  
 set PROFILE_1(SHORT_OFFDELAY_TIME)  0
@@ -26,26 +26,28 @@ set PROFILE_1(SHORT_ON_TIME_MODE)  0
 set PROFILE_1(SHORT_OFF_TIME_MODE)  0
 set PROFILE_1(SHORT_ACTION_TYPE)  1
 set PROFILE_1(SHORT_JT_OFF)      1
-set PROFILE_1(SHORT_JT_ON)      {0 2}
-set PROFILE_1(SHORT_JT_OFFDELAY)  {0 2}
-set PROFILE_1(SHORT_JT_ONDELAY)    {0 2}
+set PROFILE_1(SHORT_JT_ON)      0
+set PROFILE_1(SHORT_JT_OFFDELAY)  0
+set PROFILE_1(SHORT_JT_ONDELAY)    0
 set PROFILE_1(UI_DESCRIPTION)  "Wenn die eingestellte Windgeschwindigkeit erreicht wird, schaltet der Alarm f&uuml;r die eingestellte Zeit ein."
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)  
 set PROFILE_1(UI_HINT)  1
 
-
-set SUBSET_1(NAME)          "hidden element"
+#set SUBSET_1(NAME)          "Wind stark - Aus / Wind schwach - Ein"
+set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
-set SUBSET_1(SHORT_CT_OFFDELAY)    1
-set SUBSET_1(SHORT_CT_ONDELAY)    1
-set SUBSET_1(SHORT_CT_OFF)      1
-set SUBSET_1(SHORT_CT_ON)      1
+set SUBSET_1(SHORT_CT_OFF)      2
+set SUBSET_1(SHORT_CT_OFFDELAY)    2
+set SUBSET_1(SHORT_CT_ON)      0
+set SUBSET_1(SHORT_CT_ONDELAY)    0
 
-set SUBSET_1(SHORT_JT_OFF)       1
-set SUBSET_1(SHORT_JT_ON)        2
-set SUBSET_1(SHORT_JT_OFFDELAY)  2
-set SUBSET_1(SHORT_JT_ONDELAY)   2
-
+#set SUBSET_2(NAME)          "Wind stark - Ein / Wind schwach - Aus"
+set SUBSET_2(NAME)          "\${subset_2}"
+set SUBSET_2(SUBSET_OPTION_VALUE)  2
+set SUBSET_2(SHORT_CT_OFF)      0
+set SUBSET_2(SHORT_CT_OFFDELAY)    0
+set SUBSET_2(SHORT_CT_ON)      2
+set SUBSET_2(SHORT_CT_ONDELAY)    2
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -88,20 +90,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #1
   incr prn
-  set pref 0
+  set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn\_s}&nbsp;\${actor_$ch}&nbsp;\${description_$prn\_e}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  if {$dev_descr_sender(PARENT_TYPE) == "HM-WDS100-C6-O-2"} {
-    incr pref;
-    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td></td><td>"
-    append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  }
-
-  incr pref;
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
   option $manner($ch) 
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME ]

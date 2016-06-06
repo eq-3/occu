@@ -967,7 +967,8 @@
 		for (var i = 0; i < diagramSettings.options.series.length; i++)
 		{
 			var oldLabel = diagramSettings.options.series[i].label;
-			var label = GetChannelName(oldLabel.substring(0,12)) + " ";
+			
+			var label = GetChannelName(oldLabel.substring(0,oldLabel.indexOf('_'))) + " ";
 			label += translateKey('diagramValueType' + oldLabel.split(" ")[1]);
 			diagramSettings.options.series[i].label = label;
 		}		

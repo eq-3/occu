@@ -44,6 +44,17 @@ proc getTextField {psDescr type param value inputId} {
   return $s
 }
 
+proc getTextFieldIdentityString {psDescr type param value inputId defaultVal} {
+  upvar psDescr descr
+  array_clear param_descr
+  array set param_descr $descr($param)
+
+  set elemId '$inputId'
+
+  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"checkIdentityString($elemId,'$defaultVal')\"/>"
+  return $s
+}
+
 proc getComboBox {param prn special_input_id} {
 	  global psDescr
 	  upvar ps ps
@@ -160,16 +171,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
       incr prn
       set param POWER_STRING
+      set defaultVal "1-0:1.7"
       append HTML_PARAMS(separate_1) "<tr name='sensor_3' class='hidden'>"
         append HTML_PARAMS(separate_1) "<td>\${PowerMeterPowerString}</td>"
-        append HTML_PARAMS(separate_1) "<td>[getTextField psDescr $CHANNEL $param $ps($param) separate_${special_input_id}_$prn][getHelpIcon "POWER_STRING_CH1" $hlpBoxWidth [expr $hlpBoxHeight * 1.6]]</td>"
+        append HTML_PARAMS(separate_1) "<td>[getTextFieldIdentityString psDescr $CHANNEL $param $ps($param) separate_${special_input_id}_$prn $defaultVal][getHelpIcon "POWER_STRING_CH1" $hlpBoxWidth [expr $hlpBoxHeight * 1.6]]</td>"
       append HTML_PARAMS(separate_1) "</tr>"
 
       incr prn
       set param ENERGY_COUNTER_STRING
+      set defaultVal "1-0:1.8"
       append HTML_PARAMS(separate_1) "<tr name='sensor_3' class='hidden'>"
         append HTML_PARAMS(separate_1) "<td>\${PowerMeterEnergyCounterString}</td>"
-        append HTML_PARAMS(separate_1) "<td>[getTextField psDescr $CHANNEL $param $ps($param) separate_${special_input_id}_$prn][getHelpIcon ENERGY_COUNTER_STRING_CH1 $hlpBoxWidth $hlpBoxHeight]</td>"
+        append HTML_PARAMS(separate_1) "<td>[getTextFieldIdentityString psDescr $CHANNEL $param $ps($param) separate_${special_input_id}_$prn $defaultVal][getHelpIcon ENERGY_COUNTER_STRING_CH1 $hlpBoxWidth $hlpBoxHeight]</td>"
       append HTML_PARAMS(separate_1) "</tr>"
 
   append HTML_PARAMS(separate_1) "</table>"
@@ -209,6 +222,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "showParameter();"
 
     append HTML_PARAMS(separate_1) "\});"
+
+    append HTML_PARAMS(separate_1) "checkIdentityString = function(elemID, defaultVal) \{"
+      append HTML_PARAMS(separate_1) "var elem = jQuery('\#' + elemID);"
+      append HTML_PARAMS(separate_1) "if (elem.val() == '') \{elem.val(defaultVal);\}"
+    append HTML_PARAMS(separate_1) "\}"
+
   append HTML_PARAMS(separate_1) "</script>"
 }
 

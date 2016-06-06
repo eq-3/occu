@@ -24,3 +24,29 @@ function ::CreateBinaryActuator()
   }
   return;
 }
+
+
+function ::CreateSwitchTansmitter()
+{
+  object objState = cObj.DPByControl("SWITCH_TRANSMITTER.STATE");
+
+  if( objState)
+  {
+    WriteLine("<td>");
+      WriteLine("<table class='ControlBtnInfo'>");
+        WriteLine("<tr style='height:40px;'>");
+          WriteLine("<td id='"#chnId#"State'>");
+
+          if (objState.Value() == true) {
+            WriteLine("${stringTableStateTrue}");
+          } else {
+            WriteLine("${stringTableStateFalse}");
+          }
+
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
+}
+

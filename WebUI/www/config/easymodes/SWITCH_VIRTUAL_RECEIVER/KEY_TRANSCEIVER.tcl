@@ -23,7 +23,7 @@ set PROFILE_1(LONG_CT_OFF)                    0
 set PROFILE_1(LONG_CT_OFFDELAY)               0
 set PROFILE_1(LONG_CT_ON)                     0
 set PROFILE_1(LONG_CT_ONDELAY)                0
-set PROFILE_1(LONG_JT_OFF)                    1
+set PROFILE_1(LONG_JT_OFF)                    {1 3}
 set PROFILE_1(LONG_JT_OFFDELAY)               3
 set PROFILE_1(LONG_JT_ON)                     3
 set PROFILE_1(LONG_JT_ONDELAY)                3
@@ -45,7 +45,7 @@ set PROFILE_1(SHORT_CT_OFF)                   0
 set PROFILE_1(SHORT_CT_OFFDELAY)              0
 set PROFILE_1(SHORT_CT_ON)                    0
 set PROFILE_1(SHORT_CT_ONDELAY)               0
-set PROFILE_1(SHORT_JT_OFF)                   1
+set PROFILE_1(SHORT_JT_OFF)                   {1 3}
 set PROFILE_1(SHORT_JT_OFFDELAY)              3
 set PROFILE_1(SHORT_JT_ON)                    3
 set PROFILE_1(SHORT_JT_ONDELAY)               3
@@ -71,11 +71,11 @@ set PROFILE_2(LONG_CT_OFF)                    0
 set PROFILE_2(LONG_CT_OFFDELAY)               0
 set PROFILE_2(LONG_CT_ON)                     0
 set PROFILE_2(LONG_CT_ONDELAY)                0
-set PROFILE_2(LONG_JT_OFF)                    1
+set PROFILE_2(LONG_JT_OFF)                    {1 6}
 set PROFILE_2(LONG_JT_OFFDELAY)               6
-set PROFILE_2(LONG_JT_ON)                     4
-set PROFILE_2(LONG_JT_ONDELAY)                3
-set PROFILE_2(LONG_MULTIEXECUTE)              0
+set PROFILE_2(LONG_JT_ON)                     {4 6}
+set PROFILE_2(LONG_JT_ONDELAY)                {3 6}
+set PROFILE_2(LONG_MULTIEXECUTE)              {0 6}
 set PROFILE_2(LONG_OFFDELAY_TIME_BASE)        {0 range 0 - 7}
 set PROFILE_2(LONG_OFFDELAY_TIME_FACTOR)      {0 range 0 - 31}
 set PROFILE_2(LONG_OFF_TIME_BASE)             {7 range 0 - 7}
@@ -95,7 +95,7 @@ set PROFILE_2(SHORT_CT_ON)                    0
 set PROFILE_2(SHORT_CT_ONDELAY)               0
 set PROFILE_2(SHORT_JT_OFF)                   6
 set PROFILE_2(SHORT_JT_OFFDELAY)              6
-set PROFILE_2(SHORT_JT_ON)                    4
+set PROFILE_2(SHORT_JT_ON)                    {4 6}
 set PROFILE_2(SHORT_JT_ONDELAY)               6
 set PROFILE_2(SHORT_MULTIEXECUTE)             0
 set PROFILE_2(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}

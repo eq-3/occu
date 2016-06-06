@@ -1,0 +1,9 @@
+"switch_off" : "Switch - off",
+"switch_on" : "Switch - on",
+"switch_on_off" : "Switch - on/off",
+"switch_on_off_toggle" : "Switch - on/off/toggle",
+
+"panic_off" : "Panic off",
+"panic_on" : "Panic on",
+"panic_change_signal" : "Change signal",
+"panic_on_off" : "Panic on / off",

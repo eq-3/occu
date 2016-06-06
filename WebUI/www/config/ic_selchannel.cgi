@@ -578,7 +578,7 @@ proc LinkExists {p_LINKLIST sender_address receiver_address} {
   return $match
 }
 
-proc showHmIPChannel {devType direction address} {
+proc showHmIPChannel {devType direction address chType} {
   # direction 1 = sender, 2 = receiver
   set ch [lindex [split $address ":"] 1]
 
@@ -594,7 +594,13 @@ proc showHmIPChannel {devType direction address} {
     return 0
   }
 
-  if {[string toupper $devType] == "HMIP-WTH" && ($ch == 5)} {
+  if {[string toupper $devType] == "HMIP-WTH" && ($chType == "HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER")} {
+   # don't show the channel
+    return 0
+  }
+
+  # The weekly program of this device isn't yet implemented, so we can't use it for links
+  if {[string toupper $devType] == "HMIP-BSM" && ($chType == "WEEK_PROGRAM")} {
    # don't show the channel
     return 0
   }
@@ -685,8 +691,9 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
       #Bestimmte Kanäle der HmIP-Geräte dürfen nicht auftauchen
       set parentType ""
       set isChannel [catch {set parentType $dev_descr(PARENT_TYPE)}]
+
       if {$isChannel == 0} {
-        if {[showHmIPChannel $parentType $dev_descr(DIRECTION) $dev_descr(ADDRESS)] == 0} {
+        if {[showHmIPChannel $parentType $dev_descr(DIRECTION) $dev_descr(ADDRESS) $dev_descr(TYPE)] == 0} {
           array_clear dev_descr
           continue
         }

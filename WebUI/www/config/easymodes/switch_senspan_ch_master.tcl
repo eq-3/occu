@@ -52,14 +52,58 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set param STATUSINFO_MINDELAY
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableStatusInfoMinDelay}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+      append HTML_PARAMS(separate_1) "<td>"
+        append HTML_PARAMS(separate_1) "<select id=\"selectStatusInfoMinDelay_$chn\" onchange=\"setStatusInfoMinDelay($chn, $prn);\">"
+          append HTML_PARAMS(separate_1) "<option value=\"0\">\${stringTableNotUsed}</option>"
+          append HTML_PARAMS(separate_1) "<option value=\"1\">\${optionEnterValue}</option>"
+        append HTML_PARAMS(separate_1) "</select>"
+      append HTML_PARAMS(separate_1) "</td>"
+
+      append HTML_PARAMS(separate_1) "<td id=\"enterStatusInfoMinDelay_$chn\" class=\"hidden\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
+
+    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
+
+      append HTML_PARAMS(separate_1) "initStatusInfoMinDelay = function(chn, elmNr) \{"
+        append HTML_PARAMS(separate_1) "var enterStatusInfoElm = jQuery(\"#separate_CHANNEL_\"+chn+\"_\"+elmNr),"
+        append HTML_PARAMS(separate_1) "tdStatusInfoElm = jQuery(\"#enterStatusInfoMinDelay_\"+chn),"
+        append HTML_PARAMS(separate_1) "valStatusInfoMinDelay = parseFloat(enterStatusInfoElm.val()),"
+        append HTML_PARAMS(separate_1) "selectBoxElm = jQuery(\"#selectStatusInfoMinDelay_\"+chn);"
+
+        append HTML_PARAMS(separate_1) "if (valStatusInfoMinDelay > 0) \{"
+          append HTML_PARAMS(separate_1) "selectBoxElm.val(1);"
+          append HTML_PARAMS(separate_1) "tdStatusInfoElm.show();"
+        append HTML_PARAMS(separate_1) "\} else \{"
+          append HTML_PARAMS(separate_1) "selectBoxElm.val(0);"
+          append HTML_PARAMS(separate_1) "tdStatusInfoElm.hide();"
+        append HTML_PARAMS(separate_1) "\}"
+
+      append HTML_PARAMS(separate_1) "\};"
+
+      append HTML_PARAMS(separate_1) "setStatusInfoMinDelay = function(chn, elmNr) \{"
+        append HTML_PARAMS(separate_1) "var enterStatusInfoElm = jQuery(\"#separate_CHANNEL_\"+chn+\"_\"+elmNr),"
+        append HTML_PARAMS(separate_1) "selectBoxElm = jQuery(\"#selectStatusInfoMinDelay_\"+chn);"
+
+      append HTML_PARAMS(separate_1) "if (selectBoxElm.val() == 0) \{"
+        append HTML_PARAMS(separate_1) "enterStatusInfoElm.val(\"0.0\");"
+      append HTML_PARAMS(separate_1) "\} else \{"
+        append HTML_PARAMS(separate_1) "enterStatusInfoElm.val([getMinValue STATUSINFO_MINDELAY]);"
+      append HTML_PARAMS(separate_1) "\}"
+
+         append HTML_PARAMS(separate_1) "initStatusInfoMinDelay(chn, elmNr);"
+      append HTML_PARAMS(separate_1) "\};"
+
+
+      append HTML_PARAMS(separate_1) "window.setTimeout(initStatusInfoMinDelay($chn, $prn),100);"
+
+    append HTML_PARAMS(separate_1) "</script>"
 
     incr prn
     set param STATUSINFO_RANDOM
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableStatusInfoRandom}</td>"
-      append HTML_PARAMS(separate_1)  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append HTML_PARAMS(separate_1)  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
     incr prn

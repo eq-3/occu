@@ -136,6 +136,12 @@ DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"] = new Object();
 DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"]["50"] = "/config/img/devices/50/109_hm-lc-sw1-pl-ct_thump.png";
 DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"]["250"] = "/config/img/devices/250/109_hm-lc-sw1-pl-ct.png";
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-CT-R1"] = new Object();
+DEV_LIST.push('HmIP-SMI');
+DEV_DESCRIPTION["HmIP-SMI"] = "SMI";
+DEV_PATHS["HmIP-SMI"] = new Object();
+DEV_PATHS["HmIP-SMI"]["50"] = "/config/img/devices/50/125_hmip-smi_thumb.png";
+DEV_PATHS["HmIP-SMI"]["250"] = "/config/img/devices/250/125_hmip-smi.png";
+DEV_HIGHLIGHT["HmIP-SMI"] = new Object();
 DEV_LIST.push('HMW-IO-4-FM');
 DEV_DESCRIPTION["HMW-IO-4-FM"] = "HMW-IO-4-FM";
 DEV_PATHS["HMW-IO-4-FM"] = new Object();
@@ -385,6 +391,15 @@ DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
 DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
 DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HmIP-BSM');
+DEV_DESCRIPTION["HmIP-BSM"] = "BSM";
+DEV_PATHS["HmIP-BSM"] = new Object();
+DEV_PATHS["HmIP-BSM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BSM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HmIP-BSM"] = new Object();
+DEV_HIGHLIGHT["HmIP-BSM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BSM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BSM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('HM-MOD-EM-8');
 DEV_DESCRIPTION["HM-MOD-EM-8"] = "HM-MOD-EM-8";
 DEV_PATHS["HM-MOD-EM-8"] = new Object();
@@ -2148,6 +2163,12 @@ DEV_HIGHLIGHT["HM-RC-19-B"]["9+10"] = [5, '9', '10'];
 DEV_HIGHLIGHT["HM-RC-19-B"]["11+12"] = [5, '11', '12'];
 DEV_HIGHLIGHT["HM-RC-19-B"]["13+14"] = [5, '13', '14'];
 DEV_HIGHLIGHT["HM-RC-19-B"]["15+16"] = [5, '15', '16'];
+DEV_LIST.push('HmIP-SWSD');
+DEV_DESCRIPTION["HmIP-SWSD"] = "SWSD";
+DEV_PATHS["HmIP-SWSD"] = new Object();
+DEV_PATHS["HmIP-SWSD"]["50"] = "/config/img/devices/50/104_hm-sec-sd-2_thumb.png";
+DEV_PATHS["HmIP-SWSD"]["250"] = "/config/img/devices/250/104_hm-sec-sd-2.png";
+DEV_HIGHLIGHT["HmIP-SWSD"] = new Object();
 DEV_LIST.push('HM-OU-CM-PCB');
 DEV_DESCRIPTION["HM-OU-CM-PCB"] = "HM-OU-CM-PCB";
 DEV_PATHS["HM-OU-CM-PCB"] = new Object();
@@ -2392,6 +2413,12 @@ DEV_PATHS["HM-LC-Dim1T-CV-2"] = new Object();
 DEV_PATHS["HM-LC-Dim1T-CV-2"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
 DEV_PATHS["HM-LC-Dim1T-CV-2"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
 DEV_HIGHLIGHT["HM-LC-Dim1T-CV-2"] = new Object();
+DEV_LIST.push('HM-Dis-EP-WM55');
+DEV_DESCRIPTION["HM-Dis-EP-WM55"] = "HM-Dis-EP-WM55";
+DEV_PATHS["HM-Dis-EP-WM55"] = new Object();
+DEV_PATHS["HM-Dis-EP-WM55"]["50"] = "/config/img/devices/50/128_hm-dis-ep-wm55_thumb.png";
+DEV_PATHS["HM-Dis-EP-WM55"]["250"] = "/config/img/devices/250/128_hm-dis-ep-wm55.png";
+DEV_HIGHLIGHT["HM-Dis-EP-WM55"] = new Object();
 DEV_LIST.push('HM-CC-SCD');
 DEV_DESCRIPTION["HM-CC-SCD"] = "HM-CC-SCD";
 DEV_PATHS["HM-CC-SCD"] = new Object();
@@ -2454,6 +2481,26 @@ DEV_PATHS["263 167 Gruppe"] = new Object();
 DEV_PATHS["263 167 Gruppe"]["50"] = "/config/img/devices/50/52_hm-sec-sd-team_thumb.png";
 DEV_PATHS["263 167 Gruppe"]["250"] = "/config/img/devices/250/52_hm-sec-sd-team.png";
 DEV_HIGHLIGHT["263 167 Gruppe"] = new Object();
+DEV_LIST.push('HmIP-KRCA');
+DEV_DESCRIPTION["HmIP-KRCA"] = "KRCA";
+DEV_PATHS["HmIP-KRCA"] = new Object();
+DEV_PATHS["HmIP-KRCA"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
+DEV_PATHS["HmIP-KRCA"]["250"] = "/config/img/devices/250/85_hm-rc-sec4-3.png";
+DEV_HIGHLIGHT["HmIP-KRCA"] = new Object();
+DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HmIP-KRCA"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
+DEV_HIGHLIGHT["HmIP-KRCA"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
+DEV_HIGHLIGHT["HmIP-KRCA"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
+DEV_HIGHLIGHT["HmIP-KRCA"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
+DEV_HIGHLIGHT["HmIP-KRCA"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
 DEV_LIST.push('HMW-Sys-PS7-DR');
 DEV_DESCRIPTION["HMW-Sys-PS7-DR"] = "HMW-Sys-PS7-DR";
 DEV_PATHS["HMW-Sys-PS7-DR"] = new Object();
@@ -2824,6 +2871,7 @@ elvST['ALARMACTUATOR|ON_TIME'] = '${stringTableAlarmActuatorOnTime}';
 elvST['ALARMACTUATOR|SABOTAGE_MSG'] = '${stringTableAlarmActuatorSabotageMsg}';
 elvST['ALARMACTUATOR|STATE=FALSE'] = '${stringTableAlarmActuatorStateFalse}';
 elvST['ALARMACTUATOR|STATE=TRUE'] = '${stringTableAlarmActuatorStateTrue}';
+elvST['ARMING'] = '${stringTableSirenArmingTitle}';
 elvST['ARMING|ACOUSTIC_MULTI_DELAY_ARM'] = '${stringTableAcousticMultiDelayArm}';
 elvST['ARMING|ACOUSTIC_ALLSENS_ARM'] = '${stringTableAcousticAllSensArm}';
 elvST['ARMING|ACOUSTIC_ALLSENS_DELAY_ARM'] = '${stringTableAcousticAllsensDelayArm}';
@@ -2836,6 +2884,10 @@ elvST['ARMING|OPTIC_ALLSENS_DELAY_ARM'] = '${stringTableOpticAllSensDelayArm}';
 elvST['ARMING|OPTIC_EXTSENS_ARM'] = '${stringTableOpticExtsensArm}';
 elvST['ARMING|OPTIC_EXTSENS_DELAY_ARM'] = '${stringTableOpticExtsensDelayArm}';
 elvST['ARMING|OPTIC_DISARM'] = '${stringTableOpticDisarm}';
+elvST['ARMSTATE=DISARMED'] = '${stringTableAlarmDisarmed}';
+elvST['ARMSTATE=EXTSENS_ARMED'] = '${stringTableAlarmExtSensArmed}';
+elvST['ARMSTATE=ALLSENS_ARMED'] = '${stringTableAlarmAllSensArmed}';
+elvST['ARMSTATE=ALARM_BLOCKED'] = '${stringTableAlarmBlocked}';
 elvST['BLIND'] = '${stringTableBlindTitle}';
 elvST['BLIND|CHANGE_OVER_DELAY'] = '${stringTableBlindChangeOverDelay}';
 elvST['BLIND|LEVEL'] = '${stringTableBlindLevel}';
@@ -2932,13 +2984,20 @@ elvST['COND_TX_DECISION_ABOVE'] = '${stringTableCondTxDecisionAbove}';
 elvST['COND_TX_DECISION_BELOW'] = '${stringTableCondTxDecisionBelow}';
 elvST['COND_TX_FALLING'] = '${stringTableCondTxFalling}';
 elvST['COND_TX_RISING'] = '${stringTableCondTxRising}';
+elvST['COND_TX_THRESHOLD_LO'] = '${stringTableCondThresholdLo}';
 elvST['COND_TX_THRESHOLD_HI_POWER'] = '${stringTableCondThresholdHiPower}';
 elvST['COND_TX_THRESHOLD_LO_POWER'] = '${stringTableCondThresholdLoPower}';
 elvST['COMPATIBILITY_MODE'] = '${stringTableCompatibilityMode}';
 elvST['CONF_BUTTON_TIME'] = '${stringTableConfButtonTime}';
 elvST['CONF_BUTTON_TIME=PERMANENT'] = '${stringTableConfButtonTimePermanent}';
+elvST['CURRENTDETECTION_BEHAVIOR'] = '${stringTableCurrentDetectionBehavior}';
+elvST['CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_ACTIVE"'] = '${stringTableCurrentDetectionBehaviorActive}';
+elvST['CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_1"'] = '${stringTableCurrentDetectionBehaviorOutput1}';
+elvST['CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_2"'] = '${stringTableCurrentDetectionBehaviorOutput2}';
 elvST['CYCLIC_INFO_MSG'] = '${stringTableCyclicInfoMsg}';
 elvST['CYCLIC_INFO_MSG_DIS'] = '${stringTableCyclicInfoMsgDis}';
+elvST['CYCLIC_INFO_MSG_DIS_UNCHANGED'] = '${stringTableCyclicInfoMsgDisUnChanged}';
+elvST['CYCLIC_INFO_MSG_OVERDUE_THRESHOLD'] = '${stringTableCyclicInfoMsgOverdueThreshold}';
 elvST['CYCLIC_INFO_MSG_PAUSE'] = '${stringTableCyclicInfoMsgPause}';
 elvST['DDC|STATE'] = '${stringTableDDCState}';
 elvST['DEV_RPT_CNT_MAX'] = '${stringTableDevRptCntMax}';
@@ -3168,6 +3227,8 @@ elvST['KEY|TEXTLINE_2'] = '${stringTableKeyTextLine}';
 elvST['KEY_TRANSCEIVER'] = '${stringTableKeyTranseiverTitle}';
 elvST['KEY_TRANSCEIVER|DBL_PRESS_TIME'] = '${stringTableKeyDblPressTime}';
 elvST['KEY_TRANSCEIVER|LONG_PRESS_TIME'] = '${stringTableKeyLongPressTimeA}';
+elvST['KEY_TRANSCEIVER|REPEATED_LONG_PRESS_TIMEOUT_UNIT'] = '${stringTableKeyLongPressTimeOutUnit}';
+elvST['KEY_TRANSCEIVER|REPEATED_LONG_PRESS_TIMEOUT_VALUE'] = '${stringTableKeyLongPressTimeOutValue}';
 elvST['LANGUAGE'] = '${stringTableLanguage}';
 elvST['LANGUAGE=ENGLISH'] = '${stringTableLanguageEnglish}';
 elvST['LANGUAGE=GERMAN'] = '${stringTableLanguageGerman}';
@@ -3179,6 +3240,7 @@ elvST['LED_STATUS=GREEN'] = '${stringTableLEDStatusGreen}';
 elvST['LED_STATUS=ORANGE'] = '${stringTableLEDStatusOrange}';
 elvST['LIVE_MODE_RX'] = '${stringTableLiveModeRX}';
 elvST['LOCAL_RESET_DISABLE'] = '${stringTableLocalResetDisable}';
+elvST['LOCAL_RESET_DISABLED'] = '${stringTableLocalResetDisable}';
 elvST['LOGGING'] = '${stringTableLogging}';
 elvST['LOGGING=FALSE'] = '${stringTableLoggingFalse}';
 elvST['LOGGING=OFF'] = '${stringTableLoggingOff}';
@@ -3209,8 +3271,11 @@ elvST['LOWBAT=TRUE'] = '${stringTableBatteryEmpty}';
 elvST['LOW_BAT=TRUE'] = '${stringTableBatteryEmpty}';
 elvST['MAINTENANCE|ERROR_BATTERY=BATTERY_DEFECT'] = '${stringTableBatteryFailure}';
 elvST['MAINTENANCE|ERROR_BATTERY=NO_ERROR'] = '${stringTableBatteryOk}';
+elvST['MAINTENANCE|ERROR_OVERHEAT'] = '${stringTableErrorOverheatTrue}';
 elvST['MAINTENANCE|CONFIG_PENDING'] = '${stringTableConfigPending}';
 elvST['MAINTENANCE|LOWBAT'] = '${stringTableBatteryLow}';
+elvST['MAINTENANCE|LOW_BAT'] = '${stringTableBatteryLow}';
+elvST['MAINTENANCE|SABOTAGE'] = '${stringTableSabotage}';
 elvST['MAINTENANCE|STICKY_BATTERY=BATTERY_DEFECT'] = '${stringTableBatteryFailure}';
 elvST['MAINTENANCE|STICKY_BATTERY=BATTERY_WAS_DEFECT'] = '${stringTableBatteryWasDefect}';
 elvST['MAINTENANCE|STICKY_POWER=POWER_FAILURE'] = '${stringTablePowerNotAvailable}';
@@ -3223,23 +3288,24 @@ elvST['MAINTENANCE|UNREACH'] = '${stringTableUnreach}';
 elvST['minutes'] = '${stringTableMinute}';
 elvST['MODUS_BUTTON_LOCK'] = '${stringTableModusButtonLock}';
 elvST['MOTION_DETECTOR'] = '${stringTableMotionDetectorTitle}';
-elvST['MOTION_DETECTOR|BRIGHTNESS'] = '${stringTableMotionDetectorBrightness}';
-elvST['MOTION_DETECTOR|BRIGHTNESS_FILTER'] = '${stringTableMotionDetectorBrightnessFilter}';
+elvST['MOTION_DETECTOR'] = '${stringTableMotionDetectorTitle}';
 elvST['MOTION_DETECTOR|ERROR=SABOTAGE'] = '${stringTableMotionDetectorErrorSabotage}';
 elvST['MOTION_DETECTOR|ERROR=0'] = '${stringTableSabotageContactOk}';
 elvST['MOTION_DETECTOR|ERROR=7'] = '${stringTableMotionDetectorErrorSabotage}';
 elvST['MOTION_DETECTOR|EVENT_FILTER_NUMBER'] = '${stringTableMotionDetectorEventFilterNumber}';
 elvST['MOTION_DETECTOR|EVENT_FILTER_PERIOD'] = '${stringTableMotionDetectorEventFilterPeriod}';
 elvST['MOTION_DETECTOR|MIN_INTERVAL'] = '${stringTableMotionDetectorMinInterval}';
-elvST['MOTION_DETECTOR|MOTION=FALSE'] = '${stringTableMotionDetectorMotionFalse}';
-elvST['MOTION_DETECTOR|MOTION=TRUE'] = '${stringTableMotionDetectorMotionTrue}';
 elvST['MOTION_DETECTOR|CAPTURE_WITHIN_INTERVAL'] = '${stringTableMotionDetectorCaptureWithinInterval}';
+elvST['MOTIONDETECTOR_TRANSCEIVER'] = '${stringTableMotionDetectorTitle}';
 elvST['PARAM_SELECT'] = '${stringTableParamSelect}';
 elvST['PARAM_SELECT=INACTIVE'] = '${stringTableParamSelectInactive}';
 elvST['PARAM_SELECT=T1'] = '${stringTableParamSelectT1}';
 elvST['PARAM_SELECT=T2'] = '${stringTableParamSelectT2}';
 elvST['PARAM_SELECT=T1-T2'] = '${stringTableParamSelectT1MinusT2}';
 elvST['PARAM_SELECT=T2-T1'] = '${stringTableParamSelectT2MinusT1}';
+elvST['PARTY_SET_POINT_TEMPERATURE'] = '${stringTableClimateControlRegPartyValue}';
+elvST['PARTY_TIME_END'] = '${stringTableClimateControlRegPartyEndTime}';
+elvST['PARTY_TIME_START'] = '${stringTableClimateControlRegPartyStartTime}';
 elvST['POWER|BAT_LEVEL'] = '${stringTableBatteryCapacity}';
 elvST['POWER|LOWBAT=FALSE'] = '${stringTableBatteryOk}';
 elvST['POWER|LOWBAT=TRUE'] = '${stringTableBatteryEmpty}';
@@ -3446,12 +3512,34 @@ elvST['SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=DEGRADED_SMOKE_CHAMBER'] = '${stringTa
 elvST['SMOKE_DETECTOR|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
 elvST['SMOKE_DETECTOR|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
 elvST['SMOKE_DETECTOR|REPEAT_ENABLE'] = '${stringTableSmokeDetectorRepeatEnable}';
+elvST['SMOKE_DETECTOR_ALARM_STATUS=IDLE_OFF'] = '${stringTableStateIdleOff}';
+elvST['SMOKE_DETECTOR_ALARM_STATUS=INTRUSION_ALARM'] = '${stringTableStateIntrusionAlarm}';
+elvST['SMOKE_DETECTOR_ALARM_STATUS=PRIMARY_ALARM'] = '${stringTableStatePrimaryAlarm}';
+elvST['SMOKE_DETECTOR_ALARM_STATUS=SECONDARY_ALARM'] = '${stringTableStateSecondaryAlarm}';
+elvST['SMOKE_DETECTOR_COMMAND=INTRUSION_ALARM'] = '${stringTableCommandIntrusionAlarm}';
+elvST['SMOKE_DETECTOR_COMMAND=INTRUSION_ALARM_OFF'] = '${stringTableCommandIntrusionAlarmOff}';
+elvST['SMOKE_DETECTOR_COMMAND=SMOKE_TEST'] = '${stringTableCommandSmokeTest}';
+elvST['SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST'] = '${stringTableCommandCommunicationTest}';
+elvST['SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST_REPEATED'] = '${stringTableCommandCommunicationTestRepeated}';
+elvST['SMOKE_DETECTOR_EVENT=ALARM_OFF'] = '${stringTableEventAlarmOff}';
+elvST['SMOKE_DETECTOR_EVENT=ALARM_OFF_REPEATED'] = '${stringTableEventAlarmOffRepeated}';
+elvST['SMOKE_DETECTOR_EVENT=INTRUSION_ALARM'] = '${stringTableEventIntrusionAlarm}';
+elvST['SMOKE_DETECTOR_EVENT=INTRUSION_ALARM_REPEATED'] = '${stringTableEventIntrusionAlarmRepeated}';
+elvST['SMOKE_DETECTOR_EVENT=LOW_BAT'] = '${stringTableEventLowBat}';
+elvST['SMOKE_DETECTOR_EVENT=LOW_BAT_REPEATED'] = '${stringTableEventLowBatRepeated}';
+elvST['SMOKE_DETECTOR_EVENT=PRIMARY_ALARM'] = '${stringTableEventPrimaryAlarm}';
+elvST['SMOKE_DETECTOR_EVENT=SECONDARY_ALARM'] = '${stringTableEventSecondaryAlarm}';
 elvST['SMOKE_DETECTOR_TEAM'] = '${stringTableSmokeDetectorTitle}';
 elvST['SMOKE_DETECTOR_TEAM|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
 elvST['SMOKE_DETECTOR_TEAM|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
 elvST['SMOKE_DETECTOR_TEAM_V2'] = '${stringTableSmokeDetectorTitle}';
 elvST['SMOKE_DETECTOR_TEAM_V2|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
 elvST['SMOKE_DETECTOR_TEAM_V2|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=COMMUNICATION_TEST_SENT'] = '${stringTableCommunicatingTestSent}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=COMMUNICATION_TEST_OK'] = '${stringTableCommunicatingTestOK}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_OK'] = '${stringTableSystemTestOK}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_FAILED'] = '${stringTableSystemTestFailure}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=NONE'] = '${stringTableSystemTestNone}';
 elvST['SPEED_MULTIPLIER'] = '${stringTableSpeedMultiplier}';
 elvST['STANDBY_TIME'] = '${stringTableStandByTime}';
 elvST['STATUS_INDICATOR'] = '${stringTableStatusIndicatorTitle}';
@@ -3471,6 +3559,8 @@ elvST['SWITCH_INTERFACE'] = '${stringTableSwitchInterfaceTitle}';
 elvST['SWITCH_INTERFACE|PRESS'] = '${stringTableSwitchInterfacePress}';
 elvST['SWITCH_INTERFACE|STATE=FALSE'] = '${stringTableSwitchInterfaceStateFalse}';
 elvST['SWITCH_INTERFACE|STATE=TRUE'] = '${stringTableSwitchInterfaceStateTrue}';
+elvST['SWITCH_PANIC'] = '${stringTableSirenSwitchPanicTitle}';
+elvST['SWITCH_SENSOR'] = '${stringTableSwitchSensorTitle}';
 elvST['SWITCH_TRANSMIT'] = '${stringTableSwitchTransmitTitle}';
 elvST['SWITCH_TRANSMIT|TWO_POINT_HYSTERESIS'] = '${stringTableSwitchTransmitTwoPointHysteresis}';
 elvST['SWITCH_VIRTUAL_RECEIVER'] = '${stringTableSwitchVirtualReceiverTitle}';
@@ -3589,16 +3679,20 @@ elvST['AUTO_MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
 elvST['ACTUAL_HUMIDITY'] = '${stringTableWeatherHumidity}';
 elvST['ACTUAL_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverActualTemp}';
 elvST['ALARMTIME_MAX'] = '${stringTableAlarmTimeMax}';
+elvST['ARR_TIMEOUT'] = '${stringTableArrTimeout}';
 elvST['BACKLIGHT_AT_CHARGE'] = '${stringTableBackLightAtCharge}';
 elvST['BACKLIGHT_AT_KEYSTROKE'] = '${stringTableBackLightAtKeystroke}';
 elvST['BACKLIGHT_AT_MOTION'] = '${stringTableBackLightAtMotion}';
 elvST['BACKLIGHT_ON_TIME'] = '${stringTableBackLightOnTime}';
 elvST['BAT_DEFECT_LIMIT'] = '${stringTableBatDefectLimit}';
+elvST['BATTERY_POWERED'] = '${stringTableBatteryPowered}';
 elvST['BATTERY_STATE'] = '${stringTableClimateControlRTTransceiverBatteryState}';
 elvST['BOOST_MODE'] = '${stringTableClimateControlRTTransceiverBoostMode}';
 elvST['BOOST_MODE=FALSE'] = '${stringTableBoostModeFalse}';
 elvST['BOOST_MODE=TRUE'] = '${stringTableBoostModeTrue}';
 elvST['BOOST_STATE'] = '${stringTableBoostState}';
+elvST['BRIGHTNESS'] = '${stringTableBrightness}';
+elvST['BRIGHTNESS_FILTER'] = '${stringTableBrightnessFilter}';
 elvST['COMFORT_MODE'] = '${stringTableClimateControlRTTransceiverComfortMode}';
 elvST['COMMUNICATION_REPORTING'] = '${stringTableCommunicatingReporting}';
 elvST['COMMUNICATION_REPORTING=TRUE'] = '${stringTableCommunicatingReportingTrue}';
@@ -3609,8 +3703,12 @@ elvST['CONTROL_MODE=MANU-MODE'] = '${stringTableClimateControlRTTransceiverManuM
 elvST['CONTROL_MODE=PARTY-MODE'] = '${stringTableClimateControlRTTransceiverPartyMode}';
 elvST['DAYLIGHT_SAVINGS_TIME'] = '${stringTableDST}';
 elvST['DEVICE_IN_BOOTLOADER'] = '${stringTableDeviceInBootloader}';
+elvST['DISPLAY_INVERTING'] = '${stringTableDisplayInverting}';
 elvST['DUTY_CYCLE=FALSE'] = '${stringTableDutyCycleFalse}';
 elvST['DUTY_CYCLE=TRUE'] = '${stringTableDutyCycleTrue}';
+elvST['DUTYCYCLE_LIMIT'] = '${stringTableDutyCycleLimit}';
+elvST['ENABLE_ROUTING'] = '${stringTableEnableRouting}';
+elvST['ERROR_CODE'] = '${stringTableErrorCode}';
 elvST['ERROR_POWER=NO_ERROR'] = '${stringTablePowerAvailable}';
 elvST['ERROR_POWER=POWER_FAILURE'] = '${stringTablePowerNotAvailable}';
 elvST['ERROR_SABOTAGE=NO_ERROR'] = '${stringTableSabotageContactOk}';
@@ -3629,6 +3727,7 @@ elvST['EVENT_RANDOMTIME_UNIT=S'] = '${optionUnitS}';
 elvST['EVENT_RANDOMTIME_UNIT=M'] = '${optionUnitM}';
 elvST['EVENT_RANDOMTIME_UNIT=H'] = '${optionUnitH}';
 elvST['EXPECT_AES'] = '${stringTableExpectAES}';
+elvST['ILLUMINATION'] = '${stringTableBrightness}';
 elvST['LED_ONTIME'] = '${stringTableLEDOnTime}';
 elvST['LEVEL'] = '${stringTableDimmerLevel}';
 elvST['LEVEL_REAL'] = '${stringTableDimmerLevelReal}';
@@ -3639,7 +3738,12 @@ elvST['LOWBAT_REPORTING=TRUE'] = '${stringTableLowbatReportingTrue}';
 elvST['LOWBAT_SIGNAL'] = '${stringTableLowbatSignal}';
 elvST['LOWERING_MODE'] = '${stringTableClimateControlRTTransceiverLoweringMode}';
 elvST['LUX'] = '${stringTableLux}';
+elvST['MAINS_POWERED'] = '${stringTableMainsPowered}';
 elvST['MANU_MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
+elvST['MOTION=FALSE'] = '${stringTableMotionDetectorMotionFalse}';
+elvST['MOTION=TRUE'] = '${stringTableMotionDetectorMotionTrue}';
+elvST['MOTION_DETECTION_ACTIVE=FALSE'] = '${stringTableMotionDetectorMotionDetectionActiveFalse}';
+elvST['MOTION_DETECTION_ACTIVE=TRUE'] = '${stringTableMotionDetectorMotionDetectionActiveTrue}';
 elvST['NOT_USED'] = '${stringTableNotUsed}';
 elvST['OLD_LEVEL'] = '${stringTableDimmerOldLevel}';
 elvST['ON_TIME'] = '${stringTableDimmerOnTime}';
@@ -3655,6 +3759,7 @@ elvST['PARTY_STOP_TIME'] = '${stringTablePartyStopTime}';
 elvST['PARTY_STOP_YEAR'] = '${stringTablePartyStopYear}';
 elvST['PARTY_TEMPERATURE'] = '${stringTablePartyTemperature}';
 elvST['PEER_NEEDS_BURST'] = '${stringTablePeerNeedsBurst}';
+elvST['PIR_OPERATION_MODE'] = '${stringTablePirOperationMode}';
 elvST['POWERUP_ACTION'] = '${stringTableDimmerPowerUpAction}';
 elvST['POWERUP_JUMPTARGET'] = '${stringTableDimmerPowerUpAction}';
 elvST['POWERUP_ONDELAY_UNIT'] = '${stringTableOnDelayUnit}';
@@ -3664,7 +3769,7 @@ elvST['POWERUP_ONDELAY_UNIT=10S'] = '${optionUnit10S}';
 elvST['POWERUP_ONDELAY_UNIT=1M'] = '${optionUnit1M}';
 elvST['POWERUP_ONDELAY_UNIT=5M'] = '${optionUnit5M}';
 elvST['POWERUP_ONDELAY_UNIT=10M'] = '${optionUnit10M}';
-elvST['POWERUP_ONDELAY_VALUE'] = '${stringTableEventDelayValue}';
+elvST['POWERUP_ONDELAY_VALUE'] = '${stringTableOnDelayValue}';
 elvST['POWERUP_ONTIME_UNIT'] = '${stringTableOnTimeUnit}';
 elvST['POWERUP_ONTIME_UNIT=1S'] = '${optionUnit1S}';
 elvST['POWERUP_ONTIME_UNIT=5S'] = '${optionUnit5S}';
@@ -3673,9 +3778,12 @@ elvST['POWERUP_ONTIME_UNIT=1M'] = '${optionUnit1M}';
 elvST['POWERUP_ONTIME_UNIT=5M'] = '${optionUnit5M}';
 elvST['POWERUP_ONTIME_UNIT=10M'] = '${optionUnit10M}';
 elvST['POWERUP_ONTIME_VALUE'] = '${stringTableOnTimeValue}';
+elvST['POWER_SUPPLY'] = '${stringTablePowerSupply}';
 elvST['PROCESS=STABLE'] = '${stringTableProcessStable}';
 elvST['PROCESS=NOT_STABLE'] = '${stringTableProcessNotStable}';
 elvST['RAMP_TIME'] = '${stringTableDimmerRampTime}';
+elvST['SABOTAGE=FALSE'] = '${stringTableSabotageContactOk}';
+elvST['SABOTAGE=TRUE'] = '${stringTableSabotageContactWasActive}';
 elvST['SET_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverSetTemperature}';
 elvST['SECTION'] = '${stringTableSection}';
 elvST['SOUND_ID'] = '${stringTableSoundID}';
@@ -3683,6 +3791,7 @@ elvST['STATE=FALSE'] = '${stringTableStateFalse}';
 elvST['STATE=TRUE'] = '${stringTableStateTrue}';
 elvST['STATUSINFO_MINDELAY'] = '${stringTableStatusInfoMinDelay}';
 elvST['STATUSINFO_RANDOM'] = '${stringTableStatusInfoRandom}';
+elvST['TIME_OF_OPERATION'] = '${stringTableTimeOfOperation}';
 elvST['TX_MINDELAY'] = '${stringTableTxMinDelay}';
 elvST['TX_MINDELAY_UNIT'] = '${stringTableTxMinDelayUnit}';
 elvST['TX_MINDELAY_UNIT=100MS'] = '${optionUnit100MS}';
@@ -3706,6 +3815,8 @@ elvST['VALVE_STATE=ADJUSTMENT_TOO_SMALL'] = '${stringTableValveStateAdjToSmall}'
 elvST['VALVE_STATE=ERROR_POSITION'] = '${stringTableValveStateErrorPosition}';
 elvST['WAKEUP_DEFAULT_CHANNEL'] = '${stringTableWakeupDefaultChannel}';
 elvST['WAKEUP_BEHAVIOUR'] = '${stringTableButtonResponseWithoutChannelChooser}';
+elvST['WAKEUP_BEHAVIOUR_STATUS_MSG_CONFIRMATION'] = '${stringTableBehaviourStatusMsgConfirmation}';
+elvST['WAKEUP_BEHAVIOUR_STATUS_SIGNALIZATION_CONFIRMATION'] = '${stringTableBehaviourStatusSignalizationConfirmation}';
 elvST['WINDOW_OPEN_REPORTING'] = '${stringTableWindowOpenReporting}';
 elvST['WINDOW_OPEN_REPORTING=FALSE'] = '${stringTableWindowOpenReportingFalse}';
 elvST['WINDOW_OPEN_REPORTING=TRUE'] = '${stringTableWindowOpenReportingTrue}';
@@ -11029,10 +11140,14 @@ PartyModeDialog.RESULT_YES = 1;
  */
 function setStatusDisplayTableHeader() {
   var optionHeaderElems = jQuery("[name='optionHeader']"),
-  hideOptionHeader = true;
+  hideOptionHeader = true,
+  row;
 
   for(var loop = 0; loop <= 5; loop++) {
-    if (jQuery("#textSelect_"+loop).val() != "-1" ) {
+
+    row = jQuery("#textSelect_"+loop).val();
+
+    if ((row != undefined) && (row != "-1")) {
      hideOptionHeader = false;
     }
   }
@@ -11044,10 +11159,12 @@ function setStatusDisplayTableHeader() {
 }
 
 function setIconPreview(oValue) {
-  // oValue.index and oValue.value
+  var displayType = statusDisplayDialog.displayType,
+  picPath = (displayType == "DIS") ? "/ise/img/icons_hm_dis_wm55/24/" : "/ise/img/icons_hm_dis_ep_wm55/24/";
+
   oValue.index = oValue.index.toString();
   var previewElm = jQuery("#iconPreview_"+oValue.index);
-  previewElm.html("<img src='/ise/img/icons_hm_dis_wm55/24/"+oValue.value+".png' alt='' style='height:20px; background-color:#f0f0f0;'>");
+  previewElm.html("<img src='"+picPath+oValue.value+".png' alt='' style='height:20px; background-color:#f0f0f0;'>");
 }
 
 function displayStatusDisplayOptionContainer(lineIndex, mode) {
@@ -11142,7 +11259,12 @@ StatusDisplayDialog = Class.create({
     this.textKey = "0x12";
     this.colorKey = "0x11";
     this.iconKey = "0x13";
+    this.soundKey ="0x14";
+    this.soundQuantityKey = "0x1C";
+    this.soundTimeLagKey = "0x1D";
+    this.flashKey = "0x16";
     this.configString = "not initialized";
+    this.displayType = "DIS";
 
     var dialog = document.createElement("div");
     dialog.className = "YesNoDialog";
@@ -11190,13 +11312,12 @@ StatusDisplayDialog = Class.create({
     
     Layer.add(this.m_layer);
 
-    //this._getAllTextPresets();
-    //this._initDisplayConfigObject(); // not necessary
+    this.initEPaper();
     this._addElements();
     this._initAllValues();
-    //this._initIconPreview(); // not necessary
 
     setStatusDisplayTableHeader();
+
 
     // Remark 1: This doesn´t work satisfying -- see Remark 2
     // This should display an icon within the options of the icon selector
@@ -11206,6 +11327,8 @@ StatusDisplayDialog = Class.create({
     jQuery(".YesNoDialog").css("height", jQuery(".YesNoDialogContentWrapper").height() + 78);
     jQuery(".YesNoDialogFooter").css("top", jQuery(".YesNoDialogContentWrapper").height() + 26);
   },
+
+  initEPaper: function () {},
 
   // This is for testing only
   _getAllTextPresets: function() {
@@ -11245,7 +11368,7 @@ StatusDisplayDialog = Class.create({
     var options = "";
     options += "<option value='-1'>"+translateKey("stringTableNotUsed")+"</option>";
     for (var loop = 0; loop <= 19; loop++) {
-      options += "<option value='"+loop+"'>"+ translateKey("statusDisplayOptionText")+ " " +loop+"</option>";
+      options += "<option value='"+loop+"'>"+ translateKey("statusDisplayOptionText")+ " " +(loop + 1)+"</option>";
     }
     options += "<option value='99'>"+translateKey("statusDisplayOptionFreeText")+"</option>";
     return options;
@@ -11286,6 +11409,7 @@ StatusDisplayDialog = Class.create({
       translateKey("iconSignalYellow"),
       translateKey("iconSignalRed")
     ];
+
     options += "<option name='option_NotUsed' value='-1'>" + translateKey("stringTableNotUsed") + "</option>";
     for (var loop = 0; loop < 12; loop++) {
       // Remark 2: This doesn´t work satisfying -- see Remark 1
@@ -11400,7 +11524,7 @@ StatusDisplayDialog = Class.create({
     var self = this,
     arAllValues = this._getAllValues();
 
-    conInfo("All values of the channel: ");
+    conInfo("DIS: All values of the channel: ");
     conInfo(arAllValues);
 
     jQuery.each(arAllValues, function(index, line) {
@@ -11515,6 +11639,290 @@ StatusDisplayDialog = Class.create({
     this.close(YesNoDialog.RESULT_NO);
   }
   
+});
+
+StatusDisplayDialogEPaper = Class.create(StatusDisplayDialog, {
+
+  initEPaper: function () {
+    console.log("StatusDisplayDialogEPaper - initEPaper");
+    this.displayType = "DIS-EP";
+  },
+
+    // This creates the content of the dialog.
+  _addElements: function() {
+    var dialogContentElem = jQuery("#statusDisplayDialog"),
+    textOptions = this._getTextOptions(),
+    iconOptions = this._getIconOptions(),
+    soundOptions = this._getSoundOptions(),
+    soundQuantityOptions = this._getSoundQuantityOptions(),
+    soundTimeLagOptions = this._getSoundTimeLagOptions(),
+    flashOptions = this._getFlashOptions(),
+
+    freeTextValue = translateKey("statusDisplayOptionFreeText"),
+    arrDisabledElements = ["disabled", "","","","disabled","disabled"];
+
+    dialogContentElem.append(function(index,html){
+      //var content =  "<tr><th>&nbsp;</th><th>Text</th> <th id='headFreeText' class='hidden'></th><th name='optionHeader'>Color</th><th name='optionHeader'>Icon</th></tr>";
+      var content =  "<tr><th>&nbsp;</th><th>Text</th> <th id='headFreeText' class='hidden'></th><th name='optionHeader'>Icon</th></tr>";
+      for (var loop = 0; loop <= 4; loop++) {
+        content +=
+          "<tr>" +
+            "<td>"+translateKey("statusDisplayLine")+ " "+(loop + 1)+": </td>"+
+            "<td><select id='textSelect_"+loop+"' onchange='textOnChange(this)' "+arrDisabledElements[loop]+">"+textOptions+"</select></td>" +
+            "<td id='cellFreeText_"+loop+"' class='hidden'><input id='freeText_"+loop+"' type='text' value='"+freeTextValue+"' maxlength='12' size='15' style='text-align:center'></td>" +
+            "<td id='placeHolder_"+loop+"' class='hidden'></td>" +
+            "<td name='optionContainer_"+loop+"' class='hidden'><select id='iconSelect_"+loop+"' onchange='iconOnChange(this)'>"+iconOptions+"</select></td>" +
+            "<td name='optionContainer_"+loop+"' class='hidden' id='iconPreview_"+loop+"'></td>"+
+          "</tr>";
+      }
+
+      content += "<tr><td colspan='4'><hr></td></tr>";
+      //content += "<tr><td>"+translateKey('lblAcusticalSignal')+":</td><td><select id='soundSelectBox'>"+soundOptions+"</select></td></tr>";
+      //content += "<tr><td>"+translateKey('lblOpticalSignal')+":</td><td><select id='flashSelectBox'>"+flashOptions+"</select></td></tr>";
+
+      content += "<tr><th align='center'>"+translateKey('lblAcusticalSignal')+"</th><th>"+translateKey('lblQuantity')+"</th><th>"+translateKey('lblTimeLag')+"</th><th></th></tr>";
+      content +=
+        "<tr>" +
+          "<td align='center'><select id='soundSelectBox'>"+soundOptions+"</select></td>" +
+          "<td align='center'><select id='soundQuantitySelectBox'>"+soundQuantityOptions+"</select></td>" +
+          "<td align='center'><select id='soundTimeLagSelectBox'>"+soundTimeLagOptions+"</select></td>" +
+        "</tr>";
+
+      content += "<tr><td height='15px;'></td></tr>";
+
+      content += "<tr><th align='center'>"+translateKey('lblOpticalSignal')+"</th></tr>";
+      content +=
+        "<tr>" +
+          "<td align='center'><select id='flashSelectBox'>"+flashOptions+"</select></td>" +
+        "</tr>" ;
+
+      content += "<tr><td height='15px;'></td></tr>";
+
+      return content;
+    });
+  },
+
+    // Creates the options for the text selector
+  _getTextOptions: function() {
+    var options = "";
+    options += "<option value='-1'>"+translateKey("stringTableNotUsed")+"</option>";
+    for (var loop = 0; loop <= 9; loop++) {
+      options += "<option value='"+loop+"'>"+ translateKey("statusDisplayOptionText")+ " " +(loop + 1)+"</option>";
+    }
+    options += "<option value='99'>"+translateKey("statusDisplayOptionFreeText")+"</option>";
+    return options;
+  },
+
+    // Creates the options for the icon selector
+  _getIconOptions: function() {
+    var options = "",
+    arOptionText = [
+      translateKey("iconOff"),
+      translateKey("iconOn"),
+      translateKey("iconOpen"),
+      translateKey("iconClosed"),
+      translateKey("iconError"),
+      translateKey("iconOK"),
+      translateKey("iconInfo"),
+      translateKey("iconNewMessage"),
+      translateKey("iconServiceMessage")
+    ];
+
+    options += "<option name='option_NotUsed' value='-1'>" + translateKey("stringTableNotUsed") + "</option>";
+    for (var loop = 0; loop < 9; loop++) {
+      options += "<option name='option_"+loop+"' value='"+loop+"'>" + arOptionText[loop] + "</option>";
+    }
+    return options;
+  },
+
+  _getSoundOptions:function() {
+    var options = "",
+    arSound = ["",
+      translateKey("optionLong") + " " + translateKey("optionLong"),
+      translateKey("optionLong") + " " + translateKey("optionShort"),
+      translateKey("optionLong") + " " + translateKey("optionShort") + " " + translateKey("optionShort"),
+      translateKey("optionShort"),
+      translateKey("optionShort") + " " + translateKey("optionShort")];
+
+    options += "<option value='0xC0'>"+translateKey("stringTableNotUsed")+"</option>";
+    options += "<option value='0xC6'>"+translateKey("optionLong")+"</option>"; // This is a belated value which should appear as first option after 'not used'
+    for (var loop = 1; loop <= 5; loop++) {
+      options += "<option value='0xC"+loop+"'>"+ arSound[loop] +"</option>";
+    }
+    return options;
+  },
+
+  _getSoundQuantityOptions: function() {
+    var options = "";
+    for (var loop = 0; loop <= 14; loop++) {
+      options += "<option value='0xD"+loop.toString(16).toUpperCase()+"'>"+ (loop + 1) +"</option>";
+    }
+    options += "<option value='0xDF'>"+ translateKey("optionInfinite") +"</option>";
+    return options;
+  },
+
+  _getSoundTimeLagOptions: function() {
+    var options = "";
+    for (var loop = 0; loop <= 15; loop++) {
+      options += "<option value='0xE"+loop.toString(16).toUpperCase()+"'>"+ (parseInt(loop) + 1) * 10 + " " + translateKey("optionUnitS") +"</option>";
+    }
+    return options;
+  },
+
+  _getFlashOptions:function() {
+    var options = "",
+    arFlash = [translateKey("stringTableNotUsed"), translateKey("redFlash"), translateKey("greenFlash"), translateKey("orangeFlash")];
+    for (var loop = 0; loop <= 3; loop++) {
+      options += "<option value='0xF"+loop+"'>"+ arFlash[loop] +"</option>";
+    }
+    return options;
+  },
+
+   // Creates the string, necessary for the text field within the program
+  _createConfigString: function() {
+    var textElm, freeTextElm,iconElm,
+    result = this.startKey + ","; // Start key
+
+    // Read 5 lines and create string
+    for (var loop = 0; loop < 5; loop++) {
+      textElm = jQuery("#textSelect_" + loop);
+      iconElm = jQuery("#iconSelect_" + loop);
+      freeTextElm = jQuery("#freeText_" + loop);
+
+      if (textElm.val() == -1) {
+        result+= this.lf + ",";
+      } else {
+        result += this.textKey + ",";
+        if (textElm.val() != "99") {
+          // Predefined text bloc
+          result += this._convertVal2HexVal(textElm.val()) + ",";
+        } else {
+          // Free user customized text
+          //result += freeTextElm.val() + ",";
+          result += this._convertPlainText2Hex(freeTextElm.val());
+        }
+        if (iconElm.val() != -1) {
+          result += this.iconKey + ",";
+          result += this._convertVal2HexVal(iconElm.val()) + ",";
+        }
+        result += this.lf + ",";
+      }
+    }
+    result += this.soundKey + "," + jQuery("#soundSelectBox").val() + ",";
+    result += this.soundQuantityKey + "," + jQuery("#soundQuantitySelectBox").val() + ",";
+    result += this.soundTimeLagKey + "," + jQuery("#soundTimeLagSelectBox").val() + ",";
+    result += this.flashKey + "," + jQuery("#flashSelectBox").val() + ",";
+    result+= this.endKey; // End key
+    this.configString = result;
+  },
+  /**
+   * Initializes the dialog
+   * @private
+   */
+  _initAllValues: function() {
+    var self = this,
+    arValues = this.channelValue.split(","),
+    sizeChannelValue = arValues.length,
+    arAllValues = this._getAllValues(),
+    soundElm = jQuery("#soundSelectBox"),
+    soundQuantityElm = jQuery("#soundQuantitySelectBox"),
+    soundTimeLagElm = jQuery("#soundTimeLagSelectBox"),
+    flashElm = jQuery("#flashSelectBox");
+
+
+    conInfo("DIS-EP: All values of the channel: ");
+    conInfo(arAllValues);
+
+    jQuery.each(arAllValues, function(index, line) {
+      var textElm = jQuery("#textSelect_" + index),
+      iconElm = jQuery("#iconSelect_" + index),
+      freeTextElm = jQuery("#freeText_" + index);
+
+      if (line.text != "notUsed") {
+        textElm.val(self._convertHexVal2Val(line.text));
+        // User defined text
+        if (parseInt(line.text.split(",")[0],16) < 128) {
+          freeTextElm.val(decodeStringStatusDisplay(self._convertHexString2PlainText(line.text)));
+        }
+        if (line.icon != -1) {
+          iconElm.val(self._convertHexVal2Val(line.icon));
+          setIconPreview({index: index, value: iconElm.val()});
+        } else {
+          // Icon not in use
+          iconElm.val("-1");
+        }
+        displayStatusDisplayOptionContainer(index, true);
+      } else {
+        textElm.val("-1");
+      }
+    });
+    soundElm.val(arValues[sizeChannelValue - 8]); // initialize sound select box
+    soundQuantityElm.val(arValues[sizeChannelValue - 6]); // initialize sound quantity select box
+    soundTimeLagElm.val(arValues[sizeChannelValue - 4]); // initialize sound time lag box
+    flashElm.val(arValues[sizeChannelValue - 2]); // initialize flash select box
+
+    setFreeTextContainer();
+  },
+    // Returns an array of objects with the values of all lines.
+  // [Object {text="0x80, color="0x81", icon="0x82},.....]}
+  _getAllValues: function() {
+    var val = this.channelValue;
+    var arValues = val.split(","), //replace(/ /g, "").split(","),
+    arLines = []; // contains the lines 1,2,3
+
+    // Is a start key and end key available? Otherwise the string isn´t valid.
+    if (arValues[0] == this.startKey && arValues[arValues.length - 1] == this.endKey) {
+      var lineIndex = 0,
+      textIndex,
+      nextTextBlockIndex = 0,
+      textOffset = 0;
+
+      arValues.shift(); // remove the start key 0x02
+      arValues.pop(); // remove the end key 0x03
+      //console.log("arValues: " + arValues);
+      for (var loopx = 0; loopx < arValues.length; loopx++) {
+        //console.log("current loopx: " + loopx);
+        var valueSet = {};
+        nextTextBlockIndex = 0;
+                // Is LF?
+        if (arValues[loopx] == this.lf) {
+          valueSet.text="notUsed";
+           arLines[lineIndex] = valueSet;
+          lineIndex++;
+        }
+
+        if (arValues[loopx] == this.textKey) {
+          valueSet.text = "";
+          // Read till icon or lf and increase loopx by the number of read chars
+          textIndex = loopx + 1;
+          do {
+            valueSet.text += arValues[textIndex];
+            if ((arValues[textIndex + 1] != this.iconKey) && (arValues[textIndex + 1] != this.lf)) {
+              valueSet.text += ",";
+            }
+
+            //console.log("added char: " + arValues[textIndex]);
+            textIndex++;
+            nextTextBlockIndex++;
+          } while ((arValues[textIndex] != this.iconKey) && (arValues[textIndex] != this.lf)) ;
+
+          // Icon hinzufügen, entweder nicht benutzt (-1) oder den entsprechenden Wert
+          // Add the icon, either not used (-1) or the correspondent value
+          valueSet.icon = (arValues[textIndex] == this.iconKey) ? arValues[textIndex + 1] : -1;
+          arLines[lineIndex] = valueSet;
+          lineIndex++;
+          if (valueSet.icon == -1) {textOffset = 1;} else {textOffset = 3;}
+          // Jump to the next text block
+          loopx += nextTextBlockIndex + textOffset; // Springe zum nächsten Textblock
+          //console.log("new loopx : " + loopx);
+        }
+      }
+    } else {
+      conInfo("Value string invalid");
+    }
+    return arLines;
+  }
+
 });
 
 YesNoDialog.RESULT_NO = 0;
@@ -13121,6 +13529,20 @@ if (PLATFORM == "Central") {
       return (channel.channelType == "MAINTENANCE") ? true : false;
   },
 
+  isChannelVisible: function(channel)
+  {
+    var result = true;
+    switch (channel.channelType) {
+      case "MAINTENANCE":
+      case "WEEK_PROGRAM":
+        result = false;
+        break;
+      default: result = true;
+    }
+    return result;
+  },
+
+
   /**
    * Zeigt den Konfigurationsdialog für einen Kanal an.
    **/
@@ -13254,7 +13676,7 @@ if (PLATFORM == "Central") {
     }, this);
     device.singles.each(function(channel) {
       channel._isVisible = false;
-      if(this.showVirtualChannel(channel) && (! this.isHmIPMaintenanceChannel(channel)) ) {
+      if(this.showVirtualChannel(channel) && (this.isChannelVisible(channel)) ) {
         channel._isVisible = true;
         $(this.PREFIX + channel.id).show();
         $(this.PREFIX + channel.id + "Thumbnail").show();
@@ -16302,6 +16724,30 @@ homematic.com =
       homematic.com.callback = callback;
   },
 
+
+  showCCULicense: function(callback) {
+
+    var lang = getLang();
+    if (lang != "de" && lang != "en") {lang = getDefaultLang();};
+
+    var script = document.createElement("script");
+    script.id = "homematic_license_script";
+    script.type = "text/javascript";
+    script.src = "http://update.homematic.com/firmware/download?cmd=release_note&product=HM-CCU2&serial=3014&version="+homematic.com.m_latestVersion+"&locale=" + lang;
+    //script.src = "http://172.25.50.224:8080/update/download?cmd=release_note&product=HM-CCU2&serial=3014&version=2.13.7&locale=" + lang;
+    $("body").appendChild(script);
+    homematic.com.callback = callback;
+  },
+
+  // For testing only
+  showCCUDummyLicense: function(callback) {
+    var lang = getLang();
+    if (lang != "de" && lang != "en") {lang = getDefaultLang();};
+    var result = "<b>TEST TEXT</b><br /><p>Das ist die Lizenz</p><p>Sprache: "+lang+"</p>";
+    homematic.com.callback = callback;
+    window.setTimeout(function() {homematic.com.getCCU2LicenceText(result);}, 2000);
+  },
+
   /**
    * wird von homematic.com zurück geliefert
    **/
@@ -16320,7 +16766,14 @@ homematic.com =
   // wird von homematic.com zurück geliefert
   setDeviceFirmwareVersions: function(result) {
     homematic.com.callback(result);
+  },
+
+  // wird von homematic.com zurück geliefert
+  getCCU2LicenceText: function(result) {
+    homematic.com.callback(result);
   }
+
+
 };
 /**
  * rega.js
@@ -21857,22 +22310,22 @@ getExtendedDescription = function(type, ch) {
     case "HmIP-WTH":
       switch (ch) {
         case 1:
-          result = translateKey("lblHmIP_WTHChn1");
+          result = translateKey("lblHmIP_HeatingClimateControlTransceiver");
           break;
         case 2:
-          result = translateKey("lblHmIP_WTHChn2");
+          result = translateKey("lblHmIP_HeatingClimateControlReceiver");
           break;
         case 3:
-          result = translateKey("lblHmIP_WTHChn3");
+          result = translateKey("lblHmIP_HeatingClimateControlCLTransmitter");
           break;
         case 4:
-          result = translateKey("lblHmIP_WTHChn4");
+          result = translateKey("lblHmIP_HeatingShutterContactReceiver");
           break;
         case 5:
-          result = translateKey("lblHmIP_WTHChn5");
+          result = translateKey("lblHmIP_HeatingClimateControlSwitchTransmitter");
           break;
         case 6:
-          result = translateKey("lblHmIP_WTHChn6");
+          result = translateKey("lblHmIP_HeatingKeyReceiver");
           break;
       }
       break;
@@ -21883,25 +22336,25 @@ getExtendedDescription = function(type, ch) {
     case "HmIP-eTRV-2":
             switch (ch) {
               case 1:
-                result = translateKey("lblHmIP_TRVChn1");
+                result = translateKey("lblHmIP_HeatingClimateControlTransceiver");
                 break;
               case 2:
-                result = translateKey("lblHmIP_TRVChn2");
+                result = translateKey("lblHmIP_HeatingClimateControlReceiver");
                 break;
               case 3:
-                result = translateKey("lblHmIP_TRVChn3");
+                result = translateKey("lblHmIP_HeatingClimateControlCLReceiver");
                 break;
               case 4:
-                result = translateKey("lblHmIP_TRVChn4");
+                result = translateKey("lblHmIP_HeatingShutterContactReceiver");
                 break;
               case 5:
-                result = translateKey("lblHmIP_TRVChn5");
+                result = translateKey("lblHmIP_HeatingRoomTHTransceiver");
                 break;
               case 6:
-                result = translateKey("lblHmIP_TRVChn6");
+                result = translateKey("lblHmIP_HeatingRoomTHReceiver");
                 break;
               case 7:
-                result = translateKey("lblHmIP_TRVChn7");
+                result = translateKey("lblHmIP_HeatingKeyReceiver");
                 break;
             }
             break;
@@ -21911,19 +22364,19 @@ getExtendedDescription = function(type, ch) {
     case "HmIP-PS":
             switch (ch) {
               case 1:
-                result = translateKey("lblHmIP_PSChn1") ;
+                result = translateKey("lblHmIP_KeyTransceiver") ;
                 break;
               case 2:
-                result = translateKey("lblHmIP_PSChn2") ;
+                result = translateKey("lblHmIP_SwitchTransmitter") ;
                 break;
               case 3:
-                result = translateKey("lblHmIP_PSChn3") ;
+                result = translateKey("lblGenericLinkPartner") ;
                 break;
               case 4:
-                result = translateKey("lblHmIP_PSChn4") ;
+                result = translateKey("lblHmIP_NotSupported") ;
                 break;
               case 5:
-                result = translateKey("lblHmIP_PSChn5") ;
+                result = translateKey("lblHmIP_NotSupported") ;
                 break;
             }
             break;
@@ -21933,28 +22386,48 @@ getExtendedDescription = function(type, ch) {
     case "HmIP-PSM":
             switch (ch) {
               case 1:
-                result = translateKey("lblHmIP_PSMChn1") ;
+                result = translateKey("lblHmIP_KeyTransceiver") ;
                 break;
               case 2:
-                result = translateKey("lblHmIP_PSMChn2") ;
+                result = translateKey("lblHmIP_SwitchTransmitter") ;
                 break;
               case 3:
-                result = translateKey("lblHmIP_PSMChn3") ;
+                result = translateKey("lblGenericLinkPartner") ;
                 break;
               case 4:
-                result = translateKey("lblHmIP_PSMChn4") ;
+                result = translateKey("lblHmIP_NotSupported") ;
                 break;
               case 5:
-                result = translateKey("lblHmIP_PSMChn5") ;
+                result = translateKey("lblHmIP_NotSupported") ;
                 break;
               case 6:
-                result = translateKey("lblHmIP_PSMChn6") ;
+                result = translateKey("lblHmIP_EnergieMeterTransmitter") ;
                 break;
               case 7:
-                result = translateKey("lblHmIP_PSMChn7") ;
+                result = translateKey("lblHmIP_NotSupported") ;
                 break;
             }
             break;
+
+    case "HmIP-BSM":
+      switch (ch) {
+        case 1:
+        case 2:
+          result = translateKey("lblHmIP_KeyTransceiver") ;
+          break;
+        case 3:
+          result = translateKey("lblHmIP_SwitchTransmitter") ;
+          break;
+        case 4:
+        case 5:
+        case 6:
+          result = translateKey("lblGenericLinkPartner") ;
+          break;
+        case 7:
+          result = translateKey("lblHmIP_EnergieMeterTransmitter") ;
+          break;
+      }
+      break;
 
     // Radio-controlled indoor siren
     case "HM-Sec-Sir-WM":
@@ -24338,10 +24811,7 @@ iseButtonsDoorContact.prototype = {
       case "OPEN":
         return 1;
     }
-
-    // TODO here we should return -1
-    // For quick testing we return 0
-    return 0;
+    return -1;
   }
 
 };/**
@@ -26718,12 +27188,12 @@ iseArmAlarmSiren = Class.create();
 iseArmAlarmSiren.prototype = {
 
   initialize: function(id, initState, idDpState) {
-    console.log("id: " + id + " - initState: " + initState + " - idDpState: " + idDpState);
+    conInfo("iseArmAlarmSiren - id: " + id + " - initState: " + initState + " - idDpState: " + idDpState);
     this.id = id;
     this.state = initState;
     this.divOff = $(this.id + "Off");
-    this.divExtern = $(this.id + "Extern");
-    this.divIntern = $(this.id + "Intern");
+    this.divExtern = $(this.id + "Extern"); // all sensors
+    this.divIntern = $(this.id + "Intern"); // only the outside sensors
     this.divBlocked = $(this.id + "Blocked");
     this.idDpState = idDpState;
 
@@ -26751,10 +27221,10 @@ iseArmAlarmSiren.prototype = {
         ControlBtn.on(this.divOff);
         break;
       case 1:
-        ControlBtn.on(this.divExtern);
+        ControlBtn.on(this.divIntern); // outside sensors
         break;
       case 2:
-        ControlBtn.on(this.divIntern);
+        ControlBtn.on(this.divExtern); // all sensors
         break;
       case 3:
         ControlBtn.on(this.divBlocked);
@@ -26771,18 +27241,9 @@ iseArmAlarmSiren.prototype = {
     }, 1);
   },
 
+  // all sensors
   onClickExtern: function() {
     ControlBtn.pushed(this.divExtern);
-    setDpState(this.idDpState, 1, false);
-    var t = this;
-    new PeriodicalExecuter(function(pe) {
-      t.refresh();
-      pe.stop();
-    }, 1);
-  },
-
-  onClickIntern: function() {
-    ControlBtn.pushed(this.divIntern);
     setDpState(this.idDpState, 2, false);
     var t = this;
     new PeriodicalExecuter(function(pe) {
@@ -26791,15 +27252,19 @@ iseArmAlarmSiren.prototype = {
     }, 1);
   },
 
+  // outside sensors
+  onClickIntern: function() {
+    ControlBtn.pushed(this.divIntern);
+    setDpState(this.idDpState, 1, false);
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      t.refresh();
+      pe.stop();
+    }, 1);
+  },
+
   refresh: function() {
-    if (this.state) {
-      ControlBtn.on(this.divOn);
-      ControlBtn.off(this.divOff);
-    }
-    else {
-      ControlBtn.off(this.divOn);
-      ControlBtn.on(this.divOff);
-    }
+    this.initAllElements();
   }
 };/**
  * ic_gd.js
@@ -29500,7 +29965,7 @@ ReplaceDevice = new function()
             MessageBox.show(translateKey("replaceDeviceHintTitle"), translateKey("replaceDeviceHintContent"));
 
 
-            // Both devices - old and new - use the same regaID and the same parameters.
+            // Both devices - old and new - are using the same regaID and the same parameters.
             // So we can fetch the the new or the old device to check if one of the channels is of the type POWERMETER or POWERMETER_IGL
             var regaID = homematic("Device.getReGaIDByAddress", {"address": oDevices.newDevAddr}),
             checkDevice = homematic("Device.get", {"id": regaID});
@@ -29596,7 +30061,7 @@ CloseSetProfiles = function () {
 //var senderNoUserProfile =  "MOTION_DETECTOR, WEATHER";
 //var receiverNoUserProfile = "CLIMATECONTROL_VENT_DRIVE, BLIND, WATERDETECTIONSENSOR";
 isUserProfileAvailable = function (deviceType) {
-  var arForbiddenDevs = ["MOTION_DETECTOR", "WEATHER", "WATERDETECTIONSENSOR", "CLIMATECONTROL_VENT_DRIVE", "BLIND"],
+  var arForbiddenDevs = ["MOTION_DETECTOR", "WEATHER", "WEATHER_2", "WATERDETECTIONSENSOR", "CLIMATECONTROL_VENT_DRIVE", "BLIND"],
     result = true;
 
   jQuery.each(arForbiddenDevs, function (index, type) {
@@ -30248,6 +30713,7 @@ SaveDeviceParameters = function()
     }
   }
 
+try {
   //Timeout-Module for the new heating control?
   if (window.tom)
   {
@@ -30277,7 +30743,7 @@ SaveDeviceParameters = function()
       }
     }
   }
-
+} catch (e) {}
   //-----
 
   if (actions === 0)
@@ -31850,8 +32316,12 @@ Disable_SimKey = function(ch, prn, specialInputId)
 };
 
 
-MD_catchBrightness = function(url, sender_address, receiver_address, set_value, id, commando, parameter)
+MD_catchBrightness = function(url, sender_address, receiver_address, brightness, convertValue, set_value, id, commando, parameter)
 {
+  if (convertValue == 1) {
+    brightness = MD_convertIlluminationToDecisionValue(brightness);
+  }
+
   ResetPostString();
   poststr += "&url=" +url;
   poststr += "&sender_address="   +sender_address;
@@ -31861,6 +32331,7 @@ MD_catchBrightness = function(url, sender_address, receiver_address, set_value, 
   poststr += "&commando=" +commando;
   poststr += "&parameter=" +parameter;
   poststr += "&active_bright=" + $F(id);
+  poststr += "&brightness=" + brightness;
   SendRequest('ic_md.cgi');
 };
 
@@ -31950,8 +32421,8 @@ MD_checkPNAME = function(id, param, id_on_time)
   
   if ($F(id_on_time) < min_value[min_interval] && $(id).selectedIndex == 0)
   {
-    $(id_on_time + '_hint0').firstChild.data = unescape(localized[0]['hint0a']) +  min_value[min_interval] + unescape(localized[0]['hint0b']);
-    $(id_on_time + '_hint1').firstChild.data = unescape(localized[0]['hint1a']) +  min_value[min_interval] + unescape(localized[0]['hint1b']);
+    jQuery('#'+id_on_time + '_hint0:first-child').html(unescape(localized[0]['hint0a']) +  min_value[min_interval] + unescape(localized[0]['hint0b']));
+    jQuery('#'+id_on_time + '_hint1:first-child').html(unescape(localized[0]['hint1a']) +  min_value[min_interval] + unescape(localized[0]['hint1b']));
   } else {
     $(id_on_time + '_hint0').firstChild.data = " "; 
     $(id_on_time + '_hint1').firstChild.data = " "; 
@@ -32017,8 +32488,11 @@ MD_getHelp = function(min, max, brightness, ready)
   var active = localized[0]['active_' + ready];
   
   //Je nachdem, ob die aktuelle Helligkeit zur Verfügung steht, oder nicht, werden verschiedene Hilfstexte generiert.
-  if (brightness != -1) {  var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_1.txt';}
-  else {var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_0.txt';}
+  if (brightness != -1) {
+    var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_1.txt';
+  } else {
+    var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_0.txt';
+  }
   
   // die entsprechende Uebersetzungstabellen der Easymodes einlesen
   new Ajax.Request(path ,
@@ -32044,12 +32518,15 @@ MD_link_help = function()
   MessageBox.show(help_txt[0]['title_kind_of'], help_txt[0]['help_kind_of'] ,"" ,450 , 260);
 };
 
-MD_catchBright_help = function(min, max, brightness, ready)
-{
+MD_catchBright_help = function(min, max, brightness, ready, condition) {
   //Hilfetext für die Helligkeitsschwelle des Motion-Detectors    
   var help_txt = MD_getHelp(min, max, brightness, ready);
 
-  MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness'] ,"" ,475 ,185);
+  if (condition == "LT_LO") {
+    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_LT_LO'], "", 475, 185);
+  } else {
+    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_GE_LO'], "", 475, 185);
+  }
 
 };
 
@@ -32147,6 +32624,29 @@ MD_setMode = function(id_on_time_mode, channel, id_on_time)
   MD_checkMaxValue(id_on_time, channel, (id_on_time_mode));
 };
 
+// Converts the value of the parameter ILLUMINATION of e. g. a HmIP-MotionDetector (very high values possible)
+// to a valid decision value (0 - 255) for the use of direct links (CONDITION_LO/HI)
+MD_convertIlluminationToDecisionValue = function(value) {
+  var result = 0;
+  if (value < 80) {return parseInt(value);} // Linear-Grenze
+  value *= 10;
+  var msb = "0x80000";
+  var exp = 19;
+
+  while ((value & msb) == 0) {
+   msb >>= 1;
+   exp--;
+  }
+
+  var result = (((value^msb) << 8) / msb) | (exp << 8);
+  result /= 20;
+
+  if (result > 255) {
+    result = 255;
+  }
+
+  return parseInt(result);
+};
 
 ProofFreeTime = function(id, min, max)
 {
@@ -32754,7 +33254,7 @@ WEATHER_check_weather = function()
     if (link) { throw true; }
   } catch (e) {
     if ( e == true) {
-      if ((link[0] == "WEATHER") && (linkPeer[0] != "WEATHER_RECEIVER")) return true;
+      if (((link[0] == "WEATHER") || (link[0] == "WEATHER_2")) && (linkPeer[0] != "WEATHER_RECEIVER")) return true;
       else return false;
     } else return false;
   }
@@ -32967,6 +33467,12 @@ load_JSFunc = function(fbib) {
         }
       );
   }
+};
+
+showParamHelp = function(topic, x , y) {
+ var width = (! isNaN(x)) ? x : 450;
+ var height = (! isNaN(y)) ? y : 260;
+ MessageBox.show(translateKey("HelpTitle"), translateKey(topic), "", width, height);
 };
 
 // Test

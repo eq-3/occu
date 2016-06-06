@@ -34,12 +34,12 @@ set PROFILE_1(UI_DESCRIPTION)  "Bei starkem Wind wird der Schalter ein- und bei 
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
-set PROFILE_2(SHORT_CT_OFFDELAY)  {0 1}
-set PROFILE_2(SHORT_CT_ONDELAY)   {0 1}
-set PROFILE_2(SHORT_CT_OFF)       {0 1}
-set PROFILE_2(SHORT_CT_ON)        {0 1}
-set PROFILE_2(SHORT_COND_VALUE_LO)  {200 range 0 - 255}
-set PROFILE_2(SHORT_COND_VALUE_HI)  {100 range 0 - 255}
+set PROFILE_2(SHORT_CT_OFFDELAY)  0
+set PROFILE_2(SHORT_CT_ONDELAY)    0
+set PROFILE_2(SHORT_CT_OFF)      0
+set PROFILE_2(SHORT_CT_ON)      0
+set PROFILE_2(SHORT_COND_VALUE_LO)  200
+set PROFILE_2(SHORT_COND_VALUE_HI)  {100 0}
 set PROFILE_2(SHORT_ONDELAY_TIME)  0
 set PROFILE_2(SHORT_ON_TIME)    {111600 range 0.0 - 111600.0}
 set PROFILE_2(SHORT_OFFDELAY_TIME)  0
@@ -55,7 +55,6 @@ set PROFILE_2(UI_DESCRIPTION)  "Wenn die eingestellte Windgeschwindigkeit erreic
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 
-
 #set SUBSET_1(NAME)          "Wind stark - Aus / Wind schwach - Ein"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
@@ -67,38 +66,10 @@ set SUBSET_1(SHORT_CT_ONDELAY)    0
 #set SUBSET_2(NAME)          "Wind stark - Ein / Wind schwach - Aus"
 set SUBSET_2(SUBSET_OPTION_VALUE)  2
 set SUBSET_2(NAME)          "\${subset_2}"
-set SUBSET_2(SHORT_CT_OFF)      1
-set SUBSET_2(SHORT_CT_OFFDELAY)    1
-set SUBSET_2(SHORT_CT_ON)      3
-set SUBSET_2(SHORT_CT_ONDELAY)    3
-
-# This is for the new HM-WDS100-C6-O-2
-#set SUBSET_3(NAME)          "Wind stark - Aus / Wind schwach - Ein"
-set SUBSET_3(NAME)          "\${subset_1}"
-set SUBSET_3(SUBSET_OPTION_VALUE)  3
-set SUBSET_3(SHORT_CT_OFF)      2
-set SUBSET_3(SHORT_CT_OFFDELAY)    2
-set SUBSET_3(SHORT_CT_ON)      1
-set SUBSET_3(SHORT_CT_ONDELAY)    1
-
-# This is for the new HM-WDS100-C6-O-2
-#set SUBSET_4(NAME)          "Wind stark - Ein / Wind schwach - Aus"
-set SUBSET_4(SUBSET_OPTION_VALUE)  4
-set SUBSET_4(NAME)          "\${subset_2}"
-set SUBSET_4(SHORT_CT_OFF)      1
-set SUBSET_4(SHORT_CT_OFFDELAY)    1
-set SUBSET_4(SHORT_CT_ON)      2
-set SUBSET_4(SHORT_CT_ONDELAY)    2
-
-# This is for the new HM-WDS100-C6-O-2
-# This device is using other conditions than the old device
-
-set SUBSET_5(SUBSET_OPTION_VALUE)  5
-set SUBSET_5(NAME)          "hidden element"
-set SUBSET_5(SHORT_CT_OFF)      1
-set SUBSET_5(SHORT_CT_OFFDELAY)    1
-set SUBSET_5(SHORT_CT_ON)      1
-set SUBSET_5(SHORT_CT_ONDELAY)    1
+set SUBSET_2(SHORT_CT_OFF)      0
+set SUBSET_2(SHORT_CT_OFFDELAY)    0
+set SUBSET_2(SHORT_CT_ON)      2
+set SUBSET_2(SHORT_CT_ONDELAY)    2
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -109,8 +80,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   upvar $pps          ps
   upvar $pps_descr    ps_descr
 
-  set newSensor "HM-WDS100-C6-O-2"
-  
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
   }
@@ -146,18 +115,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\" >"
 
-
   set pref 1
-
-  if {$dev_descr_sender(PARENT_TYPE) != $newSensor} {
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_DIR}</td><td>"
-    append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn "onchange=\"WEATHER_change_thres('$prn\_1')\""]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  } else {
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_DIR}</td><td>"
-    append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn "onchange=\"WEATHER_change_thres('$prn\_1')\""]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  }
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_DIR}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn "onchange=\"WEATHER_change_thres('$prn\_1')\""]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   incr pref ;# 2
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ONDELAY_TIME}</td><td>"
@@ -187,72 +148,29 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFF_TIME
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  if {$dev_descr_sender(PARENT_TYPE) == $newSensor} {
-    incr pref ;# 6
-    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"SHORT_COND_VALUE_LO\"></td></tr>"
-    incr pref ;# 7
-    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"SHORT_COND_VALUE_HI\"></td></tr>"
-  }
-
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 #2  
   incr prn
+  set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  set pref 0
-  if {$dev_descr_sender(PARENT_TYPE) == $newSensor} {
-    incr pref;
-    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td></td><td>"
-    append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_5} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  }
-
-  incr pref; #1 / 2
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ONDELAY_TIME}</td><td>"
   option DELAY
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ONDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ONDELAY_TIME "onchange=\"ActivateFreeTime(\$('${special_input_id}_profiles'),$pref);\""]
   EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ONDELAY_TIME
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  incr pref ;# 2 / 3
-
+  incr pref ;# 2
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
   option LENGTH_OF_STAY
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME "onchange=\"ActivateFreeTime(\$('${special_input_id}_profiles'),$pref);\""]
   EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  if {$dev_descr_sender(PARENT_TYPE) == $newSensor} {
-    incr pref ;# 3 / 4
-    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"SHORT_COND_VALUE_LO\"></td></tr>"
-    incr pref ;# 4 / 5
-    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"SHORT_COND_VALUE_HI\"></td></tr>"
-  }
-
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
-
-    if {$dev_descr_sender(PARENT_TYPE) == $newSensor} {
-      append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_1) "var stormLowerThresholdElm = jQuery(\"\[name='__STORM_LOWER_THRESHOLD'\]\").first();"
-        append HTML_PARAMS(separate_1) "var stormUpperThresholdElm = jQuery(\"\[name='__STORM_UPPER_THRESHOLD'\]\").first();"
-        append HTML_PARAMS(separate_1) "var condValLoElm1 = jQuery(\"#separate_receiver_1_6\");"
-        append HTML_PARAMS(separate_1) "var condValHiElm1 = jQuery(\"#separate_receiver_1_7\");"
-        append HTML_PARAMS(separate_1) "condValLoElm1.val(stormLowerThresholdElm.val());"
-        append HTML_PARAMS(separate_1) "condValHiElm1.val(stormUpperThresholdElm.val());"
-      append HTML_PARAMS(separate_1) "</script>"
-
-      append HTML_PARAMS(separate_2) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_2) "var stormLowerThresholdElm = jQuery(\"\[name='__STORM_LOWER_THRESHOLD'\]\").first();"
-        append HTML_PARAMS(separate_2) "var stormUpperThresholdElm = jQuery(\"\[name='__STORM_UPPER_THRESHOLD'\]\").first();"
-        append HTML_PARAMS(separate_2) "var condValLoElm2 = jQuery(\"#separate_receiver_2_4\");"
-        append HTML_PARAMS(separate_2) "var condValHiElm2 = jQuery(\"#separate_receiver_2_5\");"
-        append HTML_PARAMS(separate_2) "condValLoElm2.val(stormLowerThresholdElm.val());"
-        append HTML_PARAMS(separate_2) "condValHiElm2.val(stormUpperThresholdElm.val());"
-      append HTML_PARAMS(separate_2) "</script>"
-  }
 }
 
 constructor

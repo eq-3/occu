@@ -9,9 +9,10 @@ set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE) "Expertenprofil"
 
-set range {1 2 5 12 15 25 29 39 50 62 75 89 103 118}
+set range {1 2 5 12 15 20 25 29 39 50 62 75 89 103 118}
 set PROFILE_1(STORM_UPPER_THRESHOLD) $range
 set PROFILE_1(STORM_LOWER_THRESHOLD) $range
+set PROFILE_1(PEER_NEEDS_BURST) {0 1}
 set PROFILE_1(UI_DESCRIPTION) "<br>\${windInBeaufort}"
 set PROFILE_1(UI_TEMPLATE)  "Windst&auml;rke in Beaufort"
 set PROFILE_1(UI_HINT)  1
@@ -21,10 +22,9 @@ set multilingual 1
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   global dev_descr_sender dev_descr_receiver sender_address
+  set SENDER $dev_descr_sender(PARENT_TYPE)
   set ACTOR $dev_descr_receiver(TYPE)
   set sender_addr $dev_descr_sender(PARENT)
-  catch {puts "<input type=\"hidden\" id=\"dev_descr_sender_tmp\" value=\"$dev_descr_sender(TYPE)-$sender_addr\">"}
-  catch {puts "<input type=\"hidden\" id=\"dev_descr_receiver_tmp\" value=\"$ACTOR\">"}
 
   # bei Verknuepfung Wetterstation - Kombisensor sinnlos  
   if {$ACTOR != "WS_CS"} {
@@ -49,7 +49,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(2)    "\${windForce1}"
     set options(5)    "\${windForce2}"
     set options(12)    "\${windForce3}"
-    set options(25)    "\${windForce4}"
+
+    if { [string first "HM-WDS100-C6-O-2" $SENDER] == 0 } {
+      set options(20)    "\${windForce4}"
+    } else {
+      set options(25)    "\${windForce4}"
+    }
+
     set options(29)    "\${windForce5}"
     set options(39)    "\${windForce6}"
     set options(50)    "\${windForce7}"
@@ -113,7 +119,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     
     #puts "<script type=\"text/javascript\">window.setTimeout(\"translatePage(\'#body_wrapper\')\",500);</script>"
 
-    # TODO /*Das funktioniert für eine Verknüpfung WEATHER - SWITCH
     if {$dev_descr_sender(PARENT_TYPE) == "HM-WDS100-C6-O-2"} {
         append HTML_PARAMS(separate_1) "<input id=\"weatherSensor\" type=\"text\" class=\"hidden\" value=\"$dev_descr_sender(PARENT_TYPE)\">"
         append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
@@ -123,6 +128,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
             # Die Werte dieser Elemente auf Senderseite (Wettersender) müssen auf die unten stehenden Elemente auf Aktorseite übertragen werden
             append HTML_PARAMS(separate_1) "var stormUpperThresholdElm = jQuery(\"\[name='__STORM_UPPER_THRESHOLD'\]\").first();"
             append HTML_PARAMS(separate_1) "var stormLowerThresholdElm = jQuery(\"\[name='__STORM_LOWER_THRESHOLD'\]\").first();"
+
+            # When the Expert Mode is not active
+            append HTML_PARAMS(separate_1) "if (stormUpperThresholdElm.length == 0) \{"
+              append HTML_PARAMS(separate_1) "var stormUpperThresholdElm = jQuery(\"\[name='STORM_UPPER_THRESHOLD'\]\").first();"
+              append HTML_PARAMS(separate_1) "var stormLowerThresholdElm = jQuery(\"\[name='STORM_LOWER_THRESHOLD'\]\").first();"
+            append HTML_PARAMS(separate_1) "\}"
 
             # Expertenparameter auf Aktorseite
             append HTML_PARAMS(separate_1) "var expertCondLowElm = jQuery(\"\[name='SHORT_COND_VALUE_LO'\]\").first();"

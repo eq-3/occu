@@ -24,8 +24,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set ACTOR $dev_descr_receiver(TYPE) 
   # Kanal aus der Senderaddresse entfernen, aus EDD00001234:1 wird EDD00001234
   set sender_addr [string toupper [string range $sender_address 0 [expr [string first ":" $sender_address] -1] ]] 
-  catch {puts "<input type=\"hidden\" id=\"dev_descr_sender_tmp\" value=\"$dev_descr_sender(TYPE)-$sender_addr\">"}
-  catch {puts "<input type=\"hidden\" id=\"dev_descr_receiver_tmp\" value=\"$ACTOR\">"}
 
   # bei Verknuepfung Wetterstation - Kombisensor sinnlos  
   if {$ACTOR != "WS_CS"} {

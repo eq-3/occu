@@ -2,7 +2,7 @@
 
 source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options_alarmsiren.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${switch_on}"
@@ -196,12 +196,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFFDELAY_TIME_SIRSEN
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  incr pref ;# 2
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_TIME}</td><td>"
-  option LENGTH_OF_STAY
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_TIME_SIRSEN|LONG_OFF_TIME_SIRSEN separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_TIME_SIRSEN "onchange=\"ActivateFreeTime(\$('${special_input_id}_profiles'),$pref);\""]
-  EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFF_TIME_SIRSEN
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
+  set comment {
+    incr pref ;# 2
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_TIME}</td><td>"
+    option LENGTH_OF_OFF
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_TIME_SIRSEN|LONG_OFF_TIME_SIRSEN separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_TIME_SIRSEN "onchange=\"ActivateFreeTime(\$('${special_input_id}_profiles'),$pref);\""]
+    EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFF_TIME_SIRSEN
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+  }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 #3
@@ -233,12 +235,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFFDELAY_TIME_SIRSEN
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  incr pref ;# 4
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_TIME}</td><td>"
-  option LENGTH_OF_STAY
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_TIME_SIRSEN|LONG_OFF_TIME_SIRSEN separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_TIME_SIRSEN "onchange=\"ActivateFreeTime(\$('${special_input_id}_profiles'),$pref);\""]
-  EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFF_TIME_SIRSEN
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
+  set comment {
+    incr pref ;# 4
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_TIME}</td><td>"
+    option LENGTH_OF_OFF
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_TIME_SIRSEN|LONG_OFF_TIME_SIRSEN separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_TIME_SIRSEN "onchange=\"ActivateFreeTime(\$('${special_input_id}_profiles'),$pref);\""]
+    EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFF_TIME_SIRSEN
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+  }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

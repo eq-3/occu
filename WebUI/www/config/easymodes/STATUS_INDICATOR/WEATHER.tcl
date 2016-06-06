@@ -71,31 +71,6 @@ set SUBSET_2(SHORT_CT_OFFDELAY)    0
 set SUBSET_2(SHORT_CT_ON)      2
 set SUBSET_2(SHORT_CT_ONDELAY)    2
 
-# This is for the new HM-WDS100-C6-O-2
-set SUBSET_3(NAME)          "\${subset_1}"
-set SUBSET_3(SUBSET_OPTION_VALUE)  3
-set SUBSET_3(SHORT_CT_OFF)      3
-set SUBSET_3(SHORT_CT_OFFDELAY)    3
-set SUBSET_3(SHORT_CT_ON)      1
-set SUBSET_3(SHORT_CT_ONDELAY)    1
-
-# This is for the new HM-WDS100-C6-O-2
-set SUBSET_4(SUBSET_OPTION_VALUE)  4
-set SUBSET_4(NAME)          "\${subset_2}"
-set SUBSET_4(SHORT_CT_OFF)      1
-set SUBSET_4(SHORT_CT_OFFDELAY)    1
-set SUBSET_4(SHORT_CT_ON)      3
-set SUBSET_4(SHORT_CT_ONDELAY)    3
-
-# This is for the new HM-WDS100-C6-O-2
-# This device is using other conditions than the old device
-set SUBSET_5(SUBSET_OPTION_VALUE)  5
-set SUBSET_5(NAME)          "hidden element"
-set SUBSET_5(SHORT_CT_OFF)      1
-set SUBSET_5(SHORT_CT_OFFDELAY)    1
-set SUBSET_5(SHORT_CT_ON)      1
-set SUBSET_5(SHORT_CT_ONDELAY)    1
-
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   global dev_descr_sender dev_descr_receiver  
@@ -141,18 +116,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\" >"
 
   set pref 1
-
-  if {$dev_descr_sender(PARENT_TYPE) != "HM-WDS100-C6-O-2"} {
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_DIR}</td><td>"
-    append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn "onchange=\"WEATHER_change_thres('$prn\_1')\""]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  } else {
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_DIR}</td><td>"
-    append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn "onchange=\"WEATHER_change_thres('$prn\_1')\""]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  }
-
-
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_DIR}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn "onchange=\"WEATHER_change_thres('$prn\_1')\""]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   incr pref ;# 2
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ONDELAY_TIME}</td><td>"
@@ -185,20 +151,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 #2  
   incr prn
+  set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  set pref 0
-  if {$dev_descr_sender(PARENT_TYPE) == "HM-WDS100-C6-O-2"} {
-    incr pref;
-    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td></td><td>"
-    append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_5} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  }
-
-  incr pref;
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ONDELAY_TIME}</td><td>"
   option DELAY
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ONDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ONDELAY_TIME "onchange=\"ActivateFreeTime(\$('${special_input_id}_profiles'),$pref);\""]

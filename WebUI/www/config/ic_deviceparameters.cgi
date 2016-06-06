@@ -575,6 +575,15 @@ proc isVirtual {paramId} {
  return $virtual
 }
 
+proc isHmIP {} {
+  global iface
+  set hmIPIdentifier "HmIP-RF"
+  if {$iface == $hmIPIdentifier} {
+    return "true"
+  }
+  return "false"
+}
+
 proc put_channel_parameters {} {
   global dev_descr iface iface_url env 
   global ise_CHANNELNAMES MODE channel_address channel_group
@@ -655,6 +664,10 @@ proc put_channel_parameters {} {
     # Für HmIP Kanal 0 aktivieren
     if {($ch_descr(INDEX) == 0) && ($iface != "HmIP-RF")} then { continue }
 
+    if {([isHmIP] == "true") && ($ch_descr(TYPE) == "WEEK_PROGRAM")} then {
+        set hide_channel 1
+    }
+
     if { [catch { set ch_name $ise_CHANNELNAMES($iface;$ch_descr(ADDRESS)) } ] } then {
         set ch_name "${iface}.$ch_descr(ADDRESS)"
     }
@@ -674,9 +687,16 @@ proc put_channel_parameters {} {
     }
     #=====
 
+    set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/$ch_paramid.tcl"
+
+    if {[isHmIP] == "true"} {
+      set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl"
+    }
+
     global internalKey
-    if {$ch_paramid != "" && ![catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid.tcl} ] } then {
-      # if {! [info exists internalKey] || $ch_paramid == "dimmer_virt_ch_master" } then 
+    # if {$ch_paramid != "" && ![catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid.tcl} ] } then
+    if {$ch_paramid != "" && ![catch {source $sourcePath} ] } then {
+      # if {! [info exists internalKey] || $ch_paramid == "dimmer_virt_ch_master" } then
       if {! [info exists internalKey] } then {
         set_htmlParams $iface $ch_address ch_ps ch_ps_descr CHANNEL_$ch_descr(INDEX) ""
         set s $HTML_PARAMS(separate_1)
@@ -849,7 +869,6 @@ proc put_channel_parameters {} {
     if {$s == ""} then { set s "<div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div>" }
 
     # virtuelle Kanäle nur anzeigen, wenn im Expertenmodus    
-    set hide_channel 0
     if {([isVirtual $ch_paramid] == "true") && ([session_is_expert] == 0) } {
       set hide_channel 1
     }

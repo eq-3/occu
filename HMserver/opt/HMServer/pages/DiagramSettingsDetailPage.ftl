@@ -101,14 +101,14 @@
 	<#assign i = 0>
 	<#list object.dataSources as dataSource>
 		jQuery('#assignedGroupName${i}').text(GetDeviceName('${dataSource.getGroupId()}'));
-		jQuery('#assignedName${i}').text(GetChannelName('${dataSource.getId()?substring(0,12)}'));	
+		jQuery('#assignedName${i}').text(GetChannelName('${dataSource.getId()?substring(0,dataSource.getId()?index_of("_"))}'));	
 	<#assign i = i + 1>		
 	</#list> 
 		
 	<#assign i = 0>
 	<#list notAssignedDataSources as dataSource>
 		jQuery('#notAssignedGroupName${i}').text(GetDeviceName('${dataSource.getGroupId()}'));
-		jQuery('#notAssignedName${i}').text(GetChannelName('${dataSource.getId()?substring(0,12)}'));
+		jQuery('#notAssignedName${i}').text(GetChannelName('${dataSource.getId()?substring(0,dataSource.getId()?index_of("_"))}'));
 		
 	<#assign i = i + 1>
 	</#list>

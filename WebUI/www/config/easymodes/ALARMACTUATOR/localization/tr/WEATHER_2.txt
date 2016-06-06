@@ -1,0 +1,2 @@
+"description_1_s" : "<span class=\"translated\">Secilen hiza ulasildiginda belirlenen s&uuml;re boyunca",
+"description_1_e" : "devreye girer.</span><br/><br/>",

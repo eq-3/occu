@@ -53,23 +53,17 @@ proc action_put_page {} {
     puts "<td>\${dialogHelpLinkOnlineHelpA} <a target='_blank' href=\"$HELP_URL?lang=$LANGUAGE&vers=$VERSION&serial=$SERIAL\">$HELP_URL</a> \${dialogHelpLinkOnlineHelpB}</td>"
 
     puts {
-                </tr>
-            </table>
-            <!--
-            </td>
-            <td id="tdOffline" class="CLASS21301"">
-              <div class="CLASS21302">${dialogHelpOfflineHelpTitle}</div>
-              <table class="CLASS21304">
-                  <tr>
-                    <td>${dialogHelpOfflineHelp}</td>
-                  </tr>
+      </tr>
 
-              </table>
-            </td>
-            -->
-            <td id="tdInfo" class="CLASS21305" >
-              <div class="CLASS21302">${dialogHelpInfoTitle}</div>
-              <table class="CLASS21303" >
+      <tr>
+        <td class="CLASS21306">2.</td>
+        <td><a target='_blank' href="/licenseinfo.htm">${lblLicenseInformation}</a></td>
+      </tr>
+
+      </table>
+      <td id="tdInfo" class="CLASS21305" >
+        <div class="CLASS21302">${dialogHelpInfoTitle}</div>
+        <table class="CLASS21303" >
     }
     puts "              <tr><td>$PRODUCT_NAME</td></tr>"
     puts "              <tr><td>$PRODUCT_ID</td></tr>"

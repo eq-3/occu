@@ -5,12 +5,14 @@
   string hm_oucmpcb = "HM-OU-CM-PCB";
   string hm_partyDialog = "HM-CC-RT-DN HM-TC-IT-WM-W-EU HM-CC-VG-1";
   string hm_statusDisplay = "HM-Dis-WM55";
+  string hm_statusDisplayEPaper = "HM-Dis-EP-WM55";
   string hm_rgbw_controller = "HM-LC-RGBW-WM";
 
   string excludePARTY = "PARTY_";
   string includePARTY = "PARTY_MODE_SUBMIT";
 
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
+  string excludeHmIPSmokeDetCommandReservedAlarmOff = "SMOKE_DETECTOR_COMMAND=RESERVED_ALARM_OFF";
 
   integer iDP = oSD.DestinationDP();
   integer iCH = oSD.DestinationChannel();
@@ -150,26 +152,35 @@
                 string sVLValue = web.webGetValueFromList( oDP.ValueList(), sVLKey );
                 if( sVLValue.Length() )
                 {
-                  if( (oDP.ID() == iDP) && (iV == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
-                  Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
-                  string sValue = oDP.Name()#": "#sVLValue;
-                  if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
-                  {
-                    string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"="#sVLValue;
-                    string sShortKey = oDP.HSSID()#"="#sVLValue;
-                    sValue = web.webKeyFromStringTable(sLongKey);
-                    if( !sValue.Length() )
+                  string optionVal = "";
+                  if( !oDP.IsTypeOf( OT_VARDP ) ) {
+                    optionVal = oDP.HSSID()#"="#sVLValue;
+                  }
+                  if (optionVal != excludeHmIPSmokeDetCommandReservedAlarmOff) {
+
+                    if( (oDP.ID() == iDP) && (iV == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
+                    Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
+                    string sValue = oDP.Name()#": "#sVLValue;
+                    if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                     {
-                      sValue = web.webKeyFromStringTable(sShortKey);
+                      string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"="#sVLValue;
+                      string sShortKey = oDP.HSSID()#"="#sVLValue;
+                      sValue = web.webKeyFromStringTable(sLongKey);
                       if( !sValue.Length() )
                       {
-                        sValue = sShortKey;
+                        sValue = web.webKeyFromStringTable(sShortKey);
+                        if( !sValue.Length() )
+                        {
+                          sValue = sShortKey;
+                        }
                       }
                     }
+                    Write( sValue );
+                    Write( '</option>' );
                   }
-                  Write( sValue );
-                  Write( '</option>' );
+
                 }
+
               }
             }
             else
@@ -342,16 +353,26 @@
             integer oucmpcb = chLabel.Find(hm_oucmpcb);
             integer partyDialogDevice = hm_partyDialog.Find(chLabel);
             integer statusDisplayDevice = hm_statusDisplay.Find(chLabel);
+            integer statusDisplayEPaperDevice = hm_statusDisplayEPaper.Find(chLabel);
             integer rgbw_controller = chLabel.Find(hm_rgbw_controller);
 
-            if ((statusDisplayDevice != -1) || (rgbw_controller != -1)){
+            if ((statusDisplayDevice != -1) || (statusDisplayEPaperDevice != -1) || (rgbw_controller != -1)){
               if (statusDisplayDevice != -1) {
                 if(iV == "0") {
-                  ! This is the correct string for 'all channels not used'
+                  ! This is the default string for 'all values not used'
                   iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x0A,0x03";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'DIS\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
+
+              if (statusDisplayEPaperDevice != -1) {
+                if(iV == "1") {
+                  ! This is the default string for 'all values not used'
+                  iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x14,0xC0,0x1C,0xD0,0x16,0x,0x1D,0xE0F0,0x03";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'DIS-EP\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
               if (rgbw_controller != -1) {
 
                 if (iV == "0") {
@@ -372,7 +393,7 @@
               Write( '<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
             }
 
-            if((ouled16 == -1) && (oucfm == -1) && (oucfmTW == -1) && (oucmpcb == -1) && (partyDialogDevice == -1) && (statusDisplayDevice == -1) && (rgbw_controller == -1)) {
+            if((ouled16 == -1) && (oucfm == -1) && (oucfmTW == -1) && (oucmpcb == -1) && (partyDialogDevice == -1) && (statusDisplayDevice == -1) && (statusDisplayEPaperDevice == -1) && (rgbw_controller == -1)) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
               if(ouled16 != -1) {
@@ -385,7 +406,10 @@
                 Write( '<span id="setPartyMode" class="CLASS02401" onclick="SetPartyMode(this);"><img src="/ise/img/notepad.png" /></span>' );
               }
               if (statusDisplayDevice != -1) {
-                Write( '<span id="setStatusDisplay'#oSD.ID()#'" class="CLASS02401" onclick="SetStatusDisplay('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                Write( '<span id="setStatusDisplay'#oSD.ID()#'" class="CLASS02401" onclick="SetStatusDisplay('#oSD.ID()#',\'DIS\');"><img src="/ise/img/notepad.png" /></span>' );
+              }
+              if (statusDisplayEPaperDevice != -1) {
+                Write( '<span id="setStatusDisplayEPaper'#oSD.ID()#'" class="CLASS02401" onclick="SetStatusDisplay('#oSD.ID()#',\'DIS-EP\');"><img src="/ise/img/notepad.png" /></span>' );
               }
                if (rgbw_controller != -1) {
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="SetRGBWController('#oSD.ID()#',\''#oCH.HSSID()#'\');"><img src="/ise/img/notepad.png" /></span>' );

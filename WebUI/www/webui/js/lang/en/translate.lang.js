@@ -365,6 +365,8 @@ jQuery.extend(true,langJSON, {
     "btnLogin" : "Login",
     "btnNewLogin" : "New login",
     "btnNewStart" : "Restart",
+    "btnReset" : "Reset",
+    "btnSet" : "Set",
     "dialogYes" : "Yes",
     "dialogNo" : "No",
     "dialogBack" : "Back",

@@ -1,0 +1,22 @@
+jQuery.extend(true,langJSON, {
+  "de" : {
+    "DSTStartHeader" : "<b>Beginn der Sommerzeit</b>",
+    "DSTEndHeader" : "<b>Ende der Sommerzeit</b>",
+    "DSTStartDayOfWeek" : "Wochentag",
+    "DSTStartMonth" : "Monat",
+    "DSTStartWeekOfMonth" : "Woche",
+    "DSTStartTime" : "Uhrzeit",
+    "DSTEndDayOfWeek" : "Wochentag",
+    "DSTEndMonth" : "Monat",
+    "DSTStartWeekOfMonth" : "Woche",
+    "DSTEndTime" : "Uhrzeit",
+    "UtcDSTOffset" : "UTC DST Offset",
+    "UtcOffset" : "UTC Offset",
+    "DSTSwitchAutomatically" : "Automatisches Umstellen von Sommer- auf Winterzeit",
+    "firstWeek" : "1. Woche",
+    "secondWeek" : "2. Woche",
+    "thirdWeek" : "3. Woche",
+    "forthWeek" : "4. Woche",
+    "lastWeek" : "letzte Woche"
+  }
+});

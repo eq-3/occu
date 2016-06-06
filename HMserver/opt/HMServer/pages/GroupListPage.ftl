@@ -3,7 +3,8 @@
 
 
 <script type="text/javascript">
-  setPath("<span onclick='WebUI.enter(GroupsPage);'>"+translateKey('menuGroupListPage')+"</span>");
+	setPath("<span onclick='WebUI.enter(SystemConfigPage);'>"+translateKey('menuSettingsPage')+"</span> &gt; "+ translateKey('menuGroupListPage'));
+
 </script>
 <!--</head>
 <body>-->

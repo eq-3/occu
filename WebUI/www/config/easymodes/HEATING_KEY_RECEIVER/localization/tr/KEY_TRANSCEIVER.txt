@@ -1,7 +1,13 @@
-"description_1" : "<span class=\"translated\">With a short button press the temperature will be set to the desired value <b>at least</b> for the set time. " +
-"If the thermostat is in auto mode, the switching commands will be ignored by the week programme before the set time expires. " +
+"_description_1" : "<span class=\"translated\">With a short button press the temperature will be set to the desired value <b>at least</b> for the set time. " +
+"If the thermostat is in auto mode, the switching commands will be ignored by the weekly programme before the set time expires. " +
 "If the thermostat is in manu mode, the set temperature remains until the next manual changing." +
 "</span><br/><br/>",
+
+"description_1" : "<span class=\"translated\">With a short button press the temperature will be set to the desired value for the set time. " +
+"If the thermostat is in auto mode, the switching commands of the weekly programme can overwrite the temperature. " +
+"If the thermostat is in manu mode, the set temperature remains until the next manual changing." +
+"</span><br/><br/>",
+
 "description_2" : "<span class=\"translated\">With a short or long button press the auto mode will be selected.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">With a short or long button press the manu mode will be selected.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">With a short or long button press the thermostat will be switched off.</span><br/><br/>",

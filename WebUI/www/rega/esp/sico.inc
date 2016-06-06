@@ -5,6 +5,7 @@
   string excludeHmIPProcess =  "PROCESS";
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
   string excludeHmIPValveState =  "VALVE_STATE";
+  string excludeHmIPSmokeDetTestResultNone = "SMOKE_DETECTOR_TEST_RESULT=NONE";
 
   integer iLV = oSC.LeftVal();
   integer iLVT = oSC.LeftValType();
@@ -109,7 +110,11 @@
                   if( sVLValue.Length())
                   {
                     ! Some parameters shouldn't be visible
-                    if ((oDP.HSSID().Find(excludeHmIPProcess) == -1) && (oDP.HSSID().Find(excludeHmIPValveState) == -1)) {
+                    string optionVal = "";
+                    if( !oDP.IsTypeOf( OT_VARDP ) ) {
+                      optionVal = oDP.HSSID()#"="#sVLValue;
+                    }
+                    if ((oDP.HSSID().Find(excludeHmIPProcess) == -1) && (oDP.HSSID().Find(excludeHmIPValveState) == -1) && (optionVal != excludeHmIPSmokeDetTestResultNone )) {
                       if( (oDP.ID() == iLV) && (iRV1 == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
                       Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
                       string sValue = oDP.Name()#": "#sVLValue;

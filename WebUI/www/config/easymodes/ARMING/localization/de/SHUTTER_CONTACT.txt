@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen des Kontaktes wird die Sirene unscharf und beim Schlie&szlig;en scharf geschaltet. Die Schaltzuordnung l&auml;sst sich auch umkehren. Es k&ouml;nnen sowohl eine Verz&ouml;gerungszeit, als auch eine Dauer des Scharfschaltens eingestellt werden.</span><br/><br/>",
+
+"subset_1" : "&Ouml;ffnen - scharf",
+"subset_2" : "Schlie&szlig;en - scharf",
+
+"lblIntExtAlarm" : "Modus",
+"armOutdoorSensors" : "Au&szlig;ensensoren scharf",
+"armAllSensors" : "Alle Sensoren scharf",

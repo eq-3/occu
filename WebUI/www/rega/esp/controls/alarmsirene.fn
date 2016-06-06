@@ -26,24 +26,25 @@ function ::CreateAlarmArmingControl()
         WriteLine("<tr>");
           WriteLine("<td>");
             !Alarm Aus");
-            WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02551 j_translate'>${actionAlarmControlLblOff}</div>");
+            WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02551 j_translate' style='width:120px;height:34px;padding-top:7px; padding-bottom:7px;'>${actionAlarmControlLblOff}</div>");
           WriteLine("</td>");
 
           WriteLine("<td>");
             !Extern scharf
-            WriteLine("<div id='"#chnId#"Extern' class='ControlBtnOff CLASS02551 j_translate'>${actionAlarmControlLblExtern}</div>");
+            WriteLine("<div id='"#chnId#"Extern' class='ControlBtnOff CLASS02551 j_translate' style='width:120px;height:auto;'>${actionAlarmControlLblExtern}</div>");
           WriteLine("</td>");
 
           WriteLine("<td>");
             !Intern scharf
-            WriteLine("<div id='"#chnId#"Intern' class='ControlBtnOff CLASS02551 j_translate'>${actionAlarmControlLblIntern}</div>");
+            WriteLine("<div id='"#chnId#"Intern' class='ControlBtnOff CLASS02551 j_translate' style='width:120px;height:auto;'>${actionAlarmControlLblIntern}</div>");
           WriteLine("</td>");
 
           WriteLine("<td>");
             !Alarm blocked
-            WriteLine("<div id='"#chnId#"Blocked' class='ControlBtnOff CLASS02551 j_translate' style='border-style: solid; border-color: #89989b; cursor:default'>${actionAlarmControlLblBlocked}</div>");
+            WriteLine("<div id='"#chnId#"Blocked' class='ControlBtnOff CLASS02551 j_translate' style='width:102px;height:34px;padding-top:7px; padding-bottom:7px; border-style: solid; border-color: #89989b; cursor:default'>${actionAlarmControlLblBlocked}</div>");
           WriteLine("</td>");
         WriteLine("</tr>");
+
 
         WriteLine("<tr style='height:40px; color:black'><td colspan='4'><hr></td></tr>");
 

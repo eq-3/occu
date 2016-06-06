@@ -2,7 +2,7 @@
 
 source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options_alarmsiren.tcl]
 
 set PROFILES_MAP(0) "\${expert}"
 set PROFILES_MAP(1) "\${switch_on}"

@@ -125,12 +125,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       puts "jQuery('#decalcHour').val(selHour).attr('selected',true);"
       puts "jQuery('#decalcMin').val(selMin).attr('selected',true);"
     puts "}"
-
-    puts "showParamHelp = function(topic, x , y) {"
-      puts "var width = (! isNaN(x)) ? x : 450;"
-      puts "var height = (! isNaN(y)) ? y : 260;"
-      puts "MessageBox.show(translateKey(\"HelpTitle\"), translateKey(topic) ,\"\" ,width , height);"
-    puts "}"
    puts "</script>"
 
 	# Zeittabelle sichtbar / unsichtbar schalten.

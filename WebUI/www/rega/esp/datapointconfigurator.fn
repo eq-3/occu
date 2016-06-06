@@ -99,6 +99,7 @@ function ::dcCreate()
   {
     var CN_NONE            = "NONE";
     var CN_SWITCH          = "SWITCH.";
+    var CN_SWITCH_TRANSM   = "SWITCH_TRANSMITTER.";
     var CN_DIMMER          = "DIMMER.";
     var CN_BLIND           = "BLIND.";
     var CN_WINDOW          = "WINDOW.";
@@ -173,7 +174,17 @@ function ::dcCreate()
             sLastControlName = CN_SWITCH;
             Call("/esp/controls/switch.fn::CreateBinaryActuator()");
           }
-          
+
+          !# SWITCH_TRANSMITTER
+          bIsControl = ( sControlName.Find(CN_SWITCH_TRANSM) > -1 );
+          if( bIsControl && (sLastControlName != CN_SWITCH_TRANSM) )
+          {
+            WriteLine( "<script>conInfo('Control SWITCH found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_SWITCH_TRANSM;
+            Call("/esp/controls/switch.fn::CreateSwitchTansmitter()");
+          }
+
           !# DIMMER
           bIsControl = ( sControlName.Find(CN_DIMMER) > -1 );
           if( bIsControl && (sLastControlName!=CN_DIMMER) )
@@ -774,6 +785,11 @@ function ::CreateUnknown()
           if( bReal )
           {
             sValue = value.ToString(2);
+
+            ! Show the illumination without decimal places
+            if ( (oEName.Find("HmIP-RF.") != -1) && (sShortKey == "ILLUMINATION") ) {
+              sValue = value.ToString(0);
+            }
           }
 
           if( (!bBoolean) && (!bReal) )

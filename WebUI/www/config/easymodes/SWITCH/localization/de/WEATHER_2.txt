@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Bei starkem Wind wird der Schalter ein- und bei schwachem Wind ausgeschaltet. Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Wenn die festgelegte Windgeschwindigkeit erreicht wird, schaltet der Schalter f&uuml;r die festgelegte Zeit ein.</span><br/><br/>",
+"subset_1" : "Wind stark - aus / Wind schwach - ein",
+"subset_2" : "Wind stark - ein / Wind schwach - aus",

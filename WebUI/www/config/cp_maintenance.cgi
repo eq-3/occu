@@ -376,9 +376,8 @@ proc action_put_page {} {
                                     table {
                                         table_row {
                                             table_data {
-                                                division {class="CLASS20908"} "onClick=\"window.location.href='$REMOTE_FIRMWARE_SCRIPT?cmd=download&version=$cur_version&serial=$serial&lang=de&product=HM-CCU2';\"" {
-                                                    puts "\${dialogSettingsCMBtnPerformSoftwareUpdateDownload}"
-                                                }
+                                                division {class="CLASS20908" style="display: none"} {id="btnFwDownload"} {} "onClick=\"window.location.href='$REMOTE_FIRMWARE_SCRIPT?cmd=download&version=$cur_version&serial=$serial&lang=de&product=HM-CCU2';\"" {}
+                                                division {class="CLASS20908"}  "onClick=\"showCCULicense();\"" {puts "\${dialogSettingsCMBtnPerformSoftwareUpdateDownload}"}
                                             }
                                         }
                                     }
@@ -678,6 +677,32 @@ proc action_put_page {} {
           }
         }
 
+        puts {
+          showCCULicense = function() {
+            ShowWaitAnim();
+            HideWaitAnimAutomatically(60);
+            if (showDummyLicense == "true") {
+              homematic.com.showCCUDummyLicense(function (result) {
+                HideWaitAnim();
+                var dlg = new EulaDialog(translateKey('dialogEulaTitle'), result ,function(userAction) {
+                  if (userAction == 1) {
+                    jQuery("#btnFwDownload").click();
+                  }
+                }, "html");
+              });
+            } else {
+              homematic.com.showCCULicense(function (result) {
+                HideWaitAnim();
+                var dlg = new EulaDialog(translateKey('dialogEulaTitle'), result ,function(userAction) {
+                  if (userAction == 1) {
+                    jQuery("#btnFwDownload").click();
+                  }
+                }, "html");
+              });
+            }
+
+          }
+        }
     }
     cgi_javascript {
       puts "translatePage('#messagebox');"

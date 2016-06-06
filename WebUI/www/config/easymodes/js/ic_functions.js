@@ -402,8 +402,12 @@ Disable_SimKey = function(ch, prn, specialInputId)
 };
 
 
-MD_catchBrightness = function(url, sender_address, receiver_address, set_value, id, commando, parameter)
+MD_catchBrightness = function(url, sender_address, receiver_address, brightness, convertValue, set_value, id, commando, parameter)
 {
+  if (convertValue == 1) {
+    brightness = MD_convertIlluminationToDecisionValue(brightness);
+  }
+
   ResetPostString();
   poststr += "&url=" +url;
   poststr += "&sender_address="   +sender_address;
@@ -413,6 +417,7 @@ MD_catchBrightness = function(url, sender_address, receiver_address, set_value, 
   poststr += "&commando=" +commando;
   poststr += "&parameter=" +parameter;
   poststr += "&active_bright=" + $F(id);
+  poststr += "&brightness=" + brightness;
   SendRequest('ic_md.cgi');
 };
 
@@ -502,8 +507,8 @@ MD_checkPNAME = function(id, param, id_on_time)
   
   if ($F(id_on_time) < min_value[min_interval] && $(id).selectedIndex == 0)
   {
-    $(id_on_time + '_hint0').firstChild.data = unescape(localized[0]['hint0a']) +  min_value[min_interval] + unescape(localized[0]['hint0b']);
-    $(id_on_time + '_hint1').firstChild.data = unescape(localized[0]['hint1a']) +  min_value[min_interval] + unescape(localized[0]['hint1b']);
+    jQuery('#'+id_on_time + '_hint0:first-child').html(unescape(localized[0]['hint0a']) +  min_value[min_interval] + unescape(localized[0]['hint0b']));
+    jQuery('#'+id_on_time + '_hint1:first-child').html(unescape(localized[0]['hint1a']) +  min_value[min_interval] + unescape(localized[0]['hint1b']));
   } else {
     $(id_on_time + '_hint0').firstChild.data = " "; 
     $(id_on_time + '_hint1').firstChild.data = " "; 
@@ -569,8 +574,11 @@ MD_getHelp = function(min, max, brightness, ready)
   var active = localized[0]['active_' + ready];
   
   //Je nachdem, ob die aktuelle Helligkeit zur Verfügung steht, oder nicht, werden verschiedene Hilfstexte generiert.
-  if (brightness != -1) {  var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_1.txt';}
-  else {var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_0.txt';}
+  if (brightness != -1) {
+    var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_1.txt';
+  } else {
+    var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_0.txt';
+  }
   
   // die entsprechende Uebersetzungstabellen der Easymodes einlesen
   new Ajax.Request(path ,
@@ -596,12 +604,15 @@ MD_link_help = function()
   MessageBox.show(help_txt[0]['title_kind_of'], help_txt[0]['help_kind_of'] ,"" ,450 , 260);
 };
 
-MD_catchBright_help = function(min, max, brightness, ready)
-{
+MD_catchBright_help = function(min, max, brightness, ready, condition) {
   //Hilfetext für die Helligkeitsschwelle des Motion-Detectors    
   var help_txt = MD_getHelp(min, max, brightness, ready);
 
-  MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness'] ,"" ,475 ,185);
+  if (condition == "LT_LO") {
+    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_LT_LO'], "", 475, 185);
+  } else {
+    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_GE_LO'], "", 475, 185);
+  }
 
 };
 
@@ -699,6 +710,29 @@ MD_setMode = function(id_on_time_mode, channel, id_on_time)
   MD_checkMaxValue(id_on_time, channel, (id_on_time_mode));
 };
 
+// Converts the value of the parameter ILLUMINATION of e. g. a HmIP-MotionDetector (very high values possible)
+// to a valid decision value (0 - 255) for the use of direct links (CONDITION_LO/HI)
+MD_convertIlluminationToDecisionValue = function(value) {
+  var result = 0;
+  if (value < 80) {return parseInt(value);} // Linear-Grenze
+  value *= 10;
+  var msb = "0x80000";
+  var exp = 19;
+
+  while ((value & msb) == 0) {
+   msb >>= 1;
+   exp--;
+  }
+
+  var result = (((value^msb) << 8) / msb) | (exp << 8);
+  result /= 20;
+
+  if (result > 255) {
+    result = 255;
+  }
+
+  return parseInt(result);
+};
 
 ProofFreeTime = function(id, min, max)
 {
@@ -1306,7 +1340,7 @@ WEATHER_check_weather = function()
     if (link) { throw true; }
   } catch (e) {
     if ( e == true) {
-      if ((link[0] == "WEATHER") && (linkPeer[0] != "WEATHER_RECEIVER")) return true;
+      if (((link[0] == "WEATHER") || (link[0] == "WEATHER_2")) && (linkPeer[0] != "WEATHER_RECEIVER")) return true;
       else return false;
     } else return false;
   }
@@ -1519,6 +1553,12 @@ load_JSFunc = function(fbib) {
         }
       );
   }
+};
+
+showParamHelp = function(topic, x , y) {
+ var width = (! isNaN(x)) ? x : 450;
+ var height = (! isNaN(y)) ? y : 260;
+ MessageBox.show(translateKey("HelpTitle"), translateKey(topic), "", width, height);
 };
 
 // Test

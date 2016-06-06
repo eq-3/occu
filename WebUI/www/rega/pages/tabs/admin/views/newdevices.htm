@@ -386,7 +386,8 @@ for (var i = 0; i < arDevices.length; i++) {
       onmouseover: "picDivShow(jg_250, '" + arDevices[i]['type'] + "', 250, '-1', this);", onmouseout: "picDivHide(jg_250);"})
   ]);
   tr.appendChild(td);
-  td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(arDevices[i]['desc']) );
+  td = Builder.node('td', {className: 'GrayBkg border1px'}, arDevices[i]['desc'] );
+  td.innerHTML = translateKey(arDevices[i]['desc']);
   tr.appendChild(td);
   td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(arDevices[i]['sn']));
   tr.appendChild(td);

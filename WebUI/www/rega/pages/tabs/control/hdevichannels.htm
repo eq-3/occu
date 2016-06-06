@@ -50,7 +50,7 @@
   <th><div id="room" class="pt11 <%Write(sCssName); %>" onclick="IseSort(arChns,'room',true);">${thRoom}</div></th>
   <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="func"){sCssName="SortSelected";} %>
   <th><div id="func" class="pt11 <%Write(sCssName); %>" onclick="IseSort(arChns,'func',true);">${thFunc}</div></th>
-  <th>${thLastUpdate}</th>
+  <th>${thLastChange}</th>
   <th>${thControl}</th>
   </tr>
   <%
@@ -176,6 +176,13 @@
               ! channel 7 of the ThermalControl-IndoorTemperatureSensor (e. g. HM-TC-IT-WM-W-EU)
               bShowChannel = false;
             }
+
+            ! Status Display EPaper
+            if(( (oDevHssType == "HM-Dis-EP-WM55") ) && (chNumber == 3)) {
+              ! Hide channel 3 of this device
+              bShowChannel = false;
+            }
+
           } else {
              bShowChannel = true;
             ! Interface HmIP-RF
@@ -207,6 +214,15 @@
               ! Hide channel 5. Channel 1 is visible,
               ! The channels 2, 3, 4 and 6 don´t have any parameters so they don`t appear in the list
               bShowChannel = false;
+            }
+
+            ! Flush mounted Switch and Meter (BSM)
+            ! When bShowChannel == true, the channel is visible
+            ! You can hide the channel by setting the value to false
+            if ( oDevHssType == "HmIP-BSM" ) {
+              if (chNumber == 3) {
+                bShowChannel = true;
+              }
             }
           }
 

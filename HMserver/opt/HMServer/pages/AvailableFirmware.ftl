@@ -30,6 +30,7 @@
    </table>
 
    <script type="text/javascript">
+   		setPath("<span onclick='WebUI.enter(SystemConfigPage);'>"+translateKey('menuSettingsPage')+"</span> &gt; "+ translateKey('submenuDeviceFirmware'));
    	  var s = "";
    	  s += "<table cellspacing='8'>";
    	  s += "<tr>";

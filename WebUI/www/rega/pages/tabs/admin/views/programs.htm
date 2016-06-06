@@ -140,8 +140,9 @@
     });
   };
 
-  SetStatusDisplay = function(regaDialogID) {
-    var elm = jQuery("#setStatusDisplay" + regaDialogID);
+  SetStatusDisplay = function(regaDialogID, mode) {
+    var elm = (mode == "DIS") ? jQuery("#setStatusDisplay" + regaDialogID) : jQuery("#setStatusDisplayEPaper" + regaDialogID) ;
+
     jQuery(elm).prop("disabled", true);
 
     var url = "/pages/msg/setStatusDisplay.htm";
@@ -152,18 +153,35 @@
       dataType: "html"
     });
     req.done(function(htmlContent) {
-      var statusDisplayDialog = new StatusDisplayDialog(translateKey("statusDisplayDialogTitle"), htmlContent, jQuery(inputElm).val(), function(result) {
-        jQuery(elm).prop("disabled", false);
-        if (result == 1) {
-          conInfo("SetStatusDisplay: Yes pressed");
-          var inputElm = jQuery(elm).prev();
-          var cfgString = this.getConfigString();
-          conInfo(cfgString);
-          inputElm.val(cfgString); //.change();
-          encodeStringStatusDisplay(inputElm.prop("id"));
-          inputElm.change();
-        }
-      }, "html");
+      if (mode == "DIS") {
+         statusDisplayDialog = new StatusDisplayDialog(translateKey("statusDisplayDialogTitle"), htmlContent, jQuery(inputElm).val(), function (result) {
+          jQuery(elm).prop("disabled", false);
+          if (result == 1) {
+            conInfo("SetStatusDisplay: Yes pressed");
+            var inputElm = jQuery(elm).prev();
+            var cfgString = this.getConfigString();
+            conInfo(cfgString);
+            inputElm.val(cfgString); //.change();
+            encodeStringStatusDisplay(inputElm.prop("id"));
+            inputElm.change();
+          }
+        }, "html");
+      } else if (mode == "DIS-EP") {
+         statusDisplayDialog = new StatusDisplayDialogEPaper(translateKey("statusDisplayDialogTitle"), htmlContent, jQuery(inputElm).val(), function (result) {
+          jQuery(elm).prop("disabled", false);
+          if (result == 1) {
+            conInfo("SetStatusDisplay: Yes pressed");
+            var inputElm = jQuery(elm).prev();
+            var cfgString = this.getConfigString();
+            conInfo(cfgString);
+            inputElm.val(cfgString); //.change();
+            encodeStringStatusDisplay(inputElm.prop("id"));
+            inputElm.change();
+          }
+        }, "html");
+      }
+
+
     });
   };
 

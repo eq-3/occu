@@ -13,21 +13,21 @@ jQuery.extend(true,langJSON, {
     "" : ""
   },
   "en" : {
-    "soundID" : "en Alarmsignal",
-    "pitch" : "en Tonh%F6he",
-    "speed" : "en Geschwindigkeit",
-    "signal" : "en Signal",
-    "speedSlow" : "en langsam",
-    "speedFast" : "en schnell",
+    "soundID" : "Alarm signal",
+    "pitch" : "Tone pitch",
+    "speed" : "Speed",
+    "signal" : "Signal",
+    "speedSlow" : "slow",
+    "speedFast" : "fast",
     "" : ""
   },
   "tr" : {
-    "soundID" : "tr Alarmsignal",
-    "pitch" : "tr Tonh%F6he",
-    "speed" : "tr Geschwindigkeit",
-    "signal" : "tr Signal",
-    "speedSlow" : "tr langsam",
-    "speedFast" : "tr schnell",
+    "soundID" : "Alarm signal",
+    "pitch" : "Tone pitch",
+    "speed" : "Speed",
+    "signal" : "Signal",
+    "speedSlow" : "slow",
+    "speedFast" : "fast",
     "" : ""
   }
 });

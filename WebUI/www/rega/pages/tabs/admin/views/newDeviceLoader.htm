@@ -150,7 +150,7 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
     string trId = dev.ID() # chnTmp;
     object chn = dom.GetObject(chnTmp);
     !if (chn) {
-    if (chn && (chn.HssType() != "MAINTENANCE")) {
+    if (chn && (chn.HssType() != "MAINTENANCE") && (chn.HssType() != "WEEK_PROGRAM") ) {
       Write("deviceData['hasSubs'] = true;");
       Write('var tmp = new Object();');
       Write("tmp['id'] = "#chn.ID()#";");
@@ -333,7 +333,9 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
         }
         Element.addClassName(td, "CLASS04402");
         tr.appendChild(td);
-        td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(GroupsArray[i][x]['desc']) ); tr.appendChild(td);
+        td = Builder.node('td', {className: 'GrayBkg border1px'}, GroupsArray[i][x]['desc'] );
+        td.innerHTML = translateKey(GroupsArray[i][x]['desc']);
+        tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(GroupsArray[i][x]['sn'])); tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, GroupsArray[i][x]['iface']); tr.appendChild(td);
         var trsId = "trs" + GroupsArray[i][x]['id'];
@@ -456,7 +458,9 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
         Element.addClassName(td, "CLASS04402");
         tr.appendChild(td);
        
-        td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(chns[i]['desc'])); tr.appendChild(td);
+        td = Builder.node('td', {className: 'GrayBkg border1px'}, chns[i]['desc']);
+        td.innerHTML = translateKey(chns[i]['desc']);
+        tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(chns[i]['sn'])); tr.appendChild(td);
         td = Builder.node('td', {className: 'GrayBkg border1px'}, chns[i]['iface']); tr.appendChild(td);
         var trsId = "trs" + chns[i]['id'];
