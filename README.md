@@ -25,7 +25,7 @@ subfolder arm-gnueabihf:
 subfolder X86_32:
 - Debian Wheezy
 
-subfolder mips:
+subfolder mips (outdated):
 - vu+ solo² with vti Image
 
 The script install.sh in the cpu specific subfolder copies all binary packages
