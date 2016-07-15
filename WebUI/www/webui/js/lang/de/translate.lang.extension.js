@@ -516,21 +516,7 @@ jQuery.extend(true,langJSON, {
     "lblErrorCheck" : "Fehlerpr%FCfung",
     "lblNoError" : "Kein Fehler",
 
-    "lblLinkPartnerTempSensor" : "Verkn%FCpfungspartner<br/>Temperatursensor",
-    "lblLinkPartnerWallMountedThermostat" : "Verkn%FCpfungspartner<br/>Wandthermostat",
-    "lblLinkPartnerHeatingThermostat" : "Verkn%FCpfungspartner<br/>Heizungsthermostat",
-    "lblLinkPartnerShutterContact" : "Verkn%FCpfungspartner<br/>Fensterkontakt",
-    "lblLinkPartnerHeatingThermostatSender" : "Verkn%FCpfungspartner<br/>Heizungsthermostat<br/>Sender",
-    "lblLinkPartnerHeatingThermostatReceiver" : "Verkn%FCpfungspartner<br/>Heizungsthermostat<br/>Empf%E4nger",
-    "lblLinkPartnerKey" : "Verkn%FCpfungspartner<br/>Taste",
-    "lblLinkPartnerSwitchActor" : "Verkn%FCpfungspartner<br/>Schaltaktor",
 
-    "lblSwitchActor" : "Schaltaktor",
-    "lblMeasurementChannel" : "Messwert-Kanal",
-    "lblPower" : "Leistungs-Sensor",
-    "lblCurrent" : "Strom-Sensor",
-    "lblVoltage" : "Spannungs-Sensor",
-    "lblFrequency" : "Frequenz-Sensor",
 
     "lblInfoStatusControlEnergyCounter" : "Energie-Z%E4hler " + HMIdentifier.de.CCUShortName,
     "lblInfoStatusControlDevice" : "Energie-Z%E4hler Ger%E4t",
@@ -538,12 +524,6 @@ jQuery.extend(true,langJSON, {
     "lblInfoStatusControlCurrent" : "Strom",
     "lblInfoStatusControlPower" : "Leistung",
     "lblInfoStatusControlFrequency" : "Netzfrequenz",
-
-    // Sch%FCco - don´t change
-    "lblTipTronicChn1" : "Aktor-Kanal",
-    "lblTipTronicChn2" : "Sensor-Kanal",
-    "lblTipTronicChn3" : "L%FCftungssperre-Kanal",
-    // End Sch%FCco
 
     "noLinkableChannelsAvailable" : "Es sind keine verkn%FCpfbaren Kan%E4le vorhanden.",
 
@@ -758,19 +738,19 @@ jQuery.extend(true,langJSON, {
       "Die aktuellste Firmware des Ger%E4tes befindet sich bereits auf der " + HMIdentifier.de.CCUShortName + ".\n"+
       "Bitte nehmen Sie das Firmwareupdate auf der Konfigurationsseite vor.\n\n",
 
-    "lblRGBWControllerDimmer" : "Dimmer",
-    "lblRGBWControllerColor" : "Farbe",
-    "lblRGBWControllerAutomatic" : "Programm",
-
     "deviceUpdate" : "Ger%E4te-Update:",
 
     "weeklyProfile1" : "1",
     "weeklyProfile2" : "2",
     "weeklyProfile3" : "3",
+    "weeklyProfile4" : "4",
+    "weeklyProfile5" : "5",
+    "weeklyProfile6" : "6",
 
     "optionUnitS" : "Sekunden",
     "optionUnitM" : "Minuten",
     "optionUnitH" : "Stunden",
+    "optionUnitD" : "Tage",
     "optionUnit100MS" : "100ms",
     "optionUnit1S" : "1 Sekunde",
     "optionUnit2S" : "2 Sekunden",
@@ -802,21 +782,8 @@ jQuery.extend(true,langJSON, {
     "lblDeviceFwDeliverFwImage" : "Die Updatedatei wird zum Ger%E4t %FCbertragen",
 
     "lblGenericLinkPartner" : "Verkn%FCpfungspartner",
-    "lblHmIP_KeyTransceiver" : "Tasterkanal<br/>Tastendruck",
-    "lblHmIP_SwitchTransmitter" : "Statusmitteilung Relais",
-    "lblHmIP_SwitchVirtualReceiver" : "Verkn%FCpfungspartner<br/>Taste",
-    "lblHmIP_EnergieMeterTransmitter" : "Statusmeldung Messwertkanal",
     //"lblHmIP_PSMChn7" : "Verkn%FCpfungspartner<br/>Schaltaktor",
     "lblHmIP_NotSupported" : "Zur Zeit nicht unterst%FCtzt",
-    "lblHmIP_HeatingClimateControlTransceiver" : "Verkn%FCpfungspartner Heizungsthermostat (manuelle Bedienung, Sender)",
-    "lblHmIP_HeatingClimateControlReceiver" : "Verkn%FCpfungspartner Heizungsthermostat (manuelle Bedienung, Empf%E4nger)",
-    "lblHmIP_HeatingClimateControlCLTransmitter" : "Verkn%FCpfungspartner Heizungsthermostat (zykl. Daten, Soll- u. Ist-Temp.)",
-    "lblHmIP_HeatingShutterContactReceiver" : "Verkn%FCpfungspartner T%FCr-/Fensterkontakt",
-    "lblHmIP_HeatingClimateControlSwitchTransmitter" : "Verkn%FCpfungspartner Schaltaktor f%FCr Zweipunktregelung",
-    "lblHmIP_HeatingKeyReceiver" : "Verkn%FCpfungspartner Taster",
-    "lblHmIP_HeatingClimateControlCLReceiver" : "Verkn%FCpfungspartner Wandthermostat (zykl. Daten, Soll- u. Ist-Temp.)",
-    "lblHmIP_HeatingRoomTHTransceiver" : "Verkn%FCpfungspartner Wandthermostat (manuelle Bedienung, Sender)",
-    "lblHmIP_HeatingRoomTHReceiver" : "Verkn%FCpfungspartner Wandthermostat (manuelle Bedienung, Empf%E4nger)",
 
     "lblSetMode" : "Modus einstellen!",
     "lblChannelActivInactiv" : "Kanal aktiv / inaktiv:",
@@ -898,10 +865,10 @@ jQuery.extend(true,langJSON, {
     "lblSabotage_1" :  "Sabotagekontakt<br />ausgel%F6st",
     "pirOperationModeNormal" :  "Normal",
     "pirOperationModeEco" :  "Eco",
-    "lblIndoorSirenInternAlarm" :  "Interner Alarm",
-    "lblIndoorSirenExternAlarm" :  "Externer Alarm",
-    "lblIndoorSirenPanicAlarm" :  "Panik Alarm",
-    "lblIndoorSirenArming" :  "Scharfschalten",
+    "_lblIndoorSirenInternAlarm" :  "Interner Alarm",
+    "_lblIndoorSirenExternAlarm" :  "Externer Alarm",
+    "_lblIndoorSirenPanicAlarm" :  "Panik Alarm",
+    "_lblIndoorSirenArming" :  "Scharfschalten",
     "lblAcusticalSignal" :  "Akustisches Signal",
     "lblOpticalSignal" :  "Optisches Signal",
     "redFlash" :  "rotes Blitzen",
@@ -916,6 +883,13 @@ jQuery.extend(true,langJSON, {
     "lblLinkInternalDescInternalKey" :  "Verkn%FCpfung der internen Ger%E4tetaste",
 
     "lblLicenseInformation" : "Lizenzinformation",
+    "stringTableHeating" : "Heizen",
+    "stringTableCooling" : "K&uuml;hlen",
+
+    "actionAlarmControlLblStart" : "Alarm ausl%F6sen",
+    "lblAlarmDuration" : "Alarmdauer",
+    "optionSetDuration" : "Dauer angeben",
+    "setAlarmDialogTitle" : "Alarm ausl%F6sen",
 
     "theEnd" : ""
 

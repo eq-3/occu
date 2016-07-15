@@ -339,7 +339,7 @@ proc cmd_firmware_update {} {
     # The errorCode is the error as an integer as returned from the xmlrpc call 'updateFirmware' and can be -1, -2 and so on
     set errorCode [getFwUpdateError "faultCode=" $result]
     set userHint ""
-    if {$errorCode == -1} {
+    if {$errorCode == -1 || $errorCode == -10} {
       set userHint "fwUpdatePressConfigKey"
     }
     # The errorString is the error in plain text as returned from the xmlrpc call 'updateFirmware'

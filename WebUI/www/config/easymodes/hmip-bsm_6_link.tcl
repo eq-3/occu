@@ -10,7 +10,7 @@ set ACTOR $dev_descr_receiver(TYPE)
 
 # Sender and receiver are the same device which means this is a internal device button
 if {$dev_descr_sender(PARENT) == $dev_descr_receiver(PARENT)} {
-  set internal "_INTERNAL"
+  # set internal "_INTERNAL"
 }
 
 catch {puts "<input type=\"hidden\" id=\"dev_descr_sender_tmp\" value=\"$dev_descr_sender(TYPE)-$dev_descr_sender(PARENT)\">"} 

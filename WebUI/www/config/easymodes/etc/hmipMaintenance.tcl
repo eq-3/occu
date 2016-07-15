@@ -39,7 +39,6 @@ proc getMaintenance {chn p descr} {
     append html "setCyclicInfoMsg = function(elm, chn, prn) \{"
       append html " var value = (jQuery(elm).prop('checked')) ? 1 : 0; "
       # don`t use jQuery - the dirty flag will not be recognized
-      append html " console.log('separate_CHANNEL_' + chn + '_' + prn); "
       append html " document.getElementById('separate_CHANNEL_' + chn + '_' + prn ).value = value; "
     append html "\};"
   append html "</script>"

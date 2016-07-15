@@ -1,5 +1,8 @@
 #!/bin/tclsh
-proc option {type} {
+
+# This file isn't in use anymore an can be removed.
+
+proc _option {type} {
 
 # die Einheiten werden in der Datei easymodes/EnterFreeValue gesetzt
 
@@ -59,7 +62,14 @@ proc option {type} {
       #set options(3) "\${stringTableOffDelay}"
     }
 
+    "CURRENTDETECTION_BEHAVIOR" {
+      set options(0) "\${currentDetectionActive}"; # because not in use not yet translated
+      set options(1) "\${currentDetectionInactiveValueOutput1}"; #because not in use not yet translated
+      set options(2) "\${currentDetectionInactiveValueOutput1}"; #because not in use not yet translated
+    }
+
   }
+
 }
 
 

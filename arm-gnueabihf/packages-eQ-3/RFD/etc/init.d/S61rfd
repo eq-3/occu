@@ -13,10 +13,14 @@ init() {
 	if [ ! -d /etc/config/rfd ] ; then
   		mkdir /etc/config/rfd
 	fi
+	#Migration for existing rfd.conf in user space
 	if [ ! -e /etc/config/rfd.conf ] ; then
 		cp $CFG_TEMPLATE_DIR/rfd.conf /etc/config
 	else
 		sed -i 's/\/dev\/ttyAPP0/\/dev\/mmd_bidcos/' /etc/config/rfd.conf || true
+		sed -i '/AccessFile/c\' /etc/config/rfd.conf || true
+		sed -i '/ResetFile/c\' /etc/config/rfd.conf || true
+		sed -i 's/\[Interface 0\]/Improved\ Coprocessor\ Initialization\ =\ true\n\n&/' /etc/config/rfd.conf || true
 	fi
 
         # Bug fix

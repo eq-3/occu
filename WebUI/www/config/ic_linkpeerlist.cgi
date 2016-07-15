@@ -128,24 +128,23 @@ proc isWired {senderDescription receiverDescription} {
 # Some internal links are visible within the page "Direct device connections"
 proc isInExceptionList {senderType receiverType} {
 
+  # show all internal keys of HmIP devices
   if {[isHmIP] == "true"} {return 1}
 
-  # show all internal keys of HmIP devices
-  set comment {
-    array set exceptions {
-      CONDITION_POWER SWITCH
-      CONDITION_CURRENT SWITCH
-      CONDITION_VOLTAGE SWITCH
-      CONDITION_FREQUENCY SWITCH
-    }
+  array set exceptions {
+    CONDITION_POWER SWITCH
+    CONDITION_CURRENT SWITCH
+    CONDITION_VOLTAGE SWITCH
+    CONDITION_FREQUENCY SWITCH
+  }
 
-    foreach val [array names exceptions] {
-      if {$senderType == $val && $receiverType == $exceptions($val)} {
-      #puts "$val : $exceptions($val)<br/>"
-      return 1
-      }
+  foreach val [array names exceptions] {
+    if {$senderType == $val && $receiverType == $exceptions($val)} {
+    #puts "$val : $exceptions($val)<br/>"
+    return 1
     }
   }
+
   return 0
 }
 
@@ -226,15 +225,25 @@ proc put_tablebody {} {
       #Verknüpfung mit interner Gerätetaste?
       set isHMW 0
       set internalLink 0
+      set hideBtnDelete 0
       set senderParent [lindex [split $link(SENDER) ":"] 0]
       set receiverParent [lindex [split $link(RECEIVER) ":"] 0]
       
       # Sind Sender u. Receiver identisch? Dann handelt es sich um einen internen Link, z. B. die interne Gerätetaste
-      # Diese soll nicht in der Verknüpfungsübersichtsliste angezeigt werden
+      # Diese soll bei BidCos-RF nicht in der Verknüpfungsübersichtsliste angezeigt werden, Ausnahmen werden mittels isInExceptionList erlaubt.
+      # Interne Links von HmIP-Geräten z. Z. immer angezeigt, da sie anders als bei HM nur hier editiert werden können. Diese Links dürfen nicht löschbar sein,
+      # da sie andernfalls nur durch einen Werksreset des Gerätes neu erzeugt werden können.
       if {$senderParent == $receiverParent} {
+
+        # Hide the delete button of all HmIP-Devices and of all Hm-Devices which are not in the exception list.
+        if {[isHmIP] == "true" || ![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]} {
+          set hideBtnDelete 1
+        }
+
         catch {
           if {([string index $senderParent 0] != "@")  && ([string index $senderParent 0] != "@") && ![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]} {
             set internalLink 1
+            set hideBtnDelete 1
           }
         }
       }
@@ -304,7 +313,11 @@ proc put_tablebody {} {
         }
         set SENTRY(LINKDESC) "[cgi_quote_html $link(DESCRIPTION)]&nbsp;"
 
-        set SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"RemoveLink('$iface', '$link(SENDER)', '$link(RECEIVER)');\" >\${btnRemove}</div>"
+        # It's not allowed to delete internal links
+        if {$hideBtnDelete == 0} {
+          set SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"RemoveLink('$iface', '$link(SENDER)', '$link(RECEIVER)');\" >\${btnRemove}</div>"
+        }
+
         if { $receiver_unknown==0 && $sender_unknown==0 && $sender_broken==0 && $receiver_broken==0} then {
 #       append SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"OpenSetProfiles('$iface', '$link(SENDER)', '$link(RECEIVER)');\">${btnEdit}</div>"
         append SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"WebUI.enter(LinkEditProfilePage, {iface: '$iface', sender: '$link(SENDER)', receiver: '$link(RECEIVER)'});\">\${btnEdit}</div>"
@@ -375,14 +388,16 @@ proc put_tablebody {} {
         puts "<td class=\"CLASS22106\">$SENTRY(RECEIVERADDR_DISPLAY)</td>"
         puts "</tr>"
 
+        set senderAddress $SENTRY(SENDERADDR)
+        set receiverAddress $SENTRY(RECEIVERADDR)
         set senderCh [lindex [split $SENTRY(SENDERADDR) ":"] 1]
         set receiverCh [lindex [split $SENTRY(RECEIVERADDR) ":"] 1]
         set _sender_parent_type $SENTRY(SENDER_PARENT_TYPE)
         set _receiver_parent_type $SENTRY(RECEIVER_PARENT_TYPE)
 
         puts "<script type=\"text/javascript\>"
-          puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription('$_sender_parent_type', '$senderCh'));"
-          puts "jQuery(\"#receiverNameExtension_$loop\").html(getExtendedDescription('$_receiver_parent_type', '$receiverCh'));"
+          puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_sender_parent_type','channelAddress' : '$senderAddress' ,'channelIndex' : '$senderCh' \}));"
+          puts "jQuery(\"#receiverNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_receiver_parent_type','channelAddress' : '$receiverAddress' ,'channelIndex' : '$receiverCh' \}));"
         puts "</script>"
 
         incr loop

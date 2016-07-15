@@ -113,6 +113,7 @@ function loadTextResource() {
     "translate.lang.diagram.js",
     "translate.lang.group.js",
     "translate.lang.system.js",
+    "translate.lang.channelDescription.js",
     "translate.lang.notTranslated.js"
   ];
   var url = "/webui/js/lang/" + getLang() + "/";

@@ -62,6 +62,9 @@ AKKU|STATUS=CHARGE	${stringTableAccuCharging}
 AKKU|STATUS=DISCHARGE	${stringTableAccuDischarge}
 AKKU|STATUS=STATE_UNKNOWN	${stringTableAccuStateUnkown}
 AKKU|STATUS=TRICKLE_CHARGE	${stringTableAccuTrickleCharg}
+
+ALARM_SWITCH_VIRTUAL_RECEIVER	${stringTableSwitchSensorTitle}
+
 ALARMACTUATOR	${stringTableAlarmActuatorTitle}
 ALARMACTUATOR|ERROR_BATTERY=BATTERY_DEFECT	${stringTableBatteryDefect}
 ALARMACTUATOR|ERROR_BATTERY=NO_ERROR	${stringTableBatteryNotDefect}
@@ -87,8 +90,8 @@ ARMING|OPTIC_EXTSENS_DELAY_ARM	${stringTableOpticExtsensDelayArm}
 ARMING|OPTIC_DISARM	${stringTableOpticDisarm}
 
 ARMSTATE=DISARMED	${stringTableAlarmDisarmed}
-ARMSTATE=EXTSENS_ARMED	${stringTableAlarmExtSensArmed}
-ARMSTATE=ALLSENS_ARMED	${stringTableAlarmAllSensArmed}
+ARMSTATE=EXTSENS_ARMED	${stringTableAlarmAllSensArmed}
+ARMSTATE=ALLSENS_ARMED	${stringTableAlarmExtSensArmed}
 ARMSTATE=ALARM_BLOCKED	${stringTableAlarmBlocked}
 
 BLIND	${stringTableBlindTitle}
@@ -186,13 +189,14 @@ CONDITION_VOLTAGE	${stringTableConditionVoltageTitle}
 DECISION_VALUE	${stringTableConditionValue}
 
 COND_TX_CYCLIC_ABOVE	${stringTableCondTxCyclicAbove}
-COND_TX_CYCLIC_Below	${stringTableCondTxCyclicBelow}
+COND_TX_CYCLIC_BELOW	${stringTableCondTxCyclicBelow}
 COND_TX_DECISION_ABOVE	${stringTableCondTxDecisionAbove}
 COND_TX_DECISION_BELOW	${stringTableCondTxDecisionBelow}
 COND_TX_FALLING	${stringTableCondTxFalling}
 COND_TX_RISING	${stringTableCondTxRising}
 
 COND_TX_THRESHOLD_LO	${stringTableCondThresholdLo}
+COND_TX_THRESHOLD_HI	${stringTableCondThresholdHi}
 
 COND_TX_THRESHOLD_HI_POWER	${stringTableCondThresholdHiPower}
 COND_TX_THRESHOLD_LO_POWER	${stringTableCondThresholdLoPower}
@@ -235,9 +239,13 @@ DIGITAL_INPUT|STATE=TRUE	${stringTableDigitalInputStateTrue}
 DIGITAL_OUTPUT	${stringTableDigitalOutput}
 DIGITAL_OUTPUT|STATE=FALSE	${stringTableDigitalOutputStateFalse}
 DIGITAL_OUTPUT|STATE=TRUE	${stringTableDigitalOutputStateTrue}
+
 DIMMER	${stringTableDimmerTitle}
 DIMMER|CHARACTERISTIC	${stringTableDimmerCharacteristic}
 DIMMER|ERROR=LOAD_FAILURE	${stringTableDimmerErrorLoad}
+DIMMER|ERROR_OVERLOAD	${stringTableDimmerErrorOverload}
+DIMMER|ERROR_OVERHEAT	${stringTableDimmerErrorOverheat}
+DIMMER|ERROR_REDUCED	${stringTableDimmerErrorReduced}
 DIMMER|FUSE_DELAY	${stringTableDimmerFuseDelay}
 DIMMER|LEVEL	${stringTableDimmerLevel}
 LEVEL_REAL	${stringTableDimmerLevelReal}
@@ -252,9 +260,13 @@ DIMMER|RAMP_TIME	${stringTableDimmerRampTime}
 DIMMER|RAMP_STOP	${stringTableDimmerRampStop}
 DIMMER|REDUCE_LEVEL	${stringTableDimmerReduceLevel}
 DIMMER|REDUCE_TEMP_LEVEL	${stringTableDimmerReduceTempLevel}
-DIMMER|ERROR_OVERLOAD	${stringTableDimmerErrorOverload}
-DIMMER|ERROR_OVERHEAT	${stringTableDimmerErrorOverheat}
-DIMMER|ERROR_REDUCED	${stringTableDimmerErrorReduced}
+
+DIMMER|RELAY_OFFDELAY_TIME	${stringTableRelayOffdelayTime}
+DIMMER|VOLTAGE_0	${stringTableVoltage0}
+DIMMER|VOLTAGE_100	${stringTableVoltage100}
+
+DIMMER_VIRTUAL_RECEIVER	${stringTableDimmerTitle}
+
 DISPLAY|ALARM_COUNT	${stringTableDisplayAlarmCount}
 DISPLAY|ARROW_DOWN	${stringTableDisplayArrowDown}
 DISPLAY|ARROW_UP	${stringTableDisplayArrowUp}
@@ -350,6 +362,7 @@ ERROR_REDUCED=TRUE	${stringTableErrorReducedTrue}
 ERROR_SABOTAGE=FALSE	${stringTableErrorSabotageFalse}
 ERROR_SABOTAGE=TRUE	${stringTableErrorSabotageTrue}
 FREQUENCY_INPUT	${stringTableFrequencyInput}
+FUSE_DELAY	${stringTableDimmerFuseDelay}
 GLOBAL_BUTTON_LOCK	${stringTableGlobalButtonLock}
 INHIBIT	${stringTableInhibit}
 INHIBIT=FALSE	${stringTableInhibitFalse}
@@ -366,17 +379,10 @@ INPUT_OUTPUT|LONGPRESS_TIME	${stringTableInputOutputLongPressA}
 INPUT_OUTPUT|LONG_PRESS_TIME	${stringTableInputOutputLongPressB}
 INPUT_OUTPUT|STATE=FALSE	${stringTableInputOutputStateFalse}
 INPUT_OUTPUT|STATE=TRUE	${stringTableInputOutputStateTrue}
-
-
-
-
 HEATING_CLIMATECONTROL_RECEIVER	${stringTableClimateControlReceiverTitle}
 HEATING_CLIMATECONTROL_CL_RECEIVER	${stringTableClimateControlCLReceiverTitle}
-
 HEATING_KEY_RECEIVER	${stringTableHeatingKeyReceiverTitle}
-
 HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER	${stringTableHeatingClimateControlSwitchTransmitterTitle}
-
 HEATING_CLIMATECONTROL_TRANSCEIVER	${stringTableClimateControlTransceiverTitle}
 HEATING_CLIMATECONTROL_TRANSCEIVER|ACTIVE_PROFILE	${stringTableActiveProfile}
 HEATING_CLIMATECONTROL_TRANSCEIVER|CONTROL_MODE	${stringTableControlMode}
@@ -394,8 +400,6 @@ HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=FALSE	${stringTableValveAdapti
 HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=TRUE	${stringTableValveAdaptionTrue}
 HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=CLOSED	${stringTableWindowStateClosed}
 HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=OPEN	${stringTableWindowStateOpen}
-HEATING_CLIMATECONTROL_TRANSCEIVER|DURATION_UNIT	${stringTableDurationUnit}
-HEATING_CLIMATECONTROL_TRANSCEIVER|DURATION_VALUE	${stringTableDurationValue}
 
 HEATING_CLIMATECONTROL_CL_TRANSMITTER	${stringTableHeatingClimateControlCLTransmitterTitle}
 HEATING_ROOM_TH_RECEIVER	${stringTableHeatingRoomTHReceiverTitle}
@@ -456,9 +460,6 @@ KEY|TEXTLINE_2	${stringTableKeyTextLine}
 KEY_TRANSCEIVER	${stringTableKeyTranseiverTitle}
 KEY_TRANSCEIVER|DBL_PRESS_TIME	${stringTableKeyDblPressTime}
 KEY_TRANSCEIVER|LONG_PRESS_TIME	${stringTableKeyLongPressTimeA}
-
-KEY_TRANSCEIVER|REPEATED_LONG_PRESS_TIMEOUT_UNIT	${stringTableKeyLongPressTimeOutUnit}
-KEY_TRANSCEIVER|REPEATED_LONG_PRESS_TIMEOUT_VALUE	${stringTableKeyLongPressTimeOutValue}
 
 LANGUAGE	${stringTableLanguage}
 LANGUAGE=ENGLISH	${stringTableLanguageEnglish}
@@ -615,6 +616,13 @@ RESTART_BUTTONPRESS	${stringTableRestartButtonPress}
 RESTART_BUTTONPRESS_IF_WAS_ON	${stringTableRestartButtonPressIfWasOn}
 REMOTECONTROL_RECEIVER	${stringTableRemoteControlReceiver}
 
+REPEATED_LONG_PRESS_TIMEOUT_VALUE	${stringTableKeyLongPressTimeOutValue}
+REPEATED_LONG_PRESS_TIMEOUT_UNIT	${stringTableKeyLongPressTimeOutUnit}
+REPEATED_LONG_PRESS_TIMEOUT_UNIT=100ms	${optionUnit100MS}
+REPEATED_LONG_PRESS_TIMEOUT_UNIT=S	${optionUnitS}
+REPEATED_LONG_PRESS_TIMEOUT_UNIT=M	${optionUnitM}
+REPEATED_LONG_PRESS_TIMEOUT_UNIT=H	${optionUnitH}
+
 RGBW_AUTOMATIC	${stringTableRGBWAutomaticTitle}
 RGBW_AUTOMATIC|PROGRAM	${stringTableRGBWProgram}
 RGBW_AUTOMATIC|COLOR_CHANGE_SPEED	${stringTableRGBWColorChangeSpeed}
@@ -624,24 +632,45 @@ RGBW_COLOR|COLOR	${stringTableRGBWColorValue}
 RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_BLUE	${stringTableRGBWWhiteAdjustmentBlue}
 RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_GREEN	${stringTableRGBWWhiteAdjustmentGreen}
 RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_RED	${stringTableRGBWWhiteAdjustmentRed}
+
+ROTARY_HANDLE_TRANSCEIVER	${stringTableRHSTitle}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A	${stringTableRHSMsgPosA}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=CLOSED	${stringTableRHSMsgPosClosed}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=NO_MSG	${stringTableRHSMsgPosNoMsg}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=OPEN	${stringTableRHSMsgPosOpen}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=TILTED	${stringTableRHSMsgPosTilted}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B	${stringTableRHSMsgPosB}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=CLOSED	${stringTableRHSMsgPosClosed}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG	${stringTableRHSMsgPosNoMsg}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=OPEN	${stringTableRHSMsgPosOpen}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=TILTED	${stringTableRHSMsgPosTilted}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C	${stringTableRHSMsgPosC}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=CLOSED	${stringTableRHSMsgPosClosed}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=NO_MSG	${stringTableRHSMsgPosNoMsg}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=OPEN	${stringTableRHSMsgPosOpen}
+ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=TILTED	${stringTableRHSMsgPosTilted}
+ROTARY_HANDLE_TRANSCEIVER|STATE=CLOSED	${stringTableRHSStateClosed}
+ROTARY_HANDLE_TRANSCEIVER|STATE=OPEN	${stringTableRHSStateOpen}
+ROTARY_HANDLE_TRANSCEIVER|STATE=TILTED	${stringTableRHSStateTilted}
+
 ROTARY_HANDLE_SENSOR	${stringTableRHSTitle}
 ROTARY_HANDLE_SENSOR|ERROR=SABOTAGE	${stringTableRHSErrorSabotage}
 ROTARY_HANDLE_SENSOR|EVENT_DELAYTIME	${stringTableRHSEventDelayTime}
 ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A	${stringTableRHSMsgPosA}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=CLOSED	${stringTableRHSMsgPosAClosed}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=NO_MSG	${stringTableRHSMsgPosANoMsg}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=OPEN	${stringTableRHSMsgPosAOpen}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=TILTED	${stringTableRHSMsgPosATilted}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=CLOSED	${stringTableRHSMsgPosClosed}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=NO_MSG	${stringTableRHSMsgPosNoMsg}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=OPEN	${stringTableRHSMsgPosOpen}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=TILTED	${stringTableRHSMsgPosTilted}
 ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B	${stringTableRHSMsgPosB}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=CLOSED	${stringTableRHSMsgPosBClosed}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=NO_MSG	${stringTableRHSMsgPosBNoMsg}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=OPEN	${stringTableRHSMsgPosBOpen}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=TILTED	${stringTableRHSMsgPosBTilted}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=CLOSED	${stringTableRHSMsgPosClosed}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=NO_MSG	${stringTableRHSMsgPosNoMsg}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=OPEN	${stringTableRHSMsgPosOpen}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_B=TILTED	${stringTableRHSMsgPosTilted}
 ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C	${stringTableRHSMsgPosC}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=CLOSED	${stringTableRHSMsgPosCClosed}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=NO_MSG	${stringTableRHSMsgPosCNoMsg}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=OPEN	${stringTableRHSMsgPosCOpen}
-ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=TILTED	${stringTableRHSMsgPosCTilted}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=CLOSED	${stringTableRHSMsgPosClosed}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=NO_MSG	${stringTableRHSMsgPosNoMsg}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=OPEN	${stringTableRHSMsgPosOpen}
+ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=TILTED	${stringTableRHSMsgPosTilted}
 ROTARY_HANDLE_SENSOR|STATE=CLOSED	${stringTableRHSStateClosed}
 ROTARY_HANDLE_SENSOR|STATE=OPEN	${stringTableRHSStateOpen}
 ROTARY_HANDLE_SENSOR|STATE=TILTED	${stringTableRHSStateTilted}
@@ -938,6 +967,25 @@ WINMATIC|STOP	${stringTableWinMaticStop}
 WINMATIC|TILT_MAX	${stringTableWinMaticTiltMax}
 
 
+ACOUSTIC_ALARM_SELECTION=DISABLE_ACOUSTIC_SIGNAL	${stringTableAlarmDisableAcousticSignal}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING	${stringTableAlarmFrequencyRising}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_FALLING	${stringTableAlarmFrequencyFalling}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING_AND_FALLING	${stringTableAlarmFrequencyRisingAndFalling}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_HIGH	${stringTableAlarmFrequencyAlternatingLowHigh}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_MID_HIGH	${stringTableAlarmFrequencyAlternatingLowMidHigh}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_OFF	${stringTableAlarmFrequencyHighOnOff}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_LONGOFF	${stringTableAlarmFrequencyHighOnLongOff}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_OFF_HIGHON_OFF	${stringTableAlarmFrequencyLowOnOffHighonOff}
+ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_LONGOFF_HIGHON_LONGOFF	${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}
+ACOUSTIC_ALARM_SELECTION=LOW_BATTERY	${stringTableAlarmLowBattery}
+ACOUSTIC_ALARM_SELECTION=DISARMED	${stringTableAlarmDisarmed}
+ACOUSTIC_ALARM_SELECTION=INTERNALLY_ARMED	${stringTableAlarmInternallyArmed}
+ACOUSTIC_ALARM_SELECTION=EXTERNALLY_ARMED	${stringTableAlarmExternallyArmed}
+ACOUSTIC_ALARM_SELECTION=DELAYED_INTERNALLY_ARMED	${stringTableAlarmDelayedInternallyArmed}
+ACOUSTIC_ALARM_SELECTION=DELAYED_EXTERNALLY_ARMED	${stringTableAlarmDelayedExternallyArmed}
+ACOUSTIC_ALARM_SELECTION=EVENT	${stringTableAlarmEvent}
+ACOUSTIC_ALARM_SELECTION=ERROR	${stringTableAlarmError}
+
 ALL_LEDS	${stringTableAllLEDs}
 ANALOG_INPUT	${stringTableAnalog}
 ANALOG_OUTPUT	${stringTableAnalog}
@@ -966,13 +1014,29 @@ COMMUNICATION_REPORTING	${stringTableCommunicatingReporting}
 COMMUNICATION_REPORTING=TRUE	${stringTableCommunicatingReportingTrue}
 COMMUNICATION_REPORTING=FALSE	${stringTableCommunicatingReportingFalse}
 
+CONFIG_PENDING=TRUE	${stringTableConfigPendingTrue}
+CONFIG_PENDING=FALSE	${stringTableConfigPendingFalse}
+
+
 CONTROL_MODE=AUTO-MODE	${stringTableClimateControlRTTransceiverAutoMode}
 CONTROL_MODE=BOOST-MODE	${stringTableClimateControlRTTransceiverBoostMode}
 CONTROL_MODE=MANU-MODE	${stringTableClimateControlRTTransceiverManuMode}
 CONTROL_MODE=PARTY-MODE	${stringTableClimateControlRTTransceiverPartyMode}
+
+HEATING_COOLING=COOLING	${stringTableCooling}
+HEATING_COOLING=HEATING	${stringTableHeating}
+
 DAYLIGHT_SAVINGS_TIME	${stringTableDST}
 DEVICE_IN_BOOTLOADER	${stringTableDeviceInBootloader}
 DISPLAY_INVERTING	${stringTableDisplayInverting}
+
+DURATION_UNIT	${stringTableDurationUnit}
+DURATION_UNIT=S	${stringTableDurationUnitS}
+DURATION_UNIT=M	${stringTableDurationUnitM}
+DURATION_UNIT=H	${stringTableDurationUnitH}
+DURATION_UNIT=D	${stringTableDurationUnitD}
+DURATION_VALUE	${stringTableDurationValue}
+
 DUTY_CYCLE=FALSE	${stringTableDutyCycleFalse}
 DUTY_CYCLE=TRUE	${stringTableDutyCycleTrue}
 DUTYCYCLE_LIMIT	${stringTableDutyCycleLimit}
@@ -1003,6 +1067,8 @@ EXPECT_AES	${stringTableExpectAES}
 
 ILLUMINATION	${stringTableBrightness}
 
+LED_DISABLE_CHANNELSTATE	${stringTableLEDDisableChannelState}
+
 LED_ONTIME	${stringTableLEDOnTime}
 LEVEL	${stringTableDimmerLevel}
 LEVEL_REAL	${stringTableDimmerLevelReal}
@@ -1021,8 +1087,12 @@ MAINS_POWERED	${stringTableMainsPowered}
 
 MANU_MODE	${stringTableClimateControlRTTransceiverManuMode}
 
+MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE	${stringTableMinMaxNotRelevantForManuMode}
+
 MOTION=FALSE	${stringTableMotionDetectorMotionFalse}
 MOTION=TRUE	${stringTableMotionDetectorMotionTrue}
+
+MOTION_ACTIVE_TIME	${stringTableMotionDetectorMotionActiveTime}
 
 MOTION_DETECTION_ACTIVE=FALSE	${stringTableMotionDetectorMotionDetectionActiveFalse}
 MOTION_DETECTION_ACTIVE=TRUE	${stringTableMotionDetectorMotionDetectionActiveTrue}
@@ -1032,6 +1102,17 @@ OLD_LEVEL	${stringTableDimmerOldLevel}
 ON_TIME	${stringTableDimmerOnTime}
 
 OPERATING_VOLTAGE	${stringTableOperationVoltage}
+
+OPTICAL_ALARM_SELECTION=DISABLE_OPTICAL_SIGNAL	${stringTableAlarmDisableOpticalSignal}
+OPTICAL_ALARM_SELECTION=BLINKING_ALTERNATELY_REPEATING	${stringTableAlarmBlinkingAlternatelyRepeating}
+OPTICAL_ALARM_SELECTION=BLINKING_BOTH_REPEATING	${stringTableAlarmBlinkingBothRepeating}
+OPTICAL_ALARM_SELECTION=DOUBLE_FLASHING_REPEATING	${stringTableAlarmDoubleFlashingRepeating}
+OPTICAL_ALARM_SELECTION=FLASHING_BOTH_REPEATING	${stringTableAlarmFlashingBothRepeating}
+OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_0	${stringTableAlarmConfirmingSignal0}
+OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_1	${stringTableAlarmConfirmingSignal1}
+OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_2	${stringTableAlarmConfirmingSignal2}
+
+OVERTEMP_LEVEL	${stringTableDimmerOverTempLevel}
 
 PARTY_MODE_SUBMIT	${stringTablePartyModeSubmit}
 PARTY_START_DAY	${stringTablePartyStartDay}
@@ -1067,6 +1148,7 @@ POWERUP_ONTIME_UNIT=10S	${optionUnit10S}
 POWERUP_ONTIME_UNIT=1M	${optionUnit1M}
 POWERUP_ONTIME_UNIT=5M	${optionUnit5M}
 POWERUP_ONTIME_UNIT=10M	${optionUnit10M}
+POWERUP_ONTIME_UNIT=H	${optionUnitH}
 POWERUP_ONTIME_VALUE	${stringTableOnTimeValue}
 
 POWER_SUPPLY	${stringTablePowerSupply}

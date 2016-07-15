@@ -12,6 +12,7 @@
   string includePARTY = "PARTY_MODE_SUBMIT";
 
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
+  string excludeHmIPResetMotion = "RESET_MOTION";
   string excludeHmIPSmokeDetCommandReservedAlarmOff = "SMOKE_DETECTOR_COMMAND=RESERVED_ALARM_OFF";
 
   integer iDP = oSD.DestinationDP();
@@ -229,7 +230,7 @@
               else
               {
                 ! Some parameter shouldn´t be visible
-                if( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1)) && (oDP.HSSID().Find(excludeHmIPCDT) == -1) ) {
+                if( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1)) && (oDP.HSSID().Find(excludeHmIPCDT) == -1) && (oDP.HSSID().Find(excludeHmIPResetMotion) == -1) ) {
                   Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
                   string sValue = oDP.Name();
                   if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )

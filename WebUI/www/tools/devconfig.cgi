@@ -748,7 +748,12 @@ proc show_paramset {device ps_type ps_id ps_var ps_descr_var redir_url sid} {
                 array_clear param_descr
                 array set param_descr $ps_descr($param_id)
                 set type $param_descr(TYPE)
-                set unit $param_descr(UNIT)
+
+                # For HmIP-devices the unit is sometimes not available
+                if { [catch {set unit $param_descr(UNIT)}]} {
+                  set unit ""
+                }
+
                 set min $param_descr(MIN)
                 set max $param_descr(MAX)
                 set operations $param_descr(OPERATIONS)

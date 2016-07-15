@@ -191,6 +191,7 @@ function ::CreateHeatingControlHMIP()
 {
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
+  string chnLabel = ch.Label();
 
   integer chInterfaceID = ch.Interface();
   object chInterface = dom.GetObject(chInterfaceID);
@@ -336,6 +337,13 @@ function ::CreateHeatingControlHMIP()
               WriteLine("<option value='1'>${weeklyProfile1}</option>");
               WriteLine("<option value='2'>${weeklyProfile2}</option>");
               WriteLine("<option value='3'>${weeklyProfile3}</option>");
+
+              if ((chnLabel == "HMIP-WTH-2") || (chnLabel == "HmIP-WTH-2") || (chnLabel == "ALPHA-IP-RBG")) {
+                WriteLine("<option value='4'>${weeklyProfile4}</option>");
+                WriteLine("<option value='5'>${weeklyProfile5}</option>");
+                WriteLine("<option value='6'>${weeklyProfile6}</option>");
+              }
+
             WriteLine("</select>");
           WriteLine("</td>");
 

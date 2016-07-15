@@ -58,10 +58,15 @@ jQuery.extend(true,langJSON, {
     "optionThu" : "Donnerstag",
     "optionFri" : "Freitag",
 
+    "optionWeeklyProgramStateOn"  : "EIN",
+    "optionWeeklyProgramStateOff" : "AUS",
+
     "lblProgramTemperatureProfile" : "Temperaturprofil",
+    "lblProgramProfile" : "Profil",
     "lblProgramTimeStart": "Startzeit",
     "lblProgramTimeEnd": "Endzeit",
     "lblProgramTemperature" : "Temperatur",
+    "lblProgramState" : "Schaltzustand",
     "lblProgramPeriod" : "Zeitabschnitt",
     "lblProgramPreviousDay" : "wie am Vortag",
     "lblProgramTimeExtension" : "Uhr",
@@ -80,11 +85,12 @@ jQuery.extend(true,langJSON, {
     "stringTableWeekProgram1" : "1",
     "stringTableWeekProgram2" : "2",
     "stringTableWeekProgram3" : "3",
+    "stringTableWeekProgram4" : "4",
+    "stringTableWeekProgram5" : "5",
+    "stringTableWeekProgram6" : "6",
 
     "stringTableTwoPointHysteresis" : "Hysterese f&uuml;r Zweipunktregelung",
     "stringTableHeatingCooling" : "Art der Zweipunktregelung",
-    "stringTableHeating" : "Heizen",
-    "stringTableCooling" : "K&uuml;hlen",
     "stringTableSendWeatherData" : "Sende Temperatur- und Feuchtigkeitswert",
 
     "dummy" : ""
@@ -147,10 +153,16 @@ jQuery.extend(true,langJSON, {
     "optionWed" : "Wednesday",
     "optionThu" : "Thursday",
     "optionFri" : "Friday",
+
+    "optionWeeklyProgramStateOn"  : "ON",
+    "optionWeeklyProgramStateOff" : "OFF",
+
     "lblProgramTemperatureProfile" : "Temperature profile",
+    "lblProgramProfile" : "Profile",
     "lblProgramTimeStart" : "Start time",
     "lblProgramTimeEnd" : "End time",
     "lblProgramTemperature" : "Temperature",
+    "lblProgramState" : "Switching status",
     "lblProgramPeriod" : "Time period",
     "lblProgramPreviousDay" : "apply from previous day",
     "lblProgramTimeExtension" : "o'clock",
@@ -169,12 +181,12 @@ jQuery.extend(true,langJSON, {
     "stringTableWeekProgram1" : "1",
     "stringTableWeekProgram2" : "2",
     "stringTableWeekProgram3" : "3",
+    "stringTableWeekProgram4" : "4",
+    "stringTableWeekProgram5" : "5",
+    "stringTableWeekProgram6" : "6",
 
     "stringTableTwoPointHysteresis" : "Hysteresis for on-off control",
     "stringTableHeatingCooling" : "Type of on-off control",
-    "stringTableHeating" : "Heating",
-    "stringTableCooling" : "Cooling",
-
     "stringTableSendWeatherData" : "Send temperature and humidity value",
 
     "dummy" : ""
@@ -234,10 +246,16 @@ jQuery.extend(true,langJSON, {
     "optionWed" : "Carsamba",
     "optionThu" : "Persembe",
     "optionFri" : "Cuma",
+
+    "optionWeeklyProgramStateOn"  : "ON",
+    "optionWeeklyProgramStateOff" : "OFF",
+
     "lblProgramTemperatureProfile" : "Sicaklik profili",
+    "lblProgramProfile" : "Profile",
     "lblProgramTimeStart" : "Baslama zamani",
     "lblProgramTimeEnd" : "Bitis zamani",
     "lblProgramTemperature" : "Sicaklik",
+    "lblProgramState" : "Switching status",
     "lblProgramPeriod" : "Zaman zarfi",
     "lblProgramPreviousDay" : "&ouml;nceki g&uuml;n gibi",
     "lblProgramTimeExtension" : "Saat",
@@ -255,12 +273,12 @@ jQuery.extend(true,langJSON, {
     "stringTableWeekProgram1" : "1",
     "stringTableWeekProgram2" : "2",
     "stringTableWeekProgram3" : "3",
+    "stringTableWeekProgram4" : "4",
+    "stringTableWeekProgram5" : "5",
+    "stringTableWeekProgram6" : "6",
 
     "stringTableTwoPointHysteresis" : "Cift noktali reg&uuml;lat&ouml;r icin histerezis",
     "stringTableHeatingCooling" : "Cift noktali reg&uuml;latör t&uuml;r&uuml;",
-    "stringTableHeating" : "Isitma",
-    "stringTableCooling" : "Sogutma",
-
     "stringTableSendWeatherData" : "Sicaklik degerini ve nem degerini g&ouml;nder",
 
     "dummy" : ""

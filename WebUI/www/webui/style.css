@@ -1555,7 +1555,10 @@ div.caption  { display: table-caption; }
 #ic_deviceparameters #Timeouts_Area .TimeoutTable,
 #ic_deviceparameters #P1_Timeouts_Area .TimeoutTable,
 #ic_deviceparameters #P2_Timeouts_Area .TimeoutTable,
-#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable
+#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable,
+#ic_deviceparameters #P4_Timeouts_Area .TimeoutTable,
+#ic_deviceparameters #P5_Timeouts_Area .TimeoutTable,
+#ic_deviceparameters #P6_Timeouts_Area .TimeoutTable
 {
 	background-color: $_(white); /* white */
 	border: 0;
@@ -1567,7 +1570,10 @@ div.caption  { display: table-caption; }
 #ic_deviceparameters #Timeouts_Area .TimeoutTable thead td,
 #ic_deviceparameters #P1_Timeouts_Area .TimeoutTable thead td,
 #ic_deviceparameters #P2_Timeouts_Area .TimeoutTable thead td,
-#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable thead td
+#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable thead td,
+#ic_deviceparameters #P4_Timeouts_Area .TimeoutTable thead td,
+#ic_deviceparameters #P5_Timeouts_Area .TimeoutTable thead td,
+#ic_deviceparameters #P6_Timeouts_Area .TimeoutTable thead td
 {
 	height: auto;
 	border: 0;
@@ -1579,7 +1585,10 @@ div.caption  { display: table-caption; }
 #ic_deviceparameters #Timeouts_Area .TimeoutTable thead td,
 #ic_deviceparameters #P1_Timeouts_Area .TimeoutTable thead td,
 #ic_deviceparameters #P2_Timeouts_Area .TimeoutTable thead td,
-#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable thead td
+#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable thead td,
+#ic_deviceparameters #P4_Timeouts_Area .TimeoutTable thead td,
+#ic_deviceparameters #P5_Timeouts_Area .TimeoutTable thead td,
+#ic_deviceparameters #P6_Timeouts_Area .TimeoutTable thead td
 {
 	height: auto;
 	text-align: center;
@@ -1591,7 +1600,10 @@ div.caption  { display: table-caption; }
 #ic_deviceparameters #Timeouts_Area .TimeoutTable tbody td,
 #ic_deviceparameters #P1_Timeouts_Area .TimeoutTable tbody td,
 #ic_deviceparameters #P2_Timeouts_Area .TimeoutTable tbody td,
-#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable tbody td
+#ic_deviceparameters #P3_Timeouts_Area .TimeoutTable tbody td,
+#ic_deviceparameters #P4_Timeouts_Area .TimeoutTable tbody td,
+#ic_deviceparameters #P5_Timeouts_Area .TimeoutTable tbody td,
+#ic_deviceparameters #P6_Timeouts_Area .TimeoutTable tbody td
 {
 	height: auto;
 	padding: 1px 10px;

@@ -35,6 +35,7 @@
 "RAMPON_TIME" : "<span class=\"translated\">Acildiginda rampa s&uuml;resi</span>",
 "SWITCH_DIR" : "<span class=\"translated\">Y&ouml;n</span>",
 "SWITCH_MODE" : "<span class=\"translated\">Salter modu</span>",
+"SWITCH_SIGNAL" : "<span class=\"translated\">Switch on signal</span>",
 "TEMPERATURE_LOWERING_VALUE" : "<span class=\"translated\">D&uuml;s&uuml;rme sicakligi</span>",
 "UP_DELAY_TIME" : "<span class=\"translated\">Yukari kaldirma gecikme zamani</span>",
 "UP_LEVEL" : "<span class=\"translated\">Yukari hareket pozisyonu</span>",
@@ -57,5 +58,12 @@
 "OFF_TIME_BASE" : "<span class=\"translated\">Unit switch-off time</span>",
 "OFF_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-off time (duration in status \"off\")</span>",
 "OFF_TIME_FACTOR" : "<span class=\"translated\">Value switch-off time</span>",
+"RAMPON_TIME_BASE": "<span class=\"translated\">Unit ramp time</span>",
+"RAMPON_TIME_FACTOR" : "<span class=\"translated\">Value ramp time</span>",
+"RAMPON_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-on ramp time</span>",
+"RAMPOFF_TIME_BASE": "<span class=\"translated\">Unit ramp time</span>",
+"RAMPOFF_TIME_FACTOR" : "<span class=\"translated\">Value ramp time</span>",
+"RAMPOFF_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-off ramp time</span>",
+
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperature</span>",
 

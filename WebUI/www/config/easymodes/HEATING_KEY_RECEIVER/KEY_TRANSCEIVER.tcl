@@ -2,8 +2,9 @@
 
 source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
-# source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options_hmip.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${switch_temp}"
@@ -119,7 +120,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
 #  die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
-  set prn 0  
+  puts "<script type=\"text/javascript\">getLangInfo_Special('HmIP_DEVICES.txt');</script>"
+
+  set prn 0
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) [cmd_link_paramset2 $iface $address ps_descr ps "LINK" ${special_input_id}_$prn]
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
@@ -133,16 +136,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   # *** SHORT KEYPRESS ***
 
-  set pref 1
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME_BASE}</td><td>"
-  option TIMEBASE_LONG
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME_BASE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME_BASE]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME_FACTOR}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>[get_InputElem SHORT_ON_TIME_FACTOR separate_${special_input_id}_$prn\_$pref ps SHORT_ON_TIME_FACTOR ]</td>"
-  append HTML_PARAMS(separate_$prn) "</tr>"
+  set pref 0
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${TEMPERATURE_RC}</td>"

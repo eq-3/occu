@@ -1,6 +1,6 @@
-<script type="text/javascript">
+<script type="text/javascript" xmlns="http://www.w3.org/1999/html">
   Cursor.set(Cursor.WAIT);
-  iseInitUpdateArrays();
+   iseInitUpdateArrays();
   <%
     boolean firstSort = false;
     object oUser = dom.GetObject( system.GetSessionVar("sessionUserID") );
@@ -195,14 +195,17 @@
             }
 
             ! Pluggable Switch (PS)
-            if(( (oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS") ) && (chNumber != 3)) {
-              ! Show only channel 3 of this device
-              bShowChannel = false;
+            if((oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS")) {
+              if ((chn.HssType().Find("KEY_TRANSCEIVER") != -1) || (chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {
+                bShowChannel = false;
+              }
             }
 
             ! Pluggable Switch and Meter (PSM)
+            ! Don't show the key channel (a key press doesn't work with ccu and hmip) and the  real channel (doesn't make sense with only one virtual channel)
+            ! Channel 3, 4, and 5 are virtual channels - show only the first virtual channel (no. 3) and hide channel 4 and 5
             if ( (oDevHssType == "HMIP-PSM") || (oDevHssType == "HmIP-PSM") ) {
-              if ((chNumber == 1) || (chNumber == 2) || (chNumber == 4) || (chNumber == 5)) {
+              if ((chn.HssType().Find("KEY_TRANSCEIVER") != -1) || (chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {
                 bShowChannel = false;
               }
             }
@@ -216,17 +219,18 @@
               bShowChannel = false;
             }
 
-            ! Flush mounted Switch and Meter (BSM)
-            ! When bShowChannel == true, the channel is visible
-            ! You can hide the channel by setting the value to false
-            if ( oDevHssType == "HmIP-BSM" ) {
-              if (chNumber == 3) {
-                bShowChannel = true;
-              }
+            ! Flush mounted Dimmer (BDT) and Flush mounted Switch and Meter (BSM)
+            if ( ((oDevHssType == "HmIP-BDT") || (oDevHssType == "HmIP-BSM")) && (chn.HssType().Find("KEY_TRANSCEIVER") != -1)) {
+               bShowChannel = false;
+            }
+
+            ! Don't show the key channel (a key press doesn't work with ccu and hmip) and the  real channel (doesn't make sense with only one virtual channel)
+            if ( (oDevHssType == "HmIP-ASIR") && (chn.HssType().Find("KEY_TRANSCEIVER") != -1) || (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) ) {
+              bShowChannel = false;
             }
           }
 
-          ! Write("<script type='text/javascript'>console.log('bShowChannel: "#bShowChannel#"');</script>");
+          ! Write("<script type='text/javascript'>console.log('chnType: "#chn.HssType()#" - bShowChannel: "#bShowChannel#"');</script>");
 
           if( bShow && chn.ReadyConfig() && oDev.ReadyConfig() && bShowChannel )
           {
@@ -308,7 +312,7 @@
   </script>
 </table>
 <script type="text/javascript">
-  <% 
+  <%
     if(firstSort)
     {
       Write("//IseSort(arChns,'name',true);");

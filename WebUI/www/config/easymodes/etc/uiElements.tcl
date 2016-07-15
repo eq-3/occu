@@ -112,3 +112,108 @@ proc getHelpIcon {topic x y} {
   return $ret
 }
 
+proc _getParamDescrKey {param} {
+
+  set lParam [lreplace [split $param "_"] 0 0]
+  set _paramDescr ""
+  foreach val $lParam {
+    append _paramDescr "$val"
+    append _paramDescr "_"
+  }
+  return [string trimright $_paramDescr "_"]
+}
+
+proc getTimeSelector {profileDescr p profile type prn special_input_id timebase optionValues} {
+  
+  # paramDescr        Text vor der Auswahlbox
+  # p                 Paramset
+  # profile           the profile (e. g. PROFILE_1)
+  # type              delay delayShort timeOnOff timeOnOffShort (determines the kind of the optionbox)
+  # prn               profile number
+  # special_input_id  special_input_id
+  # timebase          SHORT_ON_TIME
+  # optionValues      Option values when entering a user specific value (Enter value)
+
+  # Example
+  # [getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]
+
+  upvar $profile PROFILE
+  upvar $p ps
+  upvar pref pref
+  upvar cur_profile cur_profile
+
+  set timeBaseParam "$timebase\_BASE"
+  set timeFactorParam "$timebase\_FACTOR"
+
+  set paramBaseDescr [_getParamDescrKey $timeBaseParam]
+  set paramFactorDescr [_getParamDescrKey $timeFactorParam]
+
+  incr pref
+  append html "<tr>"
+  append html "<td>\${$profileDescr}</td>"
+  append html [getComboBox $prn $pref $special_input_id $type]
+  append html "</tr>"
+
+  append html "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\"><td>\${$paramBaseDescr}</td><td>"
+  option $optionValues
+  append html [get_ComboBox options $timeBaseParam separate_${special_input_id}_$prn\_$pref PROFILE $timeBaseParam]
+
+  append html "</td></tr>"
+
+  if {$prn == $cur_profile} {
+    switch $type {
+      delay {
+        # setCurrentDelayOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+      delayShort {
+        # setCurrentDelayShortOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+      timeOnOff {
+        # setCurrentTimeOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+      timeOnOffShort {
+        # setCurrentTimeShortOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+      rampOnOff {
+        # setCurrentRampOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+    }
+  } else {
+    switch $type {
+      delay {
+        # setCurrentDelayOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+      }
+      delayShort {
+        # setCurrentDelayShortOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+      }
+      timeOnOff {
+        # setCurrentTimeOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+      }
+      timeOnOffShort {
+        # setCurrentTimeShortOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+      }
+      rampOnOff {
+        # setCurrentRampOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+      }
+    }
+  }
+  incr pref
+  append html "<tr id=\"timeFactor\_$prn\_$pref\" class=\"hidden\"><td>\${$paramFactorDescr}</td>"
+
+  append html "<td>[get_InputElem $timeFactorParam separate_${special_input_id}_$prn\_$pref ps $timeFactorParam ]</td>"
+  append html "</tr>"
+  append html "<tr id=\"space_$prn\_$pref\" class=\"hidden\"><td><br/></td></tr>"
+
+  return $html
+
+}

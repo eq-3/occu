@@ -510,34 +510,12 @@ jQuery.extend(true, langJSON, {
     "lblErrorCheck" : "Error check",
     "lblNoError" : "No error",
 
-    "lblLinkPartnerTempSensor" : "Connection partner<br/>temperature sensor",
-    "lblLinkPartnerWallMountedThermostat" : "Connection partner<br/>wall thermostat",
-    "lblLinkPartnerHeatingThermostat" : "Connection partner<br/>radiator thermostat",
-    "lblLinkPartnerShutterContact" : "Connection partner<br/>shutter contact",
-    "lblLinkPartnerHeatingThermostatSender" : "Connection partner<br/>radiator thermostat<br/>transmitter",
-    "lblLinkPartnerHeatingThermostatReceiver" : "Connection partner<br/>radiator thermostat<br/>receiver",
-    "lblLinkPartnerKey" : "Connection partner<br/>button",
-    "lblLinkPartnerSwitchActor" : "Connection partner<br/>switch actor",
-
-    "lblSwitchActor" : "Switch actor",
-    "lblMeasurementChannel" : "Measurement channel",
-    "lblPower" : "Power sensor",
-    "lblCurrent" : "Current sensor",
-    "lblVoltage" : "Voltage sensor",
-    "lblFrequency" : "Frequency sensor",
-
     "lblInfoStatusControlEnergyCounter" : "Energy counter " + HMIdentifier.en.CCUShortName,
     "lblInfoStatusControlDevice" : "Energy counter device",
     "lblInfoStatusControlVoltage" : "Voltage",
     "lblInfoStatusControlCurrent" : "Current",
     "lblInfoStatusControlPower" : "Power",
     "lblInfoStatusControlFrequency" : "Frequency",
-
-    // Schüco - don´t change
-    "lblTipTronicChn1" : "Actor channel",
-    "lblTipTronicChn2" : "Sensor channel",
-    "lblTipTronicChn3" : "Ventilation lock channel",
-    // End Schüco
 
     "noLinkableChannelsAvailable" : "There are no channels available which can be connected.",
 
@@ -749,19 +727,19 @@ jQuery.extend(true, langJSON, {
       "The latest firmware version of the device is alreay installed on the  " + HMIdentifier.de.CCUShortName + ".\n"+
           "Please perform the firmware update on the configuration page.\n\n",
 
-    "lblRGBWControllerDimmer" : "Dimmer",
-    "lblRGBWControllerColor" : "Colour",
-    "lblRGBWControllerAutomatic" : "Program",
-
     "deviceUpdate" : "Device update:",
 
     "weeklyProfile1" : "1",
     "weeklyProfile2" : "2",
     "weeklyProfile3" : "3",
+    "weeklyProfile4" : "4",
+    "weeklyProfile5" : "5",
+    "weeklyProfile6" : "6",
 
     "optionUnitS" : "Seconds",
     "optionUnitM" : "Minutes",
     "optionUnitH" : "Hours",
+    "optionUnitD" : "Days",
     "optionUnit100MS" : "100ms",
     "optionUnit1S" : "1 second",
     "optionUnit2S" : "2 seconds",
@@ -791,21 +769,9 @@ jQuery.extend(true, langJSON, {
     "lblDeviceFwPerformUpdate" : "The device update is carried out",
     "lblDeviceFwDeliverFwImage" : "The update file is transmitted to the device",
     "lblGenericLinkPartner" : "Connection partner",
-    "lblHmIP_KeyTransceiver" : "Push button channel<br/>button press",
-    "lblHmIP_SwitchTransmitter" : "Status report relay",
-    "lblHmIP_SwitchVirtualReceiver" : "Connection partner<br/>button",
-    "lblHmIP_EnergieMeterTransmitter" : "Status report measured value channel",
+
     //"lblHmIP_PSMChn7" : "Connection partner<br/>switch actuator",
     "lblHmIP_NotSupported" : "Currently not supported",
-    "lblHmIP_HeatingClimateControlTransceiver" : "Connection partner radiator thermostat (manual operation, transmitter)",
-    "lblHmIP_HeatingClimateControlReceiver" : "Connection partner radiator thermostat (manual operation, receiver)",
-    "lblHmIP_HeatingClimateControlCLTransmitter" : "Connection partner radiator thermostat (cycl. data, setpoint and actual temp.)",
-    "lblHmIP_HeatingShutterContactReceiver" : "Connection partner door/window contact",
-    "lblHmIP_HeatingClimateControlSwitchTransmitter" : "Connection partner switch actuator for two-point control",
-    "lblHmIP_HeatingKeyReceiver" : "Connection partner push button",
-    "lblHmIP_HeatingClimateControlCLReceiver" : "Connection partner wall thermostat (cycl. data, setpoint and actual temp.)",
-    "lblHmIP_HeatingRoomTHTransceiver" : "Connection partner wall thermostat (manual operation, transmitter)",
-    "lblHmIP_HeatingRoomTHReceiver" : "Connection partner wall thermostat (manual operation, receiver)",
     "lblSetMode" : "Set mode!",
     "lblChannelActivInactiv" : "Channel active / inactive:",
     "lblRepetition" : "Repetitions",
@@ -901,6 +867,14 @@ jQuery.extend(true, langJSON, {
     "lblLinkInternalDescInternalKey" :  "Connection of internal device button",
 
     "lblLicenseInformation" : "License information",
+
+    "stringTableHeating" : "Heating",
+    "stringTableCooling" : "Cooling",
+
+    "actionAlarmControlLblStart" : "Trigger alarm",
+    "lblAlarmDuration" : "Alarm duration",
+    "optionSetDuration" : "Define duration",
+    "setAlarmDialogTitle" : "Trigger alarm",
 
     "theEnd" : ""
   }

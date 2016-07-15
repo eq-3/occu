@@ -1,15 +1,34 @@
 #!/bin/tclsh
 
-source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
+source [file join /www/config/easymodes/em_common.tcl]
+
+set PROFILES_MAP(0)  "Experte"
+set PROFILES_MAP(1)  "TheOneAndOnlyEasyMode"
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
+  global env iface_url psDescr dev_descr
 
+  upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
+  upvar PROFILE_PNAME PROFILE_PNAME
+  upvar $pps          ps
+  upvar $pps_descr    psDescr
+  upvar PROFILE_1     PROFILE_1
 
+  set chn [getChannel $special_input_id]
+  # Firmware = x.y.z
+  # devFwMajor = x
+  set devFwMajor [expr [lindex [split $dev_descr(FIRMWARE) .] 0] * 1]
 
-  # Hide all parameters of this channel
-  append HTML_PARAMS(separate_0) ""
-  append HTML_PARAMS(separate_1) ""
+  if {$devFwMajor > 1} {
+    append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+       set prn 0
+       append HTML_PARAMS(separate_1) "[getSwitchVirtualReceiver $chn ps psDescr]";
+    append HTML_PARAMS(separate_1) "</table>"
+  } else {
+    # Hide all parameters of this channel
+    append HTML_PARAMS(separate_0) ""
+    append HTML_PARAMS(separate_1) ""
+  }
 }
-
 constructor

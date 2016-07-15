@@ -81,3 +81,25 @@ function ::CreateDimmingActuator()
 
   return;
 }
+
+function ::CreateDimmerRealInfoControl() {
+  real rLevelReal = -1.0;
+  string sLevelReal;
+
+  object oLevelReal = cObj.DPByControl("DIMMER_REAL.LEVEL");
+
+  if ( oLevelReal ) {
+    rLevelReal = oLevelReal.Value() * 100;
+    sLevelReal = rLevelReal.ToString();
+  }
+
+  WriteLine("<td>");
+    WriteLine("<table class='ControlBtnInfo'>");
+      WriteLine("<tr style='height:40px;'>");
+        WriteLine("<td id='"#chnId#"Level'>");
+          WriteLine("${lblInfoDimmerLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+}

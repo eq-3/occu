@@ -279,6 +279,24 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
     append HTML_PARAMS(separate_1) "</script>"
     append HTML_PARAMS(separate_1) "<tr>"
+
+    set param MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE
+    if { ! [catch {set tmp $ps($param)}]  } {
+      # In older versions this parameter is not available
+      incr prn
+      append HTML_PARAMS(separate_1) "<tr>"
+      append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableMinMaxNotRelevantForManuMode}</td>"
+      append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">"
+      append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn]"
+      append HTML_PARAMS(separate_1) "</td>"
+      append HTML_PARAMS(separate_1) "</tr>"
+    }
+
+    append HTML_PARAMS(separate_1) "</table>"
+
+    append HTML_PARAMS(separate_1) "<hr>"
+
+    append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
     # left
     incr prn
     set param TEMPERATURE_OFFSET

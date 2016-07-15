@@ -664,7 +664,9 @@ proc put_channel_parameters {} {
     # Für HmIP Kanal 0 aktivieren
     if {($ch_descr(INDEX) == 0) && ($iface != "HmIP-RF")} then { continue }
 
-    if {([isHmIP] == "true") && ($ch_descr(TYPE) == "WEEK_PROGRAM")} then {
+    # Hier kann der Kanal für das Wochenprogramm der HmIP-Geräte unsichtbar geschaltet werden.
+    # Ausserdem werden alle Kanäle mit dem FLAG Visible 0 ausgeblendet
+    if {([isHmIP] == "true") && ($ch_descr(TYPE) == "WEEK_PROGRAM") || ! ($ch_descr(FLAGS) & 1)} then {
         set hide_channel 1
     }
 

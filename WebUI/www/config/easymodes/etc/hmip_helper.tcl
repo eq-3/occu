@@ -24,6 +24,11 @@ proc getComboBox {prn pref specialElement type} {
       "timeOnOffShort" {
         append s [getTimeOnOffShort $prn $pref $specialElement]
       }
+
+
+      "rampOnOff" {
+        append s [getRampOnOff $prn $pref $specialElement]
+      }
     }
 
     return $s
@@ -47,7 +52,7 @@ proc getDelayShort {prn pref specialElement} {
 
       append s "<script type=\"text/javascript\">"
 
-        append s "setCurrentDelayShortOption = function(prn, pref, specialElement) {"
+        append s "setCurrentDelayShortOption = function(prn, pref, specialElement, baseValue, factorValue) {"
           append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
           append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
           append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
@@ -64,8 +69,9 @@ proc getDelayShort {prn pref specialElement} {
           append s "optionMap\[\"22\"\] = 6;"
           append s "optionMap\[\"31\"\] = 7;"
 
-          append s "var baseVal = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
-          append s "factorVal =   jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 8;"
           append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
@@ -173,7 +179,7 @@ proc getDelay {prn pref specialElement} {
 
       append s "<script type=\"text/javascript\">"
 
-        append s "setCurrentDelayOption = function(prn, pref, specialElement) {"
+        append s "setCurrentDelayOption = function(prn, pref, specialElement, baseValue, factorValue) {"
           append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
           append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
           append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
@@ -191,8 +197,9 @@ proc getDelay {prn pref specialElement} {
           append s "optionMap\[\"63\"\] = 9;"
           append s "optionMap\[\"71\"\] = 10;"
 
-          append s "var baseVal = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
-          append s "factorVal =   jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 11;"
           append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
@@ -309,7 +316,7 @@ proc getTimeOnOffShort {prn pref specialElement} {
 
       append s "<script type=\"text/javascript\">"
 
-        append s "setCurrentTimeShortOption = function(prn, pref, specialElement) {"
+        append s "setCurrentTimeShortOption = function(prn, pref, specialElement, baseValue, factorValue) {"
 
           append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
           append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
@@ -324,8 +331,9 @@ proc getTimeOnOffShort {prn pref specialElement} {
           append s "optionMap\[\"21\"\] = 5;"
           append s "optionMap\[\"31\"\] = 6;"
 
-          append s "var baseVal = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
-          append s "factorVal =   jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 7;"
           append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal);"
@@ -435,7 +443,7 @@ proc getTimeOnOff {prn pref specialElement} {
 
       append s "<script type=\"text/javascript\">"
 
-        append s "setCurrentTimeOption = function(prn, pref, specialElement) {"
+        append s "setCurrentTimeOption = function(prn, pref, specialElement, baseValue, factorValue) {"
 
           append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
           append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
@@ -462,8 +470,10 @@ proc getTimeOnOff {prn pref specialElement} {
           append s "optionMap\[\"724\"\] = 17;"
           append s "optionMap\[\"731\"\] = 18;"
 
-          append s "var baseVal = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
-          append s "factorVal =   jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 19;"
           append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal);"
@@ -604,6 +614,136 @@ proc getTimeOnOff {prn pref specialElement} {
       return $s
 }
 
+proc getRampOnOff {prn pref specialElement} {
+      set s ""
+      append s "<td>"
+      append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setRampOnOffValues(this.id, $prn, $pref, \'$specialElement\')\">"
+        append s "<option value=\"0\">\${optionNotActive}</option>"
+        append s "<option value=\"1\">\${optionUnit200MS}</option>"
+        append s "<option value=\"2\">\${optionUnit500MS}</option>"
+        append s "<option value=\"3\">\${optionUnit1S}</option>"
+        append s "<option value=\"4\">\${optionUnit2S}</option>"
+        append s "<option value=\"5\">\${optionUnit5S}</option>"
+        append s "<option value=\"6\">\${optionUnit10S}</option>"
+        append s "<option value=\"7\">\${optionUnit20S}</option>"
+        append s "<option value=\"8\">\${optionUnit30S}</option>"
+        append s "<option value=\"9\">\${stringTableEnterValue}</option>"
+      append s "/<select>"
+      append s "</td>"
+
+      append s "<script type=\"text/javascript\">"
+
+        append s "setCurrentRampOption = function(prn, pref, specialElement, baseValue, factorValue) {"
+          append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "var optionMap = \[\];"
+          append s "optionMap\[\"00\"\] = 0;"
+          append s "optionMap\[\"02\"\] = 1;"
+          append s "optionMap\[\"05\"\] = 2;"
+          append s "optionMap\[\"010\"\] = 3;"
+          append s "optionMap\[\"11\"\] = 3;"
+          append s "optionMap\[\"020\"\] = 4;"
+          append s "optionMap\[\"12\"\] = 4;"
+          append s "optionMap\[\"15\"\] = 5;"
+          append s "optionMap\[\"110\"\] = 6;"
+          append s "optionMap\[\"120\"\] = 7;"
+          append s "optionMap\[\"130\"\] = 8;"
+
+          # append s "var baseVal = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          # append s "factorVal =   jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+          append s "currentVal = baseVal+factorVal,"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 9;"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
+
+          #append s "console.log(\"RAMP baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
+
+          # Enter user value
+          append s "if (optionVal == 9) {"
+            append s "timeBaseTRElem.show();"
+            append s "timeFactorTRElem.show();"
+            append s "spaceTRElem.show();"
+          append s "}"
+
+        append s "};"
+
+        append s "setRampOnOffValues = function(elmID, prn, pref, specialElement) {"
+          append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
+          append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\"+ pref),"
+          append s "factorElem = jQuery(\"#separate_\" +specialElement + \"_\"+ prn +\"_\" + (parseInt(pref) + 1)),"
+          append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\"+prn+\"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "timeBaseTRElem.hide();"
+          append s "timeFactorTRElem.hide();"
+          append s "spaceTRElem.hide();"
+
+          append s "switch (value) \{"
+            append s "case 0:"
+              # keine Verzögerung
+              append s "baseElem.val(0);"
+              append s "factorElem.val(0);"
+              append s "break;"
+            append s "case 1:"
+              # 200 ms
+              append s "baseElem.val(0);"
+              append s "factorElem.val(2);"
+              append s "break;"
+            append s "case 2:"
+              # 500 ms
+              append s "baseElem.val(0);"
+              append s "factorElem.val(5);"
+              append s "break;"
+            append s "case 3:"
+              # 1 sec
+              append s "baseElem.val(1);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 4:"
+              # 2 sec
+              append s "baseElem.val(1);"
+              append s "factorElem.val(2);"
+              append s "break;"
+            append s "case 5:"
+              # 5 sec
+              append s "baseElem.val(1);"
+              append s "factorElem.val(5);"
+              append s "break;"
+            append s "case 6:"
+              # 10 sec
+              append s "baseElem.val(1);"
+              append s "factorElem.val(10);"
+              append s "break;"
+            append s "case 7:"
+              # 20 sec
+              append s "baseElem.val(1);"
+              append s "factorElem.val(20);"
+              append s "break;"
+            append s "case 8:"
+              # 30 sec
+              append s "baseElem.val(1);"
+              append s "factorElem.val(30);"
+              append s "break;"
+            append s "case 9:"
+              append s "timeBaseTRElem.show();"
+              append s "timeFactorTRElem.show();"
+              append s "spaceTRElem.show();"
+
+              append s "break;"
+            append s "default: conInfo(\"Problem\");"
+          append s "\}"
+        append s "};"
+      append s "</script>"
+
+      return $s
+}
+
 proc trimParam {param} {
   set s [string trimleft $param ']
   set s [string trimright $s ']
@@ -681,4 +821,21 @@ proc getChannel {special_input_id} {
 
 proc getSpecialID {special_input_id} {
     return "[lindex [split $special_input_id _] 0]"
+}
+
+proc isLongKeypressAvailable {sender} {
+  set devWithoutLongKeyPress {
+    HmIP-ASIR
+  }
+
+  foreach item $devWithoutLongKeyPress {
+    if {$item == $sender} {return false}
+  }
+
+  return true
+}
+
+proc getDevFirmware {} {
+  global dev_descr
+  return $dev_descr(FIRMWARE)
 }

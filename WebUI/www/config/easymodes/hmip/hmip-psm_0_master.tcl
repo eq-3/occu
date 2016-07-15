@@ -2,7 +2,7 @@
 
 #Kanal-EasyMode!
 
-source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipMaintenance.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipChannelConfigDialogs.tcl]
 source [file join /www/config/easymodes/em_common.tcl]
 
 #Namen der EasyModes tauchen nicht mehr auf. Der Durchgängkeit werden sie hier noch definiert.

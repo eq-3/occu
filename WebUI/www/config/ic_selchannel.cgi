@@ -578,7 +578,7 @@ proc LinkExists {p_LINKLIST sender_address receiver_address} {
   return $match
 }
 
-proc showHmIPChannel {devType direction address chType} {
+proc showHmIPChannel {devType direction address chType flags} {
   # direction 1 = sender, 2 = receiver
   set ch [lindex [split $address ":"] 1]
 
@@ -588,19 +588,20 @@ proc showHmIPChannel {devType direction address chType} {
     return 0
   }
 
-  # Channel 4 and 5 of the PS and the PSM currently aren`t allowed for external links (virtual channels).
-  if {([string toupper $devType] == "HMIP-PS" || [string toupper $devType] == "HMIP-PSM") && ($ch == 4 || $ch == 5)} {
+  # Channel 4 and 5 (virtual channels) of the PS and the PSM aren`t allowed for external links with a firmware version < 2
+  # These channels are marked invisible (FLAGS visible = 0)
+  if {([string toupper $devType] == "HMIP-PS" || [string toupper $devType] == "HMIP-PSM") && ! ($flags & 1)} {
     # don't show the channel
     return 0
   }
 
   if {[string toupper $devType] == "HMIP-WTH" && ($chType == "HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER")} {
-   # don't show the channel
-    return 0
+   # show the channel
+    return 1
   }
 
-  # The weekly program of this device isn't yet implemented, so we can't use it for links
-  if {[string toupper $devType] == "HMIP-BSM" && ($chType == "WEEK_PROGRAM")} {
+  # The weekly program is not yet in use, so we can't use it for links
+  if {$chType == "WEEK_PROGRAM"} {
    # don't show the channel
     return 0
   }
@@ -693,7 +694,7 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
       set isChannel [catch {set parentType $dev_descr(PARENT_TYPE)}]
 
       if {$isChannel == 0} {
-        if {[showHmIPChannel $parentType $dev_descr(DIRECTION) $dev_descr(ADDRESS) $dev_descr(TYPE)] == 0} {
+        if {[showHmIPChannel $parentType $dev_descr(DIRECTION) $dev_descr(ADDRESS) $dev_descr(TYPE) $dev_descr(FLAGS)] == 0} {
           array_clear dev_descr
           continue
         }
@@ -836,7 +837,8 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
       if { [test_space $SENTRY(NAME)] == 1 } then { puts "<td id=\"dev$rowcount\">$SENTRY(NAME)</td>" } else { puts "<td id=\"dev$rowcount\">[cgi_quote_html $SENTRY(NAME)]</td>" }
 
       puts "<script type=\"text/javascript\">"
-        puts "var ext = getExtendedDescription(\"$dev_descr(PARENT_TYPE)\", \"$dev_descr(INDEX)\");"
+        #puts "var ext = getExtendedDescription(\"$dev_descr(PARENT_TYPE)\", \"$dev_descr(INDEX)\");"
+        puts "var ext = getExtendedDescription(\{\"deviceType\" : \"$dev_descr(PARENT_TYPE)\", \"channelType\" : \"$dev_descr(TYPE)\" ,\"channelIndex\" : \"$dev_descr(INDEX)\", \"channelAddress\" : \"$dev_descr(ADDRESS)\" \});"
         puts "if (ext.length > 0) \{"
           puts "jQuery(\"#dev$rowcount\").html(\"<br/>$SENTRY(NAME)<br/><br/>\" + ext);"
         puts "\}"

@@ -506,29 +506,15 @@ jQuery.extend(true,langJSON, {
     "lblMinutes" : "Dakika",
     "lblErrorCheck" : "Hata kontrol%FC",
     "lblNoError" : "Hata yok",
-    "lblLinkPartnerTempSensor" : "Baglanti partneri<br/>Sicaklik sens%F6r%FC",
-    "lblLinkPartnerWallMountedThermostat" : "Baglanti partneri<br/>Duvar termostati",
-    "lblLinkPartnerHeatingThermostat" : "Baglanti partneri<br/>Radyat%F6r termostati",
-    "lblLinkPartnerShutterContact" : "Baglanti partneri<br/>Pencere kontagi",
-    "lblLinkPartnerHeatingThermostatSender" : "Baglanti partneri<br/>Radyat%F6r termostati<br/>verici",
-    "lblLinkPartnerHeatingThermostatReceiver" : "Baglanti partneri<br/>Radyat%F6r termostati<br/>alici",
-    "lblLinkPartnerKey" : "Baglanti partneri<br/>tus",
-    "lblLinkPartnerSwitchActor" : "Baglanti partneri<br/>Salter akt%FCat%F6r%FC",
-    "lblSwitchActor" : "Salter akt%FCat%F6r%FC",
-    "lblMeasurementChannel" : "%D6lc%FCm degeri kanali",
-    "lblPower" : "G%FCc sens%F6r%FC",
-    "lblCurrent" : "Akim sens%F6r%FC",
-    "lblVoltage" : "Voltaj sens%F6r%FC",
-    "lblFrequency" : "Frekans sens%F6r%FC",
+
+
     "lblInfoStatusControlEnergyCounter" : "Enerji sayaci " + HMIdentifier.tr.CCUShortName,
     "lblInfoStatusControlDevice" : "Enerji sayac cihazi",
     "lblInfoStatusControlVoltage" : "Voltaj",
     "lblInfoStatusControlCurrent" : "Elektrik",
     "lblInfoStatusControlPower" : "G%FCc",
     "lblInfoStatusControlFrequency" : "Sebeke frekansi",
-    "lblTipTronicChn1" : "Akt%FCat%F6r kanali",
-    "lblTipTronicChn2" : "Sens%F6r kanali",
-    "lblTipTronicChn3" : "Havalandirma kilidi kanali",
+
     "noLinkableChannelsAvailable" : "Baglanabilir kanallar bulunamadi.",
     "performingFirmwareUpdate" : "Yazilim g%FCncellemesi yap...",
     "interfaceProcessNotReadyA" : "Aray%FCz prosesi",
@@ -726,19 +712,19 @@ jQuery.extend(true,langJSON, {
       "Aygitin en guncel yazilimini surada bulabilirsiniz " + HMIdentifier.de.CCUShortName + ".\n"+
       "Lutfen aygit guncellemesini konfig%FCrasyon sayfasinda onceden aliniz.\n\n",
 
-    "lblRGBWControllerDimmer" : "Isik ayar salteri",
-    "lblRGBWControllerColor" : "Renk",
-    "lblRGBWControllerAutomatic" : "Program",
-
     "deviceUpdate" : "Aygit Guncellemesi:",
 
     "weeklyProfile1" : "1",
     "weeklyProfile2" : "2",
     "weeklyProfile3" : "3",
+    "weeklyProfile4" : "4",
+    "weeklyProfile5" : "5",
+    "weeklyProfile6" : "6",
 
     "optionUnitS" : "Seconds",
     "optionUnitM" : "Minutes",
     "optionUnitH" : "Hours",
+    "optionUnitD" : "Days",
     "optionUnit100MS" : "100ms",
     "optionUnit1S" : "1 second",
     "optionUnit2S" : "2 seconds",
@@ -768,21 +754,10 @@ jQuery.extend(true,langJSON, {
     "lblDeviceFwPerformUpdate" : "The device update is carried out",
     "lblDeviceFwDeliverFwImage" : "The update file is transmitted to the device",
     "lblGenericLinkPartner" : "Connection partner",
-    "lblHmIP_KeyTransceiver" : "Push button channel<br/>button press",
-    "lblHmIP_SwitchTransmitter" : "Status report relay",
-    "lblHmIP_SwitchVirtualReceiver" : "Connection partner<br/>button",
-    "lblHmIP_EnergieMeterTransmitter" : "Status report measured value channel",
+
     //"lblHmIP_PSMChn7" : "Connection partner<br/>switch actuator",
     "lblHmIP_NotSupported" : "Currently not supported",
-    "lblHmIP_HeatingClimateControlTransceiver" : "Connection partner radiator thermostat (manual operation, transmitter)",
-    "lblHmIP_HeatingClimateControlReceiver" : "Connection partner radiator thermostat (manual operation, receiver)",
-    "lblHmIP_HeatingClimateControlCLTransmitter" : "Connection partner radiator thermostat (cycl. data, setpoint and actual temp.)",
-    "lblHmIP_HeatingShutterContactReceiver" : "Connection partner door/window contact",
-    "lblHmIP_HeatingClimateControlSwitchTransmitter" : "Connection partner switch actuator for two-point control",
-    "lblHmIP_HeatingKeyReceiver" : "Connection partner push button",
-    "lblHmIP_HeatingClimateControlCLReceiver" : "Connection partner wall thermostat (cycl. data, setpoint and actual temp.)",
-    "lblHmIP_HeatingRoomTHTransceiver" : "Connection partner wall thermostat (manual operation, transmitter)",
-    "lblHmIP_HeatingRoomTHReceiver" : "Connection partner wall thermostat (manual operation, receiver)",
+
     "lblSetMode" : "Set mode!",
     "lblChannelActivInactiv" : "Channel active / inactive:",
     "lblRepetition" : "Repetitions",
@@ -881,6 +856,14 @@ jQuery.extend(true,langJSON, {
     "lblLinkInternalDescInternalKey" :  "Connection of internal device button",
 
     "lblLicenseInformation" : "License information",
+
+    "stringTableHeating" : "Isitma",
+    "stringTableCooling" : "Sogutma",
+
+    "actionAlarmControlLblStart" : "Trigger alarm",
+    "lblAlarmDuration" : "Alarm duration",
+    "optionSetDuration" : "Define duration",
+    "setAlarmDialogTitle" : "Trigger alarm",
 
     "theEnd" : ""
   }

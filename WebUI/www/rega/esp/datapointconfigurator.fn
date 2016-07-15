@@ -101,6 +101,7 @@ function ::dcCreate()
     var CN_SWITCH          = "SWITCH.";
     var CN_SWITCH_TRANSM   = "SWITCH_TRANSMITTER.";
     var CN_DIMMER          = "DIMMER.";
+    var CN_DIMMER_REAL     = "DIMMER_REAL.";
     var CN_BLIND           = "BLIND.";
     var CN_WINDOW          = "WINDOW.";
     var CN_LOCK            = "LOCK.";
@@ -129,6 +130,7 @@ function ::dcCreate()
     var CN_RGBW_AUTOMATIC  = "RGBW_AUTOMATIC.";
     var CN_SMOKE_DETECTOR  = "SMOKE_DETECTOR.";
     var CN_ARMING          = "ARMING.";
+    var CN_ALARM_SWITCH_VIRTUAL_RECEIVER = "ALARM_SWITCH_VIRTUAL_RECEIVER.";
 
     var CN_EVENT_INTERFACE = "EVENT_INTERFACE.";
     var CN_NOT_ACTIVE = "CHANNEL_NOT_ACTIVE";
@@ -476,6 +478,25 @@ function ::dcCreate()
             Call("/esp/controls/alarmsirene.fn::CreateAlarmArmingControl()");
           }
 
+          !# CN_DIMMER_REAL
+          bIsControl = ( sControlName.Find(CN_DIMMER_REAL) > -1 );
+          if( bIsControl && (sLastControlName != CN_DIMMER_REAL) )
+          {
+            WriteLine( "<script>conInfo('Control CN_DIMMER_REAL found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_DIMMER_REAL;
+            Call("/esp/controls/dimmer.fn::CreateDimmerRealInfoControl()");
+          }
+
+          !# CN_ALARM_SWITCH_VIRTUAL_RECEIVER - HmIP
+          bIsControl = ( sControlName.Find(CN_ALARM_SWITCH_VIRTUAL_RECEIVER) > -1 );
+          if( bIsControl && (sLastControlName != CN_ALARM_SWITCH_VIRTUAL_RECEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_ALARM_SWITCH_VIRTUAL_RECEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_ALARM_SWITCH_VIRTUAL_RECEIVER;
+            Call("/esp/controls/alarmsirene.fn::CreateAlarmSwitchVirtualReceiver()");
+          }
 
           !# EVENT_INTERFACE
           bIsControl = ( sControlName.Find(CN_EVENT_INTERFACE) > -1 );

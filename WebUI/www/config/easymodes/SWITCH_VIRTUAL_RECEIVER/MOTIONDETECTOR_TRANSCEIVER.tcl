@@ -2,8 +2,9 @@
 
 source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options_hmip.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${switch_toggle}"
@@ -124,49 +125,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [cmd_link_paramset2 $iface $address ps_descr ps "LINK" ${special_input_id}_$prn]
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
 
-#1 Switch on
+#1 Switch toggle
   incr prn
-  set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  append HTML_PARAMS(separate_$prn) "<tr>"
-  append HTML_PARAMS(separate_$prn) "<td>\${ONDELAY_TIME_FACTOR_DESCR}</td>"
-  append HTML_PARAMS(separate_$prn) [getComboBox $prn $pref $special_input_id "delay"]
-  append HTML_PARAMS(separate_$prn) "</tr>"
+  set pref 0
+  # ONDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\"><td>\${ONDELAY_TIME_BASE}</td><td>"
-  option TIMEBASE_LONG
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ONDELAY_TIME_BASE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ONDELAY_TIME_BASE]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeFactor\_$prn\_$pref\" class=\"hidden\"><td>\${ONDELAY_TIME_FACTOR}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>[get_InputElem SHORT_ONDELAY_TIME_FACTOR separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ONDELAY_TIME_FACTOR ]</td>"
 
-  append HTML_PARAMS(separate_$prn) "</tr>"
-  append HTML_PARAMS(separate_$prn) "<tr id=\"space_$prn\_$pref\" class=\"hidden\"><td><br/></td></tr>"
-
-  incr pref
-
-  append HTML_PARAMS(separate_$prn) "<tr>"
-  append HTML_PARAMS(separate_$prn) "<td>\${ON_TIME_FACTOR_DESCR}</td>"
-  append HTML_PARAMS(separate_$prn) [getComboBox $prn $pref $special_input_id "timeOnOff"]
-  append HTML_PARAMS(separate_$prn) "</tr>"
-
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\"><td>\${ON_TIME_BASE}</td><td>"
-  option TIMEBASE_LONG
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME_BASE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME_BASE]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeFactor\_$prn\_$pref\" class=\"hidden\"><td>\${ON_TIME_FACTOR}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>[get_InputElem SHORT_ON_TIME_FACTOR separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME_FACTOR ]</td>"
-  append HTML_PARAMS(separate_$prn) "</tr>"
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -176,45 +149,17 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   #2  Treppenhauslicht
   incr prn
-  set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  append HTML_PARAMS(separate_$prn) "<tr>"
-  append HTML_PARAMS(separate_$prn) "<td>\${ONDELAY_TIME_FACTOR_DESCR}</td>"
-  append HTML_PARAMS(separate_$prn) [getComboBox $prn $pref $special_input_id "delay"]
-  append HTML_PARAMS(separate_$prn) "</tr>"
+  set pref 0
+  # ONDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\"><td>\${ONDELAY_TIME_BASE}</td><td>"
-  option TIMEBASE_LONG
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ONDELAY_TIME_BASE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ONDELAY_TIME_BASE]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeFactor\_$prn\_$pref\" class=\"hidden\"><td>\${ONDELAY_TIME_FACTOR}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>[get_InputElem SHORT_ONDELAY_TIME_FACTOR separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ONDELAY_TIME_FACTOR ]</td>"
-  append HTML_PARAMS(separate_$prn) "</tr>"
-  append HTML_PARAMS(separate_$prn) "<tr id=\"space_$prn\_$pref\" class=\"hidden\"><td><br/></td></tr>"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr>"
-  append HTML_PARAMS(separate_$prn) "<td>\${ON_TIME_FACTOR_DESCR}</td>"
-  append HTML_PARAMS(separate_$prn) [getComboBox $prn $pref $special_input_id "timeOnOff"]
-  append HTML_PARAMS(separate_$prn) "</tr>"
-
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\"><td>\${ON_TIME_BASE}</td><td>"
-  option TIMEBASE_LONG
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME_BASE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME_BASE]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr id=\"timeFactor\_$prn\_$pref\" class=\"hidden\"><td>\${ON_TIME_FACTOR}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>[get_InputElem SHORT_ON_TIME_FACTOR separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME_FACTOR ]</td>"
-  append HTML_PARAMS(separate_$prn) "</tr>"
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

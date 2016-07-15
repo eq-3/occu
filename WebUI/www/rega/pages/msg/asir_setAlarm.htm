@@ -1,0 +1,82 @@
+<table style="margin: 0 auto;">
+  <tbody>
+    <tr>
+       <td style='color:black; text-align:left'>${lblAcusticalSignal}</td>
+       <td style='text-align:left'>
+         <select id='AcousticAlarmSelect' >
+           <option value='0'>${stringTableAlarmDisableAcousticSignal}</option>
+           <option value='1'>${stringTableAlarmFrequencyRising}</option>
+           <option value='2'>${stringTableAlarmFrequencyFalling}</option>
+           <option value='3'>${stringTableAlarmFrequencyRisingAndFalling}</option>
+           <option value='4'>${stringTableAlarmFrequencyAlternatingLowHigh}</option>
+           <option value='5'>${stringTableAlarmFrequencyAlternatingLowMidHigh}</option>
+           <option value='6'>${stringTableAlarmFrequencyHighOnOff}</option>
+           <option value='7'>${stringTableAlarmFrequencyHighOnLongOff}</option>
+           <option value='8'>${stringTableAlarmFrequencyLowOnOffHighonOff}</option>
+           <option value='9'>${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}</option>
+           <option value='10'>${stringTableAlarmLowBattery}</option>
+           <option value='11'>${stringTableAlarmDisarmed}</option>
+           <option value='12'>${stringTableAlarmInternallyArmed}</option>
+           <option value='13'>${stringTableAlarmExternallyArmed}</option>
+           <option value='14'>${stringTableAlarmDelayedInternallyArmed}</option>
+           <option value='15'>${stringTableAlarmDelayedExternallyArmed}</option>
+           <option value='16'>${stringTableAlarmEvent}</option>
+           <option value='17'>${stringTableAlarmError}</option>
+         </select>
+       </td>
+     </tr>
+
+     <tr>
+      <td style='color:black; text-align:left'>${lblOpticalSignal}</td>
+       <td style='text-align:left'>
+         <select id='OpticalAlarmSelect'>
+           <option value='0'>${stringTableAlarmDisableOpticalSignal}</option>
+           <option value='1'>${stringTableAlarmBlinkingAlternatelyRepeating}</option>
+           <option value='2'>${stringTableAlarmBlinkingBothRepeating}</option>
+           <option value='3'>${stringTableAlarmDoubleFlashingRepeating}</option>
+           <option value='4'>${stringTableAlarmFlashingBothRepeating}</option>
+           <option value='5'>${stringTableAlarmConfirmingSignal0}</option>
+           <option value='6'>${stringTableAlarmConfirmingSignal1}</option>
+           <option value='7'>${stringTableAlarmConfirmingSignal2}</option>
+         </select>
+       </td>
+     </tr>
+
+     <tr>
+       <td style='color:black; text-align:left;'>${lblAlarmDuration}</td>
+       <td style='text-align:left'>
+         <select id='DurationSelect'>
+          <option value='3_S'>${optionUnit3S}</option>
+          <option value='10_S'>${optionUnit10S}</option>
+          <option value='30_S'>${optionUnit30S}</option>
+          <option value='2_M'>${optionUnit2M}</option>
+          <option value='10_M'>${optionUnit10M}</option>
+          <option value='30_M'>${optionUnit30M}</option>
+          <option value='setDuration'>${optionSetDuration}</option>
+         </select>
+       </td>
+     </tr>
+
+     <tr name='durationPanel' style="visibility: hidden">
+       <td style='color:black; text-align:left;'>${stringTableDurationUnit}</td>
+       <td style='text-align:left'>
+         <select id='DurationUnit'>
+           <option value='S'>${optionUnitS}</option>
+           <option value='M'>${optionUnitM}</option>
+           <option value='H'>${optionUnitH}</option>
+           <option value='D'>${optionUnitD}</option>
+         </select>
+       </td>
+     </tr>
+     <tr name='durationPanel' style="visibility: hidden">
+         <td style='color:black; text-align:left'>${stringTableDurationValue}</td>
+         <td style='text-align:left'>
+           <input id='DurationValue' type='text' value='0' size='5' class='CLASS02542' />
+         </td>
+     </tr>
+
+
+  </tbody>
+</table>
+
+
