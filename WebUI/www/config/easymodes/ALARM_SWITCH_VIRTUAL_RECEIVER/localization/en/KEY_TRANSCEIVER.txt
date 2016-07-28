@@ -1,7 +1,7 @@
-"description_1" : "<span class=\"translated\"><span class=\”translated\”>With a short or long button press the alarm will be switched on or off for the set time.</span><br/><br/>",
-"description_2" : "<span class=\"translated\"><span class=\”translated\”>With a short or long button press the alarm will be switched on for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_3" : "<span class=\"translated\"><span class=\”translated\”>With a short or long button press the alarm will be switched off for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">With a short or long button press the alarm will be switched on or off for the set time.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a short or long button press the alarm will be switched on for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a short or long button press the alarm will be switched off for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
 
-"description_noLong_1" : "<span class=\"translated\"><span class=\”translated\”>When the sensor is triggered the alarm will be switched on or off for the set time.</span><br/><br/>”,
-"description_noLong_2" : "<span class=\"translated\"><span class=\”translated\”>When the sensor is triggered the alarm will be switched on for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_noLong_3" : "<span class=\"translated\"><span class=\”translated\”>When the sensor is triggered the alarm will be switched off for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>”,
+"description_noLong_1" : "<span class=\"translated\">When the sensor is triggered the alarm will be switched on or off for the set time.</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">When the sensor is triggered the alarm will be switched on for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">When the sensor is triggered the alarm will be switched off for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
