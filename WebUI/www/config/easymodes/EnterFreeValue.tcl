@@ -5,6 +5,7 @@
 set unit_hour  "h"
 set unit_min  "min"
 set unit_sec  "s"
+set unit_day "d"
 set unit_perc  "%"
 set unit_temp   " &deg;C"
 set unit_cf    "0"

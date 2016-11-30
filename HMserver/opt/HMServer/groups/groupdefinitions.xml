@@ -528,6 +528,16 @@
                 <parameter_name>STATE</parameter_name>
               </mapping>
               <mapping>
+                <device_type type="HM-Sec-RHS-2"/>
+                <channel_index>1</channel_index>
+                <integer_converter>
+                  <false>0</false>
+                  <true>1</true>
+                  <true>2</true>
+                </integer_converter>
+                <parameter_name>STATE</parameter_name>
+              </mapping>
+              <mapping>
                 <device_type type="HM-Sec-xx"/>
                 <channel_index>1</channel_index>
                 <integer_converter>

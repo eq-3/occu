@@ -1,0 +1,18 @@
+"jalousieCloseDown" : "Jalousie zu / herunter",
+"jalousieOpenUp" : "Jalousie auf / hoch",
+"jalousieTargetPosition" : "Jalousie Position anfahren",
+
+"blindOpenUp" : "Rolllade auf / hoch",
+"blindCloseDown" : "Rolllade zu / herunter",
+"blindOpenClose_UpDown" : "Rolllade auf / zu & hoch / herunter",
+"blindTargetPosition" : "Rolllade Position anfahren",
+
+"blindOpenUpStopOver" : "auf / hoch & Zwischenstopp",
+
+"blindCloseDownStopOver" : "zu / herunter & Zwischenstopp",
+
+"driving_mode_0" : "direkt",
+"driving_mode_1" : "&uuml;ber die obere Endlage (Genauigkeitsfahrt)",
+"driving_mode_2" : "&uuml;ber die untere Endlage (Genauigkeitsfahrt)",
+"driving_mode_3" : "&uuml;ber die n&auml;chste Endlage (Genauigkeitsfahrt)",
+"up_equal_down" : "<div style=\"padding:10\"><br/>Die Einschaltdauer f&uuml;r &quot;Oben&quot; und &quot;Unten&quot;<br/>k&ouml;nnen nicht gleichzeitig gesetzt sein!</div>",

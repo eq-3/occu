@@ -693,6 +693,7 @@ proc action_put_page {} {
             } else {
               homematic.com.showCCULicense(function (result) {
                 HideWaitAnim();
+                jQuery("#homematic_license_script").remove();
                 var dlg = new EulaDialog(translateKey('dialogEulaTitle'), result ,function(userAction) {
                   if (userAction == 1) {
                     jQuery("#btnFwDownload").click();

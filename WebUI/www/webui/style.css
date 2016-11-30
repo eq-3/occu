@@ -8,6 +8,10 @@
     display: none;
 }
 
+.btnActive {
+  background-color: $_(active) !important;
+}
+
 .attention {
     color: $_(attention);
     font-weight: bold;
@@ -2100,8 +2104,16 @@ html, body {
     display:none;
 }
 
+.alignRight {
+  text-align: right;
+}
+
 .alignLeft {
   text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
 }
 
 .borderWidth2Px {
@@ -5115,6 +5127,20 @@ application {
 	font-size: 10px;
 	width:220px;
 	height:25px;
+}
+
+.CLASS02532a {
+	font-size: 10px;
+	width:220px;
+	height:25px;
+  color: $_(white) ! important;
+}
+
+.CLASS02532b {
+	font-size: 10px;
+	width:220px;
+	height:30px;
+  color: $_(white) ! important;
 }
 
 .CLASS02533 {

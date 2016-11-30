@@ -174,13 +174,11 @@ proc put_NaviButtons {} {
   puts "</div>"
 }
 
-# AG test_space
-
-proc test_space {pruefling} {
+proc test_space {testObject} {
   
 # wenn &nbsp; vorhanden, dann 1, sonst 0
 
-  if {$pruefling == "&nbsp;"} {
+  if {$testObject == "&nbsp;"} {
     return 1
     } else {
     return 0
@@ -580,22 +578,29 @@ proc LinkExists {p_LINKLIST sender_address receiver_address} {
 
 proc showHmIPChannel {devType direction address chType flags} {
   # direction 1 = sender, 2 = receiver
+
+  set devType [string toupper $devType]
   set ch [lindex [split $address ":"] 1]
 
   # The internal device button isn`t allowed for external links
-  if {([string toupper $devType] == "HMIP-PS" || [string toupper $devType] == "HMIP-PSM") && $direction == 1} {
+  # The HmIP-PSM is available as HmIP-PSM-IT/CH/UK etc.
+  if {(
+    ($devType == "HMIP-PS")
+    || ([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1)
+    || ($devType == "HMIP-PDT")
+    ) && $direction == 1} {
     # don't show the channel
     return 0
   }
 
   # Channel 4 and 5 (virtual channels) of the PS and the PSM aren`t allowed for external links with a firmware version < 2
   # These channels are marked invisible (FLAGS visible = 0)
-  if {([string toupper $devType] == "HMIP-PS" || [string toupper $devType] == "HMIP-PSM") && ! ($flags & 1)} {
+  if {($devType == "HMIP-PS" || $devType == "HMIP-PSM") && ! ($flags & 1)} {
     # don't show the channel
     return 0
   }
 
-  if {[string toupper $devType] == "HMIP-WTH" && ($chType == "HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER")} {
+  if {$devType == "HMIP-WTH" && ($chType == "HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER")} {
    # show the channel
     return 1
   }
@@ -606,6 +611,33 @@ proc showHmIPChannel {devType direction address chType flags} {
     return 0
   }
 
+  # Hide certain channels of HmIP devices when the expert mode is not activated.
+  if {! [session_is_expert]} {
+    # The HmIP-PSM is available as HmIP-PSM-IT/CH/UK etc.
+    if {(($devType == "HMIP-PS") || ([string equal -nocase -length 8 $devType "hmip-psm"] == 1)) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+     if {$ch >= 4} {return 0}
+    }
+
+    if {($devType == "HMIP-BDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
+     if {$ch >= 5} {return 0}
+    }
+
+    if {($devType == "HMIP-PDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
+     if {$ch >= 4} {return 0}
+    }
+
+    if {($devType == "HMIP-BSM") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+     if {$ch >= 5} {return 0}
+    }
+
+    if {($devType == "HMIP-FSM" || $devType == "HMIP-FSM16") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+     if {$ch >= 3} {return 0}
+    }
+
+    if {($devType == "HMIP-MIOB") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+      if {$ch != 3 && $ch != 7} {return 0}
+    }
+  }
   # show the channel
   return 1
 }

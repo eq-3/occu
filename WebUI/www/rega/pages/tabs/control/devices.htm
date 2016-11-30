@@ -60,8 +60,13 @@
                           }
                         }
                       }
-                      if( devs.Visible() && devs.ReadyConfig() && devs.HssType() && (! devs.MetaData("operateGroupOnly") == "true" ))
-                      {
+                      if(devs.Visible()
+                        && devs.ReadyConfig()
+                        && devs.HssType()
+                        && (! devs.MetaData("operateGroupOnly") == "true" )
+                        && devs.HssType() != "VIR-OL-GTW"
+                      )
+                        {
                         if( sFirstId == "" )
                         {
                           sFirstId = tmp;

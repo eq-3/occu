@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Bei Trockenheit f&auml;hrt die Markise / der Rollladen f&uuml;r die festgelegte Zeit ganz hoch. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Beschattung erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Regen f&auml;hrt die Markise / der Rollladen f&uuml;r die festgelegte Zeit ganz herunter. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Beschattung erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",

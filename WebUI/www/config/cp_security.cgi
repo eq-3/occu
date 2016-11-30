@@ -75,13 +75,13 @@ proc action_change_key {} {
         put_message "\${dialogSettingsSecurityMessageErrorSecKeyTitle}" \${dialogSettingsSecurityMessageErrorSecKeyContentKeyShort} {\${dialogBack} "showSecurityCP();"}
         return
     }
-		
-		if { 0 == [regexp {^[0-9a-zA-Z_]+$} $key1 dummy] } {
+    
+    if { 0 == [regexp {^[0-9a-zA-Z_]+$} $key1 dummy] } {
         #put_message "Sicherheitsschl&uuml;ssel setzen - Fehler" "Der eingegebene Schl&uuml;ssel darf keine Sonderzeichen enthalten. Erlaubt sind lediglich die Buchstaben A bis Z, die Ziffern 0 bis 9 sowie der Unterstrich." {"Zur&uuml;ck" "showSecurityCP();"}
         put_message "\${dialogSettingsSecurityMessageErrorSecKeyTitle}" \${dialogSettingsSecurityMessageErrorSecKeyContentIllegalChar} {\${dialogBack} "showSecurityCP();"}
         return
-		}
-		
+    }
+    
     # check the entered key against our current system key
     if { ![catch {exec crypttool -v -t 3 -k "$key1"}]} {
 
@@ -285,21 +285,21 @@ proc action_backup_restore_check {} {
     if { [catch {
         exec tar xf new_config.tar
         file delete -force /tmp/new_config.tar
-		
+    
     set config_version [read_version "firmware_version"]
-		set ccu1_backup false
-		if { [version_compare $config_version 2.0.0] < 0 } {
-			set ccu1_backup true		
-		}
-		
+    set ccu1_backup false
+    if { [version_compare $config_version 2.0.0] < 0 } {
+      set ccu1_backup true    
+    }
+    
         set system_has_user_key [catch {exec crypttool -v -t 0}]
         set stored_signature [exec cat signature]
         set calculated_signature [exec crypttool -s -t 0 <usr_local.tar.gz]
-		if { "false" == $ccu1_backup } {				
-			set config_has_user_key [expr {"$stored_signature" != "$calculated_signature"} ]
-		} else {	#CCU1 used an other default key. So we can´t check with crypttool.
-			set config_has_user_key [exec cat key_index]
-		}		
+    if { "false" == $ccu1_backup } {        
+      set config_has_user_key [expr {"$stored_signature" != "$calculated_signature"} ]
+    } else {  #CCU1 used an other default key. So we can´t check with crypttool.
+      set config_has_user_key [exec cat key_index]
+    }    
     } errorMessage] } {
         # "Die ausgewählte Datei enthält kein HomeMatic Systembackup. "
         # "Bitte wählen Sie eine gültige Backup-Datei aus."
@@ -403,6 +403,7 @@ proc action_backup_restore_check {} {
         puts "var url = \"$env(SCRIPT_NAME)?sid=\" + SessionId;"
         puts {
             OnNextStep = function() {
+                InterfaceMonitor.stop();
                 dlgPopup.hide();
                 dlgPopup.setWidth(400);
                 dlgPopup.LoadFromFile(url, "action=backup_restore_go&key="+document.getElementById("text_key").value);
@@ -418,23 +419,23 @@ proc action_backup_restore_go {} {
     
     set system_version [read_version "/boot/VERSION"]
     set config_version [read_version "firmware_version"]
-	set ccu1_backup false
-	if { [version_compare $config_version 2.0.0] < 0 } {
-		set ccu1_backup true
-		set comment {
-		  put_message "Backup: Versionskontrolle" {
+  set ccu1_backup false
+  if { [version_compare $config_version 2.0.0] < 0 } {
+    set ccu1_backup true
+    set comment {
+      put_message "Backup: Versionskontrolle" {
             ACHTUNG! ES WIRD JETZT VERSUCHT EIN BACKUP VON EINER CCU1 EINZUSPIELEN. HIER MUSS EVTL. NOCH EIN ABBRUCH-BUTTON IMPLEMENTIERT WERDEN.
             } {"OK" }
     }
   }
-	
+  
     set system_has_user_key [catch {exec crypttool -v -t 0}]
     set stored_signature [exec cat signature]
-	if { "false" == $ccu1_backup } {	
-		set config_has_user_key [expr {"$stored_signature" != "[exec crypttool -s -t 0 <usr_local.tar.gz]"} ]
-	} else {	#CCU1 used an other default key. So we can´t check with crypttool.
-		set config_has_user_key [exec cat key_index]
-	}
+  if { "false" == $ccu1_backup } {  
+    set config_has_user_key [expr {"$stored_signature" != "[exec crypttool -s -t 0 <usr_local.tar.gz]"} ]
+  } else {  #CCU1 used an other default key. So we can´t check with crypttool.
+    set config_has_user_key [exec cat key_index]
+  }
     catch { import key }
     if { $system_has_user_key } {
         # check the entered key against our current system key
@@ -469,103 +470,104 @@ proc action_backup_restore_go {} {
     
     cd /
     catch {
+        exec killall java
         exec run-parts -a stop /etc/config/rc.d
-	exec killall crond
+        exec killall crond
     }
-		
-	if { "false" == $ccu1_backup } {	# backup for version >= 2
-		exec umount /usr/local
-        	exec /usr/sbin/ubidetach -p /dev/mtd6
-        	exec /usr/sbin/ubiformat /dev/mtd6 -y
-        	exec /usr/sbin/ubiattach -p /dev/mtd6
-        	exec /usr/sbin/ubimkvol /dev/ubi1 -N user -m
-        	exec mount /usr/local
+    
+  if { "false" == $ccu1_backup } {  # backup for version >= 2
+    exec umount /usr/local
+          exec /usr/sbin/ubidetach -p /dev/mtd6
+          exec /usr/sbin/ubiformat /dev/mtd6 -y
+          exec /usr/sbin/ubiattach -p /dev/mtd6
+          exec /usr/sbin/ubimkvol /dev/ubi1 -N user -m
+          exec mount /usr/local
 
-		if { [catch {exec tar xzf /tmp/usr_local.tar.gz} errorMessage] } {
-			# set msg "Beim Einspielen des Systembackups ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut. "
-			# append msg "Falls dieser Fehler wiederholt Auftritt, wenden Sie sich bitte mit der folgenden Fehlermeldung an den Kundenservice:\n<br>"
-			# append msg $errorMessage
-			put_message "\${dialogSettingsSecurityMessageSysBackupErrorTitle}" "\${dialogSettingsSecurityMessageSysBackupErrorContent} $errorMessage"
-			set backuperror true
-		} else {
-			set backuperror false
-		}		
-	} else {	# backup for version < 2			
-		#delete existing files
-		file delete -force /tmp/backup
-		file delete -force /etc/config/hs485d /etc/config/hs485types /etc/config/rfd /etc/config/userprofiles 
-		file delete -force /etc/config/homematic.regadom /etc/config/homematic.regadom.bak
-		file delete -force /etc/config/ids /etc/config/ntpclient /etc/config/rega.conf /etc/config/syslog 
-		file delete -force /etc/config/tweaks /etc/config/TZ /etc/config/server.pem /etc/config/keys
-		file delete -force /etc/config/time.conf
-		
-		file mkdir /tmp/backup
-		cd /tmp/backup
-		if { [catch {exec tar xzf /tmp/usr_local.tar.gz} errorMessage] } {
-			put_message "\${dialogSettingsSecurityMessageSysBackupErrorTitle}" "\${dialogSettingsSecurityMessageSysBackupErrorContent} $errorMessage"
-			set backuperror true
-		} else {
-			#copy old files
-			if { [file exists /tmp/backup/usr/local/etc/config] } {
-				cd /tmp/backup/usr/local/etc/config
-			}
-			
-			if { [file exists hs485d] } { file copy hs485d /etc/config/hs485d }				
-			if { [file exists hs485types] } { file copy hs485types /etc/config/hs485types }
-			if { [file exists rfd] } { file copy rfd /etc/config/rfd }
-			if { [file exists userprofiles] } { file copy userprofiles /etc/config/userprofiles }
-			if { [file exists homematic.regadom] } { file copy homematic.regadom /etc/config/homematic.regadom }
-			if { [file exists homematic.regadom.bak] } { file copy homematic.regadom.bak /etc/config/homematic.regadom.bak }
-			if { [file exists ids] } { file copy ids /etc/config/ids }
-			if { [file exists ntpclient] } { file copy ntpclient /etc/config/ntpclient }
-			if { [file exists rega.conf] } { file copy rega.conf /etc/config/rega.conf }
-			if { [file exists syslog] } { file copy syslog /etc/config/syslog }
-			if { [file exists tweaks] } { file copy tweaks /etc/config/tweaks }
-			if { [file exists TZ] } { file copy TZ /etc/config/TZ }
-			if { [file exists server.pem] } { file copy server.pem /etc/config/server.pem }			
-			if { [file exists time.conf] } { file copy time.conf /etc/config/time.conf }
-			if { [file exists keys] } then {
-				file copy keys /etc/config/keys
-			} else {
-				if { $config_has_user_key } then {          
-					set fd [open "/etc/config/crypttool.cfg" r]
-					set content [read $fd]
-					close $fd
+    if { [catch {exec tar xzf /tmp/usr_local.tar.gz} errorMessage] } {
+      # set msg "Beim Einspielen des Systembackups ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut. "
+      # append msg "Falls dieser Fehler wiederholt Auftritt, wenden Sie sich bitte mit der folgenden Fehlermeldung an den Kundenservice:\n<br>"
+      # append msg $errorMessage
+      put_message "\${dialogSettingsSecurityMessageSysBackupErrorTitle}" "\${dialogSettingsSecurityMessageSysBackupErrorContent} $errorMessage"
+      set backuperror true
+    } else {
+      set backuperror false
+    }    
+  } else {  # backup for version < 2      
+    #delete existing files
+    file delete -force /tmp/backup
+    file delete -force /etc/config/hs485d /etc/config/hs485types /etc/config/rfd /etc/config/userprofiles 
+    file delete -force /etc/config/homematic.regadom /etc/config/homematic.regadom.bak
+    file delete -force /etc/config/ids /etc/config/ntpclient /etc/config/rega.conf /etc/config/syslog 
+    file delete -force /etc/config/tweaks /etc/config/TZ /etc/config/server.pem /etc/config/keys
+    file delete -force /etc/config/time.conf
+    
+    file mkdir /tmp/backup
+    cd /tmp/backup
+    if { [catch {exec tar xzf /tmp/usr_local.tar.gz} errorMessage] } {
+      put_message "\${dialogSettingsSecurityMessageSysBackupErrorTitle}" "\${dialogSettingsSecurityMessageSysBackupErrorContent} $errorMessage"
+      set backuperror true
+    } else {
+      #copy old files
+      if { [file exists /tmp/backup/usr/local/etc/config] } {
+        cd /tmp/backup/usr/local/etc/config
+      }
+      
+      if { [file exists hs485d] } { file copy hs485d /etc/config/hs485d }        
+      if { [file exists hs485types] } { file copy hs485types /etc/config/hs485types }
+      if { [file exists rfd] } { file copy rfd /etc/config/rfd }
+      if { [file exists userprofiles] } { file copy userprofiles /etc/config/userprofiles }
+      if { [file exists homematic.regadom] } { file copy homematic.regadom /etc/config/homematic.regadom }
+      if { [file exists homematic.regadom.bak] } { file copy homematic.regadom.bak /etc/config/homematic.regadom.bak }
+      if { [file exists ids] } { file copy ids /etc/config/ids }
+      if { [file exists ntpclient] } { file copy ntpclient /etc/config/ntpclient }
+      if { [file exists rega.conf] } { file copy rega.conf /etc/config/rega.conf }
+      if { [file exists syslog] } { file copy syslog /etc/config/syslog }
+      if { [file exists tweaks] } { file copy tweaks /etc/config/tweaks }
+      if { [file exists TZ] } { file copy TZ /etc/config/TZ }
+      if { [file exists server.pem] } { file copy server.pem /etc/config/server.pem }      
+      if { [file exists time.conf] } { file copy time.conf /etc/config/time.conf }
+      if { [file exists keys] } then {
+        file copy keys /etc/config/keys
+      } else {
+        if { $config_has_user_key } then {          
+          set fd [open "/etc/config/crypttool.cfg" r]
+          set content [read $fd]
+          close $fd
 
-					array set keys {}
-					foreach line [split $content "\n"] {
-						if { [regexp {([0-9]+) (.*)} $line dummy key value] } then {
-							set key [string trim $key]
-							set value [string trim $value]
-							set keys($key) $value						
-						}
-					}
-          					
-					if { [info exists keys($stored_index)] } then {
-						set keyvalue $keys($stored_index)							
-						set fd -1
+          array set keys {}
+          foreach line [split $content "\n"] {
+            if { [regexp {([0-9]+) (.*)} $line dummy key value] } then {
+              set key [string trim $key]
+              set value [string trim $value]
+              set keys($key) $value            
+            }
+          }
+                    
+          if { [info exists keys($stored_index)] } then {
+            set keyvalue $keys($stored_index)              
+            set fd -1
             
-						catch {set fd [open "/etc/config/keys" w]}
+            catch {set fd [open "/etc/config/keys" w]}
             
-						if { $fd > 0 } {
-								puts $fd "Current Index = $stored_index"
-								puts $fd "Key 0 ="
-								puts $fd "Key $stored_index = $keyvalue"
-								puts $fd "Last Index = 0"
-								close $fd
-						}
-					}          
-				}				
-			}
+            if { $fd > 0 } {
+                puts $fd "Current Index = $stored_index"
+                puts $fd "Key 0 ="
+                puts $fd "Key $stored_index = $keyvalue"
+                puts $fd "Last Index = 0"
+                close $fd
+            }
+          }          
+        }        
+      }
 
-			catch {exec eq3configcmd rfd-interface-copy rfd.conf /etc/config/rfd.conf}
+      catch {exec eq3configcmd rfd-interface-copy rfd.conf /etc/config/rfd.conf}
 
-			set backuperror false
-		}					
-		cd /
-	}
-	
-	if { "false" == $backuperror } {
+      set backuperror false
+    }          
+    cd /
+  }
+  
+  if { "false" == $backuperror } {
         exec mount -o remount,ro /usr/local
         exec mount -o remount,rw /usr/local
         division {class="popupTitle"} {
@@ -1098,9 +1100,9 @@ proc read_var { filename varname} {
     set var ""
     if { $fd >=0 } {
         while { [gets $fd buf] >=0 } {
-	        if [regexp "^ *$varname *= *(.*)$" $buf dummy var] break
+          if [regexp "^ *$varname *= *(.*)$" $buf dummy var] break
         }
-	    close $fd
+      close $fd
     }
     return $var
 }

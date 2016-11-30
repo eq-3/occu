@@ -1,0 +1,22 @@
+"profileSettings" : "Profileinstellung",
+"coolingDisable" : "Im K&uuml;hlmodus",
+"ecoCoolingTemperature" : "Energiespar-Temperatur f&uuml;r den K&uuml;hl-Modus",
+"ecoHeatingTemperature" : "Energiespar-Temperatur f&uuml;r den Heiz-Modus",
+"heatingClockFunction" : "Energiespar-Funktion",
+"heatingDisable" : "Im Heiz-Modus",
+"heatingModeSelection" : "Art/Typ der Anlage",
+"alarmWhenHumidityLimit" : "Ansteuerung eines externen Luftentfeuchters",
+"humidityLimitValue" : "Luftfeuchtigkeitswert f&uuml;r die Ansteuerung<br/>eines externen Luftentfeuchters",
+"minimalFloorTemperatur" : "* minimalFloorTemperatur <span class='attention'>not in use</span>",
+
+"optionFloorHeatingStandard" : "Standard-Fussbodenheizung",
+"optionFloorHeatingLowEnergy" : "Niedrigenergie-Fussbodenheizung",
+"optionRadiator" : "Radiator",
+"optionConvectorPassiv" : "Passiver Konvektor",
+"optionConvectorActive" : "Aktiver Konvektor (mit L&uuml;fter)",
+
+"optionDisabled" : "inaktiv",
+"optionEnabled" : "aktiv",
+
+"optionAccept" : "akzeptieren",
+"optionIgnore" : "ignorieren",

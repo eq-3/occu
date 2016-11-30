@@ -1,5 +1,10 @@
 jQuery.extend(true,langJSON, {
   "de" : {
+
+    "VIR-OL-GTW" : "OSRAM-Lightify<br/>Gateway",
+    "HM-LC-Dim1T-DR" : "Funk-Dimmaktor 1-fach, Phasenabschnitt, Hutschienenmontage",
+    "HM-LC-Ja1PBU-FM" : "Funk-Jalousieaktor 1-fach f%FCr Markenschalter, Unterputz",
+    "HM-MOD-EM-8Bit" : "Funk-Sendemodul, 8-Bit",
     "HM-LC-Sw1-PCB" : "Funk-Schaltaktor 1-fach, Platine",
     "HM-LC-AO-SM" : "Funk 0-10V Aktor",
     "HM-LC-Sw2PBU-FM" : "Funk-Schaltaktor 2-fach, Unterputzmontage",
@@ -28,6 +33,12 @@ jQuery.extend(true,langJSON, {
     "PSM" : "Homematic IP Schalt-Mess-Steckdose",
     "SWD" : "Homematic IP  Fenster- und T%FCrkontakt optisch",
     "SMI" : "Homematic IP Bewegungsmelder innen",
+    "MIOB" : "Homematic IP Multi I/O-Box",
+    "STH" : "Homematic IP Temperatur- und Luftfeuchtigkeitssensor, innen",
+    "STHD" : "Homematic IP Temperatur- und Luftfeuchtigkeitssensor mit Display, innen",
+    "PDT" : "Homematic IP Dimmaktor",
+    "ALPHA-IP-RBG" : "Raumbedienger%E4t<br/>Display",
+    "ALPHA-IP-RBGa" : "Raumbedienger%E4t<br/>Analog",
     "HM-LC-Sw1-Pl-CT-R1" : "Funk-Schaltaktor 1-fach mit Klemmanschluss",
     "HM-ES-PMSw1-DR" : "Funk-Schaltaktor mit Leistungsmessung, Hutschienenmontage",
     "HM-LC-Sw1-DR" : "Funk-Schaltaktor 1-fach, Hutschienenmontage",

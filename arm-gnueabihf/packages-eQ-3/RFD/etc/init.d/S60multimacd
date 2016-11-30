@@ -56,8 +56,29 @@ init() {
 
 }
 
+waitStartupComplete() {
+    echo -n "Waiting for multimacd to get ready"
+	STEPS=5
+    for i in $(seq 1 $STEPS)
+    do
+		sleep 2
+		echo -n "."
+        MMDSTATUSPID=`cat /var/status/multimacd.status 2>/dev/null`
+        MMDPID=`pidof multimacd`
+        if [ $MMDSTATUSPID = $MMDPID ] 
+		then
+            echo "multimacd is ready now."
+            break
+		fi 
+        if [ $i -eq $STEPS ]
+		then
+            echo "Timeout while waiting for multimacd to get ready."
+        fi
+    done
+}
+
 start() {
-	echo -n "Starting multimacd: "
+	echo "Starting multimacd: "
 	init
 	if [ ! -e $PIDFILE ] ; then
 		check_bo
@@ -68,9 +89,8 @@ start() {
 	fi
 	init
 	start-stop-daemon -S -q -b -m -p $PIDFILE --exec /bin/multimacd -- -f /etc/config/multimacd.conf -l $LOGLEVEL_RFD
-	sleep 2
-	echo "OK"
-	}
+	waitStartupComplete
+}
 stop() {
 	echo -n "Stopping multimacd: "
 	start-stop-daemon -K -q -p $PIDFILE

@@ -9,3 +9,6 @@
 "driving_mode_2" : "&uuml;ber die untere Endlage (Genauigkeitsfahrt)",
 "driving_mode_3" : "&uuml;ber die n&auml;chste Endlage (Genauigkeitsfahrt)",
 "up_equal_down" : "<div style=\"padding:10\"><br/>Die Einschaltdauer f&uuml;r &quot;Oben&quot; und &quot;Unten&quot;<br/>k&ouml;nnen nicht gleichzeitig gesetzt sein!</div>",
+
+"shortSlatUP_longBlindUP" : "kurz Lamelle auf - lang Jalousie auf / hoch",
+"shortSlatDOWN_longBlindDOWN" : "kurz Lamelle herunter - lang Jalousie zu / herunter",

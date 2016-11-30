@@ -9,3 +9,7 @@
 "driving_mode_2" : "alt son konum &uuml;zerinde (hassasiyet hareketi)",
 "driving_mode_3" : "sonraki son konum &uuml;zerinde (hassasiyet hareketi)",
 "up_equal_down" : "<div style=\"padding:10\"><br/>&quot;&Uuml;st&quot; ve &quot;alt&quot konumlarinin acik kalma s&uuml;resi<br/>ayni anda ayarlanamaz!</div>",
+
+
+"shortSlatUP_longBlindUP" : "short slat up - long blind open / up",
+"shortSlatDOWN_longBlindDOWN" : "short slat down - long blind close / down",

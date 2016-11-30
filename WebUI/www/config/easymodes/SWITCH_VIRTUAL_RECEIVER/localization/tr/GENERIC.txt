@@ -3,3 +3,7 @@
 "switch_on_off" : "Switch - on / off",
 "switch_toggle" : "Switch toggle",
 
+"actor_off" : "Actor off",
+"actor_on" : "Actor on",
+"actor_on_off" : "Actor  on / off",
+"actor_toggle" : "Actor toggle",

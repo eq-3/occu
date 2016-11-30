@@ -656,6 +656,10 @@ jQuery.extend(true,langJSON, {
     "stringTableOnTime" : "Einschaltdauer",
     "stringTableOnTimeUnit" : "Einheit der Einschaltdauer",
     "stringTableOnTimeValue" : "Wert Einschaltdauer",
+
+    "stringTableSwitchingIntervalBase" : "Einheit des Intervalls",
+    "stringTableSwitchingIntervalValue" : "Wert des Intervalls",
+
     "stringTableDurationUnit" : "Einheit Zeitdauer",
     "stringTableDurationValue" : "Wert Zeitdauer",
     "stringTableHeatingHumidity" : "Luftfeuchtigkeit",
@@ -821,5 +825,8 @@ jQuery.extend(true,langJSON, {
     "stringTableLEDDisableChannelState" : "Ger%E4te-LED deaktivieren",
     "stringTableConfigPendingTrue" : "Konfigurationsdaten stehen zur %DCbertragung an",
     "stringTableConfigPendingFalse" : "Es stehen keine Konfigurationsdaten zur %DCbertragung an",
+    "stringTableJalousieTitle" : "Jalousieaktor",
+    "stringTableRSSIDevice" : "RSSI Ger%E4t",
+    "stringTableRSSIPeer" : "RSSI Partner"
   }
 });

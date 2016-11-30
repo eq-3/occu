@@ -162,6 +162,7 @@ jQuery.extend(true,langJSON, {
     "unknownDevice" : "Unknown device",
     "triggered" : "triggered",
     "lblActiv" : "active",
+    "lblNotActiv" : "not active",
     "lblUsable" : "operable",
     "lblVisible" : "visible",
     "lblSystemIntern" : "intrinsic",
@@ -338,6 +339,7 @@ jQuery.extend(true,langJSON, {
     "lblSettingsSystemConfig5" : "Perform updates",
     "lblSettingsSystemConfig6" : "Set time and date",
     "lblSettingsSystemConfig7" : "Location settings",
+    "lblSettingsSystemConfig8" : "Connections (e.g. OSRAM lightify)",
     "commentSettingsBtnSystemConfigEnd" : "***********************************************",
     "btnAddReceiver" : "Add<br/>receiver",
     "btnAddSender" : "Add<br/>transmitter ",
@@ -367,6 +369,9 @@ jQuery.extend(true,langJSON, {
     "btnNewStart" : "Restart",
     "btnReset" : "Reset",
     "btnSet" : "Set",
+
+    "btnConfigureDST" : "Configure DST",
+
     "dialogYes" : "Yes",
     "dialogNo" : "No",
     "dialogBack" : "Back",
@@ -492,7 +497,7 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsSecurityLblPerformRestore" : "Step 2: Import file",
     "dialogSettingsSecurityLblSysResetPerform" : "Perform system reset",
     "dialogSettingsSecurityHintSecKey1" : "Attention!",
-    "dialogSettingsSecurityHintSecKey2" : "The security key should contain at least 5 characters.",
+    "dialogSettingsSecurityHintSecKey2" : "The security key should contain at least 5 characters. Please prevent the ampersand. All chars including the ampersand will be ignored. The following chars are possible: A-Z a-z 0-9 _",
     "dialogSettingsSecurityHintSecKey3" : "Please write down your security key and keep it in a safe place.<br/>For security reasons, there is no (!) possibility to reset or bypass the password.",
     "dialogSettingsSecurityHintSecKey4" : "After changing your security key, please perform a new system backup. An old backup version can not be used.",
     "dialogSettingsSecurityHintBackup1" : "Please note!",
@@ -1021,7 +1026,7 @@ jQuery.extend(true,langJSON, {
     "btnSysConfBidCosConfig" : "BidCos-RF configuration",
     "lblSysConfBidCosConfig1" : "Configure internal antenna",
     "lblSysConfBidCosConfig2" : "Manage HomeMatic Wireless LAN Gateways",
-    "btnSysConfLANGateway" : "LAN Gateway configuration",
+    "btnSysConfLANGateway" : "LAN Gateway<br/>configuration",
     "lblSysConfBidCosConfig3" : "Manage HomeMatic Wired LAN Gateways",
 
     "btnSysConfAdditionalSoft" : "Additional software",

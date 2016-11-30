@@ -17,6 +17,9 @@
 "DOWN_TIME" : "<span class=\"translated\">Verweildauer im Zustand &quot;Unten&quot;</span>",
 "DRIVING_MODE" : "<span class=\"translated\">Referenzfahrtvariante</span>",
 "GET_CURRENT_BRIGHTNESS" : "<span class=\"translated\">Aktuelle Helligkeit &uuml;bernehmen</span>",
+"JALOUSIE_SLAT_POS" : "<span class=\"translated\">Lamellenposition</span>",
+"JALOUSIE_SLAT_POS_OFF" : "<span class=\"translated\">Lamellenposition, wenn heruntergefahren</span>",
+"JALOUSIE_SLAT_POS_ON" : "<span class=\"translated\">Lamellenposition, wenn hochgefahren</span>",
 "JUMPTARGET" : "<span class=\"translated\">Zielposition</span>",
 "MAXIMAL_FILLLEVEL" : "<span class=\"translated\">Maximaler F&uuml;llstand</span>",
 "MINIMAL_FILLLEVEL" : "<span class=\"translated\">Minimaler F&uuml;llstand</span>",
@@ -62,5 +65,9 @@
 "RAMPOFF_TIME_BASE": "<span class=\"translated\">Einheit Rampenzeit</span>",
 "RAMPOFF_TIME_FACTOR" : "<span class=\"translated\">Wert Rampenzeit</span>",
 "RAMPOFF_TIME_FACTOR_DESCR" : "<span class=\"translated\">Rampenzeit beim Ausschalten</span>",
+
+"SWITCHING_INTERVAL_BASE" : "Einheit des Intervalls",
+"SWITCHING_INTERVAL_FACTOR" : "Wert des Intervalls",
+"SWITCHING_INTERVAL_FACTOR_DESCR" : "Intervall der Pumpenschutzfunktion",
 
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperatur</span>",

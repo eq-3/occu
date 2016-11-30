@@ -23,9 +23,9 @@ proc read_var { filename varname} {
     catch { set fd [open $filename r] }
     if { $fd >=0 } {
         while { [gets $fd buf] >=0 } {
-	        if [regexp "^ *$varname *= *(.*)$" $buf dummy var] break
+          if [regexp "^ *$varname *= *(.*)$" $buf dummy var] break
         }
-	    close $fd
+      close $fd
     }
   
     return $var
@@ -59,7 +59,7 @@ puts {
       <col width="25%" />
       <col width="25%" />
       <col width="25%" />
-      <col width="25%" />
+      <col width="20%" />
     </colgroup>
     <tr class="CLASS21700">
     
@@ -165,15 +165,24 @@ puts {
       </div>
     </td>
 
-	  </tr>
-	  <tr>
+    </tr>
+    
+    <tr>
+    <!-- Kopplungen -->
+    <td>
+      <div class="cpButton">
+        <div class="StdTableBtn CLASS21701" onclick="showCouplingCP();">${btnSysConfCoupling}</div>
+        <div class="StdTableBtnHelp"><img id="showCouplingCPHelp" src="/ise/img/help.png"></div>
+      </div>
+    </td>
+
 }
 
 set COL_COUNT 4
-set i 0
+set i 1
 
 if { "[read_var /etc/config/tweaks CP_DEVCONFIG]" != "" } {
-	puts "<!-- devconfig -->"
+  puts "<!-- devconfig -->"
   puts "<td>"
   puts "<div class=\"StdTableBtn CLASS21701\" onclick=\"window.open('/tools/devconfig.cgi?sid=$sid');\">devconfig</div>"
   puts "</td><td class=\"StdTableBtnHelp\"></td>"
@@ -279,7 +288,7 @@ puts {
     };
 
     function setTooltips() {
-      var helpContainer = ["#showMaintenanceCPHelp","#showSecurityCPHelp","#showTimeCPHelp","#showNetworkCPHelp","#newFirewallConfigDialogHelp","#showBidCosConfigHelp","#showSoftwareCPHelp", "#showGeneralSettingsCPHelp"];
+      var helpContainer = ["#showMaintenanceCPHelp","#showSecurityCPHelp","#showTimeCPHelp","#showNetworkCPHelp","#newFirewallConfigDialogHelp","#showBidCosConfigHelp","#showSoftwareCPHelp", "#showCouplingCPHelp", "#showGeneralSettingsCPHelp"];
       var help = [
         "<h1>"+translateKey("btnSysConfCentralMaintenace")+"</h1><ul><li>"+translateKey("lblSysConfCentralMaintenance1")+"</li><li>"+translateKey("lblSysConfCentralMaintenance2")+"</li><li>"+translateKey("lblSysConfCentralMaintenance3")+"</li></ul>",
         "<h1>"+translateKey("btnSysConfSecurity")+"</h1><ul><li>"+translateKey("lblSysConfSecurity1")+"</li><li>"+translateKey("lblSysConfSecurity2")+"</li><li>"+translateKey("lblSysConfSecurity3")+"</li><li>"+translateKey("lblSysConfSecurity4")+"</li><li>"+translateKey("lblSysConfSecurity5")+"</li></ul>",
@@ -288,6 +297,7 @@ puts {
         "<h1>"+translateKey("btnSysConfFirewallConfig")+"</h1><ul><li>"+translateKey("lblSysConfFirewallConfig1")+"</li><li>"+translateKey("lblSysConfFirewallConfig2")+"</li></li></ul>",
         "<h1>"+translateKey("btnSysConfLANGateway")+"</h1><ul><li>"+translateKey("lblSysConfBidCosConfig2")+"</li></ul>",
         "<h1>"+translateKey("btnSysConfAdditionalSoft")+"</h1><ul><li>"+translateKey("lblSysConfAdditionalSoft1")+"</li><li>"+translateKey("lblSysConfAdditionalSoft2")+"</li></ul>",
+        "<h1>"+translateKey("btnSysConfCoupling")+"</h1>",
         "<h1>"+translateKey("btnSysConfGeneralSettings")+"</h1><ul><li>"+translateKey("lblSysConfStorage")+"</li><li>"+translateKey("lblSysConfSetPowerCost")+"</li></ul>"
         ];
 

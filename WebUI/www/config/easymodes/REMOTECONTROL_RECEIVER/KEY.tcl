@@ -14,9 +14,9 @@ set PROFILE_0(UI_TEMPLATE)	"Expertenprofil"
 
 # hier folgen die verschiedenen Profile
 set PROFILE_1(SHORT_CONTROL_RC)   {1 range 0 - 6}
-set PROFILE_1(SHORT_TEMPERATUR_RC)   {17.00 range 5.00 - 30.00}
+set PROFILE_1(SHORT_TEMPERATUR_RC)   {17.00 range 4.5 - 30.5}
 set PROFILE_1(LONG_CONTROL_RC)   {0 range 0 - 6}
-set PROFILE_1(LONG_TEMPERATUR_RC)   {17.00 range 5.00 - 30.00}
+set PROFILE_1(LONG_TEMPERATUR_RC)   {17.00 range 4.5 - 30.5}
 set PROFILE_1(UI_DESCRIPTION)	"Expertenprofil"
 set PROFILE_1(UI_TEMPLATE)	"Expertenprofil"
 set PROFILE_1(UI_HINT)	1
@@ -96,9 +96,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   incr pref
 	append HTML_PARAMS(separate_$prn) "<tr id='setpoint_${special_input_id}' class='hidden'><td>\${SetPointTemperature}</td><td>"
   array_clear options
+  set options(4.5) "\${optionTemperatureOFF}"
 	for {set val 5} {$val <= 30 } {incr val} {
 	  set options($val) "$val &#176;C"
 	}
+	set options(30.5) "\${optionTemperatureON}"
 	set options(99999997) "Wert eingeben"
 
 	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_TEMPERATUR_RC|LONG_TEMPERATUR_RC separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_TEMPERATUR_RC "onchange=\"CC_ActivateFreeTemp(\$('${special_input_id}_profiles'),$pref);\""]

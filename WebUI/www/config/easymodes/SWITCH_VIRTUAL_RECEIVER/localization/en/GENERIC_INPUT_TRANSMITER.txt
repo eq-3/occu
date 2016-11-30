@@ -1,0 +1,13 @@
+"description_1" : "<span class=\"translated\">en Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die festgelegte Zeit eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_2" : "<span class=\"translated\">en Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die festgelegte Zeit ausgeschaltet. Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_3" : "<span class=\"translated\">en Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die festgelegte Zeit ein- oder ausgeschaltet (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_4" : "<span class=\"translated\">en Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die festgelegte Zeit ein- bzw. ausgeschaltet.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">en Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die festgelegte Zeit aus- bzw. eingeschaltet.</span><br/><br/>",
+
+"description_noLong_1" : "<span class=\"translated\">en Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">en Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit ausgeschaltet. Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">en Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit ein- oder ausgeschaltet (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_noLong_4" : "<span class=\"translated\">en Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit ein- bzw. ausgeschaltet.</span><br/><br/>",
+"description_noLong_5" : "<span class=\"translated\">en Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit aus- bzw. eingeschaltet.</span><br/><br/>",
+
+

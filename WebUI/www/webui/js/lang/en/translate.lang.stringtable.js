@@ -651,6 +651,10 @@ jQuery.extend(true,langJSON, {
     "stringTableOnTime" : "Switch-on time",
     "stringTableOnTimeUnit" : "Unit of switch-on time",
     "stringTableOnTimeValue" : "Value switch-on time",
+
+    "stringTableSwitchingIntervalBase" : "Unit interval",
+    "stringTableSwitchingIntervalValue" : "Value interval",
+
     "stringTableDurationUnit" : "Unit duration",
     "stringTableDurationValue" : "Value duration",
     "stringTableHeatingHumidity" : "Humidity",
@@ -815,7 +819,10 @@ jQuery.extend(true,langJSON, {
     "stringTableMotionDetectorMotionActiveTime" : "Time after which the detected movement is reset",
     "stringTableLEDDisableChannelState" : "Deactivate device LED",
     "stringTableConfigPendingTrue" : "Configuration data is ready for transmission",
-    "stringTableConfigPendingFalse" : "There is no configuration data to be transmitted"
+    "stringTableConfigPendingFalse" : "There is no configuration data to be transmitted",
+    "stringTableJalousieTitle" : "Jalousie actuator",
+    "stringTableRSSIDevice" : "RSSI device",
+    "stringTableRSSIPeer" : "RSSI peer"
 
   }
 });

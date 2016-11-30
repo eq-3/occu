@@ -302,3 +302,168 @@ function ::buildFuncOverlay() {
   }
   Write(s);
 }
+
+function ::showHideRFChannel() {
+  if(chn.HssType().Find("CONDITION_") != -1) {
+    ! channel 3 - 6 of the powermeter
+    bShowChannel = false;
+  }
+
+  if((chn.HssType().Find("SWITCH_TRANSMIT") != -1) && (chn.HssType().Find("SWITCH_TRANSMITTER") == -1)) {
+    ! channel 7 of the ThermalControl-IndoorTemperatureSensor (e. g. HM-TC-IT-WM-W-EU)
+    bShowChannel = false;
+  }
+
+  ! Status Display EPaper
+  if(( (oDevHssType == "HM-Dis-EP-WM55") ) && (chNumber == 3)) {
+    ! Hide channel 3 of this device
+    bShowChannel = false;
+  }
+}
+
+function ::showHideHmIPChannel() {
+  bShowChannel = true;
+
+  ! A key press doesn't work with the ccu2 and hmip
+  ! When the device is no remote control, don't show the key channel
+  !
+  ! When the device is a remote control, show the channel. The control says than the channel has here no function.
+  ! Otherwise the control of the remote control would display only the header of the page, which would look not so good.
+  if ((chn.HssType().Find("KEY_TRANSCEIVER") != -1) && (
+         (oDevHssType != "HmIP-RC8")
+      && (oDevHssType != "HMIP-WRC2")
+      && (oDevHssType != "HmIP-WRC2")
+      && (oDevHssType != "HmIP-WRC6")
+      && (oDevHssType != "HmIP-KRCA")
+      && (oDevHssType != "HmIP-KRCK")
+      && (oDevHssType != "HmIP-KRC4")
+      )
+    )
+  {
+    bShowChannel = false;
+    return;
+  }
+
+  if (bShowChannel == true) {
+    ! Interface HmIP-RF
+    if(chn.HssType().Find("MAINTENANCE") != -1) {
+      ! Don't show the maintenance channel of the new HmIP devices
+      ! This is necessary because the name of such a channel of an HmIP device
+      !   can be MAINTENANCE_BAT_BL, MAINTENANCE_BAT_EL, MAINTENANCE_BAT_CL and so on
+      ! For BidCos-RF this isn't necessary
+      bShowChannel = false;
+      return;
+    }
+
+    ! Pluggable Switch (PS)
+    if((oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS")) {
+      ! Hide SWITCH_VIRTUAL_RECEIVER channel 4 and 5 and the real channel when the expert mode is not active
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false;}
+        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false;}
+      }
+      return;
+    }
+
+    ! Pluggable Switch and Meter (PSM)
+    if ( (
+          oDevHssType == "HMIP-PSM")
+      || (oDevHssType == "HmIP-PSM")
+      || (oDevHssType == "HmIP-PSM-CH")
+      || (oDevHssType == "HmIP-PSM-IT")
+      || (oDevHssType == "HmIP-PSM-PE")
+      || (oDevHssType == "HmIP-PSM-UK")
+      ) {
+      ! Hide SWITCH_VIRTUAL_RECEIVER channel 4 and 5 and the real channel when the expert mode is not active
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false;}
+        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false;}
+      }
+      return;
+    }
+
+    ! Flush mounted Dimmer (BDT)
+    if (oDevHssType == "HmIP-BDT") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false;}
+        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false;}
+      }
+      return;
+    }
+
+    ! Pluggable Dimmer (PDT)
+    if (oDevHssType == "HmIP-PDT") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false;}
+        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false;}
+      }
+      return;
+    }
+
+    ! Flush mounted Switch and Meter (BSM)
+    if (oDevHssType == "HmIP-BSM") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false;}
+        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false;}
+      }
+      return;
+    }
+
+    ! Flush switch actuator with Measuring
+    if ((user.UserEasyLinkMode() == true) && ((oDevHssType == "HmIP-FSM") || (oDevHssType == "HmIP-FSM16"))) {
+      if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false;}
+      if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 2)) {bShowChannel = false;}
+      return;
+    }
+
+    ! Don't show the key channel (a key press doesn't work with ccu and hmip) and the  real channel (doesn't make sense with only one virtual channel)
+    if ( (oDevHssType == "HmIP-ASIR")  && (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) ) {
+      bShowChannel = false;
+      return;
+    }
+
+    ! Multi-IO-Box (MIOB)
+    if ((user.UserEasyLinkMode() == true) && (oDevHssType == "HmIP-MIOB")) {
+      ! Hide the real channels. They are not necessary without virtual channels
+      if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {
+          bShowChannel = false;
+          return;
+      }
+
+      ! Hide all SWITCH_VIRTUAL_RECEIVER channels other than 3 and 7 when the expert mode is not active
+      if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
+        if ((chNumber != 3) && (chNumber != 7)) {
+          bShowChannel = false;
+          return;
+        }
+      }
+      return;
+    }
+  }
+}
+
+! [devFwMajor] [devFwMinor] [devFwPatch]
+function ::getFirmwareVersion() {
+  object channel = dom.GetObject(chnId);
+  object dev = dom.GetObject(channel.Device());
+
+  string devMetaData;
+
+  if ( dev != null )
+  {
+    devMetaData = dev.MetaData("DEVDESC");
+    string tmpData;
+    string devFirmware;
+
+    foreach(tmpData, devMetaData.Split(","))
+    {
+      if ((tmpData.Find("AVAILABLE_FIRMWARE") == -1) && (tmpData.Find("FIRMWARE:") > -1)) {
+        devFirmware = tmpData.StrValueByIndex(":",1).Substr(1,5);
+
+        devFwMajor = devFirmware.StrValueByIndex(".",0).ToInteger();
+        devFwMinor = devFirmware.StrValueByIndex(".",1).ToInteger();
+        devFwPatch = devFirmware.StrValueByIndex(".",2).ToInteger();
+      }
+    }
+  }
+}

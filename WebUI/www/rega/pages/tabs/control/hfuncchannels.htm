@@ -138,8 +138,6 @@
           }
 
         boolean bShowChannel = false;
-  Write("<script type='text/javascript'>console.log('A bShowChannel: "#bShowChannel#"');</script>");
-
         if (user.UserEasyLinkMode() != true) {
           ! User is expert
           bShowChannel = true;
@@ -155,68 +153,12 @@
           }
         }
 
-  Write("<script type='text/javascript'>console.log('B bShowChannel: "#bShowChannel#"');</script>");
-
         if (sInterface != "HmIP-RF") {
-          if(chn.HssType().Find("CONDITION_") != -1) {
-            ! channel 3 - 6 of the powermeter
-            bShowChannel = false;
-          }
-
-          if((chn.HssType().Find("SWITCH_TRANSMIT") != -1) && (chn.HssType().Find("SWITCH_TRANSMITTER") == -1)) {
-            ! channel 7 of the ThermalControl-IndoorTemperatureSensor (e. g. HM-TC-IT-WM-W-EU)
-            bShowChannel = false;
-          }
-
-          ! Status Display EPaper
-          if(( (oDevHssType == "HM-Dis-EP-WM55") ) && (chNumber == 3)) {
-            ! Hide channel 3 of this device
-            bShowChannel = false;
-          }
+          Call("/esp/functions.fn::showHideRFChannel()");
         } else {
-          bShowChannel = true;
-         ! Interface HmIP-RF
-         if(chn.HssType().Find("MAINTENANCE") != -1) {
-           ! Don't show the maintenance channel of the new HmIP devices
-           ! This is necessary because the name of such a channel of an HmIP device
-           !   can be MAINTENANCE_BAT_BL, MAINTENANCE_BAT_EL, MAINTENANCE_BAT_CL and so on
-           ! For BidCos-RF this isn't necessary
-           bShowChannel = false;
-         }
-
-         ! Pluggable Switch (PS)
-         if(( (oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS") ) && (chNumber != 3)) {
-           ! Show only channel 3 of this device
-           bShowChannel = false;
-         }
-
-         ! Pluggable Switch and Meter (PSM)
-         if ( (oDevHssType == "HMIP-PSM") || (oDevHssType == "HmIP-PSM") ) {
-           if ((chNumber == 1) || (chNumber == 2) || (chNumber == 4) || (chNumber == 5)) {
-             bShowChannel = false;
-           }
-         }
-
-         ! Wall Thermostat (WTH) - this shouldn't be necessary because channel 5 has no params
-         ! so it should never appear. Currently channel 5 has some wrongly params.
-         ! So we have to hide this channel. With a modified crRFD this can easily be removed
-         if( ((oDevHssType == "HMIP-WTH") || (oDevHssType == "HmIP-WTH")) && (chNumber == 5) ) {
-           ! Hide channel 5. Channel 1 is visible,
-           ! The channels 2, 3, 4 and 6 don´t have any parameters so they don`t appear in the list
-           bShowChannel = false;
-         }
-
-         ! Flush mounted Switch and Meter (BSM)
-         ! When bShowChannel == true, the channel is visible
-         ! You can hide the channel by setting the value to false
-         if ( oDevHssType == "HmIP-BSM" ) {
-           if (chNumber == 3) {
-             bShowChannel = true;
-           }
-         }
+          Call("/esp/functions.fn::showHideHmIPChannel()");
         }
 
-  Write("<script type='text/javascript'>console.log('C bShowChannel: "#bShowChannel#"');</script>");
 
           if( bShow && chn.ReadyConfig() && oDev.ReadyConfig() && bShowChannel )
           {

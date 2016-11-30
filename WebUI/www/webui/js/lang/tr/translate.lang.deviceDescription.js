@@ -1,5 +1,9 @@
 jQuery.extend(true,langJSON, {
   "tr" : {
+    "VIR-OL-GTW" : "OSRAM-Lightify<br/>Gateway",
+    "HM-LC-Dim1T-DR" : "Wireless Dimming Actuator 1-channel, trailing edge, DIN rail mount",
+    "HM-LC-Ja1PBU-FM" : "Wireless Blind Actuator 1-channel, flush-mount with push-button",
+    "HM-MOD-EM-8Bit" : "Wireless Transmitter, 8-Bit",
     "HM-LC-Sw1-PCB" : "Wireless Switch Actuator 1-channel, PCB",
     "HM-LC-AO-SM" : "Wireless 0-10V Actuator",
     "HM-LC-Sw2PBU-FM" : "Wireless Switch Actuator 2-channel, flush-mount",
@@ -28,6 +32,12 @@ jQuery.extend(true,langJSON, {
     "PSM" : "Homematic IP G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC, 1 kanal",
     "SWD" : "Homematic IP Kablosuz pencere/kapi kontagi optik",
     "SMI" : "Homematic IP Motion Detector, indoor",
+    "MIOB" : "Homematic IP Multi I/O-Box",
+    "STH" : "Homematic IP Temperature and Humidity Sensor, indoor",
+    "STHD" : "Homematic IP Temperature and Humidity Sensor with Display, indoor",
+    "PDT" : "Homematic IP Dimming Actuator",
+    "ALPHA-IP-RBG" : "Room Control Unit<br/>Display",
+    "ALPHA-IP-RBGa" : "Room Control Unit<br/>Analogue",
     "HM-LC-Sw1-Pl-CT-R1" : "Kablosuz salter akt%FCat%F6r%FC 1 kanalli, klemens baglantili",
     "HM-ES-PMSw1-DR" : "G%FCc %F6lc%FCm fonksiyonuna sahip kablosuz salter akt%FCat%F6r%FC, baslikli raya montaj",
     "HM-LC-Sw1-DR" : "1%B4li kablosuz salter akt%FCat%F6r%FC, baslikli raya montaj",

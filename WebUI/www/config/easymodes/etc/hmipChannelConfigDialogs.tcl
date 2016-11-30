@@ -12,8 +12,7 @@ proc getMaintenance {chn p descr} {
   set param CYCLIC_INFO_MSG
   append html "<tr>"
     append html "<td>\${stringTableCyclicInfoMsg}</td>"
-    append html  "<td>[getCheckBox '$param' $ps($param) $chn '$prn\_tmp' "onchange=\"setCyclicInfoMsg(this, '$chn', '$prn');\""]</td>"
-    append html  "<td class=\"hidden\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html  "<td>[getCheckBoxCyclicInfoMsg $param $ps($param) $chn $prn]</td>"
   append html "</tr>"
 
   incr prn
@@ -37,13 +36,15 @@ proc getMaintenance {chn p descr} {
     append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
   append html "</tr>"
 
-  append html "<script type=\"text/javascript\">"
-    append html "setCyclicInfoMsg = function(elm, chn, prn) \{"
-      append html " var value = (jQuery(elm).prop('checked')) ? 1 : 0; "
-      # don`t use jQuery - the dirty flag will not be recognized
-      append html " document.getElementById('separate_CHANNEL_' + chn + '_' + prn ).value = value; "
-    append html "\};"
-  append html "</script>"
+  set param GLOBAL_BUTTON_LOCK
+  if { ! [catch {set tmp $ps($param)}]  } {
+    # This parameter isn't available for all devices
+     incr prn
+     append html "<tr>"
+       append html "<td>\${stringTableGlobalButtonLock}</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+     append html "</tr>"
+  }
 
   return $html
 }
@@ -59,21 +60,105 @@ proc getKeyTransceiver {chn p descr} {
 
   set html ""
 
+
   set param DBL_PRESS_TIME
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+      append html "<td>\${stringTableKeyDblPressTime}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+    incr prn
+  }
+
+  set param LONG_PRESS_TIME
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+      append html "<td>\${stringTableKeyLongPressTimeA}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[]</td>"
+    append html "</tr>"
+    incr prn
+  }
+
+  set param REPEATED_LONG_PRESS_TIMEOUT_UNIT
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+    append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
+    append html [getComboBox $chn $prn "$specialID" "delayShort"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param REPEATED_LONG_PRESS_TIMEOUT_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableKeyLongPressTimeOutValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+  return $html
+}
+
+proc getGenericInputTransmitter {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
+
+
+  set param MIOB_DIN_CONFIG
   append html "<tr>"
+    append html "<td>\${stringTableMiobDinConfig}</td>"
+    option MIOB_DIN_CONFIG
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn "onchange=\"showHideKeyParams($chn);\""]</td>"
+  append html "</tr>"
+
+  incr prn
+  append html "<tr>"
+  append html "<td>\${stringTableEventDelay}</td>"
+  append html [getComboBox $chn $prn "$specialID" "delayShort"]
+  append html "</tr>"
+
+  set param EVENT_DELAY_UNIT
+  append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param EVENT_DELAY_VALUE
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableEventDelayValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  incr prn
+  set param DBL_PRESS_TIME
+  append html "<tr class=\"hidden\" name=\"paramKey_$chn\">"
     append html "<td>\${stringTableKeyDblPressTime}</td>"
     append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
   append html "</tr>"
 
   incr prn
   set param LONG_PRESS_TIME
-  append html "<tr>"
+  append html "<tr class=\"hidden\" name=\"paramKey_$chn\">"
     append html "<td>\${stringTableKeyLongPressTimeA}</td>"
     append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[]</td>"
   append html "</tr>"
 
   incr prn
-  append html "<tr>"
+  append html "<tr class=\"hidden\" name=\"paramKey_$chn\">"
   append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
   append html [getComboBox $chn $prn "$specialID" "delayShort"]
   append html "</tr>"
@@ -87,12 +172,69 @@ proc getKeyTransceiver {chn p descr} {
   append html "<td>\${stringTableKeyLongPressTimeOutValue}</td>"
 
   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
   append html "</tr>"
+
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
+  append html "<script type=\"text/javascript\">"
+
+    # This is necessary for the parameters of keys.
+    # When the last value of the time select box is chosen (Enter value) then show additional elements to allow
+    # the user to enter a time.
+    append html "initKeyParams = function(chn) \{"
+     append html "var timeSelectElm = jQuery(\"#timeDelay_\"+chn+\"_6\");"
+     append html "var timeDelayVal = timeSelectElm.val();"
+     append html "var valueForEnterUserVal = parseInt(jQuery(\"#\" +timeSelectElm.attr(\"id\") + \" option:last-child\").val());"
+
+     append html "if (parseInt(timeDelayVal) == valueForEnterUserVal) \{"
+       append html "jQuery(\"#timeBase_\"+chn+\"_6\").attr(\"name\",\"paramKey_\" + chn);"
+       append html "jQuery(\"#timeFactor_\"+chn+\"_7\").attr(\"name\",\"paramKey_\" + chn);"
+       append html "jQuery(\"#space_\"+chn+\"_7\").attr(\"name\",\"paramKey_\" + chn);"
+     append html "\}"
+
+    append html "\};"
+
+    # Show the parameters for the configuration of the keys only when the mode TACTILE_SWITCH_INPUT is chosen
+    append html "showHideKeyParams = function(chn) \{"
+      append html "var arKeyParams = jQuery(\"\[name='paramKey_\" + chn +\"'\]\");"
+      # append html "var selectedMode = parseInt(jQuery(\"#separate_CHANNEL_\" + chn + \"_1\").val());"
+      # append html "if (selectedMode == 4) \{arKeyParams.show();\} else \{arKeyParams.hide();\}"
+
+      append html "var optionClass = jQuery(\"#separate_CHANNEL_\" + chn + \"_1\ option:selected\").attr(\"class\");"
+      append html "if (optionClass == \"TACTILE_SWITCH_INPUT\") \{arKeyParams.show();\} else \{arKeyParams.hide();\}"
+    append html "\};"
+
+    append html "setTimeout(function() {initKeyParams($chn);showHideKeyParams($chn);},200);"
+  append html "</script>"
+
   return $html
+}
+
+proc getAnalogOutputTransceiver {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  set param VOLTAGE_0
+  append html "<tr>"
+    append html "<td>\${stringTableVoltage0}</td>"
+    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param VOLTAGE_100
+  append html "<tr>"
+    append html "<td>\${stringTableVoltage100}</td>"
+    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[]</td>"
+  append html "</tr>"
 }
 
 proc getSwitchTransmitter {chn p descr} {
@@ -330,14 +472,16 @@ proc getDimmerVirtualReceiver {chn p descr} {
 
   set html ""
 
-  set param "LOGIC_COMBINATION"
-  append html "<tr>"
-    append html "<td>\${stringTableLogicCombination}</td>"
-    option LOGIC_COMBINATION
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if {[session_is_expert]} {
+    set param "LOGIC_COMBINATION"
+    append html "<tr>"
+      append html "<td>\${stringTableLogicCombination}</td>"
+      option LOGIC_COMBINATION
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
 
-  append html "[getHorizontalLine]"
+    append html "[getHorizontalLine]"
+  }
 
   incr prn
   set param POWERUP_JUMPTARGET
@@ -390,7 +534,6 @@ proc getDimmerVirtualReceiver {chn p descr} {
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
   return $html
-
 }
 
 proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
@@ -410,7 +553,7 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
 
 
-  set param "HEATING_COOLING"
+  set param HEATING_COOLING
   append html "<tr>"
     append html "<td>\${stringTableHeatingCooling}</td>"
     array_clear options
@@ -423,7 +566,7 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
   set param TWO_POINT_HYSTERESIS
   append html "<tr>"
     append html "<td>\${stringTableSwitchTransmitTwoPointHysteresis}</td>"
-    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
   append html "</tr>"
 
   return $html
@@ -450,20 +593,22 @@ proc getSwitchVirtualReceiver {chn p descr} {
       set option(2) "\${stringTableCurrentDetectionBehaviorOutput2}"
       append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prn]</td>"
     append html "</tr>"
+    incr prn
   }
 
-  incr prn
-  set param "LOGIC_COMBINATION"
-  append html "<tr>"
-    append html "<td>\${stringTableLogicCombination}</td>"
-    option LOGIC_COMBINATION
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
-  
-  
-  append html "[getHorizontalLine]"
-  
-  incr prn
+  if {[session_is_expert]} {
+    set param "LOGIC_COMBINATION"
+    append html "<tr>"
+      append html "<td>\${stringTableLogicCombination}</td>"
+      option LOGIC_COMBINATION
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+
+
+    append html "[getHorizontalLine]"
+    incr prn
+  }
+
   set param POWERUP_JUMPTARGET
   append html "<tr>"
     append html "<td>\${stringTableDimmerPowerUpAction}</td>"
@@ -683,7 +828,7 @@ proc getCondSwitchTransmitter {chn p descr} {
   incr prn
   set param COND_TX_DECISION_BELOW
   append html "<tr>"
-    append html "<td>\${stringTableCondTxDecisionAbove}</td>"
+    append html "<td>\${stringTableCondTxDecisionBelow}</td>"
     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
   append html "</tr>"
 

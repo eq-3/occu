@@ -1,0 +1,13 @@
+"description_1" : "<span class=\"translated\">The dimmer will be switched on or off, depending on the input value of the sensor and the selected switching direction.</span><br/><br/>",
+
+"threshold" : "Threshold value",
+"thresholdON" : "Threshold value A",
+"thresholdOFF" : "Threshold value B",
+
+"_subset_1" : "Input value >= threshold value A OFF / input value < threshold value B - ON",
+"_subset_2" : "Input value >= threshold value A ON / input value < threshold value B - OFF",
+
+"subset_1" : "Input value >= threshold value OFF / input value < threshold value - ON",
+"subset_2" : "Input value >= threshold value ON / input value < threshold value - OFF",
+
+"SWITCH_DIRECTION" : "Switching direction",

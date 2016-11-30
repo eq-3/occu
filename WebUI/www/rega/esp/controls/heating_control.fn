@@ -134,15 +134,15 @@ function ::CreateHeatingControl()
     WriteLine("</td>");
   WriteLine("</tr>");
 
-    WriteLine("<tr>");
-      WriteLine("<td colspan='2'>");
-        WriteLine("<table id='"#chnId#"showPartyEnd' class='ControlBtnInfo hidden' style='background-color:#3678C9; min-width:200px; width:100%'>");
-          WriteLine("<tr>");
-            WriteLine("<td><div>${partyModeEndTime}</div><div id='"#chnId#"partyEndTime'></div></td>");
-          WriteLine("</tr>");
-        WriteLine("</table>");
-      WriteLine("</td>");
-    WriteLine("</tr>");
+  WriteLine("<tr>");
+    WriteLine("<td colspan='2'>");
+      WriteLine("<table id='"#chnId#"showPartyEnd' class='ControlBtnInfo hidden' style='background-color:#3678C9; min-width:200px; width:100%'>");
+        WriteLine("<tr>");
+          WriteLine("<td><div>${partyModeEndTime}</div><div id='"#chnId#"partyEndTime'></div></td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
 
   string sCtrlId = "slidCtrl"#chnId;
   WriteLine("<script type='text/javascript'>");
@@ -187,8 +187,15 @@ function ::CreateHeatingControl()
   return;
 }
 
-function ::CreateHeatingControlHMIP()
+function ::CreateHeatingControlHmIP()
 {
+
+  integer devFwMajor = 0;
+  integer devFwMinor = 0;
+  integer devFwPatch = 0;
+  Call("/esp/functions.fn::getFirmwareVersion()");
+
+
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
   string chnLabel = ch.Label();
@@ -199,10 +206,13 @@ function ::CreateHeatingControlHMIP()
   string tUnit = "&deg;<i>C</i>";
   string hUnit = "&#37;";
   real rState = 0;
-  object oActiveProfile = cObj.DPByControl("HEATING_CONTROL_HMIP.ACTIVE_PROFILE");
+
   object oTemperature = cObj.DPByControl("HEATING_CONTROL_HMIP.TEMPERATURE");
-  object oHumidity = cObj.DPByControl("HEATING_CONTROL_HMIP.HUMIDITY");
   object oSetPoint = cObj.DPByControl("HEATING_CONTROL_HMIP.SETPOINT");
+  object oWindowState = cObj.DPByControl("HEATING_CONTROL_HMIP.WINDOW_STATE");
+
+  object oActiveProfile = cObj.DPByControl("HEATING_CONTROL_HMIP.ACTIVE_PROFILE");
+  object oHumidity = cObj.DPByControl("HEATING_CONTROL_HMIP.HUMIDITY");
   object oSetPointMode = cObj.DPByControl("HEATING_CONTROL_HMIP.SETPOINT_MODE");
   object oControlMode = cObj.DPByControl("HEATING_CONTROL_HMIP.CONTROL_MODE");
   object oModeBoost = cObj.DPByControl("HEATING_CONTROL_HMIP.BOOST_MODE");
@@ -210,10 +220,8 @@ function ::CreateHeatingControlHMIP()
   object oPartyEnd = cObj.DPByControl("HEATING_CONTROL_HMIP.PARTY_TIME_END");
   object oPartySetPointTemp = cObj.DPByControl("HEATING_CONTROL_HMIP.PARTY_SETPOINT_TEMP");
   object oPartyMode = cObj.DPByControl("HEATING_CONTROL_HMIP.PARTY_MODE");
-  object oWindowState = cObj.DPByControl("HEATING_CONTROL_HMIP.WINDOW_STATE");
 
   string sReadOnly = "";
-  ! rState = oSetPoint.Value();
   rState = oSetPoint.Value();
 
   if ( oTemperature )
@@ -221,7 +229,6 @@ function ::CreateHeatingControlHMIP()
     ! WriteLine(' <script>conInfo("oTemperature: '#oTemperature.Value()#'");</script> ');
     actTemp = oTemperature.Value();
   }
-
   WriteLine("<tr>");
     WriteLine("<td id='"#chnId#"tdACTUAL_TEMPERATURE'>");
       WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
@@ -249,7 +256,7 @@ function ::CreateHeatingControlHMIP()
       WriteLine("<td id='"#chnId#"tdWINDOW_STATE' >");
         WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
           WriteLine("<tr>");
-            WriteLine("<td  id='"#chnId#"WINDOW_STATE'>${stringTableWindowState}</td>");
+            WriteLine("<td  id='"#chnId#"WINDOW_STATE'>${stringTableWindowState}: </td>");
             WriteLine("<td><span id='"#chnId#"valWINDOW_STATE'></span></td>");
           WriteLine("</tr>");
         WriteLine("</table>");
@@ -338,7 +345,13 @@ function ::CreateHeatingControlHMIP()
               WriteLine("<option value='2'>${weeklyProfile2}</option>");
               WriteLine("<option value='3'>${weeklyProfile3}</option>");
 
-              if ((chnLabel == "HMIP-WTH-2") || (chnLabel == "HmIP-WTH-2") || (chnLabel == "ALPHA-IP-RBG")) {
+              if ((chnLabel == "HMIP-WTH-2")
+              || (chnLabel == "HmIP-WTH-2")
+              || (chnLabel == "HmIP-STHD")
+              || (chnLabel == "HmIP-STH")
+              || (chnLabel == "ALPHA-IP-RBG")
+              || (((chnLabel == "HmIP-WTH") || (chnLabel == "HMIP-WTH")) && (((devFwMajor == 1) && (devFwMinor >= 6)) || (devFwMajor > 1)))
+              ) {
                 WriteLine("<option value='4'>${weeklyProfile4}</option>");
                 WriteLine("<option value='5'>${weeklyProfile5}</option>");
                 WriteLine("<option value='6'>${weeklyProfile6}</option>");
@@ -352,7 +365,16 @@ function ::CreateHeatingControlHMIP()
     WriteLine("</td>");
   WriteLine("</tr>");
 
-  ! *************************************************
+  WriteLine("<tr>");
+    WriteLine("<td colspan='2'>");
+      WriteLine("<table id='"#chnId#"showPartyEnd' class='ControlBtnInfo hidden' style='background-color:#3678C9; min-width:200px; width:100%'>");
+        WriteLine("<tr>");
+          WriteLine("<td><div>${partyModeEndTime}</div><div id='"#chnId#"partyEndTime'></div></td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
   WriteLine("<script type='text/javascript'>");
     WriteLine("var opts = {};");
     WriteLine("opts.chID = '"#chnId#"';");
@@ -411,4 +433,86 @@ function ::CreateHeatingControlHMIP()
 
     WriteLine("its"#chnId#" = new iseThermostatHMIP(opts);");
   WriteLine("</script>");
+}
+
+! ALPHA-IP-RBGa
+function ::CreateHeatingControlHmIPa()
+{
+  string tUnit = "&deg;<i>C</i>";
+  string hUnit = "&#37;";
+  real actTemp = -1.0;
+  real setPointValue = -1.0;
+  boolean frostProtection = false;
+  integer valWindowState;
+  string windowState = "--";
+
+  object oTemperature = cObj.DPByControl("HEATING_CONTROL_HMIP.TEMPERATURE");
+  object oFrostProtection = cObj.DPByControl("HEATING_CONTROL_HMIP.FROST_PROTECTION");
+  object oSetPoint = cObj.DPByControl("HEATING_CONTROL_HMIP.SETPOINT");
+  object oWindowState = cObj.DPByControl("HEATING_CONTROL_HMIP.WINDOW_STATE");
+
+
+  string sReadOnly = "";
+
+  if (oSetPoint) {
+    setPointValue = oSetPoint.Value();
+  }
+
+  if ( oTemperature ) {
+    actTemp = oTemperature.Value();
+  }
+
+  if ( oFrostProtection ) {
+    frostProtection = oFrostProtection.Value();
+  }
+
+  if ( oWindowState ) {
+    valWindowState = oWindowState.Value();
+
+    if (valWindowState == 0) {
+      windowState = "${infoStatusControlLblClosed}";
+    }
+
+    if (valWindowState == 1) {
+      windowState = "${infoStatusControlLblOpen}";
+    }
+
+  }
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
+        WriteLine("<tr>");
+          WriteLine("<td>${stringTableWeatherTemperature}:&nbsp;"#actTemp.ToString(2)#"<span><b>"#tUnit#"</b></span></td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+
+    ! WriteLine("<td>");
+    !  WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
+    !    WriteLine("<tr>");
+    !     WriteLine("<td>${lblFrostProtection}: "#frostProtection#"</td>");
+    !    WriteLine("</tr>");
+    !  WriteLine("</table>");
+    ! WriteLine("</td>");
+  WriteLine("</tr>");
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
+        WriteLine("<tr>");
+          WriteLine("<td>${stringTableSetPointTemperature}: "#setPointValue.ToString(2)#"<span><b>"#tUnit#"</b></span></td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+
+    WriteLine("<td>");
+      WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
+        WriteLine("<tr>");
+          WriteLine("<td>${stringTableWindowState}: </td>");
+          WriteLine("<td><span></span>"#windowState#"</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
 }

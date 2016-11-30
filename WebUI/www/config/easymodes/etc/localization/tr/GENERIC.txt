@@ -10,6 +10,7 @@
 "hour" : "Saat",
 "inactive" : "devre disi",
 "lastValue" : "Son deger",
+"noModification" : "No Modification",
 "long" : "uzun",
 "minimal" : "minimum",
 "minutes" : "Dakikalar",

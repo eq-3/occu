@@ -563,6 +563,14 @@ proc getInternalPeers {url address parentAddress} {
 
 proc isVirtual {paramId} {
   set virtualDevices [list "switch_virt_ch_master" "dimmer_virt_ch_master" "blind_virt_ch_master"]
+  lappend virtualDevices "hmip-ps_2_master" "hmip-ps_4_master" "hmip-ps_5_master"
+  lappend virtualDevices "hmip-psm_2_master" "hmip-psm_4_master" "hmip-psm_5_master"
+  lappend virtualDevices "hmip-bdt_3_master" "hmip-bdt_5_master" "hmip-bdt_6_master"
+  lappend virtualDevices "hmip-fsm_1_master" "hmip-fsm_3_master" "hmip-fsm_4_master"
+  lappend virtualDevices "hmip-fsm16_1_master" "hmip-fsm16_3_master" "hmip-fsm16_4_master"
+  lappend virtualDevices "hmip-miob_1_master" "hmip-miob_2_master" "hmip-miob_4_master" "hmip-miob_5_master" "hmip-miob_6_master" "hmip-miob_8_master"
+  lappend virtualDevices "hmip-pdt_2_master" "hmip-pdt_4_master" "hmip-pdt_5_master"
+
   set virtual "false"
 
   foreach val $virtualDevices {
@@ -695,7 +703,7 @@ proc put_channel_parameters {} {
       set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl"
     }
 
-    global internalKey
+    global internalKey simulateLongKeyPress
     # if {$ch_paramid != "" && ![catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid.tcl} ] } then
     if {$ch_paramid != "" && ![catch {source $sourcePath} ] } then {
       # if {! [info exists internalKey] || $ch_paramid == "dimmer_virt_ch_master" } then
@@ -825,8 +833,13 @@ proc put_channel_parameters {} {
               
                 if {[isVirtual $ch_paramid] == "false"} {
                   append s "<br/><input type=\"button\" id=\"SimKey_$counter\_$loop\_$pnr\" name=\"btnSimKeyPress\" onclick=\"SendInternalKeyPress('$iface', '$sender', '$receiver')\" value=\"Simuliere Tastendruck\">"
-                  # append s  "<span id=\"SimKeyHint_$counter\_$loop\_$pnr\" class=\"attention\" style=\"display:none\">&nbsp;&nbsp;Zum Simulieren des Tastendruckes bitte zuerst das Profil übertragen.</span></td>"
-                  append s  "<span id=\"SimKeyHint_$counter\_$loop\_$pnr\" class=\"attention\" style=\"display:none\">&nbsp;&nbsp;\${lblHintSimulateKeyPress}</span></td>"
+                  if {[info exists simulateLongKeyPress] == 1} {
+                    if {$simulateLongKeyPress == 1} {
+                      append s "<script type=\"text/javascript\">jQuery(\"#SimKey_$counter\_$loop\_$pnr\").attr(\"name\",\"btnSimShortKeyPress\");</script>"
+                      append s "<input type=\"button\" id=\"SimLongKey_$counter\_$loop\_$pnr\" name=\"btnSimLongKeyPress\" onclick=\"SendInternalKeyPress('$iface', '$sender', '$receiver', true)\" value=\"Simuliere langen Tastendruck\">"
+                    }
+                  }
+                  append s  "<br/><div id=\"SimKeyHint_$counter\_$loop\_$pnr\" class=\"attention\" style=\"display:none\">&nbsp;&nbsp;\${lblHintSimulateKeyPress}</div></td>"
                 }
                 append s  "</tr>"
               }
@@ -876,12 +889,17 @@ proc put_channel_parameters {} {
     }
 
     puts "<tr [expr {$hide_channel==1?"style=\"visibility: hidden; display: none\"":""} ] >"
-    puts "<td><span onmouseover=\"picDivShow(jg_250, '$ch_descr(PARENT_TYPE)', 250, $ch_descr(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $ch_name]</span></td>"
-    puts "<td>Ch.: $ch_descr(INDEX)</td>"
+    puts "<td class=\"alignCenter\"><span onmouseover=\"picDivShow(jg_250, '$ch_descr(PARENT_TYPE)', 250, $ch_descr(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $ch_name]</span><span id=\"chDescr_$ch_descr(INDEX)\"></span></td>"
+    puts "<td class=\"alignCenter\">Ch.: $ch_descr(INDEX)</td>"
     puts "<td class=\"CLASS22003\">$s</td>"
     puts "</tr>"
 
     incr tr_count
+
+    puts "<script type='text/javascript'>"
+      puts "var ext = getExtendedDescription(\{\"deviceType\" : \"$ch_descr(PARENT_TYPE)\", \"channelType\" : \"$ch_descr(TYPE)\" ,\"channelIndex\" : \"$ch_descr(INDEX)\", \"channelAddress\" : \"$ch_descr(ADDRESS)\" \});"
+      puts "jQuery(\"#chDescr_$ch_descr(INDEX)\").html(\"<br/><br/>\" + ext);"
+    puts "</script>"
   }
   
   if {$tr_count == 0} then {
@@ -898,7 +916,16 @@ proc put_channel_parameters {} {
   puts "</div>"
   puts "<script type='text/javascript'>"
   puts "translatePage('#id_channel_parameters');"
-  puts "translateButtons('btnSimKeyPress');"
+  if {[info exists simulateLongKeyPress] == 1} {
+    if {$simulateLongKeyPress == 1} {
+      puts "translateButtons('btnSimShortKeyPress');"
+      puts "translateButtons('btnSimLongKeyPress');"
+    } else {
+      puts "translateButtons('btnSimKeyPress');"
+    }
+  } else {
+    puts "translateButtons('btnSimKeyPress');"
+  }
   puts "jQuery('#id_channel_parameters').show();"
   puts "</script>"
 }

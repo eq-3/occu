@@ -10,6 +10,7 @@
 "hour" : "Hours",
 "inactive" : "inactive",
 "lastValue" : "Last value",
+"noModification" : "No Modification",
 "long" : "long",
 "minimal" : "minimal",
 "minutes" : "Minutes",

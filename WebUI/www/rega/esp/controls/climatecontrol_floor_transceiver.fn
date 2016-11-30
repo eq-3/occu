@@ -1,0 +1,116 @@
+function ::CreateClimateControlFloorTransceiver()
+{
+
+  object objDewPointAlarm = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.DEW_POINT_ALARM");
+  object objExternalClock = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.EXTERNAL_CLOCK");
+  object objHumidityLimiter = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.HUMIDITY_LIMITER");
+  object objEmergencyOperation = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.EMERGENCY_OPERATION");
+  object objFrostProtection = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.FROST_PROTECTION");
+  object objState = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.STATE");
+
+  string classStateActive = "";
+  string classHumidityLimiterActive = "";
+  string classExternalClockActive = "";
+
+  string classDewPoint = "hidden";
+  string classEmergencyMode = "hidden";
+  string classFrostProtection = "hidden";
+  string classHumidityLimiter = "hidden";
+
+  string stateSwitchingStatus =  "${actionStatusControlLblOff}";
+  string stateHumidityLimiter = "${lblNotActiv}";
+  string stateExternalClock = "${lblNotActiv}";
+  string stateDewPoint = "${lblNotActiv}";
+  string stateEmergencyMode = "${lblNotActiv}";
+  string stateFrostProtection = "${lblNotActiv}";
+
+  ! Parameter permanent visible
+  if (objState.Value() == true) {
+    classStateActive = "btnActive";
+    stateSwitchingStatus = "${actionStatusControlLblOn}";
+  }
+
+  ! Parameter permanent visible
+  if (objExternalClock.Value()) {
+    classExternalClockActive = "btnActive";
+    stateExternalClock = "${lblActiv}";
+  }
+
+  ! *** The following parameters are only visible when the relevant state is set to true
+  if (objHumidityLimiter.Value() == true) {
+    classHumidityLimiter = "";
+    stateHumidityLimiter = "${lblActiv}";
+  }
+
+  if (objDewPointAlarm.Value() == true) {
+    classDewPoint = "";
+    stateDewPoint = "${lblActiv}";
+  }
+
+  if (objEmergencyOperation.Value() == true) {
+    classEmergencyMode = "";
+    stateEmergencyMode = "${lblActiv}";
+  }
+
+  if (objFrostProtection.Value() == true) {
+    classFrostProtection = "";
+    stateFrostProtection = "${lblActiv}";
+  }
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<div class='ControlBtnInfo CLASS02532b "#classStateActive#"'>${lblSwitchingStatus}<br/>"#stateSwitchingStatus#"</div>");
+    WriteLine("</td>");
+   WriteLine("<td>");
+     WriteLine("<div class='ControlBtnInfo CLASS02532b "#classExternalClockActive#"'>${lblExternalClock}<br/>"#stateExternalClock#"</div>");
+   WriteLine("</td>");
+  WriteLine("</tr>");
+
+  ! The following info fields are only visible when the state of the relevant parameter is true
+  WriteLine("<tr class='"#classHumidityLimiter#"'>");
+    WriteLine("<td colspan='2'>");
+      WriteLine("<table class='ControlBtnInfo' style='background-color:#3678C9; min-width:200px; width:100%'>");
+        WriteLine("<tr>");
+          WriteLine("<td>${lblHumidityLimiter}&nbsp;"#stateHumidityLimiter#"</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+  WriteLine("<tr class='"#classDewPoint#"'>");
+    WriteLine("<td colspan='2'>");
+      WriteLine("<table class='ControlBtnInfo' style='background-color:#3678C9; min-width:200px; width:100%'>");
+        WriteLine("<tr>");
+          !WriteLine("<td>${lblDewPointAlarm}<br/>"#stateDewPoint#"</td>");
+          WriteLine("<td>${lblDewPointAlarm}</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+  WriteLine("<tr class='"#classEmergencyMode#"'>");
+    WriteLine("<td colspan='2'>");
+      WriteLine("<table class='ControlBtnInfo' style='background-color:#3678C9; min-width:200px; width:100%'>");
+        WriteLine("<tr>");
+          ! WriteLine("<td>${lblEmergencyOperation}<br/>"#stateEmergencyMode#"</td>");
+          WriteLine("<td>${lblEmergencyOperation}</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+  WriteLine("<tr class='"#classFrostProtection#"'>");
+    WriteLine("<td colspan='2'>");
+      WriteLine("<table class='ControlBtnInfo' style='background-color:#3678C9; min-width:200px; width:100%'>");
+        WriteLine("<tr>");
+          WriteLine("<td>${lblFrostProtection}&nbsp;"#stateFrostProtection#"</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+}
+
+function ::CreateClimateControlFloorPumpTransceiver()
+{
+  WriteLine("<script type='text/javascript'>conInfo('CreateClimateControlFloorPumpTransceiver()');</script>");
+}

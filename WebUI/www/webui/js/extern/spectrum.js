@@ -105,8 +105,8 @@
                         "<div class='sp-fill'></div>",
                         "<div class='sp-top-inner'>",
                             "<div class='sp-color'>",
-                                "<div class='sp-sat'>",
-                                    "<div class='sp-val'>",
+                                "<div id='sp-sat' class='sp-sat'>",
+                                    "<div id='sp-val' class='sp-val'>",
                                         "<div class='sp-dragger'></div>",
                                     "</div>",
                                 "</div>",
@@ -407,41 +407,43 @@
                 move();
             }, dragStart, dragStop);
 
-            /*
-            draggable(dragger, function (dragX, dragY, e) {
+
+            /* */
+            if (preferredFormat != "convert360To200") {
+              draggable(dragger, function (dragX, dragY, e) {
 
                 // shift+drag should snap the movement to either the x or y axis.
                 if (!e.shiftKey) {
-                    shiftMovementDirection = null;
+                  shiftMovementDirection = null;
                 }
                 else if (!shiftMovementDirection) {
-                    var oldDragX = currentSaturation * dragWidth;
-                    var oldDragY = dragHeight - (currentValue * dragHeight);
-                    var furtherFromX = Math.abs(dragX - oldDragX) > Math.abs(dragY - oldDragY);
+                  var oldDragX = currentSaturation * dragWidth;
+                  var oldDragY = dragHeight - (currentValue * dragHeight);
+                  var furtherFromX = Math.abs(dragX - oldDragX) > Math.abs(dragY - oldDragY);
 
-                    shiftMovementDirection = furtherFromX ? "x" : "y";
+                  shiftMovementDirection = furtherFromX ? "x" : "y";
                 }
 
                 var setSaturation = !shiftMovementDirection || shiftMovementDirection === "x";
                 var setValue = !shiftMovementDirection || shiftMovementDirection === "y";
 
                 if (setSaturation) {
-                    currentSaturation = parseFloat(dragX / dragWidth);
+                  currentSaturation = parseFloat(dragX / dragWidth);
                 }
                 if (setValue) {
-                    currentValue = parseFloat((dragHeight - dragY) / dragHeight);
+                  currentValue = parseFloat((dragHeight - dragY) / dragHeight);
                 }
 
                 isEmpty = false;
                 if (!opts.showAlpha) {
-                    currentAlpha = 1;
+                  currentAlpha = 1;
                 }
 
                 move();
 
-            }, dragStart, dragStop);
+              }, dragStart, dragStop);
+            }
 
-            */
 
             if (!!initialColor) {
                 set(initialColor);
@@ -646,6 +648,11 @@
             drawInitial();
             callbacks.show(colorOnShow);
             boundElement.trigger('show.spectrum', [ colorOnShow ]);
+
+            if (preferredFormat == "convert360To200") {
+              container.find("#sp-sat").removeClass("sp-sat");
+              container.find("#sp-val").removeClass("sp-val");
+            }
         }
 
         function onkeydown(e) {
@@ -755,9 +762,16 @@
             // Update dragger background color (gradients take care of saturation and value).
             var flatColor = tinycolor.fromRatio({ h: currentHue, s: 1, v: 1 });
 
-            // AG
-            //dragger.css("background-color", flatColor.toHexString());
-            dragger.css("background-color", previewElement.css("background-color"));
+
+              // AG
+
+              if (preferredFormat == "convert360To200") {
+                dragger.css("background-color", previewElement.css("background-color"));
+              } else {
+                dragger.css("background-color", flatColor.toHexString());
+              }
+
+
 
             // Get a format that alpha will be included in (hex and names ignore alpha)
             var format = currentPreferredFormat;
@@ -785,7 +799,9 @@
                 // Update the replaced elements background color (with actual selected color)
                 if (rgbaSupport || realColor.alpha === 1) {
                     previewElement.css("background-color", realRgb);
-                    dragger.css("background-color", previewElement.css("background-color")); // AG
+                    if (preferredFormat == "convert360To200") {
+                      dragger.css("background-color", previewElement.css("background-color"));
+                    }
                 }
                 else {
                     previewElement.css("background-color", "transparent");
@@ -840,9 +856,12 @@
                 //make sure helpers are visible
                 alphaSlideHelper.show();
                 slideHelper.show();
-                //AG dragHelper.show();
 
-                dragHelper.hide();
+                if (preferredFormat == "convert360To200") {
+                  dragHelper.hide();
+                } else {
+                  dragHelper.show();
+                }
 
                 // Where to show the little circle in that displays your current selected color
                 var dragX = s * dragWidth;

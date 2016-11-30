@@ -102,20 +102,42 @@ set PROFILE_6(UI_DESCRIPTION)  ""
 set PROFILE_6(UI_TEMPLATE)   $PROFILE_6(UI_DESCRIPTION)
 set PROFILE_6(UI_HINT)  6
 
+proc getWTHFirmware {} {
+  global url receiver_address dev_descr_receiver
+  array set dev_descr [xmlrpc $url getDeviceDescription $dev_descr_receiver(PARENT)]
+
+  # Firmware (wthFw) = x.y.z
+  set wthFw $dev_descr(FIRMWARE)
+  set fwMajorMinorPatch [split $wthFw .]
+
+  set fw {}
+
+  lappend fw [expr [lindex $fwMajorMinorPatch 0] * 1]
+  lappend fw [expr [lindex $fwMajorMinorPatch 1] * 1]
+  lappend fw [expr [lindex $fwMajorMinorPatch 2] * 1]
+
+  return $fw
+}
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
-  global receiver_address dev_descr_sender dev_descr_receiver
+  global url receiver_address dev_descr_sender dev_descr_receiver
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
   upvar $pps          ps      
   upvar $pps_descr    ps_descr
-  
+
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
   }
-     
+
+  set wthFw [getWTHFirmware]
+  set fwMajor [lindex $wthFw 0]
+  set fwMinor [lindex $wthFw 1]
+  set fwPatch [lindex $wthFw 2]
+
+  set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE)]
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
   
 #  die Texte der Platzhalter einlesen
@@ -131,7 +153,25 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   incr prn
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
-  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+
+  if {$fwMajor > 1} {
+    append HTML_PARAMS(separate_$prn) "\${descriptionA_1}"
+  } else {
+    if {$fwMajor == 1} {
+      if {$fwMinor > 4} {
+        append HTML_PARAMS(separate_$prn) "\${descriptionA_1}"
+      } else {
+        if {$fwMinor == 4 && $fwPatch > 1} {
+          append HTML_PARAMS(separate_$prn) "\${descriptionA_1}"
+        } else {
+          append HTML_PARAMS(separate_$prn) "\${descriptionB_1}"
+        }
+      }
+    } else {
+      append HTML_PARAMS(separate_$prn) "\${descriptionB_1}"
+    }
+  }
+
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   # *** SHORT KEYPRESS ***
@@ -141,9 +181,33 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   incr pref
+
+  for {set i 5} {$i <= 30} {incr i} {
+    set options($i) "$i°C"
+  }
+
   append HTML_PARAMS(separate_$prn) "<tr><td>\${TEMPERATURE_RC}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>[get_InputElem SHORT_TEMPERATURE_RC separate_${special_input_id}_$prn\_$pref ps SHORT_TEMPERATURE_RC ]</td>"
+  append HTML_PARAMS(separate_$prn) "<td>[get_ComboBox options SHORT_TEMPERATURE_RC separate_${special_input_id}_$prn\_$pref ps SHORT_TEMPERATURE_RC]</td>"
   append HTML_PARAMS(separate_$prn) "</tr>"
+
+
+  if {$longKeypressAvailable} {
+      # *** LONG KEYPRESS ***
+      append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+
+      # ON_TIME
+      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
+
+      incr pref
+
+      for {set i 5} {$i <= 30} {incr i} {
+        set options($i) "$i°C"
+      }
+
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${TEMPERATURE_RC}</td>"
+      append HTML_PARAMS(separate_$prn) "<td>[get_ComboBox options LONG_TEMPERATURE_RC separate_${special_input_id}_$prn\_$pref ps LONG_TEMPERATURE_RC]</td>"
+      append HTML_PARAMS(separate_$prn) "</tr>"
+  }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -161,6 +225,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+  set pref 1
+
+  for {set i 5} {$i <= 30} {incr i} {
+    set options($i) "$i°C"
+  }
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${TEMPERATURE_RC}</td>"
+  append HTML_PARAMS(separate_$prn) "<td>[get_ComboBox options SHORT_TEMPERATURE_RC|LONG_TEMPERATURE_RC separate_${special_input_id}_$prn\_$pref ps SHORT_TEMPERATURE_RC]</td>"
+  append HTML_PARAMS(separate_$prn) "</tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #4

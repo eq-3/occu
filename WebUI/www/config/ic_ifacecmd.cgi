@@ -509,8 +509,19 @@ proc cmd_SendInternalKeyPress {} {
   catch {import iface}
   catch {import sender}
   catch {import receiver}
+  catch {import longKeyPress}
+
+  set simLongKeyPress "false"
+
+  catch {
+    if {[info exists longKeyPress] == 1} {
+      if {$longKeyPress == 1} {
+        set simLongKeyPress "true"
+      }
+    }
+  }
     
-  if {[catch {xmlrpc $iface_url($iface) activateLinkParamset [list string $receiver] [list string $sender] [list bool "false"]}]} then {
+  if {[catch {xmlrpc $iface_url($iface) activateLinkParamset [list string $receiver] [list string $sender] [list bool $simLongKeyPress]}]} then {
     set error "<div class=\"CLASS20700\">\${dialogSimulateKeyPressError}</div>"
     puts "<script type=\"text/javascript\">MessageBox.show('\${dialogHint}','$error' ,'', 400, 80);</script>"
   } else {

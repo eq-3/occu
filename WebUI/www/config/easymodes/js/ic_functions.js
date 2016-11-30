@@ -365,12 +365,34 @@ BLIND_setPosition = function(id)
 
 };
 
+jalousieShowSlatInputElem = function(id, chn) {
+  var selValue = jQuery("#"+id).val(),
+    jalousieSlatPosOffElm = jQuery("#jalousieSlatPosOff_" + chn),
+    jalousieSlatPosOnElm = jQuery("#jalousieSlatPosOn_" + chn);
+
+  switch (selValue) {
+    case "1":
+        jalousieSlatPosOffElm.hide();
+        jalousieSlatPosOnElm.show();
+      break;
+    case "2":
+        jalousieSlatPosOnElm.hide();
+        jalousieSlatPosOffElm.show();
+      break;
+    case "3":
+        jalousieSlatPosOnElm.show();
+        jalousieSlatPosOffElm.show();
+      break;
+  }
+};
+
 Disable_SimKey = function(ch, prn, specialInputId) 
 {
   var arrSpecialInputId = specialInputId.split("_"),
   pref_dirty = false,
   i = 1,
   jBtnSim = $("SimKey_" + arrSpecialInputId[1] + "_" +  arrSpecialInputId[2] + "_" + prn),
+  jBtnLongSim = $("SimLongKey_" + arrSpecialInputId[1] + "_" +  arrSpecialInputId[2] + "_" + prn),
   jHintSim = $("SimKeyHint_" + arrSpecialInputId[1] + "_" +  arrSpecialInputId[2] + "_" + prn);
   
   if (jBtnSim) {
@@ -387,15 +409,19 @@ Disable_SimKey = function(ch, prn, specialInputId)
      if ( (pref_dirty == true ) || ( IsDirty($(specialInputId + '_profiles')) ) ) 
     {
       jBtnSim.disabled = true;
+      if (jBtnLongSim) jBtnLongSim.disabled = true;
       //jBtnSim.value = "Simulation nicht möglich!";
       jBtnSim.value = translateKey("simulateKeyPressBtnTxtNotPossible");
+      if (jBtnLongSim) jBtnLongSim.value = translateKey("simulateKeyPressBtnTxtNotPossible");
       jHintSim.style.display = "inline";
     } 
     else
     {
       jBtnSim.disabled = false;
+      if (jBtnLongSim) jBtnLongSim.disabled = false;
       //jBtnSim.value = "Simuliere Tastendruck";
-      jBtnSim.value = translateKey("simulateKeyPressBtnTxt");
+      jBtnSim.value = translateKey("btnSimKeyPress");
+      if (jBtnLongSim) jBtnLongSim.value = translateKey("btnSimLongKeyPress");
       jHintSim.style.display = "none";
     }
   }

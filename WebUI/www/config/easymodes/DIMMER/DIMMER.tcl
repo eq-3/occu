@@ -880,14 +880,15 @@ set PROFILE_12(UI_HINT) 12
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
-  global dev_descr_sender
+  global dev_descr_sender simulateLongKeyPress
 
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
   upvar $pps          ps      
   upvar $pps_descr    ps_descr
-  
+
+  set simulateLongKeyPress 0
   set device $dev_descr_sender(TYPE)
   set ch $dev_descr_sender(INDEX)
   

@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Wird der Schalter/Taster am Eingang bet&auml;tigt, wird der Aktor ein- bzw. ausgeschaltet.</span><br/><br/>",

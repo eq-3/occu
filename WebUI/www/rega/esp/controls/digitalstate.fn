@@ -1,0 +1,64 @@
+function ::CreateDigitalState()
+{
+
+    object oDigitalState = cObj.DPByControl("DIGITAL_STATE.STATE");
+    object oLowBat = cObj.DPByControl("BATTERIE.LOWBAT");
+    integer iDigitalState = 0;
+    string sBatState = "${stringTableBatteryOk}";
+
+    if (oDigitalState) {
+      iDigitalState = oDigitalState.Value();
+    }
+
+    if (oLowBat) {
+      if (oLowBat.Value() == true) {
+        sBatState = "${stringTableBatteryLow}";
+      }
+    }
+
+
+    WriteLine("<tr>");
+
+      WriteLine("<td><div class='ControlBtnInfo CLASS02532b' style='width:180px; height:35px;'>${lblDigitalStatus}<br/>"#iDigitalState#"</div></td>");
+
+      WriteLine("<td style='background-color:#89989b; border:1px solid #000000; color:black;'>");
+        WriteLine("<div style='text-align:center;'>");
+          Write("<span style='color:white; font-size: 17px !important;'>1</span>");
+          Write("<input id='bit71' type='radio' name='bit7' value=128 disabled='disabled'>");
+          Write("<input id='bit61' type='radio' name='bit6' value=64 disabled='disabled'>");
+          Write("<input id='bit51' type='radio' name='bit5' value=32 disabled='disabled'>");
+          Write("<input id='bit41' type='radio' name='bit4' value=16 disabled='disabled'>");
+          WriteLine("&nbsp;");
+          Write("<input id='bit31' type='radio' name='bit3' value=8 disabled='disabled'>");
+          Write("<input id='bit21' type='radio' name='bit2' value=4 disabled='disabled'>");
+          Write("<input id='bit11' type='radio' name='bit1' value=2 disabled='disabled'>");
+          Write("<input id='bit01' type='radio' name='bit0' value=1 disabled='disabled'>");
+        WriteLine("</div>");
+
+        WriteLine("<div style='text-align:center;'>");
+          Write("<span style='color:white; font-size: 17px !important;'>0</span>");
+          Write("<input id='bit70' type='radio' name='bit7' value=0 disabled='disabled'>");
+          Write("<input id='bit60' type='radio' name='bit6' value=0 disabled='disabled'>");
+          Write("<input id='bit50' type='radio' name='bit5' value=0 disabled='disabled'>");
+          Write("<input id='bit40' type='radio' name='bit4' value=0 disabled='disabled'>");
+          WriteLine("&nbsp;");
+          Write("<input id='bit30' type='radio' name='bit3' value=0 disabled='disabled'>");
+          Write("<input id='bit20' type='radio' name='bit2' value=0 disabled='disabled'>");
+          Write("<input id='bit10' type='radio' name='bit1' value=0 disabled='disabled'>");
+          Write("<input id='bit00' type='radio' name='bit0' value=0 disabled='disabled'>");
+        WriteLine("</div>");
+      WriteLine("</td>");
+    WriteLine("</tr>");
+
+    WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+    WriteLine("<tr>");
+      WriteLine("<td>");
+        WriteLine("<div class='ControlBtnInfo CLASS02532a' style='width:180px'>"#sBatState#"</div>");
+      WriteLine("</td>");
+    WriteLine("</tr>");
+
+    WriteLine("<script type='text/javascript'>");
+      WriteLine("ibw"#cObj.ID()#" = new iseDigitalState("#chnId#", "#oDigitalState.Value()#");");
+    WriteLine("</script>");
+}

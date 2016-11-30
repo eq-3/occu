@@ -7,6 +7,9 @@
 "option5" : "Boost",
 "option6" : "Toggle",
 
+"optionTemperatureOFF" : "OFF",
+"optionTemperatureON" : "ON",
+
 "SetPointTemperature" : "Temperature",
 
 "hintKeyPressIgnored" : "The heating device has been configured that it will not react to a remote control!<br/><br/>See config parameter Manu-/Party mode prioritization",

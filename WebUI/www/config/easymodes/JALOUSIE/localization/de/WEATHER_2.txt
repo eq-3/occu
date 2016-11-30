@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Ab der eingegebenen Windst&auml;rke wird die Markise / der Rollladen f&uuml;r die festgelegte Zeit hochgefahren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Ab der eingegebenen Windst&auml;rke wird dieMarkise / der Rollladen  f&uuml;r die festgelegte Zeit heruntergefahren.</span><br/><br/>",

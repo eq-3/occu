@@ -37,7 +37,15 @@ proc getUnit {param} {
   upvar psDescr descr
   array_clear param_descr
   array set param_descr $descr($param)
-  set unit $param_descr(UNIT)
+  #set unit $param_descr(UNIT)
+
+  if { [catch {set unit $param_descr(UNIT)}]} {
+    set unit "<span class=\"attention\">missing unit</span>"
+  }
+
+  if {$unit == "100%"} {
+    set unit "%"
+  }
 
   if {$unit == "minutes"} {
    set unit "\${lblMinutes}"
@@ -50,7 +58,7 @@ proc getUnit {param} {
   return "$unit"
 }
 
-proc getTextField {param value chn prn} {
+proc getTextField {param value chn prn {extraparam ""}} {
   global psDescr
   upvar psDescr descr
   array_clear param_descr
@@ -59,6 +67,7 @@ proc getTextField {param value chn prn} {
   set maxValue [format {%1.1f} $param_descr(MAX)]
 
   set elemId 'separate_CHANNEL\_$chn\_$prn'
+
   # Limit float to 2 decimal places
   if {[llength [split $value "."]] == 2} {
     set value [format {%1.2f} $value]
@@ -81,7 +90,7 @@ proc getOptionBox {param options value chn prn {extraparam ""}} {
       set select ""
      }
 
-     append s "<option value=$val $select>$optionValues($val)</option>"
+     append s "<option class=\"[extractParamFromTranslationKey $optionValues($val)]\" value=$val $select>$optionValues($val)</option>"
   }
 
   append s "</select>"
@@ -93,6 +102,25 @@ proc getCheckBox {param value chn prn {extraparam ""}} {
   set checked ""
   if { $value } then { set checked "checked=\"checked\"" }
   set s "<input id='separate_CHANNEL\_$chn\_$prn' type='checkbox' $checked value='dummy' name=$param $extraparam/>"
+  return $s
+}
+
+# This is necessary because the parameter CYCLIC_INFO_MSG is an int instead of a bool
+# Here we are mapping the int (text field 0 - 255) to a checkbox (bool)
+proc getCheckBoxCyclicInfoMsg {param value chn prn {extraparam ""}} {
+  global psDescr
+  upvar psDescr psDescr
+
+  set s  "[getCheckBox '$param' $value $chn '$prn\_tmp' "onchange=\"setCyclicInfoMsg(this, '$chn', '$prn');\""]"
+  append s  "<td class=\"hidden\">[getTextField $param $value $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append s "<script type=\"text/javascript\">"
+    append s "setCyclicInfoMsg = function(elm, chn, prn) \{"
+      append s " var value = (jQuery(elm).prop('checked')) ? 1 : 0; "
+      # don`t use jQuery - the dirty flag will not be recognized
+      append s " document.getElementById('separate_CHANNEL_' + chn + '_' + prn ).value = value; "
+    append s "\};"
+  append s "</script>"
   return $s
 }
 
@@ -123,7 +151,7 @@ proc _getParamDescrKey {param} {
   return [string trimright $_paramDescr "_"]
 }
 
-proc getTimeSelector {profileDescr p profile type prn special_input_id timebase optionValues} {
+proc getTimeSelector {paramDescr p profile type prn special_input_id timebase optionValues} {
   
   # paramDescr        Text vor der Auswahlbox
   # p                 Paramset
@@ -150,8 +178,8 @@ proc getTimeSelector {profileDescr p profile type prn special_input_id timebase 
 
   incr pref
   append html "<tr>"
-  append html "<td>\${$profileDescr}</td>"
-  append html [getComboBox $prn $pref $special_input_id $type]
+  append html "<td>\${$paramDescr}</td>"
+  append html [getComboBox $prn $pref $special_input_id $type] ;# hmip_helper
   append html "</tr>"
 
   append html "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\"><td>\${$paramBaseDescr}</td><td>"
@@ -182,6 +210,22 @@ proc getTimeSelector {profileDescr p profile type prn special_input_id timebase 
         # setCurrentRampOption
         append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
       }
+
+      switchingInterval {
+        # setCurrentSwitchingIntervalOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+
+      switchingIntervalOnTime {
+        # setCurrentSwitchingIntervalOnTimeOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOnTimeOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+
+      delay0To20M_step2M {
+        # setDelay0to20M_step2MOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+      }
+
     }
   } else {
     switch $type {
@@ -205,6 +249,19 @@ proc getTimeSelector {profileDescr p profile type prn special_input_id timebase 
         # setCurrentRampOption
         append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
       }
+
+      switchingInterval {
+        # setCurrentSwitchingIntervalOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+      }
+
+      delay0To20M_step2M {
+        # setCurrentSwitchingIntervalOnTimeOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+      }
+
+
+
     }
   }
   incr pref

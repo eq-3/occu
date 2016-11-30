@@ -1,3 +1,6 @@
 "description_1" : "<span class=\"translated\">In case of rain the light will be switched on to the defined brightness value, in case of dry conditions it will be switched off. This function can be reversed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">In case of rain the switch will be switched on for the set time. </span><br/><br/>",
+"description_3" : "<span class=\"translated\">In case of rain the switch will be switched off for the set time. </span><br/><br/>",
+
 "subset_1" : "Dry - on / Rain - off",
 "subset_2" : "Dry - off / Rain - on",

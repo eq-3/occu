@@ -17,6 +17,9 @@
 "DOWN_TIME" : "<span class=\"translated\">Duration for status &quot;down&quot;</span>",
 "DRIVING_MODE" : "<span class=\"translated\">Type of reference movement</span>",
 "GET_CURRENT_BRIGHTNESS" : "<span class=\"translated\">Apply current brightness</span>",
+"JALOUSIE_SLAT_POS" : "<span class=\"translated\">Slat position</span>",
+"JALOUSIE_SLAT_POS_OFF" : "<span class=\"translated\">Slat position when in position down</span>",
+"JALOUSIE_SLAT_POS_ON" : "<span class=\"translated\">Slat position when in position up</span>",
 "JUMPTARGET" : "<span class=\"translated\">Target position</span>",
 "MAXIMAL_FILLLEVEL" : "<span class=\"translated\">Maximum fill level</span>",
 "MINIMAL_FILLLEVEL" : "<span class=\"translated\">Minimum fill level</span>",
@@ -63,5 +66,8 @@
 "RAMPOFF_TIME_FACTOR" : "<span class=\"translated\">Value ramp time</span>",
 "RAMPOFF_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-off ramp time</span>",
 
+"SWITCHING_INTERVAL_BASE" : "*Unit of interval",
+"SWITCHING_INTERVAL_FACTOR" : "Value of interval",
+"SWITCHING_INTERVAL_FACTOR_DESCR" : "Interval of pump protection function",
 
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperature</span>",

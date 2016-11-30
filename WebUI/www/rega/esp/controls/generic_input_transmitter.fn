@@ -1,0 +1,35 @@
+function ::CreateGenericInputTransmitter() {
+
+  object objState = cObj.DPByControl("GENERIC_INPUT_TRANSMITTER.STATE");
+  object objChangeOver = cObj.DPByControl("GENERIC_INPUT_TRANSMITTER.CHANGE_OVER");
+  object objExternalClock = cObj.DPByControl("GENERIC_INPUT_TRANSMITTER.EXTERNAL_CLOCK");
+  object objHumidityLimiter = cObj.DPByControl("GENERIC_INPUT_TRANSMITTER.HUMIDITY_LIMITER");
+  object objTactileSwitch = cObj.DPByControl("GENERIC_INPUT_TRANSMITTER.TACTILE_SWITCH");
+  object objTemperatureLimiter = cObj.DPByControl("GENERIC_INPUT_TRANSMITTER.TEMPERATURE_LIMITER");
+
+  string modeState = "${unknown}";
+  string channelMode = "${unknown}";
+  string showState = true;
+
+  if (objState.Value() == false) {modeState = "${stringTableSwitchStateFalse}";}
+  if (objState.Value() == true) {modeState = "${stringTableSwitchStateTrue}";}
+
+  if (objChangeOver.Value() == true) {channelMode = "${channelModeChangeOver}";}
+  if (objExternalClock.Value() == true) {channelMode = "${channelModeExternalClock}";}
+  if (objHumidityLimiter.Value() == true) {channelMode = "${channelModeHumidityLimiter}";}
+  if (objTactileSwitch.Value() == true) {channelMode = "${channelModeTactileSwitch}";showState = false;}
+  if (objTemperatureLimiter.Value() == true) {channelMode = "${channelModeTemperatureLimiter}";}
+
+  WriteLine("<tr>");
+
+    WriteLine("<td>");
+      WriteLine("<div class='ControlBtnInfo CLASS02532a' style='text-align:center; height:30px;'>${stringTableMiobDinConfig}:<br/>"#channelMode#"</div>");
+    WriteLine("</td>");
+
+    if (showState == true) {
+      WriteLine("<td>");
+        WriteLine("<div class='ControlBtnInfo CLASS02532a' style='text-align:center; height:30px;'>"#modeState#"</div>");
+      WriteLine("</td>");
+    }
+  WriteLine("</tr>");
+}

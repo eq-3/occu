@@ -57,6 +57,9 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
       Write("Group["#gE#"]['transOp'] = '"#chn.ChnAESOperation()#"';");
       Write("Group["#gE#"]['trans'] = ("#chn.ChnAESActive()#" ? '${lblSecured}' : '${lblStandard}' );");
       Write("Group["#gE#"]['name'] = '"#chn.Name()#"';");
+
+      Write("console.dir(Group);");
+
       string functions = "";
       string funcTmp = "";
       foreach(funcTmp, chn.ChnFunction()) {
@@ -278,7 +281,7 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
       Element.addClassName(td, "CLASS04402");
       tr.appendChild(td);
       
-      td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(strCut(DEV_getDescription(deviceData['type']))) ); tr.appendChild(td);
+      td = Builder.node('td', {className: 'GrayBkg border1px'}, translateKey(DEV_getDescription(deviceData['type'])) ); tr.appendChild(td);
       td = Builder.node('td', {className: 'GrayBkg border1px'}, strCut(GroupsArray[i][0]['sn'] + " " + GroupsArray[i][1]['sn'])); tr.appendChild(td);
       var sIface = (GroupsArray[i][0]['iface'] != GroupsArray[i][1]['iface'] ? GroupsArray[i][0]['iface'] + " " +  GroupsArray[i][1]['iface'] : GroupsArray[i][0]['iface']);
       td = Builder.node('td', {className: 'GrayBkg border1px'}, sIface); tr.appendChild(td);

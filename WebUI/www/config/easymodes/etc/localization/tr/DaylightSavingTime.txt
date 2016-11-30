@@ -1,22 +1,22 @@
 jQuery.extend(true,langJSON, {
   "tr" : {
-    "DSTStartHeader" : "<b>tr Beginn der Sommerzeit</b>",
-    "DSTEndHeader" : "<b>tr Ende der Sommerzeit</b>",
-    "stringTableDSTStartDayOfWeek" : "tr Wochentag",
-    "stringTableDSTStartMonth" : "tr Monat",
-    "stringTableDSTStartWeekOfMonth" : "tr Woche",
-    "stringTableDSTStartTime" : "tr Uhrzeit",
-    "stringTableDSTEndDayOfWeek" : "tr Wochentag",
-    "stringTableDSTEndMonth" : "tr Monat",
-    "stringTableDSTStartWeekOfMonth" : "tr Woche",
-    "stringTableDSTEndTime" : "tr Uhrzeit",
-    "stringTableUtcDSTOffset" : "tr UTC DST Offset",
-    "stringTableUtcOffset" : "tr UTC Offset",
-    "stringTableSwitchDSTAutomatically" : "tr Automatisches Umstellen von Sommer- auf Winterzeit",
-    "firstWeek" : "tr 1. Woche",
-    "secondWeek" : "tr 2. Woche",
-    "thirdWeek" : "tr 3. Woche",
-    "forthWeek" : "tr 4. Woche",
-    "lastWeek" : "tr letzte Woche"
+    "DSTStartHeader" : "<b>Beginning of summer time</b>",
+    "DSTEndHeader" : "<b>End of summer time</b>",
+    "DSTStartDayOfWeek" : "Weekday",
+    "DSTStartMonth" : "Month",
+    "DSTStartWeekOfMonth" : "Week",
+    "DSTStartTime" : "Time",
+    "DSTEndDayOfWeek" : "Weekday",
+    "DSTEndMonth" : "Month",
+    "DSTEndTime" : "Time",
+    "UtcDSTOffset" : "UTC DST offset",
+    "UtcOffset" : "UTC offset",
+    "DSTSwitchAutomatically" : "Automatic changeover from summer time to winter time",
+    "firstWeek" : "1st week",
+    "secondWeek" : "2nd week",
+    "thirdWeek" : "3rd week",
+    "forthWeek" : "4th week",
+    "lastWeek" : "last week"
   }
 });
+

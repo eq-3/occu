@@ -1,0 +1,13 @@
+"description_1" : "<span class=\"translated\">Der Dimmer wird abh&auml;ngig vom Eingangswert des Sensors und der gew&auml;hlten Schaltrichtung ein- oder ausgeschaltet.</span><br/><br/>",
+
+"threshold" : "Schwellwert",
+"thresholdON" : "Schwellwert A",
+"thresholdOFF" : "Schwellwert B",
+
+"_subset_1" : "Eingangswert >= Schwellwert A AUS / Eingangswert < Schwellwert B - EIN",
+"_subset_2" : "Eingangswert >= Schwellwert A EIN / Eingangswert < Schwellwert B - AUS",
+
+"subset_1" : "Eingangswert >= Schwellwert AUS / Eingangswert < Schwellwert - EIN",
+"subset_2" : "Eingangswert >= Schwellwert EIN / Eingangswert < Schwellwert - AUS",
+
+"SWITCH_DIRECTION" : "Schaltrichtung",

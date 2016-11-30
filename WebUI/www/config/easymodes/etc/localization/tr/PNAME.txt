@@ -17,6 +17,9 @@
 "DOWN_TIME" : "<span class=\"translated\">&quot;Asagi&quot; durumunda bekleme s&uuml;resi</span>",
 "DRIVING_MODE" : "<span class=\"translated\">Referans s&uuml;r&uuml;s varyasyonu</span>",
 "GET_CURRENT_BRIGHTNESS" : "<span class=\"translated\">G&uuml;ncel aydinlik derecesini al</span>",
+"JALOUSIE_SLAT_POS" : "<span class=\"translated\">Slat position</span>",
+"JALOUSIE_SLAT_POS_OFF" : "<span class=\"translated\">Slat position when in position down</span>",
+"JALOUSIE_SLAT_POS_ON" : "<span class=\"translated\">Slat position when in position up</span>",
 "JUMPTARGET" : "<span class=\"translated\">Hedef pozisyon</span>",
 "MAXIMAL_FILLLEVEL" : "<span class=\"translated\">Maksimum dolum seviyesi</span>",
 "MINIMAL_FILLLEVEL" : "<span class=\"translated\">Minimum dolum seviyesi</span>",
@@ -64,6 +67,11 @@
 "RAMPOFF_TIME_BASE": "<span class=\"translated\">Unit ramp time</span>",
 "RAMPOFF_TIME_FACTOR" : "<span class=\"translated\">Value ramp time</span>",
 "RAMPOFF_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-off ramp time</span>",
+
+"SWITCHING_INTERVAL_BASE" : "*Unit of interval",
+"SWITCHING_INTERVAL_FACTOR" : "Value of interval",
+"SWITCHING_INTERVAL_FACTOR_DESCR" : "Interval of pump protection function",
+
 
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperature</span>",
 

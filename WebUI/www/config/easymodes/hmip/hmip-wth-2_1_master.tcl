@@ -1,22 +1,15 @@
 #!/bin/tclsh
 
-#Kanal-EasyMode!
-
-#source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join /www/config/easymodes/em_common.tcl]
 
-#Namen der EasyModes tauchen nicht mehr auf. Der Durchg�ngkeit werden sie hier noch definiert.
-set PROFILES_MAP(0)  "Experte"
-set PROFILES_MAP(1)  "TheOneAndOnlyEasyMode"
-
-proc getCheckBox {type param value prn} {
+proc _getCheckBox {type param value prn} {
   set checked ""
   if { $value } then { set checked "checked=\"checked\"" }
   set s "<input id='separate_$type\_$prn' type='checkbox' $checked value='dummy' name=$param/>"
   return $s
 }
 
-proc getMinValue {param} {
+proc _getMinValue {param} {
   global psDescr
   upvar psDescr descr
   array_clear param_descr
@@ -25,7 +18,7 @@ proc getMinValue {param} {
   return "$min"
 }
 
-proc getMaxValue {param} {
+proc _getMaxValue {param} {
   global psDescr
   upvar psDescr descr
   array_clear param_descr
@@ -34,7 +27,7 @@ proc getMaxValue {param} {
   return "$max"
 }
 
-proc getTextField {type param value prn} {
+proc _getTextField {type param value prn} {
   set elemId 'separate_$type\_$prn'
   # Limit float to 2 decimal places
   if {[llength [split $value "."]] == 2} {
@@ -45,7 +38,7 @@ proc getTextField {type param value prn} {
   return $s
 }
 
-proc getUnit {param} {
+proc _getUnit {param} {
   global psDescr
   upvar psDescr descr
   array_clear param_descr
@@ -56,7 +49,6 @@ proc getUnit {param} {
    set unit "\${lblMinutes}"
   }
 
-  # TODO ??C and °C
   if {($unit == "K") || ($unit == "??C") || ($unit == "°C")} {
     set unit "&#176;C"
   }
@@ -64,7 +56,7 @@ proc getUnit {param} {
   return "$unit"
 }
 
-proc getMinMaxValueDescr {param} {
+proc _getMinMaxValueDescr {param} {
   global psDescr
   upvar psDescr descr
   array_clear param_descr
@@ -80,7 +72,7 @@ proc getMinMaxValueDescr {param} {
   return "($min - $max)"
 }
 
-proc getHelpIcon {topic x y} {
+proc _getHelpIcon {topic x y} {
   set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
   return $ret
 }
@@ -136,7 +128,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     # left
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">\${stringTableWeekProgramToEdit}</td>"
-      #append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param "onchange=\"ShowActiveWeeklyProgram(parseInt(\$(this).value)+1);\""][getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]</td>"
+      #append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param "onchange=\"ShowActiveWeeklyProgram(parseInt(\$(this).value)+1);\""][_getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]</td>"
       append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">"
         append HTML_PARAMS(separate_1) "<select id=\"editProgram\" onchange=\"ShowActiveWeeklyProgram(parseInt(\$(this).value)+1);\">"
           append HTML_PARAMS(separate_1) "<option value='0'>\${stringTableWeekProgram1}</option>"
@@ -145,12 +137,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
           append HTML_PARAMS(separate_1) "<option value='3'>\${stringTableWeekProgram4}</option>"
           append HTML_PARAMS(separate_1) "<option value='4'>\${stringTableWeekProgram5}</option>"
           append HTML_PARAMS(separate_1) "<option value='5'>\${stringTableWeekProgram6}</option>"
-      append HTML_PARAMS(separate_1) "</select>[getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]"
+      append HTML_PARAMS(separate_1) "</select>[_getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]"
       append HTML_PARAMS(separate_1) "</td>"
     append HTML_PARAMS(separate_1) "</tr>"
   append HTML_PARAMS(separate_1) "</table>"
 
-  ## Create 5 Weekly Programs ##
+  ## Create 6 Weekly Programs ##
 
   for {set loop 1} {$loop <=6} {incr loop} {
     set pNr "P$loop";
@@ -215,7 +207,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr>"
     append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableButtonResponseWithoutBacklight}</td>"
     append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">"
-    append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn]"
+    append HTML_PARAMS(separate_1) "[_getCheckBox $CHANNEL '$param' $ps($param) $prn]"
     append HTML_PARAMS(separate_1) "</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
@@ -225,42 +217,40 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
-  set comment {
+    set param TEMPERATURE_LOWERING_COOLING
+    if { ! [catch {set tmp $ps($param)}]  } {
+      # left
+      incr prn
+      append HTML_PARAMS(separate_1) "<tr><td>\${ecoCoolingTemperature}</td>"
+      append HTML_PARAMS(separate_1)  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
+      append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
+        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+      append HTML_PARAMS(separate_1) "</script>"
 
-    # The parameter TEMPERATURE_COMFORT and TEMPERATURE_LOWERING are not in use with the HmIP WTH
-    # They are available for historical reasons but cannot be used. So we don't show them.
-    # left
-    incr prn
-    set param TEMPERATURE_COMFORT
-    append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureComfort}</td>"
-    append HTML_PARAMS(separate_1)  "<td>[getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
-    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
-    append HTML_PARAMS(separate_1) "</script>"
+      # right
+      incr prn
+      set param TEMPERATURE_LOWERING
+      append HTML_PARAMS(separate_1) "<td>\${ecoHeatingTemperature}</td>"
+      append HTML_PARAMS(separate_1)  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"ecoOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
+      append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
+        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+      append HTML_PARAMS(separate_1) "</script>"
+      append HTML_PARAMS(separate_1) "</tr>"
 
-    # right
-    incr prn
-    set param TEMPERATURE_LOWERING
-    append HTML_PARAMS(separate_1) "<td>\${stringTableTemperatureLowering}</td>"
-    append HTML_PARAMS(separate_1)  "<td>[getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]<input id=\"ecoOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
-    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
-    append HTML_PARAMS(separate_1) "</script>"
-    append HTML_PARAMS(separate_1) "</tr>"
+      append HTML_PARAMS(separate_1) "<tr id=\"errorRow\" class=\"hidden\"> <td></td> <td colspan=\"2\"><span id=\"errorComfort\" class=\"attention\"></span></td> <td colspan=\"2\"><span id=\"errorEco\" class=\"attention\"></span></td> </tr>"
+    }
 
-    append HTML_PARAMS(separate_1) "<tr id=\"errorRow\" class=\"hidden\"> <td></td> <td colspan=\"2\"><span id=\"errorComfort\" class=\"attention\"></span></td> <td colspan=\"2\"><span id=\"errorEco\" class=\"attention\"></span></td> </tr>"
-  }
     # left
     incr prn
     set param TEMPERATURE_MINIMUM
     array_clear options
     set i 0
-    for {set val [getMinValue $param]} {$val <= [getMaxValue $param]} {set val [expr $val + 0.5]} {
+    for {set val [_getMinValue $param]} {$val <= [_getMaxValue $param]} {set val [expr $val + 0.5]} {
       set options($i) "$val &#176;C"
       incr i;
     }
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureMinimum}</td>"
-    append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
+    append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
     append HTML_PARAMS(separate_1) "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
     append HTML_PARAMS(separate_1) "</script>"
@@ -270,12 +260,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set param TEMPERATURE_MAXIMUM
     array_clear options
     set i 0
-    for {set val [getMinValue $param]} {$val <= [getMaxValue $param]} {set val [expr $val + 0.5]} {
+    for {set val [_getMinValue $param]} {$val <= [_getMaxValue $param]} {set val [expr $val + 0.5]} {
       set options($i) "$val &#176;C"
       incr i;
     }
     append HTML_PARAMS(separate_1) "<td>\${stringTableTemperatureMaximum}</td>"
-    append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
+    append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "</tr>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
     append HTML_PARAMS(separate_1) "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
@@ -289,7 +279,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableMinMaxNotRelevantForManuMode}</td>"
       append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">"
-      append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn]"
+      append HTML_PARAMS(separate_1) "[_getCheckBox $CHANNEL '$param' $ps($param) $prn]"
       append HTML_PARAMS(separate_1) "</td>"
       append HTML_PARAMS(separate_1) "</tr>"
     }
@@ -309,16 +299,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr i;
     }
     append HTML_PARAMS(separate_1) "<td>\${stringTableTemperatureOffset}</td>"
-    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][_getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
     #left
     incr prn
     set param TEMPERATURE_WINDOW_OPEN
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
-    append HTML_PARAMS(separate_1)  "<td>[getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
+    append HTML_PARAMS(separate_1)  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1);isEcoLTComfort(this.name);});"
     append HTML_PARAMS(separate_1) "</script>"
     append HTML_PARAMS(separate_1) "</tr>"
   append HTML_PARAMS(separate_1) "</table>"
@@ -336,7 +326,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr i;
     }
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableBoostTimePeriod}</td>"
-    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][_getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append HTML_PARAMS(separate_1) "</td>"
 
   set comment {
@@ -350,7 +340,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr i;
     }
     append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableBoostPosition}</td>"
-    append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][_getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append HTML_PARAMS(separate_1) "</td>"
   }
     append HTML_PARAMS(separate_1) "</tr>"

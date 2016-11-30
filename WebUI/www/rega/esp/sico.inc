@@ -1,11 +1,15 @@
 <%
   string excludeParty = "PARTY_";
-  string includeParty = "PARTY_MODE";
+  string includePartyMode = "PARTY_MODE";
   string excludeHmIPSection =  "SECTION";
   string excludeHmIPProcess =  "PROCESS";
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
   string excludeHmIPValveState =  "VALVE_STATE";
   string excludeHmIPSmokeDetTestResultNone = "SMOKE_DETECTOR_TEST_RESULT=NONE";
+
+  string excludeHmIPRSSI_DEVICE = "RSSI_DEVICE";
+  string excludeHmIPRSSI_PEER = "RSSI_PEER";
+
 
   integer iLV = oSC.LeftVal();
   integer iLVT = oSC.LeftValType();
@@ -184,7 +188,14 @@
                 else
                 {
                   ! Some parameter shouldn´t be visible
-                  if( ((oDP.HSSID().Find(excludeParty) == -1) || (oDP.HSSID().Find(includeParty) != -1)) && (oDP.HSSID().Find(excludeHmIPSection) == -1) && (oDP.HSSID().Find(excludeHmIPCDT) == -1)) {
+                  if(
+                    ((oDP.HSSID().Find(excludeParty) == -1) || (oDP.HSSID().Find(includePartyMode) != -1))
+                    && (oDP.HSSID().Find(excludeHmIPSection) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPCDT) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPRSSI_DEVICE) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPRSSI_PEER) == -1)
+                   ) {
+
                     if( oDP.ID() == iLV ) { sSelected = " selected"; } else { sSelected = ""; }
                     Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
                     string sValue = oDP.Name();

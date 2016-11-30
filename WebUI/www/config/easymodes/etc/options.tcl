@@ -6,6 +6,7 @@ proc option {type} {
   upvar #0 unit_hour h
   upvar #0 unit_min m
   upvar #0 unit_sec s
+  upvar #0 unit_day d
   upvar #0 unit_perc p
   upvar #0 free_value Wert
   upvar options options
@@ -13,6 +14,36 @@ proc option {type} {
   
   
   switch $type {
+
+    "TIMEBASE_SHORT" {
+        set options(0)    "100mS"
+        set options(1)    "$s"
+        set options(2)    "$m"
+        set options(3)    "$h"
+
+    }
+
+    "TIMEBASE_LONG" {
+      set options(0) "100mS"
+      set options(1) "1$s"
+      set options(2) "5$s"
+      set options(3) "10$s"
+      set options(4) "1$m"
+      set options(5) "5$m"
+      set options(6) "10$m"
+      set options(7) "1$h"
+     }
+
+    "TIMEBASE_LONG_WITH_DAY" {
+      set options(0) "1$s"
+      set options(1) "5$s"
+      set options(2) "10$s"
+      set options(3) "1$m"
+      set options(4) "5$m"
+      set options(5) "10$m"
+      set options(6) "1$h"
+      set options(7) "1$d"
+     }
 
     "DELAY" {
         set options(0)    "\${none}"
@@ -215,24 +246,29 @@ proc option {type} {
       set options(2) "\${currentDetectionInactiveValueOutput1}"; #because not in use not yet translated
     }
 
-    "TIMEBASE_SHORT" {
-        set options(0)    "100mS"
-        set options(1)    "$s"
-        set options(2)    "$m"
-        set options(3)    "$h"
-
+    "HEATING_LOAD_TYPE" {
+     set options(0) "\${optionLoadBalancing}"
+     set options(1) "\${optionLoadCollection}"
     }
 
-    "TIMEBASE_LONG" {
-      set options(0) "100mS"
-      set options(1) "1$s"
-      set options(2) "5$s"
-      set options(3) "10$s"
-      set options(4) "1$m"
-      set options(5) "5$m"
-      set options(6) "10$m"
-      set options(7) "1$h"
-     }
+    "HEATING_PUMP_CONTROL" {
+     set options(0) "\${optionLocalPumpControl}"
+     set options(1) "\${optionGlobalPumpControl}"
+    }
+
+    "HEATING_VALVE_TYPE" {
+     set options(0) "\${optionNormallyClose}"
+     set options(1) "\${optionNormallyOpen}"
+    }
+
+    "MIOB_DIN_CONFIG" {
+      set options(0) "\${channelModeChangeOver}"
+      set options(1) "\${channelModeTemperatureLimiter}"
+      set options(2) "\${channelModeExternalClock}"
+      set options(3) "\${channelModeHumidityLimiter}"
+      set options(4) "\${channelModeTactileSwitch}"
+    }
+
   }
 }
 

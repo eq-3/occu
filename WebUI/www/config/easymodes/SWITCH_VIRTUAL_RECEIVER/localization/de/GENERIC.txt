@@ -2,3 +2,8 @@
 "switch_on" : "Schalter ein",
 "switch_on_off" : "Schalter ein / aus",
 "switch_toggle" : "Schalter toggle",
+
+"actor_off" : "Aktor aus",
+"actor_on" : "Aktor ein",
+"actor_on_off" : "Aktor ein / aus",
+"actor_toggle" : "Aktor toggle",

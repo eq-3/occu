@@ -8,7 +8,6 @@ jQuery.extend(true,langJSON, {
     "DSTStartTime" : "Uhrzeit",
     "DSTEndDayOfWeek" : "Wochentag",
     "DSTEndMonth" : "Monat",
-    "DSTStartWeekOfMonth" : "Woche",
     "DSTEndTime" : "Uhrzeit",
     "UtcDSTOffset" : "UTC DST Offset",
     "UtcOffset" : "UTC Offset",

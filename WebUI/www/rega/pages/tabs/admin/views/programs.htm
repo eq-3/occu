@@ -210,6 +210,89 @@
       });
     };
 
+
+  Set_VIR_LG_RGBWController = function(regaDialogID, param) {
+      var elm = jQuery("#setRGBWController" + regaDialogID), // this is the notepad symbol
+      url = "/pages/msg/setVIR_LG_RGBWController.htm";
+      jQuery(elm).prop("disabled", true);
+      var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+
+      var req = jQuery.ajax({
+        url : url +"?sid=" + SessionId,
+        dataType: "html"
+      });
+      req.done(function(htmlContent) {
+        var vir_lg_rgbwControllerDialog = new VIR_LG_RGBWControllerDialog(translateKey("titleRGBWControllerDialogTitle"), htmlContent, param, jQuery(inputElm).val(), function(result) {
+          jQuery(elm).prop("disabled", false);
+          if (result == 1) {
+            conInfo("Set_VIR_LG_RGBWController: Yes pressed");
+            var inputElm = jQuery(elm).prev();
+            var cfgString = this.getConfigString();
+            conInfo(cfgString);
+            inputElm.val(cfgString);
+            inputElm.change();
+          }
+        }, "html");
+      });
+    };
+
+  Set_VIR_LG_WHITEController = function(regaDialogID, minVal, maxVal, curVal) {
+      var elm = jQuery("#setWhiteController" + regaDialogID), // this is the notepad symbol
+      url = "/pages/msg/setVIR_LG_WHITEController.htm";
+      jQuery(elm).prop("disabled", true);
+      var inputElm = jQuery("#prgStringOptionValue"  + regaDialogID); // this is the element which contains the relevant string to transmit
+
+      var args = {};
+      args.minVal = minVal;
+      args.maxVal = maxVal;
+      args.curVal = curVal;
+
+      var req = jQuery.ajax({
+        url : url +"?sid=" + SessionId,
+        dataType: "html"
+      });
+      req.done(function(htmlContent) {
+        var vir_lg_whiteControllerDialog = new VIR_LG_WHITEControllerDialog(translateKey("titleRGBWControllerDialogTitle"), htmlContent, args, function(result) {
+          jQuery(elm).prop("disabled", false);
+          if (result == VIR_LG_WHITEControllerDialog.RESULT_YES) {
+            conInfo("Set_VIR_LG_RGBWHITEController: Yes pressed");
+            var value = this.getValue();
+            conInfo("Color temperature (white level): " + value);
+            inputElm.val(value);
+            inputElm.change();
+          }
+        }, "html");
+      });
+    };
+
+  SetJalousieActor = function(regaDialogID, param) {
+    var elm = jQuery("#setJalousieActor" + regaDialogID), // this is the element which contains the relevant string to transmit
+    url = "/pages/msg/setJalousieActor.htm";
+    jQuery(elm).prop("disabled", true);
+    var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+
+      var jalousieActorDialog = new JalousieActorConvertHexValDialog(translateKey("titleConfigDialog"), htmlContent, jQuery(inputElm).val(), function(result) {
+        jQuery(elm).prop("disabled", false);
+        if (result == 1) {
+          conInfo("jalousieActorDialog: Yes pressed");
+          var inputElm = jQuery(elm).prev();
+          var cfgString = this.getConfigString();
+          conInfo(cfgString);
+          inputElm.val(cfgString); //.change();
+          inputElm.change();
+        }
+      }, "html");
+
+    });
+  };
+
   ChangeDelayUnit = function( sdid )
   {
     SetDelay( sdid, $F("delay"+sdid) );

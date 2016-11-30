@@ -1,2082 +1,55 @@
-CHANNELCHOOSER_JST = "{macro printHead(name, id, transKey)}\n  {if id != sortId}\n    <th class=\"ChannelChooserHead clickable\" name=${transKey} onclick=\"ChannelChooser.sortBy(\'${id}\');\">${name}<\/th>\n  {else}\n    <th class=\"ChannelChooserHead_Active clickable\" name=${transKey} onclick=\"ChannelChooser.sortBy(\'${id}\');\">\n      ${name}&#160;\n      {if sortDescend}\n        <img src=\"\/ise\/img\/arrow_down.gif\" \/>\n      {else}\n        <img src=\"\/ise\/img\/arrow_up.gif\" \/>\n      {\/if}\n    <\/th>\n  {\/if}\n{\/macro}\n<div id=\"ChannelChooserDialog\">\n<div id=\"ChannelChooserTitle\" name=\"dialogChooseChannel\" onmousedown=\"new Drag($(\'ChannelChooserDialog\'), event);\">Kanalauswahl<\/div>\n<div id=\"ChannelChooserContent\">\n  <table id=\"ChannelChooserTable\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n    <colgroup>\n      <col width=\"20%\" \/>\n      <col width=\"55px\" \/>\n      <col width=\"30%\" \/>\n      <col width=\"12%\" \/>\n      <col width=\"17%\" \/>\n      <col width=\"17%\" \/>\n    <\/colgroup>\n    <thead>\n      <tr> <!-- Überschriften -->\n        ${printHead(\"Name\", \"NAME\", \"thName\")}\n        <th class=\"ChannelChooserHead\" name=\"thPicture\">Bild<\/th>\n        ${printHead(\"Beschreibung\", \"DESCRIPTION\", \"thDescription\")}\n        ${printHead(\"Seriennummer\", \"ADDRESS\", \"thSerialNumber\")}\n        ${printHead(\"Gewerke\", \"FUNC_NAMES\", \"thFuncs\")}\n        ${printHead(\"R&auml;ume\", \"ROOM_NAMES\", \"thRooms\")}\n      <\/tr>\n      <tr> <!-- Filter -->\n        ${nameFilter.getHTML()}\n        <th class=\"Filter\">&nbsp;<\/th>\n        ${descriptionFilter.getHTML()}\n        ${addressFilter.getHTML()}\n        ${funcFilter.getHTML()}\n        ${roomFilter.getHTML()}\n      <\/tr>      \n    <\/thead>\n    <tbody>\n      {for channel in channels}\n        {if channel.channelType == \"VIRTUAL_DIMMER\"} {var virtualChannel = \"hidden j_expertChannel\"} {else} {var virtualChannel = \"\"} {\/if}\n        {if channel.channelType != \"_MAINTENANCE\"}\n            <tr class=\"ChannelChooserRow ${virtualChannel}\" id=\"${PREFIX}${channel.id}\" onclick=\"ChannelChooser.select(this.id);\" onmouseover=\"this.className=\'ChannelChooserRow_Highlight\';\" onmouseout=\"this.className=\'ChannelChooserRow\';\">\n              <td class=\"ChannelChooserCell\">${channel.name}<br\/><br\/><span class=\"j_extChnDescr\">${channel.typeDescription}_${channel.address}<\/span><\/td>\n              <td class=\"ChannelChooserThumbnail\"><div class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n              <td class=\"ChannelChooserCell\">${channel.typeDescription}<br\/>${channel.device.name}<\/td>\n              <td class=\"ChannelChooserCell\">${channel.address}<\/td>\n              <td class=\"ChannelChooserCell j_functions\">\n                {for subsection in channel.subsections}\n                  ${subsection.name}<br \/>\n                {forelse}\n                  &#160;\n                {\/for}\n              <\/td>\n              <td class=\"ChannelChooserCell j_rooms\">\n                {for room in channel.rooms}\n                  ${room.name}<br \/>\n                {forelse}\n                  &#160;\n                {\/for}\n              <\/td>\n            <\/tr>\n           {forelse}\n            <tr class=\"ChannelChooserRow\">\n              <td colspan=\"10\" class=\"ChannelChooserCell\" name=\"\"lblNoChannelsAvailable>Keine Kan&auml;le verf&uuml;gbar<\/td>\n            <\/tr>\n        {\/if}\n      {\/for}\n    <\/tbody>\n  <\/table>\n<\/div>\n<div id=\"ChannelChooserFooter\">\n  <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserAbortButton\" name=\"footerBtnCancel\" onclick=\"ChannelChooser.abort();\">Abbrechen<\/div>\n  <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserResetFiltersButton\" name=\"footerBtnResetFilterWOLineBreak\" onclick=\"ChannelChooser.resetFilters();\">Filter zur&uuml;cksetzen<\/div>\n  {if false === showVirtual}\n    <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsShow\" onclick=\"ChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le anzeigen<\/div>\n  {else}\n    <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsHide\" onclick=\"ChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le ausblenden<\/div>\n  {\/if}\n<\/div>\n<\/div>\n";
-CHANNEL_CONFIG_DIALOG_JST = "<div id=\"ChannelConfigDialog\">\n<div id=\"ChannelConfigDialogTitle\" onmousedown=\"new Drag($(\'ChannelConfigDialog\'), event);\"><span name=\"generalChannelConfigTitle\">Allgemeine Kanaleinstellungen:<\/span> ${channel.address}<\/div>\n<div id=\"ChannelConfigDialogContent\">\n\n  <div id=\"ChannelConfigDialogContentLeft\">\n    <div  class=\"ChannelConfigDialogSection\">\n      <div class=\"CLASS11000\">\n        <div class=\"CLASS11001\">${channel.imageHTML}<\/div>\n      <\/div>\n      <div class=\"CLASS11002\">${channel.typeName}<\/div>\n    <\/div>\n    \n    {if channel.supportsComTest()}\n    <div id=\"channelFunctionTestPanel\" class=\"ChannelConfigDialogSection\">\n      <div class=\"CLASS11003\" name=\"generalDeviceChannelConfigLblFuncTest\">Funktionstest<\/div>\n      <hr \/>\n      <div>\n        <table border=\"0\"  class=\"ChannelConfigDialogTable\" width=\"250px\">\n          <tr>\n            <td width=\"50%\"><div id=\"ChannelConfigDialogTestButton\" class=\"StdButton\" name=\"generalDeviceChannelConfigBtnFuncTest\" onclick=\"ChannelConfigDialog.startTest();\">Test starten<\/div><\/td>\n            <td width=\"50%\"><div id=\"ChannelConfigDialogTestResult\">--:--:--<\/div><\/td>\n          <\/tr>\n        <\/table>\n        <div class=\"CLASS11004\">\n          <p name=\"generalChannelConfigHint\">\n            Im Rahmen des Funktionstests wird gepr&uuml;ft, ob die Kommunikation mit dem Kanal fehlerfrei funktioniert.\n          <\/p>\n          {if channel.category == Channel.CATEGORY.SENDER}<p name=\"generalChannelConfigHintSender\">Bei Sensoren wartet die HomeMatic Zentrale, bis diese sich melden. Eine Fernbedienung meldet sich z.B. erst dann, wenn sie manuell betätigt wird.<\/p>{\/if}\n          {if channel.category == Channel.CATEGORY.RECEIVER}<p name=\"generalChannelConfigHintReceiver\">Bei Aktoren wird dazu in der Regel ein Schaltbefehl ausgelöst.<\/p>{\/if}\n          <\/div>\n      <\/div>\n    <\/div>\n    {\/if}\n  <\/div>\n\n  <div id=\"ChannelConfigDialogContentMain\">\n    <div class=\"ChannelConfigDialogSection\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"2px\"  class=\"ChannelConfigDialogTable\">\n        <tr><td name=\"generalDeviceChannelConfigLblName\">Name:<\/td><td><input id=\"ChannelConfigDialog_ChannelName\" class=\"CLASS11005\" type=\"text\" value=\"${channel.name}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTypeDescription\">Typenbezeichnung:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${channel.typeName}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblSerialNumber\">Seriennummer:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${channel.address}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblCategory\">Kategorie:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" \n            {if channel.category == Channel.CATEGORY.SENDER} value=\"Sender (Sensor)\" id=\"generalChannelConfigLblSender\" {\/if}\n            {if channel.category == Channel.CATEGORY.RECEIVER} value=\"Empf&auml;nger (Aktor)\" id=\"generalChannelConfigLblReceiver\" {\/if}\n            {if channel.category == Channel.CATEGORY.NONE} value=\"nicht verkn&uuml;pfbar\" id=\"generalChannelConfigLblNone\"{\/if}\n            \/>\n        <\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTransmitMode\">&Uuml;bertragungsmodus:<\/td>\n          <td>\n            <select id=\"ChannelConfigDialog_Mode\" class=\"CLASS11005\" {if !channel.isAesAvailable} disabled=\"disabled\" readonly=\"readonly\" {\/if}>\n              <option value=\"Standard\" name=\"lblStandard\" {if channel.mode == translateKey(Channel.MODE.DEFAULT)} selected=\"selected\" {\/if} >Standard<\/option>\n              <option value=\"Gesichert\" name=\"lblSecured\" {if channel.mode == translateKey(Channel.MODE.AES)} selected=\"selected\" {\/if} >Gesichert<\/option>\n            <\/select>\n          <\/td>\n        <\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblUsable\">Bedienbar:<\/td><td><input id=\"ChannelConfigDialog_isUsable\" type=\"checkbox\" {if channel.isUsable} checked=\"checked\" {\/if} {if !channel.isWritable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblVisible\">Sichtbar:<\/td><td><input id=\"ChannelConfigDialog_isVisible\" type=\"checkbox\" {if channel.isVisible} checked=\"checked\" {\/if}\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblLogged\">Protokolliert:<\/td><td><input id=\"ChannelConfigDialog_isLogged\" type=\"checkbox\" {if channel.isLogged} checked=\"checked\" {\/if} {if !channel.isLogable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n      <\/table>\n    <\/div>\n    \n    <div  class=\"ChannelConfigDialogSection\">\n      <img src=\"{if !isRoomListVisible}\/ise\/img\/plus.png{else}\/ise\/img\/minus.png{\/if}\" class=\"CLASS11006\" width=\"16px\" height=\"16px\" onclick=\"ChannelConfigDialog.toggleRooms(this);\">\n      <div class=\"CLASS11007\" name=\"generalChannelConfigLblRooms\">R&auml;ume<\/div>\n      <hr \/>\n      <form id=\"ChannelConfigDialogRooms\" {if !isRoomListVisible} style=\"display:none\" {\/if} >\n        <table class=\"ChannelConfigDialogTable\">\n          {for room in rooms}\n          <tr>\n            <td><input type=\"checkbox\" name=\"values\" value=\"${room.id}\" {if room.contains(channel.id)} checked=\"checked\" {\/if}\/><\/td><td>${room.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/table>\n      <\/form>\n    <\/div>\n    \n    <div class=\"ChannelConfigDialogSection\">\n      <img src=\"{if !isSubsectionListVisible}\/ise\/img\/plus.png{else}\/ise\/img\/minus.png{\/if}\" class=\"CLASS11006\" width=\"16px\" height=\"16px\" onclick=\"ChannelConfigDialog.toggleFuncs(this);\">\n      <div class=\"CLASS11007\" name=\"generalChannelConfigLblFunctions\">Gewerke<\/div>\n      <hr \/>\n      <form id=\"ChannelConfigDialogFuncs\" {if !isSubsectionListVisible} style=\"display:none\" {\/if}>\n        <table class=\"ChannelConfigDialogTable\">\n          {for func in funcs}\n          <tr>\n            <td><input type=\"checkbox\" name=\"values\" value=\"${func.id}\" {if func.contains(channel.id)} checked=\"checked\" {\/if}\/><\/td><td>${func.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/table>\n      <\/form>\n    <\/div>\n    \n  <\/div>\n<\/div>\n<div id=\"ChannelConfigDialogFooter\">\n  <div class=\"ChannelConfigDialogButton FooterButton\" name=\"btnOk\" id=\"ChannelConfigDialogOkButton\" onclick=\"ChannelConfigDialog.ok();\">OK<\/div>\n  <div class=\"ChannelConfigDialogButton FooterButton\" name=\"btnCancel\" id=\"ChannelConfigDialogAbortButton\" onclick=\"ChannelConfigDialog.abort();\">Abbrechen<\/div>\n<\/div>\n<\/div>\n";
-DEVICE_CONFIG_DIALOG_JST = "<div id=\"DeviceConfigDialog\">\n<div id=\"DeviceConfigDialogTitle\" onmousedown=\"new Drag($(\'DeviceConfigDialog\'), event);\"><span name=\"generalDeviceConfigTitle\">Allgemeine Geräteeinstellungen:<\/span> ${device.address}<\/div>\n<div id=\"DeviceConfigDialogContent\">\n\n  <div id=\"DeviceConfigDialogContentLeft\">\n    <div  class=\"DeviceConfigDialogSection\">\n      <div class=\"CLASS10800\">\n        <div class=\"CLASS10801\">${device.imageHTML}<\/div>\n      <\/div>\n      <div class=\"CLASS10802\">${device.typeName}<\/div>\n    <\/div>\n  <\/div>\n\n  <div id=\"DeviceConfigDialogContentMain\">\n    <div class=\"DeviceConfigDialogSection\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"2px\"  class=\"DeviceConfigDialogTable\">\n        <tr><td name=\"generalDeviceChannelConfigLblName\">Name:<\/td><td><input id=\"DeviceConfigDialog_DeviceName\" class=\"CLASS10803\" type=\"text\" value=\"${device.name}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTypeDescription\">Typenbezeichnung:<\/td><td><input class=\"CLASS10803\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${device.typeName}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblSerialNumber\">Seriennummer:<\/td><td><input class=\"CLASS10803\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${device.address}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblUsable\">Bedienbar:<\/td><td><input id=\"DeviceConfigDialog_isUsable\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isUsabilityChanged=true;\" {if device.isUsable} checked=\"checked\" {\/if} {if !device.isWritable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblVisible\">Sichtbar:<\/td><td><input id=\"DeviceConfigDialog_isVisible\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isVisibilityChanged=true;\" {if device.isVisible} checked=\"checked\" {\/if}\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblLogged\">Protokolliert:<\/td><td><input id=\"DeviceConfigDialog_isLogged\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isLoggingChanged=true;\" {if device.isLogged} checked=\"checked\" {\/if} {if !device.isLogable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n      <\/table>\n    <\/div>\n    \n    <div id=\"deviceFunctionTestPanel\" class=\"DeviceConfigDialogSection\">\n      <div class=\"CLASS10804\" name=\"generalDeviceChannelConfigLblFuncTest\">Funktionstest<\/div>\n      <hr \/>\n      <div>\n        <table border=\"0\"  class=\"DeviceConfigDialogTable\" width=\"250px\">\n          <tr>\n            <td width=\"50%\"><div id=\"DeviceConfigDialogTestButton\" class=\"StdButton\" name=\"generalDeviceChannelConfigBtnFuncTest\" onclick=\"DeviceConfigDialog.startTest();\">Test starten<\/div><\/td>\n            <td width=\"50%\"><div id=\"DeviceConfigDialogTestResult\">--:--:--<\/div><\/td>\n          <\/tr>\n        <\/table>\n        <div class=\"CLASS10805\" name=\"generalDeviceConfigHint\">\n          Im Rahmen des Funktionstests wird geprüft, ob die Kommunikation mit dem Gerät fehlerfrei funktioniert. Der Test gilt als bestanden, sobald die erste Rückmeldung von dem Gerät empfangen wurde. <br \/> Dazu werden an alle Aktoren des Geräts Schaltbefehle gesendet, die deren Zustand ändern. Sensoren, wie z.B. Fernbedienungen, melden sich im Allgemeinen erst dann, wenn sie durch ein entsprechendes Ereignis ausgelöst wurden.\n        <\/div>\n      <\/div>\n    <\/div>\n\n  <\/div>\n<\/div>\n<div id=\"DeviceConfigDialogFooter\">\n  <div class=\"DeviceConfigDialogButton FooterButton\" name=\"btnOk\" id=\"DeviceConfigDialogOkButton\" onclick=\"DeviceConfigDialog.ok();\">Ok<\/div>\n  <div class=\"DeviceConfigDialogButton FooterButton\" name=\"btnCancel\" id=\"DeviceConfigDialogAbortButton\" onclick=\"DeviceConfigDialog.abort();\">Abbrechen<\/div>\n<\/div>\n<\/div>\n";
+CHANNELCHOOSER_JST = "{macro printHead(name, id, transKey)}\n  {if id != sortId}\n    <th class=\"ChannelChooserHead clickable\" name=${transKey} onclick=\"ChannelChooser.sortBy(\'${id}\');\">${name}<\/th>\n  {else}\n    <th class=\"ChannelChooserHead_Active clickable\" name=${transKey} onclick=\"ChannelChooser.sortBy(\'${id}\');\">\n      ${name}&#160;\n      {if sortDescend}\n        <img src=\"\/ise\/img\/arrow_down.gif\" \/>\n      {else}\n        <img src=\"\/ise\/img\/arrow_up.gif\" \/>\n      {\/if}\n    <\/th>\n  {\/if}\n{\/macro}\n<div id=\"ChannelChooserDialog\">\n<div id=\"ChannelChooserTitle\" name=\"dialogChooseChannel\" onmousedown=\"new Drag($(\'ChannelChooserDialog\'), event);\">Kanalauswahl<\/div>\n<div id=\"ChannelChooserContent\">\n  <table id=\"ChannelChooserTable\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n    <colgroup>\n      <col width=\"20%\" \/>\n      <col width=\"55px\" \/>\n      <col width=\"30%\" \/>\n      <col width=\"12%\" \/>\n      <col width=\"17%\" \/>\n      <col width=\"17%\" \/>\n    <\/colgroup>\n    <thead>\n      <tr> <!-- Überschriften -->\n        ${printHead(\"Name\", \"NAME\", \"thName\")}\n        <th class=\"ChannelChooserHead\" name=\"thPicture\">Bild<\/th>\n        ${printHead(\"Beschreibung\", \"DESCRIPTION\", \"thDescription\")}\n        ${printHead(\"Seriennummer\", \"ADDRESS\", \"thSerialNumber\")}\n        ${printHead(\"Gewerke\", \"FUNC_NAMES\", \"thFuncs\")}\n        ${printHead(\"R&auml;ume\", \"ROOM_NAMES\", \"thRooms\")}\n      <\/tr>\n      <tr> <!-- Filter -->\n        ${nameFilter.getHTML()}\n        <th class=\"Filter\">&nbsp;<\/th>\n        ${descriptionFilter.getHTML()}\n        ${addressFilter.getHTML()}\n        ${funcFilter.getHTML()}\n        ${roomFilter.getHTML()}\n      <\/tr>      \n    <\/thead>\n    <tbody>\n      {for channel in channels}\n        {var virtualChannel = \"\"}\n        {var channelTypeID = channel.deviceType.id.toUpperCase()}\n\n        {if channel.channelType == \"VIRTUAL_DIMMER\"} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PS\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-IT\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-CH\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-PE\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-UK\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-BDT\") && ((channel.channelType == \"DIMMER_TRANSMITTER\") || ((channel.channelType == \"DIMMER_VIRTUAL_RECEIVER\") && (channel.index > 4)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PDT\") && ((channel.channelType == \"DIMMER_TRANSMITTER\") || ((channel.channelType == \"DIMMER_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-BSM\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 4)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-FSM\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 2)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-FSM16\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 2)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-MIOB\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && ((channel.index != 3) && (channel.index != 7))))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if channel.channelType == \"VIR-OL-GTW-CH\"} {var virtualChannel = \"hidden\"} {\/if}\n\n        {if channel.channelType != \"_MAINTENANCE\"}\n            <tr class=\"ChannelChooserRow ${virtualChannel}\" id=\"${PREFIX}${channel.id}\" onclick=\"ChannelChooser.select(this.id);\" onmouseover=\"this.className=\'ChannelChooserRow_Highlight\';\" onmouseout=\"this.className=\'ChannelChooserRow\';\">\n              <td class=\"ChannelChooserCell\">${channel.name}<br\/><br\/><span class=\"j_extChnDescr\">${channel.typeDescription}_${channel.address}<\/span><\/td>\n              <td class=\"ChannelChooserThumbnail\"><div class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n              <td class=\"ChannelChooserCell\">${channel.typeDescription}<br\/>${channel.device.name}<\/td>\n              <td class=\"ChannelChooserCell\">${channel.address}<\/td>\n              <td class=\"ChannelChooserCell j_functions\">\n                {for subsection in channel.subsections}\n                  ${subsection.name}<br \/>\n                {forelse}\n                  &#160;\n                {\/for}\n              <\/td>\n              <td class=\"ChannelChooserCell j_rooms\">\n                {for room in channel.rooms}\n                  ${room.name}<br \/>\n                {forelse}\n                  &#160;\n                {\/for}\n              <\/td>\n            <\/tr>\n           {forelse}\n            <tr class=\"ChannelChooserRow\">\n              <td colspan=\"10\" class=\"ChannelChooserCell\" name=\"\"lblNoChannelsAvailable>Keine Kan&auml;le verf&uuml;gbar<\/td>\n            <\/tr>\n        {\/if}\n      {\/for}\n    <\/tbody>\n  <\/table>\n<\/div>\n<div id=\"ChannelChooserFooter\">\n  <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserAbortButton\" name=\"footerBtnCancel\" onclick=\"ChannelChooser.abort();\">Abbrechen<\/div>\n  <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserResetFiltersButton\" name=\"footerBtnResetFilterWOLineBreak\" onclick=\"ChannelChooser.resetFilters();\">Filter zur&uuml;cksetzen<\/div>\n  {if false === showVirtual}\n    <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsShow\" onclick=\"ChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le anzeigen<\/div>\n  {else}\n    <div class=\"ChannelChooserButton colorGradient50px\" id=\"ChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsHide\" onclick=\"ChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le ausblenden<\/div>\n  {\/if}\n<\/div>\n<\/div>\n";
+CHANNEL_CONFIG_DIALOG_JST = "<div id=\"ChannelConfigDialog\">\n<div id=\"ChannelConfigDialogTitle\" onmousedown=\"new Drag($(\'ChannelConfigDialog\'), event);\"><span name=\"generalChannelConfigTitle\">Allgemeine Kanaleinstellungen:<\/span> ${channel.address}<\/div>\n<div id=\"ChannelConfigDialogContent\">\n\n  <div id=\"ChannelConfigDialogContentLeft\">\n    <div  class=\"ChannelConfigDialogSection\">\n      <div class=\"CLASS11000\">\n        <div class=\"CLASS11001\">${channel.imageHTML}<\/div>\n      <\/div>\n      <div class=\"CLASS11002\">${channel.typeName}<\/div>\n    <\/div>\n    \n    {if channel.supportsComTest()}\n    <div id=\"channelFunctionTestPanel\" class=\"ChannelConfigDialogSection\">\n      <div class=\"CLASS11003\" name=\"generalDeviceChannelConfigLblFuncTest\">Funktionstest<\/div>\n      <hr \/>\n      <div>\n        <table border=\"0\"  class=\"ChannelConfigDialogTable\" width=\"250px\">\n          <tr>\n            <td width=\"50%\"><div id=\"ChannelConfigDialogTestButton\" class=\"StdButton\" name=\"generalDeviceChannelConfigBtnFuncTest\" onclick=\"ChannelConfigDialog.startTest();\">Test starten<\/div><\/td>\n            <td width=\"50%\"><div id=\"ChannelConfigDialogTestResult\">--:--:--<\/div><\/td>\n          <\/tr>\n        <\/table>\n        <div class=\"CLASS11004\">\n          <p name=\"generalChannelConfigHint\">\n            Im Rahmen des Funktionstests wird gepr&uuml;ft, ob die Kommunikation mit dem Kanal fehlerfrei funktioniert.\n          <\/p>\n          {if channel.category == Channel.CATEGORY.SENDER}<p name=\"generalChannelConfigHintSender\">Bei Sensoren wartet die HomeMatic Zentrale, bis diese sich melden. Eine Fernbedienung meldet sich z.B. erst dann, wenn sie manuell betätigt wird.<\/p>{\/if}\n          {if channel.category == Channel.CATEGORY.RECEIVER}<p name=\"generalChannelConfigHintReceiver\">Bei Aktoren wird dazu in der Regel ein Schaltbefehl ausgelöst.<\/p>{\/if}\n          <\/div>\n      <\/div>\n    <\/div>\n    {\/if}\n  <\/div>\n\n  <div id=\"ChannelConfigDialogContentMain\">\n    <div class=\"ChannelConfigDialogSection\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"2px\"  class=\"ChannelConfigDialogTable\">\n        <tr><td name=\"generalDeviceChannelConfigLblName\">Name:<\/td><td><input id=\"ChannelConfigDialog_ChannelName\" class=\"CLASS11005\" type=\"text\" value=\"${channel.name}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTypeDescription\">Typenbezeichnung:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${channel.typeName}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblSerialNumber\">Seriennummer:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${channel.address}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblCategory\">Kategorie:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" \n            {if channel.category == Channel.CATEGORY.SENDER} value=\"Sender (Sensor)\" id=\"generalChannelConfigLblSender\" {\/if}\n            {if channel.category == Channel.CATEGORY.RECEIVER} value=\"Empf&auml;nger (Aktor)\" id=\"generalChannelConfigLblReceiver\" {\/if}\n            {if channel.category == Channel.CATEGORY.NONE} value=\"nicht verkn&uuml;pfbar\" id=\"generalChannelConfigLblNone\"{\/if}\n            \/>\n        <\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTransmitMode\">&Uuml;bertragungsmodus:<\/td>\n          <td>\n            <select id=\"ChannelConfigDialog_Mode\" class=\"CLASS11005\" {if !channel.isAesAvailable} disabled=\"disabled\" readonly=\"readonly\" {\/if}>\n              <option value=\"Standard\" name=\"lblStandard\" {if channel.mode == translateKey(Channel.MODE.DEFAULT)} selected=\"selected\" {\/if} >Standard<\/option>\n              <option value=\"Gesichert\" name=\"lblSecured\" {if channel.mode == translateKey(Channel.MODE.AES)} selected=\"selected\" {\/if} >Gesichert<\/option>\n            <\/select>\n          <\/td>\n        <\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblUsable\">Bedienbar:<\/td><td><input id=\"ChannelConfigDialog_isUsable\" type=\"checkbox\" {if channel.isUsable} checked=\"checked\" {\/if} {if !channel.isWritable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblVisible\">Sichtbar:<\/td><td><input id=\"ChannelConfigDialog_isVisible\" type=\"checkbox\" {if channel.isVisible} checked=\"checked\" {\/if}\/><\/td><\/tr>\n        <tr id=\"btnEnableChannelLogging\"><td name=\"generalDeviceChannelConfigLblLogged\">Protokolliert:<\/td><td><input id=\"ChannelConfigDialog_isLogged\" type=\"checkbox\" {if channel.isLogged} checked=\"checked\" {\/if} {if !channel.isLogable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n      <\/table>\n    <\/div>\n    \n    <div  class=\"ChannelConfigDialogSection\">\n      <img src=\"{if !isRoomListVisible}\/ise\/img\/plus.png{else}\/ise\/img\/minus.png{\/if}\" class=\"CLASS11006\" width=\"16px\" height=\"16px\" onclick=\"ChannelConfigDialog.toggleRooms(this);\">\n      <div class=\"CLASS11007\" name=\"generalChannelConfigLblRooms\">R&auml;ume<\/div>\n      <hr \/>\n      <form id=\"ChannelConfigDialogRooms\" {if !isRoomListVisible} style=\"display:none\" {\/if} >\n        <table class=\"ChannelConfigDialogTable\">\n          {for room in rooms}\n          <tr>\n            <td><input type=\"checkbox\" name=\"values\" value=\"${room.id}\" {if room.contains(channel.id)} checked=\"checked\" {\/if}\/><\/td><td>${room.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/table>\n      <\/form>\n    <\/div>\n    \n    <div class=\"ChannelConfigDialogSection\">\n      <img src=\"{if !isSubsectionListVisible}\/ise\/img\/plus.png{else}\/ise\/img\/minus.png{\/if}\" class=\"CLASS11006\" width=\"16px\" height=\"16px\" onclick=\"ChannelConfigDialog.toggleFuncs(this);\">\n      <div class=\"CLASS11007\" name=\"generalChannelConfigLblFunctions\">Gewerke<\/div>\n      <hr \/>\n      <form id=\"ChannelConfigDialogFuncs\" {if !isSubsectionListVisible} style=\"display:none\" {\/if}>\n        <table class=\"ChannelConfigDialogTable\">\n          {for func in funcs}\n          <tr>\n            <td><input type=\"checkbox\" name=\"values\" value=\"${func.id}\" {if func.contains(channel.id)} checked=\"checked\" {\/if}\/><\/td><td>${func.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/table>\n      <\/form>\n    <\/div>\n    \n  <\/div>\n<\/div>\n<div id=\"ChannelConfigDialogFooter\">\n  <div class=\"ChannelConfigDialogButton FooterButton\" name=\"btnOk\" id=\"ChannelConfigDialogOkButton\" onclick=\"ChannelConfigDialog.ok();\">OK<\/div>\n  <div class=\"ChannelConfigDialogButton FooterButton\" name=\"btnCancel\" id=\"ChannelConfigDialogAbortButton\" onclick=\"ChannelConfigDialog.abort();\">Abbrechen<\/div>\n<\/div>\n<\/div>\n";
+DEVICE_CONFIG_DIALOG_JST = "<div id=\"DeviceConfigDialog\">\n<div id=\"DeviceConfigDialogTitle\" onmousedown=\"new Drag($(\'DeviceConfigDialog\'), event);\"><span name=\"generalDeviceConfigTitle\">Allgemeine Geräteeinstellungen:<\/span> ${device.address}<\/div>\n<div id=\"DeviceConfigDialogContent\">\n\n  <div id=\"DeviceConfigDialogContentLeft\">\n    <div  class=\"DeviceConfigDialogSection\">\n      <div class=\"CLASS10800\">\n        <div class=\"CLASS10801\">${device.imageHTML}<\/div>\n      <\/div>\n      <div class=\"CLASS10802\">${device.typeName}<\/div>\n    <\/div>\n  <\/div>\n\n  <div id=\"DeviceConfigDialogContentMain\">\n    <div class=\"DeviceConfigDialogSection\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"2px\"  class=\"DeviceConfigDialogTable\">\n        <tr><td name=\"generalDeviceChannelConfigLblName\">Name:<\/td><td><input id=\"DeviceConfigDialog_DeviceName\" class=\"CLASS10803\" type=\"text\" value=\"${device.name}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTypeDescription\">Typenbezeichnung:<\/td><td><input class=\"CLASS10803\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${device.typeName}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblSerialNumber\">Seriennummer:<\/td><td><input class=\"CLASS10803\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${device.address}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblUsable\">Bedienbar:<\/td><td><input id=\"DeviceConfigDialog_isUsable\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isUsabilityChanged=true;\" {if device.isUsable} checked=\"checked\" {\/if} {if !device.isWritable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblVisible\">Sichtbar:<\/td><td><input id=\"DeviceConfigDialog_isVisible\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isVisibilityChanged=true;\" {if device.isVisible} checked=\"checked\" {\/if}\/><\/td><\/tr>\n        <tr id=\"btnEnableDeviceLogging\"><td name=\"generalDeviceChannelConfigLblLogged\">Protokolliert:<\/td><td><input id=\"DeviceConfigDialog_isLogged\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isLoggingChanged=true;\" {if device.isLogged} checked=\"checked\" {\/if} {if !device.isLogable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n      <\/table>\n    <\/div>\n    \n    <div id=\"deviceFunctionTestPanel\" class=\"DeviceConfigDialogSection\">\n      <div class=\"CLASS10804\" name=\"generalDeviceChannelConfigLblFuncTest\">Funktionstest<\/div>\n      <hr \/>\n      <div>\n        <table border=\"0\"  class=\"DeviceConfigDialogTable\" width=\"250px\">\n          <tr>\n            <td width=\"50%\"><div id=\"DeviceConfigDialogTestButton\" class=\"StdButton\" name=\"generalDeviceChannelConfigBtnFuncTest\" onclick=\"DeviceConfigDialog.startTest();\">Test starten<\/div><\/td>\n            <td width=\"50%\"><div id=\"DeviceConfigDialogTestResult\">--:--:--<\/div><\/td>\n          <\/tr>\n        <\/table>\n        <div class=\"CLASS10805\" name=\"generalDeviceConfigHint\">\n          Im Rahmen des Funktionstests wird geprüft, ob die Kommunikation mit dem Gerät fehlerfrei funktioniert. Der Test gilt als bestanden, sobald die erste Rückmeldung von dem Gerät empfangen wurde. <br \/> Dazu werden an alle Aktoren des Geräts Schaltbefehle gesendet, die deren Zustand ändern. Sensoren, wie z.B. Fernbedienungen, melden sich im Allgemeinen erst dann, wenn sie durch ein entsprechendes Ereignis ausgelöst wurden.\n        <\/div>\n      <\/div>\n    <\/div>\n\n  <\/div>\n<\/div>\n<div id=\"DeviceConfigDialogFooter\">\n  <div class=\"DeviceConfigDialogButton FooterButton\" name=\"btnOk\" id=\"DeviceConfigDialogOkButton\" onclick=\"DeviceConfigDialog.ok();\">Ok<\/div>\n  <div class=\"DeviceConfigDialogButton FooterButton\" name=\"btnCancel\" id=\"DeviceConfigDialogAbortButton\" onclick=\"DeviceConfigDialog.abort();\">Abbrechen<\/div>\n<\/div>\n<\/div>\n";
 DEVICELIST_FLAT_JST = "{macro printHead(name, id)}\n  {if id != sortId}\n    <th class=\"DeviceListHead clickable\" name=\"${name}\" onclick=\"DeviceListPage.sortBy(\'${id}\');\">${name}<\/th>\n  {else}\n    <th class=\"DeviceListHead_Active clickable\" name=\"${name}\" onclick=\"DeviceListPage.sortBy(\'${id}\');\">\n      ${name}&#160;\n      {if sortDescend}\n        <img src=\"\/ise\/img\/arrow_down.gif\" \/>\n      {else}\n        <img src=\"\/ise\/img\/arrow_up.gif\" \/>\n      {\/if}\n    <\/th>\n  {\/if}\n{\/macro}\n<table id=\"DeviceListTable\" width=\"97%\"  border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <colgroup>\n    <col width=\"11%\"\/>\n    <col width=\"11%\"\/>\n    <col width=\"55px\"\/>\n    <col width=\"11%\"\/>\n    <col width=\"11%\"\/>\n    <col width=\"11%\"\/>\n    <col width=\"11%\"\/>\n    <col width=\"11%\"\/>\n    <col width=\"11%\"\/>\n    <col width=\"25px\"\/>\n    <col width=\"25px\"\/>\n    <col width=\"25px\"\/>\n    <col width=\"11%\"\/>\n  <\/colgroup>\n  <thead>\n    <tr>\n      ${printHead(\"thName\", \"NAME\")}\n      ${printHead(\"thTypeDescriptor\", \"TYPE_NAME\")}\n      <th class=\"DeviceListHead\" name=\"thPicture\">Bild<\/th>\n      ${printHead(\"thDescriptor\", \"DESCRIPTION\")}\n      ${printHead(\"thSerialNumber\", \"ADDRESS\")}\n      ${printHead(\"thInterfaceCategory\", \"CATEGORY\")}\n      ${printHead(\"thTransmitMode\", \"MODE\")}\n      ${printHead(\"thFuncs\", \"FUNC_NAMES\")}\n      ${printHead(\"thRooms\", \"ROOM_NAMES\")}\n      <th class=\"DeviceListHead\"><img name=\"lblVisible\" src=\"\/ise\/img\/visible.png\" width=\"24px\" height=\"24px\" alt=\"sichtbar\" title=\"sichtbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblUsable\" src=\"\/ise\/img\/usable.png\" width=\"24px\" height=\"24px\" alt=\"bedienbar\" title=\"bedienbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblRecorded\" src=\"\/ise\/img\/logged.png\" width=\"24px\" height=\"24px\" alt=\"protokolliert\" title=\"protokolliert\"\/><\/th>\n      <th class=\"DeviceListHead\" name=\"thActions\">Flat Aktionen<\/th>\n    <\/tr>\n    <tr>\n      ${nameFilter.getHTML()}\n      ${typeNameFilter.getHTML()}\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      ${descriptionFilter.getHTML()}\n      ${addressFilter.getHTML()}\n      ${categoryFilter.getHTML()}\n      ${modeFilter.getHTML()}\n      ${funcFilter.getHTML()}\n      ${roomFilter.getHTML()}\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n    <\/tr>\n  <\/thead>\n  <tbody>\n    {for channel in channels}\n      <tr class=\"DeviceListRow\" id=\"${PREFIX}${channel.Id}\"  onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" onmouseover=\"this.className = \'DeviceListRow_Highlight\';\" onmouseout=\"this.className = \'DeviceListRow\';\">\n        <td class=\"DeviceListCell\">${channel.name}<\/td>\n        <td class=\"DeviceListCell\">${channel.typeName}<\/td>\n        <td class=\"DeviceListThumbnail\"><div class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n        <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n        <td class=\"DeviceListCell\">${channel.address}<\/td>\n        <td class=\"DeviceListCell\">${channel.category}<\/td>\n        <td class=\"DeviceListCell j_chMode\">${channel.mode}<\/td>\n        <td class=\"DeviceListCell j_function\">\n          {for subsection in channel.subsections}\n            ${subsection.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n        <td class=\"DeviceListCell j_rooms\">\n          {for room in channel.rooms}\n            ${room.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n        <td class=\"DeviceListCell\">\n          <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n          <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n          <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n        <\/td>\n      <\/tr>\n    {forelse}\n      <tr class=\"DeviceListRow\">\n        <td class=\"DeviceListCell\" name=\"noChannelsAvailable\" colspan=\"13\">Keine Kan&auml;le verf&uuml;gbar<\/td>\n      <\/tr>\n    {\/for}\n  <\/tbody>\n<\/table>\n\n";
 DEVICELIST_TREE_JST = "<table id=\"DeviceListTable\" width=\"97%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <colgroup>\n    <col width=\"25px\" \/>\n    <col width=\"25px\" \/>\n    <col width=\"25px\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"55px\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"11%\" \/>\n    <col width=\"25px\" \/>\n    <col width=\"25px\" \/>\n    <col width=\"25px\" \/>\n    <col width=\"11%\" \/>\n  <\/colgroup>\n  <thead>\n    <tr>\n      <!-- Alle Elemente mit Name-Attribut werden übersetzt. Der Wert des Name-Attributs ist der Key f. die Übersetzungsdatei -->\n      <th class=\"DeviceListCell_Invisible\"><div class=\"CLASS10900\">&nbsp;<\/div><\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thName\" colspan=\"3\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Name<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thTypeDescriptor\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Typen- Bezeichnung<\/th>\n      <th class=\"DeviceListHead\" name=\"thPicture\">Bild<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thDescriptor\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Bezeichnung<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thSerialNumber\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Serien- Nummer<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thInterfaceCategory\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Interface \/ Kategorie<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thTransmitMode\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">&Uuml;bertragungsmodus<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thFuncs\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Gewerke<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thRooms\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">R&auml;ume<\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblVisible\" src=\"\/ise\/img\/visible.png\" width=\"24px\" height=\"24px\" alt=\"sichtbar\" title=\"sichtbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblUsable\" src=\"\/ise\/img\/usable.png\" width=\"24px\" height=\"24px\" alt=\"bedienbar\" title=\"bedienbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblRecorded\" src=\"\/ise\/img\/logged.png\" width=\"24px\" height=\"24px\" alt=\"protokolliert\" title=\"protokolliert\"\/><\/th>\n      <th class=\"DeviceListHead\" name=\"thActions\" >Aktionen<\/th>\n    <\/tr>\n    <tr>\n      <th class=\"DeviceListCell_Invisible CLASS10901\" ><div class=\"CLASS10900\">&nbsp;<\/div><\/th>\n      ${nameFilter.getHTML(3)}\n      ${typeNameFilter.getHTML()}\n      <th class=\"Filter CLASS10901\" >&nbsp;<\/th>\n      ${descriptionFilter.getHTML()}\n      ${addressFilter.getHTML()}\n      ${interfaceFilter.getHTML()}\n      ${modeFilter.getHTML()}\n      ${funcFilter.getHTML()}\n      ${roomFilter.getHTML()}\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n    <\/tr>\n  <\/thead>\n  <tbody>\n    {for device in devices}\n      <tr id=\"${PREFIX}${device.id}\" class=\"DeviceListRow\" onclick=\"DeviceListPage.selectDevice(\'${device.id}\');\" onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n        <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">\n          <img id=\"${PREFIX}${device.id}PLUS\" onclick=\"DeviceListPage.expandDevice(event, \'${device.id}\');\" src=\"\/ise\/img\/plus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le anzeigen\" title=\"Kan&auml;le anzeigen\" {if device._expanded} style=\"display:none;\"{\/if}\/>\n          <img id=\"${PREFIX}${device.id}MINUS\" onclick=\"DeviceListPage.collapseDevice(event, \'${device.id}\');\" src=\"\/ise\/img\/minus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le verbergen\" title=\"Kan&auml;le verbergen\" {if !device._expanded} style=\"display:none;\"{\/if}\/>\n        <\/td>\n        <td class=\"DeviceListCell\" colspan=\"3\">${device.name}<\/td>\n        <td class=\"DeviceListCell\" >${device.typeName}<\/td>\n        <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${device.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${device.deviceType.id}\', 250, \'\', this);\" onmouseout=\"picDivHide(jg_250);\">${device.getThumbnailHTML()}<\/div><\/td>\n        <td class=\"DeviceListCell\" name=\"${device.typeDescription}\" >${device.typeDescription}<\/td>\n        <td class=\"DeviceListCell\" >${device.address}<\/td>\n        <td class=\"DeviceListCell\" >${device.interfaceName}<\/td>\n        <td class=\"DeviceListCell j_chMode\" >{for name in device.modes}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n        <td class=\"DeviceListCell j_functions\" >{for subsection in device.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n        <td class=\"DeviceListCell j_rooms\" >{for room in device.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isVisible}checked=\"checked\"{\/if}\/><\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isUsable}checked=\"checked\"{\/if}\/><\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isLogged}checked=\"checked\"{\/if}\/><\/td>\n        <td class=\"DeviceListCell\" >\n          <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'DEVICE\', \'${device.id}\');\">Einstellen<\/div>\n          {if device.isDeletable}\n            <div class=\"DeviceListButton\" name=\"btnRemove\" onclick=\"DeviceListPage.deleteDevice(event, \'${device.id}\');\">L&ouml;schen<\/div>\n          {else}\n            <div class=\"DeviceListButton CLASS10902\" name=\"btnRemove\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\" >L&ouml;schen<\/div>\n          {\/if}\n          <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'DEVICE\', \'${device.id}\');\">Direkte<\/div>\n          <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'DEVICE\', \'${device.id}\');\">Programme<\/div>\n        <\/td>\n      <\/tr>\n      {for group in device.groups}\n        <tr id=\"${PREFIX}${group.id}\"class=\"DeviceListRow\" {if !device._expanded}style=\"display:none;\"{\/if}>\n          <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n          <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">\n            <img id=\"${PREFIX}${group.id}PLUS\" onclick=\"DeviceListPage.expandGroup(event, \'${group.id}\');\" src=\"\/ise\/img\/plus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le anzeigen\" title=\"Kan&auml;le anzeigen\" {if group._expanded} style=\"display:none;\"{\/if}\/>\n            <img id=\"${PREFIX}${group.id}MINUS\" onclick=\"DeviceListPage.collapseGroup(event, \'${group.id}\');\" src=\"\/ise\/img\/minus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le verbergen\" title=\"Kan&auml;le verbergen\" {if !group._expanded} style=\"display:none;\"{\/if}\/>\n          <\/td>\n          <td class=\"DeviceListCell\" colspan=\"2\">${group.name}<\/td>\n          <td class=\"DeviceListCell\" >${group.typeName}<\/td>\n          <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${group.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${group.device.deviceType.id}\', 250, \'${group.formName}\', this);\" onmouseout=\"picDivHide(jg_250);\">${group.thumbnailHTML}<\/div><\/td>\n          <td class=\"DeviceListCell\" name=\"${group.typeDescription}\" >${group.typeDescription}<\/td>\n          <td class=\"DeviceListCell\" >${group.address}<\/td>\n          <td class=\"DeviceListCell\" >{for name in group.categories}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell j_chMode\" >{for name in group.modes}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell\" >{for subsection in group.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell\" >{for room in group.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isVisible}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isUsable}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isLogged}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\" >\n            <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'GROUP\', \'${group.id}\');\">Einstellen<\/div>\n            <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'GROUP\', \'${group.id}\');\">Direkte<\/div>\n            <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'GROUP\', \'${group.id}\');\">Programme<\/div>\n          <\/td>\n        <\/tr>\n        {for channel in group.channels}\n          <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow\" {if (!group._expanded) | (!device._expanded)}style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n            <td class=\"DeviceListCell_Invisible\" colspan=\"3\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n            <td class=\"DeviceListCell\" >${channel.name}<br\/>${channel.nameExtention}<\/td>\n            <td class=\"DeviceListCell\" >${channel.typeName}<\/td>\n            <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${channel.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n            <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n            <td class=\"DeviceListCell\" >${channel.address}<\/td>\n            <td class=\"DeviceListCell\" >${channel.category}<\/td>\n            <td class=\"DeviceListCell j_chMode\" >${channel.mode}<\/td>\n            <td class=\"DeviceListCell\" >{for subsection in channel.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\" >{for room in channel.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n            <td class=\"DeviceListCell\" >\n              <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n              <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n              <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n            <\/td>\n          <\/tr>        \n        {\/for}\n      {\/for}\n      {for channel in device.singles}\n        \n      {if channel._isVisible}       \n          <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow\" {if !device._expanded}style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n            <td class=\"DeviceListCell_Invisible\" colspan=\"2\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n            <td class=\"DeviceListCell\" colspan=\"2\">${channel.name}<br\/>${channel.nameExtention}<\/td>\n            <td class=\"DeviceListCell\" >${channel.typeName}<\/td>\n            <td class=\"DeviceListThumbnail\" ><div  id=\"${PREFIX}${channel.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n            <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n            <td class=\"DeviceListCell\" >${channel.address}<\/td>\n            <td class=\"DeviceListCell\" >${channel.category}<\/td>\n            <td class=\"DeviceListCell j_chMode\" >${channel.mode}<\/td>\n            <td class=\"DeviceListCell\" >{for subsection in channel.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\" >{for room in channel.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n            <td class=\"DeviceListCell\" >\n              <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n              <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n              <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n            <\/td>\n          <\/tr>        \n       {\/if} \n      \n      {\/for}\n    {forelse}\n      <tr class=\"DeviceListRow\">\n        <td class=\"DeviceListCell_Invisible\">&#160;<\/td>\n        <td class=\"DeviceListCell\" name=\"noDevicesAvailable\" colspan=\"15\">Keine Ger&auml;te verf&uuml;gbar<\/td>\n      <\/tr>\n    {\/for}\n  <\/tbody>\n  <tfoot>\n    <tr class=\"CLASS10903\">\n      <td class=\"DeviceListCell_Invisible CLASS10903\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10906\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10907\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10908\" ><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10909\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n    <\/tr>  \n  <\/tfoot>\n<\/table>\n";
 LISTFILTER_JST = "<th class=\"{if isSet}Filter_Active{else}Filter{\/if}\">\n  <div class=\"FilterCaption\" name=\"thFilter\" onclick=\"Element.show(\'${id}\');\">Filter<\/div>\n  <div class=\"FilterBodyWrapper\" id=\"${id}\" style=\"display:none\">\n    <form class=\"FilterBody\" id=\"${formId}\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n        <tbody>\n          {for item in list}\n          <tr>\n            <td class=\"FilterBodyCell\"><input type=\"checkbox\" name=\"values\" value=\"${item.id}\" {if true === item._selected}checked=\"\"{\/if}\/><td>\n            <td class=\"FilterBodyCell j_Filter_${item.id}\">${item.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/tbody>\n      <\/table>\n      <div class=\"FilterButton\" name=\"filterSet\" onclick=\"${name}.set();\">Setzen<\/div>\n      <div class=\"FilterButton\" name=\"filterClose\" onclick=\"${name}.close();\">Schlie&szlig;en<\/div>\n    <\/form>\n  <\/div>\n<\/th>\n";
-MULTI_CHANNELCHOOSER_JST = "{macro printHead(name, id, langKey)}\n  {if id != sortId}\n    <th class=\"MultiChannelChooserHead clickable\" name=${langKey} onclick=\"MultiChannelChooser.sortBy(\'${id}\');\">${name}<\/th>\n  {else}\n    <th class=\"MultiChannelChooserHead_Active clickable\" name=${langKey} onclick=\"MultiChannelChooser.sortBy(\'${id}\');\">\n      ${name}&#160;\n      {if sortDescend}\n        <img src=\"\/ise\/img\/arrow_down.gif\" \/>\n      {else}\n        <img src=\"\/ise\/img\/arrow_up.gif\" \/>\n      {\/if}\n    <\/th>\n  {\/if}\n{\/macro}\n<div id=\"MultiChannelChooserDialog\">\n<div id=\"MultiChannelChooserTitle\" onmousedown=\"new Drag($(\'MultiChannelChooserDialog\'), event);\"><span name=\"dialogChooseChannel\">Kanalauswahl<\/span>: ${title}<\/div>\n<div id=\"MultiChannelChooserContent\">\n  <table id=\"MultiChannelChooserTable\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n    <colgroup>\n      <col width=\"5%\" \/>\n      <col width=\"19%\" \/>\n      <col width=\"55px\" \/>\n      <col width=\"30%\" \/>\n      <col width=\"12%\" \/>\n      <col width=\"17%\" \/>\n      <col width=\"17%\" \/>\n    <\/colgroup>\n    <thead>\n      <tr> <!-- Überschriften -->\n        <th class=\"MultiChannelChooserHead\">&nbsp;<\/th>\n        ${printHead(\"Name\", \"NAME\", \"thName\")}\n        <th class=\"MultiChannelChooserHead\" name=\"thPicture\">Bild<\/th>\n        ${printHead(\"Beschreibung\", \"DESCRIPTION\", \"thDescription\")}\n        ${printHead(\"Seriennummer\", \"ADDRESS\", \"thSerialNumber\")}\n        ${printHead(\"Gewerke\", \"FUNC_NAMES\", \"thFunc\")}\n        ${printHead(\"R&auml;ume\", \"ROOM_NAMES\", \"thRooms\")}\n      <\/tr>\n      <tr> <!-- Filter -->\n        <th class=\"Filter\">&nbsp;<\/th>\n        ${nameFilter.getHTML()}\n        <th class=\"Filter\">&nbsp;<\/th>\n        ${descriptionFilter.getHTML()}\n        ${addressFilter.getHTML()}\n        ${funcFilter.getHTML()}\n        ${roomFilter.getHTML()}\n      <\/tr>      \n    <\/thead>\n    <tbody>\n      {for channel in channels}\n      <tr class=\"MultiChannelChooserRow\" id=\"${PREFIX}${channel.id}\" onmouseover=\"this.className=\'MultiChannelChooserRow_Highlight\';\" onmouseout=\"this.className=\'MultiChannelChooserRow\';\">\n        <td class=\"MultiChannelChooserCell_Active\"><input type=\"checkbox\" onclick=\"MultiChannelChooser.select(\'${channel.id}\', this);\" {if true === channel._selected}checked=\"\"{\/if}\/><\/td>\n        <td class=\"MultiChannelChooserCell\">${channel.name}<br\/>${channel.nameExtention}<\/td>\n        <td class=\"MultiChannelChooserThumbnail\"><div class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n        <td class=\"MultiChannelChooserCell\">${channel.typeDescription}<br\/>${channel.device.name}<\/td>\n        <td class=\"MultiChannelChooserCell\">${channel.address}<\/td>\n        <td class=\"MultiChannelChooserCell\">\n          {for subsection in channel.subsections}\n            ${subsection.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n        <td class=\"MultiChannelChooserCell\">\n          {for room in channel.rooms}\n            ${room.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n      <\/tr>\n      {forelse}\n      <tr class=\"MultiChannelChooserRow\">\n        <td colspan=\"10\" class=\"MultiChannelChooserCell\" name=\"hintMultiChannelChooserNoChannelsAvailable\">Keine Kan&auml;le verf&uuml;gbar<\/td>\n      <\/tr>        \n    {\/for}\n    <\/tbody>\n  <\/table>\n<\/div>\n<div id=\"MultiChannelChooserFooter\">\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserAbortButton\" name=\"footerBtnCancel\" onclick=\"MultiChannelChooser.abort();\">Abbrechen<\/div>\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserOkButton\" name=\"footerBtnOk\" onclick=\"MultiChannelChooser.ok();\">OK<\/div>\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserResetFiltersButton\" name=\"footerBtnResetFilterWOLineBreak\" onclick=\"MultiChannelChooser.resetFilters();\">Filter zur&uuml;cksetzen<\/div>\n  {if false === showVirtual}\n    <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsShow\" onclick=\"MultiChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le anzeigen<\/div>\n  {else}\n    <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsHide\" onclick=\"MultiChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le ausblenden<\/div>\n  {\/if}\n<\/div>\n<\/div>";
+MULTI_CHANNELCHOOSER_JST = "{macro printHead(name, id, langKey)}\n  {if id != sortId}\n    <th class=\"MultiChannelChooserHead clickable\" name=${langKey} onclick=\"MultiChannelChooser.sortBy(\'${id}\');\">${name}<\/th>\n  {else}\n    <th class=\"MultiChannelChooserHead_Active clickable\" name=${langKey} onclick=\"MultiChannelChooser.sortBy(\'${id}\');\">\n      ${name}&#160;\n      {if sortDescend}\n        <img src=\"\/ise\/img\/arrow_down.gif\" \/>\n      {else}\n        <img src=\"\/ise\/img\/arrow_up.gif\" \/>\n      {\/if}\n    <\/th>\n  {\/if}\n{\/macro}\n<div id=\"MultiChannelChooserDialog\">\n<div id=\"MultiChannelChooserTitle\" onmousedown=\"new Drag($(\'MultiChannelChooserDialog\'), event);\"><span name=\"dialogChooseChannel\">Kanalauswahl<\/span>: ${title}<\/div>\n<div id=\"MultiChannelChooserContent\">\n  <table id=\"MultiChannelChooserTable\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n    <colgroup>\n      <col width=\"5%\" \/>\n      <col width=\"19%\" \/>\n      <col width=\"55px\" \/>\n      <col width=\"30%\" \/>\n      <col width=\"12%\" \/>\n      <col width=\"17%\" \/>\n      <col width=\"17%\" \/>\n    <\/colgroup>\n    <thead>\n      <tr> <!-- Überschriften -->\n        <th class=\"MultiChannelChooserHead\">&nbsp;<\/th>\n        ${printHead(\"Name\", \"NAME\", \"thName\")}\n        <th class=\"MultiChannelChooserHead\" name=\"thPicture\">Bild<\/th>\n        ${printHead(\"Beschreibung\", \"DESCRIPTION\", \"thDescription\")}\n        ${printHead(\"Seriennummer\", \"ADDRESS\", \"thSerialNumber\")}\n        ${printHead(\"Gewerke\", \"FUNC_NAMES\", \"thFunc\")}\n        ${printHead(\"R&auml;ume\", \"ROOM_NAMES\", \"thRooms\")}\n      <\/tr>\n      <tr> <!-- Filter -->\n        <th class=\"Filter\">&nbsp;<\/th>\n        ${nameFilter.getHTML()}\n        <th class=\"Filter\">&nbsp;<\/th>\n        ${descriptionFilter.getHTML()}\n        ${addressFilter.getHTML()}\n        ${funcFilter.getHTML()}\n        ${roomFilter.getHTML()}\n      <\/tr>      \n    <\/thead>\n    <tbody>\n      {for channel in channels}\n\n        {var virtualChannel = \"\"}\n        {var channelTypeID = channel.deviceType.id.toUpperCase()}\n\n        {if channel.channelType == \"VIRTUAL_DIMMER\"} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PS\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-IT\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-CH\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-PE\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PSM-UK\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-BDT\") && ((channel.channelType == \"DIMMER_TRANSMITTER\") || ((channel.channelType == \"DIMMER_VIRTUAL_RECEIVER\") && (channel.index > 4)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-PDT\") && ((channel.channelType == \"DIMMER_TRANSMITTER\") || ((channel.channelType == \"DIMMER_VIRTUAL_RECEIVER\") && (channel.index > 3)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-BSM\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 4)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-FSM\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 2)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-FSM16\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && (channel.index > 2)))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if (channelTypeID == \"HMIP-MIOB\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && ((channel.index != 3) && (channel.index != 7))))} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n        {if channel.channelType == \"VIR-OL-GTW-CH\"} {var virtualChannel = \"hidden\"} {\/if}\n\n      <tr class=\"MultiChannelChooserRow ${virtualChannel}\" id=\"${PREFIX}${channel.id}\" onmouseover=\"this.className=\'MultiChannelChooserRow_Highlight\';\" onmouseout=\"this.className=\'MultiChannelChooserRow\';\">\n        <td class=\"MultiChannelChooserCell_Active\"><input type=\"checkbox\" onclick=\"MultiChannelChooser.select(\'${channel.id}\', this);\" {if true === channel._selected}checked=\"\"{\/if}\/><\/td>\n        <td class=\"MultiChannelChooserCell\">${channel.name}<br\/>${channel.nameExtention}<\/td>\n        <td class=\"MultiChannelChooserThumbnail\"><div class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n        <td class=\"MultiChannelChooserCell\">${channel.typeDescription}<br\/>${channel.device.name}<\/td>\n        <td class=\"MultiChannelChooserCell\">${channel.address}<\/td>\n        <td class=\"MultiChannelChooserCell\">\n          {for subsection in channel.subsections}\n            ${subsection.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n        <td class=\"MultiChannelChooserCell\">\n          {for room in channel.rooms}\n            ${room.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n      <\/tr>\n      {forelse}\n      <tr class=\"MultiChannelChooserRow\">\n        <td colspan=\"10\" class=\"MultiChannelChooserCell\" name=\"hintMultiChannelChooserNoChannelsAvailable\">Keine Kan&auml;le verf&uuml;gbar<\/td>\n      <\/tr>        \n    {\/for}\n    <\/tbody>\n  <\/table>\n<\/div>\n<div id=\"MultiChannelChooserFooter\">\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserAbortButton\" name=\"footerBtnCancel\" onclick=\"MultiChannelChooser.abort();\">Abbrechen<\/div>\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserOkButton\" name=\"footerBtnOk\" onclick=\"MultiChannelChooser.ok();\">OK<\/div>\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserResetFiltersButton\" name=\"footerBtnResetFilterWOLineBreak\" onclick=\"MultiChannelChooser.resetFilters();\">Filter zur&uuml;cksetzen<\/div>\n  {if false === showVirtual}\n    <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsShow\" onclick=\"MultiChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le anzeigen<\/div>\n  {else}\n    <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsHide\" onclick=\"MultiChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le ausblenden<\/div>\n  {\/if}\n<\/div>\n<\/div>";
 RF_CONFIG_JST = "<div class=\"CLASS10500\">\n<form name=\"RFConfig_Interfaces\">\n<table class=\"RFConfig_InterfacesTable\" width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n  <colgroup>\n    <col width=\"10%\" \/>\n    <col width=\"30%\" colspan=\"3\" \/>\n  <\/colgroup>\n  <tr>\n    <th>Auswahl<\/th>\n    <th>Seriennummer<\/th>\n    <th>Zugriffscode<\/th>\n    <th>IP Adresse<\/td>\n  <\/tr>\n\t{for gateway in m_gateways}\n  <tr class=\"RFConfig_InterfacesTable_tr\" onmouseover=\"this.className=\'RFConfig_InterfacesTable_tr_hover\';\" onmouseout=\"this.className=\'RFConfig_InterfacesTable_tr\';\">\n    <td><input id=\"${gateway.id}\" name=\"${gateway.id}\" type=\"checkbox\" \/><\/td>\n    <td onclick=\"RFConfigDialog.changeGateway(${m_dialogId}, \'${gateway.id}\');\">${gateway.serial}&nbsp;<\/td>\n    <td onclick=\"RFConfigDialog.changeGateway(${m_dialogId}, \'${gateway.id}\');\">${gateway.key}&nbsp;<\/td>\n    <td onclick=\"RFConfigDialog.changeGateway(${m_dialogId}, \'${gateway.id}\');\">${gateway.ip}&nbsp;<\/td>\n  <\/tr>\n\t{forelse}\n\t<tr class=\"RFConfig_InterfacesTable_tr\">\n    <td colspan=\"4\" align=\"center\" valign=\"middle\">Momentan sind keine Funk-LAN-Gateways verfügbar.<\/td>\n  <\/tr>\n\t{\/for}\n<\/table>\n<\/div>\n<\/form>";
 STRINGFILTER_JST = "<th class=\"{if isSet}Filter_Active{else}Filter{\/if}\" colspan=\"${colspan}\">\n  <div class=\"FilterCaption\" name=\"thFilter\" onclick=\"${name}.show();\">Filter<\/div>\n  <div class=\"FilterBodyWrapper\" id=\"${id}\" style=\"display:none;\">\n    <div class=\"FilterBody\">\n        <input class=\"FilterText\" id=\"${textId}\" onkeypress=\"${name}.checkEnterEsc(event.keyCode);\" type=\"text\" name=\"${textId}\" value=\"${value}\" \/>\n        <div class=\"FilterButton\" name=\"filterSet\" onclick=\"${name}.set();\">Setzen<\/div>\n        <div class=\"FilterButton\" name=\"filterClose\" onclick=\"${name}.close();\">Schlie&szlig;en<\/div>\n    <\/div>\n  <\/div>\n<\/th>";
 DEV_LIST        = new Array();
 DEV_DESCRIPTION = new Array();
 DEV_PATHS       = new Array();
 DEV_HIGHLIGHT   = new Array();
-DEV_LIST.push('HM-ES-PMSw1-Pl');
-DEV_DESCRIPTION["HM-ES-PMSw1-Pl"] = "HM-ES-PMSw1-Pl";
-DEV_PATHS["HM-ES-PMSw1-Pl"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-Pl"]["50"] = "/config/img/devices/50/93_hm-es-pmsw1-pl_thumb.png";
-DEV_PATHS["HM-ES-PMSw1-Pl"]["250"] = "/config/img/devices/250/93_hm-es-pmsw1-pl.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-Pl"] = new Object();
-DEV_LIST.push('263 133');
-DEV_DESCRIPTION["263 133"] = "263_133";
-DEV_PATHS["263 133"] = new Object();
-DEV_PATHS["263 133"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["263 133"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["263 133"] = new Object();
-DEV_LIST.push('HMW-Sys-PS7-DR');
-DEV_DESCRIPTION["HMW-Sys-PS7-DR"] = "HMW-Sys-PS7-DR";
-DEV_PATHS["HMW-Sys-PS7-DR"] = new Object();
-DEV_PATHS["HMW-Sys-PS7-DR"]["50"] = "/config/img/devices/50/36_hmw-sys-ps7-dr_thumb.png";
-DEV_PATHS["HMW-Sys-PS7-DR"]["250"] = "/config/img/devices/250/36_hmw-sys-ps7-dr.png";
-DEV_HIGHLIGHT["HMW-Sys-PS7-DR"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Pl-OM54');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-OM54"] = "HM-LC-Sw1-Pl-OM54";
-DEV_PATHS["HM-LC-Sw1-Pl-OM54"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-OM54"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-OM54"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HMIP-PSM');
-DEV_DESCRIPTION["HMIP-PSM"] = "PSM";
-DEV_PATHS["HMIP-PSM"] = new Object();
-DEV_PATHS["HMIP-PSM"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
-DEV_PATHS["HMIP-PSM"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
-DEV_HIGHLIGHT["HMIP-PSM"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-SM-ATmega168');
-DEV_DESCRIPTION["HM-LC-Sw1-SM-ATmega168"] = "HM-LC-Sw1-SM-ATmega168";
-DEV_PATHS["HM-LC-Sw1-SM-ATmega168"] = new Object();
-DEV_PATHS["HM-LC-Sw1-SM-ATmega168"]["50"] = "/config/img/devices/50/8_hm-lc-sw1-sm_thumb.png";
-DEV_PATHS["HM-LC-Sw1-SM-ATmega168"]["250"] = "/config/img/devices/250/8_hm-lc-sw1-sm.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-SM-ATmega168"] = new Object();
-DEV_LIST.push('HmIP-SWDO');
-DEV_DESCRIPTION["HmIP-SWDO"] = "SWD";
-DEV_PATHS["HmIP-SWDO"] = new Object();
-DEV_PATHS["HmIP-SWDO"]["50"] = "/config/img/devices/50/118_hmip-swdo_thumb.png";
-DEV_PATHS["HmIP-SWDO"]["250"] = "/config/img/devices/250/118_hmip-swdo.png";
-DEV_HIGHLIGHT["HmIP-SWDO"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-SM-2');
-DEV_DESCRIPTION["HM-LC-Sw1-SM-2"] = "HM-LC-Sw1-SM";
-DEV_PATHS["HM-LC-Sw1-SM-2"] = new Object();
-DEV_PATHS["HM-LC-Sw1-SM-2"]["50"] = "/config/img/devices/50/8_hm-lc-sw1-sm_thumb.png";
-DEV_PATHS["HM-LC-Sw1-SM-2"]["250"] = "/config/img/devices/250/8_hm-lc-sw1-sm.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-SM-2"] = new Object();
-DEV_LIST.push('263 146');
-DEV_DESCRIPTION["263 146"] = "263_146";
-DEV_PATHS["263 146"] = new Object();
-DEV_PATHS["263 146"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
-DEV_PATHS["263 146"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
-DEV_HIGHLIGHT["263 146"] = new Object();
-DEV_LIST.push('HM-ES-PMSw1-SM');
-DEV_DESCRIPTION["HM-ES-PMSw1-SM"] = "HM-ES-PMSw1-SM";
-DEV_PATHS["HM-ES-PMSw1-SM"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-SM"]["50"] = "/config/img/devices/50/115_hm-es-pmsw1-sm_thumb.png";
-DEV_PATHS["HM-ES-PMSw1-SM"]["250"] = "/config/img/devices/250/115_hm-es-pmsw1-sm.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-SM"] = new Object();
-DEV_LIST.push('HM-LC-Sw4-PCB');
-DEV_DESCRIPTION["HM-LC-Sw4-PCB"] = "HM-LC-Sw4-PCB";
-DEV_PATHS["HM-LC-Sw4-PCB"] = new Object();
-DEV_PATHS["HM-LC-Sw4-PCB"]["50"] = "/config/img/devices/50/46_hm-lc-sw4-pcb_thumb.png";
-DEV_PATHS["HM-LC-Sw4-PCB"]["250"] = "/config/img/devices/250/46_hm-lc-sw4-pcb.png";
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel1"] = [2, 0.176, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel2"] = [2, 0.244, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel3"] = [2, 0.312, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel4"] = [2, 0.38, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle1"] = [4, 0.512, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle2"] = [4, 0.570, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle3"] = [4, 0.628, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle4"] = [4, 0.686, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
-DEV_LIST.push('HM-PB-2-FM');
-DEV_DESCRIPTION["HM-PB-2-FM"] = "HM-PB-2-FM";
-DEV_PATHS["HM-PB-2-FM"] = new Object();
-DEV_PATHS["HM-PB-2-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HM-PB-2-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HM-PB-2-FM"] = new Object();
-DEV_HIGHLIGHT["HM-PB-2-FM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-PB-2-FM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-PB-2-FM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
-DEV_LIST.push('HM-WDS100-C6-O');
-DEV_DESCRIPTION["HM-WDS100-C6-O"] = "HM-WDS100-C6-O";
-DEV_PATHS["HM-WDS100-C6-O"] = new Object();
-DEV_PATHS["HM-WDS100-C6-O"]["50"] = "/config/img/devices/50/WeatherCombiSensor_thumb.png";
-DEV_PATHS["HM-WDS100-C6-O"]["250"] = "/config/img/devices/250/WeatherCombiSensor.png";
-DEV_HIGHLIGHT["HM-WDS100-C6-O"] = new Object();
-DEV_LIST.push('HM-Sen-RD-O');
-DEV_DESCRIPTION["HM-Sen-RD-O"] = "HM-Sen-RD-O";
-DEV_PATHS["HM-Sen-RD-O"] = new Object();
-DEV_PATHS["HM-Sen-RD-O"]["50"] = "/config/img/devices/50/87_hm-sen-rd-o_thumb.png";
-DEV_PATHS["HM-Sen-RD-O"]["250"] = "/config/img/devices/250/87_hm-sen-rd-o.png";
-DEV_HIGHLIGHT["HM-Sen-RD-O"] = new Object();
-DEV_LIST.push('HM-Sec-MDIR-2');
-DEV_DESCRIPTION["HM-Sec-MDIR-2"] = "HM-Sec-MDIR";
-DEV_PATHS["HM-Sec-MDIR-2"] = new Object();
-DEV_PATHS["HM-Sec-MDIR-2"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
-DEV_PATHS["HM-Sec-MDIR-2"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
-DEV_HIGHLIGHT["HM-Sec-MDIR-2"] = new Object();
-DEV_LIST.push('HM-Sec-SD-2');
-DEV_DESCRIPTION["HM-Sec-SD-2"] = "HM-Sec-SD";
-DEV_PATHS["HM-Sec-SD-2"] = new Object();
-DEV_PATHS["HM-Sec-SD-2"]["50"] = "/config/img/devices/50/104_hm-sec-sd-2_thumb.png";
-DEV_PATHS["HM-Sec-SD-2"]["250"] = "/config/img/devices/250/104_hm-sec-sd-2.png";
-DEV_HIGHLIGHT["HM-Sec-SD-2"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Pl');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl"] = "HM-LC-Sw1-Pl";
-DEV_PATHS["HM-LC-Sw1-Pl"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-LC-Dim1T-CV');
-DEV_DESCRIPTION["HM-LC-Dim1T-CV"] = "HM-LC-Dim1T-CV";
-DEV_PATHS["HM-LC-Dim1T-CV"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-CV"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-CV"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-CV"] = new Object();
-DEV_LIST.push('HM-LC-Dim1T-Pl-2');
-DEV_DESCRIPTION["HM-LC-Dim1T-Pl-2"] = "HM-LC-Dim1T-Pl-2";
-DEV_PATHS["HM-LC-Dim1T-Pl-2"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-Pl-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-Pl-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('BRC-H');
-DEV_DESCRIPTION["BRC-H"] = "BRC-H";
-DEV_PATHS["BRC-H"] = new Object();
-DEV_PATHS["BRC-H"]["50"] = "/config/img/devices/50/72_hm-rc-brc-h_thumb.png";
-DEV_PATHS["BRC-H"]["250"] = "/config/img/devices/250/72_hm-rc-brc-h.png";
-DEV_HIGHLIGHT["BRC-H"] = new Object();
-DEV_HIGHLIGHT["BRC-H"]["1"] = [4, 0.196, 0.222, 0.162, 0.164];
-DEV_HIGHLIGHT["BRC-H"]["2"] = [4, 0.417, 0.222, 0.162, 0.164];
-DEV_HIGHLIGHT["BRC-H"]["3"] = [4, 0.196, 0.482, 0.162, 0.164];
-DEV_HIGHLIGHT["BRC-H"]["4"] = [4, 0.417, 0.482, 0.162, 0.164];
-DEV_LIST.push('ZEL STG RM FZS-2');
-DEV_DESCRIPTION["ZEL STG RM FZS-2"] = "ZEL_STG_RM_FZS-2";
-DEV_PATHS["ZEL STG RM FZS-2"] = new Object();
-DEV_PATHS["ZEL STG RM FZS-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["ZEL STG RM FZS-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["ZEL STG RM FZS-2"] = new Object();
-DEV_HIGHLIGHT["ZEL STG RM FZS-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["ZEL STG RM FZS-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["ZEL STG RM FZS-2"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R3');
-DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R3"] = "HM-ES-PMSw1-Pl-DN-R3";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R3"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R3"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R3_thumb.png";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R3"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R3.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R3"] = new Object();
-DEV_LIST.push('ZEL STG RM HS 4');
-DEV_DESCRIPTION["ZEL STG RM HS 4"] = "ZEL_STG_RM_HS_4";
-DEV_PATHS["ZEL STG RM HS 4"] = new Object();
-DEV_PATHS["ZEL STG RM HS 4"]["50"] = "/config/img/devices/50/18_hm-rc-4_thumb.png";
-DEV_PATHS["ZEL STG RM HS 4"]["250"] = "/config/img/devices/250/18_hm-rc-4.png";
-DEV_HIGHLIGHT["ZEL STG RM HS 4"] = new Object();
-DEV_HIGHLIGHT["ZEL STG RM HS 4"]["1"] = [4, 0.268, 0.236, 0.16, 0.164];
-DEV_HIGHLIGHT["ZEL STG RM HS 4"]["2"] = [4, 0.476, 0.236, 0.16, 0.164];
-DEV_HIGHLIGHT["ZEL STG RM HS 4"]["3"] = [4, 0.268, 0.48, 0.16, 0.164];
-DEV_HIGHLIGHT["ZEL STG RM HS 4"]["4"] = [4, 0.476, 0.48, 0.16, 0.164];
-DEV_HIGHLIGHT["ZEL STG RM HS 4"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["ZEL STG RM HS 4"]["3+4"] = [5, '3', '4'];
-DEV_LIST.push('HM-LC-Dim1T-CV-2');
-DEV_DESCRIPTION["HM-LC-Dim1T-CV-2"] = "HM-LC-Dim1T-CV";
-DEV_PATHS["HM-LC-Dim1T-CV-2"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-CV-2"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-CV-2"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-CV-2"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Pl-3');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-3"] = "HM-LC-Sw1-Pl";
-DEV_PATHS["HM-LC-Sw1-Pl-3"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-3"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-3"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-LC-Bl1-FM');
-DEV_DESCRIPTION["HM-LC-Bl1-FM"] = "HM-LC-Bl1-FM";
-DEV_PATHS["HM-LC-Bl1-FM"] = new Object();
-DEV_PATHS["HM-LC-Bl1-FM"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
-DEV_PATHS["HM-LC-Bl1-FM"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
-DEV_HIGHLIGHT["HM-LC-Bl1-FM"] = new Object();
-DEV_LIST.push('HM-LC-Dim1T-Pl-644');
-DEV_DESCRIPTION["HM-LC-Dim1T-Pl-644"] = "HM-LC-Dim1T-Pl";
-DEV_PATHS["HM-LC-Dim1T-Pl-644"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-Pl-644"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-Pl-644"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-PB-4Dis-WM');
-DEV_DESCRIPTION["HM-PB-4Dis-WM"] = "HM-PB-4Dis-WM";
-DEV_PATHS["HM-PB-4Dis-WM"] = new Object();
-DEV_PATHS["HM-PB-4Dis-WM"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
-DEV_PATHS["HM-PB-4Dis-WM"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"] = new Object();
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_LIST.push('HM-RC-4-B');
-DEV_DESCRIPTION["HM-RC-4-B"] = "HM-RC-4-B";
-DEV_PATHS["HM-RC-4-B"] = new Object();
-DEV_PATHS["HM-RC-4-B"]["50"] = "/config/img/devices/50/18_hm-rc-4_thumb.png";
-DEV_PATHS["HM-RC-4-B"]["250"] = "/config/img/devices/250/18_hm-rc-4.png";
-DEV_HIGHLIGHT["HM-RC-4-B"] = new Object();
-DEV_HIGHLIGHT["HM-RC-4-B"]["1"] = [4, 0.268, 0.236, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4-B"]["2"] = [4, 0.476, 0.236, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4-B"]["3"] = [4, 0.268, 0.48, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4-B"]["4"] = [4, 0.476, 0.48, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4-B"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-4-B"]["3+4"] = [5, '3', '4'];
-DEV_LIST.push('HM-LC-Sw2-FM-2');
-DEV_DESCRIPTION["HM-LC-Sw2-FM-2"] = "HM-LC-Sw2-FM";
-DEV_PATHS["HM-LC-Sw2-FM-2"] = new Object();
-DEV_PATHS["HM-LC-Sw2-FM-2"]["50"] = "/config/img/devices/50/5_hm-lc-sw2-fm_thumb.png";
-DEV_PATHS["HM-LC-Sw2-FM-2"]["250"] = "/config/img/devices/250/5_hm-lc-sw2-fm.png";
-DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["1_AUS"] = [2, 0.34, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["1_EIN"] = [2, 0.6, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["2_AUS"] = [2, 0.256, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["2_EIN"] = [2, 0.508, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["1"] = [5, '1_AUS', '1_EIN'];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["2"] = [5, '2_AUS', '2_EIN'];
-DEV_LIST.push('HM-Sec-RHS-2');
-DEV_DESCRIPTION["HM-Sec-RHS-2"] = "HM-Sec-RHS";
-DEV_PATHS["HM-Sec-RHS-2"] = new Object();
-DEV_PATHS["HM-Sec-RHS-2"]["50"] = "/config/img/devices/50/17_hm-sec-rhs_thumb.png";
-DEV_PATHS["HM-Sec-RHS-2"]["250"] = "/config/img/devices/250/17_hm-sec-rhs.png";
-DEV_HIGHLIGHT["HM-Sec-RHS-2"] = new Object();
-DEV_LIST.push('HM-LC-Bl1-SM');
-DEV_DESCRIPTION["HM-LC-Bl1-SM"] = "HM-LC-Bl1-SM";
-DEV_PATHS["HM-LC-Bl1-SM"] = new Object();
-DEV_PATHS["HM-LC-Bl1-SM"]["50"] = "/config/img/devices/50/6_hm-lc-bl1-sm_thumb.png";
-DEV_PATHS["HM-LC-Bl1-SM"]["250"] = "/config/img/devices/250/6_hm-lc-bl1-sm.png";
-DEV_HIGHLIGHT["HM-LC-Bl1-SM"] = new Object();
-DEV_LIST.push('HM-EM-CMM');
-DEV_DESCRIPTION["HM-EM-CMM"] = "HM-EM-CMM";
-DEV_PATHS["HM-EM-CMM"] = new Object();
-DEV_PATHS["HM-EM-CMM"]["50"] = "/config/img/devices/50/25_hm-em-cmm_thumb.png";
-DEV_PATHS["HM-EM-CMM"]["250"] = "/config/img/devices/250/25_hm-em-cmm.png";
-DEV_HIGHLIGHT["HM-EM-CMM"] = new Object();
-DEV_LIST.push('HM-WDS30-T-O');
-DEV_DESCRIPTION["HM-WDS30-T-O"] = "HM-WDS30-T-O";
-DEV_PATHS["HM-WDS30-T-O"] = new Object();
-DEV_PATHS["HM-WDS30-T-O"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
-DEV_PATHS["HM-WDS30-T-O"]["250"] = "/config/img/devices/250/IP65_G201.png";
-DEV_HIGHLIGHT["HM-WDS30-T-O"] = new Object();
-DEV_LIST.push('HM-RC-8');
-DEV_DESCRIPTION["HM-RC-8"] = "HM-RC-8";
-DEV_PATHS["HM-RC-8"] = new Object();
-DEV_PATHS["HM-RC-8"]["50"] = "/config/img/devices/50/100_hm-rc-8_thumb.png";
-DEV_PATHS["HM-RC-8"]["250"] = "/config/img/devices/250/100_hm-rc-8.png";
-DEV_HIGHLIGHT["HM-RC-8"] = new Object();
-DEV_HIGHLIGHT["HM-RC-8"]["1"] = [1, 0.374, 0.192, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["2"] = [1, 0.537, 0.248, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["3"] = [1, 0.374, 0.284, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["4"] = [1, 0.537, 0.340, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["5"] = [1, 0.374, 0.378, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["6"] = [1, 0.537, 0.434, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["7"] = [1, 0.374, 0.470, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["8"] = [1, 0.537, 0.526, 0.02];
-DEV_HIGHLIGHT["HM-RC-8"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-8"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HM-RC-8"]["5+6"] = [5, '5', '6'];
-DEV_HIGHLIGHT["HM-RC-8"]["7+8"] = [5, '7', '8'];
-DEV_LIST.push('HM-TC-IT-WM-W-EU');
-DEV_DESCRIPTION["HM-TC-IT-WM-W-EU"] = "HM-TC-IT-WM-W-EU";
-DEV_PATHS["HM-TC-IT-WM-W-EU"] = new Object();
-DEV_PATHS["HM-TC-IT-WM-W-EU"]["50"] = "/config/img/devices/50/96_hm-tc-it-wm-w-eu_thumb.png";
-DEV_PATHS["HM-TC-IT-WM-W-EU"]["250"] = "/config/img/devices/250/96_hm-tc-it-wm-w-eu.png";
-DEV_HIGHLIGHT["HM-TC-IT-WM-W-EU"] = new Object();
-DEV_LIST.push('HM-RC-19-SW');
-DEV_DESCRIPTION["HM-RC-19-SW"] = "HM-RC-19-SW";
-DEV_PATHS["HM-RC-19-SW"] = new Object();
-DEV_PATHS["HM-RC-19-SW"]["50"] = "/config/img/devices/50/20_hm-rc-19_thumb.png";
-DEV_PATHS["HM-RC-19-SW"]["250"] = "/config/img/devices/250/20_hm-rc-19.png";
-DEV_HIGHLIGHT["HM-RC-19-SW"] = new Object();
-DEV_HIGHLIGHT["HM-RC-19-SW"]["1"] = [2, 0.296, 0.344, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["3"] = [2, 0.296, 0.416, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["5"] = [2, 0.296, 0.488, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["7"] = [2, 0.296, 0.56, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["9"] = [2, 0.296, 0.628, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["11"] = [2, 0.296, 0.704, 0.036, 0.048];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["13"] = [2, 0.296, 0.772, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["15"] = [2, 0.296, 0.844, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["2"] = [2, 0.468, 0.344, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["4"] = [2, 0.468, 0.416, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["6"] = [2, 0.468, 0.488, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["8"] = [2, 0.468, 0.56, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["10"] = [2, 0.468, 0.628, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["12"] = [2, 0.468, 0.704, 0.036, 0.048];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["14"] = [2, 0.468, 0.772, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["16"] = [2, 0.468, 0.844, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["17"] = [2, 0.58, 0.84, 0.044, 0.056];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["18"] = [2, 0.312, 0.188, 0.168, 0.088];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["5+6"] = [5, '5', '6'];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["7+8"] = [5, '7', '8'];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["9+10"] = [5, '9', '10'];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["11+12"] = [5, '11', '12'];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["13+14"] = [5, '13', '14'];
-DEV_HIGHLIGHT["HM-RC-19-SW"]["15+16"] = [5, '15', '16'];
-DEV_LIST.push('ZEL STG RM FZS');
-DEV_DESCRIPTION["ZEL STG RM FZS"] = "ZEL_STG_RM_FZS";
-DEV_PATHS["ZEL STG RM FZS"] = new Object();
-DEV_PATHS["ZEL STG RM FZS"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["ZEL STG RM FZS"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["ZEL STG RM FZS"] = new Object();
-DEV_HIGHLIGHT["ZEL STG RM FZS"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["ZEL STG RM FZS"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["ZEL STG RM FZS"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HMW-WSE-SM');
-DEV_DESCRIPTION["HMW-WSE-SM"] = "HMW-WSE-SM";
-DEV_PATHS["HMW-WSE-SM"] = new Object();
-DEV_PATHS["HMW-WSE-SM"]["50"] = "/config/img/devices/50/31_hmw-wse-sm_thumb.png";
-DEV_PATHS["HMW-WSE-SM"]["250"] = "/config/img/devices/250/31_hmw-wse-sm.png";
-DEV_HIGHLIGHT["HMW-WSE-SM"] = new Object();
-DEV_LIST.push('HmIP-SMO');
-DEV_DESCRIPTION["HmIP-SMO"] = "SMO";
-DEV_PATHS["HmIP-SMO"] = new Object();
-DEV_PATHS["HmIP-SMO"]["50"] = "/config/img/devices/50/132_hmip-smo_thumb.png";
-DEV_PATHS["HmIP-SMO"]["250"] = "/config/img/devices/250/132_hmip-smo.png";
-DEV_HIGHLIGHT["HmIP-SMO"] = new Object();
-DEV_LIST.push('HM-WDS40-TH-I');
-DEV_DESCRIPTION["HM-WDS40-TH-I"] = "HM-WDS40-TH-I";
-DEV_PATHS["HM-WDS40-TH-I"] = new Object();
-DEV_PATHS["HM-WDS40-TH-I"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
-DEV_PATHS["HM-WDS40-TH-I"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
-DEV_HIGHLIGHT["HM-WDS40-TH-I"] = new Object();
-DEV_LIST.push('ZEL STG RM FEP 230V');
-DEV_DESCRIPTION["ZEL STG RM FEP 230V"] = "ZEL_STG_RM_FEP_230V";
-DEV_PATHS["ZEL STG RM FEP 230V"] = new Object();
-DEV_PATHS["ZEL STG RM FEP 230V"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
-DEV_PATHS["ZEL STG RM FEP 230V"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
-DEV_HIGHLIGHT["ZEL STG RM FEP 230V"] = new Object();
-DEV_LIST.push('HM-RC-4-3');
-DEV_DESCRIPTION["HM-RC-4-3"] = "HM-RC-4";
-DEV_PATHS["HM-RC-4-3"] = new Object();
-DEV_PATHS["HM-RC-4-3"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
-DEV_PATHS["HM-RC-4-3"]["250"] = "/config/img/devices/250/84_hm-rc-4-3.png";
-DEV_HIGHLIGHT["HM-RC-4-3"] = new Object();
-DEV_HIGHLIGHT["HM-RC-4-3"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HM-RC-4-3"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HM-RC-4-3"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HM-RC-4-3"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HM-RC-4-3"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
-DEV_HIGHLIGHT["HM-RC-4-3"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
-DEV_HIGHLIGHT["HM-RC-4-3"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
-DEV_HIGHLIGHT["HM-RC-4-3"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
-DEV_HIGHLIGHT["HM-RC-4-3"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-3"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-3"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-3"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('HM-RC-Key4-2');
-DEV_DESCRIPTION["HM-RC-Key4-2"] = "HM-RC-Key4-2";
-DEV_PATHS["HM-RC-Key4-2"] = new Object();
-DEV_PATHS["HM-RC-Key4-2"]["50"] = "/config/img/devices/50/85_hm-rc-key4-2_thumb.png";
-DEV_PATHS["HM-RC-Key4-2"]["250"] = "/config/img/devices/250/85_hm-rc-key4-2.png";
-DEV_HIGHLIGHT["HM-RC-Key4-2"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["1_Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["2_Arrow"] = [7, '1_Arrow', 0.028, 0.156];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["3_Arrow"] = [7, '1_Arrow', 0.028, 0.312];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["4_Arrow"] = [7, '1_Arrow', 0.012, 0.468];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-2"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('HM-LC-Dim1L-Pl');
-DEV_DESCRIPTION["HM-LC-Dim1L-Pl"] = "HM-LC-Dim1L-Pl";
-DEV_PATHS["HM-LC-Dim1L-Pl"] = new Object();
-DEV_PATHS["HM-LC-Dim1L-Pl"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Dim1L-Pl"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-LC-Sw1-Pl-DN-R3');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R3"] = "HM-LC-Sw1-Pl-DN-R3";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R3"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R3"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R3_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R3"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R3.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R3"] = new Object();
-DEV_LIST.push('HM-WDS10-TH-O');
-DEV_DESCRIPTION["HM-WDS10-TH-O"] = "HM-WDS10-TH-O";
-DEV_PATHS["HM-WDS10-TH-O"] = new Object();
-DEV_PATHS["HM-WDS10-TH-O"]["50"] = "/config/img/devices/50/TH_CS_thumb.png";
-DEV_PATHS["HM-WDS10-TH-O"]["250"] = "/config/img/devices/250/TH_CS.png";
-DEV_HIGHLIGHT["HM-WDS10-TH-O"] = new Object();
-DEV_LIST.push('HMIP-eTRV');
-DEV_DESCRIPTION["HMIP-eTRV"] = "TRV";
-DEV_PATHS["HMIP-eTRV"] = new Object();
-DEV_PATHS["HMIP-eTRV"]["50"] = "/config/img/devices/50/120_hmip-etrv_thumb.png";
-DEV_PATHS["HMIP-eTRV"]["250"] = "/config/img/devices/250/120_hmip-etrv.png";
-DEV_HIGHLIGHT["HMIP-eTRV"] = new Object();
-DEV_LIST.push('HmIP-WTH');
-DEV_DESCRIPTION["HmIP-WTH"] = "WTH";
-DEV_PATHS["HmIP-WTH"] = new Object();
-DEV_PATHS["HmIP-WTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
-DEV_PATHS["HmIP-WTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
-DEV_HIGHLIGHT["HmIP-WTH"] = new Object();
-DEV_LIST.push('HM-LC-AO-SM');
-DEV_DESCRIPTION["HM-LC-AO-SM"] = "HM-LC-AO-SM";
-DEV_PATHS["HM-LC-AO-SM"] = new Object();
-DEV_PATHS["HM-LC-AO-SM"]["50"] = "/config/img/devices/50/129_hm-lc-ao-sm_thumb.png";
-DEV_PATHS["HM-LC-AO-SM"]["250"] = "/config/img/devices/250/129_hm-lc-ao-sm.png";
-DEV_HIGHLIGHT["HM-LC-AO-SM"] = new Object();
-DEV_LIST.push('HM-LC-Sw2-PB-FM');
-DEV_DESCRIPTION["HM-LC-Sw2-PB-FM"] = "HM-LC-Sw2-PB-FM";
-DEV_PATHS["HM-LC-Sw2-PB-FM"] = new Object();
-DEV_PATHS["HM-LC-Sw2-PB-FM"]["50"] = "/config/img/devices/50/PushButton-4ch-wm_thumb.png";
-DEV_PATHS["HM-LC-Sw2-PB-FM"]["250"] = "/config/img/devices/250/PushButton-4ch-wm.png";
-DEV_HIGHLIGHT["HM-LC-Sw2-PB-FM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw2-PB-FM"]["1"] = [2, 0.24, 0.312, 0.204, 0.412];
-DEV_HIGHLIGHT["HM-LC-Sw2-PB-FM"]["2"] = [2, 0.46, 0.312, 0.204, 0.412];
-DEV_LIST.push('HmIP-KRC4');
-DEV_DESCRIPTION["HmIP-KRC4"] = "KRC4";
-DEV_PATHS["HmIP-KRC4"] = new Object();
-DEV_PATHS["HmIP-KRC4"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
-DEV_PATHS["HmIP-KRC4"]["250"] = "/config/img/devices/250/84_hm-rc-4-3.png";
-DEV_HIGHLIGHT["HmIP-KRC4"] = new Object();
-DEV_HIGHLIGHT["HmIP-KRC4"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HmIP-KRC4"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HmIP-KRC4"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HmIP-KRC4"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HmIP-KRC4"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
-DEV_HIGHLIGHT["HmIP-KRC4"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
-DEV_HIGHLIGHT["HmIP-KRC4"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
-DEV_HIGHLIGHT["HmIP-KRC4"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
-DEV_HIGHLIGHT["HmIP-KRC4"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRC4"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRC4"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRC4"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRC4"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRC4"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('263 135');
-DEV_DESCRIPTION["263 135"] = "263_135";
-DEV_PATHS["263 135"] = new Object();
-DEV_PATHS["263 135"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
-DEV_PATHS["263 135"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
-DEV_HIGHLIGHT["263 135"] = new Object();
-DEV_HIGHLIGHT["263 135"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
-DEV_HIGHLIGHT["263 135"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
-DEV_LIST.push('HMW-IO-4-FM');
-DEV_DESCRIPTION["HMW-IO-4-FM"] = "HMW-IO-4-FM";
-DEV_PATHS["HMW-IO-4-FM"] = new Object();
-DEV_PATHS["HMW-IO-4-FM"]["50"] = "/config/img/devices/50/29_hmw-io-4-fm_thumb.png";
-DEV_PATHS["HMW-IO-4-FM"]["250"] = "/config/img/devices/250/29_hmw-io-4-fm.png";
-DEV_HIGHLIGHT["HMW-IO-4-FM"] = new Object();
-DEV_HIGHLIGHT["HMW-IO-4-FM"]["1"] = [6, 0.616, 0.736, 0.612, 0.836, 0.02];
-DEV_HIGHLIGHT["HMW-IO-4-FM"]["2"] = [6, 0.672, 0.736, 0.668, 0.836, 0.02];
-DEV_HIGHLIGHT["HMW-IO-4-FM"]["3"] = [6, 0.724, 0.736, 0.724, 0.836, 0.02];
-DEV_HIGHLIGHT["HMW-IO-4-FM"]["4"] = [6, 0.78, 0.736, 0.78, 0.836, 0.02];
-DEV_LIST.push('HMW-WSTH-SM');
-DEV_DESCRIPTION["HMW-WSTH-SM"] = "HMW-WSTH-SM";
-DEV_PATHS["HMW-WSTH-SM"] = new Object();
-DEV_PATHS["HMW-WSTH-SM"]["50"] = "/config/img/devices/50/32_hmw-wsth-sm_thumb.png";
-DEV_PATHS["HMW-WSTH-SM"]["250"] = "/config/img/devices/250/32_hmw-wsth-sm.png";
-DEV_HIGHLIGHT["HMW-WSTH-SM"] = new Object();
-DEV_LIST.push('ZEL STG RM FSS UP3');
-DEV_DESCRIPTION["ZEL STG RM FSS UP3"] = "ZEL_STG_RM_FSS_UP3";
-DEV_PATHS["ZEL STG RM FSS UP3"] = new Object();
-DEV_PATHS["ZEL STG RM FSS UP3"]["50"] = "/config/img/devices/50/39_hm-swi-3-fm_thumb.png";
-DEV_PATHS["ZEL STG RM FSS UP3"]["250"] = "/config/img/devices/250/39_hm-swi-3-fm.png";
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"] = new Object();
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["1"] = [5, '1_Key', '1_Kreis'];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["2"] = [5, '2_Key', '2_Kreis'];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
-DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["3"] = [5, '3_Key', '3_Kreis'];
-DEV_LIST.push('HM-LC-Sw4-PCB-2');
-DEV_DESCRIPTION["HM-LC-Sw4-PCB-2"] = "HM-LC-Sw4-PCB";
-DEV_PATHS["HM-LC-Sw4-PCB-2"] = new Object();
-DEV_PATHS["HM-LC-Sw4-PCB-2"]["50"] = "/config/img/devices/50/46_hm-lc-sw4-pcb_thumb.png";
-DEV_PATHS["HM-LC-Sw4-PCB-2"]["250"] = "/config/img/devices/250/46_hm-lc-sw4-pcb.png";
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel1"] = [2, 0.176, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel2"] = [2, 0.244, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel3"] = [2, 0.312, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel4"] = [2, 0.38, 0.78, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle1"] = [4, 0.512, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle2"] = [4, 0.570, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle3"] = [4, 0.628, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle4"] = [4, 0.686, 0.784, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
-DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
-DEV_LIST.push('HM-Dis-WM55');
-DEV_DESCRIPTION["HM-Dis-WM55"] = "HM-Dis-WM55";
-DEV_PATHS["HM-Dis-WM55"] = new Object();
-DEV_PATHS["HM-Dis-WM55"]["50"] = "/config/img/devices/50/97_hm-dis-wm55_thumb.png";
-DEV_PATHS["HM-Dis-WM55"]["250"] = "/config/img/devices/250/97_hm-dis-wm55.png";
-DEV_HIGHLIGHT["HM-Dis-WM55"] = new Object();
-DEV_LIST.push('HM-LC-Bl1-FM-2');
-DEV_DESCRIPTION["HM-LC-Bl1-FM-2"] = "HM-LC-Bl1-FM";
-DEV_PATHS["HM-LC-Bl1-FM-2"] = new Object();
-DEV_PATHS["HM-LC-Bl1-FM-2"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
-DEV_PATHS["HM-LC-Bl1-FM-2"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
-DEV_HIGHLIGHT["HM-LC-Bl1-FM-2"] = new Object();
-DEV_LIST.push('263 167');
-DEV_DESCRIPTION["263 167"] = "263_167";
-DEV_PATHS["263 167"] = new Object();
-DEV_PATHS["263 167"]["50"] = "/config/img/devices/50/51_hm-sec-sd_thumb.png";
-DEV_PATHS["263 167"]["250"] = "/config/img/devices/250/51_hm-sec-sd.png";
-DEV_HIGHLIGHT["263 167"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Pl-CT-R1');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-CT-R1"] = "HM-LC-Sw1-Pl-CT-R1";
-DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"]["50"] = "/config/img/devices/50/109_hm-lc-sw1-pl-ct_thump.png";
-DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"]["250"] = "/config/img/devices/250/109_hm-lc-sw1-pl-ct.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-CT-R1"] = new Object();
-DEV_LIST.push('HM-Sen-LI-O');
-DEV_DESCRIPTION["HM-Sen-LI-O"] = "HM-Sen-LI-O";
-DEV_PATHS["HM-Sen-LI-O"] = new Object();
-DEV_PATHS["HM-Sen-LI-O"]["50"] = "/config/img/devices/50/126_hm-sen-li-o_thumb.png";
-DEV_PATHS["HM-Sen-LI-O"]["250"] = "/config/img/devices/250/126_hm-sen-li-o.png";
-DEV_HIGHLIGHT["HM-Sen-LI-O"] = new Object();
-DEV_LIST.push('HM-LC-Dim1PWM-CV-2');
-DEV_DESCRIPTION["HM-LC-Dim1PWM-CV-2"] = "HM-LC-Dim1PWM-CV";
-DEV_PATHS["HM-LC-Dim1PWM-CV-2"] = new Object();
-DEV_PATHS["HM-LC-Dim1PWM-CV-2"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1PWM-CV-2"]["250"] = "/config/img/devices/250/79_hm-lc-dim1pwm-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1PWM-CV-2"] = new Object();
-DEV_LIST.push('HM-RC-Sec3-B');
-DEV_DESCRIPTION["HM-RC-Sec3-B"] = "HM-RC-Sec3-B";
-DEV_PATHS["HM-RC-Sec3-B"] = new Object();
-DEV_PATHS["HM-RC-Sec3-B"]["50"] = "/config/img/devices/50/22_hm-rc-sec3-b_thumb.png";
-DEV_PATHS["HM-RC-Sec3-B"]["250"] = "/config/img/devices/250/22_hm-rc-sec3-b.png";
-DEV_HIGHLIGHT["HM-RC-Sec3-B"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Sec3-B"]["1"] = [4, 0.252, 0.2, 0.16, 0.176];
-DEV_HIGHLIGHT["HM-RC-Sec3-B"]["2"] = [4, 0.492, 0.2, 0.16, 0.176];
-DEV_HIGHLIGHT["HM-RC-Sec3-B"]["3"] = [4, 0.34, 0.48, 0.224, 0.248];
-DEV_HIGHLIGHT["HM-RC-Sec3-B"]["1+2"] = [5, '1', '2'];
-DEV_LIST.push('HM-Sec-MDIR-3');
-DEV_DESCRIPTION["HM-Sec-MDIR-3"] = "HM-Sec-MDIR";
-DEV_PATHS["HM-Sec-MDIR-3"] = new Object();
-DEV_PATHS["HM-Sec-MDIR-3"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
-DEV_PATHS["HM-Sec-MDIR-3"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
-DEV_HIGHLIGHT["HM-Sec-MDIR-3"] = new Object();
-DEV_LIST.push('HM-PBI-4-FM');
-DEV_DESCRIPTION["HM-PBI-4-FM"] = "HM-PBI-4-FM";
-DEV_PATHS["HM-PBI-4-FM"] = new Object();
-DEV_PATHS["HM-PBI-4-FM"]["50"] = "/config/img/devices/50/38_hm-pbi-4-fm_thumb.png";
-DEV_PATHS["HM-PBI-4-FM"]["250"] = "/config/img/devices/250/38_hm-pbi-4-fm.png";
-DEV_HIGHLIGHT["HM-PBI-4-FM"] = new Object();
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["1_Kreis"] = [4, 0.265, 0.500, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["1"] = [5, '1_Key', '1_Kreis'];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["2_Kreis"] = [4, 0.287, 0.465, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["2"] = [5, '2_Key', '2_Kreis'];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["3_Kreis"] = [4, 0.309, 0.430, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["3"] = [5, '3_Key', '3_Kreis'];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["4_Key"] = [3, 0.18, 0.216, '4', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["4_Kreis"] = [4, 0.331, 0.395, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-PBI-4-FM"]["4"] = [5, '4_Key', '4_Kreis'];
-DEV_LIST.push('HM-WDS100-C6-O-2');
-DEV_DESCRIPTION["HM-WDS100-C6-O-2"] = "HM-WDS100-C6-O";
-DEV_PATHS["HM-WDS100-C6-O-2"] = new Object();
-DEV_PATHS["HM-WDS100-C6-O-2"]["50"] = "/config/img/devices/50/WeatherCombiSensor_thumb.png";
-DEV_PATHS["HM-WDS100-C6-O-2"]["250"] = "/config/img/devices/250/WeatherCombiSensor.png";
-DEV_HIGHLIGHT["HM-WDS100-C6-O-2"] = new Object();
-DEV_LIST.push('HM-RC-4-3-D');
-DEV_DESCRIPTION["HM-RC-4-3-D"] = "HM-RC-4";
-DEV_PATHS["HM-RC-4-3-D"] = new Object();
-DEV_PATHS["HM-RC-4-3-D"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
-DEV_PATHS["HM-RC-4-3-D"]["250"] = "/config/img/devices/250/116_hm-rc-4-3_brc-h3.png";
-DEV_HIGHLIGHT["HM-RC-4-3-D"] = new Object();
-DEV_LIST.push('HM-Sen-MDIR-O-2');
-DEV_DESCRIPTION["HM-Sen-MDIR-O-2"] = "HM-Sen-MDIR-O";
-DEV_PATHS["HM-Sen-MDIR-O-2"] = new Object();
-DEV_PATHS["HM-Sen-MDIR-O-2"]["50"] = "/config/img/devices/50/80_hm-sen-mdir-o_thumb.png";
-DEV_PATHS["HM-Sen-MDIR-O-2"]["250"] = "/config/img/devices/250/80_hm-sen-mdir-o.png";
-DEV_HIGHLIGHT["HM-Sen-MDIR-O-2"] = new Object();
-DEV_LIST.push('HM-Sys-sRP-Pl');
-DEV_DESCRIPTION["HM-Sys-sRP-Pl"] = "HM-Sys-sRP-Pl";
-DEV_PATHS["HM-Sys-sRP-Pl"] = new Object();
-DEV_PATHS["HM-Sys-sRP-Pl"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-Sys-sRP-Pl"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-Sys-sRP-Pl"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Pl-DN-R2');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R2"] = "HM-LC-Sw1-Pl-DN-R2";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R2_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R2.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R2"] = new Object();
-DEV_LIST.push('HM-RC-Key3-B');
-DEV_DESCRIPTION["HM-RC-Key3-B"] = "HM-RC-Key3-B";
-DEV_PATHS["HM-RC-Key3-B"] = new Object();
-DEV_PATHS["HM-RC-Key3-B"]["50"] = "/config/img/devices/50/23_hm-rc-key3-b_thumb.png";
-DEV_PATHS["HM-RC-Key3-B"]["250"] = "/config/img/devices/250/23_hm-rc-key3-b.png";
-DEV_HIGHLIGHT["HM-RC-Key3-B"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Key3-B"]["1"] = [4, 0.252, 0.2, 0.16, 0.18];
-DEV_HIGHLIGHT["HM-RC-Key3-B"]["2"] = [4, 0.492, 0.2, 0.16, 0.18];
-DEV_HIGHLIGHT["HM-RC-Key3-B"]["3"] = [4, 0.34, 0.484, 0.228, 0.252];
-DEV_HIGHLIGHT["HM-RC-Key3-B"]["1+2"] = [5, '1', '2'];
-DEV_LIST.push('HM-RC-Key4-3');
-DEV_DESCRIPTION["HM-RC-Key4-3"] = "HM-RC-4";
-DEV_PATHS["HM-RC-Key4-3"] = new Object();
-DEV_PATHS["HM-RC-Key4-3"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
-DEV_PATHS["HM-RC-Key4-3"]["250"] = "/config/img/devices/250/86_hm-rc-key4-3.png";
-DEV_HIGHLIGHT["HM-RC-Key4-3"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Key4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('HM-WS550STH-I');
-DEV_DESCRIPTION["HM-WS550STH-I"] = "HM-WS550STH-I";
-DEV_PATHS["HM-WS550STH-I"] = new Object();
-DEV_PATHS["HM-WS550STH-I"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
-DEV_PATHS["HM-WS550STH-I"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
-DEV_HIGHLIGHT["HM-WS550STH-I"] = new Object();
-DEV_LIST.push('HM-LC-Sw2-DR');
-DEV_DESCRIPTION["HM-LC-Sw2-DR"] = "HM-LC-Sw2-DR";
-DEV_PATHS["HM-LC-Sw2-DR"] = new Object();
-DEV_PATHS["HM-LC-Sw2-DR"]["50"] = "/config/img/devices/50/69_hm-lc-sw2-dr_thumb.png";
-DEV_PATHS["HM-LC-Sw2-DR"]["250"] = "/config/img/devices/250/69_hm-lc-sw2-dr.png";
-DEV_HIGHLIGHT["HM-LC-Sw2-DR"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw2-DR"]["1"] = [4, 0.095, 0.556, 0.045, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw2-DR"]["2"] = [4, 0.285, 0.556, 0.045, 0.04];
-DEV_LIST.push('263 132');
-DEV_DESCRIPTION["263 132"] = "263_132";
-DEV_PATHS["263 132"] = new Object();
-DEV_PATHS["263 132"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
-DEV_PATHS["263 132"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
-DEV_HIGHLIGHT["263 132"] = new Object();
-DEV_LIST.push('HM-RC-12');
-DEV_DESCRIPTION["HM-RC-12"] = "HM-RC-12";
-DEV_PATHS["HM-RC-12"] = new Object();
-DEV_PATHS["HM-RC-12"]["50"] = "/config/img/devices/50/19_hm-rc-12_thumb.png";
-DEV_PATHS["HM-RC-12"]["250"] = "/config/img/devices/250/19_hm-rc-12.png";
-DEV_HIGHLIGHT["HM-RC-12"] = new Object();
-DEV_HIGHLIGHT["HM-RC-12"]["1"] = [2, 0.252, 0.412, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["3"] = [2, 0.252, 0.508, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["5"] = [2, 0.252, 0.604, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["7"] = [2, 0.252, 0.7, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["9"] = [2, 0.252, 0.8, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["10"] = [2, 0.476, 0.8, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["8"] = [2, 0.476, 0.7, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["6"] = [2, 0.476, 0.604, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["4"] = [2, 0.476, 0.508, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["2"] = [2, 0.476, 0.412, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12"]["11"] = [2, 0.62, 0.8, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-RC-12"]["12"] = [2, 0.62, 0.704, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-RC-12"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-12"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HM-RC-12"]["5+6"] = [5, '5', '6'];
-DEV_HIGHLIGHT["HM-RC-12"]["7+8"] = [5, '7', '8'];
-DEV_HIGHLIGHT["HM-RC-12"]["9+10"] = [5, '9', '10'];
-DEV_HIGHLIGHT["HM-RC-12"]["11+12"] = [5, '11', '12'];
-DEV_LIST.push('HM-LC-Sw4-Ba-PCB');
-DEV_DESCRIPTION["HM-LC-Sw4-Ba-PCB"] = "HM-LC-Sw4-Ba-PCB";
-DEV_PATHS["HM-LC-Sw4-Ba-PCB"] = new Object();
-DEV_PATHS["HM-LC-Sw4-Ba-PCB"]["50"] = "/config/img/devices/50/88_hm-lc-sw4-ba-pcb_thumb.png";
-DEV_PATHS["HM-LC-Sw4-Ba-PCB"]["250"] = "/config/img/devices/250/88_hm-lc-sw4-ba-pcb.png";
-DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["1"] = [2, 0.140, 0.704, 0.092, 0.052];
-DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["2"] = [2, 0.328, 0.704, 0.092, 0.052];
-DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["3"] = [2, 0.512, 0.704, 0.092, 0.052];
-DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["4"] = [2, 0.688, 0.704, 0.092, 0.052];
-DEV_LIST.push('HmIP-eTRV');
-DEV_DESCRIPTION["HmIP-eTRV"] = "TRV";
-DEV_PATHS["HmIP-eTRV"] = new Object();
-DEV_PATHS["HmIP-eTRV"]["50"] = "/config/img/devices/50/120_hmip-etrv_thumb.png";
-DEV_PATHS["HmIP-eTRV"]["250"] = "/config/img/devices/250/120_hmip-etrv.png";
-DEV_HIGHLIGHT["HmIP-eTRV"] = new Object();
-DEV_LIST.push('HmIP-FSM');
-DEV_DESCRIPTION["HmIP-FSM"] = "FSM";
-DEV_PATHS["HmIP-FSM"] = new Object();
-DEV_PATHS["HmIP-FSM"]["50"] = "/config/img/devices/50/134_hmip-fsm_thumb.png";
-DEV_PATHS["HmIP-FSM"]["250"] = "/config/img/devices/250/134_hmip-fsm.png";
-DEV_HIGHLIGHT["HmIP-FSM"] = new Object();
-DEV_LIST.push('HM-OU-CFM-TW');
-DEV_DESCRIPTION["HM-OU-CFM-TW"] = "HM-OU-CFM-TW";
-DEV_PATHS["HM-OU-CFM-TW"] = new Object();
-DEV_PATHS["HM-OU-CFM-TW"]["50"] = "/config/img/devices/50/117_hm-ou-cfm-tw_thumb.png";
-DEV_PATHS["HM-OU-CFM-TW"]["250"] = "/config/img/devices/250/117_hm-ou-cfm-tw.png";
-DEV_HIGHLIGHT["HM-OU-CFM-TW"] = new Object();
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_circle"] = [4, 0.8079999999999999, 0.656, 0.118, 0.112];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_1"] = [6, 0.748, 0.712, 0.776, 0.712, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_2"] = [6, 0.776, 0.632, 0.8, 0.652, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_3"] = [6, 0.86, 0.6, 0.86, 0.628, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_4"] = [6, 0.94, 0.628, 0.92, 0.648, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_5"] = [6, 0.944, 0.712, 0.976, 0.712, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_6"] = [6, 0.8, 0.772, 0.784, 0.792, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_7"] = [6, 0.86, 0.796, 0.86, 0.8240000000000001, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_8"] = [6, 0.92, 0.772, 0.94, 0.792, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["1"] = [5, 'Light_circle', 'Light_beam_1', 'Light_beam_2', 'Light_beam_3', 'Light_beam_4', 'Light_beam_5', 'Light_beam_6', 'Light_beam_7', 'Light_beam_8'];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_1"] = [6, 0.764, 0.12, 0.792, 0.12, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_2"] = [6, 0.792, 0.12, 0.792, 0.2599999999999999, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_3"] = [6, 0.764, 0.2599999999999999, 0.792, 0.2599999999999999, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_4"] = [6, 0.764, 0.12, 0.764, 0.2599999999999999, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_5"] = [6, 0.792, 0.12, 0.836, 0.07599999999999996, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_6"] = [6, 0.836, 0.07599999999999996, 0.836, 0.30399999999999994, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_7"] = [6, 0.792, 0.2599999999999999, 0.836, 0.30399999999999994, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_beam_1"] = [6, 0.87, 0.1439999999999999, 0.952, 0.07599999999999996, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_beam_2"] = [6, 0.87, 0.19199999999999995, 0.952, 0.19199999999999995, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_beam_3"] = [6, 0.87, 0.24, 0.952, 0.30399999999999994, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-TW"]["2"] = [5, 'SP_1', 'SP_2', 'SP_3', 'SP_4', 'SP_5', 'SP_6', 'SP_7', 'SP_beam_1', 'SP_beam_2', 'SP_beam_3'];
-DEV_LIST.push('HM-Sec-TiS');
-DEV_DESCRIPTION["HM-Sec-TiS"] = "HM-Sec-TiS";
-DEV_PATHS["HM-Sec-TiS"] = new Object();
-DEV_PATHS["HM-Sec-TiS"]["50"] = "/config/img/devices/50/47_hm-sec-tis_thumb.png";
-DEV_PATHS["HM-Sec-TiS"]["250"] = "/config/img/devices/250/47_hm-sec-tis.png";
-DEV_HIGHLIGHT["HM-Sec-TiS"] = new Object();
-DEV_LIST.push('HM-LC-DDC1-PCB');
-DEV_DESCRIPTION["HM-LC-DDC1-PCB"] = "HM-LC-DDC1-PCB";
-DEV_PATHS["HM-LC-DDC1-PCB"] = new Object();
-DEV_PATHS["HM-LC-DDC1-PCB"]["50"] = "/config/img/devices/50/54a_lc-ddc1_thumb.png";
-DEV_PATHS["HM-LC-DDC1-PCB"]["250"] = "/config/img/devices/250/54a_lc-ddc1-pcb.png";
-DEV_HIGHLIGHT["HM-LC-DDC1-PCB"] = new Object();
-DEV_LIST.push('HM-LC-Bl1-PB-FM');
-DEV_DESCRIPTION["HM-LC-Bl1-PB-FM"] = "HM-LC-Bl1-PB-FM";
-DEV_PATHS["HM-LC-Bl1-PB-FM"] = new Object();
-DEV_PATHS["HM-LC-Bl1-PB-FM"]["50"] = "/config/img/devices/50/61_hm-lc-bl1-pb-fm_thumb.png";
-DEV_PATHS["HM-LC-Bl1-PB-FM"]["250"] = "/config/img/devices/250/61_hm-lc-bl1-pb-fm.png";
-DEV_HIGHLIGHT["HM-LC-Bl1-PB-FM"] = new Object();
-DEV_LIST.push('OLIGO.smart.iq.HM');
-DEV_DESCRIPTION["OLIGO.smart.iq.HM"] = "OLIGO.smart.iq.HM";
-DEV_PATHS["OLIGO.smart.iq.HM"] = new Object();
-DEV_PATHS["OLIGO.smart.iq.HM"]["50"] = "/config/img/devices/50/123_oligo.smart.ip.hm_thumb.png";
-DEV_PATHS["OLIGO.smart.iq.HM"]["250"] = "/config/img/devices/250/123_oligo.smart.ip.hm.png";
-DEV_HIGHLIGHT["OLIGO.smart.iq.HM"] = new Object();
-DEV_LIST.push('HM-OU-LED16');
-DEV_DESCRIPTION["HM-OU-LED16"] = "HM-OU-LED16";
-DEV_PATHS["HM-OU-LED16"] = new Object();
-DEV_PATHS["HM-OU-LED16"]["50"] = "/config/img/devices/50/78_hm-ou-led16_thumb.png";
-DEV_PATHS["HM-OU-LED16"]["250"] = "/config/img/devices/250/78_hm-ou-led16.png";
-DEV_HIGHLIGHT["HM-OU-LED16"] = new Object();
-DEV_HIGHLIGHT["HM-OU-LED16"]["1"] = [2, 0.152, 0.218, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["2"] = [2, 0.152, 0.277, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["3"] = [2, 0.152, 0.336, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["4"] = [2, 0.152, 0.395, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["5"] = [2, 0.152, 0.454, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["6"] = [2, 0.152, 0.513, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["7"] = [2, 0.152, 0.572, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["8"] = [2, 0.152, 0.631, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["9"] = [2, 0.728, 0.218, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["10"] = [2, 0.728, 0.277, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["11"] = [2, 0.728, 0.336, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["12"] = [2, 0.728, 0.395, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["13"] = [2, 0.728, 0.454, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["14"] = [2, 0.728, 0.513, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["15"] = [2, 0.728, 0.572, 0.064, 0.056];
-DEV_HIGHLIGHT["HM-OU-LED16"]["16"] = [2, 0.728, 0.631, 0.064, 0.056];
-DEV_LIST.push('KS550');
-DEV_DESCRIPTION["KS550"] = "KS550";
-DEV_PATHS["KS550"] = new Object();
-DEV_PATHS["KS550"]["50"] = "/config/img/devices/50/WeatherCombiSensor_thumb.png";
-DEV_PATHS["KS550"]["250"] = "/config/img/devices/250/WeatherCombiSensor.png";
-DEV_HIGHLIGHT["KS550"] = new Object();
-DEV_LIST.push('HmIP-SMO-A');
-DEV_DESCRIPTION["HmIP-SMO-A"] = "SMO";
-DEV_PATHS["HmIP-SMO-A"] = new Object();
-DEV_PATHS["HmIP-SMO-A"]["50"] = "/config/img/devices/50/132_hmip-smo_thumb.png";
-DEV_PATHS["HmIP-SMO-A"]["250"] = "/config/img/devices/250/132_hmip-smo.png";
-DEV_HIGHLIGHT["HmIP-SMO-A"] = new Object();
-DEV_LIST.push('HM-RC-Sec4-2');
-DEV_DESCRIPTION["HM-RC-Sec4-2"] = "HM-RC-Sec4-2";
-DEV_PATHS["HM-RC-Sec4-2"] = new Object();
-DEV_PATHS["HM-RC-Sec4-2"]["50"] = "/config/img/devices/50/86_hm-rc-sec4-2_thumb.png";
-DEV_PATHS["HM-RC-Sec4-2"]["250"] = "/config/img/devices/250/86_hm-rc-sec4-2.png";
-DEV_HIGHLIGHT["HM-RC-Sec4-2"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["1_Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["2_Arrow"] = [7, '1_Arrow', 0.028, 0.156];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["3_Arrow"] = [7, '1_Arrow', 0.028, 0.312];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["4_Arrow"] = [7, '1_Arrow', 0.012, 0.468];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-2"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('HM-LC-Dim2T-SM-644');
-DEV_DESCRIPTION["HM-LC-Dim2T-SM-644"] = "HM-LC-Dim2T-SM";
-DEV_PATHS["HM-LC-Dim2T-SM-644"] = new Object();
-DEV_PATHS["HM-LC-Dim2T-SM-644"]["50"] = "/config/img/devices/50/64_hm-lc-dim2T-sm_thumb.png";
-DEV_PATHS["HM-LC-Dim2T-SM-644"]["250"] = "/config/img/devices/250/64_hm-lc-dim2T-sm.png";
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Part1"] = [6, 0.539, 0.864, 0.539, 0.948, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Part2"] = [6, 0.539, 0.948, 0.49, 0.884, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Part3"] = [6, 0.539, 0.948, 0.588, 0.884, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["2_Arrow"] = [7, '1_Arrow', 0.179, 0];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Key"] = [4, 0.25, 0.26, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["2_Key"] = [4, 0.328, 0.26, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1"] = [5, '1_Arrow', '1_Key'];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["2"] = [5, '2_Arrow', '2_Key'];
-DEV_LIST.push('HM-LC-Sw4-WM-2');
-DEV_DESCRIPTION["HM-LC-Sw4-WM-2"] = "HM-LC-Sw4-WM";
-DEV_PATHS["HM-LC-Sw4-WM-2"] = new Object();
-DEV_PATHS["HM-LC-Sw4-WM-2"]["50"] = "/config/img/devices/50/76_hm-lc-sw4-wm_thumb.png";
-DEV_PATHS["HM-LC-Sw4-WM-2"]["250"] = "/config/img/devices/250/76_hm-lc-sw4-wm.png";
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel1"] = [2, 0.208, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel2"] = [2, 0.276, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel3"] = [2, 0.344, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel4"] = [2, 0.412, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle1"] = [4, 0.534, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle2"] = [4, 0.583, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle3"] = [4, 0.637, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle4"] = [4, 0.693, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
-DEV_LIST.push('HM-PB-4-WM');
-DEV_DESCRIPTION["HM-PB-4-WM"] = "HM-PB-4-WM";
-DEV_PATHS["HM-PB-4-WM"] = new Object();
-DEV_PATHS["HM-PB-4-WM"]["50"] = "/config/img/devices/50/PushButton-4ch-wm_thumb.png";
-DEV_PATHS["HM-PB-4-WM"]["250"] = "/config/img/devices/250/PushButton-4ch-wm.png";
-DEV_HIGHLIGHT["HM-PB-4-WM"] = new Object();
-DEV_HIGHLIGHT["HM-PB-4-WM"]["2"] = [2, 0.24, 0.312, 0.204, 0.168];
-DEV_HIGHLIGHT["HM-PB-4-WM"]["1"] = [2, 0.24, 0.556, 0.204, 0.168];
-DEV_HIGHLIGHT["HM-PB-4-WM"]["3"] = [2, 0.46, 0.556, 0.204, 0.168];
-DEV_HIGHLIGHT["HM-PB-4-WM"]["4"] = [2, 0.46, 0.312, 0.204, 0.168];
-DEV_HIGHLIGHT["HM-PB-4-WM"]["1+2"] = [2, 0.24, 0.312, 0.204, 0.412];
-DEV_HIGHLIGHT["HM-PB-4-WM"]["3+4"] = [2, 0.46, 0.312, 0.204, 0.412];
-DEV_LIST.push('HM-Sec-Key-S');
-DEV_DESCRIPTION["HM-Sec-Key-S"] = "HM-Sec-Key-S";
-DEV_PATHS["HM-Sec-Key-S"] = new Object();
-DEV_PATHS["HM-Sec-Key-S"]["50"] = "/config/img/devices/50/14_hm-sec-key_thumb.png";
-DEV_PATHS["HM-Sec-Key-S"]["250"] = "/config/img/devices/250/14_hm-sec-key.png";
-DEV_HIGHLIGHT["HM-Sec-Key-S"] = new Object();
-DEV_LIST.push('HM-OU-CM-PCB');
-DEV_DESCRIPTION["HM-OU-CM-PCB"] = "HM-OU-CM-PCB";
-DEV_PATHS["HM-OU-CM-PCB"] = new Object();
-DEV_PATHS["HM-OU-CM-PCB"]["50"] = "/config/img/devices/50/92_hm-ou-cm-pcb_thumb.png";
-DEV_PATHS["HM-OU-CM-PCB"]["250"] = "/config/img/devices/250/92_hm-ou-cm-pcb.png";
-DEV_HIGHLIGHT["HM-OU-CM-PCB"] = new Object();
-DEV_LIST.push('HM-ES-TX-WM');
-DEV_DESCRIPTION["HM-ES-TX-WM"] = "HM-ES-TX-WM";
-DEV_PATHS["HM-ES-TX-WM"] = new Object();
-DEV_PATHS["HM-ES-TX-WM"]["50"] = "/config/img/devices/50/102_hm-es-tx-wm_thumb.png";
-DEV_PATHS["HM-ES-TX-WM"]["250"] = "/config/img/devices/250/102_hm-es-tx-wm.png";
-DEV_HIGHLIGHT["HM-ES-TX-WM"] = new Object();
-DEV_LIST.push('ZEL STG RM DWT 10');
-DEV_DESCRIPTION["ZEL STG RM DWT 10"] = "ZEL_STG_RM_DWT_10";
-DEV_PATHS["ZEL STG RM DWT 10"] = new Object();
-DEV_PATHS["ZEL STG RM DWT 10"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
-DEV_PATHS["ZEL STG RM DWT 10"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"] = new Object();
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_LIST.push('HM-PB-2-WM55');
-DEV_DESCRIPTION["HM-PB-2-WM55"] = "HM-PB-2-WM55";
-DEV_PATHS["HM-PB-2-WM55"] = new Object();
-DEV_PATHS["HM-PB-2-WM55"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
-DEV_PATHS["HM-PB-2-WM55"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
-DEV_HIGHLIGHT["HM-PB-2-WM55"] = new Object();
-DEV_HIGHLIGHT["HM-PB-2-WM55"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
-DEV_HIGHLIGHT["HM-PB-2-WM55"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
-DEV_LIST.push('HmIP-SRH');
-DEV_DESCRIPTION["HmIP-SRH"] = "SRH";
-DEV_PATHS["HmIP-SRH"] = new Object();
-DEV_PATHS["HmIP-SRH"]["50"] = "/config/img/devices/50/130_hmip-srh_thumb.png";
-DEV_PATHS["HmIP-SRH"]["250"] = "/config/img/devices/250/130_hmip-srh.png";
-DEV_HIGHLIGHT["HmIP-SRH"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Ba-PCB');
-DEV_DESCRIPTION["HM-LC-Sw1-Ba-PCB"] = "HM-LC-Sw1-Ba-PCB";
-DEV_PATHS["HM-LC-Sw1-Ba-PCB"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Ba-PCB"]["50"] = "/config/img/devices/50/77_hm-lc-sw1-ba-pcb_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Ba-PCB"]["250"] = "/config/img/devices/250/77_hm-lc-sw1-ba-pcb.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Ba-PCB"] = new Object();
-DEV_LIST.push('HmIP-KRCA');
-DEV_DESCRIPTION["HmIP-KRCA"] = "KRCA";
-DEV_PATHS["HmIP-KRCA"] = new Object();
-DEV_PATHS["HmIP-KRCA"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
-DEV_PATHS["HmIP-KRCA"]["250"] = "/config/img/devices/250/85_hm-rc-sec4-3.png";
-DEV_HIGHLIGHT["HmIP-KRCA"] = new Object();
-DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HmIP-KRCA"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HmIP-KRCA"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
-DEV_HIGHLIGHT["HmIP-KRCA"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
-DEV_HIGHLIGHT["HmIP-KRCA"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
-DEV_HIGHLIGHT["HmIP-KRCA"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
-DEV_HIGHLIGHT["HmIP-KRCA"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRCA"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRCA"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRCA"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRCA"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HmIP-KRCA"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('HM-LC-Sw2-DR-2');
-DEV_DESCRIPTION["HM-LC-Sw2-DR-2"] = "HM-LC-Sw2-DR";
-DEV_PATHS["HM-LC-Sw2-DR-2"] = new Object();
-DEV_PATHS["HM-LC-Sw2-DR-2"]["50"] = "/config/img/devices/50/69_hm-lc-sw2-dr_thumb.png";
-DEV_PATHS["HM-LC-Sw2-DR-2"]["250"] = "/config/img/devices/250/69_hm-lc-sw2-dr.png";
-DEV_HIGHLIGHT["HM-LC-Sw2-DR-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw2-DR-2"]["1"] = [4, 0.095, 0.556, 0.045, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw2-DR-2"]["2"] = [4, 0.285, 0.556, 0.045, 0.04];
-DEV_LIST.push('HMW-LC-Dim1L-DR');
-DEV_DESCRIPTION["HMW-LC-Dim1L-DR"] = "HMW-LC-Dim1L-DR";
-DEV_PATHS["HMW-LC-Dim1L-DR"] = new Object();
-DEV_PATHS["HMW-LC-Dim1L-DR"]["50"] = "/config/img/devices/50/28_hmw-lc-dim1l-dr_thumb.png";
-DEV_PATHS["HMW-LC-Dim1L-DR"]["250"] = "/config/img/devices/250/28_hmw-lc-dim1l-dr.png";
-DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"] = new Object();
-DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"]["1"] = [2, 0.312, 0.756, 0.056, 0.06];
-DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"]["2"] = [2, 0.368, 0.752, 0.048, 0.068];
-DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"]["3"] = [2, 0.368, 0.388, 0.048, 0.064];
-DEV_LIST.push('263 144');
-DEV_DESCRIPTION["263 144"] = "263_144";
-DEV_PATHS["263 144"] = new Object();
-DEV_PATHS["263 144"]["50"] = "/config/img/devices/50/39_hm-swi-3-fm_thumb.png";
-DEV_PATHS["263 144"]["250"] = "/config/img/devices/250/39_hm-swi-3-fm.png";
-DEV_HIGHLIGHT["263 144"] = new Object();
-DEV_HIGHLIGHT["263 144"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["263 144"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
-DEV_HIGHLIGHT["263 144"]["1"] = [5, '1_Key', '1_Kreis'];
-DEV_HIGHLIGHT["263 144"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["263 144"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
-DEV_HIGHLIGHT["263 144"]["2"] = [5, '2_Key', '2_Kreis'];
-DEV_HIGHLIGHT["263 144"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["263 144"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
-DEV_HIGHLIGHT["263 144"]["3"] = [5, '3_Key', '3_Kreis'];
-DEV_LIST.push('HM-Sec-Key');
-DEV_DESCRIPTION["HM-Sec-Key"] = "HM-Sec-Key";
-DEV_PATHS["HM-Sec-Key"] = new Object();
-DEV_PATHS["HM-Sec-Key"]["50"] = "/config/img/devices/50/14_hm-sec-key_thumb.png";
-DEV_PATHS["HM-Sec-Key"]["250"] = "/config/img/devices/250/14_hm-sec-key.png";
-DEV_HIGHLIGHT["HM-Sec-Key"] = new Object();
-DEV_LIST.push('HM-Sec-Win');
-DEV_DESCRIPTION["HM-Sec-Win"] = "HM-Sec-Win";
-DEV_PATHS["HM-Sec-Win"] = new Object();
-DEV_PATHS["HM-Sec-Win"]["50"] = "/config/img/devices/50/15_hm-sec-win_thumb.png";
-DEV_PATHS["HM-Sec-Win"]["250"] = "/config/img/devices/250/15_hm-sec-win.png";
-DEV_HIGHLIGHT["HM-Sec-Win"] = new Object();
-DEV_LIST.push('HMW-IO-12-FM');
-DEV_DESCRIPTION["HMW-IO-12-FM"] = "HMW-IO-12-FM";
-DEV_PATHS["HMW-IO-12-FM"] = new Object();
-DEV_PATHS["HMW-IO-12-FM"]["50"] = "/config/img/devices/50/59_hmw-io-12-fm_thumb.png";
-DEV_PATHS["HMW-IO-12-FM"]["250"] = "/config/img/devices/250/59_hmw-io-12-fm.png";
-DEV_HIGHLIGHT["HMW-IO-12-FM"] = new Object();
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["1_num"] = [3, 0.744, 0.636, '1', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["1_line"] = [6, 0.77, 0.08, 0.860, 0.08, 0.016];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["1"] = [5, '1_num', '1_line'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["2_num"] = [3, 0.744, 0.636, '2', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["2_line"] = [6, 0.77, 0.136, 0.86, 0.136, 0.016];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["2"] = [5, '2_num', '2_line'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["3_num"] = [3, 0.744, 0.636, '3', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["3_line"] = [6, 0.77, 0.194, 0.86, 0.194, 0.016];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["3"] = [5, '3_num', '3_line'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["4_num"] = [3, 0.744, 0.636, '4', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["4_line"] = [6, 0.77, 0.25, 0.86, 0.25, 0.016];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["4"] = [5, '4_num', '4_line'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["5_num"] = [3, 0.744, 0.636, '5', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["5_line"] = [6, 0.77, 0.308, 0.86, 0.308, 0.016];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["5"] = [5, '5_num', '5_line'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["6_num"] = [3, 0.744, 0.636, '6', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["6_line"] = [6, 0.77, 0.366, 0.86, 0.366, 0.016];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["6"] = [5, '6_num', '6_line'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["7_num"] = [3, 0.744, 0.636, '7', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["7_line"] = [6, 0.77, 0.424, 0.86, 0.424, 0.016];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["7"] = [5, '7_num', '7_line'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["8_num"] = [3, 0.744, 0.636, '8', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["8_arc"] = [4, 0.370, 0.748, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["8"] = [5, '8_num', '8_arc'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["9_num"] = [3, 0.744, 0.636, '9', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["9_arc"] = [4, 0.3895, 0.704, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["9"] = [5, '9_num', '9_arc'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["10_num"] = [3, 0.744, 0.636, '10', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["10_arc"] = [4, 0.41, 0.65, 0.035, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["10"] = [5, '10_num', '10_arc'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["11_num"] = [3, 0.744, 0.636, '11', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["11_arc"] = [4, 0.4293, 0.612, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["11"] = [5, '11_num', '11_arc'];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["12_num"] = [3, 0.744, 0.636, '12', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["12_arc"] = [4, 0.448, 0.564, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-IO-12-FM"]["12"] = [5, '12_num', '12_arc'];
-DEV_LIST.push('HM-LC-Dim1L-Pl-3');
-DEV_DESCRIPTION["HM-LC-Dim1L-Pl-3"] = "HM-LC-Dim1L-Pl-3";
-DEV_PATHS["HM-LC-Dim1L-Pl-3"] = new Object();
-DEV_PATHS["HM-LC-Dim1L-Pl-3"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Dim1L-Pl-3"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-Sen-DB-PCB');
-DEV_DESCRIPTION["HM-Sen-DB-PCB"] = "HM-Sen-DB-PCB";
-DEV_PATHS["HM-Sen-DB-PCB"] = new Object();
-DEV_PATHS["HM-Sen-DB-PCB"]["50"] = "/config/img/devices/50/101_hm-sen-db-pcb_thumb.png";
-DEV_PATHS["HM-Sen-DB-PCB"]["250"] = "/config/img/devices/250/101_hm-sen-db-pcb.png";
-DEV_HIGHLIGHT["HM-Sen-DB-PCB"] = new Object();
-DEV_LIST.push('HM-LC-Dim1T-CV-644');
-DEV_DESCRIPTION["HM-LC-Dim1T-CV-644"] = "HM-LC-Dim1T-CV";
-DEV_PATHS["HM-LC-Dim1T-CV-644"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-CV-644"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-CV-644"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-CV-644"] = new Object();
-DEV_LIST.push('ZEL STG RM FST UP4');
-DEV_DESCRIPTION["ZEL STG RM FST UP4"] = "ZEL_STG_RM_FST_UP4";
-DEV_PATHS["ZEL STG RM FST UP4"] = new Object();
-DEV_PATHS["ZEL STG RM FST UP4"]["50"] = "/config/img/devices/50/38_hm-pbi-4-fm_thumb.png";
-DEV_PATHS["ZEL STG RM FST UP4"]["250"] = "/config/img/devices/250/38_hm-pbi-4-fm.png";
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"] = new Object();
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["1_Kreis"] = [4, 0.265, 0.500, 0.028, 0.028];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["1"] = [5, '1_Key', '1_Kreis'];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["2_Kreis"] = [4, 0.287, 0.465, 0.028, 0.028];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["2"] = [5, '2_Key', '2_Kreis'];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["3_Kreis"] = [4, 0.309, 0.430, 0.028, 0.028];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["3"] = [5, '3_Key', '3_Kreis'];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["4_Key"] = [3, 0.18, 0.216, '4', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["4_Kreis"] = [4, 0.331, 0.395, 0.028, 0.028];
-DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["4"] = [5, '4_Key', '4_Kreis'];
-DEV_LIST.push('HmIP-WTH-2');
-DEV_DESCRIPTION["HmIP-WTH-2"] = "WTH";
-DEV_PATHS["HmIP-WTH-2"] = new Object();
-DEV_PATHS["HmIP-WTH-2"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
-DEV_PATHS["HmIP-WTH-2"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
-DEV_HIGHLIGHT["HmIP-WTH-2"] = new Object();
-DEV_LIST.push('HM-LC-Dim1T-FM-LF');
-DEV_DESCRIPTION["HM-LC-Dim1T-FM-LF"] = "HM-LC-Dim1T-FM";
-DEV_PATHS["HM-LC-Dim1T-FM-LF"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-FM-LF"]["50"] = "/config/img/devices/50/114_hm-lc-dim1t-fm-lf_thumb_3.png";
-DEV_PATHS["HM-LC-Dim1T-FM-LF"]["250"] = "/config/img/devices/250/114_hm-lc-dim1t-fm-lf_3.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-FM-LF"] = new Object();
-DEV_LIST.push('ZEL STG RM FFK');
-DEV_DESCRIPTION["ZEL STG RM FFK"] = "ZEL_STG_RM_FFK";
-DEV_PATHS["ZEL STG RM FFK"] = new Object();
-DEV_PATHS["ZEL STG RM FFK"]["50"] = "/config/img/devices/50/16_hm-sec-sc_thumb.png";
-DEV_PATHS["ZEL STG RM FFK"]["250"] = "/config/img/devices/250/16_hm-sec-sc.png";
-DEV_HIGHLIGHT["ZEL STG RM FFK"] = new Object();
-DEV_LIST.push('HM-WDS40-TH-I-2');
-DEV_DESCRIPTION["HM-WDS40-TH-I-2"] = "HM-WDS40-TH-I";
-DEV_PATHS["HM-WDS40-TH-I-2"] = new Object();
-DEV_PATHS["HM-WDS40-TH-I-2"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
-DEV_PATHS["HM-WDS40-TH-I-2"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
-DEV_HIGHLIGHT["HM-WDS40-TH-I-2"] = new Object();
-DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R2');
-DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R2"] = "HM-ES-PMSw1-Pl-DN-R2";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R2"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R2"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R2_thumb.png";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R2"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R2.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R2"] = new Object();
-DEV_LIST.push('HM-RC-19-B');
-DEV_DESCRIPTION["HM-RC-19-B"] = "HM-RC-19-B";
-DEV_PATHS["HM-RC-19-B"] = new Object();
-DEV_PATHS["HM-RC-19-B"]["50"] = "/config/img/devices/50/20_hm-rc-19_thumb.png";
-DEV_PATHS["HM-RC-19-B"]["250"] = "/config/img/devices/250/20_hm-rc-19.png";
-DEV_HIGHLIGHT["HM-RC-19-B"] = new Object();
-DEV_HIGHLIGHT["HM-RC-19-B"]["1"] = [2, 0.296, 0.344, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["3"] = [2, 0.296, 0.416, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["5"] = [2, 0.296, 0.488, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["7"] = [2, 0.296, 0.56, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["9"] = [2, 0.296, 0.628, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["11"] = [2, 0.296, 0.704, 0.036, 0.048];
-DEV_HIGHLIGHT["HM-RC-19-B"]["13"] = [2, 0.296, 0.772, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["15"] = [2, 0.296, 0.844, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["2"] = [2, 0.468, 0.344, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["4"] = [2, 0.468, 0.416, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["6"] = [2, 0.468, 0.488, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["8"] = [2, 0.468, 0.56, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["10"] = [2, 0.468, 0.628, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["12"] = [2, 0.468, 0.704, 0.036, 0.048];
-DEV_HIGHLIGHT["HM-RC-19-B"]["14"] = [2, 0.468, 0.772, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["16"] = [2, 0.468, 0.844, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19-B"]["17"] = [2, 0.58, 0.84, 0.044, 0.056];
-DEV_HIGHLIGHT["HM-RC-19-B"]["18"] = [2, 0.312, 0.188, 0.168, 0.088];
-DEV_HIGHLIGHT["HM-RC-19-B"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-19-B"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HM-RC-19-B"]["5+6"] = [5, '5', '6'];
-DEV_HIGHLIGHT["HM-RC-19-B"]["7+8"] = [5, '7', '8'];
-DEV_HIGHLIGHT["HM-RC-19-B"]["9+10"] = [5, '9', '10'];
-DEV_HIGHLIGHT["HM-RC-19-B"]["11+12"] = [5, '11', '12'];
-DEV_HIGHLIGHT["HM-RC-19-B"]["13+14"] = [5, '13', '14'];
-DEV_HIGHLIGHT["HM-RC-19-B"]["15+16"] = [5, '15', '16'];
-DEV_LIST.push('HM-PB-6-WM55');
-DEV_DESCRIPTION["HM-PB-6-WM55"] = "HM-PB-6-WM55";
-DEV_PATHS["HM-PB-6-WM55"] = new Object();
-DEV_PATHS["HM-PB-6-WM55"]["50"] = "/config/img/devices/50/86_hm-pb-6-wm55_thumb.png";
-DEV_PATHS["HM-PB-6-WM55"]["250"] = "/config/img/devices/250/86_hm-pb-6-wm55.png";
-DEV_HIGHLIGHT["HM-PB-6-WM55"] = new Object();
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["1"] = [2, 0.164, 0.232, 0.112, 0.156];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["2"] = [2, 0.588, 0.232, 0.112, 0.156];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["3"] = [2, 0.164, 0.428, 0.112, 0.156];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["4"] = [2, 0.588, 0.428, 0.112, 0.156];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["5"] = [2, 0.164, 0.616, 0.112, 0.156];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["6"] = [2, 0.588, 0.616, 0.112, 0.156];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HM-PB-6-WM55"]["5+6"] = [5, '5', '6'];
-DEV_LIST.push('HM-LC-Dim1T-Pl-3');
-DEV_DESCRIPTION["HM-LC-Dim1T-Pl-3"] = "HM-LC-Dim1T-Pl-3";
-DEV_PATHS["HM-LC-Dim1T-Pl-3"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-Pl-3"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-Pl-3"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-RC-2-PBU-FM');
-DEV_DESCRIPTION["HM-RC-2-PBU-FM"] = "HM-RC-2-PBU-FM";
-DEV_PATHS["HM-RC-2-PBU-FM"] = new Object();
-DEV_PATHS["HM-RC-2-PBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HM-RC-2-PBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HM-RC-2-PBU-FM"] = new Object();
-DEV_HIGHLIGHT["HM-RC-2-PBU-FM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-RC-2-PBU-FM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-RC-2-PBU-FM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
-DEV_LIST.push('HM-LC-Sw1-DR');
-DEV_DESCRIPTION["HM-LC-Sw1-DR"] = "HM-LC-Sw1-DR";
-DEV_PATHS["HM-LC-Sw1-DR"] = new Object();
-DEV_PATHS["HM-LC-Sw1-DR"]["50"] = "/config/img/devices/50/35_hmw-sys-tm-dr_thumb.png";
-DEV_PATHS["HM-LC-Sw1-DR"]["250"] = "/config/img/devices/250/106_hm-lc-sw1-dr.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-DR"] = new Object();
-DEV_LIST.push('HmIP-PS');
-DEV_DESCRIPTION["HmIP-PS"] = "PS";
-DEV_PATHS["HmIP-PS"] = new Object();
-DEV_PATHS["HmIP-PS"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
-DEV_PATHS["HmIP-PS"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
-DEV_HIGHLIGHT["HmIP-PS"] = new Object();
-DEV_LIST.push('HM-WS550-US');
-DEV_DESCRIPTION["HM-WS550-US"] = "HM-WS550-US";
-DEV_PATHS["HM-WS550-US"] = new Object();
-DEV_PATHS["HM-WS550-US"]["50"] = "/config/img/devices/50/9_hm-ws550-us_thumb.png";
-DEV_PATHS["HM-WS550-US"]["250"] = "/config/img/devices/250/9_hm-ws550-us.png";
-DEV_HIGHLIGHT["HM-WS550-US"] = new Object();
-DEV_HIGHLIGHT["HM-WS550-US"]["1"] = [3, 0.440, 0.200, '1', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["2"] = [3, 0.440, 0.200, '2', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["3"] = [3, 0.440, 0.200, '3', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["4"] = [3, 0.440, 0.200, '4', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["5"] = [3, 0.440, 0.200, '5', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["6"] = [3, 0.440, 0.200, '6', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-WS550-US"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
-DEV_LIST.push('HM-LC-Dim2L-SM-2');
-DEV_DESCRIPTION["HM-LC-Dim2L-SM-2"] = "HM-LC-Dim2L-SM";
-DEV_PATHS["HM-LC-Dim2L-SM-2"] = new Object();
-DEV_PATHS["HM-LC-Dim2L-SM-2"]["50"] = "/config/img/devices/50/45_hm-lc-dim2l-sm_thumb.png";
-DEV_PATHS["HM-LC-Dim2L-SM-2"]["250"] = "/config/img/devices/250/45_hm-lc-dim2l-sm.png";
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Part1"] = [6, 0.530, 0.896, 0.530, 0.98, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Part2"] = [6, 0.530, 0.98, 0.49, 0.916, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Part3"] = [6, 0.530, 0.98, 0.574, 0.916, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2_Arrow"] = [7, '1_Arrow', 0.168, 0];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
-DEV_LIST.push('HM-Sec-Sir-WM');
-DEV_DESCRIPTION["HM-Sec-Sir-WM"] = "HM-Sec-Sir-WM";
-DEV_PATHS["HM-Sec-Sir-WM"] = new Object();
-DEV_PATHS["HM-Sec-Sir-WM"]["50"] = "/config/img/devices/50/117_hm-sec-sir-wm_thumb.png";
-DEV_PATHS["HM-Sec-Sir-WM"]["250"] = "/config/img/devices/250/117_hm-sec-sir-wm.png";
-DEV_HIGHLIGHT["HM-Sec-Sir-WM"] = new Object();
-DEV_LIST.push('263 147');
-DEV_DESCRIPTION["263 147"] = "263_147";
-DEV_PATHS["263 147"] = new Object();
-DEV_PATHS["263 147"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["263 147"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["263 147"] = new Object();
-DEV_HIGHLIGHT["263 147"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["263 147"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["263 147"]["1"] = [5, '1a', '1b'];
-DEV_LIST.push('HMW-Sen-SC-12-FM');
-DEV_DESCRIPTION["HMW-Sen-SC-12-FM"] = "HMW-Sen-SC-12-FM";
-DEV_PATHS["HMW-Sen-SC-12-FM"] = new Object();
-DEV_PATHS["HMW-Sen-SC-12-FM"]["50"] = "/config/img/devices/50/58_hmw-sen-sc-12-fm_thumb.png";
-DEV_PATHS["HMW-Sen-SC-12-FM"]["250"] = "/config/img/devices/250/58_hmw-sen-sc-12-fm.png";
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"] = new Object();
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["1_num"] = [3, 0.744, 0.636, '1', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["1_line"] = [6, 0.77, 0.055, 0.860, 0.055, 0.016];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["1"] = [5, '1_num', '1_line'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["2_num"] = [3, 0.744, 0.636, '2', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["2_line"] = [6, 0.77, 0.115, 0.86, 0.115, 0.016];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["2"] = [5, '2_num', '2_line'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["3_num"] = [3, 0.744, 0.636, '3', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["3_line"] = [6, 0.77, 0.173, 0.86, 0.173, 0.016];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["3"] = [5, '3_num', '3_line'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["4_num"] = [3, 0.744, 0.636, '4', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["4_line"] = [6, 0.77, 0.226, 0.86, 0.226, 0.016];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["4"] = [5, '4_num', '4_line'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["5_num"] = [3, 0.744, 0.636, '5', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["5_line"] = [6, 0.77, 0.288, 0.86, 0.288, 0.016];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["5"] = [5, '5_num', '5_line'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["6_num"] = [3, 0.744, 0.636, '6', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["6_line"] = [6, 0.77, 0.348, 0.86, 0.348, 0.016];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["6"] = [5, '6_num', '6_line'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["7_num"] = [3, 0.744, 0.636, '7', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["7_line"] = [6, 0.77, 0.403, 0.86, 0.403, 0.016];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["7"] = [5, '7_num', '7_line'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["8_num"] = [3, 0.744, 0.636, '8', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["8_arc"] = [4, 0.370, 0.730, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["8"] = [5, '8_num', '8_arc'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["9_num"] = [3, 0.744, 0.636, '9', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["9_arc"] = [4, 0.3895, 0.685, 0.036, 0.036, 0.0368];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["9"] = [5, '9_num', '9_arc'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["10_num"] = [3, 0.744, 0.636, '10', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["10_arc"] = [4, 0.41, 0.64, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["10"] = [5, '10_num', '10_arc'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["11_num"] = [3, 0.744, 0.636, '11', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["11_arc"] = [4, 0.43, 0.589, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["11"] = [5, '11_num', '11_arc'];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["12_num"] = [3, 0.744, 0.636, '12', 0.164, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["12_arc"] = [4, 0.45, 0.542, 0.036, 0.036, 0.036];
-DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["12"] = [5, '12_num', '12_arc'];
-DEV_LIST.push('HMIP-WRC2');
-DEV_DESCRIPTION["HMIP-WRC2"] = "WRC2";
-DEV_PATHS["HMIP-WRC2"] = new Object();
-DEV_PATHS["HMIP-WRC2"]["50"] = "/config/img/devices/50/112_hmip-wrc2_thumb.png";
-DEV_PATHS["HMIP-WRC2"]["250"] = "/config/img/devices/250/112_hmip-wrc2.png";
-DEV_HIGHLIGHT["HMIP-WRC2"] = new Object();
-DEV_HIGHLIGHT["HMIP-WRC2"]["2"] = [4, 0.540, 0.366, 0.04, 0.044];
-DEV_HIGHLIGHT["HMIP-WRC2"]["1"] = [4, 0.540, 0.622, 0.04, 0.044];
-DEV_LIST.push('HmIP-SMI');
-DEV_DESCRIPTION["HmIP-SMI"] = "SMI";
-DEV_PATHS["HmIP-SMI"] = new Object();
-DEV_PATHS["HmIP-SMI"]["50"] = "/config/img/devices/50/125_hmip-smi_thumb.png";
-DEV_PATHS["HmIP-SMI"]["250"] = "/config/img/devices/250/125_hmip-smi.png";
-DEV_HIGHLIGHT["HmIP-SMI"] = new Object();
-DEV_LIST.push('263 155');
-DEV_DESCRIPTION["263 155"] = "263_155";
-DEV_PATHS["263 155"] = new Object();
-DEV_PATHS["263 155"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
-DEV_PATHS["263 155"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
-DEV_HIGHLIGHT["263 155"] = new Object();
-DEV_HIGHLIGHT["263 155"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["263 155"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_LIST.push('HM-LC-Sw1PBU-FM');
-DEV_DESCRIPTION["HM-LC-Sw1PBU-FM"] = "HM-LC-Sw1PBU-FM";
-DEV_PATHS["HM-LC-Sw1PBU-FM"] = new Object();
-DEV_PATHS["HM-LC-Sw1PBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HM-LC-Sw1PBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"]["1"] = [5, '1a', '1b'];
-DEV_LIST.push('HM-Sec-SCo');
-DEV_DESCRIPTION["HM-Sec-SCo"] = "HM-Sec-SCo";
-DEV_PATHS["HM-Sec-SCo"] = new Object();
-DEV_PATHS["HM-Sec-SCo"]["50"] = "/config/img/devices/50/98_hm-sec-sco_thumb.png";
-DEV_PATHS["HM-Sec-SCo"]["250"] = "/config/img/devices/250/98_hm-sec-sco.png";
-DEV_HIGHLIGHT["HM-Sec-SCo"] = new Object();
-DEV_LIST.push('HM-CC-VG-1');
-DEV_DESCRIPTION["HM-CC-VG-1"] = "HM-CC-VG-1";
-DEV_PATHS["HM-CC-VG-1"] = new Object();
-DEV_PATHS["HM-CC-VG-1"]["50"] = "/config/img/devices/50/95_group_hm-cc-vg-1_thumb.png";
-DEV_PATHS["HM-CC-VG-1"]["250"] = "/config/img/devices/250/95_group_hm-cc-vg-1.png";
-DEV_HIGHLIGHT["HM-CC-VG-1"] = new Object();
-DEV_LIST.push('HMW-IO-12-Sw14-DR');
-DEV_DESCRIPTION["HMW-IO-12-Sw14-DR"] = "HMW-IO-12-Sw14-DR";
-DEV_PATHS["HMW-IO-12-Sw14-DR"] = new Object();
-DEV_PATHS["HMW-IO-12-Sw14-DR"]["50"] = "/config/img/devices/50/71_hmw-io-12-sw14-dr_thumb.png";
-DEV_PATHS["HMW-IO-12-Sw14-DR"]["250"] = "/config/img/devices/250/71_hmw-io-12-sw14-dr.png";
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"] = new Object();
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["1"] = [2, 0.106, 0.398, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["2"] = [2, 0.230, 0.398, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["3"] = [2, 0.294, 0.398, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["4"] = [2, 0.422, 0.398, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["5"] = [2, 0.482, 0.398, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["6"] = [2, 0.602, 0.398, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["7"] = [2, 0.046, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["8"] = [2, 0.106, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["9"] = [2, 0.230, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["10"] = [2, 0.294, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["11"] = [2, 0.422, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["12"] = [2, 0.482, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["13"] = [2, 0.602, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["14"] = [2, 0.666, 0.458, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["15"] = [2, 0.230, 0.69, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["16"] = [2, 0.294, 0.69, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["17"] = [2, 0.422, 0.69, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["18"] = [2, 0.482, 0.69, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["19"] = [2, 0.602, 0.69, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["20"] = [2, 0.666, 0.69, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["21"] = [2, 0.230, 0.755, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["22"] = [2, 0.294, 0.755, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["23"] = [2, 0.422, 0.755, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["24"] = [2, 0.482, 0.755, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["25"] = [2, 0.602, 0.755, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["26"] = [2, 0.666, 0.755, 0.06, 0.06];
-DEV_LIST.push('HM-LC-Sw1-FM');
-DEV_DESCRIPTION["HM-LC-Sw1-FM"] = "HM-LC-Sw1-FM";
-DEV_PATHS["HM-LC-Sw1-FM"] = new Object();
-DEV_PATHS["HM-LC-Sw1-FM"]["50"] = "/config/img/devices/50/4_hm-lc-sw1-fm_thumb.png";
-DEV_PATHS["HM-LC-Sw1-FM"]["250"] = "/config/img/devices/250/4_hm-lc-sw1-fm.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-FM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw1-FM"]["1_AUS"] = [2, 0.288, 0.66, 0.068, 0.152];
-DEV_HIGHLIGHT["HM-LC-Sw1-FM"]["1_EIN"] = [2, 0.548, 0.66, 0.068, 0.152];
-DEV_HIGHLIGHT["HM-LC-Sw1-FM"]["1"] = [5, '1_AUS', '1_EIN'];
-DEV_LIST.push('HM-LC-Dim1PWM-CV');
-DEV_DESCRIPTION["HM-LC-Dim1PWM-CV"] = "HM-LC-Dim1PWM-CV";
-DEV_PATHS["HM-LC-Dim1PWM-CV"] = new Object();
-DEV_PATHS["HM-LC-Dim1PWM-CV"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1PWM-CV"]["250"] = "/config/img/devices/250/79_hm-lc-dim1pwm-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1PWM-CV"] = new Object();
-DEV_LIST.push('ZEL STG RM FDK');
-DEV_DESCRIPTION["ZEL STG RM FDK"] = "ZEL_STG_RM_FDK";
-DEV_PATHS["ZEL STG RM FDK"] = new Object();
-DEV_PATHS["ZEL STG RM FDK"]["50"] = "/config/img/devices/50/17_hm-sec-rhs_thumb.png";
-DEV_PATHS["ZEL STG RM FDK"]["250"] = "/config/img/devices/250/17_hm-sec-rhs.png";
-DEV_HIGHLIGHT["ZEL STG RM FDK"] = new Object();
+DEV_LIST.push('HmIP-WRC6');
+DEV_DESCRIPTION["HmIP-WRC6"] = "WRC6";
+DEV_PATHS["HmIP-WRC6"] = new Object();
+DEV_PATHS["HmIP-WRC6"]["50"] = "/config/img/devices/50/131_hmip-wrc6_thumb.png";
+DEV_PATHS["HmIP-WRC6"]["250"] = "/config/img/devices/250/131_hmip-wrc6.png";
+DEV_HIGHLIGHT["HmIP-WRC6"] = new Object();
+DEV_HIGHLIGHT["HmIP-WRC6"]["1"] = [1, 0.3, 0.358, 0.025];
+DEV_HIGHLIGHT["HmIP-WRC6"]["2"] = [1, 0.705, 0.315, 0.025];
+DEV_HIGHLIGHT["HmIP-WRC6"]["3"] = [1, 0.3, 0.53, 0.025];
+DEV_HIGHLIGHT["HmIP-WRC6"]["4"] = [1, 0.705, 0.495, 0.025];
+DEV_HIGHLIGHT["HmIP-WRC6"]["5"] = [1, 0.3, 0.706, 0.025];
+DEV_HIGHLIGHT["HmIP-WRC6"]["6"] = [1, 0.705, 0.671, 0.025];
+DEV_HIGHLIGHT["HmIP-WRC6"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HmIP-WRC6"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HmIP-WRC6"]["5+6"] = [5, '5', '6'];
 DEV_LIST.push('HM-LC-Dim1TPBU-FM-2');
 DEV_DESCRIPTION["HM-LC-Dim1TPBU-FM-2"] = "HM-LC-Dim1TPBU-FM-2";
 DEV_PATHS["HM-LC-Dim1TPBU-FM-2"] = new Object();
 DEV_PATHS["HM-LC-Dim1TPBU-FM-2"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
 DEV_PATHS["HM-LC-Dim1TPBU-FM-2"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
 DEV_HIGHLIGHT["HM-LC-Dim1TPBU-FM-2"] = new Object();
-DEV_LIST.push('HM-LC-Dim1T-FM-644');
-DEV_DESCRIPTION["HM-LC-Dim1T-FM-644"] = "HM-LC-Dim1T-FM";
-DEV_PATHS["HM-LC-Dim1T-FM-644"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-FM-644"]["50"] = "/config/img/devices/50/65_hm-lc-dim1t-fm_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-FM-644"]["250"] = "/config/img/devices/250/65_hm-lc-dim1t-fm.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-FM-644"] = new Object();
-DEV_LIST.push('HM-RC-4');
-DEV_DESCRIPTION["HM-RC-4"] = "HM-RC-4";
-DEV_PATHS["HM-RC-4"] = new Object();
-DEV_PATHS["HM-RC-4"]["50"] = "/config/img/devices/50/18_hm-rc-4_thumb.png";
-DEV_PATHS["HM-RC-4"]["250"] = "/config/img/devices/250/18_hm-rc-4.png";
-DEV_HIGHLIGHT["HM-RC-4"] = new Object();
-DEV_HIGHLIGHT["HM-RC-4"]["1"] = [4, 0.268, 0.236, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4"]["2"] = [4, 0.476, 0.236, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4"]["3"] = [4, 0.268, 0.48, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4"]["4"] = [4, 0.476, 0.48, 0.16, 0.164];
-DEV_HIGHLIGHT["HM-RC-4"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-4"]["3+4"] = [5, '3', '4'];
-DEV_LIST.push('263 160');
-DEV_DESCRIPTION["263 160"] = "263_160";
-DEV_PATHS["263 160"] = new Object();
-DEV_PATHS["263 160"]["50"] = "/config/img/devices/50/57_hm-cc-scd_thumb.png";
-DEV_PATHS["263 160"]["250"] = "/config/img/devices/250/57_hm-cc-scd.png";
-DEV_HIGHLIGHT["263 160"] = new Object();
-DEV_LIST.push('HM-RC-Sec3');
-DEV_DESCRIPTION["HM-RC-Sec3"] = "HM-RC-Sec3";
-DEV_PATHS["HM-RC-Sec3"] = new Object();
-DEV_PATHS["HM-RC-Sec3"]["50"] = "/config/img/devices/50/22_hm-rc-sec3-b_thumb.png";
-DEV_PATHS["HM-RC-Sec3"]["250"] = "/config/img/devices/250/22_hm-rc-sec3-b.png";
-DEV_HIGHLIGHT["HM-RC-Sec3"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Sec3"]["1"] = [4, 0.252, 0.2, 0.16, 0.176];
-DEV_HIGHLIGHT["HM-RC-Sec3"]["2"] = [4, 0.492, 0.2, 0.16, 0.176];
-DEV_HIGHLIGHT["HM-RC-Sec3"]["3"] = [4, 0.34, 0.48, 0.224, 0.248];
-DEV_HIGHLIGHT["HM-RC-Sec3"]["1+2"] = [5, '1', '2'];
-DEV_LIST.push('HM-RCV-50');
-DEV_DESCRIPTION["HM-RCV-50"] = "HM-RCV-50";
-DEV_PATHS["HM-RCV-50"] = new Object();
-DEV_PATHS["HM-RCV-50"]["50"] = "/config/img/devices/50/CCU2_thumb.png";
-DEV_PATHS["HM-RCV-50"]["250"] = "/config/img/devices/250/CCU2.png";
-DEV_HIGHLIGHT["HM-RCV-50"] = new Object();
-DEV_HIGHLIGHT["HM-RCV-50"]["RF_1"] = [4, 0.364, 0.048, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-RCV-50"]["RF_2"] = [6, 0.4, 0.052, 0.544, 0.004, 0.016];
-DEV_HIGHLIGHT["HM-RCV-50"]["RF_3"] = [6, 0.4, 0.052, 0.6, 0.052, 0.016];
-DEV_HIGHLIGHT["HM-RCV-50"]["RF_4"] = [6, 0.4, 0.052, 0.544, 0.104, 0.016];
-DEV_HIGHLIGHT["HM-RCV-50"]["RF_5"] = [6, 0.168, 0.052, 0.344, 0.052, 0.016];
-DEV_HIGHLIGHT["HM-RCV-50"]["RF_6"] = [6, 0.168, 0, 0.344, 0.052, 0.016];
-DEV_HIGHLIGHT["HM-RCV-50"]["RF_7"] = [6, 0.168, 0.104, 0.344, 0.052, 0.016];
-DEV_HIGHLIGHT["HM-RCV-50"]["RF"] = [5, 'RF_1', 'RF_2', 'RF_3', 'RF_4', 'RF_5', 'RF_6', 'RF_7'];
-DEV_HIGHLIGHT["HM-RCV-50"]["S1"] = [3, 0.25, 0.15, '1', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S2"] = [3, 0.25, 0.15, '2', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S3"] = [3, 0.25, 0.15, '3', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S4"] = [3, 0.25, 0.15, '4', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S5"] = [3, 0.25, 0.15, '5', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S6"] = [3, 0.25, 0.15, '6', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S7"] = [3, 0.25, 0.15, '7', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S8"] = [3, 0.25, 0.15, '8', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S9"] = [3, 0.25, 0.15, '9', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S10"] = [3, 0.175, 0.15, '10', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S11"] = [3, 0.175, 0.15, '11', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S12"] = [3, 0.175, 0.15, '12', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S13"] = [3, 0.175, 0.15, '13', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S14"] = [3, 0.175, 0.15, '14', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S15"] = [3, 0.175, 0.15, '15', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S16"] = [3, 0.175, 0.15, '16', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S17"] = [3, 0.175, 0.15, '17', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S18"] = [3, 0.175, 0.15, '18', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S19"] = [3, 0.175, 0.15, '19', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S20"] = [3, 0.175, 0.15, '20', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S21"] = [3, 0.175, 0.15, '21', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S22"] = [3, 0.175, 0.15, '22', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S23"] = [3, 0.175, 0.15, '23', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S24"] = [3, 0.175, 0.15, '24', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S25"] = [3, 0.175, 0.15, '25', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S26"] = [3, 0.175, 0.15, '26', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S27"] = [3, 0.175, 0.15, '27', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S28"] = [3, 0.175, 0.15, '28', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S29"] = [3, 0.175, 0.15, '29', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S30"] = [3, 0.175, 0.15, '30', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S31"] = [3, 0.175, 0.15, '31', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S32"] = [3, 0.175, 0.15, '32', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S33"] = [3, 0.175, 0.15, '33', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S34"] = [3, 0.175, 0.15, '34', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S35"] = [3, 0.175, 0.15, '35', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S36"] = [3, 0.175, 0.15, '36', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S37"] = [3, 0.175, 0.15, '37', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S38"] = [3, 0.175, 0.15, '38', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S39"] = [3, 0.175, 0.15, '39', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S40"] = [3, 0.175, 0.15, '40', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S41"] = [3, 0.175, 0.15, '41', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S42"] = [3, 0.175, 0.15, '42', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S43"] = [3, 0.175, 0.15, '43', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S44"] = [3, 0.175, 0.15, '44', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S45"] = [3, 0.175, 0.15, '45', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S46"] = [3, 0.175, 0.15, '46', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S47"] = [3, 0.175, 0.15, '47', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S48"] = [3, 0.175, 0.15, '48', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S49"] = [3, 0.175, 0.15, '49', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["S50"] = [3, 0.175, 0.15, '50', 0.3, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-RCV-50"]["1"] = [5, 'S1'];
-DEV_HIGHLIGHT["HM-RCV-50"]["2"] = [5, 'S2'];
-DEV_HIGHLIGHT["HM-RCV-50"]["3"] = [5, 'S3'];
-DEV_HIGHLIGHT["HM-RCV-50"]["4"] = [5, 'S4'];
-DEV_HIGHLIGHT["HM-RCV-50"]["5"] = [5, 'S5'];
-DEV_HIGHLIGHT["HM-RCV-50"]["6"] = [5, 'S6'];
-DEV_HIGHLIGHT["HM-RCV-50"]["7"] = [5, 'S7'];
-DEV_HIGHLIGHT["HM-RCV-50"]["8"] = [5, 'S8'];
-DEV_HIGHLIGHT["HM-RCV-50"]["9"] = [5, 'S9'];
-DEV_HIGHLIGHT["HM-RCV-50"]["10"] = [5, 'S10'];
-DEV_HIGHLIGHT["HM-RCV-50"]["11"] = [5, 'S11'];
-DEV_HIGHLIGHT["HM-RCV-50"]["12"] = [5, 'S12'];
-DEV_HIGHLIGHT["HM-RCV-50"]["13"] = [5, 'S13'];
-DEV_HIGHLIGHT["HM-RCV-50"]["14"] = [5, 'S14'];
-DEV_HIGHLIGHT["HM-RCV-50"]["15"] = [5, 'S15'];
-DEV_HIGHLIGHT["HM-RCV-50"]["16"] = [5, 'S16'];
-DEV_HIGHLIGHT["HM-RCV-50"]["17"] = [5, 'S17'];
-DEV_HIGHLIGHT["HM-RCV-50"]["18"] = [5, 'S18'];
-DEV_HIGHLIGHT["HM-RCV-50"]["19"] = [5, 'S19'];
-DEV_HIGHLIGHT["HM-RCV-50"]["20"] = [5, 'S20'];
-DEV_HIGHLIGHT["HM-RCV-50"]["21"] = [5, 'S21'];
-DEV_HIGHLIGHT["HM-RCV-50"]["22"] = [5, 'S22'];
-DEV_HIGHLIGHT["HM-RCV-50"]["23"] = [5, 'S23'];
-DEV_HIGHLIGHT["HM-RCV-50"]["24"] = [5, 'S24'];
-DEV_HIGHLIGHT["HM-RCV-50"]["25"] = [5, 'S25'];
-DEV_HIGHLIGHT["HM-RCV-50"]["26"] = [5, 'S26'];
-DEV_HIGHLIGHT["HM-RCV-50"]["27"] = [5, 'S27'];
-DEV_HIGHLIGHT["HM-RCV-50"]["28"] = [5, 'S28'];
-DEV_HIGHLIGHT["HM-RCV-50"]["29"] = [5, 'S29'];
-DEV_HIGHLIGHT["HM-RCV-50"]["30"] = [5, 'S30'];
-DEV_HIGHLIGHT["HM-RCV-50"]["31"] = [5, 'S31'];
-DEV_HIGHLIGHT["HM-RCV-50"]["32"] = [5, 'S32'];
-DEV_HIGHLIGHT["HM-RCV-50"]["33"] = [5, 'S33'];
-DEV_HIGHLIGHT["HM-RCV-50"]["34"] = [5, 'S34'];
-DEV_HIGHLIGHT["HM-RCV-50"]["35"] = [5, 'S35'];
-DEV_HIGHLIGHT["HM-RCV-50"]["36"] = [5, 'S36'];
-DEV_HIGHLIGHT["HM-RCV-50"]["37"] = [5, 'S37'];
-DEV_HIGHLIGHT["HM-RCV-50"]["38"] = [5, 'S38'];
-DEV_HIGHLIGHT["HM-RCV-50"]["39"] = [5, 'S39'];
-DEV_HIGHLIGHT["HM-RCV-50"]["40"] = [5, 'S40'];
-DEV_HIGHLIGHT["HM-RCV-50"]["41"] = [5, 'S41'];
-DEV_HIGHLIGHT["HM-RCV-50"]["42"] = [5, 'S42'];
-DEV_HIGHLIGHT["HM-RCV-50"]["43"] = [5, 'S43'];
-DEV_HIGHLIGHT["HM-RCV-50"]["44"] = [5, 'S44'];
-DEV_HIGHLIGHT["HM-RCV-50"]["45"] = [5, 'S45'];
-DEV_HIGHLIGHT["HM-RCV-50"]["46"] = [5, 'S46'];
-DEV_HIGHLIGHT["HM-RCV-50"]["47"] = [5, 'S47'];
-DEV_HIGHLIGHT["HM-RCV-50"]["48"] = [5, 'S48'];
-DEV_HIGHLIGHT["HM-RCV-50"]["49"] = [5, 'S49'];
-DEV_HIGHLIGHT["HM-RCV-50"]["50"] = [5, 'S50'];
-DEV_LIST.push('atent');
-DEV_DESCRIPTION["atent"] = "atent";
-DEV_PATHS["atent"] = new Object();
-DEV_PATHS["atent"]["50"] = "/config/img/devices/50/73_hm-atent_thumb.png";
-DEV_PATHS["atent"]["250"] = "/config/img/devices/250/73_hm-atent.png";
-DEV_HIGHLIGHT["atent"] = new Object();
-DEV_HIGHLIGHT["atent"]["1"] = [4, 0.177, 0.216, 0.166, 0.166];
-DEV_HIGHLIGHT["atent"]["2"] = [4, 0.438, 0.216, 0.166, 0.166];
-DEV_HIGHLIGHT["atent"]["3"] = [4, 0.273, 0.49, 0.24, 0.235];
-DEV_HIGHLIGHT["atent"]["1+2"] = [5, '1', '2'];
-DEV_LIST.push('HM-WS550ST-IO');
-DEV_DESCRIPTION["HM-WS550ST-IO"] = "HM-WS550ST-IO";
-DEV_PATHS["HM-WS550ST-IO"] = new Object();
-DEV_PATHS["HM-WS550ST-IO"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
-DEV_PATHS["HM-WS550ST-IO"]["250"] = "/config/img/devices/250/IP65_G201.png";
-DEV_HIGHLIGHT["HM-WS550ST-IO"] = new Object();
-DEV_LIST.push('HM-Sen-EP');
-DEV_DESCRIPTION["HM-Sen-EP"] = "HM-Sen-EP";
-DEV_PATHS["HM-Sen-EP"] = new Object();
-DEV_PATHS["HM-Sen-EP"]["50"] = "/config/img/devices/50/48_hm-sen-ep_thumb.png";
-DEV_PATHS["HM-Sen-EP"]["250"] = "/config/img/devices/250/48_hm-sen-ep.png";
-DEV_HIGHLIGHT["HM-Sen-EP"] = new Object();
-DEV_HIGHLIGHT["HM-Sen-EP"]["1_rect"] = [2, 0.14, 0.612, 0.086, 0.05];
-DEV_HIGHLIGHT["HM-Sen-EP"]["2_rect"] = [2, 0.14, 0.740, 0.086, 0.05];
-DEV_HIGHLIGHT["HM-Sen-EP"]["1_channel"] = [3, 0.44, 0.232, '1', 0.18, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-Sen-EP"]["1"] = [5, '1_channel', '1_rect'];
-DEV_HIGHLIGHT["HM-Sen-EP"]["2_channel"] = [3, 0.44, 0.232, '2', 0.18, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-Sen-EP"]["2"] = [5, '2_channel', '2_rect'];
-DEV_LIST.push('HM-Sen-MDIR-SM');
-DEV_DESCRIPTION["HM-Sen-MDIR-SM"] = "HM-Sen-MDIR-SM";
-DEV_PATHS["HM-Sen-MDIR-SM"] = new Object();
-DEV_PATHS["HM-Sen-MDIR-SM"]["50"] = "/config/img/devices/50/53_hm-sen-mdir-sm_thumb.png";
-DEV_PATHS["HM-Sen-MDIR-SM"]["250"] = "/config/img/devices/250/53_hm-sen-mdir-sm.png";
-DEV_HIGHLIGHT["HM-Sen-MDIR-SM"] = new Object();
-DEV_LIST.push('HM-LC-Dim2L-SM-644');
-DEV_DESCRIPTION["HM-LC-Dim2L-SM-644"] = "HM-LC-Dim2L-SM";
-DEV_PATHS["HM-LC-Dim2L-SM-644"] = new Object();
-DEV_PATHS["HM-LC-Dim2L-SM-644"]["50"] = "/config/img/devices/50/45_hm-lc-dim2l-sm_thumb.png";
-DEV_PATHS["HM-LC-Dim2L-SM-644"]["250"] = "/config/img/devices/250/45_hm-lc-dim2l-sm.png";
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Part1"] = [6, 0.530, 0.896, 0.530, 0.98, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Part2"] = [6, 0.530, 0.98, 0.49, 0.916, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Part3"] = [6, 0.530, 0.98, 0.574, 0.916, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["2_Arrow"] = [7, '1_Arrow', 0.168, 0];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1"] = [5, '1_Arrow', '1_Key'];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["2"] = [5, '2_Arrow', '2_Key'];
-DEV_LIST.push('WS550');
-DEV_DESCRIPTION["WS550"] = "Funk- Wetterstation";
-DEV_PATHS["WS550"] = new Object();
-DEV_PATHS["WS550"]["50"] = "/config/img/devices/50/9_hm-ws550-us_thumb.png";
-DEV_PATHS["WS550"]["250"] = "/config/img/devices/250/9_hm-ws550-us.png";
-DEV_HIGHLIGHT["WS550"] = new Object();
-DEV_HIGHLIGHT["WS550"]["1"] = [3, 0.440, 0.200, '1', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["2"] = [3, 0.440, 0.200, '2', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["3"] = [3, 0.440, 0.200, '3', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["4"] = [3, 0.440, 0.200, '4', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["5"] = [3, 0.440, 0.200, '5', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["6"] = [3, 0.440, 0.200, '6', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS550"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
-DEV_LIST.push('HM-LC-Sw1-PB-FM');
-DEV_DESCRIPTION["HM-LC-Sw1-PB-FM"] = "HM-LC-Sw1-PB-FM";
-DEV_PATHS["HM-LC-Sw1-PB-FM"] = new Object();
-DEV_PATHS["HM-LC-Sw1-PB-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HM-LC-Sw1-PB-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-PB-FM"] = new Object();
-DEV_LIST.push('HMW-LC-Sw2-DR');
-DEV_DESCRIPTION["HMW-LC-Sw2-DR"] = "HMW-LC-Sw2-DR";
-DEV_PATHS["HMW-LC-Sw2-DR"] = new Object();
-DEV_PATHS["HMW-LC-Sw2-DR"]["50"] = "/config/img/devices/50/26_hmw-lc-sw2-dr_thumb.png";
-DEV_PATHS["HMW-LC-Sw2-DR"]["250"] = "/config/img/devices/250/26_hmw-lc-sw2-dr.png";
-DEV_HIGHLIGHT["HMW-LC-Sw2-DR"] = new Object();
-DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["1"] = [2, 0.448, 0.764, 0.048, 0.064];
-DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["2"] = [2, 0.496, 0.764, 0.052, 0.068];
-DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["3"] = [2, 0.232, 0.384, 0.104, 0.068];
-DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["4"] = [2, 0.448, 0.384, 0.104, 0.068];
-DEV_LIST.push('HM-SwI-3-FM');
-DEV_DESCRIPTION["HM-SwI-3-FM"] = "HM-SwI-3-FM";
-DEV_PATHS["HM-SwI-3-FM"] = new Object();
-DEV_PATHS["HM-SwI-3-FM"]["50"] = "/config/img/devices/50/39_hm-swi-3-fm_thumb.png";
-DEV_PATHS["HM-SwI-3-FM"]["250"] = "/config/img/devices/250/39_hm-swi-3-fm.png";
-DEV_HIGHLIGHT["HM-SwI-3-FM"] = new Object();
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["1"] = [5, '1_Key', '1_Kreis'];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["2"] = [5, '2_Key', '2_Kreis'];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-SwI-3-FM"]["3"] = [5, '3_Key', '3_Kreis'];
-DEV_LIST.push('HM-Sec-SFA-SM');
-DEV_DESCRIPTION["HM-Sec-SFA-SM"] = "HM-Sec-SFA-SM";
-DEV_PATHS["HM-Sec-SFA-SM"] = new Object();
-DEV_PATHS["HM-Sec-SFA-SM"]["50"] = "/config/img/devices/50/55_hm-sec-sfa-sm_thumb.png";
-DEV_PATHS["HM-Sec-SFA-SM"]["250"] = "/config/img/devices/250/55_hm-sec-sfa-sm.png";
-DEV_HIGHLIGHT["HM-Sec-SFA-SM"] = new Object();
-DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["1_Taster"] = [4, 0.348, 0.388, 0.08, 0.08];
-DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["1_Led"] = [4, 0.372, 0.304, 0.036, 0.036];
-DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["1"] = [5, '1_Taster', '1_Led'];
-DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2_Taster"] = [4, 0.552, 0.388, 0.08, 0.08];
-DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2_Led"] = [4, 0.576, 0.304, 0.036, 0.036];
-DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2"] = [5, '2_Taster', '2_Led'];
-DEV_LIST.push('HM-LC-Dim1T-FM');
-DEV_DESCRIPTION["HM-LC-Dim1T-FM"] = "HM-LC-Dim1T-FM";
-DEV_PATHS["HM-LC-Dim1T-FM"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-FM"]["50"] = "/config/img/devices/50/65_hm-lc-dim1t-fm_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-FM"]["250"] = "/config/img/devices/250/65_hm-lc-dim1t-fm.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-FM"] = new Object();
-DEV_LIST.push('HM-Sec-WDS');
-DEV_DESCRIPTION["HM-Sec-WDS"] = "HM-Sec-WDS";
-DEV_PATHS["HM-Sec-WDS"] = new Object();
-DEV_PATHS["HM-Sec-WDS"]["50"] = "/config/img/devices/50/49_hm-sec-wds_thumb.png";
-DEV_PATHS["HM-Sec-WDS"]["250"] = "/config/img/devices/250/49_hm-sec-wds.png";
-DEV_HIGHLIGHT["HM-Sec-WDS"] = new Object();
-DEV_LIST.push('HM-LC-Dim1L-CV-644');
-DEV_DESCRIPTION["HM-LC-Dim1L-CV-644"] = "HM-LC-Dim1L-CV";
-DEV_PATHS["HM-LC-Dim1L-CV-644"] = new Object();
-DEV_PATHS["HM-LC-Dim1L-CV-644"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1L-CV-644"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1L-CV-644"] = new Object();
-DEV_LIST.push('HM-LC-Dim1TPBU-FM');
-DEV_DESCRIPTION["HM-LC-Dim1TPBU-FM"] = "HM-LC-Dim1TPBU-FM";
-DEV_PATHS["HM-LC-Dim1TPBU-FM"] = new Object();
-DEV_PATHS["HM-LC-Dim1TPBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HM-LC-Dim1TPBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HM-LC-Dim1TPBU-FM"] = new Object();
-DEV_LIST.push('HMW-Sec-TR-FM');
-DEV_DESCRIPTION["HMW-Sec-TR-FM"] = "HMW-Sec-TR-FM";
-DEV_PATHS["HMW-Sec-TR-FM"] = new Object();
-DEV_PATHS["HMW-Sec-TR-FM"]["50"] = "/config/img/devices/50/33_hmw-sec-tr-fm_thumb.png";
-DEV_PATHS["HMW-Sec-TR-FM"]["250"] = "/config/img/devices/250/33_hmw-sec-tr-fm.png";
-DEV_HIGHLIGHT["HMW-Sec-TR-FM"] = new Object();
-DEV_LIST.push('HM-Dis-TD-T');
-DEV_DESCRIPTION["HM-Dis-TD-T"] = "HM-Dis-TD-T";
-DEV_PATHS["HM-Dis-TD-T"] = new Object();
-DEV_PATHS["HM-Dis-TD-T"]["50"] = "/config/img/devices/50/81_hm-dis-td-t_thumb.png";
-DEV_PATHS["HM-Dis-TD-T"]["250"] = "/config/img/devices/250/81_hm-dis-td-t.png";
-DEV_HIGHLIGHT["HM-Dis-TD-T"] = new Object();
-DEV_LIST.push('HM-ES-PMSw1-DR');
-DEV_DESCRIPTION["HM-ES-PMSw1-DR"] = "HM-ES-PMSw1-DR";
-DEV_PATHS["HM-ES-PMSw1-DR"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-DR"]["50"] = "/config/img/devices/50/110_hm-es-pmsw1-dr_thump.png";
-DEV_PATHS["HM-ES-PMSw1-DR"]["250"] = "/config/img/devices/250/110_hm-es-pmsw1-dr.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-DR"] = new Object();
-DEV_LIST.push('HM-RC-19');
-DEV_DESCRIPTION["HM-RC-19"] = "HM-RC-19";
-DEV_PATHS["HM-RC-19"] = new Object();
-DEV_PATHS["HM-RC-19"]["50"] = "/config/img/devices/50/20_hm-rc-19_thumb.png";
-DEV_PATHS["HM-RC-19"]["250"] = "/config/img/devices/250/20_hm-rc-19.png";
-DEV_HIGHLIGHT["HM-RC-19"] = new Object();
-DEV_HIGHLIGHT["HM-RC-19"]["1"] = [2, 0.296, 0.344, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["3"] = [2, 0.296, 0.416, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["5"] = [2, 0.296, 0.488, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["7"] = [2, 0.296, 0.56, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["9"] = [2, 0.296, 0.628, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["11"] = [2, 0.296, 0.704, 0.036, 0.048];
-DEV_HIGHLIGHT["HM-RC-19"]["13"] = [2, 0.296, 0.772, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["15"] = [2, 0.296, 0.844, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["2"] = [2, 0.468, 0.344, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["4"] = [2, 0.468, 0.416, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["6"] = [2, 0.468, 0.488, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["8"] = [2, 0.468, 0.56, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["10"] = [2, 0.468, 0.628, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["12"] = [2, 0.468, 0.704, 0.036, 0.048];
-DEV_HIGHLIGHT["HM-RC-19"]["14"] = [2, 0.468, 0.772, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["16"] = [2, 0.468, 0.844, 0.036, 0.052];
-DEV_HIGHLIGHT["HM-RC-19"]["17"] = [2, 0.58, 0.84, 0.044, 0.056];
-DEV_HIGHLIGHT["HM-RC-19"]["18"] = [2, 0.312, 0.188, 0.168, 0.088];
-DEV_HIGHLIGHT["HM-RC-19"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-19"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HM-RC-19"]["5+6"] = [5, '5', '6'];
-DEV_HIGHLIGHT["HM-RC-19"]["7+8"] = [5, '7', '8'];
-DEV_HIGHLIGHT["HM-RC-19"]["9+10"] = [5, '9', '10'];
-DEV_HIGHLIGHT["HM-RC-19"]["11+12"] = [5, '11', '12'];
-DEV_HIGHLIGHT["HM-RC-19"]["13+14"] = [5, '13', '14'];
-DEV_HIGHLIGHT["HM-RC-19"]["15+16"] = [5, '15', '16'];
-DEV_LIST.push('HmIP-eTRV-2');
-DEV_DESCRIPTION["HmIP-eTRV-2"] = "TRV";
-DEV_PATHS["HmIP-eTRV-2"] = new Object();
-DEV_PATHS["HmIP-eTRV-2"]["50"] = "/config/img/devices/50/120_hmip-etrv_thumb.png";
-DEV_PATHS["HmIP-eTRV-2"]["250"] = "/config/img/devices/250/120_hmip-etrv.png";
-DEV_HIGHLIGHT["HmIP-eTRV-2"] = new Object();
-DEV_LIST.push('HM-LC-Dim1L-Pl-644');
-DEV_DESCRIPTION["HM-LC-Dim1L-Pl-644"] = "HM-LC-Dim1L-Pl";
-DEV_PATHS["HM-LC-Dim1L-Pl-644"] = new Object();
-DEV_PATHS["HM-LC-Dim1L-Pl-644"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Dim1L-Pl-644"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-WDS30-OT2-SM-2');
-DEV_DESCRIPTION["HM-WDS30-OT2-SM-2"] = "HM-WDS30-OT2-SM";
-DEV_PATHS["HM-WDS30-OT2-SM-2"] = new Object();
-DEV_PATHS["HM-WDS30-OT2-SM-2"]["50"] = "/config/img/devices/50/127_hm-wds30-ot2-sm-2_thumb.png";
-DEV_PATHS["HM-WDS30-OT2-SM-2"]["250"] = "/config/img/devices/250/127_hm-wds30-ot2-sm-2.png";
-DEV_HIGHLIGHT["HM-WDS30-OT2-SM-2"] = new Object();
-DEV_LIST.push('HM-PB-2-WM');
-DEV_DESCRIPTION["HM-PB-2-WM"] = "HM-PB-2-WM";
-DEV_PATHS["HM-PB-2-WM"] = new Object();
-DEV_PATHS["HM-PB-2-WM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HM-PB-2-WM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HM-PB-2-WM"] = new Object();
-DEV_HIGHLIGHT["HM-PB-2-WM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-PB-2-WM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-PB-2-WM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
-DEV_LIST.push('ZEL STG RM FWT');
-DEV_DESCRIPTION["ZEL STG RM FWT"] = "ZEL_STG_RM_FWT";
-DEV_PATHS["ZEL STG RM FWT"] = new Object();
-DEV_PATHS["ZEL STG RM FWT"]["50"] = "/config/img/devices/50/42_hm-cc-tc_thumb.png";
-DEV_PATHS["ZEL STG RM FWT"]["250"] = "/config/img/devices/250/42_hm-cc-tc.png";
-DEV_HIGHLIGHT["ZEL STG RM FWT"] = new Object();
-DEV_LIST.push('HM-LC-Sw2-FM');
-DEV_DESCRIPTION["HM-LC-Sw2-FM"] = "HM-LC-Sw2-FM";
-DEV_PATHS["HM-LC-Sw2-FM"] = new Object();
-DEV_PATHS["HM-LC-Sw2-FM"]["50"] = "/config/img/devices/50/5_hm-lc-sw2-fm_thumb.png";
-DEV_PATHS["HM-LC-Sw2-FM"]["250"] = "/config/img/devices/250/5_hm-lc-sw2-fm.png";
-DEV_HIGHLIGHT["HM-LC-Sw2-FM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["1_AUS"] = [2, 0.34, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["1_EIN"] = [2, 0.6, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["2_AUS"] = [2, 0.256, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["2_EIN"] = [2, 0.508, 0.66, 0.068, 0.148];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["1"] = [5, '1_AUS', '1_EIN'];
-DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["2"] = [5, '2_AUS', '2_EIN'];
-DEV_LIST.push('HM-Dis-EP-WM55');
-DEV_DESCRIPTION["HM-Dis-EP-WM55"] = "HM-Dis-EP-WM55";
-DEV_PATHS["HM-Dis-EP-WM55"] = new Object();
-DEV_PATHS["HM-Dis-EP-WM55"]["50"] = "/config/img/devices/50/128_hm-dis-ep-wm55_thumb.png";
-DEV_PATHS["HM-Dis-EP-WM55"]["250"] = "/config/img/devices/250/128_hm-dis-ep-wm55.png";
-DEV_HIGHLIGHT["HM-Dis-EP-WM55"] = new Object();
-DEV_LIST.push('HM-CC-TC');
-DEV_DESCRIPTION["HM-CC-TC"] = "HM-CC-TC";
-DEV_PATHS["HM-CC-TC"] = new Object();
-DEV_PATHS["HM-CC-TC"]["50"] = "/config/img/devices/50/42_hm-cc-tc_thumb.png";
-DEV_PATHS["HM-CC-TC"]["250"] = "/config/img/devices/250/42_hm-cc-tc.png";
-DEV_HIGHLIGHT["HM-CC-TC"] = new Object();
-DEV_LIST.push('HmIP-WRC2');
-DEV_DESCRIPTION["HmIP-WRC2"] = "WRC2";
-DEV_PATHS["HmIP-WRC2"] = new Object();
-DEV_PATHS["HmIP-WRC2"]["50"] = "/config/img/devices/50/112_hmip-wrc2_thumb.png";
-DEV_PATHS["HmIP-WRC2"]["250"] = "/config/img/devices/250/112_hmip-wrc2.png";
-DEV_HIGHLIGHT["HmIP-WRC2"] = new Object();
-DEV_HIGHLIGHT["HmIP-WRC2"]["2"] = [4, 0.540, 0.366, 0.04, 0.044];
-DEV_HIGHLIGHT["HmIP-WRC2"]["1"] = [4, 0.540, 0.622, 0.04, 0.044];
-DEV_LIST.push('HM-RC-4-2');
-DEV_DESCRIPTION["HM-RC-4-2"] = "HM-RC-4-2";
-DEV_PATHS["HM-RC-4-2"] = new Object();
-DEV_PATHS["HM-RC-4-2"]["50"] = "/config/img/devices/50/84_hm-rc-4-2_thumb.png";
-DEV_PATHS["HM-RC-4-2"]["250"] = "/config/img/devices/250/84_hm-rc-4-2.png";
-DEV_HIGHLIGHT["HM-RC-4-2"] = new Object();
-DEV_HIGHLIGHT["HM-RC-4-2"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HM-RC-4-2"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HM-RC-4-2"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HM-RC-4-2"]["1_Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HM-RC-4-2"]["2_Arrow"] = [7, '1_Arrow', 0.028, 0.156];
-DEV_HIGHLIGHT["HM-RC-4-2"]["3_Arrow"] = [7, '1_Arrow', 0.028, 0.312];
-DEV_HIGHLIGHT["HM-RC-4-2"]["4_Arrow"] = [7, '1_Arrow', 0.012, 0.468];
-DEV_HIGHLIGHT["HM-RC-4-2"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-2"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-2"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-2"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-2"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-4-2"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('HM-LC-Sw4-DR-2');
-DEV_DESCRIPTION["HM-LC-Sw4-DR-2"] = "HM-LC-Sw4-DR";
-DEV_PATHS["HM-LC-Sw4-DR-2"] = new Object();
-DEV_PATHS["HM-LC-Sw4-DR-2"]["50"] = "/config/img/devices/50/68_hm-lc-sw4-dr_thumb.png";
-DEV_PATHS["HM-LC-Sw4-DR-2"]["250"] = "/config/img/devices/250/68_hm-lc-sw4-dr.png";
-DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["1"] = [4, 0.088, 0.556, 0.048, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["2"] = [4, 0.280, 0.556, 0.048, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["3"] = [4, 0.472, 0.556, 0.048, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["4"] = [4, 0.656, 0.556, 0.048, 0.04];
-DEV_LIST.push('HM-LC-Sw1-Pl-2');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-2"] = "HM-LC-Sw1-Pl";
-DEV_PATHS["HM-LC-Sw1-Pl-2"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-MOD-EM-8');
-DEV_DESCRIPTION["HM-MOD-EM-8"] = "HM-MOD-EM-8";
-DEV_PATHS["HM-MOD-EM-8"] = new Object();
-DEV_PATHS["HM-MOD-EM-8"]["50"] = "/config/img/devices/50/99_hm-mod-em-8_thumb.png";
-DEV_PATHS["HM-MOD-EM-8"]["250"] = "/config/img/devices/250/99_hm-mod-em-8.png";
-DEV_HIGHLIGHT["HM-MOD-EM-8"] = new Object();
-DEV_LIST.push('WS888');
-DEV_DESCRIPTION["WS888"] = "WS888";
-DEV_PATHS["WS888"] = new Object();
-DEV_PATHS["WS888"]["50"] = "/config/img/devices/50/9_hm-ws550-us_thumb.png";
-DEV_PATHS["WS888"]["250"] = "/config/img/devices/250/9_hm-ws550-us.png";
-DEV_HIGHLIGHT["WS888"] = new Object();
-DEV_HIGHLIGHT["WS888"]["1"] = [3, 0.440, 0.200, '1', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["2"] = [3, 0.440, 0.200, '2', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["3"] = [3, 0.440, 0.200, '3', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["4"] = [3, 0.440, 0.200, '4', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["5"] = [3, 0.440, 0.200, '5', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["6"] = [3, 0.440, 0.200, '6', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["WS888"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
-DEV_LIST.push('HM-RC-12-B');
-DEV_DESCRIPTION["HM-RC-12-B"] = "HM-RC-12-B";
-DEV_PATHS["HM-RC-12-B"] = new Object();
-DEV_PATHS["HM-RC-12-B"]["50"] = "/config/img/devices/50/19_hm-rc-12_thumb.png";
-DEV_PATHS["HM-RC-12-B"]["250"] = "/config/img/devices/250/19_hm-rc-12.png";
-DEV_HIGHLIGHT["HM-RC-12-B"] = new Object();
-DEV_HIGHLIGHT["HM-RC-12-B"]["1"] = [2, 0.252, 0.412, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["3"] = [2, 0.252, 0.508, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["5"] = [2, 0.252, 0.604, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["7"] = [2, 0.252, 0.7, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["9"] = [2, 0.252, 0.8, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["10"] = [2, 0.476, 0.8, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["8"] = [2, 0.476, 0.7, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["6"] = [2, 0.476, 0.604, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["4"] = [2, 0.476, 0.508, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["2"] = [2, 0.476, 0.412, 0.044, 0.072];
-DEV_HIGHLIGHT["HM-RC-12-B"]["11"] = [2, 0.62, 0.8, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-RC-12-B"]["12"] = [2, 0.62, 0.704, 0.068, 0.064];
-DEV_HIGHLIGHT["HM-RC-12-B"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HM-RC-12-B"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HM-RC-12-B"]["5+6"] = [5, '5', '6'];
-DEV_HIGHLIGHT["HM-RC-12-B"]["7+8"] = [5, '7', '8'];
-DEV_HIGHLIGHT["HM-RC-12-B"]["9+10"] = [5, '9', '10'];
-DEV_HIGHLIGHT["HM-RC-12-B"]["11+12"] = [5, '11', '12'];
-DEV_LIST.push('263 134');
-DEV_DESCRIPTION["263 134"] = "263_134";
-DEV_PATHS["263 134"] = new Object();
-DEV_PATHS["263 134"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
-DEV_PATHS["263 134"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
-DEV_HIGHLIGHT["263 134"] = new Object();
-DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R1');
-DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R1"] = "HM-ES-PMSw1-Pl-DN-R1";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R1"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R1"]["50"] = "/config/img/devices/50/93_hm-es-pmsw1-pl_thumb.png";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R1"]["250"] = "/config/img/devices/250/93_hm-es-pmsw1-pl.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R1"] = new Object();
-DEV_LIST.push('HM-Sen-MDIR-WM55');
-DEV_DESCRIPTION["HM-Sen-MDIR-WM55"] = "HM-Sen-MDIR-WM55";
-DEV_PATHS["HM-Sen-MDIR-WM55"] = new Object();
-DEV_PATHS["HM-Sen-MDIR-WM55"]["50"] = "/config/img/devices/50/103_hm-sen-mdir-wm55_thumb.png";
-DEV_PATHS["HM-Sen-MDIR-WM55"]["250"] = "/config/img/devices/250/103_hm-sen-mdir-wm55.png";
-DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"] = new Object();
-DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1"] = [2, 0.192, 0.660, 0.524, 0.12];
-DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["2"] = [2, 0.192, 0.252, 0.524, 0.12];
-DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1+2"] = [5, '1', '2'];
-DEV_LIST.push('HM-LC-Sw4-WM');
-DEV_DESCRIPTION["HM-LC-Sw4-WM"] = "HM-LC-Sw4-WM";
-DEV_PATHS["HM-LC-Sw4-WM"] = new Object();
-DEV_PATHS["HM-LC-Sw4-WM"]["50"] = "/config/img/devices/50/76_hm-lc-sw4-wm_thumb.png";
-DEV_PATHS["HM-LC-Sw4-WM"]["250"] = "/config/img/devices/250/76_hm-lc-sw4-wm.png";
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel1"] = [2, 0.208, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel2"] = [2, 0.276, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel3"] = [2, 0.344, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel4"] = [2, 0.412, 0.766, 0.065, 0.060];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle1"] = [4, 0.534, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle2"] = [4, 0.583, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle3"] = [4, 0.637, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle4"] = [4, 0.693, 0.762, 0.044, 0.044];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
-DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
-DEV_LIST.push('HM-Sen-MDIR-O');
-DEV_DESCRIPTION["HM-Sen-MDIR-O"] = "HM-Sen-MDIR-O";
-DEV_PATHS["HM-Sen-MDIR-O"] = new Object();
-DEV_PATHS["HM-Sen-MDIR-O"]["50"] = "/config/img/devices/50/80_hm-sen-mdir-o_thumb.png";
-DEV_PATHS["HM-Sen-MDIR-O"]["250"] = "/config/img/devices/250/80_hm-sen-mdir-o.png";
-DEV_HIGHLIGHT["HM-Sen-MDIR-O"] = new Object();
-DEV_LIST.push('HM-LC-Dim1L-CV');
-DEV_DESCRIPTION["HM-LC-Dim1L-CV"] = "HM-LC-Dim1L-CV";
-DEV_PATHS["HM-LC-Dim1L-CV"] = new Object();
-DEV_PATHS["HM-LC-Dim1L-CV"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1L-CV"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1L-CV"] = new Object();
-DEV_LIST.push('HM-WDS30-OT2-SM');
-DEV_DESCRIPTION["HM-WDS30-OT2-SM"] = "HM-WDS30-OT2-SM";
-DEV_PATHS["HM-WDS30-OT2-SM"] = new Object();
-DEV_PATHS["HM-WDS30-OT2-SM"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
-DEV_PATHS["HM-WDS30-OT2-SM"]["250"] = "/config/img/devices/250/IP65_G201.png";
-DEV_HIGHLIGHT["HM-WDS30-OT2-SM"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-SM');
-DEV_DESCRIPTION["HM-LC-Sw1-SM"] = "HM-LC-Sw1-SM";
-DEV_PATHS["HM-LC-Sw1-SM"] = new Object();
-DEV_PATHS["HM-LC-Sw1-SM"]["50"] = "/config/img/devices/50/8_hm-lc-sw1-sm_thumb.png";
-DEV_PATHS["HM-LC-Sw1-SM"]["250"] = "/config/img/devices/250/8_hm-lc-sw1-sm.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-SM"] = new Object();
-DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R5');
-DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R5"] = "HM-ES-PMSw1-Pl-DN-R5";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R5"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R5"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R5_thumb.png";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R5"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R5.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R5"] = new Object();
-DEV_LIST.push('HmIP-FSM16');
-DEV_DESCRIPTION["HmIP-FSM16"] = "FSM16";
-DEV_PATHS["HmIP-FSM16"] = new Object();
-DEV_PATHS["HmIP-FSM16"]["50"] = "/config/img/devices/50/135_hmip-fsm16_thumb.png";
-DEV_PATHS["HmIP-FSM16"]["250"] = "/config/img/devices/250/135_hmip-fsm16.png";
-DEV_HIGHLIGHT["HmIP-FSM16"] = new Object();
-DEV_LIST.push('263 145');
-DEV_DESCRIPTION["263 145"] = "263_145";
-DEV_PATHS["263 145"] = new Object();
-DEV_PATHS["263 145"]["50"] = "/config/img/devices/50/38_hm-pbi-4-fm_thumb.png";
-DEV_PATHS["263 145"]["250"] = "/config/img/devices/250/38_hm-pbi-4-fm.png";
-DEV_HIGHLIGHT["263 145"] = new Object();
-DEV_HIGHLIGHT["263 145"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["263 145"]["1_Kreis"] = [4, 0.265, 0.500, 0.028, 0.028];
-DEV_HIGHLIGHT["263 145"]["1"] = [5, '1_Key', '1_Kreis'];
-DEV_HIGHLIGHT["263 145"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["263 145"]["2_Kreis"] = [4, 0.287, 0.465, 0.028, 0.028];
-DEV_HIGHLIGHT["263 145"]["2"] = [5, '2_Key', '2_Kreis'];
-DEV_HIGHLIGHT["263 145"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["263 145"]["3_Kreis"] = [4, 0.309, 0.430, 0.028, 0.028];
-DEV_HIGHLIGHT["263 145"]["3"] = [5, '3_Key', '3_Kreis'];
-DEV_HIGHLIGHT["263 145"]["4_Key"] = [3, 0.18, 0.216, '4', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["263 145"]["4_Kreis"] = [4, 0.331, 0.395, 0.028, 0.028];
-DEV_HIGHLIGHT["263 145"]["4"] = [5, '4_Key', '4_Kreis'];
+DEV_LIST.push('HM-CCU-1');
+DEV_DESCRIPTION["HM-CCU-1"] = "HM-CCU-1";
+DEV_PATHS["HM-CCU-1"] = new Object();
+DEV_PATHS["HM-CCU-1"]["50"] = "/config/img/devices/50/24_hm-cen-3-1_thumb.png";
+DEV_PATHS["HM-CCU-1"]["250"] = "/config/img/devices/250/24_hm-cen-3-1.png";
+DEV_HIGHLIGHT["HM-CCU-1"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-CV');
+DEV_DESCRIPTION["HM-LC-Dim1T-CV"] = "HM-LC-Dim1T-CV";
+DEV_PATHS["HM-LC-Dim1T-CV"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-CV"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-CV"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-CV"] = new Object();
 DEV_LIST.push('HM-EM-CCM');
 DEV_DESCRIPTION["HM-EM-CCM"] = "HM-EM-CCM";
 DEV_PATHS["HM-EM-CCM"] = new Object();
 DEV_PATHS["HM-EM-CCM"]["50"] = "/config/img/devices/50/44_hm-em-ccm_thumb.png";
 DEV_PATHS["HM-EM-CCM"]["250"] = "/config/img/devices/250/44_hm-em-ccm.png";
 DEV_HIGHLIGHT["HM-EM-CCM"] = new Object();
-DEV_LIST.push('HM-Sec-RHS');
-DEV_DESCRIPTION["HM-Sec-RHS"] = "HM-Sec-RHS";
-DEV_PATHS["HM-Sec-RHS"] = new Object();
-DEV_PATHS["HM-Sec-RHS"]["50"] = "/config/img/devices/50/17_hm-sec-rhs_thumb.png";
-DEV_PATHS["HM-Sec-RHS"]["250"] = "/config/img/devices/250/17_hm-sec-rhs.png";
-DEV_HIGHLIGHT["HM-Sec-RHS"] = new Object();
-DEV_LIST.push('263 130');
-DEV_DESCRIPTION["263 130"] = "263_130";
-DEV_PATHS["263 130"] = new Object();
-DEV_PATHS["263 130"]["50"] = "/config/img/devices/50/4_hm-lc-sw1-fm_thumb.png";
-DEV_PATHS["263 130"]["250"] = "/config/img/devices/250/4_hm-lc-sw1-fm.png";
-DEV_HIGHLIGHT["263 130"] = new Object();
-DEV_HIGHLIGHT["263 130"]["1_AUS"] = [2, 0.288, 0.66, 0.068, 0.152];
-DEV_HIGHLIGHT["263 130"]["1_EIN"] = [2, 0.548, 0.66, 0.068, 0.152];
-DEV_HIGHLIGHT["263 130"]["1"] = [5, '1_AUS', '1_EIN'];
-DEV_LIST.push('HM-LC-Sw1-FM-2');
-DEV_DESCRIPTION["HM-LC-Sw1-FM-2"] = "HM-LC-Sw1-FM";
-DEV_PATHS["HM-LC-Sw1-FM-2"] = new Object();
-DEV_PATHS["HM-LC-Sw1-FM-2"]["50"] = "/config/img/devices/50/4_hm-lc-sw1-fm_thumb.png";
-DEV_PATHS["HM-LC-Sw1-FM-2"]["250"] = "/config/img/devices/250/4_hm-lc-sw1-fm.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"]["1_AUS"] = [2, 0.288, 0.66, 0.068, 0.152];
-DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"]["1_EIN"] = [2, 0.548, 0.66, 0.068, 0.152];
-DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"]["1"] = [5, '1_AUS', '1_EIN'];
-DEV_LIST.push('263 167 Gruppe');
-DEV_DESCRIPTION["263 167 Gruppe"] = "263_167_Gruppe";
-DEV_PATHS["263 167 Gruppe"] = new Object();
-DEV_PATHS["263 167 Gruppe"]["50"] = "/config/img/devices/50/52_hm-sec-sd-team_thumb.png";
-DEV_PATHS["263 167 Gruppe"]["250"] = "/config/img/devices/250/52_hm-sec-sd-team.png";
-DEV_HIGHLIGHT["263 167 Gruppe"] = new Object();
-DEV_LIST.push('HM-RC-Sec4-3');
-DEV_DESCRIPTION["HM-RC-Sec4-3"] = "HM-RC-4";
-DEV_PATHS["HM-RC-Sec4-3"] = new Object();
-DEV_PATHS["HM-RC-Sec4-3"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
-DEV_PATHS["HM-RC-Sec4-3"]["250"] = "/config/img/devices/250/85_hm-rc-sec4-3.png";
-DEV_HIGHLIGHT["HM-RC-Sec4-3"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["1"] = [5, '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["2"] = [5, '1_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["3"] = [5, '4_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["4"] = [5, '3_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
-DEV_HIGHLIGHT["HM-RC-Sec4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
-DEV_LIST.push('HM-LC-Sw4-DR');
-DEV_DESCRIPTION["HM-LC-Sw4-DR"] = "HM-LC-Sw4-DR";
-DEV_PATHS["HM-LC-Sw4-DR"] = new Object();
-DEV_PATHS["HM-LC-Sw4-DR"]["50"] = "/config/img/devices/50/68_hm-lc-sw4-dr_thumb.png";
-DEV_PATHS["HM-LC-Sw4-DR"]["250"] = "/config/img/devices/250/68_hm-lc-sw4-dr.png";
-DEV_HIGHLIGHT["HM-LC-Sw4-DR"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["1"] = [4, 0.088, 0.556, 0.048, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["2"] = [4, 0.280, 0.556, 0.048, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["3"] = [4, 0.472, 0.556, 0.048, 0.04];
-DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["4"] = [4, 0.656, 0.556, 0.048, 0.04];
-DEV_LIST.push('HM-LC-Dim1L-Pl-2');
-DEV_DESCRIPTION["HM-LC-Dim1L-Pl-2"] = "HM-LC-Dim1L-Pl-2";
-DEV_PATHS["HM-LC-Dim1L-Pl-2"] = new Object();
-DEV_PATHS["HM-LC-Dim1L-Pl-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
-DEV_PATHS["HM-LC-Dim1L-Pl-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
-DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"]["1"] = [5, '1_part1', '1_part2'];
 DEV_LIST.push('HMW-RCV-50');
 DEV_DESCRIPTION["HMW-RCV-50"] = "HMW-RCV-50";
 DEV_PATHS["HMW-RCV-50"] = new Object();
@@ -2191,16 +164,407 @@ DEV_HIGHLIGHT["HMW-RCV-50"]["47"] = [5, 'S47'];
 DEV_HIGHLIGHT["HMW-RCV-50"]["48"] = [5, 'S48'];
 DEV_HIGHLIGHT["HMW-RCV-50"]["49"] = [5, 'S49'];
 DEV_HIGHLIGHT["HMW-RCV-50"]["50"] = [5, 'S50'];
-DEV_LIST.push('HM-RC-Key3');
-DEV_DESCRIPTION["HM-RC-Key3"] = "HM-RC-Key3";
-DEV_PATHS["HM-RC-Key3"] = new Object();
-DEV_PATHS["HM-RC-Key3"]["50"] = "/config/img/devices/50/23_hm-rc-key3-b_thumb.png";
-DEV_PATHS["HM-RC-Key3"]["250"] = "/config/img/devices/250/23_hm-rc-key3-b.png";
-DEV_HIGHLIGHT["HM-RC-Key3"] = new Object();
-DEV_HIGHLIGHT["HM-RC-Key3"]["1"] = [4, 0.252, 0.2, 0.16, 0.18];
-DEV_HIGHLIGHT["HM-RC-Key3"]["2"] = [4, 0.492, 0.2, 0.16, 0.18];
-DEV_HIGHLIGHT["HM-RC-Key3"]["3"] = [4, 0.34, 0.484, 0.228, 0.252];
-DEV_HIGHLIGHT["HM-RC-Key3"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HM-RC-Sec4-2');
+DEV_DESCRIPTION["HM-RC-Sec4-2"] = "HM-RC-Sec4-2";
+DEV_PATHS["HM-RC-Sec4-2"] = new Object();
+DEV_PATHS["HM-RC-Sec4-2"]["50"] = "/config/img/devices/50/86_hm-rc-sec4-2_thumb.png";
+DEV_PATHS["HM-RC-Sec4-2"]["250"] = "/config/img/devices/250/86_hm-rc-sec4-2.png";
+DEV_HIGHLIGHT["HM-RC-Sec4-2"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["1_Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["2_Arrow"] = [7, '1_Arrow', 0.028, 0.156];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["3_Arrow"] = [7, '1_Arrow', 0.028, 0.312];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["4_Arrow"] = [7, '1_Arrow', 0.012, 0.468];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-2"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('atent');
+DEV_DESCRIPTION["atent"] = "atent";
+DEV_PATHS["atent"] = new Object();
+DEV_PATHS["atent"]["50"] = "/config/img/devices/50/73_hm-atent_thumb.png";
+DEV_PATHS["atent"]["250"] = "/config/img/devices/250/73_hm-atent.png";
+DEV_HIGHLIGHT["atent"] = new Object();
+DEV_HIGHLIGHT["atent"]["1"] = [4, 0.177, 0.216, 0.166, 0.166];
+DEV_HIGHLIGHT["atent"]["2"] = [4, 0.438, 0.216, 0.166, 0.166];
+DEV_HIGHLIGHT["atent"]["3"] = [4, 0.273, 0.49, 0.24, 0.235];
+DEV_HIGHLIGHT["atent"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HmIP-PSM-CH');
+DEV_DESCRIPTION["HmIP-PSM-CH"] = "PSM";
+DEV_PATHS["HmIP-PSM-CH"] = new Object();
+DEV_PATHS["HmIP-PSM-CH"]["50"] = "/config/img/devices/50/113_hmip-psm-ch_thumb.png";
+DEV_PATHS["HmIP-PSM-CH"]["250"] = "/config/img/devices/250/113_hmip-psm-ch.png";
+DEV_HIGHLIGHT["HmIP-PSM-CH"] = new Object();
+DEV_LIST.push('HM-Dis-TD-T');
+DEV_DESCRIPTION["HM-Dis-TD-T"] = "HM-Dis-TD-T";
+DEV_PATHS["HM-Dis-TD-T"] = new Object();
+DEV_PATHS["HM-Dis-TD-T"]["50"] = "/config/img/devices/50/81_hm-dis-td-t_thumb.png";
+DEV_PATHS["HM-Dis-TD-T"]["250"] = "/config/img/devices/250/81_hm-dis-td-t.png";
+DEV_HIGHLIGHT["HM-Dis-TD-T"] = new Object();
+DEV_LIST.push('HM-LC-DDC1-PCB');
+DEV_DESCRIPTION["HM-LC-DDC1-PCB"] = "HM-LC-DDC1-PCB";
+DEV_PATHS["HM-LC-DDC1-PCB"] = new Object();
+DEV_PATHS["HM-LC-DDC1-PCB"]["50"] = "/config/img/devices/50/54a_lc-ddc1_thumb.png";
+DEV_PATHS["HM-LC-DDC1-PCB"]["250"] = "/config/img/devices/250/54a_lc-ddc1-pcb.png";
+DEV_HIGHLIGHT["HM-LC-DDC1-PCB"] = new Object();
+DEV_LIST.push('HM-WS550STH-O');
+DEV_DESCRIPTION["HM-WS550STH-O"] = "HM-WS550STH-O";
+DEV_PATHS["HM-WS550STH-O"] = new Object();
+DEV_PATHS["HM-WS550STH-O"]["50"] = "/config/img/devices/50/TH_CS_thumb.png";
+DEV_PATHS["HM-WS550STH-O"]["250"] = "/config/img/devices/250/TH_CS.png";
+DEV_HIGHLIGHT["HM-WS550STH-O"] = new Object();
+DEV_LIST.push('263 146');
+DEV_DESCRIPTION["263 146"] = "263_146";
+DEV_PATHS["263 146"] = new Object();
+DEV_PATHS["263 146"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
+DEV_PATHS["263 146"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
+DEV_HIGHLIGHT["263 146"] = new Object();
+DEV_LIST.push('HmIP-SMO');
+DEV_DESCRIPTION["HmIP-SMO"] = "SMO";
+DEV_PATHS["HmIP-SMO"] = new Object();
+DEV_PATHS["HmIP-SMO"]["50"] = "/config/img/devices/50/132_hmip-smo_thumb.png";
+DEV_PATHS["HmIP-SMO"]["250"] = "/config/img/devices/250/132_hmip-smo.png";
+DEV_HIGHLIGHT["HmIP-SMO"] = new Object();
+DEV_LIST.push('HMW-Sen-SC-12-FM');
+DEV_DESCRIPTION["HMW-Sen-SC-12-FM"] = "HMW-Sen-SC-12-FM";
+DEV_PATHS["HMW-Sen-SC-12-FM"] = new Object();
+DEV_PATHS["HMW-Sen-SC-12-FM"]["50"] = "/config/img/devices/50/58_hmw-sen-sc-12-fm_thumb.png";
+DEV_PATHS["HMW-Sen-SC-12-FM"]["250"] = "/config/img/devices/250/58_hmw-sen-sc-12-fm.png";
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"] = new Object();
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["1_num"] = [3, 0.744, 0.636, '1', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["1_line"] = [6, 0.77, 0.055, 0.860, 0.055, 0.016];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["1"] = [5, '1_num', '1_line'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["2_num"] = [3, 0.744, 0.636, '2', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["2_line"] = [6, 0.77, 0.115, 0.86, 0.115, 0.016];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["2"] = [5, '2_num', '2_line'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["3_num"] = [3, 0.744, 0.636, '3', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["3_line"] = [6, 0.77, 0.173, 0.86, 0.173, 0.016];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["3"] = [5, '3_num', '3_line'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["4_num"] = [3, 0.744, 0.636, '4', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["4_line"] = [6, 0.77, 0.226, 0.86, 0.226, 0.016];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["4"] = [5, '4_num', '4_line'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["5_num"] = [3, 0.744, 0.636, '5', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["5_line"] = [6, 0.77, 0.288, 0.86, 0.288, 0.016];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["5"] = [5, '5_num', '5_line'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["6_num"] = [3, 0.744, 0.636, '6', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["6_line"] = [6, 0.77, 0.348, 0.86, 0.348, 0.016];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["6"] = [5, '6_num', '6_line'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["7_num"] = [3, 0.744, 0.636, '7', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["7_line"] = [6, 0.77, 0.403, 0.86, 0.403, 0.016];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["7"] = [5, '7_num', '7_line'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["8_num"] = [3, 0.744, 0.636, '8', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["8_arc"] = [4, 0.370, 0.730, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["8"] = [5, '8_num', '8_arc'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["9_num"] = [3, 0.744, 0.636, '9', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["9_arc"] = [4, 0.3895, 0.685, 0.036, 0.036, 0.0368];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["9"] = [5, '9_num', '9_arc'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["10_num"] = [3, 0.744, 0.636, '10', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["10_arc"] = [4, 0.41, 0.64, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["10"] = [5, '10_num', '10_arc'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["11_num"] = [3, 0.744, 0.636, '11', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["11_arc"] = [4, 0.43, 0.589, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["11"] = [5, '11_num', '11_arc'];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["12_num"] = [3, 0.744, 0.636, '12', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["12_arc"] = [4, 0.45, 0.542, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-Sen-SC-12-FM"]["12"] = [5, '12_num', '12_arc'];
+DEV_LIST.push('HmIP-STH');
+DEV_DESCRIPTION["HmIP-STH"] = "STH";
+DEV_PATHS["HmIP-STH"] = new Object();
+DEV_PATHS["HmIP-STH"]["50"] = "/config/img/devices/50/146_hmip-sth_thumb.png";
+DEV_PATHS["HmIP-STH"]["250"] = "/config/img/devices/250/146_hmip-sth.png";
+DEV_HIGHLIGHT["HmIP-STH"] = new Object();
+DEV_LIST.push('HM-WDS10-TH-O');
+DEV_DESCRIPTION["HM-WDS10-TH-O"] = "HM-WDS10-TH-O";
+DEV_PATHS["HM-WDS10-TH-O"] = new Object();
+DEV_PATHS["HM-WDS10-TH-O"]["50"] = "/config/img/devices/50/TH_CS_thumb.png";
+DEV_PATHS["HM-WDS10-TH-O"]["250"] = "/config/img/devices/250/TH_CS.png";
+DEV_HIGHLIGHT["HM-WDS10-TH-O"] = new Object();
+DEV_LIST.push('HM-LC-Dim2L-SM-2');
+DEV_DESCRIPTION["HM-LC-Dim2L-SM-2"] = "HM-LC-Dim2L-SM";
+DEV_PATHS["HM-LC-Dim2L-SM-2"] = new Object();
+DEV_PATHS["HM-LC-Dim2L-SM-2"]["50"] = "/config/img/devices/50/45_hm-lc-dim2l-sm_thumb.png";
+DEV_PATHS["HM-LC-Dim2L-SM-2"]["250"] = "/config/img/devices/250/45_hm-lc-dim2l-sm.png";
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Part1"] = [6, 0.530, 0.896, 0.530, 0.98, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Part2"] = [6, 0.530, 0.98, 0.49, 0.916, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Part3"] = [6, 0.530, 0.98, 0.574, 0.916, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2_Arrow"] = [7, '1_Arrow', 0.168, 0];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R3');
+DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R3"] = "HM-ES-PMSw1-Pl-DN-R3";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R3"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R3"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R3_thumb.png";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R3"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R3.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R3"] = new Object();
+DEV_LIST.push('HM-RC-4-3-D');
+DEV_DESCRIPTION["HM-RC-4-3-D"] = "HM-RC-4";
+DEV_PATHS["HM-RC-4-3-D"] = new Object();
+DEV_PATHS["HM-RC-4-3-D"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
+DEV_PATHS["HM-RC-4-3-D"]["250"] = "/config/img/devices/250/116_hm-rc-4-3_brc-h3.png";
+DEV_HIGHLIGHT["HM-RC-4-3-D"] = new Object();
+DEV_LIST.push('HM-LC-Sw4-WM-2');
+DEV_DESCRIPTION["HM-LC-Sw4-WM-2"] = "HM-LC-Sw4-WM";
+DEV_PATHS["HM-LC-Sw4-WM-2"] = new Object();
+DEV_PATHS["HM-LC-Sw4-WM-2"]["50"] = "/config/img/devices/50/76_hm-lc-sw4-wm_thumb.png";
+DEV_PATHS["HM-LC-Sw4-WM-2"]["250"] = "/config/img/devices/250/76_hm-lc-sw4-wm.png";
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel1"] = [2, 0.208, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel2"] = [2, 0.276, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel3"] = [2, 0.344, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Channel4"] = [2, 0.412, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle1"] = [4, 0.534, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle2"] = [4, 0.583, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle3"] = [4, 0.637, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["Circle4"] = [4, 0.693, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM-2"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
+DEV_LIST.push('HM-EM-CMM');
+DEV_DESCRIPTION["HM-EM-CMM"] = "HM-EM-CMM";
+DEV_PATHS["HM-EM-CMM"] = new Object();
+DEV_PATHS["HM-EM-CMM"]["50"] = "/config/img/devices/50/25_hm-em-cmm_thumb.png";
+DEV_PATHS["HM-EM-CMM"]["250"] = "/config/img/devices/250/25_hm-em-cmm.png";
+DEV_HIGHLIGHT["HM-EM-CMM"] = new Object();
+DEV_LIST.push('HmIP-SMI');
+DEV_DESCRIPTION["HmIP-SMI"] = "SMI";
+DEV_PATHS["HmIP-SMI"] = new Object();
+DEV_PATHS["HmIP-SMI"]["50"] = "/config/img/devices/50/125_hmip-smi_thumb.png";
+DEV_PATHS["HmIP-SMI"]["250"] = "/config/img/devices/250/125_hmip-smi.png";
+DEV_HIGHLIGHT["HmIP-SMI"] = new Object();
+DEV_LIST.push('HM-WDS30-OT2-SM');
+DEV_DESCRIPTION["HM-WDS30-OT2-SM"] = "HM-WDS30-OT2-SM";
+DEV_PATHS["HM-WDS30-OT2-SM"] = new Object();
+DEV_PATHS["HM-WDS30-OT2-SM"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
+DEV_PATHS["HM-WDS30-OT2-SM"]["250"] = "/config/img/devices/250/IP65_G201.png";
+DEV_HIGHLIGHT["HM-WDS30-OT2-SM"] = new Object();
+DEV_LIST.push('HM-WS550-US');
+DEV_DESCRIPTION["HM-WS550-US"] = "HM-WS550-US";
+DEV_PATHS["HM-WS550-US"] = new Object();
+DEV_PATHS["HM-WS550-US"]["50"] = "/config/img/devices/50/9_hm-ws550-us_thumb.png";
+DEV_PATHS["HM-WS550-US"]["250"] = "/config/img/devices/250/9_hm-ws550-us.png";
+DEV_HIGHLIGHT["HM-WS550-US"] = new Object();
+DEV_HIGHLIGHT["HM-WS550-US"]["1"] = [3, 0.440, 0.200, '1', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["2"] = [3, 0.440, 0.200, '2', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["3"] = [3, 0.440, 0.200, '3', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["4"] = [3, 0.440, 0.200, '4', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["5"] = [3, 0.440, 0.200, '5', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["6"] = [3, 0.440, 0.200, '6', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-WS550-US"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
+DEV_LIST.push('263 167 Gruppe');
+DEV_DESCRIPTION["263 167 Gruppe"] = "263_167_Gruppe";
+DEV_PATHS["263 167 Gruppe"] = new Object();
+DEV_PATHS["263 167 Gruppe"]["50"] = "/config/img/devices/50/52_hm-sec-sd-team_thumb.png";
+DEV_PATHS["263 167 Gruppe"]["250"] = "/config/img/devices/250/52_hm-sec-sd-team.png";
+DEV_HIGHLIGHT["263 167 Gruppe"] = new Object();
+DEV_LIST.push('HMW-WSTH-SM');
+DEV_DESCRIPTION["HMW-WSTH-SM"] = "HMW-WSTH-SM";
+DEV_PATHS["HMW-WSTH-SM"] = new Object();
+DEV_PATHS["HMW-WSTH-SM"]["50"] = "/config/img/devices/50/32_hmw-wsth-sm_thumb.png";
+DEV_PATHS["HMW-WSTH-SM"]["250"] = "/config/img/devices/250/32_hmw-wsth-sm.png";
+DEV_HIGHLIGHT["HMW-WSTH-SM"] = new Object();
+DEV_LIST.push('263 158');
+DEV_DESCRIPTION["263 158"] = "263_158";
+DEV_PATHS["263 158"] = new Object();
+DEV_PATHS["263 158"]["50"] = "/config/img/devices/50/TH_CS_thumb.png";
+DEV_PATHS["263 158"]["250"] = "/config/img/devices/250/TH_CS.png";
+DEV_HIGHLIGHT["263 158"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-SM-2');
+DEV_DESCRIPTION["HM-LC-Sw1-SM-2"] = "HM-LC-Sw1-SM";
+DEV_PATHS["HM-LC-Sw1-SM-2"] = new Object();
+DEV_PATHS["HM-LC-Sw1-SM-2"]["50"] = "/config/img/devices/50/8_hm-lc-sw1-sm_thumb.png";
+DEV_PATHS["HM-LC-Sw1-SM-2"]["250"] = "/config/img/devices/250/8_hm-lc-sw1-sm.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-SM-2"] = new Object();
+DEV_LIST.push('HM-LC-Dim1PWM-CV');
+DEV_DESCRIPTION["HM-LC-Dim1PWM-CV"] = "HM-LC-Dim1PWM-CV";
+DEV_PATHS["HM-LC-Dim1PWM-CV"] = new Object();
+DEV_PATHS["HM-LC-Dim1PWM-CV"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1PWM-CV"]["250"] = "/config/img/devices/250/79_hm-lc-dim1pwm-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1PWM-CV"] = new Object();
+DEV_LIST.push('HMW-IO-12-Sw14-DR');
+DEV_DESCRIPTION["HMW-IO-12-Sw14-DR"] = "HMW-IO-12-Sw14-DR";
+DEV_PATHS["HMW-IO-12-Sw14-DR"] = new Object();
+DEV_PATHS["HMW-IO-12-Sw14-DR"]["50"] = "/config/img/devices/50/71_hmw-io-12-sw14-dr_thumb.png";
+DEV_PATHS["HMW-IO-12-Sw14-DR"]["250"] = "/config/img/devices/250/71_hmw-io-12-sw14-dr.png";
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"] = new Object();
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["1"] = [2, 0.106, 0.398, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["2"] = [2, 0.230, 0.398, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["3"] = [2, 0.294, 0.398, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["4"] = [2, 0.422, 0.398, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["5"] = [2, 0.482, 0.398, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["6"] = [2, 0.602, 0.398, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["7"] = [2, 0.046, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["8"] = [2, 0.106, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["9"] = [2, 0.230, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["10"] = [2, 0.294, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["11"] = [2, 0.422, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["12"] = [2, 0.482, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["13"] = [2, 0.602, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["14"] = [2, 0.666, 0.458, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["15"] = [2, 0.230, 0.69, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["16"] = [2, 0.294, 0.69, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["17"] = [2, 0.422, 0.69, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["18"] = [2, 0.482, 0.69, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["19"] = [2, 0.602, 0.69, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["20"] = [2, 0.666, 0.69, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["21"] = [2, 0.230, 0.755, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["22"] = [2, 0.294, 0.755, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["23"] = [2, 0.422, 0.755, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["24"] = [2, 0.482, 0.755, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["25"] = [2, 0.602, 0.755, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw14-DR"]["26"] = [2, 0.666, 0.755, 0.06, 0.06];
+DEV_LIST.push('263 147');
+DEV_DESCRIPTION["263 147"] = "263_147";
+DEV_PATHS["263 147"] = new Object();
+DEV_PATHS["263 147"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["263 147"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["263 147"] = new Object();
+DEV_HIGHLIGHT["263 147"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["263 147"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["263 147"]["1"] = [5, '1a', '1b'];
+DEV_LIST.push('HM-Sec-SD-2-Team');
+DEV_DESCRIPTION["HM-Sec-SD-2-Team"] = "HM-Sec-SD-Team";
+DEV_PATHS["HM-Sec-SD-2-Team"] = new Object();
+DEV_PATHS["HM-Sec-SD-2-Team"]["50"] = "/config/img/devices/50/105_hm-sec-sd-2-team_thumb.png";
+DEV_PATHS["HM-Sec-SD-2-Team"]["250"] = "/config/img/devices/250/105_hm-sec-sd-2-team.png";
+DEV_HIGHLIGHT["HM-Sec-SD-2-Team"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-FM-LF');
+DEV_DESCRIPTION["HM-LC-Dim1T-FM-LF"] = "HM-LC-Dim1T-FM";
+DEV_PATHS["HM-LC-Dim1T-FM-LF"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-FM-LF"]["50"] = "/config/img/devices/50/114_hm-lc-dim1t-fm-lf_thumb_3.png";
+DEV_PATHS["HM-LC-Dim1T-FM-LF"]["250"] = "/config/img/devices/250/114_hm-lc-dim1t-fm-lf_3.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-FM-LF"] = new Object();
+DEV_LIST.push('HM-Sen-MDIR-O');
+DEV_DESCRIPTION["HM-Sen-MDIR-O"] = "HM-Sen-MDIR-O";
+DEV_PATHS["HM-Sen-MDIR-O"] = new Object();
+DEV_PATHS["HM-Sen-MDIR-O"]["50"] = "/config/img/devices/50/80_hm-sen-mdir-o_thumb.png";
+DEV_PATHS["HM-Sen-MDIR-O"]["250"] = "/config/img/devices/250/80_hm-sen-mdir-o.png";
+DEV_HIGHLIGHT["HM-Sen-MDIR-O"] = new Object();
+DEV_LIST.push('HM-RC-12');
+DEV_DESCRIPTION["HM-RC-12"] = "HM-RC-12";
+DEV_PATHS["HM-RC-12"] = new Object();
+DEV_PATHS["HM-RC-12"]["50"] = "/config/img/devices/50/19_hm-rc-12_thumb.png";
+DEV_PATHS["HM-RC-12"]["250"] = "/config/img/devices/250/19_hm-rc-12.png";
+DEV_HIGHLIGHT["HM-RC-12"] = new Object();
+DEV_HIGHLIGHT["HM-RC-12"]["1"] = [2, 0.252, 0.412, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["3"] = [2, 0.252, 0.508, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["5"] = [2, 0.252, 0.604, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["7"] = [2, 0.252, 0.7, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["9"] = [2, 0.252, 0.8, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["10"] = [2, 0.476, 0.8, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["8"] = [2, 0.476, 0.7, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["6"] = [2, 0.476, 0.604, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["4"] = [2, 0.476, 0.508, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["2"] = [2, 0.476, 0.412, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12"]["11"] = [2, 0.62, 0.8, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-RC-12"]["12"] = [2, 0.62, 0.704, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-RC-12"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-12"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HM-RC-12"]["5+6"] = [5, '5', '6'];
+DEV_HIGHLIGHT["HM-RC-12"]["7+8"] = [5, '7', '8'];
+DEV_HIGHLIGHT["HM-RC-12"]["9+10"] = [5, '9', '10'];
+DEV_HIGHLIGHT["HM-RC-12"]["11+12"] = [5, '11', '12'];
+DEV_LIST.push('HM-ES-PMSw1-Pl');
+DEV_DESCRIPTION["HM-ES-PMSw1-Pl"] = "HM-ES-PMSw1-Pl";
+DEV_PATHS["HM-ES-PMSw1-Pl"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-Pl"]["50"] = "/config/img/devices/50/93_hm-es-pmsw1-pl_thumb.png";
+DEV_PATHS["HM-ES-PMSw1-Pl"]["250"] = "/config/img/devices/250/93_hm-es-pmsw1-pl.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-Pl"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-CV-644');
+DEV_DESCRIPTION["HM-LC-Dim1T-CV-644"] = "HM-LC-Dim1T-CV";
+DEV_PATHS["HM-LC-Dim1T-CV-644"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-CV-644"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-CV-644"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-CV-644"] = new Object();
+DEV_LIST.push('HM-WS550ST-IO');
+DEV_DESCRIPTION["HM-WS550ST-IO"] = "HM-WS550ST-IO";
+DEV_PATHS["HM-WS550ST-IO"] = new Object();
+DEV_PATHS["HM-WS550ST-IO"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
+DEV_PATHS["HM-WS550ST-IO"]["250"] = "/config/img/devices/250/IP65_G201.png";
+DEV_HIGHLIGHT["HM-WS550ST-IO"] = new Object();
+DEV_LIST.push('263 144');
+DEV_DESCRIPTION["263 144"] = "263_144";
+DEV_PATHS["263 144"] = new Object();
+DEV_PATHS["263 144"]["50"] = "/config/img/devices/50/39_hm-swi-3-fm_thumb.png";
+DEV_PATHS["263 144"]["250"] = "/config/img/devices/250/39_hm-swi-3-fm.png";
+DEV_HIGHLIGHT["263 144"] = new Object();
+DEV_HIGHLIGHT["263 144"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["263 144"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
+DEV_HIGHLIGHT["263 144"]["1"] = [5, '1_Key', '1_Kreis'];
+DEV_HIGHLIGHT["263 144"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["263 144"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
+DEV_HIGHLIGHT["263 144"]["2"] = [5, '2_Key', '2_Kreis'];
+DEV_HIGHLIGHT["263 144"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["263 144"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
+DEV_HIGHLIGHT["263 144"]["3"] = [5, '3_Key', '3_Kreis'];
+DEV_LIST.push('HM-LC-Sw4-DR');
+DEV_DESCRIPTION["HM-LC-Sw4-DR"] = "HM-LC-Sw4-DR";
+DEV_PATHS["HM-LC-Sw4-DR"] = new Object();
+DEV_PATHS["HM-LC-Sw4-DR"]["50"] = "/config/img/devices/50/68_hm-lc-sw4-dr_thumb.png";
+DEV_PATHS["HM-LC-Sw4-DR"]["250"] = "/config/img/devices/250/68_hm-lc-sw4-dr.png";
+DEV_HIGHLIGHT["HM-LC-Sw4-DR"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["1"] = [4, 0.088, 0.556, 0.048, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["2"] = [4, 0.280, 0.556, 0.048, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["3"] = [4, 0.472, 0.556, 0.048, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["4"] = [4, 0.656, 0.556, 0.048, 0.04];
+DEV_LIST.push('HM-LC-Sw1-Pl-DN-R2');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R2"] = "HM-LC-Sw1-Pl-DN-R2";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R2_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R2.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R2"] = new Object();
+DEV_LIST.push('HM-WDS30-OT2-SM-2');
+DEV_DESCRIPTION["HM-WDS30-OT2-SM-2"] = "HM-WDS30-OT2-SM";
+DEV_PATHS["HM-WDS30-OT2-SM-2"] = new Object();
+DEV_PATHS["HM-WDS30-OT2-SM-2"]["50"] = "/config/img/devices/50/127_hm-wds30-ot2-sm-2_thumb.png";
+DEV_PATHS["HM-WDS30-OT2-SM-2"]["250"] = "/config/img/devices/250/127_hm-wds30-ot2-sm-2.png";
+DEV_HIGHLIGHT["HM-WDS30-OT2-SM-2"] = new Object();
+DEV_LIST.push('DEVICE');
+DEV_DESCRIPTION["DEVICE"] = "DEVICE";
+DEV_PATHS["DEVICE"] = new Object();
+DEV_PATHS["DEVICE"]["50"] = "/config/img/devices/50/unknown_device_thumb.png";
+DEV_PATHS["DEVICE"]["250"] = "/config/img/devices/250/unknown_device.png";
+DEV_HIGHLIGHT["DEVICE"] = new Object();
+DEV_HIGHLIGHT["DEVICE"]["Icon"] = [3, 0.092, 0.6, 'Icon_folgt', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["DEVICE"]["1_channel"] = [3, 0.44, 0.232, '1', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["DEVICE"]["1"] = [5, '1_channel', 'Icon'];
+DEV_HIGHLIGHT["DEVICE"]["2_channel"] = [3, 0.44, 0.232, '2', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["DEVICE"]["2"] = [5, '2_channel', 'Icon'];
+DEV_LIST.push('HM-Sec-MDIR-3');
+DEV_DESCRIPTION["HM-Sec-MDIR-3"] = "HM-Sec-MDIR";
+DEV_PATHS["HM-Sec-MDIR-3"] = new Object();
+DEV_PATHS["HM-Sec-MDIR-3"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
+DEV_PATHS["HM-Sec-MDIR-3"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
+DEV_HIGHLIGHT["HM-Sec-MDIR-3"] = new Object();
+DEV_LIST.push('263 135');
+DEV_DESCRIPTION["263 135"] = "263_135";
+DEV_PATHS["263 135"] = new Object();
+DEV_PATHS["263 135"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
+DEV_PATHS["263 135"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
+DEV_HIGHLIGHT["263 135"] = new Object();
+DEV_HIGHLIGHT["263 135"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
+DEV_HIGHLIGHT["263 135"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
+DEV_LIST.push('VIR-LG-RGBW-DIM');
+DEV_DESCRIPTION["VIR-LG-RGBW-DIM"] = "VIR-LG-RGBW-DIM";
+DEV_PATHS["VIR-LG-RGBW-DIM"] = new Object();
+DEV_PATHS["VIR-LG-RGBW-DIM"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-rgbw-dim.png";
+DEV_PATHS["VIR-LG-RGBW-DIM"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-rgbw-dim.png";
+DEV_HIGHLIGHT["VIR-LG-RGBW-DIM"] = new Object();
 DEV_LIST.push('HM-LC-Sw2PBU-FM');
 DEV_DESCRIPTION["HM-LC-Sw2PBU-FM"] = "HM-LC-Sw2PBU-FM";
 DEV_PATHS["HM-LC-Sw2PBU-FM"] = new Object();
@@ -2210,100 +574,33 @@ DEV_HIGHLIGHT["HM-LC-Sw2PBU-FM"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Sw2PBU-FM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
 DEV_HIGHLIGHT["HM-LC-Sw2PBU-FM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["HM-LC-Sw2PBU-FM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
-DEV_LIST.push('HM-Sen-Wa-Od');
-DEV_DESCRIPTION["HM-Sen-Wa-Od"] = "HM-Sen-Wa-Od";
-DEV_PATHS["HM-Sen-Wa-Od"] = new Object();
-DEV_PATHS["HM-Sen-Wa-Od"]["50"] = "/config/img/devices/50/82_hm-sen-wa-od_thumb.png";
-DEV_PATHS["HM-Sen-Wa-Od"]["250"] = "/config/img/devices/250/82_hm-sen-wa-od.png";
-DEV_HIGHLIGHT["HM-Sen-Wa-Od"] = new Object();
-DEV_LIST.push('HMW-LC-Bl1-DR-2');
-DEV_DESCRIPTION["HMW-LC-Bl1-DR-2"] = "HMW-LC-Bl1-DR";
-DEV_PATHS["HMW-LC-Bl1-DR-2"] = new Object();
-DEV_PATHS["HMW-LC-Bl1-DR-2"]["50"] = "/config/img/devices/50/27_hmw-lc-bl1-dr_thumb.png";
-DEV_PATHS["HMW-LC-Bl1-DR-2"]["250"] = "/config/img/devices/250/27_hmw-lc-bl1-dr.png";
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"] = new Object();
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["1"] = [2, 0.452, 0.772, 0.044, 0.06];
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["2"] = [2, 0.5, 0.772, 0.048, 0.06];
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["3"] = [2, 0.452, 0.388, 0.096, 0.06];
-DEV_LIST.push('HM-CC-RT-DN');
-DEV_DESCRIPTION["HM-CC-RT-DN"] = "HM-CC-RT-DN";
-DEV_PATHS["HM-CC-RT-DN"] = new Object();
-DEV_PATHS["HM-CC-RT-DN"]["50"] = "/config/img/devices/50/83_hm-cc-rt-dn_thumb.png";
-DEV_PATHS["HM-CC-RT-DN"]["250"] = "/config/img/devices/250/83_hm-cc-rt-dn.png";
-DEV_HIGHLIGHT["HM-CC-RT-DN"] = new Object();
-DEV_LIST.push('HM-LC-Bl1-SM-2');
-DEV_DESCRIPTION["HM-LC-Bl1-SM-2"] = "HM-LC-Bl1-SM";
-DEV_PATHS["HM-LC-Bl1-SM-2"] = new Object();
-DEV_PATHS["HM-LC-Bl1-SM-2"]["50"] = "/config/img/devices/50/6_hm-lc-bl1-sm_thumb.png";
-DEV_PATHS["HM-LC-Bl1-SM-2"]["250"] = "/config/img/devices/250/6_hm-lc-bl1-sm.png";
-DEV_HIGHLIGHT["HM-LC-Bl1-SM-2"] = new Object();
-DEV_LIST.push('263_149_/_263_150');
-DEV_DESCRIPTION["263_149_/_263_150"] = "263_149_/_263_150";
-DEV_PATHS["263_149_/_263_150"] = new Object();
-DEV_PATHS["263_149_/_263_150"]["50"] = "/config/img/devices/50/hm_resc-win-pcb-sc_thumb.png";
-DEV_PATHS["263_149_/_263_150"]["250"] = "/config/img/devices/250/hm_resc-win-pcb-sc.png";
-DEV_HIGHLIGHT["263_149_/_263_150"] = new Object();
-DEV_LIST.push('HmIP-WRC6');
-DEV_DESCRIPTION["HmIP-WRC6"] = "WRC6";
-DEV_PATHS["HmIP-WRC6"] = new Object();
-DEV_PATHS["HmIP-WRC6"]["50"] = "/config/img/devices/50/131_hmip-wrc6_thumb.png";
-DEV_PATHS["HmIP-WRC6"]["250"] = "/config/img/devices/250/131_hmip-wrc6.png";
-DEV_HIGHLIGHT["HmIP-WRC6"] = new Object();
-DEV_HIGHLIGHT["HmIP-WRC6"]["1"] = [1, 0.3, 0.358, 0.025];
-DEV_HIGHLIGHT["HmIP-WRC6"]["2"] = [1, 0.705, 0.315, 0.025];
-DEV_HIGHLIGHT["HmIP-WRC6"]["3"] = [1, 0.3, 0.53, 0.025];
-DEV_HIGHLIGHT["HmIP-WRC6"]["4"] = [1, 0.705, 0.495, 0.025];
-DEV_HIGHLIGHT["HmIP-WRC6"]["5"] = [1, 0.3, 0.706, 0.025];
-DEV_HIGHLIGHT["HmIP-WRC6"]["6"] = [1, 0.705, 0.671, 0.025];
-DEV_HIGHLIGHT["HmIP-WRC6"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HmIP-WRC6"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HmIP-WRC6"]["5+6"] = [5, '5', '6'];
-DEV_LIST.push('HM-Sec-SC');
-DEV_DESCRIPTION["HM-Sec-SC"] = "HM-Sec-SC";
-DEV_PATHS["HM-Sec-SC"] = new Object();
-DEV_PATHS["HM-Sec-SC"]["50"] = "/config/img/devices/50/16_hm-sec-sc_thumb.png";
-DEV_PATHS["HM-Sec-SC"]["250"] = "/config/img/devices/250/16_hm-sec-sc.png";
-DEV_HIGHLIGHT["HM-Sec-SC"] = new Object();
-DEV_LIST.push('HM-MOD-Re-8');
-DEV_DESCRIPTION["HM-MOD-Re-8"] = "HM-MOD-Re-8";
-DEV_PATHS["HM-MOD-Re-8"] = new Object();
-DEV_PATHS["HM-MOD-Re-8"]["50"] = "/config/img/devices/50/94_hm-mod-re-8_thumb.png";
-DEV_PATHS["HM-MOD-Re-8"]["250"] = "/config/img/devices/250/94_hm-mod-re-8.png";
-DEV_HIGHLIGHT["HM-MOD-Re-8"] = new Object();
-DEV_LIST.push('HMW-IO-12-Sw7-DR');
-DEV_DESCRIPTION["HMW-IO-12-Sw7-DR"] = "HMW-IO-12-Sw7-DR";
-DEV_PATHS["HMW-IO-12-Sw7-DR"] = new Object();
-DEV_PATHS["HMW-IO-12-Sw7-DR"]["50"] = "/config/img/devices/50/30_hmw-io-12-sw7-dr_thumb.png";
-DEV_PATHS["HMW-IO-12-Sw7-DR"]["250"] = "/config/img/devices/250/30_hmw-io-12-sw7-dr.png";
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"] = new Object();
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["1"] = [2, 0.264, 0.7, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["2"] = [2, 0.328, 0.7, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["3"] = [2, 0.46, 0.7, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["4"] = [2, 0.524, 0.7, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["5"] = [2, 0.648, 0.7, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["6"] = [2, 0.708, 0.7, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["8"] = [2, 0.328, 0.764, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["7"] = [2, 0.264, 0.764, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["9"] = [2, 0.46, 0.764, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["10"] = [2, 0.524, 0.764, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["11"] = [2, 0.644, 0.764, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["12"] = [2, 0.708, 0.764, 0.06, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["13"] = [2, 0.268, 0.396, 0.12, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["14"] = [2, 0.46, 0.396, 0.12, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["15"] = [2, 0.648, 0.396, 0.12, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["16"] = [2, 0.076, 0.46, 0.12, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["17"] = [2, 0.264, 0.46, 0.12, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["18"] = [2, 0.46, 0.46, 0.12, 0.06];
-DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["19"] = [2, 0.648, 0.46, 0.12, 0.06];
-DEV_LIST.push('HM-LC-Bl1PBU-FM');
-DEV_DESCRIPTION["HM-LC-Bl1PBU-FM"] = "HM-LC-Bl1PBU-FM";
-DEV_PATHS["HM-LC-Bl1PBU-FM"] = new Object();
-DEV_PATHS["HM-LC-Bl1PBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HM-LC-Bl1PBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"]["1"] = [5, '1a', '1b'];
+DEV_LIST.push('HM-CC-VD');
+DEV_DESCRIPTION["HM-CC-VD"] = "HM-CC-VD";
+DEV_PATHS["HM-CC-VD"] = new Object();
+DEV_PATHS["HM-CC-VD"]["50"] = "/config/img/devices/50/43_hm-cc-vd_thumb.png";
+DEV_PATHS["HM-CC-VD"]["250"] = "/config/img/devices/250/43_hm-cc-vd.png";
+DEV_HIGHLIGHT["HM-CC-VD"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-SM');
+DEV_DESCRIPTION["HM-LC-Sw1-SM"] = "HM-LC-Sw1-SM";
+DEV_PATHS["HM-LC-Sw1-SM"] = new Object();
+DEV_PATHS["HM-LC-Sw1-SM"]["50"] = "/config/img/devices/50/8_hm-lc-sw1-sm_thumb.png";
+DEV_PATHS["HM-LC-Sw1-SM"]["250"] = "/config/img/devices/250/8_hm-lc-sw1-sm.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-SM"] = new Object();
+DEV_LIST.push('HM-SCI-3-FM');
+DEV_DESCRIPTION["HM-SCI-3-FM"] = "HM-SCI-3-FM";
+DEV_PATHS["HM-SCI-3-FM"] = new Object();
+DEV_PATHS["HM-SCI-3-FM"]["50"] = "/config/img/devices/50/67_hm-sci-3-fm_thumb.png";
+DEV_PATHS["HM-SCI-3-FM"]["250"] = "/config/img/devices/250/67_hm-sci-3-fm.png";
+DEV_HIGHLIGHT["HM-SCI-3-FM"] = new Object();
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["1"] = [5, '1_Key', '1_Kreis'];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["2"] = [5, '2_Key', '2_Kreis'];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-SCI-3-FM"]["3"] = [5, '3_Key', '3_Kreis'];
 DEV_LIST.push('HM-LC-Sw4-SM-2');
 DEV_DESCRIPTION["HM-LC-Sw4-SM-2"] = "HM-LC-Sw4-SM";
 DEV_PATHS["HM-LC-Sw4-SM-2"] = new Object();
@@ -2325,115 +622,6 @@ DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["3"] = [5, '3_Arrow', '3_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-2"]["4"] = [5, '4_Arrow', '4_Key'];
-DEV_LIST.push('HM-LC-Dim2T-SM');
-DEV_DESCRIPTION["HM-LC-Dim2T-SM"] = "HM-LC-Dim2T-SM";
-DEV_PATHS["HM-LC-Dim2T-SM"] = new Object();
-DEV_PATHS["HM-LC-Dim2T-SM"]["50"] = "/config/img/devices/50/64_hm-lc-dim2T-sm_thumb.png";
-DEV_PATHS["HM-LC-Dim2T-SM"]["250"] = "/config/img/devices/250/64_hm-lc-dim2T-sm.png";
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Part1"] = [6, 0.539, 0.864, 0.539, 0.948, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Part2"] = [6, 0.539, 0.948, 0.49, 0.884, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Part3"] = [6, 0.539, 0.948, 0.588, 0.884, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["2_Arrow"] = [7, '1_Arrow', 0.179, 0];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Key"] = [4, 0.25, 0.26, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["2_Key"] = [4, 0.328, 0.26, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1"] = [5, '1_Arrow', '1_Key'];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["2"] = [5, '2_Arrow', '2_Key'];
-DEV_LIST.push('263 162');
-DEV_DESCRIPTION["263 162"] = "263_162";
-DEV_PATHS["263 162"] = new Object();
-DEV_PATHS["263 162"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
-DEV_PATHS["263 162"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
-DEV_HIGHLIGHT["263 162"] = new Object();
-DEV_LIST.push('ZEL STG RM WT 2');
-DEV_DESCRIPTION["ZEL STG RM WT 2"] = "ZEL_STG_RM_WT_2";
-DEV_PATHS["ZEL STG RM WT 2"] = new Object();
-DEV_PATHS["ZEL STG RM WT 2"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
-DEV_PATHS["ZEL STG RM WT 2"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
-DEV_HIGHLIGHT["ZEL STG RM WT 2"] = new Object();
-DEV_HIGHLIGHT["ZEL STG RM WT 2"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
-DEV_HIGHLIGHT["ZEL STG RM WT 2"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
-DEV_LIST.push('HM-SCI-3-FM');
-DEV_DESCRIPTION["HM-SCI-3-FM"] = "HM-SCI-3-FM";
-DEV_PATHS["HM-SCI-3-FM"] = new Object();
-DEV_PATHS["HM-SCI-3-FM"]["50"] = "/config/img/devices/50/67_hm-sci-3-fm_thumb.png";
-DEV_PATHS["HM-SCI-3-FM"]["250"] = "/config/img/devices/250/67_hm-sci-3-fm.png";
-DEV_HIGHLIGHT["HM-SCI-3-FM"] = new Object();
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["1"] = [5, '1_Key', '1_Kreis'];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["2"] = [5, '2_Key', '2_Kreis'];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
-DEV_HIGHLIGHT["HM-SCI-3-FM"]["3"] = [5, '3_Key', '3_Kreis'];
-DEV_LIST.push('HM-OU-CFM-Pl');
-DEV_DESCRIPTION["HM-OU-CFM-Pl"] = "HM-OU-CFM-Pl";
-DEV_PATHS["HM-OU-CFM-Pl"] = new Object();
-DEV_PATHS["HM-OU-CFM-Pl"]["50"] = "/config/img/devices/50/60_hm-ou-cf-pl_thumb.png";
-DEV_PATHS["HM-OU-CFM-Pl"]["250"] = "/config/img/devices/250/60_hm-ou-cf-pl.png";
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"] = new Object();
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_circle"] = [4, 0.688, 0.224, 0.118, 0.112];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_1"] = [6, 0.628, 0.28, 0.656, 0.28, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_2"] = [6, 0.656, 0.2, 0.68, 0.22, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_3"] = [6, 0.74, 0.168, 0.74, 0.196, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_4"] = [6, 0.82, 0.196, 0.8, 0.216, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_5"] = [6, 0.824, 0.28, 0.856, 0.28, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_6"] = [6, 0.68, 0.34, 0.664, 0.36, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_7"] = [6, 0.74, 0.364, 0.74, 0.392, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_8"] = [6, 0.8, 0.34, 0.82, 0.36, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["1"] = [5, 'Light_circle', 'Light_beam_1', 'Light_beam_2', 'Light_beam_3', 'Light_beam_4', 'Light_beam_5', 'Light_beam_6', 'Light_beam_7', 'Light_beam_8'];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_1"] = [6, 0.644, 0.676, 0.672, 0.676, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_2"] = [6, 0.672, 0.676, 0.672, 0.816, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_3"] = [6, 0.644, 0.816, 0.672, 0.816, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_4"] = [6, 0.644, 0.676, 0.644, 0.816, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_5"] = [6, 0.672, 0.676, 0.716, 0.632, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_6"] = [6, 0.716, 0.632, 0.716, 0.86, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_7"] = [6, 0.672, 0.816, 0.716, 0.86, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_beam_1"] = [6, 0.75, 0.7, 0.832, 0.632, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_beam_2"] = [6, 0.75, 0.748, 0.832, 0.748, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_beam_3"] = [6, 0.75, 0.796, 0.832, 0.86, 0.016];
-DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["2"] = [5, 'SP_1', 'SP_2', 'SP_3', 'SP_4', 'SP_5', 'SP_6', 'SP_7', 'SP_beam_1', 'SP_beam_2', 'SP_beam_3'];
-DEV_LIST.push('HmIP-PSM');
-DEV_DESCRIPTION["HmIP-PSM"] = "PSM";
-DEV_PATHS["HmIP-PSM"] = new Object();
-DEV_PATHS["HmIP-PSM"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
-DEV_PATHS["HmIP-PSM"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
-DEV_HIGHLIGHT["HmIP-PSM"] = new Object();
-DEV_LIST.push('HM-LC-Dim1L-CV-2');
-DEV_DESCRIPTION["HM-LC-Dim1L-CV-2"] = "HM-LC-Dim1L-CV";
-DEV_PATHS["HM-LC-Dim1L-CV-2"] = new Object();
-DEV_PATHS["HM-LC-Dim1L-CV-2"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
-DEV_PATHS["HM-LC-Dim1L-CV-2"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
-DEV_HIGHLIGHT["HM-LC-Dim1L-CV-2"] = new Object();
-DEV_LIST.push('HM-PB-4Dis-WM-2');
-DEV_DESCRIPTION["HM-PB-4Dis-WM-2"] = "HM-PB-4Dis-WM-2";
-DEV_PATHS["HM-PB-4Dis-WM-2"] = new Object();
-DEV_PATHS["HM-PB-4Dis-WM-2"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
-DEV_PATHS["HM-PB-4Dis-WM-2"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"] = new Object();
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
-DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
 DEV_LIST.push('HM-LC-Dim1T-Pl');
 DEV_DESCRIPTION["HM-LC-Dim1T-Pl"] = "HM-LC-Dim1T-Pl";
 DEV_PATHS["HM-LC-Dim1T-Pl"] = new Object();
@@ -2443,84 +631,547 @@ DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"]["1"] = [5, '1_part1', '1_part2'];
-DEV_LIST.push('HM-LC-Sw1-PCB');
-DEV_DESCRIPTION["HM-LC-Sw1-PCB"] = "HM-LC-Sw1-PCB";
-DEV_PATHS["HM-LC-Sw1-PCB"] = new Object();
-DEV_PATHS["HM-LC-Sw1-PCB"]["50"] = "/config/img/devices/50/139_hm-lc-sw1-pcb_thumb.png";
-DEV_PATHS["HM-LC-Sw1-PCB"]["250"] = "/config/img/devices/250/139_hm-lc-sw1-pcb.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-PCB"] = new Object();
-DEV_LIST.push('HmIP-RC8');
-DEV_DESCRIPTION["HmIP-RC8"] = "RC8";
-DEV_PATHS["HmIP-RC8"] = new Object();
-DEV_PATHS["HmIP-RC8"]["50"] = "/config/img/devices/50/119_hmip-rc8_thumb.png";
-DEV_PATHS["HmIP-RC8"]["250"] = "/config/img/devices/250/119_hmip-rc8.png";
-DEV_HIGHLIGHT["HmIP-RC8"] = new Object();
-DEV_HIGHLIGHT["HmIP-RC8"]["1"] = [1, 0.472, 0.218, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["2"] = [1, 0.600, 0.224, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["3"] = [1, 0.476, 0.304, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["4"] = [1, 0.606, 0.306, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["5"] = [1, 0.480, 0.384, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["6"] = [1, 0.610, 0.386, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["7"] = [1, 0.484, 0.464, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["8"] = [1, 0.614, 0.466, 0.025];
-DEV_HIGHLIGHT["HmIP-RC8"]["1+2"] = [5, '1', '2'];
-DEV_HIGHLIGHT["HmIP-RC8"]["3+4"] = [5, '3', '4'];
-DEV_HIGHLIGHT["HmIP-RC8"]["5+6"] = [5, '5', '6'];
-DEV_HIGHLIGHT["HmIP-RC8"]["7+8"] = [5, '7', '8'];
-DEV_LIST.push('HmIP-ASIR');
-DEV_DESCRIPTION["HmIP-ASIR"] = "ASIR";
-DEV_PATHS["HmIP-ASIR"] = new Object();
-DEV_PATHS["HmIP-ASIR"]["50"] = "/config/img/devices/50/133_hmip-asir_thumb.png";
-DEV_PATHS["HmIP-ASIR"]["250"] = "/config/img/devices/250/133_hmip-asir.png";
-DEV_HIGHLIGHT["HmIP-ASIR"] = new Object();
+DEV_LIST.push('VIR-LG-WHITE-DIM');
+DEV_DESCRIPTION["VIR-LG-WHITE-DIM"] = "VIR-LG-WHITE-DIM";
+DEV_PATHS["VIR-LG-WHITE-DIM"] = new Object();
+DEV_PATHS["VIR-LG-WHITE-DIM"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-white-dim.png";
+DEV_PATHS["VIR-LG-WHITE-DIM"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-white-dim.png";
+DEV_HIGHLIGHT["VIR-LG-WHITE-DIM"] = new Object();
+DEV_LIST.push('HM-WDS30-T-O');
+DEV_DESCRIPTION["HM-WDS30-T-O"] = "HM-WDS30-T-O";
+DEV_PATHS["HM-WDS30-T-O"] = new Object();
+DEV_PATHS["HM-WDS30-T-O"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
+DEV_PATHS["HM-WDS30-T-O"]["250"] = "/config/img/devices/250/IP65_G201.png";
+DEV_HIGHLIGHT["HM-WDS30-T-O"] = new Object();
+DEV_LIST.push('HM-Sec-TiS');
+DEV_DESCRIPTION["HM-Sec-TiS"] = "HM-Sec-TiS";
+DEV_PATHS["HM-Sec-TiS"] = new Object();
+DEV_PATHS["HM-Sec-TiS"]["50"] = "/config/img/devices/50/47_hm-sec-tis_thumb.png";
+DEV_PATHS["HM-Sec-TiS"]["250"] = "/config/img/devices/250/47_hm-sec-tis.png";
+DEV_HIGHLIGHT["HM-Sec-TiS"] = new Object();
+DEV_LIST.push('HmIP-FAL24-C6');
+DEV_DESCRIPTION["HmIP-FAL24-C6"] = "FAL24-C6";
+DEV_PATHS["HmIP-FAL24-C6"] = new Object();
+DEV_PATHS["HmIP-FAL24-C6"]["50"] = "/config/img/devices/50/137_hmip-fal-c6_thumb.png";
+DEV_PATHS["HmIP-FAL24-C6"]["250"] = "/config/img/devices/250/137_hmip-fal-c6.png";
+DEV_HIGHLIGHT["HmIP-FAL24-C6"] = new Object();
+DEV_LIST.push('HmIP-SWDO');
+DEV_DESCRIPTION["HmIP-SWDO"] = "SWD";
+DEV_PATHS["HmIP-SWDO"] = new Object();
+DEV_PATHS["HmIP-SWDO"]["50"] = "/config/img/devices/50/118_hmip-swdo_thumb.png";
+DEV_PATHS["HmIP-SWDO"]["250"] = "/config/img/devices/250/118_hmip-swdo.png";
+DEV_HIGHLIGHT["HmIP-SWDO"] = new Object();
+DEV_LIST.push('HM-LC-Bl1PBU-FM');
+DEV_DESCRIPTION["HM-LC-Bl1PBU-FM"] = "HM-LC-Bl1PBU-FM";
+DEV_PATHS["HM-LC-Bl1PBU-FM"] = new Object();
+DEV_PATHS["HM-LC-Bl1PBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-LC-Bl1PBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-LC-Bl1PBU-FM"]["1"] = [5, '1a', '1b'];
+DEV_LIST.push('HMIP-eTRV');
+DEV_DESCRIPTION["HMIP-eTRV"] = "TRV";
+DEV_PATHS["HMIP-eTRV"] = new Object();
+DEV_PATHS["HMIP-eTRV"]["50"] = "/config/img/devices/50/120_hmip-etrv_thumb.png";
+DEV_PATHS["HMIP-eTRV"]["250"] = "/config/img/devices/250/120_hmip-etrv.png";
+DEV_HIGHLIGHT["HMIP-eTRV"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-CV-2');
+DEV_DESCRIPTION["HM-LC-Dim1T-CV-2"] = "HM-LC-Dim1T-CV";
+DEV_PATHS["HM-LC-Dim1T-CV-2"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-CV-2"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-CV-2"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-CV-2"] = new Object();
+DEV_LIST.push('HM-LC-Dim1L-Pl');
+DEV_DESCRIPTION["HM-LC-Dim1L-Pl"] = "HM-LC-Dim1L-Pl";
+DEV_PATHS["HM-LC-Dim1L-Pl"] = new Object();
+DEV_PATHS["HM-LC-Dim1L-Pl"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Dim1L-Pl"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R5');
+DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R5"] = "HM-ES-PMSw1-Pl-DN-R5";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R5"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R5"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R5_thumb.png";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R5"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R5.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R5"] = new Object();
+DEV_LIST.push('HM-Sen-DB-PCB');
+DEV_DESCRIPTION["HM-Sen-DB-PCB"] = "HM-Sen-DB-PCB";
+DEV_PATHS["HM-Sen-DB-PCB"] = new Object();
+DEV_PATHS["HM-Sen-DB-PCB"]["50"] = "/config/img/devices/50/101_hm-sen-db-pcb_thumb.png";
+DEV_PATHS["HM-Sen-DB-PCB"]["250"] = "/config/img/devices/250/101_hm-sen-db-pcb.png";
+DEV_HIGHLIGHT["HM-Sen-DB-PCB"] = new Object();
+DEV_LIST.push('HM-Sen-LI-O');
+DEV_DESCRIPTION["HM-Sen-LI-O"] = "HM-Sen-LI-O";
+DEV_PATHS["HM-Sen-LI-O"] = new Object();
+DEV_PATHS["HM-Sen-LI-O"]["50"] = "/config/img/devices/50/126_hm-sen-li-o_thumb.png";
+DEV_PATHS["HM-Sen-LI-O"]["250"] = "/config/img/devices/250/126_hm-sen-li-o.png";
+DEV_HIGHLIGHT["HM-Sen-LI-O"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-FM-2');
+DEV_DESCRIPTION["HM-LC-Dim1T-FM-2"] = "HM-LC-Dim1T-FM";
+DEV_PATHS["HM-LC-Dim1T-FM-2"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-FM-2"]["50"] = "/config/img/devices/50/65_hm-lc-dim1t-fm_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-FM-2"]["250"] = "/config/img/devices/250/65_hm-lc-dim1t-fm.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-FM-2"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-Pl-3');
+DEV_DESCRIPTION["HM-LC-Dim1T-Pl-3"] = "HM-LC-Dim1T-Pl-3";
+DEV_PATHS["HM-LC-Dim1T-Pl-3"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-Pl-3"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-Pl-3"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HmIP-FAL230-C6');
+DEV_DESCRIPTION["HmIP-FAL230-C6"] = "FAL230-C6";
+DEV_PATHS["HmIP-FAL230-C6"] = new Object();
+DEV_PATHS["HmIP-FAL230-C6"]["50"] = "/config/img/devices/50/137_hmip-fal-c6_thumb.png";
+DEV_PATHS["HmIP-FAL230-C6"]["250"] = "/config/img/devices/250/137_hmip-fal-c6.png";
+DEV_HIGHLIGHT["HmIP-FAL230-C6"] = new Object();
+DEV_LIST.push('HM-RC-19-B');
+DEV_DESCRIPTION["HM-RC-19-B"] = "HM-RC-19-B";
+DEV_PATHS["HM-RC-19-B"] = new Object();
+DEV_PATHS["HM-RC-19-B"]["50"] = "/config/img/devices/50/20_hm-rc-19_thumb.png";
+DEV_PATHS["HM-RC-19-B"]["250"] = "/config/img/devices/250/20_hm-rc-19.png";
+DEV_HIGHLIGHT["HM-RC-19-B"] = new Object();
+DEV_HIGHLIGHT["HM-RC-19-B"]["1"] = [2, 0.296, 0.344, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["3"] = [2, 0.296, 0.416, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["5"] = [2, 0.296, 0.488, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["7"] = [2, 0.296, 0.56, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["9"] = [2, 0.296, 0.628, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["11"] = [2, 0.296, 0.704, 0.036, 0.048];
+DEV_HIGHLIGHT["HM-RC-19-B"]["13"] = [2, 0.296, 0.772, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["15"] = [2, 0.296, 0.844, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["2"] = [2, 0.468, 0.344, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["4"] = [2, 0.468, 0.416, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["6"] = [2, 0.468, 0.488, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["8"] = [2, 0.468, 0.56, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["10"] = [2, 0.468, 0.628, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["12"] = [2, 0.468, 0.704, 0.036, 0.048];
+DEV_HIGHLIGHT["HM-RC-19-B"]["14"] = [2, 0.468, 0.772, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["16"] = [2, 0.468, 0.844, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-B"]["17"] = [2, 0.58, 0.84, 0.044, 0.056];
+DEV_HIGHLIGHT["HM-RC-19-B"]["18"] = [2, 0.312, 0.188, 0.168, 0.088];
+DEV_HIGHLIGHT["HM-RC-19-B"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-19-B"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HM-RC-19-B"]["5+6"] = [5, '5', '6'];
+DEV_HIGHLIGHT["HM-RC-19-B"]["7+8"] = [5, '7', '8'];
+DEV_HIGHLIGHT["HM-RC-19-B"]["9+10"] = [5, '9', '10'];
+DEV_HIGHLIGHT["HM-RC-19-B"]["11+12"] = [5, '11', '12'];
+DEV_HIGHLIGHT["HM-RC-19-B"]["13+14"] = [5, '13', '14'];
+DEV_HIGHLIGHT["HM-RC-19-B"]["15+16"] = [5, '15', '16'];
+DEV_LIST.push('HM-Dis-WM55');
+DEV_DESCRIPTION["HM-Dis-WM55"] = "HM-Dis-WM55";
+DEV_PATHS["HM-Dis-WM55"] = new Object();
+DEV_PATHS["HM-Dis-WM55"]["50"] = "/config/img/devices/50/97_hm-dis-wm55_thumb.png";
+DEV_PATHS["HM-Dis-WM55"]["250"] = "/config/img/devices/250/97_hm-dis-wm55.png";
+DEV_HIGHLIGHT["HM-Dis-WM55"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-FM');
+DEV_DESCRIPTION["HM-LC-Sw1-FM"] = "HM-LC-Sw1-FM";
+DEV_PATHS["HM-LC-Sw1-FM"] = new Object();
+DEV_PATHS["HM-LC-Sw1-FM"]["50"] = "/config/img/devices/50/4_hm-lc-sw1-fm_thumb.png";
+DEV_PATHS["HM-LC-Sw1-FM"]["250"] = "/config/img/devices/250/4_hm-lc-sw1-fm.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-FM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw1-FM"]["1_AUS"] = [2, 0.288, 0.66, 0.068, 0.152];
+DEV_HIGHLIGHT["HM-LC-Sw1-FM"]["1_EIN"] = [2, 0.548, 0.66, 0.068, 0.152];
+DEV_HIGHLIGHT["HM-LC-Sw1-FM"]["1"] = [5, '1_AUS', '1_EIN'];
+DEV_LIST.push('HMW-LC-Dim1L-DR');
+DEV_DESCRIPTION["HMW-LC-Dim1L-DR"] = "HMW-LC-Dim1L-DR";
+DEV_PATHS["HMW-LC-Dim1L-DR"] = new Object();
+DEV_PATHS["HMW-LC-Dim1L-DR"]["50"] = "/config/img/devices/50/28_hmw-lc-dim1l-dr_thumb.png";
+DEV_PATHS["HMW-LC-Dim1L-DR"]["250"] = "/config/img/devices/250/28_hmw-lc-dim1l-dr.png";
+DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"] = new Object();
+DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"]["1"] = [2, 0.312, 0.756, 0.056, 0.06];
+DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"]["2"] = [2, 0.368, 0.752, 0.048, 0.068];
+DEV_HIGHLIGHT["HMW-LC-Dim1L-DR"]["3"] = [2, 0.368, 0.388, 0.048, 0.064];
+DEV_LIST.push('HM-LC-Sw1-Pl-DN-R4');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R4"] = "HM-LC-Sw1-Pl-DN-R4";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R4"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R4"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R4_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R4"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R4.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R4"] = new Object();
+DEV_LIST.push('HM-PB-2-FM');
+DEV_DESCRIPTION["HM-PB-2-FM"] = "HM-PB-2-FM";
+DEV_PATHS["HM-PB-2-FM"] = new Object();
+DEV_PATHS["HM-PB-2-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-PB-2-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-PB-2-FM"] = new Object();
+DEV_HIGHLIGHT["HM-PB-2-FM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-PB-2-FM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-PB-2-FM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HmIP-FAL230-C10');
+DEV_DESCRIPTION["HmIP-FAL230-C10"] = "FAL230-C10";
+DEV_PATHS["HmIP-FAL230-C10"] = new Object();
+DEV_PATHS["HmIP-FAL230-C10"]["50"] = "/config/img/devices/50/138_hmip-fal-c10_thumb.png";
+DEV_PATHS["HmIP-FAL230-C10"]["250"] = "/config/img/devices/250/138_hmip-fal-c10.png";
+DEV_HIGHLIGHT["HmIP-FAL230-C10"] = new Object();
+DEV_LIST.push('VIR-LG-ONOFF');
+DEV_DESCRIPTION["VIR-LG-ONOFF"] = "VIR-LG-ONOFFVIR-LG-ONOFF";
+DEV_PATHS["VIR-LG-ONOFF"] = new Object();
+DEV_PATHS["VIR-LG-ONOFF"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-onoff.png";
+DEV_PATHS["VIR-LG-ONOFF"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-onoff.png";
+DEV_HIGHLIGHT["VIR-LG-ONOFF"] = new Object();
+DEV_LIST.push('HM-Sen-RD-O');
+DEV_DESCRIPTION["HM-Sen-RD-O"] = "HM-Sen-RD-O";
+DEV_PATHS["HM-Sen-RD-O"] = new Object();
+DEV_PATHS["HM-Sen-RD-O"]["50"] = "/config/img/devices/50/87_hm-sen-rd-o_thumb.png";
+DEV_PATHS["HM-Sen-RD-O"]["250"] = "/config/img/devices/250/87_hm-sen-rd-o.png";
+DEV_HIGHLIGHT["HM-Sen-RD-O"] = new Object();
+DEV_LIST.push('HMW-LC-Sw2-DR');
+DEV_DESCRIPTION["HMW-LC-Sw2-DR"] = "HMW-LC-Sw2-DR";
+DEV_PATHS["HMW-LC-Sw2-DR"] = new Object();
+DEV_PATHS["HMW-LC-Sw2-DR"]["50"] = "/config/img/devices/50/26_hmw-lc-sw2-dr_thumb.png";
+DEV_PATHS["HMW-LC-Sw2-DR"]["250"] = "/config/img/devices/250/26_hmw-lc-sw2-dr.png";
+DEV_HIGHLIGHT["HMW-LC-Sw2-DR"] = new Object();
+DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["1"] = [2, 0.448, 0.764, 0.048, 0.064];
+DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["2"] = [2, 0.496, 0.764, 0.052, 0.068];
+DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["3"] = [2, 0.232, 0.384, 0.104, 0.068];
+DEV_HIGHLIGHT["HMW-LC-Sw2-DR"]["4"] = [2, 0.448, 0.384, 0.104, 0.068];
+DEV_LIST.push('HM-OU-LED16');
+DEV_DESCRIPTION["HM-OU-LED16"] = "HM-OU-LED16";
+DEV_PATHS["HM-OU-LED16"] = new Object();
+DEV_PATHS["HM-OU-LED16"]["50"] = "/config/img/devices/50/78_hm-ou-led16_thumb.png";
+DEV_PATHS["HM-OU-LED16"]["250"] = "/config/img/devices/250/78_hm-ou-led16.png";
+DEV_HIGHLIGHT["HM-OU-LED16"] = new Object();
+DEV_HIGHLIGHT["HM-OU-LED16"]["1"] = [2, 0.152, 0.218, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["2"] = [2, 0.152, 0.277, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["3"] = [2, 0.152, 0.336, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["4"] = [2, 0.152, 0.395, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["5"] = [2, 0.152, 0.454, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["6"] = [2, 0.152, 0.513, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["7"] = [2, 0.152, 0.572, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["8"] = [2, 0.152, 0.631, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["9"] = [2, 0.728, 0.218, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["10"] = [2, 0.728, 0.277, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["11"] = [2, 0.728, 0.336, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["12"] = [2, 0.728, 0.395, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["13"] = [2, 0.728, 0.454, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["14"] = [2, 0.728, 0.513, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["15"] = [2, 0.728, 0.572, 0.064, 0.056];
+DEV_HIGHLIGHT["HM-OU-LED16"]["16"] = [2, 0.728, 0.631, 0.064, 0.056];
+DEV_LIST.push('HmIP-PSM-IT');
+DEV_DESCRIPTION["HmIP-PSM-IT"] = "PSM";
+DEV_PATHS["HmIP-PSM-IT"] = new Object();
+DEV_PATHS["HmIP-PSM-IT"]["50"] = "/config/img/devices/50/113_hmip-psm-it_thumb.png";
+DEV_PATHS["HmIP-PSM-IT"]["250"] = "/config/img/devices/250/113_hmip-psm-it.png";
+DEV_HIGHLIGHT["HmIP-PSM-IT"] = new Object();
+DEV_LIST.push('HM-MOD-EM-8Bit');
+DEV_DESCRIPTION["HM-MOD-EM-8Bit"] = "HM-MOD-EM-8Bit";
+DEV_PATHS["HM-MOD-EM-8Bit"] = new Object();
+DEV_PATHS["HM-MOD-EM-8Bit"]["50"] = "/config/img/devices/50/142_hm-mod-em-8bit_thumb.png";
+DEV_PATHS["HM-MOD-EM-8Bit"]["250"] = "/config/img/devices/250/142_hm-mod-em-8bit.png";
+DEV_HIGHLIGHT["HM-MOD-EM-8Bit"] = new Object();
+DEV_LIST.push('HM-PB-2-WM55');
+DEV_DESCRIPTION["HM-PB-2-WM55"] = "HM-PB-2-WM55";
+DEV_PATHS["HM-PB-2-WM55"] = new Object();
+DEV_PATHS["HM-PB-2-WM55"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
+DEV_PATHS["HM-PB-2-WM55"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
+DEV_HIGHLIGHT["HM-PB-2-WM55"] = new Object();
+DEV_HIGHLIGHT["HM-PB-2-WM55"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
+DEV_HIGHLIGHT["HM-PB-2-WM55"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
+DEV_LIST.push('HM-MOD-EM-8');
+DEV_DESCRIPTION["HM-MOD-EM-8"] = "HM-MOD-EM-8";
+DEV_PATHS["HM-MOD-EM-8"] = new Object();
+DEV_PATHS["HM-MOD-EM-8"]["50"] = "/config/img/devices/50/99_hm-mod-em-8_thumb.png";
+DEV_PATHS["HM-MOD-EM-8"]["250"] = "/config/img/devices/250/99_hm-mod-em-8.png";
+DEV_HIGHLIGHT["HM-MOD-EM-8"] = new Object();
+DEV_LIST.push('HM-WDS40-TH-I');
+DEV_DESCRIPTION["HM-WDS40-TH-I"] = "HM-WDS40-TH-I";
+DEV_PATHS["HM-WDS40-TH-I"] = new Object();
+DEV_PATHS["HM-WDS40-TH-I"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
+DEV_PATHS["HM-WDS40-TH-I"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
+DEV_HIGHLIGHT["HM-WDS40-TH-I"] = new Object();
+DEV_LIST.push('HM-RC-12-B');
+DEV_DESCRIPTION["HM-RC-12-B"] = "HM-RC-12-B";
+DEV_PATHS["HM-RC-12-B"] = new Object();
+DEV_PATHS["HM-RC-12-B"]["50"] = "/config/img/devices/50/19_hm-rc-12_thumb.png";
+DEV_PATHS["HM-RC-12-B"]["250"] = "/config/img/devices/250/19_hm-rc-12.png";
+DEV_HIGHLIGHT["HM-RC-12-B"] = new Object();
+DEV_HIGHLIGHT["HM-RC-12-B"]["1"] = [2, 0.252, 0.412, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["3"] = [2, 0.252, 0.508, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["5"] = [2, 0.252, 0.604, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["7"] = [2, 0.252, 0.7, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["9"] = [2, 0.252, 0.8, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["10"] = [2, 0.476, 0.8, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["8"] = [2, 0.476, 0.7, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["6"] = [2, 0.476, 0.604, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["4"] = [2, 0.476, 0.508, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["2"] = [2, 0.476, 0.412, 0.044, 0.072];
+DEV_HIGHLIGHT["HM-RC-12-B"]["11"] = [2, 0.62, 0.8, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-RC-12-B"]["12"] = [2, 0.62, 0.704, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-RC-12-B"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-12-B"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HM-RC-12-B"]["5+6"] = [5, '5', '6'];
+DEV_HIGHLIGHT["HM-RC-12-B"]["7+8"] = [5, '7', '8'];
+DEV_HIGHLIGHT["HM-RC-12-B"]["9+10"] = [5, '9', '10'];
+DEV_HIGHLIGHT["HM-RC-12-B"]["11+12"] = [5, '11', '12'];
+DEV_LIST.push('HM-Sec-Win');
+DEV_DESCRIPTION["HM-Sec-Win"] = "HM-Sec-Win";
+DEV_PATHS["HM-Sec-Win"] = new Object();
+DEV_PATHS["HM-Sec-Win"]["50"] = "/config/img/devices/50/15_hm-sec-win_thumb.png";
+DEV_PATHS["HM-Sec-Win"]["250"] = "/config/img/devices/250/15_hm-sec-win.png";
+DEV_HIGHLIGHT["HM-Sec-Win"] = new Object();
+DEV_LIST.push('HmIP-FSM16');
+DEV_DESCRIPTION["HmIP-FSM16"] = "FSM16";
+DEV_PATHS["HmIP-FSM16"] = new Object();
+DEV_PATHS["HmIP-FSM16"]["50"] = "/config/img/devices/50/135_hmip-fsm16_thumb.png";
+DEV_PATHS["HmIP-FSM16"]["250"] = "/config/img/devices/250/135_hmip-fsm16.png";
+DEV_HIGHLIGHT["HmIP-FSM16"] = new Object();
+DEV_LIST.push('HMW-IO-4-FM');
+DEV_DESCRIPTION["HMW-IO-4-FM"] = "HMW-IO-4-FM";
+DEV_PATHS["HMW-IO-4-FM"] = new Object();
+DEV_PATHS["HMW-IO-4-FM"]["50"] = "/config/img/devices/50/29_hmw-io-4-fm_thumb.png";
+DEV_PATHS["HMW-IO-4-FM"]["250"] = "/config/img/devices/250/29_hmw-io-4-fm.png";
+DEV_HIGHLIGHT["HMW-IO-4-FM"] = new Object();
+DEV_HIGHLIGHT["HMW-IO-4-FM"]["1"] = [6, 0.616, 0.736, 0.612, 0.836, 0.02];
+DEV_HIGHLIGHT["HMW-IO-4-FM"]["2"] = [6, 0.672, 0.736, 0.668, 0.836, 0.02];
+DEV_HIGHLIGHT["HMW-IO-4-FM"]["3"] = [6, 0.724, 0.736, 0.724, 0.836, 0.02];
+DEV_HIGHLIGHT["HMW-IO-4-FM"]["4"] = [6, 0.78, 0.736, 0.78, 0.836, 0.02];
 DEV_LIST.push('HMIP-SWDO');
 DEV_DESCRIPTION["HMIP-SWDO"] = "SWD";
 DEV_PATHS["HMIP-SWDO"] = new Object();
 DEV_PATHS["HMIP-SWDO"]["50"] = "/config/img/devices/50/118_hmip-swdo_thumb.png";
 DEV_PATHS["HMIP-SWDO"]["250"] = "/config/img/devices/250/118_hmip-swdo.png";
 DEV_HIGHLIGHT["HMIP-SWDO"] = new Object();
-DEV_LIST.push('HM-RC-Dis-H-x-EU');
-DEV_DESCRIPTION["HM-RC-Dis-H-x-EU"] = "HM-RC-Dis-H-x-EU";
-DEV_PATHS["HM-RC-Dis-H-x-EU"] = new Object();
-DEV_PATHS["HM-RC-Dis-H-x-EU"]["50"] = "/config/img/devices/50/108_hm-rc-dis-h-x-eu_thump.png";
-DEV_PATHS["HM-RC-Dis-H-x-EU"]["250"] = "/config/img/devices/250/108_hm-rc-dis-h-x-eu.png";
-DEV_HIGHLIGHT["HM-RC-Dis-H-x-EU"] = new Object();
-DEV_LIST.push('263 157');
-DEV_DESCRIPTION["263 157"] = "263_157";
-DEV_PATHS["263 157"] = new Object();
-DEV_PATHS["263 157"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
-DEV_PATHS["263 157"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
-DEV_HIGHLIGHT["263 157"] = new Object();
-DEV_LIST.push('HM-Sec-MDIR');
-DEV_DESCRIPTION["HM-Sec-MDIR"] = "HM-Sec-MDIR";
-DEV_PATHS["HM-Sec-MDIR"] = new Object();
-DEV_PATHS["HM-Sec-MDIR"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
-DEV_PATHS["HM-Sec-MDIR"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
-DEV_HIGHLIGHT["HM-Sec-MDIR"] = new Object();
-DEV_LIST.push('HM-Sec-SC-2');
-DEV_DESCRIPTION["HM-Sec-SC-2"] = "HM-Sec-SC-2";
-DEV_PATHS["HM-Sec-SC-2"] = new Object();
-DEV_PATHS["HM-Sec-SC-2"]["50"] = "/config/img/devices/50/16_hm-sec-sc_thumb.png";
-DEV_PATHS["HM-Sec-SC-2"]["250"] = "/config/img/devices/250/16_hm-sec-sc.png";
-DEV_HIGHLIGHT["HM-Sec-SC-2"] = new Object();
-DEV_LIST.push('HmIP-SWSD');
-DEV_DESCRIPTION["HmIP-SWSD"] = "SWSD";
-DEV_PATHS["HmIP-SWSD"] = new Object();
-DEV_PATHS["HmIP-SWSD"]["50"] = "/config/img/devices/50/104_hm-sec-sd-2_thumb.png";
-DEV_PATHS["HmIP-SWSD"]["250"] = "/config/img/devices/250/104_hm-sec-sd-2.png";
-DEV_HIGHLIGHT["HmIP-SWSD"] = new Object();
-DEV_LIST.push('HM-Sec-SD-2-Team');
-DEV_DESCRIPTION["HM-Sec-SD-2-Team"] = "HM-Sec-SD-Team";
-DEV_PATHS["HM-Sec-SD-2-Team"] = new Object();
-DEV_PATHS["HM-Sec-SD-2-Team"]["50"] = "/config/img/devices/50/105_hm-sec-sd-2-team_thumb.png";
-DEV_PATHS["HM-Sec-SD-2-Team"]["250"] = "/config/img/devices/250/105_hm-sec-sd-2-team.png";
-DEV_HIGHLIGHT["HM-Sec-SD-2-Team"] = new Object();
-DEV_LIST.push('HM-WS550STH-O');
-DEV_DESCRIPTION["HM-WS550STH-O"] = "HM-WS550STH-O";
-DEV_PATHS["HM-WS550STH-O"] = new Object();
-DEV_PATHS["HM-WS550STH-O"]["50"] = "/config/img/devices/50/TH_CS_thumb.png";
-DEV_PATHS["HM-WS550STH-O"]["250"] = "/config/img/devices/250/TH_CS.png";
-DEV_HIGHLIGHT["HM-WS550STH-O"] = new Object();
+DEV_LIST.push('HM-RC-19');
+DEV_DESCRIPTION["HM-RC-19"] = "HM-RC-19";
+DEV_PATHS["HM-RC-19"] = new Object();
+DEV_PATHS["HM-RC-19"]["50"] = "/config/img/devices/50/20_hm-rc-19_thumb.png";
+DEV_PATHS["HM-RC-19"]["250"] = "/config/img/devices/250/20_hm-rc-19.png";
+DEV_HIGHLIGHT["HM-RC-19"] = new Object();
+DEV_HIGHLIGHT["HM-RC-19"]["1"] = [2, 0.296, 0.344, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["3"] = [2, 0.296, 0.416, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["5"] = [2, 0.296, 0.488, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["7"] = [2, 0.296, 0.56, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["9"] = [2, 0.296, 0.628, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["11"] = [2, 0.296, 0.704, 0.036, 0.048];
+DEV_HIGHLIGHT["HM-RC-19"]["13"] = [2, 0.296, 0.772, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["15"] = [2, 0.296, 0.844, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["2"] = [2, 0.468, 0.344, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["4"] = [2, 0.468, 0.416, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["6"] = [2, 0.468, 0.488, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["8"] = [2, 0.468, 0.56, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["10"] = [2, 0.468, 0.628, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["12"] = [2, 0.468, 0.704, 0.036, 0.048];
+DEV_HIGHLIGHT["HM-RC-19"]["14"] = [2, 0.468, 0.772, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["16"] = [2, 0.468, 0.844, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19"]["17"] = [2, 0.58, 0.84, 0.044, 0.056];
+DEV_HIGHLIGHT["HM-RC-19"]["18"] = [2, 0.312, 0.188, 0.168, 0.088];
+DEV_HIGHLIGHT["HM-RC-19"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-19"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HM-RC-19"]["5+6"] = [5, '5', '6'];
+DEV_HIGHLIGHT["HM-RC-19"]["7+8"] = [5, '7', '8'];
+DEV_HIGHLIGHT["HM-RC-19"]["9+10"] = [5, '9', '10'];
+DEV_HIGHLIGHT["HM-RC-19"]["11+12"] = [5, '11', '12'];
+DEV_HIGHLIGHT["HM-RC-19"]["13+14"] = [5, '13', '14'];
+DEV_HIGHLIGHT["HM-RC-19"]["15+16"] = [5, '15', '16'];
+DEV_LIST.push('HM-RC-4-B');
+DEV_DESCRIPTION["HM-RC-4-B"] = "HM-RC-4-B";
+DEV_PATHS["HM-RC-4-B"] = new Object();
+DEV_PATHS["HM-RC-4-B"]["50"] = "/config/img/devices/50/18_hm-rc-4_thumb.png";
+DEV_PATHS["HM-RC-4-B"]["250"] = "/config/img/devices/250/18_hm-rc-4.png";
+DEV_HIGHLIGHT["HM-RC-4-B"] = new Object();
+DEV_HIGHLIGHT["HM-RC-4-B"]["1"] = [4, 0.268, 0.236, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4-B"]["2"] = [4, 0.476, 0.236, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4-B"]["3"] = [4, 0.268, 0.48, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4-B"]["4"] = [4, 0.476, 0.48, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4-B"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-4-B"]["3+4"] = [5, '3', '4'];
+DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R2');
+DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R2"] = "HM-ES-PMSw1-Pl-DN-R2";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R2"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R2"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R2_thumb.png";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R2"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R2.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R2"] = new Object();
+DEV_LIST.push('HmIP-PSM');
+DEV_DESCRIPTION["HmIP-PSM"] = "PSM";
+DEV_PATHS["HmIP-PSM"] = new Object();
+DEV_PATHS["HmIP-PSM"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
+DEV_PATHS["HmIP-PSM"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
+DEV_HIGHLIGHT["HmIP-PSM"] = new Object();
+DEV_LIST.push('HM-RC-P1');
+DEV_DESCRIPTION["HM-RC-P1"] = "HM-RC-P1";
+DEV_PATHS["HM-RC-P1"] = new Object();
+DEV_PATHS["HM-RC-P1"]["50"] = "/config/img/devices/50/21_hm-rc-p1_thumb.png";
+DEV_PATHS["HM-RC-P1"]["250"] = "/config/img/devices/250/21_hm-rc-p1.png";
+DEV_HIGHLIGHT["HM-RC-P1"] = new Object();
+DEV_HIGHLIGHT["HM-RC-P1"]["1"] = [4, 0.26, 0.248, 0.38, 0.42];
+DEV_LIST.push('HM-LC-Sw1-FM-2');
+DEV_DESCRIPTION["HM-LC-Sw1-FM-2"] = "HM-LC-Sw1-FM";
+DEV_PATHS["HM-LC-Sw1-FM-2"] = new Object();
+DEV_PATHS["HM-LC-Sw1-FM-2"]["50"] = "/config/img/devices/50/4_hm-lc-sw1-fm_thumb.png";
+DEV_PATHS["HM-LC-Sw1-FM-2"]["250"] = "/config/img/devices/250/4_hm-lc-sw1-fm.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"]["1_AUS"] = [2, 0.288, 0.66, 0.068, 0.152];
+DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"]["1_EIN"] = [2, 0.548, 0.66, 0.068, 0.152];
+DEV_HIGHLIGHT["HM-LC-Sw1-FM-2"]["1"] = [5, '1_AUS', '1_EIN'];
+DEV_LIST.push('HM-LC-Sw1-PCB');
+DEV_DESCRIPTION["HM-LC-Sw1-PCB"] = "HM-LC-Sw1-PCB";
+DEV_PATHS["HM-LC-Sw1-PCB"] = new Object();
+DEV_PATHS["HM-LC-Sw1-PCB"]["50"] = "/config/img/devices/50/139_hm-lc-sw1-pcb_thumb.png";
+DEV_PATHS["HM-LC-Sw1-PCB"]["250"] = "/config/img/devices/250/139_hm-lc-sw1-pcb.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-PCB"] = new Object();
+DEV_LIST.push('HM-Sec-SD-Team');
+DEV_DESCRIPTION["HM-Sec-SD-Team"] = "HM-Sec-SD-Team";
+DEV_PATHS["HM-Sec-SD-Team"] = new Object();
+DEV_PATHS["HM-Sec-SD-Team"]["50"] = "/config/img/devices/50/52_hm-sec-sd-team_thumb.png";
+DEV_PATHS["HM-Sec-SD-Team"]["250"] = "/config/img/devices/250/52_hm-sec-sd-team.png";
+DEV_HIGHLIGHT["HM-Sec-SD-Team"] = new Object();
+DEV_LIST.push('HM-TC-IT-WM-W-EU');
+DEV_DESCRIPTION["HM-TC-IT-WM-W-EU"] = "HM-TC-IT-WM-W-EU";
+DEV_PATHS["HM-TC-IT-WM-W-EU"] = new Object();
+DEV_PATHS["HM-TC-IT-WM-W-EU"]["50"] = "/config/img/devices/50/96_hm-tc-it-wm-w-eu_thumb.png";
+DEV_PATHS["HM-TC-IT-WM-W-EU"]["250"] = "/config/img/devices/250/96_hm-tc-it-wm-w-eu.png";
+DEV_HIGHLIGHT["HM-TC-IT-WM-W-EU"] = new Object();
+DEV_LIST.push('263 162');
+DEV_DESCRIPTION["263 162"] = "263_162";
+DEV_PATHS["263 162"] = new Object();
+DEV_PATHS["263 162"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
+DEV_PATHS["263 162"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
+DEV_HIGHLIGHT["263 162"] = new Object();
+DEV_LIST.push('HM-ES-TX-WM');
+DEV_DESCRIPTION["HM-ES-TX-WM"] = "HM-ES-TX-WM";
+DEV_PATHS["HM-ES-TX-WM"] = new Object();
+DEV_PATHS["HM-ES-TX-WM"]["50"] = "/config/img/devices/50/102_hm-es-tx-wm_thumb.png";
+DEV_PATHS["HM-ES-TX-WM"]["250"] = "/config/img/devices/250/102_hm-es-tx-wm.png";
+DEV_HIGHLIGHT["HM-ES-TX-WM"] = new Object();
+DEV_LIST.push('HM-LC-Dim1L-CV-2');
+DEV_DESCRIPTION["HM-LC-Dim1L-CV-2"] = "HM-LC-Dim1L-CV";
+DEV_PATHS["HM-LC-Dim1L-CV-2"] = new Object();
+DEV_PATHS["HM-LC-Dim1L-CV-2"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1L-CV-2"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1L-CV-2"] = new Object();
+DEV_LIST.push('HmIP-FSM');
+DEV_DESCRIPTION["HmIP-FSM"] = "FSM";
+DEV_PATHS["HmIP-FSM"] = new Object();
+DEV_PATHS["HmIP-FSM"]["50"] = "/config/img/devices/50/134_hmip-fsm_thumb.png";
+DEV_PATHS["HmIP-FSM"]["250"] = "/config/img/devices/250/134_hmip-fsm.png";
+DEV_HIGHLIGHT["HmIP-FSM"] = new Object();
+DEV_LIST.push('263 133');
+DEV_DESCRIPTION["263 133"] = "263_133";
+DEV_PATHS["263 133"] = new Object();
+DEV_PATHS["263 133"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["263 133"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["263 133"] = new Object();
+DEV_LIST.push('HM-Sec-Key-O');
+DEV_DESCRIPTION["HM-Sec-Key-O"] = "HM-Sec-Key-O";
+DEV_PATHS["HM-Sec-Key-O"] = new Object();
+DEV_PATHS["HM-Sec-Key-O"]["50"] = "/config/img/devices/50/14_hm-sec-key_thumb.png";
+DEV_PATHS["HM-Sec-Key-O"]["250"] = "/config/img/devices/250/14_hm-sec-key.png";
+DEV_HIGHLIGHT["HM-Sec-Key-O"] = new Object();
+DEV_LIST.push('HM-WS550STH-I');
+DEV_DESCRIPTION["HM-WS550STH-I"] = "HM-WS550STH-I";
+DEV_PATHS["HM-WS550STH-I"] = new Object();
+DEV_PATHS["HM-WS550STH-I"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
+DEV_PATHS["HM-WS550STH-I"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
+DEV_HIGHLIGHT["HM-WS550STH-I"] = new Object();
+DEV_LIST.push('HM-Sen-EP');
+DEV_DESCRIPTION["HM-Sen-EP"] = "HM-Sen-EP";
+DEV_PATHS["HM-Sen-EP"] = new Object();
+DEV_PATHS["HM-Sen-EP"]["50"] = "/config/img/devices/50/48_hm-sen-ep_thumb.png";
+DEV_PATHS["HM-Sen-EP"]["250"] = "/config/img/devices/250/48_hm-sen-ep.png";
+DEV_HIGHLIGHT["HM-Sen-EP"] = new Object();
+DEV_HIGHLIGHT["HM-Sen-EP"]["1_rect"] = [2, 0.14, 0.612, 0.086, 0.05];
+DEV_HIGHLIGHT["HM-Sen-EP"]["2_rect"] = [2, 0.14, 0.740, 0.086, 0.05];
+DEV_HIGHLIGHT["HM-Sen-EP"]["1_channel"] = [3, 0.44, 0.232, '1', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-Sen-EP"]["1"] = [5, '1_channel', '1_rect'];
+DEV_HIGHLIGHT["HM-Sen-EP"]["2_channel"] = [3, 0.44, 0.232, '2', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-Sen-EP"]["2"] = [5, '2_channel', '2_rect'];
+DEV_LIST.push('VIR-LG-DIM');
+DEV_DESCRIPTION["VIR-LG-DIM"] = "VIR-LG-DIM";
+DEV_PATHS["VIR-LG-DIM"] = new Object();
+DEV_PATHS["VIR-LG-DIM"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-dim.png";
+DEV_PATHS["VIR-LG-DIM"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-dim.png";
+DEV_HIGHLIGHT["VIR-LG-DIM"] = new Object();
+DEV_LIST.push('HM-LC-Bl1-SM');
+DEV_DESCRIPTION["HM-LC-Bl1-SM"] = "HM-LC-Bl1-SM";
+DEV_PATHS["HM-LC-Bl1-SM"] = new Object();
+DEV_PATHS["HM-LC-Bl1-SM"]["50"] = "/config/img/devices/50/6_hm-lc-bl1-sm_thumb.png";
+DEV_PATHS["HM-LC-Bl1-SM"]["250"] = "/config/img/devices/250/6_hm-lc-bl1-sm.png";
+DEV_HIGHLIGHT["HM-LC-Bl1-SM"] = new Object();
+DEV_LIST.push('HMW-WSE-SM');
+DEV_DESCRIPTION["HMW-WSE-SM"] = "HMW-WSE-SM";
+DEV_PATHS["HMW-WSE-SM"] = new Object();
+DEV_PATHS["HMW-WSE-SM"]["50"] = "/config/img/devices/50/31_hmw-wse-sm_thumb.png";
+DEV_PATHS["HMW-WSE-SM"]["250"] = "/config/img/devices/250/31_hmw-wse-sm.png";
+DEV_HIGHLIGHT["HMW-WSE-SM"] = new Object();
+DEV_LIST.push('HM-RC-Sec3');
+DEV_DESCRIPTION["HM-RC-Sec3"] = "HM-RC-Sec3";
+DEV_PATHS["HM-RC-Sec3"] = new Object();
+DEV_PATHS["HM-RC-Sec3"]["50"] = "/config/img/devices/50/22_hm-rc-sec3-b_thumb.png";
+DEV_PATHS["HM-RC-Sec3"]["250"] = "/config/img/devices/250/22_hm-rc-sec3-b.png";
+DEV_HIGHLIGHT["HM-RC-Sec3"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Sec3"]["1"] = [4, 0.252, 0.2, 0.16, 0.176];
+DEV_HIGHLIGHT["HM-RC-Sec3"]["2"] = [4, 0.492, 0.2, 0.16, 0.176];
+DEV_HIGHLIGHT["HM-RC-Sec3"]["3"] = [4, 0.34, 0.48, 0.224, 0.248];
+DEV_HIGHLIGHT["HM-RC-Sec3"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HM-LC-Dim1L-Pl-3');
+DEV_DESCRIPTION["HM-LC-Dim1L-Pl-3"] = "HM-LC-Dim1L-Pl-3";
+DEV_PATHS["HM-LC-Dim1L-Pl-3"] = new Object();
+DEV_PATHS["HM-LC-Dim1L-Pl-3"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Dim1L-Pl-3"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-Sys-sRP-Pl');
+DEV_DESCRIPTION["HM-Sys-sRP-Pl"] = "HM-Sys-sRP-Pl";
+DEV_PATHS["HM-Sys-sRP-Pl"] = new Object();
+DEV_PATHS["HM-Sys-sRP-Pl"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-Sys-sRP-Pl"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-Sys-sRP-Pl"] = new Object();
+DEV_LIST.push('HMIP-WRC2');
+DEV_DESCRIPTION["HMIP-WRC2"] = "WRC2";
+DEV_PATHS["HMIP-WRC2"] = new Object();
+DEV_PATHS["HMIP-WRC2"]["50"] = "/config/img/devices/50/112_hmip-wrc2_thumb.png";
+DEV_PATHS["HMIP-WRC2"]["250"] = "/config/img/devices/250/112_hmip-wrc2.png";
+DEV_HIGHLIGHT["HMIP-WRC2"] = new Object();
+DEV_HIGHLIGHT["HMIP-WRC2"]["2"] = [4, 0.540, 0.366, 0.04, 0.044];
+DEV_HIGHLIGHT["HMIP-WRC2"]["1"] = [4, 0.540, 0.622, 0.04, 0.044];
+DEV_LIST.push('HM-Sec-SD-2');
+DEV_DESCRIPTION["HM-Sec-SD-2"] = "HM-Sec-SD";
+DEV_PATHS["HM-Sec-SD-2"] = new Object();
+DEV_PATHS["HM-Sec-SD-2"]["50"] = "/config/img/devices/50/104_hm-sec-sd-2_thumb.png";
+DEV_PATHS["HM-Sec-SD-2"]["250"] = "/config/img/devices/250/104_hm-sec-sd-2.png";
+DEV_HIGHLIGHT["HM-Sec-SD-2"] = new Object();
+DEV_LIST.push('HM-Sec-Key-S');
+DEV_DESCRIPTION["HM-Sec-Key-S"] = "HM-Sec-Key-S";
+DEV_PATHS["HM-Sec-Key-S"] = new Object();
+DEV_PATHS["HM-Sec-Key-S"]["50"] = "/config/img/devices/50/14_hm-sec-key_thumb.png";
+DEV_PATHS["HM-Sec-Key-S"]["250"] = "/config/img/devices/250/14_hm-sec-key.png";
+DEV_HIGHLIGHT["HM-Sec-Key-S"] = new Object();
+DEV_LIST.push('HM-RC-8');
+DEV_DESCRIPTION["HM-RC-8"] = "HM-RC-8";
+DEV_PATHS["HM-RC-8"] = new Object();
+DEV_PATHS["HM-RC-8"]["50"] = "/config/img/devices/50/100_hm-rc-8_thumb.png";
+DEV_PATHS["HM-RC-8"]["250"] = "/config/img/devices/250/100_hm-rc-8.png";
+DEV_HIGHLIGHT["HM-RC-8"] = new Object();
+DEV_HIGHLIGHT["HM-RC-8"]["1"] = [1, 0.374, 0.192, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["2"] = [1, 0.537, 0.248, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["3"] = [1, 0.374, 0.284, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["4"] = [1, 0.537, 0.340, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["5"] = [1, 0.374, 0.378, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["6"] = [1, 0.537, 0.434, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["7"] = [1, 0.374, 0.470, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["8"] = [1, 0.537, 0.526, 0.02];
+DEV_HIGHLIGHT["HM-RC-8"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-8"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HM-RC-8"]["5+6"] = [5, '5', '6'];
+DEV_HIGHLIGHT["HM-RC-8"]["7+8"] = [5, '7', '8'];
+DEV_LIST.push('HmIP-eTRV-2');
+DEV_DESCRIPTION["HmIP-eTRV-2"] = "TRV";
+DEV_PATHS["HmIP-eTRV-2"] = new Object();
+DEV_PATHS["HmIP-eTRV-2"]["50"] = "/config/img/devices/50/120_hmip-etrv_thumb.png";
+DEV_PATHS["HmIP-eTRV-2"]["250"] = "/config/img/devices/250/120_hmip-etrv.png";
+DEV_HIGHLIGHT["HmIP-eTRV-2"] = new Object();
+DEV_LIST.push('HM-WDS100-C6-O');
+DEV_DESCRIPTION["HM-WDS100-C6-O"] = "HM-WDS100-C6-O";
+DEV_PATHS["HM-WDS100-C6-O"] = new Object();
+DEV_PATHS["HM-WDS100-C6-O"]["50"] = "/config/img/devices/50/WeatherCombiSensor_thumb.png";
+DEV_PATHS["HM-WDS100-C6-O"]["250"] = "/config/img/devices/250/WeatherCombiSensor.png";
+DEV_HIGHLIGHT["HM-WDS100-C6-O"] = new Object();
 DEV_LIST.push('HmIP-BSM');
 DEV_DESCRIPTION["HmIP-BSM"] = "BSM";
 DEV_PATHS["HmIP-BSM"] = new Object();
@@ -2530,27 +1181,27 @@ DEV_HIGHLIGHT["HmIP-BSM"] = new Object();
 DEV_HIGHLIGHT["HmIP-BSM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
 DEV_HIGHLIGHT["HmIP-BSM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["HmIP-BSM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
-DEV_LIST.push('263 131');
-DEV_DESCRIPTION["263 131"] = "263_131";
-DEV_PATHS["263 131"] = new Object();
-DEV_PATHS["263 131"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["263 131"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["263 131"] = new Object();
-DEV_HIGHLIGHT["263 131"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["263 131"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["263 131"]["1"] = [5, '1a', '1b'];
-DEV_LIST.push('HM-LC-Sw1-Pl-DN-R4');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R4"] = "HM-LC-Sw1-Pl-DN-R4";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R4"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R4"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R4_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R4"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R4.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R4"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Pl-DN-R1');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R1"] = "HM-LC-Sw1-Pl-DN-R1";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"]["50"] = "/config/img/devices/50/93_hm-es-pmsw1-pl_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"]["250"] = "/config/img/devices/250/93_hm-es-pmsw1-pl.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R1"] = new Object();
+DEV_LIST.push('263 160');
+DEV_DESCRIPTION["263 160"] = "263_160";
+DEV_PATHS["263 160"] = new Object();
+DEV_PATHS["263 160"]["50"] = "/config/img/devices/50/57_hm-cc-scd_thumb.png";
+DEV_PATHS["263 160"]["250"] = "/config/img/devices/250/57_hm-cc-scd.png";
+DEV_HIGHLIGHT["263 160"] = new Object();
+DEV_LIST.push('HM-LC-Dim2L-SM');
+DEV_DESCRIPTION["HM-LC-Dim2L-SM"] = "HM-LC-Dim2L-SM";
+DEV_PATHS["HM-LC-Dim2L-SM"] = new Object();
+DEV_PATHS["HM-LC-Dim2L-SM"]["50"] = "/config/img/devices/50/45_hm-lc-dim2l-sm_thumb.png";
+DEV_PATHS["HM-LC-Dim2L-SM"]["250"] = "/config/img/devices/250/45_hm-lc-dim2l-sm.png";
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Part1"] = [6, 0.530, 0.896, 0.530, 0.98, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Part2"] = [6, 0.530, 0.98, 0.49, 0.916, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Part3"] = [6, 0.530, 0.98, 0.574, 0.916, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2_Arrow"] = [7, '1_Arrow', 0.168, 0];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1"] = [5, '1_Arrow', '1_Key'];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2"] = [5, '2_Arrow', '2_Key'];
 DEV_LIST.push('HM-OU-CF-Pl');
 DEV_DESCRIPTION["HM-OU-CF-Pl"] = "HM-OU-CF-Pl";
 DEV_PATHS["HM-OU-CF-Pl"] = new Object();
@@ -2578,15 +1229,431 @@ DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_1"] = [6, 0.75, 0.7, 0.832, 0.632, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_2"] = [6, 0.75, 0.748, 0.832, 0.748, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_3"] = [6, 0.75, 0.796, 0.832, 0.86, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["2"] = [5, 'SP_1', 'SP_2', 'SP_3', 'SP_4', 'SP_5', 'SP_6', 'SP_7', 'SP_beam_1', 'SP_beam_2', 'SP_beam_3'];
-DEV_LIST.push('HmIP-BDT');
-DEV_DESCRIPTION["HmIP-BDT"] = "BDT";
-DEV_PATHS["HmIP-BDT"] = new Object();
-DEV_PATHS["HmIP-BDT"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HmIP-BDT"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HmIP-BDT"] = new Object();
-DEV_HIGHLIGHT["HmIP-BDT"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HmIP-BDT"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["HmIP-BDT"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HM-LC-Sw2-PB-FM');
+DEV_DESCRIPTION["HM-LC-Sw2-PB-FM"] = "HM-LC-Sw2-PB-FM";
+DEV_PATHS["HM-LC-Sw2-PB-FM"] = new Object();
+DEV_PATHS["HM-LC-Sw2-PB-FM"]["50"] = "/config/img/devices/50/PushButton-4ch-wm_thumb.png";
+DEV_PATHS["HM-LC-Sw2-PB-FM"]["250"] = "/config/img/devices/250/PushButton-4ch-wm.png";
+DEV_HIGHLIGHT["HM-LC-Sw2-PB-FM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw2-PB-FM"]["1"] = [2, 0.24, 0.312, 0.204, 0.412];
+DEV_HIGHLIGHT["HM-LC-Sw2-PB-FM"]["2"] = [2, 0.46, 0.312, 0.204, 0.412];
+DEV_LIST.push('HM-LC-Dim1T-FM');
+DEV_DESCRIPTION["HM-LC-Dim1T-FM"] = "HM-LC-Dim1T-FM";
+DEV_PATHS["HM-LC-Dim1T-FM"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-FM"]["50"] = "/config/img/devices/50/65_hm-lc-dim1t-fm_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-FM"]["250"] = "/config/img/devices/250/65_hm-lc-dim1t-fm.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-FM"] = new Object();
+DEV_LIST.push('HM-LC-Bl1-SM-2');
+DEV_DESCRIPTION["HM-LC-Bl1-SM-2"] = "HM-LC-Bl1-SM";
+DEV_PATHS["HM-LC-Bl1-SM-2"] = new Object();
+DEV_PATHS["HM-LC-Bl1-SM-2"]["50"] = "/config/img/devices/50/6_hm-lc-bl1-sm_thumb.png";
+DEV_PATHS["HM-LC-Bl1-SM-2"]["250"] = "/config/img/devices/250/6_hm-lc-bl1-sm.png";
+DEV_HIGHLIGHT["HM-LC-Bl1-SM-2"] = new Object();
+DEV_LIST.push('ZEL STG RM FDK');
+DEV_DESCRIPTION["ZEL STG RM FDK"] = "ZEL_STG_RM_FDK";
+DEV_PATHS["ZEL STG RM FDK"] = new Object();
+DEV_PATHS["ZEL STG RM FDK"]["50"] = "/config/img/devices/50/17_hm-sec-rhs_thumb.png";
+DEV_PATHS["ZEL STG RM FDK"]["250"] = "/config/img/devices/250/17_hm-sec-rhs.png";
+DEV_HIGHLIGHT["ZEL STG RM FDK"] = new Object();
+DEV_LIST.push('VIR-OL-GTW');
+DEV_DESCRIPTION["VIR-OL-GTW"] = "VIR-OL-GTW";
+DEV_PATHS["VIR-OL-GTW"] = new Object();
+DEV_PATHS["VIR-OL-GTW"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify_gateway.png";
+DEV_PATHS["VIR-OL-GTW"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify_gateway.png";
+DEV_HIGHLIGHT["VIR-OL-GTW"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-DR');
+DEV_DESCRIPTION["HM-LC-Dim1T-DR"] = "HM-LC-Dim1T-DR";
+DEV_PATHS["HM-LC-Dim1T-DR"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-DR"]["50"] = "/config/img/devices/50/143_hm-lc-dim1t-dr_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-DR"]["250"] = "/config/img/devices/250/143_hm-lc-dim1t-dr.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-DR"] = new Object();
+DEV_LIST.push('HM-Sen-MDIR-WM55');
+DEV_DESCRIPTION["HM-Sen-MDIR-WM55"] = "HM-Sen-MDIR-WM55";
+DEV_PATHS["HM-Sen-MDIR-WM55"] = new Object();
+DEV_PATHS["HM-Sen-MDIR-WM55"]["50"] = "/config/img/devices/50/103_hm-sen-mdir-wm55_thumb.png";
+DEV_PATHS["HM-Sen-MDIR-WM55"]["250"] = "/config/img/devices/250/103_hm-sen-mdir-wm55.png";
+DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"] = new Object();
+DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1"] = [2, 0.192, 0.660, 0.524, 0.12];
+DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["2"] = [2, 0.192, 0.252, 0.524, 0.12];
+DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HmIP-WTH-2');
+DEV_DESCRIPTION["HmIP-WTH-2"] = "WTH";
+DEV_PATHS["HmIP-WTH-2"] = new Object();
+DEV_PATHS["HmIP-WTH-2"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HmIP-WTH-2"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HmIP-WTH-2"] = new Object();
+DEV_LIST.push('HmIP-FAL24-C10');
+DEV_DESCRIPTION["HmIP-FAL24-C10"] = "FAL24-C10";
+DEV_PATHS["HmIP-FAL24-C10"] = new Object();
+DEV_PATHS["HmIP-FAL24-C10"]["50"] = "/config/img/devices/50/138_hmip-fal-c10_thumb.png";
+DEV_PATHS["HmIP-FAL24-C10"]["250"] = "/config/img/devices/250/138_hmip-fal-c10.png";
+DEV_HIGHLIGHT["HmIP-FAL24-C10"] = new Object();
+DEV_LIST.push('HM-LC-Bl1-PB-FM');
+DEV_DESCRIPTION["HM-LC-Bl1-PB-FM"] = "HM-LC-Bl1-PB-FM";
+DEV_PATHS["HM-LC-Bl1-PB-FM"] = new Object();
+DEV_PATHS["HM-LC-Bl1-PB-FM"]["50"] = "/config/img/devices/50/61_hm-lc-bl1-pb-fm_thumb.png";
+DEV_PATHS["HM-LC-Bl1-PB-FM"]["250"] = "/config/img/devices/250/61_hm-lc-bl1-pb-fm.png";
+DEV_HIGHLIGHT["HM-LC-Bl1-PB-FM"] = new Object();
+DEV_LIST.push('HmIP-PSM-UK');
+DEV_DESCRIPTION["HmIP-PSM-UK"] = "PSM";
+DEV_PATHS["HmIP-PSM-UK"] = new Object();
+DEV_PATHS["HmIP-PSM-UK"]["50"] = "/config/img/devices/50/113_hmip-psm-uk_thumb.png";
+DEV_PATHS["HmIP-PSM-UK"]["250"] = "/config/img/devices/250/113_hmip-psm-uk.png";
+DEV_HIGHLIGHT["HmIP-PSM-UK"] = new Object();
+DEV_LIST.push('263 130');
+DEV_DESCRIPTION["263 130"] = "263_130";
+DEV_PATHS["263 130"] = new Object();
+DEV_PATHS["263 130"]["50"] = "/config/img/devices/50/4_hm-lc-sw1-fm_thumb.png";
+DEV_PATHS["263 130"]["250"] = "/config/img/devices/250/4_hm-lc-sw1-fm.png";
+DEV_HIGHLIGHT["263 130"] = new Object();
+DEV_HIGHLIGHT["263 130"]["1_AUS"] = [2, 0.288, 0.66, 0.068, 0.152];
+DEV_HIGHLIGHT["263 130"]["1_EIN"] = [2, 0.548, 0.66, 0.068, 0.152];
+DEV_HIGHLIGHT["263 130"]["1"] = [5, '1_AUS', '1_EIN'];
+DEV_LIST.push('HM-RC-4');
+DEV_DESCRIPTION["HM-RC-4"] = "HM-RC-4";
+DEV_PATHS["HM-RC-4"] = new Object();
+DEV_PATHS["HM-RC-4"]["50"] = "/config/img/devices/50/18_hm-rc-4_thumb.png";
+DEV_PATHS["HM-RC-4"]["250"] = "/config/img/devices/250/18_hm-rc-4.png";
+DEV_HIGHLIGHT["HM-RC-4"] = new Object();
+DEV_HIGHLIGHT["HM-RC-4"]["1"] = [4, 0.268, 0.236, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4"]["2"] = [4, 0.476, 0.236, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4"]["3"] = [4, 0.268, 0.48, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4"]["4"] = [4, 0.476, 0.48, 0.16, 0.164];
+DEV_HIGHLIGHT["HM-RC-4"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-4"]["3+4"] = [5, '3', '4'];
+DEV_LIST.push('OLIGO.smart.iq.HM');
+DEV_DESCRIPTION["OLIGO.smart.iq.HM"] = "OLIGO.smart.iq.HM";
+DEV_PATHS["OLIGO.smart.iq.HM"] = new Object();
+DEV_PATHS["OLIGO.smart.iq.HM"]["50"] = "/config/img/devices/50/123_oligo.smart.ip.hm_thumb.png";
+DEV_PATHS["OLIGO.smart.iq.HM"]["250"] = "/config/img/devices/250/123_oligo.smart.ip.hm.png";
+DEV_HIGHLIGHT["OLIGO.smart.iq.HM"] = new Object();
+DEV_LIST.push('HM-Sen-MDIR-SM');
+DEV_DESCRIPTION["HM-Sen-MDIR-SM"] = "HM-Sen-MDIR-SM";
+DEV_PATHS["HM-Sen-MDIR-SM"] = new Object();
+DEV_PATHS["HM-Sen-MDIR-SM"]["50"] = "/config/img/devices/50/53_hm-sen-mdir-sm_thumb.png";
+DEV_PATHS["HM-Sen-MDIR-SM"]["250"] = "/config/img/devices/250/53_hm-sen-mdir-sm.png";
+DEV_HIGHLIGHT["HM-Sen-MDIR-SM"] = new Object();
+DEV_LIST.push('HM-Sec-SCo');
+DEV_DESCRIPTION["HM-Sec-SCo"] = "HM-Sec-SCo";
+DEV_PATHS["HM-Sec-SCo"] = new Object();
+DEV_PATHS["HM-Sec-SCo"]["50"] = "/config/img/devices/50/98_hm-sec-sco_thumb.png";
+DEV_PATHS["HM-Sec-SCo"]["250"] = "/config/img/devices/250/98_hm-sec-sco.png";
+DEV_HIGHLIGHT["HM-Sec-SCo"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-Pl-2');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-2"] = "HM-LC-Sw1-Pl";
+DEV_PATHS["HM-LC-Sw1-Pl-2"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-2"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R1');
+DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R1"] = "HM-ES-PMSw1-Pl-DN-R1";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R1"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R1"]["50"] = "/config/img/devices/50/93_hm-es-pmsw1-pl_thumb.png";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R1"]["250"] = "/config/img/devices/250/93_hm-es-pmsw1-pl.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R1"] = new Object();
+DEV_LIST.push('HmIP-WRC2');
+DEV_DESCRIPTION["HmIP-WRC2"] = "WRC2";
+DEV_PATHS["HmIP-WRC2"] = new Object();
+DEV_PATHS["HmIP-WRC2"]["50"] = "/config/img/devices/50/112_hmip-wrc2_thumb.png";
+DEV_PATHS["HmIP-WRC2"]["250"] = "/config/img/devices/250/112_hmip-wrc2.png";
+DEV_HIGHLIGHT["HmIP-WRC2"] = new Object();
+DEV_HIGHLIGHT["HmIP-WRC2"]["2"] = [4, 0.540, 0.366, 0.04, 0.044];
+DEV_HIGHLIGHT["HmIP-WRC2"]["1"] = [4, 0.540, 0.622, 0.04, 0.044];
+DEV_LIST.push('HM-OU-CFM-TW');
+DEV_DESCRIPTION["HM-OU-CFM-TW"] = "HM-OU-CFM-TW";
+DEV_PATHS["HM-OU-CFM-TW"] = new Object();
+DEV_PATHS["HM-OU-CFM-TW"]["50"] = "/config/img/devices/50/117_hm-ou-cfm-tw_thumb.png";
+DEV_PATHS["HM-OU-CFM-TW"]["250"] = "/config/img/devices/250/117_hm-ou-cfm-tw.png";
+DEV_HIGHLIGHT["HM-OU-CFM-TW"] = new Object();
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_circle"] = [4, 0.8079999999999999, 0.656, 0.118, 0.112];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_1"] = [6, 0.748, 0.712, 0.776, 0.712, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_2"] = [6, 0.776, 0.632, 0.8, 0.652, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_3"] = [6, 0.86, 0.6, 0.86, 0.628, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_4"] = [6, 0.94, 0.628, 0.92, 0.648, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_5"] = [6, 0.944, 0.712, 0.976, 0.712, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_6"] = [6, 0.8, 0.772, 0.784, 0.792, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_7"] = [6, 0.86, 0.796, 0.86, 0.8240000000000001, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["Light_beam_8"] = [6, 0.92, 0.772, 0.94, 0.792, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["1"] = [5, 'Light_circle', 'Light_beam_1', 'Light_beam_2', 'Light_beam_3', 'Light_beam_4', 'Light_beam_5', 'Light_beam_6', 'Light_beam_7', 'Light_beam_8'];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_1"] = [6, 0.764, 0.12, 0.792, 0.12, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_2"] = [6, 0.792, 0.12, 0.792, 0.2599999999999999, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_3"] = [6, 0.764, 0.2599999999999999, 0.792, 0.2599999999999999, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_4"] = [6, 0.764, 0.12, 0.764, 0.2599999999999999, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_5"] = [6, 0.792, 0.12, 0.836, 0.07599999999999996, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_6"] = [6, 0.836, 0.07599999999999996, 0.836, 0.30399999999999994, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_7"] = [6, 0.792, 0.2599999999999999, 0.836, 0.30399999999999994, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_beam_1"] = [6, 0.87, 0.1439999999999999, 0.952, 0.07599999999999996, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_beam_2"] = [6, 0.87, 0.19199999999999995, 0.952, 0.19199999999999995, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["SP_beam_3"] = [6, 0.87, 0.24, 0.952, 0.30399999999999994, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-TW"]["2"] = [5, 'SP_1', 'SP_2', 'SP_3', 'SP_4', 'SP_5', 'SP_6', 'SP_7', 'SP_beam_1', 'SP_beam_2', 'SP_beam_3'];
+DEV_LIST.push('WS550');
+DEV_DESCRIPTION["WS550"] = "Funk- Wetterstation";
+DEV_PATHS["WS550"] = new Object();
+DEV_PATHS["WS550"]["50"] = "/config/img/devices/50/9_hm-ws550-us_thumb.png";
+DEV_PATHS["WS550"]["250"] = "/config/img/devices/250/9_hm-ws550-us.png";
+DEV_HIGHLIGHT["WS550"] = new Object();
+DEV_HIGHLIGHT["WS550"]["1"] = [3, 0.440, 0.200, '1', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["2"] = [3, 0.440, 0.200, '2', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["3"] = [3, 0.440, 0.200, '3', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["4"] = [3, 0.440, 0.200, '4', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["5"] = [3, 0.440, 0.200, '5', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["6"] = [3, 0.440, 0.200, '6', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS550"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
+DEV_LIST.push('HM-PBI-4-FM');
+DEV_DESCRIPTION["HM-PBI-4-FM"] = "HM-PBI-4-FM";
+DEV_PATHS["HM-PBI-4-FM"] = new Object();
+DEV_PATHS["HM-PBI-4-FM"]["50"] = "/config/img/devices/50/38_hm-pbi-4-fm_thumb.png";
+DEV_PATHS["HM-PBI-4-FM"]["250"] = "/config/img/devices/250/38_hm-pbi-4-fm.png";
+DEV_HIGHLIGHT["HM-PBI-4-FM"] = new Object();
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["1_Kreis"] = [4, 0.265, 0.500, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["1"] = [5, '1_Key', '1_Kreis'];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["2_Kreis"] = [4, 0.287, 0.465, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["2"] = [5, '2_Key', '2_Kreis'];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["3_Kreis"] = [4, 0.309, 0.430, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["3"] = [5, '3_Key', '3_Kreis'];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["4_Key"] = [3, 0.18, 0.216, '4', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["4_Kreis"] = [4, 0.331, 0.395, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-PBI-4-FM"]["4"] = [5, '4_Key', '4_Kreis'];
+DEV_LIST.push('HM-Sec-RHS');
+DEV_DESCRIPTION["HM-Sec-RHS"] = "HM-Sec-RHS";
+DEV_PATHS["HM-Sec-RHS"] = new Object();
+DEV_PATHS["HM-Sec-RHS"]["50"] = "/config/img/devices/50/17_hm-sec-rhs_thumb.png";
+DEV_PATHS["HM-Sec-RHS"]["250"] = "/config/img/devices/250/17_hm-sec-rhs.png";
+DEV_HIGHLIGHT["HM-Sec-RHS"] = new Object();
+DEV_LIST.push('HM-Sen-Wa-Od');
+DEV_DESCRIPTION["HM-Sen-Wa-Od"] = "HM-Sen-Wa-Od";
+DEV_PATHS["HM-Sen-Wa-Od"] = new Object();
+DEV_PATHS["HM-Sen-Wa-Od"]["50"] = "/config/img/devices/50/82_hm-sen-wa-od_thumb.png";
+DEV_PATHS["HM-Sen-Wa-Od"]["250"] = "/config/img/devices/250/82_hm-sen-wa-od.png";
+DEV_HIGHLIGHT["HM-Sen-Wa-Od"] = new Object();
+DEV_LIST.push('HM-Sec-SC-2');
+DEV_DESCRIPTION["HM-Sec-SC-2"] = "HM-Sec-SC-2";
+DEV_PATHS["HM-Sec-SC-2"] = new Object();
+DEV_PATHS["HM-Sec-SC-2"]["50"] = "/config/img/devices/50/16_hm-sec-sc_thumb.png";
+DEV_PATHS["HM-Sec-SC-2"]["250"] = "/config/img/devices/250/16_hm-sec-sc.png";
+DEV_HIGHLIGHT["HM-Sec-SC-2"] = new Object();
+DEV_LIST.push('263 134');
+DEV_DESCRIPTION["263 134"] = "263_134";
+DEV_PATHS["263 134"] = new Object();
+DEV_PATHS["263 134"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
+DEV_PATHS["263 134"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
+DEV_HIGHLIGHT["263 134"] = new Object();
+DEV_LIST.push('HM-LC-RGBW-WM');
+DEV_DESCRIPTION["HM-LC-RGBW-WM"] = "HM-LC-RGBW-WM";
+DEV_PATHS["HM-LC-RGBW-WM"] = new Object();
+DEV_PATHS["HM-LC-RGBW-WM"]["50"] = "/config/img/devices/50/111_hm-lc-rgbw-wm_thumb.png";
+DEV_PATHS["HM-LC-RGBW-WM"]["250"] = "/config/img/devices/250/111_hm-lc-rgbw-wm.png";
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["1"] = [1, 0.280, 0.569, 0.014];
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["2"] = [1, 0.280, 0.645, 0.014];
+DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["3"] = [1, 0.280, 0.721, 0.014];
+DEV_LIST.push('HM-Sec-SD');
+DEV_DESCRIPTION["HM-Sec-SD"] = "HM-Sec-SD";
+DEV_PATHS["HM-Sec-SD"] = new Object();
+DEV_PATHS["HM-Sec-SD"]["50"] = "/config/img/devices/50/51_hm-sec-sd_thumb.png";
+DEV_PATHS["HM-Sec-SD"]["250"] = "/config/img/devices/250/51_hm-sec-sd.png";
+DEV_HIGHLIGHT["HM-Sec-SD"] = new Object();
+DEV_LIST.push('HM-LC-Sw4-PCB-2');
+DEV_DESCRIPTION["HM-LC-Sw4-PCB-2"] = "HM-LC-Sw4-PCB";
+DEV_PATHS["HM-LC-Sw4-PCB-2"] = new Object();
+DEV_PATHS["HM-LC-Sw4-PCB-2"]["50"] = "/config/img/devices/50/46_hm-lc-sw4-pcb_thumb.png";
+DEV_PATHS["HM-LC-Sw4-PCB-2"]["250"] = "/config/img/devices/250/46_hm-lc-sw4-pcb.png";
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel1"] = [2, 0.176, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel2"] = [2, 0.244, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel3"] = [2, 0.312, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Channel4"] = [2, 0.38, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle1"] = [4, 0.512, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle2"] = [4, 0.570, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle3"] = [4, 0.628, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["Circle4"] = [4, 0.686, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB-2"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
+DEV_LIST.push('VIR-LG-RGB-DIM');
+DEV_DESCRIPTION["VIR-LG-RGB-DIM"] = "VIR-LG-RGB-DIM";
+DEV_PATHS["VIR-LG-RGB-DIM"] = new Object();
+DEV_PATHS["VIR-LG-RGB-DIM"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-rgb-dim.png";
+DEV_PATHS["VIR-LG-RGB-DIM"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-rgb-dim.png";
+DEV_HIGHLIGHT["VIR-LG-RGB-DIM"] = new Object();
+DEV_LIST.push('HM-WDS40-TH-I-2');
+DEV_DESCRIPTION["HM-WDS40-TH-I-2"] = "HM-WDS40-TH-I";
+DEV_PATHS["HM-WDS40-TH-I-2"] = new Object();
+DEV_PATHS["HM-WDS40-TH-I-2"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
+DEV_PATHS["HM-WDS40-TH-I-2"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
+DEV_HIGHLIGHT["HM-WDS40-TH-I-2"] = new Object();
+DEV_LIST.push('HmIP-KRC4');
+DEV_DESCRIPTION["HmIP-KRC4"] = "KRC4";
+DEV_PATHS["HmIP-KRC4"] = new Object();
+DEV_PATHS["HmIP-KRC4"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
+DEV_PATHS["HmIP-KRC4"]["250"] = "/config/img/devices/250/84_hm-rc-4-3.png";
+DEV_HIGHLIGHT["HmIP-KRC4"] = new Object();
+DEV_HIGHLIGHT["HmIP-KRC4"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HmIP-KRC4"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HmIP-KRC4"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HmIP-KRC4"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HmIP-KRC4"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
+DEV_HIGHLIGHT["HmIP-KRC4"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
+DEV_HIGHLIGHT["HmIP-KRC4"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
+DEV_HIGHLIGHT["HmIP-KRC4"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
+DEV_HIGHLIGHT["HmIP-KRC4"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRC4"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRC4"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRC4"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRC4"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRC4"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HM-CC-SCD');
+DEV_DESCRIPTION["HM-CC-SCD"] = "HM-CC-SCD";
+DEV_PATHS["HM-CC-SCD"] = new Object();
+DEV_PATHS["HM-CC-SCD"]["50"] = "/config/img/devices/50/57_hm-cc-scd_thumb.png";
+DEV_PATHS["HM-CC-SCD"]["250"] = "/config/img/devices/250/57_hm-cc-scd.png";
+DEV_HIGHLIGHT["HM-CC-SCD"] = new Object();
+DEV_LIST.push('HM-Sen-MDIR-O-2');
+DEV_DESCRIPTION["HM-Sen-MDIR-O-2"] = "HM-Sen-MDIR-O";
+DEV_PATHS["HM-Sen-MDIR-O-2"] = new Object();
+DEV_PATHS["HM-Sen-MDIR-O-2"]["50"] = "/config/img/devices/50/80_hm-sen-mdir-o_thumb.png";
+DEV_PATHS["HM-Sen-MDIR-O-2"]["250"] = "/config/img/devices/250/80_hm-sen-mdir-o.png";
+DEV_HIGHLIGHT["HM-Sen-MDIR-O-2"] = new Object();
+DEV_LIST.push('HM-LC-Sw2-FM');
+DEV_DESCRIPTION["HM-LC-Sw2-FM"] = "HM-LC-Sw2-FM";
+DEV_PATHS["HM-LC-Sw2-FM"] = new Object();
+DEV_PATHS["HM-LC-Sw2-FM"]["50"] = "/config/img/devices/50/5_hm-lc-sw2-fm_thumb.png";
+DEV_PATHS["HM-LC-Sw2-FM"]["250"] = "/config/img/devices/250/5_hm-lc-sw2-fm.png";
+DEV_HIGHLIGHT["HM-LC-Sw2-FM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["1_AUS"] = [2, 0.34, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["1_EIN"] = [2, 0.6, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["2_AUS"] = [2, 0.256, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["2_EIN"] = [2, 0.508, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["1"] = [5, '1_AUS', '1_EIN'];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM"]["2"] = [5, '2_AUS', '2_EIN'];
+DEV_LIST.push('HmIP-MIOB');
+DEV_DESCRIPTION["HmIP-MIOB"] = "MIOB";
+DEV_PATHS["HmIP-MIOB"] = new Object();
+DEV_PATHS["HmIP-MIOB"]["50"] = "/config/img/devices/50/136_hmip-miob_thumb.png";
+DEV_PATHS["HmIP-MIOB"]["250"] = "/config/img/devices/250/136_hmip-miob.png";
+DEV_HIGHLIGHT["HmIP-MIOB"] = new Object();
+DEV_LIST.push('HM-LC-AO-SM');
+DEV_DESCRIPTION["HM-LC-AO-SM"] = "HM-LC-AO-SM";
+DEV_PATHS["HM-LC-AO-SM"] = new Object();
+DEV_PATHS["HM-LC-AO-SM"]["50"] = "/config/img/devices/50/129_hm-lc-ao-sm_thumb.png";
+DEV_PATHS["HM-LC-AO-SM"]["250"] = "/config/img/devices/250/129_hm-lc-ao-sm.png";
+DEV_HIGHLIGHT["HM-LC-AO-SM"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-DR');
+DEV_DESCRIPTION["HM-LC-Sw1-DR"] = "HM-LC-Sw1-DR";
+DEV_PATHS["HM-LC-Sw1-DR"] = new Object();
+DEV_PATHS["HM-LC-Sw1-DR"]["50"] = "/config/img/devices/50/35_hmw-sys-tm-dr_thumb.png";
+DEV_PATHS["HM-LC-Sw1-DR"]["250"] = "/config/img/devices/250/106_hm-lc-sw1-dr.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-DR"] = new Object();
+DEV_LIST.push('HM-Sec-SC');
+DEV_DESCRIPTION["HM-Sec-SC"] = "HM-Sec-SC";
+DEV_PATHS["HM-Sec-SC"] = new Object();
+DEV_PATHS["HM-Sec-SC"]["50"] = "/config/img/devices/50/16_hm-sec-sc_thumb.png";
+DEV_PATHS["HM-Sec-SC"]["250"] = "/config/img/devices/250/16_hm-sec-sc.png";
+DEV_HIGHLIGHT["HM-Sec-SC"] = new Object();
+DEV_LIST.push('HM-Sec-Key');
+DEV_DESCRIPTION["HM-Sec-Key"] = "HM-Sec-Key";
+DEV_PATHS["HM-Sec-Key"] = new Object();
+DEV_PATHS["HM-Sec-Key"]["50"] = "/config/img/devices/50/14_hm-sec-key_thumb.png";
+DEV_PATHS["HM-Sec-Key"]["250"] = "/config/img/devices/250/14_hm-sec-key.png";
+DEV_HIGHLIGHT["HM-Sec-Key"] = new Object();
+DEV_LIST.push('ZEL STG RM FEP 230V');
+DEV_DESCRIPTION["ZEL STG RM FEP 230V"] = "ZEL_STG_RM_FEP_230V";
+DEV_PATHS["ZEL STG RM FEP 230V"] = new Object();
+DEV_PATHS["ZEL STG RM FEP 230V"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
+DEV_PATHS["ZEL STG RM FEP 230V"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
+DEV_HIGHLIGHT["ZEL STG RM FEP 230V"] = new Object();
+DEV_LIST.push('HM-LC-Dim2T-SM-2');
+DEV_DESCRIPTION["HM-LC-Dim2T-SM-2"] = "HM-LC-Dim2T-SM";
+DEV_PATHS["HM-LC-Dim2T-SM-2"] = new Object();
+DEV_PATHS["HM-LC-Dim2T-SM-2"]["50"] = "/config/img/devices/50/64_hm-lc-dim2T-sm_thumb.png";
+DEV_PATHS["HM-LC-Dim2T-SM-2"]["250"] = "/config/img/devices/250/64_hm-lc-dim2T-sm.png";
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Part1"] = [6, 0.539, 0.864, 0.539, 0.948, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Part2"] = [6, 0.539, 0.948, 0.49, 0.884, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Part3"] = [6, 0.539, 0.948, 0.588, 0.884, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2_Arrow"] = [7, '1_Arrow', 0.179, 0];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Key"] = [4, 0.25, 0.26, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2_Key"] = [4, 0.328, 0.26, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('HM-LC-Dim1L-CV-644');
+DEV_DESCRIPTION["HM-LC-Dim1L-CV-644"] = "HM-LC-Dim1L-CV";
+DEV_PATHS["HM-LC-Dim1L-CV-644"] = new Object();
+DEV_PATHS["HM-LC-Dim1L-CV-644"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1L-CV-644"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1L-CV-644"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-Pl-644');
+DEV_DESCRIPTION["HM-LC-Dim1T-Pl-644"] = "HM-LC-Dim1T-Pl";
+DEV_PATHS["HM-LC-Dim1T-Pl-644"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-Pl-644"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-Pl-644"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-644"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-LC-Sw1-Pl-DN-R3');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R3"] = "HM-LC-Sw1-Pl-DN-R3";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R3"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R3"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R3_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R3"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R3.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R3"] = new Object();
+DEV_LIST.push('HMW-IO-12-FM');
+DEV_DESCRIPTION["HMW-IO-12-FM"] = "HMW-IO-12-FM";
+DEV_PATHS["HMW-IO-12-FM"] = new Object();
+DEV_PATHS["HMW-IO-12-FM"]["50"] = "/config/img/devices/50/59_hmw-io-12-fm_thumb.png";
+DEV_PATHS["HMW-IO-12-FM"]["250"] = "/config/img/devices/250/59_hmw-io-12-fm.png";
+DEV_HIGHLIGHT["HMW-IO-12-FM"] = new Object();
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["1_num"] = [3, 0.744, 0.636, '1', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["1_line"] = [6, 0.77, 0.08, 0.860, 0.08, 0.016];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["1"] = [5, '1_num', '1_line'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["2_num"] = [3, 0.744, 0.636, '2', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["2_line"] = [6, 0.77, 0.136, 0.86, 0.136, 0.016];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["2"] = [5, '2_num', '2_line'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["3_num"] = [3, 0.744, 0.636, '3', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["3_line"] = [6, 0.77, 0.194, 0.86, 0.194, 0.016];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["3"] = [5, '3_num', '3_line'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["4_num"] = [3, 0.744, 0.636, '4', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["4_line"] = [6, 0.77, 0.25, 0.86, 0.25, 0.016];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["4"] = [5, '4_num', '4_line'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["5_num"] = [3, 0.744, 0.636, '5', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["5_line"] = [6, 0.77, 0.308, 0.86, 0.308, 0.016];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["5"] = [5, '5_num', '5_line'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["6_num"] = [3, 0.744, 0.636, '6', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["6_line"] = [6, 0.77, 0.366, 0.86, 0.366, 0.016];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["6"] = [5, '6_num', '6_line'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["7_num"] = [3, 0.744, 0.636, '7', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["7_line"] = [6, 0.77, 0.424, 0.86, 0.424, 0.016];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["7"] = [5, '7_num', '7_line'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["8_num"] = [3, 0.744, 0.636, '8', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["8_arc"] = [4, 0.370, 0.748, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["8"] = [5, '8_num', '8_arc'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["9_num"] = [3, 0.744, 0.636, '9', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["9_arc"] = [4, 0.3895, 0.704, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["9"] = [5, '9_num', '9_arc'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["10_num"] = [3, 0.744, 0.636, '10', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["10_arc"] = [4, 0.41, 0.65, 0.035, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["10"] = [5, '10_num', '10_arc'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["11_num"] = [3, 0.744, 0.636, '11', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["11_arc"] = [4, 0.4293, 0.612, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["11"] = [5, '11_num', '11_arc'];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["12_num"] = [3, 0.744, 0.636, '12', 0.164, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["12_arc"] = [4, 0.448, 0.564, 0.036, 0.036, 0.036];
+DEV_HIGHLIGHT["HMW-IO-12-FM"]["12"] = [5, '12_num', '12_arc'];
 DEV_LIST.push('HM-WDC7000');
 DEV_DESCRIPTION["HM-WDC7000"] = "HM-WDC7000";
 DEV_PATHS["HM-WDC7000"] = new Object();
@@ -2603,44 +1670,295 @@ DEV_HIGHLIGHT["HM-WDC7000"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Font
 DEV_HIGHLIGHT["HM-WDC7000"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
 DEV_HIGHLIGHT["HM-WDC7000"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
 DEV_HIGHLIGHT["HM-WDC7000"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
-DEV_LIST.push('HM-Sec-WDS-2');
-DEV_DESCRIPTION["HM-Sec-WDS-2"] = "HM-Sec-WDS-2";
-DEV_PATHS["HM-Sec-WDS-2"] = new Object();
-DEV_PATHS["HM-Sec-WDS-2"]["50"] = "/config/img/devices/50/49_hm-sec-wds_thumb.png";
-DEV_PATHS["HM-Sec-WDS-2"]["250"] = "/config/img/devices/250/49_hm-sec-wds.png";
-DEV_HIGHLIGHT["HM-Sec-WDS-2"] = new Object();
-DEV_LIST.push('HMIP-PS');
-DEV_DESCRIPTION["HMIP-PS"] = "PS";
-DEV_PATHS["HMIP-PS"] = new Object();
-DEV_PATHS["HMIP-PS"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
-DEV_PATHS["HMIP-PS"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
-DEV_HIGHLIGHT["HMIP-PS"] = new Object();
-DEV_LIST.push('HMIP-WTH');
-DEV_DESCRIPTION["HMIP-WTH"] = "WTH";
-DEV_PATHS["HMIP-WTH"] = new Object();
-DEV_PATHS["HMIP-WTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
-DEV_PATHS["HMIP-WTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
-DEV_HIGHLIGHT["HMIP-WTH"] = new Object();
-DEV_LIST.push('263 158');
-DEV_DESCRIPTION["263 158"] = "263_158";
-DEV_PATHS["263 158"] = new Object();
-DEV_PATHS["263 158"]["50"] = "/config/img/devices/50/TH_CS_thumb.png";
-DEV_PATHS["263 158"]["250"] = "/config/img/devices/250/TH_CS.png";
-DEV_HIGHLIGHT["263 158"] = new Object();
-DEV_LIST.push('HM-CCU-1');
-DEV_DESCRIPTION["HM-CCU-1"] = "HM-CCU-1";
-DEV_PATHS["HM-CCU-1"] = new Object();
-DEV_PATHS["HM-CCU-1"]["50"] = "/config/img/devices/50/24_hm-cen-3-1_thumb.png";
-DEV_PATHS["HM-CCU-1"]["250"] = "/config/img/devices/250/24_hm-cen-3-1.png";
-DEV_HIGHLIGHT["HM-CCU-1"] = new Object();
-DEV_LIST.push('HM-PB-2-WM55-2');
-DEV_DESCRIPTION["HM-PB-2-WM55-2"] = "HM-PB-2-WM55";
-DEV_PATHS["HM-PB-2-WM55-2"] = new Object();
-DEV_PATHS["HM-PB-2-WM55-2"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
-DEV_PATHS["HM-PB-2-WM55-2"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
-DEV_HIGHLIGHT["HM-PB-2-WM55-2"] = new Object();
-DEV_HIGHLIGHT["HM-PB-2-WM55-2"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
-DEV_HIGHLIGHT["HM-PB-2-WM55-2"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
+DEV_LIST.push('HM-Dis-EP-WM55');
+DEV_DESCRIPTION["HM-Dis-EP-WM55"] = "HM-Dis-EP-WM55";
+DEV_PATHS["HM-Dis-EP-WM55"] = new Object();
+DEV_PATHS["HM-Dis-EP-WM55"]["50"] = "/config/img/devices/50/128_hm-dis-ep-wm55_thumb.png";
+DEV_PATHS["HM-Dis-EP-WM55"]["250"] = "/config/img/devices/250/128_hm-dis-ep-wm55.png";
+DEV_HIGHLIGHT["HM-Dis-EP-WM55"] = new Object();
+DEV_LIST.push('HM-RC-Key4-3');
+DEV_DESCRIPTION["HM-RC-Key4-3"] = "HM-RC-4";
+DEV_PATHS["HM-RC-Key4-3"] = new Object();
+DEV_PATHS["HM-RC-Key4-3"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
+DEV_PATHS["HM-RC-Key4-3"]["250"] = "/config/img/devices/250/86_hm-rc-key4-3.png";
+DEV_HIGHLIGHT["HM-RC-Key4-3"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R4');
+DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R4"] = "HM-ES-PMSw1-Pl-DN-R4";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R4"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R4"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R4_thumb.png";
+DEV_PATHS["HM-ES-PMSw1-Pl-DN-R4"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R4.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R4"] = new Object();
+DEV_LIST.push('HM-RCV-50');
+DEV_DESCRIPTION["HM-RCV-50"] = "HM-RCV-50";
+DEV_PATHS["HM-RCV-50"] = new Object();
+DEV_PATHS["HM-RCV-50"]["50"] = "/config/img/devices/50/CCU2_thumb.png";
+DEV_PATHS["HM-RCV-50"]["250"] = "/config/img/devices/250/CCU2.png";
+DEV_HIGHLIGHT["HM-RCV-50"] = new Object();
+DEV_HIGHLIGHT["HM-RCV-50"]["RF_1"] = [4, 0.364, 0.048, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-RCV-50"]["RF_2"] = [6, 0.4, 0.052, 0.544, 0.004, 0.016];
+DEV_HIGHLIGHT["HM-RCV-50"]["RF_3"] = [6, 0.4, 0.052, 0.6, 0.052, 0.016];
+DEV_HIGHLIGHT["HM-RCV-50"]["RF_4"] = [6, 0.4, 0.052, 0.544, 0.104, 0.016];
+DEV_HIGHLIGHT["HM-RCV-50"]["RF_5"] = [6, 0.168, 0.052, 0.344, 0.052, 0.016];
+DEV_HIGHLIGHT["HM-RCV-50"]["RF_6"] = [6, 0.168, 0, 0.344, 0.052, 0.016];
+DEV_HIGHLIGHT["HM-RCV-50"]["RF_7"] = [6, 0.168, 0.104, 0.344, 0.052, 0.016];
+DEV_HIGHLIGHT["HM-RCV-50"]["RF"] = [5, 'RF_1', 'RF_2', 'RF_3', 'RF_4', 'RF_5', 'RF_6', 'RF_7'];
+DEV_HIGHLIGHT["HM-RCV-50"]["S1"] = [3, 0.25, 0.15, '1', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S2"] = [3, 0.25, 0.15, '2', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S3"] = [3, 0.25, 0.15, '3', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S4"] = [3, 0.25, 0.15, '4', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S5"] = [3, 0.25, 0.15, '5', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S6"] = [3, 0.25, 0.15, '6', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S7"] = [3, 0.25, 0.15, '7', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S8"] = [3, 0.25, 0.15, '8', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S9"] = [3, 0.25, 0.15, '9', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S10"] = [3, 0.175, 0.15, '10', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S11"] = [3, 0.175, 0.15, '11', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S12"] = [3, 0.175, 0.15, '12', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S13"] = [3, 0.175, 0.15, '13', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S14"] = [3, 0.175, 0.15, '14', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S15"] = [3, 0.175, 0.15, '15', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S16"] = [3, 0.175, 0.15, '16', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S17"] = [3, 0.175, 0.15, '17', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S18"] = [3, 0.175, 0.15, '18', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S19"] = [3, 0.175, 0.15, '19', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S20"] = [3, 0.175, 0.15, '20', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S21"] = [3, 0.175, 0.15, '21', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S22"] = [3, 0.175, 0.15, '22', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S23"] = [3, 0.175, 0.15, '23', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S24"] = [3, 0.175, 0.15, '24', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S25"] = [3, 0.175, 0.15, '25', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S26"] = [3, 0.175, 0.15, '26', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S27"] = [3, 0.175, 0.15, '27', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S28"] = [3, 0.175, 0.15, '28', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S29"] = [3, 0.175, 0.15, '29', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S30"] = [3, 0.175, 0.15, '30', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S31"] = [3, 0.175, 0.15, '31', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S32"] = [3, 0.175, 0.15, '32', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S33"] = [3, 0.175, 0.15, '33', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S34"] = [3, 0.175, 0.15, '34', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S35"] = [3, 0.175, 0.15, '35', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S36"] = [3, 0.175, 0.15, '36', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S37"] = [3, 0.175, 0.15, '37', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S38"] = [3, 0.175, 0.15, '38', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S39"] = [3, 0.175, 0.15, '39', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S40"] = [3, 0.175, 0.15, '40', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S41"] = [3, 0.175, 0.15, '41', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S42"] = [3, 0.175, 0.15, '42', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S43"] = [3, 0.175, 0.15, '43', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S44"] = [3, 0.175, 0.15, '44', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S45"] = [3, 0.175, 0.15, '45', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S46"] = [3, 0.175, 0.15, '46', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S47"] = [3, 0.175, 0.15, '47', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S48"] = [3, 0.175, 0.15, '48', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S49"] = [3, 0.175, 0.15, '49', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["S50"] = [3, 0.175, 0.15, '50', 0.3, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-RCV-50"]["1"] = [5, 'S1'];
+DEV_HIGHLIGHT["HM-RCV-50"]["2"] = [5, 'S2'];
+DEV_HIGHLIGHT["HM-RCV-50"]["3"] = [5, 'S3'];
+DEV_HIGHLIGHT["HM-RCV-50"]["4"] = [5, 'S4'];
+DEV_HIGHLIGHT["HM-RCV-50"]["5"] = [5, 'S5'];
+DEV_HIGHLIGHT["HM-RCV-50"]["6"] = [5, 'S6'];
+DEV_HIGHLIGHT["HM-RCV-50"]["7"] = [5, 'S7'];
+DEV_HIGHLIGHT["HM-RCV-50"]["8"] = [5, 'S8'];
+DEV_HIGHLIGHT["HM-RCV-50"]["9"] = [5, 'S9'];
+DEV_HIGHLIGHT["HM-RCV-50"]["10"] = [5, 'S10'];
+DEV_HIGHLIGHT["HM-RCV-50"]["11"] = [5, 'S11'];
+DEV_HIGHLIGHT["HM-RCV-50"]["12"] = [5, 'S12'];
+DEV_HIGHLIGHT["HM-RCV-50"]["13"] = [5, 'S13'];
+DEV_HIGHLIGHT["HM-RCV-50"]["14"] = [5, 'S14'];
+DEV_HIGHLIGHT["HM-RCV-50"]["15"] = [5, 'S15'];
+DEV_HIGHLIGHT["HM-RCV-50"]["16"] = [5, 'S16'];
+DEV_HIGHLIGHT["HM-RCV-50"]["17"] = [5, 'S17'];
+DEV_HIGHLIGHT["HM-RCV-50"]["18"] = [5, 'S18'];
+DEV_HIGHLIGHT["HM-RCV-50"]["19"] = [5, 'S19'];
+DEV_HIGHLIGHT["HM-RCV-50"]["20"] = [5, 'S20'];
+DEV_HIGHLIGHT["HM-RCV-50"]["21"] = [5, 'S21'];
+DEV_HIGHLIGHT["HM-RCV-50"]["22"] = [5, 'S22'];
+DEV_HIGHLIGHT["HM-RCV-50"]["23"] = [5, 'S23'];
+DEV_HIGHLIGHT["HM-RCV-50"]["24"] = [5, 'S24'];
+DEV_HIGHLIGHT["HM-RCV-50"]["25"] = [5, 'S25'];
+DEV_HIGHLIGHT["HM-RCV-50"]["26"] = [5, 'S26'];
+DEV_HIGHLIGHT["HM-RCV-50"]["27"] = [5, 'S27'];
+DEV_HIGHLIGHT["HM-RCV-50"]["28"] = [5, 'S28'];
+DEV_HIGHLIGHT["HM-RCV-50"]["29"] = [5, 'S29'];
+DEV_HIGHLIGHT["HM-RCV-50"]["30"] = [5, 'S30'];
+DEV_HIGHLIGHT["HM-RCV-50"]["31"] = [5, 'S31'];
+DEV_HIGHLIGHT["HM-RCV-50"]["32"] = [5, 'S32'];
+DEV_HIGHLIGHT["HM-RCV-50"]["33"] = [5, 'S33'];
+DEV_HIGHLIGHT["HM-RCV-50"]["34"] = [5, 'S34'];
+DEV_HIGHLIGHT["HM-RCV-50"]["35"] = [5, 'S35'];
+DEV_HIGHLIGHT["HM-RCV-50"]["36"] = [5, 'S36'];
+DEV_HIGHLIGHT["HM-RCV-50"]["37"] = [5, 'S37'];
+DEV_HIGHLIGHT["HM-RCV-50"]["38"] = [5, 'S38'];
+DEV_HIGHLIGHT["HM-RCV-50"]["39"] = [5, 'S39'];
+DEV_HIGHLIGHT["HM-RCV-50"]["40"] = [5, 'S40'];
+DEV_HIGHLIGHT["HM-RCV-50"]["41"] = [5, 'S41'];
+DEV_HIGHLIGHT["HM-RCV-50"]["42"] = [5, 'S42'];
+DEV_HIGHLIGHT["HM-RCV-50"]["43"] = [5, 'S43'];
+DEV_HIGHLIGHT["HM-RCV-50"]["44"] = [5, 'S44'];
+DEV_HIGHLIGHT["HM-RCV-50"]["45"] = [5, 'S45'];
+DEV_HIGHLIGHT["HM-RCV-50"]["46"] = [5, 'S46'];
+DEV_HIGHLIGHT["HM-RCV-50"]["47"] = [5, 'S47'];
+DEV_HIGHLIGHT["HM-RCV-50"]["48"] = [5, 'S48'];
+DEV_HIGHLIGHT["HM-RCV-50"]["49"] = [5, 'S49'];
+DEV_HIGHLIGHT["HM-RCV-50"]["50"] = [5, 'S50'];
+DEV_LIST.push('263 145');
+DEV_DESCRIPTION["263 145"] = "263_145";
+DEV_PATHS["263 145"] = new Object();
+DEV_PATHS["263 145"]["50"] = "/config/img/devices/50/38_hm-pbi-4-fm_thumb.png";
+DEV_PATHS["263 145"]["250"] = "/config/img/devices/250/38_hm-pbi-4-fm.png";
+DEV_HIGHLIGHT["263 145"] = new Object();
+DEV_HIGHLIGHT["263 145"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["263 145"]["1_Kreis"] = [4, 0.265, 0.500, 0.028, 0.028];
+DEV_HIGHLIGHT["263 145"]["1"] = [5, '1_Key', '1_Kreis'];
+DEV_HIGHLIGHT["263 145"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["263 145"]["2_Kreis"] = [4, 0.287, 0.465, 0.028, 0.028];
+DEV_HIGHLIGHT["263 145"]["2"] = [5, '2_Key', '2_Kreis'];
+DEV_HIGHLIGHT["263 145"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["263 145"]["3_Kreis"] = [4, 0.309, 0.430, 0.028, 0.028];
+DEV_HIGHLIGHT["263 145"]["3"] = [5, '3_Key', '3_Kreis'];
+DEV_HIGHLIGHT["263 145"]["4_Key"] = [3, 0.18, 0.216, '4', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["263 145"]["4_Kreis"] = [4, 0.331, 0.395, 0.028, 0.028];
+DEV_HIGHLIGHT["263 145"]["4"] = [5, '4_Key', '4_Kreis'];
+DEV_LIST.push('HM-LC-Dim1L-Pl-2');
+DEV_DESCRIPTION["HM-LC-Dim1L-Pl-2"] = "HM-LC-Dim1L-Pl-2";
+DEV_PATHS["HM-LC-Dim1L-Pl-2"] = new Object();
+DEV_PATHS["HM-LC-Dim1L-Pl-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Dim1L-Pl-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-2"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-LC-Sw4-DR-2');
+DEV_DESCRIPTION["HM-LC-Sw4-DR-2"] = "HM-LC-Sw4-DR";
+DEV_PATHS["HM-LC-Sw4-DR-2"] = new Object();
+DEV_PATHS["HM-LC-Sw4-DR-2"]["50"] = "/config/img/devices/50/68_hm-lc-sw4-dr_thumb.png";
+DEV_PATHS["HM-LC-Sw4-DR-2"]["250"] = "/config/img/devices/250/68_hm-lc-sw4-dr.png";
+DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["1"] = [4, 0.088, 0.556, 0.048, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["2"] = [4, 0.280, 0.556, 0.048, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["3"] = [4, 0.472, 0.556, 0.048, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw4-DR-2"]["4"] = [4, 0.656, 0.556, 0.048, 0.04];
+DEV_LIST.push('HM-OU-CM-PCB');
+DEV_DESCRIPTION["HM-OU-CM-PCB"] = "HM-OU-CM-PCB";
+DEV_PATHS["HM-OU-CM-PCB"] = new Object();
+DEV_PATHS["HM-OU-CM-PCB"]["50"] = "/config/img/devices/50/92_hm-ou-cm-pcb_thumb.png";
+DEV_PATHS["HM-OU-CM-PCB"]["250"] = "/config/img/devices/250/92_hm-ou-cm-pcb.png";
+DEV_HIGHLIGHT["HM-OU-CM-PCB"] = new Object();
+DEV_LIST.push('HM-RC-4-3');
+DEV_DESCRIPTION["HM-RC-4-3"] = "HM-RC-4";
+DEV_PATHS["HM-RC-4-3"] = new Object();
+DEV_PATHS["HM-RC-4-3"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
+DEV_PATHS["HM-RC-4-3"]["250"] = "/config/img/devices/250/84_hm-rc-4-3.png";
+DEV_HIGHLIGHT["HM-RC-4-3"] = new Object();
+DEV_HIGHLIGHT["HM-RC-4-3"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HM-RC-4-3"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HM-RC-4-3"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HM-RC-4-3"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HM-RC-4-3"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
+DEV_HIGHLIGHT["HM-RC-4-3"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
+DEV_HIGHLIGHT["HM-RC-4-3"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
+DEV_HIGHLIGHT["HM-RC-4-3"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
+DEV_HIGHLIGHT["HM-RC-4-3"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-3"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-3"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-3"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HM-LC-Dim1L-Pl-644');
+DEV_DESCRIPTION["HM-LC-Dim1L-Pl-644"] = "HM-LC-Dim1L-Pl";
+DEV_PATHS["HM-LC-Dim1L-Pl-644"] = new Object();
+DEV_PATHS["HM-LC-Dim1L-Pl-644"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Dim1L-Pl-644"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('ZEL STG RM FWT');
+DEV_DESCRIPTION["ZEL STG RM FWT"] = "ZEL_STG_RM_FWT";
+DEV_PATHS["ZEL STG RM FWT"] = new Object();
+DEV_PATHS["ZEL STG RM FWT"]["50"] = "/config/img/devices/50/42_hm-cc-tc_thumb.png";
+DEV_PATHS["ZEL STG RM FWT"]["250"] = "/config/img/devices/250/42_hm-cc-tc.png";
+DEV_HIGHLIGHT["ZEL STG RM FWT"] = new Object();
+DEV_LIST.push('HmIP-WTH');
+DEV_DESCRIPTION["HmIP-WTH"] = "WTH";
+DEV_PATHS["HmIP-WTH"] = new Object();
+DEV_PATHS["HmIP-WTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HmIP-WTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HmIP-WTH"] = new Object();
+DEV_LIST.push('HM-LC-Sw4-PCB');
+DEV_DESCRIPTION["HM-LC-Sw4-PCB"] = "HM-LC-Sw4-PCB";
+DEV_PATHS["HM-LC-Sw4-PCB"] = new Object();
+DEV_PATHS["HM-LC-Sw4-PCB"]["50"] = "/config/img/devices/50/46_hm-lc-sw4-pcb_thumb.png";
+DEV_PATHS["HM-LC-Sw4-PCB"]["250"] = "/config/img/devices/250/46_hm-lc-sw4-pcb.png";
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel1"] = [2, 0.176, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel2"] = [2, 0.244, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel3"] = [2, 0.312, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Channel4"] = [2, 0.38, 0.78, 0.068, 0.064];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle1"] = [4, 0.512, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle2"] = [4, 0.570, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle3"] = [4, 0.628, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["Circle4"] = [4, 0.686, 0.784, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
+DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
+DEV_LIST.push('HMW-IO-12-Sw7-DR');
+DEV_DESCRIPTION["HMW-IO-12-Sw7-DR"] = "HMW-IO-12-Sw7-DR";
+DEV_PATHS["HMW-IO-12-Sw7-DR"] = new Object();
+DEV_PATHS["HMW-IO-12-Sw7-DR"]["50"] = "/config/img/devices/50/30_hmw-io-12-sw7-dr_thumb.png";
+DEV_PATHS["HMW-IO-12-Sw7-DR"]["250"] = "/config/img/devices/250/30_hmw-io-12-sw7-dr.png";
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"] = new Object();
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["1"] = [2, 0.264, 0.7, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["2"] = [2, 0.328, 0.7, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["3"] = [2, 0.46, 0.7, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["4"] = [2, 0.524, 0.7, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["5"] = [2, 0.648, 0.7, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["6"] = [2, 0.708, 0.7, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["8"] = [2, 0.328, 0.764, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["7"] = [2, 0.264, 0.764, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["9"] = [2, 0.46, 0.764, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["10"] = [2, 0.524, 0.764, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["11"] = [2, 0.644, 0.764, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["12"] = [2, 0.708, 0.764, 0.06, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["13"] = [2, 0.268, 0.396, 0.12, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["14"] = [2, 0.46, 0.396, 0.12, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["15"] = [2, 0.648, 0.396, 0.12, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["16"] = [2, 0.076, 0.46, 0.12, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["17"] = [2, 0.264, 0.46, 0.12, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["18"] = [2, 0.46, 0.46, 0.12, 0.06];
+DEV_HIGHLIGHT["HMW-IO-12-Sw7-DR"]["19"] = [2, 0.648, 0.46, 0.12, 0.06];
+DEV_LIST.push('HMIP-PSM');
+DEV_DESCRIPTION["HMIP-PSM"] = "PSM";
+DEV_PATHS["HMIP-PSM"] = new Object();
+DEV_PATHS["HMIP-PSM"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
+DEV_PATHS["HMIP-PSM"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
+DEV_HIGHLIGHT["HMIP-PSM"] = new Object();
+DEV_LIST.push('HmIP-PSM-PE');
+DEV_DESCRIPTION["HmIP-PSM-PE"] = "PSM";
+DEV_PATHS["HmIP-PSM-PE"] = new Object();
+DEV_PATHS["HmIP-PSM-PE"]["50"] = "/config/img/devices/50/113_hmip-psm-pe_thumb.png";
+DEV_PATHS["HmIP-PSM-PE"]["250"] = "/config/img/devices/250/113_hmip-psm-pe.png";
+DEV_HIGHLIGHT["HmIP-PSM-PE"] = new Object();
 DEV_LIST.push('HMW-Sen-SC-12-DR');
 DEV_DESCRIPTION["HMW-Sen-SC-12-DR"] = "HMW-Sen-SC-12-DR";
 DEV_PATHS["HMW-Sen-SC-12-DR"] = new Object();
@@ -2659,12 +1977,514 @@ DEV_HIGHLIGHT["HMW-Sen-SC-12-DR"]["9"] = [2, 0.436, 0.752, 0.06, 0.06];
 DEV_HIGHLIGHT["HMW-Sen-SC-12-DR"]["10"] = [2, 0.496, 0.752, 0.06, 0.06];
 DEV_HIGHLIGHT["HMW-Sen-SC-12-DR"]["11"] = [2, 0.62, 0.752, 0.06, 0.06];
 DEV_HIGHLIGHT["HMW-Sen-SC-12-DR"]["12"] = [2, 0.68, 0.752, 0.06, 0.06];
-DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R4');
-DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R4"] = "HM-ES-PMSw1-Pl-DN-R4";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R4"] = new Object();
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R4"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R4_thumb.png";
-DEV_PATHS["HM-ES-PMSw1-Pl-DN-R4"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R4.png";
-DEV_HIGHLIGHT["HM-ES-PMSw1-Pl-DN-R4"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-Pl-CT-R1');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-CT-R1"] = "HM-LC-Sw1-Pl-CT-R1";
+DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"]["50"] = "/config/img/devices/50/109_hm-lc-sw1-pl-ct_thump.png";
+DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"]["250"] = "/config/img/devices/250/109_hm-lc-sw1-pl-ct.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-CT-R1"] = new Object();
+DEV_LIST.push('HmIP-PDT');
+DEV_DESCRIPTION["HmIP-PDT"] = "PDT";
+DEV_PATHS["HmIP-PDT"] = new Object();
+DEV_PATHS["HmIP-PDT"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
+DEV_PATHS["HmIP-PDT"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
+DEV_HIGHLIGHT["HmIP-PDT"] = new Object();
+DEV_LIST.push('263_149_/_263_150');
+DEV_DESCRIPTION["263_149_/_263_150"] = "263_149_/_263_150";
+DEV_PATHS["263_149_/_263_150"] = new Object();
+DEV_PATHS["263_149_/_263_150"]["50"] = "/config/img/devices/50/hm_resc-win-pcb-sc_thumb.png";
+DEV_PATHS["263_149_/_263_150"]["250"] = "/config/img/devices/250/hm_resc-win-pcb-sc.png";
+DEV_HIGHLIGHT["263_149_/_263_150"] = new Object();
+DEV_LIST.push('HM-LC-Bl1-FM');
+DEV_DESCRIPTION["HM-LC-Bl1-FM"] = "HM-LC-Bl1-FM";
+DEV_PATHS["HM-LC-Bl1-FM"] = new Object();
+DEV_PATHS["HM-LC-Bl1-FM"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
+DEV_PATHS["HM-LC-Bl1-FM"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
+DEV_HIGHLIGHT["HM-LC-Bl1-FM"] = new Object();
+DEV_LIST.push('HMW-LC-Bl1-DR');
+DEV_DESCRIPTION["HMW-LC-Bl1-DR"] = "HMW-LC-Bl1-DR";
+DEV_PATHS["HMW-LC-Bl1-DR"] = new Object();
+DEV_PATHS["HMW-LC-Bl1-DR"]["50"] = "/config/img/devices/50/27_hmw-lc-bl1-dr_thumb.png";
+DEV_PATHS["HMW-LC-Bl1-DR"]["250"] = "/config/img/devices/250/27_hmw-lc-bl1-dr.png";
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR"] = new Object();
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["1"] = [2, 0.452, 0.772, 0.044, 0.06];
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["2"] = [2, 0.5, 0.772, 0.048, 0.06];
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["3"] = [2, 0.452, 0.388, 0.096, 0.06];
+DEV_LIST.push('HM-Sec-SFA-SM');
+DEV_DESCRIPTION["HM-Sec-SFA-SM"] = "HM-Sec-SFA-SM";
+DEV_PATHS["HM-Sec-SFA-SM"] = new Object();
+DEV_PATHS["HM-Sec-SFA-SM"]["50"] = "/config/img/devices/50/55_hm-sec-sfa-sm_thumb.png";
+DEV_PATHS["HM-Sec-SFA-SM"]["250"] = "/config/img/devices/250/55_hm-sec-sfa-sm.png";
+DEV_HIGHLIGHT["HM-Sec-SFA-SM"] = new Object();
+DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["1_Taster"] = [4, 0.348, 0.388, 0.08, 0.08];
+DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["1_Led"] = [4, 0.372, 0.304, 0.036, 0.036];
+DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["1"] = [5, '1_Taster', '1_Led'];
+DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2_Taster"] = [4, 0.552, 0.388, 0.08, 0.08];
+DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2_Led"] = [4, 0.576, 0.304, 0.036, 0.036];
+DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2"] = [5, '2_Taster', '2_Led'];
+DEV_LIST.push('HM-Sec-RHS-2');
+DEV_DESCRIPTION["HM-Sec-RHS-2"] = "HM-Sec-RHS";
+DEV_PATHS["HM-Sec-RHS-2"] = new Object();
+DEV_PATHS["HM-Sec-RHS-2"]["50"] = "/config/img/devices/50/17_hm-sec-rhs_thumb.png";
+DEV_PATHS["HM-Sec-RHS-2"]["250"] = "/config/img/devices/250/17_hm-sec-rhs.png";
+DEV_HIGHLIGHT["HM-Sec-RHS-2"] = new Object();
+DEV_LIST.push('HM-RC-Sec3-B');
+DEV_DESCRIPTION["HM-RC-Sec3-B"] = "HM-RC-Sec3-B";
+DEV_PATHS["HM-RC-Sec3-B"] = new Object();
+DEV_PATHS["HM-RC-Sec3-B"]["50"] = "/config/img/devices/50/22_hm-rc-sec3-b_thumb.png";
+DEV_PATHS["HM-RC-Sec3-B"]["250"] = "/config/img/devices/250/22_hm-rc-sec3-b.png";
+DEV_HIGHLIGHT["HM-RC-Sec3-B"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Sec3-B"]["1"] = [4, 0.252, 0.2, 0.16, 0.176];
+DEV_HIGHLIGHT["HM-RC-Sec3-B"]["2"] = [4, 0.492, 0.2, 0.16, 0.176];
+DEV_HIGHLIGHT["HM-RC-Sec3-B"]["3"] = [4, 0.34, 0.48, 0.224, 0.248];
+DEV_HIGHLIGHT["HM-RC-Sec3-B"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('263 155');
+DEV_DESCRIPTION["263 155"] = "263_155";
+DEV_PATHS["263 155"] = new Object();
+DEV_PATHS["263 155"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
+DEV_PATHS["263 155"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
+DEV_HIGHLIGHT["263 155"] = new Object();
+DEV_HIGHLIGHT["263 155"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["263 155"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_LIST.push('HMW-Sys-PS7-DR');
+DEV_DESCRIPTION["HMW-Sys-PS7-DR"] = "HMW-Sys-PS7-DR";
+DEV_PATHS["HMW-Sys-PS7-DR"] = new Object();
+DEV_PATHS["HMW-Sys-PS7-DR"]["50"] = "/config/img/devices/50/36_hmw-sys-ps7-dr_thumb.png";
+DEV_PATHS["HMW-Sys-PS7-DR"]["250"] = "/config/img/devices/250/36_hmw-sys-ps7-dr.png";
+DEV_HIGHLIGHT["HMW-Sys-PS7-DR"] = new Object();
+DEV_LIST.push('HMIP-WTH');
+DEV_DESCRIPTION["HMIP-WTH"] = "WTH";
+DEV_PATHS["HMIP-WTH"] = new Object();
+DEV_PATHS["HMIP-WTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HMIP-WTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HMIP-WTH"] = new Object();
+DEV_LIST.push('HM-RC-Sec4-3');
+DEV_DESCRIPTION["HM-RC-Sec4-3"] = "HM-RC-4";
+DEV_PATHS["HM-RC-Sec4-3"] = new Object();
+DEV_PATHS["HM-RC-Sec4-3"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
+DEV_PATHS["HM-RC-Sec4-3"]["250"] = "/config/img/devices/250/85_hm-rc-sec4-3.png";
+DEV_HIGHLIGHT["HM-RC-Sec4-3"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Sec4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HM-LC-Sw1-Pl');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl"] = "HM-LC-Sw1-Pl";
+DEV_PATHS["HM-LC-Sw1-Pl"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-PB-2-WM');
+DEV_DESCRIPTION["HM-PB-2-WM"] = "HM-PB-2-WM";
+DEV_PATHS["HM-PB-2-WM"] = new Object();
+DEV_PATHS["HM-PB-2-WM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-PB-2-WM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-PB-2-WM"] = new Object();
+DEV_HIGHLIGHT["HM-PB-2-WM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-PB-2-WM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-PB-2-WM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HM-LC-Sw1-Pl-OM54');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-OM54"] = "HM-LC-Sw1-Pl-OM54";
+DEV_PATHS["HM-LC-Sw1-Pl-OM54"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-OM54"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-OM54"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-OM54"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-RC-2-PBU-FM');
+DEV_DESCRIPTION["HM-RC-2-PBU-FM"] = "HM-RC-2-PBU-FM";
+DEV_PATHS["HM-RC-2-PBU-FM"] = new Object();
+DEV_PATHS["HM-RC-2-PBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-RC-2-PBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-RC-2-PBU-FM"] = new Object();
+DEV_HIGHLIGHT["HM-RC-2-PBU-FM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-RC-2-PBU-FM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-RC-2-PBU-FM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HM-Sec-MDIR-2');
+DEV_DESCRIPTION["HM-Sec-MDIR-2"] = "HM-Sec-MDIR";
+DEV_PATHS["HM-Sec-MDIR-2"] = new Object();
+DEV_PATHS["HM-Sec-MDIR-2"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
+DEV_PATHS["HM-Sec-MDIR-2"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
+DEV_HIGHLIGHT["HM-Sec-MDIR-2"] = new Object();
+DEV_LIST.push('HM-WDS100-C6-O-2');
+DEV_DESCRIPTION["HM-WDS100-C6-O-2"] = "HM-WDS100-C6-O";
+DEV_PATHS["HM-WDS100-C6-O-2"] = new Object();
+DEV_PATHS["HM-WDS100-C6-O-2"]["50"] = "/config/img/devices/50/WeatherCombiSensor_thumb.png";
+DEV_PATHS["HM-WDS100-C6-O-2"]["250"] = "/config/img/devices/250/WeatherCombiSensor.png";
+DEV_HIGHLIGHT["HM-WDS100-C6-O-2"] = new Object();
+DEV_LIST.push('HM-PB-4-WM');
+DEV_DESCRIPTION["HM-PB-4-WM"] = "HM-PB-4-WM";
+DEV_PATHS["HM-PB-4-WM"] = new Object();
+DEV_PATHS["HM-PB-4-WM"]["50"] = "/config/img/devices/50/PushButton-4ch-wm_thumb.png";
+DEV_PATHS["HM-PB-4-WM"]["250"] = "/config/img/devices/250/PushButton-4ch-wm.png";
+DEV_HIGHLIGHT["HM-PB-4-WM"] = new Object();
+DEV_HIGHLIGHT["HM-PB-4-WM"]["2"] = [2, 0.24, 0.312, 0.204, 0.168];
+DEV_HIGHLIGHT["HM-PB-4-WM"]["1"] = [2, 0.24, 0.556, 0.204, 0.168];
+DEV_HIGHLIGHT["HM-PB-4-WM"]["3"] = [2, 0.46, 0.556, 0.204, 0.168];
+DEV_HIGHLIGHT["HM-PB-4-WM"]["4"] = [2, 0.46, 0.312, 0.204, 0.168];
+DEV_HIGHLIGHT["HM-PB-4-WM"]["1+2"] = [2, 0.24, 0.312, 0.204, 0.412];
+DEV_HIGHLIGHT["HM-PB-4-WM"]["3+4"] = [2, 0.46, 0.312, 0.204, 0.412];
+DEV_LIST.push('HmIP-RC8');
+DEV_DESCRIPTION["HmIP-RC8"] = "RC8";
+DEV_PATHS["HmIP-RC8"] = new Object();
+DEV_PATHS["HmIP-RC8"]["50"] = "/config/img/devices/50/119_hmip-rc8_thumb.png";
+DEV_PATHS["HmIP-RC8"]["250"] = "/config/img/devices/250/119_hmip-rc8.png";
+DEV_HIGHLIGHT["HmIP-RC8"] = new Object();
+DEV_HIGHLIGHT["HmIP-RC8"]["1"] = [1, 0.472, 0.218, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["2"] = [1, 0.600, 0.224, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["3"] = [1, 0.476, 0.304, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["4"] = [1, 0.606, 0.306, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["5"] = [1, 0.480, 0.384, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["6"] = [1, 0.610, 0.386, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["7"] = [1, 0.484, 0.464, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["8"] = [1, 0.614, 0.466, 0.025];
+DEV_HIGHLIGHT["HmIP-RC8"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HmIP-RC8"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HmIP-RC8"]["5+6"] = [5, '5', '6'];
+DEV_HIGHLIGHT["HmIP-RC8"]["7+8"] = [5, '7', '8'];
+DEV_LIST.push('HmIP-ASIR');
+DEV_DESCRIPTION["HmIP-ASIR"] = "ASIR";
+DEV_PATHS["HmIP-ASIR"] = new Object();
+DEV_PATHS["HmIP-ASIR"]["50"] = "/config/img/devices/50/133_hmip-asir_thumb.png";
+DEV_PATHS["HmIP-ASIR"]["250"] = "/config/img/devices/250/133_hmip-asir.png";
+DEV_HIGHLIGHT["HmIP-ASIR"] = new Object();
+DEV_LIST.push('HM-OU-CFM-Pl');
+DEV_DESCRIPTION["HM-OU-CFM-Pl"] = "HM-OU-CFM-Pl";
+DEV_PATHS["HM-OU-CFM-Pl"] = new Object();
+DEV_PATHS["HM-OU-CFM-Pl"]["50"] = "/config/img/devices/50/60_hm-ou-cf-pl_thumb.png";
+DEV_PATHS["HM-OU-CFM-Pl"]["250"] = "/config/img/devices/250/60_hm-ou-cf-pl.png";
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"] = new Object();
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_circle"] = [4, 0.688, 0.224, 0.118, 0.112];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_1"] = [6, 0.628, 0.28, 0.656, 0.28, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_2"] = [6, 0.656, 0.2, 0.68, 0.22, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_3"] = [6, 0.74, 0.168, 0.74, 0.196, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_4"] = [6, 0.82, 0.196, 0.8, 0.216, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_5"] = [6, 0.824, 0.28, 0.856, 0.28, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_6"] = [6, 0.68, 0.34, 0.664, 0.36, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_7"] = [6, 0.74, 0.364, 0.74, 0.392, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["Light_beam_8"] = [6, 0.8, 0.34, 0.82, 0.36, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["1"] = [5, 'Light_circle', 'Light_beam_1', 'Light_beam_2', 'Light_beam_3', 'Light_beam_4', 'Light_beam_5', 'Light_beam_6', 'Light_beam_7', 'Light_beam_8'];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_1"] = [6, 0.644, 0.676, 0.672, 0.676, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_2"] = [6, 0.672, 0.676, 0.672, 0.816, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_3"] = [6, 0.644, 0.816, 0.672, 0.816, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_4"] = [6, 0.644, 0.676, 0.644, 0.816, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_5"] = [6, 0.672, 0.676, 0.716, 0.632, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_6"] = [6, 0.716, 0.632, 0.716, 0.86, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_7"] = [6, 0.672, 0.816, 0.716, 0.86, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_beam_1"] = [6, 0.75, 0.7, 0.832, 0.632, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_beam_2"] = [6, 0.75, 0.748, 0.832, 0.748, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["SP_beam_3"] = [6, 0.75, 0.796, 0.832, 0.86, 0.016];
+DEV_HIGHLIGHT["HM-OU-CFM-Pl"]["2"] = [5, 'SP_1', 'SP_2', 'SP_3', 'SP_4', 'SP_5', 'SP_6', 'SP_7', 'SP_beam_1', 'SP_beam_2', 'SP_beam_3'];
+DEV_LIST.push('HM-LC-Ja1PBU-FM');
+DEV_DESCRIPTION["HM-LC-Ja1PBU-FM"] = "HM-LC-Ja1PBU-FM";
+DEV_PATHS["HM-LC-Ja1PBU-FM"] = new Object();
+DEV_PATHS["HM-LC-Ja1PBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-LC-Ja1PBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-LC-Ja1PBU-FM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Ja1PBU-FM"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-LC-Ja1PBU-FM"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-LC-Ja1PBU-FM"]["1"] = [5, '1a', '1b'];
+DEV_LIST.push('263 131');
+DEV_DESCRIPTION["263 131"] = "263_131";
+DEV_PATHS["263 131"] = new Object();
+DEV_PATHS["263 131"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["263 131"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["263 131"] = new Object();
+DEV_HIGHLIGHT["263 131"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["263 131"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["263 131"]["1"] = [5, '1a', '1b'];
+DEV_LIST.push('VIR-LG-RGBW');
+DEV_DESCRIPTION["VIR-LG-RGBW"] = "VIR-LG-RGBW";
+DEV_PATHS["VIR-LG-RGBW"] = new Object();
+DEV_PATHS["VIR-LG-RGBW"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-rgbw.png";
+DEV_PATHS["VIR-LG-RGBW"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-rgbw.png";
+DEV_HIGHLIGHT["VIR-LG-RGBW"] = new Object();
+DEV_LIST.push('HM-RC-Key3-B');
+DEV_DESCRIPTION["HM-RC-Key3-B"] = "HM-RC-Key3-B";
+DEV_PATHS["HM-RC-Key3-B"] = new Object();
+DEV_PATHS["HM-RC-Key3-B"]["50"] = "/config/img/devices/50/23_hm-rc-key3-b_thumb.png";
+DEV_PATHS["HM-RC-Key3-B"]["250"] = "/config/img/devices/250/23_hm-rc-key3-b.png";
+DEV_HIGHLIGHT["HM-RC-Key3-B"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Key3-B"]["1"] = [4, 0.252, 0.2, 0.16, 0.18];
+DEV_HIGHLIGHT["HM-RC-Key3-B"]["2"] = [4, 0.492, 0.2, 0.16, 0.18];
+DEV_HIGHLIGHT["HM-RC-Key3-B"]["3"] = [4, 0.34, 0.484, 0.228, 0.252];
+DEV_HIGHLIGHT["HM-RC-Key3-B"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HM-LC-Sw1-SM-ATmega168');
+DEV_DESCRIPTION["HM-LC-Sw1-SM-ATmega168"] = "HM-LC-Sw1-SM-ATmega168";
+DEV_PATHS["HM-LC-Sw1-SM-ATmega168"] = new Object();
+DEV_PATHS["HM-LC-Sw1-SM-ATmega168"]["50"] = "/config/img/devices/50/8_hm-lc-sw1-sm_thumb.png";
+DEV_PATHS["HM-LC-Sw1-SM-ATmega168"]["250"] = "/config/img/devices/250/8_hm-lc-sw1-sm.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-SM-ATmega168"] = new Object();
+DEV_LIST.push('ZEL STG RM FZS-2');
+DEV_DESCRIPTION["ZEL STG RM FZS-2"] = "ZEL_STG_RM_FZS-2";
+DEV_PATHS["ZEL STG RM FZS-2"] = new Object();
+DEV_PATHS["ZEL STG RM FZS-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["ZEL STG RM FZS-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["ZEL STG RM FZS-2"] = new Object();
+DEV_HIGHLIGHT["ZEL STG RM FZS-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["ZEL STG RM FZS-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["ZEL STG RM FZS-2"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-LC-Sw2-DR-2');
+DEV_DESCRIPTION["HM-LC-Sw2-DR-2"] = "HM-LC-Sw2-DR";
+DEV_PATHS["HM-LC-Sw2-DR-2"] = new Object();
+DEV_PATHS["HM-LC-Sw2-DR-2"]["50"] = "/config/img/devices/50/69_hm-lc-sw2-dr_thumb.png";
+DEV_PATHS["HM-LC-Sw2-DR-2"]["250"] = "/config/img/devices/250/69_hm-lc-sw2-dr.png";
+DEV_HIGHLIGHT["HM-LC-Sw2-DR-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw2-DR-2"]["1"] = [4, 0.095, 0.556, 0.045, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw2-DR-2"]["2"] = [4, 0.285, 0.556, 0.045, 0.04];
+DEV_LIST.push('263 167');
+DEV_DESCRIPTION["263 167"] = "263_167";
+DEV_PATHS["263 167"] = new Object();
+DEV_PATHS["263 167"]["50"] = "/config/img/devices/50/51_hm-sec-sd_thumb.png";
+DEV_PATHS["263 167"]["250"] = "/config/img/devices/250/51_hm-sec-sd.png";
+DEV_HIGHLIGHT["263 167"] = new Object();
+DEV_LIST.push('HM-Sec-MDIR');
+DEV_DESCRIPTION["HM-Sec-MDIR"] = "HM-Sec-MDIR";
+DEV_PATHS["HM-Sec-MDIR"] = new Object();
+DEV_PATHS["HM-Sec-MDIR"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
+DEV_PATHS["HM-Sec-MDIR"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
+DEV_HIGHLIGHT["HM-Sec-MDIR"] = new Object();
+DEV_LIST.push('263 132');
+DEV_DESCRIPTION["263 132"] = "263_132";
+DEV_PATHS["263 132"] = new Object();
+DEV_PATHS["263 132"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
+DEV_PATHS["263 132"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
+DEV_HIGHLIGHT["263 132"] = new Object();
+DEV_LIST.push('HM-LC-Dim1T-Pl-2');
+DEV_DESCRIPTION["HM-LC-Dim1T-Pl-2"] = "HM-LC-Dim1T-Pl-2";
+DEV_PATHS["HM-LC-Dim1T-Pl-2"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-Pl-2"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-Pl-2"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-2"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-RC-19-SW');
+DEV_DESCRIPTION["HM-RC-19-SW"] = "HM-RC-19-SW";
+DEV_PATHS["HM-RC-19-SW"] = new Object();
+DEV_PATHS["HM-RC-19-SW"]["50"] = "/config/img/devices/50/20_hm-rc-19_thumb.png";
+DEV_PATHS["HM-RC-19-SW"]["250"] = "/config/img/devices/250/20_hm-rc-19.png";
+DEV_HIGHLIGHT["HM-RC-19-SW"] = new Object();
+DEV_HIGHLIGHT["HM-RC-19-SW"]["1"] = [2, 0.296, 0.344, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["3"] = [2, 0.296, 0.416, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["5"] = [2, 0.296, 0.488, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["7"] = [2, 0.296, 0.56, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["9"] = [2, 0.296, 0.628, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["11"] = [2, 0.296, 0.704, 0.036, 0.048];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["13"] = [2, 0.296, 0.772, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["15"] = [2, 0.296, 0.844, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["2"] = [2, 0.468, 0.344, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["4"] = [2, 0.468, 0.416, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["6"] = [2, 0.468, 0.488, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["8"] = [2, 0.468, 0.56, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["10"] = [2, 0.468, 0.628, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["12"] = [2, 0.468, 0.704, 0.036, 0.048];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["14"] = [2, 0.468, 0.772, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["16"] = [2, 0.468, 0.844, 0.036, 0.052];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["17"] = [2, 0.58, 0.84, 0.044, 0.056];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["18"] = [2, 0.312, 0.188, 0.168, 0.088];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["5+6"] = [5, '5', '6'];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["7+8"] = [5, '7', '8'];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["9+10"] = [5, '9', '10'];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["11+12"] = [5, '11', '12'];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["13+14"] = [5, '13', '14'];
+DEV_HIGHLIGHT["HM-RC-19-SW"]["15+16"] = [5, '15', '16'];
+DEV_LIST.push('HM-LC-Sw1-Ba-PCB');
+DEV_DESCRIPTION["HM-LC-Sw1-Ba-PCB"] = "HM-LC-Sw1-Ba-PCB";
+DEV_PATHS["HM-LC-Sw1-Ba-PCB"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Ba-PCB"]["50"] = "/config/img/devices/50/77_hm-lc-sw1-ba-pcb_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Ba-PCB"]["250"] = "/config/img/devices/250/77_hm-lc-sw1-ba-pcb.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Ba-PCB"] = new Object();
+DEV_LIST.push('HMIP-WTH-2');
+DEV_DESCRIPTION["HMIP-WTH-2"] = "WTH";
+DEV_PATHS["HMIP-WTH-2"] = new Object();
+DEV_PATHS["HMIP-WTH-2"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HMIP-WTH-2"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HMIP-WTH-2"] = new Object();
+DEV_LIST.push('HM-PB-4Dis-WM-2');
+DEV_DESCRIPTION["HM-PB-4Dis-WM-2"] = "HM-PB-4Dis-WM-2";
+DEV_PATHS["HM-PB-4Dis-WM-2"] = new Object();
+DEV_PATHS["HM-PB-4Dis-WM-2"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
+DEV_PATHS["HM-PB-4Dis-WM-2"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"] = new Object();
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM-2"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_LIST.push('HM-LC-Dim2T-SM');
+DEV_DESCRIPTION["HM-LC-Dim2T-SM"] = "HM-LC-Dim2T-SM";
+DEV_PATHS["HM-LC-Dim2T-SM"] = new Object();
+DEV_PATHS["HM-LC-Dim2T-SM"]["50"] = "/config/img/devices/50/64_hm-lc-dim2T-sm_thumb.png";
+DEV_PATHS["HM-LC-Dim2T-SM"]["250"] = "/config/img/devices/250/64_hm-lc-dim2T-sm.png";
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Part1"] = [6, 0.539, 0.864, 0.539, 0.948, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Part2"] = [6, 0.539, 0.948, 0.49, 0.884, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Part3"] = [6, 0.539, 0.948, 0.588, 0.884, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["2_Arrow"] = [7, '1_Arrow', 0.179, 0];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1_Key"] = [4, 0.25, 0.26, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["2_Key"] = [4, 0.328, 0.26, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["1"] = [5, '1_Arrow', '1_Key'];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('HM-CC-VG-1');
+DEV_DESCRIPTION["HM-CC-VG-1"] = "HM-CC-VG-1";
+DEV_PATHS["HM-CC-VG-1"] = new Object();
+DEV_PATHS["HM-CC-VG-1"]["50"] = "/config/img/devices/50/95_group_hm-cc-vg-1_thumb.png";
+DEV_PATHS["HM-CC-VG-1"]["250"] = "/config/img/devices/250/95_group_hm-cc-vg-1.png";
+DEV_HIGHLIGHT["HM-CC-VG-1"] = new Object();
+DEV_LIST.push('HM-RC-4-2');
+DEV_DESCRIPTION["HM-RC-4-2"] = "HM-RC-4-2";
+DEV_PATHS["HM-RC-4-2"] = new Object();
+DEV_PATHS["HM-RC-4-2"]["50"] = "/config/img/devices/50/84_hm-rc-4-2_thumb.png";
+DEV_PATHS["HM-RC-4-2"]["250"] = "/config/img/devices/250/84_hm-rc-4-2.png";
+DEV_HIGHLIGHT["HM-RC-4-2"] = new Object();
+DEV_HIGHLIGHT["HM-RC-4-2"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HM-RC-4-2"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HM-RC-4-2"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HM-RC-4-2"]["1_Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HM-RC-4-2"]["2_Arrow"] = [7, '1_Arrow', 0.028, 0.156];
+DEV_HIGHLIGHT["HM-RC-4-2"]["3_Arrow"] = [7, '1_Arrow', 0.028, 0.312];
+DEV_HIGHLIGHT["HM-RC-4-2"]["4_Arrow"] = [7, '1_Arrow', 0.012, 0.468];
+DEV_HIGHLIGHT["HM-RC-4-2"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-2"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-2"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-2"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-2"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-4-2"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HM-LC-Sw4-Ba-PCB');
+DEV_DESCRIPTION["HM-LC-Sw4-Ba-PCB"] = "HM-LC-Sw4-Ba-PCB";
+DEV_PATHS["HM-LC-Sw4-Ba-PCB"] = new Object();
+DEV_PATHS["HM-LC-Sw4-Ba-PCB"]["50"] = "/config/img/devices/50/88_hm-lc-sw4-ba-pcb_thumb.png";
+DEV_PATHS["HM-LC-Sw4-Ba-PCB"]["250"] = "/config/img/devices/250/88_hm-lc-sw4-ba-pcb.png";
+DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["1"] = [2, 0.140, 0.704, 0.092, 0.052];
+DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["2"] = [2, 0.328, 0.704, 0.092, 0.052];
+DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["3"] = [2, 0.512, 0.704, 0.092, 0.052];
+DEV_HIGHLIGHT["HM-LC-Sw4-Ba-PCB"]["4"] = [2, 0.688, 0.704, 0.092, 0.052];
+DEV_LIST.push('HM-LC-Sw1-Pl-3');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-3"] = "HM-LC-Sw1-Pl";
+DEV_PATHS["HM-LC-Sw1-Pl-3"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-3"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-3"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HM-LC-Dim1L-CV');
+DEV_DESCRIPTION["HM-LC-Dim1L-CV"] = "HM-LC-Dim1L-CV";
+DEV_PATHS["HM-LC-Dim1L-CV"] = new Object();
+DEV_PATHS["HM-LC-Dim1L-CV"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1L-CV"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1L-CV"] = new Object();
+DEV_LIST.push('HM-LC-Dim1PWM-CV-2');
+DEV_DESCRIPTION["HM-LC-Dim1PWM-CV-2"] = "HM-LC-Dim1PWM-CV";
+DEV_PATHS["HM-LC-Dim1PWM-CV-2"] = new Object();
+DEV_PATHS["HM-LC-Dim1PWM-CV-2"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
+DEV_PATHS["HM-LC-Dim1PWM-CV-2"]["250"] = "/config/img/devices/250/79_hm-lc-dim1pwm-cv.png";
+DEV_HIGHLIGHT["HM-LC-Dim1PWM-CV-2"] = new Object();
+DEV_LIST.push('WS888');
+DEV_DESCRIPTION["WS888"] = "WS888";
+DEV_PATHS["WS888"] = new Object();
+DEV_PATHS["WS888"]["50"] = "/config/img/devices/50/9_hm-ws550-us_thumb.png";
+DEV_PATHS["WS888"]["250"] = "/config/img/devices/250/9_hm-ws550-us.png";
+DEV_HIGHLIGHT["WS888"] = new Object();
+DEV_HIGHLIGHT["WS888"]["1"] = [3, 0.440, 0.200, '1', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["2"] = [3, 0.440, 0.200, '2', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["3"] = [3, 0.440, 0.200, '3', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["4"] = [3, 0.440, 0.200, '4', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["5"] = [3, 0.440, 0.200, '5', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["6"] = [3, 0.440, 0.200, '6', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["WS888"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
+DEV_LIST.push('HMIP-PS');
+DEV_DESCRIPTION["HMIP-PS"] = "PS";
+DEV_PATHS["HMIP-PS"] = new Object();
+DEV_PATHS["HMIP-PS"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
+DEV_PATHS["HMIP-PS"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
+DEV_HIGHLIGHT["HMIP-PS"] = new Object();
+DEV_LIST.push('HM-RC-Key4-2');
+DEV_DESCRIPTION["HM-RC-Key4-2"] = "HM-RC-Key4-2";
+DEV_PATHS["HM-RC-Key4-2"] = new Object();
+DEV_PATHS["HM-RC-Key4-2"]["50"] = "/config/img/devices/50/85_hm-rc-key4-2_thumb.png";
+DEV_PATHS["HM-RC-Key4-2"]["250"] = "/config/img/devices/250/85_hm-rc-key4-2.png";
+DEV_HIGHLIGHT["HM-RC-Key4-2"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["1_Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["2_Arrow"] = [7, '1_Arrow', 0.028, 0.156];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["3_Arrow"] = [7, '1_Arrow', 0.028, 0.312];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["4_Arrow"] = [7, '1_Arrow', 0.012, 0.468];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HM-RC-Key4-2"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('VIR-LG-WHITE');
+DEV_DESCRIPTION["VIR-LG-WHITE"] = "VIR-LG-WHITE";
+DEV_PATHS["VIR-LG-WHITE"] = new Object();
+DEV_PATHS["VIR-LG-WHITE"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-white.png";
+DEV_PATHS["VIR-LG-WHITE"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-white.png";
+DEV_HIGHLIGHT["VIR-LG-WHITE"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-Pl-DN-R5');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R5"] = "HM-LC-Sw1-Pl-DN-R5";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R5_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R5.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R5"] = new Object();
 DEV_LIST.push('HM-LC-Sw4-SM-ATmega168');
 DEV_DESCRIPTION["HM-LC-Sw4-SM-ATmega168"] = "HM-LC-Sw4-SM-ATmega168";
 DEV_PATHS["HM-LC-Sw4-SM-ATmega168"] = new Object();
@@ -2686,37 +2506,279 @@ DEV_HIGHLIGHT["HM-LC-Sw4-SM-ATmega168"]["1"] = [5, '1_Arrow', '1_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-ATmega168"]["2"] = [5, '2_Arrow', '2_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-ATmega168"]["3"] = [5, '3_Arrow', '3_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM-ATmega168"]["4"] = [5, '4_Arrow', '4_Key'];
-DEV_LIST.push('HM-RC-P1');
-DEV_DESCRIPTION["HM-RC-P1"] = "HM-RC-P1";
-DEV_PATHS["HM-RC-P1"] = new Object();
-DEV_PATHS["HM-RC-P1"]["50"] = "/config/img/devices/50/21_hm-rc-p1_thumb.png";
-DEV_PATHS["HM-RC-P1"]["250"] = "/config/img/devices/250/21_hm-rc-p1.png";
-DEV_HIGHLIGHT["HM-RC-P1"] = new Object();
-DEV_HIGHLIGHT["HM-RC-P1"]["1"] = [4, 0.26, 0.248, 0.38, 0.42];
-DEV_LIST.push('HMW-LC-Bl1-DR');
-DEV_DESCRIPTION["HMW-LC-Bl1-DR"] = "HMW-LC-Bl1-DR";
-DEV_PATHS["HMW-LC-Bl1-DR"] = new Object();
-DEV_PATHS["HMW-LC-Bl1-DR"]["50"] = "/config/img/devices/50/27_hmw-lc-bl1-dr_thumb.png";
-DEV_PATHS["HMW-LC-Bl1-DR"]["250"] = "/config/img/devices/250/27_hmw-lc-bl1-dr.png";
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR"] = new Object();
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["1"] = [2, 0.452, 0.772, 0.044, 0.06];
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["2"] = [2, 0.5, 0.772, 0.048, 0.06];
-DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["3"] = [2, 0.452, 0.388, 0.096, 0.06];
-DEV_LIST.push('HM-Sec-SD-Team');
-DEV_DESCRIPTION["HM-Sec-SD-Team"] = "HM-Sec-SD-Team";
-DEV_PATHS["HM-Sec-SD-Team"] = new Object();
-DEV_PATHS["HM-Sec-SD-Team"]["50"] = "/config/img/devices/50/52_hm-sec-sd-team_thumb.png";
-DEV_PATHS["HM-Sec-SD-Team"]["250"] = "/config/img/devices/250/52_hm-sec-sd-team.png";
-DEV_HIGHLIGHT["HM-Sec-SD-Team"] = new Object();
-DEV_LIST.push('HM-LC-RGBW-WM');
-DEV_DESCRIPTION["HM-LC-RGBW-WM"] = "HM-LC-RGBW-WM";
-DEV_PATHS["HM-LC-RGBW-WM"] = new Object();
-DEV_PATHS["HM-LC-RGBW-WM"]["50"] = "/config/img/devices/50/111_hm-lc-rgbw-wm_thumb.png";
-DEV_PATHS["HM-LC-RGBW-WM"]["250"] = "/config/img/devices/250/111_hm-lc-rgbw-wm.png";
-DEV_HIGHLIGHT["HM-LC-RGBW-WM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["1"] = [1, 0.280, 0.569, 0.014];
-DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["2"] = [1, 0.280, 0.645, 0.014];
-DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["3"] = [1, 0.280, 0.721, 0.014];
+DEV_LIST.push('HM-LC-Sw1PBU-FM');
+DEV_DESCRIPTION["HM-LC-Sw1PBU-FM"] = "HM-LC-Sw1PBU-FM";
+DEV_PATHS["HM-LC-Sw1PBU-FM"] = new Object();
+DEV_PATHS["HM-LC-Sw1PBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-LC-Sw1PBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HM-LC-Sw1PBU-FM"]["1"] = [5, '1a', '1b'];
+DEV_LIST.push('HM-PB-4Dis-WM');
+DEV_DESCRIPTION["HM-PB-4Dis-WM"] = "HM-PB-4Dis-WM";
+DEV_PATHS["HM-PB-4Dis-WM"] = new Object();
+DEV_PATHS["HM-PB-4Dis-WM"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
+DEV_PATHS["HM-PB-4Dis-WM"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"] = new Object();
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["HM-PB-4Dis-WM"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_LIST.push('ZEL STG RM FSS UP3');
+DEV_DESCRIPTION["ZEL STG RM FSS UP3"] = "ZEL_STG_RM_FSS_UP3";
+DEV_PATHS["ZEL STG RM FSS UP3"] = new Object();
+DEV_PATHS["ZEL STG RM FSS UP3"]["50"] = "/config/img/devices/50/39_hm-swi-3-fm_thumb.png";
+DEV_PATHS["ZEL STG RM FSS UP3"]["250"] = "/config/img/devices/250/39_hm-swi-3-fm.png";
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"] = new Object();
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["1"] = [5, '1_Key', '1_Kreis'];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["2"] = [5, '2_Key', '2_Kreis'];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
+DEV_HIGHLIGHT["ZEL STG RM FSS UP3"]["3"] = [5, '3_Key', '3_Kreis'];
+DEV_LIST.push('HmIP-eTRV');
+DEV_DESCRIPTION["HmIP-eTRV"] = "TRV";
+DEV_PATHS["HmIP-eTRV"] = new Object();
+DEV_PATHS["HmIP-eTRV"]["50"] = "/config/img/devices/50/120_hmip-etrv_thumb.png";
+DEV_PATHS["HmIP-eTRV"]["250"] = "/config/img/devices/250/120_hmip-etrv.png";
+DEV_HIGHLIGHT["HmIP-eTRV"] = new Object();
+DEV_LIST.push('ZEL STG RM WT 2');
+DEV_DESCRIPTION["ZEL STG RM WT 2"] = "ZEL_STG_RM_WT_2";
+DEV_PATHS["ZEL STG RM WT 2"] = new Object();
+DEV_PATHS["ZEL STG RM WT 2"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
+DEV_PATHS["ZEL STG RM WT 2"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
+DEV_HIGHLIGHT["ZEL STG RM WT 2"] = new Object();
+DEV_HIGHLIGHT["ZEL STG RM WT 2"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
+DEV_HIGHLIGHT["ZEL STG RM WT 2"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
+DEV_LIST.push('HM-LC-Dim2L-SM-644');
+DEV_DESCRIPTION["HM-LC-Dim2L-SM-644"] = "HM-LC-Dim2L-SM";
+DEV_PATHS["HM-LC-Dim2L-SM-644"] = new Object();
+DEV_PATHS["HM-LC-Dim2L-SM-644"]["50"] = "/config/img/devices/50/45_hm-lc-dim2l-sm_thumb.png";
+DEV_PATHS["HM-LC-Dim2L-SM-644"]["250"] = "/config/img/devices/250/45_hm-lc-dim2l-sm.png";
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Part1"] = [6, 0.530, 0.896, 0.530, 0.98, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Part2"] = [6, 0.530, 0.98, 0.49, 0.916, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Part3"] = [6, 0.530, 0.98, 0.574, 0.916, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["2_Arrow"] = [7, '1_Arrow', 0.168, 0];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["1"] = [5, '1_Arrow', '1_Key'];
+DEV_HIGHLIGHT["HM-LC-Dim2L-SM-644"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('ZEL STG RM FSA');
+DEV_DESCRIPTION["ZEL STG RM FSA"] = "ZEL_STG_RM_FSA";
+DEV_PATHS["ZEL STG RM FSA"] = new Object();
+DEV_PATHS["ZEL STG RM FSA"]["50"] = "/config/img/devices/50/43_hm-cc-vd_thumb.png";
+DEV_PATHS["ZEL STG RM FSA"]["250"] = "/config/img/devices/250/43_hm-cc-vd.png";
+DEV_HIGHLIGHT["ZEL STG RM FSA"] = new Object();
+DEV_LIST.push('HM-SwI-3-FM');
+DEV_DESCRIPTION["HM-SwI-3-FM"] = "HM-SwI-3-FM";
+DEV_PATHS["HM-SwI-3-FM"] = new Object();
+DEV_PATHS["HM-SwI-3-FM"]["50"] = "/config/img/devices/50/39_hm-swi-3-fm_thumb.png";
+DEV_PATHS["HM-SwI-3-FM"]["250"] = "/config/img/devices/250/39_hm-swi-3-fm.png";
+DEV_HIGHLIGHT["HM-SwI-3-FM"] = new Object();
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["1_Kreis"] = [4, 0.220, 0.480, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["1"] = [5, '1_Key', '1_Kreis'];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["2_Kreis"] = [4, 0.265, 0.405, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["2"] = [5, '2_Key', '2_Kreis'];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["3_Kreis"] = [4, 0.310, 0.33, 0.028, 0.028];
+DEV_HIGHLIGHT["HM-SwI-3-FM"]["3"] = [5, '3_Key', '3_Kreis'];
+DEV_LIST.push('HmIP-KRCA');
+DEV_DESCRIPTION["HmIP-KRCA"] = "KRCA";
+DEV_PATHS["HmIP-KRCA"] = new Object();
+DEV_PATHS["HmIP-KRCA"]["50"] = "/config/img/devices/50/84_hm-rc-4-x_thumb.png";
+DEV_PATHS["HmIP-KRCA"]["250"] = "/config/img/devices/250/85_hm-rc-sec4-3.png";
+DEV_HIGHLIGHT["HmIP-KRCA"] = new Object();
+DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part1"] = [6, 0.312, 0.288, 0.416, 0.288, 0.012];
+DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part2"] = [6, 0.312, 0.288, 0.352, 0.248, 0.012];
+DEV_HIGHLIGHT["HmIP-KRCA"]["arrow_part3"] = [6, 0.312, 0.288, 0.352, 0.328, 0.012];
+DEV_HIGHLIGHT["HmIP-KRCA"]["Arrow"] = [5, 'arrow_part1', 'arrow_part2', 'arrow_part3'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["1_Arrow"] = [7, 'Arrow', 0.25, 0.0];
+DEV_HIGHLIGHT["HmIP-KRCA"]["2_Arrow"] = [7, 'Arrow', 0.238, 0.156];
+DEV_HIGHLIGHT["HmIP-KRCA"]["3_Arrow"] = [7, 'Arrow', 0.228, 0.312];
+DEV_HIGHLIGHT["HmIP-KRCA"]["4_Arrow"] = [7, 'Arrow', 0.212, 0.468];
+DEV_HIGHLIGHT["HmIP-KRCA"]["1"] = [5, '2_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["2"] = [5, '1_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["3"] = [5, '4_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["4"] = [5, '3_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
+DEV_HIGHLIGHT["HmIP-KRCA"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HM-PB-6-WM55');
+DEV_DESCRIPTION["HM-PB-6-WM55"] = "HM-PB-6-WM55";
+DEV_PATHS["HM-PB-6-WM55"] = new Object();
+DEV_PATHS["HM-PB-6-WM55"]["50"] = "/config/img/devices/50/86_hm-pb-6-wm55_thumb.png";
+DEV_PATHS["HM-PB-6-WM55"]["250"] = "/config/img/devices/250/86_hm-pb-6-wm55.png";
+DEV_HIGHLIGHT["HM-PB-6-WM55"] = new Object();
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["1"] = [2, 0.164, 0.232, 0.112, 0.156];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["2"] = [2, 0.588, 0.232, 0.112, 0.156];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["3"] = [2, 0.164, 0.428, 0.112, 0.156];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["4"] = [2, 0.588, 0.428, 0.112, 0.156];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["5"] = [2, 0.164, 0.616, 0.112, 0.156];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["6"] = [2, 0.588, 0.616, 0.112, 0.156];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["3+4"] = [5, '3', '4'];
+DEV_HIGHLIGHT["HM-PB-6-WM55"]["5+6"] = [5, '5', '6'];
+DEV_LIST.push('HM-LC-Sw2-DR');
+DEV_DESCRIPTION["HM-LC-Sw2-DR"] = "HM-LC-Sw2-DR";
+DEV_PATHS["HM-LC-Sw2-DR"] = new Object();
+DEV_PATHS["HM-LC-Sw2-DR"]["50"] = "/config/img/devices/50/69_hm-lc-sw2-dr_thumb.png";
+DEV_PATHS["HM-LC-Sw2-DR"]["250"] = "/config/img/devices/250/69_hm-lc-sw2-dr.png";
+DEV_HIGHLIGHT["HM-LC-Sw2-DR"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw2-DR"]["1"] = [4, 0.095, 0.556, 0.045, 0.04];
+DEV_HIGHLIGHT["HM-LC-Sw2-DR"]["2"] = [4, 0.285, 0.556, 0.045, 0.04];
+DEV_LIST.push('HM-LC-Sw1-PB-FM');
+DEV_DESCRIPTION["HM-LC-Sw1-PB-FM"] = "HM-LC-Sw1-PB-FM";
+DEV_PATHS["HM-LC-Sw1-PB-FM"] = new Object();
+DEV_PATHS["HM-LC-Sw1-PB-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-LC-Sw1-PB-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-PB-FM"] = new Object();
+DEV_LIST.push('HM-CC-TC');
+DEV_DESCRIPTION["HM-CC-TC"] = "HM-CC-TC";
+DEV_PATHS["HM-CC-TC"] = new Object();
+DEV_PATHS["HM-CC-TC"]["50"] = "/config/img/devices/50/42_hm-cc-tc_thumb.png";
+DEV_PATHS["HM-CC-TC"]["250"] = "/config/img/devices/250/42_hm-cc-tc.png";
+DEV_HIGHLIGHT["HM-CC-TC"] = new Object();
+DEV_LIST.push('HM-LC-Sw1-Pl-DN-R1');
+DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R1"] = "HM-LC-Sw1-Pl-DN-R1";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"] = new Object();
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"]["50"] = "/config/img/devices/50/93_hm-es-pmsw1-pl_thumb.png";
+DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"]["250"] = "/config/img/devices/250/93_hm-es-pmsw1-pl.png";
+DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R1"] = new Object();
+DEV_LIST.push('HmIP-BDT');
+DEV_DESCRIPTION["HmIP-BDT"] = "BDT";
+DEV_PATHS["HmIP-BDT"] = new Object();
+DEV_PATHS["HmIP-BDT"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BDT"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HmIP-BDT"] = new Object();
+DEV_HIGHLIGHT["HmIP-BDT"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BDT"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BDT"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HmIP-SMO-A');
+DEV_DESCRIPTION["HmIP-SMO-A"] = "SMO";
+DEV_PATHS["HmIP-SMO-A"] = new Object();
+DEV_PATHS["HmIP-SMO-A"]["50"] = "/config/img/devices/50/132_hmip-smo_thumb.png";
+DEV_PATHS["HmIP-SMO-A"]["250"] = "/config/img/devices/250/132_hmip-smo.png";
+DEV_HIGHLIGHT["HmIP-SMO-A"] = new Object();
+DEV_LIST.push('BRC-H');
+DEV_DESCRIPTION["BRC-H"] = "BRC-H";
+DEV_PATHS["BRC-H"] = new Object();
+DEV_PATHS["BRC-H"]["50"] = "/config/img/devices/50/72_hm-rc-brc-h_thumb.png";
+DEV_PATHS["BRC-H"]["250"] = "/config/img/devices/250/72_hm-rc-brc-h.png";
+DEV_HIGHLIGHT["BRC-H"] = new Object();
+DEV_HIGHLIGHT["BRC-H"]["1"] = [4, 0.196, 0.222, 0.162, 0.164];
+DEV_HIGHLIGHT["BRC-H"]["2"] = [4, 0.417, 0.222, 0.162, 0.164];
+DEV_HIGHLIGHT["BRC-H"]["3"] = [4, 0.196, 0.482, 0.162, 0.164];
+DEV_HIGHLIGHT["BRC-H"]["4"] = [4, 0.417, 0.482, 0.162, 0.164];
+DEV_LIST.push('HM-MOD-Re-8');
+DEV_DESCRIPTION["HM-MOD-Re-8"] = "HM-MOD-Re-8";
+DEV_PATHS["HM-MOD-Re-8"] = new Object();
+DEV_PATHS["HM-MOD-Re-8"]["50"] = "/config/img/devices/50/94_hm-mod-re-8_thumb.png";
+DEV_PATHS["HM-MOD-Re-8"]["250"] = "/config/img/devices/250/94_hm-mod-re-8.png";
+DEV_HIGHLIGHT["HM-MOD-Re-8"] = new Object();
+DEV_LIST.push('KS550');
+DEV_DESCRIPTION["KS550"] = "KS550";
+DEV_PATHS["KS550"] = new Object();
+DEV_PATHS["KS550"]["50"] = "/config/img/devices/50/WeatherCombiSensor_thumb.png";
+DEV_PATHS["KS550"]["250"] = "/config/img/devices/250/WeatherCombiSensor.png";
+DEV_HIGHLIGHT["KS550"] = new Object();
+DEV_LIST.push('HmIP-SWSD');
+DEV_DESCRIPTION["HmIP-SWSD"] = "SWSD";
+DEV_PATHS["HmIP-SWSD"] = new Object();
+DEV_PATHS["HmIP-SWSD"]["50"] = "/config/img/devices/50/104_hm-sec-sd-2_thumb.png";
+DEV_PATHS["HmIP-SWSD"]["250"] = "/config/img/devices/250/104_hm-sec-sd-2.png";
+DEV_HIGHLIGHT["HmIP-SWSD"] = new Object();
+DEV_LIST.push('HM-LC-Bl1-FM-2');
+DEV_DESCRIPTION["HM-LC-Bl1-FM-2"] = "HM-LC-Bl1-FM";
+DEV_PATHS["HM-LC-Bl1-FM-2"] = new Object();
+DEV_PATHS["HM-LC-Bl1-FM-2"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
+DEV_PATHS["HM-LC-Bl1-FM-2"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
+DEV_HIGHLIGHT["HM-LC-Bl1-FM-2"] = new Object();
+DEV_LIST.push('HmIP-PS');
+DEV_DESCRIPTION["HmIP-PS"] = "PS";
+DEV_PATHS["HmIP-PS"] = new Object();
+DEV_PATHS["HmIP-PS"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
+DEV_PATHS["HmIP-PS"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
+DEV_HIGHLIGHT["HmIP-PS"] = new Object();
+DEV_LIST.push('HmIP-STHD');
+DEV_DESCRIPTION["HmIP-STHD"] = "STHD";
+DEV_PATHS["HmIP-STHD"] = new Object();
+DEV_PATHS["HmIP-STHD"]["50"] = "/config/img/devices/50/147_hmip-sthd_thumb.png";
+DEV_PATHS["HmIP-STHD"]["250"] = "/config/img/devices/250/147_hmip-sthd.png";
+DEV_HIGHLIGHT["HmIP-STHD"] = new Object();
+DEV_LIST.push('HM-LC-Dim1TPBU-FM');
+DEV_DESCRIPTION["HM-LC-Dim1TPBU-FM"] = "HM-LC-Dim1TPBU-FM";
+DEV_PATHS["HM-LC-Dim1TPBU-FM"] = new Object();
+DEV_PATHS["HM-LC-Dim1TPBU-FM"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HM-LC-Dim1TPBU-FM"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HM-LC-Dim1TPBU-FM"] = new Object();
+DEV_LIST.push('HM-LC-Dim2T-SM-644');
+DEV_DESCRIPTION["HM-LC-Dim2T-SM-644"] = "HM-LC-Dim2T-SM";
+DEV_PATHS["HM-LC-Dim2T-SM-644"] = new Object();
+DEV_PATHS["HM-LC-Dim2T-SM-644"]["50"] = "/config/img/devices/50/64_hm-lc-dim2T-sm_thumb.png";
+DEV_PATHS["HM-LC-Dim2T-SM-644"]["250"] = "/config/img/devices/250/64_hm-lc-dim2T-sm.png";
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Part1"] = [6, 0.539, 0.864, 0.539, 0.948, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Part2"] = [6, 0.539, 0.948, 0.49, 0.884, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Part3"] = [6, 0.539, 0.948, 0.588, 0.884, 0.012];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["2_Arrow"] = [7, '1_Arrow', 0.179, 0];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1_Key"] = [4, 0.25, 0.26, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["2_Key"] = [4, 0.328, 0.26, 0.04, 0.044];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["1"] = [5, '1_Arrow', '1_Key'];
+DEV_HIGHLIGHT["HM-LC-Dim2T-SM-644"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('HM-Sec-WDS');
+DEV_DESCRIPTION["HM-Sec-WDS"] = "HM-Sec-WDS";
+DEV_PATHS["HM-Sec-WDS"] = new Object();
+DEV_PATHS["HM-Sec-WDS"]["50"] = "/config/img/devices/50/49_hm-sec-wds_thumb.png";
+DEV_PATHS["HM-Sec-WDS"]["250"] = "/config/img/devices/250/49_hm-sec-wds.png";
+DEV_HIGHLIGHT["HM-Sec-WDS"] = new Object();
+DEV_LIST.push('HM-Sec-Sir-WM');
+DEV_DESCRIPTION["HM-Sec-Sir-WM"] = "HM-Sec-Sir-WM";
+DEV_PATHS["HM-Sec-Sir-WM"] = new Object();
+DEV_PATHS["HM-Sec-Sir-WM"]["50"] = "/config/img/devices/50/117_hm-sec-sir-wm_thumb.png";
+DEV_PATHS["HM-Sec-Sir-WM"]["250"] = "/config/img/devices/250/117_hm-sec-sir-wm.png";
+DEV_HIGHLIGHT["HM-Sec-Sir-WM"] = new Object();
+DEV_LIST.push('HmIP-SRH');
+DEV_DESCRIPTION["HmIP-SRH"] = "SRH";
+DEV_PATHS["HmIP-SRH"] = new Object();
+DEV_PATHS["HmIP-SRH"]["50"] = "/config/img/devices/50/130_hmip-srh_thumb.png";
+DEV_PATHS["HmIP-SRH"]["250"] = "/config/img/devices/250/130_hmip-srh.png";
+DEV_HIGHLIGHT["HmIP-SRH"] = new Object();
+DEV_LIST.push('ZEL STG RM FFK');
+DEV_DESCRIPTION["ZEL STG RM FFK"] = "ZEL_STG_RM_FFK";
+DEV_PATHS["ZEL STG RM FFK"] = new Object();
+DEV_PATHS["ZEL STG RM FFK"]["50"] = "/config/img/devices/50/16_hm-sec-sc_thumb.png";
+DEV_PATHS["ZEL STG RM FFK"]["250"] = "/config/img/devices/250/16_hm-sec-sc.png";
+DEV_HIGHLIGHT["ZEL STG RM FFK"] = new Object();
+DEV_LIST.push('HM-Sec-WDS-2');
+DEV_DESCRIPTION["HM-Sec-WDS-2"] = "HM-Sec-WDS-2";
+DEV_PATHS["HM-Sec-WDS-2"] = new Object();
+DEV_PATHS["HM-Sec-WDS-2"]["50"] = "/config/img/devices/50/49_hm-sec-wds_thumb.png";
+DEV_PATHS["HM-Sec-WDS-2"]["250"] = "/config/img/devices/250/49_hm-sec-wds.png";
+DEV_HIGHLIGHT["HM-Sec-WDS-2"] = new Object();
 DEV_LIST.push('HM-LC-Sw4-SM');
 DEV_DESCRIPTION["HM-LC-Sw4-SM"] = "HM-LC-Sw4-SM";
 DEV_PATHS["HM-LC-Sw4-SM"] = new Object();
@@ -2738,95 +2800,192 @@ DEV_HIGHLIGHT["HM-LC-Sw4-SM"]["1"] = [5, '1_Arrow', '1_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM"]["2"] = [5, '2_Arrow', '2_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM"]["3"] = [5, '3_Arrow', '3_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM"]["4"] = [5, '4_Arrow', '4_Key'];
-DEV_LIST.push('HM-CC-VD');
-DEV_DESCRIPTION["HM-CC-VD"] = "HM-CC-VD";
-DEV_PATHS["HM-CC-VD"] = new Object();
-DEV_PATHS["HM-CC-VD"]["50"] = "/config/img/devices/50/43_hm-cc-vd_thumb.png";
-DEV_PATHS["HM-CC-VD"]["250"] = "/config/img/devices/250/43_hm-cc-vd.png";
-DEV_HIGHLIGHT["HM-CC-VD"] = new Object();
-DEV_LIST.push('HM-Sec-Key-O');
-DEV_DESCRIPTION["HM-Sec-Key-O"] = "HM-Sec-Key-O";
-DEV_PATHS["HM-Sec-Key-O"] = new Object();
-DEV_PATHS["HM-Sec-Key-O"]["50"] = "/config/img/devices/50/14_hm-sec-key_thumb.png";
-DEV_PATHS["HM-Sec-Key-O"]["250"] = "/config/img/devices/250/14_hm-sec-key.png";
-DEV_HIGHLIGHT["HM-Sec-Key-O"] = new Object();
-DEV_LIST.push('HM-Sec-SD');
-DEV_DESCRIPTION["HM-Sec-SD"] = "HM-Sec-SD";
-DEV_PATHS["HM-Sec-SD"] = new Object();
-DEV_PATHS["HM-Sec-SD"]["50"] = "/config/img/devices/50/51_hm-sec-sd_thumb.png";
-DEV_PATHS["HM-Sec-SD"]["250"] = "/config/img/devices/250/51_hm-sec-sd.png";
-DEV_HIGHLIGHT["HM-Sec-SD"] = new Object();
-DEV_LIST.push('ZEL STG RM FSA');
-DEV_DESCRIPTION["ZEL STG RM FSA"] = "ZEL_STG_RM_FSA";
-DEV_PATHS["ZEL STG RM FSA"] = new Object();
-DEV_PATHS["ZEL STG RM FSA"]["50"] = "/config/img/devices/50/43_hm-cc-vd_thumb.png";
-DEV_PATHS["ZEL STG RM FSA"]["250"] = "/config/img/devices/250/43_hm-cc-vd.png";
-DEV_HIGHLIGHT["ZEL STG RM FSA"] = new Object();
-DEV_LIST.push('HMIP-WTH-2');
-DEV_DESCRIPTION["HMIP-WTH-2"] = "WTH";
-DEV_PATHS["HMIP-WTH-2"] = new Object();
-DEV_PATHS["HMIP-WTH-2"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
-DEV_PATHS["HMIP-WTH-2"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
-DEV_HIGHLIGHT["HMIP-WTH-2"] = new Object();
-DEV_LIST.push('HM-LC-Dim1T-FM-2');
-DEV_DESCRIPTION["HM-LC-Dim1T-FM-2"] = "HM-LC-Dim1T-FM";
-DEV_PATHS["HM-LC-Dim1T-FM-2"] = new Object();
-DEV_PATHS["HM-LC-Dim1T-FM-2"]["50"] = "/config/img/devices/50/65_hm-lc-dim1t-fm_thumb.png";
-DEV_PATHS["HM-LC-Dim1T-FM-2"]["250"] = "/config/img/devices/250/65_hm-lc-dim1t-fm.png";
-DEV_HIGHLIGHT["HM-LC-Dim1T-FM-2"] = new Object();
-DEV_LIST.push('DEVICE');
-DEV_DESCRIPTION["DEVICE"] = "DEVICE";
-DEV_PATHS["DEVICE"] = new Object();
-DEV_PATHS["DEVICE"]["50"] = "/config/img/devices/50/unknown_device_thumb.png";
-DEV_PATHS["DEVICE"]["250"] = "/config/img/devices/250/unknown_device.png";
-DEV_HIGHLIGHT["DEVICE"] = new Object();
-DEV_HIGHLIGHT["DEVICE"]["Icon"] = [3, 0.092, 0.6, 'Icon_folgt', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["DEVICE"]["1_channel"] = [3, 0.44, 0.232, '1', 0.18, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["DEVICE"]["1"] = [5, '1_channel', 'Icon'];
-DEV_HIGHLIGHT["DEVICE"]["2_channel"] = [3, 0.44, 0.232, '2', 0.18, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["DEVICE"]["2"] = [5, '2_channel', 'Icon'];
-DEV_LIST.push('HM-LC-Dim2T-SM-2');
-DEV_DESCRIPTION["HM-LC-Dim2T-SM-2"] = "HM-LC-Dim2T-SM";
-DEV_PATHS["HM-LC-Dim2T-SM-2"] = new Object();
-DEV_PATHS["HM-LC-Dim2T-SM-2"]["50"] = "/config/img/devices/50/64_hm-lc-dim2T-sm_thumb.png";
-DEV_PATHS["HM-LC-Dim2T-SM-2"]["250"] = "/config/img/devices/250/64_hm-lc-dim2T-sm.png";
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Part1"] = [6, 0.539, 0.864, 0.539, 0.948, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Part2"] = [6, 0.539, 0.948, 0.49, 0.884, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Part3"] = [6, 0.539, 0.948, 0.588, 0.884, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2_Arrow"] = [7, '1_Arrow', 0.179, 0];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Key"] = [4, 0.25, 0.26, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2_Key"] = [4, 0.328, 0.26, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
-DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
-DEV_LIST.push('HM-LC-Dim2L-SM');
-DEV_DESCRIPTION["HM-LC-Dim2L-SM"] = "HM-LC-Dim2L-SM";
-DEV_PATHS["HM-LC-Dim2L-SM"] = new Object();
-DEV_PATHS["HM-LC-Dim2L-SM"]["50"] = "/config/img/devices/50/45_hm-lc-dim2l-sm_thumb.png";
-DEV_PATHS["HM-LC-Dim2L-SM"]["250"] = "/config/img/devices/250/45_hm-lc-dim2l-sm.png";
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"] = new Object();
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Part1"] = [6, 0.530, 0.896, 0.530, 0.98, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Part2"] = [6, 0.530, 0.98, 0.49, 0.916, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Part3"] = [6, 0.530, 0.98, 0.574, 0.916, 0.012];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Arrow"] = [5, '1_Part1', '1_Part2', '1_Part3'];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2_Arrow"] = [7, '1_Arrow', 0.168, 0];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1"] = [5, '1_Arrow', '1_Key'];
-DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2"] = [5, '2_Arrow', '2_Key'];
-DEV_LIST.push('HM-CC-SCD');
-DEV_DESCRIPTION["HM-CC-SCD"] = "HM-CC-SCD";
-DEV_PATHS["HM-CC-SCD"] = new Object();
-DEV_PATHS["HM-CC-SCD"]["50"] = "/config/img/devices/50/57_hm-cc-scd_thumb.png";
-DEV_PATHS["HM-CC-SCD"]["250"] = "/config/img/devices/250/57_hm-cc-scd.png";
-DEV_HIGHLIGHT["HM-CC-SCD"] = new Object();
-DEV_LIST.push('HM-LC-Sw1-Pl-DN-R5');
-DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R5"] = "HM-LC-Sw1-Pl-DN-R5";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"] = new Object();
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R5_thumb.png";
-DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R5.png";
-DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R5"] = new Object();
+DEV_LIST.push('263 157');
+DEV_DESCRIPTION["263 157"] = "263_157";
+DEV_PATHS["263 157"] = new Object();
+DEV_PATHS["263 157"]["50"] = "/config/img/devices/50/13_hm-ws550sth-i_thumb.png";
+DEV_PATHS["263 157"]["250"] = "/config/img/devices/250/13_hm-ws550sth-i.png";
+DEV_HIGHLIGHT["263 157"] = new Object();
+DEV_LIST.push('HMW-LC-Bl1-DR-2');
+DEV_DESCRIPTION["HMW-LC-Bl1-DR-2"] = "HMW-LC-Bl1-DR";
+DEV_PATHS["HMW-LC-Bl1-DR-2"] = new Object();
+DEV_PATHS["HMW-LC-Bl1-DR-2"]["50"] = "/config/img/devices/50/27_hmw-lc-bl1-dr_thumb.png";
+DEV_PATHS["HMW-LC-Bl1-DR-2"]["250"] = "/config/img/devices/250/27_hmw-lc-bl1-dr.png";
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"] = new Object();
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["1"] = [2, 0.452, 0.772, 0.044, 0.06];
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["2"] = [2, 0.5, 0.772, 0.048, 0.06];
+DEV_HIGHLIGHT["HMW-LC-Bl1-DR-2"]["3"] = [2, 0.452, 0.388, 0.096, 0.06];
+DEV_LIST.push('ALPHA-IP-RBG');
+DEV_DESCRIPTION["ALPHA-IP-RBG"] = "ALPHA-IP-RBG";
+DEV_PATHS["ALPHA-IP-RBG"] = new Object();
+DEV_PATHS["ALPHA-IP-RBG"]["50"] = "/config/img/devices/50/140_alpha-ip-rgb_thumb.png";
+DEV_PATHS["ALPHA-IP-RBG"]["250"] = "/config/img/devices/250/140_alpha-ip-rgb.png";
+DEV_HIGHLIGHT["ALPHA-IP-RBG"] = new Object();
+DEV_LIST.push('HM-LC-Sw2-FM-2');
+DEV_DESCRIPTION["HM-LC-Sw2-FM-2"] = "HM-LC-Sw2-FM";
+DEV_PATHS["HM-LC-Sw2-FM-2"] = new Object();
+DEV_PATHS["HM-LC-Sw2-FM-2"]["50"] = "/config/img/devices/50/5_hm-lc-sw2-fm_thumb.png";
+DEV_PATHS["HM-LC-Sw2-FM-2"]["250"] = "/config/img/devices/250/5_hm-lc-sw2-fm.png";
+DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["1_AUS"] = [2, 0.34, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["1_EIN"] = [2, 0.6, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["2_AUS"] = [2, 0.256, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["2_EIN"] = [2, 0.508, 0.66, 0.068, 0.148];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["1"] = [5, '1_AUS', '1_EIN'];
+DEV_HIGHLIGHT["HM-LC-Sw2-FM-2"]["2"] = [5, '2_AUS', '2_EIN'];
+DEV_LIST.push('HM-LC-Dim1T-FM-644');
+DEV_DESCRIPTION["HM-LC-Dim1T-FM-644"] = "HM-LC-Dim1T-FM";
+DEV_PATHS["HM-LC-Dim1T-FM-644"] = new Object();
+DEV_PATHS["HM-LC-Dim1T-FM-644"]["50"] = "/config/img/devices/50/65_hm-lc-dim1t-fm_thumb.png";
+DEV_PATHS["HM-LC-Dim1T-FM-644"]["250"] = "/config/img/devices/250/65_hm-lc-dim1t-fm.png";
+DEV_HIGHLIGHT["HM-LC-Dim1T-FM-644"] = new Object();
+DEV_LIST.push('ZEL STG RM FZS');
+DEV_DESCRIPTION["ZEL STG RM FZS"] = "ZEL_STG_RM_FZS";
+DEV_PATHS["ZEL STG RM FZS"] = new Object();
+DEV_PATHS["ZEL STG RM FZS"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
+DEV_PATHS["ZEL STG RM FZS"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
+DEV_HIGHLIGHT["ZEL STG RM FZS"] = new Object();
+DEV_HIGHLIGHT["ZEL STG RM FZS"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
+DEV_HIGHLIGHT["ZEL STG RM FZS"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
+DEV_HIGHLIGHT["ZEL STG RM FZS"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('ZEL STG RM HS 4');
+DEV_DESCRIPTION["ZEL STG RM HS 4"] = "ZEL_STG_RM_HS_4";
+DEV_PATHS["ZEL STG RM HS 4"] = new Object();
+DEV_PATHS["ZEL STG RM HS 4"]["50"] = "/config/img/devices/50/18_hm-rc-4_thumb.png";
+DEV_PATHS["ZEL STG RM HS 4"]["250"] = "/config/img/devices/250/18_hm-rc-4.png";
+DEV_HIGHLIGHT["ZEL STG RM HS 4"] = new Object();
+DEV_HIGHLIGHT["ZEL STG RM HS 4"]["1"] = [4, 0.268, 0.236, 0.16, 0.164];
+DEV_HIGHLIGHT["ZEL STG RM HS 4"]["2"] = [4, 0.476, 0.236, 0.16, 0.164];
+DEV_HIGHLIGHT["ZEL STG RM HS 4"]["3"] = [4, 0.268, 0.48, 0.16, 0.164];
+DEV_HIGHLIGHT["ZEL STG RM HS 4"]["4"] = [4, 0.476, 0.48, 0.16, 0.164];
+DEV_HIGHLIGHT["ZEL STG RM HS 4"]["1+2"] = [5, '1', '2'];
+DEV_HIGHLIGHT["ZEL STG RM HS 4"]["3+4"] = [5, '3', '4'];
+DEV_LIST.push('HM-ES-PMSw1-DR');
+DEV_DESCRIPTION["HM-ES-PMSw1-DR"] = "HM-ES-PMSw1-DR";
+DEV_PATHS["HM-ES-PMSw1-DR"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-DR"]["50"] = "/config/img/devices/50/110_hm-es-pmsw1-dr_thump.png";
+DEV_PATHS["HM-ES-PMSw1-DR"]["250"] = "/config/img/devices/250/110_hm-es-pmsw1-dr.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-DR"] = new Object();
+DEV_LIST.push('HM-ES-PMSw1-SM');
+DEV_DESCRIPTION["HM-ES-PMSw1-SM"] = "HM-ES-PMSw1-SM";
+DEV_PATHS["HM-ES-PMSw1-SM"] = new Object();
+DEV_PATHS["HM-ES-PMSw1-SM"]["50"] = "/config/img/devices/50/115_hm-es-pmsw1-sm_thumb.png";
+DEV_PATHS["HM-ES-PMSw1-SM"]["250"] = "/config/img/devices/250/115_hm-es-pmsw1-sm.png";
+DEV_HIGHLIGHT["HM-ES-PMSw1-SM"] = new Object();
+DEV_LIST.push('HM-RC-Key3');
+DEV_DESCRIPTION["HM-RC-Key3"] = "HM-RC-Key3";
+DEV_PATHS["HM-RC-Key3"] = new Object();
+DEV_PATHS["HM-RC-Key3"]["50"] = "/config/img/devices/50/23_hm-rc-key3-b_thumb.png";
+DEV_PATHS["HM-RC-Key3"]["250"] = "/config/img/devices/250/23_hm-rc-key3-b.png";
+DEV_HIGHLIGHT["HM-RC-Key3"] = new Object();
+DEV_HIGHLIGHT["HM-RC-Key3"]["1"] = [4, 0.252, 0.2, 0.16, 0.18];
+DEV_HIGHLIGHT["HM-RC-Key3"]["2"] = [4, 0.492, 0.2, 0.16, 0.18];
+DEV_HIGHLIGHT["HM-RC-Key3"]["3"] = [4, 0.34, 0.484, 0.228, 0.252];
+DEV_HIGHLIGHT["HM-RC-Key3"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('ZEL STG RM FST UP4');
+DEV_DESCRIPTION["ZEL STG RM FST UP4"] = "ZEL_STG_RM_FST_UP4";
+DEV_PATHS["ZEL STG RM FST UP4"] = new Object();
+DEV_PATHS["ZEL STG RM FST UP4"]["50"] = "/config/img/devices/50/38_hm-pbi-4-fm_thumb.png";
+DEV_PATHS["ZEL STG RM FST UP4"]["250"] = "/config/img/devices/250/38_hm-pbi-4-fm.png";
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"] = new Object();
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["1_Key"] = [3, 0.18, 0.216, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["1_Kreis"] = [4, 0.265, 0.500, 0.028, 0.028];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["1"] = [5, '1_Key', '1_Kreis'];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["2_Key"] = [3, 0.18, 0.216, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["2_Kreis"] = [4, 0.287, 0.465, 0.028, 0.028];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["2"] = [5, '2_Key', '2_Kreis'];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["3_Key"] = [3, 0.18, 0.216, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["3_Kreis"] = [4, 0.309, 0.430, 0.028, 0.028];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["3"] = [5, '3_Key', '3_Kreis'];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["4_Key"] = [3, 0.18, 0.216, '4', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["4_Kreis"] = [4, 0.331, 0.395, 0.028, 0.028];
+DEV_HIGHLIGHT["ZEL STG RM FST UP4"]["4"] = [5, '4_Key', '4_Kreis'];
+DEV_LIST.push('ZEL STG RM DWT 10');
+DEV_DESCRIPTION["ZEL STG RM DWT 10"] = "ZEL_STG_RM_DWT_10";
+DEV_PATHS["ZEL STG RM DWT 10"] = new Object();
+DEV_PATHS["ZEL STG RM DWT 10"]["50"] = "/config/img/devices/50/70_hm-pb-4dis-wm_thumb.png";
+DEV_PATHS["ZEL STG RM DWT 10"]["250"] = "/config/img/devices/250/70_hm-pb-4dis-wm.png";
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"] = new Object();
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["2"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["1"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["4"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["3"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["6"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["5"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["8"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["7"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["10"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["9"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["12"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["11"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["14"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["13"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["16"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["15"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
+DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_LIST.push('ALPHA-IP-RBGa');
+DEV_DESCRIPTION["ALPHA-IP-RBGa"] = "ALPHA-IP-RBGa";
+DEV_PATHS["ALPHA-IP-RBGa"] = new Object();
+DEV_PATHS["ALPHA-IP-RBGa"]["50"] = "/config/img/devices/50/141_alpha-ip-rgba_thumb.png";
+DEV_PATHS["ALPHA-IP-RBGa"]["250"] = "/config/img/devices/250/141_alpha-ip-rgba.png";
+DEV_HIGHLIGHT["ALPHA-IP-RBGa"] = new Object();
+DEV_LIST.push('HM-RC-Dis-H-x-EU');
+DEV_DESCRIPTION["HM-RC-Dis-H-x-EU"] = "HM-RC-Dis-H-x-EU";
+DEV_PATHS["HM-RC-Dis-H-x-EU"] = new Object();
+DEV_PATHS["HM-RC-Dis-H-x-EU"]["50"] = "/config/img/devices/50/108_hm-rc-dis-h-x-eu_thump.png";
+DEV_PATHS["HM-RC-Dis-H-x-EU"]["250"] = "/config/img/devices/250/108_hm-rc-dis-h-x-eu.png";
+DEV_HIGHLIGHT["HM-RC-Dis-H-x-EU"] = new Object();
+DEV_LIST.push('HM-CC-RT-DN');
+DEV_DESCRIPTION["HM-CC-RT-DN"] = "HM-CC-RT-DN";
+DEV_PATHS["HM-CC-RT-DN"] = new Object();
+DEV_PATHS["HM-CC-RT-DN"]["50"] = "/config/img/devices/50/83_hm-cc-rt-dn_thumb.png";
+DEV_PATHS["HM-CC-RT-DN"]["250"] = "/config/img/devices/250/83_hm-cc-rt-dn.png";
+DEV_HIGHLIGHT["HM-CC-RT-DN"] = new Object();
+DEV_LIST.push('VIR-LG-RGB');
+DEV_DESCRIPTION["VIR-LG-RGB"] = "VIR-LG-RGB";
+DEV_PATHS["VIR-LG-RGB"] = new Object();
+DEV_PATHS["VIR-LG-RGB"]["50"] = "/config/img/devices/50/osram-lightify/hm-lightify-rgb.png";
+DEV_PATHS["VIR-LG-RGB"]["250"] = "/config/img/devices/250/osram-lightify/hm-lightify-rgb.png";
+DEV_HIGHLIGHT["VIR-LG-RGB"] = new Object();
+DEV_LIST.push('HM-PB-2-WM55-2');
+DEV_DESCRIPTION["HM-PB-2-WM55-2"] = "HM-PB-2-WM55";
+DEV_PATHS["HM-PB-2-WM55-2"] = new Object();
+DEV_PATHS["HM-PB-2-WM55-2"]["50"] = "/config/img/devices/50/75_hm-pb-2-wm55_thumb.png";
+DEV_PATHS["HM-PB-2-WM55-2"]["250"] = "/config/img/devices/250/75_hm-pb-2-wm55.png";
+DEV_HIGHLIGHT["HM-PB-2-WM55-2"] = new Object();
+DEV_HIGHLIGHT["HM-PB-2-WM55-2"]["2"] = [2, 0.204, 0.23, 0.546, 0.128];
+DEV_HIGHLIGHT["HM-PB-2-WM55-2"]["1"] = [2, 0.204, 0.65, 0.546, 0.128];
+DEV_LIST.push('HM-LC-Sw4-WM');
+DEV_DESCRIPTION["HM-LC-Sw4-WM"] = "HM-LC-Sw4-WM";
+DEV_PATHS["HM-LC-Sw4-WM"] = new Object();
+DEV_PATHS["HM-LC-Sw4-WM"]["50"] = "/config/img/devices/50/76_hm-lc-sw4-wm_thumb.png";
+DEV_PATHS["HM-LC-Sw4-WM"]["250"] = "/config/img/devices/250/76_hm-lc-sw4-wm.png";
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"] = new Object();
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel1"] = [2, 0.208, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel2"] = [2, 0.276, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel3"] = [2, 0.344, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Channel4"] = [2, 0.412, 0.766, 0.065, 0.060];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["1_val"] = [3, 0.372, 0.288, '1', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["2_val"] = [3, 0.372, 0.288, '2', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["3_val"] = [3, 0.372, 0.288, '3', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["4_val"] = [3, 0.372, 0.288, '4', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle1"] = [4, 0.534, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle2"] = [4, 0.583, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle3"] = [4, 0.637, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["Circle4"] = [4, 0.693, 0.762, 0.044, 0.044];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
+DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
+DEV_LIST.push('HMW-Sec-TR-FM');
+DEV_DESCRIPTION["HMW-Sec-TR-FM"] = "HMW-Sec-TR-FM";
+DEV_PATHS["HMW-Sec-TR-FM"] = new Object();
+DEV_PATHS["HMW-Sec-TR-FM"]["50"] = "/config/img/devices/50/33_hmw-sec-tr-fm_thumb.png";
+DEV_PATHS["HMW-Sec-TR-FM"]["250"] = "/config/img/devices/250/33_hmw-sec-tr-fm.png";
+DEV_HIGHLIGHT["HMW-Sec-TR-FM"] = new Object();
 //======================================================================
 //Defines
 //======================================================================
@@ -2919,93 +3078,128 @@ DEV_getImageHighlight = function(type, form)
 	return form;
 };
 elvST = new Array();
+elvST['ACOUSTIC_ALARM_SELECTION=DELAYED_EXTERNALLY_ARMED'] = '${stringTableAlarmDelayedExternallyArmed}';
+elvST['ACOUSTIC_ALARM_SELECTION=DELAYED_INTERNALLY_ARMED'] = '${stringTableAlarmDelayedInternallyArmed}';
+elvST['ACOUSTIC_ALARM_SELECTION=DISABLE_ACOUSTIC_SIGNAL'] = '${stringTableAlarmDisableAcousticSignal}';
+elvST['ACOUSTIC_ALARM_SELECTION=DISARMED'] = '${stringTableAlarmDisarmed}';
+elvST['ACOUSTIC_ALARM_SELECTION=ERROR'] = '${stringTableAlarmError}';
+elvST['ACOUSTIC_ALARM_SELECTION=EVENT'] = '${stringTableAlarmEvent}';
+elvST['ACOUSTIC_ALARM_SELECTION=EXTERNALLY_ARMED'] = '${stringTableAlarmExternallyArmed}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_HIGH'] = '${stringTableAlarmFrequencyAlternatingLowHigh}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_MID_HIGH'] = '${stringTableAlarmFrequencyAlternatingLowMidHigh}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_FALLING'] = '${stringTableAlarmFrequencyFalling}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_LONGOFF'] = '${stringTableAlarmFrequencyHighOnLongOff}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_OFF'] = '${stringTableAlarmFrequencyHighOnOff}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_LONGOFF_HIGHON_LONGOFF'] = '${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_OFF_HIGHON_OFF'] = '${stringTableAlarmFrequencyLowOnOffHighonOff}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING'] = '${stringTableAlarmFrequencyRising}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING_AND_FALLING'] = '${stringTableAlarmFrequencyRisingAndFalling}';
+elvST['ACOUSTIC_ALARM_SELECTION=INTERNALLY_ARMED'] = '${stringTableAlarmInternallyArmed}';
+elvST['ACOUSTIC_ALARM_SELECTION=LOW_BATTERY'] = '${stringTableAlarmLowBattery}';
 elvST['ACTOR_SECURITY'] = '${stringTableActorSecurityTitle}';
-elvST['ACTOR_SECURITY|SECURE_STATE=TRUE'] = '${stringTableActorSecuritySecureStateTrue}';
-elvST['ACTOR_SECURITY|SECURE_STATE=FALSE'] = '${stringTableActorSecuritySecureStateFalse}';
 elvST['ACTOR_SECURITY|ON_TIME'] = '${stringTableActorSecurityOnTime}';
+elvST['ACTOR_SECURITY|SECURE_STATE=FALSE'] = '${stringTableActorSecuritySecureStateFalse}';
+elvST['ACTOR_SECURITY|SECURE_STATE=TRUE'] = '${stringTableActorSecuritySecureStateTrue}';
 elvST['ACTOR_WINDOW'] = '${stringTableActorWindowTitle}';
 elvST['ACTOR_WINDOW|ERROR=NO_ERROR'] = '${stringTableActorWindowNoError}';
-elvST['ACTOR_WINDOW|ERR_WINDOW_NOT_FOUND=TRUE'] = '${stringTableActorWindowErrorNotFound}';
 elvST['ACTOR_WINDOW|ERR_DETECT_EIA485_SERVICE=TRUE'] = '${stringTableActorWindowErrorETA485}';
-elvST['ACTOR_WINDOW|ERR_TTM_INTERNAL=TRUE'] = '${stringTableActorWindowErrorTipTronicModul}';
 elvST['ACTOR_WINDOW|ERR_TTCU_INTERNAL_TEST=TRUE'] = '${stringTableActorWindowErrorWindowControlDevice}';
-elvST['ACTOR_WINDOW|ERR_TTM_OVERVOLT=OVERVOLT'] = '${stringTableActorWindowErrorVoltageOver}';
-elvST['ACTOR_WINDOW|ERR_TTM_OVERVOLT=NO_ERROR'] = '${stringTableActorWindowErrorVoltageOverNoError}';
-elvST['ACTOR_WINDOW|STICKY_ERR_TTM_OVERVOLT=WAS_OVERVOLT'] = '${stringTableActorWindowErrorStickyWasVoltageOver}';
-elvST['ACTOR_WINDOW|STICKY_ERR_TTM_OVERVOLT=OVERVOLT'] = '${stringTableActorWindowErrorVoltageOver}';
-elvST['ACTOR_WINDOW|ERR_TTM_UNDERVOLT=UNDERVOLT'] = '${stringTableActorWindowErrorVoltageUnder}';
-elvST['ACTOR_WINDOW|ERR_TTM_UNDERVOLT=NO_ERROR'] = '${stringTableActorWindowErrorVoltageUnderNoError}';
-elvST['ACTOR_WINDOW|STICKY_ERR_TTM_UNDERVOLT=WAS_UNDERVOLT'] = '${stringTableActorWindowErrorStickyWasVoltageUnder}';
-elvST['ACTOR_WINDOW|STICKY_ERR_TTM_UNDERVOLT=UNDERVOLT'] = '${stringTableActorWindowErrorVoltageUnder}';
 elvST['ACTOR_WINDOW|ERR_TTCU_LOCK_ROLLERS_SHORTED=TRUE'] = '${stringTableActorWindowErrorLockRoller}';
-elvST['ACTOR_WINDOW|ERR_TTCU_SENSOR_STRIP_SHORTED=TRUE'] = '${stringTableActorWindowErrorSensorStrip_0}';
-elvST['ACTOR_WINDOW|ERR_TTCU_SENSOR_STRIP_DISCONNECTED=TRUE'] = '${stringTableActorWindowErrorSensorStrip_1}';
-elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_NO_SPEED_SIGNAL=TRUE'] = '${stringTableActorWindowErrorNoSpeedSignal}';
-elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_SHORTED=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_0}';
-elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_BLOCKED=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_1}';
-elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_OVERCURRENT=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_2}';
-elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_CONTACT_PROBLEM=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_3}';
-elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_ASYNCHRON=TRUE'] = '${stringTableActorWindowErrorAsynchron}';
 elvST['ACTOR_WINDOW|ERR_TTCU_MAGNET_ERROR=TRUE'] = '${stringTableActorWindowErrorMagnet}';
 elvST['ACTOR_WINDOW|ERR_TTCU_POWER_ONTIME_EXCEEDED=TRUE'] = '${stringTableActorWindowErrorOntimeExceeded}';
+elvST['ACTOR_WINDOW|ERR_TTCU_SENSOR_STRIP_DISCONNECTED=TRUE'] = '${stringTableActorWindowErrorSensorStrip_1}';
+elvST['ACTOR_WINDOW|ERR_TTCU_SENSOR_STRIP_SHORTED=TRUE'] = '${stringTableActorWindowErrorSensorStrip_0}';
 elvST['ACTOR_WINDOW|ERR_TTCU_STOP_AFTER_10_CLOSING_TRIES=TRUE'] = '${stringTableActorWindowErrorCancel10}';
 elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_ALLOY_MOSFET=TRUE'] = '${stringTableActorWindowErrorMOSFET}';
-elvST['ACTOR_WINDOW|ERR_WIN_STAY_IN_INITIAL_OPERATION=TRUE'] = '${stringTableActorWindowErrorStayInInitial}';
+elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_ASYNCHRON=TRUE'] = '${stringTableActorWindowErrorAsynchron}';
+elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_BLOCKED=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_1}';
+elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_CONTACT_PROBLEM=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_3}';
+elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_NO_SPEED_SIGNAL=TRUE'] = '${stringTableActorWindowErrorNoSpeedSignal}';
+elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_OVERCURRENT=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_2}';
+elvST['ACTOR_WINDOW|ERR_TTCU_TURN_TILT_ACT_SHORTED=TRUE'] = '${stringTableActorWindowErrorTurnTiltAct_0}';
 elvST['ACTOR_WINDOW|ERR_TTCU_WRONG_VOLTAGE_POLARITY=TRUE'] = '${stringTableActorWindowErrorVoltageWrongPolarity}';
+elvST['ACTOR_WINDOW|ERR_TTM_INTERNAL=TRUE'] = '${stringTableActorWindowErrorTipTronicModul}';
+elvST['ACTOR_WINDOW|ERR_TTM_OVERVOLT=NO_ERROR'] = '${stringTableActorWindowErrorVoltageOverNoError}';
+elvST['ACTOR_WINDOW|ERR_TTM_OVERVOLT=OVERVOLT'] = '${stringTableActorWindowErrorVoltageOver}';
+elvST['ACTOR_WINDOW|ERR_TTM_UNDERVOLT=NO_ERROR'] = '${stringTableActorWindowErrorVoltageUnderNoError}';
+elvST['ACTOR_WINDOW|ERR_TTM_UNDERVOLT=UNDERVOLT'] = '${stringTableActorWindowErrorVoltageUnder}';
+elvST['ACTOR_WINDOW|ERR_WINDOW_NOT_FOUND=TRUE'] = '${stringTableActorWindowErrorNotFound}';
+elvST['ACTOR_WINDOW|ERR_WIN_STAY_IN_INITIAL_OPERATION=TRUE'] = '${stringTableActorWindowErrorStayInInitial}';
 elvST['ACTOR_WINDOW|FREE_TO_USE=TRUE'] = '${stringTableActorWindowErrorFreeToUse}';
-elvST['ACTOR_WINDOW|HANDLE_LED_MODE=OFF'] = '${stringTableActorWindowLEDOff}';
 elvST['ACTOR_WINDOW|HANDLE_LED_MODE=DIMMED_ON'] = '${stringTableActorWindowLEDDimmed}';
 elvST['ACTOR_WINDOW|HANDLE_LED_MODE=FULL_ON'] = '${stringTableActorWindowLEDOn}';
-elvST['ACTOR_WINDOW|HANDLE_LOCK=TRUE'] = '${stringTableActorWindowHandleLockTrue}';
+elvST['ACTOR_WINDOW|HANDLE_LED_MODE=OFF'] = '${stringTableActorWindowLEDOff}';
 elvST['ACTOR_WINDOW|HANDLE_LOCK=FALSE'] = '${stringTableActorWindowHandleLockFalse}';
+elvST['ACTOR_WINDOW|HANDLE_LOCK=TRUE'] = '${stringTableActorWindowHandleLockTrue}';
 elvST['ACTOR_WINDOW|LEVEL'] = '${stringTableActorWindowLevel}';
 elvST['ACTOR_WINDOW|LEVEL=LOCKED'] = '${stringTableActorWindowLevelLocked}';
 elvST['ACTOR_WINDOW|ON_TIME'] = '${stringTableActorWindowOnTime}';
-elvST['ACTOR_WINDOW|RELEASE_TURN=TRUE'] = '${stringTableActorWindowReleaseTurnTrue}';
 elvST['ACTOR_WINDOW|RELEASE_TURN=FALSE'] = '${stringTableActorWindowReleaseTurnFalse}';
+elvST['ACTOR_WINDOW|RELEASE_TURN=TRUE'] = '${stringTableActorWindowReleaseTurnTrue}';
+elvST['ACTOR_WINDOW|SHEV_POS=ZULUFT_BLOCKED'] = '${stringTableActorWindowVentBlocked}';
 elvST['ACTOR_WINDOW|SHEV_POS=ZULUFT_DEACTIVATED'] = '${stringTableActorWindowVentDeactivated}';
 elvST['ACTOR_WINDOW|SHEV_POS=ZULUFT_UNBLOCKED'] = '${stringTableActorWindowVentUnblocked}';
-elvST['ACTOR_WINDOW|SHEV_POS=ZULUFT_BLOCKED'] = '${stringTableActorWindowVentBlocked}';
 elvST['ACTOR_WINDOW|STATUSINFO_MINDELAY'] = '${stringTableActorWindowStatusInfoMinDelay}';
 elvST['ACTOR_WINDOW|STATUSINFO_MINDELAY=NOT_USED'] = '${stringTableActorWindowStatusInfoNotUsed}';
 elvST['ACTOR_WINDOW|STATUSINFO_RANDOM'] = '${stringTableActorWindowStatusInfoRandom}';
+elvST['ACTOR_WINDOW|STICKY_ERR_TTM_OVERVOLT=OVERVOLT'] = '${stringTableActorWindowErrorVoltageOver}';
+elvST['ACTOR_WINDOW|STICKY_ERR_TTM_OVERVOLT=WAS_OVERVOLT'] = '${stringTableActorWindowErrorStickyWasVoltageOver}';
+elvST['ACTOR_WINDOW|STICKY_ERR_TTM_UNDERVOLT=UNDERVOLT'] = '${stringTableActorWindowErrorVoltageUnder}';
+elvST['ACTOR_WINDOW|STICKY_ERR_TTM_UNDERVOLT=WAS_UNDERVOLT'] = '${stringTableActorWindowErrorStickyWasVoltageUnder}';
 elvST['ACTOR_WINDOW|STOP'] = '${stringTableActorWindowStop}';
 elvST['ACTOR_WINDOW|WINTER_MODE'] = '${stringTableActorWindowWinterMode}';
 elvST['ACTOR_WINDOW|WINTER_MODE=NOT_USED'] = '${stringTableActorWindowWinterModeNotUsed}';
-elvST['ACTOR_WINDOW|WIN_RELEASE=TRUE'] = '${stringTableActorWindowReleaseTrue}';
 elvST['ACTOR_WINDOW|WIN_RELEASE=FALSE'] = '${stringTableActorWindowReleaseFalse}';
+elvST['ACTOR_WINDOW|WIN_RELEASE=TRUE'] = '${stringTableActorWindowReleaseTrue}';
 elvST['ACTOR_WINDOW|WIN_RELEASE_ACT'] = '${stringTableActorWindowReleaseAction}';
+elvST['ACTUAL_HUMIDITY'] = '${stringTableWeatherHumidity}';
+elvST['ACTUAL_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverActualTemp}';
 elvST['AKKU|LEVEL'] = '${stringTableAccuLevel}';
 elvST['AKKU|STATUS=CHARGE'] = '${stringTableAccuCharging}';
 elvST['AKKU|STATUS=DISCHARGE'] = '${stringTableAccuDischarge}';
 elvST['AKKU|STATUS=STATE_UNKNOWN'] = '${stringTableAccuStateUnkown}';
 elvST['AKKU|STATUS=TRICKLE_CHARGE'] = '${stringTableAccuTrickleCharg}';
-elvST['ALARM_SWITCH_VIRTUAL_RECEIVER'] = '${stringTableSwitchSensorTitle}';
 elvST['ALARMACTUATOR'] = '${stringTableAlarmActuatorTitle}';
+elvST['ALARMACTUATOR|CYCLIC_INFO_MSG'] = '${stringTableAlarmActuatorCyclicInfoMsg}';
 elvST['ALARMACTUATOR|ERROR_BATTERY=BATTERY_DEFECT'] = '${stringTableBatteryDefect}';
 elvST['ALARMACTUATOR|ERROR_BATTERY=NO_ERROR'] = '${stringTableBatteryNotDefect}';
-elvST['ALARMACTUATOR|CYCLIC_INFO_MSG'] = '${stringTableAlarmActuatorCyclicInfoMsg}';
 elvST['ALARMACTUATOR|ON_TIME'] = '${stringTableAlarmActuatorOnTime}';
 elvST['ALARMACTUATOR|SABOTAGE_MSG'] = '${stringTableAlarmActuatorSabotageMsg}';
 elvST['ALARMACTUATOR|STATE=FALSE'] = '${stringTableAlarmActuatorStateFalse}';
 elvST['ALARMACTUATOR|STATE=TRUE'] = '${stringTableAlarmActuatorStateTrue}';
+elvST['ALARMTIME_MAX'] = '${stringTableAlarmTimeMax}';
+elvST['ALARM_SWITCH_VIRTUAL_RECEIVER'] = '${stringTableSwitchSensorTitle}';
+elvST['ALL_LEDS'] = '${stringTableAllLEDs}';
+elvST['ANALOG_INPUT'] = '${stringTableAnalog}';
+elvST['ANALOG_OUTPUT'] = '${stringTableAnalog}';
+elvST['ANALOG_OUTPUT_TRANSCEIVER'] = '${stringTableAnalogOutputTransceiverTitle}';
+elvST['ANALOG_OUTPUT_TRANSCEIVER|LEVEL'] = '${stringTableAnalogOutputTransceiverLevel}';
 elvST['ARMING'] = '${stringTableSirenArmingTitle}';
-elvST['ARMING|ACOUSTIC_MULTI_DELAY_ARM'] = '${stringTableAcousticMultiDelayArm}';
 elvST['ARMING|ACOUSTIC_ALLSENS_ARM'] = '${stringTableAcousticAllSensArm}';
 elvST['ARMING|ACOUSTIC_ALLSENS_DELAY_ARM'] = '${stringTableAcousticAllsensDelayArm}';
+elvST['ARMING|ACOUSTIC_DISARM'] = '${stringTableAcousticDisarm}';
 elvST['ARMING|ACOUSTIC_EXTSENS_ARM'] = '${stringTableAcousticExtsensArm}';
 elvST['ARMING|ACOUSTIC_EXTSENS_DELAY_ARM'] = '${stringTableAcousticExtsensDelayArm}';
-elvST['ARMING|ACOUSTIC_DISARM'] = '${stringTableAcousticDisarm}';
-elvST['ARMING|OPTIC_MULTI_DELAY_ARM'] = '${stringTableOpticMultiDelayArm}';
+elvST['ARMING|ACOUSTIC_MULTI_DELAY_ARM'] = '${stringTableAcousticMultiDelayArm}';
 elvST['ARMING|OPTIC_ALLSENS_ARM'] = '${stringTableOpticAllSensArm}';
 elvST['ARMING|OPTIC_ALLSENS_DELAY_ARM'] = '${stringTableOpticAllSensDelayArm}';
+elvST['ARMING|OPTIC_DISARM'] = '${stringTableOpticDisarm}';
 elvST['ARMING|OPTIC_EXTSENS_ARM'] = '${stringTableOpticExtsensArm}';
 elvST['ARMING|OPTIC_EXTSENS_DELAY_ARM'] = '${stringTableOpticExtsensDelayArm}';
-elvST['ARMING|OPTIC_DISARM'] = '${stringTableOpticDisarm}';
+elvST['ARMING|OPTIC_MULTI_DELAY_ARM'] = '${stringTableOpticMultiDelayArm}';
+elvST['ARMSTATE=ALARM_BLOCKED'] = '${stringTableAlarmBlocked}';
+elvST['ARMSTATE=ALLSENS_ARMED'] = '${stringTableAlarmExtSensArmed}';
 elvST['ARMSTATE=DISARMED'] = '${stringTableAlarmDisarmed}';
 elvST['ARMSTATE=EXTSENS_ARMED'] = '${stringTableAlarmAllSensArmed}';
-elvST['ARMSTATE=ALLSENS_ARMED'] = '${stringTableAlarmExtSensArmed}';
-elvST['ARMSTATE=ALARM_BLOCKED'] = '${stringTableAlarmBlocked}';
+elvST['ARR_TIMEOUT'] = '${stringTableArrTimeout}';
+elvST['AUTO_MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
+elvST['BACKLIGHT_AT_CHARGE'] = '${stringTableBackLightAtCharge}';
+elvST['BACKLIGHT_AT_KEYSTROKE'] = '${stringTableBackLightAtKeystroke}';
+elvST['BACKLIGHT_AT_MOTION'] = '${stringTableBackLightAtMotion}';
+elvST['BACKLIGHT_ON_TIME'] = '${stringTableBackLightOnTime}';
+elvST['BATTERY_POWERED'] = '${stringTableBatteryPowered}';
+elvST['BATTERY_STATE'] = '${stringTableClimateControlRTTransceiverBatteryState}';
+elvST['BAT_DEFECT_LIMIT'] = '${stringTableBatDefectLimit}';
 elvST['BLIND'] = '${stringTableBlindTitle}';
 elvST['BLIND|CHANGE_OVER_DELAY'] = '${stringTableBlindChangeOverDelay}';
 elvST['BLIND|LEVEL'] = '${stringTableBlindLevel}';
@@ -3013,31 +3207,44 @@ elvST['BLIND|REFERENCE_RUNNING_TIME_BOTTOM_TOP'] = '${stringTableBlindRunnintTim
 elvST['BLIND|REFERENCE_RUNNING_TIME_TOP_BOTTOM'] = '${stringTableBlindRunningTimeTopBottom}';
 elvST['BLIND|REFERENCE_RUN_COUNTER'] = '${stringTableBlindRefRunCounter}';
 elvST['BLIND|STOP'] = '${stringTableBlindStop}';
+elvST['BOOST_MODE'] = '${stringTableClimateControlRTTransceiverBoostMode}';
+elvST['BOOST_MODE=FALSE'] = '${stringTableBoostModeFalse}';
+elvST['BOOST_MODE=TRUE'] = '${stringTableBoostModeTrue}';
+elvST['BOOST_STATE'] = '${stringTableBoostState}';
+elvST['BRIGHTNESS'] = '${stringTableBrightness}';
+elvST['BRIGHTNESS_FILTER'] = '${stringTableBrightnessFilter}';
 elvST['BURST_RX'] = '${stringTableBurstRX}';
 elvST['BUTTON_LOCK'] = '${stringTableButtonLock}';
 elvST['BUTTON_RESPONSE_WITHOUT_BACKLIGHT'] = '${stringTableButtonResponseWithoutBacklight}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR'] = '${stringTableCapacitiveFillingSensorTitle}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_DESIGN'] = '${stringTableCapacitiveFillingSensorCaseDesign}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_DESIGN=HORIZONTAL_BARREL'] = '${stringTableCapacitiveFillingSensorCaseDesignHor}';
-elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_DESIGN=VERTICAL_BARREL'] = '${stringTableCapacitiveFillingSensorCaseDesignVer}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_DESIGN=RECTANGLE'] = '${stringTableCapacitiveFillingSensorCaseDesginRect}';
+elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_DESIGN=VERTICAL_BARREL'] = '${stringTableCapacitiveFillingSensorCaseDesignVer}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_HIGH'] = '${stringTableCapacitiveFillingSensorCaseHeight}';
-elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_WIDTH'] = '${stringTableCapacitiveFillingSensorCaseWidth}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_LENGTH'] = '${stringTableCapacitiveFillingSensorCaseLength}';
-elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CONTROLTEXT_FILLINGLEVEL'] = '${stringTableCapacitiveFillingSensorTextFillingLevel}';
+elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CASE_WIDTH'] = '${stringTableCapacitiveFillingSensorCaseWidth}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CONTROLTEXT_CALC_FILLINGLEVEL'] = '${stringTableCapacitiveFillingSensorTextCalcFillingLevel}';
-elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|FILL_LEVEL'] = '${stringTableCapacitiveFillingSensorFillingLevel100perc}';
-elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|FILL_LEVEL_UPPER_THRESHOLD'] = '${stringTableCapacitiveFillingSensorFillingLevelUpperThres}';
-elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|FILL_LEVEL_LOWER_THRESHOLD'] = '${stringTableCapacitiveFillingSensorFillingLevelLowerThres}';
+elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|CONTROLTEXT_FILLINGLEVEL'] = '${stringTableCapacitiveFillingSensorTextFillingLevel}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|FILLING_LEVEL'] = '${stringTableCapacitiveFillingSensorFillingLevel}';
+elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|FILL_LEVEL'] = '${stringTableCapacitiveFillingSensorFillingLevel100perc}';
+elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|FILL_LEVEL_LOWER_THRESHOLD'] = '${stringTableCapacitiveFillingSensorFillingLevelLowerThres}';
+elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|FILL_LEVEL_UPPER_THRESHOLD'] = '${stringTableCapacitiveFillingSensorFillingLevelUpperThres}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|MEA_LENGTH'] = '${stringTableCapacitiveFillingSensorMeaLength}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|USE_CUSTOM'] = '${stringTableCapacitiveFillingSensorCustomCal}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|WATER_LOWER_THRESHOLD_CH'] = '${stringTableCapacitiveFillingSensorWaterLowerThres}';
 elvST['CAPACITIVE_FILLING_LEVEL_SENSOR|WATER_UPPER_THRESHOLD_CH'] = '${stringTableCapacitiveFillingSensorWaterUpperThres}';
 elvST['CENTRAL_KEY|DBL_PRESS_TIME'] = '${stringTableCentralKeyDblPressTime}';
 elvST['CENTRAL_KEY|LONG_PRESS_TIME'] = '${stringTableCentralKeyLongPressTime}';
+elvST['CHANGE_OVER=FALSE'] = '${stringTableChangeOverFalse}';
+elvST['CHANGE_OVER=TRUE'] = '${stringTableChangeOverTrue}';
 elvST['CHARACTERISTIC_LINEAR'] = '${stringTableCharasteristicLinear}';
 elvST['CHARACTERISTIC_SQUARE'] = '${stringTableCharasteristicSquare}';
+elvST['CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER'] = '${stringTableClimateControlDehumidifierTitle}';
+elvST['CLIMATECONTROL_FLOOR_TRANSCEIVER'] = '${stringTableClimateControlFloorTransceiverTitle}';
+elvST['CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER'] = '${stringTableClimateControlFloorPumpTransceiverTitle}';
+elvST['CLIMATECONTROL_FLOOR_TRANSMITTER'] = '${stringTableClimateControlFloorTransmitterTitle}';
+elvST['CLIMATECONTROL_HEAT_DEMAND_TRANSMITER'] = '${stringTableClimateControlHeatDemandTransmitterTitle}';
 elvST['CLIMATECONTROL_RECEIVER'] = '${stringTableClimateControlReceiver}';
 elvST['CLIMATECONTROL_REGULATOR'] = '${stringTableClimateControlRegTitle}';
 elvST['CLIMATECONTROL_REGULATOR|ADJUSTING_COMMAND'] = '${stringTableClimateControlRegAdjCommand}';
@@ -3074,6 +3281,15 @@ elvST['CLIMATECONTROL_REGULATOR|TEMPERATUR_LOWERING_VALUE'] = '${stringTableClim
 elvST['CLIMATECONTROL_REGULATOR|TEMPERATUR_PARTY_VALUE'] = '${stringTableClimateControlRegPartyValue}';
 elvST['CLIMATECONTROL_REGULATOR|TEMPERATUR_SET_POINT'] = '${stringTableClimateControlRegSetPoint}';
 elvST['CLIMATECONTROL_REGULATOR|TEMPERATUR_WINDOW_OPEN_VALUE'] = '${stringTableClimateControlRegWindowOpenValue}';
+elvST['CLIMATECONTROL_RT_RECEIVER'] = '${stringTableClimateControlRTReceiver}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER'] = '${stringTableClimateControlRTTransceiver}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=ADJUSTING_RANGE_TOO_LARGE'] = '${stringTableClimateControlRTTransceiverAdjustingRangeTooLarge}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=ADJUSTING_RANGE_TOO_SMALL'] = '${stringTableClimateControlRTTransceiverAdjustingRangeTooSmall}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=COMMUNICATION_ERROR'] = '${stringTableClimateControlRTTransceiverCommunicationError}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=LOWBAT'] = '${stringTableClimateControlRTTransceiverLowBat}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=NO_FAULT'] = '${stringTableClimateControlRTTransceiverNoFault}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=VALVE_ERROR_POSITION'] = '${stringTableClimateControlRTTransceiverValveErrorPosition}';
+elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=VALVE_TIGHT'] = '${stringTableClimateControlRTTransceiverValveTight}';
 elvST['CLIMATECONTROL_VENT_DRIVE'] = '${stringTableClimateControlVentDriveTitle}';
 elvST['CLIMATECONTROL_VENT_DRIVE|ERROR=ADJUSTING_RANGE_TO_SMALL'] = '${stringTableClimateControlVentDriveErrorAdjRangeToSmall}';
 elvST['CLIMATECONTROL_VENT_DRIVE|ERROR=LOWBAT'] = '${stringTableClimateControlVentDriveErrorLowBat}';
@@ -3082,33 +3298,33 @@ elvST['CLIMATECONTROL_VENT_DRIVE|ERROR=VALVE_DRIVE_LOOSE'] = '${stringTableClima
 elvST['CLIMATECONTROL_VENT_DRIVE|VALVE_ERROR_POSITION'] = '${stringTableClimateControlVentDriveValveErrorPos}';
 elvST['CLIMATECONTROL_VENT_DRIVE|VALVE_OFFSET_VALUE'] = '${stringTableClimateControlVentDriveValveOffsetVal}';
 elvST['CLIMATECONTROL_VENT_DRIVE|VALVE_STATE'] = '${stringTableClimateControlVentDriveValveState}';
-elvST['CLIMATECONTROL_RT_RECEIVER'] = '${stringTableClimateControlRTReceiver}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER'] = '${stringTableClimateControlRTTransceiver}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=NO_FAULT'] = '${stringTableClimateControlRTTransceiverNoFault}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=VALVE_TIGHT'] = '${stringTableClimateControlRTTransceiverValveTight}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=ADJUSTING_RANGE_TOO_LARGE'] = '${stringTableClimateControlRTTransceiverAdjustingRangeTooLarge}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=ADJUSTING_RANGE_TOO_SMALL'] = '${stringTableClimateControlRTTransceiverAdjustingRangeTooSmall}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=COMMUNICATION_ERROR'] = '${stringTableClimateControlRTTransceiverCommunicationError}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=LOWBAT'] = '${stringTableClimateControlRTTransceiverLowBat}';
-elvST['CLIMATECONTROL_RT_TRANSCEIVER|FAULT_REPORTING=VALVE_ERROR_POSITION'] = '${stringTableClimateControlRTTransceiverValveErrorPosition}';
+elvST['COMFORT_MODE'] = '${stringTableClimateControlRTTransceiverComfortMode}';
+elvST['COMMUNICATION_REPORTING'] = '${stringTableCommunicatingReporting}';
+elvST['COMMUNICATION_REPORTING=FALSE'] = '${stringTableCommunicatingReportingFalse}';
+elvST['COMMUNICATION_REPORTING=TRUE'] = '${stringTableCommunicatingReportingTrue}';
+elvST['COMPATIBILITY_MODE'] = '${stringTableCompatibilityMode}';
 elvST['CONDITION_CURRENT'] = '${stringTableConditionCurrentTitle}';
 elvST['CONDITION_FREQUENCY'] = '${stringTableConditionFrequencyTitle}';
 elvST['CONDITION_POWER'] = '${stringTableConditionPowerTitle}';
 elvST['CONDITION_VOLTAGE'] = '${stringTableConditionVoltageTitle}';
-elvST['DECISION_VALUE'] = '${stringTableConditionValue}';
 elvST['COND_TX_CYCLIC_ABOVE'] = '${stringTableCondTxCyclicAbove}';
 elvST['COND_TX_CYCLIC_BELOW'] = '${stringTableCondTxCyclicBelow}';
 elvST['COND_TX_DECISION_ABOVE'] = '${stringTableCondTxDecisionAbove}';
 elvST['COND_TX_DECISION_BELOW'] = '${stringTableCondTxDecisionBelow}';
 elvST['COND_TX_FALLING'] = '${stringTableCondTxFalling}';
 elvST['COND_TX_RISING'] = '${stringTableCondTxRising}';
-elvST['COND_TX_THRESHOLD_LO'] = '${stringTableCondThresholdLo}';
 elvST['COND_TX_THRESHOLD_HI'] = '${stringTableCondThresholdHi}';
 elvST['COND_TX_THRESHOLD_HI_POWER'] = '${stringTableCondThresholdHiPower}';
+elvST['COND_TX_THRESHOLD_LO'] = '${stringTableCondThresholdLo}';
 elvST['COND_TX_THRESHOLD_LO_POWER'] = '${stringTableCondThresholdLoPower}';
-elvST['COMPATIBILITY_MODE'] = '${stringTableCompatibilityMode}';
+elvST['CONFIG_PENDING=FALSE'] = '${stringTableConfigPendingFalse}';
+elvST['CONFIG_PENDING=TRUE'] = '${stringTableConfigPendingTrue}';
 elvST['CONF_BUTTON_TIME'] = '${stringTableConfButtonTime}';
 elvST['CONF_BUTTON_TIME=PERMANENT'] = '${stringTableConfButtonTimePermanent}';
+elvST['CONTROL_MODE=AUTO-MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
+elvST['CONTROL_MODE=BOOST-MODE'] = '${stringTableClimateControlRTTransceiverBoostMode}';
+elvST['CONTROL_MODE=MANU-MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
+elvST['CONTROL_MODE=PARTY-MODE'] = '${stringTableClimateControlRTTransceiverPartyMode}';
 elvST['CURRENTDETECTION_BEHAVIOR'] = '${stringTableCurrentDetectionBehavior}';
 elvST['CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_ACTIVE"'] = '${stringTableCurrentDetectionBehaviorActive}';
 elvST['CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_1"'] = '${stringTableCurrentDetectionBehaviorOutput1}';
@@ -3118,21 +3334,28 @@ elvST['CYCLIC_INFO_MSG_DIS'] = '${stringTableCyclicInfoMsgDis}';
 elvST['CYCLIC_INFO_MSG_DIS_UNCHANGED'] = '${stringTableCyclicInfoMsgDisUnChanged}';
 elvST['CYCLIC_INFO_MSG_OVERDUE_THRESHOLD'] = '${stringTableCyclicInfoMsgOverdueThreshold}';
 elvST['CYCLIC_INFO_MSG_PAUSE'] = '${stringTableCyclicInfoMsgPause}';
+elvST['DATE_TIME_UNKNOWN=FALSE'] = '${stringTableDateTimeUnknownFalse}';
+elvST['DATE_TIME_UNKNOWN=TRUE'] = '${stringTableDateTimeUnknownTrue}';
+elvST['DAYLIGHT_SAVINGS_TIME'] = '${stringTableDST}';
 elvST['DDC|STATE'] = '${stringTableDDCState}';
-elvST['DEV_RPT_CNT_MAX'] = '${stringTableDevRptCntMax}';
+elvST['DECISION_VALUE'] = '${stringTableConditionValue}';
+elvST['DEVICE_IN_BOOTLOADER'] = '${stringTableDeviceInBootloader}';
 elvST['DEVICE_LED_MODE'] = '${stringTableDeviceLEDMode}';
 elvST['DEVICE_LED_MODE=OFF'] = '${stringTableDeviceLEDModeOff}';
 elvST['DEVICE_LED_MODE=ON'] = '${stringTableDeviceLEDModeOn}';
+elvST['DEV_RPT_CNT_MAX'] = '${stringTableDevRptCntMax}';
+elvST['DEW_POINT_ALARM=FALSE'] = '${stringTableDewPointAlarmFalse}';
+elvST['DEW_POINT_ALARM=TRUE'] = '${stringTableDewPointAlarmTrue}';
 elvST['DIGITAL_ANALOG_INPUT|BEHAVIOUR'] = '${stringTableDigitalAnalogInputBehaviour}';
+elvST['DIGITAL_ANALOG_INPUT|CALIBRATION'] = '${stringTableDigitalAnalogInputCalibration}';
 elvST['DIGITAL_ANALOG_INPUT|STATE=FALSE'] = '${stringTableDigitalAnalogInputStateFalse}';
 elvST['DIGITAL_ANALOG_INPUT|STATE=TRUE'] = '${stringTableDigitalAnalogInputStateTrue}';
 elvST['DIGITAL_ANALOG_INPUT|VALUE'] = '${stringTableDigitalAnalogInputValue}';
-elvST['DIGITAL_ANALOG_INPUT|CALIBRATION'] = '${stringTableDigitalAnalogInputCalibration}';
 elvST['DIGITAL_ANALOG_OUTPUT|BEHAVIOUR'] = '${stringTableDigitalAnalogOutputBehaviour}';
 elvST['DIGITAL_ANALOG_OUTPUT|FREQUENCY'] = '${stringTableDigitalAnalogOutputFrequency}';
+elvST['DIGITAL_ANALOG_OUTPUT|PULSETIME'] = '${stringTableDigitalAnalogOutputPulseTime}';
 elvST['DIGITAL_ANALOG_OUTPUT|STATE=FALSE'] = '${stringTableDigitalAnalogOutputStateFalse}';
 elvST['DIGITAL_ANALOG_OUTPUT|STATE=TRUE'] = '${stringTableDigitalAnalogOutputStateTrue}';
-elvST['DIGITAL_ANALOG_OUTPUT|PULSETIME'] = '${stringTableDigitalAnalogOutputPulseTime}';
 elvST['DIGITAL_INPUT'] = '${stringTableDigitalInput}';
 elvST['DIGITAL_INPUT|BEHAVIOUR'] = '${stringTableDigitalInputBehaviour}';
 elvST['DIGITAL_INPUT|FREQUENCY'] = '${stringTableDigitalInputFrequency}';
@@ -3142,38 +3365,38 @@ elvST['DIGITAL_OUTPUT'] = '${stringTableDigitalOutput}';
 elvST['DIGITAL_OUTPUT|STATE=FALSE'] = '${stringTableDigitalOutputStateFalse}';
 elvST['DIGITAL_OUTPUT|STATE=TRUE'] = '${stringTableDigitalOutputStateTrue}';
 elvST['DIMMER'] = '${stringTableDimmerTitle}';
+elvST['DIMMER_VIRTUAL_RECEIVER'] = '${stringTableDimmerTitle}';
 elvST['DIMMER|CHARACTERISTIC'] = '${stringTableDimmerCharacteristic}';
 elvST['DIMMER|ERROR=LOAD_FAILURE'] = '${stringTableDimmerErrorLoad}';
-elvST['DIMMER|ERROR_OVERLOAD'] = '${stringTableDimmerErrorOverload}';
 elvST['DIMMER|ERROR_OVERHEAT'] = '${stringTableDimmerErrorOverheat}';
+elvST['DIMMER|ERROR_OVERLOAD'] = '${stringTableDimmerErrorOverload}';
 elvST['DIMMER|ERROR_REDUCED'] = '${stringTableDimmerErrorReduced}';
 elvST['DIMMER|FUSE_DELAY'] = '${stringTableDimmerFuseDelay}';
 elvST['DIMMER|LEVEL'] = '${stringTableDimmerLevel}';
-elvST['LEVEL_REAL'] = '${stringTableDimmerLevelReal}';
-elvST['DIMMER|LOAD_ERROR_CALIB'] = '${stringTableDimmerLoadErrorCal}';
 elvST['DIMMER|LOAD_APPEAR_BEHAVIOUR'] = '${stringTableDimmerLoadAppearBehaviour}';
+elvST['DIMMER|LOAD_ERROR_CALIB'] = '${stringTableDimmerLoadErrorCal}';
 elvST['DIMMER|LOGIC_COMBINATION'] = '${stringTableLogicCombination}';
 elvST['DIMMER|OLD_LEVEL'] = '${stringTableDimmerOldLevel}';
 elvST['DIMMER|ON_TIME'] = '${stringTableDimmerOnTime}';
 elvST['DIMMER|OVERTEMP_LEVEL'] = '${stringTableDimmerOverTempLevel}';
 elvST['DIMMER|POWERUP_ACTION'] = '${stringTableDimmerPowerUpAction}';
-elvST['DIMMER|RAMP_TIME'] = '${stringTableDimmerRampTime}';
 elvST['DIMMER|RAMP_STOP'] = '${stringTableDimmerRampStop}';
+elvST['DIMMER|RAMP_TIME'] = '${stringTableDimmerRampTime}';
 elvST['DIMMER|REDUCE_LEVEL'] = '${stringTableDimmerReduceLevel}';
 elvST['DIMMER|REDUCE_TEMP_LEVEL'] = '${stringTableDimmerReduceTempLevel}';
 elvST['DIMMER|RELAY_OFFDELAY_TIME'] = '${stringTableRelayOffdelayTime}';
-elvST['DIMMER|VOLTAGE_0'] = '${stringTableVoltage0}';
-elvST['DIMMER|VOLTAGE_100'] = '${stringTableVoltage100}';
-elvST['DIMMER_VIRTUAL_RECEIVER'] = '${stringTableDimmerTitle}';
-elvST['DISPLAY|ALARM_COUNT'] = '${stringTableDisplayAlarmCount}';
-elvST['DISPLAY|ARROW_DOWN'] = '${stringTableDisplayArrowDown}';
-elvST['DISPLAY|ARROW_UP'] = '${stringTableDisplayArrowUp}';
 elvST['DISPLAY_BACKLIGHT_MODE'] = '${stringTableDisplayBacklightMode}';
 elvST['DISPLAY_BACKLIGHT_MODE=AUTO'] = '${stringTableDisplayBacklightModeAuto}';
 elvST['DISPLAY_BACKLIGHT_MODE=OFF'] = '${stringTableDisplayBacklightModeOff}';
 elvST['DISPLAY_BACKLIGHT_MODE=ON'] = '${stringTableDisplayBacklightModeOn}';
-elvST['DISPLAY|BACKLIGHT'] = '${stringTableDisplayBacklight}';
 elvST['DISPLAY_BACKLIGHT_TIME'] = '${stringTableDisplayBacklightTime}';
+elvST['DISPLAY_BRIGHTNESS'] = '${stringTableDisplayBrightness}';
+elvST['DISPLAY_ENERGYOPTIONS'] = '${stringTableDisplayEnergyOptions}';
+elvST['DISPLAY_INVERTING'] = '${stringTableDisplayInverting}';
+elvST['DISPLAY|ALARM_COUNT'] = '${stringTableDisplayAlarmCount}';
+elvST['DISPLAY|ARROW_DOWN'] = '${stringTableDisplayArrowDown}';
+elvST['DISPLAY|ARROW_UP'] = '${stringTableDisplayArrowUp}';
+elvST['DISPLAY|BACKLIGHT'] = '${stringTableDisplayBacklight}';
 elvST['DISPLAY|BACKLIGHT=BLINK_FAST'] = '${stringTableDisplayBacklightBlinkFast}';
 elvST['DISPLAY|BACKLIGHT=BLINK_SLOW'] = '${stringTableDisplayBacklightBlinkSlow}';
 elvST['DISPLAY|BACKLIGHT=OFF'] = '${stringTableDisplayBacklightOff}';
@@ -3217,48 +3440,116 @@ elvST['DISPLAY|BLIND'] = '${stringTableDisplayBlind}';
 elvST['DISPLAY|BULB'] = '${stringTableDisplayBulb}';
 elvST['DISPLAY|CLOCK'] = '${stringTableDisplayClock}';
 elvST['DISPLAY|DOOR'] = '${stringTableDisplayDoor}';
-elvST['DISPLAY|PHONE'] = '${stringTableDisplayPhone}';
-elvST['DISPLAY|SCENE'] = '${stringTableDisplayScene}';
 elvST['DISPLAY|MESSAGE_SHOW_TIME'] = '${stringTableDisplayMessageShowTime}';
 elvST['DISPLAY|MESSAGE_SHOW_TIME=PERMANENT'] = '${stringTableDisplayMessageShowTimePermanent}';
+elvST['DISPLAY|PHONE'] = '${stringTableDisplayPhone}';
+elvST['DISPLAY|SCENE'] = '${stringTableDisplayScene}';
 elvST['DISPLAY|SERVICE_COUNT'] = '${stringTableDisplayServiceCount}';
 elvST['DISPLAY|SUBMIT'] = '${stringTableDisplaySubmit}';
 elvST['DISPLAY|SWITCH'] = '${stringTableDisplaySwitch}';
 elvST['DISPLAY|TEXT'] = '${stringTableDisplayText}';
-elvST['DISPLAY|WINDOW'] = '${stringTableDisplayWindow}';
 elvST['DISPLAY|UNIT=CELSIUS'] = '${stringTableDisplayUnitCelsius}';
 elvST['DISPLAY|UNIT=FAHRENHEIT'] = '${stringTableDisplayUnitFahrenheit}';
 elvST['DISPLAY|UNIT=NONE'] = '${stringTableDisplayUnitNone}';
 elvST['DISPLAY|UNIT=PERCENT'] = '${stringTableDisplayUnitPercent}';
 elvST['DISPLAY|UNIT=WATT'] = '${stringTableDisplayUnitWatt}';
-elvST['DISPLAY_ENERGYOPTIONS'] = '${stringTableDisplayEnergyOptions}';
-elvST['DISPLAY_BRIGHTNESS'] = '${stringTableDisplayBrightness}';
+elvST['DISPLAY|WINDOW'] = '${stringTableDisplayWindow}';
+elvST['DURATION_UNIT'] = '${stringTableDurationUnit}';
+elvST['DURATION_UNIT=D'] = '${stringTableDurationUnitD}';
+elvST['DURATION_UNIT=H'] = '${stringTableDurationUnitH}';
+elvST['DURATION_UNIT=M'] = '${stringTableDurationUnitM}';
+elvST['DURATION_UNIT=S'] = '${stringTableDurationUnitS}';
+elvST['DURATION_VALUE'] = '${stringTableDurationValue}';
+elvST['DUTYCYCLE_LIMIT'] = '${stringTableDutyCycleLimit}';
+elvST['DUTY_CYCLE=FALSE'] = '${stringTableDutyCycleFalse}';
+elvST['DUTY_CYCLE=TRUE'] = '${stringTableDutyCycleTrue}';
+elvST['EMERGENCY_OPERATION=FALSE'] = '${stringTableEmergencyOperationFalse}';
+elvST['EMERGENCY_OPERATION=TRUE'] = '${stringTableEmergencyOperationTrue}';
+elvST['ENABLE_ROUTING'] = '${stringTableEnableRouting}';
 elvST['ENERGIE_METER_TRANSMITTER|AVERAGING'] = '${stringTablePowerMeterAveraging}';
-elvST['ENERGIE_METER_TRANSMITTER|TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
-elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
 elvST['ENERGIE_METER_TRANSMITTER|CURRENT'] = '${stringTablePowerMeterCurrent}';
-elvST['ENERGIE_METER_TRANSMITTER|FREQUENCY'] = '${stringTablePowerMeterFrequency}';
-elvST['ENERGIE_METER_TRANSMITTER|POWER'] = '${stringTablePowerMeterPower}';
-elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE'] = '${stringTablePowerMeterVoltage}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=FALSE'] = '${stringTablePowerMeterOverflowFalse}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=TRUE'] = '${stringTablePowerMeterOverflowTrue}';
+elvST['ENERGIE_METER_TRANSMITTER|FREQUENCY'] = '${stringTablePowerMeterFrequency}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER'] = '${stringTablePowerMeterPower}';
+elvST['ENERGIE_METER_TRANSMITTER|TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
+elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE'] = '${stringTablePowerMeterVoltage}';
 elvST['ERROR'] = '${stringTableError}';
-elvST['ERROR_BATTERY=TRUE'] = '${stringTableBatteryOk}';
-elvST['ERROR_BATTERY=FALSE'] = '${stringTableBatteryFailure}';
 elvST['ERROR=NO_ERROR'] = '${stringTableErrorNoError}';
+elvST['ERROR_BATTERY=FALSE'] = '${stringTableBatteryFailure}';
+elvST['ERROR_BATTERY=TRUE'] = '${stringTableBatteryOk}';
+elvST['ERROR_CODE'] = '${stringTableErrorCode}';
 elvST['ERROR_OVERHEAT=FALSE'] = '${stringTableErrorOverheatFalse}';
 elvST['ERROR_OVERHEAT=TRUE'] = '${stringTableErrorOverheatTrue}';
 elvST['ERROR_OVERLOAD=FALSE'] = '${stringTableErrorOverloadFalse}';
 elvST['ERROR_OVERLOAD=TRUE'] = '${stringTableErrorOverloadTrue}';
-elvST['ERROR_POWER=TRUE'] = '${stringTableErrorPowerTrue}';
 elvST['ERROR_POWER=FALSE'] = '${stringTableErrorPowerFalse}';
+elvST['ERROR_POWER=NO_ERROR'] = '${stringTablePowerAvailable}';
+elvST['ERROR_POWER=POWER_FAILURE'] = '${stringTablePowerNotAvailable}';
+elvST['ERROR_POWER=TRUE'] = '${stringTableErrorPowerTrue}';
 elvST['ERROR_REDUCED=FALSE'] = '${stringTableErrorReducedFalse}';
 elvST['ERROR_REDUCED=TRUE'] = '${stringTableErrorReducedTrue}';
 elvST['ERROR_SABOTAGE=FALSE'] = '${stringTableErrorSabotageFalse}';
+elvST['ERROR_SABOTAGE=NO_ERROR'] = '${stringTableSabotageContactOk}';
+elvST['ERROR_SABOTAGE=SABOTAGE'] = '${stringTableSabotage}';
 elvST['ERROR_SABOTAGE=TRUE'] = '${stringTableErrorSabotageTrue}';
+elvST['ERROR_UPDATE=TRUE'] = '${stringTableErrorUpdateTrue}';
+elvST['ERROR_UPDATE=FALSE'] = '${stringTableErrorUpdateFalse}';
+elvST['EVENT_DELAYTIME'] = '${stringTableEventDelay}';
+elvST['EVENT_DELAY_UNIT'] = '${stringTableEventDelayUnit}';
+elvST['EVENT_DELAY_UNIT=100MS'] = '${optionUnit100MS}';
+elvST['EVENT_DELAY_UNIT=H'] = '${optionUnitH}';
+elvST['EVENT_DELAY_UNIT=M'] = '${optionUnitM}';
+elvST['EVENT_DELAY_UNIT=S'] = '${optionUnitS}';
+elvST['EVENT_DELAY_VALUE'] = '${stringTableEventDelayValue}';
+elvST['EVENT_RANDOMTIME_UNIT'] = '${stringTableEventRandomTimeUnit}';
+elvST['EVENT_RANDOMTIME_UNIT=100MS'] = '${optionUnit100MS}';
+elvST['EVENT_RANDOMTIME_UNIT=H'] = '${optionUnitH}';
+elvST['EVENT_RANDOMTIME_UNIT=M'] = '${optionUnitM}';
+elvST['EVENT_RANDOMTIME_UNIT=S'] = '${optionUnitS}';
+elvST['EVENT_RANDOMTIME_VALUE'] = '${stringTableStatusInfoRandom}';
+elvST['EXPECT_AES'] = '${stringTableExpectAES}';
+elvST['EXTERNAL_CLOCK=FALSE'] = '${stringTableExternalClockFalse}';
+elvST['EXTERNAL_CLOCK=TRUE'] = '${stringTableExternalClockTrue}';
 elvST['FREQUENCY_INPUT'] = '${stringTableFrequencyInput}';
+elvST['FROST_PROTECTION=FALSE'] = '${stringTableFrostProtectionFalse}';
+elvST['FROST_PROTECTION=TRUE'] = '${stringTableFrostProtectionTrue}';
 elvST['FUSE_DELAY'] = '${stringTableDimmerFuseDelay}';
+elvST['GENERIC_INPUT_TRANSMITER'] = '${stringTableGenericTransmitterTitle}';
 elvST['GLOBAL_BUTTON_LOCK'] = '${stringTableGlobalButtonLock}';
+elvST['HEATING_CLIMATECONTROL_CL_RECEIVER'] = '${stringTableClimateControlCLReceiverTitle}';
+elvST['HEATING_CLIMATECONTROL_CL_TRANSMITTER'] = '${stringTableHeatingClimateControlCLTransmitterTitle}';
+elvST['HEATING_CLIMATECONTROL_RECEIVER'] = '${stringTableClimateControlReceiverTitle}';
+elvST['HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER'] = '${stringTableHeatingClimateControlSwitchTransmitterTitle}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER'] = '${stringTableClimateControlTransceiverTitle}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|ACTIVE_PROFILE'] = '${stringTableActiveProfile}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|CONTROL_MODE'] = '${stringTableControlMode}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|FROST_PROTECTION=FALSE'] = '${stringTableFrostProtectFalse}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|FROST_PROTECTION=TRUE'] = '${stringTableFrostProtectTrue}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|HUMIDITY'] = '${stringTableHeatingHumidity}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|LEVEL'] = '${stringTableHeatingLevel}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|PARTY_MODE=FALSE'] = '${stringTablePartyModeFalse}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|PARTY_MODE=TRUE'] = '${stringTablePartyModeTrue}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SET_POINT_MODE'] = '${stringTableSetPointMode}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SET_POINT_TEMPERATURE'] = '${stringTableSetPointTemperature}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SWITCH_POINT_OCCURED=FALSE'] = '${stringTableSwitchPointOccuredFalse}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SWITCH_POINT_OCCURED=TRUE'] = '${stringTableSwitchPointOccurredTrue}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=FALSE'] = '${stringTableValveAdaptionFalse}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=TRUE'] = '${stringTableValveAdaptionTrue}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=CLOSED'] = '${stringTableWindowStateClosed}';
+elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=OPEN'] = '${stringTableWindowStateOpen}';
+elvST['HEATING_COOLING=COOLING'] = '${stringTableCooling}';
+elvST['HEATING_COOLING=HEATING'] = '${stringTableHeating}';
+elvST['HEATING_KEY_RECEIVER'] = '${stringTableHeatingKeyReceiverTitle}';
+elvST['HEATING_ROOM_TH_RECEIVER'] = '${stringTableHeatingRoomTHReceiverTitle}';
+elvST['HEATING_ROOM_TH_TRANSCEIVER'] = '${stringTableHeatingRoomTHTransceiverTitle}';
+elvST['HEATING_SHUTTER_CONTACT_RECEIVER'] = '${stringTableHeatingShutterContactReceiverTitle}';
+elvST['HUMIDITY_ALARM=FALSE'] = '${stringTableHumidityAlarmFalse}';
+elvST['HUMIDITY_ALARM=TRUE'] = '${stringTableHumidityAlarmTrue}';
+elvST['HUMIDITY_LIMITER=FALSE'] = '${stringTableHumidityLimiterFalse}';
+elvST['HUMIDITY_LIMITER=TRUE'] = '${stringTableHumidityLimiterTrue}';
+elvST['ILLUMINATION'] = '${stringTableBrightness}';
 elvST['INHIBIT'] = '${stringTableInhibit}';
 elvST['INHIBIT=FALSE'] = '${stringTableInhibitFalse}';
 elvST['INHIBIT=TRUE'] = '${stringTableInhibitTrue}';
@@ -3274,31 +3565,22 @@ elvST['INPUT_OUTPUT|LONGPRESS_TIME'] = '${stringTableInputOutputLongPressA}';
 elvST['INPUT_OUTPUT|LONG_PRESS_TIME'] = '${stringTableInputOutputLongPressB}';
 elvST['INPUT_OUTPUT|STATE=FALSE'] = '${stringTableInputOutputStateFalse}';
 elvST['INPUT_OUTPUT|STATE=TRUE'] = '${stringTableInputOutputStateTrue}';
-elvST['HEATING_CLIMATECONTROL_RECEIVER'] = '${stringTableClimateControlReceiverTitle}';
-elvST['HEATING_CLIMATECONTROL_CL_RECEIVER'] = '${stringTableClimateControlCLReceiverTitle}';
-elvST['HEATING_KEY_RECEIVER'] = '${stringTableHeatingKeyReceiverTitle}';
-elvST['HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER'] = '${stringTableHeatingClimateControlSwitchTransmitterTitle}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER'] = '${stringTableClimateControlTransceiverTitle}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|ACTIVE_PROFILE'] = '${stringTableActiveProfile}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|CONTROL_MODE'] = '${stringTableControlMode}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|FROST_PROTECTION=FALSE'] = '${stringTableFrostProtectFalse}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|FROST_PROTECTION=TRUE'] = '${stringTableFrostProtectTrue}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|LEVEL'] = '${stringTableHeatingLevel}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|HUMIDITY'] = '${stringTableHeatingHumidity}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|PARTY_MODE=FALSE'] = '${stringTablePartyModeFalse}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|PARTY_MODE=TRUE'] = '${stringTablePartyModeTrue}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SET_POINT_MODE'] = '${stringTableSetPointMode}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SET_POINT_TEMPERATURE'] = '${stringTableSetPointTemperature}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SWITCH_POINT_OCCURED=FALSE'] = '${stringTableSwitchPointOccuredFalse}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|SWITCH_POINT_OCCURED=TRUE'] = '${stringTableSwitchPointOccurredTrue}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=FALSE'] = '${stringTableValveAdaptionFalse}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|VALVE_ADAPTION=TRUE'] = '${stringTableValveAdaptionTrue}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=CLOSED'] = '${stringTableWindowStateClosed}';
-elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=OPEN'] = '${stringTableWindowStateOpen}';
-elvST['HEATING_CLIMATECONTROL_CL_TRANSMITTER'] = '${stringTableHeatingClimateControlCLTransmitterTitle}';
-elvST['HEATING_ROOM_TH_RECEIVER'] = '${stringTableHeatingRoomTHReceiverTitle}';
-elvST['HEATING_ROOM_TH_TRANSCEIVER'] = '${stringTableHeatingRoomTHTransceiverTitle}';
-elvST['HEATING_SHUTTER_CONTACT_RECEIVER'] = '${stringTableHeatingShutterContactReceiverTitle}';
+elvST['JALOUSIE'] = '${stringTableJalousieTitle}';
+elvST['JALOUSIE|CHANGE_OVER_DELAY'] = '${stringTableBlindChangeOverDelay}';
+elvST['JALOUSIE|LEVEL'] = '${stringTableBlindLevel}';
+elvST['JALOUSIE|LEVEL=OLD_LEVEL'] = '${stringTableJalousieOldLevel}';
+elvST['JALOUSIE|LEVEL=NO_MODIFICATION'] = '${stringTableJalousieNoModification}';
+elvST['JALOUSIE|LEVEL_COMBINED'] = '${stringTableJalousieLevelCombined}';
+elvST['JALOUSIE|LEVEL_SLATS'] = '${stringTableJalousieSlatsLevel}';
+elvST['JALOUSIE|LEVEL_SLATS=OLD_LEVEL'] = '${stringTableJalousieSlatsOldLevel}';
+elvST['JALOUSIE|LEVEL_SLATS=NO_MODIFICATION'] = '${stringTableJalousieSlatsNoModification}';
+elvST['JALOUSIE|REFERENCE_RUNNING_TIME_SLATS'] = '${stringTableJalousieRunningTimeSlats}';
+elvST['JALOUSIE|REFERENCE_RUNNING_TIME_TOP_BOTTOM'] = '${stringTableBlindRunningTimeTopBottom}';
+elvST['JALOUSIE|REFERENCE_RUNNING_TIME_BOTTOM_TOP'] = '${stringTableBlindRunnintTimeBottomTop}';
+elvST['JALOUSIE|REFERENCE_RUN_COUNTER'] = '${stringTableBlindRefRunCounter}';
+elvST['JALOUSIE|POSITION_SAVE_TIME'] = '${stringTableJalousiePositionSaveTime}';
+elvST['JALOUSIE|STOP'] = '${stringTableBlindStop}';
+elvST['KEY'] = '${stringTableKeyTitle}';
 elvST['KEYMATIC'] = '${stringTableKeyMaticTitle}';
 elvST['KEYMATIC|ANGLE_LOCKED'] = '${stringTableKeyMaticAngleLocked}';
 elvST['KEYMATIC|ANGLE_MAX'] = '${stringTableKeyMaticAngleMax}';
@@ -3321,19 +3603,23 @@ elvST['KEYMATIC|STATE=TRUE'] = '${stringTableKeyMaticStateTrue}';
 elvST['KEYMATIC|STATE_UNCERTAIN=FALSE'] = '${stringTableKeyMaticStateUncertainFalse}';
 elvST['KEYMATIC|STATE_UNCERTAIN=TRUE'] = '${stringTableKeyMaticStateUncertainTrue}';
 elvST['KEYPRESS_SIGNAL'] = '${stringTableKeyPressSignal}';
-elvST['KEY'] = '${stringTableKeyTitle}';
+elvST['KEY_TRANSCEIVER'] = '${stringTableKeyTranseiverTitle}';
+elvST['KEY_TRANSCEIVER|DBL_PRESS_TIME'] = '${stringTableKeyDblPressTime}';
+elvST['KEY_TRANSCEIVER|LONG_PRESS_TIME'] = '${stringTableKeyLongPressTimeA}';
 elvST['KEY|CHANNEL_FUNCTION'] = '${stringTableKeyChannelFunction}';
+elvST['KEY|CHANNEL_FUNCTION=BINARY_BEHAVIOR'] = '${stringTableKeyBinaryBehavior}';
+elvST['KEY|CHANNEL_FUNCTION=BUTTON_BEHAVIOR'] = '${stringTableKeyButtonBehavior}';
+elvST['KEY|CHANNEL_FUNCTION=INACTIVE'] = '${stringTableKeyInactive}';
+elvST['KEY|CHANNEL_FUNCTION=SWITCH_BEHAVIOR'] = '${stringTableKeySwitchBehavior}';
 elvST['KEY|DBL_PRESS_TIME'] = '${stringTableKeyDblPressTime}';
 elvST['KEY|INPUT_LOCKED'] = '${stringTableKeyInputLocked}';
 elvST['KEY|INPUT_TYPE'] = '${stringTableKeyInputType}';
 elvST['KEY|INPUT_TYPE=PUSHBUTTON'] = '${stringTableKeyInputTypePushButton}';
 elvST['KEY|INPUT_TYPE=SWITCH'] = '${stringTableKeyInputTypeSwitch}';
-elvST['KEY|LONG_PRESS_TIME'] = '${stringTableKeyLongPressTimeA}';
+elvST['KEY|LCD_LEVEL_INTERP'] = '${stringTableKeyLCDLevelInterp}';
+elvST['KEY|LCD_SYMBOL'] = '${stringTableKeyLCDSymbol}';
 elvST['KEY|LONGPRESS_TIME'] = '${stringTableKeyLongPressTimeB}';
-elvST['KEY|CHANNEL_FUNCTION=BUTTON_BEHAVIOR'] = '${stringTableKeyButtonBehavior}';
-elvST['KEY|CHANNEL_FUNCTION=SWITCH_BEHAVIOR'] = '${stringTableKeySwitchBehavior}';
-elvST['KEY|CHANNEL_FUNCTION=BINARY_BEHAVIOR'] = '${stringTableKeyBinaryBehavior}';
-elvST['KEY|CHANNEL_FUNCTION=INACTIVE'] = '${stringTableKeyInactive}';
+elvST['KEY|LONG_PRESS_TIME'] = '${stringTableKeyLongPressTimeA}';
 elvST['KEY|MSG_FOR_POS_A'] = '${stringTableKeyMsgPosClosed}';
 elvST['KEY|MSG_FOR_POS_A=CLOSED'] = '${stringTableKeyMsgPosA0}';
 elvST['KEY|MSG_FOR_POS_A=NO_MSG'] = '${stringTableKeyMsgPosA1}';
@@ -3346,18 +3632,20 @@ elvST['KEY|TEXT1'] = '${stringTableKeyText1}';
 elvST['KEY|TEXT2'] = '${stringTableKeyText2}';
 elvST['KEY|TEXTLINE_1'] = '${stringTableKeyTextLine}';
 elvST['KEY|TEXTLINE_2'] = '${stringTableKeyTextLine}';
-elvST['KEY_TRANSCEIVER'] = '${stringTableKeyTranseiverTitle}';
-elvST['KEY_TRANSCEIVER|DBL_PRESS_TIME'] = '${stringTableKeyDblPressTime}';
-elvST['KEY_TRANSCEIVER|LONG_PRESS_TIME'] = '${stringTableKeyLongPressTimeA}';
 elvST['LANGUAGE'] = '${stringTableLanguage}';
 elvST['LANGUAGE=ENGLISH'] = '${stringTableLanguageEnglish}';
 elvST['LANGUAGE=GERMAN'] = '${stringTableLanguageGerman}';
+elvST['LED_DISABLE_CHANNELSTATE'] = '${stringTableLEDDisableChannelState}';
+elvST['LED_ONTIME'] = '${stringTableLEDOnTime}';
 elvST['LED_SLEEP_MODE=OFF'] = '${stringTableLEDSleepModeOff}';
 elvST['LED_SLEEP_MODE=ON'] = '${stringTableLEDSleepModeOn}';
-elvST['LED_STATUS=OFF'] = '${stringTableLEDStatusOff}';
-elvST['LED_STATUS=RED'] = '${stringTableLEDStatusRed}';
 elvST['LED_STATUS=GREEN'] = '${stringTableLEDStatusGreen}';
+elvST['LED_STATUS=OFF'] = '${stringTableLEDStatusOff}';
 elvST['LED_STATUS=ORANGE'] = '${stringTableLEDStatusOrange}';
+elvST['LED_STATUS=RED'] = '${stringTableLEDStatusRed}';
+elvST['LEVEL'] = '${stringTableDimmerLevel}';
+elvST['LEVEL_REAL'] = '${stringTableDimmerLevelReal}';
+elvST['LEVEL_REAL'] = '${stringTableDimmerLevelReal}';
 elvST['LIVE_MODE_RX'] = '${stringTableLiveModeRX}';
 elvST['LOCAL_RESET_DISABLE'] = '${stringTableLocalResetDisable}';
 elvST['LOCAL_RESET_DISABLED'] = '${stringTableLocalResetDisable}';
@@ -3367,32 +3655,41 @@ elvST['LOGGING=OFF'] = '${stringTableLoggingOff}';
 elvST['LOGGING=ON'] = '${stringTableLoggingOn}';
 elvST['LOGGING=TRUE'] = '${stringTableLoggingTrue}';
 elvST['LOGGING_TIME'] = '${stringTableLoggingTime}';
-elvST['LOGIC_INACTIVE'] = '${stringTableLogicInactive}';
-elvST['LOGIC_OR'] = '${stringTableLogicOR}';
 elvST['LOGIC_AND'] = '${stringTableLogicAND}';
-elvST['LOGIC_XOR'] = '${stringTableLogicXOR}';
-elvST['LOGIC_NOR'] = '${stringTableLogicNOR}';
-elvST['LOGIC_NAND'] = '${stringTableLogicNAND}';
-elvST['LOGIC_ORINVERS'] = '${stringTableLogicORINVERS}';
 elvST['LOGIC_ANDINVERS'] = '${stringTableLogicANDINVERS}';
-elvST['LOGIC_PLUS'] = '${stringTableLogicPLUS}';
-elvST['LOGIC_MINUS'] = '${stringTableLogicMINUS}';
-elvST['LOGIC_MUL'] = '${stringTableLogicMUL}';
-elvST['LOGIC_PLUSINVERS'] = '${stringTableLogicPLUSINVERS}';
-elvST['LOGIC_MINUSINVERS'] = '${stringTableLogicMINUSINVERS}';
-elvST['LOGIC_MULINVERS'] = '${stringTableLogicMULINVERS}';
-elvST['LOGIC_INVERSPLUS'] = '${stringTableLogicINVERSPLUS}';
+elvST['LOGIC_COMBINATION'] = '${stringTableLogicCombination}';
+elvST['LOGIC_INACTIVE'] = '${stringTableLogicInactive}';
 elvST['LOGIC_INVERSMINUS'] = '${stringTableLogicINVERSMINUS}';
 elvST['LOGIC_INVERSMUL'] = '${stringTableLogicINVERSMUL}';
-elvST['LOW_BAT_LIMIT'] = '${stringTableBatteryLowBatLimit}';
+elvST['LOGIC_INVERSPLUS'] = '${stringTableLogicINVERSPLUS}';
+elvST['LOGIC_MINUS'] = '${stringTableLogicMINUS}';
+elvST['LOGIC_MINUSINVERS'] = '${stringTableLogicMINUSINVERS}';
+elvST['LOGIC_MUL'] = '${stringTableLogicMUL}';
+elvST['LOGIC_MULINVERS'] = '${stringTableLogicMULINVERS}';
+elvST['LOGIC_NAND'] = '${stringTableLogicNAND}';
+elvST['LOGIC_NOR'] = '${stringTableLogicNOR}';
+elvST['LOGIC_OR'] = '${stringTableLogicOR}';
+elvST['LOGIC_ORINVERS'] = '${stringTableLogicORINVERS}';
+elvST['LOGIC_PLUS'] = '${stringTableLogicPLUS}';
+elvST['LOGIC_PLUSINVERS'] = '${stringTableLogicPLUSINVERS}';
+elvST['LOGIC_XOR'] = '${stringTableLogicXOR}';
 elvST['LOWBAT=FALSE'] = '${stringTableBatteryOk}';
-elvST['LOW_BAT=FALSE'] = '${stringTableBatteryOk}';
 elvST['LOWBAT=TRUE'] = '${stringTableBatteryEmpty}';
+elvST['LOWBAT_REPORTING'] = '${stringTableLowbatReporting}';
+elvST['LOWBAT_REPORTING=FALSE'] = '${stringTableLowbatReportingFalse}';
+elvST['LOWBAT_REPORTING=TRUE'] = '${stringTableLowbatReportingTrue}';
+elvST['LOWBAT_SIGNAL'] = '${stringTableLowbatSignal}';
+elvST['LOWERING_MODE'] = '${stringTableClimateControlRTTransceiverLoweringMode}';
+elvST['LOW_BAT=FALSE'] = '${stringTableBatteryOk}';
 elvST['LOW_BAT=TRUE'] = '${stringTableBatteryEmpty}';
+elvST['LOW_BAT_LIMIT'] = '${stringTableBatteryLowBatLimit}';
+elvST['LUX'] = '${stringTableLux}';
+elvST['MAINS_POWERED'] = '${stringTableMainsPowered}';
+elvST['MAINTENANCE|CONFIG_PENDING'] = '${stringTableConfigPending}';
 elvST['MAINTENANCE|ERROR_BATTERY=BATTERY_DEFECT'] = '${stringTableBatteryFailure}';
 elvST['MAINTENANCE|ERROR_BATTERY=NO_ERROR'] = '${stringTableBatteryOk}';
 elvST['MAINTENANCE|ERROR_OVERHEAT'] = '${stringTableErrorOverheatTrue}';
-elvST['MAINTENANCE|CONFIG_PENDING'] = '${stringTableConfigPending}';
+elvST['MAINTENANCE|HMW_STICKY_UNREACH'] = '${stringTableStickyUnreach}';
 elvST['MAINTENANCE|LOWBAT'] = '${stringTableBatteryLow}';
 elvST['MAINTENANCE|LOW_BAT'] = '${stringTableBatteryLow}';
 elvST['MAINTENANCE|SABOTAGE'] = '${stringTableSabotage}';
@@ -3403,29 +3700,124 @@ elvST['MAINTENANCE|STICKY_POWER=WAS_POWER_FAILURE'] = '${stringTablePowerWasNotA
 elvST['MAINTENANCE|STICKY_SABOTAGE=SABOTAGE'] = '${stringTableSabotage}';
 elvST['MAINTENANCE|STICKY_SABOTAGE=WAS_SABOTAGED'] = '${stringTableSabotageContactWasActive}';
 elvST['MAINTENANCE|STICKY_UNREACH'] = '${stringTableStickyUnreach}';
-elvST['MAINTENANCE|HMW_STICKY_UNREACH'] = '${stringTableStickyUnreach}';
 elvST['MAINTENANCE|UNREACH'] = '${stringTableUnreach}';
-elvST['minutes'] = '${stringTableMinute}';
+elvST['MANU_MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
+elvST['MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE'] = '${stringTableMinMaxNotRelevantForManuMode}';
+elvST['MIOB_DIN_CONFIG'] = '${stringTableMiobDinConfig}';
+elvST['MOD_EM8BIT_TRANSMITTER'] = '${stringTable8BitTransmitterTitle}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN0'] = '${stringTableTransmitterDataInputPropertie0}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN1'] = '${stringTableTransmitterDataInputPropertie1}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN2'] = '${stringTableTransmitterDataInputPropertie2}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN3'] = '${stringTableTransmitterDataInputPropertie3}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN4'] = '${stringTableTransmitterDataInputPropertie4}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN5'] = '${stringTableTransmitterDataInputPropertie5}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN6'] = '${stringTableTransmitterDataInputPropertie6}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_INPUT_PROPERTIE_IN7'] = '${stringTableTransmitterDataInputPropertie7}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_STABILITY_FILTER_TIME'] = '${stringTableTransmitterDataStabilityFilterTime}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION'] = '${stringTableTransmitterDataTransmissionCondition}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION=LEVEL_CHANGE_DATA[HIGH_to_LOW]'] = '${stringTableTransmitterDataTransmissionCondition0}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION=LEVEL_CHANGE_DATA[LOW_to_HIGH]'] = '${stringTableTransmitterDataTransmissionCondition1}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION=LEVEL_CHANGE_DATA[LOW_to_HIGH_and_HIGH_to_LOW]'] = '${stringTableTransmitterDataTransmissionCondition2}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION=NEW_DATA_STABLE_FOR_TIME_DEFAULT_ENABLE'] = '${stringTableTransmitterDataTransmissionCondition3}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION=NEW_DATA_SEND_IMMEDIATELY_DEFAULT_ENABLE'] = '${stringTableTransmitterDataTransmissionCondition4}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION=NEW_DATA_STABLE_FOR_TIME_DEFAULT_DISABLE'] = '${stringTableTransmitterDataTransmissionCondition5}';
+elvST['MOD_EM8BIT_TRANSMITTER|DATA_TRANSMISSION_CONDITION=NEW_DATA_SEND_IMMEDIATELY_DEFAULT_DISABLE'] = '${stringTableTransmitterDataTransmissionCondition6}';
+elvST['MOD_EM8BIT_TRANSMITTER|STATE'] = '${stringTableTransmitterState}';
 elvST['MODUS_BUTTON_LOCK'] = '${stringTableModusButtonLock}';
+elvST['MOTION=FALSE'] = '${stringTableMotionDetectorMotionFalse}';
+elvST['MOTION=TRUE'] = '${stringTableMotionDetectorMotionTrue}';
+elvST['MOTIONDETECTOR_TRANSCEIVER'] = '${stringTableMotionDetectorTitle}';
+elvST['MOTION_ACTIVE_TIME'] = '${stringTableMotionDetectorMotionActiveTime}';
+elvST['MOTION_DETECTION_ACTIVE=FALSE'] = '${stringTableMotionDetectorMotionDetectionActiveFalse}';
+elvST['MOTION_DETECTION_ACTIVE=TRUE'] = '${stringTableMotionDetectorMotionDetectionActiveTrue}';
 elvST['MOTION_DETECTOR'] = '${stringTableMotionDetectorTitle}';
 elvST['MOTION_DETECTOR'] = '${stringTableMotionDetectorTitle}';
-elvST['MOTION_DETECTOR|ERROR=SABOTAGE'] = '${stringTableMotionDetectorErrorSabotage}';
+elvST['MOTION_DETECTOR|CAPTURE_WITHIN_INTERVAL'] = '${stringTableMotionDetectorCaptureWithinInterval}';
 elvST['MOTION_DETECTOR|ERROR=0'] = '${stringTableSabotageContactOk}';
 elvST['MOTION_DETECTOR|ERROR=7'] = '${stringTableMotionDetectorErrorSabotage}';
+elvST['MOTION_DETECTOR|ERROR=SABOTAGE'] = '${stringTableMotionDetectorErrorSabotage}';
 elvST['MOTION_DETECTOR|EVENT_FILTER_NUMBER'] = '${stringTableMotionDetectorEventFilterNumber}';
 elvST['MOTION_DETECTOR|EVENT_FILTER_PERIOD'] = '${stringTableMotionDetectorEventFilterPeriod}';
 elvST['MOTION_DETECTOR|MIN_INTERVAL'] = '${stringTableMotionDetectorMinInterval}';
-elvST['MOTION_DETECTOR|CAPTURE_WITHIN_INTERVAL'] = '${stringTableMotionDetectorCaptureWithinInterval}';
-elvST['MOTIONDETECTOR_TRANSCEIVER'] = '${stringTableMotionDetectorTitle}';
+elvST['NOT_USED'] = '${stringTableNotUsed}';
+elvST['OLD_LEVEL'] = '${stringTableDimmerOldLevel}';
+elvST['ON_TIME'] = '${stringTableDimmerOnTime}';
+elvST['OPERATING_VOLTAGE'] = '${stringTableOperationVoltage}';
+elvST['OPTICAL_ALARM_SELECTION=BLINKING_ALTERNATELY_REPEATING'] = '${stringTableAlarmBlinkingAlternatelyRepeating}';
+elvST['OPTICAL_ALARM_SELECTION=BLINKING_BOTH_REPEATING'] = '${stringTableAlarmBlinkingBothRepeating}';
+elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_0'] = '${stringTableAlarmConfirmingSignal0}';
+elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_1'] = '${stringTableAlarmConfirmingSignal1}';
+elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_2'] = '${stringTableAlarmConfirmingSignal2}';
+elvST['OPTICAL_ALARM_SELECTION=DISABLE_OPTICAL_SIGNAL'] = '${stringTableAlarmDisableOpticalSignal}';
+elvST['OPTICAL_ALARM_SELECTION=DOUBLE_FLASHING_REPEATING'] = '${stringTableAlarmDoubleFlashingRepeating}';
+elvST['OPTICAL_ALARM_SELECTION=FLASHING_BOTH_REPEATING'] = '${stringTableAlarmFlashingBothRepeating}';
+elvST['OVERTEMP_LEVEL'] = '${stringTableDimmerOverTempLevel}';
 elvST['PARAM_SELECT'] = '${stringTableParamSelect}';
 elvST['PARAM_SELECT=INACTIVE'] = '${stringTableParamSelectInactive}';
 elvST['PARAM_SELECT=T1'] = '${stringTableParamSelectT1}';
-elvST['PARAM_SELECT=T2'] = '${stringTableParamSelectT2}';
 elvST['PARAM_SELECT=T1-T2'] = '${stringTableParamSelectT1MinusT2}';
+elvST['PARAM_SELECT=T2'] = '${stringTableParamSelectT2}';
 elvST['PARAM_SELECT=T2-T1'] = '${stringTableParamSelectT2MinusT1}';
+elvST['PARTY_MODE_SUBMIT'] = '${stringTablePartyModeSubmit}';
 elvST['PARTY_SET_POINT_TEMPERATURE'] = '${stringTableClimateControlRegPartyValue}';
+elvST['PARTY_START_DAY'] = '${stringTablePartyStartDay}';
+elvST['PARTY_START_MONTH'] = '${stringTablePartyStartMonth}';
+elvST['PARTY_START_TIME'] = '${stringTablePartyStartTime}';
+elvST['PARTY_START_YEAR'] = '${stringTablePartyStartYear}';
+elvST['PARTY_STOP_DAY'] = '${stringTablePartyStopDay}';
+elvST['PARTY_STOP_MONTH'] = '${stringTablePartyStopMonth}';
+elvST['PARTY_STOP_TIME'] = '${stringTablePartyStopTime}';
+elvST['PARTY_STOP_YEAR'] = '${stringTablePartyStopYear}';
+elvST['PARTY_TEMPERATURE'] = '${stringTablePartyTemperature}';
 elvST['PARTY_TIME_END'] = '${stringTableClimateControlRegPartyEndTime}';
 elvST['PARTY_TIME_START'] = '${stringTableClimateControlRegPartyStartTime}';
+elvST['PEER_NEEDS_BURST'] = '${stringTablePeerNeedsBurst}';
+elvST['PIR_OPERATION_MODE'] = '${stringTablePirOperationMode}';
+elvST['POWERMETER_IEC1|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
+elvST['POWERMETER_IEC1|GAS_ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounterGas}';
+elvST['POWERMETER_IEC1|GAS_POWER'] = '${stringTableGasConsumption}';
+elvST['POWERMETER_IEC1|IEC_ENERGY_COUNTER'] = '${stringTablePowerMeterIECEnergyCounter}';
+elvST['POWERMETER_IEC1|IEC_POWER'] = '${stringTableIECPowerMeterPower}';
+elvST['POWERMETER_IEC1|POWER'] = '${stringTablePowerMeterPower}';
+elvST['POWERMETER_IEC2|IEC_ENERGY_COUNTER'] = '${stringTablePowerMeterIECEnergyCounter}';
+elvST['POWERMETER_IEC2|IEC_POWER'] = '${stringTableIECPowerMeterPower}';
+elvST['POWERMETER_IGL|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
+elvST['POWERMETER_IGL|GAS_ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounterGas}';
+elvST['POWERMETER_IGL|GAS_POWER'] = '${stringTableGasConsumption}';
+elvST['POWERMETER_IGL|POWER'] = '${stringTablePowerMeterPower}';
+elvST['POWERMETER|AVERAGING'] = '${stringTablePowerMeterAveraging}';
+elvST['POWERMETER|CURRENT'] = '${stringTablePowerMeterCurrent}';
+elvST['POWERMETER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
+elvST['POWERMETER|FREQUENCY'] = '${stringTablePowerMeterFrequency}';
+elvST['POWERMETER|POWER'] = '${stringTablePowerMeterPower}';
+elvST['POWERMETER|TX_MINDELAY'] = '${stringTablePowerMeterTxMinDelay}';
+elvST['POWERMETER|TX_THRESHOLD_CURRENT'] = '${stringTablePowerMeterTxThresholdCurrent}';
+elvST['POWERMETER|TX_THRESHOLD_FREQUENCY'] = '${stringTablePowerMeterTxThresholdFrequency}';
+elvST['POWERMETER|TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
+elvST['POWERMETER|TX_THRESHOLD_VOLTAGE'] = '${stringTablePowerMeterTxThresholdVoltage}';
+elvST['POWERMETER|VOLTAGE'] = '${stringTablePowerMeterVoltage}';
+elvST['POWERUP_ACTION'] = '${stringTableDimmerPowerUpAction}';
+elvST['POWERUP_JUMPTARGET'] = '${stringTableDimmerPowerUpAction}';
+elvST['POWERUP_OFF'] = '${stringTablePowerUpOFF} ';
+elvST['POWERUP_ON'] = '${stringTablePowerUpON}';
+elvST['POWERUP_ONDELAY_UNIT'] = '${stringTableOnDelayUnit}';
+elvST['POWERUP_ONDELAY_UNIT=10M'] = '${optionUnit10M}';
+elvST['POWERUP_ONDELAY_UNIT=10S'] = '${optionUnit10S}';
+elvST['POWERUP_ONDELAY_UNIT=1M'] = '${optionUnit1M}';
+elvST['POWERUP_ONDELAY_UNIT=1S'] = '${optionUnit1S}';
+elvST['POWERUP_ONDELAY_UNIT=5M'] = '${optionUnit5M}';
+elvST['POWERUP_ONDELAY_UNIT=5S'] = '${optionUnit5S}';
+elvST['POWERUP_ONDELAY_VALUE'] = '${stringTableOnDelayValue}';
+elvST['POWERUP_ONTIME_UNIT'] = '${stringTableOnTimeUnit}';
+elvST['POWERUP_ONTIME_UNIT=10M'] = '${optionUnit10M}';
+elvST['POWERUP_ONTIME_UNIT=10S'] = '${optionUnit10S}';
+elvST['POWERUP_ONTIME_UNIT=1M'] = '${optionUnit1M}';
+elvST['POWERUP_ONTIME_UNIT=1S'] = '${optionUnit1S}';
+elvST['POWERUP_ONTIME_UNIT=5M'] = '${optionUnit5M}';
+elvST['POWERUP_ONTIME_UNIT=5S'] = '${optionUnit5S}';
+elvST['POWERUP_ONTIME_UNIT=H'] = '${optionUnitH}';
+elvST['POWERUP_ONTIME_VALUE'] = '${stringTableOnTimeValue}';
+elvST['POWER_SUPPLY'] = '${stringTablePowerSupply}';
 elvST['POWER|BAT_LEVEL'] = '${stringTableBatteryCapacity}';
 elvST['POWER|LOWBAT=FALSE'] = '${stringTableBatteryOk}';
 elvST['POWER|LOWBAT=TRUE'] = '${stringTableBatteryEmpty}';
@@ -3435,35 +3827,12 @@ elvST['POWER|U_SOURCE_FAIL=FALSE'] = '${stringTablePowerSupplyOk}';
 elvST['POWER|U_SOURCE_FAIL=TRUE'] = '${stringTablePowerSupplyNotOk}';
 elvST['POWER|U_USBD_OK=FALSE'] = '${stringTableUSBNotActive}';
 elvST['POWER|U_USBD_OK=TRUE'] = '${stringTableUSBActive}';
-elvST['POWERMETER|AVERAGING'] = '${stringTablePowerMeterAveraging}';
-elvST['POWERMETER|TX_MINDELAY'] = '${stringTablePowerMeterTxMinDelay}';
-elvST['POWERMETER|TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
-elvST['POWERMETER|TX_THRESHOLD_CURRENT'] = '${stringTablePowerMeterTxThresholdCurrent}';
-elvST['POWERMETER|TX_THRESHOLD_VOLTAGE'] = '${stringTablePowerMeterTxThresholdVoltage}';
-elvST['POWERMETER|TX_THRESHOLD_FREQUENCY'] = '${stringTablePowerMeterTxThresholdFrequency}';
-elvST['POWERMETER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
-elvST['POWERMETER|POWER'] = '${stringTablePowerMeterPower}';
-elvST['POWERMETER|CURRENT'] = '${stringTablePowerMeterCurrent}';
-elvST['POWERMETER|VOLTAGE'] = '${stringTablePowerMeterVoltage}';
-elvST['POWERMETER|FREQUENCY'] = '${stringTablePowerMeterFrequency}';
-elvST['POWERMETER_IGL|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
-elvST['POWERMETER_IGL|GAS_ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounterGas}';
-elvST['POWERMETER_IGL|POWER'] = '${stringTablePowerMeterPower}';
-elvST['POWERMETER_IGL|GAS_POWER'] = '${stringTableGasConsumption}';
-elvST['POWERMETER_IEC1|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
-elvST['POWERMETER_IEC1|GAS_ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounterGas}';
-elvST['POWERMETER_IEC1|POWER'] = '${stringTablePowerMeterPower}';
-elvST['POWERMETER_IEC1|GAS_POWER'] = '${stringTableGasConsumption}';
-elvST['POWERMETER_IEC1|IEC_ENERGY_COUNTER'] = '${stringTablePowerMeterIECEnergyCounter}';
-elvST['POWERMETER_IEC1|IEC_POWER'] = '${stringTableIECPowerMeterPower}';
-elvST['POWERMETER_IEC2|IEC_ENERGY_COUNTER'] = '${stringTablePowerMeterIECEnergyCounter}';
-elvST['POWERMETER_IEC2|IEC_POWER'] = '${stringTableIECPowerMeterPower}';
-elvST['POWERUP_OFF'] = '${stringTablePowerUpOFF} ';
-elvST['POWERUP_ON'] = '${stringTablePowerUpON}';
 elvST['PRESS_LONG'] = '${stringTableKeyPressLong}';
 elvST['PRESS_LONG=TRUE'] = '${stringTableKeyPressLongTrue}';
 elvST['PRESS_SHORT'] = '${stringTableKeyPressShort}';
 elvST['PRESS_SHORT=TRUE'] = '${stringTableKeyPressShortTrue}';
+elvST['PROCESS=NOT_STABLE'] = '${stringTableProcessNotStable}';
+elvST['PROCESS=STABLE'] = '${stringTableProcessStable}';
 elvST['PULSE_SENSOR'] = '${stringTablePulseSensorTitle}';
 elvST['PULSE_SENSOR|SEQUENCE_OK'] = '${stringTablePulseSensorSequenceOk}';
 elvST['PULSE_SENSOR|SEQUENCE_PULSE_1'] = '${stringTablePulseSensorSequencePulse1}';
@@ -3478,53 +3847,37 @@ elvST['PULSE_SENSOR|SEQUENCE_PULSE_5'] = '${stringTablePulseSensorSequencePulse5
 elvST['PULSE_SENSOR|SEQUENCE_PULSE_5=NOT_USED'] = '${stringTablePulseSensorSequencePulse5Unused}';
 elvST['PULSE_SENSOR|SEQUENCE_TOLERANCE'] = '${stringTablePulseSensorSequenceTolerance}';
 elvST['RAINDETECTOR'] = '${stringTableRainDetector}';
+elvST['RAINDETECTOR_HEAT|STATE=FALSE'] = '${stringTableRainDetectorHeatingOff}';
+elvST['RAINDETECTOR_HEAT|STATE=TRUE'] = '${stringTableRainDetectorHeatingOn}';
+elvST['RAINDETECTOR|COND_TX_THRESHOLD_HI'] = '${stringTableRainDetectorCondTxThresholdHi}';
+elvST['RAINDETECTOR|COND_TX_THRESHOLD_LO'] = '${stringTableRainDetectorCondTxThresholdLo}';
 elvST['RAINDETECTOR|EVENT_FILTERTIME'] = '${stringTableRainDetectorEventFilterTime}';
+elvST['RAINDETECTOR|EVENT_RELEASE_FILTER_TIME'] = '${stringTableRainDetectorEventReleaseFilterTime}';
 elvST['RAINDETECTOR|STATE=DRY'] = '${stringTableRainDetectorDry}';
 elvST['RAINDETECTOR|STATE=RAIN'] = '${stringTableRainDetectorRain}';
 elvST['RAINDETECTOR|STATE_HIGH_HOLD_TIME'] = '${stringTableRainDetectorStateHighHoldTime}';
-elvST['RAINDETECTOR|EVENT_RELEASE_FILTER_TIME'] = '${stringTableRainDetectorEventReleaseFilterTime}';
-elvST['RAINDETECTOR|COND_TX_THRESHOLD_HI'] = '${stringTableRainDetectorCondTxThresholdHi}';
-elvST['RAINDETECTOR|COND_TX_THRESHOLD_LO'] = '${stringTableRainDetectorCondTxThresholdLo}';
-elvST['RAINDETECTOR_HEAT|STATE=TRUE'] = '${stringTableRainDetectorHeatingOn}';
-elvST['RAINDETECTOR_HEAT|STATE=FALSE'] = '${stringTableRainDetectorHeatingOff}';
-elvST['RESTART_OFF'] = '${stringTableRestartOff}';
-elvST['RESTART_LAST'] = '${stringTableRestartLast}';
-elvST['RESTART_BUTTONPRESS'] = '${stringTableRestartButtonPress}';
-elvST['RESTART_BUTTONPRESS_IF_WAS_ON'] = '${stringTableRestartButtonPressIfWasOn}';
+elvST['RAMP_TIME'] = '${stringTableDimmerRampTime}';
 elvST['REMOTECONTROL_RECEIVER'] = '${stringTableRemoteControlReceiver}';
-elvST['REPEATED_LONG_PRESS_TIMEOUT_VALUE'] = '${stringTableKeyLongPressTimeOutValue}';
 elvST['REPEATED_LONG_PRESS_TIMEOUT_UNIT'] = '${stringTableKeyLongPressTimeOutUnit}';
 elvST['REPEATED_LONG_PRESS_TIMEOUT_UNIT=100ms'] = '${optionUnit100MS}';
-elvST['REPEATED_LONG_PRESS_TIMEOUT_UNIT=S'] = '${optionUnitS}';
-elvST['REPEATED_LONG_PRESS_TIMEOUT_UNIT=M'] = '${optionUnitM}';
 elvST['REPEATED_LONG_PRESS_TIMEOUT_UNIT=H'] = '${optionUnitH}';
+elvST['REPEATED_LONG_PRESS_TIMEOUT_UNIT=M'] = '${optionUnitM}';
+elvST['REPEATED_LONG_PRESS_TIMEOUT_UNIT=S'] = '${optionUnitS}';
+elvST['REPEATED_LONG_PRESS_TIMEOUT_VALUE'] = '${stringTableKeyLongPressTimeOutValue}';
+elvST['RESTART_BUTTONPRESS'] = '${stringTableRestartButtonPress}';
+elvST['RESTART_BUTTONPRESS_IF_WAS_ON'] = '${stringTableRestartButtonPressIfWasOn}';
+elvST['RESTART_LAST'] = '${stringTableRestartLast}';
+elvST['RESTART_OFF'] = '${stringTableRestartOff}';
+elvST['RGB'] = '${stringTableRGBWColorValue}';
+elvST['RGBW'] = '${stringTableRGBWColorValue}';
 elvST['RGBW_AUTOMATIC'] = '${stringTableRGBWAutomaticTitle}';
-elvST['RGBW_AUTOMATIC|PROGRAM'] = '${stringTableRGBWProgram}';
 elvST['RGBW_AUTOMATIC|COLOR_CHANGE_SPEED'] = '${stringTableRGBWColorChangeSpeed}';
+elvST['RGBW_AUTOMATIC|PROGRAM'] = '${stringTableRGBWProgram}';
 elvST['RGBW_COLOR'] = '${stringTableRGBWColorTitle}';
 elvST['RGBW_COLOR|COLOR'] = '${stringTableRGBWColorValue}';
 elvST['RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_BLUE'] = '${stringTableRGBWWhiteAdjustmentBlue}';
 elvST['RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_GREEN'] = '${stringTableRGBWWhiteAdjustmentGreen}';
 elvST['RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_RED'] = '${stringTableRGBWWhiteAdjustmentRed}';
-elvST['ROTARY_HANDLE_TRANSCEIVER'] = '${stringTableRHSTitle}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A'] = '${stringTableRHSMsgPosA}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=CLOSED'] = '${stringTableRHSMsgPosClosed}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=NO_MSG'] = '${stringTableRHSMsgPosNoMsg}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=OPEN'] = '${stringTableRHSMsgPosOpen}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=TILTED'] = '${stringTableRHSMsgPosTilted}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B'] = '${stringTableRHSMsgPosB}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=CLOSED'] = '${stringTableRHSMsgPosClosed}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG'] = '${stringTableRHSMsgPosNoMsg}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=OPEN'] = '${stringTableRHSMsgPosOpen}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=TILTED'] = '${stringTableRHSMsgPosTilted}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C'] = '${stringTableRHSMsgPosC}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=CLOSED'] = '${stringTableRHSMsgPosClosed}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=NO_MSG'] = '${stringTableRHSMsgPosNoMsg}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=OPEN'] = '${stringTableRHSMsgPosOpen}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=TILTED'] = '${stringTableRHSMsgPosTilted}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=CLOSED'] = '${stringTableRHSStateClosed}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=OPEN'] = '${stringTableRHSStateOpen}';
-elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=TILTED'] = '${stringTableRHSStateTilted}';
 elvST['ROTARY_HANDLE_SENSOR'] = '${stringTableRHSTitle}';
 elvST['ROTARY_HANDLE_SENSOR|ERROR=SABOTAGE'] = '${stringTableRHSErrorSabotage}';
 elvST['ROTARY_HANDLE_SENSOR|EVENT_DELAYTIME'] = '${stringTableRHSEventDelayTime}';
@@ -3546,78 +3899,90 @@ elvST['ROTARY_HANDLE_SENSOR|MSG_FOR_POS_C=TILTED'] = '${stringTableRHSMsgPosTilt
 elvST['ROTARY_HANDLE_SENSOR|STATE=CLOSED'] = '${stringTableRHSStateClosed}';
 elvST['ROTARY_HANDLE_SENSOR|STATE=OPEN'] = '${stringTableRHSStateOpen}';
 elvST['ROTARY_HANDLE_SENSOR|STATE=TILTED'] = '${stringTableRHSStateTilted}';
+elvST['ROTARY_HANDLE_TRANSCEIVER'] = '${stringTableRHSTitle}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A'] = '${stringTableRHSMsgPosA}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=CLOSED'] = '${stringTableRHSMsgPosClosed}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=NO_MSG'] = '${stringTableRHSMsgPosNoMsg}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=OPEN'] = '${stringTableRHSMsgPosOpen}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_A=TILTED'] = '${stringTableRHSMsgPosTilted}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B'] = '${stringTableRHSMsgPosB}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=CLOSED'] = '${stringTableRHSMsgPosClosed}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG'] = '${stringTableRHSMsgPosNoMsg}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=OPEN'] = '${stringTableRHSMsgPosOpen}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_B=TILTED'] = '${stringTableRHSMsgPosTilted}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C'] = '${stringTableRHSMsgPosC}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=CLOSED'] = '${stringTableRHSMsgPosClosed}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=NO_MSG'] = '${stringTableRHSMsgPosNoMsg}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=OPEN'] = '${stringTableRHSMsgPosOpen}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=TILTED'] = '${stringTableRHSMsgPosTilted}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=CLOSED'] = '${stringTableRHSStateClosed}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=OPEN'] = '${stringTableRHSStateOpen}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=TILTED'] = '${stringTableRHSStateTilted}';
 elvST['RS485_IDLE_TIME'] = '${stringTableRS485IdleTime}';
+elvST['RSSI_DEVICE'] = '${stringTableRSSIDevice}';
+elvST['RSSI_PEER'] = '${stringTableRSSIPeer}';
+elvST['SABOTAGE=FALSE'] = '${stringTableSabotageContactOk}';
+elvST['SABOTAGE=TRUE'] = '${stringTableSabotageContactWasActive}';
 elvST['SABOTAGE_MSG'] = '${stringTableSabotageMsg}';
 elvST['SABOTAGE|SHAKING'] = '${stringTableSabotageContact}';
+elvST['SECTION'] = '${stringTableSection}';
 elvST['SENSOR=FALSE'] = '${stringTableSensorFalse}';
 elvST['SENSOR=TRUE'] = '${stringTableSensorTrue}';
-elvST['SENSOR|INPUT_LOCKED'] = '${stringTableSensorInputLocked}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE'] = '${stringTableSensorCO2Title}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|EVENT_FILTERTIME'] = '${stringTableSensorCO2EventFilterTime}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_A'] = '${stringTableSensorCO2MsgPosA0}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_A=LEVEL_NORMAL'] = '${stringTableSensorCO2MsgPosA1}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_A=NO_MSG'] = '${stringTableSensorCO2MsgPosA2}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_B'] = '${stringTableSensorCO2MsgPosB0}';
-elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_B=NO_MSG'] = '${stringTableSensorCO2MsgPosB1}';
-elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_B=LEVEL_NORMAL'] = '${stringTableSensorCO2MsgPosB2}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_B=LEVEL_ADDED'] = '${stringTableSensorCO2MsgPosB3}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_B=LEVEL_ADDED_STRONG'] = '${stringTableSensorCO2MsgPosB4}';
+elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_B=LEVEL_NORMAL'] = '${stringTableSensorCO2MsgPosB2}';
+elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_B=NO_MSG'] = '${stringTableSensorCO2MsgPosB1}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_C'] = '${stringTableSensorCO2MsgPosC0}';
-elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_C=NO_MSG'] = '${stringTableSensorCO2MsgPosC1}';
-elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_C=LEVEL_NORMAL'] = '${stringTableSensorCO2MsgPosC2}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_C=LEVEL_ADDED'] = '${stringTableSensorCO2MsgPosC3}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_C=LEVEL_ADDED_STRONG'] = '${stringTableSensorCO2MsgPosC4}';
+elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_C=LEVEL_NORMAL'] = '${stringTableSensorCO2MsgPosC2}';
+elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_C=NO_MSG'] = '${stringTableSensorCO2MsgPosC1}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D'] = '${stringTableSensorCO2MsgPosD0}';
-elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D=NO_MSG'] = '${stringTableSensorCO2MsgPosD1}';
-elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D=LEVEL_NORMAL'] = '${stringTableSensorCO2MsgPosD2}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D=LEVEL_ADDED'] = '${stringTableSensorCO2MsgPosD3}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D=LEVEL_ADDED_STRONG'] = '${stringTableSensorCO2MsgPosD4}';
-elvST['SENSOR_FOR_CARBON_DIOXIDE|STATE=LEVEL_NORMAL'] = '${stringTableSensorCO2LevelOk}';
+elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D=LEVEL_NORMAL'] = '${stringTableSensorCO2MsgPosD2}';
+elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D=NO_MSG'] = '${stringTableSensorCO2MsgPosD1}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|STATE=LEVEL_ADDED'] = '${stringTableSensorCO2LevelHigh}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|STATE=LEVEL_ADDED_STRONG'] = '${stringTableSensorCO2LevelStrong}';
+elvST['SENSOR_FOR_CARBON_DIOXIDE|STATE=LEVEL_NORMAL'] = '${stringTableSensorCO2LevelOk}';
 elvST['SENSOR_WINDOW'] = '${stringTableSensorWindowTitle}';
 elvST['SENSOR_WINDOW|EVENT_DELAYTIME'] = '${stringTableSensorWindowEventDelayTime}';
 elvST['SENSOR_WINDOW|EVENT_DELAYTIME=NOT_USED'] = '${stringTableActorWindowStatusInfoNotUsed}';
 elvST['SENSOR_WINDOW|LEVEL'] = '${stringTableActorWindowLevel}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_LOCKED'] = '${stringTableActorWindowTT_0}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_UNLOCKS_IN_TILT_POSITION'] = '${stringTableActorWindowTT_1}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_UNLOCKED_IN_TILT_POSITION_VENT_FRAME_IS_DUE'] = '${stringTableActorWindowTT_2}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_OPENS_IN_TILT_POSITION'] = '${stringTableActorWindowTT_3}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_IN_TILT_POSITION_PARTITIAL_OPEND'] = '${stringTableActorWindowTT_4}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_IN_TILT_POSITION_FULL_OPEND'] = '${stringTableActorWindowTT_5}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_CLOSES_FROM_TILT_POSITION'] = '${stringTableActorWindowTT_6}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_LOCKS_FROM_TILT_POSITION'] = '${stringTableActorWindowTT_7}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_UNLOCKS_IN_TURN_POSITION'] = '${stringTableActorWindowTT_8}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_UNLOCKED_IN_TURN_POSITION_VENT_FRAME_IS_DUE'] = '${stringTableActorWindowTT_9}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_COULT_BE_OPEND_MANUAL_IN_TURN_POSITION'] = '${stringTableActorWindowTT_10}';
-elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_VENT_FRAME_IS_DUE_WINDOW_LOCKS_FROM_TURN_POSITION'] = '${stringTableActorWindowTT_11}';
 elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TIPTRONIC_UNKNOWN_STATE1'] = '${stringTableActorWindowTT_12}';
 elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TIPTRONIC_UNKNOWN_STATE2'] = '${stringTableActorWindowTT_13}';
 elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TIPTRONIC_WINDOW_IN_SHEV_POSITION'] = '${stringTableActorWindowTT_14}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_CLOSES_FROM_TILT_POSITION'] = '${stringTableActorWindowTT_6}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_COULT_BE_OPEND_MANUAL_IN_TURN_POSITION'] = '${stringTableActorWindowTT_10}';
 elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_INITIAL_OPERATION'] = '${stringTableActorWindowTT_15}';
-elvST['SENSOR_WINDOW|WIN_RELEASE=TRUE'] = '${stringTableActorWindowReleaseTrue}';
-elvST['SENSOR_WINDOW|WIN_RELEASE=FALSE'] = '${stringTableActorWindowReleaseFalse}';
-elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_UNKNOWN_WINDOW_TYPE'] = '${stringTableSensorWindowType_0}';
-elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_TURN_AND_TILT'] = '${stringTableSensorWindowType_1}';
-elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_TURN_AND_TILT_TURN_LOCKED'] = '${stringTableSensorWindowType_2}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_IN_TILT_POSITION_FULL_OPEND'] = '${stringTableActorWindowTT_5}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_IN_TILT_POSITION_PARTITIAL_OPEND'] = '${stringTableActorWindowTT_4}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_UNLOCKED_IN_TILT_POSITION_VENT_FRAME_IS_DUE'] = '${stringTableActorWindowTT_2}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_IS_UNLOCKED_IN_TURN_POSITION_VENT_FRAME_IS_DUE'] = '${stringTableActorWindowTT_9}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_LOCKED'] = '${stringTableActorWindowTT_0}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_LOCKS_FROM_TILT_POSITION'] = '${stringTableActorWindowTT_7}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_OPENS_IN_TILT_POSITION'] = '${stringTableActorWindowTT_3}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_UNLOCKS_IN_TILT_POSITION'] = '${stringTableActorWindowTT_1}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_UNLOCKS_IN_TURN_POSITION'] = '${stringTableActorWindowTT_8}';
+elvST['SENSOR_WINDOW|TIPTRONIC_STATE=TT_VENT_FRAME_IS_DUE_WINDOW_LOCKS_FROM_TURN_POSITION'] = '${stringTableActorWindowTT_11}';
+elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_SHEV_TILT'] = '${stringTableSensorWindowType_6}';
+elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_SHEV_TURN'] = '${stringTableSensorWindowType_5}';
 elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_TOPLIGHT'] = '${stringTableSensorWindowType_3}';
 elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_TURN'] = '${stringTableSensorWindowType_4}';
-elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_SHEV_TURN'] = '${stringTableSensorWindowType_5}';
-elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_SHEV_TILT'] = '${stringTableSensorWindowType_6}';
+elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_TURN_AND_TILT'] = '${stringTableSensorWindowType_1}';
+elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_TURN_AND_TILT_TURN_LOCKED'] = '${stringTableSensorWindowType_2}';
+elvST['SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_UNKNOWN_WINDOW_TYPE'] = '${stringTableSensorWindowType_0}';
+elvST['SENSOR_WINDOW|WIN_RELEASE=FALSE'] = '${stringTableActorWindowReleaseFalse}';
+elvST['SENSOR_WINDOW|WIN_RELEASE=TRUE'] = '${stringTableActorWindowReleaseTrue}';
+elvST['SENSOR|INPUT_LOCKED'] = '${stringTableSensorInputLocked}';
+elvST['SET_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverSetTemperature}';
 elvST['SHUTTER_CONTACT'] = '${stringTableShutterContactTitle}';
-elvST['SHUTTER_CONTACT|ERROR=SABOTAGE'] = '${stringTableShutterContactErrorSabotage}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_A'] = '${stringTableShutterContactMsgPosA0}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_A=CLOSED'] = '${stringTableShutterContactMsgPosA1}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_A=NO_MSG'] = '${stringTableShutterContactMsgPosA2}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_A=OPEN'] = '${stringTableShutterContactMsgPosA3}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_B'] = '${stringTableShutterContactMsgPosB0}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_B=CLOSED'] = '${stringTableShutterContactMsgPosB1}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_B=NO_MSG'] = '${stringTableShutterContactMsgPosB2}';
-elvST['SHUTTER_CONTACT|MSG_FOR_POS_B=OPEN'] = '${stringTableShutterContactMsgPosB3}';
-elvST['SHUTTER_CONTACT|STATE=FALSE'] = '${stringTableShutterContactStateFalse}';
-elvST['SHUTTER_CONTACT|STATE=TRUE'] = '${stringTableShutterContactStateTrue}';
-elvST['SHUTTER_CONTACT|STATE=CLOSED'] = '${stringTableShutterContactStateFalse}';
-elvST['SHUTTER_CONTACT|STATE=OPEN'] = '${stringTableShutterContactStateTrue}';
 elvST['SHUTTER_CONTACT_HMIP'] = '${stringTableShutterContactTitle}';
 elvST['SHUTTER_CONTACT_HMIP|ERROR=SABOTAGE'] = '${stringTableShutterContactErrorSabotage}';
 elvST['SHUTTER_CONTACT_HMIP|MSG_FOR_POS_A'] = '${stringTableShutterContactHmIPMsgPosA0}';
@@ -3628,44 +3993,50 @@ elvST['SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B'] = '${stringTableShutterContactHmIPMs
 elvST['SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B=CLOSED'] = '${stringTableShutterContactMsgPosB1}';
 elvST['SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B=NO_MSG'] = '${stringTableShutterContactMsgPosB2}';
 elvST['SHUTTER_CONTACT_HMIP|MSG_FOR_POS_B=OPEN'] = '${stringTableShutterContactMsgPosB3}';
-elvST['SHUTTER_CONTACT_HMIP|STATE=FALSE'] = '${stringTableShutterContactStateFalse}';
-elvST['SHUTTER_CONTACT_HMIP|STATE=TRUE'] = '${stringTableShutterContactStateTrue}';
 elvST['SHUTTER_CONTACT_HMIP|STATE=CLOSED'] = '${stringTableShutterContactStateFalse}';
+elvST['SHUTTER_CONTACT_HMIP|STATE=FALSE'] = '${stringTableShutterContactStateFalse}';
 elvST['SHUTTER_CONTACT_HMIP|STATE=OPEN'] = '${stringTableShutterContactStateTrue}';
+elvST['SHUTTER_CONTACT_HMIP|STATE=TRUE'] = '${stringTableShutterContactStateTrue}';
+elvST['SHUTTER_CONTACT|ERROR=SABOTAGE'] = '${stringTableShutterContactErrorSabotage}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_A'] = '${stringTableShutterContactMsgPosA0}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_A=CLOSED'] = '${stringTableShutterContactMsgPosA1}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_A=NO_MSG'] = '${stringTableShutterContactMsgPosA2}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_A=OPEN'] = '${stringTableShutterContactMsgPosA3}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_B'] = '${stringTableShutterContactMsgPosB0}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_B=CLOSED'] = '${stringTableShutterContactMsgPosB1}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_B=NO_MSG'] = '${stringTableShutterContactMsgPosB2}';
+elvST['SHUTTER_CONTACT|MSG_FOR_POS_B=OPEN'] = '${stringTableShutterContactMsgPosB3}';
+elvST['SHUTTER_CONTACT|STATE=CLOSED'] = '${stringTableShutterContactStateFalse}';
+elvST['SHUTTER_CONTACT|STATE=FALSE'] = '${stringTableShutterContactStateFalse}';
+elvST['SHUTTER_CONTACT|STATE=OPEN'] = '${stringTableShutterContactStateTrue}';
+elvST['SHUTTER_CONTACT|STATE=TRUE'] = '${stringTableShutterContactStateTrue}';
 elvST['SIGNAL'] = '${stringTableSignal}';
+elvST['SIGNAL_CHIME'] = '${stringTableSignalChimeTitle}';
+elvST['SIGNAL_CHIME|ACT_NUM'] = '${stringTableSignalChimeActNum}';
+elvST['SIGNAL_CHIME|ACT_TYP'] = '${stringTableSignalChimeActType}';
+elvST['SIGNAL_CHIME|ON_TIME'] = '${stringTableSignalChimeOnTime}';
+elvST['SIGNAL_CHIME|STATE=FALSE'] = '${stringTableSignalChimeStateFalse}';
+elvST['SIGNAL_CHIME|STATE=TRUE'] = '${stringTableSignalChimeStateTrue}';
+elvST['SIGNAL_LED'] = '${stringTableSignalLEDTitle}';
+elvST['SIGNAL_LED|ACT_NUM'] = '${stringTableSignalLEDActNum}';
+elvST['SIGNAL_LED|ACT_TYP'] = '${stringTableSignalLEDActType}';
+elvST['SIGNAL_LED|ON_TIME'] = '${stringTableSignalLEDOnTime}';
+elvST['SIGNAL_LED|STATE=FALSE'] = '${stringTableSignalLEDStateFalse}';
+elvST['SIGNAL_LED|STATE=TRUE'] = '${stringTableSignalLEDStateTrue}';
 elvST['SIGNAL_TONE'] = '${stringTableSignalTone}';
 elvST['SIGNAL_TONE=HIGH'] = '${stringTableSignalToneHigh}';
 elvST['SIGNAL_TONE=LOW'] = '${stringTableSignalToneLow}';
 elvST['SIGNAL_TONE=MID'] = '${stringTableSignalToneMid}';
 elvST['SIGNAL_TONE=VERY_HIGH'] = '${stringTableSignalToneVeryHigh}';
-elvST['SIGNAL_LED'] = '${stringTableSignalLEDTitle}';
-elvST['SIGNAL_LED|ACT_NUM'] = '${stringTableSignalLEDActNum}';
-elvST['SIGNAL_LED|ACT_TYP'] = '${stringTableSignalLEDActType}';
-elvST['SIGNAL_LED|ON_TIME'] = '${stringTableSignalLEDOnTime}';
-elvST['SIGNAL_LED|STATE=TRUE'] = '${stringTableSignalLEDStateTrue}';
-elvST['SIGNAL_LED|STATE=FALSE'] = '${stringTableSignalLEDStateFalse}';
-elvST['SIGNAL_CHIME'] = '${stringTableSignalChimeTitle}';
-elvST['SIGNAL_CHIME|ACT_NUM'] = '${stringTableSignalChimeActNum}';
-elvST['SIGNAL_CHIME|ACT_TYP'] = '${stringTableSignalChimeActType}';
-elvST['SIGNAL_CHIME|ON_TIME'] = '${stringTableSignalChimeOnTime}';
-elvST['SIGNAL_CHIME|STATE=TRUE'] = '${stringTableSignalChimeStateTrue}';
-elvST['SIGNAL_CHIME|STATE=FALSE'] = '${stringTableSignalChimeStateFalse}';
-elvST['SMOKE_DETECTOR|ERROR_ALARM_TEST=NO_ERROR'] = '${stringTableSmokeDetectorAlarmTestOK}';
-elvST['SMOKE_DETECTOR|ERROR_ALARM_TEST=ALARM_TEST_FAILED'] = '${stringTableSmokeDetectorAlarmTestFailure}';
-elvST['SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=NO_ERROR'] = '${stringTableSmokeDetectorSmokeChamberOK}';
-elvST['SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=DEGRADED_SMOKE_CHAMBER'] = '${stringTableSmokeDetectorSmokeChamberFailure}';
-elvST['SMOKE_DETECTOR|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
-elvST['SMOKE_DETECTOR|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
-elvST['SMOKE_DETECTOR|REPEAT_ENABLE'] = '${stringTableSmokeDetectorRepeatEnable}';
 elvST['SMOKE_DETECTOR_ALARM_STATUS=IDLE_OFF'] = '${stringTableStateIdleOff}';
 elvST['SMOKE_DETECTOR_ALARM_STATUS=INTRUSION_ALARM'] = '${stringTableStateIntrusionAlarm}';
 elvST['SMOKE_DETECTOR_ALARM_STATUS=PRIMARY_ALARM'] = '${stringTableStatePrimaryAlarm}';
 elvST['SMOKE_DETECTOR_ALARM_STATUS=SECONDARY_ALARM'] = '${stringTableStateSecondaryAlarm}';
+elvST['SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST'] = '${stringTableCommandCommunicationTest}';
+elvST['SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST_REPEATED'] = '${stringTableCommandCommunicationTestRepeated}';
 elvST['SMOKE_DETECTOR_COMMAND=INTRUSION_ALARM'] = '${stringTableCommandIntrusionAlarm}';
 elvST['SMOKE_DETECTOR_COMMAND=INTRUSION_ALARM_OFF'] = '${stringTableCommandIntrusionAlarmOff}';
 elvST['SMOKE_DETECTOR_COMMAND=SMOKE_TEST'] = '${stringTableCommandSmokeTest}';
-elvST['SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST'] = '${stringTableCommandCommunicationTest}';
-elvST['SMOKE_DETECTOR_COMMAND=COMMUNICATION_TEST_REPEATED'] = '${stringTableCommandCommunicationTestRepeated}';
 elvST['SMOKE_DETECTOR_EVENT=ALARM_OFF'] = '${stringTableEventAlarmOff}';
 elvST['SMOKE_DETECTOR_EVENT=ALARM_OFF_REPEATED'] = '${stringTableEventAlarmOffRepeated}';
 elvST['SMOKE_DETECTOR_EVENT=INTRUSION_ALARM'] = '${stringTableEventIntrusionAlarm}';
@@ -3675,31 +4046,39 @@ elvST['SMOKE_DETECTOR_EVENT=LOW_BAT_REPEATED'] = '${stringTableEventLowBatRepeat
 elvST['SMOKE_DETECTOR_EVENT=PRIMARY_ALARM'] = '${stringTableEventPrimaryAlarm}';
 elvST['SMOKE_DETECTOR_EVENT=SECONDARY_ALARM'] = '${stringTableEventSecondaryAlarm}';
 elvST['SMOKE_DETECTOR_TEAM'] = '${stringTableSmokeDetectorTitle}';
-elvST['SMOKE_DETECTOR_TEAM|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
-elvST['SMOKE_DETECTOR_TEAM|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
 elvST['SMOKE_DETECTOR_TEAM_V2'] = '${stringTableSmokeDetectorTitle}';
 elvST['SMOKE_DETECTOR_TEAM_V2|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
 elvST['SMOKE_DETECTOR_TEAM_V2|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
-elvST['SMOKE_DETECTOR_TEST_RESULT=COMMUNICATION_TEST_SENT'] = '${stringTableCommunicatingTestSent}';
+elvST['SMOKE_DETECTOR_TEAM|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
+elvST['SMOKE_DETECTOR_TEAM|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
 elvST['SMOKE_DETECTOR_TEST_RESULT=COMMUNICATION_TEST_OK'] = '${stringTableCommunicatingTestOK}';
-elvST['SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_OK'] = '${stringTableSystemTestOK}';
-elvST['SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_FAILED'] = '${stringTableSystemTestFailure}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=COMMUNICATION_TEST_SENT'] = '${stringTableCommunicatingTestSent}';
 elvST['SMOKE_DETECTOR_TEST_RESULT=NONE'] = '${stringTableSystemTestNone}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_FAILED'] = '${stringTableSystemTestFailure}';
+elvST['SMOKE_DETECTOR_TEST_RESULT=SMOKE_TEST_OK'] = '${stringTableSystemTestOK}';
+elvST['SMOKE_DETECTOR|ERROR_ALARM_TEST=ALARM_TEST_FAILED'] = '${stringTableSmokeDetectorAlarmTestFailure}';
+elvST['SMOKE_DETECTOR|ERROR_ALARM_TEST=NO_ERROR'] = '${stringTableSmokeDetectorAlarmTestOK}';
+elvST['SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=DEGRADED_SMOKE_CHAMBER'] = '${stringTableSmokeDetectorSmokeChamberFailure}';
+elvST['SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=NO_ERROR'] = '${stringTableSmokeDetectorSmokeChamberOK}';
+elvST['SMOKE_DETECTOR|REPEAT_ENABLE'] = '${stringTableSmokeDetectorRepeatEnable}';
+elvST['SMOKE_DETECTOR|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
+elvST['SMOKE_DETECTOR|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
+elvST['SOUND_ID'] = '${stringTableSoundID}';
 elvST['SPEED_MULTIPLIER'] = '${stringTableSpeedMultiplier}';
 elvST['STANDBY_TIME'] = '${stringTableStandByTime}';
+elvST['STATE=FALSE'] = '${stringTableStateFalse}';
+elvST['STATE=TRUE'] = '${stringTableStateTrue}';
+elvST['STATUSINFO_MINDELAY'] = '${stringTableStatusInfoMinDelay}';
+elvST['STATUSINFO_RANDOM'] = '${stringTableStatusInfoRandom}';
 elvST['STATUS_INDICATOR'] = '${stringTableStatusIndicatorTitle}';
-elvST['STATUS_INDICATOR|STATE=TRUE'] = '${stringTableStatusIndicatorStateTrue}';
-elvST['STATUS_INDICATOR|STATE=FALSE'] = '${stringTableStatusIndicatorStateFalse}';
-elvST['STATUS_INDICATOR|ON_TIME'] = '${stringTableStatusIndicatorOnTime}';
-elvST['STATUS_INDICATOR|INHIBIT=TRUE'] = '${stringTableStatusIndicatorInhibitTrue}';
 elvST['STATUS_INDICATOR|INHIBIT=FALSE'] = '${stringTableStatusIndicatorInhibitFalse}';
+elvST['STATUS_INDICATOR|INHIBIT=TRUE'] = '${stringTableStatusIndicatorInhibitTrue}';
+elvST['STATUS_INDICATOR|ON_TIME'] = '${stringTableStatusIndicatorOnTime}';
+elvST['STATUS_INDICATOR|STATE=FALSE'] = '${stringTableStatusIndicatorStateFalse}';
+elvST['STATUS_INDICATOR|STATE=TRUE'] = '${stringTableStatusIndicatorStateTrue}';
+elvST['STATUS_MESSAGE_TEXT_ALIGNMENT_LEFT_ALIGNED'] = '${stringTableStatusMessageTextAligmentLeftAligned}';
 elvST['SUBMIT'] = '${stringTableSubmit}';
 elvST['SWITCH'] = '${stringTableSwitchTitle}';
-elvST['SWITCH|AES_ACTIVE'] = '${stringTableSwitchAESActive}';
-elvST['SWITCH|ON_TIME'] = '${stringTableSwitchOnTime}';
-elvST['SWITCH|STATE=FALSE'] = '${stringTableSwitchStateFalse}';
-elvST['SWITCH|STATE=TRUE'] = '${stringTableSwitchStateTrue}';
-elvST['SWITCH|STATUSINFO_RANDOM_A'] = '${stringTableStatusInfoRandomA}';
 elvST['SWITCH_INTERFACE'] = '${stringTableSwitchInterfaceTitle}';
 elvST['SWITCH_INTERFACE|PRESS'] = '${stringTableSwitchInterfacePress}';
 elvST['SWITCH_INTERFACE|STATE=FALSE'] = '${stringTableSwitchInterfaceStateFalse}';
@@ -3709,14 +4088,24 @@ elvST['SWITCH_SENSOR'] = '${stringTableSwitchSensorTitle}';
 elvST['SWITCH_TRANSMIT'] = '${stringTableSwitchTransmitTitle}';
 elvST['SWITCH_TRANSMIT|TWO_POINT_HYSTERESIS'] = '${stringTableSwitchTransmitTwoPointHysteresis}';
 elvST['SWITCH_VIRTUAL_RECEIVER'] = '${stringTableSwitchVirtualReceiverTitle}';
-elvST['TEMPERATURE_COMFORT'] = '${stringTableTemperatureComfort}';
-elvST['TEMPERATURE_LOWERING'] = '${stringTableTemperatureLowering}';
-elvST['TEMPERATURE_MINIMUM'] = '${stringTableTemperatureMinimum}';
-elvST['TEMPERATURE_MAXIMUM'] = '${stringTableTemperatureMaximum}';
+elvST['SWITCH|AES_ACTIVE'] = '${stringTableSwitchAESActive}';
+elvST['SWITCH|ON_TIME'] = '${stringTableSwitchOnTime}';
+elvST['SWITCH|STATE=FALSE'] = '${stringTableSwitchStateFalse}';
+elvST['SWITCH|STATE=TRUE'] = '${stringTableSwitchStateTrue}';
+elvST['SWITCH|STATUSINFO_RANDOM_A'] = '${stringTableStatusInfoRandomA}';
+elvST['TACTILE_SWITCH'] = '${stringTableTactileSwitch}';
+elvST['TACTILE_SWITCH=FALSE'] = '${stringTableTactileSwitchFalse}';
+elvST['TACTILE_SWITCH=TRUE'] = '${stringTableTactileSwitchTrue}';
 elvST['TEMPERATUREFALL_MODUS'] = '${stringTableTemperatureModus}';
 elvST['TEMPERATUREFALL_VALUE'] = '${stringTableTemperatureValue}';
 elvST['TEMPERATUREFALL_WINDOW_OPEN'] = '${stringTableTemperatureWindowOpen}';
 elvST['TEMPERATUREFALL_WINDOW_OPEN_TIME_PERIOD'] = '${stringTableTemperatureOpenTimePeriod}';
+elvST['TEMPERATURE_COMFORT'] = '${stringTableTemperatureComfort}';
+elvST['TEMPERATURE_LIMITER=FALSE'] = '${stringTableTemperatureLimiterFalse}';
+elvST['TEMPERATURE_LIMITER=TRUE'] = '${stringTableTemperatureLimiterTrue}';
+elvST['TEMPERATURE_LOWERING'] = '${stringTableTemperatureLowering}';
+elvST['TEMPERATURE_MAXIMUM'] = '${stringTableTemperatureMaximum}';
+elvST['TEMPERATURE_MINIMUM'] = '${stringTableTemperatureMinimum}';
 elvST['THERMALCONTROL_TRANSMIT'] = '${stringTableThermalControlTitle}';
 elvST['TILT_SENSOR'] = '${stringTableTiltSensorTitle}';
 elvST['TILT_SENSOR|EVENT_FILTERTIME'] = '${stringTableTiltSensorEventFilterTime}';
@@ -3730,36 +4119,68 @@ elvST['TILT_SENSOR|MSG_FOR_POS_B=NO_MSG'] = '${stringTableTiltSensorMsgPosB2}';
 elvST['TILT_SENSOR|MSG_FOR_POS_B=OPEN'] = '${stringTableTiltSensorMsgPosB3}';
 elvST['TILT_SENSOR|STATE=FALSE'] = '${stringTableTiltSensorStateFalse}';
 elvST['TILT_SENSOR|STATE=TRUE'] = ' ${stringTableTiltSensorStateTrue}';
-elvST['TRANSMIT_TRY_MAX'] = '${stringTableTransmitTryMax}';
+elvST['TIME_OF_OPERATION'] = '${stringTableTimeOfOperation}';
 elvST['TRANSMIT_DEV_TRY_MAX'] = '${stringTableTransmitDevTryMax}';
+elvST['TRANSMIT_TRY_MAX'] = '${stringTableTransmitTryMax}';
+elvST['TX_MINDELAY'] = '${stringTableTxMinDelay}';
+elvST['TX_MINDELAY_UNIT'] = '${stringTableTxMinDelayUnit}';
+elvST['TX_MINDELAY_UNIT=100MS'] = '${optionUnit100MS}';
+elvST['TX_MINDELAY_UNIT=H'] = '${optionUnitH}';
+elvST['TX_MINDELAY_UNIT=M'] = '${optionUnitM}';
+elvST['TX_MINDELAY_UNIT=S'] = '${optionUnitS}';
+elvST['TX_MINDELAY_VALUE'] = '${stringTableTxMinDelayValue}';
+elvST['TX_THRESHOLD_PERCENT'] = '${stringTableTxThresholdPercent}';
 elvST['TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
+elvST['UNREACH=FALSE'] = '${stringTableUnreachFalse}';
+elvST['UNREACH=TRUE'] = '${stringTableUnreachTrue}';
+elvST['UPDATE_PENDING'] = '${stringTableUpdatePending}';
+elvST['UPDATE_PENDING=FALSE'] = '${stringTableUpdatePendingFalse}';
+elvST['UPDATE_PENDING=TRUE'] = '${stringTableUpdatePendingTrue}';
 elvST['USER_COLOR'] = '${stringTableSubmit}';
 elvST['USER_PROGRAM'] = '${stringTableSubmit}';
+elvST['VALVE_STATE'] = '${stringTableClimateControlRTTransceiverVentPos}';
+elvST['VALVE_STATE=ADAPTION_DONE'] = '${stringTableValveStateAdaptionDone}';
+elvST['VALVE_STATE=ADAPTION_IN_PROGRESS'] = '${stringTableValveStateAdaptionInProgress}';
+elvST['VALVE_STATE=ADJUSTMENT_TOO_BIG'] = '${stringTableValveStateAdjTooBig}';
+elvST['VALVE_STATE=ADJUSTMENT_TOO_SMALL'] = '${stringTableValveStateAdjToSmall}';
+elvST['VALVE_STATE=ERROR_POSITION'] = '${stringTableValveStateErrorPosition}';
+elvST['VALVE_STATE=RUN_TO_START'] = '${stringTableValveStateRunToStart}';
+elvST['VALVE_STATE=STATE_NOT_AVAILABLE'] = '${stringTableValveStateNotAvailable}';
+elvST['VALVE_STATE=TOO_TIGHT'] = '${stringTableValveStateToTight}';
+elvST['VALVE_STATE=WAIT_FOR_ADAPTION'] = '${stringTableValveStateWaitForAdaption}';
 elvST['VENT_CLOSED'] = '${stringTableVentClosed}';
 elvST['VENT_OPEN'] = '${stringTableVentOpen}';
 elvST['VIRTUAL_DIMMER'] = '${stringTableVirtualDimmerTitle}';
 elvST['VIRTUAL_DIMMER|ERROR=LOAD_FAILURE'] = '${stringTableVirtualDimmerErrorLoadFailure}';
-elvST['VIRTUAL_DIMMER|ERROR_OVERLOAD'] = '${stringTableDimmerErrorOverload}';
 elvST['VIRTUAL_DIMMER|ERROR_OVERHEAT'] = '${stringTableDimmerErrorOverheat}';
+elvST['VIRTUAL_DIMMER|ERROR_OVERLOAD'] = '${stringTableDimmerErrorOverload}';
 elvST['VIRTUAL_DIMMER|ERROR_REDUCED'] = '${stringTableDimmerErrorReduced}';
 elvST['VIRTUAL_DIMMER|LOGIC_COMBINATION'] = '${stringTableLogicCombination}';
 elvST['VIRTUAL_DIMMER|POWERUP_ACTION'] = '${stringTableVirtualDimmerPowerUpAction}';
-elvST['VIRTUAL_DIMMER|STATUSINFO_RANDOM'] = '${stringTableVirtualDimmerStatusInfoRandom}';
 elvST['VIRTUAL_DIMMER|RAMP_STOP'] = '${stringTableDimmerRampStop}';
+elvST['VIRTUAL_DIMMER|STATUSINFO_RANDOM'] = '${stringTableVirtualDimmerStatusInfoRandom}';
 elvST['VIRTUAL_KEY'] = '${stringTableVirtualKeyTitle}';
 elvST['VIRTUAL_KEY|LEVEL'] = '${stringTableVirtualKeyLevel}';
-elvST['VOLUME_100$'] = '{stringTableVolume10}';
-elvST['VOLUME_90'] = '{stringTableVolume9}';
-elvST['VOLUME_80'] = '{stringTableVolume8}';
-elvST['VOLUME_70'] = '{stringTableVolume7}';
-elvST['VOLUME_60'] = '{stringTableVolume6}';
-elvST['VOLUME_50'] = '{stringTableVolume5}';
-elvST['VOLUME_40'] = '{stringTableVolume4}';
-elvST['VOLUME_30'] = '{stringTableVolume3}';
-elvST['VOLUME_20'] = '{stringTableVolume2}';
-elvST['VOLUME_10'] = '{stringTableVolume1}';
+elvST['VOLTAGE_0'] = '${stringTableVoltage0}';
+elvST['VOLTAGE_100'] = '${stringTableVoltage100}';
 elvST['VOLUME_0'] = '{stringTableVolume0}';
+elvST['VOLUME_10'] = '{stringTableVolume1}';
+elvST['VOLUME_100$'] = '{stringTableVolume10}';
+elvST['VOLUME_20'] = '{stringTableVolume2}';
+elvST['VOLUME_30'] = '{stringTableVolume3}';
+elvST['VOLUME_40'] = '{stringTableVolume4}';
+elvST['VOLUME_50'] = '{stringTableVolume5}';
+elvST['VOLUME_60'] = '{stringTableVolume6}';
+elvST['VOLUME_70'] = '{stringTableVolume7}';
+elvST['VOLUME_80'] = '{stringTableVolume8}';
+elvST['VOLUME_90'] = '{stringTableVolume9}';
+elvST['WAKEUP_BEHAVIOUR'] = '${stringTableButtonResponseWithoutChannelChooser}';
+elvST['WAKEUP_BEHAVIOUR_STATUS_MSG_CONFIRMATION'] = '${stringTableBehaviourStatusMsgConfirmation}';
+elvST['WAKEUP_BEHAVIOUR_STATUS_MSG_RESISTANCE'] = '${stringTableBehaviourStatusMsgResistance}';
+elvST['WAKEUP_BEHAVIOUR_STATUS_SIGNALIZATION_CONFIRMATION'] = '${stringTableBehaviourStatusSignalizationConfirmation}';
+elvST['WAKEUP_DEFAULT_CHANNEL'] = '${stringTableWakeupDefaultChannel}';
 elvST['WATERDETECTIONSENSOR'] = '${stringTableWDSTitle}';
+elvST['WATERDETECTIONSENSOR|EVENT_FILTERTIME'] = '${stringTableWDSEventFilterTime}';
 elvST['WATERDETECTIONSENSOR|EVENT_FILTERTIME'] = '${stringTableWDSEventFilterTime}';
 elvST['WATERDETECTIONSENSOR|MSG_FOR_POS_A'] = '${stringTableWDSMsgPosA0}';
 elvST['WATERDETECTIONSENSOR|MSG_FOR_POS_A=DRY'] = '${stringTableWDSMsgPosA1}';
@@ -3776,8 +4197,10 @@ elvST['WATERDETECTIONSENSOR|MSG_FOR_POS_C=WET'] = '${stringTableWDSMsgPosC3}';
 elvST['WATERDETECTIONSENSOR|STATE=DRY'] = '${stringTableWDSStateDry}';
 elvST['WATERDETECTIONSENSOR|STATE=WATER'] = '${stringTableWDSStateWater}';
 elvST['WATERDETECTIONSENSOR|STATE=WET'] = '${stringTableWDSStateWet}';
-elvST['WATERDETECTIONSENSOR|EVENT_FILTERTIME'] = '${stringTableWDSEventFilterTime}';
 elvST['WEATHER'] = '${stringTableWeatherTitle}';
+elvST['WEATHER_RECEIVER'] = '${stringTableWeatherReceiver}';
+elvST['WEATHER_TRANSMIT|HUMIDITY'] = '${stringTableWeatherHumidity}';
+elvST['WEATHER_TRANSMIT|TEMPERATURE'] = '${stringTableWeatherTemperature}';
 elvST['WEATHER|AIR_PRESSURE'] = '${stringTableWeatherAirPressure}';
 elvST['WEATHER|BRIGHTNESS'] = '${stringTableWeatherBrightness}';
 elvST['WEATHER|HUMIDITY'] = '${stringTableWeatherHumidity}';
@@ -3796,9 +4219,11 @@ elvST['WEATHER|WIND_SPEED'] = '${stringTableWeatherWindSpeed}';
 elvST['WEATHER|WIND_SPEED_RESULT_SOURCE'] = '${stringTableWeatherWindSpeedResultSource}';
 elvST['WEATHER|WIND_SPEED_RESULT_SOURCE=AVERAGE_VALUE'] = '${stringTableWeatherWindSpeedResultSourceAverage}';
 elvST['WEATHER|WIND_SPEED_RESULT_SOURCE=MAX_VALUE'] = '${stringTableWeatherWindSpeedResultSourceMax}';
-elvST['WEATHER_RECEIVER'] = '${stringTableWeatherReceiver}';
-elvST['WEATHER_TRANSMIT|TEMPERATURE'] = '${stringTableWeatherTemperature}';
-elvST['WEATHER_TRANSMIT|HUMIDITY'] = '${stringTableWeatherHumidity}';
+elvST['WHITE'] = '${stringTableColorTemperature}';
+elvST['WINDOW_OPEN_REPORTING'] = '${stringTableWindowOpenReporting}';
+elvST['WINDOW_OPEN_REPORTING=FALSE'] = '${stringTableWindowOpenReportingFalse}';
+elvST['WINDOW_OPEN_REPORTING=TRUE'] = '${stringTableWindowOpenReportingTrue}';
+elvST['WINDOW_STATE'] = '${stringTableWindowState}';
 elvST['WINDOW_SWITCH_RECEIVER'] = '${stringTableWindowSwitchReceiver}';
 elvST['WINMATIC'] = '${stringTableWinMaticTitle}';
 elvST['WINMATIC|ERROR=MOTOR_TILT_ERROR'] = '${stringTableWinMaticErrorMotorTilt}';
@@ -3817,198 +4242,9 @@ elvST['WINMATIC|STATE_UNCERTAIN=FALSE'] = '${stringTableWinMaticStateUncertainFa
 elvST['WINMATIC|STATE_UNCERTAIN=TRUE'] = '${stringTableWinMaticStateUncertainTrue}';
 elvST['WINMATIC|STOP'] = '${stringTableWinMaticStop}';
 elvST['WINMATIC|TILT_MAX'] = '${stringTableWinMaticTiltMax}';
-elvST['ACOUSTIC_ALARM_SELECTION=DISABLE_ACOUSTIC_SIGNAL'] = '${stringTableAlarmDisableAcousticSignal}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING'] = '${stringTableAlarmFrequencyRising}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_FALLING'] = '${stringTableAlarmFrequencyFalling}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING_AND_FALLING'] = '${stringTableAlarmFrequencyRisingAndFalling}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_HIGH'] = '${stringTableAlarmFrequencyAlternatingLowHigh}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_MID_HIGH'] = '${stringTableAlarmFrequencyAlternatingLowMidHigh}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_OFF'] = '${stringTableAlarmFrequencyHighOnOff}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_LONGOFF'] = '${stringTableAlarmFrequencyHighOnLongOff}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_OFF_HIGHON_OFF'] = '${stringTableAlarmFrequencyLowOnOffHighonOff}';
-elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_LONGOFF_HIGHON_LONGOFF'] = '${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}';
-elvST['ACOUSTIC_ALARM_SELECTION=LOW_BATTERY'] = '${stringTableAlarmLowBattery}';
-elvST['ACOUSTIC_ALARM_SELECTION=DISARMED'] = '${stringTableAlarmDisarmed}';
-elvST['ACOUSTIC_ALARM_SELECTION=INTERNALLY_ARMED'] = '${stringTableAlarmInternallyArmed}';
-elvST['ACOUSTIC_ALARM_SELECTION=EXTERNALLY_ARMED'] = '${stringTableAlarmExternallyArmed}';
-elvST['ACOUSTIC_ALARM_SELECTION=DELAYED_INTERNALLY_ARMED'] = '${stringTableAlarmDelayedInternallyArmed}';
-elvST['ACOUSTIC_ALARM_SELECTION=DELAYED_EXTERNALLY_ARMED'] = '${stringTableAlarmDelayedExternallyArmed}';
-elvST['ACOUSTIC_ALARM_SELECTION=EVENT'] = '${stringTableAlarmEvent}';
-elvST['ACOUSTIC_ALARM_SELECTION=ERROR'] = '${stringTableAlarmError}';
-elvST['ALL_LEDS'] = '${stringTableAllLEDs}';
-elvST['ANALOG_INPUT'] = '${stringTableAnalog}';
-elvST['ANALOG_OUTPUT'] = '${stringTableAnalog}';
-elvST['AUTO_MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
-elvST['ACTUAL_HUMIDITY'] = '${stringTableWeatherHumidity}';
-elvST['ACTUAL_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverActualTemp}';
-elvST['ALARMTIME_MAX'] = '${stringTableAlarmTimeMax}';
-elvST['ARR_TIMEOUT'] = '${stringTableArrTimeout}';
-elvST['BACKLIGHT_AT_CHARGE'] = '${stringTableBackLightAtCharge}';
-elvST['BACKLIGHT_AT_KEYSTROKE'] = '${stringTableBackLightAtKeystroke}';
-elvST['BACKLIGHT_AT_MOTION'] = '${stringTableBackLightAtMotion}';
-elvST['BACKLIGHT_ON_TIME'] = '${stringTableBackLightOnTime}';
-elvST['BAT_DEFECT_LIMIT'] = '${stringTableBatDefectLimit}';
-elvST['BATTERY_POWERED'] = '${stringTableBatteryPowered}';
-elvST['BATTERY_STATE'] = '${stringTableClimateControlRTTransceiverBatteryState}';
-elvST['BOOST_MODE'] = '${stringTableClimateControlRTTransceiverBoostMode}';
-elvST['BOOST_MODE=FALSE'] = '${stringTableBoostModeFalse}';
-elvST['BOOST_MODE=TRUE'] = '${stringTableBoostModeTrue}';
-elvST['BOOST_STATE'] = '${stringTableBoostState}';
-elvST['BRIGHTNESS'] = '${stringTableBrightness}';
-elvST['BRIGHTNESS_FILTER'] = '${stringTableBrightnessFilter}';
-elvST['COMFORT_MODE'] = '${stringTableClimateControlRTTransceiverComfortMode}';
-elvST['COMMUNICATION_REPORTING'] = '${stringTableCommunicatingReporting}';
-elvST['COMMUNICATION_REPORTING=TRUE'] = '${stringTableCommunicatingReportingTrue}';
-elvST['COMMUNICATION_REPORTING=FALSE'] = '${stringTableCommunicatingReportingFalse}';
-elvST['CONFIG_PENDING=TRUE'] = '${stringTableConfigPendingTrue}';
-elvST['CONFIG_PENDING=FALSE'] = '${stringTableConfigPendingFalse}';
-elvST['CONTROL_MODE=AUTO-MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
-elvST['CONTROL_MODE=BOOST-MODE'] = '${stringTableClimateControlRTTransceiverBoostMode}';
-elvST['CONTROL_MODE=MANU-MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
-elvST['CONTROL_MODE=PARTY-MODE'] = '${stringTableClimateControlRTTransceiverPartyMode}';
-elvST['HEATING_COOLING=COOLING'] = '${stringTableCooling}';
-elvST['HEATING_COOLING=HEATING'] = '${stringTableHeating}';
-elvST['DAYLIGHT_SAVINGS_TIME'] = '${stringTableDST}';
-elvST['DEVICE_IN_BOOTLOADER'] = '${stringTableDeviceInBootloader}';
-elvST['DISPLAY_INVERTING'] = '${stringTableDisplayInverting}';
-elvST['DURATION_UNIT'] = '${stringTableDurationUnit}';
-elvST['DURATION_UNIT=S'] = '${stringTableDurationUnitS}';
-elvST['DURATION_UNIT=M'] = '${stringTableDurationUnitM}';
-elvST['DURATION_UNIT=H'] = '${stringTableDurationUnitH}';
-elvST['DURATION_UNIT=D'] = '${stringTableDurationUnitD}';
-elvST['DURATION_VALUE'] = '${stringTableDurationValue}';
-elvST['DUTY_CYCLE=FALSE'] = '${stringTableDutyCycleFalse}';
-elvST['DUTY_CYCLE=TRUE'] = '${stringTableDutyCycleTrue}';
-elvST['DUTYCYCLE_LIMIT'] = '${stringTableDutyCycleLimit}';
-elvST['ENABLE_ROUTING'] = '${stringTableEnableRouting}';
-elvST['ERROR_CODE'] = '${stringTableErrorCode}';
-elvST['ERROR_POWER=NO_ERROR'] = '${stringTablePowerAvailable}';
-elvST['ERROR_POWER=POWER_FAILURE'] = '${stringTablePowerNotAvailable}';
-elvST['ERROR_SABOTAGE=NO_ERROR'] = '${stringTableSabotageContactOk}';
-elvST['ERROR_SABOTAGE=SABOTAGE'] = '${stringTableSabotage}';
-elvST['EVENT_DELAYTIME'] = '${stringTableEventDelay}';
-elvST['EVENT_DELAY_UNIT'] = '${stringTableEventDelayUnit}';
-elvST['EVENT_DELAY_UNIT=100MS'] = '${optionUnit100MS}';
-elvST['EVENT_DELAY_UNIT=S'] = '${optionUnitS}';
-elvST['EVENT_DELAY_UNIT=M'] = '${optionUnitM}';
-elvST['EVENT_DELAY_UNIT=H'] = '${optionUnitH}';
-elvST['EVENT_DELAY_VALUE'] = '${stringTableEventDelayValue}';
-elvST['EVENT_RANDOMTIME_VALUE'] = '${stringTableStatusInfoRandom}';
-elvST['EVENT_RANDOMTIME_UNIT'] = '${stringTableEventRandomTimeUnit}';
-elvST['EVENT_RANDOMTIME_UNIT=100MS'] = '${optionUnit100MS}';
-elvST['EVENT_RANDOMTIME_UNIT=S'] = '${optionUnitS}';
-elvST['EVENT_RANDOMTIME_UNIT=M'] = '${optionUnitM}';
-elvST['EVENT_RANDOMTIME_UNIT=H'] = '${optionUnitH}';
-elvST['EXPECT_AES'] = '${stringTableExpectAES}';
-elvST['ILLUMINATION'] = '${stringTableBrightness}';
-elvST['LED_DISABLE_CHANNELSTATE'] = '${stringTableLEDDisableChannelState}';
-elvST['LED_ONTIME'] = '${stringTableLEDOnTime}';
-elvST['LEVEL'] = '${stringTableDimmerLevel}';
-elvST['LEVEL_REAL'] = '${stringTableDimmerLevelReal}';
-elvST['LOGIC_COMBINATION'] = '${stringTableLogicCombination}';
-elvST['LOWBAT_REPORTING'] = '${stringTableLowbatReporting}';
-elvST['LOWBAT_REPORTING=FALSE'] = '${stringTableLowbatReportingFalse}';
-elvST['LOWBAT_REPORTING=TRUE'] = '${stringTableLowbatReportingTrue}';
-elvST['LOWBAT_SIGNAL'] = '${stringTableLowbatSignal}';
-elvST['LOWERING_MODE'] = '${stringTableClimateControlRTTransceiverLoweringMode}';
-elvST['LUX'] = '${stringTableLux}';
-elvST['MAINS_POWERED'] = '${stringTableMainsPowered}';
-elvST['MANU_MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
-elvST['MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE'] = '${stringTableMinMaxNotRelevantForManuMode}';
-elvST['MOTION=FALSE'] = '${stringTableMotionDetectorMotionFalse}';
-elvST['MOTION=TRUE'] = '${stringTableMotionDetectorMotionTrue}';
-elvST['MOTION_ACTIVE_TIME'] = '${stringTableMotionDetectorMotionActiveTime}';
-elvST['MOTION_DETECTION_ACTIVE=FALSE'] = '${stringTableMotionDetectorMotionDetectionActiveFalse}';
-elvST['MOTION_DETECTION_ACTIVE=TRUE'] = '${stringTableMotionDetectorMotionDetectionActiveTrue}';
-elvST['NOT_USED'] = '${stringTableNotUsed}';
-elvST['OLD_LEVEL'] = '${stringTableDimmerOldLevel}';
-elvST['ON_TIME'] = '${stringTableDimmerOnTime}';
-elvST['OPERATING_VOLTAGE'] = '${stringTableOperationVoltage}';
-elvST['OPTICAL_ALARM_SELECTION=DISABLE_OPTICAL_SIGNAL'] = '${stringTableAlarmDisableOpticalSignal}';
-elvST['OPTICAL_ALARM_SELECTION=BLINKING_ALTERNATELY_REPEATING'] = '${stringTableAlarmBlinkingAlternatelyRepeating}';
-elvST['OPTICAL_ALARM_SELECTION=BLINKING_BOTH_REPEATING'] = '${stringTableAlarmBlinkingBothRepeating}';
-elvST['OPTICAL_ALARM_SELECTION=DOUBLE_FLASHING_REPEATING'] = '${stringTableAlarmDoubleFlashingRepeating}';
-elvST['OPTICAL_ALARM_SELECTION=FLASHING_BOTH_REPEATING'] = '${stringTableAlarmFlashingBothRepeating}';
-elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_0'] = '${stringTableAlarmConfirmingSignal0}';
-elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_1'] = '${stringTableAlarmConfirmingSignal1}';
-elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_2'] = '${stringTableAlarmConfirmingSignal2}';
-elvST['OVERTEMP_LEVEL'] = '${stringTableDimmerOverTempLevel}';
-elvST['PARTY_MODE_SUBMIT'] = '${stringTablePartyModeSubmit}';
-elvST['PARTY_START_DAY'] = '${stringTablePartyStartDay}';
-elvST['PARTY_START_MONTH'] = '${stringTablePartyStartMonth}';
-elvST['PARTY_START_TIME'] = '${stringTablePartyStartTime}';
-elvST['PARTY_START_YEAR'] = '${stringTablePartyStartYear}';
-elvST['PARTY_STOP_DAY'] = '${stringTablePartyStopDay}';
-elvST['PARTY_STOP_MONTH'] = '${stringTablePartyStopMonth}';
-elvST['PARTY_STOP_TIME'] = '${stringTablePartyStopTime}';
-elvST['PARTY_STOP_YEAR'] = '${stringTablePartyStopYear}';
-elvST['PARTY_TEMPERATURE'] = '${stringTablePartyTemperature}';
-elvST['PEER_NEEDS_BURST'] = '${stringTablePeerNeedsBurst}';
-elvST['PIR_OPERATION_MODE'] = '${stringTablePirOperationMode}';
-elvST['POWERUP_ACTION'] = '${stringTableDimmerPowerUpAction}';
-elvST['POWERUP_JUMPTARGET'] = '${stringTableDimmerPowerUpAction}';
-elvST['POWERUP_ONDELAY_UNIT'] = '${stringTableOnDelayUnit}';
-elvST['POWERUP_ONDELAY_UNIT=1S'] = '${optionUnit1S}';
-elvST['POWERUP_ONDELAY_UNIT=5S'] = '${optionUnit5S}';
-elvST['POWERUP_ONDELAY_UNIT=10S'] = '${optionUnit10S}';
-elvST['POWERUP_ONDELAY_UNIT=1M'] = '${optionUnit1M}';
-elvST['POWERUP_ONDELAY_UNIT=5M'] = '${optionUnit5M}';
-elvST['POWERUP_ONDELAY_UNIT=10M'] = '${optionUnit10M}';
-elvST['POWERUP_ONDELAY_VALUE'] = '${stringTableOnDelayValue}';
-elvST['POWERUP_ONTIME_UNIT'] = '${stringTableOnTimeUnit}';
-elvST['POWERUP_ONTIME_UNIT=1S'] = '${optionUnit1S}';
-elvST['POWERUP_ONTIME_UNIT=5S'] = '${optionUnit5S}';
-elvST['POWERUP_ONTIME_UNIT=10S'] = '${optionUnit10S}';
-elvST['POWERUP_ONTIME_UNIT=1M'] = '${optionUnit1M}';
-elvST['POWERUP_ONTIME_UNIT=5M'] = '${optionUnit5M}';
-elvST['POWERUP_ONTIME_UNIT=10M'] = '${optionUnit10M}';
-elvST['POWERUP_ONTIME_UNIT=H'] = '${optionUnitH}';
-elvST['POWERUP_ONTIME_VALUE'] = '${stringTableOnTimeValue}';
-elvST['POWER_SUPPLY'] = '${stringTablePowerSupply}';
-elvST['PROCESS=STABLE'] = '${stringTableProcessStable}';
-elvST['PROCESS=NOT_STABLE'] = '${stringTableProcessNotStable}';
-elvST['RAMP_TIME'] = '${stringTableDimmerRampTime}';
-elvST['SABOTAGE=FALSE'] = '${stringTableSabotageContactOk}';
-elvST['SABOTAGE=TRUE'] = '${stringTableSabotageContactWasActive}';
-elvST['SET_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverSetTemperature}';
-elvST['SECTION'] = '${stringTableSection}';
-elvST['SOUND_ID'] = '${stringTableSoundID}';
-elvST['STATE=FALSE'] = '${stringTableStateFalse}';
-elvST['STATE=TRUE'] = '${stringTableStateTrue}';
-elvST['STATUSINFO_MINDELAY'] = '${stringTableStatusInfoMinDelay}';
-elvST['STATUSINFO_RANDOM'] = '${stringTableStatusInfoRandom}';
-elvST['TIME_OF_OPERATION'] = '${stringTableTimeOfOperation}';
-elvST['TX_MINDELAY'] = '${stringTableTxMinDelay}';
-elvST['TX_MINDELAY_UNIT'] = '${stringTableTxMinDelayUnit}';
-elvST['TX_MINDELAY_UNIT=100MS'] = '${optionUnit100MS}';
-elvST['TX_MINDELAY_UNIT=S'] = '${optionUnitS}';
-elvST['TX_MINDELAY_UNIT=M'] = '${optionUnitM}';
-elvST['TX_MINDELAY_UNIT=H'] = '${optionUnitH}';
-elvST['TX_MINDELAY_VALUE'] = '${stringTableTxMinDelayValue}';
-elvST['TX_THRESHOLD_PERCENT'] = '${stringTableTxThresholdPercent}';
-elvST['UNREACH=FALSE'] = '${stringTableUnreachFalse}';
-elvST['UNREACH=TRUE'] = '${stringTableUnreachTrue}';
-elvST['UPDATE_PENDING'] = '${stringTableUpdatePending}';
-elvST['VALVE_STATE'] = '${stringTableClimateControlRTTransceiverVentPos}';
-elvST['VALVE_STATE=STATE_NOT_AVAILABLE'] = '${stringTableValveStateNotAvailable}';
-elvST['VALVE_STATE=RUN_TO_START'] = '${stringTableValveStateRunToStart}';
-elvST['VALVE_STATE=WAIT_FOR_ADAPTION'] = '${stringTableValveStateWaitForAdaption}';
-elvST['VALVE_STATE=ADAPTION_IN_PROGRESS'] = '${stringTableValveStateAdaptionInProgress}';
-elvST['VALVE_STATE=ADAPTION_DONE'] = '${stringTableValveStateAdaptionDone}';
-elvST['VALVE_STATE=TOO_TIGHT'] = '${stringTableValveStateToTight}';
-elvST['VALVE_STATE=ADJUSTMENT_TOO_BIG'] = '${stringTableValveStateAdjTooBig}';
-elvST['VALVE_STATE=ADJUSTMENT_TOO_SMALL'] = '${stringTableValveStateAdjToSmall}';
-elvST['VALVE_STATE=ERROR_POSITION'] = '${stringTableValveStateErrorPosition}';
-elvST['WAKEUP_DEFAULT_CHANNEL'] = '${stringTableWakeupDefaultChannel}';
-elvST['WAKEUP_BEHAVIOUR'] = '${stringTableButtonResponseWithoutChannelChooser}';
-elvST['WAKEUP_BEHAVIOUR_STATUS_MSG_CONFIRMATION'] = '${stringTableBehaviourStatusMsgConfirmation}';
-elvST['WAKEUP_BEHAVIOUR_STATUS_SIGNALIZATION_CONFIRMATION'] = '${stringTableBehaviourStatusSignalizationConfirmation}';
-elvST['WINDOW_OPEN_REPORTING'] = '${stringTableWindowOpenReporting}';
-elvST['WINDOW_OPEN_REPORTING=FALSE'] = '${stringTableWindowOpenReportingFalse}';
-elvST['WINDOW_OPEN_REPORTING=TRUE'] = '${stringTableWindowOpenReportingTrue}';
-elvST['WINDOW_STATE'] = '${stringTableWindowState}';
 elvST['WS_CS'] = '${stringTableWSCS}';
 elvST['WS_TH'] = '${stringTableWSTH}';
+elvST['minutes'] = '${stringTableMinute}';
 /*
 Übersetzt den Inhalt der HTML-Elemente <span class="stringtable_value">...</span>
 und <select class="stringtable_select">...</select>
@@ -4304,7 +4540,14 @@ Array.prototype.ex_pushUnique = function(item)
   if (!this.ex_contains(item)) { this.push(item); }
   return this;
 };
-/*******************************************************************************
+
+String.prototype.reverse = function () {
+    var result = "";
+    for (var i = (this.length-1); i >= 0 ; i--) {
+        result += this[i];
+    }
+    return result;
+};/*******************************************************************************
  * xmlhttprequest.js
  * Browserunabhängiger Zugriff auf das XMLHttpRequest-Objekt.
  *
@@ -8178,7 +8421,7 @@ DeviceList = Singleton.create({
     
     return undefined;
   },
-  
+
   /**
    * Liefert eine Kanalgruppe anhand ihrer Id
    **/
@@ -9058,6 +9301,7 @@ ChannelChooser = Singleton.create({
   initialize: function()
   {
     this.HmIPIdentifier = "HmIP-RF";
+    this.VirtualDevicesIdentifier = "VirtualDevices";
     this.template = TrimPath.parseTemplate(CHANNELCHOOSER_JST);
   },
     
@@ -9079,33 +9323,39 @@ ChannelChooser = Singleton.create({
   },
 
   filterHmIPChannels4ProgramConditions: function(channel, arChannels) {
+    var channelTypeName = channel.typeName.toLowerCase();
+
     conInfo("filterHmIPChannels4ProgramConditions");
-    switch (channel.typeName.toLowerCase()) {
-      case "hmip-ps":
-      case "hmip-psm":
-        // HmIP-PS/PSM with older firmware (< 2.x.x) the virtual chaannels 4 and 5 didn't work
-        // So we changed the isVisible flag within the backend for this channels to false.
-        // With a firmware >= 2.x.x the virtual channels 4 and 5 should be visible.
-        // Channel 1 = key press - this doesn't work for HmIP devices and the CCU2
-        if ((channel.index != 1) && channel.isVisible) arChannels.push(channel);
-        break;
-      default : if (channel.isVisible) {arChannels.push(channel);}
+    // Channel KEY_TRANSCEIVER = key press - this doesn't work for HmIP devices and the CCU2
+    if ((channel.channelType != "KEY_TRANSCEIVER") && channel.isVisible) {
+      arChannels.push(channel);
     }
+
+    if ((channel.channelType == "KEY_TRANSCEIVER") && channel.isVisible && (channelTypeName != "hmip-ps") && (channelTypeName != "hmip-psm") && (channelTypeName != "hmip-pdt")) {
+      arChannels.push(channel);
+    }
+
     return arChannels;
   },
 
   filterHmIPChannels4ProgramActivities: function(channel, arChannels) {
     conInfo("filterHmIPChannels4ProgramActivities");
-    switch (channel.typeName.toLowerCase()) {
-      case "hmip-ps":
-      case "hmip-psm":
-        // HmIP-PS/PSM with older firmware (< 2.x.x) the virtual chaannels 4 and 5 didn't work
-        // So we changed the isVisible flag within the backend for this channels to false.
-        // With a firmware >= 2.x.x the virtual channels 4 and 5 should be visible.
-        // Channel 1 = key press - this doesn't work for HmIP devices and the CCU2
-        if ((channel.index != 1) && channel.isVisible) arChannels.push(channel);
-        break;
-      default : if (channel.isVisible) {arChannels.push(channel);}
+    if (channel.isVisible) {arChannels.push(channel);}
+    return arChannels;
+  },
+
+  filterOsramLightify: function(channel, arChannels) {
+    conInfo("filterOsramLightify");
+    if (! isNonCCUDevice(channel)) {
+      arChannels.push(channel);
+    }
+    return arChannels;
+  },
+
+  filterGateway: function(channel, arChannels) {
+    conInfo("filterGateway");
+    if (! isNonCCUGateway(channel)) {
+      arChannels.push(channel);
     }
     return arChannels;
   },
@@ -9125,6 +9375,14 @@ ChannelChooser = Singleton.create({
             this.filterHmIPChannels4ProgramConditions(channel, result);
           } else if (this.src == this.PRG_ACTIVITY) {
             this.filterHmIPChannels4ProgramActivities(channel, result);
+          } else {
+            result.push(channel);
+          }
+        } else if (channel.device.interfaceName == this.VirtualDevicesIdentifier) {
+          if (this.src == this.PRG_CONDITION) {
+            this.filterOsramLightify(channel, result);
+          } else if (this.src == this.PRG_ACTIVITY) {
+            this.filterGateway(channel, result);
           } else {
             result.push(channel);
           }
@@ -9359,18 +9617,8 @@ MultiChannelChooser = Singleton.create({
 
   filterHmIPChannels: function(channel, arChannels) {
     conInfo("filterHmIPChannels");
-    switch (channel.typeName.toLowerCase()) {
-      case "hmip-ps":
-      case "hmip-psm":
-        // HmIP-PS/PSM with older firmware (< 2.x.x) the virtual chaannels 4 and 5 don't work
-        // So we changed the isVisible flag within the backend for this channels to false.
-        // With a firmware >= 2.x.x the virtual channels 4 and 5 should be visible.
-        // Channel 1 = key press - this doesn't work for HmIP devices and the CCU2
-        if ((channel.index != 1) && channel.isVisible) arChannels.push(channel);
-
-        break;
-      default : if (channel.isVisible) {arChannels.push(channel);};
-    }
+    // Channel KEY_TRANSCEIVER = key press - this doesn't work for HmIP devices and the CCU2
+    if ((channel.channelType != "KEY_TRANSCEIVER") && channel.isVisible) {arChannels.push(channel);}
     return arChannels;
   },
 
@@ -9588,6 +9836,11 @@ MultiChannelChooser = Singleton.create({
       funcFilter       : this.FuncFilter,
       channels         : this.sort(this.filter(this.channels))
     });
+
+    if (! userIsNoExpert) {
+      jQuery(".j_expertChannel").show();
+    }
+
     translateJSTemplate("#MultiChannelChooserDialog");
     translatePage(".MultiChannelChooserRow");
   }
@@ -9651,6 +9904,10 @@ ChannelConfigDialog = Singleton.create({
        this.__hideFunctionTest();
     }
 
+    if (isNonCCUDevice(this.channel)) {
+      this.__hideLogging();
+    }
+
     translateJSTemplate("#ChannelConfigDialog");
     translatePage("#ChannelConfigDialogRooms, #ChannelConfigDialogFuncs");
     jQuery("#generalChannelConfigLblSender").val(translateKey("generalChannelConfigLblSender"));
@@ -9660,6 +9917,10 @@ ChannelConfigDialog = Singleton.create({
 
   __hideFunctionTest: function() {
     jQuery("#channelFunctionTestPanel").hide();
+  },
+
+  __hideLogging: function() {
+    jQuery("#btnEnableChannelLogging").hide();
   },
 
   /**
@@ -9836,14 +10097,21 @@ DeviceConfigDialog = Singleton.create({
     this.layer.innerHTML = this.template.process({
       device: this.device
     });
-    if (this.device.typeName.indexOf("Team") != -1) {
-       this.__hideFunctionTest();
+    if ((this.device.typeName.indexOf("Team") != -1) || (isNonCCUDevice(this.device))) {
+      this.__hideFunctionTest();
+    }
+    if (isNonCCUDevice(this.device)) {
+      this.__hideLogging();
     }
     translateJSTemplate("#DeviceConfigDialog");
   },
 
   __hideFunctionTest: function() {
     jQuery("#deviceFunctionTestPanel").hide();
+  },
+
+  __hideLogging: function() {
+    jQuery("#btnEnableDeviceLogging").hide();
   },
 
   /**
@@ -9928,6 +10196,7 @@ DeviceConfigDialog = Singleton.create({
 /**
  * deletedevicedialog.js
  **/
+
 
 /**
  * Ablauf:
@@ -10017,11 +10286,13 @@ ConfirmDeleteDeviceWindow = Class.create({
     var frameX = parseInt((screenWidth  - frameWidth ) / 2);
     var frameY = parseInt((screenHeight - frameHeight) / 2);
 
+    this.m_device = device;
+
     ConfirmDeleteDeviceWindow.TITLE = translateKey("ConfirmDeleteDeviceWindowTitle");
     ConfirmDeleteDeviceWindow.QUESTION = translateKey("ConfirmDeleteDeviceWindowQuestion");
     ConfirmDeleteDeviceWindow.DELETE_OPTIONS = translateKey("ConfirmDeleteDeviceWindowDeleteOptions");
     ConfirmDeleteDeviceWindow.REMOVE = translateKey("ConfirmDeleteDeviceWindowRemove");
-    ConfirmDeleteDeviceWindow.REMOVE_DESCRIPTION = translateKey("ConfirmDeleteDeviceWindowRemoveDescription");
+    ConfirmDeleteDeviceWindow.REMOVE_DESCRIPTION = (! isNonCCUDevice(this.m_device)) ? translateKey("ConfirmDeleteDeviceWindowRemoveDescription") : translateKey("ConfirmDeleteDeviceWindowRemoveDescriptionNoneCCUDevice");
     ConfirmDeleteDeviceWindow.RESET = translateKey("ConfirmDeleteDeviceWindowReset");
     ConfirmDeleteDeviceWindow.RESET_DESCRIPTION = translateKey("ConfirmDeleteDeviceWindowResetDescription");
     ConfirmDeleteDeviceWindow.DELETE_BUTTON = translateKey("ConfirmDeleteDeviceWindowDeleteButton");
@@ -10029,15 +10300,19 @@ ConfirmDeleteDeviceWindow = Class.create({
     ConfirmDeleteDeviceWindow.WARNING = translateKey("ConfirmDeleteDeviceWindowWarning");
 
     this.hmIPIdentifier = "HmIP-RF";
+    this.isNonCCUDevice = isNonCCUDevice(this.m_device);
 
-    this.m_device = device;
     this.m_showRemoveOption = (this.m_device.interfaceName != this.hmIPIdentifier) ? true : false;
     this.m_hasLinksOrPrograms = hasLinksOrPrograms;
     this.m_callback = callback;
     
     this.m_layer = document.createElement("div");
     this.m_layer.className = "DialogLayer";
-    
+
+    this.m_lblDeleteOptions = new UI.Label()
+            .setPosition(10, 70)
+            .setText(ConfirmDeleteDeviceWindow.DELETE_OPTIONS);
+
     this.m_listbox = new UI.ListBox()
       .setPosition(30,90)
       .setWidth(frameWidth - 60)
@@ -10088,23 +10363,29 @@ ConfirmDeleteDeviceWindow = Class.create({
         .setWidth(frameWidth - 85)
         .setHtml(ConfirmDeleteDeviceWindow.QUESTION.process({device: this.m_device}))
       )
-      .add(new UI.Label()
-        .setPosition(10, 70)
-        .setText(ConfirmDeleteDeviceWindow.DELETE_OPTIONS)
-      )
+
+      .add(this.m_lblDeleteOptions)
+
       .add(this.m_listbox)
+
       .add(this.m_description)
       .add(new UI.Button()
         .setPosition(frameWidth - 160, 200)
         .setText(ConfirmDeleteDeviceWindow.DELETE_BUTTON)
         .setAction(onDeleteHandler)
       )
+
       .add(new UI.Button()
         .setPosition(10,200)
         .setText(ConfirmDeleteDeviceWindow.ABORT_BUTTON)
         .setAction(onAbortHandler)
       );
-    
+
+    if (this.isNonCCUDevice) {
+      this.m_frame.remove(this.m_lblDeleteOptions);
+      this.m_frame.remove(this.m_listbox);
+    }
+
     if (this.m_hasLinksOrPrograms !== false)
     {
       this.m_frame.add(new UI.Text()
@@ -10205,13 +10486,32 @@ DeleteDeviceWindow = Class.create({
     {
       errorCode = error.code;
     }
-    
-    this.m_frame.dispose();
-    Layer.remove(this.m_layer);
-    
-    if (this.m_callback) { this.m_callback(errorCode); }
+    var self = this;
+
+    if (isNonCCUDevice(this.m_device)) {
+      window.setTimeout(function () {
+        self.m_frame.dispose();
+        Layer.remove(self.m_layer);
+
+        /*
+        if (self.m_callback) {
+          self.m_callback(errorCode);
+        }
+        */
+
+        ConfigData.destroy();
+        ConfigData.check(function () {
+          conInfo("Config data refreshed");
+          WebUI.enter(DeviceListPage);
+        });
+      }, 7000);
+    } else {
+      this.m_frame.dispose();
+      Layer.remove(this.m_layer);
+      if (this.m_callback) { this.m_callback(errorCode); }
+    }
   }
-  
+
 });
 
 DeleteDeviceWindow.CONTENT_WIDTH = 320;
@@ -10392,6 +10692,7 @@ DeleteDeviceDialog = Class.create({
 
     this.hmIPIdentifier = "HmIP-RF";
 
+
     new CheckLinksAndProgramsWindow(device, this.m_onLinksAndProgramsCheckedHandler);
     
   },
@@ -10439,7 +10740,7 @@ DeleteDeviceDialog = Class.create({
           homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
             homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
               homematic("Program.deleteProgramByName", {"name": "prgEnergyCounter_" + chId + "_" + chAddress}, function () {
-                conInfo(chAddress + "ProgSysvarPOWERMETER deleted - next: save ObjectModel");
+                conInfo(chAddress + " ProgSysvarPOWERMETER deleted - next: save ObjectModel");
                 homematic("system.saveObjectModel", {}, function () {
                   conInfo("ObjectModel saved");
                 });
@@ -10459,7 +10760,7 @@ DeleteDeviceDialog = Class.create({
           homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
             homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
               homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterGAS_" + chId + "_" + chAddress}, function () {
-                conInfo(chAddress + "ProgSysvarPOWERMETER_IGL deleted - next to delete: ProgSysvarPOWERMETER");
+                conInfo(chAddress + " ProgSysvarPOWERMETER_IGL deleted - next: ProgSysvarPOWERMETER");
                 self.m_deleteProgSysvarPOWERMETER(chId, chAddress);
               });
             });
@@ -10474,7 +10775,7 @@ DeleteDeviceDialog = Class.create({
     homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
         homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIECOldVal_" + chId}, function () {
           homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
-            conInfo(chAddress + " ProgSysvarPOWERMETER_IEC deleted - next to delete: ProgSysvarPOWERMETER_IGL");
+            conInfo(chAddress + " ProgSysvarPOWERMETER_IEC deleted - next: ProgSysvarPOWERMETER_IGL");
             self.m_deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
           });
         });
@@ -10483,7 +10784,6 @@ DeleteDeviceDialog = Class.create({
 
   m_onDeviceDeleted: function(errorCode)
   {
-
     if (errorCode === DeleteDeviceDialog.ERROR_NO_ERROR)
     {
       // Prüfen, ob ein Kanal des Gerätes als Energy-Counter dient.
@@ -11129,6 +11429,7 @@ PartyModeDialog = Class.create({
       firstDay: 1,
       minDate: 0,
       showButtonPanel:true,
+      currentText: translateKey("btnToday"),
       closeText: translateKey("btnOk"),
       onClose: this.OnStartDateClose
     });
@@ -11140,6 +11441,7 @@ PartyModeDialog = Class.create({
       firstDay: 1,
       minDate: 0,
       showButtonPanel: true,
+      currentText: translateKey("btnToday"),
       closeText: translateKey("btnOk"),
       onClose: refreshPartyTimePicker
     });
@@ -11801,7 +12103,7 @@ StatusDisplayDialog = Class.create({
 StatusDisplayDialogEPaper = Class.create(StatusDisplayDialog, {
 
   initEPaper: function () {
-    console.log("StatusDisplayDialogEPaper - initEPaper");
+    conInfo("StatusDisplayDialogEPaper - initEPaper");
     this.displayType = "DIS-EP";
   },
 
@@ -12529,6 +12831,426 @@ RGBWControllerDialog = Class.create({
 
 YesNoDialog.RESULT_NO = 0;
 YesNoDialog.RESULT_YES = 1;
+/**
+ * vir_lg_rgbwcontrollerdialog.js
+ **/
+
+/**
+ * Dialogbox mit den Schaltflächen "Ja" und "Neine"
+ * Normalerweise wird als content Text übergeben,
+ * wenn contentType 'html' gesetzt ist, kann auch HTML übergeben werden.
+ * Die Höhe des Dialoges sollte sich dynamisch der Contentgröße anpassen.
+ **/
+VIR_LG_RGBWControllerDialog = Class.create({
+
+  initialize: function (title, content, param, curValue, callback, contentType) {
+    var _this_ = this;
+
+    this.sliderInfoElm;
+    this.sliderElm;
+    this.param = param;
+    this.curValue = curValue;
+    this.arCurValue = curValue.split(",");
+
+    this.configString = "not initialized";
+    this.whiteLevel = 255;
+
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer";
+
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    titleElement.appendChild(document.createTextNode(title));
+    titleElement.onmousedown = function (event) {
+      new Drag(this.parentNode, event);
+    };
+    dialog.appendChild(titleElement);
+
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className = "YesNoDialogFooter";
+
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('btnOk')));
+    yesButton.onclick = function () {
+      _this_.yes();
+    };
+    footer.appendChild(yesButton);
+
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('dialogBack')));
+    noButton.onclick = function () {
+      _this_.no();
+    };
+    footer.appendChild(noButton);
+
+    dialog.appendChild(footer);
+
+    this.m_layer.appendChild(dialog);
+
+    Layer.add(this.m_layer);
+
+    this.__activateSubDialog();
+
+    //AG sorgt dafür, daß die Dialoghöhe sich dynamisch dem Content anpasst.
+    jQuery(".YesNoDialog").css("height", jQuery(".YesNoDialogContentWrapper").height() + 78);
+    jQuery(".YesNoDialogFooter").css("top", jQuery(".YesNoDialogContentWrapper").height() + 26);
+
+    this.__bindEvents();
+    translatePage('#RGBWControllerColor');
+
+  },
+
+  __bindEvents: function() {
+    var self = this;
+    if (this.__showWhiteElement()) {
+      this.sliderInfoElm.blur(function () {
+        self.whiteLevel = jQuery(this).val();
+        if (isNaN(self.whiteLevel)){
+          self.whiteLevel = 255;
+        } else if (parseInt(self.whiteLevel) < 0) {
+          self.whiteLevel = 0;
+        } else if (parseInt(self.whiteLevel) > 255) {
+          self.whiteLevel = 255;
+        }
+        jQuery(this).val(parseInt(self.whiteLevel));
+        self.sliderElm.slider("value", self.whiteLevel);
+      });
+    }
+  },
+
+  // This creates the content of the dialog.
+  __activateSubDialog: function () {
+    if(this.__showWhiteElement()) {
+      this.whiteLevel = parseInt(this.curValue.split(",")[3]);
+      jQuery("#whiteLevelElm").show();
+      this.__initSliderElm();
+    };
+
+    jQuery("#RGBWControllerColor").show();
+    this.__activateColorPicker();
+  },
+
+  __showWhiteElement: function() {
+    // There is a change with the parameters for color and color temperature
+    // Before, the color and the color temperature was one parameter .
+    // The color was set with the color picker, the color temp was set with the slider.
+
+    // Now the color temperature is an extra parameter, so we don't need the slider for this value any more at this point.
+    // The color temperature is now bound to the parameter COLOR_TEMPERATURE
+    return false;
+    //return (this.param == "RGBW") ? true : false;
+  },
+
+  __initSliderElm: function() {
+    var self = this;
+
+    this.sliderElm = jQuery("#hookSlider");
+
+    this.sliderInfoElm = jQuery("#infoSliderPos");
+    this.sliderInfoElm.val(this.whiteLevel);
+
+    var self = this;
+    this.sliderElm.slider({
+      animate: "fast",
+      value: this.whiteLevel,
+      min: 0,
+      max: 255,
+      step: 5,
+      orientation: "horizontal",
+      slide: function (event, ui) {},
+      stop: function( event, ui ) {}
+    });
+    this.sliderElm.on("slide", function (event, ui) {
+      self.__onSliderChange(ui.value);
+    });
+
+    this.sliderElm.on("slidestop", function(event, ui){
+      self.__onSliderStop(ui.value);
+    });
+  },
+
+
+
+  // PUBLIC
+  getConfigString: function () {
+    return this.configString;
+  },
+
+
+  __onSliderChange: function (val) {
+    this.sliderPos = val;
+    this.sliderInfoElm.val(this.sliderPos);
+    this.whiteLevel = this.sliderPos;
+  },
+
+  __onSliderStop: function(val) {
+    this.whiteLevel = this.sliderPos;
+  },
+
+  __getColor: function () {
+    var color = jQuery("#colorRGBControllerColor").val();
+    return color;
+  },
+
+
+  __setConfigString: function () {
+    this.configString = this.__getColor();
+
+    //if (this.__showWhiteElement()) {
+      var tmp = this.configString.split(",");
+
+      if (tmp.size() > 3) {
+        this.configString = tmp[0] +","+tmp[1]+","+tmp[2]+","+ this.whiteLevel + ")";
+      } else {
+        this.configString = this.configString.slice(0, -1) + "," + this.whiteLevel + ")";
+      }
+    //}
+  },
+
+  __activateColorPicker: function () {
+
+    var colorPickerVal = this.curValue;
+    if (this.arCurValue.size() > 3) {
+      colorPickerVal = this.arCurValue[0]+ ", " + this.arCurValue[1] + ", " + this.arCurValue[2] + ")";
+    }
+
+    jQuery("#colorRGBControllerColor").val(colorPickerVal);
+
+    jQuery("#colorRGBControllerColor").spectrum({
+      preferredFormat: 'rgb',
+      showInput: false,
+      color: this.curValue,
+      showPalette: true,
+      palette: ['white'],
+      cancelText: translateKey('btnCancel'),
+      chooseText: translateKey('btnOk')
+    });
+  },
+
+
+  close: function (result) {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) {
+      this.m_callback(result);
+    }
+  },
+
+  yes: function () {
+    this.__setConfigString();
+    this.close(YesNoDialog.RESULT_YES);
+  },
+
+  no: function () {
+    this.close(YesNoDialog.RESULT_NO);
+  }
+
+});
+
+YesNoDialog.RESULT_NO = 0;
+YesNoDialog.RESULT_YES = 1;
+/**
+ * vir_lg_whitecontrollerdialog.js
+ **/
+
+/**
+ * Dialogbox mit den Schaltflächen "Ja" und "Neine"
+ * Normalerweise wird als content Text übergeben,
+ * wenn contentType 'html' gesetzt ist, kann auch HTML übergeben werden.
+ * Die Höhe des Dialoges sollte sich dynamisch der Contentgröße anpassen.
+ **/
+VIR_LG_WHITEControllerDialog = Class.create({
+
+  initialize: function (title, content, values, callback, contentType) {
+    var _this_ = this;
+
+    this.sliderInfoElm;
+    this.sliderElm;
+    this.curValue = values.curVal;
+    this.minValue = values.minVal;
+    this.maxValue = values.maxVal;
+    this.step = 50;
+
+    this.whiteLevel = this.curValue;
+
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer";
+
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    titleElement.appendChild(document.createTextNode(title));
+    titleElement.onmousedown = function (event) {
+      new Drag(this.parentNode, event);
+    };
+    dialog.appendChild(titleElement);
+
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className = "YesNoDialogFooter";
+
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('btnOk')));
+    yesButton.onclick = function () {
+      _this_.yes();
+    };
+    footer.appendChild(yesButton);
+
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('dialogBack')));
+    noButton.onclick = function () {
+      _this_.no();
+    };
+    footer.appendChild(noButton);
+
+    dialog.appendChild(footer);
+
+    this.m_layer.appendChild(dialog);
+
+    Layer.add(this.m_layer);
+
+    this.__activateSubDialog();
+
+    //AG sorgt dafür, daß die Dialoghöhe sich dynamisch dem Content anpasst.
+    jQuery(".YesNoDialog").css("height", jQuery(".YesNoDialogContentWrapper").height() + 78);
+    jQuery(".YesNoDialogFooter").css("top", jQuery(".YesNoDialogContentWrapper").height() + 26);
+
+    // this.__bindEvents();
+    this.sliderInfoElm.prop("disabled", true);
+    translatePage('#WhiteLevelController');
+
+  },
+
+  __bindEvents: function() {
+    var self = this;
+      this.sliderInfoElm.blur(function () {
+        self.whiteLevel = jQuery(this).val();
+        if (isNaN(self.whiteLevel)){
+          self.whiteLevel = self.minValue;
+        } else if (parseInt(self.whiteLevel) < self.minValue) {
+          self.whiteLevel = self.minValue;
+        } else if (parseInt(self.whiteLevel) > self.maxValue) {
+          self.whiteLevel = self.maxValue;
+        }
+        jQuery(this).val(parseInt(self.whiteLevel));
+        self.sliderElm.slider("value", self.whiteLevel);
+      });
+  },
+
+  // This creates the content of the dialog.
+  __activateSubDialog: function () {
+      this.__initSliderElm();
+      window.setTimeout(function() {jQuery("#whiteLevelElm").show();}, 500);
+    },
+
+  __initSliderElm: function() {
+    var self = this;
+
+    this.sliderElm = jQuery("#hookSlider");
+
+    this.sliderInfoElm = jQuery("#infoSliderPos");
+    this.sliderInfoElm.val(this.whiteLevel);
+
+    var self = this;
+    this.sliderElm.slider({
+      animate: "fast",
+      value: this.whiteLevel,
+      min: this.minValue,
+      max: this.maxValue,
+      step: this.step,
+      orientation: "horizontal",
+      slide: function (event, ui) {},
+      stop: function( event, ui ) {}
+    });
+    this.sliderElm.on("slide", function (event, ui) {
+      self.__onSliderChange(ui.value);
+    });
+
+    this.sliderElm.on("slidestop", function(event, ui){
+      self.__onSliderStop(ui.value);
+    });
+  },
+
+  // PUBLIC
+  getValue: function () {
+    return parseFloat(this.whiteLevel);
+  },
+
+
+  __onSliderChange: function (val) {
+    this.sliderPos = val;
+    this.sliderInfoElm.val(this.sliderPos);
+    this.whiteLevel = this.sliderPos;
+  },
+
+  __onSliderStop: function(val) {
+    this.whiteLevel = this.sliderPos;
+  },
+
+  close: function (result) {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) {
+      this.m_callback(result);
+    }
+  },
+
+  yes: function () {
+    this.close(YesNoDialog.RESULT_YES);
+  },
+
+  no: function () {
+    this.close(YesNoDialog.RESULT_NO);
+  }
+
+});
+
+VIR_LG_WHITEControllerDialog.RESULT_NO = 0;
+VIR_LG_WHITEControllerDialog.RESULT_YES = 1;
 
 ASIR_SetAlarmDialog = Class.create({
  
@@ -12654,6 +13376,167 @@ ASIR_SetAlarmDialog = Class.create({
 
 ASIR_SetAlarmDialog.RESULT_NO = 0;
 ASIR_SetAlarmDialog.RESULT_YES = 1;
+/**
+ * JalousieActorConvertHexValDialog.js
+ **/
+ 
+/**
+ * Dialogbox mit den Schaltflächen "Ja" und "Neine"
+ * Normalerweise wird als content Text übergeben,
+ * wenn contentType 'html' gesetzt ist, kann auch HTML übergeben werden.
+ * Die Höhe des Dialoges sollte sich dynamisch der Contentgröße anpassen.
+ **/
+JalousieActorConvertHexValDialog = Class.create({
+ 
+  initialize: function(title, content, iseVal, callback, contentType)
+  {
+    var _this_ = this;
+
+    this.iseVal = iseVal;
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer";
+    this.configString = "not initialized";
+
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+    
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    titleElement.appendChild(document.createTextNode(title));
+    titleElement.onmousedown = function(event) { new Drag(this.parentNode, event); };
+    dialog.appendChild(titleElement);
+    
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+    
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+    
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className= "YesNoDialogFooter";
+    
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('footerBtnOk')));
+    yesButton.onclick = function() { _this_.yes(); };
+    footer.appendChild(yesButton);
+    
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('footerBtnCancel')));
+    noButton.onclick = function() { _this_.no(); };
+    footer.appendChild(noButton);
+    
+    dialog.appendChild(footer);
+    
+    this.m_layer.appendChild(dialog);
+    
+    Layer.add(this.m_layer);
+
+    //AG sorgt dafür, daß die Dialoghöhe sich dynamisch dem Content anpasst.
+    jQuery(".YesNoDialog").css("height", jQuery(".YesNoDialogContentWrapper").height() + 78);
+    jQuery(".YesNoDialogFooter").css("top", jQuery(".YesNoDialogContentWrapper").height() + 26);
+
+    translatePage(".YesNoDialog");
+
+    this.blindLevelElm = jQuery("#idBlindLevel");
+    this.slatLevelElm = jQuery("#idSlatsLevel");
+
+    this._initDialogElements();
+
+  },
+
+  _initDialogElements: function() {
+    var self = this;
+    var arHexVal = this.iseVal.split(",");
+    this.blindLevelElm.val(parseInt(arHexVal[0]) / 2);
+    this.slatLevelElm.val(parseInt(arHexVal[1]) / 2);
+
+    this.blindLevelElm.keyup(function(event) {self._checkVal(event.keyCode, self.blindLevelElm);});
+    this.slatLevelElm.keyup(function(event) {self._checkVal(event.keyCode, self.slatLevelElm);});
+
+  },
+
+  _checkVal: function(keyCode, elm) {
+
+    // Decimal point or comma
+    if ((keyCode == 110) || (keyCode == 188) || (keyCode == 190) ) {
+      return;
+    }
+
+    var value = parseFloat(elm.val());
+
+    if ((keyCode != 8) && ((keyCode < 48) || (keyCode > 57))) {
+      if (isNaN(value)) {
+        elm.val(0);
+      } else {
+          elm.val(value);
+      }
+    }
+
+    if (value < 0) {
+      elm.val(0);
+    } else if (value > 100) {
+      elm.val(100);
+    }
+
+  },
+
+  _createConfigString: function() {
+    var level = parseInt(parseFloat(this.blindLevelElm.val()) * 2),
+      levelSlat = parseInt(parseFloat(this.slatLevelElm.val()) * 2);
+
+    level = (isNaN(level)) ? 0: level;
+    levelSlat = (isNaN(levelSlat)) ? 0 : levelSlat;
+
+    var levelHex = level.toString(16),
+    levelSlatHex = levelSlat.toString(16),
+    dpValue;
+
+    dpValue = (levelHex.length < 2) ? "0X0" + levelHex : "0X" + levelHex;
+    dpValue += ",";
+    dpValue += (levelSlatHex.length < 2) ? "0X0" + levelSlatHex : "0X" + levelSlatHex;
+    this.configString = dpValue;
+  },
+
+  getConfigString: function() {
+    return this.configString;
+  },
+
+  close: function(result)
+  {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) { this.m_callback(result); }
+  },
+  
+  yes: function()
+  {
+    this._createConfigString();
+    this.close(JalousieActorConvertHexValDialog.RESULT_YES);
+  },
+  
+  no: function()
+  {
+    this.close(JalousieActorConvertHexValDialog.RESULT_NO);
+  }
+  
+});
+
+JalousieActorConvertHexValDialog.RESULT_NO = 0;
+JalousieActorConvertHexValDialog.RESULT_YES = 1;
 /**
  * Kopfleiste
  **/
@@ -13801,9 +14684,49 @@ if (PLATFORM == "Central") {
    *  Diese Kanäle sollen nur dann angezeigt werden, wenn der User den Expertenmodus aktiviert hat.  
    *  Die virtuellen Fernbedienungen der CCU 'VIRTUAL_KEY' sind nicht betroffen
    **/ 
-  showVirtualChannel: function(channel) 
-  {  
-    return ((! this.userIsNoExpert) || (channel.channelType == "VIRTUAL_KEY") ||  (channel.channelType.split("_")[0] != "VIRTUAL")) ? true : false; 
+  showVirtualChannel: function(channel) {
+    var deviceType = channel.deviceType.name.toUpperCase(),
+    interfaceName = channel.device.interfaceName,
+    hmIPIdentifier = "HmIP-RF";
+
+    if (interfaceName != hmIPIdentifier) {
+      return (
+        (!this.userIsNoExpert)
+        || (channel.channelType == "VIRTUAL_KEY")
+        || ((interfaceName != hmIPIdentifier) && (channel.channelType.split("_")[0] != "VIRTUAL"))
+        ) ? true : false;
+    } else {
+      if (this.userIsNoExpert) {
+        return (
+          (deviceType == "HMIP-PS") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 3)
+          || (deviceType == "HMIP-PS") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-PSM") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 3)
+          || (deviceType == "HMIP-PSM-IT") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 3)
+          || (deviceType == "HMIP-PSM-CH") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 3)
+          || (deviceType == "HMIP-PSM-PE") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 3)
+          || (deviceType == "HMIP-PSM-UK") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 3)
+          || (deviceType == "HMIP-PSM") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-PSM-IT") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-PSM-CH") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-PSM-PE") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-PSM-UK") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-BDT") && (channel.channelType == "DIMMER_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 4)
+          || (deviceType == "HMIP-BDT") && (channel.channelType == "DIMMER_TRANSMITTER")
+          || (deviceType == "HMIP-BSM") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 4)
+          || (deviceType == "HMIP-BSM") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-FSM") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 2)
+          || (deviceType == "HMIP-FSM") && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-FSM16" ) && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 2)
+          || (deviceType == "HMIP-FSM16" ) && (channel.channelType == "SWITCH_TRANSMITTER")
+          || (deviceType == "HMIP-MIOB") && (channel.channelType == "SWITCH_VIRTUAL_RECEIVER") && ((parseInt(channel.index) != 3) && (parseInt(channel.index) != 7)) // hide the virtual channels 2,4,6,8 - 3 and 7 are necessary for certain links
+          || (deviceType == "HMIP-MIOB") && (channel.channelType == "SWITCH_TRANSMITTER")  // hide the real channels when no virtual channels visible
+          || (deviceType == "HMIP-PDT") && (channel.channelType == "DIMMER_VIRTUAL_RECEIVER") && (parseInt(channel.index) > 3)
+          || (deviceType == "HMIP-PDT") && (channel.channelType == "DIMMER_TRANSMITTER")
+
+          ) ? false : true;
+      }
+    }
+    return true;
   },
 
   isHmIPMaintenanceChannel: function(channel)
@@ -22384,7 +23307,7 @@ changeRoomOrSubsection = function(id)
   if (subsection) { SubsectionList.beginUpdate(id); }
 };
 
-encodeStringStatusDisplay = function(elmID, is4Dis)
+encodeStringStatusDisplay = function(elmID, is4Dis, specialSZ)
 {
 	//Wird zur Zeit nur für die Textzeilen des HM-PB-4Dis-WM und des HM-Dis-WM55 genutzt,
 	//da dort einige Zeichen im Speicher an anderer Stelle liegen.
@@ -22401,6 +23324,11 @@ encodeStringStatusDisplay = function(elmID, is4Dis)
   // die Tilde in ein " um, so daß der generierte String zerstört wird.
   // Daher hier die Prüfung ....
   szKey = (is4Dis == true) ? "~" : szKey;
+
+  if (specialSZ) {
+    szKey = specialSZ;
+  }
+
   if (is4Dis == true) {
     outString = inString.replace(/Ä/g, "[");
     outString = outString.replace(/Ö/g, "#");
@@ -22498,7 +23426,6 @@ showAllRFInterfaces = function() {
   return sOutput;
 };
 
-// When this grows more we need another solution
 getExtendedDescription = function(oChannelDescr) {
   var result = "";
   var noDescrNecessary = "noDescrNecessary";
@@ -22519,11 +23446,11 @@ getExtendedDescription = function(oChannelDescr) {
     chType = channelType;
   }
 
-
-
+  /* Uncomment this to hide the channel description of a key
   if (chType == "KEY") {
     result = noDescrNecessary;
   }
+  */
 
   if (chType == "KEY_TRANSCEIVER") {
     if (deviceType.toLowerCase() == "hmip-asir") {
@@ -22532,12 +23459,20 @@ getExtendedDescription = function(oChannelDescr) {
   }
 
   // HM-LC-RGBW-WM - special description for the HM-LC-RGBW-WM
+  /* Uncomment this to hide the channel description of a general dimmer
   if (chType == "DIMMER") {
     result = (deviceType == "HM-LC-RGBW-WM" ) ? translateKey("chType_DIMMER") : noDescrNecessary;
   }
+  */
 
   if (chType == "SWITCH_VIRTUAL_RECEIVER") {
-    if ((deviceType.toLowerCase() == "hmip-ps" || deviceType.toLowerCase() == "hmip-psm") && (! channelIsVisible)) {
+    if ((deviceType.toLowerCase() == "hmip-ps"
+      || deviceType.toLowerCase() == "hmip-psm"
+      || deviceType.toLowerCase() == "hmip-psm-pe"
+      || deviceType.toLowerCase() == "hmip-ps-uk"
+      || deviceType.toLowerCase() == "hmip-psm-it"
+      || deviceType.toLowerCase() == "hmip-psm-ch"
+      ) && (! channelIsVisible)) {
       result = translateKey("lblHmIP_NotSupported");
     } else {
       result = translateKey("chType_SWITCH_VIRTUAL_RECEIVER");
@@ -22601,6 +23536,39 @@ getDefaultPartyModeString = function() {
   strPartyMode += curDate.getFullYear() - 2000;
 
   return strPartyMode;
+};
+
+isIPv4AddressValid = function(ipAddress) {
+  var validator = /^(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))$/;
+  return ipAddress.match(validator);
+};
+
+// Currently this function checks, if the device or channel is an OSRAM-Lightify device or an OSRAM-Lightify gateway
+// Parameter either a device object, channel object or a label
+isNonCCUDevice = function(dev_chn_lbl) {
+  var result = false;
+
+  // Check if this an OSRAM-Lightify device
+  if (dev_chn_lbl.typeName != undefined) {
+    var headChannelType = dev_chn_lbl.typeName.slice(0,7),
+        isGateway = dev_chn_lbl.typeName.match("VIR-OL-GTW");
+
+    result = ((headChannelType == "VIR-LG-") || isGateway != null) ? true : false;
+
+  } else if (typeof dev_chn_lbl == "string") {
+    result = ((dev_chn_lbl.slice(0,7) == "VIR-LG-") || (dev_chn_lbl.match("VIR-OL-GTW") != null)) ? true : false;
+  }
+  return result;
+};
+
+// Currently this function checks, if the device or channel is an OSRAM-Lightify gateway
+// For more tests this function must be extended.
+isNonCCUGateway = function(oDevChn) {
+  var result = false;
+  if (oDevChn != undefined) {
+    result = (oDevChn.typeName.match("VIR-OL-GTW") != undefined) ? true : false;
+  }
+  return result;
 };/**
  * ise/debug_funcs.js
  **/
@@ -23578,14 +24546,20 @@ iseButtonsDimmer.prototype = {
    * id = DOM-ID of switch
    * initState = Creation State 
    */
-  initialize: function(id, initState, lvlDP, oldLvlDP, iViewOnly, bSliderPosFlag)
+  initialize: function(id, initState, lvlDP, oldLvlDP, iViewOnly, bSliderPosFlag, label)
   {
     conInfo( "iseDimmer: initialize()" );
     this.id = id;
     this.state = initState;
     this.lvlDP = lvlDP;
     this.oldLvlDP = oldLvlDP;
-    if(bSliderPosFlag) 
+
+    // For some new devices (OSRAM-Lightify e. g.) we don`t know the state of the button
+    // so we treat the On/Off button as a push-button instead of a switch.
+    this.OnOffEqualsSwitch = (isNonCCUDevice(label)) ? false : true;
+
+
+    if(bSliderPosFlag)
     {
         this.bSliderPosFlag = bSliderPosFlag;
     }
@@ -23616,10 +24590,14 @@ iseButtonsDimmer.prototype = {
 
       this.clickDown = this.onClickDown.bindAsEventListener(this);
       Event.observe($(this.id + "Down"), 'click', this.clickDown);
-      
-      this.clickOn  = this.onClickOn.bindAsEventListener(this);
-      Event.observe($(this.id + "On"), 'mousedown', this.clickOn);
-      
+
+      if (this.oldLvlDP >= 1 ) {
+        this.clickOn = this.onClickOn.bindAsEventListener(this);
+        Event.observe($(this.id + "On"), 'mousedown', this.clickOn);
+      } else {
+        this.clickOn = this.onClickOnA.bindAsEventListener(this);
+        Event.observe($(this.id + "On"), 'mousedown', this.clickOn);
+      }
       this.clickOff  = this.onClickOff.bindAsEventListener(this);
       Event.observe($(this.id + "Off"), 'mousedown', this.clickOff);
       
@@ -23734,27 +24712,73 @@ iseButtonsDimmer.prototype = {
     new Ajax.Request(url, opts);
     ControlBtn.pushed($(this.id + "On"));
   },
-  
+
+  onClickOnA: function()
+  {
+    conInfo( "iseDimmer: onClickOnA()" );
+    var t = this;
+    if (this.OnOffEqualsSwitch) {
+      new PeriodicalExecuter(function (pe) {
+        if (t.state > 0) {
+          if ($(t.id + "On")) {
+            ControlBtn.on($(t.id + "On"));
+          }
+          if ($(t.id + "Off")) {
+            ControlBtn.off($(t.id + "Off"));
+          }
+        }
+        else {
+          if ($(t.id + "On")) {
+            ControlBtn.off($(t.id + "On"));
+          }
+          if ($(t.id + "Off")) {
+            ControlBtn.on($(t.id + "Off"));
+          }
+        }
+        pe.stop();
+      }, 1);
+    }
+    setDpState(this.lvlDP, 1);
+    ControlBtn.pushed($(this.id + "On"));
+
+    if (! this.OnOffEqualsSwitch) {
+      window.setTimeout(function() {ControlBtn.off( $(t.id + "On")  );},1000);
+    }
+
+  },
+
   onClickOff: function()
   {
     conInfo( "iseDimmer: onClickOff()" );
     var t = this;
-    new PeriodicalExecuter(function(pe)
-    {
-      if( t.state > 0 )
-      {
-        if( $(t.id + "On") ) { ControlBtn.on($(t.id + "On")); }
-        if( $(t.id + "Off") ) { ControlBtn.off($(t.id + "Off")); }
-      }
-      else
-      {
-        if( $(t.id + "On") ) { ControlBtn.off($(t.id + "On")); }
-        if( $(t.id + "Off") ) { ControlBtn.on($(t.id + "Off")); }
-      }
-      pe.stop();
-    }, 1);
+    if (this.OnOffEqualsSwitch) {
+      new PeriodicalExecuter(function (pe) {
+        if (t.state > 0) {
+          if ($(t.id + "On")) {
+            ControlBtn.on($(t.id + "On"));
+          }
+          if ($(t.id + "Off")) {
+            ControlBtn.off($(t.id + "Off"));
+          }
+        }
+        else {
+          if ($(t.id + "On")) {
+            ControlBtn.off($(t.id + "On"));
+          }
+          if ($(t.id + "Off")) {
+            ControlBtn.on($(t.id + "Off"));
+          }
+        }
+        pe.stop();
+      }, 1);
+    }
     setDpState(this.lvlDP, 0);
     ControlBtn.pushed($(this.id + "Off"));
+
+    if (! this.OnOffEqualsSwitch) {
+      window.setTimeout(function() {ControlBtn.off( $(t.id + "Off")  );},1000);
+    }
+
   },
  
   
@@ -23780,14 +24804,20 @@ iseButtonsDimmer.prototype = {
     conInfo( "iseDimmer: refresh()" );
     this.slider.f_setValue(this.state, true);
     this.txtPerc.value = this.state;
-    if (parseInt(this.state) > 0)
-    {
-      ControlBtn.on($(this.id + "On"));
-      ControlBtn.off($(this.id + "Off"));
-    }
-    else {
+
+    if (this.OnOffEqualsSwitch) {
+      if (parseInt(this.state) > 0) {
+        ControlBtn.on($(this.id + "On"));
+        ControlBtn.off($(this.id + "Off"));
+      }
+      else {
+        ControlBtn.off($(this.id + "On"));
+        ControlBtn.on($(this.id + "Off"));
+      }
+    } else {
+      // This is for devices without a state, e. g. OSRAM-Lightify
       ControlBtn.off($(this.id + "On"));
-      ControlBtn.on($(this.id + "Off"));
+      ControlBtn.off($(this.id + "Off"));
     }
     if(typeof setstate == "undefined")
     {
@@ -24274,6 +25304,8 @@ iseThermostatHMIP.prototype = {
     this.boostID = this.opts.boostID;
     this.partyStartID = this.opts.partyStartID;
     this.partyEndID = this.opts.partyEndID;
+    this.partyEndValue = this.opts.partyEndValue;
+    this.partyMode = this.opts.partyMode;
     this.windowStateID = this.opts.windowStateID;
     this.statusOFF = "OFF";
     this.statusON = "ON";
@@ -24289,7 +25321,6 @@ iseThermostatHMIP.prototype = {
     this.iViewOnly = false;
     this.bSliderPosFlag = false;
     this.hasRampClicked = false;
-
     this.btnUpElem = this.getElemByID("Up");
     this.btnDownElem = this.getElemByID("Down");
     this.percentElem = this.getElemByID("Deg");
@@ -24399,6 +25430,37 @@ iseThermostatHMIP.prototype = {
         }
     }
     this.activeProfileElm.val(this.ACTIVE_PROFILE);
+
+    if (this.partyMode == "true") {
+      // Holiday mode active
+      this.showHolidayEndTime();
+    }
+
+  },
+
+  getHolidayEndTime: function() {
+    var result = null;
+    if (this.partyEndValue) {
+      var arTimeString = this.partyEndValue.split(" "),
+        arDate = arTimeString[0].split("_"),
+        oDate = {},
+        time = arTimeString[1];
+
+      oDate.year = addLeadingZero(parseInt(arDate[0]));
+      oDate.month = addLeadingZero(parseInt(arDate[1]));
+      oDate.day = addLeadingZero(parseInt(arDate[2]));
+
+      result = oDate.day + "." + oDate.month + "." + oDate.year + " - " + time;
+    }
+    return result;
+  },
+
+  showHolidayEndTime: function() {
+    var stopTime = this.getHolidayEndTime();
+    if (stopTime != null) {
+      jQuery("#"+this.chId+"partyEndTime").text(stopTime);
+      jQuery("#"+this.chId+"showPartyEnd").show();
+    }
   },
 
   getElemByID: function(elm) {
@@ -24966,141 +26028,6 @@ iseButtonsWindow.prototype = {
   }
 };
 
-/* * * * * * * * * * * * * * * * * * * * * * * *
- * iseButtonsShutter                           *
- * * * * * * * * * * * * * * * * * * * * * * * */
- 
-/**
- * @class
- **/
-iseButtonsShutter= Class.create();
-
-iseButtonsShutter.prototype = {
-  /*
-   * id = datapoint-ID of switch
-   * initState = Creation State (0 or 1)
-   */
-  initialize: function(id, initState, dpLevel, dpStop, iViewOnly) {
-    
-    this.id = id;
-    this.state = initState;
-    this.dpLevel = dpLevel;
-    this.dpStop = dpStop;
-    this.Perc = $(this.id + "Perc");
-    this.divPercUp = $(this.id + "PercUp");
-    this.divPercDown = $(this.id + "PercDown");
-    this.divStop = $(this.id + "Stop");
-    this.divUp = $(this.id + "Up");
-    this.divDown = $(this.id + "Down");
-    
-    this.shutter = new shutterControl(id, initState);
-    this.Perc.value = initState;
-    this.shutter.setValue(initState);
-    
-    // Add event handlers
-    if (iViewOnly === 0)
-    {
-      this.clickCtrl = this.onClickShutter.bindAsEventListener(this);
-      Event.observe(this.shutter.divShutterBg, 'mousedown', this.clickCtrl);
-       
-      this.clickPercUp = this.onClickPercUp.bindAsEventListener(this);
-      Event.observe(this.divPercUp, 'click', this.clickPercUp);
-      this.clickPercDown = this.onClickPercDown.bindAsEventListener(this);
-      Event.observe(this.divPercDown, 'click', this.clickPercDown);
-      this.changePerc = this.onChangePerc.bindAsEventListener(this);
-      Event.observe(this.Perc, 'change', this.changePerc);
-      
-      this.clickUp = this.onClickUp.bindAsEventListener(this);
-      Event.observe(this.divUp, 'mousedown', this.clickUp);
-      this.clickDown = this.onClickDown.bindAsEventListener(this);
-      Event.observe(this.divDown, 'mousedown', this.clickDown);
-      
-      this.clickStop = this.onClickStop.bindAsEventListener(this);
-      Event.observe(this.divStop, 'mousedown', this.clickStop);
-    }
-  },
-  
-  onClickShutter: function(ev) {
-    var pos = Position.page(this.shutter.divShutterBg);
-    var offset = ev.clientY - pos[1];
-    var val = 100 - (( offset * 100 ) / this.shutter.MAX_HEIGHT);  
-    var setVal = 0;
-    if ( (val >  0) && ( val <= 20) ) setVal = 0;
-    if ( (val > 20) && ( val <= 40) ) setVal = 25;
-    if ( (val > 40) && ( val <= 60) ) setVal = 50;
-    if ( (val > 60) && ( val <= 80) ) setVal = 75;
-    if ( (val > 80) && ( val <= 100) ) setVal = 100;
-    this.state = setVal;
-    this.Perc.value = this.state;
-    this.shutter.setValue(this.state);
-    this.saveValue();
-  },
-  
-  onClickPercUp: function() {
-    this.state += 10; 
-    if (this.state > 100)
-      this.state = 100;
-    this.Perc.value = this.state;
-    this.shutter.setValue(this.state);
-    this.saveValue();
-  },
-  
-  onClickPercDown: function() {
-    this.state -= 10; 
-    if (this.state < 0)
-      this.state = 0;
-    this.Perc.value = this.state;
-    this.shutter.setValue(this.state);
-    this.saveValue();
-  },
-  
-  onChangePerc: function() {
-    if (isNaN(this.Perc.value)) { return; }
-    this.state = parseInt(this.Perc.value);
-    this.shutter.setValue(this.state);
-    this.saveValue();
-  },
-    
-  onClickUp: function() {
-    this.state = 100;
-    this.Perc.value = this.state;
-    ControlBtn.pushed(this.divUp);
-    this.shutter.setValue(this.state);
-    this.saveValue();
-    var t = this;
-    new PeriodicalExecuter(function(pe) {
-      ControlBtn.off(t.divUp);
-      pe.stop();
-    }, 1);
-  },
-  
-  saveValue: function() {
-    setDpState(this.dpLevel, this.state / 100);
-  },
-  
-  onClickDown: function() {
-    this.state = 0;
-    this.Perc.value = this.state;
-    this.shutter.setValue(this.state);
-    this.saveValue();
-    var t = this;
-    ControlBtn.pushed(this.divDown);
-    new PeriodicalExecuter(function(pe) {
-      ControlBtn.off(t.divDown);
-      pe.stop();
-    }, 1);
-  },
-  
-  onClickStop: function() {
-    ControlBtn.pushed(this.divStop);
-    setDpState(this.dpStop, 1);
-    var t = this;
-    new PeriodicalExecuter(function(pe) {
-      ControlBtn.off(t.divStop);
-      pe.stop();
-    }, 1);
-  }
-};
 
 /* * * * * * * * * * * * * * * * * * * * * * * *
  * iseButtonsWinMatic                          *
@@ -27149,12 +28076,12 @@ iseRGBWController = Class.create();
 iseRGBWController.prototype = {
 
 
-  initialize: function (id, opts) {
+  initialize: function (chnId, opts) {
     conInfo("iseRGBWController");
-    this.id  = id;
+    this.chnId  = chnId;
     this.opts = opts;
     this.program = this.opts.valProgram;
-    jQuery("#"+ this.id).text(this.program);
+    jQuery("#"+ this.chnId).text(this.program);
 
     this.brightness = this.opts.valBrightness;
     this.rampTime = this.opts.valRampTime;
@@ -27162,7 +28089,7 @@ iseRGBWController.prototype = {
     this.minColor = this.opts.valMinBorder;
     this.maxColor = this.opts.valMaxBorder;
 
-    this.chn = homematic("Device.get",{"id": this.id});
+    this.chn = homematic("Device.get",{"id": this.chnId});
     this.value =
       this.program + "," +
       this.brightness + "," +
@@ -27176,7 +28103,7 @@ iseRGBWController.prototype = {
 
   bindEvents: function() {
     var self = this;
-    jQuery("#"+ this.id).bind("click", function(){
+    jQuery("#"+ this.chnId).bind("click", function(){
       conInfo("show program dialog");
 
 
@@ -27205,7 +28132,7 @@ iseRGBWController.prototype = {
                     {name:'ACT_MIN_BOARDER', type: 'string', value: arConfigString[4]},
                     {name:'ACT_MAX_BOARDER', type: 'string', value: arConfigString[5]}
                   ]
-               }, function(result){jQuery("#"+ self.id).text( arConfigString[0] );});
+               }, function(result){jQuery("#"+ self.chnId).text( arConfigString[0] );});
             }
           }, "html");
         });
@@ -27216,7 +28143,126 @@ iseRGBWController.prototype = {
     });
   }
 
-};/**
+};
+
+
+
+// This class is responsible for the handling of the CONTROL
+iseVIR_LGRGBColorControl = Class.create();
+
+iseVIR_LGRGBColorControl.prototype = {
+
+  initialize: function (chnId, opts) {
+
+    this.chnId = chnId;
+
+    this.rgbType = opts.Type;
+    this.rgbID = opts.rgbID;
+    this.rgbVal = opts.rgbVal;
+    //this.defaultRGBW = opts.rgbDefault;
+    this.defaultRGBW = "rgb(255,255,255,255)";
+
+    this.rgbwID = "RGBW";
+
+
+    this.bindEvents();
+
+    if (this.rgbType == this.rgbwID) {
+      // this.initSlider();
+    }
+  },
+
+  bindEvents: function() {
+    var self = this;
+    jQuery(".sp-container #rgbwBtnColor" +this.chnId).bind("click", function() {
+      var color = jQuery("#colorPicker"+self.chnId).val();
+      if (!color) {color = self.defaultRGBW;}
+      self.rgbVal = color;
+      setDpState(self.rgbID,self.getColorString());
+    });
+  },
+
+  getColorString: function() {
+    var colorString = "",
+      arParamVal = this.rgbVal.split(",");
+
+    if (this.rgbType == this.rgbwID) {
+      if (arParamVal.size() > 3) {
+        colorString = arParamVal[0] +","+arParamVal[1]+","+arParamVal[2]+",255)";
+      } else {
+        colorString = this.rgbVal.slice(0, -1) + ",255)";
+      }
+    } else {
+      // This is a RGB device
+      colorString = this.rgbVal;
+    }
+
+    return colorString;
+  }
+
+};
+
+iseVIR_LGWhiteLevelControl = Class.create();
+
+iseVIR_LGWhiteLevelControl.prototype = {
+
+  initialize: function (chnId, opts) {
+    var self = this;
+    conInfo("iseVIR_LGWhiteLevelControl");
+
+    this.chnId = chnId;
+    this.whiteLevelId = opts.whiteLevelID;
+    this.whiteLevel = parseInt(opts.whiteLevelValue);
+    this.whiteLevelMin = parseInt(opts.whiteLevelMin);
+    this.whiteLevelMax = parseInt(opts.whiteLevelMax);
+
+    this.whiteLevelStep = parseInt(opts.whiteLevelStep);
+
+    window.setTimeout(function() {
+      self.sliderInfoElm = jQuery("#infoSliderPos" + self.chnId);
+      self.sliderElm = jQuery("#slider" + self.chnId);
+      self.initSlider();
+    },100);
+  },
+
+  initSlider: function () {
+
+    if (this.whiteLevel == "-1") {this.whiteLevel = this.whiteLevelMin;}
+    this.sliderInfoElm.val(this.whiteLevel);
+
+    var self = this;
+    this.sliderElm.slider({
+      animate: "fast",
+      value: this.whiteLevel,
+      min: this.whiteLevelMin,
+      max: this.whiteLevelMax,
+      step: this.whiteLevelStep,
+      orientation: "horizontal",
+      slide: function (event, ui) {},
+      stop: function( event, ui ) {}
+    });
+    this.sliderElm.on("slide", function (event, ui) {
+      self.onSliderChange(ui.value);
+    });
+
+    this.sliderElm.on("slidestop", function(event, ui){
+      self.onSliderStop(ui.value);
+    });
+  },
+
+  onSliderChange: function (val) {
+    this.sliderInfoElm.val(val);
+    this.whiteLevel = val;
+  },
+
+  onSliderStop: function(val) {
+    setDpState(this.whiteLevelId,this.whiteLevel);
+  }
+
+};
+
+
+/**
  * ise/iseButtonsSwitch.js
  **/
 
@@ -27453,6 +28499,281 @@ iseAlarmSirenHMIP.prototype = {
 };
 
 /**
+ * Created by grobelnik on 01.08.2016.
+ */
+
+
+iseDigitalState = Class.create();
+
+iseDigitalState.prototype = {
+  initialize: function (id, initState) {
+
+    var elmOn, elmOff;
+    var currentState = parseInt(initState);
+    currentState = currentState.toString(2).reverse();
+
+    for (var loop = 0; loop <= 7; loop++) {
+      elmOn = jQuery('#bit' + loop + '1');
+      elmOff = jQuery('#bit' + loop + '0');
+
+      if (parseInt(currentState[loop]) == 1) {
+        elmOn.prop('checked', true);
+      } else {
+        elmOff.prop('checked', true);
+      }
+    }
+  }
+};
+/* * * * * * * * * * * * * * * * * * * * * * * *
+ * iseButtonsShutter                           *
+ * * * * * * * * * * * * * * * * * * * * * * * */
+
+/**
+ * @class
+ **/
+iseButtonsShutter= Class.create();
+
+iseButtonsShutter.prototype = {
+  /*
+   * id = datapoint-ID of switch
+   * initState = Creation State (0 or 1)
+   */
+  initialize: function(id, initState, dpLevel, dpStop, iViewOnly, opts) {
+
+    this.id = id;
+    this.state = initState;
+    this.dpLevel = dpLevel;
+    this.dpStop = dpStop;
+    this.Perc = $(this.id + "Perc");
+    this.divPercUp = $(this.id + "PercUp");
+    this.divPercDown = $(this.id + "PercDown");
+    this.divStop = $(this.id + "Stop");
+    this.divUp = $(this.id + "Up");
+    this.divDown = $(this.id + "Down");
+
+    this.shutter = new shutterControl(id, initState);
+    this.Perc.value = initState;
+    this.shutter.setValue(initState);
+    this.opts = opts;
+
+    // Add event handlers
+    if (iViewOnly === 0)
+    {
+      this.clickCtrl = this.onClickShutter.bindAsEventListener(this);
+      Event.observe(this.shutter.divShutterBg, 'mousedown', this.clickCtrl);
+
+      this.clickPercUp = this.onClickPercUp.bindAsEventListener(this);
+      Event.observe(this.divPercUp, 'click', this.clickPercUp);
+      this.clickPercDown = this.onClickPercDown.bindAsEventListener(this);
+      Event.observe(this.divPercDown, 'click', this.clickPercDown);
+      this.changePerc = this.onChangePerc.bindAsEventListener(this);
+      Event.observe(this.Perc, 'change', this.changePerc);
+
+      this.clickUp = this.onClickUp.bindAsEventListener(this);
+      Event.observe(this.divUp, 'mousedown', this.clickUp);
+      this.clickDown = this.onClickDown.bindAsEventListener(this);
+      Event.observe(this.divDown, 'mousedown', this.clickDown);
+
+      this.clickStop = this.onClickStop.bindAsEventListener(this);
+      Event.observe(this.divStop, 'mousedown', this.clickStop);
+    }
+    this.initJalousie();
+
+  },
+
+  initJalousie: function() {},
+
+  onClickShutter: function(ev) {
+    var pos = Position.page(this.shutter.divShutterBg);
+    var offset = ev.clientY - pos[1];
+    var val = 100 - (( offset * 100 ) / this.shutter.MAX_HEIGHT);
+    var setVal = 0;
+    if ( (val >  0) && ( val <= 20) ) setVal = 0;
+    if ( (val > 20) && ( val <= 40) ) setVal = 25;
+    if ( (val > 40) && ( val <= 60) ) setVal = 50;
+    if ( (val > 60) && ( val <= 80) ) setVal = 75;
+    if ( (val > 80) && ( val <= 100) ) setVal = 100;
+    this.state = setVal;
+    this.Perc.value = this.state;
+    this.shutter.setValue(this.state);
+    this.saveValue();
+  },
+
+  onClickPercUp: function() {
+    this.state += 10;
+    if (this.state > 100)
+      this.state = 100;
+    this.Perc.value = this.state;
+    this.shutter.setValue(this.state);
+    this.saveValue();
+  },
+
+  onClickPercDown: function() {
+    this.state -= 10;
+    if (this.state < 0)
+      this.state = 0;
+    this.Perc.value = this.state;
+    this.shutter.setValue(this.state);
+    this.saveValue();
+  },
+
+  onChangePerc: function() {
+    if (isNaN(this.Perc.value)) { return; }
+    this.state = parseInt(this.Perc.value);
+    this.shutter.setValue(this.state);
+    this.saveValue();
+  },
+
+  onClickUp: function() {
+    this.state = 100;
+    this.Perc.value = this.state;
+    ControlBtn.pushed(this.divUp);
+    this.shutter.setValue(this.state);
+    this.saveValue();
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      ControlBtn.off(t.divUp);
+      pe.stop();
+    }, 1);
+  },
+
+  onClickDown: function() {
+    this.state = 0;
+    this.Perc.value = this.state;
+    this.shutter.setValue(this.state);
+    this.saveValue();
+    var t = this;
+    ControlBtn.pushed(this.divDown);
+    new PeriodicalExecuter(function(pe) {
+      ControlBtn.off(t.divDown);
+      pe.stop();
+    }, 1);
+  },
+
+  onClickStop: function() {
+    ControlBtn.pushed(this.divStop);
+    setDpState(this.dpStop, 1);
+    var t = this;
+    new PeriodicalExecuter(function(pe) {
+      ControlBtn.off(t.divStop);
+      pe.stop();
+    }, 1);
+  },
+
+  saveValue: function() {
+    setDpState(this.dpLevel, this.state / 100);
+  }
+};
+
+iseButtonsJalousie = Class.create(iseButtonsShutter, {
+  initJalousie: function () {
+    conInfo("initJalousie");
+    this.sliderInfoElm = jQuery("#infoSliderPos" + this.id);
+    this.sliderElm = jQuery("#slider" + this.id);
+    this.btnSendData = jQuery("#btnSendValues" + this.id);
+
+    this.levelSlats = this.opts.levelSlatsValue;
+    this.dpLevelCombined = this.opts.levelCombinedID;
+    this.initSliderInfoElm();
+    this.initSendBtn();
+    this.initSlider();
+    this.sliderElm.slider('value', this.opts.levelSlatsValue);
+    this.sliderInfoElm.val(this.opts.levelSlatsValue);
+
+  },
+
+  initSliderInfoElm: function() {
+    var self = this;
+    this.sliderInfoElm.blur(function() {
+      self.levelSlats = jQuery(this).val();
+      self.sliderElm.slider("value", self.levelSlats);
+    });
+  },
+
+  initSendBtn: function () {
+    var self = this;
+
+    this.btnSendData.click(function () {
+      self.saveValue();
+      JControlBtn.pushed(self.btnSendData);
+
+      new PeriodicalExecuter(function (pe) {
+        JControlBtn.off(self.btnSendData);
+        pe.stop();
+      }, 1);
+    });
+  },
+
+  initSlider: function () {
+    var self = this;
+    this.sliderElm.slider({
+      animate: "fast",
+      min: 0,
+      max: 100,
+      step: 5,
+      orientation: "horizontal",
+      slide: function (event, ui) {},
+      stop: function( event, ui ) {}
+    });
+    this.sliderElm.on("slide", function (event, ui) {
+      self.onSliderChange(ui.value);
+    });
+
+    this.sliderElm.on("slidestop", function(event, ui){
+      self.onSliderStop();
+    });
+  },
+
+  onSliderChange: function (val) {
+    this.levelSlats = val; //this.sliderElm.slider("value");
+    this.sliderInfoElm.val(this.levelSlats);
+    //this.saveValue();
+  },
+
+  onSliderStop: function() {
+  },
+
+  onClickShutter: function (ev) {
+    var pos = Position.page(this.shutter.divShutterBg);
+    var offset = ev.clientY - pos[1];
+    var val = 100 - (( offset * 100 ) / this.shutter.MAX_HEIGHT);
+    var setVal = 0;
+    if ((val > 0) && ( val <= 20)) setVal = 0;
+    if ((val > 20) && ( val <= 40)) setVal = 25;
+    if ((val > 40) && ( val <= 60)) setVal = 50;
+    if ((val > 60) && ( val <= 80)) setVal = 75;
+    if ((val > 80) && ( val <= 100)) setVal = 100;
+    this.state = setVal;
+    this.Perc.value = this.state;
+    this.shutter.setValue(this.state);
+    //this.saveValue();
+  },
+
+
+
+  onChangePerc: function() {
+    if (isNaN(this.Perc.value)) { return; }
+    this.state = parseInt(this.Perc.value);
+    //this.shutter.setValue(this.state);
+    //this.saveValue();
+  },
+
+
+  saveValue: function() {
+    var level = parseInt(this.state) * 2,
+      levelHex = level.toString(16),
+      levelSlat = parseInt(this.levelSlats) * 2,
+      levelSlatHex = levelSlat.toString(16),
+      dpValue;
+
+    dpValue = (levelHex.length < 2) ? "0X0" + levelHex : "0X" + levelHex;
+    dpValue += ",";
+    dpValue += (levelSlatHex.length < 2) ? "0X0" + levelSlatHex : "0X" + levelSlatHex;
+
+    setDpState(this.dpLevelCombined, dpValue);
+  }
+
+});/**
  * ic_gd.js
  **/
 
@@ -28328,7 +29649,9 @@ set_value = function(input_id, id, type)
 
 RemoveLink = function(iface, sender_address, receiver_address, redirect_url)
 {
-  new YesNoDialog(translateKey('dialogSafetyCheck'), translateKey('dialogQuestionRemoveLink'), function(result) {
+  var questionRemoveLink = ((iface == "HmIP-RF") && (sender_address.split(":")[0] == receiver_address.split(":")[0])) ? translateKey('dialogQuestionRemoveInternalLink') : translateKey('dialogQuestionRemoveLink');
+
+  new YesNoDialog(translateKey('dialogSafetyCheck'), questionRemoveLink, function(result) {
     if (result == YesNoDialog.RESULT_YES)
     {
       ResetPostString();
@@ -28345,7 +29668,7 @@ RemoveLink = function(iface, sender_address, receiver_address, redirect_url)
 
       SendRequest('ic_ifacecmd.cgi');
     }
-  });
+  }, "html");
 };
 
 getInnerDimensions = function()
@@ -28633,12 +29956,6 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
     if (tokens[1]) value += tokens[1];
 
     $(srcid).value = value;
-  }
-
-  // Is float allowed?
-  // The value is converted to int when min AND max are also of type int
-  if ((min.toString().indexOf(".") == -1) && (max.toString().indexOf(".") == -1) ) {
-    value = parseInt(value).toString();
   }
 
   //User is already editing?
@@ -31109,13 +32426,15 @@ SetParameters = function(iface, address, special_input_id)
 
 };
 
-SendInternalKeyPress = function(iface, sender, receiver)
+SendInternalKeyPress = function(iface, sender, receiver, longKeyPress)
 {
+  var simLongKeyPress = (longKeyPress) ? 1 : 0;
   ResetPostString();
   AddParam($('global_sid'));
   poststr += "&iface=" + iface;
   poststr += "&sender=" + sender;
   poststr += "&receiver=" + receiver;
+  poststr += "&longKeyPress=" + simLongKeyPress;
   poststr += "&cmd=SendInternalKeyPress";
   SendRequest('ic_ifacecmd.cgi');
 };
@@ -32064,6 +33383,11 @@ showGeneralSettingsCP = function()
   CreateCPPopup("/pages/jpages/system/StorageSettings/show");
 };
 
+showCouplingCP = function()
+{
+  CreateCPPopup("/pages/jpages/system/Coupling/show");
+};
+
 showTimeCP = function() {
   CreateCPPopup("/config/cp_time.cgi");
 };
@@ -32766,12 +34090,34 @@ BLIND_setPosition = function(id)
 
 };
 
+jalousieShowSlatInputElem = function(id, chn) {
+  var selValue = jQuery("#"+id).val(),
+    jalousieSlatPosOffElm = jQuery("#jalousieSlatPosOff_" + chn),
+    jalousieSlatPosOnElm = jQuery("#jalousieSlatPosOn_" + chn);
+
+  switch (selValue) {
+    case "1":
+        jalousieSlatPosOffElm.hide();
+        jalousieSlatPosOnElm.show();
+      break;
+    case "2":
+        jalousieSlatPosOnElm.hide();
+        jalousieSlatPosOffElm.show();
+      break;
+    case "3":
+        jalousieSlatPosOnElm.show();
+        jalousieSlatPosOffElm.show();
+      break;
+  }
+};
+
 Disable_SimKey = function(ch, prn, specialInputId) 
 {
   var arrSpecialInputId = specialInputId.split("_"),
   pref_dirty = false,
   i = 1,
   jBtnSim = $("SimKey_" + arrSpecialInputId[1] + "_" +  arrSpecialInputId[2] + "_" + prn),
+  jBtnLongSim = $("SimLongKey_" + arrSpecialInputId[1] + "_" +  arrSpecialInputId[2] + "_" + prn),
   jHintSim = $("SimKeyHint_" + arrSpecialInputId[1] + "_" +  arrSpecialInputId[2] + "_" + prn);
   
   if (jBtnSim) {
@@ -32788,15 +34134,19 @@ Disable_SimKey = function(ch, prn, specialInputId)
      if ( (pref_dirty == true ) || ( IsDirty($(specialInputId + '_profiles')) ) ) 
     {
       jBtnSim.disabled = true;
+      if (jBtnLongSim) jBtnLongSim.disabled = true;
       //jBtnSim.value = "Simulation nicht möglich!";
       jBtnSim.value = translateKey("simulateKeyPressBtnTxtNotPossible");
+      if (jBtnLongSim) jBtnLongSim.value = translateKey("simulateKeyPressBtnTxtNotPossible");
       jHintSim.style.display = "inline";
     } 
     else
     {
       jBtnSim.disabled = false;
+      if (jBtnLongSim) jBtnLongSim.disabled = false;
       //jBtnSim.value = "Simuliere Tastendruck";
-      jBtnSim.value = translateKey("simulateKeyPressBtnTxt");
+      jBtnSim.value = translateKey("btnSimKeyPress");
+      if (jBtnLongSim) jBtnLongSim.value = translateKey("btnSimLongKeyPress");
       jHintSim.style.display = "none";
     }
   }

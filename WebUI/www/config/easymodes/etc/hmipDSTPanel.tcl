@@ -56,14 +56,15 @@ proc getDSTPanel {p descr} {
     set html "<tr>"
       append html "<td>\${DSTSwitchAutomatically}</td>"
       append html "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html "<td><input id=\"btnShowDST\" type=\"button\" name=\"btnConfigureDST\" onclick=\"jQuery('.j_dstValue').toggle();scrollUp(this);\"></td>"
     append html "</tr>"
 
-    append html [getHorizontalLine]
-
-    append html "<tr><td>\${DSTStartHeader}</td></tr>"
+    # This values are only visible when clicking the above button (id configDST)
+    append html "<tr class=\"j_dstValue hidden\"><td colspan=\"2\"><hr></td></tr>"
+    append html "<tr class=\"j_dstValue hidden\"><td>\${DSTStartHeader}</td></tr>"
     incr prn
     set param DST_START_DAY_OF_WEEK
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${DSTStartDayOfWeek}</td>"
       set option(0) "\${timeModuleLblSelSerialPatternSunday}"
       set option(1) "\${timeModuleLblSelSerialPatternMonday}"
@@ -77,7 +78,7 @@ proc getDSTPanel {p descr} {
 
     incr prn
     set param DST_START_MONTH
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${DSTStartMonth}</td>"
       array_clear option
       set option(1) 1
@@ -97,7 +98,7 @@ proc getDSTPanel {p descr} {
 
     incr prn
     set param DST_START_WEEK_OF_MONTH
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${DSTStartWeekOfMonth}</td>"
         array_clear option
         set option(1) "\${firstWeek}"
@@ -110,17 +111,17 @@ proc getDSTPanel {p descr} {
 
     incr prn
     set param DST_START_TIME
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${DSTStartTime}</td>"
     append html "<td>[getDSTTimeElem $param $ps($param) $chn $prn]</td>"
     append html "</tr>"
 
-    append html [getHorizontalLine]
+    append html "<tr id=\"scrollDSTAnchor\" class=\"j_dstValue hidden\"><td colspan=\"2\"><hr></td></tr>"
 
-    append html "<tr><td>\${DSTEndHeader}</td></tr>"
+    append html "<tr class=\"j_dstValue hidden\"><td>\${DSTEndHeader}</td></tr>"
     incr prn
     set param DST_END_DAY_OF_WEEK
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${DSTEndDayOfWeek}</td>"
       set option(0) "\${timeModuleLblSelSerialPatternSunday}"
       set option(1) "\${timeModuleLblSelSerialPatternMonday}"
@@ -134,7 +135,7 @@ proc getDSTPanel {p descr} {
 
     incr prn
     set param DST_END_MONTH
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${DSTEndMonth}</td>"
       array_clear option
       set option(1) 1
@@ -154,7 +155,7 @@ proc getDSTPanel {p descr} {
 
     incr prn
     set param DST_END_WEEK_OF_MONTH
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${DSTStartWeekOfMonth}</td>"
         array_clear option
       set option(1) "\${firstWeek}"
@@ -167,28 +168,30 @@ proc getDSTPanel {p descr} {
 
     incr prn
     set param DST_END_TIME
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
     append html "<td>\${DSTEndTime}</td>"
     append html "<td>[getDSTTimeElem $param $ps($param) $chn $prn]</td>"
     append html "</tr>"
 
-    append html [getHorizontalLine]
+    append html "<tr class=\"j_dstValue hidden\"><td colspan=\"2\"><hr></td></tr>"
 
     incr prn
     set param UTC_DST_OFFSET
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${UtcDSTOffset}</td>"
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
 
     incr prn
     set param UTC_OFFSET
-    append html "<tr>"
+    append html "<tr class=\"j_dstValue hidden\">"
       append html "<td>\${UtcOffset}</td>"
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
 
     append html "<script type=\"text/javascript\">"
+
+      append html "translateButtons('btnConfigureDST');"
 
       # This converts the time
       append html "ConvertTimeToMin = function(chn, prn, param) \{"
@@ -215,6 +218,19 @@ proc getDSTPanel {p descr} {
         append html "valHrElm.val(valHr);"
         append html "valMinElm.val(valMin);"
       append html "\};"
+
+      append html "scrollUp = function(elm) \{"
+        append html "if (jQuery(\"#scrollDSTAnchor\").is(\":visible\")) \{"
+          append html "jQuery(\"#btnShowDST\").get(0).scrollIntoView(\{behavior:'smooth', block:'start'\});"
+        append html "\} else \{"
+          append html "var endOfView = jQuery(elm).parent().parent().parent().children(\"tr\").filter(\":visible\").first();"
+          append html "jQuery(endOfView).get(0).scrollIntoView(\{behavior:'smooth', block:'start'\});"
+        append html "\}"
+      append html "\}"
+
+
+
+
 
     append html "</script>"
 

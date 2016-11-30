@@ -24,6 +24,24 @@ set keypair 0
 #Interface des übergebenen channels
 set ch_iface ""
 set hmIPIdentifier "HmIP-RF"
+set hmwIdentifier "BidCos-Wired"
+set hmIdentifier "BidCos-RF"
+
+proc isHMW {} {
+  global iface hmwIdentifier
+  if {$iface == $hmwIdentifier} {
+    return "true"
+  }
+  return "false"
+}
+
+proc isHM {} {
+  global iface hmIdentifier
+  if {$iface == $hmIdentifier} {
+    return "true"
+  }
+  return "false"
+}
 
 proc isHmIP {} {
   global iface hmIPIdentifier
@@ -128,9 +146,11 @@ proc isWired {senderDescription receiverDescription} {
 # Some internal links are visible within the page "Direct device connections"
 proc isInExceptionList {senderType receiverType} {
 
-  # show all internal keys of HmIP devices
-  if {[isHmIP] == "true"} {return 1}
+  # Show all internal keys of HmIP and HMW devices
+  if {([isHmIP] == "true") || ([isHMW] == "true")} {return 1}
 
+
+  # Hide all internal keys of BidCos-RF devices except these in the following exceptions list
   array set exceptions {
     CONDITION_POWER SWITCH
     CONDITION_CURRENT SWITCH
@@ -187,7 +207,11 @@ proc put_tablebody {} {
     if { [set rc [ catch {set linklist [xmlrpc $url getLinks [list string $channel] [list int $flags]]} e ]] } then {
     # Falls es sich um ein unbekanntes Gerät handelt, keine Fehlermeldung ausgeben
       if { $rc != -2 } then {
-        puts "<div class=\"CLASS22103\">\${interfaceProcessNotReadyA} '$iface' \${interfaceProcessNotReadyB} Channel: '$channel'. Flags: '$flags' $e</div>"
+        if {$rc == -321} {
+           puts "<div class=\"CLASS22103\">\${unknownError} '$iface' - Channel: '$channel'. Flags: '$flags' $e</div>"
+        } else {
+          puts "<div class=\"CLASS22103\">\${interfaceProcessNotReadyA} '$iface' \${interfaceProcessNotReadyB} Channel: '$channel'. Flags: '$flags' $e</div>"
+        }
       }
       continue
     }
@@ -231,17 +255,27 @@ proc put_tablebody {} {
       
       # Sind Sender u. Receiver identisch? Dann handelt es sich um einen internen Link, z. B. die interne Gerätetaste
       # Diese soll bei BidCos-RF nicht in der Verknüpfungsübersichtsliste angezeigt werden, Ausnahmen werden mittels isInExceptionList erlaubt.
-      # Interne Links von HmIP-Geräten z. Z. immer angezeigt, da sie anders als bei HM nur hier editiert werden können. Diese Links dürfen nicht löschbar sein,
-      # da sie andernfalls nur durch einen Werksreset des Gerätes neu erzeugt werden können.
+      # Interne Links von HmIP-Geräten werden immer angezeigt, da sie anders als bei HM nur hier editiert werden können (nicht als Kanalparameter).
+      # Interne Links von PS / PSM dürfen nicht löschbar sein, da sie aufgrund der Firmware nur per Werksreset wieder restauriert werden können.
+      # Interne Links anderer HmIP-Geräte können gelöscht werden. Vor dem Löschen erscheint aber ein entsprechender Warnhinweis.
+      # Nach dem Löschen können diese Verknüpfungen aber problemlos wieder hergestellt werden.
+
       if {$senderParent == $receiverParent} {
 
-        # Hide the delete button of all HmIP-Devices and of all Hm-Devices which are not in the exception list.
-        if {[isHmIP] == "true" || ![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]} {
-          set hideBtnDelete 1
-        }
-
+        # Hide the delete button of all HmIP-Devices of the type PS and PSM.
+        # When an internal link for a device of the type PS / PSM is deleted it can only be restored by a factory reset of the device.
+        # This is because of a firmware error. Therefore we prevent the deleting of this links by hiding the delete button.
         catch {
-          if {([string index $senderParent 0] != "@")  && ([string index $senderParent 0] != "@") && ![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]} {
+          if { ([isHmIP] == "true" &&
+            [string tolower $sender_descr(PARENT_TYPE)] == "hmip-ps" ||
+            [string tolower $sender_descr(PARENT_TYPE)] == "hmip-psm"  ||
+            [string tolower $sender_descr(PARENT_TYPE)] == "hmip-pdt" )  ||
+            ![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]} {
+            set hideBtnDelete 1
+          }
+        }
+        catch {
+          if {([string index $senderParent 0] != "@")  && ([string index $receiverParent 0] != "@") && ![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]} {
             set internalLink 1
             set hideBtnDelete 1
           }
@@ -250,8 +284,7 @@ proc put_tablebody {} {
 
       catch {set isHMW [isWired $link(SENDER_DESCRIPTION) $link(RECEIVER_DESCRIPTION)]} 
 
-      #Verknüpfungen mit internen Gerätetasten (ausser Wired-Komponenten)  werden nicht angezeigt.  
-      if {(($internalLink == 0) || ($isHMW == 1)) } {       
+      if {(($internalLink == 0) || ($isHMW == 1)) } {
         #Bilder=====
         set sender_parent_type "unknown_device"
         set receiver_parent_type "unknown_device"
@@ -368,14 +401,16 @@ proc put_tablebody {} {
       set tablestruct [lsort -command my_sort $tablestruct]
       set loop 0
       foreach tr $tablestruct {
-      
+
         array set SENTRY $tr
 
-        # This is for the link of a internal device key which is visible at the page direct links (HmIP devices)
-        # instead as channel parameter (BidCos-RF and BidCos-Wired)
         if {[string first "NO_DESCRIPTION" $SENTRY(LINKDESC)] == 0} {
-           set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
-           append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
+          if {[isHmIP] == "true"} {
+             set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
+             append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
+          }
+        } elseif {[string first "" $SENTRY(LINKDESC)] == 0} {
+          set SENTRY(LINKDESC) "\${lblLinkNoDescriptionAvailable}<br/>"
         }
 
         puts "<tr>"
@@ -396,7 +431,11 @@ proc put_tablebody {} {
         set _receiver_parent_type $SENTRY(RECEIVER_PARENT_TYPE)
 
         puts "<script type=\"text/javascript\>"
+
+          # puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription('$_sender_parent_type', '$senderCh'));"
           puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_sender_parent_type','channelAddress' : '$senderAddress' ,'channelIndex' : '$senderCh' \}));"
+
+          #puts "jQuery(\"#receiverNameExtension_$loop\").html(getExtendedDescription('$_receiver_parent_type', '$receiverCh'));"
           puts "jQuery(\"#receiverNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_receiver_parent_type','channelAddress' : '$receiverAddress' ,'channelIndex' : '$receiverCh' \}));"
         puts "</script>"
 
