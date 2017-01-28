@@ -72,10 +72,26 @@ OCCU based Community Projects
 =============================
  * [Hmcon](https://github.com/hobbyquaker/hmcon) - Installer Script for rfd, hs485d and Homematic Manager. "The ReGa-less CCU" for use with Software like OpenHAB, ioBroker, ...
  * [RaspberryMatic] (https://github.com/jens-maus/RaspberryMatic) - A collaborate effort to create an open sourced HomeMatic-aware distribution for the RaspberryPi platform based on buildroot.
-
+ * [Docker Container] (https://github.com/angelnu/docker-ccu2) - OCCU based docker container
+ * [OGEMA] (http://www.ogema.org/) - open energy management; Homematic driver (https://www.ogema-source.net/wiki/display/OGEMA/Homematic+XML-RPC+high+level+driver)
 
 Version History
 ===============
+
+2017-01-27: Version 2.25.15
+- Create 2.25.15 release tag. 
+
+2016-07-29: Version 2.21.10
+- Update to CCU2 2.21.10 release. 
+
+2016-06-06: Version 2.19.9
+- Update to CCU2 2.19.9 release. 
+
+2016-05-29: Version 2.17.15
+- Update to CCU2 2.17.15 release. 
+
+2016-01-24: Version 2.15.5
+- Update to CCU2 2.15.5 release. 
 
 2015-04-02: Version 1.0.0
 - First initial version, no change history.
