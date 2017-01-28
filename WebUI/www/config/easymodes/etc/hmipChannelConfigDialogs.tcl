@@ -10,38 +10,54 @@ proc getMaintenance {chn p descr} {
   set html ""
 
   set param CYCLIC_INFO_MSG
-  append html "<tr>"
-    append html "<td>\${stringTableCyclicInfoMsg}</td>"
-    append html  "<td>[getCheckBoxCyclicInfoMsg $param $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+      append html "<td>\${stringTableCyclicInfoMsg}</td>"
+      append html  "<td>[getCheckBoxCyclicInfoMsg $param $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
   incr prn
   set param CYCLIC_INFO_MSG_DIS
-  append html "<tr>"
-    append html "<td>\${stringTableCyclicInfoMsgDis}</td>"
-    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+      append html "<td>\${stringTableCyclicInfoMsgDis}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
 
   incr prn
   set param CYCLIC_INFO_MSG_DIS_UNCHANGED
-  append html "<tr>"
-    append html "<td>\${stringTableCyclicInfoMsgDisUnChanged}</td>"
-    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+      append html "<td>\${stringTableCyclicInfoMsgDisUnChanged}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
 
   incr prn
   set param LOCAL_RESET_DISABLED
-  append html "<tr>"
-    append html "<td>\${stringTableLocalResetDisable}</td>"
-    append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+      append html "<td>\${stringTableLocalResetDisable}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
   set param GLOBAL_BUTTON_LOCK
   if { ! [catch {set tmp $ps($param)}]  } {
-    # This parameter isn't available for all devices
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableGlobalButtonLock}</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+     append html "</tr>"
+  }
+
+  set param ROUTER_MODULE_ENABLED
+  if { ! [catch {set tmp $ps($param)}]  } {
+     incr prn
+     append html "<tr>"
+       append html "<td>\${stringTableEnableRouting}</td>"
        append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
      append html "</tr>"
   }
@@ -114,7 +130,6 @@ proc getGenericInputTransmitter {chn p descr} {
   set html ""
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
-
 
   set param MIOB_DIN_CONFIG
   append html "<tr>"
@@ -902,6 +917,275 @@ proc getCondSwitchTransmitter {chn p descr} {
 
 }
 
+# ACCELERATION_TRANSCEIVER
+# Introduced with the HmIP-SAM (1612)
+proc getAccelerationTransceiver {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  append html "<tr>"
+  append html "<td>\${stringTableEventDelay}</td>"
+  append html [getComboBox $chn $prn "$specialID" "delayShort"]
+  append html "</tr>"
+
+  set param EVENT_DELAY_UNIT
+  append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param EVENT_DELAY_VALUE
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableEventDelayValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  incr prn
+  set param CHANNEL_OPERATION_MODE
+  append html "<tr>"
+    append html "<td>\${motionDetectorChannelOperationMode}</td>"
+    array_clear options
+    # not in use for HmIP-SAM set options(0) "\${motionDetectorChannelOperationModeOff}"
+    set options(1) "\${motionDetectorChannelOperationModeAnyMotion}"
+    set options(3) "\${motionDetectorChannelOperationModeFlat}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+set comment {
+  # For the HmIP-SAM this parameter is alway 1 and not changeable
+  incr prn
+  set param EVENT_FILTER_NUMBER
+  append html "<tr>"
+    append html "<td>\${stringTableEventFilterNumber}</td>"
+   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+  append html "</tr>"
+}
+  incr prn
+  set param EVENT_FILTER_PERIOD
+  append html "<tr>"
+    append html "<td>\${motionDetectorFilterPeriod}</td>"
+   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param MSG_FOR_POS_A
+  append html "<tr>"
+    append html "<td>\${motionDetectorMessageMovement}</td>"
+    array_clear options
+    set options(0) "\${motionDetectorOptionNoMessage}"
+    set options(1) "\${motionDetectorOptionNoMotion}"
+    set options(2) "\${motionDetectorOptionMotion}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param MSG_FOR_POS_B
+  append html "<tr>"
+    append html "<td>\${motionDetectorMessageNoMovement}</td>"
+    array_clear options
+    set options(0) "\${motionDetectorOptionNoMessage}"
+    set options(1) "\${motionDetectorOptionNoMotion}"
+    set options(2) "\${motionDetectorOptionMotion}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW
+  append html "<tr>"
+    append html "<td>\${motionDetectorNotificationNoMovement}</td>"
+    array_clear options
+    set options(0) "\${stringTableSoundNoSound}"
+    set options(1) "\${stringTableSoundShort}"
+    set options(2) "\${stringTableSoundShortShort}"
+    set options(3) "\${stringTableSoundLong}"
+    set options(4) "\${stringTableSoundLongShort}"
+    set options(5) "\${stringTableSoundLongLong}"
+    set options(6) "\${stringTableSoundLongShortShort}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH
+  append html "<tr>"
+    append html "<td>\${motionDetectorNotificationMovement}</td>"
+    array_clear options
+    set options(0) "\${stringTableSoundNoSound}"
+    set options(1) "\${stringTableSoundShort}"
+    set options(2) "\${stringTableSoundShortShort}"
+    set options(3) "\${stringTableSoundLong}"
+    set options(4) "\${stringTableSoundLongShort}"
+    set options(5) "\${stringTableSoundLongLong}"
+    set options(6) "\${stringTableSoundLongShortShort}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+    incr prn
+    set param SENSOR_SENSITIVITY
+    append html "<tr>"
+      append html "<td>\${motionDetectorSensorSensivity}</td>"
+      array_clear options
+      set options(0) "\${motionDetectorSensorRange16G}"
+      set options(1) "\${motionDetectorSensorRange8G}"
+      set options(2) "\${motionDetectorSensorRange4G}"
+      set options(3) "\${motionDetectorSensorRange2G}"
+      set options(4) "\${motionDetectorSensorRange2GPlusSens}"
+      set options(5) "\${motionDetectorSensorRange2G2PlusSense}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+
+  incr prn
+  set param TRIGGER_ANGLE
+  append html "<tr>"
+    append html "<td>\${motionDetectorTriggerAngle}</td>"
+   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+  append html "</tr>"
+
+}
+
+proc getClimateControlFloorDirectTransmitter {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  set hlpBoxWidth 450
+  set hlpBoxHeight 100
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
+
+  set param COOLING_DISABLE
+  append html "<tr>"
+    append html "<td>\${stringTableCoolingDisable}</td>"
+    option OPTION_DISABLE_ENABLE
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param HEATING_DISABLE
+  append html "<tr>"
+    append html "<td>\${stringTableHeatingDisable}</td>"
+    option OPTION_DISABLE_ENABLE
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param FLOOR_HEATING_MODE
+  append html "<tr>"
+    append html "<td>\${stringTableFloorHeatingMode}</td>"
+    option FLOOR_HEATING_MODE
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param HEATING_MODE_SELECTION
+  append html "<tr>"
+    append html "<td>\${stringTableHeatingModeSelection}</td>"
+    option HEATING_MODE_SELECTION
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param FROST_PROTECTION_TEMPERATURE
+  append html "<tr>"
+    append html "<td>\${stringTableFrostProtectionTemperature}</td>"
+    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param HEATING_VALVE_TYPE
+  append html "<tr>"
+    append html "<td>\${stringTableHeatingValveType}</td>"
+    option HEATING_VALVE_TYPE
+    append html  "<td>[getOptionBox $param options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param HUMIDITY_LIMIT_DISABLE
+  append html "<tr>"
+    append html "<td>\${stringTableHumidityLimitDisable}</td>"
+    option OPTION_DISABLE_ENABLE
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param HUMIDITY_LIMIT_VALUE
+  append html "<tr>"
+    append html "<td>\${stringTableHumidityLimitValue}</td>"
+    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param MINIMAL_FLOOR_TEMPERATURE
+  append html "<tr>"
+    append html "<td>\${stringTableMinimalFloorTemperature}</td>"
+    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+  append html "</tr>"
+
+#######################################################################################
+  append html "[getHorizontalLine]"
+
+  # SWITCHING_INTERVAL_BASE and INTERVAL_FACTOR
+
+  incr prn
+  append html "<tr>"
+  append html "<td>\${lblDecalcificationInterval}</td>"
+  append html [getComboBox $chn $prn "$specialID" "switchingInterval"]
+  append html "</tr>"
+
+  set param SWITCHING_INTERVAL_BASE
+  append html [getTimeUnitComboBoxB $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param SWITCHING_INTERVAL_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableSwitchingIntervalValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  # END SWITCHING_INTERVAL_BASE and INTERVAL_FACTOR
+
+  # ON_TIME_BASE and ON_TIME_FACTOR
+
+  incr prn
+  append html "<tr>"
+  append html "<td>\${stringTableOnTime}</td>"
+  append html [getComboBox $chn $prn "$specialID" "switchingIntervalOnTime"]
+  append html "</tr>"
+
+  set param ON_TIME_BASE
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param ON_TIME_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableOnTimeValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOnTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  # END ON_TIME_BASE and ON_TIME_FACTOR
+}
+
 proc getNoParamatersToSet {} {
-  return "<tr><td class=\"CLASS22003\">\${deviceAndChannelParamsLblNoParamsToSet}</td></tr>"
+  return "<tr><td class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"
 }

@@ -890,6 +890,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set simulateLongKeyPress 0
   set device $dev_descr_sender(TYPE)
+
+  if {$device == "DUAL_WHITE_BRIGHTNESS"} {
+    set device "DIMMER"
+  }
+
   set ch $dev_descr_sender(INDEX)
   
   foreach pro [array names PROFILES_MAP] {
@@ -912,8 +917,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 # die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$device', '$device');</script>"
-
-
 
   
   set prn 0 

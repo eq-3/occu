@@ -5,7 +5,7 @@ function isNoProgramScript(cont) {
   return true;
 }
 
-function setTextContent(cont) {
+function setTextContent(cont, callback) {
   var lang = getLang(),
     container = "#header, #menubar, #content, #footer",
     invisibleBeforeTranslationSelector = ".j_translate";
@@ -51,11 +51,16 @@ function setTextContent(cont) {
         }
       } catch(e) {}
     });
+
+  if (callback) {
+    callback();
+  }
+
   jQuery(invisibleBeforeTranslationSelector).show();
 }
 
-function translatePage(container) {
-  setTextContent(container);
+function translatePage(container, callback) {
+  setTextContent(container, callback);
 }
 
 /**

@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">en* Bei Feuchte oder Wasser wird das Licht auf den f&uuml;r \"Hoch\" eingestellten Wert und bei Trockenheit auf den f&uuml;r \"Niedrig\" eingestellten Wert gesetzt. Die Schaltzuordnung l&auml;sst sich auch umkehren.</span><br/><br/>",
+
+"subset_1" : "en* Feucht/Wasser - Niedrig / Trockenheit - Hoch",
+"subset_2" : "en* Feucht/Wasser - Hoch / Trockenheit - Niedrig",
+

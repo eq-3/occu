@@ -102,6 +102,8 @@ function ::dcCreate()
     var CN_SWITCH_TRANSM   = "SWITCH_TRANSMITTER.";
     var CN_DIMMER          = "DIMMER.";
     var CN_DIMMER_REAL     = "DIMMER_REAL.";
+    var CN_DUAL_WHITE_BRIGHTNESS = "DUAL_WHITE_BRIGHTNESS";
+    var CN_DUAL_WHITE_COLOR = "DUAL_WHITE_COLOR";
     var CN_BLIND           = "BLIND.";
     var CN_JALOUSIE        = "JALOUSIE.";
     var CN_WINDOW          = "WINDOW.";
@@ -179,10 +181,17 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_SWITCH) > -1 );
           if( bIsControl && (sLastControlName != CN_SWITCH) )
           {
-            WriteLine( "<script>conInfo('Control SWITCH found.');</script>" );
+            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_SWITCH;
-            Call("/esp/controls/switch.fn::CreateBinaryActuator()");
+            if (ch.Label().Substr(5,4) != "BWTH") {
+              WriteLine( "<script>conInfo('Control SWITCH found.');</script>" );
+              Call("/esp/controls/switch.fn::CreateBinaryActuator()");
+            } else {
+              ! If the device is a HmIP-BWTH or HmIP-BWTH24
+              WriteLine( "<script>conInfo('Control BWTH found.');</script>" );
+              Call("/esp/controls/heating_control.fn::CreateBWTHSwitchState()");
+            }
           }
 
           !# SWITCH_TRANSMITTER
@@ -203,6 +212,26 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_DIMMER;
             Call("/esp/controls/dimmer.fn::CreateDimmingActuator()");
+          }
+
+          !# CN_DUAL_WHITE_BRIGHTNESS
+          bIsControl = ( sControlName.Find(CN_DUAL_WHITE_BRIGHTNESS) > -1 );
+          if( bIsControl && (sLastControlName!=CN_DUAL_WHITE_BRIGHTNESS) )
+          {
+            WriteLine( "<script>conInfo('Control DUAL_WHITE_BRIGHTNESS found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_DUAL_WHITE_BRIGHTNESS;
+            Call("/esp/controls/dual_white_controller.fn::CreateDualWhiteBrightnessActuator()");
+          }
+
+          !# CN_DUAL_WHITE_COLOR
+          bIsControl = ( sControlName.Find(CN_DUAL_WHITE_COLOR) > -1 );
+          if( bIsControl && (sLastControlName!=CN_DUAL_WHITE_COLOR) )
+          {
+            WriteLine( "<script>conInfo('Control DUAL_WHITE_COLOR found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_DUAL_WHITE_COLOR;
+            Call("/esp/controls/dual_white_controller.fn::CreateDualWhiteColorActuator()");
           }
 
           !# BLIND
@@ -246,7 +275,7 @@ function ::dcCreate()
           }
  
           !# BTN
-          bIsControl = ( sControlName.Find(CN_BTN_SHORT_ONLY) > -1 ); !### Attention: workaround
+          bIsControl = ( sControlName.Find(CN_BTN_SHORT_ONLY) > -1 );
           if( bIsControl && (sLastControlName!=CN_BTN_SHORT_ONLY) )
           {
             WriteLine( "<script>conInfo('Control BTN_SHORT_ONLY found.');</script>" );
@@ -256,7 +285,7 @@ function ::dcCreate()
           }
          
           !# BUTTON
-          bIsControl = ( sControlName.Find(CN_BUTTON) > -1 ); !### Attention: workaround
+          bIsControl = ( sControlName.Find(CN_BUTTON) > -1 );
           if( bIsControl && (sLastControlName!=CN_BUTTON) )
           {
             WriteLine( "<script>conInfo('Control BUTTON found.');</script>" );
@@ -481,12 +510,11 @@ function ::dcCreate()
 
             if (ch.Label().Substr(0,7) == "VIR-LG-") {
               string chLabel = ch.Label();
-              if(chLabel.Find("RGBW") > -1) {
+              if((chLabel.Find("RGBW") > -1) || (chLabel.Find("GROUP") > -1)) {
                 Call("/esp/controls/rgbw.fn::CreateVIR-LGRGBWColorControl()");
                }
             } else {
                Call("/esp/controls/rgbw.fn::CreateRGBWColorControl()");
-
             }
           }
 
@@ -751,7 +779,7 @@ function ::CreateUnknown()
 {
   boolean bStatusOnly = (system.GetVar("iStatusOnly") == 0);
   WriteLine( '<td class="CLASS02519">' );
-    WriteLine( '<table cellspacing="10">' );
+    WriteLine( '<table cellspacing="10" style="margin: 10px 10px 10px -8px;">' );
     WriteLine( '<tr>');
     integer i = 0;
     string sEnum = "";
@@ -955,7 +983,7 @@ function ::CreateUnknown()
                   tbWrite = false;
                 }
 
-                WriteLine( '<span class="CLASS02535">' );
+                WriteLine( '<span class="CLASS02535" style="color:white">' );
 
                 if( !tbWrite )
                 {

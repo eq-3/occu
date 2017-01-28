@@ -1,3 +1,20 @@
+ACCELERATION_TRANSCEIVER	${stringTableAccelerationTransceiverTitle}
+ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE	${stringTableAccelerationTransceiverChannelOperationMode}
+ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=OFF	${stringTableAccelerationTransceiverChannelOperationModeOff}
+ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=ANY_MOTION	${stringTableAccelerationTransceiverChannelOperationModeAnyMotion}
+ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=FLAT_DECT	${stringTableAccelerationTransceiverChannelOperationModeFlat}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A	${stringTableTiltSensorMsgPosA0}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A=CLOSED	${stringTableTiltSensorMsgPosA1}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A=NO_MSG	${stringTableTiltSensorMsgPosA2}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A=OPEN	${stringTableTiltSensorMsgPosA3}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B	${stringTableTiltSensorMsgPosB0}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=CLOSED	${stringTableTiltSensorMsgPosB1}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG	${stringTableTiltSensorMsgPosB2}
+ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=OPEN	${stringTableTiltSensorMsgPosB3}
+ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW	${stringTableAccelerationTransceiverNotificationSoundTypeHighToLow}
+ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH	${stringTableAccelerationTransceiverNotificationSoundTypeLowToHigh}
+ACCELERATION_TRANSCEIVER|SENSOR_SENSITIVITY	${stringTableAccelerationTransceiverSensorSensivity}
+ACCELERATION_TRANSCEIVER|TRIGGER_ANGLE	${stringTableAccelerationTransceiverTriggerAngle}
 ACOUSTIC_ALARM_SELECTION=DELAYED_EXTERNALLY_ARMED	${stringTableAlarmDelayedExternallyArmed}
 ACOUSTIC_ALARM_SELECTION=DELAYED_INTERNALLY_ARMED	${stringTableAlarmDelayedInternallyArmed}
 ACOUSTIC_ALARM_SELECTION=DISABLE_ACOUSTIC_SIGNAL	${stringTableAlarmDisableAcousticSignal}
@@ -158,13 +175,38 @@ CENTRAL_KEY|DBL_PRESS_TIME	${stringTableCentralKeyDblPressTime}
 CENTRAL_KEY|LONG_PRESS_TIME	${stringTableCentralKeyLongPressTime}
 CHANGE_OVER=FALSE	${stringTableChangeOverFalse}
 CHANGE_OVER=TRUE	${stringTableChangeOverTrue}
+CHARACTERISTIC_BASETYPE	${stringTableCharacteristicBaseType}
+CHARACTERISTIC_COLOURASSIGNMENT	${stringTableCharacteristicColorAssignment}
+CHARACTERISTIC_CROSSFADE	${stringTableCharacteristicCrossfade}
+CHARACTERISTIC_DIM2HOT	${stringTableCharacteristicDim2Hot}
+CHARACTERISTIC_DIM2WARM	${stringTableCharacteristicDim2Warm}
+CHARACTERISTIC_HALF_CONSTANT	${stringTableCharacteristicHalfConstant}
+CHARACTERISTIC_LEVELLIMIT	${stringTableCharacteristicLevelLimit}
 CHARACTERISTIC_LINEAR	${stringTableCharasteristicLinear}
+CHARACTERISTIC_LINSQUARETYPE	${stringTableCharacteristicLinSquareType}
+CHARACTERISTIC_LOW_IS_COLD	${stringTableCharacteristicLowIsCold}
+CHARACTERISTIC_LOW_IS_WARM	${stringTableCharacteristicLowIsWarm}
+CHARACTERISTIC_MAXIMUM	${stringTableCharacteristicMaximum}
 CHARACTERISTIC_SQUARE	${stringTableCharasteristicSquare}
 CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER	${stringTableClimateControlDehumidifierTitle}
+
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|COOLING_DISABLE	${stringTableCoolingDisable}
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|FLOOR_HEATING_MODE	${stringTableFloorHeatingMode}
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HEATING_DISABLE	${stringTableHeatingDisable}
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HEATING_MODE_SELECTION	${stringTableHeatingModeSelection}
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HEATING_VALVE_TYPE	${stringTableHeatingValveType}
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HUMIDITY_LIMIT_DISABLE	${stringTableHumidityLimitDisable}
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HUMIDITY_LIMIT_VALUE	${stringTableHumidityLimitValue}
+CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|MINIMAL_FLOOR_TEMPERATURE	${stringTableMinimalFloorTemperature}
+
 CLIMATECONTROL_FLOOR_TRANSCEIVER	${stringTableClimateControlFloorTransceiverTitle}
 CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER	${stringTableClimateControlFloorPumpTransceiverTitle}
 CLIMATECONTROL_FLOOR_TRANSMITTER	${stringTableClimateControlFloorTransmitterTitle}
 CLIMATECONTROL_HEAT_DEMAND_TRANSMITER	${stringTableClimateControlHeatDemandTransmitterTitle}
+
+CLIMATECONTROL_HEAT_DEMAND_BOILER_TRANSMITTER	${stringTableClimateControlHeatDemandBoilerTransmitterTitle}
+CLIMATECONTROL_HEAT_DEMAND_PUMP_TRANSMITTER	${stringTableClimateControlHeatDemandPumpTransmitterTitle}
+
 CLIMATECONTROL_RECEIVER	${stringTableClimateControlReceiver}
 CLIMATECONTROL_REGULATOR	${stringTableClimateControlRegTitle}
 CLIMATECONTROL_REGULATOR|ADJUSTING_COMMAND	${stringTableClimateControlRegAdjCommand}
@@ -374,6 +416,13 @@ DISPLAY|UNIT=NONE	${stringTableDisplayUnitNone}
 DISPLAY|UNIT=PERCENT	${stringTableDisplayUnitPercent}
 DISPLAY|UNIT=WATT	${stringTableDisplayUnitWatt}
 DISPLAY|WINDOW	${stringTableDisplayWindow}
+DUAL_WHITE_BRIGHTNESS	${stringTableDualWhiteBrightnessTitle}
+DUAL_WHITE_COLOR	${stringTableDualWhiteColorTitle}
+DUAL_WHITE_COLOR|LEVEL	${stringTableDualWhiteColorLevel}
+DUAL_WHITE_COLOR|LEVEL_REAL	${stringTableDualWhiteColorLevelReal}
+DUAL_WHITE_COLOR|OLD_LEVEL	${stringTableDualWhiteColorOldLevel}
+DUAL_WHITE_COLOR|RAMP_STOP	${stringTableDualWhiteColorRampStop}
+DUAL_WHITE_COLOR|RAMP_TIME	${stringTableDualWhiteColorRampTime}
 DURATION_UNIT	${stringTableDurationUnit}
 DURATION_UNIT=D	${stringTableDurationUnitD}
 DURATION_UNIT=H	${stringTableDurationUnitH}
@@ -423,6 +472,8 @@ EVENT_DELAY_UNIT=H	${optionUnitH}
 EVENT_DELAY_UNIT=M	${optionUnitM}
 EVENT_DELAY_UNIT=S	${optionUnitS}
 EVENT_DELAY_VALUE	${stringTableEventDelayValue}
+EVENT_FILTER_NUMBER	${stringTableEventFilterNumber}
+EVENT_FILTER_PERIOD	${stringTableEventFilterPeriod}
 EVENT_RANDOMTIME_UNIT	${stringTableEventRandomTimeUnit}
 EVENT_RANDOMTIME_UNIT=100MS	${optionUnit100MS}
 EVENT_RANDOMTIME_UNIT=H	${optionUnitH}
@@ -435,6 +486,7 @@ EXTERNAL_CLOCK=TRUE	${stringTableExternalClockTrue}
 FREQUENCY_INPUT	${stringTableFrequencyInput}
 FROST_PROTECTION=FALSE	${stringTableFrostProtectionFalse}
 FROST_PROTECTION=TRUE	${stringTableFrostProtectionTrue}
+FROST_PROTECTION_TEMPERATURE	${stringTableFrostProtectionTemperature}
 FUSE_DELAY	${stringTableDimmerFuseDelay}
 GENERIC_INPUT_TRANSMITER	${stringTableGenericTransmitterTitle}
 GLOBAL_BUTTON_LOCK	${stringTableGlobalButtonLock}
@@ -658,8 +710,6 @@ MOTION_DETECTOR|CAPTURE_WITHIN_INTERVAL	${stringTableMotionDetectorCaptureWithin
 MOTION_DETECTOR|ERROR=0	${stringTableSabotageContactOk}
 MOTION_DETECTOR|ERROR=7	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|ERROR=SABOTAGE	${stringTableMotionDetectorErrorSabotage}
-MOTION_DETECTOR|EVENT_FILTER_NUMBER	${stringTableMotionDetectorEventFilterNumber}
-MOTION_DETECTOR|EVENT_FILTER_PERIOD	${stringTableMotionDetectorEventFilterPeriod}
 MOTION_DETECTOR|MIN_INTERVAL	${stringTableMotionDetectorMinInterval}
 NOT_USED	${stringTableNotUsed}
 OLD_LEVEL	${stringTableDimmerOldLevel}
@@ -778,7 +828,10 @@ RAINDETECTOR|EVENT_RELEASE_FILTER_TIME	${stringTableRainDetectorEventReleaseFilt
 RAINDETECTOR|STATE=DRY	${stringTableRainDetectorDry}
 RAINDETECTOR|STATE=RAIN	${stringTableRainDetectorRain}
 RAINDETECTOR|STATE_HIGH_HOLD_TIME	${stringTableRainDetectorStateHighHoldTime}
+RAMP_STOP	${stringTableDimmerRampStop}
 RAMP_TIME	${stringTableDimmerRampTime}
+REDUCE_LEVEL	${stringTableDimmerReduceLevel}
+REDUCE_TEMP_LEVEL	${stringTableDimmerReduceTempLevel}
 REMOTECONTROL_RECEIVER	${stringTableRemoteControlReceiver}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT	${stringTableKeyLongPressTimeOutUnit}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT=100ms	${optionUnit100MS}
@@ -875,6 +928,10 @@ SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_D=NO_MSG	${stringTableSensorCO2MsgPosD1}
 SENSOR_FOR_CARBON_DIOXIDE|STATE=LEVEL_ADDED	${stringTableSensorCO2LevelHigh}
 SENSOR_FOR_CARBON_DIOXIDE|STATE=LEVEL_ADDED_STRONG	${stringTableSensorCO2LevelStrong}
 SENSOR_FOR_CARBON_DIOXIDE|STATE=LEVEL_NORMAL	${stringTableSensorCO2LevelOk}
+SENSOR_RANGE_2G	${stringTableSensorRange2G}
+SENSOR_RANGE_4G	${stringTableSensorRange4G}
+SENSOR_RANGE_8G	${stringTableSensorRange8G}
+SENSOR_RANGE_16G	${stringTableSensorRange16G}
 SENSOR_WINDOW	${stringTableSensorWindowTitle}
 SENSOR_WINDOW|EVENT_DELAYTIME	${stringTableSensorWindowEventDelayTime}
 SENSOR_WINDOW|EVENT_DELAYTIME=NOT_USED	${stringTableActorWindowStatusInfoNotUsed}
@@ -988,6 +1045,13 @@ SMOKE_DETECTOR|REPEAT_ENABLE	${stringTableSmokeDetectorRepeatEnable}
 SMOKE_DETECTOR|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
 SOUND_ID	${stringTableSoundID}
+SOUND_LONG	${stringTableSoundLong}
+SOUND_LONG_LONG	${stringTableSoundLongLong}
+SOUND_LONG_SHORT	${stringTableSoundLongShort}
+SOUND_LONG_SHORT_SHORT	${stringTableSoundLongShortShort}
+SOUND_NO_SOUND	${stringTableSoundNoSound}
+SOUND_SHORT	${stringTableSoundShort}
+SOUND_SHORT_SHORT	${stringTableSoundShortShort}
 SPEED_MULTIPLIER	${stringTableSpeedMultiplier}
 STANDBY_TIME	${stringTableStandByTime}
 STATE=FALSE	${stringTableStateFalse}
@@ -1083,6 +1147,11 @@ VIRTUAL_DIMMER|LOGIC_COMBINATION	${stringTableLogicCombination}
 VIRTUAL_DIMMER|POWERUP_ACTION	${stringTableVirtualDimmerPowerUpAction}
 VIRTUAL_DIMMER|RAMP_STOP	${stringTableDimmerRampStop}
 VIRTUAL_DIMMER|STATUSINFO_RANDOM	${stringTableVirtualDimmerStatusInfoRandom}
+VIRTUAL_DUAL_WHITE_COLOR|LEVEL	${stringTableDualWhiteColorLevel}
+VIRTUAL_DUAL_WHITE_COLOR|LEVEL_REAL	${stringTableDualWhiteColorLevelReal}
+VIRTUAL_DUAL_WHITE_COLOR|OLD_LEVEL	${stringTableDualWhiteColorOldLevel}
+VIRTUAL_DUAL_WHITE_COLOR|RAMP_STOP	${stringTableDualWhiteColorRampStop}
+VIRTUAL_DUAL_WHITE_COLOR|RAMP_TIME	${stringTableDualWhiteColorRampTime}
 VIRTUAL_KEY	${stringTableVirtualKeyTitle}
 VIRTUAL_KEY|LEVEL	${stringTableVirtualKeyLevel}
 VOLTAGE_0	${stringTableVoltage0}
@@ -1169,3 +1238,5 @@ WINMATIC|TILT_MAX	${stringTableWinMaticTiltMax}
 WS_CS	${stringTableWSCS}
 WS_TH	${stringTableWSTH}
 minutes	${stringTableMinute}
+
+

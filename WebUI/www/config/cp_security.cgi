@@ -641,6 +641,7 @@ proc put_message {title msg args} {
     }
     cgi_javascript {
       puts "translatePage('#messagebox');"
+      puts "new Draggable("#messagebox");"
     }
 }
 

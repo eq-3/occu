@@ -5,7 +5,14 @@ jQuery.extend(true,langJSON, {
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analoger Ausgang",
     "chType_ARMING" : "Scharfschalten",
     "chType_BLIND" : "Rollladenaktor",
+    "chType_CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER" : "Luftfeuchtigkeitssteuerung",
+    "chType_CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER" :  "Fussbodenheizung/<br/>Pumpensteuerung<br/><br/>Verkn%FCpfungspartner<br/>Raumthermostat",
+    "chType_CLIMATECONTROL_FLOOR_TRANSCEIVER" : "Fussbodenheizung<br/>Verkn%FCpfungspartner<br/>Raumthermostat",
     "chType_CLIMATECONTROL_FLOOR_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Fussbodenheizung",
+    "chType_CLIMATECONTROL_HEAT_DEMAND_TRANSMITER" :  "W%E4rmebedarfskanal",
+    "chType_CLIMATECONTROL_HEAT_DEMAND_BOILER_TRANSMITTER" :  "W%E4rmebedarfskanal",
+    "chType_CLIMATECONTROL_HEAT_DEMAND_PUMP_TRANSMITTER" :  "W%E4rmebedarfskanal",
+    "chType_CLIMATECONTROL_INPUT_RECEIVER" :  "* CLIMATECONTROL_INPUT_RECEIVER",
     "chType_CLIMATECONTROL_RECEIVER" : "Verkn%FCpfungspartner<br/>Wandthermostat",
     "chType_CLIMATECONTROL_RT_RECEIVER" : "Verkn%FCpfungspartner<br/>Heizungsthermostat<br/>Empf%E4nger",
     "chType_CLIMATECONTROL_RT_TRANSCEIVER" : "Verkn%FCpfungspartner<br/>Heizungsthermostat<br/>Sender",
@@ -56,8 +63,6 @@ jQuery.extend(true,langJSON, {
     "chType_WEATHER_TRANSMIT" : "Verkn%FCpfungspartner<br/>Temperatursensor",
     "chType_WEEK_PROGRAM" : "Verkn%FCpfungspartner Wochenprogramm",
     "chType_WINDOW_SWITCH_RECEIVER" : "Verkn%FCpfungspartner<br/>Fensterkontakt",
-
     "theEnd" : ""
   }
 });
-

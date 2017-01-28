@@ -6,8 +6,8 @@
 source [file join /www/config/easymodes/em_common.tcl]
 
 #Namen der EasyModes tauchen nicht mehr auf. Der Durchgängkeit werden sie hier noch definiert.
-set PROFILES_MAP(0)	"Experte"
-set PROFILES_MAP(1)	"TheOneAndOnlyEasyMode"
+set PROFILES_MAP(0)  "Experte"
+set PROFILES_MAP(1)  "TheOneAndOnlyEasyMode"
 
 proc getCheckBox {type param value prn} {
   set checked ""
@@ -66,10 +66,10 @@ proc getUnit {param} {
 }
 
 proc getMinMaxValueDescr {param} {
-	global psDescr
-	upvar psDescr descr
+  global psDescr
+  upvar psDescr descr
   array_clear param_descr
-	array set param_descr $descr($param)
+  array set param_descr $descr($param)
   set min $param_descr(MIN)
   set max $param_descr(MAX)
 
@@ -88,25 +88,25 @@ proc getHelpIcon {topic x y} {
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-	global env iface_url psDescr
-	
-	puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/CC.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
+  global env iface_url psDescr
+  
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/CC.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
 
-	upvar PROFILES_MAP  PROFILES_MAP
-	upvar HTML_PARAMS   HTML_PARAMS
-	upvar PROFILE_PNAME PROFILE_PNAME
-	upvar $pps          ps
-	upvar $pps_descr    ps_descr
-	
-	#upvar PROFILE_0     PROFILE_0
-	upvar PROFILE_1     PROFILE_1
+  upvar PROFILES_MAP  PROFILES_MAP
+  upvar HTML_PARAMS   HTML_PARAMS
+  upvar PROFILE_PNAME PROFILE_PNAME
+  upvar $pps          ps
+  upvar $pps_descr    ps_descr
+  
+  #upvar PROFILE_0     PROFILE_0
+  upvar PROFILE_1     PROFILE_1
 
   set DEVICE "DEVICE"
 
   set hlpBoxWidth 450
   set hlpBoxHeight 160
 
-	array set psDescr [xmlrpc $iface_url($iface) getParamsetDescription [list string $address] [list string MASTER]]
+  array set psDescr [xmlrpc $iface_url($iface) getParamsetDescription [list string $address] [list string MASTER]]
 
   foreach val [array names psDescr] {
     #puts "$val: $psDescr($val)\n"
@@ -127,58 +127,58 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     puts "}"
    puts "</script>"
 
-	# Zeittabelle sichtbar / unsichtbar schalten.
-	##append HTML_PARAMS(separate_1) "<script text=\"javascript\">"
-	##append HTML_PARAMS(separate_1) "CC_TimeTable_on_off();"
-	##append HTML_PARAMS(separate_1) "</script>"
+  # Zeittabelle sichtbar / unsichtbar schalten.
+  ##append HTML_PARAMS(separate_1) "<script text=\"javascript\">"
+  ##append HTML_PARAMS(separate_1) "CC_TimeTable_on_off();"
+  ##append HTML_PARAMS(separate_1) "</script>"
 
 
-	  ## Wochenprogramm ##
+    ## Wochenprogramm ##
 
-  	append HTML_PARAMS(separate_1) "<div id=\"Timeouts_Area\" style=\"display:none\">"
-  	#Die DIV - Tags müssen schon existieren, wenn man in die Funktion tom.setTemp geht
-  	foreach day {SATURDAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY} {
-  		append HTML_PARAMS(separate_1) "<div id=\"temp_prof_$day\"></div>"
-  	}
-  	append HTML_PARAMS(separate_1) "</div>"
+    append HTML_PARAMS(separate_1) "<div id=\"Timeouts_Area\" style=\"display:none\">"
+    #Die DIV - Tags müssen schon existieren, wenn man in die Funktion tom.setTemp geht
+    foreach day {SATURDAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY} {
+      append HTML_PARAMS(separate_1) "<div id=\"temp_prof_$day\"></div>"
+    }
+    append HTML_PARAMS(separate_1) "</div>"
 
-  	append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-  	append HTML_PARAMS(separate_1) "tom = new TimeoutManager('$iface', '$address');"
+    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
+    append HTML_PARAMS(separate_1) "tom = new TimeoutManager('$iface', '$address');"
 
-  	foreach day {SATURDAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY} {
+    foreach day {SATURDAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY} {
 
-  		for {set i 1} {$i <= 13} {incr i} {
+      for {set i 1} {$i <= 13} {incr i} {
 
-  			set timeout     $ps(ENDTIME_${day}_$i)
-  			set temperature $ps(TEMPERATURE_${day}_$i)
-  			append HTML_PARAMS(separate_1) "tom.setTemp('$day', $timeout, $temperature);"
+        set timeout     $ps(ENDTIME_${day}_$i)
+        set temperature $ps(TEMPERATURE_${day}_$i)
+        append HTML_PARAMS(separate_1) "tom.setTemp('$day', $timeout, $temperature);"
 
-  			if {$timeout == 1440} then {
-  				break;
-  			}
-  		}
+        if {$timeout == 1440} then {
+          break;
+        }
+      }
 
-  		append HTML_PARAMS(separate_1) "tom.setDivname('$day', 'temp_prof_$day');"
-  		append HTML_PARAMS(separate_1) "tom.writeDay('$day');"
-  	}
+      append HTML_PARAMS(separate_1) "tom.setDivname('$day', 'temp_prof_$day');"
+      append HTML_PARAMS(separate_1) "tom.writeDay('$day');"
+    }
 
     # TODO - Set the weekly program only visible while certain modes are active.
     # This has to be clarified with the developer of the device
     append HTML_PARAMS(separate_1)  "jQuery('#Timeouts_Area').show();"
 
-  	append HTML_PARAMS(separate_1) "</script>"
+    append HTML_PARAMS(separate_1) "</script>"
 
     ## Ende Wochenprogramm ##
 
 
-	#append HTML_PARAMS(separate_0) [cmd_link_paramset $iface $address MASTER MASTER DEVICE]
+  #append HTML_PARAMS(separate_0) [cmd_link_paramset $iface $address MASTER MASTER DEVICE]
   append HTML_PARAMS(separate_1)  "<input id='separate_DEVICE_0' style='display:none' type='checkbox' value='dummy' />"
   append HTML_PARAMS(separate_1)  "<input id='separate_DEVICE_1' style='display:none' type='checkbox' value='dummy' />"
   append HTML_PARAMS(separate_1)  "<input id='separate_DEVICE_2' style='display:none' type='checkbox' value='dummy' />"
 
   append HTML_PARAMS(separate_1) "<hr>"
 
-	append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
       # left
       set prn 3
@@ -260,7 +260,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<hr>"
 
   # TEMPERATURE_SETTINGS
-	append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
       # left
       incr prn
@@ -369,7 +369,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<hr>"
 
   # TEMPERATURE_SETTINGS
-	append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
       # left
       incr prn
@@ -389,19 +389,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<td align=\"right\">\${stringTableClimateControlRegDecalcTime}</td>"
 
         # Decalcification hour
-      	append HTML_PARAMS(separate_1) "<td>"
+        append HTML_PARAMS(separate_1) "<td>"
           append HTML_PARAMS(separate_1) "<select id='decalcHour' onChange='setDecalcTime($prn);'>"
             for {set i 0} {$i<=23} {incr i} {
               append HTML_PARAMS(separate_1) "<option value='$i'>$i</option>"
             }
           append HTML_PARAMS(separate_1) "</select> : "
-      	# Decalcification minute
+        # Decalcification minute
           append HTML_PARAMS(separate_1) "<select id='decalcMin' onChange='setDecalcTime($prn);'>"
               append HTML_PARAMS(separate_1) "<option value='00'>00</option>"
               append HTML_PARAMS(separate_1) "<option value='30'>30</option>"
           append HTML_PARAMS(separate_1) "</select>"
           append HTML_PARAMS(separate_1) "[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]"
-      	append HTML_PARAMS(separate_1) "</td>"
+        append HTML_PARAMS(separate_1) "</td>"
       append HTML_PARAMS(separate_1)  "<td class='hidden'>[getTextField $DEVICE $param $ps($param) $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
 
       puts "<script type=\"text/javascript\">setTimeSelector($ps($param));</script>"
@@ -450,7 +450,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_1) "<hr>"
 
-	append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
       # left
       incr prn
       set param SHOW_WEEKDAY
@@ -481,7 +481,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "</table>"
   append HTML_PARAMS(separate_1) "<hr name=\"expertParam\" class=\"hidden\">"
 
-	append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
       # left
       incr prn
       set param VALVE_OFFSET
@@ -505,7 +505,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "</table>"
   append HTML_PARAMS(separate_1) "<hr name=\"expertParam\" class=\"hidden\">"
 
-	append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
       # left
       incr prn
       set param ADAPTIVE_REGULATION
@@ -545,7 +545,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<hr name=\"expertParam\" class=\"hidden\">"
 
 set comment {
-	append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
       # left
       incr prn

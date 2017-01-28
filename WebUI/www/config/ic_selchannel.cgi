@@ -185,6 +185,19 @@ proc test_space {testObject} {
     }
 }
 
+# This can be used to extend the regular link description
+proc getExtendedLinkDescription {channelType channel} {
+  set result ""
+  if {$channelType == "SWITCH_SENSOR"} {
+    if {$channel == 1} {
+      set result "/ \${chType_SWITCH_SENSOR_Int}"
+    } elseif {$channel == 2} {
+     set result "/ \${chType_SWITCH_SENSOR_Ext}"
+    }
+  }
+  return $result
+}
+
 proc put_PreviousStep {} {
 
 #cgi_debug -on
@@ -264,10 +277,13 @@ proc put_PreviousStep {} {
 
     set description1 ""
     set description2 ""
-    
-    catch {set description1 "\${lblStandardLink} $dev_descr_sender(TYPE) - $dev_descr_receiver(TYPE)"}
-    catch {set description2 "\${lblStandardLink} $dev_descr_sender(TYPE) - $dev_descr_receiver(TYPE)"}
-    #catch {set description2 "\${lblStandardLink} $dev_descr_sender(TYPE) - $dev_descr_receiver(TYPE)"}
+    set extSenderDescr ""
+    set extReceiverDescr ""
+
+    catch {set extReceiverDescr [getExtendedLinkDescription $dev_descr_receiver(TYPE) $dev_descr_receiver(INDEX)]}
+
+    catch {set description1 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
+    catch {set description2 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
 
     set SENTRY(LINKNAME)      "<input id=\"input_name\"              name=\"name\"              type=\"text\" value=\"$name\"/>"
     set SENTRY(LINKDESC)      "<input id=\"input_description\"       name=\"description\"  class=\"stringtable_input\"     type=\"text\" value=\"$description1\"/>"
@@ -401,7 +417,7 @@ proc put_tableheader {} {
   puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 4);\">\${thSerialNumber}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 5);\">\${thCategorie}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 6);\">\${thTransmitMode}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
-  puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 7);\">\${thFunction}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
+  puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 7);\">\${thFunc}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 8);\">\${thRoom}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   puts "<TD class=\"nosort\">\${thAction}</TD>"
   puts "</TR>"
@@ -576,7 +592,7 @@ proc LinkExists {p_LINKLIST sender_address receiver_address} {
   return $match
 }
 
-proc showHmIPChannel {devType direction address chType flags} {
+proc showHmIPChannel {devType direction address chType} {
   # direction 1 = sender, 2 = receiver
 
   set devType [string toupper $devType]
@@ -588,14 +604,8 @@ proc showHmIPChannel {devType direction address chType flags} {
     ($devType == "HMIP-PS")
     || ([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1)
     || ($devType == "HMIP-PDT")
+    || ($devType == "HMIP-PCBS")
     ) && $direction == 1} {
-    # don't show the channel
-    return 0
-  }
-
-  # Channel 4 and 5 (virtual channels) of the PS and the PSM aren`t allowed for external links with a firmware version < 2
-  # These channels are marked invisible (FLAGS visible = 0)
-  if {($devType == "HMIP-PS" || $devType == "HMIP-PSM") && ! ($flags & 1)} {
     # don't show the channel
     return 0
   }
@@ -614,7 +624,7 @@ proc showHmIPChannel {devType direction address chType flags} {
   # Hide certain channels of HmIP devices when the expert mode is not activated.
   if {! [session_is_expert]} {
     # The HmIP-PSM is available as HmIP-PSM-IT/CH/UK etc.
-    if {(($devType == "HMIP-PS") || ([string equal -nocase -length 8 $devType "hmip-psm"] == 1)) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+    if {(($devType == "HMIP-PS") || ([string equal -nocase -length 8 $devType "hmip-psm"] == 1) || ($devType == "HMIP-PCBS")) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
      if {$ch >= 4} {return 0}
     }
 
@@ -624,6 +634,10 @@ proc showHmIPChannel {devType direction address chType flags} {
 
     if {($devType == "HMIP-PDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
      if {$ch >= 4} {return 0}
+    }
+
+    if {($devType == "HMIP-FDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
+     if {$ch >= 3} {return 0}
     }
 
     if {($devType == "HMIP-BSM") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
@@ -704,7 +718,7 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
         }
       }
             
-      if {$dev_descr(TYPE) == "VIRTUAL_DIMMER"} {
+      if {($dev_descr(TYPE) == "VIRTUAL_DIMMER") || ($dev_descr(TYPE) == "VIRTUAL_DUAL_WHITE_BRIGHTNESS") || ($dev_descr(TYPE) == "VIRTUAL_DUAL_WHITE_COLOR") } {
         #Virtuelle Dimmerkanäle nur anzeigen wenn Expertenmodus aktiv UND der virtuelle Kanal aktiv geschaltet ist.
         #Die virtuellen Dimmerkanäle können in den Kanalparametern unter dem Punkt 'Verknüpfungsregel' aktiviert werden.
         if {[session_is_expert]} {
@@ -726,7 +740,8 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
       set isChannel [catch {set parentType $dev_descr(PARENT_TYPE)}]
 
       if {$isChannel == 0} {
-        if {[showHmIPChannel $parentType $dev_descr(DIRECTION) $dev_descr(ADDRESS) $dev_descr(TYPE) $dev_descr(FLAGS)] == 0} {
+        # Don't show certain HmIP-Channels AND invisible marked channels (FLAGS visible = 0)
+        if {([showHmIPChannel $parentType $dev_descr(DIRECTION) $dev_descr(ADDRESS) $dev_descr(TYPE) ] == 0) || (! ($dev_descr(FLAGS) & 1))} {
           array_clear dev_descr
           continue
         }

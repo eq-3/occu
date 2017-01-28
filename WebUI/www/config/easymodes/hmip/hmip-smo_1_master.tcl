@@ -4,8 +4,8 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 
-set PROFILE_PNAME(A) "\${stringTableMotionDetectorEventFilterNumber}"
-set PROFILE_PNAME(B) "\${stringTableMotionDetectorEventFilterPeriod}"
+set PROFILE_PNAME(A) "\${stringTableEventFilterNumber}"
+set PROFILE_PNAME(B) "\${stringTableEventFilterPeriod}"
 set PROFILE_PNAME(C) "\${stringTableMotionDetectorMinInterval}"
 set PROFILE_PNAME(D) "\${stringTableBrightnessFilter}"
 set PROFILE_PNAME(F) "\${motionDetectorSendMotionWithinDetectionSpan}"

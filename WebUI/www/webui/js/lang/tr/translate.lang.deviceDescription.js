@@ -1,6 +1,12 @@
 jQuery.extend(true,langJSON, {
   "tr" : {
+    "HM-DW-WM" : "Wireless Dimming Actuator<br/>2-channel PWM LED",
+    "HM-LC-DW-WM" : "Wireless controller for<br/>dual white LEDs",
     "VIR-OL-GTW" : "OSRAM-Lightify<br/>Gateway",
+    "FAL230-C6" : "Homematic IP<br/>Floor Heating Actuator",
+    "FAL230-C10" : "Homematic IP<br/>Floor Heating Actuator",
+    "FAL24-C6" : "Homematic IP<br/>Floor Heating Actuator",
+    "FAL24-C10" : "Homematic IP<br/>Floor Heating Actuator",
     "HM-LC-Dim1T-DR" : "Wireless Dimming Actuator 1-channel, trailing edge, DIN rail mount",
     "HM-LC-Ja1PBU-FM" : "Wireless Blind Actuator 1-channel, flush-mount with push-button",
     "HM-MOD-EM-8Bit" : "Wireless Transmitter, 8-Bit",
@@ -16,6 +22,7 @@ jQuery.extend(true,langJSON, {
     "ASIR" : "Homematic IP Indoor Siren",
     "FSM" : "Homematic IP Switch Actuator with power measurement, flush-mount",
     "FSM16" : "Homematic IP Switch Actuator with power measurement, flush-mount",
+    "FDT" : "Homematic IP Dimming Actuator, flush-mount",
     "RC8" : "Homematic IP Remote Contro, 8-channel",
     "SRH" : "Homematic IP Rotary Handle Sensor",
     "SMO" : "Homematic IP Motion Detector, outdoor",
@@ -36,6 +43,7 @@ jQuery.extend(true,langJSON, {
     "STH" : "Homematic IP Temperature and Humidity Sensor, indoor",
     "STHD" : "Homematic IP Temperature and Humidity Sensor with Display, indoor",
     "PDT" : "Homematic IP Dimming Actuator",
+    "HmIP-PCBS" : "Homematic IP Wireless Switch Actuator 1-channel, PCB",
     "ALPHA-IP-RBG" : "Room Control Unit<br/>Display",
     "ALPHA-IP-RBGa" : "Room Control Unit<br/>Analogue",
     "HM-LC-Sw1-Pl-CT-R1" : "Kablosuz salter akt%FCat%F6r%FC 1 kanalli, klemens baglantili",

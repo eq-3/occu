@@ -3,6 +3,10 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipDSTPanel.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 
+proc getNoParamatersToSet {} {
+  return "<tr><td class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"
+}
+
 proc getMaintenanceFloorHeating {chn p descr} {
   upvar $p ps
   upvar $descr psDescr
@@ -142,6 +146,164 @@ proc getMaintenanceFloorHeating {chn p descr} {
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOnTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
   # END ON_TIME_BASE and ON_TIME_FACTOR
+
+
+  return $html
+}
+
+proc getClimateControlHeatDemandBoilerTransmitter {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
+
+  append html "<tr>"
+  append html "<td>\${lblLeadTime}</td>"
+  append html [getComboBox $chn $prn "$specialID" "delay0To20M_step2M"]
+  append html "</tr>"
+
+  set param ONDELAY_TIME_BASE
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param ONDELAY_TIME_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableSwitchingIntervalValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  # next
+  incr prn;
+  append html "<tr>"
+  append html "<td>\${lblFollowUpTime}</td>"
+  append html [getComboBox $chn $prn "$specialID" "delay0To20M_step2M"]
+  append html "</tr>"
+
+  set param OFFDELAY_TIME_BASE
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param OFFDELAY_TIME_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableSwitchingIntervalValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  return $html
+}
+
+
+proc getClimateControlHeatDemandPumpTransmitter {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
+
+  append html "<tr>"
+  append html "<td>\${lblLeadTime}</td>"
+  append html [getComboBox $chn $prn "$specialID" "delay0To20M_step2M"]
+  append html "</tr>"
+
+  set param ONDELAY_TIME_BASE
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param ONDELAY_TIME_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableSwitchingIntervalValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  # next
+  incr prn;
+  append html "<tr>"
+  append html "<td>\${lblFollowUpTime}</td>"
+  append html [getComboBox $chn $prn "$specialID" "delay0To20M_step2M"]
+  append html "</tr>"
+
+  set param OFFDELAY_TIME_BASE
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param OFFDELAY_TIME_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableSwitchingIntervalValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  # next
+
+  incr prn;
+  append html "<tr>"
+  append html "<td>\${lblDecalcificationInterval}</td>"
+  append html [getComboBox $chn $prn "$specialID" "switchingInterval"]
+  append html "</tr>"
+
+  set param SWITCHING_INTERVAL_BASE
+  append html [getTimeUnitComboBoxB $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param SWITCHING_INTERVAL_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableSwitchingIntervalValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+  # next
+
+  incr prn;
+  append html "<tr>"
+  append html "<td>\${stringTableOnTime}</td>"
+  append html [getComboBox $chn $prn "$specialID" "switchingIntervalOnTime"]
+  append html "</tr>"
+
+  set param ON_TIME_BASE
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param ON_TIME_FACTOR
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableOnTimeValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOnTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
 
   return $html

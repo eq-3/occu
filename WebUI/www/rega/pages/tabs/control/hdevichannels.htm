@@ -177,7 +177,7 @@
             string trId = device.ID()#tmp;
             Write("<tr id='"#trId#"'>");
             Write("<td class='GrayBkg'>");
-            Write(chn.Name());
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"}</span>");
             Write("</td>");
             Write("<td class='GrayBkg'>");
             string rooms = "";
@@ -272,5 +272,13 @@
     jQuery("#ftName").focus();
   });
 
-  translatePage("#tblHDeviChannel");
+  translatePage("#tblHDeviChannel", function () {
+    jQuery("[name='hssType']").each(function(index, elm) {
+      var chText = jQuery(elm).text();
+      if (chText.indexOf("chType_") == -1) {
+        jQuery(elm).show();
+      }
+    });
+  });
+
 </script>

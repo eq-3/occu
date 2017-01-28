@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">tr* Beim &Ouml;ffnen des Kontaktes wird das Licht auf den f&uuml;r \"Hoch\" eingestellten Wert und beim Schlie&szlig;en auf den f&uuml;r \"Niedrig\" eingestellten Wert gesetzt. Die Schaltzuordnung l&auml;sst sich auch umkehren.</span><br/><br/>",
+
+"subset_1" : "tr* Offen - Niedrig / Zu - Hoch",
+"subset_2" : "tr* Offen - Hoch / Zu - Niedrig",
+
+
+

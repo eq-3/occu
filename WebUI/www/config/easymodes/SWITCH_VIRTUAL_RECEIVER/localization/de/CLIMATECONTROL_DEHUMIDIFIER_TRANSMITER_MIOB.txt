@@ -1,1 +1,1 @@
-"description_1" : "<span class=\"translated\">Fantastisch! Signalisiert der Sensor Bedarf zum Reduzieren der Luftfeuchte, wird der Aktor eingeschaltet.  Signalisiert der Sensor keinen Bedarf, wird der Aktor ausgeschaltet.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">Signalisiert der Sensor Bedarf zum Reduzieren der Luftfeuchte, wird der Aktor eingeschaltet.  Signalisiert der Sensor keinen Bedarf, wird der Aktor ausgeschaltet.</span><br/><br/>",

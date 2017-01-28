@@ -178,19 +178,19 @@ proc putSectionHMIP {} {
 
               append html "<tr>"
                 append html "<td style='text-align: right'>"
-                  append html "<span>\${lblTeachInSGTIN}</span>"
+                  append html "<span>\${lblTeachInKEY}</span>"
                 append html "</td>"
                 append html "<td>"
-                  append html "<input id='serialHmIPLocal' type='text' style='width:390px;'>"
+                  append html "<input id='keyHmIPLocal' type='text' style='width:390px'>"
                 append html "</td>"
               append html "</tr>"
 
               append html "<tr>"
                 append html "<td style='text-align: right'>"
-                  append html "<span>\${lblTeachInKEY}</span>"
+                  append html "<span>\${lblTeachInSGTIN}</span>"
                 append html "</td>"
                 append html "<td>"
-                  append html "<input id='keyHmIPLocal' type='text' style='width:390px'>"
+                  append html "<input id='serialHmIPLocal' type='text' style='width:390px;'>"
                 append html "</td>"
               append html "</tr>"
 

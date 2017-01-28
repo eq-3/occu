@@ -428,9 +428,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   
   #  die Texte der Platzhalter einlesen
-  puts "<script type=\"text/javascript\">getLangInfo('$device', '$device');</script>"
-       
-  
+  puts "<script type=\"text/javascript\">getLangInfo('$device', '$device');load_JSFunc('/config/easymodes/MASTER_LANG/HM-LC-BLIND.js');</script>"
+
   #global SUBSETS
   set name "x"
   set i 1
@@ -598,6 +597,38 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
      append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {document.getElementById('separate_${special_input_id}_$prn\_$pref').value = [expr $shortMaxTimeFirstDirDown + 0.01];},500);"
     append HTML_PARAMS(separate_$prn) "</script>"
   }
+
+
+  puts "<script type=\"text/javascript\">"
+
+    # puts "var profileSelectorElm = jQuery(\"\#${special_input_id}_profiles\");"
+
+
+    puts "window.setTimeout(function(){"
+      puts "var profileElm = jQuery(\"\#${special_input_id}_profiles\");"
+      puts "var profileHelpID = \"${special_input_id}\";"
+      puts "profileHelpID = profileHelpID.replace(\"receiver\",\"profileHelp\");"
+      puts "var profileHelpElm = jQuery(\"\#\"+profileHelpID);"
+
+      puts "profileHelpElm.powerTip({placement: \"n\", followMouse: false});"
+
+      puts "profileElm.change(function(){showProfileHelp(profileHelpElm, profileElm.val());});"
+      puts "showProfileHelp(profileHelpElm, profileElm.val());"
+    puts "},100);"
+
+    puts "showProfileHelp = function(helpElm, val) {"
+      puts "var toolTipText = translateKey(\"toolTipLongKeyPress\");"
+
+      puts "if (val >= 4) {"
+        puts "toolTipText = translateKey(\"toolTipSlatLongKeyPress\");"
+      puts "}"
+
+      puts "helpElm.data(\"powertip\", toolTipText);"
+
+      puts "if (val == 0) {helpElm.hide();} else {helpElm.show();}"
+    puts "}"
+
+  puts "</script>"
 
 }
 constructor

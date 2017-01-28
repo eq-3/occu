@@ -395,11 +395,13 @@ proc put_orig_channel_parameter {address ch} {
       } elseif {$showOption == 1} { 
         # this should only be available for a dimmer with virtual channels
         append s1 "<script type=\"text/javascript\">"
-        append s1 "self.setMinDelayVis = function() {"
-        
-            append s1 "var inputField = document.getElementById(\"separate_CHANNEL_$ch\_$i\");"
-            append s1 "var inputField_tmp = document.getElementById(\"separate_CHANNEL_$ch\_$i\_tmp\");"
-            append s1 "var option = document.getElementById(\"option_$ch\_$i\");"
+        append s1 "self.setMinDelayVis = function(ch, i) {"
+
+            append s1 "console.log(\"channel: \" + ch + \" i: \" + i);"
+
+            append s1 "var inputField = document.getElementById(\"separate_CHANNEL_\"+ch+\"\_\"+i+\"\");"
+            append s1 "var inputField_tmp = document.getElementById(\"separate_CHANNEL_\"+ch+\"\_\"+i+\"\_tmp\");"
+            append s1 "var option = document.getElementById(\"option_\"+ch+\"\_\"+i+\"\");"
             append s1 "var randomInput = inputField_tmp.parentNode.parentNode.nextSibling;"
 
             append s1 "if (option.selectedIndex == 0) {"
@@ -416,7 +418,7 @@ proc put_orig_channel_parameter {address ch} {
         append s1 "</script>"       
         
         append s1 "<tr><td><span class=\"stringtable_value\">$dev_descr_sender(TYPE)|$PROFILE_PNAME(DESCRIPTION)</span></td>"
-          append s1 "<td><select id=\"option_$ch\_$i\" onchange=\"setMinDelayVis();\">"
+          append s1 "<td><select id=\"option_$ch\_$i\" onchange=\"setMinDelayVis($ch, $i);\">"
             append s1 "<option>\${stringTableNotUsed}</option>"
             append s1 "<option>\${stringTableEnterValue}</option>"
           append s1 "</select>"
@@ -562,14 +564,14 @@ proc getInternalPeers {url address parentAddress} {
 }
 
 proc isVirtual {paramId} {
-  set virtualDevices [list "switch_virt_ch_master" "dimmer_virt_ch_master" "blind_virt_ch_master"]
+  set virtualDevices [list "switch_virt_ch_master" "dimmer_virt_ch_master" "blind_virt_ch_master" "dw_controller_brightness_virt_ch_master" "dw_controller_color_virt_ch_master"]
   lappend virtualDevices "hmip-ps_2_master" "hmip-ps_4_master" "hmip-ps_5_master"
   lappend virtualDevices "hmip-psm_2_master" "hmip-psm_4_master" "hmip-psm_5_master"
   lappend virtualDevices "hmip-bdt_3_master" "hmip-bdt_5_master" "hmip-bdt_6_master"
   lappend virtualDevices "hmip-fsm_1_master" "hmip-fsm_3_master" "hmip-fsm_4_master"
-  lappend virtualDevices "hmip-fsm16_1_master" "hmip-fsm16_3_master" "hmip-fsm16_4_master"
   lappend virtualDevices "hmip-miob_1_master" "hmip-miob_2_master" "hmip-miob_4_master" "hmip-miob_5_master" "hmip-miob_6_master" "hmip-miob_8_master"
   lappend virtualDevices "hmip-pdt_2_master" "hmip-pdt_4_master" "hmip-pdt_5_master"
+  lappend virtualDevices "hmip-fdt_1_master" "hmip-fdt_3_master" "hmip-fdt_4_master"
 
   set virtual "false"
 
@@ -592,8 +594,106 @@ proc isHmIP {} {
   return "false"
 }
 
+proc setInternalDeviceKey {ch_paramid} {
+  upvar s s
+  upvar counter counter
+  upvar ch_descr ch_descr
+
+  global dev_descr _ch_descr iface iface_url env
+  global receiver_address sender_address dev_descr_sender
+
+  # Fetch internal links only
+  set intLinks [getInternalLinks $iface_url($iface) $ch_descr(ADDRESS) $ch_descr(PARENT) $ch_descr(PARENT_TYPE)]
+
+  incr counter
+
+  set intPeers [getInternalPeers $iface_url($iface) $ch_descr(ADDRESS) $ch_descr(PARENT)]
+
+  set chn [lindex [split $ch_descr(ADDRESS) ":"] 1]
+
+  # don't delete this
+  append s "<div id=\"chType_$chn\" style=\"display:none\">$ch_descr(TYPE)</div>"
+  append s "<div id=\"chParamID_$chn\" style=\"display:none\">$ch_paramid</div>"
+  append s "<div id=\"chInternalPeers_$chn\" style=\"display:none\">$intPeers</div>"
+
+  # Iterate through each internal link
+  set loop 1
+  foreach _link $intLinks {
+
+    array set link $_link
+    set sender $link(SENDER)
+    set receiver $link(RECEIVER)
+
+    set chn [lindex [split $receiver ":"] 1]
+
+    # wichtig f. freie Werteingabe
+    array set dev_descr_sender [array get ch_descr]
+
+    catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid\_intkey.tcl}
+
+    array set receiver_ps [xmlrpc $iface_url($iface) getParamset [list string $receiver] [list string $sender]]
+    array set ps_descr_receiver [xmlrpc $iface_url($iface) getParamsetDescription [list string $receiver] [list string $sender]]
+
+    ## EASYMODE_WRAPPER
+    append s "<div class=\"easymode_wrapper\">"
+
+    #set special_input_id "receiver_$counter\_$ch_descr(INDEX)"
+    set special_input_id "receiver_$chn\_$loop"
+
+    set receiver_ps(UI_HINT) ""
+    set cur_profile [get_cur_profile2 receiver_ps PROFILES_MAP PROFILE_TMP  "KEY"]
+    set_htmlParams $iface $receiver receiver_ps ps_descr_receiver $special_input_id "KEY"
+    recycle_easymodes PROFILES_MAP HTML_PARAMS $special_input_id $cur_profile receiver_ps
+
+    if {[llength $intLinks] == 1} {
+      set keyNo ""
+    } else {
+      set keyNo "$loop."
+    }
+
+    #append s "<br/><span class=\"CLASS22015\">Programmierung der $loop. internen Ger&auml;tetaste - $sender</span>"
+    append s "<br/><span class=\"CLASS22015_\">\${lblProgrammingOfInternalDeviceKeyA} $keyNo \${lblProgrammingOfInternalDeviceKeyB} - $receiver</span>"
+    append s "<br/><br/>"
+
+    # die ComboBox der Profilauswahl
+    append s "<div id=\"maps_div_$chn\_$loop\"><textarea id=\"maps_textarea_$chn\_$loop\" style=\"display:none\">"
+    append s [get_ComboBox2 PROFILES_MAP "receiver_$chn\_$loop\_profiles" "receiver_$chn\_$loop\_profiles" $cur_profile  "onchange=\"ShowInternalKeyProfile(this, $loop, $chn);Disable_SimKey($loop, this.selectedIndex, '${special_input_id}')\""]
+    append s "</textarea></div>"
+    append s "<script type=\"text/javascript\">translate_map('maps_div_$chn\_$loop', 'maps_textarea_$chn\_$loop');</script>"
+
+    append s "<table id=\"internalKey_$chn\_$loop\" class=\"ProfileTbl\">"
+
+    foreach pnr [lsort [array names PROFILES_MAP]] {
+      append s "<script type=\"text/javascript\">translate('$pnr', '$special_input_id');</script>"
+      append s  "<tr class=\"$special_input_id\_$pnr\" [expr {$cur_profile == $pnr?" ":" style=\"visibility:hidden; display:none;\""} ]><td>"
+      append s $HTML_PARAMS(separate_$pnr)
+
+      append s "<br/><input type=\"button\" id=\"SimKey_$chn\_$loop\_$pnr\" name=\"btnSimKeyPress\" onclick=\"SendInternalKeyPress('$iface', '$sender', '$receiver')\" value=\"Simuliere Tastendruck\">"
+      if {[info exists simulateLongKeyPress] == 1} {
+        if {$simulateLongKeyPress == 1} {
+          append s "<script type=\"text/javascript\">jQuery(\"#SimKey_$chn\_$loop\_$pnr\").attr(\"name\",\"btnSimShortKeyPress\");</script>"
+          append s "<input type=\"button\" id=\"SimLongKey_$chn\_$loop\_$pnr\" name=\"btnSimLongKeyPress\" onclick=\"SendInternalKeyPress('$iface', '$sender', '$receiver', true)\" value=\"Simuliere langen Tastendruck\">"
+        }
+      }
+      append s  "<br/><div id=\"SimKeyHint_$chn\_$loop\_$pnr\" class=\"attention\" style=\"display:none\">&nbsp;&nbsp;\${lblHintSimulateKeyPress}</div></td>"
+
+      append s  "</tr>"
+    }
+    append s "</table></div>"
+    ## E N D   EASYMODE_WRAPPER
+
+
+    #Ausgewählten Eintrag sichtbar schalten: // prüfen, ob nötig
+    #append s "<div>\$('receiver_$counter\_$loop\_profiles')</div>"
+    #append s   "<script type=\"text/javascript\">ShowInternalKeyProfile(\$('receiver_$counter\_$loop\_profiles'), '$loop', '$counter');</script>"
+
+    incr loop
+  }
+  catch {unset internalKey}
+}
+
 proc put_channel_parameters {} {
-  global dev_descr iface iface_url env 
+  global dev_descr ch_descr iface iface_url env
   global ise_CHANNELNAMES MODE channel_address channel_group
   set state_intKey -1
   set wired ""
@@ -710,7 +810,19 @@ proc put_channel_parameters {} {
       if {! [info exists internalKey] } then {
         set_htmlParams $iface $ch_address ch_ps ch_ps_descr CHANNEL_$ch_descr(INDEX) ""
         set s $HTML_PARAMS(separate_1)
+
+        # Internal keys for user specific config pages
+
+        if {
+           ([string equal $ch_paramid "dw_controller_color_ch_master"] == 1)
+        || ([string equal $ch_paramid "dw_controller_color_virt_ch_master"] == 1)
+        || ([string equal $ch_paramid "dw_controller_brightness_ch_master"] == 1)
+        || ([string equal $ch_paramid "dw_controller_brightness_virt_ch_master"] == 1)
+        } {
+         setInternalDeviceKey $ch_paramid
+        }
       } else {
+        # Internal keys for generic config pages
         set s "" 
         if {[isVirtual $ch_paramid] == "true"} {
           set file "$ch_paramid\Params.tcl"
@@ -745,7 +857,7 @@ proc put_channel_parameters {} {
           cgi_debug -on 
           set error [catch {array set valueset [xmlrpc $iface_url($iface) getParamset [list string $ch_descr(ADDRESS)] [list string VALUES]]}]
           if {$error == 0} {
-            setInternalKeysOnOff 1 $ch_descr(PARENT) $iface $defaultInternalKey $isInternalKeyVisible 
+            setInternalKeysOnOff 1 $ch_descr(PARENT) $iface $defaultInternalKey $isInternalKeyVisible
             # Fetch internal links only
             set intLinks [getInternalLinks $iface_url($iface) $ch_descr(ADDRESS) $ch_descr(PARENT) $ch_descr(PARENT_TYPE)]
             
@@ -793,7 +905,8 @@ proc put_channel_parameters {} {
                 }
                 catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid.tcl} 
               }
-              
+
+              array_clear receiver_ps
               array set receiver_ps [xmlrpc $iface_url($iface) getParamset [list string $receiver] [list string $sender]]
               array set ps_descr_receiver [xmlrpc $iface_url($iface) getParamsetDescription [list string $receiver] [list string $sender]]
 
@@ -821,6 +934,10 @@ proc put_channel_parameters {} {
               # die ComboBox der Profilauswahl
               append s "<div id=\"maps_div_$counter\_$loop\"><textarea id=\"maps_textarea_$counter\_$loop\" style=\"display:none\">"
               append s [get_ComboBox2 PROFILES_MAP "receiver_$counter\_$loop\_profiles" "receiver_$counter\_$loop\_profiles" $cur_profile  "onchange=\"ShowInternalKeyProfile(this, $loop, $counter);Disable_SimKey($loop, this.selectedIndex, '${special_input_id}')\""]
+
+              # Folgendes Element kann für einen Hilfetooltip innerhalb des Easymodes verwendet werden. Siehe BLIND
+              append s "<span id=\"profileHelp\_$counter\_$loop\" class=\"hidden\">&nbsp;&nbsp;<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:22px; height:22px; position:relative; top:2px\"></span>"
+
               append s "</textarea></div>"
               append s "<script type=\"text/javascript\">translate_map('maps_div_$counter\_$loop', 'maps_textarea_$counter\_$loop');</script>"
             
@@ -845,7 +962,8 @@ proc put_channel_parameters {} {
               }
               append s "</table></div>"
               ## E N D   EASYMODE_WRAPPER
-            
+
+
               #Ausgewählten Eintrag sichtbar schalten: // prüfen, ob nötig
               #append s "<div>\$('receiver_$counter\_$loop\_profiles')</div>"
               #append s   "<script type=\"text/javascript\">ShowInternalKeyProfile(\$('receiver_$counter\_$loop\_profiles'), '$loop', '$counter');</script>"
@@ -901,7 +1019,7 @@ proc put_channel_parameters {} {
       puts "jQuery(\"#chDescr_$ch_descr(INDEX)\").html(\"<br/><br/>\" + ext);"
     puts "</script>"
   }
-  
+
   if {$tr_count == 0} then {
     puts "<tr>"
     #puts "<td colspan=\"3\"><div class=\"CLASS22004\">Keine Parameter einstellbar.</div></td>"

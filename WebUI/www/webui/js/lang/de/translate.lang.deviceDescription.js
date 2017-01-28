@@ -1,7 +1,12 @@
 jQuery.extend(true,langJSON, {
   "de" : {
-
+    "HM-DW-WM" : "Funk-Dimmaktor<br/>2-fach PWM LED",
+    "HM-LC-DW-WM" : "Funk-Controller f%FCr<br/>Dual-White-LEDs",
     "VIR-OL-GTW" : "OSRAM-Lightify<br/>Gateway",
+    "FAL230-C6" : "Homematic IP<br/>Fussbodenheizungsaktor",
+    "FAL230-C10" : "Homematic IP<br/>Fussbodenheizungsaktor",
+    "FAL24-C6" : "Homematic IP<br/>Fussbodenheizungsaktor",
+    "FAL24-C10" : "Homematic IP<br/>Fussbodenheizungsaktor",
     "HM-LC-Dim1T-DR" : "Funk-Dimmaktor 1-fach, Phasenabschnitt, Hutschienenmontage",
     "HM-LC-Ja1PBU-FM" : "Funk-Jalousieaktor 1-fach f%FCr Markenschalter, Unterputz",
     "HM-MOD-EM-8Bit" : "Funk-Sendemodul, 8-Bit",
@@ -17,6 +22,7 @@ jQuery.extend(true,langJSON, {
     "ASIR" : "Homematic IP Innensirene",
     "FSM" : "Homematic IP Schaltaktor mit Leistungsmessung, Unterputzmontage",
     "FSM16" : "Homematic IP Schaltaktor mit Leistungsmessung, Unterputzmontage",
+    "FDT" : "Homematic IP Dimmaktor, Unterputzmontage",
     "RC8" : "Homematic IP Fernbedienung, 8 Kanal",
     "SRH" : "Homematic IP Fenster-/ Drehgriffkontakt",
     "SMO" : "Homematic IP Bewegungsmelder au%DFen",
@@ -37,6 +43,7 @@ jQuery.extend(true,langJSON, {
     "STH" : "Homematic IP Temperatur- und Luftfeuchtigkeitssensor, innen",
     "STHD" : "Homematic IP Temperatur- und Luftfeuchtigkeitssensor mit Display, innen",
     "PDT" : "Homematic IP Dimmaktor",
+    "HmIP-PCBS" : "Homematic IP Funk-Schaltaktor 1-fach, Platine",
     "ALPHA-IP-RBG" : "Raumbedienger%E4t<br/>Display",
     "ALPHA-IP-RBGa" : "Raumbedienger%E4t<br/>Analog",
     "HM-LC-Sw1-Pl-CT-R1" : "Funk-Schaltaktor 1-fach mit Klemmanschluss",

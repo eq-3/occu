@@ -23,7 +23,9 @@ jQuery.extend(true,langJSON, {
 
     "WEEK_PROGRAM_POINTER" : "Hier k&ouml;nnen Sie das zu editierende Wochenprogramm w&auml;hlen.",
     "TWO_POINT_HYSTERESIS" : "Der Wandthermostat kann in Verbindung mit einem Schaltaktor als Zweipunktregler genutzt werden.<br/><br/>Die Regelung erfolgt in Abh&auml;ngigkeit der Soll- und Ist-Temperatur sowie der hier festgelegten Hysterese.",
-    "HEATING_COOLING" : "Wenn der Wandthermostat als Zweipunktregler genutzt wird, ist hier festgelegt, ob die Regelung 'Heizen' oder 'K&uuml;hlen' soll.<br/><br/>Im Heiz-Betrieb wird der Schaltaktor bei Unterschreiten der Soll-Temperatur eingeschaltet, im K&uuml;hl-Betrieb wird er bei &Uuml;berschreiten eingeschaltet."
+    "HEATING_COOLING" : "Wenn der Wandthermostat als Zweipunktregler genutzt wird, ist hier festgelegt, ob die Regelung 'Heizen' oder 'K&uuml;hlen' soll.<br/><br/>Im Heiz-Betrieb wird der Schaltaktor bei Unterschreiten der Soll-Temperatur eingeschaltet, im K&uuml;hl-Betrieb wird er bei &Uuml;berschreiten eingeschaltet.",
+
+    "HUMIDITY_LIMIT_DISABLE" : "Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt."
   },
 
   "en" : {
@@ -49,7 +51,10 @@ jQuery.extend(true,langJSON, {
 
     "WEEK_PROGRAM_POINTER" : "Please select the weekly program you want to edit here.",
     "TWO_POINT_HYSTERESIS" : "In connection with a switch actuator, the room thermostat can be used as on-off control.<br/><br/>The on-off control depends on the setpoint and actual temperature as well as the defined hysteresis.",
-    "HEATING_COOLING" : "If the room thermostat is used as on-off control, you can define here whether you want to set the 'heating' or 'cooling' mode.<br/><br/>In heating mode, the switch actuator will be switched on if the setpoint temperature falls below threshold, in cooling mode the actuator will be switched on if the threshold is exceeded."
+    "HEATING_COOLING" : "If the room thermostat is used as on-off control, you can define here whether you want to set the 'heating' or 'cooling' mode.<br/><br/>In heating mode, the switch actuator will be switched on if the setpoint temperature falls below threshold, in cooling mode the actuator will be switched on if the threshold is exceeded.",
+
+    "HUMIDITY_LIMIT_DISABLE" : "en* Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt."
+
   },
 
   "tr" : {
@@ -75,7 +80,10 @@ jQuery.extend(true,langJSON, {
 
     "WEEK_PROGRAM_POINTER" : "D&uuml;zenlenecek haftalik programi buradan secebilirsiniz.",
     "TWO_POINT_HYSTERESIS" : "Duvar termostati salter akt&uuml;at&ouml;r&uuml; yardimiyla cift noktali reg&uuml;lat&ouml;r olarak kullanilabilir.<br/><br/>Ayar islemi gercek ve nominal sicakliga ve burada tespit edilen histerezise g&ouml;re yapilir.",
-    "HEATING_COOLING" : "Duvar termostati cift noktali reg&uuml;lat&ouml;r olarak kullanilacaksa burada yapilan ayarin 'isitma' ya da 'sogutma' mi olacagi burada belirlenir.<br/><br/>Salter akt&uuml;at&ouml;r&uuml; isitma modunda nominal sicakligin altinda kalirsa, sogutma modunda ise bu degeri asarsa devreye girer."
+    "HEATING_COOLING" : "Duvar termostati cift noktali reg&uuml;lat&ouml;r olarak kullanilacaksa burada yapilan ayarin 'isitma' ya da 'sogutma' mi olacagi burada belirlenir.<br/><br/>Salter akt&uuml;at&ouml;r&uuml; isitma modunda nominal sicakligin altinda kalirsa, sogutma modunda ise bu degeri asarsa devreye girer.",
+
+    "HUMIDITY_LIMIT_DISABLE" : "tr* Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt."
+
   }
 });
 

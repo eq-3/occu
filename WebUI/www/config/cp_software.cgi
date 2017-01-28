@@ -162,6 +162,9 @@ proc put_message {title msg args} {
             }
         }
     }
+    cgi_javascript {
+      puts "new Draggable("#messagebox");"
+    }
 }
 
 # return the user language

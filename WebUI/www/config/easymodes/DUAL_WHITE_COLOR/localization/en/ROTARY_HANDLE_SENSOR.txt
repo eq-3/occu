@@ -1,0 +1,6 @@
+"description_1" : "<span class=\"translated\">en* Beim &Ouml;ffnen des Kontaktes wird das Licht auf den f&uuml;r \"Hoch\" eingestellten Wert und beim Schlie&szlig;en auf den f&uuml;r \"Niedrig\" eingestellten Wert gesetzt. Die Schaltzuordnung l&auml;sst sich auch umkehren.</span><br/><br/>",
+"_description_1" : "<span class=\"translated\">en* Beim &Ouml;ffnen des Kontaktes wird das Licht auf den f&uuml;r \"Warm\" eingestellten Wert und beim Schlie&szlig;en auf den f&uuml;r \"Kalt\" eingestellten Wert gesetzt. Die Schaltzuordnung l&auml;sst sich auch umkehren.</span><br/><br/>",
+
+"subset_1" : "en* Offen - Niedrig / Zu - Hoch",
+"subset_2" : "en* Offen - Hoch / Zu - Niedrig",
+

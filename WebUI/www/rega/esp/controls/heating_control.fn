@@ -1,5 +1,4 @@
-function ::CreateHeatingControl()
-{
+function ::CreateHeatingControl() {
   integer iLvlDpId = 0;
   real rState = 0;
   real rMin = 4.5;
@@ -187,8 +186,7 @@ function ::CreateHeatingControl()
   return;
 }
 
-function ::CreateHeatingControlHmIP()
-{
+function ::CreateHeatingControlHmIP() {
 
   integer devFwMajor = 0;
   integer devFwMinor = 0;
@@ -345,18 +343,20 @@ function ::CreateHeatingControlHmIP()
               WriteLine("<option value='2'>${weeklyProfile2}</option>");
               WriteLine("<option value='3'>${weeklyProfile3}</option>");
 
-              if ((chnLabel == "HMIP-WTH-2")
-              || (chnLabel == "HmIP-WTH-2")
-              || (chnLabel == "HmIP-STHD")
-              || (chnLabel == "HmIP-STH")
-              || (chnLabel == "ALPHA-IP-RBG")
-              || (((chnLabel == "HmIP-WTH") || (chnLabel == "HMIP-WTH")) && (((devFwMajor == 1) && (devFwMinor >= 6)) || (devFwMajor > 1)))
-              ) {
-                WriteLine("<option value='4'>${weeklyProfile4}</option>");
-                WriteLine("<option value='5'>${weeklyProfile5}</option>");
-                WriteLine("<option value='6'>${weeklyProfile6}</option>");
+              ! Some devices (eTRV and WTH with a firmware < 1.6) do have only 3 weekly programs while others have 6 of them.
+              if (
+                ((chnLabel != "HMIP-eTRV")
+                && (chnLabel != "HmIP-eTRV")
+                && (chnLabel != "HMIP-eTRV-2")
+                && (chnLabel != "HmIP-eTRV-2")
+                && (chnLabel != "HmIP-WTH")
+                && (chnLabel != "HMIP-WTH"))
+                || (((chnLabel == "HmIP-WTH") || (chnLabel == "HMIP-WTH")) && ((devFwMajor > 1) || ((devFwMajor == 1) && (devFwMinor >= 6))))
+               ) {
+                  WriteLine("<option value='4'>${weeklyProfile4}</option>");
+                  WriteLine("<option value='5'>${weeklyProfile5}</option>");
+                  WriteLine("<option value='6'>${weeklyProfile6}</option>");
               }
-
             WriteLine("</select>");
           WriteLine("</td>");
 
@@ -436,8 +436,7 @@ function ::CreateHeatingControlHmIP()
 }
 
 ! ALPHA-IP-RBGa
-function ::CreateHeatingControlHmIPa()
-{
+function ::CreateHeatingControlHmIPa() {
   string tUnit = "&deg;<i>C</i>";
   string hUnit = "&#37;";
   real actTemp = -1.0;
@@ -515,4 +514,32 @@ function ::CreateHeatingControlHmIPa()
       WriteLine("</table>");
     WriteLine("</td>");
   WriteLine("</tr>");
+}
+
+function ::CreateBWTHSwitchState() {
+    object oValveState = cObj.DPByControl("SWTICH.STATE");
+
+    string lblValveState = "${stringTableValveStateNotAvailable}";
+    boolean valveState = false;
+
+    if (oValveState) {
+      valveState = oValveState.Value();
+
+      if (valveState) {
+        lblValveState = "${stringTableValveStateTrue}";
+      } else {
+        lblValveState = "${stringTableValveStateFalse}";
+      }
+
+    }
+
+    WriteLine("<td>");
+      WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
+        WriteLine("<tr>");
+          WriteLine("<td>"#lblValveState#"</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
 }

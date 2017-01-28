@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">en* Bei erkannter Bewegung wird das Licht f&uuml;r die gew&uuml;nschte Zeit auf den festgelegten Helligkeitswert eingeschaltet und bei der n&auml;chsten erkannten Bewegung wieder ausgeschaltet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">en* Bei erkannter Bewegung wird das Licht f&uuml;r die gew&uuml;nschte Zeit eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">en* Bei erkannter Bewegung wird das Licht f&uuml;r die gew&uuml;nschte Zeit ausgeschaltet.</span><br/><br/>",
+

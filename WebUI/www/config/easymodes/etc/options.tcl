@@ -269,6 +269,25 @@ proc option {type} {
       set options(4) "\${channelModeTactileSwitch}"
     }
 
+    "HEATING_MODE_SELECTION" {
+      set options(0) "\${optionStandardRoom}"
+      set options(1) "\${optionRoomWithFirePlace}"
+      set options(2) "\${optionRoomWithTowelRail}"
+    }
+
+    "FLOOR_HEATING_MODE" {
+      set options(0) "\${optionFloorHeatingStandard}"
+      set options(1) "\${optionFloorHeatingLowEnergy}"
+      set options(2) "\${optionRadiator}"
+      set options(3) "\${optionConvectorPassiv}"
+      set options(4) "\${optionConvectorActive}"
+    }
+
+    "OPTION_DISABLE_ENABLE" {
+      set options(0) "\${optionDisable}"
+      set options(1) "\${optionEnable}"
+    }
+
   }
 }
 

@@ -24,6 +24,15 @@ proc getMinMaxValueDescr {param} {
   set min $param_descr(MIN)
   set max $param_descr(MAX)
 
+  set unit "noUnit"
+
+  catch {set unit $param_descr(UNIT)}
+
+  if {$unit == "100%"} {
+    set min [format %.0f [expr $min * 100]]
+    set max [format %.0f [expr $max * 100]]
+  }
+
   # Limit float to 2 decimal places
   if {[llength [split $min "."]] == 2} {
     set min [format {%1.2f} $min]
@@ -37,7 +46,6 @@ proc getUnit {param} {
   upvar psDescr descr
   array_clear param_descr
   array set param_descr $descr($param)
-  #set unit $param_descr(UNIT)
 
   if { [catch {set unit $param_descr(UNIT)}]} {
     set unit "<span class=\"attention\">missing unit</span>"
@@ -53,6 +61,10 @@ proc getUnit {param} {
 
   if {($unit == "K") || ($unit == "??C") || ($unit == "°C")} {
     set unit "&#176;C"
+  }
+
+  if {$unit == "_Grad_"} {
+    set unit "&#176;"
   }
 
   return "$unit"
@@ -74,6 +86,33 @@ proc getTextField {param value chn prn {extraparam ""}} {
   }
 
   set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\">"
+  return $s
+}
+
+proc getTextField100Percent {param value chn prn {extraparam ""}} {
+  global psDescr
+  upvar psDescr descr
+  array_clear param_descr
+  array set param_descr $descr($param)
+  set minValue [format {%1.1f} $param_descr(MIN)]
+  set maxValue [format {%1.1f} $param_descr(MAX)]
+
+  set minValue [expr $minValue * 100]
+  set maxValue [expr $maxValue * 100]
+
+  set elemIdTmp 'separate_CHANNEL\_$chn\_$prn\_tmp'
+  set elemId 'separate_CHANNEL\_$chn\_$prn'
+
+  # Limit float to 2 decimal places
+  if {[llength [split $value "."]] == 2} {
+    set value [format {%1.2f} $value]
+  }
+
+  set s "<input id=$elemIdTmp type=\"text\" size=\"5\" value=[format %.0f [expr $value * 100]] name=$param\_tmp onblur="
+  append s "\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1);"
+  append s "jQuery('#separate_CHANNEL\_$chn\_$prn').val(this.value / 100);\">"
+
+  append s "<input id=$elemId type=\"text\" size=\"5\" class=\"hidden\" value=$value name=$param>"
   return $s
 }
 
@@ -176,6 +215,8 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
   set paramBaseDescr [_getParamDescrKey $timeBaseParam]
   set paramFactorDescr [_getParamDescrKey $timeFactorParam]
 
+  set javascriptDelay 100
+
   incr pref
   append html "<tr>"
   append html "<td>\${$paramDescr}</td>"
@@ -192,38 +233,38 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
     switch $type {
       delay {
         # setCurrentDelayOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
       delayShort {
         # setCurrentDelayShortOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
       timeOnOff {
         # setCurrentTimeOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
       timeOnOffShort {
         # setCurrentTimeShortOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
       rampOnOff {
         # setCurrentRampOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
 
       switchingInterval {
         # setCurrentSwitchingIntervalOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
 
       switchingIntervalOnTime {
         # setCurrentSwitchingIntervalOnTimeOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOnTimeOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOnTimeOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
 
       delay0To20M_step2M {
         # setDelay0to20M_step2MOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\");}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
 
     }
@@ -231,37 +272,34 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
     switch $type {
       delay {
         # setCurrentDelayOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
       delayShort {
         # setCurrentDelayShortOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
       timeOnOff {
         # setCurrentTimeOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
       timeOnOffShort {
         # setCurrentTimeShortOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
       rampOnOff {
         # setCurrentRampOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentRampOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
 
       switchingInterval {
         # setCurrentSwitchingIntervalOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
 
       delay0To20M_step2M {
         # setCurrentSwitchingIntervalOnTimeOption
-        append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, 100)</script>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
-
-
-
     }
   }
   incr pref

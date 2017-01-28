@@ -87,7 +87,7 @@ proc getDelayShort {prn pref specialElement} {
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 8;"
-          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
@@ -198,6 +198,7 @@ proc getDelay0to20M_step2M {prn pref specialElement} {
 
           append s "var optionMap = \[\];"
           append s "optionMap\[\"00\"\] = 0;"
+          append s "optionMap\[\"40\"\] = 0;"
           append s "optionMap\[\"42\"\] = 1;"
           append s "optionMap\[\"44\"\] = 2;"
           append s "optionMap\[\"46\"\] = 3;"
@@ -214,7 +215,7 @@ proc getDelay0to20M_step2M {prn pref specialElement} {
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 11;"
-          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
@@ -354,7 +355,7 @@ proc getDelay {prn pref specialElement} {
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 11;"
-          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
@@ -488,7 +489,7 @@ proc getTimeOnOffShort {prn pref specialElement} {
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 7;"
-          append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"ONTIME baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
@@ -505,7 +506,7 @@ proc getTimeOnOffShort {prn pref specialElement} {
         append s "setTimeValuesShort = function(elmID, prn, pref, specialElement) {"
           append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
           append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref),"
-          append s "factorElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref + 1))),"
+          append s "factorElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)),"
           append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn + \"_\" + pref),"
           append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
           append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
@@ -623,13 +624,13 @@ proc getTimeOnOff {prn pref specialElement} {
           append s "optionMap\[\"724\"\] = 17;"
           append s "optionMap\[\"731\"\] = 18;"
 
-          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() :jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
           append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
 
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 19;"
-          append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"ONTIME baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
@@ -647,9 +648,9 @@ proc getTimeOnOff {prn pref specialElement} {
         append s "setTimeValues = function(elmID, prn, pref, specialElement) {"
           append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
           append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref),"
-          append s "factorElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref + 1))),"
+          append s "factorElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)),"
           append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn + \"_\" + pref),"
-          append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + parseInt(pref + 1)),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
           append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
 
           append s "timeBaseTRElem.hide();"
@@ -812,7 +813,7 @@ proc getRampOnOff {prn pref specialElement} {
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 9;"
-          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"RAMP baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
@@ -933,7 +934,7 @@ proc getSwitchingInterval {prn pref specialElement} {
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 5;"
-          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
@@ -1033,7 +1034,7 @@ proc getSwitchingIntervalOnTime {prn pref specialElement} {
 
           append s "currentVal = baseVal+factorVal,"
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 5;"
-          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal);"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 

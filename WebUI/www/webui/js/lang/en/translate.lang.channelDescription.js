@@ -5,6 +5,14 @@ jQuery.extend(true,langJSON, {
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analog output",
     "chType_ARMING" : "Arming",
     "chType_BLIND" : "Blind actuator",
+    "chType_CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER" : "Humidity control",
+    "chType_CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER" :  "Floor heating/Pump control<br/>connection partner<br/>room thermostat",
+    "chType_CLIMATECONTROL_FLOOR_TRANSCEIVER" : "Floor heating<br/>connection partner<br/>room thermostat",
+    "chType_CLIMATECONTROL_FLOOR_TRANSMITTER" : "Connection partner<br/>floor heating",
+    "chType_CLIMATECONTROL_HEAT_DEMAND_TRANSMITER" :  "Heat demand channel",
+    "chType_CLIMATECONTROL_HEAT_DEMAND_BOILER_TRANSMITTER" :  "Heat demand channel",
+    "chType_CLIMATECONTROL_HEAT_DEMAND_PUMP_TRANSMITTER" :  "Heat demand channel",
+    "chType_CLIMATECONTROL_INPUT_RECEIVER" :  "* CLIMATECONTROL_INPUT_RECEIVER",
     "chType_CLIMATECONTROL_RECEIVER" : "Connection partner<br/>wall thermostat",
     "chType_CLIMATECONTROL_RT_RECEIVER" : "Connection partner<br/>radiator thermostat<br/>receiver",
     "chType_CLIMATECONTROL_RT_TRANSCEIVER" : "Connection partner<br/>radiator thermostat<br/>transmitter",
@@ -55,8 +63,6 @@ jQuery.extend(true,langJSON, {
     "chType_WEATHER_TRANSMIT" : "Connection partner<br/>temperature sensor",
     "chType_WEEK_PROGRAM" : "Connection partner week program",
     "chType_WINDOW_SWITCH_RECEIVER" : "Connection partner<br/>shutter contact",
-
     "theEnd" : ""
   }
 });
-

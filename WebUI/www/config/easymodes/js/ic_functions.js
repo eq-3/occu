@@ -760,6 +760,23 @@ MD_convertIlluminationToDecisionValue = function(value) {
   return parseInt(result);
 };
 
+SetSensitivityOfMotionDetection = function(sensElmID) {
+  var sensElm = jQuery("#" + sensElmID ),
+    sensElmFirstOption = jQuery("#" + sensElmID + " > option:first-child"),
+    lblSensorImpulsElm = jQuery("#lblSensorImpuls"),
+    extendedOptions = jQuery("#extendedOptions");
+
+  if (parseInt(sensElm.val()) > 1) {
+    sensElmFirstOption.text("1");
+    lblSensorImpulsElm.text(translateKey("motionDetectorEventFilterNumberC")); // Sensor-Impulsen innerhalb
+    extendedOptions.show();
+  } else {
+    sensElmFirstOption.text("jedem");
+    lblSensorImpulsElm.text(translateKey("motionDetectorEventFilterNumberB")); // Sensor-Impuls
+    extendedOptions.hide();
+  }
+};
+
 ProofFreeTime = function(id, min, max)
 {
   var input = $(id);

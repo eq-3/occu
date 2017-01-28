@@ -293,6 +293,38 @@
     });
   };
 
+  SetWTHControlMode = function(regaDialogID) {
+    var elm = jQuery("#wthControlMode" + regaDialogID),
+    url = "/pages/msg/setWTHControlAndSetPointTemperatureMode.htm";
+    jQuery(elm).prop("disabled", true);
+    var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+    var paramElm = jQuery(elm).prev().prev().prev(); // this is the element which contains the parameter
+
+    inputElm.prop("disabled",true);
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+
+      var wthSelectModeDialog = new WTHSelectModeDialog(translateKey("titleConfigDialog"), htmlContent, jQuery(inputElm).val(), jQuery(paramElm).find("option:selected").html(),function(result) {
+        var inputElm = jQuery(elm).prev();
+        jQuery(elm).prop("disabled", false);
+        inputElm.prop("disabled",false);
+        if (result == 1) {
+          conInfo("wthSelectModeDialog: Yes pressed");
+          var selectedMode = this.getSelectedMode();
+          conInfo(selectedMode);
+          inputElm.val(selectedMode);
+          inputElm.change();
+        }
+      }, "html");
+
+    });
+  };
+
   ChangeDelayUnit = function( sdid )
   {
     SetDelay( sdid, $F("delay"+sdid) );

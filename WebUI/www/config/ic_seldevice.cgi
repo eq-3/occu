@@ -406,7 +406,7 @@ proc put_tableheader {} {
   puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 4);\">\${thSerialNumber}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   #puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 5);\">\${thCategorie}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   #puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 6);\">\${thTransmitMode}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
-  #puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 7);\">\${thFunction}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
+  #puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 7);\">\${thFunc}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   #puts "<TD class=\"unsorted\" onclick=\"Sort('ChnListTbl', 8);\">\${thRoom}<img src=\"/ise/img/arrow_down.gif\" alt=\"sorting\"/></TD>"
   puts "<TD class=\"nosort\">\${thAction}</TD>"
   puts "</TR>"

@@ -197,6 +197,10 @@ proc put_message {title msg args} {
       }
     }
   }
+
+  cgi_javascript {
+    puts "new Draggable("#messagebox");"
+  }
 }
 
 proc get_serial { } {
@@ -405,14 +409,14 @@ proc action_put_page {} {
           table {class="CLASS21111"} {
             set email [get_user_email]
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {colspan="2" align="left"} {
                 #puts "Schritt 1: Daten eingeben"
                 puts "\${dialogSettingsNetworkCertificateLblStep1}"
               }
             }
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {align="left"} {
                 #puts "Hostname:"
                 puts "\${dialogSettingsNetworkCertificateLblHostname}"
@@ -422,7 +426,7 @@ proc action_put_page {} {
               }
             }
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {align="left"} {
                 #puts "E-Mail Adresse:"
                 puts "\${dialogSettingsNetworkCertificateLblEMail}"
@@ -432,7 +436,7 @@ proc action_put_page {} {
               }
             }
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {colspan="2" align="left"} {
                 #puts "Land (DE, UK, etc.):"
                 puts "\${dialogSettingsNetworkCertificateLblCountry}"
@@ -450,14 +454,14 @@ proc action_put_page {} {
               }
             }
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {colspan="2" align="left"} {
                 #puts "Schritt 2: Heruntergeladenes Zertifikat ausw&auml;hlen"
                 puts "\${dialogSettingsNetworkCertificateLblStep2}"
               }
             }
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {colspan="2"} {
                 form "$env(SCRIPT_NAME)?sid=$sid" name=cert_form {target=cert_upload_iframe} enctype=multipart/form-data method=post {
                   export action=cert_upload
@@ -467,7 +471,7 @@ proc action_put_page {} {
               }
             }
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {colspan="2" align="left"} {
                 #puts "Schritt 3: Zertifikat auf Zentrale laden"
                 puts "\${dialogSettingsNetworkCertificateLblStep3}"
@@ -488,12 +492,44 @@ proc action_put_page {} {
               }
             }
             table_row {
-              td {width="20"} {}
+              table_data {width="20"} {}
               table_data {colspan="2" align="left"} {class="CLASS21118"} {
                 #puts "Schritt 4: Zentrale neu starten"
                 puts "\${dialogSettingsNetworkCertificateLblStep4}"
               }
             }
+
+            table_row {name="deleteCertificate"} {class="hidden"} {
+              table_data {colspan="4"} {
+                puts "<hr>"
+              }
+            }
+
+            table_row {name="deleteCertificate"} {class="hidden"} {
+              table_data {width="20"} {}
+              table_data {colspan="2" align="left"} {
+                #puts "Delete certificate"
+                puts "\${dialogSettingsNetworkLblDeleteCertificate}"
+              }
+
+              table_data {align="right"} {
+                division {class="popupControls CLASS21107"} {
+                  table {
+                    table_row {
+                      table_data {
+                        division {class="CLASS21108"} {onClick="deleteCert();"} {
+                          #puts "Btn delete certificate"
+                          puts "\${btnRemove}"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+
+
+            }
+
           }
         }
         table_data {class="CLASS21113"} {align="left"} {
@@ -585,7 +621,38 @@ proc action_put_page {} {
       cert_url += "&url="+document.getElementById("text_url").value;
       cert_url += "&mail="+document.getElementById("text_mail").value;
       window.location.href=cert_url;
+      };
+
+      deleteCert = function() {
+        var textA = "<div>" + translateKey('confirmCertificationPurgeA') + "<br/><br/></div>" +
+         "<div style=\"text-align:center\">" + translateKey('confirmCertificationPurgeB') + "</div>"
+
+        var textB = "<div>" + translateKey('certificationFileDeletedA')  + "<br/><br/></div>" +
+        "<div style=\"text-align:center\">" + translateKey('certificationFileDeletedB') + "</div>"
+
+        var dlg = new YesNoDialog(translateKey('dialogDeleteCertificateTitle'), textA, function(result) {
+
+          if (result == YesNoDialog.RESULT_YES) {
+            // Delete the certificate
+
+            homematic("User.deleteCertificate", {}, function(){
+              jQuery("[name='deleteCertificate']").hide();
+              homematic("User.restartLighttpd", {}, function(){
+                MessageBox.show(translateKey("dialogRestartWebserverTitle"),translateKey("dialogRestartWebserverContent"));
+                window.setTimeout(function() {window.location.protocol = "http"},2000);
+              });
+
+            });
+          }
+        }, "html");
       }
+
+      homematic("User.existsCertificate", {}, function(result) {
+        conInfo("server.pem exists: " + result);
+        if (result) {
+          jQuery("[name='deleteCertificate']").show();
+        }
+      });
     }
   }
 }

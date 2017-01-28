@@ -337,6 +337,8 @@ proc cmd_firmware_update {} {
     puts "</script>"
   } else {
     # The errorCode is the error as an integer as returned from the xmlrpc call 'updateFirmware' and can be -1, -2 and so on
+    # errorCode -1 = rfd says 'Device not reachable'
+    # errorCode -10 = Legacy API says 'Transmission Pending'
     set errorCode [getFwUpdateError "faultCode=" $result]
     set userHint ""
     if {$errorCode == -1 || $errorCode == -10} {
@@ -344,7 +346,12 @@ proc cmd_firmware_update {} {
     }
     # The errorString is the error in plain text as returned from the xmlrpc call 'updateFirmware'
     set errorString [getFwUpdateError "faultString=" $result]
-    puts "<script type=\"text/javascript\">ShowErrorMsg(\"$errorString\" + \"<br/><br/>\" + translateKey(\"dialogFirmwareUpdateFailed\") +\"<br/><br/>\"+ translateKey(\"$userHint\"));</script>"
+
+    if {$errorCode == -1} {
+      puts "<script type=\"text/javascript\">ShowErrorMsg(\"$errorString\" + \"<br/><br/>\" + translateKey(\"dialogFirmwareUpdateFailed\") +\"<br/><br/>\"+ translateKey(\"$userHint\"));</script>"
+    } else {
+      puts "<script type=\"text/javascript\">ShowErrorMsg(\"$errorString\" + \"<br/><br/>\" + translateKey(\"$userHint\"));</script>"
+    }
   }
 }
 

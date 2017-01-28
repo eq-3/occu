@@ -8,6 +8,7 @@
   string hm_statusDisplayEPaper = "HM-Dis-EP-WM55";
   string hm_rgbw_controller = "HM-LC-RGBW-WM";
   string hm_jalousieActor = "HM-LC-Ja1PBU";
+  string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
 
   string osram_rgb_controller = "VIR-LG-RGB-DIM";
   string osram_rgbw_controller = "VIR-LG-RGBW-DIM";
@@ -335,6 +336,16 @@
               if( iDPst != istEnum )
               {
                 Write( ' <i>${ruleDescrSetValueA}</i> ' );
+
+                ! Label() presents the type id of the channel, e.g. HM-OU-LED16 or  HM-OU-CFM-Pl
+                string chLabel = oCH.Label();
+
+                integer hmipWth = oCH.HssType().Find(heatingClimateControlTransceiver);
+
+                if (hmipWth != -1) {
+                  hmipWth = 1;
+                }
+
                 string sUnit = oDP.ValueUnit().ToString();
 
                 real rMin = oDP.ValueMin();
@@ -359,12 +370,34 @@
 
                 string sRange = " (" + rMin.ToInteger().ToString() + rMin.ToString().Substr(rMin.Find("."),3) + " - " + rMax.ToInteger().ToString() + rMax.ToString().Substr(rMax.Find("."),3) + ")";
 
-                Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
-                Write( sUnit );
-                Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                ! Add more exceptions
+                if (hmipWth != -1) {
+                  boolean showGenericElem = true;
+                  if ((hmipWth != -1) ) {
+
+                    if ((oDP.HSSID().Find("CONTROL_MODE") != -1) || (oDP.HSSID().Find("SET_POINT_MODE") != -1)) {
+                      ! The maximal valid value is 3, but 3 is reserved (AUTO,MANU,PARTY,RESERVED), so we restrict the maximal value to 2
+                      ! Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox alignCenter" size="6" value="'#iV#'" onfocus="SetWTHControlMode('#oSD.ID()#',\''#oCH.HSSID()#'\');" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#',2);" />' );
+                      Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="CLASS02401 SelectBox alignCenter" size="6" value="'#iV#'" onfocus="SetWTHControlMode('#oSD.ID()#',\''#oCH.HSSID()#'\');" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');"/>' );
+                      Write('<span id="wthControlMode'#oSD.ID()#'" class="CLASS02401" onclick="SetWTHControlMode('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+
+                      showGenericElem = false;
+                    }
+
+                    if (showGenericElem) {
+                      Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
+                      Write( sUnit );
+                      Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                    }
+                  }
+
+                } else {
+                  Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
+                  Write( sUnit );
+                  Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                }
               }
             }
-
           }
           if( (iVT == ivtString) || (iVT == "string") )
           {
@@ -381,7 +414,6 @@
             integer rgbw_controller = chLabel.Find(hm_rgbw_controller);
             integer osram_rgb = chLabel.Find(osram_rgb_controller);
             integer osram_rgbw = chLabel.Find(osram_rgbw_controller);
-
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
 
             if ((statusDisplayDevice != -1)

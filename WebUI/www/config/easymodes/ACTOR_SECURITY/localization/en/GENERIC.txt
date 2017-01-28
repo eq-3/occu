@@ -2,8 +2,8 @@
 "security_off" : "Ventilation lock Off",
 "security_toggle" : "Ventilation lock On / Off",
 
-"paramDescr" : "engl Modus&nbsp;&nbsp;",
+"paramDescr" : "Mode&nbsp;&nbsp;",
 
-"mode0" : "engl Ignoriere Schaltbefehl",
-"mode1" : "engl Ein",
-"mode2" : "engl Aus",
+"mode0" : "Ignore switching command",
+"mode1" : "On",
+"mode2" : "Off",

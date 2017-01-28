@@ -355,8 +355,8 @@ function ::showHideHmIPChannel() {
       return;
     }
 
-    ! Pluggable Switch (PS)
-    if((oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS")) {
+    ! Pluggable Switch (PS / PCBS)
+    if((oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS") || (oDevHssType == "HmIP-PCBS" )) {
       ! Hide SWITCH_VIRTUAL_RECEIVER channel 4 and 5 and the real channel when the expert mode is not active
       if (user.UserEasyLinkMode() == true) {
         if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false;}
@@ -366,8 +366,8 @@ function ::showHideHmIPChannel() {
     }
 
     ! Pluggable Switch and Meter (PSM)
-    if ( (
-          oDevHssType == "HMIP-PSM")
+    if (
+         (oDevHssType == "HMIP-PSM")
       || (oDevHssType == "HmIP-PSM")
       || (oDevHssType == "HmIP-PSM-CH")
       || (oDevHssType == "HmIP-PSM-IT")
@@ -396,6 +396,15 @@ function ::showHideHmIPChannel() {
       if (user.UserEasyLinkMode() == true) {
         if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false;}
         if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false;}
+      }
+      return;
+    }
+
+    ! Pluggable Dimmer (FDT)
+    if (oDevHssType == "HmIP-FDT") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false;}
+        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 2)) {bShowChannel = false;}
       }
       return;
     }
