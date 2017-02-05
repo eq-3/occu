@@ -83,6 +83,8 @@ jQuery.extend(true,langJSON, {
     "dialogRestartWebserverTitle" : "Lighttpd Restart",
     "dialogRestartWebserverContent" : "Der Webserver wird jetzt neu gestartet.",
 
+    "lblHideStickyUnreach" : "Automatische Best%E4tigung der Servicemeldung<br/>'Ger%E4tekommunikation war gest%F6rt'",
+
     "noMoreKeys" : ""
   }
 });

@@ -64,7 +64,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   incr prn
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
-  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "\${description_$heatingPumpControl}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   set pref 1

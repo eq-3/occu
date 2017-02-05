@@ -33,6 +33,34 @@ iseInitUpdateArrays();
   setPath(translateKey('serviceMsg'));
   fltSM = new iseFilter("fltSM");
   arServices = new Array();
+
+/*
+  ReceiptAlarm = function(id,reload)
+  {
+    var url = '/esp/functions.htm?sid='+SessionId;
+    var pb = "";
+    pb += 'string action = "ReceiptAlarm";';
+    pb += 'string id = "'+id+'";';
+    var opt =  {
+      postBody: pb,
+      onComplete: function(transport)
+      {
+        if( $("al"+id) )
+        {
+          hide( "al"+id );
+        }
+        else
+        {
+          if( typeof(reload) == "undefined" )
+          {
+            reloadPage();
+          }
+        }
+      }
+    };
+    new Ajax.Request(url,opt);
+  };
+*/
 </script>
 
 <div id="SvOffset"></div>
@@ -290,6 +318,13 @@ iseInitUpdateArrays();
             if( oLastTrigger.Operations() & OPERATION_WRITE )
             {
               Write( '<td align="center" valign="middle" class="CLASS02612"><input  type="button" name="btnConfirm" value="btnConfirm" onclick="ReceiptAlarm('#oAlarm.ID()#');" class="CLASS02613"/></td>' );
+
+              if (oLastTrigger.HSSID() == "STICKY_UNREACH") {
+                  Write( '<script type="text/javascript">' );
+                    ! Write(' if (WebUI.HIDESTICKYUNREACH) {ReceiptAlarm('#oAlarm.ID()#');} ');
+                    Write(' if ( homematic("CCU.getStickyUnreachState", {}) ) {ReceiptAlarm('#oAlarm.ID()#');} ');
+                  Write( '</script>');
+              }
             }
             else
             {
@@ -374,32 +409,7 @@ iseInitUpdateArrays();
     }
   };
 
-  ReceiptAlarm = function(id,reload)
-  {
-    var url = '/esp/functions.htm?sid='+SessionId;
-    var pb = "";
-    pb += 'string action = "ReceiptAlarm";';
-    pb += 'string id = "'+id+'";';
-    var opt =  {
-      postBody: pb,
-      onComplete: function(transport)
-      {
-        if( $("al"+id) )
-        {
-          hide( "al"+id );
-        }
-        else
-        {
-          if( typeof(reload) == "undefined" )
-          {
-            reloadPage();
-          }
-        }
-      }
-    };
-    new Ajax.Request(url,opt);
-  };
-  
+
   ackAll = function()
   {
     for (var i = 0; i < arServices.length; i++)

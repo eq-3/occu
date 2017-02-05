@@ -58,7 +58,7 @@
   DivSort('name');
   
 </script>
-<div class="popupTitle" id="divTitle">
+<div class="popupTitle" id="divTitle" onmousedown="new Drag($('messagebox'), event);">
   &nbsp;&nbsp;
   <% 
   Write(system.GetVar("title"));
@@ -138,7 +138,7 @@
    </tbody>
   </table>
 </div>
-<div class="CLASS00312">
+<div class="CLASS00312" onmousedown="new Drag($('messagebox'), event);">
         <table>
         <tr>
           <% string sCancelClick = "PopupClose();"; if( system.GetVar("iSecondary") == "1" ) { sCancelClick = "restorePrevious();"; } %>

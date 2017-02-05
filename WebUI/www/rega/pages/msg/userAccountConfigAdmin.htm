@@ -127,17 +127,25 @@
       </tr>
       <tr>
         <td class="CLASS00704">
-				<%
-	        object oUser = dom.GetObject( system.GetSessionVar('sessionUserID') );
-					var tableStyle = "";
-					if (oUser.UserLevel() != iulAdmin)
-					{ 
-						tableStyle = "style='display:none;visibility:hidden;'";
-					}
-				%>
+        <%
+          object oUser = dom.GetObject( system.GetSessionVar('sessionUserID') );
+          var tableStyle = "";
+          if (oUser.UserLevel() != iulAdmin)
+          { 
+            tableStyle = "style='display:none;visibility:hidden;'";
+          }
+        %>
         <table class="CLASS00708" <%Write(tableStyle);%>>
-				<colgroup><col width="90%" /><col width="10%" /></colgroup>
+        <colgroup><col width="90%" /><col width="10%" /></colgroup>
         <tr><td>${lblEasyModeActive}</td><td class="CLASS00709"><input id="cbEasy" type="checkbox" checked NAME="cbEasy"/></td></tr>
+        </table>
+        </td>
+      </tr>
+      <tr>
+        <td class="CLASS00704">
+        <table class="CLASS00708" <%Write(tableStyle);%>>
+          <colgroup><col width="90%" /><col width="10%" /></colgroup>
+          <tr><td>${lblHideStickyUnreach}</td><td class="CLASS00709"><input id="cbHideStickyUnreachServiceMessage" type="checkbox" NAME="cbStickyUnreach" onchange="onHideStickyUnreachChanged()"/></td></tr>
         </table>
         </td>
       </tr>
@@ -196,6 +204,7 @@
   translatePage("#selectUserLang");
   var languageChanged = false;
   var passChanged = false;
+  var hideStickyUnreachChanged =false;
   var arSysVars = new Array();
   var iUserId = <% Write(system.GetVar("userid")); %>;
   var arUserNames = new Array();
@@ -207,6 +216,8 @@
     Write("lang = (lang == null) ? 0 : lang;");
     Write("$('userLanguage').value = lang;");
   %>
+
+  jQuery("#cbHideStickyUnreachServiceMessage").prop("checked",WebUI.HIDESTICKYUNREACH);
 
   ChangeLevel = function(sIdx)
   {
@@ -240,6 +251,10 @@
 
   onLanguageChanged = function() {
     languageChanged = true;
+  };
+
+  onHideStickyUnreachChanged = function() {
+    hideStickyUnreachChanged = true;
   };
 
   onPwChange = function()
@@ -411,6 +426,10 @@
         loadTextResource();
         WebUI.start();
       });
+    }
+    if (hideStickyUnreachChanged) {
+      WebUI.HIDESTICKYUNREACH = jQuery("#cbHideStickyUnreachServiceMessage").prop("checked");
+      homematic("CCU.hideStickyUnreach", {"mode": WebUI.HIDESTICKYUNREACH});
     }
 
     if ( <% Write(system.GetVar("userid") # "==" # system.GetSessionVar("sessionUserID")); %> )

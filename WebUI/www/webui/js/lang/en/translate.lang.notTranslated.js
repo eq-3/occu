@@ -83,6 +83,7 @@ jQuery.extend(true,langJSON, {
     "dialogRestartWebserverTitle" : "en* Lighttpd Restart",
     "dialogRestartWebserverContent" : "en* Der Webserver wird jetzt neu gestartet.",
 
+    "lblHideStickyUnreach" : "en* Automatische Best%E4tigung der Servicemeldung<br/>'Device communication has been disturbed'",
 
     "noMoreKeys" : ""
   }

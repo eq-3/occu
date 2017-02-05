@@ -199,7 +199,7 @@ proc put_message {title msg args} {
   }
 
   cgi_javascript {
-    puts "new Draggable("#messagebox");"
+    puts "new Draggable('messagebox');"
   }
 }
 

@@ -21,6 +21,7 @@
 
 
 package require critcl
+# @sak notprovided md5cryptc
 package provide md5cryptc 1.0
 
 critcl::cheaders ../md5/md5.h
@@ -28,8 +29,11 @@ critcl::cheaders ../md5/md5.h
 
 namespace eval ::md5crypt {
     critcl::ccode {
-        #include "md5.h"
-        
+#include <string.h>
+#include "md5.h"
+#ifdef _MSC_VER
+#define snprintf _snprintf
+#endif
         static unsigned char itoa64[] =
             "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         
@@ -77,19 +81,19 @@ namespace eval ::md5crypt {
             MD5Init(&ctx);
             
             /* The password first, since that is what is most unknown */
-            MD5Update(&ctx,(const unsigned char *)pw,strlen(pw));
+            MD5Update(&ctx,(unsigned char *)pw,strlen(pw));
             
             /* Then our magic string */
-            MD5Update(&ctx,magic,strlen((const char *)magic));
+            MD5Update(&ctx,(unsigned char *)magic,strlen((const char *)magic));
             
             /* Then the raw salt */
-            MD5Update(&ctx,sp,sl);
+            MD5Update(&ctx,(unsigned char*)sp,sl);
             
             /* Then just as many characters of the MD5(pw,salt,pw) */
             MD5Init(&ctx1);
-            MD5Update(&ctx1,(const unsigned char *)pw,strlen(pw));
-            MD5Update(&ctx1,sp,sl);
-            MD5Update(&ctx1,(const unsigned char *)pw,strlen(pw));
+            MD5Update(&ctx1,(unsigned char *)pw,strlen(pw));
+            MD5Update(&ctx1,(unsigned char *)sp,sl);
+            MD5Update(&ctx1,(unsigned char *)pw,strlen(pw));
             MD5Final(final,&ctx1);
             
             for(pl = strlen(pw); pl > 0; pl -= 16) {
@@ -105,7 +109,7 @@ namespace eval ::md5crypt {
                 if(i&1)
                     MD5Update(&ctx, final, 1);
                 else
-                    MD5Update(&ctx, (const unsigned char *)pw, 1);
+                    MD5Update(&ctx, (unsigned char *)pw, 1);
             }
             
             /* Now make the output string */
@@ -122,20 +126,20 @@ namespace eval ::md5crypt {
             for(i=0;i<1000;i++) {
                 MD5Init(&ctx1);
                 if(i & 1)
-                    MD5Update(&ctx1,(const unsigned char *)pw,strlen(pw));
+                    MD5Update(&ctx1,(unsigned char *)pw,strlen(pw));
                 else
                     MD5Update(&ctx1,final,16);
                 
                 if(i % 3)
-                    MD5Update(&ctx1,sp,sl);
+                    MD5Update(&ctx1,(unsigned char *)sp,sl);
                 
                 if(i % 7)
-                    MD5Update(&ctx1,pw,strlen(pw));
+                    MD5Update(&ctx1,(unsigned char *)pw,strlen(pw));
                 
                 if(i & 1)
                     MD5Update(&ctx1,final,16);
                 else
-                    MD5Update(&ctx1,pw,strlen(pw));
+                    MD5Update(&ctx1,(unsigned char *)pw,strlen(pw));
                 MD5Final(final,&ctx1);
             }
 
@@ -158,13 +162,13 @@ namespace eval ::md5crypt {
     critcl::cproc to64_c {Tcl_Interp* interp int v int n} ok {
         char s[5];
         to64(s, (unsigned int)v, n); 
-        Tcl_SetStringObj(Tcl_GetObjResult(interp), s, n);
+        Tcl_SetObjResult(interp, Tcl_NewStringObj(s, n));
         return TCL_OK;
     }
 
     critcl::cproc md5crypt_c {Tcl_Interp* interp char* magic char* pw char* salt} ok {
         char* s = md5crypt(pw, salt, magic);
-        Tcl_SetStringObj(Tcl_GetObjResult(interp), s, strlen(s));
+        Tcl_SetObjResult(interp, Tcl_NewStringObj(s, strlen(s)));
         return TCL_OK;
     }
 }
