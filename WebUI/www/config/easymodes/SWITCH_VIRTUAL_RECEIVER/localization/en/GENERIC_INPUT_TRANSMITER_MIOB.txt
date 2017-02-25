@@ -1,1 +1,1 @@
-"description_1" : "<span class=\"translated\">en Wird der Schalter/Taster am Eingang bet&auml;tigt, wird der Aktor ein- bzw. ausgeschaltet.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">If the switch/push-button input is triggered, the actuator will be switched on or off.</span><br/><br/>",

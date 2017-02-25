@@ -311,6 +311,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
+
+
+    set param DURATION_5MIN
+    if { ! [catch {set tmp $ps($param)}]  } {
+      # In older versions this parameter is not available
+      incr prn
+      append HTML_PARAMS(separate_1) "<tr name=\"expertParam\" class=\"hidden\">"
+        append HTML_PARAMS(separate_1) "<td>\${stringTableDuration5Min}</td>"
+        append HTML_PARAMS(separate_1) "<td colspan=\"2\" name=\"expertParam\" class=\"hidden\">[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;x&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param][getHelpIcon $param 500 200]</td>"
+        append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
+          append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1)});"
+        append HTML_PARAMS(separate_1) "</script>"
+      append HTML_PARAMS(separate_1) "</tr>"
+    }
+
   append HTML_PARAMS(separate_1) "</table>"
   append HTML_PARAMS(separate_1) "<hr>"
 

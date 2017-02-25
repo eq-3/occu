@@ -1,1 +1,1 @@
-"description_1" : "<span class=\"translated\">en Signalisiert der Sensor Bedarf zum Reduzieren der Luftfeuchte, wird der Aktor eingeschaltet.  Signalisiert der Sensor keinen Bedarf, wird der Aktor ausgeschaltet.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">If the sensor signals that humidity must be reduced, the actuator will be switched on. If the sensor does not signal any demand, the actuator will be switched off.</span><br/><br/>",

@@ -168,6 +168,24 @@ proc isInExceptionList {senderType receiverType} {
   return 0
 }
 
+proc areMoreLinksAllowed {devType chType} {
+
+  set result 1
+
+  array set notAllowed {
+    HmIP-PS KEY_TRANSCEIVER
+    HmIP-PSM KEY_TRANSCEIVER
+    HmIP-PDT KEY_TRANSCEIVER
+  }
+
+  foreach val [array names notAllowed] {
+    if {[string tolower $val] == [string tolower $devType] && $chType == $notAllowed($val)} {
+      set result 0
+    }
+  }
+  return $result
+}
+
 proc put_tablebody {} {
   global iface iface_url sortby ch_iface channel keypair GL_FLAG_GROUP GL_FLAG_SENDER_DESCRIPTION GL_FLAG_RECEIVER_DESCRIPTION
   global GL_FLAG_SENDER_BROKEN GL_FLAG_RECEIVER_BROKEN
@@ -186,7 +204,7 @@ proc put_tablebody {} {
 
   #Erster Schritt: Daten sammeln.
     foreach iface [array names iface_url] {
-  
+
     if {$ch_iface != "" && $channel != ""} then {
       if {$ch_iface != $iface} then {
         continue
@@ -194,7 +212,7 @@ proc put_tablebody {} {
     }
 
     set url $iface_url($iface)
-    
+
     #check if the interface supports links. failure of this call will throw us out of here
     if { [ catch { xmlrpc $url system.methodHelp getLinks } ] } { continue }
                                  set flags 0
@@ -221,16 +239,16 @@ proc put_tablebody {} {
       catch {array set sender_descr   $link(SENDER_DESCRIPTION)}
       catch {array set receiver_descr $link(RECEIVER_DESCRIPTION)}
       array set SENTRY ""
-      
+
       _incr SENDER_LINKCOUNTER   $link(SENDER) $link(RECEIVER)
       _incr RECEIVER_LINKCOUNTER $link(RECEIVER) $link(SENDER)
-      
+
       #FLAGS auslesen=======
       set sender_broken    0
       set sender_unknown   0
       set receiver_broken  0
       set receiver_unknown 0
-      
+
       if { ! [catch {set flags $link(FLAGS)} ] } then {
         if { [BitsSet $GL_FLAG_SENDER_BROKEN $flags] } then {
           set sender_broken 1
@@ -252,7 +270,7 @@ proc put_tablebody {} {
       set hideBtnDelete 0
       set senderParent [lindex [split $link(SENDER) ":"] 0]
       set receiverParent [lindex [split $link(RECEIVER) ":"] 0]
-      
+
       # Sind Sender u. Receiver identisch? Dann handelt es sich um einen internen Link, z. B. die interne Gerätetaste
       # Diese soll bei BidCos-RF nicht in der Verknüpfungsübersichtsliste angezeigt werden, Ausnahmen werden mittels isInExceptionList erlaubt.
       # Interne Links von HmIP-Geräten werden immer angezeigt, da sie anders als bei HM nur hier editiert werden können (nicht als Kanalparameter).
@@ -282,7 +300,7 @@ proc put_tablebody {} {
         }
       }
 
-      catch {set isHMW [isWired $link(SENDER_DESCRIPTION) $link(RECEIVER_DESCRIPTION)]} 
+      catch {set isHMW [isWired $link(SENDER_DESCRIPTION) $link(RECEIVER_DESCRIPTION)]}
 
       if {(($internalLink == 0) || ($isHMW == 1)) } {
         #Bilder=====
@@ -291,11 +309,12 @@ proc put_tablebody {} {
         set sender_index 0
         set receiver_index 0
         catch { set sender_parent_type $sender_descr(PARENT_TYPE) }
+        catch { set sender_type $sender_descr(TYPE) }
         catch { set sender_index $sender_descr(INDEX) }
         catch { set receiver_parent_type $receiver_descr(PARENT_TYPE) }
         catch { set receiver_index $receiver_descr(INDEX) }
-
-        set SENTRY(SENDER_PARENT_TYPE) $sender_parent_type
+         set SENTRY(SENDER_PARENT_TYPE) $sender_parent_type
+        set SENTRY(SENDER_TYPE) $sender_type
         set SENTRY(RECEIVER_PARENT_TYPE) $receiver_parent_type
 
         set SENTRY(SENDER_IMAGE) "<div id=\"picDiv_sender_$rowcount\" class=\"CLASS22104\" onmouseover=\"picDivShow(jg_250, '$sender_parent_type', 250, '$sender_index', this);\" onmouseout=\"picDivHide(jg_250);\"></div>"
@@ -304,7 +323,7 @@ proc put_tablebody {} {
         append SENTRY(SENDER_IMAGE) "InitGD(jg_sender_$rowcount, 50);"
         append SENTRY(SENDER_IMAGE) "Draw(jg_sender_$rowcount, '$sender_parent_type', 50, $sender_index);"
         append SENTRY(SENDER_IMAGE) "</script>"
-      
+
         set SENTRY(RECEIVER_IMAGE) "<div id=\"picDiv_receiver_$rowcount\" class=\"CLASS22105\" onmouseover=\"picDivShow(jg_250, '$receiver_parent_type', 250, '$receiver_index', this);\" onmouseout=\"picDivHide(jg_250);\"></div>"
         append SENTRY(RECEIVER_IMAGE) "<script type=\"text/javascript\">"
         append SENTRY(RECEIVER_IMAGE) "var jg_receiver_$rowcount = new jsGraphics(\"picDiv_receiver_$rowcount\");"
@@ -329,18 +348,18 @@ proc put_tablebody {} {
             set SENTRY(SENDERNAME) "$iface"
             append SENTRY(SENDERNAME) ".$link(SENDER)"
         }
-        
+
         set SENTRY(SENDERADDR) $link(SENDER)
         set SENTRY(IFACE) $iface
-        
+
         if { $sender_unknown == 1 } then {
             set SENTRY(SENDERADDR_DISPLAY) "&nbsp;"
         } else {
             set SENTRY(SENDERADDR_DISPLAY) $link(SENDER)
         }
-        
+
         set SENTRY(LINKNAME) "[cgi_quote_html $link(NAME)]&nbsp;"
-       
+
         if {$sender_broken == 1 || $receiver_broken == 1} then {
               append SENTRY(LINKNAME) " <img src=\"/ise/img/dialog-error.png\" alt=\"Verkn&uuml;pfung defekt\" title=\"Verkn&uuml;pfung defekt\"/>"
         }
@@ -355,36 +374,36 @@ proc put_tablebody {} {
 #       append SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"OpenSetProfiles('$iface', '$link(SENDER)', '$link(RECEIVER)');\">${btnEdit}</div>"
         append SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"WebUI.enter(LinkEditProfilePage, {iface: '$iface', sender: '$link(SENDER)', receiver: '$link(RECEIVER)'});\">\${btnEdit}</div>"
         }
-      
+
         if {$receiver_unknown == 1} then {
           set SENTRY(RECEIVERNAME_DISPLAY) "<span onmouseover=\"picDivShow(jg_250, '$receiver_parent_type', 250, '$receiver_index', this);\" onmouseout=\"picDivHide(jg_250);\">\${unknownDevice}</span>"
         } else {
           if { [catch { set SENTRY(RECEIVERNAME_DISPLAY) "<span onmouseover=\"picDivShow(jg_250, '$receiver_parent_type', 250, '$receiver_index', this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $ise_CHANNELNAMES($iface;$link(RECEIVER))]&nbsp;</span>" } ] } then {
             set SENTRY(RECEIVERNAME_DISPLAY)  "<span onmouseover=\"picDivShow(jg_250, '$receiver_parent_type', 250, '$receiver_index', this);\" onmouseout=\"picDivHide(jg_250);\">\${unknownDevice}</span>"
-          } 
+          }
         }
         if { [catch { set SENTRY(RECEIVERNAME) $ise_CHANNELNAMES($iface;$link(RECEIVER))} ] } then {
           set SENTRY(RECEIVERNAME) "$iface"
           append SENTRY(RECEIVERNAME) ".$link(RECEIVER)"
         }
-  
+
         set SENTRY(RECEIVERADDR) $link(RECEIVER)
-        
+
         if { $receiver_unknown == 1 } then {
             set SENTRY(RECEIVERADDR_DISPLAY) "&nbsp;"
         } else {
           set SENTRY(RECEIVERADDR_DISPLAY) $link(RECEIVER)
         }
-        
+
         lappend tablestruct [array get SENTRY]
-  
+
         array_clear sender_descr
         array_clear receiver_descr
         array_clear SENTRY
         array_clear link
-        
+
         incr rowcount
-      } 
+      }
     }
   }
 
@@ -397,7 +416,7 @@ proc put_tablebody {} {
     puts "</TR>"
   } else {
     if {$sortby == "LINK"} then {
-    
+
       set tablestruct [lsort -command my_sort $tablestruct]
       set loop 0
       foreach tr $tablestruct {
@@ -449,32 +468,34 @@ proc put_tablebody {} {
       set this_sender ""
 
       foreach tr $tablestruct {
-      
         array set SENTRY $tr
-
         set this_sender $SENTRY(SENDERNAME)
-        
+
         puts "<tr>"
-        
-        #Zellen zusammenfassen
+
+        #Zellen zusammenfassen -
         if {$this_sender != $prev_sender} then {
 
           puts "<td class=\"LinkListTbl_img\" rowspan=\"$SENDER_LINKCOUNTER($SENTRY(SENDERADDR))\"><div class=\"CLASS22106\">$SENTRY(SENDERNAME_DISPLAY)</div>$SENTRY(SENDER_IMAGE)</td>"
           puts "<td rowspan=\"$SENDER_LINKCOUNTER($SENTRY(SENDERADDR))\" class=\"CLASS22106\">$SENTRY(SENDERADDR_DISPLAY)"
-          if { $sender_unknown==0 } then {
-            puts "<hr width=\"75%\" />"
-            puts "<div class=\"CLASS21000\" onclick=\"Select2ndLinkPartner('$SENTRY(IFACE)', '$SENTRY(SENDERADDR)', $SENTRY(SENDERDIRECTION));\">\${btnAddReceiver}</div>"
+
+           # Under certain circumstances hide the button for adding more link partners (e. g. PS/PSM/PDT aren't allowed)
+           if {([lindex [split $SENTRY(SENDERADDR) ":"] 0] != [lindex [split $SENTRY(RECEIVERADDR) ":"] 0]) || ([areMoreLinksAllowed $SENTRY(SENDER_PARENT_TYPE) $SENTRY(SENDER_TYPE)] == 1)} {
+            if { $sender_unknown==0 } then {
+              puts "<hr width=\"75%\" />"
+              puts "<div class=\"CLASS21000\" onclick=\"Select2ndLinkPartner('$SENTRY(IFACE)', '$SENTRY(SENDERADDR)', $SENTRY(SENDERDIRECTION));\">\${btnAddReceiver}</div>"
+            }
           }
           puts "</td>"
         }
-        
+
         puts "<td>$SENTRY(LINKNAME)</td>"
         puts "<td>$SENTRY(LINKDESC)</td>"
         puts "<td align=\"center\">$SENTRY(ACTION)</td>"
         puts "<td>$SENTRY(RECEIVERNAME_DISPLAY)</td>"
         puts "<td>$SENTRY(RECEIVERADDR_DISPLAY)</td>"
         puts "</tr>"
-        
+
         set prev_sender $this_sender
             array_clear SENTRY
       }

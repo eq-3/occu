@@ -213,7 +213,7 @@ jQuery.extend(true,langJSON, {
     "Tue" : "Di",
     "Wed" : "Mi",
     "Thu" : "Do",
-    "Fre" : "Fr",
+    "Fri" : "Fr",
     "Sat" : "Sa",
     "Jan" : "Januar",
     "Feb" : "Februar",
@@ -866,6 +866,17 @@ jQuery.extend(true,langJSON, {
     "lblKelvin" : "K",
     "lblUnknown" : "unbekannt",
 
+    "optionDisable" : "Nicht aktiv",
+    "optionEnable" : "Aktiv",
+    "optionFloorHeatingStandard" : "Standard-Fussbodenheizung",
+    "optionFloorHeatingLowEnergy" : "Niedrigenergie-Fussbodenheizung",
+    "optionRadiator" : "Radiator",
+    "optionConvectorPassiv" : "Passiver Konvektor",
+    "optionConvectorActive" : "Aktiver Konvektor (mit L&uuml;fter)",
+    "optionStandardRoom" : "Standard Raum",
+    "optionRoomWithFirePlace" : "Raum mit Feuerstelle",
+    "optionRoomWithTowelRail" : "Raum mit Handtuch-Trockner",
+
     "channelModeChangeOver" : "Change Over",
     "channelModeExternalClock" :  "Absenkbetrieb (Eco-Mode)",
     "channelModeHumidityLimiter" :  "Feuchtigkeitsbegrenzer",
@@ -889,16 +900,28 @@ jQuery.extend(true,langJSON, {
       "<h1>Bitte beachten Sie:</h1>" +
       "<ul>"+
         "<li>Es darf nur ein OSRAM-Gateway im Netzwerk vorhanden sein.</li>" +
-          "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
-          "<li>Damit das OSRAM-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
-            "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
-          "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
-            "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
+        "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
+        "<li>Damit das OSRAM-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
+          "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
+        "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
+          "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
       "</ul>",
     "timeoutAddNewDevices" : "Timeout addNewDevices",
     "unknownError" : "Unbekannter Fehler",
     "helpOsramLightify" : "Hier stellen Sie die Kopplung zwischen "+HMIdentifier.de.CCUShortName+" und <b>OSRAM-Lightify</b> her. Mehr Informationen finden Sie hier:",
     "msgNoGatewayFound" : "Kein OSRAM-Lightify-Gateway gefunden",
+
+    "dialogDeleteCertificateTitle" : "Zertifikat l%F6schen",
+    "dialogSettingsNetworkLblDeleteCertificate" : "Zertifikat von der CCU2 entfernen",
+    "confirmCertificationPurgeA" : "Wenn Sie das Zertifikat l%F6schen, k%F6nnen Sie anschlie%DFend keine gesicherte Verbindung zu Ihrer "+HMIdentifier.de.CCUShortName+" mehr aufbauen.",
+    "confirmCertificationPurgeB" : "M%F6chten Sie das Zertifikat wirklich von der "+HMIdentifier.de.CCUShortName+" entfernen?",
+    "dialogRestartWebserverTitle" : "Lighttpd Restart",
+    "dialogRestartWebserverContent" : "Der Webserver wird jetzt neu gestartet.",
+    "lblHideStickyUnreach" : "Automatische Best%E4tigung der Servicemeldung<br/>'Ger%E4tekommunikation war gest%F6rt'",
+
+    "timeModuleUserHint" :
+      "<br/>Wir empfehlen bei der Benutzung des Zeitmoduls, keine Zeitabst&auml;nde kleiner 15 Min. zu verwenden.&nbsp;" +
+      " So ist sichergestellt, dass alle konfigurierten Programme zuverl&auml;ssig ausgef&uuml;hrt werden k&ouml;nnen.</br><br/>",
 
     "theEnd" : ""
   }

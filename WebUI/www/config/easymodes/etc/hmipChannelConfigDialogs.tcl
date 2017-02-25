@@ -587,6 +587,298 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
   return $html
 }
 
+proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
+  global iface
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set weeklyPrograms 6
+
+  if {[string compare $extraparam 'only3WeeklyProgramms'] == 0} {
+    set weeklyPrograms 3
+  }
+
+  set html ""
+
+    set CHANNEL $special_input_id
+
+    set hlpBoxWidth 500
+    set hlpBoxHeight 200
+
+
+    puts "<script type=\"text/javascript\">"
+      puts "ShowActiveWeeklyProgram = function(activePrg) {"
+        puts " for (var i = 1; i <= $weeklyPrograms; i++) {"
+          puts "jQuery('#P' + i + '_Timeouts_Area').hide();"
+        puts " }"
+        puts " jQuery('#P' + activePrg + '_Timeouts_Area').show();"
+      puts "};"
+
+      puts "setDisplayMode = function(elem) {"
+        puts "var mode = jQuery(elem).val();"
+        puts "modeElem = jQuery(\".j_showHumidity\");"
+        puts "if (mode == 0) {"
+          puts "jQuery(modeElem).show();"
+        puts "} else {jQuery(modeElem).hide();}"
+      puts "};"
+    puts "</script>"
+
+    set prn 0
+
+    set param WEEK_PROGRAM_POINTER
+    append html "<table class=\"ProfileTbl\">"
+      append html "<tr>"
+        append html "<td class='hidden'><input type='text' id='separate_$CHANNEL\_$prn' name='$param'></td>"
+      append html "</tr>"
+
+      # left
+      append html "<tr>"
+        append html "<td name=\"_expertParam\" class=\"_hidden\">\${stringTableWeekProgramToEdit}</td>"
+        append html "<td name=\"_expertParam\" class=\"_hidden\">"
+          append html "<select id=\"editProgram\" onchange=\"ShowActiveWeeklyProgram(parseInt(\$(this).value)+1);\">"
+            append html "<option value='0'>\${stringTableWeekProgram1}</option>"
+            append html "<option value='1'>\${stringTableWeekProgram2}</option>"
+            append html "<option value='2'>\${stringTableWeekProgram3}</option>"
+            if {$weeklyPrograms > 3} {
+              append html "<option value='3'>\${stringTableWeekProgram4}</option>"
+              append html "<option value='4'>\${stringTableWeekProgram5}</option>"
+              append html "<option value='5'>\${stringTableWeekProgram6}</option>"
+            }
+        append html "</select>[getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]"
+        append html "</td>"
+      append html "</tr>"
+    append html "</table>"
+
+
+  ## Create the weekly Programs ##
+
+    for {set loop 1} {$loop <=$weeklyPrograms} {incr loop} {
+      set pNr "P$loop";
+      append html "<div id=\"$pNr\_Timeouts_Area\" style=\"display:none\">"
+      foreach day {SATURDAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY} {
+        append html "<div id=\"$pNr\_temp_prof_$day\"></div>"
+      }
+      append html "</div>"
+
+      append html "<script type=\"text/javascript\">"
+      append html "$pNr\_tom = new TimeoutManager('$iface', '$address', false, '$pNr\_');"
+      foreach day {SATURDAY SUNDAY MONDAY TUESDAY WEDNESDAY THURSDAY FRIDAY} {
+
+        for {set i 1} {$i <= 13} {incr i} {
+
+          set timeout     $ps($pNr\_ENDTIME_${day}_$i)
+          set temperature $ps($pNr\_TEMPERATURE_${day}_$i)
+          append html "$pNr\_tom.setTemp('$day', $timeout, $temperature);"
+
+          if {$timeout == 1440} then {
+            break;
+          }
+        }
+
+        append html "$pNr\_tom.setDivname('$day', '$pNr\_temp_prof_$day');"
+        append html "$pNr\_tom.writeDay('$day');"
+      }
+      append html "</script>"
+    }
+
+    append html "<script type=\"text/javascript\">ShowActiveWeeklyProgram(1);</script>"
+
+    append html "<hr>"
+
+    # *************** #
+    
+    append html "<table class=\"ProfileTbl\">"
+      # left
+      incr prn
+      set param SHOW_SET_TEMPERATURE
+      array_clear options
+      set options(0) "\${stringTableClimateControlRegDisplayTempInfoActualTemp}"
+      set options(1) "\${stringTableClimateControlRegDisplayTempInfoSetPoint}"
+
+      append html "<tr>"
+        append html "<td name=\"_expertParam\" class=\"_hidden\">\${stringTableClimateControlRegDisplayTempInfo}</td>"
+        append html "<td name=\"_expertParam\" class=\"_hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"setDisplayMode(this)\"]</td>"
+
+        # right
+        incr prn
+        set param SHOW_HUMIDITY
+        array_clear options
+        set options(0) "\${stringTableClimateControlRegDisplayTempHumT}"
+        set options(1) "\${stringTableClimateControlRegDisplayTempHumTH}"
+        append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">\${stringTableClimateControlRegDisplayTempHum}</td>"
+        append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+      append html "</tr>"
+
+      # left
+      incr prn
+      set param BUTTON_RESPONSE_WITHOUT_BACKLIGHT
+      append html "<tr>"
+      append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableButtonResponseWithoutBacklight}</td>"
+      append html "<td name=\"expertParam\" class=\"hidden\">"
+      # append html "[_getCheckBox $CHANNEL '$param' $ps($param) $prn]"
+      append html  "[getCheckBox '$param' $ps($param) $chn $prn]"
+      append html "</td>"
+      append html "</tr>"
+
+    append html "</table>"
+
+    append html "<hr>"
+    
+    append html "<table class=\"ProfileTbl\">"
+
+      set param TEMPERATURE_LOWERING_COOLING
+      if { ! [catch {set tmp $ps($param)}]  } {
+        # left
+        incr prn
+        append html "<tr><td>\${ecoCoolingTemperature}</td>"
+        # append html  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
+
+        append html "<script type=\"text/javascript\">"
+          append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+        append html "</script>"
+
+        # right
+        incr prn
+        set param TEMPERATURE_LOWERING
+        append html "<td>\${ecoHeatingTemperature}</td>"
+        # append html  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"ecoOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+        append html "<script type=\"text/javascript\">"
+          append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+        append html "</script>"
+        append html "</tr>"
+
+        append html "<tr id=\"errorRow\" class=\"hidden\"> <td></td> <td colspan=\"2\"><span id=\"errorComfort\" class=\"attention\"></span></td> <td colspan=\"2\"><span id=\"errorEco\" class=\"attention\"></span></td> </tr>"
+      }
+
+      # left
+      incr prn
+      set param TEMPERATURE_MINIMUM
+      array_clear options
+      set i 0
+      for {set val [getMinValue $param]} {$val <= [getMaxValue $param]} {set val [expr $val + 0.5]} {
+        set options($i) "$val &#176;C"
+        incr i;
+      }
+      append html "<tr><td>\${stringTableTemperatureMinimum}</td>"
+      append html  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $param $ps($param) $chn $prn]</span></td>"
+      append html "<script type=\"text/javascript\">"
+      append html "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+      append html "</script>"
+
+      # right
+      incr prn
+      set param TEMPERATURE_MAXIMUM
+      array_clear options
+      set i 0
+      for {set val [getMinValue $param]} {$val <= [getMaxValue $param]} {set val [expr $val + 0.5]} {
+        set options($i) "$val &#176;C"
+        incr i;
+      }
+      append html "<td>\${stringTableTemperatureMaximum}</td>"
+      append html  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $param $ps($param) $chn $prn]</span></td>"
+      append html "</tr>"
+      append html "<script type=\"text/javascript\">"
+      append html "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+      append html "</script>"
+      append html "<tr>"
+
+      set param MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE
+      if { ! [catch {set tmp $ps($param)}]  } {
+        # In older versions this parameter is not available
+        incr prn
+        append html "<tr>"
+        append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableMinMaxNotRelevantForManuMode}</td>"
+        append html "<td name=\"expertParam\" class=\"hidden\">"
+        append html  "[getCheckBox '$param' $ps($param) $chn $prn]"
+        append html "</td>"
+        append html "</tr>"
+      }
+
+      set param DURATION_5MIN
+      if { ! [catch {set tmp $ps($param)}]  } {
+        # In older versions this parameter is not available
+        incr prn
+        append html "<tr name=\"expertParam\" class=\"hidden\">"
+          append html "<td>\${stringTableDuration5Min}</td>"
+          append html "<td colspan=\"2\" >[getTextField $param $ps($param) $chn $prn]&nbsp;x&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+
+          append html "<script type=\"text/javascript\">"
+            append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);});"
+          append html "</script>"
+
+        append html "</tr>"
+      }
+
+    append html "</table>"
+
+    append html "<hr>"
+
+    append html "<table class=\"ProfileTbl\">"
+    # left
+    incr prn
+    set param TEMPERATURE_OFFSET
+    array_clear options
+    set i 0
+    for {set val -3.5} {$val <= 3.5} {set val [expr $val + 0.5]} {
+      set options($val) "$val &#176;C"
+      incr i;
+    }
+    append html "<td>\${stringTableTemperatureOffset}</td>"
+    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html "</tr>"
+
+    #left
+    incr prn
+    set param TEMPERATURE_WINDOW_OPEN
+    append html "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
+
+      append html "<script type=\"text/javascript\">"
+        append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+      append html "</script>"
+    append html "</tr>"
+  append html "</table>"
+
+  append html "<hr>"
+
+  append html "<table class=\"ProfileTbl\">"
+    # left
+    incr prn
+    set param BOOST_TIME_PERIOD
+    array_clear options
+    set i 0
+    for {set val 0} {$val <= 30} {incr val 5} {
+        set options($val) "$val min"
+      incr i;
+    }
+    append html "<tr><td>\${stringTableBoostTimePeriod}</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html "</tr>"
+  append html "</table>"
+
+    
+  if {[session_is_expert]} {
+    append html "<script type=\"text/javascript\">"
+      append html "jQuery(\"\[name='expertParam'\]\").show();"
+      append html "setDisplayMode(jQuery(\"\[name='SHOW_SET_TEMPERATURE'\]\").first());"
+    append html "</script>"
+  } else {
+    append html "<script type=\"text/javascript\">"
+      append html "jQuery(\"\[name='expertParam'\]\").hide();"
+    append html "</script>"
+  }
+  append html "<script type=\"text/javascript\">setDisplayMode(jQuery(\"\[name='SHOW_SET_TEMPERATURE'\]\").first());</script>"
+
+  return $html
+}
+
 proc getSwitchVirtualReceiver {chn p descr} {
 
   upvar $p ps

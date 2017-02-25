@@ -654,8 +654,9 @@ proc put_profile_head { PEERPART } {
     }
 
     set SENTRY(LINKNAME) "<input id=\"sender_linkname\"        name=\"sender_linkname\"        type=\"text\" size=\"30\" value=\"$linkname\"/>"
-    set SENTRY(LINKDESC) "<input id=\"sender_linkdescription\" name=\"sender_linkdescription\" type=\"text\" size=\"30\" value=\"$linkdesc\" class=\"CLASS20006\"/>"
-    append SENTRY(LINKDESC) "<span onclick=\"EnterDescriptionTemplate('receiver');\" class=\"CLASS20009\">&lt;-</span>"
+    set SENTRY(LINKDESC) "<div><table><tr class=\"WhiteHeader\"><td style=\"border: 0px\"><input id=\"sender_linkdescription\" name=\"sender_linkdescription\" type=\"text\" size=\"30\" value=\"$linkdesc\" class=\"_CLASS20006\"/></td>"
+    append SENTRY(LINKDESC) "<td style=\"border: 0px\"><div onclick=\"EnterDescriptionTemplate('receiver');\" class=\"CLASS20009\" style=\"padding:0px;\">&lt;-</div></td></tr></table></div>"
+
 
   } elseif {$PEERPART == "SENDER_GROUP"} then {
 
@@ -676,8 +677,8 @@ proc put_profile_head { PEERPART } {
     }
 
     set SENTRY(LINKNAME) "<input id=\"sendergroup_linkname\"        name=\"sender_linkname\"        type=\"text\" size=\"30\" value=\"$linkname\"/>"
-    set SENTRY(LINKDESC) "<input id=\"sendergroup_linkdescription\" name=\"sender_linkdescription\" type=\"text\" size=\"30\" value=\"$linkdesc\" class=\"CLASS20006\"/>"
-    append SENTRY(LINKDESC) "<span onclick=\"EnterDescriptionTemplate('receivergroup');\" class=\"CLASS20009\">&lt;-</span>"
+    set SENTRY(LINKDESC) "<div><table><tr class=\"WhiteHeader\"><td style=\"border: 0px\"><input id=\"sendergroup_linkdescription\" name=\"sender_linkdescription\" type=\"text\" size=\"30\" value=\"$linkdesc\" class=\"_CLASS20006\"/></td>"
+    append SENTRY(LINKDESC) "<td style=\"border: 0px\"><div onclick=\"EnterDescriptionTemplate('receivergroup');\" class=\"CLASS20009\" style=\"padding:0px;\">&lt;-</div></td></tr></table></div>"
   }
   
   set SENTRY(RECEIVERADDR) $receiver_address

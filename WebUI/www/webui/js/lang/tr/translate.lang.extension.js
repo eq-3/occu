@@ -213,7 +213,7 @@ jQuery.extend(true,langJSON, {
     "Tue" : "Sa",
     "Wed" : "Ca",
     "Thu" : "Pe",
-    "Fre" : "Cu",
+    "Fri" : "Cu",
     "Sat" : "Cmt",
     "Jan" : "Ocak",
     "Feb" : "Subat",
@@ -859,6 +859,17 @@ jQuery.extend(true,langJSON, {
     "lblKelvin" : "K",
     "lblUnknown" : "unknown",
 
+    "optionDisable" : "Inactive",
+    "optionEnable" : "Active",
+    "optionFloorHeatingStandard" : "Standard floor heating system",
+    "optionFloorHeatingLowEnergy" : "Low-energy floor heating system",
+    "optionRadiator" : "Radiator",
+    "optionConvectorPassiv" : "Passive convector",
+    "optionConvectorActive" : "Active convector (with fan)",
+    "optionStandardRoom" : "Standard room",
+    "optionRoomWithFirePlace" : "Room with fireplace",
+    "optionRoomWithTowelRail" : "Room with towel rail heating",
+
     "channelModeChangeOver" : "Change over",
     "channelModeExternalClock" :  "Temperature reduction (eco mode)",
     "channelModeHumidityLimiter" :  "Humidity limiter",
@@ -892,6 +903,18 @@ jQuery.extend(true,langJSON, {
     "unknownError" : "Unknown Error",
     "helpOsramLightify" : "You can create the pairing between the "+HMIdentifier.tr.CCUShortName+" and <b>OSRAM Lightify</b> here. Please find further information here:",
     "msgNoGatewayFound" : "No OSRAM Lightify Gateway found",
+
+    "dialogDeleteCertificateTitle" : "Delete certificate",
+    "dialogSettingsNetworkLblDeleteCertificate" : "Remove certificate from CCU2",
+
+    "confirmCertificationPurgeA" : "If the certificate is deleted, you can no longer establish a secured connection to your "+HMIdentifier.tr.CCUShortName+".",
+    "confirmCertificationPurgeB" : "Do you really want to delete the certificate from the "+HMIdentifier.tr.CCUShortName +"?",
+
+    "dialogRestartWebserverTitle" : "Lighttpd Restart",
+    "dialogRestartWebserverContent" : "The web server will now be restarted.",
+    "lblHideStickyUnreach" : "Automatically confirm the device message<br/>'Device communication interrupted'",
+
+    "timeModuleUserHint" : "When using the time module, we recommend to use no time intervals shorter than 15 minutes. This ensures that all configured programmes can be executed.",
 
     "theEnd" : ""
   }

@@ -6,6 +6,7 @@ jQuery.extend(true,langJSON, {
     "chType_ARMING" : "Scharfschalten",
     "chType_BLIND" : "Rollladenaktor",
     "chType_CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER" : "Luftfeuchtigkeitssteuerung",
+    "chType_CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Stellantrieb f%FCr Fussbodenheizung",
     "chType_CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER" :  "Fussbodenheizung/<br/>Pumpensteuerung<br/><br/>Verkn%FCpfungspartner<br/>Raumthermostat",
     "chType_CLIMATECONTROL_FLOOR_TRANSCEIVER" : "Fussbodenheizung<br/>Verkn%FCpfungspartner<br/>Raumthermostat",
     "chType_CLIMATECONTROL_FLOOR_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Fussbodenheizung",
@@ -24,6 +25,8 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER" : "Dimmaktor",
     "chType_DIMMER_TRANSMITTER" : "Statusmitteilung Dimmwert",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmaktor",
+    "chType_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
+    "chType_DUAL_WHITE_COLOR" : "Farbkanal",
     "chType_ENERGIE_METER_TRANSMITTER" : "Statusmeldung Messwertkanal",
     "chType_GENERIC_INPUT_TRANSMITER" : "Multi-IO-Box<br/>Eingangskanal",
     "chType_HEATING_CLIMATECONTROL_CL_RECEIVER" : "Verkn%FCpfungspartner Wandthermostat (zykl. Daten, Soll- u. Ist-Temp.)",
@@ -59,6 +62,8 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Schaltaktor",
     "chType_THERMALCONTROL_TRANSMIT" : "Verkn%FCpfungspartner<br/>Heizungsthermostat",
     "chType_VIRTUAL_DIMMER" : "Dimmaktor",
+    "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
+    "chType_VIRTUAL_DUAL_WHITE_COLOR" : "Farbkanal",
     "chType_WEATHER_RECEIVER" : "Verkn%FCpfungspartner<br/>Temperatursensor",
     "chType_WEATHER_TRANSMIT" : "Verkn%FCpfungspartner<br/>Temperatursensor",
     "chType_WEEK_PROGRAM" : "Verkn%FCpfungspartner Wochenprogramm",
@@ -66,3 +71,5 @@ jQuery.extend(true,langJSON, {
     "theEnd" : ""
   }
 });
+
+

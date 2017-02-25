@@ -44,6 +44,7 @@ jQuery.extend(true,langJSON, {
     "STHD" : "Homematic IP Temperature and Humidity Sensor with Display, indoor",
     "PDT" : "Homematic IP Dimming Actuator",
     "HmIP-PCBS" : "Homematic IP Wireless Switch Actuator 1-channel, PCB",
+    "HmIP-SAM" :"Homematic IP Acceleration Sensor",
     "ALPHA-IP-RBG" : "Room Control Unit<br/>Display",
     "ALPHA-IP-RBGa" : "Room Control Unit<br/>Analogue",
     "HM-LC-Sw1-Pl-CT-R1" : "Kablosuz salter akt%FCat%F6r%FC 1 kanalli, klemens baglantili",

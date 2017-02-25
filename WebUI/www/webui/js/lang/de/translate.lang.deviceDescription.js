@@ -44,6 +44,7 @@ jQuery.extend(true,langJSON, {
     "STHD" : "Homematic IP Temperatur- und Luftfeuchtigkeitssensor mit Display, innen",
     "PDT" : "Homematic IP Dimmaktor",
     "HmIP-PCBS" : "Homematic IP Funk-Schaltaktor 1-fach, Platine",
+    "HmIP-SAM" :"Homematic IP Ersch%FCtterungs- / Beschleunigungssensor",
     "ALPHA-IP-RBG" : "Raumbedienger%E4t<br/>Display",
     "ALPHA-IP-RBGa" : "Raumbedienger%E4t<br/>Analog",
     "HM-LC-Sw1-Pl-CT-R1" : "Funk-Schaltaktor 1-fach mit Klemmanschluss",

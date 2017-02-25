@@ -1,16 +1,16 @@
 jQuery.extend(true,langJSON, {
   "de" : {
-    "toolTipLongKeyPress" : "<h1>Hinweis</h1><br/>Die Funktion des langen Tastendruckes steht nur zur Ver&uuml;gung, wenn die Ger&auml;tetaste Ihres Aktors diesen auch unterst&uuml;tzt.",
-    "toolTipSlatLongKeyPress" : "<h1>Hinweis</h1><br/>Diese Funktion macht nur bei Aktoren Sinn, bei denen die Ger&auml;tetaste den langen Tastendruck unterst&uuml;tzt."
+    "toolTipLongKeyPress" : "<h1>Hinweis</h1><br/>Die Funktionen der rudiment&auml;ren Lamellenverstellung stehen lediglich f&uuml;r den HomeMatic Funk-Rollladenaktor für Markenschalter (HM-LC-Bl1PBU-FM-x) zur Verf&uuml;gung.",
+    "toolTipSlatLongKeyPress" : "<h1>Hinweis</h1><br/>Die Funktionen der rudiment&auml;ren Lamellenverstellung stehen lediglich f&uuml;r den HomeMatic Funk-Rollladenaktor für Markenschalter (HM-LC-Bl1PBU-FM-x) zur Verf&uuml;gung."
   },
 
   "en" : {
-    "toolTipLongKeyPress" : "en* <h1>Hinweis</h1><br/>Die Funktion des langen Tastendruckes steht nur zur Ver&uuml;gung, wenn die Ger&auml;tetaste Ihres Aktors diesen auch unterst&uuml;tzt.",
-    "toolTipSlatLongKeyPress" : "en* <h1>Hinweis</h1><br/>Diese Funktion macht nur bei Aktoren Sinn, bei denen die Ger&auml;tetaste den langen Tastendruck unterst&uuml;tzt."
+    "toolTipLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM-x).",
+    "toolTipSlatLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM-x)."
     },
 
   "tr" : {
-    "toolTipLongKeyPress" : "tr* <h1>Hinweis</h1><br/>Die Funktion des langen Tastendruckes steht nur zur Ver&uuml;gung, wenn die Ger&auml;tetaste Ihres Aktors diesen auch unterst&uuml;tzt.",
-    "toolTipSlatLongKeyPress" : "tr* <h1>Hinweis</h1><br/>Diese Funktion macht nur bei Aktoren Sinn, bei denen die Ger&auml;tetaste den langen Tastendruck unterst&uuml;tzt."
+    "toolTipLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM-x).",
+    "toolTipSlatLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM-x)."
   }
 });

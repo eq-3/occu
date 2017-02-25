@@ -25,7 +25,10 @@ jQuery.extend(true,langJSON, {
     "TWO_POINT_HYSTERESIS" : "Der Wandthermostat kann in Verbindung mit einem Schaltaktor als Zweipunktregler genutzt werden.<br/><br/>Die Regelung erfolgt in Abh&auml;ngigkeit der Soll- und Ist-Temperatur sowie der hier festgelegten Hysterese.",
     "HEATING_COOLING" : "Wenn der Wandthermostat als Zweipunktregler genutzt wird, ist hier festgelegt, ob die Regelung 'Heizen' oder 'K&uuml;hlen' soll.<br/><br/>Im Heiz-Betrieb wird der Schaltaktor bei Unterschreiten der Soll-Temperatur eingeschaltet, im K&uuml;hl-Betrieb wird er bei &Uuml;berschreiten eingeschaltet.",
 
-    "HUMIDITY_LIMIT_DISABLE" : "Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt."
+    "HUMIDITY_LIMIT_DISABLE" : "Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt.",
+
+    "DURATION_5MIN" : "Befindet sich der Thermostat im Auto-Modus, so wird die Temperatur mit jedem Schaltzeitpunkt auf den programmierten Wert ge&auml;ndert. Dieser Parameter dient dazu, diesen Automatismus f&uuml;r eine gewisse Zeit ausser Kraft zu setzen. Nach Ablauf der Zeit, geht der Thermostat wieder in den Auto-Modus &uuml;ber.<br><br/>" +
+      "Die Zeit wird in Minuten eingegeben. Der h&ouml;chst zul&auml;ssige Wert betr&auml;gt 720 Minuten, was 12 Stunden entspricht."
   },
 
   "en" : {
@@ -53,7 +56,10 @@ jQuery.extend(true,langJSON, {
     "TWO_POINT_HYSTERESIS" : "In connection with a switch actuator, the room thermostat can be used as on-off control.<br/><br/>The on-off control depends on the setpoint and actual temperature as well as the defined hysteresis.",
     "HEATING_COOLING" : "If the room thermostat is used as on-off control, you can define here whether you want to set the 'heating' or 'cooling' mode.<br/><br/>In heating mode, the switch actuator will be switched on if the setpoint temperature falls below threshold, in cooling mode the actuator will be switched on if the threshold is exceeded.",
 
-    "HUMIDITY_LIMIT_DISABLE" : "en* Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt."
+    "HUMIDITY_LIMIT_DISABLE" : "With this parameter you can define, if the cooling should be interrupted during cooling mode, as soon as the humidity threshold is exceeded. This stops the humidity value from increasing further.",
+
+    "DURATION_5MIN" : "If the thermostat is in auto mode, temperature will be changed with every switching time to the value defined. This parameter helps you to discontinue the automatism for a certain period of time. After the time has expired, the thermostat returns back to auto mode.<br><br/>" +
+      "Time will be displayed in minutes. The highest value permitted is 720 minutes (12 hours)."
 
   },
 
@@ -82,8 +88,10 @@ jQuery.extend(true,langJSON, {
     "TWO_POINT_HYSTERESIS" : "Duvar termostati salter akt&uuml;at&ouml;r&uuml; yardimiyla cift noktali reg&uuml;lat&ouml;r olarak kullanilabilir.<br/><br/>Ayar islemi gercek ve nominal sicakliga ve burada tespit edilen histerezise g&ouml;re yapilir.",
     "HEATING_COOLING" : "Duvar termostati cift noktali reg&uuml;lat&ouml;r olarak kullanilacaksa burada yapilan ayarin 'isitma' ya da 'sogutma' mi olacagi burada belirlenir.<br/><br/>Salter akt&uuml;at&ouml;r&uuml; isitma modunda nominal sicakligin altinda kalirsa, sogutma modunda ise bu degeri asarsa devreye girer.",
 
-    "HUMIDITY_LIMIT_DISABLE" : "tr* Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt."
+    "HUMIDITY_LIMIT_DISABLE" : "With this parameter you can define, if the cooling should be interrupted during cooling mode, as soon as the humidity threshold is exceeded. This stops the humidity value from increasing further.",
 
+    "DURATION_5MIN" : "If the thermostat is in auto mode, temperature will be changed with every switching time to the value defined. This parameter helps you to discontinue the automatism for a certain period of time. After the time has expired, the thermostat returns back to auto mode.<br><br/>" +
+      "Time will be displayed in minutes. The highest value permitted is 720 minutes (12 hours)."
   }
 });
 

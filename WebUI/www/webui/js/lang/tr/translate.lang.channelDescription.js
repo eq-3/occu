@@ -6,6 +6,7 @@ jQuery.extend(true,langJSON, {
     "chType_ARMING" : "Arming",
     "chType_BLIND" : "Blind actuator",
     "chType_CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER" : "Humidity control",
+    "chType_CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER" : "Link partner<br/>room floor heating valve",
     "chType_CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER" :  "Floor heating/Pump control<br/>connection partner<br/>room thermostat",
     "chType_CLIMATECONTROL_FLOOR_TRANSCEIVER" : "Floor heating<br/>connection partner<br/>room thermostat",
     "chType_CLIMATECONTROL_FLOOR_TRANSMITTER" : "Connection partner<br/>floor heating",
@@ -24,6 +25,8 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER" : "Dimmer actuator",
     "chType_DIMMER_TRANSMITTER" : "Status report dimmer",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",
+    "chType_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
+    "chType_DUAL_WHITE_COLOR" : "Colour channel",
     "chType_ENERGIE_METER_TRANSMITTER" : "Status report measured value channel",
     "chType_GENERIC_INPUT_TRANSMITER" : "Multi-IO-Box<br/>input channel",
     "chType_HEATING_CLIMATECONTROL_CL_RECEIVER" : "Connection partner wall thermostat (cycl. data, setpoint and actual temp.)",
@@ -59,6 +62,8 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Switch actuator",
     "chType_THERMALCONTROL_TRANSMIT" : "Connection partner<br/>radiator thermostat",
     "chType_VIRTUAL_DIMMER" : "Dimmer actuator",
+    "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
+    "chType_VIRTUAL_DUAL_WHITE_COLOR" : "Colour channel",
     "chType_WEATHER_RECEIVER" : "Connection partner<br/>temperature sensor",
     "chType_WEATHER_TRANSMIT" : "Connection partner<br/>temperature sensor",
     "chType_WEEK_PROGRAM" : "Connection partner week program",
@@ -66,3 +71,5 @@ jQuery.extend(true,langJSON, {
     "theEnd" : ""
   }
 });
+
+

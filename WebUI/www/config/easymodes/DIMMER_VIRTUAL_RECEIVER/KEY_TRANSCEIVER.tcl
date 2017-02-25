@@ -54,8 +54,8 @@ set PROFILE_1(LONG_OFFDELAY_STEP) 0.050000
 set PROFILE_1(LONG_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(LONG_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_1(LONG_OFF_LEVEL) 0.000000
-set PROFILE_1(LONG_OFF_TIME_BASE) {0 range 0 - 7}
-set PROFILE_1(LONG_OFF_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_1(LONG_OFF_TIME_BASE) {7 range 0 - 7}
+set PROFILE_1(LONG_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(LONG_OFF_TIME_MODE) 0
 set PROFILE_1(LONG_ONDELAY_MODE) 0
 set PROFILE_1(LONG_ONDELAY_TIME_BASE) {0 range 0 - 7}
@@ -96,8 +96,8 @@ set PROFILE_1(SHORT_OFFDELAY_STEP) 0.050000
 set PROFILE_1(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_1(SHORT_OFF_LEVEL) 0.000000
-set PROFILE_1(SHORT_OFF_TIME_BASE) {0 range 0 - 7}
-set PROFILE_1(SHORT_OFF_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_1(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
+set PROFILE_1(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_OFF_TIME_MODE) 0
 set PROFILE_1(SHORT_ONDELAY_MODE) 0
 set PROFILE_1(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
@@ -485,7 +485,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
 
   option DIM_OFFLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DIM_MIN_LEVEL|LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

@@ -437,22 +437,22 @@ background-color:#${colors[x]};
     pb += GetCurrentDiagram();
     pb += '}';
     var opt = {
-        postBody: pb,
-        onComplete: function(t){
-			jQuery("#messageBoxDiagram").remove();
-			var response = JSON.parse(t.responseText);
-			if(!response.isSuccessful)
-			{
-				if(response.errorCode == "42")
-				{
-					jQuery("#content").html(response.content);
-				} else {
-					alert(translateKey('diagramErrorCouldNotSave'));
-				}
-			} else {			
-        		ReturnToListWithoutSave();
-			}
+      postBody: pb,
+      onComplete: function(t){
+        jQuery("#messageBoxDiagram").remove();
+        var response = JSON.parse(t.responseText);
+        if(!response.isSuccessful)
+        {
+          if(response.errorCode == "42")
+          {
+            jQuery("#content").html(response.content);
+          } else {
+            alert(translateKey('diagramErrorCouldNotSave'));
+          }
+        } else {
+          ReturnToListWithoutSave();
         }
+      }
     }
 	new Ajax.Request(url,opt);
   };

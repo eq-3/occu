@@ -164,6 +164,8 @@ proc cmd_ShowConfigPendingMsg {} {
   ise_getChannelNames ise_CHANNELNAMES
 
   set HmIPIdentifier "HmIP-RF"
+  set HmIPGroupID "HM-CC-VG"
+  set VirtualDevicesID "VirtualDevices"
 
   set iface            ""
   set sender_address   ""
@@ -240,7 +242,10 @@ proc cmd_ShowConfigPendingMsg {} {
 
   #puts "<script type=\"text/javascript\">if (ProgressBar) ProgressBar.IncCounter(\"ConfigPending-PopUp wird angezeigt.\");</script>"
   puts "<script type=\"text/javascript\">"
-  if {$iface != "VirtualDevices"} {
+  if {$iface == $VirtualDevicesID && (([string range $receiver_type 0 7] == $HmIPGroupID) || ([string range $receiver_type 0 7] == $HmIPGroupID)) } {
+    puts "var data = '{ \"virtualDeviceSerialNumber\" : \"$sender_address\" }';"
+    puts "CreateCPPopup(\"/pages/jpages/group/configureDevices\", data);"
+  } else {
     puts "try \{"
     puts "  ConfigPendingFrm.ResetTable();"
     puts "\} catch (e) \{"
@@ -258,12 +263,9 @@ proc cmd_ShowConfigPendingMsg {} {
     } else {
       puts "ConfigPendingFrm.SetDevice('$iface', '$receiver_address', ConfigPendingFrm.CONFIGPENDING_RECEIVER);"
     }
-
     puts "ConfigPendingFrm.setReturnURL('$sidname', '$sid', '$redirect_url', $go_back);"
     puts "ConfigPendingFrm.show();"
-  } else {
-      puts "var data = '{ \"virtualDeviceSerialNumber\" : \"$sender_address\" }';"
-      puts "CreateCPPopup(\"/pages/jpages/group/configureDevices\", data);"
+
   }
   puts "</script>"
 }
