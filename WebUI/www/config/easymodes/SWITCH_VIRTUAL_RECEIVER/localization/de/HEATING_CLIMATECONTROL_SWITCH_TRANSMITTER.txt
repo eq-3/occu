@@ -3,3 +3,4 @@
 "description_3" : "<span class=\"translated\">Je nach Einstellung des Sensors (Heizen/K&uuml;hlen) wird bei Unter-/&Uuml;schreiten der gew&auml;hlten Temperatur der Schalter ein- bzw. ausgeschaltet.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit ein- oder ausgeschaltet (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
 
+"attentionToggle" : "HINWEIS:<br/>Wenn der Thermostat als Zweipunktregler verwendet werden soll, muss das Profil Schalter Ein/Aus verwendet werden.<br/><br/>",

@@ -224,7 +224,7 @@ function ::CreateVIR-LGRGBWColorControl() {
 
  WriteLine("<script type='text/javascript'>");
    ! WriteLine(" jQuery('#colorPicker"+chnId#"').spectrum({id: 'rgbwBtnColor"#chnId#"', color:'rgb(255,255,255)', preferredFormat: 'rgb', showPalette: true, palette: ['white'],cancelText: translateKey('btnCancel'),chooseText: translateKey('btnOk')}) ");
-   WriteLine(" jQuery('#colorPicker"+chnId#"').spectrum({id: 'rgbwBtnColor"#chnId#"', color:'"#rgbValue#"', preferredFormat: 'rgb', showPalette: true, palette: ['white'],cancelText: translateKey('btnCancel'),chooseText: translateKey('btnOk')}) ");
+   WriteLine(" jQuery('#colorPicker"+chnId#"').spectrum({id: 'rgbwBtnColor"#chnId#"', color:'"#rgbValue#"', preferredFormat: 'rgb', showPalette: true, showInput: true, palette: ['white'],cancelText: translateKey('btnCancel'),chooseText: translateKey('btnOk')}) ");
 
    WriteLine("var opts = {};");
    WriteLine("opts.Type = 'RGBW';");

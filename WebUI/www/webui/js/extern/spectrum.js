@@ -121,7 +121,14 @@
                         "<div class='sp-alpha'><div class='sp-alpha-inner'><div class='sp-alpha-handle'></div></div></div>",
                     "</div>",
                     "<div class='sp-input-container sp-cf'>",
-                        "<input class='sp-input' type='text' spellcheck='false'  />",
+                        "<input id='sp-input' class='sp-input hidden' type='text' spellcheck='false'  />",
+
+                        "<table align='left'>",
+                          "<tr><td><div>${statusDisplayOptionRed}</div></td><td><input id='inputRed' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
+                          "<tr><td><div>${statusDisplayOptionGreen}</div></td><td><input id='inputGreen' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
+                          "<tr><td><div>${statusDisplayOptionBlue}</div></td><td><input id='inputBlue' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
+                        "</table>",
+
                     "</div>",
                     "<div class='sp-initial sp-thumb sp-cf'></div>",
                     "<div class='sp-button-container sp-cf'>",
@@ -221,7 +228,11 @@
             alphaSliderInner = container.find(".sp-alpha-inner"),
             alphaSlider = container.find(".sp-alpha"),
             alphaSlideHelper = container.find(".sp-alpha-handle"),
-            textInput = container.find(".sp-input"),
+            //textInput = container.find(".sp-input"),
+            textInput = container.find("#sp-input"),
+            inputRed = container.find("#inputRed"),
+            inputGreen = container.find("#inputGreen"),
+            inputBlue = container.find("#inputBlue"),
             paletteContainer = container.find(".sp-palette"),
             initialColorContainer = container.find(".sp-initial"),
             cancelButton = container.find(".sp-cancel"),
@@ -332,6 +343,11 @@
                 setTimeout(setFromTextInput, 1);
             });
             textInput.keydown(function (e) { if (e.keyCode == 13) { setFromTextInput(); } });
+
+            inputRed.change(function() {setTextInput();}).keydown(function (e) { if (e.keyCode == 13) { inputGreen.focus().select(); }});
+            inputGreen.change(function() {setTextInput();}).keydown(function (e) { if (e.keyCode == 13) { inputBlue.focus().select(); }});
+            inputBlue.change(function() {setTextInput();}).keydown(function (e) { if (e.keyCode == 13) { inputRed.focus().select(); } });
+
 
             cancelButton.text(opts.cancelText);
             cancelButton.bind("click.spectrum", function (e) {
@@ -487,6 +503,8 @@
             if (opts.id != null) {
               chooseButton.prop("id", opts.id);
             }
+
+            translatePage(".sp-input-container");
         }
 
         function updateSelectionPaletteFromStorage() {
@@ -586,6 +604,23 @@
             container.removeClass(draggingClass);
             updateOriginalInput(true);
             boundElement.trigger('dragstop.spectrum', [ get() ]);
+        }
+
+        function isSingleRGBValueValid(val) {
+         return (val >= 0 || val <= 255) ? val : 255;
+        }
+
+        function setTextInput() {
+          var red = parseInt(inputRed.val()) ,
+            green = parseInt(inputGreen.val()),
+            blue = parseInt(inputBlue.val());
+
+          red = isSingleRGBValueValid(red);
+          green = isSingleRGBValueValid(green);
+          blue = isSingleRGBValueValid(blue);
+
+          textInput.val("rgb(" + red + ", " + green + ", " + blue + ")");
+          setFromTextInput();
         }
 
         function setFromTextInput() {
@@ -833,6 +868,7 @@
             // Update the text entry input as it changes happen
             if (opts.showInput) {
                 textInput.val(displayColor);
+                initRGBValues(displayColor);
             }
 
             if (opts.showPalette) {
@@ -840,6 +876,13 @@
             }
 
             drawInitial();
+        }
+
+        function initRGBValues(displayColor) {
+          var oRGBVal = displayColor.replace("rgb(", "").replace(")","").split(",");
+          inputRed.val(oRGBVal[0]);
+          inputGreen.val(oRGBVal[1]);
+          inputBlue.val(oRGBVal[2]);
         }
 
         function updateHelperLocations() {

@@ -13,16 +13,26 @@
   loopCounter = 0,
   maxPollNumber = 20;
 
-  showBargraphAnimation = function() {
-    jQuery("#animBargraph").show();
+  showBargraphAnimation = function(mode) {
+      var bargraphID = "animBargraph"+mode;
+      jQuery("#" + bargraphID).show();
   };
 
   hideBargraphAnimation = function() {
-    jQuery("#animBargraph").hide();
+    jQuery(".j_animBargraph").hide();
+
   };
+
+  showEnterIPAddress = function() {
+    jQuery("[name='enterIPForGateway']").show();
+  }
 
   showGatewayIPAddress = function(ip) {
     jQuery("#gateWayIP").val(ip);
+
+    if (!isIPv4AddressValid(ip)) {
+      showEnterIPAddress();
+    }
   }
 
   stopPolling = function() {
@@ -45,7 +55,7 @@
       deviceScanning = true;
       loopCounter = 0;
 
-      showBargraphAnimation();
+      showBargraphAnimation(0);
 
       conInfo("scanGateway activated");
 
@@ -58,6 +68,55 @@
         postBody: pb,
         onComplete: function(t) {
           conInfo("scanGateway complete");
+          poll4GatewayIP();
+        }
+      };
+      ShowWaitAnim();
+      HideWaitAnimAutomatically(60);
+      new Ajax.Request(url,opt);
+    }
+  };
+
+  addLightifyGatewayByIP = function() {
+    if (!scanActive) {
+      var ipA = jQuery("#ipA").val(),
+      ipB = jQuery("#ipB").val(),
+      ipC = jQuery("#ipC").val(),
+      ipD = jQuery("#ipD").val();
+
+      var ipAddress = ipA+"."+ipB+"."+ipC+"."+ipD
+
+      if (! isIPv4AddressValid(ipAddress)) {
+        alert(translateKey("invalidIP"));
+      } else {
+        addLightifyGateway(ipAddress);
+      }
+    }
+  };
+
+
+  addLightifyGateway = function(ip) {
+    if (!scanActive) {
+      var data = new Object();
+      var ip = ip;
+
+      scanActive = true;
+      deviceScanning = true;
+      loopCounter = 0;
+
+      showBargraphAnimation(1);
+
+      conInfo("scanGateway activated");
+
+      data.gateWayIP = ip;
+
+      var url = '/pages/jpages/system/Coupling/addLightifyGateway?sid='+SessionId;
+      var pb = JSON.stringify(data);
+      var opt =
+      {
+        postBody: pb,
+        onComplete: function(t) {
+          conInfo("addGateway complete");
           poll4GatewayIP();
         }
       };
@@ -160,7 +219,10 @@
           if (mode == poll4GatewayIP) {
             stopPolling();
             alert(alertMsg);
+            showEnterIPAddress();
           }
+        } else {
+          showEnterIPAddress();
         }
 
       }
@@ -168,16 +230,24 @@
     new Ajax.Request(url,opt);
   };
 
+
+  isValidEntry = function(elm) {
+    var value = parseInt(elm.value);
+    if (isNaN(value) || (value < 0) || (value > 255))  {
+      elm.value = "1";
+    }
+  };
+
   dlgPopup.readaptSize();
   translatePage('#messagebox');
-  translateButtons("actionStatusControlLblStart");
+  translateButtons("actionStatusControlLblStart, btnOk");
 </script>
 
 <div class="popupTitle">${"$"}{couplingDialogTitle}</div>
 <div class="CLASS21114 j_translate">
 	<table class="popupTable" border=1 width="100%">
 		<tr class="CLASS21115">
-			<td class="CLASS21116" width="125px">
+			<td class="CLASS21116" style="background-color:white;" width="125px">
 			  <table>
 
 			    <tr>
@@ -197,17 +267,39 @@
 
 			    <tr>
 			      <td>${"$"}{btnScanGateway}</td>
-			      <td><input type="button" style="width:100%" name="actionStatusControlLblStart" onclick="scanGateway();"></td>
+			      <td colspan="4"><input type="button" style="width:100%" name="actionStatusControlLblStart" onclick="scanGateway();"></td>
 			    </tr>
 
 			    <tr>
-			      <td>${"$"}{enterIPAddress}</td>
-			      <td><input id="gateWayIP" type="text" size="20"  style="text-align: center" disabled></td>
+			      <td>${"$"}{lblIPAddress}</td>
+			      <td colspan="4"><input id="gateWayIP" type="text" size="20"  style="text-align: center; width:96%" disabled></td>
 			    </tr>
 
- 			    <tr id="animBargraph" class="hidden">
+ 			    <tr id="animBargraph0" class="hidden j_animBargraph">
  			      <td></td>
- 			      <td><img src="/ise/img/anim_bargraph.gif" alt="" style="width:100%; height:25px; margin-top:15px;"></td></tr>
+ 			      <td colspan="5"><img src="/ise/img/anim_bargraph.gif" alt="" style="width:100%; height:25px; margin-top:15px;"></td>
+ 			    </tr>
+
+          <tr name="enterIPForGateway" class="hidden"><td colspan="5"><hr></td></tr>
+
+          <tr name="enterIPForGateway" class="hidden">
+            <td>${"$"}{enterIPAddress}</td>
+            <td><input id="ipA" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+            <td><input id="ipB" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+            <td><input id="ipC" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+            <td><input id="ipD" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+          </tr>
+
+			    <tr name="enterIPForGateway" class="hidden">
+			      <td></td>
+			      <td style="text-align:center" colspan="4"><input type="button" style="width:100%" name="btnOk" onclick="addLightifyGatewayByIP();"></td>
+			    </tr>
+
+ 			    <tr id="animBargraph1" class="hidden j_animBargraph">
+ 			      <td></td>
+ 			      <td colspan="5"><img src="/ise/img/anim_bargraph.gif" alt="" style="width:100%; height:25px; margin-top:15px;"></td>
+ 			    </tr>
+
 			  </table>
 			</td>
 			<td align="center">

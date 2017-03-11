@@ -1220,6 +1220,8 @@ proc getAccelerationTransceiver {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  set operationMode $ps(CHANNEL_OPERATION_MODE)
+
   set html ""
 
   append html "<tr>"
@@ -1248,19 +1250,31 @@ proc getAccelerationTransceiver {chn p descr} {
     array_clear options
     # not in use for HmIP-SAM set options(0) "\${motionDetectorChannelOperationModeOff}"
     set options(1) "\${motionDetectorChannelOperationModeAnyMotion}"
-    set options(3) "\${motionDetectorChannelOperationModeFlat}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    set options(2) "\${motionDetectorChannelOperationModeFlat}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn onchange=\"changeParamDescription(this.value)\"]</td>"
+
+    append html "<script type=\"text/javascript\">"
+      append html "changeParamDescription = function(value) {"
+        append html "jQuery(\"\[name='motion'\]\").html(translateKey(\"motionDetectorOptionMotion_\"+value));"
+        append html "jQuery(\"\[name='noMotion'\]\").html(translateKey(\"motionDetectorOptionNoMotion_\"+value));"
+        append html "jQuery(\"\[name='messageMovement'\]\").html(translateKey(\"motionDetectorMessageMovement_\"+value));"
+        append html "jQuery(\"\[name='messageNoMovement'\]\").html(translateKey(\"motionDetectorMessageNoMovement_\"+value));"
+        append html "jQuery(\"\[name='NotiMovement'\]\").html(translateKey(\"motionDetectorNotificationMovement_\"+value));"
+        append html "jQuery(\"\[name='NotiNoMovement'\]\").html(translateKey(\"motionDetectorNotificationNoMovement_\"+value));"
+      append html "};"
+    append html "</script>"
+
   append html "</tr>"
 
-set comment {
-  # For the HmIP-SAM this parameter is alway 1 and not changeable
-  incr prn
-  set param EVENT_FILTER_NUMBER
-  append html "<tr>"
-    append html "<td>\${stringTableEventFilterNumber}</td>"
-   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
-}
+  set comment {
+    # For the HmIP-SAM this parameter is alway 1 and not changeable
+    incr prn
+    set param EVENT_FILTER_NUMBER
+    append html "<tr>"
+      append html "<td>\${stringTableEventFilterNumber}</td>"
+     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
   incr prn
   set param EVENT_FILTER_PERIOD
   append html "<tr>"
@@ -1271,44 +1285,29 @@ set comment {
   incr prn
   set param MSG_FOR_POS_A
   append html "<tr>"
-    append html "<td>\${motionDetectorMessageMovement}</td>"
+    append html "<td>\${motionDetectorMessageMovement_$operationMode}</td>"
     array_clear options
     set options(0) "\${motionDetectorOptionNoMessage}"
-    set options(1) "\${motionDetectorOptionNoMotion}"
-    set options(2) "\${motionDetectorOptionMotion}"
+    set options(1) "\${motionDetectorOptionNoMotion_$operationMode}"
+    set options(2) "\${motionDetectorOptionMotion_$operationMode}"
     append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
   append html "</tr>"
 
   incr prn
   set param MSG_FOR_POS_B
   append html "<tr>"
-    append html "<td>\${motionDetectorMessageNoMovement}</td>"
+    append html "<td>\${motionDetectorMessageNoMovement_$operationMode}</td>"
     array_clear options
     set options(0) "\${motionDetectorOptionNoMessage}"
-    set options(1) "\${motionDetectorOptionNoMotion}"
-    set options(2) "\${motionDetectorOptionMotion}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
-
-  incr prn
-  set param NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW
-  append html "<tr>"
-    append html "<td>\${motionDetectorNotificationNoMovement}</td>"
-    array_clear options
-    set options(0) "\${stringTableSoundNoSound}"
-    set options(1) "\${stringTableSoundShort}"
-    set options(2) "\${stringTableSoundShortShort}"
-    set options(3) "\${stringTableSoundLong}"
-    set options(4) "\${stringTableSoundLongShort}"
-    set options(5) "\${stringTableSoundLongLong}"
-    set options(6) "\${stringTableSoundLongShortShort}"
+    set options(1) "\${motionDetectorOptionNoMotion_$operationMode}"
+    set options(2) "\${motionDetectorOptionMotion_$operationMode}"
     append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
   append html "</tr>"
 
   incr prn
   set param NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH
   append html "<tr>"
-    append html "<td>\${motionDetectorNotificationMovement}</td>"
+    append html "<td>\${motionDetectorNotificationMovement_$operationMode}</td>"
     array_clear options
     set options(0) "\${stringTableSoundNoSound}"
     set options(1) "\${stringTableSoundShort}"
@@ -1320,19 +1319,34 @@ set comment {
     append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
   append html "</tr>"
 
-    incr prn
-    set param SENSOR_SENSITIVITY
-    append html "<tr>"
-      append html "<td>\${motionDetectorSensorSensivity}</td>"
-      array_clear options
-      set options(0) "\${motionDetectorSensorRange16G}"
-      set options(1) "\${motionDetectorSensorRange8G}"
-      set options(2) "\${motionDetectorSensorRange4G}"
-      set options(3) "\${motionDetectorSensorRange2G}"
-      set options(4) "\${motionDetectorSensorRange2GPlusSens}"
-      set options(5) "\${motionDetectorSensorRange2G2PlusSense}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
+  incr prn
+  set param NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW
+  append html "<tr>"
+    append html "<td>\${motionDetectorNotificationNoMovement_$operationMode}</td>"
+    array_clear options
+    set options(0) "\${stringTableSoundNoSound}"
+    set options(1) "\${stringTableSoundShort}"
+    set options(2) "\${stringTableSoundShortShort}"
+    set options(3) "\${stringTableSoundLong}"
+    set options(4) "\${stringTableSoundLongShort}"
+    set options(5) "\${stringTableSoundLongLong}"
+    set options(6) "\${stringTableSoundLongShortShort}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
+
+  incr prn
+  set param SENSOR_SENSITIVITY
+  append html "<tr>"
+    append html "<td>\${motionDetectorSensorSensivity}</td>"
+    array_clear options
+    set options(0) "\${motionDetectorSensorRange16G}"
+    set options(1) "\${motionDetectorSensorRange8G}"
+    set options(2) "\${motionDetectorSensorRange4G}"
+    set options(3) "\${motionDetectorSensorRange2G}"
+    set options(4) "\${motionDetectorSensorRange2GPlusSens}"
+    set options(5) "\${motionDetectorSensorRange2G2PlusSense}"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html "</tr>"
 
   incr prn
   set param TRIGGER_ANGLE

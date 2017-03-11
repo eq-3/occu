@@ -3,6 +3,8 @@ ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE	${stringTableAccelerationTransce
 ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=OFF	${stringTableAccelerationTransceiverChannelOperationModeOff}
 ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=ANY_MOTION	${stringTableAccelerationTransceiverChannelOperationModeAnyMotion}
 ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=FLAT_DECT	${stringTableAccelerationTransceiverChannelOperationModeFlat}
+ACCELERATION_TRANSCEIVER|MOTION=FALSE	${stringTableAccelerationTransceiverMotionDetectorMotionFalse}
+ACCELERATION_TRANSCEIVER|MOTION=TRUE	${stringTableAccelerationTransceiverMotionDetectorMotionTrue}
 ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A	${stringTableTiltSensorMsgPosA0}
 ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A=CLOSED	${stringTableTiltSensorMsgPosA1}
 ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A=NO_MSG	${stringTableTiltSensorMsgPosA2}
@@ -905,6 +907,8 @@ SABOTAGE|SHAKING	${stringTableSabotageContact}
 SECTION	${stringTableSection}
 SENSOR=FALSE	${stringTableSensorFalse}
 SENSOR=TRUE	${stringTableSensorTrue}
+SENSOR_ERROR=FALSE	${stringTableSensorErrorFalse}
+SENSOR_ERROR=TRUE	${stringTableSensorErrorTrue}
 SENSOR_FOR_CARBON_DIOXIDE	${stringTableSensorCO2Title}
 SENSOR_FOR_CARBON_DIOXIDE|EVENT_FILTERTIME	${stringTableSensorCO2EventFilterTime}
 SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_A	${stringTableSensorCO2MsgPosA0}

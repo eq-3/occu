@@ -89,6 +89,15 @@ proc session_login { username password } {
 # @return [bool] true, falls die Session-Id gültig ist
 ##
 proc session_isValid { sid } {
+
+  if {
+    ([string index $sid 0] != "@")
+    || ([string index $sid [expr [string length $sid] -1]]  != "@")
+    || ([string length $sid] != 12)} {
+
+   return false
+  }
+
   set    script "var _session_id_ = \"$sid\";"
   append script {
     var result = false;

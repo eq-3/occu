@@ -73,6 +73,7 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeVALVE_STATE": "Valve condition",
     "diagramValueTypeFILLING_LEVEL": "Filling level",
     "diagramValueTypeLEVEL": "Valve opening",
+    "diagramValueTypeAIR_PRESSURE" : "Air pressure",
     "diagramColorFF0000": "Red",
     "diagramColor00FF00": "Green",
     "diagramColor0000FF": "Blue",

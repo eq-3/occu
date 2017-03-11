@@ -3137,6 +3137,8 @@ elvST['ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE'] = '${stringTableAcceler
 elvST['ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=OFF'] = '${stringTableAccelerationTransceiverChannelOperationModeOff}';
 elvST['ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=ANY_MOTION'] = '${stringTableAccelerationTransceiverChannelOperationModeAnyMotion}';
 elvST['ACCELERATION_TRANSCEIVER|CHANNEL_OPERATION_MODE=FLAT_DECT'] = '${stringTableAccelerationTransceiverChannelOperationModeFlat}';
+elvST['ACCELERATION_TRANSCEIVER|MOTION=FALSE'] = '${stringTableAccelerationTransceiverMotionDetectorMotionFalse}';
+elvST['ACCELERATION_TRANSCEIVER|MOTION=TRUE'] = '${stringTableAccelerationTransceiverMotionDetectorMotionTrue}';
 elvST['ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A'] = '${stringTableTiltSensorMsgPosA0}';
 elvST['ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A=CLOSED'] = '${stringTableTiltSensorMsgPosA1}';
 elvST['ACCELERATION_TRANSCEIVER|MSG_FOR_POS_A=NO_MSG'] = '${stringTableTiltSensorMsgPosA2}';
@@ -4031,6 +4033,8 @@ elvST['SABOTAGE|SHAKING'] = '${stringTableSabotageContact}';
 elvST['SECTION'] = '${stringTableSection}';
 elvST['SENSOR=FALSE'] = '${stringTableSensorFalse}';
 elvST['SENSOR=TRUE'] = '${stringTableSensorTrue}';
+elvST['SENSOR_ERROR=FALSE'] = '${stringTableSensorErrorFalse}';
+elvST['SENSOR_ERROR=TRUE'] = '${stringTableSensorErrorTrue}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE'] = '${stringTableSensorCO2Title}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|EVENT_FILTERTIME'] = '${stringTableSensorCO2EventFilterTime}';
 elvST['SENSOR_FOR_CARBON_DIOXIDE|MSG_FOR_POS_A'] = '${stringTableSensorCO2MsgPosA0}';
@@ -13192,7 +13196,7 @@ VIR_LG_RGBWControllerDialog = Class.create({
 
     jQuery("#colorRGBControllerColor").spectrum({
       preferredFormat: 'rgb',
-      showInput: false,
+      showInput: true,
       color: this.curValue,
       showPalette: true,
       palette: ['white'],
@@ -20319,6 +20323,7 @@ iseMessageBox.prototype =
     this.title = "";
     this.pb = "";
     this.file = "";
+    this.draggable = true;
 
     if(secondary)
     {
@@ -20437,6 +20442,7 @@ iseMessageBox.prototype =
         this.addToPostBody( 'integer iSecondary = '+(this.secondary?"1":"0")+';' );
         this.setWidth(1000);
         this.setFile( "/pages/msg/sysVarsSelection.htm" );
+        this.draggable = false; // Scroll bar not working otherwise
         break;
       case ID_PROGRAM_CHOOSER:
         this.setTitle( translateKey("dialogCreateFavChooseProg") /*"Favoritenerstellung - Programmauswahl" */);
@@ -20506,6 +20512,11 @@ iseMessageBox.prototype =
         throw new Error("unknown id (" + this.id + ")");
         break;
     }
+
+    if (this.draggable) {
+      jQuery("#messagebox").draggable();
+    }
+
   },
   buildPostBody: function()
   {
@@ -20608,8 +20619,8 @@ iseMessageBox.prototype =
         newDiv.setAttributeNode(newDivStyle);
       
       $('centerbox').appendChild(newDiv);
-      jQuery("#messagebox").draggable();
-    }  
+
+    }
   },
   removeMessagebox: function()
   {
@@ -33954,7 +33965,7 @@ CreateCPPopup2 = function(src, pb) {
   };
   
   dlgPopup2.ShowPopup();
-  new Draggable("messagebox");
+  //new Draggable("messagebox");
 };
 
 cp_adddev_updater=null;

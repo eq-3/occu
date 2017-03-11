@@ -552,6 +552,8 @@ jQuery.extend(true,langJSON, {
     "stringTableMotionDetectorMotionDetectionActiveTrue" :  "Bewegungsmelder aktiv",
     "stringTableMotionDetectorMotionFalse" : "keine Bewegung",
     "stringTableMotionDetectorMotionTrue" : "Bewegung erkannt",
+    "stringTableAccelerationTransceiverMotionDetectorMotionFalse" : "keine Bewegung/waagerecht",
+    "stringTableAccelerationTransceiverMotionDetectorMotionTrue" : "Bewegung erkannt/senkrecht",
     "stringTableMotionDetectorTitle" : "Bewegungsmelder",
     "stringTableNotUsed" : "Nicht benutzt",
     "stringTableOffDelay" : "Ausschaltverz%F6gerung",
@@ -911,6 +913,9 @@ jQuery.extend(true,langJSON, {
     "stringTableWindowState" : "Fensterstatus",
     "stringTableWindowStateClosed" : "Fenster geschlossen",
     "stringTableWindowStateOpen" : "Fenster ge%F6ffnet",
-    "stringTableWindowSwitchReceiver" : "Heizk%F6rperthermostat"
+    "stringTableWindowSwitchReceiver" : "Heizk%F6rperthermostat",
+    "stringTableSensorErrorFalse" : "Sensor OK",
+    "stringTableSensorErrorTrue" : "Sensor gest&ouml;rt"
+
   }
 });

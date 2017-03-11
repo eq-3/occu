@@ -74,6 +74,7 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeVALVE_STATE": "Ventilzustand",
     "diagramValueTypeFILLING_LEVEL": "F%FCllstand",
     "diagramValueTypeLEVEL": "Ventil-%D6ffnungsgrad",
+    "diagramValueTypeAIR_PRESSURE" : "Luftdruck",
     "diagramColorFF0000": "Rot",
     "diagramColor00FF00": "Gr%FCn",
     "diagramColor0000FF": "Blau",

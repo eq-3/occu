@@ -73,6 +73,7 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeVALVE_STATE": "Valf durumu",
     "diagramValueTypeFILLING_LEVEL" : "Dolum seviyesi",
     "diagramValueTypeLEVEL": "Valve opening",
+    "diagramValueTypeAIR_PRESSURE" : "Air pressure",
     "diagramColorFF0000": "Kirmizi",
     "diagramColor00FF00": "Yesil",
     "diagramColor0000FF": "Mavi",

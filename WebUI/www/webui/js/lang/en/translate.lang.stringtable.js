@@ -552,6 +552,8 @@ jQuery.extend(true,langJSON, {
     "stringTableMotionDetectorMotionDetectionActiveTrue" :  "Motion detector active",
     "stringTableMotionDetectorMotionFalse" : "no motion",
     "stringTableMotionDetectorMotionTrue" : "motion detected",
+    "stringTableAccelerationTransceiverMotionDetectorMotionFalse" : "no motion/horizontal",
+    "stringTableAccelerationTransceiverMotionDetectorMotionTrue" : "motion detected/vertical",
     "stringTableMotionDetectorTitle" : "Motion detector",
     "stringTableNotUsed" : "Unused",
     "stringTableOffDelay" : "Switch off delay",
@@ -911,6 +913,8 @@ jQuery.extend(true,langJSON, {
     "stringTableWindowState" : "Window status",
     "stringTableWindowStateClosed" : "Window closed",
     "stringTableWindowStateOpen" : "Window opened",
-    "stringTableWindowSwitchReceiver" : "Radiator thermostat"
+    "stringTableWindowSwitchReceiver" : "Radiator thermostat",
+    "stringTableSensorErrorFalse" : "Sensor OK",
+    "stringTableSensorErrorTrue" : "Sensor disturbed"
   }
 });

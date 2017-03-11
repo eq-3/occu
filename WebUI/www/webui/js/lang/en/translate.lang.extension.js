@@ -891,7 +891,9 @@ jQuery.extend(true, langJSON, {
     "dlgEnterMeterReadingsTitle" :  "Configuration of CCU energy meter",
     "btnSysConfCoupling" :  "Connections<br/>(e.g. OSRAM lightify)",
     "couplingDialogTitle" : "Dialogue connections",
-    "enterIPAddress" :  "IP address",
+    "lblIPAddress" :  "IP address",
+    "enterIPAddress" :  "Manual IP input",
+    "invalidIP" : "Invalid IP adress",
     "btnScanGateway" :  "Search gateway",
     "btnScanDevices" :  "Search devices",
     "helpOsramLightifyToolTip" :

@@ -13,6 +13,7 @@
   string osram_rgb_controller = "VIR-LG-RGB-DIM";
   string osram_rgbw_controller = "VIR-LG-RGBW-DIM";
   string osram_white_controller = "VIR-LG-WHITE-DIM";
+  string osram_group_controller = "VIR-LG-GROUP";
 
   string excludePARTY = "PARTY_";
   string includePARTY = "PARTY_MODE_SUBMIT";
@@ -414,13 +415,14 @@
             integer rgbw_controller = chLabel.Find(hm_rgbw_controller);
             integer osram_rgb = chLabel.Find(osram_rgb_controller);
             integer osram_rgbw = chLabel.Find(osram_rgbw_controller);
+            integer osram_group = chLabel.Find(osram_group_controller);
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
 
             if ((statusDisplayDevice != -1)
               || (statusDisplayEPaperDevice != -1)
               || (rgbw_controller != -1)
               || ((jalousieActor != - 1) && (oDP.HSSID().Find("LEVEL_COMBINED") != -1))
-              || (((osram_rgb != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((osram_rgbw != - 1) && (oDP.HSSID().Find("RGBW") != -1)))
+              || (((osram_rgb != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((osram_rgbw != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || ((osram_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)))
               ) {
               if (statusDisplayDevice != -1) {
                 if(iV == "0") {
@@ -471,7 +473,7 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGB\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
-              if ((osram_rgbw != -1) && (oDP.HSSID().Find("RGBW") != -1)) {
+              if (((osram_rgbw != -1) || (osram_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
                 if(iV.Find("rgb") == -1) {
                   iV = "rgb(255, 255, 255, 255)";
                 }
@@ -492,6 +494,7 @@
               && (jalousieActor == -1)
               && (osram_rgb == -1)
               && (osram_rgbw == -1)
+              && (osram_group == -1)
               ) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
@@ -522,7 +525,7 @@
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGB\');"><img src="/ise/img/notepad.png" /></span>' );
               }
 
-              if ((osram_rgbw != -1) && (oDP.HSSID().Find("RGBW") != -1)) {
+              if (((osram_rgbw != -1) || (osram_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGBW\');"><img src="/ise/img/notepad.png" /></span>' );
               }
             }

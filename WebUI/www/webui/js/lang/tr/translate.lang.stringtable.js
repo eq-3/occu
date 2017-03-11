@@ -553,6 +553,8 @@ jQuery.extend(true, langJSON, {
     "stringTableMotionDetectorMotionDetectionActiveTrue" :  "Motion detector active",
     "stringTableMotionDetectorMotionFalse": "hareket yok",
     "stringTableMotionDetectorMotionTrue": "hareket algilandi",
+    "stringTableAccelerationTransceiverMotionDetectorMotionFalse" : "no motion/horizontal",
+    "stringTableAccelerationTransceiverMotionDetectorMotionTrue" : "motion detected/vertical",
     "stringTableMotionDetectorTitle": "Hareket alarmi",
     "stringTableNotUsed": "Kullanilmiyor",
     "stringTableOffDelay" : "Switch off delay",
@@ -911,6 +913,8 @@ jQuery.extend(true, langJSON, {
     "stringTableWindowState" : "Window status",
     "stringTableWindowStateClosed" : "Window closed",
     "stringTableWindowStateOpen" : "Window opened",
-    "stringTableWindowSwitchReceiver": "Radyat%F6r termostati"
+    "stringTableWindowSwitchReceiver": "Radyat%F6r termostati",
+    "stringTableSensorErrorFalse" : "Sensor OK",
+    "stringTableSensorErrorTrue" : "Sensor disturbed"
   }
 });

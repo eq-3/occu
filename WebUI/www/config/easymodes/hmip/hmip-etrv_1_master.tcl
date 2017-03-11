@@ -281,7 +281,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     incr prn
     set param TEMPERATURE_WINDOW_OPEN
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
-    append HTML_PARAMS(separate_1)  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
+    append HTML_PARAMS(separate_1)  "<td colspan=\"2\">[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
     append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1);isEcoLTComfort(this.name);});"
     append HTML_PARAMS(separate_1) "</script>"
@@ -319,9 +319,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr prn
       append HTML_PARAMS(separate_1) "<tr name=\"expertParam\" class=\"hidden\">"
         append HTML_PARAMS(separate_1) "<td>\${stringTableDuration5Min}</td>"
-        append HTML_PARAMS(separate_1) "<td colspan=\"2\" name=\"expertParam\" class=\"hidden\">[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;x&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param][getHelpIcon $param 500 200]</td>"
+        append HTML_PARAMS(separate_1) "<td colspan=\"2\" name=\"expertParam\" class=\"hidden\"><input id=\"paramDuration5Min_$prn\" type=\"text\" value=\"[expr $ps($param) / 5]\" size=5 /><div class=\"hidden\">[_getTextField $CHANNEL $param $ps($param) $prn]</div>&nbsp;x&nbsp;[_getUnit $param]&nbsp;(0 - 144)[getHelpIcon $param 500 200]</td>"
         append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-          append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1)});"
+          append HTML_PARAMS(separate_1) "jQuery(\"#paramDuration5Min\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, 0, 144, 1);jQuery(\"#separate_$CHANNEL\_$prn\").val(parseInt(this.value) * 5);});"
         append HTML_PARAMS(separate_1) "</script>"
       append HTML_PARAMS(separate_1) "</tr>"
     }
