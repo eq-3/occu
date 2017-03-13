@@ -27,11 +27,17 @@
     jQuery("[name='enterIPForGateway']").show();
   }
 
+  hideEnterIPAddress = function() {
+    jQuery("[name='enterIPForGateway']").hide();
+  }
+
   showGatewayIPAddress = function(ip) {
     jQuery("#gateWayIP").val(ip);
 
     if (!isIPv4AddressValid(ip)) {
       showEnterIPAddress();
+    } else {
+      hideEnterIPAddress();
     }
   }
 
@@ -205,7 +211,6 @@
         } catch (e) {}
 
         if (isIPv4AddressValid(ipAddress)) {
-
           if (mode == poll4GatewayIP) {
             // Adds all known devices of the gateway
             addNewDevices();

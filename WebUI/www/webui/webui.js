@@ -4174,6 +4174,7 @@ elvST['SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=NO_ERROR'] = '${stringTableSmokeDetect
 elvST['SMOKE_DETECTOR|REPEAT_ENABLE'] = '${stringTableSmokeDetectorRepeatEnable}';
 elvST['SMOKE_DETECTOR|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
 elvST['SMOKE_DETECTOR|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
+elvST['SOFTONOFF'] = '${stringTableSoftOnOff}';
 elvST['SOUND_ID'] = '${stringTableSoundID}';
 elvST['SOUND_LONG'] = '${stringTableSoundLong}';
 elvST['SOUND_LONG_LONG'] = '${stringTableSoundLongLong}';

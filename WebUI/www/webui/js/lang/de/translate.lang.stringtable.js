@@ -915,7 +915,9 @@ jQuery.extend(true,langJSON, {
     "stringTableWindowStateOpen" : "Fenster ge%F6ffnet",
     "stringTableWindowSwitchReceiver" : "Heizk%F6rperthermostat",
     "stringTableSensorErrorFalse" : "Sensor OK",
-    "stringTableSensorErrorTrue" : "Sensor gest&ouml;rt"
+    "stringTableSensorErrorTrue" : "Sensor gest&ouml;rt",
+
+    "stringTableSoftOnOff" : "Soft On/Off"
 
   }
 });

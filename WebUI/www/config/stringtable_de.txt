@@ -1048,6 +1048,7 @@ SMOKE_DETECTOR|ERROR_SMOKE_CHAMBER=NO_ERROR	${stringTableSmokeDetectorSmokeChamb
 SMOKE_DETECTOR|REPEAT_ENABLE	${stringTableSmokeDetectorRepeatEnable}
 SMOKE_DETECTOR|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
+SOFTONOFF	${stringTableSoftOnOff}
 SOUND_ID	${stringTableSoundID}
 SOUND_LONG	${stringTableSoundLong}
 SOUND_LONG_LONG	${stringTableSoundLongLong}

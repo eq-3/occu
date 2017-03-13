@@ -915,6 +915,8 @@ jQuery.extend(true, langJSON, {
     "stringTableWindowStateOpen" : "Window opened",
     "stringTableWindowSwitchReceiver": "Radyat%F6r termostati",
     "stringTableSensorErrorFalse" : "Sensor OK",
-    "stringTableSensorErrorTrue" : "Sensor disturbed"
+    "stringTableSensorErrorTrue" : "Sensor disturbed",
+
+    "stringTableSoftOnOff" : "Soft On/Off"
   }
 });
