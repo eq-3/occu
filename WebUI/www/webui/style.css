@@ -5128,7 +5128,7 @@ application {
 	font-size: 10px;
 	width:220px;
 	height:25px;
-  line-height:25px;
+  /* line-height:25px; problem with controls with a long parameter name */
 }
 
 .CLASS02532a {
@@ -5151,6 +5151,7 @@ application {
 
 .CLASS02534 {
 	float: left;
+  text-align: left;
 }
 
 .CLASS02535 {

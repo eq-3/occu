@@ -693,36 +693,41 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     
     append html "<table class=\"ProfileTbl\">"
       # left
-      incr prn
+
       set param SHOW_SET_TEMPERATURE
-      array_clear options
-      set options(0) "\${stringTableClimateControlRegDisplayTempInfoActualTemp}"
-      set options(1) "\${stringTableClimateControlRegDisplayTempInfoSetPoint}"
-
-      append html "<tr>"
-        append html "<td name=\"_expertParam\" class=\"_hidden\">\${stringTableClimateControlRegDisplayTempInfo}</td>"
-        append html "<td name=\"_expertParam\" class=\"_hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"setDisplayMode(this)\"]</td>"
-
-        # right
+      if { ! [catch {set tmp $ps($param)}]  } {
         incr prn
-        set param SHOW_HUMIDITY
         array_clear options
-        set options(0) "\${stringTableClimateControlRegDisplayTempHumT}"
-        set options(1) "\${stringTableClimateControlRegDisplayTempHumTH}"
-        append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">\${stringTableClimateControlRegDisplayTempHum}</td>"
-        append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
-      append html "</tr>"
+        set options(0) "\${stringTableClimateControlRegDisplayTempInfoActualTemp}"
+        set options(1) "\${stringTableClimateControlRegDisplayTempInfoSetPoint}"
+
+        append html "<tr>"
+          append html "<td name=\"_expertParam\" class=\"_hidden\">\${stringTableClimateControlRegDisplayTempInfo}</td>"
+          append html "<td name=\"_expertParam\" class=\"_hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"setDisplayMode(this)\"]</td>"
+
+          # right
+          set param SHOW_HUMIDITY
+          incr prn
+          array_clear options
+          set options(0) "\${stringTableClimateControlRegDisplayTempHumT}"
+          set options(1) "\${stringTableClimateControlRegDisplayTempHumTH}"
+          append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">\${stringTableClimateControlRegDisplayTempHum}</td>"
+          append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+        append html "</tr>"
+      }
 
       # left
-      incr prn
       set param BUTTON_RESPONSE_WITHOUT_BACKLIGHT
-      append html "<tr>"
-      append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableButtonResponseWithoutBacklight}</td>"
-      append html "<td name=\"expertParam\" class=\"hidden\">"
-      # append html "[_getCheckBox $CHANNEL '$param' $ps($param) $prn]"
-      append html  "[getCheckBox '$param' $ps($param) $chn $prn]"
-      append html "</td>"
-      append html "</tr>"
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        append html "<tr>"
+        append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableButtonResponseWithoutBacklight}</td>"
+        append html "<td name=\"expertParam\" class=\"hidden\">"
+        # append html "[_getCheckBox $CHANNEL '$param' $ps($param) $prn]"
+        append html  "[getCheckBox '$param' $ps($param) $chn $prn]"
+        append html "</td>"
+        append html "</tr>"
+      }
 
     append html "</table>"
 
@@ -835,15 +840,17 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "</tr>"
 
     #left
-    incr prn
     set param TEMPERATURE_WINDOW_OPEN
-    append html "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
+    if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
+      append html "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
 
-      append html "<script type=\"text/javascript\">"
-        append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
-      append html "</script>"
-    append html "</tr>"
+        append html "<script type=\"text/javascript\">"
+          append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+        append html "</script>"
+      append html "</tr>"
+    }
   append html "</table>"
 
   append html "<hr>"

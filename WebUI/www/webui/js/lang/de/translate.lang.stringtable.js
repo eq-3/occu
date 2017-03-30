@@ -888,7 +888,7 @@ jQuery.extend(true,langJSON, {
     "stringTableWeatherTemperature" : "Temperatur",
     "stringTableWeatherTitle" : "Wettersensor",
     "stringTableWeatherWindDir" : "Windrichtung",
-    "stringTableWeatherWindDirRange" : "Windrichtung Schwankungsbreite",
+    "stringTableWeatherWindDirRange" : "Windrichtung<br/>Schwankungsbreite",
     "stringTableWeatherWindSpeed" : "Windgeschwindigkeit",
     "stringTableWeatherWindSpeedResultSource" : "Art des Windgeschwindigkeitswertes",
     "stringTableWeatherWindSpeedResultSourceAverage" : "Mittelwert",

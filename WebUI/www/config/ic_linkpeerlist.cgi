@@ -306,6 +306,7 @@ proc put_tablebody {} {
         #Bilder=====
         set sender_parent_type "unknown_device"
         set receiver_parent_type "unknown_device"
+        set sender_type ""
         set sender_index 0
         set receiver_index 0
         catch { set sender_parent_type $sender_descr(PARENT_TYPE) }
