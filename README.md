@@ -77,6 +77,12 @@ OCCU based Community Projects
 Version History
 ===============
 
+2017-03-31: Version 2.27.8
+- Create 2.27.8 release tag. 
+
+2017-03-13: Version 2.27.7
+- Create 2.27.7 release tag. 
+
 2017-01-27: Version 2.25.15
 - Create 2.25.15 release tag. 
 
