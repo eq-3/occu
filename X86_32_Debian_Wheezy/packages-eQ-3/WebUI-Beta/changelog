@@ -1,0 +1,9 @@
+- fixed a bug in time conversion routines which didn't convert DST vs. non-DST conversions correct and overly complicated. This was the reason for certain DST/non-DST related issues and also the reason for not formatting certain dates correctly in HM scripts (see https://homematic-forum.de/forum/viewtopic.php?f=34&t=34439)
+
+- replaced all localtime() and gmtime() uses with their reentrant versions localtime_r() and gmtime_r(). This should hopefully finally fix all the strange timer related issues with short timers (< minutes) which was caused by localtime/gmtime using internal buffers, thus old struct tm values were used ending up in certain runtime problems.
+
+- fixed a minor but severe bug in the Timer management which caused that especially short timers (~ seconds) suddenly stopped because the end of day information pointed to 1970-01-01 and thus cancelled further timer executions. Further long term tests have to show, however, if all timer related problems are really solved by this fix.
+
+- fixed bug where upon termination of ReGaHss the current DOM config were not saved. Now the SaveDOMThread will be properly signaled to close its operation while saving the current DOM config before shutting down. This should fix issues where changed settings were lost if the system had been reset immediately after the change
+
+- fixed the limitation of 200 script variables per variable list by having implemented a dynamic resize operation which in theory allows an unlimited number of variables now
