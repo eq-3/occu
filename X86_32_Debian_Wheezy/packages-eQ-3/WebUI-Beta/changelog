@@ -1,3 +1,5 @@
+- fixed another timer related bug which was caused because two threads were fighting for the same data and suddenly overwrote data of the other thread. Now a mutex protects use of some public methods, thus should synchronize access properly.
+
 - fixed a bug in time conversion routines which didn't convert DST vs. non-DST conversions correct and overly complicated. This was the reason for certain DST/non-DST related issues and also the reason for not formatting certain dates correctly in HM scripts (see https://homematic-forum.de/forum/viewtopic.php?f=34&t=34439)
 
 - replaced all localtime() and gmtime() uses with their reentrant versions localtime_r() and gmtime_r(). This should hopefully finally fix all the strange timer related issues with short timers (< minutes) which was caused by localtime/gmtime using internal buffers, thus old struct tm values were used ending up in certain runtime problems.
