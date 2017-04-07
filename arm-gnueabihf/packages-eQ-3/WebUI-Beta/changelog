@@ -1,3 +1,9 @@
+- modified command-line usage output to display version and build date.
+
+- added "SessionMaxCount" config option to rega.conf to allow to raise max HTTP session limit.
+
+- added "AutoSaveDOMCycle" and "CheckModifiedCycle" rega.conf config options
+
 - fixed another timer related bug which was caused because two threads were fighting for the same data and suddenly overwrote data of the other thread. Now a mutex protects use of some public methods, thus should synchronize access properly.
 
 - fixed a bug in time conversion routines which didn't convert DST vs. non-DST conversions correct and overly complicated. This was the reason for certain DST/non-DST related issues and also the reason for not formatting certain dates correctly in HM scripts (see https://homematic-forum.de/forum/viewtopic.php?f=34&t=34439)
