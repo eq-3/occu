@@ -1,0 +1,89 @@
+-----------------
+ReGaHss ChangeLog
+-----------------
+
+2017-04-09 
+
+  * fixed a another timer related regession bug which caused that daily timers
+    resulted in bogus timer executions once a daily timer was executed.
+
+#### BETA4-2017-04-07 (65eed4a) Release #####################################
+
+2017-04-06
+
+  * added "AutoSaveDOMCycle" and "CheckModifiedCycle" rega.conf config options
+    and restored the old default value of 12h and 10min.
+  * added "SessionMaxCount" config option to rega.conf to allow to raise max.
+    HTTP session limit.
+  * modified command-line usage output to display version and build date.
+  * fixed another timer related bug which was caused because two threads were
+    fighting for the same data and suddenly overwrote data of the other thread.
+    Now a mutex protects use of some public methods, thus should synchronize
+    access properly.
+
+#### BETA3-2017-04-05 (7f6cd65) Release #####################################
+
+2017-04-05
+
+  * fixed a bug in the time_t conversion routines which didn't convert DST
+    vs. non-DST conversions correct and overly complicated.
+    This was the reason for certain DST/non-DST related issues and also
+    the reason for not formatting certain dates correctly in HM scripts
+    (see https://homematic-forum.de/forum/viewtopic.php?f=34&t=34439)
+
+2017-04-04
+
+  * replaced all localtime() and gmtime() uses with their reentrant
+    versions localtime_r() and gmtime_r(). This should hopefully finally
+    fix all the strange timer related issues with short timers (< minutes)
+    which was caused by localtime/gmtime using internal buffers, thus old
+    struct tm values were used ending up in certain runtime problems.
+  * modified config AutoSave to force a save of the configuration every 60
+    minutes instead of 12h. Also switched the modified config check to
+    check every 5 minutes if the config had been changed and then
+    immediately saving it. Furthermore, switched the autosave at
+    termination of ReGaHss to the modified check thread instead.
+
+2017-04-03
+
+  * removed artifical max size for string variables. Now a string can have
+    an arbitrary length like c strings. This allowed to enlarge the size
+    of rega script programs to be edited which was previously limited to
+    100KiB. Now an arbitrary long script can be added as a HM script.
+  * fixed a minor but severe bug in the Timer management which caused
+    that especially short timers (~ seconds) suddenly stopped because
+    the end of day information pointed to 1970-01-01 and thus cancelled
+    further timer executions. Further long term tests have to show,
+    however, if all timer related problems are really solved by this fix.
+
+2017-03-30
+
+  * added missing data skipping upon termination to all relevant code
+    passages. This fixes the "invalid free()" segmentation faults upon
+    termination of ReGaHss which was caused because ReGaHss was trying to
+    free memory of static instance data. Now ReGaHss can be properly
+    terminated while freeing memory properly.
+
+2017-03-29
+
+  * fixed bug where upon termination of ReGaHss the current DOM config were
+    not saved. Now the AutoSave thread will be properly signaled to close its
+    operation while saving the current config before shutting down.
+    This should fix issues where changed settings were lost if the system had
+    been reset immediately after the change.
+  * fixed the limitation of 200 ReGa script variables per variable list by having
+    implemented a dynamic resize operation which in theory allows an
+    unlimited number of variables now.
+
+2017-03-28
+
+  * fixed certain invalid memset() calls potentially caused unwanted crashed.
+
+2017-03-23
+
+  * created top-level Makefile
+
+2017-02-12
+
+  * restructuring project directory
+  * initial commit
