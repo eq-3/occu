@@ -2,6 +2,15 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-04-24
+
+  * PONG events received will now be properly ignored without issuing an error.
+    This should fix https://github.com/eq-3/occu/issues/44
+  * added "AutoSaveDomOnExit" rega.conf option to allow to force a DOM config
+    save upon termination (disabled per default).
+
+#### BETA5-2017-04-09 (b89342f) Release #####################################
+
 2017-04-09 
 
   * fixed a another timer related regession bug which caused that daily timers
