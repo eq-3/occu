@@ -2,6 +2,14 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-04-26
+
+  * modified all uses of string operating functions to use their buffer
+    overflow/underflow safe variants instead.
+  * fixed incorrect deallocations of certain array-type variables.
+
+#### BETA6-2017-04-24 (2ad8401) Release #####################################
+
 2017-04-24
 
   * PONG events received will now be properly ignored without issuing an error.
