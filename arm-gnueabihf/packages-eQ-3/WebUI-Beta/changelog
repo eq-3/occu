@@ -2,15 +2,90 @@
 ReGaHss ChangeLog
 -----------------
 
-2017-04-26
+2017-05-11 Jens Maus <mail@jens-maus.de>
+
+  * fixed some false thread termination error output when terminating
+    ReGaHss
+  * fixed bug in script parser where lines starting only with "!" resulted in
+    commenting out the whole next line as well.
+  * modified script runtime error output to display the famous '11622' debug
+    messages as a 'info' log output instead and added a second normal 'error'
+    output which outputs the reason for the error in a more human readable
+    form with the complete code attached so that the buggy code can more easily
+    be identified.
+  * implemented the following random number generator functions to be usable
+    within a rega script
+      system.Random(min, max) - outputs a random integer number between min<>max
+                                or a general random number without specifying
+                                min/max
+      system.Srandom(val)     - Allows to seed the random number generator to
+                                a specific value or without 'val' to a random
+                                value
+
+2017-05-10 Jens Maus <mail@jens-maus.de>
+
+  * added certain math constants to support math operations
+      M_E        - e          - 2.71828182845904523536
+      M_LOG2E    - log2(e)    - 1.44269504088896340736
+      M_LOG10E   - log10(e)   - 0.434294481903251827651
+      M_LN2      - ln(2)      - 0.693147180559945309417
+      M_LN10     - ln(10)     - 2.30258509299404568402
+      M_PI       - pi         - 3.14159265358979323846
+      M_PI_2     - pi/2       - 1.57079632679489661923
+      M_PI_4     - pi/4       - 0.785398163397448309616
+      M_1_PI     - 1/pi       - 0.318309886183790671538
+      M_2_PI     - 2/pi       - 0.636619772367581343076
+      M_2_SQRTPI - 2/sqrt(pi) - 1.12837916709551257390
+      M_SQRT2    - sqrt(2)    - 1.41421356237309504880
+      M_SQRT1_2  - 1/sqrt(2)  - 0.707106781186547524401
+  * fixed ToInteger() to correctly truncate real values
+  * fixed '+' operator to be also used for concatinating a string with
+    an integer or real value similar to how '#' is doing this
+  * implemented some basic math functions which can now be used within a
+    rega script for integer and floating-point variables
+      Abs()    - compute the absolute value of an integer
+      Mod(y)   - floating-point remainder function
+      Min(y)   - determine minimum of two floating-point numbers
+      Max(y)   - determine maximum of two floating-point numbers
+      Exp()    - base-e exponential function
+      Exp2()   - base-2 exponential function
+      Exp10()  - base-10 exponential function
+      Expm1()  - exponential minus 1
+      Log()    - natural logarithmic function
+      Log2()   - base-2 logarithmic function
+      Log10()  - base-10 logarithmic function
+      Log1p()  - logarithm of 1 plus argument
+      Sqrt()   - square root function
+      Cbrt()   - cube root function
+      Pow(y)   - power function
+      Sin()    - sine function
+      Cos()    - cosine function
+      Tan()    - tangent function
+      Asin()   - arc sine function
+      Acos()   - arc cosine function
+      Atan()   - arc tangent function
+      Sinh()   - hyperbolic sine function
+      Cosh()   - hyperbolic cosine function
+      Tanh()   - hyperbolic tangent function
+      Asinh()  - inverse hyperbolic sine function
+      Acosh()  - inverse hyperbolic cosine function
+      Atanh()  - inverse hyperbolic tangent function
+      Ceil()   - ceiling function, smallest integral value not less than argument
+      Floor()  - largest integral value not greater than argument
+      Trunc(p) - round to integer, toward zero with precision p
+      Round(p) - round to nearest value, away from zero with precision p
+
+#### BETA7-2017-04-26 (9d4b309) Release #####################################
+
+2017-04-26 Jens Maus <mail@jens-maus.de>
 
   * modified all uses of string operating functions to use their buffer
-    overflow/underflow safe variants instead.
+    overflow/underflow safe variants instead. 
   * fixed incorrect deallocations of certain array-type variables.
 
 #### BETA6-2017-04-24 (2ad8401) Release #####################################
 
-2017-04-24
+2017-04-24 Jens Maus <mail@jens-maus.de>
 
   * PONG events received will now be properly ignored without issuing an error.
     This should fix https://github.com/eq-3/occu/issues/44
@@ -19,14 +94,14 @@ ReGaHss ChangeLog
 
 #### BETA5-2017-04-09 (b89342f) Release #####################################
 
-2017-04-09 
+2017-04-09 Jens Maus <mail@jens-maus.de>
 
   * fixed a another timer related regession bug which caused that daily timers
     resulted in bogus timer executions once a daily timer was executed.
 
 #### BETA4-2017-04-07 (65eed4a) Release #####################################
 
-2017-04-06
+2017-04-06 Jens Maus <mail@jens-maus.de>
 
   * added "AutoSaveDOMCycle" and "CheckModifiedCycle" rega.conf config options
     and restored the old default value of 12h and 10min.
@@ -40,7 +115,7 @@ ReGaHss ChangeLog
 
 #### BETA3-2017-04-05 (7f6cd65) Release #####################################
 
-2017-04-05
+2017-04-05 Jens Maus <mail@jens-maus.de>
 
   * fixed a bug in the time_t conversion routines which didn't convert DST
     vs. non-DST conversions correct and overly complicated.
@@ -48,7 +123,7 @@ ReGaHss ChangeLog
     the reason for not formatting certain dates correctly in HM scripts
     (see https://homematic-forum.de/forum/viewtopic.php?f=34&t=34439)
 
-2017-04-04
+2017-04-04 Jens Maus <mail@jens-maus.de>
 
   * replaced all localtime() and gmtime() uses with their reentrant
     versions localtime_r() and gmtime_r(). This should hopefully finally
@@ -61,7 +136,7 @@ ReGaHss ChangeLog
     immediately saving it. Furthermore, switched the autosave at
     termination of ReGaHss to the modified check thread instead.
 
-2017-04-03
+2017-04-03 Jens Maus <mail@jens-maus.de>
 
   * removed artifical max size for string variables. Now a string can have
     an arbitrary length like c strings. This allowed to enlarge the size
@@ -73,7 +148,7 @@ ReGaHss ChangeLog
     further timer executions. Further long term tests have to show,
     however, if all timer related problems are really solved by this fix.
 
-2017-03-30
+2017-03-30 Jens Maus <mail@jens-maus.de>
 
   * added missing data skipping upon termination to all relevant code
     passages. This fixes the "invalid free()" segmentation faults upon
@@ -81,7 +156,7 @@ ReGaHss ChangeLog
     free memory of static instance data. Now ReGaHss can be properly
     terminated while freeing memory properly.
 
-2017-03-29
+2017-03-29 Jens Maus <mail@jens-maus.de>
 
   * fixed bug where upon termination of ReGaHss the current DOM config were
     not saved. Now the AutoSave thread will be properly signaled to close its
@@ -92,15 +167,15 @@ ReGaHss ChangeLog
     implemented a dynamic resize operation which in theory allows an
     unlimited number of variables now.
 
-2017-03-28
+2017-03-28 Jens Maus <mail@jens-maus.de>
 
   * fixed certain invalid memset() calls potentially caused unwanted crashed.
 
-2017-03-23
+2017-03-23 Jens Maus <mail@jens-maus.de>
 
   * created top-level Makefile
 
-2017-02-12
+2017-02-12 Jens Maus <mail@jens-maus.de>
 
   * restructuring project directory
   * initial commit
