@@ -2,6 +2,48 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-05-18 Jens Maus <mail@jens-maus.de>
+
+  * fixed all problems with function name clashes. E.g. the use of
+    o.ToInteger() and o.BuildLabel() on a valid object 'o' returned the
+    same 'string' result even though ToInteger() isn't a valid/accepted
+    function of an object. Something like this was possible at many
+    places resulting in unwanted side effects. Now a proper
+    ScriptRuntimeError is issued instead so that script authors can
+    correct these errors.
+
+2017-05-17 Jens Maus <mail@jens-maus.de>
+
+  * fixed a bug where Type() and VarType() was not available for all
+    possible variable types. Now 'var', 'idarray' and 'object' can also
+    be queried for their types. Note, however, that for actual objects
+    only VarType() will be unique since Type() will then return the
+    actual object type instead of the variable type name.
+  * fixed a bug in while() and foreach() not raising any error if the
+    specified condition isn't valid.
+  * increased maximum number of iterations for foreach()/while() to 50000
+    to facilitate our current hardware setup.
+  * fixed /bin/hm_startup process to wait a certain amount of time for the
+    rega engine to start up. Otherwise errors might occur during startup.
+  * added Type(), VarType() and ToString() to idarray vartype
+  * fixed a regression bug which caused that session ids were not correctly
+    calculated on a CCU2
+
+2017-05-16 Jens Maus <mail@jens-maus.de>
+
+  * added missing optional 'long_press' parameter to xmlrpc.ActivateLinkParamset().
+  * fixed all xmlrpc namespace calls to correctly check for mandatory and
+    optional parameters so that future calls to the rfd XMLRPC interface won't
+    end up in random crashes.
+
+2017-05-15 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where calling xmlrpc.ActivateLinkParamset() with only two
+    arguments resulted in a crashing rfd. Now ReGa will perform some parameter
+    checks before executing the XMLRPC call.
+
+#### BETA7-2017-05-12 (b98358d) Release #####################################
+
 2017-05-11 Jens Maus <mail@jens-maus.de>
 
   * fixed some false thread termination error output when terminating
