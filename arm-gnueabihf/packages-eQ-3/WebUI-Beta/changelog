@@ -2,6 +2,29 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-05-22 Jens Maus <mail@jens-maus.de>
+
+  * fixed a regression bug which caused that obj.HssType() was not working
+    properly anymore in a generic case. This resulted in incorrectly displaying
+    temperatures in the WebUI with wind directions.
+
+2017-05-21 Jens Maus <mail@jens-maus.de>
+
+  * fixed system.Exec() function to be able to be executed without any
+    parameters without interrupting a script execution.
+  * fixed typo of "ID_GW_CHANNEL" constant
+
+2017-05-19 Jens Maus <mail@jens-maus.de>
+
+  * added a workaround for a commonly but incorrectly use of .AlDestMapDP() on
+    an AlTriggerDP() acquired object so that only a warning is issued without
+    stopping script execution. In future, however, we should and will remove
+    this workaround again.
+  * fixed a regression bug with .Variable() not having worked anymore after
+    the recent opcode fixes.
+
+#### BETA9-2017-05-18 (8d2e2bb) Release #####################################
+
 2017-05-18 Jens Maus <mail@jens-maus.de>
 
   * fixed all problems with function name clashes. E.g. the use of
@@ -42,7 +65,7 @@ ReGaHss ChangeLog
     arguments resulted in a crashing rfd. Now ReGa will perform some parameter
     checks before executing the XMLRPC call.
 
-#### BETA7-2017-05-12 (b98358d) Release #####################################
+#### BETA8-2017-05-12 (b98358d) Release #####################################
 
 2017-05-11 Jens Maus <mail@jens-maus.de>
 
