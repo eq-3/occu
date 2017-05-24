@@ -2,6 +2,19 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-05-24 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug in syslog output function where in case an output contained
+    typeical format specifiers (e.g. '%s') could result in segmentation
+    faults.
+
+2017-05-23 Jens Maus <mail@jens-maus.de>
+
+  * fixed another regression bug where calling .Device() on a HSSDP resulted
+    in a ScriptRuntimeError.
+
+#### BETA10-2017-05-22 (334e81f) Release ####################################
+
 2017-05-22 Jens Maus <mail@jens-maus.de>
 
   * fixed a regression bug which caused that obj.HssType() was not working
