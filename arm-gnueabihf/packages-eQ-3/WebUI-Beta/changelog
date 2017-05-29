@@ -2,6 +2,33 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-05-29 Jens Maus <mail@jens-maus.de>
+
+  * slightly reworked internal script function management to manage function
+    in a more secure way.
+
+2017-05-28 Jens Maus <mail@jens-maus.de>
+
+  * output just filename and line number on each Error syslog output rather
+    the full path and line number in brackets where users thought this might
+    be the error id.
+
+2017-05-27 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where a dom.GetObject() with a string starting with a number
+    always returned the object with the number the string started. Thus,
+    dom.GetObject("2Test") always returned the root object instead of trying
+    to search for an object with that particular string.
+  * fixed using LastTimeStamp() and LastTimeStampSeconds() on channel
+    objects like this had been possible.
+
+2017-05-26 Jens Maus <mail@jens-maus.de>
+
+  * using VarType() and Type() on an uninitialized 'idarray' doesn't end up
+    in a ScriptRuntimeError anymore and should return valid results now.
+
+#### BETA11-2017-05-24 (8349dc1) Release ####################################
+
 2017-05-24 Jens Maus <mail@jens-maus.de>
 
   * fixed bug in syslog output function where in case an output contained
