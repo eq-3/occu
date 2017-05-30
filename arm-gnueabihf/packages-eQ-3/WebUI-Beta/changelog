@@ -2,6 +2,14 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-05-30 Jens Maus <mail@jens-maus.de>
+
+  * general code cleanup by having increased the compiler warning level.
+  * reworked class constructors to initialize member variables in the correct
+    order so that no compiler warnings are generated anymore.
+
+#### BETA12-2017-05-29 (2fc2389) Release ####################################
+
 2017-05-29 Jens Maus <mail@jens-maus.de>
 
   * slightly reworked internal script function management to manage function
