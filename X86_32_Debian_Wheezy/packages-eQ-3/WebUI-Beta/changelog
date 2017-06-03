@@ -2,6 +2,13 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-06-01 Jens Maus <mail@jens-maus.de>
+
+  * added some verbose error output to more easily identify incorrect uses
+    of foreach()/while() expressions.
+
+#### BETA13-2017-05-30 (07cb86d) Release ####################################
+
 2017-05-30 Jens Maus <mail@jens-maus.de>
 
   * general code cleanup by having increased the compiler warning level.
