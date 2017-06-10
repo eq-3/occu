@@ -27,10 +27,10 @@ set PROFILE_0(UI_TEMPLATE)      "Expertenprofil"
 
 set PROFILE_1(SHORT_COND_VALUE_HI)          150
 set PROFILE_1(SHORT_COND_VALUE_LO)           50
-set PROFILE_1(SHORT_CT_OFF)      {0 2}
-set PROFILE_1(SHORT_CT_OFFDELAY)  {0 2}
-set PROFILE_1(SHORT_CT_ON)      {0 2}
-set PROFILE_1(SHORT_CT_ONDELAY)    {0 2}
+set PROFILE_1(SHORT_CT_OFF)      {0 2 5}
+set PROFILE_1(SHORT_CT_OFFDELAY)  {0 2 5}
+set PROFILE_1(SHORT_CT_ON)      {0 2 5}
+set PROFILE_1(SHORT_CT_ONDELAY)    {0 2 5}
 set PROFILE_1(SHORT_JT_OFF)       1
 set PROFILE_1(SHORT_JT_OFFDELAY)  6
 set PROFILE_1(SHORT_JT_ON)        4
@@ -52,10 +52,10 @@ set PROFILE_1(UI_HINT)  1
 
 set PROFILE_2(SHORT_COND_VALUE_HI)          150
 set PROFILE_2(SHORT_COND_VALUE_LO)           50
-set PROFILE_2(SHORT_CT_OFF)      0
-set PROFILE_2(SHORT_CT_OFFDELAY)  0
-set PROFILE_2(SHORT_CT_ON)      0
-set PROFILE_2(SHORT_CT_ONDELAY) 0
+set PROFILE_2(SHORT_CT_OFF)      {0 2 5}
+set PROFILE_2(SHORT_CT_OFFDELAY)  {0 2 5}
+set PROFILE_2(SHORT_CT_ON)      {0 2 5}
+set PROFILE_2(SHORT_CT_ONDELAY) {0 2 5}
 set PROFILE_2(SHORT_JT_OFF)      1
 set PROFILE_2(SHORT_JT_OFFDELAY)  3
 set PROFILE_2(SHORT_JT_ON)      3
@@ -77,10 +77,10 @@ set PROFILE_2(UI_HINT)  2
 
 set PROFILE_3(SHORT_COND_VALUE_HI)          151
 set PROFILE_3(SHORT_COND_VALUE_LO)           50
-set PROFILE_3(SHORT_CT_OFF)                   0
-set PROFILE_3(SHORT_CT_OFFDELAY)              0
-set PROFILE_3(SHORT_CT_ON)                    0
-set PROFILE_3(SHORT_CT_ONDELAY)               0
+set PROFILE_3(SHORT_CT_OFF)                   {0 2 5}
+set PROFILE_3(SHORT_CT_OFFDELAY)              {0 2 5}
+set PROFILE_3(SHORT_CT_ON)                    {0 2 5}
+set PROFILE_3(SHORT_CT_ONDELAY)               {0 2 5}
 set PROFILE_3(SHORT_JT_OFF)                   6
 set PROFILE_3(SHORT_JT_OFFDELAY)              4
 set PROFILE_3(SHORT_JT_ON)                    4
@@ -100,6 +100,30 @@ set PROFILE_3(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_3(UI_DESCRIPTION)  "Bei Bewegungserkennung wird der Schalter f&uuml;r eine bestimmte Zeit ausgeschaltet."
 set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
+
+# "Bewegung/Senkrecht"
+set SUBSET_1(NAME)          "\${subset_1}"
+set SUBSET_1(SUBSET_OPTION_VALUE)  1
+set SUBSET_1(SHORT_CT_OFF)      0
+set SUBSET_1(SHORT_CT_OFFDELAY)    0
+set SUBSET_1(SHORT_CT_ON)      0
+set SUBSET_1(SHORT_CT_ONDELAY)    0
+
+# "Ruhe/Waagerecht"
+set SUBSET_2(NAME)          "\${subset_2}"
+set SUBSET_2(SUBSET_OPTION_VALUE)  2
+set SUBSET_2(SHORT_CT_OFF)      2
+set SUBSET_2(SHORT_CT_OFFDELAY)    2
+set SUBSET_2(SHORT_CT_ON)      2
+set SUBSET_2(SHORT_CT_ONDELAY)    2
+
+# "Jede &Auml;nderung"
+set SUBSET_3(NAME)          "\${subset_3}"
+set SUBSET_3(SUBSET_OPTION_VALUE)  3
+set SUBSET_3(SHORT_CT_OFF)      5
+set SUBSET_3(SHORT_CT_OFFDELAY)    5
+set SUBSET_3(SHORT_CT_ON)      5
+set SUBSET_3(SHORT_CT_ONDELAY)    5
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -146,10 +170,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  set pref 0
-  # append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_DIR}</td><td>"
-  # append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
-  # append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_MODE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
@@ -174,7 +199,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  set pref 0
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_MODE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
@@ -191,7 +219,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  set pref 0
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_MODE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 

@@ -327,7 +327,7 @@ function ::showHideHmIPChannel() {
   ! A key press doesn't work with the ccu2 and hmip
   ! When the device is no remote control, don't show the key channel
   !
-  ! When the device is a remote control, show the channel. The control says than the channel has here no function.
+  ! When the device is a remote control, show the channel. The control will say the channel has no function.
   ! Otherwise the control of the remote control would display only the header of the page, which would look not so good.
   if ((chn.HssType().Find("KEY_TRANSCEIVER") != -1) && (
          (oDevHssType != "HmIP-RC8")
@@ -345,6 +345,7 @@ function ::showHideHmIPChannel() {
   }
 
   if (bShowChannel == true) {
+
     ! Interface HmIP-RF
     if(chn.HssType().Find("MAINTENANCE") != -1) {
       ! Don't show the maintenance channel of the new HmIP devices
@@ -390,16 +391,14 @@ function ::showHideHmIPChannel() {
       }
       return;
     }
-
     ! Pluggable Dimmer (PDT)
-    if (oDevHssType == "HmIP-PDT") {
+    if ((oDevHssType == "HmIP-PDT") || (oDevHssType == "HmIP-PDT-UK")) {
       if (user.UserEasyLinkMode() == true) {
         if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false;}
         if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false;}
       }
       return;
     }
-
     ! Pluggable Dimmer (FDT)
     if (oDevHssType == "HmIP-FDT") {
       if (user.UserEasyLinkMode() == true) {
@@ -408,7 +407,6 @@ function ::showHideHmIPChannel() {
       }
       return;
     }
-
     ! Flush mounted Switch and Meter (BSM)
     if (oDevHssType == "HmIP-BSM") {
       if (user.UserEasyLinkMode() == true) {
@@ -417,20 +415,17 @@ function ::showHideHmIPChannel() {
       }
       return;
     }
-
     ! Flush switch actuator with Measuring
     if ((user.UserEasyLinkMode() == true) && ((oDevHssType == "HmIP-FSM") || (oDevHssType == "HmIP-FSM16"))) {
       if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false;}
       if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 2)) {bShowChannel = false;}
       return;
     }
-
     ! Don't show the key channel (a key press doesn't work with ccu and hmip) and the  real channel (doesn't make sense with only one virtual channel)
     if ( (oDevHssType == "HmIP-ASIR")  && (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) ) {
       bShowChannel = false;
       return;
     }
-
     ! Multi-IO-Box (MIOB)
     if ((user.UserEasyLinkMode() == true) && (oDevHssType == "HmIP-MIOB")) {
       ! Hide the real channels. They are not necessary without virtual channels
@@ -446,7 +441,41 @@ function ::showHideHmIPChannel() {
           return;
         }
       }
-      return;
+    }
+     ! Jalousie actor (BBL/FBL)
+     if ((oDevHssType == "HmIP-BBL") || (oDevHssType == "HmIP-FBL")) {
+       if (user.UserEasyLinkMode() == true) {
+         if (chn.HssType().Find("BLIND_TRANSMITTER") != -1) {bShowChannel = false;}
+         if ((chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false;}
+       }
+       return;
+     }
+
+     ! Blind actor (BROLL/FROLL)
+     if ((oDevHssType == "HmIP-BROLL") || (oDevHssType == "HmIP-FROLL")) {
+       if (user.UserEasyLinkMode() == true) {
+         if (chn.HssType().Find("SHUTTER_TRANSMITTER") != -1) {bShowChannel = false;}
+         if ((chn.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false;}
+       }
+       return;
+     }
+
+      ! MOD-OC8 (41 channels)
+      if (oDevHssType == "HmIP-MOD-OC8") {
+        if (user.UserEasyLinkMode() == true) {
+          if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
+            if ((chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16) || (chNumber == 19) || (chNumber == 20)
+             || (chNumber == 23) || (chNumber == 24) || (chNumber == 27) || (chNumber == 28) || (chNumber == 31) || (chNumber == 32)
+             || (chNumber == 35) || (chNumber == 36) || (chNumber == 39) || (chNumber == 40)) {
+              bShowChannel = false;
+            }
+            return;
+          }
+        }
+      }
+
+     ! No hit
+     return;
     }
   }
 }

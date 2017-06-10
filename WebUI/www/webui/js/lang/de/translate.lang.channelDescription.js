@@ -5,6 +5,9 @@ jQuery.extend(true,langJSON, {
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analoger Ausgang",
     "chType_ARMING" : "Scharfschalten",
     "chType_BLIND" : "Rollladenaktor",
+    "chType_BLIND_TRANSMITTER" : "Statusmitteilung Jalousie",
+    "chType_BLIND_VIRTUAL_RECEIVER" : "Jalousieaktor",
+    "chType_BLIND_WEEK_PROFILE" : "Wochenprogramm",
     "chType_CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER" : "Luftfeuchtigkeitssteuerung",
     "chType_CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Stellantrieb f%FCr Fussbodenheizung",
     "chType_CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER" :  "Fussbodenheizung/<br/>Pumpensteuerung<br/><br/>Verkn%FCpfungspartner<br/>Raumthermostat",
@@ -25,6 +28,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER" : "Dimmaktor",
     "chType_DIMMER_TRANSMITTER" : "Statusmitteilung Dimmwert",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmaktor",
+    "chType_DIMMER_WEEK_PROFILE" : "Wochenprogramm",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
     "chType_DUAL_WHITE_COLOR" : "Farbkanal",
     "chType_ENERGIE_METER_TRANSMITTER" : "Statusmeldung Messwertkanal",
@@ -45,6 +49,7 @@ jQuery.extend(true,langJSON, {
     "chType_MOD_EM8BIT_TRANSMITTER" : "Sender f%FCr<br/>8-Bit Entscheidungswert",
     "chType_MOTION_DETECTOR" : "Bewegungsmelder",
     "chType_POWERMETER" : "Messwert-Kanal",
+    "chType_PRESENCEDETECTOR_TRANSCEIVER" : "Pr%E4senzmelder",
     "chType_RAINDETECTOR" : "Regensensor",
     "chType_RAINDETECTOR_HEAT" : "Regensensor<br/>Heizung",
     "chType_REMOTECONTROL_RECEIVER" : "Verkn%FCpfungspartner<br/>Taste",
@@ -53,13 +58,17 @@ jQuery.extend(true,langJSON, {
     "chType_SABOTAGECONTACT" : "Verkn%FCpfungspartner<br/>Sabotagekontakt",
     "chType_SENSOR_FOR_CARBON_DIOXIDE" : "Luftg%FCte-/CO2-Sensor",
     "chType_SENSOR_WINDOW" : "Sensor-Kanal",
+    "chType_SHUTTER_TRANSMITTER" : "Statusmitteilung Rolladenaktor",
+    "chType_SHUTTER_VIRTUAL_RECEIVER" : "Rolladenaktor",
     "chType_SWITCH" : "Schaltaktor",
     "chType_SWITCH_PANIC" : "Panik Alarm",
     "chType_SWITCH_SENSOR_Ext" : "Externer Alarm",
     "chType_SWITCH_SENSOR_Int" : "Interner Alarm",
     "chType_SWITCH_TRANSMIT" : "Verkn%FCpfungspartner<br/>Schaltaktor",
     "chType_SWITCH_TRANSMITTER" : "Statusmitteilung Relais",
+    "chType_SWITCH_TRANSMITTER_OC" : "Statusmitteilung OC-Ausgang",
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Schaltaktor",
+    "chType_SWITCH_WEEK_PROFILE" : "Wochenprogramm",
     "chType_THERMALCONTROL_TRANSMIT" : "Verkn%FCpfungspartner<br/>Heizungsthermostat",
     "chType_VIRTUAL_DIMMER" : "Dimmaktor",
     "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
@@ -68,8 +77,8 @@ jQuery.extend(true,langJSON, {
     "chType_WEATHER_TRANSMIT" : "Verkn%FCpfungspartner<br/>Temperatursensor",
     "chType_WEEK_PROGRAM" : "Verkn%FCpfungspartner Wochenprogramm",
     "chType_WINDOW_SWITCH_RECEIVER" : "Verkn%FCpfungspartner<br/>Fensterkontakt",
+
     "theEnd" : ""
   }
 });
-
 

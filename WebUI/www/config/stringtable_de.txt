@@ -15,7 +15,6 @@ ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG	${stringTableTiltSensorMsgPosB2}
 ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=OPEN	${stringTableTiltSensorMsgPosB3}
 ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW	${stringTableAccelerationTransceiverNotificationSoundTypeHighToLow}
 ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH	${stringTableAccelerationTransceiverNotificationSoundTypeLowToHigh}
-ACCELERATION_TRANSCEIVER|SENSOR_SENSITIVITY	${stringTableAccelerationTransceiverSensorSensivity}
 ACCELERATION_TRANSCEIVER|TRIGGER_ANGLE	${stringTableAccelerationTransceiverTriggerAngle}
 ACOUSTIC_ALARM_SELECTION=DELAYED_EXTERNALLY_ARMED	${stringTableAlarmDelayedExternallyArmed}
 ACOUSTIC_ALARM_SELECTION=DELAYED_INTERNALLY_ARMED	${stringTableAlarmDelayedInternallyArmed}
@@ -131,6 +130,10 @@ ARMSTATE=ALLSENS_ARMED	${stringTableAlarmExtSensArmed}
 ARMSTATE=DISARMED	${stringTableAlarmDisarmed}
 ARMSTATE=EXTSENS_ARMED	${stringTableAlarmAllSensArmed}
 ARR_TIMEOUT	${stringTableArrTimeout}
+ATC_ADAPTION_INTERVAL	${stringTableATCAdaptionInterval}
+ATC_MODE	${stringTableATCMode}
+ATC_OFF	${stringTableOFF}
+ATC_ON	${stringTableON}
 AUTO_MODE	${stringTableClimateControlRTTransceiverAutoMode}
 BACKLIGHT_AT_CHARGE	${stringTableBackLightAtCharge}
 BACKLIGHT_AT_KEYSTROKE	${stringTableBackLightAtKeystroke}
@@ -146,6 +149,12 @@ BLIND|REFERENCE_RUNNING_TIME_BOTTOM_TOP	${stringTableBlindRunnintTimeBottomTop}
 BLIND|REFERENCE_RUNNING_TIME_TOP_BOTTOM	${stringTableBlindRunningTimeTopBottom}
 BLIND|REFERENCE_RUN_COUNTER	${stringTableBlindRefRunCounter}
 BLIND|STOP	${stringTableBlindStop}
+BLIND_TRANSMITTER|LEVEL	${stringTableBlindLevel}
+BLIND_TRANSMITTER|LEVEL_2	${stringTableJalousieSlatsLevel}
+SHUTTER_VIRTUAL_RECEIVER	${stringTableBlindVirtualReceiverTitle}
+BLIND_VIRTUAL_RECEIVER|LEVEL	${stringTableBlindLevel}
+BLIND_VIRTUAL_RECEIVER|LEVEL_2	${stringTableJalousieSlatsLevel}
+BLIND_VIRTUAL_RECEIVER|STOP	${stringTableBlindStop}
 BOOST_MODE	${stringTableClimateControlRTTransceiverBoostMode}
 BOOST_MODE=FALSE	${stringTableBoostModeFalse}
 BOOST_MODE=TRUE	${stringTableBoostModeTrue}
@@ -173,6 +182,7 @@ CAPACITIVE_FILLING_LEVEL_SENSOR|MEA_LENGTH	${stringTableCapacitiveFillingSensorM
 CAPACITIVE_FILLING_LEVEL_SENSOR|USE_CUSTOM	${stringTableCapacitiveFillingSensorCustomCal}
 CAPACITIVE_FILLING_LEVEL_SENSOR|WATER_LOWER_THRESHOLD_CH	${stringTableCapacitiveFillingSensorWaterLowerThres}
 CAPACITIVE_FILLING_LEVEL_SENSOR|WATER_UPPER_THRESHOLD_CH	${stringTableCapacitiveFillingSensorWaterUpperThres}
+CAPTURE_WITHIN_INTERVAL	${stringTableCaptureWithinInterval}
 CENTRAL_KEY|DBL_PRESS_TIME	${stringTableCentralKeyDblPressTime}
 CENTRAL_KEY|LONG_PRESS_TIME	${stringTableCentralKeyLongPressTime}
 CHANGE_OVER=FALSE	${stringTableChangeOverFalse}
@@ -293,6 +303,9 @@ CURRENTDETECTION_BEHAVIOR	${stringTableCurrentDetectionBehavior}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_ACTIVE"	${stringTableCurrentDetectionBehaviorActive}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_1"	${stringTableCurrentDetectionBehaviorOutput1}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_2"	${stringTableCurrentDetectionBehaviorOutput2}
+
+CURRENT_ILLUMINATION	${stringTableCurrentIllumination}
+
 CYCLIC_INFO_MSG	${stringTableCyclicInfoMsg}
 CYCLIC_INFO_MSG_DIS	${stringTableCyclicInfoMsgDis}
 CYCLIC_INFO_MSG_DIS_UNCHANGED	${stringTableCyclicInfoMsgDisUnChanged}
@@ -467,7 +480,6 @@ ERROR_SABOTAGE=SABOTAGE	${stringTableSabotage}
 ERROR_SABOTAGE=TRUE	${stringTableErrorSabotageTrue}
 ERROR_UPDATE=TRUE	${stringTableErrorUpdateTrue}
 ERROR_UPDATE=FALSE	${stringTableErrorUpdateFalse}
-EVENT_DELAYTIME	${stringTableEventDelay}
 EVENT_DELAY_UNIT	${stringTableEventDelayUnit}
 EVENT_DELAY_UNIT=100MS	${optionUnit100MS}
 EVENT_DELAY_UNIT=H	${optionUnitH}
@@ -552,7 +564,6 @@ JALOUSIE|REFERENCE_RUNNING_TIME_SLATS	${stringTableJalousieRunningTimeSlats}
 JALOUSIE|REFERENCE_RUNNING_TIME_TOP_BOTTOM	${stringTableBlindRunningTimeTopBottom}
 JALOUSIE|REFERENCE_RUNNING_TIME_BOTTOM_TOP	${stringTableBlindRunnintTimeBottomTop}
 JALOUSIE|REFERENCE_RUN_COUNTER	${stringTableBlindRefRunCounter}
-JALOUSIE|POSITION_SAVE_TIME	${stringTableJalousiePositionSaveTime}
 JALOUSIE|STOP	${stringTableBlindStop}
 KEY	${stringTableKeyTitle}
 KEYMATIC	${stringTableKeyMaticTitle}
@@ -708,7 +719,6 @@ MOTION_DETECTION_ACTIVE=FALSE	${stringTableMotionDetectorMotionDetectionActiveFa
 MOTION_DETECTION_ACTIVE=TRUE	${stringTableMotionDetectorMotionDetectionActiveTrue}
 MOTION_DETECTOR	${stringTableMotionDetectorTitle}
 MOTION_DETECTOR	${stringTableMotionDetectorTitle}
-MOTION_DETECTOR|CAPTURE_WITHIN_INTERVAL	${stringTableMotionDetectorCaptureWithinInterval}
 MOTION_DETECTOR|ERROR=0	${stringTableSabotageContactOk}
 MOTION_DETECTOR|ERROR=7	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|ERROR=SABOTAGE	${stringTableMotionDetectorErrorSabotage}
@@ -745,8 +755,24 @@ PARTY_STOP_YEAR	${stringTablePartyStopYear}
 PARTY_TEMPERATURE	${stringTablePartyTemperature}
 PARTY_TIME_END	${stringTableClimateControlRegPartyEndTime}
 PARTY_TIME_START	${stringTableClimateControlRegPartyStartTime}
+
+PASSAGE_DETECTOR_COUNTER_TRANSMITTER|CHANNEL_OPERATION_MODE	${stringTablePassageDetectorCounterTransmitterChannelOperationMode}
+PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_ABOVE	${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionAbove}
+PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_BELOW	${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionBelow}
+PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_HI	${stringTablePassageDetectorCounterTransmitterCondTxThresholdHi}
+PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_LO	${stringTablePassageDetectorCounterTransmitterCondTxThresholdLo}
+
 PEER_NEEDS_BURST	${stringTablePeerNeedsBurst}
 PIR_OPERATION_MODE	${stringTablePirOperationMode}
+
+PIR_SENSITIVITY	${stringTableSensorSensivity}
+
+PIR_OPERATION_MODE_ECO	${pirOperationModeEco}
+PIR_OPERATION_MODE_NORMAL	${pirOperationModeNormal}
+PIR_OPERATION_MODE_OFF	${lblOff}
+
+POSITION_SAVE_TIME	${stringTablePositionSaveTime}
+
 POWERMETER_IEC1|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
 POWERMETER_IEC1|GAS_ENERGY_COUNTER	${stringTablePowerMeterEnergyCounterGas}
 POWERMETER_IEC1|GAS_POWER	${stringTableGasConsumption}
@@ -801,6 +827,12 @@ POWER|U_SOURCE_FAIL=FALSE	${stringTablePowerSupplyOk}
 POWER|U_SOURCE_FAIL=TRUE	${stringTablePowerSupplyNotOk}
 POWER|U_USBD_OK=FALSE	${stringTableUSBNotActive}
 POWER|U_USBD_OK=TRUE	${stringTableUSBActive}
+PRESENCEDETECTOR_TRANSCEIVER	${stringTablePresenceDetectorTitle}
+PRESENCEDETECTOR_TRANSCEIVER|MIN_INTERVAL	${stringTableMotionDetectorMinInterval}
+PRESENCE_DETECTION_ACTIVE=FALSE	${stringTablePresenceDetectionActiveFalse}
+PRESENCE_DETECTION_ACTIVE=TRUE	${stringTablePresenceDetectionActiveTrue}
+PRESENCE_DETECTION_STATE=FALSE	${stringTablePresenceDetectionStateFalse}
+PRESENCE_DETECTION_STATE=TRUE	${stringTablePresenceDetectionStateTrue}
 PRESS_LONG	${stringTableKeyPressLong}
 PRESS_LONG=TRUE	${stringTableKeyPressLongTrue}
 PRESS_SHORT	${stringTableKeyPressShort}
@@ -834,6 +866,15 @@ RAMP_STOP	${stringTableDimmerRampStop}
 RAMP_TIME	${stringTableDimmerRampTime}
 REDUCE_LEVEL	${stringTableDimmerReduceLevel}
 REDUCE_TEMP_LEVEL	${stringTableDimmerReduceTempLevel}
+REFERENCE_RUNNING_TIME_BOTTOM_TOP_UNIT	${stringTableTimeBottomTopUnit}
+REFERENCE_RUNNING_TIME_BOTTOM_TOP_VALUE	${stringTableTimeBottomTopValue}
+
+REFERENCE_RUNNING_TIME_TOP_BOTTOM_UNIT	${stringTableTimeTopBottomUnit}
+REFERENCE_RUNNING_TIME_TOP_BOTTOM_VALUE	${stringTableTimeTopBottomValue}
+
+REFERENCE_RUNNING_TIME_SLATS_UNIT	${stringTableTimeSlatsUnit}
+REFERENCE_RUNNING_TIME_SLATS_VALUE	${stringTableTimeSlatsValue}
+
 REMOTECONTROL_RECEIVER	${stringTableRemoteControlReceiver}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT	${stringTableKeyLongPressTimeOutUnit}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT=100ms	${optionUnit100MS}
@@ -841,6 +882,7 @@ REPEATED_LONG_PRESS_TIMEOUT_UNIT=H	${optionUnitH}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT=M	${optionUnitM}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT=S	${optionUnitS}
 REPEATED_LONG_PRESS_TIMEOUT_VALUE	${stringTableKeyLongPressTimeOutValue}
+RESET_PRESENCE	${stringTableResetPresence}
 RESTART_BUTTONPRESS	${stringTableRestartButtonPress}
 RESTART_BUTTONPRESS_IF_WAS_ON	${stringTableRestartButtonPressIfWasOn}
 RESTART_LAST	${stringTableRestartLast}
@@ -895,6 +937,7 @@ ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=TILTED	${stringTableRHSMsgPosTilted}
 ROTARY_HANDLE_TRANSCEIVER|STATE=CLOSED	${stringTableRHSStateClosed}
 ROTARY_HANDLE_TRANSCEIVER|STATE=OPEN	${stringTableRHSStateOpen}
 ROTARY_HANDLE_TRANSCEIVER|STATE=TILTED	${stringTableRHSStateTilted}
+ROUTER_MODULE_ENABLED	${stringTableRouterModuleEnabled}
 RS485_IDLE_TIME	${stringTableRS485IdleTime}
 
 RSSI_DEVICE	${stringTableRSSIDevice}
@@ -905,6 +948,14 @@ SABOTAGE=TRUE	${stringTableSabotageContactWasActive}
 SABOTAGE_MSG	${stringTableSabotageMsg}
 SABOTAGE|SHAKING	${stringTableSabotageContact}
 SECTION	${stringTableSection}
+SELF_CALIBRATION_RESULT=FALSE	${stringTableSelfCalibrationResultFalse}
+SELF_CALIBRATION_RESULT=TRUE	${stringTableSelfCalibrationResultTrue}
+
+SELF_CALIBRATION=START	${stringTableSelfCalibrationStart}
+SELF_CALIBRATION=STOP	${stringTableSelfCalibrationStop}
+
+
+
 SENSOR=FALSE	${stringTableSensorFalse}
 SENSOR=TRUE	${stringTableSensorTrue}
 SENSOR_ERROR=FALSE	${stringTableSensorErrorFalse}
@@ -936,6 +987,7 @@ SENSOR_RANGE_2G	${stringTableSensorRange2G}
 SENSOR_RANGE_4G	${stringTableSensorRange4G}
 SENSOR_RANGE_8G	${stringTableSensorRange8G}
 SENSOR_RANGE_16G	${stringTableSensorRange16G}
+SENSOR_SENSITIVITY	${stringTableSensorSensivity}
 SENSOR_WINDOW	${stringTableSensorWindowTitle}
 SENSOR_WINDOW|EVENT_DELAYTIME	${stringTableSensorWindowEventDelayTime}
 SENSOR_WINDOW|EVENT_DELAYTIME=NOT_USED	${stringTableActorWindowStatusInfoNotUsed}
@@ -995,6 +1047,13 @@ SHUTTER_CONTACT|STATE=CLOSED	${stringTableShutterContactStateFalse}
 SHUTTER_CONTACT|STATE=FALSE	${stringTableShutterContactStateFalse}
 SHUTTER_CONTACT|STATE=OPEN	${stringTableShutterContactStateTrue}
 SHUTTER_CONTACT|STATE=TRUE	${stringTableShutterContactStateTrue}
+SHUTTER_TRANSMITTER|LEVEL	${stringTableBlindLevel}
+SHUTTER_TRANSMITTER|LEVEL_2	${stringTableJalousieSlatsLevel}
+
+SHUTTER_VIRTUAL_RECEIVER	${stringTableShutterVirtualReceiverTitle}
+SHUTTER_VIRTUAL_RECEIVER|LEVEL	${stringTableBlindLevel}
+SHUTTER_VIRTUAL_RECEIVER|LEVEL_2	${stringTableJalousieSlatsLevel}
+SHUTTER_VIRTUAL_RECEIVER|STOP	${stringTableBlindStop}
 SIGNAL	${stringTableSignal}
 SIGNAL_CHIME	${stringTableSignalChimeTitle}
 SIGNAL_CHIME|ACT_NUM	${stringTableSignalChimeActNum}
@@ -1131,6 +1190,9 @@ UPDATE_PENDING=FALSE	${stringTableUpdatePendingFalse}
 UPDATE_PENDING=TRUE	${stringTableUpdatePendingTrue}
 USER_COLOR	${stringTableSubmit}
 USER_PROGRAM	${stringTableSubmit}
+
+VALVE_MAXIMUM_POSITION	${stringTableValveMaximumPosition}
+
 VALVE_STATE	${stringTableClimateControlRTTransceiverVentPos}
 VALVE_STATE=ADAPTION_DONE	${stringTableValveStateAdaptionDone}
 VALVE_STATE=ADAPTION_IN_PROGRESS	${stringTableValveStateAdaptionInProgress}
@@ -1217,6 +1279,13 @@ WEATHER|WIND_SPEED	${stringTableWeatherWindSpeed}
 WEATHER|WIND_SPEED_RESULT_SOURCE	${stringTableWeatherWindSpeedResultSource}
 WEATHER|WIND_SPEED_RESULT_SOURCE=AVERAGE_VALUE	${stringTableWeatherWindSpeedResultSourceAverage}
 WEATHER|WIND_SPEED_RESULT_SOURCE=MAX_VALUE	${stringTableWeatherWindSpeedResultSourceMax}
+
+WEEK_PROGRAM_CHANNEL_LOCKS	${stringTableWeekProgramChannelLocks}
+WEEK_PROGRAM_TARGET_CHANNEL_LOCKS	${stringTableWeekProgramTargetChannelLocks}
+WEEK_PROGRAM_TARGET_CHANNEL_LOCK=MANU_MODE	${stringTableWeekProgramTargetChannelLockManu}
+WEEK_PROGRAM_TARGET_CHANNEL_LOCK=AUTO_MODE_WITH_RESET	${stringTableWeekProgramTargetChannelLockAutoReset}
+WEEK_PROGRAM_TARGET_CHANNEL_LOCK=AUTO_MODE_WITHOUT_RESET	${stringTableWeekProgramTargetChannelLockAuto}
+
 WHITE	${stringTableColorTemperature}
 WINDOW_OPEN_REPORTING	${stringTableWindowOpenReporting}
 WINDOW_OPEN_REPORTING=FALSE	${stringTableWindowOpenReportingFalse}
@@ -1243,5 +1312,9 @@ WINMATIC|TILT_MAX	${stringTableWinMaticTiltMax}
 WS_CS	${stringTableWSCS}
 WS_TH	${stringTableWSTH}
 minutes	${stringTableMinute}
+15Min	${optionUnit15M}
+30Min	${optionUnit30M}
+60Min	${optionUnit60M}
+120Min	${optionUnit120M}
 
 

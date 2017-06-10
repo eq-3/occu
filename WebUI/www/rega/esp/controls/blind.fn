@@ -129,114 +129,115 @@ function ::CreateJalousieActuator()
   {
     iStopId = oStop.ID();
   }
-        WriteLine("<td>");
-          WriteLine("<table>");
-           WriteLine("<tr><td colspan='5'><div text-align:'center' style='background-color:#89989b; color:black'>${stringTableBlindLevel}</div></td></tr>");
 
-            WriteLine("<tr>");
-                WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+  WriteLine("<td>");
+    WriteLine("<table>");
+     WriteLine("<tr><td colspan='5'><div text-align:'center' style='background-color:#89989b; color:black'>${stringTableBlindLevel}</div></td></tr>");
 
+      WriteLine("<tr>");
+          WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+
+          WriteLine("<td>");
+            WriteLine("<table>");
+
+              WriteLine("<tr>");
                 WriteLine("<td>");
-                  WriteLine("<table>");
+                  WriteLine("  <div class='PercBtn' style='height:35px;width:100px;'>");
+                  WriteLine("  <table width='100%' height='100%'>");
+                  WriteLine("    <tr class='CLASS02531'>");
+                  string sReadOnly = "";
+                  if (system.GetVar("iStatusOnly")) {
+                    sReadOnly = "readonly";
+                  }
+                  WriteLine("<td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' style='text-align:center' "#sReadOnly#" /><b>%</b></td></tr>");
 
-                    WriteLine("<tr>");
-                      WriteLine("<td>");
-                        WriteLine("  <div class='PercBtn' style='height:35px;width:100px;'>");
-                        WriteLine("  <table width='100%' height='100%'>");
-                        WriteLine("    <tr class='CLASS02531'>");
-                        string sReadOnly = "";
-                        if (system.GetVar("iStatusOnly")) {
-                          sReadOnly = "readonly";
-                        }
-                        WriteLine("<td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' style='text-align:center' "#sReadOnly#" /><b>%</b></td></tr>");
-
-                        ! This original stuff is hidden (not needed) but must be available because of a class which inherits from the original
-                        WriteLine("<tr class='hidden'>");
-                        WriteLine("<td align='center'>");
-                        WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
-                        WriteLine("</td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
-                        WriteLine("</tr>");
-
-                        WriteLine("</table>");
-                        WriteLine("</div>");
-                      WriteLine("</td>");
-                    WriteLine("</tr>");
-
-                    WriteLine("<tr>");
-                      WriteLine("<td>");
-                        WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' style='width:100px;'>${actionStatusControlStop}</div>");
-                      WriteLine("</td>");
-                    WriteLine("</tr>");
-                  WriteLine("</table>");
-                WriteLine("</td>");
-
-                ! This original stuff is hidden (not needed) but must be available because of a class which inherits from the original
-                WriteLine("<td class='hidden'>");
-                  WriteLine("<table width='100%' height='100%' cellspacing='10'>");
-                    WriteLine("<tr>");
-                      WriteLine("<td>");
-                        WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Up' >");
-                          WriteLine("<tr>");
-                            WriteLine("<td>");
-                              WriteLine("<img src='/ise/img/up.png' width='40' height='30' class='CLASS02552' />");
-                            WriteLine("</td>");
-                            WriteLine("<td>");
-                              ! WriteLine("Auf");
-                              WriteLine("${actionStatusControlUp}");
-                            WriteLine("</td>");
-                          WriteLine("</tr>");
-                        WriteLine("</table>");
-                      WriteLine("</td>");
-                    WriteLine("</tr>");
-                    WriteLine("<tr>");
-                      WriteLine("<td>");
-                        WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Down'>");
-                          WriteLine("<tr>");
-                            WriteLine("<td>");
-                              WriteLine("<img src='/ise/img/down.png' width='40' height='30' class='CLASS02552' />");
-                            WriteLine("</td>");
-                            WriteLine("<td>");
-                              !WriteLine("Ab");
-                              WriteLine("${actionStatusControlDown}");
-                            WriteLine("</td>");
-                          WriteLine("</tr>");
-                        WriteLine("</table>");
-                      WriteLine("</td>");
-                    WriteLine("</tr>");
-                  WriteLine("</table>");
-                WriteLine("</td>");
-            WriteLine("</tr>");
-
-            WriteLine("<tr><td colspan='3'><hr></td></tr>");
-            WriteLine("<tr><td colspan='3'><div text-align:'center' style='background-color:#89989b; color:black'>${stringTableJalousieSlatsLevel}</div></td></tr>");
-
-            WriteLine("<tr>");
-              WriteLine("<td colspan='3'>");
-                WriteLine("<table>");
-                  WriteLine("<tr>");
-                    WriteLine("<td colspan='2' class='CLASS02546'>");
-                      WriteLine("<div class='PercBtn' style='height:35px; line-height:35px; width:100px; background-color:#89989b'>");
-                        WriteLine("<input id='infoSliderPos"#chnId#"' type='text' value='0' size='3' class='CLASS02542' style='text-align:center'/><b>%</b>");
-                      WriteLine("</div>");
-                    WriteLine("</td>");
-                    WriteLine("<td>");
-                      WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;'></div>");
-                    WriteLine("</td>");
+                  ! This original stuff is hidden (not needed) but must be available because of a class which inherits from the original
+                  WriteLine("<tr class='hidden'>");
+                  WriteLine("<td align='center'>");
+                  WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+                  WriteLine("</td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
                   WriteLine("</tr>");
-                WriteLine("</table>");
-              WriteLine("</td>");
-            WriteLine("</tr>");
 
-            WriteLine("<tr><td colspan='3'><hr></td></tr>");
+                  WriteLine("</table>");
+                  WriteLine("</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
 
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' style='width:100px;'>${actionStatusControlStop}</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+
+          ! This original stuff is hidden (not needed) but must be available because of a class which inherits from the original
+          WriteLine("<td class='hidden'>");
+            WriteLine("<table width='100%' height='100%' cellspacing='10'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Up' >");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<img src='/ise/img/up.png' width='40' height='30' class='CLASS02552' />");
+                      WriteLine("</td>");
+                      WriteLine("<td>");
+                        ! WriteLine("Auf");
+                        WriteLine("${actionStatusControlUp}");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Down'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<img src='/ise/img/down.png' width='40' height='30' class='CLASS02552' />");
+                      WriteLine("</td>");
+                      WriteLine("<td>");
+                        !WriteLine("Ab");
+                        WriteLine("${actionStatusControlDown}");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("<tr><td colspan='3'><hr></td></tr>");
+      WriteLine("<tr><td colspan='3'><div text-align:'center' style='background-color:#89989b; color:black'>${stringTableJalousieSlatsLevel}</div></td></tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td colspan='3'>");
+          WriteLine("<table>");
             WriteLine("<tr>");
-              WriteLine("<td colspan='3'>");
-                WriteLine("<div id='btnSendValues"#chnId#"' class='CLASS02550 ControlBtnOff' style='width:99%'>Send</div>");
+              WriteLine("<td colspan='2' class='CLASS02546'>");
+                WriteLine("<div class='PercBtn' style='height:35px; line-height:35px; width:100px; background-color:#89989b'>");
+                  WriteLine("<input id='infoSliderPos"#chnId#"' type='text' value='0' size='3' class='CLASS02542' style='text-align:center'/><b>%</b>");
+                WriteLine("</div>");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;'></div>");
               WriteLine("</td>");
             WriteLine("</tr>");
-
           WriteLine("</table>");
         WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("<tr><td colspan='3'><hr></td></tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td colspan='3'>");
+          WriteLine("<div id='btnSendValues"#chnId#"' class='CLASS02550 ControlBtnOff' style='width:99%'>Send</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+    WriteLine("</table>");
+  WriteLine("</td>");
 
 
 
@@ -255,5 +256,340 @@ function ::CreateJalousieActuator()
     WriteLine("ibs"#cObj.ID()#" = new iseButtonsJalousie(" # chnId # ", " # iLvl # ", " # iLvlId # ", " # iStopId # ", " #system.GetVar("iStatusOnly")# ", opts );" );
     WriteLine("translatePage('#ctrl"#chnId#"tbl');");
   WriteLine("</script>");
+  return;
+}
+
+function ::CreateBlindVirtualReceiver()
+{
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+  object oLvl = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL");
+  object oLvlSlats = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_2");
+  object oStop = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.STOP");
+
+
+  integer iLvlId = 0;
+  integer iLvlSlatsId = 0;
+  integer iStopId = 0;
+  integer iLvl = 0;
+  integer iLvlSlats = 0;
+
+  if (oLvl)
+  {
+    iLvlId = oLvl.ID();
+    iLvl = oLvl.Value();
+    if( oLvl.ValueUnit() == "100%" )
+    {
+      iLvl = iLvl * 100;
+    }
+  }
+
+  if (oLvlSlats)
+  {
+    iLvlSlatsId = oLvlSlats.ID();
+    iLvlSlats = oLvlSlats.Value();
+
+    if( oLvlSlats.ValueUnit() == "100%" )
+    {
+      iLvlSlats = iLvlSlats * 100;
+    }
+  }
+
+  if (oStop)
+  {
+    iStopId = oStop.ID();
+  }
+
+  WriteLine("<td>");
+    WriteLine("<table>");
+      WriteLine("<tr>");
+
+        WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+        WriteLine("<td>");
+          WriteLine("  <div class='PercBtn'>");
+          WriteLine("  <table width='100%' height='100%'>");
+          WriteLine("    <tr class='CLASS02531'>");
+          string sReadOnly = "";
+          if (system.GetVar("iStatusOnly")) {
+            sReadOnly = "readonly";
+          }
+          WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td></tr>");
+          WriteLine("    <tr>");
+          WriteLine("      <td align='center'>");
+          WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+          WriteLine("      </td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+          WriteLine("    </tr>");
+          WriteLine("  </table>");
+          WriteLine("  </div>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          ! WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' >Stopp</div>");
+          WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' >${actionStatusControlStop}</div>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          WriteLine("<table width='100%' height='100%' cellspacing='10'>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Up' >");
+                  WriteLine("<tr>");
+                    WriteLine("<td>");
+                      WriteLine("<img src='/ise/img/up.png' width='40' height='30' class='CLASS02552' />");
+                    WriteLine("</td>");
+                    WriteLine("<td>");
+                      ! WriteLine("Auf");
+                      WriteLine("${actionStatusControlUp}");
+                    WriteLine("</td>");
+                  WriteLine("</tr>");
+                WriteLine("</table>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Down'>");
+                  WriteLine("<tr>");
+                    WriteLine("<td>");
+                      WriteLine("<img src='/ise/img/down.png' width='40' height='30' class='CLASS02552' />");
+                    WriteLine("</td>");
+                    WriteLine("<td>");
+                      !WriteLine("Ab");
+                      WriteLine("${actionStatusControlDown}");
+                    WriteLine("</td>");
+                  WriteLine("</tr>");
+                WriteLine("</table>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+           WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+
+      WriteLine("<tr><td colspan='5'><hr></td></tr>");
+      WriteLine("<tr><td colspan='5'><div text-align:'center' style='background-color:#89989b; color:black'>${stringTableJalousieSlatsLevel}</div></td></tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td colspan='5'>");
+          WriteLine("<table>");
+            WriteLine("<tr>");
+              WriteLine("<td colspan='2' class='CLASS02546'>");
+                WriteLine("<div class='PercBtn' style='height:35px; line-height:35px; width:100px; background-color:#89989b'>");
+                  WriteLine("<input id='infoSliderPos"#chnId#"' type='text' value='0' size='3' class='CLASS02542' style='text-align:center'/><b>%</b>");
+                WriteLine("</div>");
+              WriteLine("</td>");
+              WriteLine("<td>");
+                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;'></div>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  string sCtrlId = "shutter"#chnId;
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine("var opts = {");
+      WriteLine("chnAddress:'"#chnAddress#"',");
+      WriteLine("levelD:"#iLvlId#",");
+      WriteLine("levelValue:"#iLvl#",");
+      WriteLine("levelSlatsID:"#iLvlSlatsId#",");
+      WriteLine("levelSlatsValue:"#iLvlSlats#",");
+    WriteLine("};");
+
+    WriteLine("ibs"#cObj.ID()#" = new iseHmIPJalousieShutter(" # chnId # ", " # iLvl # ", " # iLvlId # ", " # iStopId # ", " #system.GetVar("iStatusOnly")# ", opts );" );
+    WriteLine("translatePage('#ctrl"#chnId#"tbl');");
+  WriteLine("</script>");
+  return;
+}
+
+function ::CreateBlindTransmitter()
+{
+  object oLvl = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL");
+  object oLvlSlats = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL_2");
+
+
+  real iLvl = -1;
+  real iLvlSlats = -1;
+
+  string unitLevel = "%";
+  string unitLevelSlat = "%";
+
+
+
+  if ( (oLvl) && ((oLvl.Value() != "") || (oLvl.Value() == 0.000000)) )
+  {
+    iLvl = oLvl.Value();
+    if ( oLvl.ValueUnit() == "100%" )
+    {
+      iLvl = iLvl * 100;
+    }
+  }
+
+  if ( (oLvlSlats) && ((oLvlSlats.Value() != "") || (oLvlSlats.Value() == 0.000000)) )
+  {
+    iLvlSlats = oLvlSlats.Value();
+    if ( oLvlSlats.ValueUnit() == "100%" )
+    {
+      iLvlSlats = iLvlSlats * 100;
+    }
+  }
+
+  if (iLvl == -1) {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
+  } else {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#iLvl.ToInteger()#unitLevel#"</div></td>");
+  }
+
+  if (iLvlSlats == -1) {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>${unknown}</div></td>");
+  } else {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>"#iLvlSlats.ToInteger()#unitLevelSlat#"</div></td>");
+  }
+
+  return;
+}
+
+
+function ::CreateShutterVirtualReceiver()
+{
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+  object oLvl = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.LEVEL");
+  object oStop = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.STOP");
+
+  integer iLvlId = 0;
+  integer iStopId = 0;
+  integer iLvl = 0;
+
+  if (oLvl)
+  {
+    iLvlId = oLvl.ID();
+    iLvl = oLvl.Value();
+    if( oLvl.ValueUnit() == "100%" )
+    {
+      iLvl = iLvl * 100;
+    }
+  }
+
+
+  if (oStop)
+  {
+    iStopId = oStop.ID();
+  }
+
+  WriteLine("<td>");
+    WriteLine("<table>");
+      WriteLine("<tr>");
+
+        WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+        WriteLine("<td>");
+          WriteLine("  <div class='PercBtn'>");
+          WriteLine("  <table width='100%' height='100%'>");
+          WriteLine("    <tr class='CLASS02531'>");
+          string sReadOnly = "";
+          if (system.GetVar("iStatusOnly")) {
+            sReadOnly = "readonly";
+          }
+          WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td></tr>");
+          WriteLine("    <tr>");
+          WriteLine("      <td align='center'>");
+          WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+          WriteLine("      </td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+          WriteLine("    </tr>");
+          WriteLine("  </table>");
+          WriteLine("  </div>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          ! WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' >Stopp</div>");
+          WriteLine("<div class='ControlBtnOff CLASS02550' id='"#chnId#"Stop' >${actionStatusControlStop}</div>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          WriteLine("<table width='100%' height='100%' cellspacing='10'>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Up' >");
+                  WriteLine("<tr>");
+                    WriteLine("<td>");
+                      WriteLine("<img src='/ise/img/up.png' width='40' height='30' class='CLASS02552' />");
+                    WriteLine("</td>");
+                    WriteLine("<td>");
+                      ! WriteLine("Auf");
+                      WriteLine("${actionStatusControlUp}");
+                    WriteLine("</td>");
+                  WriteLine("</tr>");
+                WriteLine("</table>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td>");
+                WriteLine("<table class='ControlBtnOff CLASS02551' id='"#chnId#"Down'>");
+                  WriteLine("<tr>");
+                    WriteLine("<td>");
+                      WriteLine("<img src='/ise/img/down.png' width='40' height='30' class='CLASS02552' />");
+                    WriteLine("</td>");
+                    WriteLine("<td>");
+                      !WriteLine("Ab");
+                      WriteLine("${actionStatusControlDown}");
+                    WriteLine("</td>");
+                  WriteLine("</tr>");
+                WriteLine("</table>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+           WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  string sCtrlId = "shutter"#chnId;
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine("var opts = {");
+      WriteLine("chnAddress:'"#chnAddress#"',");
+      WriteLine("levelD:"#iLvlId#",");
+      WriteLine("levelValue:"#iLvl#",");
+    WriteLine("};");
+
+    WriteLine("ibs"#cObj.ID()#" = new iseHmIPJalousieShutter(" # chnId # ", " # iLvl # ", " # iLvlId # ", " # iStopId # ", " #system.GetVar("iStatusOnly")# ", opts );" );
+    WriteLine("translatePage('#ctrl"#chnId#"tbl');");
+  WriteLine("</script>");
+  return;
+}
+
+
+function ::CreateShutterTransmitter()
+{
+  object oLvl = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL");
+
+  real iLvl = -1;
+
+  string unitLevel = "%";
+  string unitLevelSlat = "%";
+
+  if ( (oLvl) && ((oLvl.Value() != "") || (oLvl.Value() == 0.000000)) )
+  {
+    iLvl = oLvl.Value();
+    if ( oLvl.ValueUnit() == "100%" )
+    {
+      iLvl = iLvl * 100;
+    }
+  }
+
+  if (iLvl == -1) {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
+  } else {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#iLvl.ToInteger()#unitLevel#"</div></td>");
+  }
+
   return;
 }

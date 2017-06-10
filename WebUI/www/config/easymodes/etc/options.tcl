@@ -105,6 +105,21 @@ proc option {type} {
         set options(1.0) "100$p"
     }
 
+    "BLIND_LEVEL_2" {
+        set options(0.0) "0$p"
+        set options(0.1) "10$p"
+        set options(0.2) "20$p"
+        set options(0.3) "30$p"
+        set options(0.4) "40$p"
+        set options(0.5) "50$p"
+        set options(0.6) "60$p"
+        set options(0.7) "70$p"
+        set options(0.8) "80$p"
+        set options(0.9) "90$p"
+        set options(1.0) "100$p"
+        set options(1.01) "\${lblIgnore}"
+    }
+
     "DIM_ONLEVEL" {
         set options(0.1) "10$p"
         set options(0.2) "20$p"
@@ -134,7 +149,21 @@ proc option {type} {
         set options(1.005) "\${lastValue}"
         set options(99999998)  "\${enterValue}"
     }
-    
+
+    "RAW_0_100Percent" {
+        set options(0) "0$p"
+        set options(10) "10$p"
+        set options(20) "20$p"
+        set options(30) "30$p"
+        set options(40) "40$p"
+        set options(50) "50$p"
+        set options(60) "60$p"
+        set options(70) "70$p"
+        set options(80) "80$p"
+        set options(90) "90$p"
+        set options(100) "100$p"
+    }
+
     "RAMPTIME" {
         set options(0)    "\${none}"
         set options(0.2)  "0.2$s"
@@ -229,10 +258,24 @@ proc option {type} {
     }
 
     "POWERUP_JUMPTARGET" {
+      set options(1) "\${stringTableOnDelay}"
+      set options(2) "\${stringTableStateTrue}"
+      set options(3) "\${stringTableOffDelay}"
+      #set options(0) "\${stringTableStateFalse}"
+    }
+
+    "POWERUP_JUMPTARGET_OnOff" {
       set options(0) "\${stringTableStateFalse}"
       set options(1) "\${stringTableOnDelay}"
       set options(2) "\${stringTableStateTrue}"
-      #set options(3) "\${stringTableOffDelay}"
+      set options(3) "\${stringTableOffDelay}"
+    }
+
+    "POWERUP_JUMPTARGET_BLIND_OnOff" {
+      set options(0) "\${stringTableBlindLevelOff}"
+      set options(1) "\${stringTableBlindLevelOnDelay}"
+      set options(2) "\${stringTableBlindLevelOn}"
+      set options(3) "\${stringTableBlindLevelOffDelay}"
     }
 
     "SHORT_LONG" {

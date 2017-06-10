@@ -67,7 +67,7 @@ function ::CreateDualWhiteBrightnessActuator()
       WriteLine("</tr>");
       if ( (rLevelReal != -1.0) && (user.UserEasyLinkMode() != true) ) {
         WriteLine("<tr>");
-          WriteLine("<td colspan='4'><div class='ControlBtnInfo j_translate' style='color:white'>${lblInfoDimmerLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>")
+          WriteLine("<td colspan='4'><div class='ControlBtnInfo j_translate' style='color:white'>${lblInfoLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>")
         WriteLine("</tr>");
       }
 
@@ -178,7 +178,7 @@ function ::CreateDualWhiteColorActuator() {
 
         if ( (rLevelReal != -1.0) && (user.UserEasyLinkMode() != true) ) {
           WriteLine("<tr>");
-            WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;'>${lblInfoDimmerLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>");
+            WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;'>${lblInfoLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>");
           WriteLine("</tr>");
         }
       WriteLine("</table>");

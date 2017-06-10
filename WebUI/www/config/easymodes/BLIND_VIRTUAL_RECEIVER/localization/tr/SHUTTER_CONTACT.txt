@@ -1,0 +1,24 @@
+"description_1" : "<span class=\"translated\">*tr Mit jedem &Ouml;ffnen / Schliessen des T&uuml;r-/Fensterkontaktes f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz hoch. Ist eine Hochfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit hochgefahren.</span><br/><br/>",
+
+"description_2" : "<span class=\"translated\">*tr Mit jedem &Ouml;ffnen / Schliessen des T&uuml;r-/Fensterkontaktes f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz herunter. Ist eine Herunterfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit runtergefahren.</span><br/><br/>",
+
+"description_3" : "<span class=\"translated\">*tr Mit jedem &Ouml;ffnen / Schliessen des T&uuml;r-/Fensterkontaktes f&auml;hrt die Jalousie im Wechsel ganz hoch bzw. ganz herunter (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">*tr Mit jedem &Ouml;ffnen / Schliessen des T&uuml;r-/Fensterkontaktes f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+
+"subset_1" : "*tr hochgefahren",
+"subset_2" : "*tr heruntergefahren",
+"subset_3" : "*tr hoch- / heruntergefahren im Wechsel",
+
+"subset_4" : "*tr Offen - aus / Zu - ein",
+"subset_5" : "*tr Offen - ein / Zu - aus",
+
+"subset_6" : "*tr Schlie&szlig;en",
+"subset_7" : "*tr &Ouml;ffnen",
+"subset_8" : "*tr &Auml;ndern",
+
+"subset_9" : "*tr Offen",
+"subset_10" : "*tr Zu",
+
+
+

@@ -786,8 +786,9 @@ a img {
   font-weight: bold;
   text-align: center;
   border: solid 1px $_(black); /* black */
-  border-top: inset 4px $_(clickable);
+  /* border-top: inset 4px $_(clickable);*/
   border-right: inset 4px $_(clickable);
+  cursor: pointer;
 }
 
 .ControlBtnOn {
@@ -798,6 +799,7 @@ a img {
   border: solid 1px $_(black); /* black */
   border-top: inset 4px $_(active);
   border-right: inset 4px $_(active);
+  cursor: pointer;
 }
 
 .PercBtn {
@@ -814,7 +816,7 @@ a img {
 
 .ControlBtnInfo {
   background-color: $_(clickable);
-  color: $_(textColorB); /* black */
+  color: $_(textColorA); /* white */
   border: solid 1px $_(black); /* black */
   padding: 5px;
   font-weight: bold;

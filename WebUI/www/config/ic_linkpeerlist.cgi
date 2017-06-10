@@ -176,6 +176,7 @@ proc areMoreLinksAllowed {devType chType} {
     HmIP-PS KEY_TRANSCEIVER
     HmIP-PSM KEY_TRANSCEIVER
     HmIP-PDT KEY_TRANSCEIVER
+    HmIP-PDT-UK KEY_TRANSCEIVER
   }
 
   foreach val [array names notAllowed] {
@@ -314,7 +315,7 @@ proc put_tablebody {} {
         catch { set sender_index $sender_descr(INDEX) }
         catch { set receiver_parent_type $receiver_descr(PARENT_TYPE) }
         catch { set receiver_index $receiver_descr(INDEX) }
-         set SENTRY(SENDER_PARENT_TYPE) $sender_parent_type
+        set SENTRY(SENDER_PARENT_TYPE) $sender_parent_type
         set SENTRY(SENDER_TYPE) $sender_type
         set SENTRY(RECEIVER_PARENT_TYPE) $receiver_parent_type
 

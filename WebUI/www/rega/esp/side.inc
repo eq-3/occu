@@ -21,6 +21,7 @@
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
   string excludeHmIPResetMotion = "RESET_MOTION";
   string excludeHmIPSmokeDetCommandReservedAlarmOff = "SMOKE_DETECTOR_COMMAND=RESERVED_ALARM_OFF";
+  string excludeHmIPresenceDetectionActive = "PRESENCE_DETECTION_ACTIVE";
 
   integer iDP = oSD.DestinationDP();
   integer iCH = oSD.DestinationChannel();
@@ -194,8 +195,9 @@
             }
             else
             {
-              if( (iDPvt == ivtBinary) && (iDPst != istAction) )
-              {
+              if( (iDPvt == ivtBinary) && (iDPst != istAction)
+              && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1)
+              ) {
                 if( (oDP.ID() == iDP) && (iV == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
                 Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
                 string sValue = oDP.Name()#": "#oDP.ValueName1();
@@ -238,7 +240,11 @@
               else
               {
                 ! Some parameter shouldn´t be visible
-                if( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1)) && (oDP.HSSID().Find(excludeHmIPCDT) == -1) && (oDP.HSSID().Find(excludeHmIPResetMotion) == -1) ) {
+                if ( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1))
+                && (oDP.HSSID().Find(excludeHmIPCDT) == -1)
+                && (oDP.HSSID().Find(excludeHmIPResetMotion) == -1)
+                && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1)
+                ) {
                   Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
                   string sValue = oDP.Name();
                   if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
@@ -265,7 +271,8 @@
               }
             }
           }
-          string sEnumSpecial = oDP.EnumSpecialIDs().ToString();
+          string sEnumSpecial = "";
+          if( oDP.IsTypeOf( OT_HSSDP ) ) { sEnumSpecial = oDP.EnumSpecialIDs().ToString(); };
           if( sEnumSpecial == "65535" ) { sEnumSpecial = ""; }
           string s;
           foreach(s,sEnumSpecial)
@@ -530,15 +537,15 @@
               }
             }
           }
-          
+
           if( iVT == ivtObjectId )
           {
-            
+
             Write( ' <i>mit</i> ' );
             object oDPTmp = dom.GetObject( iV );
             if( oDPTmp )
             {
-              
+
               object oCH = dom.GetObject( oDPTmp.Channel() );
               if( oCH )
               {
@@ -564,7 +571,7 @@
                     {
                       integer iDPvt = oDP.ValueType();
                       integer iDPst = oDP.ValueSubType();
-                      if( iFirstID == ID_ERROR ) { iFirstID = oDP.ID(); }         
+                      if( iFirstID == ID_ERROR ) { iFirstID = oDP.ID(); }
                       string sSelected = "";
                       if( oDP.ID() == iV ) { sSelected = " selected"; bFound = true; } else { sSelected = ""; }
                       string sIdx = "";
@@ -594,7 +601,7 @@
             } else { Write("(unbekannter Datenpunkt)"); }
             Write( ' <span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span> ' );
           }
-          
+
           if( iVT == ivtSystemId )
           {
             Write( ' <i>mit</i> ' );
@@ -665,6 +672,6 @@
           Write( '</select> ' );
         }
       }
-    }       
+    }
   }
 %>

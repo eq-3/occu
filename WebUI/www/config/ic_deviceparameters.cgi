@@ -397,7 +397,7 @@ proc put_orig_channel_parameter {address ch} {
         append s1 "<script type=\"text/javascript\">"
         append s1 "self.setMinDelayVis = function(ch, i) {"
 
-            append s1 "console.log(\"channel: \" + ch + \" i: \" + i);"
+            # append s1 "console.log(\"channel: \" + ch + \" i: \" + i);"
 
             append s1 "var inputField = document.getElementById(\"separate_CHANNEL_\"+ch+\"\_\"+i+\"\");"
             append s1 "var inputField_tmp = document.getElementById(\"separate_CHANNEL_\"+ch+\"\_\"+i+\"\_tmp\");"
@@ -572,6 +572,15 @@ proc isVirtual {paramId} {
   lappend virtualDevices "hmip-miob_1_master" "hmip-miob_2_master" "hmip-miob_4_master" "hmip-miob_5_master" "hmip-miob_6_master" "hmip-miob_8_master"
   lappend virtualDevices "hmip-pdt_2_master" "hmip-pdt_4_master" "hmip-pdt_5_master"
   lappend virtualDevices "hmip-fdt_1_master" "hmip-fdt_3_master" "hmip-fdt_4_master"
+  lappend virtualDevices "hmip-bbl_5_master" "hmip-bbl_6_master"
+  lappend virtualDevices "hmip-fbl_5_master" "hmip-fbl_6_master"
+  lappend virtualDevices "hmip-broll_5_master" "hmip-broll_6_master"
+  lappend virtualDevices "hmip-froll_5_master" "hmip-froll_6_master"
+
+  lappend virtualDevices "hmip-mod-oc8_11_master" "hmip-mod-oc8_12_master" "hmip-mod-oc8_15_master" "hmip-mod-oc8_16_master"
+  lappend virtualDevices "hmip-mod-oc8_19_master" "hmip-mod-oc8_20_master" "hmip-mod-oc8_23_master" "hmip-mod-oc8_24_master"
+  lappend virtualDevices "hmip-mod-oc8_27_master" "hmip-mod-oc8_28_master" "hmip-mod-oc8_31_master" "hmip-mod-oc8_32_master"
+  lappend virtualDevices "hmip-mod-oc8_35_master" "hmip-mod-oc8_36_master" "hmip-mod-oc8_39_master" "hmip-mod-oc8_40_master"
 
   set virtual "false"
 
@@ -800,7 +809,12 @@ proc put_channel_parameters {} {
     set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/$ch_paramid.tcl"
 
     if {[isHmIP] == "true"} {
-      set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl"
+      if {[file exist $env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl]} {
+        set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl"
+      } elseif {[file exists $env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_descr(TYPE).tcl]} {
+        set ch_paramid "$ch_descr(TYPE)"
+        set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_descr(TYPE).tcl"
+      }
     }
 
     global internalKey simulateLongKeyPress
@@ -1001,8 +1015,10 @@ proc put_channel_parameters {} {
     #if {$s == ""} then { set s "<div class=\"CLASS22004\">Keine Parameter einstellbar.</div>" }
     if {$s == ""} then { set s "<div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div>" }
 
-    # virtuelle Kanäle nur anzeigen, wenn im Expertenmodus    
-    if {([isVirtual $ch_paramid] == "true") && ([session_is_expert] == 0) } {
+    # virtuelle Kanäle nur anzeigen, wenn im Expertenmodus
+    #if {([isVirtual $ch_paramid] == "true") && ([session_is_expert] == 0) }
+
+    if {([isVirtual [xmlrpc $iface_url($iface) getParamsetId [list string $ch_descr(ADDRESS)] MASTER]] == "true") && ([session_is_expert] == 0) } {
       set hide_channel 1
     }
 

@@ -6,6 +6,10 @@
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
   string excludeHmIPValveState =  "VALVE_STATE";
   string excludeHmIPSmokeDetTestResultNone = "SMOKE_DETECTOR_TEST_RESULT=NONE";
+  string excludeHmIPCurrentIllumination = "CURRENT_ILLUMINATION";
+  string excludeHmIPActualTemperature = "ACTUAL_TEMPERATURE";
+  string excludeHmIPOperatingVoltage = "OPERATING_VOLTAGE";
+  string excludeHmIPresenceDetectionActive = "PRESENCE_DETECTION_ACTIVE";
 
   string excludeHmIPRSSI_DEVICE = "RSSI_DEVICE";
   string excludeHmIPRSSI_PEER = "RSSI_PEER";
@@ -118,7 +122,10 @@
                     if( !oDP.IsTypeOf( OT_VARDP ) ) {
                       optionVal = oDP.HSSID()#"="#sVLValue;
                     }
-                    if ((oDP.HSSID().Find(excludeHmIPProcess) == -1) && (oDP.HSSID().Find(excludeHmIPValveState) == -1) && (optionVal != excludeHmIPSmokeDetTestResultNone )) {
+                    if ((oDP.HSSID().Find(excludeHmIPProcess) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPValveState) == -1) && (optionVal != excludeHmIPSmokeDetTestResultNone )
+                    ) {
+
                       if( (oDP.ID() == iLV) && (iRV1 == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
                       Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
                       string sValue = oDP.Name()#": "#sVLValue;
@@ -144,7 +151,7 @@
               }
               else
               {
-                if( (iDPvt == ivtBinary) && ((iDPst != istAction)) )
+                if( (iDPvt == ivtBinary) && ((iDPst != istAction)) && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1))
                 {
                   if( (oDP.ID() == iLV) && (iRV1 == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
                   Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
@@ -194,6 +201,10 @@
                     && (oDP.HSSID().Find(excludeHmIPCDT) == -1)
                     && (oDP.HSSID().Find(excludeHmIPRSSI_DEVICE) == -1)
                     && (oDP.HSSID().Find(excludeHmIPRSSI_PEER) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPCurrentIllumination) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPActualTemperature) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPOperatingVoltage) == -1)
+                    && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1)
                    ) {
 
                     if( oDP.ID() == iLV ) { sSelected = " selected"; } else { sSelected = ""; }

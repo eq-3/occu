@@ -102,50 +102,53 @@
           object objX = dom.GetObject( system.GetVar("id") );
           if( objX )
           {
-            foreach( sid, objX.EnumIDs() )
-            { 
-              object oEntry = dom.GetObject( sid );
-              if( oEntry )
+            if( objX.TypeName() == "FAVORITE" )
+            {
+              foreach( sid, objX.EnumIDs() )
               {
-                Write('<td>');
-                Write('<table cellpadding="0" cellspacing="0" class="CLASS01806">');
-                Write('<tr>');
-                Write('<td class="CLASS01807">'#dom.GetObject(sid).Name()#'</td>');
-                Write('</tr>');
-                Write('<tr>');
-                Write('<td class="CLASS01808"></td>');
-                Write('</tr>');
-                Write('<tr>');
-                Write('<td id="dpc'#oEntry.ID()#'" class="CLASS01812">');
-                integer cId = oEntry.ID();
-                integer iStatusOnly = 0;
-                boolean bInStatusList = false;
-                boolean bHasFullAccess = (oEntry.UserAccessRights(iulOtherThanAdmin) == iarFullAccess); 
-                string s;
-                foreach(s,objX.FavControlIDs().EnumIDs() )
+                object oEntry = dom.GetObject( sid );
+                if( oEntry )
                 {
-                  if( s == oEntry.ID().ToString() )
+                  Write('<td>');
+                  Write('<table cellpadding="0" cellspacing="0" class="CLASS01806">');
+                  Write('<tr>');
+                  Write('<td class="CLASS01807">'#dom.GetObject(sid).Name()#'</td>');
+                  Write('</tr>');
+                  Write('<tr>');
+                  Write('<td class="CLASS01808"></td>');
+                  Write('</tr>');
+                  Write('<tr>');
+                  Write('<td id="dpc'#oEntry.ID()#'" class="CLASS01812">');
+                  integer cId = oEntry.ID();
+                  integer iStatusOnly = 0;
+                  boolean bInStatusList = false;
+                  boolean bHasFullAccess = (oEntry.UserAccessRights(iulOtherThanAdmin) == iarFullAccess);
+                  string s;
+                  foreach(s,objX.FavControlIDs().EnumIDs() )
                   {
-                    bInStatusList = true;
+                    if( s == oEntry.ID().ToString() )
+                    {
+                      bInStatusList = true;
+                    }
                   }
+                  boolean bBoolVar = false;
+                  if ( oEntry.IsTypeOf( OT_ALARMDP ) ) { bBoolVar = true;}
+                  if ( oEntry.IsTypeOf( OT_VARDP ) && (oEntry.ValueSubType() == istBool) ) { bBoolVar = true; }
+                  if (bInStatusList || bBoolVar || (!bHasFullAccess)) {
+                    iStatusOnly = 1;
+                  }
+                  Call("/esp/datapointconfigurator.fn::dcCreate()");
+                  Write('</td>');
+                  Write('</tr>');
+                  Write('<tr>');
+                  Write('<td class="CLASS01808"></td>');
+                  Write('</tr>');
+                  Write('</table>');
+                  Write('</br>');
+                  Write('</td>');
+                  Write('</tr><tr>');
+                  i = i + 1;
                 }
-                boolean bBoolVar = false;
-                if ( oEntry.IsTypeOf( OT_ALARMDP ) ) { bBoolVar = true;}
-                if ( oEntry.IsTypeOf( OT_VARDP ) && (oEntry.ValueSubType() == istBool) ) { bBoolVar = true; }
-                if (bInStatusList || bBoolVar || (!bHasFullAccess)) {
-                  iStatusOnly = 1;
-                }
-                Call("/esp/datapointconfigurator.fn::dcCreate()");
-                Write('</td>');
-                Write('</tr>');
-                Write('<tr>');
-                Write('<td class="CLASS01808"></td>');
-                Write('</tr>');
-                Write('</table>');
-                Write('</br>');
-                Write('</td>');
-                Write('</tr><tr>');
-                i = i + 1;
               }
             }
           }
@@ -262,7 +265,6 @@
 
 <script type="text/javascript">
   WebUI.resize();
-
   StartPage.showUpdate();
   if (forceUpdate) {
       StartPage.showCurrentFirmware();

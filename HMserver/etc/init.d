@@ -10,7 +10,7 @@ STARTWAITFILE=/var/status/HMServerStarted
 
 init() {
 	export TZ=`cat /etc/config/TZ | cut -d'-' -f1 | cut -d'+' -f1`
-	export JAVA_HOME=/opt/ejre1.7.0_10/
+	export JAVA_HOME=/opt/jre-1.8.0_121-compact3
 	export PATH=$PATH:$JAVA_HOME/bin
 	if [ ! -e /etc/config/log4j.xml ] ; then
 		cp $CFG_TEMPLATE_DIR/log4j.xml /etc/config

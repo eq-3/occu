@@ -21,12 +21,12 @@ set PROFILE_0(UI_TEMPLATE)      "Expertenprofil"
 
 set PROFILE_1(SHORT_COND_VALUE_HI) 150
 set PROFILE_1(SHORT_COND_VALUE_LO) 50
-set PROFILE_1(SHORT_CT_OFF) {0 2}
-set PROFILE_1(SHORT_CT_OFFDELAY) {0 2}
-set PROFILE_1(SHORT_CT_ON) {0 2}
-set PROFILE_1(SHORT_CT_ONDELAY) {0 2}
-set PROFILE_1(SHORT_CT_RAMPOFF) {0 2}
-set PROFILE_1(SHORT_CT_RAMPON) {0 2}
+set PROFILE_1(SHORT_CT_OFF) {0 2 5}
+set PROFILE_1(SHORT_CT_OFFDELAY) {0 2 5}
+set PROFILE_1(SHORT_CT_ON) {0 2 5}
+set PROFILE_1(SHORT_CT_ONDELAY) {0 2 5}
+set PROFILE_1(SHORT_CT_RAMPOFF) {0 2 5}
+set PROFILE_1(SHORT_CT_RAMPON) {0 2 5}
 set PROFILE_1(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_1(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_1(SHORT_DIM_STEP) 0.050000
@@ -68,12 +68,12 @@ set PROFILE_1(UI_HINT)  1
 
 set PROFILE_2(SHORT_COND_VALUE_HI) 151
 set PROFILE_2(SHORT_COND_VALUE_LO) 50
-set PROFILE_2(SHORT_CT_OFF) {0 2}
-set PROFILE_2(SHORT_CT_OFFDELAY) {0 2}
-set PROFILE_2(SHORT_CT_ON) {0 2}
-set PROFILE_2(SHORT_CT_ONDELAY) {0 2}
-set PROFILE_2(SHORT_CT_RAMPOFF) {0 2}
-set PROFILE_2(SHORT_CT_RAMPON) {0 2}
+set PROFILE_2(SHORT_CT_OFF) {0 2 5}
+set PROFILE_2(SHORT_CT_OFFDELAY) {0 2 5}
+set PROFILE_2(SHORT_CT_ON) {0 2 5}
+set PROFILE_2(SHORT_CT_ONDELAY) {0 2 5}
+set PROFILE_2(SHORT_CT_RAMPOFF) {0 2 5}
+set PROFILE_2(SHORT_CT_RAMPON) {0 2 5}
 set PROFILE_2(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_2(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_2(SHORT_DIM_STEP) 0.050000
@@ -108,19 +108,18 @@ set PROFILE_2(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_2(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_RAMPON_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_2(SHORT_RAMP_START_STEP) 0.050000
-
 set PROFILE_2(UI_DESCRIPTION) "Bei ausgew&auml;hlten Kontaktzustandswechseln wird das Licht f&uuml;r eine bestimmte Zeit auf die eingestellte Helligkeit eingeschaltet."
 set PROFILE_2(UI_TEMPLATE)  $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 
 set PROFILE_3(SHORT_COND_VALUE_HI) 151
 set PROFILE_3(SHORT_COND_VALUE_LO) 50
-set PROFILE_3(SHORT_CT_OFF) {0 2}
-set PROFILE_3(SHORT_CT_OFFDELAY) {0 2}
-set PROFILE_3(SHORT_CT_ON) {0 2}
-set PROFILE_3(SHORT_CT_ONDELAY) {0 2}
-set PROFILE_3(SHORT_CT_RAMPOFF) {0 2}
-set PROFILE_3(SHORT_CT_RAMPON) {0 2}
+set PROFILE_3(SHORT_CT_OFF) {0 2 5}
+set PROFILE_3(SHORT_CT_OFFDELAY) {0 2 5}
+set PROFILE_3(SHORT_CT_ON) {0 2 5}
+set PROFILE_3(SHORT_CT_ONDELAY) {0 2 5}
+set PROFILE_3(SHORT_CT_RAMPOFF) {0 2 5}
+set PROFILE_3(SHORT_CT_RAMPON) {0 2 5}
 set PROFILE_3(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_3(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_3(SHORT_DIM_STEP) 0.050000
@@ -155,10 +154,40 @@ set PROFILE_3(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_3(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_RAMPON_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_3(SHORT_RAMP_START_STEP) 0.050000
-
 set PROFILE_3(UI_DESCRIPTION) ""
 set PROFILE_3(UI_TEMPLATE)  $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
+
+
+# "Bewegung/Senkrecht"
+set SUBSET_1(NAME)          "\${subset_1}"
+set SUBSET_1(SUBSET_OPTION_VALUE)  1
+set SUBSET_1(SHORT_CT_OFF)      0
+set SUBSET_1(SHORT_CT_OFFDELAY)    0
+set SUBSET_1(SHORT_CT_ON)      0
+set SUBSET_1(SHORT_CT_ONDELAY)    0
+set SUBSET_1(SHORT_CT_RAMPOFF)    0
+set SUBSET_1(SHORT_CT_RAMPON)    0
+
+# "Ruhe/Waagerecht"
+set SUBSET_2(NAME)          "\${subset_2}"
+set SUBSET_2(SUBSET_OPTION_VALUE)  2
+set SUBSET_2(SHORT_CT_OFF)      2
+set SUBSET_2(SHORT_CT_OFFDELAY)    2
+set SUBSET_2(SHORT_CT_ON)      2
+set SUBSET_2(SHORT_CT_ONDELAY)    2
+set SUBSET_2(SHORT_CT_RAMPOFF)    2
+set SUBSET_2(SHORT_CT_RAMPON)    2
+
+# "Jede &Auml;nderung"
+set SUBSET_3(NAME)          "\${subset_3}"
+set SUBSET_3(SUBSET_OPTION_VALUE)  3
+set SUBSET_3(SHORT_CT_OFF)      5
+set SUBSET_3(SHORT_CT_OFFDELAY)    5
+set SUBSET_3(SHORT_CT_ON)      5
+set SUBSET_3(SHORT_CT_ONDELAY)    5
+set SUBSET_3(SHORT_CT_RAMPOFF)    5
+set SUBSET_3(SHORT_CT_RAMPON)    5
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -210,11 +239,15 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
 #1
   incr prn
-  set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_MODE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
@@ -251,11 +284,15 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #2
   incr prn
-  set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_MODE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
@@ -280,14 +317,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #3
   incr prn
-  set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  # RAMPOFF_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_MODE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  # RAMPON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"

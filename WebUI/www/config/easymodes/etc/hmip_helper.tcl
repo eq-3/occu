@@ -42,6 +42,14 @@ proc getComboBox {prn pref specialElement type} {
         append s [getSwitchingIntervalOnTime $prn $pref $specialElement]
       }
 
+      "blindRunningTime" {
+        append s [getBlindRunningTime $prn $pref $specialElement]
+      }
+
+      "slatRunningTime" {
+        append s [getSlatRunningTime $prn $pref $specialElement]
+      }
+
     }
 
     return $s
@@ -53,13 +61,16 @@ proc getDelayShort {prn pref specialElement} {
       append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setDelayShortValues(this.id, $prn, $pref, \'$specialElement\')\">"
         append s "<option value=\"0\">\${optionNotActive}</option>"
         append s "<option value=\"1\">\${optionUnit100MS}</option>"
-        append s "<option value=\"2\">\${optionUnit1S}</option>"
-        append s "<option value=\"3\">\${optionUnit3S}</option>"
-        append s "<option value=\"4\">\${optionUnit30S}</option>"
-        append s "<option value=\"5\">\${optionUnit1M}</option>"
-        append s "<option value=\"6\">\${optionUnit2M}</option>"
-        append s "<option value=\"7\">\${optionUnit1H}</option>"
-        append s "<option value=\"8\">\${stringTableEnterValue}</option>"
+        append s "<option value=\"2\">\${optionUnit300MS}</option>"
+        append s "<option value=\"3\">\${optionUnit500MS}</option>"
+        append s "<option value=\"4\">\${optionUnit1500MS}</option>"
+        append s "<option value=\"5\">\${optionUnit1S}</option>"
+        append s "<option value=\"6\">\${optionUnit3S}</option>"
+        append s "<option value=\"7\">\${optionUnit30S}</option>"
+        append s "<option value=\"8\">\${optionUnit1M}</option>"
+        append s "<option value=\"9\">\${optionUnit2M}</option>"
+        append s "<option value=\"10\">\${optionUnit1H}</option>"
+        append s "<option value=\"11\">\${stringTableEnterValue}</option>"
       append s "/<select>"
       append s "</td>"
 
@@ -73,14 +84,17 @@ proc getDelayShort {prn pref specialElement} {
           append s "var optionMap = \[\];"
           append s "optionMap\[\"00\"\] = 0;"
           append s "optionMap\[\"01\"\] = 1;"
-          append s "optionMap\[\"010\"\] = 2;"
-          append s "optionMap\[\"11\"\] = 2;"
-          append s "optionMap\[\"030\"\] = 3;"
-          append s "optionMap\[\"13\"\] = 3;"
-          append s "optionMap\[\"130\"\] = 4;"
-          append s "optionMap\[\"21\"\] = 5;"
-          append s "optionMap\[\"22\"\] = 6;"
-          append s "optionMap\[\"31\"\] = 7;"
+          append s "optionMap\[\"03\"\] = 2;"
+          append s "optionMap\[\"05\"\] = 3;"
+          append s "optionMap\[\"010\"\] = 5;"
+          append s "optionMap\[\"015\"\] = 4;"
+          append s "optionMap\[\"11\"\] = 5;"
+          append s "optionMap\[\"030\"\] = 6;"
+          append s "optionMap\[\"13\"\] = 6;"
+          append s "optionMap\[\"130\"\] = 7;"
+          append s "optionMap\[\"21\"\] = 8;"
+          append s "optionMap\[\"22\"\] = 9;"
+          append s "optionMap\[\"31\"\] = 10;"
 
           append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
           append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
@@ -92,7 +106,7 @@ proc getDelayShort {prn pref specialElement} {
           #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
           # Enter user value
-          append s "if (optionVal == 8) {"
+          append s "if (optionVal == 11) {"
             append s "timeBaseTRElem.show();"
             append s "timeFactorTRElem.show();"
             append s "spaceTRElem.show();"
@@ -111,50 +125,63 @@ proc getDelayShort {prn pref specialElement} {
           append s "timeBaseTRElem.hide();"
           append s "timeFactorTRElem.hide();"
           append s "spaceTRElem.hide();"
-
           append s "switch (value) \{"
             append s "case 0:"
               # keine Verzögerung
               append s "baseElem.val(0);"
               append s "factorElem.val(0);"
               append s "break;"
-
             append s "case 1:"
               # 100 ms
               append s "baseElem.val(0);"
               append s "factorElem.val(1);"
               append s "break;"
             append s "case 2:"
+              # 300 ms
+              append s "baseElem.val(0);"
+              append s "factorElem.val(3);"
+              append s "break;"
+            append s "case 3:"
+              # 500 ms
+              append s "baseElem.val(0);"
+              append s "factorElem.val(5);"
+              append s "break;"
+           append s "case 4:"
+              # 1.5 sec
+              append s "baseElem.val(0);"
+              append s "factorElem.val(15);"
+              append s "break;"
+            append s "case 5:"
               # 1 sec
               append s "baseElem.val(0);"
               append s "factorElem.val(10);"
               append s "break;"
-            append s "case 3:"
+            append s "case 6:"
               # 3 sec
               append s "baseElem.val(0);"
               append s "factorElem.val(30);"
               append s "break;"
-            append s "case 4:"
+            append s "case 7:"
               # 30 sec
               append s "baseElem.val(1);"
               append s "factorElem.val(30);"
               append s "break;"
-            append s "case 5:"
+            append s "case 8:"
               # 1 min
               append s "baseElem.val(2);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 6:"
+            append s "case 9:"
               # 2 min
               append s "baseElem.val(2);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 7:"
+            append s "case 10:"
               # 1 hour
               append s "baseElem.val(3);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 8:"
+            append s "case 11:"
               append s "timeBaseTRElem.show();"
               append s "timeFactorTRElem.show();"
               append s "spaceTRElem.show();"
@@ -1100,6 +1127,231 @@ proc getSwitchingIntervalOnTime {prn pref specialElement} {
       return $s
 }
 
+
+proc getBlindRunningTime {prn pref specialElement} {
+      set s ""
+      append s "<td>"
+      append s  "<select id=\"timeDelay\_$prn\_$pref\" name=\"presetsAutoCalibration\" onchange=\"setBlindRunningTimeValues(this.id, $prn, $pref, \'$specialElement\')\">"
+        append s "<option value=\"0\">\${optionUnit30S}</option>"
+        append s "<option value=\"1\">\${optionUnit45S}</option>"
+        append s "<option value=\"2\">\${optionUnit60S}</option>"
+        append s "<option value=\"3\">\${optionUnit90S}</option>"
+        append s "<option value=\"4\">\${stringTableEnterValue}</option>"
+
+      append s "/<select>"
+      append s "</td>"
+
+      append s "<script type=\"text/javascript\">"
+
+        append s "setCurrentBlindRunningTimeOption = function(prn, pref, specialElement, baseValue, factorValue) {"
+          append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "var optionMap = \[\];"
+          append s "optionMap\[\"230\"\] = 0;"
+          append s "optionMap\[\"245\"\] = 1;"
+          append s "optionMap\[\"260\"\] = 2;"
+          append s "optionMap\[\"290\"\] = 3;"
+
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+          append s "currentVal = baseVal+factorVal,"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 4;"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
+
+          # append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
+
+          # Enter user value
+          append s "if (optionVal == 4) {"
+            append s "timeBaseTRElem.show();"
+            append s "timeFactorTRElem.show();"
+            append s "spaceTRElem.show();"
+          append s "}"
+
+        append s "};"
+
+        append s "setBlindRunningTimeValues = function(elmID, prn, pref, specialElement) {"
+          append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
+          append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\"+ pref),"
+          append s "factorElem = jQuery(\"#separate_\" +specialElement + \"_\"+ prn +\"_\" + (parseInt(pref) + 1)),"
+          append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\"+prn+\"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "timeBaseTRElem.hide();"
+          append s "timeFactorTRElem.hide();"
+          append s "spaceTRElem.hide();"
+
+          append s "switch (value) \{"
+            append s "case 0:"
+              # 30 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(30);"
+              append s "break;"
+            append s "case 1:"
+              # 45 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(45);"
+              append s "break;"
+            append s "case 2:"
+              # 60 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(60);"
+              append s "break;"
+            append s "case 3:"
+              # 90 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(90);"
+              append s "break;"
+            append s "case 4:"
+              append s "timeBaseTRElem.show();"
+              append s "timeFactorTRElem.show();"
+              append s "spaceTRElem.show();"
+
+              append s "break;"
+            append s "default: conInfo(\"Problem\");"
+          append s "\}"
+        append s "};"
+      append s "</script>"
+
+      return $s
+}
+
+proc getSlatRunningTime {prn pref specialElement} {
+      set s ""
+      append s "<td>"
+      append s  "<select id=\"timeDelay\_$prn\_$pref\" name=\"presetsAutoCalibration\" onchange=\"setSlatRunningTimeValues(this.id, $prn, $pref, \'$specialElement\')\">"
+        append s "<option value=\"0\">\${optionUnit1S}</option>"
+        append s "<option value=\"1\">\${optionUnit2S}</option>"
+        append s "<option value=\"2\">\${optionUnit3S}</option>"
+        append s "<option value=\"3\">\${optionUnit4S}</option>"
+        append s "<option value=\"4\">\${optionUnit5S}</option>"
+
+        append s "<option value=\"5\">\${optionUnit10S}</option>"
+        append s "<option value=\"6\">\${optionUnit15S}</option>"
+        append s "<option value=\"7\">\${optionUnit20S}</option>"
+        append s "<option value=\"8\">\${optionUnit25S}</option>"
+        append s "<option value=\"9\">\${optionUnit30S}</option>"
+        append s "<option value=\"10\">\${stringTableEnterValue}</option>"
+
+      append s "/<select>"
+      append s "</td>"
+
+      append s "<script type=\"text/javascript\">"
+
+        append s "setCurrentSlatRunningTimeOption = function(prn, pref, specialElement, baseValue, factorValue) {"
+          append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "var optionMap = \[\];"
+          append s "optionMap\[\"21\"\] = 0;"
+          append s "optionMap\[\"22\"\] = 1;"
+          append s "optionMap\[\"23\"\] = 2;"
+          append s "optionMap\[\"24\"\] = 3;"
+          append s "optionMap\[\"25\"\] = 4;"
+          append s "optionMap\[\"210\"\] = 5;"
+          append s "optionMap\[\"215\"\] = 6;"
+          append s "optionMap\[\"220\"\] = 7;"
+          append s "optionMap\[\"225\"\] = 8;"
+          append s "optionMap\[\"230\"\] = 9;"
+
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+          append s "currentVal = baseVal+factorVal,"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 10;"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
+
+          # append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
+
+          # Enter user value
+          append s "if (optionVal == 10) {"
+            append s "timeBaseTRElem.show();"
+            append s "timeFactorTRElem.show();"
+            append s "spaceTRElem.show();"
+          append s "}"
+
+        append s "};"
+
+        append s "setSlatRunningTimeValues = function(elmID, prn, pref, specialElement) {"
+          append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
+          append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\"+ pref),"
+          append s "factorElem = jQuery(\"#separate_\" +specialElement + \"_\"+ prn +\"_\" + (parseInt(pref) + 1)),"
+          append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\"+prn+\"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "timeBaseTRElem.hide();"
+          append s "timeFactorTRElem.hide();"
+          append s "spaceTRElem.hide();"
+
+          append s "switch (value) \{"
+            append s "case 0:"
+              # 1 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 1:"
+              # 2 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(2);"
+              append s "break;"
+            append s "case 2:"
+              # 3 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(3);"
+              append s "break;"
+            append s "case 3:"
+              # 4 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(4);"
+              append s "break;"
+            append s "case 4:"
+              # 5 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(5);"
+              append s "break;"
+            append s "case 5:"
+              # 10 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(10);"
+              append s "break;"
+            append s "case 6:"
+              # 15 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(15);"
+              append s "break;"
+            append s "case 7:"
+              # 20 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(20);"
+              append s "break;"
+            append s "case 8:"
+              # 25 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(25);"
+              append s "break;"
+            append s "case 9:"
+              # 30 sec
+              append s "baseElem.val(2);"
+              append s "factorElem.val(30);"
+              append s "break;"
+            append s "case 10:"
+              append s "timeBaseTRElem.show();"
+              append s "timeFactorTRElem.show();"
+              append s "spaceTRElem.show();"
+              append s "break;"
+            append s "default: conInfo(\"Problem\");"
+          append s "\}"
+        append s "};"
+      append s "</script>"
+
+      return $s
+}
+
 ##
 
 proc trimParam {param} {
@@ -1186,6 +1438,29 @@ proc getTimeUnitComboBoxShort {param value chn prn special_input_id} {
   return $s
 }
 
+proc getTimeUnit10ms_100ms_1s_10s {param value chn prn special_input_id {extraparam ""}} {
+  set param [trimParam $param]
+  set elemId 'separate_$special_input_id\_$prn'
+  set j_elemId '#separate_$special_input_id\_$prn'
+  #set s "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\">"
+
+  set s "<tr id=\"timeBase_$chn\_$prn\" class=\"hidden\">"
+    append s "<td>\${[getDescription $param]}</td>"
+    append s "<td>"
+      append s "<select id=$elemId name=$param>"
+        append s "<option value='0'>\${optionUnit10MS}</option>"
+        append s "<option value='1'>\${optionUnit100MS}</option>"
+        append s "<option value='2'>\${optionUnitS}</option>"
+        append s "<option value='3'>\${optionUnit10S}</option>"
+      append s "</select>"
+    append s "</td>"
+  append s "</tr>"
+  append s "<script type=\"text/javascript\">"
+    append s "jQuery($j_elemId).val('$value');"
+  append s "</script>"
+  return $s
+}
+
 proc getDescription {param} {
   set result $param
   set desc(REPEATED_LONG_PRESS_TIMEOUT_UNIT) "stringTableKeyLongPressTimeOutUnit"
@@ -1196,6 +1471,11 @@ proc getDescription {param} {
   set desc(ON_TIME_BASE) "stringTableOnTimeUnit"
   set desc(SWITCHING_INTERVAL_BASE) "stringTableSwitchingIntervalBase"
   set desc(TX_MINDELAY_UNIT) "stringTableTxMinDelayUnit"
+  set desc(EVENT_BLINDTIME_BASE) "stringTableEventBlindTimeBase"
+  set desc(EVENT_TIMEOUT_BASE) "stringTableEventTimeoutBase"
+  set desc(REFERENCE_RUNNING_TIME_BOTTOM_TOP_UNIT) "stringTableTimeBottomTopUnit"
+  set desc(REFERENCE_RUNNING_TIME_TOP_BOTTOM_UNIT) "stringTableTimeTopBottomUnit"
+  set desc(REFERENCE_RUNNING_TIME_SLATS_UNIT) "stringTableTimeSlatsUnit"
 
   if {[catch {set result $desc($param)}]} {
    return $result

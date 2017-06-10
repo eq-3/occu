@@ -88,8 +88,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   global env iface_url
   
-  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/CC.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
-
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
@@ -116,6 +114,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       puts " jQuery('#P' + activePrg + '_Timeouts_Area').show();"
     puts "};"
   puts "</script>"
+
+
+  append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/CC.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
+
 
   set prn 0
 
@@ -245,7 +247,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureMinimum}</td>"
     append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-    append HTML_PARAMS(separate_1) "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
     append HTML_PARAMS(separate_1) "</script>"
 
     # right
@@ -261,7 +263,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "</tr>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-    append HTML_PARAMS(separate_1) "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
     append HTML_PARAMS(separate_1) "</script>"
 
     #left
@@ -400,6 +402,36 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     append HTML_PARAMS(separate_1) "</tr>"
 
+    append HTML_PARAMS(separate_1) "<tr>"
+      array_clear options
+      for {set val 0} {$val <= 1} {set val [expr $val + 0.05]} {
+        set options($val) "[expr int($val * 100)] %"
+      }
+      set param VALVE_ERROR_RUN_POSITION
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        append HTML_PARAMS(separate_1) "<td>\${stringTableValveStateErrorPosition}</td>"
+        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+      }
+
+      set param VALVE_MAXIMUM_POSITION
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        append HTML_PARAMS(separate_1) "<td>\${stringTableValveMaximumPosition}</td>"
+        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+      }
+    append HTML_PARAMS(separate_1) "</tr>"
+
+    set param BOOST_AFTER_WINDOW_OPEN
+    if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
+      append HTML_PARAMS(separate_1) "<tr>"
+      append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableBoostAfterWindowOpen}</td>"
+      append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">"
+      append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]"
+      append HTML_PARAMS(separate_1) "</td>"
+      append HTML_PARAMS(separate_1) "</tr>"
+    }
   append HTML_PARAMS(separate_1) "</table>"
 
   if {[session_is_expert]} {

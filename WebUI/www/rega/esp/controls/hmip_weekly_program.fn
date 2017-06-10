@@ -1,0 +1,64 @@
+function ::CreateWeeklyProgram()
+{
+
+  object oDevice = dom.GetObject(cObj.Device());
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+  integer chInterfaceID = ch.Interface();
+  object chInterface = dom.GetObject(chInterfaceID);
+
+  object oUser = dom.GetObject( system.GetSessionVar('sessionUserID'));
+  integer userID = oUser.ID();
+  object user = dom.GetObject(userID);
+
+  ! only readable
+  object objChannelLocks = cObj.DPByControl("WEEK_PROFILE.CHANNEL_LOCKS");
+  object objTargetChannelLock = cObj.DPByControl("WEEK_PROFILE.TARGET_CHANNEL_LOCK");
+  object objTargetChannelLocks = cObj.DPByControl("WEEK_PROFILE.TARGET_CHANNEL_LOCKS");
+
+  integer iChannelLocks = -1;
+
+  if (objChannelLocks) {
+    iChannelLocks = objChannelLocks.Value(); ! can be ''
+  }
+
+  WriteLine("<tr id='weekprg_"#chnId#"' class='hidden'>");
+    WriteLine("<td>");
+
+      WriteLine("<table style='margin:auto'>");
+        WriteLine("<tr>");
+          WriteLine("<td style='border:1px solid #000000; color:black;'>");
+            WriteLine("<div id='anchor_"#chnId#"' style='background-color:#89989b;'></div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<div id='setChannelMode_"#chnId#"' class='ControlBtnOff'>${lblSetMode}</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+      WriteLine("</table>");
+
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+
+
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine("var opts = {};");
+    WriteLine("opts.deviceID = '"#oDevice.ID()#"';");
+    WriteLine("opts.deviceLabel = '"#cObj.Label()#"';");
+    WriteLine("opts.chnAddress = '"#chnAddress#"';");
+    WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
+    WriteLine("opts.channelLocks = "#iChannelLocks#";");
+    WriteLine("opts.userEasyLinkMode = "#user.UserEasyLinkMode()#";");
+
+    WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgram("#chnId#", opts);");
+  WriteLine("</script>");
+  return;
+}
+

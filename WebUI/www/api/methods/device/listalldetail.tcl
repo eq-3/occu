@@ -24,9 +24,9 @@ set deviceDescrScript {
 
     Write("ID {" # device.ID() # "}");
     Write(" NAME {" # device.Name() # "}");
-    Write(" ADDRESS {" # device.Address() # "}"); 
-    Write(" INTERFACE {"# interface.Name() # "}"); 
-!   Write(" DEVICE_TYPE {"# device.HssType() # "}"); 
+    Write(" ADDRESS {" # device.Address() # "}");
+    Write(" INTERFACE {"# interface.Name() # "}");
+!   Write(" DEVICE_TYPE {"# device.HssType() # "}");
     Write(" DEVICE_TYPE {"# device.Label() # "}");
 
     if (device.MetaData("operateGroupOnly") == null) {
@@ -37,7 +37,7 @@ set deviceDescrScript {
 
 
 
-    Write(" CHANNELS {"); 
+    Write(" CHANNELS {");
     var first = true;
     string channelId;
     foreach(channelId, device.Channels())
@@ -47,18 +47,18 @@ set deviceDescrScript {
       {
         if (true != first) { Write(" "); } else { first = false; }
         Write("{");
-        
+
         var readable  = false;
         var writable  = false;
         var eventable = false;
         var logable   = false;
-    
+
         string dpId;
         foreach (dpId, channel.DPs())
         {
           var dp         = dom.GetObject(dpId);
           var operations = dp.Operations();
-      
+
           if (!dp.Internal())
           {
             logable = true;
@@ -67,35 +67,35 @@ set deviceDescrScript {
             if (OPERATION_EVENT & operations) { eventable = true; }
           }
         }
-        
+
         var isUsable = false;
         if (channel.UserAccessRights(iulOtherThanAdmin) == iarFullAccess)
         {
           isUsable = true;
         }
-      
+
         var category = CATEGORY_NONE;
         if (channel.ChnDirection() == 1) { category = CATEGORY_SENDER; }
         if (channel.ChnDirection() == 2) { category = CATEGORY_RECEIVER; }
-      
+
         var mode = MODE_DEFAULT;
         if (channel.ChnAESActive())
         {
           mode = MODE_AES;
         }
-            
+
         var isAesAvailable = false;
         if (channel.ChnAESOperation() > 0)
         {
           isAesAvailable = true;
         }
-      
+
         var isVirtual = false;
         if (channel.ChannelType() == 29)
         {
           isVirtual = true;
         }
-      
+
         Write("ID {" # channelId # "}");
         Write(" NAME {" # channel.Name() # "}");
         Write(" ADDRESS {" # channel.Address() # "}");
@@ -128,7 +128,7 @@ set deviceIdsScript {
   foreach(id, root.Devices().EnumIDs())
   {
     var device = dom.GetObject(id);
-    if (true == device.ReadyConfig())
+    if (true == device.ReadyConfig() && dom.GetObject(device.Interface()))
     {
       if (true != first) { Write(" "); } else { first = false; }
     Write("{" # id # "}");
@@ -143,8 +143,8 @@ set deviceIdsScript {
 set deviceIds [hmscript $deviceIdsScript args]
 
 #foreach id $deviceIds {
-#	exec echo "Device: $id" >> /tmp/log_wowi 
-#	exec echo $deviceDescr >> /tmp/log_wowi 
+#	exec echo "Device: $id" >> /tmp/log_wowi
+#	exec echo $deviceDescr >> /tmp/log_wowi
 #}
 
 set result "\["
@@ -153,7 +153,7 @@ set first  1
 foreach id $deviceIds {
 	set myargs(id) $id
 	set deviceStr [hmscript $deviceDescrScript myargs]
-	
+
 #
 # ignore invalid devices: CCU1 ==> CCU2 (Wired) Gateway has no interface
 	if {[catch {array set device $deviceStr}]} {
@@ -164,8 +164,8 @@ foreach id $deviceIds {
 
 #
 # device attributes
-#	
-	
+#
+
 	if { 1 != $first } then { append result "," } else { set first 0 }
 	append result "\{"
 	append result "\"id\":[json_toString $device(ID)]"
@@ -183,10 +183,10 @@ foreach id $deviceIds {
 	foreach _channel $device(CHANNELS) {
 		array set channel $_channel
 		if {1 != $firstChannel} then { append result "," } else { set firstChannel 0 }
-	
+
 		set partnerId $channel(GROUP_PARTNER_ID)
 		if {"65535" == $partnerId} then { set partnerId "" }
-	
+
 		append result "\{"
 		append result "\"id\":[json_toString $channel(ID)]"
 		append result ",\"name\":[json_toString $channel(NAME)]"
@@ -208,11 +208,11 @@ foreach id $deviceIds {
 		append result ",\"isVirtual\":$channel(VIRTUAL)"
 		append result ",\"channelType\":[json_toString $channel(CHANNEL_TYPE)]"
 		append result "\}"
-	
+
 		array_clear channel
 	}
 	append result "\]"
-	
+
 	append result "\}"
 
 }

@@ -38,7 +38,7 @@
         svName =  sUniqueName;
       }
     %>
-      <input id="inpName" type="text" value="<%Write(svName)%>" />
+      <input id="inpName" type="text" value="<%Write(svName)%>" onblur="stringRemoveNonPrintableChars(this)" />
     </td>
     <td id="tdDesc" class="CLASS05003" >
       <%
@@ -48,7 +48,7 @@
           svDesc =  sv.DPInfo(); 
         } 
       %>
-      <input id="inpDesc" type="text" value="<%Write(svDesc)%>" />
+      <input id="inpDesc" type="text" value="<%Write(svDesc)%>" onblur="stringRemoveNonPrintableChars(this)"/>
     </td>
       <td class="CLASS05004">
         <select id="selType" onchange="onTypeChange()">
@@ -84,7 +84,7 @@
           if (system.GetVar("createNew") == 0) {
             sUnit = sv.ValueUnit();
           }
-          Write("<input type='text' id='txtUnit' class='CLASS05011' value='"#sUnit#"'/>");
+          Write("<input type='text' id='txtUnit' class='CLASS05011' value='"#sUnit#"' onblur="stringRemoveNonPrintableChars(this)"/>");
         %>
       </td>
       <td class="CLASS05004">
@@ -297,7 +297,13 @@
         break;
     }
   };
-  
+
+  stringRemoveNonPrintableChars = function(elm) {
+    var elmVal = elm.value;
+    //elm.value = elmVal.replace(/\\n|\\r|\\t/g, "");
+    elm.value = elmVal.replace(/\\/g, "");
+  };
+
   loadNoneEdit = function()
   {
     $("tdEdit").innerHTML = "";
@@ -309,10 +315,10 @@
     s += "<table class='CLASS05010'>";
     s += "<tr><td colspan='2'>"+ translateKey("lblValueDescription") +":</td></tr>";
     s += "<tr>";
-      s += "<td>"+translateKey("lblTrue")+"&nbsp;=</td><td class='CLASS05011'> <input id='inpLTrue' type='text' size='15' value='"+translateString(sTrue)+"' />  </td>";
+      s += "<td>"+translateKey("lblTrue")+"&nbsp;=</td><td class='CLASS05011'> <input id='inpLTrue' type='text' size='15' value='"+translateString(sTrue)+"' onblur='stringRemoveNonPrintableChars(this)' />  </td>";
     s += "</tr>";
     s += "<tr>";
-      s += "<td>"+ translateKey("lblFalse") +"&nbsp;=</td><td class='CLASS05011'> <input id='inpLFalse' type='text' size='15' value='"+translateString(sFalse)+"' />  </td>";
+      s += "<td>"+ translateKey("lblFalse") +"&nbsp;=</td><td class='CLASS05011'> <input id='inpLFalse' type='text' size='15' value='"+translateString(sFalse)+"' onblur='stringRemoveNonPrintableChars(this)'/>  </td>";
     s += "</tr>";
     s += "</table>";
     $("tdEdit").innerHTML = s;

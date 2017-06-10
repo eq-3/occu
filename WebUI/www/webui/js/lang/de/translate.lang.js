@@ -643,7 +643,7 @@ jQuery.extend(true,langJSON, {
     "commentSettingsDialogFirewallEnd" : "***********************************************",
     "commentSettingsBidCosRFConf" : "***********************************************",
     "dialogSettingsBidCosRFConfPath" : "BidCos-RF Konfiguration",
-    "dialogSettingsBidCosRFConfLblSettings" : "Allgmeine Einstellungen",
+    "dialogSettingsBidCosRFConfLblSettings" : "Allgemeine Einstellungen",
     "dialogSettingsBidCosRFConfLblInternalAntenna" : "Interne Antenne verwenden",
     "dialogSettingsBidCosRFConfLblSettingsUseCFGAdapter" : HMIdentifier.de.HomeMaticCFGAdapter + " verwenden",
     "dialogSettingsBidCosRFConfBtnSave" : "%DCbernehmen",

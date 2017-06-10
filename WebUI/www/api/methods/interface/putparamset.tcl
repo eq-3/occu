@@ -9,7 +9,7 @@
 #   set        : [array] Paramset
 #                Jedes Element ist ein Objekt mit den folgenden Feldern:
 #                  name:  [string] Bezeichnung des Parameters
-#                  type:  [string] Datentyp des Parameters (string, int, bool)
+#                  type:  [string] Datentyp des Parameters (string, int, double, bool)
 #                  value: [string] Wert des Parameters
 #
 # Rückgabewert: [boolean]

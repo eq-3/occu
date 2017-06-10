@@ -11,6 +11,15 @@ loadOnce tclrpc.so
 array set ise_CHANNELNAMES ""
 ise_getChannelNames ise_CHANNELNAMES
 
+proc isHmIP {} {
+  global iface
+  set hmIPIdentifier "HmIP-RF"
+  if {$iface == $hmIPIdentifier} {
+    return "true"
+  }
+  return "false"
+}
+
 proc put_receiver_address_not_found {} {
 
   global receiver_address
@@ -81,17 +90,17 @@ proc put_page {} {
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
       puts "  setFooter(s);"
-	  
-	  #translate descriptions
-	  puts "  var senderLinkdescription = jQuery('#sender_linkdescription').val();"
-	  puts "  if(senderLinkdescription != undefined) {"
-	  puts "  	jQuery('#sender_linkdescription').val(translateString(senderLinkdescription));"
-	  puts "  }"
-	  puts "  var sendergroupLinkdescription  = jQuery('#sendergroup_linkdescription').val();"
-	  puts "  if(sendergroupLinkdescription  != undefined) {"
-	  puts "  	jQuery('#sendergroup_linkdescription').val(translateString(sendergroupLinkdescription ));"
-	  puts "  }"
-	  
+    
+    #translate descriptions
+    puts "  var senderLinkdescription = jQuery('#sender_linkdescription').val();"
+    puts "  if(senderLinkdescription != undefined) {"
+    puts "    jQuery('#sender_linkdescription').val(translateString(senderLinkdescription));"
+    puts "  }"
+    puts "  var sendergroupLinkdescription  = jQuery('#sendergroup_linkdescription').val();"
+    puts "  if(sendergroupLinkdescription  != undefined) {"
+    puts "    jQuery('#sendergroup_linkdescription').val(translateString(sendergroupLinkdescription ));"
+    puts "  }"
+    
       puts "</script>"
 
     # puts "<div class=\"subOffsetDivPopup\" style=\"padding:4px;\">"
@@ -304,6 +313,7 @@ proc put_profile_body { PEERPART } {
   if { ![catch {source $USERPROFILEFILE} ] } then {
     incr sourced
   }
+
   if { ![catch {source easymodes/$sender_paramid.tcl} ] } then {
     incr sourced
   }
@@ -408,7 +418,8 @@ proc put_profile_body { PEERPART } {
     set HMW "HMW_"
     catch {set IO "_$hmw(INPUT_TYPE)"}
   }
-  
+
+
   if {$receiver_paramid == ""} then {
     #EasyMode-Seite easymodes/<ps_id>.tcl existiert nicht. Es gibt nur den Expertenmodus.
     #In ps_ids sind sämtliche ParamsetIds aufgelistet (direkt aus xmlrpc getParamsetIds)
@@ -428,10 +439,11 @@ proc put_profile_body { PEERPART } {
   if { ![catch {source $USERPROFILEFILE} ] } then {
     incr sourced
   }
+
   if { ![catch {source easymodes/$receiver_paramid.tcl} ] } then {
     incr sourced
   }
-  
+
   if {$sourced > 0} then {
 
     set cur_profile ""
@@ -731,8 +743,6 @@ proc put_profile_head { PEERPART } {
   puts "</table>"
 }
 
-
-
 cgi_eval {
 
   cgi_input
@@ -839,6 +849,13 @@ cgi_eval {
     array set ps_descr_sender  [xmlrpc $url getParamsetDescription   [list string $sender_address]   [list string "LINK"]]
     set paramids [xmlrpc $url getParamsetId $sender_address LINK]
     set sender_paramid [getExistingParamId $paramids]
+
+    if {($sender_paramid == "") && ([isHmIP] == "true")} {
+      if { [file exists $env(DOCUMENT_ROOT)config/easymodes/linkHmIP_$dev_descr_sender(TYPE).tcl] } {
+        set sender_paramid linkHmIP_$dev_descr_sender(TYPE)
+      }
+    }
+
     set sender_PARAMIDS $paramids
     #---------------------------------------------------------------
 
@@ -847,7 +864,15 @@ cgi_eval {
     array set ps_descr_receiver  [xmlrpc $url getParamsetDescription [list string $receiver_address] [list string "LINK"]]
     set paramids [xmlrpc $url getParamsetId $receiver_address LINK]
     set receiver_paramid [getExistingParamId $paramids]
+
+    if {($receiver_paramid == "") && ([isHmIP] == "true")} {
+      if { [file exists $env(DOCUMENT_ROOT)config/easymodes/linkHmIP_$dev_descr_receiver(TYPE).tcl] } {
+        set receiver_paramid linkHmIP_$dev_descr_receiver(TYPE)
+      }
+    }
+
     set receiver_PARAMIDS $paramids
+
     #---------------------------------------------------------------
 
     #Informationen über den Sender_Group (falls vorhanden)----------

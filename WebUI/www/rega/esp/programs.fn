@@ -84,6 +84,13 @@ function ::WriteConditionText()
                       object oDP = dom.GetObject( sDP );
                       if( oDP )
                       {
+                        string hssid = "";
+
+                        if ( oDP.IsTypeOf( OT_HSSDP ) )
+                        {
+                          hssid = oDP.HSSID();
+                        }
+
                         if( oDP.ID() == iLV)
                         {
                           if( (oDP.Operations() & (OPERATION_READ|OPERATION_EVENT)) != 0 )
@@ -109,8 +116,8 @@ function ::WriteConditionText()
                                     }
                                     if( !oDP.IsTypeOf( OT_VARDP ) )
                                     {
-                                      string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"="#sVLValue;
-                                      string sShortKey = oDP.HSSID()#"="#sVLValue;
+                                      string sLongKey = oCC.ChnLabel()#"|"#hssid#"="#sVLValue;
+                                      string sShortKey = hssid#"="#sVLValue;
                                       sValue = web.webKeyFromStringTable(sLongKey);
                                       if( !sValue.Length() )
                                       {
@@ -136,8 +143,8 @@ function ::WriteConditionText()
                                   string sValue = oDP.Name()#": "#oDP.ValueName1();
                                   if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
                                   {
-                                    string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
-                                    string sShortKey = oDP.HSSID()#"=TRUE";
+                                    string sLongKey = oCC.ChnLabel()#"|"#hssid#"=TRUE";
+                                    string sShortKey = hssid#"=TRUE";
                                     sValue = web.webKeyFromStringTable(sLongKey);
                                     if( sValue.Length() == 0 )
                                     {
@@ -155,8 +162,8 @@ function ::WriteConditionText()
                                   string sValue = oDP.Name()#": "#oDP.ValueName0();
                                   if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
                                   {
-                                    string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=FALSE";
-                                    string sShortKey = oDP.HSSID()#"=FALSE";
+                                    string sLongKey = oCC.ChnLabel()#"|"#hssid#"=FALSE";
+                                    string sShortKey = hssid#"=FALSE";
                                     sValue = web.webKeyFromStringTable(sLongKey);
                                     if( sValue.Length() == 0 )
                                     {
@@ -181,8 +188,8 @@ function ::WriteConditionText()
                                   }
                                   if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
                                   {
-                                    string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID();
-                                    string sShortKey = oDP.HSSID();
+                                    string sLongKey = oCC.ChnLabel()#"|"#hssid;
+                                    string sShortKey = hssid;
                                     sValue = web.webKeyFromStringTable(sLongKey);
                                     if( !sValue.Length() )
                                     {
@@ -209,8 +216,8 @@ function ::WriteConditionText()
                                 if( (oDP.ID() == iLV) && (s == iRV1.ToString()) && (iRV1T == ivtSpecialValue) ) 
                                 { 
                                   string sValue = oDP.Name();  
-                                  string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"="#s;
-                                  string sShortKey = oDP.HSSID()#"="#s;
+                                  string sLongKey = oCC.ChnLabel()#"|"#hssid#"="#s;
+                                  string sShortKey = hssid#"="#s;
                                   string sValue = web.webKeyFromStringTable(sLongKey);
                                   if( !sValue.Length() )
                                   {
@@ -452,12 +459,19 @@ function ::WriteDestinationText()
 
                 if( oDP )
                 {
+                  string hssid = "";
+
+                  if ( oDP.IsTypeOf( OT_HSSDP ) )
+                  {
+                    hssid = oDP.HSSID();
+                  }
+
                   object oCH = dom.GetObject( oDP.Channel() );
                   if( oCH )
                   { 
                     integer iDPvt = oDP.ValueType();
                     integer iDPst = oDP.ValueSubType();
-                    string sKey = oCH.ChnLabel()#"|"#oDP.HSSID();
+                    string sKey; = oCH.ChnLabel()#"|"#hssid;
                     boolean showVal = true;
 
                     if( (iDPvt == ivtInteger) && (iDPst == istEnum) )
@@ -473,11 +487,11 @@ function ::WriteDestinationText()
                       {
                         if( iV == 0 )
                         {
-                          string sKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=FALSE";
+                          string sKey = oCH.ChnLabel()#"|"#hssid#"=FALSE";
                           string sValue = web.webKeyFromStringTable(sKey);
                           if( sValue.Length() == 0 )
                           {
-                            sKey = oDP.HSSID()#"=FALSE";
+                            sKey = hssid#"=FALSE";
                             string sValue = web.webKeyFromStringTable(sKey);
                             if( !sValue.Length() )
                             {
@@ -488,11 +502,11 @@ function ::WriteDestinationText()
                         }
                         if( iV == 1 )
                         {
-                          string sKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
+                          string sKey = oCH.ChnLabel()#"|"#hssid#"=TRUE";
                           string sValue = web.webKeyFromStringTable(sKey);
                           if( sValue.Length() == 0 )
                           {
-                            sKey = oDP.HSSID()#"=TRUE";
+                            sKey = hssid#"=TRUE";
                             string sValue = web.webKeyFromStringTable(sKey);
                             if( !sValue.Length() )
                             {
@@ -504,12 +518,12 @@ function ::WriteDestinationText()
                       }
                       else
                       {
-                        string sKey = oCH.ChnLabel()#"|"#oDP.HSSID();
+                        string sKey = oCH.ChnLabel()#"|"#hssid;
                         string sValue = web.webKeyFromStringTable(sKey);
                         sRet = sRet#sValue;
                         if( sValue.Length() == 0 )
                         {
-                          sKey = oDP.HSSID();
+                          sKey = hssid;
                           string sValue = web.webKeyFromStringTable(sKey);
                           if( !sValue.Length() )
                           {

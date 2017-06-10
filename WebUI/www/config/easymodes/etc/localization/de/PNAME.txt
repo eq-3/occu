@@ -70,4 +70,20 @@
 "SWITCHING_INTERVAL_FACTOR" : "Wert des Intervalls",
 "SWITCHING_INTERVAL_FACTOR_DESCR" : "Intervall der Pumpenschutzfunktion",
 
+"DOWN_TIME_BASE" : "<span class=\"translated\">Wert der Verweildauer</span>",
+"DOWN_TIME_FACTOR" : "<span class=\"translated\">Einheit der Verweildauer</span>",
+"DOWN_TIME_FACTOR_DESCR" : "<span class=\"translated\">Verweildauer im Zustand \"Unten\"</span>",
+
+"UP_TIME_BASE" : "<span class=\"translated\">Wert der Verweildauer</span>",
+"UP_TIME_FACTOR" : "<span class=\"translated\">Einheit der Verweildauer</span>",
+"UP_TIME_FACTOR_DESCR" : "<span class=\"translated\">Verweildauer im Zustand \"Oben\"</span>",
+
+"DOWN_TIME_DELAY_BASE" : "<span class=\"translated\">Wert der Verz%F6gerungszeit</span>",
+"DOWN_TIME_DELAY_FACTOR" : "<span class=\"translated\">Einheit der Verz%F6gerungszeit</span>",
+"DOWN_TIME_DELAY_FACTOR_DESCR" : "<span class=\"translated\">Herunterfahrverz%F6gerungszeit</span>",
+
+"UP_TIME_DELAY_BASE" : "<span class=\"translated\">Wert der Verz%F6gerungszeit</span>",
+"UP_TIME_DELAY_FACTOR" : "<span class=\"translated\">Einheit der Verz%F6gerungszeit</span>",
+"UP_TIME_DELAY_FACTOR_DESCR" : "<span class=\"translated\">Hochfahrverz%F6gerungszeit</span>",
+
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperatur</span>",

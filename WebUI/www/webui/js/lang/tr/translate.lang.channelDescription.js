@@ -5,6 +5,9 @@ jQuery.extend(true,langJSON, {
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analog output",
     "chType_ARMING" : "Arming",
     "chType_BLIND" : "Blind actuator",
+    "chType_BLIND_TRANSMITTER" : "Status report Jalousie",
+    "chType_BLIND_VIRTUAL_RECEIVER" : "Jalousie actuator",
+    "chType_BLIND_WEEK_PROFILE" : "Weekly program",
     "chType_CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER" : "Humidity control",
     "chType_CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER" : "Link partner<br/>room floor heating valve",
     "chType_CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER" :  "Floor heating/Pump control<br/>connection partner<br/>room thermostat",
@@ -25,6 +28,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER" : "Dimmer actuator",
     "chType_DIMMER_TRANSMITTER" : "Status report dimmer",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",
+    "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
     "chType_DUAL_WHITE_COLOR" : "Colour channel",
     "chType_ENERGIE_METER_TRANSMITTER" : "Status report measured value channel",
@@ -45,6 +49,7 @@ jQuery.extend(true,langJSON, {
     "chType_MOD_EM8BIT_TRANSMITTER" : "Transmitter for<br/>8 bit decision value",
     "chType_MOTION_DETECTOR" : "Motion detector",
     "chType_POWERMETER" : "Measurement channel",
+    "chType_PRESENCEDETECTOR_TRANSCEIVER" : "Presence sensor",
     "chType_RAINDETECTOR" : "Rain sensor",
     "chType_RAINDETECTOR_HEAT" : "Rain sensor<br/>heating unit",
     "chType_REMOTECONTROL_RECEIVER" : "Connection partner<br/>button",
@@ -53,13 +58,17 @@ jQuery.extend(true,langJSON, {
     "chType_SABOTAGECONTACT" : "Connection partner<br/>sabotage contact",
     "chType_SENSOR_FOR_CARBON_DIOXIDE" : "Air quality-/CO2 sensor",
     "chType_SENSOR_WINDOW" : "Sensor channel",
+    "chType_SHUTTER_TRANSMITTER" : "Status report blind actuator",
+    "chType_SHUTTER_VIRTUAL_RECEIVER" : "Blind actuator",
     "chType_SWITCH" : "Switch actuator",
     "chType_SWITCH_PANIC" : "Panic alarm",
     "chType_SWITCH_SENSOR_Ext" : "External alarm",
     "chType_SWITCH_SENSOR_Int" : "Internal alarm",
     "chType_SWITCH_TRANSMIT" : "Connection partner<br/>switch actuator",
     "chType_SWITCH_TRANSMITTER" : "Status report relay",
+    "chType_SWITCH_TRANSMITTER_OC" : "Status report relay OC-Output",
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Switch actuator",
+    "chType_SWITCH_WEEK_PROFILE" : "Weekly program",
     "chType_THERMALCONTROL_TRANSMIT" : "Connection partner<br/>radiator thermostat",
     "chType_VIRTUAL_DIMMER" : "Dimmer actuator",
     "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
@@ -68,6 +77,8 @@ jQuery.extend(true,langJSON, {
     "chType_WEATHER_TRANSMIT" : "Connection partner<br/>temperature sensor",
     "chType_WEEK_PROGRAM" : "Connection partner week program",
     "chType_WINDOW_SWITCH_RECEIVER" : "Connection partner<br/>shutter contact",
+
+
     "theEnd" : ""
   }
 });

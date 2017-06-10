@@ -1,0 +1,76 @@
+function ::CreatePresenceDetector() {
+
+  real oIllumination = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.ILLUMINATION");
+  boolean oPresenceDetectionActive = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.PRESENCE_DETECTION_ACTIVE");
+  boolean oPresenceDetectionState = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.PRESENCE_DETECTION_STATE");
+  boolean oPresenceDetectionResetPresence = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.RESET_PRESENCE");
+
+  boolean presenceDetectionActive = oPresenceDetectionActive.Value();
+  string sPresenceDetectionIsActive = "";
+  string sSetPresenceDetection = "";
+  string statePresence = "${statePresenceFalse}";
+
+  if (oPresenceDetectionState.Value() == true) {
+   statePresence = "${statePresenceTrue}";
+  }
+
+  if (presenceDetectionActive == true) {
+    presenceDetectionActive = false;
+    sPresenceDetectionIsActive = "${presenceDetectionTrue}";
+    sSetPresenceDetection = "${btnPresenceDetectionTrue}";
+  } else {
+    presenceDetectionActive = true;
+    sPresenceDetectionIsActive = "${presenceDetectionFalse}";
+    sSetPresenceDetection = "${btnPresenceDetectionFalse}";
+  }
+
+  WriteLine("<td>");
+
+    WriteLine("<table><tbody>");
+
+      WriteLine("<tr>");
+        WriteLine("<td>");
+         WriteLine("<div class='ControlBtnInfo CLASS02532'><span>${stringTableBrightness}: </span><span>"#oIllumination.Value().ToString(0)#"</span></div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("<tr class='hidden'>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#sPresenceDetectionIsActive#"</span></div>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnOff CLASS02532' style='padding:5px' id='setTransmitterOnOff"#chnId#"'>"#sSetPresenceDetection#"</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#statePresence#"</span></div>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnOff CLASS02532' style='padding:5px' id='resetPresence"#chnId#"'>${btnResetPresence}</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+    WriteLine("</tbody></table>");
+  WriteLine("</td>");
+
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine("var resetPresenceElm = jQuery('#resetPresence"#chnId#"'),");
+    WriteLine("transmitterOnOffElm = jQuery('#setTransmitterOnOff"#chnId#"');");
+
+    WriteLine("resetPresenceElm.click(function() {setDpState('"#oPresenceDetectionResetPresence.ID()#"', true);setBtnOn(this.id);});");
+
+    WriteLine("transmitterOnOffElm.click(function() {setDpState('"#oPresenceDetectionActive.ID()#"', "#presenceDetectionActive#");setBtnOn(this.id);});");
+
+    WriteLine(" setBtnOn = function(elmID) {" );
+      WriteLine(" var elm = jQuery('#'+elmID);");
+      WriteLine(" elm.removeClass('ControlBtnOff').addClass('ControlBtnOn'); ");
+      WriteLine(" window.setTimeout(function() {elm.removeClass('ControlBtnOn').addClass('ControlBtnOff');},500); ");
+    WriteLine(" }; ");
+
+   WriteLine("</script>");
+
+  return;
+}

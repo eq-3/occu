@@ -170,8 +170,8 @@ proc getButton {id btnTxt callBack} {
   return $s
 }
 
-proc getHorizontalLine {} {
-  return "<tr><td colspan=\"2\"><hr></td></tr>"
+proc getHorizontalLine {{extraparam ""}} {
+  return "<tr $extraparam><td colspan=\"2\"><hr></td></tr>"
 }
 
 proc getHelpIcon {topic x y} {
@@ -190,7 +190,7 @@ proc _getParamDescrKey {param} {
   return [string trimright $_paramDescr "_"]
 }
 
-proc getTimeSelector {paramDescr p profile type prn special_input_id timebase optionValues} {
+proc getTimeSelector {paramDescr p profile type prn special_input_id timebase optionValues {extraparam ""}} {
   
   # paramDescr        Text vor der Auswahlbox
   # p                 Paramset
@@ -218,7 +218,7 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
   set javascriptDelay 100
 
   incr pref
-  append html "<tr>"
+  append html "<tr $extraparam>"
   append html "<td>\${$paramDescr}</td>"
   append html [getComboBox $prn $pref $special_input_id $type] ;# hmip_helper
   append html "</tr>"

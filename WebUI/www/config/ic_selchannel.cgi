@@ -604,6 +604,7 @@ proc showHmIPChannel {devType direction address chType} {
     ($devType == "HMIP-PS")
     || ([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1)
     || ($devType == "HMIP-PDT")
+    || ($devType == "HMIP-PDT-UK")
     || ($devType == "HMIP-PCBS")
     ) && $direction == 1} {
     # don't show the channel
@@ -632,7 +633,7 @@ proc showHmIPChannel {devType direction address chType} {
      if {$ch >= 5} {return 0}
     }
 
-    if {($devType == "HMIP-PDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
+    if {(($devType == "HMIP-PDT") || ($devType == "HMIP-PDT-UK")) && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
      if {$ch >= 4} {return 0}
     }
 
@@ -650,6 +651,24 @@ proc showHmIPChannel {devType direction address chType} {
 
     if {($devType == "HMIP-MIOB") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
       if {$ch != 3 && $ch != 7} {return 0}
+    }
+
+    if {($devType == "HMIP-BBL" || $devType == "HMIP-FBL") && ($chType == "BLIND_VIRTUAL_RECEIVER")} {
+     if {$ch >= 5} {return 0}
+    }
+
+    if {($devType == "HMIP-BROLL" || $devType == "HMIP-FROLL") && ($chType == "SHUTTER_VIRTUAL_RECEIVER")} {
+     if {$ch >= 5} {return 0}
+    }
+
+    if {($devType == "HMIP-MOD-OC8") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+      if {
+            ($ch == 11) || ($ch == 12) || ($ch == 15) || ($ch == 16) || ($ch == 19) || ($ch == 20)
+         || ($ch == 23) || ($ch == 24) || ($ch == 27) || ($ch == 28) || ($ch == 31) || ($ch == 32)
+         || ($ch == 35) || ($ch == 36) || ($ch == 39) || ($ch == 40)
+      } {
+        return 0
+      }
     }
   }
   # show the channel

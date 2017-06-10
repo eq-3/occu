@@ -72,7 +72,7 @@ function ::CreateDimmingActuator()
       WriteLine("</tr>");
       if ( (rLevelReal != -1.0) && (user.UserEasyLinkMode() != true) ) {
         WriteLine("<tr>");
-          WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white'>${lblInfoDimmerLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>")
+          WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white'>${lblInfoLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>")
         WriteLine("</tr>");
       }
     WriteLine("</table>");
@@ -104,7 +104,7 @@ function ::CreateDimmerRealInfoControl() {
     WriteLine("<table class='ControlBtnInfo'>");
       WriteLine("<tr style='height:40px;'>");
         WriteLine("<td id='"#chnId#"Level'>");
-          WriteLine("${lblInfoDimmerLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%");
+          WriteLine("${lblInfoLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%");
         WriteLine("</td>");
       WriteLine("</tr>");
     WriteLine("</table>");
