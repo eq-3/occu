@@ -10,6 +10,7 @@
 "subset_2" : "heruntergefahren",
 "subset_3" : "hoch- / heruntergefahren im Wechsel",
 
+"COMMENT" : "The next keys are not in use",
 "subset_4" : "Offen - aus / Zu - ein",
 "subset_5" : "Offen - ein / Zu - aus",
 

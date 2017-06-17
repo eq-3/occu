@@ -1,7 +1,7 @@
-"CloseDown" : "* Jalousie zu / herunter",
-"OpenUp" : "* Jalousie auf / hoch",
-"OpenClose_UpDown" : "* Jalousie auf / zu & hoch / herunter",
-"TargetPosition" : "* Jalousie Position anfahren",
+"CloseDown" : "zu / herunter",
+"OpenUp" : "auf / hoch",
+"OpenClose_UpDown" : "auf / zu & hoch / herunter",
+"TargetPosition" : "Position anfahren",
 
 "driving_mode_0" : "direkt",
 "driving_mode_1" : "&uuml;ber die obere Endlage (Genauigkeitsfahrt)",

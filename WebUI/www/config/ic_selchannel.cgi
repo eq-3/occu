@@ -598,15 +598,14 @@ proc showHmIPChannel {devType direction address chType} {
   set devType [string toupper $devType]
   set ch [lindex [split $address ":"] 1]
 
-  # The internal device button isn`t allowed for external links
-  # The HmIP-PSM is available as HmIP-PSM-IT/CH/UK etc.
+  # The internal device button of some devices aren`t allowed for external links
+  # The next code filters e. g. a HMIP-PSM AND a HMIP-PSM-UK or a HmIP-PCBS AND a HmIP-PCBS-BAT
   if {(
     ($devType == "HMIP-PS")
     || ([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1)
-    || ($devType == "HMIP-PDT")
-    || ($devType == "HMIP-PDT-UK")
-    || ($devType == "HMIP-PCBS")
-    ) && $direction == 1} {
+    || ([string equal -nocase -length 8 $devType "HMIP-PDT"] == 1)
+    || ([string equal -nocase -length 9 $devType "HMIP-PCBS"] == 1)
+    ) && $direction == 1} { #; channel is sender
     # don't show the channel
     return 0
   }

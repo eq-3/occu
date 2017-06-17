@@ -571,24 +571,24 @@ function ::CreateShutterTransmitter()
 {
   object oLvl = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL");
 
-  real iLvl = -1;
+  real rLvl = -1;
 
   string unitLevel = "%";
   string unitLevelSlat = "%";
 
   if ( (oLvl) && ((oLvl.Value() != "") || (oLvl.Value() == 0.000000)) )
   {
-    iLvl = oLvl.Value();
+    rLvl = oLvl.Value();
     if ( oLvl.ValueUnit() == "100%" )
     {
-      iLvl = iLvl * 100;
+      rLvl = rLvl * 100;
     }
   }
 
-  if (iLvl == -1) {
+  if (rLvl == -1) {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
   } else {
-    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#iLvl.ToInteger()#unitLevel#"</div></td>");
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#rLvl.ToInteger()#unitLevel#"</div></td>");
   }
 
   return;

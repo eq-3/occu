@@ -375,7 +375,10 @@ proc getBlindTransmitter {chn p descr address} {
 
   set parent [lindex [split $address :] 0]
 
-  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
+  set hlpBoxWidth 450
+  set hlpBoxHeight 160
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
 
   puts "<div id=\"page_$parent\" class=\"hidden\">$parent</div>"
 
@@ -444,10 +447,9 @@ proc getBlindTransmitter {chn p descr address} {
   append html "[getHorizontalLine]"
 
   # AUTOCALIBRATION
-
   append html "<tr id=\"autoCalibrationPanel_$parent\" class =\"hidden\">"
     append html "<td>\${stringTableSelfCalibrationStart}</td>"
-    append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'></td>"
+    append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'>[getHelpIcon HELP_BLIND_AUTOCALIBRATION $hlpBoxWidth $hlpBoxHeight]</td>"
     append html "<td id='tdBlindStopCalibration_$parent' class=\"hidden\"><input name='btnBlindStopCalibration' onclick='autoCalib\[\"$parent\"\].stopAutoCalibration()' value='Stop Calibration' type='button'></td>"
   append html "</tr>"
 
@@ -533,7 +535,7 @@ proc getShutterTransmitter {chn p descr address} {
 
   set parent [lindex [split $address :] 0]
 
-  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
 
   puts "<div id=\"page_$parent\" class=\"hidden\">$parent</div>"
 
@@ -604,13 +606,13 @@ proc getShutterTransmitter {chn p descr address} {
   # AUTOCALIBRATION
 
   append html "<tr id=\"autoCalibrationPanel_$parent\" class =\"hidden\">"
-    append html "<td>StartAutoCalibration</td>"
+    append html "<td>\${stringTableSelfCalibrationStart}</td>"
     append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'></td>"
     append html "<td id='tdBlindStopCalibration_$parent' class=\"hidden\"><input name='btnBlindStopCalibration' onclick='autoCalib\[\"$parent\"\].stopAutoCalibration()' value='Stop Calibration' type='button'></td>"
   append html "</tr>"
 
   append html "<tr id=\"autoCalibrationActive_$parent\" class=\"hidden\">"
-    append html "<td>Auto Calibration Activ</td>"
+    append html "<td>\${lblAutoCalibrationActiv}</td>"
     append html "<td><div><img src='/ise/img/anim_bargraph.gif'></div></td>"
   append html "</tr>"
 
@@ -2399,7 +2401,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxDecisionAbove_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionAbove}</td>"
+      append html "<td>\${stringTableCondTxDecisionAbove}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2408,7 +2410,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxDecisionBelow_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionBelow}</td>"
+      append html "<td>\${stringTableCondTxDecisionBelow}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2417,7 +2419,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxThresholdHi_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTablePassageDetectorCounterTransmitterCondTxThresholdHi}</td>"
+      append html "<td>\${stringTableCondThresholdHi}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2426,7 +2428,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxThresholdLo_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTablePassageDetectorCounterTransmitterCondTxThresholdLo}</td>"
+      append html "<td>\${stringTableCondThresholdLo}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }

@@ -345,7 +345,7 @@ HmIPWeeklyProgram.prototype = {
 
     showConditionHelp = function() {
       var width = 600,
-      height = 350;
+      height = 450;
       MessageBox.show(translateKey("HmIPWPHelpTitle"), translateKey("HmIPWPConditionHelp"), "", width, height);
     };
 
@@ -577,10 +577,18 @@ HmIPWeeklyProgram.prototype = {
     this.prn++;
      result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"' onchange='showHideDuration(this.value, "+number+");'>";
       if ((this.chnType == this.DIMMER) || (this.chnType == this.BLIND)) {
-        result += "<option value='0'>"+translateKey('optionOFF')+"</option>";
-        for (var loop = 5; loop <= 100; loop += 5) {
-          result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
+
+        if (this.chnType == this.DIMMER) {
+          result += "<option value='0'>" + translateKey('optionOFF') + "</option>";
+          for (var loop = 5; loop <= 100; loop += 5) {
+            result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
+          }
+        } else {
+          for (var loop = 0; loop <= 100; loop += 5) {
+            result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
+          }
         }
+
         result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
         result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
       } else if (this.chnType == this.SWITCH) {
@@ -608,8 +616,8 @@ HmIPWeeklyProgram.prototype = {
     this.prn++;
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"'>";
 
-      result += "<option value='0'>"+translateKey('optionOFF')+"</option>";
-      for (var loop = 5; loop <= 100; loop += 5) {
+      //result += "<option value='0'>"+translateKey('optionOFF')+"</option>";
+      for (var loop = 0; loop <= 100; loop += 5) {
         result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
       }
       result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";

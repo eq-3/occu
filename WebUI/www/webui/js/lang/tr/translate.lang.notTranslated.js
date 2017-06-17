@@ -6,38 +6,6 @@ jQuery.extend(true,langJSON, {
 
     "stringTableRouterModuleEnabled" : "*tr Device serves as a router",
 
-    "stringTableATCAdaptionInterval" : "*tr Intervall f%FCr Temperaturkompensation der Sensoren",
-    "stringTableATCMode" : "*tr Temperaturkompensation der Sensoren",
-    "stringTableSensorSensivity" : "*tr Sensorempfindlichkeit",
-
-    "stringTableEventBlindTime" : "*tr EVENT_BLINDTIME",
-    "stringTableEventBlindTimeBase" : "*tr Einheit EVENT_BLINDTIME",
-    "stringTableBlindTimeValue" : "*tr Wert EVENT_BLINDTIME",
-
-    "stringTableEventTimeout" : "*tr EVENT_TIMEOUT",
-    "stringTableEventTimeoutBase" : "*tr Einheit EVENT_TIMEOUT",
-    "stringTableEventTimeoutValue" : "*tr Wert EVENT_TIMEOUT",
-
-    "stringTableCondValuePassageDetectionLeft" : "*tr Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
-    "stringTableCondValuePassageDetectionRight" : "*tr Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
-
-    "stringTablePassageDetectionLeft" : "*tr Durchgangserkennung Links",
-    "stringTablePassageDetectionRight" : "*tr Durchgangserkennung Rechts",
-
-    "stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionAbove" : "*tr COND_TX_DECISION_ABOVE",
-    "stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionBelow" : "*tr COND_TX_DECISION_BELOW",
-    "stringTablePassageDetectorCounterTransmitterCondTxThresholdHi" : "*tr COND_TX_THRESHOLD_HI",
-    "stringTablePassageDetectorCounterTransmitterCondTxThresholdLo" : "*tr COND_TX_THRESHOLD_LO",
-
-    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "*tr CHANNEL_OPERATION_MODE",
-
-    "optionPassageCounterDetectionLR" : "*tr optionPassageCounterDetectionLR",
-    "optionPassageCounterDetectionL" : "*tr optionPassageCounterDetectionL",
-    "optionPassageCounterDetectionR" : "*tr optionPassageCounterDetectionR",
-    "optionPassageCounterDeltaLR" : "*tr optionPassageCounterDeltaLR",
-    "optionPassageCounterDeltaL" : "*tr optionPassageCounterDeltaL",
-    "optionPassageCounterDeltaR" : "*tr optionPassageCounterDeltaR",
-
     "lblLocation" : "*tr Wohnort",
 
     "lblMode" : "*tr Modus",
@@ -56,6 +24,8 @@ jQuery.extend(true,langJSON, {
 
     "stringTableSelfCalibrationStart" : "*tr Starte Kalibrierfahrt",
     "stringTableSelfCalibrationStop" : "*tr Beende Kalibrierfahrt",
+
+    "lblAutoCalibrationActiv": "*tr Auto-Kalibrierung aktiv",
 
     "stringTableBlindLevelOff" : "*tr Heruntergefahren",
     "stringTableBlindLevelOnDelay" : "*tr Hochfahrverz%F6gerung",
@@ -91,7 +61,7 @@ jQuery.extend(true,langJSON, {
     "stringTablePresenceDetectorTitle" : "*tr Pr%E4senzmelder",
 
     "lblTDRegaVersion" : "*tr Logikschicht<br/>Version",
-    "lblTDReGaVersionHelp": "*tr* Logikschicht Version Erkl&auml;rung",
+    "lblTDReGaVersionHelp": "**tr Logikschicht Version Erkl&auml;rung",
 
     "optionReGaNORMAL" : "*tr NORMAL",
     "optionReGaLEGACY" : "*tr LEGACY",
@@ -106,6 +76,35 @@ jQuery.extend(true,langJSON, {
     "stringTableBlindLevelDown" : "*tr Behangh%F6he heruntergefahren",
     "stringTableJalousieSlatsLevelUp" : "*tr Lamellenposition hochgefahren",
     "stringTableJalousieSlatsLevelDown" : "*tr Lamellenposition heruntergefahren",
+
+    "COMMENT" : "THIS is for the release C/2017",
+
+    "stringTableATCAdaptionInterval" : "*tr Intervall f%FCr Temperaturkompensation der Sensoren",
+    "stringTableATCMode" : "*tr Temperaturkompensation der Sensoren",
+    "stringTableSensorSensivity" : "*tr Sensorempfindlichkeit",
+
+    "stringTableEventBlindTime" : "*tr EVENT_BLINDTIME",
+    "stringTableEventBlindTimeBase" : "*tr Einheit EVENT_BLINDTIME",
+    "stringTableBlindTimeValue" : "*tr Wert EVENT_BLINDTIME",
+
+    "stringTableEventTimeout" : "*tr EVENT_TIMEOUT",
+    "stringTableEventTimeoutBase" : "*tr Einheit EVENT_TIMEOUT",
+    "stringTableEventTimeoutValue" : "*tr Wert EVENT_TIMEOUT",
+
+    "stringTableCondValuePassageDetectionLeft" : "*tr Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
+    "stringTableCondValuePassageDetectionRight" : "*tr Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
+
+    "stringTablePassageDetectionLeft" : "*tr Durchgangserkennung Links",
+    "stringTablePassageDetectionRight" : "*tr Durchgangserkennung Rechts",
+
+    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "*tr CHANNEL_OPERATION_MODE",
+
+    "optionPassageCounterDetectionLR" : "*tr optionPassageCounterDetectionLR",
+    "optionPassageCounterDetectionL" : "*tr optionPassageCounterDetectionL",
+    "optionPassageCounterDetectionR" : "*tr optionPassageCounterDetectionR",
+    "optionPassageCounterDeltaLR" : "*tr optionPassageCounterDeltaLR",
+    "optionPassageCounterDeltaL" : "*tr optionPassageCounterDeltaL",
+    "optionPassageCounterDeltaR" : "*tr optionPassageCounterDeltaR",
 
     "noMoreKeys" : ""
   }

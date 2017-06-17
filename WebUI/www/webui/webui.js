@@ -2225,9 +2225,12 @@ DEV_HIGHLIGHT["HM-Sec-MDIR-2"] = new Object();
 DEV_LIST.push('HmIP-BBL');
 DEV_DESCRIPTION["HmIP-BBL"] = "HmIP-BBL";
 DEV_PATHS["HmIP-BBL"] = new Object();
-DEV_PATHS["HmIP-BBL"]["50"] = "/config/img/devices/50/157_hmip-broll_hmip-bbl_thumb.png";
-DEV_PATHS["HmIP-BBL"]["250"] = "/config/img/devices/250/157_hmip-broll_hmip-bbl.png";
+DEV_PATHS["HmIP-BBL"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BBL"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
 DEV_HIGHLIGHT["HmIP-BBL"] = new Object();
+DEV_HIGHLIGHT["HmIP-BBL"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('HM-WDS100-C6-O-2');
 DEV_DESCRIPTION["HM-WDS100-C6-O-2"] = "HM-WDS100-C6-O";
 DEV_PATHS["HM-WDS100-C6-O-2"] = new Object();
@@ -2340,9 +2343,12 @@ DEV_HIGHLIGHT["HM-LC-Sw1-SM-ATmega168"] = new Object();
 DEV_LIST.push('HmIP-BROLL');
 DEV_DESCRIPTION["HmIP-BROLL"] = "HmIP-BROLL";
 DEV_PATHS["HmIP-BROLL"] = new Object();
-DEV_PATHS["HmIP-BROLL"]["50"] = "/config/img/devices/50/157_hmip-broll_hmip-bbl_thumb.png";
-DEV_PATHS["HmIP-BROLL"]["250"] = "/config/img/devices/250/157_hmip-broll_hmip-bbl.png";
+DEV_PATHS["HmIP-BROLL"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BROLL"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
 DEV_HIGHLIGHT["HmIP-BROLL"] = new Object();
+DEV_HIGHLIGHT["HmIP-BROLL"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BROLL"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BROLL"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('ZEL STG RM FZS-2');
 DEV_DESCRIPTION["ZEL STG RM FZS-2"] = "ZEL_STG_RM_FZS-2";
 DEV_PATHS["ZEL STG RM FZS-2"] = new Object();
@@ -3345,7 +3351,7 @@ elvST['BLIND|REFERENCE_RUN_COUNTER'] = '${stringTableBlindRefRunCounter}';
 elvST['BLIND|STOP'] = '${stringTableBlindStop}';
 elvST['BLIND_TRANSMITTER|LEVEL'] = '${stringTableBlindLevel}';
 elvST['BLIND_TRANSMITTER|LEVEL_2'] = '${stringTableJalousieSlatsLevel}';
-elvST['SHUTTER_VIRTUAL_RECEIVER'] = '${stringTableBlindVirtualReceiverTitle}';
+elvST['BLIND_VIRTUAL_RECEIVER'] = '${stringTableBlindVirtualReceiverTitle}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL'] = '${stringTableBlindLevel}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2'] = '${stringTableJalousieSlatsLevel}';
 elvST['BLIND_VIRTUAL_RECEIVER|STOP'] = '${stringTableBlindStop}';
@@ -29333,7 +29339,15 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
         {name:'LEVEL_2', type: 'double', value: this.levelSlats / 100}
       ]
     },function(result){conInfo(result);});
+  },
 
+  saveValue: function() {
+    homematic("Interface.putParamset",{'interface': 'HmIP-RF', 'address' : this.opts.chnAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'LEVEL', type: 'double', value: this.state / 100},
+        {name:'LEVEL_2', type: 'double', value: 1.005}
+      ]
+    },function(result){conInfo(result);});
   }
 
 });

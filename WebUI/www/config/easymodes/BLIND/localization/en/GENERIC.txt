@@ -4,6 +4,7 @@
 "open_up" : "open / up",
 "open_up_stopover" : "open / up & stopover",
 "target_position" : "move to position",
+
 "driving_mode_0" : "directly",
 "driving_mode_1" : "above the upper final position (accuracy run)",
 "driving_mode_2" : "above the lower final position (accuracy run)",

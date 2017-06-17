@@ -6,10 +6,11 @@
 
 "description_4" : "<span class=\"translated\">*tr Mit jedem &Ouml;ffnen / Schliessen des T&uuml;r-/Fensterkontaktes f&auml;hrt die Markise / der Rollladen f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine entsprechende Verz&ouml;gerungszeit eingestellt, wird die Beschattung erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
 
-"subset_1" : "*tr hochgefahren",
-"subset_2" : "*tr heruntergefahren",
-"subset_3" : "*tr hoch- / heruntergefahren im Wechsel",
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",
 
+"COMMENT" : "The next keys are not in use",
 "subset_4" : "*tr Offen - aus / Zu - ein",
 "subset_5" : "*tr Offen - ein / Zu - aus",
 

@@ -1129,16 +1129,21 @@ proc getSwitchingIntervalOnTime {prn pref specialElement} {
 
 
 proc getBlindRunningTime {prn pref specialElement} {
+      set hlpBoxWidth 450
+      set hlpBoxHeight 160
+      set helpRunningTime HELP_BLIND_REFERENCE_RUNNING_TIME
+
       set s ""
       append s "<td>"
-      append s  "<select id=\"timeDelay\_$prn\_$pref\" name=\"presetsAutoCalibration\" onchange=\"setBlindRunningTimeValues(this.id, $prn, $pref, \'$specialElement\')\">"
-        append s "<option value=\"0\">\${optionUnit30S}</option>"
-        append s "<option value=\"1\">\${optionUnit45S}</option>"
-        append s "<option value=\"2\">\${optionUnit60S}</option>"
-        append s "<option value=\"3\">\${optionUnit90S}</option>"
-        append s "<option value=\"4\">\${stringTableEnterValue}</option>"
+        append s  "<select id=\"timeDelay\_$prn\_$pref\" name=\"presetsAutoCalibration\" onchange=\"setBlindRunningTimeValues(this.id, $prn, $pref, \'$specialElement\')\">"
+          append s "<option value=\"0\">\${optionUnit30S}</option>"
+          append s "<option value=\"1\">\${optionUnit45S}</option>"
+          append s "<option value=\"2\">\${optionUnit60S}</option>"
+          append s "<option value=\"3\">\${optionUnit90S}</option>"
+          append s "<option value=\"4\">\${stringTableEnterValue}</option>"
 
-      append s "/<select>"
+        append s "/<select> "
+        append s [getHelpIcon $helpRunningTime $hlpBoxWidth $hlpBoxHeight]
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"

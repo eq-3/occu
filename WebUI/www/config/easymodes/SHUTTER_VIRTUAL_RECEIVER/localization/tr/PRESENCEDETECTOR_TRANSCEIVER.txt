@@ -8,6 +8,6 @@
 
 "description_5" : "<span class=\"translated\">*tr Der Bewegungsmelder ist nicht aktiv</span>",
 
-"subset_1" : "*tr hochgefahren",
-"subset_2" : "*tr heruntergefahren",
-"subset_3" : "*tr hoch- / heruntergefahren im Wechsel",
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",

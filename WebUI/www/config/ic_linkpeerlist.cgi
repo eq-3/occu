@@ -275,7 +275,8 @@ proc put_tablebody {} {
       # Sind Sender u. Receiver identisch? Dann handelt es sich um einen internen Link, z. B. die interne Gerätetaste
       # Diese soll bei BidCos-RF nicht in der Verknüpfungsübersichtsliste angezeigt werden, Ausnahmen werden mittels isInExceptionList erlaubt.
       # Interne Links von HmIP-Geräten werden immer angezeigt, da sie anders als bei HM nur hier editiert werden können (nicht als Kanalparameter).
-      # Interne Links von PS / PSM dürfen nicht löschbar sein, da sie aufgrund der Firmware nur per Werksreset wieder restauriert werden können.
+      # Interne Links bestimmter Geräte dürfen nicht löschbar sein, da sie aufgrund der Firmware nur per Werksreset wieder restauriert werden können,
+      #   oder bei der Erstellung von Verknüpfungen nicht als Linkpartner angeboten werden, da sie nur eine Verknüpfung zulassen.
       # Interne Links anderer HmIP-Geräte können gelöscht werden. Vor dem Löschen erscheint aber ein entsprechender Warnhinweis.
       # Nach dem Löschen können diese Verknüpfungen aber problemlos wieder hergestellt werden.
 
@@ -284,12 +285,15 @@ proc put_tablebody {} {
         # Hide the delete button of all HmIP-Devices of the type PS and PSM.
         # When an internal link for a device of the type PS / PSM is deleted it can only be restored by a factory reset of the device.
         # This is because of a firmware error. Therefore we prevent the deleting of this links by hiding the delete button.
+
         catch {
-          if { ([isHmIP] == "true" &&
-            [string tolower $sender_descr(PARENT_TYPE)] == "hmip-ps" ||
-            [string tolower $sender_descr(PARENT_TYPE)] == "hmip-psm"  ||
-            [string tolower $sender_descr(PARENT_TYPE)] == "hmip-pdt" )  ||
-            ![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]} {
+          set devType $sender_descr(PARENT_TYPE)
+          if { ([isHmIP] == "true") &&
+            ($devType == "HMIP-PS")
+            || ([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1)
+            || ([string equal -nocase -length 8 $devType "HMIP-PDT"] == 1)
+            || ([string equal -nocase -length 9 $devType "HMIP-PCBS"] == 1)
+            || (![isInExceptionList $sender_descr(TYPE) $receiver_descr(TYPE)]) } {
             set hideBtnDelete 1
           }
         }

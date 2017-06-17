@@ -6,9 +6,9 @@
 
 "description_4" : "<span class=\"translated\">*en Mit einem kurzen Tastendruck f&auml;hrt die Markise / der Rollladen f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine entsprechende Verz&ouml;gerungszeit eingestellt, wird die Beschattung erst nach Ablauf dieser Zeit gefahren. Mit einem langen Tastendruck f&auml;hrt die Markise / der Rollladen nur so lange wie die Taste gedr&uuml;ckt bleibt.</span><br/><br/>",
 
-"subset_1" : "*en hochgefahren",
-"subset_2" : "*en heruntergefahren",
-"subset_3" : "*en hoch- / heruntergefahren im Wechsel",
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",
 
 
 

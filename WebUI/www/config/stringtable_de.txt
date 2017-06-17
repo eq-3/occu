@@ -151,7 +151,7 @@ BLIND|REFERENCE_RUN_COUNTER	${stringTableBlindRefRunCounter}
 BLIND|STOP	${stringTableBlindStop}
 BLIND_TRANSMITTER|LEVEL	${stringTableBlindLevel}
 BLIND_TRANSMITTER|LEVEL_2	${stringTableJalousieSlatsLevel}
-SHUTTER_VIRTUAL_RECEIVER	${stringTableBlindVirtualReceiverTitle}
+BLIND_VIRTUAL_RECEIVER	${stringTableBlindVirtualReceiverTitle}
 BLIND_VIRTUAL_RECEIVER|LEVEL	${stringTableBlindLevel}
 BLIND_VIRTUAL_RECEIVER|LEVEL_2	${stringTableJalousieSlatsLevel}
 BLIND_VIRTUAL_RECEIVER|STOP	${stringTableBlindStop}

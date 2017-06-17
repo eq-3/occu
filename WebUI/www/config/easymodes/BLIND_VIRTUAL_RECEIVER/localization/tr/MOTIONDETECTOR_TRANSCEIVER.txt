@@ -6,6 +6,6 @@
 
 "description_4" : "<span class=\"translated\">*tr Mit jeder Bewegungserkennung f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine entsprechende Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
 
-"subset_1" : "*tr hochgefahren",
-"subset_2" : "*tr heruntergefahren",
-"subset_3" : "*tr hoch- / heruntergefahren im Wechsel",
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",

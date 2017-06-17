@@ -6,37 +6,6 @@ jQuery.extend(true,langJSON, {
 
     "stringTableRouterModuleEnabled" : "Ger%E4t dient als Router",
 
-    "stringTableATCAdaptionInterval" : "Intervall f%FCr Temperaturkompensation der Sensoren",
-    "stringTableATCMode" : "Temperaturkompensation der Sensoren",
-    "stringTableSensorSensivity" : "Sensorempfindlichkeit",
-
-    "stringTableEventBlindTime" : "* EVENT_BLINDTIME",
-    "stringTableEventBlindTimeBase" : "Einheit EVENT_BLINDTIME",
-    "stringTableBlindTimeValue" : "Wert EVENT_BLINDTIME",
-
-    "stringTableEventTimeout" : "* EVENT_TIMEOUT",
-    "stringTableEventTimeoutBase" : "Einheit EVENT_TIMEOUT",
-    "stringTableEventTimeoutValue" : "Wert EVENT_TIMEOUT",
-
-    "stringTableCondValuePassageDetectionLeft" : "Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
-    "stringTableCondValuePassageDetectionRight" : "Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
-
-    "stringTablePassageDetectionLeft" : "Durchgangserkennung Links",
-    "stringTablePassageDetectionRight" : "Durchgangserkennung Rechts",
-
-    "stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionAbove" : "* COND_TX_DECISION_ABOVE",
-    "stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionBelow" : "* COND_TX_DECISION_BELOW",
-    "stringTablePassageDetectorCounterTransmitterCondTxThresholdHi" : "* COND_TX_THRESHOLD_HI",
-    "stringTablePassageDetectorCounterTransmitterCondTxThresholdLo" : "* COND_TX_THRESHOLD_LO",
-
-    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "* CHANNEL_OPERATION_MODE",
-
-    "optionPassageCounterDetectionLR" : "* optionPassageCounterDetectionLR",
-    "optionPassageCounterDetectionL" : "* optionPassageCounterDetectionL",
-    "optionPassageCounterDetectionR" : "* optionPassageCounterDetectionR",
-    "optionPassageCounterDeltaLR" : "* optionPassageCounterDeltaLR",
-    "optionPassageCounterDeltaL" : "* optionPassageCounterDeltaL",
-    "optionPassageCounterDeltaR" : "* optionPassageCounterDeltaR",
 
     "lblLocation" : "Wohnort",
 
@@ -50,8 +19,6 @@ jQuery.extend(true,langJSON, {
     "stringTableTimeBottomTopValue" : "Wert der Fahrzeit",
     "stringTableTimeTopBottomValue" : "Wert der Fahrzeit",
     "stringTableTimeSlatsValue" : "Wert der Lamellenverstellzeit",
-
-    "COMMENT" : "TODO NEW, add this to en and tr",
 
     "stringTableSelfCalibrationResultTrue" : "Kalibrierfahrt erfolgreich",
     "stringTableSelfCalibrationResultFalse" : "Kalibrierfahrt nicht erfolgreich",
@@ -111,6 +78,41 @@ jQuery.extend(true,langJSON, {
     "stringTableBlindLevelDown" : "Behangh%F6he heruntergefahren",
     "stringTableJalousieSlatsLevelUp" : "Lamellenposition hochgefahren",
     "stringTableJalousieSlatsLevelDown" : "Lamellenposition heruntergefahren",
+
+
+    "COMMENT" : "THIS is for the release C/2017",
+
+    "stringTableATCAdaptionInterval" : "Intervall f%FCr Temperaturkompensation der Sensoren",
+    "stringTableATCMode" : "Temperaturkompensation der Sensoren",
+    "stringTableSensorSensivity" : "Sensorempfindlichkeit",
+
+    "stringTableEventBlindTime" : "* EVENT_BLINDTIME",
+    "stringTableEventBlindTimeBase" : "Einheit EVENT_BLINDTIME",
+    "stringTableBlindTimeValue" : "Wert EVENT_BLINDTIME",
+
+    "stringTableEventTimeout" : "* EVENT_TIMEOUT",
+    "stringTableEventTimeoutBase" : "Einheit EVENT_TIMEOUT",
+    "stringTableEventTimeoutValue" : "Wert EVENT_TIMEOUT",
+
+    "stringTableCondValuePassageDetectionLeft" : "Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
+    "stringTableCondValuePassageDetectionRight" : "Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
+
+    "stringTablePassageDetectionLeft" : "Durchgangserkennung Links",
+    "stringTablePassageDetectionRight" : "Durchgangserkennung Rechts",
+
+    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "* CHANNEL_OPERATION_MODE",
+
+    "optionPassageCounterDetectionLR" : "* optionPassageCounterDetectionLR",
+    "optionPassageCounterDetectionL" : "* optionPassageCounterDetectionL",
+    "optionPassageCounterDetectionR" : "* optionPassageCounterDetectionR",
+    "optionPassageCounterDeltaLR" : "* optionPassageCounterDeltaLR",
+    "optionPassageCounterDeltaL" : "* optionPassageCounterDeltaL",
+    "optionPassageCounterDeltaR" : "* optionPassageCounterDeltaR",
+
+
+    "ATTENTION: " : "This is not yet approved by the marketing division",
+
+
 
     "noMoreKeys" : ""
   }
