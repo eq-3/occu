@@ -25,6 +25,8 @@ jQuery.extend(true,langJSON, {
     "chType_CONDITION_POWER" : "Leistungs-Sensor",
     "chType_CONDITION_VOLTAGE" : "Spannungs-Sensor",
     "chType_COND_SWITCH_TRANSMITTER" : "Konfiguration Entscheidungswert",
+    "chType_COND_HUMIDITY" : "Entscheidungswert Feuchtigkeit",
+    "chType_COND_TEMPERATURE" : "Entscheidungswert Temperatur",
     "chType_DIMMER" : "Dimmaktor",
     "chType_DIMMER_TRANSMITTER" : "Statusmitteilung Dimmwert",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmaktor",

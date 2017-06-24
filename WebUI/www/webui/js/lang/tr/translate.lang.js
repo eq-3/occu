@@ -982,6 +982,7 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContent" : "",
     "dialogNewDevicesErrorSecKeyLbl1b " : "",
     "optionLastValue" : "Son deger",
+    "optionNoModification" : "No change",
     "optionNone" : "yok",
     "optionNotActive" : "Etkin degil"
   }

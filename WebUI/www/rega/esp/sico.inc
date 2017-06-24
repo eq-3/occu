@@ -7,7 +7,7 @@
   string excludeHmIPValveState =  "VALVE_STATE";
   string excludeHmIPSmokeDetTestResultNone = "SMOKE_DETECTOR_TEST_RESULT=NONE";
   string excludeHmIPCurrentIllumination = "CURRENT_ILLUMINATION";
-  string excludeHmIPActualTemperature = "ACTUAL_TEMPERATURE";
+  string excludeHmIPActualTemperature = "_ACTUAL_TEMPERATURE";
   string excludeHmIPOperatingVoltage = "OPERATING_VOLTAGE";
   string excludeHmIPresenceDetectionActive = "PRESENCE_DETECTION_ACTIVE";
 
@@ -206,7 +206,6 @@
                     && (oDP.HSSID().Find(excludeHmIPOperatingVoltage) == -1)
                     && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1)
                    ) {
-
                     if( oDP.ID() == iLV ) { sSelected = " selected"; } else { sSelected = ""; }
                     Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
                     string sValue = oDP.Name();

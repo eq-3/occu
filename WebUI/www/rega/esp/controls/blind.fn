@@ -263,7 +263,21 @@ function ::CreateBlindVirtualReceiver()
 {
 
   object ch = dom.GetObject(chnId);
+
   string chnAddress = ch.Address();
+  string chnNumber = chnAddress.StrValueByIndex(":",1);
+  string controlOperable = "pointer-events:auto;";
+  boolean showVirtualChannel = true;
+
+  string devAddress =  chnAddress.StrValueByIndex(":",0);
+  string realChannelAddress = devAddress#":3";
+
+  real levelRealChannel =  dom.GetObject("HmIP-RF."#realChannelAddress#".LEVEL").Value();;
+
+  ! if ((ch.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) && (chnNumber > 4)) {
+  !   showVirtualChannel = false;
+  ! }
+
 
   object oLvl = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL");
   object oLvlSlats = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_2");
@@ -302,10 +316,20 @@ function ::CreateBlindVirtualReceiver()
     iStopId = oStop.ID();
   }
 
-  WriteLine("<td>");
-    WriteLine("<table>");
-      WriteLine("<tr>");
 
+  ! if (showVirtualChannel == false) {
+  !  controlOperable = "pointer-events:none;";
+  !  virtualChannelHint = "{virtualChannelNotOperableHint}";
+  ! }
+
+  WriteLine("<td style='"#controlOperable#"'>");
+    WriteLine("<table>");
+
+      ! if (showVirtualChannel == false) {
+      !  WriteLine("<tr><td colspan='5'><div class='ControlBtnInfo j_translate'>${controlChannelHasNoFunction}</div></td></tr>");
+      ! }
+
+      WriteLine("<tr>");
         WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
         WriteLine("<td>");
           WriteLine("  <div class='PercBtn'>");
@@ -400,6 +424,7 @@ function ::CreateBlindVirtualReceiver()
       WriteLine("levelValue:"#iLvl#",");
       WriteLine("levelSlatsID:"#iLvlSlatsId#",");
       WriteLine("levelSlatsValue:"#iLvlSlats#",");
+      WriteLine("levelRealChannel:'"#levelRealChannel#"',");
     WriteLine("};");
 
     WriteLine("ibs"#cObj.ID()#" = new iseHmIPJalousieShutter(" # chnId # ", " # iLvl # ", " # iLvlId # ", " # iStopId # ", " #system.GetVar("iStatusOnly")# ", opts );" );
@@ -407,54 +432,6 @@ function ::CreateBlindVirtualReceiver()
   WriteLine("</script>");
   return;
 }
-
-function ::CreateBlindTransmitter()
-{
-  object oLvl = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL");
-  object oLvlSlats = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL_2");
-
-
-  real iLvl = -1;
-  real iLvlSlats = -1;
-
-  string unitLevel = "%";
-  string unitLevelSlat = "%";
-
-
-
-  if ( (oLvl) && ((oLvl.Value() != "") || (oLvl.Value() == 0.000000)) )
-  {
-    iLvl = oLvl.Value();
-    if ( oLvl.ValueUnit() == "100%" )
-    {
-      iLvl = iLvl * 100;
-    }
-  }
-
-  if ( (oLvlSlats) && ((oLvlSlats.Value() != "") || (oLvlSlats.Value() == 0.000000)) )
-  {
-    iLvlSlats = oLvlSlats.Value();
-    if ( oLvlSlats.ValueUnit() == "100%" )
-    {
-      iLvlSlats = iLvlSlats * 100;
-    }
-  }
-
-  if (iLvl == -1) {
-    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
-  } else {
-    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#iLvl.ToInteger()#unitLevel#"</div></td>");
-  }
-
-  if (iLvlSlats == -1) {
-    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>${unknown}</div></td>");
-  } else {
-    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>"#iLvlSlats.ToInteger()#unitLevelSlat#"</div></td>");
-  }
-
-  return;
-}
-
 
 function ::CreateShutterVirtualReceiver()
 {
@@ -589,6 +566,53 @@ function ::CreateShutterTransmitter()
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
   } else {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#rLvl.ToInteger()#unitLevel#"</div></td>");
+  }
+
+  return;
+}
+
+function ::CreateBlindTransmitter()
+{
+  object oLvl = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL");
+  object oLvlSlats = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL_2");
+
+
+  real iLvl = -1;
+  real iLvlSlats = -1;
+
+  string unitLevel = "%";
+  string unitLevelSlat = "%";
+
+
+
+  if ( (oLvl) && ((oLvl.Value() != "") || (oLvl.Value() == 0.000000)) )
+  {
+    iLvl = oLvl.Value();
+    if ( oLvl.ValueUnit() == "100%" )
+    {
+      iLvl = iLvl * 100;
+    }
+  }
+
+  if ( (oLvlSlats) && ((oLvlSlats.Value() != "") || (oLvlSlats.Value() == 0.000000)) )
+  {
+    iLvlSlats = oLvlSlats.Value();
+    if ( oLvlSlats.ValueUnit() == "100%" )
+    {
+      iLvlSlats = iLvlSlats * 100;
+    }
+  }
+
+  if (iLvl == -1) {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
+  } else {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#iLvl.ToInteger()#unitLevel#"</div></td>");
+  }
+
+  if (iLvlSlats == -1) {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>${unknown}</div></td>");
+  } else {
+    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>"#iLvlSlats.ToInteger()#unitLevelSlat#"</div></td>");
   }
 
   return;

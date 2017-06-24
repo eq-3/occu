@@ -423,6 +423,7 @@ jQuery.extend(true, langJSON, {
     "stringTableHumidityLimitValue" : "Humidity threshold",
     "stringTableHumidityLimiterFalse" : "Operating mode humidity limit inactive",
     "stringTableHumidityLimiterTrue" :  "Operating mode humidity limit active",
+    "stringTableTemperatureOffset" : "Sicaklik ofseti",
     "stringTableIECPowerMeterPower": "IEC G%FCc",
     "stringTableInhibit": "Kilit",
     "stringTableInhibitFalse": "Kilit etkin degil",

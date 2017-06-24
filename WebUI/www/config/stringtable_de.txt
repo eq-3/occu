@@ -201,7 +201,6 @@ CHARACTERISTIC_LOW_IS_WARM	${stringTableCharacteristicLowIsWarm}
 CHARACTERISTIC_MAXIMUM	${stringTableCharacteristicMaximum}
 CHARACTERISTIC_SQUARE	${stringTableCharasteristicSquare}
 CLIMATECONTROL_DEHUMIDIFIER_TRANSMITER	${stringTableClimateControlDehumidifierTitle}
-
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|COOLING_DISABLE	${stringTableCoolingDisable}
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|FLOOR_HEATING_MODE	${stringTableFloorHeatingMode}
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HEATING_DISABLE	${stringTableHeatingDisable}
@@ -210,15 +209,12 @@ CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HEATING_VALVE_TYPE	${stringTableHeatingV
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HUMIDITY_LIMIT_DISABLE	${stringTableHumidityLimitDisable}
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HUMIDITY_LIMIT_VALUE	${stringTableHumidityLimitValue}
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|MINIMAL_FLOOR_TEMPERATURE	${stringTableMinimalFloorTemperature}
-
 CLIMATECONTROL_FLOOR_TRANSCEIVER	${stringTableClimateControlFloorTransceiverTitle}
 CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER	${stringTableClimateControlFloorPumpTransceiverTitle}
 CLIMATECONTROL_FLOOR_TRANSMITTER	${stringTableClimateControlFloorTransmitterTitle}
 CLIMATECONTROL_HEAT_DEMAND_TRANSMITER	${stringTableClimateControlHeatDemandTransmitterTitle}
-
 CLIMATECONTROL_HEAT_DEMAND_BOILER_TRANSMITTER	${stringTableClimateControlHeatDemandBoilerTransmitterTitle}
 CLIMATECONTROL_HEAT_DEMAND_PUMP_TRANSMITTER	${stringTableClimateControlHeatDemandPumpTransmitterTitle}
-
 CLIMATECONTROL_RECEIVER	${stringTableClimateControlReceiver}
 CLIMATECONTROL_REGULATOR	${stringTableClimateControlRegTitle}
 CLIMATECONTROL_REGULATOR|ADJUSTING_COMMAND	${stringTableClimateControlRegAdjCommand}
@@ -303,9 +299,7 @@ CURRENTDETECTION_BEHAVIOR	${stringTableCurrentDetectionBehavior}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_ACTIVE"	${stringTableCurrentDetectionBehaviorActive}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_1"	${stringTableCurrentDetectionBehaviorOutput1}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_2"	${stringTableCurrentDetectionBehaviorOutput2}
-
 CURRENT_ILLUMINATION	${stringTableCurrentIllumination}
-
 CYCLIC_INFO_MSG	${stringTableCyclicInfoMsg}
 CYCLIC_INFO_MSG_DIS	${stringTableCyclicInfoMsgDis}
 CYCLIC_INFO_MSG_DIS_UNCHANGED	${stringTableCyclicInfoMsgDisUnChanged}
@@ -535,6 +529,7 @@ HUMIDITY_ALARM=FALSE	${stringTableHumidityAlarmFalse}
 HUMIDITY_ALARM=TRUE	${stringTableHumidityAlarmTrue}
 HUMIDITY_LIMITER=FALSE	${stringTableHumidityLimiterFalse}
 HUMIDITY_LIMITER=TRUE	${stringTableHumidityLimiterTrue}
+HUMIDITY	${stringTableWeatherHumidity}
 ILLUMINATION	${stringTableBrightness}
 INHIBIT	${stringTableInhibit}
 INHIBIT=FALSE	${stringTableInhibitFalse}
@@ -1158,6 +1153,7 @@ TEMPERATURE_LIMITER=TRUE	${stringTableTemperatureLimiterTrue}
 TEMPERATURE_LOWERING	${stringTableTemperatureLowering}
 TEMPERATURE_MAXIMUM	${stringTableTemperatureMaximum}
 TEMPERATURE_MINIMUM	${stringTableTemperatureMinimum}
+TEMPERATURE_OFFSET	${stringTableTemperatureOffset}
 THERMALCONTROL_TRANSMIT	${stringTableThermalControlTitle}
 TILT_SENSOR	${stringTableTiltSensorTitle}
 TILT_SENSOR|EVENT_FILTERTIME	${stringTableTiltSensorEventFilterTime}

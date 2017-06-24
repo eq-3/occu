@@ -986,6 +986,7 @@ jQuery.extend(true,langJSON, {
     "dummy" : "dummy",
 
     "optionLastValue" : "Letzter Wert",
+    "optionNoModification" : "Keine %C4nderung",
     "optionNone" : "Keine",
     "optionNotActive" : "Nicht aktiv"
   }

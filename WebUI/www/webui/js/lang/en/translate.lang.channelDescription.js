@@ -25,6 +25,8 @@ jQuery.extend(true,langJSON, {
     "chType_CONDITION_POWER" : "Power sensor",
     "chType_CONDITION_VOLTAGE" : "Voltage sensor",
     "chType_COND_SWITCH_TRANSMITTER" : "Configuration condition switch",
+    "chType_COND_HUMIDITY" : "Condition humidity",
+    "chType_COND_TEMPERATURE" : "Condition temperature",
     "chType_DIMMER" : "Dimmer actuator",
     "chType_DIMMER_TRANSMITTER" : "Status report dimmer",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",

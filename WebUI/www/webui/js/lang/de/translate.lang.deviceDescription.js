@@ -56,6 +56,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-BROLL" : "Homematic IP Rollladenaktor f%FCr Markenschalter",
     "HmIP-BBL" : "Homematic IP Jalousieaktor f%FCr Markenschalter",
     "HmIP-SPI" : "Homematic IP Pr%E4senzmelder, innen",
+    "HmIP-STHO" : "Homematic IP Temperatur- und Luftfeuchtigkeitssensor - au%DFen",
     "ALPHA-IP-RBG" : "Raumbedienger%E4t<br/>Display",
     "ALPHA-IP-RBGa" : "Raumbedienger%E4t<br/>Analog",
     "HM-LC-Sw1-Pl-CT-R1" : "Funk-Schaltaktor 1-fach mit Klemmanschluss",

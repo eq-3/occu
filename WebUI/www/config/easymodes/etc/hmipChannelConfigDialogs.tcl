@@ -1737,6 +1737,9 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   set html ""
 
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js')</script>"
+
+
   set param COND_TX_CYCLIC_ABOVE
   append html "<tr>"
     append html "<td>\${stringTableCondTxCyclicAbove}</td>"

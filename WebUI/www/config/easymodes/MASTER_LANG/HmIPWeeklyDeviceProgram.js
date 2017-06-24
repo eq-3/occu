@@ -60,121 +60,120 @@ jQuery.extend(true,langJSON, {
   },
 
   "en" : {
-    "lblWeeklyProgramNotActive" : "*en Das Wochenprogramm ist nicht aktiv!",
-    "lblWeeklyProgramSwitchpoint" : "*en Schaltzeitpunkt Nr.: ",
-    "lblWPCondition" : "*en Bedingung",
-    "lblWPAstroType" : "*en Astro",
-    "lblWPAstroOffset" : "*en Astro Offset",
-    "lblWPFixedTime" : "*en Uhrzeit",
-    "lblWPDuration" : "*en Einschaltdauer",
-    "lblWPRamptime" : "*en Rampenzeit",
-    "lblWPBrightness" : "*en Helligkeit",
-    "lblWPState" : "*en Schaltzustand",
-    "lblWPBlindLevel" : "*en Behangh%F6he",
-    "lblWPSlatLevel" : "*en Lamellenposition",
-    "lblWPWeekday" : "*en Wochentag",
-    "lblWPTargetChannels" : "*en Zielkan%E4le",
-    "lblAddSwitchPoint" : "*en Schaltzeitpunkt hinzuf%FCgen",
-    "lblDelSwitchPoint" : "*en Schaltzeitpunkt entfernen",
+    "lblWeeklyProgramNotActive" : "The week program is inactive!",
+    "lblWeeklyProgramSwitchpoint" : "Switching time No.: ",
+    "lblWPCondition" : "Condition",
+    "lblWPAstroType" : "Astro",
+    "lblWPAstroOffset" : "Astro Offset",
+    "lblWPFixedTime" : "Time of day",
+    "lblWPDuration" : "Switch-on time",
+    "lblWPRamptime" : "Ramp time",
+    "lblWPBrightness" : "Brightness",
+    "lblWPState" : "Switching status",
+    "lblWPBlindLevel" : "Height of blinds",
+    "lblWPSlatLevel" : "Slat position",
+    "lblWPWeekday" : "Day of the week",
+    "lblWPTargetChannels" : "Target channels",
+    "lblAddSwitchPoint" : "Add switching time",
+    "lblDelSwitchPoint" : "Remove switching time",
 
-    "optionPermanent" : "*Permanent",
+    "optionPermanent" : "Permanent",
     "optionEnterValue" : "Enter value",
     "optionOFF" : "Off",
     "optionOldLevel" : "Old value",
     "optionNoChange" : "No change",
-    "optionSunrise" : "*en Sonnenaufgang",
-    "optionSunset": "*en Sonnenuntergang",
-    "optionWeekPrgFixed" : "*en 1: Feste Uhrzeit",
-    "optionWeekPrgAstro" : "*en 2: Astrofunktion",
-    "optionWeekPrgFixedIfBeforeAstro" : "*en 3: Feste Uhrzeit, wenn vor Astro",
-    "optionWeekPrgAstroIfBeforeFixed" : "*en 4: Astro, wenn vor fester Uhrzeit",
-    "optionWeekPrgFixedIfAfterAstro" : "*en 5: Feste Uhrzeit, wenn nach Astro",
-    "optionWeekPrgAstroIfAfterFixed" : "*en 6: Astro, wenn nach fester Uhrzeit",
-    "optionWeekPrgEarliestOfFixedAndAstro" : "*en 7: Das Fr%FChere von Astro oder fester Uhrzeit",
-    "optionWeekPrgLatestOfFixedAndAstro" : "*en 8: Das Sp%E4tere von Astro oder fester Uhrzeit",
+    "optionSunrise" : "Sunrise",
+    "optionSunset": "Sunset",
+    "optionWeekPrgFixed" : "1: Fixed time of day",
+    "optionWeekPrgAstro" : "2: Astro function",
+    "optionWeekPrgFixedIfBeforeAstro" : "3: Fixed time of day, if prior to astro",
+    "optionWeekPrgAstroIfBeforeFixed" : "4: Astro if prior to fixed time of day",
+    "optionWeekPrgFixedIfAfterAstro" : "5: Fixed time of day, if after astro",
+    "optionWeekPrgAstroIfAfterFixed" : "6: Astro if after fixed time of day",
+    "optionWeekPrgEarliestOfFixedAndAstro" : "7: Whatever occurs first between astro and fixed time of day",
+    "optionWeekPrgLatestOfFixedAndAstro" : "8: Whatever occurs last between astro and fixed time of day",
     "optionStateOFF": "Off",
     "optionStateON": "On",
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",
     "BASE_5_S" : "5 seconds",
     "BASE_10_S" : "10 seconds",
-    "BASE_1_M" : "*1 minute",
+    "BASE_1_M" : "1 minute",
     "BASE_5_M" : "5 minutes",
     "BASE_10_M" : "10 minutes",
     "BASE_1_H" : "1 hour",
 
-    "HmIPWPHelpTitle" : "*en Hilfe zum Parameter Bedingung",
+    "HmIPWPHelpTitle" : "Help on parameter condition",
 
     "HmIPWPConditionHelp" :
-      "<b>*en 1: Feste Uhrzeit</b><br/>Der Schaltvorgang wird zur vorgegebenen Uhrzeit ausgef%FChrt.<br/><br/>" +
-      "<b>*en 2: Astrofunktion</b><br/>Der Schaltvorgang wird bei Sonnenaufgang-/untergang ausgef%FChrt.<br/><br/>" +
-      "<b>*en 3: Feste Uhrzeit, wenn vor Astro</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die gew%E4hlte Uhrzeit <b>vor</b> der Astrozeit liegt.<br/><br/>" +
-      "<b>*en 4: Astro, wenn vor fester Uhrzeit</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die Astrozeitt <b>vor</b> der gew%E4hlten Uhrzeit liegt.<br/><br/>" +
-      "<b>*en 5: Feste Uhrzeit, wenn nach Astro</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die gew%E4hlte Uhrzeit <b>nach</b> der Astrozeit liegt.<br/><br/>" +
-      "<b>*en 6: Astro, wenn nach fester Uhrzeit</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die Astrozeit <b>nach</b> der gew%E4hlten Uhrzeit liegt.<br/><br/>" +
-      "<b>*en 7: Das Fr%FChere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>zuerst</b> erreicht wird.<br/><br/>" +
-      "<b>*en 8: Das Sp%E4tere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>sp%E4ter</b> erreicht wird.",
+      "<b>1: Fixed time of day</b><br/>The switching operation occurs at the set time.<br/><br/>" +
+      "<b>2: Astro function</b><br/> The switching operation occurs at sunrise/sunset.<br/><br/>" +
+      "<b>3: Fixed time of day, if prior to astro</b><br/>The switching operation occurs if the selected time of day is <b>prior to</b> astro time.<br/><br/>" +
+      "<b>4: Astro if prior to fixed time of day</b><br/>The switching operation occurs if astro time is <b>prior to</b> the selected time of day.<br/><br/>" +
+      "<b>5: Fixed time of day, if after astro</b><br/>The switching operation occurs if the selected time of day is <b>after </b> astro time.<br/><br/>" +
+      "<b>6: Astro if after fixed time of day</b><br/>The switching operation occurs if astro time is <b>after</b> the selected time of day.<br/><br/>" +
+      "<b>7: Whatever occurs first between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>first</b>.<br/><br/>" +
+      "<b>8: Whatever occurs last between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>last</b>.",
 
 
     "dummy" : ""
   },
 
   "tr" : {
-    "lblWeeklyProgramNotActive" : "*tr Das Wochenprogramm ist nicht aktiv!",
-    "lblWeeklyProgramSwitchpoint" : "*tr Schaltzeitpunkt Nr.: ",
-    "lblWPCondition" : "*tr Bedingung",
-    "lblWPAstroType" : "*tr Astro",
-    "lblWPAstroOffset" : "*tr Astro Offset",
-    "lblWPFixedTime" : "*tr Uhrzeit",
-    "lblWPDuration" : "*tr Einschaltdauer",
-    "lblWPRamptime" : "*tr Rampenzeit",
-    "lblWPBrightness" : "*tr Helligkeit",
-    "lblWPState" : "*tr Schaltzustand",
-    "lblWPBlindLevel" : "*tr Behangh%F6he",
-    "lblWPSlatLevel" : "*tr Lamellenposition",
-    "lblWPWeekday" : "*tr Wochentag",
-    "lblWPTargetChannels" : "*tr Zielkan%E4le",
-    "lblAddSwitchPoint" : "*tr Schaltzeitpunkt hinzuf%FCgen",
-    "lblDelSwitchPoint" : "*tr Schaltzeitpunkt entfernen",
+    "lblWeeklyProgramNotActive" : "The week program is inactive!",
+    "lblWeeklyProgramSwitchpoint" : "Switching time No.: ",
+    "lblWPCondition" : "Condition",
+    "lblWPAstroType" : "Astro",
+    "lblWPAstroOffset" : "Astro Offset",
+    "lblWPFixedTime" : "Time of day",
+    "lblWPDuration" : "Switch-on time",
+    "lblWPRamptime" : "Ramp time",
+    "lblWPBrightness" : "Brightness",
+    "lblWPState" : "Switching status",
+    "lblWPBlindLevel" : "Height of blinds",
+    "lblWPSlatLevel" : "Slat position",
+    "lblWPWeekday" : "Day of the week",
+    "lblWPTargetChannels" : "Target channels",
+    "lblAddSwitchPoint" : "Add switching time",
+    "lblDelSwitchPoint" : "Remove switching time",
 
-    "optionPermanent" : "*Permanent",
+    "optionPermanent" : "Permanent",
     "optionEnterValue" : "Enter value",
     "optionOFF" : "Off",
     "optionOldLevel" : "Old value",
     "optionNoChange" : "No change",
-    "optionSunrise" : "*tr Sonnenaufgang",
-    "optionSunset": "*tr Sonnenuntergang",
-    "optionWeekPrgFixed" : "*tr 1: Feste Uhrzeit",
-    "optionWeekPrgAstro" : "*tr 2: Astrofunktion",
-    "optionWeekPrgFixedIfBeforeAstro" : "*tr 3: Feste Uhrzeit, wenn vor Astro",
-    "optionWeekPrgAstroIfBeforeFixed" : "*tr 4: Astro, wenn vor fester Uhrzeit",
-    "optionWeekPrgFixedIfAfterAstro" : "*tr 5: Feste Uhrzeit, wenn nach Astro",
-    "optionWeekPrgAstroIfAfterFixed" : "*tr 6: Astro, wenn nach fester Uhrzeit",
-    "optionWeekPrgEarliestOfFixedAndAstro" : "*tr 7: Das Fr%FChere von Astro oder fester Uhrzeit",
-    "optionWeekPrgLatestOfFixedAndAstro" : "*tr 8: Das Sp%E4tere von Astro oder fester Uhrzeit",
+    "optionSunrise" : "Sunrise",
+    "optionSunset": "Sunset",
+    "optionWeekPrgFixed" : "1: Fixed time of day",
+    "optionWeekPrgAstro" : "2: Astro function",
+    "optionWeekPrgFixedIfBeforeAstro" : "3: Fixed time of day, if prior to astro",
+    "optionWeekPrgAstroIfBeforeFixed" : "4: Astro if prior to fixed time of day",
+    "optionWeekPrgFixedIfAfterAstro" : "5: Fixed time of day, if after astro",
+    "optionWeekPrgAstroIfAfterFixed" : "6: Astro if after fixed time of day",
+    "optionWeekPrgEarliestOfFixedAndAstro" : "7: Whatever occurs first between astro and fixed time of day",
+    "optionWeekPrgLatestOfFixedAndAstro" : "8: Whatever occurs last between astro and fixed time of day",
     "optionStateOFF": "Off",
     "optionStateON": "On",
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",
     "BASE_5_S" : "5 seconds",
     "BASE_10_S" : "10 seconds",
-    "BASE_1_M" : "*1 minute",
+    "BASE_1_M" : "1 minute",
     "BASE_5_M" : "5 minutes",
     "BASE_10_M" : "10 minutes",
     "BASE_1_H" : "1 hour",
 
-    "HmIPWPHelpTitle" : "*tr Hilfe zum Parameter Bedingung",
+    "HmIPWPHelpTitle" : "Help on parameter condition",
 
     "HmIPWPConditionHelp" :
-      "<b>*tr 1: Feste Uhrzeit</b><br/>Der Schaltvorgang wird zur vorgegebenen Uhrzeit ausgef%FChrt.<br/><br/>" +
-      "<b>*tr 2: Astrofunktion</b><br/>Der Schaltvorgang wird bei Sonnenaufgang-/untergang ausgef%FChrt.<br/><br/>" +
-      "<b>*tr 3: Feste Uhrzeit, wenn vor Astro</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die gew%E4hlte Uhrzeit <b>vor</b> der Astrozeit liegt.<br/><br/>" +
-      "<b>*tr 4: Astro, wenn vor fester Uhrzeit</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die Astrozeitt <b>vor</b> der gew%E4hlten Uhrzeit liegt.<br/><br/>" +
-      "<b>*tr 5: Feste Uhrzeit, wenn nach Astro</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die gew%E4hlte Uhrzeit <b>nach</b> der Astrozeit liegt.<br/><br/>" +
-      "<b>*tr 6: Astro, wenn nach fester Uhrzeit</b><br/>Der Schaltvorgang wird ausgef%FChrt, wenn die Astrozeit <b>nach</b> der gew%E4hlten Uhrzeit liegt.<br/><br/>" +
-      "<b>*tr 7: Das Fr%FChere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>zuerst</b> erreicht wird.<br/><br/>" +
-      "<b>*tr 8: Das Sp%E4tere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>sp%E4ter</b> erreicht wird.",
-
+      "<b>1: Fixed time of day</b><br/>The switching operation occurs at the set time.<br/><br/>" +
+      "<b>2: Astro function</b><br/> The switching operation occurs at sunrise/sunset.<br/><br/>" +
+      "<b>3: Fixed time of day, if prior to astro</b><br/>The switching operation occurs if the selected time of day is <b>prior to</b> astro time.<br/><br/>" +
+      "<b>4: Astro if prior to fixed time of day</b><br/>The switching operation occurs if astro time is <b>prior to</b> the selected time of day.<br/><br/>" +
+      "<b>5: Fixed time of day, if after astro</b><br/>The switching operation occurs if the selected time of day is <b>after </b> astro time.<br/><br/>" +
+      "<b>6: Astro if after fixed time of day</b><br/>The switching operation occurs if astro time is <b>after</b> the selected time of day.<br/><br/>" +
+      "<b>7: Whatever occurs first between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>first</b>.<br/><br/>" +
+      "<b>8: Whatever occurs last between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>last</b>.",
 
     "dummy" : ""
   }

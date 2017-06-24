@@ -787,6 +787,7 @@ jQuery.extend(true,langJSON, {
     "stringTableTactileSwitchTrue" :  "Betriebsart Taster aktiv",
     "stringTableTemperatureLimiterFalse" :  "Betriebsart Temperaturbegrenzung nicht aktiv",
     "stringTableTemperatureLimiterTrue" : "Betriebsart Temperaturbegrenzung aktiv",
+    "stringTableTemperatureOffset" : "Temperatur-Offset",
     "stringTableThermalControlTitle" : "Temperatursensor Wandthermostat",
     "stringTableTiltSensorEventFilterTime" : "Filterzeit",
     "stringTableTiltSensorMsgPosA0" : "Meldung in Position senkrecht",

@@ -56,6 +56,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-BROLL" : "Homematic IP Blind Actuator for brand switch systems, flush-mount",
     "HmIP-BBL" : "Homematic IP Jalousieaktor for brand switch systems, flush-mount",
     "HmIP-SPI" : "Homematic IP Presence sensor, indoor",
+    "HmIP-STHO" : "Homematic IP Temperature and Humidity Sensor – outdoor",
     "ALPHA-IP-RBG" : "Room Control Unit<br/>Display",
     "ALPHA-IP-RBGa" : "Room Control Unit<br/>Analogue",
     "HM-LC-Sw1-Pl-CT-R1" : "Kablosuz salter akt%FCat%F6r%FC 1 kanalli, klemens baglantili",

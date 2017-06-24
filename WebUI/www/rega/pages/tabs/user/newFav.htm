@@ -2,9 +2,7 @@
 ResetGAC();
 fltNF = new iseFilter('fltNF');
 arChSv = new Array();
-
 <%
-
   object oFavorites = dom.GetObject( ID_FAVORITES );
   object oOrigFav = dom.GetObject( system.GetSessionVar("sessionORIGFAVID") );
   object oFav = dom.GetObject( system.GetSessionVar("sessionFAVID") );
@@ -14,7 +12,6 @@ arChSv = new Array();
     Write( "alert(translateKey('alertLoadFavoriteError'));" );
     Write( "WebUI.enter(FavoriteListPage);" );
   }
-
   boolean firstSort = false;
   boolean firstCall = true;
   if( system.GetSessionVar("sessionTAB") == "newFav" )
@@ -28,7 +25,6 @@ arChSv = new Array();
     system.SetSessionVar("sessionFAVPDA","false");
     system.SetSessionVar("sessionFAVCENTRAL","false");
     system.SetSessionVar("sessionFAVUSER","");
-
     object oPC = dom.GetObject( 202 );
     object oPDA = dom.GetObject( 203 );
     object oCentral = dom.GetObject( 204 );
@@ -114,15 +110,12 @@ arChSv = new Array();
     }
   }
 %>
-
 <%
   integer iSW = system.GetSessionVar("sessionSW").ToInteger();
   integer iFC = iSW / 700;
   if (iFC == 0) { iFC = 1; }
 %>
-
 <%
-
   object oUsers = dom.GetObject( ID_USERS );
   if( oUsers )
   {
@@ -135,7 +128,6 @@ arChSv = new Array();
       Write( 'sUsr'#oU.ID()#' = "'#sUserFullName#'";' );
     }
   }
-
   Write( '$("cbIsPC").checked = '#system.GetSessionVar("sessionFAVPC")#';' );
   Write( '$("cbIsPDA").checked = '#system.GetSessionVar("sessionFAVPDA")#';' );
   Write( '$("cbIsCENTRAL").checked = '#system.GetSessionVar("sessionFAVCENTRAL")#';' );
@@ -149,7 +141,6 @@ arChSv = new Array();
     }
   }
 %>
-
 <%
   if( system.GetSessionVar("sessionTAB") == "newFav" ) { system.SetSessionVar("sessionTAB", "newFav"); }
     
@@ -169,9 +160,7 @@ arChSv = new Array();
   }
     
 %>
-
   setPath("<span onclick='WebUI.enter(SystemConfigPage)'>" + translateKey("menuSettingsPage") + "</span> &gt; <span onclick='updateContent()'>"+ translateKey("submenuFavorites") +"</span> &gt; "+ translateKey("submenuCreateFavorite"));
-
   DivSort = function(colName)
   { 
     IseSort(arChSv,colName,true);
@@ -614,9 +603,8 @@ arChSv = new Array();
               Write( oEntry.Address() );
             Write( '</td>' );
             Write( '<td class="tCell">' );
-              object oFunctions = oEntry.ChnFunction();
               string s;
-              foreach(s, oFunctions.EnumIDs())
+              foreach(s, oEntry.ChnFunction())
               {
                 Write( dom.GetObject(s).Name() );
                 Write( '<br />' );
@@ -624,9 +612,8 @@ arChSv = new Array();
               }
             Write( '</td>' );
             Write( '<td class="tCell">' );
-              object oRooms = oEntry.ChnRoom();
               string s;
-              foreach(s, oRooms.EnumIDs())
+              foreach(s, oEntry.ChnRoom())
               {
                 Write( dom.GetObject(s).Name() );
                 Write( '<br />' );
@@ -783,7 +770,6 @@ arChSv = new Array();
     }
   }
 %>
-
 </script>
 
 <div class="RoomFuncChooser CLASS06323" id="pcOverlay" style="display:none;">
@@ -877,10 +863,8 @@ arChSv = new Array();
   s += "</tr>";
   s += "</table>";
   setFooter(s);
-
   translatePage("#tblNewFav");
   jQuery("#tblNewFav").css("display", "table");
-
  </script>
  
  <script type="text/javascript">
@@ -1073,7 +1057,6 @@ arChSv = new Array();
   {
     iseFavorites.AddSeparator(id);
   }
-
   SaveFavoriteList = function()
   {
     var sArr = new Array();
@@ -1120,7 +1103,6 @@ arChSv = new Array();
   {
     iseFavorites.FavColumnCount( <% Write( oFav.ID() ); %>, idx );
   }
-
   FavColAlignSelect = function(idx)
   {
     iseFavorites.FavColumnAlign( <% Write( oFav.ID() ); %>, idx );
@@ -1130,6 +1112,4 @@ arChSv = new Array();
   {
     iseFavorites.FavNamePosition( <% Write( oFav.ID() ); %>, idx );
   }
-
-
 </script>
