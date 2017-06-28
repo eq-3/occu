@@ -427,8 +427,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<tr style=\"visibility:hidden;display:none\" id=\"upLevel_${special_input_id}_$prn\_2\"><td>\${UP_LEVEL}</td>"
   append HTML_PARAMS(separate_$prn) "<td>"
   option BLIND_LEVEL
-  set options(1.005) "\${lastValue}"
-  set options(1.010) "\${noModification}"
+  #set options(1.005) "\${lastValue}"
+  #set options(1.010) "\${noModification}"
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_4 PROFILE_$prn SHORT_ON_LEVEL "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -436,8 +436,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<tr style=\"visibility:hidden;display:none\" id=\"downLevel_${special_input_id}_$prn\_2\"><td>\${DOWN_LEVEL}</td>"
   append HTML_PARAMS(separate_$prn) "<td>"
   option BLIND_LEVEL
-  set options(1.005) "\${lastValue}"
-  set options(1.010) "\${noModification}"
+  #set options(1.005) "\${lastValue}"
+  #set options(1.010) "\${noModification}"
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_5 PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -457,16 +457,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   incr pref ;# 9
   append HTML_PARAMS(separate_$prn) "<tr id='jalousieSlatPosOff_$ch' class='hidden'><td>\${JALOUSIE_SLAT_POS_OFF}</td><td>"
   option BLIND_LEVEL
-  set options(1.005) "\${lastValue}"
-  set options(1.010) "\${noModification}"
+  #set options(1.005) "\${lastValue}"
+  #set options(1.010) "\${noModification}"
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL_2 "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   incr pref ;# 10
   append HTML_PARAMS(separate_$prn) "<tr id='jalousieSlatPosOn_$ch' class='hidden'><td>\${JALOUSIE_SLAT_POS_ON}</td><td>"
   option BLIND_LEVEL
-  set options(1.005) "\${lastValue}"
-  set options(1.010) "\${noModification}"
+  #set options(1.005) "\${lastValue}"
+  #set options(1.010) "\${noModification}"
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL_2 "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 

@@ -159,7 +159,7 @@ proc getTextField {param value prn special_input_id class} {
   append s "<td class='$class' style=$style>\${[getDescription $param]}</td>"
 
    if {[string first "COND_TX_THRESHOLD_HI" $param 0] != -1  || [string first "COND_TX_THRESHOLD_LO" $param 0] != -1 } {
-    append s "<td class='$class'><input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur='setVal(this)' >&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append s "<td class='$class'><input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur='setVal(this)' >&nbsp;[getMinMaxValueDescr $param]</td>"
    } else {
     if {[string first "lowerVal_" $param 0] != -1 || [string first "upperVal_" $param 0] != -1} {
       append s "<td class='$class'><input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur='setVal(this)'>&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"

@@ -44,10 +44,14 @@ jQuery.extend(true,langJSON, {
     "stringTableBlindVirtualReceiverTitle" :     "Rollladenaktor",
     "stringTablePresenceDetectorTitle" :         "Pr%E4senzmelder",
     "lblTDRegaVersion" :                         "Logikschicht<br/>Version",
-    "lblTDReGaVersionHelp" :                     "Logikschicht Version Erkl&auml;rung",
-    "optionReGaNORMAL" :                         "STANDARD",
-    "optionReGaLEGACY" :                         "LEGACY",
-    "optionReGaCOMMUNITY" :                      "COMMUNITY",
+
+    "lblTDReGaVersionHelp" :                     "Hier k%F6nnen Sie festlegen, welche Version der Logikschicht in der CCU2 verwendet werden soll. W%E4hlen Sie die Version 'Standard', um Fehlerbehebungen im Zeitmodul und neue Funktionen, wie z. B. mathematische Operationen in Skripten, nutzen zu k%F6nnen. " +
+                                                 "W%E4hlen Sie die Version 'Community' f%FCr zus%E4tzliche Verbesserungen zur Fehlerbehebung in Skripten. Bitte beachten Sie, dass diese Version zu Abbr%FCchen von Skripten f%FChren k%F6nnte, auch wenn diese mit bisherigen Versionen der CCU2-Software ausgef%FChrt wurden. " +
+                                                 "Sollten seit dem Update auf die aktuelle CCU2-Software Probleme aufgetreten sein, k%F6nnen Sie mit der Auswahl 'Legacy' auf die Vorg%E4ngerversion wechseln." ,
+
+    "optionReGaNORMAL" :                         "Standard",
+    "optionReGaLEGACY" :                         "Legacy",
+    "optionReGaCOMMUNITY" :                      "Community",
     "dialogRestart2ChanceReGaVersion" :          "Damit die %C4nderung der Logikschicht-Version wirksam wird, muss die " +HMIdentifier.de.CCUShortName + " neu gestartet werden.",
     "dialogBtnPerformLaterRestart" :             "Sp%E4ter",
     "stringTableBlindLevelUp" :                  "Behangh%F6he hochgefahren",
@@ -55,6 +59,9 @@ jQuery.extend(true,langJSON, {
     "stringTableJalousieSlatsLevelUp" :          "Lamellenposition hochgefahren",
     "stringTableJalousieSlatsLevelDown" :        "Lamellenposition heruntergefahren",
 
+    "stringTableATCAdaptionInterval" : "Intervall f%FCr Temperaturkompensation der Sensoren",
+    "stringTableATCMode" : "Temperaturkompensation der Sensoren",
+    "stringTableSensorSensivity" : "Sensorempfindlichkeit",
 
     "noMoreKeys" : ""
   }

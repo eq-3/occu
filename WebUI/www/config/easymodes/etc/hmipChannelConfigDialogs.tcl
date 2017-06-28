@@ -1785,14 +1785,14 @@ proc getCondSwitchTransmitter {chn p descr} {
   set param COND_TX_THRESHOLD_HI
   append html "<tr>"
     append html "<td>\${stringTableCondThresholdHi}</td>"
-   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
   append html "</tr>"
 
   incr prn
   set param COND_TX_THRESHOLD_LO
   append html "<tr>"
     append html "<td>\${stringTableCondThresholdLo}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
   append html "</tr>"
 
   incr prn

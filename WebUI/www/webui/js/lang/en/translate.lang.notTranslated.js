@@ -42,10 +42,14 @@ jQuery.extend(true,langJSON, {
     "stringTableBlindVirtualReceiverTitle" :     "Shutter actuator",
     "stringTablePresenceDetectorTitle" :         "Presence Sensor",
     "lblTDRegaVersion" :                         "Logic tier<br/>version",
-    "lblTDReGaVersionHelp" :                     "Logic tier version explanation",
-    "optionReGaNORMAL" :                         "STANDARD",
-    "optionReGaLEGACY" :                         "LEGACY",
-    "optionReGaCOMMUNITY" :                      "COMMUNITY",
+
+    "lblTDReGaVersionHelp" :                     "Here you can specify which logic layer version of the CCU2 should be used. Select the version 'Standard' to be able to use bug fixes in the time module as well as new features like mathematical operations in scripts. " +
+                                                 "Select the version 'Community' for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU2 software. " +
+                                                 "If any problems have occurred after the update to the current CCU2 software has been performed, you can change back to the previous version by selecting 'Legacy'." ,
+
+    "optionReGaNORMAL" :                         "Standard",
+    "optionReGaLEGACY" :                         "Legacy",
+    "optionReGaCOMMUNITY" :                      "Community",
     "dialogRestart2ChanceReGaVersion" :          "For the change of the logic tier version to apply, the " +HMIdentifier.en.CCUShortName + " must be restarted.",
     "dialogBtnPerformLaterRestart" :             "Later",
     "stringTableBlindLevelUp" :                  "Shutter level moved up",
@@ -53,6 +57,9 @@ jQuery.extend(true,langJSON, {
     "stringTableJalousieSlatsLevelUp" :          "Slat position moved up",
     "stringTableJalousieSlatsLevelDown" :        "Slat position moved down",
 
+    "stringTableATCAdaptionInterval" : "Interval for temperature compensation of the sensors",
+    "stringTableATCMode" : "Temperature compensation of the sensors",
+    "stringTableSensorSensivity" : "Sensor sensitivity",
 
     "noMoreKeys" : ""
   }

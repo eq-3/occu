@@ -583,14 +583,14 @@ HmIPWeeklyProgram.prototype = {
           for (var loop = 5; loop <= 100; loop += 5) {
             result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
           }
+          result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
+          result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
         } else {
           for (var loop = 0; loop <= 100; loop += 5) {
             result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
           }
         }
 
-        result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
-        result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
       } else if (this.chnType == this.SWITCH) {
         result += "<option value='0.000'>" + translateKey('optionStateOFF') + "</option>";
         result += "<option value='1.000'>" + translateKey('optionStateON') + "</option>";
@@ -620,8 +620,8 @@ HmIPWeeklyProgram.prototype = {
       for (var loop = 0; loop <= 100; loop += 5) {
         result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
       }
-      result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
-      result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
+     // result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
+     // result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
 
     result += "</select>";
 

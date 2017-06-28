@@ -29361,11 +29361,11 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
   },
 
   saveSliderValue: function() {
-    var levelValue = (blindLevelDestination[this.id] != null) ? blindLevelDestination[this.id] : this.levelReal;
+    //var levelValue = (blindLevelDestination[this.id] != null) ? blindLevelDestination[this.id] : this.levelReal;
     homematic("Interface.putParamset",{'interface': 'HmIP-RF', 'address' : this.opts.chnAddress, 'paramsetKey' : 'VALUES', 'set':
       [
         //{name:'LEVEL', type: 'double', value: 1.005},
-        {name:'LEVEL', type: 'double', value: levelValue},
+        // {name:'LEVEL', type: 'double', value: levelValue}, LEVEL wird intern vom Realkanal durch den crRFD ermittelt.
         {name:'LEVEL_2', type: 'double', value: this.levelSlats / 100}
       ]
     },function(result){conInfo(result);});
@@ -29376,8 +29376,8 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
     if (this.hasSlats) {
       blindLevelDestination[this.id] = this.state;
       homematic("Interface.putParamset", {'interface': 'HmIP-RF', 'address': this.opts.chnAddress, 'paramsetKey': 'VALUES', 'set': [
-        {name: 'LEVEL', type: 'double', value: this.state / 100},
-        {name: 'LEVEL_2', type: 'double', value: 1.005}
+        {name: 'LEVEL', type: 'double', value: this.state / 100}
+        //{name: 'LEVEL_2', type: 'double', value: 1.005} LEVEL_2 wird intern vom Realkanal durch den crRFD ermittelt.
       ]
       }, function (result) {
         conInfo(result);
