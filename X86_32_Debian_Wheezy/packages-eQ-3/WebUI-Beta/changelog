@@ -2,6 +2,15 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-07-07 Jens Maus <mail@jens-maus.de>
+
+  * fixed a bug in the signal handler management which was potentially broken
+    and might resulted in unexpected terminations of ReGaHss.
+  * fixed bug where object names were always trunctaed to 49 characters so
+    that GetObject() calls with the full object name didn't match.
+
+#### BETA14-2017-06-03 (8eb738a) Release ####################################
+
 2017-06-01 Jens Maus <mail@jens-maus.de>
 
   * added some verbose error output to more easily identify incorrect uses
