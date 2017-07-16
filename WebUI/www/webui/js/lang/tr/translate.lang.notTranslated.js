@@ -43,9 +43,9 @@ jQuery.extend(true,langJSON, {
     "stringTablePresenceDetectorTitle" :         "Presence Sensor",
     "lblTDRegaVersion" :                         "Logic tier<br/>version",
 
-    "lblTDReGaVersionHelp" :                     "Here you can specify which logic layer version of the CCU2 should be used. Select the version 'Standard' to be able to use bug fixes in the time module as well as new features like mathematical operations in scripts. " +
-                                                 "Select the version 'Community' for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU2 software. " +
-                                                 "If any problems have occurred after the update to the current CCU2 software has been performed, you can change back to the previous version by selecting 'Legacy'." ,
+    "lblTDReGaVersionHelp" :                     "Here you can specify which logic layer version of the CCU2 should be used. Select the version <b>'Standard'</b> to be able to use bug fixes in the time module as well as new features like mathematical operations in scripts. " +
+                                                 "<br/><br/>Select the version <b>'Community'</b> for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU2 software. " +
+                                                 "<br/><br/>If any problems have occurred after the update to the current CCU2 software has been performed, you can change back to the previous version by selecting <b>'Legacy'</b>." ,
 
     "optionReGaNORMAL" :                         "Standard",
     "optionReGaLEGACY" :                         "Legacy",
@@ -60,6 +60,31 @@ jQuery.extend(true,langJSON, {
     "stringTableATCAdaptionInterval" : "Interval for temperature compensation of the sensors",
     "stringTableATCMode" : "Temperature compensation of the sensors",
     "stringTableSensorSensivity" : "Sensor sensitivity",
+
+    "COMMENT" : "THIS is for the release C/2017",
+
+    "stringTableEventBlindTime" : "*tr EVENT_BLINDTIME",
+    "stringTableEventBlindTimeBase" : "*tr Einheit EVENT_BLINDTIME",
+    "stringTableBlindTimeValue" : "*tr Wert EVENT_BLINDTIME",
+
+    "stringTableEventTimeout" : "*tr EVENT_TIMEOUT",
+    "stringTableEventTimeoutBase" : "*tr Einheit EVENT_TIMEOUT",
+    "stringTableEventTimeoutValue" : "*tr Wert EVENT_TIMEOUT",
+
+    "stringTableCondValuePassageDetectionLeft" : "*tr Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
+    "stringTableCondValuePassageDetectionRight" : "*tr Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
+
+    "stringTablePassageDetectionLeft" : "*tr Durchgangserkennung Links",
+    "stringTablePassageDetectionRight" : "*tr Durchgangserkennung Rechts",
+
+    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "*tr CHANNEL_OPERATION_MODE",
+
+    "optionPassageCounterDetectionLR" : "*tr optionPassageCounterDetectionLR",
+    "optionPassageCounterDetectionL" : "*tr optionPassageCounterDetectionL",
+    "optionPassageCounterDetectionR" : "*tr optionPassageCounterDetectionR",
+    "optionPassageCounterDeltaLR" : "*tr optionPassageCounterDeltaLR",
+    "optionPassageCounterDeltaL" : "*tr optionPassageCounterDeltaL",
+    "optionPassageCounterDeltaR" : "*tr optionPassageCounterDeltaR",
 
     "noMoreKeys" : ""
   }

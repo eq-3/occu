@@ -366,6 +366,23 @@ proc getSwitchTransmitter {chn p descr} {
   return $html
 }
 
+proc getClimateReceiver {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set html ""
+
+  set param TEMPERATURE_OFFSET
+  append html "<tr>"
+  append html "<td>\${stringTableTemperatureOffset}</td>"
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+  append html "</tr>"
+
+  return $html
+}
+
 proc getBlindTransmitter {chn p descr address} {
 
   upvar $p ps
@@ -997,7 +1014,7 @@ proc getBlindVirtualReceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindLevelUp}</td>"
-      option BLIND_LEVEL
+      option RAW_0_100Percent
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
@@ -1007,7 +1024,7 @@ proc getBlindVirtualReceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableJalousieSlatsLevelUp}</td>"
-      option BLIND_LEVEL_2
+      option RAW_0_100Percent_2
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
@@ -1042,7 +1059,7 @@ proc getBlindVirtualReceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindLevelDown}</td>"
-      option BLIND_LEVEL
+      option RAW_0_100Percent
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
@@ -1052,7 +1069,7 @@ proc getBlindVirtualReceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableJalousieSlatsLevelDown}</td>"
-      option BLIND_LEVEL_2
+      option RAW_0_100Percent_2
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
@@ -1123,7 +1140,7 @@ proc getShutterVirtualReceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindLevelUp}</td>"
-      option BLIND_LEVEL
+      option RAW_0_100Percent
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
@@ -1161,7 +1178,7 @@ proc getShutterVirtualReceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindLevelDown}</td>"
-      option BLIND_LEVEL
+      option RAW_0_100Percent
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
@@ -1728,10 +1745,15 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
 proc getCondSwitchTransmitter {chn p descr} {
 
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
   upvar special_input_id special_input_id
+
+  set devType $dev_descr(SUBTYPE)
+  set chn [getChannel $special_input_id]
 
   set specialID "[getSpecialID $special_input_id]"
 
@@ -1739,6 +1761,11 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js')</script>"
 
+set comment {
+  foreach val [array names dev_descr] {
+    puts "$val: $dev_descr($val)<br/>"
+  }
+}
 
   set param COND_TX_CYCLIC_ABOVE
   append html "<tr>"
@@ -1785,14 +1812,14 @@ proc getCondSwitchTransmitter {chn p descr} {
   set param COND_TX_THRESHOLD_HI
   append html "<tr>"
     append html "<td>\${stringTableCondThresholdHi}</td>"
-   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getCondTXThresholdUnit $devType $chn]&nbsp;[getMinMaxValueDescr $param]</td>"
   append html "</tr>"
 
   incr prn
   set param COND_TX_THRESHOLD_LO
   append html "<tr>"
     append html "<td>\${stringTableCondThresholdLo}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getCondTXThresholdUnit $devType $chn]&nbsp;[getMinMaxValueDescr $param]</td>"
   append html "</tr>"
 
   incr prn
@@ -2380,6 +2407,8 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
   set CHANNEL $special_input_id
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js')</script>"
 
   set html ""
 

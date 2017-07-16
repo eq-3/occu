@@ -11144,7 +11144,7 @@ CrashDialog = Class.create({
         .setHtml(translateKey("crashDialogContent"))
       )
       .add(new UI.Button()
-        .setPosition(125, 200)
+        .setPosition(125, 230)
         .setText(translateKey("crashDialogBtnClose"))
         .setAction(this.close.bind(this))
       );
@@ -11161,7 +11161,7 @@ CrashDialog = Class.create({
 });
 
 CrashDialog.CONTENT_WIDTH = 400;
-CrashDialog.CONTENT_HEIGHT = 230;
+CrashDialog.CONTENT_HEIGHT = 260;
 /*
 CrashDialog.TEXT  = "<div style='font-weight: bold;'>Eine Komponente der HomeMatic Zentrale reagiert nicht mehr.</div>"
                   + "<p>Hierfür kann es eine Reihe von Ursachen geben:</p>"

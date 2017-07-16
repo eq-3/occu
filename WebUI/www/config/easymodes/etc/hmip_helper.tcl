@@ -1488,6 +1488,17 @@ proc getDescription {param} {
   return $result
 }
 
+proc getCondTXThresholdUnit {devType chn} {
+   switch $devType {
+        PSM  {return "mW"}
+        STHO  {
+          if {$chn == "2"} {return "°C"}
+          if {$chn == "3"} {return "%"}
+        }
+      default {return ""}
+    }
+}
+
 proc getMaintenanceAddress {channelAddress} {
   set parentAddress [lindex [split $channelAddress :] 0]
   return "$parentAddress:0"

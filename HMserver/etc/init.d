@@ -22,7 +22,7 @@ start() {
 	init
 	start-stop-daemon -S -q -m -p $PIDFILE --exec java -- -Xmx64m -Dlog4j.configuration=file:///etc/config/log4j.xml -Dfile.encoding=ISO-8859-1 -jar /opt/HMServer/HMIPServer.jar /etc/crRFD.conf &
 	echo "Waiting for HMServer to get ready"
-	eq3configcmd wait-for-file -f $STARTWAITFILE -p 5 -t 135
+	eq3configcmd wait-for-file -f $STARTWAITFILE -p 5 -t 300
 	echo "OK"
 }
 stop() {

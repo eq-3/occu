@@ -164,6 +164,21 @@ proc option {type} {
         set options(100) "100$p"
     }
 
+    "RAW_0_100Percent_2" {
+        set options(0) "0$p"
+        set options(10) "10$p"
+        set options(20) "20$p"
+        set options(30) "30$p"
+        set options(40) "40$p"
+        set options(50) "50$p"
+        set options(60) "60$p"
+        set options(70) "70$p"
+        set options(80) "80$p"
+        set options(90) "90$p"
+        set options(100) "100$p"
+        set options(101) "\${lblIgnore}"
+    }
+
     "RAMPTIME" {
         set options(0)    "\${none}"
         set options(0.2)  "0.2$s"

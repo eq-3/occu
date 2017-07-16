@@ -45,9 +45,9 @@ jQuery.extend(true,langJSON, {
     "stringTablePresenceDetectorTitle" :         "Pr%E4senzmelder",
     "lblTDRegaVersion" :                         "Logikschicht<br/>Version",
 
-    "lblTDReGaVersionHelp" :                     "Hier k%F6nnen Sie festlegen, welche Version der Logikschicht in der CCU2 verwendet werden soll. W%E4hlen Sie die Version 'Standard', um Fehlerbehebungen im Zeitmodul und neue Funktionen, wie z. B. mathematische Operationen in Skripten, nutzen zu k%F6nnen. " +
-                                                 "W%E4hlen Sie die Version 'Community' f%FCr zus%E4tzliche Verbesserungen zur Fehlerbehebung in Skripten. Bitte beachten Sie, dass diese Version zu Abbr%FCchen von Skripten f%FChren k%F6nnte, auch wenn diese mit bisherigen Versionen der CCU2-Software ausgef%FChrt wurden. " +
-                                                 "Sollten seit dem Update auf die aktuelle CCU2-Software Probleme aufgetreten sein, k%F6nnen Sie mit der Auswahl 'Legacy' auf die Vorg%E4ngerversion wechseln." ,
+    "lblTDReGaVersionHelp" :                     "Hier k%F6nnen Sie festlegen, welche Version der Logikschicht in der CCU2 verwendet werden soll.<br/><br/>W%E4hlen Sie die Version <b>'Standard'</b>, um Fehlerbehebungen im Zeitmodul und neue Funktionen, wie z. B. mathematische Operationen in Skripten, nutzen zu k%F6nnen. " +
+                                                 "<br/><br/>W%E4hlen Sie die Version <b>'Community'</b> f%FCr zus%E4tzliche Verbesserungen zur Fehlerbehebung in Skripten. Bitte beachten Sie, dass diese Version zu Abbr%FCchen von Skripten f%FChren k%F6nnte, auch wenn diese mit bisherigen Versionen der CCU2-Software ausgef%FChrt wurden. " +
+                                                 "<br/><br/>Sollten seit dem Update auf die aktuelle CCU2-Software Probleme aufgetreten sein, k%F6nnen Sie mit der Auswahl <b>'Legacy'</b> auf die Vorg%E4ngerversion wechseln." ,
 
     "optionReGaNORMAL" :                         "Standard",
     "optionReGaLEGACY" :                         "Legacy",
@@ -62,6 +62,36 @@ jQuery.extend(true,langJSON, {
     "stringTableATCAdaptionInterval" : "Intervall f%FCr Temperaturkompensation der Sensoren",
     "stringTableATCMode" : "Temperaturkompensation der Sensoren",
     "stringTableSensorSensivity" : "Sensorempfindlichkeit",
+
+    "COMMENT" : "THIS is for the release C/2017",
+
+    "stringTableEventBlindTime" : "* EVENT_BLINDTIME",
+    "stringTableEventBlindTimeBase" : "Einheit EVENT_BLINDTIME",
+    "stringTableBlindTimeValue" : "Wert EVENT_BLINDTIME",
+
+    "stringTableEventTimeout" : "* EVENT_TIMEOUT",
+    "stringTableEventTimeoutBase" : "Einheit EVENT_TIMEOUT",
+    "stringTableEventTimeoutValue" : "Wert EVENT_TIMEOUT",
+
+    "stringTableCondValuePassageDetectionLeft" : "Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
+    "stringTableCondValuePassageDetectionRight" : "Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
+
+    "stringTablePassageDetectionLeft" : "Durchgangserkennung Links",
+    "stringTablePassageDetectionRight" : "Durchgangserkennung Rechts",
+
+    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "* CHANNEL_OPERATION_MODE",
+
+    "optionPassageCounterDetectionLR" : "* optionPassageCounterDetectionLR",
+    "optionPassageCounterDetectionL" : "* optionPassageCounterDetectionL",
+    "optionPassageCounterDetectionR" : "* optionPassageCounterDetectionR",
+    "optionPassageCounterDeltaLR" : "* optionPassageCounterDeltaLR",
+    "optionPassageCounterDeltaL" : "* optionPassageCounterDeltaL",
+    "optionPassageCounterDeltaR" : "* optionPassageCounterDeltaR",
+
+
+    "ATTENTION: " : "This is not yet approved by the marketing division",
+
+
 
     "noMoreKeys" : ""
   }
