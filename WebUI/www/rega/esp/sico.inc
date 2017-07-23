@@ -9,7 +9,6 @@
   string excludeHmIPCurrentIllumination = "CURRENT_ILLUMINATION";
   string excludeHmIPActualTemperature = "_ACTUAL_TEMPERATURE";
   string excludeHmIPOperatingVoltage = "OPERATING_VOLTAGE";
-  string excludeHmIPresenceDetectionActive = "PRESENCE_DETECTION_ACTIVE";
 
   string excludeHmIPRSSI_DEVICE = "RSSI_DEVICE";
   string excludeHmIPRSSI_PEER = "RSSI_PEER";
@@ -151,7 +150,7 @@
               }
               else
               {
-                if( (iDPvt == ivtBinary) && ((iDPst != istAction)) && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1))
+                if( (iDPvt == ivtBinary) && ((iDPst != istAction)))
                 {
                   if( (oDP.ID() == iLV) && (iRV1 == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
                   Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
@@ -204,7 +203,6 @@
                     && (oDP.HSSID().Find(excludeHmIPCurrentIllumination) == -1)
                     && (oDP.HSSID().Find(excludeHmIPActualTemperature) == -1)
                     && (oDP.HSSID().Find(excludeHmIPOperatingVoltage) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1)
                    ) {
                     if( oDP.ID() == iLV ) { sSelected = " selected"; } else { sSelected = ""; }
                     Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );

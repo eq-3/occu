@@ -21,7 +21,6 @@
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
   string excludeHmIPResetMotion = "RESET_MOTION";
   string excludeHmIPSmokeDetCommandReservedAlarmOff = "SMOKE_DETECTOR_COMMAND=RESERVED_ALARM_OFF";
-  string excludeHmIPresenceDetectionActive = "PRESENCE_DETECTION_ACTIVE";
 
   integer iDP = oSD.DestinationDP();
   integer iCH = oSD.DestinationChannel();
@@ -195,9 +194,8 @@
             }
             else
             {
-              if( (iDPvt == ivtBinary) && (iDPst != istAction)
-              && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1)
-              ) {
+              if( (iDPvt == ivtBinary) && (iDPst != istAction) )
+              {
                 if( (oDP.ID() == iDP) && (iV == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
                 Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
                 string sValue = oDP.Name()#": "#oDP.ValueName1();
@@ -243,7 +241,6 @@
                 if ( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1))
                 && (oDP.HSSID().Find(excludeHmIPCDT) == -1)
                 && (oDP.HSSID().Find(excludeHmIPResetMotion) == -1)
-                && (oDP.HSSID().Find(excludeHmIPresenceDetectionActive) == -1)
                 ) {
                   Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
                   string sValue = oDP.Name();

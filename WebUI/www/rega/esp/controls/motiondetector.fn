@@ -34,7 +34,7 @@ function ::CreatePresenceDetector() {
         WriteLine("</td>");
       WriteLine("</tr>");
 
-      WriteLine("<tr class='hidden'>");
+      WriteLine("<tr>");
         WriteLine("<td>");
           WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#sPresenceDetectionIsActive#"</span></div>");
         WriteLine("</td>");
