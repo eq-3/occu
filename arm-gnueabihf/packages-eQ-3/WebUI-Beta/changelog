@@ -2,6 +2,48 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-08-03 Jens Maus <mail@jens-maus.de>
+
+  * implemented an "elseif" token which can be used in complex if/else
+    statements so that code obfuscation can be reduced by using "elseif()"
+    rather than "else { if() }".
+  * added new .Replace(s, d) string method which can be used to search
+    for a substring 's' and replace it with 'd' in a string variable.
+
+2017-08-02 Jens Maus <mail@jens-maus.de>
+
+  * added new .StartsWith(s) and .EndsWith(s) string methods which return
+    true or false depending on the supplied substring.
+  * added new .Contains(s) method which returns true/false if a string
+    contains the supplied substring s.
+  * added new .Trim(c), .LTrim(c) and .RTrim(c) to trim whitespaces
+    from strings either from left+right, left or just right. By specifying
+    an optional character string "c" the stripable characters can be
+    specified.
+  * added new .ToUpper() and .ToLower() method that allow to convert a
+    string variable to its uppercase or lowercase representation.
+  * added new .ToUTF8() and .ToLatin() methods that allow to convert
+    a string variable to/from UTF8 from/to Latin (ISO-8859-15).
+  * added new .UriEncode() and .UriDecode() methods that will encode and
+    decode a string variable to/from a URI conform way (%XX encoding).
+
+2017-08-01 Jens Maus <mail@jens-maus.de>
+
+  * fixed enum type list to output proper enum type names for all internally
+    known enum types.
+  * fixed some incorrect naming of "CalendarDPs" enum type which was named
+    "ClendarDPs".
+  * fixed inconsistent output of .EnumTypeName() use on unknown enum types.
+
+2017-07-31 Jens Maus <mail@jens-maus.de>
+
+  * fixed '+' operator to respect data type ordering when an addition
+    contained a string.
+  * fixed a bug where saving a script program via WebUI could take
+    considerable time if the script program reached a certain amount.
+
+#### BETA15-2017-07-11 (5dc7736) - 2.29.18 Release ##########################
+
 2017-07-07 Jens Maus <mail@jens-maus.de>
 
   * fixed a bug in the signal handler management which was potentially broken
