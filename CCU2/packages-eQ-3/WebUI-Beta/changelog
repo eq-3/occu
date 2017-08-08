@@ -2,6 +2,22 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-08-07 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where using escaping control characters strings like "\t"
+    caused a syntax error if specified as an argument to a method.
+
+2017-08-05 Jens Maus <mail@jens-maus.de>
+
+  * renamed all internal "SINGLECOND" identifiert to "SINGLECONDITION" for
+    consistency reasons.
+  * added the following missing symbol constants: OT_CALENDARDPS,
+    OT_INTERFACES, OT_RULE, OT_RULES, OT_SINGLECONDITION, OT_DESTINATION,
+    OT_SINGLEDESTINATION
+  * renamed method "RulePRogramID" to "RuleProgramID" to fix typo.
+
+#### BETA16-2017-08-04 (029f1ee) Release ####################################
+
 2017-08-03 Jens Maus <mail@jens-maus.de>
 
   * implemented an "elseif" token which can be used in complex if/else
