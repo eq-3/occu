@@ -2,6 +2,13 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-08-25 Jens Maus <mail@jens-maus.de>
+
+  * implemented "HttpListenerMaxConnections" rega.conf config option to be
+    able to raise the default number of 6 parallel http connections.
+
+#### BETA17-2017-08-08 (d5ff468) Release ####################################
+
 2017-08-07 Jens Maus <mail@jens-maus.de>
 
   * fixed bug where using escaping control characters strings like "\t"
@@ -71,6 +78,8 @@ ReGaHss ChangeLog
 
 2017-06-01 Jens Maus <mail@jens-maus.de>
 
+  * stable-2.29.x: reverted opcode overlapping optimizations.
+  * stable-2.29.x: reverted strict foreach()/while() expression checking.
   * added some verbose error output to more easily identify incorrect uses
     of foreach()/while() expressions.
 
@@ -159,11 +168,6 @@ ReGaHss ChangeLog
 
 2017-05-17 Jens Maus <mail@jens-maus.de>
 
-  * fixed a bug where Type() and VarType() was not available for all
-    possible variable types. Now 'var', 'idarray' and 'object' can also
-    be queried for their types. Note, however, that for actual objects
-    only VarType() will be unique since Type() will then return the
-    actual object type instead of the variable type name.
   * fixed a bug in while() and foreach() not raising any error if the
     specified condition isn't valid.
   * increased maximum number of iterations for foreach()/while() to 50000
