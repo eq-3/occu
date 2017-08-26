@@ -92,7 +92,7 @@
                 </div>
                 <div class="CLASS10200">
                     <span class="CLASS10101 colorGradient borderRadius2px" data-bind="click: checkConfigure">${"$"}{btnDirectDeviceLinkCheckAgain}</span>
-                    <span class="CLASS10101 colorGradient borderRadius2px" data-bind="click: ignoreConfigure">${"$"}{btnDirectDeviceLinkIgnore}</span>
+                    <span class="CLASS10101 colorGradient borderRadius2px" data-bind="click: ignoreConfigure">${"$"}{lblIgnore}</span>
                 </div>
             </div>
         </div>

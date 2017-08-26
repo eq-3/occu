@@ -1018,8 +1018,10 @@ proc put_channel_parameters {} {
     # virtuelle Kanäle nur anzeigen, wenn im Expertenmodus
     #if {([isVirtual $ch_paramid] == "true") && ([session_is_expert] == 0) }
 
-    if {([isVirtual [xmlrpc $iface_url($iface) getParamsetId [list string $ch_descr(ADDRESS)] MASTER]] == "true") && ([session_is_expert] == 0) } {
-      set hide_channel 1
+    catch {
+      if {([isVirtual [xmlrpc $iface_url($iface) getParamsetId [list string $ch_descr(ADDRESS)] MASTER]] == "true") && ([session_is_expert] == 0) } {
+        set hide_channel 1
+      }
     }
 
     puts "<tr [expr {$hide_channel==1?"style=\"visibility: hidden; display: none\"":""} ] >"

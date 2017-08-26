@@ -212,13 +212,13 @@ set PROFILE_3(SHORT_JT_REFOFF) {8 7}
 set PROFILE_3(SHORT_JT_REFON)  {3 4}
 set PROFILE_3(SHORT_MAX_TIME_FIRST_DIR)  0.1
 set PROFILE_3(SHORT_OFFDELAY_TIME) {0 range 0.0 - 111600.0}
-set PROFILE_3(SHORT_OFF_LEVEL) {1.0 range 0.0 - 1.01}
+set PROFILE_3(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.01}
 set PROFILE_3(SHORT_OFF_LEVEL_2) {1.01 range 0.0 - 1.01}
 set PROFILE_3(SHORT_OFF_TIME)  {111600.0 range 0.0 - 111600.0}
 set PROFILE_3(SHORT_OFF_TIME_MODE) 0
 set PROFILE_3(SHORT_ONDELAY_TIME)  {0 range 0.0 - 111600.0}
 set PROFILE_3(SHORT_ON_LEVEL)  {1.0 range 0.0 - 1.01}
-set PROFILE_3(SHORT_ON_LEVEL_2)  {1.00 range 0.0 - 1.01}
+set PROFILE_3(SHORT_ON_LEVEL_2)  {1.01 range 0.0 - 1.01}
 set PROFILE_3(SHORT_ON_TIME) {111600.0 range 0.0 - 111600.0}
 set PROFILE_3(SHORT_ON_TIME_MODE)  0
 set PROFILE_3(UI_DESCRIPTION)    "Mit einem kurzen Tastendruck f&auml;hrt die Jalousie/Markise/Rolllade im Wechsel ganz hoch bzw. ganz runter (Togglefunktion). Ist eine Hoch- oder Runterfahrverz&ouml;gerungszeit eingestellt, so wird die Jalousie/Markise/Rolllade erst nach Ablauf dieser Zeit gefahren. Bei einem langen Tastendruck f&auml;hrt die Jalousie/Markise/Rolllade so lange wie die Taste gedr&uuml;ckt ist."

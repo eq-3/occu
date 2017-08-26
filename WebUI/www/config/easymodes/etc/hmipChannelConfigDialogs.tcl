@@ -944,9 +944,12 @@ proc getBlindVirtualReceiver {chn p descr} {
 
   set html ""
 
+  set prn 0
+
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
     if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
       append html "<tr>"
         append html "<td>\${stringTableLogicCombinationBlind}</td>"
         option LOGIC_COMBINATION
@@ -2347,10 +2350,10 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
 
   set html ""
 
-  set lblPassageDetection "\${stringTablePassageDetectionLeft}"
+  set lblPassageDetection "\${stringTablePassageDetectionRight}"
 
   if { ! [catch {set tmp $ps(COND_TX_DECISION_BELOW)}]  } {
-    set lblPassageDetection "\${stringTablePassageDetectionRight}"
+    set lblPassageDetection "\${stringTablePassageDetectionLeft}"
   }
 
   set param CHANNEL_OPERATION_MODE
@@ -2369,7 +2372,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"decisionVal_$chn\" class=\"hidden\">"
-      append html "<td>\${stringTableCondValuePassageDetectionLeft}</td>"
+      append html "<td>\${stringTableCondValuePassageDetectionRight}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2378,7 +2381,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"decisionVal_$chn\" class=\"hidden\">"
-      append html "<td>\${stringTableCondValuePassageDetectionRight}</td>"
+      append html "<td>\${stringTableCondValuePassageDetectionLeft}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2392,7 +2395,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
         append html "decisionValElm.show();"
       append html "}"
     append html "};"
-    append html "showDecisionValue(jQuery(\"#separate_$CHANNEL\_$prn\").val(), $chn);"
+    append html "showDecisionValue(jQuery(\"#separate_$CHANNEL\_1\").val(), $chn);"
   append html "</script>"
 
   return $html
@@ -2433,7 +2436,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxDecisionAbove_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondTxDecisionAbove}</td>"
+      append html "<td>\${stringTableCondTxDecisionPassageRL}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2442,16 +2445,19 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxDecisionBelow_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondTxDecisionBelow}</td>"
+      append html "<td>\${stringTableCondTxDecisionPassageLR}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
+
+  append html "[getHorizontalLine]"
+  append html "<tr><td colspan=\"2\">\${numberOfPassesBeforeSendingDecisionVal}</td></tr>"
 
   set param COND_TX_THRESHOLD_HI
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxThresholdHi_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondThresholdHi}</td>"
+      append html "<td>\${stringTableCondThresholdPassageRL}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2460,7 +2466,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxThresholdLo_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondThresholdLo}</td>"
+      append html "<td>\${stringTableCondThresholdPassageLR}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2482,26 +2488,34 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
         append html "case 1: {"
           append html "condTxDecisionAboveElm.show();"
           append html "condTxDecisionBelowElm.show();"
+          append html "condTxThresholdHiElm.show();"
+          append html "condTxThresholdLoElm.show();"
           append html "break;"
         append html "}"
         append html "case 2: {"
           append html "condTxDecisionAboveElm.show();"
+          append html "condTxThresholdHiElm.show();"
           append html "break;"
         append html "}"
         append html "case 3: {"
           append html "condTxDecisionBelowElm.show();"
+          append html "condTxThresholdLoElm.show();"
           append html "break;"
         append html "}"
         append html "case 4: {"
+          append html "condTxDecisionAboveElm.show();"
+          append html "condTxDecisionBelowElm.show();"
           append html "condTxThresholdHiElm.show();"
           append html "condTxThresholdLoElm.show();"
           append html "break;"
         append html "}"
         append html "case 5: {"
+          append html "condTxDecisionAboveElm.show();"
           append html "condTxThresholdHiElm.show();"
           append html "break;"
         append html "}"
         append html "case 6: {"
+          append html "condTxDecisionBelowElm.show();"
           append html "condTxThresholdLoElm.show();"
           append html "break;"
         append html "}"
