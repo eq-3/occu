@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">*tr Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Licht auf den festgelegten Helligkeitswert ein- bzw. ausgeschaltet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">*tr Bei Empfang des Entscheidungswertes wird das Licht auf den festgelegten Helligkeitswert eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">*tr Bei Empfang des Entscheidungswertes wird das Licht auf den festgelegten Helligkeitswert ausgeschaltet.</span><br/><br/>",
+
+"subset_1" : "*tr Unterer Grenzwert unterschritten",
+"subset_2" : "*tr Oberer Grenzwert &uuml;berschritten",
+"subset_3" : "*tr Unterer Grenzwert unter- / oberer Grenzwert &uuml;berschritten",

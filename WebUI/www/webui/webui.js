@@ -1507,6 +1507,12 @@ DEV_PATHS["HM-Sec-SC-2"] = new Object();
 DEV_PATHS["HM-Sec-SC-2"]["50"] = "/config/img/devices/50/16_hm-sec-sc_thumb.png";
 DEV_PATHS["HM-Sec-SC-2"]["250"] = "/config/img/devices/250/16_hm-sec-sc.png";
 DEV_HIGHLIGHT["HM-Sec-SC-2"] = new Object();
+DEV_LIST.push('HmIP-SPDR');
+DEV_DESCRIPTION["HmIP-SPDR"] = "HmIP-SPDR";
+DEV_PATHS["HmIP-SPDR"] = new Object();
+DEV_PATHS["HmIP-SPDR"]["50"] = "/config/img/devices/50/154_hmip-spdr_thumb.png";
+DEV_PATHS["HmIP-SPDR"]["250"] = "/config/img/devices/250/154_hmip-spdr.png";
+DEV_HIGHLIGHT["HmIP-SPDR"] = new Object();
 DEV_LIST.push('263 134');
 DEV_DESCRIPTION["263 134"] = "263_134";
 DEV_PATHS["263 134"] = new Object();
@@ -3070,6 +3076,12 @@ DEV_PATHS["HM-CC-RT-DN"] = new Object();
 DEV_PATHS["HM-CC-RT-DN"]["50"] = "/config/img/devices/50/83_hm-cc-rt-dn_thumb.png";
 DEV_PATHS["HM-CC-RT-DN"]["250"] = "/config/img/devices/250/83_hm-cc-rt-dn.png";
 DEV_HIGHLIGHT["HM-CC-RT-DN"] = new Object();
+DEV_LIST.push('HmIP-MOD-RC8');
+DEV_DESCRIPTION["HmIP-MOD-RC8"] = "HmIP-MOD-RC8";
+DEV_PATHS["HmIP-MOD-RC8"] = new Object();
+DEV_PATHS["HmIP-MOD-RC8"]["50"] = "/config/img/devices/50/unknown_device_thumb.png";
+DEV_PATHS["HmIP-MOD-RC8"]["250"] = "/config/img/devices/250/unknown_device.png";
+DEV_HIGHLIGHT["HmIP-MOD-RC8"] = new Object();
 DEV_LIST.push('VIR-LG-RGB');
 DEV_DESCRIPTION["VIR-LG-RGB"] = "VIR-LG-RGB";
 DEV_PATHS["VIR-LG-RGB"] = new Object();
@@ -3790,6 +3802,11 @@ elvST['KEYMATIC|STATE_UNCERTAIN=FALSE'] = '${stringTableKeyMaticStateUncertainFa
 elvST['KEYMATIC|STATE_UNCERTAIN=TRUE'] = '${stringTableKeyMaticStateUncertainTrue}';
 elvST['KEYPRESS_SIGNAL'] = '${stringTableKeyPressSignal}';
 elvST['KEY_TRANSCEIVER'] = '${stringTableKeyTranseiverTitle}';
+elvST['KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE'] = '${stringTableKeyTransceiverChannelOperationMode}';
+elvST['KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=INACTIVE'] = '${stringTableKeyInactive}';
+elvST['KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=KEY_BEHAVIOR'] = '${stringTableKeyTransceiverChannelOperationModeKeyBehavior}';
+elvST['KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=SWITCH_BEHAVIOR'] = '${stringTableKeyTransceiverChannelOperationModeSwitchBehavior}';
+elvST['KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=BINARY_BEHAVIOR'] = '${stringTableKeyTransceiverChannelOperationModeBinaryBehavior}';
 elvST['KEY_TRANSCEIVER|DBL_PRESS_TIME'] = '${stringTableKeyDblPressTime}';
 elvST['KEY_TRANSCEIVER|LONG_PRESS_TIME'] = '${stringTableKeyLongPressTimeA}';
 elvST['KEY|CHANNEL_FUNCTION'] = '${stringTableKeyChannelFunction}';
@@ -4342,6 +4359,8 @@ elvST['TEMPERATURE_LOWERING'] = '${stringTableTemperatureLowering}';
 elvST['TEMPERATURE_MAXIMUM'] = '${stringTableTemperatureMaximum}';
 elvST['TEMPERATURE_MINIMUM'] = '${stringTableTemperatureMinimum}';
 elvST['TEMPERATURE_OFFSET'] = '${stringTableTemperatureOffset}';
+elvST['TEMPERATURE_OUT_OF_RANGE=FALSE'] = '${stringTableTemperatureOutOfRangeFalse}';
+elvST['TEMPERATURE_OUT_OF_RANGE=TRUE'] = '${stringTableTemperatureOutOfRangeTrue}';
 elvST['THERMALCONTROL_TRANSMIT'] = '${stringTableThermalControlTitle}';
 elvST['TILT_SENSOR'] = '${stringTableTiltSensorTitle}';
 elvST['TILT_SENSOR|EVENT_FILTERTIME'] = '${stringTableTiltSensorEventFilterTime}';
@@ -23907,6 +23926,11 @@ getExtendedDescription = function(oChannelDescr) {
     if (deviceType.toLowerCase() == "hmip-asir") {
       result = translateKey("chType_SABOTAGECONTACT");
     }
+
+    if (deviceType.toLowerCase() == "hmip-mod-rc8") {
+      result = translateKey("chType_MOD_RC8");
+    }
+
   }
 
 
@@ -23955,6 +23979,11 @@ getExtendedDescription = function(oChannelDescr) {
         if (channelIndex == 3) result = translateKey("chType_COND_HUMIDITY");
         break;
     }
+  }
+
+  if (chType == "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") {
+    if (channelIndex == 2) result = translateKey("chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL");
+    if (channelIndex == 3) result = translateKey("chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR");
   }
 
   if (result == "") {result = translateKey("chType_" + chType);}
@@ -29647,6 +29676,9 @@ iseHmIPWeeklyProgram.prototype = {
             }
           });
 
+          conInfo("iface: " + that.iface + " - address: " + that.chAddress);
+          conInfo("selectedMode: " + selectedMode + " - selectedCh: " + selectedCh);
+
          homematic("Interface.putParamset",{'interface': that.iface, 'address' : that.chAddress, 'paramsetKey' : 'VALUES', 'set':
            [
              {name:'WEEK_PROGRAM_TARGET_CHANNEL_LOCK', type: 'string', value: selectedMode},
@@ -29849,6 +29881,26 @@ iseHmIPWeeklyProgram.prototype = {
     return str.split("").reverse().join("");
   }
 };
+iseHmIPPassageDetector = Class.create();
+iseHmIPPassageDetector.prototype = {
+
+
+  initialize: function(opts) {
+    conInfo(opts);
+    this.opts = opts;
+    this.chn3Elm = jQuery("#"+this.opts.devId + this.opts.chnId);
+  },
+
+  show: function() {
+    this.chn3Elm.show();
+  },
+
+  hide: function() {
+    this.chn3Elm.hide();
+  }
+};
+
+
 /**
  * ic_gd.js
  **/

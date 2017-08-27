@@ -221,7 +221,7 @@ function ::CreateJalousieActuator()
                 WriteLine("</div>");
               WriteLine("</td>");
               WriteLine("<td>");
-                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;'></div>");
+                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;min-height:unset'></div>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
@@ -404,7 +404,7 @@ function ::CreateBlindVirtualReceiver()
                 WriteLine("</div>");
               WriteLine("</td>");
               WriteLine("<td>");
-                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;'></div>");
+                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;;min-height:unset'></div>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");

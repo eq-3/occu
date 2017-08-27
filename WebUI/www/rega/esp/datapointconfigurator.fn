@@ -125,6 +125,7 @@ function ::dcCreate()
     var CN_JALOUSIE        = "JALOUSIE.";
     var CN_LOCK            = "LOCK.";
     var CN_NONE            = "NONE";
+    var CN_PDDT = "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER.";
     var CN_POWERMETER      = "POWERMETER.";
     var CN_POWERMETER_IEC1  = "POWERMETER_IEC1.";
     var CN_POWERMETER_IEC2  = "POWERMETER_IEC2.";
@@ -683,6 +684,17 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_PRESENCEDETECTOR;
             Call("/esp/controls/motiondetector.fn::CreatePresenceDetector()");
+          }
+
+          !# CN_PDDT (PASSAGE_DETECTOR_DIRECTION_TRANSMITTER)
+          bIsControl = ( sControlName.Find(CN_PDDT) > -1 );
+          if( bIsControl && (sLastControlName != CN_PDDT) )
+          {
+            object ch = dom.GetObject(chnId);
+            WriteLine( "<script>conInfo('Control CN_PDDT (PASSAGE_DETECTOR_DIRECTION_TRANSMITTER) found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_PDDT;
+            Call("/esp/controls/passagedetector.fn::CreatePassageDetector()");
           }
 
           !# CN_WEEKLY_PROFILE - HmIP

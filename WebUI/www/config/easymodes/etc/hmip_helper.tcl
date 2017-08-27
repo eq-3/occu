@@ -1491,6 +1491,7 @@ proc getDescription {param} {
 proc getCondTXThresholdUnit {devType chn} {
    switch $devType {
         PSM  {return "mW"}
+        BSM  {return "mW"}
         STHO  {
           if {$chn == "2"} {return "°C"}
           if {$chn == "3"} {return "%"}

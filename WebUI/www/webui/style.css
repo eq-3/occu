@@ -820,6 +820,7 @@ a img {
   border: solid 1px $_(black); /* black */
   padding: 5px;
   font-weight: bold;
+  min-height: 30px;
 }
 
 .ControlBtnPushed {

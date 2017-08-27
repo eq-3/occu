@@ -337,6 +337,7 @@ function ::showHideHmIPChannel() {
       && (oDevHssType != "HmIP-KRCA")
       && (oDevHssType != "HmIP-KRCK")
       && (oDevHssType != "HmIP-KRC4")
+      && (oDevHssType != "HmIP-MOD-RC8")
       )
     )
   {

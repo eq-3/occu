@@ -57,6 +57,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-BBL" : "Homematic IP Jalousieaktor f%FCr Markenschalter",
     "HmIP-SPI" : "Homematic IP Pr%E4senzmelder, innen",
     "HmIP-STHO" : "Homematic IP Temperatur- und Luftfeuchtigkeitssensor - au%DFen",
+    "HmIP-MOD-RC8" : "Homematic IP Module Board Transmitter - 8 Kanal",
     "ALPHA-IP-RBG" : "Raumbedienger%E4t<br/>Display",
     "ALPHA-IP-RBGa" : "Raumbedienger%E4t<br/>Analog",
     "HM-LC-Sw1-Pl-CT-R1" : "Funk-Schaltaktor 1-fach mit Klemmanschluss",

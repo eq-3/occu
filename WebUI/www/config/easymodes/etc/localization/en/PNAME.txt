@@ -6,6 +6,8 @@
 "AUTO_UNLOCK_TIME" : "<span class=\"translated\">Unlock automatically</span>",
 "BRIGHTNESS_CONTROL" : "<span class=\"translated\">Brightness threshold</span>",
 "CHANGE_SIGNAL" : "<span class=\"translated\">Change signal</span>",
+"DECISION_VALUE" : "<span class=\"translated\">Decision value</span>",
+"DECISION_VALUE_PASSAGE" : "<span class=\"translated\">Decision value passage</span>",
 "DEF_ACK_ALARM" : "<span class=\"translated\">Confirmation of alarm:</span>",
 "DEF_ALARM_DURATION" : "<span class=\"translated\">Alarm duration</span>",
 "DEF_HUMIDITY" : "<span class=\"translated\">Definition humidity</span>",
@@ -71,3 +73,4 @@
 "SWITCHING_INTERVAL_FACTOR_DESCR" : "Interval of pump protection function",
 
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperature</span>",
+"SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender channel settings</span>",

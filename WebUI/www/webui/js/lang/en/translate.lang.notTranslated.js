@@ -86,6 +86,14 @@ jQuery.extend(true,langJSON, {
     "optionPassageCounterDeltaL" : "*en optionPassageCounterDeltaL",
     "optionPassageCounterDeltaR" : "*en optionPassageCounterDeltaR",
 
+    "stringTableTemperatureOutOfRangeFalse" : "*en Umgebungstemperatur OK",
+    "stringTableTemperatureOutOfRangeTrue" : "*en Umgebungstemperatur unzul%E4ssing",
+
+    "stringTableKeyTransceiverChannelOperationMode" : "*en Kanalverhalten",
+    "stringTableKeyTransceiverChannelOperationModeKeyBehavior" : "*en Taster",
+    "stringTableKeyTransceiverChannelOperationModeSwitchBehavior" : "*en Schalter",
+    "stringTableKeyTransceiverChannelOperationModeBinaryBehavior" : "*en T%FCr-/Fensterkontakt",
+
     "noMoreKeys" : ""
   }
 });

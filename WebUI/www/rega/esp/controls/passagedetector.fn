@@ -1,0 +1,164 @@
+function ::CreatePassageDetector() {
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+  string devAddress = chnAddress.StrValueByIndex(":",0);
+  string chnNumber = chnAddress.StrValueByIndex(":",1);
+
+  string chnRight2Left = devAddress#":2";
+  string chnLeft2Right = devAddress#":3";
+
+  string curPassageDetection = "unbekannt";
+  string lastPassageDetection = "unbekannt";
+
+  string curPassageDetectionRL = "Rechts nach Links";
+  string curPassageDetectionLR = "Links nach Rechts";
+  string lastPassageDetectionRL = "Rechts nach Links";
+  string lastPassageDetectionLR = "Links nach Rechts";
+
+  string cssCurPassageDir = "ControlBtnInfo";
+  string cssLastPassageDir = "ControlBtnInfo";
+
+  object oCurrentPassageDirectionRL;
+  object oCurrentPassageDirectionLR;
+  object oLastPassageDirectionRL;
+  object oLastPassageDirectionLR;
+  object oPassageCounterOverflowRL;
+  object oPassageCounterOverflowLR;
+  object oPassageCounterValueRL;
+  object oPassageCounterValueLR;
+
+  boolean bCurrentPassageDirectionRL = false;
+  boolean bCurrentPassageDirectionLR = false;
+  boolean bLastPassaageDirectionRL = false;
+  boolean bLastPassaageDirectionLR = false;
+  boolean bPassageCounterOverflowRL = false;
+  boolean bPassageCounterOverflowLR = false;
+  integer iPassageCounterValueRL = -1;
+  integer iPassageCounterValueLR = -1;
+
+
+  if (ch.HssType().Find("PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") != -1) {
+
+    oCurrentPassageDirectionRL = dom.GetObject("HmIP-RF."#chnRight2Left#".CURRENT_PASSAGE_DIRECTION");
+    if (!oCurrentPassageDirectionRL) {oCurrentPassageDirectionRL = dom.GetObject("HmIP-RF."#chnRight2Left#".CURRENT_PASSAGE_DIRECTIO");}
+
+    oCurrentPassageDirectionLR = dom.GetObject("HmIP-RF."#chnLeft2Right#".CURRENT_PASSAGE_DIRECTION");
+    if (!oCurrentPassageDirectionLR) {oCurrentPassageDirectionLR = dom.GetObject("HmIP-RF."#chnLeft2Right#".CURRENT_PASSAGE_DIRECTIO");}
+
+    if (oCurrentPassageDirectionRL) {bCurrentPassageDirectionRL = oCurrentPassageDirectionRL.Value();}
+    if (oCurrentPassageDirectionLR) {bCurrentPassageDirectionLR = oCurrentPassageDirectionLR.Value();}
+
+    oLastPassageDirectionRL = dom.GetObject("HmIP-RF."#chnRight2Left#".LAST_PASSAGE_DIRECTION");
+    oLastPassageDirectionLR = dom.GetObject("HmIP-RF."#chnLeft2Right#".LAST_PASSAGE_DIRECTION");
+    if (oLastPassageDirectionRL) {bLastPassaageDirectionRL = oLastPassageDirectionRL.Value();}
+    if (oLastPassageDirectionLR) {bLastPassaageDirectionLR = oLastPassageDirectionLR.Value();}
+
+    oPassageCounterOverflowRL = dom.GetObject("HmIP-RF."#chnRight2Left#".PASSAGE_COUNTER_OVERFLOW");
+    oPassageCounterOverflowLR = dom.GetObject("HmIP-RF."#chnLeft2Right#".PASSAGE_COUNTER_OVERFLOW");
+    if (oPassageCounterOverflowRL) {bPassageCounterOverflowRL = oPassageCounterOverflowRL.Value();}
+    if (oPassageCounterOverflowLR) {bPassageCounterOverflowLR = oPassageCounterOverflowLR.Value();}
+
+    oPassageCounterValueRL = dom.GetObject("HmIP-RF."#chnRight2Left#".PASSAGE_COUNTER_VALUE");
+    oPassageCounterValueLR = dom.GetObject("HmIP-RF."#chnLeft2Right#".PASSAGE_COUNTER_VALUE");
+    if (oPassageCounterOverflowRL) {iPassageCounterValueRL = oPassageCounterValueRL.Value();}
+    if (oPassageCounterValueLR) {iPassageCounterValueLR = oPassageCounterValueLR.Value();}
+
+!    if (oCurrentPassageDirection.Value() == true) {
+!      cssCurPassageDir = "ControlBtnOn";
+!    }
+!    if (oLastPassageDirection.Value() == true) {
+!      cssLastPassageDir = "ControlBtnOn";
+!    }
+
+  }
+  if (bCurrentPassageDirectionRL == true) {
+    curPassageDetection = curPassageDetectionRL;
+  }
+
+  if (bCurrentPassageDirectionLR == true) {
+    curPassageDetection = curPassageDetectionLR;
+  }
+
+  if (bLastPassaageDirectionRL == true) {
+    lastPassageDetection = lastPassageDetectionRL;
+  }
+
+  if (bLastPassaageDirectionLR == true) {
+    lastPassageDetection = lastPassageDetectionLR;
+  }
+  WriteLine("<td>");
+    WriteLine("<table>");
+
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<div class='"#cssCurPassageDir#"'>");
+            WriteLine("Erkannter Durchgang:<br/>"#curPassageDetection);
+          WriteLine("</div>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<div class='"#cssLastPassageDir#"'>");
+            WriteLine("Letzter erkannter Durchgang:<br/>"#lastPassageDetection);
+          WriteLine("</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<div class='"#cssLastPassageDir#"'>");
+            WriteLine("Erfasste Durchgaenge Links:<br/><span name='passageCounterValueLR'>"#iPassageCounterValueLR#"</span>");
+          WriteLine("</div>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<div class='"#cssLastPassageDir#"'>");
+            WriteLine("Erfasste Durchgaenge Rechts:<br/>"#iPassageCounterValueRL);
+          WriteLine("</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnInfo'>");
+            WriteLine("Ueberlauf linker Durchgangszaehler:<br/><span name='passageCounterOverflowLR'>"#bPassageCounterOverflowLR#"</span>");
+          WriteLine("</div>");
+        WriteLine("</td>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnInfo'>");
+            WriteLine("Ueberlauf rechter Durchgangszaehler:<br/>"#bPassageCounterOverflowRL);
+          WriteLine("</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+
+  ! Channel 2 (right/left) and 3 (left/right) are summarized in channel 2. Channel 3 is not visible
+
+  if (chnNumber == 3) {
+    object oDevice = dom.GetObject(cObj.Device());
+    integer i1DevId = -1;
+    integer i1ChnId = -1;
+    integer iDevId = oDevice.ID();
+    integer iChnId = chnId;
+
+    if (iDevId) {i1DevId = iDevId;}
+    if (iChnId) {i1ChnId = iChnId;}
+
+    WriteLine("<script type='text/javascript'>");
+
+      WriteLine("var opts = {};");
+      WriteLine("opts.devId = "#i1DevId#";");
+      WriteLine("opts.chnId = "#i1ChnId#";");
+
+      WriteLine("var oPassageDetector = new iseHmIPPassageDetector(opts);");
+
+      WriteLine("jQuery('[name=\"passageCounterValueLR\"]').first().text('"#iPassageCounterValueLR#"');");
+      WriteLine("jQuery('[name=\"passageCounterOverflowLR\"]').first().text('"#bPassageCounterOverflowLR#"');");
+
+      ! The timestamp of an event of channel 3 must be shown at channel 2
+      WriteLine("var curTimeStampElm = jQuery('#tmc"#chnId#"');");
+      WriteLine("jQuery('[name=\"timeStamp\"]').first().text(curTimeStampElm.text());");
+
+      WriteLine("oPassageDetector.hide();");
+
+    WriteLine("</script>");
+  }
+}

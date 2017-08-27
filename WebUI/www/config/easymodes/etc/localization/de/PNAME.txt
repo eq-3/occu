@@ -6,6 +6,8 @@
 "AUTO_UNLOCK_TIME" : "<span class=\"translated\">Automatisch wieder entriegeln</span>",
 "BRIGHTNESS_CONTROL" : "<span class=\"translated\">Helligkeitsschwelle</span>",
 "CHANGE_SIGNAL" : "<span class=\"translated\">&Auml;nderungssignal</span>",
+"DECISION_VALUE" : "<span class=\"translated\">Entscheidungswert</span>",
+"DECISION_VALUE_PASSAGE" : "<span class=\"translated\">Entscheidungswert Durchgang</span>",
 "DEF_ACK_ALARM" : "<span class=\"translated\">Best&auml;tigung des Alarms:</span>",
 "DEF_ALARM_DURATION" : "<span class=\"translated\">Alarmdauer</span>",
 "DEF_HUMIDITY" : "<span class=\"translated\">Definition Feuchtigkeit</span>",
@@ -87,3 +89,4 @@
 "UP_TIME_DELAY_FACTOR_DESCR" : "<span class=\"translated\">Hochfahrverz%F6gerungszeit</span>",
 
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperatur</span>",
+"SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender-Kanaleinstellungen</span>",

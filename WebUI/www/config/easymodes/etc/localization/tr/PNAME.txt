@@ -6,6 +6,8 @@
 "AUTO_UNLOCK_TIME" : "<span class=\"translated\">Otomatik olarak tekrar kilidi ac</span>",
 "BRIGHTNESS_CONTROL" : "<span class=\"translated\">Aydinlik esigi</span>",
 "CHANGE_SIGNAL" : "<span class=\"translated\">Degistirme sinyali</span>",
+"DECISION_VALUE" : "<span class=\"translated\">Decision value</span>",
+"DECISION_VALUE_PASSAGE" : "<span class=\"translated\">Decision value passage</span>",
 "DEF_ACK_ALARM" : "<span class=\"translated\">Alarm onayi:</span>",
 "DEF_ALARM_DURATION" : "<span class=\"translated\">Alarm s&uuml;resi</span>",
 "DEF_HUMIDITY" : "<span class=\"translated\">Nem tanimi</span>",
@@ -74,4 +76,4 @@
 
 
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperature</span>",
-
+"SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender channel settings</span>",

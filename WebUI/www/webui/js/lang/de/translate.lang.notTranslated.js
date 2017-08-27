@@ -89,6 +89,14 @@ jQuery.extend(true,langJSON, {
     "optionPassageCounterDeltaR" : "* optionPassageCounterDeltaR",
 
 
+    "stringTableTemperatureOutOfRangeFalse" : "Umgebungstemperatur OK",
+    "stringTableTemperatureOutOfRangeTrue" : "Umgebungstemperatur unzul%E4ssing",
+
+    "stringTableKeyTransceiverChannelOperationMode" : "Kanalverhalten",
+    "stringTableKeyTransceiverChannelOperationModeKeyBehavior" : "Taster",
+    "stringTableKeyTransceiverChannelOperationModeSwitchBehavior" : "Schalter",
+    "stringTableKeyTransceiverChannelOperationModeBinaryBehavior" : "T%FCr-/Fensterkontakt",
+
     "ATTENTION: " : "This is not yet approved by the marketing division",
 
 

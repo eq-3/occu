@@ -57,6 +57,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-BBL" : "Homematic IP Jalousieaktor for brand switch systems, flush-mount",
     "HmIP-SPI" : "Homematic IP Presence sensor, indoor",
     "HmIP-STHO" : "Homematic IP Temperature and Humidity Sensor – outdoor",
+    "HmIP-MOD-RC8" : "Homematic IP Module Board Transmitter - 8 channels",
     "ALPHA-IP-RBG" : "Room Control Unit<br/>Display",
     "ALPHA-IP-RBGa" : "Room Control Unit<br/>Analogue",
     "HM-LC-Sw1-Pl-CT-R1" : "Wireless Switch Actuator 1-channel with clamp terminal",

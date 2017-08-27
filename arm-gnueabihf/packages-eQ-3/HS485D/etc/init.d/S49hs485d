@@ -21,7 +21,7 @@ init() {
   		. /etc/config/syslog
 	fi
 	if [ ! -e /etc/config/InterfacesList.xml ] ; then
-		cp $CFG_TEMPLATE_DIR/InterfacesList.xml /etc/config
+		cp $CFG_TEMPLATE_DIR/InterfacesList.xml /etc/config/
 	else
 		cmp -s $CFG_TEMPLATE_DIR/InterfacesList.xml /etc/config/InterfacesList.xml || cp $CFG_TEMPLATE_DIR/InterfacesList.xml /etc/config
 	fi

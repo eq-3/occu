@@ -428,9 +428,11 @@ proc put_tablebody {} {
       foreach tr $tablestruct {
 
         array set SENTRY $tr
+        set internalKeyCSS ""
 
         if {[string first "NO_DESCRIPTION" $SENTRY(LINKDESC)] == 0} {
           if {[isHmIP] == "true"} {
+             set internalKeyCSS "style='background-color:#E0E0E0'"
              set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
              append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
           }
@@ -442,7 +444,7 @@ proc put_tablebody {} {
         puts "<td class=\"CLASS22106\">$SENTRY(SENDERNAME_DISPLAY)<br/><br/><span id=\"senderNameExtension_$loop\"></span></td>"
         puts "<td class=\"CLASS22106\">$SENTRY(SENDERADDR_DISPLAY)</td>"
         puts "<td>$SENTRY(LINKNAME)</td>"
-        puts "<td>$SENTRY(LINKDESC)</td>"
+        puts "<td $internalKeyCSS>$SENTRY(LINKDESC)</td>"
         puts "<td class=\"CLASS22106\">$SENTRY(ACTION)</td>"
         puts "<td class=\"CLASS22106\">$SENTRY(RECEIVERNAME_DISPLAY)<br/><br/><span id=\"receiverNameExtension_$loop\"></span></td>"
         puts "<td class=\"CLASS22106\">$SENTRY(RECEIVERADDR_DISPLAY)</td>"

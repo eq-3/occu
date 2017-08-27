@@ -1,0 +1,10 @@
+"description_2_1" : "<span class=\"translated\">*tr Bei einem Durchgang von rechts nach links wird der Dimmer f&uuml;r die festgelegte Zeit in den entgegengesetzten Zustand geschaltet.</span><br/><br/>",
+"description_3_1" : "<span class=\"translated\">*tr Bei einem Durchgang von links nach rechts wird der Dimmer f&uuml;r die festgelegte Zeit in den entgegengesetzten Zustand geschaltet.</span><br/><br/>",
+
+"description_2_2" : "<span class=\"translated\">*tr Bei einem Durchgang von rechts nach links wird der Dimmer f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_3_2" : "<span class=\"translated\">*tr Bei einem Durchgang von links nach rechts wird der Dimmer f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+
+"description_2_3" : "<span class=\"translated\">*tr Bei einem Durchgang von rechts nach links wird der Dimmer f&uuml;r die festgelegte Zeit ausgeschaltet.</span><br/><br/>",
+"description_3_3" : "<span class=\"translated\">*tr Bei einem Durchgang von links nach rechts wird der Dimmer f&uuml;r die festgelegte Zeit ausgeschaltet.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">*tr Das Profil ist nicht aktiv.</span><br/><br/>",

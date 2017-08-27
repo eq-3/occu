@@ -584,6 +584,11 @@ KEYMATIC|STATE_UNCERTAIN=FALSE	${stringTableKeyMaticStateUncertainFalse}
 KEYMATIC|STATE_UNCERTAIN=TRUE	${stringTableKeyMaticStateUncertainTrue}
 KEYPRESS_SIGNAL	${stringTableKeyPressSignal}
 KEY_TRANSCEIVER	${stringTableKeyTranseiverTitle}
+KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE	${stringTableKeyTransceiverChannelOperationMode}
+KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=INACTIVE	${stringTableKeyInactive}
+KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=KEY_BEHAVIOR	${stringTableKeyTransceiverChannelOperationModeKeyBehavior}
+KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=SWITCH_BEHAVIOR	${stringTableKeyTransceiverChannelOperationModeSwitchBehavior}
+KEY_TRANSCEIVER|CHANNEL_OPERATION_MODE=BINARY_BEHAVIOR	${stringTableKeyTransceiverChannelOperationModeBinaryBehavior}
 KEY_TRANSCEIVER|DBL_PRESS_TIME	${stringTableKeyDblPressTime}
 KEY_TRANSCEIVER|LONG_PRESS_TIME	${stringTableKeyLongPressTimeA}
 KEY|CHANNEL_FUNCTION	${stringTableKeyChannelFunction}
@@ -596,10 +601,8 @@ KEY|INPUT_LOCKED	${stringTableKeyInputLocked}
 KEY|INPUT_TYPE	${stringTableKeyInputType}
 KEY|INPUT_TYPE=PUSHBUTTON	${stringTableKeyInputTypePushButton}
 KEY|INPUT_TYPE=SWITCH	${stringTableKeyInputTypeSwitch}
-
 KEY|LCD_LEVEL_INTERP	${stringTableKeyLCDLevelInterp}
 KEY|LCD_SYMBOL	${stringTableKeyLCDSymbol}
-
 KEY|LONGPRESS_TIME	${stringTableKeyLongPressTimeB}
 KEY|LONG_PRESS_TIME	${stringTableKeyLongPressTimeA}
 KEY|MSG_FOR_POS_A	${stringTableKeyMsgPosClosed}
@@ -1154,6 +1157,8 @@ TEMPERATURE_LOWERING	${stringTableTemperatureLowering}
 TEMPERATURE_MAXIMUM	${stringTableTemperatureMaximum}
 TEMPERATURE_MINIMUM	${stringTableTemperatureMinimum}
 TEMPERATURE_OFFSET	${stringTableTemperatureOffset}
+TEMPERATURE_OUT_OF_RANGE=FALSE	${stringTableTemperatureOutOfRangeFalse}
+TEMPERATURE_OUT_OF_RANGE=TRUE	${stringTableTemperatureOutOfRangeTrue}
 THERMALCONTROL_TRANSMIT	${stringTableThermalControlTitle}
 TILT_SENSOR	${stringTableTiltSensorTitle}
 TILT_SENSOR|EVENT_FILTERTIME	${stringTableTiltSensorEventFilterTime}

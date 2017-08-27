@@ -2,6 +2,8 @@
 "switch_on" : "Switch - on",
 "switch_on_off" : "Switch - on / off",
 "switch_toggle" : "Switch toggle",
+"change_signal_on" : "When changing on",
+"change_signal_off" : "When changing off"
 
 "actor_off" : "Actor off",
 "actor_on" : "Actor on",
