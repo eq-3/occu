@@ -2,6 +2,83 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-09-11 Jens Maus <mail@jens-maus.de>
+
+  * fixed a bug in the web request response generation which supplied invalid
+    xml formatted data for hm scripts containing string variables with special
+    characters like '<' or '>'. Now these special characters are properly
+    escaped so that valid xml data is returned and thus won't result in, e.g.
+    JSON formatting errors if the script test window is used in the WebUI.
+
+2017-09-10 Jens Maus <mail@jens-maus.de>
+
+  * fixed a problen where due to implicit BINRPC definitions in how floating
+    point values are supplied, some sensors reported slightly inaccurate float
+    values (e.g. dimmers) resulting in various numeric problems. Now a proper
+    float point rounding method is applied that maintains float values to be 
+    keep accuracy up to the sixth digit.
+
+2017-09-09 Jens Maus <mail@jens-maus.de>
+
+  * fixed a bug in using multiple elseif() statements in a row which resulted
+    in multiple executions of the alternative branches.
+
+2017-09-08 Jens Maus <mail@jens-maus.de>
+
+  * fixed a regression bug which were the reason for "CompatibleForCompare"
+    errors on programs using dimmer devices in program conditions.
+
+2017-09-07 Jens Maus <mail@jens-maus.de>
+
+  * fixed problem that upon changing the value type (integer, float, string)
+    of ISE values after a program was already created using, e.g. system
+    variables or devices returning value in a certain type that ReGaHss
+    aborted program execution by issuing "CompatibleForCompare" errors. Now
+    it will try to convert to the desired type first and only issue this error
+    if a conversion is also not possible.
+  * fixed floating point to string conversion routines (e.g. ToString()) to not
+    use any floating point rounding but truncate values after the 6th digit
+    so that output e.g. using WriteLine() is somewhat more consisent and
+    human comparable to the real values.
+
+2017-09-06 Jens Maus <mail@jens-maus.de>
+
+  * fixed inconsistent rounding operations when using ToString(p) with an
+    optional parameter to specify the precision in case it is used on real
+    or string variables containing a floating point value.
+
+#### BETA19-2017-08-31 (821f393) Release ####################################
+
+2017-08-31 Jens Maus <mail@jens-maus.de>
+
+  * fixed the XmlRpcDataType to variable conversion to always perform an
+    integer conversion in case the xmlrpc call returns an integer rather
+    than potentially performing a conversion to byte which might result
+    in incorrect values in variables.
+
+2017-08-29 Jens Maus <mail@jens-maus.de>
+
+  * reworked HTTPServer startup to allow more than 10 parallel HTTP server
+    worker threads to be running at the same time.
+  * added all missing "ID_XXXXXX" type identifiers for constant ise id
+    objects and datapoints. This includes ID_GW_SYSALARM, ID_GW_SYSSERVICE
+    to retrieve the object id for alarm and service messages.
+  * reworked system.Exec() to execute the supplied command in the context of
+    a full shell rather than calling the command directly. This enables
+    system.Exec() to execute commands with more than 9 arguments and to use
+    complex shell syntax (such as shell pipes "|", redirections ">" and ";"
+    to execute more than one command). Furthermore, errors on command
+    execution should be reported and handled more properly now.
+
+2017-08-26 Jens Maus <mail@jens-maus.de>
+
+  * the method .ToString(p) can now also be used on a string-type variable to
+    round a floating point type string to a specified precision p. If a
+    string, however, contains non integer/float characters a .ToString(p)
+    call will just return the unmodified string.
+
+#### BETA18-2017-08-26 (f5fddc6) Release ####################################
+
 2017-08-25 Jens Maus <mail@jens-maus.de>
 
   * implemented "HttpListenerMaxConnections" rega.conf config option to be
