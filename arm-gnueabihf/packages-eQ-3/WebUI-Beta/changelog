@@ -2,6 +2,53 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-09-11 Jens Maus <mail@jens-maus.de>
+
+  * fixed a bug in the web request response generation which supplied invalid
+    xml formatted data for hm scripts containing string variables with special
+    characters like '<' or '>'. Now these special characters are properly
+    escaped so that valid xml data is returned and thus won't result in, e.g.
+    JSON formatting errors if the script test window is used in the WebUI.
+
+2017-09-10 Jens Maus <mail@jens-maus.de>
+
+  * fixed a problen where due to implicit BINRPC definitions in how floating
+    point values are supplied, some sensors reported slightly inaccurate float
+    values (e.g. dimmers) resulting in various numeric problems. Now a proper
+    float point rounding method is applied that maintains float values to be 
+    keep accuracy up to the sixth digit.
+
+2017-09-09 Jens Maus <mail@jens-maus.de>
+
+  * fixed a bug in using multiple elseif() statements in a row which resulted
+    in multiple executions of the alternative branches.
+
+2017-09-08 Jens Maus <mail@jens-maus.de>
+
+  * fixed a regression bug which were the reason for "CompatibleForCompare"
+    errors on programs using dimmer devices in program conditions.
+
+2017-09-07 Jens Maus <mail@jens-maus.de>
+
+  * fixed problem that upon changing the value type (integer, float, string)
+    of ISE values after a program was already created using, e.g. system
+    variables or devices returning value in a certain type that ReGaHss
+    aborted program execution by issuing "CompatibleForCompare" errors. Now
+    it will try to convert to the desired type first and only issue this error
+    if a conversion is also not possible.
+  * fixed floating point to string conversion routines (e.g. ToString()) to not
+    use any floating point rounding but truncate values after the 6th digit
+    so that output e.g. using WriteLine() is somewhat more consisent and
+    human comparable to the real values.
+
+2017-09-06 Jens Maus <mail@jens-maus.de>
+
+  * fixed inconsistent rounding operations when using ToString(p) with an
+    optional parameter to specify the precision in case it is used on real
+    or string variables containing a floating point value.
+
+#### BETA19-2017-08-31 (821f393) Release ####################################
+
 2017-08-31 Jens Maus <mail@jens-maus.de>
 
   * fixed the XmlRpcDataType to variable conversion to always perform an
@@ -108,6 +155,8 @@ ReGaHss ChangeLog
 
 2017-06-01 Jens Maus <mail@jens-maus.de>
 
+  * stable-2.29.x: reverted opcode overlapping optimizations.
+  * stable-2.29.x: reverted strict foreach()/while() expression checking.
   * added some verbose error output to more easily identify incorrect uses
     of foreach()/while() expressions.
 
@@ -196,11 +245,6 @@ ReGaHss ChangeLog
 
 2017-05-17 Jens Maus <mail@jens-maus.de>
 
-  * fixed a bug where Type() and VarType() was not available for all
-    possible variable types. Now 'var', 'idarray' and 'object' can also
-    be queried for their types. Note, however, that for actual objects
-    only VarType() will be unique since Type() will then return the
-    actual object type instead of the variable type name.
   * fixed a bug in while() and foreach() not raising any error if the
     specified condition isn't valid.
   * increased maximum number of iterations for foreach()/while() to 50000
