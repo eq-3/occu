@@ -106,6 +106,16 @@ getOnlyNonExpertChannels = function(devId, chn) {
       });
       break;
 
+    case "HMIP-WHS2" :
+      var arEasyChannels = [2,6];
+      jQuery.each(arEasyChannels,function(index,val) {
+        if (val == chn){
+          result = chn;
+          return false; // leave the each loop
+        }
+      });
+      break;
+
     default: result = chn;
   }
 
@@ -600,7 +610,10 @@ HmIPWeeklyProgram.prototype = {
 
     result += "<script type='text/javascript'>";
       result += "window.setTimeout(function(){";
-        result += "jQuery('#separate_CHANNEL_"+this.chn+"_"+this.prn+"').val('"+val+"');";
+        result += "jElm = jQuery('#separate_CHANNEL_"+this.chn+"_"+this.prn+"');";
+        result += "jElm.val('"+val+"');";
+        // don`t use jQuery - the dirty flag will not be recognized
+        result += "document.getElementById('separate_CHANNEL_"+this.chn+"_"+this.prn+"')[jElm.prop('selectedIndex')].defaultSelected = true;";
         result += "showHideDuration("+val+","+number+")";
       result += "},100);";
     result += "</script>";
@@ -627,7 +640,10 @@ HmIPWeeklyProgram.prototype = {
 
     result += "<script type='text/javascript'>";
       result += "window.setTimeout(function(){";
-        result += "jQuery('#separate_CHANNEL_"+this.chn+"_"+this.prn+"').val('"+val+"');";
+      result += "jElm = jQuery('#separate_CHANNEL_"+this.chn+"_"+this.prn+"');";
+      result += "jElm.val('"+val+"');";
+      // don`t use jQuery - the dirty flag will not be recognized
+      result += "document.getElementById('separate_CHANNEL_"+this.chn+"_"+this.prn+"')[jElm.prop('selectedIndex')].defaultSelected = true;";
       result += "},100);";
     result += "</script>";
 

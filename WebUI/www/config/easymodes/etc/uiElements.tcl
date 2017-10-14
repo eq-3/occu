@@ -174,7 +174,38 @@ proc getHorizontalLine {{extraparam ""}} {
   return "<tr $extraparam><td colspan=\"2\"><hr></td></tr>"
 }
 
-proc getHelpIcon {topic x y} {
+proc _getHelpIcon {topic x y} {
+  set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
+  return $ret
+}
+
+proc getHelpIcon {topic {x 0} {y 0}} {
+
+  # Default
+  if {$x == 0} {set x 450}
+  if {$y == 0} {set y 260}
+
+
+  # Set the size for known parameters
+  switch $topic {
+   "BLIND_AUTOCALIBRATION" {set x 450; set y 75}
+   "BLIND_REFERENCE_RUNNING_TIME" {set x 450; set y 160}
+   "BLOCKING_PERIOD" {set x 450; set y 100}
+   "BOOST_TIME_PERIOD" {set x 500; set y 200}
+   "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
+   "DELAY_COMPENSATION" {set x 450; set y 100}
+   "DURATION_5MIN" {set x 500; set y 200}
+   "ENABLE_ROUTING" {set x 500; set y 120}
+   "HEATING_COOLING" {set x 450; set y 160}
+   "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
+   "PERMANENT_FULL_RX" {set x 500; set y 160}
+   "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
+   "SPDR_CHANNEL_MODE" {set x 500; set y 600}
+   "TEMPERATURE_OFFSET" {set x 500; set y 200}
+   "TWO_POINT_HYSTERESIS" {set x 450; set y 160}
+   "WEEK_PROGRAM_POINTER" {set x 400; set y 100}
+  }
+
   set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
   return $ret
 }

@@ -88,7 +88,7 @@
       {
         !Write( ' <i>bei</i> ' );
         Write( ' <i>${ruleConditionLblWhen}</i> ' );
-        Write( '<select onchange="SetLeftValue('#oSC.ID()#',this.value);" class="SelectBox">' );
+        Write( '<select id="selectConditionWhen'#oSC.ID()#'" onchange="SetLeftValue('#oSC.ID()#',this.value);" class="SelectBox">' );
       }
 
       if( iLVT == ivtObjectId )
@@ -169,9 +169,13 @@
                       }
                     }
                   }
+                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
                   Write( sValue );
+
                   Write( '</option>' );
+
                   if( (oDP.ID() == iLV) && (iRV1 == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
+
                   Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
                   string sValue = oDP.Name()#": "#oDP.ValueName0();
                   if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
@@ -188,6 +192,8 @@
                       }
                     }
                   }
+
+                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
                   Write( sValue );
                   Write( '</option>' );
                 }
@@ -221,6 +227,7 @@
                         }
                       }
                     }
+                    Call("/esp/functions.fn::getSpecialIntegerTranslation()");
                     Write( sValue );
                     Write( '</option>' );
                   }

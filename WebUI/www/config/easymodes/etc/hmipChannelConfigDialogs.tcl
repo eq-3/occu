@@ -7,9 +7,6 @@ proc getMaintenance {chn p descr} {
   upvar $descr psDescr
   upvar prn prn
 
-  set hlpBoxWidth 500
-  set hlpBoxHeight 150
-
   set html ""
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
@@ -73,7 +70,7 @@ proc getMaintenance {chn p descr} {
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableRouterModuleEnabled}</td>"
-       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
      append html "</tr>"
   }
 
@@ -82,11 +79,18 @@ proc getMaintenance {chn p descr} {
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableEnableRouting}</td>"
-       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
      append html "</tr>"
   }
 
-
+  set param PERMANENT_FULL_RX
+  if { ! [catch {set tmp $ps($param)}]  } {
+     incr prn
+     append html "<tr>"
+       append html "<td>\${stringTablePermanentFullRX}</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
+     append html "</tr>"
+  }
 
   set param LATITUDE
   if { ! [catch {set tmp $ps($param)}]  } {
@@ -392,9 +396,6 @@ proc getBlindTransmitter {chn p descr address} {
 
   set parent [lindex [split $address :] 0]
 
-  set hlpBoxWidth 450
-  set hlpBoxHeight 160
-
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
 
   puts "<div id=\"page_$parent\" class=\"hidden\">$parent</div>"
@@ -461,12 +462,21 @@ proc getBlindTransmitter {chn p descr address} {
     append html "</tr>"
   }
 
+  set param ENDPOSITION_AUTO_DETECT
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableBlindEndPositionAutoDetect}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
   append html "[getHorizontalLine]"
 
   # AUTOCALIBRATION
   append html "<tr id=\"autoCalibrationPanel_$parent\" class =\"hidden\">"
     append html "<td>\${stringTableSelfCalibrationStart}</td>"
-    append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'>[getHelpIcon HELP_BLIND_AUTOCALIBRATION $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'>[getHelpIcon BLIND_AUTOCALIBRATION]</td>"
     append html "<td id='tdBlindStopCalibration_$parent' class=\"hidden\"><input name='btnBlindStopCalibration' onclick='autoCalib\[\"$parent\"\].stopAutoCalibration()' value='Stop Calibration' type='button'></td>"
   append html "</tr>"
 
@@ -535,8 +545,70 @@ proc getBlindTransmitter {chn p descr address} {
   append html "<td>\${stringTableTimeSlatsValue}</td>"
 
   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
   append html "</tr>"
+
+  append html "[getHorizontalLine]"
+
+  set param DELAY_COMPENSATION
+  if { ! [catch {set tmp $ps($param)}] } {
+    # The max value represents the automatic modus.
+    set autoDelayCompensation 0
+    incr prn
+
+    set bckColor "silver"
+    append html "<tr>"
+      append html "<td colspan='2' style=\"text-align:center; background-color:$bckColor\">\${stringTableBlindDelayCompensation}</td>"
+    append html "</tr>"
+
+    append html "<tr>"
+      if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {set autoDelayCompensation 1}
+      append html "<td>\${btnAutoDetect}</td>"
+      append html "<td>[getCheckBox '$param' $autoDelayCompensation $chn tmp onclick=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+
+    # Hide this while in auto mode
+    append html "<tr id=\"autoDelayCompensation_$chn\" class=\"hidden\">"
+      append html "<td>\${lblTimeDelay}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+
+    append html "<script type=\"text/javascript\">"
+      append html "setAutoDelayCompensation = function(elm, init) {"
+        append html "var autoDelayCompensationTRElm = jQuery(\"\#autoDelayCompensation_$chn\"),"
+        # append html "autoDelayCompensationTextElm = jQuery(\"\#separate_CHANNEL_$chn\_$prn\"),"
+        append html "autoDelayCompensationTextElm = document.getElementById(\"separate_CHANNEL_$chn\_$prn\"),"
+        append html "auto = jQuery(elm).prop('checked');"
+
+        append html "if (auto) {"
+          # Hide time element
+          append html "jQuery(autoDelayCompensationTRElm).hide();"
+          # append html "jQuery(autoDelayCompensationTextElm).val([getMaxValue $param]);"
+          append html "autoDelayCompensationTextElm.value = [getMaxValue $param];"
+          append html "if (init) {autoDelayCompensationTextElm.defaultValue = parseFloat([getMaxValue $param]);}"
+
+        append html "} else {"
+          # Show time element
+
+          if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {
+            # append html "jQuery(autoDelayCompensationTextElm).val([getMinValue $param]);"
+            append html "autoDelayCompensationTextElm.value = [getMinValue $param];"
+            append html "if (init) {autoDelayCompensationTextElm.defaultValue = parseFloat([getMinValue $param]);}"
+          } else {
+            # append html "jQuery(autoDelayCompensationTextElm).val($ps($param));"
+            append html "autoDelayCompensationTextElm.value = $ps($param);"
+            append html "if (init) {autoDelayCompensationTextElm.defaultValue = parseFloat($ps($param));}"
+          }
+
+          append html "jQuery(autoDelayCompensationTRElm).show();"
+        append html "}"
+
+      append html "};"
+      append html "window.setTimeout(function() {var elm = jQuery(\"#separate_CHANNEL_$chn\_tmp\");setAutoDelayCompensation(elm, true);}, 100);"
+
+    append html "</script>"
+
+  }
+
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSlatRunningTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
@@ -618,13 +690,22 @@ proc getShutterTransmitter {chn p descr address} {
     append html "</tr>"
   }
 
+  set param ENDPOSITION_AUTO_DETECT
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableBlindEndPositionAutoDetect}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
   append html "[getHorizontalLine]"
 
   # AUTOCALIBRATION
 
   append html "<tr id=\"autoCalibrationPanel_$parent\" class =\"hidden\">"
     append html "<td>\${stringTableSelfCalibrationStart}</td>"
-    append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'></td>"
+    append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'>[getHelpIcon BLIND_AUTOCALIBRATION]</td>"
     append html "<td id='tdBlindStopCalibration_$parent' class=\"hidden\"><input name='btnBlindStopCalibration' onclick='autoCalib\[\"$parent\"\].stopAutoCalibration()' value='Stop Calibration' type='button'></td>"
   append html "</tr>"
 
@@ -676,6 +757,61 @@ proc getShutterTransmitter {chn p descr address} {
   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
   append html "</tr>"
+
+  append html "[getHorizontalLine]"
+
+  set param DELAY_COMPENSATION
+  if { ! [catch {set tmp $ps($param)}] } {
+    # The max value represents the automatic modus.
+    set autoDelayCompensation 0
+    incr prn
+
+    set bckColor "silver"
+    append html "<tr>"
+      append html "<td colspan='2' style=\"text-align:center; background-color:$bckColor\">\${stringTableBlindDelayCompensation}</td>"
+    append html "</tr>"
+
+    append html "<tr>"
+      if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {set autoDelayCompensation 1}
+      append html "<td>\${btnAutoDetect}</td>"
+      append html "<td>[getCheckBox '$param' $autoDelayCompensation $chn tmp onclick=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+
+    # Hide this while in auto mode
+    append html "<tr id=\"autoDelayCompensation_$chn\" class=\"hidden\">"
+      append html "<td>\${lblTimeDelay}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+
+    append html "<script type=\"text/javascript\">"
+      append html "setAutoDelayCompensation = function(elm) {"
+        append html "var autoDelayCompensationTRElm = jQuery(\"\#autoDelayCompensation_$chn\"),"
+        append html "autoDelayCompensationTextElm = jQuery(\"\#separate_CHANNEL_$chn\_$prn\"),"
+        append html "auto = jQuery(elm).prop('checked');"
+
+        append html "if (auto) {"
+          # Hide time element
+          append html "jQuery(autoDelayCompensationTRElm).hide();"
+          append html "jQuery(autoDelayCompensationTextElm).val([getMaxValue $param]);"
+        append html "} else {"
+          # Show time element
+
+          if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {
+            append html "jQuery(autoDelayCompensationTextElm).val([getMinValue $param]);"
+          } else {
+            append html "jQuery(autoDelayCompensationTextElm).val($ps($param));"
+          }
+
+          append html "jQuery(autoDelayCompensationTRElm).show();"
+        append html "}"
+
+      append html "};"
+      append html "window.setTimeout(function() {var elm = jQuery(\"#separate_CHANNEL_$chn\_tmp\");;setAutoDelayCompensation(elm);}, 100);"
+
+    append html "</script>"
+
+  }
+
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentBlindRunningTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
@@ -784,7 +920,7 @@ set comment {
   set param POWERUP_JUMPTARGET
   append html "<tr>"
     append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-    option POWERUP_JUMPTARGET
+    option POWERUP_JUMPTARGET_HMIP
     append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
   append html "</tr>"  
   
@@ -856,9 +992,11 @@ proc getDimmerVirtualReceiver {chn p descr} {
   set specialID "[getSpecialID $special_input_id]"
 
   set html ""
+  set prn 0
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
+    incr prn
     append html "<tr>"
       append html "<td>\${stringTableLogicCombination}</td>"
       option LOGIC_COMBINATION
@@ -874,7 +1012,7 @@ proc getDimmerVirtualReceiver {chn p descr} {
   set param POWERUP_JUMPTARGET
   append html "<tr>"
     append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-    option POWERUP_JUMPTARGET
+    option POWERUP_JUMPTARGET_HMIP
     append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
   append html "</tr>"
 
@@ -1198,9 +1336,6 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
-  set hlpBoxWidth 450
-  set hlpBoxHeight 160
-
   set html ""
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN.js');load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
@@ -1212,14 +1347,14 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
     array_clear options
     set options(0) "\${stringTableHeating}"
     set options(1) "\${stringTableCooling}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn][getHelpIcon $param]</td>"
   append html "</tr>"
 
   incr prn
   set param TWO_POINT_HYSTERESIS
   append html "<tr>"
     append html "<td>\${stringTableSwitchTransmitTwoPointHysteresis}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param]</td>"
   append html "</tr>"
 
   return $html
@@ -1243,10 +1378,6 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
   set html ""
 
     set CHANNEL $special_input_id
-
-    set hlpBoxWidth 500
-    set hlpBoxHeight 200
-
 
     puts "<script type=\"text/javascript\">"
       puts "ShowActiveWeeklyProgram = function(activePrg) {"
@@ -1286,7 +1417,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
               append html "<option value='4'>\${stringTableWeekProgram5}</option>"
               append html "<option value='5'>\${stringTableWeekProgram6}</option>"
             }
-        append html "</select>[getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]"
+        append html "</select>[getHelpIcon $param]"
         append html "</td>"
       append html "</tr>"
     append html "</table>"
@@ -1412,7 +1543,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       append html "<tr><td>\${stringTableTemperatureMinimum}</td>"
       append html  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $param $ps($param) $chn $prn]</span></td>"
       append html "<script type=\"text/javascript\">"
-      append html "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+      append html "self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
       append html "</script>"
 
       # right
@@ -1428,7 +1559,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       append html  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $param $ps($param) $chn $prn]</span></td>"
       append html "</tr>"
       append html "<script type=\"text/javascript\">"
-      append html "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+      append html "self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
       append html "</script>"
       append html "<tr>"
 
@@ -1450,10 +1581,14 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
         incr prn
         append html "<tr name=\"expertParam\" class=\"hidden\">"
           append html "<td>\${stringTableDuration5Min}</td>"
-          append html "<td colspan=\"2\" >[getTextField $param $ps($param) $chn $prn]&nbsp;x&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+          append html "<td colspan=\"2\" >[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param]</td>"
 
           append html "<script type=\"text/javascript\">"
-            append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);});"
+            append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {"
+            append html "var value = this.value;"
+            append html "this.value = Math.round(this.value / 5) * 5;"
+            append html "ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);"
+            append html "});"
           append html "</script>"
 
         append html "</tr>"
@@ -1474,7 +1609,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       incr i;
     }
     append html "<td>\${stringTableTemperatureOffset}</td>"
-    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param]</td>"
     append html "</tr>"
 
     #left
@@ -1504,7 +1639,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       incr i;
     }
     append html "<tr><td>\${stringTableBoostTimePeriod}</td>"
-      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param]</td>"
     append html "</tr>"
   append html "</table>"
 
@@ -1550,67 +1685,71 @@ proc getSwitchVirtualReceiver {chn p descr} {
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
+    if { ! [catch {set tmp $ps($param)}]  } {
+      append html "<tr>"
+        append html "<td>\${stringTableLogicCombination}</td>"
+        option LOGIC_COMBINATION
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+      append html "</tr>"
+      append html "[getHorizontalLine]"
+      incr prn
+    }
+  }
+
+  set param POWERUP_JUMPTARGET
+  if { ! [catch {set tmp $ps($param)}]  } {
     append html "<tr>"
-      append html "<td>\${stringTableLogicCombination}</td>"
-      option LOGIC_COMBINATION
+      append html "<td>\${stringTableDimmerPowerUpAction}</td>"
+      option POWERUP_JUMPTARGET_HMIP
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
 
 
-    append html "[getHorizontalLine]"
     incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableOnDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "delayShort"]
+    append html "</tr>"
+
+    set param POWERUP_ONDELAY_UNIT
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+
+    incr prn
+    set param POWERUP_ONDELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableOnDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableOnTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
+    append html "</tr>"
+
+    set param POWERUP_ONTIME_UNIT
+    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param POWERUP_ONTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableOnTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
-
-  set param POWERUP_JUMPTARGET
-  append html "<tr>"
-    append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-    option POWERUP_JUMPTARGET
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
-  
-  
-  incr prn
-  append html "<tr>"
-  append html "<td>\${stringTableOnDelay}</td>"
-  append html [getComboBox $chn $prn "$specialID" "delayShort"]
-  append html "</tr>"
-  
-  set param POWERUP_ONDELAY_UNIT
-  append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
-  
-  
-  incr prn
-  set param POWERUP_ONDELAY_VALUE
-  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-  append html "<td>\${stringTableOnDelayValue}</td>"
-  
-  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-  
-  append html "</tr>"
-  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-  
-  
-  incr prn
-  append html "<tr>"
-  append html "<td>\${stringTableOnTime}</td>"
-  append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
-  append html "</tr>"
-  
-  set param POWERUP_ONTIME_UNIT
-  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-  
-  incr prn
-  set param POWERUP_ONTIME_VALUE
-  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-  append html "<td>\${stringTableOnTimeValue}</td>"
-  
-  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-  
-  append html "</tr>"
-  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-
+  if {$html == ""} {
+    append html [getNoParametersToSet]
+  }
   return $html
 }
 
@@ -1787,14 +1926,14 @@ set comment {
   set param COND_TX_DECISION_ABOVE
   append html "<tr>"
     append html "<td>\${stringTableCondTxDecisionAbove}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
   append html "</tr>"
 
   incr prn
   set param COND_TX_DECISION_BELOW
   append html "<tr>"
     append html "<td>\${stringTableCondTxDecisionBelow}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
   append html "</tr>"
 
   incr prn;
@@ -1869,7 +2008,6 @@ set comment {
 }
 
 # ACCELERATION_TRANSCEIVER
-# Introduced with the HmIP-SAM (1612)
 proc getAccelerationTransceiver {chn p descr} {
 
   upvar $p ps
@@ -2027,9 +2165,6 @@ proc getClimateControlFloorDirectTransmitter {chn p descr} {
 
   set html ""
 
-  set hlpBoxWidth 450
-  set hlpBoxHeight 100
-
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
 
   set param COOLING_DISABLE
@@ -2083,7 +2218,7 @@ proc getClimateControlFloorDirectTransmitter {chn p descr} {
   append html "<tr>"
     append html "<td>\${stringTableHumidityLimitDisable}</td>"
     option OPTION_DISABLE_ENABLE
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
   append html "</tr>"
 
   incr prn
@@ -2373,16 +2508,18 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
     incr prn
     append html "<tr id=\"decisionVal_$chn\" class=\"hidden\">"
       append html "<td>\${stringTableCondValuePassageDetectionRight}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
     append html "</tr>"
   }
+
+
 
   set param COND_TX_DECISION_BELOW
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"decisionVal_$chn\" class=\"hidden\">"
       append html "<td>\${stringTableCondValuePassageDetectionLeft}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
     append html "</tr>"
   }
 
@@ -2420,24 +2557,25 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
     incr prn
     append html "<tr><td>"
       array_clear options
-      set options(0) "\${optionInactiv}"
-      set options(1) "\${optionPassageCounterDetectionLR}"
-      set options(2) "\${optionPassageCounterDetectionL}"
-      set options(3) "\${optionPassageCounterDetectionR}"
-      set options(4) "\${optionPassageCounterDeltaLR}"
-      set options(5) "\${optionPassageCounterDeltaL}"
-      set options(6) "\${optionPassageCounterDeltaR}"
-      append html "<tr><td>\${stringTablePassageDetectorCounterTransmitterChannelOperationMode}</td><td>"
-      append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param _onchange=\"showOpModesValues(this.value,$chn)\"]
-    append html "</tr></td>"
+      set options(0) "1 - \${optionInactiv}"
+      set options(1) "2 - \${optionPassageCounterDetectionLR}"
+      set options(2) "3 - \${optionPassageCounterDetectionL}"
+      set options(3) "4 - \${optionPassageCounterDetectionR}"
+      set options(4) "5 - \${optionPassageCounterDeltaLR}"
+      set options(5) "6 - \${optionPassageCounterDeltaL}"
+      set options(6) "7 - \${optionPassageCounterDeltaR}"
+      append html "<tr>"
+        append html "<td>\${stringTablePassageDetectorCounterTransmitterChannelOperationMode}</td>"
+        append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"showOpModesValues(this.value,$chn)\"]&nbsp;[getHelpIcon SPDR_CHANNEL_MODE]</td>"
+      append html "</tr>"
   }
 
   set param COND_TX_DECISION_ABOVE
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxDecisionAbove_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondTxDecisionPassageRL}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td id=\"condTxDecisionAboveDescr_$chn\"></td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
     append html "</tr>"
   }
 
@@ -2445,19 +2583,20 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxDecisionBelow_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondTxDecisionPassageLR}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td id=\"condTxDecisionBelowDescr_$chn\"></td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
     append html "</tr>"
   }
 
-  append html "[getHorizontalLine]"
-  append html "<tr><td colspan=\"2\">\${numberOfPassesBeforeSendingDecisionVal}</td></tr>"
+  append html "[getHorizontalLine id=\"condTxHorizontalLine_$chn\"]"
+  append html "<tr id=\"condTxThresholdHeaderA_$chn\"><td colspan=\"2\">\${numberOfPassesBeforeSendingDecisionVal}</td></tr>"
+  append html "<tr id=\"condTxThresholdHeaderB_$chn\"><td colspan=\"2\">\${deltaOfPassesBeforeSendingDecisionVal}</td></tr>"
 
   set param COND_TX_THRESHOLD_HI
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxThresholdHi_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondThresholdPassageRL}</td>"
+      append html "<td id=\"condTxThresholdDescrHi_$chn\"></td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2466,7 +2605,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr id=\"condTxThresholdLo_$chn\" class=\"_hidden\">"
-      append html "<td>\${stringTableCondThresholdPassageLR}</td>"
+      append html "<td id=\"condTxThresholdDescrLo_$chn\"></td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -2474,60 +2613,157 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   append html "<script type=\"text/javascript\">"
     append html "showOpModesValues = function(value, chn) {"
       append html "var opModeElems = jQuery(\"\[name='chnOpMode_\"+chn +\"'\]\");"
-      append html "var condTxDecisionAboveElm = jQuery(\"#condTxDecisionAbove_\"+chn),"
+      append html "var condTxDecisionHeaderA = jQuery(\"#condTxThresholdHeaderA_\"+chn),"
+      append html "condTxDecisionHeaderB = jQuery(\"#condTxThresholdHeaderB_\"+chn),"
+      append html "condTxDecisionAboveElm = jQuery(\"#condTxDecisionAbove_\"+chn),"
+      append html "condTxDecisionAboveDescrElm = jQuery(\"#condTxDecisionAboveDescr_\"+chn),"
       append html "condTxDecisionBelowElm = jQuery(\"#condTxDecisionBelow_\"+chn),"
+      append html "condTxDecisionBelowDescrElm = jQuery(\"#condTxDecisionBelowDescr_\"+chn),"
       append html "condTxThresholdHiElm = jQuery(\"#condTxThresholdHi_\"+chn),"
-      append html "condTxThresholdLoElm = jQuery(\"#condTxThresholdLo_\"+chn);"
+      append html "condTxThresholdLoElm = jQuery(\"#condTxThresholdLo_\"+chn),"
+      append html "condTxHorizontalLineElm = jQuery(\"#condTxHorizontalLine_\"+chn),"
+      append html "condTxThresholdHiDescrElm = jQuery(\"#condTxThresholdDescrHi_\"+chn),"
+      append html "condTxThresholdLoDescrElm = jQuery(\"#condTxThresholdDescrLo_\"+chn);"
 
       append html "condTxDecisionAboveElm.hide();"
       append html "condTxDecisionBelowElm.hide();"
+      append html "condTxDecisionHeaderA.hide();"
+      append html "condTxDecisionHeaderB.hide();"
       append html "condTxThresholdHiElm.hide();"
       append html "condTxThresholdLoElm.hide();"
+      append html "condTxHorizontalLineElm.hide();"
 
       append html "switch (parseInt(value)) {"
         append html "case 1: {"
+          append html "condTxDecisionAboveDescrElm.html(translateKey('stringTableCondTxDecisionPassageRL_A'));"
+          append html "condTxDecisionBelowDescrElm.html(translateKey('stringTableCondTxDecisionPassageLR_A'));"
+          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_A'));"
+          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_A'));"
           append html "condTxDecisionAboveElm.show();"
           append html "condTxDecisionBelowElm.show();"
+          append html "condTxDecisionHeaderA.show();"
           append html "condTxThresholdHiElm.show();"
           append html "condTxThresholdLoElm.show();"
+          append html "condTxHorizontalLineElm.show();"
+          append html "jQuery(\"#content\").animate({scrollTop: 600},1000);"
           append html "break;"
         append html "}"
         append html "case 2: {"
+          append html "condTxDecisionAboveDescrElm.html(translateKey('stringTableCondTxDecisionPassageRL_A'));"
+          append html "condTxDecisionBelowDescrElm.html(translateKey('stringTableCondTxDecisionPassageLR_A'));"
+          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_A'));"
+          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_A'));"
           append html "condTxDecisionAboveElm.show();"
+          append html "condTxDecisionHeaderA.show();"
           append html "condTxThresholdHiElm.show();"
+          append html "condTxThresholdLoElm.hide();"
+          append html "condTxHorizontalLineElm.show();"
+          append html "jQuery(\"#content\").animate({scrollTop: 600},1000);"
           append html "break;"
         append html "}"
         append html "case 3: {"
+          append html "condTxDecisionAboveDescrElm.html(translateKey('stringTableCondTxDecisionPassageRL_A'));"
+          append html "condTxDecisionBelowDescrElm.html(translateKey('stringTableCondTxDecisionPassageLR_A'));"
+          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_A'));"
+          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_A'));"
           append html "condTxDecisionBelowElm.show();"
+          append html "condTxDecisionHeaderA.show();"
+          append html "condTxThresholdHiElm.hide();"
           append html "condTxThresholdLoElm.show();"
+          append html "condTxHorizontalLineElm.show();"
+          append html "jQuery(\"#content\").animate({scrollTop: 600},1000);"
           append html "break;"
         append html "}"
         append html "case 4: {"
+          append html "condTxDecisionAboveDescrElm.html(translateKey('stringTableCondTxDecisionPassageRL_B'));"
+          append html "condTxDecisionBelowDescrElm.html(translateKey('stringTableCondTxDecisionPassageLR_B'));"
+          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_B'));"
+          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_B'));"
           append html "condTxDecisionAboveElm.show();"
           append html "condTxDecisionBelowElm.show();"
+          append html "condTxDecisionHeaderB.show();"
           append html "condTxThresholdHiElm.show();"
           append html "condTxThresholdLoElm.show();"
+          append html "condTxHorizontalLineElm.show();"
+          append html "jQuery(\"#content\").animate({scrollTop: 600},1000);"
           append html "break;"
         append html "}"
         append html "case 5: {"
+          append html "condTxDecisionAboveDescrElm.html(translateKey('stringTableCondTxDecisionPassageRL_B'));"
+          append html "condTxDecisionBelowDescrElm.html(translateKey('stringTableCondTxDecisionPassageLR_B'));"
+          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_B'));"
+          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_B'));"
           append html "condTxDecisionAboveElm.show();"
+          append html "condTxDecisionBelowElm.show();"
+          append html "condTxDecisionHeaderB.show();"
           append html "condTxThresholdHiElm.show();"
+          append html "condTxThresholdLoElm.show();"
+          append html "condTxHorizontalLineElm.show();"
+          append html "jQuery(\"#content\").animate({scrollTop: 600},1000);"
           append html "break;"
         append html "}"
         append html "case 6: {"
+          append html "condTxDecisionAboveDescrElm.html(translateKey('stringTableCondTxDecisionPassageRL_B'));"
+          append html "condTxDecisionBelowDescrElm.html(translateKey('stringTableCondTxDecisionPassageLR_B'));"
+          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_B'));"
+          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_B'));"
+          append html "condTxDecisionAboveElm.show();"
           append html "condTxDecisionBelowElm.show();"
+          append html "condTxDecisionHeaderB.show();"
+          append html "condTxThresholdHiElm.show();"
           append html "condTxThresholdLoElm.show();"
+          append html "condTxHorizontalLineElm.show();"
+          append html "jQuery(\"#content\").animate({scrollTop: 600},1000);"
           append html "break;"
         append html "}"
       append html "}"
 
     append html "};"
-   # append html "showOpModesValues(jQuery(\"#separate_$CHANNEL\_1\").val(), $chn);"
+    append html "showOpModesValues(jQuery(\"#separate_$CHANNEL\_1\").val(), $chn);"
   append html "</script>"
 
   return $html
 }
 
-proc getNoParamatersToSet {} {
-  return "<tr><td class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"
+proc getStateResetReceiver {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set prn 0
+  set html ""
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
+
+  incr prn
+  append html "<tr>"
+  append html "<td>\${stringTableBlockingPeriod}</td>"
+  append html [getComboBox $chn $prn "$specialID" "delayShort"]
+  append html "<td>[getHelpIcon BLOCKING_PERIOD]</td>"
+  append html "</tr>"
+
+  set param BLOCKING_PERIOD_UNIT
+  append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+  incr prn
+  set param BLOCKING_PERIOD_VALUE
+  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+  append html "<td>\${stringTableBlockingPeriodValue}</td>"
+
+  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+  append html "</tr>"
+  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  return $html
+}
+
+proc getNoParametersToSet {} {
+  set html "<tr><td name=\"noParamElm\" class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"
+  # center content
+  append html "<script type=\"text/javascript\">window.setTimeout(function(){jQuery(\"\[name='noParamElm'\]\").parent().parent().parent().width(\"100%\");},100);</script>"
+  return $html
 }

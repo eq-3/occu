@@ -5208,6 +5208,49 @@ jsonrpc_notify = function(url, method, params)
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send(Object.toJSON({"version": "1.1", "method": method, "params": params}));
 };
+function showSecurityDialog() {
+
+  var fileSecHint = "/etc/config/userAckSecurityHint",
+  result = homematic('CCU.existsFile', {'file': fileSecHint});
+
+  if(! result) {
+
+    var lang = getLang();
+
+    var url = "/pages/msg/securityFirstStart_"+lang+".htm";
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(data) {
+      //new FirstSecurityDialog(translateKey("thSafetyNote"), translateKey("dialogSecurityFirstStart"), function (action) {
+      var dlg = new FirstSecurityDialog(translateKey("thSafetyNote"), data, function (action) {
+        /*
+         action can be
+         0 - user selected NO
+         1 - user selected YES
+         */
+        if (action == 1) {
+          // userAckSecurityHint doesn't exist
+          homematic("CCU.setSecurityHint");
+          WebUI.resize();
+          jQuery(".Layer0").show();
+          WebUI.enter(StartPage);
+        }
+      }, "html");
+    });
+
+    req.fail(function(data) {
+      conInfo("Security  not available");
+    });
+
+
+
+  }
+};
+
 /**
  * drag.js
  * Drag & Drop
@@ -5438,13 +5481,12 @@ WebUI = Singleton.create({
     iseRefrTimer = 0;
     
    $("body").innerHTML = "";
-  
     // Dummy-Element
     var dummyElement = document.createElement("div");
     dummyElement.id  = "dummy";
     Element.setStyle(dummyElement, {display:"none"});
     $("body").appendChild(dummyElement);
-  
+
     // Globale Werte (SessionId)
     var globalValues = document.createElement("div");
     globalValues.id = "global_values";
@@ -5459,7 +5501,7 @@ WebUI = Singleton.create({
     globalValuesForm.appendChild(globalValuesSid);
     globalValues.appendChild(globalValuesForm);
     $("body").appendChild(globalValues);
-    
+
     // picDiv: Vergrößerte Bild von HomeMatic Geräten und Kanälen
     var picDiv = document.createElement("div");
     picDiv.id  = "picDiv";
@@ -5493,7 +5535,7 @@ WebUI = Singleton.create({
       display:         "none"
     });
     $("body").appendChild(trLayer);
-    
+
     var centerBox = document.createElement("div");
     centerBox.id = "centerbox";
     Element.setStyle(centerBox, {
@@ -5540,7 +5582,7 @@ WebUI = Singleton.create({
      display:  "none"
     });
     $("body").appendChild(centerBox2);
-    
+
     // Elemente für den Seiteninhalt
     Layer.init();
     var layer0 = document.createElement("div");
@@ -5576,7 +5618,9 @@ WebUI = Singleton.create({
     Element.setStyle(canvas, {display:"none"});
     $("body").appendChild(canvas);
 
-    HeaderBar.load();
+
+    jQuery(".Layer0").hide();
+     HeaderBar.load();
 
      if (!forceUpdate) {
        jQuery("#AlarmServiceMsg").show();
@@ -5585,10 +5629,18 @@ WebUI = Singleton.create({
 
 //    MainMenu.show();
 //    mainMenu = createMainMenu($("menubar"));
-    $("content").style.cursor = "default";      
-    WebUI.resize();
-    WebUI.enter(StartPage);   
+    $("content").style.cursor = "default";
 
+    var fileSecHint = "/etc/config/userAckSecurityHint",
+    result = homematic('CCU.existsFile', {'file': fileSecHint});
+
+    if (result) {
+      WebUI.resize();
+      jQuery(".Layer0").show();
+      WebUI.enter(StartPage);
+    } else {
+      showSecurityDialog();
+    }
     if (PLATFORM == 'Central') {
       regaMonitor = new ReGaMonitor();
       InterfaceMonitor.start();
@@ -9495,6 +9547,146 @@ EulaDialog = Class.create({
     noButton.appendChild(document.createTextNode(translateKey('dialogEulaBtnCancel')));
     noButton.onclick = function() { _this_.no(); };
     footer.appendChild(noButton);
+    
+    dialog.appendChild(footer);
+    
+    this.m_layer.appendChild(dialog);
+    
+    Layer.add(this.m_layer);
+
+    if (jQuery(".EulaDialogContentWrapper").height() >= 400) {
+      jQuery(".EulaDialogContentWrapper").css("height", 400);
+      jQuery(".EulaDialogContentWrapper").css("overflow", "scroll");
+    }
+
+    //AG sorgt dafür, daß die Dialoghöhe sich dynamisch dem Content anpasst.
+    jQuery(".EulaDialog").css("height", jQuery(".EulaDialogContentWrapper").height() + 108);
+    jQuery(".EulaDialogFooter").css("top", jQuery(".EulaDialogContentWrapper").height() + 26);
+
+    jQuery("#yesBtn").hide();
+    this.centerDialog();
+
+
+
+  },
+    
+  close: function(result)
+  {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) { this.m_callback(result); }
+  },
+  
+  yes: function()
+  {
+    this.close(EulaDialog.RESULT_YES);
+  },
+  
+  no: function()
+  {
+    this.close(EulaDialog.RESULT_NO);
+  },
+
+  centerDialog: function() {
+    var dialog = jQuery(".EulaDialog"),
+    top = ((jQuery(".EulaDialogLayer").height() / 2) - (jQuery(dialog).height() / 2));
+    jQuery(dialog).css({"top":top, "margin-top": ""});
+  }
+
+});
+
+EulaDialog.RESULT_NO = 0;
+EulaDialog.RESULT_YES = 1;
+/**
+ * firstsecuritydialog.js
+ **/
+ 
+
+FirstSecurityDialog = Class.create({
+ 
+  initialize: function(title, content, callback, contentType)
+  {
+    var _this_ = this;
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "EulaDialogLayer"; 
+
+    var dialog = document.createElement("div");
+    dialog.className = "EulaDialog";
+    
+    var titleElement = document.createElement("div");
+    titleElement.className = "EulaDialogTitle";
+    titleElement.appendChild(document.createTextNode(title));
+    titleElement.onmousedown = function(event) { new Drag(this.parentNode, event); };
+    dialog.appendChild(titleElement);
+    
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "EulaDialogContentWrapper";
+    var contentElement = document.createElement("div");
+    contentElement.className = "EulaDialogContent";
+
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+    
+    dialog.appendChild(contentWrapper);
+
+    var pwdElement = document.createElement("div");
+    pwdElement.className = "EulaDialogContent";
+    pwdElement.id = "pwdLine";
+    pwdElement.style = "visibility:hidden; text-align:center";
+    pwdElement.appendChild(document.createTextNode(translateKey("lblAttentionNoPasswd")));
+    pwdElement.innerHTML = translateKey("lblAttentionNoPasswd");
+    contentWrapper.appendChild(pwdElement);
+
+    var pwd = homematic('User.getUserPWD', {'userID': userId}, function(result) {
+     if ((result == "") || (result == null)) {
+       jQuery("#pwdLine").css("visibility","visible");
+     }
+    });
+
+    var footer = document.createElement("div");
+    footer.className= "EulaDialogFooter";
+
+    var chkBox = document.createElement("div");
+    chkBox.className = "EulaDialog_checkBox";
+
+    var yesCheckBox = document.createElement("input");
+    yesCheckBox.type = "checkBox";
+    yesCheckBox.id = "eulaReadId";
+    chkBox.appendChild(yesCheckBox);
+
+    chkBox.appendChild(document.createTextNode(translateKey('dialogLblAckSecurityHint')));
+
+    yesCheckBox.onchange = function() {
+      if (jQuery(this).is(":checked")) {
+        jQuery("#yesBtn").show();
+      } else {
+        jQuery("#yesBtn").hide();
+      }
+    };
+
+    footer.appendChild(chkBox);
+
+    var yesButton = document.createElement("div");
+    yesButton.className = "EulaDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.id = "yesBtn";
+    yesButton.appendChild(document.createTextNode(translateKey('btnNext')));
+    yesButton.onclick = function() { _this_.yes(); };
+    footer.appendChild(yesButton);
+
+
+    //var noButton = document.createElement("div");
+    //noButton.className = "EulaDialog_noButton borderRadius5px colorGradient50px";
+    //noButton.appendChild(document.createTextNode(translateKey('dialogEulaBtnCancel')));
+    //noButton.onclick = function() { _this_.no(); };
+    //footer.appendChild(noButton);
     
     dialog.appendChild(footer);
     
@@ -29035,7 +29227,7 @@ iseDigitalState.prototype = {
 /**
  * @class
  **/
-iseButtonsShutter= Class.create();
+iseButtonsShutter = Class.create();
 
 iseButtonsShutter.prototype = {
   /*
@@ -29297,7 +29489,9 @@ iseButtonsJalousie = Class.create(iseButtonsShutter, {
 
 iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
   initHmIPJalousieShutter: function() {
-    this.initState = this.opts.levelValue;
+
+    // When the user is no expert the first virtual channel displays the value of the hidden real channel
+    this.initState = (this.opts.easyLinkMode) ? parseInt(this.opts.levelRealChannel * 100) : this.opts.levelValue;
 
     this.Perc.value = this.initState;
     this.shutter.setValue(this.initState);
@@ -29306,13 +29500,15 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
     if (this.hasSlats) {
       this.sliderInfoElm = jQuery("#infoSliderPos" + this.id);
       this.sliderElm = jQuery("#slider" + this.id);
-      this.levelSlats = this.opts.levelSlatsValue;
-      this.levelReal = this.opts.levelRealChannel;
 
+      // When the user is no expert the first virtual channel displays the value of the hidden real channel
+      this.levelSlats = (this.opts.easyLinkMode) ? parseInt(this.opts.levelRealChannelSlatsValue * 100) : this.opts.levelSlatsValue;
+
+      this.levelReal = this.opts.levelRealChannel;
       this.initSliderInfoElm();
       this.initSlider();
-      this.sliderElm.slider('value', this.opts.levelSlatsValue);
-      this.sliderInfoElm.val(this.opts.levelSlatsValue);
+      this.sliderElm.slider('value', this.levelSlats);
+      this.sliderInfoElm.val(this.levelSlats);
     }
   },
 

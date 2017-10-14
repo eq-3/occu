@@ -247,7 +247,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureMinimum}</td>"
     append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
+    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
     append HTML_PARAMS(separate_1) "</script>"
 
     # right
@@ -263,7 +263,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "</tr>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
+    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
     append HTML_PARAMS(separate_1) "</script>"
 
     #left
