@@ -2,6 +2,47 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-09-23 Jens Maus <mail@jens-maus.de>
+
+  * modified ToString(p) output for floating point values to be limited to the
+    documented maximum precision of 15 digits. Otherwise an output of a float
+    with higher precision might lead to some confusion.
+  * modified floating point comparison epsilon to DBL_EPSILON to be consistent
+    with the documented floating point precision (15 digits).
+
+2017-09-22 Jens Maus <mail@jens-maus.de>
+
+  * modified == and < comparison operators to use an epsilon-based comparison
+    if applied on a float value comparison. This should make script-based
+    comparisons compatible to the same way webui-based programs perform their
+    comparisons.
+  * modified .Trunc() to output the same truncated float value like
+    .ToInteger(). Only if Trunc(p) is used with an additional parameter p
+    the float value will be truncated to the p-th digit based on the
+    real float value.
+  * integrated an additional parameter for .ToInteger(p) when being used on
+    float values. If specified, the truncation operation will be based on
+    the result of ToString(p) with the precision p.
+  * modified .ToInteger() to truncate a float value based on the same rounding
+    operation like .ToString(). This should make uses of x.ToString().ToInteger()
+    consistent with direct uses of x.ToInteger() again.
+  * modified ToString() to output floating point values rounded to the sixth
+    digit again.
+
+2017-09-20 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where ToString(p) on an empty string delivered a wrong output.
+  * fixed bug where value list and binary-type system variables couldn't be
+    set from programs anymore.
+  * fixed bug where char-based system variables couldn't be emptied anymore.
+
+2017-09-16 Jens Maus <mail@jens-maus.de>
+
+  * fixed another bug with using elseif() which resulted in ScriptRuntimeError
+    outputs even thought all conditions where checked and executed correctly.
+
+#### BETA20-2017-09-13 (330c383) Release ####################################
+
 2017-09-11 Jens Maus <mail@jens-maus.de>
 
   * fixed a bug in the web request response generation which supplied invalid
@@ -155,8 +196,6 @@ ReGaHss ChangeLog
 
 2017-06-01 Jens Maus <mail@jens-maus.de>
 
-  * stable-2.29.x: reverted opcode overlapping optimizations.
-  * stable-2.29.x: reverted strict foreach()/while() expression checking.
   * added some verbose error output to more easily identify incorrect uses
     of foreach()/while() expressions.
 
@@ -245,6 +284,11 @@ ReGaHss ChangeLog
 
 2017-05-17 Jens Maus <mail@jens-maus.de>
 
+  * fixed a bug where Type() and VarType() was not available for all
+    possible variable types. Now 'var', 'idarray' and 'object' can also
+    be queried for their types. Note, however, that for actual objects
+    only VarType() will be unique since Type() will then return the
+    actual object type instead of the variable type name.
   * fixed a bug in while() and foreach() not raising any error if the
     specified condition isn't valid.
   * increased maximum number of iterations for foreach()/while() to 50000
