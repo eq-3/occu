@@ -2,6 +2,23 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-11-01 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where on a DST switching date the internal time module crashed
+    ReGaHss because internal time calculation routines couldn't deal with
+    DST borders.
+
+2017-10-11 Jens Maus <mail@jens-maus.de>
+
+  * added warning output if the maximum number of iterations for while() and
+    foreach() use has been reached. This should make it easier to reveal
+    situations where while()/foreach() uses show strange results because of
+    the max iteration limitation. Also increased the maximum iterations to
+    500000 because this also only takes a few seconds to be processed and
+    shouldn't block the ReGa too long.
+
+#### BETA21-2017-10-01 (469725b) Release ####################################
+
 2017-09-23 Jens Maus <mail@jens-maus.de>
 
   * modified ToString(p) output for floating point values to be limited to the
