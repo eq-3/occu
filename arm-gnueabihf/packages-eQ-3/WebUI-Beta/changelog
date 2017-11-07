@@ -2,6 +2,18 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-11-06 Jens Maus <mail@jens-maus.de>
+
+  * fixed more DST related bugs in the time module which could result in
+    various different issues at DST borders.
+
+2017-11-03 Jens Maus <mail@jens-maus.de>
+
+  * modified error output to be more verbose when assigning incompatible 
+    data to a system variable of a different type.
+
+#### BETA22-2017-11-03 (9f7bc6c) Release ####################################
+
 2017-11-01 Jens Maus <mail@jens-maus.de>
 
   * fixed bug where on a DST switching date the internal time module crashed
