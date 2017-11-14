@@ -2,6 +2,20 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-11-14 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where deleting an object didn't remove it from the shared
+    user objects list. Also added an automatic cleanup routine upon loading
+    the regadom which will remove all invalid object ids in the shared user
+    objects list.
+
+2017-11-09 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where using ToTime() on a time object and Filename() on a xml
+    object returned incorrect results.
+
+#### BETA23-2017-11-07 (705d243) Release ####################################
+
 2017-11-06 Jens Maus <mail@jens-maus.de>
 
   * fixed more DST related bugs in the time module which could result in
