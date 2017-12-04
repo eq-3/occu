@@ -11,3 +11,10 @@
 "subset_1" : "hochgefahren",
 "subset_2" : "heruntergefahren",
 "subset_3" : "hoch- / heruntergefahren im Wechsel",
+
+"subset_4" : "rechts > links ein / links > rechts aus",
+"subset_5" : "rechts > links aus / links > rechts ein",
+
+"subset_6" : "rechts -> links",
+"subset_7" : "links -> rechts",
+"subset_8" : "links -> rechts oder rechts -> links",

@@ -153,7 +153,15 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         append HTML_PARAMS(separate_1) "<span class=\"j_translate\">$PROFILE_PNAME(H)</span>"
       append HTML_PARAMS(separate_1) "</td>"
       append HTML_PARAMS(separate_1) "<td>"
-        append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $pref]&nbsp;[getMinMaxValueDescr $param]"
+
+        array_clear param_descr
+        array set param_descr $psDescr($param)
+        set minValue [format {%1.0f} $param_descr(MIN)]
+        set maxValue [expr [format {%1.0f} $param_descr(MAX)] / 10]
+
+        append HTML_PARAMS(separate_1) "<input id=\"_COND_TX_THRESHOLD_LO\_$pref\" size=\"5\" onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1); setCondLoValue($pref,this.value);\" >&nbsp;($minValue - $maxValue)"
+        append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $pref class=\"hidden\"]"
+        append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">window.setTimeout(function()\{jQuery(\"#_COND_TX_THRESHOLD_LO\_$pref\").val(parseInt($ps($param))/ 10);\},200);</script>"
 
         if {! $xmlCatchError} {
           set btnTxt "\${btnTakeCurrentBrightness}&nbsp;($brightness)"
@@ -191,8 +199,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     append HTML_PARAMS(separate_1) "\};"
 
+    append HTML_PARAMS(separate_1) "setCondLoValue = function(pref, value) \{"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+pref).val(parseInt(value) * 10);"
+    append HTML_PARAMS(separate_1) "\};"
+
     append HTML_PARAMS(separate_1) "setBrightness = function(pref) \{"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+pref).val(parseInt($brightness));"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+pref).val(parseInt($brightness) * 10);"
+      append HTML_PARAMS(separate_1) "jQuery(\"#_COND_TX_THRESHOLD_LO_\"+pref).val(parseInt($brightness));"
     append HTML_PARAMS(separate_1) "\};"
 
 

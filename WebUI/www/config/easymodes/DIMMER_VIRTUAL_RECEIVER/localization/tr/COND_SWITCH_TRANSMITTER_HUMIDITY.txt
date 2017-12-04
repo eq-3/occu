@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">*tr Bei Erreichen der gew&auml;hlten Feuchtigkeitsschwelle wird der Dimmer f&uuml;r die festgelegte Zeit in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). Ist eine Verz&oumlgerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_2" : "<span class=\"translated\">*tr Bei Erreichen der gew&auml;hlten Feuchtigkeitsschwelle wird der Dimmer f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">*tr Bei Erreichen der gew&auml;hlten Feuchtigkeitsschwelle wird der Dimmer f&uuml;r die festgelegte Zeit ausgeschaltet.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">*tr Das Profil ist nicht aktiv</span>",
+
+"helpBtnSenderConf" : "<span class=\"translated\">*tr Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Feuchtigkeitssensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+
+"switchPoint" : "*tr Schalten bei",
+"subset_1": "*tr Erreichen der oberen Feuchtigkeitsschwelle",
+"subset_2": "*tr Unterschreiten der unteren Feuchtigkeitsschwelle",

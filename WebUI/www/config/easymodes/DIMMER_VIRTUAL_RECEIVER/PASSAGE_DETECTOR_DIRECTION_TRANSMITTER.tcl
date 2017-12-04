@@ -241,8 +241,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
-  # OFF_TIME not in use
-  # append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
+  # OFF_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
 
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_LEVEL}</td><td>"

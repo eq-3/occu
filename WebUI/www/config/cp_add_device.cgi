@@ -28,10 +28,33 @@ proc getButtonWired {class onclick title} {
   return $html
 }
 
-proc putSectionBidCosRF {} {
-  set html ""
+proc initJavascript {} {
+  cgi_javascript {
+    puts {
+      showSection = function(section){
+        var thisSection = jQuery("body").data(section);
+        if(thisSection) {
+          jQuery('#section'+section).show();
+        } else {
+          if (typeof thisSection == "undefined") {
+            homematic('Interface.isPresent', {"interface": section}, function(result, error) {
+              if (result == true)
+              {
+                jQuery('#section'+section).show();
+                dlgPopup.readaptSize();
+              }
+            });
+          }
+        }
+      }
+    }
+  }
+}
 
-    append html "<tr class='CLASS21202'>"
+proc putSectionBidCosRF {} {
+
+  set html ""
+    append html "<tr id='sectionBidCos-RF' class='CLASS21202 hidden'>"
       append html "<td class='CLASS21207'>"
         #append html "\${dialogNewDevicesTDBidCosRF}"
         append html "<img src='/ise/img/homematic90Deg.png'>"
@@ -91,12 +114,15 @@ proc putSectionBidCosRF {} {
         append html "</table>"
       append html "</td>"
     append html "</tr>"
+    append html "<script type='text/javascript'>"
+      append html "showSection('BidCos-RF');"
+    append html "</script>"
   return $html
 }
 
 proc putSectionWiredRF {} {
   set html ""
-  append html "<tr class='CLASS21202'>"
+  append html "<tr id='sectionBidCos-Wired' class='CLASS21202 hidden'>"
 
     append html "<td class='CLASS21212'>"
       append html "<img src='/ise/img/homematicWired90Deg.png'>"
@@ -123,13 +149,18 @@ proc putSectionWiredRF {} {
     append html "</td>"
 
   append html "</tr>"
+
+  append html "<script type='text/javascript'>"
+    append html "showSection('BidCos-Wired');"
+  append html "</script>"
+
 }
 
 # Creates the HmIP Section
 proc putSectionHMIP {} {
   set html ""
 
-  append html "<tr class='CLASS21202'>"
+  append html "<tr id='sectionHmIP-RF' class='CLASS21202 hidden'>"
 
    append html "<td class='CLASS21207'>"
    #append html "HmIP"
@@ -149,7 +180,7 @@ proc putSectionHMIP {} {
         append html "<tr>"
           append html "<td class='CLASS21206'><div id='teachCounter' class='CLASS21215' style='width:100%;'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
           append html "<td>"
-          append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); rf_install_mode(false);hmip_install_mode()} \${dialogNewDevicesHmIPAddDeviceBtn}]
+          append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode()} \${dialogNewDevicesHmIPAddDeviceBtn}]
           append html "</td>"
         append html "</tr>"
       append html "</table>"
@@ -204,7 +235,7 @@ proc putSectionHMIP {} {
               append html "<tr>"
                 append html "<td><div id='teachCounterLocal' class='CLASS21215'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
                 append html "<td class='CLASS21209'>"
-                  append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); rf_install_mode(false);hmip_install_mode("local")} {${dialogNewDevicesHmIPAddDeviceBtn}${lblLocal}}]
+                  append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode("local")} {${dialogNewDevicesHmIPAddDeviceBtn}${lblLocal}}]
                 append html "</td>"
 
               append html "</tr>"
@@ -215,14 +246,11 @@ proc putSectionHMIP {} {
 
       append html "</table>"
     append html "</div>"
-
-
-
    append html "</td>"
   append html "</tr>"
 
   append html "<script type='text/javascript'>"
-
+    append html "showSection('HmIP-RF');"
   append html "</script>"
 
   return $html
@@ -241,6 +269,8 @@ proc action_put_page {} {
   }
 
 puts "<div class='CLASS21200 j_translate'>"
+
+  initJavascript
 
   puts "<table class='popupTable' border='1' style='table-layout:fixed; width:100%;'>"
     puts "<colgroup>"
@@ -288,6 +318,7 @@ puts "</div>"
   }
   puts ""
   cgi_javascript {
+
     puts "var url = \"$env(SCRIPT_NAME)?sid=\" + SessionId;"
     puts "var installTimerHmIP = 0;"
     puts {
@@ -390,16 +421,18 @@ puts "</div>"
       };
 
       hmip_install_mode_stop = function() {
-        homematic('Interface.setInstallModeHMIP',{
-          'installMode' : 'STOP',
-          'interface': 'HmIP-RF',
-          'on': 'false',
-          'time' : 0,
-          'address': '',
-          'key' : '',
-          'keymode' : ''
-          }
-        );
+         if(jQuery("body").data("HmIP-RF")) {
+          homematic('Interface.setInstallModeHMIP',{
+            'installMode' : 'STOP',
+            'interface': 'HmIP-RF',
+            'on': 'false',
+            'time' : 0,
+            'address': '',
+            'key' : '',
+            'keymode' : ''
+            }
+          );
+        }
       };
 
       hmip_install_mode_start = function(mode) {
@@ -439,6 +472,9 @@ puts "</div>"
       };
 
       hmip_install_mode = function(mode) {
+        if(jQuery("body").data("BidCos-RF")) {
+          rf_install_mode(false);
+        }
         if (installTimerHmIP > 0) {
           // Stop a running hmip install mode so the timer is set to 0
           homematic('Interface.setInstallModeHMIP',{
@@ -459,7 +495,9 @@ puts "</div>"
       };
 
       rf_install_mode = function(activate) {
-        hmip_install_mode_stop();
+        if (activate) {
+          hmip_install_mode_stop();
+        }
         var pb = "action=rf_install_mode";
         pb += "&activate="+activate;
         if(!activate && cp_adddev_updater)cp_adddev_updater.stop();
@@ -553,11 +591,15 @@ puts "</div>"
         rf_install_mode(false);
         hmip_install_mode_stop();
         PopupClose();
-        WebUI.enter(NewDeviceListPage);
+        WebUI.enter(NewDeviceListPage, {"fromTeachIn":true});
       }
       OnBack = function() {
-        rf_install_mode(false);
-        hmip_install_mode_stop();
+        if (jQuery("body").data("BidCos-RF")) {
+          rf_install_mode(false);
+        }
+        if (jQuery("body").data("HmIP-RF")) {
+          hmip_install_mode_stop();
+        }
         PopupClose();
       }
     }

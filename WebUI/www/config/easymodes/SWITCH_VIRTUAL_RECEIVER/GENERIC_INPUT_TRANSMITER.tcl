@@ -114,12 +114,12 @@ set PROFILE_2(UI_HINT)  2
 set PROFILE_3(LONG_COND_VALUE_HI)           150
 set PROFILE_3(LONG_COND_VALUE_LO)            50
 set PROFILE_3(LONG_CT_OFF)                    0
-set PROFILE_3(LONG_CT_OFFDELAY)               0
-set PROFILE_3(LONG_CT_ON)                     0
+set PROFILE_3(LONG_CT_OFFDELAY)               {0 2}
+set PROFILE_3(LONG_CT_ON)                     {0 2}
 set PROFILE_3(LONG_CT_ONDELAY)                0
-set PROFILE_3(LONG_JT_OFF)                    1
+set PROFILE_3(LONG_JT_OFF)                    {1 3}
 set PROFILE_3(LONG_JT_OFFDELAY)               6
-set PROFILE_3(LONG_JT_ON)                     4
+set PROFILE_3(LONG_JT_ON)                     {4 6}
 set PROFILE_3(LONG_JT_ONDELAY)                3
 set PROFILE_3(LONG_MULTIEXECUTE)              0
 set PROFILE_3(LONG_OFFDELAY_TIME_BASE)        {0 range 0 - 7}
@@ -136,12 +136,12 @@ set PROFILE_3(LONG_PROFILE_ACTION_TYPE)       1
 set PROFILE_3(SHORT_COND_VALUE_HI)          150
 set PROFILE_3(SHORT_COND_VALUE_LO)           50
 set PROFILE_3(SHORT_CT_OFF)                   0
-set PROFILE_3(SHORT_CT_OFFDELAY)              0
-set PROFILE_3(SHORT_CT_ON)                    0
+set PROFILE_3(SHORT_CT_OFFDELAY)              {0 2}
+set PROFILE_3(SHORT_CT_ON)                    {0 2}
 set PROFILE_3(SHORT_CT_ONDELAY)               0
-set PROFILE_3(SHORT_JT_OFF)                   1
+set PROFILE_3(SHORT_JT_OFF)                   {1 3}
 set PROFILE_3(SHORT_JT_OFFDELAY)              6
-set PROFILE_3(SHORT_JT_ON)                    4
+set PROFILE_3(SHORT_JT_ON)                    {4 6}
 set PROFILE_3(SHORT_JT_ONDELAY)               3
 set PROFILE_3(SHORT_MULTIEXECUTE)             0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}

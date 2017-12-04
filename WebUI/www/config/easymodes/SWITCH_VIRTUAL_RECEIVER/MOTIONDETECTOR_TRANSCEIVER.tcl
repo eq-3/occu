@@ -20,12 +20,12 @@ set PROFILE_0(UI_TEMPLATE)    "Expertenprofil"
 set PROFILE_1(SHORT_COND_VALUE_HI) {150 range 0 - 255}
 set PROFILE_1(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 set PROFILE_1(SHORT_CT_OFF) 0
-set PROFILE_1(SHORT_CT_OFFDELAY) 0
-set PROFILE_1(SHORT_CT_ON) 0
+set PROFILE_1(SHORT_CT_OFFDELAY) {0 2}
+set PROFILE_1(SHORT_CT_ON) {0 2}
 set PROFILE_1(SHORT_CT_ONDELAY) 0
-set PROFILE_1(SHORT_JT_OFF) 1
+set PROFILE_1(SHORT_JT_OFF) {1 3}
 set PROFILE_1(SHORT_JT_OFFDELAY) 6
-set PROFILE_1(SHORT_JT_ON) 4
+set PROFILE_1(SHORT_JT_ON) {4 6}
 set PROFILE_1(SHORT_JT_ONDELAY) 3
 set PROFILE_1(SHORT_MULTIEXECUTE) {0 false}
 set PROFILE_1(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
@@ -103,7 +103,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
   
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
-  
+
+  if {($cur_profile == 1) && ($dev_descr_receiver(PARENT_TYPE) == "HmIP-WHS2")} {
+    set modifiedCondType  "{SHORT_CT_OFFDELAY {int 0}} {SHORT_CT_ON {int 0}}"
+    puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"
+    set ps(SHORT_CT_OFFDELAY) 0
+    set ps(SHORT_CT_ON) 0
+  }
+
   #global SUBSETS
   set name "x"
   set i 1

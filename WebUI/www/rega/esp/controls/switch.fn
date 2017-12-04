@@ -1,5 +1,13 @@
 function ::CreateBinaryActuator()
 {
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+  string chnLabel = ch.Label();
+
+  ! Determine the name of the interface
+  object oIface = dom.GetObject(cObj.Interface());
+  string sInterface = oIface.Name();
+
   object objState = cObj.DPByControl("SWITCH.STATE");
   if( objState )
   {
@@ -15,8 +23,7 @@ function ::CreateBinaryActuator()
     WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
 
     WriteLine("<script type='text/javascript'>");
-      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", " #system.GetVar("iStatusOnly")# ");");
-
+      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", "#system.GetVar("iStatusOnly")#", '"#chnAddress#"', '"#chnLabel#"', '"#sInterface#"');");
       Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlLblOff')).show();");
       Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlLblOn')).show();");
 

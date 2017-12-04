@@ -28,6 +28,7 @@ set deviceDescrScript {
     Write(" INTERFACE {"# interface.Name() # "}");
 !   Write(" DEVICE_TYPE {"# device.HssType() # "}");
     Write(" DEVICE_TYPE {"# device.Label() # "}");
+    Write(" READY_CONFIG {" # device.ReadyConfig() # "}");
 
     if (device.MetaData("operateGroupOnly") == null) {
       device.AddMetaData("operateGroupOnly", false);
@@ -174,6 +175,8 @@ foreach id $deviceIds {
 	append result ",\"interface\":[json_toString $device(INTERFACE)]"
 	append result ",\"type\":[json_toString $device(DEVICE_TYPE)]"
 	append result ",\"operateGroupOnly\":[json_toString $device(GROUP_ONLY)]"
+	append result ",\"isReady\":[json_toString $device(READY_CONFIG)]"
+
 
 #
 # channesl

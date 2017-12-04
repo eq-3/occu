@@ -11,3 +11,10 @@
 "subset_1" : "*tr hochgefahren",
 "subset_2" : "*tr heruntergefahren",
 "subset_3" : "*tr hoch- / heruntergefahren im Wechsel",
+
+"subset_4" : "*tr rechts > links ein / links > rechts aus",
+"subset_5" : "*tr rechts > links aus / links > rechts ein",
+
+"subset_6" : "*tr rechts -> links",
+"subset_7" : "*tr links -> rechts",
+"subset_8" : "*tr links -> rechts oder rechts -> links",

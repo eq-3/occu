@@ -9,8 +9,8 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1) "\${switch_toggle}"
 set PROFILES_MAP(2)  "\${switch_on_off}"
-set PROFILES_MAP(3) "\${change_signal_on}"
-set PROFILES_MAP(4) "\${change_signal_off}"
+set PROFILES_MAP(3) "\${switch_on}"
+set PROFILES_MAP(4) "\${switch_off}"
 set PROFILES_MAP(5)  "\${no_action}"
 
 
@@ -24,9 +24,9 @@ set PROFILE_1(SHORT_CT_OFF)      {0 range 0 - 5}
 set PROFILE_1(SHORT_CT_OFFDELAY)  {0 range 0 - 5}
 set PROFILE_1(SHORT_CT_ON)      {0 range 0 - 5}
 set PROFILE_1(SHORT_CT_ONDELAY)    {0 range 0 - 5}
-set PROFILE_1(SHORT_JT_OFF)       1
+set PROFILE_1(SHORT_JT_OFF)       {1 3}
 set PROFILE_1(SHORT_JT_OFFDELAY)  6
-set PROFILE_1(SHORT_JT_ON)        4
+set PROFILE_1(SHORT_JT_ON)        {4 6}
 set PROFILE_1(SHORT_JT_ONDELAY)   3
 set PROFILE_1(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
 set PROFILE_1(SHORT_OFFDELAY_TIME_FACTOR)     {0 range 0 - 31}
@@ -75,10 +75,10 @@ set PROFILE_3(SHORT_CT_OFF)                   {0 range 0 - 5}
 set PROFILE_3(SHORT_CT_OFFDELAY)              {0 range 0 - 5}
 set PROFILE_3(SHORT_CT_ON)                    {0 range 0 - 5}
 set PROFILE_3(SHORT_CT_ONDELAY)               {0 range 0 - 5}
-set PROFILE_3(SHORT_JT_OFF)                   1
+set PROFILE_3(SHORT_JT_OFF)                   {1 3}
 set PROFILE_3(SHORT_JT_OFFDELAY)              3
-set PROFILE_3(SHORT_JT_ON)                    0
-set PROFILE_3(SHORT_JT_ONDELAY)               0
+set PROFILE_3(SHORT_JT_ON)                    {0 3}
+set PROFILE_3(SHORT_JT_ONDELAY)               {0 3}
 set PROFILE_3(SHORT_MULTIEXECUTE)             0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE)       0
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR)     0
@@ -134,50 +134,50 @@ set PROFILE_5(UI_DESCRIPTION)  "Der Durchgangssensor ist au&szlig;er Betrieb."
 set PROFILE_5(UI_TEMPLATE)  $PROFILE_5(UI_DESCRIPTION)
 set PROFILE_5(UI_HINT)  5
 
-#set SUBSET_1(NAME)          "Offen-Ein/Zu-Aus"
+#set SUBSET_1(NAME)          Rechts/Links-Ein / Links/Rechts-Aus"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
-set SUBSET_1(SHORT_CT_OFF)      1
-set SUBSET_1(SHORT_CT_OFFDELAY)    1
-set SUBSET_1(SHORT_CT_ON)      4
-set SUBSET_1(SHORT_CT_ONDELAY)    4
+set SUBSET_1(SHORT_CT_OFF)      2
+set SUBSET_1(SHORT_CT_OFFDELAY)    2
+set SUBSET_1(SHORT_CT_ON)      0
+set SUBSET_1(SHORT_CT_ONDELAY)    0
 
 #set SUBSET_2(NAME)          "Offen-Aus/Zu-Ein"
 set SUBSET_2(NAME)          "\${subset_2}"
 set SUBSET_2(SUBSET_OPTION_VALUE)  2
-set SUBSET_2(SHORT_CT_OFF)      4
-set SUBSET_2(SHORT_CT_OFFDELAY)    4
-set SUBSET_2(SHORT_CT_ON)      1
-set SUBSET_2(SHORT_CT_ONDELAY)    1
+set SUBSET_2(SHORT_CT_OFF)      0
+set SUBSET_2(SHORT_CT_OFFDELAY)    0
+set SUBSET_2(SHORT_CT_ON)      2
+set SUBSET_2(SHORT_CT_ONDELAY)    2
 
 #set SUBSET_3(NAME)          "Oeffnen"
 set SUBSET_3(NAME)          "\${subset_3}"
 set SUBSET_3(SUBSET_OPTION_VALUE)  3
-set SUBSET_3(SHORT_CT_OFF)      1
-set SUBSET_3(SHORT_CT_OFFDELAY)    1
-set SUBSET_3(SHORT_CT_ON)      1
-set SUBSET_3(SHORT_CT_ONDELAY)    1
+set SUBSET_3(SHORT_CT_OFF)      2
+set SUBSET_3(SHORT_CT_OFFDELAY)    2
+set SUBSET_3(SHORT_CT_ON)      2
+set SUBSET_3(SHORT_CT_ONDELAY)    2
 
 #set SUBSET_4(NAME)          "Schliessen"
 set SUBSET_4(NAME)          "\${subset_4}"
 set SUBSET_4(SUBSET_OPTION_VALUE)  4
-set SUBSET_4(SHORT_CT_OFF)      4
-set SUBSET_4(SHORT_CT_OFFDELAY)    4
-set SUBSET_4(SHORT_CT_ON)      4
-set SUBSET_4(SHORT_CT_ONDELAY)    4
+set SUBSET_4(SHORT_CT_OFF)      0
+set SUBSET_4(SHORT_CT_OFFDELAY)    0
+set SUBSET_4(SHORT_CT_ON)      0
+set SUBSET_4(SHORT_CT_ONDELAY)    0
 
 
 #set SUBSET_5(NAME)          "Aendern"
 set SUBSET_5(NAME)          "\${subset_5}"
 set SUBSET_5(SUBSET_OPTION_VALUE)  5
-set SUBSET_5(SHORT_CT_OFF)      0
-set SUBSET_5(SHORT_CT_OFFDELAY)    0
-set SUBSET_5(SHORT_CT_ON)      0
-set SUBSET_5(SHORT_CT_ONDELAY)    0
+set SUBSET_5(SHORT_CT_OFF)      1
+set SUBSET_5(SHORT_CT_OFFDELAY)    1
+set SUBSET_5(SHORT_CT_ON)      1
+set SUBSET_5(SHORT_CT_ONDELAY)    1
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-  global iface_url receiver_address dev_descr_sender dev_descr_receiver
+  global iface_url sender_address receiver_address dev_descr_sender dev_descr_receiver
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
@@ -189,6 +189,17 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
 
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
+
+set comment {
+  if {($cur_profile == 1) && ($dev_descr_receiver(PARENT_TYPE) == "HmIP-WHS2")} {
+    set modifiedCondType  "{SHORT_CT_OFF {int 5}} {SHORT_CT_OFFDELAY {int 5}} {SHORT_CT_ON {int 5}} {SHORT_CT_ONDELAY {int 5}}"
+    puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"
+    set ps(SHORT_CT_OFF) 5
+    set ps(SHORT_CT_OFFDELAY) 5
+    set ps(SHORT_CT_ON) 5
+    set ps(SHORT_CT_ONDELAY) 5
+  }
+}
 
   #global SUBSETS
   set name "x"

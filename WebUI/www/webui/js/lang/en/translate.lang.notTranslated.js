@@ -1,90 +1,41 @@
 jQuery.extend(true,langJSON, {
   "en" : {
-    "stringTableValveMaximumPosition" :          "maximum valve opening position",
-    "stringTableRouterModuleEnabled" :           "Device serves as router",
-    "lblLocation" :                              "Place of residence",
-    "lblMode" :                                  "Mode",
-    "dialogSetWPModeTitle" :                     "Set mode",
-    "stringTableTimeBottomTopUnit" :             "Unit movement time",
-    "stringTableTimeTopBottomUnit" :             "Unit movement time",
-    "stringTableTimeSlatsUnit" :                 "Unit slat adjustment time",
-    "stringTableTimeBottomTopValue" :            "Value movement time",
-    "stringTableTimeTopBottomValue" :            "Value movement time",
-    "stringTableTimeSlatsValue" :                "Value slat adjustment time",
-    "stringTableSelfCalibrationResultTrue" :     "Teach-in procedure successful",
-    "stringTableSelfCalibrationResultFalse" :    "Calibration run not required",
-    "stringTableSelfCalibrationStart" :          "Start calibration run",
-    "stringTableSelfCalibrationStop" :           "End calibration run",
-    "lblAutoCalibrationActiv" :                  "Auto calibration active",
-    "stringTableBlindLevelOff" :                 "Moved down",
-    "stringTableBlindLevelOnDelay" :             "Up-delay",
-    "stringTableBlindLevelOn" :                  "Moved up",
-    "stringTableBlindLevelOffDelay" :            "Down-delay",
-    "stringTableWeekProgramChannelLocks" :       "Channels in auto mode",
-    "stringTableWeekProgramTargetChannelLocks" : "Channels for mode week program (binary)",
-    "stringTableWeekProgramTargetChannelLockManu" : "week program: Manually",
-    "stringTableWeekProgramTargetChannelLockAutoReset" : "week program: Auto with reset (reset without function)",
-    "stringTableWeekProgramTargetChannelLockAuto" : "week program: Auto without reset",
-    "statePresenceFalse" :                       "No presence detected",
-    "statePresenceTrue" :                        "Presence detected",
-    "presenceDetectionFalse" :                   "Presence detection not active",
-    "presenceDetectionTrue" :                    "Presence detection active",
-    "btnPresenceDetectionFalse" :                "Switch on presence detection",
-    "btnPresenceDetectionTrue" :                 "Switch off presence detection",
-    "btnResetPresence" :                         "Reset status",
-    "stringTableCurrentIllumination" :           "Unfiltered, current level of brightness",
-    "stringTablePresenceDetectionActiveFalse" :  "Presence detector not active",
-    "stringTablePresenceDetectionActiveTrue" :   "Presence detector active",
-    "stringTablePresenceDetectionStateFalse" :   "No presence detected",
-    "stringTablePresenceDetectionStateTrue" :    "Presence detected",
-    "stringTableResetPresence" :                 "Reset presence",
-    "stringTableShutterVirtualReceiverTitle" :   "Blind actuator",
-    "stringTableBlindVirtualReceiverTitle" :     "Shutter actuator",
-    "stringTablePresenceDetectorTitle" :         "Presence Sensor",
-    "lblTDRegaVersion" :                         "Logic tier<br/>version",
-
-    "lblTDReGaVersionHelp" :                     "Here you can specify which logic layer version of the CCU2 should be used. Select the version <b>'Standard'</b> to be able to use bug fixes in the time module as well as new features like mathematical operations in scripts. " +
-                                                 "<br/><br/>Select the version <b>'Community'</b> for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU2 software. " +
-                                                 "<br/><br/>If any problems have occurred after the update to the current CCU2 software has been performed, you can change back to the previous version by selecting <b>'Legacy'</b>." ,
-
-    "optionReGaNORMAL" :                         "Standard",
-    "optionReGaLEGACY" :                         "Legacy",
-    "optionReGaCOMMUNITY" :                      "Community",
-    "dialogRestart2ChanceReGaVersion" :          "For the change of the logic tier version to apply, the " +HMIdentifier.en.CCUShortName + " must be restarted.",
-    "dialogBtnPerformLaterRestart" :             "Later",
-    "stringTableBlindLevelUp" :                  "Shutter level moved up",
-    "stringTableBlindLevelDown" :                "Shutter level moved down",
-    "stringTableJalousieSlatsLevelUp" :          "Slat position moved up",
-    "stringTableJalousieSlatsLevelDown" :        "Slat position moved down",
-
-    "stringTableATCAdaptionInterval" : "Interval for temperature compensation of the sensors",
-    "stringTableATCMode" : "Temperature compensation of the sensors",
-    "stringTableSensorSensivity" : "Sensor sensitivity",
-
     "COMMENT" : "THIS is for the release C/2017",
 
-    "stringTableEventBlindTime" : "*en EVENT_BLINDTIME",
-    "stringTableEventBlindTimeBase" : "*en Einheit EVENT_BLINDTIME",
-    "stringTableBlindTimeValue" : "*en Wert EVENT_BLINDTIME",
+    "stringTableEventBlindTime" : "*en Zeitspanne, bis die n%E4chste Bewegung erkannt wird.",
+    "stringTableEventBlindTimeBase" : "*en Einheit der Zeitspanne",
+    "stringTableBlindTimeValue" : "*en Wert der Zeitspanne",
 
-    "stringTableEventTimeout" : "*en EVENT_TIMEOUT",
-    "stringTableEventTimeoutBase" : "*en Einheit EVENT_TIMEOUT",
-    "stringTableEventTimeoutValue" : "*en Wert EVENT_TIMEOUT",
+    "stringTableEventTimeout" :
+      "*en Zeitspanne, in der beide Sensoren ausgel%F6st haben m%FCssen,<br/>" +
+      "damit die Richtung bestimmt werden kann.",
 
     "stringTableCondValuePassageDetectionLeft" : "*en Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
     "stringTableCondValuePassageDetectionRight" : "*en Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
 
-    "stringTablePassageDetectionLeft" : "*en Durchgangserkennung Links",
-    "stringTablePassageDetectionRight" : "*en Durchgangserkennung Rechts",
+    "stringTablePassageDetectionLeft" : "*en Durchgangserkennung Links nach Rechts",
+    "stringTablePassageDetectionRight" : "*enDurchgangserkennung Rechts nach Links",
 
-    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "*en CHANNEL_OPERATION_MODE",
+    "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "*en Betriebsart",
 
-    "optionPassageCounterDetectionLR" : "*en optionPassageCounterDetectionLR",
-    "optionPassageCounterDetectionL" : "*en optionPassageCounterDetectionL",
-    "optionPassageCounterDetectionR" : "*en optionPassageCounterDetectionR",
-    "optionPassageCounterDeltaLR" : "*en optionPassageCounterDeltaLR",
-    "optionPassageCounterDeltaL" : "*en optionPassageCounterDeltaL",
-    "optionPassageCounterDeltaR" : "*en optionPassageCounterDeltaR",
+    "optionPassageCounterDetectionLR" : "*en Durchgangsz%E4hlung beide Richtungen",
+    "optionPassageCounterDetectionL" : "*en Durchgangsz%E4hlung Rechts nach Links",
+    "optionPassageCounterDetectionR" : "*en Durchgangs%E4hlung Links nach Rechts",
+    "optionPassageCounterDeltaLR" : "*en Differenz der Durchg%E4nge Links/Rechts",
+    "optionPassageCounterDeltaL" : "*en Differenz der Durchg%E4nge Links",
+    "optionPassageCounterDeltaR" : "*en Differenz der Durchg%E4nge Rechts",
+
+    "lblCurPassageDetectionRL" : "*en Rechts nach Links",
+    "lblCurPassageDetectionLR" : "*en Links nach Rechts",
+    "lblLastPassageDetectionRL" : "*en Rechts nach Links",
+    "lblLastPassageDetectionLR" : "*en Links nach Rechts",
+
+    "identifiedPassage" : "*en Erkannter Durchgang",
+    "lastIdentifiedPassage" : "*en Vorheriger Durchgang",
+    "capturedPassageLeft" : "*en Erfasste Durchg%E4nge<br/>Links nach Rechts",
+    "capturedPassageRight" : "*en Erfasste Durchg%E4nge<br/>Rechts nach Links",
+    "overflowLeftPassage" : "*en %DCberlauf linker Durchgangszaehler",
+    "overflowRightPassage" : "*en %DCberlauf rechter Durchgangszaehler",
 
     "stringTableTemperatureOutOfRangeFalse" : "*en Umgebungstemperatur OK",
     "stringTableTemperatureOutOfRangeTrue" : "*en Umgebungstemperatur unzul%E4ssing",
@@ -94,6 +45,99 @@ jQuery.extend(true,langJSON, {
     "stringTableKeyTransceiverChannelOperationModeSwitchBehavior" : "*en Schalter",
     "stringTableKeyTransceiverChannelOperationModeBinaryBehavior" : "*en T%FCr-/Fensterkontakt",
 
-    "noMoreKeys" : ""
+    "stateMotionFalse" :                       "No motion detected",
+    "stateMotionTrue" :                        "Motion detected",
+    "motionDetectionFalse" :                   "Motion detection not active",
+    "motionDetectionTrue" :                    "Motion detection active",
+    "btnMotionDetectionFalse" :                "Switch on motion detection",
+    "btnMotionDetectionTrue" :                 "Switch off motion detection",
+    "btnResetMotion" :                         "Reset status",
+
+    "stringTableBlockingPeriod" : "*en Blockierzeitraum",
+    "stringTableBlockingPeriodUnit" : "*en Einheit des Zeitraums",
+    "stringTableBlockingPeriodValue" : "*en Wert des Zeitraums",
+
+    "stringTablePermanentFullRX" : "*en Dauerhafte Empfangsbereitschaft",
+
+    "stringTableBlindEndPositionAutoDetect" : "*en Automatische Erkennung der Endposition",
+    "stringTableBlindDelayCompensation" : "*en Kompensation der Motoreinschaltverz%F6gerung",
+
+    "lblTimeDelay" : "*en Zeitverz%F6gerung",
+
+    "stringTableCurrentPassageDirectionL2RTrue" : "*en Erkannter Durchgang: von Links nach Rechts",
+    "stringTableCurrentPassageDirectionL2RFalse" : "*en Erkannter Durchgang: nicht von Links nach Rechts",
+    "stringTableCurrentPassageDirectionR2LTrue" : "*en Erkannter Durchgang: von Rechts nach Links",
+    "stringTableCurrentPassageDirectionR2LFalse" : "*en Erkannter Durchgang: nicht von Rechts nach Links",
+
+    "stringTableLastPassageDirectionL2RTrue" : "*en Letzter erkannter Durchgang: von Links nach Rechts",
+    "stringTableLastPassageDirectionL2RFalse" : "*en Letzter erkannter Durchgang: nicht von Links nach Rechts",
+    "stringTableLastPassageDirectionR2LTrue" : "*en Letzter erkannter Durchgang: von Rechts nach Links",
+    "stringTableLastPassageDirectionR2LFalse" : "*en Letzter erkannter Durchgang: nicht von Rechts nach Links",
+
+    "stringTablePassageCounterOverflowL2RTrue" : "*en %DCberlauf Durchgangsz%E4hler Links nach Rechts",
+    "stringTablePassageCounterOverflowL2RFalse" : "*en kein %DCberlauf Durchgangsz%E4hler Links nach Rechts",
+    "stringTablePassageCounterValueL2R" : "*en Anzahl Durchg%E4nge Links nach Rechts",
+
+    "stringTablePassageCounterOverflowR2LTrue" : "*en %DCberlauf Durchgangsz%E4hler Rechts nach Links",
+    "stringTablePassageCounterOverflowR2LFalse" : "*en kein %DCberlauf Durchgangsz%E4hler Rechts nach Links",
+    "stringTablePassageCounterValueR2L" : "*en Anzahl Durchg%E4nge Rechts nach Links ",
+
+    "stringTablePassageCounterValue" : "*en Anzahl der Durchg%E4nge",
+    "stringTablePassageCounterOverflowFalse" : "*en Durchgangsz%E4hler %DCberlauf: Nein",
+    "stringTablePassageCounterOverflowTrue" : "*en Durchgangsz%E4hler %DCberlauf: Ja",
+    "stringTableLastPassageDirectionFalse" : "*en Letzter erkannter Durchgang: Nein",
+    "stringTableLastPassageDirectionTrue" : "*en Letzter erkannter Durchgang: Ja",
+    "stringTableCurrentPassageDirectionFalse" : "*en Erkannter Durchgang: Nein",
+    "stringTableCurrentPassageDirectionTrue" : "*en Erkannter Durchgang: Ja",
+
+
+    "dialogSettingsCMHintSoftwareUpdate3a" : "*en Bringen Sie eventuell installierte Zusatzmodule vor dem Update auf die aktuelle Version!",
+
+    "lblToday" : "*en Heute",
+    "lblYesterday" : "*en Gestern",
+    "btnResetSunshineDuration" : "*en Reset Sonnenscheindauer",
+    "btnResetRainCounter" : "*en Reset Regenz%E4hler",
+
+    "stringTableErrorWindCommunicationFalse" : "*en Sensor Windrichtung: Kommunikation OK ",
+    "stringTableErrorWindCommunicationTrue" : "*en Sensor Windrichtung: Kommunikationsfehler",
+    "stringTableErrorWindNorthTrue" : "*en Sensor Windrichtung: Nord nicht kalibriert",
+    "stringTableErrorWindNorthFalse" : "*en Sensor Windrichtung: Nord kalibriert",
+
+    "stringTableWeatherRainCounterOverflowTrue" : "*en Regenz%E4hler %DCberlauf: Ja",
+    "stringTableWeatherRainCounterOverflowFalse" : "*en Regenz%E4hler %DCberlauf: Nein",
+    "stringTableWeatherSunshineDurationOverflowTrue" : "*en Z%E4hler Sonnenschein %DCberlauf: Ja",
+    "stringTableWeatherSunshineDurationOverflowFalse" : "*en Z%E4hler Sonnenschein %DCberlauf: Nein",
+    "stringTableWeatherSunshineThresOverrunTrue" : "*en aktuell Sonnenschein",
+    "stringTableWeatherSunshineThresOverrunFalse" : "*en aktuell kein Sonnenschein",
+    "stringTableWeatherWindThresholdOverrunTrue" : "*en Windschwelle %FCberschritten",
+    "stringTableWeatherWindThresholdOverrunFalse" : "*en Windschwelle nicht %FCberschritten",
+
+    "stringTablePowerMainsFailureFalse" : "*en Stromausfall: Nein",
+    "stringTablePowerMainsFailureTrue" : "*en Stromausfall: Ja",
+
+    "stringTableStateResetReceiverTitle" : "*en Unterdr%FCckung Bewegungserkennung",
+
+    "helpPhilipsHueToolTip" :
+      "<h1>*en Bitte beachten Sie:</h1>" +
+      "<ul>"+
+        "<li>Die Philips Hue Kopplung hat Beta-Status</li>" +
+        "<li>Das Gateway wird unter Zuhilfenahme eines Internetdienstens von Philips gefunden (NUPNP].<br/>" +
+           "Die "+HMIdentifier.de.CCUShortName+" und das Philips-Gateway ben%F6tigen daher Zugang zum Internet.</li>" +
+        "<li>Es darf nur ein Philips-Gateway im Netzwerk vorhanden sein.</li>" +
+        "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
+        "<li>Damit das Philips-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
+          "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
+        "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
+          "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
+      "</ul>",
+
+    "teachInUserMessage" : "*en Zum Anlernen bet%E4tigen Sie bitte den Anlernknopf des Gateways.",
+
+    "stringTableConditionSwitchTransmitter" : "*en Sender Entscheidungswert",
+
+    "noMoreKeys" : "",
+
+    "comment" : "new text - not seen by the marketing division",
+    "stringTablePassageDetectorCounterTransmitterTitle" : "*en Durchgangsz%E4hler"
   }
 });

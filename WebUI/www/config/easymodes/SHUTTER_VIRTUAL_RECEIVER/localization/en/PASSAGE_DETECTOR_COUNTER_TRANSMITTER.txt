@@ -11,3 +11,10 @@
 "subset_1" : "*en hochgefahren",
 "subset_2" : "*en heruntergefahren",
 "subset_3" : "*en hoch- / heruntergefahren im Wechsel",
+
+"subset_4" : "*en rechts > links ein / links > rechts aus",
+"subset_5" : "*en rechts > links aus / links > rechts ein",
+
+"subset_6" : "*en rechts -> links",
+"subset_7" : "*en links -> rechts",
+"subset_8" : "*en links -> rechts oder rechts -> links",

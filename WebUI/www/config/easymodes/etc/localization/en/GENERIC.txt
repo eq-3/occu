@@ -41,3 +41,5 @@
 "btnEdit" : "Edit",
 "helpDecisionValAndThreshold" : "<span class=\"translated\">*en Der Entscheidungswert und der obere/untere Grenzwert sind Kanalparameter des Senders und m&uuml;ssen korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 "helpDecisionVal" : "<span class=\"translated\">*en Der Entscheidungswert ist ein Kanalparameter des Senders und muss korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+
+"helpBtnChannelConfiguration" : "<span class=\"translated\">*en Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Senders entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",

@@ -24,9 +24,9 @@ set PROFILE_1(SHORT_CT_OFF)      {0 range 0 - 5}
 set PROFILE_1(SHORT_CT_OFFDELAY)  {0 range 0 - 5}
 set PROFILE_1(SHORT_CT_ON)      {0 range 0 - 5}
 set PROFILE_1(SHORT_CT_ONDELAY)    {0 range 0 - 5}
-set PROFILE_1(SHORT_JT_OFF)       1
+set PROFILE_1(SHORT_JT_OFF)       {1 3}
 set PROFILE_1(SHORT_JT_OFFDELAY)  6
-set PROFILE_1(SHORT_JT_ON)        4
+set PROFILE_1(SHORT_JT_ON)        {4 6}
 set PROFILE_1(SHORT_JT_ONDELAY)   3
 set PROFILE_1(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
 set PROFILE_1(SHORT_OFFDELAY_TIME_FACTOR)     {0 range 0 - 31}
@@ -49,7 +49,7 @@ set PROFILE_2(SHORT_CT_OFF)      0
 set PROFILE_2(SHORT_CT_OFFDELAY)  0
 set PROFILE_2(SHORT_CT_ON)      0
 set PROFILE_2(SHORT_CT_ONDELAY)    0
-set PROFILE_2(SHORT_JT_OFF)       1
+set PROFILE_2(SHORT_JT_OFF)       {1 3}
 set PROFILE_2(SHORT_JT_OFFDELAY)  3
 set PROFILE_2(SHORT_JT_ON)        3
 set PROFILE_2(SHORT_JT_ONDELAY)   3
@@ -107,7 +107,7 @@ set PROFILE_4(UI_HINT)  4
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-  global iface_url sender_address receiver_address dev_descr_sender dev_descr_receiver
+  global  iface_url sender_address receiver_address dev_descr_sender dev_descr_receiver
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
@@ -120,6 +120,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set channel $dev_descr_sender(INDEX)
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
+
+  if {($cur_profile == 1) && ($dev_descr_receiver(PARENT_TYPE) == "HmIP-WHS2")} {
+    set modifiedCondType  "{SHORT_CT_OFFDELAY {int 0}} {SHORT_CT_ON {int 0}}"
+    puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"
+    set ps(SHORT_CT_OFFDELAY) 0
+    set ps(SHORT_CT_ON) 0
+  }
 
   #global SUBSETS
   set name "x"

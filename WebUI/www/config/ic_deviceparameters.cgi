@@ -62,7 +62,7 @@ proc put_page {} {
       puts "  var s = \"\";"
       puts "  s += \"<table cellspacing='8'>\";"
       puts "  s += \"<tr>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='SaveDeviceParameters();'>\"+translateKey('footerBtnOk')+\"</div></td>\";"
+      puts "  s += \"<td align='center' valign='middle'><div id='footerButtonOK' class='FooterButton' onclick='SaveDeviceParameters();'>\"+translateKey('footerBtnOk')+\"</div></td>\";"
       puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='CloseDeviceParameters();'>\"+translateKey('footerBtnCancel')+\"</div></td>\";"
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
@@ -581,6 +581,10 @@ proc isVirtual {paramId} {
   lappend virtualDevices "hmip-mod-oc8_19_master" "hmip-mod-oc8_20_master" "hmip-mod-oc8_23_master" "hmip-mod-oc8_24_master"
   lappend virtualDevices "hmip-mod-oc8_27_master" "hmip-mod-oc8_28_master" "hmip-mod-oc8_31_master" "hmip-mod-oc8_32_master"
   lappend virtualDevices "hmip-mod-oc8_35_master" "hmip-mod-oc8_36_master" "hmip-mod-oc8_39_master" "hmip-mod-oc8_40_master"
+
+  lappend virtualDevices "hmip-wgc_2_master" "hmip-wgc_4_master" "hmip-wgc_5_master"
+  lappend virtualDevices "hmip-whs2_1_master" "hmip-whs2_3_master" "hmip-whs2_4_master" "hmip-whs2_5_master" "hmip-whs2_7_master" "hmip-whs2_8_master"
+
 
   set virtual "false"
 

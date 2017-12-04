@@ -8,13 +8,16 @@ function ::CreatePassageDetector() {
   string chnRight2Left = devAddress#":2";
   string chnLeft2Right = devAddress#":3";
 
-  string curPassageDetection = "unbekannt";
-  string lastPassageDetection = "unbekannt";
+  string curPassageDetection = "${lblUnknown}";
+  string lastPassageDetection = "${lblUnknown}";
 
-  string curPassageDetectionRL = "Rechts nach Links";
-  string curPassageDetectionLR = "Links nach Rechts";
-  string lastPassageDetectionRL = "Rechts nach Links";
-  string lastPassageDetectionLR = "Links nach Rechts";
+  string curPassageDetectionRL = "${lblCurPassageDetectionRL}";
+  string curPassageDetectionLR = "${lblCurPassageDetectionLR}";
+  string lastPassageDetectionRL = "${lblLastPassageDetectionRL}";
+  string lastPassageDetectionLR = "${lblLastPassageDetectionLR}";
+
+  string lblOverFlowLeft = "${lblUnknown}";
+  string lblOverFlowRight = "${lblUnknown}";
 
   string cssCurPassageDir = "ControlBtnInfo";
   string cssLastPassageDir = "ControlBtnInfo";
@@ -87,42 +90,55 @@ function ::CreatePassageDetector() {
   if (bLastPassaageDirectionLR == true) {
     lastPassageDetection = lastPassageDetectionLR;
   }
+
+  if (bPassageCounterOverflowRL) {
+   lblOverFlowLeft = "${dialogYes}";
+  } else {
+    lblOverFlowLeft = "${dialogNo}";
+  }
+
+  if (bPassageCounterOverflowLR) {
+    lblOverFlowRight = "${dialogYes}";
+  } else {
+    lblOverFlowRight = "${dialogNo}";
+  }
+
   WriteLine("<td>");
     WriteLine("<table>");
 
       WriteLine("<tr>");
         WriteLine("<td>");
           WriteLine("<div class='"#cssCurPassageDir#"'>");
-            WriteLine("Erkannter Durchgang:<br/>"#curPassageDetection);
+            WriteLine("${identifiedPassage}:<br/>"#curPassageDetection);
           WriteLine("</div>");
         WriteLine("</td>");
         WriteLine("<td>");
           WriteLine("<div class='"#cssLastPassageDir#"'>");
-            WriteLine("Letzter erkannter Durchgang:<br/>"#lastPassageDetection);
+            WriteLine("${lastIdentifiedPassage}:<br/>"#lastPassageDetection);
           WriteLine("</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
       WriteLine("<tr>");
         WriteLine("<td>");
           WriteLine("<div class='"#cssLastPassageDir#"'>");
-            WriteLine("Erfasste Durchgaenge Links:<br/><span name='passageCounterValueLR'>"#iPassageCounterValueLR#"</span>");
+            WriteLine("${capturedPassageLeft}:<br/><span name='passageCounterValueLR'>"#iPassageCounterValueLR#"</span>");
           WriteLine("</div>");
         WriteLine("</td>");
         WriteLine("<td>");
           WriteLine("<div class='"#cssLastPassageDir#"'>");
-            WriteLine("Erfasste Durchgaenge Rechts:<br/>"#iPassageCounterValueRL);
+            WriteLine("${capturedPassageRight}:<br/>"#iPassageCounterValueRL);
           WriteLine("</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
       WriteLine("<tr>");
         WriteLine("<td>");
           WriteLine("<div class='ControlBtnInfo'>");
-            WriteLine("Ueberlauf linker Durchgangszaehler:<br/><span name='passageCounterOverflowLR'>"#bPassageCounterOverflowLR#"</span>");
+            WriteLine("${overflowLeftPassage}:<br/><span name='passageCounterOverflowLR'>"#lblOverFlowRight#"</span>");
           WriteLine("</div>");
         WriteLine("</td>");
         WriteLine("<td>");
           WriteLine("<div class='ControlBtnInfo'>");
-            WriteLine("Ueberlauf rechter Durchgangszaehler:<br/>"#bPassageCounterOverflowRL);
+            WriteLine("${overflowRightPassage}:<br/>"#lblOverFlowLeft);
           WriteLine("</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
@@ -151,8 +167,11 @@ function ::CreatePassageDetector() {
       WriteLine("var oPassageDetector = new iseHmIPPassageDetector(opts);");
 
       WriteLine("jQuery('[name=\"passageCounterValueLR\"]').first().text('"#iPassageCounterValueLR#"');");
-      WriteLine("jQuery('[name=\"passageCounterOverflowLR\"]').first().text('"#bPassageCounterOverflowLR#"');");
-
+      if (bPassageCounterOverflowRL) {
+        WriteLine("jQuery('[name=\"passageCounterOverflowLR\"]').first().text(translateKey('dialogYes'));");
+      } else {
+        WriteLine("jQuery('[name=\"passageCounterOverflowLR\"]').first().text(translateKey('dialogNo'));");
+      }
       ! The timestamp of an event of channel 3 must be shown at channel 2
       WriteLine("var curTimeStampElm = jQuery('#tmc"#chnId#"');");
       WriteLine("jQuery('[name=\"timeStamp\"]').first().text(curTimeStampElm.text());");

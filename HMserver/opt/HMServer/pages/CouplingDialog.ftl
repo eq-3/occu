@@ -1,90 +1,156 @@
 <script type=text/javascript>
 
   dlgPopup.setWidth(650);
-  dlgPopup.readaptSize();
+
+
+  var lightify = "lightify",
+  hue = "hue";
+
+  var availableGateways = [lightify, hue];
 
   var base_url = "/pages/jpages/system/Coupling/",
-  ipAddressPort = "",
+  ipAddressPort = {},
   ipAddress = "",
-  scanActive = false,
-  deviceScanning = false,
-  pollingTimer,
+  scanActive = {},
+  deviceScanning = {},
+  pollingTimer = {},
   pollingTime = 3000,
-  loopCounter = 0,
+  loopCounter = {},
   maxPollNumber = 20;
 
-  showBargraphAnimation = function(mode) {
-      var bargraphID = "animBargraph"+mode;
+  getAvailableGateways = function() {
+    return availableGateways;
+  };
+
+  jQuery.each(getAvailableGateways(), function(index, gateway) {
+    ipAddressPort[gateway] = "",
+    deviceScanning[gateway] = false;
+    loopCounter[gateway] = 0;
+    scanActive[gateway] = false;
+  });
+
+
+  initStartButtons = function() {
+    initClickEvents(getAvailableGateways());
+  };
+
+  initClickEvents = function(arGateways) {
+    jQuery.each(arGateways, function(index, val) {
+      jQuery("#btnStartScanGateway_" + val).unbind().click(function(){scanGateway(val);}).val(translateKey("actionStatusControlLblStart"));
+    });
+  };
+
+  showBargraphAnimation = function(bindingId) {
+      var bargraphID = "animBargraph"+bindingId;
       jQuery("#" + bargraphID).show();
   };
 
-  hideBargraphAnimation = function() {
-    jQuery(".j_animBargraph").hide();
-
+  hideBargraphAnimation = function(bindingId) {
+      var bargraphID = "animBargraph_"+bindingId+"_0";
+      jQuery("#" + bargraphID).hide();
   };
 
-  showEnterIPAddress = function() {
-    jQuery("[name='enterIPForGateway']").show();
+  showEnterIPAddress = function(bindingId) {
+    jQuery("[name='enterIPForGateway_" + bindingId + "']").show();
   }
 
-  hideEnterIPAddress = function() {
-    jQuery("[name='enterIPForGateway']").hide();
+  hideEnterIPAddress = function(bindingId) {
+    jQuery("[name='enterIPForGateway_" + bindingId + "']").hide();
   }
 
-  showGatewayIPAddress = function(ip) {
-    jQuery("#gateWayIP").val(ip);
+  showGatewayIPAddress = function(ip, bindingId) {
+    jQuery("#gateWayIP_"+bindingId).val(ip);
 
     if (!isIPv4AddressValid(ip)) {
-      showEnterIPAddress();
+      showEnterIPAddress(bindingId);
     } else {
-      hideEnterIPAddress();
+      hideEnterIPAddress(bindingId);
     }
   }
 
-  stopPolling = function() {
-    if (pollingTimer != undefined) {
-      conInfo("Polling deactivated");
-      hideBargraphAnimation();
+  disableSearchingOtherGateways = function(bindingId) {
+     jQuery.each(getAvailableGateways(), function(index, gateway) {
+      if (gateway != bindingId) {
+        conInfo("disableSearchingOtherGateway: " + gateway);
+        jQuery("#btnStartScanGateway_" + gateway).unbind().click(function() {alert(gateway + ' disabled.');}).val("--");
+      }
+    });
+  }
+
+  stopPolling = function(bindingId) {
+
+    if (bindingId != undefined) {
+      if (pollingTimer[bindingId] != undefined) {
+        conInfo("Polling " + bindingId + " deactivated");
+        hideBargraphAnimation(bindingId);
+        HideWaitAnim()
+        clearTimeout(pollingTimer[bindingId]);
+        loopCounter[bindingId] = 0;
+        scanActive[bindingId] = false;
+        initStartButtons();
+      }
+    } else {
+      conInfo("Stop Polling - Close Dialog");
       HideWaitAnim()
-      clearTimeout(pollingTimer);
-      loopCounter = 0;
-      scanActive = false;
+
+      jQuery.each(getAvailableGateways(), function(index, gateway) {
+        HideWaitAnim();
+        hideBargraphAnimation(gateway);
+        clearTimeout(pollingTimer[gateway]);
+        loopCounter[gateway] = 0;
+        scanActive[gateway] = false;
+      });
+
     }
   }
 
-  scanGateway = function() {
-    if (!scanActive) {
+  showTeachInUserMessage = function(gtw) {
+      // gtw can be used later when there are more gateways with a required messaage available.
+      alert(translateKey("teachInUserMessage"));
+  }
+
+  scanGateway = function(bindingId) {
+
+
+    if (!scanActive[bindingId]) {
+
+      if (bindingId == hue) {
+        showTeachInUserMessage(bindingId);
+      }
+
       var data = new Object();
-      var ip = jQuery("#gateWayIP").val();
+      var ip = jQuery("#gateWayIP_"+bindingId).val();
 
-      scanActive = true;
-      deviceScanning = true;
-      loopCounter = 0;
+      disableSearchingOtherGateways(bindingId);
 
-      showBargraphAnimation(0);
+      scanActive[bindingId] = true;
+      deviceScanning[bindingId] = true;
+      loopCounter[bindingId] = 0;
 
-      conInfo("scanGateway activated");
+      showBargraphAnimation("_"+bindingId+"_"+0);
 
-      //data.gateWayIP = jQuery("#gateWayIP").val();
+      conInfo("scanGateway " + bindingId + " activated");
 
-      var url = '/pages/jpages/system/Coupling/scanGateway?sid='+SessionId;
+      var url = '/pages/jpages/system/Coupling/scanGateway?bindingID='+bindingId+'&sid='+SessionId;
       var pb = JSON.stringify(data);
       var opt =
       {
         postBody: pb,
         onComplete: function(t) {
-          conInfo("scanGateway complete");
-          poll4GatewayIP();
+          conInfo(bindingId + " scanGateway complete");
+          poll4GatewayIP(bindingId);
         }
       };
       ShowWaitAnim();
       HideWaitAnimAutomatically(60);
       new Ajax.Request(url,opt);
+    } else {
+      conInfo("Scan "+ bindingId +" already active");
     }
   };
 
-  addLightifyGatewayByIP = function() {
-    if (!scanActive) {
+  addGatewayByIP = function(bindingId) {
+    if (!scanActive[bindingId]) {
       var ipA = jQuery("#ipA").val(),
       ipB = jQuery("#ipB").val(),
       ipC = jQuery("#ipC").val(),
@@ -95,35 +161,35 @@
       if (! isIPv4AddressValid(ipAddress)) {
         alert(translateKey("invalidIP"));
       } else {
-        addLightifyGateway(ipAddress);
+        addGateway(ipAddress, bindingId);
       }
     }
   };
 
 
-  addLightifyGateway = function(ip) {
-    if (!scanActive) {
+  addGateway = function(ip, bindingId) {
+    if (!scanActive[bindingId]) {
       var data = new Object();
       var ip = ip;
 
-      scanActive = true;
-      deviceScanning = true;
-      loopCounter = 0;
+      scanActive[bindingId] = true;
+      deviceScanning[bindingId] = true;
+      loopCounter[bindingId] = 0;
 
-      showBargraphAnimation(1);
+      showBargraphAnimation("_"+bindingId+"_"+1);
 
       conInfo("scanGateway activated");
 
       data.gateWayIP = ip;
 
-      var url = '/pages/jpages/system/Coupling/addLightifyGateway?sid='+SessionId;
+      var url = '/pages/jpages/system/Coupling/addGateway?sid='+SessionId;
       var pb = JSON.stringify(data);
       var opt =
       {
         postBody: pb,
         onComplete: function(t) {
           conInfo("addGateway complete");
-          poll4GatewayIP();
+          poll4GatewayIP(bindingId);
         }
       };
       ShowWaitAnim();
@@ -133,40 +199,42 @@
   };
 
   // This adds the devices of the gateway
-  addNewDevices = function() {
+  addNewDevices = function(bindingId) {
     var data = new Object();
     var url = '/pages/jpages/system/Coupling/isScanning?sid='+SessionId;
     var pb = JSON.stringify(data);
-    conInfo("addNewDevices - check if the scan for devices on the server has been completed.");
+    conInfo(bindingId + ": addNewDevices - check if the scan for devices on the server has been completed.");
 
-    loopCounter++;
+    loopCounter[bindingId]++;
 
     var opt =
     {
       postBody: pb,
       onComplete: function(t) {
         var response = JSON.parse(t.responseText);
-        deviceScanning = (response.content == "false" || response.content == false) ? false : true;
+        deviceScanning[bindingId] = (response.content == "false" || response.content == false) ? false : true;
 
         // Scanning for devices completed
-        if (! deviceScanning) {
-          stopPolling();
-          showGatewayIPAddress(ipAddressPort);
-          conInfo("All devices are available now so we can refresh the config data");
+        if (! deviceScanning[bindingId]) {
+          stopPolling(bindingId);
+          showGatewayIPAddress(ipAddressPort[bindingId], bindingId);
+          conInfo(bindingId +" - All devices are available now so we can refresh the config data");
           ConfigData.destroy();
           ConfigData.check(function() {
             conInfo("Config data refreshed");
           });
         } else {
-          conInfo("Not all devices are known yet - continue scan for devices");
-          if (maxPollNumberReached(loopCounter)) {
-              stopPolling();
-              alert(translateKey("timeoutAddNewDevices"));
+          conInfo(bindingId + " - Not all devices are known yet - continue scan for devices");
+          if (maxPollNumberReached(loopCounter[bindingId])) {
+              stopPolling(bindingId);
+              alert(translateKey("timeoutAddNewDevices")); // TODO Binding
           } else {
-            clearTimeout(pollingTimer); // clear the old timer
-            pollingTimer = setInterval(function() {
-              addNewDevices();
-            },pollingTime);
+            clearTimeout(pollingTimer[bindingId]); // clear the old timer
+            if (scanActive[bindingId]) {
+              pollingTimer[bindingId] = setInterval(function() {
+                addNewDevices(bindingId);
+              },pollingTime);
+            }
           }
         }
       }
@@ -174,23 +242,23 @@
     new Ajax.Request(url,opt);
   };
 
-  poll4GatewayIP = function() {
-    conInfo("poll4GatewayIP activated");
-    pollingTimer = setInterval(function() {getGatewayIP("poll4GatewayIP");}, pollingTime);
+  poll4GatewayIP = function(bindingId) {
+    conInfo("poll4GatewayIP "+bindingId+" activated");
+    pollingTimer[bindingId] = setInterval(function() {getGatewayIP(bindingId, "poll4GatewayIP");}, pollingTime);
   };
 
   maxPollNumberReached = function(counter) {
     return (counter > maxPollNumber) ? true : false;
   }
 
-  getGatewayIP = function(mode) {
+  getGatewayIP = function(bindingId, mode) {
     var data = new Object();
     var poll4GatewayIP = "poll4GatewayIP";
-    conInfo("getGatewayIP");
-    var url = '/pages/jpages/system/Coupling/getGatewayIP?sid='+SessionId;
+    conInfo("getGatewayIP " + bindingId);
+    var url = '/pages/jpages/system/Coupling/getGatewayIP?bindingId='+bindingId+'&sid='+SessionId;
     var pb = JSON.stringify(data);
 
-    loopCounter++;
+    loopCounter[bindingId]++;
 
     var opt =
     {
@@ -206,23 +274,22 @@
           alertMsg = response.content;
         }
         try {
-          ipAddressPort = response.content.replace("http://", "");
-          ipAddress = ipAddressPort.split(":")[0];
+          ipAddressPort[bindingId] = response.content.replace("http://", "");
+          ipAddress = ipAddressPort[bindingId].split(":")[0];
         } catch (e) {}
 
         if (isIPv4AddressValid(ipAddress)) {
           if (mode == poll4GatewayIP) {
             // Adds all known devices of the gateway
-            addNewDevices();
+            addNewDevices(bindingId);
           } else {
-            stopPolling();
-            showGatewayIPAddress(ipAddressPort);
+            stopPolling(bindingId);
+            showGatewayIPAddress(ipAddressPort[bindingId], bindingId);
             activateBtnScanDevice();
           }
-
-        } else if (maxPollNumberReached(loopCounter)) {
+        } else if (maxPollNumberReached(loopCounter[bindingId])) {
           if (mode == poll4GatewayIP) {
-            stopPolling();
+            stopPolling(bindingId);
             alert(alertMsg);
             showEnterIPAddress();
           }
@@ -251,6 +318,7 @@
 <div class="popupTitle">${"$"}{couplingDialogTitle}</div>
 <div class="CLASS21114 j_translate">
 	<table class="popupTable" border=1 width="100%">
+		<!-- Osram Lightify -->
 		<tr class="CLASS21115">
 			<td class="CLASS21116" style="background-color:white;" width="125px">
 			  <table>
@@ -258,12 +326,6 @@
 			    <tr>
 			      <td><img src="/ise/img/osramLightify/OsramLightifyLogo.jpg" alt="" width="125px" height="125px"></td>
 			    </tr>
-
-			    <!--
-			    <tr>
-			      <td>${"$"}{lblOsramLightify}</td>
-			    </tr>
-			    -->
 			  </table>
 			</td>
 
@@ -272,35 +334,35 @@
 
 			    <tr>
 			      <td>${"$"}{btnScanGateway}</td>
-			      <td colspan="4"><input type="button" style="width:100%" name="actionStatusControlLblStart" onclick="scanGateway();"></td>
+			      <td colspan="4"><input id="btnStartScanGateway_lightify" type="button" style="width:100%" name="actionStatusControlLblStart" _onclick="scanGateway('lightify');"></td>
 			    </tr>
 
 			    <tr>
 			      <td>${"$"}{lblIPAddress}</td>
-			      <td colspan="4"><input id="gateWayIP" type="text" size="20"  style="text-align: center; width:96%" disabled></td>
+			      <td colspan="4"><input id="gateWayIP_lightify" type="text" size="20"  style="text-align: center; width:96%" disabled></td>
 			    </tr>
 
- 			    <tr id="animBargraph0" class="hidden j_animBargraph">
+ 			    <tr id="animBargraph_lightify_0" class="hidden j_animBargraph">
  			      <td></td>
  			      <td colspan="5"><img src="/ise/img/anim_bargraph.gif" alt="" style="width:100%; height:25px; margin-top:15px;"></td>
  			    </tr>
 
-          <tr name="enterIPForGateway" class="hidden"><td colspan="5"><hr></td></tr>
+				<tr name="enterIPForGateway_lightify" class="hidden"><td colspan="5"><hr></td></tr>
+	
+				<tr name="enterIPForGateway_lightify" class="hidden">
+					<td>${"$"}{enterIPAddress}</td>
+					<td><input id="ipA" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+					<td><input id="ipB" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipC" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipD" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				</tr>
 
-          <tr name="enterIPForGateway" class="hidden">
-            <td>${"$"}{enterIPAddress}</td>
-            <td><input id="ipA" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-            <td><input id="ipB" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-            <td><input id="ipC" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-            <td><input id="ipD" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-          </tr>
-
-			    <tr name="enterIPForGateway" class="hidden">
+			    <tr name="enterIPForGateway_lightify" class="hidden">
 			      <td></td>
-			      <td style="text-align:center" colspan="4"><input type="button" style="width:100%" name="btnOk" onclick="addLightifyGatewayByIP();"></td>
+			      <td style="text-align:center" colspan="4"><input type="button" style="width:100%" name="btnOk" onclick="addGatewayByIP('lightify');"></td>
 			    </tr>
 
- 			    <tr id="animBargraph1" class="hidden j_animBargraph">
+ 			    <tr id="animBargraph_lightify_1" class="hidden j_animBargraph">
  			      <td></td>
  			      <td colspan="5"><img src="/ise/img/anim_bargraph.gif" alt="" style="width:100%; height:25px; margin-top:15px;"></td>
  			    </tr>
@@ -322,6 +384,70 @@
 			</td>
 
 		</tr>
+		<!-- Philips Hue -->
+		<tr class="CLASS21115">
+			<td class="CLASS21116" style="background-color:white;" width="125px">
+			  <table>
+			    <tr>
+			      <td><img src="/ise/img/philipsHue/PhilipsHueLogo.jpg" alt="" width="125px" height="125px"></td>
+			    </tr>
+			  </table>
+			</td>
+
+			<td width="45%" align="center">
+			  <table>
+
+			    <tr>
+			      <td>${"$"}{btnScanGateway}</td>
+			      <td colspan="4"><input id="btnStartScanGateway_hue" type="button" style="width:100%" name="actionStatusControlLblStart" _onclick="scanGateway('hue');"></td>
+			    </tr>
+
+			    <tr>
+			      <td>${"$"}{lblIPAddress}</td>
+			      <td colspan="4"><input id="gateWayIP_hue" type="text" size="20"  style="text-align: center; width:96%" disabled></td>
+			    </tr>
+
+ 			    <tr id="animBargraph_hue_0" class="hidden j_animBargraph">
+ 			      <td></td>
+ 			      <td colspan="5"><img src="/ise/img/anim_bargraph.gif" alt="" style="width:100%; height:25px; margin-top:15px;"></td>
+ 			    </tr>
+
+				<tr name="enterIPForGateway_hue" class="hidden"><td colspan="5"><hr></td></tr>
+	
+				<tr name="enterIPForGateway_hue" class="hidden">
+					<td>${"$"}{enterIPAddress}</td>
+					<td><input id="ipA" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+					<td><input id="ipB" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipC" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipD" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				</tr>
+
+			    <tr name="enterIPForGateway_hue" class="hidden">
+			      <td></td>
+			      <td style="text-align:center" colspan="4"><input type="button" style="width:100%" name="btnOk" onclick="addGatewayByIP('hue');"></td>
+			    </tr>
+
+ 			    <tr id="animBargraph_hue_1" class="hidden j_animBargraph">
+ 			      <td></td>
+ 			      <td colspan="5"><img src="/ise/img/anim_bargraph.gif" alt="" style="width:100%; height:25px; margin-top:15px;"></td>
+ 			    </tr>
+
+			  </table>
+			</td>
+			<td align="center">
+			  <table>
+				  <tr>
+			      <td>
+              <div style="overflow:auto; height:auto;">
+                ${"$"}{helpPhilipsHue}
+              </div>
+			        <div class="StdTableBtnHelp" style="text-align:center"><img id="showHueHelp" src="/ise/img/help.png">
+			        </div>
+			      </td>
+			    </tr>
+			  </table>
+			</td>
+		</tr>
 	</table>
 </div>
 
@@ -336,11 +462,48 @@
 </div>
 
 <script type="text/javascript">
-  jQuery("#gateWayIP").val(translateKey("lblUnknown"));
-  getGatewayIP("showIPonStart");
-  var tooltip = translateKey("helpOsramLightifyToolTip");
-  var tooltipElem = jQuery("#showLightifyHelp");
-  tooltipElem.data('powertip', tooltip);
-  tooltipElem.powerTip({placement: "nw", smartPlacement: true, followMouse: false});
+  dlgPopup.readaptSize();
+  jQuery("#gateWayIP_lightify, #gateWayIP_hue").val(translateKey("lblUnknown"));
+  getGatewayIP("lightify", "showIPonStart");
+  getGatewayIP("hue", "showIPonStart");
+
+  window.setTimeout(function() {initStartButtons();},100);
+
+  var tooltipLightify = translateKey("helpOsramLightifyToolTip");
+  var tooltipLightifyElem = jQuery("#showLightifyHelp");
+  tooltipLightifyElem.data('powertip', tooltipLightify);
+  tooltipLightifyElem.powerTip({placement: "nw", smartPlacement: true, followMouse: false});
+  
+  var tooltipHue = translateKey("helpPhilipsHueToolTip");
+  var tooltipHueElem = jQuery("#showHueHelp");
+  tooltipHueElem.data('powertip', tooltipHue);
+  tooltipHueElem.powerTip({placement: "nw", smartPlacement: true, followMouse: false});
+
+    
   jQuery("#powerTip").css("opacity",1);
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

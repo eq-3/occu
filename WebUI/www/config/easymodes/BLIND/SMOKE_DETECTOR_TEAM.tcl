@@ -20,7 +20,7 @@ set PROFILE_1(SHORT_CT_RAMPON)    2
 set PROFILE_1(SHORT_CT_OFFDELAY)  1
 set PROFILE_1(SHORT_CT_ONDELAY)    2
 set PROFILE_1(SHORT_CT_OFF)      1
-set PROFILE_1(SHORT_CT_ON)      2
+set PROFILE_1(SHORT_CT_ON)      {1 2}
 set PROFILE_1(SHORT_CT_REFOFF)    0
 set PROFILE_1(SHORT_CT_REFON)    0
 set PROFILE_1(SHORT_COND_VALUE_LO)  50 
@@ -33,7 +33,7 @@ set PROFILE_1(SHORT_ON_TIME_MODE)  0
 set PROFILE_1(SHORT_OFF_TIME_MODE)  0
 set PROFILE_1(SHORT_ACTION_TYPE)  1
 set PROFILE_1(SHORT_JT_OFF)      1
-set PROFILE_1(SHORT_JT_ON)      4
+set PROFILE_1(SHORT_JT_ON)      {3 4}
 set PROFILE_1(SHORT_JT_OFFDELAY)  2
 set PROFILE_1(SHORT_JT_ONDELAY)    4
 set PROFILE_1(SHORT_JT_RAMPOFF)    2
@@ -84,8 +84,8 @@ set PROFILE_2(UI_HINT)  2
 
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
-  
-  global receiver_address dev_descr_sender dev_descr_receiver
+
+  global iface_url sender_address receiver_address dev_descr_sender dev_descr_receiver
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
@@ -97,7 +97,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
        
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
-  
+
+  if {$cur_profile == 1} {
+    set param  "{SHORT_CT_ON {int 1}} {SHORT_JT_ON {int 3}}"
+    puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"
+    set ps(SHORT_CT_ON) 1
+    set ps(SHORT_JT_ON) 3
+  }
 
 #  die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"

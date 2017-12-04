@@ -279,6 +279,13 @@ proc option {type} {
       #set options(0) "\${stringTableStateFalse}"
     }
 
+    "POWERUP_JUMPTARGET_HMIP" {
+      set options(0) "\${stringTableStateFalse}"
+      set options(1) "\${stringTableOnDelay}"
+      set options(2) "\${stringTableStateTrue}"
+      set options(3) "\${stringTableOffDelay}"
+    }
+
     "POWERUP_JUMPTARGET_OnOff" {
       set options(0) "\${stringTableStateFalse}"
       set options(1) "\${stringTableOnDelay}"

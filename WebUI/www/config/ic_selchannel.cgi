@@ -660,6 +660,14 @@ proc showHmIPChannel {devType direction address chType} {
      if {$ch >= 5} {return 0}
     }
 
+    if {($devType == "HMIP-WGC") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+     if {$ch >= 4} {return 0}
+    }
+
+    if {($devType == "HMIP-WHS2") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+     if {($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8) } {return 0}
+    }
+
     if {($devType == "HMIP-MOD-OC8") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
       if {
             ($ch == 11) || ($ch == 12) || ($ch == 15) || ($ch == 16) || ($ch == 19) || ($ch == 20)

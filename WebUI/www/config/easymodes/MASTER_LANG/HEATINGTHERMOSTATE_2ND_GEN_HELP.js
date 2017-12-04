@@ -28,7 +28,7 @@ jQuery.extend(true,langJSON, {
     "HUMIDITY_LIMIT_DISABLE" : "Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt.",
 
     "DURATION_5MIN" : "Befindet sich der Thermostat im Auto-Modus, so wird die Temperatur mit jedem Schaltzeitpunkt auf den programmierten Wert ge&auml;ndert. Dieser Parameter dient dazu, diesen Automatismus f&uuml;r eine gewisse Zeit ausser Kraft zu setzen. Nach Ablauf der Zeit, geht der Thermostat wieder in den Auto-Modus &uuml;ber.<br><br/>" +
-      "Die Zeit wird in 5-Minuten-Schritten eingegeben. Der h&ouml;chst zul&auml;ssige Wert betr&auml;gt 144, was 12 Stunden entspricht (144 * 5 Minuten)."
+      "Die Zeit wird in 5-Minuten-Schritten eingegeben. Der h&ouml;chst zul&auml;ssige Wert betr&auml;gt 720 Minuten, was 12 Stunden entspricht."
   },
 
   "en" : {
@@ -59,7 +59,7 @@ jQuery.extend(true,langJSON, {
     "HUMIDITY_LIMIT_DISABLE" : "With this parameter you can define, if the cooling should be interrupted during cooling mode, as soon as the humidity threshold is exceeded. This stops the humidity value from increasing further.",
 
     "DURATION_5MIN" : "If the thermostat is in auto mode, temperature will be changed with every switching time to the value defined. This parameter helps you to discontinue the automatism for a certain period of time. After the time has expired, the thermostat returns back to auto mode.<br><br/>" +
-      "Time will be displayed in 5-minute steps. The highest value permitted is 144 (12 hours)."
+      "Time will be displayed in 5-minute steps. The highest value permitted is 720 minutes (12 hours)."
 
   },
 
@@ -91,7 +91,7 @@ jQuery.extend(true,langJSON, {
     "HUMIDITY_LIMIT_DISABLE" : "With this parameter you can define, if the cooling should be interrupted during cooling mode, as soon as the humidity threshold is exceeded. This stops the humidity value from increasing further.",
 
     "DURATION_5MIN" : "If the thermostat is in auto mode, temperature will be changed with every switching time to the value defined. This parameter helps you to discontinue the automatism for a certain period of time. After the time has expired, the thermostat returns back to auto mode.<br><br/>" +
-      "Time will be displayed in 5-minute steps. The highest value permitted is 144 (12 hours)."
+      "Time will be displayed in 5-minute steps. The highest value permitted is 720 minutes (12 hours)."
   }
 });
 

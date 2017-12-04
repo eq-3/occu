@@ -85,7 +85,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
     set value [format {%1.2f} $value]
   }
 
-  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\">"
+  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\" $extraparam>"
   return $s
 }
 
@@ -140,7 +140,7 @@ proc getOptionBox {param options value chn prn {extraparam ""}} {
 proc getCheckBox {param value chn prn {extraparam ""}} {
   set checked ""
   if { $value } then { set checked "checked=\"checked\"" }
-  set s "<input id='separate_CHANNEL\_$chn\_$prn' type='checkbox' $checked value='dummy' name=$param $extraparam/>"
+  set s "<input id='separate_CHANNEL\_$chn\_$prn' type='checkbox' $checked value='dummy' name=$param $extraparam>"
   return $s
 }
 
@@ -170,11 +170,61 @@ proc getButton {id btnTxt callBack} {
   return $s
 }
 
+proc getButtonChannelConfiguration {{extraDescription ""}} {
+  global dev_descr_sender
+  set html ""
+
+  # The extraDescription allows it to place a description freely as you wish
+  # Without it, the default description will be used.
+  # Example:
+  #  Default description: [getButtonChannelConfiguration]
+  #  Special description: [getButtonChannelConfiguration helpDecisionValAndThreshold]
+
+  if {$extraDescription == ""} {
+    append html "<tr><td colspan='2'>\${helpBtnChannelConfiguration}</td></tr>"
+  } else {
+    append html "<tr><td colspan='2'>\${$extraDescription}</td></tr>"
+  }
+
+  append html "<tr>"
+  append html "<td>\${SENDER_CHANNEL_SETTINGS}</td>"
+  append html "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
+  append html "</tr>"
+
+  return $html
+}
+
 proc getHorizontalLine {{extraparam ""}} {
   return "<tr $extraparam><td colspan=\"2\"><hr></td></tr>"
 }
 
-proc getHelpIcon {topic x y} {
+proc getHelpIcon {topic {x 0} {y 0}} {
+
+  # Default
+  if {$x == 0} {set x 450}
+  if {$y == 0} {set y 260}
+
+
+  # Set the size for known parameters
+  switch $topic {
+   "BLIND_AUTOCALIBRATION" {set x 450; set y 75}
+   "BLIND_REFERENCE_RUNNING_TIME" {set x 450; set y 160}
+   "BLOCKING_PERIOD" {set x 450; set y 100}
+   "BOOST_TIME_PERIOD" {set x 500; set y 200}
+   "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
+   "DELAY_COMPENSATION" {set x 450; set y 100}
+   "DURATION_5MIN" {set x 500; set y 200}
+   "ENABLE_ROUTING" {set x 500; set y 120}
+   "HEATING_COOLING" {set x 450; set y 160}
+   "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
+   "PERMANENT_FULL_RX" {set x 500; set y 160}
+   "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
+   "SPDR_CHANNEL_MODE" {set x 600; set y 600}
+   "TEMPERATURE_OFFSET" {set x 500; set y 200}
+   "TWO_POINT_HYSTERESIS" {set x 450; set y 160}
+   "WEEK_PROGRAM_POINTER" {set x 400; set y 100}
+  }
+
   set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
   return $ret
 }
@@ -191,7 +241,7 @@ proc _getParamDescrKey {param} {
 }
 
 proc getTimeSelector {paramDescr p profile type prn special_input_id timebase optionValues {extraparam ""}} {
-  
+
   # paramDescr        Text vor der Auswahlbox
   # p                 Paramset
   # profile           the profile (e. g. PROFILE_1)

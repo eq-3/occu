@@ -1,27 +1,63 @@
-function ::CreatePresenceDetector() {
+function ::CreateMotionDetector() {
 
-  real oIllumination = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.ILLUMINATION");
-  boolean oPresenceDetectionActive = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.PRESENCE_DETECTION_ACTIVE");
-  boolean oPresenceDetectionState = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.PRESENCE_DETECTION_STATE");
-  boolean oPresenceDetectionResetPresence = cObj.DPByControl("PRESENCEDETECTOR_TRANSCEIVER.RESET_PRESENCE");
+  real oIllumination = cObj.DPByControl("MOTIONDETECTOR_TRANSCEIVER.ILLUMINATION");
+  boolean oMotionDetectionActive = cObj.DPByControl("MOTIONDETECTOR_TRANSCEIVER.MOTION_DETECTION_ACTIVE");
+  boolean oMotionDetectionState = cObj.DPByControl("MOTIONDETECTOR_TRANSCEIVER.MOTION_DETECTION_STATE");
+  boolean oMotionDetectionResetMotion = cObj.DPByControl("MOTIONDETECTOR_TRANSCEIVER.RESET_MOTION");
 
-  boolean presenceDetectionActive = oPresenceDetectionActive.Value();
-  string sPresenceDetectionIsActive = "";
-  string sSetPresenceDetection = "";
-  string statePresence = "${statePresenceFalse}";
+  boolean motionDetectionActive = oMotionDetectionActive.Value();
+  string sMotionDetectionIsActive = "";
+  string sSetMotionDetection = "";
+  string stateMotion = "${stateMotionFalse}";
 
-  if (oPresenceDetectionState.Value() == true) {
-   statePresence = "${statePresenceTrue}";
+  boolean showBtnMotionDetectionOnOff = true;
+
+  object oDevice = dom.GetObject(cObj.Device());
+  object oMaintenance = dom.GetObject(oDevice.Channels().GetAt(0));
+  string address = oMaintenance.Address();
+
+
+  if (cObj.Label() == "HmIP-SMI") {
+    integer devFwMajor = 0;
+    integer devFwMinor = 0;
+    integer devFwPatch = 0;
+    Call("/esp/functions.fn::getFirmwareVersion()");
+    WriteLine( "<script>conInfo('HmIP-SMI - Fw: "#devFwMajor#"."#devFwMinor#"."#devFwPatch#"');</script>" );
+    if (((devFwMajor == 1) && (devFwMinor <= 2) && (devFwPatch <= 1))) {
+      showBtnMotionDetectionOnOff = false;
+    }
   }
 
-  if (presenceDetectionActive == true) {
-    presenceDetectionActive = false;
-    sPresenceDetectionIsActive = "${presenceDetectionTrue}";
-    sSetPresenceDetection = "${btnPresenceDetectionTrue}";
+  if (cObj.Label() == "HmIP-SPI") {
+    stateMotion = "${statePresenceFalse}";
+  }
+
+  if (oMotionDetectionState.Value() == true) {
+    if (cObj.Label() == "HmIP-SPI") {
+     stateMotion = "${statePresenceTrue}";
+    } else {
+      stateMotion = "${stateMotionTrue}";
+    }
+  }
+
+  if (motionDetectionActive == true) {
+    motionDetectionActive = false;
+    if (cObj.Label() == "HmIP-SPI") {
+      sMotionDetectionIsActive = "${presenceDetectionTrue}";
+      sSetMotionDetection = "${btnPresenceDetectionTrue}";
+    } else {
+      sMotionDetectionIsActive = "${motionDetectionTrue}";
+      sSetMotionDetection = "${btnMotionDetectionTrue}";
+    }
   } else {
-    presenceDetectionActive = true;
-    sPresenceDetectionIsActive = "${presenceDetectionFalse}";
-    sSetPresenceDetection = "${btnPresenceDetectionFalse}";
+    motionDetectionActive = true;
+    if (cObj.Label() == "HmIP-SPI") {
+    sMotionDetectionIsActive = "${presenceDetectionFalse}";
+    sSetMotionDetection = "${btnPresenceDetectionFalse}";
+    } else {
+    sMotionDetectionIsActive = "${motionDetectionFalse}";
+    sSetMotionDetection = "${btnMotionDetectionFalse}";
+    }
   }
 
   WriteLine("<td>");
@@ -30,25 +66,35 @@ function ::CreatePresenceDetector() {
 
       WriteLine("<tr>");
         WriteLine("<td>");
-         WriteLine("<div class='ControlBtnInfo CLASS02532'><span>${stringTableBrightness}: </span><span>"#oIllumination.Value().ToString(0)#"</span></div>");
+          WriteLine("<div class='ControlBtnInfo CLASS02532'><span>${stringTableBrightness}: </span><span>"#oIllumination.Value().ToString(0)#"</span></div>");
         WriteLine("</td>");
       WriteLine("</tr>");
 
-      WriteLine("<tr>");
-        WriteLine("<td>");
-          WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#sPresenceDetectionIsActive#"</span></div>");
-        WriteLine("</td>");
-        WriteLine("<td>");
-          WriteLine("<div class='ControlBtnOff CLASS02532' style='padding:5px' id='setTransmitterOnOff"#chnId#"'>"#sSetPresenceDetection#"</div>");
-        WriteLine("</td>");
-      WriteLine("</tr>");
+      if (showBtnMotionDetectionOnOff) {
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#sMotionDetectionIsActive#"</span></div>");
+          WriteLine("</td>");
+
+          if (cObj.Label() == "HmIP-SMI55") {
+            ! The SMI55 can be configured as a non-permanent listener. If this is the case this button should not be visible
+            ! The check if the device is configured as a non-permanent or a permanent listener happens below in the javascript section
+            WriteLine("<td id='tdBtnTransmitterOnOff' class='hidden'>");
+          } else {
+            WriteLine("<td>");
+          }
+            WriteLine("<div class='ControlBtnOff CLASS02532' style='min-height:30px; padding:5px;' id='setTransmitterOnOff"#chnId#"'>"#sSetMotionDetection#"</div>");
+          WriteLine("</td>");
+
+        WriteLine("</tr>");
+      }
 
       WriteLine("<tr>");
         WriteLine("<td>");
-          WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#statePresence#"</span></div>");
+          WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#stateMotion#"</span></div>");
         WriteLine("</td>");
-        WriteLine("<td>");
-          WriteLine("<div class='ControlBtnOff CLASS02532' style='padding:5px' id='resetPresence"#chnId#"'>${btnResetPresence}</div>");
+        WriteLine("<td id='tdBtnResetStatus' class='hidden'>");
+          WriteLine("<div class='ControlBtnOff CLASS02532' style='min-height:30px; padding:5px;' id='resetMotion"#chnId#"'>${btnResetMotion}</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
 
@@ -57,13 +103,22 @@ function ::CreatePresenceDetector() {
 
   WriteLine("<script type='text/javascript'>");
 
-    WriteLine("var resetPresenceElm = jQuery('#resetPresence"#chnId#"'),");
+    ! Check if the device is configured as non-permanent or permanent listener. Accordingly show/hide the button for activating/deactivating the motion detector
+    WriteLine("var address = \""#address#"\";");
+    WriteLine('var permanentFullRX = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": address, "valueKey": "PERMANENT_FULL_RX"});');
+    ! permanentFullRX can be null, 0, 1
+    ! null means, the device is a permant listener and cannot change the listener mode.
+    ! 0 = the device is configured as non-permanent listener ---- 1 = the device is configured as permanent listener
+    ! If the device is a non-permanent listener then hide the button. Otherwise the state of the control doesn't change after using the button which will cause enquiries at the customer service.
+    WriteLine("if (permanentFullRX != 0) {");
+      WriteLine("jQuery('#tdBtnTransmitterOnOff, #tdBtnResetStatus').show();");
+    WriteLine("}");
+
+
+    WriteLine("var resetMotionElm = jQuery('#resetMotion"#chnId#"'),");
     WriteLine("transmitterOnOffElm = jQuery('#setTransmitterOnOff"#chnId#"');");
-
-    WriteLine("resetPresenceElm.click(function() {setDpState('"#oPresenceDetectionResetPresence.ID()#"', true);setBtnOn(this.id);});");
-
-    WriteLine("transmitterOnOffElm.click(function() {setDpState('"#oPresenceDetectionActive.ID()#"', "#presenceDetectionActive#");setBtnOn(this.id);});");
-
+    WriteLine("resetMotionElm.click(function() {setDpState('"#oMotionDetectionResetMotion.ID()#"', true);setBtnOn(this.id);});");
+    WriteLine("transmitterOnOffElm.click(function() {setDpState('"#oMotionDetectionActive.ID()#"', "#motionDetectionActive#");setBtnOn(this.id);});");
     WriteLine(" setBtnOn = function(elmID) {" );
       WriteLine(" var elm = jQuery('#'+elmID);");
       WriteLine(" elm.removeClass('ControlBtnOff').addClass('ControlBtnOn'); ");

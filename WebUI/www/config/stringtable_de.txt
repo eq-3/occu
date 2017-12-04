@@ -155,6 +155,12 @@ BLIND_VIRTUAL_RECEIVER	${stringTableBlindVirtualReceiverTitle}
 BLIND_VIRTUAL_RECEIVER|LEVEL	${stringTableBlindLevel}
 BLIND_VIRTUAL_RECEIVER|LEVEL_2	${stringTableJalousieSlatsLevel}
 BLIND_VIRTUAL_RECEIVER|STOP	${stringTableBlindStop}
+BLOCKING_PERIOD_UNIT	${stringTableBlockingPeriodUnit}
+BLOCKING_PERIOD_UNIT=100MS	${optionUnit100MS}
+BLOCKING_PERIOD_UNIT=H	${optionUnitH}
+BLOCKING_PERIOD_UNIT=M	${optionUnitM}
+BLOCKING_PERIOD_UNIT=S	${optionUnitS}
+BLOCKING_PERIOD_VALUE	${stringTableBlockingPeriodValue}
 BOOST_MODE	${stringTableClimateControlRTTransceiverBoostMode}
 BOOST_MODE=FALSE	${stringTableBoostModeFalse}
 BOOST_MODE=TRUE	${stringTableBoostModeTrue}
@@ -277,6 +283,7 @@ CONDITION_CURRENT	${stringTableConditionCurrentTitle}
 CONDITION_FREQUENCY	${stringTableConditionFrequencyTitle}
 CONDITION_POWER	${stringTableConditionPowerTitle}
 CONDITION_VOLTAGE	${stringTableConditionVoltageTitle}
+COND_SWITCH_TRANSMITTER	${stringTableConditionSwitchTransmitter}
 COND_TX_CYCLIC_ABOVE	${stringTableCondTxCyclicAbove}
 COND_TX_CYCLIC_BELOW	${stringTableCondTxCyclicBelow}
 COND_TX_DECISION_ABOVE	${stringTableCondTxDecisionAbove}
@@ -474,6 +481,10 @@ ERROR_SABOTAGE=SABOTAGE	${stringTableSabotage}
 ERROR_SABOTAGE=TRUE	${stringTableErrorSabotageTrue}
 ERROR_UPDATE=TRUE	${stringTableErrorUpdateTrue}
 ERROR_UPDATE=FALSE	${stringTableErrorUpdateFalse}
+ERROR_WIND_COMMUNICATION=FALSE	${stringTableErrorWindCommunicationFalse}
+ERROR_WIND_COMMUNICATION=TRUE	${stringTableErrorWindCommunicationTrue}
+ERROR_WIND_NORTH=TRUE	${stringTableErrorWindNorthTrue}
+ERROR_WIND_NORTH=FALSE	${stringTableErrorWindNorthFalse}
 EVENT_DELAY_UNIT	${stringTableEventDelayUnit}
 EVENT_DELAY_UNIT=100MS	${optionUnit100MS}
 EVENT_DELAY_UNIT=H	${optionUnitH}
@@ -754,22 +765,32 @@ PARTY_TEMPERATURE	${stringTablePartyTemperature}
 PARTY_TIME_END	${stringTableClimateControlRegPartyEndTime}
 PARTY_TIME_START	${stringTableClimateControlRegPartyStartTime}
 
+PASSAGE_COUNTER_VALUE	${stringTablePassageCounterValue}
+PASSAGE_COUNTER_OVERFLOW=FALSE	${stringTablePassageCounterOverflowFalse}
+PASSAGE_COUNTER_OVERFLOW=TRUE	${stringTablePassageCounterOverflowTrue}
+
+LAST_PASSAGE_DIRECTION=TRUE	${stringTableLastPassageDirectionTrue}
+LAST_PASSAGE_DIRECTION=FALSE	${stringTableLastPassageDirectionFalse}
+
+CURRENT_PASSAGE_DIRECTION=FALSE	${stringTableCurrentPassageDirectionFalse}
+CURRENT_PASSAGE_DIRECTION=TRUE	${stringTableCurrentPassageDirectionTrue}
+
+PASSAGE_DETECTOR_COUNTER_TRANSMITTER	${stringTablePassageDetectorCounterTransmitterTitle}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|CHANNEL_OPERATION_MODE	${stringTablePassageDetectorCounterTransmitterChannelOperationMode}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_ABOVE	${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionAbove}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_BELOW	${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionBelow}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_HI	${stringTablePassageDetectorCounterTransmitterCondTxThresholdHi}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_LO	${stringTablePassageDetectorCounterTransmitterCondTxThresholdLo}
-
 PEER_NEEDS_BURST	${stringTablePeerNeedsBurst}
 PIR_OPERATION_MODE	${stringTablePirOperationMode}
-
 PIR_SENSITIVITY	${stringTableSensorSensivity}
-
 PIR_OPERATION_MODE_ECO	${pirOperationModeEco}
 PIR_OPERATION_MODE_NORMAL	${pirOperationModeNormal}
 PIR_OPERATION_MODE_OFF	${lblOff}
-
 POSITION_SAVE_TIME	${stringTablePositionSaveTime}
+
+POWER_MAINS_FAILURE=FALSE	${stringTablePowerMainsFailureFalse}
+POWER_MAINS_FAILURE=TRUE	${stringTablePowerMainsFailureTrue}
 
 POWERMETER_IEC1|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
 POWERMETER_IEC1|GAS_ENERGY_COUNTER	${stringTablePowerMeterEnergyCounterGas}
@@ -952,8 +973,6 @@ SELF_CALIBRATION_RESULT=TRUE	${stringTableSelfCalibrationResultTrue}
 SELF_CALIBRATION=START	${stringTableSelfCalibrationStart}
 SELF_CALIBRATION=STOP	${stringTableSelfCalibrationStop}
 
-
-
 SENSOR=FALSE	${stringTableSensorFalse}
 SENSOR=TRUE	${stringTableSensorTrue}
 SENSOR_ERROR=FALSE	${stringTableSensorErrorFalse}
@@ -1118,6 +1137,7 @@ SPEED_MULTIPLIER	${stringTableSpeedMultiplier}
 STANDBY_TIME	${stringTableStandByTime}
 STATE=FALSE	${stringTableStateFalse}
 STATE=TRUE	${stringTableStateTrue}
+STATE_RESET_RECEIVER	${stringTableStateResetReceiverTitle}
 STATUSINFO_MINDELAY	${stringTableStatusInfoMinDelay}
 STATUSINFO_RANDOM	${stringTableStatusInfoRandom}
 STATUS_INDICATOR	${stringTableStatusIndicatorTitle}
@@ -1262,24 +1282,38 @@ WEATHER	${stringTableWeatherTitle}
 WEATHER_RECEIVER	${stringTableWeatherReceiver}
 WEATHER_TRANSMIT|HUMIDITY	${stringTableWeatherHumidity}
 WEATHER_TRANSMIT|TEMPERATURE	${stringTableWeatherTemperature}
-WEATHER|AIR_PRESSURE	${stringTableWeatherAirPressure}
-WEATHER|BRIGHTNESS	${stringTableWeatherBrightness}
-WEATHER|HUMIDITY	${stringTableWeatherHumidity}
-WEATHER|RAINING	${stringTableWeatherRaining}
-WEATHER|RAINING=FALSE	${stringTableWeatherRainingFalse}
-WEATHER|RAINING=TRUE	${stringTableWeatherRainingTrue}
-WEATHER|RAIN_COUNTER	${stringTableWeatherRainCounter}
-WEATHER|STORM_LOWER_THRESHOLD	${stringTableWeatherStormLowerThres}
-WEATHER|STORM_UPPER_THRESHOLD	${stringTableWeatherStormUpperThres}
-WEATHER|SUNSHINEDURATION	${stringTableWeatherSunshineDuration}
-WEATHER|SUNSHINE_THRESHOLD	${stringTableWeatherSunshineThres}
-WEATHER|TEMPERATURE	${stringTableWeatherTemperature}
-WEATHER|WIND_DIRECTION	${stringTableWeatherWindDir}
-WEATHER|WIND_DIRECTION_RANGE	${stringTableWeatherWindDirRange}
-WEATHER|WIND_SPEED	${stringTableWeatherWindSpeed}
-WEATHER|WIND_SPEED_RESULT_SOURCE	${stringTableWeatherWindSpeedResultSource}
-WEATHER|WIND_SPEED_RESULT_SOURCE=AVERAGE_VALUE	${stringTableWeatherWindSpeedResultSourceAverage}
-WEATHER|WIND_SPEED_RESULT_SOURCE=MAX_VALUE	${stringTableWeatherWindSpeedResultSourceMax}
+
+# WEATHER SENSOR
+
+AIR_PRESSURE	${stringTableWeatherAirPressure}
+BRIGHTNESS	${stringTableWeatherBrightness}
+HUMIDITY	${stringTableWeatherHumidity}
+RAINING	${stringTableWeatherRaining}
+RAINING=FALSE	${stringTableWeatherRainingFalse}
+RAINING=TRUE	${stringTableWeatherRainingTrue}
+RAIN_COUNTER	${stringTableWeatherRainCounter}
+RAIN_COUNTER_OVERFLOW=TRUE	${stringTableWeatherRainCounterOverflowTrue}
+RAIN_COUNTER_OVERFLOW=FALSE	${stringTableWeatherRainCounterOverflowFalse}
+STORM_LOWER_THRESHOLD	${stringTableWeatherStormLowerThres}
+STORM_UPPER_THRESHOLD	${stringTableWeatherStormUpperThres}
+SUNSHINEDURATION	${stringTableWeatherSunshineDuration}
+SUNSHINEDURATION_OVERFLOW=FALSE	${stringTableWeatherSunshineDurationOverflowFalse}
+SUNSHINEDURATION_OVERFLOW=TRUE	${stringTableWeatherSunshineDurationOverflowTrue}
+SUNSHINE_THRESHOLD	${stringTableWeatherSunshineThres}
+SUNSHINE_THRESHOLD_OVERRUN=FALSE	${stringTableWeatherSunshineThresOverrunFalse}
+SUNSHINE_THRESHOLD_OVERRUN=TRUE	${stringTableWeatherSunshineThresOverrunTrue}
+TEMPERATURE	${stringTableWeatherTemperature}
+WIND_DIR	${stringTableWeatherWindDir}
+WIND_DIRECTION	${stringTableWeatherWindDir}
+WIND_DIR_RANGE	${stringTableWeatherWindDirRange}
+WIND_DIRECTION_RANGE	${stringTableWeatherWindDirRange}
+WIND_SPEED	${stringTableWeatherWindSpeed}
+WIND_SPEED_RESULT_SOURCE	${stringTableWeatherWindSpeedResultSource}
+WIND_SPEED_RESULT_SOURCE=AVERAGE_VALUE	${stringTableWeatherWindSpeedResultSourceAverage}
+WIND_SPEED_RESULT_SOURCE=MAX_VALUE	${stringTableWeatherWindSpeedResultSourceMax}
+WIND_THRESHOLD_OVERRUN=FALSE	${stringTableWeatherWindThresholdOverrunFalse}
+WIND_THRESHOLD_OVERRUN=TRUE	${stringTableWeatherWindThresholdOverrunTrue}
+# END WEATHER SENSOR
 
 WEEK_PROGRAM_CHANNEL_LOCKS	${stringTableWeekProgramChannelLocks}
 WEEK_PROGRAM_TARGET_CHANNEL_LOCKS	${stringTableWeekProgramTargetChannelLocks}

@@ -1,31 +1,42 @@
- ##
- # SysVar.createBool
- # Erzeugt eine Systemvariable vom Typ Boolean.
- #
- # Parameter:
- #   name: [string] Name der betreffenden Systemvariablen.
- #   init_val: [bool] Initialer Status
- #   internal: [integer]  Variable sichtbar / Variable intern
- # Rückgabewert: [string]
- #   Objekt der Systemvariablen mit Name, ID, Wert.
- ##
+##
+# SysVar.createBool
+# Erzeugt eine Systemvariable vom Typ Boolean.
+#
+# Parameter:
+#   name: [string] Name der betreffenden Systemvariablen.
+#   init_val: [bool] Initialer Status
+#   internal: [integer]  Variable sichtbar / Variable intern
+#   chnID: [integer] ID des Kanals, an dem die Variable gebunden werden soll. Wenn an kein Kanal gebunden werden soll, ist -1 zu übergeben
+# Rückgabewert: [string]
+#   Objekt der Systemvariablen mit Name, ID, Wert.
+##
 
- set script {
-   object oSysVars = dom.GetObject( ID_SYSTEM_VARIABLES );
-   object sv = dom.CreateObject(OT_VARDP);
+set script {
+  if (chnID != -1) {
+   object channel = dom.GetObject(chnID);
+  }
 
-   sv.ValueType( ivtBinary );
-   sv.ValueSubType( istBool );
-   sv.Name(name);
-   sv.ValueName0("false");
-   sv.ValueName1("true");
-   sv.State(init_val);
+  object oSysVars = dom.GetObject( ID_SYSTEM_VARIABLES );
+  object sv = dom.CreateObject(OT_VARDP);
 
-   sv.Internal(internal);
-   oSysVars.Add(sv.ID());
+  sv.ValueType( ivtBinary );
+  sv.ValueSubType( istBool );
+  sv.Name(name);
+  sv.ValueName0("false");
+  sv.ValueName1("true");
+  sv.State(init_val);
 
-   Write("{'name':'"#sv.Name()#"','id':'"#sv.ID()#"','value':'"#sv.Value()#"' }");
- }
+  sv.Internal(internal);
 
- jsonrpc_response [hmscript $script args]
+  if (channel) {
+    sv.Channel(chnID);
+    channel.DPs().Add(sv.ID());
+  }
+
+  oSysVars.Add(sv.ID());
+
+  Write("{'name':'"#sv.Name()#"','id':'"#sv.ID()#"','value':'"#sv.Value()#"' }");
+  }
+
+jsonrpc_response [hmscript $script args]
 

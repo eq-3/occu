@@ -1,4 +1,4 @@
-proc getHeader {chn} {
+proc getHeader {address chn} {
     upvar ps ps
     upvar prn prn
 
@@ -13,6 +13,7 @@ proc getHeader {chn} {
       set options(1) \${stringTableKeyTransceiverChannelOperationModeKeyBehavior}
       set options(2) \${stringTableKeyTransceiverChannelOperationModeSwitchBehavior}
       set options(3) \${stringTableKeyTransceiverChannelOperationModeBinaryBehavior}
+      # append result  "<td>[getOptionBox '$param' options $ps($param) $chn $prn "onchange=\"showHint($chn,$ps($param) ,this.value);storeChannelMode('$address', $chn, this.value)\""]</td>"
       append result  "<td>[getOptionBox '$param' options $ps($param) $chn $prn "onchange=\"showHint($chn,$ps($param) ,this.value);\""]</td>"
      append result "</tr>"
   }
@@ -27,6 +28,8 @@ proc getHeader {chn} {
   }
 
   append result "<script type=\"text/javascript\">"
+    append result "var arChModes = \[\];"
+    append result "arChModes\[0\] = \"--\";"
     append result "showHint = function(chn,origVal ,val) \{"
       append result "var chnElm = jQuery(\"\[name='modrc8_\"+chn+\"'\]\");"
       append result "var hintElm = jQuery(\"#hint_\" + chn);"
@@ -38,7 +41,35 @@ proc getHeader {chn} {
        append result "chnElm.hide();"
        append result "hintElm.show();"
       append result "\}"
-    append result "\}"
+    append result "\};"
+
+
+set comment { this is currently not in use
+    append result "storeChannelMode = function(address, chn, val) \{"
+      append result "arChModes\[chn\] = val.toString();"
+          append result "jQuery(\"#footerButtonOK\").unbind(\"click\").click(function()\{"
+
+            append result " var devAddress = address.split(\":\")\[0\];"
+            append result " jQuery.each(DeviceList.getDeviceByAddress(devAddress).channels, function(index, channel) \{ "
+
+              append result " if ((channel.channelType == \"KEY_TRANSCEIVER\") && (typeof arChModes\[index\] != \"undefined\")) \{ "
+
+                append result " conInfo(\"All right, save value into sys var\");"
+                append result " conInfo(\"svName: svHmIPModRC8ChnMode_\"+channel.id+\"_\"+channel.address+ \" - value: \" + arChModes\[index\] + \"\\n\\n\");"
+
+                append result "homematic(\"SysVar.setEnum\", \{'name' : 'svHmIPModRC8ChnMode_'+channel.id+'_'+channel.address, 'valueList' : arChModes\[channel.index\]\}, function(result) \{"
+                  append result "conInfo(\"sysvar chn \"+ index +\" saved - result: \" + result);"
+                append result "\});"
+
+              append result "\}"
+
+            append result "\}); "
+            append result "SaveDeviceParameters();"
+          append result " \});"
+    append result "\};"
+
+}
+
   append result "</script>"
 
   return $result
@@ -48,7 +79,7 @@ proc getFooter {chn} {
   return "<div id=\"hint_$chn\" class=\"hidden attention\" style=\"padding:2px;\">\${remoteModeEM8SpecialValHint}</div>"
 }
 
-proc getInactiveHTML {chn p descr} {
+proc getInactiveHTML {address chn p descr} {
 
   upvar $p ps
   upvar $descr psDescr
@@ -61,11 +92,11 @@ proc getInactiveHTML {chn p descr} {
 
   set prn 0
 
-  append html [getHeader $chn]
+  append html [getHeader $address $chn]
   return $html
 }
 
-proc getKeyHTML {chn p descr} {
+proc getKeyHTML {address chn p descr} {
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -75,7 +106,7 @@ proc getKeyHTML {chn p descr} {
   set html ""
 
   set prn 0
-  append html [getHeader $chn]
+  append html [getHeader $address $chn]
 
   set param DBL_PRESS_TIME
   if { ! [catch {set tmp $ps($param)}]  } {
@@ -120,7 +151,7 @@ proc getKeyHTML {chn p descr} {
   return $html
 }
 
-proc getSwitchHTML {chn p descr} {
+proc getSwitchHTML {address chn p descr} {
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -130,11 +161,11 @@ proc getSwitchHTML {chn p descr} {
   set html ""
 
   set prn 0
-  append html [getHeader $chn]
+  append html [getHeader $address $chn]
   return $html
 }
 
-proc getBinaryHTML {chn p descr} {
+proc getBinaryHTML {address chn p descr} {
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -144,7 +175,7 @@ proc getBinaryHTML {chn p descr} {
   set html ""
   set prn 0
 
-  append html [getHeader $chn]
+  append html [getHeader $address $chn]
 
   set param MSG_FOR_POS_A
   if { ! [catch {set tmp $ps($param)}]  } {

@@ -155,6 +155,7 @@ function ::WriteConditionText()
                                       }
                                     }
                                   }
+                                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
                                   sRet = sRet#' '#sValue;
                                 }
                                 if( (oDP.ID() == iLV) && (iRV1 == false) ) 
@@ -174,6 +175,7 @@ function ::WriteConditionText()
                                       }
                                     }
                                   }
+                                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
                                   sRet = sRet#' '#sValue;
                                 }
                                 !Write( "<script>conInfo('- ist binär und Action, RV1="#iRV1#" -- RV2="#iRV2#"');</script>" );
@@ -201,6 +203,7 @@ function ::WriteConditionText()
                                     }
                                   }
                                   !Write( "<script>conInfo('- ist was anderes -- sDP:"#sDP#" Typ:"#iRV1T#" ');</script>" );
+                                  Call("/esp/functions.fn::getSpecialIntegerTranslation()");
                                   sRet = sRet#' '#sValue;
                                 }
                               }
@@ -228,7 +231,7 @@ function ::WriteConditionText()
                                     }
                                   }
                                   !Write( "<script>conInfo('- ist HSSDP -- "#ivtSpecialValue#" -- "#sValue#"');</script>" );
-                                  sRet = sRet#' '#sValue;  
+                                  sRet = sRet#' '#sValue;
                                 }
                               }
                             }

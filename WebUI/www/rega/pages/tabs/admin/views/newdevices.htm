@@ -646,14 +646,31 @@ GetChannelType = function (channel) {
   return channel.channelType;
 };
 
-CreateSysVarEnergyCounter = function (name, type) {
+CreateSysVar = function (name, type, value, chnID) {
+  if (typeof chnID === "undefined") {
+    chnID = -1;
+  }
   switch (type) {
     case "float" :
       var minVal = 0,
         maxVal = (1.7 * Math.pow(10, 308)) - 1; // Double in C++
-      return homematic("SysVar.createFloat", {"name": name, "minValue": minVal, "maxValue": maxVal, "internal": 1});
+      return homematic("SysVar.createFloat", {"name": name, "minValue": minVal, "maxValue": maxVal, "internal": 1, "chnID": chnID}, function() {
+        if ((value != undefined) && (value != "")) {
+          homematic("SysVar.setFloat", {"name" : name, "value" : value});
+        }
+      });
     case "boolean":
-      return homematic("SysVar.createBool", {"name": name, "init_val": false, "internal": 1}); // for testing internal 0
+      return homematic("SysVar.createBool", {"name": name, "init_val": false, "internal": 1, "chnID": chnID}, function() {
+        if ((value != undefined) && (value != "")) {
+          homematic("SysVar.setBool", {"name" : name, "value" : value});
+        }
+      });
+    case "enum":
+      return homematic("SysVar.createEnum", {"name": name, "valList": "val1,val2,val3", "internal": 1, "chnID": chnID}, function() {
+        if ((value != undefined) && (value != "")) {
+          homematic("SysVar.setEnum", {"name" : name, "valueList" : value});
+        }
+      });
   }
 };
 
@@ -1054,8 +1071,347 @@ CreateSysVarEnergyCounterScriptIEC = function(chn) {
   homematic("ReGa.runScript", {"script": script});
 };
 
+/*
+"sunshineCounterId": "svHmIPSunshineCounter_" + chn.id + "_" + chn.address,
+"tmpSunshineCounterId": "svHmIPSunshineCounterOldVal_" + chn.id,
+"sunshineCounterYesterdayId": "svHmIPSunshineCounterYesterday_" + chn.id,
+"sunshineCounterTodayId": "svHmIPSunshineCounterToday_" + chn.id
+*/
+
+//HmIP-SWO-B -> (basic)
+CreateHmIPSunshineCounterScript = function(chn) {
+  conInfo("CreateHmIPSunshineCounterScript");
+  var sysVarIds = getSysVarRainSunshineCounterIds(chn, false);
+  var sysVarId = sysVarIds.sunshineCounterId,
+    sysVarOldValId = sysVarIds.tmpSunshineCounterId,
+
+    sysVarCounterTodayId = sysVarIds.sunshineCounterTodayId,
+    sysVarCounterYesterdayId = sysVarIds.sunshineCounterYesterdayId;
+
+  var updateScript =
+  "object chn = dom.GetObject('"+chn.id+"');\n" +
+  "object oOverflow = chn.DPByControl('WEATHER_TRANSMIT.SUNSHINEDURATION_OVERFLOW');\n" +
+  "object oSunshineCounter = chn.DPByControl('WEATHER_TRANSMIT.SUNSHINEDURATION');\n" +
+  "object oSysVarSunshine = dom.GetObject('"+sysVarId+"');\n" +
+  "object oSysVarSunshineOldVal = dom.GetObject('"+sysVarOldValId+"');\n" +
+  "object oSysVarCounterToday =  dom.GetObject('"+sysVarCounterTodayId+"');\n" +
+  "object oSysVarCounterYesterday =  dom.GetObject('"+sysVarCounterYesterdayId+"');\n" +
+
+
+  "boolean overFlowFlag = oOverflow.Value();\n" +
+  "real devVal = oSunshineCounter.Value();\n" +
+  "real devValMax = oSunshineCounter.ValueMax();\n" +
+  "real oldDevVal = oSysVarSunshineOldVal.Value();\n" +
+  "real diffVal = 0.0;\n" +
+  "real sysVarVal = oSysVarSunshine.Value();\n" +
+
+  "real sysVarTodayVal = oSysVarCounterToday.Value();\n" +
+
+  "real todayTotal = 0.0;\n" +
+
+  "integer tmp_devVal = (devVal.ToString().ToFloat() * 1000).ToInteger();\n" +
+  "integer tmp_oldDevVal = (oldDevVal.ToString().ToFloat() * 1000).ToInteger();\n" +
+
+
+  "if (overFlowFlag == false) {\n" +
+    "! Normal conditions\n" +
+    "if (tmp_oldDevVal <= tmp_devVal) {\n" +
+       "diffVal = devVal - oldDevVal;\n" +
+    "}\n" +
+
+    "! Device has rebooted\n" +
+    "if (tmp_oldDevVal > tmp_devVal) {\n" +
+       "diffVal = devVal;\n" +
+    "}\n"+
+
+  "} else {\n" +
+    "!overFlow is true\n" +
+    "if (tmp_oldDevVal > tmp_devVal) {\n" +
+      "! An device overflow has occured\n" +
+      "diffVal = (devVal + devValMax) - oldDevVal;\n" +
+    "} else {\n" +
+      "! Once the overflow flag has been set it will only be false when the device reboots\n"+
+      "! Therefore this is the normal condition after an device overflow\n" +
+      "diffVal = devVal - oldDevVal;\n" +
+    "}\n" +
+  "}\n" +
+
+  "oSysVarSunshineOldVal.State(devVal);\n" +
+  "oSysVarSunshine.State(sysVarVal + diffVal);\n"+
+  "todayTotal = sysVarTodayVal + diffVal;\n" +
+  "if (todayTotal >= 1440.0) {todayTotal = 0.0;}\n" +
+  "oSysVarCounterToday.State(todayTotal);\n";
+
+  var script =
+  "var sysVarId = '"+sysVarId+"';\n" +
+  "var channel = dom.GetObject('"+chn.id+"');\n" +
+  "var channelId = channel.ID();\n" +
+  "var paramId = channel.DPByControl('WEATHER_TRANSMIT.ILLUMINATION').ID();\n"+
+  "var _script = \""+updateScript+"\";\n" +
+
+  "var DP_VALUE_CHECK_UPDATE = 13;"+
+
+  "var programs = dom.GetObject(ID_PROGRAMS);"+
+  "var program  = dom.CreateObject(OT_PROGRAM);"+
+  "program.Name('prgSunshineCounter_"+ chn.id +"_"+chn.address+"');"+
+  "program.Internal(true);"+
+  "programs.Add(program.ID());"+
+
+
+  "var rule = program.Rule();"+
+  "rule.RuleOperatorType(OPERATOR_NONE);"+
+
+  "var condition = rule.RuleAddCondition();"+
+  "condition.CndOperatorType(OPERATOR_NONE);"+
+
+  "var singleCondition = condition.CndAddSingle();"+
+  "singleCondition.OperatorType(OPERATOR_NONE);"+
+  "singleCondition.ConditionType(9);"+
+  "singleCondition.ConditionType2(DP_VALUE_CHECK_UPDATE);"+
+  "singleCondition.LeftValType(ivtObjectId);"+
+  "singleCondition.LeftVal(paramId);"+
+  "singleCondition.RightVal1ValType(ivtFloat);"+
+  "singleCondition.RightVal1(0.0);"+
+  "singleCondition.RightVal2ValType(ivtFloat);"+
+  "singleCondition.RightVal2(0.0);"+
+
+  "singleCondition.ConditionChannel(channelId);"+
+
+  "var destination = rule.RuleDestination();"+
+  "var action = destination.DestAddSingle();"+
+  "action.DestinationParam(ivtString);"+
+  "action.DestinationValueType(ivtString);"+
+  "action.DestinationValue(_script);"+
+
+  "program.Active(true);"+
+  "dom.RTUpdate(0);";
+
+  homematic("ReGa.runScript", {"script": script});
+};
+
+
+//HmIP-SWO-PL/PR -> (plus/pro)
+CreateHmIPRainCounterScript = function(chn) {
+  conInfo("CreateHmIPRainCounterScript");
+  var sysVarIds = getSysVarRainSunshineCounterIds(chn, true);
+  var sysVarId = sysVarIds.rainCounterId,
+    sysVarOldValId = sysVarIds.tmpRainCounterId,
+
+    sysVarCounterTodayId = sysVarIds.rainCounterTodayId,
+    sysVarCounterYesterdayId = sysVarIds.rainCounterYesterdayId;
+
+  var updateScript =
+  "object chn = dom.GetObject('"+chn.id+"');\n" +
+  "object oOverflow = chn.DPByControl('WEATHER_TRANSMIT.RAIN_COUNTER_OVERFLOW');\n" +
+  "object oRainCounter = chn.DPByControl('WEATHER_TRANSMIT.RAIN_COUNTER');\n" +
+  "object oSysVarRain = dom.GetObject('"+sysVarId+"');\n" +
+  "object oSysVarRainOldVal = dom.GetObject('"+sysVarOldValId+"');\n" +
+  "object oSysVarCounterToday =  dom.GetObject('"+sysVarCounterTodayId+"');\n" +
+  "object oSysVarCounterYesterday =  dom.GetObject('"+sysVarCounterYesterdayId+"');\n" +
+
+
+  "boolean overFlowFlag = oOverflow.Value();\n" +
+  "real devVal = oRainCounter.Value();\n" +
+  "real devValMax = oRainCounter.ValueMax();\n" +
+  "real oldDevVal = oSysVarRainOldVal.Value();\n" +
+  "real diffVal = 0.0;\n" +
+  "real sysVarVal = oSysVarRain.Value();\n" +
+
+  "real sysVarTodayVal = oSysVarCounterToday.Value();\n" +
+  "real todayTotal = 0.0;\n" +
+
+  "integer tmp_devVal = (devVal.ToString().ToFloat() * 1000).ToInteger();\n" +
+  "integer tmp_oldDevVal = (oldDevVal.ToString().ToFloat() * 1000).ToInteger();\n" +
+
+
+  "if (overFlowFlag == false) {\n" +
+    "! Normal conditions\n" +
+    "if (tmp_oldDevVal <= tmp_devVal) {\n" +
+       "diffVal = devVal - oldDevVal;\n" +
+    "}\n" +
+
+    "! Device has rebooted\n" +
+    "if (tmp_oldDevVal > tmp_devVal) {\n" +
+       "diffVal = devVal;\n" +
+    "}\n"+
+
+  "} else {\n" +
+    "!overFlow is true\n" +
+    "if (tmp_oldDevVal > tmp_devVal) {\n" +
+      "! An device overflow has occured\n" +
+      "diffVal = (devVal + devValMax) - oldDevVal;\n" +
+    "} else {\n" +
+      "! Once the overflow flag has been set it will only be false when the device reboots\n"+
+      "! Therefore this is the normal condition after an device overflow\n" +
+      "diffVal = devVal - oldDevVal;\n" +
+    "}\n" +
+  "}\n" +
+
+  "oSysVarRainOldVal.State(devVal);\n" +
+  "oSysVarRain.State(sysVarVal + diffVal);\n"+
+  "todayTotal = sysVarTodayVal + diffVal;\n" +
+  "if (todayTotal >= 1440.0) {todayTotal = 0.0;}\n" +
+  "oSysVarCounterToday.State(todayTotal);\n";
+
+  var script =
+  "var sysVarId = '"+sysVarId+"';\n" +
+  "var channel = dom.GetObject('"+chn.id+"');\n" +
+  "var channelId = channel.ID();\n" +
+  "var paramId = channel.DPByControl('WEATHER_TRANSMIT.RAIN_COUNTER').ID();\n"+
+  "var _script = \""+updateScript+"\";\n" +
+
+  "var DP_VALUE_CHECK_UPDATE = 13;"+
+
+  "var programs = dom.GetObject(ID_PROGRAMS);"+
+  "var program  = dom.CreateObject(OT_PROGRAM);"+
+  "program.Name('prgRainCounter_"+ chn.id +"_"+chn.address+"');"+
+  "program.Internal(true);"+
+  "programs.Add(program.ID());"+
+
+
+  "var rule = program.Rule();"+
+  "rule.RuleOperatorType(OPERATOR_NONE);"+
+
+  "var condition = rule.RuleAddCondition();"+
+  "condition.CndOperatorType(OPERATOR_NONE);"+
+
+  "var singleCondition = condition.CndAddSingle();"+
+  "singleCondition.OperatorType(OPERATOR_NONE);"+
+  "singleCondition.ConditionType(9);"+
+  "singleCondition.ConditionType2(DP_VALUE_CHECK_UPDATE);"+
+  "singleCondition.LeftValType(ivtObjectId);"+
+  "singleCondition.LeftVal(paramId);"+
+  "singleCondition.RightVal1ValType(ivtFloat);"+
+  "singleCondition.RightVal1(0.0);"+
+  "singleCondition.RightVal2ValType(ivtFloat);"+
+  "singleCondition.RightVal2(0.0);"+
+
+  "singleCondition.ConditionChannel(channelId);"+
+
+  "var destination = rule.RuleDestination();"+
+  "var action = destination.DestAddSingle();"+
+  "action.DestinationParam(ivtString);"+
+  "action.DestinationValueType(ivtString);"+
+  "action.DestinationValue(_script);"+
+
+  "program.Active(true);"+
+  "dom.RTUpdate(0);";
+
+  homematic("ReGa.runScript", {"script": script});
+};
+
+CreateHmIPSunRainTodayYesterdayScript = function(chn) {
+
+  var sysVarIds = getSysVarRainSunshineCounterIds(chn, true);
+
+  var destinationScript =
+
+    "object chn = dom.GetObject('"+chn.id+"');\n" +
+
+    "object oSysVarSunshineCounterToday = dom.GetObject('"+sysVarIds.sunshineCounterTodayId+"');\n" +
+    "object oSysVarSunshineCounterYesterday = dom.GetObject('"+sysVarIds.sunshineCounterYesterdayId+"');\n" +
+
+    "object oSysVarRainCounterToday = dom.GetObject('"+sysVarIds.rainCounterTodayId+"');\n" +
+    "object oSysVarRainCounterYesterday = dom.GetObject('"+sysVarIds.rainCounterYesterdayId+"');\n" +
+
+    // 07:00 Uhr
+    // Setze Zähler Sonne für Yesterday auf den Wert des Zählers für Today
+    "if (oSysVarSunshineCounterYesterday && oSysVarSunshineCounterToday) {oSysVarSunshineCounterYesterday.State(oSysVarSunshineCounterToday.Value());}" +
+
+    // Setze Tageszähler Sonne auf 0
+      "if (oSysVarSunshineCounterToday) {oSysVarSunshineCounterToday.State(0);}"+
+
+    // Setze Zähler Regen für Yesterday auf den Wert des Zählers für Today
+    "if (oSysVarRainCounterYesterday && oSysVarRainCounterToday) {oSysVarRainCounterYesterday.State(oSysVarRainCounterToday.Value());}" +
+
+    // Setze Tageszähler Regen auf 0
+    "if (oSysVarRainCounterToday) {oSysVarRainCounterToday.State(0);}";
+
+  var script =
+
+  "var _script = \""+destinationScript+"\";\n" +
+
+  "var DP_VALUE_CHECK_UPDATE = 13;"+
+  "var TIMER_DAILY           = 9;"+
+  "var NOT_SET               = 0;"+
+
+  "var programs = dom.GetObject(ID_PROGRAMS);"+
+  "var program  = dom.CreateObject(OT_PROGRAM);"+
+  "program.Name('prgDailySunshineRainCounter_"+ chn.id + "');"+
+  "program.Internal(true);"+
+  "programs.Add(program.ID());"+
+
+  "var rule = program.Rule();"+
+  "rule.RuleOperatorType(OPERATOR_NONE);"+
+
+  "var condition = rule.RuleAddCondition();"+
+  "condition.CndOperatorType(OPERATOR_NONE);"+
+
+  "var timeModule = dom.CreateObject(OT_CALENDARDP);"+
+  "dom.GetObject(ID_CALENDARDPS).Add(timeModule);"+
+  "timeModule.TimerType(TIMER_DAILY);"+
+  "timeModule.Time('2000-01-01 07:00:00');"+
+  "timeModule.CalDuration(NOT_SET);"+
+  "timeModule.CalRepeatTime(NOT_SET);"+
+  "timeModule.Weekdays(NOT_SET);"+
+  "timeModule.Period(NOT_SET);"+
+  "timeModule.CalRepetitionValue(NOT_SET);"+
+  "timeModule.Begin('2000-01-01 00:00:00');"+
+  "timeModule.End(NOT_SET);"+
+  "timeModule.CalRepetitionCount(NOT_SET);"+
+  "timeModule.SunOffsetType(NOT_SET);"+
+
+  "var singleCondition = condition.CndAddSingle();"+
+  "singleCondition.OperatorType(OPERATOR_NONE);"+
+  "singleCondition.ConditionType(3);"+
+  "singleCondition.ConditionType2(DP_VALUE_CHECK_UPDATE);"+
+  "singleCondition.LeftValType(ivtCurrentDate);"+
+  "singleCondition.RightVal1ValType(ivtObjectId);"+
+  "singleCondition.RightVal1(timeModule.ID());"+
+
+  "var destination = rule.RuleDestination();"+
+  "var action = destination.DestAddSingle();"+
+  "action.DestinationParam(ivtString);"+
+  "action.DestinationValueType(ivtString);"+
+  "action.DestinationValue(_script);"+
+
+  "program.Active(true);"+
+
+  "dom.RTUpdate(0);";
+
+  homematic("ReGa.runScript", {"script": script});
+};
+
 getSysVarEnergyCounterIds = function (chn) {
   return {"counterId": "svEnergyCounter_" + chn.id + "_" + chn.address, "tmpCounterId": "svEnergyCounterOldVal_" + chn.id};
+};
+
+getSysVarRainSunshineCounterIds = function (chn, hasRainSensor) {
+  var result;
+
+  if (hasRainSensor) {
+    result = {
+      "rainCounterId": "svHmIPRainCounter_" + chn.id + "_" + chn.address,
+      "tmpRainCounterId": "svHmIPRainCounterOldVal_" + chn.id,
+      "rainCounterYesterdayId": "svHmIPRainCounterYesterday_" + chn.id,
+      "rainCounterTodayId": "svHmIPRainCounterToday_" + chn.id,
+
+      "sunshineCounterId": "svHmIPSunshineCounter_" + chn.id + "_" + chn.address,
+      "tmpSunshineCounterId": "svHmIPSunshineCounterOldVal_" + chn.id,
+      "sunshineCounterYesterdayId": "svHmIPSunshineCounterYesterday_" + chn.id,
+      "sunshineCounterTodayId": "svHmIPSunshineCounterToday_" + chn.id
+    };
+  } else {
+    result = {
+      "sunshineCounterId": "svHmIPSunshineCounter_" + chn.id + "_" + chn.address,
+      "tmpSunshineCounterId": "svHmIPSunshineCounterOldVal_" + chn.id,
+      "sunshineCounterYesterdayId": "svHmIPSunshineCounterYesterday_" + chn.id,
+      "sunshineCounterTodayId": "svHmIPSunshineCounterToday_" + chn.id
+    };
+  }
+
+  return result;
+
 };
 
 getSysVarEnergyCounterGasIds = function (chn) {
@@ -1076,8 +1432,8 @@ CheckAndCreateSysVarEnergyCounter = function(chn) {
   // SysVar svEnergyCounter_xxxx doesn´t exist
   if (!oSysVarEnergyCounter) {
     conInfo("create system variable: " + SysVarEnergyCounterId);
-    oSysVarEnergyCounter = CreateSysVarEnergyCounter(SysVarEnergyCounterId, "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterOldValId, "float");
+    CreateSysVar(SysVarEnergyCounterId, "float");
+    CreateSysVar(SysVarEnergyCounterOldValId, "float");
     if (chn.channelType == "ENERGIE_METER_TRANSMITTER") {
       conInfo("CreateSysVarEnergyCounterScriptPSM");
       CreateSysVarEnergyCounterScriptPSM(chn);
@@ -1090,7 +1446,6 @@ CheckAndCreateSysVarEnergyCounter = function(chn) {
 };
 
 //***
-
 CheckAndCreateSysVarEnergyCounterIEC = function(chn) {
   conInfo("CheckAndCreateSysVarEnergyCounterIEC");
   var sysVarIds = getSysVarEnergyCounterIECIds(chn);
@@ -1102,8 +1457,8 @@ CheckAndCreateSysVarEnergyCounterIEC = function(chn) {
   // SysVar svEnergyCounter_xxxx doesn´t exist
   if (!oSysVarEnergyCounter) {
     conInfo("create system variable: " + SysVarEnergyCounterId);
-    oSysVarEnergyCounter = CreateSysVarEnergyCounter(SysVarEnergyCounterId, "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterOldValId, "float");
+    CreateSysVar(SysVarEnergyCounterId, "float");
+    CreateSysVar(SysVarEnergyCounterOldValId, "float");
     conInfo("CreateSysVarEnergyCounterScriptIEC");
     CreateSysVarEnergyCounterScriptIEC(chn);
     readEnergyCounter = true; // sorgt dafür, daß die Liste der EnergyCounter aktualisiert wird.
@@ -1111,8 +1466,6 @@ CheckAndCreateSysVarEnergyCounterIEC = function(chn) {
 };
 
 //***
-
-
 CheckAndCreateSysVarEnergyCounterIGL = function (chn, channelType) {
   conInfo("CheckAndCreateSysVarEnergyCounterIGL");
   var sysVarIds = getSysVarEnergyCounterIds(chn);
@@ -1124,11 +1477,11 @@ CheckAndCreateSysVarEnergyCounterIGL = function (chn, channelType) {
   // SysVar svEnergyCounter_xxxx doesn´t exist
   if (!oSysVarEnergyCounter) {
     conInfo("create system variable: " + SysVarEnergyCounterId);
-    oSysVarEnergyCounter = CreateSysVarEnergyCounter(SysVarEnergyCounterId, "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterOldValId, "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterId + "_RESET", "boolean");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterId + "_TMP_OLDVAL", "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterId + "_DEVICE_RESET", "boolean");
+    CreateSysVar(SysVarEnergyCounterId, "float");
+    CreateSysVar(SysVarEnergyCounterOldValId, "float");
+    CreateSysVar(SysVarEnergyCounterId + "_RESET", "boolean");
+    CreateSysVar(SysVarEnergyCounterId + "_TMP_OLDVAL", "float");
+    CreateSysVar(SysVarEnergyCounterId + "_DEVICE_RESET", "boolean");
     CreateSysVarEnergyCounterScriptIGL(chn, channelType, "CURRENT");
     readEnergyCounter = true; // sorgt dafür, daß die Liste der EnergyCounter aktualisiert wird.
   }
@@ -1145,17 +1498,77 @@ CheckAndCreateSysVarEnergyCounterGasIGL = function (chn, channelType) {
   // SysVar svEnergyCounterGas_xxxx doesn´t exist
   if (!oSysVarEnergyCounterGas) {
     conInfo("create system variable: " + SysVarEnergyCounterId);
-    oSysVarEnergyCounterGas = CreateSysVarEnergyCounter(SysVarEnergyCounterId, "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterOldValId, "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterId + "_RESET", "boolean");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterId + "_TMP_OLDVAL", "float");
-    CreateSysVarEnergyCounter(SysVarEnergyCounterId + "_DEVICE_RESET", "boolean");
+    CreateSysVar(SysVarEnergyCounterId, "float");
+    CreateSysVar(SysVarEnergyCounterOldValId, "float");
+    CreateSysVar(SysVarEnergyCounterId + "_RESET", "boolean");
+    CreateSysVar(SysVarEnergyCounterId + "_TMP_OLDVAL", "float");
+    CreateSysVar(SysVarEnergyCounterId + "_DEVICE_RESET", "boolean");
     CreateSysVarEnergyCounterScriptIGL(chn, channelType, "GAS");
     readEnergyCounter = true; // sorgt dafür, daß die Liste der EnergyCounter aktualisiert wird.
   }
 };
 
-CheckIfDevHasPowerMeter = function (devId) {
+
+CheckAndCreateSysVarHmIPRainSunshineCounter = function(chn, hasRainSensor) {
+  var sysVarIds = getSysVarRainSunshineCounterIds(chn, hasRainSensor);
+
+  var SysVarSunshineCounterId = sysVarIds.sunshineCounterId,
+    SysVarSunshineCounterOldValId = sysVarIds.tmpSunshineCounterId,
+    SysVarSunshineCounterYesterdayId = sysVarIds.sunshineCounterYesterdayId,
+    SysVarSunshineCounterTodayId = sysVarIds.sunshineCounterTodayId;
+
+  var sysVarSunshineCounter = homematic("SysVar.get", {"id": SysVarSunshineCounterId});
+
+  // sysVarSunshineCounter doesn't exist
+  if (!sysVarSunshineCounter) {
+    conInfo("create system variable: " + SysVarSunshineCounterId);
+    CreateSysVar(SysVarSunshineCounterId, "float");
+    conInfo("create system variable: " + SysVarSunshineCounterOldValId);
+    CreateSysVar(SysVarSunshineCounterOldValId, "float");
+    conInfo("create system variable: " + SysVarSunshineCounterYesterdayId);
+    CreateSysVar(SysVarSunshineCounterYesterdayId, "float", 0, chn.id);
+    conInfo("create system variable: " + SysVarSunshineCounterTodayId);
+    CreateSysVar(SysVarSunshineCounterTodayId, "float", 0, chn.id);
+
+    CreateHmIPSunshineCounterScript(chn);
+
+  }
+
+  if (hasRainSensor) {
+
+    var SysVarRainCounterId = sysVarIds.rainCounterId,
+      SysVarRainCounterOldValId = sysVarIds.tmpRainCounterId,
+      SysVarRainCounterYesterdayId = sysVarIds.rainCounterYesterdayId,
+      SysVarRainCounterTodayId = sysVarIds.rainCounterTodayId;
+
+    var sysVarRainCounter = homematic("SysVar.get", {"id": SysVarRainCounterId});
+    // sysVarRainCounter doesn't exist
+    if (!sysVarRainCounter) {
+      conInfo("create system variable: " + SysVarRainCounterId);
+      CreateSysVar(SysVarRainCounterId, "float");
+      conInfo("create system variable: " + SysVarRainCounterOldValId);
+      CreateSysVar(SysVarRainCounterOldValId, "float");
+      conInfo("create system variable: " + SysVarRainCounterYesterdayId);
+      CreateSysVar(SysVarRainCounterYesterdayId, "float", 0, chn.id);
+      conInfo("create system variable: " + SysVarRainCounterTodayId);
+      CreateSysVar(SysVarRainCounterTodayId, "float", 0, chn.id);
+      CreateHmIPRainCounterScript(chn);
+    }
+  }
+
+  CreateHmIPSunRainTodayYesterdayScript(chn);
+
+};
+
+CreateSysVarHmIPModRC8 = function(channel) {
+
+  var sysVarID =  "svHmIPModRC8ChnMode_" + channel.id + "_" + channel.address;
+  // Mode of the channels (not active(0), key(1), switch(2) or shuttercontact(3)
+  // The default is key
+  CreateSysVar(sysVarID, "enum", "1", channel.id);
+};
+
+createNecessarySysVarsAndPrograms = function (devId) {
   var oDevice = homematic("Device.get", {"id": devId});
   if (oDevice) {
     ShowWaitAnim();
@@ -1180,6 +1593,20 @@ CheckIfDevHasPowerMeter = function (devId) {
         CheckAndCreateSysVarEnergyCounterGasIGL(channel, channelType);
         CheckAndCreateSysVarEnergyCounterIEC(channel);
       }
+
+      if ((channelType == "WEATHER_TRANSMIT") && (oDevice.type.toLowerCase() == "hmip-swo-b")) {
+        CheckAndCreateSysVarHmIPRainSunshineCounter(channel, false);
+      }
+
+      if ((channelType == "WEATHER_TRANSMIT") && ((oDevice.type.toLowerCase() == "hmip-swo-pr") || (oDevice.type.toLowerCase() == "hmip-swo-pl"))) {
+        CheckAndCreateSysVarHmIPRainSunshineCounter(channel, true);
+      }
+
+      /* currently not in use
+      if ((channelType == "KEY_TRANSCEIVER") && (oDevice.type.toLowerCase() == "hmip-mod-rc8")) {
+        CreateSysVarHmIPModRC8(channel);
+      }
+      */
     });
     HideWaitAnim();
   }
@@ -1188,7 +1615,7 @@ CheckIfDevHasPowerMeter = function (devId) {
 SetReadyConfigAndHideImgs = function (devId) {
   var _devId_ = devId;
 
-  CheckIfDevHasPowerMeter(_devId_);
+  createNecessarySysVarsAndPrograms(_devId_);
 
   var doSetReady = function () {
     iNewDevCount--;
@@ -1251,16 +1678,17 @@ specialReloadPage = function () {
 
 hideImages = function (devId) {
   var count = arDevices.length;
+  var x = 0;
   for (var i = 0; i < count; i++) {
     if (arDevices[i]['id'] == devId) {
       hide('picDiv' + arDevices[i]['id']);
       if (arDevices[i]['chns']) {
-        for (var x = 0; x < arDevices[i]['chns'].length; x++) {
+        for (x = 0; x < arDevices[i]['chns'].length; x++) {
           hide('picDiv' + arDevices[i]['chns'][x]['id']);
         }
       }
       if (arDevices[i]['chnsgr']) {
-        for (var x = 0; x < arDevices[i]['chnsgr'].length; x++) {
+        for (x = 0; x < arDevices[i]['chnsgr'].length; x++) {
           collapseGroup(devId, arDevices[i]['chnsgr'][x][0]['id'], arDevices[i]['chnsgr'][x][1]['id'], false);
           hide('picDiv' + arDevices[i]['chnsgr'][x][0]['id'] + arDevices[i]['chnsgr'][x][1]['id']);
         }

@@ -18,7 +18,7 @@ set PROFILE_0(UI_TEMPLATE)    "Expertenprofil"
 
 set PROFILE_1(LONG_PROFILE_ACTION_TYPE)    1
 set PROFILE_1(SHORT_CT_OFF)      {0 5}
-set PROFILE_1(SHORT_CT_OFFDELAY)  {0 5}
+set PROFILE_1(SHORT_CT_OFFDELAY)  {0 2 5}
 set PROFILE_1(SHORT_CT_ON)      {0 2 3}
 set PROFILE_1(SHORT_CT_ONDELAY)    {0 2 3 }
 set PROFILE_1(SHORT_COND_VALUE_LO)  {101 range 0 - 255}
@@ -34,10 +34,10 @@ set PROFILE_1(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE)  0
 set PROFILE_1(SHORT_OFF_TIME_MODE)  0
 set PROFILE_1(SHORT_ACTION_TYPE)  1
-set PROFILE_1(SHORT_JT_OFF)      1
-set PROFILE_1(SHORT_JT_OFFDELAY)  {1 3}
-set PROFILE_1(SHORT_JT_ON)      4
-set PROFILE_1(SHORT_JT_ONDELAY)   6
+set PROFILE_1(SHORT_JT_OFF)      {1 3}
+set PROFILE_1(SHORT_JT_OFFDELAY)  {1 3 6}
+set PROFILE_1(SHORT_JT_ON)      {4 6}
+set PROFILE_1(SHORT_JT_ONDELAY)   {6 3}
 set PROFILE_1(UI_DESCRIPTION)  "Beim &Ouml;ffnen des Schaltkontaktes wird der Schalter ein- und beim Schlie&szlig;en ausgeschaltet. Die Schaltzuordnung l&auml;sst sich auch umkehren."
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)  
 set PROFILE_1(UI_HINT)  1

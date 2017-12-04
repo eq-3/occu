@@ -3,7 +3,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipDSTPanel.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 
-proc getNoParamatersToSet {} {
+proc getNoParametersToSet {} {
   return "<tr><td class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"
 }
 

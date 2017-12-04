@@ -18,10 +18,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
     switch $ps(CHANNEL_OPERATION_MODE) {
-      0 {append HTML_PARAMS(separate_1) "[getInactiveHTML $chn ps psDescr]" }
-      1 {append HTML_PARAMS(separate_1) "[getKeyHTML $chn ps psDescr]" }
-      2 {append HTML_PARAMS(separate_1) "[getSwitchHTML $chn ps psDescr]" }
-      3 {append HTML_PARAMS(separate_1) "[getBinaryHTML $chn ps psDescr]"}
+      0 {append HTML_PARAMS(separate_1) "[getInactiveHTML $address $chn ps psDescr]" }
+      1 {append HTML_PARAMS(separate_1) "[getKeyHTML $address $chn ps psDescr]" }
+      2 {append HTML_PARAMS(separate_1) "[getSwitchHTML $address $chn ps psDescr]" }
+      3 {append HTML_PARAMS(separate_1) "[getBinaryHTML $address $chn ps psDescr]"}
     }
   append HTML_PARAMS(separate_1) "</table>"
   append HTML_PARAMS(separate_1) [getFooter $chn]

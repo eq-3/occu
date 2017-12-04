@@ -1,0 +1,277 @@
+function ::CreateWeatherSensor()
+{
+
+  boolean hasRainDetector = false;
+
+  object oDevice = dom.GetObject(cObj.Device());
+  object ch = dom.GetObject(chnId);
+  string chAddress = ch.Address();
+
+  string devAddress =  chAddress.StrValueByIndex(":",0);
+  string maintenanceChannelAddress = devAddress#":0";
+
+  object oActualTemperature = cObj.DPByControl("WEATHER_TRANSMIT.ACTUAL_TEMPERATURE");
+  object oActualHumidity = cObj.DPByControl("WEATHER_TRANSMIT.HUMIDITY");
+  object oActualIllumination = cObj.DPByControl("WEATHER_TRANSMIT.ILLUMINATION");
+  object oActualRaining = cObj.DPByControl("WEATHER_TRANSMIT.RAINING");
+  object oActualRainCounter = cObj.DPByControl("WEATHER_TRANSMIT.RAIN_COUNTER");
+  object oActualSunshineDuration = cObj.DPByControl("WEATHER_TRANSMIT.SUNSHINEDURATION");
+  object oActualSunshine = cObj.DPByControl("WEATHER_TRANSMIT.SUNSHINE_THRESHOLD_OVERRUN");
+  object oActualWindDirection = cObj.DPByControl("WEATHER_TRANSMIT.WIND_DIRECTION");
+  object oActualWindDirectionRange = cObj.DPByControl("WEATHER_TRANSMIT.WIND_DIRECTION_RANGE");
+  object oActualWindSpeed = cObj.DPByControl("WEATHER_TRANSMIT.WIND_SPEED");
+
+
+  if (oActualSunshine) {
+    object svHmIPSunshineCounter = dom.GetObject("svHmIPSunshineCounter_"#chnId#"_"#chAddress);
+    object svHmIPSunshineCounterYesterday = dom.GetObject("svHmIPSunshineCounterYesterday_"#chnId);
+    object svHmIPSunshineCounterToday = dom.GetObject("svHmIPSunshineCounterToday_"#chnId);
+  }
+  if (oActualRainCounter) {
+    object svHmIPRainCounter = dom.GetObject("svHmIPRainCounter_"#chnId#"_"#chAddress);
+    object svHmIPRainCounterYesterday = dom.GetObject("svHmIPRainCounterYesterday_"#chnId);
+    object svHmIPRainCounterToday = dom.GetObject("svHmIPRainCounterToday_"#chnId);
+  }
+
+  WriteLine("<td>");
+    WriteLine("<table>");
+      ! 1st row
+      WriteLine("<tr>");
+      if( oActualTemperature)
+      {
+        WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+          WriteLine("<table class='_ControlBtnInfo' style='border:none'>");
+            WriteLine("<tr style='height:40px;'>");
+              WriteLine("<td id='"#chnId#"ActualTemperature' class='minWidth230px'>");
+                WriteLine("${stringTableWeatherTemperature}: "#oActualTemperature.Value().ToString(1)#" "#oActualTemperature.ValueUnit());
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      }
+      if( oActualHumidity)
+      {
+        WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+          WriteLine("<table class='_ControlBtnInfo'>");
+            WriteLine("<tr style='height:40px;'>");
+              WriteLine("<td id='"#chnId#"ActualHumidity' class='minWidth230px'>");
+                WriteLine("${stringTableHeatingHumidity}: "#oActualHumidity.Value().ToString(0)#" "#oActualHumidity.ValueUnit());
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      }
+      WriteLine("</tr>");
+      ! 2nd row
+      WriteLine("<tr>");
+      if( oActualIllumination)
+      {
+        WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+          WriteLine("<table class='_ControlBtnInfo'>");
+            WriteLine("<tr style='height:40px;'>");
+              WriteLine("<td id='"#chnId#"ActualIllumination' class='minWidth230px'>");
+                WriteLine("${stringTableBrightness}: "#oActualIllumination.Value().ToString(0)#" "#oActualIllumination.ValueUnit());
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      }
+      if(oActualWindSpeed)
+      {
+        WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+          WriteLine("<table class='_ControlBtnInfo'>");
+            WriteLine("<tr style='height:40px;'>");
+              WriteLine("<td id='"#chnId#"ActualWindSpeed' class='minWidth230px'>");
+                WriteLine("${stringTableWeatherWindSpeed}: "#oActualWindSpeed.Value().ToString(0)#" "#oActualWindSpeed.ValueUnit());
+
+                 if (oActualWindDirection) {
+                   boolean bErrorWindNorth =  dom.GetObject("HmIP-RF."#maintenanceChannelAddress#".ERROR_WIND_NORTH").Value();
+                   string errorWindNorth = "style=color:white;";
+                   if (bErrorWindNorth) {
+                       errorWindNorth = "style=color:red;";
+                   }
+                   string sValue = ""; ! used by ConvWindDir()
+                   string sValueh = ""; ! set by ConvWindDir() - contains the converted value
+                   sValue = oActualWindDirection.Value().ToString(0);
+                   Call("/esp/datapointconfigurator.fn::ConvWindDir()");
+                   WriteLine("<br/><span "#errorWindNorth#">${stringTableWeatherWindDir}</span>: "#sValueh#" "#oActualWindDirection.Value().ToString(0)#oActualWindDirection.ValueUnit());
+                }
+
+                if (oActualWindDirectionRange) {
+                  WriteLine("<br/>${stringTableWeatherWindDirRangeA}: "#oActualWindDirectionRange.Value().ToString(0)#oActualWindDirectionRange.ValueUnit());
+                }
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      }
+      WriteLine("</tr>");
+
+      WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+      ! 3th row
+      WriteLine("<tr>");
+        if (oActualSunshine)
+        {
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+            WriteLine("<table class='_ControlBtnInfo'>");
+              WriteLine("<tr style='height:40px;'>");
+                WriteLine("<td id='"#chnId#"ActualSunshine' class='minWidth230px'>");
+                  if (oActualSunshine.Value()) {
+                    ! Sunshine
+                    WriteLine("${stringTableWeatherSunshineTrue}");
+                  } else {
+                    ! No sunshine
+                    WriteLine("${stringTableWeatherSunshineFalse}");
+                  }
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        } else {
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+            WriteLine("<table class='_ControlBtnInfo'>");
+              WriteLine("<tr style='height:40px;'>");
+                WriteLine("<td id='"#chnId#"ActualSunshineDuration' class='minWidth230px'>");
+                  WriteLine("Something's wrong here!");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        }
+
+        if (oActualSunshineDuration)
+        {
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black'>");
+            WriteLine("<table class='_ControlBtnInfo'>");
+              WriteLine("<tr style='height:40px;'>");
+                WriteLine("<td id='"#chnId#"ActualSunshineDuration' class='minWidth230px'>");
+                  ! WriteLine("${stringTableWeatherSunshineDuration}: <span id='"#chnId#"sunshineCounterDHM'>"#svHmIPSunshineCounter.Value().ToString(0)#"</span> "#oActualSunshineDuration.ValueUnit()); ! value with unit
+                  WriteLine("${stringTableWeatherSunshineDuration}: <span id='"#chnId#"sunshineCounterDHM'>"#svHmIPSunshineCounter.Value().ToString(0)#"</span> ");
+
+                  if (svHmIPSunshineCounterToday) {
+                    WriteLine("<br>${lblToday}: <span id='"#chnId#"sunshineTodayDHM'>"#svHmIPSunshineCounterToday.Value().ToString(0)#"</span>");
+                  }
+                  if (svHmIPSunshineCounterYesterday) {
+                    WriteLine("<br>${lblYesterday}: <span id='"#chnId#"sunshineYesterdayDHM'>"#svHmIPSunshineCounterYesterday.Value().ToString(0)#"</span>");
+                  }
+
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+      WriteLine("<tr><td></td><td><div class='ControlBtnOff' id='resetSunshineCounter"#chnId#"'>${btnResetSunshineDuration}</div></td></tr>");
+
+      ! 4rd row
+
+     if (oActualRaining) {WriteLine("<tr><td colspan='2'><hr></td></tr>");}
+
+      WriteLine("<tr>");
+        if (oActualRaining)
+        {
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+            WriteLine("<table class='_ControlBtnInfo'>");
+              WriteLine("<tr style='height:40px;'>");
+                WriteLine("<td id='"#chnId#"ActualRaining' class='minWidth230px'>");
+                  if (oActualRaining.Value()) {
+                    ! Rain
+                    WriteLine("<br/>${stringTableWeatherRainingTrue}<br/>");
+                  } else {
+                    ! No rain
+                    WriteLine("<br/>${stringTableWeatherRainingFalse}<br/>");
+                  }
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        }
+
+        if (oActualRainCounter)
+        {
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
+            WriteLine("<table class='_ControlBtnInfo'>");
+              WriteLine("<tr style='height:40px;'>");
+                WriteLine("<td class='minWidth230px'>");
+                  ! WriteLine("${stringTableWeatherRainCounter}: "#svHmIPRainCounter.Value().ToString(1)#" ("#oActualRainCounter.Value().ToString(1)#")"#oActualRainCounter.ValueUnit());
+                  WriteLine("${stringTableWeatherRainCounter}: <span id='"#chnId#"actualRainCounter'>"#svHmIPRainCounter.Value().ToString(1)#"</span> "#oActualRainCounter.ValueUnit());
+                  if (svHmIPRainCounterToday) {
+                    WriteLine("<br>${lblToday}: "#svHmIPRainCounterToday.Value().ToString(1)#" mm ");
+                  }
+                  if (svHmIPRainCounterYesterday) {
+                    WriteLine("<br>${lblYesterday}: "#svHmIPRainCounterYesterday.Value().ToString(1)#" mm ");
+                  }
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+        WriteLine("<tr><td></td><td><div class='ControlBtnOff' id='resetRainCounter"#chnId#"'>${btnResetRainCounter}</div></td></tr>");
+      }
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine(" var buttonPressed = function(elm) { ");
+      WriteLine(" elm.addClass('ControlBtnOn').removeClass('ControlBtnOff'); ");
+      WriteLine(" window.setTimeout(function() {" );
+      WriteLine(" elm.addClass('ControlBtnOff').removeClass('ControlBtnOn'); ");
+      WriteLine(" },500); ");
+    WriteLine(" }; ");
+
+    WriteLine(" window.setTimeout(function() { ");
+      if (oActualRainCounter) {
+        WriteLine(" var resetRainCounterElm = jQuery('#resetRainCounter"#chnId#"'); ");
+        WriteLine(" resetRainCounterElm.click(function() { ");
+          WriteLine(" conInfo('Reset rain counter'); ");
+          WriteLine(" buttonPressed(resetRainCounterElm); ");
+          WriteLine(" homematic('SysVar.setFloat', {'name' :"#svHmIPRainCounter.ID()#", 'value' : 0}); ");
+
+          Write(" try { ");
+            ! Status & Control
+            WriteLine(" loadChannels(" #oDevice.ID()# "); ");
+          Write (" } catch(e) { ") ;
+            ! Favourite page
+            WriteLine(" jQuery('#"#chnId#"actualRainCounter').text('0.0'); ");
+          Write (" } ");
+
+        WriteLine("});");
+      }
+
+      if (oActualSunshine) {
+
+        WriteLine(" var sunshineCounterValElm = jQuery('#"#chnId#"sunshineCounterDHM'), ");
+        WriteLine(" sunshineTodayValElm = jQuery('#"#chnId#"sunshineTodayDHM'), ");
+        WriteLine(" sunshineYesterdayValElm = jQuery('#"#chnId#"sunshineYesterdayDHM'); ");
+
+        WriteLine(" sunshineCounterValElm.text(convertMin2Hour(sunshineCounterValElm.text())); ");
+        WriteLine(" sunshineTodayValElm.text(convertMin2Hour(sunshineTodayValElm.text())); ");
+        WriteLine(" sunshineYesterdayValElm.text(convertMin2Hour(sunshineYesterdayValElm.text())); ");
+
+
+        WriteLine(" var resetSunshineCounterElm = jQuery('#resetSunshineCounter"#chnId#"'); ");
+        WriteLine(" resetSunshineCounterElm.click(function() { ");
+          WriteLine(" conInfo('Reset sunshine counter'); ");
+          WriteLine(" buttonPressed(resetSunshineCounterElm); ");
+          WriteLine(" homematic('SysVar.setFloat', {'name' :"#svHmIPSunshineCounter.ID()#", 'value' : 0}); ");
+
+          Write(" try { ");
+            ! Status & Control
+            WriteLine(" loadChannels(" #oDevice.ID()# "); ");
+          Write (" } catch(e) { ") ;
+            ! Favourite page
+            WriteLine(" jQuery('#"#chnId#"sunshineCounterDHM').text('0:00'); ");
+          Write (" } ");
+
+        WriteLine("});");
+      }
+    WriteLine( "},250); ");
+  WriteLine("</script>");
+
+}
+
+
+
+

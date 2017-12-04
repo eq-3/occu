@@ -52,18 +52,18 @@ set PROFILE_1(UI_HINT)  1
 set PROFILE_2(LONG_COND_VALUE_HI)          149 ;# match with profile 4
 set PROFILE_2(SHORT_COND_VALUE_HI)          {99 range 0 - 255}
 set PROFILE_2(SHORT_COND_VALUE_LO)          {50 range 0 - 255}
-set PROFILE_2(SHORT_CT_OFF)                 {0 range 0 - 5}
-set PROFILE_2(SHORT_CT_OFFDELAY)            {0 range 0 - 5}
-set PROFILE_2(SHORT_CT_ON)                  {0 range 0 - 5}
-set PROFILE_2(SHORT_CT_ONDELAY)             {0 range 0 - 5}
-set PROFILE_2(SHORT_CT_RAMPOFF)             {0 range 0 - 5}
-set PROFILE_2(SHORT_CT_RAMPON)              {0 range 0 - 5}
-set PROFILE_2(SHORT_JT_OFF)                 {1 range 0 - 6}
-set PROFILE_2(SHORT_JT_OFFDELAY)            {3 range 0 - 6}
-set PROFILE_2(SHORT_JT_ON)                  {4 range 1 - 6}
-set PROFILE_2(SHORT_JT_ONDELAY)             {6 range 1 - 6}
-set PROFILE_2(SHORT_JT_RAMPOFF)             {3 range 0 - 6}
-set PROFILE_2(SHORT_JT_RAMPON)              {6 range 0 - 6}
+set PROFILE_2(SHORT_CT_OFF)                 {0 2}
+set PROFILE_2(SHORT_CT_OFFDELAY)            {0 2}
+set PROFILE_2(SHORT_CT_ON)                  {0 2}
+set PROFILE_2(SHORT_CT_ONDELAY)             {0 2}
+set PROFILE_2(SHORT_CT_RAMPOFF)             {0 2}
+set PROFILE_2(SHORT_CT_RAMPON)              {0 2}
+set PROFILE_2(SHORT_JT_OFF)                 1
+set PROFILE_2(SHORT_JT_OFFDELAY)            3
+set PROFILE_2(SHORT_JT_ON)                  4
+set PROFILE_2(SHORT_JT_ONDELAY)             6
+set PROFILE_2(SHORT_JT_RAMPOFF)             3
+set PROFILE_2(SHORT_JT_RAMPON)              6
 set PROFILE_2(SHORT_ON_LEVEL)               {1.0 range 0.0 - 1.005}
 set PROFILE_2(SHORT_OFF_LEVEL)              {0.0 range 0.0 - 1.005}
 set PROFILE_2(SHORT_OFFDELAY_TIME_BASE)     {0 range 0 - 7}
@@ -158,56 +158,56 @@ set PROFILE_5(UI_DESCRIPTION)  "Der Durchgangssensor ist au&szlig;er Betrieb."
 set PROFILE_5(UI_TEMPLATE)  $PROFILE_5(UI_DESCRIPTION)
 set PROFILE_5(UI_HINT)  5
 
-#set SUBSET_1(NAME)          "Offen-Ein/Zu-Aus"
+#set SUBSET_1(NAME)          "r -> l = Ein / l - r = Aus"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
-set SUBSET_1(SHORT_CT_OFF)      1
-set SUBSET_1(SHORT_CT_OFFDELAY)    1
-set SUBSET_1(SHORT_CT_ON)      4
-set SUBSET_1(SHORT_CT_ONDELAY)    4
-set SUBSET_1(SHORT_CT_RAMPOFF)    1
-set SUBSET_1(SHORT_CT_RAMPON)    1
+set SUBSET_1(SHORT_CT_OFF)      2
+set SUBSET_1(SHORT_CT_OFFDELAY)    2
+set SUBSET_1(SHORT_CT_ON)      0
+set SUBSET_1(SHORT_CT_ONDELAY)    0
+set SUBSET_1(SHORT_CT_RAMPOFF)    2
+set SUBSET_1(SHORT_CT_RAMPON)    0
 
-#set SUBSET_2(NAME)          "Offen-Aus/Zu-Ein"
+#set SUBSET_2(NAME)          "r -> l = Aus / l - r = Ein"
 set SUBSET_2(NAME)          "\${subset_2}"
 set SUBSET_2(SUBSET_OPTION_VALUE)  2
-set SUBSET_2(SHORT_CT_OFF)      4
-set SUBSET_2(SHORT_CT_OFFDELAY)    4
-set SUBSET_2(SHORT_CT_ON)      1
-set SUBSET_2(SHORT_CT_ONDELAY)    1
-set SUBSET_2(SHORT_CT_RAMPOFF)    1
-set SUBSET_2(SHORT_CT_RAMPON)    1
+set SUBSET_2(SHORT_CT_OFF)      0
+set SUBSET_2(SHORT_CT_OFFDELAY)    0
+set SUBSET_2(SHORT_CT_ON)      2
+set SUBSET_2(SHORT_CT_ONDELAY)    2
+set SUBSET_2(SHORT_CT_RAMPOFF)    0
+set SUBSET_2(SHORT_CT_RAMPON)    2
 
 #set SUBSET_3(NAME)          "r - l"
 set SUBSET_3(NAME)          "\${subset_3}"
 set SUBSET_3(SUBSET_OPTION_VALUE)  3
-set SUBSET_3(SHORT_CT_OFF)      1
-set SUBSET_3(SHORT_CT_OFFDELAY)    1
-set SUBSET_3(SHORT_CT_ON)      1
-set SUBSET_3(SHORT_CT_ONDELAY)    1
-set SUBSET_3(SHORT_CT_RAMPOFF)    1
-set SUBSET_3(SHORT_CT_RAMPON)    1
+set SUBSET_3(SHORT_CT_OFF)        2
+set SUBSET_3(SHORT_CT_OFFDELAY)    2
+set SUBSET_3(SHORT_CT_ON)      2
+set SUBSET_3(SHORT_CT_ONDELAY)   2
+set SUBSET_3(SHORT_CT_RAMPOFF)   2
+set SUBSET_3(SHORT_CT_RAMPON)    2
 
 #set SUBSET_4(NAME)          "l - r"
 set SUBSET_4(NAME)          "\${subset_4}"
 set SUBSET_4(SUBSET_OPTION_VALUE)  4
-set SUBSET_4(SHORT_CT_OFF)      4
-set SUBSET_4(SHORT_CT_OFFDELAY)    4
-set SUBSET_4(SHORT_CT_ON)      4
-set SUBSET_4(SHORT_CT_ONDELAY)    4
-set SUBSET_4(SHORT_CT_RAMPOFF)    4
-set SUBSET_4(SHORT_CT_RAMPON)    4
+set SUBSET_4(SHORT_CT_OFF)      0
+set SUBSET_4(SHORT_CT_OFFDELAY)    0
+set SUBSET_4(SHORT_CT_ON)      0
+set SUBSET_4(SHORT_CT_ONDELAY)    0
+set SUBSET_4(SHORT_CT_RAMPOFF)    0
+set SUBSET_4(SHORT_CT_RAMPON)    0
 
 
 #set SUBSET_5(NAME)          "l - r || r - l"
 set SUBSET_5(NAME)          "\${subset_5}"
 set SUBSET_5(SUBSET_OPTION_VALUE)  5
-set SUBSET_5(SHORT_CT_OFF)        0
-set SUBSET_5(SHORT_CT_OFFDELAY)   0
-set SUBSET_5(SHORT_CT_ON)         0
-set SUBSET_5(SHORT_CT_ONDELAY)    0
-set SUBSET_5(SHORT_CT_RAMPOFF)    0
-set SUBSET_5(SHORT_CT_RAMPON)     0
+set SUBSET_5(SHORT_CT_OFF)        1
+set SUBSET_5(SHORT_CT_OFFDELAY)   1
+set SUBSET_5(SHORT_CT_ON)         1
+set SUBSET_5(SHORT_CT_ONDELAY)    1
+set SUBSET_5(SHORT_CT_RAMPOFF)    1
+set SUBSET_5(SHORT_CT_RAMPON)     1
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 

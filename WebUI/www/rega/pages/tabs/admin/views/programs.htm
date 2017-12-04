@@ -441,7 +441,15 @@
   {
     var callback = function ( result )
     {
-      if (result) { iseSingleCondition.SetChannel(scid, result); }
+      if (result) {
+
+        window.setTimeout(function() {
+          iseSingleCondition.SetChannel(scid, result);
+          window.setTimeout(function() {
+            jQuery("#selectConditionWhen" + scid).change();
+          },250);
+        },500);
+      }
     };
     ChannelChooser.show(callback, ChannelChooser.SHOW_READABLE | ChannelChooser.SHOW_EVENTABLE, ChannelChooser.PRG_CONDITION);
   };
@@ -508,7 +516,7 @@
     isePrograms.Delete(copy);
   };
   SaveProgramEdit = function(orig,copy)
-  {  
+  {
     setTimeout( "isePrograms.Restore("+orig+","+copy+")", 500 );
   };
   CopyToNewProgram = function(copy)
@@ -577,7 +585,7 @@
     var pb = '';
     pb += 'string action = "ReloadSiCo";';
     pb += 'string id = "'+scid+'";';
-    var opts = { postBody: pb, onComplete: ReloadSiCoCallback }
+    var opts = { postBody: pb, onComplete: ReloadSiCoCallback };
     new Ajax.Updater("sico"+scid,url,opts);
   };
   LoadRuleCallback = function(t)

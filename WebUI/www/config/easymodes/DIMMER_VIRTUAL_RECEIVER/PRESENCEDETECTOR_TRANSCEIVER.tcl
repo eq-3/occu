@@ -140,8 +140,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [cmd_link_paramset2 $iface $address ps_descr ps "LINK" ${special_input_id}_$prn]
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
 
-  exec echo "cur_profile: $cur_profile" >> /tmp/easy.log
-
 #1 Switch toggle
   incr prn
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}

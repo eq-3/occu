@@ -31,7 +31,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "[getClimateControlHeatDemandPumpTransmitter $chn ps psDescr]"
     } else {
       # show no parameters available
-      append HTML_PARAMS(separate_1) "[getNoParamatersToSet]"
+      append HTML_PARAMS(separate_1) "[getNoParametersToSet]"
       append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">setTimeout(function() {jQuery(\"\[name='noParamAvailable'\]\").css(\"width\",\"100%\");},100);</script>"
     }
   append HTML_PARAMS(separate_1) "</table>"

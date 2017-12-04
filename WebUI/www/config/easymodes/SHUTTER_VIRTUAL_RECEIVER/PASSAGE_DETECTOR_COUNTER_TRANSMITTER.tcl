@@ -18,14 +18,14 @@ set PROFILE_0(UI_TEMPLATE)  "Expertenprofil"
 
 set PROFILE_1(SHORT_COND_VALUE_HI) {100 range 0 - 255}
 set PROFILE_1(SHORT_COND_VALUE_LO) {50 range 0 - 255}
-set PROFILE_1(SHORT_CT_OFF) 0
-set PROFILE_1(SHORT_CT_OFFDELAY) 0
-set PROFILE_1(SHORT_CT_ON) 0
-set PROFILE_1(SHORT_CT_ONDELAY) 0
-set PROFILE_1(SHORT_CT_RAMPOFF) 0
-set PROFILE_1(SHORT_CT_RAMPON) 0
-set PROFILE_1(SHORT_CT_REFOFF) 0
-set PROFILE_1(SHORT_CT_REFON) 0
+set PROFILE_1(SHORT_CT_OFF) {0 1 2}
+set PROFILE_1(SHORT_CT_OFFDELAY) {0 1 2}
+set PROFILE_1(SHORT_CT_ON) {0 1 2}
+set PROFILE_1(SHORT_CT_ONDELAY) {0 1 2}
+set PROFILE_1(SHORT_CT_RAMPOFF) {0 1 2}
+set PROFILE_1(SHORT_CT_RAMPON) {0 1 2}
+set PROFILE_1(SHORT_CT_REFOFF) {0 1 2}
+set PROFILE_1(SHORT_CT_REFON) {0 1 2}
 set PROFILE_1(SHORT_DRIVING_MODE) 0
 set PROFILE_1(SHORT_JT_OFF) 1
 set PROFILE_1(SHORT_JT_OFFDELAY) 1
@@ -56,14 +56,14 @@ set PROFILE_1(UI_HINT)  1
 
 set PROFILE_2(SHORT_COND_VALUE_HI) {100 range 0 - 255}
 set PROFILE_2(SHORT_COND_VALUE_LO) {50 range 0 - 255}
-set PROFILE_2(SHORT_CT_OFF) 0
-set PROFILE_2(SHORT_CT_OFFDELAY) 0
-set PROFILE_2(SHORT_CT_ON) 0
-set PROFILE_2(SHORT_CT_ONDELAY) 0
-set PROFILE_2(SHORT_CT_RAMPOFF) 0
-set PROFILE_2(SHORT_CT_RAMPON) 0
-set PROFILE_2(SHORT_CT_REFOFF) 0
-set PROFILE_2(SHORT_CT_REFON) 0
+set PROFILE_2(SHORT_CT_OFF) {0 1 2}
+set PROFILE_2(SHORT_CT_OFFDELAY) {0 1 2}
+set PROFILE_2(SHORT_CT_ON) {0 1 2}
+set PROFILE_2(SHORT_CT_ONDELAY) {0 1 2}
+set PROFILE_2(SHORT_CT_RAMPOFF) {0 1 2}
+set PROFILE_2(SHORT_CT_RAMPON) {0 1 2}
+set PROFILE_2(SHORT_CT_REFOFF) {0 1 2}
+set PROFILE_2(SHORT_CT_REFON) {0 1 2}
 set PROFILE_2(SHORT_DRIVING_MODE) 0
 set PROFILE_2(SHORT_JT_OFF) 4
 set PROFILE_2(SHORT_JT_OFFDELAY) 4
@@ -94,14 +94,14 @@ set PROFILE_2(UI_HINT)  2
 
 set PROFILE_3(SHORT_COND_VALUE_HI) {100 range 0 - 255}
 set PROFILE_3(SHORT_COND_VALUE_LO) {50 range 0 - 255}
-set PROFILE_3(SHORT_CT_OFF) 0
-set PROFILE_3(SHORT_CT_OFFDELAY) 0
-set PROFILE_3(SHORT_CT_ON) 0
-set PROFILE_3(SHORT_CT_ONDELAY) 0
-set PROFILE_3(SHORT_CT_RAMPOFF) 0
-set PROFILE_3(SHORT_CT_RAMPON) 0
-set PROFILE_3(SHORT_CT_REFOFF) 0
-set PROFILE_3(SHORT_CT_REFON) 0
+set PROFILE_3(SHORT_CT_OFF) {0 1 2}
+set PROFILE_3(SHORT_CT_OFFDELAY) {0 1 2}
+set PROFILE_3(SHORT_CT_ON) {0 1 2}
+set PROFILE_3(SHORT_CT_ONDELAY) {0 1 2}
+set PROFILE_3(SHORT_CT_RAMPOFF) {0 1 2}
+set PROFILE_3(SHORT_CT_RAMPON) {0 1 2}
+set PROFILE_3(SHORT_CT_REFOFF) {0 1 2}
+set PROFILE_3(SHORT_CT_REFON) {0 1 2}
 set PROFILE_3(SHORT_DRIVING_MODE) 0
 set PROFILE_3(SHORT_JT_OFF) 1
 set PROFILE_3(SHORT_JT_OFFDELAY) 8
@@ -132,14 +132,14 @@ set PROFILE_3(UI_HINT)  3
 
 set PROFILE_4(SHORT_COND_VALUE_HI) {100 range 0 - 255}
 set PROFILE_4(SHORT_COND_VALUE_LO) {50 range 0 - 255}
-set PROFILE_4(SHORT_CT_OFF) 0
-set PROFILE_4(SHORT_CT_OFFDELAY) 0
-set PROFILE_4(SHORT_CT_ON) 0
-set PROFILE_4(SHORT_CT_ONDELAY) 0
-set PROFILE_4(SHORT_CT_RAMPOFF) 0
-set PROFILE_4(SHORT_CT_RAMPON) 0
-set PROFILE_4(SHORT_CT_REFOFF) 0
-set PROFILE_4(SHORT_CT_REFON) 0
+set PROFILE_4(SHORT_CT_OFF) {0 1 2}
+set PROFILE_4(SHORT_CT_OFFDELAY) {0 1 2}
+set PROFILE_4(SHORT_CT_ON) {0 1 2}
+set PROFILE_4(SHORT_CT_ONDELAY) {0 1 2}
+set PROFILE_4(SHORT_CT_RAMPOFF) {0 1 2}
+set PROFILE_4(SHORT_CT_RAMPON) {0 1 2}
+set PROFILE_4(SHORT_CT_REFOFF) {0 1 2}
+set PROFILE_4(SHORT_CT_REFON) {0 1 2}
 set PROFILE_4(SHORT_DRIVING_MODE) {0 1 2 3}
 set PROFILE_4(SHORT_JT_OFF) {1 5}
 set PROFILE_4(SHORT_JT_OFFDELAY) {1 6}
@@ -215,6 +215,61 @@ set SUBSET_3(SHORT_JT_RAMPON)    4
 set SUBSET_3(SHORT_JT_REFOFF)    8
 set SUBSET_3(SHORT_JT_REFON)    4
 
+
+## Subsets Passagesensor
+
+#set SUBSET_4(NAME)          "r -> l = Ein / l - r = Aus"
+set SUBSET_4(NAME)          "\${subset_4}"
+set SUBSET_4(SUBSET_OPTION_VALUE)  4
+set SUBSET_4(SHORT_CT_OFF)      2
+set SUBSET_4(SHORT_CT_OFFDELAY)    2
+set SUBSET_4(SHORT_CT_ON)      0
+set SUBSET_4(SHORT_CT_ONDELAY)    0
+set SUBSET_4(SHORT_CT_RAMPOFF)    2
+set SUBSET_4(SHORT_CT_RAMPON)    0
+
+#set SUBSET_5(NAME)          "r -> l = Aus / l - r = Ein"
+set SUBSET_5(NAME)          "\${subset_5}"
+set SUBSET_5(SUBSET_OPTION_VALUE)  5
+set SUBSET_5(SHORT_CT_OFF)      0
+set SUBSET_5(SHORT_CT_OFFDELAY)    0
+set SUBSET_5(SHORT_CT_ON)      2
+set SUBSET_5(SHORT_CT_ONDELAY)    2
+set SUBSET_5(SHORT_CT_RAMPOFF)    0
+set SUBSET_5(SHORT_CT_RAMPON)    2
+
+#set SUBSET_6(NAME)          "r - l"
+set SUBSET_6(NAME)          "\${subset_6}"
+set SUBSET_6(SUBSET_OPTION_VALUE)  6
+set SUBSET_6(SHORT_CT_OFF)        2
+set SUBSET_6(SHORT_CT_OFFDELAY)    2
+set SUBSET_6(SHORT_CT_ON)      2
+set SUBSET_6(SHORT_CT_ONDELAY)   2
+set SUBSET_6(SHORT_CT_RAMPOFF)   2
+set SUBSET_6(SHORT_CT_RAMPON)    2
+
+#set SUBSET_7(NAME)          "l - r"
+set SUBSET_7(NAME)          "\${subset_7}"
+set SUBSET_7(SUBSET_OPTION_VALUE)  7
+set SUBSET_7(SHORT_CT_OFF)      0
+set SUBSET_7(SHORT_CT_OFFDELAY)    0
+set SUBSET_7(SHORT_CT_ON)      0
+set SUBSET_7(SHORT_CT_ONDELAY)    0
+set SUBSET_7(SHORT_CT_RAMPOFF)    0
+set SUBSET_7(SHORT_CT_RAMPON)    0
+
+
+#set SUBSET_8(NAME)          "l - r || r - l"
+set SUBSET_8(NAME)          "\${subset_8}"
+set SUBSET_8(SUBSET_OPTION_VALUE)  8
+set SUBSET_8(SHORT_CT_OFF)        1
+set SUBSET_8(SHORT_CT_OFFDELAY)   1
+set SUBSET_8(SHORT_CT_ON)         1
+set SUBSET_8(SHORT_CT_ONDELAY)    1
+set SUBSET_8(SHORT_CT_RAMPOFF)    1
+set SUBSET_8(SHORT_CT_RAMPON)     1
+
+
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   global iface_url dev_descr_sender dev_descr_receiver
@@ -268,7 +323,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #1
   incr prn
-  set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
@@ -279,6 +333,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td>\${SENDER_CHANNEL_SETTINGS}</td>"
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
@@ -290,7 +349,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #2
   incr prn
-  set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
@@ -301,6 +359,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td>\${SENDER_CHANNEL_SETTINGS}</td>"
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
@@ -313,7 +376,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #3
   incr prn
-  set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
@@ -324,6 +386,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td>\${SENDER_CHANNEL_SETTINGS}</td>"
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
@@ -343,7 +410,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 #4 jalousie target position
   incr prn
-  set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
@@ -355,11 +421,17 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
 
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  incr pref ;# 2
   append HTML_PARAMS(separate_$prn) "<tr><td>\${JUMPTARGET}</td><td>"
   append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn "onchange=\"BLIND_setPosition('separate_${special_input_id}_$prn\_$pref');jalousieShowSlatInputElem('separate_${special_input_id}_$prn\_$pref', $channel);\""]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  incr pref ;# 2
+  incr pref ;# 3
   append HTML_PARAMS(separate_$prn) "<tr><td>\${DRIVING_MODE}</td><td>"
   array_clear options
   set options(0) "\${driving_mode_0}"
@@ -369,8 +441,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DRIVING_MODE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_DRIVING_MODE]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  incr pref ;# 3
-  append HTML_PARAMS(separate_$prn) "<tr style=\"visibility:hidden;display:none\" id=\"upLevel_${special_input_id}_$prn\_1\"><td>\${UP_LEVEL}</td>"
+  incr pref ;# 4
+  append HTML_PARAMS(separate_$prn) "<tr style=\"visibility:hidden;display:none\" id=\"upLevel_${special_input_id}_$prn\_2\"><td>\${UP_LEVEL}</td>"
   append HTML_PARAMS(separate_$prn) "<td>"
   option BLIND_LEVEL
   #set options(1.005) "\${lastValue}"
@@ -378,8 +450,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_3 PROFILE_$prn SHORT_ON_LEVEL]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  incr pref ;# 4
-  append HTML_PARAMS(separate_$prn) "<tr style=\"visibility:hidden;display:none\" id=\"downLevel_${special_input_id}_$prn\_1\"><td>\${DOWN_LEVEL}</td>"
+  incr pref ;# 5
+  append HTML_PARAMS(separate_$prn) "<tr style=\"visibility:hidden;display:none\" id=\"downLevel_${special_input_id}_$prn\_2\"><td>\${DOWN_LEVEL}</td>"
   append HTML_PARAMS(separate_$prn) "<td>"
   option BLIND_LEVEL
   #set options(1.005) "\${lastValue}"
@@ -387,20 +459,22 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_4 PROFILE_$prn SHORT_OFF_LEVEL]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  decr pref
   # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG id=\"upTime_${special_input_id}_$prn\_1\"]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG id=\"upTime_${special_input_id}_$prn\_2\"]"
 
   # OFF_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG id=\"downTime_${special_input_id}_$prn\_1\"]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG id=\"downTime_${special_input_id}_$prn\_2\"]"
 
   # ONDELAY_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG id=\"upDelayTime_${special_input_id}_$prn\_1\"]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG id=\"upDelayTime_${special_input_id}_$prn\_2\"]"
 
   # OFFDELAY_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG id=\"downDelayTime_${special_input_id}_$prn\_1\"]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG id=\"downDelayTime_${special_input_id}_$prn\_2\"]"
+
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_4_1');jalousieShowSlatInputElem('separate_${special_input_id}_4_1', $channel);},200)</script>"
+  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_4_2');jalousieShowSlatInputElem('separate_${special_input_id}_4_2', $channel);},200)</script>"
 
 
   #5 no action

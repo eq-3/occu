@@ -1,19 +1,4 @@
 <%
-  string excludeParty = "PARTY_";
-  string includePartyMode = "PARTY_MODE";
-  string excludeHmIPSection =  "SECTION";
-  string excludeHmIPProcess =  "PROCESS";
-  string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
-  string excludeHmIPValveState =  "VALVE_STATE";
-  string excludeHmIPSmokeDetTestResultNone = "SMOKE_DETECTOR_TEST_RESULT=NONE";
-  string excludeHmIPCurrentIllumination = "CURRENT_ILLUMINATION";
-  string excludeHmIPActualTemperature = "_ACTUAL_TEMPERATURE";
-  string excludeHmIPOperatingVoltage = "OPERATING_VOLTAGE";
-
-  string excludeHmIPRSSI_DEVICE = "RSSI_DEVICE";
-  string excludeHmIPRSSI_PEER = "RSSI_PEER";
-
-
   integer iLV = oSC.LeftVal();
   integer iLVT = oSC.LeftValType();
   integer iRV1 = oSC.RightVal1();
@@ -24,6 +9,9 @@
   integer iCT2 = oSC.ConditionType2();
   integer iCC = oSC.ConditionChannel();
   string sSelected = "";
+
+  boolean showHmIPParam = true;
+
   Write( '<select class="SelectBox" onchange="LeftValSelectChange(this.selectedIndex,'#oSC.ID()#');">' );
   if( iLVT == ivtEmpty ) { sSelected = " selected"; } else { sSelected = ""; }
   Write( '<option'#sSelected#'></option>' );
@@ -88,16 +76,16 @@
       {
         !Write( ' <i>bei</i> ' );
         Write( ' <i>${ruleConditionLblWhen}</i> ' );
-        Write( '<select onchange="SetLeftValue('#oSC.ID()#',this.value);" class="SelectBox">' );
+        Write( '<select id="selectConditionWhen'#oSC.ID()#'" onchange="SetLeftValue('#oSC.ID()#',this.value);" class="SelectBox">' );
       }
 
       if( iLVT == ivtObjectId )
       {
-        
         string sDP;
         foreach( sDP, oCC.DPs().EnumEnabledVisibleIDs() )
         {
           object oDP = dom.GetObject( sDP );
+
           if( oDP )
           {
             if( (oDP.Operations() & (OPERATION_READ|OPERATION_EVENT)) != 0 )
@@ -116,14 +104,16 @@
                   string sVLValue = web.webGetValueFromList( oDP.ValueList(), sVLKey );
                   if( sVLValue.Length())
                   {
-                    ! Some parameters shouldn't be visible
+
                     string optionVal = "";
                     if( !oDP.IsTypeOf( OT_VARDP ) ) {
                       optionVal = oDP.HSSID()#"="#sVLValue;
                     }
-                    if ((oDP.HSSID().Find(excludeHmIPProcess) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPValveState) == -1) && (optionVal != excludeHmIPSmokeDetTestResultNone )
-                    ) {
+
+                    ! Some parameters shouldn't be visible
+                    Call("/esp/functions.fn::isParameterVisible()");
+                    if (showHmIPParam == true)
+                     {
 
                       if( (oDP.ID() == iLV) && (iRV1 == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
                       Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
@@ -169,9 +159,13 @@
                       }
                     }
                   }
+                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
                   Write( sValue );
+
                   Write( '</option>' );
+
                   if( (oDP.ID() == iLV) && (iRV1 == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
+
                   Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
                   string sValue = oDP.Name()#": "#oDP.ValueName0();
                   if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
@@ -188,22 +182,16 @@
                       }
                     }
                   }
+
+                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
                   Write( sValue );
                   Write( '</option>' );
                 }
                 else
                 {
                   ! Some parameter shouldn´t be visible
-                  if(
-                    ((oDP.HSSID().Find(excludeParty) == -1) || (oDP.HSSID().Find(includePartyMode) != -1))
-                    && (oDP.HSSID().Find(excludeHmIPSection) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPCDT) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPRSSI_DEVICE) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPRSSI_PEER) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPCurrentIllumination) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPActualTemperature) == -1)
-                    && (oDP.HSSID().Find(excludeHmIPOperatingVoltage) == -1)
-                   ) {
+                  Call("/esp/functions.fn::isParameterVisible()");
+                  if(showHmIPParam == true) {
                     if( oDP.ID() == iLV ) { sSelected = " selected"; } else { sSelected = ""; }
                     Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
                     string sValue = oDP.Name();
@@ -221,6 +209,7 @@
                         }
                       }
                     }
+                    Call("/esp/functions.fn::getSpecialIntegerTranslation()");
                     Write( sValue );
                     Write( '</option>' );
                   }
