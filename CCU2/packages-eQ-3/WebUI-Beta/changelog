@@ -2,6 +2,22 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-12-03 Jens Maus <mail@jens-maus.de>
+
+  * added system.MaxIterations(max) method which allows to modify the maximum
+    number of iterations for while()/foreach() loops. Calling this method
+    with 0 will result in while()/foreach() to loop indefinitly. Calling it
+    with -1 will restore the default of 500000 iterations.
+  * removed all ID_XXXXX_MAX_COUNT entries from the public symbolic constant
+    table were they didn't belong to.
+
+2017-11-24 Jens Maus <mail@jens-maus.de>
+
+  * fixed bug where invalid objects in the shared user object list required
+    multiple restarts to completly cleanup the list.
+
+#### BETA24-2017-11-14 (7338722) Release ####################################
+
 2017-11-14 Jens Maus <mail@jens-maus.de>
 
   * fixed bug where deleting an object didn't remove it from the shared
