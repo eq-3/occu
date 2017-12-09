@@ -1,6 +1,11 @@
-"description_1" : "<span class=\"translated\">*en Bei Erreichen der oberen Helligkeitsschwelle des Helligkeitssensors wird der Schalter f&uuml;r die festgelegte Zeit eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
-"description_2" : "<span class=\"translated\">*en Bei Erreichen der oberen Helligkeitsschwelle des Helligkeitssensors wird der Schalter f&uuml;r die festgelegte Zeit ausgeschaltet. Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
-"description_3" : "<span class=\"translated\">*en Bei Erreichen der oberen Helligkeitsschwelle des Helligkeitssensors wird der Schalter f&uuml;r die festgelegte Zeit in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
-"description_4" : "<span class=\"translated\">*en Das Profil ist nicht aktiv</span>",
+"description_1" : "<span class=\"translated\">When reaching the defined brightness threshold the switch actuator is switched on for the desired time If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When reaching the defined brightness threshold the switch actuator is switched off for the desired time If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When reaching the defined brightness threshold the switch actuator is switched for the desired time into the opposite status (toggle function). If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">The profile is not active</span>",
+"switchPoint" : "Switching at",
 
-"helpBtnSenderConf" : "<span class=\"translated\">*en Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Helligkeitssensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"subset_1": "Reaching the upper brightness threshold",
+"subset_2": "Value falls below lower brightness threshold",
+
+"helpBtnSenderConf" : "<span class=\"translated\">To enable correct operation of the profile, the channel parameters of the brightness sensor have to be configured accordingly. The settings can be adjusted here via the button 'Editing transmitter channel settings'.</span><br/><br/>",
+

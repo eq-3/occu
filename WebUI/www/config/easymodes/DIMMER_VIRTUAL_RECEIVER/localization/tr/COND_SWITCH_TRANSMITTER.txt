@@ -1,7 +1,7 @@
-"description_1" : "<span class=\"translated\">*tr Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Licht auf den festgelegten Helligkeitswert ein- bzw. ausgeschaltet (Toggle-Funktion).</span><br/><br/>",
-"description_2" : "<span class=\"translated\">*tr Bei Empfang des Entscheidungswertes wird das Licht auf den festgelegten Helligkeitswert eingeschaltet.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">*tr Bei Empfang des Entscheidungswertes wird das Licht auf den festgelegten Helligkeitswert ausgeschaltet.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">When receiving the defined decision value the light is switched on or off to the defined brightness value (toggle function). </span><br/><br/>",
+"description_2" : "<span class=\"translated\">When receiving the defined decision value the light is switched on to the defined brightness value (toggle function). </span><br/><br/>",
+"description_3" : "<span class=\"translated\">When receiving the defined decision value the light is switched off to the defined brightness value (toggle function). </span><br/><br/>",
 
-"subset_1" : "*tr Unterer Grenzwert unterschritten",
-"subset_2" : "*tr Oberer Grenzwert &uuml;berschritten",
-"subset_3" : "*tr Unterer Grenzwert unter- / oberer Grenzwert &uuml;berschritten",
+"subset_1" : "Lower value falls below threshold",
+"subset_2" : "Upper threshold exceeded",
+"subset_3" : "Lower threshold value/upper threshold value exceeded",

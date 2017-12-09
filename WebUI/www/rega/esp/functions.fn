@@ -481,7 +481,7 @@ function ::showHideHmIPChannel() {
        if (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) {bShowChannel = false;}
        ! Hide all SWITCH_VIRTUAL_RECEIVER channels other than 2 and 6 when the expert mode is not active
        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
-         if ((chNumber != 2) && (chNumber != 6)) {
+         if ((chNumber != 3) && (chNumber != 7)) {
            bShowChannel = false;
            return;
          }
@@ -538,7 +538,7 @@ function ::getFirmwareVersion() {
   }
 }
 
-function ::getSpecialBinaryTranslation() {
+function ::getSpecialTranslation() {
 
   ! This is necessary for the passage detector SPDR
   ! The same parameter of the same channel type (ch 2 and 3) must be translated differently.
@@ -549,55 +549,32 @@ function ::getSpecialBinaryTranslation() {
 
     if (oCC.Label() == "HmIP-SPDR") {
       if (oCC.ChnNumber() == 2) {
-        if (sValue == "CURRENT_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableCurrentPassageDirectionR2LTrue}";}
-        if (sValue == "CURRENT_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableCurrentPassageDirectionR2LFalse}";}
+        if (sShortKey == "CURRENT_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableCurrentPassageDirectionR2LTrue}";}
+        if (sShortKey == "CURRENT_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableCurrentPassageDirectionR2LFalse}";}
 
-        if (sValue == "LAST_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableLastPassageDirectionR2LTrue}";}
-        if (sValue == "LAST_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableLastPassageDirectionR2LFalse}";}
+        if (sShortKey == "LAST_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableLastPassageDirectionR2LTrue}";}
+        if (sShortKey == "LAST_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableLastPassageDirectionR2LFalse}";}
 
-        if (sValue == "PASSAGE_COUNTER_OVERFLOW=TRUE") {sValue = "${stringTablePassageCounterOverflowR2LTrue}";}
-        if (sValue == "PASSAGE_COUNTER_OVERFLOW=FALSE") {sValue = "${stringTablePassageCounterOverflowR2LFalse}";}
+        if (sShortKey == "PASSAGE_COUNTER_OVERFLOW=TRUE") {sValue = "${stringTablePassageCounterOverflowR2LTrue}";}
+        if (sShortKey == "PASSAGE_COUNTER_OVERFLOW=FALSE") {sValue = "${stringTablePassageCounterOverflowR2LFalse}";}
 
-        if (sValue == "PASSAGE_COUNTER_VALUE") {sValue = "${stringTablePassageCounterValueR2L}";}
+        if (sShortKey == "PASSAGE_COUNTER_VALUE") {sValue = "${stringTablePassageCounterValueR2L}";}
       }
 
       if (oCC.ChnNumber() == 3) {
-        if (sValue == "CURRENT_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableCurrentPassageDirectionL2RTrue}";}
-        if (sValue == "CURRENT_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableCurrentPassageDirectionL2RFalse}";}
+        if (sShortKey == "CURRENT_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableCurrentPassageDirectionL2RTrue}";}
+        if (sShortKey == "CURRENT_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableCurrentPassageDirectionL2RFalse}";}
 
-        if (sValue == "LAST_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableLastPassageDirectionL2RTrue}";}
-        if (sValue == "LAST_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableLastPassageDirectionL2RFalse}";}
+        if (sShortKey == "LAST_PASSAGE_DIRECTION=TRUE") {sValue = "${stringTableLastPassageDirectionL2RTrue}";}
+        if (sShortKey == "LAST_PASSAGE_DIRECTION=FALSE") {sValue = "${stringTableLastPassageDirectionL2RFalse}";}
 
-        if (sValue == "PASSAGE_COUNTER_OVERFLOW=TRUE") {sValue = "${stringTablePassageCounterOverflowL2RTrue}";}
-        if (sValue == "PASSAGE_COUNTER_OVERFLOW=FALSE") {sValue = "${stringTablePassageCounterOverflowL2RFalse}";}
+        if (sShortKey == "PASSAGE_COUNTER_OVERFLOW=TRUE") {sValue = "${stringTablePassageCounterOverflowL2RTrue}";}
+        if (sShortKey == "PASSAGE_COUNTER_OVERFLOW=FALSE") {sValue = "${stringTablePassageCounterOverflowL2RFalse}";}
 
-        if (sValue == "PASSAGE_COUNTER_VALUE") {sValue = "${stringTablePassageCounterValueL2R}";}
+        if (sShortKey == "PASSAGE_COUNTER_VALUE") {sValue = "${stringTablePassageCounterValueL2R}";}
       }
     }
   }
 
   return;
-}
-
-function ::getSpecialIntegerTranslation() {
-
-  ! This is necessary for the passage detector SPDR
-  ! The same parameter of the same channel type (ch 2 and 3) must be translated differently.
-  if (oCC.HssType() == "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") {
-
-    ! R2L = Passage Right To Left
-    ! L2R = Passage Left To Right
-
-    if (oCC.Label() == "HmIP-SPDR") {
-      if (oCC.ChnNumber() == 2) {
-        if (sValue == "PASSAGE_COUNTER_VALUE") {sValue = "${stringTablePassageCounterValueR2L}";}
-      }
-
-      if (oCC.ChnNumber() == 3) {
-        if (sValue == "PASSAGE_COUNTER_VALUE") {sValue = "${stringTablePassageCounterValueL2R}";}
-      }
-    }
-  }
-
-  return ;
 }

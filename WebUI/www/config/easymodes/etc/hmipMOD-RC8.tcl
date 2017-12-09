@@ -115,7 +115,6 @@ proc getKeyHTML {address chn p descr} {
       append html "<td>\${stringTableKeyDblPressTime}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
-    incr prn
   }
 
   set param LONG_PRESS_TIME
@@ -132,21 +131,21 @@ proc getKeyHTML {address chn p descr} {
     incr prn
     append html "<tr name=\"modrc8_$chn\">"
     append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShort"]
+    append html [getComboBox $chn $prn "$specialID" "timeOnOffShort"]
     append html "</tr>"
 
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id trNAME=\"modrc8_$chn\"]
 
     incr prn
     set param REPEATED_LONG_PRESS_TIMEOUT_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<tr id=\"timeFactor_$chn\_$prn\" name=\"modrc8_$chn\" class=\"hidden\">"
     append html "<td>\${stringTableKeyLongPressTimeOutValue}</td>"
 
     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
   return $html
 }

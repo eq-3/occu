@@ -10,16 +10,5 @@
 "subset_2" : "moved down",
 "subset_3" : "changing between moved up and moved down",
 
-"COMMENT" : "The next keys are not in use",
-"subset_4" : "*en Offen - aus / Zu - ein",
-"subset_5" : "*en Offen - ein / Zu - aus",
-
-"subset_6" : "*en Schlie&szlig;en",
-"subset_7" : "*en &Ouml;ffnen",
-"subset_8" : "*en &Auml;ndern",
-
-"subset_9" : "*en Offen",
-"subset_10" : "*en Zu",
-
 
 

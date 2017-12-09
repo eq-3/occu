@@ -282,7 +282,12 @@ proc put_PreviousStep {} {
 
     catch {set extReceiverDescr [getExtendedLinkDescription $dev_descr_receiver(TYPE) $dev_descr_receiver(INDEX)]}
 
-    catch {set description1 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
+    if {[string equal $dev_descr_sender(PARENT_TYPE) "HmIP-MOD-RC8"] == 0} {
+      # This is for all links where the sender is no HmIP-MOD-RC8
+      catch {set description1 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
+    } else {
+      catch {set description1 "\${lblStandardLink} HmIP-MOD-RC8 $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
+    }
     catch {set description2 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
 
     set SENTRY(LINKNAME)      "<input id=\"input_name\"              name=\"name\"              type=\"text\" value=\"$name\"/>"
@@ -648,8 +653,8 @@ proc showHmIPChannel {devType direction address chType} {
      if {$ch >= 3} {return 0}
     }
 
-    if {($devType == "HMIP-MIOB") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-      if {$ch != 3 && $ch != 7} {return 0}
+    if {($devType == "HMIP-MIOB" || $devType == "HMIP-WHS2") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+      if {($ch != 3) && ($ch != 7)} {return 0}
     }
 
     if {($devType == "HMIP-BBL" || $devType == "HMIP-FBL") && ($chType == "BLIND_VIRTUAL_RECEIVER")} {
@@ -662,10 +667,6 @@ proc showHmIPChannel {devType direction address chType} {
 
     if {($devType == "HMIP-WGC") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
      if {$ch >= 4} {return 0}
-    }
-
-    if {($devType == "HMIP-WHS2") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-     if {($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8) } {return 0}
     }
 
     if {($devType == "HMIP-MOD-OC8") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {

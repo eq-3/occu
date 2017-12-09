@@ -712,6 +712,7 @@ function ::CreateBlindTransmitter()
 
         WriteLine("if(("#user.UserEasyLinkMode()#" == true) && ((realLevelVal != virtLevelVal) || (realSlatVal != virtSlatVal)) && (jQuery('body').data('loadCh_"#oDevice.ID()#"') != true)) {");
           WriteLine(" conInfo('BBL/FBL - Map the virtual value to the real value'); ");
+          WriteLine(" jQuery('body').data('loadCh_"#oDevice.ID()#"', true ); ");
           WriteLine("loadChannels("#oDevice.ID()#", true);");
         WriteLine("}");
       WriteLine("},250)");

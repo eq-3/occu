@@ -1,22 +1,15 @@
-"description_1" : "<span class=\"translated\">*en Bei Erreichen des oberen oder unteren Wertes der in den Kanalparametern gew&auml;hlten Windrichtung, f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz hoch. Ist eine Hochfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit hochgefahren.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">When reaching the upper and lower value of the wind direction defined in the channel parameters the blind will be moved up completely for the time set. If an up-delay is set the blind will be moved up to the desired position after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When reaching the upper and lower value of the wind direction defined in the channel parameters the blind will be moved down completely for the time set. If a down-delay is set the blind will be moved up to the desired position after the delay time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When reaching the upper and lower value of the wind direction defined in the channel parameters the blind will be moved up or down completely for the time set (toggle function). If a delay is set the blind will be moved to the desired position after the delay time has expired.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">When reaching the upper and lower value of the wind direction defined in the channel parameters the blind will be moved to the desired position for the time set. If a delay is set the blind will be moved to the desired position after the delay time has expired.</span><br/><br/>",
+"switchPoint" : "Switching at",
 
-"description_2" : "<span class=\"translated\">*en Bei Erreichen des oberen oder unteren Wertes der in den Kanalparametern gew&auml;hlten Windrichtung, f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz herunter. Ist eine Herunterfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit runtergefahren.</span><br/><br/>",
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "moved up/down in toggle mode",
+"subset_4" : "Reaching the lower value",
+"subset_5" : "Reaching the upper value",
+"subset_6" : "Reaching the upper value",
+"subset_7" : "Value falls below lower wind threshold",
 
-"description_3" : "<span class=\"translated\">*en Bei Erreichen des oberen oder unteren Wertes der in den Kanalparametern gew&auml;hlten Windrichtung, f&auml;hrt die Jalousie im Wechsel ganz hoch bzw. ganz herunter (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
-
-"description_4" : "<span class=\"translated\">*en Bei Erreichen des oberen oder unteren Wertes der in den Kanalparametern gew&auml;hlten Windrichtung, f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
-
-"subset_1" : "*en hochgefahren",
-"subset_2" : "*en heruntergefahren",
-"subset_3" : "*en hoch- / heruntergefahren im Wechsel",
-
-
-"subset_4" : "*en Erreichen des unteren Wertes",
-"subset_5" : "*en Erreichen des oberen Wertes",
-
-
-"switchPoint" : "*en Schalten bei",
-"subset_6": "*en Erreichen des oberen Wertes",
-"subset_7": "*en Unterschreiten der unteren Windschwelle",
-
-"helpBtnSenderConf" : "<span class=\"translated\">*en Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Windrichtungssensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"helpBtnSenderConf" : "<span class=\"translated\">To enable correct operation of the profile, the channel parameters of the wind direction sensor have to be configured accordingly. The settings can be adjusted here via the button 'Editing transmitter channel settings'.</span><br/><br/>",

@@ -1,0 +1,5 @@
+"hintPermanentFullRX" :
+
+  "Damit diese Verkn%FCpfung erwartungsgem%E4%DF arbeitet, muss in den Kanaleinstellungen der Parameter 'Dauerhafte Empfangsbereitschaft' aktiviert sein. " +
+  "Da dieses die Batterielebensdauer erheblich verk%FCrzt, empfehlen wir, diese Funktion nur mit den ger%E4teeigenen Tasten zu nutzen.<br/><br/>" +
+  "Sie k%F6nnen den Parameter %FCberpr%FCfen oder einstellen, indem Sie den Button 'Kanalparameter' bet%E4tigen.<br/><br/>",

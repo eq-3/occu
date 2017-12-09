@@ -22,6 +22,8 @@ function ::CreatePassageDetector() {
   string cssCurPassageDir = "ControlBtnInfo";
   string cssLastPassageDir = "ControlBtnInfo";
 
+  string cssChannel = "";
+
   object oCurrentPassageDirectionRL;
   object oCurrentPassageDirectionLR;
   object oLastPassageDirectionRL;
@@ -104,8 +106,21 @@ function ::CreatePassageDetector() {
   }
 
   WriteLine("<td>");
-    WriteLine("<table>");
 
+    if (chnNumber == 3) {
+      cssChannel = "hidden";
+      WriteLine("<table id='tdChannel3"#chnId#"' align='center'>");
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<div class='ControlBtnInfo' style='text-align:center'>");
+              WriteLine("${lblPassageDetectorNoParams}");
+            WriteLine("</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    }
+
+    WriteLine("<table id='tdChannel2"#chnId#"' class="#cssChannel#">");
       WriteLine("<tr>");
         WriteLine("<td>");
           WriteLine("<div class='"#cssCurPassageDir#"'>");
@@ -133,16 +148,17 @@ function ::CreatePassageDetector() {
       WriteLine("<tr>");
         WriteLine("<td>");
           WriteLine("<div class='ControlBtnInfo'>");
-            WriteLine("${overflowLeftPassage}:<br/><span name='passageCounterOverflowLR'>"#lblOverFlowRight#"</span>");
+            WriteLine("${overflowRightPassage}:<br/>"#lblOverFlowLeft);
           WriteLine("</div>");
         WriteLine("</td>");
         WriteLine("<td>");
           WriteLine("<div class='ControlBtnInfo'>");
-            WriteLine("${overflowRightPassage}:<br/>"#lblOverFlowLeft);
+            WriteLine("${overflowLeftPassage}:<br/><span name='passageCounterOverflowLR'>"#lblOverFlowRight#"</span>");
           WriteLine("</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
     WriteLine("</table>");
+
   WriteLine("</td>");
 
 
@@ -159,10 +175,11 @@ function ::CreatePassageDetector() {
     if (iChnId) {i1ChnId = iChnId;}
 
     WriteLine("<script type='text/javascript'>");
-
       WriteLine("var opts = {};");
       WriteLine("opts.devId = "#i1DevId#";");
       WriteLine("opts.chnId = "#i1ChnId#";");
+
+      ! WriteLine("jQuery('#tdChannel3"#chnId#"').show();");
 
       WriteLine("var oPassageDetector = new iseHmIPPassageDetector(opts);");
 

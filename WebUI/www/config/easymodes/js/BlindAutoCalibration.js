@@ -1,14 +1,15 @@
 AutoCalibrateBlind = Class.create();
 
 AutoCalibrateBlind.prototype = {
-  initialize: function (address) {
+  initialize: function (address, endPosAutoDetect) {
     var aAddress = address.split(":");
 
     this.iface = "HmIP-RF";
     this.address = address;
     this.parentAddress = aAddress[0];
+    this.endPosAutoDetect = (typeof endPosAutoDetect != "undefined") ? endPosAutoDetect : false;
 
-     this.parentAddress;
+    this.parentAddress;
     this.paramValueElems = [
       "presetsAutoCalibration",
       "REFERENCE_RUNNING_TIME_BOTTOM_TOP_UNIT",
@@ -21,6 +22,7 @@ AutoCalibrateBlind.prototype = {
     this.autoCalibrationBargraphElm;
     this.calibrationActive;
     this.forceStop;
+
 
   },
 
@@ -37,7 +39,7 @@ AutoCalibrateBlind.prototype = {
 
     homematic("Interface.getParamsetDescription", {"interface": this.iface, "address": this.address, "paramsetType": "VALUES"}, function(result) {
       jQuery.each(result, function(index,value){
-        if (value.NAME == "SELF_CALIBRATION") {
+        if ((self.endPosAutoDetect) && (value.NAME == "SELF_CALIBRATION")) {
           self.autoCalibrationPanel.show();
           return; // leave the each loop
         }

@@ -489,7 +489,7 @@ proc getDelay {prn pref specialElement} {
 
 }
 
-proc getTimeOnOffShort {prn pref specialElement} {
+proc getTimeOnOffShort {prn pref specialElement {extraparam ""}} {
       set s ""
       append s "<td>"
       append s  "<select id=\"timeOnOff\_$prn\_$pref\" onchange=\"setTimeValuesShort(this.id, $prn, $pref, \'$specialElement\')\">"
@@ -500,8 +500,9 @@ proc getTimeOnOffShort {prn pref specialElement} {
         append s "<option value=\"4\">\${optionUnit3S}</option>"
         append s "<option value=\"5\">\${optionUnit30S}</option>"
         append s "<option value=\"6\">\${optionUnit1M}</option>"
-        append s "<option value=\"7\">\${optionUnit1H}</option>"
-        append s "<option value=\"8\">\${stringTableEnterValue}</option>"
+        append s "<option value=\"7\">\${optionUnit2M}</option>"
+        append s "<option value=\"8\">\${optionUnit1H}</option>"
+        append s "<option value=\"9\">\${stringTableEnterValue}</option>"
       append s "/<select>"
       append s "</td>"
 
@@ -521,19 +522,20 @@ proc getTimeOnOffShort {prn pref specialElement} {
           append s "optionMap\[\"030\"\] = 4;"
           append s "optionMap\[\"130\"\] = 5;"
           append s "optionMap\[\"21\"\] = 6;"
-          append s "optionMap\[\"31\"\] = 7;"
+          append s "optionMap\[\"22\"\] = 7;"
+          append s "optionMap\[\"31\"\] = 8;"
 
           append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
           append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
 
           append s "currentVal = baseVal+factorVal,"
-          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 8;"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 9;"
           append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"ONTIME baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
           # Enter user value
-          append s "if (optionVal == 8) {"
+          append s "if (optionVal == 9) {"
             append s "timeBaseTRElem.show();"
             append s "timeFactorTRElem.show();"
             append s "spaceTRElem.show();"
@@ -591,11 +593,16 @@ proc getTimeOnOffShort {prn pref specialElement} {
               append s "factorElem.val(1);"
               append s "break;"
             append s "case 7:"
+              # 2 min
+              append s "baseElem.val(2);"
+              append s "factorElem.val(2);"
+              append s "break;"
+            append s "case 8:"
               # 1 h
               append s "baseElem.val(3);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 8:"
+            append s "case 9:"
               # Wert eingeben
                append s "timeBaseTRElem.show();"
                append s "timeFactorTRElem.show();"
@@ -1407,7 +1414,7 @@ proc getMin_10_15_20_25_30 {prn pref specialElement} {
           append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 5;"
           append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
-          append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
+          # append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
           # Enter user value
           append s "if (optionVal == 5) {"
@@ -1542,7 +1549,20 @@ proc getTimeUnitComboBoxShort {param value chn prn special_input_id {extraparam 
   set elemId 'separate_$special_input_id\_$prn'
   set j_elemId '#separate_$special_input_id\_$prn'
 
-  set s "<tr id=\"timeBase_$chn\_$prn\" class=\"hidden\">"
+  set trName ""
+  set specialVal0 ""
+  set specialVal1 ""
+
+  if {[string equal $extraparam ""] != 1} {
+    set specialVal0 [lindex [split $extraparam =] 0]
+    set specialVal1 [lindex [split $extraparam =] 1]
+
+    if {[string equal $specialVal0 "trNAME"] != -1 } {
+      set trName name=$specialVal1
+    }
+  }
+
+  set s "<tr $trName id=\"timeBase_$chn\_$prn\" class=\"hidden\">"
     append s "<td>\${[getDescription $param $extraparam]}</td>"
     append s "<td>"
       append s "<select id=$elemId name=$param>"

@@ -79,7 +79,7 @@ function ::CreateMotionDetector() {
           if (cObj.Label() == "HmIP-SMI55") {
             ! The SMI55 can be configured as a non-permanent listener. If this is the case this button should not be visible
             ! The check if the device is configured as a non-permanent or a permanent listener happens below in the javascript section
-            WriteLine("<td id='tdBtnTransmitterOnOff' class='hidden'>");
+            WriteLine("<td id='tdBtnTransmitterOnOff"#chnId#"' class='hidden'>");
           } else {
             WriteLine("<td>");
           }
@@ -93,7 +93,7 @@ function ::CreateMotionDetector() {
         WriteLine("<td>");
           WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#stateMotion#"</span></div>");
         WriteLine("</td>");
-        WriteLine("<td id='tdBtnResetStatus' class='hidden'>");
+        WriteLine("<td id='tdBtnResetStatus"#chnId#"' class='hidden'>");
           WriteLine("<div class='ControlBtnOff CLASS02532' style='min-height:30px; padding:5px;' id='resetMotion"#chnId#"'>${btnResetMotion}</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
@@ -111,7 +111,7 @@ function ::CreateMotionDetector() {
     ! 0 = the device is configured as non-permanent listener ---- 1 = the device is configured as permanent listener
     ! If the device is a non-permanent listener then hide the button. Otherwise the state of the control doesn't change after using the button which will cause enquiries at the customer service.
     WriteLine("if (permanentFullRX != 0) {");
-      WriteLine("jQuery('#tdBtnTransmitterOnOff, #tdBtnResetStatus').show();");
+      WriteLine("jQuery('#tdBtnTransmitterOnOff"#chnId#", #tdBtnResetStatus"#chnId#"').show();");
     WriteLine("}");
 
 

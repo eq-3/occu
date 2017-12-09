@@ -597,7 +597,7 @@ proc put_profile_body { PEERPART } {
   puts "<td align=\"left\">"
   puts "<div id=\"DelBtnEasyMode_$select_id\" onclick=\"DeleteEasyMode('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility: hidden;\">\${btnRemoveProfileTemplate}</div>"
   puts "</td>"
-  if {$iface != "BidCos-Wired" } {
+  if {($iface != "BidCos-Wired") && ($iface != "HmIP-RF") } {
     puts "<td align=\"center\" valign=\"middle\"><div onclick=\"ActivateLinkParamset('$iface', '[expr {$PEERPART=="SENDER"?$sender_address:$sender_group} ]', '$receiver_address')\" class=\"CLASS20009 CLASS20010\">\${btnTestReceiverProfile}</div></td>"
   } else {
     puts "<td align=\"center\" valign=\"middle\"><div></div></td>"

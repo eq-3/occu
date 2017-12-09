@@ -4,13 +4,18 @@
 #
 # Parameter:
 #   userName: [string] userName des Anwenders
+#   userID: [string] userId des Anwenders
 #
 # Rückgabewert: Gewählte Sprache des Users
 ##
 
+set script {
+  var user = dom.GetObject(userID);
+  Write(user.UserFirstName());
+}
+set legitimateUser [hmscript $script args]
 
-
-if {[catch {set fp [open "/etc/config/userprofiles/$args(userName).lang" r]}] == 0} {
+if {([string equal $args(userName) $legitimateUser] == 1) && ([catch {set fp [open "/etc/config/userprofiles/$args(userName).lang" r]}] == 0)} {
   set data [read $fp]
   set lang [split $data "\n"]
   close $fp

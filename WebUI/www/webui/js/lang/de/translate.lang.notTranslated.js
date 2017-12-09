@@ -16,27 +16,27 @@ jQuery.extend(true,langJSON, {
     "stringTableCondValuePassageDetectionLeft" : "Gesendeter Entscheidungswert<br/>bei Durchgang von links nach rechts",
     "stringTableCondValuePassageDetectionRight" : "Gesendeter Entscheidungswert<br/>bei Durchgang von rechts nach links",
 
-    "stringTablePassageDetectionLeft" : "Durchgangserkennung Links nach Rechts",
-    "stringTablePassageDetectionRight" : "Durchgangserkennung Rechts nach Links",
+    "stringTablePassageDetectionLeft" : "Durchgangserkennung links nach rechts",
+    "stringTablePassageDetectionRight" : "Durchgangserkennung rechts nach links",
 
     "stringTablePassageDetectorCounterTransmitterChannelOperationMode" : "Betriebsart",
 
     "optionPassageCounterDetectionLR" : "Durchgangsz%E4hlung beide Richtungen",
-    "optionPassageCounterDetectionL" : "Durchgangsz%E4hlung Rechts nach Links",
-    "optionPassageCounterDetectionR" : "Durchgangs%E4hlung Links nach Rechts",
-    "optionPassageCounterDeltaLR" : "Differenz der Durchg%E4nge Links/Rechts",
-    "optionPassageCounterDeltaL" : "Differenz der Durchg%E4nge Links",
-    "optionPassageCounterDeltaR" : "Differenz der Durchg%E4nge Rechts",
+    "optionPassageCounterDetectionL" : "Durchgangsz%E4hlung rechts nach links",
+    "optionPassageCounterDetectionR" : "Durchgangs%E4hlung links nach rechts",
+    "optionPassageCounterDeltaLR" : "Differenz der Durchg%E4nge links/rechts",
+    "optionPassageCounterDeltaL" : "Differenz der Durchg%E4nge links",
+    "optionPassageCounterDeltaR" : "Differenz der Durchg%E4nge rechts",
 
-    "lblCurPassageDetectionRL" : "Rechts nach Links",
-    "lblCurPassageDetectionLR" : "Links nach Rechts",
-    "lblLastPassageDetectionRL" : "Rechts nach Links",
-    "lblLastPassageDetectionLR" : "Links nach Rechts",
+    "lblCurPassageDetectionRL" : "Rechts nach links",
+    "lblCurPassageDetectionLR" : "Links nach rechts",
+    "lblLastPassageDetectionRL" : "Rechts nach links",
+    "lblLastPassageDetectionLR" : "Links nach rechts",
 
     "identifiedPassage" : "Erkannter Durchgang",
     "lastIdentifiedPassage" : "Vorheriger Durchgang",
-    "capturedPassageLeft" : "Erfasste Durchg%E4nge<br/>Links nach Rechts",
-    "capturedPassageRight" : "Erfasste Durchg%E4nge<br/>Rechts nach Links",
+    "capturedPassageLeft" : "Erfasste Durchg%E4nge<br/>links nach rechts",
+    "capturedPassageRight" : "Erfasste Durchg%E4nge<br/>rechts nach links",
     "overflowLeftPassage" : "%DCberlauf linker Durchgangszaehler",
     "overflowRightPassage" : "%DCberlauf rechter Durchgangszaehler",
 
@@ -67,23 +67,23 @@ jQuery.extend(true,langJSON, {
 
     "lblTimeDelay" : "Zeitverz%F6gerung",
 
-    "stringTableCurrentPassageDirectionL2RTrue" : "Erkannter Durchgang: von Links nach Rechts",
-    "stringTableCurrentPassageDirectionL2RFalse" : "Erkannter Durchgang: nicht von Links nach Rechts",
-    "stringTableCurrentPassageDirectionR2LTrue" : "Erkannter Durchgang: von Rechts nach Links",
-    "stringTableCurrentPassageDirectionR2LFalse" : "Erkannter Durchgang: nicht von Rechts nach Links",
+    "stringTableCurrentPassageDirectionL2RTrue" : "Erkannter Durchgang: von links nach rechts",
+    "stringTableCurrentPassageDirectionL2RFalse" : "Erkannter Durchgang: nicht von links nach rechts",
+    "stringTableCurrentPassageDirectionR2LTrue" : "Erkannter Durchgang: von rechts nach links",
+    "stringTableCurrentPassageDirectionR2LFalse" : "Erkannter Durchgang: nicht von rechts nach links",
 
-    "stringTableLastPassageDirectionL2RTrue" : "Letzter erkannter Durchgang: von Links nach Rechts",
-    "stringTableLastPassageDirectionL2RFalse" : "Letzter erkannter Durchgang: nicht von Links nach Rechts",
-    "stringTableLastPassageDirectionR2LTrue" : "Letzter erkannter Durchgang: von Rechts nach Links",
-    "stringTableLastPassageDirectionR2LFalse" : "Letzter erkannter Durchgang: nicht von Rechts nach Links",
+    "stringTableLastPassageDirectionL2RTrue" : "Letzter erkannter Durchgang: von links nach rechts",
+    "stringTableLastPassageDirectionL2RFalse" : "Letzter erkannter Durchgang: nicht von links nach rechts",
+    "stringTableLastPassageDirectionR2LTrue" : "Letzter erkannter Durchgang: von rechts nach links",
+    "stringTableLastPassageDirectionR2LFalse" : "Letzter erkannter Durchgang: nicht von rechts nach links",
 
-    "stringTablePassageCounterOverflowL2RTrue" : "%DCberlauf Durchgangsz%E4hler Links nach Rechts",
-    "stringTablePassageCounterOverflowL2RFalse" : "kein %DCberlauf Durchgangsz%E4hler Links nach Rechts",
-    "stringTablePassageCounterValueL2R" : "Anzahl Durchg%E4nge Links nach Rechts",
+    "stringTablePassageCounterOverflowL2RTrue" : "%DCberlauf Durchgangsz%E4hler links nach rechts",
+    "stringTablePassageCounterOverflowL2RFalse" : "kein %DCberlauf Durchgangsz%E4hler links nach rechts",
+    "stringTablePassageCounterValueL2R" : "Anzahl Durchg%E4nge links nach rechts",
 
-    "stringTablePassageCounterOverflowR2LTrue" : "%DCberlauf Durchgangsz%E4hler Rechts nach Links",
-    "stringTablePassageCounterOverflowR2LFalse" : "kein %DCberlauf Durchgangsz%E4hler Rechts nach Links",
-    "stringTablePassageCounterValueR2L" : "Anzahl Durchg%E4nge Rechts nach Links ",
+    "stringTablePassageCounterOverflowR2LTrue" : "%DCberlauf Durchgangsz%E4hler rechts nach links",
+    "stringTablePassageCounterOverflowR2LFalse" : "kein %DCberlauf Durchgangsz%E4hler rechts nach links",
+    "stringTablePassageCounterValueR2L" : "Anzahl Durchg%E4nge rechts nach links ",
 
     "stringTablePassageCounterValue" : "Anzahl der Durchg%E4nge",
     "stringTablePassageCounterOverflowFalse" : "Durchgangsz%E4hler %DCberlauf: Nein",
@@ -113,6 +113,7 @@ jQuery.extend(true,langJSON, {
     "stringTableWeatherSunshineDurationOverflowFalse" : "Z%E4hler Sonnenschein %DCberlauf: Nein",
     "stringTableWeatherSunshineThresOverrunTrue" : "aktuell Sonnenschein",
     "stringTableWeatherSunshineThresOverrunFalse" : "aktuell kein Sonnenschein",
+    "stringTableWeatherSunshineThresOverrunTitle" : "Sonnenschein",
     "stringTableWeatherWindThresholdOverrunTrue" : "Windschwelle %FCberschritten",
     "stringTableWeatherWindThresholdOverrunFalse" : "Windschwelle nicht %FCberschritten",
 
@@ -125,8 +126,8 @@ jQuery.extend(true,langJSON, {
       "<h1>Bitte beachten Sie:</h1>" +
       "<ul>"+
         "<li>Die Philips Hue Kopplung hat Beta-Status.</li>" +
-        "<li>Das Gateway wird unter Zuhilfenahme eines Internetdienstens von Philips gefunden (NUPNP].<br/>" +
-           "Die CCU2 und das Philips-Gateway ben%F6tigen daher Zugang zum Internet.</li>" +
+        "<li>Das Gateway wird unter Zuhilfenahme eines Internetdienstens von Philips gefunden (NUPNP).<br/>" +
+           "Die "+HMIdentifier.de.CCUShortName+" und das Philips-Gateway ben%F6tigen daher Zugang zum Internet.</li>" +
         "<li>Es darf nur ein Philips-Gateway im Netzwerk vorhanden sein.</li>" +
         "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
         "<li>Damit das Philips-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
@@ -139,9 +140,22 @@ jQuery.extend(true,langJSON, {
 
     "stringTableConditionSwitchTransmitter" : "Sender Entscheidungswert",
 
-    "noMoreKeys" : "",
+    "stringTablePassageDetectorCounterTransmitterTitle" : "Durchgangsz%E4hler",
+    "stringTableErrorUndervoltageFalse" : "Betriebsspannung ok, Relais kann geschaltet werden",
+    "stringTableErrorUndervoltageTrue" : "Betriebsspannung nicht ok, Relais kann nicht geschaltet werden",
 
-    "comment" : "new text - not seen by the marketing division",
-    "stringTablePassageDetectorCounterTransmitterTitle" : "Durchgangsz%E4hler"
+    "lblPassageDetectorNoParams" : "Es sind keine Parameter vorhanden.<br/>Zur Statusanzeige bitte Kanal 2 verwenden.",
+
+    "stringTableConditionSwitchTransmitterWindSpeed" : "Windgeschwindigkeitssensor",
+    "stringTableConditionSwitchTransmitterTemperature" : "Temperatursensor",
+    "stringTableConditionSwitchTransmitterHumidity" : "Luftfreuchtesensor",
+    "stringTableConditionSwitchTransmitterBrightness" : "Helligkeitssensor",
+    "stringTableConditionSwitchTransmitterRainQuantity" : "Sensor Regenmenge",
+    "stringTableConditionSwitchTransmitterRainDrop" : "Regensensor",
+    "stringTableConditionSwitchTransmitterWindDirection" : "Windrichtungssensor",
+
+    "stringTablePassageDetectorDirectionTitle" : "Richtungserkennung",
+
+    "noMoreKeys" : ""
   }
 });

@@ -354,7 +354,7 @@ function ::dcCreate()
             if (ch.Label().Substr(5,7) != "MOD-RC8") {
               Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
             } else {
-              WriteLine( "<script>console.log('HmIP-MOD-RC8 found');</script>" );
+              WriteLine( "<script>conInfo('HmIP-MOD-RC8 found');</script>" );
               Call("/esp/controls/key_switch_sc.fn::CreateContent()");
             }
           }

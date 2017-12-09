@@ -3,7 +3,7 @@
 "description_3" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle wird der Dimmer f&uuml;r die festgelegte Zeit ausgeschaltet.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
 
-"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Temperatursensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Temperatursensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
 "switchPoint" : "Schalten bei",
 "subset_1": "Erreichen der oberen Temperaturschwelle",

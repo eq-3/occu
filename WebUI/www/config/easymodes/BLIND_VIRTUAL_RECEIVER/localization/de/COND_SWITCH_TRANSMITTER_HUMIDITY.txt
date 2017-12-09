@@ -19,4 +19,4 @@
 "subset_6": "Erreichen der oberen Feuchtigkeitsschwelle",
 "subset_7": "Unterschreiten der unteren Feuchtigkeitsschwelle",
 
-"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Feuchtigkeitssensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Feuchtigkeitssensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",

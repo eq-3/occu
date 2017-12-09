@@ -26,12 +26,12 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxDecisionAbove" : "Gesendeter Entscheidungswert, wenn oberer Grenzwert &uuml;berschritten",
     "stringTableCondTxDecisionBelow" : "Gesendeter Entscheidungswert, wenn unterer Grenzwert unterschritten",
 
-    "stringTableCondTxDecisionPassageRL_A" : "Gesendeter Entscheidungswert,<br/> wenn Anzahl Durchg%E4nge rechts -> links erreicht",
-    "stringTableCondTxDecisionPassageLR_A" : "Gesendeter Entscheidungswert,<br/> wenn Anzahl Durchg%E4nge links -> rechts erreicht",
+    "stringTableCondTxDecisionPassageRL_A" : "Gesendeter Entscheidungswert,<br/>wenn Anzahl Durchg&auml;nge rechts -> links erreicht",
+    "stringTableCondTxDecisionPassageLR_A" : "Gesendeter Entscheidungswert,<br/>wenn Anzahl Durchg&auml;nge links -> rechts erreicht",
 
-    "stringTableCondTxDecisionPassageRL_B" : "Gesendeter oberer Entscheidungswert,<br/> wenn die Differenz der Durchg&auml;nge rechts -> links erreicht wurde",
-    "stringTableCondTxDecisionPassageLR_B" : "Gesendeter unterer Entscheidungswert,<br/> wenn die Differenz der Durchg&auml;nge rechts -> links erreicht und<br/>"+
-      "zuvor der obere Schwellwert erreicht wurde",
+    "stringTableCondTxDecisionPassageRL_B" : "Gesendeter oberer Entscheidungswert,<br/>wenn der obere Differenzwert erreicht wurde.",
+    "stringTableCondTxDecisionPassageLR_B" : " Gesendeter unterer Entscheidungswert,<br/>wenn der untere Differenzwert erreicht und<br/>zuvor der oberer Grenzwert erreicht wurde.",
+
 
     "stringTableCondTxFalling" : "Bei Unterschreitung des unteren Grenzwerts Entscheidungswert senden,<br/>" +
       "wenn vorher der obere Grenzwert &uuml;berschritten wurde.",
@@ -56,10 +56,10 @@ jQuery.extend(true,langJSON, {
     "deltaOfPassesBeforeSendingDecisionVal" : "Differenz der Durchg&auml;nge, bevor Entscheidungswert gesendet wird:<br/><br>",
     "stringTableCondThresholdPassageRL_A" : "Anzahl Durchg&auml;nge von rechts -> links",
     "stringTableCondThresholdPassageLR_A" : "Anzahl Durchg&auml;nge von links -> rechts",
-
-    "stringTableCondThresholdPassageRL_B" : "Oberer Differenzwert der Durchg&auml;nge rechts > links",
-    "stringTableCondThresholdPassageLR_B" : "Oberer Differenzwert der Durchg&auml;nge links > rechts",
-
+    "stringTableCondThresholdPassageRL_B" : " Oberer Differenzwert 'Durchg&auml;nge nach Links zu Durchg&auml;nge nach Rechts'",
+    "stringTableCondThresholdPassageLR_B" : "Unterer Differenzwert 'Durchg&auml;nge nach Links zu Durchg&auml;nge nach Rechts'",
+    "stringTableCondThresholdPassageRL_B1" : " Oberer Differenzwert 'Durchg&auml;nge nach Rechts zu Durchg&auml;nge nach Links'",
+    "stringTableCondThresholdPassageLR_B1" : "Unterer Differenzwert 'Durchg&auml;nge nach Rechts zu Durchg&auml;nge nach Links'",
     "stringTableCondTxDecisionRainDetected" : "Gesendeter Entscheidungswert, wenn Regen erkannt wird",
     "stringTableCondTxDecisionNoRainDetected" : "Gesendeter Entscheidungswert, wenn Trockenheit erkannt wird",
 
@@ -125,12 +125,20 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxNotActive": "This sensor channel is not active.",
     "stringTableCondThresholdHi" : "Upper limit",
     "stringTableCondThresholdLo" : "Lower limit",
-    "numberOfPassesBeforeSendingDecisionVal" : "*en Anzahl der Durchg&auml;nge, bevor Entscheidungswert gesendet wird:<br/><br>",
-    "deltaOfPassesBeforeSendingDecisionVal" : "*en Differenz der Durchg&auml;nge, bevor Entscheidungswert gesendet wird:<br/><br>",
-    "stringTableCondThresholdPassageRL" : "*en Anzahl Durchg&auml;nge rechts -> links",
-    "stringTableCondThresholdPassageLR" : "*en Anzahl Durchg&auml;nge links -> rechts",
-    "stringTableCondTxDecisionRainDetected" : "*en Gesendeter Entscheidungswert, wenn Regen erkannt wird",
-    "stringTableCondTxDecisionNoRainDetected" : "*en Gesendeter Entscheidungswert, wenn Trockenheit erkannt wird",
+    
+    
+    "numberOfPassesBeforeSendingDecisionVal" : "Number of passages before the decision value is sent:<br/><br>",
+    "deltaOfPassesBeforeSendingDecisionVal" : "Difference of passages before the decision value is sent:<br/><br>",
+    "stringTableCondThresholdPassageRL_A" : "Number of passages from right -> left",
+    "stringTableCondThresholdPassageLR_A" : "Number of passages from left -> right",
+    "stringTableCondThresholdPassageRL_B" : "Upper difference value 'Passages left to passages right'",
+    "stringTableCondThresholdPassageLR_B" : "Lower difference value 'Passages left to passages right'",
+    "stringTableCondThresholdPassageRL_B1" : "Upper difference value 'Passages right to passages left'",
+    "stringTableCondThresholdPassageLR_B1" : "Lower difference value 'Passages right to passages left'",
+    "stringTableCondTxDecisionRainDetected" : "Decision value sent if rain is detected",
+    "stringTableCondTxDecisionNoRainDetected" : "Decision value sent if draught is detected",
+    
+    
     "stringTableLEDOntime" : "LED on time (gn/rd)",
     "stringTableTransmitTryMax" : "Max. number of transmission attempts",
     "stringTableUpperVal" : "Upper limit",
@@ -189,12 +197,18 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxNotActive" : "Sens&ouml;r kanali etkin degil.",
     "stringTableCondThresholdHi" : "&Uuml;st sinir deger",
     "stringTableCondThresholdLo" : "Alt sinir deger",
-    "numberOfPassesBeforeSendingDecisionVal" : "*tr Anzahl der Durchg&auml;nge, bevor Entscheidungswert gesendet wird:<br/><br>",
-    "deltaOfPassesBeforeSendingDecisionVal" : "*tr Differenz der Durchg&auml;nge, bevor Entscheidungswert gesendet wird:<br/><br>",
-    "stringTableCondThresholdPassageRL" : "*tr Anzahl Durchg&auml;nge rechts -> links",
-    "stringTableCondThresholdPassageLR" : "*tr Anzahl Durchg&auml;nge links -> rechts",
-    "stringTableCondTxDecisionRainDetected" : "*tr Gesendeter Entscheidungswert, wenn Regen erkannt wird",
-    "stringTableCondTxDecisionNoRainDetected" : "*tr Gesendeter Entscheidungswert, wenn Trockenheit erkannt wird",
+    
+    "numberOfPassesBeforeSendingDecisionVal" : "Number of passages before the decision value is sent:<br/><br>",
+    "deltaOfPassesBeforeSendingDecisionVal" : "Difference of passages before the decision value is sent:<br/><br>",
+    "stringTableCondThresholdPassageRL_A" : "Number of passages from right -> left",
+    "stringTableCondThresholdPassageLR_A" : "Number of passages from left -> right",
+    "stringTableCondThresholdPassageRL_B" : "Upper difference value 'Passages left to passages right'",
+    "stringTableCondThresholdPassageLR_B" : "Lower difference value 'Passages left to passages right'",
+    "stringTableCondThresholdPassageRL_B1" : "Upper difference value 'Passages right to passages left'",
+    "stringTableCondThresholdPassageLR_B1" : "Lower difference value 'Passages right to passages left'",
+    "stringTableCondTxDecisionRainDetected" : "Decision value sent if rain is detected",
+    "stringTableCondTxDecisionNoRainDetected" : "Decision value sent if draught is detected",
+
     "stringTableLEDOntime" : "LED yanma s&uuml;resi (gn/rt)",
     "stringTableUpperVal" : "&Uuml;st sinir deger",
     "stringTableLowerVal" : "Alt sinir deger",

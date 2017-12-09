@@ -39,7 +39,8 @@
 "unknownProfile" : "Unbekanntes Profil",
 "useExpertMode" : "Verwenden Sie hier den Expertenmodus.",
 "btnEdit" : "Bearbeiten",
-"helpDecisionValAndThreshold" : "<span class=\"translated\">Der Entscheidungswert und der obere/untere Grenzwert sind Kanalparameter des Senders und m&uuml;ssen korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
-"helpDecisionVal" : "<span class=\"translated\">Der Entscheidungswert ist ein Kanalparameter des Senders und muss korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"btnChnEdit" : "Kanalparameter",
+"helpDecisionValAndThreshold" : "<span class=\"translated\">Der Entscheidungswert und der obere/untere Grenzwert sind Kanalparameter des Senders und m&uuml;ssen korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"helpDecisionVal" : "<span class=\"translated\">Der Entscheidungswert ist ein Kanalparameter des Senders und muss korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
-"helpBtnChannelConfiguration" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Senders entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"helpBtnChannelConfiguration" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Senders entsprechend konfiguriert sein. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",

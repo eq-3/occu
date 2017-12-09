@@ -297,7 +297,7 @@ puts {
         "<h1>"+translateKey("btnSysConfFirewallConfig")+"</h1><ul><li>"+translateKey("lblSysConfFirewallConfig1")+"</li><li>"+translateKey("lblSysConfFirewallConfig2")+"</li></li></ul>",
         "<h1>"+translateKey("btnSysConfLANGateway")+"</h1><ul><li>"+translateKey("lblSysConfBidCosConfig2")+"</li></ul>",
         "<h1>"+translateKey("btnSysConfAdditionalSoft")+"</h1><ul><li>"+translateKey("lblSysConfAdditionalSoft1")+"</li><li>"+translateKey("lblSysConfAdditionalSoft2")+"</li></ul>",
-        "<h1>"+translateKey("btnSysConfCoupling")+"</h1>",
+        "<h1>"+translateKey("btnSysConfCoupling")+"</h1><ul><li>OSRAM Lightify</li><li>Philips Hue</li></ul>",
         "<h1>"+translateKey("btnSysConfGeneralSettings")+"</h1><ul><li>"+translateKey("lblSysConfStorage")+"</li><li>"+translateKey("lblSysConfSetPowerCost")+"</li></ul>"
         ];
 

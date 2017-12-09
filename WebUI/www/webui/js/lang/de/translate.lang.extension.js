@@ -969,6 +969,10 @@ jQuery.extend(true,langJSON, {
     "dialogLblAckSecurityHint" : "Ich habe die obige Warnung gelesen!",
     "btnNext" : "Weiter",
 
+    "powerSupply" : "Spannungsversorgung",
+    "operationModeBattery" : "Batteriebetrieb",
+    "operationModeMains" : "Netzbetrieb",
+
     "theEnd" : ""
   }
 });

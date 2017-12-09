@@ -107,7 +107,7 @@ getOnlyNonExpertChannels = function(devId, chn) {
       break;
 
     case "HMIP-WHS2" :
-      var arEasyChannels = [2,6];
+      var arEasyChannels = [3,7];
       jQuery.each(arEasyChannels,function(index,val) {
         if (val == chn){
           result = chn;

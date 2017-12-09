@@ -19,4 +19,4 @@
 "subset_6": "Trockenheit",
 "subset_7": "Regen",
 
-"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Regensensors des Windsensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Regensensors des Windsensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",

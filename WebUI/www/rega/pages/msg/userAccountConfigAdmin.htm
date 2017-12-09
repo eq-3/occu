@@ -209,10 +209,12 @@
   var iUserId = <% Write(system.GetVar("userid")); %>;
   var arUserNames = new Array();
 
+
+
   // Deactivate this when the user language is not in use
   <%
     object user = dom.GetObject(uid);
-    Write("var lang = homematic('User.getLanguage', {'userName': '"#user#"'});");
+    Write("var lang = homematic('User.getLanguage', {'userName': '"#user#"', 'userID' : userId});");
     Write("lang = (lang == null) ? 0 : lang;");
     Write("$('userLanguage').value = lang;");
   %>

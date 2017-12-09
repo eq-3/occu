@@ -1,0 +1,5 @@
+"hintPermanentFullRX" :
+
+  "To make sure that the connection will be working correctly, ‘Permanently ready to receive’ has to be activated in the channel settings. " +
+  "As the battery lifetime is reduced by this, it is recommended to use this function only with the push-buttons of the device.<br/><br/>" +
+  "You can check and set the parameter via the ‘Channel parameter’ button<br/><br/>",

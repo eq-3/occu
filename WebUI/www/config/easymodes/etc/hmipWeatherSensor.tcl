@@ -8,6 +8,8 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
   set prn 0
   set html ""
 
+  set chn [getChannel $special_input_id]
+
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
 
   set param CHANNEL_OPERATION_MODE
@@ -18,7 +20,7 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
       array_clear options
       set options(0) "\${condSwitchTransmitterWindSpeedChannelOperationModeWindGustDirect}"
       set options(1) "\${condSwitchTransmitterWindSpeedChannelOperationModeWindGustForecast}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn "onchange=\"setFilterSelect(this.value, $chn, $prn);\""]</td>"
     append html "</tr>"
   }
 
@@ -71,6 +73,18 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
+
+  append html "<script type=\"text/javascript\">"
+    append html " setFilterSelect = function(value, chn, prn) { "
+      append html " console.log(\"value: \" + value + \" - prn: \" + prn);"
+      append html " var filterSelectElm = jQuery(\"#\separate_CHANNEL_\"+parseInt(chn)+\"_\" + (parseInt(prn) + 1)); "
+      append html " if (parseInt(value) == 1) { "
+        append html "filterSelectElm.val(3).prop(\"disabled\", true);"
+      append html " } else { "
+        append html "filterSelectElm.prop(\"disabled\", false);"
+      append html " } "
+    append html "}"
+  append html "</script>"
   return $html
 }
 
@@ -296,7 +310,7 @@ proc getCondSwitchTransmitterRainQuantity {chn p descr} {
     append html "</tr>"
 
     #param = EVENT_TIMEOUT_BASE
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id 'rainCounter']
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
 
     incr prn
     set param EVENT_TIMEOUT_VALUE
@@ -345,7 +359,7 @@ proc getCondSwitchTransmitterRainDrop {chn p descr} {
     append html "</tr>"
   }
 
-  set param EVENT_BLINDTIME_BASE
+  set param EVENT_TIMEOUT_BASE
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr>"
@@ -353,11 +367,11 @@ proc getCondSwitchTransmitterRainDrop {chn p descr} {
     append html [getComboBox $chn $prn "$specialID" "timeMin_10_15_20_25_30"]
     append html "</tr>"
 
-    #param = EVENT_BLINDTIME_BASE
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id 'rainDrop']
+    #param = EVENT_TIMEOUT_BASE
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
 
     incr prn
-    set param EVENT_BLINDTIME_VALUE
+    set param EVENT_TIMEOUT_VALUE
     append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
     append html "<td>\${eventTimeoutValueRainDrop}</td>"
 

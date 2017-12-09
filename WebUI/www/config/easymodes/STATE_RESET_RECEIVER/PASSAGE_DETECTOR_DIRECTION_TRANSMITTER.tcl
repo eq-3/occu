@@ -27,7 +27,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     upvar PROFILE_$pro PROFILE_$pro
   }
 
-  puts "<script type=\"text/javascript\">getLangInfo_Special('SPECIAL.txt');</script>"
+  puts "<script type=\"text/javascript\">getLangInfo('STATE_RESET_RECEIVER','STATE_RESET_RECEIVER');getLangInfo_Special('SPECIAL.txt')</script>"
 
   set prn 0
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
@@ -37,6 +37,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   incr prn
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn)  "\${hint_no_expert}<br/><br/>"
+
+  if {($dev_descr_sender(PARENT)) != ($dev_descr_receiver(PARENT))} {
+    append HTML_PARAMS(separate_$prn) "<div>\${hintPermanentFullRX}</div>"
+    append HTML_PARAMS(separate_$prn) "<input type=\"button\" value=\"\${btnChnEdit}\" onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_receiver(PARENT):0', 'redirect_url': 'IC_SETPROFILES'});\" >"
+  }
+
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
 
 

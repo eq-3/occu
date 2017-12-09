@@ -21,10 +21,10 @@ set PROFILE_1(LONG_CT_OFF)                    0
 set PROFILE_1(LONG_CT_OFFDELAY)               0
 set PROFILE_1(LONG_CT_ON)                     0
 set PROFILE_1(LONG_CT_ONDELAY)                0
-set PROFILE_1(LONG_JT_OFF)                    {1 3}
-set PROFILE_1(LONG_JT_OFFDELAY)               3
-set PROFILE_1(LONG_JT_ON)                     3
-set PROFILE_1(LONG_JT_ONDELAY)                3
+set PROFILE_1(LONG_JT_OFF)                    {1 5}
+set PROFILE_1(LONG_JT_OFFDELAY)               {3 5}
+set PROFILE_1(LONG_JT_ON)                     {1 3}
+set PROFILE_1(LONG_JT_ONDELAY)                {3 1}
 set PROFILE_1(LONG_MULTIEXECUTE)              0
 set PROFILE_1(LONG_OFFDELAY_TIME_BASE)        {0 range 0 - 7}
 set PROFILE_1(LONG_OFFDELAY_TIME_FACTOR)      {0 range 0 - 31}
@@ -43,10 +43,10 @@ set PROFILE_1(SHORT_CT_OFF)                   0
 set PROFILE_1(SHORT_CT_OFFDELAY)              0
 set PROFILE_1(SHORT_CT_ON)                    0
 set PROFILE_1(SHORT_CT_ONDELAY)               0
-set PROFILE_1(SHORT_JT_OFF)                   {1 3}
-set PROFILE_1(SHORT_JT_OFFDELAY)              3
-set PROFILE_1(SHORT_JT_ON)                    3
-set PROFILE_1(SHORT_JT_ONDELAY)               3
+set PROFILE_1(SHORT_JT_OFF)                   {1 3 5}
+set PROFILE_1(SHORT_JT_OFFDELAY)              {3 5}
+set PROFILE_1(SHORT_JT_ON)                    {1 3}
+set PROFILE_1(SHORT_JT_ONDELAY)               {3 1}
 set PROFILE_1(SHORT_MULTIEXECUTE)             0
 set PROFILE_1(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
 set PROFILE_1(SHORT_OFFDELAY_TIME_FACTOR)     {0 range 0 - 31}
@@ -224,10 +224,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     # ON_TIME
     if {$parentType == "hmip-wgc"} {
       # This is for the Garage Door Controller - we need a short ontime optionbox
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOffShort $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOffShort $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
     } else {
       # This is for all other switch actuators - here we have a long ontime optionbox
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
     }
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

@@ -53,24 +53,35 @@ jQuery.extend(true,langJSON, {
 
         "<li class='diagramHelpCustomModeLi1'>" +
           //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
-          "<b>5 - Obere Anzahl der Durchg%E4nge nach links</b><br/>" +
-          "In diesem Modus wird die Differenz aller Durchg%E4nge (rechts und links) gebildet. " +
-          "Nach links wird bis zu einem Maximalwert (1000) hochgez%E4hlt. Nach rechts wird bis auf NULL heruntergez%E4hlt. " +
-          "Mit den einstellbaren Schwellwerten wird eine Hysterese erzeugt. Bei Erreichen des oberen Differenzwertes " +
-          "wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert gesendet. Durchg%E4nge dar%FCber hinaus werden bis zu einem Maximum weitergez%E4hlt. " +
-          "Danach wird bei Erreichen des unteren Schwellwertes ein Schaltbefehl mit dem unteren Entscheidungswert gesendet." +
+          "<b>5 -Differenz der Durchg%E4nge - Links </b><br/>" +
+            "In diesem Modus wird eine interne Z%E4hlervariable bei erkanntem Durchgang nach LINKS um 1 erh%F6ht und bei " +
+            "erkanntem Durchgang nach RECHTS um 1 verringert. Der Minimalwert der internen Z%E4hlervariablen ist NULL der Maximalwert ist 1000.<br/><br/>" +
+            "Mit dem einstellbaren oberen und unteren Differenzwert wird eine Hysterese erzeugt. Erreicht der interne Z%E4hler den " +
+            "oberen Differenzwert, wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert an den/die " +
+            "Verkn%FCpfungspartner gesendet. Durchg%E4nge dar%FCber hinaus werden bis zum Maximalwert weitergez%E4hlt, f%FChren aber " +
+            "zu keinem weiteren Schaltbefehl. Erst mit erreichen des unteren Differenzwertes, wird ein Schaltbefehl mit dem " +
+            "unteren Entscheidungswert an den/die Verkn%FCpfungspartner gesendet." +
          "</li>" +
 
         "<li class='diagramHelpCustomModeLi1'>" +
           //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
-          "<b>6 - Obere Anzahl der Durchg%E4nge nach rechts</b><br/>" +
-          "In diesem Modus wird die Differenz aller Durchg%E4nge (rechts und links) gebildet. " +
-          "Nach rechts wird bis zu einem Maximalwert (1000) hochgez%E4hlt. Nach links wird bis auf NULL heruntergez%E4hlt. " +
-          "Mit den einstellbaren Schwellwerten wird eine Hysterese erzeugt. Bei Erreichen des oberen Differenzwertes " +
-          "wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert gesendet. Durchg%E4nge dar%FCber hinaus werden bis zu einem Maximum weitergez%E4hlt. "+
-          "Danach wird bei Erreichen des unteren Schwellwertes ein Schaltbefehl mit dem unteren Entscheidungswert gesendet." +
-         "</li>" +
-      "</ul>"
+          "<b>6 -Differenz der Durchg%E4nge - Rechts </b><br/>" +
+            "In diesem Modus wird eine interne Z%E4hlervariable bei erkanntem Durchgang nach RECHTS um 1 erh%F6ht und bei " +
+            "erkanntem Durchgang nach LINKS um 1 verringert. Der Minimalwert der internen Z%E4hlervariablen ist NULL der Maximalwert ist 1000.<br/><br/>" +
+            "Mit dem einstellbaren oberen und unteren Differenzwert wird eine Hysterese erzeugt. Erreicht der interne Z%E4hler den " +
+            "oberen Differenzwert, wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert an den/die " +
+            "Verkn%FCpfungspartner gesendet. Durchg%E4nge dar%FCber hinaus werden bis zum Maximalwert weitergez%E4hlt, f%FChren aber " +
+            "zu keinem weiteren Schaltbefehl. Erst mit erreichen des unteren Differenzwertes, wird ein Schaltbefehl mit dem " +
+            "unteren Entscheidungswert an den/die Verkn%FCpfungspartner gesendet." +
+             "</li>" +
+      "</ul>",
+
+    "hintPERMANENT_FULL_RX" :
+      "Bitte beachten Sie:<br/>"+
+      "Im Batteriebetrieb ist dieses Ger%E4t nicht in st%E4ndiger H%F6rbereitschaft. In diesem Fall kann die Unterdr%FCckung der Bewegungserkennung (Empfangskanal) " +
+      "nicht in einer Verkn%FCpfung verwendet werden. Im Batteriebetrieb ist dieses nur mit den ger%E4teeigenen Tasten des HmIP-SMI55 m%F6glich. "+
+      "Gleiches gilt in Programmen f%FCr das Ein-/Ausschalten der Bewegungserkennung.",
+
 
   },
 
@@ -82,65 +93,77 @@ jQuery.extend(true,langJSON, {
       "This applies also to devices with automatic calibration run if you decide to manually change the movement time value.",
     "BLIND_AUTOCALIBRATION" : "The automatic calibration run determines how long the shutter/blind needs to move to the desired level. The time for adjusting the slats is not considered and has to be entered manually.",
 
+
     "BLOCKING_PERIOD" :
-      "*en Die Bewegungs-/Pr%E4senzerkennung kann f%FCr die hier gew%E4hlte Zeit deaktiviert werden, indem ein Taster o. %E4. mit diesem Kanal verkn%FCpft wird. " +
-      "Sobald der Kanal einen Schaltbefehl empf%E4ngt, wird die Erkennung f%FCr die gew%E4hlte Zeit unterdr%FCckt. Nach Ablauf der Zeit, arbeitet der Bewegungs-/Pr%E4senzmelder wieder wie gewohnt.",
+    "The motion and presence detection can be deactivated for the time defined here, by linking a push-button or similar to this channel. " +
+    "As soon as the channel receives a switching command, the detection is muted for the time defined. After the time has expired the motion detector/presence sensor continues normal operation.",
 
     "PERMANENT_FULL_RX" :
-      "*en Um den Stromverbrauch batteriebetriebener Ger%E4te m%F6glichst gering zu halten, sind diese Ger%E4te per default nicht in st%E4ndiger H%F6rbereitschaft. " +
-      "%C4nderungen, die Sie z. B. auf dieser Kanalkonfigurationsseite vornehmen, werden dadurch erst dann %FCbertragen, wenn das Ger%E4t bet%E4tigt wird oder seinen Status sendet.<br/><br/>" +
-      "Mit diesem Parameter k%F6nnen Sie dieses Verhalten auf Kosten der Batterielebensdauer %E4ndern, so dass sich das Ger%E4t in st%E4ndiger H%F6rbereitschaft befindet und %C4nderungen unverz%FCglich %FCbernommen werden.",
+      "To keep the energy consumption of battery operated devices at a low level, the devices are not permanently listening in the default settings. " +
+      "Changes that are made e.g. on this configuration page are transferred only after the device has been operated or sends a status.<br/><br/>" +
+      "This parameter can be used to change the behaviour to permanent listening. Thus, changes are adapted immediately but however the battery lifetime will be reduced faster.",
+
 
     "COND_TX_DECISION_ABOVE_BELOW" :
-      "*en %C4ndern Sie diesen Parameter nur, wenn es wirklich notwendig ist. Eine %C4nderung dieses Wertes kann dazu f%FChren, " +
-      "dass Verkn%FCpfungen mit diesem Kanal nicht mehr erwartungsgem%E4%DF arbeiten.",
+      "Change this parameter only if it is really necessary. Changing this value can lead to " +
+      "incorrect operation of connections with this channel.",
 
-    "DELAY_COMPENSATION" : "*en Es gibt Motoren, die nach dem Einschalten mit einer gewissen Verz%F6gerung loslaufen. Dieser Parameter bietet Ihnen die M%F6glichkeit, den Wert der Verz%F6gerung einzustellen.",
+    "DELAY_COMPENSATION" : "Some motors start running after switching on with a certain delay. The parameter can be used to adjust the duration of the delay.",
 
     "SPDR_CHANNEL_MODE" :
-      "<ul>" +
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>1 - \${optionInactiv}</b><br/>" +
-          "*en Z%E4hlabh%E4ngiges Schalten des Sensors deaktiviert."+
-        "</li>" +
+    "<ul>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>1 - \${optionInactiv}</b><br/>" +
+              "Deactivate counter-based switching of sensor"+
+            "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>2 - \${optionPassageCounterDetectionLR}</b><br/>" +
-          "*en Ist die Anzahl der gew%FCnschten Durchg%E4nge erreicht, wird der gew%E4hlte Entscheidungswert gesendet "+
-          "und direkte Verkn%FCpfungen, die auf diesen Wert reagieren, getriggert.<br/><br/>" +
-          "In diesem Modus reagiert der Sensor auf Durchg%E4nge aus beiden Richtungen." +
-        "</li>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>2 - \${optionPassageCounterDetectionLR}</b><br/>" +
+              "If the desired number of passages is reached, the defined decision value will be sent "+
+              "and direct connections that react to this value are triggered.<br/><br/>" +
+              "In this mode, the sensor reacts to passages from both directions." +
+            "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>3 - \${optionPassageCounterDetectionL}</b><br/>" +
-          "*en Hier gilt das Gleiche, wie unter Punkt 2. Der Sensor reagiert aber nur noch auf Durchg%E4nge von Rechts nach Links."+
-         "</li>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>3 - \${optionPassageCounterDetectionL}</b><br/>" +
+              "Here, the same applies as for item 2. The sensor only reacts on passages from right to left."+
+             "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>4 - \${optionPassageCounterDetectionR}</b><br/>" +
-          "*en Auch hier gilt das Gleiche, wie unter Punkt 2. Der Sensor reagiert aber nur noch auf Durchg%E4nge von Links nach Rechts."+
-         "</li>" +
-        
-        "<li class='diagramHelpCustomModeLi1'>" +
-          //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
-          "<b>5 - Obere Anzahl der Durchg%E4nge nach links</b><br/>" +
-          "*en In diesem Modus wird die Differenz aller Durchg%E4nge (rechts und links) gebildet. " +
-          "Nach links wird bis zu einem Maximalwert (1000) hochgez%E4hlt. Nach rechts wird bis auf NULL heruntergez%E4hlt. " +
-          "Mit den einstellbaren Schwellwerten wird eine Hysterese erzeugt. Bei Erreichen des oberen Differenzwertes " +
-          "wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert gesendet. Durchg%E4nge dar%FCber hinaus werden bis zu einem Maximum weitergez%E4hlt. " +
-          "Danach wird bei Erreichen des unteren Schwellwertes ein Schaltbefehl mit dem unteren Entscheidungswert gesendet." +
-         "</li>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>4 - \${optionPassageCounterDetectionR}</b><br/>" +
+              "Here, also the same applies as for item 2. The sensor only reacts to passages from left to right."+
+             "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
-          "<b>6 - Obere Anzahl der Durchg%E4nge nach rechts</b><br/>" +
-          "*en In diesem Modus wird die Differenz aller Durchg%E4nge (rechts und links) gebildet. " +
-          "Nach rechts wird bis zu einem Maximalwert (1000) hochgez%E4hlt. Nach links wird bis auf NULL heruntergez%E4hlt. " +
-          "Mit den einstellbaren Schwellwerten wird eine Hysterese erzeugt. Bei Erreichen des oberen Differenzwertes " +
-          "wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert gesendet. Durchg%E4nge dar%FCber hinaus werden bis zu einem Maximum weitergez%E4hlt. "+
-          "Danach wird bei Erreichen des unteren Schwellwertes ein Schaltbefehl mit dem unteren Entscheidungswert gesendet." +
-         "</li>" +
-      "</ul>"
+            "<li class='diagramHelpCustomModeLi1'>" +
+              //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
+              "<b>5 -Difference of passages - left </b><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage from LEFT and" +
+                "reduced by 1 on passage detected from RIGHT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
+                "upper difference value, a switching command is send with the upper decision value to the" +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "additional switching commands. Only when reaching the lower difference value, a switching command " +
+                "with the lower decision value is sent to the connection partner(s)." +
+             "</li>" +
+
+            "<li class='diagramHelpCustomModeLi1'>" +
+              //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
+              "<b>6 -Difference of passages - right </b><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage from RIGHT and" +
+                "reduced by 1 on passage detected from LEFT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
+                "upper difference value, a switching command is send with the upper decision value to the" +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "additional switching commands. Only when reaching the lower difference value, a switching command " +
+                "with the lower decision value is sent to the connection partner(s)." +
+                 "</li>" +
+          "</ul>",
+
+
+      "hintPERMANENT_FULL_RX" :
+      "Please note:<br/>"+
+      "In battery mode, this device is not permanently listening. In this case, muting of motion detection (receiver channel) " +
+      "cannot be used in a connection. In battery mode, this is only possible using the push-buttons of HmIP-SMI55. The same applies to programmes for switching motion detection on or off.",
 
   },
 
@@ -153,64 +176,75 @@ jQuery.extend(true,langJSON, {
     "BLIND_AUTOCALIBRATION" : "The automatic calibration run determines how long the shutter/blind needs to move to the desired level. The time for adjusting the slats is not considered and has to be entered manually.",
 
     "BLOCKING_PERIOD" :
-      "*tr Die Bewegungs-/Pr%E4senzerkennung kann f%FCr die hier gew%E4hlte die Zeit deaktiviert werden, indem ein Taster o. %E4. mit diesem Kanal verkn%FCpft wird. " +
-      "Sobald der Kanal einen Schaltbefehl empf%E4ngt, wird die Erkennung f%FCr gew%E4hlte Zeit unterdr%FCckt. Nach Ablauf der Zeit, arbeitet der Bewegungs-/Pr%E4senzmelder wieder wie gewohnt.",
+    "The motion and presence detection can be deactivated for the time defined here, by linking a push-button or similar to this channel. " +
+    "As soon as the channel receives a switching command, the detection is muted for the time defined. After the time has expired the motion detector/presence sensor continues normal operation.",
 
     "PERMANENT_FULL_RX" :
-      "*tr Um den Stromverbrauch batteriebetriebener Ger%E4te m%F6glichst gering zu halten, sind diese Ger%E4te per default nicht in st%E4ndiger H%F6rbereitschaft. " +
-      "%C4nderungen, die Sie z. B. auf dieser Kanalkonfigurationsseite vornehmen, werden dadurch erst dann %FCbertragen, wenn das Ger%E4t bet%E4tigt wird oder seinen Status sendet.<br/><br/>" +
-      "Mit diesem Parameter k%F6nnen Sie dieses Verhalten auf Kosten der Batterielebensdauer %E4ndern, so dass sich das Ger%E4t in st%E4ndiger H%F6rbereitschaft befindet und %C4nderungen unverz%FCglich %FCbernommen werden.",
+      "To keep the energy consumption of battery operated devices at a low level, the devices are not permanently listening in the default settings. " +
+      "Changes that are made e.g. on this configuration page are transferred only after the device has been operated or sends a status.<br/><br/>" +
+      "This parameter can be used to change the behaviour to permanent listening. Thus, changes are adapted immediately but however the battery lifetime will be reduced faster.",
+
 
     "COND_TX_DECISION_ABOVE_BELOW" :
-      "*tr %C4ndern Sie diesen Parameter nur, wenn es wirklich notwendig ist. Eine %C4nderung dieses Wertes kann dazu f%FChren, " +
-      "dass Verkn%FCpfungen mit diesem Kanal nicht mehr erwartungsgem%E4%DF arbeiten.",
+      "Change this parameter only if it is really necessary. Changing this value can lead to " +
+      "incorrect operation of connections with this channel.",
 
-    "DELAY_COMPENSATION" : "*tr Es gibt Motoren, die nach dem Einschalten mit einer gewissen Verz%F6gerung loslaufen. Dieser Parameter bietet Ihnen die M%F6glichkeit, den Wert der Verz%F6gerung einzustellen.",
+    "DELAY_COMPENSATION" : "Some motors start running after switching on with a certain delay. The parameter can be used to adjust the duration of the delay.",
 
     "SPDR_CHANNEL_MODE" :
-      "<ul>" +
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>1 - \${optionInactiv}</b><br/>" +
-          "*tr Z%E4hlabh%E4ngiges Schalten des Sensors deaktiviert."+
-        "</li>" +
+    "<ul>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>1 - \${optionInactiv}</b><br/>" +
+              "Deactivate counter-based switching of sensor"+
+            "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>2 - \${optionPassageCounterDetectionLR}</b><br/>" +
-          "*tr Ist die Anzahl der gew%FCnschten Durchg%E4nge erreicht, wird der gew%E4hlte Entscheidungswert gesendet "+
-          "und direkte Verkn%FCpfungen, die auf diesen Wert reagieren, getriggert.<br/><br/>" +
-          "In diesem Modus reagiert der Sensor auf Durchg%E4nge aus beiden Richtungen." +
-        "</li>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>2 - \${optionPassageCounterDetectionLR}</b><br/>" +
+              "If the desired number of passages is reached, the defined decision value will be sent "+
+              "and direct connections that react to this value are triggered.<br/><br/>" +
+              "In this mode, the sensor reacts to passages from both directions." +
+            "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>3 - \${optionPassageCounterDetectionL}</b><br/>" +
-          "*tr Hier gilt das Gleiche, wie unter Punkt 2. Der Sensor reagiert aber nur noch auf Durchg%E4nge von Rechts nach Links."+
-         "</li>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>3 - \${optionPassageCounterDetectionL}</b><br/>" +
+              "Here, the same applies as for item 2. The sensor only reacts on passages from right to left."+
+             "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          "<b>4 - \${optionPassageCounterDetectionR}</b><br/>" +
-          "*tr Auch hier gilt das Gleiche, wie unter Punkt 2. Der Sensor reagiert aber nur noch auf Durchg%E4nge von Links nach Rechts."+
-         "</li>" +
-        
-        "<li class='diagramHelpCustomModeLi1'>" +
-          //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
-          "<b>5 - Obere Anzahl der Durchg%E4nge nach links</b><br/>" +
-          "*tr In diesem Modus wird die Differenz aller Durchg%E4nge (rechts und links) gebildet. " +
-          "Nach links wird bis zu einem Maximalwert (1000) hochgez%E4hlt. Nach rechts wird bis auf NULL heruntergez%E4hlt. " +
-          "Mit den einstellbaren Schwellwerten wird eine Hysterese erzeugt. Bei Erreichen des oberen Differenzwertes " +
-          "wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert gesendet. Durchg%E4nge dar%FCber hinaus werden bis zu einem Maximum weitergez%E4hlt. " +
-          "Danach wird bei Erreichen des unteren Schwellwertes ein Schaltbefehl mit dem unteren Entscheidungswert gesendet." +
-         "</li>" +
+            "<li class='diagramHelpCustomModeLi1'>" +
+              "<b>4 - \${optionPassageCounterDetectionR}</b><br/>" +
+              "Here, also the same applies as for item 2. The sensor only reacts to passages from left to right."+
+             "</li>" +
 
-        "<li class='diagramHelpCustomModeLi1'>" +
-          //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
-          "<b>6 - Obere Anzahl der Durchg%E4nge nach rechts</b><br/>" +
-          "*tr In diesem Modus wird die Differenz aller Durchg%E4nge (rechts und links) gebildet. " +
-          "Nach rechts wird bis zu einem Maximalwert (1000) hochgez%E4hlt. Nach links wird bis auf NULL heruntergez%E4hlt. " +
-          "Mit den einstellbaren Schwellwerten wird eine Hysterese erzeugt. Bei Erreichen des oberen Differenzwertes " +
-          "wird ein Schaltbefehl mit dem eingestellten oberen Entscheidungswert gesendet. Durchg%E4nge dar%FCber hinaus werden bis zu einem Maximum weitergez%E4hlt. "+
-          "Danach wird bei Erreichen des unteren Schwellwertes ein Schaltbefehl mit dem unteren Entscheidungswert gesendet." +
-         "</li>" +
-      "</ul>"
+            "<li class='diagramHelpCustomModeLi1'>" +
+              //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
+              "<b>5 -Difference of passages - left </b><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage from LEFT and" +
+                "reduced by 1 on passage detected from RIGHT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
+                "upper difference value, a switching command is send with the upper decision value to the" +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "additional switching commands. Only when reaching the lower difference value, a switching command " +
+                "with the lower decision value is sent to the connection partner(s)." +
+             "</li>" +
+
+            "<li class='diagramHelpCustomModeLi1'>" +
+              //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
+              "<b>6 -Difference of passages - right </b><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage from RIGHT and" +
+                "reduced by 1 on passage detected from LEFT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
+                "upper difference value, a switching command is send with the upper decision value to the" +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "additional switching commands. Only when reaching the lower difference value, a switching command " +
+                "with the lower decision value is sent to the connection partner(s)." +
+                 "</li>" +
+          "</ul>",
+
+
+      "hintPERMANENT_FULL_RX" :
+      "Please note:<br/>"+
+      "In battery mode, this device is not permanently listening. In this case, muting of motion detection (receiver channel) " +
+      "cannot be used in a connection. In battery mode, this is only possible using the push-buttons of HmIP-SMI55. The same applies to programmes for switching motion detection on or off.",
 
   }
 });

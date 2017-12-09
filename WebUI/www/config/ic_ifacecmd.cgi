@@ -119,11 +119,12 @@ proc cmd_addLink {} {
 
   set errorCode [catch { xmlrpc $url addLink [list string $sender_address] [list string $receiver_address] }]
 
-  if { ! $errorCode } then {
+  # errorCode -10 = config pending
+  if { (! $errorCode) || (($iface == $HmIPIdentifier) && ($errorCode == -10))  } then {
 
     #Verknüpfung erfolgreich angelegt. Namen und Beschreibungen noch nicht gesetzt.
     set ret 1
-    
+
     if { $description != "" || $name != "" } then {
 
       if { [catch { xmlrpc $url setLinkInfo [list string $sender_address] [list string $receiver_address] [list string $name] [list string $description] } ] } then {

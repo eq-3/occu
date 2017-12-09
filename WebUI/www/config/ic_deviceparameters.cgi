@@ -583,7 +583,7 @@ proc isVirtual {paramId} {
   lappend virtualDevices "hmip-mod-oc8_35_master" "hmip-mod-oc8_36_master" "hmip-mod-oc8_39_master" "hmip-mod-oc8_40_master"
 
   lappend virtualDevices "hmip-wgc_2_master" "hmip-wgc_4_master" "hmip-wgc_5_master"
-  lappend virtualDevices "hmip-whs2_1_master" "hmip-whs2_3_master" "hmip-whs2_4_master" "hmip-whs2_5_master" "hmip-whs2_7_master" "hmip-whs2_8_master"
+  lappend virtualDevices "hmip-whs2_1_master" "hmip-whs2_2_master" "hmip-whs2_4_master" "hmip-whs2_5_master" "hmip-whs2_6_master" "hmip-whs2_8_master"
 
 
   set virtual "false"

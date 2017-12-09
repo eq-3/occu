@@ -284,6 +284,17 @@ CONDITION_FREQUENCY	${stringTableConditionFrequencyTitle}
 CONDITION_POWER	${stringTableConditionPowerTitle}
 CONDITION_VOLTAGE	${stringTableConditionVoltageTitle}
 COND_SWITCH_TRANSMITTER	${stringTableConditionSwitchTransmitter}
+
+COND_SWITCH_TRANSMITTER_WIND_SPEED	${stringTableConditionSwitchTransmitterWindSpeed}
+COND_SWITCH_TRANSMITTER_TEMPERATURE	${stringTableConditionSwitchTransmitterTemperature}
+COND_SWITCH_TRANSMITTER_HUMIDITY	${stringTableConditionSwitchTransmitterHumidity}
+COND_SWITCH_TRANSMITTER_BRIGHTNESS	${stringTableConditionSwitchTransmitterBrightness}
+COND_SWITCH_TRANSMITTER_RAIN_QUANTITY	${stringTableConditionSwitchTransmitterRainQuantity}
+COND_SWITCH_TRANSMITTER_RAIN_DROP	${stringTableConditionSwitchTransmitterRainDrop}
+COND_SWITCH_TRANSMITTER_WIND_DIRECTION	${stringTableConditionSwitchTransmitterWindDirection}
+
+
+
 COND_TX_CYCLIC_ABOVE	${stringTableCondTxCyclicAbove}
 COND_TX_CYCLIC_BELOW	${stringTableCondTxCyclicBelow}
 COND_TX_DECISION_ABOVE	${stringTableCondTxDecisionAbove}
@@ -479,6 +490,9 @@ ERROR_SABOTAGE=FALSE	${stringTableErrorSabotageFalse}
 ERROR_SABOTAGE=NO_ERROR	${stringTableSabotageContactOk}
 ERROR_SABOTAGE=SABOTAGE	${stringTableSabotage}
 ERROR_SABOTAGE=TRUE	${stringTableErrorSabotageTrue}
+ERROR_UNDERVOLTAGE	${stringTableErrorUndervoltageTrue}
+ERROR_UNDERVOLTAGE=FALSE	${stringTableErrorUndervoltageFalse}
+ERROR_UNDERVOLTAGE=TRUE	${stringTableErrorUndervoltageTrue}
 ERROR_UPDATE=TRUE	${stringTableErrorUpdateTrue}
 ERROR_UPDATE=FALSE	${stringTableErrorUpdateFalse}
 ERROR_WIND_COMMUNICATION=FALSE	${stringTableErrorWindCommunicationFalse}
@@ -781,6 +795,9 @@ PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_ABOVE	${stringTablePassage
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_BELOW	${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionBelow}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_HI	${stringTablePassageDetectorCounterTransmitterCondTxThresholdHi}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_LO	${stringTablePassageDetectorCounterTransmitterCondTxThresholdLo}
+
+PASSAGE_DETECTOR_DIRECTION_TRANSMITTER	${stringTablePassageDetectorDirectionTitle}
+
 PEER_NEEDS_BURST	${stringTablePeerNeedsBurst}
 PIR_OPERATION_MODE	${stringTablePirOperationMode}
 PIR_SENSITIVITY	${stringTableSensorSensivity}
@@ -1300,6 +1317,7 @@ SUNSHINEDURATION	${stringTableWeatherSunshineDuration}
 SUNSHINEDURATION_OVERFLOW=FALSE	${stringTableWeatherSunshineDurationOverflowFalse}
 SUNSHINEDURATION_OVERFLOW=TRUE	${stringTableWeatherSunshineDurationOverflowTrue}
 SUNSHINE_THRESHOLD	${stringTableWeatherSunshineThres}
+SUNSHINE_THRESHOLD_OVERRUN	${stringTableWeatherSunshineThresOverrunTitle}
 SUNSHINE_THRESHOLD_OVERRUN=FALSE	${stringTableWeatherSunshineThresOverrunFalse}
 SUNSHINE_THRESHOLD_OVERRUN=TRUE	${stringTableWeatherSunshineThresOverrunTrue}
 TEMPERATURE	${stringTableWeatherTemperature}

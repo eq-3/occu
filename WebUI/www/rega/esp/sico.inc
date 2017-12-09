@@ -159,7 +159,7 @@
                       }
                     }
                   }
-                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
+                  Call("/esp/functions.fn::getSpecialTranslation()");
                   Write( sValue );
 
                   Write( '</option>' );
@@ -183,7 +183,7 @@
                     }
                   }
 
-                  Call("/esp/functions.fn::getSpecialBinaryTranslation()");
+                  Call("/esp/functions.fn::getSpecialTranslation()");
                   Write( sValue );
                   Write( '</option>' );
                 }
@@ -209,7 +209,7 @@
                         }
                       }
                     }
-                    Call("/esp/functions.fn::getSpecialIntegerTranslation()");
+                    Call("/esp/functions.fn::getSpecialTranslation()");
                     Write( sValue );
                     Write( '</option>' );
                   }

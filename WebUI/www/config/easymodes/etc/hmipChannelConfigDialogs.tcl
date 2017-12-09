@@ -6,8 +6,12 @@ proc getMaintenance {chn p descr} {
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
+  upvar special_input_id special_input_id
 
+  set specialID "[getSpecialID $special_input_id]"
   set html ""
+
+  set CHANNEL $special_input_id
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
 
@@ -85,11 +89,34 @@ proc getMaintenance {chn p descr} {
 
   set param PERMANENT_FULL_RX
   if { ! [catch {set tmp $ps($param)}]  } {
+     append html "[getHorizontalLine]"
      incr prn
-     append html "<tr>"
-       append html "<td>\${stringTablePermanentFullRX}</td>"
-       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
-     append html "</tr>"
+    array_clear options
+    set options(0) "\${operationModeBattery}"
+    set options(1) "\${operationModeMains}"
+    append html "<td>\${powerSupply}</td>"
+    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)] [getHelpIcon $param]</td>"
+
+    append html "<tr id=\"hint_separate_$CHANNEL\_$prn\">"
+     append html "<td colspan=\"2\">\${hintPERMANENT_FULL_RX}<td>"
+    append html "</tr>"
+    append html "[getHorizontalLine]"
+
+    append html "<script type='text/javascript'>"
+      append html " showParameterHint = function(elmID, value) { "
+        append html " console.log(\"elmID: \" + elmID + \" - value: \" + value); "
+        append html " var elm = jQuery(\"#hint_\"+elmID); "
+        append html " if (parseInt(value) == 0) { "
+          append html " elm.show(); "
+        append html "} else {"
+          append html " elm.hide(); "
+        append html " } "
+      append html " }; "
+
+     append html " var elm = jQuery('#separate_$CHANNEL\_$prn');"
+     append html " showParameterHint('separate_$CHANNEL\_$prn', elm.val());"
+
+    append html "</script>"
   }
 
   set param LATITUDE
@@ -459,7 +486,7 @@ proc getBlindTransmitter {chn p descr address} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindEndPositionAutoDetect}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn onchange=setVisibilityAutoCalibration(this);]</td>"
     append html "</tr>"
   }
 
@@ -477,7 +504,7 @@ proc getBlindTransmitter {chn p descr address} {
     append html "<td><div><img src='/ise/img/anim_bargraph.gif'></div></td>"
   append html "</tr>"
 
-  append html "<script type=\"text/javascript\">autoCalib = {}; autoCalib\[\"$parent\"\] = new AutoCalibrateBlind(\"$address\"); autoCalib\['$parent'\].initAutoCalibration();</script>"
+  append html "<script type=\"text/javascript\">window.setTimeout(function() {autoCalib = {}; autoCalib\[\"$parent\"\] = new AutoCalibrateBlind(\"$address\", jQuery(\"#separate_CHANNEL\_$chn\_$prn\").prop(\"checked\")); autoCalib\['$parent'\].initAutoCalibration();},100)</script>"
 
   # /AUTOCALIBRATION
 
@@ -555,7 +582,7 @@ proc getBlindTransmitter {chn p descr address} {
     append html "<tr>"
       if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {set autoDelayCompensation 1}
       append html "<td>\${btnAutoDetect}</td>"
-      append html "<td>[getCheckBox '$param' $autoDelayCompensation $chn tmp onclick=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
+      append html "<td>[getCheckBox '$param' $autoDelayCompensation $chn tmp onchange=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
 
     # Hide this while in auto mode
@@ -565,6 +592,25 @@ proc getBlindTransmitter {chn p descr address} {
     append html "</tr>"
 
     append html "<script type=\"text/javascript\">"
+
+      append html "setVisibilityAutoCalibration = function(elm) {"
+        append html " var autoCalibElm = jQuery(\"\#autoCalibrationPanel\_$parent\" ), "
+        append html " delayCompensationElm = jQuery(\"\[name='DELAY_COMPENSATION'\]\").first(); "
+        append html " if(jQuery(elm).prop('checked')) { "
+            append html " autoCalibElm.show(); "
+            append html " delayCompensationElm.prop('disabled', false); "
+            append html " if (! delayCompensationElm.prop('checked')) { "
+              append html " delayCompensationElm.prop('checked', true).change(); "
+            append html " } "
+          append html " } else { "
+            append html " autoCalibElm.hide(); "
+            append html " if (delayCompensationElm.prop('checked')) { "
+              append html " delayCompensationElm.click(); "
+            append html " } "
+            append html " delayCompensationElm.prop('disabled', true); "
+        append html " } "
+      append html "};"
+
       append html "setAutoDelayCompensation = function(elm, init) {"
         append html "var autoDelayCompensationTRElm = jQuery(\"\#autoDelayCompensation_$chn\"),"
         # append html "autoDelayCompensationTextElm = jQuery(\"\#separate_CHANNEL_$chn\_$prn\"),"
@@ -595,8 +641,10 @@ proc getBlindTransmitter {chn p descr address} {
         append html "}"
 
       append html "};"
-      append html "window.setTimeout(function() {var elm = jQuery(\"#separate_CHANNEL_$chn\_tmp\");setAutoDelayCompensation(elm, true);}, 100);"
-
+      append html "window.setTimeout(function() {"
+        append html "var elm = jQuery(\"#separate_CHANNEL_$chn\_tmp\");"
+        append html "setAutoDelayCompensation(elm, true);"
+      append html "}, 100);"
     append html "</script>"
 
   }
@@ -687,7 +735,7 @@ proc getShutterTransmitter {chn p descr address} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindEndPositionAutoDetect}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn onchange=setVisibilityAutoCalibration(this);]</td>"
     append html "</tr>"
   }
 
@@ -706,7 +754,7 @@ proc getShutterTransmitter {chn p descr address} {
     append html "<td><div><img src='/ise/img/anim_bargraph.gif'></div></td>"
   append html "</tr>"
 
-  append html "<script type=\"text/javascript\">autoCalib = {}; autoCalib\[\"$parent\"\] = new AutoCalibrateBlind(\"$address\"); autoCalib\['$parent'\].initAutoCalibration();</script>"
+  append html "<script type=\"text/javascript\">window.setTimeout(function() {autoCalib = {}; autoCalib\[\"$parent\"\] = new AutoCalibrateBlind(\"$address\", jQuery(\"#separate_CHANNEL\_$chn\_$prn\").prop(\"checked\")); autoCalib\['$parent'\].initAutoCalibration();},100)</script>"
 
   # /AUTOCALIBRATION
 
@@ -767,7 +815,7 @@ proc getShutterTransmitter {chn p descr address} {
     append html "<tr>"
       if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {set autoDelayCompensation 1}
       append html "<td>\${btnAutoDetect}</td>"
-      append html "<td>[getCheckBox '$param' $autoDelayCompensation $chn tmp onclick=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
+      append html "<td>[getCheckBox '$param' $autoDelayCompensation $chn tmp onchange=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
 
     # Hide this while in auto mode
@@ -777,6 +825,25 @@ proc getShutterTransmitter {chn p descr address} {
     append html "</tr>"
 
     append html "<script type=\"text/javascript\">"
+
+      append html "setVisibilityAutoCalibration = function(elm) {"
+        append html " var autoCalibElm = jQuery(\"\#autoCalibrationPanel\_$parent\" ), "
+        append html " delayCompensationElm = jQuery(\"\[name='DELAY_COMPENSATION'\]\").first(); "
+        append html " if(jQuery(elm).prop('checked')) { "
+            append html " autoCalibElm.show(); "
+            append html " delayCompensationElm.prop('disabled', false); "
+            append html " if (! delayCompensationElm.prop('checked')) { "
+              append html " delayCompensationElm.prop('checked', true).change(); "
+            append html " } "
+          append html " } else { "
+            append html " autoCalibElm.hide(); "
+            append html " if (delayCompensationElm.prop('checked')) { "
+              append html " delayCompensationElm.click(); "
+            append html " } "
+            append html " delayCompensationElm.prop('disabled', true); "
+        append html " } "
+      append html "};"
+
       append html "setAutoDelayCompensation = function(elm) {"
         append html "var autoDelayCompensationTRElm = jQuery(\"\#autoDelayCompensation_$chn\"),"
         append html "autoDelayCompensationTextElm = jQuery(\"\#separate_CHANNEL_$chn\_$prn\"),"
@@ -923,7 +990,7 @@ set comment {
   append html "</tr>"
   
   set param POWERUP_ONDELAY_UNIT
-  append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
   
   
   incr prn
@@ -1016,7 +1083,7 @@ proc getDimmerVirtualReceiver {chn p descr} {
   append html "</tr>"
 
   set param POWERUP_ONDELAY_UNIT
-  append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
 
   incr prn
@@ -1126,7 +1193,7 @@ proc getBlindVirtualReceiver {chn p descr} {
     append html [getComboBox $chn $prn "$specialID" "delayShort"]
     append html "</tr>"
 
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
 
     incr prn
@@ -1253,7 +1320,7 @@ proc getShutterVirtualReceiver {chn p descr} {
     append html [getComboBox $chn $prn "$specialID" "delayShort"]
     append html "</tr>"
 
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
 
     incr prn
@@ -1704,8 +1771,7 @@ proc getSwitchVirtualReceiver {chn p descr} {
     append html "</tr>"
 
     set param POWERUP_ONDELAY_UNIT
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
-
+    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
     incr prn
     set param POWERUP_ONDELAY_VALUE
@@ -2697,8 +2763,8 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
         append html "case 6: {"
           append html "condTxDecisionAboveDescrElm.html(translateKey('stringTableCondTxDecisionPassageRL_B'));"
           append html "condTxDecisionBelowDescrElm.html(translateKey('stringTableCondTxDecisionPassageLR_B'));"
-          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_B'));"
-          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_B'));"
+          append html "condTxThresholdHiDescrElm.html(translateKey('stringTableCondThresholdPassageRL_B1'));"
+          append html "condTxThresholdLoDescrElm.html(translateKey('stringTableCondThresholdPassageLR_B1'));"
           append html "condTxDecisionAboveElm.show();"
           append html "condTxDecisionBelowElm.show();"
           append html "condTxDecisionHeaderB.show();"

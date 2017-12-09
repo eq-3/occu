@@ -373,7 +373,7 @@ proc put_tablebody {} {
 
         # It's not allowed to delete internal links
         if {$hideBtnDelete == 0} {
-          set SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"RemoveLink('$iface', '$link(SENDER)', '$link(RECEIVER)');\" >\${btnRemove}</div>"
+          set SENTRY(ACTION) "<div class=\"CLASS21000\" onclick=\"RemoveLink('$iface', '$link(SENDER)', '$link(RECEIVER)', '$sender_parent_type');\" >\${btnRemove}</div>"
         }
 
         if { $receiver_unknown==0 && $sender_unknown==0 && $sender_broken==0 && $receiver_broken==0} then {
@@ -431,11 +431,17 @@ proc put_tablebody {} {
         set internalKeyCSS ""
 
         if {[string first "NO_DESCRIPTION" $SENTRY(LINKDESC)] == 0} {
-          if {[isHmIP] == "true"} {
-             set internalKeyCSS "style='background-color:#E0E0E0'"
-             set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
-             append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
+          set senderParentAdr [lindex [split $SENTRY(SENDERADDR) ":"] 0]
+          set receiverParentAdr [lindex [split $SENTRY(RECEIVERADDR) ":"] 0]
+
+          if {[string equal $senderParentAdr $receiverParentAdr] == 1} {
+            if {[isHmIP] == "true"} {
+               set internalKeyCSS "style='background-color:#E0E0E0'"
+               set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
+               append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
+            }
           }
+
         } elseif {[string first "" $SENTRY(LINKDESC)] == 0} {
           set SENTRY(LINKDESC) "\${lblLinkNoDescriptionAvailable}<br/>"
         }
@@ -477,6 +483,7 @@ proc put_tablebody {} {
 
       foreach tr $tablestruct {
         array set SENTRY $tr
+        set internalKeyCSS ""
         set this_sender $SENTRY(SENDERNAME)
 
         puts "<tr>"
@@ -497,8 +504,24 @@ proc put_tablebody {} {
           puts "</td>"
         }
 
+       if {[string first "NO_DESCRIPTION" $SENTRY(LINKDESC)] == 0} {
+          set senderParentAdr [lindex [split $SENTRY(SENDERADDR) ":"] 0]
+          set receiverParentAdr [lindex [split $SENTRY(RECEIVERADDR) ":"] 0]
+
+         if {[string equal $senderParentAdr $receiverParentAdr] == 1} {
+            if {[isHmIP] == "true"} {
+               set internalKeyCSS "style='background-color:#E0E0E0'"
+               set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
+               append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
+            }
+          }
+
+        } elseif {[string first "" $SENTRY(LINKDESC)] == 0} {
+          set SENTRY(LINKDESC) "\${lblLinkNoDescriptionAvailable}<br/>"
+        }
+
         puts "<td>$SENTRY(LINKNAME)</td>"
-        puts "<td>$SENTRY(LINKDESC)</td>"
+        puts "<td $internalKeyCSS>$SENTRY(LINKDESC)</td>"
         puts "<td align=\"center\">$SENTRY(ACTION)</td>"
         puts "<td>$SENTRY(RECEIVERNAME_DISPLAY)</td>"
         puts "<td>$SENTRY(RECEIVERADDR_DISPLAY)</td>"
@@ -518,16 +541,33 @@ proc put_tablebody {} {
       foreach tr $tablestruct {
       
         array set SENTRY $tr
+        set internalKeyCSS ""
 
         set this_receiver $SENTRY(RECEIVERNAME)
         
         set rowSpan $RECEIVER_LINKCOUNTER($SENTRY(RECEIVERADDR))
-        
+
+       if {[string first "NO_DESCRIPTION" $SENTRY(LINKDESC)] == 0} {
+          set senderParentAdr [lindex [split $SENTRY(SENDERADDR) ":"] 0]
+          set receiverParentAdr [lindex [split $SENTRY(RECEIVERADDR) ":"] 0]
+
+          if {[string equal $senderParentAdr $receiverParentAdr] == 1} {
+            if {[isHmIP] == "true"} {
+               set internalKeyCSS "style='background-color:#E0E0E0'"
+               set SENTRY(LINKDESC) "\${lblLinkInternalDescInternalKey}<br/>"
+               append SENTRY(LINKDESC) $SENTRY(SENDERNAME_DISPLAY)
+            }
+          }
+
+        } elseif {[string first "" $SENTRY(LINKDESC)] == 0} {
+          set SENTRY(LINKDESC) "\${lblLinkNoDescriptionAvailable}<br/>"
+        }
+
         puts "<tr>"
         puts "<td>$SENTRY(SENDERNAME_DISPLAY)</td>"
         puts "<td>$SENTRY(SENDERADDR_DISPLAY)</td>"
         puts "<td>$SENTRY(LINKNAME)</td>"
-        puts "<td>$SENTRY(LINKDESC)</td>"
+        puts "<td $internalKeyCSS>$SENTRY(LINKDESC)</td>"
         puts "<td align=\"center\">$SENTRY(ACTION)</td>"
 
         #Zellen zusammenfassen

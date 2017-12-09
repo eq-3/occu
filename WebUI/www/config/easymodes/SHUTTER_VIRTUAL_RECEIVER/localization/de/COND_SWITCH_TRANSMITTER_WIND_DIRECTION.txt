@@ -19,4 +19,4 @@
 "subset_6": "Erreichen des oberen Wertes",
 "subset_7": "Erreichen des unteren Wertes",
 
-"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Windrichtungssensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Windrichtungssensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",

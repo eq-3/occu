@@ -10,7 +10,7 @@
 
   var base_url = "/pages/jpages/system/Coupling/",
   ipAddressPort = {},
-  ipAddress = "",
+  ipAddress = {},
   scanActive = {},
   deviceScanning = {},
   pollingTimer = {},
@@ -24,6 +24,7 @@
 
   jQuery.each(getAvailableGateways(), function(index, gateway) {
     ipAddressPort[gateway] = "",
+    ipAddress[gateway] = "",
     deviceScanning[gateway] = false;
     loopCounter[gateway] = 0;
     scanActive[gateway] = false;
@@ -46,8 +47,9 @@
   };
 
   hideBargraphAnimation = function(bindingId) {
-      var bargraphID = "animBargraph_"+bindingId+"_0";
-      jQuery("#" + bargraphID).hide();
+      var bargraphID = "animBargraph_"+bindingId;
+      jQuery("#" + bargraphID + "_0").hide();
+      jQuery("#" + bargraphID + "_1").hide();
   };
 
   showEnterIPAddress = function(bindingId) {
@@ -151,17 +153,22 @@
 
   addGatewayByIP = function(bindingId) {
     if (!scanActive[bindingId]) {
-      var ipA = jQuery("#ipA").val(),
-      ipB = jQuery("#ipB").val(),
-      ipC = jQuery("#ipC").val(),
-      ipD = jQuery("#ipD").val();
 
-      var ipAddress = ipA+"."+ipB+"."+ipC+"."+ipD
+      if (bindingId == hue) {
+        showTeachInUserMessage(bindingId);
+      }
 
-      if (! isIPv4AddressValid(ipAddress)) {
+      var ipA = jQuery("#ipA_"+bindingId).val(),
+      ipB = jQuery("#ipB_"+bindingId).val(),
+      ipC = jQuery("#ipC_"+bindingId).val(),
+      ipD = jQuery("#ipD_"+bindingId).val();
+
+      var ipAddr = ipA+"."+ipB+"."+ipC+"."+ipD
+
+      if (! isIPv4AddressValid(ipAddr)) {
         alert(translateKey("invalidIP"));
       } else {
-        addGateway(ipAddress, bindingId);
+        addGateway(ipAddr, bindingId);
       }
     }
   };
@@ -182,7 +189,7 @@
 
       data.gateWayIP = ip;
 
-      var url = '/pages/jpages/system/Coupling/addGateway?sid='+SessionId;
+      var url = '/pages/jpages/system/Coupling/addGateway?sid='+SessionId+'&bindingId='+bindingId;
       var pb = JSON.stringify(data);
       var opt =
       {
@@ -275,10 +282,10 @@
         }
         try {
           ipAddressPort[bindingId] = response.content.replace("http://", "");
-          ipAddress = ipAddressPort[bindingId].split(":")[0];
+          ipAddress[bindingId] = ipAddressPort[bindingId].split(":")[0];
         } catch (e) {}
 
-        if (isIPv4AddressValid(ipAddress)) {
+        if (isIPv4AddressValid(ipAddress[bindingId])) {
           if (mode == poll4GatewayIP) {
             // Adds all known devices of the gateway
             addNewDevices(bindingId);
@@ -291,10 +298,10 @@
           if (mode == poll4GatewayIP) {
             stopPolling(bindingId);
             alert(alertMsg);
-            showEnterIPAddress();
+            showEnterIPAddress(bindingId);
           }
         } else {
-          showEnterIPAddress();
+          showEnterIPAddress(bindingId);
         }
 
       }
@@ -351,10 +358,10 @@
 	
 				<tr name="enterIPForGateway_lightify" class="hidden">
 					<td>${"$"}{enterIPAddress}</td>
-					<td><input id="ipA" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-					<td><input id="ipB" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-				<td><input id="ipC" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-				<td><input id="ipD" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+					<td><input id="ipA_lightify" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+					<td><input id="ipB_lightify" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipC_lightify" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipD_lightify" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
 				</tr>
 
 			    <tr name="enterIPForGateway_lightify" class="hidden">
@@ -416,10 +423,10 @@
 	
 				<tr name="enterIPForGateway_hue" class="hidden">
 					<td>${"$"}{enterIPAddress}</td>
-					<td><input id="ipA" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-					<td><input id="ipB" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-				<td><input id="ipC" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
-				<td><input id="ipD" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+					<td><input id="ipA_hue" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+					<td><input id="ipB_hue" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipC_hue" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
+				<td><input id="ipD_hue" type="text" style="text-align:center" size="3" maxlength="3" onblur="isValidEntry(this)"/></td>
 				</tr>
 
 			    <tr name="enterIPForGateway_hue" class="hidden">

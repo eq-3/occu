@@ -55,11 +55,17 @@
       <channel id="0" type="MAINTENANCE">
         <config_params/>
         <status_params>
-          <status_parameter aggregation="LAST" default="20.0" max="30.0" min="5.0" name="UPDATE_PENDING"
+          <status_parameter aggregation="OR" default="false" max="30.0" min="5.0" name="UPDATE_PENDING"
                      operations="5" tab_order="0" type="BOOL" unit="">
             <mappings>
               <mapping>
                 <device_type type="HM-TC-IT-WM-W-EU"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UPDATE_PENDING</parameter_name>
+                <priority>1</priority>
+              </mapping>
+              <mapping>
+                <device_type type="HM-CC-RT-DN"/>
                 <channel_index>0</channel_index>
                 <parameter_name>UPDATE_PENDING</parameter_name>
               </mapping>
@@ -99,11 +105,17 @@
             </mappings>
             <valueList/>
           </status_parameter>
-          <status_parameter aggregation="LAST" default="20.0" max="30.0" min="5.0" name="CONFIG_PENDING"
+          <status_parameter aggregation="OR" default="false" max="30.0" min="5.0" name="CONFIG_PENDING"
                      operations="5" tab_order="4" type="BOOL" unit="">
             <mappings>
               <mapping>
                 <device_type type="HM-TC-IT-WM-W-EU"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+                <priority>1</priority>
+              </mapping>
+              <mapping>
+                <device_type type="HM-CC-RT-DN"/>
                 <channel_index>0</channel_index>
                 <parameter_name>CONFIG_PENDING</parameter_name>
               </mapping>
