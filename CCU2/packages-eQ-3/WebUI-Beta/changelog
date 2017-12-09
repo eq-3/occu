@@ -2,6 +2,13 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-12-08 Jens Maus <mail@jens-maus.de>
+
+  * added minimum of 5k for globally modifying the number of Iterations using
+    system.MaxIterations(max)
+
+#### BETA25-2017-12-04 (518321a) Release ####################################
+
 2017-12-03 Jens Maus <mail@jens-maus.de>
 
   * added system.MaxIterations(max) method which allows to modify the maximum
