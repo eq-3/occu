@@ -51,14 +51,14 @@ jQuery.extend(true,langJSON, {
     "stringTableBlindEndPositionAutoDetect" : "Automatic detection of the end position",
     "stringTableBlindDelayCompensation" : "Compensation of motor switch-on delay",
     "lblTimeDelay" : "Time delay",
-    "stringTableCurrentPassageDirectionL2RTrue" : "Passage detectedfrom left to right",
-    "stringTableCurrentPassageDirectionL2RFalse" : "Passage detectednot from left to right",
-    "stringTableCurrentPassageDirectionR2LTrue" : "Passage detectedfrom right to left",
-    "stringTableCurrentPassageDirectionR2LFalse" : "Passage detectednot from right to left",
-    "stringTableLastPassageDirectionL2RTrue" : "Last passage detectedfrom left to right",
-    "stringTableLastPassageDirectionL2RFalse" : "Last passage detectednot from left to right",
-    "stringTableLastPassageDirectionR2LTrue" : "Last passage detectedfrom right to left",
-    "stringTableLastPassageDirectionR2LFalse" : "Last passage detectednot from right to left",
+    "stringTableCurrentPassageDirectionL2RTrue" : "Passage detected from left to right",
+    "stringTableCurrentPassageDirectionL2RFalse" : "Passage detected not from left to right",
+    "stringTableCurrentPassageDirectionR2LTrue" : "Passage detected from right to left",
+    "stringTableCurrentPassageDirectionR2LFalse" : "Passage detected not from right to left",
+    "stringTableLastPassageDirectionL2RTrue" : "Last passage detected from left to right",
+    "stringTableLastPassageDirectionL2RFalse" : "Last passage detected not from left to right",
+    "stringTableLastPassageDirectionR2LTrue" : "Last passage detected from right to left",
+    "stringTableLastPassageDirectionR2LFalse" : "Last passage detected not from right to left",
     "stringTablePassageCounterOverflowL2RTrue" : "Overrun passage counter left to right",
     "stringTablePassageCounterOverflowL2RFalse" : "no overrun passage counter left to right",
     "stringTablePassageCounterValueL2R" : "Number of passages left to right",
@@ -109,6 +109,7 @@ jQuery.extend(true,langJSON, {
           "it has to be available for the" +HMIdentifier.en.CCUShortName+".</li>" +
       "<li>After successful search, the IP address of the gateway is displayed and all lights and lamps<br/>" +
           "connected to the gateway are available as devices within the" +HMIdentifier.en.CCUShortName+".</li>" +
+      "<li>Only the new Philips Hue Bridge (square model) is supported.</li>" +
       "</ul>",
 
     "stringTablePassageDetectorCounterTransmitterTitle" : "Passage sensor",
@@ -130,3 +131,4 @@ jQuery.extend(true,langJSON, {
 
   }
 });
+

@@ -200,6 +200,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   #append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
+
+  if {$parentType == "hmip-wgc"} {
+    append HTML_PARAMS(separate_$prn) "\${hint_hmip_wgc}"
+  }
+
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   set pref 0
@@ -266,6 +271,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   #append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
+
+  if {$parentType == "hmip-wgc"} {
+    append HTML_PARAMS(separate_$prn) "\${hint_hmip_wgc}"
+  }
+
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
     set pref 0

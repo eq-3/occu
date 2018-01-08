@@ -17,7 +17,7 @@ H28V0                   hmw_io12_sw14_dr_hw0.hex                        @0x77F0 
 
 #Coprozessor
 ARM7                    hss_comm.enc                                    0.056
-CCU2                    coprocessor_update.eq3                          2.8.5          # Dual CoProzessor CCU2  
+CCU2                    coprocessor_update.eq3                          2.8.6          # Dual CoProzessor CCU2  
 # CCU2                    coprocessor_update_hm_only.eq3                1.4.1          # HM only CoProzessor CCU2  
 CCU2-RFLGW				coprocessor_update_hm_only.eq3					1.4.1          # HM only CoProzessor CCU2 for HomeMatic RF Lan Gateway
 

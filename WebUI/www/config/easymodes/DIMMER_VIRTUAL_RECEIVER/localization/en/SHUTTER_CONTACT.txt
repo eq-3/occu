@@ -5,4 +5,6 @@
 "subset_3" : "Close",
 "subset_4" : "Open",
 "subset_5" : "Change",
+"subset_6" : "Open - on/off",
+"subset_7" : "Closed - on/off",
 "at" : "<span class=\"translated\">on</span>",

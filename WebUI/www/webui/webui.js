@@ -5591,7 +5591,7 @@ WebUI = Singleton.create({
   start: function()
   {
     this.USERNAME = jQuery.trim(homematic('User.getUserName', {'userID': userId}));
-    this.USERLANGUAGE = homematic('User.getLanguage', {'userName': this.USERNAME, 'userID': userId});
+    this.USERLANGUAGE = homematic('User.getLanguage', {'userID': userId});
     this.HIDESTICKYUNREACH = (homematic("CCU.getStickyUnreachState", {}) == 0 ) ? false : true ;
     userIsNoExpert = homematic('User.isNoExpert', {"id": userId});
 
@@ -24252,7 +24252,7 @@ convertMin2Hour = function(valMin) {
   hours = (isNaN(hours)) ? 0 : hours;
   minutes = (isNaN(minutes)) ? 0 : minutes;
 
-  return hours + ':' + ((minutes <= 9) ? "0"+minutes : minutes);
+  return hours + ' h : ' + ((minutes <= 9) ? "0"+minutes+" m" : minutes+" m");
 };
 
 /**
@@ -31720,7 +31720,9 @@ DetermineParameterValue = function(iface, address, ps_id, param_id, html_inputel
 ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
 {
   // Falls das Tasten-Event nicht mit übergeben wurde ....
-  var keyCode = 0;
+  var keyCode = 0,
+    finalVal;
+
   if (event) {
     keyCode = event.keyCode;
   }
@@ -31755,24 +31757,28 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
     //alert("Keine Zahl.");
     //value = 0;
     //$(dstid).value = min;
+    finalVal = min;
     ok = false;
   }
   else if (isNaN(value))
   {
     //alert("Keine Zahl.");
     //value = min;
+    finalVal = min;
     ok = false;
   }
   else if (value < min)
   {
     //alert("Der kleinste Wert ist 0.");
     //value = min;
+    finalVal = min;
     ok = false;
   }
   else if (value > max)
   {
     //alert("Der größte Wert ist 100.");
     //value = max;
+    finalVal = max;
     ok = false;
   }
 
@@ -31793,7 +31799,8 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
   {
     $(srcid).setAttribute("valvalid", "false");
     $(srcid).style.backgroundColor = "red";
-    $(dstid).value = max * dstValueFactor;
+    $(dstid).value = finalVal * dstValueFactor;
+    window.setTimeout(function(){$(srcid).style.backgroundColor = "white";},1000);
   }
 };
 

@@ -1022,14 +1022,15 @@ proc action_download_logfile {} {
     puts "Content-Disposition:attachment;filename=[set HOSTNAME]-$year-$month-$day.log\n"
     
     cd /var/log
-    foreach f {messages.1 messages.0 messages} {
+    foreach f {messages.1 messages.0 messages hmserver.log.1 hmserver.log} {
         catch {
             set fd [open $f r]
+            puts -nonewline "\r\n***** $f *****\r\n"
             while { ! [eof $fd]} {
                 puts -nonewline "[gets $fd]\r\n"
             }
-      close $fd
-  }
+            close $fd
+        }
     }
 }
 

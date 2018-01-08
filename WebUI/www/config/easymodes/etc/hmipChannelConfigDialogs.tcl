@@ -104,7 +104,6 @@ proc getMaintenance {chn p descr} {
 
     append html "<script type='text/javascript'>"
       append html " showParameterHint = function(elmID, value) { "
-        append html " console.log(\"elmID: \" + elmID + \" - value: \" + value); "
         append html " var elm = jQuery(\"#hint_\"+elmID); "
         append html " if (parseInt(value) == 0) { "
           append html " elm.show(); "
@@ -395,12 +394,22 @@ proc getClimateReceiver {chn p descr} {
   upvar prn prn
   upvar special_input_id special_input_id
 
+  set CHANNEL $special_input_id
+
   set html ""
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
 
   set param TEMPERATURE_OFFSET
   append html "<tr>"
-  append html "<td>\${stringTableTemperatureOffset}</td>"
-  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    array_clear options
+    set i 0
+    for {set val -3.5} {$val <= 3.5} {set val [expr $val + 0.5]} {
+      set options($val) "$val &#176;C"
+      incr i;
+    }
+    append html "<td>\${stringTableTemperatureOffset}</td>"
+    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param]</td>"
   append html "</tr>"
 
   return $html

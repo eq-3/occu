@@ -137,11 +137,11 @@ jQuery.extend(true,langJSON, {
             "<li class='diagramHelpCustomModeLi1'>" +
               //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
               "<b>5 -Difference of passages - left </b><br/>" +
-                "In this mode an internal counter variant is increased by 1 on detected passage from LEFT and" +
-                "reduced by 1 on passage detected from RIGHT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage to LEFT and " +
+                "reduced by 1 on passage detected to RIGHT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
                 "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
-                "upper difference value, a switching command is send with the upper decision value to the" +
-                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "upper difference value, a switching command is send with the upper decision value to the " +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause " +
                 "additional switching commands. Only when reaching the lower difference value, a switching command " +
                 "with the lower decision value is sent to the connection partner(s)." +
              "</li>" +
@@ -149,11 +149,11 @@ jQuery.extend(true,langJSON, {
             "<li class='diagramHelpCustomModeLi1'>" +
               //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
               "<b>6 -Difference of passages - right </b><br/>" +
-                "In this mode an internal counter variant is increased by 1 on detected passage from RIGHT and" +
-                "reduced by 1 on passage detected from LEFT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage to RIGHT and " +
+                "reduced by 1 on passage detected to LEFT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
                 "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
-                "upper difference value, a switching command is send with the upper decision value to the" +
-                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "upper difference value, a switching command is send with the upper decision value to the " +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause " +
                 "additional switching commands. Only when reaching the lower difference value, a switching command " +
                 "with the lower decision value is sent to the connection partner(s)." +
                  "</li>" +
@@ -218,11 +218,11 @@ jQuery.extend(true,langJSON, {
             "<li class='diagramHelpCustomModeLi1'>" +
               //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
               "<b>5 -Difference of passages - left </b><br/>" +
-                "In this mode an internal counter variant is increased by 1 on detected passage from LEFT and" +
-                "reduced by 1 on passage detected from RIGHT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage to LEFT and " +
+                "reduced by 1 on passage detected to RIGHT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
                 "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
-                "upper difference value, a switching command is send with the upper decision value to the" +
-                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "upper difference value, a switching command is send with the upper decision value to the " +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause " +
                 "additional switching commands. Only when reaching the lower difference value, a switching command " +
                 "with the lower decision value is sent to the connection partner(s)." +
              "</li>" +
@@ -230,11 +230,11 @@ jQuery.extend(true,langJSON, {
             "<li class='diagramHelpCustomModeLi1'>" +
               //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
               "<b>6 -Difference of passages - right </b><br/>" +
-                "In this mode an internal counter variant is increased by 1 on detected passage from RIGHT and" +
-                "reduced by 1 on passage detected from LEFT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
+                "In this mode an internal counter variant is increased by 1 on detected passage to RIGHT and " +
+                "reduced by 1 on passage detected to LEFT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
                 "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
-                "upper difference value, a switching command is send with the upper decision value to the" +
-                "connection partner(s). Additional passages are counted until the maximum value but will not cause" +
+                "upper difference value, a switching command is send with the upper decision value to the " +
+                "connection partner(s). Additional passages are counted until the maximum value but will not cause " +
                 "additional switching commands. Only when reaching the lower difference value, a switching command " +
                 "with the lower decision value is sent to the connection partner(s)." +
                  "</li>" +

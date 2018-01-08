@@ -110,6 +110,12 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxDecisionAbove" : "Sent decision value if upper limit is exceeded",
     "stringTableCondTxDecisionBelow" : "Sent decision value if lower limit falls below threshold",
 
+    "stringTableCondTxDecisionPassageRL_A" : "Sent decision value<br/>if number of passages right -> left reached",
+    "stringTableCondTxDecisionPassageLR_A" : "Sent decision value<br/>if number of passages left -> right reached",
+
+    "stringTableCondTxDecisionPassageRL_B" : "Sent upper decision value,<br/>wenn der obere Differenzwert erreicht wurde.",
+    "stringTableCondTxDecisionPassageLR_B" : "Sent lower decision value,<br/>when the lower differential value has been reached and the upper limit has been reached previously.",
+
     "stringTableCondTxFalling" : "Send decision value if lower limit falls below threshold<br/>" +
        "and if the upper limit has been exceeded previously.",
     "stringTableCondTxFallingA" : "Send decision value (",
@@ -185,6 +191,13 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxCyclicBelow" : "Alt sinir deger asildiginda karar degerini periyodik sekilde g&ouml;nder",
     "stringTableCondTxDecisionAbove" : "&Uuml;st sinir deger asildiginda g&ouml;nderilen karar degeri",
     "stringTableCondTxDecisionBelow" : "Alt sinir deger asildiginda g&ouml;nderilen karar degeri",
+
+    "stringTableCondTxDecisionPassageRL_A" : "Sent decision value<br/>if number of passages right -> left reached",
+    "stringTableCondTxDecisionPassageLR_A" : "Sent decision value<br/>if number of passages left -> right reached",
+
+    "stringTableCondTxDecisionPassageRL_B" : "Sent upper decision value,<br/>wenn der obere Differenzwert erreicht wurde.",
+    "stringTableCondTxDecisionPassageLR_B" : "Sent lower decision value,<br/>when the lower differential value has been reached and the upper limit has been reached previously.",
+
     "stringTableCondTxFalling" : "Eger &ouml;nceden &uuml;st sinir deger asilmissa,<br/>alt sinir deger de asildiginda karar degerini g&ouml;nder.",
     "stringTableCondTxFallingA" : "Eger &ouml;nceden &uuml;st sinir deger asilmissa (",
     "stringTableCondTxFallingB" : ") <br/>alt sinir deger de asildiginda karar degerini g&ouml;nder.",

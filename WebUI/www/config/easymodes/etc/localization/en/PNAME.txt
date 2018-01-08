@@ -68,9 +68,25 @@
 "RAMPOFF_TIME_FACTOR" : "<span class=\"translated\">Value ramp time</span>",
 "RAMPOFF_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-off ramp time</span>",
 
-"SWITCHING_INTERVAL_BASE" : "*Unit of interval",
+"SWITCHING_INTERVAL_BASE" : "Unit of interval",
 "SWITCHING_INTERVAL_FACTOR" : "Value of interval",
 "SWITCHING_INTERVAL_FACTOR_DESCR" : "Interval of pump protection function",
+
+"DOWN_TIME_BASE" : "<span class=\"translated\">Value of the duration</span>",
+"DOWN_TIME_FACTOR" : "<span class=\"translated\">Unit of the duration</span>",
+"DOWN_TIME_FACTOR_DESCR" : "<span class=\"translated\">Duration while in state \"down\"</span>",
+
+"UP_TIME_BASE" : "<span class=\"translated\">Value of the duration</span>",
+"UP_TIME_FACTOR" : "<span class=\"translated\">Unit of the duration</span>",
+"UP_TIME_FACTOR_DESCR" : "<span class=\"translated\">Duration while in state \"up\"</span>",
+
+"DOWN_TIME_DELAY_BASE" : "<span class=\"translated\">Value of the delay time</span>",
+"DOWN_TIME_DELAY_FACTOR" : "<span class=\"translated\">Unit of the delay time</span>",
+"DOWN_TIME_DELAY_FACTOR_DESCR" : "<span class=\"translated\">Down-delay</span>",
+
+"UP_TIME_DELAY_BASE" : "<span class=\"translated\">Value of the delay time</span>",
+"UP_TIME_DELAY_FACTOR" : "<span class=\"translated\">Unit of the delay time</span>",
+"UP_TIME_DELAY_FACTOR_DESCR" : "<span class=\"translated\">Up-delay</span>",
 
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperature</span>",
 "SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender channel settings</span>",

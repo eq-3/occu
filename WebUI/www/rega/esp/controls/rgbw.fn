@@ -269,7 +269,7 @@ function ::CreateVIR-LGWhiteLevelControl() {
         WriteLine("</tr>");
         WriteLine("<tr>");
           WriteLine("<td colspan='2'>");
-            WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;'></div>");
+            WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:220px;min-height:unset'></div>");
           WriteLine("</td>");
         WriteLine("</tr>");
       WriteLine("</table>");

@@ -42,8 +42,8 @@ function ::CreateWeatherSensor()
         WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
           WriteLine("<table class='_ControlBtnInfo' style='border:none'>");
             WriteLine("<tr style='height:40px;'>");
-              WriteLine("<td id='"#chnId#"ActualTemperature' class='minWidth230px'>");
-                WriteLine("${stringTableWeatherTemperature}: "#oActualTemperature.Value().ToString(1)#" "#oActualTemperature.ValueUnit());
+              WriteLine("<td id='"#chnId#"ActualTemperature' class='minWidth230px' style='text-align:left''>");
+                WriteLine("<span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableWeatherTemperature}: </span><span class='CLASS02535' style='color:white'>"#oActualTemperature.Value().ToString(1)#" "#oActualTemperature.ValueUnit()#"</span>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
@@ -54,8 +54,8 @@ function ::CreateWeatherSensor()
         WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
           WriteLine("<table class='_ControlBtnInfo'>");
             WriteLine("<tr style='height:40px;'>");
-              WriteLine("<td id='"#chnId#"ActualHumidity' class='minWidth230px'>");
-                WriteLine("${stringTableHeatingHumidity}: "#oActualHumidity.Value().ToString(0)#" "#oActualHumidity.ValueUnit());
+              WriteLine("<td id='"#chnId#"ActualHumidity' class='minWidth230px' style='text-align:left''>");
+                WriteLine("<span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableHeatingHumidity}: </span><span class='CLASS02535' style='color:white'>"#oActualHumidity.Value().ToString(0)#" "#oActualHumidity.ValueUnit()#"</span>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
@@ -69,8 +69,8 @@ function ::CreateWeatherSensor()
         WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
           WriteLine("<table class='_ControlBtnInfo'>");
             WriteLine("<tr style='height:40px;'>");
-              WriteLine("<td id='"#chnId#"ActualIllumination' class='minWidth230px'>");
-                WriteLine("${stringTableBrightness}: "#oActualIllumination.Value().ToString(0)#" "#oActualIllumination.ValueUnit());
+              WriteLine("<td id='"#chnId#"ActualIllumination' class='minWidth230px' style='text-align:left''>");
+                WriteLine("<span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableBrightness}: </span><span class='CLASS02535' style='color:white'>"#oActualIllumination.Value().ToString(0)#" "#oActualIllumination.ValueUnit()#"</span>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
@@ -81,24 +81,36 @@ function ::CreateWeatherSensor()
         WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
           WriteLine("<table class='_ControlBtnInfo'>");
             WriteLine("<tr style='height:40px;'>");
-              WriteLine("<td id='"#chnId#"ActualWindSpeed' class='minWidth230px'>");
-                WriteLine("${stringTableWeatherWindSpeed}: "#oActualWindSpeed.Value().ToString(0)#" "#oActualWindSpeed.ValueUnit());
+              WriteLine("<td id='"#chnId#"ActualWindSpeed' class='minWidth230px' style='text-align:left'>");
+                WriteLine("<span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableWeatherWindSpeed}: </span><span class='CLASS02535' style='color:white'>"#oActualWindSpeed.Value().ToString(0)#" "#oActualWindSpeed.ValueUnit()#"</span>");
+
+                 boolean bErrorWindNorth = true;
 
                  if (oActualWindDirection) {
-                   boolean bErrorWindNorth =  dom.GetObject("HmIP-RF."#maintenanceChannelAddress#".ERROR_WIND_NORTH").Value();
-                   string errorWindNorth = "style=color:white;";
+                   bErrorWindNorth =  dom.GetObject("HmIP-RF."#maintenanceChannelAddress#".ERROR_WIND_NORTH").Value();
+                   string errorWindNorth = "class='CLASS02534 j_translate' style='color:white; float: none; display: inline;'";
                    if (bErrorWindNorth) {
-                       errorWindNorth = "style=color:red;";
+                       errorWindNorth = "style='color:red; float: none; display: inline;'";
                    }
                    string sValue = ""; ! used by ConvWindDir()
                    string sValueh = ""; ! set by ConvWindDir() - contains the converted value
                    sValue = oActualWindDirection.Value().ToString(0);
                    Call("/esp/datapointconfigurator.fn::ConvWindDir()");
-                   WriteLine("<br/><span "#errorWindNorth#">${stringTableWeatherWindDir}</span>: "#sValueh#" "#oActualWindDirection.Value().ToString(0)#oActualWindDirection.ValueUnit());
+                   if (bErrorWindNorth) {
+                    WriteLine("<br/><span "#errorWindNorth#">${stringTableWeatherWindDir}: </span><img src='/ise/img/help.png' alt='help' style='cursor: pointer; width:18px; height:18px; vertical-align:middle;' onclick=alert(translateKey('stringTableErrorWindNorthTrue'));> ");
+                   } else {
+                    WriteLine("<br/><span "#errorWindNorth#">${stringTableWeatherWindDir}: </span><span class='CLASS02535' style='color:white'>"#sValueh#"  "#oActualWindDirection.Value().ToString(0)#oActualWindDirection.ValueUnit()#"</span>");
+                   }
                 }
 
-                if (oActualWindDirectionRange) {
-                  WriteLine("<br/>${stringTableWeatherWindDirRangeA}: "#oActualWindDirectionRange.Value().ToString(0)#oActualWindDirectionRange.ValueUnit());
+                if ((! bErrorWindNorth) && oActualWindDirectionRange) {
+                  real actualWindDirectionRange = "0";
+                  if (! oActualWindDirectionRange.Value()) {
+                    actualWindDirectionRange = 0.0;
+                  } else {
+                    actualWindDirectionRange = oActualWindDirectionRange.Value();
+                  }
+                  WriteLine("<br/><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableWeatherWindDirRangeA}: </span><span class='CLASS02535' style='color:white'>"#actualWindDirectionRange.ToString(0)#oActualWindDirectionRange.ValueUnit()#"</span>");
                 }
               WriteLine("</td>");
             WriteLine("</tr>");
@@ -145,15 +157,15 @@ function ::CreateWeatherSensor()
           WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black'>");
             WriteLine("<table class='_ControlBtnInfo'>");
               WriteLine("<tr style='height:40px;'>");
-                WriteLine("<td id='"#chnId#"ActualSunshineDuration' class='minWidth230px'>");
+                WriteLine("<td id='"#chnId#"ActualSunshineDuration' class='minWidth230px' style='text-align:left'>");
                   ! WriteLine("${stringTableWeatherSunshineDuration}: <span id='"#chnId#"sunshineCounterDHM'>"#svHmIPSunshineCounter.Value().ToString(0)#"</span> "#oActualSunshineDuration.ValueUnit()); ! value with unit
-                  WriteLine("${stringTableWeatherSunshineDuration}: <span id='"#chnId#"sunshineCounterDHM'>"#svHmIPSunshineCounter.Value().ToString(0)#"</span> ");
+                  WriteLine("<span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableWeatherSunshineDuration}: </span><span id='"#chnId#"sunshineCounterDHM' class='CLASS02535' style='color:white'>"#svHmIPSunshineCounter.Value().ToString(0)#"</span> ");
 
                   if (svHmIPSunshineCounterToday) {
-                    WriteLine("<br>${lblToday}: <span id='"#chnId#"sunshineTodayDHM'>"#svHmIPSunshineCounterToday.Value().ToString(0)#"</span>");
+                    WriteLine("<br><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${lblToday}: </span><span id='"#chnId#"sunshineTodayDHM' class='CLASS02535' style='color:white'>"#svHmIPSunshineCounterToday.Value().ToString(0)#"</span>");
                   }
                   if (svHmIPSunshineCounterYesterday) {
-                    WriteLine("<br>${lblYesterday}: <span id='"#chnId#"sunshineYesterdayDHM'>"#svHmIPSunshineCounterYesterday.Value().ToString(0)#"</span>");
+                    WriteLine("<br><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${lblYesterday}: </span><span id='"#chnId#"sunshineYesterdayDHM' class='CLASS02535' style='color:white'>"#svHmIPSunshineCounterYesterday.Value().ToString(0)#"</span>");
                   }
 
                 WriteLine("</td>");
@@ -193,14 +205,15 @@ function ::CreateWeatherSensor()
           WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black''>");
             WriteLine("<table class='_ControlBtnInfo'>");
               WriteLine("<tr style='height:40px;'>");
-                WriteLine("<td class='minWidth230px'>");
+                WriteLine("<td class='minWidth230px' style='text-align:left'>");
                   ! WriteLine("${stringTableWeatherRainCounter}: "#svHmIPRainCounter.Value().ToString(1)#" ("#oActualRainCounter.Value().ToString(1)#")"#oActualRainCounter.ValueUnit());
-                  WriteLine("${stringTableWeatherRainCounter}: <span id='"#chnId#"actualRainCounter'>"#svHmIPRainCounter.Value().ToString(1)#"</span> "#oActualRainCounter.ValueUnit());
+                  WriteLine("<span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableWeatherRainCounter}: </span><span id='"#chnId#"actualRainCounter' class='CLASS02535' style='color:white'>"#svHmIPRainCounter.Value().ToString(1)#" "#oActualRainCounter.ValueUnit()#"</span>");
+
                   if (svHmIPRainCounterToday) {
-                    WriteLine("<br>${lblToday}: "#svHmIPRainCounterToday.Value().ToString(1)#" mm ");
+                     WriteLine("<br><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${lblToday}: </span><span class='CLASS02535' style='color:white'>"#svHmIPRainCounterToday.Value().ToString(1)#" "#oActualRainCounter.ValueUnit()#"</span>");
                   }
                   if (svHmIPRainCounterYesterday) {
-                    WriteLine("<br>${lblYesterday}: "#svHmIPRainCounterYesterday.Value().ToString(1)#" mm ");
+                    WriteLine("<br><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${lblYesterday}: </span><span class='CLASS02535' style='color:white'>"#svHmIPRainCounterYesterday.Value().ToString(1)#" "#oActualRainCounter.ValueUnit()#"</span>");
                   }
                 WriteLine("</td>");
               WriteLine("</tr>");

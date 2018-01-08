@@ -11,3 +11,16 @@
 "subset_3" : "changing between moved up and moved down",
 
 
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "moved up/down in toggle mode",
+
+"subset_4" : "Open - off / Closed - on",
+"subset_5" : "Open - on / Closed - off",
+
+"subset_6" : "Close",
+"subset_7" : "Open",
+"subset_8" : "Change",
+
+"subset_9" : "Open",
+"subset_10" : "Close",

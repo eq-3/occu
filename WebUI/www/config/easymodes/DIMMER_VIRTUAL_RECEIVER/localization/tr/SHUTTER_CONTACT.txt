@@ -5,4 +5,6 @@
 "subset_3" : "Kapat",
 "subset_4" : "Acma",
 "subset_5" : "Degistir",
+"subset_6" : "Open - on/off",
+"subset_7" : "Closed - on/off",
 "at" : "<span class=\"translated\">'da</span>",

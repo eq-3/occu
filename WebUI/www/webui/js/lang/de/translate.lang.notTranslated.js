@@ -134,6 +134,7 @@ jQuery.extend(true,langJSON, {
           "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
         "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
           "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
+        "<li>Es wird nur die neue Philips Hue Bridge (quadratisches Modell) unterst&uuml;tzt.</li>" +
       "</ul>",
 
     "teachInUserMessage" : "Zum Anlernen bet%E4tigen Sie bitte den Anlernknopf des Gateways.",

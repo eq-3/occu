@@ -10,4 +10,4 @@
 "description_noLong_4" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit ein- bzw. ausgeschaltet.</span><br/><br/>",
 "description_noLong_5" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird der Schalter f&uuml;r die festgelegte Zeit aus- bzw. eingeschaltet.</span><br/><br/>",
 
-
+"hint_hmip_wgc" : "Wenn das Ger&auml;t mit Batterien betrieben wird, sollte keine lange Einschaltdauer gew&auml;hlt werden, da das angezogene Relais die Batterien sehr schnell entleeren w&uuml;rde.<br/><br/>",
