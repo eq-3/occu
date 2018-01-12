@@ -21,7 +21,7 @@ set PROFILE_1(LONG_CT_OFF)                    0
 set PROFILE_1(LONG_CT_OFFDELAY)               0
 set PROFILE_1(LONG_CT_ON)                     0
 set PROFILE_1(LONG_CT_ONDELAY)                0
-set PROFILE_1(LONG_JT_OFF)                    {1 5}
+set PROFILE_1(LONG_JT_OFF)                    {1 3 5}
 set PROFILE_1(LONG_JT_OFFDELAY)               {3 5}
 set PROFILE_1(LONG_JT_ON)                     {1 3}
 set PROFILE_1(LONG_JT_ONDELAY)                {3 1}
