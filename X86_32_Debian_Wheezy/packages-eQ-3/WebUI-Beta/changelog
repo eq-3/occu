@@ -2,6 +2,22 @@
 ReGaHss ChangeLog
 -----------------
 
+2017-12-26 Jens Maus <mail@jens-maus.de>
+
+  * added "incorrect use" warnings for use of Device() on DP objects and
+    LastTimestamp() and LastTimestampSeconds() on channel objects similar to
+    the already existing warning on incorrect use of AlDestMap().
+  * added automatic variable stack enlargement which should allow to deal with
+    way more variables on the script execution stack than before.
+
+2017-12-18 Jens Maus <mail@jens-maus.de>
+
+  * added default charset encoding "iso-8859-1" to all xmlrpc responses so 
+    that clients should have additional information to decode xmlrpc responses
+    correctly.
+
+#### BETA26-2017-12-09 (b3bc9eb) Release ####################################
+
 2017-12-08 Jens Maus <mail@jens-maus.de>
 
   * added minimum of 5k for globally modifying the number of Iterations using
@@ -292,7 +308,7 @@ ReGaHss ChangeLog
     always returned the object with the number the string started. Thus,
     dom.GetObject("2Test") always returned the root object instead of trying
     to search for an object with that particular string.
-  * fixed using LastTimeStamp() and LastTimeStampSeconds() on channel
+  * fixed using LastTimestamp() and LastTimestampSeconds() on channel
     objects like this had been possible.
 
 2017-05-26 Jens Maus <mail@jens-maus.de>
