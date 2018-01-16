@@ -10,7 +10,7 @@
   integer iCC = oSC.ConditionChannel();
   string sSelected = "";
 
-  boolean showHmIPParam = true;
+  boolean showChannelParam = true;
 
   Write( '<select class="SelectBox" onchange="LeftValSelectChange(this.selectedIndex,'#oSC.ID()#');">' );
   if( iLVT == ivtEmpty ) { sSelected = " selected"; } else { sSelected = ""; }
@@ -112,7 +112,7 @@
 
                     ! Some parameters shouldn't be visible
                     Call("/esp/functions.fn::isParameterVisible()");
-                    if (showHmIPParam == true)
+                    if (showChannelParam == true)
                      {
 
                       if( (oDP.ID() == iLV) && (iRV1 == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
@@ -191,7 +191,7 @@
                 {
                   ! Some parameter shouldn´t be visible
                   Call("/esp/functions.fn::isParameterVisible()");
-                  if(showHmIPParam == true) {
+                  if(showChannelParam == true) {
                     if( oDP.ID() == iLV ) { sSelected = " selected"; } else { sSelected = ""; }
                     Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
                     string sValue = oDP.Name();
