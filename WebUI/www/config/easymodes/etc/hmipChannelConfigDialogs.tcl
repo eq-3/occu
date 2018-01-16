@@ -337,6 +337,19 @@ proc getSwitchTransmitter {chn p descr} {
 
   set html ""
 
+  set param CURRENTDETECTION_BEHAVIOR
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html "<tr>"
+      append html "<td>\${stringTableCurrentDetectionBehavior}</td>"
+      array_clear option
+      set option(0) "\${stringTableCurrentDetectionBehaviorActive}"
+      set option(1) "\${stringTableCurrentDetectionBehaviorOutput1}"
+      set option(2) "\${stringTableCurrentDetectionBehaviorOutput2}"
+      append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+    incr prn
+  }
+
   append html "<tr>"
   append html "<td>\${stringTableEventDelay}</td>"
   append html [getComboBox $chn $prn "$specialID" "delayShort"]
@@ -990,25 +1003,25 @@ set comment {
     append html "<td>\${stringTableDimmerPowerUpAction}</td>"
     option POWERUP_JUMPTARGET_HMIP
     append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"  
-  
+  append html "</tr>"
+
   incr prn
   append html "<tr>"
   append html "<td>\${stringTableOnDelay}</td>"
   append html [getComboBox $chn $prn "$specialID" "delayShort"]
   append html "</tr>"
-  
+
   set param POWERUP_ONDELAY_UNIT
   append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-  
-  
+
+
   incr prn
   set param POWERUP_ONDELAY_VALUE
   append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
   append html "<td>\${stringTableOnDelayValue}</td>"
-  
+
   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-  
+
   append html "</tr>"
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
@@ -1527,7 +1540,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "<hr>"
 
     # *************** #
-    
+
     append html "<table class=\"ProfileTbl\">"
       # left
 
@@ -1569,7 +1582,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "</table>"
 
     append html "<hr>"
-    
+
     append html "<table class=\"ProfileTbl\">"
 
       set param TEMPERATURE_LOWERING_COOLING
@@ -1711,7 +1724,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "</tr>"
   append html "</table>"
 
-    
+
   if {[session_is_expert]} {
     append html "<script type=\"text/javascript\">"
       append html "jQuery(\"\[name='expertParam'\]\").show();"
@@ -1738,18 +1751,6 @@ proc getSwitchVirtualReceiver {chn p descr} {
 
   set html ""
 
-  set param CURRENTDETECTION_BEHAVIOR
-  if { ! [catch {set tmp $ps($param)}]  } {
-    append html "<tr>"
-      append html "<td>\${stringTableCurrentDetectionBehavior}</td>"
-      array_clear option
-      set option(0) "\${stringTableCurrentDetectionBehaviorActive}"
-      set option(1) "\${stringTableCurrentDetectionBehaviorOutput1}"
-      set option(2) "\${stringTableCurrentDetectionBehaviorOutput2}"
-      append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-    incr prn
-  }
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
