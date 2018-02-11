@@ -52,6 +52,8 @@ Supported communication devices
 - HM-CFG-LAN (limited support, OTAU (Over The Air Updates) not possible)
 - HMW-LGW-O-DR-GS-EU Wired LAN Gateway
 - HM-Cfg-USB-2 (experimental, not official supported)
+- HM-MOD-RPI-PCB
+- HmIP-RFUSB (HmIP only)
 
 CCU2 Toolchain
 ==============
@@ -69,8 +71,9 @@ please contact support@eq-3.de.
 OCCU based Community Projects
 =============================
  * [Hmcon](https://github.com/hobbyquaker/hmcon) - Installer Script for rfd, hs485d and Homematic Manager. "The ReGa-less CCU" for use with Software like OpenHAB, ioBroker, ...
- * [RaspberryMatic] (https://github.com/jens-maus/RaspberryMatic) - A collaborate effort to create an open sourced HomeMatic-aware distribution for the RaspberryPi platform based on buildroot.
- * [OGEMA] (http://www.ogema.org/) - open energy management; Homematic driver (https://www.ogema-source.net/wiki/display/OGEMA/Homematic+XML-RPC+high+level+driver)
+ * [RaspberryMatic](https://github.com/jens-maus/RaspberryMatic) - A collaborate effort to create an open sourced HomeMatic-aware distribution for the RaspberryPi platform based on buildroot.
+ * [X86 Docker Container](https://github.com/litti/dccu2) (e.g. for QNAP Stations)
+ * [OGEMA](http://www.ogema.org/) - open energy management; Homematic driver (https://www.ogema-source.net/wiki/display/OGEMA/Homematic+XML-RPC+high+level+driver)
 
 Version History
 ===============
