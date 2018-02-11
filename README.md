@@ -58,14 +58,12 @@ CCU2 Toolchain
 With the CCU2 toolchain it is possible to compile C/C++ programms and build
 installable CCU2 add-ons. 
 It is also possible to build CCU2 images with additional software, e.g. the
-Email add-on, which can be installed as normal CCU2 updates. A tutorial on how
-to create a customized CCU2 Image will be published after the "HomeMatic User
-Treffen 2015" (April 18th/19th 2015).
+Email add-on, which can be installed as normal CCU2 updates.
 
 Support
 =======
 The HM-OCCU-SDK is provided free of charge. If you want any commercial support
-pleace contact support@eq-3.de.
+please contact support@eq-3.de.
 
 
 OCCU based Community Projects
