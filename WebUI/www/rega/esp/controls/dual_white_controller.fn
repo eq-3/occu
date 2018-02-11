@@ -163,7 +163,7 @@ function ::CreateDualWhiteColorActuator() {
             WriteLine("</tr>");
             WriteLine("<tr>");
               WriteLine("<td colspan='3'>");
-                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:275px;'></div>");
+                WriteLine("<div id='slider"#chnId#"' class='ControlBtnInfo' style='width:275px;min-height:unset'></div>");
               WriteLine("</td>");
             WriteLine("</tr>");
             WriteLine("</table>");

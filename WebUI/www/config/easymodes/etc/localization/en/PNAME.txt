@@ -32,6 +32,7 @@
 "ONDELAY_TIME" : "<span class=\"translated\">On delay time</span>",
 "ON_AIRING" : "<span class=\"translated\">Ventilation if</span>",
 "ON_LEVEL" : "<span class=\"translated\">Level in status \"on\"</span>",
+"OUTPUT_BEHAVIOUR" : "<span class=\"translated\">Color</span>",
 "ON_THRESHOLD" : "<span class=\"translated\">Switch on if</span>",
 "ON_TIME" : "<span class=\"translated\">Switch-on time (duration in status \"on\")</span>",
 "ON_TIME_MODE" : "<span class=\"translated\">Type of duration</span>",

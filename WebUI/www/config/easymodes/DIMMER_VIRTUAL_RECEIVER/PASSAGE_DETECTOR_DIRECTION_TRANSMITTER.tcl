@@ -5,14 +5,13 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/DIMMER_VIRTUAL_RECEIVER/getColorElement.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1) "\${dimmer_toggle}"
 set PROFILES_MAP(2)  "\${dimmer_on}"
 set PROFILES_MAP(3) "\${dimmer_off}"
 set PROFILES_MAP(4)  "\${no_action}"
-
-
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)    "Expertenprofil"
@@ -42,6 +41,7 @@ set PROFILE_1(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE)             0
 set PROFILE_1(SHORT_OFF_TIME_MODE)            0
+set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_1(UI_DESCRIPTION)  "Beim Öffnen toggelt wird der Schaltaktor in den entgegengesetzten Zustand versetzt."
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
@@ -70,6 +70,7 @@ set PROFILE_2(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE)             0
 set PROFILE_2(SHORT_OFF_TIME_MODE)            0
+set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_2(UI_DESCRIPTION)  "Beim &Ouml;ffnen des Schaltkontaktes wird der Schalter ein- und beim Schlie&szlig;en ausgeschaltet. Die Schaltzuordnung l&auml;sst sich auch umkehren."
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
@@ -98,6 +99,7 @@ set PROFILE_3(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE)             0
 set PROFILE_3(SHORT_OFF_TIME_MODE)            0
+set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_3(UI_DESCRIPTION)  "Beim &Ouml;ffnen des Schaltkontaktes wird der Schalter ein- und beim Schlie&szlig;en ausgeschaltet. Die Schaltzuordnung l&auml;sst sich auch umkehren."
 set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
@@ -157,7 +159,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set ps(SHORT_COND_VALUE_LO) $condTXDecisionValue
   }
 
-  puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"
+  catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"}
 
 #  die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
@@ -188,6 +190,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
 
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
@@ -227,6 +235,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -250,6 +263,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #4

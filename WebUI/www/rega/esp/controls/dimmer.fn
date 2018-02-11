@@ -20,6 +20,7 @@ function ::CreateDimmingActuator()
   {
     object oLevel = cObj.DPByControl("DIMMER.LEVEL");
     object oLevelReal = cObj.DPByControl("DIMMER.LEVEL_REAL");
+    object oColor = cObj.DPByControl("DIMMER.COLOR");
 
     if( oLevel )
     {
@@ -68,7 +69,28 @@ function ::CreateDimmingActuator()
             WriteLine("<tr><td><div id='"#chnId#"Off' class='ControlBtnOff CLASS02545 j_translate'>${actionStatusControlLblOff}</div></td></tr>");
           WriteLine("</table>");
         WriteLine("</td>");
-        !****************
+
+        if (oColor) {
+          string listColor = "black\tblue\tgreen\tturquoise\tred\tpurple\tyellow\twhite";
+          string sColor;
+          WriteLine("<td style='background-color:#89989b'>");
+            WriteLine("<table>");
+              WriteLine("<tr><td><div>Farbe</div></td></tr>");
+
+              ! Color selectbox
+              WriteLine("<tr><td>");
+                WriteLine("<select onchange='alert(\"set color\");'>");
+                  foreach(sColor, listColor) {
+                    WriteLine("<option>"#sColor#"</option>");
+                  }
+                WriteLine("</select>");
+              WriteLine("</td></tr>");
+
+            WriteLine("</table>");
+          WriteLine("</td>");
+        }
+
+      !****************
       WriteLine("</tr>");
       if ( (rLevelReal != -1.0) && (user.UserEasyLinkMode() != true) ) {
         WriteLine("<tr>");

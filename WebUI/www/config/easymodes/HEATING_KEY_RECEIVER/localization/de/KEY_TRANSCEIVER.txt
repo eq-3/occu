@@ -1,6 +1,6 @@
 "comment" : "Siehe Gerätedoku",
 "descriptionA_1" : "<span class=\"translated\">" +
-"Mit einem kurzen Tastendruck wird die Temperatur <b>mindestens</b> f&uuml;r die festgelegte Zeit auf den gew&uuml;nschten Wert gesetzt. " +
+"Mit einem kurzen oder langen Tastendruck wird die Temperatur <b>mindestens</b> f&uuml;r die festgelegte Zeit auf den gew&uuml;nschten Wert gesetzt. " +
 "Befindet sich der Thermostat im Auto-Modus, werden Schaltbefehle durch das Wochenprogramm vor Ablauf der festgelegten Zeit ignoriert. " +
 "Befindet sich der Thermostat im Manu-Modus, bleibt die hier gesetzte Temperatur bis zur n&auml;chsten manuellen &Auml;nderung bestehen." +
 "</span><br/><br/>",

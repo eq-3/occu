@@ -5,6 +5,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/DIMMER_VIRTUAL_RECEIVER/getColorElement.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1) "\${dimmer_toggle}"
@@ -44,6 +45,7 @@ set PROFILE_1(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE)             0
 set PROFILE_1(SHORT_OFF_TIME_MODE)            0
+set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_1(UI_DESCRIPTION)  "Bei Empfang des Entscheidungswert wird der Dimmer in den entgegengesetzten Zustand versetzt."
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
@@ -76,6 +78,7 @@ set PROFILE_2(SHORT_ON_TIME_BASE)           {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR)         {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE)           0
 set PROFILE_2(SHORT_OFF_TIME_MODE)          0
+set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE)    1
 set PROFILE_2(UI_DESCRIPTION)  "Bei Empfang des Entscheidungswert wird der Dimmer ein-/ausgeschaltet."
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
@@ -108,6 +111,7 @@ set PROFILE_3(SHORT_ONDELAY_TIME_FACTOR)      {0 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE)             0
+set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_3(UI_DESCRIPTION)  "Bei Empfang des Entscheidungswert wird der Dimmer f&uuml;r eine bestimmte Zeit eingeschaltet."
 set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
@@ -141,6 +145,7 @@ set PROFILE_4(SHORT_ONDELAY_TIME_FACTOR)      {0 range 0 - 31}
 set PROFILE_4(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_4(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_4(SHORT_ON_TIME_MODE)             0
+set PROFILE_4(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_4(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_4(UI_DESCRIPTION)  "Bei Erkennung des &Auml;nderungssignals wird der Dimmer f&uuml;r eine bestimmte Zeit ausgeschaltet."
 set PROFILE_4(UI_TEMPLATE)    $PROFILE_4(UI_DESCRIPTION)
@@ -243,7 +248,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set decisionValues "
    {SHORT_COND_VALUE_HI {int $condTXDecisionAbove}}
    {SHORT_COND_VALUE_LO {int $condTXDecisionBelow}}"
-  puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValues]]"
+  catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValues]]"}
   set ps(SHORT_COND_VALUE_HI) $condTXDecisionAbove
   set ps(SHORT_COND_VALUE_LO) $condTXDecisionBelow
 
@@ -287,6 +292,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
 
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
@@ -336,6 +347,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
@@ -382,6 +399,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #4
@@ -414,6 +437,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

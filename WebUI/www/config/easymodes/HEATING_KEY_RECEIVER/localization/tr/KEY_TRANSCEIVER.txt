@@ -1,4 +1,4 @@
-"descriptionA_1" : "<span class=\"translated\">With a short button press the temperature will be set to the desired value <b>at least</b> for the set time. " +
+"descriptionA_1" : "<span class=\"translated\">With a short or long button press the temperature will be set to the desired value <b>at least</b> for the set time. " +
 "If the thermostat is in auto mode, the switching commands will be ignored by the weekly programme before the set time expires. " +
 "If the thermostat is in manu mode, the set temperature remains until the next manual changing." +
 "</span><br/><br/>",

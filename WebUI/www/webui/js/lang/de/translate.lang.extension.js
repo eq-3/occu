@@ -333,6 +333,8 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsSecurityMessagePerformSystemResetContent" : "Best&auml;tigen Sie hier, um den System-Reset durchzuf&uuml;hren.<br/><br>Die " + HMIdentifier.de.CCUShortName + " wird automatisch neu gestartet. Danach k&ouml;nnen Sie sich wieder anmelden.",
     "dialogPerformRebootTitle" : "Neustart der Zentrale",
     "dialogPerformRebootContent" : "Der Neustart wird jetzt durchgef&uuml;hrt. Sie k&ouml;nnen sich danach &uuml;ber die Schaltfl&auml;che unten neu anmelden.",
+    "dialogPerformShutdownTitle" : "Herunterfahren der Zentrale",
+    "dialogPerformShutdownContent" : "Die Zentrale wird jetzt heruntergefahren. Bitte warten Sie bis diese komplett heruntergefahren ist und trennen Sie sie erst dann von ihrer Stromquelle.",
     "dialogSetSecKeyRebootHead" : "Bitte geben Sie den Sicherheitsschl&uuml;ssel ein und f&uuml;hren Sie anschlie&szlig;end den Systemreset durch.",
     "dialogSetSecKeyRebootLbl" : "Sicherheitsschl&uuml;ssel: ",
     "dialogSetSecKeyRebootFalseTitle" : "System-Reset: Sicherheitsfehler",
@@ -512,6 +514,7 @@ jQuery.extend(true,langJSON, {
     "lblMinutes" : "Minuten",
     "lblErrorCheck" : "Fehlerpr%FCfung",
     "lblNoError" : "Kein Fehler",
+    "lblError" : "Fehler",
     "lblInfoStatusControlEnergyCounter" : "Energie-Z%E4hler " + HMIdentifier.de.CCUShortName,
     "lblInfoStatusControlDevice" : "Energie-Z%E4hler Ger%E4t",
     "lblInfoStatusControlVoltage" : "Spannung",
@@ -755,6 +758,12 @@ jQuery.extend(true,langJSON, {
     "optionNormalLength" : "Normale L&auml;nge",
     "optionFileLength" : "Dateil%E4nge",
     "optionSetLength" : "L&auml;nge angeben",
+    "optionPassageCounterDetectionLR" : "Durchgangsz%E4hlung beide Richtungen",
+    "optionPassageCounterDetectionL" : "Durchgangsz%E4hlung rechts nach links",
+    "optionPassageCounterDetectionR" : "Durchgangs%E4hlung links nach rechts",
+    "optionPassageCounterDeltaLR" : "Differenz der Durchg%E4nge links/rechts",
+    "optionPassageCounterDeltaL" : "Differenz der Durchg%E4nge links",
+    "optionPassageCounterDeltaR" : "Differenz der Durchg%E4nge rechts",
     "lblDeviceFwPerformUpdate" : "Das Update des Ger%E4tes wird durchgef%FChrt",
     "lblDeviceFwDeliverFwImage" : "Die Updatedatei wird zum Ger%E4t %FCbertragen",
     "lblGenericLinkPartner" : "Verkn%FCpfungspartner",
@@ -914,16 +923,6 @@ jQuery.extend(true,langJSON, {
     "invalidIP" : "Ung%FCltige IP-Adresse",
     "btnScanGateway" :  "Suche Gateway",
     "btnScanDevices" :  "Suche Ger%E4te",
-    "helpOsramLightifyToolTip" :
-      "<h1>Bitte beachten Sie:</h1>" +
-      "<ul>"+
-        "<li>Es darf nur ein OSRAM-Gateway im Netzwerk vorhanden sein.</li>" +
-        "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
-        "<li>Damit das OSRAM-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
-          "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
-        "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
-          "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
-      "</ul>",
     "timeoutAddNewDevices" : "Timeout addNewDevices",
     "unknownError" : "Unbekannter Fehler",
     "helpOsramLightify" : "Hier stellen Sie die Kopplung zwischen "+HMIdentifier.de.CCUShortName+" und <b>OSRAM-Lightify</b> her. Mehr Informationen finden Sie hier:",
@@ -972,6 +971,65 @@ jQuery.extend(true,langJSON, {
     "powerSupply" : "Spannungsversorgung",
     "operationModeBattery" : "Batteriebetrieb",
     "operationModeMains" : "Netzbetrieb",
+
+    "lblCurPassageDetectionRL" : "Rechts nach links",
+    "lblCurPassageDetectionLR" : "Links nach rechts",
+    "lblLastPassageDetectionRL" : "Rechts nach links",
+    "lblLastPassageDetectionLR" : "Links nach rechts",
+    "identifiedPassage" : "Erkannter Durchgang",
+    "lastIdentifiedPassage" : "Vorheriger Durchgang",
+    "capturedPassageLeft" : "Erfasste Durchg%E4nge<br/>links nach rechts",
+    "capturedPassageRight" : "Erfasste Durchg%E4nge<br/>rechts nach links",
+    "overflowLeftPassage" : "%DCberlauf linker Durchgangszaehler",
+    "overflowRightPassage" : "%DCberlauf rechter Durchgangszaehler",
+    "stateMotionFalse" :                       "Keine Bewegung erkannt",
+    "stateMotionTrue" :                        "Bewegung erkannt",
+    "motionDetectionFalse" :                   "Bewegungserkennung nicht aktiv",
+    "motionDetectionTrue" :                    "Bewegungserkennung aktiv",
+    "btnMotionDetectionFalse" :                "Bewegungserkennung einschalten",
+    "btnMotionDetectionTrue" :                 "Bewegungserkennung ausschalten",
+    "btnResetMotion" :                         "Reset Status",
+    "lblTimeDelay" : "Zeitverz%F6gerung",
+    "helpPartyModeWithinPrograms" : "Wenn Sie den Urlaubsmodus w%E4hlen, m%FCssen Sie zus%E4tzlich folgende Parameter setzen:",
+    "dialogSettingsCMHintSoftwareUpdate3a" : "Bringen Sie eventuell installierte Zusatzmodule vor dem Update auf die aktuelle Version!",
+    "lblToday" : "Heute",
+    "lblYesterday" : "Gestern",
+    "btnResetSunshineDuration" : "Reset Sonnenscheindauer",
+    "btnResetRainCounter" : "Reset Regenz%E4hler",
+
+    "helpOsramLightifyToolTip" :
+      "<h1>Bitte beachten Sie:</h1>" +
+      "<ul>"+
+        "<li>Es darf nur ein OSRAM-Gateway im Netzwerk vorhanden sein.</li>" +
+        "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
+        "<li>Damit das OSRAM-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
+          "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
+        "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
+          "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
+      "</ul>",
+
+    "helpPhilipsHueToolTip" :
+      "<h1>Bitte beachten Sie:</h1>" +
+      "<ul>"+
+        "<li>Die Philips Hue Kopplung hat Beta-Status.</li>" +
+        "<li>Das Gateway wird unter Zuhilfenahme eines Internetdienstens von Philips gefunden (NUPNP).<br/>" +
+           "Die "+HMIdentifier.de.CCUShortName+" und das Philips-Gateway ben%F6tigen daher Zugang zum Internet.</li>" +
+        "<li>Es darf nur ein Philips-Gateway im Netzwerk vorhanden sein.</li>" +
+        "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
+        "<li>Damit das Philips-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
+          "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
+        "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
+          "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
+        "<li>Es wird nur die neue Philips Hue Bridge (quadratisches Modell) unterst&uuml;tzt.</li>" +
+      "</ul>",
+
+    "teachInUserMessage" : "Zum Anlernen bet%E4tigen Sie bitte den Anlernknopf des Gateways.",
+
+    "lblPassageDetectorNoParams" : "Es sind keine Parameter vorhanden.<br/>Zur Statusanzeige bitte Kanal 2 verwenden.",
+
+    "lblNormal" : "Normal",
+    "lblOverflow" : "%DCberlauf",
+    "lblUnderflow" : "Unterlauf",
 
     "theEnd" : ""
   }

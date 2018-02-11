@@ -174,22 +174,22 @@ proc getDelayShort {prn pref specialElement} {
               append s "break;"
             append s "case 8:"
               # 1 min
-              append s "baseElem.val(4);"
+              append s "baseElem.val(2);"
               append s "factorElem.val(1);"
               append s "break;"
             append s "case 9:"
               # 2 min
-              append s "baseElem.val(4);"
+              append s "baseElem.val(2);"
               append s "factorElem.val(2);"
               append s "break;"
             append s "case 10:"
               # 15 min
-              append s "baseElem.val(4);"
+              append s "baseElem.val(2);"
               append s "factorElem.val(15);"
               append s "break;"
             append s "case 11:"
               # 1 hour
-              append s "baseElem.val(7);"
+              append s "baseElem.val(3);"
               append s "factorElem.val(1);"
               append s "break;"
             append s "case 12:"

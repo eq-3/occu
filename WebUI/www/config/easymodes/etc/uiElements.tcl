@@ -215,6 +215,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "DELAY_COMPENSATION" {set x 450; set y 100}
    "DURATION_5MIN" {set x 500; set y 200}
    "ENABLE_ROUTING" {set x 500; set y 120}
+   "EVENT_FILTER_NUMBER_motionDetect" {set x 400; set y 60}
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "PERMANENT_FULL_RX" {set x 500; set y 160}

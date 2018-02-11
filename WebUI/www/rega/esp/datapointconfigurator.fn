@@ -34,11 +34,6 @@ function ::dcCreateTable()
     Call("/esp/datapointconfigurator.fn::StringCut()");
   
     WriteLine('<tr>');
-      WriteLine('<td class="CLASS02506"></td>');
-      WriteLine('<td class="CLASS02506"></td>');
-    WriteLine('</tr>');
-  
-    WriteLine('<tr>');
       WriteLine('<td class="CLASS02507">');
       WriteLine('<div class="CLASS02509">'#sName#'</div></td>');
       WriteLine('<td id="dpc'#cId#'" class="CLASS02508">');
@@ -46,10 +41,6 @@ function ::dcCreateTable()
       WriteLine('</td>');
     WriteLine('</tr>');
   
-    WriteLine('<tr>');
-      WriteLine('<td class="CLASS02506"></td>');
-      WriteLine('<td class="CLASS02506"></td>');
-    WriteLine('</tr>');
   }
   WriteLine('</table>');
 }
@@ -88,7 +79,7 @@ function ::dcCreate()
     if( bSysVar )
     {
       WriteLine( '<table id="ctrl'#chnId#'tbl" cellspacing="0" class="ctrlTbl CLASS02510" border="0">' );
-      WriteLine( '<tr align="center">' );
+      WriteLine( '<tr>' );
       Call( "/esp/datapointconfigurator.fn::CreateSysVar()" );
       WriteLine( '</tr>' );
       WriteLine( '</table>' );
@@ -103,6 +94,7 @@ function ::dcCreate()
     var CN_BLIND           = "BLIND.";
     var CN_BLIND_TRANSMITTER      = "BLIND_TRANSMITTER.";
     var CN_BLIND_VIRTUAL_RECEIVER = "BLIND_VIRTUAL_RECEIVER.";
+    var CN_BRIGHTNESS_TRANSMITTER = "BRIGHTNESS_TRANSMITTER.";
     var CN_BTN_SHORT_ONLY  = "BTN_SHORT_ONLY.";
     var CN_BUTTON          = "BUTTON.";
     var CN_CAPACITIVE_FILLING_SENSOR  = "CAPACITIVE_FILLING_LEVEL_SENSOR.";
@@ -133,9 +125,9 @@ function ::dcCreate()
     var CN_POWERMETER_IGL  = "POWERMETER_IGL.";
     var CN_POWERMETER_PSM  = "POWERMETER_PSM.";
     var CN_RC19_DISPLAY    = "RC19_DISPLAY.";
+    var CN_RGB_COLOR        = "RGB_COLOR.";
     var CN_RGBW_AUTOMATIC  = "RGBW_AUTOMATIC.";
     var CN_RGBW_COLOR       = "RGBW_COLOR.";
-    var CN_RGB_COLOR        = "RGB_COLOR.";
     var CN_RHS             = "RHS.";
     var CN_SHUTTER_TRANSMITTER      = "SHUTTER_TRANSMITTER.";
     var CN_SHUTTER_VIRTUAL_RECEIVER = "SHUTTER_VIRTUAL_RECEIVER.";
@@ -143,30 +135,31 @@ function ::dcCreate()
     var CN_SWITCH          = "SWITCH.";
     var CN_SWITCH_TRANSM   = "SWITCH_TRANSMITTER.";
     var CN_THERMO          = "TEMP.";
+    var CN_WATER_DETECTION_TRANSMITTER = "WATER_DETECTION_TRANSMITTER.";
     var CN_WEATHER_TRANSMIT = "WEATHER_TRANSMIT.";
     var CN_WEEKLY_PROFILE   = "WEEK_PROFILE.";
-    var CN_WINDOW          = "WINDOW.";
     var CN_WIN_SC          = "WIN_SC.";
     var CN_WIN_SC_SECURE   = "WIN_SC_SECURE.";
     var CN_WIN_SC_SENSOR   = "WIN_SC_SENSOR.";
+    var CN_WINDOW          = "WINDOW.";
 
     var CN_EVENT_INTERFACE = "EVENT_INTERFACE.";
     var CN_NOT_ACTIVE = "CHANNEL_NOT_ACTIVE";
 
     var isInvisible = false;
     var isKnownControl = false;
-    
+
     ctrlReqUpdate = true;
     boolean bUnknown = true;
     string sLastControlName = "";
     string sControlName = "";
     boolean bSV = false;
     boolean bIsControl = false;
-    
+
     ictCH = cObj.ChannelType();
     WriteLine("<table id='ctrl"#chnId#"tbl' class='ctrlTbl CLASS02520' border='0' >");
     WriteLine("<tr>");
-    
+
     string sE;
     string oEName;
 
@@ -185,7 +178,7 @@ function ::dcCreate()
           {
             ! IGNORE NONE
           }
-        
+
           !# SWITCH
           bIsControl = ( sControlName.Find(CN_SWITCH) > -1 );
           if( bIsControl && (sLastControlName != CN_SWITCH) )
@@ -217,10 +210,18 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_DIMMER) > -1 );
           if( bIsControl && (sLastControlName!=CN_DIMMER) )
           {
-            WriteLine( "<script>conInfo('Control DIMMER found.');</script>" );
+            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_DIMMER;
-            Call("/esp/controls/dimmer.fn::CreateDimmingActuator()");
+            if (ch.Label().Substr(0,12) != "VIR-LG-ONOFF") {
+              WriteLine( "<script>conInfo('Control DIMMER found.');</script>" );
+              Call("/esp/controls/dimmer.fn::CreateDimmingActuator()");
+            } else {
+              ! This is because the device VIR_LG_ONOFF claims it is a DIMMER instead of a SWITCH
+              WriteLine( "<script>conInfo('Control VIR_LG_ONOFF (OSRAM, PHILIPS.....) found.');</script>" );
+              sLastControlName = CN_SWITCH;
+              Call("/esp/controls/switch.fn::CreateVIR-LG-ONOFF_Actuator()");
+            }
           }
 
           !# CN_DUAL_WHITE_BRIGHTNESS
@@ -312,7 +313,7 @@ function ::dcCreate()
             sLastControlName = CN_WINDOW;
             Call("/esp/controls/window.fn::CreateWinMatic()");
           }
-          
+
           !# LOCK
           bIsControl = ( sControlName.Find(CN_LOCK) > -1 );
           if( bIsControl && (sLastControlName!=CN_LOCK) )
@@ -322,7 +323,7 @@ function ::dcCreate()
             sLastControlName = CN_LOCK;
             Call("/esp/controls/lock.fn::CreateKeyMatic()");
           }
- 
+
           !# BTN
           bIsControl = ( sControlName.Find(CN_BTN_SHORT_ONLY) > -1 );
           if( bIsControl && (sLastControlName!=CN_BTN_SHORT_ONLY) )
@@ -332,7 +333,7 @@ function ::dcCreate()
             sLastControlName = CN_BTN_SHORT_ONLY;
             Call("/esp/controls/button.fn::CreateKeyShortOnly()");
           }
-         
+
           !# BUTTON
           bIsControl = ( sControlName.Find(CN_BUTTON) > -1 );
           if( bIsControl && (sLastControlName!=CN_BUTTON) )
@@ -388,7 +389,7 @@ function ::dcCreate()
             sLastControlName = CN_DOOR_SENSOR;
             Call("/esp/controls/door_window_contact.fn::CreateDoorWindowContact()");
           }
-          
+
           !# RHS (Rotary Handle Sensor - Fensterdrehgriffkontakt)
           bIsControl = ( sControlName.Find(CN_RHS) > -1 );
           if( bIsControl && (sLastControlName!=CN_RHS) )
@@ -398,7 +399,7 @@ function ::dcCreate()
             sLastControlName = CN_RHS;
             Call("/esp/controls/rhs.fn::CreateWndRotSensor()");
           }
-          
+
           !# THERMOSTAT
           bIsControl = ( sControlName.Find(CN_THERMO) > -1 );
           if( bIsControl && (sLastControlName!=CN_THERMO) && (sControlName.Find('COLORTEMP') == -1))
@@ -428,7 +429,7 @@ function ::dcCreate()
             Call("/esp/controls/digitalstate.fn::CreateDigitalState()");
           }
 
-          !# CAPACITIVE FILLING LEVEL SENSOR 
+          !# CAPACITIVE FILLING LEVEL SENSOR
           bIsControl = ( sControlName.Find(CN_CAPACITIVE_FILLING_SENSOR) > -1 );
           if( bIsControl && (sLastControlName!=CN_CAPACITIVE_FILLING_SENSOR) )
           {
@@ -523,7 +524,7 @@ function ::dcCreate()
             sLastControlName = CN_POWERMETER_IGL;
             Call("/esp/controls/powermeter.fn::CreatePowermeterIGLControl()");
           }
-          
+
           !# POWERMETER_PSM
           bIsControl = ( sControlName.Find(CN_POWERMETER_PSM) > -1 );
           if( bIsControl && (sLastControlName != CN_POWERMETER_PSM) )
@@ -722,6 +723,26 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_WEATHER_TRANSMIT;
             Call("/esp/controls/weather_sensor.fn::CreateWeatherSensor()");
+          }
+
+          !# CN_BRIGHTNESS_TRANSMITTER - HmIP
+          bIsControl = ( sControlName.Find(CN_BRIGHTNESS_TRANSMITTER) > -1 );
+          if( bIsControl && (sLastControlName != CN_BRIGHTNESS_TRANSMITTER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_BRIGHTNESS_TRANSMITTER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_BRIGHTNESS_TRANSMITTER;
+            Call("/esp/controls/brightness_transmitter.fn::CreateBrightnessTransmitter()");
+          }
+
+          !# CN_WATER_DETECTION_TRANSMITTER - HmIP
+          bIsControl = ( sControlName.Find(CN_WATER_DETECTION_TRANSMITTER) > -1 );
+          if( bIsControl && (sLastControlName != CN_WATER_DETECTION_TRANSMITTER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_WATER_DETECTION_TRANSMITTER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_WATER_DETECTION_TRANSMITTER;
+            Call("/esp/controls/water_detection_transmitter.fn::CreateWaterDetectionTransmitter()");
           }
 
           !# EVENT_INTERFACE
@@ -991,9 +1012,6 @@ function ::CreateUnknown()
           {
             value = value * 100;
             sValueUnit = "%";
-          }
-          if( sValueUnit == "%" )
-          {
             sSpace = "";
           }
 
@@ -1068,8 +1086,13 @@ function ::CreateUnknown()
           {
             WriteLine( '<td>' );
 
-              WriteLine( '<div class="ControlBtnInfo CLASS02532" style="height:2.5em;" >' );
-                WriteLine( '<span class="_CLASS02533"><span class="CLASS02534 j_translate" style="float: none;">'#sTitle#'</span>' );
+              WriteLine( '<div class="ControlBtnInfo CLASS02532">' );
+              if(sTitle == "") {
+                WriteLine( '<span class="_CLASS02533"><span class="CLASS02534 j_translate">'#sTitle#'</span>' );
+                }
+                else {
+                WriteLine( '<span class="_CLASS02533"><span class="CLASS02534 j_translate">'#sTitle#':</span>' );
+                }
                 boolean tbRead =  ( ( oDP.Operations() & OPERATION_READ ) != 0 );
                 boolean tbEvent = ( ( oDP.Operations() & OPERATION_EVENT ) != 0 );
                 boolean tbWrite = ( ( oDP.Operations() & OPERATION_WRITE ) != 0 );
@@ -1088,7 +1111,7 @@ function ::CreateUnknown()
                   {
                     Call("/esp/datapointconfigurator.fn::ConvWindDir()");
                   }
-                  WriteLine(sValueh#" "#sValue#""#sValueUnit );
+                  WriteLine(sValueh#" "#sValue#sSpace#sValueUnit );
                 }
                 else
                 {
@@ -1214,11 +1237,8 @@ function ::ConvWindDir() {
 
 function ::CreateSysVar()
 {
-  string sName = "";
   WriteLine( '<td class="CLASS02537">' );
     WriteLine( '<div class="ControlBtnInfo CLASS02538" >' );
-      sName = cObj.Name();
-      WriteLine( '<span class="CLASS02534">'#sName#':  </span>' );
       
       string sSysVarVal = '';
       object cObjTmp = cObj;
@@ -1247,7 +1267,7 @@ function ::CreateSysVars()
 !        if( !(i%2) ) { WriteLine( '<tr>' ); }
         WriteLine( '<td class="CLASS02540">' );
           WriteLine( '<div class="ControlBtnInfo CLASS02538" >' );
-            WriteLine( '<span class="CLASS02534">'#oSV.Name()#':  </span>' );
+            WriteLine( '<span class="CLASS02534">'#oSV.Name()#':</span>' );
             
             string sSysVarVal = "";
             object cObjTmp = oSV;

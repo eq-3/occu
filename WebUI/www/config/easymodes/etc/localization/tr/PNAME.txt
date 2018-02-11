@@ -32,6 +32,7 @@
 "ONDELAY_TIME" : "<span class=\"translated\">Acma gecikmesi</span>",
 "ON_AIRING" : "<span class=\"translated\">'da havalandirma</span>",
 "ON_LEVEL" : "<span class=\"translated\">\"acik\" durumundaki seviye</span>",
+"OUTPUT_BEHAVIOUR" : "<span class=\"translated\">Color</span>",
 "ON_THRESHOLD" : "<span class=\"translated\">'da acma</span>",
 "ON_TIME" : "<span class=\"translated\">(\"acik\" durumundaki bekleme s&uuml;resi) acik kalma s&uuml;resi</span>",
 "ON_TIME_MODE" : "<span class=\"translated\">Bekleme s&uuml;resi t&uuml;r&uuml;</span>",

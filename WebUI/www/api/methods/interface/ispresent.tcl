@@ -1,6 +1,6 @@
 ##
-# BidCosRF.isPresent
-# Prüft, ob der BidCos-RF-Dienst (rfd) läuft.
+# Interface.isPresent
+# Prüft, ob der gewählte Interface-Dienst läuft.
 #
 # Prameter:
 #   interface: [string] Bezeichnung der Schnittstelle

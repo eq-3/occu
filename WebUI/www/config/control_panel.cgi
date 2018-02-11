@@ -182,10 +182,9 @@ set COL_COUNT 4
 set i 1
 
 if { "[read_var /etc/config/tweaks CP_DEVCONFIG]" != "" } {
-  puts "<!-- devconfig -->"
-  puts "<td>"
+  puts "<td><div class=\"cpButton\">"
   puts "<div class=\"StdTableBtn CLASS21701\" onclick=\"window.open('/tools/devconfig.cgi?sid=$sid');\">devconfig</div>"
-  puts "</td><td class=\"StdTableBtnHelp\"></td>"
+  puts "<div class=\"StdTableBtnHelp\"></div></td>"
   incr i
 }
 

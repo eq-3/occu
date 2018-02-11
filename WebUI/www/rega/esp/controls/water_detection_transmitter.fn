@@ -1,0 +1,52 @@
+function ::CreateWaterDetectionTransmitter()
+{
+
+  object oWaterDetected = cObj.DPByControl("WATER_DETECTION_TRANSMITTER.WATERLEVEL_DETECTED");
+  object oMoistureDetected = cObj.DPByControl("WATER_DETECTION_TRANSMITTER.MOISTURE_DETECTED");
+
+  string msgWater = "${stringTableStateUnknown}";
+  string msgMoisture = "${stringTableStateUnknown}";
+  
+  if (oWaterDetected) {
+    if (oWaterDetected.Value()) {
+      msgWater = "${stringTableWaterLevelDetectedTrue}";
+    } else {
+      msgWater = "${stringTableWaterLevelDetectedFalse}";
+    }
+  }
+
+  if (oMoistureDetected) {
+    if (oMoistureDetected.Value()) {
+      msgMoisture = "${stringTableMoistureDetectedTrue}";
+    } else {
+      msgMoisture = "${stringTableMoistureDetectedFalse}";
+    }
+  }
+
+  WriteLine("<td>");
+
+    WriteLine("<table>");
+      WriteLine("<tr>");
+
+        WriteLine("<td>");
+          WriteLine("<table id='"#chnId#"waterDetect' class='ControlBtnInfo minWidth230px'>");
+            WriteLine("<tr>");
+              WriteLine("<td align='center'>"#msgWater#"</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          WriteLine("<table id='"#chnId#"moistureDetect' class='ControlBtnInfo minWidth230px'>");
+            WriteLine("<tr>");
+              WriteLine("<td align='center'>"#msgMoisture#"</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+      WriteLine("</tr>");
+    WriteLine("</table>");
+
+  WriteLine("</td>");
+
+}

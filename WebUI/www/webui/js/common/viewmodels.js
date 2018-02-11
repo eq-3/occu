@@ -3,15 +3,19 @@ virtualDevicePrefix = "INT";
 //Class to represent a device
 function GroupDevice(id, serialNumber, type)
 {
+  conInfo(id + " " + serialNumber + " " + type);
   var self = this;
   self.id = id;
-  self.serialNumber = serialNumber;
-  self.device = DeviceList.getDeviceByAddress(serialNumber);
+  self.realSerialNumber = serialNumber.split(":")[0];  
+  conInfo(self.realSerialNumber);
+  self.serialNumber = serialNumber
+  self.device = DeviceList.getDeviceByAddress(self.realSerialNumber);
+  conInfo(self.device);
   self.type = type;
+  self.devType = translateKey(type);
   if(typeof self.device == "undefined")
   {
-    self.name = type +" "+ serialNumber;
-    
+    self.name = type +" "+ self.serialNumber;    
   }
   else
   {
@@ -20,8 +24,16 @@ function GroupDevice(id, serialNumber, type)
   
   self.getConfigPending = function()
   {
-    var deviceParamSet = homematic('Interface.getParamset', {"interface": "BidCos-RF", "address" : self.serialNumber+":0", "paramsetKey" : "VALUES"});
-    if(deviceParamSet.CONFIG_PENDING === '1')
+	var interfaceId = "BidCos-RF";
+	if(!self.type.startsWith("HM-"))
+	{
+		interfaceId = "HmIP-RF";
+	}
+	
+  var deviceParamSet = homematic('Interface.getParamset', {"interface": interfaceId, "address" : self.realSerialNumber+":0", "paramsetKey" : "VALUES"});
+    // conInfo(deviceParamSet);
+    // handle null/undefined like no config pending
+	if(deviceParamSet != typeof 'undefined' && deviceParamSet != null && (deviceParamSet.CONFIG_PENDING === '1' || deviceParamSet.CONFIG_PENDING === true))
     {
       return true;
     }
@@ -38,14 +50,20 @@ function GroupDevice(id, serialNumber, type)
     }
     else
     {
-      return DEV_getImagePath(this.type, 50);
+      //return DEV_getImagePath(this.type, 50);
+      if (typeof self.device != "undefined") {
+        return DEV_getImagePath(self.device.deviceType.id, 50);
+      }
     }
         
     }, this);
   
   self.showDevicePicture = function(groupdevice, mouseoverevent)
   {
-    picDivShow(jg_250, self.type, 250, -1, mouseoverevent.currentTarget);
+    //picDivShow(jg_250, self.type, 250, -1, mouseoverevent.currentTarget);
+    if (typeof self.device != "undefined") {
+      picDivShow(jg_250, self.device.deviceType.id, 250, -1, mouseoverevent.currentTarget);
+    }
   };
   
   self.hideDevicePicture = function()

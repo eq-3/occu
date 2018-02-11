@@ -152,18 +152,20 @@ self.CC_save_Temp = function(prgName)
 {
   var prg = (prgName != undefined && prgName != null) ? prgName : "";
   var unit_cf = 0;
-	//1
-  try {
-	  // C or F - the new heating control supports no F
-    unit_cf = document.getElementById('separate_CHANNEL_2_2').selectedIndex ;//2
-  } catch (e) {}
 
-	//3
+  if ($F("global_iface") == "BidCos-RF") {
+    try {
+      // C or F - the new heating control supports no F
+      unit_cf = document.getElementById('separate_CHANNEL_2_2').selectedIndex;//2
+    } catch (e) {
+    }
+  }
+
 	for (loop = 0; loop <= (document.getElementsByName(prg+'temp_tmp').length -1); loop++)
 	{
-		if (unit_cf == 0) //4
+		if (unit_cf == 0)
 			document.getElementsByName(prg + 'temp')[loop].value = parseFloat(document.getElementsByName(prg +'temp_tmp')[loop].value).toFixed(1);
-		else  //5  
+		else
 			document.getElementsByName(prg+'temp')[loop].value = parseFloat((document.getElementsByName(prg+'temp_tmp')[loop].value -32) * 5 / 9 ).toFixed(1);
 	}
 };

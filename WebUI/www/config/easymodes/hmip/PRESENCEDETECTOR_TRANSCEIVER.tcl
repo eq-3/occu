@@ -3,6 +3,7 @@
 source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
 set PROFILE_PNAME(A) "\${stringTableEventFilterNumber}"
 set PROFILE_PNAME(B) "\${stringTableEventFilterPeriod}"
@@ -15,6 +16,10 @@ set PROFILE_PNAME(I) "\${stringTableMotionDetectorMotionActiveTime}"
 
 set PROFILES_MAP(0)  "Experte"
 set PROFILES_MAP(1)  "TheOneAndOnlyEasyMode"
+
+proc getHelp {topic x y} {
+  return "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
+}
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -43,7 +48,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set xmlCatchError [catch {set brightness [format "%.0f" [xmlrpc $iface_url($iface) getValue [list string $address] [list string ILLUMINATION]]]}]
 
   set hlpBoxWidth 450
-  set hlpBoxHeight 160
+  set hlpBoxHeight 80
 
 ###
 
@@ -51,7 +56,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(A)</span></td><td id=\"Hm\">\${mdTrigger}"
     array_clear options
 
-    set pref 1
+    set prn 1
 
     for {set i 1} {$i <= 15} {incr i} {
       set options($i) $i
@@ -59,7 +64,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_NUMBER separate_${special_input_id}_1 ps EVENT_FILTER_NUMBER "onchange=\"MD_init(\'separate_${special_input_id}_1\', 1, 15)\"" ]
     append HTML_PARAMS(separate_1) "<span class=\"event_filter_number\"> Sensor-Impulsen innerhalb <span>"
-    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$pref\', 1, 15)</script>"
+    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 1, 15)</script>"
 
     array_clear options
     set options(0.5) "0.5"
@@ -78,11 +83,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(7.0) "7.0"
     set options(7.5) "7.5"
 
-    incr pref; # 2
-    append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_PERIOD separate_${special_input_id}_$pref ps EVENT_FILTER_PERIOD]
+    incr prn; # 2
+    append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_PERIOD separate_${special_input_id}_$prn ps EVENT_FILTER_PERIOD]
     append HTML_PARAMS(separate_1) "<span class=\"event_filter_number\">&nbsp;Sekunden</span></td></tr>"
 
-     incr pref; #3
+     incr prn; #3
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(C)</span></td><td>"
     array_clear options
     set options(0)  "15$s"
@@ -93,19 +98,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(5)  "8$m"
     set options(6)  "16$m"
 
-    append HTML_PARAMS(separate_1) [get_ComboBox options MIN_INTERVAL separate_${special_input_id}_$pref ps MIN_INTERVAL ]
+    append HTML_PARAMS(separate_1) "[get_ComboBox options MIN_INTERVAL separate_${special_input_id}_$prn ps MIN_INTERVAL ]&nbsp;[getHelp MIN_INTERVAL_PRESENCE $hlpBoxWidth $hlpBoxHeight]"
     append HTML_PARAMS(separate_1) "</td></tr>"
 
-    incr pref; #4
+    incr prn; #4
     append HTML_PARAMS(separate_1) "<tr><td colspan=\"2\"><span>$PROFILE_PNAME(F)</span>"
     if {$capture_within_interval == 1} {
-      append HTML_PARAMS(separate_1) "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$pref\" name=\"CAPTURE_WITHIN_INTERVAL\" checked=\"checked\"></td>"
+      append HTML_PARAMS(separate_1) "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=\"CAPTURE_WITHIN_INTERVAL\" checked=\"checked\"></td>"
     } else {
-      append HTML_PARAMS(separate_1) "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$pref\" name=\"CAPTURE_WITHIN_INTERVAL\"></td>"
+      append HTML_PARAMS(separate_1) "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=\"CAPTURE_WITHIN_INTERVAL\"></td>"
     }
 
 
-    incr pref; #5
+    incr prn; #5
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(I)</span></td><td>"
     array_clear options
     set options(0)  "15$s"
@@ -117,11 +122,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(6)  "16$m"
     set options(7)  "32$m"
 
-    append HTML_PARAMS(separate_1) [get_ComboBox options MOTION_ACTIVE_TIME separate_${special_input_id}_$pref ps MOTION_ACTIVE_TIME ]
+    append HTML_PARAMS(separate_1) [get_ComboBox options MOTION_ACTIVE_TIME separate_${special_input_id}_$prn ps MOTION_ACTIVE_TIME ]
     append HTML_PARAMS(separate_1) "</td></tr>"
 
 
-    incr pref; #6
+    incr prn; #6
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(D)</span></td><td>"
     array_clear  options
 
@@ -129,11 +134,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       set options($i) [expr $i + 1]
     }
 
-    append HTML_PARAMS(separate_1) [get_ComboBox options BRIGHTNESS_FILTER separate_${special_input_id}_$pref ps BRIGHTNESS_FILTER "onchange=\"MD_init(\'separate_${special_input_id}_$pref\', 0, 15)\""]
+    append HTML_PARAMS(separate_1) [get_ComboBox options BRIGHTNESS_FILTER separate_${special_input_id}_$prn ps BRIGHTNESS_FILTER "onchange=\"MD_init(\'separate_${special_input_id}_$prn\', 0, 15)\""]
     append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
-    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$pref\', 0, 15)</script>"
+    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 0, 15)</script>"
 
-    incr pref; #7
+    incr prn; #7
     set param PIR_OPERATION_MODE
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td><span class=\"j_translate\">$PROFILE_PNAME(G)</span></td>"
@@ -141,12 +146,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         array_clear options
         set options(0)  "\${pirOperationModeNormal}"
         set options(1)  "\${pirOperationModeEco}"
-        # append HTML_PARAMS(separate_1) [get_ComboBox options $param separate_${special_input_id}_$pref ps $param "onchange=\"showEcoModeElement(this);\""] [getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]
-        append HTML_PARAMS(separate_1) [get_ComboBox options $param separate_${special_input_id}_$pref ps $param "onchange=\"showEcoModeElement(this);\""]
+        # append HTML_PARAMS(separate_1) [get_ComboBox options $param separate_${special_input_id}_$prn ps $param "onchange=\"showEcoModeElement(this);\""] [getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]
+        append HTML_PARAMS(separate_1) [get_ComboBox options $param separate_${special_input_id}_$prn ps $param "onchange=\"showEcoModeElement(this);\""]
       append HTML_PARAMS(separate_1) "</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
-    incr pref; #8
+    incr prn; #8
 set comment {
     set param COND_TX_THRESHOLD_LO
     append HTML_PARAMS(separate_1) "<tr id=\"txThresholdLo\" class=\"hidden\">"
@@ -154,7 +159,7 @@ set comment {
         append HTML_PARAMS(separate_1) "<span class=\"j_translate\">$PROFILE_PNAME(H)</span>"
       append HTML_PARAMS(separate_1) "</td>"
       append HTML_PARAMS(separate_1) "<td>"
-        append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $pref]&nbsp;[getMinMaxValueDescr $param]"
+        append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]"
 }
 
     set param COND_TX_THRESHOLD_LO
@@ -169,14 +174,14 @@ set comment {
         set minValue [format {%1.0f} $param_descr(MIN)]
         set maxValue [expr [format {%1.0f} $param_descr(MAX)] / 10]
 
-        append HTML_PARAMS(separate_1) "<input id=\"_COND_TX_THRESHOLD_LO\_$pref\" size=\"5\" onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1); setCondLoValue($pref,this.value);\" >&nbsp;($minValue - $maxValue)"
-        append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $pref class=\"hidden\"]"
-        append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">window.setTimeout(function()\{jQuery(\"#_COND_TX_THRESHOLD_LO\_$pref\").val(parseInt($ps($param))/ 10);\},200);</script>"
+        append HTML_PARAMS(separate_1) "<input id=\"_COND_TX_THRESHOLD_LO\_$prn\" size=\"5\" onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1); setCondLoValue($prn,this.value);\" >&nbsp;($minValue - $maxValue)"
+        append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
+        append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">window.setTimeout(function()\{jQuery(\"#_COND_TX_THRESHOLD_LO\_$prn\").val(parseInt($ps($param))/ 10);\},200);</script>"
 
 
         if {! $xmlCatchError} {
           set btnTxt "\${btnTakeCurrentBrightness}&nbsp;($brightness)"
-          append HTML_PARAMS(separate_1) "[getButton getBrightness \"btnTakeCurrentBrightness\" setBrightness($pref);]"
+          append HTML_PARAMS(separate_1) "[getButton getBrightness \"btnTakeCurrentBrightness\" setBrightness($prn);]"
           append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
             append HTML_PARAMS(separate_1) "var elem = jQuery(\"#getBrightness\");"
             append HTML_PARAMS(separate_1) "if (elem) elem.val(elem.val() + \" ($brightness)\");"
@@ -189,19 +194,19 @@ set comment {
 
     set param ATC_MODE
     if { ! [catch {set tmp $ps($param)}]  } {
-      incr pref
+      incr prn
       append HTML_PARAMS(separate_1) "<tr>"
         array_clear options
         set options(0) "\${optionInactiv}"
         set options(1) "\${optionActiv}"
         append HTML_PARAMS(separate_1) "<td>\${stringTableATCMode}</td>"
-        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_${special_input_id}_$pref ps $param onchange=\"setATCAdatptionInterval()\"]</td>"
+        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param onchange=\"setATCAdatptionInterval()\"]</td>"
       append HTML_PARAMS(separate_1) "</tr>"
     }
 
     set param ATC_ADAPTION_INTERVAL
     if { ! [catch {set tmp $ps($param)}]  } {
-      incr pref
+      incr prn
       append HTML_PARAMS(separate_1) "<tr>"
         array_clear options
         set options(0) "\${optionUnit15M}"
@@ -209,12 +214,12 @@ set comment {
         set options(2) "\${optionUnit60M}"
         set options(3) "\${optionUnit120M}"
         append HTML_PARAMS(separate_1) "<td name=\"paramATCAdaptionInterval\" class=\"hidden\">\${stringTableATCAdaptionInterval}</td>"
-        append HTML_PARAMS(separate_1) "<td name=\"paramATCAdaptionInterval\" class=\"hidden\">[get_ComboBox options $param separate_${special_input_id}_$pref ps $param]</td>"
+        append HTML_PARAMS(separate_1) "<td name=\"paramATCAdaptionInterval\" class=\"hidden\">[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]</td>"
       append HTML_PARAMS(separate_1) "</tr>"
 
       set param PIR_SENSITIVITY
       if { ! [catch {set tmp $ps($param)}]  } {
-        incr pref
+        incr prn
         append HTML_PARAMS(separate_1) "<tr>"
           append HTML_PARAMS(separate_1) "<td>\${stringTableSensorSensivity}</td>"
           array_clear options
@@ -229,9 +234,11 @@ set comment {
           set options(25) "90%" ; # 25 is the default
           set options(10) "100%"
 
-          append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param separate_${special_input_id}_$pref ps $param]</td>"
+          append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]</td>"
         append HTML_PARAMS(separate_1) "</tr>"
       }
+
+      append HTML_PARAMS(separate_1) "[getAlarmPanel ps]"
 
       append HTML_PARAMS(separate_1) "[getHorizontalLine "name=\"paramATCAdaptionInterval\" class=\"hidden\""]"
 
@@ -272,18 +279,18 @@ set comment {
     append HTML_PARAMS(separate_1) "\};"
 
 set comment {
-    append HTML_PARAMS(separate_1) "setBrightness = function(pref) \{"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+pref).val(parseInt($brightness));"
+    append HTML_PARAMS(separate_1) "setBrightness = function(prn) \{"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+prn).val(parseInt($brightness));"
     append HTML_PARAMS(separate_1) "\};"
 }
 
-    append HTML_PARAMS(separate_1) "setCondLoValue = function(pref, value) \{"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+pref).val(parseInt(value) * 10);"
+    append HTML_PARAMS(separate_1) "setCondLoValue = function(prn, value) \{"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+prn).val(parseInt(value) * 10);"
     append HTML_PARAMS(separate_1) "\};"
 
-    append HTML_PARAMS(separate_1) "setBrightness = function(pref) \{"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+pref).val(parseInt($brightness) * 10);"
-      append HTML_PARAMS(separate_1) "jQuery(\"#_COND_TX_THRESHOLD_LO_\"+pref).val(parseInt($brightness));"
+    append HTML_PARAMS(separate_1) "setBrightness = function(prn) \{"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+prn).val(parseInt($brightness) * 10);"
+      append HTML_PARAMS(separate_1) "jQuery(\"#_COND_TX_THRESHOLD_LO_\"+prn).val(parseInt($brightness));"
     append HTML_PARAMS(separate_1) "\};"
 
     append HTML_PARAMS(separate_1) "showEcoModeElement(jQuery(\"\[name='PIR_OPERATION_MODE'\]\")\[0\]);"

@@ -32,6 +32,7 @@
 "ONDELAY_TIME" : "<span class=\"translated\">Einschaltverz&ouml;gerung</span>",
 "ON_AIRING" : "<span class=\"translated\">L&uuml;ften bei</span>",
 "ON_LEVEL" : "<span class=\"translated\">Pegel im Zustand \"ein\"</span>",
+"OUTPUT_BEHAVIOUR" : "<span class=\"translated\">Farbe</span>",
 "ON_THRESHOLD" : "<span class=\"translated\">Einschalten bei</span>",
 "ON_TIME" : "<span class=\"translated\">Verweildauer im Zustand \"ein\"</span>",
 "ON_TIME_MODE" : "<span class=\"translated\">Art der Verweildauer</span>",

@@ -14,6 +14,7 @@
 "long" : "lang",
 "minimal" : "minimal",
 "minutes" : "Minuten",
+"minute" : "Minute",
 "none" : "keine",
 "no_userProfile" : "Die Funktion wird von diesem Profil zur Zeit nicht unterst%FCtzt",
 "ok" : "OK",
@@ -44,3 +45,22 @@
 "helpDecisionVal" : "<span class=\"translated\">Der Entscheidungswert ist ein Kanalparameter des Senders und muss korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
 "helpBtnChannelConfiguration" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Senders entsprechend konfiguriert sein. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+
+"helpBtnChannelConfigurationMotionDetectorGeneric" : "Die Einschaltdauer des Aktors sollte immer etwas gr%F6sser sein, als der 'Mindestsendeabstand' des Sensors. ",
+
+"helpBtnChannelConfigurationMotionDetectorA" : "Der Mindestsendeabstand des Sensors ist auf ",
+"helpBtnChannelConfigurationMotionDetectorB" : "eingestellt. Das heisst, erkannte Bewegungen werden alle ",
+"helpBtnChannelConfigurationMotionDetectorC" : "an den Aktor gemeldet. Die Einschaltdauer des Aktors sollte deshalb immer gr%F6sser als ",
+"helpBtnChannelConfigurationMotionDetectorD" : "sein, damit das Profil erwartungsgem%E4%DF arbeitet. ",
+"helpBtnChannelConfigurationMotionDetectorE" : "Ausserdem sollte darauf geachtet werden, dass der Kanalparameter 'Innerhalb des Sendeabstandes erkannte Bewegung senden' aktiviert ist.<br/><br/>",
+
+"helpGotoChannelConfiguration" : "Die Einstellungen des Sensors k%F6nnen von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.",
+
+"BLACK" : "Aus",
+"BLUE" : "Blau",
+"GREEN" : "Gr&uuml;n",
+"TURQUOISE" : "T&uuml;rkis",
+"RED" : "Rot",
+"PURPLE" : "Violett",
+"YELLOW" : "Gelb",
+"WHITE" : "Weiss",

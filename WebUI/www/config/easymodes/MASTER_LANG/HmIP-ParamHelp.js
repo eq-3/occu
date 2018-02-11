@@ -82,7 +82,16 @@ jQuery.extend(true,langJSON, {
       "nicht in einer Verkn%FCpfung verwendet werden. Im Batteriebetrieb ist dieses nur mit den ger%E4teeigenen Tasten des HmIP-SMI55 m%F6glich. "+
       "Gleiches gilt in Programmen f%FCr das Ein-/Ausschalten der Bewegungserkennung.",
 
+    "EVENT_FILTER_NUMBER_motionDetect":
+      "Hier k%F6nnen Sie die Empfindlichkeit der Bewegungserkennung einstellen. Dabei bedeutet ein hoher Wert eine h%F6here Empfindlichkeit.",
 
+    "ALARM_MODE_TYPE" :
+      "F%FCr den Fall, dass die "+ HMIdentifier.de.CCUShortName + " aus irgendwelchen Gr%FCnden nicht erreichbar ist, k%F6nnen Sie hier w%E4hlen, " +
+      "ob die Alarmsirene f%FCr die gew%E4hlten Zonen Alarm ausl%F6sen soll, oder nicht.",
+    "MIN_INTERVAL" :
+      "Der Bewegungsmelder meldet die erste erkannte Bewegung sofort, weitere Bewegungen dann erneut wieder nach der hier gew%E4hlten Zeit.",
+    "MIN_INTERVAL_PRESENCE" :
+      "Der Pr%E4senzmelder meldet die erste erkannte Bewegung sofort, weitere Bewegungen dann erneut wieder nach der hier gew%E4hlten Zeit."
   },
 
   "en" : {
@@ -160,12 +169,22 @@ jQuery.extend(true,langJSON, {
           "</ul>",
 
 
-      "hintPERMANENT_FULL_RX" :
+    "hintPERMANENT_FULL_RX" :
       "Please note:<br/>"+
       "In battery mode, this device is not permanently listening. In this case, muting of motion detection (receiver channel) " +
       "cannot be used in a connection. In battery mode, this is only possible using the push-buttons of HmIP-SMI55. The same applies to programmes for switching motion detection on or off.",
 
-  },
+    "EVENT_FILTER_NUMBER_motionDetect":
+      "en* Hier k%F6nnen Sie die Empfindlichkeit der Bewegungserkennung einstellen. Dabei bedeutet ein hoher Wert eine h%F6here Empfindlichkeit.",
+
+    "ALARM_MODE_TYPE" :
+      "en* F%FCr den Fall, dass die "+ HMIdentifier.en.CCUShortName + " aus irgendwelchen Gr%FCnden nicht erreichbar ist, k%F6nnen Sie hier w%E4hlen, " +
+      "ob die Alarmsirene f%FCr die gew%E4hlten Zonen Alarm ausl%F6sen soll, oder nicht.",
+    "MIN_INTERVAL" :
+      "The motion detector reports the first detected movement immediately, then further movements again after the time selected here.",
+    "MIN_INTERVAL_PRESENCE" :
+      "The presence sensor reports the first detected movement immediately, then further movements again after the time selected here.",
+    },
 
   "tr" : {
     "HelpTitle" : "Help",
@@ -240,11 +259,21 @@ jQuery.extend(true,langJSON, {
                  "</li>" +
           "</ul>",
 
-
-      "hintPERMANENT_FULL_RX" :
+    "hintPERMANENT_FULL_RX" :
       "Please note:<br/>"+
       "In battery mode, this device is not permanently listening. In this case, muting of motion detection (receiver channel) " +
       "cannot be used in a connection. In battery mode, this is only possible using the push-buttons of HmIP-SMI55. The same applies to programmes for switching motion detection on or off.",
+
+    "EVENT_FILTER_NUMBER_motionDetect":
+      "tr* Hier k%F6nnen Sie die Empfindlichkeit der Bewegungserkennung einstellen. Dabei bedeutet ein hoher Wert eine h%F6here Empfindlichkeit.",
+
+    "ALARM_MODE_TYPE" :
+      "tr* F%FCr den Fall, dass die "+ HMIdentifier.tr.CCUShortName + " aus irgendwelchen Gr%FCnden nicht erreichbar ist, k%F6nnen Sie hier w%E4hlen, " +
+      "ob die Alarmsirene f%FCr die gew%E4hlten Zonen Alarm ausl%F6sen soll, oder nicht.",
+    "MIN_INTERVAL" :
+      "The motion detector reports the first detected movement immediately, then further movements again after the time selected here.",
+    "MIN_INTERVAL_PRESENCE" :
+      "The presence sensor reports the first detected movement immediately, then further movements again after the time selected here.",
 
   }
 });

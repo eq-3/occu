@@ -83,6 +83,29 @@ function ::CreateAlarmSwitchVirtualReceiver()
   object objAcousticAlarmSelection = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ACOUSTIC_ALARM_SELECTION");
   object objOpticalAlarmSelection = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.OPTICAL_ALARM_SELECTION");
 
+  object oZoneActive;
+  object oZoneAlarm;
+
+  string arZoneActive = "";
+  string arZoneAlarm = "";
+  integer loop = 1;
+  while (loop < 8) {
+    oZoneActive = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_"#loop#"_ACTIVE");
+    if (oZoneActive) {
+      arZoneActive = arZoneActive#oZoneActive.Value().ToString()#"\t";
+    } else {
+     arZoneActive = arZoneActive#"unknown\t";
+    }
+
+    oZoneAlarm = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_"#loop#"_ALARM");
+    if (oZoneAlarm) {
+      arZoneAlarm = arZoneActive#oZoneAlarm.Value().ToString()#"\t";
+    } else {
+      arZoneAlarm = arZoneActive#"unknown\t";
+    }
+    loop = loop + 1;
+  }
+
   WriteLine("<td>");
     WriteLine("<div id='"#chnId#"controlPanel'>");
       WriteLine("<table>");
@@ -119,6 +142,19 @@ function ::CreateAlarmSwitchVirtualReceiver()
       if (objOpticalAlarmSelection) {
         WriteLine("opts.OpticalAlarmSelectionID = '"#objOpticalAlarmSelection.ID()#"';");
         WriteLine("opts.OpticalAlarmSelectionVal = '"#objOpticalAlarmSelection.Value()#"';");
+      }
+
+      string val;
+      integer loop = 1;
+      foreach (val, arZoneActive) {
+        WriteLine("opts.Zone"#loop#"Active = '"#val#"';");
+        loop = loop + 1;
+      }
+
+      loop = 1;
+      foreach (val, arZoneAlarm) {
+        WriteLine("opts.Zone"#loop#"Alarm = '"#val#"';");
+        loop = loop + 1;
       }
 
     WriteLine("its"#chnId#" = new iseAlarmSirenHMIP(opts);");

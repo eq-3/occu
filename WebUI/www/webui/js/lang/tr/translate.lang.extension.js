@@ -332,6 +332,8 @@ jQuery.extend(true,langJSON, {
     "profileNotSaveable" : "Bu profil, profil taslagi olarak kaydedilemez.",
     "dialogPerformRebootTitle" : "Merkezi yeniden baslat",
     "dialogPerformRebootContent" : "Yeniden baslatma islemi simdi gerceklestiriliyor. Daha sonra alt kisimdaki alandan yeniden oturum acabilirsiniz.",
+    "dialogPerformShutdownTitle" : "Shutdown of CCU",
+    "dialogPerformShutdownContent" : "The shutdown will be performed. Please wait until the shutdown is finished before you disconnect your CCU from power.",
     "dialogSetSecKeyRebootHead" : "L%FCtfen g%FCvenlik kodunu girin ve daha sonra sistemi yeniden baslatin.",
     "dialogSetSecKeyRebootLbl" : "G%FCvenlik kodu: ",
     "dialogSetSecKeyRebootFalseTitle" : "Sistemi yeniden baslat: G%FCvenlik hatasi",
@@ -509,6 +511,7 @@ jQuery.extend(true,langJSON, {
     "lblMinutes" : "Dakika",
     "lblErrorCheck" : "Hata kontrol%FC",
     "lblNoError" : "Hata yok",
+    "lblError" : "Hata",
     "lblInfoStatusControlEnergyCounter" : "Enerji sayaci " + HMIdentifier.tr.CCUShortName,
     "lblInfoStatusControlDevice" : "Enerji sayac cihazi",
     "lblInfoStatusControlVoltage" : "Voltaj",
@@ -748,6 +751,12 @@ jQuery.extend(true,langJSON, {
     "optionNormalLength" : "Normal length",
     "optionFileLength" : "File length",
     "optionSetLength" : "Specify length",
+    "optionPassageCounterDetectionLR" : "Passage counting both directions",
+    "optionPassageCounterDetectionL" : "Passage counting right to left",
+    "optionPassageCounterDetectionR" : "Passage counting left to right",
+    "optionPassageCounterDeltaLR" : "Difference of passages left/right",
+    "optionPassageCounterDeltaL" : "Difference of passages left",
+    "optionPassageCounterDeltaR" : "Difference of passages right",
     "lblDeviceFwPerformUpdate" : "The device update is carried out",
     "lblDeviceFwDeliverFwImage" : "The update file will be transferred to the device",
     "lblGenericLinkPartner" : "Connection partner",
@@ -787,14 +796,14 @@ jQuery.extend(true,langJSON, {
     "dialogNewDevicesBidCosRFLbl1" : "<h1>Direct teaching-in of "+HMIdentifier.en.LabelHomematic+" device</h1>",
     "dialogNewDevicesBidCosRFLbl2" : "To teach-in a "+HMIdentifier.en.LabelHomematic+" device to the "+HMIdentifier.en.CCUShortName+" please click on &quot;Teach-in HM device&quot;. Teach-in mode of the "+HMIdentifier.en.CCUShortName+" remains activated for 60 seconds. Meanwhile, please activate the teach-in mode of the "+HMIdentifier.en.LabelHomematic+" device you want to teach-in as well.",
     "dialogNewDevicesBidCosRFLbl3" : "<h1>Teaching-in of "+HMIdentifier.en.LabelHomematic+" device with serial number</h1>",
-    "dialogNewDevicesBidCosRFLbl5" : "To teach-in a "+HMIdentifier.en.LabelHomematic+" device with the serial number, please enter the serial number of your device and click on &quot;Teach-in HM device&quot;.<br /><p><span class=’CLASS21211’ style=’color:black’>Please note!<br/></span>Not all "+HMIdentifier.en.LabelHomematic+" devices support teaching-in via serial number.</p>",
+    "dialogNewDevicesBidCosRFLbl5" : "To teach-in a "+HMIdentifier.en.LabelHomematic+" device with the serial number, please enter the serial number of your device and click on &quot;Teach-in HM device&quot;.<br /><p><span class='CLASS21211' style='color:black'>Please note!<br/></span>Not all "+HMIdentifier.en.LabelHomematic+" devices support teaching-in via serial number.</p>",
     "dialogNewDevicesAddDeviceBtn" : "Teach-in HM<br/>device",
     "dialogNewDevicesHmIPAddDeviceBtn" : "Teach-in HmIP<br/>device",
     "dialogNewDevicesBidCosWiredLbl3" : "<h1>Teaching-in of "+HMIdentifier.en.LabelHomematicWiredText+" device with search function</h1>",
     "dialogNewDevicesBidCosWiredLbl4" : HMIdentifier.en.LabelHomematicWiredText+" devices can be taught-in with the search function. Please click on the button &quot;Search HM Wired device&quot;. The CCU2 will then automatically teach-in all available "+HMIdentifier.en.LabelHomematicWiredText+" devices to your system.",
     "dialogNewDevicesBidCosWiredBtn" : "Search HM Wired<br/> device",
     "dialogNewDevicesBidCosWiredLbl1" : "<h1>Automatic teaching-in of "+HMIdentifier.en.LabelHomematicWiredText+" device</h1>",
-    "dialogNewDevicesBidCosWiredLbl2" : HMIdentifier.en.LabelHomematicWiredText+" devices can be taught-in automatically. Therefore, activate the teach-in mode of your device.<br/><p><span class=’CLASS21211’ style=’color:black’>Please note!<br/></span>Not all "+HMIdentifier.en.LabelHomematicWiredText+" devices support automatic teaching-in.</p>",
+    "dialogNewDevicesBidCosWiredLbl2" : HMIdentifier.en.LabelHomematicWiredText+" devices can be taught-in automatically. Therefore, activate the teach-in mode of your device.<br/><p><span class='CLASS21211' style='color:black'>Please note!<br/></span>Not all "+HMIdentifier.en.LabelHomematicWiredText+" devices support automatic teaching-in.</p>",
     "dialogNewDevicesHmIPWithInternet" : "<h1>Teaching-in of "+HMIdentifier.en.LabelHomematicIPText+" device with active Internet connection</h1>",
     "dialogNewDevicesHmIPWithoutInternet" : "<h1>Teaching-in of "+HMIdentifier.en.LabelHomematicIPText+" device without Internet connection</h1>",
     "dialogNewDevicesHmIPRFLbl1" : HMIdentifier.en.LabelHomematicIPText+" devices can be taught-in to the "+HMIdentifier.en.CCUShortName+" as well. Please click on the button&quot;Teach-in HmIP device&quot;. Teach-in mode of the "+HMIdentifier.en.CCUShortName+" remains activated for 60 seconds. Meanwhile, please activate the teach-in mode of the "+HMIdentifier.en.LabelHomematicIPText+" device you want to teach-in as well.",
@@ -907,16 +916,6 @@ jQuery.extend(true,langJSON, {
     "invalidIP" : "Invalid IP adress",
     "btnScanGateway" :  "Search gateway",
     "btnScanDevices" :  "Search devices",
-    "helpOsramLightifyToolTip" :
-      "<h1>Please note:</h1>" +
-      "<ul>"+
-        "<li>Only one OSRAM gateway may be connected to your network.</li>" +
-        "<li>The gateway should always receive the same IP address from the DHCP server (WLAN router)!</li>" +
-        "<li>To make sure that the OSRAM gateway can be found using the button <b>Start</b>,<br/>" +
-          "it has to be available for the "+HMIdentifier.tr.CCUShortName+".</li>" +
-        "<li>If searching was successful, the IP address of the gateway is displayed and all connected<br/>" +
-          "lights and lamps are available as devices in the CCU.</li>" +
-      "</ul>",
     "timeoutAddNewDevices" : "Timeout addNewDevices",
     "unknownError" : "Unknown Error",
     "helpOsramLightify" : "You can create the pairing between the "+HMIdentifier.tr.CCUShortName+" and <b>OSRAM Lightify</b> here. Please find further information here:",
@@ -965,6 +964,68 @@ jQuery.extend(true,langJSON, {
     "powerSupply" : "Power supply",
     "operationModeBattery" : "Battery operation",
     "operationModeMains" : "Mains voltage",
+
+    "lblCurPassageDetectionRL" : "Right to left",
+    "lblCurPassageDetectionLR" : "Left to right",
+    "lblLastPassageDetectionRL" : "Right to left",
+    "lblLastPassageDetectionLR" : "Left to right",
+    "identifiedPassage" : "Passages detected",
+    "lastIdentifiedPassage" : "Previous passage",
+    "capturedPassageLeft" : "Passages detected<br/>left to right",
+    "capturedPassageRight" : "Passages detected<br/>right to left",
+    "overflowLeftPassage" : "Overrun left passage counter",
+    "overflowRightPassage" : "Overrun right passage counter",
+
+    "stateMotionFalse" : "No motion detected",
+    "stateMotionTrue" : " Motion detected",
+    "motionDetectionFalse" : " Motion detection not active",
+    "motionDetectionTrue" : " Motion detection active",
+    "btnMotionDetectionFalse" : " Activate motion detection",
+    "btnMotionDetectionTrue" : " Deactivate motion detection",
+    "btnResetMotion" : "Reset status",
+
+    "lblTimeDelay" : "Time delay",
+
+    "helpPartyModeWithinPrograms" : "If you select the holiday mode, you have to set the following parameters as well:",
+    "dialogSettingsCMHintSoftwareUpdate3a" : "Update any additional modules installed to the latest version before installation of the update!",
+    "lblToday" : "Today",
+    "lblYesterday" : "Yesterday",
+    "btnResetSunshineDuration" : "Reset hours of sunshine",
+    "btnResetRainCounter" : "Reset rainfall counter",
+
+    "teachInUserMessage" : "For teaching-in, confirm the teach-in button of the gateway.",
+
+    "helpOsramLightifyToolTip" :
+      "<h1>Please note:</h1>" +
+      "<ul>"+
+        "<li>Only one OSRAM gateway may be connected to your network.</li>" +
+        "<li>The gateway should always receive the same IP address from the DHCP server (WLAN router)!</li>" +
+        "<li>To make sure that the OSRAM gateway can be found using the button <b>Start</b>,<br/>" +
+          "it has to be available for the "+HMIdentifier.tr.CCUShortName+".</li>" +
+        "<li>If searching was successful, the IP address of the gateway is displayed and all connected<br/>" +
+          "lights and lamps are available as devices in the CCU.</li>" +
+      "</ul>",
+
+    "helpPhilipsHueToolTip" :
+      "<h1>Please note:</h1>" +
+    "<ul>" +
+      "<li>The connection with Philips Hue is in beta status.</li>" +
+      "<li>The gateway is found using an Internet service of Philips (NUPNP).<br/>" +
+            "Therefore, the" +HMIdentifier.tr.CCUShortName+" and the Philips Gateway require Internet connection.</li>" +
+      "<li>Only one Philips Gateway may be available in the system.</li>" +
+      "<li>The gateway should always receive the same IP address from the DHCP server (WLAN router)!</li>" +
+      "<li>To make sure that the Philips gateway can be found successfully via the <b>Start</b> button,<br/>" +
+          "it has to be available for the" +HMIdentifier.tr.CCUShortName+".</li>" +
+      "<li>After successful search, the IP address of the gateway is displayed and all lights and lamps<br/>" +
+          "connected to the gateway are available as devices within the" +HMIdentifier.tr.CCUShortName+".</li>" +
+      "<li>Only the new Philips Hue Bridge (square model) is supported.</li>" +
+      "</ul>",
+
+    "lblPassageDetectorNoParams" : "No parameters available.<br/>Please use channel 2 for status display.",
+
+    "lblNormal" : "Normal",
+    "lblOverflow" : "Overflow",
+    "lblUnderflow" : "Underflow",
 
     "theEnd" : ""
   }

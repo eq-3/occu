@@ -62,7 +62,7 @@
  <tbody data-bind="foreach: assignedDevices">
       <tr class="CLASS04901">
           <td class="tBodyCell" data-bind="text: name"></td>
-          <td class="tBodyCell" data-bind="text: type"></td>
+          <td class="tBodyCell" data-bind="text: devType"></td>
           <td class="tBodyCell" style="background-color: white; width: 10px">
               <div style="position: relative;" data-bind="event: {mouseover: showDevicePicture, mouseout: hideDevicePicture}">
                   <img data-bind="attr:{src: imagePath, title: name, alt: name}">
@@ -102,7 +102,7 @@
   <tbody data-bind="foreach: assignableDevices">
     <tr class="CLASS04901">
         <td class="tBodyCell" data-bind="text: name"></td>
-        <td class="tBodyCell" data-bind="text: type"></td>
+        <td class="tBodyCell" data-bind="text: devType"></td>
         <td class="tBodyCell" style="background-color: white; width: 10px">
             <div style="position: relative;" data-bind="event: {mouseover: showDevicePicture, mouseout: hideDevicePicture}">
                 <img data-bind="attr:{src: imagePath, title: name, alt: name}">
@@ -141,7 +141,7 @@
      <tbody data-bind="foreach: leftoverDevices">
      <tr class="CLASS04901">
          <td class="tBodyCell" data-bind="text: name"></td>
-         <td class="tBodyCell" data-bind="text: type"></td>
+         <td class="tBodyCell" data-bind="text: devType"></td>
          <td class="tBodyCell" style="background-color: white; width: 10px">
              <div style="position: relative;" data-bind="event: {mouseover: showDevicePicture, mouseout: hideDevicePicture}">
                  <img data-bind="attr:{src: imagePath, title: name, alt: name}">

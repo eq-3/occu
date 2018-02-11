@@ -166,7 +166,7 @@
             }
           }
 
-          if (sInterface != "HmIP-RF") {
+          if ((sInterface != "HmIP-RF") && (sInterface != "VirtualDevices")) {
             Call("/esp/functions.fn::showHideRFChannel()");
           } else {
             Call("/esp/functions.fn::showHideHmIPChannel()");

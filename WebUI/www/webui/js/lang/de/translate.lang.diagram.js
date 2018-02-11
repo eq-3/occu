@@ -128,7 +128,12 @@ jQuery.extend(true, langJSON, {
 
     "btnDiagramPeriodLastHour" : "Letzte Stunde ausw%E4hlen",
     "diagramPeriodLastHour" : "Letzte Stunde",
-    "diagramConsolidationFunctionTotal" : "Summe"
+    "diagramConsolidationFunctionTotal" : "Summe",
+
+    "diagramValueTypeHIGHEST_ILLUMINATION" : langJSON.de.stringTableHighestIllumination,
+    "diagramValueTypeCURRENT_ILLUMINATION" : langJSON.de.stringTableCurrentIllumination,
+    "diagramValueTypeLOWEST_ILLUMINATION" : langJSON.de.stringTableLowestIllumination,
+    "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.de.stringTableAverageIllmination
 
 
   }

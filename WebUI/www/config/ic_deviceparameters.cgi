@@ -585,6 +585,7 @@ proc isVirtual {paramId} {
   lappend virtualDevices "hmip-wgc_2_master" "hmip-wgc_4_master" "hmip-wgc_5_master"
   lappend virtualDevices "hmip-whs2_1_master" "hmip-whs2_2_master" "hmip-whs2_4_master" "hmip-whs2_5_master" "hmip-whs2_6_master" "hmip-whs2_8_master"
 
+  lappend virtualDevices "hmip-bsl_5_master" "hmip-bsl_6_master" "hmip-bsl_9_master" "hmip-bsl_10_master" "hmip-bsl_13_master" "hmip-bsl_14_master"
 
   set virtual "false"
 
@@ -602,6 +603,17 @@ proc isHmIP {} {
   global iface
   set hmIPIdentifier "HmIP-RF"
   if {$iface == $hmIPIdentifier} {
+    return "true"
+  }
+  return "false"
+}
+
+proc isHmIPGroup {devType} {
+  global iface
+  set HmIPGroupIfaceIdentifier "VirtualDevices"
+  set HmIPGroupIdentifier "HmIP-HEATING"
+
+  if {$iface == $HmIPGroupIfaceIdentifier && $devType == $HmIPGroupIdentifier} {
     return "true"
   }
   return "false"
@@ -782,8 +794,14 @@ proc put_channel_parameters {} {
     
     array set ch_descr_orig [array get ch_descr]
 
-    # Für HmIP Kanal 0 aktivieren
-    if {($ch_descr(INDEX) == 0) && ($iface != "HmIP-RF")} then { continue }
+    # Activate channel 0 for HmIP devices and the HmIP group
+    if {$ch_descr(INDEX) == 0 && $iface != "HmIP-RF" && $iface != "VirtualDevices" } {
+      continue
+    } else {
+      if {$ch_descr(INDEX) == 0 && $ch_descr(PARENT_TYPE) == "HM-CC-VG-1"} {
+        continue
+      }
+    }
 
     # Hier kann der Kanal für das Wochenprogramm der HmIP-Geräte unsichtbar geschaltet werden.
     # Ausserdem werden alle Kanäle mit dem FLAG Visible 0 ausgeblendet
@@ -812,7 +830,7 @@ proc put_channel_parameters {} {
 
     set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/$ch_paramid.tcl"
 
-    if {[isHmIP] == "true"} {
+    if {[isHmIP] == "true" || [isHmIPGroup $ch_descr(PARENT_TYPE)] == "true" } {
       if {[file exist $env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl]} {
         set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl"
       } elseif {[file exists $env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_descr(TYPE).tcl]} {

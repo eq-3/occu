@@ -2,6 +2,9 @@ jQuery.extend(true,langJSON, {
   "en" : {
     "chType_ACTOR_SECURITY" : "Ventilation lock channel",
     "chType_ACTOR_WINDOW" : "Actor channel",
+    "chType_ALARM_COND_SWITCH_RECEIVER" : "Connection partner<br/>for sensor with security channel",
+    "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Connection partner<br/>alarm siren",
+    "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarm channel",
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analog output",
     "chType_ARMING" : "Arming",
     "chType_BLIND" : "Blind actuator",
@@ -69,6 +72,7 @@ jQuery.extend(true,langJSON, {
     "chType_REMOTECONTROL_RECEIVER" : "Connection partner<br/>button",
     "chType_RGBW_AUTOMATIC" : "Program",
     "chType_RGBW_COLOR" : "Colour",
+    "chType_ROTARY_HANDLE_TRANSCEIVER" : "Rotary Handle Sensor",
     "chType_SABOTAGECONTACT" : "Connection partner<br/>sabotage contact",
     "chType_SENSOR_FOR_CARBON_DIOXIDE" : "Air quality-/CO2 sensor",
     "chType_SENSOR_WINDOW" : "Sensor channel",

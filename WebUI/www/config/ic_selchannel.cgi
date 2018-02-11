@@ -678,6 +678,15 @@ proc showHmIPChannel {devType direction address chType} {
         return 0
       }
     }
+
+    if {$devType == "HMIP-BSL"} {
+      if {($chType == "SWITCH_VIRTUAL_RECEIVER") && ($ch >=5)} {
+        return 0
+      } elseif {($chType == "DIMMER_VIRTUAL_RECEIVER") && (($ch == 9) || ($ch == 10) || ($ch == 13) || ($ch == 14))} {
+        return 0
+      }
+    }
+
   }
   # show the channel
   return 1

@@ -18,7 +18,7 @@ set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)    "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)      "Expertenprofil"
 
-set PROFILE_1(LONG_CONTROL_MODE_RC) 0
+set PROFILE_1(LONG_CONTROL_MODE_RC) {6 0}
 set PROFILE_1(LONG_DELTA_TEMPERATURE) 0.000000
 set PROFILE_1(LONG_ON_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(LONG_ON_TIME_FACTOR) {0 range 0 - 31}
@@ -121,7 +121,7 @@ proc getWTHFirmware {} {
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
-  global url receiver_address dev_descr_sender dev_descr_receiver
+  global iface_url receiver_address dev_descr_sender dev_descr_receiver
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
@@ -192,6 +192,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 
   if {$longKeypressAvailable} {
+      if {$ps(LONG_CONTROL_MODE_RC) != 6} {
+        set param "{LONG_CONTROL_MODE_RC {int 6}}"
+        puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $param]]"
+        set ps(LONG_CONTROL_MODE_RC) 6
+      }
+
       # *** LONG KEYPRESS ***
       append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 

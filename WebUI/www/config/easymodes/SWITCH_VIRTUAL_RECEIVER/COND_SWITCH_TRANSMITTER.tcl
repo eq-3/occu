@@ -11,6 +11,12 @@ set PROFILES_MAP(1) "\${switch_toggle}"
 set PROFILES_MAP(2)  "\${switch_on_off}"
 set PROFILES_MAP(3) "\${change_signal}"
 
+set VALUE_GE_LO 0
+set VALUE_GE_HI 1
+set VALUE_L_LO 2
+set VALUE_L_HI 3
+set VALUE_GE_LO_AND_L_HI 4
+set VALUE_L_LO_OR_GE_HI 5
 
 
 set PROFILE_0(UI_HINT)  0
@@ -93,7 +99,7 @@ set PROFILE_3(UI_DESCRIPTION)  "Bei Erkennung des &Auml;nderungssignals wird der
 set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
 
-#set SUBSET_1(NAME)          "Offen-Ein/Zu-Aus"
+#set SUBSET_1(NAME)          "Oberer Grenzwert &uuml;berschritten - ein / Unterer Grenzwert unterschritten - aus"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
 set SUBSET_1(SHORT_CT_OFF)      1
@@ -101,7 +107,7 @@ set SUBSET_1(SHORT_CT_OFFDELAY)    1
 set SUBSET_1(SHORT_CT_ON)      4
 set SUBSET_1(SHORT_CT_ONDELAY)    4
 
-#set SUBSET_2(NAME)          "Offen-Aus/Zu-Ein"
+#set SUBSET_2(NAME)          "Oberer Grenzwert &uuml;berschritten - aus / Unterer Grenzwert unterschritten - ein"
 set SUBSET_2(NAME)          "\${subset_2}"
 set SUBSET_2(SUBSET_OPTION_VALUE)  2
 set SUBSET_2(SHORT_CT_OFF)      4
@@ -109,7 +115,7 @@ set SUBSET_2(SHORT_CT_OFFDELAY)    4
 set SUBSET_2(SHORT_CT_ON)      1
 set SUBSET_2(SHORT_CT_ONDELAY)    1
 
-#set SUBSET_3(NAME)          "Oeffnen"
+#set SUBSET_3(NAME)          "Oberer Grenzwert &uuml;berschritten"
 set SUBSET_3(NAME)          "\${subset_3}"
 set SUBSET_3(SUBSET_OPTION_VALUE)  3
 set SUBSET_3(SHORT_CT_OFF)      1
@@ -117,7 +123,7 @@ set SUBSET_3(SHORT_CT_OFFDELAY)    1
 set SUBSET_3(SHORT_CT_ON)      1
 set SUBSET_3(SHORT_CT_ONDELAY)    1
 
-#set SUBSET_4(NAME)          "Schliessen"
+#set SUBSET_4(NAME)          "Unterer Grenzwert unterschritten"
 set SUBSET_4(NAME)          "\${subset_4}"
 set SUBSET_4(SUBSET_OPTION_VALUE)  4
 set SUBSET_4(SHORT_CT_OFF)      4
@@ -126,7 +132,7 @@ set SUBSET_4(SHORT_CT_ON)      4
 set SUBSET_4(SHORT_CT_ONDELAY)    4
 
 
-#set SUBSET_5(NAME)          "Aendern"
+#set SUBSET_5(NAME)          "Unterer Grenzwert unter- / oberer Grenzwert &uuml;berschritten"
 set SUBSET_5(NAME)          "\${subset_5}"
 set SUBSET_5(SUBSET_OPTION_VALUE)  5
 set SUBSET_5(SHORT_CT_OFF)      0
@@ -197,7 +203,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set pref 1
   append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_3 SUBSET_4 SUBSET_5} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # ONDELAY

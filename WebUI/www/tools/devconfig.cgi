@@ -139,6 +139,7 @@ proc cmd_main {} {
         h3 [url "Link List" $env(SCRIPT_NAME)?cmd=list_links&$urlsid]
         h3 [url "Service Messages" $env(SCRIPT_NAME)?cmd=service_messages&$urlsid]
         h3 [url "RSSI" $env(SCRIPT_NAME)?cmd=show_rssi&$urlsid]
+        h3 [url "Device Types" /tools/devicetypes.html]
     }
 }
 

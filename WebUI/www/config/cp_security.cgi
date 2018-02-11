@@ -192,7 +192,7 @@ proc action_factory_reset_go {} {
         }
     }
     catch {
-        exec run-parts /etc/config/rc.d stop
+        exec run-parts -a stop /etc/config/rc.d
     }
     if { [catch {
         exec crypttool -r

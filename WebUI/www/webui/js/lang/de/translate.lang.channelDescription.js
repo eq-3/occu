@@ -2,6 +2,9 @@ jQuery.extend(true,langJSON, {
   "de" : {
     "chType_ACTOR_SECURITY" : "L%FCftungssperre-Kanal",
     "chType_ACTOR_WINDOW" : "Aktor-Kanal",
+    "chType_ALARM_COND_SWITCH_RECEIVER" : "Verkn%FCpfungspartner<br/>f%FCr Sensor mit Sicherheitskanal",
+    "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Alarmsirene",
+    "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarmkanal",
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analoger Ausgang",
     "chType_ARMING" : "Scharfschalten",
     "chType_BLIND" : "Rollladenaktor",
@@ -69,6 +72,7 @@ jQuery.extend(true,langJSON, {
     "chType_REMOTECONTROL_RECEIVER" : "Verkn%FCpfungspartner<br/>Taste",
     "chType_RGBW_AUTOMATIC" : "Programm",
     "chType_RGBW_COLOR" : "Farbe",
+    "chType_ROTARY_HANDLE_TRANSCEIVER" : "Fenster-/ Drehgriffkontakt",
     "chType_SABOTAGECONTACT" : "Verkn%FCpfungspartner<br/>Sabotagekontakt",
     "chType_SENSOR_FOR_CARBON_DIOXIDE" : "Luftg%FCte-/CO2-Sensor",
     "chType_SENSOR_WINDOW" : "Sensor-Kanal",

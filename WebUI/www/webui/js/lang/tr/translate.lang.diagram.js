@@ -127,7 +127,12 @@ jQuery.extend(true, langJSON, {
 
     "btnDiagramPeriodLastHour" : "Son saati secgin",
     "diagramPeriodLastHour" : "Son saat",
-    "diagramConsolidationFunctionTotal" : "%D6zet"
+    "diagramConsolidationFunctionTotal" : "%D6zet",
+
+    "diagramValueTypeHIGHEST_ILLUMINATION" : langJSON.tr.stringTableHighestIllumination,
+    "diagramValueTypeCURRENT_ILLUMINATION" : langJSON.tr.stringTableCurrentIllumination,
+    "diagramValueTypeLOWEST_ILLUMINATION" : langJSON.tr.stringTableLowestIllumination,
+    "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.tr.stringTableAverageIllmination
   }
 });
 

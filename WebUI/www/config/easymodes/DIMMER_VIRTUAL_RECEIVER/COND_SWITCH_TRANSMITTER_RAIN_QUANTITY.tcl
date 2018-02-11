@@ -5,6 +5,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/DIMMER_VIRTUAL_RECEIVER/getColorElement.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${dimmer_toggle}"
@@ -54,6 +55,7 @@ set PROFILE_1(SHORT_ON_MIN_LEVEL) 0.100000
 set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
+set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(SHORT_RAMPOFF_TIME_BASE) 0
 set PROFILE_1(SHORT_RAMPOFF_TIME_FACTOR) 5
@@ -100,6 +102,7 @@ set PROFILE_2(SHORT_ON_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_2(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
+set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_2(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
@@ -146,6 +149,7 @@ set PROFILE_3(SHORT_ON_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_3(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
+set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
@@ -237,6 +241,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
@@ -279,6 +289,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #3
@@ -310,14 +326,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_LEVEL}</td><td>"
-  option DIM_ONLEVEL
+  option DIM_OFFLEVEL
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
-
-
 
 #4
   incr prn

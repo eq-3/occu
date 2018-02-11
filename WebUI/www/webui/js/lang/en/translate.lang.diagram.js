@@ -127,7 +127,12 @@ jQuery.extend(true, langJSON, {
 
     "btnDiagramPeriodLastHour" : "Select last hour",
     "diagramPeriodLastHour" : "Last hour",
-    "diagramConsolidationFunctionTotal" : "Total"
+    "diagramConsolidationFunctionTotal" : "Total",
+
+    "diagramValueTypeHIGHEST_ILLUMINATION" : langJSON.en.stringTableHighestIllumination,
+    "diagramValueTypeCURRENT_ILLUMINATION" : langJSON.en.stringTableCurrentIllumination,
+    "diagramValueTypeLOWEST_ILLUMINATION" : langJSON.en.stringTableLowestIllumination,
+    "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.en.stringTableAverageIllmination
   }
 });
 

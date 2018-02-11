@@ -3614,7 +3614,7 @@ application {
 /* rega\pages\msg\editScript.htm */
 
 .CLASS00001 {
-	overflow: auto;
+	/*overflow: auto;*/
 	width: 100%;
 	height: 100%;
 }
@@ -3627,6 +3627,8 @@ application {
 .CLASS00003 {
 	height: 200px;
 	width: 100%;
+	min-height: 200px;
+	min-width: 800px;
 }
 
 .CLASS00004 {
@@ -3688,6 +3690,7 @@ application {
 .CLASS00014 {
 	height: 200px;
 	width: 100%;
+	resize: none;
 }
 
 .CLASS00015 {
@@ -3709,6 +3712,8 @@ application {
 	width:20%;
 	height:200px;
 	background-color: $_(white); /* white */
+	min-height: 200px;
+	min-width: 20%;
 }
 
 /* rega\pages\msg\statusinfo.htm */
@@ -4796,7 +4801,8 @@ application {
 .CLASS01812 {
 	background-color:$_(activeBackground);
 	width:580px;
-	height:120px;
+	/*height:120px;*/
+	height:auto;
 	border:solid 1px $_(black); /* black */
 	color: $_(textColorB); /* black */
 }
@@ -4980,7 +4986,8 @@ application {
 	background-color:$_(activeBackground);
 	width:520px;
 	max-width:502px;
-	height:120px;
+	/*height:120px;*/
+	height:auto;
 	border:solid 1px $_(black); /* black */
 	color: $_(textColorB); /* black */
 	overflow:auto;
@@ -5138,7 +5145,11 @@ application {
 .CLASS02532 {
 	font-size: 10px;
 	width:220px;
-	height:25px;
+	/*height:25px;*/
+	height:auto;
+	min-height: 32px;
+	clear: both;
+	display: inline-block;
   /* line-height:25px; problem with controls with a long parameter name */
 }
 
@@ -5167,6 +5178,11 @@ application {
 
 .CLASS02535 {
 	float: right;
+	text-align: right;
+	width: 98%;
+	word-wrap: break-word;
+	max-width: 480px;
+	display: inline-block;
 }
 
 .CLASS02536 {
@@ -5174,13 +5190,21 @@ application {
 }
 
 .CLASS02537 {
+	text-align: center;
 	padding: 5px;
+	width: 100%;
 	background-color: $_(activeBackground) ! important;
 }
 
 .CLASS02538 {
-	width:220px;
-	height:25px;
+	/*width:220px;
+	height:25px;*/
+	width:98%;
+	height:100%;
+	min-height:1em;
+	max-width: 480px;
+	clear: both;
+	display: inline-block;
 }
 
 .CLASS02539 {
@@ -5189,7 +5213,8 @@ application {
 
 .CLASS02540 {
 	text-align:center;
-	width:100%;
+	/*width:100%;*/
+	width:220px;
 	border:0px;
 }
 

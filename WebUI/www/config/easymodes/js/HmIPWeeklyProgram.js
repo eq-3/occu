@@ -64,8 +64,10 @@ setWPTargetChannels = function(thisElm, chn, prn) {
 };
 
 getOnlyNonExpertChannels = function(devId, chn) {
-  var result = null;
+  var result = null,
+  arEasyChannels = [];
   chn = parseInt(chn);
+
 
   switch (devId.toUpperCase()) {
     case "HMIP-FDT" :
@@ -97,7 +99,7 @@ getOnlyNonExpertChannels = function(devId, chn) {
       break;
 
     case "HMIP-MOD-OC8" :
-      var arEasyChannels = [10,14,18,22,26,30,34,38];
+      arEasyChannels = [10,14,18,22,26,30,34,38];
       jQuery.each(arEasyChannels,function(index,val) {
         if (val == chn){
           result = chn;
@@ -107,7 +109,17 @@ getOnlyNonExpertChannels = function(devId, chn) {
       break;
 
     case "HMIP-WHS2" :
-      var arEasyChannels = [3,7];
+      arEasyChannels = [3,7];
+      jQuery.each(arEasyChannels,function(index,val) {
+        if (val == chn){
+          result = chn;
+          return false; // leave the each loop
+        }
+      });
+      break;
+
+    case "HMIP-BSL" :
+      arEasyChannels = [4,8,12];
       jQuery.each(arEasyChannels,function(index,val) {
         if (val == chn){
           result = chn;
@@ -724,15 +736,31 @@ HmIPWeeklyProgram.prototype = {
     var result = "";
     var paramID = number +"_WP_TARGET_CHANNELS";
     var val = (this.activeEntries[number] == true ) ? parseInt(this.ps[paramID]) : 0;
+
+    var valCheckBox,
+    tmpVal;
+
     this.curTargetChannels = val;
     this.prn++;
 
     result += "<table><tbody><tr>";
 
       jQuery.each(this.virtualChannels,function(index,value){
+        if (self.sessionIsExpert) {
+          valCheckBox = Math.pow(2,index);
+        } else {
+          if (index == 0){
+            valCheckBox = 1;
+            tmpVal = 1;
+          } else {
+            valCheckBox = tmpVal << 3;
+            tmpVal = valCheckBox;
+          }
+        }
+
         result += "<td>";
           result += "<label for='targetChannel"+number+"_"+index+"'>"+self.virtualChannels[index]+"</label>";
-          result += "<input id='targetChannel"+number+"_"+index+"' type='checkbox' value='"+Math.pow(2,index)+"' onchange='setWPTargetChannels(this,"+self.chn+","+self.prn+")'>";
+          result += "<input id='targetChannel"+number+"_"+index+"' name='targetChannel"+self.chn+"_"+number+"' type='checkbox' value='"+valCheckBox+"' onchange='setWPTargetChannels(this,"+self.chn+","+self.prn+")'>";
         result += "</td>";
       });
 
@@ -744,15 +772,23 @@ HmIPWeeklyProgram.prototype = {
     // Init checkboxes
     result += "<script type='text/javascript'>";
       result += "window.setTimeout(function(){";
-        result += "var iSelectedChn = " +parseInt(this.curTargetChannels) + ";";
-        result += "var bSelectedChn = iSelectedChn.toString(2);";
-        result += "var reversedBinary = reverseString(bSelectedChn);";
+      result += "var iSelectedChn = " +parseInt(this.curTargetChannels) + ";";
+      result += "var bSelectedChn = iSelectedChn.toString(2);";
+      result += "var reversedBinary = reverseString(bSelectedChn);";
+      result += "var counter = 1;"
 
-        result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-          result += "jQuery('#targetChannel"+number+"_'+loop).attr('checked', (reversedBinary[loop] == '1') ? true : false );";
+      if (this.sessionIsExpert) {
+          result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
+            result += "jQuery('#targetChannel"+number+"_'+loop).attr('checked', (reversedBinary[loop] == '1') ? true : false );";
+          result += "}";
+      } else {
+        result += "jQuery('#targetChannel"+number+"_0').attr('checked', (reversedBinary[0] == '1') ? true : false );";
+        result += "for (var loop = 3; loop < reversedBinary.length; loop+=3) {";
+          result += "jQuery('#targetChannel"+number+"_'+counter).attr('checked', (reversedBinary[loop] == '1') ? true : false );";
+          result += "counter++";
         result += "}";
-
-      result += "},50);";
+      }
+    result += "},50);";
     result += "</script>";
 
     return result;
@@ -797,6 +833,7 @@ HmIPWeeklyProgram.prototype = {
     addEntry = function(elm, number) {
       self.numberOfActiveEntries++;
       var nextNumber = parseInt(number) + 1;
+
       jQuery("#weeklyProgramNotActive").hide();
 
       self.activeEntries[self._addLeadingZero(nextNumber)] = true;
@@ -810,6 +847,8 @@ HmIPWeeklyProgram.prototype = {
       jQuery("#separate_CHANNEL_" + self.weekDayID[self._addLeadingZero(nextNumber)]).val(127);
       jQuery("[name='weekDay"+self.chn+"_"+self._addLeadingZero(nextNumber)+"']").attr("checked", true);
 
+      window.setTimeout(function() {self._initTargetChannels(number);},500);
+
       if ( (! self._isNextEntryInUse(nextNumber)) && (parseInt(nextNumber) < self.maxEntries)) {
         jQuery("#btnAddNewEntry" + (self._addLeadingZero(parseInt(nextNumber)))).show();
       } else {
@@ -818,9 +857,6 @@ HmIPWeeklyProgram.prototype = {
       jQuery("#btnDelEntry"+self._addLeadingZero(nextNumber)).get(0).scrollIntoView({behavior:'smooth', block:'end'});
       //jQuery("#btnDelEntry"+self._addLeadingZero(nextNumber)).get(0).scrollIntoView(false);
     };
-
-
-
 
     if (mode == "DEL") {
       classAddElm = "hidden";
@@ -837,6 +873,18 @@ HmIPWeeklyProgram.prototype = {
       panel += addElm;
     panel += "</tr>";
     return panel;
+  },
+
+  _initTargetChannels: function(number) {
+    var arTargetChannels = jQuery("[name='targetChannel"+this.chn +"_"+ this._addLeadingZero(parseInt(number +1))+"']"),
+      elmTargetValue = jQuery("[name='"+this._addLeadingZero(parseInt(number +1))+"_WP_TARGET_CHANNELS']"),
+      targetValue = 0;
+
+    jQuery.each(arTargetChannels, function(index,elm) {
+      jQuery(elm).attr('checked', true);
+      targetValue += parseInt(jQuery(elm).val());
+    });
+    elmTargetValue.val(targetValue);
   },
 
   _getMaxEntries: function() {

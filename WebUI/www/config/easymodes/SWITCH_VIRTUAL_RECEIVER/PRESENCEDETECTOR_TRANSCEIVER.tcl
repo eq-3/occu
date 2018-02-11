@@ -5,6 +5,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/motionDetectorOnTimeHint.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${switch_toggle}"
@@ -88,8 +89,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   upvar PROFILE_PNAME PROFILE_PNAME
   upvar $pps          ps      
   upvar $pps_descr    ps_descr
-  
-  
 
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
@@ -140,6 +139,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
+  append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint]"
 
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
@@ -161,6 +161,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+
+  append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint]"
 
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

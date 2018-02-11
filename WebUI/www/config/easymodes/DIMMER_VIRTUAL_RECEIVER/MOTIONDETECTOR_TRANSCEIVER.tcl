@@ -5,6 +5,8 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/DIMMER_VIRTUAL_RECEIVER/getColorElement.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/motionDetectorOnTimeHint.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${dimmer_toggle}"
@@ -53,6 +55,7 @@ set PROFILE_1(SHORT_ON_MIN_LEVEL) 0.100000
 set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
+set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(SHORT_RAMPOFF_TIME_BASE) 0
 set PROFILE_1(SHORT_RAMPOFF_TIME_FACTOR) 5
@@ -90,6 +93,7 @@ set PROFILE_2(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.005}
 set PROFILE_2(SHORT_ON_TIME_BASE) {5 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {1 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
+set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet.<br />"
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
@@ -173,6 +177,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint]"
+
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -201,6 +213,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint]"
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

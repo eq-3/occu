@@ -470,6 +470,21 @@ proc action_put_page {} {
                     puts "\${dialogSettingsCMHintRestart}"
                 }
             }
+            table_row {class="CLASS20902 j_noForcedUpdate j_fwUpdateOnly"} {
+                table_data {class="CLASS20903"} $styleMaxWidth {
+		                puts "\${dialogSettingsCMTDCCUShutdown}"
+                }
+                table_data {class="CLASS20904"} {
+                    division {class="popupControls CLASS20905"} {
+                        division {class="CLASS20910"} {onClick="OnShutdown();"} {
+                            puts "\${dialogSettingsCMBtnCCUShutdown}"
+                        }
+                    }
+                }
+                table_data {align="left"} {class="CLASS20904"} {
+                    puts "\${dialogSettingsCMHintShutdown}"
+                }
+            }
             
             # Abgesicherter Modus
             table_row {class="CLASS20902 j_noForcedUpdate j_fwUpdateOnly"} {
@@ -729,6 +744,12 @@ proc action_put_page {} {
                 dlgPopup.LoadFromFile(url, "action=reboot_confirm");
             }
             
+            OnShutdown = function() {
+                dlgPopup.hide();
+                dlgPopup.setWidth(400);
+                dlgPopup.LoadFromFile(url, "action=shutdown_confirm");
+            }
+            
             OnEnterSafeMode = function() {
               new YesNoDialog(translateKey("dialogSafetyCheck"), translateKey("dialogQuestionRestartSafeMode"), function(result) {
                 if (result == YesNoDialog.RESULT_YES)
@@ -942,6 +963,89 @@ proc action_reboot_go {} {
     }
 }
 
+proc action_shutdown_confirm {} {
+   global env
+   
+    http_head
+    division {class="popupTitle"} {
+        puts "\${dialogSafetyCheck}"
+    }
+    division {class="CLASS20900"} {
+        table {class="popupTable CLASS20901"} {border="1"} {
+            table_row {
+                table_data {
+                    table {class="CLASS20909"} {width="100%"} {
+                        table_row {
+                            table_data {colspan="3"} {
+			        puts "\${dialogQuestionShutdown}"
+                            }
+                        }                        
+                        table_row {
+                            table_data {align="right"} {class="CLASS20911"} {colspan="3"} {
+                                division {class="popupControls CLASS20905"} {
+                                    division {class="CLASS20910"} {onClick="OnNextStep()"} {
+                                        puts "\${dialogBtnPerformShutdown}"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    division {class="popupControls"} {
+        table {
+            table_row {
+                table_data {class="CLASS20907"} {
+                    division {class="CLASS20908"} {onClick="dlgPopup.hide();showMaintenanceCP();"} {
+                        puts "\${btnCancel}"
+                    }
+                }
+            }
+        }
+    }
+    puts ""
+    cgi_javascript {
+        puts "var url = \"$env(SCRIPT_NAME)?sid=\" + SessionId;"
+        puts {
+            OnNextStep = function() {
+                regaMonitor.stop();
+                InterfaceMonitor.stop();
+                dlgPopup.hide();
+                dlgPopup.setWidth(400);
+                dlgPopup.LoadFromFile(url, "action=shutdown_go");
+            }
+        }
+        puts "dlgPopup.readaptSize();"
+        puts "translatePage('#messagebox')"
+    }
+}
+
+proc action_shutdown_go {} {
+    global env
+    cd /tmp/
+    
+    http_head
+
+    put_message "\${dialogPerformShutdownTitle}" {
+        ${dialogPerformShutdownContent}
+    } "_empty_"
+
+    puts ""
+    cgi_javascript {
+        puts "var url = \"$env(SCRIPT_NAME)?sid=\" + SessionId;"
+        puts {
+            var pb = "action=shutdown";
+            var opts = {
+                postBody: pb,
+                sendXML: false
+            };
+            new Ajax.Request(url, opts);
+        }
+    }
+}
+
 proc action_update_start {} {
     catch { exec killall hss_lcd }
     catch { exec lcdtool {Saving     Data...    } }
@@ -961,6 +1065,14 @@ proc action_reboot {} {
     rega system.Save()
     catch { exec lcdtool {Reboot...             } }
     exec /sbin/reboot
+}
+proc action_shutdown {} {
+    catch { exec killall hss_lcd }
+    catch { exec lcdtool {Saving     Data...    } }
+    rega system.Save()
+    catch { exec lcdtool {Shutdown...           } }
+    exec sleep 5
+    exec /sbin/poweroff
 }
 
 proc get_logserver {} {

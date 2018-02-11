@@ -1,0 +1,69 @@
+function ::CreateBrightnessTransmitter()
+{
+
+  object oCurrentIlumination = cObj.DPByControl("BRIGHTNESS_TRANSMITTER.CURRENT_ILLUMINATION");
+  object oAverageIlumination = cObj.DPByControl("BRIGHTNESS_TRANSMITTER.AVERAGE_ILLUMINATION");
+  object oLowestIlumination = cObj.DPByControl("BRIGHTNESS_TRANSMITTER.LOWEST_ILLUMINATION");
+  object oHighestIlumination = cObj.DPByControl("BRIGHTNESS_TRANSMITTER.HIGHEST_ILLUMINATION");
+
+
+  WriteLine("<td>");
+
+    WriteLine("<table>");
+      WriteLine("<tr>");
+
+        WriteLine("<td>");
+          WriteLine("<table id='"#chnId#"currentIlumination' class='ControlBtnInfo minWidth230px'>");
+            WriteLine("<tr>");
+              WriteLine("<td align='center'>${stringTableCurrentIllumination}</td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td class='CLASS02518'>"#oCurrentIlumination.Value().ToString(2)#" "#oCurrentIlumination.ValueUnit()#"</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          WriteLine("<table id='"#chnId#"averageIlumination' class='ControlBtnInfo minWidth230px'>");
+            WriteLine("<tr>");
+              WriteLine("<td align='center'>${stringTableAverageIllumination}</td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td class='CLASS02518'>"#oAverageIlumination.Value().ToString(2)#" "#oAverageIlumination.ValueUnit()#"</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+
+        WriteLine("<td>");
+          WriteLine("<table id='"#chnId#"lowestIlumination' class='ControlBtnInfo minWidth230px'>");
+            WriteLine("<tr>");
+              WriteLine("<td align='center'>${stringTableLowestIllumination}</td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td class='CLASS02518'>"#oLowestIlumination.Value().ToString(2)#" "#oLowestIlumination.ValueUnit()#"</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+        WriteLine("<td>");
+          WriteLine("<table id='"#chnId#"highestIlumination' class='ControlBtnInfo minWidth230px'>");
+            WriteLine("<tr>");
+              WriteLine("<td align='center'>${stringTableHighestIllumination}</td>");
+            WriteLine("</tr>");
+            WriteLine("<tr>");
+              WriteLine("<td class='CLASS02518'>"#oHighestIlumination.Value().ToString(2)#" "#oHighestIlumination.ValueUnit()#"</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+      WriteLine("</tr>");
+
+    WriteLine("</table>");
+
+  WriteLine("</td>");
+
+}

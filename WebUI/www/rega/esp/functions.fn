@@ -40,20 +40,32 @@ function ::WriteDPText()
         { 
           if (sValue == "")
           {
-            sRet=sRet#"0";
+            real n = 0.0;
+            sRet = sRet # n.ToString() # " (" # n.ToString(2);
           }
           else
           {
-            sRet=sRet#sValue;
+            sRet = sRet # sValue.ToString() # " (" # sValue.ToString(2);
+          }
+          if( to.ValueUnit() == "" )
+          {
+            sRet = sRet # ")";
           }
         }
         if (btoString)
         {
           sRet = sRet # sValue;
+          sRet = sRet.Replace("\r\n", "<br/>");
+          sRet = sRet.Replace("\r", "<br/>");
+          sRet = sRet.Replace("\n", "<br/>");
         }
         if( to.ValueUnit() != "" )
         {
           sRet=sRet#" "#to.ValueUnit();
+          if( btoNumber )
+          {
+            sRet = sRet # ")";
+          }
         }
       }
       else
@@ -325,10 +337,10 @@ function ::showHideHmIPChannel() {
   bShowChannel = true;
 
   ! A key press doesn't work with the ccu2 and hmip
-  ! When the device is no remote control, don't show the key channel
+  ! When the device is not a remote control, don't show the key channel
   !
   ! When the device is a remote control, show the channel. The control will say the channel has no function.
-  ! Otherwise the control of the remote control would display only the header of the page, which would look not so good.
+  ! Otherwise the control of the remote control would display only the header of the page, which wouldn't look so good.
   if ((chn.HssType().Find("KEY_TRANSCEIVER") != -1) && (
          (oDevHssType != "HmIP-RC8")
       && (oDevHssType != "HMIP-WRC2")
@@ -338,6 +350,7 @@ function ::showHideHmIPChannel() {
       && (oDevHssType != "HmIP-KRCK")
       && (oDevHssType != "HmIP-KRC4")
       && (oDevHssType != "HmIP-MOD-RC8")
+      && (oDevHssType != "HmIP-BRC2")
       )
     )
   {
@@ -489,6 +502,15 @@ function ::showHideHmIPChannel() {
       }
     }
 
+    ! HmIP-BSL (Switch actuator for brand switches with signal lamp)
+    if (oDevHssType == "HmIP-BSL") {
+     if (user.UserEasyLinkMode() == true) {
+       if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false;}
+       if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && ((chNumber == 9) || (chNumber == 10) || (chNumber == 13) || (chNumber == 14) )) {bShowChannel = false;}
+     }
+     return;
+    }
+
     ! No hit
     return;
     }
@@ -512,6 +534,24 @@ function ::isParameterVisible() {
   if ( sInterface == hmIPRFIdentifier ) {
     excludeBinaryParams = "PARTY_,PARTY_MODE,SECTION,PROCESS,VALVE_STATE,CONTROL_DIFFERENTIAL_TEMPERATURE,RSSI_DEVICE,RSSI_PEER,";
     excludeBinaryParams = excludeBinaryParams#"OPERATING_VOLTAGE,BOOST_TIME,SMOKE_DETECTOR_TEST_RESULT=NONE,QUICK_VETO_TIME";
+
+    if ((oCC.HssType().Find("DIMMER_TRANSMITTER") != -1)
+    || (oCC.HssType().Find("DIMMER_VIRTUAL_RECEIVER")!= -1)
+    || (oCC.HssType().Find("BLIND_TRANSMITTER")!= -1)
+    || (oCC.HssType().Find("BLIND_VIRTUAL_RECEIVER")!= -1)
+    || (oCC.HssType().Find("SHUTTER_TRANSMITTER") != -1)
+    || (oCC.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1)
+    ) {
+
+      if ( oDP.HSSID().Find("ACTIVITY_STATE") != -1 ) {
+        if ( sVLValue.Find("STABLE") != -1 ) {
+          showChannelParam = false;
+        }
+      }
+      includeBinaryParams = "PROCESS";
+
+      return;
+    }
   }
   
   if ( sInterface == bidCosRFIdentifier ) {
