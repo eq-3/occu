@@ -238,7 +238,7 @@ set comment {
         append HTML_PARAMS(separate_1) "</tr>"
       }
 
-      append HTML_PARAMS(separate_1) "[getAlarmPanel ps]"
+      # append HTML_PARAMS(separate_1) "[getAlarmPanel ps]"
 
       append HTML_PARAMS(separate_1) "[getHorizontalLine "name=\"paramATCAdaptionInterval\" class=\"hidden\""]"
 

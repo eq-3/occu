@@ -13,6 +13,7 @@
 "stringTableAlarmConfirmingSignal1" : "Confirmation signal 1 - long short",
 "stringTableAlarmConfirmingSignal2" : "Confirmation signal 2 - long short short",
 "stringTableAlarmDisableAcousticSignal" : "No acoustic signal",
+
 "stringTableAlarmFrequencyRising" : "Freq. rising",
 "stringTableAlarmFrequencyFalling" : "Freq. dropping",
 "stringTableAlarmFrequencyRisingAndFalling" : "Freq. increasing/dropping",

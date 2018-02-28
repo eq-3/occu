@@ -1,6 +1,7 @@
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
+# source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
 proc getMaintenance {chn p descr} {
   upvar $p ps
@@ -190,7 +191,7 @@ proc getKeyTransceiver {chn p descr} {
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
-  append html "[getAlarmPanel ps]"
+  # append html "[getAlarmPanel ps]"
 
   return $html
 }
@@ -442,6 +443,11 @@ proc getBlindTransmitter {chn p descr address} {
 
   set parent [lindex [split $address :] 0]
 
+  set Fw [getDevFwMajorMinorPatch]
+  set fwMajor [lindex $Fw 0]
+  set fwMinor [lindex $Fw 1]
+  set fwPatch [lindex $Fw 2]
+
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
 
   puts "<div id=\"page_$parent\" class=\"hidden\">$parent</div>"
@@ -519,8 +525,13 @@ proc getBlindTransmitter {chn p descr address} {
 
   append html "[getHorizontalLine]"
 
+  set cssAutoCalibration "hidden"
+  if {$fwMajor == 1 && $fwMinor == 0 && $fwPatch <= 10 } {
+    set cssAutoCalibration ""
+  }
+
   # AUTOCALIBRATION
-  append html "<tr id=\"autoCalibrationPanel_$parent\" class =\"hidden\">"
+  append html "<tr id=\"autoCalibrationPanel_$parent\" class =$cssAutoCalibration>"
     append html "<td>\${stringTableSelfCalibrationStart}</td>"
     append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'>[getHelpIcon BLIND_AUTOCALIBRATION]</td>"
     append html "<td id='tdBlindStopCalibration_$parent' class=\"hidden\"><input name='btnBlindStopCalibration' onclick='autoCalib\[\"$parent\"\].stopAutoCalibration()' value='Stop Calibration' type='button'></td>"
@@ -691,6 +702,11 @@ proc getShutterTransmitter {chn p descr address} {
 
   set parent [lindex [split $address :] 0]
 
+  set Fw [getDevFwMajorMinorPatch]
+  set fwMajor [lindex $Fw 0]
+  set fwMinor [lindex $Fw 1]
+  set fwPatch [lindex $Fw 2]
+
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
 
   puts "<div id=\"page_$parent\" class=\"hidden\">$parent</div>"
@@ -768,9 +784,13 @@ proc getShutterTransmitter {chn p descr address} {
 
   append html "[getHorizontalLine]"
 
-  # AUTOCALIBRATION
+  set cssAutoCalibration "hidden"
+  if {$fwMajor == 1 && $fwMinor == 0 && $fwPatch <= 10 } {
+    set cssAutoCalibration ""
+  }
 
-  append html "<tr id=\"autoCalibrationPanel_$parent\" class =\"hidden\">"
+  # AUTOCALIBRATION
+  append html "<tr id=\"autoCalibrationPanel_$parent\" class =$cssAutoCalibration>"
     append html "<td>\${stringTableSelfCalibrationStart}</td>"
     append html "<td id='tdBtnBlindAutoCalibration_$parent'><input name='btnBlindAutoCalibration' onclick='autoCalib\[\"$parent\"\].triggerAutoCalibration()' value='Auto Calibration' type='button'>[getHelpIcon BLIND_AUTOCALIBRATION]</td>"
     append html "<td id='tdBlindStopCalibration_$parent' class=\"hidden\"><input name='btnBlindStopCalibration' onclick='autoCalib\[\"$parent\"\].stopAutoCalibration()' value='Stop Calibration' type='button'></td>"
@@ -1026,6 +1046,77 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
   return $html
 }
 
+  proc getAlarmCondSwitchReceiver {chn p descr} {
+    upvar $p ps
+    upvar $descr psDescr
+    upvar prn prn
+    upvar special_input_id special_input_id
+
+    puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
+    set hlpBoxWidth 450
+    set hlpBoxHeight 160
+
+    set specialID "[getSpecialID $special_input_id]"
+    set html ""
+
+  set param SD_MULTICAST_ZONE_1
+  if { ! [catch {set tmp $ps($param)}] } {
+
+     # This is for the parameter SD_MULTICAST_ZONE_1..7
+     append html "<tr>"
+       append html "<td>\${paramSDMulticastZone}</td>"
+       append html "<td>"
+         append html "<table><tr>"
+            for {set loop 1} {$loop < 8} {incr loop} {
+              incr prn
+              set zoneActive ""
+              set checked ""
+              set zoneActive "$ps(SD_MULTICAST_ZONE_$loop)"
+              if {[string equal $zoneActive "1"] == 1} {
+                set checked "checked"
+              }
+             append html "<td>"
+               append html "<label for=\"separate\_${special_input_id}_$prn\">$loop</label>"
+               append html "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=\"SD_MULTICAST_ZONE_$loop\" $checked style=\"vertical-align:middle;\"></td>"
+             append html "</td>"
+            }
+            append html "<td>[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+         append html "</tr></table>"
+       append html "<td>"
+     append html "</tr>"
+  }
+
+  set param SILENT_ALARM_ZONE_1
+  if { ! [catch {set tmp $ps($param)}] } {
+
+     # This is for the parameter SILENT_ALARM_ZONE_1..7
+     append html "<tr>"
+       append html "<td>\${paramSilentAlarmZone}</td>"
+       append html "<td>"
+         append html "<table><tr>"
+            for {set loop 1} {$loop < 8} {incr loop} {
+              incr prn
+              set zoneActive ""
+              set checked ""
+              set zoneActive "$ps(SILENT_ALARM_ZONE_$loop)"
+              if {[string equal $zoneActive "1"] == 1} {
+                set checked "checked"
+              }
+             append html "<td>"
+               append html "<label for=\"separate\_${special_input_id}_$prn\">$loop</label>"
+               append html "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=\"SILENT_ALARM_ZONE_$loop\" $checked style=\"vertical-align:middle;\"></td>"
+             append html "</td>"
+            }
+            append html "<td>[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+         append html "</tr></table>"
+       append html "<td>"
+     append html "</tr>"
+  }
+    return $html
+  }
+
+
 proc getDimmerVirtualReceiver {chn p descr} {
   upvar $p ps
   upvar $descr psDescr
@@ -1046,7 +1137,7 @@ proc getDimmerVirtualReceiver {chn p descr} {
       append html "<td>\${stringTableLogicCombination}</td>"
       option LOGIC_COMBINATION
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-      append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\"Hilfe\" onclick=\"Virtual_DimmerChannel_help($chn);\"></td>"
+      append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"Virtual_DimmerChannel_help($chn);\"></td>"
 
     append html "</tr>"
 
@@ -2064,54 +2155,57 @@ proc getAccelerationTransceiver {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  set prn 0
+
   set operationMode $ps(CHANNEL_OPERATION_MODE)
-
   set html ""
+  if { ! [catch {set tmp $ps($param)}] } {
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "delayShort"]
+    append html "</tr>"
 
-  append html "<tr>"
-  append html "<td>\${stringTableEventDelay}</td>"
-  append html [getComboBox $chn $prn "$specialID" "delayShort"]
-  append html "</tr>"
+    set param EVENT_DELAY_UNIT
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
 
-  set param EVENT_DELAY_UNIT
-  append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
 
-  incr prn
-  set param EVENT_DELAY_VALUE
-  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-  append html "<td>\${stringTableEventDelayValue}</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
-  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
 
-  append html "</tr>"
-  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-
-  incr prn
   set param CHANNEL_OPERATION_MODE
-  append html "<tr>"
-    append html "<td>\${motionDetectorChannelOperationMode}</td>"
-    array_clear options
-    # not in use for HmIP-SAM set options(0) "\${motionDetectorChannelOperationModeOff}"
-    set options(1) "\${motionDetectorChannelOperationModeAnyMotion}"
-    set options(2) "\${motionDetectorChannelOperationModeFlat}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn onchange=\"changeParamDescription(this.value)\"]</td>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorChannelOperationMode}</td>"
+      array_clear options
+      # not in use for HmIP-SAM set options(0) "\${motionDetectorChannelOperationModeOff}"
+      set options(1) "\${motionDetectorChannelOperationModeAnyMotion}"
+      set options(2) "\${motionDetectorChannelOperationModeFlat}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn onchange=\"changeParamDescription(this.value)\"]</td>"
 
-    append html "<script type=\"text/javascript\">"
-      append html "changeParamDescription = function(value) {"
-        append html "jQuery(\"\[name='motion'\]\").html(translateKey(\"motionDetectorOptionMotion_\"+value));"
-        append html "jQuery(\"\[name='noMotion'\]\").html(translateKey(\"motionDetectorOptionNoMotion_\"+value));"
-        append html "jQuery(\"\[name='messageMovement'\]\").html(translateKey(\"motionDetectorMessageMovement_\"+value));"
-        append html "jQuery(\"\[name='messageNoMovement'\]\").html(translateKey(\"motionDetectorMessageNoMovement_\"+value));"
-        append html "jQuery(\"\[name='NotiMovement'\]\").html(translateKey(\"motionDetectorNotificationMovement_\"+value));"
-        append html "jQuery(\"\[name='NotiNoMovement'\]\").html(translateKey(\"motionDetectorNotificationNoMovement_\"+value));"
-      append html "};"
-    append html "</script>"
-
-  append html "</tr>"
+      append html "<script type=\"text/javascript\">"
+        append html "changeParamDescription = function(value) {"
+          append html "jQuery(\"\[name='motion'\]\").html(translateKey(\"motionDetectorOptionMotion_\"+value));"
+          append html "jQuery(\"\[name='noMotion'\]\").html(translateKey(\"motionDetectorOptionNoMotion_\"+value));"
+          append html "jQuery(\"\[name='messageMovement'\]\").html(translateKey(\"motionDetectorMessageMovement_\"+value));"
+          append html "jQuery(\"\[name='messageNoMovement'\]\").html(translateKey(\"motionDetectorMessageNoMovement_\"+value));"
+          append html "jQuery(\"\[name='NotiMovement'\]\").html(translateKey(\"motionDetectorNotificationMovement_\"+value));"
+          append html "jQuery(\"\[name='NotiNoMovement'\]\").html(translateKey(\"motionDetectorNotificationNoMovement_\"+value));"
+        append html "};"
+      append html "</script>"
+    append html "</tr>"
+  }
 
   set comment {
-    # For the HmIP-SAM this parameter is alway 1 and not changeable
+    # For the HmIP-SAM this parameter is always 1 and not changeable
     incr prn
     set param EVENT_FILTER_NUMBER
     append html "<tr>"
@@ -2119,85 +2213,100 @@ proc getAccelerationTransceiver {chn p descr} {
      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
-  incr prn
+
   set param EVENT_FILTER_PERIOD
-  append html "<tr>"
-    append html "<td>\${motionDetectorFilterPeriod}</td>"
-   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorFilterPeriod}</td>"
+     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param MSG_FOR_POS_A
-  append html "<tr>"
-    append html "<td>\${motionDetectorMessageMovement_$operationMode}</td>"
-    array_clear options
-    set options(0) "\${motionDetectorOptionNoMessage}"
-    set options(1) "\${motionDetectorOptionNoMotion_$operationMode}"
-    set options(2) "\${motionDetectorOptionMotion_$operationMode}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorMessageMovement_$operationMode}</td>"
+      array_clear options
+      set options(0) "\${motionDetectorOptionNoMessage}"
+      set options(1) "\${motionDetectorOptionNoMotion_$operationMode}"
+      set options(2) "\${motionDetectorOptionMotion_$operationMode}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param MSG_FOR_POS_B
-  append html "<tr>"
-    append html "<td>\${motionDetectorMessageNoMovement_$operationMode}</td>"
-    array_clear options
-    set options(0) "\${motionDetectorOptionNoMessage}"
-    set options(1) "\${motionDetectorOptionNoMotion_$operationMode}"
-    set options(2) "\${motionDetectorOptionMotion_$operationMode}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorMessageNoMovement_$operationMode}</td>"
+      array_clear options
+      set options(0) "\${motionDetectorOptionNoMessage}"
+      set options(1) "\${motionDetectorOptionNoMotion_$operationMode}"
+      set options(2) "\${motionDetectorOptionMotion_$operationMode}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH
-  append html "<tr>"
-    append html "<td>\${motionDetectorNotificationMovement_$operationMode}</td>"
-    array_clear options
-    set options(0) "\${stringTableSoundNoSound}"
-    set options(1) "\${stringTableSoundShort}"
-    set options(2) "\${stringTableSoundShortShort}"
-    set options(3) "\${stringTableSoundLong}"
-    set options(4) "\${stringTableSoundLongShort}"
-    set options(5) "\${stringTableSoundLongLong}"
-    set options(6) "\${stringTableSoundLongShortShort}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorNotificationMovement_$operationMode}</td>"
+      array_clear options
+      set options(0) "\${stringTableSoundNoSound}"
+      set options(1) "\${stringTableSoundShort}"
+      set options(2) "\${stringTableSoundShortShort}"
+      set options(3) "\${stringTableSoundLong}"
+      set options(4) "\${stringTableSoundLongShort}"
+      set options(5) "\${stringTableSoundLongLong}"
+      set options(6) "\${stringTableSoundLongShortShort}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW
-  append html "<tr>"
-    append html "<td>\${motionDetectorNotificationNoMovement_$operationMode}</td>"
-    array_clear options
-    set options(0) "\${stringTableSoundNoSound}"
-    set options(1) "\${stringTableSoundShort}"
-    set options(2) "\${stringTableSoundShortShort}"
-    set options(3) "\${stringTableSoundLong}"
-    set options(4) "\${stringTableSoundLongShort}"
-    set options(5) "\${stringTableSoundLongLong}"
-    set options(6) "\${stringTableSoundLongShortShort}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorNotificationNoMovement_$operationMode}</td>"
+      array_clear options
+      set options(0) "\${stringTableSoundNoSound}"
+      set options(1) "\${stringTableSoundShort}"
+      set options(2) "\${stringTableSoundShortShort}"
+      set options(3) "\${stringTableSoundLong}"
+      set options(4) "\${stringTableSoundLongShort}"
+      set options(5) "\${stringTableSoundLongLong}"
+      set options(6) "\${stringTableSoundLongShortShort}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param SENSOR_SENSITIVITY
-  append html "<tr>"
-    append html "<td>\${motionDetectorSensorSensivity}</td>"
-    array_clear options
-    set options(0) "\${motionDetectorSensorRange16G}"
-    set options(1) "\${motionDetectorSensorRange8G}"
-    set options(2) "\${motionDetectorSensorRange4G}"
-    set options(3) "\${motionDetectorSensorRange2G}"
-    set options(4) "\${motionDetectorSensorRange2GPlusSens}"
-    set options(5) "\${motionDetectorSensorRange2G2PlusSense}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorSensorSensivity}</td>"
+      array_clear options
+      set options(0) "\${motionDetectorSensorRange16G}"
+      set options(1) "\${motionDetectorSensorRange8G}"
+      set options(2) "\${motionDetectorSensorRange4G}"
+      set options(3) "\${motionDetectorSensorRange2G}"
+      set options(4) "\${motionDetectorSensorRange2GPlusSens}"
+      set options(5) "\${motionDetectorSensorRange2G2PlusSense}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param TRIGGER_ANGLE
-  append html "<tr>"
-    append html "<td>\${motionDetectorTriggerAngle}</td>"
-   append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
+  if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorTriggerAngle}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
 
   return $html
 }
@@ -2400,7 +2509,7 @@ proc getShutterContact {chn p descr} {
     append html "</td></tr>"
   }
 
-    append html "[getAlarmPanel ps]"
+  # append html "[getAlarmPanel ps]"
   
   return $html
 }
@@ -2576,7 +2685,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
     append html "</tr>"
   }
 
-  append html "[getAlarmPanel ps]"
+  # append html "[getAlarmPanel ps]"
 
   append html "<script type=\"text/javascript\">"
     append html "showDecisionValue = function(value, chn) {"
@@ -2887,59 +2996,75 @@ proc getWaterDetectionTransmitter {chn p descr} {
   set param ACOUSTIC_ALARM_SIGNAL
   if { ! [catch {set tmp $ps($param)}] } {
     incr prn
-    append html "<tr><td>"
-      array_clear options
-      set options(0) "\${stringTableAlarmDisableAcousticSignal}"
-      set options(1) "\${stringTableAlarmFrequencyRising}"
-      set options(2) "\${stringTableAlarmFrequencyFalling}"
-      set options(3) "\${stringTableAlarmFrequencyRisingAndFalling}"
-      set options(4) "\${stringTableAlarmFrequencyAlternatingLowHigh}"
-      set options(5) "\${stringTableAlarmFrequencyAlternatingLowMidHigh}"
-      set options(6) "\${stringTableAlarmFrequencyHighOnOff}"
-      set options(7) "\${stringTableAlarmFrequencyHighOnLongOff}"
-      set options(8) "\${stringTableAlarmFrequencyLowOnOffHighonOff}"
-      append html "<tr><td>\${stringTableSoundID}</td><td>"
-      append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
-    append html "</tr></td>"
+    array_clear options
+    set options(0) "\${stringTableAlarmDisableAcousticSignal}"
+    set options(1) "\${stringTableAlarmFrequencyRising}"
+    set options(2) "\${stringTableAlarmFrequencyFalling}"
+    set options(3) "\${stringTableAlarmFrequencyRisingAndFalling}"
+    set options(4) "\${stringTableAlarmFrequencyAlternatingLowHigh}"
+    set options(5) "\${stringTableAlarmFrequencyAlternatingLowMidHigh}"
+    set options(6) "\${stringTableAlarmFrequencyHighOnOff}"
+    set options(7) "\${stringTableAlarmFrequencyHighOnLongOff}"
+    set options(8) "\${stringTableAlarmFrequencyLowOnOffHighonOff}"
+    append html "<tr><td>\${stringTableSoundID}</td><td>"
+    append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
+    append html "</td></tr>"
 
   }
   set param ACOUSTIC_ALARM_TIMING
   if { ! [catch {set tmp $ps($param)}] } {
     incr prn
-    append html "<tr><td>"
-      array_clear options
-      set options(0) "\${stringTablePermanent}"
-      set options(1) "\${stringTableThreeMinutes}"
-      set options(2) "\${stringTableSixMinutes}"
-      set options(3) "\${stringTableOncePerMinute}"
-      append html "<tr><td>\${lblAlarmTiming}</td><td>"
-      append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
-    append html "</tr></td>"
+    array_clear options
+    set options(0) "\${stringTablePermanent}"
+    set options(1) "\${stringTableThreeMinutes}"
+    set options(2) "\${stringTableSixMinutes}"
+    set options(3) "\${stringTableOncePerMinute}"
+    append html "<tr><td>\${lblAlarmTiming}</td><td>"
+    append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
+    append html "</td></tr>"
   }
 
   set param ACOUSTIC_ALARM_TRIGGER
   if { ! [catch {set tmp $ps($param)}] } {
     incr prn
-    append html "<tr><td>"
-      array_clear options
-      set options(0) "\${stringTableNoAcousticAlarm}"
-      set options(1) "\${stringTableTriggerEvent1}"
-      set options(2) "\${stringTableTriggerEvent2}"
-      set options(3) "\${stringTableTriggerEvent1_2}"
-      append html "<tr><td>\${lblAlarmTrigger}</td><td>"
-      append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
-    append html "</tr></td>"
+    array_clear options
+    set options(0) "\${stringTableNoAcousticAlarm}"
+    set options(1) "\${stringTableTriggerEvent1}"
+    set options(2) "\${stringTableTriggerEvent2}"
+    set options(3) "\${stringTableTriggerEvent1_2}"
+    append html "<tr><td>\${lblAlarmTrigger}</td><td>"
+    append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
+    append html "</td></tr>"
   }
 
-
-  if { ! [catch {set tmp $ps($param)}]  } {
   set param TRIGGER_ANGLE
+  if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorTriggerAngle}</td>"
-     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+      append html "<td>"
+      append html "<input id=\"btnTriggerAngle_$prn\" type=\"button\" onclick=\"deactivateTriggerAngle($chn, $prn);\">"
+      append html "</td>"
     append html "</tr>"
+
+    append html "<script type=\"text/javascript\">"
+
+     append html "window.setTimeout(function() {"
+       append html "jQuery(\"#btnTriggerAngle\_$prn\").val(translateKey(\"positionDetectionOFF\"));"
+       append html "deactivateTriggerAngle = function(chn, prn) {"
+          append html "document.getElementById('separate_CHANNEL_'+chn+'_'+prn).value = '0';"
+       append html "};"
+     append html "}, 100);"
+
+    append html "</script>"
+
   }
+
+  # append html "[getAlarmPanel ps]"
+
+  return $html
 }
 
 proc getNoParametersToSet {} {

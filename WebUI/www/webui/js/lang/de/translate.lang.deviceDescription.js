@@ -248,7 +248,8 @@ jQuery.extend(true,langJSON, {
     "HM-WS550ST-IO" : "Funk-Temperatursensor au%DFen",
     "HM-Sen-RD-O" : "Regensensor",
     "HM-CC-VG-1" : "Gruppe Heizungssteuerung",
-    "DEVICE" : "Unbekanntes Ger%E4t"
+    "DEVICE" : "Unbekanntes Ger%E4t",
+
+    "The END" : ""
   }
 });
-

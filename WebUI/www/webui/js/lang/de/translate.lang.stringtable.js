@@ -568,7 +568,7 @@ jQuery.extend(true,langJSON, {
     "stringTableOnTime" : "Einschaltdauer",
     "stringTableOnTimeUnit" : "Einheit der Einschaltdauer",
     "stringTableOnTimeValue" : "Wert Einschaltdauer",
-    "stringTableOperationVoltage" : "Betriebspannung in V:",
+    "stringTableOperationVoltage" : "Betriebsspannung in V",
     "stringTableOpticAllSensArm" : "Optisches Signal f%FCr Scharfschaltung extern",
     "stringTableOpticAllSensDelayArm" :  "Optisches Signal f%FCr Scharfschaltverz%F6gerung extern",
     "stringTableOpticDisarm" :  "Optisches Signal f%FCr Unscharfschaltung",
@@ -943,7 +943,7 @@ jQuery.extend(true,langJSON, {
     "stringTableSensorSensivity" : "Sensorempfindlichkeit",
 
     "stringTableCurrentIllumination" :           "Ungefilterte, aktuelle Helligkeit",
-    "stringTableAverageIllumination" :            "Durchschnittliche Helligkeit",
+    "stringTableAverageIllmination" :            "Durchschnittliche Helligkeit",
     "stringTableHighestIllumination" :           "Maximale Helligkeit",
     "stringTableLowestIllumination" :            "Minimale Helligkeit",
 
@@ -1049,6 +1049,7 @@ jQuery.extend(true,langJSON, {
     "stringTableConditionSwitchTransmitterRainQuantity" : "Sensor Regenmenge",
     "stringTableConditionSwitchTransmitterRainDrop" : "Regensensor",
     "stringTableConditionSwitchTransmitterWindDirection" : "Windrichtungssensor",
-    "stringTablePassageDetectorDirectionTitle" : "Richtungserkennung"
+    "stringTablePassageDetectorDirectionTitle" : "Richtungserkennung",
+    "stringTableWaterDetectionTransmitterTitle" : "Wassersensor"
   }
 });

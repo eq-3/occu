@@ -54,6 +54,10 @@ proc getComboBox {prn pref specialElement type} {
         append s [getSlatRunningTime $prn $pref $specialElement]
       }
 
+      "alarmTimeMax10Min" {
+        append s [getAlarmTimeMax10Min $prn $pref $specialElement]
+      }
+
     }
 
     return $s
@@ -174,22 +178,22 @@ proc getDelayShort {prn pref specialElement} {
               append s "break;"
             append s "case 8:"
               # 1 min
-              append s "baseElem.val(2);"
+              append s "baseElem.val(4);"
               append s "factorElem.val(1);"
               append s "break;"
             append s "case 9:"
               # 2 min
-              append s "baseElem.val(2);"
+              append s "baseElem.val(4);"
               append s "factorElem.val(2);"
               append s "break;"
             append s "case 10:"
               # 15 min
-              append s "baseElem.val(2);"
+              append s "baseElem.val(4);"
               append s "factorElem.val(15);"
               append s "break;"
             append s "case 11:"
               # 1 hour
-              append s "baseElem.val(3);"
+              append s "baseElem.val(7);"
               append s "factorElem.val(1);"
               append s "break;"
             append s "case 12:"
@@ -1478,6 +1482,149 @@ proc getMin_10_15_20_25_30 {prn pref specialElement} {
       return $s
 }
 
+proc getAlarmTimeMax10Min {prn pref specialElement} {
+  set s ""
+  append s "<td>"
+  append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setAlarmTimeMax10MinValues(this.id, $prn, $pref, \'$specialElement\')\">"
+    append s "<option value=\"0\">\${optionUnit1S}</option>"
+    append s "<option value=\"1\">\${optionUnit5S}</option>"
+    append s "<option value=\"2\">\${optionUnit10S}</option>"
+    append s "<option value=\"3\">\${optionUnit30S}</option>"
+    append s "<option value=\"4\">\${optionUnit1M}</option>"
+    append s "<option value=\"5\">\${optionUnit2M}</option>"
+    append s "<option value=\"6\">\${optionUnit4M}</option>"
+    append s "<option value=\"7\">\${optionUnit5M}</option>"
+    append s "<option value=\"8\">\${optionUnit6M}</option>"
+    append s "<option value=\"9\">\${optionUnit8M}</option>"
+    append s "<option value=\"10\">\${optionUnit10M}</option>"
+
+    # Hide the next value because the max value should not exceed 10 minutes
+    # append s "<option value=\"11\">\${stringTableEnterValue}</option>"
+  append s "/<select>"
+  append s "</td>"
+
+  append s "<script type=\"text/javascript\">"
+
+    append s "setCurrentAlarmTimeMax10MinOption = function(prn, pref, specialElement, baseValue, factorValue) {"
+      append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
+      append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
+      append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+      append s "var optionMap = \[\];"
+      append s "optionMap\[\"11\"\] = 0;"
+      append s "optionMap\[\"15\"\] = 1;"
+      append s "optionMap\[\"110\"\] = 2;"
+      append s "optionMap\[\"130\"\] = 3;"
+      append s "optionMap\[\"41\"\] = 4;"
+
+      append s "optionMap\[\"42\"\] = 5;"
+      append s "optionMap\[\"44\"\] = 6;"
+      append s "optionMap\[\"45\"\] = 7;"
+      append s "optionMap\[\"46\"\] = 8;"
+      append s "optionMap\[\"48\"\] = 9;"
+      append s "optionMap\[\"61\"\] = 10;"
+
+      append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+      append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+      append s "currentVal = baseVal+factorVal,"
+      append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 11;"
+      append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
+
+      # append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
+
+      # Enter user value
+      append s "if (optionVal == 11) {"
+        append s "timeBaseTRElem.show();"
+        append s "timeFactorTRElem.show();"
+        append s "spaceTRElem.show();"
+      append s "}"
+
+    append s "};"
+
+    append s "setAlarmTimeMax10MinValues = function(elmID, prn, pref, specialElement) {"
+      append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
+      append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\"+ pref),"
+      append s "factorElem = jQuery(\"#separate_\" +specialElement + \"_\"+ prn +\"_\" + (parseInt(pref) + 1)),"
+      append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
+      append s "timeFactorTRElem = jQuery(\"#timeFactor_\"+prn+\"_\" + (parseInt(pref) + 1)),"
+      append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+      append s "timeBaseTRElem.hide();"
+      append s "timeFactorTRElem.hide();"
+      append s "spaceTRElem.hide();"
+
+      append s "switch (value) \{"
+        append s "case 0:"
+          # 1 s
+          append s "baseElem.val(1);"
+          append s "factorElem.val(1);"
+          append s "break;"
+
+        append s "case 1:"
+          # 5 sec
+          append s "baseElem.val(1);"
+          append s "factorElem.val(5);"
+          append s "break;"
+        append s "case 2:"
+          # 10 sec
+          append s "baseElem.val(1);"
+          append s "factorElem.val(10);"
+          append s "break;"
+        append s "case 3:"
+          # 30 sec
+          append s "baseElem.val(1);"
+          append s "factorElem.val(30);"
+          append s "break;"
+        append s "case 4:"
+          # 1 min
+          append s "baseElem.val(4);"
+          append s "factorElem.val(1);"
+          append s "break;"
+        append s "case 5:"
+          # 2 min
+          append s "baseElem.val(4);"
+          append s "factorElem.val(2);"
+          append s "break;"
+        append s "case 6:"
+          # 4 min
+          append s "baseElem.val(4);"
+          append s "factorElem.val(4);"
+          append s "break;"
+        append s "case 7:"
+          # 5 min
+          append s "baseElem.val(4);"
+          append s "factorElem.val(5);"
+          append s "break;"
+        append s "case 8:"
+          # 6 min
+          append s "baseElem.val(4);"
+          append s "factorElem.val(6);"
+          append s "break;"
+        append s "case 9:"
+          # 8 min
+          append s "baseElem.val(4);"
+          append s "factorElem.val(8);"
+          append s "break;"
+        append s "case 10:"
+          # 10 min
+          append s "baseElem.val(6);"
+          append s "factorElem.val(1);"
+          append s "break;"
+         append s "case 11:"
+          append s "timeBaseTRElem.show();"
+          append s "timeFactorTRElem.show();"
+          append s "spaceTRElem.show();"
+
+          append s "break;"
+        append s "default: conInfo(\"Problem\");"
+      append s "\}"
+    append s "};"
+  append s "</script>"
+
+  return $s
+}
+
 
 ##
 
@@ -1682,6 +1829,23 @@ proc getDevFirmware {} {
   global dev_descr
   return $dev_descr(FIRMWARE)
 }
+
+proc getDevFwMajorMinorPatch {} {
+  global dev_descr
+
+  # Firmware = x.y.z
+  set firmWare $dev_descr(FIRMWARE)
+  set fwMajorMinorPatch [split $firmWare .]
+
+  set fw {}
+
+  lappend fw [expr [lindex $fwMajorMinorPatch 0] * 1]
+  lappend fw [expr [lindex $fwMajorMinorPatch 1] * 1]
+  lappend fw [expr [lindex $fwMajorMinorPatch 2] * 1]
+
+  return $fw
+}
+
 
 # This can be used to return the original parameter name of a translation key
 proc extractParamFromTranslationKey {key} {

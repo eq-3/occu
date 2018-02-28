@@ -2137,8 +2137,8 @@ DEV_HIGHLIGHT["HM-LC-Sw1-Pl-CT-R1"] = new Object();
 DEV_LIST.push('HmIP-HEATING');
 DEV_DESCRIPTION["HmIP-HEATING"] = "HM-CC-VG-1";
 DEV_PATHS["HmIP-HEATING"] = new Object();
-DEV_PATHS["HmIP-HEATING"]["50"] = "/config/img/devices/50/95_group_hm-cc-vg-1_thumb.png";
-DEV_PATHS["HmIP-HEATING"]["250"] = "/config/img/devices/250/95_group_hm-cc-vg-1.png";
+DEV_PATHS["HmIP-HEATING"]["50"] = "/config/img/devices/50/175_hmip-group-heating_thumb.png";
+DEV_PATHS["HmIP-HEATING"]["250"] = "/config/img/devices/250/175_hmip-group-heating.png";
 DEV_HIGHLIGHT["HmIP-HEATING"] = new Object();
 DEV_LIST.push('HmIP-PDT');
 DEV_DESCRIPTION["HmIP-PDT"] = "PDT";
@@ -3325,7 +3325,10 @@ elvST['ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=OPEN'] = '${stringTableTiltSensorM
 elvST['ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW'] = '${stringTableAccelerationTransceiverNotificationSoundTypeHighToLow}';
 elvST['ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH'] = '${stringTableAccelerationTransceiverNotificationSoundTypeLowToHigh}';
 elvST['ACCELERATION_TRANSCEIVER|TRIGGER_ANGLE'] = '${stringTableAccelerationTransceiverTriggerAngle}';
-elvST['ACOUSTIC_ALARM_SELECTION=DELAYED_EXTERNALLY_ARMED'] = '${stringTableAlarmDelayedExternallyArmed}';
+elvST['ACOUSTIC_ALARM_ACTIVE=FALSE'] = '${stringTableAcousticAlarmActiveFalse}';
+elvST['ACOUSTIC_ALARM_ACTIVE=TRUE'] = '${stringTableAcousticAlarmActiveTrue}';
+elvST['OPTICAL_ALARM_ACTIVE=FALSE'] = '${stringTableOpticalAlarmActiveFalse}';
+elvST['OPTICAL_ALARM_ACTIVE=TRUE'] = '${stringTableOpticalAlarmActiveTrue}';
 elvST['ACOUSTIC_ALARM_SELECTION=DELAYED_INTERNALLY_ARMED'] = '${stringTableAlarmDelayedInternallyArmed}';
 elvST['ACOUSTIC_ALARM_SELECTION=DISABLE_ACOUSTIC_SIGNAL'] = '${stringTableAlarmDisableAcousticSignal}';
 elvST['ACOUSTIC_ALARM_SELECTION=DISARMED'] = '${stringTableAlarmDisarmed}';
@@ -3334,6 +3337,15 @@ elvST['ACOUSTIC_ALARM_SELECTION=EVENT'] = '${stringTableAlarmEvent}';
 elvST['ACOUSTIC_ALARM_SELECTION=EXTERNALLY_ARMED'] = '${stringTableAlarmExternallyArmed}';
 elvST['ACOUSTIC_ALARM_SELECTION=INTERNALLY_ARMED'] = '${stringTableAlarmInternallyArmed}';
 elvST['ACOUSTIC_ALARM_SELECTION=LOW_BATTERY'] = '${stringTableAlarmLowBattery}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING'] = '${stringTableAlarmFrequencyRising}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_FALLING'] = '${stringTableAlarmFrequencyFalling}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_RISING_AND_FALLING'] = '${stringTableAlarmFrequencyRisingAndFalling}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_HIGH'] = '${stringTableAlarmFrequencyAlternatingLowHigh}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_ALTERNATING_LOW_MID_HIGH'] = '${stringTableAlarmFrequencyAlternatingLowMidHigh}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_OFF'] = '${stringTableAlarmFrequencyHighOnOff}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_LONGOFF'] = '${stringTableAlarmFrequencyHighOnLongOff}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_OFF_HIGHON_OFF'] = '${stringTableAlarmFrequencyLowOnOffHighonOff}';
+elvST['ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_LONGOFF_HIGHON_LONGOFF'] = '${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}';
 elvST['ACTOR_SECURITY'] = '${stringTableActorSecurityTitle}';
 elvST['ACTOR_SECURITY|ON_TIME'] = '${stringTableActorSecurityOnTime}';
 elvST['ACTOR_SECURITY|SECURE_STATE=FALSE'] = '${stringTableActorSecuritySecureStateFalse}';
@@ -3393,9 +3405,13 @@ elvST['ACTOR_WINDOW|WIN_RELEASE_ACT'] = '${stringTableActorWindowReleaseAction}'
 elvST['ACTUAL_HUMIDITY'] = '${stringTableWeatherHumidity}';
 elvST['ACTUAL_TEMPERATURE'] = '${stringTableClimateControlRTTransceiverActualTemp}';
 elvST['ACTUAL_TEMPERATURE_STATUS=NORMAL'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblNormal}';
+elvST['ACTUAL_TEMPERATURE_STATUS=0'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblNormal}';
 elvST['ACTUAL_TEMPERATURE_STATUS=UNKNOWN'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblUnknown}';
+elvST['ACTUAL_TEMPERATURE_STATUS=1'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblUnknown}';
 elvST['ACTUAL_TEMPERATURE_STATUS=OVERFLOW'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblOverflow}';
+elvST['ACTUAL_TEMPERATURE_STATUS=2'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblOverflow}';
 elvST['ACTUAL_TEMPERATURE_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblUnderflow}';
+elvST['ACTUAL_TEMPERATURE_STATUS=3'] = '${lblValue} ${stringTableClimateControlRTTransceiverActualTemp}: ${lblUnderflow}';
 elvST['AKKU|LEVEL'] = '${stringTableAccuLevel}';
 elvST['AKKU|STATUS=CHARGE'] = '${stringTableAccuCharging}';
 elvST['AKKU|STATUS=DISCHARGE'] = '${stringTableAccuDischarge}';
@@ -3441,8 +3457,11 @@ elvST['ATC_ON'] = '${stringTableON}';
 elvST['AUTO_MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
 elvST['AVERAGE_ILLUMINATION'] = '${stringTableAverageIllumination}';
 elvST['AVERAGE_ILLUMINATION_STATUS=NORMAL'] = '${lblValue} ${stringTableAverageIllumination}: ${lblNormal}';
+elvST['AVERAGE_ILLUMINATION_STATUS=0'] = '${lblValue} ${stringTableAverageIllumination}: ${lblNormal}';
 elvST['AVERAGE_ILLUMINATION_STATUS=UNKNOWN'] = '${lblValue} ${stringTableAverageIllumination}: ${lblUnknown}';
+elvST['AVERAGE_ILLUMINATION_STATUS=1'] = '${lblValue} ${stringTableAverageIllumination}: ${lblUnknown}';
 elvST['AVERAGE_ILLUMINATION_STATUS=OVERFLOW'] = '${lblValue} ${stringTableAverageIllumination}: ${lblOverflow}';
+elvST['AVERAGE_ILLUMINATION_STATUS=2'] = '${lblValue} ${stringTableAverageIllumination}: ${lblOverflow}';
 elvST['BACKLIGHT_AT_CHARGE'] = '${stringTableBackLightAtCharge}';
 elvST['BACKLIGHT_AT_KEYSTROKE'] = '${stringTableBackLightAtKeystroke}';
 elvST['BACKLIGHT_AT_MOTION'] = '${stringTableBackLightAtMotion}';
@@ -3460,36 +3479,56 @@ elvST['BLIND|STOP'] = '${stringTableBlindStop}';
 elvST['BLIND_TRANSMITTER|ACTIVITY_STATE=DOWN'] = '${stringTableBlindActivityStateDown}';
 elvST['BLIND_TRANSMITTER|ACTIVITY_STATE=UNKNOWN'] = '${stringTableBlindActivityStateUnknown}';
 elvST['BLIND_TRANSMITTER|ACTIVITY_STATE=UP'] = '${stringTableBlindActivityStateUp}';
-elvST['BLIND_TRANSMITTER|ACTIVITY_STATE=STABLE'] = '${stringTableBlindActivityStateStable}';
+elvST['BLIND_TRANSMITTER|ACTIVITY_STATE=STABLE'] = '${stringTableProcessStableBlindTransmitter}';
 elvST['BLIND_TRANSMITTER|LEVEL'] = '${stringTableBlindLevel}';
 elvST['BLIND_TRANSMITTER|LEVEL_STATUS=ERROR'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
+elvST['BLIND_TRANSMITTER|LEVEL_STATUS=4'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
 elvST['BLIND_TRANSMITTER|LEVEL_STATUS=NORMAL'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
+elvST['BLIND_TRANSMITTER|LEVEL_STATUS=0'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
 elvST['BLIND_TRANSMITTER|LEVEL_STATUS=OVERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
+elvST['BLIND_TRANSMITTER|LEVEL_STATUS=2'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
 elvST['BLIND_TRANSMITTER|LEVEL_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
+elvST['BLIND_TRANSMITTER|LEVEL_STATUS=3'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
 elvST['BLIND_TRANSMITTER|LEVEL_STATUS=UNKNOWN'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
+elvST['BLIND_TRANSMITTER|LEVEL_STATUS=1'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
 elvST['BLIND_TRANSMITTER|LEVEL_2'] = '${stringTableJalousieSlatsLevel}';
 elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=ERROR'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
+elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=4'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
 elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=NORMAL'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
+elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=0'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
 elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=OVERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
+elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=2'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
 elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
+elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=3'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
 elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=UNKNOWN'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
+elvST['BLIND_TRANSMITTER|LEVEL_2_STATUS=1'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
 elvST['BLIND_VIRTUAL_RECEIVER'] = '${stringTableBlindVirtualReceiverTitle}';
 elvST['BLIND_VIRTUAL_RECEIVER|ACTIVITY_STATE=DOWN'] = '${stringTableBlindActivityStateDown}';
 elvST['BLIND_VIRTUAL_RECEIVER|ACTIVITY_STATE=UNKNOWN'] = '${stringTableBlindActivityStateUnknown}';
 elvST['BLIND_VIRTUAL_RECEIVER|ACTIVITY_STATE=UP'] = '${stringTableBlindActivityStateUp}';
-elvST['BLIND_VIRTUAL_RECEIVER|ACTIVITY_STATE=STABLE'] = '${stringTableBlindActivityStateStable}';
+elvST['BLIND_VIRTUAL_RECEIVER|ACTIVITY_STATE=STABLE'] = '${stringTableProcessStableBlindTransmitter}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL'] = '${stringTableBlindLevel}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=ERROR'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=4'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=NORMAL'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=0'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=OVERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=2'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=3'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=UNKNOWN'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_STATUS=1'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2'] = '${stringTableJalousieSlatsLevel}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=ERROR'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=4'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=NORMAL'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=0'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=OVERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=2'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=3'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
 elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=UNKNOWN'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
+elvST['BLIND_VIRTUAL_RECEIVER|LEVEL_2_STATUS=1'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
 elvST['BLIND_VIRTUAL_RECEIVER|STOP'] = '${stringTableBlindStop}';
 elvST['BLIND_TRANSMITTER|PROCESS=NOT_STABLE'] = '${stringTableProcessNotStableBlindTransmitter}';
 elvST['BLIND_TRANSMITTER|PROCESS=STABLE'] = '${stringTableProcessStableBlindTransmitter}';
@@ -3657,8 +3696,11 @@ elvST['CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_1"'] = 
 elvST['CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_2"'] = '${stringTableCurrentDetectionBehaviorOutput2}';
 elvST['CURRENT_ILLUMINATION'] = '${stringTableCurrentIllumination}';
 elvST['CURRENT_ILLUMINATION_STATUS=NORMAL'] = '${lblValue} ${stringTableCurrentIllumination}: ${lblNormal}';
+elvST['CURRENT_ILLUMINATION_STATUS=0'] = '${lblValue} ${stringTableCurrentIllumination}: ${lblNormal}';
 elvST['CURRENT_ILLUMINATION_STATUS=UNKNOWN'] = '${lblValue} ${stringTableCurrentIllumination}: ${lblUnknown}';
+elvST['CURRENT_ILLUMINATION_STATUS=1'] = '${lblValue} ${stringTableCurrentIllumination}: ${lblUnknown}';
 elvST['CURRENT_ILLUMINATION_STATUS=OVERFLOW'] = '${lblValue} ${stringTableCurrentIllumination}: ${lblOverflow}';
+elvST['CURRENT_ILLUMINATION_STATUS=2'] = '${lblValue} ${stringTableCurrentIllumination}: ${lblOverflow}';
 elvST['CYCLIC_INFO_MSG'] = '${stringTableCyclicInfoMsg}';
 elvST['CYCLIC_INFO_MSG_DIS'] = '${stringTableCyclicInfoMsgDis}';
 elvST['CYCLIC_INFO_MSG_DIS_UNCHANGED'] = '${stringTableCyclicInfoMsgDisUnChanged}';
@@ -3718,25 +3760,35 @@ elvST['DIMMER|RELAY_OFFDELAY_TIME'] = '${stringTableRelayOffdelayTime}';
 elvST['DIMMER_TRANSMITTER|ACTIVITY_STATE=DOWN'] = '${stringTableDimmerActivityStateDown}';
 elvST['DIMMER_TRANSMITTER|ACTIVITY_STATE=UNKNOWN'] = '${stringTableDimmerActivityStateUnknown}';
 elvST['DIMMER_TRANSMITTER|ACTIVITY_STATE=UP'] = '${stringTableDimmerActivityStateUp}';
-elvST['DIMMER_TRANSMITTER|ACTIVITY_STATE=STABLE'] = '${stringTableDimmerActivityStateStable}';
+elvST['DIMMER_TRANSMITTER|ACTIVITY_STATE=STABLE'] = '${stringTableProcessStableBlindDimmerTransmitter}';
 elvST['DIMMER_TRANSMITTER|PROCESS=NOT_STABLE'] = '${stringTableProcessNotStableDimmerTransmitter}';
 elvST['DIMMER_TRANSMITTER|PROCESS=STABLE'] = '${stringTableProcessStableBlindDimmerTransmitter}';
 elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=ERROR'] = '${lblValue} ${stringTableDimmerLevel}: ${lblError}';
+elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=4'] = '${lblValue} ${stringTableDimmerLevel}: ${lblError}';
 elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=NORMAL'] = '${lblValue} ${stringTableDimmerLevel}: ${lblNormal}';
+elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=0'] = '${lblValue} ${stringTableDimmerLevel}: ${lblNormal}';
 elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=OVERFLOW'] = '${lblValue} ${stringTableDimmerLevel}: ${lblOverflow}';
+elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=2'] = '${lblValue} ${stringTableDimmerLevel}: ${lblOverflow}';
 elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}';
+elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=3'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}';
 elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=UNKNOWN'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}';
+elvST['DIMMER_TRANSMITTER|LEVEL_STATUS=1'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}';
 elvST['DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=DOWN'] = '${stringTableDimmerActivityStateDown}';
 elvST['DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=UNKNOWN'] = '${stringTableDimmerActivityStateUnknown}';
 elvST['DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=UP'] = '${stringTableDimmerActivityStateUp}';
-elvST['DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=STABLE'] = '${stringTableDimmerActivityStateStable}';
+elvST['DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=STABLE'] = '${stringTableProcessStableBlindDimmerTransmitter}';
 elvST['DIMMER_VIRTUAL_RECEIVER|PROCESS=NOT_STABLE'] = '${stringTableProcessNotStableDimmerTransmitter}';
 elvST['DIMMER_VIRTUAL_RECEIVER|PROCESS=STABLE'] = '${stringTableProcessStableBlindDimmerTransmitter}';
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=ERROR'] = '${lblValue} ${stringTableDimmerLevel}: ${lblError}';
+elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=4'] = '${lblValue} ${stringTableDimmerLevel}: ${lblError}';
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=NORMAL'] = '${lblValue} ${stringTableDimmerLevel}: ${lblNormal}';
+elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=0'] = '${lblValue} ${stringTableDimmerLevel}: ${lblNormal}';
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=OVERFLOW'] = '${lblValue} ${stringTableDimmerLevel}: ${lblOverflow}';
+elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=2'] = '${lblValue} ${stringTableDimmerLevel}: ${lblOverflow}';
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}';
+elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=3'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}';
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNKNOWN'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}';
+elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=1'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}';
 elvST['DISPLAY_BACKLIGHT_MODE'] = '${stringTableDisplayBacklightMode}';
 elvST['DISPLAY_BACKLIGHT_MODE=AUTO'] = '${stringTableDisplayBacklightModeAuto}';
 elvST['DISPLAY_BACKLIGHT_MODE=OFF'] = '${stringTableDisplayBacklightModeOff}';
@@ -3828,26 +3880,37 @@ elvST['ENABLE_ROUTING'] = '${stringTableEnableRouting}';
 elvST['ENERGIE_METER_TRANSMITTER|AVERAGING'] = '${stringTablePowerMeterAveraging}';
 elvST['ENERGIE_METER_TRANSMITTER|CURRENT'] = '${stringTablePowerMeterCurrent}';
 elvST['ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterCurrent}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=0'] = '${lblValue} ${stringTablePowerMeterCurrent}: ${lblNormal}';
 elvST['ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=OVERFLOW'] = '${lblValue} ${stringTablePowerMeterCurrent}: ${lblOverflow}';
+elvST['ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=1'] = '${lblValue} ${stringTablePowerMeterCurrent}: ${lblOverflow}';
 elvST['ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=UNDERFLOW'] = '${lblValue} ${stringTablePowerMeterCurrent}: ${lblUnderflow}';
+elvST['ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=2'] = '${lblValue} ${stringTablePowerMeterCurrent}: ${lblUnderflow}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=FALSE'] = '${stringTablePowerMeterOverflowFalse}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=TRUE'] = '${stringTablePowerMeterOverflowTrue}';
 elvST['ENERGIE_METER_TRANSMITTER|FREQUENCY'] = '${stringTablePowerMeterFrequency}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER'] = '${stringTablePowerMeterPower}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=0'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=OVERFLOW'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=1'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=UNDERFLOW'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=2'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}';
 elvST['ENERGIE_METER_TRANSMITTER|TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
 elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE'] = '${stringTablePowerMeterVoltage}';
 elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterVoltage}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=0'] = '${lblValue} ${stringTablePowerMeterVoltage}: ${lblNormal}';
 elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=OVERFLOW'] = '${lblValue} ${stringTablePowerMeterVoltage}: ${lblOverflow}';
+elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=1'] = '${lblValue} ${stringTablePowerMeterVoltage}: ${lblOverflow}';
 elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=UNDERFLOW'] = '${lblValue} ${stringTablePowerMeterVoltage}: ${lblUnderflow}';
+elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=2'] = '${lblValue} ${stringTablePowerMeterVoltage}: ${lblUnderflow}';
 elvST['ERROR'] = '${stringTableError}';
 elvST['ERROR=NO_ERROR'] = '${stringTableErrorNoError}';
 elvST['ERROR_BATTERY=FALSE'] = '${stringTableBatteryFailure}';
 elvST['ERROR_BATTERY=TRUE'] = '${stringTableBatteryOk}';
 elvST['ERROR_CODE'] = '${stringTableErrorCode}';
+elvST['ERROR_NON_FLAT_POSITIONING=FALSE'] = '${stringTableErrorNonFlatPositioningFalse}';
+elvST['ERROR_NON_FLAT_POSITIONING=TRUE'] = '${stringTableErrorNonFlatPositioningTrue}';
 elvST['ERROR_OVERHEAT=FALSE'] = '${stringTableErrorOverheatFalse}';
 elvST['ERROR_OVERHEAT=TRUE'] = '${stringTableErrorOverheatTrue}';
 elvST['ERROR_OVERLOAD=FALSE'] = '${stringTableErrorOverloadFalse}';
@@ -3933,21 +3996,31 @@ elvST['HEATING_ROOM_TH_TRANSCEIVER'] = '${stringTableHeatingRoomTHTransceiverTit
 elvST['HEATING_SHUTTER_CONTACT_RECEIVER'] = '${stringTableHeatingShutterContactReceiverTitle}';
 elvST['HIGHEST_ILLUMINATION'] = '${stringTableHighestIllumination}';
 elvST['HIGHEST_ILLUMINATION_STATUS=NORMAL'] = '${lblValue} ${stringTableHighestIllumination}: ${lblNormal}';
+elvST['HIGHEST_ILLUMINATION_STATUS=0'] = '${lblValue} ${stringTableHighestIllumination}: ${lblNormal}';
 elvST['HIGHEST_ILLUMINATION_STATUS=UNKNOWN'] = '${lblValue} ${stringTableHighestIllumination}: ${lblUnknown}';
+elvST['HIGHEST_ILLUMINATION_STATUS=1'] = '${lblValue} ${stringTableHighestIllumination}: ${lblUnknown}';
 elvST['HIGHEST_ILLUMINATION_STATUS=OVERFLOW'] = '${lblValue} ${stringTableHighestIllumination}: ${lblOverflow}';
+elvST['HIGHEST_ILLUMINATION_STATUS=2'] = '${lblValue} ${stringTableHighestIllumination}: ${lblOverflow}';
 elvST['HUMIDITY_ALARM=FALSE'] = '${stringTableHumidityAlarmFalse}';
 elvST['HUMIDITY_ALARM=TRUE'] = '${stringTableHumidityAlarmTrue}';
 elvST['HUMIDITY_LIMITER=FALSE'] = '${stringTableHumidityLimiterFalse}';
 elvST['HUMIDITY_LIMITER=TRUE'] = '${stringTableHumidityLimiterTrue}';
 elvST['HUMIDITY'] = '${stringTableWeatherHumidity}';
 elvST['HUMIDITY_STATUS=NORMAL'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblNormal}';
+elvST['HUMIDITY_STATUS=0'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblNormal}';
 elvST['HUMIDITY_STATUS=UNKNOWN'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblUnknown}';
+elvST['HUMIDITY_STATUS=1'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblUnknown}';
 elvST['HUMIDITY_STATUS=OVERFLOW'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblOverflow}';
+elvST['HUMIDITY_STATUS=2'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblOverflow}';
 elvST['HUMIDITY_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblUnderflow}';
+elvST['HUMIDITY_STATUS=3'] = '${lblValue} ${stringTableWeatherHumidity}: ${lblUnderflow}';
 elvST['ILLUMINATION'] = '${stringTableBrightness}';
 elvST['ILLUMINATION_STATUS=NORMAL'] = '${lblValue} ${stringTableBrightness}: ${lblNormal}';
+elvST['ILLUMINATION_STATUS=0'] = '${lblValue} ${stringTableBrightness}: ${lblNormal}';
 elvST['ILLUMINATION_STATUS=UNKNOWN'] = '${lblValue} ${stringTableBrightness}: ${lblUnknown}';
+elvST['ILLUMINATION_STATUS=1'] = '${lblValue} ${stringTableBrightness}: ${lblUnknown}';
 elvST['ILLUMINATION_STATUS=OVERFLOW'] = '${lblValue} ${stringTableBrightness}: ${lblOverflow}';
+elvST['ILLUMINATION_STATUS=2'] = '${lblValue} ${stringTableBrightness}: ${lblOverflow}';
 elvST['INHIBIT'] = '${stringTableInhibit}';
 elvST['INHIBIT=FALSE'] = '${stringTableInhibitFalse}';
 elvST['INHIBIT=TRUE'] = '${stringTableInhibitTrue}';
@@ -4086,8 +4159,11 @@ elvST['LOW_BAT=TRUE'] = '${stringTableBatteryEmpty}';
 elvST['LOW_BAT_LIMIT'] = '${stringTableBatteryLowBatLimit}';
 elvST['LOWEST_ILLUMINATION'] = '${stringTableLowestIllumination}';
 elvST['LOWEST_ILLUMINATION_STATUS=NORMAL'] = '${lblValue} ${stringTableLowestIllumination}: ${lblNormal}';
+elvST['LOWEST_ILLUMINATION_STATUS=0'] = '${lblValue} ${stringTableLowestIllumination}: ${lblNormal}';
 elvST['LOWEST_ILLUMINATION_STATUS=UNKNOWN'] = '${lblValue} ${stringTableLowestIllumination}: ${lblUnknown}';
+elvST['LOWEST_ILLUMINATION_STATUS=1'] = '${lblValue} ${stringTableLowestIllumination}: ${lblUnknown}';
 elvST['LOWEST_ILLUMINATION_STATUS=OVERFLOW'] = '${lblValue} ${stringTableLowestIllumination}: ${lblOverflow}';
+elvST['LOWEST_ILLUMINATION_STATUS=2'] = '${lblValue} ${stringTableLowestIllumination}: ${lblOverflow}';
 elvST['LUX'] = '${stringTableLux}';
 elvST['MAINS_POWERED'] = '${stringTableMainsPowered}';
 elvST['MAINTENANCE|CONFIG_PENDING'] = '${stringTableConfigPending}';
@@ -4147,9 +4223,13 @@ elvST['NOT_USED'] = '${stringTableNotUsed}';
 elvST['OLD_LEVEL'] = '${stringTableDimmerOldLevel}';
 elvST['ON_TIME'] = '${stringTableDimmerOnTime}';
 elvST['OPERATING_VOLTAGE'] = '${stringTableOperationVoltage}';
+elvST['OPERATING_VOLTAGE_STATUS'] = '${stringTableOperationVoltage}';
 elvST['OPERATING_VOLTAGE_STATUS=NORMAL'] = '${lblValue} ${stringTableOperationVoltage}: ${lblNormal}';
+elvST['OPERATING_VOLTAGE_STATUS=0'] = '${lblValue} ${stringTableOperationVoltage}: ${lblNormal}';
 elvST['OPERATING_VOLTAGE_STATUS=UNKNOWN'] = '${lblValue} ${stringTableOperationVoltage}: ${lblUnknown}';
+elvST['OPERATING_VOLTAGE_STATUS=1'] = '${lblValue} ${stringTableOperationVoltage}: ${lblUnknown}';
 elvST['OPERATING_VOLTAGE_STATUS=OVERFLOW'] = '${lblValue} ${stringTableOperationVoltage}: ${lblOverflow}';
+elvST['OPERATING_VOLTAGE_STATUS=2'] = '${lblValue} ${stringTableOperationVoltage}: ${lblOverflow}';
 elvST['OPTICAL_ALARM_SELECTION=BLINKING_ALTERNATELY_REPEATING'] = '${stringTableAlarmBlinkingAlternatelyRepeating}';
 elvST['OPTICAL_ALARM_SELECTION=BLINKING_BOTH_REPEATING'] = '${stringTableAlarmBlinkingBothRepeating}';
 elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_0'] = '${stringTableAlarmConfirmingSignal0}';
@@ -4218,10 +4298,15 @@ elvST['POWERMETER|CURRENT'] = '${stringTablePowerMeterCurrent}';
 elvST['POWERMETER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
 elvST['POWERMETER|FREQUENCY'] = '${stringTablePowerMeterFrequency}';
 elvST['POWERMETER|FREQUENCY_STATUS=ERROR '] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}';
+elvST['POWERMETER|FREQUENCY_STATUS=4 '] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}';
 elvST['POWERMETER|FREQUENCY_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}';
+elvST['POWERMETER|FREQUENCY_STATUS=0'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}';
 elvST['POWERMETER|FREQUENCY_STATUS=OVERFLOW'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblOverflow}';
+elvST['POWERMETER|FREQUENCY_STATUS=2'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblOverflow}';
 elvST['POWERMETER|FREQUENCY_STATUS=UNDERFLOW'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnderflow}';
+elvST['POWERMETER|FREQUENCY_STATUS=3'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnderflow}';
 elvST['POWERMETER|FREQUENCY_STATUS=UNKNOWN'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnknown}';
+elvST['POWERMETER|FREQUENCY_STATUS=1'] = '${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnknown}';
 elvST['POWERMETER|POWER'] = '${stringTablePowerMeterPower}';
 elvST['POWERMETER|TX_MINDELAY'] = '${stringTablePowerMeterTxMinDelay}';
 elvST['POWERMETER|TX_THRESHOLD_CURRENT'] = '${stringTablePowerMeterTxThresholdCurrent}';
@@ -4283,6 +4368,7 @@ elvST['PULSE_SENSOR|SEQUENCE_PULSE_4=NOT_USED'] = '${stringTablePulseSensorSeque
 elvST['PULSE_SENSOR|SEQUENCE_PULSE_5'] = '${stringTablePulseSensorSequencePulse5}';
 elvST['PULSE_SENSOR|SEQUENCE_PULSE_5=NOT_USED'] = '${stringTablePulseSensorSequencePulse5Unused}';
 elvST['PULSE_SENSOR|SEQUENCE_TOLERANCE'] = '${stringTablePulseSensorSequenceTolerance}';
+elvST['RADIATOR_THERMOSTAT'] = '${stringTableRadiatorThermostatTitle}';
 elvST['RAINDETECTOR'] = '${stringTableRainDetector}';
 elvST['RAINDETECTOR_HEAT|STATE=FALSE'] = '${stringTableRainDetectorHeatingOff}';
 elvST['RAINDETECTOR_HEAT|STATE=TRUE'] = '${stringTableRainDetectorHeatingOn}';
@@ -4472,38 +4558,58 @@ elvST['SHUTTER_CONTACT|STATE=TRUE'] = '${stringTableShutterContactStateTrue}';
 elvST['SHUTTER_TRANSMITTER|ACTIVITY_STATE=DOWN'] = '${stringTableShutterActivityStateDown}';
 elvST['SHUTTER_TRANSMITTER|ACTIVITY_STATE=UNKNOWN'] = '${stringTableShutterActivityStateUnknown}';
 elvST['SHUTTER_TRANSMITTER|ACTIVITY_STATE=UP'] = '${stringTableShutterActivityStateUp}';
-elvST['SHUTTER_TRANSMITTER|ACTIVITY_STATE=STABLE'] = '${stringTableShutterActivityStateStable}';
+elvST['SHUTTER_TRANSMITTER|ACTIVITY_STATE=STABLE'] = '${stringTableProcessStableShutterTransmitter}';
 elvST['SHUTTER_TRANSMITTER|LEVEL'] = '${stringTableBlindLevel}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=ERROR'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=4'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=NORMAL'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=0'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=OVERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=2'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=3'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=UNKNOWN'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_STATUS=1'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_2'] = '${stringTableJalousieSlatsLevel}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=ERROR'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=4'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=NORMAL'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=0'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=OVERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=2'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=3'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
 elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=UNKNOWN'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
+elvST['SHUTTER_TRANSMITTER|LEVEL_2_STATUS=1'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
 elvST['SHUTTER_TRANSMITTER|PROCESS=NOT_STABLE'] = '${stringTableProcessNotStableShutterTransmitter}';
 elvST['SHUTTER_TRANSMITTER|PROCESS=STABLE'] = '${stringTableProcessStableShutterTransmitter}';
 elvST['SHUTTER_VIRTUAL_RECEIVER'] = '${stringTableShutterVirtualReceiverTitle}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|ACTIVITY_STATE=DOWN'] = '${stringTableShutterActivityStateDown}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|ACTIVITY_STATE=UNKNOWN'] = '${stringTableShutterActivityStateUnknown}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|ACTIVITY_STATE=UP'] = '${stringTableShutterActivityStateUp}';
-elvST['SHUTTER_VIRTUAL_RECEIVER|ACTIVITY_STATE=STABLE'] = '${stringTableShutterActivityStateStable}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|ACTIVITY_STATE=STABLE'] = '${stringTableProcessStableShutterTransmitter}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL'] = '${stringTableBlindLevel}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=ERROR'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=4'] = '${lblValue} ${stringTableBlindLevel}: ${lblError}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=NORMAL'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=0'] = '${lblValue} ${stringTableBlindLevel}: ${lblNormal}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=OVERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=2'] = '${lblValue} ${stringTableBlindLevel}: ${lblOverflow}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=3'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnderflow}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNKNOWN'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_STATUS=1'] = '${lblValue} ${stringTableBlindLevel}: ${lblUnknown}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2'] = '${stringTableJalousieSlatsLevel}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=ERROR'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=4'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblError}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=NORMAL'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=0'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblNormal}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=OVERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=2'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblOverflow}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=UNDERFLOW'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=3'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnderflow}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=UNKNOWN'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
+elvST['SHUTTER_VIRTUAL_RECEIVER|LEVEL_2_STATUS=1'] = '${lblValue} ${stringTableJalousieSlatsLevel}: ${lblUnknown}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|STOP'] = '${stringTableBlindStop}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|PROCESS=STABLE'] = '${stringTableProcessStableShutterTransmitter}';
 elvST['SHUTTER_VIRTUAL_RECEIVER|PROCESS=NOT_STABLE'] = '${stringTableProcessNotStableShutterTransmitter}';
@@ -4585,6 +4691,7 @@ elvST['STATUS_INDICATOR|STATE=TRUE'] = '${stringTableStatusIndicatorStateTrue}';
 elvST['STATUS_MESSAGE_TEXT_ALIGNMENT_LEFT_ALIGNED'] = '${stringTableStatusMessageTextAligmentLeftAligned}';
 elvST['SUBMIT'] = '${stringTableSubmit}';
 elvST['SWITCH'] = '${stringTableSwitchTitle}';
+elvST['SWITCH_ACTUATOR'] = '${stringTableSwitchTitle}';
 elvST['SWITCH_INTERFACE'] = '${stringTableSwitchInterfaceTitle}';
 elvST['SWITCH_INTERFACE|PRESS'] = '${stringTableSwitchInterfacePress}';
 elvST['SWITCH_INTERFACE|STATE=FALSE'] = '${stringTableSwitchInterfaceStateFalse}';
@@ -4630,8 +4737,11 @@ elvST['TILT_SENSOR|STATE=FALSE'] = '${stringTableTiltSensorStateFalse}';
 elvST['TILT_SENSOR|STATE=TRUE'] = ' ${stringTableTiltSensorStateTrue}';
 elvST['TIME_OF_OPERATION'] = '${stringTableTimeOfOperation}';
 elvST['TIME_OF_OPERATION_STATUS=NORMAL'] = '${lblValue} ${stringTableTimeOfOperation}: ${lblNormal}';
+elvST['TIME_OF_OPERATION_STATUS=0'] = '${lblValue} ${stringTableTimeOfOperation}: ${lblNormal}';
 elvST['TIME_OF_OPERATION_STATUS=UNKNOWN'] = '${lblValue} ${stringTableTimeOfOperation}: ${lblUnknown}';
+elvST['TIME_OF_OPERATION_STATUS=1'] = '${lblValue} ${stringTableTimeOfOperation}: ${lblUnknown}';
 elvST['TIME_OF_OPERATION_STATUS=OVERFLOW'] = '${lblValue} ${stringTableTimeOfOperation}: ${lblOverflow}';
+elvST['TIME_OF_OPERATION_STATUS=2'] = '${lblValue} ${stringTableTimeOfOperation}: ${lblOverflow}';
 elvST['TRANSMIT_DEV_TRY_MAX'] = '${stringTableTransmitDevTryMax}';
 elvST['TRANSMIT_TRY_MAX'] = '${stringTableTransmitTryMax}';
 elvST['TX_MINDELAY'] = '${stringTableTxMinDelay}';
@@ -4697,6 +4807,7 @@ elvST['WAKEUP_BEHAVIOUR_STATUS_MSG_CONFIRMATION'] = '${stringTableBehaviourStatu
 elvST['WAKEUP_BEHAVIOUR_STATUS_MSG_RESISTANCE'] = '${stringTableBehaviourStatusMsgResistance}';
 elvST['WAKEUP_BEHAVIOUR_STATUS_SIGNALIZATION_CONFIRMATION'] = '${stringTableBehaviourStatusSignalizationConfirmation}';
 elvST['WAKEUP_DEFAULT_CHANNEL'] = '${stringTableWakeupDefaultChannel}';
+elvST['WALLMOUNTED_THERMOSTAT'] = '${stringTableWallMountedThermostatTitle}';
 elvST['WATERDETECTIONSENSOR'] = '${stringTableWDSTitle}';
 elvST['WATERDETECTIONSENSOR|EVENT_FILTERTIME'] = '${stringTableWDSEventFilterTime}';
 elvST['WATERDETECTIONSENSOR|EVENT_FILTERTIME'] = '${stringTableWDSEventFilterTime}';
@@ -4714,6 +4825,9 @@ elvST['WATERDETECTIONSENSOR|MSG_FOR_POS_C=WATER'] = '${stringTableWDSMsgPosC2}';
 elvST['WATERDETECTIONSENSOR|MSG_FOR_POS_C=WET'] = '${stringTableWDSMsgPosC3}';
 elvST['WATERDETECTIONSENSOR|STATE=DRY'] = '${stringTableWDSStateDry}';
 elvST['WATERDETECTIONSENSOR|STATE=WATER'] = '${stringTableWDSStateWater}';
+elvST['WATER_DETECTION_TRANSMITTER'] = '${stringTableWaterDetectionTransmitterTitle}';
+elvST['WATER_DETECTION_TRANSMITTER|ALARMSTATE=FALSE'] = '${stringTableWeatherTransmitAlarmEventFalse}';
+elvST['WATER_DETECTION_TRANSMITTER|ALARMSTATE=TRUE'] = '${stringTableWeatherTransmitAlarmEventTrue}';
 elvST['WATERDETECTIONSENSOR|STATE=WET'] = '${stringTableWDSStateWet}';
 elvST['WATERLEVEL_DETECTED=TRUE'] = '${stringTableWaterLevelDetectedTrue}';
 elvST['WATERLEVEL_DETECTED=FALSE'] = '${stringTableWaterLevelDetectedFalse}';
@@ -4733,7 +4847,9 @@ elvST['RAIN_COUNTER'] = '${stringTableWeatherRainCounter}';
 elvST['RAIN_COUNTER_OVERFLOW=TRUE'] = '${stringTableWeatherRainCounterOverflowTrue}';
 elvST['RAIN_COUNTER_OVERFLOW=FALSE'] = '${stringTableWeatherRainCounterOverflowFalse}';
 elvST['RAIN_COUNTER_STATUS=NORMAL'] = '${lblValue} ${stringTableWeatherRainCounter}: ${lblNormal}';
+elvST['RAIN_COUNTER_STATUS=0'] = '${lblValue} ${stringTableWeatherRainCounter}: ${lblNormal}';
 elvST['RAIN_COUNTER_STATUS=UNKNOWN'] = '${lblValue} ${stringTableWeatherRainCounter}: ${lblUnknown}';
+elvST['RAIN_COUNTER_STATUS=1'] = '${lblValue} ${stringTableWeatherRainCounter}: ${lblUnknown}';
 elvST['STORM_LOWER_THRESHOLD'] = '${stringTableWeatherStormLowerThres}';
 elvST['STORM_UPPER_THRESHOLD'] = '${stringTableWeatherStormUpperThres}';
 elvST['SUNSHINEDURATION'] = '${stringTableWeatherSunshineDuration}';
@@ -4746,17 +4862,25 @@ elvST['SUNSHINE_THRESHOLD_OVERRUN=TRUE'] = '${stringTableWeatherSunshineThresOve
 elvST['TEMPERATURE'] = '${stringTableWeatherTemperature}';
 elvST['WIND_DIR'] = '${stringTableWeatherWindDir}';
 elvST['WIND_DIR_STATUS=NORMAL'] = '${lblValue} ${stringTableWeatherWindDir}: ${lblNormal}';
+elvST['WIND_DIR_STATUS=0'] = '${lblValue} ${stringTableWeatherWindDir}: ${lblNormal}';
 elvST['WIND_DIR_STATUS=UNKNOWN'] = '${lblValue} ${stringTableWeatherWindDir}: ${lblUnknown}';
+elvST['WIND_DIR_STATUS=1'] = '${lblValue} ${stringTableWeatherWindDir}: ${lblUnknown}';
 elvST['WIND_DIRECTION'] = '${stringTableWeatherWindDir}';
 elvST['WIND_DIR_RANGE'] = '${stringTableWeatherWindDirRange}';
 elvST['WIND_DIR_RANGE_STATUS=NORMAL'] = '${lblValue} ${stringTableWeatherWindDirRange}: ${lblNormal}';
+elvST['WIND_DIR_RANGE_STATUS=0'] = '${lblValue} ${stringTableWeatherWindDirRange}: ${lblNormal}';
 elvST['WIND_DIR_RANGE_STATUS=UNKNOWN'] = '${lblValue} ${stringTableWeatherWindDirRange}: ${lblUnknown}';
+elvST['WIND_DIR_RANGE_STATUS=1'] = '${lblValue} ${stringTableWeatherWindDirRange}: ${lblUnknown}';
 elvST['WIND_DIR_RANGE_STATUS=OVERFLOW'] = '${lblValue} ${stringTableWeatherWindDirRange}: ${lblOverflow}';
+elvST['WIND_DIR_RANGE_STATUS=2'] = '${lblValue} ${stringTableWeatherWindDirRange}: ${lblOverflow}';
 elvST['WIND_DIRECTION_RANGE'] = '${stringTableWeatherWindDirRange}';
 elvST['WIND_SPEED'] = '${stringTableWeatherWindSpeed}';
 elvST['WIND_SPEED_STATUS=NORMAL'] = '${lblValue} ${stringTableWeatherWindSpeed}: ${lblNormal}';
+elvST['WIND_SPEED_STATUS=0'] = '${lblValue} ${stringTableWeatherWindSpeed}: ${lblNormal}';
 elvST['WIND_SPEED_STATUS=UNKNOWN'] = '${lblValue} ${stringTableWeatherWindSpeed}: ${lblUnknown}';
+elvST['WIND_SPEED_STATUS=1'] = '${lblValue} ${stringTableWeatherWindSpeed}: ${lblUnknown}';
 elvST['WIND_SPEED_STATUS=OVERFLOW'] = '${lblValue} ${stringTableWeatherWindSpeed}: ${lblOverflow}';
+elvST['WIND_SPEED_STATUS=2'] = '${lblValue} ${stringTableWeatherWindSpeed}: ${lblOverflow}';
 elvST['WIND_SPEED_RESULT_SOURCE'] = '${stringTableWeatherWindSpeedResultSource}';
 elvST['WIND_SPEED_RESULT_SOURCE=AVERAGE_VALUE'] = '${stringTableWeatherWindSpeedResultSourceAverage}';
 elvST['WIND_SPEED_RESULT_SOURCE=MAX_VALUE'] = '${stringTableWeatherWindSpeedResultSourceMax}';
@@ -25641,6 +25765,7 @@ iseButtonsSwitch.prototype = {
     this.iFace = iFace;
     this.HmIPInterfaceID = "HmIP-RF";
     this.labelGarageDoorController = "HmIP-WGC";
+    this.labelVIR_LG_ONOFF = "VIR-LG-ONOFF";
 
     this.garageDoorControllerOnTime = 0.5;
     
@@ -25661,7 +25786,11 @@ iseButtonsSwitch.prototype = {
   onClickOff: function() {
     ControlBtn.pushed(this.divOff);
     //this.state = false;
-    setDpState(this.idDpState, 0, true);
+    if (this.chnLabel != this.labelVIR_LG_ONOFF) {
+      setDpState(this.idDpState, 0, true);
+    } else {
+      setDpState(this.idDpState,0);
+    }
     var t = this;
     new PeriodicalExecuter(function(pe) {
       t.refresh();
@@ -25672,7 +25801,11 @@ iseButtonsSwitch.prototype = {
   onClickOn: function() {
     ControlBtn.pushed(this.divOn);
     if (this.chnLabel != this.labelGarageDoorController) {
-      setDpState(this.idDpState, 1, true);
+      if (this.chnLabel != this.labelVIR_LG_ONOFF) {
+        setDpState(this.idDpState, 1, true);
+      } else {
+        setDpState(this.idDpState,1);
+      }
     } else {
       homematic("Interface.putParamset",{'interface': this.HmIPInterfaceID, 'address' : this.chnAddress, 'paramsetKey' : 'VALUES', 'set':
         [
@@ -29725,9 +29858,11 @@ iseAlarmSirenHMIP = Class.create();
 iseAlarmSirenHMIP.prototype = {
 
   initialize: function(opts) {
-    this.chnId = opts.chID;
-    this.iface = opts.chInterface;
-    this.chAddress = opts.chAddress;
+    conInfo(opts);
+    this.opts = opts;
+    this.chnId = this.opts.chID;
+    this.iface = this.opts.chInterface;
+    this.chAddress = this.opts.chAddress;
 
     this.startAlarmElm = jQuery("#"+this.chnId+"startAlarm");
 
@@ -29739,19 +29874,45 @@ iseAlarmSirenHMIP.prototype = {
 
   initAllElements: function() {
     var self = this;
-    /*
-    this.selectDurationElm.change(function() {
-      self.setTimePanel();
-    });
-    */
+    /* Not in use currently
+    if (self.opts.ZoneActive[1]) {
+      var zoneActive,
+        zoneAlarmElm,
+        dataPointID,
+        elemID,
+        elemIsChecked,
+        arZoneActive,
+        arZoneAlarm;
 
+      for (var loop = 1; loop < 8; loop++) {
+        arZoneActive = self.opts.ZoneActive[loop].split(",");
+        arZoneAlarm = self.opts.ZoneAlarm[loop].split(",");
+        dataPointID = arZoneActive[0];
+        elemID = arZoneAlarm[0];
+        elemIsChecked = (arZoneActive[1] == "true") ? true : false;
+        zoneAlarmElm = jQuery("#ZoneAlarm_" + loop + "_" + elemID);
+
+        zoneAlarmElm.prop("checked", elemIsChecked);
+        zoneAlarmElm.val(loop); // we use this in the method setAlarmZone >> elm.val()
+
+        zoneAlarmElm.change(function () {
+          self.setAlarmZone(this.id);
+        });
+      }
+    }
+    */
     this.startAlarmElm.click(function() {
       self.activateAlarm();
     });
 
-    //this.setTimeShortCut();
-
   },
+
+  /*
+  setAlarmZone: function(elmID) {
+    var elm = jQuery("#" + elmID);
+    setDpState(this.opts.ZoneActive[parseInt(elm.val())].split(",")[0], elm.prop("checked"), true);
+  },
+  */
 
   // Here we have to use putParamset for the whole bunch of parameters
   activateAlarm: function() {

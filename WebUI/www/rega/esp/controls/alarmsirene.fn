@@ -45,7 +45,6 @@ function ::CreateAlarmArmingControl()
           WriteLine("</td>");
         WriteLine("</tr>");
 
-
         WriteLine("<tr style='height:40px; color:black'><td colspan='4'><hr></td></tr>");
 
         WriteLine("<tr class='ControlBtnInfo' style='height:40px;'>");
@@ -80,82 +79,130 @@ function ::CreateAlarmSwitchVirtualReceiver()
 
   object objDurationUnit = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.DURATION_UNIT");
   object objDurationValue = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.DURATION_VALUE");
-  object objAcousticAlarmSelection = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ACOUSTIC_ALARM_SELECTION");
-  object objOpticalAlarmSelection = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.OPTICAL_ALARM_SELECTION");
+
+  ! object objAcousticAlarmSelection = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ACOUSTIC_ALARM_SELECTION");
+  ! object objOpticalAlarmSelection = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.OPTICAL_ALARM_SELECTION");
 
   object oZoneActive;
   object oZoneAlarm;
 
+  string val;
   string arZoneActive = "";
   string arZoneAlarm = "";
   integer loop = 1;
-  while (loop < 8) {
-    oZoneActive = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_"#loop#"_ACTIVE");
-    if (oZoneActive) {
-      arZoneActive = arZoneActive#oZoneActive.Value().ToString()#"\t";
-    } else {
-     arZoneActive = arZoneActive#"unknown\t";
-    }
 
-    oZoneAlarm = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_"#loop#"_ALARM");
-    if (oZoneAlarm) {
-      arZoneAlarm = arZoneActive#oZoneAlarm.Value().ToString()#"\t";
-    } else {
-      arZoneAlarm = arZoneActive#"unknown\t";
-    }
-    loop = loop + 1;
-  }
+
 
   WriteLine("<td>");
     WriteLine("<div id='"#chnId#"controlPanel'>");
       WriteLine("<table>");
-        WriteLine("<tr>");
-          WriteLine("<td>");
-            WriteLine("<div id='"#chnId#"startAlarm' class='ControlBtnOff CLASS02551 j_translate' style='width:120px;height:34px;padding-top:7px; padding-bottom:7px;'>${actionAlarmControlLblStart}</div>");
-          WriteLine("</td>");
-      WriteLine("</table>");
 
+      ! This is currently deactivated
+      if (cObj.DPByControl("_ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_1_ACTIVE")) {
+          WriteLine("<tr><td colspan='7' style='text-align:center;'><div class='ControlBtnInfo' style='line-height:2em'>Aktive Alarmzonen:</div></td></tr>");
+          WriteLine("<tr>");
+            while (loop < 8) {
+              oZoneActive = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_"#loop#"_ACTIVE");
+              if (oZoneActive) {
+                arZoneActive = arZoneActive # oZoneActive.ID() #","# oZoneActive.Value().ToString() # "\t";
+              } else {
+                arZoneActive = arZoneActive # "unknown\t";
+              }
+
+              oZoneAlarm = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_"#loop#"_ALARM");
+              if (oZoneAlarm) {
+                arZoneAlarm = arZoneAlarm # oZoneAlarm.ID() #","# oZoneAlarm.Value().ToString() # "\t";
+              } else {
+                arZoneAlarm = arZoneAlarm # "unknown\t";
+              }
+              WriteLine("<td>");
+              if (oZoneAlarm) {
+                WriteLine("<label style='color:black' for='ZoneAlarm_"#loop#"_"#oZoneAlarm.ID()#"'>"#loop#"</label>");
+                WriteLine("<input type='checkbox' id='ZoneAlarm_"#loop#"_"#oZoneAlarm.ID()#"'/>");
+              } else {
+                WriteLine("<div class='ControlBtnOff CLASS02551' style='line-height:70px'>Zone active:<br/>unknown</div>");
+              }
+              WriteLine("</td>");
+              loop = loop + 1;
+            }
+          WriteLine("</tr>");
+
+        ! ALARM ACTIVE / NOT ACTIVE
+          WriteLine("<tr><td colspan='7'><hr></td></tr>");
+          WriteLine("<tr><td colspan='7'><div class='ControlBtnInfo' style='line-height:2em'>Status der Alarmzonen</div></td></tr>");
+          WriteLine("<tr>");
+            loop = 1;
+            string sFontColorClassName = "CLASS02526";
+            string sFontColorDangerClassName = "CLASS02527";
+            string sBgColorClassName = "CLASS02525c";
+            string sBgColorDangerClassName = "CLASS02558b";
+
+            string statusCSS = sBgColorClassName;
+
+            while (loop < 8) {
+              object oZoneAlarmTriggered = cObj.DPByControl("ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_"#loop#"_ALARM");
+              if (oZoneAlarmTriggered) {
+                if (oZoneAlarmTriggered.Value() == true) {
+                  statusCSS = sBgColorDangerClassName;
+                }
+                WriteLine("<td><div id='alarmTriggered_"#loop#"_"#oZoneAlarmTriggered.ID()#"' class='"#statusCSS#"'>"#loop#"</div></td>");
+              }
+              loop = loop + 1;
+            }
+          WriteLine("</tr>");
+
+          WriteLine("<tr><td colspan='7'><hr></td></tr>");
+        }
+
+        WriteLine("<tr>");
+          WriteLine("<td colspan='7'>");
+            WriteLine("<div id='"#chnId#"startAlarm' class='ControlBtnOff CLASS02551 j_translate' style='width:120px;height:34px;line-height:34px;padding-top:7px;padding-bottom:7px;margin: auto;'>${actionAlarmControlLblStart}</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+      WriteLine("</table>");
     WriteLine("</div>");
   WriteLine("</td>");
 
-    WriteLine("<script type='text/javascript'>");
-      WriteLine("var opts = {};");
-      WriteLine("opts.chID = '"#chnId#"';");
-      WriteLine("opts.chAddress = '"#chnAddress#"';");
-      WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
+  WriteLine("<script type='text/javascript'>");
+    WriteLine("var opts = {};");
+    WriteLine("opts.chID = '"#chnId#"';");
+    WriteLine("opts.chAddress = '"#chnAddress#"';");
+    WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
 
-      if (objDurationUnit) {
-        WriteLine("opts.durationUnitID = '"#objDurationUnit.ID()#"';");
-        WriteLine("opts.durationUnitVal = '"#objDurationUnit.Value()#"';");
-      }
+    if (objDurationUnit) {
+      WriteLine("opts.durationUnitID = '"#objDurationUnit.ID()#"';");
+      WriteLine("opts.durationUnitVal = '"#objDurationUnit.Value()#"';");
+    }
 
-      if (objDurationValue) {
-        WriteLine("opts.durationValueID = '"#objDurationValue.ID()#"';");
-        WriteLine("opts.durationValueVal = '"#objDurationValue.Value()#"';");
-      }
+    if (objDurationValue) {
+      WriteLine("opts.durationValueID = '"#objDurationValue.ID()#"';");
+      WriteLine("opts.durationValueVal = '"#objDurationValue.Value()#"';");
+    }
 
-      if (objAcousticAlarmSelection) {
-        WriteLine("opts.AcousticAlarmSelectionID = '"#objAcousticAlarmSelection.ID()#"';");
-        WriteLine("opts.AcousticAlarmSelectionVal = '"#objAcousticAlarmSelection.Value()#"';");
-      }
+    ! if (objAcousticAlarmSelection) {
+    !  WriteLine("opts.AcousticAlarmSelectionID = '"#objAcousticAlarmSelection.ID()#"';");
+    !  WriteLine("opts.AcousticAlarmSelectionVal = '"#objAcousticAlarmSelection.Value()#"';");
+    ! }
 
-      if (objOpticalAlarmSelection) {
-        WriteLine("opts.OpticalAlarmSelectionID = '"#objOpticalAlarmSelection.ID()#"';");
-        WriteLine("opts.OpticalAlarmSelectionVal = '"#objOpticalAlarmSelection.Value()#"';");
-      }
+    ! if (objOpticalAlarmSelection) {
+    !  WriteLine("opts.OpticalAlarmSelectionID = '"#objOpticalAlarmSelection.ID()#"';");
+    !  WriteLine("opts.OpticalAlarmSelectionVal = '"#objOpticalAlarmSelection.Value()#"';");
+    ! }
 
-      string val;
-      integer loop = 1;
-      foreach (val, arZoneActive) {
-        WriteLine("opts.Zone"#loop#"Active = '"#val#"';");
-        loop = loop + 1;
-      }
+    ! loop = 1;
+    ! WriteLine("opts.ZoneActive = {};");
+    ! foreach (val, arZoneActive) {
+    !  WriteLine("opts.ZoneActive["#loop#"] = '"#val#"';");
+    !  loop = loop + 1;
+    ! }
 
-      loop = 1;
-      foreach (val, arZoneAlarm) {
-        WriteLine("opts.Zone"#loop#"Alarm = '"#val#"';");
-        loop = loop + 1;
-      }
+    ! loop = 1;
+    ! WriteLine("opts.ZoneAlarm = {};");
+    ! foreach (val, arZoneAlarm) {
+    !   WriteLine("opts.ZoneAlarm["#loop#"] = '"#val#"';");
+    !  loop = loop + 1;
+    ! }
 
     WriteLine("its"#chnId#" = new iseAlarmSirenHMIP(opts);");
   WriteLine("</script>");

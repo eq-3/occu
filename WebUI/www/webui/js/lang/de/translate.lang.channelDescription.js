@@ -3,7 +3,7 @@ jQuery.extend(true,langJSON, {
     "chType_ACTOR_SECURITY" : "L%FCftungssperre-Kanal",
     "chType_ACTOR_WINDOW" : "Aktor-Kanal",
     "chType_ALARM_COND_SWITCH_RECEIVER" : "Verkn%FCpfungspartner<br/>f%FCr Sensor mit Sicherheitskanal",
-    "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Alarmsirene",
+    "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Backup Alarmsirene",
     "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarmkanal",
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analoger Ausgang",
     "chType_ARMING" : "Scharfschalten",
@@ -97,7 +97,13 @@ jQuery.extend(true,langJSON, {
     "chType_WEEK_PROGRAM" : "Verkn%FCpfungspartner Wochenprogramm",
     "chType_WINDOW_SWITCH_RECEIVER" : "Verkn%FCpfungspartner<br/>Fensterkontakt",
 
+    "comment" : "the following is for HmIP-Groups",
+    "REMOTE_CONTROL" : "Homematic IP Tasterkanal",
+    "RADIATOR_THERMOSTAT" : "Homematic IP Heizk%F6rperthermostat",
+    "SENSOR_WINDOW" : "Homematic IP Fenster Zustandserkennung",
+    "SWITCH_ACTUATOR" : "Homematic IP Schaltaktor",
+    "WALLMOUNTED_THERMOSTAT" : "Homematic IP Wandthermostat",
+
     "theEnd" : ""
   }
 });
-

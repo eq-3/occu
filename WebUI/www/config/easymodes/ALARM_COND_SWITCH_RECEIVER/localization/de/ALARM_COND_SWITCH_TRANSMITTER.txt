@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">Sollte der Sensor den Kontakt mit der Zentrale verlieren, wird der gew&uuml;nschte Alarm f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",

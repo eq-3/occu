@@ -418,11 +418,15 @@
     }
 
     adaptChannelNames = function(id, groupName) {
-      var device = DeviceList.getDevice(id);
+      var device = DeviceList.getDevice(id),
+      channelOffset = 1;
       if (device) {
+        if (device.typeName == "HmIP-HEATING") {
+          channelOffset = 0;
+        }
         jQuery.each(device.channels, function(index, channel) {
-          homematic("Channel.setName", {id: channel.id, name: groupName+":"+(index+1)}, function(result) {
-            if (index+1 == device.channels.length) {
+          homematic("Channel.setName", {id: channel.id, name: groupName+":"+parseInt(index + channelOffset)}, function(result) {
+            if (parseInt(index + 1) == device.channels.length) {
               DeviceList.beginUpdateDevice(id, function() {
                 conInfo("Device list actualized");
               });
@@ -466,15 +470,19 @@
     }
 
     SaveGroup = function() {
-      var showMessage = false;
+      var showMessage = false,
+      channelOffset = 1;
 
       if ( !viewModel.isNew() && (viewModel.origGroupName != "") && (viewModel.origGroupName != viewModel.groupDeviceName())) {
         showMessage = true;
       }
 
       if (viewModel.device && !viewModel.isNew()) {
+        if (viewModel.device.typeName == "HmIP-HEATING") {
+          channelOffset = 0;
+        }
         jQuery.each(viewModel.device.channels, function(index,channel) {
-          if (((viewModel.origGroupName != "")) && viewModel.origGroupName + ":" + (index + 1) != channel.name) {
+          if (((viewModel.origGroupName != "")) && viewModel.origGroupName + ":" + parseInt(index + channelOffset) != channel.name) {
             showMessage = true;
           }
         });

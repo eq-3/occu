@@ -33,8 +33,8 @@ set PROFILE_1(LONG_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(LONG_OFF_TIME_MODE) 0
 set PROFILE_1(LONG_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(LONG_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_1(LONG_ON_TIME_BASE) {7 range 0 - 7}
-set PROFILE_1(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_1(LONG_ON_TIME_BASE) {4 range 0 - 7}
+set PROFILE_1(LONG_ON_TIME_FACTOR) {6 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_MODE) 0
 set PROFILE_1(LONG_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(LONG_SIGNAL_SELECTION_ACOUSTIC) {1 range 0 - 17}
@@ -57,8 +57,8 @@ set PROFILE_1(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_OFF_TIME_MODE) 0
 set PROFILE_1(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
-set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_1(SHORT_ON_TIME_BASE) {4 range 0 - 7}
+set PROFILE_1(SHORT_ON_TIME_FACTOR) {6 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(SHORT_SIGNAL_SELECTION_ACOUSTIC) {1 range 0 - 17}
@@ -74,9 +74,9 @@ set PROFILE_2(LONG_CT_OFF) 0
 set PROFILE_2(LONG_CT_OFFDELAY) 0
 set PROFILE_2(LONG_CT_ON) 0
 set PROFILE_2(LONG_CT_ONDELAY) 0
-set PROFILE_2(LONG_JT_OFF) 1
+set PROFILE_2(LONG_JT_OFF) 3
 set PROFILE_2(LONG_JT_OFFDELAY) 3
-set PROFILE_2(LONG_JT_ON) 3
+set PROFILE_2(LONG_JT_ON) {1 3}
 set PROFILE_2(LONG_JT_ONDELAY) 3
 set PROFILE_2(LONG_MULTIEXECUTE) 0
 set PROFILE_2(LONG_OFFDELAY_TIME_BASE) {0 range 0 - 7}
@@ -86,8 +86,8 @@ set PROFILE_2(LONG_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(LONG_OFF_TIME_MODE) 0
 set PROFILE_2(LONG_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(LONG_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_2(LONG_ON_TIME_BASE) {7 range 0 - 7}
-set PROFILE_2(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_2(LONG_ON_TIME_BASE) {4 range 0 - 7}
+set PROFILE_2(LONG_ON_TIME_FACTOR) {6 range 0 - 31}
 set PROFILE_2(LONG_ON_TIME_MODE) 0
 set PROFILE_2(LONG_PROFILE_ACTION_TYPE) 1
 set PROFILE_2(LONG_SIGNAL_SELECTION_ACOUSTIC) {1 range 0 - 17}
@@ -98,9 +98,9 @@ set PROFILE_2(SHORT_CT_OFF) 0
 set PROFILE_2(SHORT_CT_OFFDELAY) 0
 set PROFILE_2(SHORT_CT_ON) 0
 set PROFILE_2(SHORT_CT_ONDELAY) 0
-set PROFILE_2(SHORT_JT_OFF) 1
+set PROFILE_2(SHORT_JT_OFF) 3
 set PROFILE_2(SHORT_JT_OFFDELAY) 3
-set PROFILE_2(SHORT_JT_ON) 3
+set PROFILE_2(SHORT_JT_ON) {1 3}
 set PROFILE_2(SHORT_JT_ONDELAY) 3
 set PROFILE_2(SHORT_MULTIEXECUTE) 0
 set PROFILE_2(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
@@ -110,12 +110,12 @@ set PROFILE_2(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_OFF_TIME_MODE) 0
 set PROFILE_2(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_2(SHORT_ON_TIME_BASE) {7 range 0 - 7}
-set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_2(SHORT_ON_TIME_BASE) {4 range 0 - 7}
+set PROFILE_2(SHORT_ON_TIME_FACTOR) {6 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_2(SHORT_SIGNAL_SELECTION_ACOUSTIC) {1 range 0 - 17}
-set PROFILE_2(SHORT_SIGNAL_SELECTION_OPTICAL) {4 range 0 - 4}
+set PROFILE_2(SHORT_SIGNAL_SELECTION_OPTICAL) {4 range 0 - 7}
 set PROFILE_2(UI_DESCRIPTION)  ""
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
@@ -140,8 +140,8 @@ set PROFILE_3(LONG_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(LONG_OFF_TIME_MODE) 0
 set PROFILE_3(LONG_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(LONG_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_3(LONG_ON_TIME_BASE) {7 range 0 - 7}
-set PROFILE_3(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_3(LONG_ON_TIME_BASE) {4 range 0 - 7}
+set PROFILE_3(LONG_ON_TIME_FACTOR) {6 range 0 - 31}
 set PROFILE_3(LONG_ON_TIME_MODE) 0
 set PROFILE_3(LONG_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(LONG_SIGNAL_SELECTION_ACOUSTIC) {1 range 0 - 17}
@@ -164,8 +164,8 @@ set PROFILE_3(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_OFF_TIME_MODE) 0
 set PROFILE_3(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_3(SHORT_ON_TIME_BASE) {7 range 0 - 7}
-set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_3(SHORT_ON_TIME_BASE) {4 range 0 - 7}
+set PROFILE_3(SHORT_ON_TIME_FACTOR) {6 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(SHORT_SIGNAL_SELECTION_ACOUSTIC) {1 range 0 - 17}
@@ -219,10 +219,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     set pref 0
     # ONDELAY
-    # append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
+    #append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
     # ON_TIME
-    append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+    append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn alarmTimeMax10Min $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
     incr pref
     set param SHORT_SIGNAL_SELECTION_ACOUSTIC
@@ -266,12 +266,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param]
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-    # OFFDELAY
-    # append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
-
-    # OFF_TIME
-    # append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
-
     if {$longKeypressAvailable} {
       # *** LONG KEYPRESS ***
       append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
@@ -280,7 +274,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       # append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_ONDELAY_TIME TIMEBASE_LONG]"
 
       # ON_TIME
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
+      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn alarmTimeMax10Min $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
 
     incr pref
     set param LONG_SIGNAL_SELECTION_ACOUSTIC
@@ -323,12 +317,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(7) "\${stringTableAlarmConfirmingSignal2}"
     append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param]
     append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-    # OFFDELAY
-    # append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_OFFDELAY_TIME TIMEBASE_LONG]"
-
-    # OFF_TIME
-    # append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_OFF_TIME TIMEBASE_LONG]"
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -346,7 +334,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
     # ON_TIME
-    append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+    append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn alarmTimeMax10Min $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
     incr pref
     set param SHORT_SIGNAL_SELECTION_ACOUSTIC
@@ -404,7 +392,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_ONDELAY_TIME TIMEBASE_LONG]"
 
       # ON_TIME
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
+      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn alarmTimeMax10Min $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
 
     incr pref
     set param LONG_SIGNAL_SELECTION_ACOUSTIC
@@ -447,12 +435,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(7) "\${stringTableAlarmConfirmingSignal2}"
     append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param]
     append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-    # OFFDELAY
-    # append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_OFFDELAY_TIME TIMEBASE_LONG]"
-
-    # OFF_TIME
-    # append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_OFF_TIME TIMEBASE_LONG]"
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

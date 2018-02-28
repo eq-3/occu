@@ -6,7 +6,9 @@ function GroupDevice(id, serialNumber, type)
   conInfo(id + " " + serialNumber + " " + type);
   var self = this;
   self.id = id;
-  self.realSerialNumber = serialNumber.split(":")[0];  
+  self.arSerialNumber = serialNumber.split(":");
+  self.realSerialNumber = self.arSerialNumber[0];
+  self.Channel = self.arSerialNumber[1];
   conInfo(self.realSerialNumber);
   self.serialNumber = serialNumber
   self.device = DeviceList.getDeviceByAddress(self.realSerialNumber);
@@ -62,7 +64,7 @@ function GroupDevice(id, serialNumber, type)
   {
     //picDivShow(jg_250, self.type, 250, -1, mouseoverevent.currentTarget);
     if (typeof self.device != "undefined") {
-      picDivShow(jg_250, self.device.deviceType.id, 250, -1, mouseoverevent.currentTarget);
+      picDivShow(jg_250, self.device.deviceType.id, 250, self.Channel, mouseoverevent.currentTarget);
     }
   };
   

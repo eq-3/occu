@@ -1054,6 +1054,7 @@ jQuery.extend(true, langJSON, {
     "stringTableConditionSwitchTransmitterRainQuantity" :  "Sensor rainfall volume",
     "stringTableConditionSwitchTransmitterRainDrop" :  "Rain sensor",
     "stringTableConditionSwitchTransmitterWindDirection" :  "Wind direction sensor",
-    "stringTablePassageDetectorDirectionTitle" : "Direction recognition"
+    "stringTablePassageDetectorDirectionTitle" : "Direction recognition",
+    "stringTableWaterDetectionTransmitterTitle" : "Water sensor"
   }
 });

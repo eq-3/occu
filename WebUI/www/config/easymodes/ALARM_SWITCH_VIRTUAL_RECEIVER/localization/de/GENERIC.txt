@@ -1,11 +1,9 @@
 "acousticalAlarm" : "Akustischer Alarm",
 "opticalAlarm" : "Optischer Alarm",
-
 "switch_off" : "Alarm aus",
 "switch_on" : "Alarm ein",
 "switch_on_off" : "Alarm ein / aus",
 "switch_toggle" : "Alarm toggle",
-
 "stringTableAlarmDisableOpticalSignal" : "Kein optisches Signal",
 "stringTableAlarmBlinkingAlternatelyRepeating" : "Abwechselndes, langsames Blinken",
 "stringTableAlarmBlinkingBothRepeating" : "Gleichzeitigs langsames Blinken",

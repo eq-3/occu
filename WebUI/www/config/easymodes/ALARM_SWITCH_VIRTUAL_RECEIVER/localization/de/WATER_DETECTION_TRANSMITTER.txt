@@ -1,0 +1,9 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Wassermelders wird der Alarm f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span>",
+
+"switchMode" : "Schalten bei",
+
+"subset_1": "Feuchtigkeit",
+"subset_2": "Wasserstand",
+"subset_3": "Feuchtigkeit oder Wasserstand",
+"subset_4": "Trockenheit",

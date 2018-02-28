@@ -184,6 +184,7 @@
                         }
                       }
                     }
+                    Call("/esp/functions.fn::getSpecialTranslationPrgDest()");
                     Write( sValue );
                     Write( '</option>' );
                   }

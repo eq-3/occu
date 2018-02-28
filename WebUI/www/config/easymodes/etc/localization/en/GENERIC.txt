@@ -46,15 +46,15 @@
 
 "helpBtnChannelConfiguration" : "<span class=\"translated\">To enable correct operation of the profile, the channel parameters of the sensor have to be configured accordingly. The settings can be adjusted here via the button 'Editing transmitter channel settings'.</span><br/><br/>",
 
-"helpBtnChannelConfigurationMotionDetectorGeneric" : "en* Die Einschaltdauer des Aktors sollte immer etwas gr%F6sser sein, als der 'Mindestsendeabstand' des Sensors. ",
+"helpBtnChannelConfigurationMotionDetectorGeneric" : "The switch-on duration should always be longer than the ‘Minimum transmission interval' of the sensor. ",
 
-"helpBtnChannelConfigurationMotionDetectorA" : "en* Der Mindestsendeabstand des Sensors ist auf ",
-"helpBtnChannelConfigurationMotionDetectorB" : "eingestellt. Das heisst, erkannte Bewegungen werden alle ",
-"helpBtnChannelConfigurationMotionDetectorC" : "an den Aktor gemeldet. Die Einschaltdauer des Aktors sollte deshalb immer gr%F6sser als ",
-"helpBtnChannelConfigurationMotionDetectorD" : "sein, damit das Profil erwartungsgem%E4%DF arbeitet. ",
-"helpBtnChannelConfigurationMotionDetectorE" : "Ausserdem sollte darauf geachtet werden, dass der Kanalparameter 'Innerhalb des Sendeabstandes erkannte Bewegung senden' aktiviert ist.<br/><br/>",
+"helpBtnChannelConfigurationMotionDetectorA" : "The minimum transmission interval of the sensor ist set to ",
+"helpBtnChannelConfigurationMotionDetectorB" : ".  All movements detected are reported every ",
+"helpBtnChannelConfigurationMotionDetectorC" : "to the actuator. The switch-on duration of the actuator should therefore always be longer than ",
+"helpBtnChannelConfigurationMotionDetectorD" : ", to ensure the correct operation of the profile. ",
+"helpBtnChannelConfigurationMotionDetectorE" : "Also, make sure that the channel parameter ‘Send detected motion within transmission interval’ is activated.<br/><br/>",
 
-"helpGotoChannelConfiguration" : "en* Die Einstellungen des Sensors k%F6nnen von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.",
+"helpGotoChannelConfiguration" : "The settings can be adjusted here via the button 'Editing transmitter channel settings",
 
 "BLACK" : "Off",
 "BLUE" : "Blue",

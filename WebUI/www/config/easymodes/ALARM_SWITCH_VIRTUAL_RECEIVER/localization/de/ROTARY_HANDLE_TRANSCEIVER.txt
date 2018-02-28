@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen des Schaltkontaktes wird der Alarm ein- und beim Schlie&szlig;en ausgeschaltet. Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen des Schaltkontaktes wird der Alarm eingeschaltet.</span><br/><br/>",
 "description_2" : "<span class=\"translated\">Beim Erkennen des festgelegten &Auml;nderungssignals wird der Alarm eingeschaltet.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Beim Erkennen des &Ouml;ffnen-Signals (ganz auf oder gekippt), wird der Alarm in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). </span><br/><br/>",
+"_description_3" : "<span class=\"translated\">Beim Erkennen des &Ouml;ffnen-Signals (ganz auf oder gekippt), wird der Alarm in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). </span><br/><br/>",
 
 "subset_1" : "Offen - ein / Zu - aus",
 "subset_2" : "Offen - aus / Zu - ein",

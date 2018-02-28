@@ -3,7 +3,7 @@ jQuery.extend(true,langJSON, {
     "chType_ACTOR_SECURITY" : "Ventilation lock channel",
     "chType_ACTOR_WINDOW" : "Actor channel",
     "chType_ALARM_COND_SWITCH_RECEIVER" : "Connection partner<br/>for sensor with security channel",
-    "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Connection partner<br/>alarm siren",
+    "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Connection partner<br/>backup alarm siren",
     "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarm channel",
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analog output",
     "chType_ARMING" : "Arming",
@@ -97,8 +97,13 @@ jQuery.extend(true,langJSON, {
     "chType_WEEK_PROGRAM" : "Connection partner week program",
     "chType_WINDOW_SWITCH_RECEIVER" : "Connection partner<br/>shutter contact",
 
+    "comment" : "the following is for HmIP-Groups",
+    "REMOTE_CONTROL" : "Homematic IP Push button channel",
+    "RADIATOR_THERMOSTAT" : "Homematic IP Radiator thermostat",
+    "SENSOR_WINDOW" : "Homematic IP Window state detection",
+    "SWITCH_ACTUATOR" : "Homematic IP Switch actuator",
+    "WALLMOUNTED_THERMOSTAT" : "Homematic IP Wall thermostat",
+
     "theEnd" : ""
   }
 });
-
-

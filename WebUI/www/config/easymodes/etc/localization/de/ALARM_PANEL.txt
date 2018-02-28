@@ -1,10 +1,10 @@
 jQuery.extend(true,langJSON, {
   "de" : {
-    "alarmPanelHeader" : "In Verbindung mit einer AlarmSirene (ASIR) k%F6nnen hier entsprechende Einstellungen gemacht werden.",
+    "alarmPanelHeader" : "In Verbindung mit einer AlarmSirene (ASIR) k%F6nnen hier entsprechende Alarmzonen aktiviert werden.",
 
     "paramAlarmModeZone" : "<span>Aktive Alarmzonen</span>",
     "paramAlarmModeType" : "<span>Alamierung bei Nichterreichen<br/>der "+ HMIdentifier.de.CCUShortName +"</span>",
-    "ALARM_FOR_ZONES" : "Alarmierung aller aktiven Zonen",
-    "DISARM_FOR_ZONES" : "Keine Alarmierung"
+    "ALARM_FOR_ZONES" : "Alarmierung aller gew%E4hlten Zonen",
+    "DISARM_FOR_ZONES" : "Unscharf-Schalten aller gew%E4hlten Zonen"
   }
 });

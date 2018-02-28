@@ -2,60 +2,67 @@ jQuery.extend(true,langJSON, {
   "en" : {
     "COMMENT" : "THIS is for the release A/2018",
 
-    "stringTableBrightnessFilterSize" : "en* Anzahl der zur Berechnung der Helligkeit<br/>verwendeten letzten Helligkeitswerte",
+    "stringTableBrightnessFilterSize" : "Number of last brightness values used for calculation<br/>of brightness",
 
-    "stringTableWaterLevelDetectedFalse" : "en* Wasserstand erkannt: Nein",
-    "stringTableWaterLevelDetectedTrue" : "en* Wasserstand erkannt: Ja",
+    "stringTableWaterLevelDetectedFalse" : "Water level detected: No",
+    "stringTableWaterLevelDetectedTrue" : "Water level detected: Yes",
 
-    "stringTableMoistureDetectedFalse" : "en* Feuchtigkeit erkannt: Nein",
-    "stringTableMoistureDetectedTrue" : "en* Feuchtigkeit erkannt: Ja",
-    "stringTableStateUnknown" : "en* Zustand unbekannt",
+    "stringTableMoistureDetectedFalse" : "Humidity detected: No",
+    "stringTableMoistureDetectedTrue" : "Water level detected: Yes",
+    "stringTableStateUnknown" : "Status unknown",
 
-    "stringTableWeatherTransmitAlarmEventFalse" : "en* Feuchtigkeit oder Wasserstand erkannt: Nein",
-    "stringTableWeatherTransmitAlarmEventTrue" : "en* Feuchtigkeit oder Wasserstand erkannt: Ja",    "lblAlarmTrigger" : "Alarmausl%F6ser",
+    "stringTableWeatherTransmitAlarmEventFalse" : "Humidity or water level detected: No",
+    "stringTableWeatherTransmitAlarmEventTrue" : "Humidity or water level detected: Yes",
+    "lblAlarmTrigger" : "Alarm trigger",
 
-    "stringTableNoAcousticAlarm" : "en* Keine Alarmausl%F6sung ",
-    "stringTableTriggerEvent1" : "en* Alarm bei Feuchtigkeit",
-    "stringTableTriggerEvent2" : "en* Alarm bei Wasserstand",
-    "stringTableTriggerEvent1_2" : "en* Alarm bei Feuchtigkeit/Wasserstand",
+    "stringTableNoAcousticAlarm" : "No triggering of alarm",
+    "stringTableTriggerEvent1" : "Alarm in case of humidity",
+    "stringTableTriggerEvent2" : "Alarm in case of water",
+    "stringTableTriggerEvent1_2" : "Alarm in case of humidity/water",
 
 
-    "lblAlarmTiming" : "en* Alarmmeldung",
-    "stringTablePermanent" : "en* Daueralarm",
-    "stringTableThreeMinutes" : "en* Alarm f%FCr 3 Minuten",
-    "stringTableSixMinutes" : "en* Alarm f%FCr 6 Minuten",
-    "stringTableOncePerMinute" : "en* Ein Alarmsignal pro Minute",
+    "lblAlarmTiming" : "Alarm message",
+    "stringTablePermanent" : "Continuous alarm",
+    "stringTableThreeMinutes" : "Alarm for 3 minutes",
+    "stringTableSixMinutes" : "Alarm for 6 minutes",
+    "stringTableOncePerMinute" : "One alarm signal per minute",
 
-    "comment" : "The next 5 lines are for the translation of group devices",
-    "WALLMOUNTED_THERMOSTAT" : "en* Wandthermostat",
-    "RADIATOR_THERMOSTAT" : "en* Heizk%F6rperthermostat",
-    "SENSOR_WINDOW" : "en* Fensterkotakt / Drehgriffsensor",
-    "SWITCH_ACTUATOR" : "en* Schaltaktor",
-    "REMOTE_CONTROL" : "en* Tasterkanal",
+    "stringTableProcessNotStableBlindTransmitter" : "Blind moves",
+    "stringTableProcessStableBlindTransmitter" : "Blind not moving",
 
-    "stringTableProcessNotStableBlindTransmitter" : "en* Jalousie f%E4hrt",
-    "stringTableProcessStableBlindTransmitter" : "en* Jalousie steht",
+    "stringTableProcessNotStableShutterTransmitter" : "Shutter moves",
+    "stringTableProcessStableShutterTransmitter" : "Shutter not moving",
 
-    "stringTableProcessNotStableShutterTransmitter" : "en* Rolllade f%E4hrt",
-    "stringTableProcessStableShutterTransmitter" : "en* Rolllade steht",
+    "stringTableProcessNotStableDimmerTransmitter" : "Ramp active",
+    "stringTableProcessStableBlindDimmerTransmitter" : "Level stable",
 
-    "stringTableProcessNotStableDimmerTransmitter" : "en* Rampe aktiv",
-    "stringTableProcessStableBlindDimmerTransmitter" : "en* Pegel stabil",
+    "stringTableBlindActivityStateDown" : "Blind moves down",
+    "stringTableBlindActivityStateUnknown" : "Blind activity unknown",
+    "stringTableBlindActivityStateUp" : "Blind moves up",
 
-    "stringTableBlindActivityStateDown" : "en* Jalousie fährt herunter",
-    "stringTableBlindActivityStateUnknown" : "en* Status unbekannt",
-    "stringTableBlindActivityStateUp" : "en* Jalousie fährt hoch",
-    "stringTableBlindActivityStateStable" : "en* * Jalousie steht *",
+    "stringTableShutterActivityStateDown" : "Shutter moves down",
+    "stringTableShutterActivityStateUnknown" : "Shutter activity unknown",
+    "stringTableShutterActivityStateUp" : "Shutter moves up",
 
-    "stringTableShutterActivityStateDown" : "en* Rolllade fährt herunter",
-    "stringTableShutterActivityStateUnknown" : "en* Status unbekannt",
-    "stringTableShutterActivityStateUp" : "en* Rolllade fährt hoch",
-    "stringTableShutterActivityStateStable" : "en* * Rolllade steht *",
+    "stringTableDimmerActivityStateDown" : "Ramp up",
+    "stringTableDimmerActivityStateUnknown" : "Dimmer activity unknown",
+    "stringTableDimmerActivityStateUp" : "Ramp down",
 
-    "stringTableDimmerActivityStateDown" : "en* Rampe hoch",
-    "stringTableDimmerActivityStateUnknown" : "en* Status unbekannt",
-    "stringTableDimmerActivityStateUp" : "en* Rampe herunter",
-    "stringTableDimmerActivityStateStable" : "en* * Pegel stabil *",
+    "stringTableWallMountedThermostatTitle" : "Wall Thermostat",
+    "stringTableRadiatorThermostatTitle" : "Radiator Thermostat",
+
+    "acousticAlarm" : "Acoustic signal",
+    "opticalAlarm" : "Visual signal",
+
+    "stringTableErrorNonFlatPositioningFalse" : "Angle for position detection exceeded: No",
+    "stringTableErrorNonFlatPositioningTrue" : "Angle for position detection exceeded: Yes",
+
+    "stringTableAcousticAlarmActiveFalse" : "Acoustic signal deactivated",
+    "stringTableAcousticAlarmActiveTrue" : "Acoustic signal activated",
+    "stringTableOpticalAlarmActiveFalse" : "Visual signal deactivated",
+    "stringTableOpticalAlarmActiveTrue" : "Visual signal activated",
+
+    "positionDetectionOFF" : "Position detection OFF",
 
     "noMoreKeys" : ""
   }

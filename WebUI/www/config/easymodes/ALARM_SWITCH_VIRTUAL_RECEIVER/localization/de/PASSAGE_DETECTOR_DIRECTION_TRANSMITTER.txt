@@ -1,0 +1,4 @@
+"description_2_1" : "<span class=\"translated\">Bei einem Durchgang von rechts nach links wird der Alarm f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_3_1" : "<span class=\"translated\">Bei einem Durchgang von links nach rechts wird der Alarm f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+
+"description_notActive" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",

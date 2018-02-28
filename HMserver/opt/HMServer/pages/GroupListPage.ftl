@@ -117,6 +117,7 @@
         self.editGroup = function(group)
         {
             ShowWaitAnim();
+            HideWaitAnimAutomatically(60);
             var url = '/pages/jpages/group/edit?sid='+SessionId;
             var data = new Object();
             data.groupId = group.id;

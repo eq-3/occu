@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">When receiving the decision value defined the switch actuator is switched on for the desired time.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+
+"subset_1" : "right > left on / left > right off",
+"subset_2" : "right > left off / left > right on",
+"subset_3" : "right -> left",
+"subset_4" : "left -> right",
+"subset_5" : "left -> right or right -> left",

@@ -615,13 +615,19 @@ proc showHmIPChannel {devType direction address chType} {
     return 0
   }
 
-  if {$devType == "HMIP-WTH" && ($chType == "HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER")} {
+  if {($devType == "HMIP-WTH") && ($chType == "HEATING_CLIMATECONTROL_SWITCH_TRANSMITTER")} {
    # show the channel
     return 1
   }
 
   # The weekly program is not yet in use, so we can't use it for links
   if {$chType == "WEEK_PROGRAM"} {
+   # don't show the channel
+    return 0
+  }
+
+  # The sabotage channel of the HmIP-ASIR is not yet in use, so we can't use it for links
+  if {($devType == "HMIP-ASIR") && ($chType == "KEY_TRANSCEIVER")} {
    # don't show the channel
     return 0
   }

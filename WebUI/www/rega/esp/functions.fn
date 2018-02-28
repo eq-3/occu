@@ -523,6 +523,7 @@ function ::isParameterVisible() {
   string sInterface = _oIface.Name();
 
   string hmIPRFIdentifier = "HmIP-RF";
+  string hmIPVirtualDevIdentifier = "VirtualDevices";
   string bidCosRFIdentifier = "BidCos-RF";
   string wiredIdentifier = "BidCos-Wired";
 
@@ -532,8 +533,8 @@ function ::isParameterVisible() {
   showChannelParam = true;
 
   if ( sInterface == hmIPRFIdentifier ) {
-    excludeBinaryParams = "PARTY_,PARTY_MODE,SECTION,PROCESS,VALVE_STATE,CONTROL_DIFFERENTIAL_TEMPERATURE,RSSI_DEVICE,RSSI_PEER,";
-    excludeBinaryParams = excludeBinaryParams#"OPERATING_VOLTAGE,BOOST_TIME,SMOKE_DETECTOR_TEST_RESULT=NONE,QUICK_VETO_TIME";
+    excludeBinaryParams = "BOOST_TIME,CONTROL_DIFFERENTIAL_TEMPERATURE,LEVEL_STATUS,OPERATING_VOLTAGE,PARTY_,PARTY_MODE,PROCESS,QUICK_VETO_TIME,";
+    excludeBinaryParams = excludeBinaryParams#"RSSI_DEVICE,RSSI_PEER,SECTION,SMOKE_DETECTOR_TEST_RESULT=NONE,VALVE_STATE";
 
     if ((oCC.HssType().Find("DIMMER_TRANSMITTER") != -1)
     || (oCC.HssType().Find("DIMMER_VIRTUAL_RECEIVER")!= -1)
@@ -553,14 +554,21 @@ function ::isParameterVisible() {
       return;
     }
   }
-  
+
+  if ( sInterface == hmIPVirtualDevIdentifier ) {
+    excludeBinaryParams = "BOOST_TIME,CONTROL_DIFFERENTIAL_TEMPERATURE,LEVEL_STATUS,OPERATING_VOLTAGE,PARTY_,PARTY_MODE,PROCESS,QUICK_VETO_TIME,";
+    excludeBinaryParams = excludeBinaryParams#"RSSI_DEVICE,RSSI_PEER,SECTION,SMOKE_DETECTOR_TEST_RESULT=NONE,VALVE_STATE";
+    return;
+  }
+
+
   if ( sInterface == bidCosRFIdentifier ) {
     excludeBinaryParams = "PARTY_";
     includeBinaryParams = "PARTY_MODE";
   }
 
  ! The check of the type is to prevent the hiding of system vars
-  if ((( sInterface == hmIPRFIdentifier ) || ( sInterface == bidCosRFIdentifier )) && ( oDP.IsTypeOf( OT_HSSDP ))) {
+  if ((( sInterface == hmIPRFIdentifier ) || ( sInterface == bidCosRFIdentifier ) || (sInterface == hmIPVirtualDevIdentifier)) && ( oDP.IsTypeOf( OT_HSSDP ))) {
     foreach (tmp, excludeBinaryParams.Split(",")) {
       if (oDP.HSSID().Find(tmp) != -1) {
         foreach (tmp, includeBinaryParams.Split(",")) {
@@ -601,7 +609,7 @@ function ::getFirmwareVersion() {
   }
 }
 
-function ::getSpecialTranslation() {
+function ::getSpecialTranslationPrgCond() {
 
   ! This is necessary for the passage detector SPDR
   ! The same parameter of the same channel type (ch 2 and 3) must be translated differently.
@@ -639,5 +647,17 @@ function ::getSpecialTranslation() {
     }
   }
 
+  return;
+}
+
+function ::getSpecialTranslationPrgDest() {
+  ! ASIR - Adds the string "Alarmsignal: " to the original value.
+  if (oDP.HSSID() == "ACOUSTIC_ALARM_SELECTION") {
+    sValue = "${acousticAlarm}: "#sValue;
+  }
+  ! ASIR - Adds the string "Alarmsignal: " to the original value.
+  if (oDP.HSSID() == "OPTICAL_ALARM_SELECTION") {
+    sValue = "${opticalAlarm}: "#sValue;
+  }
   return;
 }

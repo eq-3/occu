@@ -159,7 +159,7 @@
                       }
                     }
                   }
-                  Call("/esp/functions.fn::getSpecialTranslation()");
+                  Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
                   Write( sValue );
 
                   Write( '</option>' );
@@ -183,7 +183,7 @@
                     }
                   }
 
-                  Call("/esp/functions.fn::getSpecialTranslation()");
+                  Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
                   Write( sValue );
                   Write( '</option>' );
                 }
@@ -209,7 +209,7 @@
                         }
                       }
                     }
-                    Call("/esp/functions.fn::getSpecialTranslation()");
+                    Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
                     Write( sValue );
                     Write( '</option>' );
                   }

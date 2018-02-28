@@ -5113,6 +5113,11 @@ application {
 	border:1px solid $_(black); /* black */
 }
 
+.CLASS02525c {
+	background-color:$_(okSignal);
+	border:1px solid $_(black); /* black */
+}
+
 .CLASS02526 {
 	color: $_(textColorB); /* #000000 */
 }
@@ -5330,7 +5335,12 @@ application {
 .CLASS02558 {
 	height:96px;
 	width:96px;
-	background-color:#c70022;
+	background-color:#c70022;	/* green */
+	border:1px solid $_(black); /* black */
+}
+
+.CLASS02558b {
+	background-color:#c70022;		/* green */
 	border:1px solid $_(black); /* black */
 }
 

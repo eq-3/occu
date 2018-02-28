@@ -250,4 +250,3 @@ jQuery.extend(true,langJSON, {
     "DEVICE" : "Bilinmeyen cihaz"
   }
 });
-

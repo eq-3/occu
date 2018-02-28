@@ -150,7 +150,7 @@ proc getCheckBoxCyclicInfoMsg {param value chn prn {extraparam ""}} {
   global psDescr
   upvar psDescr psDescr
 
-  set s  "[getCheckBox '$param' $value $chn '$prn\_tmp' "onchange=\"setCyclicInfoMsg(this, '$chn', '$prn');\""]"
+  set s  "[getCheckBox '$param' $value $chn $prn\_tmp "onchange=\"setCyclicInfoMsg(this, '$chn', '$prn');\""]"
   append s  "<td class=\"hidden\">[getTextField $param $value $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
   append s "<script type=\"text/javascript\">"
@@ -318,6 +318,10 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
         append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
       }
 
+      alarmTimeMax10Min {
+        # setDelay0to20M_step2MOption
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentAlarmTimeMax10MinOption($prn, $pref, \"$special_input_id\");}, $javascriptDelay)</script>"
+      }
     }
   } else {
     switch $type {
@@ -348,9 +352,13 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
       }
 
       delay0To20M_step2M {
-        # setCurrentSwitchingIntervalOnTimeOption
         append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
       }
+
+      alarmTimeMax10Min {
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentAlarmTimeMax10MinOption($prn, $pref, \"$special_input_id\",[lindex $PROFILE($timeBaseParam) 0],[lindex $PROFILE($timeFactorParam) 0]);}, $javascriptDelay)</script>"
+      }
+
     }
   }
   incr pref

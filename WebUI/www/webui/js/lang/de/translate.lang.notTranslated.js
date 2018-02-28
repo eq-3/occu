@@ -28,13 +28,6 @@ jQuery.extend(true,langJSON, {
     "stringTableSixMinutes" : "Alarm f%FCr 6 Minuten",
     "stringTableOncePerMinute" : "Ein Alarmsignal pro Minute",
 
-    "comment" : "The next 5 lines are for the translation of group devices",
-    "WALLMOUNTED_THERMOSTAT" : "Wandthermostat",
-    "RADIATOR_THERMOSTAT" : "Heizk%F6rperthermostat",
-    "SENSOR_WINDOW" : "Fensterkotakt / Drehgriffsensor",
-    "SWITCH_ACTUATOR" : "Schaltaktor",
-    "REMOTE_CONTROL" : "Tasterkanal",
-
     "stringTableProcessNotStableBlindTransmitter" : "Jalousie f%E4hrt",
     "stringTableProcessStableBlindTransmitter" : "Jalousie steht",
 
@@ -47,17 +40,30 @@ jQuery.extend(true,langJSON, {
     "stringTableBlindActivityStateDown" : "Jalousie f%E4hrt herunter",
     "stringTableBlindActivityStateUnknown" : "Jalousie Aktivit%E4t unbekannt",
     "stringTableBlindActivityStateUp" : "Jalousie f%E4hrt hoch",
-    "stringTableBlindActivityStateStable" : "* Jalousie steht *",
 
     "stringTableShutterActivityStateDown" : "Rolllade f%E4hrt herunter",
     "stringTableShutterActivityStateUnknown" : "Rolllade Aktivit%E4t unbekannt",
     "stringTableShutterActivityStateUp" : "Rolllade f%E4hrt hoch",
-    "stringTableShutterActivityStateStable" : "* Rolllade steht *",
 
     "stringTableDimmerActivityStateDown" : "Rampe hoch",
     "stringTableDimmerActivityStateUnknown" : "Dimmer Aktivit%E4t unbekannt",
     "stringTableDimmerActivityStateUp" : "Rampe herunter",
-    "stringTableDimmerActivityStateStable" : "* Pegel stabil *",
+
+    "stringTableWallMountedThermostatTitle" : "Wandthermostat",
+    "stringTableRadiatorThermostatTitle" : "Heizk%F6rperthermostat",
+
+    "acousticAlarm" : "Akustisches Signal",
+    "opticalAlarm" : "Optisches Signal",
+
+    "stringTableErrorNonFlatPositioningFalse" : "Winkel Lageerkennung %FCberschritten: Nein",
+    "stringTableErrorNonFlatPositioningTrue" : "Winkel Lageerkennung %FCberschritten: Ja",
+
+    "stringTableAcousticAlarmActiveFalse" : "Akustisches Signal deaktiviert",
+    "stringTableAcousticAlarmActiveTrue" : "Akustisches Signal aktiviert",
+    "stringTableOpticalAlarmActiveFalse" : "Optisches Signal deaktiviert",
+    "stringTableOpticalAlarmActiveTrue" : "Optisches Signal aktiviert",
+
+    "positionDetectionOFF" : "Lageerkennung AUS",
 
     "noMoreKeys" : ""
   }

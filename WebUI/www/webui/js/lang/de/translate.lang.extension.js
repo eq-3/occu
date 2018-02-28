@@ -760,7 +760,7 @@ jQuery.extend(true,langJSON, {
     "optionSetLength" : "L&auml;nge angeben",
     "optionPassageCounterDetectionLR" : "Durchgangsz%E4hlung beide Richtungen",
     "optionPassageCounterDetectionL" : "Durchgangsz%E4hlung rechts nach links",
-    "optionPassageCounterDetectionR" : "Durchgangs%E4hlung links nach rechts",
+    "optionPassageCounterDetectionR" : "Durchgangsz%E4hlung links nach rechts",
     "optionPassageCounterDeltaLR" : "Differenz der Durchg%E4nge links/rechts",
     "optionPassageCounterDeltaL" : "Differenz der Durchg%E4nge links",
     "optionPassageCounterDeltaR" : "Differenz der Durchg%E4nge rechts",

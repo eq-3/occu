@@ -176,7 +176,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
-    append HTML_PARAMS(separate_1) "[getAlarmPanel ps]"
+    # append HTML_PARAMS(separate_1) "[getAlarmPanel ps]"
 
   append HTML_PARAMS(separate_1) "</table>"
 
