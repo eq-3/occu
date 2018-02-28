@@ -2,6 +2,13 @@
 ReGaHss ChangeLog
 -----------------
 
+2018-02-27 Jens Maus <mail@jens-maus.de>
+
+  * optimized system.Exec() to avoid creating zombie processes in case
+    background execution using "&" is used.
+
+#### BETA27-2018-01-14 (440f8d6) Release ####################################
+
 2017-12-26 Jens Maus <mail@jens-maus.de>
 
   * added "incorrect use" warnings for use of Device() on DP objects and
