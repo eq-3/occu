@@ -1415,7 +1415,7 @@
         </td>
 			</tr>
 		</table>
-		<div id='hintNoDataAvailable' class='hidden' style='text-align:center'><b>${'$'}{diagramNoDataAvailable}</b></div>
+		<div id='hintNoDataAvailable' class='hidden attention' style='text-align:center'><b>${'$'}{diagramNoDataAvailable}</b></div>
 		<div id="currentDiagram" style="margin-left: 25px;"></div>
 		
 		<div id="legendTooltipText" class="hideAtStart">${"$"}{diagramLegendExplanationTooltip}</div>

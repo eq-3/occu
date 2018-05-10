@@ -16,6 +16,7 @@ proc getIfaceURL {interface} {
    "BidCos-RF" {array set ifaceList $INTERFACE_LIST(BidCos-RF)}      
    "BidCos-Wired" {array set ifaceList $INTERFACE_LIST(BidCos-Wired)}      
    "HmIP-RF" {array set ifaceList $INTERFACE_LIST(HmIP-RF)}
+   "HmIP-Wired" {array set ifaceList $INTERFACE_LIST(HmIP-Wired)}
   }
   return $ifaceList(URL)
 }

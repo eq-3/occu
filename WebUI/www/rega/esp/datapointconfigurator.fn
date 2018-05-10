@@ -384,10 +384,24 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_DOOR_SENSOR) > -1 );
           if( bIsControl && (sLastControlName!=CN_DOOR_SENSOR) )
           {
-            WriteLine( "<script>conInfo('Control DOOR_WINDOW_CONTACT found.');</script>" );
-            isKnownControl = true;
-            sLastControlName = CN_DOOR_SENSOR;
-            Call("/esp/controls/door_window_contact.fn::CreateDoorWindowContact()");
+            object ch = dom.GetObject(chnId);
+            if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") {
+              WriteLine( "<script>conInfo('Control DOOR_WINDOW_CONTACT found.');</script>" );
+              isKnownControl = true;
+              sLastControlName = CN_DOOR_SENSOR;
+              Call("/esp/controls/door_window_contact.fn::CreateDoorWindowContact()");
+            } else {
+              WriteLine( "<script>conInfo('Control CN_MULTI_MODE_INPUT_TRANSMITTER found.');</script>" );
+              isKnownControl = true;
+              sLastControlName = CN_DOOR_SENSOR;
+              if (ch) {
+                if (ch.MetaData("channelMode") != 3) {
+                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                } else {
+                  Call("/esp/controls/door_window_contact.fn::CreateDoorWindowContact()");
+                }
+              }
+            }
           }
 
           !# RHS (Rotary Handle Sensor - Fensterdrehgriffkontakt)
@@ -895,6 +909,8 @@ function ::CreateNoFunction()
 function ::CreateUnknown()
 {
   boolean bStatusOnly = (system.GetVar("iStatusOnly") == 0);
+  string showParam = true;
+
   WriteLine( '<td class="CLASS02519">' );
     WriteLine( '<table cellspacing="10" style="margin: 10px 10px 10px -8px;">' );
     WriteLine( '<tr>');
@@ -915,266 +931,272 @@ function ::CreateUnknown()
     foreach( s, sEnum )
     {
       object oDP = dom.GetObject( s );
-      if( oDP )
+
+      if( oDP)
       {
-        boolean bIsKnownControl = false;
-        string sCName = oDP.MetaData("CONTROL");
-        if( sCName )
-        {
-          integer iPosPoint = sCName.Find('.');
-          if( iPosPoint != -1 )
+
+        ! Some parameters shouldn't be visible
+        Call("/esp/datapointconfigurator.fn::HideCertainParameters()");
+        if (showParam == true) {
+          boolean bIsKnownControl = false;
+          string sCName = oDP.MetaData("CONTROL");
+          if( sCName )
           {
-            string sCtrlName = sCName.Substr(0,iPosPoint);
-            integer iPosCtrl = sKnownControls.Find( sCtrlName );
-            if( iPosCtrl != -1 )
+            integer iPosPoint = sCName.Find('.');
+            if( iPosPoint != -1 )
             {
-              bIsKnownControl = true;
+              string sCtrlName = sCName.Substr(0,iPosPoint);
+              integer iPosCtrl = sKnownControls.Find( sCtrlName );
+              if( iPosCtrl != -1 )
+              {
+                bIsKnownControl = true;
+              }
+            }
+            !# Parameter is not visible
+            if(  sCName.Find("INVISIBLE") > -1)
+            {
+              WriteLine( "<script>conInfo('Control not visible.');</script>" );
+              isInvisible = true;
+            } else {
+              isInvisible = false;
             }
           }
-          !# Parameter is not visible
-          if(  sCName.Find("INVISIBLE") > -1)
+          if( (!bIsKnownControl) && (!isInvisible) )
           {
-            WriteLine( "<script>conInfo('Control not visible.');</script>" );
-            isInvisible = true;
-          } else {
-            isInvisible = false;
-          }
-        }
-        if( (!bIsKnownControl) && (!isInvisible) )
-        {
-          var value = oDP.Value();
+            var value = oDP.Value();
 
-          boolean bIsSysVar = ((oDP.IsTypeOf( OT_VARDP )) || (oDP.IsTypeOf( OT_ALARMDP )));
-          boolean bIsHssDp = ( oDP.IsTypeOf( OT_HSSDP ) );
-          boolean bChannel = ( cObj.IsTypeOf( OT_CHANNEL ) );
-          string sTitle = "";
-          string sKey = "";
-          boolean bHideValue = false;
-          if( bChannel )
-          {
-            if( bIsHssDp )
+            boolean bIsSysVar = ((oDP.IsTypeOf( OT_VARDP )) || (oDP.IsTypeOf( OT_ALARMDP )));
+            boolean bIsHssDp = ( oDP.IsTypeOf( OT_HSSDP ) );
+            boolean bChannel = ( cObj.IsTypeOf( OT_CHANNEL ) );
+            string sTitle = "";
+            string sKey = "";
+            boolean bHideValue = false;
+            if( bChannel )
             {
-              string sLongKey = cObj.HssType()#"|"#oDP.HSSID();
-              string sShortKey = oDP.HSSID();
-              if( (oDP.ValueType() == ivtInteger) && (oDP.ValueSubType() == istEnum) )
+              if( bIsHssDp )
               {
-                ! Current HmIP devices don`t work properly with web.webGetValueFromList
-                ! Therefore this is deactivated
-                if ( (oEName.Find("HmIP-RF.") == -1) ) {
-                 sLongKey = sLongKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
-                 sShortKey = sShortKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
-                } else {
-                  sLongKey = sLongKey#"="#value;
-                  sShortKey = sShortKey#"="#value;
-                }
+                string sLongKey = cObj.HssType()#"|"#oDP.HSSID();
+                string sShortKey = oDP.HSSID();
+                if( (oDP.ValueType() == ivtInteger) && (oDP.ValueSubType() == istEnum) )
+                {
+                  ! Current HmIP devices don`t work properly with web.webGetValueFromList
+                  ! Therefore this is deactivated
+                  if ( (oEName.Find("HmIP-RF.") == -1) ) {
+                   sLongKey = sLongKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
+                   sShortKey = sShortKey#"="#web.webGetValueFromList( oDP.ValueList(), value );
+                  } else {
+                    sLongKey = sLongKey#"="#value;
+                    sShortKey = sShortKey#"="#value;
+                  }
 
-                bHideValue = true;
-              }
-              if( (oDP.ValueType() == ivtBinary ) && ((oDP.ValueSubType() == istGeneric)||(oDP.ValueSubType() == istBool)||(oDP.ValueSubType() == istSwitch)) )
-              {
-                string sPVal = "";
-                if( oDP.Value() )
-                {
-                  sPVal = "TRUE";
+                  bHideValue = true;
                 }
-                else
+                if( (oDP.ValueType() == ivtBinary ) && ((oDP.ValueSubType() == istGeneric)||(oDP.ValueSubType() == istBool)||(oDP.ValueSubType() == istSwitch)) )
                 {
-                  sPVal = "FALSE";
+                  string sPVal = "";
+                  if( oDP.Value() )
+                  {
+                    sPVal = "TRUE";
+                  }
+                  else
+                  {
+                    sPVal = "FALSE";
+                  }
+                  sLongKey = sLongKey#"="#sPVal;
+                  sShortKey = sShortKey#"="#sPVal;
+                  bHideValue = true;
                 }
-                sLongKey = sLongKey#"="#sPVal;
-                sShortKey = sShortKey#"="#sPVal;
-                bHideValue = true;
-              }
-              sTitle = web.webKeyFromStringTable( sLongKey );
-              if( !sTitle.Length() )
-              {
-                sTitle = web.webKeyFromStringTable( sShortKey );
+                sTitle = web.webKeyFromStringTable( sLongKey );
                 if( !sTitle.Length() )
                 {
-                  sTitle = "["#sShortKey#"]";
+                  sTitle = web.webKeyFromStringTable( sShortKey );
+                  if( !sTitle.Length() )
+                  {
+                    sTitle = "["#sShortKey#"]";
+                  }
                 }
+              }
+              else
+              {
+                sTitle = oDP.Name();
               }
             }
             else
             {
               sTitle = oDP.Name();
             }
-          }
-          else
-          {
-            sTitle = oDP.Name();
-          }
 
-          string sValueUnit = oDP.ValueUnit();
-          string sSpace = " ";
-          if( sValueUnit == "degree" ) { sValueUnit = "&deg;"; sSpace = ""; }
-          if( sValueUnit == "100%" )
-          {
-            value = value * 100;
-            sValueUnit = "%";
-            sSpace = "";
-          }
-
-          string sValue = "?";
-
-          boolean bBoolean = ( value.Type() == "boolean" );
-          boolean bReal = ( value.Type() == "real" );
-
-          if( bBoolean && bChannel )
-          {
-            string sVLKey = "";
-            if( value == false ) { sVLKey = "=FALSE"; }
-            if( value == true ) { sVLKey = "=TRUE"; }
-            sValue = web.webKeyFromStringTable( sKey#sVLKey );
-            if( !sValue.Length() )
+            string sValueUnit = oDP.ValueUnit();
+            string sSpace = " ";
+            if( sValueUnit == "degree" ) { sValueUnit = "&deg;"; sSpace = ""; }
+            if( sValueUnit == "100%" )
             {
-              sValue = value.ToString(0);
+              value = value * 100;
+              sValueUnit = "%";
+              sSpace = "";
+            }
+
+            string sValue = "?";
+
+            boolean bBoolean = ( value.Type() == "boolean" );
+            boolean bReal = ( value.Type() == "real" );
+
+            if( bBoolean && bChannel )
+            {
+              string sVLKey = "";
+              if( value == false ) { sVLKey = "=FALSE"; }
+              if( value == true ) { sVLKey = "=TRUE"; }
+              sValue = web.webKeyFromStringTable( sKey#sVLKey );
+              if( !sValue.Length() )
+              {
+                sValue = value.ToString(0);
+                if( !sTitle.Length() )
+                {
+                  sTitle = sKey;
+                }
+              }
+              else
+              {
+                sTitle = "";
+              }
+            }
+            else
+            {
               if( !sTitle.Length() )
               {
                 sTitle = sKey;
               }
             }
-            else
-            {
-              sTitle = "";
-            }
-          }
-          else
-          {
-            if( !sTitle.Length() )
-            {
-              sTitle = sKey;
-            }
-          }
 
-          if( bReal )
-          {
-            sValue = value.ToString(2);
+            if( bReal )
+            {
+              sValue = value.ToString(2);
 
-            ! Show the illumination without decimal places
-            if ( (oEName.Find("HmIP-RF.") != -1) && (sShortKey == "ILLUMINATION") ) {
+              ! Show the illumination without decimal places
+              if ( (oEName.Find("HmIP-RF.") != -1) && (sShortKey == "ILLUMINATION") ) {
+                sValue = value.ToString(0);
+              }
+            }
+
+            if( (!bBoolean) && (!bReal) )
+            {
               sValue = value.ToString(0);
             }
-          }
 
-          if( (!bBoolean) && (!bReal) )
-          {
-            sValue = value.ToString(0);
-          }
-
-          if( !value.ToString().Length() )
-          {
-            sValue = "0";
-          }
-
-          if( bHideValue )
-          {
-            if( ( oDP.Operations() & OPERATION_WRITE ) == 0 )
+            if( !value.ToString().Length() )
             {
-              sValue = sTitle;
-              sTitle = "";
+              sValue = "0";
             }
-          }
 
-         ! if( !(i%2) ) { WriteLine( '<tr>' ); }
-          boolean bExistControl = true;
-          if( (bStatusOnly) && (!bIsSysVar) && (sLastControlName != ""))
-          {
-            bExistControl = false;
-          }
-          if( bExistControl  )
-          {
-            WriteLine( '<td>' );
+            if( bHideValue )
+            {
+              if( ( oDP.Operations() & OPERATION_WRITE ) == 0 )
+              {
+                sValue = sTitle;
+                sTitle = "";
+              }
+            }
 
-              WriteLine( '<div class="ControlBtnInfo CLASS02532">' );
-              if(sTitle == "") {
-                WriteLine( '<span class="_CLASS02533"><span class="CLASS02534 j_translate">'#sTitle#'</span>' );
-                }
-                else {
-                WriteLine( '<span class="_CLASS02533"><span class="CLASS02534 j_translate">'#sTitle#':</span>' );
-                }
-                boolean tbRead =  ( ( oDP.Operations() & OPERATION_READ ) != 0 );
-                boolean tbEvent = ( ( oDP.Operations() & OPERATION_EVENT ) != 0 );
-                boolean tbWrite = ( ( oDP.Operations() & OPERATION_WRITE ) != 0 );
-                boolean bBoolean = false;
+           ! if( !(i%2) ) { WriteLine( '<tr>' ); }
+            boolean bExistControl = true;
+            if( (bStatusOnly) && (!bIsSysVar) && (sLastControlName != ""))
+            {
+              bExistControl = false;
+            }
+            if( bExistControl  )
+            {
+              WriteLine( '<td>' );
 
-                if (cObj.IsTypeOf(OT_VARDP) || cObj.IsTypeOf(OT_ALARMDP)) {
-                  tbWrite = false;
-                }
-
-                WriteLine( '<span class="CLASS02535" style="color:white">' );
-
-                if( !tbWrite )
-                {
-                  string sValueh = "";
-                  if (oDP.HssType() == "WIND_DIRECTION")
-                  {
-                    Call("/esp/datapointconfigurator.fn::ConvWindDir()");
+                WriteLine( '<div class="ControlBtnInfo CLASS02532">' );
+                if(sTitle == "") {
+                  WriteLine( '<span class="_CLASS02533"><span class="CLASS02534 j_translate">'#sTitle#'</span>' );
                   }
-                  WriteLine(sValueh#" "#sValue#sSpace#sValueUnit );
-                }
-                else
-                {
-                  if( !bBoolean )
+                  else {
+                  WriteLine( '<span class="_CLASS02533"><span class="CLASS02534 j_translate">'#sTitle#':</span>' );
+                  }
+                  boolean tbRead =  ( ( oDP.Operations() & OPERATION_READ ) != 0 );
+                  boolean tbEvent = ( ( oDP.Operations() & OPERATION_EVENT ) != 0 );
+                  boolean tbWrite = ( ( oDP.Operations() & OPERATION_WRITE ) != 0 );
+                  boolean bBoolean = false;
+
+                  if (cObj.IsTypeOf(OT_VARDP) || cObj.IsTypeOf(OT_ALARMDP)) {
+                    tbWrite = false;
+                  }
+
+                  WriteLine( '<span class="CLASS02535" style="color:white">' );
+
+                  if( !tbWrite )
                   {
-                    if( (bStatusOnly) && (!bIsSysVar) && (sLastControlName == ""))
+                    string sValueh = "";
+                    if (oDP.HssType() == "WIND_DIRECTION")
                     {
-                      string sDivider = "";
-                      if( oDP.ValueUnit() == "100%" ) { sDivider = "/100"; }
-                      WriteLine( "<input size='6' value='"#sValue#"' onblur='setDpState("#oDP.ID()#", value"#sDivider#")' />"#sSpace#sValueUnit );
+                      Call("/esp/datapointconfigurator.fn::ConvWindDir()");
                     }
-                    else
-                    {
-                      string sSysVarVal = "";
-                      object cObjTmp = oDP;
-                      integer iVT = oDP.ValueType();
-                      integer iST = oDP.ValueSubType();
-                      boolean bLogic  = ( (iVT==ivtBinary)  && (iST==istBool)    );
-                      boolean bList   = ( (iVT==ivtInteger) && (iST==istEnum)    );
-                      boolean bNumber = ( (iVT==ivtFloat)   && (iST==istGeneric) );
-                      boolean bAlarm  = ( (iVT==ivtBinary)  && (iST==istAlarm)   );
-                      boolean bString = ( (iVT==ivtString)  && (iST==istChar8859));
-                      Call( "/esp/system.fn::getSysVarValAsString()" );
-                      WriteLine( sSysVarVal );
-                    }
+                    WriteLine(sValueh#" "#sValue#sSpace#sValueUnit );
                   }
                   else
                   {
-
-                    if( system.GetVar("iStatusOnly") == 0 )
+                    if( !bBoolean )
                     {
-                      string sClassName;
-
-                      sClassName = "CLASS02516";
-                      if( oDP.Value() == true ) { sClassName = "CLASS02517"; }
-                      WriteLine("<span class='" # sClassName # "' onclick='setDpState("#oDP.ID()#", true)'>&nbsp;&nbsp;An&nbsp;&nbsp;</span>&nbsp;&nbsp;");
-
-                      sClassName = "CLASS02516";
-                      if( (oDP.Value() == false) || (oDP.Value() == "") ) { sClassName = "CLASS02517"; }
-                      WriteLine("<span class='" # sClassName # "' onclick='setDpState("#oDP.ID()#", false)'>&nbsp;Aus&nbsp;</span>");
-                    }
-                    else
-                    {
-                      if (oDP.Value())
+                      if( (bStatusOnly) && (!bIsSysVar) && (sLastControlName == ""))
                       {
-                        WriteLine(oDP.ValueName1());
+                        string sDivider = "";
+                        if( oDP.ValueUnit() == "100%" ) { sDivider = "/100"; }
+                        WriteLine( "<input size='6' value='"#sValue#"' onblur='setDpState("#oDP.ID()#", value"#sDivider#")' />"#sSpace#sValueUnit );
                       }
                       else
                       {
-                        WriteLine(oDP.ValueName0());
+                        string sSysVarVal = "";
+                        object cObjTmp = oDP;
+                        integer iVT = oDP.ValueType();
+                        integer iST = oDP.ValueSubType();
+                        boolean bLogic  = ( (iVT==ivtBinary)  && (iST==istBool)    );
+                        boolean bList   = ( (iVT==ivtInteger) && (iST==istEnum)    );
+                        boolean bNumber = ( (iVT==ivtFloat)   && (iST==istGeneric) );
+                        boolean bAlarm  = ( (iVT==ivtBinary)  && (iST==istAlarm)   );
+                        boolean bString = ( (iVT==ivtString)  && (iST==istChar8859));
+                        Call( "/esp/system.fn::getSysVarValAsString()" );
+                        WriteLine( sSysVarVal );
+                      }
+                    }
+                    else
+                    {
+
+                      if( system.GetVar("iStatusOnly") == 0 )
+                      {
+                        string sClassName;
+
+                        sClassName = "CLASS02516";
+                        if( oDP.Value() == true ) { sClassName = "CLASS02517"; }
+                        WriteLine("<span class='" # sClassName # "' onclick='setDpState("#oDP.ID()#", true)'>&nbsp;&nbsp;An&nbsp;&nbsp;</span>&nbsp;&nbsp;");
+
+                        sClassName = "CLASS02516";
+                        if( (oDP.Value() == false) || (oDP.Value() == "") ) { sClassName = "CLASS02517"; }
+                        WriteLine("<span class='" # sClassName # "' onclick='setDpState("#oDP.ID()#", false)'>&nbsp;Aus&nbsp;</span>");
+                      }
+                      else
+                      {
+                        if (oDP.Value())
+                        {
+                          WriteLine(oDP.ValueName1());
+                        }
+                        else
+                        {
+                          WriteLine(oDP.ValueName0());
+                        }
                       }
                     }
                   }
-                }
-                WriteLine("</span></span>");
-              WriteLine( '</div>' );
-            WriteLine( '</td>' );
+                  WriteLine("</span></span>");
+                WriteLine( '</div>' );
+              WriteLine( '</td>' );
+            }
+            if( (i%2) ) { WriteLine( '</tr><tr>' ); }
+            i = i + 1;
           }
-          if( (i%2) ) { WriteLine( '</tr><tr>' ); }
-          i = i + 1;
         }
-      }
-    }
+       }
+     }
   WriteLine('</tr>');
   WriteLine('</table>');
   WriteLine('</td>');
@@ -1293,5 +1315,19 @@ function ::CreateSysVars()
   WriteLine( '</table>' );
   WriteLine( '</td>' );
   
+  return;
+}
+
+function ::HideCertainParameters() {
+  string tmp;
+  string param2Exclude = "IDENTIFY_DURATION,IDENTIFICATION_MODE_KEY_VISUAL,IDENTIFICATION_MODE_LCD_BACKLIGHT,IDENTIFY_TARGET_LEVEL";
+
+  showParam = true;
+  foreach (tmp, param2Exclude.Split(",")) {
+    if (oDP.HSSID().Find(tmp) != -1) {
+      showParam = false;
+      return;
+    }
+  }
   return;
 }

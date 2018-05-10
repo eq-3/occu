@@ -402,7 +402,7 @@ jQuery.extend(true,langJSON, {
     "alertUseOnlySpecialChars" : "L%FCtfen sadece izin verilen %F6zel karakterleri kullanin [., !, $, (, ), :, ;, #, %DF, %E4, %F6, %FC, -].",
     "alertCharsNotAllowed" : "Tanimlar asagidaki karakterleri icermemelidir: <, >, ', \", &, $, [, ], {, } ve \\",
     "alertErrorDeleteObject" : "Objeler silinemedi.",
-    "dialogAllRFInterfacesTitle" : "Bilinen t%FCm RF aray%FCzleri",
+    "dialogAllRFInterfacesTitle" : "Bilinen t%FCm aray%FCzleri",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentA" : "Yedek y%FCklenemedi. Bu yedek, merkezi yazilima dayaniyor ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentB" : "<br>\nBu yazilim, suanda merkezde y%FCkl%FC olan versiyondan daha g%FCnceldir ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentC" : ".<br>\n%D6nce merkezi yazilimi g%FCncelleyin, daha sonra sistem yedegini tekrar y%FCklemeye baslayin.",
@@ -1026,6 +1026,15 @@ jQuery.extend(true,langJSON, {
     "lblNormal" : "Normal",
     "lblOverflow" : "Overflow",
     "lblUnderflow" : "Underflow",
+
+    "colorBLACK" : "Black",
+    "colorBLUE" : "Blue",
+    "colorGREEN" : "Green",
+    "colorTURQUOISE" : "Turquoise",
+    "colorRED" : "Red",
+    "colorPURPLE" : "Purple",
+    "colorYELLOW" : "Yellow",
+    "colorWHITE" : "White",
 
     "theEnd" : ""
   }

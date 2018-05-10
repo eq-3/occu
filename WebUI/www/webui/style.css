@@ -293,6 +293,7 @@ a img {
   /*position: absolute;*/
   margin-left: 0px;
   margin-top: 6px;
+  padding-left: 10px;
 }
 
 /* Small Logo Position für An- und Abmeldung */
@@ -375,7 +376,7 @@ a img {
   text-align:center;
   border:solid 1px $_(black); /* black */
   background-color:$_(clickable);
-  height: 40px;
+  height: 20px;
 }
 
 .filterTable td
@@ -2141,6 +2142,17 @@ html, body {
     color: $_(clickable);
 }
 
+.noBorder {
+  border-style: none !important;
+}
+
+.marginAuto {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .RFConfig_InterfacesTable {
   border: 1px solid $_(black); /* black */
 }
@@ -3698,6 +3710,8 @@ application {
 	height:60px;
 	background-color: $_(white); /* white */
 	text-align:left;
+	min-height: 200px;
+	min-width: 20%;
 }
 
 .CLASS00016 {
@@ -3712,8 +3726,6 @@ application {
 	width:20%;
 	height:200px;
 	background-color: $_(white); /* white */
-	min-height: 200px;
-	min-width: 20%;
 }
 
 /* rega\pages\msg\statusinfo.htm */
@@ -7577,6 +7589,7 @@ color: $_(textColorA); /* white */
 
 .CLASS11102 {
   width: 100%;
+	padding-left: 10px;
 }
 
 .CLASS11103 {

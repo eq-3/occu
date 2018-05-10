@@ -400,7 +400,7 @@
             var device = new Object();
             device.id = item.id;
             device.serialNumber = item.serialNumber;
-            device.type = item.type;
+            device.type = translateKey(item.type);
             data.devicesToConfigure.push(device);
         });
 

@@ -424,7 +424,8 @@ function ::UpdateUI()
 
 
 
-  Write( 'if(urlParamInterfaces == "true") showRFInterfaces();');
+  Write( 'if(urlParamInterfaces == "true") showInterfaces();');
+  Write( 'if(showAPITools == "true") showHmAPITools();');
 
   !###################
   !# Systemvariablen #

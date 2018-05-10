@@ -68,68 +68,46 @@ getOnlyNonExpertChannels = function(devId, chn) {
   arEasyChannels = [];
   chn = parseInt(chn);
 
+  var arNonExpertChannels = [];
 
-  switch (devId.toUpperCase()) {
-    case "HMIP-FDT" :
-    case "HMIP-FSM" :
-    case "HMIP-FSM16" :
-      if (chn == 2) {result =  chn;}
-      break;
+  arNonExpertChannels["HMIP-FDT"] = [2];
+  arNonExpertChannels["HMIP-FSM"] = [2];
+  arNonExpertChannels["HMIP-FSM16"] = [2];
 
-    case "HMIP-PCBS-BAT" :
-    case "HMIP-PDT" :
-    case "HMIP-PDT-UK" :
-    case "HMIP-PS" :
-    case "HMIP-PCBS" :
-    case "HMIP-PSM" :
-    case "HMIP-PSM-PE" :
-    case "HMIP-PSM-UK" :
-    case "HMIP-PSM-IT" :
-    case "HMIP-PSM-CH" :
-      if (chn == 3) {result =  chn;}
-      break;
+  arNonExpertChannels["HMIP-PCBS"] = [3];
+  arNonExpertChannels["HMIP-PCBS-BAT"] = [3];
+  arNonExpertChannels["HMIP-PDT"] = [3];
+  arNonExpertChannels["HMIP-PDT-UK"] = [3];
+  arNonExpertChannels["HMIP-PS"] = [3];
+  arNonExpertChannels["HMIP-PSM"] = [3];
+  arNonExpertChannels["HMIP-PSM-CH"] = [3];
+  arNonExpertChannels["HMIP-PSM-IT"] = [3];
+  arNonExpertChannels["HMIP-PSM-PE"] = [3];
+  arNonExpertChannels["HMIP-PSM-UK"] = [3];
 
-    case "HMIP-BBL" :
-    case "HMIP-BDT" :
-    case "HMIP-BROLL" :
-    case "HMIP-BSM" :
-    case "HMIP-FBL" :
-    case "HMIP-FROLL" :
-      if (chn == 4) {result =  chn;}
-      break;
+  arNonExpertChannels["HMIP-BBL"] = [4];
+  arNonExpertChannels["HMIP-BDT"] = [4];
+  arNonExpertChannels["HMIP-BROLL"] = [4];
+  arNonExpertChannels["HMIP-BSM"] = [4];
+  arNonExpertChannels["HMIP-FBL"] = [4];
+  arNonExpertChannels["HMIP-FROLL"] = [4];
 
-    case "HMIP-MOD-OC8" :
-      arEasyChannels = [10,14,18,22,26,30,34,38];
-      jQuery.each(arEasyChannels,function(index,val) {
-        if (val == chn){
-          result = chn;
-          return false; // leave the each loop
-        }
-      });
-      break;
 
-    case "HMIP-WHS2" :
-      arEasyChannels = [3,7];
-      jQuery.each(arEasyChannels,function(index,val) {
-        if (val == chn){
-          result = chn;
-          return false; // leave the each loop
-        }
-      });
-      break;
+  arNonExpertChannels["HMIP-BSL"] = [4,8,12];
+  arNonExpertChannels["HMIP-MOD-OC8"] = [10,14,18,22,26,30,34,38];
+  arNonExpertChannels["HMIP-WHS2"] = [3,7];
+  arNonExpertChannels["HMIPW-DRBL4"] = [2,6,10,14];
+  arNonExpertChannels["HMIPW-DRD3"] = [2,6,10];
+  arNonExpertChannels["HMIPW-DRS4"] = [2,6,10,14];
+  arNonExpertChannels["HMIPW-DRS8"] = [2,6,10,14,18,22,26,30];
+  arNonExpertChannels["HMIPW-FIO6"] = [8,12,16,20,24,28];
 
-    case "HMIP-BSL" :
-      arEasyChannels = [4,8,12];
-      jQuery.each(arEasyChannels,function(index,val) {
-        if (val == chn){
-          result = chn;
-          return false; // leave the each loop
-        }
-      });
-      break;
-
-    default: result = chn;
-  }
+  jQuery.each(arNonExpertChannels[devId.toUpperCase()], function(index,val) {
+    if (val == chn){
+      result = chn;
+      return false; // leave the each loop
+    }
+  });
 
   return result;
 };
@@ -170,7 +148,9 @@ HmIPWeeklyProgram.prototype = {
     this.chn = this.arAddress[1];
 
     this.device = DeviceList.getDeviceByAddress(this.devAddress);
-    this.chnType = this.device.channels[this.chn].channelType;
+
+    // The device type of the HmIP-BSL is DIMMER_WEEK_PROFILE but the weekly program should act as a SWITCH_WEEK_PROFILE
+    this.chnType = (this._isDeviceType("HmIP-BSL")) ? this.SWITCH : this.device.channels[this.chn].channelType;
 
     this.ps = ps;
     this.psDescr = psDescr;
@@ -187,6 +167,11 @@ HmIPWeeklyProgram.prototype = {
     this.maxEntries = this._getMaxEntries();
 
     this.virtualChannels = getWPVirtualChannels(this.device.deviceType.id, this.device.channels, this.sessionIsExpert);
+
+    // The HmIP-BSL consists of SWITCH and DIMMER channels. For the weekly program we are currently using only the SWITCH channels.
+    if (this._isDeviceType("HmIP-BSL")) {
+      this.virtualChannels = (this.sessionIsExpert) ? [4, 5, 6] : [4];
+    }
 
     var table = "";
     table += "<table class='ProfileTbl'><tbody>";
@@ -212,6 +197,12 @@ HmIPWeeklyProgram.prototype = {
         jQuery("#weeklyProgramNotActive").hide();
       }, 250);
     }
+  },
+
+  // Checks if the device type is of a particular kind
+  // This is useful for the treatment of special cases (e.g. the HmIP-BSL which is a DIMMER_WEEKLY_PROFILE but must be treated as a SWITCH_WEEKLY_PROFILE
+  _isDeviceType: function(devType) {
+    return (this.device.deviceType.id == devType) ? true : false;
   },
 
   _getEntry: function(number) {
@@ -775,7 +766,7 @@ HmIPWeeklyProgram.prototype = {
       result += "var iSelectedChn = " +parseInt(this.curTargetChannels) + ";";
       result += "var bSelectedChn = iSelectedChn.toString(2);";
       result += "var reversedBinary = reverseString(bSelectedChn);";
-      result += "var counter = 1;"
+      result += "var counter = 1;";
 
       if (this.sessionIsExpert) {
           result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";

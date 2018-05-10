@@ -4,11 +4,11 @@
 "description_4" : "<span class=\"translated\">With a short or long button press the switch will be switched on or off for the set time.</span><br/><br/>",
 "description_5" : "<span class=\"translated\">With a short or long button press the switch will be switched on or off for the set time.</span><br/><br/>",
 
-"description_noLong_1" : "<span class=\"translated\">When the sensor is triggered the switch will be switched on for the time set. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_noLong_2" : "<span class=\"translated\">When the sensor is triggered the switch will be switched off for the time set. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_noLong_3" : "<span class=\"translated\">When the sensor is triggered the switch will be switched on or off for the time set (toggle function). If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_noLong_4" : "<span class=\"translated\">When the sensor is triggered the switch will be switched on or off for the set time.</span><br/><br/>",
-"description_noLong_5" : "<span class=\"translated\">When the sensor is triggered the switch will be switched off or on for the set time.</span><br/><br/>",
+"description_noLong_1" : "<span class=\"translated\">With a button press the switch will be switched on for the time set. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">With a button press the switch will be switched off for the time set. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">With a button press the switch will be switched on or off for the time set (toggle function). If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_noLong_4" : "<span class=\"translated\">With a button press the switch will be switched on or off for the set time.</span><br/><br/>",
+"description_noLong_5" : "<span class=\"translated\">With a button press the switch will be switched off or on for the set time.</span><br/><br/>",
 
 
 "hint_hmip_wgc" : "If the device is operated with batteries, a long on time should not be chosen because the energized relay would drain the batteries very quickly.<br/><br/>",

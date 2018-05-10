@@ -5,6 +5,16 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 
+set NOP 0
+set ON_DELAY 1
+set RAMP_ON 2
+set ON 3
+set OFF_DELAY 4
+set RAMP_OFF 5
+set OFF 6
+set REFON 7
+set REFOFF 8
+
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${OpenUp}"
 set PROFILES_MAP(2)  "\${CloseDown}"
@@ -142,13 +152,13 @@ set PROFILE_4(SHORT_CT_REFOFF) {0 1 2}
 set PROFILE_4(SHORT_CT_REFON) {0 1 2}
 set PROFILE_4(SHORT_DRIVING_MODE) {0 1 2 3}
 set PROFILE_4(SHORT_JT_OFF) {1 5}
-set PROFILE_4(SHORT_JT_OFFDELAY) {1 6}
-set PROFILE_4(SHORT_JT_ON) {1 5}
-set PROFILE_4(SHORT_JT_ONDELAY) {2 5}
-set PROFILE_4(SHORT_JT_RAMPOFF) {7 8}
-set PROFILE_4(SHORT_JT_RAMPON) {3 4}
+set PROFILE_4(SHORT_JT_OFFDELAY) {1 3 4 6}
+set PROFILE_4(SHORT_JT_ON) {1 4 5}
+set PROFILE_4(SHORT_JT_ONDELAY) {1 2 5}
+set PROFILE_4(SHORT_JT_RAMPOFF) {2 5 8}
+set PROFILE_4(SHORT_JT_RAMPON) {2 5 4}
 set PROFILE_4(SHORT_JT_REFOFF) {7 8}
-set PROFILE_4(SHORT_JT_REFON) {3 4}
+set PROFILE_4(SHORT_JT_REFON) {3 4 7}
 set PROFILE_4(SHORT_MAX_TIME_FIRST_DIR) 25.500000
 set PROFILE_4(SHORT_MULTIEXECUTE) 0
 set PROFILE_4(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
@@ -182,97 +192,104 @@ set PROFILE_5(UI_HINT)  5
 #set SUBSET_1(NAME)          "Hochgefahren"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
-set SUBSET_1(SHORT_JT_OFF)      1
-set SUBSET_1(SHORT_JT_OFFDELAY)    1
-set SUBSET_1(SHORT_JT_ON)      1
-set SUBSET_1(SHORT_JT_ONDELAY)    2
-set SUBSET_1(SHORT_JT_RAMPOFF)    8
-set SUBSET_1(SHORT_JT_RAMPON)    3
-set SUBSET_1(SHORT_JT_REFOFF)    8
-set SUBSET_1(SHORT_JT_REFON)    3
+set SUBSET_1(SHORT_JT_OFF)      $ON_DELAY
+set SUBSET_1(SHORT_JT_OFFDELAY) $ON
+set SUBSET_1(SHORT_JT_ON)       $ON_DELAY
+set SUBSET_1(SHORT_JT_ONDELAY)  $ON_DELAY
+set SUBSET_1(SHORT_JT_RAMPOFF)  $RAMP_OFF
+set SUBSET_1(SHORT_JT_RAMPON)   $RAMP_ON
+set SUBSET_1(SHORT_JT_REFOFF)   $REFOFF
+set SUBSET_1(SHORT_JT_REFON)    $REFON
 
 #set SUBSET_2(NAME)          "Runtergefahren"
 set SUBSET_2(NAME)          "\${subset_2}"
 set SUBSET_2(SUBSET_OPTION_VALUE)  2
-set SUBSET_2(SHORT_JT_OFF)      5
-set SUBSET_2(SHORT_JT_OFFDELAY)    6
-set SUBSET_2(SHORT_JT_ON)      5
-set SUBSET_2(SHORT_JT_ONDELAY)    5
-set SUBSET_2(SHORT_JT_RAMPOFF)    7
-set SUBSET_2(SHORT_JT_RAMPON)    4
-set SUBSET_2(SHORT_JT_REFOFF)    7
-set SUBSET_2(SHORT_JT_REFON)    4
+set SUBSET_2(SHORT_JT_OFF)       $OFF_DELAY
+set SUBSET_2(SHORT_JT_OFFDELAY)  $OFF_DELAY
+set SUBSET_2(SHORT_JT_ON)        $OFF_DELAY
+set SUBSET_2(SHORT_JT_ONDELAY)   $OFF
+set SUBSET_2(SHORT_JT_RAMPOFF)   $RAMP_OFF
+set SUBSET_2(SHORT_JT_RAMPON)    $RAMP_ON
+set SUBSET_2(SHORT_JT_REFOFF)    $REFOFF
+set SUBSET_2(SHORT_JT_REFON)     $REFON
 
 #set SUBSET_3(NAME)          "Hoch-/Runtergefahren im Wechsel"
 set SUBSET_3(NAME)          "\${subset_3}"
 set SUBSET_3(SUBSET_OPTION_VALUE)  3
-set SUBSET_3(SHORT_JT_OFF)      1
-set SUBSET_3(SHORT_JT_OFFDELAY)    6
-set SUBSET_3(SHORT_JT_ON)      5
-set SUBSET_3(SHORT_JT_ONDELAY)    2
-set SUBSET_3(SHORT_JT_RAMPOFF)    8
-set SUBSET_3(SHORT_JT_RAMPON)    4
-set SUBSET_3(SHORT_JT_REFOFF)    8
-set SUBSET_3(SHORT_JT_REFON)    4
+set SUBSET_3(SHORT_JT_OFF)      $ON_DELAY
+set SUBSET_3(SHORT_JT_OFFDELAY) $OFF_DELAY
+set SUBSET_3(SHORT_JT_ON)       $OFF_DELAY
+set SUBSET_3(SHORT_JT_ONDELAY)  $ON_DELAY
+set SUBSET_3(SHORT_JT_RAMPOFF)  $RAMP_ON
+set SUBSET_3(SHORT_JT_RAMPON)   $RAMP_OFF
+set SUBSET_3(SHORT_JT_REFOFF)   $REFOFF
+set SUBSET_3(SHORT_JT_REFON)    $REFON
 
 
 ## Subsets Passagesensor
 
 #set SUBSET_4(NAME)          "r -> l = Ein / l - r = Aus"
 set SUBSET_4(NAME)          "\${subset_4}"
-set SUBSET_4(SUBSET_OPTION_VALUE)  4
-set SUBSET_4(SHORT_CT_OFF)      2
-set SUBSET_4(SHORT_CT_OFFDELAY)    2
-set SUBSET_4(SHORT_CT_ON)      0
-set SUBSET_4(SHORT_CT_ONDELAY)    0
+set SUBSET_4(SUBSET_OPTION_VALUE) 4
+set SUBSET_4(SHORT_CT_OFF)        2
+set SUBSET_4(SHORT_CT_OFFDELAY)   2
+set SUBSET_4(SHORT_CT_ON)         2
+set SUBSET_4(SHORT_CT_ONDELAY)    2
 set SUBSET_4(SHORT_CT_RAMPOFF)    2
-set SUBSET_4(SHORT_CT_RAMPON)    0
+set SUBSET_4(SHORT_CT_RAMPON)     2
+
 
 #set SUBSET_5(NAME)          "r -> l = Aus / l - r = Ein"
 set SUBSET_5(NAME)          "\${subset_5}"
-set SUBSET_5(SUBSET_OPTION_VALUE)  5
-set SUBSET_5(SHORT_CT_OFF)      0
-set SUBSET_5(SHORT_CT_OFFDELAY)    0
-set SUBSET_5(SHORT_CT_ON)      2
+set SUBSET_5(SUBSET_OPTION_VALUE) 5
+set SUBSET_5(SHORT_CT_OFF)        0
+set SUBSET_5(SHORT_CT_OFFDELAY)   0
+set SUBSET_5(SHORT_CT_ON)         2
 set SUBSET_5(SHORT_CT_ONDELAY)    2
 set SUBSET_5(SHORT_CT_RAMPOFF)    0
-set SUBSET_5(SHORT_CT_RAMPON)    2
+set SUBSET_5(SHORT_CT_RAMPON)     2
 
 #set SUBSET_6(NAME)          "r - l"
 set SUBSET_6(NAME)          "\${subset_6}"
-set SUBSET_6(SUBSET_OPTION_VALUE)  6
+set SUBSET_6(SUBSET_OPTION_VALUE) 6
 set SUBSET_6(SHORT_CT_OFF)        2
-set SUBSET_6(SHORT_CT_OFFDELAY)    2
-set SUBSET_6(SHORT_CT_ON)      2
-set SUBSET_6(SHORT_CT_ONDELAY)   2
-set SUBSET_6(SHORT_CT_RAMPOFF)   2
-set SUBSET_6(SHORT_CT_RAMPON)    2
+set SUBSET_6(SHORT_CT_OFFDELAY)   2
+set SUBSET_6(SHORT_CT_ON)         2
+set SUBSET_6(SHORT_CT_ONDELAY)    2
+set SUBSET_6(SHORT_CT_RAMPOFF)    2
+set SUBSET_6(SHORT_CT_RAMPON)     2
+set SUBSET_6(SHORT_CT_REFOFF)     2
+set SUBSET_6(SHORT_CT_REFON)      2
 
 #set SUBSET_7(NAME)          "l - r"
 set SUBSET_7(NAME)          "\${subset_7}"
-set SUBSET_7(SUBSET_OPTION_VALUE)  7
-set SUBSET_7(SHORT_CT_OFF)      0
-set SUBSET_7(SHORT_CT_OFFDELAY)    0
-set SUBSET_7(SHORT_CT_ON)      0
+set SUBSET_7(SUBSET_OPTION_VALUE) 7
+set SUBSET_7(SHORT_CT_OFF)        0
+set SUBSET_7(SHORT_CT_OFFDELAY)   0
+set SUBSET_7(SHORT_CT_ON)         0
 set SUBSET_7(SHORT_CT_ONDELAY)    0
 set SUBSET_7(SHORT_CT_RAMPOFF)    0
-set SUBSET_7(SHORT_CT_RAMPON)    0
-
+set SUBSET_7(SHORT_CT_RAMPON)     0
+set SUBSET_7(SHORT_CT_REFOFF)     0
+set SUBSET_7(SHORT_CT_REFON)     0
 
 #set SUBSET_8(NAME)          "l - r || r - l"
 set SUBSET_8(NAME)          "\${subset_8}"
-set SUBSET_8(SUBSET_OPTION_VALUE)  8
+set SUBSET_8(SUBSET_OPTION_VALUE) 8
 set SUBSET_8(SHORT_CT_OFF)        1
 set SUBSET_8(SHORT_CT_OFFDELAY)   1
 set SUBSET_8(SHORT_CT_ON)         1
 set SUBSET_8(SHORT_CT_ONDELAY)    1
 set SUBSET_8(SHORT_CT_RAMPOFF)    1
 set SUBSET_8(SHORT_CT_RAMPON)     1
+set SUBSET_8(SHORT_CT_REFOFF)     1
+set SUBSET_8(SHORT_CT_REFON)      1
+
 
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-  global iface_url dev_descr_sender dev_descr_receiver
+  global iface_url sender_address dev_descr_sender dev_descr_receiver
 
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
@@ -288,6 +305,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set channel $dev_descr_sender(INDEX)
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
+
+  array set masterParamSet [xmlrpc $iface_url($iface) getParamset [list string $sender_address] [list string MASTER]]
+  set senderOperationMode $masterParamSet(CHANNEL_OPERATION_MODE)
 
   #global SUBSETS
   set name "x"
@@ -334,10 +354,35 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
 
-  set pref 1
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
+    set pref 0
+    if {$senderOperationMode == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 2} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 3} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_7} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } else {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
+
+    append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">"
+      append HTML_PARAMS(separate_$prn) "window.setTimeout(function() \{"
+        append HTML_PARAMS(separate_$prn) "var dirtyElm = document.getElementById(\"separate_receiver_0_3\");"
+        append HTML_PARAMS(separate_$prn) "dirtyElm.defaultValue = parseInt(dirtyElm.value) + 1;"
+      append HTML_PARAMS(separate_$prn) "\},100);"
+    append HTML_PARAMS(separate_$prn) "</script>"
 
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
@@ -360,10 +405,35 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
 
-  set pref 1
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
+    set pref 0
+    if {$senderOperationMode == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 2} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 3} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_7} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } else {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
+
+    append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">"
+      append HTML_PARAMS(separate_$prn) "window.setTimeout(function() \{"
+        append HTML_PARAMS(separate_$prn) "var dirtyElm = document.getElementById(\"separate_receiver_0_3\");"
+        append HTML_PARAMS(separate_$prn) "dirtyElm.defaultValue = parseInt(dirtyElm.value) + 1;"
+      append HTML_PARAMS(separate_$prn) "\},100);"
+    append HTML_PARAMS(separate_$prn) "</script>"
 
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
@@ -387,10 +457,35 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
 
-  set pref 1
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
+    set pref 0
+    if {$senderOperationMode == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 2} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 3} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_7} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } else {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
+
+    append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">"
+      append HTML_PARAMS(separate_$prn) "window.setTimeout(function() \{"
+        append HTML_PARAMS(separate_$prn) "var dirtyElm = document.getElementById(\"separate_receiver_0_3\");"
+        append HTML_PARAMS(separate_$prn) "dirtyElm.defaultValue = parseInt(dirtyElm.value) + 1;"
+      append HTML_PARAMS(separate_$prn) "\},100);"
+    append HTML_PARAMS(separate_$prn) "</script>"
 
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
@@ -421,10 +516,35 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append HTML_PARAMS(separate_$prn)) "</tr>"
 
-  set pref 1
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
+    set pref 0
+    if {$senderOperationMode == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 2} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } elseif {$senderOperationMode == 3} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_7} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    } else {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td>\${DECISION_VALUE_PASSAGE}</td><td>"
+      append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
+
+    append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">"
+      append HTML_PARAMS(separate_$prn) "window.setTimeout(function() \{"
+        append HTML_PARAMS(separate_$prn) "var dirtyElm = document.getElementById(\"separate_receiver_0_3\");"
+        append HTML_PARAMS(separate_$prn) "dirtyElm.defaultValue = parseInt(dirtyElm.value) + 1;"
+      append HTML_PARAMS(separate_$prn) "\},100);"
+    append HTML_PARAMS(separate_$prn) "</script>"
 
   incr pref ;# 2
   append HTML_PARAMS(separate_$prn) "<tr><td>\${JUMPTARGET}</td><td>"

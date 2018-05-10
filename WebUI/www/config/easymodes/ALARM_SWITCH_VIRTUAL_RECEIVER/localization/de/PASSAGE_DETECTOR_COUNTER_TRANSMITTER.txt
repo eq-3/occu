@@ -1,4 +1,4 @@
-"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird der Schalter f&uuml;r eine festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird der Alarm f&uuml;r eine festgelegte Zeit eingeschaltet.</span><br/><br/>",
 "description_2" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
 
 "subset_1" : "rechts > links ein / links > rechts aus",

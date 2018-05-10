@@ -23,10 +23,10 @@ jQuery.extend(true,langJSON, {
 
 
     "lblAlarmTiming" : "Alarmmeldung",
-    "stringTablePermanent" : "Daueralarm",
-    "stringTableThreeMinutes" : "Alarm f%FCr 3 Minuten",
-    "stringTableSixMinutes" : "Alarm f%FCr 6 Minuten",
-    "stringTableOncePerMinute" : "Ein Alarmsignal pro Minute",
+    "stringTableAlarmPermanent" : "Daueralarm",
+    "stringTableAlarmThreeMinutes" : "Alarm f%FCr 3 Minuten",
+    "stringTableAlarmSixMinutes" : "Alarm f%FCr 6 Minuten",
+    "stringTableAlarmOncePerMinute" : "Ein Alarmsignal pro Minute",
 
     "stringTableProcessNotStableBlindTransmitter" : "Jalousie f%E4hrt",
     "stringTableProcessStableBlindTransmitter" : "Jalousie steht",
@@ -37,6 +37,9 @@ jQuery.extend(true,langJSON, {
     "stringTableProcessNotStableDimmerTransmitter" : "Rampe aktiv",
     "stringTableProcessStableBlindDimmerTransmitter" : "Pegel stabil",
 
+    "stringTableProcessNotStableGeneric" : "Ger%E4t aktiv",
+    "stringTableProcessStableGeneric" : "Ger%E4t nicht aktiv",
+    
     "stringTableBlindActivityStateDown" : "Jalousie f%E4hrt herunter",
     "stringTableBlindActivityStateUnknown" : "Jalousie Aktivit%E4t unbekannt",
     "stringTableBlindActivityStateUp" : "Jalousie f%E4hrt hoch",
@@ -55,6 +58,7 @@ jQuery.extend(true,langJSON, {
     "acousticAlarm" : "Akustisches Signal",
     "opticalAlarm" : "Optisches Signal",
 
+    "stringTableErrorNonFlatPositioning" : "Fehler Lageerkennung",
     "stringTableErrorNonFlatPositioningFalse" : "Winkel Lageerkennung %FCberschritten: Nein",
     "stringTableErrorNonFlatPositioningTrue" : "Winkel Lageerkennung %FCberschritten: Ja",
 
@@ -64,6 +68,43 @@ jQuery.extend(true,langJSON, {
     "stringTableOpticalAlarmActiveTrue" : "Optisches Signal aktiviert",
 
     "positionDetectionOFF" : "Lageerkennung AUS",
+
+    "lblWaterDetectorMsg_Water" : "Meldung bei Wasserstand",
+    "lblWaterDetectorMsg_Dry" : "Meldung bei Trockenheit",
+    "lblWaterDetectorMsg_Moisture" : "Meldung bei Feuchtigkeit",
+
+    "stringTableMsg_Dry" : "Trockenheit",
+    "stringTableMsg_Water" : "Wasserstand erkannt",
+    "stringTableMsg_Moisture" : "Feuchtigkeit erkannt",
+
+    "COMMENT" : "THIS is for the release B/2018",
+
+    "switchCommand" : "Schaltbefehl",
+
+    "colorStateNormal" : "Farbstatus normal",
+    "colorStateUnknown" : "Farbstatus unbekannt",
+
+    "stringTableRampTimeUnit" : "Einheit Rampenzeit",
+    "stringTableRampTimeUnitD" : "Einheit Rampenzeit: Tage",
+    "stringTableRampTimeUnitH" : "Einheit Rampenzeit: Stunden",
+    "stringTableRampTimeUnitM" : "Einheit Rampenzeit: Minuten",
+    "stringTableRampTimeUnitS" : "Einheit Rampenzeit: Sekunden",
+    "stringTableRampTimeValue" : "Wert Rampenzeit",
+
+    "stringTableIdentificationModeLCDBacklightFalse" : "Beleuchtung Display: AUS",
+    "stringTableIdentificationModeLCDBacklightTrue" : "Beleuchtung Display: EIN",
+    "stringTableIdentificationModeKeyVisualFalse" : "Beleuchtung Systemtaste: AUS",
+    "stringTableIdentificationModeKeyVisualTrue" : "Beleuchtung Systemtaste: EIN",
+    "stringTableIdentifyDuration" : "Dauer der Beleuchtung",
+    "stringTableIdentifyTargetLevel" : "Helligkeitswert der Beleuchtung",
+
+    "stringTableMultiModeInputTransmitterTitle" : "Wired Eingangsmodul",
+
+    "btnAccessPointSettings" : "Accesspoint",
+    "lblAccessPointSettings1" : "help1",
+    "lblAccessPointSettings2" : "help2",
+
+    "deviceFirmwareInformation" : "%DCbersicht",
 
     "noMoreKeys" : ""
   }

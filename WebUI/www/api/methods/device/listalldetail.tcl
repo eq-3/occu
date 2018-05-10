@@ -144,79 +144,79 @@ set deviceIdsScript {
 set deviceIds [hmscript $deviceIdsScript args]
 
 #foreach id $deviceIds {
-#	exec echo "Device: $id" >> /tmp/log_wowi
-#	exec echo $deviceDescr >> /tmp/log_wowi
+#  exec echo "Device: $id" >> /tmp/log_wowi
+#  exec echo $deviceDescr >> /tmp/log_wowi
 #}
 
 set result "\["
 set first  1
 
 foreach id $deviceIds {
-	set myargs(id) $id
-	set deviceStr [hmscript $deviceDescrScript myargs]
+  set myargs(id) $id
+  set deviceStr [hmscript $deviceDescrScript myargs]
 
 #
 # ignore invalid devices: CCU1 ==> CCU2 (Wired) Gateway has no interface
-	if {[catch {array set device $deviceStr}]} {
-#		exec echo "Error setting device description: " $id >> /tmp/devicelistdetail.log
-#		exec echo "Description: " $deviceStr >> /tmp/devicelistdetail.log
-		continue
-	}
+  if {[catch {array set device $deviceStr}]} {
+#    exec echo "Error setting device description: " $id >> /tmp/devicelistdetail.log
+#    exec echo "Description: " $deviceStr >> /tmp/devicelistdetail.log
+    continue
+  }
 
 #
 # device attributes
 #
 
-	if { 1 != $first } then { append result "," } else { set first 0 }
-	append result "\{"
-	append result "\"id\":[json_toString $device(ID)]"
-	append result ",\"name\":[json_toString $device(NAME)]"
-	append result ",\"address\":[json_toString $device(ADDRESS)]"
-	append result ",\"interface\":[json_toString $device(INTERFACE)]"
-	append result ",\"type\":[json_toString $device(DEVICE_TYPE)]"
-	append result ",\"operateGroupOnly\":[json_toString $device(GROUP_ONLY)]"
-	append result ",\"isReady\":[json_toString $device(READY_CONFIG)]"
+  if { 1 != $first } then { append result "," } else { set first 0 }
+  append result "\{"
+  append result "\"id\":[json_toString $device(ID)]"
+  append result ",\"name\":[json_toString $device(NAME)]"
+  append result ",\"address\":[json_toString $device(ADDRESS)]"
+  append result ",\"interface\":[json_toString $device(INTERFACE)]"
+  append result ",\"type\":[json_toString $device(DEVICE_TYPE)]"
+  append result ",\"operateGroupOnly\":[json_toString $device(GROUP_ONLY)]"
+  append result ",\"isReady\":[json_toString $device(READY_CONFIG)]"
 
 
 #
 # channesl
 #
-	set firstChannel 1
-	append result ",\"channels\":\["
-	foreach _channel $device(CHANNELS) {
-		array set channel $_channel
-		if {1 != $firstChannel} then { append result "," } else { set firstChannel 0 }
+  set firstChannel 1
+  append result ",\"channels\":\["
+  foreach _channel $device(CHANNELS) {
+    array set channel $_channel
+    if {1 != $firstChannel} then { append result "," } else { set firstChannel 0 }
 
-		set partnerId $channel(GROUP_PARTNER_ID)
-		if {"65535" == $partnerId} then { set partnerId "" }
+    set partnerId $channel(GROUP_PARTNER_ID)
+    if {"65535" == $partnerId} then { set partnerId "" }
 
-		append result "\{"
-		append result "\"id\":[json_toString $channel(ID)]"
-		append result ",\"name\":[json_toString $channel(NAME)]"
-		append result ",\"address\":[json_toString $channel(ADDRESS)]"
-		append result ",\"deviceId\":[json_toString $channel(DEVICE)]"
-		append result ",\"index\":$channel(INDEX)"
-		append result ",\"partnerId\":[json_toString $partnerId]"
-  	append result ",\"mode\":[json_toString $channel(MODE)]"
-		append result ",\"category\":[json_toString $channel(CATEGORY)]"
-  	append result ",\"isReady\":$channel(READY_CONFIG)"
-		append result ",\"isUsable\":$channel(USABLE)"
-		append result ",\"isVisible\":$channel(VISIBLE)"
-		append result ",\"isLogged\":$channel(LOGGED)"
-		append result ",\"isLogable\":$channel(LOGABLE)"
-		append result ",\"isReadable\":$channel(READABLE)"
-		append result ",\"isWritable\":$channel(WRITABLE)"
-		append result ",\"isEventable\":$channel(EVENTABLE)"
-		append result ",\"isAesAvailable\":$channel(AES_AVAILABLE)"
-		append result ",\"isVirtual\":$channel(VIRTUAL)"
-		append result ",\"channelType\":[json_toString $channel(CHANNEL_TYPE)]"
-		append result "\}"
+    append result "\{"
+    append result "\"id\":[json_toString $channel(ID)]"
+    append result ",\"name\":[json_toString $channel(NAME)]"
+    append result ",\"address\":[json_toString $channel(ADDRESS)]"
+    append result ",\"deviceId\":[json_toString $channel(DEVICE)]"
+    append result ",\"index\":$channel(INDEX)"
+    append result ",\"partnerId\":[json_toString $partnerId]"
+    append result ",\"mode\":[json_toString $channel(MODE)]"
+    append result ",\"category\":[json_toString $channel(CATEGORY)]"
+    append result ",\"isReady\":$channel(READY_CONFIG)"
+    append result ",\"isUsable\":$channel(USABLE)"
+    append result ",\"isVisible\":$channel(VISIBLE)"
+    append result ",\"isLogged\":$channel(LOGGED)"
+    append result ",\"isLogable\":$channel(LOGABLE)"
+    append result ",\"isReadable\":$channel(READABLE)"
+    append result ",\"isWritable\":$channel(WRITABLE)"
+    append result ",\"isEventable\":$channel(EVENTABLE)"
+    append result ",\"isAesAvailable\":$channel(AES_AVAILABLE)"
+    append result ",\"isVirtual\":$channel(VIRTUAL)"
+    append result ",\"channelType\":[json_toString $channel(CHANNEL_TYPE)]"
+    append result "\}"
 
-		array_clear channel
-	}
-	append result "\]"
+    array_clear channel
+  }
+  append result "\]"
 
-	append result "\}"
+  append result "\}"
 
 }
 

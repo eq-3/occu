@@ -10,10 +10,11 @@
   string hm_jalousieActor = "HM-LC-Ja1PBU";
   string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
 
-  string osram_rgb_controller = "VIR-LG-RGB-DIM";
-  string osram_rgbw_controller = "VIR-LG-RGBW-DIM";
-  string osram_white_controller = "VIR-LG-WHITE-DIM";
-  string osram_group_controller = "VIR-LG-GROUP";
+  string s_vir_lg_rgb_dim = "VIR-LG-RGB-DIM";
+  string s_vir_lg_rgbw_dim = "VIR-LG-RGBW-DIM";
+  string s_vir_lg_white_dim = "VIR-LG-WHITE-DIM";
+  string s_vir_lg_group = "VIR-LG-GROUP";
+  string s_vir_lg_onoff = "VIR-LG-ONOFF";
 
   string excludePARTY = "PARTY_";
   string includePARTY = "PARTY_MODE_SUBMIT";
@@ -126,6 +127,10 @@
     object oCH = dom.GetObject( iCH );
     if( oCH )
     {
+      boolean isVirLG_ONOFF = false;
+      if( oCH.Label().Find(s_vir_lg_onoff) != -1 ) {
+        isVirLG_ONOFF = true;
+      }
       Write( ' <select onchange="SetDestinationDPSelectChange('#oSD.ID()#',this);" class="SelectBox">' );
       boolean bFound = false;
       integer iFirstID = ID_ERROR;
@@ -195,11 +200,12 @@
             }
             else
             {
-              if( (iDPvt == ivtBinary) && (iDPst != istAction) )
+              if( ((iDPvt == ivtBinary) && (iDPst != istAction)) || (isVirLG_ONOFF) )
               {
+                string sValue = "not set";
                 if( (oDP.ID() == iDP) && (iV == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
                 Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
-                string sValue = oDP.Name()#": "#oDP.ValueName1();
+                sValue = oDP.Name()#": "#oDP.ValueName1();
                 if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                 {
                   string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
@@ -218,7 +224,7 @@
                 Write( '</option>' );
                 if( (oDP.ID() == iDP) && (iV == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
                 Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
-                string sValue = oDP.Name()#": "#oDP.ValueName0();
+                sValue = oDP.Name()#": "#oDP.ValueName0();
                 if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                 {
                   string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=FALSE";
@@ -339,7 +345,7 @@
                 Write( '<span id="setWhiteController'#oSD.ID()#'" class="CLASS02401" onclick="Set_VIR_LG_WHITEController('#oSD.ID()#','#rMin#','#rMax#','#iV#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
 
-              if( iDPst != istEnum )
+              if( (iDPst != istEnum) && (! isVirLG_ONOFF) )
               {
                 Write( ' <i>${ruleDescrSetValueA}</i> ' );
 
@@ -418,16 +424,16 @@
             integer statusDisplayDevice = hm_statusDisplay.Find(chLabel);
             integer statusDisplayEPaperDevice = hm_statusDisplayEPaper.Find(chLabel);
             integer rgbw_controller = chLabel.Find(hm_rgbw_controller);
-            integer osram_rgb = chLabel.Find(osram_rgb_controller);
-            integer osram_rgbw = chLabel.Find(osram_rgbw_controller);
-            integer osram_group = chLabel.Find(osram_group_controller);
+            integer i_vir_lg_rgb_dim = chLabel.Find(s_vir_lg_rgb_dim);
+            integer i_vir_lg_rgbw_dim = chLabel.Find(s_vir_lg_rgbw_dim);
+            integer i_vir_lg_group = chLabel.Find(s_vir_lg_group);
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
 
             if ((statusDisplayDevice != -1)
               || (statusDisplayEPaperDevice != -1)
               || (rgbw_controller != -1)
               || ((jalousieActor != - 1) && (oDP.HSSID().Find("LEVEL_COMBINED") != -1))
-              || (((osram_rgb != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((osram_rgbw != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || ((osram_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)))
+              || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)))
               ) {
               if (statusDisplayDevice != -1) {
                 if(iV == "0") {
@@ -469,7 +475,7 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetJalousieActor('#oSD.ID()#',\''#oDP.HSSID()#'\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
-              if ((osram_rgb != -1) && (oDP.HSSID().Find("RGB") != -1)) {
+              if ((i_vir_lg_rgb_dim != -1) && (oDP.HSSID().Find("RGB") != -1)) {
 
                 if(iV.Find("rgb") == -1) {
                   iV = "rgb(255, 255, 255)";
@@ -478,7 +484,7 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGB\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
-              if (((osram_rgbw != -1) || (osram_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
+              if (((i_vir_lg_rgbw_dim != -1) || ( i_vir_lg_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
                 if(iV.Find("rgb") == -1) {
                   iV = "rgb(255, 255, 255, 255)";
                 }
@@ -497,9 +503,9 @@
               && (statusDisplayEPaperDevice == -1)
               && (rgbw_controller == -1)
               && (jalousieActor == -1)
-              && (osram_rgb == -1)
-              && (osram_rgbw == -1)
-              && (osram_group == -1)
+              && (i_vir_lg_rgb_dim == -1)
+              && (i_vir_lg_rgbw_dim == -1)
+              && ( i_vir_lg_group == -1)
               ) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
@@ -526,11 +532,11 @@
                 Write( '<span id="setJalousieActor'#oSD.ID()#'" class="CLASS02401" onclick="SetJalousieActor('#oSD.ID()#',\''#oDP.HSSID()#'\');"><img src="/ise/img/notepad.png" /></span>' );
               }
 
-              if ((osram_rgb != -1) && (oDP.HSSID().Find("RGB") != -1)) {
+              if ((i_vir_lg_rgb_dim != -1) && (oDP.HSSID().Find("RGB") != -1)) {
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGB\');"><img src="/ise/img/notepad.png" /></span>' );
               }
 
-              if (((osram_rgbw != -1) || (osram_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
+              if (((i_vir_lg_rgbw_dim != -1) || ( i_vir_lg_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGBW\');"><img src="/ise/img/notepad.png" /></span>' );
               }
             }

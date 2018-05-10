@@ -314,11 +314,13 @@ proc put_tablebody {} {
         set sender_type ""
         set sender_index 0
         set receiver_index 0
+        set receiver_type ""
         catch { set sender_parent_type $sender_descr(PARENT_TYPE) }
         catch { set sender_type $sender_descr(TYPE) }
         catch { set sender_index $sender_descr(INDEX) }
         catch { set receiver_parent_type $receiver_descr(PARENT_TYPE) }
         catch { set receiver_index $receiver_descr(INDEX) }
+        catch { set receiver_type $receiver_descr(TYPE) }
         set SENTRY(SENDER_PARENT_TYPE) $sender_parent_type
         set SENTRY(SENDER_TYPE) $sender_type
         set SENTRY(RECEIVER_PARENT_TYPE) $receiver_parent_type
@@ -461,15 +463,23 @@ proc put_tablebody {} {
         set senderCh [lindex [split $SENTRY(SENDERADDR) ":"] 1]
         set receiverCh [lindex [split $SENTRY(RECEIVERADDR) ":"] 1]
         set _sender_parent_type $SENTRY(SENDER_PARENT_TYPE)
+        set _sender_type $SENTRY(SENDER_TYPE)
         set _receiver_parent_type $SENTRY(RECEIVER_PARENT_TYPE)
 
         puts "<script type=\"text/javascript\>"
+          if {! [string equal $_sender_type "MULTI_MODE_INPUT_TRANSMITTER"]} {
+            puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_sender_parent_type','channelAddress' : '$senderAddress' ,'channelIndex' : '$senderCh' \}));"
+          } else {
+            puts "var channel = DeviceList.getChannelByAddress(\"$senderAddress\");"
+            puts "homematic(\"Interface.getMetadata\", {\"objectId\" : channel.id, \"dataId\" : \"channelMode\"}, function(result) {"
+              puts "if (result == \"null\") {result = 1;}"
+              puts "jQuery(\"#senderNameExtension_$loop\").html(translateKey(\"chType_MULTI_MODE_INPUT_TRANSMITTER_\"+result));"
+            puts "});"
+          }
 
-          # puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription('$_sender_parent_type', '$senderCh'));"
-          puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_sender_parent_type','channelAddress' : '$senderAddress' ,'channelIndex' : '$senderCh' \}));"
-
-          #puts "jQuery(\"#receiverNameExtension_$loop\").html(getExtendedDescription('$_receiver_parent_type', '$receiverCh'));"
           puts "jQuery(\"#receiverNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_receiver_parent_type','channelAddress' : '$receiverAddress' ,'channelIndex' : '$receiverCh' \}));"
+
+
         puts "</script>"
 
         incr loop

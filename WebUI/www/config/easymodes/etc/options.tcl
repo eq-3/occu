@@ -272,6 +272,12 @@ proc option {type} {
       set options(16) "\${stringTableLogicINVERSMUL}"
     }
 
+    "LOGIC_COMBINATION_NO_AND_OR" {
+      set options(0) "\${stringTableLogicInactive}"
+      set options(1) "\${stringTableLogicOR}"
+      set options(2) "\${stringTableLogicAND}"
+    }
+
     "POWERUP_JUMPTARGET" {
       set options(1) "\${stringTableOnDelay}"
       set options(2) "\${stringTableStateTrue}"

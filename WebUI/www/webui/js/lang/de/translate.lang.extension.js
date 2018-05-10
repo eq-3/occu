@@ -405,7 +405,7 @@ jQuery.extend(true,langJSON, {
     "alertUseOnlySpecialChars" : "Bitte verwenden Sie nur die erlaubten Sonderzeichen [., !, $, (, ), :, ;, #, %DF, %E4, %F6, %FC, -].",
     "alertCharsNotAllowed" : "Bezeichnungen d%FCrfen keines der folgenden Zeichen enthalten: <, >, ', \", &, $, [, ], {, } und \\",
     "alertErrorDeleteObject" : "Objekt konnte nicht gel%F6scht werden.",
-    "dialogAllRFInterfacesTitle" : "Alle bekannten RF-Interfaces",
+    "dialogAllRFInterfacesTitle" : "Alle bekannten Interfaces",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentA" : "Einspielen des Backups nicht m%F6glich. Das vorliegende Backup basiert auf der Zentralen-Firmware ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentB" : "<br>\nDiese ist aktueller, als die derzeit auf der Zentrale installierte Version ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentC" : ".<br>\nF&uuml;hren Sie zun&auml;chst ein Update der Zentralen-Firmware durch und starten Sie dann das Einspielen des Systembackups erneut.",
@@ -1030,6 +1030,15 @@ jQuery.extend(true,langJSON, {
     "lblNormal" : "Normal",
     "lblOverflow" : "%DCberlauf",
     "lblUnderflow" : "Unterlauf",
+
+    "colorBLACK" : "Schwarz",
+    "colorBLUE" : "Blau",
+    "colorGREEN" : "Gr%FCn",
+    "colorTURQUOISE" : "T%FCrkis",
+    "colorRED" : "Rot",
+    "colorPURPLE" : "Violett",
+    "colorYELLOW" : "Gelb",
+    "colorWHITE" : "Weiss",
 
     "theEnd" : ""
   }

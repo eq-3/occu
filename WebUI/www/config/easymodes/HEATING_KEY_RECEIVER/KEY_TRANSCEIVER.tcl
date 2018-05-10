@@ -121,12 +121,14 @@ proc getWTHFirmware {} {
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
-  global iface_url receiver_address dev_descr_sender dev_descr_receiver
+  global iface_url sender_address iface_url receiver_address dev_descr_sender dev_descr_receiver
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
   upvar $pps          ps      
   upvar $pps_descr    ps_descr
+
+  set url $iface_url($iface)
 
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
@@ -137,7 +139,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set fwMinor [lindex $wthFw 1]
   set fwPatch [lindex $wthFw 2]
 
-  set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE)]
+  set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
   
 #  die Texte der Platzhalter einlesen

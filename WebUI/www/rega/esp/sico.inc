@@ -30,6 +30,9 @@
     object oCC = dom.GetObject( iCC );
     object oLV = dom.GetObject( iLV );
     boolean bOK = false;
+
+    string sVLValue = "";
+
     if( iLVT == ivtObjectId )
     {
       bOK = ( oCC && oLV );
@@ -76,7 +79,7 @@
       {
         !Write( ' <i>bei</i> ' );
         Write( ' <i>${ruleConditionLblWhen}</i> ' );
-        Write( '<select id="selectConditionWhen'#oSC.ID()#'" onchange="SetLeftValue('#oSC.ID()#',this.value);" class="SelectBox">' );
+        Write( '<select id="selectConditionWhen'#oSC.ID()#'" name="selectConditionWhen" onchange="SetLeftValue('#oSC.ID()#',this.value); setOptionWidthSelectConditionWhen();" class="SelectBox">' );
       }
 
       if( iLVT == ivtObjectId )
@@ -101,7 +104,7 @@
                 string sVLKey;
                 foreach( sVLKey, system.GenerateEnum(0,iVLCount) )
                 {
-                  string sVLValue = web.webGetValueFromList( oDP.ValueList(), sVLKey );
+                  sVLValue = web.webGetValueFromList( oDP.ValueList(), sVLKey );
                   if( sVLValue.Length())
                   {
 
@@ -113,7 +116,7 @@
                     ! Some parameters shouldn't be visible
                     Call("/esp/functions.fn::isParameterVisible()");
                     if (showChannelParam == true)
-                     {
+                    {
 
                       if( (oDP.ID() == iLV) && (iRV1 == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
                       Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
@@ -142,50 +145,59 @@
               {
                 if( (iDPvt == ivtBinary) && ((iDPst != istAction)))
                 {
-                  if( (oDP.ID() == iLV) && (iRV1 == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
-                  Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
-                  string sValue = oDP.Name()#": "#oDP.ValueName1();
-                  if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
-                  {
-                    string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
-                    string sShortKey = oDP.HSSID()#"=TRUE";
-                    sValue = web.webKeyFromStringTable(sLongKey);
-                    if( sValue.Length() == 0 )
+
+
+                    ! Some parameters shouldn't be visible
+                    Call("/esp/functions.fn::isParameterVisible()");
+                    if (showChannelParam == true)
                     {
-                      string sValue = web.webKeyFromStringTable(sShortKey);
-                      if( !sValue.Length() )
+                      if( (oDP.ID() == iLV) && (iRV1 == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
+                      Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
+                      string sValue = oDP.Name()#": "#oDP.ValueName1();
+                      if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
                       {
-                        sValue = sShortKey;
+                        string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
+                        string sShortKey = oDP.HSSID()#"=TRUE";
+                        sValue = web.webKeyFromStringTable(sLongKey);
+                        if( sValue.Length() == 0 )
+                        {
+                          string sValue = web.webKeyFromStringTable(sShortKey);
+                          if( !sValue.Length() )
+                          {
+                            sValue = sShortKey;
+                          }
+                        }
                       }
-                    }
-                  }
-                  Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
-                  Write( sValue );
+                      Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
+                      Write( sValue );
 
-                  Write( '</option>' );
+                      Write( '</option>' );
 
-                  if( (oDP.ID() == iLV) && (iRV1 == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
+                      if( (oDP.ID() == iLV) && (iRV1 == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
 
-                  Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
-                  string sValue = oDP.Name()#": "#oDP.ValueName0();
-                  if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
-                  {
-                    string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=FALSE";
-                    string sShortKey = oDP.HSSID()#"=FALSE";
-                    sValue = web.webKeyFromStringTable(sLongKey);
-                    if( sValue.Length() == 0 )
-                    {
-                      string sValue = web.webKeyFromStringTable(sShortKey);
-                      if( !sValue.Length() )
+                      Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
+                      string sValue = oDP.Name()#": "#oDP.ValueName0();
+                      if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
                       {
-                        sValue = sShortKey;
+                        string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=FALSE";
+                        string sShortKey = oDP.HSSID()#"=FALSE";
+                        sValue = web.webKeyFromStringTable(sLongKey);
+                        if( sValue.Length() == 0 )
+                        {
+                          string sValue = web.webKeyFromStringTable(sShortKey);
+                          if( !sValue.Length() )
+                          {
+                            sValue = sShortKey;
+                          }
+                        }
                       }
-                    }
-                  }
 
-                  Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
-                  Write( sValue );
-                  Write( '</option>' );
+                      Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
+                      Write( sValue );
+                      Write( '</option>' );
+                    }
+
+
                 }
                 else
                 {
@@ -255,7 +267,7 @@
           string sVLKey;
           foreach( sVLKey, system.GenerateEnum(0,iVLCount) )
           {
-            string sVLValue = web.webGetValueFromList( oLV.ValueList(), sVLKey );
+            sVLValue = web.webGetValueFromList( oLV.ValueList(), sVLKey );
             if( iRV1 == sVLKey ) { sSelected = " selected"; } else { sSelected = ""; }
             Write( '<option value="'#oLV.ID()#':'#sVLKey#'"'#sSelected#'>' );
             Write( sVLValue );

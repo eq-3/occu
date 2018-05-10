@@ -693,6 +693,38 @@ proc showHmIPChannel {devType direction address chType} {
       }
     }
 
+    if {($devType == "HMIPW-DRBL4") && ($chType == "BLIND_VIRTUAL_RECEIVER")} {
+      if {
+            ($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8)
+         || ($ch == 11) || ($ch == 12) || ($ch == 15) || ($ch == 16)
+         } {
+        return 0
+      }
+    }
+
+    if {(($devType == "HMIPW-DRS4") || ($devType == "HMIPW-DRS8")) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+      if {
+            ($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8)
+         || ($ch == 11) || ($ch == 12) || ($ch == 15) || ($ch == 16)
+         || ($ch == 19) || ($ch == 20) || ($ch == 23) || ($ch == 24)
+         || ($ch == 27) || ($ch == 28) || ($ch == 31) || ($ch == 32)
+         } {
+        return 0
+      }
+    }
+
+    if {($devType == "HMIPW-DRD3") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
+      if {($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8) || ($ch == 11) || ($ch == 12)} {
+        return 0
+      }
+    }
+
+    if {($devType == "HMIPW-FIO6") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+      if {($ch == 9) || ($ch == 10) || ($ch == 13) || ($ch == 14) || ($ch == 17) || ($ch == 18) || ($ch == 21) || ($ch == 22) || ($ch == 25) || ($ch == 26) || ($ch == 29) || ($ch == 30)} {
+        return 0
+      }
+    }
+
   }
   # show the channel
   return 1
@@ -925,13 +957,24 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
 
       if { [test_space $SENTRY(NAME)] == 1 } then { puts "<td id=\"dev$rowcount\">$SENTRY(NAME)</td>" } else { puts "<td id=\"dev$rowcount\">[cgi_quote_html $SENTRY(NAME)]</td>" }
 
-      puts "<script type=\"text/javascript\">"
-        #puts "var ext = getExtendedDescription(\"$dev_descr(PARENT_TYPE)\", \"$dev_descr(INDEX)\");"
-        puts "var ext = getExtendedDescription(\{\"deviceType\" : \"$dev_descr(PARENT_TYPE)\", \"channelType\" : \"$dev_descr(TYPE)\" ,\"channelIndex\" : \"$dev_descr(INDEX)\", \"channelAddress\" : \"$dev_descr(ADDRESS)\" \});"
-        puts "if (ext.length > 0) \{"
-          puts "jQuery(\"#dev$rowcount\").html(\"<br/>$SENTRY(NAME)<br/><br/>\" + ext);"
-        puts "\}"
-      puts "</script>"
+      if {! [string equal $dev_descr(TYPE) "MULTI_MODE_INPUT_TRANSMITTER"]} {
+        puts "<script type=\"text/javascript\">"
+          puts "var ext = getExtendedDescription(\{\"deviceType\" : \"$dev_descr(PARENT_TYPE)\", \"channelType\" : \"$dev_descr(TYPE)\" ,\"channelIndex\" : \"$dev_descr(INDEX)\", \"channelAddress\" : \"$dev_descr(ADDRESS)\" \});"
+          puts "if (ext.length > 0) \{"
+            puts "jQuery(\"#dev$rowcount\").html(\"<br/>$SENTRY(NAME)<br/><br/>\" + ext);"
+          puts "\}"
+        puts "</script>"
+      } else {
+        puts "<script type=\"text/javascript\">"
+          puts "var channel = DeviceList.getChannelByAddress(\"$dev_descr(ADDRESS)\");"
+          puts "homematic(\"Interface.getMetadata\", {\"objectId\" : channel.id, \"dataId\" : \"channelMode\"}, function(result) {"
+            puts "if (result == \"null\") {result = 1;}"
+            puts "jQuery(\"#dev$rowcount\").html(\"<br/>$SENTRY(NAME)<br/><br/>\" + translateKey(\"chType_MULTI_MODE_INPUT_TRANSMITTER_\"+result));"
+          puts "});"
+
+        puts "</script>"
+
+      }
 
       puts "<td>$SENTRY(TYPE)</td>"
 
