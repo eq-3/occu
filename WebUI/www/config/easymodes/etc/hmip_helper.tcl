@@ -17,6 +17,17 @@ proc getComboBox {prn pref specialElement type} {
         append s [getDelayShort $prn $pref $specialElement]
       }
 
+      "eventDelay" {
+        append s [getPanelA $prn $pref $specialElement]
+      }
+
+      "eventRandomTime" {
+        append s [getPanelA $prn $pref $specialElement]
+      }
+
+      "txMinDelay" {
+        append s [getPanelA $prn $pref $specialElement]
+      }
       "delay0To20M_step2M" {
         append s [getDelay0to20M_step2M $prn $pref $specialElement]
       }
@@ -61,6 +72,152 @@ proc getComboBox {prn pref specialElement type} {
     }
 
     return $s
+}
+
+proc getPanelA {prn pref specialElement} {
+      set s ""
+      append s "<td>"
+      append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setPanelAValues(this.id, $prn, $pref, \'$specialElement\')\">"
+        append s "<option value=\"0\">\${optionNotActive}</option>"
+        append s "<option value=\"1\">\${optionUnit100MS}</option>"
+        append s "<option value=\"2\">\${optionUnit300MS}</option>"
+        append s "<option value=\"3\">\${optionUnit500MS}</option>"
+        append s "<option value=\"4\">\${optionUnit1500MS}</option>"
+        append s "<option value=\"5\">\${optionUnit1S}</option>"
+        append s "<option value=\"6\">\${optionUnit3S}</option>"
+        append s "<option value=\"7\">\${optionUnit30S}</option>"
+        append s "<option value=\"8\">\${optionUnit1M}</option>"
+        append s "<option value=\"9\">\${optionUnit2M}</option>"
+        append s "<option value=\"10\">\${optionUnit15M}</option>"
+        append s "<option value=\"11\">\${optionUnit1H}</option>"
+        append s "<option value=\"12\">\${stringTableEnterValue}</option>"
+      append s "/<select>"
+      append s "</td>"
+
+      append s "<script type=\"text/javascript\">"
+
+        append s "setCurrentDelayShortOption = function(prn, pref, specialElement, baseValue, factorValue) {"
+          append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "var optionMap = \[\];"
+          append s "optionMap\[\"00\"\] = 0;"
+          append s "optionMap\[\"01\"\] = 1;"
+          append s "optionMap\[\"03\"\] = 2;"
+          append s "optionMap\[\"05\"\] = 3;"
+          append s "optionMap\[\"010\"\] = 5;"
+          append s "optionMap\[\"015\"\] = 4;"
+          append s "optionMap\[\"11\"\] = 5;"
+          append s "optionMap\[\"030\"\] = 6;"
+          append s "optionMap\[\"13\"\] = 6;"
+          append s "optionMap\[\"130\"\] = 7;"
+          append s "optionMap\[\"41\"\] = 8;"
+          append s "optionMap\[\"42\"\] = 9;"
+          append s "optionMap\[\"415\"\] = 10;"
+          append s "optionMap\[\"71\"\] = 11;"
+
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+          append s "currentVal = baseVal+factorVal,"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 12;"
+          append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
+
+          #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
+
+          # Enter user value
+          append s "if (optionVal == 12) {"
+            append s "timeBaseTRElem.show();"
+            append s "timeFactorTRElem.show();"
+            append s "spaceTRElem.show();"
+          append s "}"
+
+        append s "};"
+
+        append s "setPanelAValues = function(elmID, prn, pref, specialElement) {"
+          append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
+          append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\"+ pref),"
+          append s "factorElem = jQuery(\"#separate_\" +specialElement + \"_\"+ prn +\"_\" + (parseInt(pref) + 1)),"
+          append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\"+prn+\"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "timeBaseTRElem.hide();"
+          append s "timeFactorTRElem.hide();"
+          append s "spaceTRElem.hide();"
+          append s "switch (value) \{"
+            append s "case 0:"
+              # keine Verzögerung
+              append s "baseElem.val(0);"
+              append s "factorElem.val(0);"
+              append s "break;"
+            append s "case 1:"
+              # 100 ms
+              append s "baseElem.val(0);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 2:"
+              # 300 ms
+              append s "baseElem.val(0);"
+              append s "factorElem.val(3);"
+              append s "break;"
+            append s "case 3:"
+              # 500 ms
+              append s "baseElem.val(0);"
+              append s "factorElem.val(5);"
+              append s "break;"
+           append s "case 4:"
+              # 1.5 sec
+              append s "baseElem.val(0);"
+              append s "factorElem.val(15);"
+              append s "break;"
+            append s "case 5:"
+              # 1 sec
+              append s "baseElem.val(0);"
+              append s "factorElem.val(10);"
+              append s "break;"
+            append s "case 6:"
+              # 3 sec
+              append s "baseElem.val(0);"
+              append s "factorElem.val(30);"
+              append s "break;"
+            append s "case 7:"
+              # 30 sec
+              append s "baseElem.val(1);"
+              append s "factorElem.val(30);"
+              append s "break;"
+            append s "case 8:"
+              # 1 min
+              append s "baseElem.val(2);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 9:"
+              # 2 min
+              append s "baseElem.val(2);"
+              append s "factorElem.val(2);"
+              append s "break;"
+            append s "case 10:"
+              # 15 min
+              append s "baseElem.val(2);"
+              append s "factorElem.val(15);"
+              append s "break;"
+            append s "case 11:"
+              # 1 hour
+              append s "baseElem.val(3);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 12:"
+              append s "timeBaseTRElem.show();"
+              append s "timeFactorTRElem.show();"
+              append s "spaceTRElem.show();"
+              append s "break;"
+            append s "default: conInfo(\"Problem\");"
+          append s "\}"
+        append s "};"
+      append s "</script>"
+
+      return $s
 }
 
 proc getDelayShort {prn pref specialElement} {
@@ -207,7 +364,6 @@ proc getDelayShort {prn pref specialElement} {
       append s "</script>"
 
       return $s
-
 }
 
 proc getDelay0to20M_step2M {prn pref specialElement} {
@@ -1813,16 +1969,27 @@ proc getSpecialID {special_input_id} {
     return "[lindex [split $special_input_id _] 0]"
 }
 
-proc isLongKeypressAvailable {sender} {
+proc isLongKeypressAvailable {sender sender_address url} {
+
+  # Here we check for certain device types without a long keypress.
   set devWithoutLongKeyPress {
-    HmIP-ASIR
+    HmIP-ASIR HmIP-DRI16 HmIPW-DRI32
   }
 
   foreach item $devWithoutLongKeyPress {
     if {$item == $sender} {return false}
   }
 
-  return true
+  # Here we test for all devices with a long keypress available, if the config parameter LONG_PRESS_TIME is set to a value == 0.
+  # If true, the long keypress doesn't work and should not be available for easymode profiles.
+  set result true
+  catch {
+    array set sender_ch_ps [xmlrpc $url getParamset $sender_address MASTER]
+    if {$sender_ch_ps(LONG_PRESS_TIME) == 0.000000} {
+      set result false
+    }
+  }
+  return $result
 }
 
 proc getDevFirmware {} {

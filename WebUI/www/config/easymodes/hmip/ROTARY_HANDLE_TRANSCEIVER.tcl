@@ -52,8 +52,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr>"
       array_clear options
       set options(0) "\${stringTableRHSMsgPosNoMsg}"
-      set options(1) "\${stringTableRHSMsgPosOpen}"
-      set options(2) "\${stringTableRHSMsgPosClosed}"
+      set options(1) "\${stringTableRHSMsgPosClosed}"
+      set options(2) "\${stringTableRHSMsgPosOpen}"
       set options(3) "\${stringTableRHSMsgPosTilted}"
       append HTML_PARAMS(separate_1) "<td>\${stringTableRHSMsgPosA}</td>"
       append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]</td>"
@@ -65,8 +65,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr>"
       array_clear options
       set options(0) "\${stringTableRHSMsgPosNoMsg}"
-      set options(1) "\${stringTableRHSMsgPosOpen}"
-      set options(2) "\${stringTableRHSMsgPosClosed}"
+      set options(1) "\${stringTableRHSMsgPosClosed}"
+      set options(2) "\${stringTableRHSMsgPosOpen}"
       set options(3) "\${stringTableRHSMsgPosTilted}"
       append HTML_PARAMS(separate_1) "<td>\${stringTableRHSMsgPosB}</td>"
       append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]</td>"
@@ -78,8 +78,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr>"
       array_clear options
       set options(0) "\${stringTableRHSMsgPosNoMsg}"
-      set options(1) "\${stringTableRHSMsgPosOpen}"
-      set options(2) "\${stringTableRHSMsgPosClosed}"
+      set options(1) "\${stringTableRHSMsgPosClosed}"
+      set options(2) "\${stringTableRHSMsgPosOpen}"
       set options(3) "\${stringTableRHSMsgPosTilted}"
       append HTML_PARAMS(separate_1) "<td>\${stringTableRHSMsgPosC}</td>"
       append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]</td>"

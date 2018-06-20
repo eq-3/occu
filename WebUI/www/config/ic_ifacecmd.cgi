@@ -23,6 +23,7 @@ proc cmd_removeLink {} {
 
   set url $iface_url($iface)
   set HmIPIdentifier "HmIP-RF"
+  set HmIPWiredIdentifier "HmIP-Wired"
 
   if { ![info exist env(IC_OPTIONS)] || ([string first NO_PROFILE_MAPPING $env(IC_OPTIONS)] < 0) } {
 
@@ -51,7 +52,7 @@ proc cmd_removeLink {} {
 
   set errorCode [catch {xmlrpc $url removeLink [list string $sender_address] [list string $receiver_address]}]
 
-   if { (! $errorCode) || ($iface == $HmIPIdentifier) } then {
+   if { (! $errorCode) || $iface == $HmIPIdentifier || $iface == $HmIPWiredIdentifier} then {
     #puts "<script type=\"text/javascript\">alert('Loeschen der Verknuepfung war erfolgreich!');</script>"
     cmd_ShowConfigPendingMsg
   } else {
@@ -104,6 +105,7 @@ proc cmd_addLink {} {
   set redirect_url       ""
 
   set HmIPIdentifier "HmIP-RF"
+  set HmIPWiredIdentifier "HmIP-Wired"
 
   catch { import iface }
   catch { import sender_address }
@@ -120,7 +122,7 @@ proc cmd_addLink {} {
   set errorCode [catch { xmlrpc $url addLink [list string $sender_address] [list string $receiver_address] }]
 
   # errorCode -10 = config pending
-  if { (! $errorCode) || (($iface == $HmIPIdentifier) && ($errorCode == -10))  } then {
+  if { (! $errorCode) || ((($iface == $HmIPIdentifier)  || ($iface == $HmIPWiredIdentifier)) && ($errorCode == -10))  } then {
 
     #Verknüpfung erfolgreich angelegt. Namen und Beschreibungen noch nicht gesetzt.
     set ret 1
@@ -318,13 +320,14 @@ proc cmd_firmware_update {} {
   set address ""
 
   set HmIPIdentifier "HmIP-RF"
+  set HmIPWiredIdentifier "HmIP-Wired"
 
   catch { import iface }
   catch { import address }
 
   set url $iface_url($iface)
 
-  if {$iface != $HmIPIdentifier} {
+  if {($iface != $HmIPIdentifier)  && ($iface != $HmIPWiredIdentifier)} {
     catch {xmlrpc $url updateFirmware [list string $address]} result
   } else {
     # HmIP device
@@ -386,6 +389,7 @@ proc cmd_set_profile {} {
   set paramid ""
   set pnr     ""
   set HmIPIdentifier "HmIP-RF"
+  set HmIPWiredIdentifier "HmIP-Wired"
 
   catch { import iface }
   catch { import address }
@@ -416,7 +420,7 @@ proc cmd_set_profile {} {
     
   puts "<script type=\"text/javascript\">"
 
-  if {$ret == -1 && $iface != $HmIPIdentifier} then {
+  if {$ret == -1 && (($iface != $HmIPIdentifier)  && ($iface != $HmIPWiredIdentifier))} then {
     
     #Kein ConfigPending anzeigen nach dem Laufbalken (sinnlos, weil keine Übertragung erfolgte):
     puts "ProgressBar.OnFinish = function () \{ return; \}"

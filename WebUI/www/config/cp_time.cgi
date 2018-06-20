@@ -100,8 +100,8 @@ set LOCATIONS {
     {"Norway" "CET/CEST"}
     {- "Oslo" "60.0" "10.8" default}
     {"Austria" "CET/CEST"}
-    {- "Vienna" "47.0" "7.4" default}
-    {- "Salzburg" "50.7" "8.0"}
+    {- "Vienna" "48.2" "16.4" default}
+    {- "Salzburg" "47.8" "13.1"}
     {"Poland" "CET/CEST"}
     {- "Warsaw" "52.2" "21.0" default}
     {"Portugal" "WET/WEST"}

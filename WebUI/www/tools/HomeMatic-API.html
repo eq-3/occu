@@ -1,0 +1,50 @@
+<table align="center">
+  <tr>
+
+    <td>
+      <select id="iFace">
+        <option value="HmIP-RF">HmIP-RF</option>
+        <option value="HmIP-Wired">HmIP-Wired</option>
+        <option value="BidCos-RF">BidCos-RF</option>
+      </select>
+    </td>
+
+
+    <td><input id="address" type="text" size="16"></td>
+
+    <td>
+      <select id="paramset">
+        <option value="MASTER">MASTER</option>
+        <option value="VALUES">VALUES</option>
+        <option value="LINK">LINK</option>
+        <option value="SERVICE">SERVICE</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="3" align="center">
+      <div>
+        <input type="button" value="getParamset" onclick="getParamset(this.value);">
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">
+      <div>
+        <input type="button" value="getParamsetDescription" onclick="getParamset(this.value);">
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">
+      <div>
+        <input type="button" value="getDeviceDescription" onclick="getDeviceDesctiption(this.value);">
+      </div>
+    </td>
+  </tr>
+
+</table>
+
+
+

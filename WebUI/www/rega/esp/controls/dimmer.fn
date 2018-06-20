@@ -71,23 +71,33 @@ function ::CreateDimmingActuator()
         WriteLine("</td>");
 
         if (oColor) {
-          string listColor = "black\tblue\tgreen\tturquoise\tred\tpurple\tyellow\twhite";
+          ! string listColor = "black\tblue\tgreen\tturquoise\tred\tpurple\tyellow\twhite";
+          string listColor = "${lblOff}\t${colorBLUE}\t${colorGREEN}\t${colorTURQUOISE}\t${colorRED}\t${colorPURPLE}\t${colorYELLOW}\t${colorWHITE}";
           string sColor;
-          WriteLine("<td style='background-color:#89989b'>");
-            WriteLine("<table>");
-              WriteLine("<tr><td><div>Farbe</div></td></tr>");
+          WriteLine("<td style='_background-color:#89989b'>");
+            WriteLine("<div class='ControlBtnOff'>");
+              WriteLine("<table>");
+                WriteLine("<tr><td><div>Farbe</div></td></tr>");
+                ! Color selectbox
+                WriteLine("<tr><td>");
+                  WriteLine("<select id='bslColorSelector"#chnId#"' onchange='bslSetColor(this,"#oColor.ID()#");'>");
+                    integer loop = 0;
+                    foreach(sColor, listColor) {
+                      WriteLine("<option value="#loop#">"#sColor#"</option>");
+                      loop = loop + 1;
+                    }
+                  WriteLine("</select>");
+                WriteLine("</td></tr>");
+              WriteLine("</table>");
+            WriteLine("</div>");
 
-              ! Color selectbox
-              WriteLine("<tr><td>");
-                WriteLine("<select onchange='alert(\"set color\");'>");
-                  foreach(sColor, listColor) {
-                    WriteLine("<option>"#sColor#"</option>");
-                  }
-                WriteLine("</select>");
-              WriteLine("</td></tr>");
-
-            WriteLine("</table>");
           WriteLine("</td>");
+          WriteLine("<script type='text/javascript'>");
+            WriteLine("bslSetColor = function(elm, oColorID) {");
+              WriteLine("setDpState(oColorID, elm.value);");
+            WriteLine("}");
+            WriteLine("jQuery('#bslColorSelector"#chnId#"').val("#oColor.Value()#");");
+          WriteLine("</script>");
         }
 
       !****************
@@ -97,6 +107,8 @@ function ::CreateDimmingActuator()
           WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white'>${lblInfoLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%</div></td>")
         WriteLine("</tr>");
       }
+
+
     WriteLine("</table>");
   WriteLine("</td>");
 

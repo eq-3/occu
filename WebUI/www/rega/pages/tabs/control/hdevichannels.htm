@@ -166,12 +166,11 @@
             }
           }
 
-          if ((sInterface != "HmIP-RF") && (sInterface != "VirtualDevices")) {
+          if ((sInterface != "HmIP-RF") && (sInterface != "HmIP-Wired") && (sInterface != "VirtualDevices")) {
             Call("/esp/functions.fn::showHideRFChannel()");
           } else {
             Call("/esp/functions.fn::showHideHmIPChannel()");
           }
-
           if( bShow && chn.ReadyConfig() && oDev.ReadyConfig() && bShowChannel )
           {
             string trId = device.ID()#tmp;
@@ -186,7 +185,13 @@
                 ! Channel 3 is not visible.
                 Write(chn.Label()#"<br/>&nbsp;"#device.Address()#"&nbsp;");
               } else {
-                Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"}</span>");
+                if (chn.HssType() == "MULTI_MODE_INPUT_TRANSMITTER") {
+                  string mode = chn.MetaData("channelMode");
+                  if (mode == null) {mode = "1";}
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_"#mode#"}</span>");
+                } else {
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"}</span>");
+                }
               }
             }
             Write("</td>");

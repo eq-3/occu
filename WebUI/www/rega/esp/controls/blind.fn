@@ -261,28 +261,33 @@ function ::CreateBlindVirtualReceiver()
   object oUser = dom.GetObject( system.GetSessionVar('sessionUserID'));
   integer userID = oUser.ID();
   object user = dom.GetObject(userID);
-
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
-  string chnNumber = chnAddress.StrValueByIndex(":",1);
+  ! integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
   string controlOperable = "pointer-events:auto;";
   boolean showVirtualChannel = true;
 
-  string devAddress =  chnAddress.StrValueByIndex(":",0);
-  string realChannelAddress = devAddress#":3";
+  object chInterface = dom.GetObject(cObj.Interface());
+  string devAddress = chnAddress.StrValueByIndex(":",0);
 
-  real levelRealChannel =  dom.GetObject("HmIP-RF."#realChannelAddress#".LEVEL").Value();
-  real levelRealChannelSlats =  dom.GetObject("HmIP-RF."#realChannelAddress#".LEVEL_2").Value();
+  ! Determine the address of the real channel
+  string realChannelAddress = devAddress#":"# ch.MetaData("RealChannel");
 
-  ! if ((ch.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) && (chnNumber > 4)) {
-  !   showVirtualChannel = false;
-  ! }
+  WriteLine( "<script>conInfo('CreateBlindVirtualReceiver - realChannel: "#realChannelAddress#"');</script>" );
 
+  real levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL").Value();
+  real levelRealChannelSlats =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_2").Value();
+
+  integer levelStatusRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_STATUS").Value();
+  integer level_2_StatusRealChannelSlats =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_2_STATUS").Value();
+  integer activityStateRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".ACTIVITY_STATE").Value();
 
   object oLvl = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL");
   object oLvlSlats = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_2");
   object oStop = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.STOP");
 
+  ! integer levelStatusRealChannel =  cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_STATUS").Value();
+  ! integer level_2_StatusRealChannelSlats =  cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_2_STATUS").Value();
 
   integer iLvlId = 0;
   integer iLvlSlatsId = 0;
@@ -339,7 +344,7 @@ function ::CreateBlindVirtualReceiver()
           if (system.GetVar("iStatusOnly")) {
             sReadOnly = "readonly";
           }
-          WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td></tr>");
+          WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' style='text-align:center' "#sReadOnly#" /><b>%</b></td></tr>");
           WriteLine("    <tr>");
           WriteLine("      <td align='center'>");
           WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
@@ -395,7 +400,7 @@ function ::CreateBlindVirtualReceiver()
       WriteLine("<tr><td colspan='5'><div text-align:'center' style='background-color:#89989b; color:black'>${stringTableJalousieSlatsLevel}</div></td></tr>");
 
       WriteLine("<tr>");
-        WriteLine("<td colspan='5'>");
+        WriteLine("<td id='tdSlider"#chnId#"' colspan='5'>");
           WriteLine("<table>");
             WriteLine("<tr>");
               WriteLine("<td colspan='2' class='CLASS02546'>");
@@ -419,14 +424,20 @@ function ::CreateBlindVirtualReceiver()
   WriteLine("<script type='text/javascript'>");
 
     WriteLine("var opts = {");
+      WriteLine("chnInterface:'"#chInterface.Name()#"',");
       WriteLine("chnAddress:'"#chnAddress#"',");
       WriteLine("levelD:"#iLvlId#",");
       WriteLine("levelValue:"#iLvl#",");
       WriteLine("levelSlatsID:"#iLvlSlatsId#",");
       WriteLine("levelSlatsValue:"#iLvlSlats#",");
       WriteLine("levelRealChannel:'"#levelRealChannel#"',");
+      WriteLine("levelStatusRealChannel:'"#levelStatusRealChannel#"',");
+
       WriteLine("levelRealChannelSlatsValue:'"#levelRealChannelSlats#"',");
-      WriteLine("easyLinkMode: "#user.UserEasyLinkMode()#",");
+      WriteLine("levelStatusRealChannelSlatsValue:'"#level_2_StatusRealChannelSlats#"',");
+      WriteLine("activityStateRealChannel:'"#activityStateRealChannel#"',");
+
+      WriteLine("easyLinkMode: "#user.UserEasyLinkMode());
     WriteLine("};");
 
     WriteLine("ibs"#cObj.ID()#" = new iseHmIPJalousieShutter(" # chnId # ", " # iLvl # ", " # iLvlId # ", " # iStopId # ", " #system.GetVar("iStatusOnly")# ", opts );" );
@@ -445,14 +456,20 @@ function ::CreateShutterVirtualReceiver()
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
 
-  string chnNumber = chnAddress.StrValueByIndex(":",1);
+  ! string chnNumber = chnAddress.StrValueByIndex(":",1);
   string controlOperable = "pointer-events:auto;";
   boolean showVirtualChannel = true;
 
-  string devAddress =  chnAddress.StrValueByIndex(":",0);
-  string realChannelAddress = devAddress#":3";
+  object chInterface = dom.GetObject(cObj.Interface());
 
-  real levelRealChannel =  dom.GetObject("HmIP-RF."#realChannelAddress#".LEVEL").Value();
+  string devAddress =  chnAddress.StrValueByIndex(":",0);
+
+  ! Determine the address of the real channel
+  string realChannelAddress = devAddress#":"# ch.MetaData("RealChannel");
+
+  real levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL").Value();
+  integer levelStatusRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_STATUS").Value();
+  integer activityStateRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".ACTIVITY_STATE").Value();
 
   object oLvl = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.LEVEL");
   object oStop = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.STOP");
@@ -490,7 +507,7 @@ function ::CreateShutterVirtualReceiver()
           if (system.GetVar("iStatusOnly")) {
             sReadOnly = "readonly";
           }
-          WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td></tr>");
+          WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' style='text-align:center' "#sReadOnly#" /><b>%</b></td></tr>");
           WriteLine("    <tr>");
           WriteLine("      <td align='center'>");
           WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
@@ -547,11 +564,14 @@ function ::CreateShutterVirtualReceiver()
   WriteLine("<script type='text/javascript'>");
 
     WriteLine("var opts = {");
+      WriteLine("chnInterface:'"#chInterface.Name()#"',");
       WriteLine("chnAddress:'"#chnAddress#"',");
       WriteLine("levelD:"#iLvlId#",");
       WriteLine("levelValue:"#iLvl#",");
       WriteLine("levelRealChannel:'"#levelRealChannel#"',");
-      WriteLine("easyLinkMode: "#user.UserEasyLinkMode()#",");
+      WriteLine("levelStatusRealChannel:'"#levelStatusRealChannel#"',");
+      WriteLine("activityStateRealChannel:'"#activityStateRealChannel#"',");
+      WriteLine("easyLinkMode: "#user.UserEasyLinkMode());
     WriteLine("};");
 
     WriteLine("ibs"#cObj.ID()#" = new iseHmIPJalousieShutter(" # chnId # ", " # iLvl # ", " # iLvlId # ", " # iStopId # ", " #system.GetVar("iStatusOnly")# ", opts );" );
@@ -569,6 +589,7 @@ function ::CreateShutterTransmitter()
 
   object oDevice = dom.GetObject(cObj.Device());
   object oLvl = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL");
+  object oLvlStatus = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL_STATUS");
 
   real rLvl = -1;
 
@@ -583,7 +604,7 @@ function ::CreateShutterTransmitter()
     }
   }
 
-  if (rLvl == -1) {
+  if (oLvlStatus.Value() != 0) {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
   } else {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#rLvl.ToInteger()#unitLevel#"</div></td>");
@@ -604,14 +625,28 @@ function ::CreateShutterTransmitter()
         integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
 
         ! Create the channel address of the first VIRTUAL_CHANNEL - we assume it's the next channel after the real channel
-        chnNumber = chnNumber + 1;
+        object ch = dom.GetObject(chnId);
+        string chnAddress = ch.Address();
+        integer chnNumberReal = chnAddress.StrValueByIndex(":",1).ToInteger();
+        integer chnNumberVirt;
 
-        ! Get the appropriate channel
-        object oVirtChannel = dom.GetObject(oDevice.Channels().GetAt(chnNumber));
+        ! Create the channel address of the first VIRTUAL_CHANNEL - we assume it's the next channel after the real channel
+        chnNumberVirt = chnNumberReal + 1;
+
+        ! Get the appropriate channel (the first virtual cahnnel)
+        object oVirtChannel0 = dom.GetObject(oDevice.Channels().GetAt(chnNumberVirt));
+        oVirtChannel0.AddMetaData("RealChannel", chnNumberReal);
+
+        ! Set the real channel of the second and third virtual channel as well
+        object oVirtChannel1 = dom.GetObject(oDevice.Channels().GetAt(chnNumberVirt + 1));
+        oVirtChannel1.AddMetaData("RealChannel", chnNumberReal);
+
+        object oVirtChannel2 = dom.GetObject(oDevice.Channels().GetAt(chnNumberVirt + 2));
+        oVirtChannel2.AddMetaData("RealChannel", chnNumberReal);
 
        ! END VIRTUAL_CHANNEL
 
-        WriteLine(" var virtLevelPercElm = jQuery('#"#oVirtChannel.ID()#"Perc'); ");
+        WriteLine(" var virtLevelPercElm = jQuery('#"#oVirtChannel0.ID()#"Perc'); ");
 
         WriteLine(" var virtLevelVal = (isNaN(parseInt(virtLevelPercElm.val()))) ? -1 : parseInt(virtLevelPercElm.val()); ");
         WriteLine(" var realLevelVal = "#rLvl.ToInteger()#"; ");
@@ -641,6 +676,9 @@ function ::CreateBlindTransmitter()
   object oLvl = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL");
   object oLvlSlats = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL_2");
 
+  object oLvlStatus = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL_STATUS");
+  object oLvlSlatsStatus = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL_2_STATUS");
+
   real rLvl = -1;
   real iLvlSlats = -1;
 
@@ -665,13 +703,13 @@ function ::CreateBlindTransmitter()
     }
   }
 
-  if (rLvl == -1) {
+  if (oLvlStatus.Value() != 0) {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
   } else {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#rLvl.ToInteger()#unitLevel#"</div></td>");
   }
 
-  if (iLvlSlats == -1) {
+  if (oLvlSlatsStatus.Value() != 0) {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>${unknown}</div></td>");
   } else {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableJalousieSlatsLevel}<br/>"#iLvlSlats.ToInteger()#unitLevelSlat#"</div></td>");
@@ -689,19 +727,28 @@ function ::CreateBlindTransmitter()
       ! Fetch the values of the first VIRTUAL_CHANNEL
         object ch = dom.GetObject(chnId);
         string chnAddress = ch.Address();
-        integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
+        integer chnNumberReal = chnAddress.StrValueByIndex(":",1).ToInteger();
+        integer chnNumberVirt;
 
         ! Create the channel address of the first VIRTUAL_CHANNEL - we assume it's the next channel after the real channel
-        chnNumber = chnNumber + 1;
+        chnNumberVirt = chnNumberReal + 1;
 
-        ! Get the appropriate channel
-        object oVirtChannel = dom.GetObject(oDevice.Channels().GetAt(chnNumber));
+        ! Get the appropriate channel (the first virtual cahnnel)
+        object oVirtChannel0 = dom.GetObject(oDevice.Channels().GetAt(chnNumberVirt));
+        oVirtChannel0.AddMetaData("RealChannel", chnNumberReal);
+
+        ! Set the real channel of the second and third virtual channel as well
+        object oVirtChannel1 = dom.GetObject(oDevice.Channels().GetAt(chnNumberVirt + 1));
+        oVirtChannel1.AddMetaData("RealChannel", chnNumberReal);
+
+        object oVirtChannel2 = dom.GetObject(oDevice.Channels().GetAt(chnNumberVirt + 2));
+        oVirtChannel2.AddMetaData("RealChannel", chnNumberReal);
 
        ! END VIRTUAL_CHANNEL
 
 
-        WriteLine(" var virtLevelPercElm = jQuery('#"#oVirtChannel.ID()#"Perc'); ");
-        WriteLine(" var virtSlatPercElm = jQuery('#infoSliderPos"#oVirtChannel.ID()#"'); ");
+        WriteLine(" var virtLevelPercElm = jQuery('#"#oVirtChannel0.ID()#"Perc'); ");
+        WriteLine(" var virtSlatPercElm = jQuery('#infoSliderPos"#oVirtChannel0.ID()#"'); ");
 
         WriteLine(" var virtLevelVal = parseInt(virtLevelPercElm.val()), ");
         WriteLine(" virtSlatVal = parseInt(virtSlatPercElm.val()), ");

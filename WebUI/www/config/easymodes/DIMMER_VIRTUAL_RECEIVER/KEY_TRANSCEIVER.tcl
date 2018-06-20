@@ -397,15 +397,25 @@ set PROFILE_5(UI_DESCRIPTION)  "Die Taste ist nicht aktiv."
 set PROFILE_5(UI_TEMPLATE)   $PROFILE_5(UI_DESCRIPTION)
 set PROFILE_5(UI_HINT) 5
 
+proc getDescription {longAvailable prn} {
+  if {$longAvailable} {
+    return "\${description_$prn}"
+  } else {
+    return "\${description_noLong_$prn}"
+  }
+}
+
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-  global dev_descr_sender dev_descr_receiver
+  global iface_url sender_address dev_descr_sender dev_descr_receiver
 
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
   upvar $pps          ps
   upvar $pps_descr    ps_descr
+
+  set url $iface_url($iface)
 
   set device $dev_descr_sender(TYPE)
   set ch $dev_descr_sender(INDEX)
@@ -414,13 +424,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     upvar PROFILE_$pro PROFILE_$pro
   }
 
+  set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
+
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 
 # die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
   puts "<script type=\"text/javascript\">getLangInfo_Special('HmIP_DEVICES.txt');</script>"
-
-
 
   set prn 0
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
@@ -432,7 +442,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
-  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   # RAMPON_TIME
@@ -455,22 +466,24 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
   }
 
-  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+  if {$longKeypressAvailable} {
+    append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 
-  # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
+    # ON_TIME
+    append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
 
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MAX_LEVEL}</td><td>"
-  option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
-  EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  set param LONG_OUTPUT_BEHAVIOUR
-  if {[info exists ps($param)] == 1} {
     incr pref
-    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MAX_LEVEL}</td><td>"
+    option DIM_ONLEVEL
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    set param LONG_OUTPUT_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
   }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
@@ -481,7 +494,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
-  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   # OFFDELAY
@@ -498,28 +512,30 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # RAMPOFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
 
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
-
-  option DIM_OFFLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
-  EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  set param LONG_OUTPUT_BEHAVIOUR
-  if {[info exists ps($param)] == 1} {
+  if {$longKeypressAvailable} {
     incr pref
-    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
-  }
+    append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
 
+    option DIM_OFFLEVEL
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    set param LONG_OUTPUT_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
+  }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #3
   incr prn
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
-  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  #append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
   set pref 0
   # RAMPON_TIME
@@ -555,38 +571,40 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # RAMPOFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
 
-  ## LONG KEYPRESS
-  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
-  # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
+  if {$longKeypressAvailable} {
+    ## LONG KEYPRESS
+    append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+    # ON_TIME
+    append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
 
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MAX_LEVEL}</td><td>"
-  option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
-  EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
-  option DIM_OFFLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
-  EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  set param LONG_OUTPUT_BEHAVIOUR
-  if {[info exists ps($param)] == 1} {
     incr pref
-    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
-  }
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MAX_LEVEL}</td><td>"
+    option DIM_ONLEVEL
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
+    option DIM_OFFLEVEL
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    set param LONG_OUTPUT_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
+  }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #4
   incr prn
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
-  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
   set pref 0
   # RAMPON_TIME

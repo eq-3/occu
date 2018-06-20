@@ -159,8 +159,9 @@ proc putSectionWiredRF {} {
 # Creates the HmIP Section
 proc putSectionHMIP {} {
   set html ""
+  set iFace "HmIP-RF"
 
-  append html "<tr id='sectionHmIP-RF' class='CLASS21202 hidden'>"
+  append html "<tr id='section$iFace' class='CLASS21202 hidden'>"
 
    append html "<td class='CLASS21207'>"
    #append html "HmIP"
@@ -178,9 +179,9 @@ proc putSectionHMIP {} {
          append html "</tr>"
 
         append html "<tr>"
-          append html "<td class='CLASS21206'><div id='teachCounter' class='CLASS21215' style='width:100%;'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
+          append html "<td class='CLASS21206'><div id='teachCounter_$iFace' class='CLASS21215' style='width:100%;'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
           append html "<td>"
-          append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode()} \${dialogNewDevicesHmIPAddDeviceBtn}]
+          append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode("HmIP-RF")} \${dialogNewDevicesHmIPAddDeviceBtn}]
           append html "</td>"
         append html "</tr>"
       append html "</table>"
@@ -212,7 +213,7 @@ proc putSectionHMIP {} {
                   append html "<span>\${lblTeachInKEY}</span>"
                 append html "</td>"
                 append html "<td>"
-                  append html "<input id='keyHmIPLocal' type='text' style='width:390px'>"
+                  append html "<input id='keyHmIPLocal_$iFace' type='text' style='width:390px'>"
                 append html "</td>"
               append html "</tr>"
 
@@ -221,7 +222,7 @@ proc putSectionHMIP {} {
                   append html "<span>\${lblTeachInSGTIN}</span>"
                 append html "</td>"
                 append html "<td>"
-                  append html "<input id='serialHmIPLocal' type='text' style='width:390px;'>"
+                  append html "<input id='serialHmIPLocal_$iFace' type='text' style='width:390px;'>"
                 append html "</td>"
               append html "</tr>"
 
@@ -233,9 +234,9 @@ proc putSectionHMIP {} {
               append html "<col style='width: 105px;'>"
             append html "</colgroup>"
               append html "<tr>"
-                append html "<td><div id='teachCounterLocal' class='CLASS21215'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
+                append html "<td><div id='teachCounterLocal_$iFace' class='CLASS21215'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
                 append html "<td class='CLASS21209'>"
-                  append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode("local")} {${dialogNewDevicesHmIPAddDeviceBtn}${lblLocal}}]
+                  append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode("HmIP-RF", "local")} {${dialogNewDevicesHmIPAddDeviceBtn}${lblLocal}}]
                 append html "</td>"
 
               append html "</tr>"
@@ -253,6 +254,107 @@ proc putSectionHMIP {} {
     append html "showSection('HmIP-RF');"
   append html "</script>"
 
+  return $html
+}
+
+# Creates the HmIP-Wired Section
+proc putSectionHMIPWired {} {
+  set html ""
+
+  set iFace "HmIP-Wired"
+
+  append html "<tr id='section$iFace' class='CLASS21202 hidden'>"
+
+   append html "<td class='CLASS21207'>"
+   append html "HmIP-Wired"
+   #append html "<img src='/ise/img/homematicIP90Deg.png'>"
+   append html "</td>"
+
+    append html "<td class='CLASS21208' align='left'>"
+    append html "\${dialogNewDevicesHmIPWithInternet}"
+    append html "<div class='popupControls CLASS21205'>"
+      append html "<table>"
+        append html "<tr>"
+          append html "<td colspan='2'>"
+            append html "\${dialogNewDevicesHmIPRFLbl1}"
+          append html "</td>"
+         append html "</tr>"
+
+        append html "<tr>"
+          append html "<td class='CLASS21206'><div id='teachCounter_$iFace' class='CLASS21215' style='width:100%;'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
+          append html "<td>"
+          append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode("HmIP-Wired")} \${dialogNewDevicesHmIPAddDeviceBtn}]
+          append html "</td>"
+        append html "</tr>"
+      append html "</table>"
+    append html "</div>"
+   append html "</td>"
+
+   append html "<td class='CLASS21208' align='left'>"
+    append html "\${dialogNewDevicesHmIPWithoutInternet}"
+    append html "<div class='popupControls CLASS21205'>"
+      append html "<table>"
+
+        append html "<tr>"
+          append html "<td colspan='2'>"
+            append html "\${dialogNewDevicesHmIPRFLbl2}"
+          append html "</td>"
+        append html "</tr>"
+
+        append html "<tr>"
+          append html "<td class='CLASS21206'>"
+
+            append html "<table>"
+              append html "<colgroup>"
+                append html "<col style='width: 50px;'>"
+                append html "<col style='width: auto;'>"
+              append html "</colgroup>"
+
+              append html "<tr>"
+                append html "<td style='text-align: right'>"
+                  append html "<span>\${lblTeachInKEY}</span>"
+                append html "</td>"
+                append html "<td>"
+                  append html "<input id='keyHmIPLocal_$iFace' type='text' style='width:390px'>"
+                append html "</td>"
+              append html "</tr>"
+
+              append html "<tr>"
+                append html "<td style='text-align: right'>"
+                  append html "<span>\${lblTeachInSGTIN}</span>"
+                append html "</td>"
+                append html "<td>"
+                  append html "<input id='serialHmIPLocal_$iFace' type='text' style='width:390px;'>"
+                append html "</td>"
+              append html "</tr>"
+
+            append html "</table>"
+
+            append html "<table style='table-layout:fixed; width: 100%; padding-right:15px'>"
+            append html "<colgroup>"
+              append html "<col style='width: auto;'>"
+              append html "<col style='width: 105px;'>"
+            append html "</colgroup>"
+              append html "<tr>"
+                append html "<td><div id='teachCounterLocal_$iFace' class='CLASS21215'>\${dialogNewDevicesBidCosRFFetchmodeNotActive}</div></td>"
+                append html "<td class='CLASS21209'>"
+                  append html [getButton {CLASS21210 colorGradient50px} {buttonPressed(this); hmip_install_mode("HmIP-Wired", "local")} {${dialogNewDevicesHmIPAddDeviceBtn}${lblLocal}}]
+                append html "</td>"
+
+              append html "</tr>"
+            append html "</table>"
+
+          append html "</td>"
+        append html "</tr>"
+
+      append html "</table>"
+    append html "</div>"
+   append html "</td>"
+  append html "</tr>"
+
+  append html "<script type='text/javascript'>"
+    append html "showSection('HmIP-Wired');"
+  append html "</script>"
   return $html
 }
 
@@ -290,6 +392,10 @@ puts "<div class='CLASS21200 j_translate'>"
     # Start section HM IP
     puts [putSectionHMIP]
     # End section HM IP
+
+    # Start section HM IP Wired
+    puts [putSectionHMIPWired]
+    # End section HM IP Wired
   puts "</table>"
 
 puts "</div>"
@@ -401,13 +507,14 @@ puts "</div>"
       }
 
 
-      getInstallModeTimer = function(mode) {
-        var remainingTimeElm = (mode == "local") ? jQuery("#teachCounterLocal") : jQuery("#teachCounter");
+      getInstallModeTimer = function(interface, mode) {
+        var remainingTimeElm = (mode == "local") ? jQuery("#teachCounterLocal_" + interface) : jQuery("#teachCounter_" + interface),
+        iFace = interface;
         window.setTimeout(function() {
-          homematic ('Interface.getInstallMode', {'interface': 'HmIP-RF'}, function(result) {
+          homematic ('Interface.getInstallMode', {'interface': iFace}, function(result) {
             if (result >= 1) {
               remainingTimeElm.text(translateKey("dialogNewDevicesBidCosRFFetchmodeActiveA") + result + translateKey("dialogNewDevicesBidCosRFFetchmodeActiveB"));
-              getInstallModeTimer(mode);
+              getInstallModeTimer(iFace, mode);
               if (result == 40 || result == 30 || result == 20) {
                 update_new_device_count();
               }
@@ -421,10 +528,11 @@ puts "</div>"
       };
 
       hmip_install_mode_stop = function() {
+         var iFace = 'HmIP-RF'
          if(jQuery("body").data("HmIP-RF")) {
           homematic('Interface.setInstallModeHMIP',{
             'installMode' : 'STOP',
-            'interface': 'HmIP-RF',
+            'interface': iFace,
             'on': 'false',
             'time' : 0,
             'address': '',
@@ -435,21 +543,23 @@ puts "</div>"
         }
       };
 
-      hmip_install_mode_start = function(mode) {
+      hmip_install_mode_start = function(interface, mode) {
         var devAddress = "",
          devKey = "",
          devKeyMode = "",
          installTime = 60;
 
+         var iFace = interface;
+
         if (mode == "local") {
-          devAddress = jQuery("#serialHmIPLocal").val().replace(/-/g,"").toUpperCase();
-          devKey = jQuery("#keyHmIPLocal").val().replace(/-/g,"").toUpperCase();
+          devAddress = jQuery("#serialHmIPLocal_" + iFace).val().replace(/-/g,"").toUpperCase();
+          devKey = jQuery("#keyHmIPLocal_" + iFace).val().replace(/-/g,"").toUpperCase();
           devKey = (devKey.length < 32) ? convertHmIPKeyBase32ToBase16(devKey) : devKey;
           devKeyMode = 'LOCAL';
 
           homematic('Interface.setInstallModeHMIP',{
             'installMode' : 'LOCAL',
-            'interface': 'HmIP-RF',
+            'interface': iFace,
             'on': 'true',
             'time' : installTime,
             'address': devAddress,
@@ -460,7 +570,7 @@ puts "</div>"
         } else {
           homematic('Interface.setInstallModeHMIP',{
             'installMode' : 'ALL',
-            'interface': 'HmIP-RF',
+            'interface': iFace,
             'on': 'true',
             'time' : installTime,
             'address': "",
@@ -468,10 +578,13 @@ puts "</div>"
             'keymode' : ""
           });
         }
-        getInstallModeTimer(mode);
+        getInstallModeTimer(iFace, mode);
       };
 
-      hmip_install_mode = function(mode) {
+      hmip_install_mode = function(interface, mode) {
+
+        var iFace = interface;
+
         if(jQuery("body").data("BidCos-RF")) {
           rf_install_mode(false);
         }
@@ -479,18 +592,18 @@ puts "</div>"
           // Stop a running hmip install mode so the timer is set to 0
           homematic('Interface.setInstallModeHMIP',{
             'installMode' : 'STOP',
-            'interface': 'HmIP-RF',
+            'interface': iFace,
             'on': 'false',
             'time' : 0,
             'address': '',
             'key' : '',
             'keymode' : ''
             }, function() {
-              hmip_install_mode_start(mode);
+              hmip_install_mode_start(iFace, mode);
             }
           );
         } else {
-          hmip_install_mode_start(mode);
+          hmip_install_mode_start(iFace,mode);
         }
       };
 

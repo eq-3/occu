@@ -193,7 +193,7 @@
           break;
         case 1:
           iSubType = SYSVAR_ENUM;
-          pb += "string sValList = '"+$("txVals").value+"';";
+          pb += "string sValList = '"+$("txVals").value.replace(/(?:\r\n|\r|\n)/g,';')+"';";
           break;
         case 2:
           iSubType = SYSVAR_GENERIC;

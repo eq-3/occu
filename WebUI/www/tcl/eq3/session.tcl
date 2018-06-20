@@ -137,6 +137,7 @@ proc session_renew { sid } {
   ::http::cleanup [::http::geturl "$RENEW_URL?sid=@$sid@"]
 }
 
+
 ##
 # session_logout
 # Schlieﬂt eine laufende Sitzung.
@@ -144,5 +145,7 @@ proc session_renew { sid } {
 # @param sid [string] Session-Id
 ##
 proc session_logout { sid } {
-  rega_exec "system.ClearSessionID(\"$sid\");"
+  if {[session_isValid $sid] == true} {
+    rega_exec "system.ClearSessionID(\"$sid\");"
+  }
 }

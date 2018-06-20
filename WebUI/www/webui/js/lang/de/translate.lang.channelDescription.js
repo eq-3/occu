@@ -62,6 +62,13 @@ jQuery.extend(true,langJSON, {
     "chType_MOD_RC8" : "Taster/Schalter<br/>T%FCr-/Fensterkontakt",
     "chType_MOTION_DETECTOR" : "Bewegungsmelder",
     "chType_MOTIONDETECTOR_TRANSCEIVER" : "Bewegungsmelder",
+
+    "chType_MULTI_MODE_INPUT_TRANSMITTER" : "Homematic IP Wired<br/>Eingangsmodul",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER_0" : "Kanal deaktiviert",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Tasterkanal",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER_2" : "Schalter",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER_3" : "T%FCr-/Fensterkontakt",
+
     "chType_PASSAGE_DETECTOR_COUNTER_TRANSMITTER" : "Durchgangsz%E4hler",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR" : "Durchgangserkennung<br/>Links nach Rechts",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL" : "Durchgangserkennung<br/>Rechts nach Links",

@@ -374,6 +374,29 @@
     };
   };
 
+  // Sets the width of a selectbox with the name 'selectConditionWhen' according to the width of the selected option
+  // This is necessary because of the length of some parameters which causes the line with the condition to reach into the second line.
+  setOptionWidthSelectConditionWhen = function() {
+      var jElm = jQuery("[name='selectConditionWhen']"),
+        arrowWidth = 30;
+
+      jQuery.each(jElm, function (index, elm) {
+        var text = jQuery(elm).find("option:selected").text();
+        // create test element
+        var _test = jQuery("<span>").html(text).css({
+          "font-size": jQuery(elm).css("font-size"), // ensures same size text
+          "visibility": "hidden"               // prevents FOUC
+        });
+
+        // add to body, get width, and get out
+        //_test.appendTo(elm.parent());
+        _test.appendTo(body);
+        var width = _test.width();
+        _test.remove();
+        jQuery(elm).width(width + arrowWidth);
+      });
+  };
+
   SetLeftValue = function(scid,dpid)
   {
     var iPosColon = dpid.indexOf(":");
@@ -552,10 +575,13 @@
       "ruleConditionButtonDeviceList, ruleConditionButtonSystemVar, ruleConditionButtonTimeModul," +
       "ruleActivityButtonDeviceList, ruleActivityButtonSystemState, ruleActivityButtonCreateScript";
 
-      // Erst aktivieren, wenn benötigt.
       setConditionBlockColor();
       translatePage('#prgrulecontent');
       translateButtons(buttons);
+
+      // Set the width of the selectbox for the condition rules to the width of the selected option.
+      // Otherwise the width of the selectbox equals the size of the longest option
+      setOptionWidthSelectConditionWhen();
   };
 
   ReloadSiDeCallback = function(t)

@@ -5,7 +5,7 @@
 # Parameter:
 #   interface:    [stirng] Bezeichnung der Schnittstelle
 #   address:      [string] Adresse des logischen Geräts
-#   paramsetType: [string] Typ des Paramsets (MASTER, VALUES, LINK)
+#   paramsetKey: [string] Typ des Paramsets (MASTER, VALUES, LINK)
 #
 # Rückgabewert: [array]
 #   Jedes Element ist ein Objekt, welches einen Parameter beschreibt.
@@ -32,9 +32,9 @@
 ##
 
 set address      $args(address)
-set paramsetType $args(paramsetType)
+set paramsetKey $args(paramsetKey)
 
-checkXmlRpcStatus [catch { array set description [xmlrpc $interface(URL) getParamsetDescription [list string $address] [list string $paramsetType]] }]
+checkXmlRpcStatus [catch { array set description [xmlrpc $interface(URL) getParamsetDescription [list string $address] [list string $paramsetKey]] }]
 
 set result "\["
 set first 1

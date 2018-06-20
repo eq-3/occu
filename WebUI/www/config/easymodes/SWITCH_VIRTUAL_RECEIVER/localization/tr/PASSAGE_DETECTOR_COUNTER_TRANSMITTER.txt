@@ -4,8 +4,15 @@
 "description_4" : "<span class=\"translated\">When receiving the decision value defined the switch actuator is switched off for the desired time.</span><br/><br/>",
 "description_5" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
 
-"subset_1" : "right > left on / left > right off",
-"subset_2" : "right > left off / left > right on",
-"subset_3" : "right -> left",
-"subset_4" : "left -> right",
-"subset_5" : "left -> right or right -> left",
+"subset_1_mode1" : "right > left on / left > right off",
+"subset_2_mode1" : "right > left off / left > right on",
+
+"subset_1_mode2" : "right > left on",
+"subset_2_mode2" : "right > left off",
+
+"subset_1_mode3" : "left > right off",
+"subset_2_mode3" : "left > right on",
+
+"subset_7" : "right -> left",
+"subset_8" : "left -> right",
+"subset_9" : "left -> right or right -> left",

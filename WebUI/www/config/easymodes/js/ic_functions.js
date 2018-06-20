@@ -19,7 +19,7 @@ time_tmp = "";
 perc_tmp = "";
 temp_tmp = "";
 exists_bib = [] ;
-arModEM8 = [];
+arChnHasLinks = [];
 
 getInternalKeySpecialInputId = function(arrId) 
 {
@@ -1116,36 +1116,46 @@ HMW_WebUIsetChannel = function(id, ch_type)
 };
 
 
-setHM_MOD_EM_X = function(channel, prgExists) {
-  var channel = parseInt(channel);
-  var tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel -1];
-  var elm = jQuery("[name='CHANNEL_FUNCTION']")[channel -1];
+showHintPrgLink = function(channel, prgExists) {
+  var channel = parseInt(channel),
+  tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel],
+  elm = jQuery("[name='CHANNEL_FUNCTION'], [name='CHANNEL_OPERATION_MODE']")[channel -1];
+
   jQuery(elm).prop("disabled", true);
   if (prgExists) {
     jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintPrgExists")+"</div>");
   } else {
-    arModEM8[channel] = true;
+    arChnHasLinks[channel] = true;
     jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintLinkExists")+"</div>");
   }
 };
 
 ShowHintIfProgramExists = function(id, ch) {
     homematic("Channel.listProgramIds", {id: id}, function(result, error) {
-    if (result[0] != undefined) {
-      setHM_MOD_EM_X(ch, true);
+    if (typeof result[0] != "undefined") {
+      showHintPrgLink(ch, true);
     } else {
-      if(arModEM8[parseInt(ch)] != true) {
-        var elm = jQuery("[name='CHANNEL_FUNCTION']")[ch - 1];
+      if(arChnHasLinks[parseInt(ch)] != true) {
+        var elm = jQuery("[name='CHANNEL_FUNCTION'], [name='CHANNEL_OPERATION_MODE']")[ch - 1];
         jQuery(elm).prop("disabled", false);
       }
     }
   });
 };
 
-RF_existsLink = function(deviceType, address, ch) {
+RF_existsLink = function(deviceType, ch, ch_type) {
+  // The ch_type of a HM-MOD-EM-8 is KEY which is very generic. Therefore, for this device we have to check the device type.
   switch(deviceType) {
     case "HM-MOD-EM-8":
-      setHM_MOD_EM_X(ch, false);
+      showHintPrgLink(ch, false);
+      break;
+    default:
+      break;
+  }
+
+  switch(ch_type) {
+    case "MULTI_MODE_INPUT_TRANSMITTER":
+      showHintPrgLink(ch, false);
       break;
     default:
       break;

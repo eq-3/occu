@@ -105,7 +105,7 @@
   <td class="CLASS03801">
   </td>
   </tr>
-  <script type="text/javascript">translatePage("#tblHFuncChannels");</script>
+  <!-- script type="text/javascript">translatePage("#tblHFuncChannels");</script-->
    <%
 
     object oUser = dom.GetObject( system.GetSessionVar('sessionUserID'));
@@ -153,17 +153,34 @@
           }
         }
 
-        if ((sInterface != "HmIP-RF") && (sInterface != "VirtualDevices")) {
+        if ((sInterface != "HmIP-RF") && (sInterface != "HmIP-Wired") && (sInterface != "VirtualDevices")) {
           Call("/esp/functions.fn::showHideRFChannel()");
         } else {
           Call("/esp/functions.fn::showHideHmIPChannel()");
         }
 
-
           if( bShow && chn.ReadyConfig() && oDev.ReadyConfig() && bShowChannel )
           {
             Write("<td class='GrayBkg'>");
-            Write(chn.Name());
+
+            if ((chn.HssType() == "SWITCH_TRANSMITTER") && (chn.Label() == "HmIP-MOD-OC8") ) {
+              Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_OC}</span>");
+            } else {
+              if ((chn.HssType() == "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") && (chn.Label() == "HmIP-SPDR")) {
+                ! Show the device address instead of the channel address because channel 2 and 3 are summarized together in channel 2.
+                ! Channel 3 is not visible.
+                Write(chn.Label()#"<br/>&nbsp;"#oDev.Address()#"&nbsp;");
+              } else {
+                if (chn.HssType() == "MULTI_MODE_INPUT_TRANSMITTER") {
+                  string mode = chn.MetaData("channelMode");
+                  if (mode == null) {mode = "1";}
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_"#mode#"}</span>");
+                } else {
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"}</span>");
+                }
+              }
+            }
+
             Write("</td>");
             Write("<td  class='GrayBkg'>");
             string rooms = "";
@@ -256,6 +273,15 @@
 
   jQuery("#btnFilterName").click(function(){
     jQuery("#ftName").focus();
+  });
+
+  translatePage("#tblHFuncChannels", function () {
+    jQuery("[name='hssType']").each(function(index, elm) {
+      var chText = jQuery(elm).text();
+      if (chText.indexOf("chType_") == -1) {
+        jQuery(elm).show();
+      }
+    });
   });
 
 </script>

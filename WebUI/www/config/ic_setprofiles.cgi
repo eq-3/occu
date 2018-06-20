@@ -14,7 +14,8 @@ ise_getChannelNames ise_CHANNELNAMES
 proc isHmIP {} {
   global iface
   set hmIPIdentifier "HmIP-RF"
-  if {$iface == $hmIPIdentifier} {
+  set hmIPWiredIdentifier "HmIP-Wired"
+  if {($iface == $hmIPIdentifier) || ($iface == $hmIPWiredIdentifier)} {
     return "true"
   }
   return "false"

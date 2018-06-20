@@ -20,6 +20,7 @@ ACOUSTIC_ALARM_ACTIVE=FALSE	${stringTableAcousticAlarmActiveFalse}
 ACOUSTIC_ALARM_ACTIVE=TRUE	${stringTableAcousticAlarmActiveTrue}
 OPTICAL_ALARM_ACTIVE=FALSE	${stringTableOpticalAlarmActiveFalse}
 OPTICAL_ALARM_ACTIVE=TRUE	${stringTableOpticalAlarmActiveTrue}
+ACOUSTIC_ALARM_SELECTION=DELAYED_EXTERNALLY_ARMED	${stringTableAlarmDelayedExternallyArmed}
 ACOUSTIC_ALARM_SELECTION=DELAYED_INTERNALLY_ARMED	${stringTableAlarmDelayedInternallyArmed}
 ACOUSTIC_ALARM_SELECTION=DISABLE_ACOUSTIC_SIGNAL	${stringTableAlarmDisableAcousticSignal}
 ACOUSTIC_ALARM_SELECTION=DISARMED	${stringTableAlarmDisarmed}
@@ -352,6 +353,16 @@ CLIMATECONTROL_VENT_DRIVE|ERROR=VALVE_DRIVE_LOOSE	${stringTableClimateControlVen
 CLIMATECONTROL_VENT_DRIVE|VALVE_ERROR_POSITION	${stringTableClimateControlVentDriveValveErrorPos}
 CLIMATECONTROL_VENT_DRIVE|VALVE_OFFSET_VALUE	${stringTableClimateControlVentDriveValveOffsetVal}
 CLIMATECONTROL_VENT_DRIVE|VALVE_STATE	${stringTableClimateControlVentDriveValveState}
+COLOR=BLACK	${colorBLACK}
+COLOR=BLUE	${colorBLUE}
+COLOR=GREEN	${colorGREEN}
+COLOR=TURQUOISE	${colorTURQUOISE}
+COLOR=RED	${colorRED}
+COLOR=PURPLE	${colorPURPLE}
+COLOR=YELLOW	${colorYELLOW}
+COLOR=WHITE	${colorWHITE}
+COLOR_STATUS=NORMAL	${colorStateNormal}
+COLOR_STATUS=UNKNOWN	${colorStateUnknown}
 COMFORT_MODE	${stringTableClimateControlRTTransceiverComfortMode}
 COMMUNICATION_REPORTING	${stringTableCommunicatingReporting}
 COMMUNICATION_REPORTING=FALSE	${stringTableCommunicatingReportingFalse}
@@ -362,7 +373,6 @@ CONDITION_FREQUENCY	${stringTableConditionFrequencyTitle}
 CONDITION_POWER	${stringTableConditionPowerTitle}
 CONDITION_VOLTAGE	${stringTableConditionVoltageTitle}
 COND_SWITCH_TRANSMITTER	${stringTableConditionSwitchTransmitter}
-
 COND_SWITCH_TRANSMITTER_WIND_SPEED	${stringTableConditionSwitchTransmitterWindSpeed}
 COND_SWITCH_TRANSMITTER_TEMPERATURE	${stringTableConditionSwitchTransmitterTemperature}
 COND_SWITCH_TRANSMITTER_HUMIDITY	${stringTableConditionSwitchTransmitterHumidity}
@@ -370,9 +380,6 @@ COND_SWITCH_TRANSMITTER_BRIGHTNESS	${stringTableConditionSwitchTransmitterBright
 COND_SWITCH_TRANSMITTER_RAIN_QUANTITY	${stringTableConditionSwitchTransmitterRainQuantity}
 COND_SWITCH_TRANSMITTER_RAIN_DROP	${stringTableConditionSwitchTransmitterRainDrop}
 COND_SWITCH_TRANSMITTER_WIND_DIRECTION	${stringTableConditionSwitchTransmitterWindDirection}
-
-
-
 COND_TX_CYCLIC_ABOVE	${stringTableCondTxCyclicAbove}
 COND_TX_CYCLIC_BELOW	${stringTableCondTxCyclicBelow}
 COND_TX_DECISION_ABOVE	${stringTableCondTxDecisionAbove}
@@ -610,6 +617,7 @@ ERROR=NO_ERROR	${stringTableErrorNoError}
 ERROR_BATTERY=FALSE	${stringTableBatteryFailure}
 ERROR_BATTERY=TRUE	${stringTableBatteryOk}
 ERROR_CODE	${stringTableErrorCode}
+ERROR_NON_FLAT_POSITIONING	${stringTableErrorNonFlatPositioning}
 ERROR_NON_FLAT_POSITIONING=FALSE	${stringTableErrorNonFlatPositioningFalse}
 ERROR_NON_FLAT_POSITIONING=TRUE	${stringTableErrorNonFlatPositioningTrue}
 ERROR_OVERHEAT=FALSE	${stringTableErrorOverheatFalse}
@@ -635,6 +643,7 @@ ERROR_WIND_COMMUNICATION=FALSE	${stringTableErrorWindCommunicationFalse}
 ERROR_WIND_COMMUNICATION=TRUE	${stringTableErrorWindCommunicationTrue}
 ERROR_WIND_NORTH=TRUE	${stringTableErrorWindNorthTrue}
 ERROR_WIND_NORTH=FALSE	${stringTableErrorWindNorthFalse}
+EVENT_DELAYTIME	${stringTableEventDelayTime}
 EVENT_DELAY_UNIT	${stringTableEventDelayUnit}
 EVENT_DELAY_UNIT=100MS	${optionUnit100MS}
 EVENT_DELAY_UNIT=H	${optionUnitH}
@@ -706,7 +715,6 @@ HUMIDITY_ALARM=FALSE	${stringTableHumidityAlarmFalse}
 HUMIDITY_ALARM=TRUE	${stringTableHumidityAlarmTrue}
 HUMIDITY_LIMITER=FALSE	${stringTableHumidityLimiterFalse}
 HUMIDITY_LIMITER=TRUE	${stringTableHumidityLimiterTrue}
-
 HUMIDITY	${stringTableWeatherHumidity}
 HUMIDITY_STATUS=NORMAL	${lblValue} ${stringTableWeatherHumidity}: ${lblNormal}
 HUMIDITY_STATUS=0	${lblValue} ${stringTableWeatherHumidity}: ${lblNormal}
@@ -716,6 +724,12 @@ HUMIDITY_STATUS=OVERFLOW	${lblValue} ${stringTableWeatherHumidity}: ${lblOverflo
 HUMIDITY_STATUS=2	${lblValue} ${stringTableWeatherHumidity}: ${lblOverflow}
 HUMIDITY_STATUS=UNDERFLOW	${lblValue} ${stringTableWeatherHumidity}: ${lblUnderflow}
 HUMIDITY_STATUS=3	${lblValue} ${stringTableWeatherHumidity}: ${lblUnderflow}
+IDENTIFICATION_MODE_KEY_VISUAL=FALSE	${stringTableIdentificationModeKeyVisualFalse}
+IDENTIFICATION_MODE_KEY_VISUAL=TRUE	${stringTableIdentificationModeKeyVisualTrue}
+IDENTIFICATION_MODE_LCD_BACKLIGHT=FALSE	${stringTableIdentificationModeLCDBacklightFalse}
+IDENTIFICATION_MODE_LCD_BACKLIGHT=TRUE	${stringTableIdentificationModeLCDBacklightTrue}
+IDENTIFY_DURATION	${stringTableIdentifyDuration}
+IDENTIFY_TARGET_LEVEL	${stringTableIdentifyTargetLevel}
 ILLUMINATION	${stringTableBrightness}
 ILLUMINATION_STATUS=NORMAL	${lblValue} ${stringTableBrightness}: ${lblNormal}
 ILLUMINATION_STATUS=0	${lblValue} ${stringTableBrightness}: ${lblNormal}
@@ -921,6 +935,7 @@ MOTION_DETECTOR|ERROR=0	${stringTableSabotageContactOk}
 MOTION_DETECTOR|ERROR=7	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|ERROR=SABOTAGE	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|MIN_INTERVAL	${stringTableMotionDetectorMinInterval}
+MULTI_MODE_INPUT_TRANSMITTER	${stringTableMultiModeInputTransmitterTitle}
 NOT_USED	${stringTableNotUsed}
 OLD_LEVEL	${stringTableDimmerOldLevel}
 ON_TIME	${stringTableDimmerOnTime}
@@ -1065,6 +1080,8 @@ PRESS_LONG	${stringTableKeyPressLong}
 PRESS_LONG=TRUE	${stringTableKeyPressLongTrue}
 PRESS_SHORT	${stringTableKeyPressShort}
 PRESS_SHORT=TRUE	${stringTableKeyPressShortTrue}
+PROCESS=NOT_STABLE	${stringTableProcessNotStableGeneric}
+PROCESS=STABLE	${stringTableProcessStableGeneric}
 PULSE_SENSOR	${stringTablePulseSensorTitle}
 PULSE_SENSOR|SEQUENCE_OK	${stringTablePulseSensorSequenceOk}
 PULSE_SENSOR|SEQUENCE_PULSE_1	${stringTablePulseSensorSequencePulse1}
@@ -1091,6 +1108,14 @@ RAINDETECTOR|STATE=RAIN	${stringTableRainDetectorRain}
 RAINDETECTOR|STATE_HIGH_HOLD_TIME	${stringTableRainDetectorStateHighHoldTime}
 RAMP_STOP	${stringTableDimmerRampStop}
 RAMP_TIME	${stringTableDimmerRampTime}
+
+RAMP_TIME_UNIT	${stringTableRampTimeUnit}
+RAMP_TIME_UNIT=D	${stringTableRampTimeUnitD}
+RAMP_TIME_UNIT=H	${stringTableRampTimeUnitH}
+RAMP_TIME_UNIT=M	${stringTableRampTimeUnitM}
+RAMP_TIME_UNIT=S	${stringTableRampTimeUnitS}
+RAMP_TIME_VALUE	${stringTableRampTimeValue}
+
 REDUCE_LEVEL	${stringTableDimmerReduceLevel}
 REDUCE_TEMP_LEVEL	${stringTableDimmerReduceTempLevel}
 REFERENCE_RUNNING_TIME_BOTTOM_TOP_UNIT	${stringTableTimeBottomTopUnit}
@@ -1125,7 +1150,6 @@ RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_GREEN	${stringTableRGBWWhiteAdjustmentGreen}
 RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_RED	${stringTableRGBWWhiteAdjustmentRed}
 ROTARY_HANDLE_SENSOR	${stringTableRHSTitle}
 ROTARY_HANDLE_SENSOR|ERROR=SABOTAGE	${stringTableRHSErrorSabotage}
-ROTARY_HANDLE_SENSOR|EVENT_DELAYTIME	${stringTableRHSEventDelayTime}
 ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A	${stringTableRHSMsgPosA}
 ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=CLOSED	${stringTableRHSMsgPosClosed}
 ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A=NO_MSG	${stringTableRHSMsgPosNoMsg}
@@ -1491,6 +1515,10 @@ VALVE_STATE=TOO_TIGHT	${stringTableValveStateToTight}
 VALVE_STATE=WAIT_FOR_ADAPTION	${stringTableValveStateWaitForAdaption}
 VENT_CLOSED	${stringTableVentClosed}
 VENT_OPEN	${stringTableVentOpen}
+
+VIR-LG-ONOFF-CH|LEVEL=FALSE	${stringTableStateFalse}
+VIR-LG-ONOFF-CH|LEVEL=TRUE	${stringTableStateTrue}
+
 VIRTUAL_DIMMER	${stringTableVirtualDimmerTitle}
 VIRTUAL_DIMMER|ERROR=LOAD_FAILURE	${stringTableVirtualDimmerErrorLoadFailure}
 VIRTUAL_DIMMER|ERROR_OVERHEAT	${stringTableDimmerErrorOverheat}

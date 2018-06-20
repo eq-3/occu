@@ -22,7 +22,7 @@ jQuery.extend(true, langJSON, {
     "stringTableAlarmActuatorStateTrue": "Salter durumu: Acik",
     "stringTableAlarmActuatorTitle": "Kablosuz siren/yildirim kumandasi",
     "stringTableAlarmAllSensArmed" :  "Outdoor sensors armed, (presence mode)",
-    "stringTableAlarmBlinkingAlternatelyRepeating" : "Alternating, slow flashing",
+    "stringTableAlarmBlinkingAlternatelyRepeating" : "Alternating slow flashing",
     "stringTableAlarmBlinkingBothRepeating" : "Simultaneous slow flashing",
     "stringTableAlarmBlocked" :  "Alarm blocked",
     "stringTableAlarmConfirmingSignal0" : "Confirmation signal 0 - long long",
@@ -45,7 +45,7 @@ jQuery.extend(true, langJSON, {
     "stringTableAlarmFrequencyHighOnLongOff" : "Frequency high on, long off",
     "stringTableAlarmFrequencyHighOnOff" : "Frequency high on/off",
     "stringTableAlarmFrequencyLowOnLongOffHighOnLongOff" : "Frequency low on - long off, high on - long off",
-    "stringTableAlarmFrequencyLowOnOffHighonOff" : "Frequency low on/off, high on/off",
+    "stringTableAlarmFrequencyLowOnOffHighOnOff" : "Frequency low on/off, high on/off",
     "stringTableAlarmFrequencyRising" : "Frequency increasing",
     "stringTableAlarmFrequencyRisingAndFalling" : "Frequency increasing/dropping",
     "stringTableAlarmInternallyArmed" : "Presence mode",
@@ -637,7 +637,6 @@ jQuery.extend(true, langJSON, {
     "stringTableRGBWWhiteAdjustmentGreen" : "Su dengelemesi Yesil",
     "stringTableRGBWWhiteAdjustmentRed" : "Su dengelemesi Kirmizi",
     "stringTableRHSErrorSabotage": "Sabotaj",
-    "stringTableRHSEventDelayTime": "Bildiri gecikmesi",
     "stringTableRHSMsgPosA": "Bildiri alt pozisyonda",
     "stringTableRHSMsgPosB": "Bildiri capraz pozisyonda",
     "stringTableRHSMsgPosC": "Bildiri %FCst pozisyonda",
@@ -699,7 +698,7 @@ jQuery.extend(true, langJSON, {
     "stringTableSetPointMode" : "Mode for setpoint temperature",
     "stringTableSetPointTemperature" : "Setpoint temperature",
     "stringTableShutterContactErrorSabotage": "Sabotaj",
-    "stringTableShutterContactEventDelayTime": "Bildiri gecikmesi",
+    "stringTableEventDelayTime": "Bildiri gecikmesi",
     "stringTableShutterContactHmIPMsgPosA0" : "Bildiri bu pozisyonda acildi",
     "stringTableShutterContactHmIPMsgPosB0" : "Bildiri bu pozisyonda kapatildi",
     "stringTableShutterContactMsgPosA0": "Bildiri bu pozisyonda kapatildi",
@@ -1055,6 +1054,10 @@ jQuery.extend(true, langJSON, {
     "stringTableConditionSwitchTransmitterRainDrop" :  "Rain sensor",
     "stringTableConditionSwitchTransmitterWindDirection" :  "Wind direction sensor",
     "stringTablePassageDetectorDirectionTitle" : "Direction recognition",
-    "stringTableWaterDetectionTransmitterTitle" : "Water sensor"
+    "stringTableWaterDetectionTransmitterTitle" : "Water sensor",
+
+    "stringTableMultiModeInputTransmitterTitle" : "tr* Wired Eingangsmodul",
+
+    "noMoreKeys" : ""
   }
 });

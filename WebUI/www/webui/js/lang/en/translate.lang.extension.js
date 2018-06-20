@@ -403,7 +403,7 @@ jQuery.extend(true, langJSON, {
     "alertUseOnlySpecialChars" : "Please do only use the allowed special characters [., !, $, (, ), :, ;, #, ß, ä, ö, ü, -].",
     "alertCharsNotAllowed" : "Descriptions may not contain any of the following characters: <, >, ', \", &, $, [, ], {, } and \\",
     "alertErrorDeleteObject" : "Object could not be deleted.",
-    "dialogAllRFInterfacesTitle" : "All known RF Interfaces",
+    "dialogAllRFInterfacesTitle" : "All known Interfaces",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentA" : "Import of backup not possible. The backup available is based on the CCU firmware ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentB" : "<br>\nThis is a later version than the current version installed on the CCU. ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentC" : ".<br>\nPlease perform an update of your CCU firmware first. Then, please start to import the system backup.",
@@ -1026,6 +1026,15 @@ jQuery.extend(true, langJSON, {
     "lblNormal" : "Normal",
     "lblOverflow" : "Overflow",
     "lblUnderflow" : "Underflow",
+
+    "colorBLACK" : "Black",
+    "colorBLUE" : "Blue",
+    "colorGREEN" : "Green",
+    "colorTURQUOISE" : "Turquoise",
+    "colorRED" : "Red",
+    "colorPURPLE" : "Purple",
+    "colorYELLOW" : "Yellow",
+    "colorWHITE" : "White",
 
     "theEnd" : ""
   }
