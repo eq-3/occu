@@ -560,6 +560,8 @@ jQuery.extend(true,langJSON, {
     "thVersion" : "Version",
     "thMinCCU" : "min. CCU-Version",
     "submenuDeviceFirmware" : "Ger%E4te-Firmware",
+    "submenuDeviceFirmwareInformation" : "Ger%E4te-Firmware - %DCbersicht",
+
     "addFirmwareMsgTitle" : "Ger%E4te-Firmware",
     "addFirmwareMsgBody" : "W%E4hlen Sie die gew%FCnschte Firmware:",
     "addDevFirmwareInvalid" : "Fehler:<br/>Ist das eine g%FCltige Firmwaredatei?",
@@ -639,6 +641,8 @@ jQuery.extend(true,langJSON, {
     "lblGeneralSettingsConditionNumber" : "Zustandszahl",
     "lblInfoStatusControlGas" : "Verbrauch",
     "lblInfoLevelReal" : "Realer Wert",
+    "lblInfoLevelRealBrightness" : "Reale Helligkeit",
+    "lblInfoColorReal" : "Realer Farbwert",
     "optionRGBWControllerPrg0" : "Aus",
     "optionRGBWControllerPrg1" : "Langsamer Durchlauf",
     "optionRGBWControllerPrg2" : "Normaler Durchlauf",
@@ -931,7 +935,7 @@ jQuery.extend(true,langJSON, {
     "msgNoGatewayFound" : "Kein Gateway gefunden",
 
     "dialogDeleteCertificateTitle" : "Zertifikat l%F6schen",
-    "dialogSettingsNetworkLblDeleteCertificate" : "Zertifikat von der CCU2 entfernen",
+    "dialogSettingsNetworkLblDeleteCertificate" : "Zertifikat von der CCU entfernen",
     "confirmCertificationPurgeA" : "Wenn Sie das Zertifikat l%F6schen, k%F6nnen Sie anschlie%DFend keine gesicherte Verbindung zu Ihrer "+HMIdentifier.de.CCUShortName+" mehr aufbauen.",
     "confirmCertificationPurgeB" : "M%F6chten Sie das Zertifikat wirklich von der "+HMIdentifier.de.CCUShortName+" entfernen?",
     "dialogRestartWebserverTitle" : "Lighttpd Restart",
@@ -954,9 +958,9 @@ jQuery.extend(true,langJSON, {
     "btnPresenceDetectionTrue" :                 "Pr%E4senzerkennung ausschalten",
     "btnResetPresence" :                         "Reset Status",
     "lblTDRegaVersion" :                         "Logikschicht<br/>Version",
-    "lblTDReGaVersionHelp" :                     "Hier k%F6nnen Sie festlegen, welche Version der Logikschicht in der CCU2 verwendet werden soll.<br/><br/>W%E4hlen Sie die Version <b>'Standard'</b>, um Fehlerbehebungen im Zeitmodul und neue Funktionen, wie z. B. mathematische Operationen in Skripten, nutzen zu k%F6nnen. " +
-                                                 "<br/><br/>W%E4hlen Sie die Version <b>'Community'</b> f%FCr zus%E4tzliche Verbesserungen zur Fehlerbehebung in Skripten. Bitte beachten Sie, dass diese Version zu Abbr%FCchen von Skripten f%FChren k%F6nnte, auch wenn diese mit bisherigen Versionen der CCU2-Software ausgef%FChrt wurden. " +
-                                                 "<br/><br/>Sollten seit dem Update auf die aktuelle CCU2-Software Probleme aufgetreten sein, k%F6nnen Sie mit der Auswahl <b>'Legacy'</b> auf die Vorg%E4ngerversion wechseln." ,
+    "lblTDReGaVersionHelp" :                     "Hier k%F6nnen Sie festlegen, welche Version der Logikschicht in der CCU verwendet werden soll.<br/><br/>W%E4hlen Sie die Version <b>'Standard'</b>, um Fehlerbehebungen im Zeitmodul und neue Funktionen, wie z. B. mathematische Operationen in Skripten, nutzen zu k%F6nnen. " +
+                                                 "<br/><br/>W%E4hlen Sie die Version <b>'Community'</b> f%FCr zus%E4tzliche Verbesserungen zur Fehlerbehebung in Skripten. Bitte beachten Sie, dass diese Version zu Abbr%FCchen von Skripten f%FChren k%F6nnte, auch wenn diese mit bisherigen Versionen der CCU-Software ausgef%FChrt wurden. " +
+                                                 "<br/><br/>Sollten seit dem Update auf die aktuelle CCU-Software Probleme aufgetreten sein, k%F6nnen Sie mit der Auswahl <b>'Legacy'</b> auf die Vorg%E4ngerversion wechseln." ,
 
     "optionReGaNORMAL" :                         "Standard",
     "optionReGaLEGACY" :                         "Legacy",
@@ -964,7 +968,7 @@ jQuery.extend(true,langJSON, {
     "dialogRestart2ChanceReGaVersion" :          "Damit die %C4nderung der Logikschicht-Version wirksam wird, muss die " +HMIdentifier.de.CCUShortName + " neu gestartet werden.",
     "dialogBtnPerformLaterRestart" :             "Sp%E4ter",
 
-    "lblAttentionNoPasswd" : "Aus Sicherheitsgr%FCnden empfehlen wir,<br/>dass Sie ein Passwort f%FCr die CCU2 vergeben",
+    "lblAttentionNoPasswd" : "Aus Sicherheitsgr%FCnden empfehlen wir,<br/>dass Sie ein Passwort f%FCr die CCU vergeben",
     "dialogLblAckSecurityHint" : "Ich habe die obige Warnung gelesen!",
     "btnNext" : "Weiter",
 
@@ -1030,6 +1034,18 @@ jQuery.extend(true,langJSON, {
     "lblNormal" : "Normal",
     "lblOverflow" : "%DCberlauf",
     "lblUnderflow" : "Unterlauf",
+
+    "lblAlarmTrigger" : "Alarmausl%F6ser",
+    "lblAlarmTiming" : "Alarmmeldung",
+    "acousticAlarm" : "Akustisches Signal",
+    "opticalAlarm" : "Optisches Signal",
+    "positionDetectionOFF" : "Lageerkennung AUS",
+    "lblWaterDetectorMsg_Water" : "Meldung bei Wasserstand",
+    "lblWaterDetectorMsg_Dry" : "Meldung bei Trockenheit",
+    "lblWaterDetectorMsg_Moisture" : "Meldung bei Feuchtigkeit",
+    "switchCommand" : "Schaltbefehl",
+    "deviceFirmwareInformation" : "%DCbersicht",
+
 
     "colorBLACK" : "Schwarz",
     "colorBLUE" : "Blau",

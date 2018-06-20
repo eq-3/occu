@@ -165,11 +165,17 @@
                         var devicesToConfigureFromGroup = JSON.parse('{"devices" : '+response.content+'}');
                         ko.utils.arrayForEach(devicesToConfigureFromGroup.devices, function(item){
                             homematic("Device.getReGaIDByAddress", {address:item.id}, function(result) {
-                               homematic("Device.setOperateGroupOnly", {id:result, mode: false}, function() {
-                                 DeviceList.devices[result].isOperateGroupOnly = false;
-                              });
-                            })
+                                homematic("Device.setOperateGroupOnly", {id:result, mode: false}, function() {
+                                    if (result != "noDeviceFound") {
+                                        DeviceList.devices[result].isOperateGroupOnly = false;
+                                    }
+                                });
+                            });
                             self.addDeviceToList(item.id, item.name, item.type);
+                        });
+                        jQuery("[name='groupDev']").each(function(index,chType) {
+                          var txtElm = jQuery(this);
+                          txtElm.text(translateKey(txtElm.text()));
                         });
                         translatePage(".toTranslate");
                     }
@@ -311,7 +317,7 @@
                     <tbody data-bind="foreach: devicesToConfigure">
                         <tr class="popupTableRowGray">
                             <td data-bind="text: name"></td>
-                            <td data-bind="text: type"></td>
+                            <td name="groupDev" data-bind="text: type"></td>
                             <td style="background-color: white;">
                                 <div style="position: relative;" data-bind="event: {mouseover: showDevicePicture, mouseout: hideDevicePicture}">
                                     <img data-bind="attr:{src: imagePath, title: name, alt: name}">

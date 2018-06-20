@@ -36,7 +36,7 @@
    	  s += "<tr>";
    	  s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>"+ translateKey('footerBtnPageBack') +"</div></td>";
  			s += "<td align='center' valign='middle'><div class='FooterButton' onclick='addNewFirware();'>"+ translateKey('footerBtnNew') +"</div></td>";
- 			s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(DeviceFirmwareInformation);'>"+ translateKey('deviceFirmwareInformation') +"</div></td>";
+ 			// s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(DeviceFirmwareInformation);'>"+ translateKey('deviceFirmwareInformation') +"</div></td>";
       setFooter(s);
 
       deleteFirmware = function(fwID, devName) {

@@ -126,8 +126,10 @@ function ::CreateDimmingActuator()
 function ::CreateDimmerRealInfoControl() {
   real rLevelReal = -1.0;
   string sLevelReal;
+  string sColorReal;
 
   object oLevelReal = cObj.DPByControl("DIMMER_REAL.LEVEL");
+  object oColorReal = cObj.DPByControl("DIMMER_REAL.COLOR");
 
   if ( oLevelReal ) {
     rLevelReal = oLevelReal.Value() * 100;
@@ -138,9 +140,23 @@ function ::CreateDimmerRealInfoControl() {
     WriteLine("<table class='ControlBtnInfo'>");
       WriteLine("<tr style='height:40px;'>");
         WriteLine("<td id='"#chnId#"Level'>");
-          WriteLine("${lblInfoLevelReal}: "#sLevelReal.StrValueByIndex(".",0)#"%");
+          WriteLine("${lblInfoLevelRealBrightness}: "#sLevelReal.StrValueByIndex(".",0)#"%");
         WriteLine("</td>");
       WriteLine("</tr>");
     WriteLine("</table>");
   WriteLine("</td>");
+
+  if ( oColorReal ) {
+    string arColor = "lblOff,colorBLUE,colorGREEN,colorTURQUOISE,colorRED,colorPURPLE,colorYELLOW,colorWHITE";
+    integer colorReal = oColorReal.Value();
+    WriteLine("<td>");
+      WriteLine("<table class='ControlBtnInfo'>");
+        WriteLine("<tr style='height:40px;'>");
+          WriteLine("<td id='"#chnId#"Color'>");
+            WriteLine("${lblInfoColorReal}: ${"#arColor.StrValueByIndex(",",colorReal)#"}");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
 }

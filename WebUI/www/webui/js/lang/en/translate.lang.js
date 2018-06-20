@@ -1,18 +1,18 @@
 jQuery.extend(true,HMIdentifier , {
   "en" : {
-    "CCUFullNameHeader" : "HomeMatic CCU2",
+    "CCUFullNameHeader" : "Homematic CCU",
     "CCUFullNameText" : "Homematic CCU",
     "CCUShortName" : "CCU",
     "BidCosRF" : "BidCos-RF",
     "BidCosWired" : "BidCos-Wired",
     "HmIPRF" : "HmIP-RF",
     "VirtualDevices" : "VirtualDevices",
-    "HomeMaticCFGAdapter" : "HomeMatic Configuration-Adapter",
-    "LabelHomeMatic" : "HomeMatic",
+    "HomeMaticCFGAdapter" : "Homematic Configuration-Adapter",
+    "LabelHomeMatic" : "Homematic",
     "LabelHomematic" : "Homematic",
-    "LabelHomematicWiredHeader" : "HomeMatic Wired",
+    "LabelHomematicWiredHeader" : "Homematic Wired",
     "LabelHomematicWiredText" : "Homematic Wired",
-    "LabelHomematicIPHeader" : "HomeMatic IP",
+    "LabelHomematicIPHeader" : "Homematic IP",
     "LabelHomematicIPText" : "Homematic IP"
   }
 });
@@ -24,6 +24,8 @@ jQuery.extend(true,langJSON, {
     "BidCosWired" : HMIdentifier.en.BidCosWired,
     "HmIPRF" : HMIdentifier.en.HmIPRF,
     "VirtualDevices" : HMIdentifier.en.VirtualDevices,
+    "LabelHomematicIPHeader" : HMIdentifier.de.LabelHomematicIPHeader,
+    "LabelHomeMatic" : HMIdentifier.de.LabelHomeMatic,
     "ccuNotReady" : "The " + HMIdentifier.en.CCUFullNameText + " is not yet ready",
     "ccuNotReadyHint" : "Please wait. You will automatically be redirected to the home page.",
     "loadWebUI" : "Loading...",
@@ -36,6 +38,7 @@ jQuery.extend(true,langJSON, {
     "update" :  HMIdentifier.en.CCUShortName +" update:",
     "firmware" : "Firmware",
     "isAvailable" : "is available",
+    "firmwareAvailOnCCU" : "Firmware available<br/>on the " + HMIdentifier.en.CCUShortName,
     "newFirmwareAvailable" : "New firmware available",
     "login" : "Login",
     "alarmMsg" : "Alarm messages",
@@ -764,16 +767,16 @@ jQuery.extend(true,langJSON, {
 
     "commentDialogHelp" : "***********************************************",
 
+    "homepage" : "Homepage",
     "dialogHelpPath" : "Help",
     "dialogHelpBtnOnlineHelp" : "Online help",
+    "dialogHelpLinkOnlineHelpA" : "Homematic",
+    "dialogHelpLinkOnlineHelpB" : "Homematic IP",
 
-    "dialogHelpLinkOnlineHelpA" : "Access to HomeMatic homepage",
-    "dialogHelpLinkOnlineHelpB" : "",
-
-    "dialogHelpOfflineHelpTitle" : "<b>Offline help<b>",
+    "dialogHelpOfflineHelpTitle" : "<b>Offline help</b>",
     "dialogHelpOfflineHelp" : "Insert the supplied HomeMatic CD into your CD drive. <br/>Afterwards, please click on \"Start => Run\" and then \"Browse\". Set the drive letter of the CD drive and select the file \"setup.exe\". <br/>Then, please follow the instructions on the screen.",
 
-    "dialogHelpInfoTitle" : "<b>Info<b>",
+    "dialogHelpInfoTitle" : "<b>Info</b>",
     "dialogHelpInfoLblSN" : "Serial number:",
     "dialogHelpInfoLblVersion" : "Version:",
     "dialogHelpInfoLblCopyright" : "Copyright",

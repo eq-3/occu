@@ -2,100 +2,30 @@ jQuery.extend(true,langJSON, {
   "en" : {
     "COMMENT" : "THIS is for the release A/2018",
 
-    "stringTableBrightnessFilterSize" : "Number of last brightness values used for calculation<br/>of brightness",
-
-    "stringTableWaterLevelDetectedFalse" : "Water level detected: No",
-    "stringTableWaterLevelDetectedTrue" : "Water level detected: Yes",
-
-    "stringTableMoistureDetectedFalse" : "Humidity detected: No",
-    "stringTableMoistureDetectedTrue" : "Water level detected: Yes",
-    "stringTableStateUnknown" : "Status unknown",
-
-    "stringTableWeatherTransmitAlarmEventFalse" : "Humidity or water level detected: No",
-    "stringTableWeatherTransmitAlarmEventTrue" : "Humidity or water level detected: Yes",
-    "lblAlarmTrigger" : "Alarm trigger",
-
-    "stringTableNoAcousticAlarm" : "No triggering of alarm",
-    "stringTableTriggerEvent1" : "Alarm in case of humidity",
-    "stringTableTriggerEvent2" : "Alarm in case of water",
-    "stringTableTriggerEvent1_2" : "Alarm in case of humidity/water",
-
-
-    "lblAlarmTiming" : "Alarm message",
-    "stringTableAlarmPermanent" : "Continuous alarm",
-    "stringTableAlarmThreeMinutes" : "Alarm for 3 minutes",
-    "stringTableAlarmSixMinutes" : "Alarm for 6 minutes",
-    "stringTableAlarmOncePerMinute" : "One alarm signal per minute",
-
-    "stringTableProcessNotStableBlindTransmitter" : "Blind moves",
-    "stringTableProcessStableBlindTransmitter" : "Blind not moving",
-
-    "stringTableProcessNotStableShutterTransmitter" : "Shutter moves",
-    "stringTableProcessStableShutterTransmitter" : "Shutter not moving",
-
-    "stringTableProcessNotStableDimmerTransmitter" : "Ramp active",
-    "stringTableProcessStableBlindDimmerTransmitter" : "Level stable",
-
-    "stringTableProcessNotStableGeneric" : "Device active",
-    "stringTableProcessStableGeneric" : "Device not active",
-
-    "stringTableBlindActivityStateDown" : "Blind moves down",
-    "stringTableBlindActivityStateUnknown" : "Blind activity unknown",
-    "stringTableBlindActivityStateUp" : "Blind moves up",
-
-    "stringTableShutterActivityStateDown" : "Shutter moves down",
-    "stringTableShutterActivityStateUnknown" : "Shutter activity unknown",
-    "stringTableShutterActivityStateUp" : "Shutter moves up",
-
-    "stringTableDimmerActivityStateDown" : "Ramp up",
-    "stringTableDimmerActivityStateUnknown" : "Dimmer activity unknown",
-    "stringTableDimmerActivityStateUp" : "Ramp down",
-
-    "stringTableWallMountedThermostatTitle" : "Wall Thermostat",
-    "stringTableRadiatorThermostatTitle" : "Radiator Thermostat",
-
-    "acousticAlarm" : "Acoustic signal",
-    "opticalAlarm" : "Visual signal",
-
-    "stringTableErrorNonFlatPositioning" : "Error position detection",
-    "stringTableErrorNonFlatPositioningFalse" : "Angle for position detection exceeded: No",
-    "stringTableErrorNonFlatPositioningTrue" : "Angle for position detection exceeded: Yes",
-
-    "stringTableAcousticAlarmActiveFalse" : "Acoustic signal deactivated",
-    "stringTableAcousticAlarmActiveTrue" : "Acoustic signal activated",
-    "stringTableOpticalAlarmActiveFalse" : "Visual signal deactivated",
-    "stringTableOpticalAlarmActiveTrue" : "Visual signal activated",
-
-    "positionDetectionOFF" : "Position detection OFF",
-
-    "lblWaterDetectorMsg_Water" : "Message at water detection",
-    "lblWaterDetectorMsg_Dry" : "Message at dryness",
-    "lblWaterDetectorMsg_Moisture" : "Message at humidity detection",
-
-    "stringTableMsg_Dry" : "Dryness",
-    "stringTableMsg_Water" : "Water detected",
-    "stringTableMsg_Moisture" : "Humidity detected",
 
     "COMMENT" : "THIS is for the release B/2018",
 
-    "switchCommand" : "en* Schaltbefehl",
+    "colorStateNormal" : "Colour mode normal",
+    "colorStateUnknown" : "Colour mode unknown",
 
-    "colorStateNormal" : "en* Farbstatus normal",
-    "colorStateUnknown" : "en* Farbstatus unbekannt",
+    "stringTableRampTimeUnit" : "Unit ramp time",
+    "stringTableRampTimeUnitD" : "Unit ramp time: Days",
+    "stringTableRampTimeUnitH" : "Unit ramp time: Hours",
+    "stringTableRampTimeUnitM" : "Unit ramp time: Minutes",
+    "stringTableRampTimeUnitS" : "Unit ramp time: Seconds",
+    "stringTableRampTimeValue" : "Value ramp time",
 
-    "stringTableRampTimeUnit" : "en* Einheit Rampenzeit",
-    "stringTableRampTimeUnitD" : "en* Einheit Rampenzeit: Tage",
-    "stringTableRampTimeUnitH" : "en* Einheit Rampenzeit: Stunden",
-    "stringTableRampTimeUnitM" : "en* Einheit Rampenzeit: Minuten",
-    "stringTableRampTimeUnitS" : "en* Einheit Rampenzeit: Sekunden",
-    "stringTableRampTimeValue" : "en* Wert Rampenzeit",
+    "stringTableIdentificationModeLCDBacklightFalse" : "Lighting Display: OFF",
+    "stringTableIdentificationModeLCDBacklightTrue" : "Lighting Display: ON",
+    "stringTableIdentificationModeKeyVisualFalse" : "Lighting system button: OFF",
+    "stringTableIdentificationModeKeyVisualTrue" : "Lighting system button: ON",
+    "stringTableIdentifyDuration" : "Duration of lighting",
+    "stringTableIdentifyTargetLevel" : "Brightness value of lighting",
 
-    "stringTableIdentificationModeLCDBacklightFalse" : "en* Beleuchtung Display: AUS",
-    "stringTableIdentificationModeLCDBacklightTrue" : "en* Beleuchtung Display: EIN",
-    "stringTableIdentificationModeKeyVisualFalse" : "en* Beleuchtung Systemtaste: AUS",
-    "stringTableIdentificationModeKeyVisualTrue" : "en* Beleuchtung Systemtaste: EIN",
-    "stringTableIdentifyDuration" : "en* Dauer der Beleuchtung",
-    "stringTableIdentifyTargetLevel" : "en* Helligkeitswert der Beleuchtung",
+    "lblPressCfgButton" : "Please press the config key and bring the device into radio range.",
+
+    "COMMENT" : "************* THIS is for the release CCU3 B1/2018 *************",
+    "COMMENT" : " (DRAP Integration)",
 
     "stringTableMultiModeInputTransmitterTitle" : "en* Wired Eingangsmodul",
 
@@ -103,7 +33,58 @@ jQuery.extend(true,langJSON, {
     "lblAccessPointSettings1" : "en* help1",
     "lblAccessPointSettings2" : "en* help2",
 
-    "deviceFirmwareInformation" : "en* %DCbersicht",
+    "submenuAccessPointSettings" : "en* Homematic IP Access Points",
+    "thAccessPointName" : "en* Name",
+    "thAccessPoint" : "en* Access Point",
+    "thAccessPointID" : "en* Access Point ID",
+    "thAccessPointType" : "en* Typ",
+    "thAccessPointVersion" : "en* Versionen",
+    "thAccessPointAvailableVersion" : "en* Verf%FCgbare Versionen",
+    "thAccessPointIP" : "en* IP-Adresse",
+    "thAccessPointState" : "en* Status",
+    "accessPointPassphrase" : "en* Passwort (UDP/NetFinder, Default siehe Ger%E4t)",
+    "accessPointLocalKey" : "en* Offlinebetrieb Aktiv und Schl%FCssel (siehe QR-Code Sticker)",
+    "accessPointForceDelete" : "en* L%F6schen erzwingen (ohne Reset am Ger%E4t)",
+    "notAvailable" : "-",
+    "active" : "en* Aktiv",
+    "inactive" : "en* Inaktiv",
+    "primary" : "en* Prim%E4r",
+    "AccessPointSearchInProgress" : "en* Access Points werden gesucht...",
+    "dialogNewAccessPointTitle" : "en* Access Point hinzuf%FCgen",
+    "dialogDeleteAccessPointTitle" : "en* Access Point entfernen und zur%FCcksetzen",
+    "dialogEditAccessPointTitle" : "en* Access Point Einstellungen und Update",
+    "AccessPointAssignmentFailedIdMissing" : "en* Interner Fehler, die ID des Access Point fehlt",
+    "AccessPointAssignmentFailedNameMissing" : "en* Bitte geben Sie einen namen f%FCr den Access Point ein",
+    "AccessPointAssignmentFailedPassphraseMissing" : "en* Bitte geben Sie das Passwort des Access Point ein (Default siehe Ger%E4t)",
+    "AccessPointAssignmentFailedPassphraseInvalidFormat" : "en* Das Passwort des Access point ist nicht korrekt, bitte kontrollieren Sie dieses oder %E4ndern dieses gegebenenfalls %FCber NetFinder wenn dabei eines der folgenden Zeichenverwendet wurde <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
+    "AccessPointAssignmentFailedLocalKeyMissing" : "en* Bitte geben Sie den Schl%FCssel des Access Point ein (siehe QR-Code Sticker), oder deaktivieren Sie die Funktion des Offlinebetriebes",
+    "AccessPointAssignmentFailedLocalKeyInvalid" : "en* Der Schl%FCssel des Access Point hat ein ung%FCltiges Format, bitte kontrollieren Sie diesen (siehe QR-COde Sticker)",
+    "AccessPointAssignmentFailedNotKnown" : "en* Der Access Point konnte nicht hinzugef%FCgt werden, bitte f%FChren Sie erneut die Suche durch.",
+    "AccessPointAssignmentFailedPassphraseCouldNotChecked" : "en* Die Konfiguration des Access Point konnte nicht abgefragt werden, bitte kontrollieren Sie die Verbindung und versuchen es sp%E4ter erneut",
+    "AccessPointAssignmentFailedPassphraseInvalidValue" : "en* Das Passwort des Access Point schein falsch zu sein, bitte korrigieren Sie dieses und versuchen es erneut.",
+    "AccessPointAssignmentGetConfigurationParameterDescription" : "en* Die Konfiguration des Access Point konnte nicht abgefragt werden, bitte kontrollieren Sie die Verbindung und versuchen es sp%E4ter erneut",
+    "AccessPointAssignmentGetConfigurationParameter" : "en* Die Konfiguration des Access Point konnte nicht abgefragt werden, bitte kontrollieren Sie die Verbindung und versuchen es sp%E4ter erneut",
+    "AccessPointAssignmentConfigurationParameterNotSupported" : "en* Die Firmware des Access Point unterst%FCtzt die Funktion nicht, bitte aktualisieren Sie diese",
+    "AccessPointAssignmentConfigurationParameterCouldNotBeSaved" : "en* Die Konfiguration des Access Point konnte nicht gespeichert werden, bitte kontrollieren Sie die Verbindung und versuchen es sp%E4ter erneut",
+    "AccessPointAssignmentNotFinished" : "en* Verbindung und Einrichtung des Access Point wird vorgenommen, bitte warten",
+    "AccessPointAssignmentInProgress" : "en* Verbindung und Einrichtung des Access Point wird vorgenommen, bitte warten",
+    "accessPointPrimaryNotKnown" : "en* Der Prim%E4re Access Point konnte nicht gefunden werden, bitte pr%FCfen Sie die Konfiguration der Zentrale",
+    "accessPointNotKnown" : "en* Der Access Point konnte nicht gefunden werden, bitte aktualisieren Sie die Liste und f%FChren die Aktion erneut durch",
+    "accessPointLocalKeyNotSupported" : "en* Die Konfiguration des Zentrale erlaubt keinen Offlinebetrieb, bitte deaktivieren Sie diese Funktion",
+    "AccessPointAssignmentFinished" : "en* Der Access Point wurde zum LAN-Router umkonfiguriert und sollte jetzt t%FCrkis leuchten",
+    "accessPointDeleteHint" : "en* Wollen Sie den Access point wirklich aus dem System entfernen?\r\nSollten Sie den letzten ",
+    "AccessPointDeletionFailedIdMissing" : "en* Interner Fehler, die ID des Access Point fehlt",
+    "AccessPointDeletionFailedPassphraseMissing" : "en* Bitte geben Sie das Passwort des Access Point ein (Default siehe Ger%E4t)",
+    "AccessPointDeletionFailedPassphraseInvalidFormat" : "en* Das Passwort des Access point ist nicht korrekt, bitte kontrollieren Sie dieses oder %E4ndern dieses gegebenenfalls %FCber NetFinder wenn dabei eines der folgenden Zeichenverwendet wurde <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
+    "AccessPointDeletionFailedNotKnown" : "en* Der Access Point konnte nicht gel%F6scht werden, bitte pr%FCfen Sie die Verbindung des Access Point oder erzwingen Sie das L%F6schen, wodurch der Access Point nicht zur%FCck gesetzt wird.",
+    "AccessPointDeletionFailedPassphraseCouldNotChecked" : "en* Die Konfiguration des Access Point konnte nicht abgefragt werden, bitte kontrollieren Sie die Verbindung und versuchen es sp%E4ter erneut",
+    "AccessPointDeletionFailedPassphraseInvalidValue" : "en* Das Passwort des Access Point schein falsch zu sein, bitte korrigieren Sie dieses und versuchen es erneut.",
+    "AccessPointDeletionFailedFactoryReset" : "en* Der Werksreset des Access point konnte nicht durchgef%FChrt werden, bitte %FCberpr%FCfen Sie die Verbingung und propieren es sp%E4ter erneut",
+    "AccessPointDeletionNotFinished" : "en* Umkonfiguration und Werksreset des Access Point wird durchgef%FChrt",
+    "AccessPointDeletionInProgress" : "en* Umkonfiguration und Werksreset des Access Point wird durchgef%FChrt",
+    "AccessPointDeletionFinished" : "en* Der Access Point wurde entfernt aus der Zentrale entfernt. Mit dem Werksreset hat dieser wieder das Standard Verhalten.",
+    "SetAccessPointNameSuccess" : "en* Der Name des Access Point wurde ge%E4ndert",
+    "AccessPointUpdateInitiated" : "en* Das Firmwareupdate des Access Point wurde gestartet, dies kann einige Minuten dauern, anschlieﬂend leuchtet die Systemtaste wieder t%FCrkis.",
 
     "noMoreKeys" : ""
   }

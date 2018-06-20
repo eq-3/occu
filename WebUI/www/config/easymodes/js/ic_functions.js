@@ -1227,17 +1227,33 @@ TextColor = function(c)
   else    { return WebUI.getColor("gray"); }
 };
 
-Virtual_DimmerChannel_help = function(ch)
+Virtual_DimmerChannel_help = function(ch, lc)
 {
-  //if ($F("virtual_help_button_" + ch) == "Hilfe")
-  if ($F("virtual_help_button_" + ch) == translateKey("genericBtnTxtHelp"))
-  {
-    $("virtual_ch_help_" + ch).style.display = "inline";
-    $("virtual_help_button_" + ch).value = translateKey("genericBtnTxtHelpOff");
-  } else
-  {
-    $("virtual_ch_help_" + ch).style.display = "none";
-    $("virtual_help_button_" + ch).value = translateKey("genericBtnTxtHelp");
+  var virtualChHelpElm = jQuery("#virtual_ch_help_" + ch),
+    virtualChHelpElm2 = jQuery("#virtual_ch_help2_" + ch),
+    virtualHelpButtonElm = jQuery("#virtual_help_button_" + ch),
+    virtualHelpButtonElm2 = jQuery("#virtual_help_button2_" + ch);
+
+  if (lc != "lc2") {
+    if (virtualHelpButtonElm.val() == translateKey("genericBtnTxtHelp")) {
+      virtualChHelpElm2.hide();
+      virtualChHelpElm.show();
+      virtualHelpButtonElm.val(translateKey("genericBtnTxtHelpOff"));
+      virtualHelpButtonElm2.val(translateKey("genericBtnTxtHelp"));
+    } else {
+      virtualChHelpElm.hide();
+      virtualHelpButtonElm.val(translateKey("genericBtnTxtHelp"));
+    }
+  } else {
+    if (virtualHelpButtonElm2.val() == translateKey("genericBtnTxtHelp")) {
+      virtualChHelpElm.hide();
+      virtualChHelpElm2.show();
+      virtualHelpButtonElm.val(translateKey("genericBtnTxtHelp"));
+      virtualHelpButtonElm2.val(translateKey("genericBtnTxtHelpOff"));
+    } else {
+      virtualChHelpElm2.hide();
+      virtualHelpButtonElm2.val(translateKey("genericBtnTxtHelp"));
+    }
   }
 };
 

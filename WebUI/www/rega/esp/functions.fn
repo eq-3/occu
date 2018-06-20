@@ -588,7 +588,7 @@ function ::isParameterVisible() {
   showChannelParam = true;
 
   if ( (sInterface == hmIPRFIdentifier) || (sInterface == hmIPWIdentifier) ) {
-    excludeBinaryParams = "BOOST_TIME,CONTROL_DIFFERENTIAL_TEMPERATURE,LEVEL_STATUS,OPERATING_VOLTAGE,PARTY_,PARTY_MODE,PROCESS,QUICK_VETO_TIME,";
+    excludeBinaryParams = "BOOST_TIME,CONTROL_DIFFERENTIAL_TEMPERATURE,LAST_PASSAGE_DIRECTION,LEVEL_STATUS,OPERATING_VOLTAGE,PARTY_,PARTY_MODE,PASSAGE_COUNTER_OVERFLOW,PROCESS,QUICK_VETO_TIME,";
     excludeBinaryParams = excludeBinaryParams#"RSSI_DEVICE,RSSI_PEER,SECTION,SMOKE_DETECTOR_TEST_RESULT=NONE,VALVE_STATE";
 
     if ((oCC.HssType().Find("DIMMER_TRANSMITTER") != -1)
@@ -665,6 +665,21 @@ function ::isParameterVisible() {
         return;
       }
     }
+  }
+  return;
+}
+
+! Filters a single option instead of an entire parameter
+! The above function 'isParameterVisible' blocks a binary parameter complete, means PARAM=TRUE and PARAM=FALSE are blocked
+! This function is useful for filtering single options like PARAM=FALSE while PARAM=TRUE is visible
+! [showChannelParam]
+function ::isBinaryOptionVisible() {
+  showChannelParam = true;
+  if (oCC.HssType() == "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") {
+      if ((oDP.HSSID().Find("CURRENT_PASSAGE_DIRECTION") != -1)) {
+       showChannelParam = false;
+       return;
+      }
   }
   return;
 }

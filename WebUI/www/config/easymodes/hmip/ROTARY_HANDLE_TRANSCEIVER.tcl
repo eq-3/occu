@@ -48,7 +48,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     #3
     incr prn
-    set param MSG_FOR_POS_A
+    set param MSG_FOR_POS_B
     append HTML_PARAMS(separate_1) "<tr>"
       array_clear options
       set options(0) "\${stringTableRHSMsgPosNoMsg}"
@@ -61,7 +61,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     #4
     incr prn
-    set param MSG_FOR_POS_B
+    set param MSG_FOR_POS_A
     append HTML_PARAMS(separate_1) "<tr>"
       array_clear options
       set options(0) "\${stringTableRHSMsgPosNoMsg}"

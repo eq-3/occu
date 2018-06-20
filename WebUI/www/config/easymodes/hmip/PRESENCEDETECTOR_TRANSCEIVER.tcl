@@ -45,7 +45,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set capture_within_interval  $dev_descr(CAPTURE_WITHIN_INTERVAL)
 
   set help_txt "\${motionDetectorHelp}"
-  set xmlCatchError [catch {set brightness [format "%.0f" [xmlrpc $iface_url($iface) getValue [list string $address] [list string ILLUMINATION]]]}]
+  #set xmlCatchError [catch {set brightness [format "%.0f" [xmlrpc $iface_url($iface) getValue [list string $address] [list string ILLUMINATION]]]}]
+   set xmlCatchError [catch {set brightness [format "%.0f" [xmlrpc $iface_url($iface) getValue [list string $address] [list string CURRENT_ILLUMINATION]]]}]
 
   set hlpBoxWidth 450
   set hlpBoxHeight 80

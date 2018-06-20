@@ -1,7 +1,74 @@
 jQuery.extend(true,langJSON, {
   "tr" : {
-    "virtualHelpTxt" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">Cikis seviyesi 3 kanalin asagidaki kuralara g&ouml;re birbirine baglanmasiyla belirlenir:</span><br><br></font>Cikis seviyesi = (((0 o A) o B) o C)<br/><br/>Burada su tanim gecerlidir:<br/><br/>&nbsp;A = Ch:1 seviyesi<br/>&nbsp;B = Ch:2 seviyesi<br/>&nbsp;C = Ch:3 seviyesi<br/>&nbsp;o = buna ait kanalin baglanti kurali<br/>&nbsp;Parantezler icten disa dogru d&uuml;zenlenir.<br/><br/>Her bir baglanti kuralinin anlami:<br/><ul><li>Kanal etkin degil: Kanal baglanti sirasinda dikkate alinmadi.</li><li>OR: Baglanti sonucu, birbirine baglanmis kanallarin daha y&uuml;ksek olan seviyesidir.</li><li>AND: Baglanti sonucu, birbirine baglanmis kanallarin daha d&uuml;s&uuml;k olan seviyesidir.</li><li>XOR: Her iki kanalda ACIK veya KAPALI ise baglanti sonucu %0'dir. Sadece tek bir kanal ACIK ise, sonuc bu kanalin seviyesidir.</li><li>NOR: OR baglantisi yapiliyor ve sonuc daha sonra d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;yor (%100 - seviye).</li><li>NAND: AND baglantisi yapiliyor ve sonuc daha sonra d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;yor (%100 - seviye).</li><li>OR_INVERS: Baglantisi yapilacak kanal ('o'nun saginda) &ouml;nce d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;r (%100 - seviye) ve daha sonra da OR baglantisi yapilir.</li><li>AND_INVERS: Baglantisi yapilacak kanal ('o'nun saginda) &ouml;nce d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;r (%100 - seviye) ve daha sonra da AND baglantisi yapilir.</li><li>PLUS: Her iki seviye birbiriyle toplaniyor (maks. %100).</li><li>MINUS: Her iki seviye birbirinden cikariliyor (maks. %0).</li><li>MINUS: Her iki seviye birbiriyle carpiliyor.</li><li>PLUS_INVERS: Baglantisi yapilacak kanal ('o'nun saginda) &ouml;nce d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;r (%100 - seviye) ve daha sonra da PLUS baglantisi yapiliyor. </li><li>MINUS_INVERS: Baglantisi yapilacak kanal ('o'nun saginda) &ouml;nce d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;r (%100 - seviye) ve daha sonra da MINUS baglantisi yapiliyor. </li><li>MULTI_INVERS: Baglantisi yapilacak kanal ('o'nun saginda) &ouml;nce d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;r (%100 - seviye) ve daha sonra da MULTI baglantisi yapiliyor. </li><li>INVERS_PLUS: Her iki seviye birbiriyle toplaniyor (maks. %100) ve sonuc daha sonra d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;yor (%100 - seviye)</li><li>INVERS_MINUS: Her iki seviye birbirinden cikariliyor (max. %100) ve sonuc daha sonra d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;yor (%100 - seviye)</li><li>INVERS_MULTI: Her iki seviye birbiriyle carpiliyor ve sonuc daha sonra d&ouml;n&uuml;st&uuml;r&uuml;l&uuml;yor (%100 - seviye)</li></ul>&Ouml;rnek:<br/><blockquote>A = %70, B = %25, C = %80<br/><br/>Baglanti: (((0% OR A) NOR B) AND_INVERS C)<br/><br/>0% OR A = 70%<br/>70% NOR B = 30%<br/>30% AND_INVERS C = 20%<br/><br/>Cikis seviyesi burada %20'dir</blockquote>",
-    "helpBtnTxt" : "Yardim"
+    "virtualHelpTxt" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "The output level is defined by a connection of the real channel according to the following rule:</span><br><br></font>" +
+    "Output level = ((0 o A) o B) o C)<br/><br/>" +
+    "The following definition will be applied: <br/><br/>" +
+    "&nbsp;A = level of the first virtual channel<br/>" +
+    "&nbsp;B = level of the second virtual channel<br/>" +
+    "&nbsp;C = level of the third virtual channel<br/><br/>" +
+    "o = connection rule of corresponding channel<br/>" +
+    "&nbsp;Brackets are handled from inside to outside.<br/><br/>" +
+    "Meaning of single connection rules:<br/>" +
+    "<ul><li>Channel inactive: The channel is ignored in the connection.</li>" +
+    "<li>OR: The connection result is the higher level of the connected channels.</li>" +
+    "<li>AND: The connection result is the lower level of the connected channels.</li>" +
+    "<li>XOR: The connection result is 0% if both channels are ON or OFF. If only one channel is ON the result is the level of this channel.</li>" +
+    "<li>NOR: The connection OR will be executed and the result will be reversed afterwards (100% - level).</li>" +
+    "<li>NAND: The connection AND will be executed and the result will be reversed afterwards (100% - level).</li>" +
+    "<li>OR_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection OR will be executed.</li>" +
+    "<li>AND_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection AND will be executed.</li>" +
+    "<li>PLUS: Both levels will be added (max. 100%).</li><li>MINUS: Both levels will be subtracted (max. 0%).</li>" +
+    "<li>MULTI: Both channels will multiplied.</li>" +
+    "<li>PLUS_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection PLUS will be executed.</li>" +
+    "<li>MINUS_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection MINUS will be executed.</li>" +
+    "<li>MULTI_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection MULTI will be executed.</li>" +
+    "<li>INVERS_PLUS: Both levels will be added (max. 100%) and the the result will be reversed afterwards (100% - level)</li>" +
+    "<li>INVERS_MINUS: Both levels will be subtracted (max. 100%) and the result will be reversed afterwards (100% - level)</li>" +
+    "<li>INVERS_MULTI: Both levels will be multiplied and the the result will be reversed afterwards (100% - level)</li>" +
+    "</ul>Example:<br/><blockquote>A = 70%, B = 25%, C = 80%<br/><br/>" +
+    "Connection: (((0% OR A) NOR B) AND_INVERS C)<br/><br/>" +
+    "0% OR A = 70%<br/>" +
+    "70% NOR B = 30%<br/>" +
+    "30% AND_INVERS C = 20%<br/><br/>" +
+    "Here the output level results in 20%</blockquote>",
+
+    "virtualHelpTxt2" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "The output value is defined by a binary / logical connection of the primary color (RGB) of the channel according to the following rule:</span><br><br></font>" +
+    "Output value = ((A o B) o C)<br/><br/>" +
+    "The following definition will be applied: <br/><br/>" +
+    "&nbsp;A = color value of the first virtual channel<br/>" +
+    "&nbsp;B = color value of the second virtual channel<br/>" +
+    "&nbsp;C = color value of the third virtual channel<br/><br/>" +
+    "o = connection rule of corresponding channel<br/>" +
+    "&nbsp;Brackets are handled from inside to outside.<br/><br/>" +
+    "Meaning of single connection rules:<br/>" +
+    "<ul><li>Channel inactive: The channel is ignored in the connection.</li>" +
+    "<li>OR: The connection result are all active primary colors (RGB) of the connected channels.</li>" +
+    "<li>AND: The connection result are the common primary colors (RGB) of the connected channels.</li>" +
+	"<table border=\"1\">" +
+    "<tr><td>Red-Bit</td><td>Green-Bit</td><td>Blue-Bit</td><td>Farbe</td><td>Farbwert (bin&auml;r)</td></tr>" +
+    "<tr><td>0</td><td>0</td><td>0</td><td>Off /Black</td><td>0 (0b000)</td></tr>" +
+    "<tr><td>0</td><td>0</td><td>1</td><td>Blue</td><td>1 (0b001)</td></tr>" +
+    "<tr><td>0</td><td>1</td><td>0</td><td>Green</td><td>2 (0b010)</td></tr>" +
+    "<tr><td>0</td><td>1</td><td>1</td><td>Turqoise</td><td>3 (0b011)</td></tr>" +
+    "<tr><td>1</td><td>0</td><td>0</td><td>Red</td><td>4 (0b400)</td></tr>" +
+    "<tr><td>1</td><td>0</td><td>1</td><td>Violet</td><td>5 (0b101)</td></tr>" +
+    "<tr><td>1</td><td>1</td><td>0</td><td>Yellow</td><td>6 (0b110)</td></tr>" +
+    "<tr><td>1</td><td>1</td><td>1</td><td>White</td><td>7 (0b111)</td></tr>" +
+    "</table>" +
+    "</ul>Example 1 (Mixing):<br/><blockquote>A = Red, B = Green, C = Blue<br/><br/>" +
+    "Connection: (((A) OR B) OR C)<br/><br/>" +
+    "A OR B = Yellow<br/>" +
+    "Yellow OR C = White<br/><br/>" +
+    "Here the output value results in White</blockquote>" +
+	"</ul>Example 2 (Filtering):<br/><blockquote>A = Violet, B = Yellow, C = White<br/><br/>" +
+    "Connection: (((A) AND B) AND C)<br/><br/>" +
+    "A AND B = Red<br/>" +
+    "Red AND C = Red<br/><br/>" +
+    "Here the output value results in Red</blockquote>",
+
+    "helpBtnTxt" : "Help"
   }
 });
 

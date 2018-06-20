@@ -292,6 +292,7 @@ proc option {type} {
       set options(3) "\${stringTableOffDelay}"
     }
 
+
     "POWERUP_JUMPTARGET_OnOff" {
       set options(0) "\${stringTableStateFalse}"
       set options(1) "\${stringTableOnDelay}"

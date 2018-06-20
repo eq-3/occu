@@ -259,9 +259,14 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
   set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string BRIGHTNESS]]}]
 
   if {$xmlCatch != 0} {
-    set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string ILLUMINATION]]}]
+    set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string CURRENT_ILLUMINATION]]}]
     if {$xmlCatch == 0} {
       set brightnessHas2beConverted 1
+    } else {
+      set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string ILLUMINATION]]}]
+      if {$xmlCatch == 0} {
+        set brightnessHas2beConverted 1
+      }
     }
   }
 
