@@ -141,7 +141,7 @@ proc getMaintenance {chn p descr} {
 proc getKeyTransceiver {chn p descr} {
 
   global env
-  source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
+  # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
   upvar $p ps
   upvar $descr psDescr
@@ -1157,8 +1157,8 @@ proc getDimmerTransmitter {chn p descr} {
   set specialID "[getSpecialID $special_input_id]"
 
   set html ""
+  set param EVENT_DELAY_UNIT
   if { ! [catch {set tmp $ps($param)}] } {
-    set param EVENT_DELAY_UNIT
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -1349,7 +1349,6 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
 proc getDimmerVirtualReceiver {chn p descr} {
 
   global dev_descr
-
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -1365,78 +1364,58 @@ proc getDimmerVirtualReceiver {chn p descr} {
   set devType $dev_descr(TYPE)
 
   if {[session_is_expert]} {
+    set hr 0
     set param "LOGIC_COMBINATION"
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableLogicCombination}</td>"
-        array_clear options
-        if {[string equal "HmIP-BSL" $devType] == 1} {
-          option LOGIC_COMBINATION_NO_AND_OR
-        } else {
+    if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
+      set hr 1
+      append html "<tr>"
+        append html "<td>\${stringTableLogicCombination} \${stringTableBrightness}</td>"
+          array_clear options
           option LOGIC_COMBINATION
-        }
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-      append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"Virtual_DimmerChannel_help($chn);\"></td>"
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"Virtual_DimmerChannel_help($chn);\"></td>"
 
-    append html "</tr>"
+      append html "</tr>"
+    }
 
-    append html "[getHorizontalLine]"
+    set param "LOGIC_COMBINATION_2"
+    if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
+      set hr 1
+      append html "<tr>"
+        append html "<td>\${stringTableLogicCombination} \${stringTableColor}</td>"
+          array_clear options
+          if {[string equal "HmIP-BSL" $devType] == 1} {
+            option LOGIC_COMBINATION_NO_AND_OR
+          } else {
+            option LOGIC_COMBINATION
+          }
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button2_$chn\" type=\"button\" value=\${help} onclick=\"Virtual_DimmerChannel_help($chn, 'lc2');\"></td>"
+
+      append html "</tr>"
+    }
+    if {$hr == 1} {
+      append html "[getHorizontalLine]"
+    }
   }
 
-  incr prn
   set param POWERUP_JUMPTARGET
-  append html "<tr>"
-    append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-    option POWERUP_JUMPTARGET_HMIP
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
-
-
-  incr prn
-  append html "<tr>"
-  append html "<td>\${stringTableOnDelay}</td>"
-  append html [getComboBox $chn $prn "$specialID" "delayShort"]
-  append html "</tr>"
-
-  set param POWERUP_ONDELAY_UNIT
-  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-
-
-  incr prn
-  set param POWERUP_ONDELAY_VALUE
-  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-  append html "<td>\${stringTableOnDelayValue}</td>"
-
-  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-  append html "</tr>"
-  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-
-  incr prn
-  append html "<tr>"
-  append html "<td>\${stringTableOnTime}</td>"
-  append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
-  append html "</tr>"
-
-  set param POWERUP_ONTIME_UNIT
-  append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-
-  incr prn
-  set param POWERUP_ONTIME_VALUE
-  append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-  append html "<td>\${stringTableOnTimeValue}</td>"
-
-  append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-  append html "</tr>"
-  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html [getPowerUpSelector $chn ps $special_input_id]
+  }
 
   #### HELP
   append html "<tr><td colspan=\"3\">"
     append html "<table class=\"ProfileTbl\" id=\"virtual_ch_help_$chn\" style=\"display:none\">"
     append html "<tr><td>\${virtualHelpTxt}</td></tr>"
+    append html "</table>"
+  append html "</td></tr>"
+
+  append html "<tr><td colspan=\"3\">"
+    append html "<table class=\"ProfileTbl\" id=\"virtual_ch_help2_$chn\" style=\"display:none\">"
+    append html "<tr><td>\${virtualHelpTxt2}</td></tr>"
     append html "</table>"
   append html "</td></tr>"
 
@@ -1603,9 +1582,12 @@ proc getShutterVirtualReceiver {chn p descr} {
 
   set html ""
 
+  set prn 0
+
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
     if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
       append html "<tr>"
         append html "<td>\${stringTableLogicCombination}</td>"
         option LOGIC_COMBINATION
@@ -1661,13 +1643,9 @@ proc getShutterVirtualReceiver {chn p descr} {
     append html "</tr>"
   }
 
-
-
   set param POWERUP_OFFDELAY_UNIT
   if { ! [catch {set tmp $ps($param)}]  } {
-
     append html "[getHorizontalLine]"
-
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableBlindLevelOffDelay}</td>"
@@ -1675,7 +1653,6 @@ proc getShutterVirtualReceiver {chn p descr} {
     append html "</tr>"
 
     append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
-
 
     incr prn
     set param POWERUP_OFFDELAY_VALUE
@@ -1744,9 +1721,22 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
   set specialID "[getSpecialID $special_input_id]"
 
-  set weeklyPrograms 6
+  set isGroup ""
+
+  if {[string equal [string range $address 0 2] "INT"] == 1} {
+    set isGroup "_group"
+  }
+
+  puts "isGroup: $isGroup<br/>"
+
+  set weeklyPrograms 3
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/CC.js');</script>"
+
+  set param P6_TEMPERATURE_MONDAY_1
+  if { ! [catch {set tmp $ps($param)}]  } {
+      set weeklyPrograms 6
+  }
 
   if {[string compare $extraparam 'only3WeeklyProgramms'] == 0} {
     set weeklyPrograms 3
@@ -1794,7 +1784,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
               append html "<option value='4'>\${stringTableWeekProgram5}</option>"
               append html "<option value='5'>\${stringTableWeekProgram6}</option>"
             }
-        append html "</select>[getHelpIcon $param]"
+        append html "</select>[getHelpIcon $param$isGroup]"
         append html "</td>"
       append html "</tr>"
     append html "</table>"
@@ -2046,71 +2036,26 @@ proc getSwitchVirtualReceiver {chn p descr} {
   set specialID "[getSpecialID $special_input_id]"
 
   set html ""
-
+  set prn 0
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
     if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
       append html "<tr>"
         append html "<td>\${stringTableLogicCombination}</td>"
         option LOGIC_COMBINATION
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
       append html "</tr>"
       append html "[getHorizontalLine]"
-      incr prn
     }
   }
 
   set param POWERUP_JUMPTARGET
   if { ! [catch {set tmp $ps($param)}]  } {
-    append html "<tr>"
-      append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-      option POWERUP_JUMPTARGET_HMIP
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-
-
-    incr prn
-    append html "<tr>"
-    append html "<td>\${stringTableOnDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShort"]
-    append html "</tr>"
-
-    set param POWERUP_ONDELAY_UNIT
-    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-
-    incr prn
-    set param POWERUP_ONDELAY_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableOnDelayValue}</td>"
-
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-    append html "</tr>"
-    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-
-
-    incr prn
-    append html "<tr>"
-    append html "<td>\${stringTableOnTime}</td>"
-    append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
-    append html "</tr>"
-
-    set param POWERUP_ONTIME_UNIT
-    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-
-    incr prn
-    set param POWERUP_ONTIME_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableOnTimeValue}</td>"
-
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-    append html "</tr>"
-    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html [getPowerUpSelector $chn ps $special_input_id]
   }
+
   if {$html == ""} {
     append html [getNoParametersToSet]
   }
@@ -2695,7 +2640,7 @@ proc getClimateControlFloorDirectTransmitter {chn p descr} {
 
 proc getShutterContact {chn p descr} {
   global env
-  source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
+  # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
   upvar $p ps
   upvar $descr psDescr
@@ -2882,7 +2827,7 @@ proc getPassageDetector {chn p descr} {
 
 proc getPassageDetectorDirectionTransmitter {chn p descr} {
   global env
-  source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
+  # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
   upvar $p ps
   upvar $descr psDescr
@@ -3253,7 +3198,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
     set options(5) "\${stringTableAlarmFrequencyAlternatingLowMidHigh}"
     set options(6) "\${stringTableAlarmFrequencyHighOnOff}"
     set options(7) "\${stringTableAlarmFrequencyHighOnLongOff}"
-    set options(8) "\${stringTableAlarmFrequencyLowOnOffHighOnOff}"
+    set options(8) "\${stringTableAlarmFrequencyLowOnOffHighonOff}"
     set options(9) "\${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}"
     append html "<tr><td>\${stringTableSoundID}</td><td>"
     append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]

@@ -9,6 +9,3 @@
 "subset_1" : "moved up",
 "subset_2" : "moved down",
 "subset_3" : "changing between moved up and moved down",
-
-
-

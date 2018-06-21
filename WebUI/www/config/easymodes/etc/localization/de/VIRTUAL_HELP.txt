@@ -1,6 +1,73 @@
 jQuery.extend(true,langJSON, {
   "de" : {
-    "virtualHelpTxt" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">Der Ausgangspegel wird durch eine Verkn&uuml;pfung der virtuellen Kan&auml;le mit dem Realkanal nach folgender Regel bestimmt:</span><br><br></font>Ausgangspegel = (((0 o A) o B) o C)<br/><br/>Es gilt dabei folgende Definition:<br/><br/>&nbsp;A = Pegel des ersten virtuellen Kanals<br/>&nbsp;B = Pegel des zweiten virtuellen Kanals<br/>&nbsp;C = Pegel des dritten virtuellen Kanals<br/><br/>o = Verkn&uuml;pfungsregel des dazugeh&ouml;rigen Kanals<br/>&nbsp;Klammern werden von innen nach aussen abgearbeitet.<br/><br/>Bedeutung der einzelnen Verkn&uuml;pfungsregeln:<br/><ul><li>Kanal inaktiv: Der Kanal wird bei der Verkn&uuml;pfung ignoriert.</li><li>OR: Das Verkn&uuml;pfungsergebnis ist der h&ouml;here Pegel der verkn&uuml;pften Kan&auml;le.</li><li>AND: Das Verkn&uuml;pfungsergebnis ist der niedrigere Pegel der verkn&uuml;pften Kan&auml;le.</li><li>XOR: Das Verkn&uuml;pfungsergebnis ist 0%, wenn beide Kan&auml;le AN oder AUS sind. Ist nur ein Kanal AN, ist das Ergebnis der Pegel dieses Kanals.</li><li>NOR: Es wird die Verkn&uuml;pfung OR ausgef&uuml;hrt und das Ergebniss anschlie&szlig;end invertiert (100% - Pegel).</li><li>NAND: Es wird die Verkn&uuml;pfung AND ausgef&uuml;hrt und das Ergebniss anschlie&szlig;end invertiert (100% - Pegel).</li><li>OR_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung OR ausgef&uuml;hrt.</li><li>AND_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung AND ausgef&uuml;hrt.</li><li>PLUS: Die beiden Pegel werden addiert (max. 100%).</li><li>MINUS: Die beiden Pegel werden subtrahiert (min. 0%).</li><li>MULTI: Die beiden Pegel werden multipliziert.</li><li>PLUS_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung PLUS ausgef&uuml;hrt. </li><li>MINUS_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung MINUS ausgef&uuml;hrt. </li><li>MULTI_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung MULTI ausgef&uuml;hrt. </li><li>INVERS_PLUS: Die beiden Pegel werden addiert (max. 100%) und das Ergebnis anschlie&szlig;end invertiert (100% - Pegel)</li><li>INVERS_MINUS: Die beiden Pegel werden subtrahiert (max. 100%) und das Ergebnis anschlie&szlig;end invertiert (100% - Pegel)</li><li>INVERS_MULTI: Die beiden Pegel werden multipliziert und das Ergebnis anschlie&szlig;end invertiert (100% - Pegel)</li></ul>Beispiel:<br/><blockquote>A = 70%, B = 25%, C = 80%<br/><br/>Verkn&uuml;pfung: (((0% OR A) NOR B) AND_INVERS C)<br/><br/>0% OR A = 70%<br/>70% NOR B = 30%<br/>30% AND_INVERS C = 20%<br/><br/>Der Ausgangspegel ergibt hier 20%</blockquote>",
+    "virtualHelpTxt" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "Der Ausgangspegel wird durch eine Verkn&uuml;pfung der virtuellen Kan&auml;le mit dem Realkanal nach folgender Regel bestimmt:</span><br><br></font>" +
+    "Ausgangspegel = (((0 o A) o B) o C)<br/><br/>" +
+    "Es gilt dabei folgende Definition:<br/><br/>" +
+    "&nbsp;A = Pegel des ersten virtuellen Kanals<br/>" +
+    "&nbsp;B = Pegel des zweiten virtuellen Kanals<br/>" +
+    "&nbsp;C = Pegel des dritten virtuellen Kanals<br/><br/>" +
+    "o = Verkn&uuml;pfungsregel des dazugeh&ouml;rigen Kanals<br/>" +
+    "&nbsp;Klammern werden von innen nach aussen abgearbeitet.<br/><br/>" +
+    "Bedeutung der einzelnen Verkn&uuml;pfungsregeln:<br/>" +
+    "<ul><li>Kanal inaktiv: Der Kanal wird bei der Verkn&uuml;pfung ignoriert.</li>" +
+    "<li>OR: Das Verkn&uuml;pfungsergebnis ist der h&ouml;here Pegel der verkn&uuml;pften Kan&auml;le.</li>" +
+    "<li>AND: Das Verkn&uuml;pfungsergebnis ist der niedrigere Pegel der verkn&uuml;pften Kan&auml;le.</li>" +
+    "<li>XOR: Das Verkn&uuml;pfungsergebnis ist 0%, wenn beide Kan&auml;le AN oder AUS sind. Ist nur ein Kanal AN, ist das Ergebnis der Pegel dieses Kanals.</li>" +
+    "<li>NOR: Es wird die Verkn&uuml;pfung OR ausgef&uuml;hrt und das Ergebniss anschlie&szlig;end invertiert (100% - Pegel).</li>" +
+    "<li>NAND: Es wird die Verkn&uuml;pfung AND ausgef&uuml;hrt und das Ergebniss anschlie&szlig;end invertiert (100% - Pegel).</li>" +
+    "<li>OR_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung OR ausgef&uuml;hrt.</li>" +
+    "<li>AND_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung AND ausgef&uuml;hrt.</li>" +
+    "<li>PLUS: Die beiden Pegel werden addiert (max. 100%).</li><li>MINUS: Die beiden Pegel werden subtrahiert (min. 0%).</li>" +
+    "<li>MULTI: Die beiden Pegel werden multipliziert.</li>" +
+    "<li>PLUS_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung PLUS ausgef&uuml;hrt.</li>" +
+    "<li>MINUS_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung MINUS ausgef&uuml;hrt.</li>" +
+    "<li>MULTI_INVERS: Der zu verkn&uuml;pfende Kanal (rechts vom 'o') wird zuerst invertiert (100% - Pegel) und anschlie&szlig;end die Verkn&uuml;pfung MULTI ausgef&uuml;hrt.</li>" +
+    "<li>INVERS_PLUS: Die beiden Pegel werden addiert (max. 100%) und das Ergebnis anschlie&szlig;end invertiert (100% - Pegel)</li>" +
+    "<li>INVERS_MINUS: Die beiden Pegel werden subtrahiert (max. 100%) und das Ergebnis anschlie&szlig;end invertiert (100% - Pegel)</li>" +
+    "<li>INVERS_MULTI: Die beiden Pegel werden multipliziert und das Ergebnis anschlie&szlig;end invertiert (100% - Pegel)</li>" +
+    "</ul>Beispiel:<br/><blockquote>A = 70%, B = 25%, C = 80%<br/><br/>" +
+    "Verkn&uuml;pfung: (((0% OR A) NOR B) AND_INVERS C)<br/><br/>" +
+    "0% OR A = 70%<br/>" +
+    "70% NOR B = 30%<br/>" +
+    "30% AND_INVERS C = 20%<br/><br/>" +
+    "Der Ausgangspegel ergibt hier 20%</blockquote>",
+
+
+    "virtualHelpTxt2" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "Der Ausgangswert wird durch eine binäre / logische Verkn&uuml;pfung der Prim&auml;rfarben (RGB) der virtuellen Kan&auml;le nach folgender Regel bestimmt:</span><br><br></font>" +
+    "Ausgangswert = ((A o B) o C)<br/><br/>Es gilt dabei folgende Definition:<br/><br/>" +
+    "&nbsp;A = Farbwerte des ersten virtuellen Kanals<br/>&nbsp;" +
+    "B = Farbwerte des zweiten virtuellen Kanals<br/>&nbsp;" +
+    "C = Farbwerte des dritten virtuellen Kanals<br/><br/>" +
+    "o = Verkn&uuml;pfungsregel des dazugeh&ouml;rigen Kanals<br/>" +
+    "&nbsp;Klammern werden von innen nach aussen abgearbeitet.<br/><br/>" +
+    "Bedeutung der einzelnen Verkn&uuml;pfungsregeln:<br/>" +
+    "<ul><li>Kanal inaktiv: Der Kanal wird bei der Verkn&uuml;pfung ignoriert.</li>" +
+    "<li>OR: Das Verkn&uuml;pfungsergebnis sind alle aktiven Prim&auml;rfarben (RGB) der verkn&uuml;pften Kan&auml;le.</li>" +
+    "<li>AND: Das Verkn&uuml;pfungsergebnis sind die gemeinsammen aktiven Prim&auml;rfarben (RGB) der verkn&uuml;pften Kan&auml;le.</li>" +
+    "<table border=\"1\">" +
+    "<tr><td>Rot-Bit</td><td>Gr&uuml;n-Bit</td><td>Blau-Bit</td><td>Farbe</td><td>Farbwert (bin&auml;r)</td></tr>" +
+    "<tr><td>0</td><td>0</td><td>0</td><td>Aus /Schwarz</td><td>0 (0b000)</td></tr>" +
+    "<tr><td>0</td><td>0</td><td>1</td><td>Blau</td><td>1 (0b001)</td></tr>" +
+    "<tr><td>0</td><td>1</td><td>0</td><td>Gr&uuml;n</td><td>2 (0b010)</td></tr>" +
+    "<tr><td>0</td><td>1</td><td>1</td><td>T&uuml;rkis</td><td>3 (0b011)</td></tr>" +
+    "<tr><td>1</td><td>0</td><td>0</td><td>Rot</td><td>4 (0b400)</td></tr>" +
+    "<tr><td>1</td><td>0</td><td>1</td><td>Violet</td><td>5 (0b101)</td></tr>" +
+    "<tr><td>1</td><td>1</td><td>0</td><td>Gelb</td><td>6 (0b110)</td></tr>" +
+    "<tr><td>1</td><td>1</td><td>1</td><td>Wei&szlig;</td><td>7 (0b111)</td></tr>" +
+    "</table>" +
+    "</ul>Beispiel 1 (Mischung):<br/><blockquote>A = Rot, B = Gr&uuml;n, C = Blau<br/><br/>" +
+    "Verkn&uuml;pfung: (((A) OR B) OR C)<br/><br/>" +
+    "A OR B = Gelb<br/>" +
+    "Gelb OR C = Wei&szlig;<br/><br/>" +
+    "Der Ausgangswert ergibt hier Wei&szlig;</blockquote>" +
+	"</ul>Beispiel 2 (Filter):<br/><blockquote>A = Violet, B = Gelb, C = Wei&szlig;<br/><br/>" +
+    "Verkn&uuml;pfung: (((A) AND B) AND C)<br/><br/>" +
+    "A AND B = Rot<br/>" +
+    "Rot AND C = Rot<br/><br/>" +
+    "Der Ausgangswert ergibt hier Rot</blockquote>",
+
     "helpBtnTxt" : "Hilfe"
   }
 });

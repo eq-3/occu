@@ -10,7 +10,7 @@ function GroupDevice(id, serialNumber, type)
   self.realSerialNumber = self.arSerialNumber[0];
   self.Channel = self.arSerialNumber[1];
   conInfo(self.realSerialNumber);
-  self.serialNumber = serialNumber
+  self.serialNumber = serialNumber;
   self.device = DeviceList.getDeviceByAddress(self.realSerialNumber);
   conInfo(self.device);
   self.type = type;
@@ -26,16 +26,16 @@ function GroupDevice(id, serialNumber, type)
   
   self.getConfigPending = function()
   {
-	var interfaceId = "BidCos-RF";
-	if(!self.type.startsWith("HM-"))
-	{
-		interfaceId = "HmIP-RF";
-	}
-	
+  var interfaceId = "BidCos-RF";
+  if(!self.type.startsWith("HM-"))
+  {
+    interfaceId = "HmIP-RF";
+  }
+  
   var deviceParamSet = homematic('Interface.getParamset', {"interface": interfaceId, "address" : self.realSerialNumber+":0", "paramsetKey" : "VALUES"});
     // conInfo(deviceParamSet);
     // handle null/undefined like no config pending
-	if(deviceParamSet != typeof 'undefined' && deviceParamSet != null && (deviceParamSet.CONFIG_PENDING === '1' || deviceParamSet.CONFIG_PENDING === true))
+  if(deviceParamSet != typeof 'undefined' && deviceParamSet != null && (deviceParamSet.CONFIG_PENDING === '1' || deviceParamSet.CONFIG_PENDING === true))
     {
       return true;
     }

@@ -2484,7 +2484,7 @@ html, body {
   margin-left: -209px;
   margin-top: -55px;
   width: 418px;
-  height: 80px;
+  height: 70px;
   background-color:$_(black); /* #000000 */
 }
 
@@ -2493,20 +2493,20 @@ html, body {
   top:2px;
   left:2px;
   width: 414px;
-  height: 76px;
+  height: 66px;
   background-color: $_(activeBackground);
 }
 
 #webuiloader_icon {
   position: absolute;
-  top: 10px;
-  left: 5px;
+  top: 15px;
+  left: 15px;
 }
 
 #webuiloader_caption {
   position: absolute;
-  top: 10px;
-  left: 65px;
+  top: 5px;
+  left: 200px;
   height: 50px;
   line-height:50px;
   text-align: middle;

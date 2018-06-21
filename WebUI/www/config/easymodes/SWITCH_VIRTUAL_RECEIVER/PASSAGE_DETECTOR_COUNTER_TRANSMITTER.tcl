@@ -325,6 +325,15 @@ set comment {
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
 
+  set scvl SHORT_COND_VALUE_LO
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+  set scvh SHORT_COND_VALUE_HI
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
+
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 
@@ -384,6 +393,14 @@ set comment {
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
 
+  set scvl SHORT_COND_VALUE_LO
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+  set scvh SHORT_COND_VALUE_HI
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #3
@@ -435,6 +452,13 @@ set comment {
     # ON_TIME
     append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
+    set scvl SHORT_COND_VALUE_LO
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+    set scvh SHORT_COND_VALUE_HI
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -493,6 +517,14 @@ set comment {
 
     # OFF_TIME
     append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
+
+    set scvl SHORT_COND_VALUE_LO
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+    set scvh SHORT_COND_VALUE_HI
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

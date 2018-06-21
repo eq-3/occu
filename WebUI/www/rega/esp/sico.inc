@@ -145,34 +145,35 @@
               {
                 if( (iDPvt == ivtBinary) && ((iDPst != istAction)))
                 {
-
-
-                    ! Some parameters shouldn't be visible
-                    Call("/esp/functions.fn::isParameterVisible()");
-                    if (showChannelParam == true)
+                  ! Some parameters shouldn't be visible
+                  Call("/esp/functions.fn::isParameterVisible()");
+                  if (showChannelParam == true)
+                  {
+                    if( (oDP.ID() == iLV) && (iRV1 == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
+                    Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
+                    string sValue = oDP.Name()#": "#oDP.ValueName1();
+                    if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
                     {
-                      if( (oDP.ID() == iLV) && (iRV1 == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
-                      Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
-                      string sValue = oDP.Name()#": "#oDP.ValueName1();
-                      if( (!oDP.IsTypeOf( OT_VARDP )) && (!oDP.IsTypeOf( OT_ALARMDP )) )
+                      string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
+                      string sShortKey = oDP.HSSID()#"=TRUE";
+                      sValue = web.webKeyFromStringTable(sLongKey);
+                      if( sValue.Length() == 0 )
                       {
-                        string sLongKey = oCC.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
-                        string sShortKey = oDP.HSSID()#"=TRUE";
-                        sValue = web.webKeyFromStringTable(sLongKey);
-                        if( sValue.Length() == 0 )
+                        string sValue = web.webKeyFromStringTable(sShortKey);
+                        if( !sValue.Length() )
                         {
-                          string sValue = web.webKeyFromStringTable(sShortKey);
-                          if( !sValue.Length() )
-                          {
-                            sValue = sShortKey;
-                          }
+                          sValue = sShortKey;
                         }
                       }
-                      Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
-                      Write( sValue );
+                    }
+                    Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
+                    Write( sValue );
 
-                      Write( '</option>' );
+                    Write( '</option>' );
 
+                    Call("/esp/functions.fn::isBinaryOptionVisible()");
+                    if (showChannelParam == true)
+                    {
                       if( (oDP.ID() == iLV) && (iRV1 == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
 
                       Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
@@ -196,7 +197,7 @@
                       Write( sValue );
                       Write( '</option>' );
                     }
-
+                  }
 
                 }
                 else

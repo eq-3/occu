@@ -253,11 +253,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set condTXDecisionValue $sender_descrMaster(COND_TX_DECISION_ABOVE)
     set decisionValue "{SHORT_COND_VALUE_HI {int $condTXDecisionValue}}"
     set ps(SHORT_COND_VALUE_HI) $condTXDecisionValue
+    set scvlh SHORT_COND_VALUE_HI
 
   } elseif {$channel == 3} {
     set condTXDecisionValue $sender_descrMaster(COND_TX_DECISION_BELOW)
     set decisionValue "{SHORT_COND_VALUE_LO {int $condTXDecisionValue}}"
     set ps(SHORT_COND_VALUE_LO) $condTXDecisionValue
+    set scvlh SHORT_COND_VALUE_LO
   }
 
   puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"
@@ -286,6 +288,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvlh\" value=\"$condTXDecisionValue\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #2
@@ -300,6 +305,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   #ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
+
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvlh\" value=\"$condTXDecisionValue\"/></tr></td>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -323,6 +331,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvlh\" value=\"$condTXDecisionValue\"/></tr></td>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -378,6 +388,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   # OFFDELAY_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG id=\"downDelayTime_${special_input_id}_$prn\_1\"]"
+
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvlh\" value=\"$condTXDecisionValue\"/></tr></td>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
   append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_4_1');},200)</script>"

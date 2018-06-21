@@ -15,7 +15,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set chn [getChannel $special_input_id]
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
-    set prn 1
     append HTML_PARAMS(separate_1) "[getShutterVirtualReceiver $chn ps psDescr]"
   append HTML_PARAMS(separate_1) "</table>"
 }

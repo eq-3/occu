@@ -428,6 +428,12 @@ DEV_PATHS["HmIP-BSL"]["250"] = "/config/img/devices/250/173_hmip-bsl.png";
 DEV_HIGHLIGHT["HmIP-BSL"] = new Object();
 DEV_HIGHLIGHT["HmIP-BSL"]["1"] = [1, 0.525, 0.650, 0.025];
 DEV_HIGHLIGHT["HmIP-BSL"]["2"] = [1, 0.510, 0.360, 0.025];
+DEV_HIGHLIGHT["HmIP-BSL"]["12"] = [1, 0.525, 0.650, 0.025];
+DEV_HIGHLIGHT["HmIP-BSL"]["13"] = [1, 0.525, 0.650, 0.025];
+DEV_HIGHLIGHT["HmIP-BSL"]["14"] = [1, 0.525, 0.650, 0.025];
+DEV_HIGHLIGHT["HmIP-BSL"]["8"] = [1, 0.510, 0.360, 0.025];
+DEV_HIGHLIGHT["HmIP-BSL"]["9"] = [1, 0.510, 0.360, 0.025];
+DEV_HIGHLIGHT["HmIP-BSL"]["10"] = [1, 0.510, 0.360, 0.025];
 DEV_LIST.push('HM-LC-Sw1-SM-2');
 DEV_DESCRIPTION["HM-LC-Sw1-SM-2"] = "HM-LC-Sw1-SM";
 DEV_PATHS["HM-LC-Sw1-SM-2"] = new Object();
@@ -642,6 +648,12 @@ DEV_PATHS["HM-CC-VD"] = new Object();
 DEV_PATHS["HM-CC-VD"]["50"] = "/config/img/devices/50/43_hm-cc-vd_thumb.png";
 DEV_PATHS["HM-CC-VD"]["250"] = "/config/img/devices/250/43_hm-cc-vd.png";
 DEV_HIGHLIGHT["HM-CC-VD"] = new Object();
+DEV_LIST.push('HmIP-eTRV-B1');
+DEV_DESCRIPTION["HmIP-eTRV-B1"] = "TRV-B";
+DEV_PATHS["HmIP-eTRV-B1"] = new Object();
+DEV_PATHS["HmIP-eTRV-B1"]["50"] = "/config/img/devices/50/178_hmip-etrv-b1_thumb.png";
+DEV_PATHS["HmIP-eTRV-B1"]["250"] = "/config/img/devices/250/178_hmip-etrv-b1.png";
+DEV_HIGHLIGHT["HmIP-eTRV-B1"] = new Object();
 DEV_LIST.push('HM-LC-Sw1-SM');
 DEV_DESCRIPTION["HM-LC-Sw1-SM"] = "HM-LC-Sw1-SM";
 DEV_PATHS["HM-LC-Sw1-SM"] = new Object();
@@ -1968,6 +1980,12 @@ DEV_HIGHLIGHT["HM-RCV-50"]["47"] = [5, 'S47'];
 DEV_HIGHLIGHT["HM-RCV-50"]["48"] = [5, 'S48'];
 DEV_HIGHLIGHT["HM-RCV-50"]["49"] = [5, 'S49'];
 DEV_HIGHLIGHT["HM-RCV-50"]["50"] = [5, 'S50'];
+DEV_LIST.push('HmIP-SWDM-B2');
+DEV_DESCRIPTION["HmIP-SWDM-B2"] = "HmIP-SWDM";
+DEV_PATHS["HmIP-SWDM-B2"] = new Object();
+DEV_PATHS["HmIP-SWDM-B2"]["50"] = "/config/img/devices/50/179_hmip-swdm-b2_thumb.png";
+DEV_PATHS["HmIP-SWDM-B2"]["250"] = "/config/img/devices/250/179_hmip-swdm-b2.png";
+DEV_HIGHLIGHT["HmIP-SWDM-B2"] = new Object();
 DEV_LIST.push('263 145');
 DEV_DESCRIPTION["263 145"] = "263_145";
 DEV_PATHS["263 145"] = new Object();
@@ -2451,6 +2469,18 @@ DEV_PATHS["HmIP-SWD"] = new Object();
 DEV_PATHS["HmIP-SWD"]["50"] = "/config/img/devices/50/172_hmip-swd_thumb.png";
 DEV_PATHS["HmIP-SWD"]["250"] = "/config/img/devices/250/172_hmip-swd.png";
 DEV_HIGHLIGHT["HmIP-SWD"] = new Object();
+DEV_LIST.push('HmIP-SWDM');
+DEV_DESCRIPTION["HmIP-SWDM"] = "HmIP-SWDM";
+DEV_PATHS["HmIP-SWDM"] = new Object();
+DEV_PATHS["HmIP-SWDM"]["50"] = "/config/img/devices/50/181_hmip-swdm_thumb.png";
+DEV_PATHS["HmIP-SWDM"]["250"] = "/config/img/devices/250/181_hmip-swdm.png";
+DEV_HIGHLIGHT["HmIP-SWDM"] = new Object();
+DEV_LIST.push('HmIP-DBB');
+DEV_DESCRIPTION["HmIP-DBB"] = "HmIP-DBB";
+DEV_PATHS["HmIP-DBB"] = new Object();
+DEV_PATHS["HmIP-DBB"]["50"] = "/config/img/devices/50/177_hmip-dbb_thumb.png";
+DEV_PATHS["HmIP-DBB"]["250"] = "/config/img/devices/250/177_hmip-dbb.png";
+DEV_HIGHLIGHT["HmIP-DBB"] = new Object();
 DEV_LIST.push('HM-RC-Key3-B');
 DEV_DESCRIPTION["HM-RC-Key3-B"] = "HM-RC-Key3-B";
 DEV_PATHS["HM-RC-Key3-B"] = new Object();
@@ -2896,6 +2926,12 @@ DEV_PATHS["HM-LC-Sw2-DR"]["250"] = "/config/img/devices/250/69_hm-lc-sw2-dr.png"
 DEV_HIGHLIGHT["HM-LC-Sw2-DR"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Sw2-DR"]["1"] = [4, 0.095, 0.556, 0.045, 0.04];
 DEV_HIGHLIGHT["HM-LC-Sw2-DR"]["2"] = [4, 0.285, 0.556, 0.045, 0.04];
+DEV_LIST.push('HmIP-eTRV-B');
+DEV_DESCRIPTION["HmIP-eTRV-B"] = "TRV-B";
+DEV_PATHS["HmIP-eTRV-B"] = new Object();
+DEV_PATHS["HmIP-eTRV-B"]["50"] = "/config/img/devices/50/180_hmip-etrv-b_thumb.png";
+DEV_PATHS["HmIP-eTRV-B"]["250"] = "/config/img/devices/250/180_hmip-etrv-b.png";
+DEV_HIGHLIGHT["HmIP-eTRV-B"] = new Object();
 DEV_LIST.push('HM-LC-Sw1-PB-FM');
 DEV_DESCRIPTION["HM-LC-Sw1-PB-FM"] = "HM-LC-Sw1-PB-FM";
 DEV_PATHS["HM-LC-Sw1-PB-FM"] = new Object();
@@ -4390,7 +4426,8 @@ elvST['POWERMETER|TX_THRESHOLD_VOLTAGE'] = '${stringTablePowerMeterTxThresholdVo
 elvST['POWERMETER|VOLTAGE'] = '${stringTablePowerMeterVoltage}';
 elvST['POWERUP_ACTION'] = '${stringTableDimmerPowerUpAction}';
 elvST['POWERUP_JUMPTARGET'] = '${stringTableDimmerPowerUpAction}';
-elvST['POWERUP_OFF'] = '${stringTablePowerUpOFF} ';
+elvST['POWERUP_OFF'] = '${stringTablePowerUpOFF}';
+elvST['POWERUP_OFFDELAY_VALUE'] = '${stringTableOffDelayValue}';
 elvST['POWERUP_ON'] = '${stringTablePowerUpON}';
 elvST['POWERUP_ONDELAY_UNIT'] = '${stringTableOnDelayUnit}';
 elvST['POWERUP_ONDELAY_UNIT=10M'] = '${optionUnit10M}';
@@ -4400,6 +4437,7 @@ elvST['POWERUP_ONDELAY_UNIT=1S'] = '${optionUnit1S}';
 elvST['POWERUP_ONDELAY_UNIT=5M'] = '${optionUnit5M}';
 elvST['POWERUP_ONDELAY_UNIT=5S'] = '${optionUnit5S}';
 elvST['POWERUP_ONDELAY_VALUE'] = '${stringTableOnDelayValue}';
+elvST['POWERUP_OFFTIME_UNIT'] = '${stringTableOffTimeUnit}';
 elvST['POWERUP_ONTIME_UNIT'] = '${stringTableOnTimeUnit}';
 elvST['POWERUP_ONTIME_UNIT=10M'] = '${optionUnit10M}';
 elvST['POWERUP_ONTIME_UNIT=10S'] = '${optionUnit10S}';
@@ -15016,8 +15054,8 @@ Page = Class.create({
  
 StartPage = Singleton.create(Page, {
   MAINMENU_ID: "MAINMENU_STARTPAGE",
-
-  downloadURL: "http://update.homematic.com/firmware/download?cmd=download",
+  downloadURL: (isHTTPS) ? "https://update.homematic.com:8443/firmware/download?cmd=download" : "http://update.homematic.com/firmware/download?cmd=download",
+  // https://update.homematic.com:8443/firmware/
   devList: [],
   devIndex: 0,
   newFwCounter: 0,
@@ -15031,7 +15069,6 @@ StartPage = Singleton.create(Page, {
    **/
   initialize: function ()
   {
-
     this.deviceList = [];
 
     switch (getUPL())
@@ -19223,14 +19260,18 @@ homematic.com =
 
   m_callback: null,
 
+  m_URLServer: "",
+
   init: function()
   {
+    this.m_URLServer = (isHTTPS) ? "https://update.homematic.com:8443" : "http://update.homematic.com";
+
     var serial = homematic("CCU.getSerial");
     // The server should return a string like "homematic.com.setLatestVersion('2.4.212');"
     var script = document.createElement("script");
     script.id = "homematic_com_script";
     script.type = "text/javascript";
-    script.src = "http://update.homematic.com/firmware/download?cmd=js_check_version&version="+WEBUI_VERSION+"&product=HM-CCU2&serial=" + serial;
+    script.src = this.m_URLServer + "/firmware/download?cmd=js_check_version&version="+WEBUI_VERSION+"&product=HM-CCU2&serial=" + serial;
     $("body").appendChild(script);
   },
 
@@ -19282,7 +19323,7 @@ homematic.com =
       var script = document.createElement("script");
       script.id = "homematic_com_script_" + index;
       script.type = "text/javascript";
-      script.src = "http://update.homematic.com/firmware/download?cmd=js_check_version&product=" + product + "&serial=0";
+      script.src =  this.m_URLServer + "/firmware/download?cmd=js_check_version&product=" + product + "&serial=0";
       $("body").appendChild(script);
       homematic.com.callback = callback;
   },
@@ -19292,7 +19333,7 @@ homematic.com =
       var script = document.createElement("script");
       script.id = "homematic_com_script_fw";
       script.type = "text/javascript";
-      script.src = "http://update.homematic.com/firmware/api/firmware/search/DEVICE";
+      script.src =  this.m_URLServer + "/firmware/api/firmware/search/DEVICE";
       $("body").appendChild(script);
       homematic.com.callback = callback;
   },
@@ -19306,8 +19347,8 @@ homematic.com =
     var script = document.createElement("script");
     script.id = "homematic_license_script";
     script.type = "text/javascript";
-    script.src = "http://update.homematic.com/firmware/download?cmd=release_note&product=HM-CCU2&serial=3014&version="+homematic.com.m_latestVersion+"&locale=" + lang;
-    //script.src = "http://172.25.50.224:8080/update/download?cmd=release_note&product=HM-CCU2&serial=3014&version=2.13.7&locale=" + lang;
+    script.src = this.m_URLServer + "/firmware/download?cmd=release_note&product=HM-CCU2&serial=3014&version="+homematic.com.m_latestVersion+"&locale=" + lang;
+
     $("body").appendChild(script);
     homematic.com.callback = callback;
   },
@@ -19345,8 +19386,6 @@ homematic.com =
   getCCU2LicenceText: function(result) {
     homematic.com.callback(result);
   }
-
-
 };
 /**
  * rega.js
@@ -37540,17 +37579,33 @@ TextColor = function(c)
   else    { return WebUI.getColor("gray"); }
 };
 
-Virtual_DimmerChannel_help = function(ch)
+Virtual_DimmerChannel_help = function(ch, lc)
 {
-  //if ($F("virtual_help_button_" + ch) == "Hilfe")
-  if ($F("virtual_help_button_" + ch) == translateKey("genericBtnTxtHelp"))
-  {
-    $("virtual_ch_help_" + ch).style.display = "inline";
-    $("virtual_help_button_" + ch).value = translateKey("genericBtnTxtHelpOff");
-  } else
-  {
-    $("virtual_ch_help_" + ch).style.display = "none";
-    $("virtual_help_button_" + ch).value = translateKey("genericBtnTxtHelp");
+  var virtualChHelpElm = jQuery("#virtual_ch_help_" + ch),
+    virtualChHelpElm2 = jQuery("#virtual_ch_help2_" + ch),
+    virtualHelpButtonElm = jQuery("#virtual_help_button_" + ch),
+    virtualHelpButtonElm2 = jQuery("#virtual_help_button2_" + ch);
+
+  if (lc != "lc2") {
+    if (virtualHelpButtonElm.val() == translateKey("genericBtnTxtHelp")) {
+      virtualChHelpElm2.hide();
+      virtualChHelpElm.show();
+      virtualHelpButtonElm.val(translateKey("genericBtnTxtHelpOff"));
+      virtualHelpButtonElm2.val(translateKey("genericBtnTxtHelp"));
+    } else {
+      virtualChHelpElm.hide();
+      virtualHelpButtonElm.val(translateKey("genericBtnTxtHelp"));
+    }
+  } else {
+    if (virtualHelpButtonElm2.val() == translateKey("genericBtnTxtHelp")) {
+      virtualChHelpElm.hide();
+      virtualChHelpElm2.show();
+      virtualHelpButtonElm.val(translateKey("genericBtnTxtHelp"));
+      virtualHelpButtonElm2.val(translateKey("genericBtnTxtHelpOff"));
+    } else {
+      virtualChHelpElm2.hide();
+      virtualHelpButtonElm2.val(translateKey("genericBtnTxtHelp"));
+    }
   }
 };
 

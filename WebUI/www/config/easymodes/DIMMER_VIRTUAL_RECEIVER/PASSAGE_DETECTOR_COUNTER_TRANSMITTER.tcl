@@ -372,6 +372,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set scvl SHORT_COND_VALUE_LO
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+  set scvh SHORT_COND_VALUE_HI
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 
@@ -451,6 +459,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set scvl SHORT_COND_VALUE_LO
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+  set scvh SHORT_COND_VALUE_HI
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #3
@@ -515,6 +531,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
   }
 
+  set scvl SHORT_COND_VALUE_LO
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+  set scvh SHORT_COND_VALUE_HI
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #4
@@ -578,6 +602,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
   }
+
+  set scvl SHORT_COND_VALUE_LO
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+  set scvh SHORT_COND_VALUE_HI
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

@@ -42,6 +42,9 @@
       <allowed_member_type>
         <member_type type="HM-RC-2-PBU-FM"/>
       </allowed_member_type>
+      <allowed_member_type>
+        <member_type type="ZEL STG RM FFK"/>
+      </allowed_member_type>
     </allowed_member_types>
     <group_type>
       <id>HomeMatic.heating</id>
@@ -560,6 +563,11 @@
                   <true>1</true>
                   <true>2</true>
                 </integer_converter>
+                <parameter_name>STATE</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="ZEL STG RM FFK"/>
+                <channel_index>1</channel_index>
                 <parameter_name>STATE</parameter_name>
               </mapping>
             </mappings>

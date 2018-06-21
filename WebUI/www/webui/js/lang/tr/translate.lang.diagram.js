@@ -132,7 +132,7 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeHIGHEST_ILLUMINATION" : langJSON.tr.stringTableHighestIllumination,
     "diagramValueTypeCURRENT_ILLUMINATION" : langJSON.tr.stringTableCurrentIllumination,
     "diagramValueTypeLOWEST_ILLUMINATION" : langJSON.tr.stringTableLowestIllumination,
-    "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.tr.stringTableAverageIllmination
+    "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.tr.stringTableAverageIllumination
   }
 });
 

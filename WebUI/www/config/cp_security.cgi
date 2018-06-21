@@ -292,10 +292,11 @@ proc action_backup_restore_check {} {
       set ccu1_backup true    
     }
     
-        set system_has_user_key [catch {exec crypttool -v -t 0}]
-        set stored_signature [exec cat signature]
-        set calculated_signature [exec crypttool -s -t 0 <usr_local.tar.gz]
-    if { "false" == $ccu1_backup } {        
+    set system_has_user_key [catch {exec crypttool -v -t 0}]
+    set stored_signature [exec cat signature]
+    set calculated_signature [exec crypttool -s -t 0 <usr_local.tar.gz]
+
+    if { "false" == $ccu1_backup } {
       set config_has_user_key [expr {"$stored_signature" != "$calculated_signature"} ]
     } else {  #CCU1 used an other default key. So we can´t check with crypttool.
       set config_has_user_key [exec cat key_index]

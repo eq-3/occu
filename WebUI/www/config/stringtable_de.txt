@@ -1041,7 +1041,8 @@ POWERMETER|TX_THRESHOLD_VOLTAGE	${stringTablePowerMeterTxThresholdVoltage}
 POWERMETER|VOLTAGE	${stringTablePowerMeterVoltage}
 POWERUP_ACTION	${stringTableDimmerPowerUpAction}
 POWERUP_JUMPTARGET	${stringTableDimmerPowerUpAction}
-POWERUP_OFF	${stringTablePowerUpOFF} 
+POWERUP_OFF	${stringTablePowerUpOFF}
+POWERUP_OFFDELAY_VALUE	${stringTableOffDelayValue}
 POWERUP_ON	${stringTablePowerUpON}
 POWERUP_ONDELAY_UNIT	${stringTableOnDelayUnit}
 POWERUP_ONDELAY_UNIT=10M	${optionUnit10M}
@@ -1051,6 +1052,7 @@ POWERUP_ONDELAY_UNIT=1S	${optionUnit1S}
 POWERUP_ONDELAY_UNIT=5M	${optionUnit5M}
 POWERUP_ONDELAY_UNIT=5S	${optionUnit5S}
 POWERUP_ONDELAY_VALUE	${stringTableOnDelayValue}
+POWERUP_OFFTIME_UNIT	${stringTableOffTimeUnit}
 POWERUP_ONTIME_UNIT	${stringTableOnTimeUnit}
 POWERUP_ONTIME_UNIT=10M	${optionUnit10M}
 POWERUP_ONTIME_UNIT=10S	${optionUnit10S}

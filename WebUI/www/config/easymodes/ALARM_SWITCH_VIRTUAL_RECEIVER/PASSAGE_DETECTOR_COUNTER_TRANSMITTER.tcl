@@ -221,6 +221,14 @@ set comment {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  set scvl SHORT_COND_VALUE_LO
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\" ><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvl\" value=\"$condTXDecisionBelow\"/></tr></td>"
+
+  set scvh SHORT_COND_VALUE_HI
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvh\" value=\"$condTXDecisionAbove\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 

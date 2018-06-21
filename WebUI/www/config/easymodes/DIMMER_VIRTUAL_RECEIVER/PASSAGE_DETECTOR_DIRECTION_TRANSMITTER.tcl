@@ -152,11 +152,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set condTXDecisionValue $sender_descrMaster(COND_TX_DECISION_ABOVE)
     set decisionValue "{SHORT_COND_VALUE_HI {int $condTXDecisionValue}}"
     set ps(SHORT_COND_VALUE_HI) $condTXDecisionValue
+    set scvlh SHORT_COND_VALUE_HI
 
   } elseif {$channel == 3} {
     set condTXDecisionValue $sender_descrMaster(COND_TX_DECISION_BELOW)
     set decisionValue "{SHORT_COND_VALUE_LO {int $condTXDecisionValue}}"
     set ps(SHORT_COND_VALUE_LO) $condTXDecisionValue
+    set scvlh SHORT_COND_VALUE_LO
   }
 
   catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"}
@@ -210,6 +212,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvlh\" value=\"$condTXDecisionValue\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 
@@ -241,6 +246,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
   }
 
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvlh\" value=\"$condTXDecisionValue\"/></tr></td>"
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #3
@@ -269,6 +277,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
   }
+
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"$scvlh\" value=\"$condTXDecisionValue\"/></tr></td>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

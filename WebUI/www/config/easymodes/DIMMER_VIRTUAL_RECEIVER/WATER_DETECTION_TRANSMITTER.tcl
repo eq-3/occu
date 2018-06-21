@@ -11,7 +11,8 @@ set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${dimmer_toggle}"
 set PROFILES_MAP(2)  "\${dimmer_on}"
 set PROFILES_MAP(3)  "\${dimmer_off}"
-set PROFILES_MAP(4)  "\${no_action}"
+set PROFILES_MAP(4)   "\${blink}"
+set PROFILES_MAP(5)  "\${no_action}"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)  "Expertenprofil"
@@ -19,6 +20,7 @@ set PROFILE_0(UI_TEMPLATE)    "Expertenprofil"
 
 # hier folgen die verschiedenen Profile
 
+set PROFILE_1(LONG_COND_VALUE_LO) 50
 set PROFILE_1(SHORT_COND_VALUE_HI) {150 range 0 - 255}
 set PROFILE_1(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 set PROFILE_1(SHORT_CT_OFF) {0 1 2 4}
@@ -66,7 +68,7 @@ set PROFILE_1(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
-
+set PROFILE_2(LONG_COND_VALUE_LO) 50
 set PROFILE_2(SHORT_COND_VALUE_HI) {150 range 0 - 255}
 set PROFILE_2(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 set PROFILE_2(SHORT_CT_OFF) {2 0 1 4}
@@ -89,8 +91,6 @@ set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_2(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.005}
-set PROFILE_2(SHORT_ON_TIME_BASE) {7 range 0 - 7}
-set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
 set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_2(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
@@ -100,6 +100,7 @@ set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 
+set PROFILE_3(LONG_COND_VALUE_LO) 50
 set PROFILE_3(SHORT_COND_VALUE_HI) {150 range 0 - 255}
 set PROFILE_3(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 set PROFILE_3(SHORT_CT_OFF) {2 0 1 4}
@@ -135,16 +136,57 @@ set PROFILE_3(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter
 set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
 
-
-set PROFILE_4(SHORT_JT_OFF)      0
-set PROFILE_4(SHORT_JT_ON)      0
-set PROFILE_4(SHORT_JT_OFFDELAY)  0
-set PROFILE_4(SHORT_JT_ONDELAY)    0
-set PROFILE_4(SHORT_JT_RAMPOFF) 0
+set PROFILE_4(LONG_COND_VALUE_LO) 51
+set PROFILE_4(SHORT_COND_VALUE_HI) {150 range 0 - 255}
+set PROFILE_4(SHORT_COND_VALUE_LO) {50 range 0 - 255}
+set PROFILE_4(SHORT_CT_OFF) {0 2 1 4}
+set PROFILE_4(SHORT_CT_OFFDELAY) {0 1 2 4}
+set PROFILE_4(SHORT_CT_ON) {0 1 2 4}
+set PROFILE_4(SHORT_CT_ONDELAY) {0 1 2 4}
+set PROFILE_4(SHORT_CT_RAMPOFF) {0 1 2 4}
+set PROFILE_4(SHORT_CT_RAMPON) {0 1 2 4}
+set PROFILE_4(SHORT_JT_OFF) 1
+set PROFILE_4(SHORT_JT_OFFDELAY) 3
+set PROFILE_4(SHORT_JT_ON) 3
+set PROFILE_4(SHORT_JT_ONDELAY) 3
+set PROFILE_4(SHORT_JT_RAMPOFF) 2
 set PROFILE_4(SHORT_JT_RAMPON) 0
-set PROFILE_4(UI_DESCRIPTION)  "Der Bewegungsmelder ist au&szlig;er Betrieb."
+set PROFILE_4(SHORT_MULTIEXECUTE) {0 false}
+set PROFILE_4(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_ON_TIME_BASE) {1 range 0 - 7}
+set PROFILE_4(SHORT_ON_TIME_FACTOR) {1 range 0 - 31}
+set PROFILE_4(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.005}
+set PROFILE_4(SHORT_ON_TIME_MODE) 0
+set PROFILE_4(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_OFF_TIME_BASE) {1 range 0 - 7}
+set PROFILE_4(SHORT_OFF_TIME_FACTOR) {1 range 0 - 31}
+set PROFILE_4(SHORT_OFF_TIME_MODE) 0
+set PROFILE_4(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_OFDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.005}
+set PROFILE_4(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_4(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_RAMPON_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_RAMPOFF_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_PROFILE_ACTION_TYPE) 1
+set PROFILE_4(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet.<br />"
 set PROFILE_4(UI_TEMPLATE)    $PROFILE_4(UI_DESCRIPTION)
 set PROFILE_4(UI_HINT)  4
+
+set PROFILE_5(SHORT_JT_OFF)      0
+set PROFILE_5(SHORT_JT_ON)      0
+set PROFILE_5(SHORT_JT_OFFDELAY)  0
+set PROFILE_5(SHORT_JT_ONDELAY)    0
+set PROFILE_5(SHORT_JT_RAMPOFF) 0
+set PROFILE_5(SHORT_JT_RAMPON) 0
+set PROFILE_5(UI_DESCRIPTION)  "Der Bewegungsmelder ist au&szlig;er Betrieb."
+set PROFILE_5(UI_TEMPLATE)    $PROFILE_5(UI_DESCRIPTION)
+set PROFILE_5(UI_HINT)  5
 
 # hier folgen die eventuellen Subsets
 
@@ -364,7 +406,52 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
-#4
+#4  Dimmer BLINK
+  incr prn
+  if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
+  append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${switchMode}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  append HTML_PARAMS(separate_$prn) "<tr><td></td></tr>"
+
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn blink $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
+  option DIM_ONLEVEL
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent(\$('${special_input_id}_profiles'),$pref);\""]
+  EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
+
+  # OFF_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
+
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_LEVEL}</td><td>"
+  option DIM_ONLEVEL
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent(\$('${special_input_id}_profiles'),$pref);\""]
+  EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
+
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
+#5
   incr prn
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"

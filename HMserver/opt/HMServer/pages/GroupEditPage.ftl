@@ -547,6 +547,7 @@
                         }
                     });
 
+                    /* This is not necessary when saving a group
                     ko.utils.arrayForEach(viewModel.assignableDevices(), function(item) {
                         if(item.device != undefined) {
                           //SetOperateGroupOnly(item, false)
@@ -554,9 +555,10 @@
 
                         if(item.getConfigPending())
                         {
-                            viewModel.devicesInConfigPending.push(item);
+                          //viewModel.devicesInConfigPending.push(item);
                         }
                     });
+                    */
 
                     if(viewModel.isNew()) {
                         var virtualSerialNumber = createVirtualDeviceSerialNumber(response.content);

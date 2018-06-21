@@ -558,6 +558,7 @@ jQuery.extend(true, langJSON, {
     "thVersion" : "Version",
     "thMinCCU" : "Minimum required CCU version",
     "submenuDeviceFirmware" : "Device firmware",
+    "submenuDeviceFirmwareInformation" : "Device firmware - overview",
     "addFirmwareMsgTitle" : "Device firmware",
     "addFirmwareMsgBody" : "Please select the firmware.",
     "addDevFirmwareInvalid" : "Error:<br/>Firmware file valid?",
@@ -637,6 +638,8 @@ jQuery.extend(true, langJSON, {
     "lblGeneralSettingsConditionNumber" : "Condition number",
     "lblInfoStatusControlGas" : "Consumption",
     "lblInfoLevelReal" : "Actual value",
+    "lblInfoLevelRealBrightness" : "Actual brightness",
+    "lblInfoColorReal" : "Acual color",
     "optionRGBWControllerPrg0" : "Off",
     "optionRGBWControllerPrg1" : "Slow cycle",
     "optionRGBWControllerPrg2" : "Normal cycle",
@@ -805,7 +808,7 @@ jQuery.extend(true, langJSON, {
     "dialogNewDevicesAddDeviceBtn" : "Teach-in HM<br/>device",
     "dialogNewDevicesHmIPAddDeviceBtn" : "Teach-in HmIP<br/>device",
     "dialogNewDevicesBidCosWiredLbl3" : "<h1>Teaching-in of "+HMIdentifier.en.LabelHomematicWiredText+" device with search function</h1>",
-    "dialogNewDevicesBidCosWiredLbl4" : HMIdentifier.en.LabelHomematicWiredText+" devices can be taught-in with the search function. Please click on the button &quot;Search HM Wired device&quot;. The CCU2 will then automatically teach-in all available "+HMIdentifier.en.LabelHomematicWiredText+" devices to your system.",
+    "dialogNewDevicesBidCosWiredLbl4" : HMIdentifier.en.LabelHomematicWiredText+" devices can be taught-in with the search function. Please click on the button &quot;Search HM Wired device&quot;. The CCU will then automatically teach-in all available "+HMIdentifier.en.LabelHomematicWiredText+" devices to your system.",
     "dialogNewDevicesBidCosWiredBtn" : "Search HM Wired<br/> device",
     "dialogNewDevicesBidCosWiredLbl1" : "<h1>Automatic teaching-in of "+HMIdentifier.en.LabelHomematicWiredText+" device</h1>",
     "dialogNewDevicesBidCosWiredLbl2" : HMIdentifier.en.LabelHomematicWiredText+" devices can be taught-in automatically. Therefore, activate the teach-in mode of your device.<br/><p><span class='CLASS21211' style='color:black'>Please note!<br/></span>Not all "+HMIdentifier.en.LabelHomematicWiredText+" devices support automatic teaching-in.</p>",
@@ -928,7 +931,7 @@ jQuery.extend(true, langJSON, {
     "msgNoGatewayFound" : "No Gateway found",
 
     "dialogDeleteCertificateTitle" : "Delete certificate",
-    "dialogSettingsNetworkLblDeleteCertificate" : "Remove certificate from CCU2",
+    "dialogSettingsNetworkLblDeleteCertificate" : "Remove certificate from CCU",
 
     "confirmCertificationPurgeA" : "If the certificate is deleted, you can no longer establish a secured connection to your "+HMIdentifier.en.CCUShortName+".",
     "confirmCertificationPurgeB" : "Do you really want to delete the certificate from the "+HMIdentifier.en.CCUShortName +"?",
@@ -951,9 +954,9 @@ jQuery.extend(true, langJSON, {
     "btnPresenceDetectionTrue" :                 "Switch off presence detection",
     "btnResetPresence" :                         "Reset status",
     "lblTDRegaVersion" :                         "Logic tier<br/>version",
-    "lblTDReGaVersionHelp" :                     "Here you can specify which logic layer version of the CCU2 should be used. Select the version <b>'Standard'</b> to be able to use bug fixes in the time module as well as new features like mathematical operations in scripts. " +
-                                                 "<br/><br/>Select the version <b>'Community'</b> for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU2 software. " +
-                                                 "<br/><br/>If any problems have occurred after the update to the current CCU2 software has been performed, you can change back to the previous version by selecting <b>'Legacy'</b>." ,
+    "lblTDReGaVersionHelp" :                     "Here you can specify which logic layer version of the CCU should be used. Select the version <b>'Standard'</b> to be able to use bug fixes in the time module as well as new features like mathematical operations in scripts. " +
+                                                 "<br/><br/>Select the version <b>'Community'</b> for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU software. " +
+                                                 "<br/><br/>If any problems have occurred after the update to the current CCU software has been performed, you can change back to the previous version by selecting <b>'Legacy'</b>." ,
 
     "optionReGaNORMAL" :                         "Standard",
     "optionReGaLEGACY" :                         "Legacy",
@@ -961,7 +964,7 @@ jQuery.extend(true, langJSON, {
     "dialogRestart2ChanceReGaVersion" :          "For the change of the logic tier version to apply, the " +HMIdentifier.en.CCUShortName + " must be restarted.",
     "dialogBtnPerformLaterRestart" :             "Later",
 
-    "lblAttentionNoPasswd" : "For security reasons, we recommend that you assign a password for the CCU2!",
+    "lblAttentionNoPasswd" : "For security reasons, we recommend that you assign a password for the CCU!",
     "dialogLblAckSecurityHint" : "I have read the above warning",
     "btnNext" : "Next",
 
@@ -1026,6 +1029,17 @@ jQuery.extend(true, langJSON, {
     "lblNormal" : "Normal",
     "lblOverflow" : "Overflow",
     "lblUnderflow" : "Underflow",
+
+    "lblAlarmTrigger" : "Alarm trigger",
+    "lblAlarmTiming" : "Alarm message",
+    "acousticAlarm" : "Acoustic signal",
+    "opticalAlarm" : "Visual signal",
+    "positionDetectionOFF" : "Position detection OFF",
+    "lblWaterDetectorMsg_Water" : "Message at water detection",
+    "lblWaterDetectorMsg_Dry" : "Message at dryness",
+    "lblWaterDetectorMsg_Moisture" : "Message at humidity detection",
+    "switchCommand" : "Switch command",
+    "deviceFirmwareInformation" : "Overview",
 
     "colorBLACK" : "Black",
     "colorBLUE" : "Blue",

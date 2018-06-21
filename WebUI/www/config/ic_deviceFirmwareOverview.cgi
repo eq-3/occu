@@ -42,14 +42,14 @@ proc put_headerElem {} {
      puts "<col width=\"auto\"/>"
    puts "</colgroup>"
 
-   puts "<th class=\"DeviceListHead\">Name</th>"
-   puts "<th class=\"DeviceListHead\">Typen-<br/>bezeichnung</th>"
-   puts "<th class=\"DeviceListHead\">Bild</th>"
-   puts "<th class=\"DeviceListHead\">Seriennummer</th>"
-   puts "<th class=\"DeviceListHead\">Firmware</th>"
-   puts "<th class=\"DeviceListHead\">Firmware available</th>"
+   puts "<th class=\"DeviceListHead\">\${thName}</th>"
+   puts "<th class=\"DeviceListHead\">\${thTypeDescriptor}</th>"
+   puts "<th class=\"DeviceListHead\">\${thPicture}</th>"
+   puts "<th class=\"DeviceListHead\">\${thSerialNumber}</th>"
+   puts "<th class=\"DeviceListHead\">\${thFirmware}</th>"
+   puts "<th class=\"DeviceListHead\">\${firmwareAvailOnCCU}</th>"
   # puts "<th class=\"DeviceListHead\">Firmware state</th>"
-   puts "<th class=\"DeviceListHead\">Action</th>"
+   puts "<th class=\"DeviceListHead\">\${thAction}</th>"
 
    put_filter
 
@@ -103,7 +103,8 @@ proc getHTML {val} {
 
     if {[string equal $val "AVAILABLE_FIRMWARE"] == 1} {
       if {([string equal $value "0.0"] == 1) || ([string equal $value "0.0.0"] == 1)} {
-        set value $dev_descr(FIRMWARE);
+        # set value $dev_descr(FIRMWARE)
+        set value " -- "
       }
     }
     set html "<td name='$val'>$value</td>"
@@ -298,6 +299,8 @@ cgi_eval {
         append footerHtml "<tr>"
          append footerHtml "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>\${footerBtnPageBack}</div></td>"
           append footerHtml "<td align='center' valign='middle'><div class='FooterButton CLASS04312' onclick='resetFilter();'>\${footerBtnResetFilter}</div></td>"
+          append footerHtml "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(DeviceFirmware);'>\${submenuDeviceFirmware}</div></td>"
+
         append footerHtml "</tr>"
       append footerHtml "</table>"
 
