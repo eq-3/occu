@@ -5228,6 +5228,10 @@ application {
 	background-color:$_(inactiveBackground) ! important;
 }
 
+.CLASS02539a {
+	background-color:$_(white) ! important;
+}
+
 .CLASS02540 {
 	text-align:center;
 	/*width:100%;*/

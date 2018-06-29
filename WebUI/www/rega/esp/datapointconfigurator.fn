@@ -1323,10 +1323,13 @@ function ::HideCertainParameters() {
   string param2Exclude = "IDENTIFY_DURATION,IDENTIFICATION_MODE_KEY_VISUAL,IDENTIFICATION_MODE_LCD_BACKLIGHT,IDENTIFY_TARGET_LEVEL";
 
   showParam = true;
-  foreach (tmp, param2Exclude.Split(",")) {
-    if (oDP.HSSID().Find(tmp) != -1) {
-      showParam = false;
-      return;
+  ! Check if datapoint is no sysvar
+  if (! oDP.IsTypeOf( OT_VARDP )) {
+    foreach (tmp, param2Exclude.Split(",")) {
+      if (oDP.HSSID().Find(tmp) != -1) {
+        showParam = false;
+        return;
+      }
     }
   }
   return;

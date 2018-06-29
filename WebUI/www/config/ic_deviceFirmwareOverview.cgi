@@ -95,14 +95,15 @@ proc put_end_body {} {
 }
 
 proc getHTML {val} {
-  global dev_descr
+  global iface dev_descr
+  set bidcosWiredID "BidCos-Wired"
 
   set html ""
   if { ! [catch {set tmp $dev_descr($val)}]  } {
     set value $dev_descr($val)
 
     if {[string equal $val "AVAILABLE_FIRMWARE"] == 1} {
-      if {([string equal $value "0.0"] == 1) || ([string equal $value "0.0.0"] == 1)} {
+      if {([string equal $value "0.0"] == 1) || ([string equal $value "0.0.0"] == 1) || ([string equal $iface $bidcosWiredID] == 1)} {
         # set value $dev_descr(FIRMWARE)
         set value " -- "
       }
@@ -130,7 +131,8 @@ proc getActionPanel {} {
         if {([string equal $dev_descr(AVAILABLE_FIRMWARE) "0.0.0"] != 1)  && ($dev_descr(AVAILABLE_FIRMWARE) != $dev_descr(FIRMWARE))} then {
           set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\" ><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
         } else {
-          set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22008 noBorder\">- -</td></tr>"
+          # set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22008 noBorder\">- -</td></tr>"
+          set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22008 noBorder\"></td></tr>"
         }
       }
     } else {
@@ -232,6 +234,7 @@ cgi_eval {
         } else {
           if {
             ([string equal $dev_descr(TYPE) "HM-RCV-50"] != 1)
+            && ([string equal $dev_descr(TYPE) "HMW-RCV-50"] != 1)
             && ([string first "VIR-" $dev_descr(TYPE)] == -1)
             && ([string equal $dev_descr(TYPE) "HM-CC-VG-1"] != 1)
             && ([string equal $dev_descr(TYPE) "HmIP-HEATING"] != 1)

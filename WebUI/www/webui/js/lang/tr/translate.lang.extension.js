@@ -633,7 +633,7 @@ jQuery.extend(true,langJSON, {
     "lblInfoStatusControlGas" : "T%FCketim",
     "lblInfoLevelReal" : "G%FCncel dege",
     "lblInfoLevelRealBrightness" : "Actual brightness",
-    "lblInfoColorReal" : "Acual color",
+    "lblInfoColorReal" : "Actual color",
     "optionRGBWControllerPrg0" : "Kapali",
     "optionRGBWControllerPrg1" : "Yavas gecis",
     "optionRGBWControllerPrg2" : "Normal gecis",
