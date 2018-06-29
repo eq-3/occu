@@ -639,7 +639,7 @@ jQuery.extend(true, langJSON, {
     "lblInfoStatusControlGas" : "Consumption",
     "lblInfoLevelReal" : "Actual value",
     "lblInfoLevelRealBrightness" : "Actual brightness",
-    "lblInfoColorReal" : "Acual color",
+    "lblInfoColorReal" : "Actual color",
     "optionRGBWControllerPrg0" : "Off",
     "optionRGBWControllerPrg1" : "Slow cycle",
     "optionRGBWControllerPrg2" : "Normal cycle",
