@@ -30666,7 +30666,7 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
 
     this.state = this.initState;
 
-    this.Perc.value = (this.levelStatus != 0) ? "??" : this.initState;
+    this.Perc.value = (this.levelStatus > 0) ? "??" : this.initState;
 
     this.shutter.setValue(this.initState);
 
@@ -30682,7 +30682,7 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
       this.initSliderInfoElm();
       this.initSlider();
       this.sliderElm.slider('value', this.levelSlats);
-      this.sliderInfoElm.val((this.levelSlatsStatus != 0) ? "??" : this.levelSlats);
+      this.sliderInfoElm.val((this.levelSlatsStatus > 0) ? "??" : this.levelSlats);
     }
     this.blockElements();
   },
@@ -30693,7 +30693,7 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
     controlOperableAuto = "auto",
       activityState = parseInt(this.opts.activityStateRealChannel);
 
-    if (this.levelStatus != 0) {
+    if (this.levelStatus > 0) {
       jQuery("#shutter" + this.id).css("pointer-events", controlOperableNone); // visual blind element
       jQuery("#" + this.Perc.id).css("pointer-events", controlOperableNone);   // text value in %
       $(this.divPercUp).stopObserving('click');                                // up button
@@ -30705,7 +30705,7 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
       //}
     }
 
-    if (! isNaN(this.levelSlatsStatus) && this.levelSlatsStatus != 0) {
+    if (! isNaN(this.levelSlatsStatus) && this.levelSlatsStatus > 0) {
       jQuery("#tdSlider" + this.id).css("pointer-events", controlOperableNone);
     }
   },
