@@ -97,6 +97,7 @@ proc put_end_body {} {
 proc getHTML {val} {
   global iface dev_descr
   set bidcosWiredID "BidCos-Wired"
+  set tdID ""
 
   set html ""
   if { ! [catch {set tmp $dev_descr($val)}]  } {
@@ -108,7 +109,11 @@ proc getHTML {val} {
         set value " -- "
       }
     }
-    set html "<td name='$val'>$value</td>"
+    if {[string equal $val "FIRMWARE"] == 1} {
+      set html "<td id='deviceFirmware_$dev_descr(ADDRESS)' name='$val'>$value</td>"
+    } else {
+      set html "<td name='$val'>$value</td>"
+    }
   } else {
    set html  "<td name='$val'> -- </td>"
   }
@@ -124,7 +129,7 @@ proc getActionPanel {} {
 
    # This was the initial test button > set html "<td><div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"alert('OK');\">Einstellen</div><td>"
 
-   set tableCell "<table class=\"j_translate tTable filterTable noBorder marginAuto\" style=cellspacing=\"0\">"
+   set tableCell "<table id=\"id_firmware_table_$dev_descr(ADDRESS)\" class=\"j_translate tTable filterTable noBorder marginAuto\" style=cellspacing=\"0\">"
 
    if {($iface != $HmIPIdentifier) && ($iface != $HmIPWIdentifier)} {
       catch {

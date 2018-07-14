@@ -57,7 +57,7 @@ proc getMaintenance {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableLocalResetDisable}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
     append html "</tr>"
   }
 
@@ -1726,8 +1726,6 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
   if {[string equal [string range $address 0 2] "INT"] == 1} {
     set isGroup "_group"
   }
-
-  puts "isGroup: $isGroup<br/>"
 
   set weeklyPrograms 3
 

@@ -1139,7 +1139,7 @@ proc put_Header {} {
   append SENTRY(IMAGE) "Draw(jg_thumb, '$dev_descr(TYPE)', 50, '-1' );"
   append SENTRY(IMAGE) "</script>"
 
-  set SENTRY(FIRMWARE) "<table id=\"id_firmware_table\" cellspacing=\"0\">"
+  set SENTRY(FIRMWARE) "<table id=\"id_firmware_table_$address\" class=\"id_firmware_table\" cellspacing=\"0\">"
   #append SENTRY(FIRMWARE) "<tr><td>Version:</td><td class=\"CLASS22006\">$dev_descr(FIRMWARE)</td></tr>"
   append SENTRY(FIRMWARE) "<tr><td>\${lblFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(FIRMWARE)</td></tr>"
   if {$MODE == "DEVICEPARAMETERS"} then {
@@ -1170,6 +1170,11 @@ proc put_Header {} {
             set fw_update_rows "<tr><td class=\"CLASS22008\"><div>\${lblDeviceFwDeliverFwImage}</div><div class=\"StdTableBtnHelp\"><img id=\"hmIPDeliverFirmwareHelp\" height=\"24\" width=\"24\"src=\"/ise/img/help.png\"></div></td></tr>"
           }
 
+          "DO_UPDATE_PENDING" -
+          "PERFORMING_UPDATE" {
+            set fw_update_rows "<tr><td class=\"CLASS22006\">"+translateKey('lblDeviceFwPerformUpdate')+"</td></tr>"
+          }
+
           "READY_FOR_UPDATE" {
             set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
             append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
@@ -1182,14 +1187,14 @@ proc put_Header {} {
     }
     append SENTRY(FIRMWARE) $fw_update_rows
 
-        puts {
-          <script type="text/javascript">
-            var tooltipHTML = "<div>"+translateKey("tooltipHmIPDeliverFirmwareImage");+"</div>",
-            tooltipElem = jQuery("#hmIPDeliverFirmwareHelp") ;
-            tooltipElem.data('powertip', tooltipHTML);
-            tooltipElem.powerTip({placement: 'sw', followMouse: false});
-          </script>
-        }
+    puts {
+      <script type="text/javascript">
+        var tooltipHTML = "<div>"+translateKey("tooltipHmIPDeliverFirmwareImage");+"</div>",
+        tooltipElem = jQuery("#hmIPDeliverFirmwareHelp") ;
+        tooltipElem.data('powertip', tooltipHTML);
+        tooltipElem.powerTip({placement: 'sw', followMouse: false});
+      </script>
+    }
 
   }
   append SENTRY(FIRMWARE) "</table>"

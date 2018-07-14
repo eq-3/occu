@@ -218,6 +218,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "EVENT_FILTER_NUMBER_motionDetect" {set x 400; set y 60}
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
+   "LOCAL_RESET_DISABLED" {set x 500; set y 130}
    "PERMANENT_FULL_RX" {set x 500; set y 160}
    "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
    "SPDR_CHANNEL_MODE" {set x 600; set y 600}

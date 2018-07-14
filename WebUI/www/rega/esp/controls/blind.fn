@@ -275,19 +275,16 @@ function ::CreateBlindVirtualReceiver()
 
   WriteLine( "<script>conInfo('CreateBlindVirtualReceiver - realChannel: "#realChannelAddress#"');</script>" );
 
-  real levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL").Value();
-  real levelRealChannelSlats =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_2").Value();
+  object levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL");
+  object levelRealChannelSlats =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_2");
 
-  integer levelStatusRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_STATUS").Value();
-  integer level_2_StatusRealChannelSlats =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_2_STATUS").Value();
-  integer activityStateRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".ACTIVITY_STATE").Value();
+  object levelStatusRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_STATUS");
+  object level_2_StatusRealChannelSlats =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_2_STATUS");
+  object activityStateRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".ACTIVITY_STATE");
 
   object oLvl = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL");
   object oLvlSlats = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_2");
   object oStop = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.STOP");
-
-  ! integer levelStatusRealChannel =  cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_STATUS").Value();
-  ! integer level_2_StatusRealChannelSlats =  cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL_2_STATUS").Value();
 
   integer iLvlId = 0;
   integer iLvlSlatsId = 0;
@@ -430,13 +427,31 @@ function ::CreateBlindVirtualReceiver()
       WriteLine("levelValue:"#iLvl#",");
       WriteLine("levelSlatsID:"#iLvlSlatsId#",");
       WriteLine("levelSlatsValue:"#iLvlSlats#",");
-      WriteLine("levelRealChannel:'"#levelRealChannel#"',");
-      WriteLine("levelStatusRealChannel:'"#levelStatusRealChannel#"',");
-
-      WriteLine("levelRealChannelSlatsValue:'"#levelRealChannelSlats#"',");
-      WriteLine("levelStatusRealChannelSlatsValue:'"#level_2_StatusRealChannelSlats#"',");
-      WriteLine("activityStateRealChannel:'"#activityStateRealChannel#"',");
-
+      if (levelRealChannel) {
+        WriteLine("levelRealChannel:'"#levelRealChannel.Value()#"',");
+      } else {
+        WriteLine("levelRealChannel: -1,");
+      }
+      if (levelStatusRealChannel) {
+        WriteLine("levelStatusRealChannel:'"#levelStatusRealChannel.Value()#"',");
+      } else {
+        WriteLine("levelStatusRealChannel: -1,");
+      }
+      if (levelRealChannelSlats) {
+        WriteLine("levelRealChannelSlatsValue:'"#levelRealChannelSlats.Value()#"',");
+      } else {
+        WriteLine("levelRealChannelSlatsValue: -1,");
+      }
+      if (level_2_StatusRealChannelSlats) {
+        WriteLine("levelStatusRealChannelSlatsValue:'"#level_2_StatusRealChannelSlats.Value()#"',");
+      } else {
+        WriteLine("levelStatusRealChannelSlatsValue: -1,");
+      }
+      if (activityStateRealChannel) {
+        WriteLine("activityStateRealChannel:'"#activityStateRealChannel.Value()#"',");
+      } else {
+        WriteLine("activityStateRealChannel: -1,");
+      }
       WriteLine("easyLinkMode: "#user.UserEasyLinkMode());
     WriteLine("};");
 
@@ -448,7 +463,6 @@ function ::CreateBlindVirtualReceiver()
 
 function ::CreateShutterVirtualReceiver()
 {
-
   object oUser = dom.GetObject( system.GetSessionVar('sessionUserID'));
   integer userID = oUser.ID();
   object user = dom.GetObject(userID);
@@ -467,9 +481,9 @@ function ::CreateShutterVirtualReceiver()
   ! Determine the address of the real channel
   string realChannelAddress = devAddress#":"# ch.MetaData("RealChannel");
 
-  real levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL").Value();
-  integer levelStatusRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_STATUS").Value();
-  integer activityStateRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".ACTIVITY_STATE").Value();
+  object levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL");
+  object levelStatusRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_STATUS");
+  object activityStateRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".ACTIVITY_STATE");
 
   object oLvl = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.LEVEL");
   object oStop = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.STOP");
@@ -568,9 +582,22 @@ function ::CreateShutterVirtualReceiver()
       WriteLine("chnAddress:'"#chnAddress#"',");
       WriteLine("levelD:"#iLvlId#",");
       WriteLine("levelValue:"#iLvl#",");
-      WriteLine("levelRealChannel:'"#levelRealChannel#"',");
-      WriteLine("levelStatusRealChannel:'"#levelStatusRealChannel#"',");
-      WriteLine("activityStateRealChannel:'"#activityStateRealChannel#"',");
+      if (levelRealChannel) {
+        WriteLine("levelRealChannel:'"#levelRealChannel.Value()#"',");
+      } else {
+        WriteLine("levelRealChannel: -1,");
+      }
+      if (levelStatusRealChannel) {
+        WriteLine("levelStatusRealChannel:'"#levelStatusRealChannel.Value()#"',");
+      } else {
+        WriteLine("levelStatusRealChannel: -1,");
+      }
+      if (activityStateRealChannel) {
+        WriteLine("activityStateRealChannel:'"#activityStateRealChannel.Value()#"',");
+      } else {
+        WriteLine("activityStateRealChannel: -1,");
+      }
+
       WriteLine("easyLinkMode: "#user.UserEasyLinkMode());
     WriteLine("};");
 

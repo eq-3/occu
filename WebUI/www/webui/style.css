@@ -1452,14 +1452,14 @@ div.caption  { display: table-caption; }
 	background-color: $_(background); /* #183473 */
 }
 
-#ic_deviceparameters #id_firmware_table
+#ic_deviceparameters .id_firmware_table
 {
 	width: 100%;
 }
 
-#ic_deviceparameters #id_firmware_table tr td
+#ic_deviceparameters .id_firmware_table tr td
 {
-	border: 0;
+	border: 0 !important;
 }
 
 #ic_deviceparameters #DeviceInformation

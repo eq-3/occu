@@ -327,6 +327,8 @@ proc cmd_firmware_update {} {
 
   set url $iface_url($iface)
 
+  array set devDescr [xmlrpc $url getDeviceDescription [list string $address]]
+
   if {($iface != $HmIPIdentifier)  && ($iface != $HmIPWiredIdentifier)} {
     catch {xmlrpc $url updateFirmware [list string $address]} result
   } else {
@@ -343,20 +345,125 @@ proc cmd_firmware_update {} {
     puts "</script>"
   } else {
     # The errorCode is the error as an integer as returned from the xmlrpc call 'updateFirmware' and can be -1, -2 and so on
-    # errorCode -1 = rfd says 'Device not reachable'
+    # errorCode -1 = Device not reachable
+    # errorCode -2 = Invalid access point, device or channel
+    # errorCode -3 = Unknown Parametset
+    # errorCode -5 = Invalid parameter or value
     # errorCode -10 = Legacy API says 'Transmission Pending'
+
     set errorCode [getFwUpdateError "faultCode=" $result]
     set userHint ""
     if {$errorCode == -1 || $errorCode == -10} {
-      set userHint "fwUpdatePressConfigKey"
+      set userHint "fwUpdatePressSystemKey"
     }
+
     # The errorString is the error in plain text as returned from the xmlrpc call 'updateFirmware'
     set errorString [getFwUpdateError "faultString=" $result]
 
     if {$errorCode == -1} {
-      puts "<script type=\"text/javascript\">ShowErrorMsg(\"$errorString\" + \"<br/><br/>\" + translateKey(\"dialogFirmwareUpdateFailed\") +\"<br/><br/>\"+ translateKey(\"$userHint\"));</script>"
+      # puts "<script type=\"text/javascript\">ShowErrorMsg(\"$errorString\" + \"<br/><br/>\" + translateKey(\"dialogFirmwareUpdateFailed\") +\"<br/><br/>\"+ translateKey(\"$userHint\"));</script>"
+      puts "<script type=\"text/javascript\">ShowErrorMsg(translateKey(\"dialogFirmwareUpdateFailed\") +\"<br/><br/>\"+ translateKey(\"$userHint\"));</script>"
     } else {
-      puts "<script type=\"text/javascript\">ShowErrorMsg(\"$errorString\" + \"<br/><br/>\" + translateKey(\"$userHint\"));</script>"
+     cgi_javascript {
+      # puts "ShowInfoMsg('$errorString' + '<br/><br/>' + translateKey('$userHint'));"
+      puts "ShowInfoMsg(translateKey('$userHint'));"
+
+      # This is for the HmIP-SWSD
+      if {[string equal $devDescr(TYPE) "HmIP-SWSD"] != -1} {
+        puts "var iface = \"$iface\","
+        puts "address = \"$address\";"
+        puts "var devDescr = homematic(\"Interface.getDeviceDescription\", {\"interface\": iface, \"address\": address});"
+        puts {
+
+            var fwInfoPanelElm = jQuery("#id_firmware_table_" + address),
+            fwOverviewPageTDFirmware = jQuery("#deviceFirmware_" + address);
+
+            var firmwareUpdateState = devDescr.firmwareUpdateState,
+            firmware = devDescr.firmware,
+            availableFW = devDescr.availableFirmware;
+
+            // Zeige "Gerät nicht erreichbar, drücke Konfig-Button" und prüfe 5 Minuten lang, ob sich der Status ändert.
+            //Ändert sich der Status nicht, zeige wieder den Update-Button,
+            //Ändert sich der Status, starte entsprechende Aktion
+
+            // Zeige initial Config Pending
+            if (firmwareUpdateState == "READY_FOR_UPDATE") {
+              fwInfoPanelElm.html("<tr><td>"+translateKey('lblPressSystemButton')+"</td></tr>");
+            } else {
+              fwInfoPanelElm.html("<tr><td></td></tr>");
+            }
+
+            var maxChecks = 60, // 60 Checks alle 5 Sekunden = 300 Sekunden = 5 Min
+            numberOfChecks = 0,
+            interval = 5000; // Prüfe alle 5 Sekunden
+
+            var intervalCheckState = setInterval(function() {
+              conInfo("Check state");
+
+              // Hole devDescr des Gerätes
+              var result = homematic("Interface.getDeviceDescription", {"interface": iface, "address": address}),
+              firmwareUpdateState = result.firmwareUpdateState,
+              firmware = result.firmware,
+              availableFW = result.availableFirmware;
+
+              conInfo("firmwareUpdateState: " + firmwareUpdateState);
+
+              switch (firmwareUpdateState) {
+                case "READY_FOR_UPDATE":
+                  // As long as the user didn't press the config button of the SWSD the firmwareUpdateState is "READY_FOR_UPDATE"
+                  fw_update_rows = "<tr><td>"+translateKey('lblPressSystemButton')+"</td></tr>";
+                  fwInfoPanelElm.html(fw_update_rows);
+                  break;
+                case "DO_UPDATE_PENDING":
+                case "PERFORMING_UPDATE":
+                  // This shouldn't last very long - some seconds maximum.
+                  if (InfoMsg) {
+                      InfoMsg.hide();
+                  }
+                  fw_update_rows = "<tr><td class=\"CLASS22006\">"+translateKey('lblDeviceFwPerformUpdate')+"</td></tr>"
+                  fwInfoPanelElm.html(fw_update_rows);
+                  break;
+                case "UP_TO_DATE":
+                  // Firmware successful delivered - Show actual firmware and stop checking.
+                  if (InfoMsg) {
+                      InfoMsg.hide();
+                  }
+                  fw_update_rows = "<tr><td>"+translateKey('lblFirmwareVersion')+"</td><td class=\"CLASS22006\">"+firmware+"</td></tr>";
+
+                    if (fwOverviewPageTDFirmware.length == 1) {
+                      // This is the firmware overview page
+                      fwOverviewPageTDFirmware.text(firmware);
+                      fwInfoPanelElm.html("");
+                    } else {
+                      // this is the device parameter page
+                      fwInfoPanelElm.html(fw_update_rows);
+                    }
+                  clearInterval(intervalCheckState);
+                  break;
+              }
+
+              numberOfChecks++;
+              if (numberOfChecks >= maxChecks) {
+                clearInterval(intervalCheckState);
+
+                if (InfoMsg) {
+                    InfoMsg.hide();
+                }
+                var fw_update_rows = "";
+                if (fwOverviewPageTDFirmware.length != 1) {
+                  // this is the device parameter page
+                  // Show the normal fwInfoPanelElm (Version: xxx, available Version and Update Button)
+                  fw_update_rows += "<tr><td>"+translateKey('lblFirmwareVersion')+"</td><td class=\"CLASS22006\">"+firmware+"</td></tr>" +
+                  "<tr><td>"+translateKey('lblAvailableFirmwareVersion')+"</td><td class=\"CLASS22006\">"+availableFW+"</td></tr>";
+                }
+                // This is for the firmware overview page AND the device parameter page (Update Button)
+                fw_update_rows += "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">"+translateKey('lblUpdate')+"</span></td></tr>";
+                fwInfoPanelElm.html(fw_update_rows);
+              }
+            }, interval);
+          }
+        }
+      }
     }
   }
 }

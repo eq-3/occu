@@ -19,7 +19,7 @@ jQuery.extend(true,langJSON, {
     "stringTableIdentifyDuration" : "Duration of lighting",
     "stringTableIdentifyTargetLevel" : "Brightness value of lighting",
 
-    "lblPressCfgButton" : "Please press the config key and bring the device into radio range.",
+    "lblPressSystemButton" : "Please press the system key and bring the device into radio range.",
 
     "COMMENT" : "************* THIS is for the release CCU3 B1/2018 *************",
     "COMMENT" : " (DRAP Integration)",

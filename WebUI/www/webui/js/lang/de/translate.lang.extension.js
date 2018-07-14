@@ -576,6 +576,9 @@ jQuery.extend(true,langJSON, {
     "fwUpdatePressConfigKey" :
       "Bringen Sie das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" und dr%FCcken Sie die Konfigurations-Taste. "+
       "Anschlie%DFend startet das Firmwareupdate.",
+    "fwUpdatePressSystemKey" :
+      "Bringen Sie das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" und dr%FCcken Sie die System-Taste. "+
+      "Anschlie%DFend startet das Firmwareupdate.",
     "partyModeDialogTitle" : "Hier k%F6nnen Sie den Party-/Urlaubsmodus einstellen.",
     "partyStart" : "Startzeit",
     "partyEnd" : "Endzeit",

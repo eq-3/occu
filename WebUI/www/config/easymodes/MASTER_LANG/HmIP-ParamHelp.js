@@ -91,7 +91,13 @@ jQuery.extend(true,langJSON, {
     "MIN_INTERVAL" :
       "Der Bewegungsmelder meldet die erste erkannte Bewegung sofort, weitere Bewegungen dann erneut wieder nach der hier gew%E4hlten Zeit.",
     "MIN_INTERVAL_PRESENCE" :
-      "Der Pr%E4senzmelder meldet die erste erkannte Bewegung sofort, weitere Bewegungen dann erneut wieder nach der hier gew%E4hlten Zeit."
+      "Der Pr%E4senzmelder meldet die erste erkannte Bewegung sofort, weitere Bewegungen dann erneut wieder nach der hier gew%E4hlten Zeit.",
+
+    "LOCAL_RESET_DISABLED" : "Bitte beachten Sie, dass dieses Ger%E4t nach Aktivierung dieser Funktion nicht mehr %FCber die Ger%E4tetaste zur%FCckgesetzt werden kann. " +
+    "Ein Zur%FCcksetzten des Ger%E4ts ist in diesem Fall nur noch %FCber die Zentrale m%F6glich.<br/><br/>" +
+    "<b>Bitte erstellen Sie vor Aktivierung der Funktion ein Backup Ihrer Zentrale, in dem dieses Ger%E4t bereits enthalten ist.</b>",
+
+    "noMoreHelp" : ""
   },
 
   "en" : {
@@ -184,6 +190,13 @@ jQuery.extend(true,langJSON, {
       "The motion detector reports the first detected movement immediately, then further movements again after the time selected here.",
     "MIN_INTERVAL_PRESENCE" :
       "The presence sensor reports the first detected movement immediately, then further movements again after the time selected here.",
+
+    "LOCAL_RESET_DISABLED" : "Please note that the factory settings of this device can no longer be restored via the device button after activating this function. " +
+    "In this case, the device reset is only possible via the Central Control Unit.<br/><br/>" +
+    "<b>Before activation of this function, please create a backup of your Central Control Unit that already includes this device.</b>",
+
+    "noMoreHelp" : ""
+
     },
 
   "tr" : {
@@ -275,6 +288,11 @@ jQuery.extend(true,langJSON, {
     "MIN_INTERVAL_PRESENCE" :
       "The presence sensor reports the first detected movement immediately, then further movements again after the time selected here.",
 
+    "LOCAL_RESET_DISABLED" : "Please note that the factory settings of this device can no longer be restored via the device button after activating this function. " +
+    "In this case, the device reset is only possible via the Central Control Unit.<br/><br/>" +
+    "<b>Before activation of this function, please create a backup of your Central Control Unit that already includes this device.</b>",
+
+    "noMoreHelp" : ""
   }
 });
 
