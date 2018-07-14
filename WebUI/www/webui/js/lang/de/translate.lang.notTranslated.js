@@ -19,7 +19,7 @@ jQuery.extend(true,langJSON, {
     "stringTableIdentifyDuration" : "Dauer der Beleuchtung",
     "stringTableIdentifyTargetLevel" : "Helligkeitswert der Beleuchtung",
 
-    "lblPressCfgButton" : "Bitte bet%E4tigen Sie die Konfig-Taste und bringen das Ger%E4t in Funkreichweite.",
+    "lblPressSystemButton" : "Bitte bet%E4tigen Sie die System-Taste und bringen das Ger%E4t in Funkreichweite.",
 
     "COMMENT" : "************* THIS is for the release CCU3 B1/2018 *************",
     "COMMENT" : " (DRAP Integration)",

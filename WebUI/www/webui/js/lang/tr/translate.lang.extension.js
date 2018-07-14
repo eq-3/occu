@@ -567,6 +567,9 @@ jQuery.extend(true,langJSON, {
     "delDevFirmwareMsgBody" : "Donanim yazilimini sistemden gercgekten kaldirmak istiyor musunuz?",
     "fwUpdatePressConfigKey" :
       "Cihazi "+HMIdentifier.tr.CCUShortName+"  sinyal araligina getirin ve konfig%FCrasyon tusuna basin. Ardindan donanim yazilimi g%FCncellemesi baslar.",
+    "fwUpdatePressSystemKey" :
+      "Please place the device in radio range of the "+HMIdentifier.en.CCUShortName+" and press the system key! "+
+      "Afterwards, the firmware update will be performed.",
     "partyModeDialogTitle" : "Buradan parti/tatil modunu ayarlayabilirsiniz.",
     "partyStart" : "Baslangic saati",
     "partyEnd" : "Bitis saati",

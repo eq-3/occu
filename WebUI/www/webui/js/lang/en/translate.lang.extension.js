@@ -570,9 +570,15 @@ jQuery.extend(true, langJSON, {
     "delDevFirmwareSuccessB" : " deleted",
     "delDevFirmwareMsgTitle" : "Confirmation!",
     "delDevFirmwareMsgBody" : "Do you really want to remove the firmware?",
+
     "fwUpdatePressConfigKey" :
       "Please place the device in radio range of the "+HMIdentifier.en.CCUShortName+" and press the configuration key! "+
       "Afterwards, the firmware update will be performed.",
+
+    "fwUpdatePressSystemKey" :
+      "Please place the device in radio range of the "+HMIdentifier.en.CCUShortName+" and press the system key! "+
+      "Afterwards, the firmware update will be performed.",
+
     "partyModeDialogTitle" : "Please set the party/holiday mode here.",
     "partyStart" : "Start",
     "partyEnd" : "End",
