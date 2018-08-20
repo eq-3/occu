@@ -34,18 +34,26 @@ jQuery.extend(true,langJSON, {
     "lblAccessPointSettings2" : "en* help2",
 
     "submenuAccessPointSettings" : "en* Homematic IP Access Points",
+    "submenuNewAccessPoints" : "en* Neu",
     "thAccessPointName" : "en* Name",
     "thAccessPoint" : "en* Access Point",
     "thAccessPointID" : "en* Access Point ID",
     "thAccessPointType" : "en* Typ",
-    "thAccessPointVersion" : "en* Versionen",
+    "thAccessPointVersion" : "en* Hauptprozessor",
+    "thAccessPointVersionCoprocessor" : "en* Co-Prozessor",
     "thAccessPointAvailableVersion" : "en* Verf%FCgbare Versionen",
     "thAccessPointIP" : "en* IP-Adresse",
     "thAccessPointState" : "en* Status",
-    "accessPointPassphrase" : "en* Passwort (UDP/NetFinder, Default siehe Ger%E4t)",
-    "accessPointLocalKey" : "en* Offlinebetrieb Aktiv und Schl%FCssel (siehe QR-Code Sticker)",
-    "accessPointForceDelete" : "en* L%F6schen erzwingen (ohne Reset am Ger%E4t)",
-    "notAvailable" : "-",
+
+    "accessPointPassphrase" : "en* Passwort",
+    "accessPointPassphraseA" : "en* (UDP/NetFinder, Default siehe Ger%E4t)",
+
+    "accessPointLocalKey" : "en* Schl%FCssel",
+    "lblSeeQRCodeSticker" : "en* (siehe QR-Code Sticker)",
+
+
+    "accessPointForceDelete" : "en* L%F6schen erzwingen<br/>(kein Werksreset)",
+    "accessPointNotAvailable" : "-",
     "active" : "en* Aktiv",
     "inactive" : "en* Inaktiv",
     "primary" : "en* Prim%E4r",
@@ -72,7 +80,10 @@ jQuery.extend(true,langJSON, {
     "accessPointNotKnown" : "en* Der Access Point konnte nicht gefunden werden, bitte aktualisieren Sie die Liste und f%FChren die Aktion erneut durch",
     "accessPointLocalKeyNotSupported" : "en* Die Konfiguration des Zentrale erlaubt keinen Offlinebetrieb, bitte deaktivieren Sie diese Funktion",
     "AccessPointAssignmentFinished" : "en* Der Access Point wurde zum LAN-Router umkonfiguriert und sollte jetzt t%FCrkis leuchten",
-    "accessPointDeleteHint" : "en* Wollen Sie den Access point wirklich aus dem System entfernen?\r\nSollten Sie den letzten ",
+
+    "accessPointDeleteHint" : "en* Wollen Sie den Access Point wirklich aus dem System entfernen? " +
+      "Sollte im System kein Access Point mehr vorhanden sein, k%F6nnen die entsprechenden Ger%E4te nicht vollst%E4ndig verwendet werden, bis wieder ein Access Point hinzugef%FCgt wurde.",
+
     "AccessPointDeletionFailedIdMissing" : "en* Interner Fehler, die ID des Access Point fehlt",
     "AccessPointDeletionFailedPassphraseMissing" : "en* Bitte geben Sie das Passwort des Access Point ein (Default siehe Ger%E4t)",
     "AccessPointDeletionFailedPassphraseInvalidFormat" : "en* Das Passwort des Access point ist nicht korrekt, bitte kontrollieren Sie dieses oder %E4ndern dieses gegebenenfalls %FCber NetFinder wenn dabei eines der folgenden Zeichenverwendet wurde <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
@@ -85,8 +96,46 @@ jQuery.extend(true,langJSON, {
     "AccessPointDeletionFinished" : "en* Der Access Point wurde entfernt aus der Zentrale entfernt. Mit dem Werksreset hat dieser wieder das Standard Verhalten.",
     "SetAccessPointNameSuccess" : "en* Der Name des Access Point wurde ge%E4ndert",
     "AccessPointUpdateInitiated" : "en* Das Firmwareupdate des Access Point wurde gestartet, dies kann einige Minuten dauern, anschlieﬂend leuchtet die Systemtaste wieder t%FCrkis.",
+    "lblFirmwareVersions" : "en Firmwareversionen",
+    "lblAvailableCapital": "en* Available",
+
+    "lblStateGarageDoorPosition" : "en* Position des Garagentores:",
+    "lblPosClosed" : "en* geschlossen",
+    "lblPosOpen" : "en* ge%F6ffnet",
+    "lblPosVentilation" : "en* L%FCftungsposition",
+    "lblPosUnknown" : "en* unbekannt",
+
+    "btnGarageOpen" : "en* %D6ffnen",
+    "btnGarageClose" : "en* Schlie%DFen",
+    "btnGarageVent" : "en* L%FCften",
+    "btnGarageStop" : "en* Stop",
+
+    "lblStateGarageDoorSwitch" : "en* Status Beleuchtung:",
+    "lblFalse" : "en* AUS",
+    "lblTrue" : "en* EIN",
+    "lblSwitchOn" : "en* Licht einschalten",
+    "lblSwitchOff" : "en* Licht ausschalten",
+
+    "stringTableDoorCommandClose" : "en* Tor schlie%DFen",
+    "stringTableDoorCommandNOP" : "en* keine Aktion",
+    "stringTableDoorCommandOpen" : "en* Tor %F6ffnen",
+    "stringTableDoorCommandPartialOpen" : "en* Stellung L%FCftung",
+    "stringTableDoorCommandStop" : "en* Stoppe Fahrt",
+
+    "stringTableDoorStateClose" : "en* Stellung geschlossen",
+    "stringTableDoorStateOpen" : "en* Stellung ge%F6ffnet",
+    "stringTableDoorStateUnknown" : "en* Stellung unbekannt",
+    "stringTableDoorStateVentilationPosition" : "en* L%FCfterstellung",
+
+    "dialogSettingsUSBStorageSettings" : "External USB memory",
+    "dialogSettingsStorageHintUSBStorageP1" : "Only data of directories that are used by included system components (e.g. diagrams) will be saved.",
+
+    "stringTableLEDDisableSendState" : "en* Visuelle Best%E4tigung des Tastendrucks deaktivieren",
+    "stringTableDisableAcousticSendState" : "en* Akustische Best%E4tigung des Tastendrucks deaktivieren",
+
+    "transferUserBackupTitle" : "en* System-Backup pr%FCfen und %FCbertragen",
+    "transferUserBackupContent" : "en* Bitte haben Sie einen Augenblick Geduld!",
 
     "noMoreKeys" : ""
   }
 });
-

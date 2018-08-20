@@ -13,7 +13,19 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsStorageStateNotInitialised" : "microSD Karte ist vorhanden aber nicht initalisiert.",
     "dialogSettingsStorageStateNotPresent" : "microSD Karte ist nicht vorhanden bzw. wurde nicht erkannt.",
     "dialogSettingsInitialisingMessageTitle" : "Die microSD Karte wird zurzeit initialisiert",
-    "lblSysConfStorage" : "Speicherverwaltung"
+    "lblSysConfStorage" : "Speicherverwaltung",
+
+    "dialogSettingsExternalStorageStateInitialised" : "externer USB-Speicher vorhanden.",
+    "dialogSettingsExternalStorageStateNotPresent" : "Es wurde kein externer USB-Speicher gefunden."
   }
 });
+
+window.setTimeout(function() {
+  if (getProduct() >= 3) {
+    langJSON.de.dialogSettingsStorageStateInitialised = langJSON.de.dialogSettingsExternalStorageStateInitialised;
+    langJSON.de.dialogSettingsStorageStateNotPresent = langJSON.de.dialogSettingsExternalStorageStateNotPresent;
+  }
+},750);
+
+
 

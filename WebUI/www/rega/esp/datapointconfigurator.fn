@@ -107,6 +107,7 @@ function ::dcCreate()
     var CN_DIMMER          = "DIMMER.";
     var CN_DIMMER_REAL     = "DIMMER_REAL.";
     var CN_DOOR_OPENER     = "DOOROPENER.";
+    var CN_DOOR_RECEIVER     = "DOOR_RECEIVER.";
     var CN_DOOR_SENSOR     = "DOOR_SENSOR.";
     var CN_DUAL_WHITE_BRIGHTNESS = "DUAL_WHITE_BRIGHTNESS";
     var CN_DUAL_WHITE_COLOR = "DUAL_WHITE_COLOR";
@@ -131,6 +132,7 @@ function ::dcCreate()
     var CN_RHS             = "RHS.";
     var CN_SHUTTER_TRANSMITTER      = "SHUTTER_TRANSMITTER.";
     var CN_SHUTTER_VIRTUAL_RECEIVER = "SHUTTER_VIRTUAL_RECEIVER.";
+    var CN_SIMPLE_SWITCH_RECEIVER = "SIMPLE_SWITCH_RECEIVER.";
     var CN_SMOKE_DETECTOR  = "SMOKE_DETECTOR.";
     var CN_SWITCH          = "SWITCH.";
     var CN_SWITCH_TRANSM   = "SWITCH_TRANSMITTER.";
@@ -368,6 +370,26 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_DOOR_OPENER;
             Call("/esp/controls/door_opener.fn::CreateDoorOpener()");
+          }
+
+          !# DOOR_RECEIVER
+          bIsControl = ( sControlName.Find(CN_DOOR_RECEIVER) > -1 );
+          if( bIsControl && (sLastControlName!=CN_DOOR_RECEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control DOOR_RECEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_DOOR_RECEIVER;
+            Call("/esp/controls/door_opener.fn::CreateDoorReceiver()");
+          }
+
+          !# CN_SIMPLE_SWITCH_RECEIVER
+          bIsControl = ( sControlName.Find(CN_SIMPLE_SWITCH_RECEIVER) > -1 );
+          if( bIsControl && (sLastControlName!=CN_SIMPLE_SWITCH_RECEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_SIMPLE_SWITCH_RECEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_SIMPLE_SWITCH_RECEIVER;
+            Call("/esp/controls/door_opener.fn::CreateSimpleSwitchReceiver()");
           }
 
           !# RC19_DISPLAY

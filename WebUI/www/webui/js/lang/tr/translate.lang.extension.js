@@ -954,8 +954,7 @@ jQuery.extend(true,langJSON, {
     "lblTDRegaVersion" :                         "Logic tier<br/>version",
 
     "lblTDReGaVersionHelp" :                     "Here you can specify which logic layer version of the CCU should be used. Select the version <b>'Standard'</b> to be able to use bug fixes in the time module as well as new features like mathematical operations in scripts. " +
-                                                 "<br/><br/>Select the version <b>'Community'</b> for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU software. " +
-                                                 "<br/><br/>If any problems have occurred after the update to the current CCU software has been performed, you can change back to the previous version by selecting <b>'Legacy'</b>." ,
+                                                 "<br/><br/>Select the version <b>'Community'</b> for additional improvements to troubleshooting in scripts. Please note that in this version scripts may be cancelled even if these have been executed with previous versions of the CCU software. ",
 
     "optionReGaNORMAL" :                         "Standard",
     "optionReGaLEGACY" :                         "Legacy",

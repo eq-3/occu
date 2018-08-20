@@ -599,6 +599,8 @@ proc isVirtual {paramId} {
   lappend virtualDevices "hmipw-fio6_9_master" "hmipw-fio6_10_master" "hmipw-fio6_13_master" "hmipw-fio6_14_master" "hmipw-fio6_17_master" "hmipw-fio6_18_master"
   lappend virtualDevices "hmipw-fio6_21_master" "hmipw-fio6_22_master" "hmipw-fio6_25_master" "hmipw-fio6_26_master" "hmipw-fio6_29_master" "hmipw-fio6_30_master"
 
+  lappend virtualDevices "hmip-pcbs2_3_master" "hmip-pcbs2_5_master" "hmip-pcbs2_6_master" "hmip-pcbs2_7_master" "hmip-pcbs2_9_master" "hmip-pcbs2_10_master"
+
   set virtual "false"
 
   foreach val $virtualDevices {

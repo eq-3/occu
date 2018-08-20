@@ -1,0 +1,6 @@
+"description_1" : "<span class=\"translated\">en* Mit einem kurzen oder langen Tastendruck wird das Garagentoor in den entgegengesetzten Zustand gefahren (ge%F6ffnet oder geschlossen - Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">en* Mit einem kurzen oder langen Tastendruck wird das Garagentor ge%F6ffnet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">en* Mit einem kurzen oder langen Tastendruck wird das Garagentor geschlossen.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">en* Mit einem kurzen oder langen Tastendruck wird die Fahrt des Garagentores angehalten.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">en* Mit einem kurzen oder langen Tastendruck f%E4hrt das Garagentor in die L%FCftungsposition.</span><br/><br/>",
+

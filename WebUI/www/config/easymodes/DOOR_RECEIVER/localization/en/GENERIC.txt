@@ -1,0 +1,5 @@
+"switch_open_close" : "en* %D6ffnen / Schlie%DFen",
+"switch_open" : "en* %D6ffnen",
+"switch_close" : "en* Schlie%DFen",
+"switch_partialOpen" : "en* L%FCften",
+"switch_stop" : "en* Stop",

@@ -962,8 +962,7 @@ jQuery.extend(true,langJSON, {
     "btnResetPresence" :                         "Reset Status",
     "lblTDRegaVersion" :                         "Logikschicht<br/>Version",
     "lblTDReGaVersionHelp" :                     "Hier k%F6nnen Sie festlegen, welche Version der Logikschicht in der CCU verwendet werden soll.<br/><br/>W%E4hlen Sie die Version <b>'Standard'</b>, um Fehlerbehebungen im Zeitmodul und neue Funktionen, wie z. B. mathematische Operationen in Skripten, nutzen zu k%F6nnen. " +
-                                                 "<br/><br/>W%E4hlen Sie die Version <b>'Community'</b> f%FCr zus%E4tzliche Verbesserungen zur Fehlerbehebung in Skripten. Bitte beachten Sie, dass diese Version zu Abbr%FCchen von Skripten f%FChren k%F6nnte, auch wenn diese mit bisherigen Versionen der CCU-Software ausgef%FChrt wurden. " +
-                                                 "<br/><br/>Sollten seit dem Update auf die aktuelle CCU-Software Probleme aufgetreten sein, k%F6nnen Sie mit der Auswahl <b>'Legacy'</b> auf die Vorg%E4ngerversion wechseln." ,
+                                                 "<br/><br/>W%E4hlen Sie die Version <b>'Community'</b> f%FCr zus%E4tzliche Verbesserungen zur Fehlerbehebung in Skripten. Bitte beachten Sie, dass diese Version zu Abbr%FCchen von Skripten f%FChren k%F6nnte, auch wenn diese mit bisherigen Versionen der CCU-Software ausgef%FChrt wurden. ",
 
     "optionReGaNORMAL" :                         "Standard",
     "optionReGaLEGACY" :                         "Legacy",

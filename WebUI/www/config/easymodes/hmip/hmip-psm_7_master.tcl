@@ -17,7 +17,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   if {$devFwMajor > 1} {
     append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
-       set prn 1
+       set prn 0
        append HTML_PARAMS(separate_1) "[getCondSwitchTransmitter $chn ps psDescr]";
     append HTML_PARAMS(separate_1) "</table>"
   } else {

@@ -169,7 +169,36 @@ proc read_var { filename varname} {
 
 
 proc get_version { } {
-    return [read_var /boot/VERSION VERSION]
+    #return [read_var /boot/VERSION VERSION]
+    return [read_var /VERSION VERSION]
+}
+
+proc get_CoProVersion {} {
+  set cfgFile "/var/hm_mode"
+  set unknownVersion "0.0.0"
+  set result $unknownVersion
+  if {[file exists $cfgFile]} {
+    catch {set result [string trim [read_var /var/hm_mode HM_HMIP_VERSION] "'"]}
+  }
+
+  if {$result == ""} {
+    set result $unknownVersion
+  }
+  return $result
+}
+
+proc showHmIPWired {} {
+  set result false
+
+  if {[getProduct] >= 3} {
+    set coProVer [get_CoProVersion]
+    set coProFwMajor [expr [lindex [split $coProVer .] 0] * 1]
+    set coProFwMinor [expr [lindex [split $coProVer .] 1] * 1]
+    if {($coProFwMajor > 3) || (($coProFwMajor == 3) && ($coProFwMinor >= 5))} {
+      set result true
+    }
+  }
+  return $result
 }
 
 # Prüft, ob es sich um die alte oder neue CCU handelt

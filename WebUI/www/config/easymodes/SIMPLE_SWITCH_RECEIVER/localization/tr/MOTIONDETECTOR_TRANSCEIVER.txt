@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">tr* Beim Ausl&ouml;sen des Sensors wird die Beleuchtung des Garagentorantriebes in den entgegengesetzten Zustand geschaltet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">tr* Beim Ausl&ouml;sen des Sensors wird die Beleuchtung des Garagentorantriebes eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">tr* Beim Ausl&ouml;sen des Sensors wird die Beleuchtung des Garagentorantriebes ausgeschaltet.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">tr* Der Bewegungsmelder ist nicht aktiv</span>",
+
+"hintOnTime" : "<span class=\"translated\">tr* Die Einschaltdauer der Beleuchtung wird vom Garagentorantrieb bestimmt. Sehen Sie dazu bitte im Handbuch des Antriebs nach.</span><br/><br/>",

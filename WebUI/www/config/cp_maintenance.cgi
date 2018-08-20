@@ -480,23 +480,25 @@ proc action_put_page {} {
           puts "\${dialogSettingsCMHintRestart}"
         }
       }
-set comment {
-      table_row {class="CLASS20902 j_noForcedUpdate j_fwUpdateOnly"} {
-        table_data {class="CLASS20903"} $styleMaxWidth {
-          puts "\${dialogSettingsCMTDCCUShutdown}"
-        }
-        table_data {class="CLASS20904"} {
-          division {class="popupControls CLASS20905"} {
-            division {class="CLASS20910"} {onClick="OnShutdown();"} {
-              puts "\${dialogSettingsCMBtnCCUShutdown}"
+
+      if {[getProduct] >= 3} {
+        table_row {class="CLASS20902 j_noForcedUpdate j_fwUpdateOnly"} {
+          table_data {class="CLASS20903"} $styleMaxWidth {
+            puts "\${dialogSettingsCMTDCCUShutdown}"
+          }
+          table_data {class="CLASS20904"} {
+            division {class="popupControls CLASS20905"} {
+              division {class="CLASS20910"} {onClick="OnShutdown();"} {
+                puts "\${dialogSettingsCMBtnCCUShutdown}"
+              }
             }
           }
-        }
-        table_data {align="left"} {class="CLASS20904"} {
-          puts "\${dialogSettingsCMHintShutdown}"
+          table_data {align="left"} {class="CLASS20904"} {
+            puts "\${dialogSettingsCMHintShutdown}"
+          }
         }
       }
-}
+
       # Abgesicherter Modus
       table_row {class="CLASS20902 j_noForcedUpdate j_fwUpdateOnly"} {
         table_data {class="CLASS20903"} $styleMaxWidth {
@@ -533,7 +535,7 @@ set comment {
           table_data {align="left"} {
             puts "<select id='selectedReGaVersion'>"
             puts "<option value='NORMAL'>\${optionReGaNORMAL}</option>"
-            puts "<option value='LEGACY'>\${optionReGaLEGACY}</option>"
+            # puts "<option value='LEGACY'>\${optionReGaLEGACY}</option>"
             puts "<option value='COMMUNITY'>\${optionReGaCOMMUNITY}</option>"
             puts "</select>"
           }
@@ -902,7 +904,7 @@ proc action_firmware_upload {} {
       set file_invalid [catch {exec file -b $filename | egrep -q "(gzip compressed|tar archive)"} result]
       if {$file_invalid == 0} {
         # the file seems to be a tar archive (perhaps with gzip compression)
-        set file_invalid [catch {exec /bin/tar -C $TMPDIR --no-same-owner -xf $filename} result]
+        set file_invalid [catch {exec /bin/tar -C $TMPDIR --no-same-owner -xmf $filename} result]
         file delete -force -- $filename
       }
     }
@@ -1180,7 +1182,7 @@ proc action_apply_logging {} {
   }
   catch {exec killall syslogd}
   catch {exec killall klogd}
-  exec /etc/init.d/S01logging start
+  exec /etc/init.d/S07logging start
   puts "Success -confirm"
 }
 

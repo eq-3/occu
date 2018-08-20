@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird der Schalter f&uuml;r die gew&uuml;nschte Zeit in den entgegengesetzten Zustand geschaltet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird der Schalter f&uuml;r die gew&uuml;nschte Zeit eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird der Schalter f&uuml;r die gew&uuml;nschte Zeit ausgeschaltet.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Der Sensor ist nicht aktiv</span>",
+
+"subset_1": "Bewegung/Senkrecht",
+"subset_2": "Ruhe/Waagerecht",
+"subset_3": "Jede &Auml;nderung",

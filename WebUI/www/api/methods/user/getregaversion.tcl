@@ -7,12 +7,20 @@
 # Rückgabewert: Gewählte ReGaVersion
 ##
 
-if {[catch {set fp [open "/etc/config/ReGaHssVersion" r]}] == 0} {
-  set data [read $fp]
-  set version [split $data "\n"]
-  close $fp
-} else {
-  set version "NORMAL"
-}
+ set defaultVersion "COMMUNITY"
 
-jsonrpc_response [json_toString [lindex $version 0]]
+ if {[catch {set fp [open "/etc/config/ReGaHssVersion" r]}] == 0} {
+   set data [read $fp]
+   set version [split $data "\n"]
+   close $fp
+ } else {
+   set version $defaultVersion
+ }
+
+ set version [lindex $version 0]
+
+ if {[string equal $version LEGACY]} {
+   set version $defaultVersion
+ }
+
+ jsonrpc_response [json_toString $version]

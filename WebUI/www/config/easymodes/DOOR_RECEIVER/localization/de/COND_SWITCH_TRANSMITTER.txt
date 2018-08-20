@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Garagentoor in den entgegengesetzten Zustand gefahren (ge%F6ffnet oder geschlossen - Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Garagentor ge%F6ffnet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Garagentor geschlossen.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes f%E4hrt das Garagentor in die L%FCftungsposition.</span><br/><br/>",
+
+"subset_1" : "Unterer Grenzwert unterschritten / Oberer Grenzwert &uuml;berschritten",
+"subset_2" : "Oberer Grenzwert &uuml;berschritten",
+"subset_3" : "Unterer Grenzwert unterschritten",
+
+

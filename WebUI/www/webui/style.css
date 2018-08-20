@@ -1196,6 +1196,16 @@ a img {
   text-align: left;
 }
 
+.tBodyCellCenter
+{
+  background-color: $_(activeBackground); /* #f0f0f0 */
+  height: 40px;
+  border: solid 1px $_(black); /* black */
+  color: $_(textColorB); /* black */
+  padding: 4px;
+  text-align: center;
+}
+
 .tTable
 {
   text-align:center;
@@ -2129,6 +2139,11 @@ html, body {
   text-align: center;
 }
 
+.divAlignCenter {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .borderWidth2Px {
   border-width: 2px !important;
 }
@@ -2724,12 +2739,12 @@ html, body {
 }
 
 #MultiChannelChooserOkButton {
-  left: 4px;
+  left: 109px;
   width: 100px;
 }
 
 #MultiChannelChooserAbortButton {
-  left: 109px;
+  left: 4px;
   width: 100px;
 }
 
@@ -2977,12 +2992,12 @@ html, body {
 }
 
 #ChannelConfigDialogOkButton {
-  left: 4px;
+  left: 691px;
   width: 100px;
 }
 
 #ChannelConfigDialogAbortButton {
-  left: 691px;
+  left: 4px;
   width: 100px;
 }
 
@@ -2992,7 +3007,7 @@ html, body {
   padding:5px;
   top:0;
   left:0;
-  width:260;
+  width:260px;
   overflow:hidden;
 }
 
@@ -3100,12 +3115,12 @@ html, body {
 }
 
 #DeviceConfigDialogOkButton {
-  left: 4px;
+  left: 691px;
   width: 100px;
 }
 
 #DeviceConfigDialogAbortButton {
-  left: 691px;
+  left: 4px;
   width: 100px;
 }
 
@@ -3115,7 +3130,7 @@ html, body {
   padding:5px;
   top:0;
   left:0;
-  width:260;
+  width: 260px;
   overflow:hidden;
 }
 
@@ -5313,6 +5328,12 @@ application {
 	width:150px;
 }
 
+.CLASS02551b {
+	cursor:pointer;
+	height:35px;
+	width:98%;
+}
+
 .CLASS02552 {
 	border:solid 1px $_(black); /* black */
 }
@@ -6672,6 +6693,7 @@ color: $_(textColorA); /* white */
 	text-align:center;
 	vertical-align:middle;
 	font-weight:bold;
+	height: auto;
 }
 
 .CLASS05201 {
@@ -6714,6 +6736,9 @@ color: $_(textColorA); /* white */
 	text-align:left;
 	padding-left:5px;
 	border:solid 1px $_(black); /* black */
+-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
 }
 
 .CLASS05210 {

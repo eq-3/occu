@@ -132,7 +132,15 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeHIGHEST_ILLUMINATION" : langJSON.en.stringTableHighestIllumination,
     "diagramValueTypeCURRENT_ILLUMINATION" : langJSON.en.stringTableCurrentIllumination,
     "diagramValueTypeLOWEST_ILLUMINATION" : langJSON.en.stringTableLowestIllumination,
-    "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.en.stringTableAverageIllumination
+    "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.en.stringTableAverageIllumination,
+
+    "diagramExternalStorageDataloggingNotInitialised": "There is no USB memory for saving the diagram data or it could not be accessed. External USB memory is required to store the diagram data."
+
   }
 });
 
+window.setTimeout(function() {
+  if (getProduct() >= 3) {
+    langJSON.en.diagramDataloggingNotInitialised = langJSON.en.diagramExternalStorageDataloggingNotInitialised;
+  }
+}, 750);

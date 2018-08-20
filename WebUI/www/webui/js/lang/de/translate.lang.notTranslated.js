@@ -31,18 +31,28 @@ jQuery.extend(true,langJSON, {
     "lblAccessPointSettings2" : "help2",
 
     "submenuAccessPointSettings" : "Homematic IP Access Points",
+    "submenuNewAccessPoints" : "Neu",
     "thAccessPointName" : "Name",
     "thAccessPoint" : "Access Point",
     "thAccessPointID" : "Access Point ID",
     "thAccessPointType" : "Typ",
-    "thAccessPointVersion" : "Versionen",
+    "thAccessPointVersion" : "Hauptprozessor",
+    "thAccessPointVersionCoprocessor" : "Co-Prozessor",
     "thAccessPointAvailableVersion" : "Verf%FCgbare Versionen",
     "thAccessPointIP" : "IP-Adresse",
     "thAccessPointState" : "Status",
-    "accessPointPassphrase" : "Passwort (UDP/NetFinder, Default siehe Ger%E4t)",
-    "accessPointLocalKey" : "Offlinebetrieb Aktiv und Schl%FCssel (siehe QR-Code Sticker)",
-    "accessPointForceDelete" : "L%F6schen erzwingen (ohne Reset am Ger%E4t)",
-    "notAvailable" : "-",
+
+    "accessPointPassphrase" : "Passwort",
+    "accessPointPassphraseA" : "(UDP/NetFinder, Default siehe Ger%E4t)",
+
+    "accessPointLocalKey" : "Schl%FCssel",
+    "lblSeeQRCodeSticker" : "(siehe QR-Code Sticker)",
+
+    "offlineOperation" : "Offlinebetrieb",
+
+
+    "accessPointForceDelete" : "L%F6schen erzwingen<br/>(kein Werksreset)",
+    "accessPointNotAvailable" : "-",
     "active" : "Aktiv",
     "inactive" : "Inaktiv",
     "primary" : "Prim%E4r",
@@ -63,13 +73,16 @@ jQuery.extend(true,langJSON, {
     "AccessPointAssignmentGetConfigurationParameter" : "Die Konfiguration des Access Point konnte nicht abgefragt werden, bitte kontrollieren Sie die Verbindung und versuchen es sp%E4ter erneut",
     "AccessPointAssignmentConfigurationParameterNotSupported" : "Die Firmware des Access Point unterst%FCtzt die Funktion nicht, bitte aktualisieren Sie diese",
     "AccessPointAssignmentConfigurationParameterCouldNotBeSaved" : "Die Konfiguration des Access Point konnte nicht gespeichert werden, bitte kontrollieren Sie die Verbindung und versuchen es sp%E4ter erneut",
-    "AccessPointAssignmentNotFinished" : "Verbindung und Einrichtung des Access Point wird vorgenommen, bitte warten",
-    "AccessPointAssignmentInProgress" : "Verbindung und Einrichtung des Access Point wird vorgenommen, bitte warten",
+    "AccessPointAssignmentNotFinished" : "Die Verbindung wird hergestellt.",
+    "AccessPointAssignmentInProgress" : "Die Verbindung wird hergestellt.",
     "accessPointPrimaryNotKnown" : "Der Prim%E4re Access Point konnte nicht gefunden werden, bitte pr%FCfen Sie die Konfiguration der Zentrale",
     "accessPointNotKnown" : "Der Access Point konnte nicht gefunden werden, bitte aktualisieren Sie die Liste und f%FChren die Aktion erneut durch",
     "accessPointLocalKeyNotSupported" : "Die Konfiguration des Zentrale erlaubt keinen Offlinebetrieb, bitte deaktivieren Sie diese Funktion",
     "AccessPointAssignmentFinished" : "Der Access Point wurde zum LAN-Router umkonfiguriert und sollte jetzt t%FCrkis leuchten",
-    "accessPointDeleteHint" : "Wollen Sie den Access point wirklich aus dem System entfernen?\r\nSollten Sie den letzten ",
+
+    "accessPointDeleteHint" : "Wollen Sie den Access Point wirklich aus dem System entfernen? " +
+      "Sollte im System kein Access Point mehr vorhanden sein, k%F6nnen die entsprechenden Ger%E4te nicht vollst%E4ndig verwendet werden, bis wieder ein Access Point hinzugef%FCgt wurde.",
+
     "AccessPointDeletionFailedIdMissing" : "Interner Fehler, die ID des Access Point fehlt",
     "AccessPointDeletionFailedPassphraseMissing" : "Bitte geben Sie das Passwort des Access Point ein (Default siehe Ger%E4t)",
     "AccessPointDeletionFailedPassphraseInvalidFormat" : "Das Passwort des Access point ist nicht korrekt, bitte kontrollieren Sie dieses oder %E4ndern dieses gegebenenfalls %FCber NetFinder wenn dabei eines der folgenden Zeichenverwendet wurde <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
@@ -82,7 +95,48 @@ jQuery.extend(true,langJSON, {
     "AccessPointDeletionFinished" : "Der Access Point wurde entfernt aus der Zentrale entfernt. Mit dem Werksreset hat dieser wieder das Standard Verhalten.",
     "SetAccessPointNameSuccess" : "Der Name des Access Point wurde ge%E4ndert",
     "AccessPointUpdateInitiated" : "Das Firmwareupdate des Access Point wurde gestartet, dies kann einige Minuten dauern, anschlie%DFend leuchtet die Systemtaste wieder t%FCrkis.",
+    "lblFirmwareVersions" : "Firmwareversionen",
+    "lblAvailableCapital": "Verf%fcgbar",
+
+    "lblStateGarageDoorPosition" : "Position des Garagentores:",
+    "lblPosClosed" : "geschlossen",
+    "lblPosOpen" : "ge%F6ffnet",
+    "lblPosVentilation" : "L%FCftungsposition",
+    "lblPosUnknown" : "unbekannt",
+
+    "btnGarageOpen" : "%D6ffnen",
+    "btnGarageClose" : "Schlie%DFen",
+    "btnGarageVent" : "L%FCften",
+    "btnGarageStop" : "Stopp",
+
+    "lblStateGarageDoorSwitch" : "Status Beleuchtung:",
+    "lblFalse" : "AUS",
+    "lblTrue" : "EIN",
+    "lblSwitchOn" : "Licht einschalten",
+    "lblSwitchOff" : "Licht ausschalten",
+
+    "stringTableDoorCommandClose" : "Tor schlie%DFen",
+    "stringTableDoorCommandNOP" : "keine Aktion",
+    "stringTableDoorCommandOpen" : "Tor %F6ffnen",
+    "stringTableDoorCommandPartialOpen" : "Stellung L%FCftung",
+    "stringTableDoorCommandStop" : "Stoppe Fahrt",
+
+    "stringTableDoorStateClose" : "Stellung geschlossen",
+    "stringTableDoorStateOpen" : "Stellung ge%F6ffnet",
+    "stringTableDoorStateUnknown" : "Stellung unbekannt",
+    "stringTableDoorStateVentilationPosition" : "L%FCfterstellung",
+
+    "dialogSettingsUSBStorageSettings" : "Externer USB-Speicher",
+    "dialogSettingsStorageHintUSBStorageP1" : "Die Sicherung der Daten umfasst nur die Verzeichnisse, die von mitgelieferten Systemkomponenten wie den Diagrammen verwendet werden.",
+
+    "stringTableLEDDisableSendState" : "Visuelle Best%E4tigung des Tastendrucks deaktivieren",
+    "stringTableDisableAcousticSendState" : "Akustische Best%E4tigung des Tastendrucks deaktivieren",
+
+    "transferUserBackupTitle" : "System-Backup pr%FCfen und %FCbertragen",
+    "transferUserBackupContent" : "Bitte haben Sie einen Augenblick Geduld!",
 
     "noMoreKeys" : ""
   }
 });
+
+

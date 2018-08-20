@@ -10,6 +10,7 @@
 #                                     ("full", "restricted", "none")
 #  ips: [array] Liste der IP-Adressen und IP-Adressgruppen für eingeschränkte 
 #               Berechtigung. Jedes Element ist eine Zeichenkette.
+#  userports:   [array] Enthält benutzerdefinierte Ports zwecks Firewall Freigabe
 #
 # Rückgabewert: [bool]
 #  true
@@ -19,10 +20,13 @@ source /lib/libfirewall.tcl
 
 set services $args(services)
 set ips      $args(ips)
+#set userports $args(userports)
 
+Firewall_setLoggingEnabled 1
 Firewall_loadConfiguration
 
 set Firewall_IPS $ips
+#set Firewall_USER_PORTS $userports
 
 foreach _service $services {
   array set service $_service

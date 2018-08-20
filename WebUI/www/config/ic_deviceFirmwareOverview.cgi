@@ -238,7 +238,8 @@ cgi_eval {
           # put_error $iface $address
         } else {
           if {
-            ([string equal $dev_descr(TYPE) "HM-RCV-50"] != 1)
+            ([string length $dev_descr(TYPE)] > 0)
+            && ([string equal $dev_descr(TYPE) "HM-RCV-50"] != 1)
             && ([string equal $dev_descr(TYPE) "HMW-RCV-50"] != 1)
             && ([string first "VIR-" $dev_descr(TYPE)] == -1)
             && ([string equal $dev_descr(TYPE) "HM-CC-VG-1"] != 1)

@@ -73,9 +73,9 @@ getOnlyNonExpertChannels = function(devId, chn) {
   arNonExpertChannels["HMIP-FDT"] = [2];
   arNonExpertChannels["HMIP-FSM"] = [2];
   arNonExpertChannels["HMIP-FSM16"] = [2];
-
   arNonExpertChannels["HMIP-PCBS"] = [3];
   arNonExpertChannels["HMIP-PCBS-BAT"] = [3];
+  arNonExpertChannels["HMIP-PCBS2"] = [4, 8];
   arNonExpertChannels["HMIP-PDT"] = [3];
   arNonExpertChannels["HMIP-PDT-UK"] = [3];
   arNonExpertChannels["HMIP-PS"] = [3];

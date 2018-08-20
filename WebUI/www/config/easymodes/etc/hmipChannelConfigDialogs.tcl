@@ -151,7 +151,57 @@ proc getKeyTransceiver {chn p descr} {
   set specialID "[getSpecialID $special_input_id]"
 
   set html ""
+  set specialParam 0
 
+set comment {
+  # Intruduced with the DBB but currently not supported
+  set param DISABLE_ACOUSTIC_CHANNELSTATE
+  if { ! [catch {set tmp $ps($param)}] } {
+    append html "<tr>"
+      append html "<td>\${stringTableDisableAcousticChannelState}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+    set specialParam 1
+    incr prn
+  }
+}
+
+  set param DISABLE_ACOUSTIC_SENDSTATE
+  if { ! [catch {set tmp $ps($param)}] } {
+    append html "<tr>"
+      append html "<td>\${stringTableDisableAcousticSendState}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+    set specialParam 1
+    incr prn
+  }
+
+set comment {
+  # Intruduced with the DBB but currently not supported
+  set param LED_DISABLE_CHANNELSTATE
+  if { ! [catch {set tmp $ps($param)}] } {
+    append html "<tr>"
+      append html "<td>\${stringTableLEDDisableChannelState}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+    set specialParam 1
+    incr prn
+  }
+}
+
+  set param LED_DISABLE_SENDSTATE
+  if { ! [catch {set tmp $ps($param)}] } {
+    append html "<tr>"
+      append html "<td>\${stringTableLEDDisableSendState}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+    set specialParam 1
+    incr prn
+  }
+
+  if {$specialParam == 1} {
+  append html "[getHorizontalLine]"
+  }
 
   set param DBL_PRESS_TIME
   if { ! [catch {set tmp $ps($param)}]  } {
@@ -3295,6 +3345,118 @@ proc getWaterDetectionTransmitter {chn p descr} {
   # append html "[getAlarmPanel ps]"
 
   return $html
+}
+
+proc getDoorReceiver {chn p descr} {
+    upvar $p ps
+    upvar $descr psDescr
+    upvar prn prn
+    upvar special_input_id special_input_id
+
+    set specialID "[getSpecialID $special_input_id]"
+
+    set html ""
+    set prn 0
+
+  set param EVENT_DELAY_UNIT
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+}
+
+proc getSimpleSwitchReceiver {chn p descr} {
+    upvar $p ps
+    upvar $descr psDescr
+    upvar prn prn
+    upvar special_input_id special_input_id
+
+    set specialID "[getSpecialID $special_input_id]"
+
+    set html ""
+    set prn 0
+
+  set param EVENT_DELAY_UNIT
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
 }
 
 proc getNoParametersToSet {} {

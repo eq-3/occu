@@ -1,0 +1,5 @@
+"switch_on_off" : "tr* Beleuchtung ein / aus",
+"switch_on" : "tr* Beleuchtung ein",
+"switch_off" : "tr* Beleuchtung aus",
+
+"hintOnTime" : "<span class=\"translated\">tr* Die Einschaltdauer der Beleuchtung wird vom Garagentorantrieb bestimmt. Sehen Sie dazu bitte im Handbuch des Antriebs nach.</span><br/><br/>",

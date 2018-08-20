@@ -1,4 +1,5 @@
 <script>
+  var product = getProduct();
 	var enableInitaliseSDCardButton = ${SDCardEnableInitButton};
 	var enableBackupSDCardButton = ${SDCardEnableBackupButton};
   var arCurrency = ["EUR", "TRY", "GBP", "CHF", "PLN"],
@@ -8,8 +9,17 @@
   gasHeatingValueElm = jQuery("#gasHeatingValue"),
   gasConditionNumberElm = jQuery("#gasConditionNumber");
 
+  var tdMicroSDElm = jQuery("#tdMicroSD"),
+  tdUSBStorageElm = jQuery("#tdUSBStorage");
+
 	var base_url = "/pages/jpages/system/StorageSettings/";
     dlgResult = 0;
+
+  if (product >= 3) {
+    tdUSBStorageElm.show();
+  } else {
+    tdMicroSDElm.show();
+  }
 
 	OnInitaliseSDCard = function() {
 		MessageBox.show(
@@ -75,9 +85,9 @@
 		}
 
 		if(enableBackupSDCardButton == false) {
-			jQuery('#backupSDCardButton').hide();
+			jQuery('[name="backupSDCardButton"]').hide();
 		} else {
-			jQuery('#backupSDCardButton').show();
+			jQuery('[name="backupSDCardButton"]').show();
 		}
 	};
         
@@ -159,8 +169,10 @@
 </script>
 <div class="popupTitle">${"$"}{dialogSettingsGeneralSettingsTitle}</div>
 <div class="CLASS21114 j_translate">
-	<table class="popupTable" border=1 width="100%">
-		<tr class="CLASS21115">
+	<table  class="popupTable" border=1 width="100%">
+
+    <!-- Micro SD CARD -->
+		<tr id="tdMicroSD" class="CLASS21115 hidden">
 			<td class="CLASS21116">${"$"}{dialogSettingsSDCardSettings}</td>
 			<td  align="center"  width="35%">
 				<table>
@@ -177,7 +189,7 @@
 										<div id="initaliseSDCardButton" class="StdButton CLASS04907" onClick="OnInitaliseSDCard()">${"$"}{dialogSettingsStorageSettingsBtnInitaliseSDCard}</div>
 									</td>
 									<td align="right">
-										<div id="backupSDCardButton" class="StdButton CLASS04907" onClick="OnBackupSDCard()">${"$"}{dialogSettingsStorageSettingsBtnBackup}</div>
+										<div name="backupSDCardButton" class="StdButton CLASS04907" onClick="OnBackupSDCard()">${"$"}{dialogSettingsStorageSettingsBtnBackup}</div>
 									</td>
 								</tr>
 								</table>
@@ -192,6 +204,38 @@
 				<p> ${"$"}{dialogSettingsStorageHintSDCardP2} </p>
 			</td>
 		</tr>
+    <!-- END Micro SD CARD -->
+
+    <!-- USB Storage -->
+		<tr id="tdUSBStorage" class="CLASS21115 hidden">
+			<td class="CLASS21116">${"$"}{dialogSettingsUSBStorageSettings}</td>
+			<td  align="center"  width="35%">
+				<table>
+					<tr>
+						<td class="CLASS21112">${"$"}{dialogSettingsSDCardStatus}:</td>
+						<td>${SDCardStatus}</td>
+					</tr>
+					<tr>
+						<td align="center" class="CLASS21112" colspan="2" >
+							<div class="popupControls CLASS21107">
+								<table>
+								<tr>
+										<td align="right">
+										<div name="backupSDCardButton" class="StdButton CLASS04907" onClick="OnBackupSDCard()">${"$"}{dialogSettingsStorageSettingsBtnBackup}</div>
+									</td>
+								</tr>
+								</table>
+							</div>
+							</td>
+					</tr>
+				</table>
+			</td>
+			<td class="CLASS21113" align="left">
+				<p> ${"$"}{dialogSettingsStorageHintUSBStorageP1} </p>
+			</td>
+		</tr>
+    <!-- END USB Storage -->
+
 		<tr class="CLASS21115">
 		  <td class="CLASS21116">
        ${"$"}{tdPowerCost}

@@ -41,6 +41,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_TRANSMITTER" : "Statusmitteilung Dimmwert",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmaktor",
     "chType_DIMMER_WEEK_PROFILE" : "Wochenprogramm",
+    "chType_DOOR_RECEIVER_MOD_TM" : "Torantrieb",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
     "chType_DUAL_WHITE_COLOR" : "Farbkanal",
     "chType_ENERGIE_METER_TRANSMITTER" : "Statusmeldung Messwertkanal",
@@ -85,6 +86,9 @@ jQuery.extend(true,langJSON, {
     "chType_SENSOR_WINDOW" : "Sensor-Kanal",
     "chType_SHUTTER_TRANSMITTER" : "Statusmitteilung Rollladenaktor",
     "chType_SHUTTER_VIRTUAL_RECEIVER" : "Rollladenaktor",
+
+    "chType_SIMPLE_SWITCH_RECEIVER_MOD_TM" : "Beleuchtung",
+
     "chType_STATE_RESET_RECEIVER" : "Unterdr%FCckung der<br/>Bewegungserkennung",
     "chType_SWITCH" : "Schaltaktor",
     "chType_SWITCH_PANIC" : "Panik Alarm",

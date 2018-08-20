@@ -406,7 +406,7 @@ proc cmd_firmware_update {} {
               firmware = result.firmware,
               availableFW = result.availableFirmware;
 
-              conInfo("firmwareUpdateState: " + firmwareUpdateState);
+              conInfo("firmwareUpdateState", firmwareUpdateState);
 
               switch (firmwareUpdateState) {
                 case "READY_FOR_UPDATE":

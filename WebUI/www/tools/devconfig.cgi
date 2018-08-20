@@ -877,7 +877,8 @@ proc show_paramset {device ps_type ps_id ps_var ps_descr_var redir_url sid} {
                                         }
                                     }
                                 } else {
-                                    puts "[lindex $value_list $value]"
+                                    # puts "[lindex $value_list $value]"
+                                    puts "[lsearch $value_list $value]"
                                 }
                             }
                             td
@@ -1271,7 +1272,8 @@ proc cmd_xml_paramset {} {
                 }
                 "ENUM" {
                     set value_list $param_descr(VALUE_LIST)
-                    set value [lindex $value_list $value]
+                    # set value [lindex $value_list $value]
+                    set value [lsearch $value_list $value]
                 }
                 "ACTION" {
                     continue
@@ -1324,7 +1326,8 @@ proc cmd_csv_paramset {} {
                 }
                 "ENUM" {
                     set value_list $param_descr(VALUE_LIST)
-                    set hr_value [lindex $value_list $value]
+                    # set hr_value [lindex $value_list $value]
+                    set hr_value [lsearch $value_list $value]
                 }
                 "ACTION" {
                     continue

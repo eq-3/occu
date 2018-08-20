@@ -639,6 +639,10 @@ proc showHmIPChannel {devType direction address chType} {
      if {$ch >= 4} {return 0}
     }
 
+    if {(($devType == "HMIP-PCBS2")) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+     if {($ch == 5) || ($ch == 6) || ($ch == 9) || ($ch == 10)} {return 0}
+    }
+
     if {($devType == "HMIP-BDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
      if {$ch >= 5} {return 0}
     }

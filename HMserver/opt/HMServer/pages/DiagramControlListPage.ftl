@@ -851,7 +851,14 @@
 					if(response.errorCode == "42")
 					{
 						jQuery("#content").html(response.content);
-					} else {
+					} else if(response.errorCode == "not_initialized")
+					{
+            var s = "<table id=\"dataloggingError\" class=\"tTable\" cellpadding=\"3\" cellspacing=\"3\"><tr><td class=\"CLASS21906\">";
+            s += translateKey('diagramDataloggingNotInitialised');
+            s += "</td></tr></table>";
+            jQuery('#contentRight').html(s);
+            jQuery('#contentRight').css('visibility','visible');
+					} else{
 						alert(response.content);
 					}
 				} else {

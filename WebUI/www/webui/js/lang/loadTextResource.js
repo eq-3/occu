@@ -94,7 +94,7 @@ function getLang() {
       return getBrowserLang();
     } else {
       if (langID == "0") {
-      // The user has choosen "Auto" which will use the browser settings
+      // The user has chosen "Auto" which will use the browser settings
       return getBrowserLang();
       } else {
         return arrLang[parseInt(langID)];

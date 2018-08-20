@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">Beim &Ouml;ffnen des Kontakts wird die Beleuchtung des Garagentorantriebes in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim &Ouml;ffnen des Kontakts wird die Beleuchtung des Garagentorantriebes ein- und beim Schlie&szlig;en ausgeschaltet. Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Erkennen des &Auml;nderungssignals wird die Beleuchtung des Garagentorantriebes eingeschaltet.</span><br/><br/>",
+
+"subset_1" : "Offen - ein / Zu - aus",
+"subset_2" : "Offen - aus / Zu - ein",
+"subset_3" : "&Ouml;ffnen",
+"subset_4" : "Schlie&szlig;en",
+"subset_5" : "&Auml;ndern",
+"at" : "<span class=\"translated\">beim</span>",

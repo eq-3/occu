@@ -94,7 +94,7 @@ jQuery.extend(true,langJSON, {
       "Der Pr%E4senzmelder meldet die erste erkannte Bewegung sofort, weitere Bewegungen dann erneut wieder nach der hier gew%E4hlten Zeit.",
 
     "LOCAL_RESET_DISABLED" : "Bitte beachten Sie, dass dieses Ger%E4t nach Aktivierung dieser Funktion nicht mehr %FCber die Ger%E4tetaste zur%FCckgesetzt werden kann. " +
-    "Ein Zur%FCcksetzten des Ger%E4ts ist in diesem Fall nur noch %FCber die Zentrale m%F6glich.<br/><br/>" +
+    "Ein Zur%FCcksetzen des Ger%E4tes ist in diesem Fall nur noch %FCber die Zentrale m%F6glich.<br/><br/>" +
     "<b>Bitte erstellen Sie vor Aktivierung der Funktion ein Backup Ihrer Zentrale, in dem dieses Ger%E4t bereits enthalten ist.</b>",
 
     "noMoreHelp" : ""

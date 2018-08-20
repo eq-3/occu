@@ -372,7 +372,7 @@ function ::showHideHmIPChannel() {
     }
 
     ! Pluggable Switch (PS / PCBS / WGC)
-    if((oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS") || (oDevHssType == "HmIP-PCBS") || (oDevHssType == "HmIP-WGC") ) {
+    if((oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS") || (oDevHssType == "HmIP-PCBS") || (oDevHssType == "HmIP-PCBS-BAT") || (oDevHssType == "HmIP-WGC") ) {
       ! Hide SWITCH_VIRTUAL_RECEIVER channel 4 and 5 and the real channel when the expert mode is not active
       if (user.UserEasyLinkMode() == true) {
         if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
@@ -380,6 +380,17 @@ function ::showHideHmIPChannel() {
       }
       return;
     }
+
+    ! Switch Circuit Board - 2 channels PCBS2
+    if(oDevHssType == "HmIP-PCBS2") {
+      ! Hide SWITCH_VIRTUAL_RECEIVER channel 5, 6, 9, 10 and the real channel 3 and 7 when the expert mode is not active
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
+        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && ((chNumber == 5) || (chNumber == 6) || (chNumber == 9) || (chNumber == 10))) {bShowChannel = false; return;}
+      }
+      return;
+    }
+
 
     ! Pluggable Switch and Meter (PSM)
     if (

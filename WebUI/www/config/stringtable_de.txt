@@ -497,6 +497,7 @@ DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNDERFLOW	${lblValue} ${stringTableDimmerLe
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=3	${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNKNOWN	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=1	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
+DISABLE_ACOUSTIC_SENDSTATE	${stringTableDisableAcousticSendState}
 DISPLAY_BACKLIGHT_MODE	${stringTableDisplayBacklightMode}
 DISPLAY_BACKLIGHT_MODE=AUTO	${stringTableDisplayBacklightModeAuto}
 DISPLAY_BACKLIGHT_MODE=OFF	${stringTableDisplayBacklightModeOff}
@@ -566,6 +567,20 @@ DISPLAY|UNIT=NONE	${stringTableDisplayUnitNone}
 DISPLAY|UNIT=PERCENT	${stringTableDisplayUnitPercent}
 DISPLAY|UNIT=WATT	${stringTableDisplayUnitWatt}
 DISPLAY|WINDOW	${stringTableDisplayWindow}
+
+DOOR_COMMAND=CLOSE	${stringTableDoorCommandClose}
+DOOR_COMMAND=NOP	${stringTableDoorCommandNOP}
+DOOR_COMMAND=OPEN	${stringTableDoorCommandOpen}
+DOOR_COMMAND=PARTIAL_OPEN	${stringTableDoorCommandPartialOpen}
+DOOR_COMMAND=STOP	${stringTableDoorCommandStop}
+
+DOOR_RECEIVER	${stringTableDoorReceiverTitle}
+
+DOOR_STATE=CLOSED	${stringTableDoorStateClose}
+DOOR_STATE=OPEN	${stringTableDoorStateOpen}
+DOOR_STATE=POSITION_UNKNOWN	${stringTableDoorStateUnknown}
+DOOR_STATE=VENTILATION_POSITION	${stringTableDoorStateVentilationPosition}
+
 DUAL_WHITE_BRIGHTNESS	${stringTableDualWhiteBrightnessTitle}
 DUAL_WHITE_COLOR	${stringTableDualWhiteColorTitle}
 DUAL_WHITE_COLOR|LEVEL	${stringTableDualWhiteColorLevel}
@@ -827,6 +842,7 @@ LANGUAGE	${stringTableLanguage}
 LANGUAGE=ENGLISH	${stringTableLanguageEnglish}
 LANGUAGE=GERMAN	${stringTableLanguageGerman}
 LED_DISABLE_CHANNELSTATE	${stringTableLEDDisableChannelState}
+LED_DISABLE_LED_DISABLE_SENDSTATE	${stringTableLEDDisableSendState}
 LED_ONTIME	${stringTableLEDOnTime}
 LED_SLEEP_MODE=OFF	${stringTableLEDSleepModeOff}
 LED_SLEEP_MODE=ON	${stringTableLEDSleepModeOn}
@@ -1373,6 +1389,7 @@ SIGNAL_TONE=HIGH	${stringTableSignalToneHigh}
 SIGNAL_TONE=LOW	${stringTableSignalToneLow}
 SIGNAL_TONE=MID	${stringTableSignalToneMid}
 SIGNAL_TONE=VERY_HIGH	${stringTableSignalToneVeryHigh}
+SIMPLE_SWITCH_RECEIVER	${stringTableSimpleSwitchReceiverTitle}
 SMOKE_DETECTOR_ALARM_STATUS=IDLE_OFF	${stringTableStateIdleOff}
 SMOKE_DETECTOR_ALARM_STATUS=INTRUSION_ALARM	${stringTableStateIntrusionAlarm}
 SMOKE_DETECTOR_ALARM_STATUS=PRIMARY_ALARM	${stringTableStatePrimaryAlarm}

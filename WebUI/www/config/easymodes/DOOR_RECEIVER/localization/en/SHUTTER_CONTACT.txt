@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">en* Beim &Ouml;ffnen des Kontakts wird das Garagentoor in den entgegengesetzten Zustand gefahren (ge%F6ffnet oder geschlossen - Toggle-Funktion). Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">en* Beim &Ouml;ffnen des Kontakts wird das Garagentor hoch- und beim Schlie&szlig;en herunter gefahren. Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">en* Beim Erkennen des &Auml;nderungssignals wird Garagentor hochgefahren.</span><br/><br/>",
+
+"subset_1" : "en* Offen - Tor auf / Zu - Tor zu",
+"subset_2" : "en* Offen - Tor zu / Zu - Tor auf",
+"subset_3" : "en* &Ouml;ffnen",
+"subset_4" : "en* Schlie&szlig;en",
+"subset_5" : "en* &Auml;ndern",
+"at" : "<span class=\"translated\">beim</span>",
