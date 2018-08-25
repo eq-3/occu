@@ -21,7 +21,7 @@ function getDefaultLang() {
  * @return {Array} Available languages
  */
 function getAvailableLang() {
-  return ["de", "en", "tr"];
+  return ["de", "en"];
 }
 
 /**
@@ -97,7 +97,7 @@ function getLang() {
       // The user has chosen "Auto" which will use the browser settings
       return getBrowserLang();
       } else {
-        return arrLang[parseInt(langID)];
+        return (parseInt(langID) < arrLang.length) ? arrLang[parseInt(langID)] : getBrowserLang();
       }
     }
     return defaultLang;

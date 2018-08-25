@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">tr* Bei Bet%E4tigung des Schalters wird das Garagentor in den entgegengesetzten Zustand gefahren (ge%F6ffnet oder geschlossen - Toggle-Funktion).</span><br/><br/>",
-"description_2" : "<span class=\"translated\">tr* Bei Bet%E4tigung des Schalters wird das Garagentor ge%F6ffnet.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">tr* Bei Bet%E4tigung des Schalters wird das Garagentor geschlossen.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">tr* Bei Bet%E4tigung des Schalters wird die Fahrt des Garagentores angehalten.</span><br/><br/>",
-"description_5" : "<span class=\"translated\">tr* Bei Bet%E4tigung des Schalters f%E4hrt das Garagentor in die L%FCftungsposition.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">When activating the switch the garage door is moved into the opposite position (open or closed - toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When activating the switch, the garage door is opened.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When activating the switch, the garage door is opened.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">When activating the switch, the garage door is stopped.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">When activating the switch, the garage door is moved into ventilation position.</span><br/><br/>",
 

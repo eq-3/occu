@@ -310,7 +310,7 @@ puts {
         "<h1>"+translateKey("btnSysConfAdditionalSoft")+"</h1><ul><li>"+translateKey("lblSysConfAdditionalSoft1")+"</li><li>"+translateKey("lblSysConfAdditionalSoft2")+"</li></ul>",
         "<h1>"+translateKey("btnSysConfCoupling")+"</h1><ul><li>OSRAM Lightify</li><li>Philips Hue</li></ul>",
         "<h1>"+translateKey("btnSysConfGeneralSettings")+"</h1><ul><li>"+translateKey("lblSysConfStorage")+"</li><li>"+translateKey("lblSysConfSetPowerCost")+"</li></ul>",
-        "<h1>"+translateKey("btnAccessPointSettings")+"</h1><ul><li>"+translateKey("lblAccessPointSettings1")+"</li><li>"+translateKey("lblAccessPointSettings2")+"</li></ul>"
+        "<h1>"+translateKey("btnAccessPointSettings")+"</h1><ul><li>"+translateKey("lblAccessPointSettings1")+"</li></ul>"
         ];
 
        jQuery.each(helpContainer, function(index, container){

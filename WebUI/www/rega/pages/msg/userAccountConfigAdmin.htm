@@ -76,7 +76,6 @@
                                <option value="0">${selectLangAuto}</option>
                                <option value="1">${selectLangDE}</option>
                                <option value="2">${selectLangUK}</option>
-                               <option value="3">${selectLangTR}</option>
                            </select>
                        </td>
                    </tr>
@@ -215,7 +214,7 @@
   <%
     object user = dom.GetObject(uid);
     Write("var lang = homematic('User.getLanguage', {'userID' : userId});");
-    Write("lang = (lang == null) ? 0 : lang;");
+    Write("lang = ((lang == null) || (lang > 2)) ? 0 : lang;");
     Write("$('userLanguage').value = lang;");
   %>
 

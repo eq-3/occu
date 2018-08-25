@@ -12328,14 +12328,21 @@ FirewallConfigDialog = Class.create({
    * Übernimmt die Änderungen und schließt den FirewallConfigDialog anschließend.
    **/
   ok: function () {
-    var xmlrpcAccess = this.m_xmlrpcListBox.getSelectedItem().id;
-    var hmscriptAccess = this.m_hmscriptListBox.getSelectedItem().id;
-    var ips = this.m_ipTextArea.getText().replace(/\s+/g, '').split(";");
+    var xmlrpcAccess = this.m_xmlrpcListBox.getSelectedItem().id,
+    hmscriptAccess = this.m_hmscriptListBox.getSelectedItem().id,
+    ips = this.m_ipTextArea.getText();
+
+    // Remove a trailing ; at the end of ips
+    ips = (ips.charAt(ips.length -1) == ";") ? ips.slice(0,-1) : ips;
+    ips = ips.replace(/\s+/g, '').split(";");
+
     var isOk = true;
-    for (var i = 0, len = ips.length; i < len; i++) {
-      var ip = ips[i];
-      if (!ip.match(/^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\/[0-9]+)?$/)) {
-        isOk = false;
+    if (ips[0] != "" ) {
+      for (var i = 0, len = ips.length; i < len; i++) {
+        var ip = ips[i];
+        if (! isIPAddressValid(ip)) {
+          isOk = false;
+        }
       }
     }
 
@@ -15124,11 +15131,12 @@ Page = Class.create({
 /**
  * StartPage.js
  **/
- 
+
+var preURL = (WEBUI_VERSION.split(".")[0] < 3) ? "" : "ccu3-";
+
 StartPage = Singleton.create(Page, {
   MAINMENU_ID: "MAINMENU_STARTPAGE",
-  downloadURL: (isHTTPS) ? "https://update.homematic.com:8443/firmware/download?cmd=download" : "http://update.homematic.com/firmware/download?cmd=download",
-  // https://update.homematic.com:8443/firmware/
+  downloadURL: (isHTTPS) ? "https://"+preURL+"update.homematic.com:8443/firmware/download?cmd=download" : "http://"+preURL+"update.homematic.com/firmware/download?cmd=download",
   devList: [],
   devIndex: 0,
   newFwCounter: 0,
@@ -19339,10 +19347,14 @@ homematic.com =
   m_product: "",
   init: function()
   {
-    this.m_product ="HM-CCU" + WEBUI_VERSION.split(".")[0];
-    this.m_URLServer = (isHTTPS) ? "https://update.homematic.com:8443" : "http://update.homematic.com";
+    this.m_ccuProduct = getProduct();
+    this.preURL = (this.m_ccuProduct < 3) ? "" : "ccu3-";
+    this.m_product ="HM-CCU" + this.m_ccuProduct;
+    this.m_URLServer = (isHTTPS) ? "https://"+this.preURL+"update.homematic.com:8443" : "http://"+this.preURL+"update.homematic.com";
 
     var serial = homematic("CCU.getSerial");
+    serial = ((serial != "") && (typeof serial != "undefined") && (serial != null)) ? serial : "0";
+
     // The server should return a string like "homematic.com.setLatestVersion('2.4.212');"
     var script = document.createElement("script");
     script.id = "homematic_com_script";
@@ -25389,6 +25401,13 @@ getDefaultPartyModeString = function() {
 
 isIPv4AddressValid = function(ipAddress) {
   var validator = /^(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))\.(\d|[1-9]\d|1\d\d|2([0-4]\d|5[0-5]))$/;
+  return ipAddress.match(validator);
+};
+
+// This validates IPv4 (e. g. 192.168.0.1 or 192.168.0.0/16 - whereas the /16 is cut off and not examined) AND IPv6 addresses
+isIPAddressValid = function(ipAddress) {
+  ipAddress = ipAddress.split("/")[0];
+  var validator = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$|^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z]|[A-Za-z][A-Za-z0-9\-]*[A-Za-z0-9])$|^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/;
   return ipAddress.match(validator);
 };
 

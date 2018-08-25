@@ -73,16 +73,17 @@ proc getBackupErrorMessage {errorCode} {
   # 18 = Adapter Version nicht unterstützt
   # 99 = Unknown error
 
-  set code(9) "\$\{WrongJavaCall\}"
-  set code(10) "\$\{OK\}"
-  set code(11) "\$\{BackupImperfectMissingFile\}"
-  set code(12) "\$\{NoInternet_KeyserverTimeout\}"
-  set code(13) "\$\{ErrorDevicePersistence_TypesNotCompatibel\}"
-  set code(14) "\$\{MigrationFailed\}"
-  set code(15) "\$\{CoProcessor_not_availabel\}"
-  set code(16) "\$\{CoProcessor_NotInitialized\}"
-  set code(18) "\$\{CoProcessor_VersionNotSupported\}"
-  set code(99) "\$\{UnknownError\}"
+  set code(9) "\$\{backupWrongJavaCall\}"
+  set code(10) "\$\{backupOK\}"
+  set code(11) "\$\{backupBackupImperfectMissingFile\}"
+  set code(12) "\$\{backupNoInternet_KeyserverTimeout\}"
+  set code(13) "\$\{backupKeyServer_NAK\}"
+  set code(14) "\$\{backupErrorDevicePersistence_TypesNotCompatibel\}"
+  set code(15) "\$\{backupMigrationFailed\}"
+  set code(16) "\$\{backupCoProcessor_not_availabel\}"
+  set code(17) "\$\{backupCoProcessor_NotInitialized\}"
+  set code(18) "\$\{backupCoProcessor_VersionNotSupported\}"
+  set code(99) "\$\{backupUnknownError\}"
   return $code($errorCode)
 }
 
@@ -713,18 +714,19 @@ proc action_backup_restore_go {} {
   }
 
   # Check if the backup can be used without problems
+  if {[file exists /etc/config/crRFD]} {
+    set checkBackupState [checkUserBackupValidility $migration_mode]
+    if {$checkBackupState != 10} {
+      # It's not possible to use the backup
+      set backuperror true
 
-  set checkBackupState [checkUserBackupValidility $migration_mode]
-  if {$checkBackupState != 10} {
-    # It's not possible to use the backup
-    set backuperror true
+      # Start /etc/init.d/S62HMServer start
+      cgi_javascript {puts "homematic('User.restartHmIPServer');"}
+      put_message "\${dialogSettingsSecurityMessageSysBackupErrorTitle}" "\${dialogSettingsSecurityMessageSysBackupErrorContent} [getBackupErrorMessage $checkBackupState]"
+    }
 
-    # Start /etc/init.d/S62HMServer start
-    cgi_javascript {puts "homematic('User.restartHmIPServer');"}
-    put_message "\${dialogSettingsSecurityMessageSysBackupErrorTitle}" "\${dialogSettingsSecurityMessageSysBackupErrorContent} [getBackupErrorMessage $checkBackupState]"
+    cgi_javascript {puts "MessageBox.close();"}
   }
-
-  cgi_javascript {puts "MessageBox.close();"}
 
   if { "false" == $backuperror } {
         exec mount -o remount,ro /usr/local

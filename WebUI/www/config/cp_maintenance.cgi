@@ -25,7 +25,12 @@ set RFD_URL "bin://127.0.0.1:2001"
 set HS485D_URL "bin://127.0.0.1:2000"
 # set PFMD_URL "bin://127.0.0.1:2002" - not necessary with the ccu2
 
-set REMOTE_FIRMWARE_SCRIPT "http://update.homematic.com/firmware/download"
+
+if {[getProduct] < 3} {
+  set REMOTE_FIRMWARE_SCRIPT "http://update.homematic.com/firmware/download"
+} else {
+  set REMOTE_FIRMWARE_SCRIPT "http://ccu3-update.homematic.com/firmware/download"
+}
 
 proc action_acceptEula {} {
   global env sid
@@ -270,7 +275,9 @@ proc action_firmware_update_cancel {} {
     catch {exec rm /var/new_firmware.tar.gz}
     catch { exec /bin/sh -c "rm /var/EULA.*"}
   } else {
-   catch { exec /bin/sh -c "rm -rf `readlink /usr/local/.firmwareUpdate` /usr/local/.firmwareUpdate" }
+   catch { exec /bin/sh -c "rm -rf `readlink -f /usr/local/.firmwareUpdate` /usr/local/.firmwareUpdate" }
+   catch { exec /bin/sh -c "rm -f /usr/local/tmp/EULA.*"}
+   catch { exec /bin/sh -c "rm -f /usr/local/tmp/update_script"}
   }
 
   cgi_javascript {
@@ -786,7 +793,7 @@ proc action_put_page {} {
         translateKey('dialogSettingsCMDialogHintPerformFirmwareUploadTitle'),
         translateKey('dialogSettingsCMDialogHintPerformFirmwareUploadContent')+
         ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>',
-        '','320','100','fwUpload', 'msgBoxBarGraph');
+        '','320','105','fwUpload', 'msgBoxBarGraph');
       } else {
         elem.show();
       }

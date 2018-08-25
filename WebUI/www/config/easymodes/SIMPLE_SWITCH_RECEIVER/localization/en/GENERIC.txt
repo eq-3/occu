@@ -1,5 +1,9 @@
-"switch_on_off" : "en* Beleuchtung ein / aus",
-"switch_on" : "en* Beleuchtung ein",
-"switch_off" : "en* Beleuchtung aus",
+"switch_on_off" : "Lights on / off",
+"switch_on" : "Lights on",
+"switch_off" : Lights off",
 
-"hintOnTime" : "<span class=\"translated\">en* Die Einschaltdauer der Beleuchtung wird vom Garagentorantrieb bestimmt. Sehen Sie dazu bitte im Handbuch des Antriebs nach.</span><br/><br/>",
+"hintOnTime" : "<span class=\"translated\">The switch-on time of the light is defined be the garage door drive. Please refer to the manual of the drive.</span><br/><br/>",
+
+"switch_toggle" : "Lights toggle",
+"change_signal_on" : "On change signal on",
+"change_signal_off" : "On change signal off",

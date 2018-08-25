@@ -106,12 +106,12 @@ function ::CreateSimpleSwitchReceiver() {
       string lblButton;
       if (oState.Value()) {
         state = false;
-        currentState = "${lblTrue}";
-        lblButton = "${lblSwitchOff}";
+        currentState = "${lblOn}";
+        lblButton = "${lblSwitchLightOff}";
       } else {
         state = true;
-        currentState = "${lblFalse}";
-        lblButton = "${lblSwitchOn}";
+        currentState = "${lblOff}";
+        lblButton = "${lblSwitchLightOn}";
       }
 
       WriteLine("<tr>");
