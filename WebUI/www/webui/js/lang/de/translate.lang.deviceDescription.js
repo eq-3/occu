@@ -131,7 +131,7 @@ jQuery.extend(true,langJSON, {
     "HM-RC-P1" : "Funk-Panikhandsender",
     "HM-RC-Sec3-B" : "Funk-Handsender f%FCr Alarmzentrale",
     "HM-RC-Key3-B" : "Funk-Handsender f%FCr KeyMatic",
-    "HM-CCU-1" : "HomeMatic Zentrale",
+    "HM-CCU-1" : "Homematic Zentrale",
     "HM-EM-CMM" : "Z%E4hlersensor Management Modul",
     "HMW-LC-Sw2-DR" : "Wired RS485 Schaltaktor 2-fach, Hutschienenmontage",
     "HMW-LC-Bl1-DR" : "Wired RS485 Rollladenaktor 1-fach, Hutschienenmontage",

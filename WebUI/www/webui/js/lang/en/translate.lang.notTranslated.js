@@ -29,7 +29,7 @@ jQuery.extend(true,langJSON, {
 
     "stringTableMultiModeInputTransmitterTitle" : "Wired Input Module",
 
-    "btnAccessPointSettings" : "Homematic IP Access Points",
+    "btnAccessPointSettings" : "Homematic IP<br/>Access Points",
     "lblAccessPointSettings1" : "Administration of Homematic IP Access Points",
 
     "submenuAccessPointSettings" : "Homematic IP Access Points",
@@ -129,6 +129,11 @@ jQuery.extend(true,langJSON, {
     "stringTableLEDDisableSendState" : "Deactivate visual confirmation of button press",
     "stringTableDisableAcousticSendState" : "Deactivate acoustic confirmation of button press",
 
+    "dialogSettingsSecurityTDAuth" : "Authentication",
+    "dialogSettingsSecurityLblActivateAuthRemoteXML" : "Authentication active: ",
+    "dialogSettingsSecurityTDExplanation" : "When activated, external access to the Homematic XML-RPC API and the Homematic Script API is only possible with a valid user name and password.",
+
+
     "transferUserBackupTitle" : "Check system backup and transfer",
     "transferUserBackupContent" : "Please wait a moment.",
 
@@ -143,6 +148,9 @@ jQuery.extend(true,langJSON, {
     "backupCoProcessor_NotInitialized" : "The co-processor cannot be initiated.",
     "backupCoProcessor_VersionNotSupported" : "Communication with co-processor failed.",
     "backupUnknownError" : "Unknown error.",
+
+    "stringTableSectionStatusNormal" : "Status Section: Normal",
+    "stringTableSectionStatusUnknown" : "Status Section: Unknown",
 
     "noMoreKeys" : ""
   }

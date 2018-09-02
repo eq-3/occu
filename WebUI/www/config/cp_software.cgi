@@ -253,7 +253,7 @@ proc action_put_page {} {
                     if { ! [file executable $s] } continue
                     array set sw_info ""
                     get_info $s sw_info
-                    if { ![info exists sw_info(Name) ] } continue
+                    if { ![info exists sw_info(Name)] } continue
                     table_row {class="CLASS21407"} {
                         table_data {class="CLASS21408"} {
                             puts "$sw_info(Name)"

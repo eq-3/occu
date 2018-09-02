@@ -1216,6 +1216,10 @@ SABOTAGE=TRUE	${stringTableSabotageContactWasActive}
 SABOTAGE_MSG	${stringTableSabotageMsg}
 SABOTAGE|SHAKING	${stringTableSabotageContact}
 SECTION	${stringTableSection}
+
+SECTION_STATUS=NORMAL	${stringTableSectionStatusNormal}
+SECTION_STATUS=UNKNOWN	${stringTableSectionStatusUnknown}
+
 SELF_CALIBRATION_RESULT=FALSE	${stringTableSelfCalibrationResultFalse}
 SELF_CALIBRATION_RESULT=TRUE	${stringTableSelfCalibrationResultTrue}
 

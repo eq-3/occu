@@ -4617,6 +4617,8 @@ elvST['SABOTAGE=TRUE'] = '${stringTableSabotageContactWasActive}';
 elvST['SABOTAGE_MSG'] = '${stringTableSabotageMsg}';
 elvST['SABOTAGE|SHAKING'] = '${stringTableSabotageContact}';
 elvST['SECTION'] = '${stringTableSection}';
+elvST['SECTION_STATUS=NORMAL'] = '${stringTableSectionStatusNormal}';
+elvST['SECTION_STATUS=UNKNOWN'] = '${stringTableSectionStatusUnknown}';
 elvST['SELF_CALIBRATION_RESULT=FALSE'] = '${stringTableSelfCalibrationResultFalse}';
 elvST['SELF_CALIBRATION_RESULT=TRUE'] = '${stringTableSelfCalibrationResultTrue}';
 elvST['SELF_CALIBRATION=START'] = '${stringTableSelfCalibrationStart}';

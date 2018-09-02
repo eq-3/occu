@@ -72,17 +72,14 @@ set PROFILE_2(UI_HINT)  2
 
 set PROFILE_3(SHORT_COND_VALUE_HI)          150
 set PROFILE_3(SHORT_COND_VALUE_LO)           50
-
-set PROFILE_3(SHORT_CT_OFF)       0
-set PROFILE_3(SHORT_CT_OFFDELAY)  0
-set PROFILE_3(SHORT_CT_ON)        2
-set PROFILE_3(SHORT_CT_ONDELAY)   2
-
-set PROFILE_3(SHORT_JT_OFF)      1
-set PROFILE_3(SHORT_JT_OFFDELAY)  3
-set PROFILE_3(SHORT_JT_ON)      4
-set PROFILE_3(SHORT_JT_ONDELAY)   6
-
+set PROFILE_3(SHORT_CT_OFF)                   1
+set PROFILE_3(SHORT_CT_OFFDELAY)              1
+set PROFILE_3(SHORT_CT_ON)                    1
+set PROFILE_3(SHORT_CT_ONDELAY)               2
+set PROFILE_3(SHORT_JT_OFF)                   3
+set PROFILE_3(SHORT_JT_OFFDELAY)              3
+set PROFILE_3(SHORT_JT_ON)                    3
+set PROFILE_3(SHORT_JT_ONDELAY)               6
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR)     {0 range 0 - 31}
 set PROFILE_3(SHORT_OFF_TIME_BASE)            {7 range 0 - 7}

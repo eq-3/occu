@@ -131,7 +131,7 @@ jQuery.extend(true,langJSON, {
     "HM-RC-P1": "Wireless Panic Hand Transmitter",
     "HM-RC-Sec3-B": "Wireless Remote Control for the alarm function",
     "HM-RC-Key3-B": "Wireless Remote Control for KeyMatic",
-    "HM-CCU-1": "HomeMatic Central Control Unit",
+    "HM-CCU-1": "Homematic Central Control Unit",
     "HM-EM-CMM": "Metering Sensor management module",
     "HMW-LC-Sw2-DR": "Wired RS485 Switch Actuator 2-channel, DIN rail mount",
     "HMW-LC-Bl1-DR": "Wired RS485 Blind Actuator 1-channel, DIN rail mount",
