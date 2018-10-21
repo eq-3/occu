@@ -2,6 +2,7 @@ HomeMatic-Open-Central-Control-Unit-SDK (HM-OCCU-SDK)
 
 WARNING
 =======
+
 With version 3.41.x changes have been implemented to improve the security of the CCU3 software. These changes can rarely lead to problems with 3rd party software. The following changes have been made:
 
 - Firewall settings are now more restrictive by default and can be changed via an extended configuration dialog.
