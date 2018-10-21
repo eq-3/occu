@@ -1,8 +1,8 @@
 <script>
-  var accessPointName,
+  var accessPointName = null,
   eyeIsVisible = false,
   offlineOperation = false,
-  userPassPhrase = "",
+  userPassPhrase = null,
   localKeyA = "";
 
 	translatePage('#messagebox');
@@ -112,10 +112,21 @@
     passwordElm.val(value);
   };
 
+  showOkButton = function() {
+    dlg.btnYesShow();
+  };
 
+  hideOkButton = function() {
+    dlg.btnYesHide();
+  };
 
   storeNewName = function(value) {
     accessPointName = value;
+    if ((accessPointName != "") && (userPassPhrase)) {
+      showOkButton();
+    } else {
+     hideOkButton();
+    }
   };
 
   storePassphrase = function(value) {
@@ -125,6 +136,13 @@
       eyeIsVisible = true;
     }
     userPassPhrase = value;
+
+    if ((userPassPhrase != "") && (accessPointName)) {
+      showOkButton();
+    } else {
+      hideOkButton();
+    }
+
   };
 
   setOfflineOperation = function(value) {
@@ -206,7 +224,7 @@
               dlgHtml += translateKey("accessPointPassphrase")+":";
             dlgHtml += "</td>";
             dlgHtml += "<td class='td2'>";
-              dlgHtml += "<input id='passphrase' type='password' size='32' onblur='storePassphrase(this.value)'>";
+              dlgHtml += "<input id='passphrase' type='password' size='32' onkeyup='storePassphrase(this.value)'>";
               dlgHtml += "<div style='font-weight:normal; font-size:11px !important;text-align:center'>"+translateKey("accessPointPassphraseA")+"</div>"
             dlgHtml += "</td>";
 
@@ -235,7 +253,7 @@
               dlgHtml += translateKey("accessPointLocalKey")+":";
             dlgHtml += "</td>";
             dlgHtml += "<td class='td2'>";
-              dlgHtml += "<input id='localKey' type='text' size='32' value='' onblur='storeLocalKey(this.value)'>";
+              dlgHtml += "<input id='localKey' type='text' size='32' value='' onkeyup='storeLocalKey(this.value)'>";
               dlgHtml += "<div style='font-weight:normal; font-size:11px !important;text-align:center'>"+translateKey("lblSeeQRCodeSticker")+"</div>"
             dlgHtml += "</td>";
           dlgHtml += "</tr>";
@@ -246,12 +264,18 @@
 
   var dlg = new YesNoDialog(translateKey("dialogNewAccessPointTitle"),dlgHtml,function(btnPress){
     if (btnPress == YesNoDialog.RESULT_YES) {
-      AssignAccessPoint();
+      if (accessPointName && userPassPhrase) {
+        AssignAccessPoint();
+      } else {
+        // This should never be called
+        alert("Name oder Passwort nicht gesetzt.");
+      }
       PopupClose();
     } else {
       PopupClose();
     }
   }, "html");
+  dlg.btnYesHide();
   dlg.btnTextYes(translateKey("btnAdd"));
   dlg.btnTextNo(translateKey("dialogBack"));
   dlg.setWidth(650);

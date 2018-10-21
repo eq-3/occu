@@ -61,6 +61,7 @@
 	   
 	  s += "</tr>";
 	  s += "</table>";
+
 	  setFooter(s);
 	  translateButtons("btnEdit");
 	  translateButtons("btnRemove");
@@ -75,6 +76,7 @@
   <thead>
     <tr>
       <td class="thCell CLASS04900" >${"$"}{thAccessPointName}</td>
+      <td class="thCell CLASS04900" >${"$"}{thPicture}</td>
       <td class="thCell CLASS04900" >${"$"}{thAccessPoint}</td>
       <td class="thCell CLASS04900" >${"$"}{thAccessPointVersion}</td>
       <td class="thCell CLASS04900" >${"$"}{thAccessPointIP}</td>
@@ -87,6 +89,11 @@
     <#list objectList as accessPoint>
       <tr class="CLASS04901">
         <td class="tBodyCellCenter">${accessPoint.name}</td>
+
+        <td class="tBodyCellCenter">
+          <div id="pic_${accessPoint.id}"></div>
+        </td>
+
         <td class="tBodyCellCenter">
           <table cellpadding="0" cellspacing="0" border="0" align="center">
             <tr>
@@ -142,6 +149,13 @@
         </td>
         <!-- End Action Column -->
       </tr>
+
+      <script type="text/javascript">
+        var accessPointType = '${accessPoint.type}',
+          devicePic = (accessPointType == "") ? "/config/img/devices/50/CCU3_thumb.png" : "/config/img/devices/50/162_hmipw-drap_thumb.png";
+          jQuery("#pic_${accessPoint.id}").html("<img style='max-width:100%; max-height:100%;' src='"+devicePic+"'>");
+      </script>
+
     </#list>
   </tbody>
 </table>

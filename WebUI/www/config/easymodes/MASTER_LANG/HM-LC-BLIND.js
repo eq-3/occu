@@ -7,10 +7,5 @@ jQuery.extend(true,langJSON, {
   "en" : {
     "toolTipLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM).",
     "toolTipSlatLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM)."
-    },
-
-  "tr" : {
-    "toolTipLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM).",
-    "toolTipSlatLongKeyPress" : "<h1>Please note</h1><br/>The rudimentary slat adjustment function is only available for the Homematic Wireless Shutter Actuator for brand switches (HM-LC-Bl1PBU-FM)."
-  }
+    }
 });

@@ -69,41 +69,5 @@ jQuery.extend(true,langJSON, {
     "PowerMeterProtocolModeModeOptionB" : "Mode B - bidirectional data interface with speed switching",
     "PowerMeterProtocolModeModeOptionC" : "Mode C - bidirectional data interface with speed switching",
     "PowerMeterProtocolModeModeOptionD" : "Mode D - unidirectional data interface with transmission interval (e.g. EasyMeter)"
-  },
-
-  "tr" : {
-    "PowerMeterIGLMeterType" : "Type of sensor",
-    "PowerMeterIGLConstantGas" : "Gas meter constant",
-    "PowerMeterIGLConstantIR" : "IR meter constant",
-    "PowerMeterIGLSensibilityIR" : "IR threshold sensibility",
-    "PowerMeterIGLConstantLed" : "LED meter constant",
-    "PowerMeterIGLSensorGAS" : "Gas",
-    "PowerMeterIGLSensorIR" : "Infrared",
-    "PowerMeterIGLSensorLED" : "LED",
-    "PowerMeterIGLSensorUnknown" : "Unknown",
-
-    "****" : "****",
-    "PowerMeterIECSensor" : "IEC",
-    "PowerMeterPowerString" : "Identification marking of power",
-    "PowerMeterEnergyCounterString" : "Identification marking of meter reading",
-
-    "PowerMeterBaudRate" : "Baud rate",
-    "PowerMeterSerialFormat" : "Character format of consumption meter",
-    "PowerMeterPowerMode" : "Energy mode of consumption meter",
-    "PowerMeterProtocolMode" : "Protocol mode of consumption meter",
-    "PowerMeterSamplesPerCycle" : "Number of data requests per transmission interval",
-
-    "PowerMeterSerialFormatOption0" : "1_7D_1P_E_1S",
-    "PowerMeterSerialFormatOption1" : "1_7D_1P_E_2S",
-    "PowerMeterSerialFormatOption2" : "1_8D_0P_N_1S",
-    "PowerMeterSerialFormatOption3" : "1_8D_1P_E_1S",
-
-    "PowerMeterPowerModeOptionMains" : "Mains voltage",
-    "PowerMeterPowerModeOptionBattery" : "Battery operation",
-
-    "PowerMeterProtocolModeModeOptionA" : "Mode A - bidirectional data interface without speed switching",
-    "PowerMeterProtocolModeModeOptionB" : "Mode B - bidirectional data interface with speed switching",
-    "PowerMeterProtocolModeModeOptionC" : "Mode C - bidirectional data interface with speed switching",
-    "PowerMeterProtocolModeModeOptionD" : "Mode D - unidirectional data interface with transmission interval (e.g. EasyMeter)"
   }
 });

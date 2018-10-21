@@ -6,8 +6,19 @@ sourceOnce session.tcl
 load tclrega.so
 load tclrpc.so
 
-set RFD_URL "bin://127.0.0.1:2001"
-set HS485D_URL "bin://127.0.0.1:2000"
+set portnumber 2001
+catch { source "/etc/eq3services.ports.tcl" }
+if { [info exists EQ3_SERVICE_RFD_PORT] } {
+  set portnumber $EQ3_SERVICE_RFD_PORT
+}
+set RFD_URL "bin://127.0.0.1:$portnumber"
+
+set portnumber 2000
+catch { source "/etc/eq3services.ports.tcl" }
+if { [info exists EQ3_SERVICE_HS485D_PORT] } {
+  set portnumber $EQ3_SERVICE_HS485D_PORT
+}
+set HS485D_URL "bin://127.0.0.1:$portnumber"
 
 
 proc getButton {class onclick title} {

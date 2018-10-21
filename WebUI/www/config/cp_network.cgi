@@ -635,7 +635,7 @@ proc action_put_page {} {
               jQuery("[name='deleteCertificate']").hide();
               homematic("User.restartLighttpd", {}, function(){
                 MessageBox.show(translateKey("dialogRestartWebserverTitle"),translateKey("dialogRestartWebserverContent"));
-                window.setTimeout(function() {window.location.protocol = "http"},2000);
+                window.setTimeout(function() {window.location.protocol = "http";},2000);
               });
 
             });

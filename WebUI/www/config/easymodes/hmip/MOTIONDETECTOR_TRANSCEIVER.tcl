@@ -132,7 +132,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     }
 
     append HTML_PARAMS(separate_1) [get_ComboBox options BRIGHTNESS_FILTER separate_${special_input_id}_$prn ps BRIGHTNESS_FILTER "onchange=\"MD_init(\'separate_${special_input_id}_$prn\', 0, 15)\""]
-    append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
+    append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}"
+    append HTML_PARAMS(separate_1) "&nbsp;[getHelpIcon BRIGHTNESS_FILTER $hlpBoxWidth $hlpBoxHeight]"
+    append HTML_PARAMS(separate_1) "</td></tr>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 0, 15)</script>"
 
     incr prn; #7

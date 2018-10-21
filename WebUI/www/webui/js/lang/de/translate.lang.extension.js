@@ -402,7 +402,7 @@ jQuery.extend(true,langJSON, {
     "alertNoNumberMinVal" : "Der Minimalwert ist keine Zahl.",
     "alertNoNumberMaxVal" : "Der Maximalwert ist keine Zahl.",
     "alertValOutOfRange" : "Wert au%DFerhalb des m%F6glichen Eingabebereichs!",
-    "alertUseOnlySpecialChars" : "Bitte verwenden Sie nur die erlaubten Sonderzeichen [., !, $, (, ), :, ;, #, %DF, %E4, %F6, %FC, -].",
+    "alertUseOnlySpecialChars" : "Bitte verwenden Sie nur die erlaubten Sonderzeichen ., !, $, (, ), :, ;, #, %DF, %C4, %E4, %D6, %F6, %DC, %FC, -",
     "alertCharsNotAllowed" : "Bezeichnungen d%FCrfen keines der folgenden Zeichen enthalten: <, >, ', \", &, $, [, ], {, } und \\",
     "alertErrorDeleteObject" : "Objekt konnte nicht gel%F6scht werden.",
     "dialogAllRFInterfacesTitle" : "Alle bekannten Interfaces",
@@ -897,7 +897,6 @@ jQuery.extend(true,langJSON, {
     "lblColorTemperatureBR" : "Farb-<br/>temperatur",
     "lblKelvin" : "K",
     "lblUnknown" : "unbekannt",
-
     "optionDisable" : "Nicht aktiv",
     "optionEnable" : "Aktiv",
     "optionFloorHeatingStandard" : "Standard-Fussbodenheizung",
@@ -1048,7 +1047,7 @@ jQuery.extend(true,langJSON, {
     "deviceFirmwareInformation" : "%DCbersicht",
 
 
-    "colorBLACK" : "Schwarz",
+    "colorBLACK" : "Farbe Aus",
     "colorBLUE" : "Blau",
     "colorGREEN" : "Gr%FCn",
     "colorTURQUOISE" : "T%FCrkis",
@@ -1056,6 +1055,124 @@ jQuery.extend(true,langJSON, {
     "colorPURPLE" : "Violett",
     "colorYELLOW" : "Gelb",
     "colorWHITE" : "Weiss",
+    "colorStateNormal" : "Farbstatus normal",
+    "colorStateUnknown" : "Farbstatus unbekannt",
+
+    "lblPressSystemButton" : "Bitte bet%E4tigen Sie die System-Taste und bringen das Ger%E4t in Funkreichweite.",
+
+    "btnAccessPointSettings" : "Homematic IP<br/>Access Points",
+    "lblAccessPointSettings1" : "Verwaltung der Homematic IPAccess Points",
+
+    "submenuAccessPointSettings" : "Homematic IP Access Points",
+    "submenuNewAccessPoints" : "Neu",
+    "thAccessPointName" : "Name",
+    "thAccessPoint" : "Access Point",
+    "thAccessPointID" : "Access Point<br/>SGTIN",
+    "thAccessPointType" : "Typ",
+    "thAccessPointVersion" : "Hauptprozessor",
+    "thAccessPointVersionCoprocessor" : "Co-Prozessor",
+    "thAccessPointAvailableVersion" : "Verf%FCgbare Versionen",
+    "thAccessPointIP" : "IP-Adresse",
+    "thAccessPointState" : "Status",
+
+    "accessPointPassphrase" : "Passwort (PW)",
+    "accessPointPassphraseA" : "(siehe Ger%E4teaufdruck)",
+
+    "accessPointLocalKey" : "Key",
+    "lblSeeQRCodeSticker" : "(siehe QR-Code Sticker)",
+
+    "offlineOperation" : "Offlinebetrieb",
+
+
+    "accessPointForceDelete" : "L%F6schen erzwingen<br/>(kein Werksreset)",
+    "accessPointNotAvailable" : "-",
+    "active" : "Aktiv",
+    "inactive" : "Inaktiv",
+    "primary" : "Intern",
+    "AccessPointSearchInProgress" : "Access Points werden gesucht...",
+    "dialogNewAccessPointTitle" : "Access Point hinzuf%FCgen",
+    "dialogDeleteAccessPointTitle" : "Access Point entfernen und zur%FCcksetzen",
+    "dialogEditAccessPointTitle" : "Access Point: Einstellungen und Update",
+    "AccessPointAssignmentFailedIdMissing" : "Interner Fehler: Die SGTIN des Access Points fehlt.",
+    "AccessPointAssignmentFailedNameMissing" : "Geben Sie das Passwort des Access Points ein (siehe Ger%E4teaufdruck (PW)). ",
+    "AccessPointAssignmentFailedPassphraseMissing" : "Geben Sie das Passwort des Access Points ein (siehe Ger%E4teaufdruck (PW)). ",
+    "AccessPointAssignmentFailedPassphraseInvalidFormat" : "Das Passwort des Access Points ist nicht korrekt. Kontrollieren Sie die korrekte Eingabe des Passwortes. Bei Verwendung eines der folgenden Sonderzeichen, muss das Passwort %FCber NetFinder angepasst werden: <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
+    "AccessPointAssignmentFailedLocalKeyMissing" : "Bitte geben Sie den Schl%FCssel des Access Point ein (siehe QR-Code Sticker), oder deaktivieren Sie die Funktion des Offlinebetriebes",
+    "AccessPointAssignmentFailedLocalKeyInvalid" : "Der Key des Access Points hat ein ung%FCltiges Format. Bitte kontrollieren Sie diesen (siehe QR-Code Sticker).",
+
+    "AccessPointAssignmentFailedNotKnown" : "Der Access Point konnte nicht hinzugef%FCgt werden. F%FChren Sie die Suche erneut durch.",
+    "AccessPointAssignmentFailedPassphraseCouldNotChecked" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
+    "AccessPointAssignmentFailedPassphraseInvalidValue" : "Das Passwort des Access Points ist ungültig.",
+    "AccessPointAssignmentGetConfigurationParameterDescription" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
+    "AccessPointAssignmentGetConfigurationParameter" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
+    "AccessPointAssignmentConfigurationParameterNotSupported" : "Die Firmware Ihres Access Points unterst%FCtzt diese Funktion nicht. Aktualisieren Sie die Firmware auf die neuste Version.",
+    "AccessPointAssignmentConfigurationParameterCouldNotBeSaved" : "Die Konfiguration des Access Points konnte nicht gespeichert werden. Kontrollieren Sie die Verbindung und versuchen Sie es erneut.",
+    "AccessPointAssignmentNotFinished" : "Die Verbindung wird hergestellt.",
+    "AccessPointAssignmentInProgress" : "Die Verbindung wird hergestellt.",
+    "accessPointPrimaryNotKnown" : "Der interne Access Point konnte nicht gefunden werden. Pr%FCfen Sie die Konfiguration der Zentrale.",
+    "accessPointNotKnown" : "Der Access Point konnte nicht gefunden werden. Aktualisieren Sie die Liste und f%FChren die Aktion erneut durch.",
+    "accessPointLocalKeyNotSupported" : "Die Konfiguration der Zentrale ist nicht im Offlinebetrieb möglich. Deaktivieren Sie diese Funktion.",
+    "AccessPointAssignmentFinished" : "Der Access Point wurde zum LAN-Router umkonfiguriert und sollte jetzt t%FCrkis leuchten.",
+    "accessPointDeleteHint" : "Wollen Sie den Access Point wirklich aus dem System entfernen? " +
+      "Sollte im System kein Access Point mehr vorhanden sein, k%F6nnen die entsprechenden Ger%E4te nicht vollst%E4ndig verwendet werden, bis wieder ein Access Point hinzugef%FCgt wurde.",
+    "AccessPointDeletionFailedIdMissing" : "Interner Fehler, die SGTIN des Access Point fehlt.",
+    "AccessPointDeletionFailedPassphraseMissing" : "Geben Sie das Passwort des Access Points ein (siehe Ger%E4teaufdruck (PW)).",
+    "AccessPointDeletionFailedPassphraseInvalidFormat" : "Das Passwort des Access Points ist nicht korrekt. Kontrollieren Sie die korrekte Eingabe des Passwortes. Bei Verwendung eines der folgenden Sonderzeichen, muss das Passwort %FCber NetFinder angepasst werden: <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
+    "AccessPointDeletionFailedNotKnown" : "Der Access Point konnte nicht gel%F6scht werden. Pr%FCfen Sie die Verbindung des Access Points oder erzwingen Sie das L%F6schen.",
+    "AccessPointDeletionFailedPassphraseCouldNotChecked" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
+    "AccessPointDeletionFailedPassphraseInvalidValue" : "Das Passwort des Access Points ist ungültig.",
+    "AccessPointDeletionFailedFactoryReset" : "Der Werksreset des Access Points konnte nicht durchgef%FChrt werden. %FCberpr%FCfen Sie die Verbindung und versuchen Sie es erneut.",
+    "AccessPointDeletionNotFinished" : "Konfiguration und Werksreset des Access Points wird durchgef%FChrt.",
+    "AccessPointDeletionInProgress" : "Konfiguration und Werksreset des Access Points wird durchgef%FChrt.",
+    "AccessPointDeletionFinished" : "Der Access Point wurde gel%F6scht. Die Standard-Einstellungen wurden wieder hergestellt.",
+    "SetAccessPointNameSuccess" : "Der Name des Access Points wurde ge%E4ndert.",
+    "AccessPointUpdateInitiated" : "Das Firmwareupdate des Access Points wurde gestartet. Dies kann einige Minuten dauern. Anschlie%DFend leuchtet die Systemtaste wieder t%FCrkis.",
+
+    "lblFirmwareVersions" : "Firmwareversionen",
+    "lblAvailableCapital": "Verf%fcgbar",
+
+    "lblStateGarageDoorPosition" : "Position des Garagentors:",
+    "lblPosClosed" : "geschlossen",
+    "lblPosOpen" : "ge%F6ffnet",
+    "lblPosVentilation" : "L%FCftungsposition",
+    "lblPosUnknown" : "unbekannt",
+
+    "btnGarageOpen" : "%D6ffnen",
+    "btnGarageClose" : "Schlie%DFen",
+    "btnGarageVent" : "L%FCften",
+    "btnGarageStop" : "Stopp",
+
+    "lblStateGarageDoorSwitch" : "Status Beleuchtung:",
+    "lblSwitchLightOn" : "Licht einschalten",
+    "lblSwitchLightOff" : "Licht ausschalten",
+
+    "dialogSettingsUSBStorageSettings" : "Externer USB-Speicher",
+    "dialogSettingsStorageHintUSBStorageP1" : "Die Sicherung der Daten umfasst nur die Diagramme.",
+
+
+    "dialogSettingsSecurityTDAuth" : "Authentifizierung",
+    "dialogSettingsSecurityLblActivateAuthRemoteXML" : "Authentifizierung aktiv: ",
+    "dialogSettingsSecurityTDExplanation" : "Bei Aktivierung ist der externe Zugriff auf die Homematic XML-RPC API und die Homematic-Script API nur mit g%FCltigem Benutzernamen und Passwort m%F6glich.",
+
+    "transferUserBackupTitle" : "System-Backup pr%FCfen und %FCbertragen",
+    "transferUserBackupContent" : "Bitte warten Sie kurz.",
+
+    "backupWrongJavaCall" : "Fehlerhafter Aufruf",
+    "backupOK" : "Das Backup ist ohne Fehler",
+    "backupBackupImperfectMissingFile" : "Backup fehlerhaft/unvollst%E4ndig (z. B. *.apkx Datei fehlt).",
+    "backupNoInternet_KeyserverTimeout" : "Kein Internet / Keyserver Timeout.",
+    "backupKeyServer_NAK" : "Zentrale dem Keyserver unbekannt.",
+    "backupErrorDevicePersistence_TypesNotCompatibel" : "Einlesen der Ger%E4te fehlgeschlagen (<br/>Gerätetypen nicht kompatibel).",
+    "backupMigrationFailed" : "Unbekannter Fehler.",
+    "backupCoProcessor_not_availabel" : "Es ist kein Coprozessor verf%FCgbar.",
+    "backupCoProcessor_NotInitialized" : "Der Coprozessor kann nicht initialisiert werden.",
+    "backupCoProcessor_VersionNotSupported" : "Kommunikation mit dem Coprozessor fehlgeschlagen.",
+    "backupUnknownError" : "Unbekannter Fehler.",
+
+    "lblSettingsFavorites1User" : "%DCbersicht %FCber die dem angemeldeten Benutzer zugeordneten Favoriten",
+    "lblSettingsFavorites2User" : "Anlegen und Bearbeiten neuer Favoriten",
+
+    "lblSettingsUserAdministrationUser" : "Bearbeiten des eigenen Benutzerkontos mit %C4ndern des Kennwortes",
 
     "theEnd" : ""
   }

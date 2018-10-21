@@ -643,7 +643,6 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsFirewallLblScriptAPI" : "<b>Remote Homematic-Script API:</b>",
     "dialogSettingsFirewallLblHintScriptAPI" : "Erm%F6glicht den Zugriff auf die Logikschicht der Homematic Zentrale",
     "dialogSettingsFirewallLblIPAddresses" : "<b>IP-Adressen f%FCr den eingeschr%E4nkten Zugriff:</b>",
-    "dialogSettingsFirewallLblHintIPAddresses" : "Sie k%F6nnen den Zugriff f%FCr einzelne IP-Adressen (z.B. 192.168.0.1) oder ganze Adressbereiche (z.B. 192.168.0.0/16) freigeben.",
     "dialogSettingsFirewallLblFullAccess" : "Vollzugriff",
     "dialogSettingsFirewallLblRestrictedAccess" : "Eingeschr%E4nkt",
     "dialogSettingsFirewallLblNoAccess" : "Kein Zugriff",

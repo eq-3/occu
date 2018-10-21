@@ -1,156 +1,112 @@
 jQuery.extend(true,langJSON, {
   "en" : {
-    "COMMENT" : "THIS is for the release A/2018",
+
+    "comment" : "********** Start translated section (already translated by K. Rosenfeld) **********",
+    "dlgAdminPasswdHint1" :
+      "Before you put your CCU into operation, you need to enter an administrator password. " +
+        "Be sure to choose a password that you can easily remember and do not share it with anyone else.<br/><br/>" +
+        "Additional users with restricted rights can be set up in the CCU user management area.",
+
+    "dlgUserPasswdHint1" :
+    "Before you put your CCU into operation, you need to enter a password. " +
+      "Be sure to choose a password that you can easily remember and do not share it with anyone else.<br/><br/>",
+
+    "showHelpSecurityHigh" : "<h1><h1>Maximum security level</h1><p><ul><li>Firewall ports: Closed as standard (incoming connections)</li></ul></p>",
+    "showHelpSecurityMid" : "<h1>Standard security level</h1> <p><ul><li>Firewall ports: Closed as standard (incoming connections)</li><li>Authentication for Homematic XML-RPC API and Remote Homematic Script API: Activated</li><li>Remote access to Homematic XML-RPC API: Restricted</li><li>Remote access to Homematic Script API: Restricted</li></ul></p>",
+    "showHelpSecurityLow" : "<h1>Minimum security level</h1> <p><ul><li>Firewall ports: Open as standard</li><li>Authentication for Homematic XML-RPC API and Remote Homematic Script API: Deactivated</li><li>Remote access to Homematic XML-RPC API: Full access</li><li>Remote access to Homematic Script API: Restricted</li></ul></p>",
+    "showHelpSecurityCustom": "<h1>Custom security level</h1> <p>One or more settings deviate from the default settings for the security levels.<br>If &quot;Custom&quot; is retained here, no settings are changed.</p>",
+
+    "secLevelHigh" : "Maximum security",
+    "secLevelMid" : "Restricted",
+    "secLevelLow" : "Relaxed",
+    "secLevelCustom" : "Custom",
+
+    "secLevelHighCaptionA" : "I am familiar with how to set individual services (such as programming interfaces) via the CCU security options. This setting only permits access to the online interface.",
+    "secLevelHighCaptionB" : "This security level does not permit access to the Mediola software. This can be modified via the CCU firewall settings.",
+    "secLevelMidCaption" : "This safety level permits access to interfaces, additional software and the Mediola software.",
+    "secLevelLowCaptionA" : "I am familiar with how to protect the CCU against unauthorised access.",
+    "secLevelUserHint" : "A security level does not prevent subsequent opening of ports, for example, in the firewall setting. The security level would then switch, for example, from 'Maximum security' to 'Custom'.",
+
+    "dialogSetSecurityLevelExpress"  : "Express",
+    "dialogSetSecurityLevelUserDefined"  : "Custom",
+    "dlgSecurityLevelHeader" : "Security level",
+    "noPasswdSet" : "No password set!",
+    "passwdNotIdentical" : "Passwords do not match!",
+
+    "adminPasswordTitle" : "<u>Administrator password</u>",
+    "userPasswordTitle" : "<u>User password</u>",
+    "portEnablingTitle" : "<b>Port opening:</b>",
+    "portEnablingCaption" : "This is where required ports can be opened. Enter the ports in a list separated by ';'.",
+
+    "securitySettingsTitle" : HMIdentifier.en.CCUShortName + " Security setting",
+    "btnSecuritySettings" : "Security<br/>wizard",
+    "lblSecuritySettings1" : "Express",
+    "lblSecuritySettings2" : "Custom",
+
+    "dialogSettingsFirewallLblFWPolicy" : "<b>Firewall policy:</b>",
+    "dialogSettingsFirewallLblPortAccess" : "<b>Port access:</b>",
+    "dialogSettingsFirewallLblPortsRestricted" : "Ports blocked",
+    "dialogSettingsFirewallLblPortsOpen" : "Ports open",
+    "dialogSettingsFirewallLblHintPortAccess" : "Port access settings",
+
+    "lblSetting" : "Setting",
+
+    "dialogSettingsFirewallLblMediola" : "<b>Mediola access:</b>",
+    "dialogSettingsFirewallLblHintMediola" : "Enables access to the Mediola service",
+
+    "toolTipFirewallAccessModes" : "<ul>" +
+      "<li>Full access: Remote and local access granted<</li>" +
+      "<li>Restricted: Local access only</li>" +
+      "<li>No access: Access not granted</li>" +
+    "<ul>",
+    "dialogSettingsFirewallLblHintIPAddresses" : "You can enable access for individual IP addresses or entire address ranges for both IPv4 and IPv6. Enter the addresses in a list separated by ';'.",
+
+    "comment" : "********** END translated section **********",
+
+    "dglUserNewFwSettingsTitle" : "en* Bitte beachten!",
+    "dglUserNewFwSettingsContent" : "en* Die Firewalleinstellungen wurden ge%E4ndert. Bei Problemen mit z. B. Zusatzsoftware, wenden Sie sich bitte an den Administrator.",
 
 
-    "COMMENT" : "THIS is for the release B/2018",
+    "stringTableContactBoost" : "Corrosion protection",
+    "lblJalousieBlind" : "Operation mode blind / shutter",
+    "optionBlind" : "Blind",
+    "optionShutter" : "Shutter",
+    "hintBlindModeChanged" : "en* %DCbertragen Sie bitte die Konfiguration, bevor Sie weitermachen",
 
-    "colorStateNormal" : "Colour mode normal",
-    "colorStateUnknown" : "Colour mode unknown",
+    "dialogSettingsStorageTitleLEDS" : "en* Info LED",
+    "dialogSettingsStorageSettingsLblServiceLed" : "en* Servicemeldungen:",
+    "dialogSettingsStorageSettingsLblAlarmLed" : "en* Alarmmeldungen:",
+    "dialogSettingsStorageHintLEDS" : "en* Ein- bzw. Abschalten des Blinkens der Info LED bei Service- und Alarmmeldungen",
 
-    "stringTableRampTimeUnit" : "Unit ramp time",
-    "stringTableRampTimeUnitD" : "Unit ramp time: Days",
-    "stringTableRampTimeUnitH" : "Unit ramp time: Hours",
-    "stringTableRampTimeUnitM" : "Unit ramp time: Minutes",
-    "stringTableRampTimeUnitS" : "Unit ramp time: Seconds",
-    "stringTableRampTimeValue" : "Value ramp time",
+    "HmIPWPSlatPosHelpTitle" : "en* Hinweis zur Lamellenposition",
+    "HmIPWPSlatPosHelp" : "en* Bitte bedenken Sie, dass die Lammellenposition nur f%FCr Jalousieaktoren gilt und bei Rollladenaktoren keine Funktion hat.",
 
-    "stringTableIdentificationModeLCDBacklightFalse" : "Lighting Display: OFF",
-    "stringTableIdentificationModeLCDBacklightTrue" : "Lighting Display: ON",
-    "stringTableIdentificationModeKeyVisualFalse" : "Lighting system button: OFF",
-    "stringTableIdentificationModeKeyVisualTrue" : "Lighting system button: ON",
-    "stringTableIdentifyDuration" : "Duration of lighting",
-    "stringTableIdentifyTargetLevel" : "Brightness value of lighting",
+    "dialogSettingsSecurityTDSNMP" : "en* SNMP",
+    "dialogSettingsSecurityLblActivateSNMP" : "en* SNMP aktiv:",
+    "dialogSettingsSecurityTDSNMPExplanation" : "en* Bei Aktivierung ist der SNMP Dienst aktiv. Unterstützt wird ausschließlich SNMPv3 mit SHA und AES.",
+    "dialogSettingsSecurityPasswordHint" : "en* Bitte beachten Sie, dass das Passwort mindestens 8 Zeichen lang sein muss.",
+    "dialogSettingsSecurityUserHint" : "en* Bitte geben Sie einen Benutzernamen ein.",
 
-    "lblPressSystemButton" : "Please press the system key and bring the device into radio range.",
+    "hintWiredBlindLinksAvailable" : "en* Achtung, es bestehen Verkn%FCpfungen! Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
+    "hintWiredBlindProgramsAvailable" : "en* Achtung, es bestehen Programme! Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
 
-    "COMMENT" : "************* THIS is for the release CCU3 B1/2018 *************",
-    "COMMENT" : " (DRAP Integration)",
+    "hintWiredBlindLinksAndProgramsAvailable" : "en* Achtung, es bestehen Verkn%FCpfungen und Programme. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
+    "hintCheckChannels" : "<br/>en* Pr%FCfen Sie bitte folgende Kan%E4le: ",
 
-    "stringTableMultiModeInputTransmitterTitle" : "Wired Input Module",
+    "lblSoundFileNr" : "en* MP3-Datei",
+    "lblColorNr" : "en* Farbe",
+    "lblColorSongNr" : "en* MP3-Datei<br/>Farbe",
+    "internalSystemSound" : "en* Interner Sound",
+    "randomPlayback" : "en* Zufallswiedergabe",
+    "soundOldValue" : "en* Zuletzt gespielte MP3-Datei",
+    "colorOldValue" : "en* Zuletzt gew%E4hlte Farbe",
+    "soundColorOldValue" : "en* MP3-Datei/Farbe = letzter Wert",
+    "soundColorRandomPlayback" : "en* MP3-Datei/Farbe = Zufallswiedergabe",
+    "soundColorInternal" : "en* Interner Sound/keine Farbe",
+    "hintSoundFileRandom20" : "en* Zuf%E4llige Wiedergabe einer der ersten 20 MP3-Dateien.",
 
-    "btnAccessPointSettings" : "Homematic IP<br/>Access Points",
-    "lblAccessPointSettings1" : "Administration of Homematic IP Access Points",
-
-    "submenuAccessPointSettings" : "Homematic IP Access Points",
-    "submenuNewAccessPoints" : "New",
-    "thAccessPointName" : "Name",
-    "thAccessPoint" : "Access Point",
-    "thAccessPointID" : "Access Point SGTIN",
-    "thAccessPointType" : "Type",
-    "thAccessPointVersion" : "Main processor",
-    "thAccessPointVersionCoprocessor" : "Co-processor",
-    "thAccessPointAvailableVersion" : "Available versions",
-    "thAccessPointIP" : "IP address",
-    "thAccessPointState" : "Status",
-
-    "accessPointPassphrase" : "Password (PW)",
-    "accessPointPassphraseA" : "(see device labelling)",
-
-    "accessPointLocalKey" : "Key",
-    "lblSeeQRCodeSticker" : "(see QR code sticker)",
-
-    "offlineOperation" : "Offline operation",
-
-    "accessPointForceDelete" : "Force delete<br/>(no factory reset)",
-    "accessPointNotAvailable" : "-",
-    "active" : "Active",
-    "inactive" : "Inactive",
-    "primary" : "Internal",
-    "AccessPointSearchInProgress" : "Searching for Access Points...",
-    "dialogNewAccessPointTitle" : "Add Access Point",
-    "dialogDeleteAccessPointTitle" : "Remove and reset Access Point",
-    "dialogEditAccessPointTitle" : "Access Point: Settings and update",
-    "AccessPointAssignmentFailedIdMissing" : "Internal error: The SGTIN of the Access Point is missing.",
-    "AccessPointAssignmentFailedNameMissing" : "Please enter the name for the Access Point.",
-    "AccessPointAssignmentFailedPassphraseMissing" : "Please enter the password of the Access Point (see device labelling (PW). ",
-    "AccessPointAssignmentFailedPassphraseInvalidFormat" : "The password of the Access Point is not correct. Please make sure the password is correct. If you use one of the following special characters, the password has to be adjusted via NetFinder: <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
-    "AccessPointAssignmentFailedLocalKeyMissing" : "Please enter the Access Point key (see QR code sticker) or deactivate the offline operation function, if you want to proceed the teach-in with active Internet connect.",
-    "AccessPointAssignmentFailedLocalKeyInvalid" : "The Access Point key has an invalid format. Make sure your key is correct (see QR code sticker).",
-    "AccessPointAssignmentFailedNotKnown" : "The Access Point could not be added. Please search again.",
-    "AccessPointAssignmentFailedPassphraseCouldNotChecked" : "The configuration of the Access Point cannot be requested. Check the connection and try again.",
-    "AccessPointAssignmentFailedPassphraseInvalidValue" : "The password of the Access Point is invalid.",
-    "AccessPointAssignmentGetConfigurationParameterDescription" : "The configuration of the Access Point cannot be requested. Check the connection and try again.",
-    "AccessPointAssignmentGetConfigurationParameter" : "The configuration of the Access Point cannot be requested. Check the connection and try again.",
-    "AccessPointAssignmentConfigurationParameterNotSupported" : "The firmware of your Access Point does not support this function. Please update the firmware to the latest version. ",
-    "AccessPointAssignmentConfigurationParameterCouldNotBeSaved" : "The configuration of the Access Point cannot be saved. Check the connection and try again.",
-    "AccessPointAssignmentNotFinished" : "Connection is established.",
-    "AccessPointAssignmentInProgress" : "Connection is established.",
-    "accessPointPrimaryNotKnown" : "The internal Access Point could not be found. Check the configuration of your CCU.",
-    "accessPointNotKnown" : "The Access Point could not be found. Update the list and try again.",
-    "accessPointLocalKeyNotSupported" : "The configuration for your CCU is not possible in offline operation. Deactivate this function. ",
-    "AccessPointAssignmentFinished" : "The Access Point has been configured as LAN router and should now light up turquoise.",
-    "accessPointDeleteHint" : "Do you really want to remove the Access Point from the system? If no Access Point is available in the system, the corresponding devices cannot be used entirely until an Access Point has been added again.",
-    "AccessPointDeletionFailedIdMissing" : "Internal error: The SGTIN of the Access Point is missing.",
-    "AccessPointDeletionFailedPassphraseMissing" : "Please enter the password of the Access Point (see device labelling (PW). ",
-    "AccessPointDeletionFailedPassphraseInvalidFormat" : "The password of the Access Point is not correct. Please make sure the password is correct. If you use one of the following special characters, the password has to be adjusted via NetFinder: <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
-    "AccessPointDeletionFailedNotKnown" : "The Access Point could not be deleted. Please check the connection of the Access Point or force the deletion.",
-    "AccessPointDeletionFailedPassphraseCouldNotChecked" : "The configuration of the Access Point cannot be requested. Check the connection and try again.",
-    "AccessPointDeletionFailedPassphraseInvalidValue" : "The password of the Access Point is invalid.",
-    "AccessPointDeletionFailedFactoryReset" : "The factory settings of the Access Point could not be restored. Check the connection and try again.",
-    "AccessPointDeletionNotFinished" : "Configuration and reset of the Access Point is carried out.",
-    "AccessPointDeletionInProgress" : "Configuration and reset of the Access Point is carried out.",
-    "AccessPointDeletionFinished" : "The Access Point has been deleted. The default settings have been restored.",
-    "SetAccessPointNameSuccess" : "The name of the Access Point has been changed.",
-    "AccessPointUpdateInitiated" : "The firmware update of the Access Point has been started. This may take a few minutes. Afterwards, the system button lights up turquoise again.",
-
-    "lblFirmwareVersions" : "Firmware versions",
-    "lblAvailableCapital": "Available",
-
-    "lblStateGarageDoorPosition" : "Garage door position: ",
-    "lblPosClosed" : "Closed",
-    "lblPosOpen" : "Open",
-    "lblPosVentilation" : "Ventilation position",
-    "lblPosUnknown" : "Unknown ",
-
-    "btnGarageOpen" : "Opening",
-    "btnGarageClose" : "Closing",
-    "btnGarageVent" : "Ventilation",
-    "btnGarageStop" : "Stop",
-
-    "lblStateGarageDoorSwitch" : "Lighting state:",
-    "lblSwitchLightOn" : "Switching light on",
-    "lblSwitchLightOff" : "Switching light off",
-
-    "stringTableDoorCommandClose" : "Closing the garage door",
-    "stringTableDoorCommandNOP" : "No action",
-    "stringTableDoorCommandOpen" : "Opening the garage door",
-    "stringTableDoorCommandPartialOpen" : "Ventilation position",
-    "stringTableDoorCommandStop" : "Stop movement",
-
-    "stringTableDoorStateClose" : "Position closed",
-    "stringTableDoorStateOpen" : "Position opened",
-    "stringTableDoorStateUnknown" : "Position unknown",
-    "stringTableDoorStateVentilationPosition" : "Ventilation position",
-
-    "dialogSettingsUSBStorageSettings" : "External USB memory",
-    "dialogSettingsStorageHintUSBStorageP1" : "Storage of data only includes the diagrams.",
-
-    "stringTableLEDDisableSendState" : "Deactivate visual confirmation of button press",
-    "stringTableDisableAcousticSendState" : "Deactivate acoustic confirmation of button press",
-
-    "dialogSettingsSecurityTDAuth" : "Authentication",
-    "dialogSettingsSecurityLblActivateAuthRemoteXML" : "Authentication active: ",
-    "dialogSettingsSecurityTDExplanation" : "When activated, external access to the Homematic XML-RPC API and the Homematic Script API is only possible with a valid user name and password.",
-
-
-    "transferUserBackupTitle" : "Check system backup and transfer",
-    "transferUserBackupContent" : "Please wait a moment.",
-
-    "backupWrongJavaCall" : "Incorrect call",
-    "backupOK" : "Backup without error",
-    "backupBackupImperfectMissingFile" : "Incorrect/incomplete backup (e.g. *.apkx file is missing).",
-    "backupNoInternet_KeyserverTimeout" : "No Internet / key server time-out.",
-    "backupKeyServer_NAK" : "CCU unknown to key server.",
-    "backupErrorDevicePersistence_TypesNotCompatibel" : "Reading of devices failed (<br/>Device types not compatible).",
-    "backupMigrationFailed" : "Unknown error.",
-    "backupCoProcessor_not_availabel" : "No co-processor is available.",
-    "backupCoProcessor_NotInitialized" : "The co-processor cannot be initiated.",
-    "backupCoProcessor_VersionNotSupported" : "Communication with co-processor failed.",
-    "backupUnknownError" : "Unknown error.",
-
-    "stringTableSectionStatusNormal" : "Status Section: Normal",
-    "stringTableSectionStatusUnknown" : "Status Section: Unknown",
+    "optionNoRepetition" : "en* Keine Wiederholung",
+    "optionInfiniteRepetition" : "en* Dauerhaft",
 
     "noMoreKeys" : ""
   }

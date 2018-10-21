@@ -44,8 +44,8 @@ set PROFILE_1(SHORT_OFFDELAY_STEP) 0.050000
 set PROFILE_1(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_1(SHORT_OFF_LEVEL) 0.000000
-set PROFILE_1(SHORT_OFF_TIME_BASE) 7
-set PROFILE_1(SHORT_OFF_TIME_FACTOR) 31
+set PROFILE_1(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
+set PROFILE_1(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_OFF_TIME_MODE) 0
 set PROFILE_1(SHORT_ONDELAY_MODE) 0
 set PROFILE_1(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
@@ -56,6 +56,7 @@ set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
 set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_1(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(SHORT_RAMPOFF_TIME_BASE) 0
 set PROFILE_1(SHORT_RAMPOFF_TIME_FACTOR) 5
@@ -169,6 +170,15 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   if {[info exists ps($param)] == 1} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  set param SHORT_PROFILE_REPETITIONS
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getRepetitionSelector PROFILE_$prn ${special_input_id} $param]
+
+    # OFF_TIME
+    append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink0 $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
   }
 
   append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint]"

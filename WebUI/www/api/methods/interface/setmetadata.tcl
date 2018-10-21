@@ -16,7 +16,11 @@ set script {
     o.AddMetaData(dataId, value);
     Write(dataId#": "#o.MetaData(dataId));
   } else {
-    Write("Not able to set the metadata");
+    ! Write("Not able to set the metadata");
+    object o = dom.CreateObject(OT_OBJECT);
+    o.Name(objectId);
+    o.AddMetaData(dataId, value);
+    Write(dataId#": "#o.MetaData(dataId));
   }
 }
 

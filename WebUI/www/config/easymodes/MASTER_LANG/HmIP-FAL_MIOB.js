@@ -36,24 +36,5 @@ jQuery.extend(true,langJSON, {
     "optionNormallyOpen": "NO (normally open)",
 
     "" : ""
-  },
-  "tr" : {
-    "lblCoolingEmergencyPWMSignal": "Emergency operation cooling",
-    "lblHeatingEmergencyPWMSignal": "Emergency operation heating",
-    "lblFrostProtectionTemperature": "Frost protection function activated from: ",
-    "lblHeatingLoadType": "Heating zone control",
-    "lblHeatingPumpControl": "Mode for heating zone 1",
-    "lblHeatingValveType": "Valve type",
-    "lblDecalcificationInterval": "Descaling run interval during inactivity",
-    "lblLeadTime" : "Lead time",
-    "lblFollowUpTime" : "Follow-up time",
-    "optionLoadBalancing": "Load balancing",
-    "optionLoadCollection": "Load collection",
-    "optionLocalPumpControl": "Heating pump control",
-    "optionGlobalPumpControl": "Heating valve control",
-    "optionNormallyClose": "NC (normally closed)",
-    "optionNormallyOpen": "NO (normally open)",
-
-    "" : ""
   }
 });

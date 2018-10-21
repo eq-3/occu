@@ -10,3 +10,6 @@
 "wake_up_light" : "Wake up light",
 "dimmer_toggle" : "Dimmer alternating on/off",
 "dimmer_on_when_change_signal" : "Dimmer on when change signal",
+
+"noRepetitions" : "en* Keine Wiederholung",
+"infiniteRepetitions" : "en* Unendlich",

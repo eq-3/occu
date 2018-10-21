@@ -22,6 +22,7 @@ jQuery.extend(true,langJSON, {
     "groupWillBeDeletedHeader" : "Group will be deleted...",
     "groupWillBeDeletedContent" : "Please wait. The direct device connections are being configured.",
     "Heating_Control" : "Heating control",
+    "HmIP-Heizungssteuerung" : "HmIP-Heating control",
     "Light_Control" : "Light control",
     "newGroupInputField" : "New group",
     "btnVirtualDeviceStateAndOperating" : "Operate",

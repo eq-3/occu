@@ -10,13 +10,15 @@
   gasConditionNumberElm = jQuery("#gasConditionNumber");
 
   var tdMicroSDElm = jQuery("#tdMicroSD"),
-  tdUSBStorageElm = jQuery("#tdUSBStorage");
+  tdUSBStorageElm = jQuery("#tdUSBStorage"),
+	tdLEDSElm = jQuery("#tdLEDS");
 
 	var base_url = "/pages/jpages/system/StorageSettings/";
     dlgResult = 0;
 
   if (product >= 3) {
     tdUSBStorageElm.show();
+		tdLEDSElm.show();
   } else {
     tdMicroSDElm.show();
   }
@@ -159,12 +161,34 @@
     new Ajax.Request(url,opt);
   };
 
+	onInfoLedCheckChange = function() {
+		var serviceVal = jQuery("#inputServiceLed").prop("checked");
+		var alarmVal = jQuery("#inputAlarmLed").prop("checked");
+		console.log("service checked:"+serviceVal);
+		console.log("alarm checked:"+alarmVal);
+		homematic("CCU.setInfoLedConfig", { serviceLedOn: serviceVal, alarmLedOn: alarmVal})
+
+	}
+
   jQuery.each(arCurrency, function(index, val) {
     curSelBoxElm.append("<option value='"+val+"'>"+val+"</option>");
   });
   readPricePerKWh();
 	translatePage('#messagebox');
 	dlgPopup.readaptSize();
+
+	//info led settings
+  getMessagesLEDSettings = function() {
+		return homematic("CCU.getInfoLedConfig", {});
+	};
+
+	var infoLedSettings = getMessagesLEDSettings();
+	infoLedServiceElm = jQuery("#inputServiceLed");
+	infoLedServiceElm.prop("checked", infoLedSettings.serviceLedOn);
+	infoLedServiceElm.val(infoLedSettings.serviceLedOn);
+	infoLedAlarmElm = jQuery("#inputAlarmLed");
+	infoLedAlarmElm.prop("checked", infoLedSettings.alarmLedOn);
+	infoLedAlarmElm.val(infoLedSettings.alarmLedOn);
 
 </script>
 <div class="popupTitle">${"$"}{dialogSettingsGeneralSettingsTitle}</div>
@@ -309,6 +333,26 @@
   	  </td>
 		</tr>
 
+
+    <!-- Service- / Alarm LED -->
+		<tr id="tdLEDS" class="CLASS21115 hidden">
+			<td class="CLASS21116">${"$"}{dialogSettingsStorageTitleLEDS}</td>
+			<td  align="left"  width="35%">
+				<table>
+					<tr>
+						<td class="CLASS21112"><label class="CLASS04904">${"$"}{dialogSettingsStorageSettingsLblServiceLed}</label></td>
+						<td><input id="inputServiceLed" type="checkbox" onClick="onInfoLedCheckChange()" /></td>
+					</tr>
+					<tr>
+						<td class="CLASS21112"><label class="CLASS04904">${"$"}{dialogSettingsStorageSettingsLblAlarmLed}</label></td>
+						<td><input id="inputAlarmLed" type="checkbox" onClick="onInfoLedCheckChange()" /></td>
+					</tr>
+				</table>
+			</td>
+			<td class="CLASS21113" align="left">
+				<p> ${"$"}{dialogSettingsStorageHintLEDS} </p>
+			</td>
+		</tr>
 	</table>
 </div>
 

@@ -396,8 +396,8 @@ jQuery.extend(true,langJSON, {
     "stringTableEventRandomTimeUnit" : "Unit of random part",
     "stringTableEventSecondaryAlarm" : "Alarm triggered by other device",
     "stringTableExpectAES" : "AES encryption",
-    "stringTableExternalClockFalse" : "Energy-saving temperature mode inactive",
-    "stringTableExternalClockTrue" :  "Energy-saving temperature mode active",
+    "stringTableExternalClockFalse" : "Energy-saving<br/>temperature mode inactive",
+    "stringTableExternalClockTrue" :  "Energy-saving<br/>temperature mode active",
     "stringTableFloorHeatingMode" : "Kind/type of system",
     "stringTableFrequencyInput" : "Analog",
     "stringTableFrostProtectFalse" : "Frost protection inactive",
@@ -576,7 +576,7 @@ jQuery.extend(true,langJSON, {
     "stringTableOnTimeUnit" : "Unit of switch-on time",
     "stringTableOnTimeValue" : "Value switch-on time",
     "stringTableOffTimeValue" : "Value switch-off time",
-    "stringTableOperationVoltage" : "Operating voltage in V:",
+    "stringTableOperationVoltage" : "Operating voltage in V",
     "stringTableOpticAllSensArm" :  "Visual signal for arming in absence mode",
     "stringTableOpticAllSensDelayArm" :  "Visual signal for delayed arming in absence mode",
     "stringTableOpticDisarm" :  "Visual signal for deactivating alarm",
@@ -1103,7 +1103,39 @@ jQuery.extend(true,langJSON, {
     "stringTableMsg_Water" : "Water detected",
     "stringTableMsg_Moisture" : "Humidity detected",
 
+    "stringTableRampTimeUnit" : "Unit ramp time",
+    "stringTableRampTimeUnitD" : "Unit ramp time: Days",
+    "stringTableRampTimeUnitH" : "Unit ramp time: Hours",
+    "stringTableRampTimeUnitM" : "Unit ramp time: Minutes",
+    "stringTableRampTimeUnitS" : "Unit ramp time: Seconds",
+    "stringTableRampTimeUnit10MS" : "Unit ramp time: mS",
+    "stringTableRampTimeValue" : "Value ramp time",
 
+    "stringTableIdentificationModeLCDBacklightFalse" : "Lighting Display: OFF",
+    "stringTableIdentificationModeLCDBacklightTrue" : "Lighting Display: ON",
+    "stringTableIdentificationModeKeyVisualFalse" : "Lighting system button: OFF",
+    "stringTableIdentificationModeKeyVisualTrue" : "Lighting system button: ON",
+    "stringTableIdentifyDuration" : "Duration of lighting",
+    "stringTableIdentifyTargetLevel" : "Brightness value of lighting",
+
+    "stringTableMultiModeInputTransmitterTitle" : "Wired Input Module",
+
+    "stringTableDoorCommandClose" : "Closing the garage door",
+    "stringTableDoorCommandNOP" : "No action",
+    "stringTableDoorCommandOpen" : "Opening the garage door",
+    "stringTableDoorCommandPartialOpen" : "Ventilation position",
+    "stringTableDoorCommandStop" : "Stop movement",
+
+    "stringTableDoorStateClose" : "Position closed",
+    "stringTableDoorStateOpen" : "Position opened",
+    "stringTableDoorStateUnknown" : "Position unknown",
+    "stringTableDoorStateVentilationPosition" : "Ventilation position",
+
+    "stringTableLEDDisableSendState" : "Deactivate visual confirmation of button press",
+    "stringTableDisableAcousticSendState" : "Deactivate acoustic confirmation of button press",
+
+    "stringTableSectionStatusNormal" : "Status Section: Normal",
+    "stringTableSectionStatusUnknown" : "Status Section: Unknown",
 
     "noMoreKeys" : ""
   }

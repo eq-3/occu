@@ -135,6 +135,7 @@
                           }
                         }
                       }
+                      Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
                       Write( sValue );
                       Write( '</option>' );
                     }
@@ -247,6 +248,7 @@
                     sValue = sShortKey;
                   }
                 }
+                Call("/esp/functions.fn::getSpecialTranslationPrgCond()");
                 Write( sValue );
                 Write( '</option>' );
               }

@@ -1,0 +1,14 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird die gew&auml;hlte MP3-Datei f&uuml;r die festgelegte Zeit abgespielt.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird die gew&auml;hlte MP3-Datei ausgeschaltet.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
+
+"switchMode" : "Schalten bei",
+
+"subset_1": "Feuchtigkeit",
+"subset_2": "Wasserstand",
+"subset_3": "Feuchtigkeit oder Wasserstand",
+"subset_4": "Trockenheit",
+
+

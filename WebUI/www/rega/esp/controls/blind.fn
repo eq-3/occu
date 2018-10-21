@@ -488,6 +488,12 @@ function ::CreateShutterVirtualReceiver()
   object oLvl = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.LEVEL");
   object oStop = cObj.DPByControl("SHUTTER_VIRTUAL_RECEIVER.STOP");
 
+  if (mode.MetaData("channelMode") == "shutter") {
+    object oLvl = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.LEVEL");
+    object oStop = cObj.DPByControl("BLIND_VIRTUAL_RECEIVER.STOP");
+  }
+
+
   integer iLvlId = 0;
   integer iStopId = 0;
   integer iLvl = 0;
@@ -617,6 +623,11 @@ function ::CreateShutterTransmitter()
   object oDevice = dom.GetObject(cObj.Device());
   object oLvl = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL");
   object oLvlStatus = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL_STATUS");
+
+  if (mode.MetaData("channelMode") == "shutter") {
+    object oLvl = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL");
+    object oLvlStatus = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL_STATUS");
+  }
 
   real rLvl = -1;
 

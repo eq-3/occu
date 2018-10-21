@@ -1,0 +1,18 @@
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion)</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen abgespielt oder beendet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen abgespielt.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen beendet.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
+
+"subset_1_mode1" : "rechts > links ein / links > rechts aus",
+"subset_2_mode1" : "rechts > links aus / links > rechts ein",
+
+"subset_1_mode2" : "rechts > links ein",
+"subset_2_mode2" : "rechts > links aus",
+
+"subset_1_mode3" : "links > rechts aus",
+"subset_2_mode3" : "links > rechts ein",
+
+"subset_7" : "rechts -> links",
+"subset_8" : "links -> rechts",
+"subset_9" : "links -> rechts oder rechts -> links",

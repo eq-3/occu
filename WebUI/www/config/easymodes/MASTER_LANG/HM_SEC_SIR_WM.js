@@ -20,14 +20,5 @@ jQuery.extend(true,langJSON, {
     "speedSlow" : "slow",
     "speedFast" : "fast",
     "" : ""
-  },
-  "tr" : {
-    "soundID" : "Alarm signal",
-    "pitch" : "Tone pitch",
-    "speed" : "Speed",
-    "signal" : "Signal",
-    "speedSlow" : "slow",
-    "speedFast" : "fast",
-    "" : ""
   }
 });

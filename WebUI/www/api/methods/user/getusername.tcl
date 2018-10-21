@@ -13,7 +13,7 @@ set script {
   var user = dom.GetObject(userID);
   if (user)
   {
-          Write("NAME {" # user.UserFirstName() # "}");
+          Write("NAME {" # user.Name() # "}");
   }
   else
   {

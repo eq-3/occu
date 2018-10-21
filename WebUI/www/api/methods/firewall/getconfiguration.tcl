@@ -16,6 +16,8 @@
 #                                  ("full", "restricted", "none")
 #     ips     :   [array] Liste der IP-Adressen und IP-Addressgruppen für den 
 #                         eingeschränkten Zugriff. Jedes Element ist ein String.
+#     userports:  [array] Enthält benutzerdefinierte Ports zwecks Firewall Freigabe
+#     mode:		  [string] Firewall mode. ("MOST_OPEN", "RESTRICTIVE")
 ##
 
 source /lib/libfirewall.tcl
@@ -57,7 +59,19 @@ foreach ip $Firewall_IPS {
   if { 0 == $first } then { append result "," } else { set first 0 }
   append result [json_toString $ip]
 }
-append result "\]"
+append result "\],"
+
+# User Ports für eingehende Freigabe
+set first 1
+append result "\"userports\": \["
+foreach uport $Firewall_USER_PORTS {
+  if { 0 == $first } then { append result "," } else { set first 0 }
+  append result [json_toString $uport]
+}
+append result "\],"
+
+# Firewall mode MOST_OPEN/RESTRICTIVE
+append result "\"mode\":\"$Firewall_MODE\""
 
 append result "\}"
 

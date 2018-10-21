@@ -21,8 +21,20 @@ array set REGA_LOGLEVELS {
   3 "\${dialogSettingsCMLogLevel4}"
 }
 
-set RFD_URL "bin://127.0.0.1:2001"
-set HS485D_URL "bin://127.0.0.1:2000"
+set portnumber 2001
+catch { source "/etc/eq3services.ports.tcl" }
+if { [info exists EQ3_SERVICE_RFD_PORT] } {
+  set portnumber $EQ3_SERVICE_RFD_PORT
+}
+
+set RFD_URL "bin://127.0.0.1:$portnumber"
+
+set portnumber 2000
+catch { source "/etc/eq3services.ports.tcl" }
+if { [info exists EQ3_SERVICE_HS485D_PORT] } {
+  set portnumber $EQ3_SERVICE_HS485D_PORT
+}
+set HS485D_URL "bin://127.0.0.1:$portnumber"
 # set PFMD_URL "bin://127.0.0.1:2002" - not necessary with the ccu2
 
 
@@ -878,7 +890,7 @@ proc action_firmware_upload {} {
     # check if the uploaded file looks like a firmware file
     set file_valid 0
     catch {
-      exec tar zxvf $filename update_script EULA.en EULA.de EULA.tr -C /var/
+      exec tar zxvf $filename update_script EULA.en -C /var/
     }
     set file_valid [file exists "/var/update_script"]
 
@@ -894,20 +906,16 @@ proc action_firmware_upload {} {
 
     cd /usr/local/tmp/
     set TMPDIR "[file tail $filename-dir]"
-
     exec mkdir -p $TMPDIR
-    set file_invalid 1
-
-    catch {
-      exec tar zxvf $filename update_script EULA.en EULA.de EULA.tr -C /usr/local/
-    }
 
     #
     # check if the uploaded file is a valid firmware update file
     #
 
+    set file_invalid [catch {exec tar zxvf $filename update_script EULA.en EULA.de -C /usr/local/}]
+
     # check for .tar.gz or .tar
-    if {$file_invalid != 0} {
+    if {$file_invalid == 0} {
       set file_invalid [catch {exec file -b $filename | egrep -q "(gzip compressed|tar archive)"} result]
       if {$file_invalid == 0} {
         # the file seems to be a tar archive (perhaps with gzip compression)

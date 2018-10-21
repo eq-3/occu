@@ -73,6 +73,10 @@ proc getComboBox {prn pref specialElement type} {
         append s [getBlink $prn $pref $specialElement]
       }
 
+      "blink0" {
+        append s [getBlink $prn $pref $specialElement]
+      }
+
     }
 
     return $s
@@ -787,25 +791,26 @@ proc getTimeOnOff {prn pref specialElement} {
       append s "<td>"
       append s  "<select id=\"timeOnOff\_$prn\_$pref\" onchange=\"setTimeValues(this.id, $prn, $pref, \'$specialElement\')\">"
         append s "<option value=\"0\">\${optionNotActive}</option>"
-        append s "<option value=\"1\">\${optionUnit1S}</option>"
-        append s "<option value=\"2\">\${optionUnit2S}</option>"
-        append s "<option value=\"3\">\${optionUnit5S}</option>"
-        append s "<option value=\"4\">\${optionUnit10S}</option>"
-        append s "<option value=\"5\">\${optionUnit30S}</option>"
-        append s "<option value=\"6\">\${optionUnit1M}</option>"
-        append s "<option value=\"7\">\${optionUnit2M}</option>"
-        append s "<option value=\"8\">\${optionUnit5M}</option>"
-        append s "<option value=\"9\">\${optionUnit10M}</option>"
-        append s "<option value=\"10\">\${optionUnit30M}</option>"
-        append s "<option value=\"11\">\${optionUnit1H}</option>"
-        append s "<option value=\"12\">\${optionUnit2H}</option>"
-        append s "<option value=\"13\">\${optionUnit3H}</option>"
-        append s "<option value=\"14\">\${optionUnit5H}</option>"
-        append s "<option value=\"15\">\${optionUnit8H}</option>"
-        append s "<option value=\"16\">\${optionUnit12H}</option>"
-        append s "<option value=\"17\">\${optionUnit24H}</option>"
-        append s "<option value=\"18\">\${stringTablePermanent}</option>"
-        append s "<option value=\"19\">\${stringTableEnterValue}</option>"
+        append s "<option value=\"1\">\${optionUnit100MS}</option>"
+        append s "<option value=\"2\">\${optionUnit1S}</option>"
+        append s "<option value=\"3\">\${optionUnit2S}</option>"
+        append s "<option value=\"4\">\${optionUnit5S}</option>"
+        append s "<option value=\"5\">\${optionUnit10S}</option>"
+        append s "<option value=\"6\">\${optionUnit30S}</option>"
+        append s "<option value=\"7\">\${optionUnit1M}</option>"
+        append s "<option value=\"8\">\${optionUnit2M}</option>"
+        append s "<option value=\"9\">\${optionUnit5M}</option>"
+        append s "<option value=\"10\">\${optionUnit10M}</option>"
+        append s "<option value=\"11\">\${optionUnit30M}</option>"
+        append s "<option value=\"12\">\${optionUnit1H}</option>"
+        append s "<option value=\"13\">\${optionUnit2H}</option>"
+        append s "<option value=\"14\">\${optionUnit3H}</option>"
+        append s "<option value=\"15\">\${optionUnit5H}</option>"
+        append s "<option value=\"16\">\${optionUnit8H}</option>"
+        append s "<option value=\"17\">\${optionUnit12H}</option>"
+        append s "<option value=\"18\">\${optionUnit24H}</option>"
+        append s "<option value=\"19\">\${stringTablePermanent}</option>"
+        append s "<option value=\"20\">\${stringTableEnterValue}</option>"
       append s "/<select>"
       append s "</td>"
 
@@ -819,39 +824,40 @@ proc getTimeOnOff {prn pref specialElement} {
 
           append s "var optionMap = \[\];"
           append s "optionMap\[\"00\"\] = 0;"
-          append s "optionMap\[\"11\"\] = 1;"
-          append s "optionMap\[\"12\"\] = 2;"
-          append s "optionMap\[\"21\"\] = 3;"
-          append s "optionMap\[\"31\"\] = 4;"
-          append s "optionMap\[\"33\"\] = 5;"
-          append s "optionMap\[\"41\"\] = 6;"
-          append s "optionMap\[\"42\"\] = 7;"
-          append s "optionMap\[\"45\"\] = 8;" ;# 5 Minutes - floor terminal block 6 or 10 channels
-          append s "optionMap\[\"51\"\] = 8;" ;# 5 Minutes - all other devices
-          append s "optionMap\[\"61\"\] = 9;"
-          append s "optionMap\[\"63\"\] = 10;"
-          append s "optionMap\[\"71\"\] = 11;"
-          append s "optionMap\[\"72\"\] = 12;"
-          append s "optionMap\[\"73\"\] = 13;"
-          append s "optionMap\[\"75\"\] = 14;"
-          append s "optionMap\[\"78\"\] = 15;"
-          append s "optionMap\[\"712\"\] = 16;"
-          append s "optionMap\[\"724\"\] = 17;"
-          append s "optionMap\[\"731\"\] = 18;"
+          append s "optionMap\[\"01\"\] = 1;"
+          append s "optionMap\[\"11\"\] = 2;"
+          append s "optionMap\[\"12\"\] = 3;"
+          append s "optionMap\[\"21\"\] = 4;"
+          append s "optionMap\[\"31\"\] = 5;"
+          append s "optionMap\[\"33\"\] = 6;"
+          append s "optionMap\[\"41\"\] = 7;"
+          append s "optionMap\[\"42\"\] = 8;"
+          append s "optionMap\[\"45\"\] = 9;" ;# 5 Minutes - floor terminal block 6 or 10 channels
+          append s "optionMap\[\"51\"\] = 9;" ;# 5 Minutes - all other devices
+          append s "optionMap\[\"61\"\] = 10;"
+          append s "optionMap\[\"63\"\] = 11;"
+          append s "optionMap\[\"71\"\] = 12;"
+          append s "optionMap\[\"72\"\] = 13;"
+          append s "optionMap\[\"73\"\] = 14;"
+          append s "optionMap\[\"75\"\] = 15;"
+          append s "optionMap\[\"78\"\] = 16;"
+          append s "optionMap\[\"712\"\] = 17;"
+          append s "optionMap\[\"724\"\] = 18;"
+          append s "optionMap\[\"731\"\] = 19;"
 
           append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() :jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
           append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
 
 
           append s "currentVal = baseVal+factorVal,"
-          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 19;"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 20;"
           append s "jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"ONTIME baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
 
           # Enter user value
-          append s "if (optionVal == 19) {"
+          append s "if (optionVal == 20) {"
             append s "timeBaseTRElem.show();"
             append s "timeFactorTRElem.show();"
             append s "spaceTRElem.show();"
@@ -879,97 +885,102 @@ proc getTimeOnOff {prn pref specialElement} {
               append s "factorElem.val(0);"
               append s "break;"
             append s "case 1:"
+              # not in use
+              append s "baseElem.val(0);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 2:"
               # 1 s
               append s "baseElem.val(1);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 2:"
+            append s "case 3:"
               # 2 s
               append s "baseElem.val(1);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 3:"
+            append s "case 4:"
               # 5 s
               append s "baseElem.val(2);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 4:"
+            append s "case 5:"
               # 10 s
               append s "baseElem.val(3);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 5:"
+            append s "case 6:"
               # 30 s
               append s "baseElem.val(3);"
               append s "factorElem.val(3);"
               append s "break;"
-            append s "case 6:"
+            append s "case 7:"
               # 1 m
               append s "baseElem.val(4);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 7:"
+            append s "case 8:"
               # 2 m
               append s "baseElem.val(4);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 8:"
+            append s "case 9:"
               # 5 m
               append s "baseElem.val(5);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 9:"
+            append s "case 10:"
               # 10 m
               append s "baseElem.val(6);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 10:"
+            append s "case 11:"
               # 30 m
               append s "baseElem.val(6);"
               append s "factorElem.val(3);"
               append s "break;"
 
-            append s "case 11:"
+            append s "case 12:"
               # 1 h
               append s "baseElem.val(7);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 12:"
+            append s "case 13:"
               # 2 h
               append s "baseElem.val(7);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 13:"
+            append s "case 14:"
               # 3 h
               append s "baseElem.val(7);"
               append s "factorElem.val(3);"
               append s "break;"
-            append s "case 14:"
+            append s "case 15:"
               # 5 h
               append s "baseElem.val(7);"
               append s "factorElem.val(5);"
               append s "break;"
-            append s "case 15:"
+            append s "case 16:"
               # 8 h
               append s "baseElem.val(7);"
               append s "factorElem.val(8);"
               append s "break;"
-            append s "case 16:"
+            append s "case 17:"
               # 12 h
               append s "baseElem.val(7);"
               append s "factorElem.val(12);"
               append s "break;"
-            append s "case 17:"
+            append s "case 18:"
               # 24 h
               append s "baseElem.val(7);"
               append s "factorElem.val(24);"
               append s "break;"
-            append s "case 18:"
+            append s "case 19:"
               # Unendlich
               append s "baseElem.val(7);"
               append s "factorElem.val(31);"
               append s "break;"
-            append s "case 19:"
+            append s "case 20:"
               # Wert eingeben
                append s "timeBaseTRElem.show();"
                append s "timeFactorTRElem.show();"
@@ -1789,14 +1800,14 @@ proc getBlink {prn pref specialElement} {
       set s ""
       append s "<td>"
       append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setBlinkOptions(this.id, $prn, $pref, \'$specialElement\')\">"
-        append s "<option value=\"0\">\${optionUnit100MS}</option>"
-        append s "<option value=\"1\">\${optionUnit500MS}</option>"
-        append s "<option value=\"2\">\${optionUnit1S}</option>"
-        append s "<option value=\"3\">\${optionUnit2S}</option>"
-        append s "<option value=\"4\">\${optionUnit5S}</option>"
-        append s "<option value=\"5\">\${stringTableEnterValue}</option>"
+        append s "<option value=\"0\">\${stringTablePermanent}</option>"
+        append s "<option value=\"1\">\${optionUnit100MS}</option>"
+        append s "<option value=\"2\">\${optionUnit500MS}</option>"
+        append s "<option value=\"3\">\${optionUnit1S}</option>"
+        append s "<option value=\"4\">\${optionUnit2S}</option>"
+        append s "<option value=\"5\">\${optionUnit5S}</option>"
+        append s "<option value=\"6\">\${stringTableEnterValue}</option>"
 
-        # append s "<option value=\"5\">\${stringTableEnterValue}</option>"
       append s "/<select>"
       append s "</td>"
 
@@ -1808,23 +1819,24 @@ proc getBlink {prn pref specialElement} {
           append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
 
           append s "var optionMap = \[\];"
-          append s "optionMap\[\"01\"\] = 0;"
-          append s "optionMap\[\"05\"\] = 1;"
-          append s "optionMap\[\"11\"\] = 2;"
-          append s "optionMap\[\"12\"\] = 3;"
-          append s "optionMap\[\"15\"\] = 4;"
+          append s "optionMap\[\"731\"\] = 0;"
+          append s "optionMap\[\"01\"\] = 1;"
+          append s "optionMap\[\"05\"\] = 2;"
+          append s "optionMap\[\"11\"\] = 3;"
+          append s "optionMap\[\"12\"\] = 4;"
+          append s "optionMap\[\"15\"\] = 5;"
 
           append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
           append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
 
           append s "currentVal = baseVal+factorVal,"
-          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 5;"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 6;"
           append s "jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();"
 
           #append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
           # Enter user value
-          append s "if (optionVal == 5) {"
+          append s "if (optionVal == 6) {"
             append s "timeBaseTRElem.show();"
             append s "timeFactorTRElem.show();"
             append s "spaceTRElem.show();"
@@ -1846,32 +1858,38 @@ proc getBlink {prn pref specialElement} {
 
           append s "switch (value) \{"
             append s "case 0:"
+              # permanently
+              append s "baseElem.val(7);"
+              append s "factorElem.val(31);"
+              append s "break;"
+
+            append s "case 1:"
               # 100ms
               append s "baseElem.val(0);"
               append s "factorElem.val(1);"
               append s "break;"
 
-            append s "case 1:"
+            append s "case 2:"
               # 500 ms
               append s "baseElem.val(0);"
               append s "factorElem.val(5);"
               append s "break;"
-            append s "case 2:"
+            append s "case 3:"
               # 1 s
               append s "baseElem.val(1);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 3:"
+            append s "case 4:"
               # 2 s
               append s "baseElem.val(1);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 4:"
+            append s "case 5:"
               # 5 s
               append s "baseElem.val(1);"
               append s "factorElem.val(5);"
               append s "break;"
-            append s "case 5:"
+            append s "case 6:"
               append s "timeBaseTRElem.show();"
               append s "timeFactorTRElem.show();"
               append s "spaceTRElem.show();"
@@ -2078,7 +2096,7 @@ proc isLongKeypressAvailable {sender sender_address url} {
 
   # Here we check for certain device types without a long keypress.
   set devWithoutLongKeyPress {
-    HmIP-ASIR HmIP-DRI16 HmIPW-DRI32
+    HmIP-ASIR
   }
 
   foreach item $devWithoutLongKeyPress {

@@ -649,7 +649,14 @@ proc set_location_config {country city lat lon timezone} {
     rega_script "var x=system.Longitude($lon);var y=system.Latitude($lat);var a=dom.ChangedTimeManually();"
     
     catch {exec /sbin/hwclock -wu}
-    catch {exec SetInterfaceClock 127.0.0.1:2001}
+
+    set portnumber 2001
+    catch { source "/etc/eq3services.ports.tcl" }
+    if { [info exists EQ3_SERVICE_RFD_PORT] } {
+        set portnumber $EQ3_SERVICE_RFD_PORT
+    }
+
+    catch {exec SetInterfaceClock 127.0.0.1:$portnumber}
     return 1
 }
 
@@ -700,8 +707,14 @@ proc action_apply_time {} {
     catch { rega_script "var a=dom.ChangedTimeManually();" }
    
     catch {exec /sbin/hwclock -wu}
-    
-    if { [catch {exec SetInterfaceClock 127.0.0.1:2001} fid] } {
+
+    set portnumber 2001
+    catch { source "/etc/eq3services.ports.tcl" }
+    if { [info exists EQ3_SERVICE_RFD_PORT] } {
+        set portnumber $EQ3_SERVICE_RFD_PORT
+    }
+
+    if { [catch {exec SetInterfaceClock 127.0.0.1:$portnumber} fid] } {
         puts "Failure SetInterfaceClock: $fid"
         return
     }
@@ -715,7 +728,14 @@ proc action_apply_timeserver {} {
         return
     }
     catch {exec setclock noloop}
-    catch {exec SetInterfaceClock 127.0.0.1:2001}
+
+    set portnumber 2001
+    catch { source "/etc/eq3services.ports.tcl" }
+    if { [info exists EQ3_SERVICE_RFD_PORT] } {
+        set portnumber $EQ3_SERVICE_RFD_PORT
+    }
+
+    catch {exec SetInterfaceClock 127.0.0.1:$portnumber}
     puts "Success"
 }
 

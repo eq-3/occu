@@ -1,0 +1,29 @@
+<%
+system.SetSessionVar("sessionTAB", "adminFirstStart");
+%>
+<script type="text/javascript">
+  saveUserPassword = function()
+  {
+    var url = "/esp/system.htm?sid="+SessionId;
+    var pb = "string action = 'saveUserPwd';";
+    pb += "integer userId = " + userId + ";";
+    pb += "string pw = '"+passWord+"';";
+
+    var opts =
+    {
+      postBody:ReGa.encode(pb),
+      onComplete: function(t)
+      {
+        conInfo("savePassword onComplete: " + t.responseText);
+      },
+      onFailure: function(t) {
+        conInfo("savePassword onFailure: " + t.responseText);
+      }
+    };
+    new Ajax.Request(url,opts);
+  };
+
+  passWord = "";
+  new DialogUserPassword();
+</script>
+

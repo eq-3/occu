@@ -142,9 +142,11 @@ jQuery.extend(true, langJSON, {
   }
 });
 
-window.setTimeout(function() {
-  if (getProduct() >= 3) {
-    langJSON.de.diagramDataloggingNotInitialised = langJSON.de.diagramExternalStorageDataloggingNotInitialised;
-  }
-}, 750);
+if (typeof WEBUI_VERSION != "undefined") {
+  window.setTimeout(function () {
+    if (WEBUI_VERSION.split(".")[0] >= 3) {
+      langJSON.de.diagramDataloggingNotInitialised = langJSON.de.diagramExternalStorageDataloggingNotInitialised;
+    }
+  }, 750);
+}
 

@@ -106,60 +106,6 @@ jQuery.extend(true,langJSON, {
     "motionDetectorSensorRange8G" : "8G",
     "motionDetectorSensorRange16G" : "16G"
 
-  },
-
-  "tr" : {
-    "mdTrigger" : "...'de devreye girer ",
-    "motionDetectorOnAirInterval" : "Iletim mesafesi",
-    "motionDetectorMinimumOnAirInterval" : "Asgari iletim mesafesi",
-    "motionDetectorOnAirIntervalMode" : "Iletim mesafesini secme",
-    "motionDetectorOnAirIntervalModeClassic" : "klasik",
-    "motionDetectorOnAirIntervalModeDynamic" : "dinamik",
-    "motionDetectorRetentionTime" : "Bekleme s&uuml;resi",
-    "motionDetectorMinimumRetentionTime" : "Asgari bekleme s&uuml;resi",
-    "motionDetectorEventFilterNumberA" : "her",
-    "motionDetectorEventFilterNumberB" : " Sens&ouml;r impulsu",
-    "motionDetectorEventFilterNumberC" : " Saniyeler icindeki sens&ouml;r ",
-    "motionDetectorEventFilterNumberD" : " impulslari",
-    "motionDetectorSendMotionWithinDetectionSpan" : "Iletim mesafesi icinde algilanan hareketleri ilet;",
-    "motionDetectorMinumumOfLastValuesA" : "Aktarilan parlaklik",
-    "motionDetectorMinumumOfLastValuesB0" : "son tespit edilen deger",
-    "motionDetectorMinumumOfLastValuesB1" : "son degerlerin ",
-    "motionDetectorMinumumOfLastValuesC" : " minimumu",
-    "motionDetectorMinumumOfLastValuesD" : " (her 6 dakikada bir &ouml;lc&uuml;m)",
-    "motionDetectorHelp" : "<hr><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">Iletim mesafesinin secilmesi</span><br><br></font>Direkt baglantilar olusturuldugunda bekleme s&uuml;resi minimuma ayarlanmissa (standart tutum) iletim mesafesinin secimi dogrudan t&uuml;keticinin (akt&uuml;at&ouml;r&uuml;n) minimum bekleme s&uuml;resine etki eder.<br><br>Bu durumda su iliski gecerli olur:<br><br><span style=\"text-decoration:underline; font-weight:bold\">Klasik ayar:</span><br><br>Bu ayar klasik bir hareket alarminin fonksiyonunu yansitir. Iletim mesafesi sabit 240 saniye olarak (+ %10 tolerans) &ouml;nceden belirlenmistir. Bunun anlami: Hareket alarmi algilanan ilk hareketi bildirir, diger hareketleri ise tekrar yakl. 240 saniye sonra bildirir. &Ouml;rn. bir kablosuz saltere (aydinlatmayi acmak icin) dogrudan baglanti yapilmissa, bu aydinlatma otomatik olarak 5 dakikalik bir acik kalma s&uuml;resine sahip olur. Yani aydinlatma, algilanan hareketten en erken 5 dakika sonra kendini kapatir. S&uuml;rekli hareket varsa acik kalma s&uuml;resi otomatik olarak her defasinda 5 dakika uzar.<br><br>Bunun avantaji: T&uuml;keticinin &ouml;nceden belirlenmis sabit acik kalma s&uuml;resine sahip olmasi ve hareket alarminin bataryayi koruyacak sekilde calismasi.<br><br>Dezavantaj: 5 dakikadan daha kisa acik kalma s&uuml;releri m&uuml;mk&uuml;n degil.<br><br><span style=\"text-decoration:underline; font-weight:bold\">Dinamik ayar:</span><br><br>Iletim mesafesi kendini otomatik olarak oda icindeki harekete uyarlar. Minimum deger &ouml;nceden belirlenebilir, bu esnada girilecek k&uuml;c&uuml;k degerler bataryanin &ouml;mr&uuml;n&uuml; kisaltir. Hareket alarmi algiladigi ilk hareketi bildirir, sonraki hareketleri ise &ouml;ncelikle girilen minimum s&uuml;re sonrasinda bildirir (&ouml;rn. 30 saniye). &Ouml;rn. bir kablosuz saltere (bir aydinlatmayi acmak icin) dogrudan baglanti yapilmissa, bu durumda bu aydinlatma da minimum 30 saniyelik bir acik kalma s&uuml;resine sahip olur. Aydinlatma 30 saniye sonunda kapanir. S&uuml;rekli hareket olmasi halinde hareket alarmi iletim mesafesini kendi basina adim adim (dinamik sekilde) ve dolayisiyla da buna dogrudan bagli bir t&uuml;keticinin acik kalma s&uuml;resini de 10 dakikaya kadar uzatir.<br><br>Avantaj: Az hareketin oldugu ortamlarda dogrudan bagli t&uuml;keticilerin acik kalma s&uuml;resi kisa ayarlanabilir (enerji tasarrufu icin).<br><br>Dezavantaj: Acik kalma s&uuml;resi &ouml;nceden tahmin edilemez ve duruma g&ouml;re 10 dakikayi bulabilir. Hareket alarmina ait bataryanin &ouml;mr&uuml;n&uuml; kisaltir.<br><br>",
-
-    "motionDetectorFilterPeriod" : "Time for switching back to standby <br/>after the last vibration has been detected",
-    "motionDetectorChannelOperationMode" : "Detection method",
-    "motionDetectorChannelOperationModeOff" : "Sensor not active",
-    "motionDetectorChannelOperationModeAnyMotion" : "Vibration",
-    "motionDetectorChannelOperationModeFlat" : "Position change",
-
-    "motionDetectorMessageMovement_1" : "<span name=\"messageMovement\">Message in motion status</span>",
-    "motionDetectorMessageMovement_2" : "<span name=\"messageMovement\">Message when vertical</span>",
-    "motionDetectorMessageNoMovement_1" : "<span name=\"messageNoMovement\">Message in standby status</span>",
-    "motionDetectorMessageNoMovement_2" : "<span name=\"messageNoMovement\">Message when horizontal</span>",
-    "motionDetectorNotificationMovement_1" : "<span name=\"NotiMovement\">Sound notification motion</span>",
-    "motionDetectorNotificationMovement_2" : "<span name=\"NotiMovement\">Sound notification Vertical</span>",
-    "motionDetectorNotificationNoMovement_1" : "<span name=\"NotiNoMovement\">Sound notification standby</span>",
-    "motionDetectorNotificationNoMovement_2" : "<span name=\"NotiNoMovement\">Sound notification horizontal</span>",
-
-
-    "motionDetectorSensorSensivity" : "Sensor sensitivity during vibration",
-    "motionDetectorTriggerAngle" : "Angle for position detection",
-
-    "motionDetectorOptionNoMessage" : "No message",
-    "motionDetectorOptionMotion_1": "<span name=\"motion\">Motion</span>",
-    "motionDetectorOptionMotion_2": "<span name=\"motion\">Vertical</span>",
-    "motionDetectorOptionNoMotion_1": "<span name=\"noMotion\">Standby</span>",
-    "motionDetectorOptionNoMotion_2": "<span name=\"noMotion\">Horizontal</span>",
-
-    "motionDetectorSensorRange2GPlusSen" : "2G+",
-    "motionDetectorSensorRange2G2PlusSens" : "2G++",
-    "motionDetectorSensorRange2G" : "2G",
-    "motionDetectorSensorRange4G" : "4G",
-    "motionDetectorSensorRange8G" : "8G",
-    "motionDetectorSensorRange16G" : "16G"
   }
 });
 

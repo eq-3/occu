@@ -2,17 +2,26 @@
 
 # dev_descr_sender(TYPE) enthaelt den Sendertype (KEY, WATERDETECTIONSENSOR usw.)
 
-global dev_descr_receiver dev_descr_sender 
+global dev_descr_receiver dev_descr_sender url
 
 set multilingual 1
 set internal ""
-set ACTOR $dev_descr_receiver(TYPE) 
+
+
+# Check the mode of a wired blind (shutter or blind)
+# Determine the current channelMode
+set chnMode [xmlrpc $url getMetadata [list string $dev_descr_receiver(ADDRESS)] channelMode]
+
+if {[string equal $chnMode "shutter"] == 1} {
+  set dev_descr_receiver(TYPE) "SHUTTER_VIRTUAL_RECEIVER"
+}
+
+set ACTOR $dev_descr_receiver(TYPE)
 
 # Sender and receiver are the same device which means this is a internal device button
 if {$dev_descr_sender(PARENT) == $dev_descr_receiver(PARENT)} {
   # set internal "_INTERNAL"
 }
-
 
 if {[catch {set x $dev_descr_sender(TYPE)}] == 0} {
 

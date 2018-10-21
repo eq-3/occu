@@ -1,0 +1,10 @@
+"description_2_1" : "<span class=\"translated\">Bei einem Durchgang von rechts nach links wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion).</span><br/><br/>",
+"description_3_1" : "<span class=\"translated\">Bei einem Durchgang von links nach rechts wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion)</span><br/><br/>",
+
+"description_2_2" : "<span class=\"translated\">Bei einem Durchgang von rechts nach links wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen abgespielt.</span><br/><br/>",
+"description_3_2" : "<span class=\"translated\">Bei einem Durchgang von links nach rechts wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen abgespielt.</span><br/><br/>",
+
+"description_2_3" : "<span class=\"translated\">Bei einem Durchgang von rechts nach links wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen beendet.</span><br/><br/>",
+"description_3_3" : "<span class=\"translated\">Bei einem Durchgang von links nach rechts wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen beendet.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",

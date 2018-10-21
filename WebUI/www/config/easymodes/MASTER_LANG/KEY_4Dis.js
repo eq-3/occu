@@ -19,16 +19,5 @@ jQuery.extend(true,langJSON, {
       "dialogHelpContentB" : "replaced by",
       "dialogHelpContentC" : "Hour glass",
       "dialogHelpContentD" : "Arrow upwards to the left"
-    },
-
-  "tr" : {
-    "lblLowerKey" : "Alt tus",
-    "lblUpperKey" : "&Uuml;st tus",
-    "dialogHelpTitle" : "Tuslari tanimlama bilgisi!",
-    "dialogHelpContent" : "Sadece kisitli bir karakter seti bulundugundan,<br />bazi karakterleri kullanmak m&uuml;mk&uuml;n degildir ve bunlar<br />duvardaki tus takimi tarafindan baska karakterlerle degistirilir (esleme yapilir).<br /><br />",
-    "dialogHelpContentA" : "Karakter",
-    "dialogHelpContentB" : "... ile degistirildi",
-    "dialogHelpContentC" : "Kum saati",
-    "dialogHelpContentD" : "Sol &uuml;ste ok"
-  }
+    }
 });

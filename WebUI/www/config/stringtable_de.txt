@@ -593,6 +593,7 @@ DURATION_UNIT=D	${stringTableDurationUnitD}
 DURATION_UNIT=H	${stringTableDurationUnitH}
 DURATION_UNIT=M	${stringTableDurationUnitM}
 DURATION_UNIT=S	${stringTableDurationUnitS}
+DURATION_UNIT=10MS	${stringTableRampTimeUnit10MS}
 DURATION_VALUE	${stringTableDurationValue}
 DUTYCYCLE_LIMIT	${stringTableDutyCycleLimit}
 DUTY_CYCLE=FALSE	${stringTableDutyCycleFalse}
@@ -1132,6 +1133,8 @@ RAMP_TIME_UNIT=D	${stringTableRampTimeUnitD}
 RAMP_TIME_UNIT=H	${stringTableRampTimeUnitH}
 RAMP_TIME_UNIT=M	${stringTableRampTimeUnitM}
 RAMP_TIME_UNIT=S	${stringTableRampTimeUnitS}
+RAMP_TIME_UNIT=10MS	${stringTableRampTimeUnit10MS}
+
 RAMP_TIME_VALUE	${stringTableRampTimeValue}
 
 REDUCE_LEVEL	${stringTableDimmerReduceLevel}
@@ -1696,3 +1699,8 @@ minutes	${stringTableMinute}
 30Min	${optionUnit30M}
 60Min	${optionUnit60M}
 120Min	${optionUnit120M}
+
+SOUNDFILE=INTERNAL_SOUNDFILE	${stringTableInternalSoundFile}
+SOUNDFILE=RANDOM_SOUNDFILE	${stringTableRandomSoundFile}
+SOUNDFILE=OLD_VALUE	${stringTableOldValueSoundFile}
+SOUNDFILE=DO_NOT_CARE	${stringTableDoNotCareSoundFile}

@@ -89,6 +89,8 @@ function ::dcCreate()
   if( cObj.IsTypeOf( OT_CHANNEL ) )
   {
 
+    var CN_ACOUSTIC_SIGNAL_TRANSMITTER = "ACOUSTIC_SIGNAL_TRANSMITTER.";
+    var CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER.";
     var CN_ALARM_SWITCH_VIRTUAL_RECEIVER = "ALARM_SWITCH_VIRTUAL_RECEIVER.";
     var CN_ARMING          = "ARMING.";
     var CN_BLIND           = "BLIND.";
@@ -263,7 +265,20 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_TRANSMITTER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_TRANSMITTER;
-            Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
+
+            object ch = dom.GetObject(chnId);
+
+            if (ch.Label().Substr(0,6) != "HmIPW-") {
+              Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
+            } else {
+              object mode = dom.GetObject(ch.Address());
+              if (mode.MetaData("channelMode") == "shutter") {
+                Call("/esp/controls/blind.fn::CreateShutterTransmitter()");
+              } else {
+                Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
+              }
+
+            }
           }
 
           !# CN_BLIND_VIRTUAL_RECEIVER
@@ -273,7 +288,17 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_VIRTUAL_RECEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_VIRTUAL_RECEIVER;
-            Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
+            object ch = dom.GetObject(chnId);
+            if (ch.Label().Substr(0,6) != "HmIPW-") {
+              Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
+            } else {
+              object mode = dom.GetObject(ch.Address());
+              if (mode.MetaData("channelMode") == "shutter") {
+                Call("/esp/controls/blind.fn::CreateShutterVirtualReceiver()");
+              } else {
+                Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
+              }
+            }
           }
 
           !# CN_SHUTTER_TRANSMITTER
@@ -678,6 +703,26 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_DIMMER_REAL;
             Call("/esp/controls/dimmer.fn::CreateDimmerRealInfoControl()");
+          }
+
+          !# CN_ACOUSTIC_SIGNAL_TRANSMITTER
+          bIsControl = ( sControlName.Find(CN_ACOUSTIC_SIGNAL_TRANSMITTER) > -1 );
+          if( bIsControl && (sLastControlName != CN_ACOUSTIC_SIGNAL_TRANSMITTER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_ACOUSTIC_SIGNAL_TRANSMITTER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_ACOUSTIC_SIGNAL_TRANSMITTER;
+            Call("/esp/controls/acoustic_signal.fn::CreateAcousticSignalRealInfoControl()");
+          }
+
+          !# CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER
+          bIsControl = ( sControlName.Find(CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER) > -1 );
+          if( bIsControl && (sLastControlName != CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER;
+            Call("/esp/controls/acoustic_signal.fn::CreateAcousticSignalVirtualReceiver()");
           }
 
           !# CN_ALARM_SWITCH_VIRTUAL_RECEIVER - HmIP

@@ -16,3 +16,5 @@ if {$activate == "true"} {
   catch {exec rm /etc/config/sshEnabled}
 }
 
+source "/bin/setfirewall.tcl"
+

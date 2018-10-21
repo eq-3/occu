@@ -1,0 +1,4 @@
+"description_noLong_1" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird die gew&auml;hlte MP3-Datei mit der festgelegten Lautst&auml;rke abgespielt.</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Abspielen der MP3-Datei beendet.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird die gew&auml;hlte MP3-Datei abwechselnd mit der eingestellten Lautst&auml;rke abgespielt und ausgeschaltet.</span><br/><br/>",
+"description_noLong_4" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",

@@ -9,8 +9,3 @@
 "subset_1" : "hochgefahren",
 "subset_2" : "heruntergefahren",
 "subset_3" : "hoch- / heruntergefahren im Wechsel",
-
-
-
-
-

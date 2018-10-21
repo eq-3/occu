@@ -1,5 +1,6 @@
-#!/bin/tclsh
 ##
+# CCU.setSecurityLevel
+#
 # Sets current security level.
 # Parameters: Security level as String:
 #               Possible values:
@@ -14,14 +15,10 @@ set lvl $args(level)
 
 source "/lib/libsecuritylevel.tcl"
 if { [string compare $lvl "LOW"] == 0 || [string compare $lvl "MEDIUM"] == 0 || [string compare $lvl "HIGH"] == 0 } {
-	if { [ SEC_applysecuritylevel $lvl ]  } {
-		if { [ SEC_setsecuritylevel $lvl ] } {
-			jsonrpc_response true
-		} else {
-			jsonrpc_response false
-		}
-		
-	} else {
+	if { [ SEC_setsecuritylevel $lvl ]  } {
+		jsonrpc_response true
+	}
+	else {
 		jsonrpc_response false
 	}
 } else {

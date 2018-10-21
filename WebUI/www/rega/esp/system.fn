@@ -1025,6 +1025,22 @@ function ::TmToString() {
   }
 }
 
+function ::saveUserPwd() {
+  integer uid = system.GetVar("userId");
+  string pwd = system.GetVar("pw");
+  object user = dom.GetObject(uid);
+  if (user) {
+    user.UserBlankPwd(pwd);
+    if (pwd != "") {
+      Write("Password for user "#user.Name()#" set!");
+    } else {
+      Write("Password for user "#user.Name()#" cleared!");
+    }
+  } else {
+    Write("User unknown");
+  }
+}
+
 function ::saveUser() {
   integer uid = system.GetVar("iUserid");
   if (uid == 0) {

@@ -396,8 +396,8 @@ jQuery.extend(true,langJSON, {
     "stringTableEventRandomTimeUnit" : "Einheit des Zufallsanteils",
     "stringTableEventSecondaryAlarm" : "fremdausgel%F6ster Alarm",
     "stringTableExpectAES" : "AES-Verschl%FCsselung",
-    "stringTableExternalClockFalse" : "Modus Energiespar-Temperatur nicht aktiv",
-    "stringTableExternalClockTrue" :  "Modus Energiespar-Temperatur aktiv",
+    "stringTableExternalClockFalse" : "Modus Energiespar-Temperatur<br/>nicht aktiv",
+    "stringTableExternalClockTrue" :  "Modus Energiespar-Temperatur<br/>aktiv",
     "stringTableFloorHeatingMode" : "Art/Typ der Anlage",
     "stringTableFrequencyInput" : "Analog",
     "stringTableFrostProtectFalse" : "Frostschutz nicht aktiv",
@@ -525,8 +525,8 @@ jQuery.extend(true,langJSON, {
     "stringTableLogicAND" : "AND (niedriger Pegel hat Priorit%E4t)",
     "stringTableLogicANDINVERS" : "AND_INVERS (AND mit vorheriger Invertierung des Kanal-Pegels)",
     "stringTableLogicCombination" : "Verkn%FCpfungsregel",
-    "stringTableLogicCombinationBlind" : "Verkn%FCpfungsregel Rollladensteuerung",
-    "stringTableLogicCombinationShutter" : "Verkn%FCpfungsregel Jalousiesteuerung",
+    "stringTableLogicCombinationBlind" : "Verkn%FCpfungsregel Jalousiesteuerung",
+    "stringTableLogicCombinationShutter" : "Verkn%FCpfungsregel Rollladensteuerung",
     "stringTableLogicCombinationSlat" : "Verkn%FCpfungsregel Lamellensteuerung",
     "stringTableLogicINVERSMINUS" : "INVERS_MINUS (wie MINUS, aber mit anschlie%DFender Invertierung des Pegels)",
     "stringTableLogicINVERSMUL" : "INVERS_MULTI (wie MULTI, aber mit anschlie%DFender Invertierung des Pegels)",
@@ -1103,6 +1103,40 @@ jQuery.extend(true,langJSON, {
     "stringTableMsg_Dry" : "Trockenheit",
     "stringTableMsg_Water" : "Wasserstand erkannt",
     "stringTableMsg_Moisture" : "Feuchtigkeit erkannt",
+
+    "stringTableRampTimeUnit" : "Einheit Rampenzeit",
+    "stringTableRampTimeUnitD" : "Einheit Rampenzeit: Tage",
+    "stringTableRampTimeUnitH" : "Einheit Rampenzeit: Stunden",
+    "stringTableRampTimeUnitM" : "Einheit Rampenzeit: Minuten",
+    "stringTableRampTimeUnitS" : "Einheit Rampenzeit: Sekunden",
+    "stringTableRampTimeUnit10MS" : "Einheit Rampenzeit: 10 mS",
+    "stringTableRampTimeValue" : "Wert Rampenzeit",
+
+    "stringTableIdentificationModeLCDBacklightFalse" : "Beleuchtung Display: AUS",
+    "stringTableIdentificationModeLCDBacklightTrue" : "Beleuchtung Display: EIN",
+    "stringTableIdentificationModeKeyVisualFalse" : "Beleuchtung Systemtaste: AUS",
+    "stringTableIdentificationModeKeyVisualTrue" : "Beleuchtung Systemtaste: EIN",
+    "stringTableIdentifyDuration" : "Dauer der Beleuchtung",
+    "stringTableIdentifyTargetLevel" : "Helligkeitswert der Beleuchtung",
+
+    "stringTableMultiModeInputTransmitterTitle" : "Wired Eingangsmodul",
+
+    "stringTableDoorCommandClose" : "Tor schlie%DFen",
+    "stringTableDoorCommandNOP" : "keine Aktion",
+    "stringTableDoorCommandOpen" : "Tor %F6ffnen",
+    "stringTableDoorCommandPartialOpen" : "Stellung L%FCftungsposition",
+    "stringTableDoorCommandStop" : "Fahrt stoppen",
+
+    "stringTableDoorStateClose" : "Stellung geschlossen",
+    "stringTableDoorStateOpen" : "Stellung ge%F6ffnet",
+    "stringTableDoorStateUnknown" : "Stellung unbekannt",
+    "stringTableDoorStateVentilationPosition" : "L%FCftungsposition",
+
+    "stringTableLEDDisableSendState" : "Visuelle Best%E4tigung des Tastendrucks deaktivieren",
+    "stringTableDisableAcousticSendState" : "Akustische Best%E4tigung des Tastendrucks deaktivieren",
+
+    "stringTableSectionStatusNormal" : "Status Sektion: Normal",
+    "stringTableSectionStatusUnknown" : "Status Sektion: Unbekannt",
 
     "noMoreKeys" : ""
 

@@ -14,6 +14,11 @@
 
 set result true
 
+set portnumber 2000
+catch { source "/etc/eq3services.ports.tcl" }
+if { [info exists EQ3_SERVICE_HS485D_PORT] } {
+	set portnumber $EQ3_SERVICE_HS485D_PORT
+}
 
 set header ""
 # Read contents of current hs485d.conf until first interface section
@@ -31,7 +36,7 @@ if { $configexists == 1 } then {
 } else {
 	append header "# This File was automatically generated\n" 
 	append header "# TCP Port for XmlRpc connections\n"
-	append header "Listen Port = 2000\n"
+	append header "Listen Port = $portnumber\n"
 	append header "\n"
 	append header "Log Destination = Syslog\n"
 	append header "Log Identifier = hs485d\n"

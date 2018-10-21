@@ -1,5 +1,6 @@
-#!/bin/tclsh
 ##
+# CCU.getSecurityLevel
+#
 # Retrieves current security level.
 # Parameters: None
 # Return value: Current security level of type string.
@@ -9,9 +10,9 @@
 #                       HIGH:   High security - Authentication enabled; Firewall set to RESTRICTIVE
 ##
 
-source "/lib/libsecuritylevel.tcl"
+source /lib/libsecuritylevel.tcl
 
 set result [ SEC_getsecuritylevel ]
 
-jsonrpc_response $result
+jsonrpc_response [json_toString $result]
 

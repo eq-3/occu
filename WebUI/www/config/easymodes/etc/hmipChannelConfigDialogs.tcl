@@ -369,6 +369,9 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   upvar prn prn
   upvar special_input_id special_input_id
 
+  set hlpBoxWidth 450
+  set hlpBoxHeight 80
+
   set specialID "[getSpecialID $special_input_id]"
   set CHANNEL $special_input_id
 
@@ -477,16 +480,15 @@ proc getMultiModeInputTransmitter {chn p descr address} {
     append html "</tr>"
   }
 
-set comment {
   set param CONTACT_BOOST
   if { ! [catch {set tmp $ps($param)}] } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableContactBoost}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append html "</tr>"
   }
-}
+
 
 
   append html "<script type=\"text/javascript\">"
@@ -1432,17 +1434,19 @@ proc getDimmerVirtualReceiver {chn p descr} {
     set param "LOGIC_COMBINATION_2"
     if { ! [catch {set tmp $ps($param)}]  } {
       incr prn
+      set onClick "Virtual_DimmerChannel_help($chn);"
       set hr 1
       append html "<tr>"
         append html "<td>\${stringTableLogicCombination} \${stringTableColor}</td>"
           array_clear options
-          if {[string equal "HmIP-BSL" $devType] == 1} {
+          if {([string equal "HmIP-BSL" $devType] == 1) || ([string equal "HmIP-MP3P" $devType] == 1)} {
+            set onClick "Virtual_DimmerChannel_help($chn,'lc2');"
             option LOGIC_COMBINATION_NO_AND_OR
           } else {
             option LOGIC_COMBINATION
           }
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button2_$chn\" type=\"button\" value=\${help} onclick=\"Virtual_DimmerChannel_help($chn, 'lc2');\"></td>"
+        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button2_$chn\" type=\"button\" value=\${help} onclick=$onClick></td>"
 
       append html "</tr>"
     }
@@ -1645,6 +1649,15 @@ proc getShutterVirtualReceiver {chn p descr} {
       append html "</tr>"
       append html "[getHorizontalLine]"
     }
+  }
+
+  set param POSITION_SAVE_TIME
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTablePositionSaveTime}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
   }
 
   set param POWERUP_JUMPTARGET
@@ -3457,6 +3470,93 @@ proc getSimpleSwitchReceiver {chn p descr} {
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
+}
+
+proc getAcousticSignalTransmitter {chn p descr} {
+    upvar $p ps
+    upvar $descr psDescr
+    upvar prn prn
+    upvar special_input_id special_input_id
+
+    set specialID "[getSpecialID $special_input_id]"
+
+    set html ""
+    set prn 0
+
+  set param EVENT_DELAY_UNIT
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+}
+
+proc getAcousticSignalVirtualReceiver {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+  set prn 0
+
+  if {[session_is_expert]} {
+    set param "LOGIC_COMBINATION"
+    if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableLogicCombination}</td>"
+        option LOGIC_COMBINATION
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+      append html "</tr>"
+      append html "[getHorizontalLine]"
+    }
+  }
+
+  set param POWERUP_JUMPTARGET
+  if { ! [catch {set tmp $ps($param)}]  } {
+    append html [getPowerUpSelectorAcousticSignal $chn ps $special_input_id]
+  }
+  return $html
 }
 
 proc getNoParametersToSet {} {

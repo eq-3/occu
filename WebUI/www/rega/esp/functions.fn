@@ -523,6 +523,16 @@ function ::showHideHmIPChannel() {
      return;
     }
 
+    ! HmIP-MP3P (MP3 player and dimmer with 7 colors)
+    if (oDevHssType == "HmIP-MP3P") {
+     if (user.UserEasyLinkMode() == true) {
+       if ((chn.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1)) {bShowChannel = false; return;}
+       if ((chn.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1) && (chNumber != 2)) {bShowChannel = false; return;}
+       if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
+       if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber != 6)) {bShowChannel = false; return;}
+     }
+     return;
+    }
 
     ! HmIPW-DRBL4 (HmIP wired blind actor)
     if (oDevHssType == "HmIPW-DRBL4") {
@@ -589,6 +599,7 @@ function ::isParameterVisible() {
 
   string hmIPRFIdentifier = "HmIP-RF";
   string hmIPWIdentifier = "HmIP-Wired";
+  string HmIPWLabel = "HmIPW-";
   string hmIPVirtualDevIdentifier = "VirtualDevices";
   string bidCosRFIdentifier = "BidCos-RF";
   string wiredIdentifier = "BidCos-Wired";
@@ -599,7 +610,7 @@ function ::isParameterVisible() {
   showChannelParam = true;
 
   if ( (sInterface == hmIPRFIdentifier) || (sInterface == hmIPWIdentifier) ) {
-    excludeBinaryParams = "BOOST_TIME,CONTROL_DIFFERENTIAL_TEMPERATURE,ERROR_CODE,LAST_PASSAGE_DIRECTION,LEVEL_STATUS,OPERATING_VOLTAGE,PARTY_,PARTY_MODE,PASSAGE_COUNTER_OVERFLOW,PROCESS,QUICK_VETO_TIME,";
+    excludeBinaryParams = "BOOST_TIME,CONTROL_DIFFERENTIAL_TEMPERATURE,ERROR_CODE,LAST_PASSAGE_DIRECTION,LEVEL_STATUS,LEVEL_2_STATUS,OPERATING_VOLTAGE,PARTY_,PARTY_MODE,PASSAGE_COUNTER_OVERFLOW,PROCESS,QUICK_VETO_TIME,";
     excludeBinaryParams = excludeBinaryParams#"RSSI_DEVICE,RSSI_PEER,SECTION,SMOKE_DETECTOR_TEST_RESULT=NONE,VALVE_STATE";
 
     if ((oCC.HssType().Find("DIMMER_TRANSMITTER") != -1)
@@ -618,6 +629,15 @@ function ::isParameterVisible() {
       includeBinaryParams = "PROCESS";
 
       return;
+    }
+
+    !MP3P
+    if ( (oCC.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1) || (oCC.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1) ) {
+      if ( (oDP.HSSID().Find("LEVEL") != -1)
+      || (oDP.HSSID().Find("ACTIVITY_STATE") != -1)
+      ) {
+        showChannelParam = false;
+      }
     }
 
     ! Check if this is a multi-io channel - the channel can be a key, switch or shutter contact -
@@ -649,6 +669,18 @@ function ::isParameterVisible() {
       }
 
       return;
+    }
+
+
+    ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
+    ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
+    if ((oCC.Label().Find(HmIPWLabel) != -1) && (oCC.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)) {
+      object oMode = dom.GetObject(oCC.Address());
+      if (oMode.MetaData("channelMode") == "shutter") {
+        if ((oDP.HSSID().Find("LEVEL_2") != -1)) {
+          showChannelParam = false;
+        }
+      }
     }
   }
 
@@ -692,6 +724,14 @@ function ::isBinaryOptionVisible() {
        return;
       }
   }
+
+  if (oCC.HssType() == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") {
+      if ((oDP.HSSID().Find("SOUNDFILE_LIST") != -1)) {
+       showChannelParam = false;
+       return;
+      }
+  }
+
   return;
 }
 
@@ -722,6 +762,8 @@ function ::getFirmwareVersion() {
 }
 
 function ::getSpecialTranslationPrgCond() {
+
+  string HmIPWLabel = "HmIPW-";
 
   ! This is necessary for the passage detector SPDR
   ! The same parameter of the same channel type (ch 2 and 3) must be translated differently.
@@ -785,6 +827,38 @@ function ::getSpecialTranslationPrgCond() {
     }
   }
 
+  if (oCC.HssType() == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") {
+    if (sShortKey.Find("SOUNDFILE=SOUNDFILE_") != -1) {
+      string no = sShortKey.StrValueByIndex("_",1);
+      sValue = "${lblSoundFileNr}: "#no;
+    }
+  }
+
+  ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
+  ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
+  if ((oCC.Label().Find(HmIPWLabel) != -1) &&  (oCC.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)) {
+    object oMode = dom.GetObject(oCC.Address());
+    if (oMode.MetaData("channelMode") == "shutter") {
+      if (sShortKey == "ACTIVITY_STATE=DOWN") {
+        sValue = "${stringTableShutterActivityStateDown}";
+      }
+      if (sShortKey == "ACTIVITY_STATE=UNKNOWN") {
+        sValue = "${stringTableShutterActivityStateUnknown}";
+      }
+      if (sShortKey == "ACTIVITY_STATE=UP") {
+        sValue = "${stringTableShutterActivityStateUp}";
+      }
+      if (sShortKey == "ACTIVITY_STATE=STABLE") {
+        sValue = "${stringTableProcessStableShutterTransmitter}";
+      }
+      if (sShortKey == "PROCESS=STABLE") {
+        sValue = "${stringTableProcessStableShutterTransmitter}";
+      }
+      if (sShortKey == "PROCESS=NOT_STABLE") {
+        sValue = "${stringTableProcessNotStableShutterTransmitter}";
+      }
+    }
+  }
   return;
 }
 
@@ -796,6 +870,13 @@ function ::getSpecialTranslationPrgDest() {
   ! ASIR - Adds the string "Alarmsignal: " to the original value.
   if (oDP.HSSID() == "OPTICAL_ALARM_SELECTION") {
     sValue = "${opticalAlarm}: "#sValue;
+  }
+
+  if (oCH.HssType() == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") {
+    if (sValue.Find("SOUNDFILE=SOUNDFILE_") != -1) {
+      string no = sValue.StrValueByIndex("_",1);
+      sValue = "${lblSoundFileNr}: "#no;
+    }
   }
   return;
 }

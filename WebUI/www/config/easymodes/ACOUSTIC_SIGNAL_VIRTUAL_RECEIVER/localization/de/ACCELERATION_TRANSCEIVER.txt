@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird die gew&auml;hlte MP3-Datei f&uuml;r die gew&uuml;nschte Zeit eingeschaltet und bei der n&auml;chsten erkannten Bewegung beendet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird die gew&auml;hlte MP3-Datei f&uuml;r die gew&uuml;nschte Zeit eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird eine laufende MP3-Datei ausgeschaltet.</span><br/><br/>",
+
+"subset_1": "Bewegung/Senkrecht",
+"subset_2": "Ruhe/Waagerecht",
+"subset_3": "Jede &Auml;nderung",

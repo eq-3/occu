@@ -1,4 +1,13 @@
 <%
+
+  integer iDP = oSD.DestinationDP();
+  integer iCH = oSD.DestinationChannel();
+  integer iP = oSD.DestinationParam();
+  integer iV = oSD.DestinationValue();
+  integer iVT = oSD.DestinationValueType();
+  integer iVP = oSD.DestinationValueParam();
+  integer iVPT = oSD.DestinationValueParamType();
+
   string hm_ouled16 =  "HM-OU-LED16";
   string hm_oucfm = "HM-OU-CFM-Pl";
   string hm_oucfmTW = "HM-OU-CFM-TW";
@@ -19,18 +28,31 @@
   string excludePARTY = "PARTY_";
   string includePARTY = "PARTY_MODE_SUBMIT";
 
+  string excludeSoundFileList = "SOUNDFILE_LIST_";
+  string excludeColorList = "COLOR_LIST_";
+  string excludeOntimeList = "ON_TIME_LIST_";
+  string excludeOutputSelectSize = "OUTPUT_SELECT_SIZE";
+  string excludeRepetitions = "REPETITIONS=";
+
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
   string excludeHmIPResetMotion = "RESET_MOTION";
   string excludeHmIPSmokeDetCommandReservedAlarmOff = "SMOKE_DETECTOR_COMMAND=RESERVED_ALARM_OFF";
 
-  integer iDP = oSD.DestinationDP();
-  integer iCH = oSD.DestinationChannel();
-  integer iP = oSD.DestinationParam();
-  integer iV = oSD.DestinationValue();
-  integer iVT = oSD.DestinationValueType();
-  integer iVP = oSD.DestinationValueParam();
-  integer iVPT = oSD.DestinationValueParamType();
+  ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
+  ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
+  string excludeHmIPLevel2 = "xx";
+  object oCH = dom.GetObject( iCH );
+  if (oCH) {
+    if (oCH.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) {
+      object oMode = dom.GetObject(oCH.Address());
+      if (oMode.MetaData("channelMode") == "shutter") {
+        string excludeHmIPLevel2 = "LEVEL_2";
+      }
+    }
+  }
+
   string sSelected = "";
+
   Write( '<select class="SelectBox" onchange="DestinationParamSelectChange(this.selectedIndex,'#oSD.ID()#');">' );
   if( iP == ivtEmpty ) { sSelected = " selected"; } else { sSelected = ""; }
   Write( '<option'#sSelected#'></option>' );
@@ -170,7 +192,12 @@
                   if( !oDP.IsTypeOf( OT_VARDP ) ) {
                     optionVal = oDP.HSSID()#"="#sVLValue;
                   }
-                  if (optionVal != excludeHmIPSmokeDetCommandReservedAlarmOff) {
+                  if ((optionVal != excludeHmIPSmokeDetCommandReservedAlarmOff)
+                    && (optionVal.Find(excludeSoundFileList) == -1)
+                    && (optionVal.Find(excludeRepetitions) == -1)
+                    && (optionVal.Find(excludeColorList) == -1)
+                    && (optionVal.Find(excludeOntimeList) == -1)
+                  ) {
 
                     if( (oDP.ID() == iDP) && (iV == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
                     Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
@@ -248,6 +275,8 @@
                 if ( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1))
                 && (oDP.HSSID().Find(excludeHmIPCDT) == -1)
                 && (oDP.HSSID().Find(excludeHmIPResetMotion) == -1)
+                && (oDP.HSSID().Find(excludeHmIPLevel2) == -1)
+                && (oDP.HSSID().Find(excludeOutputSelectSize) == -1)
                 ) {
                   Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
                   string sValue = oDP.Name();

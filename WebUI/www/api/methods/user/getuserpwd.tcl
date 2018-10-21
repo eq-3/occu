@@ -1,12 +1,12 @@
 ##
 # User.getUserPWD
-# Ermittelt den Usernamen des Anwenders
+# Ermittelt das Passwort des Anwenders
 #
 # Parameter:
-#   id: [string] Id des Anwenders
+#   userID: [string] Id des Anwenders
 #
 # Rückgabewert: [string]
-#    Username
+#    Userpasswort
 ##
 
 set script {

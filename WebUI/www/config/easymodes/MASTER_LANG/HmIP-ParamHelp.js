@@ -97,6 +97,14 @@ jQuery.extend(true,langJSON, {
     "Ein Zur%FCcksetzen des Ger%E4tes ist in diesem Fall nur noch %FCber die Zentrale m%F6glich.<br/><br/>" +
     "<b>Bitte erstellen Sie vor Aktivierung der Funktion ein Backup Ihrer Zentrale, in dem dieses Ger%E4t bereits enthalten ist.</b>",
 
+    "BRIGHTNESS_FILTER" : "Der Helligkeitsfilter im Bewegungsmelder misst etwa alle 6 Minuten einen Helligkeitswert. %DCber den Dropdown-Button bestimmen Sie, wie viele dieser Werte gespeichert werden. Der niedrigste der gespeicherten Werten wird f%FCr die Auswertung verwendet.",
+
+    "CONTACT_BOOST" : "Um dem Korrodieren und m%F6glichen Funktionseinschr%E4nkungen der Taster bzw. Schalter vorzubeugen, kann der 'Korrosionsschutz' aktiviert werden. " +
+    "Dieser sorgt daf%FCr, dass kurzzeitig ein erh%F6hter Strom durch einen angeschlossenen Taster oder Schalter flie%DFt, wenn er bet%E4tigt wird. Der Stromimpuls wirkt der Korrosion entgegen.",
+
+    "repetitionOffTimeSound" : "W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Ausschaltdauer gew%E4hlt, wird der Parameter Wiederholungen ignoriert.",
+    "repetitionOffTimeDimmer" : "W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Einschaltdauer oder Ausschaltdauer gew%E4hlt, wird der Parameter Wiederholungen ignoriert.",
+
     "noMoreHelp" : ""
   },
 
@@ -195,104 +203,15 @@ jQuery.extend(true,langJSON, {
     "In this case, the device reset is only possible via the Central Control Unit.<br/><br/>" +
     "<b>Before activation of this function, please create a backup of your Central Control Unit that already includes this device.</b>",
 
-    "noMoreHelp" : ""
+    "BRIGHTNESS_FILTER" : "The brightness filter of the motion detector measures the brightness approximately every 6 minutes. Use the dropdown button to determine how many of these brightness values are saved. The lowest of the stored values is used for the evaluation.",
 
-    },
+    "CONTACT_BOOST" : "In order to prevent corrosion and possible functional restrictions of the buttons or switches, the 'corrosion protection' can be activated. " +
+    "This ensures that an increased current flows briefly through a connected pushbutton or switch when it is actuated. The current pulse counteracts corrosion.",
 
-  "tr" : {
-    "HelpTitle" : "Help",
-    "ROUTER_MODULE_ENABLED" : "<b>The device acts as router</b><br/><br/>This option allows the Homematic IP device to forward wireless commands. It therefore is used to increase the reach of standalone components.",
-    "ENABLE_ROUTING" : "<b>Routing active</b><br/><br/>Through this option the device attempts to communicate via a Homematic IP radio router as soon as it cannot directly reach the receiver. For example, the routing function may be activated on Homematic IP pluggable switch and meter with current firmware.",
-    "BLIND_REFERENCE_RUNNING_TIME" : "After you have manually changed the movement time value, the CCU has no information anymore on the blind/shutter position. You should therefore perform a calibration run (once completely to up and down). This ensures that the CCU is updated on the blind/shutters exact position.<br/><br/>" +
-      "This applies also to devices with automatic calibration run if you decide to manually change the movement time value.",
-    "BLIND_AUTOCALIBRATION" : "The automatic calibration run determines how long the shutter/blind needs to move to the desired level. The time for adjusting the slats is not considered and has to be entered manually.",
-
-    "BLOCKING_PERIOD" :
-    "The motion and presence detection can be deactivated for the time defined here, by linking a push-button or similar to this channel. " +
-    "As soon as the channel receives a switching command, the detection is muted for the time defined. After the time has expired the motion detector/presence sensor continues normal operation.",
-
-    "PERMANENT_FULL_RX" :
-      "To keep the energy consumption of battery operated devices at a low level, the devices are not permanently listening in the default settings. " +
-      "Changes that are made e.g. on this configuration page are transferred only after the device has been operated or sends a status.<br/><br/>" +
-      "This parameter can be used to change the behaviour to permanent listening. Thus, changes are adapted immediately but however the battery lifetime will be reduced faster.",
-
-
-    "COND_TX_DECISION_ABOVE_BELOW" :
-      "Change this parameter only if it is really necessary. Changing this value can lead to " +
-      "incorrect operation of connections with this channel.",
-
-    "DELAY_COMPENSATION" : "Some motors start running after switching on with a certain delay. The parameter can be used to adjust the duration of the delay.",
-
-    "SPDR_CHANNEL_MODE" :
-    "<ul>" +
-            "<li class='diagramHelpCustomModeLi1'>" +
-              "<b>1 - \${optionInactiv}</b><br/>" +
-              "Deactivate counter-based switching of sensor"+
-            "</li>" +
-
-            "<li class='diagramHelpCustomModeLi1'>" +
-              "<b>2 - \${optionPassageCounterDetectionLR}</b><br/>" +
-              "If the desired number of passages is reached, the defined decision value will be sent "+
-              "and direct connections that react to this value are triggered.<br/><br/>" +
-              "In this mode, the sensor reacts to passages from both directions." +
-            "</li>" +
-
-            "<li class='diagramHelpCustomModeLi1'>" +
-              "<b>3 - \${optionPassageCounterDetectionL}</b><br/>" +
-              "Here, the same applies as for item 2. The sensor only reacts on passages from right to left."+
-             "</li>" +
-
-            "<li class='diagramHelpCustomModeLi1'>" +
-              "<b>4 - \${optionPassageCounterDetectionR}</b><br/>" +
-              "Here, also the same applies as for item 2. The sensor only reacts to passages from left to right."+
-             "</li>" +
-
-            "<li class='diagramHelpCustomModeLi1'>" +
-              //"<b>5 - \${optionPassageCounterDeltaL}</b><br/>" +
-              "<b>5 -Difference of passages - left </b><br/>" +
-                "In this mode an internal counter variant is increased by 1 on detected passage to LEFT and " +
-                "reduced by 1 on passage detected to RIGHT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
-                "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
-                "upper difference value, a switching command is send with the upper decision value to the " +
-                "connection partner(s). Additional passages are counted until the maximum value but will not cause " +
-                "additional switching commands. Only when reaching the lower difference value, a switching command " +
-                "with the lower decision value is sent to the connection partner(s)." +
-             "</li>" +
-
-            "<li class='diagramHelpCustomModeLi1'>" +
-              //"<b>6 - \${optionPassageCounterDeltaR}</b><br/>" +
-              "<b>6 -Difference of passages - right </b><br/>" +
-                "In this mode an internal counter variant is increased by 1 on detected passage to RIGHT and " +
-                "reduced by 1 on passage detected to LEFT. The mimium value of the internal counter variable is ZERO and the maximum value is 1000.<br/><br/>" +
-                "The adjustable upper and lower difference value is used to create a hysteresis. If the internal counter reaches the " +
-                "upper difference value, a switching command is send with the upper decision value to the " +
-                "connection partner(s). Additional passages are counted until the maximum value but will not cause " +
-                "additional switching commands. Only when reaching the lower difference value, a switching command " +
-                "with the lower decision value is sent to the connection partner(s)." +
-                 "</li>" +
-          "</ul>",
-
-    "hintPERMANENT_FULL_RX" :
-      "Please note:<br/>"+
-      "In battery mode, this device is not permanently listening. In this case, muting of motion detection (receiver channel) " +
-      "cannot be used in a connection. In battery mode, this is only possible using the push-buttons of HmIP-SMI55. The same applies to programmes for switching motion detection on or off.",
-
-    "EVENT_FILTER_NUMBER_motionDetect":
-      "You can adjust the sensitivity of the motion detection here. A higher value is equal to a higher sensitivity level.",
-
-    "ALARM_MODE_ZONE_1 - currently not in use" :
-      "tr* F%FCr den Fall, dass die "+ HMIdentifier.tr.CCUShortName + " aus irgendwelchen Gr%FCnden nicht erreichbar ist, k%F6nnen Sie hier die Zonen w%E4hlen, " +
-      "die dann ............",
-    "MIN_INTERVAL" :
-      "The motion detector reports the first detected movement immediately, then further movements again after the time selected here.",
-    "MIN_INTERVAL_PRESENCE" :
-      "The presence sensor reports the first detected movement immediately, then further movements again after the time selected here.",
-
-    "LOCAL_RESET_DISABLED" : "Please note that the factory settings of this device can no longer be restored via the device button after activating this function. " +
-    "In this case, the device reset is only possible via the Central Control Unit.<br/><br/>" +
-    "<b>Before activation of this function, please create a backup of your Central Control Unit that already includes this device.</b>",
+    "repetitionOffTimeSound" : "en* W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Ausschaltdauer gewählt, wird der Parameter Wiederholungen ignoriert.",
+    "repetitionOffTimeDimmer" : "en* W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Einschaltdauer oder Ausschaltdauer gewählt, wird der Parameter Wiederholungen ignoriert.",
 
     "noMoreHelp" : ""
-  }
+
+    }
 });
-

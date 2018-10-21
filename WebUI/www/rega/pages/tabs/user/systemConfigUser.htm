@@ -2,7 +2,7 @@
   system.SetSessionVar("sessionTAB", "systemconfigUser");
 %>
 <script type="text/javascript">
-  setPath("Einstellungen");
+  setPath(translateKey("menuSettingsPage"));
 </script>
 
 <table class="StdTable" cellspacing="20">
@@ -15,19 +15,19 @@
   <tr class="CLASS06100">
     <!-- Favoriten -->
     <td>
-      <div class="StdTableBtn" onclick="WebUI.enter(FavoriteListPage);">Favoriten</div>
+      <div class="StdTableBtn" onclick="WebUI.enter(FavoriteListPage);">${btnSettingsFavorites}</div>
       <ul>
-        <li>&Uuml;bersicht über die dem angemeldeten Benutzer zugeordneten Favoriten</li>
-        <li>Anlegen und Bearbeiten neuer Favoriten</li>
-        <li>L&ouml;schen von Favoriten</li>
+        <li>${lblSettingsFavorites1User}</li>
+        <li>${lblSettingsFavorites2User}</li>
+        <li>${lblSettingsFavorites3}</li>
       </ul>
     </td>
     
     <!-- Benutzerverwaltung -->
     <td>
-      <div  class="StdTableBtn" onclick="WebUI.enter(UserAdminPageUser);">Benutzerverwaltung</div>
+      <div  class="StdTableBtn" onclick="WebUI.enter(UserAdminPageUser);">${btnSettingsUserAdministration}</div>
       <ul>
-        <li>Bearbeiten des eigenen Benutzerkontos mit Ändern des Kennwortes</li>
+        <li>${lblSettingsUserAdministrationUser}</li>
       </ul>
     </td>
     <td class="CLASS06101"></td>
@@ -42,5 +42,6 @@
 </table>
 
 <script type="text/javascript">
-setFooter("");
+  setFooter("");
+  translatePage("#content");
 </script>

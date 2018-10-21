@@ -201,7 +201,7 @@ proc getExtendedLinkDescription {channelType channel} {
 proc put_PreviousStep {} {
 
 #cgi_debug -on
-  global ise_CHANNELNAMES step receiver_links
+  global ise_CHANNELNAMES step receiver_links url
   global dev_descr_sender dev_descr_receiver iface sender_address receiver_address name description group_name group_description sender_group dev_descr_sender_group
 
 #cgi_debug -on
@@ -281,6 +281,20 @@ proc put_PreviousStep {} {
     set extReceiverDescr ""
 
     catch {set extReceiverDescr [getExtendedLinkDescription $dev_descr_receiver(TYPE) $dev_descr_receiver(INDEX)]}
+
+
+    if {[string first "HmIPW-" $dev_descr_receiver(PARENT_TYPE)] != -1} {
+      if {[string equal $dev_descr_receiver(TYPE) "BLIND_VIRTUAL_RECEIVER"] == 1} {
+        # Check the mode of a wired blind (shutter or blind)
+        # Determine the current channelMode
+        catch {
+          set chnMode [xmlrpc $url getMetadata [list string $dev_descr_receiver(ADDRESS)] channelMode]
+          if {[string equal $chnMode "shutter"] == 1} {
+            set dev_descr_receiver(TYPE) "SHUTTER_VIRTUAL_RECEIVER"
+          }
+        }
+      }
+    }
 
     if {[string equal $dev_descr_sender(PARENT_TYPE) "HmIP-MOD-RC8"] == 0} {
       # This is for all links where the sender is no HmIP-MOD-RC8

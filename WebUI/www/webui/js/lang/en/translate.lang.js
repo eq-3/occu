@@ -643,7 +643,6 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsFirewallLblScriptAPI" : "<b>Remote Homematic script API:</b>",
     "dialogSettingsFirewallLblHintScriptAPI" : "Enables access to the logic tier of the Homematic CCU",
     "dialogSettingsFirewallLblIPAddresses" : "<b>IP addresses for restricted access</b>",
-    "dialogSettingsFirewallLblHintIPAddresses" : "You can enable access for single IP addresses (e.g. 192.168.0.1) or entire address ranges (e.g. 192.168.0.0/16).",
     "dialogSettingsFirewallLblFullAccess" : "Full access",
     "dialogSettingsFirewallLblRestrictedAccess" : "Restricted access",
     "dialogSettingsFirewallLblNoAccess" : "No access",
