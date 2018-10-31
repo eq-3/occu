@@ -2,6 +2,8 @@ jQuery.extend(true,langJSON, {
   "de" : {
     "chType_ACTOR_SECURITY" : "L%FCftungssperre-Kanal",
     "chType_ACTOR_WINDOW" : "Aktor-Kanal",
+    "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Statusmitteilung MP3-Player",
+    "chType_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" : "MP3-Player",
     "chType_ALARM_COND_SWITCH_RECEIVER" : "Verkn%FCpfungspartner<br/>f%FCr Sensor mit Sicherheitskanal",
     "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Backup Alarmsirene",
     "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarmkanal",
@@ -41,6 +43,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_TRANSMITTER" : "Statusmitteilung Dimmwert",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmaktor",
     "chType_DIMMER_WEEK_PROFILE" : "Wochenprogramm",
+    "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Wochenprogramm",
     "chType_DOOR_RECEIVER_MOD_TM" : "Torantrieb",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
     "chType_DUAL_WHITE_COLOR" : "Farbkanal",

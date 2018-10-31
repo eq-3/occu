@@ -352,6 +352,7 @@ function ::showHideHmIPChannel() {
       && (oDevHssType != "HmIP-MOD-RC8")
       && (oDevHssType != "HmIP-BRC2")
       && (oDevHssType != "HmIP-DBB")
+      && (oDevHssType != "HmIP-RCB1")
       )
     )
   {

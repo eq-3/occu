@@ -511,6 +511,7 @@ proc getPowerUpSelector {chn p special_input_id} {
                     append html "<option value=\"$loop\" $select>$loop</option>"
                   }
               append html "</select>"
+              append html "[getHelpIcon repetitionOffTimeDimmer 450 100]"
             append html "</td>"
           }
 
@@ -616,7 +617,7 @@ set comment {
           # OFF
           append html "jQuery(\"#timeDelay_\" + chn + \"_7\").val(0).change().prop(\"disabled\", true);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_8\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_9\").val(0).change().prop(\"disabled\", true);"
+          # append html "jQuery(\"#timeDelay_\" + chn + \"_9\").val(0).change().prop(\"disabled\", true);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_10\").val(0).change().prop(\"disabled\", true);"
           catch {append html "jQuery(\"#separate_CHANNEL_\" + chn + \"_$powerUpLevelPRN\").val(0);"}
           append html "panelOnElm.hide();"
@@ -788,6 +789,7 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
                   append html "<option value=\"$loop\" $select>$loop</option>"
                 }
             append html "</select>"
+            append html "[getHelpIcon repetitionOffTimeSound 450 100]"
           append html "</td>"
         }
       append html "</tr>"
@@ -902,7 +904,7 @@ set comment {
           # OFF
           append html "jQuery(\"#timeDelay_\" + chn + \"_7\").val(0).change().prop(\"disabled\", true);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_8\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_9\").val(0).change().prop(\"disabled\", true);"
+          # append html "jQuery(\"#timeDelay_\" + chn + \"_9\").val(0).change().prop(\"disabled\", true);"
           append html "jQuery(\"#separate_CHANNEL_\" + chn + \"_$powerUpLevelPRN\").val(0);"
           append html "panelOnElm.hide();"
           append html "panelOffElm.hide();"

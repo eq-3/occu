@@ -32,6 +32,7 @@
   string excludeColorList = "COLOR_LIST_";
   string excludeOntimeList = "ON_TIME_LIST_";
   string excludeOutputSelectSize = "OUTPUT_SELECT_SIZE";
+  string excludeCombinedParameter = "COMBINED_PARAMETER";
   string excludeRepetitions = "REPETITIONS=";
 
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
@@ -277,6 +278,7 @@
                 && (oDP.HSSID().Find(excludeHmIPResetMotion) == -1)
                 && (oDP.HSSID().Find(excludeHmIPLevel2) == -1)
                 && (oDP.HSSID().Find(excludeOutputSelectSize) == -1)
+                && (oDP.HSSID().Find(excludeCombinedParameter) == -1)
                 ) {
                   Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
                   string sValue = oDP.Name();

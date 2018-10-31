@@ -625,6 +625,12 @@ proc showHmIPChannel {devType direction address chType} {
     || ([string equal -nocase -length 8 $devType "HMIP-PDT"] == 1)
     || ([string equal -nocase -length 9 $devType "HMIP-PCBS"] == 1)
     ) && $direction == 1} { #; channel is sender
+
+    if {$chType == "COND_SWITCH_TRANSMITTER"} {
+      # show the channel
+      # return 1
+    }
+
     # don't show the channel
     return 0
   }
@@ -739,6 +745,18 @@ proc showHmIPChannel {devType direction address chType} {
 
     if {($devType == "HMIPW-FIO6") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
       if {($ch == 9) || ($ch == 10) || ($ch == 13) || ($ch == 14) || ($ch == 17) || ($ch == 18) || ($ch == 21) || ($ch == 22) || ($ch == 25) || ($ch == 26) || ($ch == 29) || ($ch == 30)} {
+        return 0
+      }
+    }
+
+    if {($devType == "HMIP-MP3P") && ($chType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER")} {
+      if {($ch == 3) || ($ch == 4)} {
+        return 0
+      }
+    }
+
+    if {($devType == "HMIP-MP3P") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
+      if {($ch == 7) || ($ch == 8)} {
         return 0
       }
     }

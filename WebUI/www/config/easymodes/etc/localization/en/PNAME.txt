@@ -36,7 +36,7 @@
 "ON_AIRING" : "<span class=\"translated\">Ventilation if</span>",
 "ON_LEVEL" : "<span class=\"translated\">Level in status \"on\"</span>",
 "ON_LEVEL_mp3" : "<span class=\"translated\">Volume in status \"on\"</span>",
-"OUTPUT_BEHAVIOUR_sound" : "<span class=\"translated\">Color</span>",
+"OUTPUT_BEHAVIOUR_color" : "<span class=\"translated\">Color</span>",
 "OUTPUT_BEHAVIOUR_mp3" : "<span class=\"translated\">MP3-File</span>",
 "ON_THRESHOLD" : "<span class=\"translated\">Switch on if</span>",
 "ON_TIME" : "<span class=\"translated\">Switch-on time (duration in status \"on\")</span>",
@@ -99,4 +99,4 @@
 "TEMPERATURE_RC" : "<span class=\"translated\">Temperature</span>",
 "SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender channel settings</span>",
 
-"REPETITION" : "<span class=\"translated\">en* Wiederholungen</span>",
+"REPETITION" : "<span class=\"translated\">Repetitions</span>",

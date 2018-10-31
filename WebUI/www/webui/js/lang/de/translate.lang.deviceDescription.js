@@ -83,6 +83,8 @@ jQuery.extend(true,langJSON, {
     "HmIPW-DRS4" : "Homematic IP Wired Schaltaktor - 4-fach",
     "HmIPW-DRS8" : "Homematic IP Wired Schaltaktor - 8-fach",
     "HmIPW-FIO6" : "Homematic IP Wired IO Modul Unterputz - 6-fach",
+    "HmIP-FCI1" : "Homematic IP Kontakt-Schnittstelle Unterputz - 1-fach",
+    "HmIP-FCI6" : "Homematic IP Kontakt-Schnittstelle Unterputz - 6-fach",
     "HmIP-CCU3" : "Homematic IP Zentrale CCU3",
     "HmIP-DBB" : "Homematic IP T%FCrklingeltaster",
     "HmIP-MOD-TM" : "Homematic IP Tormatic Modul",

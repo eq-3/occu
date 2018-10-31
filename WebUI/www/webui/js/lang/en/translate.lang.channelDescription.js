@@ -2,6 +2,10 @@ jQuery.extend(true,langJSON, {
   "en" : {
     "chType_ACTOR_SECURITY" : "Ventilation lock channel",
     "chType_ACTOR_WINDOW" : "Actor channel",
+
+    "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Status report MP3-Player",
+    "chType_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" : "MP3-Player",
+
     "chType_ALARM_COND_SWITCH_RECEIVER" : "Connection partner<br/>for sensor with security channel",
     "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Connection partner<br/>backup alarm siren",
     "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarm channel",
@@ -41,6 +45,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_TRANSMITTER" : "Status report dimmer",
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",
     "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
+    "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Weekly program",
     "chType_DOOR_RECEIVER_MOD_TM" : "Door drive",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
     "chType_DUAL_WHITE_COLOR" : "Colour channel",

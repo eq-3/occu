@@ -6,8 +6,6 @@
 "dimmer_on_brighter" : "MP3 - ein/lauter",
 "dimmer_on_off" : "MP3 - ein/aus",
 "dimmer_on_off_b_d" : "MP3 - ein/aus &amp; lauter/leiser",
-"sleep_well" : "Einschlafmusik",
-"wake_up_light" : "Aufwachmusik",
 "dimmer_toggle" : "MP3 abwechselnd ein/aus",
 "dimmer_on_when_change_signal" : "MP3 ein bei &Auml;nderungssignal",
 

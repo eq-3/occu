@@ -82,6 +82,10 @@ jQuery.extend(true,langJSON, {
       "nicht in einer Verkn%FCpfung verwendet werden. Im Batteriebetrieb ist dieses nur mit den ger%E4teeigenen Tasten des HmIP-SMI55 m%F6glich. "+
       "Gleiches gilt in Programmen f%FCr das Ein-/Ausschalten der Bewegungserkennung.",
 
+    "" :
+    "Bitte beachten Sie:<br/>"+
+    "Im Batteriebetrieb ist dieses Ger%E4t nicht in st%E4ndiger H%F6rbereitschaft.",
+
     "EVENT_FILTER_NUMBER_motionDetect":
       "Hier k%F6nnen Sie die Empfindlichkeit der Bewegungserkennung einstellen. Dabei bedeutet ein hoher Wert eine h%F6here Empfindlichkeit.",
 
@@ -208,8 +212,8 @@ jQuery.extend(true,langJSON, {
     "CONTACT_BOOST" : "In order to prevent corrosion and possible functional restrictions of the buttons or switches, the 'corrosion protection' can be activated. " +
     "This ensures that an increased current flows briefly through a connected pushbutton or switch when it is actuated. The current pulse counteracts corrosion.",
 
-    "repetitionOffTimeSound" : "en* W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Ausschaltdauer gewählt, wird der Parameter Wiederholungen ignoriert.",
-    "repetitionOffTimeDimmer" : "en* W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Einschaltdauer oder Ausschaltdauer gewählt, wird der Parameter Wiederholungen ignoriert.",
+    "repetitionOffTimeSound" : "Select the pause between the repetitions with the off duration. If a permanent off time is selected, the Repeats parameter is ignored.",
+    "repetitionOffTimeDimmer" : "Select the pause between the repetitions with the off duration. If a permanent on-time or off-time is selected, the Repeats parameter is ignored.",
 
     "noMoreHelp" : ""
 

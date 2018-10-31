@@ -4,10 +4,15 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
 proc getMaintenance {chn p descr} {
+
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
   upvar special_input_id special_input_id
+
+  set devType $dev_descr(TYPE)
 
   set specialID "[getSpecialID $special_input_id]"
   set html ""
@@ -96,11 +101,17 @@ proc getMaintenance {chn p descr} {
     set options(0) "\${operationModeBattery}"
     set options(1) "\${operationModeMains}"
     append html "<td>\${powerSupply}</td>"
-    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)] [getHelpIcon $param]</td>"
+      if {[string equal $devType "HmIP-SMI55"] == 1} {
+        append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)] [getHelpIcon $param]</td>"
+      } else {
+        append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)]</td>"
+      }
 
-    append html "<tr id=\"hint_separate_$CHANNEL\_$prn\">"
-     append html "<td colspan=\"2\">\${hintPERMANENT_FULL_RX}<td>"
-    append html "</tr>"
+    if {[string equal $devType "! HmIP-MP3P"] == 1} {
+      append html "<tr id=\"hint_separate_$CHANNEL\_$prn\">"
+        append html "<td colspan=\"2\">\${hintPERMANENT_FULL_RX}<td>"
+      append html "</tr>"
+    }
     append html "[getHorizontalLine]"
 
     append html "<script type='text/javascript'>"

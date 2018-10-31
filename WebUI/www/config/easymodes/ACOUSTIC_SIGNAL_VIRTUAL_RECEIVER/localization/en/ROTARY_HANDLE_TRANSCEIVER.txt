@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">en* Beim &Ouml;ffnen des Fensters wird die gew&auml;hlte MP3-Datei abgespielt und beim Schlie&szlig;en beendet. Diese Funktion l&auml;sst sich auch umkehren.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">en* Beim Erkennen des festgelegten &Auml;nderungssignals wird die gew&auml;hlte MP3-Datei mit der festgelegten Lautst&auml;rke abgespielt.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">en* Beim Erkennen des &Ouml;ffnen-Signals wird die gew&auml;hlte MP3-Datei mit der festgelegten Lautst&auml;rke abgespielt und beim n&auml;chsten &Ouml;ffnen wieder beendet (Toggle-Funktion). </span><br/><br/>",
+"description_1" : "<span class=\"translated\">When the window is opened, the selected MP3 file is played and when it is closed, the file is stopped. This function can be reversed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the defined change signal is detected, the selected MP3 file is played at the defined volume.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the open signal is detected, the selected MP3 file is played at the defined volume and the next time opening takes place, it is stopped again (toggle function).</span><br/><br/>",
 
 "subset_1" : "Open - on / Closed - off",
 "subset_2" : "Open - off / Closed - on",

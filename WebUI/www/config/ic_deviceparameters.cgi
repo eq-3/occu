@@ -601,6 +601,8 @@ proc isVirtual {paramId} {
 
   lappend virtualDevices "hmip-pcbs2_3_master" "hmip-pcbs2_5_master" "hmip-pcbs2_6_master" "hmip-pcbs2_7_master" "hmip-pcbs2_9_master" "hmip-pcbs2_10_master"
 
+  lappend virtualDevices "hmip-mp3p_3_master" "hmip-mp3p_4_master" "hmip-mp3p_7_master" "hmip-mp3p_8_master"
+
   set virtual "false"
 
   foreach val $virtualDevices {

@@ -77,7 +77,7 @@ function ::CreateDimmingActuator()
           WriteLine("<td style='_background-color:#89989b'>");
             WriteLine("<div class='ControlBtnOff'>");
               WriteLine("<table>");
-                WriteLine("<tr><td><div>Farbe</div></td></tr>");
+                WriteLine("<tr><td><div>${stringTableColor}</div></td></tr>");
                 ! Color selectbox
                 WriteLine("<tr><td>");
                   WriteLine("<select id='bslColorSelector"#chnId#"' onchange='bslSetColor(this,"#oColor.ID()#");'>");

@@ -38,6 +38,8 @@ ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_OFF	${stringTableAlarmFrequencyHighOnO
 ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_LONGOFF	${stringTableAlarmFrequencyHighOnLongOff}
 ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_OFF_HIGHON_OFF	${stringTableAlarmFrequencyLowOnOffHighonOff}
 ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_LONGOFF_HIGHON_LONGOFF	${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}
+ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER	${stringTableAcousticSignalVirtualReceiverTitle}
+ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER|LEVEL	${lblVolume}
 ACTOR_SECURITY	${stringTableActorSecurityTitle}
 ACTOR_SECURITY|ON_TIME	${stringTableActorSecurityOnTime}
 ACTOR_SECURITY|SECURE_STATE=FALSE	${stringTableActorSecuritySecureStateFalse}
@@ -497,6 +499,7 @@ DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNDERFLOW	${lblValue} ${stringTableDimmerLe
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=3	${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNKNOWN	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=1	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
+DISABLE_ACOUSTIC_CHANNELSTATE	${stringTableDisableAcousticChannelState}
 DISABLE_ACOUSTIC_SENDSTATE	${stringTableDisableAcousticSendState}
 DISPLAY_BACKLIGHT_MODE	${stringTableDisplayBacklightMode}
 DISPLAY_BACKLIGHT_MODE=AUTO	${stringTableDisplayBacklightModeAuto}
@@ -593,7 +596,7 @@ DURATION_UNIT=D	${stringTableDurationUnitD}
 DURATION_UNIT=H	${stringTableDurationUnitH}
 DURATION_UNIT=M	${stringTableDurationUnitM}
 DURATION_UNIT=S	${stringTableDurationUnitS}
-DURATION_UNIT=10MS	${stringTableRampTimeUnit10MS}
+DURATION_UNIT=10MS	${stringTableDurationUnit10MS}
 DURATION_VALUE	${stringTableDurationValue}
 DUTYCYCLE_LIMIT	${stringTableDutyCycleLimit}
 DUTY_CYCLE=FALSE	${stringTableDutyCycleFalse}
@@ -959,11 +962,11 @@ ON_TIME	${stringTableDimmerOnTime}
 OPERATING_VOLTAGE	${stringTableOperationVoltage}
 OPERATING_VOLTAGE_STATUS	${stringTableOperationVoltage}
 OPERATING_VOLTAGE_STATUS=NORMAL	${lblValue} ${stringTableOperationVoltage}: ${lblNormal}
-OPERATING_VOLTAGE_STATUS=0	${lblValue} ${stringTableOperationVoltage}: ${lblNormal}
-OPERATING_VOLTAGE_STATUS=UNKNOWN	${lblValue} ${stringTableOperationVoltage}: ${lblUnknown}
-OPERATING_VOLTAGE_STATUS=1	${lblValue} ${stringTableOperationVoltage}: ${lblUnknown}
-OPERATING_VOLTAGE_STATUS=OVERFLOW	${lblValue} ${stringTableOperationVoltage}: ${lblOverflow}
-OPERATING_VOLTAGE_STATUS=2	${lblValue} ${stringTableOperationVoltage}: ${lblOverflow}
+OPERATING_VOLTAGE_STATUS=0	${lblValue} ${stringTableOperationVoltageState}: ${lblNormal}
+OPERATING_VOLTAGE_STATUS=UNKNOWN	${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}
+OPERATING_VOLTAGE_STATUS=1	${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}
+OPERATING_VOLTAGE_STATUS=OVERFLOW	${lblValue} ${stringTableOperationVoltageState}: ${lblOverflow}
+OPERATING_VOLTAGE_STATUS=2	${lblValue} ${stringTableOperationVoltageState}: ${lblOverflow}
 OPTICAL_ALARM_SELECTION=BLINKING_ALTERNATELY_REPEATING	${stringTableAlarmBlinkingAlternatelyRepeating}
 OPTICAL_ALARM_SELECTION=BLINKING_BOTH_REPEATING	${stringTableAlarmBlinkingBothRepeating}
 OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_0	${stringTableAlarmConfirmingSignal0}

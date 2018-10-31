@@ -782,6 +782,7 @@ jQuery.extend(true,langJSON, {
     "lblPlayingTime" : "Abspieldauer",
     "lblDurationHHmmSS" : "Dauer hh:mm:ss",
     "lblOff" : "Aus",
+    "lblOn" : "Ein",
     "lblOrangeShort" : "Orange kurz",
     "lblOrangeLong" : "Orange lang",
     "lblYellowShort" : "Gelb kurz",

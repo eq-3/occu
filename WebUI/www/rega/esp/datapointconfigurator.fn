@@ -305,6 +305,8 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_SHUTTER_TRANSMITTER) > -1 );
           if( bIsControl && (sLastControlName!=CN_SHUTTER_TRANSMITTER) )
           {
+            object ch = dom.GetObject(chnId);
+            object mode = dom.GetObject(ch.Address());
             WriteLine( "<script>conInfo('Control SHUTTER_TRANSMITTER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_SHUTTER_TRANSMITTER;
@@ -315,6 +317,8 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_SHUTTER_VIRTUAL_RECEIVER) > -1 );
           if( bIsControl && (sLastControlName!=CN_SHUTTER_VIRTUAL_RECEIVER) )
           {
+            object ch = dom.GetObject(chnId);
+            object mode = dom.GetObject(ch.Address());
             WriteLine( "<script>conInfo('Control SHUTTER_VIRTUAL_RECEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_SHUTTER_VIRTUAL_RECEIVER;
@@ -1387,7 +1391,7 @@ function ::CreateSysVars()
 
 function ::HideCertainParameters() {
   string tmp;
-  string param2Exclude = "IDENTIFY_DURATION,IDENTIFICATION_MODE_KEY_VISUAL,IDENTIFICATION_MODE_LCD_BACKLIGHT,IDENTIFY_TARGET_LEVEL";
+  string param2Exclude = "IDENTIFY_DURATION,IDENTIFICATION_MODE_KEY_VISUAL,IDENTIFICATION_MODE_LCD_BACKLIGHT,IDENTIFY_TARGET_LEVEL,STATUS_FLAG_ERROR,STATUS_FLAG_LOW_BAT,STATUS_FLAG_PLAYING_FILE_ACTIVE,STATUS_FLAG_PLAYLIST_ACTIVE,ERROR_CODE_STATUS";
 
   showParam = true;
   ! Check if datapoint is no sysvar

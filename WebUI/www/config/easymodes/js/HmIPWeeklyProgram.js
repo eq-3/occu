@@ -182,7 +182,8 @@ HmIPWeeklyProgram.prototype = {
 
     this._getTargetChannelTypes();
 
-    this.devHasVirtualBlindReceiver = (this.isWired) ? this.hasActiveVirtualBlindReceiver() : true;
+    //this.devHasVirtualBlindReceiver = (this.isWired) ? this.hasActiveVirtualBlindReceiver() : true;
+    this.devHasVirtualBlindReceiver = this.hasActiveVirtualBlindReceiver();
 
     var table = "";
     table += "<table class='ProfileTbl'><tbody>";
@@ -754,10 +755,9 @@ HmIPWeeklyProgram.prototype = {
       translateKey("colorWHITE"),
     ];
 
-    // Todo Set select - the value is val
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"' dataid='color_"+number+"'>";
       result += (val == 253) ? "<option value='253' selected='selected'>"+translateKey("randomPlayback")+"</option>" : "<option value='253'>"+translateKey("randomPlayback")+"</option>" ;
-      result += (val == 254) ? "<option value='254' selected='selected'>"+translateKey("soundOldValue")+"</option>" : "<option value='254'>"+translateKey("soundOldValue")+"</option>" ;
+      result += (val == 254) ? "<option value='254' selected='selected'>"+translateKey("colorOldValue")+"</option>" : "<option value='254'>"+translateKey("colorOldValue")+"</option>" ;
       jQuery.each(arColor, function(index,color) {
         result += (val == index) ? "<option  value='"+index+"'  selected='selected'>"+color+"</option>" : "<option  value='"+index+"'>"+color+"</option>";
       });
@@ -771,7 +771,6 @@ HmIPWeeklyProgram.prototype = {
     paramID = number + "_WP_OUTPUT_BEHAVIOUR",
     val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]) : 0;
 
-    // Todo Set select - the value is val
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"' dataid='sound_"+number+"'>";
       result += (val == 0) ? "<option value='0' selected='selected'>"+translateKey("internalSystemSound")+"</option>" : "<option value='0'>"+translateKey("internalSystemSound")+"</option>" ;
       result += (val == 253) ? "<option value='253' selected='selected'>"+translateKey("randomPlayback")+"</option>" : "<option value='253'>"+translateKey("randomPlayback")+"</option>" ;
@@ -801,7 +800,6 @@ HmIPWeeklyProgram.prototype = {
       translateKey("colorWHITE"),
     ];
 
-    // Todo Set select - the value is val
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"' dataid='soundColor_"+number+"'>";
       result += (val == 0) ? "<option value='0' selected='selected'>"+translateKey("soundColorInternal") +"</option>" : "<option value='0'>"+translateKey("soundColorInternal") +"</option>";
       result += (val == 253) ? "<option value='253' selected='selected'>"+translateKey("soundColorRandomPlayback")+"</option>" : "<option value='253'>"+translateKey("soundColorRandomPlayback")+"</option>";

@@ -65,25 +65,25 @@ jQuery.extend(true,langJSON, {
 
     "dialogSettingsFirewallLblHintIPAddresses" : "Sie k%F6nnen den Zugriff f%FCr einzelne IP-Adressen oder ganze Adressbereiche sowohl f%FCr IPv4 als auch f%FCr IPv6 freigeben. Geben Sie die Adressen durch ein ';' getrennt ein.",
 
-    "comment" : "********** END translated section **********",
+    "comment" : "********** Start translated section (already translated by K. Rosenfeld B2) **********",
 
     "dglUserNewFwSettingsTitle" : "Bitte beachten!",
-    "dglUserNewFwSettingsContent" : "Die Firewalleinstellungen wurden ge%E4ndert. Bei Problemen mit z. B. Zusatzsoftware, wenden Sie sich bitte an den Administrator.",
+    "dglUserNewFwSettingsContent" : "Die Firewalleinstellungen wurden ge%E4ndert. Bei Problemen, z. B. mit Zusatzsoftware, wenden Sie sich bitte an den Administrator.",
 
 
     "stringTableContactBoost" : "Korrosionsschutz",
     "lblJalousieBlind" : "Betriebsmodus Jalousie / Rolllade",
     "optionBlind" : "Jalousie",
     "optionShutter" : "Rolllade",
-     "hintBlindModeChanged" : "%DCbertragen Sie bitte die Konfiguration, bevor Sie weitermachen",
+     "hintBlindModeChanged" : "%DCbertragen Sie die Konfiguration, bevor Sie fortfahren.",
 
-    "dialogSettingsStorageTitleLEDS" : "Info LED",
+    "dialogSettingsStorageTitleLEDS" : "Info-LED",
     "dialogSettingsStorageSettingsLblServiceLed" : "Servicemeldungen:",
     "dialogSettingsStorageSettingsLblAlarmLed" : "Alarmmeldungen:",
-    "dialogSettingsStorageHintLEDS" : "Ein- bzw. Abschalten des Blinkens der Info LED bei Service- und Alarmmeldungen",
+    "dialogSettingsStorageHintLEDS" : "Ein- bzw. Ausschalten des Blinkens der Info-LED bei Service- und Alarmmeldungen",
 
     "HmIPWPSlatPosHelpTitle" : "Hinweis zur Lamellenposition",
-    "HmIPWPSlatPosHelp" : "Bitte bedenken Sie, dass die Lammellenposition nur f%FCr Jalousieaktoren gilt und bei Rollladenaktoren keine Funktion hat.",
+    "HmIPWPSlatPosHelp" : "Bitte beachten Sie, dass die Lamellenposition nur f%FCr Jalousieaktoren und nicht f%FCr Rollladenaktoren genutzt werden kann.",
 
     "dialogSettingsSecurityTDSNMP" : "SNMP",
     "dialogSettingsSecurityLblActivateSNMP" : "SNMP aktiv:",
@@ -91,11 +91,12 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsSecurityPasswordHint" : "Bitte beachten Sie, dass das Passwort mindestens 8 Zeichen lang sein muss.",
     "dialogSettingsSecurityUserHint" : "Bitte geben Sie einen Benutzernamen ein.",
 
-    "hintWiredBlindLinksAvailable" : "Achtung, es bestehen Verkn%FCpfungen! Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
-    "hintWiredBlindProgramsAvailable" : "Achtung, es bestehen Programme! Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
+    "hintWiredBlindLinksAvailable" : "Achtung: Es bestehen Verkn%Fcpfungen. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
+    "hintWiredBlindProgramsAvailable" : "Achtung: Es bestehen Programme. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
+    "hintWiredBlindLinksAndProgramsAvailable" : "Achtung: Es bestehen Verkn%FCpfungen und Programme. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
 
-    "hintWiredBlindLinksAndProgramsAvailable" : "Achtung, es bestehen Verkn%FCpfungen und Programme. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
     "hintCheckChannels" : "<br/>Pr%FCfen Sie bitte folgende Kan%E4le: ",
+
 
     "lblSoundFileNr" : "MP3-Datei",
     "lblColorNr" : "Farbe",
@@ -112,10 +113,14 @@ jQuery.extend(true,langJSON, {
     "optionNoRepetition" : "Keine Wiederholung",
     "optionInfiniteRepetition" : "Dauerhaft",
 
-    "stringTableInternalSoundFile" : "Ger%E4tesound",
+    "stringTableInternalSoundFile" : "Interner Ger%E4tesound",
     "stringTableRandomSoundFile" : "Zufallswiedergabe",
-    "stringTableOldValueSoundFile" : "Zuletzt gespieltes St%FCck",
-    "stringTableDoNotCareSoundFile" : "Mit dem aktuellen St%FCck fortfahren",
+    "stringTableOldValueSoundFile" : "Zuletzt gespielter Titel",
+    "stringTableDoNotCareSoundFile" : "Mit dem aktuellen Titel fortfahren",
+
+    "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
+
+    "comment" : "********** END translated section **********",
 
     "noMoreKeys" : ""
   }

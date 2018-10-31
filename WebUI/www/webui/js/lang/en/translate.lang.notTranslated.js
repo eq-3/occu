@@ -55,58 +55,67 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsFirewallLblHintMediola" : "Enables access to the Mediola service",
 
     "toolTipFirewallAccessModes" : "<ul>" +
-      "<li>Full access: Remote and local access granted<</li>" +
+      "<li>Full access: Remote and local access granted</li>" +
       "<li>Restricted: Local access only</li>" +
       "<li>No access: Access not granted</li>" +
     "<ul>",
     "dialogSettingsFirewallLblHintIPAddresses" : "You can enable access for individual IP addresses or entire address ranges for both IPv4 and IPv6. Enter the addresses in a list separated by ';'.",
 
-    "comment" : "********** END translated section **********",
+    "comment" : "********** Start translated section (already translated by K. Rosenfeld B2) **********",
 
-    "dglUserNewFwSettingsTitle" : "en* Bitte beachten!",
-    "dglUserNewFwSettingsContent" : "en* Die Firewalleinstellungen wurden ge%E4ndert. Bei Problemen mit z. B. Zusatzsoftware, wenden Sie sich bitte an den Administrator.",
+    "dglUserNewFwSettingsTitle" : "Please note!",
+    "dglUserNewFwSettingsContent" : "The firewall settings have changed. In case of problems, e.g. with additional software, please contact the admin.",
 
 
     "stringTableContactBoost" : "Corrosion protection",
-    "lblJalousieBlind" : "Operation mode blind / shutter",
+    "lblJalousieBlind" : "Operating mode blind / shutter",
     "optionBlind" : "Blind",
     "optionShutter" : "Shutter",
-    "hintBlindModeChanged" : "en* %DCbertragen Sie bitte die Konfiguration, bevor Sie weitermachen",
+    "hintBlindModeChanged" : "Transfer the configuration before you continue.",
 
-    "dialogSettingsStorageTitleLEDS" : "en* Info LED",
-    "dialogSettingsStorageSettingsLblServiceLed" : "en* Servicemeldungen:",
-    "dialogSettingsStorageSettingsLblAlarmLed" : "en* Alarmmeldungen:",
-    "dialogSettingsStorageHintLEDS" : "en* Ein- bzw. Abschalten des Blinkens der Info LED bei Service- und Alarmmeldungen",
+    "dialogSettingsStorageTitleLEDS" : "Info LED",
+    "dialogSettingsStorageSettingsLblServiceLed" : "Service messages:",
+    "dialogSettingsStorageSettingsLblAlarmLed" : "Alarm messages:",
+    "dialogSettingsStorageHintLEDS" : "Switching the Info LED flashing on or off in case of service and alarm messages",
 
-    "HmIPWPSlatPosHelpTitle" : "en* Hinweis zur Lamellenposition",
-    "HmIPWPSlatPosHelp" : "en* Bitte bedenken Sie, dass die Lammellenposition nur f%FCr Jalousieaktoren gilt und bei Rollladenaktoren keine Funktion hat.",
+    "HmIPWPSlatPosHelpTitle" : "Information about slats position",
+    "HmIPWPSlatPosHelp" : "Please note that the slats position can be used only for blind actuators and not for shutter actuators.",
 
-    "dialogSettingsSecurityTDSNMP" : "en* SNMP",
-    "dialogSettingsSecurityLblActivateSNMP" : "en* SNMP aktiv:",
-    "dialogSettingsSecurityTDSNMPExplanation" : "en* Bei Aktivierung ist der SNMP Dienst aktiv. Unterstützt wird ausschließlich SNMPv3 mit SHA und AES.",
-    "dialogSettingsSecurityPasswordHint" : "en* Bitte beachten Sie, dass das Passwort mindestens 8 Zeichen lang sein muss.",
-    "dialogSettingsSecurityUserHint" : "en* Bitte geben Sie einen Benutzernamen ein.",
+    "dialogSettingsSecurityTDSNMP" : "SNMP",
+    "dialogSettingsSecurityLblActivateSNMP" : "SNMP active:",
+    "dialogSettingsSecurityTDSNMPExplanation" : "After activation, the SNMP service is active. Only SNMPv3 with SHA and AES is supported.",
+    "dialogSettingsSecurityPasswordHint" : "Please note that the password must contain at least 8 characters.",
+    "dialogSettingsSecurityUserHint" : "Please enter a user name.",
 
-    "hintWiredBlindLinksAvailable" : "en* Achtung, es bestehen Verkn%FCpfungen! Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
-    "hintWiredBlindProgramsAvailable" : "en* Achtung, es bestehen Programme! Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
+    "hintWiredBlindLinksAvailable" : "Please note: Connections have been found. The operation mode can therefore not be changed.",
+    "hintWiredBlindProgramsAvailable" : "Please note: Programs have been found. The operation mode can therefore not be changed.",
 
-    "hintWiredBlindLinksAndProgramsAvailable" : "en* Achtung, es bestehen Verkn%FCpfungen und Programme. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
-    "hintCheckChannels" : "<br/>en* Pr%FCfen Sie bitte folgende Kan%E4le: ",
+    "hintWiredBlindLinksAndProgramsAvailable" : "Please note: Connections and programs have been found. The operation mode can therefore not be changed.",
+    "hintCheckChannels" : "<br/>Check the following channels:  ",
 
-    "lblSoundFileNr" : "en* MP3-Datei",
-    "lblColorNr" : "en* Farbe",
-    "lblColorSongNr" : "en* MP3-Datei<br/>Farbe",
-    "internalSystemSound" : "en* Interner Sound",
-    "randomPlayback" : "en* Zufallswiedergabe",
-    "soundOldValue" : "en* Zuletzt gespielte MP3-Datei",
-    "colorOldValue" : "en* Zuletzt gew%E4hlte Farbe",
-    "soundColorOldValue" : "en* MP3-Datei/Farbe = letzter Wert",
-    "soundColorRandomPlayback" : "en* MP3-Datei/Farbe = Zufallswiedergabe",
-    "soundColorInternal" : "en* Interner Sound/keine Farbe",
-    "hintSoundFileRandom20" : "en* Zuf%E4llige Wiedergabe einer der ersten 20 MP3-Dateien.",
+    "lblSoundFileNr" : "MP3 file",
+    "lblColorNr" : "Colour",
+    "lblColorSongNr" : "MP3 file<br/>colour",
+    "internalSystemSound" : "Internal sound",
+    "randomPlayback" : "Shuffle",
+    "soundOldValue" : "Last MP3 file played",
+    "colorOldValue" : "Last colour selected",
+    "soundColorOldValue" : "MP3 file/colour = last value",
+    "soundColorRandomPlayback" : "MP3 file/colour = shuffle",
+    "soundColorInternal" : "Internal sound/no colour",
+    "hintSoundFileRandom20" : "Random playback of one of the first 20 MP3 files.",
 
-    "optionNoRepetition" : "en* Keine Wiederholung",
-    "optionInfiniteRepetition" : "en* Dauerhaft",
+    "optionNoRepetition" : "No repetition",
+    "optionInfiniteRepetition" : "Permanent",
+
+    "stringTableInternalSoundFile" : "Internal device sound",
+    "stringTableRandomSoundFile" : "Shuffle",
+    "stringTableOldValueSoundFile" : "Title last played",
+    "stringTableDoNotCareSoundFile" : "Proceed with current title",
+
+    "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
+
+    "comment" : "********** END translated section **********",
 
     "noMoreKeys" : ""
   }

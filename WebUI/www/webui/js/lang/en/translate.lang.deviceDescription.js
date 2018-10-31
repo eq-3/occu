@@ -84,6 +84,8 @@ jQuery.extend(true,langJSON, {
     "HmIPW-DRS4" : "Homematic IP Wired Switch Actuator - 4 channels",
     "HmIPW-DRS8" : "Homematic IP Wired Switch Actuator - 8 channels",
     "HmIPW-FIO6" : "Homematic IP Wired IO Module flush-mount - 6 channels",
+    "HmIP-FCI1" : "Homematic IP Contact Interface flush-mount - 1 channel",
+    "HmIP-FCI6" : "Homematic IP Contact Interface flush-mount - 6 channels",
     "HmIP-CCU3" : "Homematic IP Central Control Unit CCU3",
     "HmIP-DBB" : "Homematic IP Doorbell Button",
     "HmIP-MOD-TM" : "Homematic IP Tormatic Module",

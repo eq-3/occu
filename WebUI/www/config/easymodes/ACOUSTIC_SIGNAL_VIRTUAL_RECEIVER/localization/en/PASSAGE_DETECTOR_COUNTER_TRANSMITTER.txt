@@ -1,8 +1,8 @@
-"description_1" : "<span class=\"translated\">en* Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion)</span><br/><br/>",
-"description_2" : "<span class=\"translated\">en* Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen abgespielt oder beendet.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">en* Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen abgespielt.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">en* Bei Empfang des gew&auml;hlten Entscheidungswertes wird die gew&auml;hlte MP3-Datei entsprechend der gew&auml;hlten Einstellungen beendet.</span><br/><br/>",
-"description_5" : "<span class=\"translated\">en* The profile is not active.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">When the selected decision value is received, the selected MP3 file is played and stopped in turn (toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the selected decision value is received, the selected MP3 file is played or stopped depending on the settings selected.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the selected decision value is received, the selected MP3 file is played depending on the settings selected.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">When the selected decision value is received, the selected MP3 file is stopped depending on the settings selected.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
 
 "subset_1_mode1" : "right > left on / left > right off",
 "subset_2_mode1" : "right > left off / left > right on",

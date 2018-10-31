@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">en* Beim Ausl&ouml;sen des Sensors wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion).</span><br/><br/>",
-"description_2" : "<span class=\"translated\">en* Beim Ausl&ouml;sen des Sensors wird die gew&auml;hlte MP3-Datei f&uuml;r die festgelegte Zeit abgespielt.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">en* Beim Ausl&ouml;sen des Sensors wird die gew&auml;hlte MP3-Datei ausgeschaltet.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">When the sensor is triggered, the selected MP3 file is played and stopped in turn (toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the sensor is triggered, the selected MP3 file is played for the defined time.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the sensor is triggered, the selected MP3 file is switched off.</span><br/><br/>",
 
 "description_4" : "<span class=\"translated\">The profile is not active</span>",
 
