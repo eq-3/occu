@@ -1,5 +1,5 @@
 <script>
-  var product = getProduct();
+  var product = parseInt(getProduct());
 	var enableInitaliseSDCardButton = ${SDCardEnableInitButton};
 	var enableBackupSDCardButton = ${SDCardEnableBackupButton};
   var arCurrency = ["EUR", "TRY", "GBP", "CHF", "PLN"],

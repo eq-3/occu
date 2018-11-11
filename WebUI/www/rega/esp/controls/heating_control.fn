@@ -343,17 +343,20 @@ function ::CreateHeatingControlHmIP() {
               WriteLine("<option value='2'>${weeklyProfile2}</option>");
               WriteLine("<option value='3'>${weeklyProfile3}</option>");
 
-              ! Some devices (eTRV and WTH with a firmware < 1.6) do have only 3 weekly programs while others have 6 of them.
+              ! Some devices (eTRV and WTH with a firmware < 1.6 and others) do have only 3 weekly programs while others have 6 of them.
               if (
-                ((chnLabel != "HMIP-eTRV")
-                && (chnLabel != "HmIP-eTRV")
-                && (chnLabel != "HMIP-eTRV-2")
-                && (chnLabel != "HmIP-eTRV-2")
-                && (chnLabel != "HmIP-eTRV-2-UK")
-                && (chnLabel != "HmIP-eTRV-B")
-                && (chnLabel != "HmIP-eTRV-B1")
-                && (chnLabel != "HmIP-WTH")
-                && (chnLabel != "HMIP-WTH"))
+                (
+                  (chnLabel != "HMIP-eTRV")
+                  && (chnLabel != "HmIP-eTRV")
+                  && (chnLabel != "HMIP-eTRV-2")
+                  && (chnLabel != "HmIP-eTRV-2")
+                  && (chnLabel != "HmIP-eTRV-2-UK")
+                  && (chnLabel != "HmIP-eTRV-B")
+                  && (chnLabel != "HmIP-eTRV-B1")
+                  && (chnLabel != "HmIP-WTH")
+                  && (chnLabel != "HMIP-WTH")
+                  && (chnLabel != "HmIP-eTRV-C")
+                )
                 || (((chnLabel == "HmIP-WTH") || (chnLabel == "HMIP-WTH")) && ((devFwMajor > 1) || ((devFwMajor == 1) && (devFwMinor >= 6))))
                ) {
                   WriteLine("<option value='4'>${weeklyProfile4}</option>");

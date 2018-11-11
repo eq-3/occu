@@ -20,10 +20,14 @@ jQuery.extend(true,langJSON, {
   }
 });
 
-window.setTimeout(function() {
-  if (getProduct() >= 3) {
-    langJSON.en.dialogSettingsStorageStateInitialised = langJSON.en.dialogSettingsExternalStorageStateInitialised;
-    langJSON.en.dialogSettingsStorageStateNotPresent = langJSON.en.dialogSettingsExternalStorageStateNotPresent;
+window.setTimeout(function () {
+  if (typeof WEBUI_VERSION != "undefined") {
+    if (WEBUI_VERSION.split(".")[0] >= 3) {
+      langJSON.en.dialogSettingsStorageStateInitialised = langJSON.en.dialogSettingsExternalStorageStateInitialised;
+      langJSON.en.dialogSettingsStorageStateNotPresent = langJSON.en.dialogSettingsExternalStorageStateNotPresent;
+      langJSON.en.dialogSettingsStorageStateNotInitialised = langJSON.en.dialogSettingsExternalStorageStateNotPresent;
+    }
   }
-},750);
+}, 1500);
+
 

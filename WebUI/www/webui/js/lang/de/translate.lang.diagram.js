@@ -136,17 +136,16 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.de.stringTableAverageIllumination,
 
     "diagramExternalStorageDataloggingNotInitialised": "Es ist kein USB-Speicher f%FCr die Speicherung der Diagrammdaten vorhanden oder auf diesen konnte nicht zugegriffen werden. Um die Diagrammdaten zu speichern, ist externer USB-Speicher erforderlich."
-
-
-
   }
 });
 
-if (typeof WEBUI_VERSION != "undefined") {
-  window.setTimeout(function () {
+
+window.setTimeout(function () {
+  if (typeof WEBUI_VERSION != "undefined") {
     if (WEBUI_VERSION.split(".")[0] >= 3) {
       langJSON.de.diagramDataloggingNotInitialised = langJSON.de.diagramExternalStorageDataloggingNotInitialised;
     }
-  }, 750);
-}
+  }
+}, 1500);
+
 
