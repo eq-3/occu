@@ -1121,7 +1121,7 @@ jQuery.extend(true,langJSON, {
     "stringTableIdentifyDuration" : "Duration of lighting",
     "stringTableIdentifyTargetLevel" : "Brightness value of lighting",
 
-    "stringTableMultiModeInputTransmitterTitle" : "Wired Input Module",
+    "stringTableMultiModeInputTransmitterTitle" : "Input Module",
 
     "stringTableDoorCommandClose" : "Closing the garage door",
     "stringTableDoorCommandNOP" : "No action",

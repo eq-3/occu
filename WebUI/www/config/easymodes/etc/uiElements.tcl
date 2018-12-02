@@ -504,8 +504,8 @@ proc getPowerUpSelector {chn p special_input_id} {
             append html "<td>\${lblRepetition}</td>"
             append html "<td>"
               append html "<select id='separate_CHANNEL\_$chn\_$prn' name=$param>"
-                append html "<option val=\"0\">\${optionNoRepetition}</option>"
-                append html "<option val=\"255\">\${optionInfiniteRepetition}</option>"
+                append html "<option value=\"0\">\${optionNoRepetition}</option>"
+                append html "<option value=\"255\">\${optionInfiniteRepetition}</option>"
                   for {set loop 1} {$loop <= 254} {incr loop} {
                     if {$tmp == $loop} {set select "selected=\"selected\""} else {set select ""}
                     append html "<option value=\"$loop\" $select>$loop</option>"
@@ -782,8 +782,8 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
           append html "<td>\${lblRepetition}</td>"
           append html "<td>"
             append html "<select id='separate_CHANNEL\_$chn\_$prn' name=$param>"
-              append html "<option val=\"0\">\${optionNoRepetition}</option>"
-              append html "<option val=\"255\">\${optionInfiniteRepetition}</option>"
+              append html "<option value=\"0\">\${optionNoRepetition}</option>"
+              append html "<option value=\"255\">\${optionInfiniteRepetition}</option>"
                 for {set loop 1} {$loop <= 254} {incr loop} {
                   if {$tmp == $loop} {set select "selected=\"selected\""} else {set select ""}
                   append html "<option value=\"$loop\" $select>$loop</option>"

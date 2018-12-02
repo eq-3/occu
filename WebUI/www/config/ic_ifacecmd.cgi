@@ -369,7 +369,7 @@ proc cmd_firmware_update {} {
       puts "ShowInfoMsg(translateKey('$userHint'));"
 
       # This is for the HmIP-SWSD
-      if {[string equal $devDescr(TYPE) "HmIP-SWSD"] != -1} {
+      if {[string equal $devDescr(TYPE) "HmIP-SWSD"] == 1} {
         puts "var iface = \"$iface\","
         puts "address = \"$address\";"
         puts "var devDescr = homematic(\"Interface.getDeviceDescription\", {\"interface\": iface, \"address\": address});"
@@ -395,7 +395,11 @@ proc cmd_firmware_update {} {
 
             var maxChecks = 60, // 60 Checks alle 5 Sekunden = 300 Sekunden = 5 Min
             numberOfChecks = 0,
-            interval = 5000; // Prüfe alle 5 Sekunden
+            interval = 5000, // Check every 5 seconds
+            timeForReInclusion = 60000, // One minute
+            updateTimer = null,
+            messageUpdateProblem = false,
+            firmwareUpdateFailed = false;
 
             var intervalCheckState = setInterval(function() {
               conInfo("Check state");
@@ -406,7 +410,7 @@ proc cmd_firmware_update {} {
               firmware = result.firmware,
               availableFW = result.availableFirmware;
 
-              conInfo("firmwareUpdateState", firmwareUpdateState);
+              conInfo("firmwareUpdateState: " + firmwareUpdateState);
 
               switch (firmwareUpdateState) {
                 case "READY_FOR_UPDATE":
@@ -417,34 +421,83 @@ proc cmd_firmware_update {} {
                 case "DO_UPDATE_PENDING":
                 case "PERFORMING_UPDATE":
                   // This shouldn't last very long - some seconds maximum.
+
+                  if (!updateTimer) {
+                    // Timer, which shows a message after one minute that the update wasn't successful.
+                    updateTimer = setTimeout(function() {
+                      messageUpdateProblem = true;
+
+                      homematic("Interface.setMetadata_crRFD", {
+                        'interface': 'HmIP-RF',
+                        'objectId' : address + ":1",
+                        'dataId' : 'smokeTestDone',
+                        'value' : false
+                      });
+
+                      MessageBox.show(translateKey("dialogHint"),translateKey("hintReInclusionDetectorFailed"),function(){
+                        messageUpdateProblem = false;
+                        clearTimeout(updateTimer);
+                        updateTimer = null;
+                        firmwareUpdateFailed = true;
+                      }, 400, 80);
+                    },timeForReInclusion);
+                  }
                   if (InfoMsg) {
                       InfoMsg.hide();
                   }
-                  fw_update_rows = "<tr><td class=\"CLASS22006\">"+translateKey('lblDeviceFwPerformUpdate')+"</td></tr>"
+                  if (firmwareUpdateFailed == true) {
+                    fw_update_rows = "<tr><td class=\"CLASS22006\">"+translateKey('dialogFirmwareUpdateFailed')+"</td></tr>";
+                    fw_update_rows +=  "<tr id=\"swsdHintCheckDevice\"><td colspan=\"2\"><span class=\"attention\">"+translateKey("checkSmokeDetectorSelfTest")+"</span></td></tr>";
+                  } else {
+                    fw_update_rows = "<tr><td class=\"CLASS22006\">"+translateKey('lblDeviceFwPerformUpdate')+"</td></tr>";
+                  }
                   fwInfoPanelElm.html(fw_update_rows);
                   break;
                 case "UP_TO_DATE":
-                  // Firmware successful delivered - Show actual firmware and stop checking.
+                  // Firmware successful delivered - Show actual firmware, clear the updateTimer and stop checking.
+                  clearTimeout(updateTimer);
+                  updateTimer = null;
+
+                  if (messageUpdateProblem) {
+                    MessageBox.close();
+                  }
+
                   if (InfoMsg) {
                       InfoMsg.hide();
                   }
                   fw_update_rows = "<tr><td>"+translateKey('lblFirmwareVersion')+"</td><td class=\"CLASS22006\">"+firmware+"</td></tr>";
+                  fw_update_rows += "<tr id=\"swsdHintCheckDevice\"><td colspan=\"2\"><span class=\"attention\">"+translateKey("checkSmokeDetectorSelfTest")+"</span></td></tr>";
 
-                    if (fwOverviewPageTDFirmware.length == 1) {
-                      // This is the firmware overview page
-                      fwOverviewPageTDFirmware.text(firmware);
-                      fwInfoPanelElm.html("");
-                    } else {
-                      // this is the device parameter page
-                      fwInfoPanelElm.html(fw_update_rows);
-                    }
+                  if (fwOverviewPageTDFirmware.length == 1) {
+                    // This is the firmware overview page
+                    fwOverviewPageTDFirmware.text(firmware);
+                    fwInfoPanelElm.html("");
+                  } else {
+                    // this is the device parameter page
+                    fwInfoPanelElm.html(fw_update_rows);
+                  }
                   clearInterval(intervalCheckState);
+
+                  homematic("Interface.setMetadata_crRFD", {
+                    'interface': 'HmIP-RF',
+                    'objectId' : address + ":1",
+                    'dataId' : 'smokeTestDone',
+                    'value' : false
+                  });
+
+                  MessageBox.show(translateKey("dialogHint"),translateKey("hintActivateDetectorSelfTest"),'', 400, 80);
                   break;
               }
 
               numberOfChecks++;
               if (numberOfChecks >= maxChecks) {
                 clearInterval(intervalCheckState);
+                clearTimeout(updateTimer);
+                updateTimer = null;
+
+                if (messageUpdateProblem) {
+                  MessageBox.close();
+                }
 
                 if (InfoMsg) {
                     InfoMsg.hide();

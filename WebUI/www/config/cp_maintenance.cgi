@@ -890,7 +890,7 @@ proc action_firmware_upload {} {
     # check if the uploaded file looks like a firmware file
     set file_valid 0
     catch {
-      exec tar zxvf $filename update_script EULA.en -C /var/
+      exec tar zxvf $filename update_script EULA.en EULA.de -C /var/
     }
     set file_valid [file exists "/var/update_script"]
 

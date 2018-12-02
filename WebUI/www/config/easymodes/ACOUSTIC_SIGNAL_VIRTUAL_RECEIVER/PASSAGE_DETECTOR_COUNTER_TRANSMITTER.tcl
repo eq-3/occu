@@ -48,7 +48,7 @@ set PROFILE_1(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE)             0
 set PROFILE_1(SHORT_OFF_TIME_MODE)            0
-set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 7}
+set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 255}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_1(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_1(UI_DESCRIPTION)  "Bei Empfang des Entscheidungswert wird der Dimmer in den entgegengesetzten Zustand versetzt."
@@ -82,7 +82,7 @@ set PROFILE_2(SHORT_ON_TIME_BASE)           {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR)         {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE)           0
 set PROFILE_2(SHORT_OFF_TIME_MODE)          0
-set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 7}
+set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 255}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE)    1
 set PROFILE_2(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_2(UI_DESCRIPTION)  "Bei Empfang des Entscheidungswert wird der Dimmer ein-/ausgeschaltet."
@@ -116,7 +116,7 @@ set PROFILE_3(SHORT_ONDELAY_TIME_FACTOR)      {0 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE)             0
-set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 7}
+set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 255}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_3(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_3(UI_DESCRIPTION)  "Bei Empfang des Entscheidungswert wird der Dimmer f&uuml;r eine bestimmte Zeit eingeschaltet."
@@ -151,7 +151,7 @@ set PROFILE_4(SHORT_ONDELAY_TIME_FACTOR)      {0 range 0 - 31}
 set PROFILE_4(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_4(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_4(SHORT_ON_TIME_MODE)             0
-set PROFILE_4(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 7}
+set PROFILE_4(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 255}
 set PROFILE_4(SHORT_PROFILE_ACTION_TYPE)      1
 set PROFILE_4(SHORT_PROFILE_REPETITIONS) 0
 set PROFILE_4(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}

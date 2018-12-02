@@ -577,7 +577,7 @@ jQuery.extend(true,langJSON, {
       "Bringen Sie das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" und dr%FCcken Sie die Konfigurations-Taste. "+
       "Anschlie%DFend startet das Firmwareupdate.",
     "fwUpdatePressSystemKey" :
-      "Bringen Sie das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" und dr%FCcken Sie die System-Taste. "+
+      "Bringen Sie das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" und dr%FCcken Sie die Bedientaste. "+
       "Anschlie%DFend startet das Firmwareupdate.",
     "partyModeDialogTitle" : "Hier k%F6nnen Sie den Party-/Urlaubsmodus einstellen.",
     "partyStart" : "Startzeit",
@@ -928,6 +928,7 @@ jQuery.extend(true,langJSON, {
     "lblIPAddress" :  "IP-Adresse",
     "enterIPAddress" :  "Manuelle IP-Eingabe",
     "invalidIP" : "Ung%FCltige IP-Adresse",
+    "invalidNetMask" : "Ung%FCltige Subnetmaske",
     "btnScanGateway" :  "Suche Gateway",
     "btnScanDevices" :  "Suche Ger%E4te",
     "timeoutAddNewDevices" : "Timeout addNewDevices",
@@ -1059,7 +1060,7 @@ jQuery.extend(true,langJSON, {
     "colorStateNormal" : "Farbstatus normal",
     "colorStateUnknown" : "Farbstatus unbekannt",
 
-    "lblPressSystemButton" : "Bitte bet%E4tigen Sie die System-Taste und bringen das Ger%E4t in Funkreichweite.",
+    "lblPressSystemButton" : "Bitte bet%E4tigen Sie die Bedientaste und bringen das Ger%E4t in Funkreichweite.",
 
     "btnAccessPointSettings" : "Homematic IP<br/>Access Points",
     "lblAccessPointSettings1" : "Verwaltung der Homematic IPAccess Points",

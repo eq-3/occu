@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Sendet der Wandthermostat den Heiz-/K&uuml;hlbefehl wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Sendet der Wandthermostat den Heiz-/K&uuml;hlbefehl,wird die gew&auml;hlte MP3-Datei f&uuml;r die festgelegte Zeit eingeschaltet. Wird das Ende der Heiz-/K&uuml;hlphase gesendet, wird das Abspielen beendet.</span><br/><br/>",

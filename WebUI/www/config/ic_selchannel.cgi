@@ -613,15 +613,28 @@ proc LinkExists {p_LINKLIST sender_address receiver_address} {
 
 proc showHmIPChannel {devType direction address chType} {
   # direction 1 = sender, 2 = receiver
+  global iface_url
+  set ch [lindex [split $address ":"] 1]
+
+  set major 0
+
+  if {[string toupper $devType] == "HMIP-PSM"} {
+    set parentAddress [lindex [split $address ":"] 0]
+    set url $iface_url(HmIP-RF)
+    array set dev_descr [xmlrpc $url getDeviceDescription [list string $parentAddress]]
+    set firmware $dev_descr(FIRMWARE)
+    set fwMajorMinorPatch [split $firmware .]
+    set major [expr [lindex $fwMajorMinorPatch 0] * 1]
+  }
 
   set devType [string toupper $devType]
-  set ch [lindex [split $address ":"] 1]
 
   # The internal device button of some devices aren`t allowed for external links
   # The next code filters e. g. a HMIP-PSM AND a HMIP-PSM-UK or a HmIP-PCBS AND a HmIP-PCBS-BAT
   if {(
     ($devType == "HMIP-PS")
-    || ([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1)
+    || (([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1) && ($major < 2))
+    || (([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1) && ($chType == "KEY_TRANSCEIVER"))
     || ([string equal -nocase -length 8 $devType "HMIP-PDT"] == 1)
     || ([string equal -nocase -length 9 $devType "HMIP-PCBS"] == 1)
     ) && $direction == 1} { #; channel is sender

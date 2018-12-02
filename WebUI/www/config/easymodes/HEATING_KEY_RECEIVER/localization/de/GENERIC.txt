@@ -5,3 +5,4 @@
 "switch_on" : "Thermostat \"ein\"",
 "boost_on_off" : "Boostmodus \"ein \\ aus\"",
 
+"lblLongKeyPress" : "Langer Tastendruck",

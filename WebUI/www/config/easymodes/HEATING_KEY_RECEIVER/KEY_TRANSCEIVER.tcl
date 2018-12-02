@@ -193,15 +193,24 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "</tr>"
 
 
-  if {$longKeypressAvailable} {
-      if {$ps(LONG_CONTROL_MODE_RC) != 6} {
-        set param "{LONG_CONTROL_MODE_RC {int 6}}"
-        puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $param]]"
-        set ps(LONG_CONTROL_MODE_RC) 6
+  if {($longKeypressAvailable) && ($cur_profile == $prn)} {
+      set comment  {
+        if {$ps(LONG_CONTROL_MODE_RC) != 6} {
+          set param "{LONG_CONTROL_MODE_RC {int 6}}"
+          puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $param]]"
+          set ps(LONG_CONTROL_MODE_RC) 6
+        }
       }
-
       # *** LONG KEYPRESS ***
       append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+
+      # LONG KEYPRESS ACTIVE / NOT ACTIVE
+      incr pref
+      array_clear options
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${lblLongKeyPress}</td><td>"
+      set options(0) "\${active_0}"
+      set options(6) "\${active_1}"
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_CONTROL_MODE_RC separate_${special_input_id}_$prn\_$pref PROFILE_$prn  LONG_CONTROL_MODE_RC]
 
       # ON_TIME
       append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"

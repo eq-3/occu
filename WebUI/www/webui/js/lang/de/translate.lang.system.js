@@ -20,13 +20,15 @@ jQuery.extend(true,langJSON, {
   }
 });
 
-if (typeof WEBUI_VERSION != "undefined") {
   window.setTimeout(function () {
-    if (WEBUI_VERSION.split(".")[0] >= 3) {
-      langJSON.de.dialogSettingsStorageStateInitialised = langJSON.de.dialogSettingsExternalStorageStateInitialised;
-      langJSON.de.dialogSettingsStorageStateNotPresent = langJSON.de.dialogSettingsExternalStorageStateNotPresent;
+    if (typeof WEBUI_VERSION != "undefined") {
+      if (WEBUI_VERSION.split(".")[0] >= 3) {
+        langJSON.de.dialogSettingsStorageStateInitialised = langJSON.de.dialogSettingsExternalStorageStateInitialised;
+        langJSON.de.dialogSettingsStorageStateNotPresent = langJSON.de.dialogSettingsExternalStorageStateNotPresent;
+        langJSON.de.dialogSettingsStorageStateNotInitialised = langJSON.de.dialogSettingsExternalStorageStateNotPresent;
+      }
     }
-  }, 750);
-}
+  }, 1500);
+
 
 

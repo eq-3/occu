@@ -338,8 +338,13 @@ proc action_put_page {} {
                 puts "\${dialogSettingsNetworkIPSettingsLblIPAdd}"
               }
               table_data {
-                cgi_text ip_address=$ip {id="text_ip"}
+                cgi_text ip_address=$ip {id="text_ip"} {onpaste="isIPValid(this.value, this.id, true);"} {onkeyup="isIPValid(this.value, this.id);"}
               }
+
+              table_data {id="text_ip_hint"} {class="attention hidden"} {
+                puts "\${invalidIP}"
+              }
+
             }
             table_row {
               table_data {width="20"} { }
@@ -348,8 +353,13 @@ proc action_put_page {} {
                 puts "\${dialogSettingsNetworkIPSettingsLblSubnet}"
               }
               table_data {
-                cgi_text mask=$mask {id="text_mask"} 
+                cgi_text mask=$mask {id="text_mask"} {onpaste="isNetMaskValid(this.value, this.id, true);"} {onkeyup="isNetMaskValid(this.value, this.id);"}
               }
+
+              table_data {id="text_mask_hint"} {class="attention hidden"} {
+                puts "\${invalidNetMask}"
+              }
+
             }
             table_row {
               table_data {width="20"} { }
@@ -358,8 +368,13 @@ proc action_put_page {} {
                 puts "\${dialogSettingsNetworkIPSettingsLblGateway}"
               }
               table_data {
-                cgi_text gw=$gw {id="text_gw"} 
+                cgi_text gw=$gw {id="text_gw"} {onpaste="isIPValid(this.value, this.id, true);"} {onkeyup="isIPValid(this.value, this.id);"}
               }
+
+              table_data {id="text_gw_hint"} {class="attention hidden"} {
+                puts "\${invalidIP}"
+              }
+
             }
             table_row {
               table_data {class="CLASS21112"} {colspan="3"} {
@@ -374,8 +389,13 @@ proc action_put_page {} {
                 puts "\${dialogSettingsNetworkIPSettingsLblDNS1}"
               }
               table_data {
-                cgi_text dns1=$dns1 {id="text_dns1"}
+                cgi_text dns1=$dns1 {id="text_dns1"} {onpaste="isIPValid(this.value, this.id, true);"} {onkeyup="isIPValid(this.value, this.id);"}
               }
+
+              table_data {id="text_dns1_hint"} {class="attention hidden"} {
+                puts "\${invalidIP}"
+              }
+
             }
             table_row {
               table_data {width="30"} { }
@@ -384,8 +404,13 @@ proc action_put_page {} {
                 puts "\${dialogSettingsNetworkIPSettingsLblDNS2}"
               }
               table_data {
-                cgi_text dns2=$dns2 {id="text_dns2"}
+                cgi_text dns2=$dns2 {id="text_dns2"} {onpaste="isIPValid(this.value, this.id, true);"} {onkeyup="isIPValid(this.value, this.id);"}
               }
+
+              table_data {id="text_dns2_hint"} {class="attention hidden"} {
+                puts "\${invalidIP}"
+              }
+
             }
           }
         }
@@ -418,8 +443,13 @@ proc action_put_page {} {
                 puts "\${dialogSettingsNetworkCertificateLblHostname}"
               }
               table_data {align="right"} {
-                cgi_text url=$env(HTTP_HOST) {size="35"} {id="text_url"} {type="text"} 
+                cgi_text url=$env(HTTP_HOST) {size="35"} {id="text_url"} {type="text"}  {onpaste="isIPValid(this.value, this.id, true);"} {onkeyup="isIPValid(this.value, this.id);"}
               }
+
+              table_data {id="text_url_hint"} {class="attention hidden"} {
+                puts "\${invalidIP}"
+              }
+
             }
             table_row {
               table_data {width="20"} {}
@@ -557,7 +587,7 @@ proc action_put_page {} {
           }
         }
         table_data {class="CLASS21103"} {
-          division {class="CLASS21108"} {onClick="OnOK()"} {
+          division {id="btnOK"} {class="CLASS21108"} {onClick="OnOK()"} {
             #puts "OK"
             puts "\${btnOk}"
           }
@@ -594,7 +624,14 @@ proc action_put_page {} {
       }
     }
     puts {
+      var timer_text_ip,
+      timer_text_gw,
+      timer_text_dns1,
+      timer_text_dns2,
+      timer_text_url;
+
       dlgResult = 0;
+
       enable_disable = function() {
         var disabled= !document.getElementById("radio_manual").checked;
         document.getElementById("text_ip").disabled=disabled;
@@ -602,7 +639,76 @@ proc action_put_page {} {
         document.getElementById("text_gw").disabled=disabled;
         document.getElementById("text_dns1").disabled=disabled;
         document.getElementById("text_dns2").disabled=disabled;
-      }
+      };
+
+      checkIPAddress = function(ipAddress, elmId) {
+        var isValid = isIPAddressValid(ipAddress),
+        btnOKElm = jQuery("#btnOK"),
+        invalidHintElm = jQuery("#"+elmId+"_hint");
+
+        if (isValid != null) {
+         invalidHintElm.hide();
+         btnOKElm.show();
+        } else {
+         invalidHintElm.show();
+         btnOKElm.hide();
+        }
+      };
+
+      isIPValid = function(ipAddress, elmId, isPaste) {
+        if (isPaste) {
+          setTimeout(function() {ipAddress = jQuery("#"+elmId).val();},100);
+        }
+
+        var timeDelay = 1000;
+        switch(elmId) {
+          case "text_ip":
+            clearTimeout(timer_text_ip);
+            timer_text_ip = setTimeout(function() {checkIPAddress(ipAddress, elmId)},timeDelay);
+            break;
+          case "text_gw":
+            clearTimeout(timer_text_gw);
+            timer_text_gw = setTimeout(function() {checkIPAddress(ipAddress, elmId)},timeDelay);
+            break;
+          case "text_dns1":
+            clearTimeout(timer_text_dns1);
+            timer_text_dns1 = setTimeout(function() {checkIPAddress(ipAddress, elmId)},timeDelay);
+            break;
+          case "text_dns2":
+            clearTimeout(timer_text_dns2);
+            timer_text_dns2 = setTimeout(function() {checkIPAddress(ipAddress, elmId)},timeDelay);
+            break;
+          case "text_url":
+            clearTimeout(timer_text_url);
+            timer_text_url = setTimeout(function() {checkIPAddress(ipAddress, elmId)},timeDelay);
+            break;
+        }
+      };
+
+      isNetMaskValid = function(netMask, elmId, isPaste) {
+        var timer_netMask,
+        timeDelay = 1000;
+
+        if (isPaste) {
+          setTimeout(function() {netMask = jQuery("#"+elmId).val();},100);
+        }
+
+        clearTimeout(timer_netMask);
+        timer_netMask = setTimeout(function() {
+
+          var isValid = isSubnetMaskValid(netMask),
+          btnOKElm = jQuery("#btnOK"),
+          invalidHintElm = jQuery("#"+elmId+"_hint");
+
+          if (isValid != null) {
+           invalidHintElm.hide();
+           btnOKElm.show();
+          } else {
+           invalidHintElm.show();
+           btnOKElm.hide();
+          }
+        },timeDelay);
+      };
     }
     puts "enable_disable();"
     puts "translatePage('#messagebox');"

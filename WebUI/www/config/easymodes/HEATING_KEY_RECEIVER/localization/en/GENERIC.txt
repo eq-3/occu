@@ -4,3 +4,5 @@
 "switch_off" : "Thermostat \"off\"",
 "switch_on" : "Thermostat \"on\"",
 "boost_on_off" : "Boost mode \"on \\ off\"",
+
+"lblLongKeyPress" : "Long keypress",

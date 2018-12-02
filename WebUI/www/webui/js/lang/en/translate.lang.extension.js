@@ -928,6 +928,7 @@ jQuery.extend(true, langJSON, {
     "lblIPAddress" :  "IP address",
     "enterIPAddress" :  "Manual IP input",
     "invalidIP" : "Invalid IP adress",
+    "invalidNetMask" : "Invalid Subnet mask",
     "btnScanGateway" :  "Search gateway",
     "btnScanDevices" :  "Search devices",
     "timeoutAddNewDevices" : "Timeout addNewDevices",

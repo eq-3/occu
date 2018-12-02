@@ -1122,7 +1122,7 @@ jQuery.extend(true,langJSON, {
     "stringTableIdentifyDuration" : "Dauer der Beleuchtung",
     "stringTableIdentifyTargetLevel" : "Helligkeitswert der Beleuchtung",
 
-    "stringTableMultiModeInputTransmitterTitle" : "Wired Eingangsmodul",
+    "stringTableMultiModeInputTransmitterTitle" : "Eingangsmodul",
 
     "stringTableDoorCommandClose" : "Tor schlie%DFen",
     "stringTableDoorCommandNOP" : "keine Aktion",

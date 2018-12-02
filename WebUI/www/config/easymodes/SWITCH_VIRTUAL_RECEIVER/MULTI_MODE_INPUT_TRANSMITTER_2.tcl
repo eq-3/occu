@@ -123,7 +123,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"}
   }
 
-  set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
+  set longKeypressAvailable false
 
   set parentType [string tolower $dev_descr_receiver(PARENT_TYPE)]
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
@@ -163,22 +163,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     # This is for all other switch actuators - here we have a long ontime optionbox
     append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
   }
-  if {$longKeypressAvailable} {
-    # *** LONG KEYPRESS ***
-    append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
-
-    # ONDELAY
-    append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_ONDELAY_TIME TIMEBASE_LONG]"
-
-    # ON_TIME
-    if {$parentType == "hmip-wgc"} {
-      # This is for the Garage Door Controller - we need a short ontime optionbox
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOffShort $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
-    } else {
-      # This is for all other switch actuators - here we have a long ontime optionbox
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
-    }
-  }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #2
@@ -195,17 +179,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     # OFF_TIME
     append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
-
-    if {$longKeypressAvailable} {
-      # *** LONG KEYPRESS ***
-      append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
-      # OFFDELAY
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_OFFDELAY_TIME TIMEBASE_LONG]"
-
-      # OFF_TIME
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_OFF_TIME TIMEBASE_LONG]"
-      # ****
-    }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -234,23 +207,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     # OFF_TIME
     append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
-
-    if {$longKeypressAvailable} {
-      # *** LONG KEYPRESS ***
-      append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
-
-      # ONDELAY
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_ONDELAY_TIME TIMEBASE_LONG]"
-
-      # ON_TIME
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
-
-      # OFFDELAY
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_OFFDELAY_TIME TIMEBASE_LONG]"
-
-      # OFF_TIME
-      append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_OFF_TIME TIMEBASE_LONG]"
-    }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 }

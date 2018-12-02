@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">If the wall thermostat sends the command for heating or cooling the selected MP3 file is played and stopped in turn (toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">If the wall thermostat sends the command for heating or cooling, the selected MP3 file is switched on for the defined time. If the end of the heating/cooling period is being send, the playback stops.</span><br/><br/>",
