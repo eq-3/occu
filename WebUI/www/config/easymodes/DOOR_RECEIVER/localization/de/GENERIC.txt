@@ -3,3 +3,4 @@
 "switch_close" : "Schlie%DFen",
 "switch_partialOpen" : "L%FCften",
 "switch_stop" : "Stop",
+"toggle" : "Toggle",

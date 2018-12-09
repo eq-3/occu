@@ -486,12 +486,12 @@
 
                 if (iV == "0") {
 
-                  if (oDP.HSSID().Find("RGBW_COLOR") != -1) {
+                  if (oDP.HSSID().Find("USER_COLOR") != -1) {
                     ! deprecated iV = "0,200,0.5,0";
                     iV = "{'ACT_HSV_COLOR_VALUE_STORE':0,'ACT_BRIGHTNESS_STORE':200,'RAMP_TIME_STORE':0.5,'ON_TIME_STORE':0}";
                   }
 
-                  if (oDP.HSSID().Find("RGBW_AUTOMATIC") != -1) {
+                  if (oDP.HSSID().Find("USER_PROGRAM") != -1) {
                     ! deprecated iV = "0,200,0.5,0,0,199";
                     iV = "{'ACT_COLOR_PROGRAM_STORE':0,'ACT_BRIGHTNESS_STORE':200,'RAMP_TIME_STORE':0.5,'ON_TIME_STORE':0, 'ACT_MIN_BORDER_STORE':0, 'ACT_MAX_BORDER_STORE':199}";
                   }

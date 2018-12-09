@@ -122,6 +122,15 @@ jQuery.extend(true,langJSON, {
 
     "comment" : "********** END translated section **********",
 
+    "comment" : "This is for the Smoke-Detector certification",
+
+    "checkSmokeDetectorSelfTest" : "Bitte vergewissern Sie sich, dass der Rauchmelder korrekt arbeitet, indem Sie einen Selbsttest durch Druck auf die Bedientaste durchf%FChren!",
+    "hintActivateDetectorSelfTest" : "Das Firmware-Update wurde erfolgreich aufgespielt. ",
+    "hintReInclusionDetectorFailed" : "Beim Aufspielen des Firmware-Updates ist ein Problem aufgetreten. ",
+
     "noMoreKeys" : ""
   }
 });
+
+langJSON.de.hintActivateDetectorSelfTest += langJSON.de.checkSmokeDetectorSelfTest;
+langJSON.de.hintReInclusionDetectorFailed += langJSON.de.checkSmokeDetectorSelfTest;
