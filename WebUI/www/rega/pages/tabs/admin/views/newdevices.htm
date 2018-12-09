@@ -940,8 +940,10 @@ CreateSysVarEnergyCounterScriptPSM = function(chn) {
     "}\n" +
   "}\n" +
 
-  "oSysVarEnergyCounterOldVal.State(devVal);\n" +
-  "oSysVarEnergyCounter.State(sysVarVal + diffVal);\n";
+  "if (tmp_devVal != 0) {" +
+    "oSysVarEnergyCounterOldVal.State(devVal);\n" +
+    "oSysVarEnergyCounter.State(sysVarVal + diffVal);\n" +
+  "}";
 
   var script =
   "var sysVarId = '"+sysVarId+"';\n" +
@@ -1021,8 +1023,10 @@ CreateSysVarEnergyCounterScriptIEC = function(chn) {
       "diffVal = devVal - oldDevVal;\n" +
     "}\n" +
 
-  "oSysVarEnergyCounterOldVal.State(devVal);\n" +
-  "oSysVarEnergyCounter.State(sysVarVal + diffVal);\n";
+  "if (tmp_devVal != 0) {" +
+    "oSysVarEnergyCounterOldVal.State(devVal);\n" +
+    "oSysVarEnergyCounter.State(sysVarVal + diffVal);\n" +
+  "}";
 
   var script =
   "var sysVarId = '"+sysVarId+"';\n" +

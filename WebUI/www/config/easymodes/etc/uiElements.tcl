@@ -781,7 +781,7 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
           incr prn
           append html "<td>\${lblRepetition}</td>"
           append html "<td>"
-            append html "<select id='separate_CHANNEL\_$chn\_$prn' name=$param>"
+            append html "<select id=\"separate_CHANNEL\_$chn\_$prn\" name=$param>"
               append html "<option value=\"0\">\${optionNoRepetition}</option>"
               append html "<option value=\"255\">\${optionInfiniteRepetition}</option>"
                 for {set loop 1} {$loop <= 254} {incr loop} {

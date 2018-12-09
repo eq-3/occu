@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">When opening the contact the garage door is moved into the opposite position (open or closed - toggle function). </span><br/><br/> This function can be reversed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When opening the contact the garage door is moved up. If the contact is closed, the garage door is moved down. This function can be reversed.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When detecting the defined change signal the garage door is moved up.</span><br/><br/>",
+
+"subset_1" : "Open - garage door open / closed - garage door closed",
+"subset_2" : "Open - garage door closed / closed - garage door open",
+"subset_3" : "Opening",
+"subset_4" : "Closing",
+"subset_5" : "Changing",
+"at" : "<span class=\"translated\">at</span>",

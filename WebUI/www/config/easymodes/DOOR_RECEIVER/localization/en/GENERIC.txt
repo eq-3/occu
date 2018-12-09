@@ -3,3 +3,4 @@
 "switch_close" : "Closing",
 "switch_partialOpen" : "Ventilation",
 "switch_stop" : "Stop",
+"toggle" : "Toggle",

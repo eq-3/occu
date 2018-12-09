@@ -182,8 +182,8 @@ HmIPWeeklyProgram.prototype = {
 
     this._getTargetChannelTypes();
 
-    //this.devHasVirtualBlindReceiver = (this.isWired) ? this.hasActiveVirtualBlindReceiver() : true;
-    this.devHasVirtualBlindReceiver = this.hasActiveVirtualBlindReceiver();
+    this.devHasVirtualBlindReceiver = (this.isWired) ? this.hasActiveVirtualBlindReceiver() : true;
+    //this.devHasVirtualBlindReceiver = this.hasActiveVirtualBlindReceiver();
 
     var table = "";
     table += "<table class='ProfileTbl'><tbody>";

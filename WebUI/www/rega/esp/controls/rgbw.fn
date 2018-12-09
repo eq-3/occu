@@ -118,6 +118,7 @@ function ::CreateRGBWAutomaticControl() {
     ! Set selectbox to the active program
     WriteLine("jQuery('#"+chnId#"').val("#oProgram.Value()#");");
 
+    ! NOT IN USE ANYMORE
     !WriteLine("var hsvValMin =  parseInt("#oMinBorder.Value()#" / 199 * 360); ");
     !WriteLine("var hsvValMax =  parseInt("#oMaxBorder.Value()#" / 199 * 360); ");
 

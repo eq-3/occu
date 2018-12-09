@@ -388,7 +388,7 @@ proc cmd_firmware_update {} {
 
             // Zeige initial Config Pending
             if (firmwareUpdateState == "READY_FOR_UPDATE") {
-              fwInfoPanelElm.html("<tr><td>"+translateKey('lblPressSystemButton')+"</td></tr>");
+              fwInfoPanelElm.html("<tr><td style=\"border-style:none\">"+translateKey('lblPressSystemButton')+"</td></tr>");
             } else {
               fwInfoPanelElm.html("<tr><td></td></tr>");
             }
@@ -415,7 +415,7 @@ proc cmd_firmware_update {} {
               switch (firmwareUpdateState) {
                 case "READY_FOR_UPDATE":
                   // As long as the user didn't press the config button of the SWSD the firmwareUpdateState is "READY_FOR_UPDATE"
-                  fw_update_rows = "<tr><td>"+translateKey('lblPressSystemButton')+"</td></tr>";
+                  fw_update_rows = "<tr><td style=\"border-style:none\">"+translateKey('lblPressSystemButton')+"</td></tr>";
                   fwInfoPanelElm.html(fw_update_rows);
                   break;
                 case "DO_UPDATE_PENDING":
@@ -510,7 +510,7 @@ proc cmd_firmware_update {} {
                   "<tr><td>"+translateKey('lblAvailableFirmwareVersion')+"</td><td class=\"CLASS22006\">"+availableFW+"</td></tr>";
                 }
                 // This is for the firmware overview page AND the device parameter page (Update Button)
-                fw_update_rows += "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">"+translateKey('lblUpdate')+"</span></td></tr>";
+                fw_update_rows += "<tr><td colspan=\"2\" class=\"CLASS22007\" style=\"border-style:none\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">"+translateKey('lblUpdate')+"</span></td></tr>";
                 fwInfoPanelElm.html(fw_update_rows);
               }
             }, interval);
