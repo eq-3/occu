@@ -92,7 +92,7 @@ set deviceDescrScript {
         }
 
         var isVirtual = false;
-        if (channel.ChannelType() == 29)
+        if ((channel.ChannelType() == 29) || (channel.Label() == "HmIP-RCV-50"))
         {
           isVirtual = true;
         }
@@ -116,6 +116,24 @@ set deviceDescrScript {
         Write(" AES_AVAILABLE {" # isAesAvailable # "}");
         Write(" VIRTUAL {" # isVirtual # "}");
         Write(" CHANNEL_TYPE {" # channel.HssType() # "}");
+
+        object channelMode = dom.GetObject(channel.Address());
+        if (channelMode) {
+          string modeMultiChannel = channelMode.MetaData('channelMode');
+          if (modeMultiChannel) {
+            Write(" MODE_MULTI_MODE_CHANNEL {" # modeMultiChannel # "}");
+          } else {
+            Write(" MODE_MULTI_MODE_CHANNEL {--}");
+          }
+        } else {
+          string modeMultiChannel = channel.MetaData('channelMode');
+          if (modeMultiChannel) {
+            Write(" MODE_MULTI_MODE_CHANNEL {" # modeMultiChannel # "}");
+          } else {
+            Write(" MODE_MULTI_MODE_CHANNEL {--}");
+          }
+        }
+
         Write("}");
       }
     }
@@ -210,6 +228,8 @@ foreach id $deviceIds {
     append result ",\"isAesAvailable\":$channel(AES_AVAILABLE)"
     append result ",\"isVirtual\":$channel(VIRTUAL)"
     append result ",\"channelType\":[json_toString $channel(CHANNEL_TYPE)]"
+    catch {append result ",\"mode_multi_mode\":[json_toString $channel(MODE_MULTI_MODE_CHANNEL)]"}
+
     append result "\}"
 
     array_clear channel

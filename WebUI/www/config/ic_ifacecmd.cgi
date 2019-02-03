@@ -352,7 +352,7 @@ proc cmd_firmware_update {} {
     # errorCode -10 = Legacy API says 'Transmission Pending'
 
     set errorCode [getFwUpdateError "faultCode=" $result]
-    set userHint ""
+    set userHint "dialogFirmwareUpdateUnknownError"
     if {$errorCode == -1 || $errorCode == -10} {
       set userHint "fwUpdatePressSystemKey"
     }

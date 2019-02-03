@@ -150,7 +150,10 @@ proc getCheckBoxCyclicInfoMsg {param value chn prn {extraparam ""}} {
   global psDescr
   upvar psDescr psDescr
 
-  set s  "[getCheckBox '$param' $value $chn $prn\_tmp "onchange=\"setCyclicInfoMsg(this, '$chn', '$prn');\""]"
+  set hlpBoxWidth  450
+  set hlpBoxHeight  350
+
+  set s  "[getCheckBox '$param' $value $chn $prn\_tmp "onchange=\"setCyclicInfoMsg(this, '$chn', '$prn');\""]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]"
   append s  "<td class=\"hidden\">[getTextField $param $value $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
   append s "<script type=\"text/javascript\">"
@@ -472,10 +475,6 @@ proc getPowerUpSelector {chn p special_input_id} {
       append html "</tr>"
     }
 
-    foreach val [array names dev_descr] {
-     # puts "$val: $dev_descr($val)<br/>"
-    }
-
 
     set param POWERUP_OUTPUT_BEHAVIOUR
     if { ! [catch {set tmp $ps($param)}] } {
@@ -546,66 +545,69 @@ proc getPowerUpSelector {chn p special_input_id} {
 
   append html "</table></td></tr>"
 
-set comment {
-  append html "<tr id=\"powerUpPanelOFF_$chn\"><td><table>"
-    ### OFF
-    set param POWERUP_OFFDELAY_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
-      incr prn
-      append html "<tr>"
-      append html "<td>\${stringTableOffDelay}</td>"
-      append html [getComboBox $chn $prn "$specialID" "delayShort"]
-      append html "</tr>"
+# *******
+  if { ! [catch {set tmp $ps(POWERUP_OFFTIME_UNIT)}]  } {
+    append html "<tr id=\"powerUpPanelOFF_$chn\"><td><table>"
 
-      append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+      set comment {
+        set param POWERUP_OFFDELAY_UNIT
+        if { ! [catch {set tmp $ps($param)}]  } {
+          incr prn
+          append html "<tr>"
+          append html "<td>\${stringTableOffDelay}</td>"
+          append html [getComboBox $chn $prn "$specialID" "delayShort"]
+          append html "</tr>"
 
-      incr prn
-      set param POWERUP_OFFDELAY_VALUE
-      append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-      append html "<td>\${stringTableOffDelayValue}</td>"
+          append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+          incr prn
+          set param POWERUP_OFFDELAY_VALUE
+          append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+          append html "<td>\${stringTableOffDelayValue}</td>"
 
-      append html "</tr>"
-      append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-    }
+          append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
-    ###
-    set param POWERUP_OFFTIME_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
-      incr prn
-      append html "<tr>"
-      append html "<td>\${stringTableOffTime}</td>"
-      append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
-      append html "</tr>"
+          append html "</tr>"
+          append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+          append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+        }
+      }
+      ###
+      set param POWERUP_OFFTIME_UNIT
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        append html "<tr>"
+        append html "<td>\${stringTableOffTime}</td>"
+        append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
+        append html "</tr>"
 
-      append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+        append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
-      incr prn
-      set param POWERUP_OFFTIME_VALUE
-      append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-      append html "<td>\${stringTableOffTimeValue}</td>"
+        incr prn
+        set param POWERUP_OFFTIME_VALUE
+        append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+        append html "<td>\${stringTableOffTimeValue}</td>"
 
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
-      append html "</tr>"
-      append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-    }
+        append html "</tr>"
+        append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      }
 
-    ###
-    set param POWERUP_OFF_LEVEL
-    if { ! [catch {set tmp $ps($param)}]  } {
-      incr prn
-      append html "<tr>"
-        append html "<td>\${stringTableDimmerLevel}</td>"
-        option RAW_0_100Percent
-        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-      append html "</tr>"
-    }
-  append html "</table></td></tr>"
-}
+      ###
+      set param POWERUP_OFF_LEVEL
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${stringTableDimmerLevel}</td>"
+          option RAW_0_100Percent
+          append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "</tr>"
+      }
+    append html "</table></td></tr>"
+  }
+# *******
 
   append html "<script type=\"text/javascript\">"
 
@@ -619,7 +621,7 @@ set comment {
           append html "jQuery(\"#timeDelay_\" + chn + \"_8\").val(0).change().prop(\"disabled\", true);"
           # append html "jQuery(\"#timeDelay_\" + chn + \"_9\").val(0).change().prop(\"disabled\", true);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_10\").val(0).change().prop(\"disabled\", true);"
-          catch {append html "jQuery(\"#separate_CHANNEL_\" + chn + \"_$powerUpLevelPRN\").val(0);"}
+          #catch {append html "jQuery(\"#separate_CHANNEL_\" + chn + \"_$powerUpLevelPRN\").val(0);"}
           append html "panelOnElm.hide();"
           append html "panelOffElm.show();"
           append html "break;"

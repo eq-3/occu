@@ -2,7 +2,7 @@ jQuery.extend(true,langJSON, {
   "de" : {
     "HelpTitle" : "Hilfe",
     "ROUTER_MODULE_ENABLED" : "<b>Ger%E4t dient als Router</b><br/><br/>Durch diese Option kann das Ger%E4t Homematic IP Funkbefehle weiterleiten. Es dient somit als Reichweitenverl%E4ngerung f%FCr abgesetzte Komponenten.",
-    "ENABLE_ROUTING" : "<b>Routing aktiv</b><br/><br/>Durch diese Option versucht das Ger%E4t %FCber einen Homematic IP Funk Router zu kommunizieren, sobald es den Empf%E4nger nicht direkt erreichen kann. Die Routingfunktion kann beispielsweise bei den Homematic IP Schalt-Mess- und Schaltsteckdosen mit aktueller Firmware aktiviert werden.",
+    "ENABLE_ROUTING" : "<b>Routing aktiv</b><br/><br/>Durch diese Option versucht das Ger%E4t %FCber einen Homematic IP Router zu kommunizieren, sobald es den Empf%E4nger nicht direkt erreichen kann. Die Routingfunktion kann beispielsweise bei den Homematic IP Schalt-Mess- und Schaltsteckdosen mit aktueller Firmware aktiviert werden.",
     "BLIND_REFERENCE_RUNNING_TIME" : "Nachdem Sie den Wert der Fahrzeit per Hand ge%E4ndert haben, ist der CCU die Position der Jalousie/Rolllade nicht mehr bekannt. Daher sollten sie anschlie%DFend eine Kalibrierfahrt (einmal ganz hoch oder herunter) durchf&uuml;hren. Dadurch stellen sie sicher, dass der CCU die genaue Position der Jalousie/Rolllade wieder bekannt ist.<br/><br/>" +
       "Das gilt auch f%FCr Ger%E4te mit automatischer Kalibrierfahrt, wenn Sie sich entschlie%DFen, den Wert der Fahrzeit per Hand zu %E4ndern.",
     "BLIND_AUTOCALIBRATION" : "Die automatische Kalibrierfahrt ermittelt die Fahrzeit f%FCr die Behangh%F6he. Die Lamellenverstellzeit ist davon nicht betroffen und muss von Hand eingetragen werden.",
@@ -82,10 +82,6 @@ jQuery.extend(true,langJSON, {
       "nicht in einer Verkn%FCpfung verwendet werden. Im Batteriebetrieb ist dieses nur mit den ger%E4teeigenen Tasten des HmIP-SMI55 m%F6glich. "+
       "Gleiches gilt in Programmen f%FCr das Ein-/Ausschalten der Bewegungserkennung.",
 
-    "" :
-    "Bitte beachten Sie:<br/>"+
-    "Im Batteriebetrieb ist dieses Ger%E4t nicht in st%E4ndiger H%F6rbereitschaft.",
-
     "EVENT_FILTER_NUMBER_motionDetect":
       "Hier k%F6nnen Sie die Empfindlichkeit der Bewegungserkennung einstellen. Dabei bedeutet ein hoher Wert eine h%F6here Empfindlichkeit.",
 
@@ -109,13 +105,27 @@ jQuery.extend(true,langJSON, {
     "repetitionOffTimeSound" : "W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Ausschaltdauer gew%E4hlt, wird der Parameter Wiederholungen ignoriert.",
     "repetitionOffTimeDimmer" : "W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Einschaltdauer oder Ausschaltdauer gew%E4hlt, wird der Parameter Wiederholungen ignoriert.",
 
+    "CYCLIC_INFO_MSG" : 
+      "Ist der Parameter <b>${stringTableCyclicInfoMsg}</b> nicht aktiviert, wird der Status regelm%E4%DFig in einem gewissen Zeitraster gesendet. " +
+      "Dieses Zeitraster ist von Ger%E4t zu Ger%E4t verschieden und kann zwischen 1 und 24 Stunden liegen.<br/><br/>" +
+      "Ist der Parameter aktiviert, dann wird der Status <u>zus%E4tzlich</u> in einem Zeitraster nach folgender Formel gesendet:<br/><br/> " +
+      "<div style=\"margin-left:20px\">" +
+        "Zeit f%FCr ein Status Info, wenn sich der Status %E4ndert:<br>" +
+        "(A+1) x C Sekunden<br/><br/>" +
+        "Zeit f%FCr ein Status Info, wenn sich der Status nicht %E4ndert:<br/>" +
+        "(A+1) x (B+1) x C Sekunden<br/><br/>" +
+      "</div>" +
+      "Dabei gilt:<br/><br/>"+
+      "<b>A = ${stringTableCyclicInfoMsgDis}</br><br/>" +
+      "B = ${stringTableCyclicInfoMsgDisUnChangedwoBR}</br><br/>" +
+      "C = Zuf%E4llige Zeit zwischen 120 und 184 Sekunden</b></br><br/>",
     "noMoreHelp" : ""
   },
 
   "en" : {
     "HelpTitle" : "Help",
     "ROUTER_MODULE_ENABLED" : "<b>The device acts as router</b><br/><br/>This option allows the Homematic IP device to forward wireless commands. It therefore is used to increase the reach of standalone components.",
-    "ENABLE_ROUTING" : "<b>Routing active</b><br/><br/>Through this option the device attempts to communicate via a Homematic IP radio router as soon as it cannot directly reach the receiver. For example, the routing function may be activated on Homematic IP pluggable switch and meter with current firmware.",
+    "ENABLE_ROUTING" : "<b>Routing active</b><br/><br/>Through this option the device attempts to communicate via a Homematic IP router as soon as it cannot directly reach the receiver. For example, the routing function may be activated on Homematic IP pluggable switch and meter with current firmware.",
     "BLIND_REFERENCE_RUNNING_TIME" : "After you have manually changed the movement time value, the CCU has no information anymore on the blind/shutter position. You should therefore perform a calibration run (once completely to up and down). This ensures that the CCU is updated on the blind/shutters exact position.<br/><br/>" +
       "This applies also to devices with automatic calibration run if you decide to manually change the movement time value.",
     "BLIND_AUTOCALIBRATION" : "The automatic calibration run determines how long the shutter/blind needs to move to the desired level. The time for adjusting the slats is not considered and has to be entered manually.",
@@ -215,7 +225,21 @@ jQuery.extend(true,langJSON, {
     "repetitionOffTimeSound" : "Select the pause between the repetitions with the off duration. If a permanent off time is selected, the Repeats parameter is ignored.",
     "repetitionOffTimeDimmer" : "Select the pause between the repetitions with the off duration. If a permanent on-time or off-time is selected, the Repeats parameter is ignored.",
 
-    "noMoreHelp" : ""
+    "CYCLIC_INFO_MSG" :
+      "<b>en*</b> Ist der Parameter <b>${stringTableCyclicInfoMsg}</b> nicht aktiviert, wird der Status regelm%E4%DFig in einem gewissen Zeitraster gesendet. " +
+      "Dieses Zeitraster ist von Ger%E4t zu Ger%E4t verschieden und kann zwischen 1 und 24 Stunden liegen.<br/><br/>" +
+      "Ist der Parameter aktiviert, dann wird der Status <u>zus%E4tzlich</u> in einem Zeitraster nach folgender Formel gesendet:<br/><br/> " +
+      "<div style=\"margin-left:20px\">" +
+        "Zeit f%FCr ein Status Info, wenn sich der Status %E4ndert:<br>" +
+        "(A+1) x C Sekunden<br/><br/>" +
+        "Zeit f%FCr ein Status Info, wenn sich der Status nicht %E4ndert:<br/>" +
+        "(A+1) x (B+1) x C Sekunden<br/><br/>" +
+      "</div>" +
+      "Dabei gilt:<br/><br/>"+
+      "<b>A = ${stringTableCyclicInfoMsgDis}</br><br/>" +
+      "B = ${stringTableCyclicInfoMsgDisUnChangedwoBR}</br><br/>" +
+      "C = Zuf%E4llige Zeit zwischen 120 und 184 Sekunden</b></br><br/>",
 
+    "noMoreHelp" : ""
     }
 });

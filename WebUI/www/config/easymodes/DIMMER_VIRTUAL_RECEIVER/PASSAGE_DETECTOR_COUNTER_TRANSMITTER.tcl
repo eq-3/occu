@@ -97,9 +97,9 @@ set PROFILE_3(SHORT_CT_RAMPON)                {0 range 0 - 5}
 set PROFILE_3(SHORT_JT_OFF)                   1
 set PROFILE_3(SHORT_JT_OFFDELAY)              3
 set PROFILE_3(SHORT_JT_ON)                    3
-set PROFILE_3(SHORT_JT_ONDELAY)               3
-set PROFILE_3(SHORT_JT_RAMPOFF)               3
-set PROFILE_3(SHORT_JT_RAMPON)                3
+set PROFILE_3(SHORT_JT_ONDELAY)               1
+set PROFILE_3(SHORT_JT_RAMPOFF)               2
+set PROFILE_3(SHORT_JT_RAMPON)                2
 set PROFILE_3(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.005}
 set PROFILE_3(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.005}
 set PROFILE_3(SHORT_MULTIEXECUTE)             0

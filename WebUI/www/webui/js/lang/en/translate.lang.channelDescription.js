@@ -68,7 +68,7 @@ jQuery.extend(true,langJSON, {
     "chType_MOD_RC8" : "Key, Switch<br/>door/window contact",
     "chType_MOTION_DETECTOR" : "Motion detector",
     "chType_MOTIONDETECTOR_TRANSCEIVER" : "Motion detector",
-    "chType_MULTI_MODE_INPUT_TRANSMITTER" : "Homematic IP Wired<br/>Input Module",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER" : "Input Module",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_0" : "Channel deactivated",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Push button channel",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_2" : "Switch",

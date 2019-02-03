@@ -226,6 +226,7 @@ jQuery.extend(true,langJSON, {
     "stringTableCyclicInfoMsg" : "Cyclically status message",
     "stringTableCyclicInfoMsgDis" : "Number of messages that are left out",
     "stringTableCyclicInfoMsgDisUnChanged" :  "Number of unchanged status messages that are left out",
+    "stringTableCyclicInfoMsgDisUnChangedwoBR" :  "Number of unchanged status messages that are left out",
     "stringTableCyclicInfoMsgOverdueThreshold" :  "Number of missed status messages<br/>until 'unreach' is flagged",
     "stringTableCyclicInfoMsgPause" : "Interval for cyclically status messages",
     "stringTableDDCState" : "Open",
@@ -1050,6 +1051,8 @@ jQuery.extend(true,langJSON, {
     "stringTablePassageDetectorCounterTransmitterTitle" : "Passage sensor",
     "stringTableErrorUndervoltageFalse" : "Operating voltage OK, relay can be switched",
     "stringTableErrorUndervoltageTrue" : "Operating voltage not OK, relay cannot be switched",
+    "stringTableErrorUndervoltageDimmerFalse" : "Operating voltage OK",
+    "stringTableErrorUndervoltageDimmerTrue" : "Operating voltage not OK",
     "stringTableConditionSwitchTransmitterWindSpeed" : "Wind velocity sensor",
     "stringTableConditionSwitchTransmitterTemperature" : "Temperature sensor",
     "stringTableConditionSwitchTransmitterHumidity" : "Humidity sensor",
@@ -1059,7 +1062,6 @@ jQuery.extend(true,langJSON, {
     "stringTableConditionSwitchTransmitterWindDirection" :  "Wind direction sensor",
     "stringTablePassageDetectorDirectionTitle" : "Direction recognition",
     "stringTableWaterDetectionTransmitterTitle" : "Water sensor",
-
     "stringTableBrightnessFilterSize" : "Number of last brightness values used for calculation<br/>of brightness",
     "stringTableWaterLevelDetectedFalse" : "Water level detected: No",
     "stringTableWaterLevelDetectedTrue" : "Water level detected: Yes",
@@ -1139,6 +1141,17 @@ jQuery.extend(true,langJSON, {
 
     "stringTableSectionStatusNormal" : "Status Section: Normal",
     "stringTableSectionStatusUnknown" : "Status Section: Unknown",
+
+    "stringTableErrorCoprocessorTrue" : "Fehler CoProcessor: Ja",
+    "stringTableErrorCoprocessorFalse" : "Fehler CoProcessor: Nein",
+    "stringTableErrorRestartNeededTrue" : "Neustart n%F6tig: Ja",
+    "stringTableErrorRestartNeededFalse" : "Neustart n%F6tig: Nein",
+
+    "stringTableInternalSoundFile" : "Internal device sound",
+    "stringTableRandomSoundFile" : "Shuffle",
+    "stringTableOldValueSoundFile" : "Title last played",
+    "stringTableDoNotCareSoundFile" : "Proceed with current title",
+    "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
 
     "noMoreKeys" : ""
   }

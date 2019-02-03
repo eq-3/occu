@@ -246,13 +246,13 @@ HmIPWeeklyProgram.prototype = {
       this.numberOfActiveEntries++;
     }
 
-    
+
     showSlatPosHelp = function() {
       var width = 400,
       height = 75;
       MessageBox.show(translateKey("HmIPWPSlatPosHelpTitle"), translateKey("HmIPWPSlatPosHelp"), "", width, height);
     };
-    
+
     programEntry += "<tr id='entry"+number+"' class="+entryVisibilityCSS+"><td><table>";
       programEntry += "<tbody>";
       programEntry += "<tr><td colspan='6'><hr class='CLASS10400'></td></tr>";
@@ -819,7 +819,7 @@ HmIPWeeklyProgram.prototype = {
   _getSlatLevel: function(number) {
     var result = "",
     paramID = number +"_WP_LEVEL_2",
-    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]).toFixed(3) : "0.000";
+    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]).toFixed(3) : "1.010";
 
     this.prn++;
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"'>";
@@ -828,8 +828,8 @@ HmIPWeeklyProgram.prototype = {
       for (var loop = 0; loop <= 100; loop += 5) {
         result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
       }
-     // result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
-     // result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
+      result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
+      result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
 
     result += "</select>";
 
@@ -946,6 +946,7 @@ HmIPWeeklyProgram.prototype = {
           elmSlatPos.show();
         } else {
           elmSlatPos.hide();
+          jQuery(jQuery("[name='"+self._addLeadingZero(number)+"_WP_LEVEL_2']")[0]).val("1.010");
         }
       }
     };

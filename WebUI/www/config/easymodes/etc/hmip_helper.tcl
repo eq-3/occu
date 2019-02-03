@@ -182,8 +182,8 @@ proc getPanelA {prn pref specialElement} {
               append s "break;"
             append s "case 5:"
               # 1 sec
-              append s "baseElem.val(0);"
-              append s "factorElem.val(10);"
+              append s "baseElem.val(1);"
+              append s "factorElem.val(1);"
               append s "break;"
             append s "case 6:"
               # 3 sec

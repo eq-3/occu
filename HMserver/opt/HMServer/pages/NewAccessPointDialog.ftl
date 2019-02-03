@@ -4,26 +4,27 @@
   offlineOperation = false,
   userPassPhrase = null,
   localKeyA = "";
+  maxAttemptAssignAP = 10;
 
 	translatePage('#messagebox');
   	dlgPopup.setWidth(600);
 	dlgPopup.readaptSize();
-    
+
   ShowAccessPointList = function()
-	{  
+	{
 		var url = '/pages/jpages/hmip/AccessPointSettings/?sid='+SessionId;
 		var opt =
 		{
 			onComplete: function(t)
-			{        		
+			{
 				jQuery("#content").html(t.responseText);
 			}
 		}
 		new Ajax.Request(url,opt);
 	};
-	
+
   IsAssignDoneAccessPoint = function()
-	{  
+	{
 		var url = '/pages/jpages/hmip/AccessPointSettings/isAssignmentDone?sid='+SessionId;
 		var data = "{";
 		data += '"id" : "${accessPoint.id}"';
@@ -40,15 +41,21 @@
             PopupClose();
 						jQuery("#content").html(response.content);
 					} else {
-						// Recursive call until it finished or has a crytical problem
-						setTimeout(IsAssignDoneAccessPoint, 5000);	
+						// Recursive call 'maxAttemptAssignAP' times
+						if (maxAttemptAssignAP > 0) {
+						  maxAttemptAssignAP--;
+						  setTimeout(IsAssignDoneAccessPoint, 5000);
+					  } else {
+              jQuery("#messageBoxAssignment").remove();
+              PopupClose();
+              alert(translateKey(response.content));
+					  }
 					}
 				} else {
           jQuery("#messageBoxAssignment").remove();
           PopupClose();
-          // TODO make a correct message box
 					alert(translateKey(response.content));
-					
+
 					// refresh main list
 					ShowAccessPointList();
 				}
@@ -56,7 +63,7 @@
 		}
 		new Ajax.Request(url,opt);
 	};
-    
+
 	AssignAccessPoint = function()
 	{
 		var name = accessPointName.replace("'", "").replace("\"", "").replace("\\", "");
@@ -79,7 +86,7 @@
 			onComplete: function(t)
 			{
 				var response = JSON.parse(t.responseText);
-				
+
 				if(!response.isSuccessful)
 				{
 					if(response.errorCode == "42")
@@ -89,10 +96,10 @@
 					} else {
 						alert(translateKey(response.content));
 					}
-				} else {				
+				} else {
 					MessageBox.show(translateKey(response.content), '<br/><br/><img id="messageBoxAssignmentGraph" src="/ise/img/anim_bargraph.gif"><br/>','','320','90', 'messageBoxAssignment', 'messageBoxAssignmentGraph');
 					// first wait 15s
-					setTimeout(IsAssignDoneAccessPoint, 15000);	
+					setTimeout(IsAssignDoneAccessPoint, 15000);
 				}
 			}
 		}
@@ -237,7 +244,7 @@
 
           dlgHtml += "<tr><td colspan='2'><hr></td></tr>";
 
-          dlgHtml += "<tr align='center'><td colspan='3'>"+translateKey('offlineOperation')+"</td></tr>";
+          dlgHtml += "<tr align='center'><td colspan='3'>"+translateKey('offlineOperation')+"</td><td style='position:relative; left:-130px'><img src='/ise/img/help.png'/ height='20' width='20' onclick=\"MessageBox.show('"+translateKey('tooltipHelp')+"', '"+translateKey('helpAccessPointOffline')+"', '', 450, 220);\"/></td></tr>";
 
           dlgHtml += "<tr>";
             dlgHtml += "<td>";

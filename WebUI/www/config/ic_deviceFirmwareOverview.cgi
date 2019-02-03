@@ -140,10 +140,9 @@ proc getActionPanel {} {
           set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22008 noBorder\"></td></tr>"
         }
       }
-    } else {
+   } else {
       # This is a HmIP device
       if {[catch {set firmwareUpdateState $dev_descr(FIRMWARE_UPDATE_STATE)}] == 0} {
-
         switch $firmwareUpdateState {
           "PERFORMING_UPDATE" {
             set fw_update_rows "<tr><td class=\"_CLASS22006 noBorder\">\${lblDeviceFwPerformUpdate}</td></tr>"
@@ -151,9 +150,17 @@ proc getActionPanel {} {
 
           "NEW_FIRMWARE_AVAILABLE" -
           "DELIVER_FIRMWARE_IMAGE" {
-            set fw_update_rows "<tr><td class=\"_CLASS22008 noBorder\"><div>\${lblDeviceFwDeliverFwImage}</div><div class=\"StdTableBtnHelp\"><img class=\"j_hmIPDeliverFirmwareHelp\" height=\"24\" width=\"24\"src=\"/ise/img/help.png\"></div></td></tr>"
+            set helpIdentifier "j_hmIPDeliverFirmwareHelp"
+
+            if {[catch {set devType $dev_descr(TYPE)}] == 0} {
+              if {[string first HmIPW- $devType] != -1} {
+                set helpIdentifier "j_hmIPWDeliverFirmwareHelp"
+              }
+            }
+             set fw_update_rows "<tr><td class=\"_CLASS22008 noBorder\"><div>\${lblDeviceFwDeliverFwImage}</div><div class=\"StdTableBtnHelp\"><img class=$helpIdentifier height=\"24\" width=\"24\"src=\"/ise/img/help.png\"></div></td></tr>"
           }
 
+          "DO_UPDATE_PENDING" -
           "READY_FOR_UPDATE" {
             # set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"_CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
             append fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\"><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
@@ -206,11 +213,20 @@ proc put_table_row {} {
 }
 
 proc put_actionHelp {} {
+  global dev_descr
+
   puts "<script type=\"text/javascript\">"
     puts "var tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPDeliverFirmwareImage\");+\"</div>\","
     puts "tooltipElem = jQuery(\".j_hmIPDeliverFirmwareHelp\") ;"
     puts "tooltipElem.data('powertip', tooltipHTML);"
     puts "tooltipElem.powerTip({placement: 'sw', followMouse: false});"
+
+    # Wired-Tooltip
+    puts "var wired_tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPWDeliverFirmwareImage\");+\"</div>\","
+    puts "wired_tooltipElem = jQuery(\".j_hmIPWDeliverFirmwareHelp\") ;"
+    puts "wired_tooltipElem.data('powertip', wired_tooltipHTML);"
+    puts "wired_tooltipElem.powerTip({placement: 'sw', followMouse: false});"
+
   puts "</script>"
 }
 

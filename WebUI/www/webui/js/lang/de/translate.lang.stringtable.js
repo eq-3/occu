@@ -226,6 +226,7 @@ jQuery.extend(true,langJSON, {
     "stringTableCyclicInfoMsg" : "Zyklische Statusmeldung",
     "stringTableCyclicInfoMsgDis" : "Anzahl der auszulassenden Statusmeldungen",
     "stringTableCyclicInfoMsgDisUnChanged" :  "Anzahl der auszulassenden,<br/>unver%E4nderten Statusmeldungen",
+    "stringTableCyclicInfoMsgDisUnChangedwoBR" :  "Anzahl der auszulassenden, unver%E4nderten Statusmeldungen",
     "stringTableCyclicInfoMsgOverdueThreshold" :  "Anzahl der verpassten Statusmeldungen,<br/>bis 'unreach' geflaggt wird",
     "stringTableCyclicInfoMsgPause" : "Intervall f%FCr zyklische Statusmeldung",
     "stringTableDDCState" : "%D6ffnen",
@@ -1052,6 +1053,8 @@ jQuery.extend(true,langJSON, {
     "stringTablePassageDetectorCounterTransmitterTitle" : "Durchgangsz%E4hler",
     "stringTableErrorUndervoltageFalse" : "Betriebsspannung ok, Relais kann geschaltet werden",
     "stringTableErrorUndervoltageTrue" : "Betriebsspannung nicht ok, Relais kann nicht geschaltet werden",
+    "stringTableErrorUndervoltageDimmerFalse" : "Betriebsspannung OK",
+    "stringTableErrorUndervoltageDimmerTrue" : "Betriebsspannung nicht OK",
     "stringTableConditionSwitchTransmitterWindSpeed" : "Windgeschwindigkeitssensor",
     "stringTableConditionSwitchTransmitterTemperature" : "Temperatursensor",
     "stringTableConditionSwitchTransmitterHumidity" : "Luftfreuchtesensor",
@@ -1140,6 +1143,17 @@ jQuery.extend(true,langJSON, {
 
     "stringTableSectionStatusNormal" : "Status Sektion: Normal",
     "stringTableSectionStatusUnknown" : "Status Sektion: Unbekannt",
+
+    "stringTableErrorCoprocessorTrue" : "Fehler CoProcessor: Ja",
+    "stringTableErrorCoprocessorFalse" : "Fehler CoProcessor: Nein",
+    "stringTableErrorRestartNeededTrue" : "Neustart n%F6tig: Ja",
+    "stringTableErrorRestartNeededFalse" : "Neustart n%F6tig: Nein",
+
+    "stringTableInternalSoundFile" : "Interner Ger%E4tesound",
+    "stringTableRandomSoundFile" : "Zufallswiedergabe",
+    "stringTableOldValueSoundFile" : "Zuletzt gespielter Titel",
+    "stringTableDoNotCareSoundFile" : "Mit dem aktuellen Titel fortfahren",
+    "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
 
     "noMoreKeys" : ""
 

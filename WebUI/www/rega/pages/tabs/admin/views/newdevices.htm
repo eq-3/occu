@@ -396,13 +396,28 @@ for (var i = 0; i < arDevices.length; i++) {
   td = Builder.node('td', {id: "transParent" + arDevices[i]['id'], className: 'GrayBkg border1px'}, spaceCut(arDevices[i]['trans']));
   tr.appendChild(td);
 
+
   if (NAV_IE) {
     td = Builder.node('td', {className: 'WhiteBkg border1px'},
       [Builder.node('div', {id: 'tdn' + arDevices[i]['id'], className: "CLASS04306", onclick: 'textEdit(id, ' + arDevices[i]['id'] + ', false, 0, CALL_STRCUT)'}, strCut(arDevices[i]['name'], true)) ]);
     tr.appendChild(td);
   }
   else {
-    td = Builder.node('td', {className: 'WhiteBkg CLASS04307 border1px', id: 'tdn' + arDevices[i]['id'], onclick: 'textEdit(id, ' + arDevices[i]['id'] + ', false, 0, CALL_STRCUT)'}, strCut(arDevices[i]['name'], true));
+    if (isDevTypeHmIPW(arDevices[i]['type'])) {
+      td = Builder.node('td', {className: 'WhiteBkg CLASS04307 border1px'});
+      divA = Builder.node('div', {id: 'tdn' + arDevices[i]['id']}, strCut(arDevices[i]['name'].replace(/:/g, ":<br/>"), false));
+      divB = Builder.node('div', {
+        id: 'btnRename_' + arDevices[i]["id"],
+        className: 'TestButton colorGradient borderRadius2px hidden',
+        style: 'min-width:7em',
+        onclick: 'renameAllNamesDialog(' + arDevices[i]["id"] + ')'
+      }, translateKey("lblRename"));
+      td.appendChild(divA);
+      td.appendChild(divB);
+    } else {
+      td = Builder.node('td', {className: 'WhiteBkg CLASS04307 border1px', id: 'tdn' + arDevices[i]['id'], onclick: 'textEdit(id, ' + arDevices[i]['id'] + ', false, 0, CALL_STRCUT)'}, strCut(arDevices[i]['name'], true));
+    }
+
     tr.appendChild(td);
   }
   td = Builder.node('td', {id: "funcs" + arDevices[i]['id'], className: 'GrayBkg border1px'}, semCut(arDevices[i]['func']));
@@ -431,6 +446,11 @@ for (var i = 0; i < arDevices.length; i++) {
   Draw(jg_0, arDevices[i]['type'], 50, '-1');
 
   arDevPosis[arDevPosis.length] = i + 2;
+
+  // Zeilenumbruch im Gerätenamen
+  var devNameElm = jQuery("#tdn" + arDevices[i]['id']);
+  devNameElm.html(devNameElm.text());
+
 }
 
 
@@ -616,6 +636,116 @@ editFuncs = function () {
     iseFunctions.buildFuncOverlay();
   };
   dlgPopup.ShowPopup();
+};
+
+renameAllNamesDialog = function(devId) {
+
+  var url = '/pages/msg/askRenameAllChannels.htm?sid=' + SessionId;
+  var opt =
+  {
+    onComplete: function (t) {
+      var selectedVal = "";
+      var dlg = new YesNoDialog("", t.responseText, function(result) {
+
+        if (result) {
+            //var val = jQuery("input[name='allChannels']:checked").val();
+            renameDeviceDialog(devId, selectedVal);
+        }
+      }, "html");
+
+      selectedVal = jQuery("input[name='allChannels']:checked").val();
+      jQuery("input[name='allChannels']").change(function() {selectedVal = this.value;});
+
+      dlg.setWidth(400);
+      dlg.btnTextYes(translateKey("btnNext"));
+      dlg.btnTextNo(translateKey("btnCancel"));
+    }
+  };
+  new Ajax.Request(url, opt);
+};
+
+showBtnYes = function(value) {
+  if (value == "") {
+    renameDeviceDlg.btnYesHide();
+  } else {
+    renameDeviceDlg.btnYesShow();
+  }
+
+};
+
+actualizePreviewChannelNames = function(value) {
+
+  if (typeof  actualizeChannelTimer != "undefined") {
+    clearTimeout(actualizeChannelTimer);
+  }
+
+  actualizeChannelTimer = setTimeout(function() {
+    var channelRows = jQuery("[name='previewChannelName']"),
+      basisName = renameDeviceDlg.convertToValidBasicName(value);
+
+    jQuery("#deviceBasisName").val(basisName);
+
+    if (basisName == "") {
+      renameDeviceDlg.btnYesHide();
+    } else {
+      renameDeviceDlg.btnYesShow();
+    }
+
+    channelRows.each(function(index, elm) {
+      var arChannelName = jQuery(elm).html().split(":"),
+      newName = "";
+      // Set the new basis name
+      arChannelName[0] = value;
+      // Build the new name
+      arChannelName.each(function(val) {
+        newName += val +":";
+      });
+      jQuery(elm).html(renameDeviceDlg.convertToValidBasicName(newName.slice(0,-1))); // slice removes the unnecessary ':' at the end of the new name
+    });
+  },1000);
+};
+
+renameDeviceDialog = function(devId, allChannels) {
+  var url = '/pages/msg/renameDevice.htm?sid=' + SessionId;
+  var opt =
+  {
+    onComplete: function (t) {
+      renameDeviceDlg = new RenameDeviceDialog("", t.responseText, devId, allChannels, function(result) {
+        var self = this;
+        // Yes pressed
+        if (result) {
+
+          var newName = this.getNewDeviceName();
+          conInfo("renameDeviceDialog - Try to save the new name!");
+          homematic("Device.setName", {id: devId, name: newName.replace(/<[^>]*>/g, " ")}, function(result) {
+            conInfo("Device name successfully set to " + result);
+            //WebUI.enter(NewDeviceListPage);
+            jQuery("#tdn" + devId).html(result.replace(/:/g,":<br/>"));
+
+            if (allChannels == "true") {
+              conInfo("Now we should rename all available channels.");
+              var arChnObj = self.getNewChannelNames();
+
+              conInfo(arChnObj);
+
+              jQuery.each(arChnObj, function(index, chnObj) {
+                homematic("Channel.setName", {id: chnObj.id, name: chnObj.name.replace(/<[^>]*>/g, " ")},function(result) {
+                  conInfo("Channel "+chnObj.id+": name successfully set to " + result.replace(/:/g,":<br/>"));
+                  jQuery("#tdn" + chnObj.id).html(result.replace(/:/g,":<br/>"));
+                });
+              });
+
+            }
+          });
+        }
+      }, "html");
+      renameDeviceDlg.resetHeight();
+      renameDeviceDlg.setWidth(600);
+      renameDeviceDlg.btnTextNo(translateKey("btnCancel"));
+      renameDeviceDlg.btnTextYes(translateKey("btnOk"));
+    }
+  };
+  new Ajax.Request(url, opt);
 };
 
 refreshFooterButton = function () {

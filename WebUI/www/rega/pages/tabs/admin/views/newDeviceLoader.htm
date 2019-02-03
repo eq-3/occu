@@ -494,7 +494,7 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
               [Builder.node('div', {id:'tdn' + chns[i]['id'], className: "CLASS04403 CLASS04404", onclick: 'textEdit(id, '+chns[i]['id']+', false, 0, CALL_STRCUT)'}, strCut(chns[i]['name'], true)) ]); tr.appendChild(td);
         }
         else {
-         td = Builder.node('td', {className: 'WhiteBkg CLASS04404 border1px', id:'tdn' + chns[i]['id'], onclick: 'textEdit(id, '+chns[i]['id']+', false, 0, CALL_STRCUT)'}, strCut(chns[i]['name'], true)); tr.appendChild(td);
+         td = Builder.node('td', {className: 'WhiteBkg CLASS04404 border1px', id:'tdn' + chns[i]['id'], onclick: 'textEdit(id, '+chns[i]['id']+', false, 0, CALL_STRCUT)'}, strCut(chns[i]['name'].replace(/:/g, ":<br/>"), true)); tr.appendChild(td);
         }
         
         if (NAV_IE) {
@@ -532,6 +532,11 @@ if ( dev && (dev.ReadyConfig() == false) && (dev.Name() != 'Gateway') && (dev.In
         var jg_0 = new jsGraphics('picDiv' + chns[i]['id']);
         InitGD(jg_0, 50);
         Draw(jg_0, deviceData['type'], 50, chns[i]['chnNr']);
+
+        // Zeilenumbruch im Kanalnamen
+        var devNameElm = jQuery("#tdn" + chns[i]['id']);
+        devNameElm.html(devNameElm.text());
+
       }
     }
   }

@@ -91,83 +91,112 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<tr id=\"hintLinksProgramsHR_$chn\" class=\"hidden\"><td colspan=\"2\"><hr></td></tr>"
 
       puts "<script type=\"text/javascript\">"
-        puts "var hintIndicator = 0;"
-        puts "var oChannel = DeviceList.getChannelByAddress('$address');"
 
-        puts "var virChnAddressA = oChannel.device.address + \":\" + (oChannel.index + 1),"
-        puts "virChnAddressB = oChannel.device.address + \":\" + (oChannel.index + 2),"
-        puts "virChnAddressC = oChannel.device.address + \":\" + (oChannel.index + 3),"
+        puts "initBlind = function(address, fromInbox, newDevice) \{"
+          puts "if (fromInbox) \{"
+            puts "homematic(\"Interface.getMetadata_crRFD\", \{\"interface\" : \"HmIP-RF\",\"objectId\": address,\"dataId\": \"channelMode\"\},"
+            puts "function(result) {window.setTimeout(function() \{jQuery('#modeSelector_' + address.replace(\":\",\"_\")).val(result).prop('selected',true);\},500);});"
 
-        puts "oChannelVirtA = DeviceList.getChannelByAddress(virChnAddressA),"
-        puts "oChannelVirtB = DeviceList.getChannelByAddress(virChnAddressB),"
-        puts "oChannelVirtC = DeviceList.getChannelByAddress(virChnAddressC);"
+            puts "if (newDevice) \{"
+              set devAddress [lindex [split $address :] 0]
+              puts "var oDevice = DeviceList.getDeviceByAddress('$devAddress');"
+              puts "oDevice.inInbox = true;"
+              puts "DeviceList.updateDevice(oDevice);"
+            puts "\}"
 
-        puts "if (0 != $chnHasLinks) {"
-           puts "hintIndicator += 1;"
-        puts "}"
-
-        puts "if ((oChannel.listProgramIds().length > 0) || (oChannelVirtA.listProgramIds().length > 0) || (oChannelVirtB.listProgramIds().length > 0) || (oChannelVirtC.listProgramIds().length > 0)) {"
-          puts "hintIndicator += 2;"
-        puts "}"
-
-        puts "if (hintIndicator > 0) {"
-          puts "var arHints = \['', 'hintWiredBlindLinksAvailable', 'hintWiredBlindProgramsAvailable', 'hintWiredBlindLinksAndProgramsAvailable'\]"
-          if {[session_is_expert]} {
-            puts "var hintAffectedChannels = (oChannel.index) + ', ' + (oChannel.index + 1) + ', ' + (oChannel.index + 2) + ', ' + (oChannel.index + 3);"
-          } else {
-            puts "var hintAffectedChannels = (oChannel.index) + ', ' + (oChannel.index + 1);"
-          }
-          puts "jQuery(\"#hintLinksProgramsAvailable_$chn\").html(translateKey(arHints\[hintIndicator\]) + translateKey(\"hintCheckChannels\") + hintAffectedChannels);"
-          puts "jQuery(\"#hintLinksProgramsHR_$chn\").show();"
-          puts "jQuery(\"#modeSelector_\"+oChannel.device.address+\"_$chn\").prop(\"disabled\", true);"
-        puts "}"
-
-        # When the metadata channelMode isn't set yet (after teach-in) set the metadata to the default value blind
-        puts "var devMode = homematic(\"Interface.getMetadata\", \{"
-         puts "\"objectId\": oChannel.address,"
-         puts "\"dataId\": \"channelMode\""
-        puts "\});"
-
-        puts "if (! devMode) \{"
-
-          puts "var devAddress = oChannel.device.address,"
-          puts "ch = oChannel.index,"
-          puts "chnAddress;"
-
-          puts "for(var x = 0; x<=3; x++) \{"
-            puts "chnAddress = devAddress+\":\"+(parseInt(ch) + x);"
-            puts "homematic(\"Interface.setMetadata_crRFD\", \{"
-              puts "\"interface\": \"HmIP-RF\","
-              puts "\"objectId\": chnAddress,"
-              puts "\"dataId\": \"channelMode\","
-              puts "\"value\": \"blind\""
-            puts "\});"
-
-            puts "homematic(\"Interface.setMetadata\", \{"
-              puts "\"objectId\": chnAddress,"
-              puts "\"dataId\": \"channelMode\","
-              puts "\"value\": \"blind\""
-            puts "\});"
           puts "\}"
 
+          puts "var oChannel = DeviceList.getChannelByAddress('$address');"
+
+          puts "var hintIndicator = 0;"
+
+          puts "var virChnAddressA = oChannel.device.address + \":\" + (oChannel.index + 1),"
+          puts "virChnAddressB = oChannel.device.address + \":\" + (oChannel.index + 2),"
+          puts "virChnAddressC = oChannel.device.address + \":\" + (oChannel.index + 3),"
+
+          puts "oChannelVirtA = DeviceList.getChannelByAddress(virChnAddressA),"
+          puts "oChannelVirtB = DeviceList.getChannelByAddress(virChnAddressB),"
+          puts "oChannelVirtC = DeviceList.getChannelByAddress(virChnAddressC);"
+
+          puts "if (0 != $chnHasLinks) {"
+             puts "hintIndicator += 1;"
+          puts "}"
+
+          puts "if ((oChannel.listProgramIds().length > 0) || (oChannelVirtA.listProgramIds().length > 0) || (oChannelVirtB.listProgramIds().length > 0) || (oChannelVirtC.listProgramIds().length > 0)) {"
+            puts "hintIndicator += 2;"
+          puts "}"
+
+          puts "if (hintIndicator > 0) {"
+            puts "var arHints = \['', 'hintWiredBlindLinksAvailable', 'hintWiredBlindProgramsAvailable', 'hintWiredBlindLinksAndProgramsAvailable'\]"
+            if {[session_is_expert]} {
+              puts "var hintAffectedChannels = (oChannel.index) + ', ' + (oChannel.index + 1) + ', ' + (oChannel.index + 2) + ', ' + (oChannel.index + 3);"
+            } else {
+              puts "var hintAffectedChannels = (oChannel.index) + ', ' + (oChannel.index + 1);"
+            }
+            puts "jQuery(\"#hintLinksProgramsAvailable_$chn\").html(translateKey(arHints\[hintIndicator\]) + translateKey(\"hintCheckChannels\") + hintAffectedChannels);"
+            puts "jQuery(\"#hintLinksProgramsHR_$chn\").show();"
+            puts "jQuery(\"#modeSelector_\"+oChannel.device.address+\"_$chn\").prop(\"disabled\", true);"
+          puts "}"
+
+          # When the metadata channelMode isn't set yet (after teach-in) set the metadata to the default value blind
+
+          puts "var devMode = oChannel.multiMode;"
+
+          puts "if ((devMode == '--') || (devMode == 'null') || (typeof devMode == 'undefined')) \{"
+
+            puts "var devAddress = oChannel.device.address,"
+            puts "devMode = 'blind',"
+            puts "ch = oChannel.index,"
+            puts "isChannelMultiModeSet = false,"
+            puts "chnAddress;"
+
+            puts "for(var x = 0; x<=3; x++) \{"
+              puts "chnAddress = devAddress+\":\"+(parseInt(ch) + x);"
+              puts "homematic(\"Interface.setMetadata_crRFD\", \{"
+                puts "\"interface\": \"HmIP-RF\","
+                puts "\"objectId\": chnAddress,"
+                puts "\"dataId\": \"channelMode\","
+                puts "\"value\": \"blind\""
+              puts "\});"
+
+              puts "homematic(\"Interface.setMetadata\", \{"
+                puts "\"objectId\": chnAddress,"
+                puts "\"dataId\": \"channelMode\","
+                puts "\"value\": \"blind\""
+              puts "\}, function() \{"
+                puts "if (! isChannelMultiModeSet) \{"
+                  puts "oChannel.setMultiMode('blind');"
+                  puts "oChannelVirtA.setMultiMode('blind');"
+                  puts "oChannelVirtB.setMultiMode('blind');"
+                  puts "oChannelVirtC.setMultiMode('blind');"
+                  puts "DeviceList.beginUpdateDevice(oChannel.device.id);"
+                  puts "isChannelMultiModeSet = true;"
+                puts "\}"
+              puts "\});"
+            puts "\}"
+
+          puts "\}"
+
+          puts "var tmpChannelMode = \"blind\";"
+          puts "if (typeof arModeElms != 'object') {arModeElms = \[\];}"
+
+          puts "window.setTimeout(function() {jQuery(\"\#$addressID\").val(devMode).prop('selected',true);},50);"
+
         puts "\}"
-      puts "</script>"
 
 
-
-      puts "<script type=\"text/javascript\">"
-
-        puts "var tmpChannelMode = \"blind\";"
-        puts "if (typeof arModeElms != 'object') {arModeElms = \[\];}"
-
-         # set the mode input element to the current state
-         puts "var oChannel = DeviceList.getChannelByAddress('$address');"
-         puts "var devMode = homematic(\"Interface.getMetadata\", \{"
-           puts "\"objectId\": oChannel.address,"
-           puts "\"dataId\": \"channelMode\""
-         puts "\});"
-        puts "window.setTimeout(function() {jQuery(\"\#$addressID\").val(devMode).prop('selected',true);},50);"
-
+        # Nur, wenn im Posteingang
+        puts "if (typeof devToConfigure != 'undefined') \{"
+         puts "var oDevice = DeviceList.getDeviceByAddress('$devAddress');"
+         puts "if (typeof oDevice != 'object') \{"
+             puts "DeviceList.beginUpdateDevice(devToConfigure, function() \{initBlind('$address', true, true);\});"
+          puts "\} else \{"
+            puts "initBlind('$address',true, false);"
+          puts "\}"
+          puts "window.setTimeout(function() \{delete devToConfigure\},500);"
+        puts "\} else \{"
+          puts "initBlind('$address',false, false);"
+        puts "\}"
 
         puts "storeChangedModeElms = function(address, chn) \{"
           # arModeElms contains all changed mode elements
@@ -176,12 +205,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
           puts "var devAddress = address.split(\":\")\[0\],"
           puts "chnAddress;"
 
-
-
           puts "for(var x = 0; x <= 3; x++) \{"
             puts "chAddress = devAddress + \":\" + (parseInt(chn) + x);"
             puts "if (jQuery.inArray(chAddress, arModeElms) == -1) {arModeElms.push(chAddress);}"
           puts "\}"
+
         puts "\};"
 
         puts "setMetaData = function() \{"
@@ -192,6 +220,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
             puts "tmpChannelMode = (typeof elmVal != \"undefined\") ? elmVal : tmpChannelMode;"
             puts "elmVal = tmpChannelMode;"
             puts "var oChannel = DeviceList.getChannelByAddress(chAddress);"
+            puts "var device = oChannel.device;"
 
             puts "homematic(\"Interface.setMetadata_crRFD\", \{"
               puts "\"interface\": \"HmIP-RF\","
@@ -204,16 +233,34 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
               puts "\"objectId\": oChannel.address,"
               puts "\"dataId\": \"channelMode\","
               puts "\"value\": elmVal"
-            puts "\}, function() {oChannel.changeChannelDescription();});"
+            puts "\}, function() {
+              oChannel.changeChannelDescription();
+              oChannel.setMultiMode(elmVal);
+              DeviceList.beginUpdateDevice(device.id);
+            });"
           puts "\});"
+        puts "\}"
+
+        puts "setReferenceRunningTimeSlatsValue = function() \{"
+          puts "jQuery.each(arModeElms, function(index, chAddress) \{"
+            puts "var elmID = \"#modeSelector_\" + chAddress.replace(\":\",\"_\"),"
+            puts "elmVal = jQuery(elmID).val();"
+
+            puts "if (elmVal === \"shutter\") \{"
+              puts "homematic(\"Interface.putParamset\", {'interface': 'HmIP-RF', 'address': chAddress, 'paramsetKey' : 'MASTER', 'set' : \[\{name:'REFERENCE_RUNNING_TIME_SLATS_UNIT', type : 'integer', value : 0\}\,\{name:'REFERENCE_RUNNING_TIME_SLATS_VALUE', type : 'integer', value : 0\}\] }, function() \{\});"
+            puts "\} else \{"
+              puts "homematic(\"Interface.putParamset\", {'interface': 'HmIP-RF', 'address': chAddress, 'paramsetKey' : 'MASTER', 'set' : \[\{name:'REFERENCE_RUNNING_TIME_SLATS_UNIT', type : 'integer', value : 2\}\,\{name:'REFERENCE_RUNNING_TIME_SLATS_VALUE', type : 'integer', value : 2\}\] }, function() \{\});"
+            puts "\}"
+          puts "\});"
+
           puts "delete arModeElms;"
+
         puts "\}"
 
         # Extend the footer buttons
          puts "window.setTimeout(function() \{"
            puts "var elm = jQuery('#footerButtonOK');"
-           #puts "elm.off('click').click(function() {SaveDeviceParameters();setMetaData();});"
-           puts "elm.off('click').click(function() {setMetaData();});"
+           puts "elm.off('click').click(function() {setMetaData();setReferenceRunningTimeSlatsValue();});"
          puts "\},1200);"
       puts "</script>"
     }

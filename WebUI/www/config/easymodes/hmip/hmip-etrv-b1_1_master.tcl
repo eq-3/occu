@@ -36,9 +36,9 @@ proc _getMaxValue {param} {
 
 proc _getTextField {type param value prn} {
   set elemId 'separate_$type\_$prn'
-  # Limit float to 2 decimal places
+  # Limit float to 1 decimal places
   if {[llength [split $value "."]] == 2} {
-    set value [format {%1.2f} $value]
+    set value [format {%1.1f} $value]
   }
 
   set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param>"
@@ -60,6 +60,10 @@ proc _getUnit {param} {
     set unit "&#176;C"
   }
 
+  if {$unit == "100%"} {
+   set unit "%"
+  }
+
   return "$unit"
 }
 
@@ -71,10 +75,14 @@ proc _getMinMaxValueDescr {param} {
   set min $param_descr(MIN)
   set max $param_descr(MAX)
 
+  if {[string equal $param "VALVE_OFFSET"] != -1} {
+    return "(0 - 100)"
+  }
+
   # Limit float to 2 decimal places
-  if {[llength [split $min "."]] == 2} {
-    set min [format {%1.2f} $min]
-    set max [format {%1.2f} $max]
+  if {[llength [split $min "."]] == 1} {
+    set min [format {%1.1f} $min]
+    set max [format {%1.1f} $max]
   }
   return "($min - $max)"
 }
@@ -430,6 +438,15 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
       }
     append HTML_PARAMS(separate_1) "</tr>"
+
+    set param VALVE_OFFSET
+    if { ! [catch {set tmp $ps($param)}]  } {
+      incr prn
+      append HTML_PARAMS(separate_1) "<tr>"
+        append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableValveOffset}</td>"
+        append HTML_PARAMS(separate_1) "<td colspan=\"2\" >[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp; [_getUnit $param]&nbsp;[_getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight + 50]]</td>"
+      append HTML_PARAMS(separate_1) "</tr>"
+    }
 
     set param BOOST_AFTER_WINDOW_OPEN
     if { ! [catch {set tmp $ps($param)}]  } {

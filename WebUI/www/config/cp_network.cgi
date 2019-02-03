@@ -443,7 +443,7 @@ proc action_put_page {} {
                 puts "\${dialogSettingsNetworkCertificateLblHostname}"
               }
               table_data {align="right"} {
-                cgi_text url=$env(HTTP_HOST) {size="35"} {id="text_url"} {type="text"}  {onpaste="isIPValid(this.value, this.id, true);"} {onkeyup="isIPValid(this.value, this.id);"}
+                cgi_text url=$env(HTTP_HOST) {size="35"} {id="text_url"} {type="text"}
               }
 
               table_data {id="text_url_hint"} {class="attention hidden"} {

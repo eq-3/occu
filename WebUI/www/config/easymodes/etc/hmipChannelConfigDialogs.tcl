@@ -14,6 +14,10 @@ proc getMaintenance {chn p descr} {
 
   set devType $dev_descr(TYPE)
 
+  set devIsHmIPWired [isDevHmIPW $devType]
+
+  set cyclicInfo false
+
   set specialID "[getSpecialID $special_input_id]"
   set html ""
 
@@ -24,6 +28,7 @@ proc getMaintenance {chn p descr} {
 
   set param CYCLIC_INFO_MSG
   if { ! [catch {set tmp $ps($param)}]  } {
+    set cyclicInfo true
     append html "<tr>"
       append html "<td>\${stringTableCyclicInfoMsg}</td>"
       append html  "<td>[getCheckBoxCyclicInfoMsg $param $ps($param) $chn $prn]</td>"
@@ -32,6 +37,7 @@ proc getMaintenance {chn p descr} {
 
   set param CYCLIC_INFO_MSG_DIS
   if { ! [catch {set tmp $ps($param)}]  } {
+    set cyclicInfo true
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCyclicInfoMsgDis}</td>"
@@ -41,11 +47,16 @@ proc getMaintenance {chn p descr} {
 
   set param CYCLIC_INFO_MSG_DIS_UNCHANGED
   if { ! [catch {set tmp $ps($param)}]  } {
+    set cyclicInfo true
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCyclicInfoMsgDisUnChanged}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
+  }
+
+  if {$cyclicInfo == "true"} {
+    append html "[getHorizontalLine]"
   }
 
   set param LOW_BAT_LIMIT
@@ -85,12 +96,30 @@ proc getMaintenance {chn p descr} {
   }
 
   set param ENABLE_ROUTING
+  if { ! [catch {set tmp $ps($param)}]} {
+    if {$devIsHmIPWired == "false"} {
+       incr prn
+       append html "<tr>"
+         append html "<td>\${stringTableEnableRouting}</td>"
+         append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
+       append html "</tr>"
+    }
+  }
+
+  set param DISPLAY_CONTRAST
   if { ! [catch {set tmp $ps($param)}]  } {
      incr prn
-     append html "<tr>"
-       append html "<td>\${stringTableEnableRouting}</td>"
-       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
-     append html "</tr>"
+    array_clear options
+    set i 0
+    for {set val 0} {$val <= 31} {incr val} {
+        set options($val) "$val"
+      incr i;
+    }
+
+    append html "<tr>"
+      append html "<td>\${stringTableDisplayContrast}</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+    append html "</tr>"
   }
 
   set param PERMANENT_FULL_RX
@@ -1218,10 +1247,27 @@ proc getDimmerTransmitter {chn p descr} {
   upvar special_input_id special_input_id
 
   set specialID "[getSpecialID $special_input_id]"
+  set CHANNEL $special_input_id
 
   set html ""
+
+  set prn 0
+
+  set param CHANNEL_OPERATION_MODE
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    array_clear options
+    set options(0) "\${optionInactiv}"
+    set options(1) "\${optionActiv}"
+    append html "<tr><td>\${lblChannelActivInactiv}</td><td>"
+    append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"showDecisionValue(this.value,$chn)\"]
+    append html "</tr></td>"
+  }
+
+
   set param EVENT_DELAY_UNIT
   if { ! [catch {set tmp $ps($param)}] } {
+    incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -1265,7 +1311,7 @@ proc getDimmerTransmitter {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableDimmerFuseDelay}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
 
@@ -1274,7 +1320,7 @@ proc getDimmerTransmitter {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableDimmerOverTempLevel}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
   return $html
@@ -1915,12 +1961,14 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
           # right
           set param SHOW_HUMIDITY
-          incr prn
-          array_clear options
-          set options(0) "\${stringTableClimateControlRegDisplayTempHumT}"
-          set options(1) "\${stringTableClimateControlRegDisplayTempHumTH}"
-          append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">\${stringTableClimateControlRegDisplayTempHum}</td>"
-          append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+          if {! [catch {set tmp $ps($param)}]} {
+            incr prn
+            array_clear options
+            set options(0) "\${stringTableClimateControlRegDisplayTempHumT}"
+            set options(1) "\${stringTableClimateControlRegDisplayTempHumTH}"
+            append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">\${stringTableClimateControlRegDisplayTempHum}</td>"
+            append html "<td name=\"_expertParam\" class=\"hidden j_showHumidity\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+          }
         append html "</tr>"
       }
 

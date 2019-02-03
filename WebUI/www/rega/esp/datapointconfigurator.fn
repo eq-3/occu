@@ -117,6 +117,7 @@ function ::dcCreate()
     var CN_HEATING_CONTROL = "HEATING_CONTROL.";
     var CN_HEATING_CONTROL_HMIP     = "HEATING_CONTROL_HMIP.";
     var CN_HMIP_BUTTON     = "BUTTON_NO_FUNCTION.";
+    var CN_IDENTIFICATION = "IDENTIFICATION.";
     var CN_JALOUSIE        = "JALOUSIE.";
     var CN_LOCK            = "LOCK.";
     var CN_MOTIONDETECTOR  = "MOTIONDETECTOR_TRANSCEIVER.";
@@ -172,10 +173,14 @@ function ::dcCreate()
       object oE = dom.GetObject( sE );
       if( oE )
       {
+
+        ! WriteLine( "<script>console.log('oE.ID(): "#oE.ID()#"');</script>" );
+
         sControlName = oE.MetaData("CONTROL");
-        ! WriteLine( "<script>conInfo('sControlName: "#sControlName#"');</script>" );
+
         if( sControlName )
         {
+          ! WriteLine( "<script>conInfo('sControlName: "#sControlName#"');</script>" );
           !# NONE
           bIsControl = ( sControlName.Find(CN_NONE) > -1 );
           if( bIsControl && (sLastControlName != CN_NONE) )
@@ -819,6 +824,17 @@ function ::dcCreate()
             sLastControlName = CN_BRIGHTNESS_TRANSMITTER;
             Call("/esp/controls/brightness_transmitter.fn::CreateBrightnessTransmitter()");
           }
+
+          !# CN_IDENTIFICATION - HmIPW Identification
+          bIsControl = ( sControlName.Find(CN_IDENTIFICATION) > -1 );
+          if( bIsControl && (sLastControlName != CN_IDENTIFICATION) )
+          {
+            WriteLine( "<script>conInfo('Control CN_IDENTIFICATION found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_IDENTIFICATION;
+            Call("/esp/controls/hmipw_identification.fn::CreateIdentification()");
+          }
+
 
           !# CN_WATER_DETECTION_TRANSMITTER - HmIP
           bIsControl = ( sControlName.Find(CN_WATER_DETECTION_TRANSMITTER) > -1 );

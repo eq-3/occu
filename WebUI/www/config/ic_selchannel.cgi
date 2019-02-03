@@ -786,6 +786,8 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
   global iface_url ise_CHANNELNAMES ise_FUNCTIONS ise_ROOMS
   global step dev_descr_sender dev_descr_receiver iface sender_address receiver_address sender_group
 
+
+
 #cgi_debug -on
 
   upvar $p_realchannels    realchannels
@@ -808,6 +810,8 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
 
   set rowcount 0
   set virtualcount 0
+
+  set HmIPVirtualKeyID "HmIP-RCV-50"
 
   puts "<TBODY id=\"chnListBody\" style=\"display:none\">"
 
@@ -1000,7 +1004,7 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
         set SENTRY(ACTION) "<div onclick=\"Select2ndLinkPartner('$iface_loop', '$dev_descr(ADDRESS)', $dev_descr(DIRECTION));\" class=\"CLASS21904\">\${btnSelect}</div>"
       }
 
-      puts "<tr [expr {$dev_descr(TYPE) == "VIRTUAL_KEY"?"class=\"virtual_key_hidden\"":""} ] >"
+      puts "<tr [expr {($dev_descr(TYPE) == "VIRTUAL_KEY") || ($dev_descr(PARENT_TYPE) == $HmIPVirtualKeyID)?"class=\"virtual_key_hidden\"":""} ] >"
 
       #puts "<script type=\"text/javascript\">console.log(\"$dev_descr(PARENT_TYPE)\");</script>"
 

@@ -625,6 +625,13 @@ proc isHmIP {} {
   return "false"
 }
 
+proc isDevHmIPW {device} {
+  set result "false"
+  if {[string first "HmIPW-" $device] == 0} {
+    set result "true"
+  }
+  return $result
+}
 
 proc isHmIPGroup {devType} {
   global iface
@@ -1151,12 +1158,10 @@ proc put_Header {} {
     if {($iface != $HmIPIdentifier) && ($iface != $HmIPWIdentifier)} {
       catch {
         if {$dev_descr(AVAILABLE_FIRMWARE) != $dev_descr(FIRMWARE)} then {
-          #set    fw_update_rows "<tr><td>Verf&uuml;gbare Version:</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
           set    fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
-          #append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">Update</span></td></tr>"
-          append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+          # Deactivate the update button. The update should be done from the device firmware page.
+          #append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
         } else {
-          #set fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22008\">(Aktuelle Firmwareversion)</td></tr>"
           set fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22008\">\${lblActualFirmwareVersion}</td></tr>"
         }
       }
@@ -1183,7 +1188,8 @@ proc put_Header {} {
 
           "READY_FOR_UPDATE" {
             set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
-            append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+            # Deactivate the update button. The update should be done from the device firmware page.
+            # append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
           }
 
           "UP_TO_DATE" {

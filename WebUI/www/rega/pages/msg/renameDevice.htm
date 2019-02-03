@@ -1,0 +1,43 @@
+<table style="margin: 0 auto;">
+  <tbody>
+    <table style="width: 100%;">
+      <tbody>
+        <tr>
+         <td colspan="2" align="center">
+           <div>${lblDeviceName}</div>
+         </td>
+        </tr>
+
+        <tr>
+          <td width="100%" align="center">
+            <input id="deviceBasisName" style="text-align: right;" onkeyup="showBtnYes(this.value);actualizePreviewChannelNames(this.value);" value=""/> : <input id="partSN" size="4" disabled/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table id="tblChannelList" style="width: 100%; margin-top:2em;" class="hidden">
+      <tbody>
+        <tr>
+          <td colspan="2" align="center">
+            <div>${lblChannelNames}</div>
+          </td>
+        </tr>
+
+        <tr align="center">
+          <td style="background-color:lightgrey; border: 1px solid black;" >
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <div id="channelNames" style="height:auto; max-height: 300px; width:550px; overflow-y: auto;"></div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </tbody>
+</table>

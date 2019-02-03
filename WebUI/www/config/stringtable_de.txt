@@ -471,8 +471,6 @@ DIMMER_TRANSMITTER|ACTIVITY_STATE=DOWN	${stringTableDimmerActivityStateDown}
 DIMMER_TRANSMITTER|ACTIVITY_STATE=UNKNOWN	${stringTableDimmerActivityStateUnknown}
 DIMMER_TRANSMITTER|ACTIVITY_STATE=UP	${stringTableDimmerActivityStateUp}
 DIMMER_TRANSMITTER|ACTIVITY_STATE=STABLE	${stringTableProcessStableBlindDimmerTransmitter}
-DIMMER_TRANSMITTER|PROCESS=NOT_STABLE	${stringTableProcessNotStableDimmerTransmitter}
-DIMMER_TRANSMITTER|PROCESS=STABLE	${stringTableProcessStableBlindDimmerTransmitter}
 DIMMER_TRANSMITTER|LEVEL_STATUS=ERROR	${lblValue} ${stringTableDimmerLevel}: ${lblError}
 DIMMER_TRANSMITTER|LEVEL_STATUS=4	${lblValue} ${stringTableDimmerLevel}: ${lblError}
 DIMMER_TRANSMITTER|LEVEL_STATUS=NORMAL	${lblValue} ${stringTableDimmerLevel}: ${lblNormal}
@@ -483,6 +481,8 @@ DIMMER_TRANSMITTER|LEVEL_STATUS=UNDERFLOW	${lblValue} ${stringTableDimmerLevel}:
 DIMMER_TRANSMITTER|LEVEL_STATUS=3	${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}
 DIMMER_TRANSMITTER|LEVEL_STATUS=UNKNOWN	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
 DIMMER_TRANSMITTER|LEVEL_STATUS=1	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
+DIMMER_TRANSMITTER|PROCESS=NOT_STABLE	${stringTableProcessNotStableDimmerTransmitter}
+DIMMER_TRANSMITTER|PROCESS=STABLE	${stringTableProcessStableBlindDimmerTransmitter}
 DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=DOWN	${stringTableDimmerActivityStateDown}
 DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=UNKNOWN	${stringTableDimmerActivityStateUnknown}
 DIMMER_VIRTUAL_RECEIVER|ACTIVITY_STATE=UP	${stringTableDimmerActivityStateUp}
@@ -507,6 +507,7 @@ DISPLAY_BACKLIGHT_MODE=OFF	${stringTableDisplayBacklightModeOff}
 DISPLAY_BACKLIGHT_MODE=ON	${stringTableDisplayBacklightModeOn}
 DISPLAY_BACKLIGHT_TIME	${stringTableDisplayBacklightTime}
 DISPLAY_BRIGHTNESS	${stringTableDisplayBrightness}
+DISPLAY_CONTRAST	${stringTableDisplayContrast}
 DISPLAY_ENERGYOPTIONS	${stringTableDisplayEnergyOptions}
 DISPLAY_INVERTING	${stringTableDisplayInverting}
 DISPLAY|ALARM_COUNT	${stringTableDisplayAlarmCount}
@@ -636,6 +637,9 @@ ERROR=NO_ERROR	${stringTableErrorNoError}
 ERROR_BATTERY=FALSE	${stringTableBatteryFailure}
 ERROR_BATTERY=TRUE	${stringTableBatteryOk}
 ERROR_CODE	${stringTableErrorCode}
+ERROR_COPROCESSOR	${stringTableErrorCoProcessor}
+ERROR_COPROCESSOR=TRUE	${stringTableErrorCoprocessorTrue}
+ERROR_COPROCESSOR=FALSE	${stringTableErrorCoprocessorFalse}
 ERROR_NON_FLAT_POSITIONING	${stringTableErrorNonFlatPositioning}
 ERROR_NON_FLAT_POSITIONING=FALSE	${stringTableErrorNonFlatPositioningFalse}
 ERROR_NON_FLAT_POSITIONING=TRUE	${stringTableErrorNonFlatPositioningTrue}
@@ -649,6 +653,9 @@ ERROR_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
 ERROR_POWER=TRUE	${stringTableErrorPowerTrue}
 ERROR_REDUCED=FALSE	${stringTableErrorReducedFalse}
 ERROR_REDUCED=TRUE	${stringTableErrorReducedTrue}
+ERROR_RESTART_NEEDED	${stringTableErrorRestartNeeded}
+ERROR_RESTART_NEEDED=TRUE	${stringTableErrorRestartNeededTrue}
+ERROR_RESTART_NEEDED=FALSE	${stringTableErrorRestartNeededFalse}
 ERROR_SABOTAGE=FALSE	${stringTableErrorSabotageFalse}
 ERROR_SABOTAGE=NO_ERROR	${stringTableSabotageContactOk}
 ERROR_SABOTAGE=SABOTAGE	${stringTableSabotage}

@@ -67,7 +67,7 @@ jQuery.extend(true,langJSON, {
     "chType_MOTION_DETECTOR" : "Bewegungsmelder",
     "chType_MOTIONDETECTOR_TRANSCEIVER" : "Bewegungsmelder",
 
-    "chType_MULTI_MODE_INPUT_TRANSMITTER" : "Homematic IP Wired<br/>Eingangsmodul",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER" : "Eingangsmodul",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_0" : "Kanal deaktiviert",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Tasterkanal",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_2" : "Schalter",
