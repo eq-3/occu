@@ -222,7 +222,7 @@
               dlgHtml += translateKey("thAccessPointName")+":";
             dlgHtml += "</td>";
             dlgHtml += "<td class='td2'>";
-              dlgHtml += "<input id='name' type='text' size='32' value='${accessPoint.name}' onblur='storeNewName(this.value)'>";
+              dlgHtml += "<input id='name' type='text' size='32' value='${accessPoint.name}' onkeyup='storeNewName(this.value)' onpaste='var self=this; setTimeout(function() {storeNewName(self.value)},10);'>";
             dlgHtml += "</td>";
           dlgHtml += "</tr>";
 
@@ -231,7 +231,7 @@
               dlgHtml += translateKey("accessPointPassphrase")+":";
             dlgHtml += "</td>";
             dlgHtml += "<td class='td2'>";
-              dlgHtml += "<input id='passphrase' type='password' size='32' onkeyup='storePassphrase(this.value)'>";
+              dlgHtml += "<input id='passphrase' type='password' size='32' onkeyup='storePassphrase(this.value)' onpaste='var self=this; setTimeout(function() {storePassphrase(self.value)},10);'>";
               dlgHtml += "<div style='font-weight:normal; font-size:11px !important;text-align:center'>"+translateKey("accessPointPassphraseA")+"</div>"
             dlgHtml += "</td>";
 

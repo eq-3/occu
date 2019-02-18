@@ -1049,8 +1049,8 @@ jQuery.extend(true,langJSON, {
     "stringTableStateResetReceiverTitle" : "Suppression of motion detection",
     "stringTableConditionSwitchTransmitter" : "Transmitter decision value",
     "stringTablePassageDetectorCounterTransmitterTitle" : "Passage sensor",
-    "stringTableErrorUndervoltageFalse" : "Operating voltage OK, relay can be switched",
-    "stringTableErrorUndervoltageTrue" : "Operating voltage not OK, relay cannot be switched",
+    "stringTableErrorUndervoltageFalse" : "Operating voltage OK, output can be switched",
+    "stringTableErrorUndervoltageTrue" : "Operating voltage not OK, output cannot be switched",
     "stringTableErrorUndervoltageDimmerFalse" : "Operating voltage OK",
     "stringTableErrorUndervoltageDimmerTrue" : "Operating voltage not OK",
     "stringTableConditionSwitchTransmitterWindSpeed" : "Wind velocity sensor",
@@ -1152,6 +1152,8 @@ jQuery.extend(true,langJSON, {
     "stringTableOldValueSoundFile" : "Title last played",
     "stringTableDoNotCareSoundFile" : "Proceed with current title",
     "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
+
+    "stringTableOptimumStartStop" : "Optimum Start/Stop",
 
     "noMoreKeys" : ""
   }

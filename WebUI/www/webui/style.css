@@ -5011,8 +5011,8 @@ application {
 
 .CLASS02508 {
 	background-color:$_(activeBackground);
-	width:520px;
-	max-width:502px;
+	width:100%;
+	/*max-width:502px;*/
 	/*height:120px;*/
 	height:auto;
 	border:solid 1px $_(black); /* black */

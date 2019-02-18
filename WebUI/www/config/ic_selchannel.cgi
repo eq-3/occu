@@ -1059,8 +1059,8 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
 
       incr rowcount
       
-      if {$dev_descr(TYPE) == "VIRTUAL_KEY"} then { incr virtualcount }
-      
+      if {($dev_descr(TYPE) == "VIRTUAL_KEY") || ($dev_descr(PARENT_TYPE) == $HmIPVirtualKeyID)} then { incr virtualcount }
+
       array_clear SENTRY
       array_clear dev_descr
     }

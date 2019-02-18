@@ -3,59 +3,62 @@ jQuery.extend(true,langJSON, {
 
     "comment" : "This is for the Smoke-Detector certification",
 
-    "checkSmokeDetectorSelfTest" : "en* Bitte vergewissern Sie sich, dass der Rauchmelder korrekt arbeitet, indem Sie einen Selbsttest durch Druck auf die Bedientaste durchf%FChren!",
-    "hintActivateDetectorSelfTest" : "en* Das Firmware-Update wurde erfolgreich aufgespielt. ",
-    "hintReInclusionDetectorFailed" : "en* Beim Aufspielen des Firmware-Updates ist ein Problem aufgetreten. ",
+    "checkSmokeDetectorSelfTest" : "To make sure the smoke detector is working properly, please  perform a self-test by pressing the operating key.",
+    "hintActivateDetectorSelfTest" : "The firmware update was successful. ",
+    "hintReInclusionDetectorFailed" : "A problem occurred while updating the firmware. ",
 
     "lblRename" : "Rename",
-    "askRenameAllChannels" : "en* Standard-Kanalnamen automatisiert vergeben?",
-    "lblDeviceName" : "en* Ger%E4tename",
-    "lblChannelNames" : "en* Vorschau Kanalnamen",
+    "askRenameAllChannels" : "Automatically assign standard channel names?",
+    "lblDeviceName" : "Device description",
+    "lblChannelNames" : "Preview of channel names",
 
     "stringTableDisplayContrast" : "Display contrast",
 
-    "dialogFirmwareUpdateUnknownError" : "en* Es ist ein unbekannter Fehler aufgetreten<br/><br/>Bitte %FCberpr%FCfen Sie, ob das Ger%E4t erreichbar ist.",
+    "dialogFirmwareUpdateUnknownError" : "An unknown error has occurred<br/><br/>Please check whether the device can be accessed.",
 
-    "lblHmIPWIdentification" : "en* Identification",
-    "lbDisplayBacklight" : "en* Beleuchtung<br/>Display",
-    "lblLightingKeyVisual" : "en* Beleuchtung<br/>Systemtaste",
+    "lblHmIPWIdentification" : "Identification",
+    "lbDisplayBacklight" : "Lighting<br/>Display",
+    "lblLightingKeyVisual" : "Lighting<br/>System key",
 
-    "optionUnit10SShort" : "en* 10 Sec",
-    "optionUnit30SShort" : "en* 30 Sec",
-    "optionUnit1MShort" : "en* 1 Min",
-    "optionUnit5MSShort" : "en* 5 Min",
-    "optionUnit10MShort" : "en* 10 Min",
-    "optionUnit30MShort" : "en* 30 Min",
+    "optionUnit10SShort" : "10 s",
+    "optionUnit30SShort" : "30 s",
+    "optionUnit1MShort" : "1 min",
+    "optionUnit5MSShort" : "5 min",
+    "optionUnit10MShort" : "10 min",
+    "optionUnit30MShort" : "30 min",
 
-    "stringTableErrorCoProcessor" : "en* Der Kanal ist nicht ansprechbar.",
-    "stringTableErrorRestartNeeded" : "en * Es ist ein Neutstart des Ger%E4tes n%F6tig.",
+    "stringTableErrorCoProcessor" : "The channel cannot be accessed.",
+    "stringTableErrorRestartNeeded" : "The device must be restarted.",
 
     "helpAccessPointOffline" :
-      "en* F%FCr die <u>Inbetriebnahme</u> des Homematic IP Access Points wird <b>immer</b> eine Internetverbindung ben%F6tigt.<br/><br/>" +
-      "Nach erfolgreicher Inbetriebnahme - die Systemtaste leuchtet t%FCrkis -, kann der Offlinebetrieb genutzt werden, " +
-      "f%FCr den dann keine Internetverbindung mehr ben%F6tigt wird.<br/><br/>" +
-      "Wenn Sie den Offlinebetrieb nutzen m%F6chten, verwenden Sie zum Anlernen neuer Ger%E4te im Anlerndialog das Feld <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet +"</b>" +
-      "Dazu geben Sie den KEY und die SGTIN des dem Ger%E4t beigef%FCgten Stickers ein.",
+    "An internet connection is needed to <u>commission</u> the Homematic IP Wired Access Point.<br/><br/>" +
+    "Following successful commissioning (the system key is lit turquoise) the system can be operated offline. Operation then no longer requires an internet connection.<br/><br/>" +
+    "If you would like to use offline operation and train additional wired devices, use the training dialogue in the field <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet + "</b>" +
+    "Enter the KEY and the SGTIN from the device label.",
 
-    "comment" : "Bis hier in Resource.xls übertragen",
+    "drapMaxCurrentBus" : "Maximum current consumption by the bus",
+    "drapHelpMaxCurrentBus" : "Configuration of the parameter is dependent on the power pack.",
+    "drapBusConfig" : "Bus configuration",
+    "drapHelpBusConfig" : "Configuration of the parameter is dependent on the bus topology.",
 
-    "drapMaxCurrentBus" : "en* Maximale Stromaufnahme des Bus",
-    "drapHelpMaxCurrentBus" : "en* Dieser Wert muss in Abh%E4ngigkeit des verwendeten Netzteil konfiguriert werden.",
-    "drapBusConfig" : "en* Buskonfiguration",
-    "drapHelpBusConfig" : "en* Dieser Wert muss in Abh%E4ngigkeit der verwendeten Bustopologie konfiguriert werden",
+    "optionRingMode" : "Ring topology",
+    "optionTwoSeparateBusSystems" : "Two separate bus strings",
 
-    "optionRingMode" : "en* Ringtopologie",
-    "optionTwoSeparateBusSystems" : "en* Zwei getrennte Bussysteme",
-
-    "AccessPointConfigurationFinished" : "en* Die Einstellungen wurden erfolgreich %FCbernommen.",
+    "AccessPointConfigurationFinished" : "Settings successfully saved.",
 
     "dialogMigrationRCV50Title" : langJSON.en.dialogHint,
 
-    "dialogMigrationRCV50" : "en* In diesem Release ist es erstmals m%F6glich, auch f%FCr Homematic IP 50 virtuelle Fernbedienungskan%E4le zu nutzen.<br/><br/>" +
-    "Damit diese vollumf%E4nglich genutzt werden k%F6nnen, ist es erforderlich, Homematic IP Sensoren, welche in Programmen eingebunden sind, umzukonfigurieren. " +
-    "Die %C4nderungen der Konfiguration werden automatisch im Hintergrund durchgef%FChrt. Dies macht sich durch entsprechende Service-Mitteilungen \"Konfigurationsdaten stehen zur %DCbertragung an\" bemerkbar. " +
-    "Bitte nutzen sie die Virtuellen Fernbedienungskan%E4le erst, nachdem die Konfigurationsdaten %FCbertragen wurden. " +
-    "Bestehende Programme und Verkn%FCpfungen werden von den %C4nderungen nicht beeinflusst.",
+    "dialogMigrationRCV50" : "Starting with this release, 50 virtual remote operation channels can also be used for Homematic IP for the first time.<br/><br/>" +
+    "To enable them to be used in full, trained Homematic IP sensors already set in the programs will need to be reconfigured. " +
+    "This configuration runs automatically in the background, with appropriate service messages displayed (\"Configuration data ready for transfer\"). " +
+    "Please do not use the virtual remote operation channels until the configuration data has been transferred.<br/><br/>" +
+    "The changes do not impact existing programs and links.",
+
+    "btnAccessPointConfig" : "Configuration",
+
+    "lblQueryConfig" : "Query configuration",
+    "lblSetConfig" : "Save configuration",
+    "lblConfigNotChanged" : "No changes were made to the configuration.",
 
     "noMoreKeys" : ""
   }

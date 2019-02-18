@@ -1039,6 +1039,7 @@ jQuery.extend(true, langJSON, {
 
     "lblPassageDetectorNoParams" : "No parameters available.<br/>Please use channel 2 for status display.",
 
+    "lblExternal" : "External",
     "lblNormal" : "Normal",
     "lblOverflow" : "Overflow",
     "lblUnderflow" : "Underflow",

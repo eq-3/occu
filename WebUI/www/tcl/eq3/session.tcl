@@ -41,40 +41,23 @@ proc session_getHttpHeader { pRequest headerName } {
 #
 # @throws "create", falls keine Session-Id erstellt werden konnte
 #                   (z.B.: zu viele gleichzeitige Sitzungen)
-# @throws "id", falls die erzeugte Session-Id ungültig ist
-#               (das sollte eigentlich niemals geschehen)
 # @throws "credentials", falls Benutzername oder Passwort falsch sind
 ##
 proc session_login { username password } {
   global LOGIN_URL
-  
-  # Schritt 1: Session erstellen
-  
-  set request  [::http::geturl $LOGIN_URL]
-  set location [session_getHttpHeader $request location]
-  ::http::cleanup $request
+ 
+  # Schritt 1: Benutzeranmeldung und Session erstellen
 
-  if { ![regexp {sid=@([^@]*)@} $location dummy sid] } then {
-    error "create"
-  }
-
-  # Schritt 2: Benutzeranmeldung
-  
-  set url   "$LOGIN_URL?sid=@$sid@"
-  set query [::http::formatQuery tbUsername $username tbPassword $password]
-  
-  set request  [::http::geturl $url -query $query]
+  set request  [::http::geturl $LOGIN_URL -query [::http::formatQuery tbUsername $username tbPassword $password]]
   set location [session_getHttpHeader $request location]
   set code     [::http::code $request]
   ::http::cleanup $request
-  
-  if { -1 != [string first 500 $code] } then {
-    session_logout $sid
-    error "id"
+
+  if { -1 != [string first 503 $code] } then {
+    error "create"
   }
-  
-  if { -1 != [string first error $location] } then {
-    session_logout $sid
+
+	if { ![regexp {sid=@([^@]*)@} $location dummy sid] } then {
     error "credentials"
   }
   

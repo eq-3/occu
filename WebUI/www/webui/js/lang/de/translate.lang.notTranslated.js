@@ -5,14 +5,14 @@ jQuery.extend(true,langJSON, {
 
     "checkSmokeDetectorSelfTest" : "Bitte vergewissern Sie sich, dass der Rauchmelder korrekt arbeitet, indem Sie einen Selbsttest durch Druck auf die Bedientaste durchf%FChren!",
     "hintActivateDetectorSelfTest" : "Das Firmware-Update wurde erfolgreich aufgespielt. ",
-    "hintReInclusionDetectorFailed" : "Beim Aufspielen des Firmware-Updates ist ein Problem aufgetreten. ",
+    "hintReInclusionDetectorFailed" : "Beim Firmware-Update ist ein Problem aufgetreten.  ",
 
     "lblRename" : "Umbenennen",
     "askRenameAllChannels" : "Standard-Kanalnamen automatisiert vergeben?",
     "lblDeviceName" : "Ger%E4tename",
     "lblChannelNames" : "Vorschau Kanalnamen",
 
-    "stringTableDisplayContrast" : "Display Kontrast",
+    "stringTableDisplayContrast" : "Displaykontrast",
 
     "dialogFirmwareUpdateUnknownError" : "Es ist ein unbekannter Fehler aufgetreten<br/><br/>Bitte %FCberpr%FCfen Sie, ob das Ger%E4t erreichbar ist.",
 
@@ -20,43 +20,48 @@ jQuery.extend(true,langJSON, {
     "lbDisplayBacklight" : "Beleuchtung<br/>Display",
     "lblLightingKeyVisual" : "Beleuchtung<br/>Systemtaste",
 
-    "optionUnit10SShort" : "10 Sec",
-    "optionUnit30SShort" : "30 Sec",
-    "optionUnit1MShort" : "1 Min",
-    "optionUnit5MSShort" : "5 Min",
-    "optionUnit10MShort" : "10 Min",
-    "optionUnit30MShort" : "30 Min",
+    "optionUnit10SShort" : "10 s",
+    "optionUnit30SShort" : "30 s",
+    "optionUnit1MShort" : "1 min",
+    "optionUnit5MSShort" : "5 min",
+    "optionUnit10MShort" : "10 min",
+    "optionUnit30MShort" : "30 min",
 
-    "stringTableErrorCoProcessor" : "Der Kanal ist nicht ansprechbar.",
+    "stringTableErrorCoProcessor" : "Der Kanal ist nicht erreichbar.",
     "stringTableErrorRestartNeeded" : "Es ist ein Neutstart des Ger%E4tes n%F6tig.",
 
     "helpAccessPointOffline" :
-      "F%FCr die <u>Inbetriebnahme</u> des Homematic IP Access Points wird <b>immer</b> eine Internetverbindung ben%F6tigt.<br/><br/>" +
-      "Nach erfolgreicher Inbetriebnahme - die Systemtaste leuchtet t%FCrkis -, kann der Offlinebetrieb genutzt werden, " +
-      "f%FCr den dann keine Internetverbindung mehr ben%F6tigt wird.<br/><br/>" +
-      "Wenn Sie den Offlinebetrieb nutzen m%F6chten, verwenden Sie zum Anlernen neuer Ger%E4te im Anlerndialog das Feld <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet +"</b>" +
-      "Dazu geben Sie den KEY und die SGTIN des dem Ger%E4t beigef%FCgten Stickers ein.",
+      "F%FCr die <u>Inbetriebnahme</u> des Homematic IP Access Points wird eine Internetverbindung ben%F6tigt.<br/><br/>" +
+      "Nach erfolgreicher Inbetriebnahme (die Systemtaste leuchtet t%FCrkis), kann der Offlinebetrieb genutzt werden. " +
+      "F%FCr den weiteren Betrieb wird nun keine Internetverbindung mehr ben%F6tigt.<br/><br/>" +
+      "Wenn Sie den Offlinebetrieb nutzen und weitere Wired Ger%E4te anlernen m%F6chten, verwenden Sie im Anlerndialog das Feld <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet +"</b>" +
+      "Geben Sie den KEY und die SGTIN des Ger%E4teaufklebers ein.",
 
-    "comment" : "Bis hier in Resource.xls %FCbertragen",
 
-    "drapMaxCurrentBus" : "Maximale Stromaufnahme des Bus",
-    "drapHelpMaxCurrentBus" : "Dieser Wert muss in Abh%E4ngigkeit des verwendeten Netzteil konfiguriert werden.",
+    "drapMaxCurrentBus" : "Maximale Stromaufnahme<br/>des Bus",
+    "drapHelpMaxCurrentBus" : "Dieser Wert muss in Abh%E4ngigkeit des verwendeten Netzteils konfiguriert werden.",
     "drapBusConfig" : "Buskonfiguration",
-    "drapHelpBusConfig" : "Dieser Wert muss in Abh%E4ngigkeit der verwendeten Bustopologie konfiguriert werden",
+    "drapHelpBusConfig" : "Dieser Wert muss in Abh%E4ngigkeit der verwendeten Bustopologie konfiguriert werden.",
 
     "optionRingMode" : "Ringtopologie",
-    "optionTwoSeparateBusSystems" : "Zwei getrennte Bussysteme",
+    "optionTwoSeparateBusSystems" : "Zwei getrennte Busstr%E4nge",
 
     "AccessPointConfigurationFinished" : "Die Einstellungen wurden erfolgreich %FCbernommen.",
 
     "dialogMigrationRCV50Title" : langJSON.de.dialogHint,
 
-    "dialogMigrationRCV50" : "In diesem Release ist es erstmals m%F6glich, auch f%FCr Homematic IP 50 virtuelle Fernbedienungskan%E4le zu nutzen.<br/><br/>" +
-    "Damit diese vollumf%E4nglich genutzt werden k%F6nnen, ist es erforderlich, Homematic IP Sensoren, welche in Programmen eingebunden sind, umzukonfigurieren. " +
-    "Die %C4nderungen der Konfiguration werden automatisch im Hintergrund durchgef%FChrt. Dies macht sich durch entsprechende Service-Mitteilungen \"Konfigurationsdaten stehen zur %DCbertragung an\" bemerkbar. " +
-    "Bitte nutzen sie die Virtuellen Fernbedienungskan%E4le erst, nachdem die Konfigurationsdaten %FCbertragen wurden. " +
+    "dialogMigrationRCV50" : "Ab diesem Release ist es erstmals m%F6glich, auch f%FCr Homematic IP 50 virtuelle Fernbedienungskan%E4le zu nutzen.<br/><br/>" +
+    "Damit diese vollumf%E4nglich genutzt werden k%F6nnen, m%FCssen angelernte Homematic IP Sensoren, welche in Programmen eingebunden sind, umkonfiguriert werden. " +
+    "Diese Konfiguration wird automatisch im Hintergrund durchgef%FChrt und durch entsprechende Service-Mitteilungen (\"Konfigurationsdaten stehen zur %DCbertragung an\") angezeigt. " +
+    "Bitte nutzen sie die virtuellen Fernbedienungskan%E4le erst, nachdem die Konfigurationsdaten %FCbertragen wurden. " +
     "Bestehende Programme und Verkn%FCpfungen werden von den %C4nderungen nicht beeinflusst.",
-    
+
+    "btnAccessPointConfig" : "Konfiguration",
+
+    "lblQueryConfig" : "Konfiguration abfragen",
+    "lblSetConfig" : "Konfiguration speichern",
+    "lblConfigNotChanged" : "Es wurde keine %C4nderung an der Konfiguration vorgenommen.",
+
     "noMoreKeys" : ""
   }
 });

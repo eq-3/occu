@@ -694,7 +694,7 @@ jQuery.extend(true,langJSON, {
       "<div>Diese Einstellung hat nur Auswirkungen auf gro&szlig;e Zeitr%E4ume (Woche/Monat/Jahr)</div>",
     "lblSettingsDeviceFirmware0" : "%DCbersicht installierter Ger%E4te-Firmware-Dateien",
     "lblSettingsDeviceFirmware1" : "Ger%E4te-Firmware hinzuf%FCgen",
-    "lblSettingsDeviceFirmware2" : "Ger%E4te-Firmware enfernen",
+    "lblSettingsDeviceFirmware2" : "Ger%E4te-Firmware entfernen",
     "lblSettingsDeviceFirmware3" : "Changelog der Ger%E4te-Firmware betrachten",
     "hintDevFwAlreadyUploaded" : "" +
       "Die aktuellste Firmware des Ger%E4tes befindet sich bereits auf der " + HMIdentifier.de.CCUShortName + ".\n"+
@@ -1041,6 +1041,7 @@ jQuery.extend(true,langJSON, {
 
     "lblPassageDetectorNoParams" : "Es sind keine Parameter vorhanden.<br/>Zur Statusanzeige bitte Kanal 2 verwenden.",
 
+    "lblExternal" : "Extern",
     "lblNormal" : "Normal",
     "lblOverflow" : "%DCberlauf",
     "lblUnderflow" : "Unterlauf",
@@ -1112,7 +1113,7 @@ jQuery.extend(true,langJSON, {
 
     "AccessPointAssignmentFailedNotKnown" : "Der Access Point konnte nicht hinzugef%FCgt werden. F%FChren Sie die Suche erneut durch.",
     "AccessPointAssignmentFailedPassphraseCouldNotChecked" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
-    "AccessPointAssignmentFailedPassphraseInvalidValue" : "Das Passwort des Access Points ist ungültig.",
+    "AccessPointAssignmentFailedPassphraseInvalidValue" : "Das Passwort des Access Points ist ung%FCltig.",
     "AccessPointAssignmentGetConfigurationParameterDescription" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
     "AccessPointAssignmentGetConfigurationParameter" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
     "AccessPointAssignmentConfigurationParameterNotSupported" : "Die Firmware Ihres Access Points unterst%FCtzt diese Funktion nicht. Aktualisieren Sie die Firmware auf die neuste Version.",

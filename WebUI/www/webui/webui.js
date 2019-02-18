@@ -4548,6 +4548,7 @@ elvST['OLD_LEVEL'] = '${stringTableDimmerOldLevel}';
 elvST['ON_TIME'] = '${stringTableDimmerOnTime}';
 elvST['OPERATING_VOLTAGE'] = '${stringTableOperationVoltage}';
 elvST['OPERATING_VOLTAGE_STATUS'] = '${stringTableOperationVoltage}';
+elvST['OPERATING_VOLTAGE_STATUS=EXTERNAL'] = '${lblValue} ${stringTableOperationVoltage}: ${lblExternal}';
 elvST['OPERATING_VOLTAGE_STATUS=NORMAL'] = '${lblValue} ${stringTableOperationVoltage}: ${lblNormal}';
 elvST['OPERATING_VOLTAGE_STATUS=0'] = '${lblValue} ${stringTableOperationVoltageState}: ${lblNormal}';
 elvST['OPERATING_VOLTAGE_STATUS=UNKNOWN'] = '${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}';
@@ -6004,11 +6005,12 @@ function showSecurityDialog() {
         if (action == 1) {
           WebUI.resize();
           jQuery(".Layer0").show();
+          homematic("CCU.setSecurityHint");
           if (getProduct() >= 3) {
+            WebUI.enter(StartPage);
             new InstallWizard();
           } else {
             WebUI.enter(StartPage);
-            homematic("CCU.setSecurityHint");
           }
         }
       }, "html");
@@ -6017,9 +6019,6 @@ function showSecurityDialog() {
     req.fail(function(data) {
       conInfo("Security  not available");
     });
-
-
-
   }
 };
 
@@ -6431,15 +6430,32 @@ WebUI = Singleton.create({
       if (getProduct() >= 3) {
 
         if (! homematic('CCU.existsFile', {'file': LegacyAPIMigrationDialog.CONFIRM_FILE})) {
-          var dlgAPIMigration = new LegacyAPIMigrationDialog(translateKey("dialogMigrationRCV50Title"), translateKey("dialogMigrationRCV50"), function (result) {
-            if (result == this.RESULT_YES) {
-              homematic("CCU.createFile", {'file': LegacyAPIMigrationDialog.CONFIRM_FILE}, function (result) {
-                conInfo("createFile "+ LegacyAPIMigrationDialog.CONFIRM_FILE+" - result: " + result);
-              });
+
+          // Get the number of HmIP devices without the HmIP-RCV-50
+          var countHmIPDevices = 0;
+          homematic("Interface.listDevices", {"interface": "HmIP-RF"}, function (deviceList) {
+            if (deviceList) {
+              for (var i = 0; i < deviceList.length; i++) {
+                var device = deviceList[i];
+                if (device.children.length > 0 && (device.type != "HmIP-RCV-50")) {
+                  countHmIPDevices++;
+                }
+              }
+
+              // When the number of HmIP devices is > 0 (this is not the case with a factory new CCU) then show HmIP-RCV-50 migration hint the following hint.
+              if (countHmIPDevices > 0) {
+                MessageBox.show(translateKey("dialogMigrationRCV50Title"), translateKey("dialogMigrationRCV50"), function() {
+                  homematic("CCU.createFile", {'file': LegacyAPIMigrationDialog.CONFIRM_FILE}, function (result) {
+                    conInfo("createFile " + LegacyAPIMigrationDialog.CONFIRM_FILE + " - result: " + result);
+                  });
+                }, 600, 200);
+              } else {
+                homematic("CCU.createFile", {'file': LegacyAPIMigrationDialog.CONFIRM_FILE}, function (result) {
+                  conInfo("createFile " + LegacyAPIMigrationDialog.CONFIRM_FILE + " - result: " + result);
+                });
+              }
             }
-          }, "html");
-          dlgAPIMigration.btnNoHide();
-          dlgAPIMigration.btnTextYes(translateKey("btnOk"));
+          });
         }
 
         var usrPwd = homematic('User.getUserPWD', {'userID': userId});
@@ -8960,7 +8976,15 @@ Channel = Class.create({
   {
     return homematic("Channel.listProgramIds", {"id": this.id});
   },
-  
+
+  /**
+   * Liefert eine Liste sämtlicher Programme (Ids), die den Kanal verwenden
+   **/
+  hasProgramIds: function()
+  {
+    return homematic("Channel.hasProgramIds", {"id": this.id});
+  },
+
   /**
    * Ermittelt, ob der Kanal den Funktionstest unterstützt.
    **/

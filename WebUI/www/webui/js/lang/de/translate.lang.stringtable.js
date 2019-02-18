@@ -1051,8 +1051,8 @@ jQuery.extend(true,langJSON, {
     "stringTableStateResetReceiverTitle" : "Unterdr%FCckung Bewegungserkennung",
     "stringTableConditionSwitchTransmitter" : "Sender Entscheidungswert",
     "stringTablePassageDetectorCounterTransmitterTitle" : "Durchgangsz%E4hler",
-    "stringTableErrorUndervoltageFalse" : "Betriebsspannung ok, Relais kann geschaltet werden",
-    "stringTableErrorUndervoltageTrue" : "Betriebsspannung nicht ok, Relais kann nicht geschaltet werden",
+    "stringTableErrorUndervoltageFalse" : "Betriebsspannung ok, Ausgang kann geschaltet werden",
+    "stringTableErrorUndervoltageTrue" : "Betriebsspannung nicht ok, Ausgang kann nicht geschaltet werden",
     "stringTableErrorUndervoltageDimmerFalse" : "Betriebsspannung OK",
     "stringTableErrorUndervoltageDimmerTrue" : "Betriebsspannung nicht OK",
     "stringTableConditionSwitchTransmitterWindSpeed" : "Windgeschwindigkeitssensor",
@@ -1154,6 +1154,8 @@ jQuery.extend(true,langJSON, {
     "stringTableOldValueSoundFile" : "Zuletzt gespielter Titel",
     "stringTableDoNotCareSoundFile" : "Mit dem aktuellen Titel fortfahren",
     "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
+
+    "stringTableOptimumStartStop" : "Optimum Start/Stopp",
 
     "noMoreKeys" : ""
 

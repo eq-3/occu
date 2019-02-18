@@ -40,37 +40,19 @@ proc getHttpHeader { pRequest headerName } {
 set username $args(username)
 set password $args(password)
 
-# Schritt 1: Session erstellen
+# Schritt 1: Benutzeranmeldung und Session erstellen
 
-set request  [::http::geturl $LOGIN_URL]
-set location [getHttpHeader $request location]
-::http::cleanup $request
-
-if { ![regexp {sid=@([^@]*)@} $location dummy sid] } then {
-  jsonrpc_error 501 "too many sessions"
-}
-
-# Schritt 2: Benutzeranmeldung
-
-set url   "$LOGIN_URL?sid=@$sid@"
-set query [::http::formatQuery tbUsername $username tbPassword $password]
-  
-set request  [::http::geturl $url -query $query]
+set request  [::http::geturl $LOGIN_URL -query [::http::formatQuery tbUsername $username tbPassword $password]]
 set location [getHttpHeader $request location]
 set code     [::http::code $request]
 ::http::cleanup $request
-  
-if { -1 != [string first 500 $code] } then {
-  hmscript "system.ClearSessionID(\"$sid\");"
-  jsonrpc_error 501 "invalid session id"
+
+if { -1 != [string first 503 $code] } then {
+  jsonrpc_error 503 "service not available"
 }
-  
-if { -1 != [string first error $location] } then {
-  hmscript "system.ClearSessionID(\"$sid\");"
-  jsonrpc_error 502 "invalid username oder password"
+
+if { ![regexp {sid=@([^@]*)@} $location dummy sid] } then {
+  jsonrpc_error 501 "invalid credentials or too many sessions"
 }
-  
+
 jsonrpc_response [json_toString $sid]
-
-
-

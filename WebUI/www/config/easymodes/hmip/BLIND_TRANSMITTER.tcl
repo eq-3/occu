@@ -122,7 +122,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
              puts "hintIndicator += 1;"
           puts "}"
 
-          puts "if ((oChannel.listProgramIds().length > 0) || (oChannelVirtA.listProgramIds().length > 0) || (oChannelVirtB.listProgramIds().length > 0) || (oChannelVirtC.listProgramIds().length > 0)) {"
+          puts "if ((oChannel.hasProgramIds()) || (oChannelVirtA.hasProgramIds()) || (oChannelVirtB.hasProgramIds()) || (oChannelVirtC.hasProgramIds())) {"
             puts "hintIndicator += 2;"
           puts "}"
 
@@ -178,6 +178,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
           puts "\}"
 
           puts "var tmpChannelMode = \"blind\";"
+          puts "if (typeof arRealChannelElms != 'object') {arRealChannelElms = \[\];}"
           puts "if (typeof arModeElms != 'object') {arModeElms = \[\];}"
 
           puts "window.setTimeout(function() {jQuery(\"\#$addressID\").val(devMode).prop('selected',true);},50);"
@@ -204,6 +205,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
           puts "var devAddress = address.split(\":\")\[0\],"
           puts "chnAddress;"
+
+          puts "arRealChannelElms.push(address);"
 
           puts "for(var x = 0; x <= 3; x++) \{"
             puts "chAddress = devAddress + \":\" + (parseInt(chn) + x);"
@@ -242,7 +245,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         puts "\}"
 
         puts "setReferenceRunningTimeSlatsValue = function() \{"
-          puts "jQuery.each(arModeElms, function(index, chAddress) \{"
+          puts "jQuery.each(arRealChannelElms, function(index, chAddress) \{"
             puts "var elmID = \"#modeSelector_\" + chAddress.replace(\":\",\"_\"),"
             puts "elmVal = jQuery(elmID).val();"
 
@@ -253,6 +256,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
             puts "\}"
           puts "\});"
 
+          puts "delete arRealChannelElms;"
           puts "delete arModeElms;"
 
         puts "\}"

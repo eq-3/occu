@@ -96,7 +96,7 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_SENSOR_Ext" : "External alarm",
     "chType_SWITCH_SENSOR_Int" : "Internal alarm",
     "chType_SWITCH_TRANSMIT" : "Connection partner<br/>switch actuator",
-    "chType_SWITCH_TRANSMITTER" : "Status report relay",
+    "chType_SWITCH_TRANSMITTER" : "Status report output",
     "chType_SWITCH_TRANSMITTER_OC" : "Status report relay OC-Output",
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Switch actuator",
     "chType_SWITCH_WEEK_PROFILE" : "Weekly program",

@@ -73,7 +73,7 @@ proc getMaintenance {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableLocalResetDisable}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
   }
 
@@ -91,7 +91,7 @@ proc getMaintenance {chn p descr} {
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableRouterModuleEnabled}</td>"
-       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
      append html "</tr>"
   }
 
@@ -101,7 +101,7 @@ proc getMaintenance {chn p descr} {
        incr prn
        append html "<tr>"
          append html "<td>\${stringTableEnableRouting}</td>"
-         append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param]</td>"
+         append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
        append html "</tr>"
     }
   }
@@ -328,7 +328,7 @@ proc getGenericInputTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param DBL_PRESS_TIME
@@ -432,6 +432,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   set param EVENT_DELAY_UNIT
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
+    set eventDelayPrn $prn
     append html "<tr name=\"multiModeInputTransceiverEventDelay_$chn\">"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -448,7 +449,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
 # ** KEY **
@@ -525,42 +526,62 @@ proc getMultiModeInputTransmitter {chn p descr address} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableContactBoost}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append html "</tr>"
   }
-
-
 
   append html "<script type=\"text/javascript\">"
 
     append html "showHideKeyParams = function(mode, ch) {"
-      append html "var elmEventDelay = jQuery(\"\[name='multiModeInputTransceiverEventDelay_\"+ch+\"'\]\");"
-      append html "var elmKey = jQuery(\"\[name='multiModeInputTransceiverKey_\"+ch+\"'\]\");"
-      append html "var elmBinary = jQuery(\"\[name='multiModeInputTransceiverBinary_\"+ch+\"'\]\");"
+      append html "var elmEventDelay = jQuery(\"\[name='multiModeInputTransceiverEventDelay_\"+ch+\"'\]\"),"
+      append html " elmEventDelayTimeBaseVal = jQuery('\#timeDelay_'+ch+'_$eventDelayPrn').val(),"
+      append html " elmEventDelayTimeBase = jQuery('\#timeBase_'+ch+'_$eventDelayPrn'),"
+      append html " elmEventDelayTimeFactor = jQuery('\#timeFactor_'+ch+'_[expr $eventDelayPrn + 1]'),"
+      append html " elmEventDelaySpace = jQuery('\#space_'+ch+'_[expr $eventDelayPrn + 1]'),"
+      append html " elmKey = jQuery(\"\[name='multiModeInputTransceiverKey_\"+ch+\"'\]\"),"
+      append html " elmBinary = jQuery(\"\[name='multiModeInputTransceiverBinary_\"+ch+\"'\]\");"
 
       append html "switch(parseInt(mode)) {"
         append html "case 0:"
-            append html "elmEventDelay.hide();"
-            append html "elmKey.hide();"
-            append html "elmBinary.hide();"
+          append html "elmEventDelay.hide();"
+          append html "elmEventDelayTimeBase.hide();"
+          append html "elmEventDelayTimeFactor.hide();"
+          append html "elmEventDelaySpace.hide();"
+          append html "elmKey.hide();"
+          append html "elmBinary.hide();"
           append html "break;"
 
         append html "case 1:"
-            append html "elmEventDelay.show();"
-            append html "elmKey.show();"
-            append html "elmBinary.hide();"
+          append html "elmEventDelay.show();"
+          append html "if (elmEventDelayTimeBaseVal == 12) {"
+            append html "elmEventDelayTimeBase.show();"
+            append html "elmEventDelayTimeFactor.show();"
+            append html "elmEventDelaySpace.show();"
+          append html "}"
+          append html "elmKey.show();"
+          append html "elmBinary.hide();"
           append html "break;"
 
         append html "case 2:"
-            append html "elmEventDelay.show();"
-            append html "elmKey.hide();"
-            append html "elmBinary.hide();"
+          append html "elmEventDelay.show();"
+          append html "if (elmEventDelayTimeBaseVal == 12) {"
+            append html "elmEventDelayTimeBase.show();"
+            append html "elmEventDelayTimeFactor.show();"
+            append html "elmEventDelaySpace.show();"
+          append html "}"
+          append html "elmKey.hide();"
+          append html "elmBinary.hide();"
           append html "break;"
 
         append html "case 3:"
-            append html "elmEventDelay.show();"
-            append html "elmKey.hide();"
-            append html "elmBinary.show();"
+          append html "elmEventDelay.show();"
+          append html "if (elmEventDelayTimeBaseVal == 12) {"
+            append html "elmEventDelayTimeBase.show();"
+            append html "elmEventDelayTimeFactor.show();"
+            append html "elmEventDelaySpace.show();"
+          append html "}"
+          append html "elmKey.hide();"
+          append html "elmBinary.show();"
           append html "break;"
 
       append html "}"
@@ -663,7 +684,7 @@ proc getSwitchTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -685,7 +706,7 @@ proc getSwitchTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param LED_DISABLE_CHANNELSTATE
@@ -721,14 +742,14 @@ proc getClimateReceiver {chn p descr} {
       incr i;
     }
     append html "<td>\${stringTableTemperatureOffset}</td>"
-    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param]</td>"
+    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
   append html "</tr>"
 
   return $html
 }
 
 proc getBlindTransmitter {chn p descr address} {
-  global iface
+  global iface dev_descr
 
   upvar $p ps
   upvar $descr psDescr
@@ -768,7 +789,7 @@ proc getBlindTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -790,7 +811,7 @@ proc getBlindTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param CHANGE_OVER_DELAY
@@ -922,7 +943,7 @@ proc getBlindTransmitter {chn p descr address} {
       append html "<td colspan='2' style=\"text-align:center; background-color:$bckColor\">\${stringTableBlindDelayCompensation}</td>"
     append html "</tr>"
 
-    append html "<tr>"
+    append html "<tr name=\"trAutoCompensate\">"
       if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {set autoDelayCompensation 1}
       append html "<td>\${btnAutoDetect}</td>"
       append html "<td>[getCheckBox '_$param' $autoDelayCompensation $chn tmp onchange=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
@@ -935,6 +956,11 @@ proc getBlindTransmitter {chn p descr address} {
     append html "</tr>"
 
     append html "<script type=\"text/javascript\">"
+
+      # SPHM-118
+      if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+        append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
+      }
 
       append html "setVisibilityAutoCalibration = function(elm) {"
         append html " var autoCalibElm = jQuery(\"\#autoCalibrationPanel\_$parent\" ), "
@@ -990,14 +1016,14 @@ proc getBlindTransmitter {chn p descr address} {
     append html "</script>"
   }
 
-  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  # append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSlatRunningTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
   return $html
 }
 
 proc getShutterTransmitter {chn p descr address} {
-  global iface
+  global iface dev_descr
 
   upvar $p ps
   upvar $descr psDescr
@@ -1035,7 +1061,7 @@ proc getShutterTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -1057,7 +1083,7 @@ proc getShutterTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param CHANGE_OVER_DELAY
@@ -1165,7 +1191,7 @@ proc getShutterTransmitter {chn p descr address} {
       append html "<td colspan='2' style=\"text-align:center; background-color:$bckColor\">\${stringTableBlindDelayCompensation}</td>"
     append html "</tr>"
 
-    append html "<tr>"
+    append html "<tr name=\"trAutoCompensate\">"
       if {[format {%1.1f} $ps($param)] == [getMaxValue $param]} {set autoDelayCompensation 1}
       append html "<td>\${btnAutoDetect}</td>"
       append html "<td>[getCheckBox '_$param' $autoDelayCompensation $chn tmp onchange=setAutoDelayCompensation(this);]&nbsp;[getHelpIcon $param]</td>"
@@ -1178,6 +1204,11 @@ proc getShutterTransmitter {chn p descr address} {
     append html "</tr>"
 
     append html "<script type=\"text/javascript\">"
+
+      # SPHM-118
+      if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+        append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
+      }
 
       append html "setVisibilityAutoCalibration = function(elm) {"
         append html " var autoCalibElm = jQuery(\"\#autoCalibrationPanel\_$parent\" ), "
@@ -1197,7 +1228,7 @@ proc getShutterTransmitter {chn p descr address} {
         append html " } "
       append html "};"
 
-     append html "setAutoDelayCompensation = function(elm, init) {"
+      append html "setAutoDelayCompensation = function(elm, init) {"
 
         append html "var arElmID = elm.id.split(\"_\"),"
         append html "chn = arElmID\[2\],"
@@ -1233,8 +1264,7 @@ proc getShutterTransmitter {chn p descr address} {
     append html "</script>"
 
   }
-
-  append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+  # append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
 
   return $html
 }
@@ -1284,7 +1314,7 @@ proc getDimmerTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -1303,7 +1333,7 @@ proc getDimmerTransmitter {chn p descr} {
     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param FUSE_DELAY
@@ -1356,7 +1386,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -1378,7 +1408,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   return $html
@@ -1819,14 +1849,14 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
     array_clear options
     set options(0) "\${stringTableHeating}"
     set options(1) "\${stringTableCooling}"
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn][getHelpIcon $param]</td>"
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
   append html "</tr>"
 
   incr prn
   set param TWO_POINT_HYSTERESIS
   append html "<tr>"
     append html "<td>\${stringTableSwitchTransmitTwoPointHysteresis}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param]</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param]</td>"
   append html "</tr>"
 
   return $html
@@ -2062,13 +2092,24 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
         append html "</tr>"
       }
 
+      set param OPTIMUM_START_STOP
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        append html "<tr>"
+        append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableOptimumStartStop}</td>"
+        append html "<td name=\"expertParam\" class=\"hidden\">"
+        append html  "[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]"
+        append html "</td>"
+        append html "</tr>"
+      }
+
       set param DURATION_5MIN
       if { ! [catch {set tmp $ps($param)}]  } {
         # In older versions this parameter is not available
         incr prn
         append html "<tr name=\"expertParam\" class=\"hidden\">"
           append html "<td>\${stringTableDuration5Min}</td>"
-          append html "<td colspan=\"2\" >[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param]</td>"
+          append html "<td colspan=\"2\" >[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param]</td>"
 
           append html "<script type=\"text/javascript\">"
             append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {"
@@ -2096,7 +2137,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       incr i;
     }
     append html "<td>\${stringTableTemperatureOffset}</td>"
-    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param]</td>"
+    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
 
     #left
@@ -2126,7 +2167,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       incr i;
     }
     append html "<tr><td>\${stringTableBoostTimePeriod}</td>"
-      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param]</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
   append html "</table>"
 
@@ -2215,7 +2256,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -2237,7 +2278,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param TX_MINDELAY_UNIT
@@ -2259,7 +2300,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
   append html [getHorizontalLine]
 
@@ -2432,7 +2473,7 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   append html "</tr>"
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
   incr prn
   append html "<tr>"
@@ -2452,7 +2493,7 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   append html "</tr>"
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   
   return $html
 }
@@ -2489,7 +2530,7 @@ proc getAccelerationTransceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param CHANNEL_OPERATION_MODE
@@ -2791,7 +2832,7 @@ proc getShutterContact {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
 
@@ -3274,7 +3315,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_FILTER_NUMBER
@@ -3293,7 +3334,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
 
     append html "<tr>"
       append html "<td>\${stringTableEventFilterNumber}</td>"
-      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param\_motionDetect $hlpBoxWidth $hlpBoxHeight]</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param\_motionDetect $hlpBoxWidth $hlpBoxHeight]</td>"
     append html "</tr>"
   }
 
@@ -3449,7 +3490,7 @@ proc getDoorReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -3471,7 +3512,7 @@ proc getDoorReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 }
 
@@ -3505,7 +3546,7 @@ proc getSimpleSwitchReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -3527,7 +3568,7 @@ proc getSimpleSwitchReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 }
 
@@ -3561,7 +3602,7 @@ proc getAcousticSignalTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -3583,7 +3624,7 @@ proc getAcousticSignalTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 }
 

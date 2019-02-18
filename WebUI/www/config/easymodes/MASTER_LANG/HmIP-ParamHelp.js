@@ -106,19 +106,22 @@ jQuery.extend(true,langJSON, {
     "repetitionOffTimeDimmer" : "W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Einschaltdauer oder Ausschaltdauer gew%E4hlt, wird der Parameter Wiederholungen ignoriert.",
 
     "CYCLIC_INFO_MSG" : 
-      "Ist der Parameter <b>${stringTableCyclicInfoMsg}</b> nicht aktiviert, wird der Status regelm%E4%DFig in einem gewissen Zeitraster gesendet. " +
-      "Dieses Zeitraster ist von Ger%E4t zu Ger%E4t verschieden und kann zwischen 1 und 24 Stunden liegen.<br/><br/>" +
-      "Ist der Parameter aktiviert, dann wird der Status <u>zus%E4tzlich</u> in einem Zeitraster nach folgender Formel gesendet:<br/><br/> " +
-      "<div style=\"margin-left:20px\">" +
-        "Zeit f%FCr ein Status Info, wenn sich der Status %E4ndert:<br>" +
-        "(A+1) x C Sekunden<br/><br/>" +
-        "Zeit f%FCr ein Status Info, wenn sich der Status nicht %E4ndert:<br/>" +
-        "(A+1) x (B+1) x C Sekunden<br/><br/>" +
-      "</div>" +
-      "Dabei gilt:<br/><br/>"+
-      "<b>A = ${stringTableCyclicInfoMsgDis}</br><br/>" +
-      "B = ${stringTableCyclicInfoMsgDisUnChangedwoBR}</br><br/>" +
-      "C = Zuf%E4llige Zeit zwischen 120 und 184 Sekunden</b></br><br/>",
+    "Ist der Parameter <b>${stringTableCyclicInfoMsg}</b> nicht aktiviert, wird der Status regelm%E4%DFig in einem bestimmten Zeitraster gesendet. " +
+    "Dieses Zeitraster ist von Ger%E4t zu Ger%E4t unterschiedlich und kann zwischen einer und 24 Stunden liegen.<br/><br/>" +
+    "Ist der Parameter aktiviert, wird der Status <u>zus%E4tzlich</u> in einem Zeitraster nach folgender Formel gesendet:<br/><br/> " +
+    "<div style=\"margin-left:20px\">" +
+      "Zeit f%FCr eine Statusmeldung, wenn sich der Status %E4ndert:<br>" +
+      "(A+1) x C Sekunden<br/><br/>" +
+      "Zeit f%FCr eine Statusmeldung, wenn sich der Status nicht %E4ndert:<br/>" +
+      "(A+1) x (B+1) x C Sekunden<br/><br/>" +
+    "</div>" +
+    "Dabei gilt:<br/><br/>"+
+    "<b>A = ${stringTableCyclicInfoMsgDis}</br><br/>" +
+    "B = ${stringTableCyclicInfoMsgDisUnChangedwoBR}</br><br/>" +
+    "C = Zuf%E4llige Zeit zwischen 120 und 184 Sekunden</b></br><br/>",
+
+    "OPTIMUM_START_STOP" : "Die Optimum-Start-/Stopp-Funktion berechnet automatisch die ben%F6tigte Vorlaufzeit, um eine gew%FCnschte Temperatur zum eingestellten Zeitpunkt im Heizprofil bereits erreicht zu haben. Das Heizprofil wird dabei vorausschauend betrachtet.",
+
     "noMoreHelp" : ""
   },
 
@@ -226,19 +229,21 @@ jQuery.extend(true,langJSON, {
     "repetitionOffTimeDimmer" : "Select the pause between the repetitions with the off duration. If a permanent on-time or off-time is selected, the Repeats parameter is ignored.",
 
     "CYCLIC_INFO_MSG" :
-      "<b>en*</b> Ist der Parameter <b>${stringTableCyclicInfoMsg}</b> nicht aktiviert, wird der Status regelm%E4%DFig in einem gewissen Zeitraster gesendet. " +
-      "Dieses Zeitraster ist von Ger%E4t zu Ger%E4t verschieden und kann zwischen 1 und 24 Stunden liegen.<br/><br/>" +
-      "Ist der Parameter aktiviert, dann wird der Status <u>zus%E4tzlich</u> in einem Zeitraster nach folgender Formel gesendet:<br/><br/> " +
-      "<div style=\"margin-left:20px\">" +
-        "Zeit f%FCr ein Status Info, wenn sich der Status %E4ndert:<br>" +
-        "(A+1) x C Sekunden<br/><br/>" +
-        "Zeit f%FCr ein Status Info, wenn sich der Status nicht %E4ndert:<br/>" +
-        "(A+1) x (B+1) x C Sekunden<br/><br/>" +
-      "</div>" +
-      "Dabei gilt:<br/><br/>"+
-      "<b>A = ${stringTableCyclicInfoMsgDis}</br><br/>" +
-      "B = ${stringTableCyclicInfoMsgDisUnChangedwoBR}</br><br/>" +
-      "C = Zuf%E4llige Zeit zwischen 120 und 184 Sekunden</b></br><br/>",
+    "If parameter <b>${stringTableCyclicInfoMsg}</b> is not active, status is sent at specific regular intervals. " +
+    "These intervals differ from one appliance to the next and can be anywhere between one and 24 hours.<br/><br/>" +
+    "If the parameter is active, status is <u>additionally </u> sent at intervals calculated using the following equation:<br/><br/> " +
+    "<div style=\"margin-left:20px\">" +
+    "Timing of a status report if status changes:<br>" +
+    "(A+1) x C seconds<br/><br/>" +
+    "Timing of a status report if status does not change:<br/>" +
+    "(A+1) x (B+1) x C seconds<br/><br/>" +
+    "</div>" +
+    "Where:<br/><br/>"+
+    "<b>A = ${stringTableCyclicInfoMsgDis}</br><br/>" +
+    "B = ${stringTableCyclicInfoMsgDisUnChangedwoBR}</br><br/>" +
+    "C = Random time between 120 and 184 seconds</b></br><br/>",
+
+    "OPTIMUM_START_STOP" : "The optimum start/stop function automatically calculates the required lead time to achieve a desired temperature already at the set time in the heating profile. The heating profile is considered in advance.",
 
     "noMoreHelp" : ""
     }

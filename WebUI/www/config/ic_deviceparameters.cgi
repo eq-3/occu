@@ -144,9 +144,9 @@ proc put_device_parameters {} {
     #set s "<div class=\"CLASS22001\">Keine Parameter einstellbar.</div>"
     set s "<div class=\"CLASS22001\">\${deviceAndChannelParamsLblNoParamsToSet}</div>"
   }
-  
+
   puts "<div class=\"parameter_area CLASS22002\" id=\"id_device_parameters\" style=\"display:none\" >"
-  
+
   #Hier nur als Tabelle, damit die Formatierung wie die in der Kanalparameter-Übersicht ist
   puts "<table class=\"parameter_header\" cellspacing=\"0\">"
   puts "<thead>"
@@ -172,8 +172,11 @@ proc put_device_parameters {} {
   puts "</div>"
 
   puts "<script type='text/javascript'>"
-  puts "translatePage('#id_device_parameters');"
-  puts "jQuery('#id_device_parameters').show();"
+  if {[isHmIP] == "false"} {
+    puts "translatePage('#id_device_parameters');"
+    puts "jQuery('#id_device_parameters').show();"
+  }
+
   puts "</script>"
 
 }
@@ -633,6 +636,14 @@ proc isDevHmIPW {device} {
   return $result
 }
 
+proc isDevHmIPVirtualKey {devType} {
+  set result "false"
+  if {[string first "HmIP-RCV-50" $devType] == 0} {
+    set result "true"
+  }
+  return $result
+}
+
 proc isHmIPGroup {devType} {
   global iface
   set HmIPGroupIfaceIdentifier "VirtualDevices"
@@ -866,7 +877,7 @@ proc put_channel_parameters {} {
 
     global internalKey simulateLongKeyPress
     # if {$ch_paramid != "" && ![catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid.tcl} ] } then
-    if {$ch_paramid != "" && ![catch {source $sourcePath} ] } then {
+    if {($ch_paramid != "" )&& (![catch {source $sourcePath}]) && ([isDevHmIPVirtualKey $ch_descr(PARENT_TYPE)] == "false") } then {
       # if {! [info exists internalKey] || $ch_paramid == "dimmer_virt_ch_master" } then
       if {! [info exists internalKey] } then {
         set_htmlParams $iface $ch_address ch_ps ch_ps_descr CHANNEL_$ch_descr(INDEX) ""
@@ -1152,7 +1163,7 @@ proc put_Header {} {
 
   set SENTRY(FIRMWARE) "<table id=\"id_firmware_table_$address\" class=\"id_firmware_table\" cellspacing=\"0\">"
   #append SENTRY(FIRMWARE) "<tr><td>Version:</td><td class=\"CLASS22006\">$dev_descr(FIRMWARE)</td></tr>"
-  append SENTRY(FIRMWARE) "<tr><td>\${lblFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(FIRMWARE)</td></tr>"
+  append SENTRY(FIRMWARE) "<tr><td>\${lblFirmwareVersion}</td><td id=\"curFwVersion\" class=\"CLASS22006\">$dev_descr(FIRMWARE)</td></tr>"
   if {$MODE == "DEVICEPARAMETERS"} then {
     set fw_update_rows ""
     if {($iface != $HmIPIdentifier) && ($iface != $HmIPWIdentifier)} {
@@ -1230,7 +1241,6 @@ proc put_Header {} {
         tooltipElem.powerTip({placement: 'sw', followMouse: false});
       </script>
     }
-
   }
   append SENTRY(FIRMWARE) "</table>"
 
@@ -1282,6 +1292,12 @@ proc put_Header {} {
   puts "</TBODY>"
 
   puts "</table>"
+
+  # TODO For the HmIP virtual keys of the CCU the crRFD should return the version of the WebUI as firmware version. Instead it returns 1.0.0 (see SPHM-113).
+  # When the crRFD is corrected, this can be removed.
+  if {$dev_descr(TYPE) == "HmIP-RCV-50"} {
+    puts "<script type=\"text/javascript\">jQuery(\"#curFwVersion\").text(WEBUI_VERSION);</script>"
+  }
 
   puts "<script type=\"text/javascript\">"
   puts "\$('DeviceDescription').innerHTML = translateKey(DEV_getDescription('$dev_descr(TYPE)')) + \"&nbsp;\";"

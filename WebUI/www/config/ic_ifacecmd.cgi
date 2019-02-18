@@ -341,7 +341,7 @@ proc cmd_firmware_update {} {
   if { $result == 1 } then {
     puts "<script type=\"text/javascript\">"
       puts "ShowInfoMsg(translateKey(\"dialogFirmwareUpdateSuccess\"));"
-      puts "if (InfoMsg) InfoMsg.OnOK = function () {InfoMsg.remove(); location.reload(); }"
+      puts "if (InfoMsg) InfoMsg.OnOK = function () {InfoMsg.hide(); window.setTimeout(function() {WebUI.enter(DeviceFirmwareInformation);},100); }"
     puts "</script>"
   } else {
     # The errorCode is the error as an integer as returned from the xmlrpc call 'updateFirmware' and can be -1, -2 and so on

@@ -203,7 +203,6 @@ proc put_table_row {} {
 
     puts "picDIV.prop(\"id\", \"pic\" + dev.id);"
     puts "picDIV.html(dev.thumbnailHTML);"
-    # puts "picDIV.bind(\"mouseover\", function() {picDivShow(jg_250, '$dev_descr(TYPE)', 250, '', this);});"
     puts "picDIV.bind(\"mouseover\", function() {picDivShow(jg_250, dev.typeName, 250, '', this);});"
 
     puts ""
@@ -257,6 +256,7 @@ cgi_eval {
             ([string length $dev_descr(TYPE)] > 0)
             && ([string equal $dev_descr(TYPE) "HM-RCV-50"] != 1)
             && ([string equal $dev_descr(TYPE) "HMW-RCV-50"] != 1)
+            && ([string equal $dev_descr(TYPE) "HmIP-RCV-50"] != 1)
             && ([string first "VIR-" $dev_descr(TYPE)] == -1)
             && ([string equal $dev_descr(TYPE) "HM-CC-VG-1"] != 1)
             && ([string equal $dev_descr(TYPE) "HmIP-HEATING"] != 1)

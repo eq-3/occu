@@ -98,7 +98,7 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_SENSOR_Ext" : "Externer Alarm",
     "chType_SWITCH_SENSOR_Int" : "Interner Alarm",
     "chType_SWITCH_TRANSMIT" : "Verkn%FCpfungspartner<br/>Schaltaktor",
-    "chType_SWITCH_TRANSMITTER" : "Statusmitteilung Relais",
+    "chType_SWITCH_TRANSMITTER" : "Statusmitteilung Schaltausgang",
     "chType_SWITCH_TRANSMITTER_OC" : "Statusmitteilung OC-Ausgang",
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Schaltaktor",
     "chType_SWITCH_WEEK_PROFILE" : "Wochenprogramm",

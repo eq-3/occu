@@ -104,7 +104,7 @@ proc getPanelA {prn pref specialElement} {
 
       append s "<script type=\"text/javascript\">"
 
-        append s "setCurrentDelayShortOption = function(prn, pref, specialElement, baseValue, factorValue) {"
+        append s "setCurrentDelayShortOptionA = function(prn, pref, specialElement, baseValue, factorValue) {"
           append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
           append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
           append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"

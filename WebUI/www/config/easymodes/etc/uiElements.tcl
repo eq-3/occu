@@ -17,12 +17,17 @@ proc getMaxValue {param} {
 }
 
 proc getMinMaxValueDescr {param} {
-  global psDescr
+  global psDescr dev_descr
   upvar psDescr descr
   array_clear param_descr
   array set param_descr $descr($param)
   set min $param_descr(MIN)
   set max $param_descr(MAX)
+
+  # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
+  if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+    set max [expr $param_descr(MAX) - 0.1]
+  }
 
   set unit "noUnit"
 
@@ -71,12 +76,17 @@ proc getUnit {param} {
 }
 
 proc getTextField {param value chn prn {extraparam ""}} {
-  global psDescr
+  global psDescr dev_descr
   upvar psDescr descr
   array_clear param_descr
   array set param_descr $descr($param)
   set minValue [format {%1.1f} $param_descr(MIN)]
   set maxValue [format {%1.1f} $param_descr(MAX)]
+
+  # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
+  if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+    set maxValue [expr $param_descr(MAX) - 0.1]
+  }
 
   set elemId 'separate_CHANNEL\_$chn\_$prn'
 
@@ -213,19 +223,20 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "BLIND_AUTOCALIBRATION" {set x 450; set y 75}
    "BLIND_REFERENCE_RUNNING_TIME" {set x 450; set y 160}
    "BLOCKING_PERIOD" {set x 450; set y 100}
-   "BOOST_TIME_PERIOD" {set x 500; set y 200}
+   "BOOST_TIME_PERIOD" {set x 450; set y 120}
    "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
    "DELAY_COMPENSATION" {set x 450; set y 100}
-   "DURATION_5MIN" {set x 500; set y 200}
+   "DURATION_5MIN" {set x 500; set y 160}
    "ENABLE_ROUTING" {set x 500; set y 120}
    "EVENT_FILTER_NUMBER_motionDetect" {set x 400; set y 60}
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
+   "OPTIMUM_START_STOP" {set x 450; set y 80}
    "PERMANENT_FULL_RX" {set x 500; set y 160}
    "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
    "SPDR_CHANNEL_MODE" {set x 600; set y 600}
-   "TEMPERATURE_OFFSET" {set x 500; set y 200}
+   "TEMPERATURE_OFFSET" {set x 500; set y 160}
    "TWO_POINT_HYSTERESIS" {set x 450; set y 160}
    "WEEK_PROGRAM_POINTER" {set x 400; set y 100}
    "WEEK_PROGRAM_POINTER_group" {set x 400; set y 100}
