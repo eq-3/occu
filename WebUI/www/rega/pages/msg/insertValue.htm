@@ -222,7 +222,7 @@ SaveSettings = function()
         break;
     }
   }
-}
+};
 
 valueUp = function()
 {
@@ -230,7 +230,7 @@ valueUp = function()
   newVal = parseInt($("txtVal").value) + 10;
   if (newVal > 100) newVal = 100;
   $("txtVal").value = newVal;
-}
+};
 
 valueDown = function()
 {
@@ -238,7 +238,7 @@ valueDown = function()
   newVal = parseInt($("txtVal").value) - 10;
   if (newVal <= 0) newVal = 0;
   $("txtVal").value = newVal;
-}
+};
 
 channelChooser = function()
 {
@@ -250,7 +250,7 @@ channelChooser = function()
       loadChannelEdit();
     }
   }, ChannelChooser.SHOW_ALL);
-}
+};
 
   sysvarChooser = function()
   {
@@ -266,13 +266,13 @@ channelChooser = function()
         dpID = dlgResult;
       }
       loadSystemEdit();
-    }
+    };
     chooserPopup.ShowPopup();
-  }
+  };
 
   // Eingegebenen Werte speichern
   saveSysVar = function() {
-  }
+  };
 
   changeType = function()
   {
@@ -292,7 +292,7 @@ channelChooser = function()
         loadSystemEdit();
         break;
     }
-  }
+  };
   
   loadInsertEdit = function()
   {
@@ -397,7 +397,7 @@ channelChooser = function()
     new Ajax.Updater("chnDP", url, opts);
 
 
-  }
+  };
   
   loadSystemEdit = function()
   {
@@ -438,7 +438,7 @@ channelChooser = function()
     };
     new Ajax.Updater("sysName", url, opts);
     $("sysName").show();
-  }
+  };
   
   <%
     if( iVT == ivtObjectId )

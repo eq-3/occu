@@ -379,6 +379,8 @@ function ::showHideHmIPChannel() {
           if (! controlName) {
             bShowChannel = false;
           }
+        } else {
+          bShowChannel = false;
         }
       } else {
         bShowChannel = false;
@@ -608,7 +610,7 @@ function ::showHideHmIPChannel() {
 }
 
 ! [showChannelParam]
-function ::isParameterVisible() {
+function ::conditionIsParameterVisible() {
   object _oIface = dom.GetObject(oCC.Interface());
   string sInterface = _oIface.Name();
 
@@ -626,7 +628,7 @@ function ::isParameterVisible() {
 
   if ( (sInterface == hmIPRFIdentifier) || (sInterface == hmIPWIdentifier) ) {
     excludeBinaryParams = "BOOST_TIME,CONTROL_DIFFERENTIAL_TEMPERATURE,ERROR_CODE,LAST_PASSAGE_DIRECTION,LEVEL_STATUS,LEVEL_2_STATUS,OPERATING_VOLTAGE,PARTY_,PARTY_MODE,PASSAGE_COUNTER_OVERFLOW,PROCESS,QUICK_VETO_TIME,";
-    excludeBinaryParams = excludeBinaryParams#"RSSI_DEVICE,RSSI_PEER,SECTION,SMOKE_DETECTOR_TEST_RESULT=NONE,STATUS_FLAG_,VALVE_STATE";
+    excludeBinaryParams = excludeBinaryParams#"RSSI_DEVICE,RSSI_PEER,SECTION,SMOKE_DETECTOR_TEST_RESULT=NONE,STATUS_FLAG_";
 
     if ((oCC.HssType().Find("DIMMER_TRANSMITTER") != -1)
     || (oCC.HssType().Find("DIMMER_VIRTUAL_RECEIVER")!= -1)
@@ -728,10 +730,10 @@ function ::isParameterVisible() {
 }
 
 ! Filters a single option instead of an entire parameter
-! The above function 'isParameterVisible' blocks a binary parameter complete, means PARAM=TRUE and PARAM=FALSE are blocked
+! The above function 'conditionIsParameterVisible' blocks a binary parameter complete, means PARAM=TRUE and PARAM=FALSE are blocked
 ! This function is useful for filtering single options like PARAM=FALSE while PARAM=TRUE is visible
 ! [showChannelParam]
-function ::isBinaryOptionVisible() {
+function ::conditionIsBinaryOptionVisible() {
   showChannelParam = true;
   if (oCC.HssType() == "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") {
       if ((oDP.HSSID().Find("CURRENT_PASSAGE_DIRECTION") != -1)) {
@@ -745,6 +747,19 @@ function ::isBinaryOptionVisible() {
        showChannelParam = false;
        return;
       }
+  }
+  return;
+}
+
+! [showChannelParam]
+function ::destinationIsParameterVisible() {
+  showChannelParam = true;
+
+  ! Hide all parameters of the channel ACOUSTIC_DISPLAY_RECEIVER except COMBINED_PARAMETER
+  if (oCH.HssType().Find("ACOUSTIC_DISPLAY_RECEIVER") != -1) {
+    if (oDP.HSSID().Find("COMBINED_PARAMETER") == -1)  {
+      showChannelParam = false;
+    }
   }
   return;
 }
@@ -882,6 +897,12 @@ function ::getSpecialTranslationPrgCond() {
    if (sShortKey.Find("ERROR_UNDERVOLTAGE=FALSE") != -1) {
      sValue = "${stringTableErrorUndervoltageDimmerFalse}";
    }
+  }
+
+  if ((oCC.Label().Find("HmIP-FALMOT-") != -1) && (oCC.HssType() == "CLIMATECONTROL_FLOOR_TRANSCEIVER")) {
+    if (sShortKey.Find("LEVEL") != -1) {
+      sValue = "${stringTableHeatingLevel}";
+    }
   }
 
   return;

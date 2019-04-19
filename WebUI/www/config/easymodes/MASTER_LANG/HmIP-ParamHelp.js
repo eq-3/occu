@@ -122,6 +122,14 @@ jQuery.extend(true,langJSON, {
 
     "OPTIMUM_START_STOP" : "Die Optimum-Start-/Stopp-Funktion berechnet automatisch die ben%F6tigte Vorlaufzeit, um eine gew%FCnschte Temperatur zum eingestellten Zeitpunkt im Heizprofil bereits erreicht zu haben. Das Heizprofil wird dabei vorausschauend betrachtet.",
 
+    "comment" : "Not yet approved by prod tech.",
+    "EVENT_FILTER_TIME" :
+    "Bei der Verwendung von passiven Glasbruchmeldern ist eine Event-Filterzeit von mindestens 60 Sekunden zu w%E4hlen.",
+
+    "EVENT_FILTER_PERIOD" :
+      "Die Filterzeit des Sensors wird durch die Multiplikation der Werte <b>Filterzeitz%E4hler</b> und <b>Filterbasis</b> bestimmt.<br/><br/>" +
+      "Das Ergebnis ergibt die Event-Filterzeit in Sekunden. Dabei bedeutet ein hoher Wert eine l%E4ngere Filterzeit.",
+
     "noMoreHelp" : ""
   },
 
@@ -245,6 +253,16 @@ jQuery.extend(true,langJSON, {
 
     "OPTIMUM_START_STOP" : "The optimum start/stop function automatically calculates the required lead time to achieve a desired temperature already at the set time in the heating profile. The heating profile is considered in advance.",
 
+    "comment" : "Not yet approved by prod tech.",
+    "EVENT_FILTER_TIME" :
+    "en* Bei der Verwendung von passiven Glasbruchmeldern ist eine Event-Filterzeit von mindestens 60 Sekunden zu w%E4hlen.",
+
+    "EVENT_FILTER_PERIOD" :
+      "en* Die Filterzeit des Sensors wird durch die Multiplikation der Werte <b>Filterzeitz%E4hler</b> und <b>Filterbasis</b> bestimmt.<br/><br/>" +
+      "Das Ergebnis ergibt die Event-Filterzeit in Sekunden. Dabei bedeutet ein hoher Wert eine l%E4ngere Filterzeit.",
+
     "noMoreHelp" : ""
     }
 });
+
+

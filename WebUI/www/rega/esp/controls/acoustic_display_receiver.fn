@@ -1,0 +1,27 @@
+function ::CreateAcousticDisplayReceiver()
+{
+  object objCombinedParameter = cObj.DPByControl("ACOUSTIC_DISPLAY_RECEIVER.COMBINED_PARAMETER");
+
+  if( objCombinedParameter )
+  {
+    WriteLine("<td>");
+      WriteLine("<table id='"#chnId#"acoustic' class='ControlBtnInfo' align='center'>");
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518'>");
+
+            WriteLine("<div id='combinedParam_"#chnId#"' class='CLASS02551' onclick='setAcousticDisplayReceiver();' style='width:120px;height:34px;line-height:15px;margin: auto;'>${configureDisplay}</div>");
+
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
+
+  WriteLine("<script type='text/javascript'>");
+    WriteLine("setAcousticDisplayReceiver = function() {");
+      WriteLine("its"#chnId#" = new iseAcousticDisplayReceiver('"#objCombinedParameter.ID()#"');");
+    WriteLine("}");
+  WriteLine("</script>");
+
+  return;
+}

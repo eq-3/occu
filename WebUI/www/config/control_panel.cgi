@@ -118,35 +118,47 @@ if {![isOldCCU]} {
     <tr>
   }
 }
-puts {
-    <!-- Firewall Konfiguration -->
+
+
+if {[getProduct] >= 3} {
+  puts {
     <td>
       <div class="cpButton">
         <div class="StdTableBtn CLASS21701" onclick="new FirewallConfigDialog();">${btnSysConfFirewallConfig}</div>
         <div class="StdTableBtnHelp"><img id="newFirewallConfigDialogHelp" src="/ise/img/help.png"></div>
       </div>
     </td>
-
-    <!-- BidCoS-RF Konfiguration -->
-    <td>
-}
-if {[isOldCCU]} {
-  puts {
-        <div class="StdTableBtn CLASS21701" onclick="ConfigData.check(function() { WebUI.enter(BidcosRfPage); });">${btnSysConfBidCosConfig}</div>
-        <ul>
-          <li>${lblSysConfBidCosConfig1}</li> <!-- interne Antenne konfigurieren -->
-          <li>${lblSysConfBidCosConfig2}</li> <!-- HomeMatic Funk-LAN-Gateways verwalten -->
-        </ul>
   }
 } else {
   puts {
-        <div class="cpButton">
-          <div class="StdTableBtn CLASS21701" onclick="ConfigData.check(function() { WebUI.enter(BidcosRfPage); });">${btnSysConfLANGateway}</div>
+    <td>
+      <div class="cpButton">
+        <div class="StdTableBtn CLASS21701" onclick="new FirewallConfigDialog_CCU2();">${btnSysConfFirewallConfig}</div>
+        <div class="StdTableBtnHelp"><img id="newFirewallConfigDialogHelp" src="/ise/img/help.png"></div>
+      </div>
+    </td>
+  }
+}
+
+if {[isOldCCU]} {
+  puts {
+    <td>
+      <div class="StdTableBtn CLASS21701" onclick="ConfigData.check(function() { WebUI.enter(BidcosRfPage); });">${btnSysConfBidCosConfig}</div>
+      <ul>
+        <li>${lblSysConfBidCosConfig1}</li> <!-- interne Antenne konfigurieren -->
+        <li>${lblSysConfBidCosConfig2}</li> <!-- HomeMatic Funk-LAN-Gateways verwalten -->
+      </ul>
+  }
+} else {
+  puts {
+    <td>
+      <div class="cpButton">
+        <div class="StdTableBtn CLASS21701" onclick="ConfigData.check(function() { WebUI.enter(BidcosRfPage); });">${btnSysConfLANGateway}</div>
   }
 }
 
   puts {
-    <div class="StdTableBtnHelp"><img id="showBidCosConfigHelp" src="/ise/img/help.png"></div>
+        <div class="StdTableBtnHelp"><img id="showBidCosConfigHelp" src="/ise/img/help.png"></div>
       </div>
     </td>
 
@@ -209,6 +221,16 @@ if { "[read_var /etc/config/tweaks CP_DEVCONFIG]" != "" } {
   puts "<div class=\"StdTableBtn CLASS21701\" onclick=\"window.open('/tools/devconfig.cgi?sid=$sid');\">devconfig</div>"
   puts "<div class=\"StdTableBtnHelp\"></div></td>"
   incr i
+
+  if { $i == $COL_COUNT } {
+    puts {
+      <td class="_CLASS21702"></td>
+      </tr>
+      <tr>
+    }
+    set i 0
+  }
+
 }
 
 array set addons [::HomeMatic::Addon::GetAll]

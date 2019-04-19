@@ -460,6 +460,34 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     }
   append HTML_PARAMS(separate_1) "</table>"
 
+  if { (! [catch {set tmp $ps(CHANNEL_OPERATION_MODE)}]) || (! [catch {set tmp $ps(ACOUSTIC_ALARM_SIGNAL)}])  } {
+    append HTML_PARAMS(separate_1) "<hr>"
+    append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+        set param CHANNEL_OPERATION_MODE
+        if { ! [catch {set tmp $ps($param)}]  } {
+          incr prn
+          array_clear options
+          set options(0) "\${optionETRVNormalMode}"
+          set options(1) "\${optionETRVSilentMode}"
+          append HTML_PARAMS(separate_1) "<tr><td>\${lblMode}</td><td>"
+          append HTML_PARAMS(separate_1) "[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"alert(this.value,$chn)\"]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.75]]"
+          append HTML_PARAMS(separate_1) "</td></tr>"
+        }
+
+        set param ACOUSTIC_ALARM_SIGNAL
+        if { ! [catch {set tmp $ps($param)}]  } {
+          incr prn
+          append HTML_PARAMS(separate_1) "<tr>"
+            append HTML_PARAMS(separate_1) "<td>\${lblAcousticAlarmSignal}</td>"
+            append HTML_PARAMS(separate_1) "<td>"
+            append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.5]]"
+            append HTML_PARAMS(separate_1) "</td>"
+          append HTML_PARAMS(separate_1) "</tr>"
+        }
+
+    append HTML_PARAMS(separate_1) "</table>"
+  }
+
   if {[session_is_expert]} {
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
       append HTML_PARAMS(separate_1) "jQuery(\"\[name='expertParam'\]\").show();"

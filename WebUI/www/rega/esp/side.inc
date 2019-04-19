@@ -1,5 +1,7 @@
 <%
 
+  boolean showChannelParam = true;
+
   integer iDP = oSD.DestinationDP();
   integer iCH = oSD.DestinationChannel();
   integer iP = oSD.DestinationParam();
@@ -17,8 +19,9 @@
   string hm_statusDisplayEPaper = "HM-Dis-EP-WM55";
   string hm_rgbw_controller = "HM-LC-RGBW-WM";
   string hm_jalousieActor = "HM-LC-Ja1PBU";
-  string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
+  string hmip_wrcd = "HmIP-WRCD";
 
+  string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
   string s_vir_lg_rgb_dim = "VIR-LG-RGB-DIM";
   string s_vir_lg_rgbw_dim = "VIR-LG-RGBW-DIM";
   string s_vir_lg_white_dim = "VIR-LG-WHITE-DIM";
@@ -154,7 +157,7 @@
       if( oCH.Label().Find(s_vir_lg_onoff) != -1 ) {
         isVirLG_ONOFF = true;
       }
-      Write( ' <select onchange="SetDestinationDPSelectChange('#oSD.ID()#',this);" class="SelectBox">' );
+      Write( ' <select id="setDestinationDPSelectChange'#oSD.ID()#'" onchange="SetDestinationDPSelectChange('#oSD.ID()#',this);" class="SelectBox">' );
       boolean bFound = false;
       integer iFirstID = ID_ERROR;
       string sDP;
@@ -199,76 +202,82 @@
                     && (optionVal.Find(excludeColorList) == -1)
                     && (optionVal.Find(excludeOntimeList) == -1)
                   ) {
+                    ! Some parameter shouldn´t be visible - this is the new way to hide certain parameters
+                    Call("/esp/functions.fn::destinationIsParameterVisible()");
+                    if(showChannelParam == true) {
 
-                    if( (oDP.ID() == iDP) && (iV == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
-                    Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
-                    string sValue = oDP.Name()#": "#sVLValue;
-                    if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
-                    {
-                      string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"="#sVLValue;
-                      string sShortKey = oDP.HSSID()#"="#sVLValue;
-                      sValue = web.webKeyFromStringTable(sLongKey);
-                      if( !sValue.Length() )
+                      if( (oDP.ID() == iDP) && (iV == sVLKey) ) { sSelected = " selected"; } else { sSelected = ""; }
+                      Write( '<option value="'#oDP.ID()#':'#sVLKey#'"'#sSelected#'>' );
+                      string sValue = oDP.Name()#": "#sVLValue;
+                      if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                       {
-                        sValue = web.webKeyFromStringTable(sShortKey);
+                        string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"="#sVLValue;
+                        string sShortKey = oDP.HSSID()#"="#sVLValue;
+                        sValue = web.webKeyFromStringTable(sLongKey);
                         if( !sValue.Length() )
                         {
-                          sValue = sShortKey;
+                          sValue = web.webKeyFromStringTable(sShortKey);
+                          if( !sValue.Length() )
+                          {
+                            sValue = sShortKey;
+                          }
                         }
                       }
+                      Call("/esp/functions.fn::getSpecialTranslationPrgDest()");
+                      Write( sValue );
+                      Write( '</option>' );
                     }
-                    Call("/esp/functions.fn::getSpecialTranslationPrgDest()");
-                    Write( sValue );
-                    Write( '</option>' );
                   }
-
                 }
-
               }
             }
             else
             {
               if( ((iDPvt == ivtBinary) && (iDPst != istAction)) || (isVirLG_ONOFF) )
               {
-                string sValue = "not set";
-                if( (oDP.ID() == iDP) && (iV == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
-                Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
-                sValue = oDP.Name()#": "#oDP.ValueName1();
-                if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
-                {
-                  string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
-                  string sShortKey = oDP.HSSID()#"=TRUE";
-                  sValue = web.webKeyFromStringTable(sLongKey);
-                  if( !sValue.Length() )
+                ! Some parameter shouldn´t be visible
+                Call("/esp/functions.fn::destinationIsParameterVisible()");
+                if (showChannelParam == true) {
+                  string sValue = "not set";
+                  if( (oDP.ID() == iDP) && (iV == 1) ) { sSelected = " selected"; } else { sSelected = ""; }
+                  Write( '<option value="'#oDP.ID()#':1"'#sSelected#'>' );
+                  sValue = oDP.Name()#": "#oDP.ValueName1();
+                  if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                   {
-                    sValue = web.webKeyFromStringTable(sShortKey);
+                    string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=TRUE";
+                    string sShortKey = oDP.HSSID()#"=TRUE";
+                    sValue = web.webKeyFromStringTable(sLongKey);
                     if( !sValue.Length() )
                     {
-                      sValue = sShortKey;
+                      sValue = web.webKeyFromStringTable(sShortKey);
+                      if( !sValue.Length() )
+                      {
+                        sValue = sShortKey;
+                      }
                     }
                   }
-                }
-                Write( sValue );
-                Write( '</option>' );
-                if( (oDP.ID() == iDP) && (iV == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
-                Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
-                sValue = oDP.Name()#": "#oDP.ValueName0();
-                if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
-                {
-                  string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=FALSE";
-                  string sShortKey = oDP.HSSID()#"=FALSE";
-                  sValue = web.webKeyFromStringTable(sLongKey);
-                  if( !sValue.Length() )
+                  Write( sValue );
+                  Write( '</option>' );
+                  if( (oDP.ID() == iDP) && (iV == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
+                  Write( '<option value="'#oDP.ID()#':0"'#sSelected#'>' );
+                  sValue = oDP.Name()#": "#oDP.ValueName0();
+                  if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                   {
-                    sValue = web.webKeyFromStringTable(sShortKey);
+                    string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID()#"=FALSE";
+                    string sShortKey = oDP.HSSID()#"=FALSE";
+                    sValue = web.webKeyFromStringTable(sLongKey);
                     if( !sValue.Length() )
                     {
-                      sValue = sShortKey;
+                      sValue = web.webKeyFromStringTable(sShortKey);
+                      if( !sValue.Length() )
+                      {
+                        sValue = sShortKey;
+                      }
                     }
                   }
+                  Write( sValue );
+                  Write( '</option>' );
                 }
-                Write( sValue );
-                Write( '</option>' );
               }
               else
               {
@@ -279,29 +288,34 @@
                 && (oDP.HSSID().Find(excludeHmIPLevel2) == -1)
                 && (oDP.HSSID().Find(excludeOutputSelectSize) == -1)
                 && (oDP.HSSID().Find(excludeCombinedParameter) == -1)
+                || ((oCH.Label().Find(hmip_wrcd) != -1) && (oDP.HSSID().Find(excludeCombinedParameter) != -1))
                 ) {
-                  Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
-                  string sValue = oDP.Name();
-                  if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
-                  {
-                    string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID();
-                    string sShortKey = oDP.HSSID();
-                    sValue = web.webKeyFromStringTable(sLongKey);
-                    if( !sValue.Length() )
+                  ! Some parameter shouldn´t be visible - this is the new way to hide certain parameters
+                  Call("/esp/functions.fn::destinationIsParameterVisible()");
+                  if (showChannelParam == true) {
+                    Write( '<option value="'#oDP.ID()#':0|'#oDP.Name()#'"'#sSelected#'>' );
+                    string sValue = oDP.Name();
+                    if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                     {
-                      sValue = web.webKeyFromStringTable(sShortKey);
+                      string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID();
+                      string sShortKey = oDP.HSSID();
+                      sValue = web.webKeyFromStringTable(sLongKey);
                       if( !sValue.Length() )
                       {
-                        sValue = sShortKey;
+                        sValue = web.webKeyFromStringTable(sShortKey);
                         if( !sValue.Length() )
                         {
-                          sValue = oDP.Name();
+                          sValue = sShortKey;
+                          if( !sValue.Length() )
+                          {
+                            sValue = oDP.Name();
+                          }
                         }
                       }
                     }
+                    Write( sValue );
+                    Write( '</option>' );
                   }
-                  Write( sValue );
-                  Write( '</option>' );
                 }
               }
             }
@@ -459,9 +473,11 @@
             integer i_vir_lg_rgbw_dim = chLabel.Find(s_vir_lg_rgbw_dim);
             integer i_vir_lg_group = chLabel.Find(s_vir_lg_group);
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
+            integer ePaperAcousticDisplay = chLabel.Find(hmip_wrcd);
 
             if ((statusDisplayDevice != -1)
               || (statusDisplayEPaperDevice != -1)
+              || (ePaperAcousticDisplay != -1)
               || (rgbw_controller != -1)
               || ((jalousieActor != - 1) && (oDP.HSSID().Find("LEVEL_COMBINED") != -1))
               || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)))
@@ -480,6 +496,14 @@
                   iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x14,0xC0,0x1C,0xD0,0x16,0x,0x1D,0xE0F0,0x03";
                 }
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'DIS-EP\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
+              if (ePaperAcousticDisplay != -1) {
+                if(iV == "0") {
+                  ! This is the default string for 'all values not used'
+                  iV = "{DDBC=WHITE,DDTC=BLACK,DDI=0,DDA=CENTER,DDS=Zeile 1,DDID=1},{DDBC=WHITE,DDTC=BLACK,DDI=0,DDA=CENTER,DDS=Zeile 2,DDID=2},{DDBC=WHITE,DDTC=BLACK,DDI=0,DDA=CENTER,DDS=Zeile 3,DDID=3},{DDBC=WHITE,DDTC=BLACK,DDI=0,DDA=CENTER,DDS=Zeile 4,DDID=4},{DDBC=WHITE,DDTC=BLACK,DDI=0,DDA=CENTER,DDS=Zeile 5,DDID=5}";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'ACOUSTIC_DIS-EP\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if (rgbw_controller != -1) {
@@ -532,6 +556,7 @@
               && (partyDialogDevice == -1)
               && (statusDisplayDevice == -1)
               && (statusDisplayEPaperDevice == -1)
+              && (ePaperAcousticDisplay == -1)
               && (rgbw_controller == -1)
               && (jalousieActor == -1)
               && (i_vir_lg_rgb_dim == -1)
@@ -554,6 +579,9 @@
               }
               if (statusDisplayEPaperDevice != -1) {
                 Write( '<span id="setStatusDisplayEPaper'#oSD.ID()#'" class="CLASS02401" onclick="SetStatusDisplay('#oSD.ID()#',\'DIS-EP\');"><img src="/ise/img/notepad.png" /></span>' );
+              }
+              if (ePaperAcousticDisplay != -1) {
+                Write( '<span id="ePaperAcousticDisplay'#oSD.ID()#'" class="CLASS02401" onclick="SetStatusDisplay('#oSD.ID()#',\'ACOUSTIC_DIS-EP\');"><img src="/ise/img/notepad.png" /></span>' );
               }
               if (rgbw_controller != -1) {
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="SetRGBWController('#oSD.ID()#',\''#oDP.HSSID()#'\');"><img src="/ise/img/notepad.png" /></span>' );

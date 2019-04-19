@@ -96,6 +96,7 @@ getOnlyNonExpertChannels = function(devId, chn) {
   arNonExpertChannels["HMIP-BSL"] = [4,8,12];
   arNonExpertChannels["HMIP-MOD-OC8"] = [10,14,18,22,26,30,34,38];
   arNonExpertChannels["HMIP-WHS2"] = [3,7];
+  arNonExpertChannels["HMIP-MIOB"] = [2,6];
   arNonExpertChannels["HMIP-MP3P"] = [2,6];
   arNonExpertChannels["HMIPW-DRBL4"] = [2,6,10,14];
   arNonExpertChannels["HMIPW-DRD3"] = [2,6,10];
@@ -152,9 +153,10 @@ HmIPWeeklyProgram.prototype = {
     this.device = DeviceList.getDeviceByAddress(this.devAddress);
     this.isWired = (this.device.deviceType.id.split("-")[0] == "HmIPW") ? true : false;
 
-    // The device type of the HmIP-BSL is DIMMER_WEEK_PROFILE but the weekly program should act as a SWITCH_WEEK_PROFILE
-    this.chnType = (this._isDeviceType("HmIP-BSL")) ? this.SWITCH : this.device.channels[this.chn].channelType;
     this.chnType = (this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) ? this.DIMMER : this.device.channels[this.chn].channelType;
+
+    // The device type of the HmIP-BSL is DIMMER_WEEK_PROFILE but the weekly program should act as a SWITCH_WEEK_PROFILE
+    this.chnType = (this._isDeviceType("HmIP-BSL")) ? this.SWITCH : this.chnType;
 
     this.ps = ps;
     this.psDescr = psDescr;

@@ -1335,10 +1335,13 @@ function ::UserDeleteSysVarBuildTable() {
 
 ! [alPC], [alPDA]
 function ::setAutoLogin() {
-  object users = dom.GetObject(ID_USERS);
-  if (users) {
-    users.UsersDefaultLogin(dwcPC, system.GetVar("alPC"));
-    users.UsersDefaultLogin(dwcPDA, system.GetVar("alPDA"));
+ object oUser = dom.GetObject(system.GetSessionVar("sessionUserID"));
+  if (oUser.UserLevel() == iulAdmin) {
+    object users = dom.GetObject(ID_USERS);
+    if (users) {
+      users.UsersDefaultLogin(dwcPC, system.GetVar("alPC"));
+      users.UsersDefaultLogin(dwcPDA, system.GetVar("alPDA"));
+    }
   }
   return;
 }

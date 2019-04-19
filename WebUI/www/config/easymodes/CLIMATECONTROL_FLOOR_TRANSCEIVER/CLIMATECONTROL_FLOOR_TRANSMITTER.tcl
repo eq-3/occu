@@ -60,10 +60,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   array_clear options
   set options(0) "\${optionFloorHeatingStandard}"
   set options(1) "\${optionFloorHeatingLowEnergy}"
-  set options(2) "\${optionRadiator}"
-  set options(3) "\${optionConvectorPassiv}"
-  set options(4) "\${optionConvectorActive}"
 
+  if {[string first "HmIP-FALMOT-" $dev_descr_receiver(PARENT_TYPE) 0] == -1} {
+    set options(2) "\${optionRadiator}"
+    set options(3) "\${optionConvectorPassiv}"
+    set options(4) "\${optionConvectorActive}"
+  }
   append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 

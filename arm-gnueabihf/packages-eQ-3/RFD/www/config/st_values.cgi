@@ -1,8 +1,8 @@
 #!/bin/tclsh
 source ../cgi.tcl
 
-set ST_FILENAME "$env(DOCUMENT_ROOT)/config/stringtable_de.txt"
-set JS_FILENAME "$env(DOCUMENT_ROOT)/config/st_values.js"
+set ST_FILENAME [file join $env(DOCUMENT_ROOT) config/stringtable_de.txt]
+set JS_FILENAME [file join $env(DOCUMENT_ROOT) config/st_values.js]
 	
 proc put_js_functions {} {
 

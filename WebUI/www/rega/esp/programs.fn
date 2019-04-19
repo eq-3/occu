@@ -596,7 +596,14 @@ function ::WriteDestinationText()
                           if (unit == "&#176;C") {
                             sRet=sRet#value.ToString(2);
                           } else {
-                           if ( (value.ToString().Find("0x02") != -1) || (value.ToString().Find("ACT_") != -1) ) {
+                           ! Device specific program description
+                           ! a) e. g. HM-Dis-EP-WM55
+                           ! b) e. g. HmIP-WRCD
+                           if (
+                              (value.ToString().Find("0x02") != -1) || (value.ToString().Find("ACT_") != -1)  ||
+                              (value.ToString().Find("DDBC=") != -1)
+                              ) {
+
                               ! This is because the value of the status display or the RGBW-Controller can be very long
                               sRet=sRet#" ${ruleDescrHexString}";
                             } else {

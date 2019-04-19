@@ -95,7 +95,7 @@ function ::CreateAlarmSwitchVirtualReceiver()
 
   WriteLine("<td>");
     WriteLine("<div id='"#chnId#"controlPanel'>");
-      WriteLine("<table>");
+      WriteLine("<table align='center'>");
 
       ! This is currently deactivated
       if (cObj.DPByControl("_ALARM_SWITCH_VIRTUAL_RECEIVER.ZONE_1_ACTIVE")) {

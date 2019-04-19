@@ -1,6 +1,6 @@
 "description_1" : "<span class=\"translated\">When the sensor is triggered the switch will be switched on at least for the time set. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
 "description_2" : "<span class=\"translated\">When the sensor is triggered the switch will be switched on without delay at least for the time set.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">The motion detector is not active.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
 "md_on_time" : "Switch-on time (duration in status \"on\")",
 "md_min_on_time" : "Minimum switch-on time",
 "hint0a" : "<b>Attention!</b> The selected switch-on time of the actuator is shorter than the minimum transmission interval of ",

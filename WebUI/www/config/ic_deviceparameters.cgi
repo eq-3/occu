@@ -690,7 +690,7 @@ proc setInternalDeviceKey {ch_paramid} {
     # wichtig f. freie Werteingabe
     array set dev_descr_sender [array get ch_descr]
 
-    catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid\_intkey.tcl}
+    catch {source [file join $env(DOCUMENT_ROOT) config/easymodes/$ch_paramid\_intkey.tcl]}
 
     array set receiver_ps [xmlrpc $iface_url($iface) getParamset [list string $receiver] [list string $sender]]
     array set ps_descr_receiver [xmlrpc $iface_url($iface) getParamsetDescription [list string $receiver] [list string $sender]]
@@ -864,14 +864,14 @@ proc put_channel_parameters {} {
     }
     #=====
 
-    set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/$ch_paramid.tcl"
+    set sourcePath [file join $env(DOCUMENT_ROOT) config/easymodes/$ch_paramid.tcl]
 
     if {[isHmIP] == "true" || [isHmIPGroup $ch_descr(PARENT_TYPE)] == "true" } {
-      if {[file exist $env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl]} {
-        set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_paramid.tcl"
-      } elseif {[file exists $env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_descr(TYPE).tcl]} {
+      if {[file exists [file join $env(DOCUMENT_ROOT) config/easymodes/hmip/$ch_paramid.tcl]]} {
+        set sourcePath [file join $env(DOCUMENT_ROOT) config/easymodes/hmip/$ch_paramid.tcl]
+      } elseif {[file exists [file join $env(DOCUMENT_ROOT) config/easymodes/hmip/$ch_descr(TYPE).tcl]]} {
         set ch_paramid "$ch_descr(TYPE)"
-        set sourcePath "$env(DOCUMENT_ROOT)config/easymodes/hmip/$ch_descr(TYPE).tcl"
+        set sourcePath [file join $env(DOCUMENT_ROOT) config/easymodes/hmip/$ch_descr(TYPE).tcl]
       }
     }
 
@@ -898,7 +898,7 @@ proc put_channel_parameters {} {
         set s "" 
         if {[isVirtual $ch_paramid] == "true"} {
           set file "$ch_paramid\Params.tcl"
-          catch {source $env(DOCUMENT_ROOT)/config/easymodes/$file}
+          catch {source [file join $env(DOCUMENT_ROOT) config/easymodes/$file]}
           # catch { set s [cmd_link_paramset $iface $ch_descr(ADDRESS) MASTER MASTER CHANNEL_$ch_descr(INDEX)] }
           catch { set_htmlParams $iface $ch_address ch_ps ch_ps_descr CHANNEL_$ch_descr(INDEX) "" }
           append s $HTML_PARAMS(separate_1)
@@ -968,14 +968,14 @@ proc put_channel_parameters {} {
                 if { [catch { array set ch_descr [xmlrpc $iface_url($iface) getDeviceDescription [list string $sender]] } ] } then { 
                   #continue
                 } 
-                catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid.tcl}
+                catch {source [file join $env(DOCUMENT_ROOT) config/easymodes/$ch_paramid.tcl]}
               } 
         
               if {[isVirtual $ch_paramid] == "true"} { 
                 if { [catch { array set ch_descr [xmlrpc $iface_url($iface) getDeviceDescription [list string $sender]] } ] } then { 
                   continue
                 }
-                catch {source $env(DOCUMENT_ROOT)/config/easymodes/$ch_paramid.tcl} 
+                catch {source [file join $env(DOCUMENT_ROOT) config/easymodes/$ch_paramid.tcl]}
               }
 
               array_clear receiver_ps
@@ -1233,14 +1233,17 @@ proc put_Header {} {
     }
     append SENTRY(FIRMWARE) $fw_update_rows
 
-    puts {
-      <script type="text/javascript">
-        var tooltipHTML = "<div>"+translateKey("tooltipHmIPDeliverFirmwareImage");+"</div>",
-        tooltipElem = jQuery("#hmIPDeliverFirmwareHelp") ;
-        tooltipElem.data('powertip', tooltipHTML);
-        tooltipElem.powerTip({placement: 'sw', followMouse: false});
-      </script>
-    }
+    puts "<script type=\"text/javascript\">"
+
+      if {[isDevHmIPW $dev_descr(TYPE)] == "true"} {
+        puts "var tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPWDeliverFirmwareImage\");+\"</div>\","
+      } else {
+        puts "var tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPDeliverFirmwareImage\");+\"</div>\","
+      }
+      puts "tooltipElem = jQuery(\"#hmIPDeliverFirmwareHelp\");"
+      puts "tooltipElem.data('powertip', tooltipHTML);"
+      puts "tooltipElem.powerTip({placement: 'sw', followMouse: false});"
+    puts "</script>"
   }
   append SENTRY(FIRMWARE) "</table>"
 

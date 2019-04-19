@@ -1,5 +1,5 @@
 "description_1" : "<span class=\"translated\">When the sensor is triggered the window is tilt to the defined opening position in the set rate.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">The motion detector is not active.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
 "help_title_WINMATIC" : "Further information regarding switch-on time (duration in status &quot;Tilt&quot;)",
 "help_WINMATIC" : "<div style=&quot;padding:10&quot;>" +
   "If the switch-on time is shorter than the transmission interval of the motion detector it is possible that the window is tilt open again after the switch-on time has expired.<br/><br/>" +

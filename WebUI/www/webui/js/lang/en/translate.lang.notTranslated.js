@@ -60,6 +60,75 @@ jQuery.extend(true,langJSON, {
     "lblSetConfig" : "Save configuration",
     "lblConfigNotChanged" : "No changes were made to the configuration.",
 
+    "NEW ****** NEW" : "Release B/2019",
+
+    "en* stringTableErrorBadRechargeableBatteryHealthFalse" : "Battery status: OK",
+    "en* stringTableErrorBadRechargeableBatteryHealthTrue" : "Battery status: Not OK",
+
+    "configureDisplay" : "Display configuration",
+    "resetDisplay" : "Display reset",
+
+    "hintLinkParamOnOffNotActive" : "Note!<br/><br/>The 'ON and OFF time' parameters must not both be set to 'Not active'.",
+
+    "lblText" : "Text",
+    "lblAlign" : "Alignment",
+    "lblBGColorBR" : "Background-<br/>Colour",
+    "lblTextColorBR" : "Text-<br/>Colour",
+    "lblIcon" : "Icon",
+    "iconLampOff" : "Lamp OFF",
+    "iconLampOn" : "Lamp ON",
+    "iconPadlockOpen" : "Lock OPEN",
+    "iconPadlockClosed" : "Lock CLOSED",
+    "iconX" : "X",
+    "iconTick" : "Checkmark",
+    "iconInfo" : "Info",
+    "iconEnvelope" : "Envelope",
+    "iconWrench" : "Spanner",
+    "iconSun" : "Sun",
+    "iconMoon" : "Moon",
+    "iconWind" : "Wind",
+    "iconCloud" : "Cloud",
+    "iconCloudBolt" : "Cloud/lightening",
+    "iconCloudLightRain" : "Cloud/light rain",
+    "iconCloudMoon" : "Cloud/moon",
+    "iconCloudRain" : "Cloud/rain",
+    "iconCloudSnow" : "Cloud/snow",
+    "iconCloudSun" : "Cloud/sun",
+    "iconCloundSunRain" : "Cloud/sun/rain",
+    "iconSnowFlake" : "Cloud/snowflake",
+    "iconRainDrop" : "Cloud/raindrop",
+    "iconFlame" : "Flame",
+    "iconWindowOpen" : "Window open",
+    "iconShutter" : "Shutter",
+    "iconEco" : "Eco",
+    "iconProtectionOff" : "Protection deactivated",
+    "iconProtectionExternal" : "Presence mode",
+    "iconProtectionInternal" : "Absence mode",
+    "iconBell" : "Notification",
+    "iconClock" : "Clock",
+
+    "dialogHelpAcousticDisplayReceiverTitle" : "Note on text entry",
+    "dialogHelpAcousticDisplayReceiverContent" :
+      "To delete a text line, please enter a space.<br/><br/>" +
+      "Since only a limited character set is available, some characters cannot be used and are replaced by other characters.<br/><br/>" +
+      "<table style=\"margin-left:auto; margin-right:auto\">" +
+      "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
+      "<tr><td align='center'><span>[</span></td><td align='center'><span>%C4</span></td></tr>" +
+      "<tr><td align='center'><span>#</span></td><td align='center'><span>%D6</span></td></tr>" +
+      "<tr><td align='center'><span>$</span></td><td align='center'><span>%DC</span></td></tr>" +
+      "<tr><td align='center'><span>{</span></td><td align='center'><span>%E4</span></td></tr>" +
+      "<tr><td align='center'><span>|</span></td><td align='center'><span>%F6</span></td></tr>" +
+      "<tr><td align='center'><span>}</span></td><td align='center'><span>%FC</span></td></tr>" +
+      "<tr><td align='center'><span>_</span></td><td align='center'><span>%DF</span></td></tr>" +
+      "<tr><td align='center'><span>]</span></td><td align='center'><span>&</span></td></tr>" +
+      "<tr><td align='center'><span>%B5</span></td><td align='center'><span>=</span></td></tr>" +
+      "<tr><td align='center'><span> ; </span></td><td align='center'><span>Sanduhr</span></td></tr>" +
+      "<tr><td align='center'><span> < </span></td><td align='center'><span>Arrow down</span></td></tr>" +
+      "<tr><td align='center'><span> = </span></td><td align='center'><span>Arrow up</span></td></tr>" +
+      "<tr><td align='center'><span> > </span></td><td align='center'><span>Arrow up to right</span></td></tr>" +
+      "<tr><td align='center'><span> @ </span></td><td align='center'><span>Arrow down to right</span></td></tr>" +
+       "</table>",
+
     "noMoreKeys" : ""
   }
 });

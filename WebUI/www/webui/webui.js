@@ -124,6 +124,12 @@ DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
 DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
 DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["1"] = [5, '1_Arrow', '1_Key'];
 DEV_HIGHLIGHT["HM-LC-Dim2L-SM"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('HmIP-ASIR-2');
+DEV_DESCRIPTION["HmIP-ASIR-2"] = "HmIP-ASIR";
+DEV_PATHS["HmIP-ASIR-2"] = new Object();
+DEV_PATHS["HmIP-ASIR-2"]["50"] = "/config/img/devices/50/196_hmip-ASIR-2_thumb.png";
+DEV_PATHS["HmIP-ASIR-2"]["250"] = "/config/img/devices/250/196_hmip-ASIR-2.png";
+DEV_HIGHLIGHT["HmIP-ASIR-2"] = new Object();
 DEV_LIST.push('HM-LC-Sw1-FM-2');
 DEV_DESCRIPTION["HM-LC-Sw1-FM-2"] = "HM-LC-Sw1-FM";
 DEV_PATHS["HM-LC-Sw1-FM-2"] = new Object();
@@ -263,6 +269,12 @@ DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_1"] = [6, 0.75, 0.7, 0.832, 0.632, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_2"] = [6, 0.75, 0.748, 0.832, 0.748, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["SP_beam_3"] = [6, 0.75, 0.796, 0.832, 0.86, 0.016];
 DEV_HIGHLIGHT["HM-OU-CF-Pl"]["2"] = [5, 'SP_1', 'SP_2', 'SP_3', 'SP_4', 'SP_5', 'SP_6', 'SP_7', 'SP_beam_1', 'SP_beam_2', 'SP_beam_3'];
+DEV_LIST.push('HmIP-STHD');
+DEV_DESCRIPTION["HmIP-STHD"] = "HmIP-STHD";
+DEV_PATHS["HmIP-STHD"] = new Object();
+DEV_PATHS["HmIP-STHD"]["50"] = "/config/img/devices/50/147_hmip-sthd_thumb.png";
+DEV_PATHS["HmIP-STHD"]["250"] = "/config/img/devices/250/147_hmip-sthd.png";
+DEV_HIGHLIGHT["HmIP-STHD"] = new Object();
 DEV_LIST.push('HM-ES-PMSw1-Pl');
 DEV_DESCRIPTION["HM-ES-PMSw1-Pl"] = "HM-ES-PMSw1-Pl";
 DEV_PATHS["HM-ES-PMSw1-Pl"] = new Object();
@@ -480,7 +492,7 @@ DEV_HIGHLIGHT["HM-LC-Sw4-SM"]["2"] = [5, '2_Arrow', '2_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM"]["3"] = [5, '3_Arrow', '3_Key'];
 DEV_HIGHLIGHT["HM-LC-Sw4-SM"]["4"] = [5, '4_Arrow', '4_Key'];
 DEV_LIST.push('HmIP-BWTH');
-DEV_DESCRIPTION["HmIP-BWTH"] = "WTH";
+DEV_DESCRIPTION["HmIP-BWTH"] = "HmIP-WTH";
 DEV_PATHS["HmIP-BWTH"] = new Object();
 DEV_PATHS["HmIP-BWTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
 DEV_PATHS["HmIP-BWTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
@@ -586,8 +598,14 @@ DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HmIPW-FAL24-C6');
+DEV_DESCRIPTION["HmIPW-FAL24-C6"] = "HmIPW-FAL24-C6";
+DEV_PATHS["HmIPW-FAL24-C6"] = new Object();
+DEV_PATHS["HmIPW-FAL24-C6"]["50"] = "/config/img/devices/50/137_hmip-fal-c6_thumb.png";
+DEV_PATHS["HmIPW-FAL24-C6"]["250"] = "/config/img/devices/250/137_hmip-fal-c6.png";
+DEV_HIGHLIGHT["HmIPW-FAL24-C6"] = new Object();
 DEV_LIST.push('HmIP-ASIR');
-DEV_DESCRIPTION["HmIP-ASIR"] = "ASIR";
+DEV_DESCRIPTION["HmIP-ASIR"] = "HmIP-ASIR";
 DEV_PATHS["HmIP-ASIR"] = new Object();
 DEV_PATHS["HmIP-ASIR"]["50"] = "/config/img/devices/50/133_hmip-asir_thumb.png";
 DEV_PATHS["HmIP-ASIR"]["250"] = "/config/img/devices/250/133_hmip-asir.png";
@@ -611,7 +629,7 @@ DEV_PATHS["HM-ES-TX-WM"]["50"] = "/config/img/devices/50/102_hm-es-tx-wm_thumb.p
 DEV_PATHS["HM-ES-TX-WM"]["250"] = "/config/img/devices/250/102_hm-es-tx-wm.png";
 DEV_HIGHLIGHT["HM-ES-TX-WM"] = new Object();
 DEV_LIST.push('HmIP-FAL230-C10');
-DEV_DESCRIPTION["HmIP-FAL230-C10"] = "FAL230-C10";
+DEV_DESCRIPTION["HmIP-FAL230-C10"] = "HmIP-FAL230-C10";
 DEV_PATHS["HmIP-FAL230-C10"] = new Object();
 DEV_PATHS["HmIP-FAL230-C10"]["50"] = "/config/img/devices/50/138_hmip-fal-c10_thumb.png";
 DEV_PATHS["HmIP-FAL230-C10"]["250"] = "/config/img/devices/250/138_hmip-fal-c10.png";
@@ -978,6 +996,12 @@ DEV_PATHS["VIR-LG-RGBW-DIM"] = new Object();
 DEV_PATHS["VIR-LG-RGBW-DIM"]["50"] = "/config/img/devices/50/coupling/hm-coupling-rgbw-dim.png";
 DEV_PATHS["VIR-LG-RGBW-DIM"]["250"] = "/config/img/devices/250/coupling/hm-coupling-rgbw-dim.png";
 DEV_HIGHLIGHT["VIR-LG-RGBW-DIM"] = new Object();
+DEV_LIST.push('HmIPW-STHD');
+DEV_DESCRIPTION["HmIPW-STHD"] = "HmIPW-STHD";
+DEV_PATHS["HmIPW-STHD"] = new Object();
+DEV_PATHS["HmIPW-STHD"]["50"] = "/config/img/devices/50/147_hmip-sthd_thumb.png";
+DEV_PATHS["HmIPW-STHD"]["250"] = "/config/img/devices/250/147_hmip-sthd.png";
+DEV_HIGHLIGHT["HmIPW-STHD"] = new Object();
 DEV_LIST.push('HM-Sen-MDIR-O-2');
 DEV_DESCRIPTION["HM-Sen-MDIR-O-2"] = "HM-Sen-MDIR-O";
 DEV_PATHS["HM-Sen-MDIR-O-2"] = new Object();
@@ -1218,7 +1242,7 @@ DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2_Taster"] = [4, 0.552, 0.388, 0.08, 0.08];
 DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2_Led"] = [4, 0.576, 0.304, 0.036, 0.036];
 DEV_HIGHLIGHT["HM-Sec-SFA-SM"]["2"] = [5, '2_Taster', '2_Led'];
 DEV_LIST.push('HMIP-WTH');
-DEV_DESCRIPTION["HMIP-WTH"] = "WTH";
+DEV_DESCRIPTION["HMIP-WTH"] = "HmIP-WTH";
 DEV_PATHS["HMIP-WTH"] = new Object();
 DEV_PATHS["HMIP-WTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
 DEV_PATHS["HMIP-WTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
@@ -1269,7 +1293,7 @@ DEV_PATHS["HM-Sec-WDS"]["50"] = "/config/img/devices/50/49_hm-sec-wds_thumb.png"
 DEV_PATHS["HM-Sec-WDS"]["250"] = "/config/img/devices/250/49_hm-sec-wds.png";
 DEV_HIGHLIGHT["HM-Sec-WDS"] = new Object();
 DEV_LIST.push('HMIP-WTH-2');
-DEV_DESCRIPTION["HMIP-WTH-2"] = "WTH";
+DEV_DESCRIPTION["HMIP-WTH-2"] = "HmIP-WTH";
 DEV_PATHS["HMIP-WTH-2"] = new Object();
 DEV_PATHS["HMIP-WTH-2"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
 DEV_PATHS["HMIP-WTH-2"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
@@ -1399,6 +1423,12 @@ DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1_Key"] = [4, 0.25, 0.26, 0.04, 0.044];
 DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2_Key"] = [4, 0.328, 0.26, 0.04, 0.044];
 DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
 DEV_HIGHLIGHT["HM-LC-Dim2T-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('HmIP-STH');
+DEV_DESCRIPTION["HmIP-STH"] = "STH";
+DEV_PATHS["HmIP-STH"] = new Object();
+DEV_PATHS["HmIP-STH"]["50"] = "/config/img/devices/50/146_hmip-sth_thumb.png";
+DEV_PATHS["HmIP-STH"]["250"] = "/config/img/devices/250/146_hmip-sth.png";
+DEV_HIGHLIGHT["HmIP-STH"] = new Object();
 DEV_LIST.push('VIR-LG-WHITE');
 DEV_DESCRIPTION["VIR-LG-WHITE"] = "VIR-LG-WHITE";
 DEV_PATHS["VIR-LG-WHITE"] = new Object();
@@ -1495,7 +1525,7 @@ DEV_HIGHLIGHT["HM-LC-Ja1PBU-FM"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
 DEV_HIGHLIGHT["HM-LC-Ja1PBU-FM"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["HM-LC-Ja1PBU-FM"]["1"] = [5, '1a', '1b'];
 DEV_LIST.push('HmIP-FAL230-C6');
-DEV_DESCRIPTION["HmIP-FAL230-C6"] = "FAL230-C6";
+DEV_DESCRIPTION["HmIP-FAL230-C6"] = "HmIP-FAL230-C6";
 DEV_PATHS["HmIP-FAL230-C6"] = new Object();
 DEV_PATHS["HmIP-FAL230-C6"]["50"] = "/config/img/devices/50/137_hmip-fal-c6_thumb.png";
 DEV_PATHS["HmIP-FAL230-C6"]["250"] = "/config/img/devices/250/137_hmip-fal-c6.png";
@@ -1531,11 +1561,17 @@ DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
 DEV_LIST.push('HmIP-WTH');
-DEV_DESCRIPTION["HmIP-WTH"] = "WTH";
+DEV_DESCRIPTION["HmIP-WTH"] = "HmIP-WTH";
 DEV_PATHS["HmIP-WTH"] = new Object();
 DEV_PATHS["HmIP-WTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
 DEV_PATHS["HmIP-WTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
 DEV_HIGHLIGHT["HmIP-WTH"] = new Object();
+DEV_LIST.push('HmIP-WRCD');
+DEV_DESCRIPTION["HmIP-WRCD"] = "HmIP-WRCD";
+DEV_PATHS["HmIP-WRCD"] = new Object();
+DEV_PATHS["HmIP-WRCD"]["50"] = "/config/img/devices/50/194_hmip-wrcd_thumb.png";
+DEV_PATHS["HmIP-WRCD"]["250"] = "/config/img/devices/250/194_hmip-wrcd.png";
+DEV_HIGHLIGHT["HmIP-WRCD"] = new Object();
 DEV_LIST.push('HmIP-RCV-50');
 DEV_DESCRIPTION["HmIP-RCV-50"] = "HmIP-RCV-50";
 DEV_PATHS["HmIP-RCV-50"] = new Object();
@@ -1773,6 +1809,12 @@ DEV_PATHS["HmIPW-DRAP"] = new Object();
 DEV_PATHS["HmIPW-DRAP"]["50"] = "/config/img/devices/50/162_hmipw-drap_thumb.png";
 DEV_PATHS["HmIPW-DRAP"]["250"] = "/config/img/devices/250/162_hmipw-drap.png";
 DEV_HIGHLIGHT["HmIPW-DRAP"] = new Object();
+DEV_LIST.push('HmIPW-FAL230-C10');
+DEV_DESCRIPTION["HmIPW-FAL230-C10"] = "HmIPW-FAL230-C10";
+DEV_PATHS["HmIPW-FAL230-C10"] = new Object();
+DEV_PATHS["HmIPW-FAL230-C10"]["50"] = "/config/img/devices/50/138_hmip-fal-c10_thumb.png";
+DEV_PATHS["HmIPW-FAL230-C10"]["250"] = "/config/img/devices/250/138_hmip-fal-c10.png";
+DEV_HIGHLIGHT["HmIPW-FAL230-C10"] = new Object();
 DEV_LIST.push('HmIP-SWSD');
 DEV_DESCRIPTION["HmIP-SWSD"] = "SWSD";
 DEV_PATHS["HmIP-SWSD"] = new Object();
@@ -1800,7 +1842,7 @@ DEV_HIGHLIGHT["HM-RC-Sec4-3"]["4"] = [5, '3_Arrow'];
 DEV_HIGHLIGHT["HM-RC-Sec4-3"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
 DEV_HIGHLIGHT["HM-RC-Sec4-3"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
 DEV_LIST.push('HmIP-ASIR-B1');
-DEV_DESCRIPTION["HmIP-ASIR-B1"] = "ASIR";
+DEV_DESCRIPTION["HmIP-ASIR-B1"] = "HmIP-ASIR";
 DEV_PATHS["HmIP-ASIR-B1"] = new Object();
 DEV_PATHS["HmIP-ASIR-B1"]["50"] = "/config/img/devices/50/133_hmip-asir_thumb.png";
 DEV_PATHS["HmIP-ASIR-B1"]["250"] = "/config/img/devices/250/133_hmip-asir.png";
@@ -1920,6 +1962,12 @@ DEV_PATHS["HM-LC-Sw1-DR"] = new Object();
 DEV_PATHS["HM-LC-Sw1-DR"]["50"] = "/config/img/devices/50/35_hmw-sys-tm-dr_thumb.png";
 DEV_PATHS["HM-LC-Sw1-DR"]["250"] = "/config/img/devices/250/106_hm-lc-sw1-dr.png";
 DEV_HIGHLIGHT["HM-LC-Sw1-DR"] = new Object();
+DEV_LIST.push('HmIPW-FAL230-C6');
+DEV_DESCRIPTION["HmIPW-FAL230-C6"] = "HmIPW-FAL230-C6";
+DEV_PATHS["HmIPW-FAL230-C6"] = new Object();
+DEV_PATHS["HmIPW-FAL230-C6"]["50"] = "/config/img/devices/50/137_hmip-fal-c6_thumb.png";
+DEV_PATHS["HmIPW-FAL230-C6"]["250"] = "/config/img/devices/250/137_hmip-fal-c6.png";
+DEV_HIGHLIGHT["HmIPW-FAL230-C6"] = new Object();
 DEV_LIST.push('HM-LC-Sw1-Pl-CT-R1');
 DEV_DESCRIPTION["HM-LC-Sw1-Pl-CT-R1"] = "HM-LC-Sw1-Pl-CT-R1";
 DEV_PATHS["HM-LC-Sw1-Pl-CT-R1"] = new Object();
@@ -1974,12 +2022,6 @@ DEV_PATHS["HmIPW-DRBL4"] = new Object();
 DEV_PATHS["HmIPW-DRBL4"]["50"] = "/config/img/devices/50/163_hmipw-drbl4_thumb.png";
 DEV_PATHS["HmIPW-DRBL4"]["250"] = "/config/img/devices/250/163_hmipw-drbl4.png";
 DEV_HIGHLIGHT["HmIPW-DRBL4"] = new Object();
-DEV_LIST.push('HmIP-STH');
-DEV_DESCRIPTION["HmIP-STH"] = "STH";
-DEV_PATHS["HmIP-STH"] = new Object();
-DEV_PATHS["HmIP-STH"]["50"] = "/config/img/devices/50/146_hmip-sth_thumb.png";
-DEV_PATHS["HmIP-STH"]["250"] = "/config/img/devices/250/146_hmip-sth.png";
-DEV_HIGHLIGHT["HmIP-STH"] = new Object();
 DEV_LIST.push('HM-LC-Sw1-Pl-DN-R5');
 DEV_DESCRIPTION["HM-LC-Sw1-Pl-DN-R5"] = "HM-LC-Sw1-Pl-DN-R5";
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"] = new Object();
@@ -1987,7 +2029,7 @@ DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R5"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R5.png";
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R5"] = new Object();
 DEV_LIST.push('HmIP-BWTH24');
-DEV_DESCRIPTION["HmIP-BWTH24"] = "WTH";
+DEV_DESCRIPTION["HmIP-BWTH24"] = "HmIP-WTH";
 DEV_PATHS["HmIP-BWTH24"] = new Object();
 DEV_PATHS["HmIP-BWTH24"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
 DEV_PATHS["HmIP-BWTH24"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
@@ -2147,12 +2189,6 @@ DEV_HIGHLIGHT["HM-WS550-US"]["7"] = [3, 0.440, 0.200, '7', 0.124, 'verdana', Fon
 DEV_HIGHLIGHT["HM-WS550-US"]["8"] = [3, 0.440, 0.200, '8', 0.124, 'verdana', Font.BOLD];
 DEV_HIGHLIGHT["HM-WS550-US"]["9"] = [3, 0.440, 0.200, '9', 0.124, 'verdana', Font.BOLD];
 DEV_HIGHLIGHT["HM-WS550-US"]["10"] = [3, 0.405, 0.200, '10', 0.124, 'verdana', Font.BOLD];
-DEV_LIST.push('HmIP-STHD');
-DEV_DESCRIPTION["HmIP-STHD"] = "STHD";
-DEV_PATHS["HmIP-STHD"] = new Object();
-DEV_PATHS["HmIP-STHD"]["50"] = "/config/img/devices/50/147_hmip-sthd_thumb.png";
-DEV_PATHS["HmIP-STHD"]["250"] = "/config/img/devices/250/147_hmip-sthd.png";
-DEV_HIGHLIGHT["HmIP-STHD"] = new Object();
 DEV_LIST.push('263 146');
 DEV_DESCRIPTION["263 146"] = "263_146";
 DEV_PATHS["263 146"] = new Object();
@@ -2257,6 +2293,12 @@ DEV_PATHS["263 133"] = new Object();
 DEV_PATHS["263 133"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
 DEV_PATHS["263 133"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
 DEV_HIGHLIGHT["263 133"] = new Object();
+DEV_LIST.push('HmIPW-WTH');
+DEV_DESCRIPTION["HmIPW-WTH"] = "HmIPW-WTH";
+DEV_PATHS["HmIPW-WTH"] = new Object();
+DEV_PATHS["HmIPW-WTH"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HmIPW-WTH"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HmIPW-WTH"] = new Object();
 DEV_LIST.push('HmIP-SMI55');
 DEV_DESCRIPTION["HmIP-SMI55"] = "HmIP-SMI55";
 DEV_PATHS["HmIP-SMI55"] = new Object();
@@ -2308,6 +2350,12 @@ DEV_HIGHLIGHT["HmIP-BBL"] = new Object();
 DEV_HIGHLIGHT["HmIP-BBL"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
 DEV_HIGHLIGHT["HmIP-BBL"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["HmIP-BBL"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HmIPW-STH');
+DEV_DESCRIPTION["HmIPW-STH"] = "HmIPW-STH";
+DEV_PATHS["HmIPW-STH"] = new Object();
+DEV_PATHS["HmIPW-STH"]["50"] = "/config/img/devices/50/146_hmip-sth_thumb.png";
+DEV_PATHS["HmIPW-STH"]["250"] = "/config/img/devices/250/146_hmip-sth.png";
+DEV_HIGHLIGHT["HmIPW-STH"] = new Object();
 DEV_LIST.push('HMIP-PS');
 DEV_DESCRIPTION["HMIP-PS"] = "PS";
 DEV_PATHS["HMIP-PS"] = new Object();
@@ -2315,7 +2363,7 @@ DEV_PATHS["HMIP-PS"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
 DEV_PATHS["HMIP-PS"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
 DEV_HIGHLIGHT["HMIP-PS"] = new Object();
 DEV_LIST.push('HmIP-FAL24-C10');
-DEV_DESCRIPTION["HmIP-FAL24-C10"] = "FAL24-C10";
+DEV_DESCRIPTION["HmIP-FAL24-C10"] = "HmIP-FAL24-C10";
 DEV_PATHS["HmIP-FAL24-C10"] = new Object();
 DEV_PATHS["HmIP-FAL24-C10"]["50"] = "/config/img/devices/50/138_hmip-fal-c10_thumb.png";
 DEV_PATHS["HmIP-FAL24-C10"]["250"] = "/config/img/devices/250/138_hmip-fal-c10.png";
@@ -2350,6 +2398,12 @@ DEV_HIGHLIGHT["HM-LC-RGBW-WM"] = new Object();
 DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["1"] = [1, 0.280, 0.569, 0.014];
 DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["2"] = [1, 0.280, 0.645, 0.014];
 DEV_HIGHLIGHT["HM-LC-RGBW-WM"]["3"] = [1, 0.280, 0.721, 0.014];
+DEV_LIST.push('HmIP-FALMOT-C12');
+DEV_DESCRIPTION["HmIP-FALMOT-C12"] = "HmIP-FALMOT-C12";
+DEV_PATHS["HmIP-FALMOT-C12"] = new Object();
+DEV_PATHS["HmIP-FALMOT-C12"]["50"] = "/config/img/devices/50/198_hmip-falmot-c12_thumb.png";
+DEV_PATHS["HmIP-FALMOT-C12"]["250"] = "/config/img/devices/250/198_hmip-falmot-c12.png";
+DEV_HIGHLIGHT["HmIP-FALMOT-C12"] = new Object();
 DEV_LIST.push('HMW-LC-Dim1L-DR');
 DEV_DESCRIPTION["HMW-LC-Dim1L-DR"] = "HMW-LC-Dim1L-DR";
 DEV_PATHS["HMW-LC-Dim1L-DR"] = new Object();
@@ -2465,6 +2519,12 @@ DEV_HIGHLIGHT["HmIP-BDT"] = new Object();
 DEV_HIGHLIGHT["HmIP-BDT"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
 DEV_HIGHLIGHT["HmIP-BDT"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["HmIP-BDT"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HmIPW-FAL24-C10');
+DEV_DESCRIPTION["HmIPW-FAL24-C10"] = "HmIPW-FAL24-C10";
+DEV_PATHS["HmIPW-FAL24-C10"] = new Object();
+DEV_PATHS["HmIPW-FAL24-C10"]["50"] = "/config/img/devices/50/138_hmip-fal-c10_thumb.png";
+DEV_PATHS["HmIPW-FAL24-C10"]["250"] = "/config/img/devices/250/138_hmip-fal-c10.png";
+DEV_HIGHLIGHT["HmIPW-FAL24-C10"] = new Object();
 DEV_LIST.push('HM-Sec-SD-Team');
 DEV_DESCRIPTION["HM-Sec-SD-Team"] = "HM-Sec-SD-Team";
 DEV_PATHS["HM-Sec-SD-Team"] = new Object();
@@ -2495,6 +2555,12 @@ DEV_PATHS["HMW-Sec-TR-FM"] = new Object();
 DEV_PATHS["HMW-Sec-TR-FM"]["50"] = "/config/img/devices/50/33_hmw-sec-tr-fm_thumb.png";
 DEV_PATHS["HMW-Sec-TR-FM"]["250"] = "/config/img/devices/250/33_hmw-sec-tr-fm.png";
 DEV_HIGHLIGHT["HMW-Sec-TR-FM"] = new Object();
+DEV_LIST.push('HmIP-SWDO-PL');
+DEV_DESCRIPTION["HmIP-SWDO-PL"] = "HmIP-SWDO-PL";
+DEV_PATHS["HmIP-SWDO-PL"] = new Object();
+DEV_PATHS["HmIP-SWDO-PL"]["50"] = "/config/img/devices/50/197_hmip-swdo-pl_thumb.png";
+DEV_PATHS["HmIP-SWDO-PL"]["250"] = "/config/img/devices/250/197_hmip-swdo-pl.png";
+DEV_HIGHLIGHT["HmIP-SWDO-PL"] = new Object();
 DEV_LIST.push('HmIP-KRCA');
 DEV_DESCRIPTION["HmIP-KRCA"] = "KRCA";
 DEV_PATHS["HmIP-KRCA"] = new Object();
@@ -2726,6 +2792,14 @@ DEV_PATHS["HM-LC-Dim1T-DR"] = new Object();
 DEV_PATHS["HM-LC-Dim1T-DR"]["50"] = "/config/img/devices/50/143_hm-lc-dim1t-dr_thumb.png";
 DEV_PATHS["HM-LC-Dim1T-DR"]["250"] = "/config/img/devices/250/143_hm-lc-dim1t-dr.png";
 DEV_HIGHLIGHT["HM-LC-Dim1T-DR"] = new Object();
+DEV_LIST.push('HmIPW-SMI55');
+DEV_DESCRIPTION["HmIPW-SMI55"] = "HmIPW-SMI55";
+DEV_PATHS["HmIPW-SMI55"] = new Object();
+DEV_PATHS["HmIPW-SMI55"]["50"] = "/config/img/devices/50/195_hmipw-smi55_thumb.png";
+DEV_PATHS["HmIPW-SMI55"]["250"] = "/config/img/devices/250/195_hmipw-smi55.png";
+DEV_HIGHLIGHT["HmIPW-SMI55"] = new Object();
+DEV_HIGHLIGHT["HmIPW-SMI55"]["1"] = [1, 0.530, 0.820, 0.025];
+DEV_HIGHLIGHT["HmIPW-SMI55"]["2"] = [1, 0.505, 0.210, 0.025];
 DEV_LIST.push('HM-LC-Sw4-DR-2');
 DEV_DESCRIPTION["HM-LC-Sw4-DR-2"] = "HM-LC-Sw4-DR";
 DEV_PATHS["HM-LC-Sw4-DR-2"] = new Object();
@@ -2848,6 +2922,12 @@ DEV_PATHS["HM-LC-Dim1T-CV"] = new Object();
 DEV_PATHS["HM-LC-Dim1T-CV"]["50"] = "/config/img/devices/50/66_hm-lc-dim1t-cv_thumb.png";
 DEV_PATHS["HM-LC-Dim1T-CV"]["250"] = "/config/img/devices/250/66_hm-lc-dim1t-cv.png";
 DEV_HIGHLIGHT["HM-LC-Dim1T-CV"] = new Object();
+DEV_LIST.push('HmIP-ASIR-O');
+DEV_DESCRIPTION["HmIP-ASIR-O"] = "HmIP-ASIR-O";
+DEV_PATHS["HmIP-ASIR-O"] = new Object();
+DEV_PATHS["HmIP-ASIR-O"]["50"] = "/config/img/devices/50/192_hmip-asir-o_thumb.png";
+DEV_PATHS["HmIP-ASIR-O"]["250"] = "/config/img/devices/250/192_hmip-asir-o.png";
+DEV_HIGHLIGHT["HmIP-ASIR-O"] = new Object();
 DEV_LIST.push('HmIP-SWDO');
 DEV_DESCRIPTION["HmIP-SWDO"] = "HmIP-SWDO";
 DEV_PATHS["HmIP-SWDO"] = new Object();
@@ -3045,6 +3125,12 @@ DEV_PATHS["HmIP-CCU3"] = new Object();
 DEV_PATHS["HmIP-CCU3"]["50"] = "/config/img/devices/50/CCU3_thumb.png";
 DEV_PATHS["HmIP-CCU3"]["250"] = "/config/img/devices/250/CCU3.png";
 DEV_HIGHLIGHT["HmIP-CCU3"] = new Object();
+DEV_LIST.push('HmIP-SCI');
+DEV_DESCRIPTION["HmIP-SCI"] = "HmIP-SCI";
+DEV_PATHS["HmIP-SCI"] = new Object();
+DEV_PATHS["HmIP-SCI"]["50"] = "/config/img/devices/50/190_hmip-sci_thumb.png";
+DEV_PATHS["HmIP-SCI"]["250"] = "/config/img/devices/250/190_hmip-sci.png";
+DEV_HIGHLIGHT["HmIP-SCI"] = new Object();
 DEV_LIST.push('HM-OU-CFM-Pl');
 DEV_DESCRIPTION["HM-OU-CFM-Pl"] = "HM-OU-CFM-Pl";
 DEV_PATHS["HM-OU-CFM-Pl"] = new Object();
@@ -3213,7 +3299,7 @@ DEV_PATHS["HmIP-SWD"]["50"] = "/config/img/devices/50/172_hmip-swd_thumb.png";
 DEV_PATHS["HmIP-SWD"]["250"] = "/config/img/devices/250/172_hmip-swd.png";
 DEV_HIGHLIGHT["HmIP-SWD"] = new Object();
 DEV_LIST.push('HmIP-SWDO-I');
-DEV_DESCRIPTION["HmIP-SWDO-I"] = "HmIP-SWDO";
+DEV_DESCRIPTION["HmIP-SWDO-I"] = "HmIP-SWDO-I";
 DEV_PATHS["HmIP-SWDO-I"] = new Object();
 DEV_PATHS["HmIP-SWDO-I"]["50"] = "/config/img/devices/50/152_hmip-swdo-i_thumb.png";
 DEV_PATHS["HmIP-SWDO-I"]["250"] = "/config/img/devices/250/152_hmip-swdo-i.png";
@@ -3477,7 +3563,7 @@ DEV_HIGHLIGHT["HM-RC-Sec4-2"]["4"] = [5, '3_Arrow'];
 DEV_HIGHLIGHT["HM-RC-Sec4-2"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
 DEV_HIGHLIGHT["HM-RC-Sec4-2"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
 DEV_LIST.push('HmIP-FAL24-C6');
-DEV_DESCRIPTION["HmIP-FAL24-C6"] = "FAL24-C6";
+DEV_DESCRIPTION["HmIP-FAL24-C6"] = "HmIP-FAL24-C6";
 DEV_PATHS["HmIP-FAL24-C6"] = new Object();
 DEV_PATHS["HmIP-FAL24-C6"]["50"] = "/config/img/devices/50/137_hmip-fal-c6_thumb.png";
 DEV_PATHS["HmIP-FAL24-C6"]["250"] = "/config/img/devices/250/137_hmip-fal-c6.png";
@@ -3551,6 +3637,12 @@ DEV_getImagePath = function(type, size)
 {
 
   var product = WEBUI_VERSION.split(".")[0];
+
+  if (product < 3 && (type == "HmIP-RCV-50")) {
+    DEV_PATHS[type][50] = "/config/img/devices/50/CCU2_thumb.png";
+    DEV_PATHS[type][250] = "/config/img/devices/250/CCU2.png";
+  }
+
   if (product >= 3 && (type == "HM-RCV-50" || type == "HMW-RCV-50")) {
     DEV_PATHS[type][50] = "/config/img/devices/50/CCU3_thumb.png";
     DEV_PATHS[type][250] = "/config/img/devices/250/CCU3.png";
@@ -3886,6 +3978,8 @@ elvST['CLIMATECONTROL_FLOOR_TRANSMITTER'] = '${stringTableClimateControlFloorTra
 elvST['CLIMATECONTROL_HEAT_DEMAND_TRANSMITER'] = '${stringTableClimateControlHeatDemandTransmitterTitle}';
 elvST['CLIMATECONTROL_HEAT_DEMAND_BOILER_TRANSMITTER'] = '${stringTableClimateControlHeatDemandBoilerTransmitterTitle}';
 elvST['CLIMATECONTROL_HEAT_DEMAND_PUMP_TRANSMITTER'] = '${stringTableClimateControlHeatDemandPumpTransmitterTitle}';
+elvST['CLIMATECONTROL_INPUT_RECEIVER'] = '${stringTableClimateControlInputReceiverTitle}';
+elvST['CLIMATECONTROL_INPUT_TRANSMITTER'] = '${stringTableClimateControlInputTransmitterTitle}';
 elvST['CLIMATECONTROL_RECEIVER'] = '${stringTableClimateControlReceiver}';
 elvST['CLIMATECONTROL_REGULATOR'] = '${stringTableClimateControlRegTitle}';
 elvST['CLIMATECONTROL_REGULATOR|ADJUSTING_COMMAND'] = '${stringTableClimateControlRegAdjCommand}';
@@ -3949,6 +4043,7 @@ elvST['COLOR=YELLOW'] = '${colorYELLOW}';
 elvST['COLOR=WHITE'] = '${colorWHITE}';
 elvST['COLOR_STATUS=NORMAL'] = '${colorStateNormal}';
 elvST['COLOR_STATUS=UNKNOWN'] = '${colorStateUnknown}';
+elvST['COMBINED_PARAMETER'] = '${stringTableSubmit}';
 elvST['COMFORT_MODE'] = '${stringTableClimateControlRTTransceiverComfortMode}';
 elvST['COMMUNICATION_REPORTING'] = '${stringTableCommunicatingReporting}';
 elvST['COMMUNICATION_REPORTING=FALSE'] = '${stringTableCommunicatingReportingFalse}';
@@ -4214,6 +4309,8 @@ elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=UNDERFLOW'] = '${lblValue} ${str
 elvST['ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=2'] = '${lblValue} ${stringTablePowerMeterVoltage}: ${lblUnderflow}';
 elvST['ERROR'] = '${stringTableError}';
 elvST['ERROR=NO_ERROR'] = '${stringTableErrorNoError}';
+elvST['ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=FALSE'] = '${stringTableErrorBadRechargeableBatteryHealthFalse}';
+elvST['ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=TRUE'] = '${stringTableErrorBadRechargeableBatteryHealthTrue}';
 elvST['ERROR_BATTERY=FALSE'] = '${stringTableBatteryFailure}';
 elvST['ERROR_BATTERY=TRUE'] = '${stringTableBatteryOk}';
 elvST['ERROR_CODE'] = '${stringTableErrorCode}';
@@ -4306,6 +4403,8 @@ elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=CLOSED'] = '${stringTable
 elvST['HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=OPEN'] = '${stringTableWindowStateOpen}';
 elvST['HEATING_COOLING=COOLING'] = '${stringTableCooling}';
 elvST['HEATING_COOLING=HEATING'] = '${stringTableHeating}';
+elvST['HEATING_COOLING=1'] = '${stringTableCooling}';
+elvST['HEATING_COOLING=0'] = '${stringTableHeating}';
 elvST['HEATING_KEY_RECEIVER'] = '${stringTableHeatingKeyReceiverTitle}';
 elvST['HEATING_ROOM_TH_RECEIVER'] = '${stringTableHeatingRoomTHReceiverTitle}';
 elvST['HEATING_ROOM_TH_TRANSCEIVER'] = '${stringTableHeatingRoomTHTransceiverTitle}';
@@ -6088,19 +6187,32 @@ ConfigData = Singleton.create({
   initialize: function()
   {
     this.isPresent = false;
+    this.showMessage = false;
   },
   
   check: function(callback)
   {
+    this.callback = callback;
     if (this.isPresent === false)
     {
-      this.isPresent = true;      
-      new ConfigDataLoader(callback);
+      //this.isPresent = true;
+      //new ConfigDataLoader(callback);
+      this.configDataLoader.showMessage();
+      this.showMessage = true;
     }
     else
     {
       if (callback) { callback(); }
     }
+  },
+
+  load: function() {
+    this.configDataLoader = new ConfigDataLoader(function() {
+      conInfo("Config data ready to use");
+      ConfigData.isPresent = true;
+      if (ConfigData.showMessage) { this.hideMessage(); }
+      if (ConfigData.callback) { ConfigData.callback(); }
+    });
   },
 
   destroy: function()
@@ -6115,41 +6227,46 @@ ConfigDataLoader = Class.create({
   initialize: function(callback)
   {
     var that = this;
-    
+
     this.TASKLIST = [
       {name: "WEBUILOADER_DEVICES"  , action: function() { DeviceList.reload(that); }},
       {name: "WEBUILOADER_ROOMS"    , action: function() { RoomList.reload(that); }},
       {name: "WEBUILOADER_FUNCTIONS", action: function() { SubsectionList.reload(that); }}
     ];
-    
-    var screenWidth  = WebUI.getWidth();
-    var screenHeight = WebUI.getHeight();
-    var frameWidth   = ConfigDataLoader.CONTENT_WIDTH;
-    var frameHeight  = ConfigDataLoader.CONTENT_HEIGHT;
-    var frameX = parseInt((screenWidth  - frameWidth ) / 2);
-    var frameY = parseInt((screenHeight - frameHeight) / 2);
-
     this.m_currentTask = -1;
     this.m_callback = callback;
-    
-    this.m_layer = document.createElement("div");
-    this.m_layer.className = "DialogLayer";
-        
-    this.m_frame = new UI.Frame()
-      .setTitle(translateKey('infoLoadConfigData'))
-      .setContentSize(frameWidth, frameHeight)
-      .setPosition(frameX, frameY)
-      .add(new UI.Text()
-        .setPosition(10,10)
-        .setWidth(frameWidth - 10)
-        //.setHtml(ConfigDataLoader.CONTENT)
-        .setHtml("<img src='/ise/img/ajaxload_white.gif' style='float:left;margin-right:10px' />" + translateKey('infoLoadConfigDataPlsWait'))
-      );
-      
+    this.ready();
+  },
+
+  showMessage: function() {
+    var screenWidth = WebUI.getWidth();
+       var screenHeight = WebUI.getHeight();
+       var frameWidth = ConfigDataLoader.CONTENT_WIDTH;
+       var frameHeight = ConfigDataLoader.CONTENT_HEIGHT;
+       var frameX = parseInt((screenWidth - frameWidth ) / 2);
+       var frameY = parseInt((screenHeight - frameHeight) / 2);
+
+       this.m_layer = document.createElement("div");
+       this.m_layer.className = "DialogLayer";
+
+       this.m_frame = new UI.Frame()
+         .setTitle(translateKey('infoLoadConfigData'))
+         .setContentSize(frameWidth, frameHeight)
+         .setPosition(frameX, frameY)
+         .add(new UI.Text()
+           .setPosition(10, 10)
+           .setWidth(frameWidth - 10)
+           //.setHtml(ConfigDataLoader.CONTENT)
+           .setHtml("<img src='/ise/img/ajaxload_white.gif' style='float:left;margin-right:10px' />" + translateKey('infoLoadConfigDataPlsWait'))
+         );
+
     this.m_layer.appendChild(this.m_frame.getElement());
     Layer.add(this.m_layer);
-    
-    this.ready();
+  },
+
+  hideMessage: function() {
+    this.m_frame.dispose();
+    Layer.remove(this.m_layer);
   },
 
   ready: function()
@@ -6161,9 +6278,6 @@ ConfigDataLoader = Class.create({
     }
     else
     {
-      this.m_frame.dispose();
-      Layer.remove(this.m_layer);
-    
       if (this.m_callback) { this.m_callback(); }
     }
   },
@@ -6240,6 +6354,7 @@ WebUI = Singleton.create({
   
   start: function()
   {
+    ConfigData.load();
     this.USERNAME = jQuery.trim(homematic('User.getUserFirstName', {'userID': userId}));
 
     if ((this.USERNAME == "") || (typeof this.USERNAME == "undefined")) {
@@ -10253,6 +10368,10 @@ MessageBox = Class.create({
   {
     Layer.remove(this.m_layer);
     if (typeof this.m_action == "function") { this.m_action(); }
+  },
+
+  setOkButtonText: function(lbl) {
+    this.m_okButton.setText(lbl);
   }
 
 });
@@ -10260,7 +10379,7 @@ MessageBox = Class.create({
 MessageBox.DEFAULT_CONTENT_HEIGHT = 80;
 MessageBox.DEFAULT_CONTENT_WIDTH  = 320; 
 
-MessageBox.show = function(title, content, callback, width, height, id, barGraphId)
+MessageBox.show = function(title, content, callback, width, height, id, barGraphId, btnText)
 {
   this.msgBox = new MessageBox();
   this.msgBox.setTitle(title);
@@ -10276,6 +10395,10 @@ MessageBox.show = function(title, content, callback, width, height, id, barGraph
   if ((width && width != "") && (height && height != ""))
   {
     this.msgBox.setContentSize(width, height);
+  }
+
+  if (typeof btnText != "undefined") {
+    this.msgBox.setOkButtonText(btnText);
   }
 
   if (id) {
@@ -12843,6 +12966,182 @@ FirewallConfigDialog = Class.create({
 
 });
 
+FirewallConfigDialog_CCU2 = Class.create({
+
+  /**
+   * @constructor
+   * Erzeugt einen neuen FirewallConfigDialog
+   **/
+  initialize: function () {
+    var screenWidth = WebUI.getWidth();
+    var screenHeight = WebUI.getHeight();
+    var frameWidth = FirewallConfigDialog.CONTENT_WIDTH;
+    var frameHeight = FirewallConfigDialog.CONTENT_HEIGHT;
+    var frameX = parseInt((screenWidth - frameWidth) / 2);
+    var frameY = parseInt((screenHeight - frameHeight) / 2);
+
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "DialogLayer";
+
+    this.m_xmlrpcListBox = new UI.ListBox()
+      .setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, 10)
+      .setWidth(150)
+      //.add({id: "full"      , name: "Vollzugriff"})
+      //.add({id: "restricted", name: "eingeschränkt"})
+      //.add({id: "none"      , name: "kein Zugriff"});
+      .add({id: "full", name: translateKey("dialogSettingsFirewallLblFullAccess")})
+      .add({id: "restricted", name: translateKey("dialogSettingsFirewallLblRestrictedAccess")})
+      .add({id: "none", name: translateKey("dialogSettingsFirewallLblNoAccess")});
+
+
+    this.m_hmscriptListBox = new UI.ListBox()
+      .setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, 80)
+      .setWidth(150)
+      //.add({id: "full"      , name: "Vollzugriff"})
+      //.add({id: "restricted", name: "eingeschränkt"})
+      //.add({id: "none"      , name: "kein Zugriff"});
+      .add({id: "full", name: translateKey("dialogSettingsFirewallLblFullAccess")})
+      .add({id: "restricted", name: translateKey("dialogSettingsFirewallLblRestrictedAccess")})
+      .add({id: "none", name: translateKey("dialogSettingsFirewallLblNoAccess")});
+
+    this.m_ipTextArea = new UI.Textarea()
+      .setPosition(10, 180)
+      .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+      .setHeight(100)
+      .setWrap(true);
+
+    this.m_frame = new UI.Frame()
+      //.setTitle("Firewall Konfiguration")
+      .setTitle(translateKey("dialogSettingsFirewallTitle"))
+      .setContentSize(frameWidth, frameHeight)
+      .setPosition(frameX, frameY)
+      .add(new UI.Text()
+        .setPosition(10, 10)
+        //.setHtml("<b>HomeMatic XML-RPC API:</b>")
+        .setHtml(translateKey("dialogSettingsFirewallLblXMLRPCAPI"))
+    )
+      .add(new UI.Text()
+        .setPosition(10, 40)
+        .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+        //.setText("Ermöglicht den direkten Zugriff auf angelernte HomeMatic Geräte")
+        .setText(translateKey("dialogSettingsFirewallLblHintXMLRPCAPI"))
+    )
+      .add(this.m_xmlrpcListBox)
+      .add(new UI.Text()
+        .setPosition(10, 80)
+        //.setHtml("<b>Remote HomeMatic-Script API:</b>")
+        .setHtml(translateKey("dialogSettingsFirewallLblScriptAPI"))
+    )
+      .add(new UI.Text()
+        .setPosition(10, 110)
+        .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+        //.setText("Ermöglicht den Zugriff auf die Logikschicht der HomeMatic Zentrale")
+        .setText(translateKey("dialogSettingsFirewallLblHintScriptAPI"))
+    )
+      .add(this.m_hmscriptListBox)
+      .add(new UI.Text()
+        .setPosition(10, 150)
+        //.setHtml("<b>IP-Adressen für den eingeschränkten Zugriff:</b>")
+        .setHtml(translateKey("dialogSettingsFirewallLblIPAddresses"))
+    )
+      .add(this.m_ipTextArea)
+      .add(new UI.Text()
+        .setPosition(10, 290)
+        .setWidth(FirewallConfigDialog.CONTENT_WIDTH - 20)
+        //.setText("Sie können den Zugriff wahlweise für einzelne IP-Adressen (z.B. 192.168.0.1) oder ganze Adressbereiche (z.B. 192.168.0.0/16) freigeben.")
+        .setText(translateKey("dialogSettingsFirewallLblHintIPAddresses"))
+    )
+      .add(new UI.Button()
+        .setPosition(10, FirewallConfigDialog.CONTENT_HEIGHT - 30)
+        //.setText("Abbrechen")
+        .setText(translateKey("btnCancel"))
+
+        .setAction(this.close, this)
+    )
+      .add(new UI.Button()
+        .setPosition(FirewallConfigDialog.CONTENT_WIDTH - 160, FirewallConfigDialog.CONTENT_HEIGHT - 30)
+        //.setText("OK")
+        .setText(translateKey("btnOk"))
+        .setAction(this.ok, this)
+    );
+
+    this.loadConfiguration();
+
+    this.m_layer.appendChild(this.m_frame.getElement());
+    Layer.add(this.m_layer);
+  },
+
+  loadConfiguration: function () {
+
+    var response = homematic("Firewall.getConfiguration");
+    if (null != response) {
+      var services = response.services;
+      var ips = response.ips.join(";\n");
+      var xmlrpcAccess = "full";
+      var hmscriptAccess = "full";
+
+      for (var i = 0, len = services.length; i < len; i++) {
+        var service = services[i];
+        if (service.id == "XMLRPC") {
+          xmlrpcAccess = service.access;
+        }
+        if (service.id == "REGA") {
+          hmscriptAccess = service.access;
+        }
+      }
+
+      this.m_xmlrpcListBox.selectItemById(xmlrpcAccess);
+      this.m_hmscriptListBox.selectItemById(hmscriptAccess);
+      this.m_ipTextArea.setText(ips);
+    }
+  },
+
+  /**
+   * Schließt den FirewallConfigDialog ohne Änderungen zu übernehmen.
+   **/
+  close: function () {
+    Layer.remove(this.m_layer);
+  },
+
+  /**
+   * Übernimmt die Änderungen und schließt den FirewallConfigDialog anschließend.
+   **/
+  ok: function () {
+    var xmlrpcAccess = this.m_xmlrpcListBox.getSelectedItem().id,
+    hmscriptAccess = this.m_hmscriptListBox.getSelectedItem().id,
+    ips = this.m_ipTextArea.getText().replace(/\s+/g, '').split(";"),
+    firewallPolicy = "MOST_OPEN",
+    userPorts = "";
+
+    var isOk = true;
+    if (ips[0] != "" ) {
+      for (var i = 0, len = ips.length; i < len; i++) {
+        var ip = ips[i];
+        if (! isIPAddressValid(ip)) {
+          isOk = false;
+        }
+      }
+    }
+
+    if (isOk) {
+      this.close();
+      homematic("Firewall.setConfiguration", {
+        services: [
+          {name: "XMLRPC", access: xmlrpcAccess},
+          {name: "REGA", access: hmscriptAccess}
+        ],
+        ips: ips,
+        userports: userPorts,
+        mode: firewallPolicy
+      });
+    }
+    else {
+      //MessageBox.show("Eingabefehler", "Verwenden Sie bitte nur IP-Adressen im Format \"1.2.3.4\" und Adressgruppen im Format \"1.2.3.0/8\". Separieren Sie die einzelnen Adressen durch Semikola.");
+      MessageBox.show(translateKey("dialogSettingsFirewallErrorMsgTitle"), translateKey("dialogSettingsFirewallErrorMsgContent"));
+    }
+  }
+});
+
 FirewallConfigDialog.CONTENT_WIDTH = 500;
 FirewallConfigDialog.CONTENT_HEIGHT = 400;
 
@@ -14075,6 +14374,539 @@ StatusDisplayDialogEPaper = Class.create(StatusDisplayDialog, {
 
 YesNoDialog.RESULT_NO = 0;
 YesNoDialog.RESULT_YES = 1;
+var arIconDesc = [],
+  resetEPaperDisplay = false;
+
+function getIconDescr(no) {
+  if(arIconDesc.length == 0) {
+    arIconDesc = [
+      translateKey("iconLampOff"),
+      translateKey("iconLampOn"),
+      translateKey("iconPadlockOpen"),
+      translateKey("iconPadlockClosed"),
+      translateKey("iconX"),
+      translateKey("iconTick"),
+      translateKey("iconInfo"),
+      translateKey("iconEnvelope"),
+      translateKey("iconWrench"),
+      translateKey("iconSun"),
+
+      translateKey("iconMoon"),
+      translateKey("iconWind"),
+      translateKey("iconCloud"),
+      translateKey("iconCloudBolt"),
+      translateKey("iconCloudLightRain"),
+      translateKey("iconCloudMoon"),
+      translateKey("iconCloudRain"),
+      translateKey("iconCloudSnow"),
+      translateKey("iconCloudSun"),
+      translateKey("iconCloundSunRain"),
+
+      translateKey("iconSnowFlake"),
+      translateKey("iconRainDrop"),
+      translateKey("iconFlame"),
+      translateKey("iconWindowOpen"),
+      translateKey("iconShutter"),
+      translateKey("iconEco"),
+      translateKey("iconProtectionOff"),
+      translateKey("iconProtectionExternal"),
+      translateKey("iconProtectionInternal"),
+      translateKey("iconBell"),
+
+      translateKey("iconClock")
+    ];
+  }
+  return arIconDesc[no];
+};
+
+function setIconPreview2(picNr, row) {
+  var picPath = "/ise/img/icons_hmip_wrcd/24/",
+  previewElm = jQuery("#iconPreview_" + row);
+
+  if (picNr != 0) {
+
+    previewElm.html("<img src='" + picPath + picNr + ".png' alt='' style='height:20px; background-color:#f0f0f0;'>");
+  } else {
+    previewElm.html("");
+  }
+};
+
+function showHideSoundParams(soundNo) {
+  var soundParamElms = jQuery("[name='soundParam']");
+  if (soundNo != 0) {
+    soundParamElms.show();
+  } else {
+    soundParamElms.hide();
+  }
+};
+
+function showHideDisplayConfig(elm) {
+  var resetDisplay = jQuery(elm).is(":checked");
+  if (resetDisplay) {
+    jQuery("[name='displayConfig']").attr("style", "visibility:hidden");
+    resetEPaperDisplay = true;
+  } else {
+    jQuery("[name='displayConfig']").attr("style", "visibility:visible");
+    resetEPaperDisplay = false;
+  }
+};
+
+function setTextAlignment(row, alignment) {
+  var textElm = jQuery("#text_" + row);
+  textElm.attr("style","text-align: " + alignment.toLowerCase());
+};
+
+function showDisplayConfigTextHelp() {
+  var title = translateKey("dialogHelpAcousticDisplayReceiverTitle"),
+    content = translateKey("dialogHelpAcousticDisplayReceiverContent");
+  MessageBox.show(title, content,'', 450, 420);
+};
+
+StatusDisplayDialogAcousticEPaper = Class.create({
+ 
+  initialize: function(title, content, value, callback, contentType) {
+    var _this_ = this;
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer";
+    this.RESULT_NO = 0;
+    this.RESULT_YES = 1;
+
+    this.arInitConfigString = value.split("},{"); // cfg string when entering the dialog
+
+    resetEPaperDisplay = false;
+
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+    
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    titleElement.appendChild(document.createTextNode(title));
+    titleElement.onmousedown = function(event) { new Drag(this.parentNode, event); };
+    dialog.appendChild(titleElement);
+    
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+    
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+    
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className= "YesNoDialogFooter";
+    
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('footerBtnOk')));
+    yesButton.onclick = function() { _this_.yes(); };
+    yesButton.id="btnYes";
+    footer.appendChild(yesButton);
+    
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('footerBtnCancel')));
+    noButton.onclick = function() { _this_.no(); };
+    noButton.id = "btnNo";
+    footer.appendChild(noButton);
+    
+    dialog.appendChild(footer);
+    
+    this.m_layer.appendChild(dialog);
+    Layer.add(this.m_layer);
+
+    translatePage(".YesNoDialog");
+
+    this._addElements();
+    if (this.arInitConfigString != "") {
+      this._initDialog();
+    }
+
+    this.setHeight();
+    this.setWidth(700);
+  },
+
+  _initDialog: function() {
+    var self = this;
+    jQuery.each(this.arInitConfigString, function(index, cfg){
+      var cfg = cfg.replace(/{/,"").replace(/}/,""),
+        arCfgParamString = cfg.split(","),
+        arParam = [];
+
+      var curRow;
+
+      jQuery.each(arCfgParamString, function(index, param) {
+        var _arParam = param.split("=");
+        arParam[_arParam[0]] = _arParam[1];
+      });
+
+      if (typeof arParam["DDID"] != "undefined") {
+        curRow = arParam["DDID"];
+
+        if (arParam["DDS"] != "") {
+          if (arParam["DDS"] == "XXX") {
+            jQuery("#resetDisplay").attr("checked", true).change();
+            arParam["DDS"] = "";
+            // Because the reset command doesn't set DDA and DDTC
+            // we have to set DDA and DDTC manually when initializing the dialog within programs.
+            arParam["DDA"] = "CENTER";
+            arParam["DDTC"] = "BLACK";
+          }
+          jQuery("#text_" + curRow).val(self._decodeSpecialChars(arParam["DDS"]));
+        }
+
+        jQuery("#align_" + curRow).val(arParam["DDA"]).change();
+        jQuery("#bgColor_" + curRow).val(arParam["DDBC"]);
+        jQuery("#textColor_" + curRow).val(arParam["DDTC"]);
+        jQuery("#icon_" + curRow).val(arParam["DDI"]).change();
+      }
+
+      if (typeof arParam["ANS"] != "undefined") {
+        jQuery("#soundSelectBox").val(arParam["ANS"]).change();
+        jQuery("#soundQuantitySelectBox").val(arParam["R"]);
+        jQuery("#soundTimeLagSelectBox").val(arParam["IN"]);
+      }
+
+    });
+  },
+
+  _addElements: function() {
+    var self = this,
+    dialogContentElem = jQuery("#statusDisplayDialog");
+
+    dialogContentElem.append(function(index,html){
+      var content =  "<table name='displayConfig'>";
+        content += "<th>&nbsp;</th>";
+        content += "<th>"+translateKey('lblText')+"&nbsp;&nbsp;<img src='/ise/img/help.png' height='16' width='16' onclick='showDisplayConfigTextHelp();'></th>";
+        content += "<th>"+translateKey('lblAlign')+"</th>";
+        content += "<th>"+translateKey('lblBGColorBR')+"</th>";
+        content += "<th>"+translateKey('lblTextColorBR')+"</th>";
+        content += "<th>"+translateKey('lblIcon')+"</th>";
+
+      for (var loop = 1; loop <= 5; loop++) {
+        content +=
+          "<tr>" +
+            "<td>"+translateKey('statusDisplayLine')+": "+loop+"</td>" +
+            "<td>"+self._getTextElm(loop)+"</td>" +
+            "<td>"+self._getAlignElm(loop)+"</td>" +
+            "<td>"+self._getBgColorElm(loop)+"</td>" +
+            "<td>"+self._getTextColorElm(loop)+"</td>" +
+            "<td>"+self._getIconElm(loop)+"</td>" +
+            "<td id='iconPreview_"+loop+"'></td>"+
+          "</tr>";
+      }
+      content += "</table>";
+
+      content +=
+        "<tr>" +
+           "<td colspan='7'><hr></td>"+
+        "</tr>";
+
+      content +=
+      "<table align='center'>" +
+        "<th align='center'>"+translateKey('lblAcusticalSignal')+"</th><th class='hidden' name='soundParam'>"+translateKey('lblRepetition')+"</th><th class='hidden' name='soundParam'>"+translateKey('lblTimeLag')+"</th>";
+
+      content +=
+        "<tr>" +
+          "<td align='center'><select class='centerSelect' id='soundSelectBox' onchange='showHideSoundParams(this.value)'>"+self._getSoundOptions()+"</select></td>" +
+          "<td class='hidden' name='soundParam' align='center'><select class='centerSelect' id='soundQuantitySelectBox'>"+self._getSoundQuantityOptions()+"</select></td>" +
+          "<td class='hidden' name='soundParam' align='center'><select class='centerSelect' id='soundTimeLagSelectBox'>"+self._getSoundTimeLagOptions()+"</select></td>" +
+        "</tr>" +
+
+      "</table>";
+
+      content +=
+        "<tr>" +
+           "<td colspan='7'><hr></td>"+
+        "</tr>";
+
+      content +=
+        "<table align='center'>";
+        content +=
+          "<tr>" +
+            "<td>"+translateKey("resetDisplay")+"</td>" +
+            "<td><input id='resetDisplay' type='checkbox' onchange='showHideDisplayConfig(this);'></td>" +
+          "</tr>" +
+      "</table>";
+
+      return content;
+    });
+  },
+
+  _getTextElm: function(no) {
+    return "<input id='text_"+no+"' type='text' maxlength='15' size='15' style='text-align:center;' tabindex='"+no+"'>";
+  },
+
+  _getAlignElm: function(no) {
+    var html = "<select class='centerSelect' id='align_"+no+"' onchange='setTextAlignment("+no+", this.value)'>";
+      html += "<option value='LEFT'>"+translateKey('lblLeft')+"</option>";
+      html += "<option value='CENTER' selected>"+translateKey('lblCenter')+"</option>";
+      html += "<option value='RIGHT'>"+translateKey('lblRight')+"</option>";
+    html += "</select>";
+    return html;
+  },
+
+  _getBgColorElm: function(no) {
+    var html = "<select class='centerSelect' id='bgColor_"+no+"'>";
+      html += "<option value='WHITE'>"+translateKey('colorWHITE')+"</option>";
+      html += "<option value='BLACK'>"+translateKey('colorBLACK_A')+"</option>";
+      html += "<option value='RED'>"+translateKey('colorRED')+"</option>";
+    html += "</select>";
+    return html;
+  },
+
+  _getTextColorElm: function(no) {
+    var html = "<select class='centerSelect' id='textColor_"+no+"'>";
+      html += "<option value='WHITE'>"+translateKey('colorWHITE')+"</option>";
+      html += "<option value='BLACK' selected>"+translateKey('colorBLACK_A')+"</option>";
+      html += "<option value='RED'>"+translateKey('colorRED')+"</option>";
+    html += "</select>";
+    return html;
+  },
+
+  _getIconElm: function(no) {
+    var html = "<select class='centerSelect' id='icon_"+no+"' onchange='setIconPreview2(this.value, "+no+");'>";
+    html += "<option value='0'>"+translateKey('stringTableNotUsed')+"</option>";
+    for (var loop = 0; loop < 31; loop++) {
+      html += "<option value='" +(loop + 1)+"'>"+getIconDescr(loop)+"</option>";
+    }
+    html += "</select>";
+    return html;
+  },
+
+  _getSoundOptions:function() {
+    var options = "",
+    arSound = [
+      translateKey("stringTableNotUsed"),
+      translateKey("Low battery"),
+      translateKey("Disarmed"),
+      translateKey("ExternallyArmed"),
+      translateKey("InternallyArmed"),
+      translateKey("DelayExternalArming"),
+      translateKey("DelayInternalArming"),
+      translateKey("Event"),
+      translateKey("Error")
+    ];
+
+    for (var loop = 0; loop < arSound.length; loop++) {
+      options += "<option value='"+loop+"'>"+ arSound[loop] +"</option>";
+    }
+    return options;
+  },
+
+  _getSoundQuantityOptions: function() {
+    var options = "";
+    options += "<option value='0'>"+translateKey('optionNoRepetition')+"</option>";
+    for (var loop = 1; loop <= 14; loop++) {
+      options += "<option value='"+loop+"'>"+loop+"</option>";
+    }
+    options += "<option value='15'>"+translateKey('optionInfinite')+"</option>";
+    return options;
+  },
+
+  _getSoundTimeLagOptions: function() {
+    var options = "";
+    for (var loop = 1; loop <= 15; loop++) {
+      options += "<option value='"+loop+"'>"+ (parseInt(loop)  * 10) + " " + translateKey("optionUnitS") +"</option>";
+    }
+    return options;
+  },
+
+  _getTextConfigString: function() {
+    var result = "";
+
+    var rowCounter = 0,
+      text = [],
+      align = [],
+      bgColor = [],
+      textColor = [],
+      icon = [];
+
+    var rowNo,
+      rowText,
+      rowIcon;
+
+    for (var loop = 0; loop < 5; loop++) {
+      rowNo = loop + 1;
+      rowText = jQuery("#text_" + rowNo).val();
+      rowIcon = jQuery("#icon_" + rowNo).val();
+      if (rowText != "" || rowIcon != 0) {
+        if (rowText != "") {
+          text[rowCounter] = this._encodeSpecialChars(rowText);
+        } else {
+          text[rowCounter] = "";
+        }
+
+        icon[rowCounter] = rowIcon;
+        align[rowCounter] = jQuery("#align_" + rowNo).val();
+        bgColor[rowCounter] = jQuery("#bgColor_" + rowNo).val();
+        textColor[rowCounter] = jQuery("#textColor_" + rowNo).val();
+
+        result = result.replace(/,DDC=true/g, '');
+
+        result += "{" +
+          "DDBC=" + bgColor[rowCounter] +     // DISPLAY_DATA_BACKGROUND_COLOR
+          ",DDTC=" + textColor[rowCounter] +  // DISPLAY_DATA_TEXT_COLOR
+          ",DDI=" + icon[rowCounter] +        // DISPLAY_DATA_ICON
+          ",DDA=" + align[rowCounter] +       // DISPLAY_DATA_ALIGNMENT
+          ",DDS=" + text[rowCounter] +        // DISPLAY_DATA_STRING
+          ",DDID=" + rowNo +                  // DISPLAY_DATA_ID
+          ",DDC=true"+                        // DISPLAY_DATA_COMMIT
+          "},";
+        rowCounter++;
+      }
+    }
+    return result;
+  },
+
+  _encodeSpecialChars: function(txt) {
+    return txt
+      .replace(/Ä/g,"[")
+      .replace(/Ö/g,"#")
+      .replace(/Ü/g,"$")
+      .replace(/ä/g,"²")
+      .replace(/ö/g,"|")
+      .replace(/ü/g,"³")
+      .replace(/ß/g,"_")
+      .replace(/&/g,"]")
+      .replace(/=/g,"µ");
+  },
+
+  _decodeSpecialChars: function(txt) {
+    return txt
+      .replace(/\[/g,"Ä")
+      .replace(/#/g,"Ö")
+      .replace(/\$/g,"Ü")
+      .replace(/²/g,"ä")
+      .replace(/\|/g,"ö")
+      .replace(/³/g,"ü")
+      .replace(/\_/g,"ß")
+      .replace(/\]/g,"&")
+      .replace(/µ/g,"=");
+  },
+
+  _getAcousticConfigString: function() {
+    var result = "",
+      selectedSound = jQuery("#soundSelectBox").val();
+
+    if (selectedSound != 0) {
+      result += "{" +
+        "R=" + jQuery("#soundQuantitySelectBox").val() +    // REPETITIONS
+        ",IN=" + jQuery("#soundTimeLagSelectBox").val() +   // INTERVAL
+        ",ANS=" + selectedSound +                           // ACOUSTIC_NOTIFICATION_SELECTION
+        "}";
+    }
+
+    return result;
+  },
+
+  _createConfigString: function() {
+    var textConfigString = "", acousticConfigString = "";
+    if (! resetEPaperDisplay) {
+       textConfigString = this._getTextConfigString();
+       acousticConfigString = this._getAcousticConfigString();
+      this.configString = (acousticConfigString == "") ? textConfigString.slice(0, textConfigString.length - 1) : textConfigString + acousticConfigString;
+    } else {
+      acousticConfigString = this._getAcousticConfigString();
+      this.configString = (acousticConfigString == "") ? "{DDS=XXX,DDID=1,DDC=true}" : "{DDS=XXX,DDID=1,DDC=true}," + this._getAcousticConfigString() ;
+    }
+  },
+
+  getConfigString: function() {
+    return this.configString;
+  },
+
+  // PUBLIC
+  close: function(result)
+  {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) { this.m_callback(result); }
+  },
+  
+  yes: function()
+  {
+    this._createConfigString();
+    this.close(this.RESULT_YES);
+  },
+  
+  no: function()
+  {
+    this.close(this.RESULT_NO);
+  },
+
+  btnTextYes: function(btnTxt) {
+    jQuery(".YesNoDialog_yesButton").text(btnTxt);
+  },
+
+  btnYesHide: function() {
+    jQuery("#btnYes").addClass("hidden");
+  },
+
+  btnYesShow: function() {
+    jQuery("#btnYes").removeClass("hidden");
+  },
+
+  btnTextNo: function(btnTxt) {
+    jQuery(".YesNoDialog_noButton").text(btnTxt);
+  },
+
+  btnNoHide: function() {
+    jQuery("#btnNo").addClass("hidden");
+  },
+
+  btnNoShow: function() {
+    jQuery("#btnNo").removeClass("hidden");
+  },
+
+  setHeight: function() {
+    var heightContentWrapper = jQuery(".YesNoDialogContentWrapper").height(),
+      yesNoElm = jQuery(".YesNoDialog"),
+      footerElm = jQuery(".YesNoDialogFooter");
+
+    yesNoElm.css("height", heightContentWrapper + 78);
+    footerElm.css("top", heightContentWrapper + 26);
+    yesNoElm.css("top", (window.innerHeight / 2) - (yesNoElm.height() / 2));
+  },
+
+  resetHeight: function() {
+    this.setHeight();
+  },
+
+  setWidth: function(dlgWidth) {
+    var defaultWith = 600,
+      offsetWidth = 4,
+      offsetPosYesButton = 109,
+      offsetDialogHeight = 78,
+      offsetDialogFooterHeight = 26;
+
+    var width = dlgWidth - offsetWidth,
+      yesButtonPos = dlgWidth - offsetPosYesButton,
+      position = jQuery(".YesNoDialog").position();
+
+    // dlgWidth = (defaultWith < dlgWidth) ? defaultWith : dlgWidth;
+
+    jQuery(".YesNoDialog").width(dlgWidth).css({left: position.left + ((defaultWith - dlgWidth) / 2)});
+    jQuery(".YesNoDialogTitle").width(width);
+    jQuery(".YesNoDialogContentWrapper").width(width);
+    jQuery(".YesNoDialogFooter").width(width);
+    jQuery(".YesNoDialog_yesButton").css("left", yesButtonPos);
+
+    //Dialoghöhe an Content anpassen.
+    jQuery(".YesNoDialog").css("height", jQuery(".YesNoDialogContentWrapper").height() + offsetDialogHeight);
+    jQuery(".YesNoDialogFooter").css("top", jQuery(".YesNoDialogContentWrapper").height() + offsetDialogFooterHeight);
+  }
+  
+});
 /**
  * rgbwcontrollerdialog.js
  **/
@@ -17244,8 +18076,8 @@ if (PLATFORM == "Central") {
   ],
   INTERFACES:
   [
-    {id: "INTERFACE_BIDCOS_RF", name: translateKey("BidCosRF")}, // BidCos-RF
-    {id: "INTERFACE_BIDCOS_WIRED", name: translateKey("BidCosWired")}, // BidCos-Wired
+    {id: "INTERFACE_BIDCOS_RF", name: translateKey("BidCosRF-Filter")}, // BidCos-RF
+    {id: "INTERFACE_BIDCOS_WIRED", name: translateKey("BidCosWired-Filter")}, // BidCos-Wired
     {id: "INTERFACE_HMIP_RF", name: translateKey("HmIPRF")}, // HmIP-RF
     {id: "INTERFACE_VIRTUAL_DEVICES", name: translateKey("VirtualDevices")},
     {id: "INTERFACE_SYSTEM", name: "System"} //
@@ -26566,7 +27398,7 @@ showAllAPITools = function() {
   });
 
   req.done(function(htmlContent) {
-    MessageBox.show("HomeMatic API - CCU-SN: " + homematic("CCU.getSerial") + " - Address: " + homematic("CCU.getAddress"), htmlContent, null, 450,150);
+    MessageBox.show("HomeMatic API - CCU-SN: " + homematic("CCU.getSerial") + " - Address: " + homematic("CCU.getAddress"), htmlContent, null, 450,150, null, null,translateKey("btnCancel"));
   });
 
   req.fail(function() {
@@ -26691,8 +27523,9 @@ getExtendedDescription = function(oChannelDescr) {
   }
   */
 
+
   if (chType == "KEY_TRANSCEIVER") {
-    if (deviceType.toLowerCase() == "hmip-asir") {
+    if (deviceType.toLowerCase().indexOf("hmip-asir") != -1) {
       result = translateKey("chType_SABOTAGECONTACT");
     }
 
@@ -26956,6 +27789,41 @@ getDualWhiteControllerDiagramURLs = function() {
     dualWhiteControllerDiagramURL["2101"] = path + "Dim2Hot_quadratisch_halb_niedrigistkalt.png";
     dualWhiteControllerDiagramURL["2110"] = path + "Dim2Hot_quadratisch_maximal_niedrigistwarm.png";
     dualWhiteControllerDiagramURL["2111"] = path + "Dim2Hot_quadratisch_maximal_niedrigistkalt.png";
+  }
+};
+/**
+ * Created by grobelnik on 01.08.2016.
+ */
+
+
+iseAcousticDisplayReceiver = Class.create();
+
+iseAcousticDisplayReceiver.prototype = {
+  initialize: function (id, chnAddress, iface) {
+    var self = this;
+    this.id = id;
+
+    statusDisplayDialog = new StatusDisplayDialogAcousticEPaper(translateKey("statusDisplayDialogTitle"), this._getAnchor(), "", function (result) {
+      if (result == this.RESULT_YES) {
+        var configString = this.getConfigString();
+        //conInfo("statusDisplayDialog configString: " + configString);
+
+        if (configString.length > 0) {
+          conInfo("Set the display");
+          setDpState(self.id, configString);
+        } else {
+          conInfo("Don't set the display");
+        }
+      }
+    },"html");
+
+  },
+
+  _getAnchor: function() {
+  return "<table style='margin: 0 auto;'>" +
+     "<tbody id='statusDisplayDialog'>" +
+     "</tbody>" +
+  "</table>";
   }
 };
 /**
@@ -29427,12 +30295,14 @@ iseButtonsWindow.prototype = {
     
     switch (initState) {
       case 0:
+      case false:
         ControlBtn.on(this.divClosed);
         break;
       case 1:
         ControlBtn.on(this.divOpenV);
         break;
       case 2:
+      case true:
         ControlBtn.on(this.divOpenH);
         break;
       default:
@@ -32880,6 +33750,7 @@ iseHmIPWeeklyProgram.prototype = {
     arNonExpertChannels["HMIP-BSL"] = [4,8,12];
     arNonExpertChannels["HMIP-MOD-OC8"] = [10,14,18,22,26,30,34,38];
     arNonExpertChannels["HMIP-WHS2"] = [3,7];
+    arNonExpertChannels["HMIP-MIOB"] = [2,6];
     arNonExpertChannels["HMIP-MP3P"] = [2,6];
     arNonExpertChannels["HMIPW-DRBL4"] = [2,6,10,14];
     arNonExpertChannels["HMIPW-DRD3"] = [2,6,10];
@@ -39103,8 +39974,8 @@ showHintPrgLink = function(channel, prgExists) {
 };
 
 ShowHintIfProgramExists = function(id, ch) {
-    homematic("Channel.listProgramIds", {id: id}, function(result, error) {
-    if (typeof result[0] != "undefined") {
+    homematic("Channel.hasProgramIds", {id: id}, function(result, error) {
+    if (result) {
       showHintPrgLink(ch, true);
     } else {
       if(arChnHasLinks[parseInt(ch)] != true) {
@@ -39616,6 +40487,43 @@ rfd_test = function() {
   });
 };
   
+preventOnOffNonActive= function(elm) {
+  var arFooterElems = jQuery(".FooterButton"),
+    arOnOffElems = jQuery("[name='"+elm.name+"']"),
+    onOffNotActive = 0,
+    chn = elm.name.split("_")[1],
+    counter;
+
+  if (arOnOffElems.length == 2) {
+    counter = 1;
+    jQuery.each(arOnOffElems, function(index,elem) {
+       if (jQuery(elem).val() == 0) {
+         onOffNotActive++;
+       }
+    });
+  } else if (arOnOffElems.length == 4) {
+    counter = 0;
+    if (
+      ((jQuery(arOnOffElems[0]).val() == 0) && (jQuery(arOnOffElems[1]).val() == 0)) ||
+      ((jQuery(arOnOffElems[2]).val() == 0) && (jQuery(arOnOffElems[3]).val() == 0))
+    ) {
+      onOffNotActive++;
+    }
+  }
+
+
+  if (onOffNotActive > counter) {
+    arFooterElems[1].hide();
+    arFooterElems[2].hide();
+    if (jQuery(".j_hint").length == 0) {
+      jQuery("#receiver_param_"+chn).append("<p class='j_hint attention'><b>"+translateKey('hintLinkParamOnOffNotActive')+"</b></p>");
+    }
+  } else {
+    arFooterElems[1].show();
+    arFooterElems[2].show();
+    jQuery(".j_hint").remove();
+  }
+};
 // language = getLang();//"de";
 
 setLanguage = function(lang)

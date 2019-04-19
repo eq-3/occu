@@ -509,6 +509,7 @@ jQuery.extend(true,langJSON, {
     "stringTableRS485IdleTime" : "Bus-Ruhezeit bei Serviceeingriff",
     "stringTableEnterValue" : "Wert eingeben",
     "stringTableEventFilterTime" : "Filterzeit",
+    "stringTableEventFilterTimeA" : "Event-Filterzeit",
     "stringTableRainDetectorHeatingOn" : "Heizung Ein",
     "stringTableRainDetectorHeatingOff" : "Heizung Aus",
     "lblMinutes" : "Minuten",
@@ -608,6 +609,7 @@ jQuery.extend(true,langJSON, {
     "diagramPeriodThisWeek" : "Diese Woche",
     "diagramPeriodThisMonth" : "Dieser Monat",
     "diagramPeriodThisYear" : "Dieses Jahr",
+
     "iconOff":"Aus",
     "iconOn":"An",
     "iconOpen":"Offen",
@@ -620,6 +622,8 @@ jQuery.extend(true,langJSON, {
     "iconSignalGreen":"Signal gr%FCn",
     "iconSignalYellow":"Signal gelb",
     "iconSignalRed":"Signal rot",
+
+    
     "statusDisplayDialogTitle" : "Display Konfiguration",
     "statusDisplayOptionText" : "Text",
     "statusDisplayOptionWhite" : "Wei%DF",
@@ -734,8 +738,10 @@ jQuery.extend(true,langJSON, {
     "optionUnit45S" : "45 Sekunden",
     "optionUnit60S" : "60 Sekunden",
     "optionUnit90S" : "90 Sekunden",
+    "optionUnit105S" : "105 Sekunden",
     "optionUnit1M": "1 Minute",
     "optionUnit2M": "2 Minuten",
+    "optionUnit3M": "3 Minuten",
     "optionUnit4M": "4 Minuten",
     "optionUnit5M": "5 Minuten",
     "optionUnit6M": "6 Minuten",
@@ -1059,6 +1065,7 @@ jQuery.extend(true,langJSON, {
 
 
     "colorBLACK" : "Farbe Aus",
+    "colorBLACK_A" : "Schwarz",
     "colorBLUE" : "Blau",
     "colorGREEN" : "Gr%FCn",
     "colorTURQUOISE" : "T%FCrkis",
@@ -1122,7 +1129,7 @@ jQuery.extend(true,langJSON, {
     "AccessPointAssignmentInProgress" : "Die Verbindung wird hergestellt.",
     "accessPointPrimaryNotKnown" : "Der interne Access Point konnte nicht gefunden werden. Pr%FCfen Sie die Konfiguration der Zentrale.",
     "accessPointNotKnown" : "Der Access Point konnte nicht gefunden werden. Aktualisieren Sie die Liste und f%FChren die Aktion erneut durch.",
-    "accessPointLocalKeyNotSupported" : "Die Konfiguration der Zentrale ist nicht im Offlinebetrieb möglich. Deaktivieren Sie diese Funktion.",
+    "accessPointLocalKeyNotSupported" : "Die Konfiguration der Zentrale ist nicht im Offlinebetrieb m%F6glich. Deaktivieren Sie diese Funktion.",
     "AccessPointAssignmentFinished" : "Der Access Point wurde zum LAN-Router umkonfiguriert und sollte jetzt t%FCrkis leuchten.",
     "accessPointDeleteHint" : "Wollen Sie den Access Point wirklich aus dem System entfernen? " +
       "Sollte im System kein Access Point mehr vorhanden sein, k%F6nnen die entsprechenden Ger%E4te nicht vollst%E4ndig verwendet werden, bis wieder ein Access Point hinzugef%FCgt wurde.",
@@ -1131,7 +1138,7 @@ jQuery.extend(true,langJSON, {
     "AccessPointDeletionFailedPassphraseInvalidFormat" : "Das Passwort des Access Points ist nicht korrekt. Kontrollieren Sie die korrekte Eingabe des Passwortes. Bei Verwendung eines der folgenden Sonderzeichen, muss das Passwort %FCber NetFinder angepasst werden: <, >, ', \u0022, &amp;, $, ?, #, [, ], {, } oder \\",
     "AccessPointDeletionFailedNotKnown" : "Der Access Point konnte nicht gel%F6scht werden. Pr%FCfen Sie die Verbindung des Access Points oder erzwingen Sie das L%F6schen.",
     "AccessPointDeletionFailedPassphraseCouldNotChecked" : "Die Konfiguration des Access Points konnte nicht abgefragt werden. Kontrollieren Sie die Verbindung und versuchen es erneut.",
-    "AccessPointDeletionFailedPassphraseInvalidValue" : "Das Passwort des Access Points ist ungültig.",
+    "AccessPointDeletionFailedPassphraseInvalidValue" : "Das Passwort des Access Points ist ung%FCltig.",
     "AccessPointDeletionFailedFactoryReset" : "Der Werksreset des Access Points konnte nicht durchgef%FChrt werden. %FCberpr%FCfen Sie die Verbindung und versuchen Sie es erneut.",
     "AccessPointDeletionNotFinished" : "Konfiguration und Werksreset des Access Points wird durchgef%FChrt.",
     "AccessPointDeletionInProgress" : "Konfiguration und Werksreset des Access Points wird durchgef%FChrt.",
@@ -1173,7 +1180,7 @@ jQuery.extend(true,langJSON, {
     "backupBackupImperfectMissingFile" : "Backup fehlerhaft/unvollst%E4ndig (z. B. *.apkx Datei fehlt).",
     "backupNoInternet_KeyserverTimeout" : "Kein Internet / Keyserver Timeout.",
     "backupKeyServer_NAK" : "Zentrale dem Keyserver unbekannt.",
-    "backupErrorDevicePersistence_TypesNotCompatibel" : "Einlesen der Ger%E4te fehlgeschlagen (<br/>Gerätetypen nicht kompatibel).",
+    "backupErrorDevicePersistence_TypesNotCompatibel" : "Einlesen der Ger%E4te fehlgeschlagen (<br/>Ger%E4tetypen nicht kompatibel).",
     "backupMigrationFailed" : "Unbekannter Fehler.",
     "backupCoProcessor_not_availabel" : "Es ist kein Coprozessor verf%FCgbar.",
     "backupCoProcessor_NotInitialized" : "Der Coprozessor kann nicht initialisiert werden.",

@@ -852,7 +852,7 @@ cgi_eval {
     set sender_paramid [getExistingParamId $paramids]
 
     if {($sender_paramid == "") && ([isHmIP] == "true")} {
-      if { [file exists $env(DOCUMENT_ROOT)config/easymodes/linkHmIP_$dev_descr_sender(TYPE).tcl] } {
+      if { [file exists [file join $env(DOCUMENT_ROOT) config/easymodes/linkHmIP_$dev_descr_sender(TYPE).tcl]] } {
         set sender_paramid linkHmIP_$dev_descr_sender(TYPE)
       }
     }
@@ -867,7 +867,7 @@ cgi_eval {
     set receiver_paramid [getExistingParamId $paramids]
 
     if {($receiver_paramid == "") && ([isHmIP] == "true")} {
-      if { [file exists $env(DOCUMENT_ROOT)config/easymodes/linkHmIP_$dev_descr_receiver(TYPE).tcl] } {
+      if { [file exists [file join $env(DOCUMENT_ROOT) config/easymodes/linkHmIP_$dev_descr_receiver(TYPE).tcl]] } {
         set receiver_paramid linkHmIP_$dev_descr_receiver(TYPE)
       }
     }

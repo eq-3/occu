@@ -4,7 +4,7 @@
 
 "description_4" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht im festgelegten Takt endlos zwischen den beiden Helligkeitswerten.</span><br/><br/>",
 
-"description_5" : "<span class=\"translated\">Der Bewegungsmelder ist nicht aktiv</span>",
+"description_5" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
 
 "switchMode" : "Schalten bei",
 

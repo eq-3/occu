@@ -14,6 +14,7 @@
     "optionUnit30S": "30 Sekunden",
     "optionUnit1M": "1 Minute",
     "optionUnit2M": "2 Minuten",
+    "optionUnit3M": "3 Minuten",
     "optionUnit4M": "4 Minuten",
     "optionUnit5M": "5 Minuten",
     "optionUnit6M": "6 Minuten",

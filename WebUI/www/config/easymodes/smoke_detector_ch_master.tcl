@@ -1,6 +1,6 @@
 #!/bin/tclsh
 #Kanal-EasyMode!
-source $env(DOCUMENT_ROOT)/config/easymodes/em_common.tcl
+source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 
 # set PROFILE_PNAME(Team) "Zu welcher Gruppe geh&ouml;rt der Rauchmelder?"
 set PROFILE_PNAME(Team) "\${SD_QuestionGroup}"

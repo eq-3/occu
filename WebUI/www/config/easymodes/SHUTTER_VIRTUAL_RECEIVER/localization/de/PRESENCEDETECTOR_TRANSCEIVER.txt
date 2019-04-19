@@ -6,7 +6,7 @@
 
 "description_4" : "<span class=\"translated\">Mit jeder Bewegungserkennung f&auml;hrt die Markise / der Rollladen f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine entsprechende Verz&ouml;gerungszeit eingestellt, wird die Beschattung erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
 
-"description_5" : "<span class=\"translated\">Der Bewegungsmelder ist nicht aktiv</span>",
+"description_5" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
 
 "subset_1" : "hochgefahren",
 "subset_2" : "heruntergefahren",

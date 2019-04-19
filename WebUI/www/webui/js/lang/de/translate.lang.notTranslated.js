@@ -62,6 +62,77 @@ jQuery.extend(true,langJSON, {
     "lblSetConfig" : "Konfiguration speichern",
     "lblConfigNotChanged" : "Es wurde keine %C4nderung an der Konfiguration vorgenommen.",
 
+
+    "NEW ****** NEW" : "Release B/2019",
+
+    "stringTableErrorBadRechargeableBatteryHealthFalse" : "Akkuzustand: OK",
+    "stringTableErrorBadRechargeableBatteryHealthTrue" : "Akkuzustand: nicht OK",
+
+    "configureDisplay" : "Display-Konfiguration",
+    "resetDisplay" : "Display-Reset",
+
+    "hintLinkParamOnOffNotActive" : "Hinweis!<br/><br/>Die Parameter Ein- und Ausschaltdauer d%FCrfen nicht gemeinsam auf 'Nicht aktiv' gestellt werden.",
+
+    "lblText" : "Text",
+    "lblAlign" : "Ausrichtung",
+    "lblBGColorBR" : "Hintergrund-<br/>Farbe",
+    "lblTextColorBR" : "Text-<br/>Farbe",
+    "lblIcon" : "Icon",
+
+    "iconLampOff" : "Lampe aus",
+    "iconLampOn" : "Lampe ein",
+    "iconPadlockOpen" : "Schloss auf",
+    "iconPadlockClosed" : "Schloss zu",
+    "iconX" : "X",
+    "iconTick" : "H%E4ckchen",
+    "iconInfo" : "Info",
+    "iconEnvelope" : "Briefumschlag",
+    "iconWrench" : "Schraubenschl%FCssel",
+    "iconSun" : "Sonne",
+    "iconMoon" : "Mond",
+    "iconWind" : "Wind",
+    "iconCloud" : "Wolke",
+    "iconCloudBolt" : "Wolke/Blitz",
+    "iconCloudLightRain" : "Wolke/leichter Regen",
+    "iconCloudMoon" : "Wolke/Mond",
+    "iconCloudRain" : "Wolke/Regen",
+    "iconCloudSnow" : "Wolke/Schnee",
+    "iconCloudSun" : "Wolke/Sonne",
+    "iconCloundSunRain" : "Wolke/Sonne/Regen",
+    "iconSnowFlake" : "Wolke/Schneeflocke",
+    "iconRainDrop" : "Wolke/Regentropfen",
+    "iconFlame" : "Flamme",
+    "iconWindowOpen" : "Fenster auf",
+    "iconShutter" : "Rollladen",
+    "iconEco" : "Eco",
+    "iconProtectionOff" : "Unscharf",
+    "iconProtectionExternal" : "H%FCllschutz",
+    "iconProtectionInternal" : "Vollschutz",
+    "iconBell" : "Benachrichtigung",
+    "iconClock" : "Uhr",
+
+    "dialogHelpAcousticDisplayReceiverTitle" : "Hinweis zur Texteingabe",
+    "dialogHelpAcousticDisplayReceiverContent" :
+      "Um eine Textzeile zu l%F6schen, geben Sie f%FCr die Zeile bitte ein Leerzeichen ein.<br/><br/>" +
+      "Da nur ein eingeschr%E4nkter Zeichensatz zur Verf%FCgung steht, k%F6nnen einige Zeichen nicht verwendet werden " +
+      "und werden durch andere Zeichen ausgetauscht.<br/><br/>" +
+        "<table style=\"margin-left:auto; margin-right:auto\">" +
+        "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
+        "<tr><td align='center'><span>[</span></td><td align='center'><span>%C4</span></td></tr>" +
+        "<tr><td align='center'><span>#</span></td><td align='center'><span>%D6</span></td></tr>" +
+        "<tr><td align='center'><span>$</span></td><td align='center'><span>%DC</span></td></tr>" +
+        "<tr><td align='center'><span>{</span></td><td align='center'><span>%E4</span></td></tr>" +
+        "<tr><td align='center'><span>|</span></td><td align='center'><span>%F6</span></td></tr>" +
+        "<tr><td align='center'><span>}</span></td><td align='center'><span>%FC</span></td></tr>" +
+        "<tr><td align='center'><span>_</span></td><td align='center'><span>%DF</span></td></tr>" +
+        "<tr><td align='center'><span>]</span></td><td align='center'><span>&</span></td></tr>" +
+        "<tr><td align='center'><span>%B5</span></td><td align='center'><span>=</span></td></tr>" +
+        "<tr><td align='center'><span> ; </span></td><td align='center'><span>Sanduhr</span></td></tr>" +
+        "<tr><td align='center'><span> < </span></td><td align='center'><span>Pfeil nach unten</span></td></tr>" +
+        "<tr><td align='center'><span> = </span></td><td align='center'><span>Pfeil nach oben</span></td></tr>" +
+        "<tr><td align='center'><span> > </span></td><td align='center'><span>Pfeil nach oben rechts</span></td></tr>" +
+        "<tr><td align='center'><span> @ </span></td><td align='center'><span>Pfeil nach unten rechts</span></td></tr>" +
+        "</table>",
     "noMoreKeys" : ""
   }
 });

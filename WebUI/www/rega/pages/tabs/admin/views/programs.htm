@@ -141,11 +141,24 @@
   };
 
   SetStatusDisplay = function(regaDialogID, mode) {
-    var elm = (mode == "DIS") ? jQuery("#setStatusDisplay" + regaDialogID) : jQuery("#setStatusDisplayEPaper" + regaDialogID) ;
+    var url = "/pages/msg/setStatusDisplay.htm";
+    var elm;
+
+    switch (mode) {
+      case "DIS":
+        elm = jQuery("#setStatusDisplay" + regaDialogID);
+        break;
+      case "DIS-EP":
+        elm = jQuery("#setStatusDisplayEPaper" + regaDialogID);
+        break;
+      case "ACOUSTIC_DIS-EP":
+        elm = jQuery("#ePaperAcousticDisplay" + regaDialogID);
+        break;
+    }
 
     jQuery(elm).prop("disabled", true);
 
-    var url = "/pages/msg/setStatusDisplay.htm";
+
     var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
 
     var req = jQuery.ajax({
@@ -179,6 +192,18 @@
             inputElm.change();
           }
         }, "html");
+      } else if (mode == "ACOUSTIC_DIS-EP") {
+        statusDisplayDialog = new StatusDisplayDialogAcousticEPaper(translateKey("statusDisplayDialogTitle"), htmlContent, jQuery(inputElm).val(), function (result) {
+          if (result == this.RESULT_YES) {
+            var configString = this.getConfigString();
+            console.log(configString);
+            var inputElm = jQuery(elm).prev();
+            inputElm.val(configString);
+            inputElm.change();
+          }
+        },"html");
+        statusDisplayDialog.btnTextYes(translateKey("footerBtnOk"));
+        statusDisplayDialog.btnTextNo(translateKey("footerBtnCancel"));
       }
 
 
@@ -454,7 +479,18 @@
   {
     var callback = function ( result )
     {
-      if (result) { iseSingleDestination.SetChannel(scid, result); }
+      if (result) {
+        window.setTimeout(function() {
+          iseSingleDestination.SetChannel(scid, result);
+          // Necessary for the COMBINED_PARAMETER of the HmIP-WRCD
+          var chn = DeviceList.getChannel(result);
+          if (chn.channelType == "ACOUSTIC_DISPLAY_RECEIVER") {
+            window.setTimeout(function () {
+              jQuery("#setDestinationDPSelectChange" + scid).change();
+            }, 750);
+          }
+        },500);
+      }
     };
 
     ChannelChooser.show(callback, ChannelChooser.SHOW_WRITABLE, ChannelChooser.PRG_ACTIVITY);

@@ -4,7 +4,9 @@ function ::CreateIdentification() {
 
   boolean showDisplayIdent = true;
 
-  if (cObj.Label() == "HmIPW-FIO6") {
+  object oIdentificationBacklight = cObj.DPByControl("IDENTIFICATION.IDENTIFICATION_MODE_LCD_BACKLIGHT");
+
+  if (! oIdentificationBacklight) {
     showDisplayIdent = false;
   }
 
@@ -17,25 +19,25 @@ function ::CreateIdentification() {
             WriteLine("<div class='ControlBtnOff' align='center'>${lbDisplayBacklight}</div>");
           WriteLine("</td>");
           WriteLine("<td>");
-            WriteLine("<div id='backlightOff_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '0');\">${stringTableOFF}</div>");
+            WriteLine("<div id='backlightOff_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '0', '"#chnAddress#"');\">${stringTableOFF}</div>");
           WriteLine("</td>");
           WriteLine("<td>");
-            WriteLine("<div id='backlight10S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '10');\">${optionUnit10SShort}</div>");
+            WriteLine("<div id='backlight10S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '10', '"#chnAddress#"');\">${optionUnit10SShort}</div>");
           WriteLine("</td>");
           WriteLine("<td>");
-            WriteLine("<div id='backlight30S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '30');\">${optionUnit30SShort}</div>");
+            WriteLine("<div id='backlight30S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '30', '"#chnAddress#"');\">${optionUnit30SShort}</div>");
           WriteLine("</td>");
           WriteLine("<td >");
-            WriteLine("<div id='backlight1M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '60');\">${optionUnit1MShort}</div>");
+            WriteLine("<div id='backlight1M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '60', '"#chnAddress#"');\">${optionUnit1MShort}</div>");
           WriteLine("</td>");
           WriteLine("<td >");
-            WriteLine("<div id='backlight5M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '300');\">${optionUnit5MSShort}</div>");
+            WriteLine("<div id='backlight5M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '300', '"#chnAddress#"');\">${optionUnit5MSShort}</div>");
           WriteLine("</td>");
           WriteLine("<td >");
-            WriteLine("<div id='backlight10M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '600');\">${optionUnit10MShort}</div>");
+            WriteLine("<div id='backlight10M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '600', '"#chnAddress#"');\">${optionUnit10MShort}</div>");
           WriteLine("</td>");
           WriteLine("<td >");
-            WriteLine("<div id='backlight30M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '1800');\">${optionUnit30MShort}</div>");
+            WriteLine("<div id='backlight30M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setBacklight(this, '1800', '"#chnAddress#"');\">${optionUnit30MShort}</div>");
           WriteLine("</td>");
         WriteLine("</tr>");
       }
@@ -44,25 +46,25 @@ function ::CreateIdentification() {
         WriteLine("<div class='ControlBtnOff' align='center'>${lblLightingKeyVisual}</div>");
       WriteLine("</td>");
       WriteLine("<td>");
-        WriteLine("<div id='visualKeyOff_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '0');\">${stringTableOFF}</div>");
+        WriteLine("<div id='visualKeyOff_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '0', '"#chnAddress#"');\">${stringTableOFF}</div>");
       WriteLine("</td>");
       WriteLine("<td>");
-        WriteLine("<div id='visualKey10S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '10');\">${optionUnit10SShort}</div>");
+        WriteLine("<div id='visualKey10S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '10', '"#chnAddress#"');\">${optionUnit10SShort}</div>");
       WriteLine("</td>");
       WriteLine("<td>");
-        WriteLine("<div id='visualKey30S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '30');\">${optionUnit30SShort}</div>");
+        WriteLine("<div id='visualKey30S_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '30', '"#chnAddress#"');\">${optionUnit30SShort}</div>");
       WriteLine("</td>");
       WriteLine("<td>");
-        WriteLine("<div id='visualKey1M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '60');\">${optionUnit1MShort}</div>");
+        WriteLine("<div id='visualKey1M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '60', '"#chnAddress#"');\">${optionUnit1MShort}</div>");
       WriteLine("</td>");
       WriteLine("<td>");
-        WriteLine("<div id='visualKey5M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '300');\">${optionUnit5MSShort}</div>");
+        WriteLine("<div id='visualKey5M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '300', '"#chnAddress#"');\">${optionUnit5MSShort}</div>");
       WriteLine("</td>");
       WriteLine("<td>");
-        WriteLine("<div id='visualKey10M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '600');\">${optionUnit10MShort}</div>");
+        WriteLine("<div id='visualKey10M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '600', '"#chnAddress#"');\">${optionUnit10MShort}</div>");
       WriteLine("</td>");
       WriteLine("<td>");
-        WriteLine("<div id='visualKey30M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '1800');\">${optionUnit30MShort}</div>");
+        WriteLine("<div id='visualKey30M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '1800', '"#chnAddress#"');\">${optionUnit30MShort}</div>");
       WriteLine("</td>");
     WriteLine("</tr>");
     WriteLine("</table>");
@@ -71,12 +73,12 @@ function ::CreateIdentification() {
 
   WriteLine("<script type='text/javascript'>");
 
-    WriteLine("setBacklight = function(elm, duration) {");
+    WriteLine("setBacklight = function(elm, duration, chAddress) {");
       WriteLine("jQuery(elm).switchClass('ControlBtnOff', 'ControlBtnOn', 0);");
 
       WriteLine("homematic('Interface.putParamset', {");
         WriteLine(" 'interface' : 'HmIP-RF', ");
-        WriteLine(" 'address' : '"#chnAddress#"', ");
+        WriteLine(" 'address' : chAddress, ");
         WriteLine(" 'paramsetKey' : 'VALUES', ");
         WriteLine(" 'set' : [ ");
         WriteLine(" {name: 'IDENTIFICATION_MODE_LCD_BACKLIGHT', type: 'bool', value: true}, ");
@@ -87,11 +89,11 @@ function ::CreateIdentification() {
       WriteLine("window.setTimeout(function() {jQuery(elm).switchClass('ControlBtnOn', 'ControlBtnOff', 0);}, 500)");
     WriteLine("};");
 
-    WriteLine("setVisualKey = function(elm, duration) {");
+    WriteLine("setVisualKey = function(elm, duration, chAddress) {");
       WriteLine("jQuery(elm).switchClass('ControlBtnOff', 'ControlBtnOn', 0);");
       WriteLine("homematic('Interface.putParamset', {");
         WriteLine(" 'interface' : 'HmIP-RF', ");
-        WriteLine(" 'address' : '"#chnAddress#"', ");
+        WriteLine(" 'address' : chAddress, ");
         WriteLine(" 'paramsetKey' : 'VALUES', ");
         WriteLine(" 'set' : [ ");
         WriteLine(" {name: 'IDENTIFICATION_MODE_KEY_VISUAL', type: 'bool', value: true}, ");

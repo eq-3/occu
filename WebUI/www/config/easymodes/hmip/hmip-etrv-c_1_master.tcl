@@ -139,7 +139,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     # left
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">\${stringTableWeekProgramToEdit}</td>"
-      #append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param "onchange=\"ShowActiveWeeklyProgram(parseInt(\$(this).value)+1);\""][getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]</td>"
+      #append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param "onchange=\"ShowActiveWeeklyProgram(parseInt(\$(this).value)+1);\""]&nbsp;[getHelpIcon $param [expr $hlpBoxWidth * 0.8] [expr $hlpBoxHeight / 2]]</td>"
       append HTML_PARAMS(separate_1) "<td name=\"_expertParam\" class=\"_hidden\">"
         append HTML_PARAMS(separate_1) "<select id=\"editProgram\" onchange=\"ShowActiveWeeklyProgram(parseInt(\$(this).value)+1);\">"
           append HTML_PARAMS(separate_1) "<option value='0'>\${stringTableWeekProgram1}</option>"
@@ -287,7 +287,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr i;
     }
     append HTML_PARAMS(separate_1) "<td>\${stringTableTemperatureOffset}</td>"
-    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
   # left
@@ -304,7 +304,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     incr prn
     set param TEMPERATUREFALL_MODUS
     append HTML_PARAMS(separate_1) "<tr name=\"expertParam\" class=\"hidden\"><td>\${stringTableTemperatureFallModeOptions}</td><td>"
-    #append HTML_PARAMS(separate_1)  [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight + 20]]
+    #append HTML_PARAMS(separate_1)  [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight + 20]]
 
     append HTML_PARAMS(separate_1) "<select id='separate_$CHANNEL\_$prn' name='$param'>"
     append HTML_PARAMS(separate_1) "<option value='0'>\${stringTableTemperatureFallModeOpt0}</option>"
@@ -332,7 +332,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr prn
       append HTML_PARAMS(separate_1) "<tr name=\"expertParam\" class=\"hidden\">"
         append HTML_PARAMS(separate_1) "<td>\${stringTableDuration5Min}</td>"
-        append HTML_PARAMS(separate_1) "<td colspan=\"2\" >[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+        append HTML_PARAMS(separate_1) "<td colspan=\"2\" >[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
 
         append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
           append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {"
@@ -359,7 +359,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr i;
     }
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableBoostTimePeriod}</td>"
-    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append HTML_PARAMS(separate_1) "</td>"
 
     # right
@@ -372,7 +372,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr i;
     }
     append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableBoostPosition}</td>"
-    append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+    append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
     append HTML_PARAMS(separate_1) "</td>"
 
     append HTML_PARAMS(separate_1) "</tr>"
@@ -428,14 +428,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       if { ! [catch {set tmp $ps($param)}]  } {
         incr prn
         append HTML_PARAMS(separate_1) "<td>\${stringTableValveStateErrorPosition}</td>"
-        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
       }
 
       set param VALVE_MAXIMUM_POSITION
       if { ! [catch {set tmp $ps($param)}]  } {
         incr prn
         append HTML_PARAMS(separate_1) "<td>\${stringTableValveMaximumPosition}</td>"
-        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+        append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
       }
     append HTML_PARAMS(separate_1) "</tr>"
 
@@ -444,7 +444,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr prn
       append HTML_PARAMS(separate_1) "<tr>"
         append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableValveOffset}</td>"
-        append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\" colspan=\"2\" >[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp; [_getUnit $param]&nbsp;[_getMinMaxValueDescr $param][getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight + 50]]</td>"
+        append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\" colspan=\"2\" >[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp; [_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight + 50]]</td>"
       append HTML_PARAMS(separate_1) "</tr>"
     }
 
@@ -452,13 +452,41 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if { ! [catch {set tmp $ps($param)}]  } {
       incr prn
       append HTML_PARAMS(separate_1) "<tr>"
-      append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableBoostAfterWindowOpen}</td>"
-      append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">"
-      append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]"
-      append HTML_PARAMS(separate_1) "</td>"
+        append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableBoostAfterWindowOpen}</td>"
+        append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">"
+        append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]"
+        append HTML_PARAMS(separate_1) "</td>"
       append HTML_PARAMS(separate_1) "</tr>"
     }
   append HTML_PARAMS(separate_1) "</table>"
+
+  if { (! [catch {set tmp $ps(CHANNEL_OPERATION_MODE)}]) || (! [catch {set tmp $ps(ACOUSTIC_ALARM_SIGNAL)}])  } {
+    append HTML_PARAMS(separate_1) "<hr>"
+    append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+        set param CHANNEL_OPERATION_MODE
+        if { ! [catch {set tmp $ps($param)}]  } {
+          incr prn
+          array_clear options
+          set options(0) "\${optionETRVNormalMode}"
+          set options(1) "\${optionETRVSilentMode}"
+          append HTML_PARAMS(separate_1) "<tr><td>\${lblMode}</td><td>"
+          append HTML_PARAMS(separate_1) "[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"alert(this.value,$chn)\"]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.75]]"
+          append HTML_PARAMS(separate_1) "</td></tr>"
+        }
+
+        set param ACOUSTIC_ALARM_SIGNAL
+        if { ! [catch {set tmp $ps($param)}]  } {
+          incr prn
+          append HTML_PARAMS(separate_1) "<tr>"
+            append HTML_PARAMS(separate_1) "<td>\${lblAcousticAlarmSignal}</td>"
+            append HTML_PARAMS(separate_1) "<td>"
+            append HTML_PARAMS(separate_1) "[getCheckBox $CHANNEL '$param' $ps($param) $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.5]]"
+            append HTML_PARAMS(separate_1) "</td>"
+          append HTML_PARAMS(separate_1) "</tr>"
+        }
+
+    append HTML_PARAMS(separate_1) "</table>"
+  }
 
   if {[session_is_expert]} {
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"

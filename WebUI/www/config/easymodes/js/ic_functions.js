@@ -1131,8 +1131,8 @@ showHintPrgLink = function(channel, prgExists) {
 };
 
 ShowHintIfProgramExists = function(id, ch) {
-    homematic("Channel.listProgramIds", {id: id}, function(result, error) {
-    if (typeof result[0] != "undefined") {
+    homematic("Channel.hasProgramIds", {id: id}, function(result, error) {
+    if (result) {
       showHintPrgLink(ch, true);
     } else {
       if(arChnHasLinks[parseInt(ch)] != true) {
@@ -1644,3 +1644,40 @@ rfd_test = function() {
   });
 };
   
+preventOnOffNonActive= function(elm) {
+  var arFooterElems = jQuery(".FooterButton"),
+    arOnOffElems = jQuery("[name='"+elm.name+"']"),
+    onOffNotActive = 0,
+    chn = elm.name.split("_")[1],
+    counter;
+
+  if (arOnOffElems.length == 2) {
+    counter = 1;
+    jQuery.each(arOnOffElems, function(index,elem) {
+       if (jQuery(elem).val() == 0) {
+         onOffNotActive++;
+       }
+    });
+  } else if (arOnOffElems.length == 4) {
+    counter = 0;
+    if (
+      ((jQuery(arOnOffElems[0]).val() == 0) && (jQuery(arOnOffElems[1]).val() == 0)) ||
+      ((jQuery(arOnOffElems[2]).val() == 0) && (jQuery(arOnOffElems[3]).val() == 0))
+    ) {
+      onOffNotActive++;
+    }
+  }
+
+
+  if (onOffNotActive > counter) {
+    arFooterElems[1].hide();
+    arFooterElems[2].hide();
+    if (jQuery(".j_hint").length == 0) {
+      jQuery("#receiver_param_"+chn).append("<p class='j_hint attention'><b>"+translateKey('hintLinkParamOnOffNotActive')+"</b></p>");
+    }
+  } else {
+    arFooterElems[1].show();
+    arFooterElems[2].show();
+    jQuery(".j_hint").remove();
+  }
+};

@@ -95,6 +95,9 @@ jQuery.extend(true,langJSON, {
     "stringTableHeatingCooling" : "Art der Zweipunktregelung",
     "stringTableSendWeatherData" : "Sende Temperatur- und Feuchtigkeitswert",
 
+    "optionETRVNormalMode" : "Normalbetrieb",
+    "optionETRVSilentMode" : "Fl%FCsterbetrieb",
+    "lblAcousticAlarmSignal" : "Akustischer Alarm",
     "dummy" : ""
   },
 
@@ -193,6 +196,9 @@ jQuery.extend(true,langJSON, {
     "stringTableTwoPointHysteresis" : "Hysteresis for on-off control",
     "stringTableHeatingCooling" : "Type of on-off control",
     "stringTableSendWeatherData" : "Send temperature and humidity value",
+    "optionETRVNormalMode" : "Normal mode",
+    "optionETRVSilentMode" : "Whisper mode",
+    "lblAcousticAlarmSignal" : "Audible alarm",
 
     "dummy" : ""
   }

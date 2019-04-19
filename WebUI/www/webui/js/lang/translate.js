@@ -159,8 +159,8 @@ function translateString(stringToTranslate) {
 function translateFilter() {
   jQuery(".j_Filter_MODE_DEFAULT").html(translateKey("lblStandard"));
   jQuery(".j_Filter_MODE_AES").html(translateKey("lblSecured"));
-  jQuery(".j_Filter_INTERFACE_BIDCOS_RF").html(translateKey("BidCosRF"));
-  jQuery(".j_Filter_INTERFACE_BIDCOS_WIRED").html(translateKey("BidCosWired"));
+  jQuery(".j_Filter_INTERFACE_BIDCOS_RF").html(translateKey("BidCosRF-Filter"));
+  jQuery(".j_Filter_INTERFACE_BIDCOS_WIRED").html(translateKey("BidCosWired-Filter"));
   jQuery(".j_Filter_INTERFACE_HMIP_RF").html(translateKey("HmIPRF"));
   jQuery(".j_Filter_INTERFACE_VIRTUAL_DEVICES").html(translateKey("VirtualDevices"));
 }

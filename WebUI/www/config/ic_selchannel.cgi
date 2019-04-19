@@ -660,7 +660,7 @@ proc showHmIPChannel {devType direction address chType} {
   }
 
   # The sabotage channel of the HmIP-ASIR is not yet in use, so we can't use it for links
-  if {($devType == "HMIP-ASIR") && ($chType == "KEY_TRANSCEIVER")} {
+  if {([string first "HMIP-ASIR" $devType] != -1) && ($chType == "KEY_TRANSCEIVER")} {
    # don't show the channel
     return 0
   }

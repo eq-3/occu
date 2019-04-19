@@ -76,16 +76,17 @@ function ::CreateMotionDetector() {
             WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#sMotionDetectionIsActive#"</span></div>");
           WriteLine("</td>");
 
-          if (cObj.Label() == "HmIP-SMI55") {
-            ! The SMI55 can be configured as a non-permanent listener. If this is the case this button should not be visible
-            ! The check if the device is configured as a non-permanent or a permanent listener happens below in the javascript section
-            WriteLine("<td id='tdBtnTransmitterOnOff"#chnId#"' class='hidden'>");
-          } else {
-            WriteLine("<td>");
+          if (oMotionDetectionActive) {
+            if (cObj.Label() == "HmIP-SMI55") {
+              ! The SMI55 can be configured as a non-permanent listener. If this is the case this button should not be visible
+              ! The check if the device is configured as a non-permanent or a permanent listener happens below in the javascript section
+              WriteLine("<td id='tdBtnTransmitterOnOff"#chnId#"' class='hidden'>");
+            } else {
+              WriteLine("<td>");
+            }
+              WriteLine("<div class='ControlBtnOff CLASS02532' style='min-height:30px; padding:5px;' id='setTransmitterOnOff"#chnId#"'>"#sSetMotionDetection#"</div>");
+            WriteLine("</td>");
           }
-            WriteLine("<div class='ControlBtnOff CLASS02532' style='min-height:30px; padding:5px;' id='setTransmitterOnOff"#chnId#"'>"#sSetMotionDetection#"</div>");
-          WriteLine("</td>");
-
         WriteLine("</tr>");
       }
 
@@ -93,9 +94,12 @@ function ::CreateMotionDetector() {
         WriteLine("<td>");
           WriteLine("<div class='ControlBtnInfo CLASS02532'><span>"#stateMotion#"</span></div>");
         WriteLine("</td>");
-        WriteLine("<td id='tdBtnResetStatus"#chnId#"' class='hidden'>");
-          WriteLine("<div class='ControlBtnOff CLASS02532' style='min-height:30px; padding:5px;' id='resetMotion"#chnId#"'>${btnResetMotion}</div>");
-        WriteLine("</td>");
+
+        if (oMotionDetectionResetMotion) {
+          WriteLine("<td id='tdBtnResetStatus"#chnId#"' class='hidden'>");
+            WriteLine("<div class='ControlBtnOff CLASS02532' style='min-height:30px; padding:5px;' id='resetMotion"#chnId#"'>${btnResetMotion}</div>");
+          WriteLine("</td>");
+        }
       WriteLine("</tr>");
 
     WriteLine("</tbody></table>");
@@ -117,8 +121,13 @@ function ::CreateMotionDetector() {
 
     WriteLine("var resetMotionElm = jQuery('#resetMotion"#chnId#"'),");
     WriteLine("transmitterOnOffElm = jQuery('#setTransmitterOnOff"#chnId#"');");
-    WriteLine("resetMotionElm.click(function() {setDpState('"#oMotionDetectionResetMotion.ID()#"', true);setBtnOn(this.id);});");
-    WriteLine("transmitterOnOffElm.click(function() {setDpState('"#oMotionDetectionActive.ID()#"', "#motionDetectionActive#");setBtnOn(this.id);});");
+
+    if (oMotionDetectionResetMotion) {
+      WriteLine("resetMotionElm.click(function() {setDpState('"#oMotionDetectionResetMotion.ID()#"', true);setBtnOn(this.id);});");
+    }
+    if (oMotionDetectionActive) {
+      WriteLine("transmitterOnOffElm.click(function() {setDpState('"#oMotionDetectionActive.ID()#"', "#motionDetectionActive#");setBtnOn(this.id);});");
+    }
     WriteLine(" setBtnOn = function(elmID) {" );
       WriteLine(" var elm = jQuery('#'+elmID);");
       WriteLine(" elm.removeClass('ControlBtnOff').addClass('ControlBtnOn'); ");

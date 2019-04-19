@@ -2,6 +2,7 @@
 "opticalAlarm" : "Optischer Alarm",
 
 "switch_on" : "Alarm ein",
+"switch_off" : "Alarm aus",
 
 "stringTableAlarmDisableOpticalSignal" : "Kein optisches Signal",
 "stringTableAlarmBlinkingAlternatelyRepeating" : "Abwechselndes, langsames Blinken",

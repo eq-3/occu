@@ -2,6 +2,6 @@
 "description_2" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird die Beleuchtung des Garagentorantriebes eingeschaltet.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird die Beleuchtung des Garagentorantriebes ausgeschaltet.</span><br/><br/>",
 
-"description_4" : "<span class=\"translated\">Der Bewegungsmelder ist nicht aktiv</span>",
+"description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
 
 "hintOnTime" : "<span class=\"translated\">Die Einschaltdauer der Beleuchtung wird vom Garagentorantrieb bestimmt. Sehen Sie dazu bitte im Handbuch des Antriebs nach.</span><br/><br/>",

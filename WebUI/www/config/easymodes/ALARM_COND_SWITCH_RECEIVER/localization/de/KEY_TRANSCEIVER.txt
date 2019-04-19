@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">Sollte der Sabotagekontakt ausgel%F6st werden, wird der gew&uuml;nschte Alarm f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Sabotagekontakt wird f%FCr diese Verkn%FCpfung nicht genutzt.</span><br/><br/>",

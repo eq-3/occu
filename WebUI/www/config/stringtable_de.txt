@@ -302,6 +302,8 @@ CLIMATECONTROL_FLOOR_TRANSMITTER	${stringTableClimateControlFloorTransmitterTitl
 CLIMATECONTROL_HEAT_DEMAND_TRANSMITER	${stringTableClimateControlHeatDemandTransmitterTitle}
 CLIMATECONTROL_HEAT_DEMAND_BOILER_TRANSMITTER	${stringTableClimateControlHeatDemandBoilerTransmitterTitle}
 CLIMATECONTROL_HEAT_DEMAND_PUMP_TRANSMITTER	${stringTableClimateControlHeatDemandPumpTransmitterTitle}
+CLIMATECONTROL_INPUT_RECEIVER	${stringTableClimateControlInputReceiverTitle}
+CLIMATECONTROL_INPUT_TRANSMITTER	${stringTableClimateControlInputTransmitterTitle}
 CLIMATECONTROL_RECEIVER	${stringTableClimateControlReceiver}
 CLIMATECONTROL_REGULATOR	${stringTableClimateControlRegTitle}
 CLIMATECONTROL_REGULATOR|ADJUSTING_COMMAND	${stringTableClimateControlRegAdjCommand}
@@ -365,6 +367,7 @@ COLOR=YELLOW	${colorYELLOW}
 COLOR=WHITE	${colorWHITE}
 COLOR_STATUS=NORMAL	${colorStateNormal}
 COLOR_STATUS=UNKNOWN	${colorStateUnknown}
+COMBINED_PARAMETER	${stringTableSubmit}
 COMFORT_MODE	${stringTableClimateControlRTTransceiverComfortMode}
 COMMUNICATION_REPORTING	${stringTableCommunicatingReporting}
 COMMUNICATION_REPORTING=FALSE	${stringTableCommunicatingReportingFalse}
@@ -634,6 +637,8 @@ ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=UNDERFLOW	${lblValue} ${stringTablePowe
 ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=2	${lblValue} ${stringTablePowerMeterVoltage}: ${lblUnderflow}
 ERROR	${stringTableError}
 ERROR=NO_ERROR	${stringTableErrorNoError}
+ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=FALSE	${stringTableErrorBadRechargeableBatteryHealthFalse}
+ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=TRUE	${stringTableErrorBadRechargeableBatteryHealthTrue}
 ERROR_BATTERY=FALSE	${stringTableBatteryFailure}
 ERROR_BATTERY=TRUE	${stringTableBatteryOk}
 ERROR_CODE	${stringTableErrorCode}
@@ -726,6 +731,8 @@ HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=CLOSED	${stringTableWindowStateC
 HEATING_CLIMATECONTROL_TRANSCEIVER|WINDOW_STATE=OPEN	${stringTableWindowStateOpen}
 HEATING_COOLING=COOLING	${stringTableCooling}
 HEATING_COOLING=HEATING	${stringTableHeating}
+HEATING_COOLING=1	${stringTableCooling}
+HEATING_COOLING=0	${stringTableHeating}
 HEATING_KEY_RECEIVER	${stringTableHeatingKeyReceiverTitle}
 HEATING_ROOM_TH_RECEIVER	${stringTableHeatingRoomTHReceiverTitle}
 HEATING_ROOM_TH_TRANSCEIVER	${stringTableHeatingRoomTHTransceiverTitle}

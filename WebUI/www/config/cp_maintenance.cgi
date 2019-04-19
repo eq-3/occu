@@ -1140,6 +1140,7 @@ proc action_reboot {} {
   catch { exec lcdtool {Saving   Data...  } }
   rega system.Save()
   catch { exec lcdtool {Reboot...       } }
+  exec sleep 5
   exec /sbin/reboot
 }
 proc action_shutdown {} {

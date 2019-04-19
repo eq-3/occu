@@ -185,13 +185,13 @@ proc getKeyTransceiver {chn p descr} {
 
   upvar $p ps
   upvar $descr psDescr
-  upvar prn prn
   upvar special_input_id special_input_id
 
   set specialID "[getSpecialID $special_input_id]"
 
   set html ""
   set specialParam 0
+  set prn 1
 
 set comment {
   # Intruduced with the DBB but currently not supported
@@ -216,8 +216,6 @@ set comment {
     incr prn
   }
 
-set comment {
-  # Intruduced with the DBB but currently not supported
   set param LED_DISABLE_CHANNELSTATE
   if { ! [catch {set tmp $ps($param)}] } {
     append html "<tr>"
@@ -227,7 +225,7 @@ set comment {
     set specialParam 1
     incr prn
   }
-}
+
 
   set param LED_DISABLE_SENDSTATE
   if { ! [catch {set tmp $ps($param)}] } {
@@ -237,6 +235,20 @@ set comment {
     append html "</tr>"
     set specialParam 1
     incr prn
+  }
+
+  # This is for the display configuration for the keys of a ACOUSTIC_DISPLAY_RECEIVER (e. g. HmIP-WRCD)
+  set paramText TEXT
+  set paramIcon TEXT_ICON
+  if {(! [catch {set tmp $ps($paramText)}]) && (! [catch {set tmp $ps($paramIcon)}])} {
+    set psText $ps(TEXT)
+    set psAlignment $ps(TEXT_ALIGNMENT)
+    set psBgColor $ps(TEXT_BACKGROUND_COLOR)
+    set psTextColor $ps(TEXT_COLOR)
+    set psIcon $ps(TEXT_ICON)
+    append html [getAcousticdDisplayReceiverConfig $special_input_id $chn $psText $psAlignment $psBgColor $psTextColor $psIcon]
+
+    set specialParam 1
   }
 
   if {$specialParam == 1} {
@@ -411,6 +423,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
 
   set hlpBoxWidth 450
   set hlpBoxHeight 80
+  set eventDelayPrn 0
 
   set specialID "[getSpecialID $special_input_id]"
   set CHANNEL $special_input_id
@@ -552,23 +565,13 @@ proc getMultiModeInputTransmitter {chn p descr address} {
           append html "break;"
 
         append html "case 1:"
-          append html "elmEventDelay.show();"
-          append html "if (elmEventDelayTimeBaseVal == 12) {"
-            append html "elmEventDelayTimeBase.show();"
-            append html "elmEventDelayTimeFactor.show();"
-            append html "elmEventDelaySpace.show();"
-          append html "}"
+          append html "elmEventDelay.hide();"
           append html "elmKey.show();"
           append html "elmBinary.hide();"
           append html "break;"
 
         append html "case 2:"
-          append html "elmEventDelay.show();"
-          append html "if (elmEventDelayTimeBaseVal == 12) {"
-            append html "elmEventDelayTimeBase.show();"
-            append html "elmEventDelayTimeFactor.show();"
-            append html "elmEventDelaySpace.show();"
-          append html "}"
+          append html "elmEventDelay.hide();"
           append html "elmKey.hide();"
           append html "elmBinary.hide();"
           append html "break;"
@@ -1291,7 +1294,7 @@ proc getDimmerTransmitter {chn p descr} {
     set options(1) "\${optionActiv}"
     append html "<tr><td>\${lblChannelActivInactiv}</td><td>"
     append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"showDecisionValue(this.value,$chn)\"]
-    append html "</tr></td>"
+    append html "</td></tr>"
   }
 
 
@@ -1871,6 +1874,9 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  set hlpBoxWidth 450
+  set hlpBoxHeight 160
+
   set isGroup ""
 
   if {[string equal [string range $address 0 2] "INT"] == 1} {
@@ -2171,6 +2177,32 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "</tr>"
   append html "</table>"
 
+  if { (! [catch {set tmp $ps(CHANNEL_OPERATION_MODE)}]) || (! [catch {set tmp $ps(ACOUSTIC_ALARM_SIGNAL)}])  } {
+    append html "<hr>"
+    append html "<table class=\"ProfileTbl\">"
+      set param CHANNEL_OPERATION_MODE
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        array_clear options
+        set options(0) "\${optionETRVNormalMode}"
+        set options(1) "\${optionETRVSilentMode}"
+        append html "<tr><td>\${lblMode}</td><td>"
+        append html "[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"alert(this.value,$chn)\"]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.75]]"
+        append html "</td></tr>"
+      }
+
+      set param ACOUSTIC_ALARM_SIGNAL
+      if { ! [catch {set tmp $ps($param)}]  } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${lblAcousticAlarmSignal}</td>"
+          append html "<td>"
+          append html "[getCheckBox $CHANNEL '$param' $ps($param) $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.5]]"
+          append html "</td>"
+        append html "</tr>"
+      }
+    append html "</table>"
+  }
 
   if {[session_is_expert]} {
     append html "<script type=\"text/javascript\">"
@@ -2812,6 +2844,9 @@ proc getShutterContact {chn p descr} {
 
   set CHANNEL $special_input_id
 
+  set hlpBoxWidth 450
+  set hlpBoxHeight 160
+
   set html ""
 
   set param EVENT_DELAY_UNIT
@@ -2835,6 +2870,27 @@ proc getShutterContact {chn p descr} {
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
+  set param EVENT_FILTER_NUMBER
+  if { ! [catch {set tmp $ps($param)}]  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventFilterTimeA}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventFilterTime"]
+    append html "</tr>"
+
+    append html [getEventFilterNumber $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_FILTER_PERIOD
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventFilterPeriodA}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentEventFilterTime($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
 
   set param MSG_FOR_POS_A
   if { ! [catch {set tmp $ps($param)}]  } {
@@ -3014,7 +3070,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
     set options(1) "\${optionActiv}"
     append html "<tr><td>$lblPassageDetection</td><td>"
     append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"showDecisionValue(this.value,$chn)\"]
-    append html "</tr></td>"
+    append html "</td></tr>"
   }
 
   if {[session_is_expert]} {

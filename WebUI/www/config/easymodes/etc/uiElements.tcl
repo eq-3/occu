@@ -33,7 +33,7 @@ proc getMinMaxValueDescr {param} {
 
   catch {set unit $param_descr(UNIT)}
 
-  if {$unit == "100%"} {
+  if {($unit == "100%") && ($max <= 1)} {
     set min [format %.0f [expr $min * 100]]
     set max [format %.0f [expr $max * 100]]
   }
@@ -229,6 +229,8 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "DURATION_5MIN" {set x 500; set y 160}
    "ENABLE_ROUTING" {set x 500; set y 120}
    "EVENT_FILTER_NUMBER_motionDetect" {set x 400; set y 60}
+   "EVENT_FILTER_PERIOD" {set x 450; set y 120}
+   "EVENT_FILTER_TIME" {set x 400; set y 90}
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
@@ -240,6 +242,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "TWO_POINT_HYSTERESIS" {set x 450; set y 160}
    "WEEK_PROGRAM_POINTER" {set x 400; set y 100}
    "WEEK_PROGRAM_POINTER_group" {set x 400; set y 100}
+
   }
 
   set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
@@ -963,5 +966,141 @@ set comment {
       append html "}"
     append html "},100);"
   append html "</script>"
+  return $html
+}
+
+proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignment valBgColor valTextColor valIcon} {
+  upvar prn prn
+
+  set specialID "[getSpecialID $special_input_id]"
+
+    set html "<tr>"
+      append html "<td colspan=\"2\"><table><tbody style=\"background-color:white\">"
+        append html "<tr>"
+          append html "<th>\${lblText}</th>"
+          append html "<th>\${lblAlign}</th>"
+          append html "<th>\${lblBGColorBR}</th>"
+          append html "<th>\${lblTextColorBR}</th>"
+          append html "<th>\${lblIcon}</th>"
+          append html "</tr>"
+        append html "<tr>"
+          # TEXT
+          append html "<td>"
+            append html "<input id='separate_$special_input_id\_$prn' name='TEXT' type='text' value='$valText' maxlength='15' size='15'>"
+            append html "<script type=\"text/javascript\">"
+              append html "var elm = document.getElementById('separate_$special_input_id\_$prn');"
+              append html "elm.defaultValue = elm.value;"
+            append html "</script>"
+
+          append html "</td>"
+          incr prn
+
+          # Align
+          set selLeft ""
+          set selCenter ""
+          set selRight ""
+          if {$valAlignment == 0} {set selLeft  "selected=\"selected\"" }
+          if {$valAlignment == 1} {set selCenter  "selected=\"selected\"" }
+          if {$valAlignment == 2} {set selRight  "selected=\"selected\"" }
+          append html "<td>"
+            append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_ALIGNMENT' onchange='setTextAlignment(this.value, $chn, [expr $prn - 1]);'>"
+              append html "<option value='0' $selLeft>\${lblLeft}</option>"
+              append html "<option value='1' $selCenter>\${lblCenter}</option>"
+              append html "<option value='2' $selRight>\${lblRight}</option>"
+            append html "</select>"
+          append html "</td>"
+          append html "<script type=\"text/javascript\">"
+            append html "var elm = document.getElementById('separate_$special_input_id\_$prn');"
+            append html "elm.defaultSelected = elm.value;"
+
+            append html "setTextAlignment = function(alignment, chn, prevElmPrn) \{"
+              append html "var align = \['left', 'center', 'right'\];"
+              append html "var textElm = jQuery(\"\#separate\_$specialID\_\"\+chn+\"_\"+prevElmPrn);"
+              append html "textElm.attr(\"style\", \"text-align:\" + align\[alignment\]);"
+            append html "\};"
+
+            append html "setTextAlignment($valAlignment, $chn, [expr $prn - 1]);"
+
+          append html "</script>"
+          incr prn
+
+          # BgColor
+          set colorWhite ""
+          set colorBlack ""
+          set colorRed ""
+          if {$valBgColor == 0} {set colorWhite  "selected=\"selected\"" }
+          if {$valBgColor == 1} {set colorBlack  "selected=\"selected\"" }
+          if {$valBgColor == 2} {set colorRed  "selected=\"selected\"" }
+          append html "<td>"
+            append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_BACKGROUND_COLOR'>"
+              append html "<option value='0' $colorWhite >\${colorWHITE}</option>"
+              append html "<option value='1' $colorBlack>\${colorBLACK_A}</option>"
+              append html "<option value='2' $colorRed>\${colorRED}</option>"
+            append html "</select>"
+          append html "</td>"
+          append html "<script type=\"text/javascript\">"
+            append html "var elm = document.getElementById('separate_$special_input_id\_$prn');"
+            append html "elm.defaultSelected = elm.value;"
+           append html "</script>"
+          incr prn
+
+          # TextColor
+          set colorWhite ""
+          set colorBlack ""
+          set colorRed ""
+          if {$valTextColor == 0} {set colorWhite  "selected=\"selected\"" }
+          if {$valTextColor == 1} {set colorBlack  "selected=\"selected\"" }
+          if {$valTextColor == 2} {set colorRed  "selected=\"selected\"" }
+          append html "<td>"
+            append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_COLOR'>"
+              append html "<option value='0' $colorWhite >\${colorWHITE}</option>"
+              append html "<option value='1' $colorBlack>\${colorBLACK_A}</option>"
+              append html "<option value='2' $colorRed>\${colorRED}</option>"
+            append html "</select>"
+          append html "</td>"
+          append html "<script type=\"text/javascript\">"
+            append html "var elm = document.getElementById('separate_$special_input_id\_$prn');"
+            append html "elm.defaultSelected = elm.value;"
+           append html "</script>"
+          incr prn
+
+          # Icon
+          append html "<td>"
+            append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_ICON' onchange='setIconPreview(this.value, \"$chn\")'>"
+              set iconCounter 0
+              foreach icon {stringTableNotUsed iconLampOff iconLampOn iconPadlockOpen iconPadlockClosed iconX iconTick iconInfo iconEnvelope iconWrench iconSun iconMoon iconWind
+              iconCloud iconCloudBolt iconCloudLightRain iconCloudMoon iconCloudRain iconCloudSnow iconCloudSun iconCloundSunRain iconSnowFlake iconRainDrop iconFlame
+              iconWindowOpen iconShutter iconEco iconProtectionOff iconProtectionExternal iconProtectionInternal iconBell iconClock} {
+                append html "<option value='$iconCounter'>\${$icon}</option>"
+                incr iconCounter
+              }
+            append html "</select>"
+          append html "</td>"
+          append html "<td id=\"iconPreview_$chn\"></td>"
+
+          append html "<script type=\"text/javascript\">"
+            append html "setIconPreview = function(picNr, chn) \{"
+              append html "var picPath = \"/ise/img/icons_hmip_wrcd/24/\","
+              append html "previewElm = jQuery(\"\#iconPreview_\"+chn);"
+
+              append html "if (picNr != 0) \{"
+                append html "previewElm.html(\" <img src='\" + picPath + picNr + \".png' alt='' style = 'height:20px; background-color:\#f0f0f0;'>\");"
+              append html "\} else \{"
+                append html "previewElm.html(\"\");"
+              append html "\}"
+
+            append html "\};"
+
+            append html "window.setTimeout(function() \{"
+              append html "jQuery(\"\#separate\_$special_input_id\_$prn option\[value='$valIcon'\]\").prop(\"selected\",true).change();"
+
+              append html "var elm = document.getElementById('separate_$special_input_id\_$prn');"
+              append html "elm.options\[elm.selectedIndex\].defaultSelected = elm.value;"
+            append html "\},100);"
+          append html "</script>"
+          incr prn
+        append html "</tr>"
+      append html "</tbody></table></td>"
+    append html "</tr>"
   return $html
 }
