@@ -131,6 +131,8 @@ foreach(devId, oUser.UserTempViewIDs().EnumEnabledIDs())
     Write("deviceData['sn'] = '"#dev.Address()#"';");
     Write("var chnTypes = new Array();");
 
+    Write("setNewDevicePos2SystemPos(deviceData);");
+
     string
     chnId;
     foreach(chnId, dev.Channels())
@@ -1270,8 +1272,11 @@ CreateHmIPSunshineCounterScript = function(chn) {
     "}\n" +
   "}\n" +
 
-  "oSysVarSunshineOldVal.State(devVal);\n" +
-  "oSysVarSunshine.State(sysVarVal + diffVal);\n"+
+  "if (tmp_devVal != 0) {\n" +
+    "oSysVarSunshineOldVal.State(devVal);\n" +
+    "oSysVarSunshine.State(sysVarVal + diffVal);\n"+
+  "}\n" +
+
   "todayTotal = sysVarTodayVal + diffVal;\n" +
   "if (todayTotal >= 1440.0) {todayTotal = 0.0;}\n" +
   "oSysVarCounterToday.State(todayTotal);\n";
@@ -1381,8 +1386,11 @@ CreateHmIPRainCounterScript = function(chn) {
     "}\n" +
   "}\n" +
 
-  "oSysVarRainOldVal.State(devVal);\n" +
-  "oSysVarRain.State(sysVarVal + diffVal);\n"+
+  "if (tmp_devVal != 0) {\n" +
+    "oSysVarRainOldVal.State(devVal);\n" +
+    "oSysVarRain.State(sysVarVal + diffVal);\n"+
+  "}\n" +
+
   "todayTotal = sysVarTodayVal + diffVal;\n" +
   "if (todayTotal >= 1440.0) {todayTotal = 0.0;}\n" +
   "oSysVarCounterToday.State(todayTotal);\n";
@@ -1702,8 +1710,7 @@ CreateSysVarHmIPModRC8 = function(channel) {
   CreateSysVar(sysVarID, "enum", "1", channel.id);
 };
 
-createNecessarySysVarsAndPrograms = function (devId) {
-  var oDevice = homematic("Device.get", {"id": devId});
+createNecessarySysVarsAndPrograms = function (oDevice) {
   if (oDevice) {
     ShowWaitAnim();
     jQuery.each(oDevice.channels, function (index, channel) {
@@ -1749,7 +1756,10 @@ createNecessarySysVarsAndPrograms = function (devId) {
 SetReadyConfigAndHideImgs = function (devId) {
   var _devId_ = devId;
 
-  createNecessarySysVarsAndPrograms(_devId_);
+  var oDevice = homematic("Device.get", {"id": devId});
+
+  //setDevicePos2SystemPos(oDevice);
+  createNecessarySysVarsAndPrograms(oDevice);
 
   var doSetReady = function () {
     iNewDevCount--;

@@ -2,13 +2,12 @@ jQuery.extend(true,langJSON, {
   "en" : {
     "chType_ACTOR_SECURITY" : "Ventilation lock channel",
     "chType_ACTOR_WINDOW" : "Actor channel",
-
     "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Status report MP3-Player",
     "chType_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" : "MP3-Player",
-
     "chType_ALARM_COND_SWITCH_RECEIVER" : "Connection partner<br/>for sensor with security channel",
     "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Connection partner<br/>backup alarm siren",
     "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarm channel",
+    "chType_ANALOG_INPUT_TRANSMITTER" : "Analog input",
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analog output",
     "chType_ARMING" : "Arming",
     "chType_BLIND" : "Blind actuator",
@@ -47,6 +46,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",
     "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Weekly program",
+    "chType_DOOR_RECEIVER_MOD_HO" : "Door drive",
     "chType_DOOR_RECEIVER_MOD_TM" : "Door drive",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
     "chType_DUAL_WHITE_COLOR" : "Colour channel",
@@ -90,6 +90,7 @@ jQuery.extend(true,langJSON, {
     "chType_SENSOR_WINDOW" : "Sensor channel",
     "chType_SHUTTER_TRANSMITTER" : "Status report blind actuator",
     "chType_SHUTTER_VIRTUAL_RECEIVER" : "Blind actuator",
+    "chType_SIMPLE_SWITCH_RECEIVER_MOD_HO" : "Light",
     "chType_SIMPLE_SWITCH_RECEIVER_MOD_TM" : "Light",
     "chType_STATE_RESET_RECEIVER" : "Suppression of<br/>motion detection",
     "chType_SWITCH" : "Switch actuator",

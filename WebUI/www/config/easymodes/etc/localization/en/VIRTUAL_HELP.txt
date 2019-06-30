@@ -1,6 +1,7 @@
 jQuery.extend(true,langJSON, {
   "en" : {
-    "virtualHelpTxt" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "VIRTUAL_HELP" : true,
+    "virtualHelpTxtDimmer" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
     "The output level is defined by a connection of the real channel according to the following rule:</span><br><br></font>" +
     "Output level = ((0 o A) o B) o C)<br/><br/>" +
     "The following definition will be applied: <br/><br/>" +
@@ -16,8 +17,8 @@ jQuery.extend(true,langJSON, {
     "<li>XOR: The connection result is 0% if both channels are ON or OFF. If only one channel is ON the result is the level of this channel.</li>" +
     "<li>NOR: The connection OR will be executed and the result will be reversed afterwards (100% - level).</li>" +
     "<li>NAND: The connection AND will be executed and the result will be reversed afterwards (100% - level).</li>" +
-    "<li>OR_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection OR will be executed.</li>" +
-    "<li>AND_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection AND will be executed.</li>" +
+    "<li>OR_INVERS: The channel to be connected (on the right side of the 'o') will be reversed first (100% - level) and afterwards the connection OR will be executed.</li>" +
+    "<li>AND_INVERS: The channel to be connected (on the right side of the 'o') will be reversed first (100% - level) and afterwards the connection AND will be executed.</li>" +
     "<li>PLUS: Both levels will be added (max. 100%).</li><li>MINUS: Both levels will be subtracted (max. 0%).</li>" +
     "<li>MULTI: Both channels will multiplied.</li>" +
     "<li>PLUS_INVERS: The channel to be connected (on the right side of the 'o') will be reversed fist (100% - level) and afterwards the connection PLUS will be executed.</li>" +
@@ -33,7 +34,7 @@ jQuery.extend(true,langJSON, {
     "30% AND_INVERS C = 20%<br/><br/>" +
     "Here the output level results in 20%</blockquote>",
 
-    "virtualHelpTxt2" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "virtualHelpTxtDimmerColor" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
     "The output value is defined by a binary / logical connection of the primary color (RGB) of the channel according to the following rule:</span><br><br></font>" +
     "Output value = ((A o B) o C)<br/><br/>" +
     "The following definition will be applied: <br/><br/>" +
@@ -46,7 +47,7 @@ jQuery.extend(true,langJSON, {
     "<ul><li>Channel inactive: The channel is ignored in the connection.</li>" +
     "<li>OR: The connection result are all active primary colors (RGB) of the connected channels.</li>" +
     "<li>AND: The connection result are the common primary colors (RGB) of the connected channels.</li>" +
-	"<table border=\"1\">" +
+  " <table border=\"1\">" +
     "<tr><td>Red-Bit</td><td>Green-Bit</td><td>Blue-Bit</td><td>Farbe</td><td>Farbwert (bin&auml;r)</td></tr>" +
     "<tr><td>0</td><td>0</td><td>0</td><td>Off /Black</td><td>0 (0b000)</td></tr>" +
     "<tr><td>0</td><td>0</td><td>1</td><td>Blue</td><td>1 (0b001)</td></tr>" +
@@ -62,11 +63,38 @@ jQuery.extend(true,langJSON, {
     "A OR B = Yellow<br/>" +
     "Yellow OR C = White<br/><br/>" +
     "Here the output value results in White</blockquote>" +
-	"</ul>Example 2 (Filtering):<br/><blockquote>A = Violet, B = Yellow, C = White<br/><br/>" +
+    "</ul>Example 2 (Filtering):<br/><blockquote>A = Violet, B = Yellow, C = White<br/><br/>" +
     "Connection: (((A) AND B) AND C)<br/><br/>" +
     "A AND B = Red<br/>" +
     "Red AND C = Red<br/><br/>" +
     "Here the output value results in Red</blockquote>",
+
+    "virtualHelpTxtSwitch" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+      "The channel state is defined by a connection of the real channel according to the following rule:</span><br><br></font>" +
+      "Output level = ((0 o A) o B) o C)<br/><br/>" +
+      "The following definition will be applied: <br/><br/>" +
+      "&nbsp;A = state of the first virtual channel<br/>" +
+      "&nbsp;B = state of the second virtual channel<br/>" +
+      "&nbsp;C = state of the third virtual channel<br/><br/>" +
+      "o = connection rule of corresponding channel<br/>" +
+      "&nbsp;Brackets are handled from inside to outside.<br/><br/>" +
+      "Meaning of single connection rules:<br/>" +
+      "<ul><li>Channel inactive: The channel is ignored in the connection.</li>" +
+
+      "<li>OR: The result is ON if at least one channel is ON.</li>" +
+      "<li>AND: The result is ON if both channels are ON.</li>" +
+      "<li>XOR: The result is ON if exactly one channel is ON.</li>" +
+      "<li>NOR: The logic result is ON when both channels are OFF.</li>" +
+      "<li>NAND: The result is ON if at least one channel is OFF.</li>" +
+      "<li>OR_INVERS: The state of the channel to be connected (on the right side of the 'o') will be inverted first and afterwards the connection OR will be executed.</li>" +
+      "<li>AND_INVERS: The state of the channel to be connected (on the right side of the 'o') will be inverted first and afterwards the connection AND will be executed.</li>" +
+
+    "</ul>Example:<br/><blockquote>A = ON, B = OFF, C = ON<br/><br/>" +
+    "Connection: (((0% OR A) NOR B) AND_INVERS C)<br/><br/>" +
+    "OFF OR A = ON<br/>" +
+    "ON NOR B = OFF<br/>" +
+    "OFF AND_INVERS C = OFF<br/><br/>" +
+    "The state of the actor is OFF</blockquote>",
 
     "helpBtnTxt" : "Help"
   }

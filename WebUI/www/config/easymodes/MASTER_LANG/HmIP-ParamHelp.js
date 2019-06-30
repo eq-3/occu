@@ -255,11 +255,11 @@ jQuery.extend(true,langJSON, {
 
     "comment" : "Not yet approved by prod tech.",
     "EVENT_FILTER_TIME" :
-    "en* Bei der Verwendung von passiven Glasbruchmeldern ist eine Event-Filterzeit von mindestens 60 Sekunden zu w%E4hlen.",
+    "When using passive glass break sensors, an event filter time of at least 60 seconds has to be selected.",
 
     "EVENT_FILTER_PERIOD" :
-      "en* Die Filterzeit des Sensors wird durch die Multiplikation der Werte <b>Filterzeitz%E4hler</b> und <b>Filterbasis</b> bestimmt.<br/><br/>" +
-      "Das Ergebnis ergibt die Event-Filterzeit in Sekunden. Dabei bedeutet ein hoher Wert eine l%E4ngere Filterzeit.",
+      "The filter time of the sensor is determined by multiplying the values <b>filter time counter</b> and <b>filter basis</b>.<br/><br/>." +
+      "The result is the event filter time in seconds. A higher value is equal to a larger filter time.",
 
     "noMoreHelp" : ""
     }

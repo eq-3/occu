@@ -32,7 +32,7 @@ proc getTextField {psDescr type param value inputId} {
 
   set elemId '$inputId'
 
-  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue($elemId, $elemId,$param_descr(MIN), $param_descr(MAX), parseFloat(1))\"/>"
+  set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" name=\"$param\" onblur=\"ProofAndSetValue($elemId, $elemId,$param_descr(MIN), $param_descr(MAX), parseFloat(1))\"/>"
   return $s
 }
 

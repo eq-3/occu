@@ -43,7 +43,7 @@
         <table cellpadding="0" cellspacing="0" border="0" align="center">
           <tr>
             <td class="CLASS04903">
-              <input type="button" name="btnAdd" value="btnAdd" class="DeviceListButton CLASS04907" onclick="AddAccessPoint('${acessPoint.id}');" />
+              <input type="button" name="btnAdd" value="btnAdd" class="DeviceListButton CLASS04907" onclick="AddAccessPoint('${acessPoint.id}', '${acessPoint.version}');" />
             </td>
           </tr>
         </table>
@@ -56,13 +56,31 @@
 </table>
 
 <script type="text/javascript">	
-	AddAccessPoint = function(id)
-	{	
-		var url = '/pages/jpages/hmip/AccessPointSettings/showAdd';
-		var data = "{";
-		data += '"id" : "' + id;
-		data += '"}';
-		CreateCPPopup(url, data);
+	AddAccessPoint = function(id, version)
+	{
+    if (typeof version != "undefined") {
+      var arAPFw = version.split(".");
+      if (arAPFw.length == 3) {
+        var fwMajor = parseInt(arAPFw[0]),
+        fwMinor = parseInt(arAPFw[1]),
+        fwPatch = parseInt(arAPFw[2]);
+
+        // Check if fw >= 2.2.0
+        if ((fwMajor < 2) || (fwMajor == 2 && fwMinor < 2))  {
+          var url = '/pages/jpages/hmip/AccessPointSettings/showAdd';
+          var data = "{";
+          data += '"id" : "' + id;
+          data += '"}';
+          CreateCPPopup(url, data);
+        } else {
+          alert(translateKey("drapFwNotCompatWithCCUFW"));
+        }
+      } else {
+        conInfo("AddAccessPoint - Version should be x.y.z but is: " + version);
+      }
+    } else {
+      conInfo("AddAccessPoint - Version not defined");
+    }
 	};
 </script>
 </body>

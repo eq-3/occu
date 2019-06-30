@@ -9,6 +9,7 @@ checkWallMountedThermostat = function(groupSN) {
     url: url,
     type:  "POST",
     async: true,
+    cache: false,
     data: JSON.stringify({groupSN: groupSN}),
     dataType: "json"
   });

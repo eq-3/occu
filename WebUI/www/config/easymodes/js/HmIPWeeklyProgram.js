@@ -103,6 +103,7 @@ getOnlyNonExpertChannels = function(devId, chn) {
   arNonExpertChannels["HMIPW-DRS4"] = [2,6,10,14];
   arNonExpertChannels["HMIPW-DRS8"] = [2,6,10,14,18,22,26,30];
   arNonExpertChannels["HMIPW-FIO6"] = [8,12,16,20,24,28];
+  arNonExpertChannels["HMIP-MIO16-PCB"] = [18,22,26,30,34,38,42,46];
 
   jQuery.each(arNonExpertChannels[devId.toUpperCase()], function(index,val) {
     if (val == chn){
@@ -310,7 +311,7 @@ HmIPWeeklyProgram.prototype = {
                 programEntry += "<td name='elmSlatPos_"+number+"'>" + translateKey('lblWPSlatLevel') + "</td>";
                 programEntry += "<td name='elmSlatPos_"+number+"'>" + this._getSlatLevel(number);
                 if (this.isWired) {
-                  programEntry += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showSlatPosHelp();'>";
+                  programEntry += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' alt='' onclick='showSlatPosHelp();'>";
                 }
                 programEntry += "</td>";
               }
@@ -320,7 +321,7 @@ HmIPWeeklyProgram.prototype = {
                 this.prn++;
                 programEntry += "<td name='lblWPColorSelector_" + number + "' class='hidden'>"+translateKey('lblColorNr')+": </td></td><td name='lblWPColorSelector_" + number + "' class='hidden'>"+this._getColorSelector(number)+"</td>";
                 programEntry += "<td name='lblWPSoundSelector_" + number + "' class='hidden'>"+translateKey('lblSoundFileNr')+": </td><td name='lblWPSoundSelector_" + number + "' class='hidden'>"+this._getSoundSelector(number)+"</td>";
-                programEntry += "<td name='lblWPColorSoundSelector_" + number + "' class='hidden'>"+translateKey('lblColorSongNr')+": </td><td name='lblWPColorSoundSelector_" + number + "'class='hidden'>"+this._getColorSoundSelector(number)+"</td>";
+                programEntry += "<td name='lblWPColorSoundSelector_" + number + "' class='hidden'>"+translateKey('lblColorSongNr')+": </td><td name='lblWPColorSoundSelector_" + number + "' class='hidden'>"+this._getColorSoundSelector(number)+"</td>";
               }
 
             programEntry += "</tr>";
@@ -419,7 +420,7 @@ HmIPWeeklyProgram.prototype = {
         result += "<option value='"+loop+"' "+selected+">"+arOptions[loop]+"</option>";
       }
     result += "</select>";
-    result += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showConditionHelp();'>";
+    result += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' alt='' onclick='showConditionHelp();'>";
 
     return result;
   },
@@ -685,7 +686,8 @@ HmIPWeeklyProgram.prototype = {
   _getLevel: function(number) {
     var result = "",
     paramID = number +"_WP_LEVEL",
-    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]).toFixed(3) : "0.000";
+    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]).toFixed(3) : "0.000",
+    optionVal;
 
     // For blinds this has no effect because there is no duration
     showHideDuration = function(val, elmNr) {
@@ -710,32 +712,29 @@ HmIPWeeklyProgram.prototype = {
       if ((this.chnType == this.DIMMER) || (this.chnType == this.BLIND)) {
 
         if ((this.chnType == this.DIMMER)) {
-          result += "<option value='0'>" + translateKey('optionOFF') + "</option>";
+          result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
           for (var loop = 5; loop <= 100; loop += 5) {
-            result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
+            optionVal = (loop / 100).toFixed(3);
+            result += (val == optionVal) ?  "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
           }
-          result += "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
-          result += "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
+          result += (val == 1.005) ? "<option value='1.005' selected='selected'>"+translateKey('optionOldLevel')+"</option>" : "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
+          result += (val == 1.01) ? "<option value='1.010' selected='selected'>"+translateKey('optionNoChange')+"</option>" : "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
         } else {
           for (var loop = 0; loop <= 100; loop += 5) {
-            result += "<option value='" + (loop / 100).toFixed(3) + "'>" + loop + " %</options>";
+            optionVal = (loop / 100).toFixed(3);
+            result += (val == optionVal) ? "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
           }
         }
-
       } else if (this.chnType == this.SWITCH) {
-        result += "<option value='0.000'>" + translateKey('optionStateOFF') + "</option>";
-        result += "<option value='1.000'>" + translateKey('optionStateON') + "</option>";
+        result += (val == 0) ? "<option value='0.000' selected='selected'>" + translateKey('optionStateOFF') + "</option>" : "<option value='0.000'>" + translateKey('optionStateOFF') + "</option>";
+        result += (val == 1) ? "<option value='1.000' selected='selected'>" + translateKey('optionStateON') + "</option>" : "<option value='1.000'>" + translateKey('optionStateON') + "</option>";
       }
 
     result += "</select>";
 
     result += "<script type='text/javascript'>";
       result += "window.setTimeout(function(){";
-        result += "jElm = jQuery('#separate_CHANNEL_"+this.chn+"_"+this.prn+"');";
-        result += "jElm.val('"+val+"');";
-        // don`t use jQuery - the dirty flag will not be recognized
-        result += "document.getElementById('separate_CHANNEL_"+this.chn+"_"+this.prn+"')[jElm.prop('selectedIndex')].defaultSelected = true;";
-        result += "showHideDuration("+val+","+number+")";
+        result += "showHideDuration("+val+","+number+");";
       result += "},100);";
     result += "</script>";
     return result;
@@ -970,9 +969,9 @@ HmIPWeeklyProgram.prototype = {
       soundSelector = jQuery("[dataid='sound_"+number+"']"),
       colorSoundSelector = jQuery("[dataid='soundColor_"+number+"']");
 
-      if (elmLblWPColorSelector.css("display") != "none") {activeElmID = colorSelector[0].id;};
-      if (elmLblWPSoundSelector.css("display") != "none") {activeElmID = soundSelector[0].id;};
-      if (elmLblWPColorSoundSelector.css("display") != "none") {activeElmID = colorSoundSelector[0].id;};
+      if (elmLblWPColorSelector.css("display") != "none") {activeElmID = colorSelector[0].id;}
+      if (elmLblWPSoundSelector.css("display") != "none") {activeElmID = soundSelector[0].id;}
+      if (elmLblWPColorSoundSelector.css("display") != "none") {activeElmID = colorSoundSelector[0].id;}
 
       jQuery.each(arActiveChkBoxes, function (index, elm) {
         chType = elm.attributes.data.value;

@@ -7,6 +7,7 @@ jQuery.extend(true,langJSON, {
     "chType_ALARM_COND_SWITCH_RECEIVER" : "Verkn%FCpfungspartner<br/>f%FCr Sensor mit Sicherheitskanal",
     "chType_ALARM_COND_SWITCH_TRANSMITTER" : "Verkn%FCpfungspartner<br/>Backup Alarmsirene",
     "chType_ALARM_SWITCH_VIRTUAL_RECEIVER" : "Alarmkanal",
+    "chType_ANALOG_INPUT_TRANSMITTER" : "Analoger Eingang",
     "chType_ANALOG_OUTPUT_TRANSCEIVER" : "Analoger Ausgang",
     "chType_ARMING" : "Scharfschalten",
     "chType_BLIND" : "Rollladenaktor",
@@ -45,6 +46,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmaktor",
     "chType_DIMMER_WEEK_PROFILE" : "Wochenprogramm",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Wochenprogramm",
+    "chType_DOOR_RECEIVER_MOD_HO" : "Torantrieb",
     "chType_DOOR_RECEIVER_MOD_TM" : "Torantrieb",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
     "chType_DUAL_WHITE_COLOR" : "Farbkanal",
@@ -90,9 +92,8 @@ jQuery.extend(true,langJSON, {
     "chType_SENSOR_WINDOW" : "Sensor-Kanal",
     "chType_SHUTTER_TRANSMITTER" : "Statusmitteilung Rollladenaktor",
     "chType_SHUTTER_VIRTUAL_RECEIVER" : "Rollladenaktor",
-
+    "chType_SIMPLE_SWITCH_RECEIVER_MOD_HO" : "Beleuchtung",
     "chType_SIMPLE_SWITCH_RECEIVER_MOD_TM" : "Beleuchtung",
-
     "chType_STATE_RESET_RECEIVER" : "Unterdr%FCckung der<br/>Bewegungserkennung",
     "chType_SWITCH" : "Schaltaktor",
     "chType_SWITCH_PANIC" : "Panik Alarm",

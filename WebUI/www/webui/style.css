@@ -200,7 +200,8 @@ a img {
 
 /* Pfadangabe im Seiten-Header */
 #PagePath {
-  color: $_(textColorA); /* #ffffff */
+  /*color: $_(textColorA);  #ffffff */
+  color: #afafaf; /* #ffffff */
   vertical-align: bottom;
 }
 #PagePath span {
@@ -2186,7 +2187,7 @@ html, body {
 
 .RFConfig_InterfacesTable_tr_hover {
   background-color: $_(inactiveBackground);
-	cursor:pointer;
+  cursor:pointer;
 }
 
 .RFConfig_InterfacesTable td {
@@ -2200,7 +2201,48 @@ html, body {
    text-align: center;
    -ms-text-align-last: center;
    -moz-text-align-last: center;
-}.Filter {
+}
+
+progress[value] {
+
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+   appearance: none;
+
+  /* Remove the default border in Firefox. */
+  border: none;
+
+  /* For IE10 */
+  color: #3678c9;
+  width: 75%;
+  height: 100%;
+}
+progress::-moz-progress-bar { background: #3678c9; }
+progress::-webkit-progress-value { background: #3678c9; }
+
+#dutyCycleProgress {
+  width: 75%;
+
+  background: -moz-linear-gradient(0deg, rgba(13,255,0,1) 0%, rgba(255,255,0,1) 63%, rgba(255,0,0,1) 100%); /* ff3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(13,255,0,1)), color-stop(63%, rgba(255,255,0,1)), color-stop(100%, rgba(255,0,0,1))); /* safari4+,chrome */
+  background: -webkit-linear-gradient(0deg, rgba(13,255,0,1) 0%, rgba(255,255,0,1) 63%, rgba(255,0,0,1) 100%); /* safari5.1+,chrome10+ */
+  background: -o-linear-gradient(0deg, rgba(13,255,0,1) 0%, rgba(255,255,0,1) 63%, rgba(255,0,0,1) 100%); /* opera 11.10+ */
+  background: -ms-linear-gradient(0deg, rgba(13,255,0,1) 0%, rgba(255,255,0,1) 63%, rgba(255,0,0,1) 100%); /* ie10+ */
+  background: linear-gradient(90deg, rgba(13,255,0,1) 0%, rgba(255,255,0,1) 63%, rgba(255,0,0,1) 100%); /* w3c */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0DFF00', endColorstr='#ff0000',GradientType=1 ); /* ie6-9 */
+
+
+}
+
+#dutyCycleProgressBar {
+  width: 1%;
+  height: 12px;
+  background-color: #d9d9d9;
+}
+
+
+.Filter {
   margin:0;
   border:1px solid $_(black); /* black */
   padding:0;
@@ -3173,7 +3215,7 @@ html, body {
   height:20px;
   text-align:center;
   line-height:20px;
-}.YesNoDialogLayer {
+}.YesNoDialogLayer, .YesNoDialogLayerA {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -3181,7 +3223,7 @@ html, body {
   background-image: url(/ise/img/tr50.gif);
 }
 
-.YesNoDialog {
+.YesNoDialog, .YesNoDialogA {
   position: relative;
   top: 50%;
   left: 50%;
@@ -3192,7 +3234,8 @@ html, body {
   background-color: $_(black); /* black */
 }
 
-.YesNoDialogTitle {
+
+.YesNoDialogTitle, .YesNoDialogTitleA {
   position: absolute;
   top: 2px;
   left: 2px;
@@ -3207,7 +3250,7 @@ html, body {
   cursor: pointer;
 }
 
-.YesNoDialogContentWrapper {
+.YesNoDialogContentWrapper, .YesNoDialogContentWrapperA {
   position: absolute;
   top: 24px;
   left: 2px;
@@ -3218,14 +3261,14 @@ html, body {
   overflow: hidden;  
 }
 
-.YesNoDialogContent {
+.YesNoDialogContent, .YesNoDialogContentA {
   padding:5px;
   font-weight: bold;
   color: $_(textColorB); /* black */
 }
 
 
-.YesNoDialogFooter {
+.YesNoDialogFooter, .YesNoDialogFooterA {
   position: absolute;
   top: 98px;
   left: 2px;
@@ -3234,7 +3277,7 @@ html, body {
   background-color: $_(white); /* white */
 }
 
-.YesNoDialog_yesButton {
+.YesNoDialog_yesButton, .YesNoDialogA_yesButton {
   position: absolute;
   border: 1px solid $_(black); /* black */
   top: 4px;
@@ -3250,7 +3293,7 @@ html, body {
   width: 100px;  
 }
 
-.YesNoDialog_noButton {
+.YesNoDialog_noButton, .YesNoDialogA_noButton {
   position: absolute;
   border: 1px solid $_(black); /* black */
   top: 4px;
@@ -5217,6 +5260,14 @@ application {
 	float: right;
 	text-align: right;
 	width: 98%;
+	word-wrap: break-word;
+	max-width: 480px;
+	display: inline-block;
+}
+
+.CLASS02535A {
+	float: right;
+	text-align: right;
 	word-wrap: break-word;
 	max-width: 480px;
 	display: inline-block;

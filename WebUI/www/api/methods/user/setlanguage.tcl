@@ -8,4 +8,9 @@
 # Rückgabewert: kein
 ##
 
-exec echo $args(userLang) > /etc/config/userprofiles/$args(userName).lang
+set userName $args(userName)
+set userName [string map {"\." "."} $userName]
+set userName [string map {"\/" "/"} $userName]
+set userName [string map {"../" ""} $userName]
+exec echo $args(userLang) > /etc/config/userprofiles/$userName.lang
+

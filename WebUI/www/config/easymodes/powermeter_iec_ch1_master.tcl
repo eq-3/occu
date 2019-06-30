@@ -2,6 +2,11 @@
 
 source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 
+proc getHelpIcon {topic x y} {
+  set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
+  return $ret
+}
+
 proc getDefaultValue {psDescr param} {
   upvar psDescr descr
   array_clear param_descr
@@ -25,10 +30,10 @@ proc getMinMaxValueDescr {psDescr param} {
   set min $param_descr(MIN)
   set max $param_descr(MAX)
 
-  # Limit float to 2 decimal places
+  # Limit float to 3 decimal places
   if {[llength [split $min "."]] == 2} {
-    set min [format {%1.2f} $min]
-    set max [format {%1.2f} $max]
+    set min [format {%1.3f} $min]
+    set max [format {%1.3f} $max]
   }
   return "($min - $max)"
 }
@@ -40,7 +45,7 @@ proc getTextField {psDescr type param value inputId} {
 
   set elemId '$inputId'
 
-  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue($elemId, $elemId,$param_descr(MIN), $param_descr(MAX), parseFloat(1))\"/>"
+  set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" name=\"$param\" onblur=\"ProofAndSetValue($elemId, $elemId,$param_descr(MIN), $param_descr(MAX), parseFloat(1))\"/>"
   return $s
 }
 
@@ -51,7 +56,7 @@ proc getTextFieldIdentityString {psDescr type param value inputId defaultVal} {
 
   set elemId '$inputId'
 
-  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"checkIdentityString($elemId,'$defaultVal')\"/>"
+  set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" name=\"$param\" onblur=\"checkIdentityString($elemId,'$defaultVal')\"/>"
   return $s
 }
 

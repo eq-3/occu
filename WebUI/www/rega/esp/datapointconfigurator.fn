@@ -92,6 +92,7 @@ function ::dcCreate()
     var CN_ACOUSTIC_SIGNAL_TRANSMITTER = "ACOUSTIC_SIGNAL_TRANSMITTER.";
     var CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER.";
     var CN_ALARM_SWITCH_VIRTUAL_RECEIVER = "ALARM_SWITCH_VIRTUAL_RECEIVER.";
+    var CN_ANALOG_INPUT = "ANALOG_INPUT.";
     var CN_ARMING          = "ARMING.";
     var CN_BLIND           = "BLIND.";
     var CN_BLIND_TRANSMITTER      = "BLIND_TRANSMITTER.";
@@ -196,6 +197,16 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_ACOUSTIC_DISPLAY_RECEIVER;
             Call("/esp/controls/acoustic_display_receiver.fn::CreateAcousticDisplayReceiver()");
+          }
+
+          !#ANALOG_INPUT
+          bIsControl = ( sControlName.Find(CN_ANALOG_INPUT) > -1 );
+          if( bIsControl && (sLastControlName != CN_ANALOG_INPUT) )
+          {
+            WriteLine( "<script>conInfo('Control CN_ANALOG_INPUT found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_ANALOG_INPUT;
+            Call("/esp/controls/analog_input.fn::CreateAnalogInputVoltage()");
           }
 
           !# SWITCH

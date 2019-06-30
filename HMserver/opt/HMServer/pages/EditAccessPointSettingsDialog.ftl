@@ -179,32 +179,49 @@
     
   UpdateAccessPoint = function()
 	{
-		var url = '/pages/jpages/hmip/AccessPointSettings/startAccessPointUpdate?sid='+SessionId;
-		var data = "{";
-		data += '"id" : "${accessPoint.id}"';
-		data += '}';
-		var opt =
-		{
-			postBody: data,
-			onComplete: function(t)
-			{
-				var response = JSON.parse(t.responseText);
-	  		if(!response.isSuccessful) {
-					if(response.errorCode == "42")
-					{
-						PopupClose();
-						jQuery("#content").html(response.content);
-					} else {
-						alert(translateKey(response.content));
-					}
-				} else {				
-					PopupClose();
-        			// TODO make a correct message box
-					alert(translateKey(response.content));
-				}
-			}
-		}
-		new Ajax.Request(url,opt);
+	  if (typeof availableFwVersion != "undefined") {
+      var arAvailFw = availableFwVersion.split(".");
+      if (arAvailFw.length == 3) {
+        var fwMajor = parseInt(arAvailFw[0]),
+        fwMinor = parseInt(arAvailFw[1]),
+        fwPatch = parseInt(arAvailFw[2]);
+
+        // Check if fw >= 2.2.0
+        if ((fwMajor < 2) || (fwMajor == 2 && fwMinor < 2))  {
+          var url = '/pages/jpages/hmip/AccessPointSettings/startAccessPointUpdate?sid='+SessionId;
+          var data = "{";
+          data += '"id" : "${accessPoint.id}"';
+          data += '}';
+          var opt =
+          {
+            postBody: data,
+            onComplete: function(t)
+            {
+              var response = JSON.parse(t.responseText);
+              if(!response.isSuccessful) {
+                if(response.errorCode == "42")
+                {
+                  PopupClose();
+                  jQuery("#content").html(response.content);
+                } else {
+                  alert(translateKey(response.content));
+                }
+              } else {
+                PopupClose();
+                alert(translateKey(response.content));
+              }
+            }
+          }
+          new Ajax.Request(url,opt);
+        } else {
+          alert(translateKey("drapFwNotCompatWithCCUFW"));
+        }
+      } else {
+        conInfo("UpdateAccessPoint - Version should be x.y.z but is: " + availableFwVersion);
+      }
+    } else {
+      conInfo("UpdateAccessPoint - Available version not defined");
+    }
 	};
 
   storePassphrase = function(value) {
@@ -399,8 +416,15 @@
 
           dlgHtml += "<tr align='center'><td colspan='3'>"+translateKey('lblFirmwareVersions')+"</td></tr>";
 
-          dlgHtml += "<table>"
-            dlgHtml += "<tr><th></th><th>"+translateKey('dialogShowDeviceFirmwareTHCurFw')+"</th><th>"+translateKey('lblAvailableCapital')+"</th></tr>";
+          dlgHtml += "<table>";
+            dlgHtml += "<tr>";
+              dlgHtml +=  "<th></th>";
+              dlgHtml +=  "<th>"+translateKey('dialogShowDeviceFirmwareTHCurFw')+"</th>";
+              if (accessPointType != "") {
+                dlgHtml += "<th>" + translateKey('lblAvailableCapital') + "</th>";
+              }
+            dlgHtml +=  "</tr>";
+
             dlgHtml += "<tr>";
               dlgHtml += "<td>";
                 dlgHtml += translateKey("thAccessPointVersion")+":";
@@ -409,9 +433,11 @@
                 dlgHtml += "<input id='versionMainprocessor' type='text' class='textCenter' size='10' value='"+accessPointVersion+"' disabled>";
               dlgHtml += "</td>";
 
-              dlgHtml += "<td class='td2'>";
-                dlgHtml += "<input type='text' class='textCenter' size='10' value='"+availableFwVersion+"' disabled>";
-              dlgHtml += "</td>";
+              if (accessPointType != "") {
+                dlgHtml += "<td class='td2'>";
+                dlgHtml += "<input type='text' class='textCenter' size='10' value='" + availableFwVersion + "' disabled>";
+                dlgHtml += "</td>";
+              }
             dlgHtml += "</tr>";
 
             dlgHtml += "<tr>";
@@ -422,26 +448,29 @@
                 dlgHtml += "<input id='versionCoprocessor' type='text' class='textCenter' size='10' value='"+coProcessorVersion+"' disabled>";
               dlgHtml += "</td>";
 
-              dlgHtml += "<td class='td2'>";
-                dlgHtml += "<input type='text' class='textCenter' size='10' value='"+availableFwVersionCoPro+"' disabled>";
-              dlgHtml += "</td>";
+              if (accessPointType != "") {
+                dlgHtml += "<td class='td2'>";
+                dlgHtml += "<input type='text' class='textCenter' size='10' value='" + availableFwVersionCoPro + "' disabled>";
+                dlgHtml += "</td>";
+              }
             dlgHtml += "</tr>";
 
-            if (showBtnUpload) {
-              dlgHtml += "<tr>";
-                 dlgHtml += "<td><td><td class='CLASS04903 td2'>";
-                   dlgHtml += "<input type='button' class='DeviceListButton' name='lblUpdate' value='"+translateKey('lblUpdate')+"' onclick='UpdateAccessPoint();'>";
-                 dlgHtml += "</td></td></td>";
+            if (accessPointType != "") {
+              if (showBtnUpload) {
+                dlgHtml += "<tr>";
+                dlgHtml += "<td><td><td class='CLASS04903 td2'>";
+                dlgHtml += "<input type='button' class='DeviceListButton' name='lblUpdate' value='" + translateKey('lblUpdate') + "' onclick='UpdateAccessPoint();'>";
+                dlgHtml += "</td></td></td>";
+                dlgHtml += "</tr>";
+              }
+
+              dlgHtml += "<tr><td colspan='3'><hr></td></tr>";
+              //dlgHtml += "<tr align='center'><td colspan='3'>"+translateKey('lblAccessPointConfiguration')+"</td></tr>";
+              dlgHtml += "<tr align='center'>";
+              dlgHtml += "<td colspan='3'><input type='button' class='DeviceListButton' name='lblAccessPointConfig' value='" + translateKey('btnAccessPointConfig') + "' onclick='EnterPassPhraseAccessPoint();'></td>";
               dlgHtml += "</tr>";
             }
-
-            dlgHtml += "<tr><td colspan='3'><hr></td></tr>";
-            //dlgHtml += "<tr align='center'><td colspan='3'>"+translateKey('lblAccessPointConfiguration')+"</td></tr>";
-            dlgHtml += "<tr align='center'>";
-            dlgHtml += "<td colspan='3'><input type='button' class='DeviceListButton' name='lblAccessPointConfig' value='"+translateKey('btnAccessPointConfig')+"' onclick='EnterPassPhraseAccessPoint();'></td>";
-            dlgHtml += "</tr>";
-
-          dlgHtml += "</table>"
+          dlgHtml += "</table>";
         dlgHtml += "<table>";
       dlgHtml += "</td>"; // END Content
     dlgHtml += "</tr>";

@@ -300,7 +300,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"}
   }
 
-  set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
+  set longKeypressAvailable false
 
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 

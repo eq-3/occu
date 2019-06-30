@@ -430,8 +430,29 @@ Disable_SimKey = function(ch, prn, specialInputId)
 
 MD_catchBrightness = function(url, sender_address, receiver_address, brightness, convertValue, set_value, id, commando, parameter)
 {
-  if (convertValue == 1) {
-    brightness = MD_convertIlluminationToDecisionValue(brightness);
+  // knownBrightness is used to prevent unnecessary calls for the converting of the current brightness while building the page.
+  // Each profile of the easymode needs the brightness, so we store the value for 500 ms in the var knownBrightness
+  if (typeof knownBrightness == "undefined") {
+    if (convertValue == 1) {
+      var oSender = DeviceList.getDeviceByAddress(sender_address.split(":")[0]),
+        devDescr = homematic("Interface.getDeviceDescription", {
+          "interface": oSender.interfaceName,
+          "address": oSender.address
+        });
+
+      if ((oSender.typeName.indexOf("HmIPW-") != -1) || ((oSender.typeName.indexOf("HmIP-") != -1) && (devDescr.firmware.split(".")[0] >= 2))) {
+        conInfo("Here we work with the brightness value calculated with the new method");
+        brightness = MD_convertIlluminationToDecisionValue_V2(brightness);
+      } else {
+        // Old calculation method
+        conInfo("Here we work with the brightness value calculated with the old method");
+        brightness = MD_convertIlluminationToDecisionValue(brightness);
+      }
+      knownBrightness = brightness;
+      window.setTimeout(function() {delete knownBrightness;}, 500);
+    }
+  } else {
+    brightness = knownBrightness;
   }
 
   ResetPostString();
@@ -758,6 +779,64 @@ MD_convertIlluminationToDecisionValue = function(value) {
   }
 
   return parseInt(result);
+};
+
+// SPHM-301
+MD_convertIlluminationToDecisionValue_V2 = function(value) {
+  var brightness = (isNaN(value)) ? 0 :  parseInt(Math.abs(value) * 100),
+    convBrightness,
+    offset_x,
+    value_a0,
+    value_a1,
+    valueValid = true;
+
+  switch (true) {
+    case (brightness <= Math.pow(10,1)):
+      offset_x = 0;
+      value_a0 = 0;
+      value_a1 = 1;
+      break;
+    case (brightness <= Math.pow(10,2)):
+      offset_x = 10;
+      value_a0 = 10;
+      value_a1 = 0.2;
+      break;
+    case (brightness <= Math.pow(10,3)):
+      offset_x = 100;
+      value_a0 = 28;
+      value_a1 = 0.05;
+      break;
+    case (brightness <= Math.pow(10,4)):
+      offset_x = 1000;
+      value_a0 = 73;
+      value_a1 = 0.005;
+      break;
+    case (brightness <= Math.pow(10,5)):
+      offset_x = 10000;
+      value_a0 = 118;
+      value_a1 = 0.0005;
+      break;
+    case (brightness <= Math.pow(10,6)):
+      offset_x = 100000;
+      value_a0 = 163;
+      value_a1 = 0.00005;
+      break;
+    case (brightness <= Math.pow(10,7)):
+      offset_x = 1000000;
+      value_a0 = 208;
+      value_a1 = 0.000005;
+      break;
+    default: valueValid = false;
+
+  }
+  if (valueValid) {
+    convBrightness = brightness - offset_x;
+    convBrightness = convBrightness * value_a1;
+    convBrightness = convBrightness + value_a0;
+    convBrightness = convBrightness + 0.5;
+    return parseInt(convBrightness);
+  }
+  return 253;
 };
 
 SetSensitivityOfMotionDetection = function(sensElmID) {
@@ -1227,7 +1306,7 @@ TextColor = function(c)
   else    { return WebUI.getColor("gray"); }
 };
 
-Virtual_DimmerChannel_help = function(ch, lc)
+VirtualChannel_help = function(ch, lc)
 {
   var virtualChHelpElm = jQuery("#virtual_ch_help_" + ch),
     virtualChHelpElm2 = jQuery("#virtual_ch_help2_" + ch),
@@ -1672,12 +1751,12 @@ preventOnOffNonActive= function(elm) {
   if (onOffNotActive > counter) {
     arFooterElems[1].hide();
     arFooterElems[2].hide();
-    if (jQuery(".j_hint").length == 0) {
-      jQuery("#receiver_param_"+chn).append("<p class='j_hint attention'><b>"+translateKey('hintLinkParamOnOffNotActive')+"</b></p>");
-    }
+    jQuery(".j_hint").remove();
+    jQuery("#receiver_param_"+chn).append("<p class='j_hint attention'><b>"+translateKey('hintLinkParamOnOffNotActive')+"</b></p>");
+
   } else {
+    jQuery(".j_hint").remove();
     arFooterElems[1].show();
     arFooterElems[2].show();
-    jQuery(".j_hint").remove();
   }
 };

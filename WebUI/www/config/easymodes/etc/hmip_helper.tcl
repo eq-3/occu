@@ -186,13 +186,17 @@ proc getPanelA {prn pref specialElement} {
               append s "break;"
             append s "case 5:"
               # 1 sec
-              append s "baseElem.val(1);"
-              append s "factorElem.val(1);"
+              append s "if (baseElem.val() != 1 || factorElem.val() != 1) \{"
+                append s "baseElem.val(0);"
+                append s "factorElem.val(10);"
+              append s "\}"
               append s "break;"
             append s "case 6:"
               # 3 sec
-              append s "baseElem.val(0);"
-              append s "factorElem.val(30);"
+              append s "if (baseElem.val() != 1 || factorElem.val() != 3) \{"
+                append s "baseElem.val(0);"
+                append s "factorElem.val(30);"
+              append s "\}"
               append s "break;"
             append s "case 7:"
               # 30 sec
@@ -2234,18 +2238,6 @@ proc getDescription {param {extraparam ""}} {
   return $result
 }
 
-proc getCondTXThresholdUnit {devType chn} {
-   switch $devType {
-        PSM  {return "mW"}
-        BSM  {return "mW"}
-        STHO  {
-          if {$chn == "2"} {return "°C"}
-          if {$chn == "3"} {return "%"}
-        }
-      default {return ""}
-    }
-}
-
 proc getMaintenanceAddress {channelAddress} {
   set parentAddress [lindex [split $channelAddress :] 0]
   return "$parentAddress:0"
@@ -2280,6 +2272,16 @@ proc isLongKeypressAvailable {sender sender_address url} {
     }
   }
   return $result
+}
+
+proc devIsPowerMeter {devType} {
+   switch [string tolower $devType] {
+        hmip-bsm  {return true}
+        hmip-fsm  {return true}
+        hmip-fsm16  {return true}
+        hmip-psm  {return true}
+      default {return false}
+    }
 }
 
 proc getDevFirmware {} {

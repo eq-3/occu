@@ -177,16 +177,16 @@ proc getDSTPanel {p descr} {
       append html "<tr class=\"j_dstValue hidden\"><td colspan=\"2\"><hr></td></tr>"
 
       incr prn
-      set param UTC_DST_OFFSET
+      set param UTC_OFFSET
       append html "<tr class=\"j_dstValue hidden\">"
-        append html "<td>\${UtcDSTOffset}</td>"
+        append html "<td>\${UtcOffset}</td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
       append html "</tr>"
 
       incr prn
-      set param UTC_OFFSET
+      set param UTC_DST_OFFSET
       append html "<tr class=\"j_dstValue hidden\">"
-        append html "<td>\${UtcOffset}</td>"
+        append html "<td>\${UtcDSTOffset}</td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
       append html "</tr>"
 

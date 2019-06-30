@@ -1,5 +1,6 @@
 jQuery.extend(true,langJSON, {
   "en" : {
+    "DaylightSavingTime" : true,
     "DSTStartHeader" : "<b>Beginning of summer time</b>",
     "DSTEndHeader" : "<b>End of summer time</b>",
     "DSTStartDayOfWeek" : "Weekday",

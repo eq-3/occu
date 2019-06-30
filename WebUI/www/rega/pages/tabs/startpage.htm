@@ -167,6 +167,12 @@
         <tr valign="top" class="CLASS01810">
           <td>
           <table id="tblStartpageInfo" width="100%" class="CLASS01811 startPageInfo hidden">
+
+            <tr>
+              <th style="width:40%"></th>
+              <th style="width:60%"></th>
+            </tr>
+
             <tr>
                 <!-- Uhrzeit -->
               <td>${time}:</td>
@@ -243,9 +249,19 @@
                 }
               }
              %>
+
+            <tr id="partingLine1" class="hidden"><td colspan="2" style="height: 50px"><hr></td></tr>
+
+            <!-- DutyCycle -->
+            <tr name="trDutyCycle" style="visibility: hidden"><td></td><td><div id="dutyCycleVal" style="width:75%; text-align:center"></div></td></tr>
+            <tr name="trDutyCycle" style="visibility: hidden">
+              <td>${lblDutyCycle}</td>
+              <td> <div id="dutyCycleProgress"  align="right"><div id="dutyCycleProgressBar"></div></div> </td>
+            </tr>
+
           </table>
           </td>
-        </tr>        
+        </tr>
         </table>
 
         <div id="forceUpdate" style="display:none; margine-top:50px; padding:10px;" >

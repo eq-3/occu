@@ -1,0 +1,17 @@
+function ::CreateAnalogInputVoltage()
+{
+  object objState = cObj.DPByControl("ANALOG_INPUT.VOLTAGE");
+
+  if( objState)
+  {
+    WriteLine("<td>");
+      WriteLine("<table class='ControlBtnInfo'>");
+        WriteLine("<tr style='height:40px;'>");
+          WriteLine("<td>");
+            WriteLine("${stringTableAnalogInputTransmitterVoltage}:<br/>"#objState.Value().ToString(2)#"&nbsp;"#objState.ValueUnit());
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
+}

@@ -272,6 +272,16 @@ proc option {type} {
       set options(16) "\${stringTableLogicINVERSMUL}"
     }
 
+    "LOGIC_COMBINATION_SWITCH" {
+      set options(1) "\${stringTableLogicSwitchOR}"
+      set options(2) "\${stringTableLogicSwitchAND}"
+      set options(3) "\${stringTableLogicSwitchXOR}"
+      set options(4) "\${stringTableLogicSwitchNOR}"
+      set options(5) "\${stringTableLogicSwitchNAND}"
+      set options(6) "\${stringTableLogicSwitchORINVERS}"
+      set options(7) "\${stringTableLogicSwitchANDINVERS}"
+    }
+
     "LOGIC_COMBINATION_NO_AND_OR" {
       set options(0) "\${stringTableLogicInactive}"
       set options(1) "\${stringTableLogicOR}"

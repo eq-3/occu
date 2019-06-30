@@ -5,7 +5,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/DIMMER_VIRTUAL_RECEIVER/getColorElement.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER/getSoundSelector.tcl]
 
 set PROFILES_MAP(0) "\${expert}"
 set PROFILES_MAP(1) "\${dimmer_toggle}"
@@ -290,7 +290,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set param SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
     incr pref
-    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    append HTML_PARAMS(separate_$prn) [getSoundSelector PROFILE_$prn ${special_input_id} $param]
   }
 
   set param SHORT_PROFILE_REPETITIONS
@@ -366,7 +366,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set param SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
     incr pref
-    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    append HTML_PARAMS(separate_$prn) [getSoundSelector PROFILE_$prn ${special_input_id} $param]
   }
 
   set param SHORT_PROFILE_REPETITIONS

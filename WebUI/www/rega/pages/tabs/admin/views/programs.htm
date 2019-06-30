@@ -114,6 +114,7 @@
 
     var req = jQuery.ajax({
       url : url +"?sid=" + SessionId,
+      cache: false,
       dataType: "html"
     });
 
@@ -163,6 +164,7 @@
 
     var req = jQuery.ajax({
       url : url +"?sid=" + SessionId,
+      cache: false,
       dataType: "html"
     });
     req.done(function(htmlContent) {
@@ -196,7 +198,6 @@
         statusDisplayDialog = new StatusDisplayDialogAcousticEPaper(translateKey("statusDisplayDialogTitle"), htmlContent, jQuery(inputElm).val(), function (result) {
           if (result == this.RESULT_YES) {
             var configString = this.getConfigString();
-            console.log(configString);
             var inputElm = jQuery(elm).prev();
             inputElm.val(configString);
             inputElm.change();
@@ -218,6 +219,7 @@
 
       var req = jQuery.ajax({
         url : url +"?sid=" + SessionId,
+        cache: false,
         dataType: "html"
       });
       req.done(function(htmlContent) {
@@ -237,13 +239,14 @@
 
 
   Set_VIR_LG_RGBWController = function(regaDialogID, param) {
-      var elm = jQuery("#setRGBWController" + regaDialogID), // this is the notepad symbol
-      url = "/pages/msg/setVIR_LG_RGBWController.htm";
-      jQuery(elm).prop("disabled", true);
-      var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+    var elm = jQuery("#setRGBWController" + regaDialogID), // this is the notepad symbol
+    url = "/pages/msg/setVIR_LG_RGBWController.htm";
+    jQuery(elm).prop("disabled", true);
+    var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
 
       var req = jQuery.ajax({
         url : url +"?sid=" + SessionId,
+        cache: false,
         dataType: "html"
       });
       req.done(function(htmlContent) {
@@ -274,6 +277,7 @@
 
       var req = jQuery.ajax({
         url : url +"?sid=" + SessionId,
+        cache: false,
         dataType: "html"
       });
       req.done(function(htmlContent) {
@@ -298,6 +302,7 @@
 
     var req = jQuery.ajax({
       url : url +"?sid=" + SessionId,
+      cache: false,
       dataType: "html"
     });
 
@@ -329,6 +334,7 @@
 
     var req = jQuery.ajax({
       url : url +"?sid=" + SessionId,
+      cache: false,
       dataType: "html"
     });
 
@@ -346,6 +352,45 @@
           inputElm.change();
         }
       }, "html");
+
+    });
+  };
+
+  chooseSoundFiles = function(initValues) {
+    var dialog = new SoundfileChooserDialog(initValues, function(result) {
+      if (result != this.RESULT_NO) {
+        jQuery("#combinedParam_ChoosenFiles").val(result.replace(/;/g, ","));
+      }
+    });
+  };
+
+
+  setAcousticSignalController = function(regaDialogID, param) {
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID),
+    url = "/pages/msg/setAcousticSignalCombinedParam.htm";
+    jQuery(elm).prop("disabled", true);
+    var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+
+      var dialog = new AcousticSignalController(translateKey("titleConfigDialog"), htmlContent, jQuery(elm).val(), function(result) {
+        jQuery(elm).prop("disabled", false);
+        if (result != 0) {
+          conInfo("AcousticSignalController: Yes pressed");
+          var inputElm = jQuery(elm);
+          var cfgString = this.getConfigString();
+          conInfo(cfgString);
+          inputElm.val(cfgString);
+          inputElm.change();
+        }
+      }, "html");
+      dialog.btnTextNo(translateKey("footerBtnCancel"));
+      dialog.btnTextYes(translateKey("footerBtnOk"));
 
     });
   };

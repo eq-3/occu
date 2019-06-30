@@ -1,5 +1,4 @@
 #!/bin/tclsh
-#Kanal-EasyMode V1.4!
 source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
@@ -13,9 +12,7 @@ set PROFILE_PNAME(F) "\${motionDetectorSendMotionWithinDetectionSpan}"
 set PROFILE_PNAME(G) "\${stringTablePirOperationMode}"
 set PROFILE_PNAME(H) "\${stringTableCondThresholdLo}"
 set PROFILE_PNAME(I) "\${stringTableMotionDetectorMotionActiveTime}"
-
-set PROFILES_MAP(0)  "Experte"
-set PROFILES_MAP(1)  "TheOneAndOnlyEasyMode"
+set PROFILE_PNAME(J) "\${motionDetectorLEDDisableChannelState}"
 
 proc getHelp {topic x y} {
   return "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
@@ -26,7 +23,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/ic_effects.js');</script>"
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/MOTION_DETECTOR.js');</script>"
 
-  global iface_url global psDescr
+  global iface_url global psDescr dev_descr
 
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
@@ -39,6 +36,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set brightness "0"
   set chn [lindex [split $address :] 1]
+
+  set devType $dev_descr(TYPE)
+  set devIsHmIPWired [isDevHmIPW $devType]
 
   set url $iface_url($iface)
   array set dev_descr [xmlrpc $url getParamset [list string $address] MASTER]
@@ -84,11 +84,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(7.0) "7.0"
     set options(7.5) "7.5"
 
-    incr prn; # 2
+    incr prn; #2
     append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_PERIOD separate_${special_input_id}_$prn ps EVENT_FILTER_PERIOD]
     append HTML_PARAMS(separate_1) "<span class=\"event_filter_number\">&nbsp;Sekunden</span></td></tr>"
 
-     incr prn; #3
+    incr prn; #3
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(C)</span></td><td>"
     array_clear options
     set options(0)  "15$s"
@@ -102,7 +102,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "[get_ComboBox options MIN_INTERVAL separate_${special_input_id}_$prn ps MIN_INTERVAL ]&nbsp;[getHelp MIN_INTERVAL_PRESENCE $hlpBoxWidth $hlpBoxHeight]"
     append HTML_PARAMS(separate_1) "</td></tr>"
 
-    incr prn; #4
+    set param LED_DISABLE_CHANNELSTATE
+    if { (! [catch {set tmp $ps($param)}]) && ($devIsHmIPWired == "true")  } {
+      incr prn; #4
+      append HTML_PARAMS(separate_1) "<tr><td>$PROFILE_PNAME(J)</td>"
+      if {$dev_descr(LED_DISABLE_CHANNELSTATE) == 1} {
+        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param checked=\"checked\"></td></tr>"
+      } else {
+        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param></td></tr>"
+      }
+
+    }
+
+    incr prn; #5
     append HTML_PARAMS(separate_1) "<tr><td colspan=\"2\"><span>$PROFILE_PNAME(F)</span>"
     if {$capture_within_interval == 1} {
       append HTML_PARAMS(separate_1) "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=\"CAPTURE_WITHIN_INTERVAL\" checked=\"checked\"></td>"
@@ -110,8 +122,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=\"CAPTURE_WITHIN_INTERVAL\"></td>"
     }
 
-
-    incr prn; #5
+    incr prn; #6
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(I)</span></td><td>"
     array_clear options
     set options(0)  "15$s"
@@ -127,7 +138,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "</td></tr>"
 
 
-    incr prn; #6
+    incr prn; #7
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(D)</span></td><td>"
     array_clear  options
 
@@ -139,7 +150,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 0, 15)</script>"
 
-    incr prn; #7
+    incr prn; #8
     set param PIR_OPERATION_MODE
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td><span class=\"j_translate\">$PROFILE_PNAME(G)</span></td>"
@@ -152,17 +163,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
-    incr prn; #8
-set comment {
-    set param COND_TX_THRESHOLD_LO
-    append HTML_PARAMS(separate_1) "<tr id=\"txThresholdLo\" class=\"hidden\">"
-      append HTML_PARAMS(separate_1) "<td>"
-        append HTML_PARAMS(separate_1) "<span class=\"j_translate\">$PROFILE_PNAME(H)</span>"
-      append HTML_PARAMS(separate_1) "</td>"
-      append HTML_PARAMS(separate_1) "<td>"
-        append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]"
-}
-
+    incr prn; #9
     set param COND_TX_THRESHOLD_LO
     append HTML_PARAMS(separate_1) "<tr id=\"txThresholdLo\" class=\"hidden\">"
       append HTML_PARAMS(separate_1) "<td>"
@@ -172,13 +173,24 @@ set comment {
 
         array_clear param_descr
         array set param_descr $psDescr($param)
+        set brightnessCorrectionFactor 10
+
+        set Fw [getDevFwMajorMinorPatch]
+        set fwMajor [lindex $Fw 0]
+        # set fwMinor [lindex $Fw 1]
+        # set fwPatch [lindex $Fw 2]
+
+        # SPHM-310 - No correction factor for HmIPW and all sensors with a firmware >= 2.0.0
+        if {$devIsHmIPWired == "true" || $fwMajor >= 2} {
+          set brightnessCorrectionFactor 1
+        }
+
         set minValue [format {%1.0f} $param_descr(MIN)]
-        set maxValue [expr [format {%1.0f} $param_descr(MAX)] / 10]
+        set maxValue [expr [format {%1.0f} $param_descr(MAX)] / $brightnessCorrectionFactor]
 
         append HTML_PARAMS(separate_1) "<input id=\"_COND_TX_THRESHOLD_LO\_$prn\" size=\"5\" onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1); setCondLoValue($prn,this.value);\" >&nbsp;($minValue - $maxValue)"
         append HTML_PARAMS(separate_1) "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
-        append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">window.setTimeout(function()\{jQuery(\"#_COND_TX_THRESHOLD_LO\_$prn\").val(parseInt($ps($param))/ 10);\},200);</script>"
-
+        append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">window.setTimeout(function()\{jQuery(\"#_COND_TX_THRESHOLD_LO\_$prn\").val(parseInt($ps($param))/ $brightnessCorrectionFactor);\},200);</script>"
 
         if {! $xmlCatchError} {
           set btnTxt "\${btnTakeCurrentBrightness}&nbsp;($brightness)"
@@ -188,6 +200,7 @@ set comment {
             append HTML_PARAMS(separate_1) "if (elem) elem.val(elem.val() + \" ($brightness)\");"
           append HTML_PARAMS(separate_1) "</script>"
         }
+
       append HTML_PARAMS(separate_1) "</td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
@@ -286,11 +299,11 @@ set comment {
 }
 
     append HTML_PARAMS(separate_1) "setCondLoValue = function(prn, value) \{"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+prn).val(parseInt(value) * 10);"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+prn).val(parseInt(value) * $brightnessCorrectionFactor);"
     append HTML_PARAMS(separate_1) "\};"
 
     append HTML_PARAMS(separate_1) "setBrightness = function(prn) \{"
-      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+prn).val(parseInt($brightness) * 10);"
+      append HTML_PARAMS(separate_1) "jQuery(\"#separate_${special_input_id}_\"+prn).val(parseInt($brightness) * $brightnessCorrectionFactor);"
       append HTML_PARAMS(separate_1) "jQuery(\"#_COND_TX_THRESHOLD_LO_\"+prn).val(parseInt($brightness));"
     append HTML_PARAMS(separate_1) "\};"
 

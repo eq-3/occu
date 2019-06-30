@@ -124,14 +124,13 @@ proc getActionPanel {} {
     global dev_descr iface
 
     set HmIPIdentifier "HmIP-RF"
-    set HmIPWIdentifier "HmIP-Wired"
     set fw_update_rows ""
 
    # This was the initial test button > set html "<td><div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"alert('OK');\">Einstellen</div><td>"
 
    set tableCell "<table id=\"id_firmware_table_$dev_descr(ADDRESS)\" class=\"j_translate tTable filterTable noBorder marginAuto\" style=cellspacing=\"0\">"
 
-   if {($iface != $HmIPIdentifier) && ($iface != $HmIPWIdentifier)} {
+   if {$iface != $HmIPIdentifier} {
       catch {
         if {([string equal $dev_descr(AVAILABLE_FIRMWARE) "0.0.0"] != 1)  && ($dev_descr(AVAILABLE_FIRMWARE) != $dev_descr(FIRMWARE))} then {
           set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\" ><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
@@ -320,7 +319,7 @@ cgi_eval {
       puts "};"
 
       set footerHtml  ""
-      append footerHtml "<table style='backgroud-color:white' boder='0' cellspacing='8'>"
+      append footerHtml "<table style='backgroud-color:white' border='0' cellspacing='8'>"
         append footerHtml "<tr>"
          append footerHtml "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>\${footerBtnPageBack}</div></td>"
           append footerHtml "<td align='center' valign='middle'><div class='FooterButton CLASS04312' onclick='resetFilter();'>\${footerBtnResetFilter}</div></td>"

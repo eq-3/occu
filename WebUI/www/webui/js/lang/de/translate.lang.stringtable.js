@@ -364,6 +364,7 @@ jQuery.extend(true,langJSON, {
     "stringTableDurationUnitS" : "Einheit Zeitdauer: Sekunden",
     "stringTableDurationUnit10MS" : "Einheit Zeitdauer: 10 mS",
     "stringTableDurationValue" : "Wert Zeitdauer",
+    "stringTableDuration" : "Zeitdauer",
     "stringTableDutyCycleFalse" : "Dutycycle OK",
     "stringTableDutyCycleLimit" :  "Duty Cyle Limit, bis zu dem noch Datentelegramme gesendet werden",
     "stringTableDutyCycleTrue" : "Dutycycle erreicht",
@@ -1121,6 +1122,7 @@ jQuery.extend(true,langJSON, {
     "stringTableRampTimeUnitS" : "Einheit Rampenzeit: Sekunden",
     "stringTableRampTimeUnit10MS" : "Einheit Rampenzeit: 10 mS",
     "stringTableRampTimeValue" : "Wert Rampenzeit",
+    "stringTableRampTime" : "Rampenzeit",
 
     "stringTableIdentificationModeLCDBacklightFalse" : "Beleuchtung Display: AUS",
     "stringTableIdentificationModeLCDBacklightTrue" : "Beleuchtung Display: EIN",
@@ -1160,6 +1162,13 @@ jQuery.extend(true,langJSON, {
     "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
 
     "stringTableOptimumStartStop" : "Optimum Start/Stopp",
+    "stringTableDisplayContrast" : "Displaykontrast",
+    "stringTableErrorCoProcessor" : "Der Kanal ist nicht erreichbar.",
+    "stringTableErrorRestartNeeded" : "Es ist ein Neutstart des Ger%E4tes n%F6tig.",
+
+    "stringTableErrorBadRechargeableBatteryHealthFalse" : "Akkuzustand: OK",
+    "stringTableErrorBadRechargeableBatteryHealthTrue" : "Akkuzustand: nicht OK",
+
 
     "noMoreKeys" : ""
 

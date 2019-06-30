@@ -364,6 +364,7 @@ jQuery.extend(true,langJSON, {
     "stringTableDurationUnitS" : "Unit duration: Seconds",
     "stringTableDurationUnit10MS" : "Unit duration: 10 mS",
     "stringTableDurationValue" : "Value duration",
+    "stringTableDuration" : "Duration",
     "stringTableDutyCycleFalse" : "Duty cycle OK",
     "stringTableDutyCycleLimit" :  "Duty cycle limit for sending data telegrams",
     "stringTableDutyCycleTrue" : "Duty cycle reached",
@@ -560,7 +561,7 @@ jQuery.extend(true,langJSON, {
     "stringTableCaptureWithinInterval" : "Send detected motion within transmission interval:",
     "stringTableMotionDetectorErrorSabotage" : "Sabotage",
     "stringTableMotionDetectorMinInterval" : "Minimum transmission interval",
-    "stringTableMotionDetectorMotionActiveTime" : "Time after which the detected movement is reset",
+    "stringTableMotionDetectorMotionActiveTime" : "Time after which the detected<br/>movement is reset",
     "stringTableMotionDetectorMotionDetectionActiveFalse" :  "Motion detector inactive",
     "stringTableMotionDetectorMotionDetectionActiveTrue" :  "Motion detector active",
     "stringTableMotionDetectorMotionFalse" : "no motion",
@@ -1119,6 +1120,7 @@ jQuery.extend(true,langJSON, {
     "stringTableRampTimeUnitS" : "Unit ramp time: Seconds",
     "stringTableRampTimeUnit10MS" : "Unit ramp time: mS",
     "stringTableRampTimeValue" : "Value ramp time",
+    "stringTableRampTime" : "Ramp time",
 
     "stringTableIdentificationModeLCDBacklightFalse" : "Lighting Display: OFF",
     "stringTableIdentificationModeLCDBacklightTrue" : "Lighting Display: ON",
@@ -1158,6 +1160,12 @@ jQuery.extend(true,langJSON, {
     "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
 
     "stringTableOptimumStartStop" : "Optimum Start/Stop",
+    "stringTableDisplayContrast" : "Display contrast",
+    "stringTableErrorCoProcessor" : "The channel cannot be accessed.",
+    "stringTableErrorRestartNeeded" : "The device must be restarted.",
+
+    "stringTableErrorBadRechargeableBatteryHealthFalse" : "Battery status: OK",
+    "stringTableErrorBadRechargeableBatteryHealthTrue" : "Battery status: Not OK",
 
     "noMoreKeys" : ""
   }

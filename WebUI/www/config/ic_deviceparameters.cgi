@@ -481,7 +481,7 @@ proc put_orig_channel_parameter {address ch} {
           
           # this should only be available for a dimmer with virtual channels
           if {($param == "LOGIC_COMBINATION")} {
-            append s1 "&nbsp<input id=\"virtual_help_button_$ch\" class=\"j_helpBtn\" type=\"button\" value=\"Hilfe\" onclick=\"Virtual_DimmerChannel_help($ch);\">"
+            append s1 "&nbsp<input id=\"virtual_help_button_$ch\" class=\"j_helpBtn\" type=\"button\" value=\"Hilfe\" onclick=\"VirtualChannel_help($ch);\">"
           }
         } else {incr i -1} 
         append s1 "</td>" 
@@ -605,6 +605,15 @@ proc isVirtual {paramId} {
   lappend virtualDevices "hmip-pcbs2_3_master" "hmip-pcbs2_5_master" "hmip-pcbs2_6_master" "hmip-pcbs2_7_master" "hmip-pcbs2_9_master" "hmip-pcbs2_10_master"
 
   lappend virtualDevices "hmip-mp3p_3_master" "hmip-mp3p_4_master" "hmip-mp3p_7_master" "hmip-mp3p_8_master"
+
+  lappend virtualDevices "hmip-mio16-pcb_17_master" "hmip-mio16-pcb_19_master" "hmip-mio16-pcb_20_master"
+  lappend virtualDevices "hmip-mio16-pcb_21_master" "hmip-mio16-pcb_23_master" "hmip-mio16-pcb_24_master"
+  lappend virtualDevices "hmip-mio16-pcb_25_master" "hmip-mio16-pcb_27_master" "hmip-mio16-pcb_28_master"
+  lappend virtualDevices "hmip-mio16-pcb_29_master" "hmip-mio16-pcb_31_master" "hmip-mio16-pcb_32_master"
+  lappend virtualDevices "hmip-mio16-pcb_33_master" "hmip-mio16-pcb_35_master" "hmip-mio16-pcb_36_master"
+  lappend virtualDevices "hmip-mio16-pcb_37_master" "hmip-mio16-pcb_39_master" "hmip-mio16-pcb_40_master"
+  lappend virtualDevices "hmip-mio16-pcb_41_master" "hmip-mio16-pcb_43_master" "hmip-mio16-pcb_44_master"
+  lappend virtualDevices "hmip-mio16-pcb_45_master" "hmip-mio16-pcb_47_master" "hmip-mio16-pcb_48_master"
 
   set virtual "false"
 

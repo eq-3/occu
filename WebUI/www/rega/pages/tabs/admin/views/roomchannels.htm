@@ -205,7 +205,7 @@ for (var i = 0; i < chnsTmp.length; i++) {
     }
     var sName = translateKey("btnRemove");//"Löschen";
     var sClassName = "StdButton";
-    if( chnsTmp[i]['unerasable'] == "true" )
+    if( chnsTmp[i]['unerasable'] == "true" && chnsTmp[i]['type'] != "HmIP-RCV-50")
     {
       sClassName += "Inactive";
       sDelFunc = "";

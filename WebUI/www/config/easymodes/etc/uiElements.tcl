@@ -16,6 +16,16 @@ proc getMaxValue {param} {
   return "$max"
 }
 
+proc getUserDefinedMaxValue {devType} {
+  switch [string tolower $devType] {
+      hmip-psm  {return 3680}
+      hmip-fsm16 {return 3680}
+      hmip-bsm  {return 1150}
+      hmip-fsm  {return 1150}
+    default {return "<span class=\"attention\">max value not available</span>"}
+  }
+}
+
 proc getMinMaxValueDescr {param} {
   global psDescr dev_descr
   upvar psDescr descr
@@ -43,6 +53,14 @@ proc getMinMaxValueDescr {param} {
     set min [format {%1.2f} $min]
     set max [format {%1.2f} $max]
   }
+
+  if {[string equal $dev_descr(TYPE) "HmIP-MIO16-PCB"] == 1} {
+    if {([string equal $param "COND_TX_THRESHOLD_LO"] == 1) || ([string equal $param "COND_TX_THRESHOLD_HI"] == 1)} {
+      append min "V"
+      append max "V"
+    }
+  }
+
   return "($min - $max)"
 }
 
@@ -75,13 +93,38 @@ proc getUnit {param} {
   return "$unit"
 }
 
+proc getCondTXThresholdUnit {devType chn} {
+   switch [string tolower $devType] {
+        hmip-stho  {
+          if {$chn == "2"} {return "°C"}
+          if {$chn == "3"} {return "%"}
+        }
+      default {return ""}
+    }
+}
+
+proc getUserDefinedCondTXThresholdUnitMinMaxDescr {devType chn} {
+   switch [string tolower $devType] {
+        hmip-psm  {return "W (0 - [getUserDefinedMaxValue $devType])"}
+        hmip-fsm16  {return "W (0 - [getUserDefinedMaxValue $devType])"}
+        hmip-bsm  {return "W (0 - [getUserDefinedMaxValue $devType])"}
+        hmip-fsm  {return "W (0 - [getUserDefinedMaxValue $devType])"}
+      default {return "<span class=\"attention\">missing description</span>"}
+    }
+}
+
 proc getTextField {param value chn prn {extraparam ""}} {
   global psDescr dev_descr
   upvar psDescr descr
   array_clear param_descr
   array set param_descr $descr($param)
   set minValue [format {%1.1f} $param_descr(MIN)]
-  set maxValue [format {%1.1f} $param_descr(MAX)]
+
+  if {[devIsPowerMeter $dev_descr(TYPE)]} {
+    set maxValue [getUserDefinedMaxValue $dev_descr(TYPE)]
+  } else {
+    set maxValue [format {%1.1f} $param_descr(MAX)]
+  }
 
   # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
   if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
@@ -95,7 +138,13 @@ proc getTextField {param value chn prn {extraparam ""}} {
     set value [format {%1.2f} $value]
   }
 
+  # Convert float to int - sometimes the parameter UTC_* comes as float instead of int (for whatever reason). This will cause an error.
+  if {([string equal $param UTC_OFFSET] == 1) || ([string equal $param UTC_DST_OFFSET] == 1)} {
+    set value [expr {int([expr $value])}]
+  }
+
   set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\" $extraparam>"
+
   return $s
 }
 
@@ -517,8 +566,10 @@ proc getPowerUpSelector {chn p special_input_id} {
             append html "<td>\${lblRepetition}</td>"
             append html "<td>"
               append html "<select id='separate_CHANNEL\_$chn\_$prn' name=$param>"
-                append html "<option value=\"0\">\${optionNoRepetition}</option>"
-                append html "<option value=\"255\">\${optionInfiniteRepetition}</option>"
+              if {$tmp == 0} {set select "selected=\"selected\""} else {set select ""}
+              append html "<option value=\"0\" $select>\${optionNoRepetition}</option>"
+              if {$tmp == 255} {set select "selected=\"selected\""} else {set select ""}
+              append html "<option value=\"255\" $select>\${optionInfiniteRepetition}</option>"
                   for {set loop 1} {$loop <= 254} {incr loop} {
                     if {$tmp == $loop} {set select "selected=\"selected\""} else {set select ""}
                     append html "<option value=\"$loop\" $select>$loop</option>"
@@ -798,8 +849,10 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
           append html "<td>\${lblRepetition}</td>"
           append html "<td>"
             append html "<select id=\"separate_CHANNEL\_$chn\_$prn\" name=$param>"
-              append html "<option value=\"0\">\${optionNoRepetition}</option>"
-              append html "<option value=\"255\">\${optionInfiniteRepetition}</option>"
+              if {$tmp == 0} {set select "selected=\"selected\""} else {set select ""}
+              append html "<option value=\"0\" $select>\${optionNoRepetition}</option>"
+              if {$tmp == 255} {set select "selected=\"selected\""} else {set select ""}
+              append html "<option value=\"255\" $select>\${optionInfiniteRepetition}</option>"
                 for {set loop 1} {$loop <= 254} {incr loop} {
                   if {$tmp == $loop} {set select "selected=\"selected\""} else {set select ""}
                   append html "<option value=\"$loop\" $select>$loop</option>"
@@ -977,7 +1030,7 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
     set html "<tr>"
       append html "<td colspan=\"2\"><table><tbody style=\"background-color:white\">"
         append html "<tr>"
-          append html "<th>\${lblText}</th>"
+          append html "<th>\${lblText}&nbsp;<img src=\"/ise/img/help.png\" onclick=\"showDisplayConfigTextHelp();\" width=\"16\" height=\"16\"></th>"
           append html "<th>\${lblAlign}</th>"
           append html "<th>\${lblBGColorBR}</th>"
           append html "<th>\${lblTextColorBR}</th>"
@@ -986,7 +1039,7 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
         append html "<tr>"
           # TEXT
           append html "<td>"
-            append html "<input id='separate_$special_input_id\_$prn' name='TEXT' type='text' value='$valText' maxlength='15' size='15'>"
+            append html "<input id='separate_$special_input_id\_$prn' name='TEXT' type='text' value=\"$valText\" maxlength='15' size='15'>"
             append html "<script type=\"text/javascript\">"
               append html "var elm = document.getElementById('separate_$special_input_id\_$prn');"
               append html "elm.defaultValue = elm.value;"

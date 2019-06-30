@@ -169,7 +169,20 @@ function ::WriteDPText()
           if( bFloat )
           {
             sValue = sValue.ToFloat();
-            sValue = sValue.ToString(2);
+            if (toCH.Label() != "HM-ES-TX-WM") {
+              sValue = sValue.ToString(2);
+            } else {
+              ! The HM-ES-TX-WM with a fw >= 2.x.y has a accuracy of 4 digits after the decimal point
+              ! Older firmware versions only use 2 digits.
+              integer chnId = toCH.ID();
+              integer devFwMajor = 0;
+              Call("/esp/functions.fn::getFirmwareVersion()");
+              if (devFwMajor >= 2) {
+                sValue = sValue.ToString(4);
+              } else {
+                sValue = sValue.ToString(2);
+              }
+            }
           }
           if( (!bBinary) && (!bFloat) )
           {
@@ -603,6 +616,20 @@ function ::showHideHmIPChannel() {
       }
     }
 
+    ! HmIP-MIO16-PCB (HmIP multi io modul 4 x 4 - some channels are virtual switch receiver)
+    if (oDevHssType == "HmIP-MIO16-PCB") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
+        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
+          if ((chNumber == 19) || (chNumber == 20) || (chNumber == 23) || (chNumber == 24) || (chNumber == 27) || (chNumber == 28)|| (chNumber == 31) || (chNumber == 32)||
+              (chNumber == 35) || (chNumber == 36)|| (chNumber == 39) || (chNumber == 40) || (chNumber == 43) || (chNumber == 44) || (chNumber == 47) || (chNumber == 48)) {
+            bShowChannel = false;
+            return;
+          }
+        }
+      }
+    }
+
     ! No hit
     return;
     }
@@ -761,6 +788,21 @@ function ::destinationIsParameterVisible() {
       showChannelParam = false;
     }
   }
+
+  ! Hide the parameter COMBINED_PARAMETER for channels of type DIMMER_VIRTUAL_RECEIVER (e. g. MP3P dimmer channel)
+  if (oCH.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) {
+    if (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)  {
+      showChannelParam = false;
+    }
+  }
+
+  ! Hide the parameter ON_TIME for channels of type PRESENCEDETECTOR_TRANSCEIVER and MOTIONDETECTOR_TRANSCEIVER (SPHM-289)
+  if ((oCH.HssType().Find("MOTIONDETECTOR_TRANSCEIVER") != -1) || (oCH.HssType().Find("PRESENCEDETECTOR_TRANSCEIVER") != -1)) {
+    if (oDP.HSSID().Find("ON_TIME") != -1)  {
+      showChannelParam = false;
+    }
+  }
+
   return;
 }
 

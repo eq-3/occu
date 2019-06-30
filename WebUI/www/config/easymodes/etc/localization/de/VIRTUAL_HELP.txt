@@ -1,6 +1,7 @@
 jQuery.extend(true,langJSON, {
   "de" : {
-    "virtualHelpTxt" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "VIRTUAL_HELP" : true,
+    "virtualHelpTxtDimmer" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
     "Der Ausgangspegel wird durch eine Verkn&uuml;pfung der virtuellen Kan&auml;le mit dem Realkanal nach folgender Regel bestimmt:</span><br><br></font>" +
     "Ausgangspegel = (((0 o A) o B) o C)<br/><br/>" +
     "Es gilt dabei folgende Definition:<br/><br/>" +
@@ -34,8 +35,8 @@ jQuery.extend(true,langJSON, {
     "Der Ausgangspegel ergibt hier 20%</blockquote>",
 
 
-    "virtualHelpTxt2" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
-    "Der Ausgangswert wird durch eine binäre / logische Verkn&uuml;pfung der Prim&auml;rfarben (RGB) der virtuellen Kan&auml;le nach folgender Regel bestimmt:</span><br><br></font>" +
+    "virtualHelpTxtDimmerColor" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "Der Ausgangswert wird durch eine bin&auml;re / logische Verkn&uuml;pfung der Prim&auml;rfarben (RGB) der virtuellen Kan&auml;le nach folgender Regel bestimmt:</span><br><br></font>" +
     "Ausgangswert = ((A o B) o C)<br/><br/>Es gilt dabei folgende Definition:<br/><br/>" +
     "&nbsp;A = Farbwerte des ersten virtuellen Kanals<br/>&nbsp;" +
     "B = Farbwerte des zweiten virtuellen Kanals<br/>&nbsp;" +
@@ -62,11 +63,38 @@ jQuery.extend(true,langJSON, {
     "A OR B = Gelb<br/>" +
     "Gelb OR C = Wei&szlig;<br/><br/>" +
     "Der Ausgangswert ergibt hier Wei&szlig;</blockquote>" +
-	"</ul>Beispiel 2 (Filter):<br/><blockquote>A = Violet, B = Gelb, C = Wei&szlig;<br/><br/>" +
+    "</ul>Beispiel 2 (Filter):<br/><blockquote>A = Violet, B = Gelb, C = Wei&szlig;<br/><br/>" +
     "Verkn&uuml;pfung: (((A) AND B) AND C)<br/><br/>" +
     "A AND B = Rot<br/>" +
     "Rot AND C = Rot<br/><br/>" +
     "Der Ausgangswert ergibt hier Rot</blockquote>",
+
+    "virtualHelpTxtSwitch" : "<hr><br/><br/><font size='3'><span style=\"text-decoration:underline; font-weight:bold\">" +
+    "Der Kanalzustand wird durch eine Verkn&uuml;pfung der virtuellen Kan&auml;le mit dem Realkanal nach folgender Regel bestimmt:</span><br><br></font>" +
+    "Ausgangspegel = (((0 o A) o B) o C)<br/><br/>" +
+    "Es gilt dabei folgende Definition:<br/><br/>" +
+    "&nbsp;A = Zustand des ersten virtuellen Kanals<br/>" +
+    "&nbsp;B = Zustand des zweiten virtuellen Kanals<br/>" +
+    "&nbsp;C = Zustand des dritten virtuellen Kanals<br/><br/>" +
+    "o = Verkn&uuml;pfungsregel des dazugeh&ouml;rigen Kanals<br/>" +
+    "&nbsp;Klammern werden von innen nach aussen abgearbeitet.<br/><br/>" +
+    "Bedeutung der einzelnen Verkn&uuml;pfungsregeln:<br/>" +
+    "<ul><li>Kanal inaktiv: Der Kanal wird bei der Verkn&uuml;pfung ignoriert.</li>" +
+
+    "<li>OR: Das Verkn&uuml;pfungsergebnis ist EIN, wenn mindestens ein Kanal EIN ist.</li>" +
+    "<li>AND: Das Verkn&uuml;pfungsergebnis ist EIN, wenn beide Kan&auml;le EIN sind.</li>" +
+    "<li>XOR: Das Verkn&uuml;pfungsergebnis ist EIN, wenn nur genau ein Kanal EIN ist.</li>" +
+    "<li>NOR: Das Verkn&uuml;pfungsergebnis ist EIN, wenn beide Kan&auml;le AUS sind.</li>" +
+    "<li>NAND: Das Verkn&uuml;pfungsergebnis ist EIN, wenn mindestens ein Kanal AUS ist.</li>" +
+    "<li>OR_INVERS: Der Zustand des zu verkn&uuml;pfenden Kanals (rechts vom 'o') wird zuerst invertiert und anschlie&szlig;end die Verkn&uuml;pfung OR ausgef&uuml;hrt.</li>" +
+    "<li>AND_INVERS: Der Zustand des zu verkn&uuml;pfenden Kanals (rechts vom 'o') wird zuerst invertiert und anschlie&szlig;end die Verkn&uuml;pfung AND ausgef&uuml;hrt.</li>" +
+
+    "</ul>Beispiel:<br/><blockquote>A = EIN, B = AUS, C = EIN<br/><br/>" +
+    "Verkn&uuml;pfung: (((AUS OR A) NOR B) AND_INVERS C)<br/><br/>" +
+    "AUS OR A = EIN<br/>" +
+    "EIN NOR B = AUS<br/>" +
+    "AUS AND_INVERS C = AUS<br/><br/>" +
+    "Der Zustand Aktors ist AUS</blockquote>",
 
     "helpBtnTxt" : "Hilfe"
   }

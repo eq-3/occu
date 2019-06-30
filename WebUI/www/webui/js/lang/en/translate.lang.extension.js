@@ -33,6 +33,11 @@ jQuery.extend(true, langJSON, {
     "lblLinkNameWith": "with",
     "lblUnknownDevice": "Unknown device",
     "lblSelectLanguage": "Language:",
+    "lblText" : "Text",
+    "lblAlign" : "Alignment",
+    "lblBGColorBR" : "Background-<br/>Colour",
+    "lblTextColorBR" : "Text-<br/>Colour",
+    "lblIcon" : "Icon",
     "selectLangAuto": "Auto",
     "selectLangDE": "German",
     "selectLangUK": "English",
@@ -227,6 +232,7 @@ jQuery.extend(true, langJSON, {
     "Oct": "October",
     "Nov": "November",
     "Dec": "December",
+    "Sec" : "Second",
     "Hou": "Hour",
     "Min": "Minute",
     "btnDatePickerThisMonth": "Current month",
@@ -295,9 +301,9 @@ jQuery.extend(true, langJSON, {
     "ErrorOnDeleteWindowDeferDescription" : "Device will be deleted as soon as it can be accessed again",
     "ErrorOnDeleteWindowForce" : "Delete from Homematic CCU",
     "ErrorOnDeleteWindowForceDescription" : "Device will be deleted from Homematic CCU, even if it can not be accessed.",
-    "ErrorOnDeleteWindowDeviceNotReachable" : "<b>The device '${device.name}' can not be accessed.</b><p>Please make sure that your device is located within the radio range and press the teach-in button again if necessary.<br />Then try again to delete your device.</p>",
+    "ErrorOnDeleteWindowDeviceNotReachable" : "<b>The device '${device.name}' can not be accessed.</b><p>Please make sure that your device is accessible and press the teach-in button again if necessary.<br /><br />Then try again to delete your device.</p>",
     "ErrorOnDeleteWindowUnknownDevice" : "<b>The HomeMatc CCU does not know the device '${device.name}'</b><p>It may have been deleted already.</p>",
-    "ErrorOnDeleteWindowUnknownError" : "<b>The device '${device.name}' could not be deleted.</b><p>Please make sure that your device is located within the radio range and press the teach-in button again if necessary.<br />Then try again to delete your device.</p>",
+    "ErrorOnDeleteWindowUnknownError" : "<b>The device '${device.name}' could not be deleted.</b><p>Please make sure that your device is accessible and press the teach-in button again if necessary.<br /><br />Then try again to delete your device.</p>",
     "ErrorOnDeleteWindowAbortButton" : "Cancel",
     "ErrorOnDeleteWindowDeleteButton" : "Delete again",
     "sysVarAlarmZone1" : "Alarm zone 1",
@@ -403,7 +409,7 @@ jQuery.extend(true, langJSON, {
     "alertUseOnlySpecialChars" : "Please do only use the allowed special characters ., !, $, (, ), :, ;, #, %DF, %C4, %E4, %D6, %F6, %DC, %FC, -",
     "alertCharsNotAllowed" : "Descriptions may not contain any of the following characters: <, >, ', \", &, $, [, ], {, } and \\",
     "alertErrorDeleteObject" : "Object could not be deleted.",
-    "dialogAllRFInterfacesTitle" : "All known Interfaces",
+    "dialogAllRFInterfacesTitle" : "All known RF-Interfaces",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentA" : "Import of backup not possible. The backup available is based on the CCU firmware ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentB" : "<br>\nThis is a later version than the current version installed on the CCU. ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentC" : ".<br>\nPlease perform an update of your CCU firmware first. Then, please start to import the system backup.",
@@ -615,12 +621,42 @@ jQuery.extend(true, langJSON, {
     "iconClosed":"Closed",
     "iconError":"Error",
     "iconOK":"All right",
-    "iconInfo":"Information",
     "iconNewMessage":"New message",
     "iconServiceMessage":"Service message",
     "iconSignalGreen":"Signal green",
     "iconSignalYellow":"Signal yellow",
     "iconSignalRed":"Signal red",
+    "iconLampOff" : "Lamp OFF",
+    "iconLampOn" : "Lamp ON",
+    "iconPadlockOpen" : "Lock OPEN",
+    "iconPadlockClosed" : "Lock CLOSED",
+    "iconX" : "X",
+    "iconTick" : "Checkmark",
+    "iconInfo" : "Info",
+    "iconEnvelope" : "Envelope",
+    "iconWrench" : "Spanner",
+    "iconSun" : "Sun",
+    "iconMoon" : "Moon",
+    "iconWind" : "Wind",
+    "iconCloud" : "Cloud",
+    "iconCloudBolt" : "Cloud/lightening",
+    "iconCloudLightRain" : "Cloud/light rain",
+    "iconCloudMoon" : "Cloud/moon",
+    "iconCloudRain" : "Cloud/rain",
+    "iconCloudSnow" : "Cloud/snow",
+    "iconCloudSun" : "Cloud/sun",
+    "iconCloundSunRain" : "Cloud/sun/rain",
+    "iconSnowFlake" : "Cloud/snowflake",
+    "iconRainDrop" : "Cloud/raindrop",
+    "iconFlame" : "Flame",
+    "iconWindowOpen" : "Window open",
+    "iconShutter" : "Shutter",
+    "iconEco" : "Eco",
+    "iconProtectionOff" : "Protection deactivated",
+    "iconProtectionExternal" : "Presence mode",
+    "iconProtectionInternal" : "Absence mode",
+    "iconBell" : "Notification",
+    "iconClock" : "Clock",
     "statusDisplayDialogTitle" : "Display configuration",
     "statusDisplayOptionText" : "Text",
     "statusDisplayOptionWhite" : "white",
@@ -693,6 +729,9 @@ jQuery.extend(true, langJSON, {
          "</li>" +
       "</ul>" +
       "<div>This setting only effects larger time periods (week/month/year).</div>",
+
+    "lblSettingsDeviceFirmwareMain0" : "Device firmware overview",
+    "lblSettingsDeviceFirmwareMain1" : "Perform device firmware update",
     "lblSettingsDeviceFirmware0" : "Overview of the installed device firmware files",
     "lblSettingsDeviceFirmware1" : "Add device firmware",
     "lblSettingsDeviceFirmware2" : "Delete device firmware",
@@ -761,6 +800,13 @@ jQuery.extend(true, langJSON, {
     "optionUnit8H" : "8 hours",
     "optionUnit12H" : "12 hours",
     "optionUnit24H" : "24 hours",
+    "optionUnit10SShort" : "10 s",
+    "optionUnit30SShort" : "30 s",
+    "optionUnit1MShort" : "1 min",
+    "optionUnit5MSShort" : "5 min",
+    "optionUnit10MShort" : "10 min",
+    "optionUnit30MShort" : "30 min",
+
     "optionOnWithDelay" : "On with switch on delay",
     "optionOnWithoutDelay" : "On without switch on delay",
     "optionInactiv" : "Inactive",
@@ -776,6 +822,8 @@ jQuery.extend(true, langJSON, {
     "optionPassageCounterDeltaLR" : "Difference of passages left/right",
     "optionPassageCounterDeltaL" : "Difference of passages left",
     "optionPassageCounterDeltaR" : "Difference of passages right",
+    "optionRingMode" : "Ring topology",
+    "optionTwoSeparateBusSystems" : "Two separate bus strings",
     "lblDeviceFwPerformUpdate" : "The device update is carried out",
     "lblDeviceFwDeliverFwImage" : "The update file will be transferred to the device",
     "lblGenericLinkPartner" : "Connection partner",
@@ -1242,6 +1290,7 @@ jQuery.extend(true, langJSON, {
     "<ul>",
 
     "dialogSettingsFirewallLblHintIPAddresses" : "You can enable access for individual IP addresses or entire address ranges for both IPv4 and IPv6. Enter the addresses in a list separated by ';'.",
+    "dialogSettingsFirewallLblHintIPAddressesWithoutIPv6" : "You can enable access for individual IP addresses (e. g. 192.168.0.1) or entire address ranges (e. g. 192.168.0.0/16) for IPv4. Enter the addresses in a list separated by ';'.",
 
     "dglUserNewFwSettingsTitle" : "Please note!",
     "dglUserNewFwSettingsContent" : "The firewall settings have changed. In case of problems, e.g. with additional software, please contact the admin.",
@@ -1282,6 +1331,74 @@ jQuery.extend(true, langJSON, {
     "soundColorRandomPlayback" : "MP3 file/colour = shuffle",
     "soundColorInternal" : "Internal sound/no colour",
     "hintSoundFileRandom20" : "Random playback of one of the first 20 MP3 files.",
+
+    "***"  : "***",
+
+    "checkSmokeDetectorSelfTest" : "To make sure the smoke detector is working properly, please  perform a self-test by pressing the operating key.",
+    "hintActivateDetectorSelfTest" : "The firmware update was successful. ",
+    "hintReInclusionDetectorFailed" : "A problem occurred while updating the firmware. ",
+
+    "lblRename" : "Rename",
+    "askRenameAllChannels" : "Automatically assign standard channel names?",
+    "lblDeviceName" : "Device description",
+    "lblChannelNames" : "Preview of channel names",
+
+    "dialogFirmwareUpdateUnknownError" : "An unknown error has occurred<br/><br/>Please check whether the device can be accessed.",
+
+    "lblHmIPWIdentification" : "Identification",
+    "lbDisplayBacklight" : "Lighting<br/>Display",
+    "lblLightingKeyVisual" : "Lighting<br/>System key",
+
+    "helpAccessPointOffline" :
+    "An internet connection is needed to <u>commission</u> the Homematic IP Wired Access Point.<br/><br/>" +
+    "Following successful commissioning (the system key is lit turquoise) the system can be operated offline. Operation then no longer requires an internet connection.<br/><br/>" +
+    "If you would like to use offline operation and train additional wired devices, use the training dialogue in the field <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet + "</b>" +
+    "Enter the KEY and the SGTIN from the device label.",
+
+    "drapMaxCurrentBus" : "Maximum current consumption by the bus",
+    "drapHelpMaxCurrentBus" : "Configuration of the parameter is dependent on the power pack.",
+    "drapBusConfig" : "Bus configuration",
+    "drapHelpBusConfig" : "Configuration of the parameter is dependent on the bus topology.",
+
+    "AccessPointConfigurationFinished" : "Settings successfully saved.",
+    "dialogMigrationRCV50Title" : langJSON.en.dialogHint,
+    "dialogMigrationRCV50" : "Starting with this release, 50 virtual remote operation channels can also be used for Homematic IP for the first time.<br/><br/>" +
+    "To enable them to be used in full, trained Homematic IP sensors already set in the programs will need to be reconfigured. " +
+    "This configuration runs automatically in the background, with appropriate service messages displayed (\"Configuration data ready for transfer\"). " +
+    "Please do not use the virtual remote operation channels until the configuration data has been transferred.<br/><br/>" +
+    "The changes do not impact existing programs and links.",
+    "btnAccessPointConfig" : "Configuration",
+    "lblQueryConfig" : "Query configuration",
+    "lblSetConfig" : "Save configuration",
+    "lblConfigNotChanged" : "No changes were made to the configuration.",
+
+    "configureDisplay" : "Display configuration",
+    "resetDisplay" : "Display reset",
+
+    "hintLinkParamOnOffNotActive" : "Note!<br/><br/>The 'ON and OFF time' parameters must not both be set to 'Not active'.",
+
+    "dialogHelpAcousticDisplayReceiverTitle" : "Note on text entry",
+    "dialogHelpAcousticDisplayReceiverContent" :
+      "Depending on the character width (e.g. an 'I' takes up less space than a 'W'), up to 15 characters can be displayed in one line.<br/><br/>" +
+      "To delete a text line, please enter a space.<br/><br/>" +
+      "Since only a limited character set is available, some characters cannot be used and are replaced by other characters.<br/><br/>" +
+      "<table style=\"margin-left:auto; margin-right:auto\">" +
+      "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
+      "<tr><td align='center'><span>[</span></td><td align='center'><span>%C4</span></td></tr>" +
+      "<tr><td align='center'><span>#</span></td><td align='center'><span>%D6</span></td></tr>" +
+      "<tr><td align='center'><span>$</span></td><td align='center'><span>%DC</span></td></tr>" +
+      "<tr><td align='center'><span>{</span></td><td align='center'><span>%E4</span></td></tr>" +
+      "<tr><td align='center'><span>|</span></td><td align='center'><span>%F6</span></td></tr>" +
+      "<tr><td align='center'><span>}</span></td><td align='center'><span>%FC</span></td></tr>" +
+      "<tr><td align='center'><span>_</span></td><td align='center'><span>%DF</span></td></tr>" +
+      "<tr><td align='center'><span>]</span></td><td align='center'><span>&</span></td></tr>" +
+      "<tr><td align='center'><span>'</span></td><td align='center'><span>=</span></td></tr>" +
+      "<tr><td align='center'><span> ; </span></td><td align='center'><span>Sanduhr</span></td></tr>" +
+      "<tr><td align='center'><span> < </span></td><td align='center'><span>Arrow down</span></td></tr>" +
+      "<tr><td align='center'><span> = </span></td><td align='center'><span>Arrow up</span></td></tr>" +
+      "<tr><td align='center'><span> > </span></td><td align='center'><span>Arrow up to right</span></td></tr>" +
+      "<tr><td align='center'><span> @ </span></td><td align='center'><span>Arrow down to right</span></td></tr>" +
+       "</table>",
 
     "theEnd" : ""
   }

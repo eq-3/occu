@@ -101,27 +101,30 @@ getLangInfo = function(sender, actor)
 
 getLangInfo_Special = function(file)
 {
-  var language = getLang();
-  var path = '/config/easymodes/etc/localization/' + language + '/' + file;
+   var language = getLang();
 
-  localized = (typeof localized === "undefined") ? {} : localized;
+   if (!langJSON[language][file.split('.')[0]] ) {
+    var path = '/config/easymodes/etc/localization/' + language + '/' + file;
 
-  new Ajax.Request(path,
-    {
-    method:    'get',
-    asynchronous: false,
-    onSuccess: function(success) {
-            set_Special = success.responseText;
-          },
+    localized = (typeof localized === "undefined") ? {} : localized;
 
-    onFailure: function(failure) {
-            Ajax_failure(path, failure.statusText);
-          
-          }
-    });
+    new Ajax.Request(path,
+      {
+        method: 'get',
+        asynchronous: false,
+        onSuccess: function (success) {
+          set_Special = success.responseText;
+        },
+
+        onFailure: function (failure) {
+          Ajax_failure(path, failure.statusText);
+
+        }
+      });
 
     //localized = eval(set_Special);
-    jQuery.extend(true,localized, eval(set_Special));
+    jQuery.extend(true, localized, eval(set_Special));
+  }
 };
 
 

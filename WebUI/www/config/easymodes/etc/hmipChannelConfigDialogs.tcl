@@ -159,18 +159,18 @@ proc getMaintenance {chn p descr} {
     append html "</script>"
   }
 
-  set param LATITUDE
+  set param LONGITUDE
   if { ! [catch {set tmp $ps($param)}]  } {
     incr prn
     append html "<tr name='positionFixing'>"
-     append html "<td>\${lblLocation} - \${dialogSettingsTimePositionLblLatitude}</td>"
+     append html "<td>\${lblLocation} - \${dialogSettingsTimePositionLblLongtitude}</td>"
     append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
 
-    set param LONGITUDE
+    set param LATITUDE
     incr prn
     append html "<tr name='positionFixing'>"
-     append html "<td>\${lblLocation} - \${dialogSettingsTimePositionLblLongtitude}</td>"
+     append html "<td>\${lblLocation} - \${dialogSettingsTimePositionLblLatitude}</td>"
     append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
@@ -1516,7 +1516,7 @@ proc getDimmerVirtualReceiver {chn p descr} {
           array_clear options
           option LOGIC_COMBINATION
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"Virtual_DimmerChannel_help($chn);\"></td>"
+        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"VirtualChannel_help($chn);\"></td>"
 
       append html "</tr>"
     }
@@ -1524,13 +1524,13 @@ proc getDimmerVirtualReceiver {chn p descr} {
     set param "LOGIC_COMBINATION_2"
     if { ! [catch {set tmp $ps($param)}]  } {
       incr prn
-      set onClick "Virtual_DimmerChannel_help($chn);"
+      set onClick "VirtualChannel_help($chn);"
       set hr 1
       append html "<tr>"
         append html "<td>\${stringTableLogicCombination} \${stringTableColor}</td>"
           array_clear options
           if {([string equal "HmIP-BSL" $devType] == 1) || ([string equal "HmIP-MP3P" $devType] == 1)} {
-            set onClick "Virtual_DimmerChannel_help($chn,'lc2');"
+            set onClick "VirtualChannel_help($chn,'lc2');"
             option LOGIC_COMBINATION_NO_AND_OR
           } else {
             option LOGIC_COMBINATION
@@ -1553,13 +1553,13 @@ proc getDimmerVirtualReceiver {chn p descr} {
   #### HELP
   append html "<tr><td colspan=\"3\">"
     append html "<table class=\"ProfileTbl\" id=\"virtual_ch_help_$chn\" style=\"display:none\">"
-    append html "<tr><td>\${virtualHelpTxt}</td></tr>"
+    append html "<tr><td>\${virtualHelpTxtDimmer}</td></tr>"
     append html "</table>"
   append html "</td></tr>"
 
   append html "<tr><td colspan=\"3\">"
     append html "<table class=\"ProfileTbl\" id=\"virtual_ch_help2_$chn\" style=\"display:none\">"
-    append html "<tr><td>\${virtualHelpTxt2}</td></tr>"
+    append html "<tr><td>\${virtualHelpTxtDimmerColor}</td></tr>"
     append html "</table>"
   append html "</td></tr>"
 
@@ -2226,19 +2226,24 @@ proc getSwitchVirtualReceiver {chn p descr} {
   upvar prn prn
   upvar special_input_id special_input_id
 
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
   set specialID "[getSpecialID $special_input_id]"
 
   set html ""
   set prn 0
+  set hr 0
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
     if { ! [catch {set tmp $ps($param)}]  } {
+      set hr 1
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableLogicCombination}</td>"
-        option LOGIC_COMBINATION
+        option LOGIC_COMBINATION_SWITCH
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"VirtualChannel_help($chn);\"></td>"
       append html "</tr>"
       append html "[getHorizontalLine]"
     }
@@ -2249,6 +2254,21 @@ proc getSwitchVirtualReceiver {chn p descr} {
     append html [getPowerUpSelector $chn ps $special_input_id]
   }
 
+  if {$hr == 1} {
+    #### HELP
+    # append html "[getHorizontalLine]"
+    append html "<tr><td colspan=\"3\">"
+      append html "<table class=\"ProfileTbl\" id=\"virtual_ch_help_$chn\" style=\"display:none\">"
+      append html "<tr><td>\${virtualHelpTxtSwitch}</td></tr>"
+      append html "</table>"
+    append html "</td></tr>"
+
+    puts "<script type=\"text/javascript\">"
+      puts "jQuery(\".j_helpBtn\").val(translateKey(\"helpBtnTxt\"));"
+    puts "</script>"
+
+  }
+
   if {$html == ""} {
     append html [getNoParametersToSet]
   }
@@ -2256,13 +2276,15 @@ proc getSwitchVirtualReceiver {chn p descr} {
 }
 
 proc getEnergieMeterTransmitter {chn p descr} {
-
+  global dev_descr
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
   upvar special_input_id special_input_id
 
   set specialID "[getSpecialID $special_input_id]"
+
+  set devType $dev_descr(TYPE)
 
   set html ""
 
@@ -2358,7 +2380,12 @@ proc getEnergieMeterTransmitter {chn p descr} {
     append prnTmp $prn _tmp
 
     append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prnTmp "onchange=\"test(this, '$prn');\""]</td>"
-    append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</span></td>"
+    if {[devIsPowerMeter $devType]} {
+      append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]</span></td>"
+    } else {
+      append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</span></td>"
+    }
+
   append html "</tr>"
   append html "<script type=\"text/javascript\">"
     append html "if ($ps($param) > 0) {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[1\].selected = true;document.getElementById('field_$prn').style.visibility='visible';} else {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[0\].selected = true;document.getElementById('field_$prn').style.visibility='hidden';}"
@@ -2402,7 +2429,7 @@ proc getCondSwitchTransmitter {chn p descr} {
   upvar prn prn
   upvar special_input_id special_input_id
 
-  set devType $dev_descr(SUBTYPE)
+  set devType $dev_descr(TYPE)
   set chn [getChannel $special_input_id]
 
   set specialID "[getSpecialID $special_input_id]"
@@ -2469,24 +2496,55 @@ proc getCondSwitchTransmitter {chn p descr} {
     append html "</tr>"
   }
 
-  set param COND_TX_THRESHOLD_LO
-  if { ! [catch {set tmp $ps($param)}] } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableCondThresholdLo}</td>"
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getCondTXThresholdUnit $devType $chn]&nbsp;[getMinMaxValueDescr $param]</td>"
-    append html "</tr>"
-  }
 
-  set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}] } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableCondThresholdHi}</td>"
-     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getCondTXThresholdUnit $devType $chn]&nbsp;[getMinMaxValueDescr $param]</td>"
-    append html "</tr>"
-  }
+  if {[devIsPowerMeter $devType]} {
+    set param COND_TX_THRESHOLD_LO
+    if { ! [catch {set tmp $ps($param)}] } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableCondThresholdLo}</td>"
+        append html "<td>"
 
+          append html "<input id=\"thresLo_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 1000)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
+          append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
+
+        append html "</td>"
+      append html "</tr>"
+    }
+
+    set param COND_TX_THRESHOLD_HI
+    if { ! [catch {set tmp $ps($param)}] } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableCondThresholdHi}</td>"
+        append html "<td>"
+
+          append html "<input id=\"thresHi_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 1000)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
+          append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
+
+       append html "</td>"
+      append html "</tr>"
+    }
+  } else {
+    set param COND_TX_THRESHOLD_LO
+    if { ! [catch {set tmp $ps($param)}] } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableCondThresholdLo}</td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getCondTXThresholdUnit $devType $chn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "</tr>"
+    }
+
+    set param COND_TX_THRESHOLD_HI
+    if { ! [catch {set tmp $ps($param)}] } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableCondThresholdHi}</td>"
+       append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getCondTXThresholdUnit $devType $chn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "</tr>"
+    }
+
+  }
   set param EVENT_DELAY_UNIT
   incr prn
   append html "<tr>"

@@ -83,7 +83,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       set options(16) "\${stringTableLogicINVERSMUL}"
       append HTML_PARAMS(separate_1) [get_ComboBox options LOGIC_COMBINATION separate_${special_input_id}_6 ps LOGIC_COMBINATION]
 
-      append HTML_PARAMS(separate_1) "&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$ch\" type=\"button\" value=\"Hilfe\" onclick=\"Virtual_DimmerChannel_help($ch);\">"
+      append HTML_PARAMS(separate_1) "&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$ch\" type=\"button\" value=\"Hilfe\" onclick=\"VirtualChannel_help($ch);\">"
     append HTML_PARAMS(separate_1) "</td></tr>"
 
 
@@ -134,7 +134,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #catch {source [file join $env(DOCUMENT_ROOT) config/virtualHelp.tcl]}
   #append HTML_PARAMS(separate_1) "<tr><td>$help_txt</td></tr>"
 
-  append HTML_PARAMS(separate_1) "<tr><td>\${virtualHelpTxt}</td></tr>"
+  append HTML_PARAMS(separate_1) "<tr><td>\${virtualHelpTxtDimmer}</td></tr>"
 
   append HTML_PARAMS(separate_1) "</table>"
 

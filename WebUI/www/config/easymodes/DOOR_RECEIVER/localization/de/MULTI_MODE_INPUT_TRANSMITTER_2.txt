@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Garagentor in den entgegengesetzten Zustand gefahren (ge%F6ffnet oder geschlossen - Toggle-Funktion).</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Garagentor ge%F6ffnet.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Garagentor geschlossen.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird die Fahrt des Garagentores angehalten.</span><br/><br/>",
-"description_5" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters f%E4hrt das Garagentor in die L%FCftungsposition.</span><br/><br/>",
-
+"description_1" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Garagentor in den entgegengesetzten Zustand gefahren (ge%F6ffnet oder geschlossen). Ein weiterer Tastendruck h%E4lt das Tor an, der n%E4chste Tastendruck l%E4sst das Tor bis zur Endlage weiterfahren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Garagentor in den entgegengesetzten Zustand gefahren (ge%F6ffnet oder geschlossen). Ein weiterer Tastendruck h%E4lt das Tor an, der n%E4chste Tastendruck l%E4sst das Tor wieder bis zur vorherigen Endlage zur%FCckfahren.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Garagentor ge%F6ffnet.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Garagentor geschlossen.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird die Fahrt des Garagentores angehalten.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters f%E4hrt das Garagentor in die L%FCftungsposition.</span><br/><br/>",

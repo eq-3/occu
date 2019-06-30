@@ -1,0 +1,84 @@
+<!-- This html should create the dialog for the parameter COMBINED_PARAMETER-->
+
+<table style="margin: 0 auto;">
+   <tbody>
+    <tr>
+      <td>${lblVolume}: </td>
+      <td id="tdCombinedParam_Volume">
+      </td>
+    </tr>
+
+    <tr>
+      <td>Spieldauer begrenzt</td>
+      <td>
+        <input id="chkBoxTimeLimit" type="checkbox">
+      </td>
+    </tr>
+
+    <tr name="trDuration">
+      <td>${stringTableDuration}: </td>
+      <td>
+        <input id="combinedParam_DurationValue" type="text" size="5" style="text-align: left;" value="0">
+      </td>
+      <td style="text-align:center;">x</td>
+      <td>
+        <select id="combinedParam_DurationUnit"  style="text-align: center;">
+          <option value="3">${optionUnit10MS}</option>
+          <option value="0">${Sec}</option>
+          <option value="1">${Min}</option>
+          <option value="2">${Hou}</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr name="trRampTime">
+      <td>${stringTableRampTime}: </td>
+      <td>
+        <input id="combinedParam_RampTimeValue" type="text" size="5" style="text-align: left;" value="0">
+      </td>
+      <td style="text-align:center;">x</td>
+      <td>
+        <select id="combinedParam_RampTimeUnit" style="text-align: center;">
+          <option value="3">${optionUnit10MS}</option>
+          <option value="0">${Sec}</option>
+          <option value="1">${Min}</option>
+          <!-- <option value="2">${Hou}</option> Ramptime hour disabled-->
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>${lblRepetitions}: </td>
+      <td colspan="3">
+        <select id="combinedParam_Repetitions" style="text-align: center;">
+          <option value="0">${optionNoRepetition}</option>
+          <option value="1">1 ${optionRepetition}</option>
+          <option value="2">2 ${optionRepetitions}</option>
+          <option value="3">3 ${optionRepetitions}</option>
+          <option value="4">4 ${optionRepetitions}</option>
+          <option value="5">5 ${optionRepetitions}</option>
+          <option value="6">6 ${optionRepetitions}</option>
+          <option value="7">7 ${optionRepetitions}</option>
+          <option value="8">8 ${optionRepetitions}</option>
+          <option value="9">9 ${optionRepetitions}</option>
+          <option value="10">10 ${optionRepetitions}</option>
+          <option value="11">11 ${optionRepetitions}</option>
+          <option value="12">12 ${optionRepetitions}</option>
+          <option value="13">13 ${optionRepetitions}</option>
+          <option value="14">14 ${optionRepetitions}</option>
+          <option value="15">${optionInfiniteRepetition}</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>${lblSoundfileList}: </td>
+      <td colspan="3">
+        <input id="combinedParam_ChoosenFiles" type="text" disabled>
+      </td>
+      <td><div id="btnChooseSoundFiles" class="StdButton" style="width:100%;">${btnChooseSongs}</div></td>
+    </tr>
+
+
+   </tbody>
+</table>

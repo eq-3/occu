@@ -20,8 +20,12 @@
   string hm_rgbw_controller = "HM-LC-RGBW-WM";
   string hm_jalousieActor = "HM-LC-Ja1PBU";
   string hmip_wrcd = "HmIP-WRCD";
+  string hmip_mp3p = "HmIP-MP3P";
 
   string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
+
+  string acousticSignalVirtualReceiver = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER";
+
   string s_vir_lg_rgb_dim = "VIR-LG-RGB-DIM";
   string s_vir_lg_rgbw_dim = "VIR-LG-RGBW-DIM";
   string s_vir_lg_white_dim = "VIR-LG-WHITE-DIM";
@@ -35,7 +39,7 @@
   string excludeColorList = "COLOR_LIST_";
   string excludeOntimeList = "ON_TIME_LIST_";
   string excludeOutputSelectSize = "OUTPUT_SELECT_SIZE";
-  string excludeCombinedParameter = "COMBINED_PARAMETER";
+  string excludeCombinedParameter = "_COMBINED_PARAMETER";
   string excludeRepetitions = "REPETITIONS=";
 
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
@@ -473,6 +477,9 @@
             integer i_vir_lg_rgbw_dim = chLabel.Find(s_vir_lg_rgbw_dim);
             integer i_vir_lg_group = chLabel.Find(s_vir_lg_group);
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
+            integer i_acousticSignalVirtualReceiver = oCH.HssType().Find(acousticSignalVirtualReceiver);
+            integer i_hmip_mp3p = chLabel.Find(hmip_mp3p);
+
             integer ePaperAcousticDisplay = chLabel.Find(hmip_wrcd);
 
             if ((statusDisplayDevice != -1)
@@ -480,7 +487,7 @@
               || (ePaperAcousticDisplay != -1)
               || (rgbw_controller != -1)
               || ((jalousieActor != - 1) && (oDP.HSSID().Find("LEVEL_COMBINED") != -1))
-              || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)))
+              || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (i_hmip_mp3p != -1))
               ) {
               if (statusDisplayDevice != -1) {
                 if(iV == "0") {
@@ -545,8 +552,16 @@
                 }
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGBW\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
+
+              if (((i_hmip_mp3p != -1) && (i_acousticSignalVirtualReceiver != -1)) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                if (iV.Find("SL=") == -1) {
+                  iV = "L=100,DU=2,DV=31,RTU=0,RTV=0,R=0,SL=0";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setAcousticSignalController('#oSD.ID()#',\'COMBINED_PARAMETER\');;" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
             } else {
-              Write( '<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              Write('<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
             }
 
             if((ouled16 == -1)
@@ -561,7 +576,8 @@
               && (jalousieActor == -1)
               && (i_vir_lg_rgb_dim == -1)
               && (i_vir_lg_rgbw_dim == -1)
-              && ( i_vir_lg_group == -1)
+              && (i_vir_lg_group == -1)
+              && (i_acousticSignalVirtualReceiver == -1)
               ) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
@@ -598,6 +614,11 @@
               if (((i_vir_lg_rgbw_dim != -1) || ( i_vir_lg_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
                 Write( '<span id="setRGBWController'#oSD.ID()#'" class="CLASS02401" onclick="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGBW\');"><img src="/ise/img/notepad.png" /></span>' );
               }
+
+              if ((i_acousticSignalVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                Write( '<span id="setAcousticSignalVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setAcousticSignalController('#oSD.ID()#',\''#oDP.HSSID()#'\');"><img src="/ise/img/notepad.png" /></span>' );
+              }
+
             }
           }
 

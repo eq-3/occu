@@ -33,6 +33,11 @@ jQuery.extend(true,langJSON, {
     "lblLinkNameWith" : "mit",
     "lblUnknownDevice" : "Unbekanntes Ger%E4t",
     "lblSelectLanguage" : "Sprache:",
+    "lblText" : "Text",
+    "lblAlign" : "Ausrichtung",
+    "lblBGColorBR" : "Hintergrund-<br/>Farbe",
+    "lblTextColorBR" : "Text-<br/>Farbe",
+    "lblIcon" : "Icon",
     "selectLangAuto" : "Auto",
     "selectLangDE" : "Deutsch",
     "selectLangUK" : "Englisch",
@@ -227,6 +232,7 @@ jQuery.extend(true,langJSON, {
     "Oct" : "Oktober",
     "Nov" : "November",
     "Dec" : "Dezember",
+    "Sec" : "Sekunde",
 	  "Hou" : "Stunde",
 	  "Min" : "Minute",
     "btnDatePickerThisMonth" : "Dieser Monat",
@@ -295,9 +301,9 @@ jQuery.extend(true,langJSON, {
     "ErrorOnDeleteWindowDeferDescription" : "L%F6scht das Ger%E4t, sobald es wieder erreichbar ist",
     "ErrorOnDeleteWindowForce" : "Aus Homematic Zentrale l%F6schen",
     "ErrorOnDeleteWindowForceDescription" : "L%F6scht das Ger%E4t aus der Homematic Zentrale, auch wenn es nicht erreichbar ist.",
-    "ErrorOnDeleteWindowDeviceNotReachable" : "<b>Das Ger%E4t '${device.name}' ist nicht erreichbar.</b><p>Stellen Sie sicher, dass das Ger%E4t sich in Funk-Reichweite befindet und bet%E4tigen Sie ggf. die Anlerntaste.<br />Wiederholen Sie anschlie%DFend den L%F6schvorgang.</p>",
+    "ErrorOnDeleteWindowDeviceNotReachable" : "<b>Das Ger%E4t '${device.name}' ist nicht erreichbar.</b><p>Stellen Sie sicher, dass das Ger%E4t sich in Reichweite befindet und bet%E4tigen Sie ggf. die Anlerntaste.<br /><br />Wiederholen Sie anschlie%DFend den L%F6schvorgang.</p>",
     "ErrorOnDeleteWindowUnknownDevice" : "<b>Das Ger%E4t '${device.name}' ist der Homematic Zentrale nicht bekannt.</b><p>Eventuell wurde es bereits gel%F6scht.</p>",
-    "ErrorOnDeleteWindowUnknownError" : "<b>Das Ger%E4t '${device.name}' konnte nicht gel%F6scht werden.</b><p>Stellen Sie sicher, dass das Ger%E4t sich in Funk-Reichweite befindet und bet%E4tigen Sie ggf. die Anlerntaste.<br />Wiederholen Sie anschlie%DFend den L%F6schvorgang.</p>",
+    "ErrorOnDeleteWindowUnknownError" : "<b>Das Ger%E4t '${device.name}' konnte nicht gel%F6scht werden.</b><p>Stellen Sie sicher, dass das Ger%E4t sich in Reichweite befindet und bet%E4tigen Sie ggf. die Anlerntaste.<br /><br />Wiederholen Sie anschlie%DFend den L%F6schvorgang.</p>",
     "ErrorOnDeleteWindowAbortButton" : "Abbrechen",
     "ErrorOnDeleteWindowDeleteButton" : "Erneut l%F6schen",
     "sysVarAlarmZone1" : "Alarmzone 1",
@@ -405,7 +411,7 @@ jQuery.extend(true,langJSON, {
     "alertUseOnlySpecialChars" : "Bitte verwenden Sie nur die erlaubten Sonderzeichen ., !, $, (, ), :, ;, #, %DF, %C4, %E4, %D6, %F6, %DC, %FC, -",
     "alertCharsNotAllowed" : "Bezeichnungen d%FCrfen keines der folgenden Zeichen enthalten: <, >, ', \", &, $, [, ], {, } und \\",
     "alertErrorDeleteObject" : "Objekt konnte nicht gel%F6scht werden.",
-    "dialogAllRFInterfacesTitle" : "Alle bekannten Interfaces",
+    "dialogAllRFInterfacesTitle" : "Alle bekannten Funk-Interfaces",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentA" : "Einspielen des Backups nicht m%F6glich. Das vorliegende Backup basiert auf der Zentralen-Firmware ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentB" : "<br>\nDiese ist aktueller, als die derzeit auf der Zentrale installierte Version ",
     "dialogSettingsSecurityMessageSysBackupFWUpdateNecessaryContentC" : ".<br>\nF&uuml;hren Sie zun&auml;chst ein Update der Zentralen-Firmware durch und starten Sie dann das Einspielen des Systembackups erneut.",
@@ -616,14 +622,42 @@ jQuery.extend(true,langJSON, {
     "iconClosed":"Geschlossen",
     "iconError":"Fehler",
     "iconOK":"Alles okay",
-    "iconInfo":"Information",
     "iconNewMessage":"Neue Nachricht",
     "iconServiceMessage":"Servicemeldung",
     "iconSignalGreen":"Signal gr%FCn",
     "iconSignalYellow":"Signal gelb",
     "iconSignalRed":"Signal rot",
-
-    
+    "iconLampOff" : "Lampe aus",
+    "iconLampOn" : "Lampe ein",
+    "iconPadlockOpen" : "Schloss auf",
+    "iconPadlockClosed" : "Schloss zu",
+    "iconX" : "X",
+    "iconTick" : "H%E4ckchen",
+    "iconInfo" : "Info",
+    "iconEnvelope" : "Briefumschlag",
+    "iconWrench" : "Schraubenschl%FCssel",
+    "iconSun" : "Sonne",
+    "iconMoon" : "Mond",
+    "iconWind" : "Wind",
+    "iconCloud" : "Wolke",
+    "iconCloudBolt" : "Wolke/Blitz",
+    "iconCloudLightRain" : "Wolke/leichter Regen",
+    "iconCloudMoon" : "Wolke/Mond",
+    "iconCloudRain" : "Wolke/Regen",
+    "iconCloudSnow" : "Wolke/Schnee",
+    "iconCloudSun" : "Wolke/Sonne",
+    "iconCloundSunRain" : "Wolke/Sonne/Regen",
+    "iconSnowFlake" : "Wolke/Schneeflocke",
+    "iconRainDrop" : "Wolke/Regentropfen",
+    "iconFlame" : "Flamme",
+    "iconWindowOpen" : "Fenster auf",
+    "iconShutter" : "Rollladen",
+    "iconEco" : "Eco",
+    "iconProtectionOff" : "Unscharf",
+    "iconProtectionExternal" : "H%FCllschutz",
+    "iconProtectionInternal" : "Vollschutz",
+    "iconBell" : "Benachrichtigung",
+    "iconClock" : "Uhr",
     "statusDisplayDialogTitle" : "Display Konfiguration",
     "statusDisplayOptionText" : "Text",
     "statusDisplayOptionWhite" : "Wei%DF",
@@ -696,6 +730,9 @@ jQuery.extend(true,langJSON, {
          "</li>" +
       "</ul>" +
       "<div>Diese Einstellung hat nur Auswirkungen auf gro&szlig;e Zeitr%E4ume (Woche/Monat/Jahr)</div>",
+
+    "lblSettingsDeviceFirmwareMain0" : "Ger%E4te-Firmware %DCbersicht",
+    "lblSettingsDeviceFirmwareMain1" : "Firmware Update durchf%FChren",
     "lblSettingsDeviceFirmware0" : "%DCbersicht installierter Ger%E4te-Firmware-Dateien",
     "lblSettingsDeviceFirmware1" : "Ger%E4te-Firmware hinzuf%FCgen",
     "lblSettingsDeviceFirmware2" : "Ger%E4te-Firmware entfernen",
@@ -764,6 +801,13 @@ jQuery.extend(true,langJSON, {
     "optionUnit8H" : "8 Stunden",
     "optionUnit12H" : "12 Stunden",
     "optionUnit24H" : "24 Stunden",
+    "optionUnit10SShort" : "10 s",
+    "optionUnit30SShort" : "30 s",
+    "optionUnit1MShort" : "1 min",
+    "optionUnit5MSShort" : "5 min",
+    "optionUnit10MShort" : "10 min",
+    "optionUnit30MShort" : "30 min",
+
     "optionOnWithDelay" : "Ein mit Einschaltverz%F6gerung",
     "optionOnWithoutDelay" : "Ein ohne Einschaltverz%F6gerung",
     "optionInactiv" : "Inaktiv",
@@ -779,6 +823,8 @@ jQuery.extend(true,langJSON, {
     "optionPassageCounterDeltaLR" : "Differenz der Durchg%E4nge links/rechts",
     "optionPassageCounterDeltaL" : "Differenz der Durchg%E4nge links",
     "optionPassageCounterDeltaR" : "Differenz der Durchg%E4nge rechts",
+    "optionRingMode" : "Ringtopologie",
+    "optionTwoSeparateBusSystems" : "Zwei getrennte Busstr%E4nge",
     "lblDeviceFwPerformUpdate" : "Das Update des Ger%E4tes wird durchgef%FChrt",
     "lblDeviceFwDeliverFwImage" : "Die Updatedatei wird zum Ger%E4t %FCbertragen",
     "lblGenericLinkPartner" : "Verkn%FCpfungspartner",
@@ -1250,6 +1296,7 @@ jQuery.extend(true,langJSON, {
     "<ul>",
 
     "dialogSettingsFirewallLblHintIPAddresses" : "Sie k%F6nnen den Zugriff f%FCr einzelne IP-Adressen oder ganze Adressbereiche sowohl f%FCr IPv4 als auch f%FCr IPv6 freigeben. Geben Sie die Adressen durch ein ';' getrennt ein.",
+    "dialogSettingsFirewallLblHintIPAddressesWithoutIPv6" : "Sie k%F6nnen den Zugriff f%FCr einzelne IP-Adressen (z. B. 192.168.0.1) oder ganze Adressbereiche (z. B. 192.168.0.0/16) f%FCr IPv4 freigeben. Geben Sie die Adressen durch ein ';' getrennt ein.",
 
     "dglUserNewFwSettingsTitle" : "Bitte beachten!",
     "dglUserNewFwSettingsContent" : "Die Firewalleinstellungen wurden ge%E4ndert. Bei Problemen, z. B. mit Zusatzsoftware, wenden Sie sich bitte an den Administrator.",
@@ -1290,6 +1337,76 @@ jQuery.extend(true,langJSON, {
     "soundColorRandomPlayback" : "MP3-Datei/Farbe = Zufallswiedergabe",
     "soundColorInternal" : "Interner Sound/keine Farbe",
     "hintSoundFileRandom20" : "Zuf%E4llige Wiedergabe einer der ersten 20 MP3-Dateien.",
+
+    "***"  : "***",
+
+    "checkSmokeDetectorSelfTest" : "Bitte vergewissern Sie sich, dass der Rauchmelder korrekt arbeitet, indem Sie einen Selbsttest durch Druck auf die Bedientaste durchf%FChren!",
+    "hintActivateDetectorSelfTest" : "Das Firmware-Update wurde erfolgreich aufgespielt. ",
+    "hintReInclusionDetectorFailed" : "Beim Firmware-Update ist ein Problem aufgetreten.  ",
+
+    "lblRename" : "Umbenennen",
+    "askRenameAllChannels" : "Standard-Kanalnamen automatisiert vergeben?",
+    "lblDeviceName" : "Ger%E4tename",
+    "lblChannelNames" : "Vorschau Kanalnamen",
+
+    "dialogFirmwareUpdateUnknownError" : "Es ist ein unbekannter Fehler aufgetreten<br/><br/>Bitte %FCberpr%FCfen Sie, ob das Ger%E4t erreichbar ist.",
+
+    "lblHmIPWIdentification" : "Identifizierung",
+    "lbDisplayBacklight" : "Beleuchtung<br/>Display",
+    "lblLightingKeyVisual" : "Beleuchtung<br/>Systemtaste",
+
+    "helpAccessPointOffline" :
+      "F%FCr die <u>Inbetriebnahme</u> des Homematic IP Access Points wird eine Internetverbindung ben%F6tigt.<br/><br/>" +
+      "Nach erfolgreicher Inbetriebnahme (die Systemtaste leuchtet t%FCrkis), kann der Offlinebetrieb genutzt werden. " +
+      "F%FCr den weiteren Betrieb wird nun keine Internetverbindung mehr ben%F6tigt.<br/><br/>" +
+      "Wenn Sie den Offlinebetrieb nutzen und weitere Wired Ger%E4te anlernen m%F6chten, verwenden Sie im Anlerndialog das Feld <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet +"</b>" +
+      "Geben Sie den KEY und die SGTIN des Ger%E4teaufklebers ein.",
+
+    "drapMaxCurrentBus" : "Maximale Stromaufnahme<br/>des Bus",
+    "drapHelpMaxCurrentBus" : "Dieser Wert muss in Abh%E4ngigkeit des verwendeten Netzteils konfiguriert werden.",
+    "drapBusConfig" : "Buskonfiguration",
+    "drapHelpBusConfig" : "Dieser Wert muss in Abh%E4ngigkeit der verwendeten Bustopologie konfiguriert werden.",
+
+    "AccessPointConfigurationFinished" : "Die Einstellungen wurden erfolgreich %FCbernommen.",
+    "dialogMigrationRCV50Title" : langJSON.de.dialogHint,
+    "dialogMigrationRCV50" : "Ab diesem Release ist es erstmals m%F6glich, auch f%FCr Homematic IP 50 virtuelle Fernbedienungskan%E4le zu nutzen.<br/><br/>" +
+    "Damit diese vollumf%E4nglich genutzt werden k%F6nnen, m%FCssen angelernte Homematic IP Sensoren, welche in Programmen eingebunden sind, umkonfiguriert werden. " +
+    "Diese Konfiguration wird automatisch im Hintergrund durchgef%FChrt und durch entsprechende Service-Mitteilungen (\"Konfigurationsdaten stehen zur %DCbertragung an\") angezeigt. " +
+    "Bitte nutzen sie die virtuellen Fernbedienungskan%E4le erst, nachdem die Konfigurationsdaten %FCbertragen wurden. " +
+    "Bestehende Programme und Verkn%FCpfungen werden von den %C4nderungen nicht beeinflusst.",
+    "btnAccessPointConfig" : "Konfiguration",
+    "lblQueryConfig" : "Konfiguration abfragen",
+    "lblSetConfig" : "Konfiguration speichern",
+    "lblConfigNotChanged" : "Es wurde keine %C4nderung an der Konfiguration vorgenommen.",
+
+    "configureDisplay" : "Display-Konfiguration",
+    "resetDisplay" : "Display-Reset",
+
+    "hintLinkParamOnOffNotActive" : "Hinweis!<br/><br/>Die Parameter Ein- und Ausschaltdauer d%FCrfen nicht gemeinsam auf 'Nicht aktiv' gestellt werden.",
+
+    "dialogHelpAcousticDisplayReceiverTitle" : "Hinweis zur Texteingabe",
+    "dialogHelpAcousticDisplayReceiverContent" :
+      "Abh%E4ngig von der Zeichenbreite (ein 'I' nimmt z. B. weniger Platz ein, als ein 'W'), k%F6nnen bis zu 15 Zeichen in einer Zeile dargestellt werden.<br/><br/>" +
+      "Um eine Textzeile zu l%F6schen, geben Sie f%FCr die Zeile bitte ein Leerzeichen ein.<br/><br/>" +
+      "Da nur ein eingeschr%E4nkter Zeichensatz zur Verf%FCgung steht, k%F6nnen einige Zeichen nicht verwendet werden " +
+      "und werden durch andere Zeichen ausgetauscht.<br/><br/>" +
+        "<table style=\"margin-left:auto; margin-right:auto\">" +
+        "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
+        "<tr><td align='center'><span>[</span></td><td align='center'><span>%C4</span></td></tr>" +
+        "<tr><td align='center'><span>#</span></td><td align='center'><span>%D6</span></td></tr>" +
+        "<tr><td align='center'><span>$</span></td><td align='center'><span>%DC</span></td></tr>" +
+        "<tr><td align='center'><span>{</span></td><td align='center'><span>%E4</span></td></tr>" +
+        "<tr><td align='center'><span>|</span></td><td align='center'><span>%F6</span></td></tr>" +
+        "<tr><td align='center'><span>}</span></td><td align='center'><span>%FC</span></td></tr>" +
+        "<tr><td align='center'><span>_</span></td><td align='center'><span>%DF</span></td></tr>" +
+        "<tr><td align='center'><span>]</span></td><td align='center'><span>&</span></td></tr>" +
+        "<tr><td align='center'><span>'</span></td><td align='center'><span>=</span></td></tr>" +
+        "<tr><td align='center'><span> ; </span></td><td align='center'><span>Sanduhr</span></td></tr>" +
+        "<tr><td align='center'><span> < </span></td><td align='center'><span>Pfeil nach unten</span></td></tr>" +
+        "<tr><td align='center'><span> = </span></td><td align='center'><span>Pfeil nach oben</span></td></tr>" +
+        "<tr><td align='center'><span> > </span></td><td align='center'><span>Pfeil nach oben rechts</span></td></tr>" +
+        "<tr><td align='center'><span> @ </span></td><td align='center'><span>Pfeil nach unten rechts</span></td></tr>" +
+        "</table>",
 
     "theEnd" : ""
   }

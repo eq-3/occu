@@ -39,6 +39,7 @@ ACOUSTIC_ALARM_SELECTION=FREQUENCY_HIGHON_LONGOFF	${stringTableAlarmFrequencyHig
 ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_OFF_HIGHON_OFF	${stringTableAlarmFrequencyLowOnOffHighonOff}
 ACOUSTIC_ALARM_SELECTION=FREQUENCY_LOWON_LONGOFF_HIGHON_LONGOFF	${stringTableAlarmFrequencyLowOnLongOffHighOnLongOff}
 ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER	${stringTableAcousticSignalVirtualReceiverTitle}
+ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER|COMBINED_PARAMETER	${lblPlaylist}
 ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER|LEVEL	${lblVolume}
 ACTOR_SECURITY	${stringTableActorSecurityTitle}
 ACTOR_SECURITY|ON_TIME	${stringTableActorSecurityOnTime}
@@ -123,6 +124,14 @@ ALARMTIME_MAX	${stringTableAlarmTimeMax}
 ALARM_SWITCH_VIRTUAL_RECEIVER	${stringTableSwitchSensorTitle}
 ALL_LEDS	${stringTableAllLEDs}
 ANALOG_INPUT	${stringTableAnalog}
+ANALOG_INPUT_TRANSMITTER|FILTER_SIZE	${stringTableAnalogInputTransmitterFilterSize}
+ANALOG_INPUT_TRANSMITTER|VOLTAGE	${stringTableAnalogInputTransmitterVoltage}
+ANALOG_INPUT_TRANSMITTER|VOLTAGE_STATUS=NORMAL	${stringTableAnalogInputVoltageStatus}: ${lblNormal}
+ANALOG_INPUT_TRANSMITTER|VOLTAGE_STATUS=0	${stringTableAnalogInputVoltageStatus}: ${lblNormal}
+ANALOG_INPUT_TRANSMITTER|VOLTAGE_STATUS=OVERFLOW	${stringTableAnalogInputVoltageStatus}: ${lblOverflow}
+ANALOG_INPUT_TRANSMITTER|VOLTAGE_STATUS=2	${stringTableAnalogInputVoltageStatus}: ${lblOverflow}
+ANALOG_INPUT_TRANSMITTER|VOLTAGE_STATUS=UNDERFLOW	${stringTableAnalogInputVoltageStatus}: ${lblUnderflow}
+ANALOG_INPUT_TRANSMITTER|VOLTAGE_STATUS=3	${stringTableAnalogInputVoltageStatus}: ${lblUnderflow}
 ANALOG_OUTPUT	${stringTableAnalog}
 ANALOG_OUTPUT_TRANSCEIVER	${stringTableAnalogOutputTransceiverTitle}
 ANALOG_OUTPUT_TRANSCEIVER|LEVEL	${stringTableAnalogOutputTransceiverLevel}
@@ -637,6 +646,7 @@ ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=UNDERFLOW	${lblValue} ${stringTablePowe
 ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=2	${lblValue} ${stringTablePowerMeterVoltage}: ${lblUnderflow}
 ERROR	${stringTableError}
 ERROR=NO_ERROR	${stringTableErrorNoError}
+ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH	${stringTableErrorBadRechargeableBatteryHealthTrue}
 ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=FALSE	${stringTableErrorBadRechargeableBatteryHealthFalse}
 ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=TRUE	${stringTableErrorBadRechargeableBatteryHealthTrue}
 ERROR_BATTERY=FALSE	${stringTableBatteryFailure}

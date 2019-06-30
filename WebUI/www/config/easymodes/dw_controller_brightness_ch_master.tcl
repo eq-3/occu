@@ -30,11 +30,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<td style=\"width:10%\">\${stringTableLogicCombination}</td>"
       option LOGIC_COMBINATION
       append HTML_PARAMS(separate_1) "<td style=\"width:25%\">[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-      append HTML_PARAMS(separate_1) "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\"Hilfe\" onclick=\"Virtual_DimmerChannel_help($chn);\"></td>"
+      append HTML_PARAMS(separate_1) "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\"Hilfe\" onclick=\"VirtualChannel_help($chn);\"></td>"
       append HTML_PARAMS(separate_1) "<td style=\"25%\"></td>"
     append HTML_PARAMS(separate_1) "</tr>"
 
-    append HTML_PARAMS(separate_1) "<tr id=\"virtual_ch_help_$chn\" style=\"display:none\"><td colspan=\"3\">\${virtualHelpTxt}</td></tr>"
+    append HTML_PARAMS(separate_1) "<tr id=\"virtual_ch_help_$chn\" style=\"display:none\"><td colspan=\"3\">\${virtualHelpTxtDimmer}</td></tr>"
     append HTML_PARAMS(separate_1) "<tr><td colspan=\"4\"><hr></td></tr>"
   append HTML_PARAMS(separate_1) "</table>"
 
@@ -145,7 +145,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
     append HTML_PARAMS(separate_1) "jQuery(\".j_helpBtn\").val(translateKey(\"helpBtnTxt\"));"
 
-    append HTML_PARAMS(separate_1) "Virtual_DimmerChannel_help = function(ch) {"
+    append HTML_PARAMS(separate_1) "VirtualChannel_help = function(ch) {"
       append HTML_PARAMS(separate_1) "jQuery('#virtual_ch_help_' + ch).toggle(\"fast\", function() {"
         append HTML_PARAMS(separate_1) "var btnElm = jQuery(\"#virtual_help_button_' + ch\");"
         append HTML_PARAMS(separate_1) "if (btnElm.val() == translateKey(\"genericBtnTxtHelp\")) {"

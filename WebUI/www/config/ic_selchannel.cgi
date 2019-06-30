@@ -774,6 +774,12 @@ proc showHmIPChannel {devType direction address chType} {
       }
     }
 
+    if {($devType == "HMIP-MIO16-PCB") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
+      if {($ch == 19) || ($ch == 20) || ($ch == 23) || ($ch == 24) || ($ch == 27) || ($ch == 28) || ($ch == 31) || ($ch == 32) || ($ch == 35) || ($ch == 36) || ($ch == 39) || ($ch == 40) || ($ch == 43) || ($ch == 44) || ($ch == 47) || ($ch == 48)} {
+        return 0
+      }
+    }
+
   }
   # show the channel
   return 1

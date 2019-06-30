@@ -48,13 +48,13 @@
 
 "helpBtnChannelConfigurationMotionDetectorGeneric" : "The switch-on duration should always be longer than the ‘Minimum transmission interval' of the sensor. ",
 
-"helpBtnChannelConfigurationMotionDetectorA" : "The minimum transmission interval of the sensor ist set to ",
+"helpBtnChannelConfigurationMotionDetectorA" : "The minimum transmission interval of the sensor is set to ",
 "helpBtnChannelConfigurationMotionDetectorB" : ".  All movements detected are reported every ",
 "helpBtnChannelConfigurationMotionDetectorC" : "to the actuator. The switch-on duration of the actuator should therefore always be longer than ",
 "helpBtnChannelConfigurationMotionDetectorD" : ", to ensure the correct operation of the profile. ",
-"helpBtnChannelConfigurationMotionDetectorE" : "Also, make sure that the channel parameter ‘Send detected motion within transmission interval’ is activated.<br/><br/>",
+"helpBtnChannelConfigurationMotionDetectorE" : "Also, make sure that the channel parameter 'Send detected motion within transmission interval' is activated.<br/><br/>",
 
-"helpGotoChannelConfiguration" : "The settings can be adjusted here via the button 'Editing transmitter channel settings",
+"helpGotoChannelConfiguration" : "The settings can be adjusted here via the button 'Sender channel settings Edit'",
 
 "BLACK" : "Off",
 "BLUE" : "Blue",
