@@ -1,3 +1,5 @@
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
+
 proc getMinValue {param} {
   global psDescr
   upvar psDescr descr

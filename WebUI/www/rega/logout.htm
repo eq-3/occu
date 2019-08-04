@@ -113,6 +113,7 @@
       }
     %>
     }
+    window.history.pushState({},document.title, "/logout.htm?lang="+getLang());
     translatePage("#maintable");
     translateAttribute("#idHelp", "title", "tooltipHelp");
   </script>
