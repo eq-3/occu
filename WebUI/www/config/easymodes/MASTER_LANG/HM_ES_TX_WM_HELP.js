@@ -98,7 +98,11 @@ jQuery.extend(true,langJSON, {
     "ENERGY_COUNTER_STRING_CH2_V2" :
       "Standardeinstellung: 2.8.0<br />"+
       "2 --> Wirkleistung alle Phasen - (Geliefert)<br />"+
-      "8 --> Integral &uuml;ber die Zeit = Z&auml;hlerstand"
+      "8 --> Integral &uuml;ber die Zeit = Z&auml;hlerstand",
+
+    "DZG_COMPATIBILITY_MODE" : "Einige Z%E4hler von DZG weisen einen Fehler in der Kodierung der Leistung auf, wodurch positive Leistungswerte als negative interpretiert werden. Dies wird mit dem Kompatibilit%E4tsmodus behoben.",
+
+    "ELSTER_COMPATIBILITY_MODE" : "Sofern die gew%FCnschten Messwerte bei der normalen Abfrage nicht verf%FCgbar sind, kann bei Z%E4hlern von Elster ein alternatives Aufrufkommando probiert werden. Dies wird mit dem Kompatibilit%E4tsmodus aktiviert.",
 
   },
   "en" :{
@@ -203,7 +207,11 @@ jQuery.extend(true,langJSON, {
     "ENERGY_COUNTER_STRING_CH2_V2" :
       "Default setting: 2.8.0<br />"+
       "2 --> sum of effective power - (supplied)<br />"+
-      "8 --> integral over time = meter reading<br />"
+      "8 --> integral over time = meter reading<br />",
+
+    "DZG_COMPATIBILITY_MODE" : "Some meters of Deutsche Z%E4hlergesellschaft (DZG) show an error in the coding of the power. This may lead to positive values being interpreted as negative values. It will be fixed with the compatibility mode.",
+
+    "ELSTER_COMPATIBILITY_MODE" : "If the desired measuring values are not available during normal request, an alternative call command can be tried for Elster meters. This will be activated with the compatibility mode.",
 
   }
 });

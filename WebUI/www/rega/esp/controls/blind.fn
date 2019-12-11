@@ -266,6 +266,7 @@ function ::CreateBlindVirtualReceiver()
   ! integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
   string controlOperable = "pointer-events:auto;";
   boolean showVirtualChannel = true;
+  boolean showHintVirtualChannelChanged = false;
 
   object chInterface = dom.GetObject(cObj.Interface());
   string devAddress = chnAddress.StrValueByIndex(":",0);
@@ -291,6 +292,18 @@ function ::CreateBlindVirtualReceiver()
   integer iStopId = 0;
   integer iLvl = 0;
   integer iLvlSlats = 0;
+
+
+  if (user.UserEasyLinkMode()) {
+    integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
+    object levelVirt2 = dom.GetObject(chInterface.Name()#"."#devAddress#":"#(chnNumber + 1)#".LEVEL");
+    object level_2Virt2 = dom.GetObject(chInterface.Name()#"."#devAddress#":"#(chnNumber + 1)#".LEVEL_2");
+    object levelVirt3 = dom.GetObject(chInterface.Name()#"."#devAddress#":"#(chnNumber + 2)#".LEVEL");
+    object level_2Virt3 = dom.GetObject(chInterface.Name()#"."#devAddress#":"#(chnNumber + 2)#".LEVEL_2");
+    if ((levelVirt2.Value() > 0) || (levelVirt3.Value() > 0) || (level_2Virt2.Value() > 0) || (level_2Virt3.Value() > 0)) {
+      showHintVirtualChannelChanged = true;
+    }
+  }
 
   if (oLvl)
   {
@@ -318,18 +331,9 @@ function ::CreateBlindVirtualReceiver()
     iStopId = oStop.ID();
   }
 
-
-  ! if (showVirtualChannel == false) {
-  !  controlOperable = "pointer-events:none;";
-  !  virtualChannelHint = "{virtualChannelNotOperableHint}";
-  ! }
-
   WriteLine("<td style='"#controlOperable#"'>");
-    WriteLine("<table>");
+    WriteLine("<table align='center'>");
 
-      ! if (showVirtualChannel == false) {
-      !  WriteLine("<tr><td colspan='5'><div class='ControlBtnInfo j_translate'>${controlChannelHasNoFunction}</div></td></tr>");
-      ! }
 
       WriteLine("<tr>");
         WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
@@ -392,6 +396,9 @@ function ::CreateBlindVirtualReceiver()
         WriteLine("</td>");
       WriteLine("</tr>");
 
+      if (showHintVirtualChannelChanged) {
+        WriteLine("<tr><td colspan='5'><div id='hintVirtualChannelChanged"#chnId#"' class='ControlBtnOff CLASS02550c'><span class='attention'>${hintVirtualChannelChanged}</span></div></td></tr>");
+      }
 
       WriteLine("<tr><td colspan='5'><hr></td></tr>");
       WriteLine("<tr><td colspan='5'><div style='text-align:center; background-color:#89989b; color:black'>${stringTableJalousieSlatsLevel}</div></td></tr>");
@@ -419,7 +426,6 @@ function ::CreateBlindVirtualReceiver()
 
   string sCtrlId = "shutter"#chnId;
   WriteLine("<script type='text/javascript'>");
-
     WriteLine("var opts = {");
       WriteLine("chnInterface:'"#chInterface.Name()#"',");
       WriteLine("chnAddress:'"#chnAddress#"',");
@@ -473,6 +479,7 @@ function ::CreateShutterVirtualReceiver()
   ! string chnNumber = chnAddress.StrValueByIndex(":",1);
   string controlOperable = "pointer-events:auto;";
   boolean showVirtualChannel = true;
+  boolean showHintVirtualChannelChanged = false;
 
   object chInterface = dom.GetObject(cObj.Interface());
 
@@ -499,6 +506,15 @@ function ::CreateShutterVirtualReceiver()
   integer iStopId = 0;
   integer iLvl = 0;
 
+  if (user.UserEasyLinkMode()) {
+    integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
+    object levelVirt2 = dom.GetObject(chInterface.Name()#"."#devAddress#":"#(chnNumber + 1)#".LEVEL");
+    object levelVirt3 = dom.GetObject(chInterface.Name()#"."#devAddress#":"#(chnNumber + 2)#".LEVEL");
+    if ((levelVirt2.Value() > 0) || (levelVirt3.Value() > 0)) {
+      showHintVirtualChannelChanged = true;
+    }
+  }
+
   if (oLvl)
   {
     iLvlId = oLvl.ID();
@@ -516,7 +532,7 @@ function ::CreateShutterVirtualReceiver()
   }
 
   WriteLine("<td>");
-    WriteLine("<table>");
+    WriteLine("<table align='center'>");
       WriteLine("<tr>");
 
         WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
@@ -578,6 +594,11 @@ function ::CreateShutterVirtualReceiver()
            WriteLine("</table>");
         WriteLine("</td>");
       WriteLine("</tr>");
+
+      if (showHintVirtualChannelChanged) {
+        WriteLine("<tr><td colspan='5'><div id='hintVirtualChannelChanged"#chnId#"' class='ControlBtnOff CLASS02550c'><span class='attention'>${hintVirtualChannelChanged}</span></div></td></tr>");
+      }
+
     WriteLine("</table>");
   WriteLine("</td>");
 
@@ -645,6 +666,8 @@ function ::CreateShutterTransmitter()
     }
   }
 
+  WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+
   if (oLvlStatus.Value() != 0) {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
   } else {
@@ -654,9 +677,17 @@ function ::CreateShutterTransmitter()
     WriteLine( "<script type='text/javascript'>" );
 
       ! Hide the real channel when the user is no expert
-      WriteLine(" if("#user.UserEasyLinkMode()#" == true) { ");
-        WriteLine(" jQuery('#"#oDevice.ID()#chnId#"').hide(); ");
-      WriteLine(" } ");
+      !WriteLine(" if("#user.UserEasyLinkMode()#" == true) { ");
+      !  WriteLine(" jQuery('#"#oDevice.ID()#chnId#"').hide(); ");
+      !WriteLine(" } ");
+
+      ! Hide the real channel when the user is no expert
+       WriteLine(" if("#user.UserEasyLinkMode()#" == true) { ");
+         WriteLine(" jQuery('#"#oDevice.ID()#chnId#"').hide(); ");
+       WriteLine(" } else { ");
+         WriteLine("shutter"#cObj.ID()#" = new shutterControl(" # chnId # ", " # rLvl #"); ");
+         WriteLine("shutter"#cObj.ID()#".setValue("#rLvl#")");
+       WriteLine(" } ");
 
       WriteLine("window.setTimeout(function(){");
 
@@ -744,6 +775,8 @@ function ::CreateBlindTransmitter()
     }
   }
 
+  WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+
   if (oLvlStatus.Value() != 0) {
     WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
   } else {
@@ -759,9 +792,18 @@ function ::CreateBlindTransmitter()
     WriteLine( "<script type='text/javascript'>" );
 
       ! Hide the real channel when the user is no expert
-      WriteLine(" if("#user.UserEasyLinkMode()#" == true) { ");
-        WriteLine(" jQuery('#"#oDevice.ID()#chnId#"').hide(); ");
-      WriteLine(" } ");
+      !WriteLine(" if("#user.UserEasyLinkMode()#" == true) { ");
+        !WriteLine(" jQuery('#"#oDevice.ID()#chnId#"').hide(); ");
+      !WriteLine(" } ");
+
+      ! Hide the real channel when the user is no expert
+       WriteLine(" if("#user.UserEasyLinkMode()#" == true) { ");
+         WriteLine(" jQuery('#"#oDevice.ID()#chnId#"').hide(); ");
+       WriteLine(" } else { ");
+         WriteLine("shutter"#cObj.ID()#" = new shutterControl(" # chnId # ", " # rLvl #"); ");
+         WriteLine("shutter"#cObj.ID()#".setValue("#rLvl#")");
+       WriteLine(" } ");
+
 
       WriteLine("window.setTimeout(function(){");
 

@@ -36,7 +36,6 @@ cgi_eval {
   }
 
   puts "<script type=\"text/javascript\">"
-
   switch $commando {
     
     "setEasymode"   {
@@ -67,10 +66,10 @@ cgi_eval {
           #Die aktuelle Helligkeit steht zur Verfügung
           #active 0 = inaktiv, 1 = aktiv
           if {$brightness < $active_bright} {set active "1"} else {set active "0"}
-          puts "MD_catchBright_help('$min','$max','$brightness','$active', 'LT_LO');"
+          puts "MD_catchBright_help('$min','$max','$brightness', '$active_bright', '$active', 'LT_LO', '$sender_address');"
         } else {
           #Die aktuelle Helligkeit steht nicht zur Verfügung, da der Sender noch kein Datenpaket gesendet hat.
-          puts "MD_catchBright_help('$min','$max','$brightness','', 'LT_LO');"
+          puts "MD_catchBright_help('$min','$max','$brightness','$active_bright', '', 'LT_LO', '$sender_address');"
         }
       }
 
@@ -81,10 +80,10 @@ cgi_eval {
           #Die aktuelle Helligkeit steht zur Verfügung
           #active 0 = inaktiv, 1 = aktiv
           if {$brightness >= $active_bright} {set active "1"} else {set active "0"}
-          puts "MD_catchBright_help('$min','$max','$brightness','$active', 'GE_LO');"
+          puts "MD_catchBright_help('$min','$max','$brightness', '$active_bright', '$active', 'GE_LO', '$sender_address');"
         } else {
           #Die aktuelle Helligkeit steht nicht zur Verfügung, da der Sender noch kein Datenpaket gesendet hat.
-          puts "MD_catchBright_help('$min','$max','$brightness','', 'GE_LO');"
+          puts "MD_catchBright_help('$min','$max','$brightness', '$active_bright', '', 'GE_LO', '$sender_address');"
         }
       }
 

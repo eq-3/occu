@@ -13,7 +13,7 @@
 ##
 
 set address     $args(address)
-set peerAddress $args(peerAdress)
+set peerAddress $args(peerAddress)
 set longPress   $args(longPress)
 
 checkXmlRpcStatus [catch {xmlrpc $interface(URL) activateLinkParamset [list string $address] [list string $peerAddress] [list bool $longPress] }]

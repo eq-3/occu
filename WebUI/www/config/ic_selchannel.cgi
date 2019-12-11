@@ -283,7 +283,7 @@ proc put_PreviousStep {} {
     catch {set extReceiverDescr [getExtendedLinkDescription $dev_descr_receiver(TYPE) $dev_descr_receiver(INDEX)]}
 
 
-    if {[string first "HmIPW-" $dev_descr_receiver(PARENT_TYPE)] != -1} {
+    if {[string first "HmIP" $dev_descr_receiver(PARENT_TYPE)] != -1} {
       if {[string equal $dev_descr_receiver(TYPE) "BLIND_VIRTUAL_RECEIVER"] == 1} {
         # Check the mode of a wired blind (shutter or blind)
         # Determine the current channelMode
@@ -315,7 +315,9 @@ proc put_PreviousStep {} {
       puts "var groupDescrElem = jQuery(\"#input_group_description\");"
       puts "jQuery(\"#input_name\").attr(\"value\",translateString(\"$name\"));"
       puts "jQuery(\"#input_group_name\").attr(\"value\",translateString(\"$group_name\"));"
-      puts "descrElem.attr(\"value\",translateString(descrElem.val()));"
+      #puts "descrElem.attr(\"value\",translateString(descrElem.val()));"
+      puts "jQuery(descrElem).val(translateString(descrElem.val()));"
+
       puts "groupDescrElem.attr(\"value\",translateString(groupDescrElem.val()));"
     puts "</script>"
 
@@ -611,9 +613,39 @@ proc LinkExists {p_LINKLIST sender_address receiver_address} {
   return $match
 }
 
+proc linkIsExpertChannel {devType chType chNr} {
+  upvar virtChnCounter virtChnCounter
+
+  set devType [string tolower $devType]
+  set arChVirtType [list "DIMMER_VIRTUAL_RECEIVER" "SWITCH_VIRTUAL_RECEIVER" "BLIND_VIRTUAL_RECEIVER" "SHUTTER_VIRTUAL_RECEIVER" "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER"]
+
+  set result 1
+
+  if {($devType!= "hmip-miob") && ($devType != "hmip-whs2")} {
+    foreach val $arChVirtType {
+      if {$chType == $val} {
+        if {[expr $virtChnCounter >= 3] == 1} {set virtChnCounter 0}
+        incr virtChnCounter
+        if {[expr $virtChnCounter != 1] == 1} {
+          set result 0
+          break
+        }
+      }
+    }
+  } else {
+    # Special handling for the MIOB and WHS2
+    # Hide the virtual channels 2,4,6,8 - 3 and 7 are necessary for certain links
+    if {($chNr == 2) || ($chNr == 4) || ($chNr == 6) || ($chNr == 8)} {set result 0}
+  }
+  return $result
+}
+
 proc showHmIPChannel {devType direction address chType} {
   # direction 1 = sender, 2 = receiver
   global iface_url
+
+  upvar virtChnCounter virtChnCounter
+
   set ch [lindex [split $address ":"] 1]
 
   set major 0
@@ -665,121 +697,9 @@ proc showHmIPChannel {devType direction address chType} {
     return 0
   }
 
-  # Hide certain channels of HmIP devices when the expert mode is not activated.
+  # Hide the virtual channel 2 and 3 of HmIP devices when the expert mode is not activated.
   if {! [session_is_expert]} {
-    # The HmIP-PSM is available as HmIP-PSM-IT/CH/UK etc.
-    if {(($devType == "HMIP-PS") || ([string equal -nocase -length 8 $devType "hmip-psm"] == 1) || ($devType == "HMIP-PCBS")) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-     if {$ch >= 4} {return 0}
-    }
-
-    if {(($devType == "HMIP-PCBS2")) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-     if {($ch == 5) || ($ch == 6) || ($ch == 9) || ($ch == 10)} {return 0}
-    }
-
-    if {($devType == "HMIP-BDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
-     if {$ch >= 5} {return 0}
-    }
-
-    if {(($devType == "HMIP-PDT") || ($devType == "HMIP-PDT-UK")) && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
-     if {$ch >= 4} {return 0}
-    }
-
-    if {($devType == "HMIP-FDT") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
-     if {$ch >= 3} {return 0}
-    }
-
-    if {($devType == "HMIP-BSM") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-     if {$ch >= 5} {return 0}
-    }
-
-    if {($devType == "HMIP-FSM" || $devType == "HMIP-FSM16") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-     if {$ch >= 3} {return 0}
-    }
-
-    if {($devType == "HMIP-MIOB" || $devType == "HMIP-WHS2") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-      if {($ch != 3) && ($ch != 7)} {return 0}
-    }
-
-    if {($devType == "HMIP-BBL" || $devType == "HMIP-FBL") && ($chType == "BLIND_VIRTUAL_RECEIVER")} {
-     if {$ch >= 5} {return 0}
-    }
-
-    if {($devType == "HMIP-BROLL" || $devType == "HMIP-FROLL") && ($chType == "SHUTTER_VIRTUAL_RECEIVER")} {
-     if {$ch >= 5} {return 0}
-    }
-
-    if {($devType == "HMIP-WGC") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-     if {$ch >= 4} {return 0}
-    }
-
-    if {($devType == "HMIP-MOD-OC8") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-      if {
-            ($ch == 11) || ($ch == 12) || ($ch == 15) || ($ch == 16) || ($ch == 19) || ($ch == 20)
-         || ($ch == 23) || ($ch == 24) || ($ch == 27) || ($ch == 28) || ($ch == 31) || ($ch == 32)
-         || ($ch == 35) || ($ch == 36) || ($ch == 39) || ($ch == 40)
-      } {
-        return 0
-      }
-    }
-
-    if {$devType == "HMIP-BSL"} {
-      if {($chType == "SWITCH_VIRTUAL_RECEIVER") && ($ch >=5)} {
-        return 0
-      } elseif {($chType == "DIMMER_VIRTUAL_RECEIVER") && (($ch == 9) || ($ch == 10) || ($ch == 13) || ($ch == 14))} {
-        return 0
-      }
-    }
-
-    if {($devType == "HMIPW-DRBL4") && ($chType == "BLIND_VIRTUAL_RECEIVER")} {
-      if {
-            ($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8)
-         || ($ch == 11) || ($ch == 12) || ($ch == 15) || ($ch == 16)
-         } {
-        return 0
-      }
-    }
-
-    if {(($devType == "HMIPW-DRS4") || ($devType == "HMIPW-DRS8")) && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-      if {
-            ($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8)
-         || ($ch == 11) || ($ch == 12) || ($ch == 15) || ($ch == 16)
-         || ($ch == 19) || ($ch == 20) || ($ch == 23) || ($ch == 24)
-         || ($ch == 27) || ($ch == 28) || ($ch == 31) || ($ch == 32)
-         } {
-        return 0
-      }
-    }
-
-    if {($devType == "HMIPW-DRD3") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
-      if {($ch == 3) || ($ch == 4) || ($ch == 7) || ($ch == 8) || ($ch == 11) || ($ch == 12)} {
-        return 0
-      }
-    }
-
-    if {($devType == "HMIPW-FIO6") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-      if {($ch == 9) || ($ch == 10) || ($ch == 13) || ($ch == 14) || ($ch == 17) || ($ch == 18) || ($ch == 21) || ($ch == 22) || ($ch == 25) || ($ch == 26) || ($ch == 29) || ($ch == 30)} {
-        return 0
-      }
-    }
-
-    if {($devType == "HMIP-MP3P") && ($chType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER")} {
-      if {($ch == 3) || ($ch == 4)} {
-        return 0
-      }
-    }
-
-    if {($devType == "HMIP-MP3P") && ($chType == "DIMMER_VIRTUAL_RECEIVER")} {
-      if {($ch == 7) || ($ch == 8)} {
-        return 0
-      }
-    }
-
-    if {($devType == "HMIP-MIO16-PCB") && ($chType == "SWITCH_VIRTUAL_RECEIVER")} {
-      if {($ch == 19) || ($ch == 20) || ($ch == 23) || ($ch == 24) || ($ch == 27) || ($ch == 28) || ($ch == 31) || ($ch == 32) || ($ch == 35) || ($ch == 36) || ($ch == 39) || ($ch == 40) || ($ch == 43) || ($ch == 44) || ($ch == 47) || ($ch == 48)} {
-        return 0
-      }
-    }
-
+    return [linkIsExpertChannel $devType $chType $ch]
   }
   # show the channel
   return 1
@@ -792,7 +712,7 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
   global iface_url ise_CHANNELNAMES ise_FUNCTIONS ise_ROOMS
   global step dev_descr_sender dev_descr_receiver iface sender_address receiver_address sender_group
 
-
+  set virtChnCounter 0
 
 #cgi_debug -on
 

@@ -62,8 +62,8 @@ jQuery.extend(true,langJSON, {
     "chType_HEATING_ROOM_TH_TRANSCEIVER" : "Verkn%FCpfungspartner Wandthermostat (manuelle Bedienung, Sender)",
     "chType_HEATING_SHUTTER_CONTACT_RECEIVER" : "Verkn%FCpfungspartner T%FCr-/Fensterkontakt",
     "chType_JALOUSIE" : "Jalousieaktor",
-    "chType_KEY" : "Tasterkanal",
-    "chType_KEY_TRANSCEIVER" : "Tasterkanal",
+    "chType_KEY" : "Taster",
+    "chType_KEY_TRANSCEIVER" : "Taster",
     "chType_LUXMETER" : "Helligkeitssensor",
     "chType_MOD_EM8BIT_TRANSMITTER" : "Sender f%FCr<br/>8-Bit Entscheidungswert",
     "chType_MOD_RC8" : "Taster/Schalter<br/>T%FCr-/Fensterkontakt",
@@ -72,7 +72,7 @@ jQuery.extend(true,langJSON, {
 
     "chType_MULTI_MODE_INPUT_TRANSMITTER" : "Eingangsmodul",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_0" : "Kanal deaktiviert",
-    "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Tasterkanal",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Taster",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_2" : "Schalter",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_3" : "T%FCr-/Fensterkontakt",
 
@@ -86,6 +86,10 @@ jQuery.extend(true,langJSON, {
     "chType_REMOTECONTROL_RECEIVER" : "Verkn%FCpfungspartner<br/>Taste",
     "chType_RGBW_AUTOMATIC" : "Programm",
     "chType_RGBW_COLOR" : "Farbe",
+
+    "chType_ROTARY_CONTROL_TRANSCEIVER_TL" : "tr Drehrichtungsgeber Links",
+    "chType_ROTARY_CONTROL_TRANSCEIVER_TR" : "tr Drehrichtungsgeber Rechts",
+
     "chType_ROTARY_HANDLE_TRANSCEIVER" : "Fenster-/ Drehgriffkontakt",
     "chType_SABOTAGECONTACT" : "Verkn%FCpfungspartner<br/>Sabotagekontakt",
     "chType_SENSOR_FOR_CARBON_DIOXIDE" : "Luftg%FCte-/CO2-Sensor",

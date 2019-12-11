@@ -198,7 +198,7 @@ proc put_expertprofile {iface address p_str special_name special_id pps_descr pp
     
     array set options ""
     set options(0) "Experte"
-    append str [get_ComboBox2 options $name $id 0 "onchange=\"ShowEasyMode(this);\""]
+    append str [get_ComboBox2 options $name $id 0 "onchange=\"ShowEasyMode(this, '$iface');\""]
     append str "<br/>Sie besitzen nicht die Berechtigung das Expertenprofil zu ver&auml;ndern."
     
     append str "</div>"
@@ -206,7 +206,7 @@ proc put_expertprofile {iface address p_str special_name special_id pps_descr pp
     append str "<div style=\"visibility: hidden; display: none;\">"
     array set options ""
     set options(0) "Experte"
-    append str [get_ComboBox2 options $name $id 0 "onchange=\"ShowEasyMode(this);\""]
+    append str [get_ComboBox2 options $name $id 0 "onchange=\"ShowEasyMode(this, '$iface');\""]
     append str "</div>"
     
     append str [cmd_link_paramset2 $iface $address ps_descr ps "LINK" $profilename]
@@ -344,7 +344,7 @@ proc put_profile_body { PEERPART } {
         }
       }
 
-      append SENTRY(SENDER_PROFILE) [get_ComboBox2 PROFILES_MAP "sender_profiles" "sender_profiles" $cur_profile "onchange=\"ShowEasyMode(this);\""]
+      append SENTRY(SENDER_PROFILE) [get_ComboBox2 PROFILES_MAP "sender_profiles" "sender_profiles" $cur_profile "onchange=\"ShowEasyMode(this, '$iface');\""]
     } else {
       set group "receivergroup"
       set special_input_id "sendergroup"
@@ -363,7 +363,7 @@ proc put_profile_body { PEERPART } {
         }
       }
       
-      append SENTRY(SENDER_PROFILE) [get_ComboBox2 PROFILES_MAP "sender_profiles" "sendergroup_profiles" $cur_profile "onchange=\"ShowEasyMode(this);\""]
+      append SENTRY(SENDER_PROFILE) [get_ComboBox2 PROFILES_MAP "sender_profiles" "sendergroup_profiles" $cur_profile "onchange=\"ShowEasyMode(this, '$iface');\""]
     }
 
     catch { append SENTRY(SENDER_PROFILE) $HTML_PARAMS(before_profiles) }
@@ -397,7 +397,7 @@ proc put_profile_body { PEERPART } {
     destructor
 
     #Ausgewählten Eintrag sichtbar schalten:
-    append SENTRY(SENDER_PROFILE) "<script type=\"text/javascript\">ShowEasyMode(\$('${special_input_id}_profiles'));</script>"
+    append SENTRY(SENDER_PROFILE) "<script type=\"text/javascript\">ShowEasyMode(\$('${special_input_id}_profiles'), '$iface');</script>"
   } else {
     if {$PEERPART == "SENDER" } then {
       put_expertprofile $iface $sender_address SENTRY(SENDER_PROFILE) "sender" "sender"      ps_descr_sender sender_ps
@@ -473,11 +473,11 @@ proc put_profile_body { PEERPART } {
       # die ComboBox der Profilauswahl    
       if {[info exists multilingual]} then {
         append SENTRY(RECEIVER_PROFILE) "<div id=\"maps_div_0\"><textarea id=\"maps_textarea_0\" style=\"display:none\">"
-        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receiver_profiles" $cur_profile  "onchange=\"ShowEasyMode(this);\""]
+        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receiver_profiles" $cur_profile  "onchange=\"ShowEasyMode(this, '$iface');\""]
         append SENTRY(RECEIVER_PROFILE) "</textarea></div>"
         append SENTRY(RECEIVER_PROFILE) "<script type=\"text/javascript\">translate_map('maps_div_0', 'maps_textarea_0');</script>"
       } else {
-        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receiver_profiles" $cur_profile  "onchange=\"ShowEasyMode(this);\""]
+        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receiver_profiles" $cur_profile  "onchange=\"ShowEasyMode(this, '$iface');\""]
       }
     } else {
       set special_input_id "receivergroup"
@@ -499,11 +499,11 @@ proc put_profile_body { PEERPART } {
       # bei Kanalpaar
       if {[info exists multilingual]} then {
         append SENTRY(RECEIVER_PROFILE) "<div id=\"maps_div_1\"><textarea id=\"maps_textarea_1\" style=\"display:none\">"
-        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receivergroup_profiles" $cur_profile  "onchange=\"ShowEasyMode(this);\""]
+        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receivergroup_profiles" $cur_profile  "onchange=\"ShowEasyMode(this, '$iface');\""]
         append SENTRY(RECEIVER_PROFILE) "</textarea></div>"
         append SENTRY(RECEIVER_PROFILE) "<script type=\"text/javascript\">translate_map('maps_div_1', 'maps_textarea_1');</script>"
       } else {
-        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receivergroup_profiles" $cur_profile  "onchange=\"ShowEasyMode(this);\""]
+        append SENTRY(RECEIVER_PROFILE) [get_ComboBox2 PROFILES_MAP "receiver_profiles" "receivergroup_profiles" $cur_profile  "onchange=\"ShowEasyMode(this, '$iface');\""]
       }
     }
 
@@ -551,7 +551,7 @@ proc put_profile_body { PEERPART } {
     destructor
 
     #Ausgewählten Eintrag sichtbar schalten:
-    append SENTRY(RECEIVER_PROFILE) "<script type=\"text/javascript\">window.setTimeout(function() {ShowEasyMode(\$('${special_input_id}_profiles'));},500);</script>"
+    append SENTRY(RECEIVER_PROFILE) "<script type=\"text/javascript\">window.setTimeout(function() {ShowEasyMode(\$('${special_input_id}_profiles'), '$iface');},500);</script>"
 
   } else {
 
@@ -593,7 +593,11 @@ proc put_profile_body { PEERPART } {
     set select_id "sendergroup"
   }
   puts "<td align=\"left\">"
-  puts "<div id=\"NewProfileTemplate_$select_id\" onclick=\"ShowNewEasyModeDialog('$select_id');\"  class=\"CLASS20009 CLASS20010\" >\${btnSaveNewProfile}</div>"
+  if {$iface != "HmIP-RF"} {
+    puts "<div id=\"NewProfileTemplate_$select_id\" onclick=\"ShowNewEasyModeDialog('$select_id');\"  class=\"CLASS20009 CLASS20010\" >\${btnSaveNewProfile}</div>"
+  } else {
+      puts "<div id=\"NewProfileTemplate_$select_id\" class=\"CLASS20009a CLASS20010\" >\${btnSaveNewProfile}</div>"
+  }
   puts "</td>"
   puts "<td align=\"left\">"
   puts "<div id=\"DelBtnEasyMode_$select_id\" onclick=\"DeleteEasyMode('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility: hidden;\">\${btnRemoveProfileTemplate}</div>"
@@ -612,7 +616,11 @@ proc put_profile_body { PEERPART } {
   puts "<div id=\"DelBtnEasyMode_$select_id\" onclick=\"DeleteEasyMode('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility: hidden;\">\${btnRemoveProfileTemplate}</div>"
   puts "</td>"
   puts "<td align=\"right\">"
-  puts "<div id=\"NewProfileTemplate_$select_id\" onclick=\"ShowNewEasyModeDialog('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility:visible\">\${btnSaveNewProfile}</div>"
+  if {$iface != "HmIP-RF"} {
+    puts "<div id=\"NewProfileTemplate_$select_id\" onclick=\"ShowNewEasyModeDialog('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility:visible\">\${btnSaveNewProfile}</div>"
+  } else {
+    puts "<div id=\"NewProfileTemplate_$select_id\" class=\"CLASS20009a CLASS20010\" style=\"visibility:visible\">\${btnSaveNewProfile}</div>"
+  }
   puts "</td>"
   puts "</tr>"
   puts "</tbody>"

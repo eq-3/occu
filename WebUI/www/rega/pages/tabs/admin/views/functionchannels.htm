@@ -161,6 +161,7 @@ var idFunc = <% Write(system.GetVar("id"));%>
 var iElemsAdded = 0;
 var iElemsShown = 0;
 var arPicDivs = new Array();
+var _chn;
 
 //for(var i = 0; i<$("tblsvr").rows.length;i++ ) $("tblsvr").deleteRow(0);
 
@@ -186,7 +187,14 @@ for (var i = 0; i < chnsTmp.length; i++)
     else {
       td = Builder.node('td'); tr.appendChild(td);
     }
-    td = Builder.node('td', {className: "GrayBkg DeviceListCell"}, chnsTmp[i]['name']); tr.appendChild(td);
+    //td = Builder.node('td', {className: "GrayBkg DeviceListCell"}, chnsTmp[i]['name']); tr.appendChild(td);
+    td = Builder.node('td', {className: "GrayBkg DeviceListCell"});
+    _chn = DeviceList.getChannelByAddress(chnsTmp[i]['sn']);
+    div = Builder.node("div");
+    div.innerHTML = chnsTmp[i]['name'] +"<br/>" +_chn.nameExtention;
+    td.appendChild(div);
+    tr.appendChild(td);
+
     td = Builder.node('td', {className: "GrayBkg DeviceListCell"}, chnsTmp[i]['type']); tr.appendChild(td);
     var sPicDivId = 'picDiv' + idFunc + chnsTmp[i]['id'];
     td = Builder.node('td', {className: 'WhiteBkgPic DeviceListCell'}, [

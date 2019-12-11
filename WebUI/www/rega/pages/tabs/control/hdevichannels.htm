@@ -127,8 +127,8 @@
     object oUser = dom.GetObject( system.GetSessionVar('sessionUserID'));
     integer userID = oUser.ID();
     object user = dom.GetObject(userID);
+    integer virtChnCounter = 0;
 
-    
     object device = dom.GetObject(system.GetVar("id"));
     if (device) {
       if (device.Visible()) {
@@ -149,7 +149,7 @@
           if (chn.Visible() && (chn.UserAccessRights(iulOtherThanAdmin) == iarFullAccess)) {
             bShow = true;
           }
-         
+
           boolean bShowChannel = false;
           if (user.UserEasyLinkMode() != true) {
             ! User is expert
@@ -157,16 +157,16 @@
           } else {
             if (chn.HssType().Find("VIRTUAL_") == -1) {
                 ! not a virtual channel
-                bShowChannel = true;        
+                bShowChannel = true;
             } else {
-              if (chn.HssType().Find("VIRTUAL_KEY") != -1) { 
-                ! virtual key of the ccu 
-                bShowChannel = true;        
+              if (chn.HssType().Find("VIRTUAL_KEY") != -1) {
+                ! virtual key of the ccu
+                bShowChannel = true;
               }
             }
           }
 
-          if ((sInterface != "HmIP-RF") && (sInterface != "HmIP-Wired") && (sInterface != "VirtualDevices")) {
+          if ((sInterface != "HmIP-RF") && (sInterface != "VirtualDevices")) {
             Call("/esp/functions.fn::showHideRFChannel()");
           } else {
             Call("/esp/functions.fn::showHideHmIPChannel()");
@@ -217,18 +217,35 @@
                 showExtDesc = true;
               }
 
-              if ((chn.HssType() == "BLIND_TRANSMITTER") && (chn.Label().Substr(0,6) == "HmIPW-")) {
-                object mode = dom.GetObject(chn.Address());
-                if (mode.MetaData("channelMode") == "shutter") {
-                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_SHUTTER_TRANSMITTER}</span>");
-                  showExtDesc = true;
+              if (chn.HssType() == "BLIND_TRANSMITTER") {
+                if ((chn.Label().Substr(0,6) == "HmIPW-") || (chn.Label() == "HmIP-DRBLI4")) {
+                  object mode = dom.GetObject(chn.Address());
+                  if (mode.MetaData("channelMode") == "shutter") {
+                    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_SHUTTER_TRANSMITTER}</span>");
+                    showExtDesc = true;
+                  }
                 }
               }
 
-              if ((chn.HssType() == "BLIND_VIRTUAL_RECEIVER") && (chn.Label().Substr(0,6) == "HmIPW-")) {
-                object mode = dom.GetObject(chn.Address());
-                if (mode.MetaData("channelMode") == "shutter") {
-                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_SHUTTER_VIRTUAL_RECEIVER}</span>");
+              if (chn.HssType() == "BLIND_VIRTUAL_RECEIVER") {
+                if ((chn.Label().Substr(0,6) == "HmIPW-") || (chn.Label() == "HmIP-DRBLI4")) {
+                  object mode = dom.GetObject(chn.Address());
+                  if (mode.MetaData("channelMode") == "shutter") {
+                    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_SHUTTER_VIRTUAL_RECEIVER}</span>");
+                    showExtDesc = true;
+                  }
+                }
+              }
+
+              if ((chn.HssType() == "ROTARY_CONTROL_TRANSCEIVER") && (chn.Label() == "HmIP-WRCR") ) {
+
+                integer chnNumber = chn.Address().StrValueByIndex(":",1).ToInteger();
+                if (chnNumber == 2) {
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TR}</span>");
+                  showExtDesc = true;
+                }
+                if (chnNumber == 3) {
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TL}</span>");
                   showExtDesc = true;
                 }
               }

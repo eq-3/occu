@@ -21,10 +21,14 @@
   string hm_jalousieActor = "HM-LC-Ja1PBU";
   string hmip_wrcd = "HmIP-WRCD";
   string hmip_mp3p = "HmIP-MP3P";
+  string hmip_bsl = "HmIP-BSL";
 
   string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
 
   string acousticSignalVirtualReceiver = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER";
+  string blindVirtualReceiver = "BLIND_VIRTUAL_RECEIVER";
+  string dimmerVirtualReceiver = "DIMMER_VIRTUAL_RECEIVER";
+  string switchVirtualReceiver = "SWITCH_VIRTUAL_RECEIVER";
 
   string s_vir_lg_rgb_dim = "VIR-LG-RGB-DIM";
   string s_vir_lg_rgbw_dim = "VIR-LG-RGBW-DIM";
@@ -456,6 +460,11 @@
                   Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
                   Write( sUnit );
                   Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+
+                  ! SPHM-365 - Help for the LEVEL_2 parameter of blind actors
+                  if ((oCH.HssType().Find(blindVirtualReceiver) != -1) && (oDP.HSSID().Find("LEVEL_2") != -1)) {
+                    Write( "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp(translateKey('helpBlindParamLevel2'), 400, 150)\">" );
+                  }
                 }
               }
             }
@@ -478,6 +487,9 @@
             integer i_vir_lg_group = chLabel.Find(s_vir_lg_group);
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
             integer i_acousticSignalVirtualReceiver = oCH.HssType().Find(acousticSignalVirtualReceiver);
+            integer i_dimmerVirtualReceiver = oCH.HssType().Find(dimmerVirtualReceiver);
+            integer i_switchVirtualReceiver = oCH.HssType().Find(switchVirtualReceiver);
+            integer i_blindVirtualReceiver = oCH.HssType().Find(blindVirtualReceiver);
             integer i_hmip_mp3p = chLabel.Find(hmip_mp3p);
 
             integer ePaperAcousticDisplay = chLabel.Find(hmip_wrcd);
@@ -487,7 +499,7 @@
               || (ePaperAcousticDisplay != -1)
               || (rgbw_controller != -1)
               || ((jalousieActor != - 1) && (oDP.HSSID().Find("LEVEL_COMBINED") != -1))
-              || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (i_hmip_mp3p != -1))
+              || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (i_hmip_mp3p != -1) || (i_blindVirtualReceiver != -1) || (i_dimmerVirtualReceiver != -1) || (i_switchVirtualReceiver != -1))
               ) {
               if (statusDisplayDevice != -1) {
                 if(iV == "0") {
@@ -557,11 +569,36 @@
                 if (iV.Find("SL=") == -1) {
                   iV = "L=100,DU=2,DV=31,RTU=0,RTV=0,R=0,SL=0";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setAcousticSignalController('#oSD.ID()#',\'COMBINED_PARAMETER\');;" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setAcousticSignalController('#oSD.ID()#',\'COMBINED_PARAMETER\');;" type="text" class="SelectBox alignCenter" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
+              if ((i_dimmerVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                if (iV.Find("L=") == -1) {
+                  if ((oCH.Label().Find(hmip_mp3p) == -1) && (oCH.Label().Find(hmip_bsl) == -1)) {
+                    iV = "L=100,OT=0, RT=0";
+                  } else {
+                    iV = "L=100,DV=31,DU=2,RTV=0, RTU=1,C=7";
+                  }
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox alignCenter" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
+              if ((i_switchVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                if (iV.Find("S=") == -1) {
+                  iV = "S=true";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
+              if (((i_blindVirtualReceiver != -1)) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                if (iV.Find("L=") == -1) {
+                  iV = "L=100,L2=100";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setBlindLevelController('#oSD.ID()#',\'COMBINED_PARAMETER\',\''#oCH.Address()#'\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
             } else {
-              Write('<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              Write('<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" />< ' );
             }
 
             if((ouled16 == -1)
@@ -578,6 +615,9 @@
               && (i_vir_lg_rgbw_dim == -1)
               && (i_vir_lg_group == -1)
               && (i_acousticSignalVirtualReceiver == -1)
+              && (i_blindVirtualReceiver == -1)
+              && (i_dimmerVirtualReceiver == -1)
+              && (i_switchVirtualReceiver == -1)
               ) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
@@ -617,6 +657,19 @@
 
               if ((i_acousticSignalVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 Write( '<span id="setAcousticSignalVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setAcousticSignalController('#oSD.ID()#',\''#oDP.HSSID()#'\');"><img src="/ise/img/notepad.png" /></span>' );
+              }
+
+              if ((i_blindVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                Write( '<span id="setBlindVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setBlindLevelController('#oSD.ID()#',\''#oDP.HSSID()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
+                Write('<img src onerror="setShutterVirtualReceiverInitValue(\'prgStringOptionValue'#oSD.ID()#'\',\''#oCH.Address()#'\');">');
+              }
+
+              if ((i_dimmerVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                Write( '<span id="setDimmerVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
+              }
+
+              if ((i_switchVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                Write( '<span id="setSwitchVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
               }
 
             }

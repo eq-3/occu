@@ -285,12 +285,24 @@ proc check_RF_links {device iface address channel ch_type name} {
     puts "<script type=\"text/javascript\">arChnHasLinks\[parseInt($channel)\] = false;ShowHintIfProgramExists('$name', '$channel')</script>"
     global iface_url
     set links ""
+    set internalLinkOnly 0
     catch {set links [xmlrpc $iface_url($iface) getLinks [list string $address]]}
+
+    set listLinkPeers  [xmlrpc $iface_url($iface) getLinkPeers [list string $address]]
+    set numberOfLinks [llength $listLinkPeers]
+
+    if {[expr $numberOfLinks * 1] == 1} {
+      set devAddress [lindex [split $address :] 0]
+      set peerAddress [lindex [split $listLinkPeers :] 0]
+      if {[string equal $devAddress $peerAddress]} {
+        set internalLinkOnly 1
+      }
+    }
     foreach _link $links {
       array set link $_link
       if {(($link(SENDER) == $address) || ($link(RECEIVER) == $address))} {
         # wenn Verknuepfung fuer diesen Kanal besteht
-        puts "<script type=\"text/javascript\">RF_existsLink('$device', '$channel', '$ch_type');</script>"
+        puts "<script type=\"text/javascript\">RF_existsLink('$device', '$channel', '$ch_type', $internalLinkOnly);</script>"
         break;
       }
     }
@@ -566,65 +578,43 @@ proc getInternalPeers {url address parentAddress} {
   return $intPeers
 }
 
-proc isVirtual {paramId} {
-  set virtualDevices [list "switch_virt_ch_master" "dimmer_virt_ch_master" "blind_virt_ch_master" "dw_controller_brightness_virt_ch_master" "dw_controller_color_virt_ch_master"]
-  lappend virtualDevices "hmip-ps_2_master" "hmip-ps_4_master" "hmip-ps_5_master"
-  lappend virtualDevices "hmip-psm_2_master" "hmip-psm_4_master" "hmip-psm_5_master"
-  lappend virtualDevices "hmip-bdt_3_master" "hmip-bdt_5_master" "hmip-bdt_6_master"
-  lappend virtualDevices "hmip-fsm_1_master" "hmip-fsm_3_master" "hmip-fsm_4_master"
-  lappend virtualDevices "hmip-miob_1_master" "hmip-miob_2_master" "hmip-miob_4_master" "hmip-miob_5_master" "hmip-miob_6_master" "hmip-miob_8_master"
-  lappend virtualDevices "hmip-pdt_2_master" "hmip-pdt_4_master" "hmip-pdt_5_master"
-  lappend virtualDevices "hmip-fdt_1_master" "hmip-fdt_3_master" "hmip-fdt_4_master"
-  lappend virtualDevices "hmip-bbl_5_master" "hmip-bbl_6_master"
-  lappend virtualDevices "hmip-fbl_5_master" "hmip-fbl_6_master"
-  lappend virtualDevices "hmip-broll_5_master" "hmip-broll_6_master"
-  lappend virtualDevices "hmip-froll_5_master" "hmip-froll_6_master"
+proc isExpertChannel {devType chType chNr} {
+  upvar virtChnCounter virtChnCounter
 
-  lappend virtualDevices "hmip-mod-oc8_11_master" "hmip-mod-oc8_12_master" "hmip-mod-oc8_15_master" "hmip-mod-oc8_16_master"
-  lappend virtualDevices "hmip-mod-oc8_19_master" "hmip-mod-oc8_20_master" "hmip-mod-oc8_23_master" "hmip-mod-oc8_24_master"
-  lappend virtualDevices "hmip-mod-oc8_27_master" "hmip-mod-oc8_28_master" "hmip-mod-oc8_31_master" "hmip-mod-oc8_32_master"
-  lappend virtualDevices "hmip-mod-oc8_35_master" "hmip-mod-oc8_36_master" "hmip-mod-oc8_39_master" "hmip-mod-oc8_40_master"
+  set devType [string tolower $devType]
 
-  lappend virtualDevices "hmip-wgc_2_master" "hmip-wgc_4_master" "hmip-wgc_5_master"
-  lappend virtualDevices "hmip-whs2_1_master" "hmip-whs2_2_master" "hmip-whs2_4_master" "hmip-whs2_5_master" "hmip-whs2_6_master" "hmip-whs2_8_master"
+  set arChType [list "DIMMER_TRANSMITTER" "SWITCH_TRANSMITTER" "BLIND_TRANSMITTER" "SHUTTER_TRANSMITTER" "ACOUSTIC_SIGNAL_TRANSMITTER"]
+  set arChVirtType [list "DIMMER_VIRTUAL_RECEIVER" "SWITCH_VIRTUAL_RECEIVER" "BLIND_VIRTUAL_RECEIVER" "SHUTTER_VIRTUAL_RECEIVER" "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER"]
 
-  lappend virtualDevices "hmip-bsl_5_master" "hmip-bsl_6_master" "hmip-bsl_9_master" "hmip-bsl_10_master" "hmip-bsl_13_master" "hmip-bsl_14_master"
+  set result "false"
 
-  lappend virtualDevices "hmipw-drbl4_3_master" "hmipw-drbl4_4_master" "hmipw-drbl4_7_master" "hmipw-drbl4_8_master" "hmipw-drbl4_11_master" "hmipw-drbl4_12_master" "hmipw-drbl4_15_master" "hmipw-drbl4_16_master"
-
-  lappend virtualDevices "hmipw-drs4_3_master" "hmipw-drs4_4_master" "hmipw-drs4_7_master" "hmipw-drs4_8_master" "hmipw-drs4_11_master" "hmipw-drs4_12_master" "hmipw-drs4_15_master" "hmipw-drs4_16_master"
-
-  lappend virtualDevices "hmipw-drs8_3_master" "hmipw-drs8_4_master" "hmipw-drs8_7_master" "hmipw-drs8_8_master" "hmipw-drs8_11_master" "hmipw-drs8_12_master" "hmipw-drs8_15_master" "hmipw-drs8_16_master"
-  lappend virtualDevices "hmipw-drs8_19_master" "hmipw-drs8_20_master" "hmipw-drs8_23_master" "hmipw-drs8_24_master" "hmipw-drs8_27_master" "hmipw-drs8_28_master" "hmipw-drs8_31_master" "hmipw-drs8_32_master"
-
-  lappend virtualDevices "hmipw-drd3_3_master" "hmipw-drd3_4_master" "hmipw-drd3_7_master" "hmipw-drd3_8_master" "hmipw-drd3_11_master" "hmipw-drd3_12_master"
-
-  lappend virtualDevices "hmipw-fio6_9_master" "hmipw-fio6_10_master" "hmipw-fio6_13_master" "hmipw-fio6_14_master" "hmipw-fio6_17_master" "hmipw-fio6_18_master"
-  lappend virtualDevices "hmipw-fio6_21_master" "hmipw-fio6_22_master" "hmipw-fio6_25_master" "hmipw-fio6_26_master" "hmipw-fio6_29_master" "hmipw-fio6_30_master"
-
-  lappend virtualDevices "hmip-pcbs2_3_master" "hmip-pcbs2_5_master" "hmip-pcbs2_6_master" "hmip-pcbs2_7_master" "hmip-pcbs2_9_master" "hmip-pcbs2_10_master"
-
-  lappend virtualDevices "hmip-mp3p_3_master" "hmip-mp3p_4_master" "hmip-mp3p_7_master" "hmip-mp3p_8_master"
-
-  lappend virtualDevices "hmip-mio16-pcb_17_master" "hmip-mio16-pcb_19_master" "hmip-mio16-pcb_20_master"
-  lappend virtualDevices "hmip-mio16-pcb_21_master" "hmip-mio16-pcb_23_master" "hmip-mio16-pcb_24_master"
-  lappend virtualDevices "hmip-mio16-pcb_25_master" "hmip-mio16-pcb_27_master" "hmip-mio16-pcb_28_master"
-  lappend virtualDevices "hmip-mio16-pcb_29_master" "hmip-mio16-pcb_31_master" "hmip-mio16-pcb_32_master"
-  lappend virtualDevices "hmip-mio16-pcb_33_master" "hmip-mio16-pcb_35_master" "hmip-mio16-pcb_36_master"
-  lappend virtualDevices "hmip-mio16-pcb_37_master" "hmip-mio16-pcb_39_master" "hmip-mio16-pcb_40_master"
-  lappend virtualDevices "hmip-mio16-pcb_41_master" "hmip-mio16-pcb_43_master" "hmip-mio16-pcb_44_master"
-  lappend virtualDevices "hmip-mio16-pcb_45_master" "hmip-mio16-pcb_47_master" "hmip-mio16-pcb_48_master"
-
-  set virtual "false"
-
-  foreach val $virtualDevices {
-    if {$val == $paramId} {
-      set virtual "true"
+set comment {
+  This hides the real channel. Not necessary anymofe
+  foreach val $arChType {
+    if {$chType == $val} {
+      set result "true"
       break
     }
-  } 
+  }
+}
 
- return $virtual
+  if {($devType!= "hmip-miob") && ($devType != "hmip-whs2")} {
+    foreach val $arChVirtType {
+      if {$chType == $val} {
+        if {[expr $virtChnCounter >= 3] == 1} {set virtChnCounter 0}
+        incr virtChnCounter
+        if {[expr $virtChnCounter != 1] == 1} {
+          set result "true"
+          break
+        }
+      }
+    }
+  } else {
+    ! Special handling for the MIOB and WHS2
+    ! Hide the virtual channels 2,4,6,8 - 3 and 7 are necessary for certain links
+    if {($chNr == 2) || ($chNr == 4) || ($chNr == 6) || ($chNr == 8)} {set result "true"}
+  }
+  return $result
 }
 
 proc isHmIP {} {
@@ -768,6 +758,7 @@ proc put_channel_parameters {} {
   set state_intKey -1
   set wired ""
   set s ""
+  set virtChnCounter 0
 
   if { ! [ info exist dev_descr(CHILDREN) ] } then {
     #Keine Channels vorhanden == Keine Parameter einstellbar.
@@ -905,7 +896,8 @@ proc put_channel_parameters {} {
       } else {
         # Internal keys for generic config pages
         set s "" 
-        if {[isVirtual $ch_paramid] == "true"} {
+
+        if {[isExpertChannel $ch_descr(PARENT_TYPE) $ch_descr(TYPE) $ch_descr(INDEX)] == "true"} {
           set file "$ch_paramid\Params.tcl"
           catch {source [file join $env(DOCUMENT_ROOT) config/easymodes/$file]}
           # catch { set s [cmd_link_paramset $iface $ch_descr(ADDRESS) MASTER MASTER CHANNEL_$ch_descr(INDEX)] }
@@ -968,20 +960,21 @@ proc put_channel_parameters {} {
               array set dev_descr_sender [array get ch_descr] 
               
               # original channelparam
-              if {$loop == 1 && ([isVirtual $ch_paramid] == "false")} {  
-                append s [put_orig_channel_parameter $ch_address $ch_descr(INDEX)] 
+
+              if {$loop == 1 && ([isExpertChannel $ch_descr(PARENT_TYPE) $ch_descr(TYPE) $ch_descr(INDEX)] == "false")} {
+                append s [put_orig_channel_parameter $ch_address $ch_descr(INDEX)]
               }
               # end original channelparam
 
-              if {([isVirtual $ch_paramid] == "false")} {
-                if { [catch { array set ch_descr [xmlrpc $iface_url($iface) getDeviceDescription [list string $sender]] } ] } then { 
+              if {([isExpertChannel $ch_descr(PARENT_TYPE) $ch_descr(TYPE) $ch_descr(INDEX)] == "false")} {
+                if { [catch { array set ch_descr [xmlrpc $iface_url($iface) getDeviceDescription [list string $sender]] } ] } then {
                   #continue
                 } 
                 catch {source [file join $env(DOCUMENT_ROOT) config/easymodes/$ch_paramid.tcl]}
               } 
-        
-              if {[isVirtual $ch_paramid] == "true"} { 
-                if { [catch { array set ch_descr [xmlrpc $iface_url($iface) getDeviceDescription [list string $sender]] } ] } then { 
+
+              if {[isExpertChannel $ch_descr(PARENT_TYPE) $ch_descr(TYPE) $ch_descr(INDEX)] == "true"} {
+                if { [catch { array set ch_descr [xmlrpc $iface_url($iface) getDeviceDescription [list string $sender]] } ] } then {
                   continue
                 }
                 catch {source [file join $env(DOCUMENT_ROOT) config/easymodes/$ch_paramid.tcl]}
@@ -1028,8 +1021,8 @@ proc put_channel_parameters {} {
                 append s "<script type=\"text/javascript\">translate('$pnr', '$special_input_id');</script>"
                 append s  "<tr class=\"$special_input_id\_$pnr\" [expr {$cur_profile == $pnr?" ":" style=\"visibility:hidden; display:none;\""} ]><td>"
                 append s $HTML_PARAMS(separate_$pnr)
-              
-                if {[isVirtual $ch_paramid] == "false"} {
+
+                if {[isExpertChannel $ch_descr(PARENT_TYPE) $ch_descr(TYPE) $ch_descr(INDEX)] == "false"} {
                   append s "<br/><input type=\"button\" id=\"SimKey_$counter\_$loop\_$pnr\" name=\"btnSimKeyPress\" onclick=\"SendInternalKeyPress('$iface', '$sender', '$receiver')\" value=\"Simuliere Tastendruck\">"
                   if {[info exists simulateLongKeyPress] == 1} {
                     if {$simulateLongKeyPress == 1} {
@@ -1082,18 +1075,21 @@ proc put_channel_parameters {} {
     #if {$s == ""} then { set s "<div class=\"CLASS22004\">Keine Parameter einstellbar.</div>" }
     if {$s == ""} then { set s "<div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div>" }
 
-    # virtuelle Kanäle nur anzeigen, wenn im Expertenmodus
-    #if {([isVirtual $ch_paramid] == "true") && ([session_is_expert] == 0) }
-
     catch {
-      if {([isVirtual [xmlrpc $iface_url($iface) getParamsetId [list string $ch_descr(ADDRESS)] MASTER]] == "true") && ([session_is_expert] == 0) } {
+      if {([isExpertChannel $ch_descr(PARENT_TYPE) $ch_descr(TYPE) $ch_descr(INDEX)] == "true") && ([session_is_expert] == 0) } {
         set hide_channel 1
       }
     }
 
+    set styleVirtChn ""
+
+    if {[session_is_expert] && [string first "_VIRTUAL_RECEIVER" $ch_descr(TYPE)] != -1} {
+           set styleVirtChn "virtualChannelBckGnd"
+    }
+
     puts "<tr [expr {$hide_channel==1?"style=\"visibility: hidden; display: none\"":""} ] >"
     puts "<td class=\"alignCenter\"><span onmouseover=\"picDivShow(jg_250, '$ch_descr(PARENT_TYPE)', 250, $ch_descr(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $ch_name]</span><span id=\"chDescr_$ch_descr(INDEX)\"></span></td>"
-    puts "<td class=\"alignCenter\">Ch.: $ch_descr(INDEX)</td>"
+    puts "<td class=\"alignCenter $styleVirtChn\" >Ch.: $ch_descr(INDEX)</td>"
     puts "<td class=\"CLASS22003\">$s</td>"
     puts "</tr>"
 
@@ -1196,7 +1192,9 @@ proc put_Header {} {
 
           "NEW_FIRMWARE_AVAILABLE" -
           "DELIVER_FIRMWARE_IMAGE" {
-            set fw_update_rows "<tr><td class=\"CLASS22008\"><div>\${lblDeviceFwDeliverFwImage}</div><div class=\"StdTableBtnHelp\"><img id=\"hmIPDeliverFirmwareHelp\" height=\"24\" width=\"24\"src=\"/ise/img/help.png\"></div></td></tr>"
+            if {[string equal $dev_descr(TYPE) "HmIP-SWSD"] == 1} {
+              set fw_update_rows "<tr><td class=\"CLASS22008\"><div>\${lblDeviceFwDeliverFwImage}</div><div class=\"StdTableBtnHelp\"><img id=\"hmIPDeliverFirmwareHelp\" height=\"24\" width=\"24\"src=\"/ise/img/help.png\"></div></td></tr>"
+            }
           }
 
           "DO_UPDATE_PENDING" -
@@ -1207,7 +1205,7 @@ proc put_Header {} {
           }
 
           "READY_FOR_UPDATE" {
-            set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
+            set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"CLASS22006\"><span class='UILink' onclick='WebUI.enter(DeviceFirmwareInformation);'>$dev_descr(AVAILABLE_FIRMWARE)</span></td></tr>"
             # Deactivate the update button. The update should be done from the device firmware page.
             # append fw_update_rows "<tr><td colspan=\"2\" class=\"CLASS22007\"><span onclick=\"FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
           }
@@ -1245,9 +1243,9 @@ proc put_Header {} {
     puts "<script type=\"text/javascript\">"
 
       if {[isDevHmIPW $dev_descr(TYPE)] == "true"} {
-        puts "var tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPWDeliverFirmwareImage\");+\"</div>\","
+        puts "var tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPWDeliverFirmwareImageA\");+\"</div>\","
       } else {
-        puts "var tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPDeliverFirmwareImage\");+\"</div>\","
+        puts "var tooltipHTML = \"<div>\"+translateKey(\"tooltipHmIPDeliverFirmwareImageA\");+\"</div>\","
       }
       puts "tooltipElem = jQuery(\"#hmIPDeliverFirmwareHelp\");"
       puts "tooltipElem.data('powertip', tooltipHTML);"

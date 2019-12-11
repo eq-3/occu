@@ -57,7 +57,7 @@
 	  s += "<table cellspacing='8'>";
 	  s += "<tr>";
 	  s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>"+ translateKey('footerBtnPageBack') +"</div></td>";
-	  s += "<td align='center' valign='middle'><div class='FooterButton' onclick='SearchNewAccessPoint();'>"+ translateKey('footerBtnNew') +"</div></td>";
+	  s += "<td id='btnSearchNewAccessPoint' align='center' valign='middle'><div class='FooterButton' onclick='SearchNewAccessPoint();'>"+ translateKey('footerBtnNew') +"</div></td>";
 	   
 	  s += "</tr>";
 	  s += "</table>";

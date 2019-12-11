@@ -428,11 +428,24 @@ Disable_SimKey = function(ch, prn, specialInputId)
 };
 
 
-MD_catchBrightness = function(url, sender_address, receiver_address, brightness, convertValue, set_value, id, commando, parameter)
+MD_catchBrightness = function(url, sender_address, receiver_address, brightness, convertValue, paramType, set_value, id, commando, parameter)
 {
   // knownBrightness is used to prevent unnecessary calls for the converting of the current brightness while building the page.
   // Each profile of the easymode needs the brightness, so we store the value for 500 ms in the var knownBrightness
   if (typeof knownBrightness == "undefined") {
+    var curBrightness = homematic("Interface.getValue", {"interface": "HmIP-RF", "address": sender_address, "valueKey": paramType});
+    brightness =  (curBrightness) ? Math.round(curBrightness) : Math.round(brightness);
+
+    conInfo("sender_address: " + sender_address +" - paramType: " + paramType + " - current brightness via getValue: " + curBrightness + " - calculated brightness: " + brightness);
+
+    arID = id.split("_");
+    jQuery("#brightDescr_"+arID[2]).css("display", "inline");
+    jQuery("#okButton_"+arID[2]).css("display", "inline");
+
+    if (! commando.includes("help_active_")) {
+      jQuery("#usrDefBrightness_" + arID[2]).val(brightness);
+    }
+
     if (convertValue == 1) {
       var oSender = DeviceList.getDeviceByAddress(sender_address.split(":")[0]),
         devDescr = homematic("Interface.getDeviceDescription", {
@@ -441,16 +454,14 @@ MD_catchBrightness = function(url, sender_address, receiver_address, brightness,
         });
 
       if ((oSender.typeName.indexOf("HmIPW-") != -1) || ((oSender.typeName.indexOf("HmIP-") != -1) && (devDescr.firmware.split(".")[0] >= 2))) {
-        conInfo("Here we work with the brightness value calculated with the new method");
         brightness = MD_convertIlluminationToDecisionValue_V2(brightness);
       } else {
         // Old calculation method
-        conInfo("Here we work with the brightness value calculated with the old method");
-        brightness = MD_convertIlluminationToDecisionValue(brightness);
+        brightness = MD_convertIlluminationToDecisionValue(brightness, oSender.typeName, devDescr.firmware);
       }
-      knownBrightness = brightness;
-      window.setTimeout(function() {delete knownBrightness;}, 500);
     }
+    knownBrightness = brightness;
+    window.setTimeout(function() {delete knownBrightness;}, 500);
   } else {
     brightness = knownBrightness;
   }
@@ -611,35 +622,37 @@ MD_init = function(id, min, max)
   }
 };
 
-MD_getHelp = function(min, max, brightness, ready)
+MD_getHelp = function(min, max, brightness, activeBright, ready, isHmIP)
 {
   // liest die Hilfedatei für den MotionSensor ein
 //  var language = $F('language') ;
-  var language = getLang();
-  var font_bold = "\"font-style:normal; font-weight:bold\"";
-  var font_underline = "\"font-style:normal; text-decoration:underline\"";
-  var active = localized[0]['active_' + ready];
-  
+  var language = getLang(),
+   font_bold = "\"font-style:normal; font-weight:bold\"",
+   font_underline = "\"font-style:normal; text-decoration:underline\"",
+   active = localized[0]['active_' + ready],
+   fileName0 = (isHmIP) ? 'MOTION_DETECTOR_HMIP_0.txt' : 'MOTION_DETECTOR_0.txt',
+   fileName1 = (isHmIP) ? 'MOTION_DETECTOR_HMIP_1.txt' : 'MOTION_DETECTOR_1.txt';
+
   //Je nachdem, ob die aktuelle Helligkeit zur Verfügung steht, oder nicht, werden verschiedene Hilfstexte generiert.
   if (brightness != -1) {
-    var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_1.txt';
+    var path = '/config/easymodes/etc/localization/' + language + '/' + fileName1;
   } else {
-    var path = '/config/easymodes/etc/localization/' + language + '/MOTION_DETECTOR_0.txt';
+    var path = '/config/easymodes/etc/localization/' + language + '/' + fileName0;
   }
   
   // die entsprechende Uebersetzungstabellen der Easymodes einlesen
   new Ajax.Request(path ,
-    {
+  {
     method:    'get',
     asynchronous: false,
     onSuccess: function(success) {
-            help_txt = eval(success.responseText);
-          },
+      help_txt = eval(success.responseText);
+    },
 
     onFailure: function(failure) {
-            Ajax_failure(path, failure.statusText);
-          }
-    });
+      Ajax_failure(path, failure.statusText);
+    }
+  });
   return help_txt;
 };
 
@@ -651,16 +664,16 @@ MD_link_help = function()
   MessageBox.show(help_txt[0]['title_kind_of'], help_txt[0]['help_kind_of'] ,"" ,450 , 260);
 };
 
-MD_catchBright_help = function(min, max, brightness, ready, condition) {
-  //Hilfetext für die Helligkeitsschwelle des Motion-Detectors    
-  var help_txt = MD_getHelp(min, max, brightness, ready);
+MD_catchBright_help = function(min, max, brightness, activeBright, ready, condition, sensorAddress) {
+  var isHmIP = (sensorAddress.split(":")[0].length > 10) ? true : false;
+  //Hilfetext für die Helligkeitsschwelle des Motion-Detectors
+  var help_txt = MD_getHelp(min, max, brightness, activeBright, ready, isHmIP);
 
   if (condition == "LT_LO") {
-    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_LT_LO'], "", 475, 185);
+    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_LT_LO'], "", 475, (isHmIP) ? 350 : 185);
   } else {
-    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_GE_LO'], "", 475, 185);
+    MessageBox.show(help_txt[0]['title_brightness'], help_txt[0]['help_brightness_active_GE_LO'], "", 475, (isHmIP) ? 350 : 185);
   }
-
 };
 
 MD_minInterval = function(id)
@@ -727,23 +740,23 @@ MD_proofClassic = function(id)
 
 MD_set_h_m_s = function(id_h, id_m, id_s)
 {
-  
+  var h, m, s;
   switch ($F(id_s)) {
 
   case "15":
-    var h = '00'; var m = '00'; var s = '15';
+    h = '00'; m = '00'; s = '15';
     break;
   case "30":
-    var h = '00'; var m = '00'; var s = '30';
+    h = '00'; m = '00'; s = '30';
     break;
   case "60":
-    var h = '00'; var m = '01'; var s = '00';
+    h = '00'; m = '01'; s = '00';
     break;
   case "120":
-    var h = '00'; var m = '02'; var s = '00';
+    h = '00'; m = '02'; s = '00';
     break;
   case "240":
-    var h = '00'; var m = '05'; var s = '00'; //klassich minimum 5 Minuten (4 Min + Toleranz)
+    h = '00'; m = '05'; s = '00'; //klassich minimum 5 Minuten (4 Min + Toleranz)
     break;
   }
 
@@ -759,20 +772,49 @@ MD_setMode = function(id_on_time_mode, channel, id_on_time)
 
 // Converts the value of the parameter ILLUMINATION of e. g. a HmIP-MotionDetector (very high values possible)
 // to a valid decision value (0 - 255) for the use of direct links (CONDITION_LO/HI)
-MD_convertIlluminationToDecisionValue = function(value) {
-  var result = 0;
-  if (value < 80) {return parseInt(value);} // Linear-Grenze
-  value *= 10;
-  var msb = "0x80000";
-  var exp = 19;
+MD_convertIlluminationToDecisionValue = function(value, typeTransmitter, devFwVersion) {
+  conInfo("Here we work with the brightness value calculated with the old method");
+  var result = 0,
+   linearLimit = 80,
+   resultDivider = 20,
+   msb = "0x80000",
+   exp = 19,
+   val = parseInt(value);
 
-  while ((value & msb) == 0) {
+  var arFw = devFwVersion.split("."),
+    fwMajor = parseInt(arFw[0]),
+    fwMinor = parseInt(arFw[1]),
+    fwPatch = parseInt(arFw[2]);
+
+  var idHmIP = "HmIP-";
+
+  // TWIST-1746
+  if (
+      typeTransmitter == idHmIP + "SPI"
+    || typeTransmitter == idHmIP + "SMI55"
+    || ((typeTransmitter == idHmIP + "SMI") && (((fwMajor == 1) && (fwMinor >= 5)) || ((fwMajor == 1) && (fwMinor == 4) && (fwPatch >= 10))))
+    || ((typeTransmitter == idHmIP + "SMO") && (((fwMajor == 1) && (fwMinor >= 3)) || ((fwMajor == 1) && (fwMinor == 2) && (fwPatch >= 10))))
+    ) {
+    linearLimit = 75;
+    resultDivider = 21;
+    msb = "0x800000";
+    exp = 23;
+    conInfo("Calculation lux -> condition value for SPI / SMI55 / SMI fw >= 1.4.10 / SMO fw >= 1.2.10");
+  } else {
+    conInfo("Calculation lux -> condition value for SMI fw < 1.4.10 / SMO fw < 1.2.10");
+  }
+
+  val *= 10;
+
+  if (val < linearLimit) {return val;} // Linear-Grenze
+
+  while ((val & msb) == 0) {
    msb >>= 1;
    exp--;
   }
 
-  var result = (((value^msb) << 8) / msb) | (exp << 8);
-  result /= 20;
+  var result = (((val^msb) << 8) / msb) | (exp << 8);
+  result /= resultDivider;
 
   if (result > 255) {
     result = 255;
@@ -783,6 +825,7 @@ MD_convertIlluminationToDecisionValue = function(value) {
 
 // SPHM-301
 MD_convertIlluminationToDecisionValue_V2 = function(value) {
+  conInfo("Here we work with the brightness value calculated with the new method");
   var brightness = (isNaN(value)) ? 0 :  parseInt(Math.abs(value) * 100),
     convBrightness,
     offset_x,
@@ -1198,7 +1241,7 @@ HMW_WebUIsetChannel = function(id, ch_type)
 showHintPrgLink = function(channel, prgExists) {
   var channel = parseInt(channel),
   tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel],
-  elm = jQuery("[name='CHANNEL_FUNCTION'], [name='CHANNEL_OPERATION_MODE']")[channel -1];
+  elm = jQuery("#separate_CHANNEL_" + channel + "_1");
 
   jQuery(elm).prop("disabled", true);
   if (prgExists) {
@@ -1209,20 +1252,28 @@ showHintPrgLink = function(channel, prgExists) {
   }
 };
 
+showHintInternalLink = function(channel) {
+  var channel = parseInt(channel),
+    tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel];
+    jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintExternalLinkExists")+"</div>");
+};
+
 ShowHintIfProgramExists = function(id, ch) {
-    homematic("Channel.hasProgramIds", {id: id}, function(result, error) {
+  homematic("Channel.hasProgramIds", {id: id}, function(result, error) {
     if (result) {
       showHintPrgLink(ch, true);
     } else {
       if(arChnHasLinks[parseInt(ch)] != true) {
-        var elm = jQuery("[name='CHANNEL_FUNCTION'], [name='CHANNEL_OPERATION_MODE']")[ch - 1];
+        var elm = jQuery("#separate_CHANNEL_" + ch + "_1");
         jQuery(elm).prop("disabled", false);
       }
     }
   });
 };
 
-RF_existsLink = function(deviceType, ch, ch_type) {
+RF_existsLink = function(deviceType, ch, ch_type, internalLinkOnly) {
+  var arDevMultiModeException = [];
+
   // The ch_type of a HM-MOD-EM-8 is KEY which is very generic. Therefore, for this device we have to check the device type.
   switch(deviceType) {
     case "HM-MOD-EM-8":
@@ -1234,7 +1285,12 @@ RF_existsLink = function(deviceType, ch, ch_type) {
 
   switch(ch_type) {
     case "MULTI_MODE_INPUT_TRANSMITTER":
-      showHintPrgLink(ch, false);
+      arDevMultiModeException = ["HmIP-FSI16", "HmIP-DRDI3"];
+      if ((arDevMultiModeException.indexOf(deviceType) == -1) || (internalLinkOnly == 0)) {
+        showHintPrgLink(ch, false);
+      } else {
+        showHintInternalLink(ch);
+      }
       break;
     default:
       break;
@@ -1724,39 +1780,94 @@ rfd_test = function() {
 };
   
 preventOnOffNonActive= function(elm) {
-  var arFooterElems = jQuery(".FooterButton"),
-    arOnOffElems = jQuery("[name='"+elm.name+"']"),
-    onOffNotActive = 0,
-    chn = elm.name.split("_")[1],
-    counter;
+  var receiverType = jQuery("#receiver_paramid").val();
 
-  if (arOnOffElems.length == 2) {
-    counter = 1;
-    jQuery.each(arOnOffElems, function(index,elem) {
-       if (jQuery(elem).val() == 0) {
-         onOffNotActive++;
-       }
-    });
-  } else if (arOnOffElems.length == 4) {
-    counter = 0;
-    if (
-      ((jQuery(arOnOffElems[0]).val() == 0) && (jQuery(arOnOffElems[1]).val() == 0)) ||
-      ((jQuery(arOnOffElems[2]).val() == 0) && (jQuery(arOnOffElems[3]).val() == 0))
-    ) {
-      onOffNotActive++;
+  if (receiverType  && (receiverType != "linkHmIP_HEATING_KEY_RECEIVER")) {
+    var arFooterElems = jQuery(".FooterButton"),
+      arOnOffElems = jQuery("[name='" + elm.name + "']"),
+      onOffNotActive = 0,
+      chn = elm.name.split("_")[1],
+      counter;
+
+    if (arOnOffElems.length == 2) {
+      counter = 1;
+      jQuery.each(arOnOffElems, function (index, elem) {
+        if (jQuery(elem).val() == 0) {
+          onOffNotActive++;
+        }
+      });
+    } else if (arOnOffElems.length == 4) {
+      counter = 0;
+      if (
+        ((jQuery(arOnOffElems[0]).val() == 0) && (jQuery(arOnOffElems[1]).val() == 0)) ||
+        ((jQuery(arOnOffElems[2]).val() == 0) && (jQuery(arOnOffElems[3]).val() == 0))
+      ) {
+        onOffNotActive++;
+      }
+    }
+
+    if (onOffNotActive > counter) {
+      arFooterElems[1].hide();
+      arFooterElems[2].hide();
+      jQuery(".j_hint").remove();
+      jQuery("#receiver_param_" + chn).append("<p class='j_hint attention'><b>" + translateKey('hintLinkParamOnOffNotActive') + "</b></p>");
+
+    } else {
+      jQuery(".j_hint").remove();
+      arFooterElems[1].show();
+      arFooterElems[2].show();
     }
   }
+};
 
+addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
+  var hookElm_1 = jQuery("#hookAbortEventSendingChannels_1_"+ chn),
+    hookElm_2 = jQuery("#hookAbortEventSendingChannels_2_"+ chn),
+    device = DeviceList.getDeviceByAddress(devAddress),
+    counter = 0,
+    html, html_1, html_2;
 
-  if (onOffNotActive > counter) {
-    arFooterElems[1].hide();
-    arFooterElems[2].hide();
-    jQuery(".j_hint").remove();
-    jQuery("#receiver_param_"+chn).append("<p class='j_hint attention'><b>"+translateKey('hintLinkParamOnOffNotActive')+"</b></p>");
+  setAbortEventSendingChannels = function(chn, prn) {
+    var valElm = jQuery("#separate_CHANNEL_" + chn+ "_" + prn),
+      arChkBoxes = jQuery("[name='abortEventSendingCh_"+chn+"']"),
+      val = 0;
 
-  } else {
-    jQuery(".j_hint").remove();
-    arFooterElems[1].show();
-    arFooterElems[2].show();
+    jQuery.each(arChkBoxes, function(index, chkBox) {
+      if(chkBox.checked) {
+        val += parseInt(chkBox.value);
+      }
+    });
+
+    valElm.val(val);
+  };
+
+  jQuery.each(device.channels, function(index,channel) {
+
+    if (channel.channelType == "KEY_TRANSCEIVER" || channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER" ) {
+
+      html = (counter == 0 || counter == 16) ? "" : html;
+
+      html += "<td align='center'>";
+      html += "<label for='abortEventSendingCh_" + chn + "_" + counter + "' style='background-color:white; display:block; text-align:center;'>" + channel.index + "</label>";
+      if (isBitSet(value, counter)) {
+        html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' checked onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+      } else {
+        html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+      }
+      html += "</td>";
+
+      if (counter <= 15) {
+        html_1  = html;
+      } else if( counter <= 31) {
+        html_2 = html;
+      }
+      counter++;
+    }
+  });
+  html_1 += "<td><input type='text' class='hidden' id='separate_CHANNEL_"+chn+"_"+prn+"' size='6' name='ABORT_EVENT_SENDING_CHANNELS' value='"+value+"'></td>";
+  hookElm_1.html(html_1);
+
+  if (html_2) {
+    hookElm_2.html(html_2);
   }
 };

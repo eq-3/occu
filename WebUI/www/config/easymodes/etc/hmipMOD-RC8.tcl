@@ -5,7 +5,7 @@ proc getHeader {address chn} {
     set result ""
 
     set param CHANNEL_OPERATION_MODE
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
      incr prn
      append result "<tr>"
       append result "<td style=\"min-width:240px\">\${stringTableKeyTransceiverChannelOperationMode}</td>"
@@ -19,7 +19,7 @@ proc getHeader {address chn} {
   }
  
   set param LED_DISABLE_CHANNELSTATE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
      incr prn
      append result "<tr name=\"modrc8_$chn\">"
        append result "<td>\${stringTableLEDDisableChannelState}</td>"
@@ -109,7 +109,7 @@ proc getKeyHTML {address chn p descr} {
   append html [getHeader $address $chn]
 
   set param DBL_PRESS_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr name=\"modrc8_$chn\">"
       append html "<td>\${stringTableKeyDblPressTime}</td>"
@@ -118,7 +118,7 @@ proc getKeyHTML {address chn p descr} {
   }
 
   set param LONG_PRESS_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr name=\"modrc8_$chn\">"
       append html "<td>\${stringTableKeyLongPressTimeA}</td>"
@@ -127,7 +127,7 @@ proc getKeyHTML {address chn p descr} {
   }
 
   set param REPEATED_LONG_PRESS_TIMEOUT_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr name=\"modrc8_$chn\">"
     append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
@@ -177,7 +177,7 @@ proc getBinaryHTML {address chn p descr} {
   append html [getHeader $address $chn]
 
   set param MSG_FOR_POS_A
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
       array_clear options
       set options(0) "\${stringTableShutterContactMsgPosA2}"
@@ -189,7 +189,7 @@ proc getBinaryHTML {address chn p descr} {
   }
 
   set param MSG_FOR_POS_B
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
       array_clear options
       set options(0) "\${stringTableShutterContactMsgPosA2}"

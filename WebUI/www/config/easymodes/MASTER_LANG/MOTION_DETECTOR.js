@@ -101,8 +101,8 @@ jQuery.extend(true,langJSON, {
     "motionDetectorOptionNoMotion_1": "<span name=\"noMotion\">Standby</span>",
     "motionDetectorOptionNoMotion_2": "<span name=\"noMotion\">Horizontal</span>",
 
-    "motionDetectorSensorRange2GPlusSen" : "2G+",
-    "motionDetectorSensorRange2G2PlusSens" : "2G++",
+    "motionDetectorSensorRange2GPlusSens" : "2G+",
+    "motionDetectorSensorRange2G2PlusSense" : "2G++",
     "motionDetectorSensorRange2G" : "2G",
     "motionDetectorSensorRange4G" : "4G",
     "motionDetectorSensorRange8G" : "8G",

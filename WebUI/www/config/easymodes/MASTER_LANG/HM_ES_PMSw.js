@@ -33,19 +33,19 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxDecisionPassageLR_B" : " Gesendeter unterer Entscheidungswert,<br/>wenn der untere Differenzwert erreicht und<br/>zuvor der oberer Grenzwert erreicht wurde.",
 
 
-    "stringTableCondTxFalling" : "Bei Unterschreitung des unteren Grenzwerts Entscheidungswert senden,<br/>" +
+    "stringTableCondTxFalling" : "Bei Unterschreitung des unteren Grenzwertes Entscheidungswert senden,<br/>" +
       "wenn vorher der obere Grenzwert &uuml;berschritten wurde.",
-    "stringTableCondTxFallingA" : "Bei Unterschreitung des unteren Grenzwerts Entscheidungswert (",
+    "stringTableCondTxFallingA" : "Bei Unterschreitung des unteren Grenzwertes Entscheidungswert (",
     "stringTableCondTxFallingB" : ") senden,<br/>wenn vorher der obere Grenzwert &uuml;berschritten wurde.",
 
-    "stringTableCondTxRising" : "Bei &Uuml;berschreitung des oberen Grenzwerts Entscheidungswert senden,<br/>" +
+    "stringTableCondTxRising" : "Bei &Uuml;berschreitung des oberen Grenzwertes Entscheidungswert senden,<br/>" +
       "wenn vorher der untere Grenzwert unterschritten wurde.",
-    "stringTableCondTxRisingA" : "Bei &Uuml;berschreitung des oberen Grenzwerts Entscheidungswert (",
+    "stringTableCondTxRisingA" : "Bei &Uuml;berschreitung des oberen Grenzwertes Entscheidungswert (",
     "stringTableCondTxRisingB" : ") senden,<br/>wenn vorher der untere Grenzwert unterschritten wurde.",
 
     "stringTableCondTxFallingRisingA": "Entscheidungswert (",
-    "stringTableCondTxFallingRisingB": ") bei &Uuml;berschreitung des oberen Grenzwerts senden,<br/>wenn vorher der untere Grenzwert unterschritten wurde, oder Entscheidungswert (",
-    "stringTableCondTxFallingRisingC": ") bei Unterschreitung des unteren Grenzwerts senden,<br/>wenn vorher der obere Grenzwert &uuml;berschritten wurde.",
+    "stringTableCondTxFallingRisingB": ") bei &Uuml;berschreitung des oberen Grenzwertes senden,<br/>wenn vorher der untere Grenzwert unterschritten wurde, oder Entscheidungswert (",
+    "stringTableCondTxFallingRisingC": ") bei Unterschreitung des unteren Grenzwertes senden,<br/>wenn vorher der obere Grenzwert &uuml;berschritten wurde.",
 
     "stringTableCondTxNotActive": "Der Sensorkanal ist nicht aktiv.",
     "stringTableCondThresholdHi" : "Oberer Grenzwert",

@@ -1,3 +1,5 @@
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
+
 proc getMinValue {param} {
   global psDescr
   upvar psDescr descr
@@ -34,8 +36,8 @@ proc getMinMaxValueDescr {param} {
   set min $param_descr(MIN)
   set max $param_descr(MAX)
 
-  # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
-  if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+  # SPHM-118 / SPHM-410 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
+  if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
     set max [expr $param_descr(MAX) - 0.1]
   }
 
@@ -127,7 +129,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
   }
 
   # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
-  if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+  if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
     set maxValue [expr $param_descr(MAX) - 0.1]
   }
 
@@ -256,6 +258,31 @@ proc getButtonChannelConfiguration {{extraDescription ""}} {
   return $html
 }
 
+proc getDeactivateLongKeypress {p profile special_input_id prn {optionDisable 0} {optionEnable 1}} {
+  upvar $profile PROFILE
+  upvar $p ps
+  upvar pref pref
+
+  # The default value for optionDisable = 0, for optionEnable = 1
+  # You can set user defined values instead. See DIMMER_VIRTUAL_RECEIVER/KEY_TRANSMITTER
+
+  set html ""
+
+  # Long key press activ/inactive
+  set param LONG_PROFILE_ACTION_TYPE
+  if { [info exists ps($param)] == 1  } {
+    incr pref
+    append html "<tr>"
+      append html "<td>\${longKeyPressActiveInactive}</td>"
+      array_clear options
+      set options($optionDisable) "\${optionDisable}"
+      set options($optionEnable) "\${optionEnable}"
+      append html "<td>[get_ComboBox options $param ${special_input_id}_$prn\_$pref PROFILE $param]</td>"
+    append html "</tr>"
+  }
+  return $html
+}
+
 proc getHorizontalLine {{extraparam ""}} {
   return "<tr $extraparam><td colspan=\"2\"><hr></td></tr>"
 }
@@ -269,11 +296,13 @@ proc getHelpIcon {topic {x 0} {y 0}} {
 
   # Set the size for known parameters
   switch $topic {
+   "ABORT_EVENT_SENDING_CHANNELS" {set x 500; set y 140}
    "BLIND_AUTOCALIBRATION" {set x 450; set y 75}
    "BLIND_REFERENCE_RUNNING_TIME" {set x 450; set y 160}
    "BLOCKING_PERIOD" {set x 450; set y 100}
    "BOOST_TIME_PERIOD" {set x 450; set y 120}
    "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
+   "CONTACT_BOOST" {set x 450; set y 180}
    "DELAY_COMPENSATION" {set x 450; set y 100}
    "DURATION_5MIN" {set x 500; set y 160}
    "ENABLE_ROUTING" {set x 500; set y 120}
@@ -283,8 +312,10 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
+   "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
    "PERMANENT_FULL_RX" {set x 500; set y 160}
+   "PWM_AT_LOW_VALVE_POSITION" {set x 500; set y 130}
    "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
    "SPDR_CHANNEL_MODE" {set x 600; set y 600}
    "TEMPERATURE_OFFSET" {set x 500; set y 160}
@@ -487,7 +518,7 @@ proc getPowerUpSelector {chn p special_input_id} {
     append html "</tr>"
 
     set param POWERUP_ONDELAY_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
 
         append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
@@ -505,7 +536,7 @@ proc getPowerUpSelector {chn p special_input_id} {
 
     ###
     set param POWERUP_ONTIME_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
       append html "<td>\${stringTableOnTime}</td>"
@@ -528,7 +559,7 @@ proc getPowerUpSelector {chn p special_input_id} {
 
     ###
     set param POWERUP_ON_LEVEL
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       set powerUpLevelPRN $prn
       append html "<tr>"
@@ -540,8 +571,9 @@ proc getPowerUpSelector {chn p special_input_id} {
 
 
     set param POWERUP_OUTPUT_BEHAVIOUR
-    if { ! [catch {set tmp $ps($param)}] } {
+    if { [info exists ps($param)] == 1 } {
       if {[string equal $dev_descr(TYPE) HmIP-MP3P] == 1} {
+        set tmp $ps($param)
         # set listColor "colorBLACK  colorBLUE colorGREEN colorTURQUOISE colorRED colorPURPLE colorYELLOW colorWHITE randomPlayback colorOldValue lblIgnore"
         set listColor "colorBLACK  colorBLUE colorGREEN colorTURQUOISE colorRED colorPURPLE colorYELLOW colorWHITE"
         set select ""
@@ -561,7 +593,8 @@ proc getPowerUpSelector {chn p special_input_id} {
           append html "</td>"
 
           set param POWERUP_PROFILE_REPETITIONS
-          if { ! [catch {set tmp $ps($param)}]  } {
+          if { [info exists ps($param)] == 1  } {
+            set tmp $ps($param)
             incr prn
             append html "<td>\${lblRepetition}</td>"
             append html "<td>"
@@ -612,11 +645,11 @@ proc getPowerUpSelector {chn p special_input_id} {
 
 # *******
   if { ! [catch {set tmp $ps(POWERUP_OFFTIME_UNIT)}]  } {
-    append html "<tr id=\"powerUpPanelOFF_$chn\"><td><table>"
+    append html "<tr id=\"powerUpPanelOFF_$chn\"><td colspan=\"2\"><table>"
 
       set comment {
         set param POWERUP_OFFDELAY_UNIT
-        if { ! [catch {set tmp $ps($param)}]  } {
+        if { [info exists ps($param)] == 1  } {
           incr prn
           append html "<tr>"
           append html "<td>\${stringTableOffDelay}</td>"
@@ -639,7 +672,7 @@ proc getPowerUpSelector {chn p special_input_id} {
       }
       ###
       set param POWERUP_OFFTIME_UNIT
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append html "<tr>"
         append html "<td>\${stringTableOffTime}</td>"
@@ -662,7 +695,7 @@ proc getPowerUpSelector {chn p special_input_id} {
 
       ###
       set param POWERUP_OFF_LEVEL
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append html "<tr>"
           append html "<td>\${stringTableDimmerLevel}</td>"
@@ -766,7 +799,7 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
     append html "</tr>"
 
     set param POWERUP_ONDELAY_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
 
         append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
@@ -786,7 +819,7 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
 
     ###
     set param POWERUP_ONTIME_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
       append html "<td>\${stringTableOnTime}</td>"
@@ -809,7 +842,7 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
 
     ###
     set param POWERUP_ON_LEVEL
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       set powerUpLevelPRN $prn
       append html "<tr>"
@@ -820,8 +853,9 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
     }
 
     set param POWERUP_OUTPUT_BEHAVIOUR
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       set select ""
+      set tmp $ps($param)
       incr prn
       set powerOutputBehaviourPrn $prn
       append html "<tr>"
@@ -844,7 +878,8 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
         append html "</td>"
 
         set param POWERUP_PROFILE_REPETITIONS
-        if { ! [catch {set tmp $ps($param)}]  } {
+        if { [info exists ps($param)] == 1  } {
+          set tmp $ps($param)
           incr prn
           append html "<td>\${lblRepetition}</td>"
           append html "<td>"
@@ -868,7 +903,7 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
       append html "</tr>"
 
           set param POWERUP_OFFTIME_UNIT
-          if { ! [catch {set tmp $ps($param)}]  } {
+          if { [info exists ps($param)] == 1  } {
             incr prn
             append html "<tr>"
             append html "<td>\${stringTableOffTime}</td>"
@@ -896,10 +931,10 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
   append html "</table></td></tr>"
 
 set comment {
-  append html "<tr id=\"powerUpPanelOFF_$chn\"><td><table>"
+  append html "<tr id=\"powerUpPanelOFF_$chn\"><td colspan=\"2\"><table>"
     ### OFF
     set param POWERUP_OFFDELAY_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
       append html "<td>\${stringTableOffDelay}</td>"
@@ -921,7 +956,7 @@ set comment {
     }
 
     set param POWERUP_OFFTIME_UNIT
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
       append html "<td>\${stringTableOffTime}</td>"
@@ -943,7 +978,7 @@ set comment {
     }
 
     set param POWERUP_OFF_LEVEL
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
         append html "<td>\${lblVolume}</td>"
@@ -1056,7 +1091,7 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
           if {$valAlignment == 1} {set selCenter  "selected=\"selected\"" }
           if {$valAlignment == 2} {set selRight  "selected=\"selected\"" }
           append html "<td>"
-            append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_ALIGNMENT' onchange='setTextAlignment(this.value, $chn, [expr $prn - 1]);'>"
+            append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_ALIGNMENT' onchange='setTextAlign(this.value, $chn, [expr $prn - 1]);'>"
               append html "<option value='0' $selLeft>\${lblLeft}</option>"
               append html "<option value='1' $selCenter>\${lblCenter}</option>"
               append html "<option value='2' $selRight>\${lblRight}</option>"
@@ -1066,13 +1101,13 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
             append html "var elm = document.getElementById('separate_$special_input_id\_$prn');"
             append html "elm.defaultSelected = elm.value;"
 
-            append html "setTextAlignment = function(alignment, chn, prevElmPrn) \{"
+            append html "setTextAlign = function(alignment, chn, prevElmPrn) \{"
               append html "var align = \['left', 'center', 'right'\];"
               append html "var textElm = jQuery(\"\#separate\_$specialID\_\"\+chn+\"_\"+prevElmPrn);"
               append html "textElm.attr(\"style\", \"text-align:\" + align\[alignment\]);"
             append html "\};"
 
-            append html "setTextAlignment($valAlignment, $chn, [expr $prn - 1]);"
+            append html "setTextAlign($valAlignment, $chn, [expr $prn - 1]);"
 
           append html "</script>"
           incr prn
@@ -1080,15 +1115,12 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
           # BgColor
           set colorWhite ""
           set colorBlack ""
-          set colorRed ""
           if {$valBgColor == 0} {set colorWhite  "selected=\"selected\"" }
           if {$valBgColor == 1} {set colorBlack  "selected=\"selected\"" }
-          if {$valBgColor == 2} {set colorRed  "selected=\"selected\"" }
           append html "<td>"
             append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_BACKGROUND_COLOR'>"
               append html "<option value='0' $colorWhite >\${colorWHITE}</option>"
               append html "<option value='1' $colorBlack>\${colorBLACK_A}</option>"
-              append html "<option value='2' $colorRed>\${colorRED}</option>"
             append html "</select>"
           append html "</td>"
           append html "<script type=\"text/javascript\">"
@@ -1100,15 +1132,12 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
           # TextColor
           set colorWhite ""
           set colorBlack ""
-          set colorRed ""
           if {$valTextColor == 0} {set colorWhite  "selected=\"selected\"" }
           if {$valTextColor == 1} {set colorBlack  "selected=\"selected\"" }
-          if {$valTextColor == 2} {set colorRed  "selected=\"selected\"" }
           append html "<td>"
             append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_COLOR'>"
               append html "<option value='0' $colorWhite >\${colorWHITE}</option>"
               append html "<option value='1' $colorBlack>\${colorBLACK_A}</option>"
-              append html "<option value='2' $colorRed>\${colorRED}</option>"
             append html "</select>"
           append html "</td>"
           append html "<script type=\"text/javascript\">"
@@ -1155,5 +1184,245 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
         append html "</tr>"
       append html "</tbody></table></td>"
     append html "</tr>"
+  return $html
+}
+
+# model must be shutter or blind
+proc getPowerUpSelectorShutterBlind {chn p special_input_id model} {
+  global psDescr dev_descr
+  upvar psDescr psDescr
+  upvar $p ps
+  upvar prn prn
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set param POWERUP_JUMPTARGET
+  incr prn
+  set powerupModePrn $prn
+  set html "<tr>"
+    append html "<td>\${stringTablePowerUpAction}</td>"
+    option POWERUP_JUMPTARGET_BLIND_OnOff
+    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn "onchange=\"powerUP_showRelevantData($chn, this.value,true);\""]</td>"
+  append html "</tr>"
+
+  append html "<tr id=\"powerUpPanelON_$chn\"><td colspan=\"2\"><table>"
+    ###
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableBlindLevelOnDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "delayShort"]
+    append html "</tr>"
+
+    set param POWERUP_ONDELAY_UNIT
+    if { [info exists ps($param)] == 1  } {
+
+        append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+        incr prn
+        set param POWERUP_ONDELAY_VALUE
+        append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+        append html "<td>\${stringTableOnDelayValue}</td>"
+
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+        append html "</tr>"
+        append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+       append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    }
+
+set comment { NO ONTIME
+    ###
+    set param POWERUP_ONTIME_UNIT
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+      append html "<td>\${stringTableOnTime}</td>"
+      append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
+      append html "</tr>"
+
+      append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+      incr prn
+      set param POWERUP_ONTIME_VALUE
+      append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+      append html "<td>\${stringTableOnTimeValue}</td>"
+
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+      append html "</tr>"
+      append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    }
+}
+
+    ###
+    set param POWERUP_ON_LEVEL
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableBlindLevelUp}</td>"
+        option RAW_0_100Percent
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+      append html "</tr>"
+    }
+
+    if {[string equal $model "blind"] == 1} {
+      set param POWERUP_ON_LEVEL_2
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${stringTableJalousieSlatsLevelUp}</td>"
+          option RAW_0_100Percent_2
+          append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "</tr>"
+      }
+    }
+
+  append html "</table></td></tr>"
+
+# *******
+  if { ! [catch {set tmp $ps(POWERUP_OFFTIME_UNIT)}]  } {
+    append html "<tr id=\"powerUpPanelOFF_$chn\"><td colspan=\"2\"><table>"
+
+      set param POWERUP_OFFDELAY_UNIT
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+        append html "<tr>"
+        #append html "<td>\${stringTableBlindLevelOffDelay}</td>"
+        append html "<td>\${stringTableBlindLevelOffDelay}</td>"
+        append html [getComboBox $chn $prn "$specialID" "delayShort"]
+        append html "</tr>"
+
+        append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+        incr prn
+        set param POWERUP_OFFDELAY_VALUE
+        append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+        append html "<td>\${stringTableOffDelayValue}</td>"
+
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+        append html "</tr>"
+        append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      }
+
+set comment { No OFFTIME
+      ###
+      set param POWERUP_OFFTIME_UNIT
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+        append html "<tr>"
+        append html "<td>\${stringTableOffTime}</td>"
+        append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
+        append html "</tr>"
+
+        append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+        incr prn
+        set param POWERUP_OFFTIME_VALUE
+        append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+        append html "<td>\${stringTableOffTimeValue}</td>"
+
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+        append html "</tr>"
+        append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      }
+}
+      ###
+      set param POWERUP_OFF_LEVEL
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${stringTableBlindLevelDown}</td>"
+          option RAW_0_100Percent
+          append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "</tr>"
+      }
+
+      if {[string equal $model "blind"] == 1} {
+        set param POWERUP_OFF_LEVEL_2
+        if { [info exists ps($param)] == 1  } {
+          incr prn
+          append html "<tr>"
+            append html "<td>\${stringTableJalousieSlatsLevelDown}</td>"
+            option RAW_0_100Percent_2
+            append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+          append html "</tr>"
+        }
+      }
+
+    append html "</table></td></tr>"
+  }
+# *******
+
+  append html "<script type=\"text/javascript\">"
+
+    append html "powerUP_showRelevantData = function(chn, val, valChanged) {"
+      append html "var panelOnElm = jQuery(\"#powerUpPanelON_\" + chn),"
+      append html "panelOffElm = jQuery(\"#powerUpPanelOFF_\" + chn);"
+
+      append html "switch (parseInt(val)) {"
+        append html "case 0:"
+          # OFF
+          append html "jQuery(\"#timeDelay_\" + chn + \"_7\").val(0).change().prop(\"disabled\", true);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_8\").val(0).change().prop(\"disabled\", true);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_9\").val(0).change().prop(\"disabled\", true);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_10\").val(0).change().prop(\"disabled\", true);"
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_9\").val(0);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_11\").val(0);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_12\").val(101);}"}
+          append html "panelOnElm.hide();"
+          append html "panelOffElm.show();"
+          append html "break;"
+        append html "case 1:"
+          # ON_DELAY
+          append html "jQuery(\"#timeDelay_\" + chn + \"_2\").prop(\"disabled\", false);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_3\").prop(\"disabled\", false);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_4\").prop(\"disabled\", false);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_5\").prop(\"disabled\", false);"
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_6\").val(100);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_7\").val(100);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_8\").val(101);}"}
+          append html "panelOnElm.show();"
+          append html "panelOffElm.hide();"
+          append html "break;"
+        append html "case 2:"
+          # ON
+          append html "jQuery(\"#timeDelay_\" + chn + \"_2\").val(0).change().prop(\"disabled\", true);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_3\").val(0).change().prop(\"disabled\", true);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_4\").val(0).change().prop(\"disabled\", true);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_5\").val(0).change().prop(\"disabled\", true);"
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_6\").val(100);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_7\").val(100);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_8\").val(101);}"}
+          append html "panelOnElm.show();"
+          append html "panelOffElm.hide();"
+          append html "break;"
+        append html "case 3:"
+          # OFF_DELAY
+          append html "jQuery(\"#timeDelay_\" + chn + \"_7\").prop(\"disabled\", false);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_8\").prop(\"disabled\", false);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_9\").prop(\"disabled\", false);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_10\").prop(\"disabled\", false);"
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_9\").val(0);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_11\").val(0);}"}
+          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_12\").val(101);}"}
+          append html "panelOnElm.hide();"
+          append html "panelOffElm.show();"
+          append html "break;"
+        append html "default:"
+          append html "panelOnElm.show();"
+          append html "panelOffElm.show();"
+      append html "}"
+    append html "};"
+
+    append html "window.setTimeout(function() {"
+      append html "var selectedPowerMode = jQuery(\"#separate_CHANNEL_$chn\_$powerupModePrn\").val();"
+      append html "powerUP_showRelevantData($chn, selectedPowerMode, false);"
+    append html "},100);"
+  append html "</script>"
   return $html
 }

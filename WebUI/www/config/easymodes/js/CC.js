@@ -1,4 +1,4 @@
-self.CC_ActivateFreeTemp = function(selectelem, pref)
+CC_ActivateFreeTemp = function(selectelem, pref)
 {
   var pnr = selectelem.options[selectelem.selectedIndex].value; //1
   var upnr = pnr.split(".")[1];
@@ -68,7 +68,7 @@ self.CC_ActivateFreeTemp = function(selectelem, pref)
   }
 };
 
-self.CC_check_Value = function(id)
+CC_check_Value = function(id)
 {
   var unit_cf = document.getElementById('separate_CHANNEL_2_2').selectedIndex ;//1 
   var val = ($F(id)); //2 
@@ -122,7 +122,7 @@ self.CC_check_Value = function(id)
   
 };
 
-self.CC_conv_CF = function()
+CC_conv_CF = function()
 {
   //1 
   var unit_cf = document.getElementById('separate_CHANNEL_2_2').selectedIndex ;//2 
@@ -148,7 +148,7 @@ self.CC_conv_CF = function()
   
 };
 
-self.CC_save_Temp = function(prgName)
+CC_save_Temp = function(prgName)
 {
   var prg = (typeof prgName != "undefined" && prgName != null) ? prgName : "";
   var unit_cf = 0;
@@ -170,7 +170,7 @@ self.CC_save_Temp = function(prgName)
   }
 };
 
-self.CC_setUnit = function()
+CC_setUnit = function()
 {
   var unit_cf = document.getElementById('separate_CHANNEL_2_2').selectedIndex,
   unit = "",
@@ -234,13 +234,13 @@ self.CC_setUnit = function()
 };
 
 
-self.CC_TextColor = function(c)
+CC_TextColor = function(c)
 {
   if (!c) { return WebUI.getColor("windowText"); }
   else    { return WebUI.getColor("gray"); }
 };
 
-self.CC_TimeTable_on_off = function()
+CC_TimeTable_on_off = function()
 {
   //1  
   var id_mode = document.getElementById('separate_CHANNEL_2_3');
@@ -252,14 +252,14 @@ self.CC_TimeTable_on_off = function()
   else time_area.style.display = "none"; 
 };
 
-self.setPointVisibility = function(elem, prn) {
+setPointVisibility = function(elem, prn) {
   var curMode = jQuery("#separate_" +elem+ "_" +prn+ "_1 :selected").val();
   if (curMode == 1 || curMode == 3 || curMode == 4) {
     jQuery("#setpoint_" + elem).show();
   } else {jQuery("#setpoint_" + elem).hide();}
 };
 
-self.setMinMaxTempOption = function(optionElemId, tmpElemId) {
+setMinMaxTempOption = function(optionElemId, tmpElemId) {
   var optionElem = jQuery('#' + optionElemId),
      origVal = parseFloat(jQuery('#' + tmpElemId).val());
 
@@ -278,7 +278,7 @@ self.setMinMaxTempOption = function(optionElemId, tmpElemId) {
   });
 };
 
-self.setMinMaxTemp = function(optionElemId, tmpElemId) {
+setMinMaxTemp = function(optionElemId, tmpElemId) {
   var selectedVal = jQuery("#"+optionElemId + " option:selected").html();
   // OFF selected
   if (isNaN(parseFloat(selectedVal)) && selectedVal == jQuery("#"+optionElemId + " option:first").html()) {
@@ -292,7 +292,7 @@ self.setMinMaxTemp = function(optionElemId, tmpElemId) {
 };
 
 
-self.isEcoLTComfort = function(elmName) {
+isEcoLTComfort = function(elmName) {
   // elmName should be e. g. TEMPERATURE_COMFORT
   var arName = elmName.split("_"),
   elmType = arName[1], // e.g.COMFORT

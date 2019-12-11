@@ -114,9 +114,11 @@ proc put_page {} {
 }
 
 proc _incr {p_arr address peer} {
+  upvar sender_broken sb
+  upvar receiver_broken rb
 
   # If address == peer then we have an internal link which we don´t count
-  if { $address != $peer } {
+  if { ($address != $peer) && ($sb == 0) && ($rb == 0)} {
     upvar $p_arr arr
     if { [catch {incr arr($address)}] } then {
     set arr($address) 1
@@ -241,9 +243,6 @@ proc put_tablebody {} {
       catch {array set receiver_descr $link(RECEIVER_DESCRIPTION)}
       array set SENTRY ""
 
-      _incr SENDER_LINKCOUNTER   $link(SENDER) $link(RECEIVER)
-      _incr RECEIVER_LINKCOUNTER $link(RECEIVER) $link(SENDER)
-
       #FLAGS auslesen=======
       set sender_broken    0
       set sender_unknown   0
@@ -264,6 +263,10 @@ proc put_tablebody {} {
           set receiver_unknown 1
         }
       }
+
+      _incr SENDER_LINKCOUNTER   $link(SENDER) $link(RECEIVER)
+      _incr RECEIVER_LINKCOUNTER $link(RECEIVER) $link(SENDER)
+
       #=====================
       #Verknüpfung mit interner Gerätetaste?
       set isHMW 0
@@ -471,10 +474,12 @@ proc put_tablebody {} {
             puts "jQuery(\"#senderNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_sender_parent_type','channelAddress' : '$senderAddress' ,'channelIndex' : '$senderCh' \}));"
           } else {
             puts "var channel = DeviceList.getChannelByAddress(\"$senderAddress\");"
-            puts "homematic(\"Interface.getMetadata\", {\"objectId\" : channel.id, \"dataId\" : \"channelMode\"}, function(result) {"
-              puts "if (result == \"null\") {result = 1;}"
-              puts "jQuery(\"#senderNameExtension_$loop\").html(translateKey(\"chType_MULTI_MODE_INPUT_TRANSMITTER_\"+result));"
-            puts "});"
+            puts "if (channel) {"
+              puts "homematic(\"Interface.getMetadata\", {\"objectId\" : channel.id, \"dataId\" : \"channelMode\"}, function(result) {"
+                puts "if (result == \"null\") {result = 1;}"
+                puts "jQuery(\"#senderNameExtension_$loop\").html(translateKey(\"chType_MULTI_MODE_INPUT_TRANSMITTER_\"+result));"
+              puts "});"
+            puts "}"
           }
 
           puts "jQuery(\"#receiverNameExtension_$loop\").html(getExtendedDescription(\{ 'deviceType' : '$_receiver_parent_type','channelAddress' : '$receiverAddress' ,'channelIndex' : '$receiverCh' \}));"

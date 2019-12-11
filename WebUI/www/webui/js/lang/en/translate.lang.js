@@ -28,8 +28,9 @@ jQuery.extend(true,langJSON, {
     "BidCosWired-Filter" : HMIdentifier.en.BidCosWiredFilter,
     "HmIPRF" : HMIdentifier.en.HmIPRF,
     "VirtualDevices" : HMIdentifier.en.VirtualDevices,
-    "LabelHomematicIPHeader" : HMIdentifier.de.LabelHomematicIPHeader,
-    "LabelHomeMatic" : HMIdentifier.de.LabelHomeMatic,
+    "LabelHomematicIPHeader" : HMIdentifier.en.LabelHomematicIPHeader,
+    "LabelHomeMatic" : HMIdentifier.en.LabelHomeMatic,
+    "LabelCCU" : HMIdentifier.en.CCUShortName,
     "ccuNotReady" : "The " + HMIdentifier.en.CCUFullNameText + " is not yet ready",
     "ccuNotReadyHint" : "Please wait. You will automatically be redirected to the home page.",
     "loadWebUI" : "Loading...",
@@ -1079,7 +1080,9 @@ jQuery.extend(true,langJSON, {
     "optionLastValue" : "Last value",
     "optionNoModification" : "No change",
     "optionNone" : "None",
-    "optionNotActive" : "Not active"
+    "optionNotActive" : "Not active",
+
+    "HelpTitle" : "Help"
   }
 });
 

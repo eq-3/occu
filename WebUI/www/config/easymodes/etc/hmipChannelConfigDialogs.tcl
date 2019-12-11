@@ -27,7 +27,7 @@ proc getMaintenance {chn p descr} {
 
 
   set param CYCLIC_INFO_MSG
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     set cyclicInfo true
     append html "<tr>"
       append html "<td>\${stringTableCyclicInfoMsg}</td>"
@@ -36,7 +36,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param CYCLIC_INFO_MSG_DIS
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     set cyclicInfo true
     incr prn
     append html "<tr>"
@@ -46,7 +46,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param CYCLIC_INFO_MSG_DIS_UNCHANGED
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     set cyclicInfo true
     incr prn
     append html "<tr>"
@@ -60,7 +60,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param LOW_BAT_LIMIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBatteryLowBatLimit}</td>"
@@ -69,7 +69,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param LOCAL_RESET_DISABLED
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableLocalResetDisable}</td>"
@@ -78,7 +78,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param GLOBAL_BUTTON_LOCK
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableGlobalButtonLock}</td>"
@@ -87,7 +87,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param ROUTER_MODULE_ENABLED
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableRouterModuleEnabled}</td>"
@@ -96,7 +96,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param ENABLE_ROUTING
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     if {$devIsHmIPWired == "false"} {
        incr prn
        append html "<tr>"
@@ -107,7 +107,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param DISPLAY_CONTRAST
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
      incr prn
     array_clear options
     set i 0
@@ -123,7 +123,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param PERMANENT_FULL_RX
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
      append html "[getHorizontalLine]"
      incr prn
     array_clear options
@@ -160,7 +160,7 @@ proc getMaintenance {chn p descr} {
   }
 
   set param LONGITUDE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr name='positionFixing'>"
      append html "<td>\${lblLocation} - \${dialogSettingsTimePositionLblLongtitude}</td>"
@@ -180,7 +180,7 @@ proc getMaintenance {chn p descr} {
 
 proc getKeyTransceiver {chn p descr} {
 
-  global env
+  global env dev_descr
   # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
   upvar $p ps
@@ -196,7 +196,7 @@ proc getKeyTransceiver {chn p descr} {
 set comment {
   # Intruduced with the DBB but currently not supported
   set param DISABLE_ACOUSTIC_CHANNELSTATE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     append html "<tr>"
       append html "<td>\${stringTableDisableAcousticChannelState}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
@@ -207,7 +207,7 @@ set comment {
 }
 
   set param DISABLE_ACOUSTIC_SENDSTATE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     append html "<tr>"
       append html "<td>\${stringTableDisableAcousticSendState}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
@@ -217,7 +217,7 @@ set comment {
   }
 
   set param LED_DISABLE_CHANNELSTATE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     append html "<tr>"
       append html "<td>\${stringTableLEDDisableChannelState}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
@@ -228,7 +228,7 @@ set comment {
 
 
   set param LED_DISABLE_SENDSTATE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     append html "<tr>"
       append html "<td>\${stringTableLEDDisableSendState}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
@@ -256,7 +256,7 @@ set comment {
   }
 
   set param DBL_PRESS_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
       append html "<td>\${stringTableKeyDblPressTime}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
@@ -265,7 +265,7 @@ set comment {
   }
 
   set param LONG_PRESS_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
       append html "<td>\${stringTableKeyLongPressTimeA}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[]</td>"
@@ -274,7 +274,7 @@ set comment {
   }
 
   set param REPEATED_LONG_PRESS_TIMEOUT_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
     append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
     append html [getComboBox $chn $prn "$specialID" "timeOnOffShort"]
@@ -295,6 +295,30 @@ set comment {
   }
   # append html "[getAlarmPanel ps]"
 
+
+  set param ABORT_EVENT_SENDING_CHANNELS
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+
+   append html "[getHorizontalLine]"
+
+   append html "<tr>"
+     append html "<td colspan='2' align='center'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
+   append html "</tr>"
+
+   append html "<tr>"
+   append html "<td>\${lblStopRunningLink}</td>"
+   append html "<td colspan='2'><table>"
+     append html "<tr id='hookAbortEventSendingChannels_1_$chn'/>"
+     append html "<tr id='hookAbortEventSendingChannels_2_$chn'/>"
+   append html "</table></td>"
+   append html "</tr>"
+
+    append html "<script type='text/javascript'>"
+      append html "addAbortEventSendingChannels('$chn','$prn', '$dev_descr(ADDRESS)', $ps($param));"
+    append html "</script>"
+  }
+
   return $html
 }
 
@@ -312,7 +336,7 @@ proc getGenericInputTransmitter {chn p descr} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
 
   set param MIOB_DIN_CONFIG
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableMiobDinConfig}</td>"
@@ -322,7 +346,7 @@ proc getGenericInputTransmitter {chn p descr} {
   }
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
@@ -344,7 +368,7 @@ proc getGenericInputTransmitter {chn p descr} {
   }
 
   set param DBL_PRESS_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr class=\"hidden\" name=\"paramKey_$chn\">"
       append html "<td>\${stringTableKeyDblPressTime}</td>"
@@ -360,7 +384,7 @@ proc getGenericInputTransmitter {chn p descr} {
   }
 
   set param REPEATED_LONG_PRESS_TIMEOUT_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr class=\"hidden\" name=\"paramKey_$chn\">"
     append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
@@ -370,7 +394,7 @@ proc getGenericInputTransmitter {chn p descr} {
   }
 
   set param REPEATED_LONG_PRESS_TIMEOUT_VALUE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
      append html "<td>\${stringTableKeyLongPressTimeOutValue}</td>"
@@ -416,6 +440,8 @@ proc getGenericInputTransmitter {chn p descr} {
 
 proc getMultiModeInputTransmitter {chn p descr address} {
 
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -429,7 +455,9 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   set CHANNEL $special_input_id
 
   set param CHANNEL_OPERATION_MODE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
+    set valueListIndex [expr [lsearch $psDescr($param) VALUE_LIST] +1]
+    set valueList "[lindex $psDescr($param) $valueListIndex]"
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableKeyTransceiverChannelOperationMode}</td>"
@@ -437,13 +465,16 @@ proc getMultiModeInputTransmitter {chn p descr address} {
       set options(0) "\${lblNotActiv}"
       set options(1) "\${stringTableKeyTransceiverChannelOperationModeKeyBehavior}"
       set options(2) "\${stringTableKeyTransceiverChannelOperationModeSwitchBehavior}"
-      set options(3) "\${stringTableKeyTransceiverChannelOperationModeBinaryBehavior}"
+
+      if {[lsearch $valueList BINARY_BEHAVIOR] != -1} {
+        set options(3) "\${stringTableKeyTransceiverChannelOperationModeBinaryBehavior}"
+      }
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn onchange=\"channelOperationModeChange(this.value,'$address')\"]</td>"
     append html "</tr>"
   }
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     set eventDelayPrn $prn
     append html "<tr name=\"multiModeInputTransceiverEventDelay_$chn\">"
@@ -468,7 +499,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
 # ** KEY **
 
   set param DBL_PRESS_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr name=\"multiModeInputTransceiverKey_$chn\">"
       append html "<td>\${stringTableKeyDblPressTime}</td>"
@@ -477,7 +508,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   }
 
   set param LONG_PRESS_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr name=\"multiModeInputTransceiverKey_$chn\">"
       append html "<td>\${stringTableKeyLongPressTimeA}</td>"
@@ -486,7 +517,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   }
 
   set param REPEATED_LONG_PRESS_TIMEOUT_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
 
       incr prn
       append html "<tr name=\"multiModeInputTransceiverKey_$chn\">"
@@ -509,7 +540,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
 # ** END KEY **
 
   set param MSG_FOR_POS_A
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr name=\"multiModeInputTransceiverBinary_$chn\">"
       append html "<td>\${stringTableShutterContactHmIPMsgPosA0}</td>"
@@ -522,7 +553,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   }
 
   set param MSG_FOR_POS_B
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr name=\"multiModeInputTransceiverBinary_$chn\">"
       append html "<td>\${stringTableShutterContactHmIPMsgPosB0}</td>"
@@ -535,13 +566,38 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   }
 
   set param CONTACT_BOOST
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableContactBoost}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
   }
+
+  set param ABORT_EVENT_SENDING_CHANNELS
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+
+    append html "[getHorizontalLine]"
+
+    append html "<tr>"
+      append html "<td colspan='2' align='center'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+
+    append html "<tr>"
+    append html "<td>\${lblStopRunningLink}</td>"
+    append html "<td colspan='2'><table>"
+      append html "<tr id='hookAbortEventSendingChannels_1_$chn'/>"
+      append html "<tr id='hookAbortEventSendingChannels_2_$chn'/>"
+    append html "</table></td>"
+    append html "</tr>"
+
+    append html "<script type='text/javascript'>"
+      append html "addAbortEventSendingChannels('$chn','$prn', '$dev_descr(ADDRESS)', $ps($param));"
+    append html "</script>"
+  }
+
+
 
   append html "<script type=\"text/javascript\">"
 
@@ -618,6 +674,26 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   return $html
 }
 
+proc getAnalogInputTransmitter {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  set prn 1;
+  set param FILTER_SIZE
+  append html "<tr>"
+    append html "<td>\${stringTableAnalogInputTransmitterFilterSize}</td>"
+    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_ANALOG_INPUT_TRANSMITTER 550 250]</td>"
+  append html "</tr>"
+
+  return $html
+}
+
 proc getAnalogOutputTransceiver {chn p descr} {
 
   upvar $p ps
@@ -657,7 +733,7 @@ proc getSwitchTransmitter {chn p descr} {
   set html ""
 
   set param CURRENTDETECTION_BEHAVIOR
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
       append html "<td>\${stringTableCurrentDetectionBehavior}</td>"
       array_clear option
@@ -670,7 +746,7 @@ proc getSwitchTransmitter {chn p descr} {
   }
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -691,7 +767,7 @@ proc getSwitchTransmitter {chn p descr} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -713,7 +789,7 @@ proc getSwitchTransmitter {chn p descr} {
   }
 
   set param LED_DISABLE_CHANNELSTATE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     # In older versions this parameter is not available
      incr prn
      append html "<tr>"
@@ -775,7 +851,7 @@ proc getBlindTransmitter {chn p descr address} {
   set html ""
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -796,7 +872,7 @@ proc getBlindTransmitter {chn p descr address} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -818,7 +894,7 @@ proc getBlindTransmitter {chn p descr address} {
   }
 
   set param CHANGE_OVER_DELAY
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindChangeOverDelay}</td>"
@@ -828,7 +904,7 @@ proc getBlindTransmitter {chn p descr address} {
   }
 
   set param REFERENCE_RUN_COUNTER
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindRefRunCounter}</td>"
@@ -837,7 +913,7 @@ proc getBlindTransmitter {chn p descr address} {
   }
 
   set param ENDPOSITION_AUTO_DETECT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindEndPositionAutoDetect}</td>"
@@ -869,7 +945,7 @@ proc getBlindTransmitter {chn p descr address} {
   # /AUTOCALIBRATION
 
   set param REFERENCE_RUNNING_TIME_BOTTOM_TOP_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableBlindRunnintTimeBottomTop}</td>"
@@ -891,7 +967,7 @@ proc getBlindTransmitter {chn p descr address} {
   }
 
   set param REFERENCE_RUNNING_TIME_TOP_BOTTOM_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableBlindRunningTimeTopBottom}</td>"
@@ -913,7 +989,7 @@ proc getBlindTransmitter {chn p descr address} {
   }
 
   set param REFERENCE_RUNNING_TIME_SLATS_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableJalousieRunningTimeSlats}</td>"
@@ -936,7 +1012,7 @@ proc getBlindTransmitter {chn p descr address} {
   append html "[getHorizontalLine]"
 
   set param DELAY_COMPENSATION
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     # The max value represents the automatic modus.
     set autoDelayCompensation 0
     incr prn
@@ -960,8 +1036,8 @@ proc getBlindTransmitter {chn p descr address} {
 
     append html "<script type=\"text/javascript\">"
 
-      # SPHM-118
-      if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+      # SPHM-118 / SPHM-410
+      if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
         append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
       }
 
@@ -1049,7 +1125,7 @@ proc getShutterTransmitter {chn p descr address} {
   set html ""
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -1068,7 +1144,7 @@ proc getShutterTransmitter {chn p descr address} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -1090,7 +1166,7 @@ proc getShutterTransmitter {chn p descr address} {
   }
 
   set param CHANGE_OVER_DELAY
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindChangeOverDelay}</td>"
@@ -1100,7 +1176,7 @@ proc getShutterTransmitter {chn p descr address} {
   }
 
   set param REFERENCE_RUN_COUNTER
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindRefRunCounter}</td>"
@@ -1109,7 +1185,7 @@ proc getShutterTransmitter {chn p descr address} {
   }
 
   set param ENDPOSITION_AUTO_DETECT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableBlindEndPositionAutoDetect}</td>"
@@ -1140,7 +1216,7 @@ proc getShutterTransmitter {chn p descr address} {
   # /AUTOCALIBRATION
 
   set param REFERENCE_RUNNING_TIME_BOTTOM_TOP_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableBlindRunnintTimeBottomTop}</td>"
@@ -1162,7 +1238,7 @@ proc getShutterTransmitter {chn p descr address} {
   }
 
   set param REFERENCE_RUNNING_TIME_TOP_BOTTOM_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableBlindRunningTimeTopBottom}</td>"
@@ -1184,7 +1260,7 @@ proc getShutterTransmitter {chn p descr address} {
   append html "[getHorizontalLine]"
 
   set param DELAY_COMPENSATION
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     # The max value represents the automatic modus.
     set autoDelayCompensation 0
     incr prn
@@ -1208,8 +1284,8 @@ proc getShutterTransmitter {chn p descr address} {
 
     append html "<script type=\"text/javascript\">"
 
-      # SPHM-118
-      if {[string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1} {
+      # SPHM-118 / SPHM-410
+      if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
         append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
       }
 
@@ -1287,7 +1363,7 @@ proc getDimmerTransmitter {chn p descr} {
   set prn 0
 
   set param CHANNEL_OPERATION_MODE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     array_clear options
     set options(0) "\${optionInactiv}"
@@ -1299,7 +1375,7 @@ proc getDimmerTransmitter {chn p descr} {
 
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
@@ -1321,7 +1397,7 @@ proc getDimmerTransmitter {chn p descr} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -1340,7 +1416,7 @@ proc getDimmerTransmitter {chn p descr} {
   }
 
   set param FUSE_DELAY
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableDimmerFuseDelay}</td>"
@@ -1349,7 +1425,7 @@ proc getDimmerTransmitter {chn p descr} {
   }
 
   set param OVERTEMP_LEVEL
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableDimmerOverTempLevel}</td>"
@@ -1373,7 +1449,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
   set html ""
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -1393,7 +1469,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -1432,7 +1508,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
     set html ""
 
   set param SD_MULTICAST_ZONE_1
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
 
      # This is for the parameter SD_MULTICAST_ZONE_1..7
      append html "<tr>"
@@ -1459,7 +1535,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
   }
 
   set param SILENT_ALARM_ZONE_1
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
 
      # This is for the parameter SILENT_ALARM_ZONE_1..7
      append html "<tr>"
@@ -1508,7 +1584,7 @@ proc getDimmerVirtualReceiver {chn p descr} {
   if {[session_is_expert]} {
     set hr 0
     set param "LOGIC_COMBINATION"
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       set hr 1
       append html "<tr>"
@@ -1522,7 +1598,7 @@ proc getDimmerVirtualReceiver {chn p descr} {
     }
 
     set param "LOGIC_COMBINATION_2"
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       set onClick "VirtualChannel_help($chn);"
       set hr 1
@@ -1546,7 +1622,7 @@ proc getDimmerVirtualReceiver {chn p descr} {
   }
 
   set param POWERUP_JUMPTARGET
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html [getPowerUpSelector $chn ps $special_input_id]
   }
 
@@ -1578,18 +1654,21 @@ proc getBlindVirtualReceiver {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
   set html ""
 
   set prn 0
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableLogicCombinationBlind}</td>"
         option LOGIC_COMBINATION
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "<td rowspan='2'>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"VirtualChannel_help($chn);\"></td>"
       append html "</tr>"
       incr prn
       set param "LOGIC_COMBINATION_2"
@@ -1603,115 +1682,30 @@ proc getBlindVirtualReceiver {chn p descr} {
   }
 
   set param POSITION_SAVE_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTablePositionSaveTime}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
     append html "</tr>"
+    append html "[getHorizontalLine]"
   }
 
   set param POWERUP_JUMPTARGET
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-      option POWERUP_JUMPTARGET_BLIND_OnOff
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
+  if { [info exists ps($param)] == 1  } {
+    append html [getPowerUpSelectorShutterBlind $chn ps $special_input_id blind]
   }
 
-  set param POWERUP_ONDELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  #### HELP
+  append html "<tr><td colspan=\"2\">"
+    append html "<table class=\"ProfileTbl\" id=\"virtual_ch_help_$chn\" style=\"display:none\">"
+    append html "<tr><td>\${virtualHelpTxtDimmer}</td></tr>"
+    append html "</table>"
+  append html "</td></tr>"
 
-    append html "[getHorizontalLine]"
-
-    incr prn
-    append html "<tr>"
-    append html "<td>\${stringTableBlindLevelOnDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShort"]
-    append html "</tr>"
-
-    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-
-
-    incr prn
-    set param POWERUP_ONDELAY_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableOnDelayValue}</td>"
-
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-    append html "</tr>"
-    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-  }
-
-  ## hier hin
-  set param POWERUP_ON_LEVEL
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableBlindLevelUp}</td>"
-      option RAW_0_100Percent
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-  }
-
-  set param POWERUP_ON_LEVEL_2
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableJalousieSlatsLevelUp}</td>"
-      option RAW_0_100Percent_2
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-  }
-
-  set param POWERUP_OFFDELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
-
-    append html "[getHorizontalLine]"
-
-    incr prn
-    append html "<tr>"
-    append html "<td>\${stringTableBlindLevelOffDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShort"]
-    append html "</tr>"
-
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
-
-    incr prn
-    set param POWERUP_OFFDELAY_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableOffDelayValue}</td>"
-
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-    append html "</tr>"
-    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-  }
-
-  set param POWERUP_OFF_LEVEL
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableBlindLevelDown}</td>"
-      option RAW_0_100Percent
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-  }
-
-  set param POWERUP_OFF_LEVEL_2
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableJalousieSlatsLevelDown}</td>"
-      option RAW_0_100Percent_2
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-  }
+  puts "<script type=\"text/javascript\">"
+    puts "jQuery(\".j_helpBtn\").val(translateKey(\"helpBtnTxt\"));"
+  puts "</script>"
 
   return $html
 }
@@ -1724,110 +1718,51 @@ proc getShutterVirtualReceiver {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
   set html ""
 
   set prn 0
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableLogicCombination}</td>"
         option LOGIC_COMBINATION
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        append html "<td>&nbsp<input class=\"j_helpBtn\" id=\"virtual_help_button_$chn\" type=\"button\" value=\${help} onclick=\"VirtualChannel_help($chn);\"></td>"
       append html "</tr>"
       append html "[getHorizontalLine]"
     }
   }
 
   set param POSITION_SAVE_TIME
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTablePositionSaveTime}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 50]</td>"
     append html "</tr>"
+    append html "[getHorizontalLine]"
   }
 
   set param POWERUP_JUMPTARGET
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-      option POWERUP_JUMPTARGET_BLIND_OnOff
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
+  if { [info exists ps($param)] == 1  } {
+    append html [getPowerUpSelectorShutterBlind $chn ps $special_input_id shutter]
   }
 
-  set param POWERUP_ONDELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  #### HELP
+  append html "<tr><td colspan=\"2\">"
+    append html "<table class=\"ProfileTbl\" id=\"virtual_ch_help_$chn\" style=\"display:none\">"
+    append html "<tr><td>\${virtualHelpTxtDimmer}</td></tr>"
+    append html "</table>"
+  append html "</td></tr>"
 
-    append html "[getHorizontalLine]"
-
-    incr prn
-    append html "<tr>"
-    append html "<td>\${stringTableBlindLevelOnDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShort"]
-    append html "</tr>"
-
-    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-
-
-    incr prn
-    set param POWERUP_ONDELAY_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableOnDelayValue}</td>"
-
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-    append html "</tr>"
-    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-  }
-
-  set param POWERUP_ON_LEVEL
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableBlindLevelUp}</td>"
-      option RAW_0_100Percent
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-  }
-
-  set param POWERUP_OFFDELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
-    append html "[getHorizontalLine]"
-    incr prn
-    append html "<tr>"
-    append html "<td>\${stringTableBlindLevelOffDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShort"]
-    append html "</tr>"
-
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
-
-    incr prn
-    set param POWERUP_OFFDELAY_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableOnDelayValue}</td>"
-
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-    append html "</tr>"
-    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-  }
-
-  set param POWERUP_OFF_LEVEL
-  if { ! [catch {set tmp $ps($param)}]  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableBlindLevelDown}</td>"
-      option RAW_0_100Percent
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-  }
+  puts "<script type=\"text/javascript\">"
+    puts "jQuery(\".j_helpBtn\").val(translateKey(\"helpBtnTxt\"));"
+  puts "</script>"
 
   return $html
 }
@@ -1888,7 +1823,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/CC.js');</script>"
 
   set param P6_TEMPERATURE_MONDAY_1
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
       set weeklyPrograms 6
   }
 
@@ -1985,7 +1920,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       # left
 
       set param SHOW_SET_TEMPERATURE
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         array_clear options
         set options(0) "\${stringTableClimateControlRegDisplayTempInfoActualTemp}"
@@ -1997,7 +1932,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
           # right
           set param SHOW_HUMIDITY
-          if {! [catch {set tmp $ps($param)}]} {
+          if {[info exists ps($param)] == 1} {
             incr prn
             array_clear options
             set options(0) "\${stringTableClimateControlRegDisplayTempHumT}"
@@ -2010,7 +1945,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
       # left
       set param BUTTON_RESPONSE_WITHOUT_BACKLIGHT
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append html "<tr>"
         append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableButtonResponseWithoutBacklight}</td>"
@@ -2028,7 +1963,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "<table class=\"ProfileTbl\">"
 
       set param TEMPERATURE_LOWERING_COOLING
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         # left
         incr prn
         append html "<tr><td>\${ecoCoolingTemperature}</td>"
@@ -2066,7 +2001,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       append html "<tr><td>\${stringTableTemperatureMinimum}</td>"
       append html  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $param $ps($param) $chn $prn]</span></td>"
       append html "<script type=\"text/javascript\">"
-      append html "self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+      append html "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
       append html "</script>"
 
       # right
@@ -2082,12 +2017,12 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       append html  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[getTextField $param $ps($param) $chn $prn]</span></td>"
       append html "</tr>"
       append html "<script type=\"text/javascript\">"
-      append html "self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
+      append html "setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );"
       append html "</script>"
       append html "<tr>"
 
       set param MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         # In older versions this parameter is not available
         incr prn
         append html "<tr>"
@@ -2099,7 +2034,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       }
 
       set param OPTIMUM_START_STOP
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append html "<tr>"
         append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableOptimumStartStop}</td>"
@@ -2110,7 +2045,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       }
 
       set param DURATION_5MIN
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         # In older versions this parameter is not available
         incr prn
         append html "<tr name=\"expertParam\" class=\"hidden\">"
@@ -2148,7 +2083,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
     #left
     set param TEMPERATURE_WINDOW_OPEN
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
@@ -2181,7 +2116,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "<hr>"
     append html "<table class=\"ProfileTbl\">"
       set param CHANNEL_OPERATION_MODE
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         array_clear options
         set options(0) "\${optionETRVNormalMode}"
@@ -2192,7 +2127,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       }
 
       set param ACOUSTIC_ALARM_SIGNAL
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append html "<tr>"
           append html "<td>\${lblAcousticAlarmSignal}</td>"
@@ -2236,7 +2171,7 @@ proc getSwitchVirtualReceiver {chn p descr} {
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       set hr 1
       incr prn
       append html "<tr>"
@@ -2250,7 +2185,7 @@ proc getSwitchVirtualReceiver {chn p descr} {
   }
 
   set param POWERUP_JUMPTARGET
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html [getPowerUpSelector $chn ps $special_input_id]
   }
 
@@ -2293,7 +2228,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
   append html "<tr><td colspan='2'><b>\${energyMeterTransmitterHeader}<b/><br/><br/></td></tr>"
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -2314,7 +2249,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -2336,7 +2271,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
   }
 
   set param TX_MINDELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableTxMinDelay}</td>"
@@ -2359,7 +2294,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
   append html [getHorizontalLine]
 
   set param AVERAGING
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTablePowerMeterAveraging}</td>"
@@ -2434,52 +2369,92 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  set helpDlgWidth 450
+  set helpDlgHeight 170
+
   set html ""
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js')</script>"
 
   set param COND_TX_FALLING
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCondTxFalling}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param $helpDlgWidth $helpDlgHeight]</td>"
     append html "</tr>"
   }
 
   set param COND_TX_CYCLIC_BELOW
-    if { ! [catch {set tmp $ps($param)}] } {
+    if { [info exists ps($param)] == 1 } {
       incr prn;
       append html "<tr>"
         append html "<td>&nbsp;&nbsp;\${stringTableCondTxCyclicBelow}</td>"
         append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
       append html "</tr>"
+
+      append html "<script type=\"text/javascript\">"
+        append html "var condTxFallingRisingElm = jQuery('#separate_$specialID\_$chn\_[expr $prn - 1]');"
+        append html "var condTxCyclicBelowAboveElm = jQuery('#separate_$specialID\_$chn\_$prn');"
+
+        append html "if (condTxCyclicBelowAboveElm.is(':checked')) \{"
+          append html "condTxFallingRisingElm.prop('disabled', true);"
+        append html "\}"
+
+        append html "condTxCyclicBelowAboveElm.click(function() \{"
+          append html "var elmIsChecked = jQuery(this).is(':checked');"
+          append html "if (elmIsChecked) \{"
+            append html "condTxFallingRisingElm.prop('checked', true).prop('disabled',true);"
+          append html "\} else \{"
+            append html "condTxFallingRisingElm.prop('disabled',false);"
+          append html "\}"
+        append html "\});"
+      append html "</script>"
     }
 
   append html [getHorizontalLine]
 
   set param COND_TX_RISING
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCondTxRising}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param  $helpDlgWidth $helpDlgHeight]</td>"
     append html "</tr>"
   }
 
   set param COND_TX_CYCLIC_ABOVE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn;
     append html "<tr>"
       append html "<td>&nbsp;&nbsp;\${stringTableCondTxCyclicAbove}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
     append html "</tr>"
+
+      append html "<script type=\"text/javascript\">"
+        append html "var condTxFallingRisingElm = jQuery('#separate_$specialID\_$chn\_[expr $prn - 1]');"
+        append html "var condTxCyclicBelowAboveElm = jQuery('#separate_$specialID\_$chn\_$prn');"
+
+        append html "if (condTxCyclicBelowAboveElm.is(':checked')) \{"
+          append html "condTxFallingRisingElm.prop('disabled', true);"
+        append html "\}"
+
+        append html "condTxCyclicBelowAboveElm.click(function() \{"
+        append html "var elmIsChecked = jQuery(this).is(':checked');"
+        append html "if (elmIsChecked) \{"
+          append html "condTxFallingRisingElm.prop('checked', true).prop('disabled',true);"
+        append html "\} else \{"
+          append html "condTxFallingRisingElm.prop('disabled',false);"
+        append html "\}"
+        append html "\});"
+      append html "</script>"
+
   }
 
   append html [getHorizontalLine]
 
   set param COND_TX_DECISION_BELOW
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCondTxDecisionBelow}</td>"
@@ -2488,7 +2463,7 @@ proc getCondSwitchTransmitter {chn p descr} {
   }
 
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn;
     append html "<tr>"
       append html "<td>\${stringTableCondTxDecisionAbove}</td>"
@@ -2499,13 +2474,13 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   if {[devIsPowerMeter $devType]} {
     set param COND_TX_THRESHOLD_LO
-    if { ! [catch {set tmp $ps($param)}] } {
+    if { [info exists ps($param)] == 1 } {
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableCondThresholdLo}</td>"
         append html "<td>"
 
-          append html "<input id=\"thresLo_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 1000)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
+          append html "<input id=\"thresLo_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
           append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
 
         append html "</td>"
@@ -2513,13 +2488,13 @@ proc getCondSwitchTransmitter {chn p descr} {
     }
 
     set param COND_TX_THRESHOLD_HI
-    if { ! [catch {set tmp $ps($param)}] } {
+    if { [info exists ps($param)] == 1 } {
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableCondThresholdHi}</td>"
         append html "<td>"
 
-          append html "<input id=\"thresHi_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 1000)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
+          append html "<input id=\"thresHi_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
           append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
 
        append html "</td>"
@@ -2527,7 +2502,7 @@ proc getCondSwitchTransmitter {chn p descr} {
     }
   } else {
     set param COND_TX_THRESHOLD_LO
-    if { ! [catch {set tmp $ps($param)}] } {
+    if { [info exists ps($param)] == 1 } {
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableCondThresholdLo}</td>"
@@ -2536,7 +2511,7 @@ proc getCondSwitchTransmitter {chn p descr} {
     }
 
     set param COND_TX_THRESHOLD_HI
-    if { ! [catch {set tmp $ps($param)}] } {
+    if { [info exists ps($param)] == 1 } {
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableCondThresholdHi}</td>"
@@ -2603,7 +2578,7 @@ proc getAccelerationTransceiver {chn p descr} {
   set operationMode $ps(CHANNEL_OPERATION_MODE)
   set html ""
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -2624,7 +2599,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param CHANNEL_OPERATION_MODE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorChannelOperationMode}</td>"
@@ -2658,7 +2633,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param EVENT_FILTER_PERIOD
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorFilterPeriod}</td>"
@@ -2667,7 +2642,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param MSG_FOR_POS_A
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorMessageMovement_$operationMode}</td>"
@@ -2680,7 +2655,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param MSG_FOR_POS_B
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorMessageNoMovement_$operationMode}</td>"
@@ -2693,7 +2668,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorNotificationMovement_$operationMode}</td>"
@@ -2710,7 +2685,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorNotificationNoMovement_$operationMode}</td>"
@@ -2727,7 +2702,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param SENSOR_SENSITIVITY
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorSensorSensivity}</td>"
@@ -2743,7 +2718,7 @@ proc getAccelerationTransceiver {chn p descr} {
   }
 
   set param TRIGGER_ANGLE
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorTriggerAngle}</td>"
@@ -2908,7 +2883,7 @@ proc getShutterContact {chn p descr} {
   set html ""
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -2929,7 +2904,7 @@ proc getShutterContact {chn p descr} {
   }
 
   set param EVENT_FILTER_NUMBER
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventFilterTimeA}</td>"
@@ -2951,7 +2926,7 @@ proc getShutterContact {chn p descr} {
   }
 
   set param MSG_FOR_POS_A
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr><td>"
       array_clear options
@@ -2964,7 +2939,7 @@ proc getShutterContact {chn p descr} {
   }
 
   set param MSG_FOR_POS_B
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr><td>"
       array_clear options
@@ -2994,7 +2969,7 @@ proc getPassageDetector {chn p descr} {
   set html ""
 
   set param ATC_MODE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       array_clear options
@@ -3006,7 +2981,7 @@ proc getPassageDetector {chn p descr} {
   }
 
   set param ATC_ADAPTION_INTERVAL
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       array_clear options
@@ -3034,7 +3009,7 @@ proc getPassageDetector {chn p descr} {
   }
 
   set param EVENT_BLINDTIME_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventBlindTime}</td>"
@@ -3057,7 +3032,7 @@ proc getPassageDetector {chn p descr} {
   }
 
   set param EVENT_TIMEOUT_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventTimeout}</td>"
@@ -3080,7 +3055,7 @@ proc getPassageDetector {chn p descr} {
   }
 
   set param LED_DISABLE_CHANNELSTATE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableLEDDisableChannelState}</td>"
@@ -3089,7 +3064,7 @@ proc getPassageDetector {chn p descr} {
   }
 
   set param SENSOR_SENSITIVITY
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableSensorSensivity}</td>"
@@ -3121,7 +3096,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
   }
 
   set param CHANNEL_OPERATION_MODE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     array_clear options
     set options(0) "\${optionInactiv}"
@@ -3133,7 +3108,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
 
   if {[session_is_expert]} {
     set param COND_TX_DECISION_ABOVE
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr id=\"decisionVal_$chn\" class=\"hidden\">"
         append html "<td>\${stringTableCondValuePassageDetectionRight}</td>"
@@ -3142,7 +3117,7 @@ proc getPassageDetectorDirectionTransmitter {chn p descr} {
     }
 
     set param COND_TX_DECISION_BELOW
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr id=\"decisionVal_$chn\" class=\"hidden\">"
         append html "<td>\${stringTableCondValuePassageDetectionLeft}</td>"
@@ -3183,7 +3158,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   set html ""
 
   set param CHANNEL_OPERATION_MODE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr><td>"
       array_clear options
@@ -3202,7 +3177,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
 
   if {[session_is_expert]} {
     set param COND_TX_DECISION_ABOVE
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr id=\"condTxDecisionAbove_$chn\" class=\"_hidden\">"
         append html "<td id=\"condTxDecisionAboveDescr_$chn\"></td>"
@@ -3211,7 +3186,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
     }
 
     set param COND_TX_DECISION_BELOW
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr id=\"condTxDecisionBelow_$chn\" class=\"_hidden\">"
         append html "<td id=\"condTxDecisionBelowDescr_$chn\"></td>"
@@ -3225,7 +3200,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   append html "<tr id=\"condTxThresholdHeaderB_$chn\"><td colspan=\"2\">\${deltaOfPassesBeforeSendingDecisionVal}</td></tr>"
 
   set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr id=\"condTxThresholdHi_$chn\" class=\"_hidden\">"
       append html "<td id=\"condTxThresholdDescrHi_$chn\"></td>"
@@ -3234,7 +3209,7 @@ proc getPassageDetectorCounterTransmitter {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_LO
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr id=\"condTxThresholdLo_$chn\" class=\"_hidden\">"
       append html "<td id=\"condTxThresholdDescrLo_$chn\"></td>"
@@ -3411,7 +3386,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
   # puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
@@ -3433,7 +3408,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
   }
 
   set param EVENT_FILTER_NUMBER
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     # convert float to int (0.0 = 0)
     set min [expr {int([expr [getMinValue $param]])}]
@@ -3453,7 +3428,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
   }
 
   set param EVENT_FILTER_PERIOD
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorFilterPeriod}</td>"
@@ -3462,7 +3437,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
   }
 
   set param ACOUSTIC_ALARM_SIGNAL
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     array_clear options
     set options(0) "\${stringTableAlarmDisableAcousticSignal}"
@@ -3481,7 +3456,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
 
   }
   set param ACOUSTIC_ALARM_TIMING
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     array_clear options
     set options(0) "\${stringTableAlarmPermanent}"
@@ -3494,7 +3469,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
   }
 
   set param ACOUSTIC_ALARM_TRIGGER
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     array_clear options
     set options(0) "\${stringTableNoAcousticAlarm}"
@@ -3507,7 +3482,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
   }
 
   set param TRIGGER_ANGLE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorTriggerAngle}</td>"
@@ -3531,7 +3506,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
 
 
     set param MSG_FOR_POS_B ;# B = Dry
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
 
         array_clear options
@@ -3544,7 +3519,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
     }
 
     set param MSG_FOR_POS_C ;# C = Moisture
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
         array_clear options
         set options(1) "\${stringTableMsg_Dry}"
@@ -3556,7 +3531,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
     }
 
     set param MSG_FOR_POS_A ;# A = Waterlevel
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
         array_clear options
         set options(1) "\${stringTableMsg_Dry}"
@@ -3586,7 +3561,7 @@ proc getDoorReceiver {chn p descr} {
     set prn 0
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
@@ -3608,7 +3583,7 @@ proc getDoorReceiver {chn p descr} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -3642,7 +3617,7 @@ proc getSimpleSwitchReceiver {chn p descr} {
     set prn 0
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
@@ -3664,7 +3639,7 @@ proc getSimpleSwitchReceiver {chn p descr} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -3698,7 +3673,7 @@ proc getAcousticSignalTransmitter {chn p descr} {
     set prn 0
 
   set param EVENT_DELAY_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
@@ -3720,7 +3695,7 @@ proc getAcousticSignalTransmitter {chn p descr} {
   }
 
   set param EVENT_RANDOMTIME_UNIT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableRandomTime}</td>"
@@ -3755,7 +3730,7 @@ proc getAcousticSignalVirtualReceiver {chn p descr} {
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
         append html "<td>\${stringTableLogicCombination}</td>"
@@ -3767,7 +3742,7 @@ proc getAcousticSignalVirtualReceiver {chn p descr} {
   }
 
   set param POWERUP_JUMPTARGET
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     append html [getPowerUpSelectorAcousticSignal $chn ps $special_input_id]
   }
   return $html

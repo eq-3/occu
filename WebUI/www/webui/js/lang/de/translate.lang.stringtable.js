@@ -378,6 +378,8 @@ jQuery.extend(true,langJSON, {
     "stringTableErrorOverheatTrue" : "%DCberhitzung: Ja",
     "stringTableErrorOverloadFalse" : "Strom%FCberlastung: Nein",
     "stringTableErrorOverloadTrue" : "Strom%FCberlastung: Ja",
+    "stringTableErrorPowerFailureFalse" : "Spannungsversorgung OK",
+    "stringTableErrorPowerFailureTrue" : "Spannungsversorgung fehlerhaft",
     "stringTableErrorPowerFalse" : "Netzspannung fehlerhaft",
     "stringTableErrorPowerTrue" : "Netzspannung OK",
     "stringTableErrorReducedFalse" : "volle Leistung m%F6glich",
@@ -1169,6 +1171,11 @@ jQuery.extend(true,langJSON, {
     "stringTableErrorBadRechargeableBatteryHealthFalse" : "Akkuzustand: OK",
     "stringTableErrorBadRechargeableBatteryHealthTrue" : "Akkuzustand: nicht OK",
 
+    "stringTablePowerUpAction" : "Aktion bei Spannungszufuhr",
+
+    "stringTableLevelStatus" : "Status Level",
+    "stringTableLevel" : "Wert",
+    "stringTableLevelReal" : "Wert",
 
     "noMoreKeys" : ""
 

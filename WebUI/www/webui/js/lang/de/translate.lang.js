@@ -30,6 +30,7 @@ jQuery.extend(true,langJSON, {
     "VirtualDevices" : HMIdentifier.de.VirtualDevices,
     "LabelHomematicIPHeader" : HMIdentifier.de.LabelHomematicIPHeader,
     "LabelHomeMatic" : HMIdentifier.de.LabelHomeMatic,
+    "LabelCCU" : HMIdentifier.de.CCUShortName,
 
     "ccuNotReady" : "Die " + HMIdentifier.de.CCUFullNameText + " ist noch nicht bereit",
     "ccuNotReadyHint" : "Bitte warten. Sie werden automatisch auf die Startseite weitergeleitet.",
@@ -1003,7 +1004,9 @@ jQuery.extend(true,langJSON, {
     "optionLastValue" : "Letzter Wert",
     "optionNoModification" : "Keine %C4nderung",
     "optionNone" : "Keine",
-    "optionNotActive" : "Nicht aktiv"
+    "optionNotActive" : "Nicht aktiv",
+
+    "HelpTitle" : "Hilfe"
   }
 });
 

@@ -49,7 +49,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
     # A wired blind cannot only be a blind but a shutter as well!!
-    if {[string equal $devIface HmIPW] == 1} {
+    if {([string equal $devIface HmIPW] == 1) || ([string equal $devType HmIP-DRBLI4] == 1)} {
 
       # Determine the current channelMode
       set devMode [xmlrpc $url getMetadata [list string $address] channelMode]
@@ -128,11 +128,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
           puts "if (hintIndicator > 0) {"
             puts "var arHints = \['', 'hintWiredBlindLinksAvailable', 'hintWiredBlindProgramsAvailable', 'hintWiredBlindLinksAndProgramsAvailable'\]"
-            if {[session_is_expert]} {
+
+            puts "if (oChannel.hasProgramIds()) \{"
               puts "var hintAffectedChannels = (oChannel.index) + ', ' + (oChannel.index + 1) + ', ' + (oChannel.index + 2) + ', ' + (oChannel.index + 3);"
-            } else {
-              puts "var hintAffectedChannels = (oChannel.index) + ', ' + (oChannel.index + 1);"
-            }
+            puts "\} else \{"
+              puts "var hintAffectedChannels = (oChannel.index + 1) + ', ' + (oChannel.index + 2) + ', ' + (oChannel.index + 3);"
+            puts "\}"
+
             puts "jQuery(\"#hintLinksProgramsAvailable_$chn\").html(translateKey(arHints\[hintIndicator\]) + translateKey(\"hintCheckChannels\") + hintAffectedChannels);"
             puts "jQuery(\"#hintLinksProgramsHR_$chn\").show();"
             puts "jQuery(\"#modeSelector_\"+oChannel.device.address+\"_$chn\").prop(\"disabled\", true);"

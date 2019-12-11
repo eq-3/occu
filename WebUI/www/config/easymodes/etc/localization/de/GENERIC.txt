@@ -44,6 +44,10 @@
 "helpDecisionValAndThreshold" : "<span class=\"translated\">Der Entscheidungswert und der obere/untere Grenzwert sind Kanalparameter des Senders und m&uuml;ssen korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 "helpDecisionVal" : "<span class=\"translated\">Der Entscheidungswert ist ein Kanalparameter des Senders und muss korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
+"longKeyPressActiveInactive" : "Langer Tastendruck",
+"optionDisable" : "Nicht aktiv",
+"optionEnable" : "Aktiv",
+
 "helpBtnChannelConfiguration" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Senders entsprechend konfiguriert sein. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
 "helpBtnChannelConfigurationMotionDetectorGeneric" : "Die Einschaltdauer des Aktors sollte immer etwas gr%F6sser sein, als der 'Mindestsendeabstand' des Sensors. ",

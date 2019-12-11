@@ -13,9 +13,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set chn [getChannel $special_input_id]
 
-  # array set paramSet [xmlrpc $iface_url($iface) getParamset [list string $address] [list string MASTER]]
-  # puts "chn: $chn - channel operation mode: $paramSet(CHANNEL_OPERATION_MODE)<br/>"
-
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
     switch $ps(CHANNEL_OPERATION_MODE) {
       0 {append HTML_PARAMS(separate_1) "[getInactiveHTML $address $chn ps psDescr]" }

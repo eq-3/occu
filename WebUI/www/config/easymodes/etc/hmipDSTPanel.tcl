@@ -53,7 +53,7 @@ proc getDSTPanel {p descr} {
     set chn 0
 
     set param DAYLIGHT_SAVINGS_TIME
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       set html "<tr>"
         append html "<td>\${DSTSwitchAutomatically}</td>"
         append html "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"

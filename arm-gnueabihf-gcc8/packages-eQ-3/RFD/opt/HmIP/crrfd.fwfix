@@ -1,0 +1,46 @@
+{
+	"divergentDeviceTypes" : [
+		{
+			"deviceTypeId": 277,
+			"manufacturerCode": 1,
+			"companyPrefix" : 4047986,
+			"oemPrefix": "MO",
+			"virtualManufacturerCode": 65535
+		},
+		{
+			"deviceTypeId": 278,
+			"manufacturerCode": 1,
+			"companyPrefix" : 4047986,
+			"oemPrefix": "MO",
+			"virtualManufacturerCode": 65535
+		},
+		{
+			"deviceTypeId": 279,
+			"manufacturerCode": 1,
+			"companyPrefix" : 4047986,
+			"oemPrefix": "MO",
+			"virtualManufacturerCode": 65535
+		},
+		{
+			"deviceTypeId": 280,
+			"manufacturerCode": 1,
+			"companyPrefix" : 4047986,
+			"oemPrefix": "MO",
+			"virtualManufacturerCode": 65535
+		},
+		{
+			"deviceTypeId": 283,
+			"manufacturerCode": 1,
+			"companyPrefix" : 4047986,
+			"oemPrefix": "MO",
+			"virtualManufacturerCode": 65535
+		},
+		{
+			"deviceTypeId": 261,
+			"manufacturerCode": 1,
+			"companyPrefix" : 4047986,
+			"oemPrefix": "MO",
+			"virtualManufacturerCode": 65535
+		}
+	]
+}

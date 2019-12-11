@@ -391,7 +391,99 @@
       }, "html");
       dialog.btnTextNo(translateKey("footerBtnCancel"));
       dialog.btnTextYes(translateKey("footerBtnOk"));
+    });
+  };
 
+  setBlindLevelController = function(regaDialogID, param, chAddress) {
+    var ch = DeviceList.getChannelByAddress(chAddress),
+      virtChannelType = (typeof ch.virtChannelType != "undefined") ? ch.virtChannelType : "";
+
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID); // this is the element which contains the relevant string to transmit
+
+    if (virtChannelType == "SHUTTER_VIRTUAL_RECEIVER") {
+      var url = "/pages/msg/setShutterVirtualReceiverCombinedParam.htm";
+      elm.val(elm.val().split(",")[0]);
+    } else {
+      var url = "/pages/msg/setBlindVirtualReceiverCombinedParam.htm";
+    }
+
+    jQuery(elm).prop("disabled", true);
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+      var dialog = new BlindCombinedParamDialog(translateKey("titleConfigDialog"), htmlContent, jQuery(elm).val(), virtChannelType, function (result) {
+        jQuery(elm).prop("disabled", false);
+        if (result != 0) {
+          conInfo("setBlindLevelController: Yes pressed");
+          var cfgString = this.getConfigString();
+          conInfo(cfgString);
+          elm.val(cfgString);
+          elm.change();
+        }
+      }, "html");
+      dialog.btnTextNo(translateKey("footerBtnCancel"));
+      dialog.btnTextYes(translateKey("footerBtnOk"));
+      dialog.setWidth(400);
+    });
+  };
+
+  setDimmerLevelController = function(regaDialogID, deviceType, chnAddress) {
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
+    url = "/pages/msg/setDimmerVirtualReceiverCombinedParam.htm";
+    jQuery(elm).prop("disabled", true);
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+      var dialog = new DimmerCombinedParamDialog(translateKey("titleConfigDialog"), htmlContent, deviceType, chnAddress ,jQuery(elm).val(), function(result) {
+        jQuery(elm).prop("disabled", false);
+          if (result != 0) {
+            conInfo("setDimmerLevelController: Yes pressed");
+            var cfgString = this.getConfigString();
+            conInfo(cfgString);
+            elm.val(cfgString);
+            elm.change();
+          }
+
+      }, "html");
+      dialog.btnTextNo(translateKey("footerBtnCancel"));
+      dialog.btnTextYes(translateKey("footerBtnOk"));
+      dialog.setWidth(400);
+    });
+  };
+
+  setSwitchStateController = function (regaDialogID, deviceType, chnAddress) {
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
+      url = "/pages/msg/setSwitchVirtualReceiverCombinedParam.htm";
+    jQuery(elm).prop("disabled", true);
+
+    var req = jQuery.ajax({
+      url: url + "?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function (htmlContent) {
+      var dialog = new SwitchCombinedParamDialog(translateKey("titleConfigDialog"), htmlContent, deviceType, chnAddress, jQuery(elm).val(), function (result) {
+        jQuery(elm).prop("disabled", false);
+        if (result != this.RESULT_NO) {
+          conInfo("setSwitchStateController: Yes pressed");
+          var cfgString = this.getConfigString();
+          conInfo(cfgString);
+          elm.val(cfgString);
+          elm.change();
+        }
+
+      }, "html");
+      dialog.btnTextNo(translateKey("footerBtnCancel"));
+      dialog.btnTextYes(translateKey("footerBtnOk"));
+      dialog.setWidth(400);
     });
   };
 
@@ -527,13 +619,11 @@
       if (result) {
         window.setTimeout(function() {
           iseSingleDestination.SetChannel(scid, result);
-          // Necessary for the COMBINED_PARAMETER of the HmIP-WRCD
-          var chn = DeviceList.getChannel(result);
-          if (chn.channelType == "ACOUSTIC_DISPLAY_RECEIVER") {
-            window.setTimeout(function () {
-              jQuery("#setDestinationDPSelectChange" + scid).change();
-            }, 750);
-          }
+          // Necessary for the COMBINED_PARAMETER
+          window.setTimeout(function () {
+            jQuery("#setDestinationDPSelectChange" + scid).change();
+            jQuery("#prgStringOptionValue"+scid).change();
+          }, 750);
         },500);
       }
     };
@@ -568,8 +658,12 @@
       var sIDX = dpid.substr(iPosColon+1);
       iseSingleDestination.reload = false;
       iseSingleDestination.SetValueAndDP(chid,sIDX,sDPID, elem);
-      //iseSingleDestination.SetDP(chid,sDPID);
-    }   
+
+      // Necessary for the COMBINED_PARAMETER
+      window.setTimeout(function() {
+        jQuery("#prgStringOptionValue"+chid).change();
+      }, 500);
+    }
   };
   DestinationParamSelectChange = function(idx,sdid)
   {

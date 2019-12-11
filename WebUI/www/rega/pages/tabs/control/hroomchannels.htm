@@ -139,30 +139,30 @@
             bShow = true;
           }
 
-          boolean bShowChannel = false;
+          !  boolean bShowChannel = false;
+          !  if (user.UserEasyLinkMode() != true) {
+          !    ! User is expert
+          !    bShowChannel = true;
+          !  } else {
+          !    if (chn.HssType().Find("VIRTUAL_") == -1) {
+          !        ! not a virtual channel
+          !        bShowChannel = true;
+          !    } else {
+          !      if (chn.HssType().Find("VIRTUAL_KEY") != -1) {
+          !        ! virtual key of the ccu
+          !        bShowChannel = true;
+          !      }
+          !    }
+          !  }
 
-          if (user.UserEasyLinkMode() != true) {
-            ! User is expert
-            bShowChannel = true;
-          } else {
-            if (chn.HssType().Find("VIRTUAL_") == -1) {
-                ! not a virtual channel
-                bShowChannel = true;
-            } else {
-              if (chn.HssType().Find("VIRTUAL_KEY") != -1) {
-                ! virtual key of the ccu
-                bShowChannel = true;
-              }
-            }
-          }
+          !  if ((sInterface != "HmIP-RF") && (sInterface != "HmIP-Wired")  && (sInterface != "VirtualDevices")) {
+          !    Call("/esp/functions.fn::showHideRFChannel()");
+          !  } else {
+          !    Call("/esp/functions.fn::showHideHmIPChannel()");
+          !  }
 
-          if ((sInterface != "HmIP-RF") && (sInterface != "HmIP-Wired")  && (sInterface != "VirtualDevices")) {
-            Call("/esp/functions.fn::showHideRFChannel()");
-          } else {
-            Call("/esp/functions.fn::showHideHmIPChannel()");
-          }
-
-          if( bShow && chn.ReadyConfig() && oDev.ReadyConfig() && bShowChannel )
+          ! if( bShow && chn.ReadyConfig() && oDev.ReadyConfig() && bShowChannel )
+          if( bShow && chn.ReadyConfig() && oDev.ReadyConfig())
           {
             string trId = room.ID()#tmp;
             boolean showExtDesc = false;
@@ -218,6 +218,19 @@
                 object mode = dom.GetObject(chn.Address());
                 if (mode.MetaData("channelMode") == "shutter") {
                   Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_SHUTTER_VIRTUAL_RECEIVER}</span>");
+                  showExtDesc = true;
+                }
+              }
+
+              if ((chn.HssType() == "ROTARY_CONTROL_TRANSCEIVER") && (chn.Label() == "HmIP-WRCR") ) {
+
+                integer chnNumber = chn.Address().StrValueByIndex(":",1).ToInteger();
+                if (chnNumber == 2) {
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TR}</span>");
+                  showExtDesc = true;
+                }
+                if (chnNumber == 3) {
+                  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TL}</span>");
                   showExtDesc = true;
                 }
               }

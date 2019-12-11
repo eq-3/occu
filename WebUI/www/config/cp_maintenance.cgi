@@ -286,6 +286,12 @@ proc action_firmware_update_cancel {} {
   if {[getProduct] < 3} {
     catch {exec rm /var/new_firmware.tar.gz}
     catch { exec /bin/sh -c "rm /var/EULA.*"}
+    cgi_javascript {
+      puts {
+        homematic('User.startHmIPServer',{});
+        InterfaceMonitor.start();
+      }
+    }
   } else {
    catch { exec /bin/sh -c "rm -rf `readlink -f /usr/local/.firmwareUpdate` /usr/local/.firmwareUpdate" }
    catch { exec /bin/sh -c "rm -f /usr/local/tmp/EULA.*"}
@@ -405,7 +411,7 @@ proc action_put_page {} {
                   table {
                     table_row {
                       table_data {
-                        division {class="CLASS20908" style="display: none"} {id="btnFwDownload"} {} "onClick=\"window.location.href='$REMOTE_FIRMWARE_SCRIPT?cmd=download&version=$cur_version&serial=$serial&lang=de&product=HM-CCU2';\"" {}
+                        division {class="CLASS20908" style="display: none"} {id="btnFwDownload"} {} "onClick=\"window.location.href='$REMOTE_FIRMWARE_SCRIPT?cmd=download&version=$cur_version&serial=$serial&lang=de&product=HM-CCU[getProduct]';\"" {}
                         division {class="CLASS20908"}  "onClick=\"showCCULicense();\"" {puts "\${dialogSettingsCMBtnPerformSoftwareUpdateDownload}"}
                       }
                     }
@@ -440,7 +446,7 @@ proc action_put_page {} {
                   table {
                     table_row {
                       table_data {
-                        division {class="CLASS20919"} {onClick="document.firmware_form.submit();showUserHint();"} {
+                        division {class="CLASS20919"} {onClick="stopHmIPServer();document.firmware_form.submit();showUserHint();"} {
                           puts "\${dialogSettingsCMBtnPerformSoftwareUpdateUpload}"
                         }
                       }
@@ -799,16 +805,23 @@ proc action_put_page {} {
     puts {
 
       showUserHint = function() {
-      var elem = jQuery('#fwUpload');
-      if (elem.length == 0) {
-        MessageBox.show(
-        translateKey('dialogSettingsCMDialogHintPerformFirmwareUploadTitle'),
-        translateKey('dialogSettingsCMDialogHintPerformFirmwareUploadContent')+
-        ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>',
-        '','320','105','fwUpload', 'msgBoxBarGraph');
-      } else {
-        elem.show();
+        var elem = jQuery('#fwUpload');
+        if (elem.length == 0) {
+          MessageBox.show(
+          translateKey('dialogSettingsCMDialogHintPerformFirmwareUploadTitle'),
+          translateKey('dialogSettingsCMDialogHintPerformFirmwareUploadContent')+
+          ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>',
+          '','320','105','fwUpload', 'msgBoxBarGraph');
+        } else {
+          elem.show();
+        }
       }
+
+      stopHmIPServer = function() {
+        if( getProduct() < 3 ) {
+          InterfaceMonitor.stop();
+          homematic('User.stopHmIPServer' , {} );
+        }
       }
     }
 
@@ -900,6 +913,12 @@ proc action_firmware_upload {} {
       set action "acceptEula"
     } else {
       file delete -force -- [lindex $firmware_file 0]
+      cgi_javascript {
+        puts {
+          homematic('User.startHmIPServer',{});
+          InterfaceMonitor.start();
+        }
+      }
       set action "firmware_update_invalid"
     }
   } else {

@@ -16,7 +16,7 @@ proc getAlarmPanel {p} {
   set hlpBoxHeight 80
 
   set param ALARM_MODE_ZONE_1
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
 
    append html "[getHorizontalLine]"
 
@@ -47,7 +47,7 @@ proc getAlarmPanel {p} {
   }
 
   set param ALARM_MODE_TYPE
-  if { (! [catch {set tmp $ps($param)}]) && (! [catch {set tmp $ps(DBL_PRESS_TIME)}])  } {
+  if { ([info exists ps($param)] == 1) && (! [catch {set tmp $ps(DBL_PRESS_TIME)}])  } {
     incr prn
     array_clear options
     set options(0) "\${ALARM_FOR_ZONES}"

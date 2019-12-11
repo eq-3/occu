@@ -71,7 +71,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 
   if {($cur_profile == 1) && ($ps(SHORT_CT_OFF) != 2)} {
-    puts "putParamset<br/>"
     set modifiedCondType  "{SHORT_CT_OFF {int 2}} {SHORT_CT_OFFDELAY {int 2}} {SHORT_CT_ON {int 2}} {SHORT_CT_ONDELAY {int 2}}"
     catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"}
     set ps(SHORT_CT_OFF) 2

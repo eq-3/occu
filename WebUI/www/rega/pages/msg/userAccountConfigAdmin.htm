@@ -390,6 +390,7 @@
 
     var olduserlevel = -1;
     var bn = $("fullName").value;
+    bn = bn.trim();
     
     if ($("txtPw").value != $("txtPw2").value)
     {
@@ -409,6 +410,15 @@
       alert(translateKey("alertEmptyUsername"));
       return;
     }
+    
+    //check for white spaces
+    if(bn.search(/\w\s/) != -1) 
+    {
+      alert(translateKey("alertUsernameForbiddenChars"));
+      return;
+    }
+
+    //check for illegal special chars
     if (!(isTextAllowed(bn,1))) return;
     
     if (userExists(buildUserName()))

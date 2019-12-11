@@ -35,7 +35,7 @@
    	  s += "<table cellspacing='8'>";
    	  s += "<tr>";
    	  s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>"+ translateKey('footerBtnPageBack') +"</div></td>";
- 			s += "<td align='center' valign='middle'><div class='FooterButton' onclick='addNewFirware();'>"+ translateKey('footerBtnNew') +"</div></td>";
+ 			s += "<td align='center' valign='middle'><div class='FooterButton' onclick='addNewFirmware();'>"+ translateKey('footerBtnNew') +"</div></td>";
  			// s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(DeviceFirmwareInformation);'>"+ translateKey('deviceFirmwareInformation') +"</div></td>";
       setFooter(s);
 
@@ -76,7 +76,7 @@
         });
       };
 
-      addNewFirware = function() {
+      addNewFirmware = function() {
         try {
           var tmp = new FormData();
         } catch(e) {
@@ -84,6 +84,45 @@
           return;
         }
         var file;
+
+        /* This we can use when we need a hint for a high duty cycle before uploading a device firmware
+        elemHidden = "",
+        dcVal = 0,
+        dcWarningLevel = 40,
+        ifaceBidCosRF = "BidCos-RF";
+
+        var BidCosIFaces = homematic("Interface.listBidcosInterfaces", {"interface": ifaceBidCosRF});
+        console.log(BidCosIFaces);
+
+        jQuery.each(BidCosIFaces, function(index, iFace) {
+          if (iFace.type == "CCU2") {
+            if (typeof iFace.dutyCycle != "undefined") {
+              dcVal = parseInt(iFace.dutyCycle);
+            }
+          }
+        });
+
+        if (dcVal >= dcWarningLevel) {
+          var btnTxt = translateKey("lblIgnore");
+          elemHidden="visibilityHidden";
+          var msgContent = "<span class='attention'>"+translateKey('hintDevFwUpdateDCHigh')+"</span><br/><br/>";
+
+          msgContent += "<div style='text-align:center'><input type='button' value='"+btnTxt+"' onclick='jQuery(\".visibilityHidden\").removeClass(\"visibilityHidden\");jQuery(this).addClass(\"visibilityHidden\");'></div>";
+
+          msgContent += "<span class='"+elemHidden+"'><b>"+translateKey("addFirmwareMsgBody")+"</b></span><br/><br/>";
+        } else {
+          elemHidden = "";
+          //Waehle die gewuenschte Firmware:
+          var msgContent = "<b>"+translateKey("addFirmwareMsgBody")+"</b><br/><br/>";
+        }
+
+        msgContent += "<form id='fileupload' class='"+elemHidden+"' name='fileupload' enctype='multipart/form-data' method='post'>"
+        msgContent += "  <fieldset>"
+        msgContent += "    <input type='file' name='fileselect' id='fileselect'></input>"
+        msgContent += "  </fieldset>"
+        msgContent += "</form>"
+        */
+
         //var msgContent = "<b>Waehle die gewuenschte Firmware:</b><br/><br/>";
         var msgContent = "<b>"+translateKey("addFirmwareMsgBody")+"</b><br/><br/>";
 
@@ -132,7 +171,7 @@
         jQuery(".YesNoDialog_noButton").text(translateKey("btnCancel"));
       };
 
-      // This is for IE8 and IE9 neccessary
+      // This is necessary for IE8 and IE9
       addFirmwareOldFashioned = function() {
 
         var msgContent = "<b>"+translateKey("addFirmwareMsgBody")+"</b><br/><br/>";

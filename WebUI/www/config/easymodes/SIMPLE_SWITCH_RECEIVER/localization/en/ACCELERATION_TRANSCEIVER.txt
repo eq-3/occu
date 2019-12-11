@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">According to the selected switching mode, the switch is switched for the desired time into the opposite status (toggle function).</span><br/><br/>",
-"description_2" : "<span class=\"translated\">According to the selected switching mode, the switch will be switched on for the desired time.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">According to the selected switching mode, the switch will be switched off for the desired time.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">According to the selected switching mode, the light of the garage door drive is switched on or off (toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">According to the selected switching mode, the light of the garage door drive is switched on.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">According to the selected switching mode, the light of the garage door drive is switched off.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">The sensor is not active</span>",
 
 "subset_1": "Motion/vertical",

@@ -42,10 +42,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn)  "\${hint_no_expert}<br/><br/>"
 
   set param PERMANENT_FULL_RX
-  if { ! [catch {set tmp $dev_descr($param)}]  } {
+  if {[info exists dev_descr(PERMANENT_FULL_RX)]} {
     if {($dev_descr_sender(PARENT)) != ($dev_descr_receiver(PARENT))} {
       append HTML_PARAMS(separate_$prn) "<div>\${hintPermanentFullRX}</div>"
-      append HTML_PARAMS(separate_$prn) "<input type=\"button\" value=\"\${btnChnEdit}\" onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_receiver(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" >"
+      append HTML_PARAMS(separate_$prn) "<input type=\"button\" value=\"\${btnChnEdit}\" onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$maintenanceChannelAddress', 'redirect_url': 'IC_SETPROFILES'});\" >"
     }
   }
 

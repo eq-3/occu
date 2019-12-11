@@ -48,86 +48,51 @@ reverseString = function (str) {
 
 setWPTargetChannels = function(thisElm, chn, prn) {
   var targetElm = jQuery("#separate_CHANNEL_"+chn+"_"+prn),
-   iActiveChannels = parseInt(targetElm.val()),
-   selectedVal = parseInt(thisElm.value);
+    chkBoxElems = jQuery("[name='"+thisElm.name+"']:checked"),
+    selVal = 0;
 
-  if (thisElm.checked) {
-    iActiveChannels += selectedVal;
-  } else {
-    iActiveChannels -= selectedVal;
-  }
-
-  this.curTargetChannels = iActiveChannels;
-
-  targetElm.val(iActiveChannels);
-
-};
-
-getOnlyNonExpertChannels = function(devId, chn) {
-  var result = null,
-  arEasyChannels = [];
-  chn = parseInt(chn);
-
-  var arNonExpertChannels = [];
-
-  arNonExpertChannels["HMIP-FDT"] = [2];
-  arNonExpertChannels["HMIP-FSM"] = [2];
-  arNonExpertChannels["HMIP-FSM16"] = [2];
-  arNonExpertChannels["HMIP-PCBS"] = [3];
-  arNonExpertChannels["HMIP-PCBS-BAT"] = [3];
-  arNonExpertChannels["HMIP-PCBS2"] = [4, 8];
-  arNonExpertChannels["HMIP-PDT"] = [3];
-  arNonExpertChannels["HMIP-PDT-UK"] = [3];
-  arNonExpertChannels["HMIP-PS"] = [3];
-  arNonExpertChannels["HMIP-PSM"] = [3];
-  arNonExpertChannels["HMIP-PSM-CH"] = [3];
-  arNonExpertChannels["HMIP-PSM-IT"] = [3];
-  arNonExpertChannels["HMIP-PSM-PE"] = [3];
-  arNonExpertChannels["HMIP-PSM-UK"] = [3];
-
-  arNonExpertChannels["HMIP-BBL"] = [4];
-  arNonExpertChannels["HMIP-BDT"] = [4];
-  arNonExpertChannels["HMIP-BROLL"] = [4];
-  arNonExpertChannels["HMIP-BSM"] = [4];
-  arNonExpertChannels["HMIP-FBL"] = [4];
-  arNonExpertChannels["HMIP-FROLL"] = [4];
-
-
-  arNonExpertChannels["HMIP-BSL"] = [4,8,12];
-  arNonExpertChannels["HMIP-MOD-OC8"] = [10,14,18,22,26,30,34,38];
-  arNonExpertChannels["HMIP-WHS2"] = [3,7];
-  arNonExpertChannels["HMIP-MIOB"] = [2,6];
-  arNonExpertChannels["HMIP-MP3P"] = [2,6];
-  arNonExpertChannels["HMIPW-DRBL4"] = [2,6,10,14];
-  arNonExpertChannels["HMIPW-DRD3"] = [2,6,10];
-  arNonExpertChannels["HMIPW-DRS4"] = [2,6,10,14];
-  arNonExpertChannels["HMIPW-DRS8"] = [2,6,10,14,18,22,26,30];
-  arNonExpertChannels["HMIPW-FIO6"] = [8,12,16,20,24,28];
-  arNonExpertChannels["HMIP-MIO16-PCB"] = [18,22,26,30,34,38,42,46];
-
-  jQuery.each(arNonExpertChannels[devId.toUpperCase()], function(index,val) {
-    if (val == chn){
-      result = chn;
-      return false; // leave the each loop
-    }
+  jQuery.each(chkBoxElems, function(index, elem) {
+    selVal += parseInt(jQuery(elem).val());
   });
 
-  return result;
+  targetElm.val(selVal);
+
 };
 
-getWPVirtualChannels = function(devId, channels, expert) {
+getOnlyExpertChannels = function(channelType, channelNr) {
+  var result = null;
+    if (
+      channelType == "DIMMER_VIRTUAL_RECEIVER" ||
+      channelType == "SWITCH_VIRTUAL_RECEIVER" ||
+      channelType == "BLIND_VIRTUAL_RECEIVER" ||
+      channelType == "SHUTTER_VIRTUAL_RECEIVER" ||
+      channelType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER"
+    ) {
+      virtChnCounterWP = (virtChnCounterWP >= 3) ? 0 : virtChnCounterWP;
+      virtChnCounterWP++;
+      if (virtChnCounterWP == 1) {
+        return channelNr;
+      } else {
+        return null;
+      }
+    }
+  return result;
+
+};
+
+getWPVirtualChannels = function(channels, expert) {
   var result = [];
 
   jQuery.each(channels, function(index, chn) {
     var virtualChID = "_VIRTUAL_RECEIVER",
-      noExpertChn;
+      expertChn;
     if (chn.channelType.indexOf(virtualChID) !== -1) {
       if (expert == 1) {
         result.push(index);
       } else {
-       noExpertChn = getOnlyNonExpertChannels(devId, index);
-        if (noExpertChn) {
-          result.push(noExpertChn);
+       expertChn = getOnlyExpertChannels(chn.channelType, index);
+        if (expertChn) {
+          result.push(expertChn);
         }
       }
     }
@@ -140,7 +105,7 @@ HmIPWeeklyProgram = Class.create();
 HmIPWeeklyProgram.prototype = {
   initialize: function (address, ps, psDescr, sessionIsExpert) {
     self = this;
-
+    virtChnCounterWP = 0;
     this.DIMMER = "DIMMER_WEEK_PROFILE";
     this.DIMMER_OUTPUT_BEHAVIOUR = "DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE";
     this.SWITCH = "SWITCH_WEEK_PROFILE";
@@ -170,13 +135,40 @@ HmIPWeeklyProgram.prototype = {
     this.curWeekdays = 0;
     this.curTargetChannels = 0;
     this.targetChannelTypes = {};
+    this.showHintExpertTargetChannel = false;
 
     this.targetChannelTypesVirtualBlind = [];  // only in use for some wired blinds which can be used as a shutter
+
+    this.arColorA = [],
+    this.arColorB = [],
 
     this.anchor = jQuery("#weeklyProgram_" + this.chn);
     this.maxEntries = this._getMaxEntries();
 
-    this.virtualChannels = getWPVirtualChannels(this.device.deviceType.id, this.device.channels, this.sessionIsExpert);
+    // Prüfe, ob im vereinfachten Modus Expertenkanäle aktiv sind. Wenn ja, zeige auch Targetkanäle des Expertenmodus an
+    if (this.sessionIsExpert == 0) {
+      var AvailableVirtualChannels = getWPVirtualChannels(this.device.channels, 1);
+      for (var x = 1; x <= this.maxEntries; x++) {
+        if (self.sessionIsExpert == 1) {break;} // When the expert mode has been activated, the check can be left.
+        val = this.ps[this._addLeadingZero(x) + "_WP_TARGET_CHANNELS"]; // Get the value of the selected target channel
+
+        if (val > 1) { // The first target channel is always visible (no expert channel)
+          jQuery.each(AvailableVirtualChannels, function (index, ch) {
+            var y = index / 3;
+            if ((y != 0) && (y != parseInt(y))) { // select target channels 1,2,4,5,7,8,10,11.... which are expert channels
+              // If the expert target channel is set, switch to the expert mode
+              if (isBitSet(val, index)) {
+                self.sessionIsExpert = 1;
+                self.showHintExpertTargetChannel = true;
+                return false; // leave each loop
+              }
+            }
+          });
+        }
+      }
+    }
+
+    this.virtualChannels = getWPVirtualChannels(this.device.channels, this.sessionIsExpert);
 
     // The HmIP-BSL consists of SWITCH and DIMMER channels. For the weekly program we are currently using only the SWITCH channels.
     if (this._isDeviceType("HmIP-BSL")) {
@@ -212,6 +204,10 @@ HmIPWeeklyProgram.prototype = {
         jQuery("#weeklyProgramNotActive").hide();
       }, 250);
     }
+    if (this.showHintExpertTargetChannel) {
+      window.setTimeout(function() {jQuery("[name='hintWeeklyProgramActiveExpertChannel']").show();},250);
+    }
+    window.setTimeout(function() {delete virtChnCounterWP;},5000);
   },
 
   hasActiveVirtualBlindReceiver: function() {
@@ -311,7 +307,7 @@ HmIPWeeklyProgram.prototype = {
                 programEntry += "<td name='elmSlatPos_"+number+"'>" + translateKey('lblWPSlatLevel') + "</td>";
                 programEntry += "<td name='elmSlatPos_"+number+"'>" + this._getSlatLevel(number);
                 if (this.isWired) {
-                  programEntry += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' alt='' onclick='showSlatPosHelp();'>";
+                  programEntry += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px;' alt='' onclick='showSlatPosHelp();'>";
                 }
                 programEntry += "</td>";
               }
@@ -354,6 +350,19 @@ HmIPWeeklyProgram.prototype = {
             programEntry += "</tr>";
           programEntry += "</td>";
         programEntry += "</tr>";
+
+        if (this.virtualChannels.length > 1) {
+          programEntry += "<tr name='hintWeeklyProgramActiveExpertChannel' class='hidden'>";
+            programEntry += "<td></td>";
+            programEntry += "<td colspan='5'>"+translateKey('hintWeeklyProgramActiveExpertChannel')+"</td>";
+          programEntry += "</tr>";
+
+          programEntry += "<tr>";
+            programEntry += "<td>" + translateKey('lblSelectTargetChannels') + "</td>";
+            programEntry += "<td>" + this._getPanelSelectTargetChannels(this.chn, number, this.prn) + "</td>";
+          programEntry += "</tr>";
+        }
+        programEntry += this._getHR();
 
         // Is the next entry not active AND it's not the last one? If so, then allow to add a new one.
         if ((this.ps[(this._addLeadingZero(parseInt(number) + 1)) + "_WP_WEEKDAY"] == "0") && (parseInt(number) < this.maxEntries)) {
@@ -420,7 +429,7 @@ HmIPWeeklyProgram.prototype = {
         result += "<option value='"+loop+"' "+selected+">"+arOptions[loop]+"</option>";
       }
     result += "</select>";
-    result += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' alt='' onclick='showConditionHelp();'>";
+    result += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px;' alt='' onclick='showConditionHelp();'>";
 
     return result;
   },
@@ -431,7 +440,7 @@ HmIPWeeklyProgram.prototype = {
     valMin = (this.activeEntries[number] == true ) ? parseInt(this.ps[number +"_WP_FIXED_MINUTE"]) : 0,
     curTime = this._addLeadingZero(valHr) + ":" + this._addLeadingZero(valMin);
 
-    result += "<input type='text' id='fixedTime"+number+"' style='text-align:center' maxlength='5' size='7' value='"+curTime+"'  onblur='checkWPFixedTime(this, "+this.chn+","+(parseInt(this.prn)+1)+")'>";
+    result += "<input type='text' id='fixedTime"+number+"' style='text-align:center;' maxlength='5' size='7' value='"+curTime+"'  onblur='checkWPFixedTime(this, "+this.chn+","+(parseInt(this.prn)+1)+")'>";
 
     result += "<script type='text/javascript'>";
     result += "jQuery( '#fixedTime"+number+"').on( 'keydown', function(event) {";
@@ -616,73 +625,6 @@ HmIPWeeklyProgram.prototype = {
     return result;
   },
 
-  /*
-  _getOutputBehaviourDimActor: function(number) {
-    var result = "",
-      paramID = number + "_WP_OUTPUT_BEHAVIOUR",
-      val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]) : 0,
-      arColor = [
-        translateKey("colorBLACK"),
-        translateKey("colorBLUE"),
-        translateKey("colorGREEN"),
-        translateKey("colorTURQUOISE"),
-        translateKey("colorRED"),
-        translateKey("colorPURPLE"),
-        translateKey("colorYELLOW"),
-        translateKey("colorWHITE"),
-      ];
-
-    this.prn++;
-    result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"'>";
-      jQuery.each(arColor, function(index,color) {
-        result += "<option  value='"+index+"'>"+color+"</option>";
-      });
-      result += "<option value='253'>"+translateKey("randomPlayback")+"</option>";
-      result += "<option value='254'>"+translateKey("colorOldValue")+"</option>";
-    result += "</select>";
-
-    result += "<script type='text/javascript'>";
-      result += "window.setTimeout(function(){";
-        result += "jElm = jQuery('#separate_CHANNEL_"+this.chn+"_"+this.prn+"');";
-        result += "jElm.val('"+val+"');";
-        // don`t use jQuery - the dirty flag will not be recognized
-        result += "document.getElementById('separate_CHANNEL_"+this.chn+"_"+this.prn+"')[jElm.prop('selectedIndex')].defaultSelected = true;";
-      result += "},250);";
-    result += "</script>";
-
-
-
-    return result;
-  },
- */
-  /*
-  _getOutputBehaviourDimMP3Player: function(number) {
-    var result = "",
-      paramID = number + "_WP_OUTPUT_BEHAVIOUR",
-      val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]) : 0;
-
-    this.prn++;
-    result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"'>";
-      result += "<option value='0'>"+translateKey("internalSystemSound")+"</option>";
-      for (var loop = 1; loop <= 252; loop++) {
-        result += "<option value='"+loop+"'>"+loop+"</option>";
-      }
-      result += "<option value='253'>"+translateKey("randomPlayback")+"</option>";
-      result += "<option value='254'>"+translateKey("soundOldValue")+"</option>";
-    result += "</select>";
-
-    result += "<script type='text/javascript'>";
-      result += "window.setTimeout(function(){";
-        result += "jElm = jQuery('#separate_CHANNEL_"+this.chn+"_"+this.prn+"');";
-        result += "jElm.val('"+val+"');";
-        // don`t use jQuery - the dirty flag will not be recognized
-        result += "document.getElementById('separate_CHANNEL_"+this.chn+"_"+this.prn+"')[jElm.prop('selectedIndex')].defaultSelected = true;";
-      result += "},50);";
-    result += "</script>";
-
-    return result;
-  },
-*/
   _getLevel: function(number) {
     var result = "",
     paramID = number +"_WP_LEVEL",
@@ -710,17 +652,17 @@ HmIPWeeklyProgram.prototype = {
     this.prn++;
      result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"' onchange='showHideDuration(this.value, "+number+");'>";
       if ((this.chnType == this.DIMMER) || (this.chnType == this.BLIND)) {
-
+        var loop;
         if ((this.chnType == this.DIMMER)) {
           result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
-          for (var loop = 5; loop <= 100; loop += 5) {
+          for (loop = 5; loop <= 100; loop += 5) {
             optionVal = (loop / 100).toFixed(3);
             result += (val == optionVal) ?  "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
           }
           result += (val == 1.005) ? "<option value='1.005' selected='selected'>"+translateKey('optionOldLevel')+"</option>" : "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
           result += (val == 1.01) ? "<option value='1.010' selected='selected'>"+translateKey('optionNoChange')+"</option>" : "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
         } else {
-          for (var loop = 0; loop <= 100; loop += 5) {
+          for (loop = 0; loop <= 100; loop += 5) {
             optionVal = (loop / 100).toFixed(3);
             result += (val == optionVal) ? "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
           }
@@ -741,25 +683,47 @@ HmIPWeeklyProgram.prototype = {
 
   },
 
+  _getArColor: function(index) {
+    return (index == 0)
+      ?
+      [
+        translateKey("colorBLACK"),
+        translateKey("colorBLUE"),
+        translateKey("colorGREEN"),
+        translateKey("colorTURQUOISE"),
+        translateKey("colorRED"),
+        translateKey("colorPURPLE"),
+        translateKey("colorYELLOW"),
+        translateKey("colorWHITE")
+      ]
+      :
+      [
+        "",
+        translateKey("colorBLUE"),
+        translateKey("colorGREEN"),
+        translateKey("colorTURQUOISE"),
+        translateKey("colorRED"),
+        translateKey("colorPURPLE"),
+        translateKey("colorYELLOW"),
+        translateKey("colorWHITE")
+      ];
+
+
+  },
+
   _getColorSelector: function (number) {
     var result = "",
     paramID = number + "_WP_OUTPUT_BEHAVIOUR",
-    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]) : 0,
-    arColor = [
-      translateKey("colorBLACK"),
-      translateKey("colorBLUE"),
-      translateKey("colorGREEN"),
-      translateKey("colorTURQUOISE"),
-      translateKey("colorRED"),
-      translateKey("colorPURPLE"),
-      translateKey("colorYELLOW"),
-      translateKey("colorWHITE"),
-    ];
+    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]) : 0;
+
+    if (this.arColorA.length == 0) {
+      this.arColorA = this._getArColor(0);
+    }
 
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"' dataid='color_"+number+"'>";
       result += (val == 253) ? "<option value='253' selected='selected'>"+translateKey("randomPlayback")+"</option>" : "<option value='253'>"+translateKey("randomPlayback")+"</option>" ;
       result += (val == 254) ? "<option value='254' selected='selected'>"+translateKey("colorOldValue")+"</option>" : "<option value='254'>"+translateKey("colorOldValue")+"</option>" ;
-      jQuery.each(arColor, function(index,color) {
+      jQuery.each(this.arColorA, function(index,color) {
         result += (val == index) ? "<option  value='"+index+"'  selected='selected'>"+color+"</option>" : "<option  value='"+index+"'>"+color+"</option>";
       });
     result += "</select>";
@@ -789,28 +753,23 @@ HmIPWeeklyProgram.prototype = {
   _getColorSoundSelector: function (number) {
     var result = "",
     paramID = number + "_WP_OUTPUT_BEHAVIOUR",
-    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]) : 0,
-    arColor = [
-      "",
-      translateKey("colorBLUE"),
-      translateKey("colorGREEN"),
-      translateKey("colorTURQUOISE"),
-      translateKey("colorRED"),
-      translateKey("colorPURPLE"),
-      translateKey("colorYELLOW"),
-      translateKey("colorWHITE"),
-    ];
+    val = (this.activeEntries[number] == true ) ? (1 * this.ps[paramID]) : 0;
+
+    if (this.arColorB.length == 0) {
+      this.arColorB = this._getArColor(1);
+    }
 
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+paramID+"' dataid='soundColor_"+number+"'>";
       result += (val == 0) ? "<option value='0' selected='selected'>"+translateKey("soundColorInternal") +"</option>" : "<option value='0'>"+translateKey("soundColorInternal") +"</option>";
       result += (val == 253) ? "<option value='253' selected='selected'>"+translateKey("soundColorRandomPlayback")+"</option>" : "<option value='253'>"+translateKey("soundColorRandomPlayback")+"</option>";
       result += "<option value='254'>"+translateKey("soundColorOldValue")+"</option>";
+      var loop;
 
-      for (var loop = 1; loop <= 7; loop++) {
-        result += (val == loop) ? "<option value='"+loop+"' selected='selected'>"+loop+" / "+arColor[loop]+"</option>" : "<option value='"+loop+"'>"+loop+" / "+arColor[loop]+"</option>";
+      for (loop = 1; loop <= 7; loop++) {
+        result += (val == loop) ? "<option value='"+loop+"' selected='selected'>"+loop+" / "+this.arColorB[loop]+"</option>" : "<option value='"+loop+"'>"+loop+" / "+this.arColorB[loop]+"</option>";
       }
 
-      for (var loop = 8; loop <= 252; loop++) {
+      for (loop = 8; loop <= 252; loop++) {
         result += (val == loop) ? "<option value='"+loop+"' selected='selected'>"+loop+"</option>" : "<option value='"+loop+"'>"+loop+"</option>";
       }
     result += "</select>";
@@ -920,7 +879,6 @@ HmIPWeeklyProgram.prototype = {
     var result = "";
     var paramID = number +"_WP_TARGET_CHANNELS";
     var val = (this.activeEntries[number] == true ) ? parseInt(this.ps[paramID]) : 0;
-    var hasBlind = false;
 
     var valCheckBox,
     tmpVal;
@@ -931,7 +889,6 @@ HmIPWeeklyProgram.prototype = {
 
     blindAvailable = function(elm,  number) {
       if (self.isWired) {
-        var elmID = elm.id.split("_")[1];
         var arActiveChkBoxes = jQuery("[name='" + elm.name + "']:checked");
         var elmSlatPos = jQuery("[name='elmSlatPos_" + self._addLeadingZero(number) + "']");
         var showElmSlatPos = false;
@@ -953,12 +910,12 @@ HmIPWeeklyProgram.prototype = {
     };
 
     setDimmerOutputBehaviour = function(elm, number) {
-      var number = self._addLeadingZero(number),
-      paramID = number + "_WP_OUTPUT_BEHAVIOUR",
+      number = self._addLeadingZero(number);
+
+      var paramID = number + "_WP_OUTPUT_BEHAVIOUR",
       arActiveChkBoxes = jQuery("[name='" + elm.name + "']:checked"),
-      elmLblRamptime = jQuery('#lblWPRamptime_' + number),
       chType,
-        activeElmID = "",
+      activeElmID = "",
       elmLblBrightness = jQuery('#lblWPBrightness_' + number),
       hasDimmerVirtReceiver = false,
       hasAcousticVirtReceiver = false,
@@ -1017,6 +974,11 @@ HmIPWeeklyProgram.prototype = {
 
     result += "<table><tbody><tr>";
 
+      var cssCounter,
+        colorLight = "#e9e9e9",
+        colorDark = "#d9d9d9",
+        cssColor = colorDark;
+
       jQuery.each(this.virtualChannels,function(index,value){
         if (self.sessionIsExpert) {
           valCheckBox = Math.pow(2,index);
@@ -1030,8 +992,17 @@ HmIPWeeklyProgram.prototype = {
           }
         }
 
+        if (self.sessionIsExpert && (self.virtualChannels.length > 3)) {
+          cssCounter = index / 3;
+          if ((cssCounter != 0) && (cssCounter == parseInt(cssCounter))) {
+            cssColor = (cssColor == colorLight) ? colorDark : colorLight;
+          }
+        } else {
+          cssColor = "white";
+        }
+
         result += "<td>";
-          result += "<label for='targetChannel"+number+"_"+index+"'>"+self.virtualChannels[index]+"</label>";
+          result += "<label for='targetChannel"+number+"_"+index+"' style='background-color:"+cssColor+"; display:block; text-align:center;'>"+self.virtualChannels[index]+"</label>";
           if (self.chnType == self.BLIND) {
             result += "<input id='targetChannel" + number + "_" + index + "' data='" + self.targetChannelTypesVirtualBlind[index] + "' name='targetChannel" + self.chn + "_" + number + "' type='checkbox' value='" + valCheckBox + "' onchange='setWPTargetChannels(this," + self.chn + "," + self.prn + ");blindAvailable(this," + number + ");'>";
           } else if (self.device.channels[self.chn].channelType == self.DIMMER_OUTPUT_BEHAVIOUR) {
@@ -1138,6 +1109,40 @@ HmIPWeeklyProgram.prototype = {
     return result;
   },
 
+  _getPanelSelectTargetChannels: function(chn, number, prn) {
+    var result = "",
+      self = this;
+
+    selectTargetChannel1stVirt = function (chn, number, prn) {
+      selectTargetChannelNone(chn, number);
+      jQuery("#separate_CHANNEL_"+chn+"_"+prn).val(0);
+      self._initTargetChannels(parseInt(number) - 1);
+
+    };
+
+    selectTargetChannelAll = function(chn,number, prn) {
+      number = (parseInt(number) < 10) ? "0"+number : number;
+      var arTargetChannels = jQuery("[name='targetChannel"+ chn +"_"+ number +"']");
+      jQuery("#separate_CHANNEL_"+chn+"_"+prn).val(0);
+      jQuery(arTargetChannels).attr('checked', true).change();
+    };
+
+    selectTargetChannelNone = function(chn,number, prn) {
+      number = (parseInt(number) < 10) ? "0"+number : number;
+      var arTargetChannels = jQuery("[name='targetChannel"+ chn +"_"+ number +"']");
+      jQuery("#separate_CHANNEL_"+chn+"_"+prn).val(0);
+      jQuery(arTargetChannels).attr('checked', false).change();
+    };
+
+    if (this.sessionIsExpert) {
+      result += "<input id='btnSelect1stVirtual_" + chn + "' type='button' value='" + translateKey('btnSelect1stVirTargetChannels') + "' style='margin-right: 10px;' onclick='selectTargetChannel1stVirt(" + chn + ", " + number + ", " + prn + ");'>";
+    }
+    result += "<input type='button' value='"+translateKey('btnSelectAllTargetChannels')+"' style='margin-right: 10px;' onclick='selectTargetChannelAll("+chn+", "+number+", "+prn+");'>";
+    result += "<input type='button' value='"+translateKey('btnSelectNoTargetChannels')+"' onclick='selectTargetChannelNone("+chn+", "+number+", "+prn+");'>";
+
+    return result;
+  },
+
   _getTargetChannelTypes: function() {
     var self = this;
     jQuery.each(this.virtualChannels, function(index,chn) {
@@ -1158,8 +1163,6 @@ HmIPWeeklyProgram.prototype = {
     });
     return result;
   },
-
-
 
   _getHR: function() {
     return "<tr><td colspan='6'><hr></td></tr>";
@@ -1245,11 +1248,20 @@ HmIPWeeklyProgram.prototype = {
   _initTargetChannels: function(number) {
     var arTargetChannels = jQuery("[name='targetChannel"+this.chn +"_"+ this._addLeadingZero(parseInt(number +1))+"']"),
       elmTargetValue = jQuery("[name='"+this._addLeadingZero(parseInt(number +1))+"_WP_TARGET_CHANNELS']"),
-      targetValue = 0;
+      targetValue = 0,
+      virtChnCounter = 0;
 
     jQuery.each(arTargetChannels, function(index,elm) {
-      jQuery(elm).attr('checked', true);
-      targetValue += parseInt(jQuery(elm).val());
+      // At first unset all target channels
+      jQuery(elm).attr('checked', false);
+
+      // SPHM-367 - activate only the first virtual channel
+      if (!self.sessionIsExpert || virtChnCounter == 0) {
+        jQuery(elm).attr('checked', true);
+        targetValue += parseInt(jQuery(elm).val());
+      }
+      virtChnCounter++;
+      virtChnCounter = (virtChnCounter >= 3) ? 0 : virtChnCounter;
     });
     elmTargetValue.val(targetValue);
   },

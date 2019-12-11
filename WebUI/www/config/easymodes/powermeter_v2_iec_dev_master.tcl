@@ -94,9 +94,20 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<tr class=\"j_IECSensor\">"
     append HTML_PARAMS(separate_1) "<td>\${stringTableDZGCompatibilityMode}</td>"
     append HTML_PARAMS(separate_1) "<td>"
-     append HTML_PARAMS(separate_1) "[getCheckBox '$param' $ps($param) $prn]"
+     append HTML_PARAMS(separate_1) "[getCheckBox '$param' $ps($param) $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight / 2]]"
     append HTML_PARAMS(separate_1) "</td>"
   append HTML_PARAMS(separate_1) "</tr>"
+
+  set param ELSTER_COMPATIBILITY_MODE
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append HTML_PARAMS(separate_1) "<tr class=\"j_IECSensor\">"
+      append HTML_PARAMS(separate_1) "<td>\${stringTableElsterCompatibilityMode}</td>"
+      append HTML_PARAMS(separate_1) "<td>"
+       append HTML_PARAMS(separate_1) "[getCheckBox '$param' $ps($param) $prn]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight / 2]]"
+      append HTML_PARAMS(separate_1) "</td>"
+    append HTML_PARAMS(separate_1) "</tr>"
+  }
 
   incr prn
   set param BAUDRATE

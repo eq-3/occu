@@ -209,7 +209,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     # left
     set param BUTTON_RESPONSE_WITHOUT_BACKLIGHT
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableButtonResponseWithoutBacklight}</td>"
@@ -225,7 +225,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
     set param TEMPERATURE_LOWERING_COOLING
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       # left
       incr prn
       append HTML_PARAMS(separate_1) "<tr><td>\${ecoCoolingTemperature}</td>"
@@ -258,7 +258,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureMinimum}</td>"
     append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
+    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
     append HTML_PARAMS(separate_1) "</script>"
 
     # right
@@ -274,7 +274,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param tmp_$CHANNEL\_$prn ps $param onchange=setMinMaxTemp('tmp_$CHANNEL\_$prn','separate_$CHANNEL\_$prn')]</span> <span class='hidden'>[_getTextField $CHANNEL '$param' $ps($param) $prn]</span></td>"
     append HTML_PARAMS(separate_1) "</tr>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {self.setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
+    append HTML_PARAMS(separate_1) "try{window.setTimeout(function() {setMinMaxTempOption('tmp_$CHANNEL\_$prn', 'separate_$CHANNEL\_$prn' );},100);} catch(e){}"
     append HTML_PARAMS(separate_1) "</script>"
 
     #left
@@ -327,7 +327,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 
     set param DURATION_5MIN
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       # In older versions this parameter is not available
       incr prn
       append HTML_PARAMS(separate_1) "<tr name=\"expertParam\" class=\"hidden\">"
@@ -425,14 +425,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         set options($val) "[expr int($val * 100)] %"
       }
       set param VALVE_ERROR_RUN_POSITION
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append HTML_PARAMS(separate_1) "<td>\${stringTableValveStateErrorPosition}</td>"
         append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
       }
 
       set param VALVE_MAXIMUM_POSITION
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append HTML_PARAMS(separate_1) "<td>\${stringTableValveMaximumPosition}</td>"
         append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param][getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td>"
@@ -440,7 +440,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "</tr>"
 
     set param VALVE_OFFSET
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append HTML_PARAMS(separate_1) "<tr>"
         append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableValveOffset}</td>"
@@ -449,7 +449,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     }
 
     set param BOOST_AFTER_WINDOW_OPEN
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td name=\"expertParam\" class=\"hidden\">\${stringTableBoostAfterWindowOpen}</td>"
@@ -464,7 +464,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<hr>"
     append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
         set param CHANNEL_OPERATION_MODE
-        if { ! [catch {set tmp $ps($param)}]  } {
+        if { [info exists ps($param)] == 1  } {
           incr prn
           array_clear options
           set options(0) "\${optionETRVNormalMode}"
@@ -475,7 +475,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         }
 
         set param ACOUSTIC_ALARM_SIGNAL
-        if { ! [catch {set tmp $ps($param)}]  } {
+        if { [info exists ps($param)] == 1  } {
           incr prn
           append HTML_PARAMS(separate_1) "<tr>"
             append HTML_PARAMS(separate_1) "<td>\${lblAcousticAlarmSignal}</td>"

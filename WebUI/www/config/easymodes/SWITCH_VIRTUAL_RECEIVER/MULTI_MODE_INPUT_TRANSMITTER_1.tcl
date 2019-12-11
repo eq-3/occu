@@ -36,7 +36,7 @@ set PROFILE_1(LONG_ONDELAY_TIME_FACTOR)       {0 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_BASE)              {7 range 0 - 7}
 set PROFILE_1(LONG_ON_TIME_FACTOR)            {31 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_MODE)              0
-set PROFILE_1(LONG_PROFILE_ACTION_TYPE)       1
+set PROFILE_1(LONG_PROFILE_ACTION_TYPE)       {1 0}
 set PROFILE_1(SHORT_COND_VALUE_HI)          150
 set PROFILE_1(SHORT_COND_VALUE_LO)           50
 set PROFILE_1(SHORT_CT_OFF)                   0
@@ -69,10 +69,10 @@ set PROFILE_2(LONG_CT_OFF)                    0
 set PROFILE_2(LONG_CT_OFFDELAY)               0
 set PROFILE_2(LONG_CT_ON)                     0
 set PROFILE_2(LONG_CT_ONDELAY)                0
-set PROFILE_2(LONG_JT_OFF)                    {1 6}
+set PROFILE_2(LONG_JT_OFF)                    6
 set PROFILE_2(LONG_JT_OFFDELAY)               6
 set PROFILE_2(LONG_JT_ON)                     {4 6}
-set PROFILE_2(LONG_JT_ONDELAY)                {3 6}
+set PROFILE_2(LONG_JT_ONDELAY)                6
 set PROFILE_2(LONG_MULTIEXECUTE)              {0 6}
 set PROFILE_2(LONG_OFFDELAY_TIME_BASE)        {0 range 0 - 7}
 set PROFILE_2(LONG_OFFDELAY_TIME_FACTOR)      {0 range 0 - 31}
@@ -84,7 +84,7 @@ set PROFILE_2(LONG_ONDELAY_TIME_FACTOR)       {0 range 0 - 31}
 set PROFILE_2(LONG_ON_TIME_BASE)              7
 set PROFILE_2(LONG_ON_TIME_FACTOR)            31
 set PROFILE_2(LONG_ON_TIME_MODE)              0
-set PROFILE_2(LONG_PROFILE_ACTION_TYPE)       1
+set PROFILE_2(LONG_PROFILE_ACTION_TYPE)       {1 0}
 set PROFILE_2(SHORT_COND_VALUE_HI)          150
 set PROFILE_2(SHORT_COND_VALUE_LO)           50
 set PROFILE_2(SHORT_CT_OFF)                   0
@@ -132,7 +132,7 @@ set PROFILE_3(LONG_ONDELAY_TIME_FACTOR)       {0 range 0 - 31}
 set PROFILE_3(LONG_ON_TIME_BASE)              {7 range 0 - 7}
 set PROFILE_3(LONG_ON_TIME_FACTOR)            {31 range 0 - 31}
 set PROFILE_3(LONG_ON_TIME_MODE)              0
-set PROFILE_3(LONG_PROFILE_ACTION_TYPE)       1
+set PROFILE_3(LONG_PROFILE_ACTION_TYPE)       {1 0}
 set PROFILE_3(SHORT_COND_VALUE_HI)          150
 set PROFILE_3(SHORT_COND_VALUE_LO)           50
 set PROFILE_3(SHORT_CT_OFF)                   0
@@ -225,6 +225,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     # *** LONG KEYPRESS ***
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 
+    # Long key press activ/inactive
+    append HTML_PARAMS(separate_$prn) [getDeactivateLongKeypress ps PROFILE_$prn separate_receiver $prn]
+
     # ONDELAY
     append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_ONDELAY_TIME TIMEBASE_LONG]"
 
@@ -257,6 +260,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {$longKeypressAvailable} {
       # *** LONG KEYPRESS ***
       append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+
+      # Long key press activ/inactive
+      append HTML_PARAMS(separate_$prn) [getDeactivateLongKeypress ps PROFILE_$prn separate_receiver $prn]
+
       # OFFDELAY
       append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_OFFDELAY_TIME TIMEBASE_LONG]"
 
@@ -296,6 +303,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {$longKeypressAvailable} {
       # *** LONG KEYPRESS ***
       append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+
+      # Long key press activ/inactive
+      append HTML_PARAMS(separate_$prn) [getDeactivateLongKeypress ps PROFILE_$prn separate_receiver $prn]
 
       # ONDELAY
       append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id LONG_ONDELAY_TIME TIMEBASE_LONG]"

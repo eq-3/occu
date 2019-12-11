@@ -37,7 +37,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   set prn 0
 
   set param CYCLIC_INFO_MSG
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCyclicInfoMsg}</td>"
@@ -46,7 +46,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param CYCLIC_INFO_MSG_DIS
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCyclicInfoMsgDis}</td>"
@@ -55,7 +55,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param CYCLIC_INFO_MSG_DIS_UNCHANGED
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCyclicInfoMsgDisUnChanged}</td>"
@@ -64,7 +64,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param LOCAL_RESET_DISABLED
-  if { ! [catch {set tmp $ps($param)}] } {
+  if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableLocalResetDisable}</td>"
@@ -73,7 +73,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param ENABLE_ROUTING
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     if {$devIsHmIPWired == "false"} {
       incr prn
       append html "<tr>"
@@ -89,7 +89,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   append html "[getHorizontalLine]"
 
   set param COOLING_EMERGENCY_PWM_SIGNAL
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblCoolingEmergencyPWMSignal}</td>"
@@ -98,7 +98,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param HEATING_EMERGENCY_PWM_SIGNAL
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblHeatingEmergencyPWMSignal}</td>"
@@ -107,7 +107,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param FROST_PROTECTION_TEMPERATURE
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblFrostProtectionTemperature}</td>"
@@ -116,7 +116,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param HEATING_LOAD_TYPE
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblHeatingLoadType}</td>"
@@ -126,7 +126,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param HEATING_PUMP_CONTROL
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblHeatingPumpControl}</td>"
@@ -136,12 +136,33 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param HEATING_VALVE_TYPE
-  if { ! [catch {set tmp $ps($param)}]} {
+  if { [info exists ps($param)] == 1} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblHeatingValveType}</td>"
       option HEATING_VALVE_TYPE
       append html  "<td>[getOptionBox $param options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
+
+  set param PWM_AT_LOW_VALVE_POSITION
+  if { [info exists ps($param)] == 1 } {
+    append html "[getHorizontalLine]"
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTablePWMatLowValvePosition}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+
+  set param ON_MIN_LEVEL
+  if { [info exists ps($param)] == 1} {
+    incr prn
+    append html "<tr>"
+      option ON_MIN_LEVEL_10_25Percent
+      append html "<td>\${stringTableOnMinLevel}</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
   }
 
@@ -151,7 +172,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
     # SWITCHING_INTERVAL_BASE and INTERVAL_FACTOR
 
     set param SWITCHING_INTERVAL_BASE
-    if { ! [catch {set tmp $ps($param)}]} {
+    if { [info exists ps($param)] == 1} {
       append html "[getHorizontalLine]"
       incr prn
       append html "<tr>"
@@ -201,7 +222,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
      }
   } else {
     set param DECALCIFICATION_WEEKDAY
-    if { ! [catch {set tmp $ps($param)}]} {
+    if { [info exists ps($param)] == 1} {
       append html "[getHorizontalLine]"
       incr prn
       append html "<tr>"
@@ -313,7 +334,7 @@ proc getClimateControlHeatDemandPumpTransmitter {chn p descr} {
   set prn 0
 
   set param ONDELAY_TIME_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn;
     append html "<tr>"
     append html "<td>\${lblLeadTime}</td>"
@@ -336,7 +357,7 @@ proc getClimateControlHeatDemandPumpTransmitter {chn p descr} {
 
   # next
   set param OFFDELAY_TIME_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn;
     append html "<tr>"
     append html "<td>\${lblFollowUpTime}</td>"
@@ -359,7 +380,7 @@ proc getClimateControlHeatDemandPumpTransmitter {chn p descr} {
 
   # next
   set param SWITCHING_INTERVAL_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn;
     append html "<tr>"
     append html "<td>\${lblDecalcificationInterval}</td>"
@@ -382,7 +403,7 @@ proc getClimateControlHeatDemandPumpTransmitter {chn p descr} {
 
   # next
   set param ON_TIME_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn;
     append html "<tr>"
     append html "<td>\${stringTableOnTime}</td>"

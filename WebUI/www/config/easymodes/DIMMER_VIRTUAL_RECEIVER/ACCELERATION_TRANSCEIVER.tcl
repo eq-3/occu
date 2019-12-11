@@ -11,8 +11,8 @@ set PROFILES_MAP(0) "\${expert}"
 set PROFILES_MAP(1) "\${dimmer_toggle}"
 set PROFILES_MAP(2) "\${dimmer_on}"
 set PROFILES_MAP(3) "\${dimmer_off}"
+set PROFILES_MAP(4) "\${dimmer_on_off}"
 
-# set PROFILES_MAP(2) "\${change_signal}"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)   "Expertenprofil"
@@ -165,6 +165,60 @@ set PROFILE_3(UI_TEMPLATE)  $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
 
 
+set PROFILE_4(SHORT_COND_VALUE_HI) 151
+set PROFILE_4(SHORT_COND_VALUE_LO) 50
+
+set PROFILE_4(SHORT_CT_OFF)      {0 2}
+set PROFILE_4(SHORT_CT_OFFDELAY) {0 2}
+set PROFILE_4(SHORT_CT_ON)       {1 2}
+set PROFILE_4(SHORT_CT_ONDELAY)  {1 2}
+set PROFILE_4(SHORT_CT_RAMPOFF)  {0 2}
+set PROFILE_4(SHORT_CT_RAMPON)   {0 2}
+
+set PROFILE_4(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
+set PROFILE_4(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
+set PROFILE_4(SHORT_DIM_STEP) 0.050000
+
+set PROFILE_4(SHORT_JT_OFF)       {1 2}
+set PROFILE_4(SHORT_JT_OFFDELAY)  {2 3}
+set PROFILE_4(SHORT_JT_ON)        {1 4}
+set PROFILE_4(SHORT_JT_ONDELAY)   {1 6}
+set PROFILE_4(SHORT_JT_RAMPOFF)   {2 5}
+set PROFILE_4(SHORT_JT_RAMPON)    {2 5}
+
+set PROFILE_4(SHORT_MULTIEXECUTE) 0
+set PROFILE_4(SHORT_OFFDELAY_BLINK) {0 1}
+set PROFILE_4(SHORT_OFFDELAY_BLINK_PERIOD_OFFDELAYLEVEL) 4
+set PROFILE_4(SHORT_OFFDELAY_BLINK_PERIOD_OLDLEVEL) 4
+set PROFILE_4(SHORT_OFFDELAY_STEP) 0.050000
+set PROFILE_4(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_OFF_LEVEL) 0.000000
+set PROFILE_4(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
+set PROFILE_4(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_4(SHORT_OFF_TIME_MODE) 0
+set PROFILE_4(SHORT_ONDELAY_MODE) 0
+set PROFILE_4(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.0}
+set PROFILE_4(SHORT_ON_MIN_LEVEL) {0.1 range 0.0 - 1.0}
+set PROFILE_4(SHORT_ON_TIME_BASE) {7 range 0 - 7}
+set PROFILE_4(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_4(SHORT_ON_TIME_MODE) 0
+set PROFILE_4(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_4(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
+set PROFILE_4(SHORT_PROFILE_ACTION_TYPE) 1
+set PROFILE_4(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
+set PROFILE_4(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_RAMPON_TIME_FACTOR) {5 range 0 - 31}
+set PROFILE_4(SHORT_RAMP_START_STEP) 0.050000
+set PROFILE_4(UI_DESCRIPTION) ""
+set PROFILE_4(UI_TEMPLATE)  $PROFILE_4(UI_DESCRIPTION)
+set PROFILE_4(UI_HINT)  4
+
+
+
 # "Bewegung/Senkrecht"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
@@ -194,6 +248,38 @@ set SUBSET_3(SHORT_CT_ON)      5
 set SUBSET_3(SHORT_CT_ONDELAY)    5
 set SUBSET_3(SHORT_CT_RAMPOFF)    5
 set SUBSET_3(SHORT_CT_RAMPON)    5
+
+#set SUBSET_4(NAME)          "Bewegung-Ein/Ruhe-Aus"
+set SUBSET_4(NAME)          "\${subset_4}"
+set SUBSET_4(SUBSET_OPTION_VALUE) 4
+set SUBSET_4(SHORT_CT_OFF)        0
+set SUBSET_4(SHORT_CT_OFFDELAY)   0
+set SUBSET_4(SHORT_CT_ON)         2
+set SUBSET_4(SHORT_CT_ONDELAY)    2
+set SUBSET_4(SHORT_CT_RAMPOFF)    0
+set SUBSET_4(SHORT_CT_RAMPON)     2
+set SUBSET_4(SHORT_JT_OFF)        1
+set SUBSET_4(SHORT_JT_OFFDELAY)   3
+set SUBSET_4(SHORT_JT_ON)         4
+set SUBSET_4(SHORT_JT_ONDELAY)    6
+set SUBSET_4(SHORT_JT_RAMPOFF)    2
+set SUBSET_4(SHORT_JT_RAMPON)     5
+
+#set SUBSET_5(NAME)          "Bewegung-Aus/Ruhe-Ein"
+set SUBSET_5(NAME)          "\${subset_5}"
+set SUBSET_5(SUBSET_OPTION_VALUE) 5
+set SUBSET_5(SHORT_CT_OFF)        2
+set SUBSET_5(SHORT_CT_OFFDELAY)   2
+set SUBSET_5(SHORT_CT_ON)         1
+set SUBSET_5(SHORT_CT_ONDELAY)    1
+set SUBSET_5(SHORT_CT_RAMPOFF)    2
+set SUBSET_5(SHORT_CT_RAMPON)     0
+set SUBSET_5(SHORT_JT_OFF)        1
+set SUBSET_5(SHORT_JT_OFFDELAY)   3
+set SUBSET_5(SHORT_JT_ON)         4
+set SUBSET_5(SHORT_JT_ONDELAY)    6
+set SUBSET_5(SHORT_JT_RAMPOFF)    2
+set SUBSET_5(SHORT_JT_RAMPON)     5
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -389,6 +475,66 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_$prn) "<tr><td colspan=\"2\">$actor_off_hint</td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
+
+#4
+  incr prn
+  if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
+  append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  set pref 1
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_MODE}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_4 SUBSET_5} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  # RAMPON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
+
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+
+  incr pref ;# 4
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
+  option DIM_ONLEVEL
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent(\$('${special_input_id}_profiles'),$pref);\""]
+  EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  set param SHORT_PROFILE_REPETITIONS
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getRepetitionSelector PROFILE_$prn ${special_input_id} $param]
+
+    # OFF_TIME
+    append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink0 $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
+  }
+
+  # OFFDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
+
+
+  incr pref ;# 6
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${OFFDELAY_BLINK}</td><td>"
+  array_clear options
+  set options(0)    "\${off}"
+  set options(1)    "\${on}"
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_BLINK separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFFDELAY_BLINK]
+
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  # RAMPOFF_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
+
+  append HTML_PARAMS(separate_$prn) "<tr><td colspan=\"2\">$actor_off_hint</td></tr>"
+  append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
+
 
 }
 

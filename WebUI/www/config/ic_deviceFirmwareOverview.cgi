@@ -133,7 +133,7 @@ proc getActionPanel {} {
    if {$iface != $HmIPIdentifier} {
       catch {
         if {([string equal $dev_descr(AVAILABLE_FIRMWARE) "0.0.0"] != 1)  && ($dev_descr(AVAILABLE_FIRMWARE) != $dev_descr(FIRMWARE))} then {
-          set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\" ><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+          set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\" ><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate('$dev_descr(TYPE)');\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
         } else {
           # set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22008 noBorder\">- -</td></tr>"
           set fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22008 noBorder\"></td></tr>"
@@ -162,7 +162,7 @@ proc getActionPanel {} {
           "DO_UPDATE_PENDING" -
           "READY_FOR_UPDATE" {
             # set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"_CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
-            append fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\"><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate();\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+            append fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\"><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate('$dev_descr(TYPE)');\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
           }
         }
       } else {

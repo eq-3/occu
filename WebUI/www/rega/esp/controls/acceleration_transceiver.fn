@@ -1,0 +1,27 @@
+function ::CreateAccelerationTransceiver()
+{
+  object objMotion = cObj.DPByControl("ACCELERATION_TRANSCEIVER.MOTION");
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+  if( objMotion )
+  {
+    WriteLine("<td>");
+      WriteLine("<table align='center'>");
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div id='accelerationState"#chnId#"' class='ControlBtnInfo CLASS02532'>--</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
+
+  WriteLine("<script type='text/javascript'>");
+    WriteLine("its"#chnId#" = new iseAccelerationTransceiver('"#chnId#"', '"#objMotion.Value()#"', '"#chnAddress#"');");
+  WriteLine("</script>");
+
+  return;
+}
+

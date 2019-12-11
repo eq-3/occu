@@ -2,6 +2,10 @@
 "description_2" : "<span class=\"translated\">According to the selected switching mode the switch will be switched on for the desired time.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">According to the selected switching mode the switch will be switched off for the desired time.</span><br/><br/>",
 
+"description_4" : "<span class=\"translated\">According to the selected switching mode the switch will be switched.</span><br/><br/>",
+
 "subset_1": "Motion/Vertical",
 "subset_2": "Standby/Horizontal",
 "subset_3": "Every change",
+"subset_4": "Motion on / No motion off",
+"subset_5": "Motion off / No motion on",

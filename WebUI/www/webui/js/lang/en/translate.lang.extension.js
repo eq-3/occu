@@ -695,8 +695,10 @@ jQuery.extend(true, langJSON, {
     "lblColorValue" : "Color",
     "lblColorValueBR" : "Color",
     "lblBrightnessLevel" : "Brightness",
+    "lblSwitchingState" : "Switching state",
     "lblRampTime" : "Ramp time",
     "lblOnTime" : "Switch-on time",
+    "lblOnTimeLimited" : "Switch-on time limited",
     "lblColorValueMin" : "Color value start",
     "lblcolorValueMax" : "Color value end",
     "lblAllowOnlyGroupOperation": "Deactivate single device operation",
@@ -737,7 +739,7 @@ jQuery.extend(true, langJSON, {
     "lblSettingsDeviceFirmware2" : "Delete device firmware",
     "lblSettingsDeviceFirmware3" : "View changelog of the firmware",
     "hintDevFwAlreadyUploaded" : "" +
-      "The latest firmware version of the device is alreay installed on the  " + HMIdentifier.de.CCUShortName + ".\n"+
+      "The latest firmware version of the device is alreay installed on the  " + HMIdentifier.en.CCUShortName + ".\n"+
           "Please perform the firmware update on the configuration page.\n\n",
     "deviceUpdate" : "Device update:",
     "weeklyProfile1" : "1",
@@ -881,15 +883,24 @@ jQuery.extend(true, langJSON, {
     "controlChannelHasNoFunction" : "The channel has no function here",
     "weeklyProfileLbl" : "Week profile",
     "_tooltipHmIPDeliverFirmwareImage" : "* old Version *Transferring the update file to the device is performed <br/>in the background and takes longer time.<br/><br/>After the file has been transferred successfully,<br/>the button for activating the<br/>device firmware update will appear here.",
+
     "tooltipHmIPDeliverFirmwareImage" :
       "Please note: New firmware files for Homematic IP devices are currently transferred in the background.<br/>" +
       "Depending on the device, this procedure can take between 8 and 42 hours.<br/>" +
       "After the firmware files have been transferred, an update button for executing the update of the device will be displayed.",
 
+    "tooltipHmIPDeliverFirmwareImageA" :
+      "Please note: New firmware files for Homematic IP devices are currently transferred in the background.<br/>" +
+      "Depending on the device, this procedure can take between 8 and 42 hours.<br/>" ,
+
     "tooltipHmIPWDeliverFirmwareImage" :
       "Please note: New firmware files for Homematic IP devices are currently transferred in the background.<br/>" +
       "Depending on the device, this procedure can take between 15 and 30 minutes.<br/>" +
       "After the firmware files have been transferred, an update button for executing the update of the device will be displayed.",
+
+    "tooltipHmIPWDeliverFirmwareImageA" :
+      "Please note: New firmware files for Homematic IP devices are currently transferred in the background.<br/>" +
+      "Depending on the device, this procedure can take between 15 and 30 minutes.<br/>" ,
 
     "selectFlashSequence" : "Definition of flashing sequence",
     "stringTableButtonLock" : "Local operating lock",
@@ -1220,7 +1231,7 @@ jQuery.extend(true, langJSON, {
     "backupBackupImperfectMissingFile" : "Incorrect/incomplete backup (e.g. *.apkx file is missing).",
     "backupNoInternet_KeyserverTimeout" : "No Internet / key server time-out.",
     "backupKeyServer_NAK" : "CCU unknown to key server.",
-    "backupErrorDevicePersistence_TypesNotCompatibel" : "Reading of devices failed (<br/>Device types not compatible).",
+    "backupErrorDevicePersistence_TypesNotCompatibel" : "Reading of devices failed!<br/>(Device types not compatible).",
     "backupMigrationFailed" : "Unknown error.",
     "backupCoProcessor_not_availabel" : "No co-processor is available.",
     "backupCoProcessor_NotInitialized" : "The co-processor cannot be initiated.",
@@ -1352,13 +1363,18 @@ jQuery.extend(true, langJSON, {
     "helpAccessPointOffline" :
     "An internet connection is needed to <u>commission</u> the Homematic IP Wired Access Point.<br/><br/>" +
     "Following successful commissioning (the system key is lit turquoise) the system can be operated offline. Operation then no longer requires an internet connection.<br/><br/>" +
-    "If you would like to use offline operation and train additional wired devices, use the training dialogue in the field <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet + "</b>" +
+    "If you would like to use offline operation and train additional wired devices, use the training dialogue in the field <b>" + langJSON.en.dialogNewDevicesHmIPWithoutInternet + "</b>" +
     "Enter the KEY and the SGTIN from the device label.",
 
     "drapMaxCurrentBus" : "Maximum current consumption by the bus",
-    "drapHelpMaxCurrentBus" : "Configuration of the parameter is dependent on the power pack.",
+
+    "drapHelpMaxCurrentBus" :
+      "This value must be configured depending on the power supply unit used. " +
+      "The value depends on the output current of the power supply unit. It is necessary for a correct start of the bus system.",
+
     "drapBusConfig" : "Bus configuration",
-    "drapHelpBusConfig" : "Configuration of the parameter is dependent on the bus topology.",
+
+    "drapHelpBusConfig" : "Select the bus topology you have installed here.",
 
     "AccessPointConfigurationFinished" : "Settings successfully saved.",
     "dialogMigrationRCV50Title" : langJSON.en.dialogHint,
@@ -1374,6 +1390,7 @@ jQuery.extend(true, langJSON, {
 
     "configureDisplay" : "Display configuration",
     "resetDisplay" : "Display reset",
+    "resetDevice" : "Device reset",
 
     "hintLinkParamOnOffNotActive" : "Note!<br/><br/>The 'ON and OFF time' parameters must not both be set to 'Not active'.",
 
@@ -1399,6 +1416,13 @@ jQuery.extend(true, langJSON, {
       "<tr><td align='center'><span> > </span></td><td align='center'><span>Arrow up to right</span></td></tr>" +
       "<tr><td align='center'><span> @ </span></td><td align='center'><span>Arrow down to right</span></td></tr>" +
        "</table>",
+
+    "lblVibration" : "Vibration",
+    "lblPosition" : "Position",
+    "lblHorizontal" : "Horizontal",
+    "lblVertical" : "Vertical",
+    "lblYes" : "Yes",
+    "lblNo" : "No",
 
     "theEnd" : ""
   }

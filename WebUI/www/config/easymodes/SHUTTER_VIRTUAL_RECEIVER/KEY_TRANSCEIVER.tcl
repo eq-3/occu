@@ -20,6 +20,7 @@ set PROFILES_MAP(1)  "\${OpenUp}"
 set PROFILES_MAP(2)  "\${CloseDown}"
 set PROFILES_MAP(3)  "\${OpenClose_UpDown}"
 set PROFILES_MAP(4)  "\${TargetPosition}"
+set PROFILES_MAP(5)  "\${DefaultToggle}"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
@@ -187,15 +188,15 @@ set PROFILE_3(LONG_CT_RAMPON) 0
 set PROFILE_3(LONG_CT_REFOFF) 0
 set PROFILE_3(LONG_CT_REFON) 0
 set PROFILE_3(LONG_DRIVING_MODE) {0 1 2 3}
-set PROFILE_3(LONG_JT_OFF) 1
-set PROFILE_3(LONG_JT_OFFDELAY) 8
-set PROFILE_3(LONG_JT_ON) 4
-set PROFILE_3(LONG_JT_ONDELAY) 7
-set PROFILE_3(LONG_JT_RAMPOFF) 6
-set PROFILE_3(LONG_JT_RAMPON) 3
-set PROFILE_3(LONG_JT_REFOFF) 6
-set PROFILE_3(LONG_JT_REFON) 3
-set PROFILE_3(LONG_MAX_TIME_FIRST_DIR) {0.4 range 0.0 - 25.5}
+set PROFILE_3(LONG_JT_OFF) {1 4}
+set PROFILE_3(LONG_JT_OFFDELAY) {8 1}
+set PROFILE_3(LONG_JT_ON) {4 1}
+set PROFILE_3(LONG_JT_ONDELAY) {7 4}
+set PROFILE_3(LONG_JT_RAMPOFF) {6 5}
+set PROFILE_3(LONG_JT_RAMPON) {3 2}
+set PROFILE_3(LONG_JT_REFOFF) {6 5}
+set PROFILE_3(LONG_JT_REFON) {3 2}
+set PROFILE_3(LONG_MAX_TIME_FIRST_DIR) 0.4
 set PROFILE_3(LONG_MULTIEXECUTE) 1
 set PROFILE_3(LONG_OFFDELAY_TIME_BASE) 0
 set PROFILE_3(LONG_OFFDELAY_TIME_FACTOR) 0
@@ -211,7 +212,7 @@ set PROFILE_3(LONG_ON_LEVEL_2) 1.010000
 set PROFILE_3(LONG_ON_TIME_BASE) 7
 set PROFILE_3(LONG_ON_TIME_FACTOR) 31
 set PROFILE_3(LONG_ON_TIME_MODE) 0
-set PROFILE_3(LONG_PROFILE_ACTION_TYPE) {1 5}
+set PROFILE_3(LONG_PROFILE_ACTION_TYPE) 5
 set PROFILE_3(SHORT_COND_VALUE_HI) 100
 set PROFILE_3(SHORT_COND_VALUE_LO) 50
 set PROFILE_3(SHORT_CT_OFF) {0 1 2 5}
@@ -223,14 +224,14 @@ set PROFILE_3(SHORT_CT_RAMPON) {0 1 2 5}
 set PROFILE_3(SHORT_CT_REFOFF) 0
 set PROFILE_3(SHORT_CT_REFON) 0
 set PROFILE_3(SHORT_DRIVING_MODE) 0
-set PROFILE_3(SHORT_JT_OFF)       [subst {$ON_DELAY}]
-set PROFILE_3(SHORT_JT_OFFDELAY)  [subst {$OFF_DELAY $REFOFF}]
-set PROFILE_3(SHORT_JT_ON)        $OFF_DELAY
-set PROFILE_3(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $REFON}]
-set PROFILE_3(SHORT_JT_RAMPOFF)   $OFF
-set PROFILE_3(SHORT_JT_RAMPON)    $ON
-set PROFILE_3(SHORT_JT_REFOFF)    [subst {$REFON $OFF}]
-set PROFILE_3(SHORT_JT_REFON)     [subst {$REFOFF $ON}]
+set PROFILE_3(SHORT_JT_OFF)       [subst {$ON_DELAY $OFF_DELAY}]
+set PROFILE_3(SHORT_JT_OFFDELAY)  [subst {$OFF_DELAY $REFOFF $ON_DELAY}]
+set PROFILE_3(SHORT_JT_ON)        [subst {$OFF_DELAY $ON_DELAY}]
+set PROFILE_3(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $OFF_DELAY $REFON}]
+set PROFILE_3(SHORT_JT_RAMPOFF)   [subst {$OFF $RAMP_OFF}]
+set PROFILE_3(SHORT_JT_RAMPON)    [subst {$ON $RAMP_ON}]
+set PROFILE_3(SHORT_JT_REFOFF)    [subst {$REFON $OFF $RAMP_OFF}]
+set PROFILE_3(SHORT_JT_REFON)     [subst {$REFOFF $ON $RAMP_ON}]
 set PROFILE_3(SHORT_MAX_TIME_FIRST_DIR) 25.500000
 set PROFILE_3(SHORT_MULTIEXECUTE) 0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
@@ -328,6 +329,83 @@ set PROFILE_4(UI_DESCRIPTION) ""
 set PROFILE_4(UI_TEMPLATE)  $PROFILE_4(UI_DESCRIPTION)
 set PROFILE_4(UI_HINT)  4
 
+
+set PROFILE_5(LONG_COND_VALUE_HI) 100
+set PROFILE_5(LONG_COND_VALUE_LO) 50
+set PROFILE_5(LONG_CT_OFF) 0
+set PROFILE_5(LONG_CT_OFFDELAY) 0
+set PROFILE_5(LONG_CT_ON) 0
+set PROFILE_5(LONG_CT_ONDELAY) 0
+set PROFILE_5(LONG_CT_RAMPOFF) 0
+set PROFILE_5(LONG_CT_RAMPON) 0
+set PROFILE_5(LONG_CT_REFOFF) 0
+set PROFILE_5(LONG_CT_REFON) 0
+set PROFILE_5(LONG_DRIVING_MODE) {0 1 2 3}
+set PROFILE_5(LONG_JT_OFF) {1 4}
+set PROFILE_5(LONG_JT_OFFDELAY) {8 1}
+set PROFILE_5(LONG_JT_ON) {4 1}
+set PROFILE_5(LONG_JT_ONDELAY) {7 4}
+set PROFILE_5(LONG_JT_RAMPOFF) {6 5}
+set PROFILE_5(LONG_JT_RAMPON) {3 2}
+set PROFILE_5(LONG_JT_REFOFF) {6 5}
+set PROFILE_5(LONG_JT_REFON) {3 2}
+set PROFILE_5(LONG_MAX_TIME_FIRST_DIR) 0.1
+set PROFILE_5(LONG_MULTIEXECUTE) 1
+set PROFILE_5(LONG_OFFDELAY_TIME_BASE) 0
+set PROFILE_5(LONG_OFFDELAY_TIME_FACTOR) 0
+set PROFILE_5(LONG_OFF_LEVEL) 0.000000
+set PROFILE_5(LONG_OFF_LEVEL_2) 1.010000
+set PROFILE_5(LONG_OFF_TIME_BASE) 7
+set PROFILE_5(LONG_OFF_TIME_FACTOR) 31
+set PROFILE_5(LONG_OFF_TIME_MODE) 0
+set PROFILE_5(LONG_ONDELAY_TIME_BASE) 0
+set PROFILE_5(LONG_ONDELAY_TIME_FACTOR) 0
+set PROFILE_5(LONG_ON_LEVEL) 1.000000
+set PROFILE_5(LONG_ON_LEVEL_2) 1.010000
+set PROFILE_5(LONG_ON_TIME_BASE) 7
+set PROFILE_5(LONG_ON_TIME_FACTOR) 31
+set PROFILE_5(LONG_ON_TIME_MODE) 0
+set PROFILE_5(LONG_PROFILE_ACTION_TYPE) {1 5}
+set PROFILE_5(SHORT_COND_VALUE_HI) 100
+set PROFILE_5(SHORT_COND_VALUE_LO) 50
+set PROFILE_5(SHORT_CT_OFF) {0 1 2 5}
+set PROFILE_5(SHORT_CT_OFFDELAY) {0 1 2 5}
+set PROFILE_5(SHORT_CT_ON) {0 1 2 5}
+set PROFILE_5(SHORT_CT_ONDELAY) {0 1 2 5}
+set PROFILE_5(SHORT_CT_RAMPOFF) {0 1 2 5}
+set PROFILE_5(SHORT_CT_RAMPON) {0 1 2 5}
+set PROFILE_5(SHORT_CT_REFOFF) 0
+set PROFILE_5(SHORT_CT_REFON) 0
+set PROFILE_5(SHORT_DRIVING_MODE) 0
+set PROFILE_5(SHORT_JT_OFF)       [subst {$ON_DELAY $OFF_DELAY}]
+set PROFILE_5(SHORT_JT_OFFDELAY)  [subst {$OFF_DELAY $REFOFF $ON_DELAY}]
+set PROFILE_5(SHORT_JT_ON)        [subst {$OFF_DELAY $ON_DELAY}]
+set PROFILE_5(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $OFF_DELAY $REFON}]
+set PROFILE_5(SHORT_JT_RAMPOFF)   [subst {$OFF $RAMP_OFF}]
+set PROFILE_5(SHORT_JT_RAMPON)    [subst {$ON $RAMP_ON}]
+set PROFILE_5(SHORT_JT_REFOFF)    [subst {$REFON $OFF $RAMP_OFF}]
+set PROFILE_5(SHORT_JT_REFON)     [subst {$REFOFF $ON $RAMP_ON}]
+set PROFILE_5(SHORT_MAX_TIME_FIRST_DIR) 25.500000
+set PROFILE_5(SHORT_MULTIEXECUTE) 0
+set PROFILE_5(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_5(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_5(SHORT_OFF_LEVEL) 0.000000
+set PROFILE_5(SHORT_OFF_LEVEL_2) 1.010000
+set PROFILE_5(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
+set PROFILE_5(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_5(SHORT_OFF_TIME_MODE) 0
+set PROFILE_5(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_5(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_5(SHORT_ON_LEVEL) 1.000000
+set PROFILE_5(SHORT_ON_LEVEL_2) 1.010000
+set PROFILE_5(SHORT_ON_TIME_BASE) {7 range 0 - 7}
+set PROFILE_5(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_5(SHORT_ON_TIME_MODE) 0
+set PROFILE_5(SHORT_PROFILE_ACTION_TYPE) 1
+set PROFILE_5(UI_DESCRIPTION) ""
+set PROFILE_5(UI_TEMPLATE)  $PROFILE_5(UI_DESCRIPTION)
+set PROFILE_5(UI_HINT)  5
+
 # hier folgen die eventuellen Subsets
 #set SUBSET_1(NAME)          "Hochgefahren"
 set SUBSET_1(NAME)          "\${subset_1}"
@@ -419,17 +497,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
 
 
+  set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
+
 set comment {
   if {$ps(LONG_MAX_TIME_FIRST_DIR) < 0.4} {
-    puts "$ps(LONG_MAX_TIME_FIRST_DIR)<br/>"
     set valLONG_MAX_TIME_FIRST_DIR 0.4
     set param  "{LONG_MAX_TIME_FIRST_DIR {$valLONG_MAX_TIME_FIRST_DIR}}"
-    # puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"
+    catch {puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"}
     set ps(LONG_MAX_TIME_FIRST_DIR) $valLONG_MAX_TIME_FIRST_DIR
   }
 }
-
-  set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 
 # die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
@@ -454,8 +531,7 @@ set comment {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
   incr pref
-  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {document.getElementById(\"separate_receiver_$prn\_$pref\").value = 0.4;},300)</script>"
+  #append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #2
@@ -472,8 +548,7 @@ set comment {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
   incr pref
-  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {document.getElementById(\"separate_receiver_$prn\_$pref\").value = 0.4;},300)</script>"
+  #append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -498,8 +573,7 @@ set comment {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
   incr pref
-  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {document.getElementById(\"separate_receiver_$prn\_$pref\").value = 0.4;},300)</script>"
+  #append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 
@@ -558,13 +632,35 @@ set comment {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG id=\"downDelayTime_${special_input_id}_$prn\_1\"]"
 
   incr pref
-  append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
-  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {document.getElementById(\"separate_receiver_$prn\_$pref\").value = 0.4;},300)</script>"
+  #append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
   # parameter end
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
   append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_$prn\_1');jalousieShowSlatInputElem('separate_${special_input_id}_$prn\_1', $ch);},200)</script>"
+
+#5
+  incr prn
+  set pref 0
+  if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
+  append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+  # OFF_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
+
+  #OFFDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
+
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+
+  # ONDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
+
+  #incr pref
+  #append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
+  append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 }
 

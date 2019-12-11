@@ -67,7 +67,7 @@ set PROFILE_1(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_MODE) 0
 set PROFILE_1(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_1(LONG_PROFILE_REPETITIONS) {0 range 0 - 255}
-set PROFILE_1(LONG_PROFILE_ACTION_TYPE) 3
+set PROFILE_1(LONG_PROFILE_ACTION_TYPE) {3 0}
 set PROFILE_1(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(LONG_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_1(LONG_RAMPON_TIME_BASE) {0 range 0 - 7}
@@ -158,7 +158,7 @@ set PROFILE_2(LONG_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(LONG_ON_TIME_MODE) 0
 set PROFILE_2(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
-set PROFILE_2(LONG_PROFILE_ACTION_TYPE) 4
+set PROFILE_2(LONG_PROFILE_ACTION_TYPE) {4 0}
 set PROFILE_2(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(LONG_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_2(LONG_RAMPON_TIME_BASE) {0 range 0 - 7}
@@ -249,7 +249,7 @@ set PROFILE_3(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(LONG_ON_TIME_MODE) 0
 set PROFILE_3(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_3(LONG_PROFILE_REPETITIONS) {0 range 0 - 255}
-set PROFILE_3(LONG_PROFILE_ACTION_TYPE) 5
+set PROFILE_3(LONG_PROFILE_ACTION_TYPE) {5 0}
 set PROFILE_3(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(LONG_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_3(LONG_RAMPON_TIME_BASE) {0 range 0 - 7}
@@ -342,7 +342,7 @@ set PROFILE_4(LONG_ON_TIME_BASE) {5 range 0 - 7}
 set PROFILE_4(LONG_ON_TIME_FACTOR) {1 range 0 - 31}
 set PROFILE_4(LONG_ON_TIME_MODE) 0
 set PROFILE_4(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
-set PROFILE_4(LONG_PROFILE_ACTION_TYPE) 5
+set PROFILE_4(LONG_PROFILE_ACTION_TYPE) 1
 set PROFILE_4(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_4(LONG_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_4(LONG_RAMPON_TIME_BASE) {0 range 0 - 7}
@@ -482,6 +482,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   if {$longKeypressAvailable} {
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 
+    # Long key press activ/inactive
+    append HTML_PARAMS(separate_$prn) [getDeactivateLongKeypress ps PROFILE_$prn separate_receiver $prn 0 3]
+
     # ON_TIME
     append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
 
@@ -542,10 +545,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
 
   if {$longKeypressAvailable} {
-    incr pref
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+
+    # Long key press activ/inactive
+    append HTML_PARAMS(separate_$prn) [getDeactivateLongKeypress ps PROFILE_$prn separate_receiver $prn 0 4]
+
     append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
 
+    incr pref
     option DIM_OFFLEVEL
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
@@ -613,6 +620,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   if {$longKeypressAvailable} {
     ## LONG KEYPRESS
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
+
+    # Long key press activ/inactive
+    append HTML_PARAMS(separate_$prn) [getDeactivateLongKeypress ps PROFILE_$prn separate_receiver $prn 0 5]
+
     # ON_TIME
     append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id LONG_ON_TIME TIMEBASE_LONG]"
 

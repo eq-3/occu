@@ -100,7 +100,8 @@ jQuery.extend(true,langJSON, {
     "BRIGHTNESS_FILTER" : "Der Helligkeitsfilter im Bewegungsmelder misst etwa alle 6 Minuten einen Helligkeitswert. %DCber den Dropdown-Button bestimmen Sie, wie viele dieser Werte gespeichert werden. Der niedrigste der gespeicherten Werten wird f%FCr die Auswertung verwendet.",
 
     "CONTACT_BOOST" : "Um dem Korrodieren und m%F6glichen Funktionseinschr%E4nkungen der Taster bzw. Schalter vorzubeugen, kann der 'Korrosionsschutz' aktiviert werden. " +
-    "Dieser sorgt daf%FCr, dass kurzzeitig ein erh%F6hter Strom durch einen angeschlossenen Taster oder Schalter flie%DFt, wenn er bet%E4tigt wird. Der Stromimpuls wirkt der Korrosion entgegen.",
+    "Dieser sorgt daf%FCr, dass kurzzeitig ein erh%F6hter Strom durch einen angeschlossenen Taster oder Schalter flie%DFt, wenn er bet%E4tigt wird. Der Stromimpuls wirkt der Korrosion entgegen.<br/><br/>" +
+    "Diese Funktion sollte nur bei Netzspannungs-Tastern und Schaltern aktiviert werden und keinesfalls bei Mikrotastern oder anderen Kontakten mit geringem Schaltverm%F6gen.",
 
     "repetitionOffTimeSound" : "W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Ausschaltdauer gew%E4hlt, wird der Parameter Wiederholungen ignoriert.",
     "repetitionOffTimeDimmer" : "W%E4hlen Sie mit der Ausschaltdauer die Pause zwischen den Wiederholungen. Wird eine dauerhafte Einschaltdauer oder Ausschaltdauer gew%E4hlt, wird der Parameter Wiederholungen ignoriert.",
@@ -129,6 +130,45 @@ jQuery.extend(true,langJSON, {
     "EVENT_FILTER_PERIOD" :
       "Die Filterzeit des Sensors wird durch die Multiplikation der Werte <b>Filterzeitz%E4hler</b> und <b>Filterbasis</b> bestimmt.<br/><br/>" +
       "Das Ergebnis ergibt die Event-Filterzeit in Sekunden. Dabei bedeutet ein hoher Wert eine l%E4ngere Filterzeit.",
+
+    "helpBrightnessLux" : "F%FCr die Funktionalit%E4t dieser Verkn%FCpfung muss der vom Sensor ermittelte Helligkeitswert, der sehr hohe Werte annehmen kann, "+
+      "in einen Wert von 0 - 255 konvertiert werden. Geben Sie hier den von Ihnen gew%FCnschten Helligkeitswert ein, wird der konvertierte Wert im Feld Helligkeitsschwelle eingetragen.",
+
+    "COND_TX_FALLING" :
+      "Damit Verkn%FCpfungen mit diesem Kanal funktionieren, muss dieser Parameter aktiviert werden.<br/><br/>" +
+      "Bei Unterschreitung des unteren Grenzwertes, wird der entsprechende Entscheidungswert gesendet, <u>wenn vorher der obere Grenzwert %FCberschritten wurde.</u><br/><br/>" +
+      "Der Entscheidungswert wird nur einmal gesendet. Soll er in regelm%E4%DFigen Abst%E4nden gesendet werden, aktivieren Sie zus%E4tzlich den n%E4chsten Parameter 'Entscheidungswert zyklisch senden.'",
+
+    "COND_TX_RISING" :
+      "Damit Verkn%FCpfungen mit diesem Kanal funktionieren, muss dieser Parameter aktiviert werden.<br/><br/>" +
+      "Bei %DCberschreitung des oberen Grenzwertes, wird der entsprechende Entscheidungswert gesendet, <u>wenn vorher der untere Grenzwert unterschritten wurde.</u><br/><br/>" +
+      "Der Entscheidungswert wird nur einmal gesendet. Soll er in regelm%E4%DFigen Abst%E4nden gesendet werden, aktivieren Sie zus%E4tzlich den n%E4chsten Parameter 'Entscheidungswert zyklisch senden.'",
+
+      "FILTER_SIZE_ANALOG_INPUT_TRANSMITTER" :
+        "Die H%F6he der anliegende Eingangsspannung wird alle 100 ms gepr%FCft. D. h., es werden 10 Messungen/Sekunde durchgef%FChrt.<br/><br/> " +
+        "Dieser Parameter bestimmt, wieviele Messungen f%FCr den Mittelwert des auszugebenen Spannungswertes verwendet werden. " +
+        "Bei einem Wert von z. B. 2, werden entsprechend 2 Werte verwendet. Beispiel:<br/><br/>" +
+        "&nbsp;&nbsp;&nbsp;Wert 1: 5.4V, Wert 2: 5.6V - Der Mittelwert betr%E4gt (5.4V+5.6V) / 2 = 5.5V<br/><br/>" +
+        "Der Status, d. h. der Mittelwert der kurz vor der %DCbertragung anliegenden Eingangsspannung, wird in einem bestimmten Intervall gesendet. " +
+        "Dieses Intervall k%F6nnen Sie durch den Parameter 'Zyklische Statusmeldung' des Kanal 0 beeinflussen. Lesen Sie dazu bitte die dazugeh%F6rige Hilfe.<br/><br/>" +
+        "",
+
+    "PWM_AT_LOW_VALVE_POSITION" :
+      "Der Parameter sollte aktiviert werden, wenn sich in einem Raum mit mehreren Heizkreisen, bei kleiner Ventilposition unterschiedliche Temperaturen auf der Oberfl%E4che des Fu%DFbodens einstellen.<br/><br/>" +
+      "Des Weiteren kann der Parameter aktiviert werden, wenn es bei kleinen Ventilpositionen zu Ger%E4uschentwicklungen am Heizkreisverteiler kommt. In diesem Fall ist zus%E4tzlich ein Wert bei " +
+      "Parameter 'Ventilpositionen Umschaltwert' auszuw%E4hlen.",
+
+    "ON_MIN_LEVEL" : 
+      "Wurde der Parameter 'Automatische Umschaltung von Stetig auf PWM' aktiviert, kann durch eine Eingabe des Umschaltwertes die automatische Umschaltung von Stetig auf PWM f%FCr kleine " +
+      "Ventilpositionen f%FCr alle Kan%E4le aktiviert werden.",
+
+    "ABORT_EVENT_SENDING_CHANNELS" :
+      "Damit das Ger%E4t unverz%FCglich auf einen neuen Tastendruck reagiert, kann der noch laufende Sendevorgang eines alten Tastendruckes abgebrochen werden. " +
+      "Bei Tastenpaaren, z. B. f%FCr Hochfahren und Runterfahren, sollten dazu jeweils beide Auswahlfelder an beiden Tastenkan%E4len aktiviert werden.<br/><br/>" +
+      "Bei Verwendung als Einzeltaste sollte jeweils nur das Auswahlfeld mit der Nummer des eigenen Tastenkanals ausgew%E4hlt werden.",
+
+    "POSITION_SAVE_TIME" :
+    "Zeit, nach der die aktuelle Position als 'alter Wert' gewertet wird.",
 
     "noMoreHelp" : ""
   },
@@ -231,7 +271,8 @@ jQuery.extend(true,langJSON, {
     "BRIGHTNESS_FILTER" : "The brightness filter of the motion detector measures the brightness approximately every 6 minutes. Use the dropdown button to determine how many of these brightness values are saved. The lowest of the stored values is used for the evaluation.",
 
     "CONTACT_BOOST" : "In order to prevent corrosion and possible functional restrictions of the buttons or switches, the 'corrosion protection' can be activated. " +
-    "This ensures that an increased current flows briefly through a connected pushbutton or switch when it is actuated. The current pulse counteracts corrosion.",
+    "This ensures that an increased current flows briefly through a connected pushbutton or switch when it is actuated. The current pulse counteracts corrosion.<br/><br/>" +
+    "This function should only be activated with mains voltage push-buttons and switches and under no circumstances with micro push-buttons or other contacts with low switching capacity..",
 
     "repetitionOffTimeSound" : "Select the pause between the repetitions with the off duration. If a permanent off time is selected, the Repeats parameter is ignored.",
     "repetitionOffTimeDimmer" : "Select the pause between the repetitions with the off duration. If a permanent on-time or off-time is selected, the Repeats parameter is ignored.",
@@ -260,6 +301,41 @@ jQuery.extend(true,langJSON, {
     "EVENT_FILTER_PERIOD" :
       "The filter time of the sensor is determined by multiplying the values <b>filter time counter</b> and <b>filter basis</b>.<br/><br/>." +
       "The result is the event filter time in seconds. A higher value is equal to a larger filter time.",
+
+    "helpBrightnessLux" : "To ensure functionality of this connection, the brightness value determined by the sensor (which can be very high) must be converted to a value between 0 and 255. "+
+      "If you enter the brightness value you want to use here, the converted value is entered in the “brightness threshold” field.",
+
+    "COND_TX_FALLING" :
+      "This parameter must be activated in order for connections in this channel to function properly.<br/><br/>" +
+      "If the value falls below the lower limit, the corresponding decision value is sent, <u>if the value has previously exceeded the upper limit.</u><br/><br/>" +
+      "The decision value is sent only once. If it is to be sent in regular intervals, also activate the next parameter 'Send decision value cyclically'.",
+
+    "COND_TX_RISING" :
+      "This parameter must be activated in order for connections in this channel to function properly. <br/><br/>" +
+      "If the value exceeds the upper limit, the corresponding decision value is sent. <u>if the value falls below the lower limit.</u><br/><br/>" +
+      "The decision value is sent only once. If it is to be sent in regular intervals, also activate the next parameter 'Send decision value cyclically'.",
+
+    "FILTER_SIZE_ANALOG_INPUT_TRANSMITTER" :
+      "The level of the applied input voltage is checked every 100 ms. This means that 10 measurements/second are carried out.<br/><br/>"+
+      "This parameter determines how many measurements are used for the mean value of the voltage value to be output. With a value of e.g. 2, 2 values are used accordingly. Example:<br/><br/>"+
+      "&nbsp;&nbsp;&nbsp;Value 1: 5.4V, Value 2: 5.6V - The average value is (5.4V+5.6V) / 2 = 5.5V<br/><br/>"+
+      "The status, i.e. the average value of the input voltage present shortly before transmission, is transmitted at a certain interval. You can influence this parameter using the parameter ‘Cyclical status message’ of channel 0. Please read the corresponding help text.<br/><br/>",
+
+    "PWM_AT_LOW_VALVE_POSITION" :
+      "The parameter should be activated if different temperatures occur with a small valve position on the surface of the floor in a room with several heating circuits.<br/><br/>" +
+      "Furthermore, the parameter can be activated if with small valve positions noise develops at the heating circuit distributor. " +
+      "In this case, an additional value must be selected for the 'Valve positions changeover value' parameter." ,
+
+    "ON_MIN_LEVEL" :
+      "If the parameter 'Automatic switchover from continuous to PWM' has been activated, the automatic switchover from continuous to PWM for small valve positions can be activated for all channels by entering the switchover value.",
+
+    "ABORT_EVENT_SENDING_CHANNELS" :
+      "To ensure that the device reacts immediately to a new button press, the transmission process of an old button press that is still in progress can be cancelled.  " +
+      "For key pairs, e.g. for moving up and down, both selection fields on both key channels should be activated.<br/><br/>" +
+      "When using as a single key, only the selection field with the number of your own key channel should be selected." ,
+
+    "POSITION_SAVE_TIME" :
+    "Time after which the current position is interpreted as 'old value'.",
 
     "noMoreHelp" : ""
     }

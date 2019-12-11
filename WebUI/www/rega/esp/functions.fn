@@ -346,6 +346,99 @@ function ::showHideRFChannel() {
   }
 }
 
+! This seems to work but the risk to release this right now is to high
+function ::_showHideHmIPChannel() {
+  bShowChannel = true;
+
+  ! A key press doesn't work with the ccu2 and hmip
+  ! When the device is not a remote control, don't show the key channel
+  !
+  ! When the device IS A REMOTE CONTROL, show the channel. The control will say the channel has no function.
+  ! Otherwise the control of the remote control would display only the header of the page, which wouldn't look so good.
+  if ((chn.HssType().Find("KEY_TRANSCEIVER") != -1) && (
+         (oDevHssType != "HmIP-RC8")
+      && (oDevHssType != "HMIP-WRC2")
+      && (oDevHssType != "HmIP-WRC2")
+      && (oDevHssType != "HmIP-WRC6")
+      && (oDevHssType != "HmIP-KRCA")
+      && (oDevHssType != "HmIP-KRCK")
+      && (oDevHssType != "HmIP-KRC4")
+      && (oDevHssType != "HmIP-MOD-RC8")
+      && (oDevHssType != "HmIP-BRC2")
+      && (oDevHssType != "HmIP-DBB")
+      && (oDevHssType != "HmIP-RCB1")
+      && (oDevHssType != "HmIP-WRCR")
+      && (oDevHssType != "HmIP-RCV-50")
+      )
+    )
+  {
+    bShowChannel = false;
+    return;
+  }
+
+  if (bShowChannel == true) {
+
+    ! Interface HmIP-RF and HmIP-Wired
+    if (chn.HssType().Find("MAINTENANCE") != -1) {
+      ! Don't show the maintenance channel of the new HmIP devices
+      ! This is necessary because the name of such a channel of an HmIP device
+      !   can be MAINTENANCE_BAT_BL, MAINTENANCE_BAT_EL, MAINTENANCE_BAT_CL and so on
+      ! For BidCos-RF this isn't necessary
+
+      ! A HmIPW-* device with a control for the parameter IDENTIFY_TARGET_LEVEL (MAINTENANCE channel)
+      ! should be visible. So it's possible to use the identify function of wHmIPW-devices.
+      if (oDevHssType.Substr(0,6) == "HmIPW-") {
+        object chnParam = dom.GetObject("HmIP-RF."#chn.Address()#".IDENTIFY_TARGET_LEVEL");
+        if (chnParam) {
+          string controlName = chnParam.MetaData("CONTROL");
+          if (! controlName) {
+            bShowChannel = false;
+          }
+        } else {
+          bShowChannel = false;
+        }
+      } else {
+        bShowChannel = false;
+      }
+      return;
+    }
+
+    if (user.UserEasyLinkMode() == true) {
+      if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)
+      || (chn.HssType().Find("SWITCH_TRANSMITTER") != -1)
+      || (chn.HssType().Find("BLIND_TRANSMITTER") != -1)
+      || (chn.HssType().Find("SHUTTER_TRANSMITTER") != -1)
+      || (chn.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1))
+      {bShowChannel = false; return;}
+
+      if ((oDevHssType != "HmIP-MIOB") && (oDevHssType != "HmIP-WHS2")) {
+        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1)
+        ) {
+          if (virtChnCounter >= 3) {virtChnCounter = 0;}
+          virtChnCounter = virtChnCounter + 1;
+          if (virtChnCounter != 1) {bShowChannel = false; return;}
+        }
+      } else {
+        ! HmIP-MIOB and HmIP-WHS2
+        ! Hide all SWITCH_VIRTUAL_RECEIVER channels other than 3 and 7 (the 2nd virtual channel instead of the first one) when the expert mode is not active
+        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
+          if ((chNumber != 3) && (chNumber != 7)) {
+            bShowChannel = false;
+            return;
+          }
+        }
+      }
+    }
+    ! No hit
+    return;
+  }
+}
+
+! This is the old version of the function above. We use this old version as long as the new one hasn't been tested extensively
 function ::showHideHmIPChannel() {
   bShowChannel = true;
 
@@ -366,6 +459,7 @@ function ::showHideHmIPChannel() {
       && (oDevHssType != "HmIP-BRC2")
       && (oDevHssType != "HmIP-DBB")
       && (oDevHssType != "HmIP-RCB1")
+      && (oDevHssType != "HmIP-WRCR")
       && (oDevHssType != "HmIP-RCV-50")
       )
     )
@@ -420,7 +514,6 @@ function ::showHideHmIPChannel() {
       }
       return;
     }
-
 
     ! Pluggable Switch and Meter (PSM)
     if (
@@ -630,11 +723,75 @@ function ::showHideHmIPChannel() {
       }
     }
 
+    if ( (oDevHssType == "HmIP-FSI16")) {
+      if (chn.HssType().Find("MULTI_MODE_INPUT_TRANSMITTER") != -1) {
+        bShowChannel = false;
+        return;
+      }
+
+      if (user.UserEasyLinkMode() == true) {
+        if (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) {bShowChannel = false; return;}
+        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
+          if ((chNumber == 4) || (chNumber == 5)) {
+            bShowChannel = false;
+            return;
+          }
+        }
+      }
+    }
+
+    ! HmIP-DRSI4
+    if (oDevHssType == "HmIP-DRSI4") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
+        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
+          if ((chNumber == 7) || (chNumber == 8) || (chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16)|| (chNumber == 19) || (chNumber == 20)) {
+            bShowChannel = false;
+            return;
+          }
+        }
+      }
+    }
+
+    ! HmIP-DRBLI4
+    if (oDevHssType == "HmIP-DRBLI4") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("BLIND_TRANSMITTER") != -1)) {bShowChannel = false; return;}
+        if (chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) {
+          if ((chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16) || (chNumber == 19) || (chNumber == 20)|| (chNumber == 23) || (chNumber == 24)) {
+            bShowChannel = false;
+            return;
+          }
+        }
+      }
+    }
+
+    ! HmIP-DRDI3 (HmIP dimmer actor)
+    if (oDevHssType == "HmIP-DRDI3") {
+      if (user.UserEasyLinkMode() == true) {
+        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
+        if (chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) {
+          if ((chNumber == 6) || (chNumber == 7) || (chNumber == 10) || (chNumber == 11) || (chNumber == 14) || (chNumber == 15)) {
+            bShowChannel = false;
+            return;
+          }
+        }
+      }
+    }
+
+    if (chn.HssType().Find("MULTI_MODE_INPUT_TRANSMITTER") != -1 ) {
+        if (chn.MetaData("channelMode") != 3) {
+          bShowChannel = false;
+        }
+      return;
+    }
+
     ! No hit
     return;
     }
   }
 }
+
 
 ! [showChannelParam]
 function ::conditionIsParameterVisible() {
@@ -715,10 +872,9 @@ function ::conditionIsParameterVisible() {
       return;
     }
 
-
-    ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
+    ! Some blind actors (e. g. HmIPW-DRBL4 or HmIP-DRBLI4) can act as a shutter or a blind.
     ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
-    if ((oCC.Label().Find(HmIPWLabel) != -1) && (oCC.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)) {
+    if ((oCC.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) || (oCC.HssType().Find("BLIND_TRANSMITTER") != -1)) {
       object oMode = dom.GetObject(oCC.Address());
       if (oMode.MetaData("channelMode") == "shutter") {
         if ((oDP.HSSID().Find("LEVEL_2") != -1)) {
@@ -785,13 +941,6 @@ function ::destinationIsParameterVisible() {
   ! Hide all parameters of the channel ACOUSTIC_DISPLAY_RECEIVER except COMBINED_PARAMETER
   if (oCH.HssType().Find("ACOUSTIC_DISPLAY_RECEIVER") != -1) {
     if (oDP.HSSID().Find("COMBINED_PARAMETER") == -1)  {
-      showChannelParam = false;
-    }
-  }
-
-  ! Hide the parameter COMBINED_PARAMETER for channels of type DIMMER_VIRTUAL_RECEIVER (e. g. MP3P dimmer channel)
-  if (oCH.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) {
-    if (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)  {
       showChannelParam = false;
     }
   }
@@ -905,9 +1054,9 @@ function ::getSpecialTranslationPrgCond() {
     }
   }
 
-  ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
-  ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
-  if ((oCC.Label().Find(HmIPWLabel) != -1) &&  (oCC.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)) {
+  ! Some blind actors (e. g. HmIPW-DRBL4 or HmIP-DRBLI4) can act as a shutter or a blind.
+  ! When acting as a shutter the default text (blind) must be replaced by the text shutter
+  if ((oCC.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) || (oCC.HssType().Find("BLIND_TRANSMITTER") != -1)) {
     object oMode = dom.GetObject(oCC.Address());
     if (oMode.MetaData("channelMode") == "shutter") {
       if (sShortKey == "ACTIVITY_STATE=DOWN") {

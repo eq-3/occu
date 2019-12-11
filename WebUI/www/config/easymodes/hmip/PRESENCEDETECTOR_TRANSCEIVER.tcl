@@ -103,7 +103,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "</td></tr>"
 
     set param LED_DISABLE_CHANNELSTATE
-    if { (! [catch {set tmp $ps($param)}]) && ($devIsHmIPWired == "true")  } {
+    if { ([info exists ps($param)] == 1) && ($devIsHmIPWired == "true")  } {
       incr prn; #4
       append HTML_PARAMS(separate_1) "<tr><td>$PROFILE_PNAME(J)</td>"
       if {$dev_descr(LED_DISABLE_CHANNELSTATE) == 1} {
@@ -207,7 +207,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "[getHorizontalLine]"
 
     set param ATC_MODE
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append HTML_PARAMS(separate_1) "<tr>"
         array_clear options
@@ -219,7 +219,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     }
 
     set param ATC_ADAPTION_INTERVAL
-    if { ! [catch {set tmp $ps($param)}]  } {
+    if { [info exists ps($param)] == 1  } {
       incr prn
       append HTML_PARAMS(separate_1) "<tr>"
         array_clear options
@@ -232,7 +232,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "</tr>"
 
       set param PIR_SENSITIVITY
-      if { ! [catch {set tmp $ps($param)}]  } {
+      if { [info exists ps($param)] == 1  } {
         incr prn
         append HTML_PARAMS(separate_1) "<tr>"
           append HTML_PARAMS(separate_1) "<td>\${stringTableSensorSensivity}</td>"

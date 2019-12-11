@@ -13,7 +13,7 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
 
   set param CHANNEL_OPERATION_MODE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condSwitchTransmitterWindSpeedChannelOperationMode}</td>"
@@ -25,7 +25,7 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
   }
 
   set param FILTER_SELECT
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condSwitchTransmitterWindSpeedFilterSelect}</td>"
@@ -39,7 +39,7 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
   }
 
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionWindAbove}</td>"
@@ -48,7 +48,7 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
   }
 
   set param COND_TX_DECISION_BELOW
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionWindBelow}</td>"
@@ -57,7 +57,7 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdWindHi}</td>"
@@ -66,7 +66,7 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_LO
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdWindLo}</td>"
@@ -99,7 +99,7 @@ proc getCondSwitchTransmitterTemperature {chn p descr} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
 
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionTempAbove}</td>"
@@ -108,7 +108,7 @@ proc getCondSwitchTransmitterTemperature {chn p descr} {
   }
 
   set param COND_TX_DECISION_BELOW
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionTempBelow}</td>"
@@ -117,7 +117,7 @@ proc getCondSwitchTransmitterTemperature {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdTempHi}</td>"
@@ -126,7 +126,7 @@ proc getCondSwitchTransmitterTemperature {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_LO
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdTempLo}</td>"
@@ -149,7 +149,7 @@ proc getCondSwitchTransmitterHumidity {chn p descr} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
 
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionHumidityAbove}</td>"
@@ -158,7 +158,7 @@ proc getCondSwitchTransmitterHumidity {chn p descr} {
   }
 
   set param COND_TX_DECISION_BELOW
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionHumidityBelow}</td>"
@@ -167,7 +167,7 @@ proc getCondSwitchTransmitterHumidity {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdHumidityHi}</td>"
@@ -176,7 +176,7 @@ proc getCondSwitchTransmitterHumidity {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_LO
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdHumidityLo}</td>"
@@ -208,7 +208,7 @@ proc getCondSwitchTransmitterBrightness {chn p descr} {
   # Bestimmt zusammen mit dem nächsten Parameter, ab welchem LUX-Wert Sonnenschein angenommen wird.
   # Wert = VAL * 10 ^ EXP
   set param BRIGHTNESS_THRESHOLD_VAL
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${brightnessThresholdVAL}</td>"
@@ -217,7 +217,7 @@ proc getCondSwitchTransmitterBrightness {chn p descr} {
   }
 
   set param BRIGHTNESS_THRESHOLD_EXP
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${brightnessThresholdEXP}</td>"
@@ -232,7 +232,7 @@ proc getCondSwitchTransmitterBrightness {chn p descr} {
   append html "[getHorizontalLine]"
 
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionBrightnessAbove}</td>"
@@ -241,7 +241,7 @@ proc getCondSwitchTransmitterBrightness {chn p descr} {
   }
 
   set param COND_TX_DECISION_BELOW
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionBrightnessBelow}</td>"
@@ -250,7 +250,7 @@ proc getCondSwitchTransmitterBrightness {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdBrightnessHi}</td>"
@@ -259,7 +259,7 @@ proc getCondSwitchTransmitterBrightness {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_LO
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdBrightnessLo}</td>"
@@ -284,7 +284,7 @@ proc getCondSwitchTransmitterRainQuantity {chn p descr} {
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionRainQuantityAbove}</td>"
@@ -293,7 +293,7 @@ proc getCondSwitchTransmitterRainQuantity {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdRainQuantity}</td>"
@@ -302,7 +302,7 @@ proc getCondSwitchTransmitterRainQuantity {chn p descr} {
   }
 
   set param EVENT_TIMEOUT_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${eventTimeoutRainCounter}</td>"
@@ -342,7 +342,7 @@ proc getCondSwitchTransmitterRainDrop {chn p descr} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
 
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCondTxDecisionRainDetected}</td>"
@@ -351,7 +351,7 @@ proc getCondSwitchTransmitterRainDrop {chn p descr} {
   }
 
   set param COND_TX_DECISION_BELOW
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableCondTxDecisionNoRainDetected}</td>"
@@ -360,7 +360,7 @@ proc getCondSwitchTransmitterRainDrop {chn p descr} {
   }
 
   set param EVENT_TIMEOUT_BASE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
     append html "<td>\${eventTimeoutRainDrop}</td>"
@@ -396,7 +396,7 @@ proc getCondSwitchTransmitterWindDirection {chn p descr} {
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
 
   set param COND_TX_DECISION_ABOVE
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionWindDirectionAbove}</td>"
@@ -405,7 +405,7 @@ proc getCondSwitchTransmitterWindDirection {chn p descr} {
   }
 
   set param COND_TX_DECISION_BELOW
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condTxDecisionWindDirectionBelow}</td>"
@@ -414,7 +414,7 @@ proc getCondSwitchTransmitterWindDirection {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_HI
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdWindDirectionHi}</td>"
@@ -423,7 +423,7 @@ proc getCondSwitchTransmitterWindDirection {chn p descr} {
   }
 
   set param COND_TX_THRESHOLD_LO
-  if { ! [catch {set tmp $ps($param)}]  } {
+  if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
       append html "<td>\${condThresholdWindDirectionLo}</td>"

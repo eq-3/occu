@@ -179,6 +179,26 @@ proc option {type} {
         set options(101) "\${lblIgnore}"
     }
 
+    "ON_MIN_LEVEL_10_25Percent" {
+        set options(0) "\${inactive}"
+        set options(0.1) "10$p"
+        set options(0.11) "11$p"
+        set options(0.12) "12$p"
+        set options(0.13) "13$p"
+        set options(0.14) "14$p"
+        set options(0.15) "15$p"
+        set options(0.16) "16$p"
+        set options(0.17) "17$p"
+        set options(0.18) "18$p"
+        set options(0.19) "19$p"
+        set options(0.20) "20$p"
+        set options(0.21) "21$p"
+        set options(0.22) "22$p"
+        set options(0.23) "23$p"
+        set options(0.24) "24$p"
+        set options(0.25) "25$p"
+    }
+
     "RAMPTIME" {
         set options(0)    "\${none}"
         set options(0.2)  "0.2$s"

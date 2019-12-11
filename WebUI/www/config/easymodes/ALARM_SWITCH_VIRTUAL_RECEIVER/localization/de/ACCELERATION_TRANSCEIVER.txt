@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird der Alarm eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten &Auml;nderungssignal wird der Alarm eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
+
+"subset_1": "Bewegung/Senkrecht",
+"subset_2": "Ruhe/Waagerecht",
+"subset_3": "Jede &Auml;nderung",

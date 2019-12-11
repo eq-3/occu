@@ -88,6 +88,7 @@ function ::dcCreate()
     
   if( cObj.IsTypeOf( OT_CHANNEL ) )
   {
+    var CN_ACCELERATION_TRANSCEIVER = "ACCELERATION_TRANSCEIVER.";
     var CN_ACOUSTIC_DISPLAY_RECEIVER = "ACOUSTIC_DISPLAY_RECEIVER.";
     var CN_ACOUSTIC_SIGNAL_TRANSMITTER = "ACOUSTIC_SIGNAL_TRANSMITTER.";
     var CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER.";
@@ -187,6 +188,16 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_NONE) )
           {
             ! IGNORE NONE
+          }
+
+          !#ACCELERATION_TRANSCEIVER
+          bIsControl = ( sControlName.Find(CN_ACCELERATION_TRANSCEIVER) > -1 );
+          if( bIsControl && (sLastControlName != CN_ACCELERATION_TRANSCEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_ACCELERATION_TRANSCEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_ACCELERATION_TRANSCEIVER;
+            Call("/esp/controls/acceleration_transceiver.fn::CreateAccelerationTransceiver()");
           }
 
           !#ACOUSTIC_DISPLAY_RECEIVER
@@ -294,7 +305,7 @@ function ::dcCreate()
 
             object ch = dom.GetObject(chnId);
 
-            if (ch.Label().Substr(0,6) != "HmIPW-") {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")) {
               Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -315,7 +326,7 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_BLIND_VIRTUAL_RECEIVER;
             object ch = dom.GetObject(chnId);
-            if (ch.Label().Substr(0,6) != "HmIPW-") {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")) {
               Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -405,15 +416,17 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_HMIP_BUTTON) > -1 );
           if( bIsControl && (sLastControlName!=CN_HMIP_BUTTON) )
           {
-            WriteLine( "<script>conInfo('Control CN_HMIP_BUTTON found.');</script>" );
             object ch = dom.GetObject(chnId);
-            isKnownControl = true;
-            sLastControlName = CN_HMIP_BUTTON;
-            if (ch.Label().Substr(5,7) != "MOD-RC8") {
-              Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
-            } else {
-              WriteLine( "<script>conInfo('HmIP-MOD-RC8 found');</script>" );
-              Call("/esp/controls/key_switch_sc.fn::CreateContent()");
+            if ((ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") || ((ch.HssType() == "MULTI_MODE_INPUT_TRANSMITTER") && (ch.MetaData("channelMode") != 3))) {
+              WriteLine( "<script>conInfo('Control CN_HMIP_BUTTON found.');</script>" );
+              isKnownControl = true;
+              sLastControlName = CN_HMIP_BUTTON;
+              if (ch.Label().Substr(5,7) != "MOD-RC8") {
+                Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+              } else {
+                WriteLine( "<script>conInfo('HmIP-MOD-RC8 found');</script>" );
+                Call("/esp/controls/key_switch_sc.fn::CreateContent()");
+              }
             }
           }
 
@@ -896,9 +909,21 @@ function ::dcCreate()
     }
     if (!isKnownControl)
     {
-      WriteLine( "<script>conInfo('Control UNKNOWN found.');</script>" );
       WriteLine( '</tr></table><table cellspacing="0" class="ctrlTbl CLASS02510" border="0" ><tr>' );
-      Call("/esp/datapointconfigurator.fn::CreateUnknown()");
+      object ch = dom.GetObject(chnId);
+
+      if (ch.HssType() == "ROTARY_CONTROL_TRANSCEIVER") {
+        if (ch.Label() == "HmIP-WRCR") {
+          WriteLine( "<script>conInfo('ROTARY_CONTROL_TRANSCEIVER found.');</script>" );
+          Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+        } else {
+          WriteLine( "<script>conInfo('Control UNKNOWN found.');</script>" );
+          Call("/esp/datapointconfigurator.fn::CreateUnknown()");
+        }
+      } else {
+        WriteLine( "<script>conInfo('Control UNKNOWN found.');</script>" );
+        Call("/esp/datapointconfigurator.fn::CreateUnknown()");
+      }
     }
     if ( (isKnownControl) && (bSV)  && (oEName.Find("HmIP-RF.") == -1) )
     {

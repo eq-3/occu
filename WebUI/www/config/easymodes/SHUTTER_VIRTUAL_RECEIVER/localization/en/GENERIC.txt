@@ -2,6 +2,7 @@
 "OpenUp" : "open / up",
 "OpenClose_UpDown" : "open / closed & up / down",
 "TargetPosition" : "move to position",
+"DefaultToggle" : "Default Toggle",
 
 "driving_mode_0" : "directly",
 "driving_mode_1" : "above the upper final position (accuracy run)",

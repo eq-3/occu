@@ -696,8 +696,10 @@ jQuery.extend(true,langJSON, {
     "lblColorValue" : "Farbwert",
     "lblColorValueBR" : "Farb-<br/>wert",
     "lblBrightnessLevel" : "Helligkeitswert",
+    "lblSwitchingState" : "Schaltzustand",
     "lblRampTime" : "Rampenzeit",
     "lblOnTime" : "Einschaltdauer",
+    "lblOnTimeLimited" : "Einschaltdauer begrenzt",
     "lblColorValueMin" : "Farbwert Start",
     "lblcolorValueMax" : "Farbwert Ende",
     "lblAllowOnlyGroupOperation": "Einzelne Ger&auml;tebedienung deaktivieren",
@@ -882,15 +884,24 @@ jQuery.extend(true,langJSON, {
     "controlChannelHasNoFunction" : "Der Kanal hat hier keine Funktion",
     "weeklyProfileLbl" : "Wochenprofil",
     "_tooltipHmIPDeliverFirmwareImage" : "* old Version * Das %DCbertragen der Updatedatei zum Ger%E4t geschieht<br/>im Hintergrund und nimmt erhebliche Zeit in Anspruch.<br/><br/>Nachdem die Datei erfolgreich %FCbertragen wurde,<br/>erscheint hier der Update-Button, mit dem Sie die<br/>Ger%E4tefirmware dann aktualisieren k%F6nnen.",
+
     "tooltipHmIPDeliverFirmwareImage" :
         "Beachten Sie, dass neue Firmware-Dateien f%FCr Homematic IP Ger%E4te im Hintergrund %FCbertragen werden.<br/>" +
         "Dieser Vorgang kann je nach Ger%E4t zwischen 8 und 42 Stunden dauern.<br/>" +
         "Sobald die Firmware-Dateien %FCbertragen wurden, erscheint hier der Update-Button, um das Ger%E4teupdate durchzuf%FChren.",
 
+    "tooltipHmIPDeliverFirmwareImageA" :
+        "Beachten Sie, dass neue Firmware-Dateien f%FCr Homematic IP Ger%E4te im Hintergrund %FCbertragen werden.<br/>" +
+        "Dieser Vorgang kann je nach Ger%E4t zwischen 8 und 42 Stunden dauern.<br/>",
+
     "tooltipHmIPWDeliverFirmwareImage" :
         "Beachten Sie, dass neue Firmware-Dateien f%FCr Homematic IP Ger%E4te im Hintergrund %FCbertragen werden.<br/>" +
         "Dieser Vorgang kann je nach Ger%E4t zwischen 15 und 30 Minuten dauern.<br/>" +
         "Sobald die Firmware-Dateien %FCbertragen wurden, erscheint hier der Update-Button, um das Ger%E4teupdate durchzuf%FChren.",
+
+    "tooltipHmIPWDeliverFirmwareImageA" :
+        "Beachten Sie, dass neue Firmware-Dateien f%FCr Homematic IP Ger%E4te im Hintergrund %FCbertragen werden.<br/>" +
+        "Dieser Vorgang kann je nach Ger%E4t zwischen 15 und 30 Minuten dauern.<br/>" ,
 
     "selectFlashSequence" : "Wahl der Blinkfolge",
     "stringTableButtonLock" : "Lokale Bediensperre",
@@ -1226,7 +1237,7 @@ jQuery.extend(true,langJSON, {
     "backupBackupImperfectMissingFile" : "Backup fehlerhaft/unvollst%E4ndig (z. B. *.apkx Datei fehlt).",
     "backupNoInternet_KeyserverTimeout" : "Kein Internet / Keyserver Timeout.",
     "backupKeyServer_NAK" : "Zentrale dem Keyserver unbekannt.",
-    "backupErrorDevicePersistence_TypesNotCompatibel" : "Einlesen der Ger%E4te fehlgeschlagen (<br/>Ger%E4tetypen nicht kompatibel).",
+    "backupErrorDevicePersistence_TypesNotCompatibel" : "Einlesen der Ger%E4te fehlgeschlagen!<br/>(Ger%E4tetypen nicht kompatibel).",
     "backupMigrationFailed" : "Unbekannter Fehler.",
     "backupCoProcessor_not_availabel" : "Es ist kein Coprozessor verf%FCgbar.",
     "backupCoProcessor_NotInitialized" : "Der Coprozessor kann nicht initialisiert werden.",
@@ -1363,9 +1374,13 @@ jQuery.extend(true,langJSON, {
       "Geben Sie den KEY und die SGTIN des Ger%E4teaufklebers ein.",
 
     "drapMaxCurrentBus" : "Maximale Stromaufnahme<br/>des Bus",
-    "drapHelpMaxCurrentBus" : "Dieser Wert muss in Abh%E4ngigkeit des verwendeten Netzteils konfiguriert werden.",
+
+    "drapHelpMaxCurrentBus" :
+      "Dieser Wert muss in Abh%E4ngigkeit des verwendeten Netzteils konfiguriert werden. " +
+      "Der Wert richtet sich nach dem Ausgangsstrom des verwendeten Netzteils. Dies ist f%FCr einen reibungslosen Start des Bussystem erforderlich.",
+
     "drapBusConfig" : "Buskonfiguration",
-    "drapHelpBusConfig" : "Dieser Wert muss in Abh%E4ngigkeit der verwendeten Bustopologie konfiguriert werden.",
+    "drapHelpBusConfig" : "W%E4hlen Sie hier die von Ihnen installierte Bustopologie aus.",
 
     "AccessPointConfigurationFinished" : "Die Einstellungen wurden erfolgreich %FCbernommen.",
     "dialogMigrationRCV50Title" : langJSON.de.dialogHint,
@@ -1381,6 +1396,7 @@ jQuery.extend(true,langJSON, {
 
     "configureDisplay" : "Display-Konfiguration",
     "resetDisplay" : "Display-Reset",
+    "resetDevice" : "Ger%E4te-Reset",
 
     "hintLinkParamOnOffNotActive" : "Hinweis!<br/><br/>Die Parameter Ein- und Ausschaltdauer d%FCrfen nicht gemeinsam auf 'Nicht aktiv' gestellt werden.",
 
@@ -1407,6 +1423,13 @@ jQuery.extend(true,langJSON, {
         "<tr><td align='center'><span> > </span></td><td align='center'><span>Pfeil nach oben rechts</span></td></tr>" +
         "<tr><td align='center'><span> @ </span></td><td align='center'><span>Pfeil nach unten rechts</span></td></tr>" +
         "</table>",
+
+    "lblVibration" : "Ersch%FCtterung",
+    "lblPosition" : "Lage",
+    "lblHorizontal" : "Waagerecht",
+    "lblVertical" : "Senkrecht",
+    "lblYes" : "Ja",
+    "lblNo" : "Nein",
 
     "theEnd" : ""
   }

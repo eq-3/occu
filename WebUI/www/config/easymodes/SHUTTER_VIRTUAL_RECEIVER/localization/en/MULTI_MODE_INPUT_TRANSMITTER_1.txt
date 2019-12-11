@@ -2,6 +2,7 @@
 "description_2" : "<span class=\"translated\">With a short button press the awning / shutter will be moved down completely for the set time. If a down-delay is set the awning / shutter will be moved down after the delay time has expired. With a long button press the awning / shutter will be moved for as long as the button remains pressed.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">With a short button press the awning / shutter will be moved up completely or down completely (toggle function). If a delay is set the awning / shutter is moved after the delay time has expired. With a long button press the awning / shutter will be moved for as long as the button remains pressed.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">With a short button press the awning / shutter will be moved to the desired position for the set time. If a delay is set the awning / shutter will be moved after the delay time has expired. With a long button press the awning / shutter will be moved for as long as the button remains pressed.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">en* Dieses Standard-Profil wird beim Anlegen der Verkn&uuml;pfung erstellt. Es ist f&uuml;r Jalousieaktoren ausgelegt. F&uuml;r Rollladenaktoren w&auml;hlen Sie bitte aus den vorhandenen Profilen ein den Bed&uuml;rfnissen entsprechendes Profil aus.</span><br/><br/>",
 
 "subset_1" : "moved up",
 "subset_2" : "moved down",
