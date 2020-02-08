@@ -1,0 +1,18 @@
+"description_1" : "<span class=\"translated\">With a quick clockwise rotation, the blind will be moved up completely for the set time. If an up-delay is set the blind will be moved up to the desired position after the delay time has expired. With a slow clockwise rotation, the blind moves up in 100ms steps. This allows the adjustment of the slats position.</span><br/><br/>",
+
+"description_2" : "<span class=\"translated\">With a quick clockwise rotation, the blind will be moved down completely for the set time. If a down-delay is set, the blind will be moved down to the desired position after the delay time has expired. With a slow clockwise rotation, the blind moves down in 100ms steps. This allows the adjustment of the slats position.</span><br/><br/>",
+
+"description_3" : "<span class=\"translated\">With a quick clockwise rotation, the blind will alternate between being moved up completely and down completely (toggle function). If a delay is set the shading element is moved after the delay time has expired. With a slow clockwise rotation, the blind moves up or down in 100ms steps (toggle function). This allows the adjustment of the slats position.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">With a quick clockwise rotation, the blind will be moved for the set time to the required position. If a delay is set the shutter will be moved after the delay time has expired. With a slow clockwise rotation the blind moves up or down in 100ms steps. This allows the adjustment of the slats position.</span><br/><br/>",
+
+"description_5" : "<span class=\"translated\">The profile is not active.</span>",
+
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",
+
+
+
+
+

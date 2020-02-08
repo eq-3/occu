@@ -50,7 +50,7 @@ set PROFILE_2(SHORT_CT_ON)      {0 2}
 set PROFILE_2(SHORT_CT_ONDELAY)    {0 2}
 set PROFILE_2(SHORT_JT_OFF)      {1 range 0 - 6}
 set PROFILE_2(SHORT_JT_OFFDELAY)  {3 range 0 - 6}
-set PROFILE_2(SHORT_JT_ON)      {6 range 0 - 6}
+set PROFILE_2(SHORT_JT_ON)      {4 range 0 - 6}
 set PROFILE_2(SHORT_JT_ONDELAY)    {6 range 0 - 6}
 set PROFILE_2(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
 set PROFILE_2(SHORT_OFFDELAY_TIME_FACTOR)     {0 range 0 - 31}

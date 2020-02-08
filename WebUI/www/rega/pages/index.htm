@@ -105,12 +105,14 @@
 
       isHTTPS = window.location.protocol.startsWith("https:");
       forceUpdate = false;
-      preventInterfaceCheck = false;
+      preventInterfaceCheck = (jQuery.url().param('preventInterfaceCheck') == "true") ? true : false;
       urlParamInterfaces = jQuery.url().param('showInterfaces');
       urlDebug = jQuery.url().param('debug');
       showDummyLicense = jQuery.url().param('showDummyLicense');
       createNewProgram = false;
       showAPITools = jQuery.url().param('showAPITools');
+      showRFAddress = (jQuery.url().param('showRFAddress') == "true") ? true : false;
+
 
       /**
        * jg_250

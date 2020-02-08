@@ -207,6 +207,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-SMI55": "Homematic IP Motion Detector for 55mm frames - indoor",
     "HmIP-SPDR": "Homematic IP Passage Sensor with Direction Recognition",
     "HmIP-SPI": "Homematic IP Presence sensor - indoor",
+    "HmIP-SRD" : "Homematic IP Rain Sensor",
     "HmIP-STHD": "Homematic IP Temperature and Humidity Sensor with Display - indoor",
     "HmIP-STHO": "Homematic IP Temperature and Humidity Sensor - outdoor",
     "HmIP-STV" : "Homematic IP Tilt and Vibration Sensor",
@@ -221,9 +222,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-WGC": "Homematic IP Garage Door Controller",
     "HmIP-WHS2": "Homematic IP Switch Actuator for heating systems - 2 channels",
     "HmIP-WRCD" : "Homematic IP Wall-mount Remote Control with status display",
-
-    "HmIP-WRCR" : "No Descr",
-
+    "HmIP-WRCR" : "Homematic IP Rotary Button",
     "HmIP-WTH": "Homematic IP Wall Thermostat",
     "HmIP-WTH-B": "Homematic IP Wall Thermostat - basic",
     "HmIP-WTH-2": "Homematic IP Wall Thermostat with Humidity Sensor",
@@ -278,6 +277,7 @@ jQuery.extend(true,langJSON, {
     "SWSD": "Homematic IP Smoke Detector",
     "TRV": "Homematic IP Radiator Thermostat",
     "TRV-B": "Homematic IP Radiator Thermostat - basic",
+    "TRV-B-UK": "Homematic IP Radiator Thermostat - basic UK",
     "TRV-C": "Homematic IP Radiator Thermostat - compact",
     "TRV-UK": "Homematic IP Radiator Thermostat UK",
     "VIR-HUE-GTW": "Philips-Hue<br/>Gateway",

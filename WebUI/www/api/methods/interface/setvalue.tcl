@@ -6,7 +6,7 @@
 #   interface: [string] Bezeichnung der Schnittstelle
 #   address:   [string] Adresse des logischen Geräts
 #   valueKey:  [string] Id des Parameters
-#   type:      [string] Datentyp des Parameters (string, int, bool)
+#   type:      [string] Datentyp des Parameters (string, int, double, bool)
 #   value:     [string] Neuer Wert des Parameters
 #
 # Rückgabewert: [boolean]

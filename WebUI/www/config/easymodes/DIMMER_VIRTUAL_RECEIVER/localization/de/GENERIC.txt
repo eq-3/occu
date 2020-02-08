@@ -8,7 +8,7 @@
 "dimmer_on_off_b_d" : "Dimmer - ein/aus &amp; heller/dunkler",
 "sleep_well" : "Einschlaflicht",
 "wake_up_light" : "Aufwachlicht",
-"dimmer_toggle" : "Dimmer abwechselnd ein/aus",
+"dimmer_toggle" : "Toggle",
 "dimmer_on_when_change_signal" : "Dimmer ein bei &Auml;nderungssignal",
 
 "noRepetitions" : "Keine Wiederholung",

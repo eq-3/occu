@@ -1255,7 +1255,7 @@ showHintPrgLink = function(channel, prgExists) {
 showHintInternalLink = function(channel) {
   var channel = parseInt(channel),
     tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel];
-    jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintExternalLinkExists")+"</div>");
+    jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintInternalLinkExists")+"</div>");
 };
 
 ShowHintIfProgramExists = function(id, ch) {

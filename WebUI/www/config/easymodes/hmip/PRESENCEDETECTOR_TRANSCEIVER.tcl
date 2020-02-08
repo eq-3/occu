@@ -103,7 +103,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "</td></tr>"
 
     set param LED_DISABLE_CHANNELSTATE
-    if { ([info exists ps($param)] == 1) && ($devIsHmIPWired == "true")  } {
+    if {[info exists ps($param)] == 1} {
       incr prn; #4
       append HTML_PARAMS(separate_1) "<tr><td>$PROFILE_PNAME(J)</td>"
       if {$dev_descr(LED_DISABLE_CHANNELSTATE) == 1} {

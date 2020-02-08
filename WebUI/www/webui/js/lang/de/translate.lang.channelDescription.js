@@ -75,7 +75,6 @@ jQuery.extend(true,langJSON, {
     "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Taster",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_2" : "Schalter",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_3" : "T%FCr-/Fensterkontakt",
-
     "chType_PASSAGE_DETECTOR_COUNTER_TRANSMITTER" : "Durchgangsz%E4hler",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR" : "Durchgangserkennung<br/>Links nach Rechts",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL" : "Durchgangserkennung<br/>Rechts nach Links",
@@ -86,10 +85,8 @@ jQuery.extend(true,langJSON, {
     "chType_REMOTECONTROL_RECEIVER" : "Verkn%FCpfungspartner<br/>Taste",
     "chType_RGBW_AUTOMATIC" : "Programm",
     "chType_RGBW_COLOR" : "Farbe",
-
-    "chType_ROTARY_CONTROL_TRANSCEIVER_TL" : "tr Drehrichtungsgeber Links",
-    "chType_ROTARY_CONTROL_TRANSCEIVER_TR" : "tr Drehrichtungsgeber Rechts",
-
+    "chType_ROTARY_CONTROL_TRANSCEIVER_TL" : "Drehrichtungsgeber<br/>Links",
+    "chType_ROTARY_CONTROL_TRANSCEIVER_TR" : "Drehrichtungsgeber<br/>Rechts",
     "chType_ROTARY_HANDLE_TRANSCEIVER" : "Fenster-/ Drehgriffkontakt",
     "chType_SABOTAGECONTACT" : "Verkn%FCpfungspartner<br/>Sabotagekontakt",
     "chType_SENSOR_FOR_CARBON_DIOXIDE" : "Luftg%FCte-/CO2-Sensor",

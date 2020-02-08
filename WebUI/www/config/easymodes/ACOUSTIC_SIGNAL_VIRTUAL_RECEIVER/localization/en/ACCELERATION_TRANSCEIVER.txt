@@ -4,6 +4,6 @@
 
 "description_3" : "<span class=\"translated\">eAccording to the selected switching mode, a running MP3 file will be switched off</span><br/><br/>",
 
-"subset_1": "Motion/Vertical",
+"subset_1": "Motion/Tilted",
 "subset_2": "Standby/Horizontal",
 "subset_3": "Every change",

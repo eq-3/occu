@@ -1421,6 +1421,7 @@ jQuery.extend(true, langJSON, {
     "lblPosition" : "Position",
     "lblHorizontal" : "Horizontal",
     "lblVertical" : "Vertical",
+    "lblNonHorizontal" : "Tilted",
     "lblYes" : "Yes",
     "lblNo" : "No",
 

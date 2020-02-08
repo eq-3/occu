@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">Mit einer schnellen Linksdrehung wird das Licht auf den festgelegten Helligkeitswert eingeschaltet. Eine langsame Linksdrehung dimmt das Licht hoch.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Mit einer schnellen Linksdrehung wird das Licht ausgeschaltet. Eine langsame Linksdrehung dimmt das Licht herunter.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Mit einer schnellen Linksdrehung wechselt das Licht zwischen dem festgelegten Helligkeitswert und &quot;aus&quot;. Eine langsame Linksdrehung dimmt das Licht abwechselnd hoch- und herunter.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",

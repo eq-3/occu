@@ -3,6 +3,6 @@
 "description_3" : "<span class=\"translated\">According to the selected switching mode, the light of the garage door drive is switched off.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">The sensor is not active</span>",
 
-"subset_1": "Motion/vertical",
+"subset_1": "Motion/Tilted",
 "subset_2": "Standby/horizontal",
-"subset_3": "Each change",
+"subset_3": "Every change",

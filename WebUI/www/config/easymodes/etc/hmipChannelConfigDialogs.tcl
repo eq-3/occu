@@ -454,6 +454,15 @@ proc getMultiModeInputTransmitter {chn p descr address} {
   set specialID "[getSpecialID $special_input_id]"
   set CHANNEL $special_input_id
 
+  set param LED_DISABLE_CHANNELSTATE
+  if { [info exists ps($param)] == 1  } {
+     incr prn
+     append html "<tr>"
+       append html "<td>\${stringTableLEDDisableChannelState}</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+     append html "</tr>"
+  }
+
   set param CHANNEL_OPERATION_MODE
   if { [info exists ps($param)] == 1 } {
     set valueListIndex [expr [lsearch $psDescr($param) VALUE_LIST] +1]
@@ -790,7 +799,6 @@ proc getSwitchTransmitter {chn p descr} {
 
   set param LED_DISABLE_CHANNELSTATE
   if { [info exists ps($param)] == 1  } {
-    # In older versions this parameter is not available
      incr prn
      append html "<tr>"
        append html "<td>\${stringTableLEDDisableChannelState}</td>"
@@ -1873,7 +1881,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
               append html "<option value='4'>\${stringTableWeekProgram5}</option>"
               append html "<option value='5'>\${stringTableWeekProgram6}</option>"
             }
-        append html "</select>[getHelpIcon $param$isGroup]"
+        append html "</select>&nbsp;[getHelpIcon $param$isGroup]"
         append html "</td>"
       append html "</tr>"
     append html "</table>"
@@ -2023,7 +2031,6 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
       set param MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE
       if { [info exists ps($param)] == 1  } {
-        # In older versions this parameter is not available
         incr prn
         append html "<tr>"
         append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableMinMaxNotRelevantForManuMode}</td>"
@@ -2046,7 +2053,6 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
 
       set param DURATION_5MIN
       if { [info exists ps($param)] == 1  } {
-        # In older versions this parameter is not available
         incr prn
         append html "<tr name=\"expertParam\" class=\"hidden\">"
           append html "<td>\${stringTableDuration5Min}</td>"
@@ -2611,8 +2617,18 @@ proc getAccelerationTransceiver {chn p descr} {
 
       append html "<script type=\"text/javascript\">"
         append html "changeParamDescription = function(value) {"
-          append html "jQuery(\"\[name='motion'\]\").html(translateKey(\"motionDetectorOptionMotion_\"+value));"
-          append html "jQuery(\"\[name='noMotion'\]\").html(translateKey(\"motionDetectorOptionNoMotion_\"+value));"
+
+          append html "var optionNoMotion = translateKey(\"motionDetectorOptionNoMotion_\"+value),"
+          append html "optionMotion = translateKey(\"motionDetectorOptionMotion_\"+value);"
+
+          append html "var optMsgPosA = jQuery(\"\[name='MSG_FOR_POS_A'\] option\");"
+          append html "jQuery(optMsgPosA\[1\]).text(optionNoMotion);"
+          append html "jQuery(optMsgPosA\[2\]).text(optionMotion);"
+
+          append html "var optMsgPosB = jQuery(\"\[name='MSG_FOR_POS_B'\] option\");"
+          append html "jQuery(optMsgPosB\[1\]).text(optionNoMotion);"
+          append html "jQuery(optMsgPosB\[2\]).text(optionMotion);"
+
           append html "jQuery(\"\[name='messageMovement'\]\").html(translateKey(\"motionDetectorMessageMovement_\"+value));"
           append html "jQuery(\"\[name='messageNoMovement'\]\").html(translateKey(\"motionDetectorMessageNoMovement_\"+value));"
           append html "jQuery(\"\[name='NotiMovement'\]\").html(translateKey(\"motionDetectorNotificationMovement_\"+value));"
@@ -2713,7 +2729,7 @@ proc getAccelerationTransceiver {chn p descr} {
       set options(3) "\${motionDetectorSensorRange2G}"
       set options(4) "\${motionDetectorSensorRange2GPlusSens}"
       set options(5) "\${motionDetectorSensorRange2G2PlusSense}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 170]</td>"
     append html "</tr>"
   }
 
@@ -2722,7 +2738,7 @@ proc getAccelerationTransceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${motionDetectorTriggerAngle}</td>"
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 100]</td>"
     append html "</tr>"
   }
 
@@ -3035,7 +3051,7 @@ proc getPassageDetector {chn p descr} {
   if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
-    append html "<td>\${stringTableEventTimeout}</td>"
+    append html "<td>\${stringTableEventTimeoutPassageDetector}</td>"
     append html [getComboBox $chn $prn "$specialID" "delayShort"]
     append html "</tr>"
 
@@ -3746,6 +3762,72 @@ proc getAcousticSignalVirtualReceiver {chn p descr} {
     append html [getPowerUpSelectorAcousticSignal $chn ps $special_input_id]
   }
   return $html
+}
+
+proc getRainDetectionTransmitter {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+  set html ""
+  set prn 0
+
+  set param LED_DISABLE_CHANNELSTATE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableLEDDisableChannelState}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+    set specialParam 1
+  }
+
+  set param EVENT_TIMEOUT_BASE
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventTimeoutRainDetector}</td>"
+    append html [getComboBox $chn $prn "$specialID" "delayShortA"]
+    # append html "<td>[getHelpIcon $param]</td>"
+    append html "</tr>"
+
+    #param = EVENT_TIMEOUT_BASE
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_TIMEOUT_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventTimeoutValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param SAMPLE_INTERVAL
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${rainDetectorSampleInterval}</td>"
+     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+     # append html "<td>[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+
+  set param SENSOR_SENSITIVITY
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableSensorSensivity}</td>"
+      option RAW_0_100Percent
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_rain]</td>"
+    append html "</tr>"
+  }
+  return $html
+
 }
 
 proc getNoParametersToSet {} {

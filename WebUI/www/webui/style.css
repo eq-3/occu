@@ -259,11 +259,11 @@ a img {
 }
 
 #chnListBody td {
-  /*border: solid 1px $_(black); /* black */*/
+  /*border: solid 1px $_(black); /* black */
   text-align: center;  
 }
 #chnListBody th {
-  /*border: solid 1px $_(black); /* black */*/
+  /*border: solid 1px $_(black); /* black */
   text-align: center;  
 }
 
@@ -483,7 +483,7 @@ a img {
 
 .Messages_Selected {
   background-color: $_(active); /* #565657 */
-};
+}
 
 /* Kopfzeile der Alarm-/Servicemeldungen */
 .MsgTblHeader {
@@ -1226,9 +1226,10 @@ a img {
 
 .tTable td
 {
-  color: $_(textColorB); /* black */
+  color: $_(textColorB);
 }
 */
+
 .bgWhite
 {
   background-color: $_(white); /* white */
@@ -2584,7 +2585,7 @@ html, body {
   left: 200px;
   height: 50px;
   line-height:50px;
-  text-align: middle;
+  text-align: center;
   color: $_(textColorB); /* #000000 */
 }
 
@@ -5102,7 +5103,7 @@ application {
 }
 
 .CLASS02513 {
-	width:96;
+	width:96px;
 	background-color:$_(white); /* white */
 	border:1px solid $_(black); /* black */
 }
@@ -5258,6 +5259,17 @@ application {
 	width:220px;
 	height:30px;
   color: $_(white) ! important;
+}
+
+.CLASS02532c {
+	font-size: 10px;
+	width:220px;
+	/*height:25px;*/
+	height:auto;
+	min-height: 32px;
+	clear: both;
+	display: inline-block;
+  line-height:25px;
 }
 
 .CLASS02533 {
@@ -7076,7 +7088,8 @@ color: $_(textColorA); /* white */
 	background-color:$_(inactiveBackground);
 	border:solid 1px $_(black); /* black */
 	width:170px;
-	padding: 6px	color: $_(textColorB); /* black */
+	padding: 6px;
+	color: $_(textColorB); /* black */
 }
 
 .CLASS05907 {
@@ -7858,7 +7871,7 @@ color: $_(textColorA); /* white */
 /* config\ic_ifacecmd.cgi */
 
 .CLASS20700 {
-  padding:10;
+  padding: 10px;
   text-align:center
 }
 

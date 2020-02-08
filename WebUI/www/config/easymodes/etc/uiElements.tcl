@@ -105,6 +105,7 @@ proc getCondTXThresholdUnit {devType chn} {
     }
 }
 
+
 proc getUserDefinedCondTXThresholdUnitMinMaxDescr {devType chn} {
    switch [string tolower $devType] {
         hmip-psm  {return "W (0 - [getUserDefinedMaxValue $devType])"}
@@ -283,6 +284,35 @@ proc getDeactivateLongKeypress {p profile special_input_id prn {optionDisable 0}
   return $html
 }
 
+proc getNumberOfDimmingSteps {p profile special_input_id prn} {
+  upvar $profile PROFILE
+  upvar $p ps
+  upvar pref pref
+
+  set html ""
+
+  set param LONG_DIM_STEP
+  if { [info exists ps($param)] == 1  } {
+    incr pref
+    append html "<tr>"
+      append html "<td>\${longKeyPressDimmingSteps}</td>"
+      array_clear options
+      set options(0.05) 20
+      set options(0.1) 10
+      set options(0.11) 9
+      set options(0.125) 8
+      set options(0.14) 7
+      set options(0.16) 6
+      set options(0.2) 5
+      set options(0.25) 4
+      set options(0.33) 3
+      set options(0.5) 2
+      append html "<td>[get_ComboBox options $param ${special_input_id}_$prn\_$pref PROFILE $param]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+  return $html
+}
+
 proc getHorizontalLine {{extraparam ""}} {
   return "<tr $extraparam><td colspan=\"2\"><hr></td></tr>"
 }
@@ -312,6 +342,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
+   "LONG_DIM_STEP" {set x 500; set y 130}
    "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
    "PERMANENT_FULL_RX" {set x 500; set y 160}

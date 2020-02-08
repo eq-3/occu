@@ -4,8 +4,8 @@
 "description_4" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird das Licht geschaltet.</span><br/><br/>",
 
 
-"subset_1": "Bewegung/Senkrecht",
+"subset_1": "Bewegung/Geneigt",
 "subset_2": "Ruhe/Waagerecht",
 "subset_3": "Jede &Auml;nderung",
-"subset_4": "Bewegung/Senkrecht Ein / Ruhe/Waagerecht Aus",
-"subset_5": "Bewegung/Senkrecht Aus / Ruhe/Waagerecht Ein",
+"subset_4": "Bewegung/Geneigt Ein / Ruhe/Waagerecht Aus",
+"subset_5": "Bewegung/Geneigt Aus / Ruhe/Waagerecht Ein",

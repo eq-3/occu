@@ -569,7 +569,7 @@ jQuery.extend(true,langJSON, {
     "stringTableMotionDetectorMotionFalse" : "no motion",
     "stringTableMotionDetectorMotionTrue" : "motion detected",
     "stringTableAccelerationTransceiverMotionDetectorMotionFalse" : "no motion/horizontal",
-    "stringTableAccelerationTransceiverMotionDetectorMotionTrue" : "motion detected/vertical",
+    "stringTableAccelerationTransceiverMotionDetectorMotionTrue" : "motion detected/tilted",
     "stringTableMotionDetectorTitle" : "Motion detector",
     "stringTableNotUsed" : "Unused",
     "stringTableOFF" : "Off",
@@ -995,7 +995,7 @@ jQuery.extend(true,langJSON, {
     "stringTableEventBlindTime" : "Time interval until the next motion is detected.",
     "stringTableEventBlindTimeBase" : "Time interval unit",
     "stringTableBlindTimeValue" : "Time interval value",
-    "stringTableEventTimeout" :
+    "stringTableEventTimeoutPassageDetector" :
       "Time interval in which both sensors must be triggered,<br/>" +
       "so that the direction can be determined.",
     "stringTableEventTimeoutBase" : "Time interval unit",
@@ -1174,6 +1174,8 @@ jQuery.extend(true,langJSON, {
     "stringTableLevelStatus" : "Status Level",
     "stringTableLevel" : "Value",
     "stringTableLevelReal" : "Value",
+
+    "stringTableRotaryControlTransceiverTitle" : " Rotary Button",
 
     "noMoreKeys" : ""
   }

@@ -1,0 +1,24 @@
+"description_1" : "<span class=\"translated\">Die Jalousie wird enstprechend des gew&auml;hlten Schaltbefehls gefahren. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Erkennung des gew&aumlhlten Schaltbefehls f&auml;hrt die Jalousie im Wechsel ganz hoch bzw. ganz herunter (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+"_description_3" : "<span class=\"translated\">Bei Erkennung des gew&aumlhlten Schaltbefehls f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+
+"description_3" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
+
+"subset_1" : "hochgefahren",
+"subset_2" : "heruntergefahren",
+"subset_3" : "hoch- / heruntergefahren im Wechsel",
+
+"subset_4" : "Regen - zu/herunter / Trockenheit - auf/hoch",
+"subset_5" : "Regen - auf/hoch / Trockenheit - zu/herunter",
+
+"subset_6" : "Trockenheit",
+"subset_7" : "Regen",
+"subset_8" : "&Auml;nderung",
+
+"subset_9" : "Regen",
+"subset_10" : "Trockenheit",
+
+"_at" : "<span class=\"translated\">bei</span>",
+
+
+

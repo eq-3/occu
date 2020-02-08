@@ -1,0 +1,16 @@
+"description_1" : "<span class=\"translated\">Bei Erkennung des gew&aumlhlten Schaltbefehls wird das Licht in den entgegengesetzten Zustand geschaltet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Das Licht wird entsprechend des gew&auml;hlten Schaltbefehls geschaltet.</span><br/><br/>",
+
+"description_3" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
+
+"subset_1" : "Regen - ein/aus",
+"subset_2" : "Trockenheit - ein/aus",
+"subset_3" : "Regen - ein / Trockenheit - aus",
+"subset_4" : "Regen - aus / Trockenheit - ein",
+"subset_5" : "Regen - ein",
+"subset_6" : "Regen - aus",
+"subset_7" : "Trockenheit - ein",
+"subset_8" : "Trockenheit - aus",
+
+"_at" : "<span class=\"translated\">bei</span>",
+

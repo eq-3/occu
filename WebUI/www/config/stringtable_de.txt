@@ -670,6 +670,7 @@ ERROR_POWER=NO_ERROR	${stringTablePowerAvailable}
 ERROR_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
 ERROR_POWER=TRUE	${stringTableErrorPowerTrue}
 
+ERROR_POWER_FAILURE	${stringTableErrorPowerFailureTrue}
 ERROR_POWER_FAILURE=FALSE	${stringTableErrorPowerFailureFalse}
 ERROR_POWER_FAILURE=TRUE	${stringTableErrorPowerFailureTrue}
 
@@ -733,6 +734,8 @@ FROST_PROTECTION_TEMPERATURE	${stringTableFrostProtectionTemperature}
 FUSE_DELAY	${stringTableDimmerFuseDelay}
 GENERIC_INPUT_TRANSMITER	${stringTableGenericTransmitterTitle}
 GLOBAL_BUTTON_LOCK	${stringTableGlobalButtonLock}
+HEATER_STATE=FALSE	${stringTableRainDetectorHeatingOff}
+HEATER_STATE=TRUE	${stringTableRainDetectorHeatingOn}
 HEATING_CLIMATECONTROL_CL_RECEIVER	${stringTableClimateControlCLReceiverTitle}
 HEATING_CLIMATECONTROL_CL_TRANSMITTER	${stringTableHeatingClimateControlCLTransmitterTitle}
 HEATING_CLIMATECONTROL_RECEIVER	${stringTableClimateControlReceiverTitle}
@@ -1172,6 +1175,7 @@ PULSE_SENSOR|SEQUENCE_PULSE_5	${stringTablePulseSensorSequencePulse5}
 PULSE_SENSOR|SEQUENCE_PULSE_5=NOT_USED	${stringTablePulseSensorSequencePulse5Unused}
 PULSE_SENSOR|SEQUENCE_TOLERANCE	${stringTablePulseSensorSequenceTolerance}
 RADIATOR_THERMOSTAT	${stringTableRadiatorThermostatTitle}
+RAIN_DETECTION_TRANSMITTER	${stringTableRainDetector}
 RAINDETECTOR	${stringTableRainDetector}
 RAINDETECTOR_HEAT|STATE=FALSE	${stringTableRainDetectorHeatingOff}
 RAINDETECTOR_HEAT|STATE=TRUE	${stringTableRainDetectorHeatingOn}
@@ -1226,6 +1230,7 @@ RGBW_COLOR|COLOR	${stringTableRGBWColorValue}
 RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_BLUE	${stringTableRGBWWhiteAdjustmentBlue}
 RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_GREEN	${stringTableRGBWWhiteAdjustmentGreen}
 RGBW_COLOR|WHITE_ADJUSTMENT_VALUE_RED	${stringTableRGBWWhiteAdjustmentRed}
+ROTARY_CONTROL_TRANSCEIVER	${stringTableRotaryControlTransceiverTitle}
 ROTARY_HANDLE_SENSOR	${stringTableRHSTitle}
 ROTARY_HANDLE_SENSOR|ERROR=SABOTAGE	${stringTableRHSErrorSabotage}
 ROTARY_HANDLE_SENSOR|MSG_FOR_POS_A	${stringTableRHSMsgPosA}

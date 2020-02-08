@@ -138,10 +138,21 @@ picDivShow = function(jg, devtype, size, formname, divelem)
   //-----
 
   ShowElement('picDiv');
+  if (typeof previewPicTimer == "undefined") {
+    previewPicTimer = window.setTimeout(function () {
+      HideElement('picDiv');
+      delete previewPicTimer;
+    }, 10000);
+  }
 };
 
 picDivHide = function(jg)
 {
+  if (typeof previewPicTimer != "undefined") {
+    window.clearTimeout(previewPicTimer);
+    delete previewPicTimer;
+  }
+
   if (! jg) return;
 
   HideElement('picDiv');

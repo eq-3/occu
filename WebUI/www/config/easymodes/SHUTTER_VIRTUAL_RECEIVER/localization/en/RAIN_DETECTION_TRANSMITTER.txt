@@ -1,0 +1,21 @@
+"description_1" : "<span class=\"translated\">The awning / shutter is moved according to the selected switching command. If a lifting delay is set the blind / shutter will be moved after the delay time has expired.</span><br/><br/>",
+
+"description_2" : "<span class=\"translated\">If the selected switching command is detected, the awning / shutter is entirely raised or lowered alternately (toggle function). If a delay is set, the awning / shutter will be moved to the desired position after the delay time has expired.</span><br/><br/></span><br/><br/>",
+
+"description_3" : "<span class=\"translated\">The profile is not active.</span>",
+
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",
+
+"subset_4" : "Rain - closed/down / dry conditions - open/up",
+"subset_5" : "Rain - open/up / dry conditions - closed/down",
+
+"subset_6" : "Dry conditions",
+"subset_7" : "Rain",
+"subset_8" : "Change",
+
+"subset_9" : "Rain",
+"subset_10" : "Dry conditions",
+
+"_at" : "<span class=\"translated\">en* bei</span>",

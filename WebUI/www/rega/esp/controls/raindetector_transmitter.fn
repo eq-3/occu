@@ -1,0 +1,43 @@
+function ::CreateRainDetectorTransmitter()
+{
+  object objRain = cObj.DPByControl("RAIN_DETECTION_TRANSMITTER.RAINING");
+  object objHeaterState = cObj.DPByControl("RAIN_DETECTION_TRANSMITTER.HEATER_STATE");
+
+  string rainState = "${lblUnknown}";
+  string heaterState = "${lblUnknown}";
+
+  if (objRain) {
+    if (objRain.Value()) {
+      rainState = "${stringTableWeatherRainingTrue}";
+    } else {
+      rainState = "${stringTableWeatherRainingFalse}" ;
+    }
+  }
+
+  if (objHeaterState) {
+    if (objHeaterState.Value()) {
+      heaterState = "${stringTableRainDetectorHeatingOn}";
+    } else {
+      heaterState = "${stringTableRainDetectorHeatingOff}";
+    }
+  }
+
+  WriteLine("<td>");
+    WriteLine("<table align='center'>");
+      WriteLine("<tr>");
+        WriteLine("<td class='CLASS02518'>");
+          WriteLine("<div id='rainState"#chnId#"' class='ControlBtnInfo CLASS02532c'>"#rainState#"</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td class='CLASS02518'>");
+          WriteLine("<div id='heaterState"#chnId#"' class='ControlBtnInfo CLASS02532c'>"#heaterState#"</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  return;
+}
+

@@ -131,6 +131,7 @@ function ::dcCreate()
     var CN_POWERMETER_IGL  = "POWERMETER_IGL.";
     var CN_POWERMETER_PSM  = "POWERMETER_PSM.";
     var CN_RC19_DISPLAY    = "RC19_DISPLAY.";
+    var CN_RAIN_DETECTION_TRANSMITTER = "RAIN_DETECTION_TRANSMITTER.";
     var CN_RGB_COLOR        = "RGB_COLOR.";
     var CN_RGBW_AUTOMATIC  = "RGBW_AUTOMATIC.";
     var CN_RGBW_COLOR       = "RGBW_COLOR.";
@@ -417,7 +418,8 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName!=CN_HMIP_BUTTON) )
           {
             object ch = dom.GetObject(chnId);
-            if ((ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") || ((ch.HssType() == "MULTI_MODE_INPUT_TRANSMITTER") && (ch.MetaData("channelMode") != 3))) {
+            ! if ((ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") || ((ch.HssType() == "MULTI_MODE_INPUT_TRANSMITTER") && (ch.MetaData("channelMode") != 3))) {
+            if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") {
               WriteLine( "<script>conInfo('Control CN_HMIP_BUTTON found.');</script>" );
               isKnownControl = true;
               sLastControlName = CN_HMIP_BUTTON;
@@ -485,10 +487,11 @@ function ::dcCreate()
               isKnownControl = true;
               sLastControlName = CN_DOOR_SENSOR;
               if (ch) {
-                if (ch.MetaData("channelMode") != 3) {
-                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
-                } else {
+                ! channelMode 1 and 2 are handled as HMIP_BUTTON
+                if (ch.MetaData("channelMode") == 3) {
                   Call("/esp/controls/door_window_contact.fn::CreateDoorWindowContact()");
+                } else {
+                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
                 }
               }
             }
@@ -857,6 +860,16 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_BRIGHTNESS_TRANSMITTER;
             Call("/esp/controls/brightness_transmitter.fn::CreateBrightnessTransmitter()");
+          }
+
+          !# RAIN_DETECTION_TRANSMITTER - HmIP
+          bIsControl = ( sControlName.Find(CN_RAIN_DETECTION_TRANSMITTER) > -1 );
+          if( bIsControl && (sLastControlName != CN_RAIN_DETECTION_TRANSMITTER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_RAIN_DETECTION_TRANSMITTER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_RAIN_DETECTION_TRANSMITTER;
+            Call("/esp/controls/raindetector_transmitter.fn::CreateRainDetectorTransmitter()");
           }
 
           !# CN_IDENTIFICATION - HmIPW Identification

@@ -166,7 +166,7 @@ set PROFILE_3(UI_TEMPLATE)  $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
 
 
-# "Bewegung/Senkrecht"
+# "Bewegung/Geneigt"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
 set SUBSET_1(SHORT_CT_OFF)      0

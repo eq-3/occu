@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">With a quick anti-clockwise rotation, the light will be switched to the defined brightness value. A slow anti-clockwise rotation will dim the light up.</span><br/><br/>",
+
+"description_2" : "<span class=\"translated\">With a quick anti-clockwise rotation, the light will be switched off. A slow anti-clockwise rotation will dim the light down.</span><br/><br/>",
+
+"description_3" : "<span class=\"translated\">With a quick anti-clockwise rotation, the light changes between the defined brightness value and &quot;off&quot;. A slow anti-clockwise rotation will dim the light up or down.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",

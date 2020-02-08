@@ -43,7 +43,7 @@ jQuery.extend(true,langJSON, {
     "lblBrightnessLuxA" : "Helligkeit in Lux",
     "lblBrightnessLuxB" : "eingeben und %FCbernehmen",
 
-    "hintExternalLinkExists" :
+    "hintInternalLinkExists" :
       "Bei %C4nderung des Kanalverhaltens, sollte die interne Verkn%FCpfung des Ger%E4tes gel%F6scht und neu erstellt werden.<br/>" +
       "Andernfalls wird die interne Verkn%FCpfung sich nicht mehr erwartungsgem%E4%DF verhalten.",
 
@@ -110,6 +110,22 @@ jQuery.extend(true,langJSON, {
     "lblDelayExternalArming" : "Externer Alarm verz%F6gert aktiviert",
     "lblDelayInternalArming" : "Interner Alarm verz%F6gert aktiviert",
     "lblEvent" : "Event",
+
+
+    "comment" : "***** A/2020 *****",
+
+    "dlgLoadLicense" : "Laden der Lizenz",
+    "dlgErrorLoadLicense" : "Die Software-Lizenz kann nicht geladen werden. Pr%FCfen Sie bitte die Internetverbindung der CCU.",
+
+    "comment" : "NOT YET TRANSLATED",
+
+    "rotationDirLeftFast" : "Schnelles Drehen nach links",
+    "rotationDirRightFast" : "Schnelles Drehen nach rechts",
+    "rotationDirLeftSlow" : "Langsames Drehen nach links",
+    "rotationDirRightSlow" : "Langsames Drehen nach rechts",
+
+    "stringTableEventTimeoutRainDetector" : "Zeitspanne ohne Regen, nach der vom <br/>Sensor 'Trocken' gemeldet wird.",
+    "rainDetectorSampleInterval" : "Zeitspanne zwischen den einzelnen Messungen<br/>(Regenerkennungsintervall)",
 
     "noMoreKeys" : ""
 

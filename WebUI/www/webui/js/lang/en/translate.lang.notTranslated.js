@@ -115,10 +115,18 @@ jQuery.extend(true,langJSON, {
     "comment" : "***** A/2020 *****",
 
     "dlgLoadLicense" : "Loading the license",
-    "dlgErrorLoadLicense" : "The software license cannot be loaded. Please check the Internet connection of the CCU.",
+    "dlgErrorLoadLicense" : "The software license cannot be loaded Please check the Internet connection of the CCU.",
 
 
     "comment" : "NOT YET TRANSLATED",
+
+    "rotationDirLeftFast" : "Quick anti-clockwise rotation",
+    "rotationDirRightFast" : "Quick clockwise rotation",
+    "rotationDirLeftSlow" : "Slow anti-clockwise rotation",
+    "rotationDirRightSlow" : "Slow clockwise rotation",
+
+    "stringTableEventTimeoutRainDetector" : "Time period without rain, after which the <br/>sensor signals 'dry condition'.",
+    "rainDetectorSampleInterval" : "Time between the single measurements<br/>(rain detection interval)",
 
     "noMoreKeys" : ""
   }

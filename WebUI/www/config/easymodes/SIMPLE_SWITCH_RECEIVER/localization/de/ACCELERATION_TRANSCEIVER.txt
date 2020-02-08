@@ -3,6 +3,6 @@
 "description_3" : "<span class=\"translated\">Entsprechend dem gew&auml;hlten Schaltmodus wird die Beleuchtung des Garagentorantriebes ausgeschaltet.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">Der Sensor ist nicht aktiv</span>",
 
-"subset_1": "Bewegung/Senkrecht",
+"subset_1": "Bewegung/Geneigt",
 "subset_2": "Ruhe/Waagerecht",
 "subset_3": "Jede &Auml;nderung",

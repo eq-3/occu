@@ -35,6 +35,8 @@
 "xxxx" : "xxxx",
 "yyyy" : "yyyy",
 "description_longkey" : "<span class=\"translated\">Additional settings for the long button press.</span><br/><br/>",
+"description_slowRotation" : "<span class=\"translated\">Settings for slow rotation.</span><br/><br/>",
+"description_fastRotation" : "<span class=\"translated\">Settings for quick rotation.</span><br/><br/>",
 "channel_nonactive" : "",
 "not_active" : "inactive",
 "unknownProfile" : "Unknown profile",
@@ -45,6 +47,7 @@
 "helpDecisionVal" : "<span class=\"translated\">The decision value and the upper/lower threshold value are channel parameters of the transmitter and must be configured correctly to enable correct operation of the profile. The settings can be adjusted here via the button 'Editing transmitter channel settings'.</span><br/><br/>",
 
 "longKeyPressActiveInactive" : "Long keypress",
+"longKeyPressDimmingSteps" : "Number of dimmer steps",
 "optionDisable" : "Inactive",
 "optionEnable" : "Active",
 

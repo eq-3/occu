@@ -1,0 +1,18 @@
+"description_1" : "<span class=\"translated\">If the switching command is detected, the selected MP3 file is played with the specified volume and stopped with the next detection (toggle function).</span><br/><br/>",
+
+"description_2" : "<span class=\"translated\">" +
+"The switching command 'Dry conditions' plays the selected MP3 file with the defined volume in dry conditions, in case of rain the MP3 is stopped. " +
+"The switching command 'Rain' plays the selected MP3 file with the defined volume in case of rain, in dry conditions the MP3 is stopped."
+"</span><br/><br/>",
+
+
+"description_3" : "<span class=\"translated\">The profile is not active.</span>",
+
+"subset_1" : "Rain - off / dry conditions - on",
+"subset_2" : "Rain - on / dry conditions - off",
+"subset_3" : "Dry conditions",
+"subset_4" : "Rain",
+"subset_6" : "Rain - on/off",
+"subset_7" : "Dry conditions - on/off",
+"_at" : "<span class=\"translated\">when</span>",
+

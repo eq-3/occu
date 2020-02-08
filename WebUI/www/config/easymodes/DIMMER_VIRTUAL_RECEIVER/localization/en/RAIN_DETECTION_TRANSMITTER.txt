@@ -1,0 +1,15 @@
+"description_1" : "<span class=\"translated\">If the selected switching command is detected, the light is switched to the opposite state (toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The light is switched according to the selected switching command..</span><br/><br/>",
+"description_3" : "<span class=\"translated\">The profile is not active.</span>",
+
+"subset_1" : "rain - on/off",
+"subset_2" : "dry conditions - on/off",
+"subset_3" : "rain - on / drought - off",
+"subset_4" : "rain - off / drought - on",
+"subset_5" : "rain - on",
+"subset_6" : "rain - off",
+"subset_7" : "dry conditions - on",
+"subset_8" : "dry conditions - off",
+
+"_at" : "<span class=\"translated\">en* bei</span>",
+

@@ -1428,6 +1428,7 @@ jQuery.extend(true,langJSON, {
     "lblPosition" : "Lage",
     "lblHorizontal" : "Waagerecht",
     "lblVertical" : "Senkrecht",
+    "lblNonHorizontal" : "Geneigt",
     "lblYes" : "Ja",
     "lblNo" : "Nein",
 

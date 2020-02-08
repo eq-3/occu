@@ -73,6 +73,7 @@
 "SWITCHING_INTERVAL_BASE" : "Einheit des Intervalls",
 "SWITCHING_INTERVAL_FACTOR" : "Wert des Intervalls",
 "SWITCHING_INTERVAL_FACTOR_DESCR" : "Intervall der Pumpenschutzfunktion",
+"SWITCH_COMMAND" : "<span class=\"translated\">Schaltbefehl</span>",
 "SWITCH_DIR" : "<span class=\"translated\">Richtung</span>",
 "SWITCH_MODE" : "<span class=\"translated\">Schaltmodus</span>",
 "SWITCH_SIGNAL" : "<span class=\"translated\">Einschaltsignal</span>",

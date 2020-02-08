@@ -830,7 +830,7 @@
     var pb = '';
     pb += 'string action = "ReloadRule";';
     pb += 'string rid = "'+rid+'";';
-    var opt = { postBody: pb, onComplete: ReloadRuleCallback }
+    var opt = { postBody: pb, onComplete: ReloadRuleCallback };
     new Ajax.Updater("rule"+rid,url,opt);
   };
   LoadRule = function(pid,rid)

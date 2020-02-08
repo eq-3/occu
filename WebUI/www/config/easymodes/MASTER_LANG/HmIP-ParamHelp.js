@@ -170,6 +170,28 @@ jQuery.extend(true,langJSON, {
     "POSITION_SAVE_TIME" :
     "Zeit, nach der die aktuelle Position als 'alter Wert' gewertet wird.",
 
+    "SENSOR_SENSITIVITY" : "Bei Verwendung als Ersch%FCtterungssensor, erm%F6glicht dieser Parameter die Einstellung der Empflindlichkeit des Sensors. Dabei gilt:<br/><br/>" +
+    "16G = sehr unempfindlich<br/>" +
+    "8G<br/>" +
+    "4G<br/>" +
+    "2G<br/>" +
+    "2G+<br/>" +
+    "2G++ = sehr empfindlich",
+
+    "SENSOR_SENSITIVITY_rain" :
+    "Hier k%F6nnen Sie die Empfindlichkeit des Regensensors einstellen. Dabei bedeutet ein hoher Wert eine h%F6here Empfindlichkeit.<br/><br/>"  +
+    "Einstellung 0%:   Es muss nahezu die ganze Sensorfl%E4che mit Regenwasser bedeckt sein, damit der Sensor ausl%F6st.<br/><br/>" +
+    "Einstellung 100%: Es reicht ein kleiner Tropfen ( von ca. 70mm&sup3; ) f%FCr ein Ausl%F6sen des Sensors aus ( je nach Region mehr oder weniger ).<br/><br/>" +
+    "<b>Achtung:</b><br/>Wenn f%FCr einen Test des Sensors Trinkwasser verwendet wird, reduziert sich die Menge an notwendigem Wasser f%FCr eine Ausl%F6sung, da dessen Leitwert i.d.R. um mehrere 10er Potenzen h%F6her liegt.",
+
+    "TRIGGER_ANGLE" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wieviel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, " +
+      "damit ein Event ausgel%F6st wird.",
+
+    "LONG_DIM_STEP" :
+      "Dieser Parameter bestimmt die Anzahl der Stufen, um die Helligkeit von 0% - 100% hochzudimmen, bzw. von 100% - 0 % herunterzudimmen.<br/><br/>" +
+      "<u>Beispiel:</u><br/>" +
+      "Ein Wert von 4 sorgt daf%FCr, dass die Helligkeit in 25%-Stufen (100% / 4) gew%E4hlt werden kann. Wird nun eine Pegelbegrenzung von 50% eingestellt, dann wird dieser Wert in 2 Stufen erreicht.",
+
     "noMoreHelp" : ""
   },
 
@@ -336,6 +358,29 @@ jQuery.extend(true,langJSON, {
 
     "POSITION_SAVE_TIME" :
     "Time after which the current position is interpreted as 'old value'.",
+
+    "SENSOR_SENSITIVITY" : "When using as vibration sensor, this parameter can be used to set the sensor sensitivity. That means:<br/><br/>" +
+    "16G = very insensitive<br/>" +
+    "8G<br/>" +
+    "4G<br/>" +
+    "2G<br/>" +
+    "2G+<br/>" +
+    "2G++ = very sensitive",
+
+    "SENSOR_SENSITIVITY_rain" :
+      "You can adjust the rain sensor sensitivity here. A higher value implies higher sensitivity.<br/><br/>"  +
+      "Setting 0%:   Almost the entire sensor surface must be covered with rainwater for the sensor to trigger.<br/><br/>" +
+      "Setting 100%: A small drop (of approx. 70mm&sup3;) is sufficient to trigger the sensor (more or less, depending on the area).<br/><br/>" +
+      "<b>Please note:</b><br/>If drinking water is used for a test of the sensor, the amount of water required for triggering is reduced, as its conductance value is usually several potencies of 10 higher.",
+
+
+    "TRIGGER_ANGLE" : "When used as position detection sensor, this parameter determines by how many degrees the angle of the top/bottom of the sensor has to change in relation to the horizontal, " +
+      "to trigger an event.",
+
+    "LONG_DIM_STEP" :
+      "This parameter determines the number of steps to dim the brightness from 0% - 100% up, or from 100% - 0% down.<br/><br/>" +
+      "<u>Example:</u><br/>" +
+      "A value of 4 ensures that the brightness can be adjusted in 25% steps (100% / 4). If a level limitation of 50% is set, in this case the value is reached in 2 steps.",
 
     "noMoreHelp" : ""
     }

@@ -2,7 +2,7 @@
 "description_2" : "<span class=\"translated\">According to the selected switching signal the Alarm will be switched on.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">The profile is not active.</span>",
 
-"subset_1": "Motion/Vertical",
+"subset_1": "Motion/Tilted",
 "subset_2": "Standby/Horizontal",
 "subset_3": "Every change",
 

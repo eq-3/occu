@@ -35,6 +35,10 @@
 "xxxx" : "xxxx",
 "yyyy" : "yyyy",
 "description_longkey" : "<span class=\"translated\">Zus&auml;tzliche Einstellung f&uuml;r den langen Tastendruck.</span><br/><br/>",
+
+"description_slowRotation" : "<span class=\"translated\">Einstellung f&uuml;r langsames Drehen.</span><br/><br/>",
+"description_fastRotation" : "<span class=\"translated\">Einstellung f&uuml;r schnelles Drehen.</span><br/><br/>",
+
 "channel_nonactive" : "",
 "not_active" : "nicht aktiv",
 "unknownProfile" : "Unbekanntes Profil",
@@ -45,6 +49,8 @@
 "helpDecisionVal" : "<span class=\"translated\">Der Entscheidungswert ist ein Kanalparameter des Senders und muss korrekt konfiguriert sein, damit das Profil funktioniert. Die Einstellung kann von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
 "longKeyPressActiveInactive" : "Langer Tastendruck",
+"longKeyPressDimmingSteps" : "Anzahl Dimmerabstufungen",
+
 "optionDisable" : "Nicht aktiv",
 "optionEnable" : "Aktiv",
 

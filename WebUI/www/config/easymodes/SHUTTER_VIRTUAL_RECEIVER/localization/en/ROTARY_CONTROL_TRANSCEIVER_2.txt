@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">With a short clockwise rotation, the awning / shutter will be moved up for the set time. If an up-delay is set the awning / shutter will be moved up after the delay time has expired. With a slow clockwise rotation the awning / shutter will be moved for as long as the button remains pressed.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With quick clockwise rotation the awning / shutter will be moved down completely for the set time. If a down-delay is set the awning / shutter will be moved to the desired position after the delay time has expired. With a slow clockwise rotation the awning / shutter will be moved for as long as the button remains pressed.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a quick clockwise rotation the awning / shutter will be moved up completely or down completely (toggle function). If a delay is set the shading element is moved after the delay time has expired. With a slow clockwise rotation the awning / shutter will be moved for as long as the button remains pressed.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">With a quick clockwise rotation the awning / shutter will be moved to the desired position for the set time. If a delay is set the shutter will be moved after the delay time has expired. With a slow clockwise rotation the awning / shutter will be moved for as long as the button remains pressed.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">This default profile is defined when the connection is created. It is designed for blind actuators. For shutter actuators, please select a profile corresponding to your requirements from the existing profiles.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">The profile is not active.</span>",
+
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",

@@ -568,7 +568,7 @@ jQuery.extend(true,langJSON, {
     "stringTableMotionDetectorMotionFalse" : "keine Bewegung",
     "stringTableMotionDetectorMotionTrue" : "Bewegung erkannt",
     "stringTableAccelerationTransceiverMotionDetectorMotionFalse" : "keine Bewegung/waagerecht",
-    "stringTableAccelerationTransceiverMotionDetectorMotionTrue" : "Bewegung erkannt/senkrecht",
+    "stringTableAccelerationTransceiverMotionDetectorMotionTrue" : "Bewegung erkannt/geneigt",
     "stringTableMotionDetectorTitle" : "Bewegungsmelder",
     "stringTableNotUsed" : "Nicht benutzt",
     "stringTableOFF" : "Aus",
@@ -910,8 +910,8 @@ jQuery.extend(true,langJSON, {
     "stringTableWeatherHumidity" : "Rel. Luftfeuchte",
     "stringTableWeatherRainCounter" : "Regenmenge",
     "stringTableWeatherRaining" : "Regen",
-    "stringTableWeatherRainingFalse" : "aktuell kein Regen",
-    "stringTableWeatherRainingTrue" : "aktuell Regen",
+    "stringTableWeatherRainingFalse" : "Aktuell kein Regen",
+    "stringTableWeatherRainingTrue" : "Aktuell Regen",
     "stringTableWeatherReceiver" : "Heizungsthermostat (Empf%E4nger Wetterdaten)",
     "stringTableWeatherStormLowerThres" : "Windalarm-Ausschaltschwelle",
     "stringTableWeatherStormUpperThres" : "Windalarm-Einschaltschwelle",
@@ -997,7 +997,7 @@ jQuery.extend(true,langJSON, {
     "stringTableEventBlindTime" : "Zeitspanne, bis die n%E4chste Bewegung erkannt wird.",
     "stringTableEventBlindTimeBase" : "Einheit der Zeitspanne",
     "stringTableBlindTimeValue" : "Wert der Zeitspanne",
-    "stringTableEventTimeout" :
+    "stringTableEventTimeoutPassageDetector" :
       "Zeitspanne, in der beide Sensoren ausgel%F6st haben m%FCssen,<br/>" +
       "damit die Richtung bestimmt werden kann.",
     "stringTableEventTimeoutBase" : "Einheit der Zeitspanne",
@@ -1176,6 +1176,8 @@ jQuery.extend(true,langJSON, {
     "stringTableLevelStatus" : "Status Level",
     "stringTableLevel" : "Wert",
     "stringTableLevelReal" : "Wert",
+
+    "stringTableRotaryControlTransceiverTitle" : "Drehtaster",
 
     "noMoreKeys" : ""
 

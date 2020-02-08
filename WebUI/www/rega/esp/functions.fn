@@ -346,99 +346,6 @@ function ::showHideRFChannel() {
   }
 }
 
-! This seems to work but the risk to release this right now is to high
-function ::_showHideHmIPChannel() {
-  bShowChannel = true;
-
-  ! A key press doesn't work with the ccu2 and hmip
-  ! When the device is not a remote control, don't show the key channel
-  !
-  ! When the device IS A REMOTE CONTROL, show the channel. The control will say the channel has no function.
-  ! Otherwise the control of the remote control would display only the header of the page, which wouldn't look so good.
-  if ((chn.HssType().Find("KEY_TRANSCEIVER") != -1) && (
-         (oDevHssType != "HmIP-RC8")
-      && (oDevHssType != "HMIP-WRC2")
-      && (oDevHssType != "HmIP-WRC2")
-      && (oDevHssType != "HmIP-WRC6")
-      && (oDevHssType != "HmIP-KRCA")
-      && (oDevHssType != "HmIP-KRCK")
-      && (oDevHssType != "HmIP-KRC4")
-      && (oDevHssType != "HmIP-MOD-RC8")
-      && (oDevHssType != "HmIP-BRC2")
-      && (oDevHssType != "HmIP-DBB")
-      && (oDevHssType != "HmIP-RCB1")
-      && (oDevHssType != "HmIP-WRCR")
-      && (oDevHssType != "HmIP-RCV-50")
-      )
-    )
-  {
-    bShowChannel = false;
-    return;
-  }
-
-  if (bShowChannel == true) {
-
-    ! Interface HmIP-RF and HmIP-Wired
-    if (chn.HssType().Find("MAINTENANCE") != -1) {
-      ! Don't show the maintenance channel of the new HmIP devices
-      ! This is necessary because the name of such a channel of an HmIP device
-      !   can be MAINTENANCE_BAT_BL, MAINTENANCE_BAT_EL, MAINTENANCE_BAT_CL and so on
-      ! For BidCos-RF this isn't necessary
-
-      ! A HmIPW-* device with a control for the parameter IDENTIFY_TARGET_LEVEL (MAINTENANCE channel)
-      ! should be visible. So it's possible to use the identify function of wHmIPW-devices.
-      if (oDevHssType.Substr(0,6) == "HmIPW-") {
-        object chnParam = dom.GetObject("HmIP-RF."#chn.Address()#".IDENTIFY_TARGET_LEVEL");
-        if (chnParam) {
-          string controlName = chnParam.MetaData("CONTROL");
-          if (! controlName) {
-            bShowChannel = false;
-          }
-        } else {
-          bShowChannel = false;
-        }
-      } else {
-        bShowChannel = false;
-      }
-      return;
-    }
-
-    if (user.UserEasyLinkMode() == true) {
-      if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)
-      || (chn.HssType().Find("SWITCH_TRANSMITTER") != -1)
-      || (chn.HssType().Find("BLIND_TRANSMITTER") != -1)
-      || (chn.HssType().Find("SHUTTER_TRANSMITTER") != -1)
-      || (chn.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1))
-      {bShowChannel = false; return;}
-
-      if ((oDevHssType != "HmIP-MIOB") && (oDevHssType != "HmIP-WHS2")) {
-        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1)
-        || (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)
-        || (chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)
-        || (chn.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1)
-        || (chn.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1)
-        ) {
-          if (virtChnCounter >= 3) {virtChnCounter = 0;}
-          virtChnCounter = virtChnCounter + 1;
-          if (virtChnCounter != 1) {bShowChannel = false; return;}
-        }
-      } else {
-        ! HmIP-MIOB and HmIP-WHS2
-        ! Hide all SWITCH_VIRTUAL_RECEIVER channels other than 3 and 7 (the 2nd virtual channel instead of the first one) when the expert mode is not active
-        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
-          if ((chNumber != 3) && (chNumber != 7)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-    ! No hit
-    return;
-  }
-}
-
-! This is the old version of the function above. We use this old version as long as the new one hasn't been tested extensively
 function ::showHideHmIPChannel() {
   bShowChannel = true;
 
@@ -495,303 +402,48 @@ function ::showHideHmIPChannel() {
       return;
     }
 
-    ! Pluggable Switch (PS / PCBS / WGC)
-    if((oDevHssType == "HMIP-PS") || (oDevHssType == "HmIP-PS") || (oDevHssType == "HmIP-PCBS") || (oDevHssType == "HmIP-PCBS-BAT") || (oDevHssType == "HmIP-WGC") ) {
-      ! Hide SWITCH_VIRTUAL_RECEIVER channel 4 and 5 and the real channel when the expert mode is not active
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false; return;}
-      }
-      return;
-    }
+    ! SPHM-495
+    ! if (chn.HssType().Find("MULTI_MODE_INPUT_TRANSMITTER") != -1) {
+    !    if ((chn.MetaData("channelMode") != 3) && ((oDevHssType != "HmIP-DSD-PCB"))) {
+    !      bShowChannel = false;
+    !    }
+    !  return;
+    !}
 
-    ! Switch Circuit Board - 2 channels PCBS2
-    if(oDevHssType == "HmIP-PCBS2") {
-      ! Hide SWITCH_VIRTUAL_RECEIVER channel 5, 6, 9, 10 and the real channel 3 and 7 when the expert mode is not active
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && ((chNumber == 5) || (chNumber == 6) || (chNumber == 9) || (chNumber == 10))) {bShowChannel = false; return;}
-      }
-      return;
-    }
+    if (user.UserEasyLinkMode() == true) {
+      if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)
+      || (chn.HssType().Find("SWITCH_TRANSMITTER") != -1)
+      || (chn.HssType().Find("BLIND_TRANSMITTER") != -1)
+      || (chn.HssType().Find("SHUTTER_TRANSMITTER") != -1)
+      || (chn.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1))
+      {bShowChannel = false; return;}
 
-    ! Pluggable Switch and Meter (PSM)
-    if (
-         (oDevHssType == "HMIP-PSM")
-      || (oDevHssType == "HmIP-PSM")
-      || (oDevHssType == "HmIP-PSM-CH")
-      || (oDevHssType == "HmIP-PSM-IT")
-      || (oDevHssType == "HmIP-PSM-PE")
-      || (oDevHssType == "HmIP-PSM-UK")
-      ) {
-      ! Hide SWITCH_VIRTUAL_RECEIVER channel 4 and 5 and the real channel when the expert mode is not active
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false; return;}
-      }
-      return;
-    }
-
-    ! Flush mounted Dimmer (BDT)
-    if (oDevHssType == "HmIP-BDT") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false; return;}
-      }
-      return;
-    }
-    ! Pluggable Dimmer (PDT)
-    if ((oDevHssType == "HmIP-PDT") || (oDevHssType == "HmIP-PDT-UK")) {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 3)) {bShowChannel = false; return;}
-      }
-      return;
-    }
-    ! Pluggable Dimmer (FDT)
-    if (oDevHssType == "HmIP-FDT") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber > 2)) {bShowChannel = false; return;}
-      }
-      return;
-    }
-    ! Flush mounted Switch and Meter (BSM)
-    if (oDevHssType == "HmIP-BSM") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false; return;}
-      }
-      return;
-    }
-    ! Flush switch actuator with Measuring
-    if ((user.UserEasyLinkMode() == true) && ((oDevHssType == "HmIP-FSM") || (oDevHssType == "HmIP-FSM16"))) {
-      if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-      if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 2)) {bShowChannel = false; return;}
-      return;
-    }
-    ! Don't show the key channel (a key press doesn't work with ccu and hmip) and the  real channel (doesn't make sense with only one virtual channel)
-    if ( (oDevHssType == "HmIP-ASIR")  && (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) ) {
-      bShowChannel = false;
-      return;
-    }
-    ! Multi-IO-Box (MIOB)
-    if ((user.UserEasyLinkMode() == true) && (oDevHssType == "HmIP-MIOB")) {
-      ! Hide the real channels. They are not necessary without virtual channels
-      if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {
-          bShowChannel = false;
-          return;
-      }
-
-      ! Hide all SWITCH_VIRTUAL_RECEIVER channels other than 3 and 7 when the expert mode is not active
-      if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
-        if ((chNumber != 3) && (chNumber != 7)) {
-          bShowChannel = false;
-          return;
-        }
-      }
-    }
-    ! Jalousie actor (BBL/FBL)
-    if ((oDevHssType == "HmIP-BBL") || (oDevHssType == "HmIP-FBL")) {
-     if (user.UserEasyLinkMode() == true) {
-       ! if (chn.HssType().Find("BLIND_TRANSMITTER") != -1) {bShowChannel = false; return;}
-       if ((chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false; return;}
-     }
-     return;
-    }
-
-    ! Blind actor (BROLL/FROLL)
-    if ((oDevHssType == "HmIP-BROLL") || (oDevHssType == "HmIP-FROLL")) {
-     if (user.UserEasyLinkMode() == true) {
-       ! if (chn.HssType().Find("SHUTTER_TRANSMITTER") != -1) {bShowChannel = false; return;}
-       if ((chn.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false; return;}
-     }
-     return;
-    }
-
-    ! MOD-OC8 (41 channels)
-    if (oDevHssType == "HmIP-MOD-OC8") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
-          if ((chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16) || (chNumber == 19) || (chNumber == 20)
-           || (chNumber == 23) || (chNumber == 24) || (chNumber == 27) || (chNumber == 28) || (chNumber == 31) || (chNumber == 32)
-           || (chNumber == 35) || (chNumber == 36) || (chNumber == 39) || (chNumber == 40)) {
-            bShowChannel = false;
-          }
-          return;
-        }
-      }
-    }
-
-    ! HmIP-WHS2
-    if (oDevHssType == "HmIP-WHS2") {
-      if (user.UserEasyLinkMode() == true) {
-       if (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) {bShowChannel = false; return;}
-       ! Hide all SWITCH_VIRTUAL_RECEIVER channels other than 2 and 6 when the expert mode is not active
-       if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
-         if ((chNumber != 3) && (chNumber != 7)) {
-           bShowChannel = false;
-           return;
-         }
-       }
-      }
-    }
-
-    ! HmIP-BSL (Switch actuator for brand switches with signal lamp)
-    if (oDevHssType == "HmIP-BSL") {
-     if (user.UserEasyLinkMode() == true) {
-       if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) && (chNumber > 4)) {bShowChannel = false; return;}
-       if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && ((chNumber == 9) || (chNumber == 10) || (chNumber == 13) || (chNumber == 14) )) {bShowChannel = false; return;}
-     }
-     return;
-    }
-
-    ! HmIP-MP3P (MP3 player and dimmer with 7 colors)
-    if (oDevHssType == "HmIP-MP3P") {
-     if (user.UserEasyLinkMode() == true) {
-       if ((chn.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-       if ((chn.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1) && (chNumber != 2)) {bShowChannel = false; return;}
-       if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-       if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) && (chNumber != 6)) {bShowChannel = false; return;}
-     }
-     return;
-    }
-
-    ! HmIPW-DRBL4 (HmIP wired blind actor)
-    if (oDevHssType == "HmIPW-DRBL4") {
-      if (user.UserEasyLinkMode() == true) {
-        if (chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 3) || (chNumber == 4) || (chNumber == 7) || (chNumber == 8) || (chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16)) {
-            bShowChannel = false;
-            return;
+      if ((oDevHssType != "HmIP-MIOB") && (oDevHssType != "HmIP-WHS2")) {
+        if ((chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1)
+        ) {
+          if (virtChnCounter >= 3) {virtChnCounter = 0;}
+          virtChnCounter = virtChnCounter + 1;
+          if (virtChnCounter != 1) {bShowChannel = false; return;}
+        } else {
+          ! HmIP-MIOB and HmIP-WHS2
+          ! Hide all SWITCH_VIRTUAL_RECEIVER channels other than 3 and 7 (the 2nd virtual channel instead of the first one) when the expert mode is not active
+          if ((chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1)) {
+            if ((chNumber != 3) && (chNumber != 7)) {
+              bShowChannel = false;
+              return;
+            }
           }
         }
       }
     }
-
-    ! HmIPW-DRS4 (HmIP wired switch actor)
-    if ((oDevHssType == "HmIPW-DRS4") || (oDevHssType == "HmIPW-DRS8")) {
-      if (user.UserEasyLinkMode() == true) {
-        if (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) {bShowChannel = false; return;}
-        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 3) || (chNumber == 4) || (chNumber == 7) || (chNumber == 8) || (chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16)
-          || (chNumber == 19) || (chNumber == 20) || (chNumber == 23) || (chNumber == 24) || (chNumber == 27) || (chNumber == 28) || (chNumber == 31) || (chNumber == 32)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    ! HmIPW-DRD3 (HmIP wired dimmer actor)
-    if (oDevHssType == "HmIPW-DRD3") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if (chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 3) || (chNumber == 4) || (chNumber == 7) || (chNumber == 8) || (chNumber == 11) || (chNumber == 12)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    ! HmIPW-FIO6 (HmIP wired io modul - some channels are virtual switch receiver)
-    if (oDevHssType == "HmIPW-FIO6") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 9) || (chNumber == 10) || (chNumber == 13) || (chNumber == 14) || (chNumber == 17) || (chNumber == 18)|| (chNumber == 21) || (chNumber == 22)|| (chNumber == 25) || (chNumber == 26)|| (chNumber == 29) || (chNumber == 30)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    ! HmIP-MIO16-PCB (HmIP multi io modul 4 x 4 - some channels are virtual switch receiver)
-    if (oDevHssType == "HmIP-MIO16-PCB") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 19) || (chNumber == 20) || (chNumber == 23) || (chNumber == 24) || (chNumber == 27) || (chNumber == 28)|| (chNumber == 31) || (chNumber == 32)||
-              (chNumber == 35) || (chNumber == 36)|| (chNumber == 39) || (chNumber == 40) || (chNumber == 43) || (chNumber == 44) || (chNumber == 47) || (chNumber == 48)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    if ( (oDevHssType == "HmIP-FSI16")) {
-      if (chn.HssType().Find("MULTI_MODE_INPUT_TRANSMITTER") != -1) {
-        bShowChannel = false;
-        return;
-      }
-
-      if (user.UserEasyLinkMode() == true) {
-        if (chn.HssType().Find("SWITCH_TRANSMITTER") != -1) {bShowChannel = false; return;}
-        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 4) || (chNumber == 5)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    ! HmIP-DRSI4
-    if (oDevHssType == "HmIP-DRSI4") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("SWITCH_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if (chn.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 7) || (chNumber == 8) || (chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16)|| (chNumber == 19) || (chNumber == 20)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    ! HmIP-DRBLI4
-    if (oDevHssType == "HmIP-DRBLI4") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("BLIND_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if (chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 11) || (chNumber == 12) || (chNumber == 15) || (chNumber == 16) || (chNumber == 19) || (chNumber == 20)|| (chNumber == 23) || (chNumber == 24)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    ! HmIP-DRDI3 (HmIP dimmer actor)
-    if (oDevHssType == "HmIP-DRDI3") {
-      if (user.UserEasyLinkMode() == true) {
-        if ((chn.HssType().Find("DIMMER_TRANSMITTER") != -1)) {bShowChannel = false; return;}
-        if (chn.HssType().Find("DIMMER_VIRTUAL_RECEIVER") != -1) {
-          if ((chNumber == 6) || (chNumber == 7) || (chNumber == 10) || (chNumber == 11) || (chNumber == 14) || (chNumber == 15)) {
-            bShowChannel = false;
-            return;
-          }
-        }
-      }
-    }
-
-    if (chn.HssType().Find("MULTI_MODE_INPUT_TRANSMITTER") != -1 ) {
-        if (chn.MetaData("channelMode") != 3) {
-          bShowChannel = false;
-        }
-      return;
-    }
-
     ! No hit
     return;
-    }
   }
 }
-
 
 ! [showChannelParam]
 function ::conditionIsParameterVisible() {
@@ -836,6 +488,15 @@ function ::conditionIsParameterVisible() {
     if ( (oCC.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1) || (oCC.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1) ) {
       if ( (oDP.HSSID().Find("LEVEL") != -1)
       || (oDP.HSSID().Find("ACTIVITY_STATE") != -1)
+      ) {
+        showChannelParam = false;
+      }
+    }
+
+    !RAIN_DETECTION_TRANSMITTER
+    if ((oCC.HssType().Find("RAIN_DETECTION_TRANSMITTER") != -1)) {
+      if ( (oDP.HSSID().Find("ACTUAL_TEMPERATURE") != -1)
+      || (oDP.HSSID().Find("ACTUAL_TEMPERATURE_STATUS") != -1)
       ) {
         showChannelParam = false;
       }
@@ -1093,6 +754,29 @@ function ::getSpecialTranslationPrgCond() {
   if ((oCC.Label().Find("HmIP-FALMOT-") != -1) && (oCC.HssType() == "CLIMATECONTROL_FLOOR_TRANSCEIVER")) {
     if (sShortKey.Find("LEVEL") != -1) {
       sValue = "${stringTableHeatingLevel}";
+    }
+  }
+
+  if (oCC.HssType() == "ROTARY_CONTROL_TRANSCEIVER") {
+    if (oCC.Label() == "HmIP-WRCR") {
+      if (oCC.ChnNumber() == 2) {
+        if (sShortKey.Find("PRESS_SHORT") != -1) {
+          sValue = "${rotationDirRightFast}";
+        }
+
+        if (sShortKey.Find("PRESS_LONG") != -1) {
+          sValue = "${rotationDirRightSlow}";
+        }
+      }
+      if (oCC.ChnNumber() == 3) {
+        if (sShortKey.Find("PRESS_SHORT") != -1) {
+          sValue = "${rotationDirLeftFast}";
+        }
+
+        if (sShortKey.Find("PRESS_LONG") != -1) {
+          sValue = "${rotationDirLeftSlow}";
+        }
+      }
     }
   }
 

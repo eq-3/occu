@@ -2,6 +2,7 @@
 "OpenUp" : "auf / hoch",
 "OpenClose_UpDown" : "auf / zu & hoch / herunter",
 "TargetPosition" : "Position anfahren",
+"Toggle" : "Toggle",
 
 "driving_mode_0" : "direkt",
 "driving_mode_1" : "&uuml;ber die obere Endlage (Genauigkeitsfahrt)",
