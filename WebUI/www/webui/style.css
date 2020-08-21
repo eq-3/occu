@@ -2217,6 +2217,17 @@ table.center {
    -moz-text-align-last: center;
 }
 
+.controlHeader {
+  text-align:center;
+  background-color:#89989b;
+  color:white;
+  font-weight: bold;
+}
+
+.controlRedBorder {
+  border: 1px solid red !important;
+}
+
 progress[value] {
 
   /* Reset the default appearance */
@@ -2968,13 +2979,10 @@ html, body {
 }
 
 .DeviceListButton {
-
   background-color: $_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
-
   margin:2%;
   border:1px solid $_(black); /* black */
-  border-radius: 3px;
   width:95%;
   text-align:center;
   height:20px;
@@ -5293,6 +5301,13 @@ application {
 .CLASS02535A {
 	float: right;
 	text-align: right;
+	word-wrap: break-word;
+	max-width: 480px;
+	display: inline-block;
+}
+
+.CLASS02535B {
+	text-align: center;
 	word-wrap: break-word;
 	max-width: 480px;
 	display: inline-block;
@@ -8167,6 +8182,12 @@ color: $_(textColorA); /* white */
 .CLASS21108 {
   width:100px;
   margin: 5px;
+}
+
+.CLASS21108A {
+	width: 100px;
+	margin: 5px;
+	line-height: 100%
 }
 
 .CLASS21109 {

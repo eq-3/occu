@@ -43,11 +43,11 @@ function ::CreateDoorReceiver() {
           WriteLine("<div>");
             WriteLine("<table id='"#chnId#"tblDoorState' class='ControlBtnInfo _hidden' style='width:98%'>");
               WriteLine("<tr>");
-                WriteLine("<td align='center'>${lblStateGarageDoorPosition}</td>");
+                WriteLine("<td style='text-align:center;'>${lblStateGarageDoorPosition}</td>");
               WriteLine("</tr>");
 
               WriteLine("<tr>");
-                WriteLine("<td align='center'><span id='"#chnId#"actState'>${"#state#"}</span></td>");
+                WriteLine("<td style='text-align:center;'><span id='"#chnId#"actState'>${"#state#"}</span></td>");
               WriteLine("</tr>");
             WriteLine("</table>");
           WriteLine("</div>");
@@ -119,11 +119,11 @@ function ::CreateSimpleSwitchReceiver() {
           WriteLine("<div>");
             WriteLine("<table  class='ControlBtnInfo' style='width:98%'>");
               WriteLine("<tr>");
-                WriteLine("<td align='center'>${lblStateGarageDoorSwitch}</td>");
+                WriteLine("<td style='text-align:center;'>${lblStateGarageDoorSwitch}</td>");
               WriteLine("</tr>");
 
               WriteLine("<tr>");
-                WriteLine("<td align='center'><span id='"#chnId#"actState'>"#currentState#"</span></td>");
+                WriteLine("<td style='text-align:center;'><span id='"#chnId#"actState'>"#currentState#"</span></td>");
               WriteLine("</tr>");
             WriteLine("</table>");
           WriteLine("</div>");

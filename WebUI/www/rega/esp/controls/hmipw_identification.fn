@@ -12,7 +12,7 @@ function ::CreateIdentification() {
 
   WriteLine("<td>");
     WriteLine("<table>");
-      WriteLine("<tr><td colspan='8'><div style='text-align:center; background-color:#89989b; color:black'>${lblHmIPWIdentification}</div><td></tr>");
+      WriteLine("<tr><td colspan='8'><div class='controlHeader'>${lblHmIPWIdentification}</div><td></tr>");
       if (showDisplayIdent) {
         WriteLine("<tr>");
           WriteLine("<td>");

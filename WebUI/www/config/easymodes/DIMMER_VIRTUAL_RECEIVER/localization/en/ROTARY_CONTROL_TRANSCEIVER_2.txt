@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">With a quick clockwise rotation, the light will be switched to the defined brightness value. A slow clockwise rotation will dim the light up.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">A clockwise rotation dims the light up according to the selected settings.</span><br/><br/>",
 
-"description_2" : "<span class=\"translated\">With a quick clockwise rotation, the light will be switched off. A slow clockwise rotation will dim the light down.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">A clockwise rotation dims the light down according to the selected settings.</span><br/><br/>",
 
 "description_3" : "<span class=\"translated\">With a quick clockwise rotation, the light changes between the defined brightness value and &quot;off&quot;. A slow clockwise rotation will dim the light up or down.</span><br/><br/>",
 

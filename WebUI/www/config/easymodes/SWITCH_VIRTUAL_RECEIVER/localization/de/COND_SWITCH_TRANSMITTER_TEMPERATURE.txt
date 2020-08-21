@@ -1,10 +1,10 @@
-"description_1" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle wird der Schalter f&uuml;r die festgelegte Zeit eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle wird der Schalter f&uuml;r die festgelegte Zeit ausgeschaltet. Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle wird der Schalter f&uuml;r die festgelegte Zeit in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_1" : "<span class=\"translated\">Bei Empfang des Schaltbefehls wird der Schalter f&uuml;r die festgelegte Zeit eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des Schaltbefehls wird der Schalter f&uuml;r die festgelegte Zeit ausgeschaltet. Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Empfang des Schaltbefehls wird der Schalter f&uuml;r die festgelegte Zeit in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
 "description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
 
 "helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Temperatursensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
 "switchPoint" : "Schalten bei",
-"subset_1": "Erreichen der oberen Temperaturschwelle",
+"subset_1": "%DCberschreiten der oberen Temperaturschwelle",
 "subset_2": "Unterschreiten der unteren Temperaturschwelle",

@@ -61,8 +61,8 @@
     <td class="CLASS01406" colspan="3">
       <table>
       <tr>
-        <td align='center' valign='middle'><div class="FooterButton CLASS01407" onclick="saveAutoLogin();" >${footerBtnOk}</div></td>
-        <td align='center' valign='middle'><div class="FooterButton CLASS01408" onclick="PopupClose();">${footerBtnCancel}</div></td>
+        <td style='text-align: center; vertical-align:middle;'><div class="FooterButton CLASS01407" onclick="saveAutoLogin();" >${footerBtnOk}</div></td>
+        <td style='text-align: center; vertical-align:middle;'><div class="FooterButton CLASS01408" onclick="PopupClose();">${footerBtnCancel}</div></td>
       </tr>
       </table>
     </td>
@@ -74,5 +74,5 @@
     var alPC = $("cbPC")[$("cbPC").selectedIndex].value;
     var alPDA = "0";
     iseUser.setAutoLogin(alPC, alPDA);
-  }
+  };
 </script>

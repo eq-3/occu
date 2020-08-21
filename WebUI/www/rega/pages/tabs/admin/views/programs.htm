@@ -487,6 +487,36 @@
     });
   };
 
+   setHmIPWeeklyProgramController = function(regaDialogID, chAddress, userNoExpert) {
+    var chn = DeviceList.getChannelByAddress(chAddress);
+    var chnInterface = "HmIP-RF";
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID);
+    jQuery(elm).prop("disabled", true);
+
+    var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
+
+     var opts = {"deviceID": chn.device.id, "deviceLabel":chn.typeName, "chnAddress":chn.address, "chInterface":chnInterface, "channelLocks":"channelLocks", "userEasyLinkMode":userNoExpert};
+     var dialog = new iseHmIPWeeklyProgram(regaDialogID, opts , function(result) {
+       jQuery(elm).prop("disabled", false);
+       if (result != 0) {
+         conInfo("HmIPWeeklyProgramController: Yes pressed");
+         var inputElm = jQuery(elm);
+         var cfgString = this.getConfigString();
+         conInfo(cfgString);
+         inputElm.val(cfgString);
+         inputElm.change();
+       }
+     }, "html");
+     dialog.getModeDialog();
+     window.setTimeout(function(){
+       dialog.modeElm = jQuery("#wpChannelMode_" + regaDialogID);
+       dialog.chnElems = jQuery("[name='wpChannelSel_"+regaDialogID+"']");
+     },500);
+
+     //dialog.btnTextNo(translateKey("footerBtnCancel"));
+     //dialog.btnTextYes(translateKey("footerBtnOk"));
+  };
+
   ChangeDelayUnit = function( sdid )
   {
     SetDelay( sdid, $F("delay"+sdid) );
@@ -850,13 +880,13 @@
   var s = "";
   s += "<table cellspacing='8'>";
   s += "<tr>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='CancelProgramEdit(<% Write(oPrg.ID()); %>);'>${footerBtnCancel}</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='SaveProgramEdit(<% Write(oOrigPrg.ID()); %>,<% Write(oPrg.ID()); %>);'>${footerBtnOk}</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04800' onclick='CopyToNewProgram(<% Write(oPrg.ID()); %>);' >${footerBtnSaveNewProgram}</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04801' onclick='new HMScriptExecutor();'>${footerBtnTestScript}</div></td>";
+    s += "<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='CancelProgramEdit(<% Write(oPrg.ID()); %>);'>${footerBtnCancel}</div></td>";
+    s += "<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='SaveProgramEdit(<% Write(oOrigPrg.ID()); %>,<% Write(oPrg.ID()); %>);'>${footerBtnOk}</div></td>";
+    s += "<td style='text-align:center; vertical-align:middle;'><div class='FooterButton CLASS04800' onclick='CopyToNewProgram(<% Write(oPrg.ID()); %>);' >${footerBtnSaveNewProgram}</div></td>";
+    s += "<td style='text-align:center; vertical-align:middle;'><div class='FooterButton CLASS04801' onclick='new HMScriptExecutor();'>${footerBtnTestScript}</div></td>";
     if(dbg)
     {
-      s += "<td align='center' valign='middle'><div class='FooterButton' onclick='reloadPage();'>Aktualisieren</div></td>";
+      s += "<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='reloadPage();'>Aktualisieren</div></td>";
     }
   s += "</tr>";
   s += "</table>";

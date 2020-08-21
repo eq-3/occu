@@ -11,5 +11,5 @@
 "subset_7" : "dry conditions - on",
 "subset_8" : "dry conditions - off",
 
-"_at" : "<span class=\"translated\">en* bei</span>",
+"_at" : "<span class=\"translated\">when</span>",
 

@@ -1,5 +1,6 @@
 "description_1" : "<span class=\"translated\">Bei Erkennung des Schaltbefehls wird die gew&auml;hlte MP3-Datei mit der festgelegten Lautst&auml;rke abgespielt und bei der n&auml;chsten Erkennung wieder beendet (Toggle-Funktion).</span><br/><br/>",
 "description_2" : "<span class=\"translated\">" +
+
 "Der Schaltbefehl 'Trockenheit' spielt die gew&auml;hlte MP3-Datei mit der festgelegten Lautst&auml;rke bei Trockenheit ab, bei Regen wird die MP3 beendet." +
 " Der Schaltbefehlt 'Regen' spielt die gew&auml;hlte MP3-Datei mit der festgelegten Lautst&auml;rke bei Regen ab, bei Trockenheit wird die MP3 beendet.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",

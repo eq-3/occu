@@ -1,0 +1,171 @@
+function ::CreateDrap()
+{
+  ! object ch = dom.GetObject(chnId);
+  ! string chnAddress = ch.Address();
+
+    object objIPAddress = cObj.DPByControl("MAINTENANCE.IP_ADDRESS");
+    object objUnreach = cObj.DPByControl("MAINTENANCE.UNREACH");
+    object objVoltage = cObj.DPByControl("MAINTENANCE.OPERATING_VOLTAGE");
+    object objVoltageStatus = cObj.DPByControl("MAINTENANCE.OPERATING_VOLTAGE_STATUS");
+    object objTemperature = cObj.DPByControl("MAINTENANCE.ACTUAL_TEMPERATURE");
+    object objErrorOverHeat = cObj.DPByControl("MAINTENANCE.ERROR_OVERHEAT");
+    object objErrorUnderVoltage = cObj.DPByControl("MAINTENANCE.ERROR_UNDERVOLTAGE");
+    object objErrorBusConfigMismatch = cObj.DPByControl("MAINTENANCE.ERROR_BUS_CONFIG_MISMATCH");
+    object objErrorPowerShortCircuitBus1 = cObj.DPByControl("MAINTENANCE.ERROR_POWER_SHORT_CIRCUIT_BUS_1");
+    object objErrorPowerShortCircuitBus2 = cObj.DPByControl("MAINTENANCE.ERROR_POWER_SHORT_CIRCUIT_BUS_2");
+    object objErrorPowerShortCircuitDataLineBus1 = cObj.DPByControl("MAINTENANCE.ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_1");
+    object objErrorPowerShortCircuitDataLineBus2 = cObj.DPByControl("MAINTENANCE.ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2");
+
+    string commState = "${stringTableUnreachFalseBR}";
+    string overTemp = "${stringTableErrorOverheatFalseBR}";
+    string underVoltage = "stringTablelErrorBusConfigMismatchFalse";
+    string errBusConfigMismatch = "${stringTablelErrorBusConfigMismatchFalse}";
+    string errPowerShortCircuitBus1 = "${stringTableErrorPowerShortCircuitBus1False}";
+    string errPowerShortCircuitBus2 = "${stringTableErrorPowerShortCircuitBus2False}";
+    string errPowerShortCircuitDataLineBus1 = "${stringTableErrorShortCircuitDataLineBus1False}";
+    string errPowerShortCircuitDataLineBus2 = "${stringTableErrorShortCircuitDataLineBus2False}";
+    boolean bError = false;
+
+    boolean bErrorUnderVoltage = false;
+    boolean bErrorBusConfigMismatch = false;
+    boolean bErrorPowerShortCurcuitBus1 = false;
+    boolean bErrorPowerShortCurcuitBus2 = false;
+    boolean bErrorPowerShortCircuitDataLineBus1 = false;
+    boolean bErrorPowerShortCircuitDataLineBus2 = false;
+
+
+
+    if (objUnreach) {
+      if (objUnreach.Value() == 1) {commState = "${stringTableUnreachFalseBR}";}
+    }
+
+    if (objErrorOverHeat) {
+      if (objErrorOverHeat.Value() == 1) {overTemp = "${stringTableErrorOverheatTrueBR}";}
+    }
+
+    if (objErrorUnderVoltage) {
+      if (objErrorUnderVoltage.Value() == 1) {underVoltage = "${stringTableErrorUndervoltageTrue}"; bError = true; bErrorUnderVoltage = true;}
+    }
+
+    if (objErrorBusConfigMismatch) {
+      if (objErrorBusConfigMismatch.Value() == 1) {errBusConfigMismatch = "${stringTablelErrorBusConfigMismatchTrue}"; bError = true; bErrorBusConfigMismatch = true;}
+    }
+
+    if (objErrorPowerShortCircuitBus1) {
+      if (objErrorPowerShortCircuitBus1.Value() == 1) {errPowerShortCircuitBus1 = "${stringTableErrorPowerShortCircuitBus1True}"; bError = true; bErrorPowerShortCurcuitBus1 = true;}
+    }
+
+    if (objErrorPowerShortCircuitBus2) {
+      if (objErrorPowerShortCircuitBus2.Value() == 1) {errPowerShortCircuitBus2 = "${stringTableErrorPowerShortCircuitBus2True}"; bError = true; bErrorPowerShortCurcuitBus2 = true;}
+    }
+
+    if (objErrorPowerShortCircuitDataLineBus1) {
+      if (objErrorPowerShortCircuitDataLineBus1.Value() == 1) {errPowerShortCircuitDataLineBus1 = "${stringTableErrorShortCircuitDataLineBus1True}"; bError = true; bErrorPowerShortCircuitDataLineBus1 = true;}
+    }
+
+    if (objErrorPowerShortCircuitDataLineBus2) {
+      if (objErrorPowerShortCircuitDataLineBus2.Value() == 1) {errPowerShortCircuitDataLineBus2 = "${stringTableErrorShortCircuitDataLineBus2True}"; bError = true; bErrorPowerShortCircuitDataLineBus2 = true;}
+    }
+
+
+    WriteLine("<td>");
+      WriteLine("<table align='center'>");
+
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'><b><u>"#cObj.Label()#"</u></b></div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblIPAddress}<br/>"#objIPAddress.Value()#"</div>");
+          WriteLine("</td>");
+
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>"#commState#"</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        if (objVoltage) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCurrentOperatingVoltage}<br/>"#objVoltage.Value().ToString(1)#" "#objVoltage.ValueUnit()#"</div>");
+          WriteLine("</td>");
+        }
+        if (objVoltageStatus) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableOperationVoltageState}<br/>${lblVoltageStatus_"#objVoltageStatus.Value()#"}</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        if (objTemperature) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblOperationTemp}<br/>"#objTemperature.Value().ToString(1)#objTemperature.ValueUnit()#"</div>");
+          WriteLine("</td>");
+        }
+        if (objErrorOverHeat) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>"#overTemp#"</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+
+      if (bError) {WriteLine("<tr><td colspan='2'><hr></td></tr>");}
+
+      if (bErrorBusConfigMismatch) {
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'>"#errBusConfigMismatch#"</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+      if (bErrorPowerShortCurcuitBus1) {
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitBus1#"</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+      if (bErrorPowerShortCurcuitBus2) {
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitBus2#"</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+      if (bErrorPowerShortCircuitDataLineBus1) {
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitDataLineBus1#"</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+      if (bErrorPowerShortCircuitDataLineBus2) {
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitDataLineBus2#"</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+      if (bErrorUnderVoltage) {
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'>"#underVoltage#"</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+      WriteLine("</table>");
+    WriteLine("</td>");
+
+  return;
+}
+

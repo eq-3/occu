@@ -37,11 +37,11 @@
 </script>
 <table id="tblHDeviChannel" class="filterTable CLASS03500 j_translate" cellpadding="0" cellspacing="0" border="1" >
   <colgroup>
-     <col width="12%" />
-     <col width="10%" />
-     <col width="10%" />
-     <col width="10%" />
-     <col width="58%" />
+     <col style="width:12%;"/>
+     <col style="width:10%;"/>
+     <col style="width:10%;"/>
+     <col style="width:10%;"/>
+     <col style="width:58%;"/>
   </colgroup>
   <tr>
   <%string sCssName="Sort"; if(system.GetSessionVar("sessionLS")=="name"){sCssName="SortSelected";} %>
@@ -238,16 +238,19 @@
               }
 
               if ((chn.HssType() == "ROTARY_CONTROL_TRANSCEIVER") && (chn.Label() == "HmIP-WRCR") ) {
-
-                integer chnNumber = chn.Address().StrValueByIndex(":",1).ToInteger();
-                if (chnNumber == 2) {
+                if (chNumber == 2) {
                   Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TR}</span>");
                   showExtDesc = true;
                 }
-                if (chnNumber == 3) {
+                if (chNumber == 3) {
                   Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TL}</span>");
                   showExtDesc = true;
                 }
+              }
+
+              if ( (chn.HssType() == "COND_SWITCH_TRANSMITTER_TEMPERATURE") && (chn.Label() == "HmIP-STE2-PCB") && (chNumber == 3) ) {
+                Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_COND_SWITCH_TRANSMITTER_TEMPERATURE_DIFF}</span>");
+                showExtDesc = true;
               }
 
               if (showExtDesc == false) {
@@ -288,13 +291,13 @@
             Write(sLastTime);
             
             Write("</span></td></tr>");
-            Write( '<tr><td align="center" class="CLASS03502">' );
+            Write( '<tr><td style="text-align:center;" class="CLASS03502">' );
             string sDisplay = 'none';
             if( chn.WorkingDPState() ) { sDisplay = "inline"; }
             Write( '<span id="work'#cId#'" style="display:'#sDisplay#';"><img src="/ise/img/pinion_gears_32.png" /></span>' );
             sDisplay = 'none';
             if( chn.ExistServiceMsg() ) { sDisplay = "inline"; }
-            Write( '<span id="warn'#cId#'" style="display:'#sDisplay#'"><img src="/ise/img/warning.png" /></span>' );
+            Write( '<span id="warn'#cId#'" style="display:'#sDisplay#'"><img name="attention" src="/ise/img/warning.png"/></span>' );
             Write( '</td></tr></table>' );
             
             Write("</td>");
@@ -347,6 +350,8 @@
   jQuery("#btnFilterName").click(function(){
     jQuery("#ftName").focus();
   });
+
+  jQuery("[name='attention']").data('powertip', '<div>'+translateKey("lblSeeServiceMessage")+'</div>').powerTip();
 
   translatePage("#tblHDeviChannel", function () {
     jQuery("[name='hssType']").each(function(index, elm) {

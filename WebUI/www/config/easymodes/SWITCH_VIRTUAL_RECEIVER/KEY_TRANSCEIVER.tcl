@@ -59,7 +59,7 @@ set PROFILE_1(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE)             0
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE)      1
-set PROFILE_1(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Schalter erst nach Ablauf dieser Zeit eingeschaltet."
+set PROFILE_1(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die eingestellte Zeit eingeschaltet."
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
@@ -107,7 +107,7 @@ set PROFILE_2(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE)             0
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE)      1
-set PROFILE_2(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Schalter erst nach Ablauf dieser Zeit eingeschaltet."
+set PROFILE_2(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die eingestellte Zeit ausgeschaltet."
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)  
 set PROFILE_2(UI_HINT)  2
 
@@ -155,7 +155,7 @@ set PROFILE_3(SHORT_ON_TIME_BASE)             {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR)           {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE)             0
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE)      1
-set PROFILE_3(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Schalter erst nach Ablauf dieser Zeit eingeschaltet."
+set PROFILE_3(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird der Schalter f&uuml;r die eingestellte Zeit ein- bzw. ausgeschaltet."
 set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
 

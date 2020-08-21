@@ -164,6 +164,20 @@ proc option {type} {
         set options(100) "100$p"
     }
 
+    "RAW_0_100Percent_1" {
+        set options(0) "0$p"
+        set options(0.1) "10$p"
+        set options(0.2) "20$p"
+        set options(0.3) "30$p"
+        set options(0.4) "40$p"
+        set options(0.5) "50$p"
+        set options(0.6) "60$p"
+        set options(0.7) "70$p"
+        set options(0.8) "80$p"
+        set options(0.9) "90$p"
+        set options(1.0) "100$p"
+    }
+
     "RAW_0_100Percent_2" {
         set options(0) "0$p"
         set options(10) "10$p"

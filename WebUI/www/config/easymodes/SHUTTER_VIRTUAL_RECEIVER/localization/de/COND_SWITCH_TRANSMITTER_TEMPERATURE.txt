@@ -1,10 +1,7 @@
-"description_1" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz hoch. Ist eine Hochfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit hochgefahren.</span><br/><br/>",
-
-"description_2" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz herunter. Ist eine Herunterfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit runtergefahren.</span><br/><br/>",
-
-"description_3" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle f&auml;hrt die Jalousie im Wechsel ganz hoch bzw. ganz herunter (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
-
-"description_4" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Temperaturschwelle f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">Bei Empfang des Schaltbefehls f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz hoch. Ist eine Hochfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit hochgefahren.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des Schaltbefehls f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit ganz herunter. Ist eine Herunterfahrverz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit runtergefahren.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Empfang des Schaltbefehls f&auml;hrt die Jalousie im Wechsel ganz hoch bzw. ganz herunter (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Bei Empfang des Schaltbefehls f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine Verz&ouml;gerungszeit eingestellt, wird die Jalousie erst nach Ablauf dieser Zeit gefahren.</span><br/><br/>",
 
 "subset_1" : "hochgefahren",
 "subset_2" : "heruntergefahren",
@@ -12,11 +9,11 @@
 
 
 "subset_4" : "Unterschreiten der unteren Temperaturschwelle",
-"subset_5" : "Erreichen der oberen Temperaturschwelle",
+"subset_5" : "%DCberschreiten der oberen Temperaturschwelle",
 
 
 "switchPoint" : "Schalten bei",
-"subset_6": "Erreichen der oberen Temperaturschwelle",
+"subset_6": "%DCberschreiten der oberen Temperaturschwelle",
 "subset_7": "Unterschreiten der unteren Temperaturschwelle",
 
 "helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Temperatursensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",

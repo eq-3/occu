@@ -73,7 +73,7 @@ set PROFILE_1(SHORT_CT_RAMPOFF) 0
 set PROFILE_1(SHORT_CT_RAMPON) 0
 set PROFILE_1(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_1(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_1(SHORT_DIM_STEP) 0.050000
+set PROFILE_1(SHORT_DIM_STEP) {0.05 range 0.0 - 1.0}
 set PROFILE_1(SHORT_JT_OFF) 1
 set PROFILE_1(SHORT_JT_OFFDELAY) 3
 set PROFILE_1(SHORT_JT_ON) 3
@@ -101,7 +101,7 @@ set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
 set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_1(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
-set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
+set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) {3 0}
 set PROFILE_1(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_1(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
@@ -164,7 +164,7 @@ set PROFILE_2(SHORT_CT_RAMPOFF) 0
 set PROFILE_2(SHORT_CT_RAMPON) 0
 set PROFILE_2(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_2(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_2(SHORT_DIM_STEP) 0.050000
+set PROFILE_2(SHORT_DIM_STEP) {0.05 range 0.0 - 1.0}
 set PROFILE_2(SHORT_JT_OFF) 6
 set PROFILE_2(SHORT_JT_OFFDELAY) 5
 set PROFILE_2(SHORT_JT_ON) 4
@@ -191,7 +191,7 @@ set PROFILE_2(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
 set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
-set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
+set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) {4 0}
 set PROFILE_2(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_2(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
@@ -255,7 +255,7 @@ set PROFILE_3(SHORT_CT_RAMPOFF) 0
 set PROFILE_3(SHORT_CT_RAMPON) 0
 set PROFILE_3(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_3(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_3(SHORT_DIM_STEP) 0.050000
+set PROFILE_3(SHORT_DIM_STEP) {0.05 range 0.0 - 1.0}
 set PROFILE_3(SHORT_JT_OFF) 1
 set PROFILE_3(SHORT_JT_OFFDELAY) 5
 set PROFILE_3(SHORT_JT_ON) 4
@@ -351,8 +351,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\" style=\"padding-bottom:10px;\"><hr>\${description_fastRotation}</td></tr>"
-  # RAMPON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
+
+  # RAMPON_TIME doesn't work with the ACTION_TYPE 'PROFILE_ACTION_TYPE_DRIVE_UP' which is necessary to be able to use DIM_STEPS for this profile
+  # RAMPON_TIME works apparently only with the ACTION_TYPE 'PROFILE_ACTION_TYPE_JUMP' which sets the brightnes immediately to the set brightness.
+  # append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 
 
   # ON_TIME
@@ -364,6 +366,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn SHORT_DIM_STEP]
 
   set param SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
@@ -393,7 +397,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn]
+  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn LONG_DIM_STEP]
 
   set param LONG_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
@@ -442,8 +446,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  # RAMPOFF_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
+  # RAMPOFF_TIME doesn't work with the ACTION_TYPE 'PROFILE_ACTION_TYPE_DRIVE_UP' which is necessary to be able to use DIM_STEPS for this profile
+  # RAMPOFF_TIME works apparently only with the ACTION_TYPE 'PROFILE_ACTION_TYPE_JUMP' which sets the brightnes immediately to the set brightness.
+  # append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
+
+  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn SHORT_DIM_STEP]
 
   set param SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
@@ -461,7 +468,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn]
+  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn LONG_DIM_STEP]
 
   set param LONG_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
@@ -482,8 +489,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\" style=\"padding-bottom:10px;\"><hr>\${description_fastRotation}</td></tr>"
 
   set pref 0
-  # RAMPON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
+  # RAMPON_TIME doesn't work with the ACTION_TYPE 'PROFILE_ACTION_TYPE_DRIVE_UP' which is necessary to be able to use DIM_STEPS for this profile
+  # RAMPON_TIME works apparently only with the ACTION_TYPE 'PROFILE_ACTION_TYPE_JUMP' which sets the brightnes immediately to the set brightness.
+  # append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
@@ -522,8 +530,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_BLINK separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFFDELAY_BLINK]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  # RAMPOFF_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
+  # RAMPOFF_TIME doesn't work with the ACTION_TYPE 'PROFILE_ACTION_TYPE_DRIVE_UP' which is necessary to be able to use DIM_STEPS for this profile
+  # RAMPOFF_TIME works apparently only with the ACTION_TYPE 'PROFILE_ACTION_TYPE_JUMP' which sets the brightnes immediately to the set brightness.
+  # append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
+
+  # This works only with the ACTION_TYPE DRIVE_UP/DOWN
+  # With the default link the SHORT_ACTION_TYPE is set to JUMP. This means that the SHORT_KEYPRESS (quick rotation) will immediately jump to the selected brightness (no dimming possible).
+  # append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn SHORT_DIM_STEP]
 
   ## LONG KEYPRESS
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\" style=\"padding-bottom:10px;\"><hr>\${description_slowRotation}</td></tr>"
@@ -545,7 +558,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn]
+  append HTML_PARAMS(separate_$prn) [getNumberOfDimmingSteps ps PROFILE_$prn separate_receiver $prn LONG_DIM_STEP]
 
   set param LONG_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {

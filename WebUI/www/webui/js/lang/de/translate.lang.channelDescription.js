@@ -1,5 +1,8 @@
 jQuery.extend(true,langJSON, {
   "de" : {
+
+    "chType_ACCESSPOINT_GENERIC_RECEIVER_1" : "Homematic IP Wired Bus Kanal 1",
+    "chType_ACCESSPOINT_GENERIC_RECEIVER_2" : "Homematic IP Wired Bus Kanal 2",
     "chType_ACTOR_SECURITY" : "L%FCftungssperre-Kanal",
     "chType_ACTOR_WINDOW" : "Aktor-Kanal",
     "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Statusmitteilung MP3-Player",
@@ -36,6 +39,8 @@ jQuery.extend(true,langJSON, {
     "chType_COND_TEMPERATURE" : "Entscheidungswert Temperatur",
     "chType_COND_SWITCH_TRANSMITTER_BRIGHTNESS" : "Verkn%FCpfungspartner<br/>Helligkeit",
     "chType_COND_SWITCH_TRANSMITTER_HUMIDITY" : "Verkn%FCpfungspartner<br/>Luftfeuchtigkeit",
+    "chType_COND_SWITCH_TRANSMITTER_PARTICULATE_MATTER25" : "Verkn%FCpfungspartner<br/>Mengenkonzentration PM2.5",
+    "chType_COND_SWITCH_TRANSMITTER_PARTICULATE_MATTER100" : "Verkn%FCpfungspartner<br/>Mengenkonzentration PM10",
     "chType_COND_SWITCH_TRANSMITTER_RAIN_DROP" : "Verkn%FCpfungspartner<br/>Regen / Trocken",
     "chType_COND_SWITCH_TRANSMITTER_RAIN_QUANTITY" : "Verkn%FCpfungspartner<br/>Regenmenge",
     "chType_COND_SWITCH_TRANSMITTER_TEMPERATURE" : "Verkn%FCpfungspartner<br/>Temperatur",
@@ -74,7 +79,7 @@ jQuery.extend(true,langJSON, {
     "chType_MULTI_MODE_INPUT_TRANSMITTER_0" : "Kanal deaktiviert",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Taster",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_2" : "Schalter",
-    "chType_MULTI_MODE_INPUT_TRANSMITTER_3" : "T%FCr-/Fensterkontakt",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER_3" : "Kontakt",
     "chType_PASSAGE_DETECTOR_COUNTER_TRANSMITTER" : "Durchgangsz%E4hler",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR" : "Durchgangserkennung<br/>Links nach Rechts",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL" : "Durchgangserkennung<br/>Rechts nach Links",
@@ -105,6 +110,7 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_TRANSMITTER_OC" : "Statusmitteilung OC-Ausgang",
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Schaltaktor",
     "chType_SWITCH_WEEK_PROFILE" : "Wochenprogramm",
+    "chType_COND_SWITCH_TRANSMITTER_TEMPERATURE_DIFF" : "Verkn%FCpfungspartner<br/>Differenztemperatur",
     "chType_THERMALCONTROL_TRANSMIT" : "Verkn%FCpfungspartner<br/>Heizungsthermostat",
     "chType_VIRTUAL_DIMMER" : "Dimmaktor",
     "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",

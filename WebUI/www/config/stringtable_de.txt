@@ -280,6 +280,7 @@ CAPACITIVE_FILLING_LEVEL_SENSOR|USE_CUSTOM	${stringTableCapacitiveFillingSensorC
 CAPACITIVE_FILLING_LEVEL_SENSOR|WATER_LOWER_THRESHOLD_CH	${stringTableCapacitiveFillingSensorWaterLowerThres}
 CAPACITIVE_FILLING_LEVEL_SENSOR|WATER_UPPER_THRESHOLD_CH	${stringTableCapacitiveFillingSensorWaterUpperThres}
 CAPTURE_WITHIN_INTERVAL	${stringTableCaptureWithinInterval}
+CARRIER_SENSE_LEVEL	${lblCarrierSense}
 CENTRAL_KEY|DBL_PRESS_TIME	${stringTableCentralKeyDblPressTime}
 CENTRAL_KEY|LONG_PRESS_TIME	${stringTableCentralKeyLongPressTime}
 CHANGE_OVER=FALSE	${stringTableChangeOverFalse}
@@ -307,8 +308,14 @@ CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HUMIDITY_LIMIT_DISABLE	${stringTableHumi
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|HUMIDITY_LIMIT_VALUE	${stringTableHumidityLimitValue}
 CLIMATECONTROL_FLOOR_DIRECT_TRANSMITTER|MINIMAL_FLOOR_TEMPERATURE	${stringTableMinimalFloorTemperature}
 CLIMATECONTROL_FLOOR_TRANSCEIVER	${stringTableClimateControlFloorTransceiverTitle}
+CLIMATECONTROL_FLOOR_TRANSCEIVER|EMERGENCY_OPERATION=FALSE	${stringTableEmergencyOperationFalse}
+CLIMATECONTROL_FLOOR_TRANSCEIVER|EMERGENCY_OPERATION=TRUE	${stringTableEmergencyOperationTrue}
 CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER	${stringTableClimateControlFloorPumpTransceiverTitle}
+CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER|EMERGENCY_OPERATION=FALSE	${stringTableEmergencyOperationFalse}
+CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER|EMERGENCY_OPERATION=TRUE	${stringTableEmergencyOperationTrue}
 CLIMATECONTROL_FLOOR_TRANSMITTER	${stringTableClimateControlFloorTransmitterTitle}
+CLIMATECONTROL_FLOOR_TRANSMITTER|EMERGENCY_OPERATION=FALSE	${stringTableEmergencyOperationFalse}
+CLIMATECONTROL_FLOOR_TRANSMITTER|EMERGENCY_OPERATION=TRUE	${stringTableEmergencyOperationTrue}
 CLIMATECONTROL_HEAT_DEMAND_TRANSMITER	${stringTableClimateControlHeatDemandTransmitterTitle}
 CLIMATECONTROL_HEAT_DEMAND_BOILER_TRANSMITTER	${stringTableClimateControlHeatDemandBoilerTransmitterTitle}
 CLIMATECONTROL_HEAT_DEMAND_PUMP_TRANSMITTER	${stringTableClimateControlHeatDemandPumpTransmitterTitle}
@@ -413,6 +420,7 @@ CONTROL_MODE=AUTO-MODE	${stringTableClimateControlRTTransceiverAutoMode}
 CONTROL_MODE=BOOST-MODE	${stringTableClimateControlRTTransceiverBoostMode}
 CONTROL_MODE=MANU-MODE	${stringTableClimateControlRTTransceiverManuMode}
 CONTROL_MODE=PARTY-MODE	${stringTableClimateControlRTTransceiverPartyMode}
+CURRENT	${stringTableCurrent}
 CURRENTDETECTION_BEHAVIOR	${stringTableCurrentDetectionBehavior}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_ACTIVE"	${stringTableCurrentDetectionBehaviorActive}
 CURRENTDETECTION_BEHAVIOR="CURRENTDETECTION_INACTIVE_VALUE_OUTPUT_1"	${stringTableCurrentDetectionBehaviorOutput1}
@@ -424,6 +432,14 @@ CURRENT_ILLUMINATION_STATUS=UNKNOWN	${lblValue} ${stringTableCurrentIllumination
 CURRENT_ILLUMINATION_STATUS=1	${lblValue} ${stringTableCurrentIllumination}: ${lblUnknown}
 CURRENT_ILLUMINATION_STATUS=OVERFLOW	${lblValue} ${stringTableCurrentIllumination}: ${lblOverflow}
 CURRENT_ILLUMINATION_STATUS=2	${lblValue} ${stringTableCurrentIllumination}: ${lblOverflow}
+CURRENT_STATUS=NORMAL	${lblValue} ${stringTableCurrent}: ${lblNormal}
+CURRENT_STATUS=0	${lblValue} ${stringTableCurrent}: ${lblNormal}
+CURRENT_STATUS=OVERFLOW	${lblValue} ${stringTableCurrent}: ${lblOverflow}
+CURRENT_STATUS=1	${lblValue} ${stringTableCurrent}: ${lblOverflow}
+CURRENT_STATUS=UNDERFLOW	${lblValue} ${stringTableCurrent}: ${lblUnderflow}
+CURRENT_STATUS=2	${lblValue} ${stringTableCurrent}: ${lblUnderflow}
+CURRENT_STATUS=UNKNOWN	${lblValue} ${stringTableCurrent}: ${lblUnknown}
+CURRENT_STATUS=3	${lblValue} ${stringTableCurrent}: ${lblUnknown}
 CYCLIC_INFO_MSG	${stringTableCyclicInfoMsg}
 CYCLIC_INFO_MSG_DIS	${stringTableCyclicInfoMsgDis}
 CYCLIC_INFO_MSG_DIS_UNCHANGED	${stringTableCyclicInfoMsgDisUnChanged}
@@ -613,19 +629,13 @@ DURATION_UNIT=S	${stringTableDurationUnitS}
 DURATION_UNIT=10MS	${stringTableDurationUnit10MS}
 DURATION_VALUE	${stringTableDurationValue}
 DUTYCYCLE_LIMIT	${stringTableDutyCycleLimit}
+DUTY_CYCLE_LEVEL	${lblDutyCycle}
 DUTY_CYCLE=FALSE	${stringTableDutyCycleFalse}
 DUTY_CYCLE=TRUE	${stringTableDutyCycleTrue}
 EMERGENCY_OPERATION=FALSE	${stringTableEmergencyOperationFalse}
 EMERGENCY_OPERATION=TRUE	${stringTableEmergencyOperationTrue}
 ENABLE_ROUTING	${stringTableEnableRouting}
 ENERGIE_METER_TRANSMITTER|AVERAGING	${stringTablePowerMeterAveraging}
-ENERGIE_METER_TRANSMITTER|CURRENT	${stringTablePowerMeterCurrent}
-ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterCurrent}: ${lblNormal}
-ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=0	${lblValue} ${stringTablePowerMeterCurrent}: ${lblNormal}
-ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterCurrent}: ${lblOverflow}
-ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=1	${lblValue} ${stringTablePowerMeterCurrent}: ${lblOverflow}
-ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=UNDERFLOW	${lblValue} ${stringTablePowerMeterCurrent}: ${lblUnderflow}
-ENERGIE_METER_TRANSMITTER|CURRENT_STATUS=2	${lblValue} ${stringTablePowerMeterCurrent}: ${lblUnderflow}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=FALSE	${stringTablePowerMeterOverflowFalse}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=TRUE	${stringTablePowerMeterOverflowTrue}
@@ -638,13 +648,6 @@ ENERGIE_METER_TRANSMITTER|POWER_STATUS=1	${lblValue} ${stringTablePowerMeterPowe
 ENERGIE_METER_TRANSMITTER|POWER_STATUS=UNDERFLOW	${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}
 ENERGIE_METER_TRANSMITTER|POWER_STATUS=2	${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}
 ENERGIE_METER_TRANSMITTER|TX_THRESHOLD_POWER	${stringTablePowerMeterTxThresholdPower}
-ENERGIE_METER_TRANSMITTER|VOLTAGE	${stringTablePowerMeterVoltage}
-ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterVoltage}: ${lblNormal}
-ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=0	${lblValue} ${stringTablePowerMeterVoltage}: ${lblNormal}
-ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterVoltage}: ${lblOverflow}
-ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=1	${lblValue} ${stringTablePowerMeterVoltage}: ${lblOverflow}
-ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=UNDERFLOW	${lblValue} ${stringTablePowerMeterVoltage}: ${lblUnderflow}
-ENERGIE_METER_TRANSMITTER|VOLTAGE_STATUS=2	${lblValue} ${stringTablePowerMeterVoltage}: ${lblUnderflow}
 ERROR	${stringTableError}
 ERROR=NO_ERROR	${stringTableErrorNoError}
 ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH	${stringTableErrorBadRechargeableBatteryHealthTrue}
@@ -652,6 +655,7 @@ ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=FALSE	${stringTableErrorBadRechargeableBat
 ERROR_BAD_RECHARGEABLE_BATTERY_HEALTH=TRUE	${stringTableErrorBadRechargeableBatteryHealthTrue}
 ERROR_BATTERY=FALSE	${stringTableBatteryFailure}
 ERROR_BATTERY=TRUE	${stringTableBatteryOk}
+ERROR_BUS_CONFIG_MISMATCH	${stringTablelErrorBusConfigMismatchTrue}
 ERROR_BUS_CONFIG_MISMATCH=FALSE	${stringTablelErrorBusConfigMismatchFalse}
 ERROR_BUS_CONFIG_MISMATCH=TRUE	${stringTablelErrorBusConfigMismatchTrue}
 ERROR_CODE	${stringTableErrorCode}
@@ -661,8 +665,10 @@ ERROR_COPROCESSOR=FALSE	${stringTableErrorCoprocessorFalse}
 ERROR_NON_FLAT_POSITIONING	${stringTableErrorNonFlatPositioning}
 ERROR_NON_FLAT_POSITIONING=FALSE	${stringTableErrorNonFlatPositioningFalse}
 ERROR_NON_FLAT_POSITIONING=TRUE	${stringTableErrorNonFlatPositioningTrue}
+ERROR_OVERHEAT	${stringTableErrorOverheatTrue}
 ERROR_OVERHEAT=FALSE	${stringTableErrorOverheatFalse}
 ERROR_OVERHEAT=TRUE	${stringTableErrorOverheatTrue}
+ERROR_OVERLOAD	${stringTableErrorOverloadTrue}
 ERROR_OVERLOAD=FALSE	${stringTableErrorOverloadFalse}
 ERROR_OVERLOAD=TRUE	${stringTableErrorOverloadTrue}
 ERROR_POWER=FALSE	${stringTableErrorPowerFalse}
@@ -674,8 +680,10 @@ ERROR_POWER_FAILURE	${stringTableErrorPowerFailureTrue}
 ERROR_POWER_FAILURE=FALSE	${stringTableErrorPowerFailureFalse}
 ERROR_POWER_FAILURE=TRUE	${stringTableErrorPowerFailureTrue}
 
+ERROR_POWER_SHORT_CIRCUIT_BUS_1	${stringTableErrorPowerShortCircuitBus1True}
 ERROR_POWER_SHORT_CIRCUIT_BUS_1=FALSE	${stringTableErrorPowerShortCircuitBus1False}
 ERROR_POWER_SHORT_CIRCUIT_BUS_1=TRUE	${stringTableErrorPowerShortCircuitBus1True}
+ERROR_POWER_SHORT_CIRCUIT_BUS_2	${stringTableErrorPowerShortCircuitBus2True}
 ERROR_POWER_SHORT_CIRCUIT_BUS_2=FALSE	${stringTableErrorPowerShortCircuitBus2False}
 ERROR_POWER_SHORT_CIRCUIT_BUS_2=TRUE	${stringTableErrorPowerShortCircuitBus2True}
 ERROR_REDUCED=FALSE	${stringTableErrorReducedFalse}
@@ -687,8 +695,10 @@ ERROR_SABOTAGE=FALSE	${stringTableErrorSabotageFalse}
 ERROR_SABOTAGE=NO_ERROR	${stringTableSabotageContactOk}
 ERROR_SABOTAGE=SABOTAGE	${stringTableSabotage}
 ERROR_SABOTAGE=TRUE	${stringTableErrorSabotageTrue}
+ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_1	${stringTableErrorShortCircuitDataLineBus1True}
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_1=FALSE	${stringTableErrorShortCircuitDataLineBus1False}
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_1=TRUE	${stringTableErrorShortCircuitDataLineBus1True}
+ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2	${stringTableErrorShortCircuitDataLineBus2True}
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2=FALSE	${stringTableErrorShortCircuitDataLineBus2False}
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2=TRUE	${stringTableErrorShortCircuitDataLineBus2True}
 ERROR_UNDERVOLTAGE	${stringTableErrorUndervoltageTrue}
@@ -813,6 +823,7 @@ INPUT_OUTPUT|LONGPRESS_TIME	${stringTableInputOutputLongPressA}
 INPUT_OUTPUT|LONG_PRESS_TIME	${stringTableInputOutputLongPressB}
 INPUT_OUTPUT|STATE=FALSE	${stringTableInputOutputStateFalse}
 INPUT_OUTPUT|STATE=TRUE	${stringTableInputOutputStateTrue}
+IP_ADDRESS	${lblIPAddress}
 JALOUSIE	${stringTableJalousieTitle}
 JALOUSIE|CHANGE_OVER_DELAY	${stringTableBlindChangeOverDelay}
 JALOUSIE|LEVEL	${stringTableBlindLevel}
@@ -1012,12 +1023,14 @@ MOTION_DETECTOR|ERROR=7	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|ERROR=SABOTAGE	${stringTableMotionDetectorErrorSabotage}
 MOTION_DETECTOR|MIN_INTERVAL	${stringTableMotionDetectorMinInterval}
 MULTI_MODE_INPUT_TRANSMITTER	${stringTableMultiModeInputTransmitterTitle}
+MULTICAST_ROUTER_MODULE_ENABLED	${stringTableMulticastRouterModuleEnabled}
 NOT_USED	${stringTableNotUsed}
 OLD_LEVEL	${stringTableDimmerOldLevel}
 ON_TIME	${stringTableDimmerOnTime}
 OPERATING_VOLTAGE	${stringTableOperationVoltage}
 OPERATING_VOLTAGE_STATUS	${stringTableOperationVoltage}
 OPERATING_VOLTAGE_STATUS=EXTERNAL	${lblValue} ${stringTableOperationVoltage}: ${lblExternal}
+OPERATING_VOLTAGE_STATUS=	${lblValue} ${stringTableOperationVoltageState}: ${lblExternal}
 OPERATING_VOLTAGE_STATUS=NORMAL	${lblValue} ${stringTableOperationVoltage}: ${lblNormal}
 OPERATING_VOLTAGE_STATUS=0	${lblValue} ${stringTableOperationVoltageState}: ${lblNormal}
 OPERATING_VOLTAGE_STATUS=UNKNOWN	${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}
@@ -1096,7 +1109,7 @@ POWERMETER_IGL|GAS_ENERGY_COUNTER	${stringTablePowerMeterEnergyCounterGas}
 POWERMETER_IGL|GAS_POWER	${stringTableGasConsumption}
 POWERMETER_IGL|POWER	${stringTablePowerMeterPower}
 POWERMETER|AVERAGING	${stringTablePowerMeterAveraging}
-POWERMETER|CURRENT	${stringTablePowerMeterCurrent}
+POWERMETER|CURRENT	${stringTableCurrent}
 POWERMETER|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
 POWERMETER|FREQUENCY	${stringTablePowerMeterFrequency}
 POWERMETER|FREQUENCY_STATUS=ERROR 	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
@@ -1115,7 +1128,7 @@ POWERMETER|TX_THRESHOLD_CURRENT	${stringTablePowerMeterTxThresholdCurrent}
 POWERMETER|TX_THRESHOLD_FREQUENCY	${stringTablePowerMeterTxThresholdFrequency}
 POWERMETER|TX_THRESHOLD_POWER	${stringTablePowerMeterTxThresholdPower}
 POWERMETER|TX_THRESHOLD_VOLTAGE	${stringTablePowerMeterTxThresholdVoltage}
-POWERMETER|VOLTAGE	${stringTablePowerMeterVoltage}
+POWERMETER|VOLTAGE	${stringTableVoltage}
 POWERUP_ACTION	${stringTableDimmerPowerUpAction}
 POWERUP_JUMPTARGET	${stringTableDimmerPowerUpAction}
 POWERUP_OFF	${stringTablePowerUpOFF}
@@ -1215,7 +1228,8 @@ REPEATED_LONG_PRESS_TIMEOUT_UNIT=H	${optionUnitH}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT=M	${optionUnitM}
 REPEATED_LONG_PRESS_TIMEOUT_UNIT=S	${optionUnitS}
 REPEATED_LONG_PRESS_TIMEOUT_VALUE	${stringTableKeyLongPressTimeOutValue}
-RESET_PRESENCE	${stringTableResetPresence}
+RESET_MOTION	${stringTableResetStatus}
+RESET_PRESENCE	${stringTableResetStatus}
 RESTART_BUTTONPRESS	${stringTableRestartButtonPress}
 RESTART_BUTTONPRESS_IF_WAS_ON	${stringTableRestartButtonPressIfWasOn}
 RESTART_LAST	${stringTableRestartLast}
@@ -1537,6 +1551,10 @@ SWITCH|STATUSINFO_RANDOM_A	${stringTableStatusInfoRandomA}
 TACTILE_SWITCH	${stringTableTactileSwitch}
 TACTILE_SWITCH=FALSE	${stringTableTactileSwitchFalse}
 TACTILE_SWITCH=TRUE	${stringTableTactileSwitchTrue}
+
+TEMP_HUMIDITY_PARTICULATE_MATTER_TRANSMITTER|INTERVAL_UNIT	${stringTableTempHumidityParticulateMatterUnit}
+TEMP_HUMIDITY_PARTICULATE_MATTER_TRANSMITTER|INTERVAL_VALUE	${stringTableTempHumidityParticulateMatterValue}
+
 TEMPERATUREFALL_MODUS	${stringTableTemperatureModus}
 TEMPERATUREFALL_VALUE	${stringTableTemperatureValue}
 TEMPERATUREFALL_WINDOW_OPEN	${stringTableTemperatureWindowOpen}
@@ -1623,8 +1641,17 @@ VIRTUAL_DUAL_WHITE_COLOR|RAMP_STOP	${stringTableDualWhiteColorRampStop}
 VIRTUAL_DUAL_WHITE_COLOR|RAMP_TIME	${stringTableDualWhiteColorRampTime}
 VIRTUAL_KEY	${stringTableVirtualKeyTitle}
 VIRTUAL_KEY|LEVEL	${stringTableVirtualKeyLevel}
+VOLTAGE	${stringTableVoltage}
 VOLTAGE_0	${stringTableVoltage0}
 VOLTAGE_100	${stringTableVoltage100}
+VOLTAGE_STATUS=NORMAL	${lblValue} ${stringTableVoltage}: ${lblNormal}
+VOLTAGE_STATUS=0	${lblValue} ${stringTableVoltage}: ${lblNormal}
+VOLTAGE_STATUS=OVERFLOW	${lblValue} ${stringTableVoltage}: ${lblOverflow}
+VOLTAGE_STATUS=1	${lblValue} ${stringTableVoltage}: ${lblOverflow}
+VOLTAGE_STATUS=UNDERFLOW	${lblValue} ${stringTableVoltage}: ${lblUnderflow}
+VOLTAGE_STATUS=2	${lblValue} ${stringTableVoltage}: ${lblUnderflow}
+VOLTAGE_STATUS=UNKNOWN	${lblValue} ${stringTableVoltage}: ${lblUnknown}
+VOLTAGE_STATUS=3	${lblValue} ${stringTableVoltage}: ${lblUnknown}
 VOLUME_0	{stringTableVolume0}
 VOLUME_10	{stringTableVolume1}
 VOLUME_100$	{stringTableVolume10}
@@ -1766,3 +1793,6 @@ SOUNDFILE=INTERNAL_SOUNDFILE	${stringTableInternalSoundFile}
 SOUNDFILE=RANDOM_SOUNDFILE	${stringTableRandomSoundFile}
 SOUNDFILE=OLD_VALUE	${stringTableOldValueSoundFile}
 SOUNDFILE=DO_NOT_CARE	${stringTableDoNotCareSoundFile}
+
+
+

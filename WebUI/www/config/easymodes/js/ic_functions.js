@@ -549,7 +549,7 @@ MD_checkPNAME = function(id, param, id_on_time)
   $(md_min_interval).value = min_interval + "," + $(id).selectedIndex;
   
   
-  var min_value = new Array(15, 30, 60, 120, 240);
+  var min_value = [15, 30, 60, 120, 240];
   var h = "hour_" + id_on_time.split("_")[2] + "_" + id_on_time.split("_")[3] + "_" + id_on_time.split("_")[1];
   var m = h.replace('hour_', 'min_');
   var s = h.replace('hour_', 'sec_');
@@ -1008,7 +1008,7 @@ ProofFreeTime = function(id, min, max)
       if (param == "ON_TIME" || param == "OFF_TIME") 
       {
         var min_interval = $F(md_min_interval).split(",")[0]; // enthaelt den Wert des Kanalparameters 'Mindestsendeabstand'. Moegl. Werte 0, 1, 2, 3, 4
-        var min_value = new Array(15, 30, 60, 120, 240);
+        var min_value = [15, 30, 60, 120, 240];
         var h = "hour_" + id.split("_")[1] + "_" + id.split("_")[2] + "_" + id.split("_")[3];
         var m = h.replace('hour_', 'min_');
         var s = h.replace('hour_', 'sec_');
@@ -1569,7 +1569,7 @@ WEATHER_put_desc = function(id,x)
     var upper_index = $('separate_sender_1_1').selectedIndex; //4 
     var lower_index = $('separate_sender_1_2').selectedIndex; //5 
     
-    var desc = new Array();
+    var desc = [];
     var upper_desc = document.getElementById('upper_desc');
     var lower_desc = document.getElementById('lower_desc');
     var elem = id.split("_");
@@ -1847,7 +1847,7 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
 
       html = (counter == 0 || counter == 16) ? "" : html;
 
-      html += "<td align='center'>";
+      html += "<td style='text-align:center;'>";
       html += "<label for='abortEventSendingCh_" + chn + "_" + counter + "' style='background-color:white; display:block; text-align:center;'>" + channel.index + "</label>";
       if (isBitSet(value, counter)) {
         html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' checked onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
@@ -1869,5 +1869,47 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
 
   if (html_2) {
     hookElm_2.html(html_2);
+  }
+};
+
+addHintHeatingGroupDevice = function (address) {
+  var devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
+      inHeatingGroup = homematic("Interface.getMetadata", {"objectId" : devId, "dataId" : "inHeatingGroup"}),
+      hint = "<div class='attention' style='width:100%; height:50px; line-height: 25px; background-color: white; text-align: center; position:fixed; z-index: 188;'>" + translateKey('hintGroupDevice') + "</div>";
+
+  if (inHeatingGroup != "null") {   // MetaData available?
+    conInfo("MetaData available", "inHeatingGroup: " + inHeatingGroup);
+    if (inHeatingGroup == "true") {
+      jQuery("#content").prepend(hint);
+      jQuery("#ic_deviceparameters").animate({"margin-top" : "50px"});
+    }
+  } else { // Read /etc/congig/groups.gson (fallback if no meta data available (migration))
+    conInfo("MetaData not available");
+    var allowedGroupMembers = [
+      "RADIATOR_THERMOSTAT",
+      "WALLMOUNTED_THERMOSTAT",
+      "HM-CC-RT-DN",
+      "HM-TC-IT-WM-W-EU"
+      ],
+      showHint = false,
+      devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
+      groupList = JSON.parse(homematic("CCU.getHeatingGroupList",{}));
+
+    if (groupList != -1 && typeof groupList == "object") {
+      jQuery.each(groupList, function (index, groups) {
+        jQuery.each(groups, function (index, group) {
+          jQuery.each(group.groupMembers, function (index, groupMember) {
+            if ((groupMember.id == address) && (jQuery.inArray(groupMember.memberType.id, allowedGroupMembers) != -1)) {
+              showHint = true;
+              homematic("Interface.setMetadata", {"objectId": devId, "dataId": "inHeatingGroup", "value" : "true"});
+            }
+          });
+        });
+      });
+    }
+    if (showHint) {
+      jQuery("#content").prepend(hint);
+      jQuery("#ic_deviceparameters").animate({"margin-top" : "50px"});
+    }
   }
 };

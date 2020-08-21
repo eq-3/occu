@@ -171,18 +171,18 @@ arSortFObj[arSortFObj.length] = tmpFunction;
 
 <table id="tblFunctionList" class="tblList CLASS04200" style="display:none" cellspacing="0" cellpadding="0" >
 <colgroup>
-  <col width="4%" />
-  <col width="8%" />
-  <col width="12%" />
-  <col width="12%" />
-  <col width="4%" />
-  <col width="16%" />
-  <col width="8%" />
-  <col width="8%" />
-  <col width="4%" />
-  <col width="8%" />
-  <col width="8%" />
-  <col width="8%" />
+  <col style="width:4%;"/>
+  <col style="width:8%;"/>
+  <col style="width:12%;"/>
+  <col style="width:12%;"/>
+  <col style="width:4%;"/>
+  <col style="width:16%;"/>
+  <col style="width:8%;"/>
+  <col style="width:8%;"/>
+  <col style="width:4%;"/>
+  <col style="width:8%;"/>
+  <col style="width:8%;"/>
+  <col style="width:8%;"/>
 </colgroup>
 <thead>
 <tr class='CLASS04101'>
@@ -695,15 +695,15 @@ if ( oUser )
 
   var s = "";
   s += "<table cellspacing='8'>";
-  s += "<colgroup> <col width='4%' /><col width='8%' /><col width='12%' /><col width='12%' /><col width='4%' /><col width='16%' />" +
-        "<col width='8%' /><col width='8%' /><col width='4%' /><col width='8%' /><col width='8%' /><col width='8%' /></colgroup>";
+  s += "<colgroup> <col style='width:4%;'/><col style='width:8%;'/><col style='width:12%;'/><col style='width:12%;'/><col style='width:4%;' width='4%' /><col style='width:16%;'/>" +
+        "<col style='width:8%;'/><col style='width:8%;'/><col style='width:4%;'/><col style='width:8%;'/><col style='width:8%;'/><col style='width:8%;'/></colgroup>";
   s += "<tr>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack()'>${footerBtnPageBack}</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04209' onclick='fltSF.clearFilters();restoreFuncs();updateTable();' >${footerBtnResetFilter}</div></td>";
-    s += "<td align='center' valign='middle'><div id='btnExp' onclick='bFilterUsed=false;expandAll();' class='FooterButton CLASS04209' >${footerBtnOpenTree}</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='WebUI.goBack()'>${footerBtnPageBack}</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton CLASS04209' onclick='fltSF.clearFilters();restoreFuncs();updateTable();' >${footerBtnResetFilter}</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div id='btnExp' onclick='bFilterUsed=false;expandAll();' class='FooterButton CLASS04209' >${footerBtnOpenTree}</div></td>";
     s += "<td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
-    s += "<td align='center' class='CLASS04210'>${lblFunctionList}</td>";
-    s += "<td align='center'><div class='FooterButton' onclick='editFuncs();'>${footerBtnEdit}</div></td>";
+    s += "<td style='text-align:center;' class='CLASS04210'>${lblFunctionList}</td>";
+    s += "<td style='text-align:center;'><div class='FooterButton' onclick='editFuncs();'>${footerBtnEdit}</div></td>";
   s += "</tr>";
   s += "</table>";
   setFooter(s);

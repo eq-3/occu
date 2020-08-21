@@ -1,136 +1,122 @@
-jQuery.extend(true,langJSON, {
-  "en" : {
-    "comment" : "***** C/2019 *****",
+jQuery.extend(true, langJSON, {
+  "en": {
 
-    "setAllHmIPDevices" :
-      "Do you want to transfer this position to the corresponding HmIP devices?\n\n"  +
-        "Please bear in mind that this may result in communication problems due to the increased radio traffic.",
+    "helpAlarmSwitchParamDurationValue":
+      "Due to legal regulations, the duration of the alarm is limited to 10 minutes. " +
+      "This means that an entered value greater than 10 minutes or 600 seconds is ignored.",
 
-    "dialogSettingsTimePositionMessageSetPositionSucceedIncludingAllDevices" :
-      "Position information was saved.<br/><br/>" +
-        "The location data of the corresponding HmIP devices will be adjusted.",
+      "cpSecurityHttpsRedirectTitle" : "Automatic forwarding to HTTPS",
+      "cpSecurityHttpsRedirectLabel" : "Forwarding to HTTPS active:",
+      "cpSecurityHttpsRedirectDescription" : "If this function is activated, automatic forwarding to HTTPS takes place when accessing the WebUI via HTTP.",
+  
+    /* LanRoutingV2 */
 
-    "stringTableAnalogInputTransmitterFilterSize" : "Number of measurements used for the average value<br/>of the input voltage.",
-    "stringTableAnalogInputTransmitterVoltage" : "Input voltage",
-    "stringTableAnalogInputVoltageStatus" : "Input voltage",
+    "stringTableBrightnessVisKey": "Brightness of the system button",
+    "stringTableDisplayLightingDuration": "Illumination time display",
 
-    "lblDutyCycleBidCosRF" : "Duty Cycle BidCos:",
-    "lblDutyCycleHmIP" : "Duty Cycle HmIP: ",
-    "lblDutyCycle" : "Duty Cycle CCU: ",
-    "lblDutyCycleA" : "Duty Cycle CCU",
+    "lblBus": "BUS",
 
-    "stringTableDZGCompatibilityMode" : "DGZ compatibility mode",
-    "PowerMeterProtocolModeModeOptionSML" : "SML protocol",
+    "lblOperatingVoltage": "Output voltage",
+    "lblOperatingVoltageStatus": "Status output voltage",
+    "lblOperationPowerConsumptionState": "Status current consumption",
 
-    "lblRepetitions" : "Repetitions",
-    "optionRepetition" : "repetition",
-    "optionRepetitions" : "repetitions",
-    "lblSoundfileList" : "Title list",
-    "btnChooseSongs"  : "Title selection",
+    "lblCurrentPowerConsumption": "Actual current consumption",
+    "lblCurrentOperatingVoltage": "Actual operating voltage",
 
-    "lblPlaylist" : "Playlist",
-
-    "stringTableLogicSwitchAND" : "AND (on if both values are on)",
-    "stringTableLogicSwitchANDINVERS" : "AND_INVERS (AND with previous inverting of channel condition)",
-    "stringTableLogicSwitchNAND" : "NAND (on if at least one value is off)",
-    "stringTableLogicSwitchNOR" : "NOR (on if both values are on)",
-    "stringTableLogicSwitchOR" : "OR (on if at least one value on)",
-    "stringTableLogicSwitchORINVERS" : "OR_INVERS (OR with previous inverting of channel condition)",
-    "stringTableLogicSwitchXOR" : "XOR (on if exactly one value on)",
-
-    "drapFwNotCompatWithCCUFW" : "The Access Point firmware is not compatible to the CCU.\n\nPlease update your CCU!",
-
-    "comment" : "***** D/2019 *****",
-    "lblBrightnessLuxA" : "Enter brightness in lux",
-    "lblBrightnessLuxB" : "and confirm",
-
-    "hintInternalLinkExists" :
-      "If the channel behaviour changes, the internal connection of the device should be deleted and recreated.<br/> " +
-      " Otherwise the internal connection will no longer behave as expected.",
-
-    "comment" : "Error codes service messages DRAP",
-    "stringTablelErrorBusConfigMismatchFalse" : "The actual bus topology corresponds to the configured bus topology.",
-    "stringTablelErrorBusConfigMismatchTrue" : "The actual Bus topology is different to the configured Bus topology.",
-
-    "stringTableErrorPowerShortCircuitBus1False" : "No short circuit between the power lines of Bus 1 detected.",
-    "stringTableErrorPowerShortCircuitBus1True" : "A short circuit between the power lines of Bus 1 was detected.",
-
-    "stringTableErrorPowerShortCircuitBus2False" : "No short circuit between the power lines of Bus 2 detected.",
-    "stringTableErrorPowerShortCircuitBus2True" : "A short circuit between the power lines of Bus 2 was detected.",
-
-    "stringTableErrorShortCircuitDataLineBus1False" : "No short circuit between 24V line and the Data line A and/or B of Bus 1 detected.",
-    "stringTableErrorShortCircuitDataLineBus1True" : "A short circuit between 24V line and the Data line A and/or B of Bus 1 was detected.",
-
-    "stringTableErrorShortCircuitDataLineBus2False" : "No short circuit between 24V line and the Data line A and/or B of Bus 2 detected.",
-    "stringTableErrorShortCircuitDataLineBus2True" : "A short circuit between 24V line and the Data line A and/or B of Bus 2 was detected.",
-
-    "hintDevFwUpdateDCHigh" :
-      "<b><span class='attention'>Please note: The duty cycle of the "+HMIdentifier.en.CCUShortName+" is currently very high!</span></b><br/><br/>" +
-      "A device firmware update is therefore currently not possible.<br/><br/>"+
-      "Wait until the duty cycle has fallen below 80% and then try again.",
-
-    "lblSelectTargetChannels" : "Select<br /> target channels",
-    "btnSelect1stVirTargetChannels" : "1. Virt",
-    "btnSelectAllTargetChannels" : "All",
-    "btnSelectNoTargetChannels" : "None",
-
-    "hintWeeklyProgramActiveExpertChannel" :
-      "The expert mode is not active. However, since at least one expert target channel is activated for at least one switching time, " +
-      "the target channels are still displayed in expert mode.",
-
-    "helpBlindParamLevel2" :
-      "In order for a change in the slat position to take effect at this point, <u>also</u> the shutter height must be defined as the second parameter.<br/><br/>" +
-      "If you only want to change the slat position, use the parameter 'Channel action' and select the value 'Ignore' for the shutter height.",
-
-    "stringTableOnMinLevel" : "Valve position changeover value",
-    "stringTablePWMatLowValvePosition" : "Automatic changeover from continuous to PWM<br/>(with small valve positions)",
-
-    "alertUsernameForbiddenChars" : "The user name shall not contain a space character.",
-    "addFirmwareFailedMinCCUVersion" : "This device-firmware update is not supported by the firmware of your CCU. Please update the CCU firmware first.",
-
-    "stringTableAbortEventSendingChannels" :
-      "Faster reaction to a new button press by cancelling old transmission processes",
-
-    "lblStopRunningLink" : "Cancel old transmissions<br/>of this buttons",
-
-    "stringTableElsterCompatibilityMode" : "Elster compatibility mode",
-
-    "addFirmwareFailedNotValidatable" : "The compatibility of this device-firmware update is not validatable. Please download the device-firmware one more time and try again.",
-
-    "hintVirtualChannelChanged" : "Attention! Important note!",
-    "hintVirtualChannelChangedMsg" :
-      "In simplified mode the channel is switched by the 1st virtual channel. The 2nd and 3rd virtual channel is not displayed. If these do not correspond to the default state, " +
-      "the status displayed in the WebUI does eventually not correspond to the actual value. This seems to be the case here.<br/><br/>" +
-      "You can check this by deactivating the simplified connection configuration in the user administration and then coming back here.",
-
-    "lblLowBattery" : "Battery empty",
-    "lblDisarmed" : "Alarm deactivated",
-    "lblExternallyArmed" : "External alarm activated",
-    "lblInternallyArmed" : "Internal alarm activated",
-    "lblDelayExternalArming" : "External alarm activated with delay",
-    "lblDelayInternalArming" : "Internal alarm activated with delay",
-    "lblEvent" : "Event",
+    "comment": "lt. D. Stueben 06.02.2020",
+    "lblVoltageStatus_0": "Normal",
+    "lblVoltageStatus_1": "Unknown",
+    "lblVoltageStatus_2": "Overvoltage",
+    "lblVoltageStatus_3": "Ext. power supply",
 
 
-    "comment" : "***** A/2020 *****",
+    "lblPowerConsumptionStatus_0": "Normal",
+    "lblPowerConsumptionStatus_1": "Unknown",
+    "lblPowerConsumptionStatus_2": "Current consumption too high",
 
-    "dlgLoadLicense" : "Loading the license",
-    "dlgErrorLoadLicense" : "The software license cannot be loaded Please check the Internet connection of the CCU.",
+    "stringTableOperationPowerConsumptionState": "Status current consumption",
+    "lblOperationTemp": "Operating temperature",
+
+    "lblDutyCycle": "Duty cycle",
+    "lblCarrierSense": "Carrier Sense",
+
+    "comment": "NEW for the DRAP migration",
+    "headerDrapUpdateNecessary": 
+    "This update uses Advanced Routing to establish improved communication between the Homematic IP wireless and wired components. " +
+      "This requires a firmware update of the Homematic IP Wired Access Point.<br><br>After the update, the Homematic IP Wired Access Point is moved into the inbox and must be configured there.<br>" +
+      "All wired devices in the installation that have already been connected and configured will continue to work as usual after the update.",
+
+    "drapUpdateNecessary": "The following Wired Access Points with an incompatible firmware were found and must be updated:<br/><br/>",
+
+    "comment": "SPHM-537",
+    "stringTableErrorCoProcessor": "The channel is not accessible. Please check the power supply of the channel or deactivate it in the WebUI.",
+
+    "lblSeeServiceMessage": "See service message!",
+
+    "lblAllChannelsVisible": "All channels visible:",
+
+    "thAvailableVersion": "Available version",
+    "thInstalledVersion": "Installed version",
+    "btnReload": "Reload",
 
 
-    "comment" : "NOT YET TRANSLATED",
+    "btnAccessPoints": "Update Access Points with</br>incompatible FW",
+    "lblShowAllAPs": "Update Access Points with incompatible FW",
+    "lblGotoUpdate" : "To the update",
 
-    "rotationDirLeftFast" : "Quick anti-clockwise rotation",
-    "rotationDirRightFast" : "Quick clockwise rotation",
-    "rotationDirLeftSlow" : "Slow anti-clockwise rotation",
-    "rotationDirRightSlow" : "Slow clockwise rotation",
+    "apSearchMigrationDescription": "The password of the Homematic IP Access Point and an active Internet connection are required for the update. The password (PW) can be found on the sticker on the device.",
 
-    "stringTableEventTimeoutRainDetector" : "Time period without rain, after which the <br/>sensor signals 'dry condition'.",
-    "rainDetectorSampleInterval" : "Time between the single measurements<br/>(rain detection interval)",
+    "apSearchDescription": "The password of the Homematic IP Access Point is required for the update. The password (PW) can be found on the sticker on the device.",
+    "password": "Password",
+    "apSearchWaitText": "Access Points are searched in the network. Please wait until the search is complete.",
+    "apMigrationNoApToUpdate" : "No Access Points were found that require firmware updates.",
+    "apMigrationConfigureForUpdateFailed" : "An error occurred when starting the Access Point update. Please check the password and try again.",
+    "apMigrationUpdateSuccessful" : "The firmware update was successfully completed.",
+    "apMigrationErrorOrTimeout" : "An error occurred during the firmware update Please update the view and try again.",
+    "apMigrationUpdateSuccessfulAddition" : "You can now teach-in the Access Point via &ldquo;Teach-in device&rdquo;.",
+    "apMigrationUpdateSuccessfulAdditionMigrationMode" : "The Access Point is now in your inbox.",
+
+    "hintDeviceDoesNotSupportAction" : "The currently installed device firmware does not support this function.",
+
+
+    "stringTableTempHumidityParticulateMatterUnit" : "Unit of automatic sensor cleaning",
+    "stringTableTempHumidityParticulateMatterValue" : "Value of automatic sensor cleaning",
+
+    "lblDifferentialTemperature": "Difference temperature T1 - T2",
+    "noNeedForUpdate" : "No update required.",
+    "notCompatible" : "Not compatible",
+
+    "stringTableMassConc25" : "Mass concentration PM2.5",
+    "stringTableMassConc100" : "Mass concentration PM10",
+    "stringTableNumberConc25" : "Quantity concentration PM2.5",
+    "stringTableNumberConc100" : "Quantity concentration PM10",
+    "stringTableTypicalParticelSize" : "Typical particle size",
+
+    "aqiGood" : "Good",
+    "aqiModerate" : "Moderate",
+    "aqiUnhealty1" : "Unhealthy for sen. people",
+    "aqiUnhealty2" : "Unhealthy",
+    "aqiUnhealty3" : "Very unhealthy",
+    "aqiHazardous" : "Threat to health",
+    "lblLocationA" : "Location",
+    "Europe" : "Europe",
+    "USA" : "USA",
+
+    "hintGroupDevice" : "Please note! This device is part of a heating group.<br/>Adjustments to the temperature profiles should be made in the group.",
+
+    "lblChnNotAllowedInRoom" : "This channel cannot be assigned to a room!",
+    "lblChnNotAllowedInFunc" : "This channel cannot be assigned to a function!",
+
+    "stringTableMulticastRouterModuleEnabled" : "MultiCast Routing",
+
+    "lblErrorSensor" : "Sensor error",
+
+     "lblOutputSwap" : "Swap outputs",
+    "optionOutputNotSwapped" : "No",
+    "optionOutputSwapped" : "Yes",
+
+    "hintSetReady" : "Please press the Done button and configure the device in the device list.",
 
     "noMoreKeys" : ""
   }
 });
-
-langJSON.en.hintActivateDetectorSelfTest += langJSON.en.checkSmokeDetectorSelfTest;
-langJSON.en.hintReInclusionDetectorFailed += langJSON.en.checkSmokeDetectorSelfTest;

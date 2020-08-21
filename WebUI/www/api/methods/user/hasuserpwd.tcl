@@ -1,12 +1,12 @@
 ##
-# User.getUserPWD
-# Ermittelt das Passwort des Anwenders
+# User.hasUserPWD
+# Ermittelt ob der Anwender ein Passwort gesetzt hat.
 #
 # Parameter:
 #   userID: [string] Id des Anwenders
 #
 # Rückgabewert: [string]
-#    Userpasswort
+#    true / false
 ##
 
 set script {

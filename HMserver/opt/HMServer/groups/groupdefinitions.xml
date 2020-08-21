@@ -111,7 +111,7 @@
             </mappings>
             <valueList/>
           </status_parameter>
-          <status_parameter aggregation="OR" default="false" max="30.0" min="5.0" name="CONFIG_PENDING"
+          <status_parameter aggregation="OR" default="false" max="true" min="false" name="CONFIG_PENDING"
                      operations="5" tab_order="4" type="BOOL" unit="">
             <mappings>
               <mapping>
@@ -125,10 +125,70 @@
                 <channel_index>0</channel_index>
                 <parameter_name>CONFIG_PENDING</parameter_name>
               </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SCo"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-xx"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-FM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-RC-2-PBU-FM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="ZEL STG RM FFK"/>
+                <channel_index>0</channel_index>
+                <parameter_name>CONFIG_PENDING</parameter_name>
+              </mapping>
             </mappings>
             <valueList/>
           </status_parameter>
-          <status_parameter aggregation="LAST" default="20.0" max="30.0" min="5.0" name="UNREACH" operations="5"
+          <status_parameter aggregation="OR" default="false" max="true" min="false" name="UNREACH" operations="5"
                      tab_order="5" type="BOOL" unit="">
             <mappings>
               <mapping>
@@ -136,14 +196,134 @@
                 <channel_index>0</channel_index>
                 <parameter_name>UNREACH</parameter_name>
               </mapping>
+              <mapping>
+                <device_type type="HM-CC-RT-DN"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SCo"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-xx"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-FM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-RC-2-PBU-FM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="ZEL STG RM FFK"/>
+                <channel_index>0</channel_index>
+                <parameter_name>UNREACH</parameter_name>
+              </mapping>
             </mappings>
             <valueList/>
           </status_parameter>
-          <status_parameter aggregation="LAST" default="20.0" max="30.0" min="5.0" name="LOWBAT" operations="5"
+          <status_parameter aggregation="OR" default="false" max="true" min="false" name="LOWBAT" operations="5"
                      tab_order="6" type="BOOL" unit="">
             <mappings>
               <mapping>
                 <device_type type="HM-TC-IT-WM-W-EU"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-CC-RT-DN"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SCo"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-xx"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>LOWBAT</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-FM"/>
                 <channel_index>0</channel_index>
                 <parameter_name>LOWBAT</parameter_name>
               </mapping>
@@ -161,11 +341,76 @@
             </mappings>
             <valueList/>
           </status_parameter>
-          <status_parameter aggregation="LAST" default="20.0" max="30.0" min="5.0" name="STICKY_UNREACH"
+          <status_parameter aggregation="LAST" default="false" max="true" min="false" name="STICKY_UNREACH"
                      operations="7" tab_order="8" type="BOOL" unit="">
             <mappings>
               <mapping>
                 <device_type type="HM-TC-IT-WM-W-EU"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-CC-RT-DN"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SC-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-SCo"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-RHS-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-Sec-xx"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-WM55-2"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-PB-2-FM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="HM-RC-2-PBU-FM"/>
+                <channel_index>0</channel_index>
+                <parameter_name>STICKY_UNREACH</parameter_name>
+              </mapping>
+              <mapping>
+                <device_type type="ZEL STG RM FFK"/>
                 <channel_index>0</channel_index>
                 <parameter_name>STICKY_UNREACH</parameter_name>
               </mapping>

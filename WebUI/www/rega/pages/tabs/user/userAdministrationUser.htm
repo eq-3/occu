@@ -10,15 +10,15 @@
 
 <table class="tTable CLASS06200" id="userAdminUser" cellpadding="0" cellspacing="0" style="display:none">
 <colgroup>
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<col width="6%" />
-<!-- <col width="6%" /> -->
-<col width="8%" />
-<col width="8%" />
-<col width="6%" />
-<col width="6%" />
+<col style="width:6%;" />
+<col style="width:6%;" />
+<col style="width:6%;" />
+<col style="width:6%;" />
+<!-- <col style="width:6%;" /> -->
+<col style="width:8%;" />
+<col style="width:8%;" />
+<col style="width:6%;" />
+<col style="width:6%;" />
 </colgroup>
 
 <tr class="CLASS06201">
@@ -40,10 +40,10 @@
   if( sUserFullName == ' ' ){ sUserFullName = oUser.Name(); }
  
 Write("<tr>");
-  Write("<td align='center' valign='middle' class='TblUserAdministration CLASS06202'>");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration CLASS06202'>");
     WriteLine(sUserFullName);
   Write("</td>");
-  Write("<td align='center' valign='middle' class='TblUserAdministration'>");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration'>");
     if (oUser.UserPwd() != "") {
         Write("*****");
     }
@@ -51,21 +51,21 @@ Write("<tr>");
         Write("nicht gesetzt");
     }
   Write("</td>");
-  Write("<td align='center' valign='middle' class='TblUserAdministration CLASS06202'>");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration CLASS06202'>");
       string sChecked = "";
         if (oUser.UserShowLogin()) {
           sChecked = "checked";
     }
     Write("<input id='cb"#oUser.ID()#"' disabled='disabled' "#sChecked#" type='checkbox' />");
   Write("</td>");
-  Write("<td align='center' valign='middle' class='TblUserAdministration'>");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration'>");
 
       Write("Benutzer");
 
   Write("</td>");
   
 ! Endgerät
-!  Write("<td align='center' valign='middle' class='TblUserAdministration'>");
+!  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration'>");
 !      integer uc = oUser.UserClient();
 !      if (uc == dwcAuto) { Write("automatisch"); }
 !      if (uc == dwcPDA) { Write("PDA"); }
@@ -73,19 +73,19 @@ Write("<tr>");
 !      if (uc == dwcHandy) { Write("Handy"); }
 !  Write("</td>");
   
-  Write("<td align='center' valign='middle' class='TblUserAdministration'>");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration'>");
     Write(oUser.UserMailAddress());
   Write("</td>");
-  Write("<td align='center' valign='middle' class='TblUserAdministration'>");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration'>");
     Write(oUser.UserPhoneNumber());
   Write("</td>");
-  Write("<td align='center' valign='middle' class='TblUserAdministration'>");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration'>");
   if (oUser.ID() == oUsers.UsersDefaultLogin(dwcPC))
   {
     Write("aktiv");
   }
   Write("</td>");
-  Write("<td align='center' valign='middle' class='TblUserAdministration CLASS06203' >");
+  Write("<td style='text-align:center; vertical-align: middle;' class='TblUserAdministration CLASS06203' >");
   Write("<div class='StdButton CLASS06204' onclick='editUser("#oUser.ID()#")'>${btnEdit}</div>");
 Write("</td>");
 Write("</tr>");
@@ -105,7 +105,7 @@ Write("</tr>");
   
   s += "<table cellspacing='8'>";
   s += "<tr>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack()'>${footerBtnPageBack}</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='WebUI.goBack()'>${footerBtnPageBack}</div></td>";
   s += "</tr>";
   s += "</table>";
 

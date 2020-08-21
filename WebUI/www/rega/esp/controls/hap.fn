@@ -1,0 +1,60 @@
+function ::CreateHAP()
+{
+  ! object ch = dom.GetObject(chnId);
+  ! string chnAddress = ch.Address();
+
+    object objIPAddress = cObj.DPByControl("MAINTENANCE.IP_ADDRESS");
+    object objUnreach = cObj.DPByControl("MAINTENANCE.UNREACH");
+    object objLevelDutyCycle = cObj.DPByControl("MAINTENANCE.DUTY_CYCLE_LEVEL");
+    object objLevelCarrierSense = cObj.DPByControl("MAINTENANCE.CARRIER_SENSE_LEVEL");
+
+
+    string commState = "${stringTableUnreachFalseBR}";
+
+    if (objUnreach) {
+      if (objUnreach.Value() == false) {commState = "${stringTableUnreachFalseBR}";}
+      if (objUnreach.Value() == true) {commState = "${stringTableUnreachTrueBR}";}
+    }
+
+    WriteLine("<td>");
+      WriteLine("<table align='center'>");
+
+        WriteLine("<tr>");
+          WriteLine("<td class='CLASS02518' colspan='2'>");
+            WriteLine("<div class='ControlBtnInfo'><b><u>"#cObj.Label()#"</u></b></div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+        WriteLine("<tr>");
+          if (objIPAddress) {
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblIPAddress}<br/>"#objIPAddress.Value()#"</div>");
+            WriteLine("</td>");
+          }
+          if (objUnreach) {
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>"#commState#"</div>");
+            WriteLine("</td>");
+          }
+        WriteLine("</tr>");
+
+        WriteLine("<tr>");
+          if (objLevelDutyCycle) {
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblDutyCycle}<br/>"#objLevelDutyCycle.Value().ToInteger()#" "#objLevelDutyCycle.ValueUnit()#"</div>");
+            WriteLine("</td>");
+          }
+
+          if (objLevelCarrierSense) {
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCarrierSense}<br/>"#objLevelCarrierSense.Value().ToInteger()#" "#objLevelCarrierSense.ValueUnit()#"</div>");
+            WriteLine("</td>");
+          }
+        WriteLine("</tr>");
+
+      WriteLine("</table>");
+    WriteLine("</td>");
+
+  return;
+}
+

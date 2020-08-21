@@ -91,7 +91,7 @@ proc putSectionBidCosRF {} {
         append html "</div>"
       append html "</td>"
 
-      append html "<td align='left' class='CLASS21208'>"
+      append html "<td  style='text-align:left;' class='CLASS21208'>"
         append html "\${dialogNewDevicesBidCosRFLbl3}"
         append html "\${dialogNewDevicesBidCosRFLbl5}"
 
@@ -138,7 +138,7 @@ proc putSectionWiredRF {} {
     append html "<td class='CLASS21212'>"
       append html "<img src='/ise/img/homematicWired90Deg.png'>"
     append html "</td>"
-    append html "<td align='left' class='CLASS21208'>"
+    append html "<td  style='text-align:left;' class='CLASS21208'>"
       append html "\${dialogNewDevicesBidCosWiredLbl3}"
       append html "\${dialogNewDevicesBidCosWiredLbl4}"
 
@@ -154,7 +154,7 @@ proc putSectionWiredRF {} {
       append html "</div>"
 
     append html "</td>"
-    append html "<td align='left' class='CLASS21208'>"
+    append html "<td  style='text-align:left;' class='CLASS21208'>"
       append html "\${dialogNewDevicesBidCosWiredLbl1}"
       append html "\${dialogNewDevicesBidCosWiredLbl2}"
     append html "</td>"

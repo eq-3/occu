@@ -196,7 +196,7 @@ set PROFILE_3(LONG_JT_RAMPOFF) {6 5}
 set PROFILE_3(LONG_JT_RAMPON) {3 2}
 set PROFILE_3(LONG_JT_REFOFF) {6 5}
 set PROFILE_3(LONG_JT_REFON) {3 2}
-set PROFILE_3(LONG_MAX_TIME_FIRST_DIR) 0.4
+set PROFILE_3(LONG_MAX_TIME_FIRST_DIR) {0.4 range 0.0 - 25.5}
 set PROFILE_3(LONG_MULTIEXECUTE) 1
 set PROFILE_3(LONG_OFFDELAY_TIME_BASE) 0
 set PROFILE_3(LONG_OFFDELAY_TIME_FACTOR) 0
@@ -349,7 +349,7 @@ set PROFILE_5(LONG_JT_RAMPOFF) {6 5}
 set PROFILE_5(LONG_JT_RAMPON) {3 2}
 set PROFILE_5(LONG_JT_REFOFF) {6 5}
 set PROFILE_5(LONG_JT_REFON) {3 2}
-set PROFILE_5(LONG_MAX_TIME_FIRST_DIR) 0.1
+set PROFILE_5(LONG_MAX_TIME_FIRST_DIR) {0.4 0.1}
 set PROFILE_5(LONG_MULTIEXECUTE) 1
 set PROFILE_5(LONG_OFFDELAY_TIME_BASE) 0
 set PROFILE_5(LONG_OFFDELAY_TIME_FACTOR) 0
@@ -499,14 +499,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 
-set comment {
-    if {$ps(LONG_MAX_TIME_FIRST_DIR) < 0.4} {
-      set valLONG_MAX_TIME_FIRST_DIR 0.4
-      set param  "{LONG_MAX_TIME_FIRST_DIR {$valLONG_MAX_TIME_FIRST_DIR}}"
-      catch {puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"}
-      set ps(LONG_MAX_TIME_FIRST_DIR) $valLONG_MAX_TIME_FIRST_DIR
-    }
-}
+
+  if {$ps(LONG_MAX_TIME_FIRST_DIR) < 0.4} {
+    set valLONG_MAX_TIME_FIRST_DIR 0.4
+    set param  "{LONG_MAX_TIME_FIRST_DIR {$valLONG_MAX_TIME_FIRST_DIR}}"
+    catch {puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"}
+    set ps(LONG_MAX_TIME_FIRST_DIR) $valLONG_MAX_TIME_FIRST_DIR
+  }
+
 
 # die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('MULTI_MODE_INPUT_TRANSMITTER_1', '$dev_descr_receiver(TYPE)');</script>"

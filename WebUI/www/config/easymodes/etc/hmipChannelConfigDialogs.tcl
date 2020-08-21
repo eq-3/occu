@@ -1,11 +1,12 @@
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipDRAP_HAPMaintenance.tcl]
 # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
 proc getMaintenance {chn p descr} {
 
-  global dev_descr
+  global dev_descr env
 
   upvar $p ps
   upvar $descr psDescr
@@ -25,6 +26,10 @@ proc getMaintenance {chn p descr} {
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
 
+  if {([string equal $devType "HmIP-CCU3"] == 1) || ([string equal $devType "RPI-RF-MOD"] == 1)} {
+    append html "[getNoParametersToSet]"
+    return $html
+  }
 
   set param CYCLIC_INFO_MSG
   if { [info exists ps($param)] == 1  } {
@@ -71,7 +76,7 @@ proc getMaintenance {chn p descr} {
   set param LOCAL_RESET_DISABLED
   if { [info exists ps($param)] == 1  } {
     incr prn
-    append html "<tr>"
+    append html "<tr name=\"expertParam\" class=\"hidden\">"
       append html "<td>\${stringTableLocalResetDisable}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
@@ -86,13 +91,24 @@ proc getMaintenance {chn p descr} {
      append html "</tr>"
   }
 
-  set param ROUTER_MODULE_ENABLED
-  if { [info exists ps($param)] == 1  } {
-     incr prn
-     append html "<tr>"
-       append html "<td>\${stringTableRouterModuleEnabled}</td>"
-       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
-     append html "</tr>"
+  if {([string equal $devType "HmIPW-DRAP"] != 1) && ([string equal $devType "HmIP-HAP"] != 1)} {
+    set param ROUTER_MODULE_ENABLED
+    if { [info exists ps($param)] == 1  } {
+       incr prn
+       append html "<tr>"
+         append html "<td>\${stringTableRouterModuleEnabled}</td>"
+         append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+       append html "</tr>"
+    }
+  }
+
+  set param MULTICAST_ROUTER_MODULE_ENABLED
+  if { [info exists ps($param)] == 1} {
+    incr prn
+    append html "<tr>"
+     append html "<td>\${stringTableMulticastRouterModuleEnabled}</td>"
+     append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 600 300]</td>"
+    append html "</tr>"
   }
 
   set param ENABLE_ROUTING
@@ -159,6 +175,12 @@ proc getMaintenance {chn p descr} {
     append html "</script>"
   }
 
+  # DRAP/HAP Integration #
+  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1)} {
+    append html "[getDRAP_HAPMaintenance $chn ps psDescr]"
+  }
+  # End DRAP/HAP Integration #
+
   set param LONGITUDE
   if { [info exists ps($param)] == 1  } {
     incr prn
@@ -173,6 +195,12 @@ proc getMaintenance {chn p descr} {
      append html "<td>\${lblLocation} - \${dialogSettingsTimePositionLblLatitude}</td>"
     append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
+  }
+
+  if {[session_is_expert]} {
+    append html "<script type=\"text/javascript\">"
+      append html "jQuery(\"\[name='expertParam'\]\").show();"
+    append html "</script>"
   }
 
   return $html
@@ -303,7 +331,7 @@ set comment {
    append html "[getHorizontalLine]"
 
    append html "<tr>"
-     append html "<td colspan='2' align='center'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
+     append html "<td colspan='2'  style='text-align:center;'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
    append html "</tr>"
 
    append html "<tr>"
@@ -590,7 +618,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
     append html "[getHorizontalLine]"
 
     append html "<tr>"
-      append html "<td colspan='2' align='center'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
+      append html "<td colspan='2'  style='text-align:center;'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
 
     append html "<tr>"
@@ -858,8 +886,20 @@ proc getBlindTransmitter {chn p descr address} {
 
   set html ""
 
+  set param OUTPUT_SWAP
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    array_clear options
+    set options(0) "\${optionOutputNotSwapped}"
+    set options(1) "\${optionOutputSwapped}"
+    append html "<tr><td>\${lblOutputSwap}</td><td>"
+    append html "[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]&nbsp;[getHelpIcon $param]"
+    append html "</td></tr>"
+  }
+
   set param EVENT_DELAY_UNIT
   if { [info exists ps($param)] == 1  } {
+    incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -1132,8 +1172,20 @@ proc getShutterTransmitter {chn p descr address} {
 
   set html ""
 
+  set param OUTPUT_SWAP
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    array_clear options
+    set options(0) "\${optionOutputNotSwapped}"
+    set options(1) "\${optionOutputSwapped}"
+    append html "<tr><td>\${lblOutputSwap}</td><td>"
+    append html "[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]&nbsp;[getHelpIcon $param]"
+    append html "</td></tr>"
+  }
+
   set param EVENT_DELAY_UNIT
   if { [info exists ps($param)] == 1  } {
+    incr prn
     append html "<tr>"
     append html "<td>\${stringTableEventDelay}</td>"
     append html [getComboBox $chn $prn "$specialID" "eventDelay"]
@@ -1859,6 +1911,8 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
         puts "} else {jQuery(modeElem).hide();}"
       puts "};"
     puts "</script>"
+
+    append html "[addHintHeatingGroupDevice $address]"
 
     set prn 0
 

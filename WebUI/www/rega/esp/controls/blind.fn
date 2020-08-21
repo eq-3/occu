@@ -30,9 +30,9 @@ function ::CreateShutterActuator()
     }
     WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td></tr>");
     WriteLine("    <tr>");
-    WriteLine("      <td align='center'>");
+    WriteLine("      <td style='text-align:center;'>");
     WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
-    WriteLine("      </td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+    WriteLine("      </td><td style='text-align:center;'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
     WriteLine("    </tr>");
     WriteLine("  </table>");
     WriteLine("  </div>");
@@ -153,9 +153,9 @@ function ::CreateJalousieActuator()
 
                   ! This original stuff is hidden (not needed) but must be available because of a class which inherits from the original
                   WriteLine("<tr class='hidden'>");
-                  WriteLine("<td align='center'>");
+                  WriteLine("<td style='text-align:center;'>");
                   WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
-                  WriteLine("</td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+                  WriteLine("</td><td style='text-align:center;'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
                   WriteLine("</tr>");
 
                   WriteLine("</table>");
@@ -263,7 +263,6 @@ function ::CreateBlindVirtualReceiver()
   object user = dom.GetObject(userID);
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
-  ! integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
   string controlOperable = "pointer-events:auto;";
   boolean showVirtualChannel = true;
   boolean showHintVirtualChannelChanged = false;
@@ -272,8 +271,12 @@ function ::CreateBlindVirtualReceiver()
   string devAddress = chnAddress.StrValueByIndex(":",0);
 
   ! Determine the address of the real channel
-  string realChannelAddress = devAddress#":"# ch.MetaData("RealChannel");
-
+  if (ch.MetaData("RealChannel")) {
+    string realChannelAddress = devAddress#":"# ch.MetaData("RealChannel");
+  } else {
+    integer virtChn = chnAddress.StrValueByIndex(":",1).ToInteger();
+    string realChannelAddress = devAddress#":"# virtChn - 1;
+  }
   WriteLine( "<script>conInfo('CreateBlindVirtualReceiver - realChannel: "#realChannelAddress#"');</script>" );
 
   object levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL");
@@ -309,6 +312,11 @@ function ::CreateBlindVirtualReceiver()
   {
     iLvlId = oLvl.ID();
     iLvl = oLvl.Value();
+
+    if (iLvl == "") {
+      iLvl = 0;
+    }
+
     if( oLvl.ValueUnit() == "100%" )
     {
       iLvl = iLvl * 100;
@@ -319,6 +327,10 @@ function ::CreateBlindVirtualReceiver()
   {
     iLvlSlatsId = oLvlSlats.ID();
     iLvlSlats = oLvlSlats.Value();
+
+    if (iLvlSlats == "") {
+      iLvlSlats = 0;
+    }
 
     if( oLvlSlats.ValueUnit() == "100%" )
     {
@@ -347,9 +359,9 @@ function ::CreateBlindVirtualReceiver()
           }
           WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' style='text-align:center' "#sReadOnly#" /><b>%</b></td></tr>");
           WriteLine("    <tr>");
-          WriteLine("      <td align='center'>");
+          WriteLine("      <td style='text-align:center;'>");
           WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
-          WriteLine("      </td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+          WriteLine("      </td><td style='text-align:center;'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
           WriteLine("    </tr>");
           WriteLine("  </table>");
           WriteLine("  </div>");
@@ -475,8 +487,6 @@ function ::CreateShutterVirtualReceiver()
 
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
-
-  ! string chnNumber = chnAddress.StrValueByIndex(":",1);
   string controlOperable = "pointer-events:auto;";
   boolean showVirtualChannel = true;
   boolean showHintVirtualChannelChanged = false;
@@ -486,7 +496,13 @@ function ::CreateShutterVirtualReceiver()
   string devAddress =  chnAddress.StrValueByIndex(":",0);
 
   ! Determine the address of the real channel
-  string realChannelAddress = devAddress#":"# ch.MetaData("RealChannel");
+  if (ch.MetaData("RealChannel")) {
+    string realChannelAddress = devAddress#":"# ch.MetaData("RealChannel");
+  } else {
+    integer virtChn = chnAddress.StrValueByIndex(":",1).ToInteger();
+    string realChannelAddress = devAddress#":"# virtChn - 1;
+  }
+  WriteLine( "<script>conInfo('CreateShutterVirtualReceiver - realChannel: "#realChannelAddress#"');</script>" );
 
   object levelRealChannel =  dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL");
   object levelStatusRealChannel = dom.GetObject(chInterface.Name()#"."#realChannelAddress#".LEVEL_STATUS");
@@ -546,9 +562,9 @@ function ::CreateShutterVirtualReceiver()
           }
           WriteLine("      <td colspan='2' class='CLASS02546'><input id='"#chnId#"Perc' type='text' value='0' size='3' class='CLASS02542' style='text-align:center' "#sReadOnly#" /><b>%</b></td></tr>");
           WriteLine("    <tr>");
-          WriteLine("      <td align='center'>");
+          WriteLine("      <td style='text-align:center;'>");
           WriteLine("      <table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"PercUp' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"PercDown' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
-          WriteLine("      </td><td align='center'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+          WriteLine("      </td><td style='text-align:center;'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
           WriteLine("    </tr>");
           WriteLine("  </table>");
           WriteLine("  </div>");

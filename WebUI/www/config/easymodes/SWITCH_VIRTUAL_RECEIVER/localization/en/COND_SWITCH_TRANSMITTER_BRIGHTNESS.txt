@@ -1,6 +1,6 @@
-"description_1" : "<span class=\"translated\">When reaching the defined brightness threshold the switch actuator is switched on for the desired time If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">When reaching the defined brightness threshold the switch actuator is switched off for the desired time If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">When reaching the defined brightness threshold the switch actuator is switched for the desired time into the opposite status (toggle function). If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">On receipt of the switching command the switch actuator is switched on for the desired time If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">On receipt of the switching command the switch actuator is switched off for the desired time If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">On receipt of the switching command the switch actuator is switched for the desired time into the opposite status (toggle function). If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">The profile is not active</span>",
 "switchPoint" : "Switching at",
 

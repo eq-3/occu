@@ -1143,7 +1143,7 @@
       showCustomModeElements();
     }
     // ATTENTION only for debugging - IE might crash when not in debugging mode (console available)
-    if (debug == "true" && !jQuery.browser.msie) {
+    if ((debug == "true") && (typeof console == "object")) {
       console.dir(diagramSettings);
 		}
 
@@ -1154,12 +1154,12 @@
 		}
 		lastDiagramSettingsAsJson = diagramSettingsAsJson;
 
-    // the tooltip doesn´t work with lte IE8
-    if(!jQuery.browser.msie || (jQuery.browser.msie && parseInt(jQuery.browser.version) > 8)) {
+    try {
       // add tooltip
       addLegendTooltip();
       jQuery.jqplot.postDrawHooks.push(addLegendTooltip);
-    } else {
+    } catch (e) {
+      // the tooltip doesn´t work with lte IE8
       jQuery("#legendTooltipText, #legendTooltip, #diagramPleaseWaitForLoadingNextDiagram").hide();
     }
 	};

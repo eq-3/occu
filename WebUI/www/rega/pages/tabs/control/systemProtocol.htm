@@ -43,10 +43,10 @@ ResetGAC();
 
 <table class="tTable filterTable" id="SysProtoList" cellspacing="0" cellpadding="0" style="display:none">
   <colgroup>
-    <col width="12%" />
-    <col width="12%" />
-    <col width="16%" />
-    <col width="60%" />
+    <col style="width:12%;"/>
+    <col style="width:12%;"/>
+    <col style="width:16%;"/>
+    <col style="width:60%;"/>
   </colgroup>
   <thead id="histlistheader">
       <tr>
@@ -127,11 +127,11 @@ ResetGAC();
 
   s += "<table cellspacing='8'>";
   s += "<tr>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack()'>"+translateKey('footerBtnPageBack')+"</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS03306' onclick='fltPROT.clearFilters();reloadPage();' >"+translateKey('footerBtnResetFilter')+"</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='refreshTable(false);'>"+translateKey('footerBtnUpdate')+"</div></td>";
-    s += "<td align='center' valign='middle'><a class='CLASS03005' href='" + historyBufferUrl + "'><div class='FooterButton'>"+translateKey('footerBtnExport')+"</div></a></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='iseSystem.ClearHistoryData();'>"+translateKey('footerBtnDelete')+"</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='WebUI.goBack()'>"+translateKey('footerBtnPageBack')+"</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton CLASS03306' onclick='fltPROT.clearFilters();reloadPage();' >"+translateKey('footerBtnResetFilter')+"</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div id='btnRefreshTable' class='FooterButton' onclick='refreshTable(false);'>"+translateKey('footerBtnUpdate')+"</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><a class='CLASS03005' href='" + historyBufferUrl + "'><div class='FooterButton'>"+translateKey('footerBtnExport')+"</div></a></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='iseSystem.ClearHistoryData();'>"+translateKey('footerBtnDelete')+"</div></td>";
   s += "</tr>";
   s += "</table>";
   

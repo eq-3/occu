@@ -47,7 +47,7 @@ proc getHeader {address chn} {
 set comment { this is currently not in use
     append result "storeChannelMode = function(address, chn, val) \{"
       append result "arChModes\[chn\] = val.toString();"
-          append result "jQuery(\"#footerButtonOK\").unbind(\"click\").click(function()\{"
+          append result "jQuery(\"#footerButtonOK, #footerButtonTake\").unbind(\"click\").click(function()\{"
 
             append result " var devAddress = address.split(\":\")\[0\];"
             append result " jQuery.each(DeviceList.getDeviceByAddress(devAddress).channels, function(index, channel) \{ "

@@ -1,7 +1,7 @@
-"description_1" : "<span class=\"translated\">When reaching the set temperature threshold the blind will be moved up completely for the time set. If an up-delay is set the blind will be moved up to the desired position after the delay time has expired.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">When reaching the set temperature threshold the blind will be moved down completely for the time set. If a down-delay is set the blind will be moved up to the desired position after the delay time has expired.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">When reaching the set temperature threshold the blind will be moved up or down completely (toggle function). If a delay is set the blind will be moved to the desired position after the delay time has expired.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">When reaching the set temperature threshold the blind will be moved to the desired position for the time set. If a delay is set the blind will be moved to the desired position after the delay time has expired.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">On receipt of the switching command the blind will be moved up completely for the time set. If an up-delay is set the blind will be moved up to the desired position after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">On receipt of the switching command the blind will be moved down completely for the time set. If a down-delay is set the blind will be moved up to the desired position after the delay time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">On receipt of the switching command the blind will be moved up or down completely (toggle function). If a delay is set the blind will be moved to the desired position after the delay time has expired.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">On receipt of the switching command the blind will be moved to the desired position for the time set. If a delay is set the blind will be moved to the desired position after the delay time has expired.</span><br/><br/>",
 "switchPoint" : "Switching at",
 
 "subset_1" : "moved up",

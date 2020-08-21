@@ -1,5 +1,6 @@
 jQuery.extend(true,langJSON, {
   "de" : {
+    "autoSensorCleaning" : "Intervall Sensorreinigung",
     "condSwitchTransmitterWindSpeedFilterSelect" : "Berechnung der Windst&auml;rke",
     "optionSwitchTransmitterWindSpeedFilterSelectCurrentValue" : "Momentaner Wert",
     "optionSwitchTransmitterWindSpeedFilterSelectMinValue" : "Minimaler Wert",
@@ -28,6 +29,12 @@ jQuery.extend(true,langJSON, {
     "condTxDecisionBrightnessBelow" : "Gesendeter Entscheidungswert, wenn untere Helligkeitsschwelle unterschritten<br/>(Nur, wenn vorher obere Helligkeitsschwelle &uuml;berschritten wurde)",
     "condThresholdBrightnessHi" : "Obere Helligkeitsschwelle",
     "condThresholdBrightnessLo" : "Untere Helligkeitsschwelle",
+
+    "condTxDecisionParticulateMatterAbove" : "Gesendeter Entscheidungswert, wenn obere Feinstaubkonzentration &uuml;berschritten",
+    "condTxDecisionParticulateMatterBelow" : "Gesendeter Entscheidungswert, wenn untere Feinstaubkonzentration unterschritten",
+    "condThresholdParticulateMatterHi" : "Obere Feinstaubkonzentration",
+    "condThresholdParticulateMatterLo" : "Untere Feinstaubkonzentration",
+
     "brightnessThresholdEXP" : "Wert des Exponenten",
     "brightnessThresholdVAL" : "Gemeldeter Wert des Helligkeitssensors",
     "sunshineThreshold" : "Helligkeitsschwelle, ab dem Sonnenschein signalisiert wird",
@@ -43,6 +50,7 @@ jQuery.extend(true,langJSON, {
   },
 
   "en" : {
+    "autoSensorCleaning" : "Interval sensor cleaning",
     "condSwitchTransmitterWindSpeedFilterSelect" : "Calculation of wind velocity",
     "optionSwitchTransmitterWindSpeedFilterSelectCurrentValue" : "Current value",
     "optionSwitchTransmitterWindSpeedFilterSelectMinValue" : "Minimum value",
@@ -71,6 +79,12 @@ jQuery.extend(true,langJSON, {
     "condTxDecisionBrightnessBelow" : "Decision value sent if lower brightness value falls below threshold<br/>(only, if upper brightness threshold has been exceeded previously)",
     "condThresholdBrightnessHi" : "Upper brightness threshold",
     "condThresholdBrightnessLo" : "Lower brightness threshold",
+
+    "condTxDecisionParticulateMatterAbove" : "Transmitted decision value, if upper particulate matter concentration exceeded",
+    "condTxDecisionParticulateMatterBelow" : "Transmitted decision value, if upper particulate matter concentration falls below",
+    "condThresholdParticulateMatterHi" : "Upper particulate matter concentration",
+    "condThresholdParticulateMatterLo" : "Lower particulate matter concentration",
+
     "brightnessThresholdEXP" : "Value of exponent",
     "brightnessThresholdVAL" : "Registered value of brightness sensor",
     "sunshineThreshold" : "Brightness threshold at which the sunshine duration is signalled",

@@ -35,10 +35,8 @@ set deviceDescrScript {
     }
 
     Write(" GROUP_ONLY {"# device.MetaData("operateGroupOnly") # "}");
-
-
-
     Write(" CHANNELS {");
+
     var first = true;
     string channelId;
     foreach(channelId, device.Channels())

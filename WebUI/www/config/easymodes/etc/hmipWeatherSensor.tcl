@@ -89,14 +89,98 @@ proc getCondSwitchTransmitterWindSpeed {chn p descr} {
 }
 
 proc getCondSwitchTransmitterTemperature {chn p descr} {
+  global dev_descr
   upvar $p ps
   upvar $descr psDescr
   upvar special_input_id special_input_id
+
+  set chn [getChannel $special_input_id]
+  set specialID "[getSpecialID $special_input_id]"
+
+  set helpDlgWidth 450
+  set helpDlgHeight 170
 
   set prn 0
   set html ""
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
+
+  set param COND_TX_FALLING
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableCondTxFallingTemp}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_Temp $helpDlgWidth $helpDlgHeight]</td>"
+    append html "</tr>"
+  }
+
+  set param COND_TX_CYCLIC_BELOW
+    if { [info exists ps($param)] == 1 } {
+      incr prn;
+      append html "<tr>"
+        append html "<td>&nbsp;&nbsp;\${stringTableSendSwitchCommandCyclically}</td>"
+        append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html "</tr>"
+      append html [getHorizontalLine]
+
+      append html "<script type=\"text/javascript\">"
+        append html "var condTxFallingRisingElm = jQuery('#separate_$specialID\_$chn\_[expr $prn - 1]');"
+        append html "var condTxCyclicBelowAboveElm = jQuery('#separate_$specialID\_$chn\_$prn');"
+
+        append html "if (condTxCyclicBelowAboveElm.is(':checked')) \{"
+          append html "condTxFallingRisingElm.prop('disabled', true);"
+        append html "\}"
+
+        append html "condTxCyclicBelowAboveElm.click(function() \{"
+          append html "var elmIsChecked = jQuery(this).is(':checked');"
+          append html "if (elmIsChecked) \{"
+            append html "condTxFallingRisingElm.prop('checked', true).prop('disabled',true);"
+          append html "\} else \{"
+            append html "condTxFallingRisingElm.prop('disabled',false);"
+          append html "\}"
+        append html "\});"
+      append html "</script>"
+    }
+
+  set param COND_TX_RISING
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableCondTxRisingTemp}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_Temp  $helpDlgWidth $helpDlgHeight]</td>"
+    append html "</tr>"
+  }
+
+  set param COND_TX_CYCLIC_ABOVE
+  if { [info exists ps($param)] == 1 } {
+    incr prn;
+    append html "<tr>"
+      append html "<td>&nbsp;&nbsp;\${stringTableSendSwitchCommandCyclically}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html [getHorizontalLine]
+    append html "</tr>"
+
+      append html "<script type=\"text/javascript\">"
+        append html "var condTxFallingRisingElm = jQuery('#separate_$specialID\_$chn\_[expr $prn - 1]');"
+        append html "var condTxCyclicBelowAboveElm = jQuery('#separate_$specialID\_$chn\_$prn');"
+
+        append html "if (condTxCyclicBelowAboveElm.is(':checked')) \{"
+          append html "condTxFallingRisingElm.prop('disabled', true);"
+        append html "\}"
+
+        append html "condTxCyclicBelowAboveElm.click(function() \{"
+        append html "var elmIsChecked = jQuery(this).is(':checked');"
+        append html "if (elmIsChecked) \{"
+          append html "condTxFallingRisingElm.prop('checked', true).prop('disabled',true);"
+        append html "\} else \{"
+          append html "condTxFallingRisingElm.prop('disabled',false);"
+        append html "\}"
+        append html "\});"
+      append html "</script>"
+
+  }
+
+
 
   set param COND_TX_DECISION_ABOVE
   if { [info exists ps($param)] == 1  } {
@@ -133,7 +217,48 @@ proc getCondSwitchTransmitterTemperature {chn p descr} {
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
-  return $html
+
+
+  set param TEMPERATURE_OFFSET
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      set comment {
+        array_clear options
+        set i 0
+        for {set val -12.8} {$val <= 12.7} {set val [expr $val + 0.1]} {
+          set options($val) "$val &#176;C"
+          incr i;
+        }
+      }
+      append html "<td>\${stringTableTemperatureOffset}</td>"
+      # append html "<td>[get_ComboBox options $param separate_$specialID\_$chn\_$prn ps $param]&nbsp;[getHelpIcon $param] <span class=\"attention\">Help not yet available</span></td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_STE2]</td>"
+
+    append html "</tr>"
+  }
+
+  set param TX_MINDELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableTxMinDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "txMinDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param TX_MINDELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
 
   return $html
 }
@@ -433,4 +558,112 @@ proc getCondSwitchTransmitterWindDirection {chn p descr} {
   return $html
 
   return $html
+}
+
+proc getCondSwitchTransmitterParticulateMatter {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar special_input_id special_input_id
+
+  set prn 0
+  set html ""
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
+
+  set param COND_TX_DECISION_ABOVE
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${condTxDecisionParticulateMatterAbove}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
+    append html "</tr>"
+  }
+
+  set param COND_TX_DECISION_BELOW
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${condTxDecisionParticulateMatterBelow}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon COND_TX_DECISION_ABOVE_BELOW]</td>"
+    append html "</tr>"
+  }
+
+  set param COND_TX_THRESHOLD_HI
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${condThresholdParticulateMatterHi}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  set param COND_TX_THRESHOLD_LO
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${condThresholdParticulateMatterLo}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+  return $html
+
+  return $html
+}
+
+proc getTempHumidityParticulateMatterTransmitter {chn p descr address} {
+
+ upvar $p ps
+ upvar $descr psDescr
+ upvar special_input_id special_input_id
+
+ set specialID "[getSpecialID $special_input_id]"
+
+ set prn 0
+ set html ""
+
+ puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/js/AirQuality.js'); load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js');load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-Weather.js');</script>"
+
+  set param INTERVAL_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${autoSensorCleaning}</td>"
+    append html "[getComboBox $chn $prn $specialID autoInterval]"
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxC $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param INTERVAL_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableLevel}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentAutoIntervalOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+
+    append html "<tr>"
+      append html "<td>"
+        append html "$\{lblLocationA\}"
+      append html "</td>"
+
+      append html "<td>"
+        append html "<select id='modeAirQuality' onchange='selectAQI(this.value, \"$address\");'>"
+          append html "<option value='Europe'>Europa</option>"
+          append html "<option value='USA'>USA</option>"
+        append html "</select>"
+        append html "&nbsp;[getHelpIcon AQI_MODE 450 80]"
+      append html "</td>"
+
+      append html "<script type='text/javascript'>"
+         append html "setCurrentAQIMode(\"$address\");"
+       append html "</script>"
+
+  }
+
+  return $html
+
 }

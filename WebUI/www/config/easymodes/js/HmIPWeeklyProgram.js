@@ -552,77 +552,11 @@ HmIPWeeklyProgram.prototype = {
   },
 
   _getDuration: function(number) {
-    var result = "",
-    factorMin = this.psDescr.DURATION_FACTOR_MIN,
-    factorMax = this.psDescr.DURATION_FACTOR_MAX,
-    valBaseID = number +"_WP_DURATION_BASE",
-    valFactorID = number +"_WP_DURATION_FACTOR";
-
-    var valBase = (this.activeEntries[number] == true ) ? parseInt(this.ps[valBaseID]) : 0;
-    var valFactor = (this.activeEntries[number] == true ) ? parseInt(this.ps[valFactorID]) : 0;
-
-    var arOptions = ["BASE_100_MS","BASE_1_S","BASE_5_S","BASE_10_S","BASE_1_M","BASE_5_M","BASE_10_M","BASE_1_H"];
-
-    this.prn++;
-    result += "<input type='text' id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+valFactorID+"' value='"+valFactor+"' size='2' class='alignCenter' onblur='checkWPMinMaxValue(this,"+factorMin+","+factorMax+")'>";
-    result += " x ";
-
-    result += "<script type='text/javascript'>";
-    result += "jQuery( '#separate_CHANNEL_"+this.chn+"_"+this.prn+"').on( 'keydown', function(event) {";
-    result += "    if(event.which == 13)";
-    result += "      checkWPMinMaxValue(this,"+factorMin+","+factorMax+")";
-    result += "  });";
-    result += "</script>";
-
-    this.prn++;
-    result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+valBaseID+"'>";
-      jQuery.each(arOptions, function(index, value) {
-        if (index != valBase) {
-          result += "<option value='" + index + "'>" + translateKey(value) + "</options>";
-        } else {
-          result += "<option selected='selected' value='" + index + "'>" + translateKey(value) + "</options>";
-        }
-      });
-    result += "</select>";
-
-    return result;
+    return this._getDurationRamptimeHTML("duration", number);
   },
 
   _getRampTime: function(number) {
-    var result = "",
-    factorMin = this.psDescr.RAMP_TIME_FACTOR_MIN,
-    factorMax = this.psDescr.RAMP_TIME_FACTOR_MAX,
-    valBaseID = number +"_WP_RAMP_TIME_BASE",
-    valFactorID = number +"_WP_RAMP_TIME_FACTOR";
-
-    var valBase = (this.activeEntries[number] == true ) ? parseInt(this.ps[valBaseID]) : 0;
-    var valFactor = (this.activeEntries[number] == true ) ? parseInt(this.ps[valFactorID]) : 0;
-
-    var arOptions = ["BASE_100_MS","BASE_1_S","BASE_5_S","BASE_10_S","BASE_1_M","BASE_5_M","BASE_10_M","BASE_1_H"];
-
-    this.prn++;
-    result += "<input type='text' id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+valFactorID+"' value='"+valFactor+"' size='2' class='alignCenter' onblur='checkWPMinMaxValue(this,"+factorMin+","+factorMax+")'>";
-    result += " x ";
-
-    result += "<script type='text/javascript'>";
-    result += "jQuery( '#separate_CHANNEL_"+this.chn+"_"+this.prn+"').on( 'keydown', function(event) {";
-    result += "    if(event.which == 13)";
-    result += "      checkWPMinMaxValue(this,"+factorMin+","+factorMax+")";
-    result += "  });";
-    result += "</script>";
-
-    this.prn++;
-    result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+valBaseID+"'>";
-      jQuery.each(arOptions, function(index, value) {
-        if (index != valBase) {
-          result += "<option value='" + index + "'>" + translateKey(value) + "</options>";
-        } else {
-          result += "<option selected='selected' value='" + index + "'>" + translateKey(value) + "</options>";
-        }
-      });
-    result += "</select>";
-
-    return result;
+    return this._getDurationRamptimeHTML("ramptime", number);
   },
 
   _getLevel: function(number) {
@@ -1264,6 +1198,57 @@ HmIPWeeklyProgram.prototype = {
       virtChnCounter = (virtChnCounter >= 3) ? 0 : virtChnCounter;
     });
     elmTargetValue.val(targetValue);
+  },
+
+  _getDurationRamptimeHTML: function(mode, number) {
+    var result = "",
+      factorMin = "",
+      factorMax = "",
+      valBaseID = number +"_WP_DURATION_BASE",
+      valFactorID = number +"_WP_DURATION_FACTOR";
+
+    switch (mode) {
+      case "duration":
+        factorMin = this.psDescr.DURATION_FACTOR_MIN;
+        factorMax = this.psDescr.DURATION_FACTOR_MAX;
+        break;
+      case "ramptime":
+        factorMin = this.psDescr.RAMP_TIME_FACTOR_MIN;
+        factorMax = this.psDescr.RAMP_TIME_FACTOR_MAX;
+        break;
+      default:
+        conInfo("HmIPWeeklyProgram - _getDurationRamptimeHTML: an error occured");
+    }
+
+    var valBase = (this.activeEntries[number] == true ) ? parseInt(this.ps[valBaseID]) : 0;
+    var valFactor = (this.activeEntries[number] == true ) ? parseInt(this.ps[valFactorID]) : 0;
+
+    var arOptions = ["BASE_100_MS","BASE_1_S","BASE_5_S","BASE_10_S","BASE_1_M","BASE_5_M","BASE_10_M","BASE_1_H"];
+
+    this.prn++;
+    result += "<input type='text' id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+valFactorID+"' value='"+valFactor+"' size='2' class='alignCenter' onblur='checkWPMinMaxValue(this,"+factorMin+","+factorMax+")'>";
+    result += " x ";
+
+    result += "<script type='text/javascript'>";
+    result += "jQuery( '#separate_CHANNEL_"+this.chn+"_"+this.prn+"').on( 'keydown', function(event) {";
+    result += "    if(event.which == 13)";
+    result += "      checkWPMinMaxValue(this,"+factorMin+","+factorMax+")";
+    result += "  });";
+    result += "</script>";
+
+    this.prn++;
+    result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+valBaseID+"'>";
+      jQuery.each(arOptions, function(index, value) {
+        if (index != valBase) {
+          result += "<option value='" + index + "'>" + translateKey(value) + "</options>";
+        } else {
+          result += "<option selected='selected' value='" + index + "'>" + translateKey(value) + "</options>";
+        }
+      });
+    result += "</select>";
+
+    return result;
+
   },
 
   _getMaxEntries: function() {

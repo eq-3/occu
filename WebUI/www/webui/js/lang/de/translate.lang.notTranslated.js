@@ -1,138 +1,127 @@
-jQuery.extend(true,langJSON, {
-  "de" : {
-    "comment" : "***** C/2019 *****",
+jQuery.extend(true, langJSON, {
+  "de": {
 
-    "setAllHmIPDevices" :
-      "Soll diese Position auf die entsprechenden HmIP-Ger%E4te %FCbertragen werden?\n\n"  +
-        "Bedenken Sie, dass es dann wegen des erh%F6hten Funkaufkommens eventuell zu Kommunikationsst%F6rungen kommen kann.",
-    "dialogSettingsTimePositionMessageSetPositionSucceedIncludingAllDevices" :
-      "Positionsangabe wurde gespeichert.<br/><br/>" +
-        "Die Standortdaten der enstprechenden HmIP-Ger%E4te werden angepasst.",
+    "helpAlarmSwitchParamDurationValue":
+      "Aufrund gesetzlicher Vorgaben ist die Zeitdauer des Alarms auf 10 Minuten begrenzt.  " +
+      "Das hei%DFt, eine Eingabe von Werten gr%F6sser 10 Minuten bzw. 600 Sekunden wird ignoriert.",
 
-    "stringTableAnalogInputTransmitterFilterSize" : "Anzahl der Messungen, die f%FCr die Mittelwertbildung<br/>der Eingangsspannung genutzt werden",
-    "stringTableAnalogInputTransmitterVoltage" : "Eingangsspannung",
-    "stringTableAnalogInputVoltageStatus" : "Eingangsspannung",
+    "cpSecurityHttpsRedirectTitle" : "Automatische Umleitung auf HTTPS",
+    "cpSecurityHttpsRedirectLabel" : "Umleitung auf HTTPS aktiv:",
+    "cpSecurityHttpsRedirectDescription" : "Ist die Funktion aktiviert, erfolgt bei Zugriff auf die WebUI %FCber HTTP eine automatische Umleitung auf HTTPS",
 
-    "lblDutyCycleBidCosRF" : "Duty Cycle BidCos:",
-    "lblDutyCycleHmIP" : "Duty Cycle HmIP: ",
-    "lblDutyCycle" : "Duty Cycle CCU: ",
-    "lblDutyCycleA" : "Duty Cycle CCU",
+    /* LanRoutingV2 */
 
-    "stringTableDZGCompatibilityMode" : "DZG Kompatibilit%E4tsmodus",
-    "PowerMeterProtocolModeModeOptionSML" : "SML-Protokoll",
+    "stringTableBrightnessVisKey": "Helligkeit der Systemtaste",
+    "stringTableDisplayLightingDuration": "Beleuchtungsdauer Display",
 
-    "lblRepetitions" : "Wiederholungen",
-    "optionRepetition" : "Wiederholung",
-    "optionRepetitions" : "Wiederholungen",
-    "lblSoundfileList" : "Titel",
-    "btnChooseSongs"  : "Titelauswahl",
+    "lblBus": "BUS",
 
-    "lblPlaylist" : "Wiedergabeliste",
+    "lblOperatingVoltage": "Ausgangsspannung",
+    "lblOperatingVoltageStatus": "Status Ausgangsspannung",
+    "lblOperationPowerConsumptionState": "Status Stromaufnahme",
 
-    "stringTableLogicSwitchAND" : "AND (ein, wenn beide Werte ein)",
-    "stringTableLogicSwitchANDINVERS" : "AND_INVERS (AND mit vorheriger Invertierung des Kanal-Zustands)",
-    "stringTableLogicSwitchNAND" : "NAND (ein, wenn mindestens ein Wert aus)",
-    "stringTableLogicSwitchNOR" : "NOR (ein, wenn beide Werte aus)",
-    "stringTableLogicSwitchOR" : "OR (ein, wenn mindestens ein Wert ein)",
-    "stringTableLogicSwitchORINVERS" : "OR_INVERS (OR mit vorheriger Invertierung des Kanal-Zustands)",
-    "stringTableLogicSwitchXOR" : "XOR (ein, wenn nur genau ein Wert ein)",
+    "lblCurrentPowerConsumption": "Aktuelle Stromaufnahme",
+    "lblCurrentOperatingVoltage": "Aktuelle Betriebsspannung",
 
-    "drapFwNotCompatWithCCUFW" : "Die Accesspoint-Firmware ist nicht kompatibel mit der CCU.\n\nBitte aktualisieren Sie Ihre CCU!",
-
-    "comment" : "***** D/2019 *****",
-    "lblBrightnessLuxA" : "Helligkeit in Lux",
-    "lblBrightnessLuxB" : "eingeben und %FCbernehmen",
-
-    "hintInternalLinkExists" :
-      "Bei %C4nderung des Kanalverhaltens, sollte die interne Verkn%FCpfung des Ger%E4tes gel%F6scht und neu erstellt werden.<br/>" +
-      "Andernfalls wird die interne Verkn%FCpfung sich nicht mehr erwartungsgem%E4%DF verhalten.",
-
-    "comment" : "Error codes service messages DRAP",
-    "stringTablelErrorBusConfigMismatchFalse" : "Die tats%E4chliche Bustopologie entspricht der konfigurierten Bustopologie.",
-    "stringTablelErrorBusConfigMismatchTrue" : "Die tats%E4chliche Bustopologie entspricht nicht der konfigurierten Bustopologie.",
-
-    "stringTableErrorPowerShortCircuitBus1False" : "Kein Kurzschluss zwischen den Stromleitungen von Bus 1 festgestellt.",
-    "stringTableErrorPowerShortCircuitBus1True" : "Ein Kurzschluss zwischen den Stromleitungen von Bus 1 wurde festgestellt.",
-
-    "stringTableErrorPowerShortCircuitBus2False" : "Kein Kurzschluss zwischen den Stromleitungen von Bus 2 festgestellt.",
-    "stringTableErrorPowerShortCircuitBus2True" : "Ein Kurzschluss zwischen den Stromleitungen von Bus 2 wurde festgestellt.",
+    "comment": "lt. D. Stueben 06.02.2020",
+    "lblVoltageStatus_0": "Normal",
+    "lblVoltageStatus_1": "Unbekannt",
+    "lblVoltageStatus_2": "%DCberspannung",
+    "lblVoltageStatus_3": "Ext. Spannungsversorgung",
 
 
-    "stringTableErrorShortCircuitDataLineBus1False" : "Kein Kurzschluss zwischen der 24V-Leitung und der Datenleitung A und/oder B von Bus 1 festgestellt.",
-    "stringTableErrorShortCircuitDataLineBus1True" : "Ein Kurzschluss zwischen der 24V-Leitung und der Datenleitung A und/oder B von Bus 1 wurde festgestellt.",
+    "lblPowerConsumptionStatus_0": "Normal",
+    "lblPowerConsumptionStatus_1": "Unbekannt",
+    "lblPowerConsumptionStatus_2": "Stromaufnahme zu hoch",
 
-    "stringTableErrorShortCircuitDataLineBus2False" : "Kein Kurzschluss zwischen der 24V-Leitung und der Datenleitung A und/oder B von Bus 2 festgestellt.",
-    "stringTableErrorShortCircuitDataLineBus2True" : "Ein Kurzschluss zwischen der 24V-Leitung und der Datenleitung A und/oder B von Bus 2 wurde festgestellt.",
+    "stringTableOperationPowerConsumptionState": "Status Stromaufnahme",
+    "lblOperationTemp": "Betriebstemperatur",
 
-    "hintDevFwUpdateDCHigh" : 
-      "<b><span class='attention'>Achtung: Der Duty Cycle der "+HMIdentifier.de.CCUShortName+" ist derzeit sehr hoch!</span></b><br/><br/>" +
-      "Ein Ger%E4tefirmwareupdate ist daher im Moment nicht m%F6glich.<br/><br/>"+
-      "Warten Sie, bis der Duty Cycle unter 80% gesunken ist und versuchen Sie es dann erneut.",
+    "lblDutyCycle": "Duty Cycle",
+    "lblCarrierSense": "Carrier Sense",
 
-    "lblSelectTargetChannels" : "Zielkan%E4le<br /> w%E4hlen",
-    "btnSelect1stVirTargetChannels" : "1. Virt",
-    "btnSelectAllTargetChannels" : "Alle",
-    "btnSelectNoTargetChannels" : "Keine",
+    "comment": "NEW for the DRAP migration",
+    "headerDrapUpdateNecessary": 
+      "Mit diesem Update wird durch Advanced Routing eine verbesserte Kommunikation zwischen den Homematic IP Funk- und den Homematic IP Wired-Komponenten etabliert. " +
+      "Dazu ist es erforderlich, dass ein Firmware-Update des Homematic IP Wired Access Point durchgef%FChrt wird.<br><br>Der Homematic IP Wired Access Point befindet sich " +
+      "nach diesem Update im Posteingang und muss dort konfiguriert werden.<br>Alle bereits angelernten und konfigurierten Wired-Ger%E4te in der Installation arbeiten nach dem Update wie gewohnt weiter.",
 
-    "hintWeeklyProgramActiveExpertChannel" :
-      "Der Expertenmodus ist nicht aktiv. Da jedoch bei mindestens einem Schaltzeitpunkt zumindest ein Experten-Zielkanal aktiviert ist, " +
-      "werden die Zielkan%E4le dennoch im Expertenmodus dargestellt.",
+    "drapUpdateNecessary": "Folgende Wired Access Points mit einer inkompatiblen Firmware wurden gefunden und m%FCssen aktualisiert werden:<br/><br/>",
 
-    "helpBlindParamLevel2" :
-      "Damit eine %C4nderung der Lamellenposition an dieser Stelle wirksam wird, muss <u>zus%E4tzlich</u> als zweiter Parameter die Behangh%F6he festgelegt werden.<br/><br/>" +
-      "M%F6chten Sie nur die Lamellenposition %E4ndern, verwenden Sie den Parameter Kanalaktion und w%E4hlen f%FCr die Behangh%F6he den Wert 'Ignorieren'.",
+    "comment": "SPHM-537",
+    "stringTableErrorCoProcessor": "Der Kanal ist nicht erreichbar. Bitte pr%FCfen Sie die Spannungsversorgung des Kanals oder deaktivieren Sie diesen in der WebUI.",
 
-    "stringTableOnMinLevel" : "Ventilposition Umschaltwert",
-    "stringTablePWMatLowValvePosition" : "Automatische Umschaltung von Stetig auf PWM<br/>(bei kleinen Ventilpositionen)",
+    "lblSeeServiceMessage": "Siehe Servicemeldung!",
 
-    "alertUsernameForbiddenChars" : "Der Benutzername darf kein Leerzeichen enthalten.",
-    "addFirmwareFailedMinCCUVersion" : "Dieses Ger%E4te-Firmware Update wird von der Firmware Ihrer CCU nicht unterst%FCtzt. Bitte aktualisieren Sie zun%E4chst Ihre CCU Firmware.",
+    "lblAllChannelsVisible": "Alle Kan%E4le sichtbar:",
 
-    "stringTableAbortEventSendingChannels" :
-      "Schnellere Reaktion bei erneutem Tastendruck durch Abbruch alter Sendevorg%E4nge",
-    "lblStopRunningLink" : "Alte Sendevorg%E4nge<br/>dieser Tasten abbrechen",
+    "thAvailableVersion": "Verf%FCgbare Version",
+    "thInstalledVersion": "Installierte Version",
+    "btnReload": "Neu laden",
 
-    "stringTableElsterCompatibilityMode" : "Elster Kompatibilit%E4tsmodus",
+    "btnAccessPoints": "Access Points mit</br>inkompatibler FW updaten",
+    "lblShowAllAPs": "Access Points mit inkompatibler FW updaten",
+    "lblGotoUpdate" : "Zum Update",
 
-    "addFirmwareFailedNotValidatable" : "Die Kompatibil%E4t dieses Ger%E4te-Firmware Updates kann nicht %FCberpr%FCft werden. Bitte laden Sie die Firmware erneut herunter und versuchen sie noch einmal.",
+    "apSearchMigrationDescription":
+      "F%FCr die Aktualisierung werden das Passwort des Homematic IP Access Points sowie eine aktive Internetverbindung ben%F6tigt. Das Passwort (PW) finden Sie auf dem Aufkleber am Ger%E4t.",
 
-    "hintVirtualChannelChanged" : "Achtung! Wichtiger Hinweis!",
-    "hintVirtualChannelChangedMsg" :
-      "Im vereinfachten Modus wird der Kanal mittels des 1. virtuellen Kanal geschaltet. Der  2. und 3. virtuelle Kanal wird nicht angezeigt. Wenn diese nicht dem Default-Zustand entsprechen, " +
-      "entspricht der in der WebUI angezeigte Status unter Umst%E4nden nicht dem tats%E4chlichen Wert. Das scheint hier der Fall zu sein.<br/><br/>" +
+    "apSearchDescription": "F%FCr die Aktualisierung wird das Passwort des Homematic IP Access Points ben%F6tigt. Das Passwort (PW) finden Sie auf dem Aufkleber am Ger%E4t.",
 
-      "Sie k%F6nnen das %FCberpr%FCfen, indem Sie in der Benutzerverwaltung die vereinfachte Verkn%FCpfungskonfiguration deaktivieren und anschließend hierher zur%FCckkommen. ",
+    "password": "Passwort",
+    "apSearchWaitText": "Access Points werden im Netzwerk gesucht. Bitte warten Sie, bis die Suche abgeschlossen ist.",
+    "apMigrationNoApToUpdate" : "Es wurden keine Access Points gefunden, deren Firmware aktualisiert werden muss.",
 
-    "lblLowBattery" : "Batterie leer",
-    "lblDisarmed" : "Alarm aus",
-    "lblExternallyArmed" : "Externer Alarm aktiviert",
-    "lblInternallyArmed" : "Interner Alarm aktiviert",
-    "lblDelayExternalArming" : "Externer Alarm verz%F6gert aktiviert",
-    "lblDelayInternalArming" : "Interner Alarm verz%F6gert aktiviert",
-    "lblEvent" : "Event",
+    "apMigrationConfigureForUpdateFailed" : "Beim Starten des Access Point-Updates ist ein Fehler aufgetreten. Bitte %FCberpr%FCfen Sie das Passwort und versuchen Sie es erneut.",
 
+    "apMigrationUpdateSuccessful" : "Die Aktualisierung der Firmware wurde erfolgreich abgeschlossen.",
+    "apMigrationUpdateSuccessfulTitle" : "Firmware aktualisisert",
 
-    "comment" : "***** A/2020 *****",
+    "apMigrationErrorOrTimeout" : "Bei dem Firmware-Update ist ein Fehler aufgetreten. Bitte aktualisieren Sie die Ansicht und versuchen Sie es erneut.",
 
-    "dlgLoadLicense" : "Laden der Lizenz",
-    "dlgErrorLoadLicense" : "Die Software-Lizenz kann nicht geladen werden. Pr%FCfen Sie bitte die Internetverbindung der CCU.",
+    "apMigrationUpdateSuccessfulAddition" : "Sie k%F6nnen den Access Point jetzt %FCber &ldquo;Ger%E4te anlernen&rdquo; anlernen.",
+    "apMigrationUpdateSuccessfulAdditionMigrationMode" : "Der Access Point befindet sich jetzt im Posteingang.",
 
-    "comment" : "NOT YET TRANSLATED",
+    "hintDeviceDoesNotSupportAction" : "Die aktuell installierte GerÃ¤te-Firmware unterstÃ¼tzt diese Funktion nicht.",
 
-    "rotationDirLeftFast" : "Schnelles Drehen nach links",
-    "rotationDirRightFast" : "Schnelles Drehen nach rechts",
-    "rotationDirLeftSlow" : "Langsames Drehen nach links",
-    "rotationDirRightSlow" : "Langsames Drehen nach rechts",
+    "stringTableTempHumidityParticulateMatterUnit" : "Einheit der automatischen Sensorreinigung",
+    "stringTableTempHumidityParticulateMatterValue" : "Wert der automatischen Sensorreinigung",
 
-    "stringTableEventTimeoutRainDetector" : "Zeitspanne ohne Regen, nach der vom <br/>Sensor 'Trocken' gemeldet wird.",
-    "rainDetectorSampleInterval" : "Zeitspanne zwischen den einzelnen Messungen<br/>(Regenerkennungsintervall)",
+    "lblDifferentialTemperature": "Differenz-Temperatur T1 - T2",
+    "noUpdateNeeded" : "Kein Update erforderlich.",
+     "notCompatible" : "Nicht kompatibel",
+
+    "stringTableMassConc25" : "Massenkonzentration PM2.5",
+    "stringTableMassConc100" : "Massenkonzentration PM10",
+    "stringTableNumberConc25" : "Mengenkonzentration PM2.5",
+    "stringTableNumberConc100" : "Mengenkonzentration PM10",
+    "stringTableTypicalParticelSize" : "Typische Partikelgr%F6%DFe",
+
+    "aqiGood" : "Gut",
+    "aqiModerate" : "M%E4%DFig",
+    "aqiUnhealty1" : "Ungesund f%FCr empf. Personen",
+    "aqiUnhealty2" : "Ungesund",
+    "aqiUnhealty3" : "Sehr ungesund",
+    "aqiHazardous" : "Gesundheitsgef%E4hrdend",
+    "lblLocationA" : "Standort",
+    "Europe" : "Europa",
+    "USA" : "USA",
+
+    "hintGroupDevice" : "Achtung! Dieses Ger%E4t ist Teil einer Heizgruppe.<br/>Anpassungen an den Temperaturprofilen sollten in der Gruppe vorgenommen werden.",
+
+    "lblChnNotAllowedInRoom" : "Dieser Kanal kann keinem Raum zugewiesen werden!",
+    "lblChnNotAllowedInFunc" : "Dieser Kanal kann keinem Gewerk zugewiesen werden!",
+
+    "stringTableMulticastRouterModuleEnabled" : "MultiCast-Routing",
+    "lblErrorSensor" : "Sensorfehler",
+
+    "lblOutputSwap" : "Ausg%E4nge tauschen",
+    "optionOutputNotSwapped" : "Nein",
+    "optionOutputSwapped" : "Ja",
+
+    "hintSetReady" : "Bitte bet%E4tigen Sie den Fertig Button und konfigurieren das Ger%E4t in der Ger%E4teliste",
 
     "noMoreKeys" : ""
-
   }
 });
-
-langJSON.de.hintActivateDetectorSelfTest += langJSON.de.checkSmokeDetectorSelfTest;
-langJSON.de.hintReInclusionDetectorFailed += langJSON.de.checkSmokeDetectorSelfTest;
-
 

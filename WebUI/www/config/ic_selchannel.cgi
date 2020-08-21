@@ -89,16 +89,16 @@ proc put_page {} {
       puts "  s += \"<table cellspacing='8'>\";"
       puts "  s += \"<tr>\";"
       if {$step < 3} then {
-        puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${btnCancel}</div></td>\";"
-        puts "  s += \"<td align='center' valign='middle'><div class='FooterButton CLASS21901' onclick='ResetFilterAndTable();'>\${footerBtnResetFilter}</div></td>\";"
+        puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${btnCancel}</div></td>\";"
+        puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton CLASS21901' onclick='ResetFilterAndTable();'>\${footerBtnResetFilter}</div></td>\";"
 
         if {$virtualchannels > 0} then {
-          puts "  s += \"<td align='center' valign='middle'><div class='FooterButton CLASS21909' onclick='ToggleVirtualKeys();' id='ToggleVirtualKeys'>\${footerBtnVirtualChannelsShow}</div></td>\";"
+          puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton CLASS21909' onclick='ToggleVirtualKeys();' id='ToggleVirtualKeys'>\${footerBtnVirtualChannelsShow}</div></td>\";"
         }
       } else {
-        puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${btnCancel}</div></td>\";"
-        puts "  s += \"<td align='center' valign='middle'><div class='FooterButton CLASS21901' onclick='CollectData_AddLink(1);'>\${footerBtnCreateEdit}</div></td>\";"
-        puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='CollectData_AddLink(0);'>\${footerBtnCreate}</div></td>\";"
+        puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${btnCancel}</div></td>\";"
+        puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton CLASS21901' onclick='CollectData_AddLink(1);'>\${footerBtnCreateEdit}</div></td>\";"
+        puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='CollectData_AddLink(0);'>\${footerBtnCreate}</div></td>\";"
       }
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
@@ -121,25 +121,25 @@ proc put_page {} {
 proc put_colgroup {} {
   puts "<colgroup>"
 #Name
-  puts "  <col width=\"21%\" />"
+  puts "  <col style=\"width:21%;\"/>"
 #Typenbezeichnung
-  puts "  <col width=\"10%\" />"
+  puts "  <col style=\"width:10%;\"/>"
 #Bild
-  puts "  <col width=\"4%\" />"
+  puts "  <col style=\"width:4%;\"/>"
 #Bezeichnung
-  puts "  <col width=\"18%\" />"
+  puts "  <col style=\"width:18%;\"/>"
 #Seriennummer
-  puts "  <col width=\"10%\" />"
+  puts "  <col style=\"width:10%;\"/>"
 #Kategorie
-  puts "  <col width=\"5%\" />"
+  puts "  <col style=\"width:5%;\"/>"
 #Übertragungsmodus
-  puts "  <col width=\"5%\" />"
+  puts "  <col style=\"width:5%;\"/>"
 #Gewerk
-  puts "  <col width=\"10%\" />"
+  puts "  <col style=\"width:10%;\"/>"
 #Raum
-  puts "  <col width=\"10%\" />"
+  puts "  <col style=\"width:10%;\"/>"
 #Aktion
-  puts "  <col width=\"7%\" />"
+  puts "  <col style=\"width:7%;\"/>"
   puts "</colgroup>"
 }
 
@@ -350,28 +350,28 @@ proc put_PreviousStep {} {
   puts "<table border=\"1\" id=\"createLinkStep1\" cellspacing=\"0\" class=\"j_translate\" >"
 
   puts "<colgroup>"
-  puts "  <col width=\"10%\" />"
-  puts "  <col width=\"10%\" />"
-  puts "  <col width=\"25%\" />"
-  puts "  <col width=\"25%\" />"
-  puts "  <col width=\"10%\" />"
-  puts "  <col width=\"10%\" />"
+  puts "  <col style=\"width:10%;\"/>"
+  puts "  <col style=\"width:10%;\"/>"
+  puts "  <col style=\"width:25%;\"/>"
+  puts "  <col style=\"width:25%;\"/>"
+  puts "  <col style=\"width:10%;\"/>"
+  puts "  <col style=\"width:10%;\"/>"
   puts "</colgroup>"
   
   puts "<THEAD>"
 
   puts "<TR>"
-  puts "<TD COLSPAN=\"2\" align=\"center\">\${thSender}</TD>"
-  puts "<TD COLSPAN=\"2\" align=\"center\" class=\"BlueHeader\">\${thLink}</TD>"
-  puts "<TD COLSPAN=\"2\" align=\"center\">\${thReceiver}</TD>"
+  puts "<TD COLSPAN=\"2\"  style=\"text-align:center;\">\${thSender}</TD>"
+  puts "<TD COLSPAN=\"2\"  style=\"text-align:center;\" class=\"BlueHeader\">\${thLink}</TD>"
+  puts "<TD COLSPAN=\"2\"  style=\"text-align:center;\">\${thReceiver}</TD>"
   puts "</TR>"
   puts "<TR class=\"CLASS21913\">"
-  puts "<TD align=\"center\">\${thName}</TD>"
-  puts "<TD align=\"center\">\${thSerialNumber}</TD>"
-  puts "<TD align=\"center\" class=\"BlueHeader\">\${thName}</TD>"
-  puts "<TD align=\"center\">\${thDescription}</TD>"
-  puts "<TD align=\"center\">\${thName}</TD>"
-  puts "<TD align=\"center\">\${thSerialNumber}</TD>"
+  puts "<TD  style=\"text-align:center;\">\${thName}</TD>"
+  puts "<TD  style=\"text-align:center;\">\${thSerialNumber}</TD>"
+  puts "<TD  style=\"text-align:center;\" class=\"BlueHeader\">\${thName}</TD>"
+  puts "<TD  style=\"text-align:center;\">\${thDescription}</TD>"
+  puts "<TD  style=\"text-align:center;\">\${thName}</TD>"
+  puts "<TD  style=\"text-align:center;\">\${thSerialNumber}</TD>"
   puts "</TR>"
   
   puts "</THEAD>"
@@ -379,21 +379,21 @@ proc put_PreviousStep {} {
   puts "<TBODY>"
       
   puts "<tr>"
-  puts "<td align=\"center\">$SENTRY(SENDERNAME_DISPLAY)</td>"
-  puts "<td align=\"center\">$SENTRY(SENDERADDR)</td>"
-  puts "<td style=\"vertical-align: top;\" align=\"center\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKNAME)</td>"
-  puts "<td style=\"vertical-align: top;\" align=\"center\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKDESC)</td>"
-  puts "<td align=\"center\">$SENTRY(RECEIVERNAME_DISPLAY)</td>"
-  puts "<td align=\"center\">$SENTRY(RECEIVERADDR)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(SENDERNAME_DISPLAY)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(SENDERADDR)</td>"
+  puts "<td style=\"text-align:center; vertical-align: top;\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKNAME)</td>"
+  puts "<td style=\"text-align:center; vertical-align: top;\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKDESC)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(RECEIVERNAME_DISPLAY)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(RECEIVERADDR)</td>"
   puts "</tr>"
 
   puts "<tr [expr {$sender_group != ""?"":"style=\"display:none;\""}]>"
-  puts "<td align=\"center\">$SENTRY(SENDERGROUPNAME_DISPLAY)</td>"
-  puts "<td align=\"center\">$SENTRY(SENDERGROUPADDR)</td>"
-  puts "<td style=\"vertical-align: top;\" align=\"center\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKGROUPNAME)</td>"
-  puts "<td style=\"vertical-align: top;\" align=\"center\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKGROUPDESC)</td>"
-  puts "<td align=\"center\">$SENTRY(RECEIVERNAME_DISPLAY)</td>"
-  puts "<td align=\"center\">$SENTRY(RECEIVERADDR)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(SENDERGROUPNAME_DISPLAY)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(SENDERGROUPADDR)</td>"
+  puts "<td style=\"text-align:center; vertical-align: top;\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKGROUPNAME)</td>"
+  puts "<td style=\"text-align:center; vertical-align: top;\" [expr {$step==3?"class=\"WhiteHeader\"":""}]>$SENTRY(LINKGROUPDESC)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(RECEIVERNAME_DISPLAY)</td>"
+  puts "<td style=\"text-align:center;\">$SENTRY(RECEIVERADDR)</td>"
   puts "</tr>"
 
   puts "</TBODY>"
@@ -427,7 +427,7 @@ proc put_tableheader {} {
   puts "<THEAD id=\"chnListHead\" class=\"j_translate\" >"
   
   puts "<TR>"
-  puts "<TD class=\"chnListTbl_Caption\" align=\"left\" colspan=\"10\">$step. \${thLinkPeer}</TD>"
+  puts "<TD class=\"chnListTbl_Caption\" style=\"text-align:left;\" colspan=\"10\">$step. \${thLinkPeer}</TD>"
   puts "</TR>"
   
   puts "<TR id=\"tr_caption_colnames\" align=\"center\">"
@@ -980,7 +980,7 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
         puts "roomElem.html(translateString(roomElem.html()));"
       puts "</script>"
 
-      puts "<td align=\"center\">$SENTRY(ACTION)</td>"
+      puts "<td style=\"text-align:center;\">$SENTRY(ACTION)</td>"
       puts "</tr>"
 
       incr rowcount
@@ -994,7 +994,7 @@ proc put_tablebody {p_realchannels p_virtualchannels} {
 
   if {$rowcount == 0} then {
     puts "<TR>"
-    puts "<TD height=\"100\" align=\"center\" COLSPAN=\"10\">\${noLinkableChannelsAvailable}</TD>"
+    puts "<TD height=\"100\"  style=\"text-align:center;\" COLSPAN=\"10\">\${noLinkableChannelsAvailable}</TD>"
     puts "</TR>"
   }
 

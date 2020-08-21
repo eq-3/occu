@@ -443,7 +443,7 @@ set comment {
       # right
       incr prn
       set param DECALCIFICATION_TIME
-      append HTML_PARAMS(separate_1) "<td align=\"right\">\${stringTableClimateControlRegDecalcTime}</td>"
+      append HTML_PARAMS(separate_1) "<td  style=\"text-align:right;\">\${stringTableClimateControlRegDecalcTime}</td>"
 
         # Decalcification hour
       	append HTML_PARAMS(separate_1) "<td>"

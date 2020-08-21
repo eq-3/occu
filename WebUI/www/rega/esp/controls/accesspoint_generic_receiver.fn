@@ -1,0 +1,53 @@
+function ::CreateAccessPointGenericReceiver()
+{
+  object objVoltage = cObj.DPByControl("ACCESSPOINT_GENERIC_RECEIVER.VOLTAGE");
+  object objVoltageStatus = cObj.DPByControl("ACCESSPOINT_GENERIC_RECEIVER.VOLTAGE_STATUS");
+
+  object objCurrent = cObj.DPByControl("ACCESSPOINT_GENERIC_RECEIVER.CURRENT");
+  object objCurrentStatus = cObj.DPByControl("ACCESSPOINT_GENERIC_RECEIVER.CURRENT_STATUS");
+
+  string ch = cObj.Address().StrValueByIndex(":",1);
+
+
+
+  WriteLine("<td>");
+    WriteLine("<table align='center'>");
+
+      WriteLine("<tr>");
+          WriteLine("<td colspan='2'>");
+            WriteLine("<div class='controlHeader'>${lblBus} "#ch#"</div>");
+          WriteLine("</td>");
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        if (objVoltage) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblOperatingVoltage}<br/>"#objVoltage.Value().ToString(1)#" "#objVoltage.ValueUnit()#"</div>");
+          WriteLine("</td>");
+        }
+        if (objVoltageStatus) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblOperatingVoltageStatus}<br/>${lblVoltageStatus_"#objVoltageStatus.Value()#"}</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        if (objCurrent) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCurrentPowerConsumption}<br/>"#objCurrent.Value().ToString(1)#" "#objCurrent.ValueUnit()#"</div>");
+          WriteLine("</td>");
+        }
+        if (objCurrentStatus) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblOperationPowerConsumptionState}<br/>${lblPowerConsumptionStatus_"#objCurrentStatus.Value()#"}</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  return;
+}
+

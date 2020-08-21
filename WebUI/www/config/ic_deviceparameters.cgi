@@ -23,7 +23,7 @@ proc put_error {iface address} {
       puts "  var s = \"\";"
       puts "  s += \"<table cellspacing='8'>\";"
       puts "  s += \"<tr>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='CloseDeviceParameters();'>Abbrechen</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='CloseDeviceParameters();'>Abbrechen</div></td>\";"
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
       puts "  setFooter(s);"
@@ -62,9 +62,9 @@ proc put_page {} {
       puts "  var s = \"\";"
       puts "  s += \"<table cellspacing='8'>\";"
       puts "  s += \"<tr>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='CloseDeviceParameters();'>\"+translateKey('footerBtnCancel')+\"</div></td>\";"
-      puts "  s += \"<td align='center' valign='middle'><div id='footerButtonOK' class='FooterButton' onclick='goBack=true; SaveDeviceParameters();'>\"+translateKey('footerBtnTransfer')+\"</div></td>\";"
-      puts "  s += \"<td align='center' valign='middle'><div id='footerButtonOK' class='FooterButton' onclick='SaveDeviceParameters();'>\"+translateKey('footerBtnOk')+\"</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='CloseDeviceParameters();'>\"+translateKey('footerBtnCancel')+\"</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div id='footerButtonTake' class='FooterButton' onclick='goBack=true; SaveDeviceParameters();'>\"+translateKey('footerBtnTransfer')+\"</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div id='footerButtonOK' class='FooterButton' onclick='SaveDeviceParameters();'>\"+translateKey('footerBtnOk')+\"</div></td>\";"
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
       puts "  setFooter(s);"
@@ -785,9 +785,9 @@ proc put_channel_parameters {} {
   puts "<table id=\"id_channel_parameters_table\" class=\"parameters_table\" cellspacing=\"0\">"
   
   puts "<colgroup>"
-  puts "  <col width=\"20%\" />"
-  puts "  <col width=\"5%\" />"
-  puts "  <col width=\"75%\" />"
+  puts "  <col style=\"width:20%;\"/>"
+  puts "  <col style=\"width:5%;\" />"
+  puts "  <col style=\"width:75%;\"/>"
   puts "</colgroup>"
 
   puts "<THEAD>"
@@ -1188,7 +1188,7 @@ proc put_Header {} {
 
         switch $firmwareUpdateState {
           "PERFORMING_UPDATE" {
-            set fw_update_rows "<tr><td class=\"CLASS22006\">\${lblDeviceFwPerformUpdate}</td></tr>"
+            set fw_update_rows "<tr><td class=\"_CLASS22006 noBorder\">\${lblDeviceFwPerformUpdate}</td></tr>"
           }
 
           "NEW_FIRMWARE_AVAILABLE" -
@@ -1200,7 +1200,7 @@ proc put_Header {} {
 
           "DO_UPDATE_PENDING" -
           "PERFORMING_UPDATE" {
-            set fw_update_rows "<tr><td class=\"CLASS22006\"><span id=\"swsdHintPerformeUpdate\">\${lblDeviceFwPerformUpdate}</span></td></tr>"
+            set fw_update_rows "<tr><td class=\"_CLASS22006 noBorder\"><span id=\"swsdHintPerformeUpdate\">\${lblDeviceFwPerformUpdate}</span></td></tr>"
             append fw_update_rows "<tr id=\"swsdHintCheckDevice\" class=\"hidden\"><td colspan=\"2\"><span class=\"attention\">\${checkSmokeDetectorSelfTest}</span></td></tr>"
 
           }
@@ -1259,19 +1259,19 @@ proc put_Header {} {
 
   puts "<colgroup>"
   #Name
-  puts "  <col width=\"29%\" />"
+  puts "  <col style=\"width:29%;\"/>"
   #Typenbezeichnung
-  puts "  <col width=\"10%\" />"
+  puts "  <col style=\"width:10%;\"/>"
   #Bild
-  puts "  <col width=\"1%\"/>"
+  puts "  <col style=\"width:1%;\"/>"
   #Bezeichnung
-  puts "  <col width=\"30%\" />"
+  puts "  <col style=\"width:30%;\"/>"
   #SN
-  puts "  <col width=\"5%\" />"
+  puts "  <col style=\"width:5%;\"/>"
   #Interface
-  puts "  <col width=\"5%\" />"
+  puts "  <col style=\"width:5%;\"/>"
   #Firmware
-  puts "  <col width=\"15%\" />"
+  puts "  <col style=\"width:15%;\"/>"
   puts "</colgroup>"
   
   puts "<THEAD>"

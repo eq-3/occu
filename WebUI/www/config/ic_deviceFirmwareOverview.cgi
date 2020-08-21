@@ -32,14 +32,14 @@ proc put_headerElem {} {
 
   puts "<table id=\"devFwOverview\" cellspacing=\"0\" cellpadding=\"0\" class=\"tTable filterTable\">"
    puts "<colgroup>"
-    puts "<col width=\"35%\"/>"
-    puts "<col width=\"20%\"/>"
-    puts "<col width=\"55px\"/>"
-    puts "<col width=\"10%\"/>"
-     puts "<col width=\"10%\"/>"
-     puts "<col width=\"10%\"/>"
-   #  puts "<col width=\"10%\"/>"
-     puts "<col width=\"auto\"/>"
+    puts "<col style=\"width:35%;\"/>"
+    puts "<col style=\"width:20%;\"/>"
+    puts "<col style=\"width:55px;\"/>"
+    puts "<col style=\"width:10%;\"/>"
+     puts "<col style=\"width:10%;\"/>"
+     puts "<col style=\"width:10%;\"/>"
+   #  puts "<col style=\"width:10%;\"/>"
+     puts "<col style=\"width:auto;\"/>"
    puts "</colgroup>"
 
    puts "<th class=\"DeviceListHead\">\${thName}</th>"
@@ -164,6 +164,20 @@ proc getActionPanel {} {
             # set fw_update_rows "<tr><td>\${lblAvailableFirmwareVersion}</td><td class=\"_CLASS22006\">$dev_descr(AVAILABLE_FIRMWARE)</td></tr>"
             append fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\"><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate('$dev_descr(TYPE)');\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
           }
+          
+          "LIVE_NEW_FIRMWARE_AVAILABLE" {
+            #new live update firmware available -> show update button if device supports it
+            #i.e. hap and drap versions smaller than 2.1 do not support it, so we check that here
+            if { ([string compare "HmIPW-DRAP" $dev_descr(TYPE)] == 0 || [string compare "HmIP-HAP" $dev_descr(TYPE)] == 0 ) && ([regexp {[0-1]\.[0-9]*\.[0-9]*} $dev_descr(FIRMWARE)] || [regexp {2\.0\.[0-9]*} $dev_descr(FIRMWARE)]) } {
+              append fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\"><span onclick=\"ShowInfoMsg(translateKey('hintDeviceDoesNotSupportAction'))\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+            } else {
+              append fw_update_rows "<tr><td colspan=\"2\" class=\"_CLASS22007 noBorder\"><span onclick=\"setGlobalIfaceAddress('$iface', '$dev_descr(ADDRESS)');FirmwareUpdate('$dev_descr(TYPE)');\" class=\"CLASS21000\">\${lblUpdate}</span></td></tr>"
+            }
+           
+          }
+          "LIVE_DELIVER_FIRMWARE_IMAGE" {
+            set fw_update_rows "<tr><td class=\"_CLASS22006 noBorder\">\${lblDeviceFwPerformUpdate}</td></tr>"
+          }
         }
       } else {
         # This should never be reached....
@@ -174,7 +188,7 @@ proc getActionPanel {} {
     append tableCell $fw_update_rows
 
     append tableCell "</table>"
-    return "<td align=\"center\" name=\"j_actionTD\">$tableCell</td>"
+    return "<td style=\"text-align:center;\" name=\"j_actionTD\">$tableCell</td>"
 }
 
 proc put_table_row {} {
@@ -321,9 +335,9 @@ cgi_eval {
       set footerHtml  ""
       append footerHtml "<table style='backgroud-color:white' border='0' cellspacing='8'>"
         append footerHtml "<tr>"
-         append footerHtml "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>\${footerBtnPageBack}</div></td>"
-          append footerHtml "<td align='center' valign='middle'><div class='FooterButton CLASS04312' onclick='resetFilter();'>\${footerBtnResetFilter}</div></td>"
-          append footerHtml "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(DeviceFirmware);'>\${submenuDeviceFirmware}</div></td>"
+         append footerHtml "<td  style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='WebUI.goBack();'>\${footerBtnPageBack}</div></td>"
+          append footerHtml "<td  style='text-align:center; vertical-align:middle;'><div class='FooterButton CLASS04312' onclick='resetFilter();'>\${footerBtnResetFilter}</div></td>"
+          append footerHtml "<td  style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='WebUI.enter(DeviceFirmware);'>\${submenuDeviceFirmware}</div></td>"
 
         append footerHtml "</tr>"
       append footerHtml "</table>"

@@ -55,9 +55,9 @@ function ::CreateDimmingActuator()
                 WriteLine("<td colspan='2' class='CLASS02541'><input id='"#chnId#"Perc' type='text' value='"#iState#"' size='3' class='CLASS02542' "#sReadOnly#" /><b>%</b></td>");
               WriteLine("</tr>");
               WriteLine("<tr>");
-                WriteLine("<td align='center' class='CLASS02544'>");
+                WriteLine("<td style='text-align: center' class='CLASS02544'>");
                 WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"Up' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"Down' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
-                WriteLine("</td><td align='center' class='CLASS02544'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+                WriteLine("</td><td style='text-align: center' class='CLASS02544'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
               WriteLine("</tr>");
             WriteLine("</table>");
           WriteLine("</div>");

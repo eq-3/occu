@@ -36,10 +36,14 @@ proc getMinMaxValueDescr {param} {
   set min $param_descr(MIN)
   set max $param_descr(MAX)
 
-  # SPHM-118 / SPHM-410 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
-  if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
-    set max [expr $param_descr(MAX) - 0.1]
-  }
+
+
+    # SPHM-118 / SPHM-410 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
+    if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
+      if {($param == "REFERENCE_RUNNING_TIME_TOP_BOTTOM_VALUE") || ($param == "REFERENCE_RUNNING_TIME_BOTTOM_TOP_VALUE")} {
+        set max [expr $param_descr(MAX) - 1]
+      }
+    }
 
   set unit "noUnit"
 
@@ -84,7 +88,7 @@ proc getUnit {param} {
    set unit "\${lblMinutes}"
   }
 
-  if {($unit == "K") || ($unit == "??C") || ($unit == "Â°C")} {
+  if {($unit == "K") || ($unit == "??C") || ($unit == "°C")} {
     set unit "&#176;C"
   }
 
@@ -98,9 +102,10 @@ proc getUnit {param} {
 proc getCondTXThresholdUnit {devType chn} {
    switch [string tolower $devType] {
         hmip-stho  {
-          if {$chn == "2"} {return "Â°C"}
+          if {$chn == "2"} {return "°C"}
           if {$chn == "3"} {return "%"}
         }
+        hmip-slo {return "Lux"}
       default {return ""}
     }
 }
@@ -131,7 +136,9 @@ proc getTextField {param value chn prn {extraparam ""}} {
 
   # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
   if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
-    set maxValue [expr $param_descr(MAX) - 0.1]
+    if {($param == "REFERENCE_RUNNING_TIME_TOP_BOTTOM_VALUE") ||  ($param == "REFERENCE_RUNNING_TIME_BOTTOM_TOP_VALUE")} {
+      set maxValue [expr $param_descr(MAX) - 1]
+    }
   }
 
   set elemId 'separate_CHANNEL\_$chn\_$prn'
@@ -212,8 +219,8 @@ proc getCheckBoxCyclicInfoMsg {param value chn prn {extraparam ""}} {
   global psDescr
   upvar psDescr psDescr
 
-  set hlpBoxWidth  450
-  set hlpBoxHeight  350
+  set hlpBoxWidth  640
+  set hlpBoxHeight  400
 
   set s  "[getCheckBox '$param' $value $chn $prn\_tmp "onchange=\"setCyclicInfoMsg(this, '$chn', '$prn');\""]&nbsp;[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]"
   append s  "<td class=\"hidden\">[getTextField $param $value $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
@@ -284,14 +291,14 @@ proc getDeactivateLongKeypress {p profile special_input_id prn {optionDisable 0}
   return $html
 }
 
-proc getNumberOfDimmingSteps {p profile special_input_id prn} {
+proc getNumberOfDimmingSteps {p profile special_input_id prn stepParam} {
   upvar $profile PROFILE
   upvar $p ps
   upvar pref pref
 
   set html ""
 
-  set param LONG_DIM_STEP
+  set param $stepParam
   if { [info exists ps($param)] == 1  } {
     incr pref
     append html "<tr>"
@@ -307,7 +314,8 @@ proc getNumberOfDimmingSteps {p profile special_input_id prn} {
       set options(0.25) 4
       set options(0.33) 3
       set options(0.5) 2
-      append html "<td>[get_ComboBox options $param ${special_input_id}_$prn\_$pref PROFILE $param]&nbsp;[getHelpIcon $param]</td>"
+      set options(1.0) 1
+      append html "<td>[get_ComboBox options $param ${special_input_id}_$prn\_$pref PROFILE $param]&nbsp;[getHelpIcon DIM_STEP]</td>"
     append html "</tr>"
   }
   return $html
@@ -342,14 +350,16 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
-   "LONG_DIM_STEP" {set x 500; set y 130}
+   "DIM_STEP" {set x 500; set y 150}
    "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
+   "OUTPUT_SWAP" {set x 450; set y 100}
    "PERMANENT_FULL_RX" {set x 500; set y 160}
    "PWM_AT_LOW_VALVE_POSITION" {set x 500; set y 130}
    "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
    "SPDR_CHANNEL_MODE" {set x 600; set y 600}
    "TEMPERATURE_OFFSET" {set x 500; set y 160}
+   "TEMPERATURE_OFFSET_STE2" {set x 500; set y 130}
    "TWO_POINT_HYSTERESIS" {set x 450; set y 160}
    "WEEK_PROGRAM_POINTER" {set x 400; set y 100}
    "WEEK_PROGRAM_POINTER_group" {set x 400; set y 100}
@@ -1396,57 +1406,63 @@ set comment { No OFFTIME
       append html "panelOffElm = jQuery(\"#powerUpPanelOFF_\" + chn);"
 
       append html "switch (parseInt(val)) {"
+
         append html "case 0:"
           # OFF
-          append html "jQuery(\"#timeDelay_\" + chn + \"_7\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_8\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_9\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_10\").val(0).change().prop(\"disabled\", true);"
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_9\").val(0);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_11\").val(0);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_12\").val(101);}"}
+          append html "jQuery(\"#powerUpPanelOFF_\" + chn + \" select \").first().val(0).change().prop(\"disabled\", true);"
           append html "panelOnElm.hide();"
           append html "panelOffElm.show();"
+
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelOFF_\" + chn + \" select :visible\").eq(1).val(0);}"}
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelOFF_\" + chn + \" select :visible\").eq(2).val(101);}"}
+
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_9\").val(0);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_11\").val(0);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_12\").val(101);}"}
+
           append html "break;"
         append html "case 1:"
           # ON_DELAY
-          append html "jQuery(\"#timeDelay_\" + chn + \"_2\").prop(\"disabled\", false);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_3\").prop(\"disabled\", false);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_4\").prop(\"disabled\", false);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_5\").prop(\"disabled\", false);"
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_6\").val(100);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_7\").val(100);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_8\").val(101);}"}
           append html "panelOnElm.show();"
           append html "panelOffElm.hide();"
+
+          append html "jQuery(\"#powerUpPanelON_\" + chn + \" select \").first().val(0).change().prop(\"disabled\", false);"
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelON_\" + chn + \" select :visible\").eq(1).val(100);}"}
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelON_\" + chn + \" select :visible\").eq(2).val(101);}"}
+
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_6\").val(100);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_7\").val(100);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_8\").val(101);}"}
+
           append html "break;"
         append html "case 2:"
           # ON
-          append html "jQuery(\"#timeDelay_\" + chn + \"_2\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_3\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_4\").val(0).change().prop(\"disabled\", true);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_5\").val(0).change().prop(\"disabled\", true);"
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_6\").val(100);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_7\").val(100);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_8\").val(101);}"}
           append html "panelOnElm.show();"
           append html "panelOffElm.hide();"
+          append html "jQuery(\"#powerUpPanelON_\" + chn + \" select \").first().val(0).change().prop(\"disabled\", true);"
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelON_\" + chn + \" select :visible\").eq(1).val(100);}"}
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelON_\" + chn + \" select :visible\").eq(2).val(101);}"}
+
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_6\").val(100);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_7\").val(100);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_8\").val(101);}"}
           append html "break;"
         append html "case 3:"
           # OFF_DELAY
-          append html "jQuery(\"#timeDelay_\" + chn + \"_7\").prop(\"disabled\", false);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_8\").prop(\"disabled\", false);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_9\").prop(\"disabled\", false);"
-          append html "jQuery(\"#timeDelay_\" + chn + \"_10\").prop(\"disabled\", false);"
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_9\").val(0);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_11\").val(0);}"}
-          catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_12\").val(101);}"}
           append html "panelOnElm.hide();"
           append html "panelOffElm.show();"
+          append html "jQuery(\"#powerUpPanelOFF_\" + chn + \" select \").first().val(0).change().prop(\"disabled\", false);"
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelOFF_\" + chn + \" select :visible\").eq(1).val(0);}"}
+          catch {append html "if (valChanged) {jQuery(\"#powerUpPanelOFF_\" + chn + \" select :visible\").eq(2).val(101);}"}
+
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_9\").val(0);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_11\").val(0);}"}
+        #  catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_12\").val(101);}"}
           append html "break;"
         append html "default:"
           append html "panelOnElm.show();"
           append html "panelOffElm.show();"
+
       append html "}"
     append html "};"
 
@@ -1456,4 +1472,10 @@ set comment { No OFFTIME
     append html "},100);"
   append html "</script>"
   return $html
+}
+
+proc addHintHeatingGroupDevice {address} {
+    append html "<script type='text/javascript'>"
+    append html "addHintHeatingGroupDevice('$address');"
+    append html "</script>"
 }

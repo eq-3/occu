@@ -420,6 +420,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 
+  if {$ps(LONG_MAX_TIME_FIRST_DIR) == 0.4} {
+    set valLONG_MAX_TIME_FIRST_DIR 0.1
+    set param  "{LONG_MAX_TIME_FIRST_DIR {$valLONG_MAX_TIME_FIRST_DIR}}"
+    catch {puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]]"}
+    set ps(LONG_MAX_TIME_FIRST_DIR) $valLONG_MAX_TIME_FIRST_DIR
+  }
+
 # die Texte der Platzhalter einlesen
   # puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
   puts "<script type=\"text/javascript\">getLangInfo('MULTI_MODE_INPUT_TRANSMITTER_1', '$dev_descr_receiver(TYPE)');</script>"

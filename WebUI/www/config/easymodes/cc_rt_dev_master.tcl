@@ -108,11 +108,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   array set psDescr [xmlrpc $iface_url($iface) getParamsetDescription [list string $address] [list string MASTER]]
 
-  foreach val [array names psDescr] {
-    #puts "$val: $psDescr($val)\n"
-  }
-
   puts "<script type=\"text/javascript\">"
+
+    puts "addHintHeatingGroupDevice('$address');"
+
     puts "setDecalcTime = function(id) {"
       puts "var valHour = jQuery('#decalcHour').val();"
       puts "var valMin = jQuery('#decalcMin').val();"
@@ -386,7 +385,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       # right
       incr prn
       set param DECALCIFICATION_TIME
-      append HTML_PARAMS(separate_1) "<td align=\"right\">\${stringTableClimateControlRegDecalcTime}</td>"
+      append HTML_PARAMS(separate_1) "<td  style=\"text-align:right;\">\${stringTableClimateControlRegDecalcTime}</td>"
 
         # Decalcification hour
         append HTML_PARAMS(separate_1) "<td>"

@@ -109,7 +109,7 @@ jQuery.extend(true,langJSON, {
     "dialogActivateLinkParamsetSuccess" : "Das Profil wurde erfolgreich ausgel%F6st.",
     "dialogActivateLinkParamsetError" : "Das Profil konnte nicht ausgel%F6st werden. Bitte stellen Sie sicher, dass sich das Ger%E4t innerhalb der Funkreichweite befindet und aktiv ist.",
     "dialogFirmwareUpdateCheckSuccess" : "Firmware-Update abgeschlossen. Erfolg wird gepr%FCft.",
-    "dialogFirmwareUpdateSuccess" : "Firmware-Update erfolgreich.",
+    "dialogFirmwareUpdateSuccess" : "Firmware-Update wird durchgef%FChrt.",
     "dialogFirmwareUpdateFailed" : "Firmware-Update fehlgeschlagen.",
     "dialogSetProfileProgressBarSendProfile" : "Profileinstellungen werden an Komponenten %FCbertragen.",
     "dialogSetProfileErrorProgressBarA" : "Fehler beim Speichern des Profils ",
@@ -756,6 +756,7 @@ jQuery.extend(true,langJSON, {
     "optionUnit1D" : "1 Tag",
     "optionUnit7D" : "7 Tage",
     "optionUnit14D" : "14 Tage",
+    "optionUnit24D" : "24 Tage",
     "optionUnit28D" : "28 Tage",
     "optionUnit30D" : "30 Tage",
     "optionUnit10MS" : "10ms",
@@ -1408,20 +1409,20 @@ jQuery.extend(true,langJSON, {
       "und werden durch andere Zeichen ausgetauscht.<br/><br/>" +
         "<table style=\"margin-left:auto; margin-right:auto\">" +
         "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
-        "<tr><td align='center'><span>[</span></td><td align='center'><span>%C4</span></td></tr>" +
-        "<tr><td align='center'><span>#</span></td><td align='center'><span>%D6</span></td></tr>" +
-        "<tr><td align='center'><span>$</span></td><td align='center'><span>%DC</span></td></tr>" +
-        "<tr><td align='center'><span>{</span></td><td align='center'><span>%E4</span></td></tr>" +
-        "<tr><td align='center'><span>|</span></td><td align='center'><span>%F6</span></td></tr>" +
-        "<tr><td align='center'><span>}</span></td><td align='center'><span>%FC</span></td></tr>" +
-        "<tr><td align='center'><span>_</span></td><td align='center'><span>%DF</span></td></tr>" +
-        "<tr><td align='center'><span>]</span></td><td align='center'><span>&</span></td></tr>" +
-        "<tr><td align='center'><span>'</span></td><td align='center'><span>=</span></td></tr>" +
-        "<tr><td align='center'><span> ; </span></td><td align='center'><span>Sanduhr</span></td></tr>" +
-        "<tr><td align='center'><span> < </span></td><td align='center'><span>Pfeil nach unten</span></td></tr>" +
-        "<tr><td align='center'><span> = </span></td><td align='center'><span>Pfeil nach oben</span></td></tr>" +
-        "<tr><td align='center'><span> > </span></td><td align='center'><span>Pfeil nach oben rechts</span></td></tr>" +
-        "<tr><td align='center'><span> @ </span></td><td align='center'><span>Pfeil nach unten rechts</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>[</span></td><td  style='text-align:center;'><span>%C4</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>#</span></td><td  style='text-align:center;'><span>%D6</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>$</span></td><td  style='text-align:center;'><span>%DC</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>{</span></td><td  style='text-align:center;'><span>%E4</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>|</span></td><td  style='text-align:center;'><span>%F6</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>}</span></td><td  style='text-align:center;'><span>%FC</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>_</span></td><td  style='text-align:center;'><span>%DF</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>]</span></td><td  style='text-align:center;'><span>&</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span>'</span></td><td  style='text-align:center;'><span>=</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span> ; </span></td><td  style='text-align:center;'><span>Sanduhr</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span> < </span></td><td  style='text-align:center;'><span>Pfeil nach unten</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span> = </span></td><td  style='text-align:center;'><span>Pfeil nach oben</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span> > </span></td><td  style='text-align:center;'><span>Pfeil nach oben rechts</span></td></tr>" +
+        "<tr><td  style='text-align:center;'><span> @ </span></td><td  style='text-align:center;'><span>Pfeil nach unten rechts</span></td></tr>" +
         "</table>",
 
     "lblVibration" : "Ersch%FCtterung",
@@ -1432,6 +1433,70 @@ jQuery.extend(true,langJSON, {
     "lblYes" : "Ja",
     "lblNo" : "Nein",
 
+    "setAllHmIPDevices" :
+       "Soll diese Position auf die entsprechenden HmIP-Ger%E4te %FCbertragen werden?\n\n"  +
+         "Bedenken Sie, dass es dann wegen des erh%F6hten Funkaufkommens eventuell zu Kommunikationsst%F6rungen kommen kann.",
+     "dialogSettingsTimePositionMessageSetPositionSucceedIncludingAllDevices" :
+       "Positionsangabe wurde gespeichert.<br/><br/>" +
+         "Die Standortdaten der enstprechenden HmIP-Ger%E4te werden angepasst.",
+     "lblDutyCycleBidCosRF" : "Duty Cycle BidCos:",
+     "lblDutyCycleHmIP" : "Duty Cycle HmIP: ",
+     "lblDutyCycle" : "Duty Cycle CCU: ",
+     "lblDutyCycleA" : "Duty Cycle CCU",
+     "PowerMeterProtocolModeModeOptionSML" : "SML-Protokoll",
+     "lblRepetitions" : "Wiederholungen",
+     "optionRepetition" : "Wiederholung",
+     "optionRepetitions" : "Wiederholungen",
+     "lblSoundfileList" : "Titel",
+     "btnChooseSongs"  : "Titelauswahl",
+     "lblPlaylist" : "Wiedergabeliste",
+     "drapFwNotCompatWithCCUFW" : "Die Accesspoint-Firmware ist nicht kompatibel mit der CCU.\n\nBitte aktualisieren Sie Ihre CCU!",
+     "lblBrightnessLuxA" : "Helligkeit in Lux",
+     "lblBrightnessLuxB" : "eingeben und %FCbernehmen",
+     "hintInternalLinkExists" :
+       "Bei %C4nderung des Kanalverhaltens, sollte die interne Verkn%FCpfung des Ger%E4tes gel%F6scht und neu erstellt werden.<br/>" +
+       "Andernfalls wird die interne Verkn%FCpfung sich nicht mehr erwartungsgem%E4%DF verhalten.",
+     "hintDevFwUpdateDCHigh" :
+       "<b><span class='attention'>Achtung: Der Duty Cycle der "+HMIdentifier.de.CCUShortName+" ist derzeit sehr hoch!</span></b><br/><br/>" +
+       "Ein Ger%E4tefirmwareupdate ist daher im Moment nicht m%F6glich.<br/><br/>"+
+       "Warten Sie, bis der Duty Cycle unter 80% gesunken ist und versuchen Sie es dann erneut.",
+     "lblSelectTargetChannels" : "Zielkan%E4le<br /> w%E4hlen",
+     "btnSelect1stVirTargetChannels" : "1. Virt",
+     "btnSelectAllTargetChannels" : "Alle",
+     "btnSelectNoTargetChannels" : "Keine",
+     "hintWeeklyProgramActiveExpertChannel" :
+       "Der Expertenmodus ist nicht aktiv. Da jedoch bei mindestens einem Schaltzeitpunkt zumindest ein Experten-Zielkanal aktiviert ist, " +
+       "werden die Zielkan%E4le dennoch im Expertenmodus dargestellt.",
+     "helpBlindParamLevel2" :
+       "Damit eine %C4nderung der Lamellenposition an dieser Stelle wirksam wird, muss <u>zus%E4tzlich</u> als zweiter Parameter die Behangh%F6he festgelegt werden.<br/><br/>" +
+       "M%F6chten Sie nur die Lamellenposition %E4ndern, verwenden Sie den Parameter Kanalaktion und w%E4hlen f%FCr die Behangh%F6he den Wert 'Ignorieren'.",
+     "alertUsernameForbiddenChars" : "Der Benutzername darf kein Leerzeichen enthalten.",
+     "addFirmwareFailedMinCCUVersion" : "Dieses Ger%E4te-Firmware Update wird von der Firmware Ihrer CCU nicht unterst%FCtzt. Bitte aktualisieren Sie zun%E4chst Ihre CCU Firmware.",
+     "lblStopRunningLink" : "Alte Sendevorg%E4nge<br/>dieser Tasten abbrechen",
+     "addFirmwareFailedNotValidatable" : "Die Kompatibil%E4t dieses Ger%E4te-Firmware Updates kann nicht %FCberpr%FCft werden. Bitte laden Sie die Firmware erneut herunter und versuchen sie noch einmal.",
+     "hintVirtualChannelChanged" : "Achtung! Wichtiger Hinweis!",
+     "hintVirtualChannelChangedMsg" :
+       "Im vereinfachten Modus wird der Kanal mittels des 1. virtuellen Kanal geschaltet. Der  2. und 3. virtuelle Kanal wird nicht angezeigt. Wenn diese nicht dem Default-Zustand entsprechen, " +
+       "entspricht der in der WebUI angezeigte Status unter Umst%E4nden nicht dem tats%E4chlichen Wert. Das scheint hier der Fall zu sein.<br/><br/>" +
+       "Sie k%F6nnen das %FCberpr%FCfen, indem Sie in der Benutzerverwaltung die vereinfachte Verkn%FCpfungskonfiguration deaktivieren und anschlie%DFend hierher zur%FCckkommen. ",
+     "lblLowBattery" : "Batterie leer",
+     "lblDisarmed" : "Alarm aus",
+     "lblExternallyArmed" : "Externer Alarm aktiviert",
+     "lblInternallyArmed" : "Interner Alarm aktiviert",
+     "lblDelayExternalArming" : "Externer Alarm verz%F6gert aktiviert",
+     "lblDelayInternalArming" : "Interner Alarm verz%F6gert aktiviert",
+     "lblEvent" : "Event",
+     "dlgLoadLicense" : "Laden der Lizenz",
+     "dlgErrorLoadLicense" : "Die Software-Lizenz kann nicht geladen werden. Pr%FCfen Sie bitte die Internetverbindung der CCU.",
+     "rotationDirLeftFast" : "Schnelles Drehen nach links",
+     "rotationDirRightFast" : "Schnelles Drehen nach rechts",
+     "rotationDirLeftSlow" : "Langsames Drehen nach links",
+     "rotationDirRightSlow" : "Langsames Drehen nach rechts",
+     "rainDetectorSampleInterval" : "Zeitspanne zwischen den einzelnen Messungen<br/>(Regenerkennungsintervall)",
+
     "theEnd" : ""
   }
 });
+
+langJSON.de.hintActivateDetectorSelfTest += langJSON.de.checkSmokeDetectorSelfTest;
+langJSON.de.hintReInclusionDetectorFailed += langJSON.de.checkSmokeDetectorSelfTest;

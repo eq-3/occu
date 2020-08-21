@@ -19,9 +19,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   array set psDescr [xmlrpc $iface_url($iface) getParamsetDescription [list string $address] [list string MASTER]]
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
-    append HTML_PARAMS(separate_1) "<col width=\"50%\">"
-    append HTML_PARAMS(separate_1) "<col width=\"39%\">"
-    append HTML_PARAMS(separate_1) "<col width=\"1%\">"
+    append HTML_PARAMS(separate_1) "<col style=\"width:50%;\" >"
+    append HTML_PARAMS(separate_1) "<col style=\"width:39%;\">"
+    append HTML_PARAMS(separate_1) "<col style=\"width:1%;\">"
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>"
 
@@ -69,7 +69,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         append HTML_PARAMS(separate_1) "</table>"
       append HTML_PARAMS(separate_1) "</td>"
 
-      append HTML_PARAMS(separate_1) "<td id=\"idHelpContainer\" class=\"hidden\" valign=\"top\">"
+      append HTML_PARAMS(separate_1) "<td id=\"idHelpContainer\" class=\"hidden\" style=\"vertical-align:top;\">"
         append HTML_PARAMS(separate_1) "<div>\${lblHeaderHelpTransmitterTransmissionCondition}</div>"
         append HTML_PARAMS(separate_1) "<div><br/><span id=\"idHelp\"></span></div>"
       append HTML_PARAMS(separate_1) "</td>"

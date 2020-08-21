@@ -29,6 +29,10 @@
   string blindVirtualReceiver = "BLIND_VIRTUAL_RECEIVER";
   string dimmerVirtualReceiver = "DIMMER_VIRTUAL_RECEIVER";
   string switchVirtualReceiver = "SWITCH_VIRTUAL_RECEIVER";
+  string alarmSwitchVirtualReceiver = "ALARM_SWITCH_VIRTUAL_RECEIVER";
+
+  ! e. g. DIMMER_WEEK_PROFILE, SWITCH_WEEK_PROFILE
+  string hmIPWeekProfile = "_WEEK_PROFILE";
 
   string s_vir_lg_rgb_dim = "VIR-LG-RGB-DIM";
   string s_vir_lg_rgbw_dim = "VIR-LG-RGBW-DIM";
@@ -47,7 +51,6 @@
   string excludeRepetitions = "REPETITIONS=";
 
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
-  string excludeHmIPResetMotion = "RESET_MOTION";
   string excludeHmIPSmokeDetCommandReservedAlarmOff = "SMOKE_DETECTOR_COMMAND=RESERVED_ALARM_OFF";
 
   ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
@@ -292,7 +295,6 @@
                 ! Some parameter shouldn´t be visible
                 if ( ((oDP.HSSID().Find(excludePARTY) == -1) || (oDP.HSSID().Find(includePARTY) != -1))
                 && (oDP.HSSID().Find(excludeHmIPCDT) == -1)
-                && (oDP.HSSID().Find(excludeHmIPResetMotion) == -1)
                 && (oDP.HSSID().Find(excludeHmIPLevel2) == -1)
                 && (oDP.HSSID().Find(excludeOutputSelectSize) == -1)
                 && (oDP.HSSID().Find(excludeCombinedParameter) == -1)
@@ -459,11 +461,16 @@
                 } else {
                   Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
                   Write( sUnit );
-                  Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                  ! Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                  Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"></span>' );
 
                   ! SPHM-365 - Help for the LEVEL_2 parameter of blind actors
                   if ((oCH.HssType().Find(blindVirtualReceiver) != -1) && (oDP.HSSID().Find("LEVEL_2") != -1)) {
                     Write( "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp(translateKey('helpBlindParamLevel2'), 400, 150)\">" );
+                  }
+
+                  if ((oCH.HssType().Find(alarmSwitchVirtualReceiver) != -1) && (oDP.HSSID().Find("DURATION_VALUE") != -1)) {
+                    Write( "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp(translateKey('helpAlarmSwitchParamDurationValue'), 400, 100)\">" );
                   }
                 }
               }
@@ -491,6 +498,7 @@
             integer i_switchVirtualReceiver = oCH.HssType().Find(switchVirtualReceiver);
             integer i_blindVirtualReceiver = oCH.HssType().Find(blindVirtualReceiver);
             integer i_hmip_mp3p = chLabel.Find(hmip_mp3p);
+            integer i_hmip_WeekProfile = oCH.HssType().Find(hmIPWeekProfile);
 
             integer ePaperAcousticDisplay = chLabel.Find(hmip_wrcd);
 
@@ -499,14 +507,21 @@
               || (ePaperAcousticDisplay != -1)
               || (rgbw_controller != -1)
               || ((jalousieActor != - 1) && (oDP.HSSID().Find("LEVEL_COMBINED") != -1))
-              || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1)) || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1)) || (i_hmip_mp3p != -1) || (i_blindVirtualReceiver != -1) || (i_dimmerVirtualReceiver != -1) || (i_switchVirtualReceiver != -1))
+              || (((i_vir_lg_rgb_dim != - 1) && (oDP.HSSID().Find("RGB") != -1))
+              || ((i_vir_lg_rgbw_dim != - 1) && (oDP.HSSID().Find("RGBW") != -1))
+              || (( i_vir_lg_group != - 1) && (oDP.HSSID().Find("RGBW") != -1))
+              || (i_hmip_mp3p != -1)
+              || (i_blindVirtualReceiver != -1)
+              || (i_dimmerVirtualReceiver != -1)
+              || (i_switchVirtualReceiver != -1)
+              || (i_hmip_WeekProfile != -1))
               ) {
               if (statusDisplayDevice != -1) {
                 if(iV == "0") {
                   ! This is the default string for 'all values not used'
                   iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x0A,0x03";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'DIS\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'DIS\');" type="text" class="SelectBox CLASS00012" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if (statusDisplayEPaperDevice != -1) {
@@ -514,7 +529,7 @@
                   ! This is the default string for 'all values not used'
                   iV = "0x02,0x0A,0x0A,0x0A,0x0A,0x0A,0x14,0xC0,0x1C,0xD0,0x16,0x,0x1D,0xE0F0,0x03";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'DIS-EP\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetStatusDisplay('#oSD.ID()#',\'DIS-EP\');" type="text" class="SelectBox CLASS00012" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if (ePaperAcousticDisplay != -1) {
@@ -539,14 +554,14 @@
                     iV = "{'ACT_COLOR_PROGRAM_STORE':0,'ACT_BRIGHTNESS_STORE':200,'RAMP_TIME_STORE':0.5,'ON_TIME_STORE':0, 'ACT_MIN_BORDER_STORE':0, 'ACT_MAX_BORDER_STORE':199}";
                   }
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetRGBWController('#oSD.ID()#',\''#oDP.HSSID()#'\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetRGBWController('#oSD.ID()#',\''#oDP.HSSID()#'\');" type="text" class="SelectBox CLASS00012" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if ((jalousieActor != - 1) && (oDP.HSSID().Find("LEVEL_COMBINED") != -1)) {
                 if (iV == "0") {
                   iV = "0X00,0X00";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetJalousieActor('#oSD.ID()#',\''#oDP.HSSID()#'\');" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="SetJalousieActor('#oSD.ID()#',\''#oDP.HSSID()#'\');" type="text" class="SelectBox CLASS00012" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if ((i_vir_lg_rgb_dim != -1) && (oDP.HSSID().Find("RGB") != -1)) {
@@ -555,22 +570,37 @@
                   iV = "rgb(255, 255, 255)";
                 }
 
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGB\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGB\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if (((i_vir_lg_rgbw_dim != -1) || ( i_vir_lg_group != -1)) && (oDP.HSSID().Find("RGBW") != -1)) {
                 if(iV.Find("rgb") == -1) {
                   iV = "rgb(255, 255, 255, 255)";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGBW\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="Set_VIR_LG_RGBWController('#oSD.ID()#',\'RGBW\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if (((i_hmip_mp3p != -1) && (i_acousticSignalVirtualReceiver != -1)) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("SL=") == -1) {
                   iV = "L=100,DU=2,DV=31,RTU=0,RTV=0,R=0,SL=0";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setAcousticSignalController('#oSD.ID()#',\'COMBINED_PARAMETER\');;" type="text" class="SelectBox alignCenter" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setAcousticSignalController('#oSD.ID()#',\'COMBINED_PARAMETER\');;" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
+
+              if ((i_hmip_WeekProfile != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                object oUser = dom.GetObject( system.GetSessionVar('sessionUserID'));
+                boolean noExpertMode = false;
+                if (oUser) {
+                  noExpertMode = oUser.UserEasyLinkMode();
+                }
+                object oCH = dom.GetObject( iCH );
+                if (iV.Find("WPTCL=") == -1) {
+                  iV = " WPTCLS=0,WPTCL=2";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setHmIPWeeklyProgramController('#oSD.ID()#',\''#oCH.Address()#'\','#noExpertMode#');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+
+              }
+
 
               if ((i_dimmerVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("L=") == -1) {
@@ -580,21 +610,21 @@
                     iV = "L=100,DV=31,DU=2,RTV=0, RTU=1,C=7";
                   }
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox alignCenter" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if ((i_switchVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("S=") == -1) {
                   iV = "S=true";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if (((i_blindVirtualReceiver != -1)) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("L=") == -1) {
                   iV = "L=100,L2=100";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setBlindLevelController('#oSD.ID()#',\'COMBINED_PARAMETER\',\''#oCH.Address()#'\');" type="text" class="SelectBox alignCenter" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setBlindLevelController('#oSD.ID()#',\'COMBINED_PARAMETER\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
             } else {
@@ -618,6 +648,7 @@
               && (i_blindVirtualReceiver == -1)
               && (i_dimmerVirtualReceiver == -1)
               && (i_switchVirtualReceiver == -1)
+              && (i_hmip_WeekProfile == -1)
               ) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {

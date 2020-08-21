@@ -397,15 +397,15 @@
   var s = "";
   s += "<table cellspacing='8'>";
   s += "<tr>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>"+ translateKey('footerBtnPageBack') +"</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='NewProgram();'>"+ translateKey('footerBtnNew') +"</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS03306' onclick='fltVR.clearFilters();updateTable();' >"+translateKey('footerBtnResetFilter')+"</div></td>";
-    //s += "<td align='center' valign='middle'><div class='FooterButton CLASS04905' onclick='ShowNonVisiblePrograms();' >Systeminterne Programme<br /><% Write(sInternalBtnText); %>blenden</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04905' onclick='ShowNonVisiblePrograms();' >"+translateKey(internalBtnText) +"</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04906' onclick='new HMScriptExecutor();' >"+translateKey('footerBtnTestScript')+ "</div></td>";
+    s += "<td  style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='WebUI.goBack();'>"+ translateKey('footerBtnPageBack') +"</div></td>";
+    s += "<td  style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='NewProgram();'>"+ translateKey('footerBtnNew') +"</div></td>";
+    s += "<td  style='text-align:center; vertical-align: middle;'><div class='FooterButton CLASS03306' onclick='fltVR.clearFilters();updateTable();' >"+translateKey('footerBtnResetFilter')+"</div></td>";
+    //s += "<td  style='text-align:center;' valign='middle'><div class='FooterButton CLASS04905' onclick='ShowNonVisiblePrograms();' >Systeminterne Programme<br /><% Write(sInternalBtnText); %>blenden</div></td>";
+    s += "<td  style='text-align:center; vertical-align: middle;'><div class='FooterButton CLASS04905' onclick='ShowNonVisiblePrograms();' >"+translateKey(internalBtnText) +"</div></td>";
+    s += "<td  style='text-align:center; vertical-align: middle;'><div class='FooterButton CLASS04906' onclick='new HMScriptExecutor();' >"+translateKey('footerBtnTestScript')+ "</div></td>";
     if(dbg)
     {
-      s += "<td align='center' valign='middle'><div class='FooterButton' onclick='reloadPage();'>"+translateKey('footerBtnUpdate')+ "</div></td>";
+      s += "<td  style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='reloadPage();'>"+translateKey('footerBtnUpdate')+ "</div></td>";
     }
   s += "</tr>";
   s += "</table>";

@@ -1,5 +1,8 @@
 jQuery.extend(true,langJSON, {
   "en" : {
+
+    "chType_ACCESSPOINT_GENERIC_RECEIVER_1" : "Homematic IP Wired Bus Channel 1",
+    "chType_ACCESSPOINT_GENERIC_RECEIVER_2" : "Homematic IP Wired Bus Channel 2",
     "chType_ACTOR_SECURITY" : "Ventilation lock channel",
     "chType_ACTOR_WINDOW" : "Actor channel",
     "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Status report MP3-Player",
@@ -36,6 +39,8 @@ jQuery.extend(true,langJSON, {
     "chType_COND_TEMPERATURE" : "Condition temperature",
     "chType_COND_SWITCH_TRANSMITTER_BRIGHTNESS" : "Connection partner<br/>Brightness",
     "chType_COND_SWITCH_TRANSMITTER_HUMIDITY" : "Connection partner<br/>Humidity",
+    "chType_COND_SWITCH_TRANSMITTER_PARTICULATE_MATTER25" : "en* Verkn%FCpfungspartner<br/>en* Mengenkonzentration PM2.5",
+    "chType_COND_SWITCH_TRANSMITTER_PARTICULATE_MATTER100" : "en* Verkn%FCpfungspartner<br/>en* Mengenkonzentration PM10",
     "chType_COND_SWITCH_TRANSMITTER_RAIN_DROP" : "Connection partner<br/>Rain / No Rain",
     "chType_COND_SWITCH_TRANSMITTER_RAIN_QUANTITY" : "Connection partner<br/>Rain quantity",
     "chType_COND_SWITCH_TRANSMITTER_TEMPERATURE" : "Connection partner<br/>Temperature",
@@ -73,7 +78,7 @@ jQuery.extend(true,langJSON, {
     "chType_MULTI_MODE_INPUT_TRANSMITTER_0" : "Channel deactivated",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_1" : "Push button",
     "chType_MULTI_MODE_INPUT_TRANSMITTER_2" : "Switch",
-    "chType_MULTI_MODE_INPUT_TRANSMITTER_3" : "Door/window contact",
+    "chType_MULTI_MODE_INPUT_TRANSMITTER_3" : "Contact",
     "chType_PASSAGE_DETECTOR_COUNTER_TRANSMITTER" : "Passage counter",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR" : "Passage detection<br/>left to right",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL" : "Passage detection<br/>right to left",
@@ -104,6 +109,7 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_TRANSMITTER_OC" : "Status report relay OC-Output",
     "chType_SWITCH_VIRTUAL_RECEIVER" : "Switch actuator",
     "chType_SWITCH_WEEK_PROFILE" : "Weekly program",
+    "chType_COND_SWITCH_TRANSMITTER_TEMPERATURE_DIFF" : "Connection partner<br/>Differential temperature",
     "chType_THERMALCONTROL_TRANSMIT" : "Connection partner<br/>radiator thermostat",
     "chType_VIRTUAL_DIMMER" : "Dimmer actuator",
     "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",

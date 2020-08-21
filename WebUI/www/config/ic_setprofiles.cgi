@@ -33,7 +33,7 @@ proc put_receiver_address_not_found {} {
       puts "  var s = \"\";"
       puts "  s += \"<table cellspacing='8'>\";"
       puts "  s += \"<tr>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${footerBtnCancel}</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${footerBtnCancel}</div></td>\";"
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
       puts "  setFooter(s);"
@@ -56,7 +56,7 @@ proc put_sender_address_not_found {} {
       puts "  var s = \"\";"
       puts "  s += \"<table cellspacing='8'>\";"
       puts "  s += \"<tr>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${footerBtnCancel}</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='WebUI.enter(LinkListPage);'>\${footerBtnCancel}</div></td>\";"
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
       puts "  setFooter(s);"
@@ -85,9 +85,9 @@ proc put_page {} {
       puts "  var s = \"\";"
       puts "  s += \"<table cellspacing='8'>\";"
       puts "  s += \"<tr>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='RevertProfileSettings(); WebUI.enter(LinkListPage);'>\${footerBtnCancel}</div></td>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='CollectData_SaveProfileSettings(1);'>\${footerBtnTransfer}</div></td>\";"
-      puts "  s += \"<td align='center' valign='middle'><div class='FooterButton' onclick='CollectData_SaveProfileSettings(0);'>\${footerBtnOk}</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='RevertProfileSettings(); WebUI.enter(LinkListPage);'>\${footerBtnCancel}</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='CollectData_SaveProfileSettings(1);'>\${footerBtnTransfer}</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='CollectData_SaveProfileSettings(0);'>\${footerBtnOk}</div></td>\";"
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
       puts "  setFooter(s);"
@@ -565,8 +565,8 @@ proc put_profile_body { PEERPART } {
   
   puts "<table class=\"SetProfLinkTbl\" cellspacing=\"0\">"
   puts "<colgroup>"
-  puts "<col width=\"50\%\"/>"
-  puts "<col width=\"50\%\"/>"
+  puts "<col style=\"width:50%;\"/>"
+  puts "<col style=\"width:50%;\"/>"
   puts "</colgroup>"
   puts "<tbody>"
   puts "<tr class=\"CLASS20003\">"
@@ -578,11 +578,11 @@ proc put_profile_body { PEERPART } {
 
   puts "<table class=\"SetProfLinkTbl_Buttons\" border=\"0\" cellspacing=\"0\">"
   puts "<colgroup>"
-  puts "<col width=\"10\%\"/>"
-  puts "<col width=\"26\%\"/>"
-  puts "<col width=\"28\%\"/>"
-  puts "<col width=\"26\%\"/>"
-  puts "<col width=\"10\%\"/>"
+  puts "<col style=\"width:10%;\"/>"
+  puts "<col style=\"width:26%;\"/>"
+  puts "<col style=\"width:28%;\"/>"
+  puts "<col style=\"width:26%;\"/>"
+  puts "<col style=\"width:10%;\"/>"
   puts "</colgroup>"
   puts "<tbody>"
   puts "<tr>"
@@ -592,30 +592,30 @@ proc put_profile_body { PEERPART } {
   } else {
     set select_id "sendergroup"
   }
-  puts "<td align=\"left\">"
+  puts "<td  style=\"text-align:left;\">"
   if {$iface != "HmIP-RF"} {
     puts "<div id=\"NewProfileTemplate_$select_id\" onclick=\"ShowNewEasyModeDialog('$select_id');\"  class=\"CLASS20009 CLASS20010\" >\${btnSaveNewProfile}</div>"
   } else {
       puts "<div id=\"NewProfileTemplate_$select_id\" class=\"CLASS20009a CLASS20010\" >\${btnSaveNewProfile}</div>"
   }
   puts "</td>"
-  puts "<td align=\"left\">"
+  puts "<td  style=\"text-align:left;\">"
   puts "<div id=\"DelBtnEasyMode_$select_id\" onclick=\"DeleteEasyMode('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility: hidden;\">\${btnRemoveProfileTemplate}</div>"
   puts "</td>"
   if {($iface != "BidCos-Wired") && ($iface != "HmIP-RF") } {
-    puts "<td align=\"center\" valign=\"middle\"><div onclick=\"ActivateLinkParamset('$iface', '[expr {$PEERPART=="SENDER"?$sender_address:$sender_group} ]', '$receiver_address')\" class=\"CLASS20009 CLASS20010\">\${btnTestReceiverProfile}</div></td>"
+    puts "<td style=\"text-align:center; vertical-align:middle;\"><div onclick=\"ActivateLinkParamset('$iface', '[expr {$PEERPART=="SENDER"?$sender_address:$sender_group} ]', '$receiver_address')\" class=\"CLASS20009 CLASS20010\">\${btnTestReceiverProfile}</div></td>"
   } else {
-    puts "<td align=\"center\" valign=\"middle\"><div></div></td>"
+    puts "<td style=\"text-align:center; vertical-align:middle;\"><div></div></td>"
   }
   if {$PEERPART == "SENDER" } then {
     set select_id "receiver"
   } else {
     set select_id "receivergroup"
   }
-  puts "<td align=\"right\">"
+  puts "<td  style=\"text-align:right;\">"
   puts "<div id=\"DelBtnEasyMode_$select_id\" onclick=\"DeleteEasyMode('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility: hidden;\">\${btnRemoveProfileTemplate}</div>"
   puts "</td>"
-  puts "<td align=\"right\">"
+  puts "<td  style=\"text-align:right;\">"
   if {$iface != "HmIP-RF"} {
     puts "<div id=\"NewProfileTemplate_$select_id\" onclick=\"ShowNewEasyModeDialog('$select_id');\" class=\"CLASS20009 CLASS20010\" style=\"visibility:visible\">\${btnSaveNewProfile}</div>"
   } else {

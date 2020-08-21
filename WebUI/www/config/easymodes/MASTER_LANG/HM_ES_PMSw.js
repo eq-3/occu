@@ -23,6 +23,7 @@ jQuery.extend(true,langJSON, {
     "frequencyOptionMasterSlave" : "Schaltbefehl bei &Uuml;ber- bzw. Unterschreiten der Frequenz",
     "stringTableCondTxCyclicAbove" : "Entscheidungswert zyklisch senden",
     "stringTableCondTxCyclicBelow" : "Entscheidungswert zyklisch senden",
+    "stringTableSendSwitchCommandCyclically" : "Schaltbefehl zyklisch senden",
     "stringTableCondTxDecisionAbove" : "Gesendeter Entscheidungswert, wenn oberer Grenzwert &uuml;berschritten",
     "stringTableCondTxDecisionBelow" : "Gesendeter Entscheidungswert, wenn unterer Grenzwert unterschritten",
 
@@ -37,11 +38,15 @@ jQuery.extend(true,langJSON, {
       "wenn vorher der obere Grenzwert &uuml;berschritten wurde.",
     "stringTableCondTxFallingA" : "Bei Unterschreitung des unteren Grenzwertes Entscheidungswert (",
     "stringTableCondTxFallingB" : ") senden,<br/>wenn vorher der obere Grenzwert &uuml;berschritten wurde.",
+    "stringTableCondTxFallingTemp" : "Bei Unterschreitung der unteren Temperaturschwelle den Schaltbefehl senden,<br/>" +
+      "wenn vorher die obere Temperaturschwelle &uuml;berschritten wurde.",
 
     "stringTableCondTxRising" : "Bei &Uuml;berschreitung des oberen Grenzwertes Entscheidungswert senden,<br/>" +
       "wenn vorher der untere Grenzwert unterschritten wurde.",
     "stringTableCondTxRisingA" : "Bei &Uuml;berschreitung des oberen Grenzwertes Entscheidungswert (",
     "stringTableCondTxRisingB" : ") senden,<br/>wenn vorher der untere Grenzwert unterschritten wurde.",
+    "stringTableCondTxRisingTemp" : "Bei &Uuml;berschreitung der oberen Temperaturschwell den Schaltbefehl senden,<br/>" +
+      "wenn vorher die untere Temperaturschwelle unterschritten wurde.",
 
     "stringTableCondTxFallingRisingA": "Entscheidungswert (",
     "stringTableCondTxFallingRisingB": ") bei &Uuml;berschreitung des oberen Grenzwertes senden,<br/>wenn vorher der untere Grenzwert unterschritten wurde, oder Entscheidungswert (",
@@ -107,6 +112,7 @@ jQuery.extend(true,langJSON, {
     "frequencyOptionMasterSlave" : "Switching command if frequency is exceeded or falls below threshold",
     "stringTableCondTxCyclicAbove" : "Send decision value cyclically",
     "stringTableCondTxCyclicBelow" : "Send decision value cyclically",
+    "stringTableSendSwitchCommandCyclically" : "Send switch command cyclically",
     "stringTableCondTxDecisionAbove" : "Sent decision value if upper limit is exceeded",
     "stringTableCondTxDecisionBelow" : "Sent decision value if lower limit falls below threshold",
 
@@ -120,11 +126,16 @@ jQuery.extend(true,langJSON, {
        "and if the upper limit has been exceeded previously.",
     "stringTableCondTxFallingA" : "Send decision value (",
     "stringTableCondTxFallingB" : ") if lower limit falls below threshold<br/>and if the upper limit has been exceeded previously.",
+    "stringTableCondTxFallingTemp" : "Send switch command if lower temperature falls below threshold<br/>" +
+       "and if the upper temperatrue has been exceeded previously.",
 
     "stringTableCondTxRising" : "Send decision value if upper limit is exceeded<br/>" +
       "and if the lower limit has fallen below threshold previously.",
     "stringTableCondTxRisingA" : "Send decision value (",
     "stringTableCondTxRisingB" : ") if upper limit is exceeded<br/>and if the lower limit has fallen below threshold previously.",
+    "stringTableCondTxRisingTemp" : "Send switch command if upper temperature is exceeded<br/>" +
+      "and if the lower temperature has fallen below threshold previously.",
+
     "stringTableCondTxFallingRisingA": "Send decision value (",
     "stringTableCondTxFallingRisingB": ") if upper limit has been exceeded and the lower limit<br/>has fallen below threshold previously or send decision value (",
     "stringTableCondTxFallingRisingC": ") if the lower limit<br/>falls below threshold and the upper limit has been exceeded previously.",

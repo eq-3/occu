@@ -108,7 +108,7 @@
     ! Spalte 1 ausgeben
     if (iFavColumnCount >= 1)
     {
-      WriteLine("<td valign='top'>");
+      WriteLine("<td style='vertical-align: top;'>");
       string sId;
       foreach(sId, aColumn_1)
       {
@@ -144,7 +144,7 @@
     ! Spalte 2 ausgeben
     if (iFavColumnCount >= 2)
     {
-      WriteLine("<td valign='top'>");
+      WriteLine("<td style='vertical-align: top;'>");
       string sId;
       foreach(sId, aColumn_2)
       {
@@ -179,7 +179,7 @@
     ! Spalte 3 ausgeben
     if (iFavColumnCount >= 3)
     {
-      WriteLine("<td valign='top'>");
+      WriteLine("<td style='vertical-align: top;'>");
       string sId;
       foreach(sId, aColumn_3)
       {
@@ -215,7 +215,7 @@
     ! Spalte 4 ausgeben
     if (iFavColumnCount >= 4)
     {
-      WriteLine("<td valign='top'>");
+      WriteLine("<td style='vertical-align: top;'>");
       string sId;
       foreach(sId, aColumn_4)
       {
@@ -267,7 +267,7 @@
   var s = '';
   s += '<table cellspacing="8">';
   s += '<tr>';
-  s += '<td align="center" valign="middle"><div class="FooterButton" onclick="WebUI.goBack();">${footerBtnPageBack}</div></td>';
+  s += '<td style="text-align:center; vertical-align: middle;"><div class="FooterButton" onclick="WebUI.goBack();">${footerBtnPageBack}</div></td>';
   s += '</tr>';
   s += '</table>';
   setFooter(s);

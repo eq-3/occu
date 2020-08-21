@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird der Alarm f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span>",
+
+"helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Sensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
+
+"hintAlarmInvalidValue" :
+  "Aufrund gesetzlicher Vorgaben ist die Zeitdauer des Alarms auf 10 Minuten begrenzt. Bitte benutzen Sie die vorgegebenen Werte der Auswahlliste. " +
+  "Wenn Sie die Einschaltdauer per Experteneinstellung vornehmen, achten Sie darauf, dass Sie keinen Wert gr%F6%DFer 10 Minuten verwenden.",

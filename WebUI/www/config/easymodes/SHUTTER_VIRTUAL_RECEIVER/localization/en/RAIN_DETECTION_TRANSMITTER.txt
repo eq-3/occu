@@ -18,4 +18,4 @@
 "subset_9" : "Rain",
 "subset_10" : "Dry conditions",
 
-"_at" : "<span class=\"translated\">en* bei</span>",
+"_at" : "<span class=\"translated\">when</span>",

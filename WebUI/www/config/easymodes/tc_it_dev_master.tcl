@@ -107,6 +107,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
 
   puts "<script type=\"text/javascript\">"
+
+    puts "addHintHeatingGroupDevice('$address');"
+
     puts "setDecalcTime = function(id) {"
       puts "var valHour = jQuery('#decalcHour').val();"
       puts "var valMin = jQuery('#decalcMin').val();"

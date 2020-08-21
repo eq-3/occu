@@ -165,6 +165,7 @@
                         var devicesToConfigureFromGroup = JSON.parse('{"devices" : '+response.content+'}');
                         ko.utils.arrayForEach(devicesToConfigureFromGroup.devices, function(item){
                             homematic("Device.getReGaIDByAddress", {address:item.id}, function(result) {
+                                homematic("Interface.setMetadata", {"objectId":DeviceList.getDeviceByAddress(item.id.split(":")[0]).id, "dataId": "inHeatingGroup", "value" : "false"});
                                 homematic("Device.setOperateGroupOnly", {id:result, mode: false}, function() {
                                     if (result != "noDeviceFound") {
                                         DeviceList.devices[result].isOperateGroupOnly = false;

@@ -42,7 +42,7 @@ function ::CreateDangerSensor()
             WriteLine("</div>");
           WriteLine("</td>");
         WriteLine("</tr>");
-        WriteLine("<tr><td align='center' id='"#chnId#"_dangerTxt' class='j_translate " # sFontColorDangerClassName # "'>Gefahr</td></tr>");
+        WriteLine("<tr><td style='text-align:center;' id='"#chnId#"_dangerTxt' class='j_translate " # sFontColorDangerClassName # "'>Gefahr</td></tr>");
       WriteLine("</table>");
     WriteLine("</td>");
     WriteLine("<td class='CLASS02528'>&nbsp;</td>");

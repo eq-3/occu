@@ -1,9 +1,9 @@
-"description_1" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Windschwelle wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion).</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Bei Erreichen der gew&auml;hlten Windschwelle wird die gew&auml;hlte MP3-Datei f&uuml;r die festgelegte Zeit abgespielt.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">Bei Empfang des Schaltbefehls wird die gew&auml;hlte MP3-Datei abwechselnd abgespielt und beendet (Toggle-Funktion).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des Schaltbefehls wird die gew&auml;hlte MP3-Datei f&uuml;r die festgelegte Zeit abgespielt.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
 
 "helpBtnSenderConf" : "<span class=\"translated\">Damit das Profil wunschgem&auml;&szlig; arbeitet, m&uuml;ssen die Kanalparameter des Windsensors entsprechend konfiguriert sein. Die Einstellungen k&ouml;nnen von hier aus gemacht werden, indem die Taste 'Sender-Kanaleinstellung bearbeiten' bet&auml;tigt wird.</span><br/><br/>",
 
 "switchPoint" : "Schalten bei",
-"subset_1": "Erreichen der oberen Windschwelle",
+"subset_1": "%DCberschreiten der oberen Windschwelle",
 "subset_2": "Unterschreiten der unteren Windschwelle",

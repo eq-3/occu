@@ -1,0 +1,49 @@
+function ::CreateCondSwitchTransmitterTemperature()
+{
+  object objTemp = cObj.DPByControl("COND_SWITCH_TRANSMITTER_TEMPERATURE.ACTUAL_TEMPERATURE");
+  object objStatus = cObj.DPByControl("COND_SWITCH_TRANSMITTER_TEMPERATURE.ACTUAL_TEMPERATURE_STATUS");
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+  integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
+
+  string label = "${stringTableWeatherTemperature}";
+  string valueAndUnit;
+
+  if (objTemp) {
+    valueAndUnit = objTemp.Value().ToString(1)#" "#objTemp.ValueUnit();
+  } else {
+    valueAndUnit = "${lblUnknown}";
+  }
+
+  ! ACTUAL_TEMPERATURE_STATUS > 0 = NORMAL, 1 = UNKNOWN, 2 = OVERFLOW, 3 = UNDERFLOW
+  if (objStatus.Value() > 0) {
+    if (objStatus.Value() == 1) {valueAndUnit = "${lblUnknown}";}  else {valueAndUnit = "${lblErrorSensor}";}
+  }
+
+  if ((ch.Label() == "HmIP-STE2-PCB") && (chnNumber < 3)) {
+    label = "${stringTableParamSelectT"#chnNumber#"} ";
+  }
+
+  if ((ch.Label() == "HmIP-STE2-PCB") && (chnNumber == 3)) {
+    label = "${stringTableParamSelectT1MinusT2}";
+  }
+
+  if( objTemp )
+  {
+    WriteLine("<td>");
+      WriteLine("<table id='"#chnId#"currentIlumination' class='ControlBtnInfo minWidth230px'>");
+        WriteLine("<tr>");
+
+          WriteLine("<td  style='text-align:left;'>"#label#"</td>");
+
+        WriteLine("</tr>");
+        WriteLine("<tr>");
+          WriteLine("<td  style='text-align:right;' class='CLASS02518'>"#valueAndUnit#"</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
+
+  return;
+}

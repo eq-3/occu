@@ -519,6 +519,11 @@
 
         ko.utils.arrayForEach(viewModel.assignedDevices(), function(item) {
             data.assignedDevicesIds.push(item.id);
+            homematic("Interface.setMetadata", {"objectId":item.device.id, "dataId": "inHeatingGroup", "value" : "true"});
+        });
+
+        ko.utils.arrayForEach(viewModel.assignableDevices(), function(item) {
+            homematic("Interface.setMetadata", {"objectId":item.device.id, "dataId": "inHeatingGroup", "value" : "false"});
         });
 
         pb = JSON.stringify(data);

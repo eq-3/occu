@@ -14,6 +14,8 @@ system.SetSessionVar("sessionTAB", "adminFirstStart");
       postBody:ReGa.encode(pb),
       onComplete: function(t)
       {
+        homematic("Interface.setMetadata", {"objectId":userId, "dataId":"pwdSet", "value": "true"});
+        iseUser.setAutoLogin(0, 0);
         conInfo("savePassword onComplete: " + t.responseText);
       },
       onFailure: function(t) {

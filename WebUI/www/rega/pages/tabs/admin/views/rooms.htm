@@ -170,18 +170,18 @@ arSortRObj[arSortRObj.length] = tmpRoom;
 <table id="tblRoomList" class="tblList CLASS04100" style="display:none" cellpadding="0" cellspacing="0" >
 
 <colgroup>
-  <col width="4%" />
-  <col width="8%" />
-  <col width="12%" />
-  <col width="12%" />
-  <col width="4%" />
-  <col width="16%" />
-  <col width="8%" />
-  <col width="8%" />
-  <col width="4%" />
-  <col width="8%" />
-  <col width="8%" />
-  <col width="8%" />
+  <col style="width:4%;"/>
+  <col style="width:8%;"/>
+  <col style="width:12%;"/>
+  <col style="width:12%;"/>
+  <col style="width:4%;"/>
+  <col style="width:16%;"/>
+  <col style="width:8%;"/>
+  <col style="width:8%;"/>
+  <col style="width:4%;"/>
+  <col style="width:8%;"/>
+  <col style="width:8%;"/>
+  <col style="width:8%;"/>
 </colgroup>
 
 <thead>
@@ -707,15 +707,15 @@ if ( oUser )
   var s = "";
   
   s += "<table cellspacing='8'>";
-  s += "<colgroup> <col width='4%' /><col width='8%' /><col width='12%' /><col width='12%' /><col width='4%' /><col width='16%' />" +
-        "<col width='8%' /><col width='8%' /><col width='4%' /><col width='8%' /><col width='8%' /><col width='8%' /></colgroup>";
+  s += "<colgroup> <col style='width:4%;' /><col style='width:8%;'/><col style='width:12%;'/><col style='width:12%;'/><col style='width:4%;'/><col style='width:16%;'/>" +
+        "<col style='width:8%;'/><col style='width:8%;'/><col style='width:4%;'/><col style='width:8%;'/><col style='width:8%;'/><col style='width:8%;'/></colgroup>";
   s += "<tr>";
-    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack()'>${footerBtnPageBack}</div></td>";
-    s += "<td align='center' valign='middle'><div class='FooterButton CLASS04107' onclick='fltSR.clearFilters();restoreRooms();updateTable();' >${footerBtnResetFilter}</div></td>";
-    s += "<td align='center' valign='middle'><div id='btnExp' class='FooterButton CLASS04107' onclick='bFilterUsed=false;expandAll();'>${footerBtnOpenTree}</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton' onclick='WebUI.goBack()'>${footerBtnPageBack}</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div class='FooterButton CLASS04107' onclick='fltSR.clearFilters();restoreRooms();updateTable();' >${footerBtnResetFilter}</div></td>";
+    s += "<td style='text-align:center; vertical-align: middle;'><div id='btnExp' class='FooterButton CLASS04107' onclick='bFilterUsed=false;expandAll();'>${footerBtnOpenTree}</div></td>";
     s += "<td></td><td></td><td></td><td></td><td></td><td></td><td></td>";
-    s += "<td align='center' class='CLASS04108'>${lblRoomlist}</td>";
-    s += "<td align='center'><div class='FooterButton' onclick='editRooms();'>${footerBtnEdit}</div></td>";
+    s += "<td style='text-align:center;' class='CLASS04108'>${lblRoomlist}</td>";
+    s += "<td style='text-align:center;'><div class='FooterButton' onclick='editRooms();'>${footerBtnEdit}</div></td>";
   s += "</tr>";
   s += "</table>";
 

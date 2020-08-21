@@ -31,7 +31,7 @@ function ::CreateWaterDetectionTransmitter()
         WriteLine("<td>");
           WriteLine("<table id='"#chnId#"waterDetect' class='ControlBtnInfo minWidth230px'>");
             WriteLine("<tr>");
-              WriteLine("<td align='center'>"#msgWater#"</td>");
+              WriteLine("<td style='text-align: center'>"#msgWater#"</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
         WriteLine("</td>");
@@ -39,7 +39,7 @@ function ::CreateWaterDetectionTransmitter()
         WriteLine("<td>");
           WriteLine("<table id='"#chnId#"moistureDetect' class='ControlBtnInfo minWidth230px'>");
             WriteLine("<tr>");
-              WriteLine("<td align='center'>"#msgMoisture#"</td>");
+              WriteLine("<td style='text-align:center;'>"#msgMoisture#"</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
         WriteLine("</td>");

@@ -109,7 +109,7 @@ jQuery.extend(true, langJSON, {
     "dialogActivateLinkParamsetSuccess": "The profile has been triggered successfully.",
     "dialogActivateLinkParamsetError": "The profile could not be triggered. Please make sure that the device is located within the wireless range and active.",
     "dialogFirmwareUpdateCheckSuccess": "Firmware update completed. Checking if successful...",
-    "dialogFirmwareUpdateSuccess": "Firmware update successful.",
+    "dialogFirmwareUpdateSuccess": "Firmware update is being carried out.",
     "dialogFirmwareUpdateFailed": "Firmware update failed.",
     "dialogSetProfileProgressBarSendProfile": "Profile settings will be transmitted to devices.",
     "dialogSetProfileErrorProgressBarA": "Error during saving of profile ",
@@ -755,6 +755,7 @@ jQuery.extend(true, langJSON, {
     "optionUnit1D" : "1 day",
     "optionUnit7D" : "7 days",
     "optionUnit14D" : "14 days",
+    "optionUnit24D" : "24 days",
     "optionUnit28D" : "28 days",
     "optionUnit30D" : "30 days",
     "optionUnit10MS" : "10ms",
@@ -1401,20 +1402,20 @@ jQuery.extend(true, langJSON, {
       "Since only a limited character set is available, some characters cannot be used and are replaced by other characters.<br/><br/>" +
       "<table style=\"margin-left:auto; margin-right:auto\">" +
       "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
-      "<tr><td align='center'><span>[</span></td><td align='center'><span>%C4</span></td></tr>" +
-      "<tr><td align='center'><span>#</span></td><td align='center'><span>%D6</span></td></tr>" +
-      "<tr><td align='center'><span>$</span></td><td align='center'><span>%DC</span></td></tr>" +
-      "<tr><td align='center'><span>{</span></td><td align='center'><span>%E4</span></td></tr>" +
-      "<tr><td align='center'><span>|</span></td><td align='center'><span>%F6</span></td></tr>" +
-      "<tr><td align='center'><span>}</span></td><td align='center'><span>%FC</span></td></tr>" +
-      "<tr><td align='center'><span>_</span></td><td align='center'><span>%DF</span></td></tr>" +
-      "<tr><td align='center'><span>]</span></td><td align='center'><span>&</span></td></tr>" +
-      "<tr><td align='center'><span>'</span></td><td align='center'><span>=</span></td></tr>" +
-      "<tr><td align='center'><span> ; </span></td><td align='center'><span>Sanduhr</span></td></tr>" +
-      "<tr><td align='center'><span> < </span></td><td align='center'><span>Arrow down</span></td></tr>" +
-      "<tr><td align='center'><span> = </span></td><td align='center'><span>Arrow up</span></td></tr>" +
-      "<tr><td align='center'><span> > </span></td><td align='center'><span>Arrow up to right</span></td></tr>" +
-      "<tr><td align='center'><span> @ </span></td><td align='center'><span>Arrow down to right</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>[</span></td><td  style='text-align:center;'><span>%C4</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>#</span></td><td  style='text-align:center;'><span>%D6</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>$</span></td><td  style='text-align:center;'><span>%DC</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>{</span></td><td  style='text-align:center;'><span>%E4</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>|</span></td><td  style='text-align:center;'><span>%F6</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>}</span></td><td  style='text-align:center;'><span>%FC</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>_</span></td><td  style='text-align:center;'><span>%DF</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>]</span></td><td  style='text-align:center;'><span>&</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span>'</span></td><td  style='text-align:center;'><span>=</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span> ; </span></td><td  style='text-align:center;'><span>Sanduhr</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span> < </span></td><td  style='text-align:center;'><span>Arrow down</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span> = </span></td><td  style='text-align:center;'><span>Arrow up</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span> > </span></td><td  style='text-align:center;'><span>Arrow up to right</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span> @ </span></td><td  style='text-align:center;'><span>Arrow down to right</span></td></tr>" +
        "</table>",
 
     "lblVibration" : "Vibration",
@@ -1425,6 +1426,70 @@ jQuery.extend(true, langJSON, {
     "lblYes" : "Yes",
     "lblNo" : "No",
 
+    "setAllHmIPDevices" :
+      "Do you want to transfer this position to the corresponding HmIP devices?\n\n"  +
+        "Please bear in mind that this may result in communication problems due to the increased radio traffic.",
+    "dialogSettingsTimePositionMessageSetPositionSucceedIncludingAllDevices" :
+      "Position information was saved.<br/><br/>" +
+        "The location data of the corresponding HmIP devices will be adjusted.",
+    "lblDutyCycleBidCosRF" : "Duty Cycle BidCos:",
+    "lblDutyCycleHmIP" : "Duty Cycle HmIP: ",
+    "lblDutyCycle" : "Duty Cycle CCU: ",
+    "lblDutyCycleA" : "Duty Cycle CCU",
+    "PowerMeterProtocolModeModeOptionSML" : "SML protocol",
+    "lblRepetitions" : "Repetitions",
+    "optionRepetition" : "repetition",
+    "optionRepetitions" : "repetitions",
+    "lblSoundfileList" : "Title list",
+    "btnChooseSongs"  : "Title selection",
+    "lblPlaylist" : "Playlist",
+    "drapFwNotCompatWithCCUFW" : "The Access Point firmware is not compatible to the CCU.\n\nPlease update your CCU!",
+    "lblBrightnessLuxA" : "Enter brightness in lux",
+    "lblBrightnessLuxB" : "and confirm",
+    "hintInternalLinkExists" :
+      "If the channel behaviour changes, the internal connection of the device should be deleted and recreated.<br/> " +
+      " Otherwise the internal connection will no longer behave as expected.",
+    "hintDevFwUpdateDCHigh" :
+      "<b><span class='attention'>Please note: The duty cycle of the "+HMIdentifier.en.CCUShortName+" is currently very high!</span></b><br/><br/>" +
+      "A device firmware update is therefore currently not possible.<br/><br/>"+
+      "Wait until the duty cycle has fallen below 80% and then try again.",
+    "lblSelectTargetChannels" : "Select<br /> target channels",
+    "btnSelect1stVirTargetChannels" : "1. Virt",
+    "btnSelectAllTargetChannels" : "All",
+    "btnSelectNoTargetChannels" : "None",
+    "hintWeeklyProgramActiveExpertChannel" :
+      "The expert mode is not active. However, since at least one expert target channel is activated for at least one switching time, " +
+      "the target channels are still displayed in expert mode.",
+    "helpBlindParamLevel2" :
+      "In order for a change in the slat position to take effect at this point, <u>also</u> the shutter height must be defined as the second parameter.<br/><br/>" +
+      "If you only want to change the slat position, use the parameter 'Channel action' and select the value 'Ignore' for the shutter height.",
+    "alertUsernameForbiddenChars" : "The user name shall not contain a space character.",
+    "addFirmwareFailedMinCCUVersion" : "This device-firmware update is not supported by the firmware of your CCU. Please update the CCU firmware first.",
+    "lblStopRunningLink" : "Cancel old transmissions<br/>of this buttons",
+    "addFirmwareFailedNotValidatable" : "The compatibility of this device-firmware update is not validatable. Please download the device-firmware one more time and try again.",
+    "hintVirtualChannelChanged" : "Attention! Important note!",
+    "hintVirtualChannelChangedMsg" :
+      "In simplified mode the channel is switched by the 1st virtual channel. The 2nd and 3rd virtual channel is not displayed. If these do not correspond to the default state, " +
+      "the status displayed in the WebUI does eventually not correspond to the actual value. This seems to be the case here.<br/><br/>" +
+      "You can check this by deactivating the simplified connection configuration in the user administration and then coming back here.",
+    "lblLowBattery" : "Battery empty",
+    "lblDisarmed" : "Alarm deactivated",
+    "lblExternallyArmed" : "External alarm activated",
+    "lblInternallyArmed" : "Internal alarm activated",
+    "lblDelayExternalArming" : "External alarm activated with delay",
+    "lblDelayInternalArming" : "Internal alarm activated with delay",
+    "lblEvent" : "Event",
+    "dlgLoadLicense" : "Loading the license",
+    "dlgErrorLoadLicense" : "The software license cannot be loaded Please check the Internet connection of the CCU.",
+    "rotationDirLeftFast" : "Quick anti-clockwise rotation",
+    "rotationDirRightFast" : "Quick clockwise rotation",
+    "rotationDirLeftSlow" : "Slow anti-clockwise rotation",
+    "rotationDirRightSlow" : "Slow clockwise rotation",
+    "rainDetectorSampleInterval" : "Time between the single measurements<br/>(rain detection interval)",
+
     "theEnd" : ""
   }
 });
+
+langJSON.en.hintActivateDetectorSelfTest += langJSON.en.checkSmokeDetectorSelfTest;
+langJSON.en.hintReInclusionDetectorFailed += langJSON.en.checkSmokeDetectorSelfTest;
