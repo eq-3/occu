@@ -117,6 +117,10 @@ jQuery.extend(true, langJSON, {
 
     "hintSetReady" : "Please press the Done button and configure the device in the device list.",
 
+    "drapRescueIntroTitle" : "HmIP-DRAP preparatory update",
+    "drapRescueIntroText" : "This HmIP-DRAP with firmware version 2.0.16 requires an intermediate update before the actual update can be carried out.</br>For this purpose, enter the password (PW) printed on the HmIP-DRAP and click &ldquo;OK&rdquo;.",
+    "drapRescueUpdateSuccessful" : "The intermediate update was completed successfully.</br>Wait until the LED of the HmIP-DRAP flashes blue or shines turquoise. Start the actual update by clicking the &ldquo;Update&rdquo; button again.",
+
     "noMoreKeys" : ""
   }
 });

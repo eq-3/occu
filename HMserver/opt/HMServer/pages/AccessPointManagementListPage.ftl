@@ -71,6 +71,9 @@
                     //timeout or error
                     MessageBox.show(translateKey("lblError"), translateKey("apMigrationErrorOrTimeout"));
                     //updateUI();
+                } else if(retCode == 3) {
+                    var text = translateKey("drapRescueUpdateSuccessful");
+                    MessageBox.show(translateKey("apMigrationUpdateSuccessfulTitle"), text);
                 } else {
                     //TODO Handle should not happen case
                 }
@@ -110,6 +113,29 @@
         new Ajax.Request(url,opt);
     };
 
+    sendRescueAPRequest = function(accessPointId, pwd)  {
+        pwd = pwd.replace(/\\/g, "\\\\");
+        pwd = pwd.replace(/"/g, '\\"');
+        var url = '/pages/jpages/hmip/AccessPoint/rescueAccessPoint?sid='+SessionId;
+        var pb = '';
+        pb += '{"accessPointId":"'+accessPointId+'",';
+        pb += '"pwd":"'+pwd+'"}';
+        var opt = {
+            method: 'post',
+            postBody: pb,
+            onComplete: function(t)
+            {
+                var jsonObj = JSON.parse(t.responseText);
+                if(jsonObj.isSuccessful === true) {
+                    updateUI(); //java calls waitUpdateComplete on next updateUI iteration, but this way the dialog ui is updated immediately
+                } else {
+                    MessageBox.show(translateKey("lblError"), jsonObj.content);
+                }
+            }
+        }
+        new Ajax.Request(url,opt);
+    };
+
     showCredentialsDialog = function(accessPointId) {
         var title = '${"$"}{password}';
         var descriptionText = migrationMode ? '${"$"}{apSearchMigrationDescription}' : '${"$"}{apSearchDescription}';
@@ -130,6 +156,25 @@
 
     updateAccessPoint = function(accessPointId) {
         showCredentialsDialog(accessPointId);
+    }
+
+    rescueAccessPoint = function(accessPointId) {
+        console.log("rescueAccessPoint");
+        var title =  '${"$"}{drapRescueIntroTitle}';
+        var descriptionText = '${"$"}{drapRescueIntroText}';
+        var credDlgHtml = "<html><body>";
+        credDlgHtml += '<div style="margin:10px">'+descriptionText+'</br></div>';
+        credDlgHtml += '<div style="margin:10px">${"$"}{lblUserPassword}</br><input width="30" id="passphrase" placeholder=${"$"}{password} type="password"/></div>';
+        credDlgHtml += "</body></html>";
+
+        var credDlg = new RequestCredentialsDialog(title, credDlgHtml , function(result) {
+            var self = this;
+            if (result) {
+                sendRescueAPRequest(accessPointId, self.passphrase);
+            }
+        }, "html");
+        credDlg.btnTextYes(translateKey("btnOk"));
+        credDlg.btnTextNo(translateKey("btnCancel"));
     }
 
     cleanUpAndClose = function() {
@@ -240,6 +285,9 @@
                         <div id="updateBtn_${accessPoint.id}" class="DeviceListButton hidden">
                           <div class="CLASS21108A" onclick="updateAccessPoint('${accessPoint.id}');">${"$"}{lblUpdate}</div>
                         </div>
+                        <div id="rescueBtn_${accessPoint.id}" class="DeviceListButton hidden">
+                          <div class="CLASS21108A" onclick="rescueAccessPoint('${accessPoint.id}');">${"$"}{lblUpdate}</div>
+                        </div>
                         <div id="noUpdateTxt_${accessPoint.id}" class="hidden">${"$"}{noUpdateNeeded}</div>
                         <div id="updateInProgressTxt_${accessPoint.id}" class="hidden">${"$"}{dialogFirmwareUpdateSuccess}</div>
                       </td>
@@ -285,9 +333,14 @@
                   var avFirm = '${accessPoint.availableVersion}';
                   var instFirm = '${accessPoint.version}';
                   var apUpdating = '${accessPoint.updating?c}';
+                  var needUdpUpdate = '${accessPoint.needUdpUpdate?c}';
                   if(apUpdating === 'true') {
                       jQuery("#updateInProgressTxt_${accessPoint.id}").show();
-                  } else {
+                  } else if(needUdpUpdate === 'true') {
+                      console.log("needUdpUpdate");
+                      jQuery("#rescueBtn_${accessPoint.id}").show();
+                  }
+                  else {
                       if(evalVersionAGreaterThanB(avFirm, instFirm)) {
                         jQuery("#updateBtn_${accessPoint.id}").show();
                       } else {

@@ -121,6 +121,11 @@ jQuery.extend(true, langJSON, {
 
     "hintSetReady" : "Bitte bet%E4tigen Sie den Fertig Button und konfigurieren das Ger%E4t in der Ger%E4teliste",
 
+    "drapRescueIntroTitle" : "HmIP-DRAP Vorbereitungsupdate",
+    "drapRescueIntroText" : "Dieser HmIP-DRAP mit der Firmware Version 2.0.16 erfordert ein Zwischenupdate, bevor das eigentliche Update ausgef%FChrt werden kann.</br>Geben Sie hierf%FCr das auf dem HmIP-DRAP aufgedruckte Passwort (PW) ein und klicken Sie anschlie%DFend auf &bdquo;OK&ldquo;",
+    "drapRescueUpdateSuccessful" : "Das Zwischenupdate wurde erfolgreich abgeschlossen.</br>Warten Sie, bis die LED des HmIP-DRAP blau blinkt, bzw. t%FCrkis leuchtet. Starten Sie dann das eigentliche Update, indem Sie erneut den &ldquo;Update&rdquo; Button klicken.",
+    "comment" : "Noch nicht bei der TecDocu gewesen",
+
     "noMoreKeys" : ""
   }
 });

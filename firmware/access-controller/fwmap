@@ -1,0 +1,6 @@
+# Mapping file for Homematic IP Access Controller firmware files
+# Format: Type Filename Version
+# Remark: The version column won't be evaluated by HmIPServer, but it is still helpful.
+
+HmIPW-DRAP	HmIPW-DRAP_update_V2_2_12_2020_08_26.zip	2.2.12
+HmIP-HAP	HMIP_HAP_update_V2_2_12_2020_08_26.zip	2.2.12
