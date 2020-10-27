@@ -688,7 +688,7 @@ proc getPowerUpSelector {chn p special_input_id} {
   if { ! [catch {set tmp $ps(POWERUP_OFFTIME_UNIT)}]  } {
     append html "<tr id=\"powerUpPanelOFF_$chn\"><td colspan=\"2\"><table>"
 
-      set comment {
+      set comment { The actor is always off after powerup, so there is no need for a offdelay parameter
         set param POWERUP_OFFDELAY_UNIT
         if { [info exists ps($param)] == 1  } {
           incr prn
@@ -710,40 +710,42 @@ proc getPowerUpSelector {chn p special_input_id} {
           append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
           append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
         }
-      }
-      ###
-      set param POWERUP_OFFTIME_UNIT
-      if { [info exists ps($param)] == 1  } {
-        incr prn
-        append html "<tr>"
-        append html "<td>\${stringTableOffTime}</td>"
-        append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
-        append html "</tr>"
-
-        append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
-
-        incr prn
-        set param POWERUP_OFFTIME_VALUE
-        append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-        append html "<td>\${stringTableOffTimeValue}</td>"
-
-        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-        append html "</tr>"
-        append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-        append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-      }
 
       ###
-      set param POWERUP_OFF_LEVEL
-      if { [info exists ps($param)] == 1  } {
-        incr prn
-        append html "<tr>"
-          append html "<td>\${stringTableDimmerLevel}</td>"
-          option RAW_0_100Percent
-          append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-        append html "</tr>"
-      }
+
+        set param POWERUP_OFFTIME_UNIT
+        if { [info exists ps($param)] == 1  } {
+          incr prn
+          append html "<tr>"
+          append html "<td>\${stringTableOffTime}</td>"
+          append html [getComboBox $chn $prn "$specialID" "timeOnOff"]
+          append html "</tr>"
+
+          append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+          incr prn
+          set param POWERUP_OFFTIME_VALUE
+          append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+          append html "<td>\${stringTableOffTimeValue}</td>"
+
+          append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+          append html "</tr>"
+          append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+          append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+        }
+
+        ###
+        set param POWERUP_OFF_LEVEL
+        if { [info exists ps($param)] == 1  } {
+          incr prn
+          append html "<tr>"
+            append html "<td>\${stringTableDimmerLevel}</td>"
+            option RAW_0_100Percent
+            append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+          append html "</tr>"
+        }
+}
     append html "</table></td></tr>"
   }
 # *******

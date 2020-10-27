@@ -37,6 +37,7 @@
     "optionUnit1D": "1 day",
     "optionUnit7D": "7 days",
     "optionUnit14D": "14 days",
+    "optionUnit24D": "24 days",
     "optionUnit28D": "28 days",
     "optionUnit30D": "30 days",
     "stringTablePermanent" : "continuously",

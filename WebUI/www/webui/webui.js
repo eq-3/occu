@@ -1147,6 +1147,12 @@ DEV_PATHS["HM-WS550ST-IO"] = new Object();
 DEV_PATHS["HM-WS550ST-IO"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
 DEV_PATHS["HM-WS550ST-IO"]["250"] = "/config/img/devices/250/IP65_G201.png";
 DEV_HIGHLIGHT["HM-WS550ST-IO"] = new Object();
+DEV_LIST.push('HmIP-eTRV-C-2');
+DEV_DESCRIPTION["HmIP-eTRV-C-2"] = "TRV-C";
+DEV_PATHS["HmIP-eTRV-C-2"] = new Object();
+DEV_PATHS["HmIP-eTRV-C-2"]["50"] = "/config/img/devices/50/188_hmip-etrv-c_thumb.png";
+DEV_PATHS["HmIP-eTRV-C-2"]["250"] = "/config/img/devices/250/188_hmip-etrv-c.png";
+DEV_HIGHLIGHT["HmIP-eTRV-C-2"] = new Object();
 DEV_LIST.push('263 162');
 DEV_DESCRIPTION["263 162"] = "263_162";
 DEV_PATHS["263 162"] = new Object();
@@ -29426,7 +29432,7 @@ showDCAllInterfaces = function() {
       html += "</tr>";
 
       html += "<tr>";
-        html += "<td> <div><div id='dutyCycleProgress_"+index+"' class='dutyCycleProgress' text-align='right' style='margin-left: auto; margin-right: auto;'><div id='dutyCycleProgressBar_"+index+"' class='dutyCycleProgressBar' style='width:100%;'></div></div><div></td>";
+        html += "<td> <div><div id='dutyCycleProgress_"+index+"' class='dutyCycleProgress' align='right' style='margin-left: auto; margin-right: auto;'><div id='dutyCycleProgressBar_"+index+"' class='dutyCycleProgressBar' style='width:100%;'></div></div><div></td>";
       html += "</tr>";
 
       window.setTimeout(function() {

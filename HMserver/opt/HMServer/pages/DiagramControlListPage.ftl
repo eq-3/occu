@@ -2,73 +2,73 @@
 <head>
 <style>
 .StdButtonBig {
-	padding-right: 12px;
-	padding-left: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 .hideAtStart {
-	visibility:hidden;
+  visibility:hidden;
 }
 #legendTooltip {
-	color:#192C6E;
-	position:absolute;
-	top:-14px;
-	right:-5px;
-	font-weight:bold;
+  color:#192C6E;
+  position:absolute;
+  top:-14px;
+  right:-5px;
+  font-weight:bold;
 }
-#
+
 </style>
 
 <script language="text/javascript">
-	var selectedDiagramId;
-  var noDiagramData = true;
-	var refreshDiagramOnRefreshTimeout;
-	var lastDiagramSettingsAsJson;
-	var showComparisonPeriod = false;
-	var comparisonLegendExtension = "";
-	var timePeriod = "unknown";
-	var defaultPeriod = undefined;
-	var origXAxis = {};
-	var diagramRenderer = undefined;
-	var barRenderer = false;
-	var selectedPeriod = -1; // -1 = unknown, 0 = hour, 1 = day, 2 = week, 3 = month, 4 = year
-	var arPeriod = ["hour", "24h", "week", "month", "year"];
-	var arTicks = ["10 minutes", "60 minutes", "1440 minutes", "2880 minutes", "52560 minutes"]; 	// 0 = hour, 1 = day, 2 = week, 3 = month, 4 = year
-	var numberOfDataSets = 1;
-	var diagramElem = jQuery('#currentDiagram');
-	var btnPeriodDay = jQuery('#selectPeriodLastDay');
-	var btnPeriodWeek = jQuery('#selectPeriodLastWeek');
-	var btnPeriodMonth = jQuery('#selectPeriodLastMonth');
-	var btnPeriodYear = jQuery('#selectPeriodLastYear');
-	var btnComparisonPeriod = jQuery('#showComparisonPeriod');
-	var selBoxComparisonDevice = jQuery('#selectDeviceForComparisonPeriod');
-	var lblNoDataAvailable = jQuery("#hintNoDataAvailable");
-	var consolidationElem = jQuery('#selectConsolidationFunction');
-	var debug = jQuery.url().param('debug');
-	var createDummy = jQuery.url().param('createDummy');
-  var curDate = new Date();
-  var comparisonSelectedDevice = 0;
-  var numberOfDevices = 1;
-  var consolidationMode = 0;
+  var selectedDiagramId,
+  noDiagramData = true,
+  refreshDiagramOnRefreshTimeout,
+  lastDiagramSettingsAsJson,
+  showComparisonPeriod = false,
+  comparisonLegendExtension = "",
+  timePeriod = "unknown",
+  defaultPeriod = undefined,
+  origXAxis = {},
+  diagramRenderer = undefined,
+  barRenderer = false,
+  selectedPeriod = -1, // -1 = unknown, 0 = hour, 1 = day, 2 = week, 3 = month, 4 = year
+  arPeriod = ["hour", "24h", "week", "month", "year"],
+  arTicks = ["10 minutes", "60 minutes", "1440 minutes", "2880 minutes", "52560 minutes"],   // 0 = hour, 1 = day, 2 = week, 3 = month, 4 = year
+  numberOfDataSets = 1,
+  diagramElem = jQuery('#currentDiagram'),
+  btnPeriodDay = jQuery('#selectPeriodLastDay'),
+  btnPeriodWeek = jQuery('#selectPeriodLastWeek'),
+  btnPeriodMonth = jQuery('#selectPeriodLastMonth'),
+  btnPeriodYear = jQuery('#selectPeriodLastYear'),
+  btnComparisonPeriod = jQuery('#showComparisonPeriod'),
+  selBoxComparisonDevice = jQuery('#selectDeviceForComparisonPeriod'),
+  lblNoDataAvailable = jQuery("#hintNoDataAvailable"),
+  consolidationElem = jQuery('#selectConsolidationFunction'),
+  debug = jQuery.url().param('debug'),
+  createDummy = jQuery.url().param('createDummy'),
+  curDate = new Date(),
+  comparisonSelectedDevice = 0,
+  numberOfDevices = 1,
+  consolidationMode = 0;
 
-	function initSite() {
-		jQuery('#contentRight').css('visibility','hidden');
-		setPath("<span onclick='WebUI.enter(ControlPage);'>"+translateKey('menuControlPage')+"</span> &gt; "+ translateKey('submenuDiagramListPage'));
-		var s = "";
-		s += "<table cellspacing='8'>";
-		s += "<tr>";
-		s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>"+ translateKey('footerBtnPageBack') +"</div></td>";	  
-		s += "</tr>";
-		s += "</table>";
-		setFooter(s);
-		translateButtons("diagramPeriodLastHour, diagramPeriodLastDay, diagramPeriodLastWeek, diagramPeriodLastMonth, diagramPeriodLastYear, btnDiagramRepaint, btnDiagramExport, btnDiagramResetDiagramZoom, btnDiagramShowComparisonPeriod");
-		translatePage("#${TableId}");
-		jQuery("#${TableId}").show();
-	};
+  function initSite() {
+    jQuery('#contentRight').css('visibility','hidden');
+    setPath("<span onclick='WebUI.enter(ControlPage);'>"+translateKey('menuControlPage')+"</span> &gt; "+ translateKey('submenuDiagramListPage'));
+    var s = "";
+    s += "<table cellspacing='8'>";
+    s += "<tr>";
+    s += "<td align='center' valign='middle'><div class='FooterButton' onclick='WebUI.goBack();'>"+ translateKey('footerBtnPageBack') +"</div></td>";    
+    s += "</tr>";
+    s += "</table>";
+    setFooter(s);
+    translateButtons("diagramPeriodLastHour, diagramPeriodLastDay, diagramPeriodLastWeek, diagramPeriodLastMonth, diagramPeriodLastYear, btnDiagramRepaint, btnDiagramExport, btnDiagramResetDiagramZoom, btnDiagramShowComparisonPeriod");
+    translatePage("#${TableId}");
+    jQuery("#${TableId}").show();
+  }
 
   function storeOrigXAxisTimePeriod(min, max) {
     origXAxis.min = min;
     origXAxis.max = max;
-  };
+  }
 
   function getComparisonOptions() {
     return {
@@ -109,7 +109,7 @@
   function getBarGraphXAxis(period) {
     // period > 0 = hour, 1 = today, 2 = this week, 3 = this month, 4 = this year
     var d = curDate;
-    var result = {}
+    var result = {};
     switch (arPeriod[period]) {
        case 0:
         // Todo default
@@ -163,7 +163,7 @@
       translateKey("diagramPeriodLastYear")
     ];
     var result;
-    if (mode == 3) {
+    if (mode == 3 || mode == 4) {
       // User defined
       result = jQuery.merge([], fullPeriod);
     } else {
@@ -180,7 +180,7 @@
    return consolidationMode;
   };
 
-	function setRenderer(id) {
+  function setRenderer(id) {
     if (id == 3) {
       diagramRenderer = jQuery.jqplot.BarRenderer;
       barRenderer = true;
@@ -188,7 +188,7 @@
       diagramRenderer = undefined;
       barRenderer = false;
     }
-	};
+  };
 
   function getBarWidth() {
     return null; // The with of the bars will be calculated automatically
@@ -478,7 +478,7 @@
       // Check if the dataset contains the data of the previous period - e. g. yesterday or last week
       if (isValidDataSet(timeStamp, true)) {
        value = valueSet[1];
-       tmp[getIndexOfDataSet(timeStamp)] = value
+       tmp[getIndexOfDataSet(timeStamp)] = value;
        result[getIndexOfDataSet(timeStamp)] = value;
       }
     });
@@ -558,11 +558,11 @@
     jQuery(".jPeriodButton").css("color","#000000");
   }
 
-	function setSelectedBtn(mode) {
+  function setSelectedBtn(mode) {
     var arMode = ["Hour","Day","Week","Month","Year"];
-	  resetAllBtn();
-	  jQuery("#selectPeriodLast"+arMode[mode]).css("color","green");
-	};
+    resetAllBtn();
+    jQuery("#selectPeriodLast"+arMode[mode]).css("color","green");
+  };
 
   function setTimeSelectors() {
     jElemsDate = jQuery("#selectPeriodStartDate, #selectPeriodEndDate");
@@ -581,21 +581,21 @@
     }
   };
 
-	function initGui() {
-		jQuery(window).unbind('resize');
-		jQuery(window).resize(function() {
-			clearTimeout(refreshDiagramOnRefreshTimeout);
-			refreshDiagramOnRefreshTimeout = setTimeout(doneResizing, 250);
-		});
+  function initGui() {
+    jQuery(window).unbind('resize');
+    jQuery(window).resize(function() {
+      clearTimeout(refreshDiagramOnRefreshTimeout);
+      refreshDiagramOnRefreshTimeout = setTimeout(doneResizing, 250);
+    });
 
-		setTimeSelectors();
+    setTimeSelectors();
 
-		jQuery("#selectConsolidationFunction").change(function() {
-		  consolidationMode = this.value;
+    jQuery("#selectConsolidationFunction").change(function() {
+      consolidationMode = this.value;
       setTimeSelectors();
       setRenderer(this.value);
       refreshDiagram();
-		});
+    });
 
     jQuery("#selectPeriodLastHour").click(function() {
       defaultPeriod = 0;
@@ -608,61 +608,61 @@
       showCustomModeHelp();
     });
 
-		btnPeriodDay.click(function() {
+    btnPeriodDay.click(function() {
       defaultPeriod = 1;
       timePeriod = arPeriod[defaultPeriod];
       showPeriod(defaultPeriod);
-			refreshDiagram();
-		});
-			
-		btnPeriodWeek.click(function() {
+      refreshDiagram();
+    });
+      
+    btnPeriodWeek.click(function() {
       defaultPeriod = 2;
       timePeriod = arPeriod[defaultPeriod];
       showPeriod(defaultPeriod);
-			refreshDiagram();
-		});
-		
-		btnPeriodMonth.click(function() {
+      refreshDiagram();
+    });
+    
+    btnPeriodMonth.click(function() {
       defaultPeriod = 3;
       timePeriod = arPeriod[defaultPeriod];
       showPeriod(defaultPeriod);
-			refreshDiagram();
-		});
-		
-		btnPeriodYear.click(function() {
+      refreshDiagram();
+    });
+    
+    btnPeriodYear.click(function() {
       defaultPeriod = 4;
       timePeriod = arPeriod[defaultPeriod];
       showPeriod(defaultPeriod);
-			refreshDiagram();
-		});
-		
-		jQuery("#selectPeriodDo").click(function() {
-			refreshDiagram();
-		});
-		
-		jQuery("#exportPeriodDo").click(function() {
-			exportDiagram();
-		});
-		
-		jQuery("#resetDiagramZoom").click(function() {
-			resetDiagramZoom();
-		});
+      refreshDiagram();
+    });
+    
+    jQuery("#selectPeriodDo").click(function() {
+      refreshDiagram();
+    });
+    
+    jQuery("#exportPeriodDo").click(function() {
+      exportDiagram();
+    });
+    
+    jQuery("#resetDiagramZoom").click(function() {
+      resetDiagramZoom();
+    });
 
-		btnComparisonPeriod.click(function() {
+    btnComparisonPeriod.click(function() {
 
-		  if (!noDiagramData) {
-		    comparisonSelectedDevice = 0;
-		    showComparisonPeriod = (showComparisonPeriod == true) ? false : true;
+      if (!noDiagramData) {
+        comparisonSelectedDevice = 0;
+        showComparisonPeriod = (showComparisonPeriod == true) ? false : true;
         (showComparisonPeriod == true && (numberOfDevices > 1)) ? selBoxComparisonDevice.show() : selBoxComparisonDevice.hide();
-		    ShowDiagram(lastDiagramSettingsAsJson);
-		  }
-		});
+        ShowDiagram(lastDiagramSettingsAsJson);
+      }
+    });
 
-		selBoxComparisonDevice.change(function() {
-		   comparisonSelectedDevice = this.value;
-		   showComparisonPeriod = true;
-		   ShowDiagram(lastDiagramSettingsAsJson);
-		});
+    selBoxComparisonDevice.change(function() {
+       comparisonSelectedDevice = this.value;
+       showComparisonPeriod = true;
+       ShowDiagram(lastDiagramSettingsAsJson);
+    });
 
     // Only for testing
     jQuery("#toggleRenderer").click(function() {
@@ -673,205 +673,205 @@
       }
       refreshDiagram();
     });
-		var legendTooltipText = jQuery('#legendTooltipText').text();
-		jQuery('#legendTooltip').attr('title', legendTooltipText);
-		initPicker();
-	};
-	
-	function doneResizing(){
-		if (lastDiagramSettingsAsJson != undefined) {
-			 ShowDiagram(lastDiagramSettingsAsJson);
-		}
-	}
-	
-	function initPicker() {
-		var langDatePicker = {
-			monthNames: [
-				translateKey('timeModuleSelectSerialPatternJan'),
-				translateKey('timeModuleSelectSerialPatternFeb'),
-				translateKey('timeModuleSelectSerialPatternMar'),
-				translateKey('timeModuleSelectSerialPatternApr'),
-				translateKey('timeModuleSelectSerialPatternMay'),
-				translateKey('timeModuleSelectSerialPatternJun'),
-				translateKey('timeModuleSelectSerialPatternJul'),
-				translateKey('timeModuleSelectSerialPatternAug'),
-				translateKey('timeModuleSelectSerialPatternSep'),
-				translateKey('timeModuleSelectSerialPatternOct'),
-				translateKey('timeModuleSelectSerialPatternNov'),
-				translateKey('timeModuleSelectSerialPatternDec')
-				],
-			dayNames: [
-				translateKey('timeModuleLblSelSerialPatternSunday'),
-				translateKey('timeModuleLblSelSerialPatternMonday'),,
-				translateKey('timeModuleLblSelSerialPatternTuesday'),
-				translateKey('timeModuleLblSelSerialPatternWednesday'),
-				translateKey('timeModuleLblSelSerialPatternThursday'),
-				translateKey('timeModuleLblSelSerialPatternFriday'),
-				translateKey('timeModuleLblSelSerialPatternSaturday')
-				],
-			dayNamesMin: [
-				translateKey('Sun'),
-				translateKey('Mon'),
-				translateKey('Tue'),
-				translateKey('Wed'),
-				translateKey('Thu'),
-				translateKey('Fre'),
-				translateKey('Sat')
-				],
-			firstDay: 1,
-			isRTL: false
-		};
-		jQuery.datepicker.setDefaults(langDatePicker);
-		
-		jQuery(".datepicker").datepicker({
-			dateFormat: 'dd.mm.yy',
-			showButtonPanel: true,
-			closeText: translateKey("btnOk")
-		});
-		
-		jQuery(".timepicker").timepicker({
-			showAnim: 'blind',
-			hourText: translateKey('Hou'),
-			minuteText: translateKey('Min'),
-			amPmText: ['AM', 'PM'],
-			showCloseButton: true,
-			closeButtonText: translateKey("btnOk")
-		});
-	}
-	
-	showPeriod = function(periodChoice) {
-		var offset1 = (barRenderer) ? 2 : 1;
-		var offset2 = (barRenderer) ? 14 : 7;
-		selectedPeriod = parseInt(periodChoice);
+    var legendTooltipText = jQuery('#legendTooltipText').text();
+    jQuery('#legendTooltip').attr('title', legendTooltipText);
+    initPicker();
+  };
+  
+  function doneResizing(){
+    if (lastDiagramSettingsAsJson != undefined) {
+       ShowDiagram(lastDiagramSettingsAsJson);
+    }
+  }
+  
+  function initPicker() {
+    var langDatePicker = {
+      monthNames: [
+        translateKey('timeModuleSelectSerialPatternJan'),
+        translateKey('timeModuleSelectSerialPatternFeb'),
+        translateKey('timeModuleSelectSerialPatternMar'),
+        translateKey('timeModuleSelectSerialPatternApr'),
+        translateKey('timeModuleSelectSerialPatternMay'),
+        translateKey('timeModuleSelectSerialPatternJun'),
+        translateKey('timeModuleSelectSerialPatternJul'),
+        translateKey('timeModuleSelectSerialPatternAug'),
+        translateKey('timeModuleSelectSerialPatternSep'),
+        translateKey('timeModuleSelectSerialPatternOct'),
+        translateKey('timeModuleSelectSerialPatternNov'),
+        translateKey('timeModuleSelectSerialPatternDec')
+        ],
+      dayNames: [
+        translateKey('timeModuleLblSelSerialPatternSunday'),
+        translateKey('timeModuleLblSelSerialPatternMonday'),,
+        translateKey('timeModuleLblSelSerialPatternTuesday'),
+        translateKey('timeModuleLblSelSerialPatternWednesday'),
+        translateKey('timeModuleLblSelSerialPatternThursday'),
+        translateKey('timeModuleLblSelSerialPatternFriday'),
+        translateKey('timeModuleLblSelSerialPatternSaturday')
+        ],
+      dayNamesMin: [
+        translateKey('Sun'),
+        translateKey('Mon'),
+        translateKey('Tue'),
+        translateKey('Wed'),
+        translateKey('Thu'),
+        translateKey('Fre'),
+        translateKey('Sat')
+        ],
+      firstDay: 1,
+      isRTL: false
+    };
+    jQuery.datepicker.setDefaults(langDatePicker);
+    
+    jQuery(".datepicker").datepicker({
+      dateFormat: 'dd.mm.yy',
+      showButtonPanel: true,
+      closeText: translateKey("btnOk")
+    });
+    
+    jQuery(".timepicker").timepicker({
+      showAnim: 'blind',
+      hourText: translateKey('Hou'),
+      minuteText: translateKey('Min'),
+      amPmText: ['AM', 'PM'],
+      showCloseButton: true,
+      closeButtonText: translateKey("btnOk")
+    });
+  }
+  
+  showPeriod = function(periodChoice) {
+    var offset1 = (barRenderer) ? 2 : 1;
+    var offset2 = (barRenderer) ? 14 : 7;
+    selectedPeriod = parseInt(periodChoice);
 
-		var start;
-		switch (selectedPeriod) {
-		// last hour
-		//case 0:
-			//start = new Date(new Date().setHours(new Date().getHours() - offset1));
-			//break;
-		// last day
-		case 0:
-		case 1:
-			//start = new Date(new Date().setDate(new Date().getDate() - 1));
-			start = new Date(new Date().setDate(new Date().getDate() - offset1));
-			break;
-		// last week
-		case 2:
-			//start = new Date(new Date().setDate(new Date().getDate() - 7));
-			start = new Date(new Date().setDate(new Date().getDate() - offset2));
-			break;
-			
-		// last month
-		case 3:
-			//start = new Date(new Date().setMonth(new Date().getMonth() - 1));
-			start = new Date(new Date().setMonth(new Date().getMonth() - offset1));
-			break;
-			
-		// last year
-		case 4:
-			//start = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
-			start = new Date(new Date().setFullYear(new Date().getFullYear() - offset1));
-			break;
-		}
+    var start;
+    switch (selectedPeriod) {
+    // last hour
+    //case 0:
+      //start = new Date(new Date().setHours(new Date().getHours() - offset1));
+      //break;
+    // last day
+    case 0:
+    case 1:
+      //start = new Date(new Date().setDate(new Date().getDate() - 1));
+      start = new Date(new Date().setDate(new Date().getDate() - offset1));
+      break;
+    // last week
+    case 2:
+      //start = new Date(new Date().setDate(new Date().getDate() - 7));
+      start = new Date(new Date().setDate(new Date().getDate() - offset2));
+      break;
+      
+    // last month
+    case 3:
+      //start = new Date(new Date().setMonth(new Date().getMonth() - 1));
+      start = new Date(new Date().setMonth(new Date().getMonth() - offset1));
+      break;
+      
+    // last year
+    case 4:
+      //start = new Date(new Date().setFullYear(new Date().getFullYear() - 1));
+      start = new Date(new Date().setFullYear(new Date().getFullYear() - offset1));
+      break;
+    }
 
-		if (barRenderer) {
-		  jQuery("#tdCustomModeHelp").hide();
-		  jQuery(".j_barGraphMode").show();
-		  setSelectedBtn(selectedPeriod);
-		} else {
-		  jQuery("#tdCustomModeHelp").show();
-		  jQuery(".j_barGraphMode").hide();
-		  resetAllBtn();
-		}
-		var end = curDate;
-		showPeriodInGui(start, end);
-	};
-	
-	showPeriodInGui = function(start, end) {
-		jQuery('#selectPeriodStartDate').val(getFormattedDate(start));
-		jQuery('#selectPeriodEndDate').val(getFormattedDate(end));
-		jQuery('#selectPeriodStartTime').val(getFormattedTime(start));
-		jQuery('#selectPeriodEndTime').val(getFormattedTime(end));
-	};
-	
-	function getFormattedDate(date) {
-		return manageLeadingZero(date.getDate(), 2) + '.' + manageLeadingZero((date.getMonth() + 1), 2) + '.' + manageLeadingZero(date.getFullYear(), 4);
-	};
-	
-	function getFormattedTime(date) {
-		return manageLeadingZero(date.getHours(), 2) + ':' + manageLeadingZero(date.getMinutes(), 2);
-	};
-	
-	function manageLeadingZero(number, size) {	
-		var result = number + "";
-		while (result.length < size) {
-			result = "0" + result;
-		}
-		
-		return result;
-	};
-	
-	triggerDiagram = function(diagramID) {
-		if (!${initialized?string('true', 'false')}) {
-			return;
-		}
-		showComparisonPeriod = false;
-		selBoxComparisonDevice.hide();
-		highlightSelectedDiagram(diagramID);
-	
-		selectedDiagramId = diagramID;
-		triggerDiagramRefresh(selectedDiagramId, false);
-	};
+    if (barRenderer) {
+      jQuery("#tdCustomModeHelp").hide();
+      jQuery(".j_barGraphMode").show();
+    } else {
+      jQuery("#tdCustomModeHelp").show();
+      jQuery(".j_barGraphMode").hide();
+      resetAllBtn();
+    }
+    setSelectedBtn(selectedPeriod);
+    var end = curDate;
+    showPeriodInGui(start, end);
+  };
+  
+  showPeriodInGui = function(start, end) {
+    jQuery('#selectPeriodStartDate').val(getFormattedDate(start));
+    jQuery('#selectPeriodEndDate').val(getFormattedDate(end));
+    jQuery('#selectPeriodStartTime').val(getFormattedTime(start));
+    jQuery('#selectPeriodEndTime').val(getFormattedTime(end));
+  };
+  
+  function getFormattedDate(date) {
+    return manageLeadingZero(date.getDate(), 2) + '.' + manageLeadingZero((date.getMonth() + 1), 2) + '.' + manageLeadingZero(date.getFullYear(), 4);
+  };
+  
+  function getFormattedTime(date) {
+    return manageLeadingZero(date.getHours(), 2) + ':' + manageLeadingZero(date.getMinutes(), 2);
+  };
+  
+  function manageLeadingZero(number, size) {  
+    var result = number + "";
+    while (result.length < size) {
+      result = "0" + result;
+    }
+    
+    return result;
+  };
+  
+  triggerDiagram = function(diagramID) {
+    if (!${initialized?string('true', 'false')}) {
+      return;
+    }
+    showComparisonPeriod = false;
+    selBoxComparisonDevice.hide();
+    highlightSelectedDiagram(diagramID);
+  
+    selectedDiagramId = diagramID;
+    triggerDiagramRefresh(selectedDiagramId, false);
+  };
 
-	triggerDiagramRefresh = function(diagramID, useCustomPeriod) {
-		if (!${initialized?string('true', 'false')}) {
-			return;
-		}
-		var url = '/pages/jpages/diagram/control/show?sid=' + SessionId + '&diagramid=' + diagramID + '&consolidationFunction=' + getConsolitation() + '&timePeriod=' + arPeriod[defaultPeriod];
+  triggerDiagramRefresh = function(diagramID, useCustomPeriod) {
+    if (!${initialized?string('true', 'false')}) {
+      return;
+    }
+    var url = '/pages/jpages/diagram/control/show?sid=' + SessionId + '&diagramid=' + diagramID + '&consolidationFunction=' + getConsolitation() + '&timePeriod=' + arPeriod[defaultPeriod];
 
-		if (useCustomPeriod) {
-			var customPeriodStart = jQuery('#selectPeriodStartDate').val() + '_' + jQuery('#selectPeriodStartTime').val();
-			var customPeriodEnd = jQuery('#selectPeriodEndDate').val() + '_' + jQuery('#selectPeriodEndTime').val();
-			url += '&start=' + customPeriodStart + '&end=' + customPeriodEnd;
-		} else {
-			appendDiagramSettings(diagramID);
-		}
+    if (useCustomPeriod) {
+      var customPeriodStart = jQuery('#selectPeriodStartDate').val() + '_' + jQuery('#selectPeriodStartTime').val();
+      var customPeriodEnd = jQuery('#selectPeriodEndDate').val() + '_' + jQuery('#selectPeriodEndTime').val();
+      url += '&start=' + customPeriodStart + '&end=' + customPeriodEnd;
+    } else {
+      appendDiagramSettings(diagramID);
+    }
 
-		if (!barRenderer) {
-		  showComparisonPeriod = false;
-		}
-		blockUI();
-		var opt =
-		{
-			onComplete: function(t) {
-				var response = JSON.parse(t.responseText);
-				if(!response.isSuccessful)
-				{
-					if(response.errorCode == "42")
-					{
-						jQuery("#content").html(response.content);
-					} else if(response.errorCode == "not_initialized")
-					{
+    if (!barRenderer) {
+      showComparisonPeriod = false;
+    }
+    blockUI();
+    var opt =
+    {
+      onComplete: function(t) {
+        var response = JSON.parse(t.responseText);
+        if(!response.isSuccessful)
+        {
+          if(response.errorCode == "42")
+          {
+            jQuery("#content").html(response.content);
+          } else if(response.errorCode == "not_initialized")
+          {
             var s = "<table id=\"dataloggingError\" class=\"tTable\" cellpadding=\"3\" cellspacing=\"3\"><tr><td class=\"CLASS21906\">";
             s += translateKey('diagramDataloggingNotInitialised');
             s += "</td></tr></table>";
             jQuery('#contentRight').html(s);
             jQuery('#contentRight').css('visibility','visible');
-					} else{
-						alert(response.content);
-					}
-				} else {
-				  lblNoDataAvailable.hide();
-				  noDiagramData = false;
-					ShowDiagram([response.content]);
-				}
-				
-				jQuery.unblockUI();
-			},
-			onException: function(t) {
-			  conInfo("Exception triggerDiagramRefresh!");
-			  lblNoDataAvailable.show();
+          } else{
+            alert(response.content);
+          }
+        } else {
+          lblNoDataAvailable.hide();
+          noDiagramData = false;
+          ShowDiagram([response.content]);
+        }
+        
+        jQuery.unblockUI();
+      },
+      onException: function(t) {
+        conInfo("Exception triggerDiagramRefresh!");
+        lblNoDataAvailable.show();
         //Draw an empty chart
         diagramElem.empty();
         var options = {
@@ -888,34 +888,34 @@
               ticks: getBarGraphTicks(),
             }
           }
-        }
+        };
         noDiagramData = true;
         var lastPlotter = jQuery.jqplot('currentDiagram', [[null]], options );
         jQuery.unblockUI();
-			}
-		}
-		setTimeout(function() {jQuery.unblockUI();}, 10000); // Fallback after 10000ms.....
-		new Ajax.Request(url, opt);
-	};
+      }
+    };
+    setTimeout(function() {jQuery.unblockUI();}, 10000); // Fallback after 10000ms.....
+    new Ajax.Request(url, opt);
+  };
 
-	refreshDiagram = function() {
-		triggerDiagramRefresh(selectedDiagramId, true);
-	};
+  refreshDiagram = function() {
+    triggerDiagramRefresh(selectedDiagramId, true);
+  };
 
-	exportDiagram = function() {
-		var url = '/pages/jpages/diagram/control/export?sid=' + SessionId + '&language=' + getLang() + '&diagramid=' + selectedDiagramId + '&consolidationFunction=' + getConsolitation();
-		var customPeriodStart = jQuery('#selectPeriodStartDate').val() + '_' + jQuery('#selectPeriodStartTime').val();
-		var customPeriodEnd = jQuery('#selectPeriodEndDate').val() + '_' + jQuery('#selectPeriodEndTime').val();		
-		url += '&start=' + customPeriodStart + '&end=' + customPeriodEnd;
-        window.open(url,'_blank')
-	};
+  exportDiagram = function() {
+    var url = '/pages/jpages/diagram/control/export?sid=' + SessionId + '&language=' + getLang() + '&diagramid=' + selectedDiagramId + '&consolidationFunction=' + getConsolitation();
+    var customPeriodStart = jQuery('#selectPeriodStartDate').val() + '_' + jQuery('#selectPeriodStartTime').val();
+    var customPeriodEnd = jQuery('#selectPeriodEndDate').val() + '_' + jQuery('#selectPeriodEndTime').val();    
+    url += '&start=' + customPeriodStart + '&end=' + customPeriodEnd;
+        window.open(url,'_blank');
+  };
 
 
-	function resetDiagramZoom() {
+  function resetDiagramZoom() {
     if (window.lastPlotter != undefined) {
       window.lastPlotter.resetZoom();
     }
-	};
+  };
 
   function hideCustomModeElements() {
     jQuery("[name='customMode']").hide();
@@ -925,16 +925,16 @@
     jQuery("[name='customMode']").show();
   };
 
-	function ShowDiagram(diagramSettingsAsJson) {
-		setTimeSelectors();
-		// only show diagram and its options if data is available
-		if (diagramSettingsAsJson) {
-			jQuery('#contentRight').css('visibility','visible');
-		} else {
-			jQuery('#contentRight').css('visibility','hidden');
-		}
-		
-		var diagramSettings = JSON.parse(diagramSettingsAsJson);
+  function ShowDiagram(diagramSettingsAsJson) {
+    setTimeSelectors();
+    // only show diagram and its options if data is available
+    if (diagramSettingsAsJson) {
+      jQuery('#contentRight').css('visibility','visible');
+    } else {
+      jQuery('#contentRight').css('visibility','hidden');
+    }
+
+    var diagramSettings = JSON.parse(diagramSettingsAsJson);
     storeOrigXAxisTimePeriod(diagramSettings.options.axes.xaxis.min, diagramSettings.options.axes.xaxis.max);
 
     var numberOfNecessaryDatapoints = (barRenderer == false) ? 2 : 1;
@@ -947,118 +947,149 @@
       }
     });
 
-		// release memory and empty the chart if necessary
-		if (window.lastPlotter != undefined) {
-		  window.lastPlotter.destroy();
-		}
+    // release memory and empty the chart if necessary
+    if (window.lastPlotter != undefined) {
+      window.lastPlotter.destroy();
+    }
 
-		// clear diagramm and initialize renderers
-		diagramElem.empty();
-		diagramSettings.options.axes.xaxis.renderer = jQuery.jqplot.DateAxisRenderer;
-		diagramSettings.options.axesDefaults = { tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer};
-		diagramSettings.options.legend.renderer = jQuery.jqplot.EnhancedLegendRenderer;
-		
-		// do not allow zoom if no series has a value
-		if (!hasOneSeriesAtLeastOneValue(diagramSettings.diagram)) {
-			diagramSettings.options.cursor.zoom = false;
-		}
-		
-		// disable reset diagram zoom button if zoom is not enabled
-		if(diagramSettings.options.cursor.zoom == true) {
-			jQuery("#resetDiagramZoom").show(); 
-		} else {
-			jQuery("#resetDiagramZoom").hide();
-		}
-		
-		// set device name as series value
-		for (var i = 0; i < diagramSettings.options.series.length; i++)
-		{
-			var oldLabel = diagramSettings.options.series[i].label;
-			
-			var label = GetChannelName(oldLabel.substring(0,oldLabel.indexOf('_'))) + " ";
-			label += translateKey('diagramValueType' + oldLabel.split(" ")[1]);
-			diagramSettings.options.series[i].label = label;
-		}		
-		
-		// show chart even if no data is available for selected period (jqplot needs at least one value for plotting)
-		if (diagramSettings.diagram.length == 0) {
-			diagramSettings.diagram = [[null]];
-		} else {
-			for (var i = 0; i < diagramSettings.diagram.length; i++)
-			{
-				if(diagramSettings.diagram[i].length == 0) {
-					diagramSettings.diagram[i] = [null];
-				}
-			}
-		}
-		
-		// adjust diagramm width and height
-		var isLegendOutsideOfDiagram = diagramSettings.options.legend.placement == "outside";
-		adjustDiagramSize(diagramSettings.diagram.length, isLegendOutsideOfDiagram);
-		
-		// show single data point instead of empty chart if only one value for a series is available
-		for (var i = 0; i < diagramSettings.diagram.length; i++) {
-			diagramSettings.options.series[i].showMarker = diagramSettings.diagram.indexOf(i).length == 1;
-		}
+    // clear diagramm and initialize renderers
+    diagramElem.empty();
+    diagramSettings.options.axes.xaxis.renderer = jQuery.jqplot.DateAxisRenderer;
+    diagramSettings.options.axesDefaults = { tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer};
+    diagramSettings.options.legend.renderer = jQuery.jqplot.EnhancedLegendRenderer;
+
+    /* AG Displays a tooltip at the datapoint of a line diagram
+    diagramSettings.options.highlighter = {
+      show: !barRenderer,
+      sizeAdjust: 3,
+      tooltipLocation: "sw",
+      tooltipAxes: "piered",
+      formatString: "<table><tr><td>%s</td></tr><tr><td style='text-align:center'>%.1f</td></tr></table>",
+      fadeTooltip: true,
+      tooltipFadeSpeed: "fast",
+      useAxesFormatters: true
+    };
+
+    */
+    // Hides the small tooltip in the right bottom edge of line graphs
+    //diagramSettings.options.cursor.showTooltip = barRenderer;
+
+
+
+    // do not allow zoom if no series has a value
+    if (!hasOneSeriesAtLeastOneValue(diagramSettings.diagram)) {
+      diagramSettings.options.cursor.zoom = false;
+    }
+    
+    // disable reset diagram zoom button if zoom is not enabled
+    if(diagramSettings.options.cursor.zoom == true) {
+      jQuery("#resetDiagramZoom").show(); 
+    } else {
+      jQuery("#resetDiagramZoom").hide();
+    }
+    
+    // set device name as series value
+    for (var i = 0; i < diagramSettings.options.series.length; i++)
+    {
+      var oldLabel = diagramSettings.options.series[i].label;
+      
+      var label = GetChannelName(oldLabel.substring(0,oldLabel.indexOf('_'))) + " ";
+      label += translateKey('diagramValueType' + oldLabel.split(" ")[1]);
+      diagramSettings.options.series[i].label = label;
+    }    
+    
+    // show chart even if no data is available for selected period (jqplot needs at least one value for plotting)
+    if (diagramSettings.diagram.length == 0) {
+      diagramSettings.diagram = [[null]];
+    } else {
+      for (var i = 0; i < diagramSettings.diagram.length; i++)
+      {
+        if(diagramSettings.diagram[i].length == 0) {
+          diagramSettings.diagram[i] = [null];
+        }
+      }
+    }
+    
+    // adjust diagramm width and height
+    var isLegendOutsideOfDiagram = diagramSettings.options.legend.placement == "outside";
+    adjustDiagramSize(diagramSettings.diagram.length, isLegendOutsideOfDiagram);
+    
+    // show single data point instead of empty chart if only one value for a series is available
+    for (var i = 0; i < diagramSettings.diagram.length; i++) {
+      diagramSettings.options.series[i].showMarker = diagramSettings.diagram.indexOf(i).length == 1;
+    }
 
     // Only for debugging! Don´t forget to uncomment this. Otherwise you will experience massive problems with some MS browsers :-(
     // console.dir(diagramSettings);
 
     setButtonText(diagramSettings.type);
-		// plot the diagram
-		diagramSettings.options.seriesDefaults.renderer = diagramRenderer;
-		if (barRenderer) {
-    selBoxComparisonDevice.html("");
+    // plot the diagram
+    diagramSettings.options.seriesDefaults.renderer = diagramRenderer;
 
-    if (createDummy) {
-      // ************ DUMMY DEVICE ************
-      // Creates a dummy device with nearly identical data
-      var dummyDiagramData = [];
-      jQuery.extend(true, dummyDiagramData, diagramSettings.diagram);
-      jQuery.each(dummyDiagramData[0], function(index,value) {
-        if (value[1]) {
-          // Dummy data = original * 0.95 so it is somewhat different
-          dummyDiagramData[0][index][1] = value[1] * 0.95 ;
-        }
+    /* AG
+      // The default jqPlot marker renderer, rendering the points on the line.
+      diagramSettings.options.seriesDefaults.markerRenderer = jQuery.jqplot.MarkerRenderer;
+      diagramSettings.options.seriesDefaults.markerOptions = {
+        show: true,
+        size: 5,
+        style: 'filledCircle', //circle, diamond, square - filledCirce, filledDiamond, filledSquare
+        shadow:false,
+        lineWidth: 1
+      };
+    */
+    if (barRenderer) {
+      selBoxComparisonDevice.html("");
+      diagramSettings.options.cursor.barRendererToday = (timePeriod == "unknown" || timePeriod == "24h") ? true : false;
+
+      if (createDummy) {
+        // ************ DUMMY DEVICE ************
+        // Creates a dummy device with nearly identical data
+        var dummyDiagramData = [];
+        jQuery.extend(true, dummyDiagramData, diagramSettings.diagram);
+        jQuery.each(dummyDiagramData[0], function(index,value) {
+          if (value[1]) {
+            // Dummy data = original * 0.95 so it is somewhat different
+            dummyDiagramData[0][index][1] = value[1] * 0.95 ;
+          }
+        });
+        diagramSettings.diagram.push(dummyDiagramData[0]);
+        jQuery.extend(true, dummyDiagramData, diagramSettings.options.series);
+        diagramSettings.options.series.push(dummyDiagramData[0]);
+        diagramSettings.options.series[1].label = "DummY Nr. 1";
+        diagramSettings.options.seriesColors.push("#FFFF00");
+
+        // ************ END DUMMY DEVICE ************
+
+        /*
+        // ************ DUMMY DEVICE ************
+        // Creates a dummy device with nearly identical data
+        var dummyDiagramData = [];
+        jQuery.extend(true, dummyDiagramData, diagramSettings.diagram);
+        jQuery.each(dummyDiagramData[0], function(index,value) {
+          if (value[1]) {
+            // Dummy data = original * 1.25 so it is somewhat different
+            dummyDiagramData[0][index][1] = value[1] * 1.25 ;
+          }
+        });
+        diagramSettings.diagram.push(dummyDiagramData[0]);
+        jQuery.extend(true, dummyDiagramData, diagramSettings.options.series);
+        diagramSettings.options.series.push(dummyDiagramData[0]);
+        diagramSettings.options.series[2].label = "DummY Nr. 2";
+        diagramSettings.options.seriesColors.push("#666699");
+        // ************ END DUMMY DEVICE ************
+        */
+      }
+
+      numberOfDevices = diagramSettings.diagram.length;
+
+      jQuery.each(diagramSettings.options.series, function (index, item) {
+          selBoxComparisonDevice.append(jQuery('<option>', {
+              value: index,
+              text : item.label
+          }));
       });
-      diagramSettings.diagram.push(dummyDiagramData[0]);
-      jQuery.extend(true, dummyDiagramData, diagramSettings.options.series);
-      diagramSettings.options.series.push(dummyDiagramData[0]);
-      diagramSettings.options.series[1].label = "DummY Nr. 1";
-      diagramSettings.options.seriesColors.push("#FFFF00");
 
-      // ************ END DUMMY DEVICE ************
-
-      /*
-      // ************ DUMMY DEVICE ************
-      // Creates a dummy device with nearly identical data
-      var dummyDiagramData = [];
-      jQuery.extend(true, dummyDiagramData, diagramSettings.diagram);
-      jQuery.each(dummyDiagramData[0], function(index,value) {
-        if (value[1]) {
-          // Dummy data = original * 1.25 so it is somewhat different
-          dummyDiagramData[0][index][1] = value[1] * 1.25 ;
-        }
-      });
-      diagramSettings.diagram.push(dummyDiagramData[0]);
-      jQuery.extend(true, dummyDiagramData, diagramSettings.options.series);
-      diagramSettings.options.series.push(dummyDiagramData[0]);
-      diagramSettings.options.series[2].label = "DummY Nr. 2";
-      diagramSettings.options.seriesColors.push("#666699");
-      // ************ END DUMMY DEVICE ************
-      */
-    }
-
-    numberOfDevices = diagramSettings.diagram.length;
-
-  	jQuery.each(diagramSettings.options.series, function (index, item) {
-        selBoxComparisonDevice.append(jQuery('<option>', {
-            value: index,
-            text : item.label
-        }));
-    });
-
-    selBoxComparisonDevice.val(getSelectedDeviceForComparison());
+      selBoxComparisonDevice.val(getSelectedDeviceForComparison());
 
       var origDiagramData = [];
       var comparisonOptions = [];
@@ -1066,8 +1097,8 @@
 
       jQuery.extend(true, origDiagramData, diagramSettings.diagram);
 
-		  numberOfDataSets = diagramSettings.diagram.size();
- 		  hideCustomModeElements();
+      numberOfDataSets = diagramSettings.diagram.size();
+       hideCustomModeElements();
       diagramSettings.options.seriesDefaults.rendererOptions = getBarGraphRenderOptions();
       diagramSettings.options.axes.xaxis.tickInterval = getTickInterval();
       diagramSettings.options.axes.yaxis.tickOptions = {formatString: "%.2f"}; // %d is another option (without zoom)
@@ -1140,19 +1171,20 @@
         }
       }
     } else {
+      diagramSettings.options.axes.yaxis.tickOptions = {formatString: "%.1f"};
       showCustomModeElements();
     }
     // ATTENTION only for debugging - IE might crash when not in debugging mode (console available)
     if ((debug == "true") && (typeof console == "object")) {
       console.dir(diagramSettings);
-		}
+    }
 
-		if (showComparisonPeriod)  {
-		  lastPlotter = jQuery.jqplot('currentDiagram', comparisonDiagram, diagramSettings.options );
+    if (showComparisonPeriod)  {
+      lastPlotter = jQuery.jqplot('currentDiagram', comparisonDiagram, diagramSettings.options );
     } else {
-		  lastPlotter = jQuery.jqplot('currentDiagram', diagramSettings.diagram, diagramSettings.options );
-		}
-		lastDiagramSettingsAsJson = diagramSettingsAsJson;
+      lastPlotter = jQuery.jqplot('currentDiagram', diagramSettings.diagram, diagramSettings.options );
+    }
+    lastDiagramSettingsAsJson = diagramSettingsAsJson;
 
     try {
       // add tooltip
@@ -1162,119 +1194,119 @@
       // the tooltip doesn´t work with lte IE8
       jQuery("#legendTooltipText, #legendTooltip, #diagramPleaseWaitForLoadingNextDiagram").hide();
     }
-	};
+  };
 
-	function hasOneSeriesAtLeastOneValue(series) {
-		for (var i = 0; i < series.length; i++) {			
-			if (series[i].length > 0) {
-				return true;
-			}
-		}
-	
-		return false;
-	}
-	
-	function adjustDiagramSize(amountOfSeries, isLegendOutsideOfDiagram) {
-		var minWidth = 400;
-		var minHeight = 200;
-	
-		var offsetRight = 50; // correct displaying of all x axis labels
-		var offsetTopDown = 370; // space for header, control elements and footer
-		
-		if (isLegendOutsideOfDiagram) {
-			offsetTopDown += calculatePossibleLegendHeight(amountOfSeries);
-		}
-		
-		var calculatedWidth = jQuery(window).width() - jQuery('#contentLeft').width() - offsetRight;
-		var calculatedHeight = jQuery(window).height() - offsetTopDown;
-		
-		if (calculatedWidth < minWidth) {
-			calculatedWidth = minWidth;
-		}
-		
-		if (calculatedHeight < minHeight) {
-			calculatedHeight = minHeight;
-		}
-		
-		jQuery('#currentDiagram').width(calculatedWidth);
-		jQuery('#currentDiagram').height(calculatedHeight);
-	}
-	
-	function calculatePossibleLegendHeight(amountOfSeries) {
-		var legendColumns = 4;
-		var heightForEachRow = 42;
-		
-		var amountOfRowsInLegend = Math.ceil(amountOfSeries / legendColumns);
-		return amountOfRowsInLegend * heightForEachRow;
-	}
-	
-	function addLegendTooltip() {
-		jQuery('#legendTooltip').css('visibility', 'visible');
-		
-		var tooltipDiv = jQuery('#legendTooltip').clone();		
-		jQuery('.jqplot-table-legend:last').append(tooltipDiv);
-	}
+  function hasOneSeriesAtLeastOneValue(series) {
+    for (var i = 0; i < series.length; i++) {      
+      if (series[i].length > 0) {
+        return true;
+      }
+    }
+  
+    return false;
+  }
+  
+  function adjustDiagramSize(amountOfSeries, isLegendOutsideOfDiagram) {
+    var minWidth = 400;
+    var minHeight = 200;
+  
+    var offsetRight = 50; // correct displaying of all x axis labels
+    var offsetTopDown = 370; // space for header, control elements and footer
+    
+    if (isLegendOutsideOfDiagram) {
+      offsetTopDown += calculatePossibleLegendHeight(amountOfSeries);
+    }
+    
+    var calculatedWidth = jQuery(window).width() - jQuery('#contentLeft').width() - offsetRight;
+    var calculatedHeight = jQuery(window).height() - offsetTopDown;
+    
+    if (calculatedWidth < minWidth) {
+      calculatedWidth = minWidth;
+    }
+    
+    if (calculatedHeight < minHeight) {
+      calculatedHeight = minHeight;
+    }
+    
+    jQuery('#currentDiagram').width(calculatedWidth);
+    jQuery('#currentDiagram').height(calculatedHeight);
+  }
+  
+  function calculatePossibleLegendHeight(amountOfSeries) {
+    var legendColumns = 4;
+    var heightForEachRow = 42;
+    
+    var amountOfRowsInLegend = Math.ceil(amountOfSeries / legendColumns);
+    return amountOfRowsInLegend * heightForEachRow;
+  }
+  
+  function addLegendTooltip() {
+    jQuery('#legendTooltip').css('visibility', 'visible');
+    
+    var tooltipDiv = jQuery('#legendTooltip').clone();    
+    jQuery('.jqplot-table-legend:last').append(tooltipDiv);
+  }
 
-	function appendDiagramSettings(diagramID) {		
-		var url = '/pages/jpages/diagram/control/settings?sid=' + SessionId + '&diagramid=' + diagramID;
-		var opt =
-		{
-			onComplete: function(t) {
-				var response = JSON.parse(t.responseText);
-				if(!response.isSuccessful)
-				{
-					if(response.errorCode == "42")
-					{
-						jQuery("#content").html(response.content);
-					} else {
-						alert(response.content);
-					}
-				} else {
-					var diagramSettings = JSON.parse(response.content);					
-					parseDiagramSettings(diagramSettings);
-				}
-			}
-		}
-		
-		new Ajax.Request(url, opt);
-	};
-	
-	function parseDiagramSettings(diagramSettings) {
+  function appendDiagramSettings(diagramID) {    
+    var url = '/pages/jpages/diagram/control/settings?sid=' + SessionId + '&diagramid=' + diagramID;
+    var opt =
+    {
+      onComplete: function(t) {
+        var response = JSON.parse(t.responseText);
+        if(!response.isSuccessful)
+        {
+          if(response.errorCode == "42")
+          {
+            jQuery("#content").html(response.content);
+          } else {
+            alert(response.content);
+          }
+        } else {
+          var diagramSettings = JSON.parse(response.content);          
+          parseDiagramSettings(diagramSettings);
+        }
+      }
+    };
+    
+    new Ajax.Request(url, opt);
+  };
+  
+  function parseDiagramSettings(diagramSettings) {
     var tmpDefaultPeriod = defaultPeriod,
     tmpConsolidationFunction = getConsolitation();
-		setConsolidationFunction(diagramSettings.consolidationFunction);
+    setConsolidationFunction(diagramSettings.consolidationFunction);
     defaultPeriod = diagramSettings.defaultPeriod;
-		setVisibilitySelectPeriod(diagramSettings.isOperable);
-		showPeriod(defaultPeriod);
-		if ((tmpDefaultPeriod != diagramSettings.defaultPeriod) || (tmpConsolidationFunction != diagramSettings.consolidationFunction)) {
-		  triggerDiagram(selectedDiagramId);
-		}
-	};
-	
-	function setVisibilitySelectPeriod(isVisible) {
-		if (isVisible) {
-			jQuery('#selectPeriod').show();
-		} else {
-			jQuery('#selectPeriod').hide();
-		}
-	};
+    setVisibilitySelectPeriod(diagramSettings.isOperable);
+    showPeriod(defaultPeriod);
+    if ((tmpDefaultPeriod != diagramSettings.defaultPeriod) || (tmpConsolidationFunction != diagramSettings.consolidationFunction)) {
+      triggerDiagram(selectedDiagramId);
+    }
+  };
+  
+  function setVisibilitySelectPeriod(isVisible) {
+    if (isVisible) {
+      jQuery('#selectPeriod').show();
+    } else {
+      jQuery('#selectPeriod').hide();
+    }
+  };
 
-	function setConsolidationFunction(consolidationFunction) {
+  function setConsolidationFunction(consolidationFunction) {
     setRenderer(consolidationFunction);
-		consolidationMode = consolidationFunction;
-	};
-	
-	function highlightSelectedDiagram(diagramID) {
-		jQuery('#diagrams td').removeClass('ButtonStatusRoomsSelected');
-		jQuery('#diagram' + diagramID).addClass('ButtonStatusRoomsSelected');
-		jQuery('#diagram' + diagramID).css('text-align', 'left');
-	};
-	
-	function blockUI() {
-		jQuery.blockUI({
-			message: jQuery('#diagramPleaseWaitForLoadingNextDiagram').text()
-		});
-	}
+    consolidationMode = consolidationFunction;
+  };
+  
+  function highlightSelectedDiagram(diagramID) {
+    jQuery('#diagrams td').removeClass('ButtonStatusRoomsSelected');
+    jQuery('#diagram' + diagramID).addClass('ButtonStatusRoomsSelected');
+    jQuery('#diagram' + diagramID).css('text-align', 'left');
+  };
+  
+  function blockUI() {
+    jQuery.blockUI({
+      message: jQuery('#diagramPleaseWaitForLoadingNextDiagram').text()
+    });
+  }
 
   function showCustomModeHelp() {
     MessageBox.show(translateKey("diagramHelpCustomModeTitle"),
@@ -1286,105 +1318,105 @@
     );
   }
 
-	GetChannelName = function(address) {
-		var ch = DeviceList.getChannelByAddress(address);
-		if (ch != undefined) {
-			return ch.getName();
-		} else {
-			return address;
-		}
-	};
+  GetChannelName = function(address) {
+    var ch = DeviceList.getChannelByAddress(address);
+    if (ch != undefined) {
+      return ch.getName();
+    } else {
+      return address;
+    }
+  };
 
-	(function () {
-		initSite();
-		
-		if (!${initialized?string('true', 'false')}) {
-		
-			var s = "<table id=\"dataloggingError\" class=\"tTable\" cellpadding=\"3\" cellspacing=\"3\"><tr><td class=\"CLASS21906\">";
-			s += translateKey('diagramDataloggingNotInitialised');
-			s += "</td></tr></table>";
-			jQuery('#contentRight').html(s);
-			jQuery('#contentRight').css('visibility','visible');
-			return;
-		}
-		
-		initGui();
-		
-		var firstDiagram = ${firstDiagram};
-		if (firstDiagram != -1) {
-			triggerDiagram(firstDiagram);
-		}
-	})();
+  (function () {
+    initSite();
+    
+    if (!${initialized?string('true', 'false')}) {
+    
+      var s = "<table id=\"dataloggingError\" class=\"tTable\" cellpadding=\"3\" cellspacing=\"3\"><tr><td class=\"CLASS21906\">";
+      s += translateKey('diagramDataloggingNotInitialised');
+      s += "</td></tr></table>";
+      jQuery('#contentRight').html(s);
+      jQuery('#contentRight').css('visibility','visible');
+      return;
+    }
+    
+    initGui();
+    
+    var firstDiagram = ${firstDiagram};
+    if (firstDiagram != -1) {
+      triggerDiagram(firstDiagram);
+    }
+  })();
 </script>
 </head>
 <body>
 <table id="${TableId}" width="100%" class="CLASS03900" cellpadding="0" cellspacing="0">
   <tr>
     <td id="contentLeft">
-		<div class="CLASS04002" style="height: 719px;">
-			<table id="tblFunctionNames" class="CLASS03903" border="1" cellpadding="4" cellspacing="0" style="width:200px">
-				<#list objectList as diagram>
-					<tr id="diagrams">
-						<td id='diagram${diagram.id}' class="ButtonStatusRooms CLASS03905" onclick="triggerDiagram(${diagram.id});">
-							<table>
-								<tr class='CLASS03904'>
-									<td style="font-weight:bold;">${diagram.name}</td></td>
-								</tr>
-								<tr>
-									<td>${diagram.description}</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-				</#list>
-			</table>
-		</div>
+    <div class="CLASS04002" style="height: 719px;">
+      <table id="tblFunctionNames" class="CLASS03903" border="1" cellpadding="4" cellspacing="0" style="width:200px">
+        <#list objectList as diagram>
+          <tr id="diagrams">
+            <td id='diagram${diagram.id}' class="ButtonStatusRooms CLASS03905" onclick="triggerDiagram(${diagram.id});">
+              <table>
+                <tr class='CLASS03904'>
+                  <td style="font-weight:bold;">${diagram.name}</td></td>
+                </tr>
+                <tr>
+                  <td>${diagram.description}</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </#list>
+      </table>
+    </div>
    </td>
    
    <td id="contentRight" class="j_translate">
-		<div id="selectPeriod">
-			<table>
-				<tr>
+    <div id="selectPeriod">
+      <table>
+        <tr>
           <!--
           <td>
             <input type="button" value="diagramPeriodLastHour" name="diagramPeriodLastHour" id="selectPeriodLastHour" class="StdButtonBig jPeriodButton"/>
           </td>
           -->
-					<td>
-						<input type="button" value="diagramPeriodLastDay" name="diagramPeriodLastDay" id="selectPeriodLastDay" class="StdButtonBig jPeriodButton"/>
-					</td>
-					<td>
-						<input type="button" value="diagramPeriodLastWeek" name="diagramPeriodLastWeek" id="selectPeriodLastWeek" class="StdButtonBig jPeriodButton"/>
-					</td>
-					<td>
-						<input type="button" value="diagramPeriodLastMonth" name="diagramPeriodLastMonth" id="selectPeriodLastMonth" class="StdButtonBig jPeriodButton"/>
-					</td>
-					<td>
-						<input type="button" value="diagramPeriodLastYear" name="diagramPeriodLastYear" id="selectPeriodLastYear" class="StdButtonBig jPeriodButton"/>
-					</td>
-				</tr>
-			</table>
-			<table name="customMode">
-				<tr>
-					<td>${"$"}{diagramPeriodCustomStart}</td>
-					<td><input type="text" id="selectPeriodStartDate" class="datepicker"/></td>
-					<td><input type="text" id="selectPeriodStartTime" class="timepicker"/></td>
-					<td width="15px"></td>
-					<td>${"$"}{diagramPeriodCustomEnd}</td>
-					<td><input type="text" id="selectPeriodEndDate" class="datepicker"/></td>
-					<td><input type="text" id="selectPeriodEndTime" class="timepicker"/></td>
-				</tr>
-			</table>
-			<table>
-				<tr>
-					<td name="customMode">${"$"}{thDiagramSelectTempConsolidationFunction}</td>
-					<td name="customMode">
-						<select id="selectConsolidationFunction" size="1">
-							<option value="0">${"$"}{diagramConsolidationFunctionAverage}</option>
-							<option value="1">${"$"}{diagramConsolidationFunctionMinimum}</option>
-							<option value="2">${"$"}{diagramConsolidationFunctionMaximum}</option>
-						</select>
-					</td>
+          <td>
+            <input type="button" value="diagramPeriodLastDay" name="diagramPeriodLastDay" id="selectPeriodLastDay" class="StdButtonBig jPeriodButton"/>
+          </td>
+          <td>
+            <input type="button" value="diagramPeriodLastWeek" name="diagramPeriodLastWeek" id="selectPeriodLastWeek" class="StdButtonBig jPeriodButton"/>
+          </td>
+          <td>
+            <input type="button" value="diagramPeriodLastMonth" name="diagramPeriodLastMonth" id="selectPeriodLastMonth" class="StdButtonBig jPeriodButton"/>
+          </td>
+          <td>
+            <input type="button" value="diagramPeriodLastYear" name="diagramPeriodLastYear" id="selectPeriodLastYear" class="StdButtonBig jPeriodButton"/>
+          </td>
+        </tr>
+      </table>
+      <table name="customMode">
+        <tr>
+          <td>${"$"}{diagramPeriodCustomStart}</td>
+          <td><input type="text" id="selectPeriodStartDate" class="datepicker"/></td>
+          <td><input type="text" id="selectPeriodStartTime" class="timepicker"/></td>
+          <td width="15px"></td>
+          <td>${"$"}{diagramPeriodCustomEnd}</td>
+          <td><input type="text" id="selectPeriodEndDate" class="datepicker"/></td>
+          <td><input type="text" id="selectPeriodEndTime" class="timepicker"/></td>
+        </tr>
+      </table>
+      <table>
+        <tr>
+          <td name="customMode">${"$"}{thDiagramSelectTempConsolidationFunction}</td>
+          <td name="customMode">
+            <select id="selectConsolidationFunction" size="1">
+              <option value="0">${"$"}{diagramConsolidationFunctionAverage}</option>
+              <option value="1">${"$"}{diagramConsolidationFunctionMinimum}</option>
+              <option value="2">${"$"}{diagramConsolidationFunctionMaximum}</option>
+            </select>
+          </td>
 
           <td id="tdCustomModeHelp" class="CLASS01408 hidden">
             &nbsp;
@@ -1406,28 +1438,28 @@
           </td>
           -->
 
-				</tr>
-			</table>
-		</div>
-		<table>
-			<tr>
+        </tr>
+      </table>
+    </div>
+    <table>
+      <tr>
         <td>
           <input type="button" value="btnDiagramRepaint" name="btnDiagramRepaint" class="StdButtonBig" id="selectPeriodDo"/>
         </td>
-				<td>
-					<input type="button" value="btnDiagramResetZoom" name="btnDiagramResetDiagramZoom" class="StdButtonBig" id="resetDiagramZoom"/>
-				</td>
+        <td>
+          <input type="button" value="btnDiagramResetZoom" name="btnDiagramResetDiagramZoom" class="StdButtonBig" id="resetDiagramZoom"/>
+        </td>
         <td>
           <input type="button" value="btnDiagramExport" name="btnDiagramExport" class="StdButtonBig" id="exportPeriodDo"/>
         </td>
-			</tr>
-		</table>
-		<div id='hintNoDataAvailable' class='hidden attention' style='text-align:center'><b>${'$'}{diagramNoDataAvailable}</b></div>
-		<div id="currentDiagram" style="margin-left: 25px;"></div>
-		
-		<div id="legendTooltipText" class="hideAtStart">${"$"}{diagramLegendExplanationTooltip}</div>
-		<div id="legendTooltip" class="hideAtStart">${"$"}{diagramLegendExplanationTeaser}</div>
-		<div id="diagramPleaseWaitForLoadingNextDiagram" class="hideAtStart">${"$"}{diagramPleaseWaitForLoadingNextDiagram}</div>
+      </tr>
+    </table>
+    <div id='hintNoDataAvailable' class='hidden attention' style='text-align:center'><b>${'$'}{diagramNoDataAvailable}</b></div>
+    <div id="currentDiagram" style="margin-left: 25px;"></div>
+    
+    <div id="legendTooltipText" class="hideAtStart">${"$"}{diagramLegendExplanationTooltip}</div>
+    <div id="legendTooltip" class="hideAtStart">${"$"}{diagramLegendExplanationTeaser}</div>
+    <div id="diagramPleaseWaitForLoadingNextDiagram" class="hideAtStart">${"$"}{diagramPleaseWaitForLoadingNextDiagram}</div>
 
    </td>
 </table>

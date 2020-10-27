@@ -974,7 +974,7 @@ jQuery.extend(true,langJSON, {
     "lblSysConfAdditionalSoft1" : "Zusatzsoftware verwalten",
     "lblSysConfAdditionalSoft2" : "Zusatzsoftware installieren",
     "Australia" : "Australien",
-    "Austria" : "%D6stereich",
+    "Austria" : "%D6sterreich",
     "Belgium" : "Belgien",
     "Bulgaria" : "Bulgarien",
     "CzechRepublic" : "Tschechische Republik",
