@@ -501,7 +501,11 @@ function ::conditionIsParameterVisible() {
     }
 
     !MP3P
-    if ( (oCC.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1) || (oCC.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1) ) {
+    if (
+    (oCC.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1)
+    || (oCC.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1)
+    || (oCC.HssType().Find("OPTICAL_SIGNAL_RECEIVER") != -1)
+    ) {
       if ( (oDP.HSSID().Find("LEVEL") != -1)
       || (oDP.HSSID().Find("ACTIVITY_STATE") != -1)
       ) {
@@ -642,6 +646,14 @@ function ::destinationIsParameterVisible() {
   ! Hide all parameters of the channel WEEK_PROFILE (e. g. SWITCH_WEEK_PROFILE, DIMMER_WEEK_PROFILE) except COMBINED_PARAMETER
   if (oCH.HssType().Find("_WEEK_PROFILE") != -1) {
     if (oDP.HSSID().Find("COMBINED_PARAMETER") == -1)  {
+      showChannelParam = false;
+    }
+  }
+
+  !HmIPW-WRC6
+  ! Hide all parameters of the channel OPTICAL_SIGNAL_RECEIVER except COMBINED_PARAMETER
+  if ( oCH.HssType().Find("OPTICAL_SIGNAL_RECEIVER") != -1) {
+    if ( (oDP.HSSID().Find("COMBINED_PARAMETER") == -1)) {
       showChannelParam = false;
     }
   }

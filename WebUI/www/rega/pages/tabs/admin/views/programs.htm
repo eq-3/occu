@@ -495,7 +495,9 @@
 
     var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
 
+     // ToDo HmIPWeeklyProgramController erstellen
      var opts = {"deviceID": chn.device.id, "deviceLabel":chn.typeName, "chnAddress":chn.address, "chInterface":chnInterface, "channelLocks":"channelLocks", "userEasyLinkMode":userNoExpert};
+     //var dialog = new HmIPWeeklyProgramController(translateKey("titleConfigDialog"), htmlContent, jQuery(elm).val(), function(result) {
      var dialog = new iseHmIPWeeklyProgram(regaDialogID, opts , function(result) {
        jQuery(elm).prop("disabled", false);
        if (result != 0) {

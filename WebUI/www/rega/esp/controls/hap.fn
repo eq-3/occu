@@ -9,7 +9,7 @@ function ::CreateHAP()
     object objLevelCarrierSense = cObj.DPByControl("MAINTENANCE.CARRIER_SENSE_LEVEL");
 
 
-    string commState = "${stringTableUnreachFalseBR}";
+    string commState = "${lblUnknown}";
 
     if (objUnreach) {
       if (objUnreach.Value() == false) {commState = "${stringTableUnreachFalseBR}";}

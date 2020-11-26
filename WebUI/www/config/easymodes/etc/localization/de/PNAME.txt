@@ -60,6 +60,7 @@
 "OPEN_WHEN" : "<span class=\"translated\">&Ouml;ffnen bei&nbsp;</span>",
 "OUTPUT_BEHAVIOUR_color" : "<span class=\"translated\">Farbe</span>",
 "OUTPUT_BEHAVIOUR_mp3" : "<span class=\"translated\">MP3-Datei</span>",
+"OUTPUT_BEHAVIOUR_blink" : "<span class=\"translated\">Modus</span>",
 "RAMPOFF_TIME" : "<span class=\"translated\">Rampenzeit beim Ausschalten</span>",
 "RAMPOFF_TIME_BASE": "<span class=\"translated\">Einheit Rampenzeit</span>",
 "RAMPOFF_TIME_FACTOR" : "<span class=\"translated\">Wert Rampenzeit</span>",

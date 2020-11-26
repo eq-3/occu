@@ -211,6 +211,8 @@ jQuery.extend(true,langJSON, {
     "Izmir" : "Izmir",
     "Konya" : "Konya",
     "Mersin" : "Mersin",
+    "Europe" : "Europa",
+    "USA" : "USA",
     "commentCitiesEnd" : "***********************************************",
     "commentDatePicker" : "***********************************************",
     "Sun" : "So",
@@ -236,7 +238,7 @@ jQuery.extend(true,langJSON, {
 	  "Hou" : "Stunde",
 	  "Min" : "Minute",
     "btnDatePickerThisMonth" : "Dieser Monat",
-    "btnDatePickerClose" : "Schliessen",
+    "btnDatePickerClose" : "Schlie%DFen",
     "commentDatePickerEnd" : "***********************************************",
     "crashDialogContent" : "<div style='font-weight: bold;'>Eine Komponente der Homematic Zentrale reagiert nicht mehr.</div><p>Hierf%FCr kann es eine Reihe von Ursachen geben:</p><ul><li>es besteht keine Netzwerk-Verbindung</li><li>die Stromversorung der HomeMatic Zentrale wurde unterbrochen</li><li>mindestens eine Komponente der HomeMatic Zentrale ist abgest%FCrzt</li></ul><p>%DCberpr%FCfen Sie die Netzwerk-Verbindung und die Stromversorgung der HomeMatic Zentrale. Starten Sie ggf. die HomeMatic Zentrale neu.</p>",
     "crashDialogBtnClose" : "Schlie%DFen",
@@ -755,6 +757,7 @@ jQuery.extend(true,langJSON, {
     "optionUnitD" : "Tage",
     "optionUnit1D" : "1 Tag",
     "optionUnit7D" : "7 Tage",
+    "optionUnit8D" : "8 Tage",
     "optionUnit14D" : "14 Tage",
     "optionUnit24D" : "24 Tage",
     "optionUnit28D" : "28 Tage",
@@ -1345,6 +1348,8 @@ jQuery.extend(true,langJSON, {
     "randomPlayback" : "Zufallswiedergabe",
     "soundOldValue" : "Zuletzt gespielte MP3-Datei",
     "colorOldValue" : "Zuletzt gew%E4hlte Farbe",
+    "blinkOldValue" : "Zuletzt gew%E4hltes Verhalten",
+
     "soundColorOldValue" : "MP3-Datei/Farbe = letzter Wert",
     "soundColorRandomPlayback" : "MP3-Datei/Farbe = Zufallswiedergabe",
     "soundColorInternal" : "Interner Sound/keine Farbe",
@@ -1493,6 +1498,103 @@ jQuery.extend(true,langJSON, {
      "rotationDirLeftSlow" : "Langsames Drehen nach links",
      "rotationDirRightSlow" : "Langsames Drehen nach rechts",
      "rainDetectorSampleInterval" : "Zeitspanne zwischen den einzelnen Messungen<br/>(Regenerkennungsintervall)",
+
+    "helpAlarmSwitchParamDurationValue":
+      "Aufrund gesetzlicher Vorgaben ist die Zeitdauer des Alarms auf 10 Minuten begrenzt.  " +
+      "Das hei%DFt, eine Eingabe von Werten gr%F6sser 10 Minuten bzw. 600 Sekunden wird ignoriert.",
+
+    "cpSecurityHttpsRedirectTitle" : "Automatische Umleitung auf HTTPS",
+    "cpSecurityHttpsRedirectLabel" : "Umleitung auf HTTPS aktiv:",
+    "cpSecurityHttpsRedirectDescription" : "Ist die Funktion aktiviert, erfolgt bei Zugriff auf die WebUI %FCber HTTP eine automatische Umleitung auf HTTPS",
+    "lblBus": "BUS",
+
+    "lblOperatingVoltage": "Ausgangsspannung",
+    "lblOperatingVoltageStatus": "Status Ausgangsspannung",
+    "lblOperationPowerConsumptionState": "Status Stromaufnahme",
+
+    "lblCurrentPowerConsumption": "Aktuelle Stromaufnahme",
+    "lblCurrentOperatingVoltage": "Aktuelle Betriebsspannung",
+
+    "lblVoltageStatus_0": "Normal",
+    "lblVoltageStatus_1": "Unbekannt",
+    "lblVoltageStatus_2": "%DCberspannung",
+    "lblVoltageStatus_3": "Ext. Spannungsversorgung",
+
+
+    "lblPowerConsumptionStatus_0": "Normal",
+    "lblPowerConsumptionStatus_1": "Unbekannt",
+    "lblPowerConsumptionStatus_2": "Stromaufnahme zu hoch",
+
+    "stringTableOperationPowerConsumptionState": "Status Stromaufnahme",
+    "lblOperationTemp": "Betriebstemperatur",
+
+    "lblDutyCycle": "Duty Cycle",
+    "lblCarrierSense": "Carrier Sense",
+
+    "headerDrapUpdateNecessary":
+      "Mit diesem Update wird durch Advanced Routing eine verbesserte Kommunikation zwischen den Homematic IP Funk- und den Homematic IP Wired-Komponenten etabliert. " +
+      "Dazu ist es erforderlich, dass ein Firmware-Update des Homematic IP Wired Access Point durchgef%FChrt wird.<br><br>Der Homematic IP Wired Access Point befindet sich " +
+      "nach diesem Update im Posteingang und muss dort konfiguriert werden.<br>Alle bereits angelernten und konfigurierten Wired-Ger%E4te in der Installation arbeiten nach dem Update wie gewohnt weiter.",
+
+    "drapUpdateNecessary": "Folgende Wired Access Points mit einer inkompatiblen Firmware wurden gefunden und m%FCssen aktualisiert werden:<br/><br/>",
+
+    "lblSeeServiceMessage": "Siehe Servicemeldung!",
+
+    "lblAllChannelsVisible": "Alle Kan%E4le sichtbar:",
+
+    "thAvailableVersion": "Verf%FCgbare Version",
+    "thInstalledVersion": "Installierte Version",
+    "btnReload": "Neu laden",
+
+    "btnAccessPoints": "Access Points mit</br>inkompatibler FW updaten",
+    "lblShowAllAPs": "Access Points mit inkompatibler FW updaten",
+    "lblGotoUpdate" : "Zum Update",
+
+    "apSearchMigrationDescription":
+      "F%FCr die Aktualisierung werden das Passwort des Homematic IP Access Points sowie eine aktive Internetverbindung ben%F6tigt. Das Passwort (PW) finden Sie auf dem Aufkleber am Ger%E4t.",
+
+    "apSearchDescription": "F%FCr die Aktualisierung wird das Passwort des Homematic IP Access Points ben%F6tigt. Das Passwort (PW) finden Sie auf dem Aufkleber am Ger%E4t.",
+
+    "password": "Passwort",
+    "apSearchWaitText": "Access Points werden im Netzwerk gesucht. Bitte warten Sie, bis die Suche abgeschlossen ist.",
+    "apMigrationNoApToUpdate" : "Es wurden keine Access Points gefunden, deren Firmware aktualisiert werden muss.",
+
+    "apMigrationConfigureForUpdateFailed" : "Beim Starten des Access Point-Updates ist ein Fehler aufgetreten. Bitte %FCberpr%FCfen Sie das Passwort und versuchen Sie es erneut.",
+
+    "apMigrationUpdateSuccessful" : "Die Aktualisierung der Firmware wurde erfolgreich abgeschlossen.",
+    "apMigrationUpdateSuccessfulTitle" : "Firmware aktualisisert",
+
+    "apMigrationErrorOrTimeout" : "Bei dem Firmware-Update ist ein Fehler aufgetreten. Bitte aktualisieren Sie die Ansicht und versuchen Sie es erneut.",
+
+    "apMigrationUpdateSuccessfulAddition" : "Sie k%F6nnen den Access Point jetzt %FCber &ldquo;Ger%E4te anlernen&rdquo; anlernen.",
+    "apMigrationUpdateSuccessfulAdditionMigrationMode" : "Der Access Point befindet sich jetzt im Posteingang.",
+
+    "hintDeviceDoesNotSupportAction" : "Die aktuell installierte GerÃ¤te-Firmware unterstÃ¼tzt diese Funktion nicht.",
+    "lblDifferentialTemperature": "Differenz-Temperatur T1 - T2",
+    "noUpdateNeeded" : "Kein Update erforderlich.",
+    "notCompatible" : "Nicht kompatibel",
+
+    "aqiGood" : "Gut",
+    "aqiModerate" : "M%E4%DFig",
+    "aqiUnhealty1" : "Ungesund f%FCr empf. Personen",
+    "aqiUnhealty2" : "Ungesund",
+    "aqiUnhealty3" : "Sehr ungesund",
+    "aqiHazardous" : "Gesundheitsgef%E4hrdend",
+    "lblLocationA" : "Standort",
+
+    "hintGroupDevice" : "Achtung! Dieses Ger%E4t ist Teil einer Heizgruppe.<br/>Anpassungen an den Temperaturprofilen sollten in der Gruppe vorgenommen werden.",
+    "lblChnNotAllowedInRoom" : "Dieser Kanal kann keinem Raum zugewiesen werden!",
+    "lblChnNotAllowedInFunc" : "Dieser Kanal kann keinem Gewerk zugewiesen werden!",
+    "lblErrorSensor" : "Sensorfehler",
+    "lblOutputSwap" : "Ausg%E4nge tauschen",
+    "optionOutputNotSwapped" : "Nein",
+    "optionOutputSwapped" : "Ja",
+    "hintSetReady" : "Bitte bet%E4tigen Sie den Fertig Button und konfigurieren das Ger%E4t in der Ger%E4teliste",
+    "drapRescueIntroTitle" : "HmIP-DRAP Vorbereitungsupdate",
+    "drapRescueIntroText" : "Dieser HmIP-DRAP mit der Firmware Version 2.0.16 erfordert ein Zwischenupdate, bevor das eigentliche Update ausgef%FChrt werden kann.</br>Geben Sie hierf%FCr das auf dem HmIP-DRAP aufgedruckte Passwort (PW) ein und klicken Sie anschlie%DFend auf &bdquo;OK&ldquo;",
+    "drapRescueUpdateSuccessful" : "Das Zwischenupdate wurde erfolgreich abgeschlossen.</br>Warten Sie, bis die LED des HmIP-DRAP blau blinkt, bzw. t%FCrkis leuchtet. Starten Sie dann das eigentliche Update, indem Sie erneut den &ldquo;Update&rdquo; Button klicken.",
+
+    "lbl24Average" : "24h Durchschnitt",
 
     "theEnd" : ""
   }

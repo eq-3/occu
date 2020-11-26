@@ -321,7 +321,7 @@ proc cmd_firmware_update {} {
 
   set HmIPIdentifier "HmIP-RF"
   set HmIPWiredIdentifier "HmIP-Wired"
-  set HmIPDRAPIdentifier "HmIP-DRAP"
+  set HmIPDRAPIdentifier "HmIPW-DRAP"
   set HmIPHAPIdentififier "HmIP-HAP"
 
   catch { import iface }

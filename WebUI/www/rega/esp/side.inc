@@ -30,6 +30,7 @@
   string dimmerVirtualReceiver = "DIMMER_VIRTUAL_RECEIVER";
   string switchVirtualReceiver = "SWITCH_VIRTUAL_RECEIVER";
   string alarmSwitchVirtualReceiver = "ALARM_SWITCH_VIRTUAL_RECEIVER";
+  string opticalSignaReceiver = "OPTICAL_SIGNAL_RECEIVER";
 
   ! e. g. DIMMER_WEEK_PROFILE, SWITCH_WEEK_PROFILE
   string hmIPWeekProfile = "_WEEK_PROFILE";
@@ -495,6 +496,7 @@
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
             integer i_acousticSignalVirtualReceiver = oCH.HssType().Find(acousticSignalVirtualReceiver);
             integer i_dimmerVirtualReceiver = oCH.HssType().Find(dimmerVirtualReceiver);
+            integer i_opticalSignalReceiver = oCH.HssType().Find(opticalSignaReceiver);
             integer i_switchVirtualReceiver = oCH.HssType().Find(switchVirtualReceiver);
             integer i_blindVirtualReceiver = oCH.HssType().Find(blindVirtualReceiver);
             integer i_hmip_mp3p = chLabel.Find(hmip_mp3p);
@@ -513,6 +515,7 @@
               || (i_hmip_mp3p != -1)
               || (i_blindVirtualReceiver != -1)
               || (i_dimmerVirtualReceiver != -1)
+              || (i_opticalSignalReceiver != -1)
               || (i_switchVirtualReceiver != -1)
               || (i_hmip_WeekProfile != -1))
               ) {
@@ -613,6 +616,17 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
+              if ((i_opticalSignalReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                if (iV.Find("L=") == -1) {
+                  if ((oCH.Label().Find(hmip_mp3p) == -1) && (oCH.Label().Find(hmip_bsl) == -1)) {
+                    iV = "L=100,DV=31,DU=2,RTV=0,RTU=0,C=7,CB=1,RTTOV=0,RTTOU=3";
+                  } else {
+                    iV = "L=100,DV=31,DU=2,RTV=0, RTU=1,C=7";
+                  }
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
               if ((i_switchVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("S=") == -1) {
                   iV = "S=true";
@@ -647,6 +661,7 @@
               && (i_acousticSignalVirtualReceiver == -1)
               && (i_blindVirtualReceiver == -1)
               && (i_dimmerVirtualReceiver == -1)
+              && (i_opticalSignalReceiver == -1)
               && (i_switchVirtualReceiver == -1)
               && (i_hmip_WeekProfile == -1)
               ) {
@@ -698,11 +713,13 @@
               if ((i_dimmerVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 Write( '<span id="setDimmerVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
               }
+              if ((i_opticalSignalReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                Write( '<span id="setDimmerVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
+              }
 
               if ((i_switchVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 Write( '<span id="setSwitchVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
               }
-
             }
           }
 
@@ -740,27 +757,31 @@
                       integer iDPvt = oDP.ValueType();
                       integer iDPst = oDP.ValueSubType();
                       if( iFirstID == ID_ERROR ) { iFirstID = oDP.ID(); }
-                      string sSelected = "";
-                      if( oDP.ID() == iV ) { sSelected = " selected"; bFound = true; } else { sSelected = ""; }
-                      string sIdx = "";
-                      Write( '<option value="'#oDP.ID()#'"'#sSelected#'>' );
-                      string sValue = oDP.Name();
-                      if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
-                      {
-                        string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID();
-                        string sShortKey = oDP.HSSID();
-                        sValue = web.webKeyFromStringTable(sLongKey);
-                        if( !sValue.Length() )
+                      ! Some parameter shouldn´t be visible - this is the new way to hide certain parameters
+                      Call("/esp/functions.fn::destinationIsParameterVisible()");
+                      if (showChannelParam == true) {
+                        string sSelected = "";
+                        if( oDP.ID() == iV ) { sSelected = " selected"; bFound = true; } else { sSelected = ""; }
+                        string sIdx = "";
+                        Write( '<option value="'#oDP.ID()#'"'#sSelected#'>' );
+                        string sValue = oDP.Name();
+                        if( (!oDP.IsTypeOf(OT_VARDP)) && (!oDP.IsTypeOf(OT_ALARMDP)) )
                         {
-                          sValue = web.webKeyFromStringTable(sShortKey);
+                          string sLongKey = oCH.ChnLabel()#"|"#oDP.HSSID();
+                          string sShortKey = oDP.HSSID();
+                          sValue = web.webKeyFromStringTable(sLongKey);
                           if( !sValue.Length() )
                           {
-                            sValue = sShortKey;
+                            sValue = web.webKeyFromStringTable(sShortKey);
+                            if( !sValue.Length() )
+                            {
+                              sValue = sShortKey;
+                            }
                           }
                         }
+                        Write( sValue );
+                        Write( '</option>' );
                       }
-                      Write( sValue );
-                      Write( '</option>' );
                     }
                   }
                 }

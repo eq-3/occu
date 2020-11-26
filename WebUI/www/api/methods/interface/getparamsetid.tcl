@@ -11,7 +11,7 @@
 #   Id des Parametersets
 ##
 
-set addres $args(address)
+set address $args(address)
 set paramsetType $args(paramsetType)
 
 checkXmlRpcStatus [catch { set paramsetId [xmlrpc $interface(URL) getParamsetId [list string $address] [list string $paramsetType]] }]

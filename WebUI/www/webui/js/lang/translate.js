@@ -175,6 +175,15 @@ function translateAndSetImage(elem, nameOfPic) {
   jQuery(elem).attr("src", "/ise/img/lang/"+getLang()+"/"+nameOfPic);
 }
 
+function showHelp(topic, x, y) {
+  var width = (! isNaN(x)) ? x : 450;
+  var height = (! isNaN(y)) ? y : 260;
+  if ((typeof showRamptimeOff != "undefined") && (showRamptimeOff == true)) {
+    topic += "WithRampOff";
+  }
+  MessageBox.show(translateKey("HelpTitle"), translateKey(topic), "", width, height);
+}
+
 function translateAvailable() {
   alert("translateAvailable");
 }

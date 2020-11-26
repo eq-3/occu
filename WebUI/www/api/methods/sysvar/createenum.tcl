@@ -1,6 +1,6 @@
 ##
 # SysVar.createEnum
-# Erzeugt eine Systemvariable vom Typ Boolean.
+# Erzeugt eine Systemvariable vom Typ Enum.
 #
 # Parameter:
 #   name: [string] Name der betreffenden Systemvariablen.

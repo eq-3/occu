@@ -1,0 +1,36 @@
+function ::CreateAccessReceiver()
+{
+  object objAuth = cObj.DPByControl("ACCESS_RECEIVER.ACCESS_AUTHORIZATION");
+  object objState = cObj.DPByControl("ACCESS_RECEIVER.STATE");
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+
+  WriteLine("<td>");
+
+    WriteLine("<table style='margin: 0 auto;'>");
+      WriteLine("<tr>");
+        WriteLine("<td colspan='3'><div class='controlHeader'>tr Berechtigung</div></td>");
+      WriteLine("</tr>");
+      WriteLine("<tr>");
+        if (objAuth) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div id='permissionOFF_"#chnId#"' class='CLASS02550 ControlBtnOff' align='center' onclick=\"setDpState("#objAuth.ID()#", 0);\">${stringTableOFF}</div>");
+            WriteLine("<div id='permissionON_"#chnId#"' class='CLASS02550 ControlBtnOff' align='center' onclick=\"setDpState("#objAuth.ID()#", 1);\">${stringTableON}</div>");
+          WriteLine("</td>");
+          WriteLine("<td style='width:50px;'></td>");
+        }
+        if (objState) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo'>${lblPermission}: "#objState.Value()#"</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+    WriteLine("</table>");
+
+  WriteLine("</td>");
+
+  return;
+}
+

@@ -1,6 +1,7 @@
 jQuery.extend(true,langJSON, {
   "de" : {
     "HelpTitle" : "Hilfe",
+    "noHelpAvailable" : "Es steht keine Hilfe zur Ver%FCgung",
     "ROUTER_MODULE_ENABLED" : "<b>Ger%E4t dient als Router</b><br/><br/>Durch diese Option kann das Ger%E4t Homematic IP Funkbefehle weiterleiten. Es dient somit als Reichweitenverl%E4ngerung f%FCr abgesetzte Komponenten.",
     "ENABLE_ROUTING" : "<b>Routing aktiv</b><br/><br/>Durch diese Option versucht das Ger%E4t %FCber einen Homematic IP Router zu kommunizieren, sobald es den Empf%E4nger nicht direkt erreichen kann.",
     "BLIND_REFERENCE_RUNNING_TIME" : "Nachdem Sie den Wert der Fahrzeit per Hand ge%E4ndert haben, ist der CCU die Position der Jalousie/Rolllade nicht mehr bekannt. Daher sollten sie anschlie%DFend eine Kalibrierfahrt (einmal ganz hoch oder herunter) durchf&uuml;hren. Dadurch stellen sie sicher, dass der CCU die genaue Position der Jalousie/Rolllade wieder bekannt ist.<br/><br/>" +
@@ -242,11 +243,20 @@ jQuery.extend(true,langJSON, {
       "Dieser Parameter erm%F6glicht es, die Ausg%E4nge zu tauschen. AUF/ZU bzw. HOCH/RUNTER wird dann zu ZU/AUF bzw. RUNTER/HOCH.<br/><br/>" +
       "Dies kann z. B. dazu genutzt werden, um Fehler bei der Installation zu korrigieren.",
 
+    "AUTO_HYDRAULIC_ADJUSTMENT" : "%DCber die Ventile wird ein hydraulischer Abgleich durchgef%FChrt, d.h. die Durchflussmenge an den Ventilen wird so eingestellt, dass sich alle R%E4ume mit der gleichen Geschwindigkeit erw%E4rmen.",
+
+    "CALIBRATION_PPM" :
+      "Bei der automatischen Kalibrierung des CO2-Sensors wird der niedrigste Messwert innerhalb vordefinierter Kalibrierintervalle als neue Referenz angenommen. " +
+      "Frische Au%DFenluft hat dabei einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung geht man davon aus, das die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht. " +
+      "<br/><br/>Die Kalibrierung ben%F6tig mindestens 3 Kalibrierintervalle um den Endwert sicher zu bestimmen.\n" +
+      "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden, dann sollte eine Kalibrierung alle 1-2 Jahre manuell durchgef%FChrt werden.",
+
     "noMoreHelp" : ""
   },
 
   "en" : {
     "HelpTitle" : "Help",
+    "noHelpAvailable" : "No help available",
     "ROUTER_MODULE_ENABLED" : "<b>The device acts as router</b><br/><br/>This option allows the Homematic IP device to forward wireless commands. It therefore is used to increase the reach of standalone components.",
     "ENABLE_ROUTING" : "<b>Routing active</b><br/><br/>Through this option the device attempts to communicate via a Homematic IP router as soon as it cannot directly reach the receiver.",
     "BLIND_REFERENCE_RUNNING_TIME" : "After you have manually changed the movement time value, the CCU has no information anymore on the blind/shutter position. You should therefore perform a calibration run (once completely to up and down). This ensures that the CCU is updated on the blind/shutters exact position.<br/><br/>" +
@@ -480,6 +490,14 @@ jQuery.extend(true,langJSON, {
     "OUTPUT_SWAP" :
       "This parameter can be used to swap the outputs. OPEN/CLOSED or UP/DOWN will then be changed into CLOSED/OPEN or DOWN/UP.<br/><br/>" +
       "It can be used, for example, to correct errors during installation.",
+
+    "AUTO_HYDRAULIC_ADJUSTMENT" : "A hydraulic balancing is performed via the valves, which means that the flow rate at the valves is adjusted so that all rooms heat up at the same rate.",
+
+    "CALIBRATION_PPM" :
+      "en* Bei der automatischen Kalibrierung des CO2-Sensors wird der niedrigste Messwert innerhalb vordefinierter Kalibrierintervalle als neue Referenz angenommen. " +
+      "Frische Au%DFenluft hat dabei einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung geht man davon aus, das die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht." +
+      "<br/><br/>Die Kalibrierung ben%F6tig mindestens 3 Kalibrierintervalle um den Endwert sicher zu bestimmen.\n" +
+      "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden, dann sollte eine Kalibrierung alle 1-2 Jahre manuell durchgef%FChrt werden.",
 
     "noMoreHelp" : ""
     }

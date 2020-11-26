@@ -8,21 +8,17 @@ CFG_TEMPLATE_DIR=/etc/config_templates
 PIDFILE=/var/run/multimacd.pid
 
 update() {        
-	if [ ! -e /etc/config/no-coprocessor-update ] ; then
-		echo "checking if firmware update is needed..."
-		/bin/eq3configcmd update-coprocessor -p "/dev/mxs_auart_raw.0" -u
-		if ! [ $? -eq 0 ] ; then
-			echo "error while updating coprocessor, recovering..."
-			avrprog --bo
-			/bin/eq3configcmd update-coprocessor -p "/dev/mxs_auart_raw.0" -u -f
-			sleep 1
-		else
-			echo "done"
-			sleep 1
-		fi
+	echo "checking if firmware update is needed..."
+	/bin/eq3configcmd update-coprocessor -p "/dev/mxs_auart_raw.0" -u
+	if ! [ $? -eq 0 ] ; then
+		echo "error while updating coprocessor, recovering..."
+		avrprog --bo
+		/bin/eq3configcmd update-coprocessor -p "/dev/mxs_auart_raw.0" -u -f
+		sleep 1
 	else
-		echo "firmware update disabled"
-	fi
+		echo "done"
+		sleep 1
+	fi	
 }
 check_bo(){
 	avrprog --devinfo | grep -q ec,fd,da,ef

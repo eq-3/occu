@@ -5,6 +5,7 @@
 <script type="text/javascript">
 	var notAssignedVisible;
 	var diagramType;
+	var devType;
 
 	var jUnitElm = jQuery("#diagram_displayedUnit"),
 	jConsolidationElm = jQuery("#diagram_defaultConsolidationFunction");
@@ -83,7 +84,9 @@
 	<#if object.id = 0 && object.name == "">
 		jQuery('#diagram_name').val(translateKey('diagramDefaultName'));
 	</#if>
-	
+
+	var devSN;
+
 	var s = "";
 	s += "<table cellspacing='8'>";
 	s += "<tr>";
@@ -97,11 +100,13 @@
 	translatePage("#parameterTable");
 	translatePage("#dataSourcesTable");
 	jQuery("#DiagramDetailPage").show();
-	
+
 	<#assign i = 0>
 	<#list object.dataSources as dataSource>
+	  devSN = '${dataSource.id}';
+	  devType = DeviceList.getDeviceByAddress(devSN.split(':')[0]);
 		jQuery('#assignedGroupName${i}').text(GetDeviceName('${dataSource.getGroupId()}'));
-		jQuery('#assignedName${i}').text(GetChannelName('${dataSource.getId()?substring(0,dataSource.getId()?index_of("_"))}'));	
+		jQuery('#assignedName${i}').text(GetChannelName('${dataSource.getId()?substring(0,dataSource.getId()?index_of("_"))}'));
 	<#assign i = i + 1>		
 	</#list> 
 		
@@ -266,7 +271,14 @@ background-color:#${colors[x]};
   		<td class="tBodyCell CLASS04902" id="assignedGroupName${i}"></td>
   		<td class="tBodyCell CLASS04907">${dataSource.getGroupId()}</td>
   		<td class="tBodyCell CLASS04902" id="assignedName${i}"></td>
-        <td class="tBodyCell CLASS04907">${"$"}{diagramValueType${dataSource.getKey()}}</td>        
+      <td name="valueType${dataSource.getKey()}" class="tBodyCell CLASS04907">${"$"}{diagramValueType${dataSource.getKey()}}</td>
+
+      <script>
+        if ((devType.typeName == "HmIP-SCTH230") && ("${dataSource.getKey()}" == "CONCENTRATION") ) {
+          jQuery(" [name='valueType${dataSource.getKey()}'] ").html( '${"$"}{diagramValueType${dataSource.getKey()}_CO2}' );
+        }
+      </script>
+
         <td class="tBodyCell CLASS04907">
 		<select id="assignedColor${i}" class="dropdown" size="1" style="width:175px;">
         	<#list [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] as x>
@@ -317,13 +329,20 @@ background-color:#${colors[x]};
   		<td class="tBodyCell CLASS04902" id="notAssignedGroupName${i}"></td>
   		<td class="tBodyCell CLASS04907">${dataSource.getGroupId()}</td>
   		<td class="tBodyCell CLASS04902" id="notAssignedName${i}"></td>
-        <td class="tBodyCell CLASS04907">${"$"}{diagramValueType${dataSource.getKey()}}</td>        
-        <td class="tBodyCell CLASS04907">
-        <select id="notAssignedColor${i}" class="dropdown" style="width:175px;" size="1">
-        	<#list [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] as x>
-        		<option value="${x}" class="Colors${x}" data-image="/webui/css/extern/msdropdown/icons/${x}.png" <#if dataSource.getColor() = x>selected</#if> > ${"$"}{diagramColor${colors[x]}}</option>
-        	</#list>
-        </select></td>
+      <td name="valueType${dataSource.getKey()}" class="tBodyCell CLASS04907">${"$"}{diagramValueType${dataSource.getKey()}}</td>
+
+      <script>
+        if ((devType.typeName == "HmIP-SCTH230") && ("${dataSource.getKey()}" == "CONCENTRATION") ) {
+          jQuery(" [name='valueType${dataSource.getKey()}'] ").html( '${"$"}{diagramValueType${dataSource.getKey()}_CO2}' );
+        }
+      </script>
+
+      <td class="tBodyCell CLASS04907">
+      <select id="notAssignedColor${i}" class="dropdown" style="width:175px;" size="1">
+        <#list [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] as x>
+          <option value="${x}" class="Colors${x}" data-image="/webui/css/extern/msdropdown/icons/${x}.png" <#if dataSource.getColor() = x>selected</#if> > ${"$"}{diagramColor${colors[x]}}</option>
+        </#list>
+      </select></td>
 		<!-- Start action column -->        
 		<td class="tBodyCell CLASS04907" >
 		<#if object.dataSources?size &lt; 15>

@@ -66,6 +66,8 @@ set PROFILE_1(LONG_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_MODE) 0
 set PROFILE_1(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_1(LONG_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_1(LONG_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_1(LONG_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_1(LONG_PROFILE_ACTION_TYPE) {3 0}
 set PROFILE_1(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
@@ -110,6 +112,8 @@ set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
 set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_1(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_1(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_1(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
@@ -158,6 +162,8 @@ set PROFILE_2(LONG_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(LONG_ON_TIME_MODE) 0
 set PROFILE_2(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_2(LONG_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_2(LONG_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_2(LONG_PROFILE_ACTION_TYPE) {4 0}
 set PROFILE_2(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(LONG_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
@@ -201,6 +207,8 @@ set PROFILE_2(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
 set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_2(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_2(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_2(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
@@ -248,6 +256,8 @@ set PROFILE_3(LONG_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(LONG_ON_TIME_MODE) 0
 set PROFILE_3(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_3(LONG_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_3(LONG_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_3(LONG_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_3(LONG_PROFILE_ACTION_TYPE) {5 0}
 set PROFILE_3(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
@@ -292,6 +302,8 @@ set PROFILE_3(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
 set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_3(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_3(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_3(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
@@ -342,6 +354,8 @@ set PROFILE_4(LONG_ON_TIME_BASE) {5 range 0 - 7}
 set PROFILE_4(LONG_ON_TIME_FACTOR) {1 range 0 - 31}
 set PROFILE_4(LONG_ON_TIME_MODE) 0
 set PROFILE_4(LONG_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_4(LONG_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_4(LONG_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_4(LONG_PROFILE_ACTION_TYPE) 1
 set PROFILE_4(LONG_RAMPOFF_TIME_BASE) {0 range 0 - 7}
 set PROFILE_4(LONG_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
@@ -385,6 +399,8 @@ set PROFILE_4(SHORT_ON_TIME_BASE) {5 range 0 - 7}
 set PROFILE_4(SHORT_ON_TIME_FACTOR) {1 range 0 - 31}
 set PROFILE_4(SHORT_ON_TIME_MODE) 0
 set PROFILE_4(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_4(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_4(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_4(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_4(SHORT_RAMPOFF_TIME_BASE) {1 range 0 - 7}
 set PROFILE_4(SHORT_RAMPOFF_TIME_FACTOR) {30 range 0 - 31}
@@ -479,6 +495,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink0 $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
   }
 
+  set param SHORT_OPTICAL_SIGNAL_COLOR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  set param SHORT_OPTICAL_SIGNAL_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+  }
+
   if {$longKeypressAvailable} {
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 
@@ -508,6 +536,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
       # OFF_TIME
       append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink0 $prn $special_input_id LONG_OFF_TIME TIMEBASE_LONG]"
+    }
+
+    set param LONG_OPTICAL_SIGNAL_COLOR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+    set param LONG_OPTICAL_SIGNAL_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
     }
 
   }
@@ -544,6 +584,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
   }
 
+  set param SHORT_OPTICAL_SIGNAL_COLOR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+    set param SHORT_OPTICAL_SIGNAL_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+    }
+
   if {$longKeypressAvailable} {
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 
@@ -563,6 +615,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr pref
       append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
     }
+
+    set param LONG_OPTICAL_SIGNAL_COLOR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+    set param LONG_OPTICAL_SIGNAL_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+    }
+
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -602,6 +667,17 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink0 $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
   }
 
+  set param SHORT_OPTICAL_SIGNAL_COLOR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  set param SHORT_OPTICAL_SIGNAL_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+  }
 
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
@@ -656,6 +732,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink0 $prn $special_input_id LONG_OFF_TIME TIMEBASE_LONG]"
     }
 
+    set param LONG_OPTICAL_SIGNAL_COLOR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+    set param LONG_OPTICAL_SIGNAL_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+    }
+
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -684,6 +772,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   if {[info exists ps($param)] == 1} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  set param SHORT_OPTICAL_SIGNAL_COLOR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  set param SHORT_OPTICAL_SIGNAL_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
   }
 
   # OFFDELAY

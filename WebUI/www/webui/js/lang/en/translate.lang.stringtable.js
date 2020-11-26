@@ -1196,6 +1196,25 @@ jQuery.extend(true,langJSON, {
     "Faster reaction to a new button press by cancelling old transmission processes",
     "stringTableElsterCompatibilityMode" : "Elster compatibility mode",
     "stringTableEventTimeoutRainDetector" : "Time period without rain, after which the <br/>sensor signals 'dry condition'.",
+    "stringTableBrightnessVisKey": "Brightness of the system button",
+    "stringTableDisplayLightingDuration": "Illumination time display",
+    "stringTableErrorCoProcessor": "The channel is not accessible. Please check the power supply of the channel or deactivate it in the WebUI.",
+    "stringTableTempHumidityParticulateMatterUnit" : "Unit of automatic sensor cleaning",
+    "stringTableTempHumidityParticulateMatterValue" : "Value of automatic sensor cleaning",
+
+    "stringTableMassConc10" : "Mass concentration PM1.0",
+    "stringTableMassConc25" : "Mass concentration PM2.5",
+    "stringTableMassConc100" : "Mass concentration PM10",
+    "stringTableNumberConc10" : "Quantity concentration PM1.0",
+    "stringTableNumberConc25" : "Quantity concentration PM2.5",
+    "stringTableNumberConc100" : "Quantity concentration PM10",
+    "stringTableTypicalParticelSize" : "Typical particle size",
+
+    "stringTableMulticastRouterModuleEnabled" : "MultiCast Routing",
+
+    "stringTableOldValue" : "Old Value",
+    "stringTableNoChange" : "Ignore",
+
     "noMoreKeys" : ""
   }
 });

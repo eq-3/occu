@@ -27,23 +27,33 @@ jQuery.extend(true,langJSON, {
     "motionDetectorChannelOperationModeOff" : "Sensor nicht aktiv",
     "motionDetectorChannelOperationModeAnyMotion" : "Ersch%FCtterung",
     "motionDetectorChannelOperationModeFlat" : "Lage%E4nderung",
+    "motionDetectorChannelOperationModeTilt" : "Neigungs%E4nderung",
 
     "motionDetectorMessageMovement_1" : "<span name=\"messageMovement\">Meldung im Zustand Bewegung</span>",
     "motionDetectorMessageMovement_2" : "<span name=\"messageMovement\">Meldung im Zustand Geneigt</span>",
+    "motionDetectorMessageMovement_3" : "<span name=\"messageMovement\">Meldung im Zustand Geneigt</span>",
+    "motionDetectorMessageTilted" : "<span name=\"messageTilted\">Meldung im Zustand Senkrecht</span>",
+
     "motionDetectorMessageNoMovement_1" : "<span name=\"messageNoMovement\">Meldung im Zustand Ruhe</span>",
     "motionDetectorMessageNoMovement_2" : "<span name=\"messageNoMovement\">Meldung im Zustand Waagerecht</span>",
+    "motionDetectorMessageNoMovement_3" : "<span name=\"messageNoMovement\">Meldung im Zustand Waagerecht</span>",
+
     "motionDetectorNotificationMovement_1" : "<span name=\"NotiMovement\">Benachrichtigungston Bewegung</span>",
     "motionDetectorNotificationMovement_2" : "<span name=\"NotiMovement\">Benachrichtigungston Neigung</span>",
     "motionDetectorNotificationNoMovement_1" : "<span name=\"NotiNoMovement\">Benachrichtigungston Ruhe</span>",
     "motionDetectorNotificationNoMovement_2" : "<span name=\"NotiNoMovement\">Benachrichtigungston Waagerecht</span>",
     "motionDetectorSensorSensivity" : "Empfindlichkeit des Sensors bei Ersch%FCtterung",
     "motionDetectorTriggerAngle" : "Winkel f%FCr die Lageerkennung",
+    "motionDetectorTriggerAngle2" : "Winkel f%FCr die Neigungserkennung",
 
     "motionDetectorOptionNoMessage" : "Keine Meldung",
     "motionDetectorOptionMotion_1": "Bewegung",
     "motionDetectorOptionMotion_2": "Geneigt",
+    "motionDetectorOptionMotion_3": "Geneigt",
     "motionDetectorOptionNoMotion_1": "Ruhe",
     "motionDetectorOptionNoMotion_2": "Waagerecht",
+    "motionDetectorOptionNoMotion_3": "Waagerecht",
+    "motionDetectorOptionNotTilted": "Senkrecht",
 
     "motionDetectorSensorRange2GPlusSens" : "2G+",
     "motionDetectorSensorRange2G2PlusSense" : "2G++",

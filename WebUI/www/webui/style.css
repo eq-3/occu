@@ -1,3 +1,7 @@
+:root {
+  --btnGradient: linear-gradient(to bottom, white 30%, gray);
+}
+
 * {
 	font-family:Verdana,Tahoma,Arial,Helvetica,sans-serif ! important;
 	font-size: 12px ! important;
@@ -41,6 +45,10 @@
 	width:160px;
 }
 
+.minWidth210px {
+  min-width: 210px;
+}
+
 .minWidth230px {
   min-width: 230px;
 }
@@ -62,11 +70,15 @@
 }
 
 .colorGradient {
-  background-image:url(/ise/img/gradientButton25px.png) !important;
+  /*background-image:url(/ise/img/gradientButton25px.png) !important;*/
+  /*background-image: linear-gradient(to bottom, white 40%, gray) !important;*/
+  background-image: var(--btnGradient) !important;
 }
 
 .colorGradient50px {
-  background-image:url(/ise/img/gradientButton50px.png) !important;
+  /*background-image:url(/ise/img/gradientButton50px.png) !important;*/
+  /*(to bottom, white 40%, gray) !important;*/
+  background-image: var(--btnGradient) !important;
 }
 
 .startPageInfo {
@@ -316,7 +328,9 @@ a img {
 /* Standard-Button (z.B. Benutzernamen bei Login) */
 .Button {
   background-color: $_(clickable);
-  background-image:url(/ise/img/gradientButton50px.png) !important;
+  /*background-image:url(/ise/img/gradientButton50px.png) !important;*/
+  /*background-image: linear-gradient(to bottom, white 40%, gray) !important;*/
+  background-image: var(--btnGradient) !important;
   color: $_(textColorB); /* black */
   font-weight: bold;
   width: 200px;
@@ -409,6 +423,8 @@ a img {
 {
   background-color: $_(logoutButton);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
 
   color: $_(textColorB); /* black */
   font-weight: bold;
@@ -471,6 +487,8 @@ a img {
 .Messages {
   background-color: $_(messagesBackground);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
 
   overflow: auto;
 
@@ -528,7 +546,9 @@ a img {
   overflow: hidden;
   border-radius: 10px;
   margin-left: 10px;
-  background-image:url(/ise/img/gradientButton50px.png);
+  /*background-image:url(/ise/img/gradientButton50px.png);*/
+  background-image: linear-gradient(to bottom, white 40%, gray);
+  background-image: var(--btnGradient);
 }
 
 .StdTableBtnHelp {
@@ -693,6 +713,8 @@ a img {
 .popupControls div {
   background-color: $_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
 
   color: $_(textColorB); /* black */
   text-align: center;
@@ -739,7 +761,8 @@ a img {
 
 .FilterBtn {
   background-image:url(/ise/img/gradientButton25px.png);
-
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
   color: $_(textColorB); /* black */
 
   cursor: pointer;
@@ -774,6 +797,8 @@ a img {
 .FilterSetButton {
   background-color: $_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
 
   color: $_(textColorB); /* black */
   border: solid 1px $_(black); /* black */
@@ -885,6 +910,8 @@ a img {
 {
   background-color: $_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
 
   color: $_(textColorB); /* white */
   border: solid 1px $_(black); /* black */
@@ -895,6 +922,8 @@ a img {
 .StdButton {
     background-color: $_(clickable);
     background-image:url(/ise/img/gradientButton25px.png);
+    /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+    background-image: var(--btnGradient);
     margin:2%;
     border:1px solid $_(black); /* black */
     /* width:95%; */
@@ -912,7 +941,9 @@ a img {
 
 .StdButtonBig {
     background-color: $_(clickable);
-    background-image:url(/ise/img/gradientButton50px.png);
+    /*background-image:url(/ise/img/gradientButton50px.png);*/
+    background-image: linear-gradient(to bottom, white 40%, gray);
+    background-image: var(--btnGradient);
     margin:2%;
     border:1px solid $_(black); /* black */
     /* width:95%; */
@@ -934,6 +965,8 @@ a img {
 {
   background-color: $_(activeBackground); /* #dddddd */
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
   color: $_(textColorA); /* #ffffff */
   border: solid 1px $_(gray); /* silver */
   border-radius: 5px;
@@ -992,7 +1025,9 @@ a img {
 .FooterButton {
 
   background-color: $_(clickable);
-  background-image:url(/ise/img/gradientButton50px.png);
+  /*background-image:url(/ise/img/gradientButton50px.png);*/
+  background-image: linear-gradient(to bottom, white 40%, gray);
+  background-image: var(--btnGradient);
 
   overflow: auto;
 
@@ -1452,6 +1487,8 @@ div.caption  { display: table-caption; }
 
 #_body {
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray);*/
+  background-image: var(--btnGradient);
 
 }
 
@@ -2297,6 +2334,8 @@ progress::-webkit-progress-value { background: #3678c9; }
 
   background-color:$_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray );*/
+  background-image: var(--btnGradient);
 
   color: $_(textColorB); /* black */
 
@@ -2340,6 +2379,8 @@ progress::-webkit-progress-value { background: #3678c9; }
 
   background-color:$_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray );*/
+  background-image: var(--btnGradient);
 
   width:96%;
   margin:3px 2% 3px 2%;
@@ -2489,6 +2530,8 @@ html, body {
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr= #ffffff, endColorstr=#d0d0d0)";*/
 
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray );*/
+  background-image: var(--btnGradient);
 
   overflow: auto;
 
@@ -2511,6 +2554,8 @@ html, body {
 .MainMenuItemCaption {
   background-color: $_(mainMenuBackground);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray );*/
+  background-image: var(--btnGradient);
 
   border: 1px solid $_(black);
   /* padding-left: 5px;
@@ -2981,6 +3026,8 @@ html, body {
 .DeviceListButton {
   background-color: $_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+  /*background-image: linear-gradient(to bottom, white 40%, gray );*/
+  background-image: var(--btnGradient);
   margin:2%;
   border:1px solid $_(black); /* black */
   width:95%;
@@ -3609,6 +3656,7 @@ application {
 .UIButton {
   position: absolute;
   border: 1px solid $_(black); /* black */
+  border-radius: 5px;
   background-color:$_(clickable);
   margin: 0;
   padding: 0;
@@ -6699,7 +6747,9 @@ color: $_(textColorA); /* white */
 
 .CLASS05008 {
     background-color:$_(clickable);
-    background-image:url(/ise/img/gradientButton50px.png);
+    /*background-image:url(/ise/img/gradientButton50px.png);*/
+		/*background-image: linear-gradient(to bottom, white 40%, gray );*/
+		background-image: var(--btnGradient);
 
 	color: $_(textColorB); /* black */
 	border:solid 1px $_(black); /* black */
@@ -8122,7 +8172,9 @@ color: $_(textColorA); /* white */
 .CLASS21000 {
 
   background-color: $_(gray); /* rgb(153, 153, 153) */
-  background-image:url(/ise/img/gradientButton50px.png);
+  /*background-image:url(/ise/img/gradientButton50px.png);*/
+	/*background-image: linear-gradient(to bottom, white 40%, gray );*/
+	background-image: var(--btnGradient);
 
   padding: 3px;
   text-align:center;
@@ -8672,6 +8724,8 @@ color: $_(textColorA); /* white */
 
   background-color: $_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+	/*background-image: linear-gradient(to bottom, white 40%, gray );*/
+	background-image: var(--btnGradient);
 
   color: $_(textColorB); /* black */
   border: 1px solid $_(black); /* black */
@@ -8743,6 +8797,8 @@ color: $_(textColorA); /* white */
 
   background-color: $_(clickable);
   background-image:url(/ise/img/gradientButton25px.png);
+	/*background-image: linear-gradient(to bottom, white 40%, gray );*/
+	background-image: var(--btnGradient);
 
   text-align:center;
   width:30px;

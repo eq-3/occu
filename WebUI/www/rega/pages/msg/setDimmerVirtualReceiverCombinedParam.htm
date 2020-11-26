@@ -38,6 +38,26 @@
       </td>
     </tr>
 
+    <tr id="trSelectBehaviour" class="visibilityHidden">
+      <td>${lblBehaviour}</td>
+      <td colspan="3">
+        <select id="combinedParam_Behaviour">
+          <option value="14">${blinkOldValue}</option>
+          <option value="0">${optionColorOFF}</option>
+          <option value="1">${optionColorON}</option>
+          <option value="2">${blinkSlow}</option>
+          <option value="3">${blinkMiddle}</option>
+          <option value="4">${blinkFast}</option>
+          <option value="5">${blinkFlashSlow}</option>
+          <option value="6">${blinkFlashMiddle}</option>
+          <option value="7">${blinkFlashFast}</option>
+          <option value="8">${blinkBillowSlow}</option>
+          <option value="9">${blinkBillowMiddle}</option>
+          <option value="10">${blinkBillowFast}</option>
+        </select>
+      </td>
+    </tr>
+
     <tr name="trRampTime">
       <td>${stringTableRampTime}: </td>
       <td>
@@ -59,7 +79,8 @@
     <tr>
       <td>${lblOnTimeLimited}:</td>
       <td>
-        <input id="chkBoxTimeLimit" type="checkbox">
+        <input id="chkBoxTimeLimit" type="checkbox">&nbsp;
+        <img src="/ise/img/help.png" style="cursor: pointer; width: 18px; height:18px;" onclick="showHelp('helpCombinedParameterTimeLimit', 450,120);">
       </td>
     </tr>
 
@@ -75,6 +96,22 @@
           <option value="0">${Sec}</option>
           <option value="1">${Min}</option>
           <option value="2">${Hou}</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr id="trRampTimeOff" class="visibilityHidden">
+      <td>${stringTableRampTimeOff}: </td>
+      <td>
+        <input id="combinedParam_RampTimeOffValue" type="text" size="5" style="text-align: left;" value="0">
+      </td>
+      <td style="text-align:center;">x</td>
+      <td>
+        <select id="combinedParam_RampTimeOffUnit" style="text-align: center;">
+          <option value="3">${optionUnit10MS}</option>
+          <option value="0">${Sec}</option>
+          <option value="1">${Min}</option>
+          <!-- <option value="2">${Hou}</option> Ramptime hour disabled-->
         </select>
       </td>
     </tr>

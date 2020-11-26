@@ -7,9 +7,12 @@ jQuery.extend(true,langJSON, {
     "lblWPAstroOffset" : "Astro Offset",
     "lblWPFixedTime" : "Uhrzeit",
     "lblWPDuration" : "Einschaltdauer",
+    "lblWPDuration1" : "Dauer",
     "lblWPRamptime" : "Rampenzeit",
     "lblWPBrightness" : "Helligkeit",
     "lblWPState" : "Schaltzustand",
+    "lblWPPermission" : "Berechtigung",
+    "lblWPAction" : "Aktion",
     "lblWPBlindLevel" : "Behangh%F6he",
     "lblWPSlatLevel" : "Lamellenposition",
     "lblWPWeekday" : "Wochentag",
@@ -34,6 +37,8 @@ jQuery.extend(true,langJSON, {
     "optionWeekPrgLatestOfFixedAndAstro" : "8: Das Sp%E4tere von Astro oder fester Uhrzeit",
     "optionStateOFF": "Aus",
     "optionStateON": "Ein",
+    "optionPermissionTrue" : "Erteilt",
+    "optionPermisionFalse" : "Nicht erteilt",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 Sekunde",
@@ -56,6 +61,11 @@ jQuery.extend(true,langJSON, {
       "<b>7: Das Fr%FChere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>zuerst</b> erreicht wird.<br/><br/>" +
       "<b>8: Das Sp%E4tere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>sp%E4ter</b> erreicht wird.",
 
+    "DLD_Mode" : "Hilfe DLD_Mode",
+    "DLD_LockMode" : "Hilfe Geraeteverhalten",
+    "DLD_UserMode" : "Hilfe Benutzerberechtigung",
+    "DLD_TargetChannels" : "Hilfe Zielkanaele",
+
     "dummy" : ""
   },
 
@@ -67,9 +77,12 @@ jQuery.extend(true,langJSON, {
     "lblWPAstroOffset" : "Astro Offset",
     "lblWPFixedTime" : "Time of day",
     "lblWPDuration" : "Switch-on time",
+    "lblWPDuration1" : "Duration",
     "lblWPRamptime" : "Ramp time",
     "lblWPBrightness" : "Brightness",
     "lblWPState" : "Switching status",
+    "lblWPPermission" : "Permission",
+    "lblWPAction" : "Action",
     "lblWPBlindLevel" : "Height of blinds",
     "lblWPSlatLevel" : "Slat position",
     "lblWPWeekday" : "Day of the week",
@@ -94,6 +107,9 @@ jQuery.extend(true,langJSON, {
     "optionWeekPrgLatestOfFixedAndAstro" : "8: Whatever occurs last between astro and fixed time of day",
     "optionStateOFF": "Off",
     "optionStateON": "On",
+    "optionPermissionTrue" : "en* Erteilt",
+    "optionPermisionFalse" : "en* Nicht erteilt",
+
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",
     "BASE_5_S" : "5 seconds",
@@ -115,7 +131,10 @@ jQuery.extend(true,langJSON, {
       "<b>7: Whatever occurs first between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>first</b>.<br/><br/>" +
       "<b>8: Whatever occurs last between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>last</b>.",
 
-
+    "DLD_Mode" : "en* HELP DLD_Mode",
+    "DLD_LockMode" : "en* HELP Geraeteverhalten",
+    "DLD_UserMode" : "en* HELP Benutzerberechtigung",
+    "DLD_TargetChannels" : "en* HELP Zielkanaele",
     "dummy" : ""
   }
 });

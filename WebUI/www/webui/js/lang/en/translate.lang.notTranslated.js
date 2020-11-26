@@ -1,126 +1,108 @@
 jQuery.extend(true, langJSON, {
   "en": {
+    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "en* Kommunikation Staubsensor: OK",
+    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "en* Kommunikation Staubsensor: gest&ouml;rt",
 
-    "helpAlarmSwitchParamDurationValue":
-      "Due to legal regulations, the duration of the alarm is limited to 10 minutes. " +
-      "This means that an entered value greater than 10 minutes or 600 seconds is ignored.",
+    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "en* Kommunikation Temp.-Luftfeuchtesensor: OK",
+    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "en* Kommunikation Temp.-Luftfeuchtesensor: gest&ouml;rt",
 
-      "cpSecurityHttpsRedirectTitle" : "Automatic forwarding to HTTPS",
-      "cpSecurityHttpsRedirectLabel" : "Forwarding to HTTPS active:",
-      "cpSecurityHttpsRedirectDescription" : "If this function is activated, automatic forwarding to HTTPS takes place when accessing the WebUI via HTTP.",
-  
-    /* LanRoutingV2 */
+    "stringTableErrorParticulateMatterMeasurementFalse" : "en* Messung Staubsensor: OK",
+    "stringTableErrorParticulateMatterMeasurementTrue" : "en* Messung Staubsensor: gest&ouml;rt",
 
-    "stringTableBrightnessVisKey": "Brightness of the system button",
-    "stringTableDisplayLightingDuration": "Illumination time display",
+    "stringTableErrorTempOrHumidityMeasurementFalse" : "en* Messung Temp.-Luftfeuchte: OK",
+    "stringTableErrorTempOrHumidityMeasurementTrue" : "en* Messung Temp.-Luftfeuchte: gest&ouml;rt",
 
-    "lblBus": "BUS",
+    "lblTilt" : "en* Neigung",
 
-    "lblOperatingVoltage": "Output voltage",
-    "lblOperatingVoltageStatus": "Status output voltage",
-    "lblOperationPowerConsumptionState": "Status current consumption",
+    "stringTableAutoHydraulicAdjustment" : "en* Hydraulischer Ventilabgleich",
 
-    "lblCurrentPowerConsumption": "Actual current consumption",
-    "lblCurrentOperatingVoltage": "Actual operating voltage",
+    "hintSetReadyWeeklyProgram" : "en* Zum konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
 
-    "comment": "lt. D. Stueben 06.02.2020",
-    "lblVoltageStatus_0": "Normal",
-    "lblVoltageStatus_1": "Unknown",
-    "lblVoltageStatus_2": "Overvoltage",
-    "lblVoltageStatus_3": "Ext. power supply",
+    "stringTableAutoRelockDelay" : "en* AutoRelockDelay",
+    "stringTableDoorLockDirection" : "en* Drehrichtung zum Schlie%DFen",
+    "stringTableDoorLockNeutralPos" : "en* Neutrale Position",
+    "stringTableDoorLockTurns" : "en* Anzhahl der Umdrehungen zum Schlie%DFen",
+    "lblVertical" : "en* Vertikal",
+    "lblHorizontal" : "en* Horizontal",
 
+    "comment" : "Diese Keys nach MASTER_LANG/HmIPWeeklyDeviceProgram.js",
+    "optionDoorLockAction" : "en* Ger%E4te-Verhalten",
+    "optionDoorLockUser" : "en* Benutzerberechtigung",
+    "optionDLDAction1" : "en* Verriegeln + Auto-Relock Ende",
+    "optionDLDAction2" : "en* 100% Verriegeln + Auto-Relock Beginn mit On-Time aus AutoRelockDelay",
+    "optionDLDAction3" : "en* Entriegeln + Auto-Relock Ende",
+    "optionDLDAction4" : "en* Auto-Relock Ende",
+    "comment" : "End HmIPWeeklyDeviceProgram.js",
 
-    "lblPowerConsumptionStatus_0": "Normal",
-    "lblPowerConsumptionStatus_1": "Unknown",
-    "lblPowerConsumptionStatus_2": "Current consumption too high",
+    "lblBehaviour" : "en* Verhalten",
 
-    "stringTableOperationPowerConsumptionState": "Status current consumption",
-    "lblOperationTemp": "Operating temperature",
+    "optionColorOFF" : "en* Beleuchtung Aus",
+    "optionColorON" : "en* Dauerhaft Ein",
+    "blinkSlow" : "en* Langsames Blinken",
+    "blinkMiddle" : "en* Mittleres Blinken",
+    "blinkFast" : "en* Schnelles Blinken",
+    "blinkFlashSlow" : "en* Langsames Blitzen",
+    "blinkFlashMiddle" : "en* Mittleres Blitzen",
+    "blinkFlashFast" : "en* Schnelles Blitzen",
+    "blinkBillowSlow" : "en* Langsames An-/Abschwellen",
+    "blinkBillowMiddle" : "en* Mittleres An-/Abschwellen",
+    "blinkBillowFast" : "en* Schnelles An-/Abschwellen",
 
-    "lblDutyCycle": "Duty cycle",
-    "lblCarrierSense": "Carrier Sense",
+    "stringTableColorOldValue" : "en* Farbwert beibehalten",
+    "stringTableColorNoChange" : "en* Farbwert ignorieren",
 
-    "comment": "NEW for the DRAP migration",
-    "headerDrapUpdateNecessary": 
-    "This update uses Advanced Routing to establish improved communication between the Homematic IP wireless and wired components. " +
-      "This requires a firmware update of the Homematic IP Wired Access Point.<br><br>After the update, the Homematic IP Wired Access Point is moved into the inbox and must be configured there.<br>" +
-      "All wired devices in the installation that have already been connected and configured will continue to work as usual after the update.",
+    "stringTableColorBehaviourOldValue" : "en* Verhalten beibehalten",
+    "stringTableColorBehaviourDoNotCare" : "en* Verhalten ignorieren",
 
-    "drapUpdateNecessary": "The following Wired Access Points with an incompatible firmware were found and must be updated:<br/><br/>",
+    "stringTableColorBehaviourStatus" : "Status Verhalten",
 
-    "comment": "SPHM-537",
-    "stringTableErrorCoProcessor": "The channel is not accessible. Please check the power supply of the channel or deactivate it in the WebUI.",
+    "stringTableRampTimeOff" : "en* Ausschalt-Rampenzeit",
 
-    "lblSeeServiceMessage": "See service message!",
+    "helpCombinedParameterTimeLimit" :
+      "en* Eine nicht aktivierte Checkbox bedeutet dauerhaft Ein.<br/></br>" +
+      "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer bestimmen. " +
+      "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted dauerhaft Ein.",
 
-    "lblAllChannelsVisible": "All channels visible:",
+    "helpCombinedParameterTimeLimitWithRampOff" :
+    "en* Eine nicht aktivierte Checkbox bedeutet dauerhaft Ein.<br/></br>" +
+    "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer, sowie die Ausschalt-Rampenzeit bestimmen. " +
+    "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted dauerhaft Ein.",
 
-    "thAvailableVersion": "Available version",
-    "thInstalledVersion": "Installed version",
-    "btnReload": "Reload",
+    "diagramValueTypeCONCENTRATION_CO2" : "en* CO2 Konzentration",
+    "lblCO2Concentration" : "en* CO2 Konzentration",
 
+    "btnDirectFwUpload" : "en* Direkt auf CCU laden und installieren",
+    "dialogSettingsCMLblAlternateSoftwareUpdate" : "en* Alternative Vorgehensweise:",
 
-    "btnAccessPoints": "Update Access Points with</br>incompatible FW",
-    "lblShowAllAPs": "Update Access Points with incompatible FW",
-    "lblGotoUpdate" : "To the update",
+    "indoorAirQualityGood" : "en* Raumluftqualit%E4t: Gut",
+    "indoorAirQualityMediocre" : "en* Raumluftqualit%E4t: Mittelm%E4%DFig<br/><br/>Der Raum sollte gel%FCftet werden.",
+    "indoorAirQualityModerate" : "en* Raumluftqualit%E4t: M%E4%DFig<br/><br/>Der Raum sollte dringend gel%FCftet werden.",
+    "indoorAirQualityLow" : "en* Raumluftqualit%E4t: Niedrig<br/><br/>Der Raum sollte unbedingt gel%FCftet werden.",
 
-    "apSearchMigrationDescription": "The password of the Homematic IP Access Point and an active Internet connection are required for the update. The password (PW) can be found on the sticker on the device.",
+    "lblCalibrationValue" : "en* Kalibrierwert",
+    "lblCalibrationInterval" : "en* Kalibrierungsintervall",
+    "lblCalibrationInterval" : "en* Kalibrierungsintervall",
+    "stringTableCalibrationIntervalUnit" : "en* Einheit Kalibrierungsintervall",
+    "stringTableCalibrationIntervalValue" : "en* Wert des Kalibrierungsintervalls",
 
-    "apSearchDescription": "The password of the Homematic IP Access Point is required for the update. The password (PW) can be found on the sticker on the device.",
-    "password": "Password",
-    "apSearchWaitText": "Access Points are searched in the network. Please wait until the search is complete.",
-    "apMigrationNoApToUpdate" : "No Access Points were found that require firmware updates.",
-    "apMigrationConfigureForUpdateFailed" : "An error occurred when starting the Access Point update. Please check the password and try again.",
-    "apMigrationUpdateSuccessful" : "The firmware update was successfully completed.",
-    "apMigrationErrorOrTimeout" : "An error occurred during the firmware update Please update the view and try again.",
-    "apMigrationUpdateSuccessfulAddition" : "You can now teach-in the Access Point via &ldquo;Teach-in device&rdquo;.",
-    "apMigrationUpdateSuccessfulAdditionMigrationMode" : "The Access Point is now in your inbox.",
+    "stringTableConcentration" : "en* CO2-Konzentration",
+    "stringTableConcentrationStatus" : "en* Status CO2-Konzentration",
+    "lblAutoCalibration" : "en* Automatische Kalibrierung",
 
-    "hintDeviceDoesNotSupportAction" : "The currently installed device firmware does not support this function.",
-
-
-    "stringTableTempHumidityParticulateMatterUnit" : "Unit of automatic sensor cleaning",
-    "stringTableTempHumidityParticulateMatterValue" : "Value of automatic sensor cleaning",
-
-    "lblDifferentialTemperature": "Difference temperature T1 - T2",
-    "noNeedForUpdate" : "No update required.",
-    "notCompatible" : "Not compatible",
-
-    "stringTableMassConc25" : "Mass concentration PM2.5",
-    "stringTableMassConc100" : "Mass concentration PM10",
-    "stringTableNumberConc25" : "Quantity concentration PM2.5",
-    "stringTableNumberConc100" : "Quantity concentration PM10",
-    "stringTableTypicalParticelSize" : "Typical particle size",
-
-    "aqiGood" : "Good",
-    "aqiModerate" : "Moderate",
-    "aqiUnhealty1" : "Unhealthy for sen. people",
-    "aqiUnhealty2" : "Unhealthy",
-    "aqiUnhealty3" : "Very unhealthy",
-    "aqiHazardous" : "Threat to health",
-    "lblLocationA" : "Location",
-    "Europe" : "Europe",
-    "USA" : "USA",
-
-    "hintGroupDevice" : "Please note! This device is part of a heating group.<br/>Adjustments to the temperature profiles should be made in the group.",
-
-    "lblChnNotAllowedInRoom" : "This channel cannot be assigned to a room!",
-    "lblChnNotAllowedInFunc" : "This channel cannot be assigned to a function!",
-
-    "stringTableMulticastRouterModuleEnabled" : "MultiCast Routing",
-
-    "lblErrorSensor" : "Sensor error",
-
-     "lblOutputSwap" : "Swap outputs",
-    "optionOutputNotSwapped" : "No",
-    "optionOutputSwapped" : "Yes",
-
-    "hintSetReady" : "Please press the Done button and configure the device in the device list.",
-
-    "drapRescueIntroTitle" : "HmIP-DRAP preparatory update",
-    "drapRescueIntroText" : "This HmIP-DRAP with firmware version 2.0.16 requires an intermediate update before the actual update can be carried out.</br>For this purpose, enter the password (PW) printed on the HmIP-DRAP and click &ldquo;OK&rdquo;.",
-    "drapRescueUpdateSuccessful" : "The intermediate update was completed successfully.</br>Wait until the LED of the HmIP-DRAP flashes blue or shines turquoise. Start the actual update by clicking the &ldquo;Update&rdquo; button again.",
+    "diagramValueTypeCONCENTRATION" : "en* CO2-Konzentration",
 
     "noMoreKeys" : ""
   }
 });
+
+langJSON.en.stringTableColorBehaviourOff = langJSON.en.optionColorOFF;
+langJSON.en.stringTableColorBehaviourOn = langJSON.en.optionColorON;
+langJSON.en.stringTableColorBehaviourBlinkingSlow = langJSON.en.blinkSlow;
+langJSON.en.stringTableColorBehaviourBlinkingMiddle = langJSON.en.blinkMiddle;
+langJSON.en.stringTableColorBehaviourBlinkingFast = langJSON.en.blinkFast;
+langJSON.en.stringTableColorBehaviourFlashSlow = langJSON.en.blinkFlashSlow;
+langJSON.en.stringTableColorBehaviourFlashMiddle = langJSON.en.blinkFlashMiddle;
+langJSON.en.stringTableColorBehaviourFlashFast = langJSON.en.blinkFlashFast;
+langJSON.en.stringTableColorBehaviourBillowSlow = langJSON.en.blinkBillowSlow;
+langJSON.en.stringTableColorBehaviourBillowMiddle = langJSON.en.blinkBillowMiddle;
+langJSON.en.stringTableColorBehaviourBillowFast = langJSON.en.blinkBillowFast;

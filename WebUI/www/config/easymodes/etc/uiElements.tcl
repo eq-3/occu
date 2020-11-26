@@ -38,12 +38,17 @@ proc getMinMaxValueDescr {param} {
 
 
 
-    # SPHM-118 / SPHM-410 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
-    if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
-      if {($param == "REFERENCE_RUNNING_TIME_TOP_BOTTOM_VALUE") || ($param == "REFERENCE_RUNNING_TIME_BOTTOM_TOP_VALUE")} {
-        set max [expr $param_descr(MAX) - 1]
-      }
+  # SPHM-118 / SPHM-410 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
+  if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
+    if {($param == "REFERENCE_RUNNING_TIME_TOP_BOTTOM_VALUE") || ($param == "REFERENCE_RUNNING_TIME_BOTTOM_TOP_VALUE")} {
+      set max [expr $param_descr(MAX) - 1]
     }
+  }
+
+  if {[string equal $dev_descr(TYPE) "HmIP-SCTH230"] == 1} {
+    if {$param == "INTERVAL_VALUE"} {set min 1}
+    if {$param == "CALIBRATION_PPM_VAL"} {set max 10000}
+  }
 
   set unit "noUnit"
 
@@ -65,6 +70,11 @@ proc getMinMaxValueDescr {param} {
       append min "V"
       append max "V"
     }
+  }
+
+  if {$param == "TRIGGER_ANGLE_2"} {
+    upvar valTriggerAngle triggerAngle
+    set min "<span id='minTriggerAngle' >$triggerAngle</span>"
   }
 
   return "($min - $max)"
@@ -95,7 +105,6 @@ proc getUnit {param} {
   if {$unit == "_Grad_"} {
     set unit "&#176;"
   }
-
   return "$unit"
 }
 
@@ -106,6 +115,11 @@ proc getCondTXThresholdUnit {devType chn} {
           if {$chn == "3"} {return "%"}
         }
         hmip-slo {return "Lux"}
+        hmip-scth230 {
+          if {$chn == "2" || $chn == "3"} {return "ppm"}
+          if {$chn == "5"} {return "°C"}
+          if {$chn == "6"} {return "%"}
+        }
       default {return ""}
     }
 }
@@ -126,12 +140,19 @@ proc getTextField {param value chn prn {extraparam ""}} {
   upvar psDescr descr
   array_clear param_descr
   array set param_descr $descr($param)
-  set minValue [format {%1.1f} $param_descr(MIN)]
+  set minValue $param_descr(MIN)
+  set maxValue $param_descr(MAX)
+
+  if {[string first "." $param_descr(MIN)] != -1} {
+    set minValue [format {%1.1f} $minValue]
+  }
+
+  if {[string first "." $param_descr(MAX)] != -1} {
+    set maxValue [format {%1.1f} $maxValue]
+  }
 
   if {[devIsPowerMeter $dev_descr(TYPE)]} {
     set maxValue [getUserDefinedMaxValue $dev_descr(TYPE)]
-  } else {
-    set maxValue [format {%1.1f} $param_descr(MAX)]
   }
 
   # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
@@ -141,11 +162,16 @@ proc getTextField {param value chn prn {extraparam ""}} {
     }
   }
 
+  if {[string equal $dev_descr(TYPE) "HmIP-SCTH230"] == 1} {
+    if {$param == "INTERVAL_VALUE"} {set minValue 1}
+    if {$param == "CALIBRATION_PPM_VAL"} {set maxValue 10000}
+  }
+
   set elemId 'separate_CHANNEL\_$chn\_$prn'
 
   # Limit float to 2 decimal places
   if {[llength [split $value "."]] == 2} {
-    set value [format {%1.2f} $value]
+    set value [format {%1.1f} $value]
   }
 
   # Convert float to int - sometimes the parameter UTC_* comes as float instead of int (for whatever reason). This will cause an error.
@@ -153,7 +179,45 @@ proc getTextField {param value chn prn {extraparam ""}} {
     set value [expr {int([expr $value])}]
   }
 
-  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\" $extraparam>"
+  if {$param == "TRIGGER_ANGLE_2"} {
+    upvar valTriggerAngle triggerAngle
+    set minValue $triggerAngle
+  }
+
+  if {$param == "TRIGGER_ANGLE" && [info exists descr(TRIGGER_ANGLE_2)] == 1} {
+    upvar valTriggerAngle2 triggerAngle2
+    set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"SetTriggerAngle2(this.value, $triggerAngle2);ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\" $extraparam>"
+    cgi_javascript {
+      puts "var maxTriggerAngle = parseInt($maxValue), minTriggerAngle = parseInt($minValue);"
+      puts {
+        SetTriggerAngle2 = function(value, triggerAngle2) {
+          var triggerAngleElm = jQuery("[name='TRIGGER_ANGLE']").first(),
+          triggerAngleElm2 = jQuery("[name='TRIGGER_ANGLE_2']").first(),
+          valTriggerAngle = parseInt(triggerAngleElm.val()),
+          valTriggerAngle2 = parseInt(triggerAngleElm2.val()),
+          value = parseInt(value);
+
+          if (isNaN(valTriggerAngle) || (valTriggerAngle < minTriggerAngle)) {valTriggerAngle = minTriggerAngle; valTriggerAngle2 = minTriggerAngle;}
+          if (valTriggerAngle > maxTriggerAngle) {valTriggerAngle = maxTriggerAngle; valTriggerAngle2 = maxTriggerAngle;}
+
+          jQuery("\#minTriggerAngle").text(valTriggerAngle);
+
+          if ((valTriggerAngle > valTriggerAngle2) || (valTriggerAngle == minTriggerAngle) || (valTriggerAngle == maxTriggerAngle)) {
+            triggerAngleElm2.val(valTriggerAngle);
+          }
+
+          triggerAngleElm2.unbind("blur")
+          triggerAngleElm2.removeAttr("onblur");
+          triggerAngleElm2.bind("blur",function() {
+            ProofAndSetValue(this.id, this.id, valTriggerAngle, maxTriggerAngle, 1);
+          });
+
+        }
+      }
+    }
+  } else {
+    set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1)\" $extraparam>"
+  }
 
   return $s
 }
@@ -335,10 +399,12 @@ proc getHelpIcon {topic {x 0} {y 0}} {
   # Set the size for known parameters
   switch $topic {
    "ABORT_EVENT_SENDING_CHANNELS" {set x 500; set y 140}
+   "AUTO_HYDRAULIC_ADJUSTMENT" {set x 500; set y 75}
    "BLIND_AUTOCALIBRATION" {set x 450; set y 75}
    "BLIND_REFERENCE_RUNNING_TIME" {set x 450; set y 160}
    "BLOCKING_PERIOD" {set x 450; set y 100}
    "BOOST_TIME_PERIOD" {set x 450; set y 120}
+   "CALIBRATION_PPM" {set x 500; set y 250}
    "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
    "CONTACT_BOOST" {set x 450; set y 180}
    "DELAY_COMPENSATION" {set x 450; set y 100}
@@ -353,7 +419,9 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "DIM_STEP" {set x 500; set y 150}
    "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
+
    "OUTPUT_SWAP" {set x 450; set y 100}
+
    "PERMANENT_FULL_RX" {set x 500; set y 160}
    "PWM_AT_LOW_VALVE_POSITION" {set x 500; set y 130}
    "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
@@ -610,6 +678,48 @@ proc getPowerUpSelector {chn p special_input_id} {
       append html "</tr>"
     }
 
+    set param POWERUP_OPTICAL_SIGNAL_COLOR
+    if { [info exists ps($param)] == 1 } {
+      set tmp $ps($param)
+      set listColor "colorBLACK  colorBLUE colorGREEN colorTURQUOISE colorRED colorPURPLE colorYELLOW colorWHITE"
+      set select ""
+      incr prn
+      append html "<tr>"
+        append html "<td>\${lblColorValue}</td>"
+        append html "<td>"
+          append html "<select id='separate_CHANNEL\_$chn\_$prn' name=$param>"
+            # append html "<option value=\"14\" $select>\${colorOldValue}</option>"
+            # append html "<option value=\"15\" $select>\${lblIgnore}</option>"
+            for {set loop 0} {$loop <= [expr [llength $listColor] -1]} {incr loop} {
+              if {$tmp == $loop} {set select "selected=\"selected\""} else {set select ""}
+              append html "<option value=\"$loop\" $select>\${[lindex $listColor $loop]}</option>"
+            }
+          append html "</select>"
+        append html "</td>"
+      append html "</tr>"
+    }
+
+    set param POWERUP_OPTICAL_SIGNAL_BEHAVIOUR
+    if { [info exists ps($param)] == 1 } {
+      set tmp $ps($param)
+      set listBehaviour "optionColorOFF optionColorON blinkSlow blinkMiddle blinkFast blinkFlashSlow blinkFlashMiddle blinkFlashFast blinkBillowSlow blinkBillowMiddle blinkBillowFast"
+      set select ""
+      incr prn
+      append html "<tr>"
+        append html "<td>\${lblBehaviour}</td>"
+        append html "<td>"
+          append html "<select id='separate_CHANNEL\_$chn\_$prn' name=$param>"
+            # append html "<option value=\"14\" $select>\${blinkOldValue}</option>"
+            # append html "<option value=\"15\" $select>\${lblIgnore}</option>"
+            for {set loop 0} {$loop <= [expr [llength $listBehaviour] -1]} {incr loop} {
+              if {$tmp == $loop} {set select "selected=\"selected\""} else {set select ""}
+              append html "<option value=\"$loop\" $select>\${[lindex $listBehaviour $loop]}</option>"
+            }
+          append html "</select>"
+        append html "</td>"
+      append html "</tr>"
+    }
+
 
     set param POWERUP_OUTPUT_BEHAVIOUR
     if { [info exists ps($param)] == 1 } {
@@ -771,6 +881,7 @@ proc getPowerUpSelector {chn p special_input_id} {
           append html "jQuery(\"#timeDelay_\" + chn + \"_2\").prop(\"disabled\", false);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_3\").prop(\"disabled\", false);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_4\").prop(\"disabled\", false);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_6\").prop(\"disabled\", false);"
           catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_$powerUpLevelPRN\").val(100);}"}
           append html "panelOnElm.show();"
           append html "panelOffElm.hide();"
@@ -780,6 +891,7 @@ proc getPowerUpSelector {chn p special_input_id} {
           append html "jQuery(\"#timeDelay_\" + chn + \"_2\").val(0).change().prop(\"disabled\", true);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_3\").val(0).change().prop(\"disabled\", true);"
           append html "jQuery(\"#timeDelay_\" + chn + \"_4\").val(0).change().prop(\"disabled\", true);"
+          append html "jQuery(\"#timeDelay_\" + chn + \"_6\").val(0).change().prop(\"disabled\", true);"
           catch {append html "if (valChanged) {jQuery(\"#separate_CHANNEL_\" + chn + \"_$powerUpLevelPRN\").val(100);}"}
           append html "panelOnElm.show();"
           append html "panelOffElm.hide();"

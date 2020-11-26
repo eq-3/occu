@@ -36,6 +36,7 @@
     "optionUnit24H": "24h",
     "optionUnit1D": "1 day",
     "optionUnit7D": "7 days",
+    "optionUnit8D": "8 days",
     "optionUnit14D": "14 days",
     "optionUnit24D": "24 days",
     "optionUnit28D": "28 days",

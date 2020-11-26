@@ -164,7 +164,7 @@
     ];
     var result;
     if (mode == 3 || mode == 4) {
-      // User defined
+      // Power consumption and User defined
       result = jQuery.merge([], fullPeriod);
     } else {
       // Temperature and Power
@@ -958,19 +958,20 @@
     diagramSettings.options.axesDefaults = { tickRenderer: jQuery.jqplot.CanvasAxisTickRenderer};
     diagramSettings.options.legend.renderer = jQuery.jqplot.EnhancedLegendRenderer;
 
-    /* AG Displays a tooltip at the datapoint of a line diagram
-    diagramSettings.options.highlighter = {
-      show: !barRenderer,
-      sizeAdjust: 3,
-      tooltipLocation: "sw",
-      tooltipAxes: "piered",
-      formatString: "<table><tr><td>%s</td></tr><tr><td style='text-align:center'>%.1f</td></tr></table>",
-      fadeTooltip: true,
-      tooltipFadeSpeed: "fast",
-      useAxesFormatters: true
-    };
+    if (homematic('CCU.existsFile', {'file': "/etc/config/showDiagramDatapoints"})) {
+      //AG Displays a tooltip at the datapoint of a line diagram
+      diagramSettings.options.highlighter = {
+        show: !barRenderer,
+        sizeAdjust: 3,
+        tooltipLocation: "sw",
+        tooltipAxes: "piered",
+        formatString: "<table><tr><td>%s</td></tr><tr><td style='text-align:center'>%.1f</td></tr></table>",
+        fadeTooltip: true,
+        tooltipFadeSpeed: "fast",
+        useAxesFormatters: true
+      };
+    }
 
-    */
     // Hides the small tooltip in the right bottom edge of line graphs
     //diagramSettings.options.cursor.showTooltip = barRenderer;
 
@@ -1026,17 +1027,17 @@
     // plot the diagram
     diagramSettings.options.seriesDefaults.renderer = diagramRenderer;
 
-    /* AG
+    if (homematic('CCU.existsFile', {'file': "/etc/config/showDiagramDatapoints"})) {
       // The default jqPlot marker renderer, rendering the points on the line.
       diagramSettings.options.seriesDefaults.markerRenderer = jQuery.jqplot.MarkerRenderer;
       diagramSettings.options.seriesDefaults.markerOptions = {
         show: true,
         size: 5,
         style: 'filledCircle', //circle, diamond, square - filledCirce, filledDiamond, filledSquare
-        shadow:false,
+        shadow: false,
         lineWidth: 1
       };
-    */
+    }
     if (barRenderer) {
       selBoxComparisonDevice.html("");
       diagramSettings.options.cursor.barRendererToday = (timePeriod == "unknown" || timePeriod == "24h") ? true : false;

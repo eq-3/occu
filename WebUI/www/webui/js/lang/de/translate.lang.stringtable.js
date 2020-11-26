@@ -1179,7 +1179,6 @@ jQuery.extend(true,langJSON, {
     "stringTableLogicSwitchOR" : "OR (ein, wenn mindestens ein Wert ein)",
     "stringTableLogicSwitchORINVERS" : "OR_INVERS (OR mit vorheriger Invertierung des Kanal-Zustands)",
     "stringTableLogicSwitchXOR" : "XOR (ein, wenn nur genau ein Wert ein)",
-
     "comment" : "Error codes service messages DRAP",
     "stringTablelErrorBusConfigMismatchFalse" : "Die tats%E4chliche Bustopologie entspricht der konfigurierten Bustopologie.",
     "stringTablelErrorBusConfigMismatchTrue" : "Die tats%E4chliche Bustopologie entspricht nicht der konfigurierten Bustopologie.",
@@ -1191,13 +1190,31 @@ jQuery.extend(true,langJSON, {
     "stringTableErrorShortCircuitDataLineBus1True" : "Ein Kurzschluss zwischen der 24V-Leitung und der Datenleitung A und/oder B von Bus 1 wurde festgestellt.",
     "stringTableErrorShortCircuitDataLineBus2False" : "Kein Kurzschluss zwischen der 24V-Leitung und der Datenleitung A und/oder B von Bus 2 festgestellt.",
     "stringTableErrorShortCircuitDataLineBus2True" : "Ein Kurzschluss zwischen der 24V-Leitung und der Datenleitung A und/oder B von Bus 2 wurde festgestellt.",
-
     "stringTableOnMinLevel" : "Ventilposition Umschaltwert",
     "stringTablePWMatLowValvePosition" : "Automatische Umschaltung von Stetig auf PWM<br/>(bei kleinen Ventilpositionen)",
     "stringTableAbortEventSendingChannels" :
     "Schnellere Reaktion bei erneutem Tastendruck durch Abbruch alter Sendevorg%E4nge",
     "stringTableElsterCompatibilityMode" : "Elster Kompatibilit%E4tsmodus",
     "stringTableEventTimeoutRainDetector" : "Zeitspanne ohne Regen, nach der vom <br/>Sensor 'Trocken' gemeldet wird.",
+    "stringTableBrightnessVisKey": "Helligkeit der Systemtaste",
+    "stringTableDisplayLightingDuration": "Beleuchtungsdauer Display",
+    "stringTableErrorCoProcessor": "Der Kanal ist nicht erreichbar. Bitte pr%FCfen Sie die Spannungsversorgung des Kanals oder deaktivieren Sie diesen in der WebUI.",
+    "stringTableTempHumidityParticulateMatterUnit" : "Einheit der automatischen Sensorreinigung",
+    "stringTableTempHumidityParticulateMatterValue" : "Wert der automatischen Sensorreinigung",
+
+    "stringTableMassConc10" : "Massenkonzentration PM1.0",
+    "stringTableMassConc25" : "Massenkonzentration PM2.5",
+    "stringTableMassConc100" : "Massenkonzentration PM10",
+    "stringTableNumberConc10" : "Mengenkonzentration PM1.0",
+    "stringTableNumberConc25" : "Mengenkonzentration PM2.5",
+    "stringTableNumberConc100" : "Mengenkonzentration PM10",
+    "stringTableTypicalParticelSize" : "Typische Partikelgr%F6%DFe",
+
+    "stringTableMulticastRouterModuleEnabled" : "MultiCast-Routing",
+
+    "stringTableOldValue" : "Alter Wert",
+    "stringTableNoChange" : "Ignorieren",
+
     "noMoreKeys" : ""
   }
 });

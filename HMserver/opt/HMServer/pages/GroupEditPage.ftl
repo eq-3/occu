@@ -196,7 +196,7 @@
         /*self.executeDeviceRefresh = true;
         self.regaId = "2082"*/
         self.executeDeviceRefresh = ${executeDeviceRefresh?c};
-        self.regaId = "${addedRegaId}"
+        self.regaId = "${addedRegaId}";
 
         self.virtualDeviceSerialNumber = ko.observable("");
         self.groupDeviceName = ko.observable("");
@@ -221,7 +221,7 @@
         self.isSingleOperationForbidden = ${isSingleOperationForbidden}
         self.isSaving = ko.observable(false);
 
-        self.possibleGroupTypes = new Array();
+        self.possibleGroupTypes = [];
         <#list possibleGroupTypes as deviceType>self.possibleGroupTypes.push(new GroupType("${deviceType.getId()}", translateKey('${deviceType.getLabel()}')));</#list>
 
         ko.utils.arrayForEach(self.possibleGroupTypes, function(item) {
@@ -238,7 +238,7 @@
 
             data.groupTypeId = item.id;
 
-            pb = JSON.stringify(data);
+            var pb = JSON.stringify(data);
 
             var opt =
             {
@@ -257,7 +257,7 @@
                     });
                     translateButtons("btnAdd");
                 }
-            }
+            };
 
             new Ajax.Request(url,opt);
         });
@@ -278,14 +278,14 @@
             self.assignableDevices.remove(device);
             self.assignedDevices.push(device);
             translateButtons("btnGroupRemove");
-        }
+        };
 
         self.removeDevice = function(device)
         {
             self.assignedDevices.remove(device);
             self.assignableDevices.push(device);
             translateButtons("btnAdd");
-        }
+        };
 
         self.configureVirtualDevice = function()
         {
@@ -298,7 +298,7 @@
                     HideWaitAnim();
                     jQuery("#content").html(data);
             });
-        }
+        };
 
         self.operateVirtualDevice = function()
         {
@@ -317,11 +317,11 @@
                     var newContent = t.responseText.replace(regularExpression, "loadChannels("+virtualDevice.device.id+")");
                     jQuery("#content").html(newContent);
                 }
-            }
+            };
             new Ajax.Request(url,opt);
-        }
+        };
 
-        self.assignableDeviceHeaders = new Array();
+        self.assignableDeviceHeaders = [];
         self.assignableDeviceHeaders.push(new Header(translateKey('groupDeviceName'), 'name'));
         self.assignableDeviceHeaders.push(new Header(translateKey('thTypeDescriptorWOLineBreak'), 'type'));
         self.assignableDeviceHeaders.push(new Header(translateKey('thPicture'), 'thPicture'));
@@ -329,14 +329,14 @@
         self.assignableDeviceHeaders.push(new Header(translateKey('groupSerialNumber'), 'serialNumber'));
         self.assignableDeviceHeaders.push(new Header(translateKey('groupAction'), 'deviceAction'));
 
-        self.assignedDeviceHeaders = new Array
+        self.assignedDeviceHeaders = [];
         self.assignedDeviceHeaders.push(new Header(translateKey('groupDeviceName'), 'name'));
         self.assignedDeviceHeaders.push(new Header(translateKey('thTypeDescriptorWOLineBreak'), 'type'));
         self.assignedDeviceHeaders.push(new Header(translateKey('thPicture'), 'thPicture'));
         self.assignedDeviceHeaders.push(new Header(translateKey('groupSerialNumber'), 'serialNumber'));
         self.assignedDeviceHeaders.push(new Header(translateKey('groupAction'), 'deviceAction'));
 
-        self.leftoverDeviceHeaders = new Array
+        self.leftoverDeviceHeaders = [];
         self.leftoverDeviceHeaders.push(new Header(translateKey('groupDeviceName'), 'name'));
         self.leftoverDeviceHeaders.push(new Header(translateKey('thTypeDescriptorWOLineBreak'), 'type'));
         self.leftoverDeviceHeaders.push(new Header(translateKey('thPicture'), 'thPicture'));
@@ -370,7 +370,7 @@
             var descSort = function(a,b){ return ascSort(b,a); };
             var sortFunc = header.asc ? ascSort : descSort;
             deviceList.sort(sortFunc);
-        }
+        };
     }
 
     var viewModel = new GroupViewModel();
@@ -394,7 +394,7 @@
     {
         var data = new Object();
 
-        data.devicesToConfigure = new Array();
+        data.devicesToConfigure = [];
 
         ko.utils.arrayForEach(devicesInPendingState, function(item) {
             var device = new Object();
@@ -404,7 +404,7 @@
             data.devicesToConfigure.push(device);
         });
 
-        var url = '/pages/jpages/group/list?sid='+SessionId;
+        var url = '/pages/jpages/group/list?sid='+SessionId,
         pb = JSON.stringify(data);
         var opt =
         {
@@ -413,9 +413,9 @@
             {
                 jQuery("#content").html(t.responseText);
             }
-        }
+        };
         new Ajax.Request(url,opt);
-    }
+    };
 
     adaptChannelNames = function(id, groupName) {
       var device = DeviceList.getDevice(id),
@@ -467,7 +467,7 @@
               });
             }
         });
-    }
+    };
 
     SaveGroup = function() {
       var showMessage = false,
@@ -498,7 +498,7 @@
 
         });
       } else { _SaveGroup();}
-    }
+    };
 
     _SaveGroup = function()
     {
@@ -513,7 +513,7 @@
         data.groupName = escape(viewModel.groupName());
         data.groupTypeId = viewModel.groupType().id;
         data.forbidSingleOperation = viewModel.isSingleOperationForbidden;
-        data.assignedDevicesIds = new Array();
+        data.assignedDevicesIds = [];
         data.isNewGroup = viewModel.isNew();
         data.groupDeviceName = jQuery("#group_name").val() + " " + viewModel.virtualDeviceSerialNumber();
 
@@ -588,10 +588,10 @@
                     }
                 }
             }
-        }
+        };
 
         new Ajax.Request(url,opt);
-    }
+    };
 
     SetOperateGroupOnly = function(item, mode) {
       homematic("Device.setOperateGroupOnly", {id:item.device.id, mode: mode}, function(result) {
@@ -599,7 +599,7 @@
           DeviceList.devices[item.device.id].isOperateGroupOnly = mode;
         }
       });
-    }
+    };
 
   var s = "";
   s += "<table cellspacing='8'>";
@@ -621,7 +621,7 @@
 
 </script>
  <div class="DialogLayer" style="z-index: 200; position: absolute; top: 0px; left: 0px; display: none" data-bind="visible: isSaving">
-     <div class="UIFrame" style="width: 324px; height:86px; top: 260px; left: 480px">
+     <div class="UIFrame" style="width: 324px; height:86px; top: 260px; left: 480px;">
          <div class="UIFrameTitle" style="top: 2px; left: 2px; width: 320px; height: 20px; line-height: 20px;">
              ${"$"}{groupWillBeSavedHeader}
          </div>

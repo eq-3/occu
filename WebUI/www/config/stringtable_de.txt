@@ -158,6 +158,8 @@ ATC_ADAPTION_INTERVAL	${stringTableATCAdaptionInterval}
 ATC_MODE	${stringTableATCMode}
 ATC_OFF	${stringTableOFF}
 ATC_ON	${stringTableON}
+
+AUTO_HYDRAULIC_ADJUSTMENT	${stringTableAutoHydraulicAdjustment}
 AUTO_MODE	${stringTableClimateControlRTTransceiverAutoMode}
 AVERAGE_ILLUMINATION	${stringTableAverageIllumination}
 AVERAGE_ILLUMINATION_STATUS=NORMAL	${lblValue} ${stringTableAverageIllumination}: ${lblNormal}
@@ -382,6 +384,24 @@ COLOR=RED	${colorRED}
 COLOR=PURPLE	${colorPURPLE}
 COLOR=YELLOW	${colorYELLOW}
 COLOR=WHITE	${colorWHITE}
+COLOR=LEVEL	${stringTableBrightness}
+COLOR=OLD_VALUE	${stringTableColorOldValue}
+COLOR=DO_NOT_CARE	${stringTableColorNoChange}
+COLOR_BEHAVIOUR=OFF	${stringTableColorBehaviourOff}
+COLOR_BEHAVIOUR=ON	${stringTableColorBehaviourOn}
+COLOR_BEHAVIOUR=BLINKING_SLOW	${stringTableColorBehaviourBlinkingSlow}
+COLOR_BEHAVIOUR=BLINKING_MIDDLE	${stringTableColorBehaviourBlinkingMiddle}
+COLOR_BEHAVIOUR=BLINKING_FAST	${stringTableColorBehaviourBlinkingFast}
+COLOR_BEHAVIOUR=FLASH_SLOW	${stringTableColorBehaviourFlashSlow}
+COLOR_BEHAVIOUR=FLASH_MIDDLE	${stringTableColorBehaviourFlashMiddle}
+COLOR_BEHAVIOUR=FLASH_FAST	${stringTableColorBehaviourFlashFast}
+COLOR_BEHAVIOUR=BILLOW_SLOW	${stringTableColorBehaviourBillowSlow}
+COLOR_BEHAVIOUR=BILLOW_MIDDLE	${stringTableColorBehaviourBillowMiddle}
+COLOR_BEHAVIOUR=BILLOW_FAST	${stringTableColorBehaviourBillowFast}
+COLOR_BEHAVIOUR=OLD_VALUE	${stringTableColorBehaviourOldValue}
+COLOR_BEHAVIOUR=DO_NOT_CARE	${stringTableColorBehaviourDoNotCare}
+COLOR_BEHAVIOUR_STATUS=NORMAL	${stringTableColorBehaviourStatus}: ${lblNormal}
+COLOR_BEHAVIOUR_STATUS=UNKNOWN	${stringTableColorBehaviourStatus}: ${lblUnknown}
 COLOR_STATUS=NORMAL	${colorStateNormal}
 COLOR_STATUS=UNKNOWN	${colorStateUnknown}
 COMBINED_PARAMETER	${stringTableSubmit}
@@ -390,6 +410,13 @@ COMMUNICATION_REPORTING	${stringTableCommunicatingReporting}
 COMMUNICATION_REPORTING=FALSE	${stringTableCommunicatingReportingFalse}
 COMMUNICATION_REPORTING=TRUE	${stringTableCommunicatingReportingTrue}
 COMPATIBILITY_MODE	${stringTableCompatibilityMode}
+CONCENTRATION	${lblValue} ${stringTableConcentration}
+CONCENTRATION_STATUS=NORMAL	${stringTableConcentrationStatus}: ${lblNormal}
+CONCENTRATION_STATUS=0	${stringTableConcentrationStatus}: ${lblNormal}
+CONCENTRATION_STATUS=UNKNOWN	${stringTableConcentrationStatus}: ${lblUnknown}
+CONCENTRATION_STATUS=1	${stringTableConcentrationStatus}: ${lblUnknown}
+CONCENTRATION_STATUS=OVERFLOW	${stringTableConcentrationStatus}: ${lblOverflow}
+CONCENTRATION_STATUS=2	${stringTableConcentrationStatus}: ${lblOverflow}
 CONDITION_CURRENT	${stringTableConditionCurrentTitle}
 CONDITION_FREQUENCY	${stringTableConditionFrequencyTitle}
 CONDITION_POWER	${stringTableConditionPowerTitle}
@@ -659,6 +686,10 @@ ERROR_BUS_CONFIG_MISMATCH	${stringTablelErrorBusConfigMismatchTrue}
 ERROR_BUS_CONFIG_MISMATCH=FALSE	${stringTablelErrorBusConfigMismatchFalse}
 ERROR_BUS_CONFIG_MISMATCH=TRUE	${stringTablelErrorBusConfigMismatchTrue}
 ERROR_CODE	${stringTableErrorCode}
+ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR=FALSE	${stringTableErrorCommunicationParticulateMatterSensorFalse}
+ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR=TRUE	${stringTableErrorCommunicationParticulateMatterSensorTrue}
+ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=FALSE	${stringTableErrorCommunicationTempAndHumiditySensorFalse}
+ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=TRUE	${stringTableErrorCommunicationTempAndHumiditySensorTrue}
 ERROR_COPROCESSOR	${stringTableErrorCoProcessor}
 ERROR_COPROCESSOR=TRUE	${stringTableErrorCoprocessorTrue}
 ERROR_COPROCESSOR=FALSE	${stringTableErrorCoprocessorFalse}
@@ -671,6 +702,8 @@ ERROR_OVERHEAT=TRUE	${stringTableErrorOverheatTrue}
 ERROR_OVERLOAD	${stringTableErrorOverloadTrue}
 ERROR_OVERLOAD=FALSE	${stringTableErrorOverloadFalse}
 ERROR_OVERLOAD=TRUE	${stringTableErrorOverloadTrue}
+ERROR_PARTICULATE_MATTER_MEASUREMENT=FALSE	${stringTableErrorParticulateMatterMeasurementFalse}
+ERROR_PARTICULATE_MATTER_MEASUREMENT=TRUE	${stringTableErrorParticulateMatterMeasurementTrue}
 ERROR_POWER=FALSE	${stringTableErrorPowerFalse}
 ERROR_POWER=NO_ERROR	${stringTablePowerAvailable}
 ERROR_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
@@ -701,6 +734,8 @@ ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_1=TRUE	${stringTableErrorShortCircuitDataLineB
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2	${stringTableErrorShortCircuitDataLineBus2True}
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2=FALSE	${stringTableErrorShortCircuitDataLineBus2False}
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2=TRUE	${stringTableErrorShortCircuitDataLineBus2True}
+ERROR_TEMP_OR_HUMIDITY_MEASUREMENT=FALSE	${stringTableErrorTempOrHumidityMeasurementFalse}
+ERROR_TEMP_OR_HUMIDITY_MEASUREMENT=TRUE	${stringTableErrorTempOrHumidityMeasurementTrue}
 ERROR_UNDERVOLTAGE	${stringTableErrorUndervoltageTrue}
 ERROR_UNDERVOLTAGE=FALSE	${stringTableErrorUndervoltageFalse}
 ERROR_UNDERVOLTAGE=TRUE	${stringTableErrorUndervoltageTrue}
@@ -1796,3 +1831,52 @@ SOUNDFILE=DO_NOT_CARE	${stringTableDoNotCareSoundFile}
 
 
 
+MASS_CONCENTRATION_PM_1	${stringTableMassConc10}
+MASS_CONCENTRATION_PM_1_STATUS=NORMAL	${stringTableMassConc10} ${lblStatus} ${lblNormal}
+MASS_CONCENTRATION_PM_1_STATUS=UNKNOWN	${stringTableMassConc10} ${lblStatus} ${lblUnknown}
+MASS_CONCENTRATION_PM_1_STATUS=OVERFLOW	${stringTableMassConc10} ${lblStatus} ${lblOverflow}
+
+MASS_CONCENTRATION_PM_1_24H_AVERAGE	${stringTableMassConc10} ${lbl24Average}
+MASS_CONCENTRATION_PM_1_24H_AVERAGE_STATUS=NORMAL	${stringTableMassConc10} ${lbl24Average} ${lblStatus} ${lblNormal}
+MASS_CONCENTRATION_PM_1_24H_AVERAGE_STATUS=UNKNOWN	${stringTableMassConc10} ${lbl24Average} ${lblStatus} ${lblUnknown}
+MASS_CONCENTRATION_PM_1_24H_AVERAGE_STATUS=OVERFLOW	${stringTableMassConc10} ${lbl24Average} ${lblStatus} ${lblOverflow}
+
+MASS_CONCENTRATION_PM_2_5	${stringTableMassConc25}
+MASS_CONCENTRATION_PM_2_5_STATUS=NORMAL	${stringTableMassConc25} ${lblStatus} ${lblNormal}
+MASS_CONCENTRATION_PM_2_5_STATUS=UNKNOWN	${stringTableMassConc25} ${lblStatus} ${lblUnknown}
+MASS_CONCENTRATION_PM_2_5_STATUS=OVERFLOW	${stringTableMassConc25} ${lblStatus} ${lblOverflow}
+
+MASS_CONCENTRATION_PM_2_5_24H_AVERAGE	${stringTableMassConc25} ${lbl24Average}
+MASS_CONCENTRATION_PM_2_5_24H_AVERAGE_STATUS=NORMAL	${stringTableMassConc25} ${lbl24Average} ${lblStatus} ${lblNormal}
+MASS_CONCENTRATION_PM_2_5_24H_AVERAGE_STATUS=UNKNOWN	${stringTableMassConc25} ${lbl24Average} ${lblStatus} ${lblUnknown}
+MASS_CONCENTRATION_PM_2_5_24H_AVERAGE_STATUS=OVERFLOW	${stringTableMassConc25} ${lbl24Average} ${lblStatus} ${lblOverflow}
+
+MASS_CONCENTRATION_PM_10	${stringTableMassConc100}
+MASS_CONCENTRATION_PM_10_STATUS=NORMAL	${stringTableMassConc100} ${lblStatus} ${lblNormal}
+MASS_CONCENTRATION_PM_10_STATUS=UNKNOWN	${stringTableMassConc100} ${lblStatus} ${lblUnknown}
+MASS_CONCENTRATION_PM_10_STATUS=OVERFLOW	${stringTableMassConc100} ${lblStatus} ${lblOverflow}
+
+MASS_CONCENTRATION_PM_10_24H_AVERAGE	${stringTableMassConc100} ${lbl24Average}
+MASS_CONCENTRATION_PM_10_24H_AVERAGE_STATUS=NORMAL	${stringTableMassConc100} ${lbl24Average} ${lblStatus} ${lblNormal}
+MASS_CONCENTRATION_PM_10_24H_AVERAGE_STATUS=UNKNOWN	${stringTableMassConc100} ${lbl24Average} ${lblStatus} ${lblUnknown}
+MASS_CONCENTRATION_PM_10_24H_AVERAGE_STATUS=OVERFLOW	${stringTableMassConc100} ${lbl24Average} ${lblStatus} ${lblOverflow}
+
+NUMBER_CONCENTRATION_PM_1	${stringTableNumberConc10}
+NUMBER_CONCENTRATION_PM_1_STATUS=NORMAL	${stringTableNumberConc10} ${lblStatus} ${lblNormal}
+NUMBER_CONCENTRATION_PM_1_STATUS=UNKNOWN	${stringTableNumberConc10} ${lblStatus} ${lblUnknown}
+NUMBER_CONCENTRATION_PM_1_STATUS=OVERFLOW	${stringTableNumberConc10} ${lblStatus} ${lblOverflow}
+
+NUMBER_CONCENTRATION_PM_2_5	${stringTableNumberConc25}
+NUMBER_CONCENTRATION_PM_2_5_STATUS=NORMAL	${stringTableNumberConc25} ${lblStatus} ${lblNormal}
+NUMBER_CONCENTRATION_PM_2_5_STATUS=UNKNOWN	${stringTableNumberConc25} ${lblStatus} ${lblUnknown}
+NUMBER_CONCENTRATION_PM_2_5_STATUS=OVERFLOW	${stringTableNumberConc25} ${lblStatus} ${lblOverflow}
+
+NUMBER_CONCENTRATION_PM_10	${stringTableNumberConc100}
+NUMBER_CONCENTRATION_PM_10_STATUS=NORMAL	${stringTableNumberConc100} ${lblStatus} ${lblNormal}
+NUMBER_CONCENTRATION_PM_10_STATUS=UNKNOWN	${stringTableNumberConc100} ${lblStatus} ${lblUnknown}
+NUMBER_CONCENTRATION_PM_10_STATUS=OVERFLOW	${stringTableNumberConc100} ${lblStatus} ${lblOverflow}
+
+TYPICAL_PARTICLE_SIZE	${stringTableTypicalParticelSize}
+TYPICAL_PARTICLE_SIZE_STATUS=NORMAL	${stringTableTypicalParticelSize} ${lblStatus} ${lblNormal}
+TYPICAL_PARTICLE_SIZE_STATUS=UNKNOWN	${stringTableTypicalParticelSize} ${lblStatus} ${lblUnknown}
+TYPICAL_PARTICLE_SIZE_STATUS=OVERFLOW	${stringTableTypicalParticelSize} ${lblStatus} ${lblOverflow}

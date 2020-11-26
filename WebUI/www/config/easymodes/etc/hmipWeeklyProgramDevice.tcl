@@ -3,7 +3,7 @@
 
 puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIPWeeklyDeviceProgram.js');load_JSFunc('/config/easymodes/js/HmIPWeeklyProgram.js');</script>"
 
-proc getHmIPWeeklyProgram {address chn p descr devType} {
+proc getHmIPWeeklyProgram {address chn p descr devType {extraparam ""}} {
 
   upvar $p ps
   upvar $descr psDescr
@@ -35,12 +35,13 @@ proc getHmIPWeeklyProgram {address chn p descr devType} {
         append objPSDescr "'RAMP_TIME_FACTOR_MAX' : '$param_descr(MAX)',"
       }
 
-      array_clear param_descr
-      array set param_descr $psDescr(01_WP_ASTRO_OFFSET)
-      append objPSDescr "'ASTRO_OFFSET_MIN' : '$param_descr(MIN)',"
-      append objPSDescr "'ASTRO_OFFSET_MAX' : '$param_descr(MAX)',"
-      append objPSDescr "'ASTRO_OFFSET_UNIT' : 'min',"
-
+      if {[string equal $extraparam 'hideAstroOffset'] != 1} {
+        array_clear param_descr
+        array set param_descr $psDescr(01_WP_ASTRO_OFFSET)
+        append objPSDescr "'ASTRO_OFFSET_MIN' : '$param_descr(MIN)',"
+        append objPSDescr "'ASTRO_OFFSET_MAX' : '$param_descr(MAX)',"
+        append objPSDescr "'ASTRO_OFFSET_UNIT' : 'min',"
+      }
       append objPSDescr "'end' : ''"
 
     append objPSDescr "\}"

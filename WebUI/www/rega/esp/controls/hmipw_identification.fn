@@ -67,7 +67,8 @@ function ::CreateIdentification() {
         WriteLine("<div id='visualKey30M_"#chnId#"' class='CLASS02550b ControlBtnOff' align='center' onclick=\"setVisualKey(this, '1800', '"#chnAddress#"');\">${optionUnit30MShort}</div>");
       WriteLine("</td>");
     WriteLine("</tr>");
-    WriteLine("</table>");
+   WriteLine("</table>");
+   Call("/esp/controls/maintenance.fn::CreateOperationVoltage()");
   WriteLine("</td>");
 
 

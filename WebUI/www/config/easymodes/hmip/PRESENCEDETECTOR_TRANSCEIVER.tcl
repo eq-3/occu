@@ -14,9 +14,6 @@ set PROFILE_PNAME(H) "\${stringTableCondThresholdLo}"
 set PROFILE_PNAME(I) "\${stringTableMotionDetectorMotionActiveTime}"
 set PROFILE_PNAME(J) "\${motionDetectorLEDDisableChannelState}"
 
-proc getHelp {topic x y} {
-  return "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
-}
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -99,7 +96,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set options(5)  "8$m"
     set options(6)  "16$m"
 
-    append HTML_PARAMS(separate_1) "[get_ComboBox options MIN_INTERVAL separate_${special_input_id}_$prn ps MIN_INTERVAL ]&nbsp;[getHelp MIN_INTERVAL_PRESENCE $hlpBoxWidth $hlpBoxHeight]"
+    append HTML_PARAMS(separate_1) "[get_ComboBox options MIN_INTERVAL separate_${special_input_id}_$prn ps MIN_INTERVAL ]&nbsp;[getHelpIcon MIN_INTERVAL_PRESENCE $hlpBoxWidth $hlpBoxHeight]"
     append HTML_PARAMS(separate_1) "</td></tr>"
 
     set param LED_DISABLE_CHANNELSTATE
@@ -107,9 +104,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr prn; #4
       append HTML_PARAMS(separate_1) "<tr><td>$PROFILE_PNAME(J)</td>"
       if {$dev_descr(LED_DISABLE_CHANNELSTATE) == 1} {
-        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param checked=\"checked\"></td></tr>"
+        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param checked=\"checked\">[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td></tr>"
       } else {
-        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param></td></tr>"
+        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param>[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td></tr>"
       }
 
     }

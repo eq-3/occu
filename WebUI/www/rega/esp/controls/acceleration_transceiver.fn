@@ -1,9 +1,19 @@
 function ::CreateAccelerationTransceiver()
 {
   object objMotion = cObj.DPByControl("ACCELERATION_TRANSCEIVER.MOTION");
+  object objTiltAngle = cObj.DPByControl("ACCELERATION_TRANSCEIVER.ABSOLUTE_ANGLE");
 
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
+
+  integer tiltAngle = -1;
+  string tiltUnit = "";
+
+  if( objTiltAngle )
+  {
+    tiltAngle = objTiltAngle.Value();
+    tiltUnit = objTiltAngle.ValueUnit();
+  }
 
   if( objMotion )
   {
@@ -19,7 +29,8 @@ function ::CreateAccelerationTransceiver()
   }
 
   WriteLine("<script type='text/javascript'>");
-    WriteLine("its"#chnId#" = new iseAccelerationTransceiver('"#chnId#"', '"#objMotion.Value()#"', '"#chnAddress#"');");
+    WriteLine("console.log('"#objMotion#"','"#objTiltAngle#"');");
+    WriteLine("its"#chnId#" = new iseAccelerationTransceiver('"#chnId#"', '"#objMotion.Value()#"', '"#chnAddress#"', '"#tiltAngle#"', '"#tiltUnit#"');");
   WriteLine("</script>");
 
   return;

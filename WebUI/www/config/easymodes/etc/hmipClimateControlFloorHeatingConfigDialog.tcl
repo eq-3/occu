@@ -166,6 +166,16 @@ proc getMaintenanceFloorHeating {chn p descr} {
     append html "</tr>"
   }
 
+  set param AUTO_HYDRAULIC_ADJUSTMENT
+  if { [info exists ps($param)] == 1 } {
+    append html "[getHorizontalLine]"
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableAutoHydraulicAdjustment}</td>"
+      append html  "<td>[getCheckBoxCyclicInfoMsg $param $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
   # SPHM-308
   if {$devIsFalmot == "false"} {
 
@@ -257,7 +267,6 @@ proc getMaintenanceFloorHeating {chn p descr} {
       append html "</tr>"
     }
   }
-
   return $html
 }
 
