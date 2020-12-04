@@ -41,25 +41,6 @@ set comment {
   }
 }
 
-  set param BACKLIGHT_ON_TIME
-  if { [info exists ps($param)] == 1 } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableDisplayLightingDuration}</td>"
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
-    append html "</tr>"
-  }
-
-  set param SIGNAL_BRIGHTNESS
-  if { [info exists ps($param)] == 1 } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableBrightnessVisKey}</td>"
-      option RAW_0_100Percent_1
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-    append html "</tr>"
-  }
-
 set comment {
   # For the user not visible
   set param _SUPPORTING_WIRED_OPERATION_MODE

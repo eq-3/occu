@@ -293,6 +293,7 @@ jQuery.extend(true,langJSON, {
     "TRV-B": "Homematic IP Heizk%F6rperthermostat - basic",
     "TRV-B-UK": "Homematic IP Heizk%F6rperthermostat - basic UK",
     "TRV-C": "Homematic IP Heizk%F6rperthermostat - kompakt",
+    "TRV-E": "Homematic IP Heizk%F6rperthermostat - Evo",
     "TRV-UK": "Homematic IP Heizk%F6rperthermostat UK",
     "VIR-HUE-GTW": "Philips-Hue<br/>Gateway",
     "VIR-OL-GTW": "OSRAM-Lightify<br/>Gateway",

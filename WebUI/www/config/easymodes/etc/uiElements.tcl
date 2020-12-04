@@ -408,6 +408,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
    "CONTACT_BOOST" {set x 450; set y 180}
    "DELAY_COMPENSATION" {set x 450; set y 100}
+   "DIM_STEP" {set x 500; set y 150}
    "DURATION_5MIN" {set x 500; set y 160}
    "ENABLE_ROUTING" {set x 500; set y 120}
    "EVENT_FILTER_NUMBER_motionDetect" {set x 400; set y 60}
@@ -416,7 +417,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
-   "DIM_STEP" {set x 500; set y 150}
+   "MOUNTING_ORIENTATION" {set x 450; set y 75}
    "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
 

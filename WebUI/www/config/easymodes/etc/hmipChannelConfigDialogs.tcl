@@ -124,15 +124,53 @@ proc getMaintenance {chn p descr} {
 
   set param DISPLAY_CONTRAST
   if { [info exists ps($param)] == 1  } {
-     incr prn
+    incr prn
     array_clear options
-    for {set val 0} {$val <= 31} {incr val} {
-        set options($val) "$val"
+    if {[string equal $devType "HmIP-eTRV-3"] == 1} {
+      for {set val 20} {$val <= 160} {incr val 20} {
+          set options($val) "$val"
+      }
+    } else {
+      # This is currently in use for the HmIPW-DRAP
+      for {set val 0} {$val <= 31} {incr val} {
+          set options($val) "$val"
+      }
     }
 
     append html "<tr>"
       append html "<td>\${stringTableDisplayContrast}</td>"
       append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+    append html "</tr>"
+  }
+
+  set param BACKLIGHT_ON_TIME
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableDisplayLightingDuration}</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  set param SIGNAL_BRIGHTNESS
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableBrightnessVisKey}</td>"
+      option RAW_0_100Percent_1
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
+  set param MOUNTING_ORIENTATION
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableMountingOrientation}</td>"
+    array_clear options
+    set options(0) "\${stringTableWinMaticMountSideLeft}"
+    set options(1) "\${stringTableWinMaticMountSideRight}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
   }
 

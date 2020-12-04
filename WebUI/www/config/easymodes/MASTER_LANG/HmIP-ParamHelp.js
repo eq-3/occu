@@ -204,6 +204,8 @@ jQuery.extend(true,langJSON, {
     "TRIGGER_ANGLE" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wieviel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, " +
       "damit ein Event ausgel%F6st wird.",
 
+    "TRIGGER_ANGLE_2" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wie viel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, damit der senkrechte Zustand  erreicht wird.",
+
     "DIM_STEP" :
       "Dieser Parameter bestimmt die Anzahl der Stufen, um die Helligkeit von 0% - 100% hochzudimmen, bzw. von 100% - 0 % herunterzudimmen.<br/><br/>" +
       "<u>Beispiel:</u><br/>" +
@@ -247,9 +249,11 @@ jQuery.extend(true,langJSON, {
 
     "CALIBRATION_PPM" :
       "Bei der automatischen Kalibrierung des CO2-Sensors wird der niedrigste Messwert innerhalb vordefinierter Kalibrierintervalle als neue Referenz angenommen. " +
-      "Frische Au%DFenluft hat dabei einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung geht man davon aus, das die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht. " +
-      "<br/><br/>Die Kalibrierung ben%F6tig mindestens 3 Kalibrierintervalle um den Endwert sicher zu bestimmen.\n" +
-      "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden, dann sollte eine Kalibrierung alle 1-2 Jahre manuell durchgef%FChrt werden.",
+      "Frische Au%DFenluft hat einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung wird angenommen, dass die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht. " +
+      "<br/><br/>Die Kalibrierung ben%F6tig mindestens drei Kalibrierintervalle, um den Endwert sicher zu bestimmen." +
+      "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden. Eine Kalibrierung sollte in dem Fall alle 1-2 Jahre manuell durchgef%FChrt werden.",
+
+    "MOUNTING_ORIENTATION" : "Dieser Parameter erm%FCglicht es, den Displayinhalt um 180 Grad zu drehen.",
 
     "noMoreHelp" : ""
   },
@@ -451,6 +455,8 @@ jQuery.extend(true,langJSON, {
     "TRIGGER_ANGLE" : "When used as position detection sensor, this parameter determines by how many degrees the angle of the top/bottom of the sensor has to change in relation to the horizontal, " +
       "to trigger an event.",
 
+    "TRIGGER_ANGLE_2" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wie viel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, damit der senkrechte Zustand  erreicht wird.",
+
     "DIM_STEP" :
       "This parameter determines the number of steps to dim the brightness from 0% - 100% up, or from 100% - 0% down.<br/><br/>" +
       "<u>Example:</u><br/>" +
@@ -494,10 +500,12 @@ jQuery.extend(true,langJSON, {
     "AUTO_HYDRAULIC_ADJUSTMENT" : "A hydraulic balancing is performed via the valves, which means that the flow rate at the valves is adjusted so that all rooms heat up at the same rate.",
 
     "CALIBRATION_PPM" :
-      "en* Bei der automatischen Kalibrierung des CO2-Sensors wird der niedrigste Messwert innerhalb vordefinierter Kalibrierintervalle als neue Referenz angenommen. " +
-      "Frische Au%DFenluft hat dabei einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung geht man davon aus, das die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht." +
-      "<br/><br/>Die Kalibrierung ben%F6tig mindestens 3 Kalibrierintervalle um den Endwert sicher zu bestimmen.\n" +
-      "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden, dann sollte eine Kalibrierung alle 1-2 Jahre manuell durchgef%FChrt werden.",
+      "Bei der automatischen Kalibrierung des CO2-Sensors wird der niedrigste Messwert innerhalb vordefinierter Kalibrierintervalle als neue Referenz angenommen. " +
+      "Frische Au%DFenluft hat einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung wird angenommen, dass die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht. " +
+      "<br/><br/>Die Kalibrierung ben%F6tig mindestens drei Kalibrierintervalle, um den Endwert sicher zu bestimmen." +
+      "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden. Eine Kalibrierung sollte in dem Fall alle 1-2 Jahre manuell durchgef%FChrt werden.",
+
+    "MOUNTING_ORIENTATION" : "This parameter makes it possible to rotate the display content by 180 degrees.",
 
     "noMoreHelp" : ""
     }

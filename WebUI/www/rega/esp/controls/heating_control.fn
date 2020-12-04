@@ -358,6 +358,7 @@ function ::CreateHeatingControlHmIP() {
                   && (chnLabel != "HMIP-WTH")
                   && (chnLabel != "HmIP-eTRV-C")
                   && (chnLabel != "HmIP-eTRV-C-2")
+                  && (chnLabel != "HmIP-eTRV-3")
                 )
                 || (((chnLabel == "HmIP-WTH") || (chnLabel == "HMIP-WTH")) && ((devFwMajor > 1) || ((devFwMajor == 1) && (devFwMinor >= 6))))
                ) {

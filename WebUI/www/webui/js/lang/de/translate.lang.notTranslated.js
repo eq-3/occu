@@ -1,32 +1,16 @@
 jQuery.extend(true, langJSON, {
   "de": {
 
-    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Kommunikation Staubsensor: OK",
-    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Kommunikation Staubsensor: gest&ouml;rt",
-
-    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "Kommunikation Temp.-Luftfeuchtesensor: OK",
-    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "Kommunikation Temp.-Luftfeuchtesensor: gest&ouml;rt",
-
-    "stringTableErrorParticulateMatterMeasurementFalse" : "Messung Staubsensor: OK",
-    "stringTableErrorParticulateMatterMeasurementTrue" : "Messung Staubsensor: gest&ouml;rt",
-
-    "stringTableErrorTempOrHumidityMeasurementFalse" : "Messung Temp.-Luftfeuchte: OK",
-    "stringTableErrorTempOrHumidityMeasurementTrue" : "Messung Temp.-Luftfeuchte: gest&ouml;rt",
-
-    "lblTilt" : "Neigung",
-
-    "stringTableAutoHydraulicAdjustment" : "Hydraulischer Ventilabgleich",
-
-    "hintSetReadyWeeklyProgram" : "Zum konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
-
-    "stringTableAutoRelockDelay" : "AutoRelockDelay",
+    "comment" : "Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
+    "stringTableAutoRelockDelay" : "Verz%F6gerung autom. Verschlie%DFen",
     "stringTableDoorLockDirection" : "Drehrichtung zum Schlie%DFen",
     "stringTableDoorLockNeutralPos" : "Neutrale Position",
     "stringTableDoorLockTurns" : "Anzhahl der Umdrehungen zum Schlie%DFen",
     "lblVertical" : "Vertikal",
     "lblHorizontal" : "Horizontal",
+    "comment" : "END comment",
 
-    "comment" : "Diese Keys nach MASTER_LANG/HmIPWeeklyDeviceProgram.js",
+    "comment" : "Diese Keys nach MASTER_LANG/HmIPWeeklyDeviceProgram.js - Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
     "optionDoorLockAction" : "Ger%E4te-Verhalten",
     "optionDoorLockUser" : "Benutzerberechtigung",
     "optionDLDAction1" : "Verriegeln + Auto-Relock Ende",
@@ -35,19 +19,42 @@ jQuery.extend(true, langJSON, {
     "optionDLDAction4" : "Auto-Relock Ende",
     "comment" : "End HmIPWeeklyDeviceProgram.js",
 
+
+    "stringTableErrorCommunicationParticulateMatterSensor" : "Fehler Kommunikation Feinstaubsensor",
+    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Kommunikation Feinstaubsensor: OK",
+    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Kommunikation Feinstaubsensor: gest&ouml;rt",
+
+    "stringTableErrorCommunicationTempAndHumiditySensor" : "Fehler Kommunikation Temp.-Luftfeuchtesensor",
+    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "Kommunikation Temp.-Luftfeuchtesensor: OK",
+    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "Kommunikation Temp.-Luftfeuchtesensor: gest&ouml;rt",
+
+    "stringTableErrorParticulateMatterMeasurementFalse" : "Messung Feinstaubsensor: OK",
+    "stringTableErrorParticulateMatterMeasurementTrue" : "Messung Feinstaubsensor: gest&ouml;rt",
+
+    "stringTableErrorTempOrHumidityMeasurementFalse" : "Messung Temp.-Luftfeuchte: OK",
+    "stringTableErrorTempOrHumidityMeasurementTrue" : "Messung Temp.-Luftfeuchte: gest&ouml;rt",
+
+    "lblTilt" : "Neigung",
+
+    "stringTableAutoHydraulicAdjustment" : "Hydraulischer Ventilabgleich",
+
+    "hintSetReadyWeeklyProgram" : "Zum Konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
+
+
+
     "lblBehaviour" : "Verhalten",
 
-    "optionColorOFF" : "Beleuchtung Aus",
-    "optionColorON" : "Dauerhaft Ein",
+    "optionColorOFF" : "Beleuchtung aus",
+    "optionColorON" : "Dauerhaft ein",
     "blinkSlow" : "Langsames Blinken",
     "blinkMiddle" : "Mittleres Blinken",
     "blinkFast" : "Schnelles Blinken",
     "blinkFlashSlow" : "Langsames Blitzen",
     "blinkFlashMiddle" : "Mittleres Blitzen",
     "blinkFlashFast" : "Schnelles Blitzen",
-    "blinkBillowSlow" : "Langsames An-/Abschwellen",
-    "blinkBillowMiddle" : "Mittleres An-/Abschwellen",
-    "blinkBillowFast" : "Schnelles An-/Abschwellen",
+    "blinkBillowSlow" : "Langsames Pulsieren",
+    "blinkBillowMiddle" : "Mittleres Pulsieren",
+    "blinkBillowFast" : "Schnelles Pulsieren",
 
     "stringTableColorOldValue" : "Farbwert beibehalten",
     "stringTableColorNoChange" : "Farbwert ignorieren",
@@ -60,17 +67,17 @@ jQuery.extend(true, langJSON, {
     "stringTableRampTimeOff" : "Ausschalt-Rampenzeit",
 
     "helpCombinedParameterTimeLimit" :
-      "Eine nicht aktivierte Checkbox bedeutet dauerhaft Ein.<br/></br>" +
+      "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ein'.<br/></br>" +
       "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer bestimmen. " +
-      "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted dauerhaft Ein.",
+      "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ein'.",
 
     "helpCombinedParameterTimeLimitWithRampOff" :
-    "Eine nicht aktivierte Checkbox bedeutet dauerhaft Ein.<br/></br>" +
+    "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ein'.<br/></br>" +
     "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer, sowie die Ausschalt-Rampenzeit bestimmen. " +
-    "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted dauerhaft Ein.",
+    "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ein'.",
 
-    "diagramValueTypeCONCENTRATION_CO2" : "CO2 Konzentration",
-    "lblCO2Concentration" : "CO2 Konzentration",
+
+    "lblCO2Concentration" : "CO2-Konzentration",
 
     "btnDirectFwUpload" : "Direkt auf CCU laden und installieren",
     "dialogSettingsCMLblAlternateSoftwareUpdate" : "Alternative Vorgehensweise:",
@@ -82,20 +89,29 @@ jQuery.extend(true, langJSON, {
 
     "lblCalibrationValue" : "Kalibrierwert",
     "lblCalibrationInterval" : "Kalibrierungsintervall",
-    "lblCalibrationInterval" : "Kalibrierungsintervall",
     "stringTableCalibrationIntervalUnit" : "Einheit Kalibrierungsintervall",
     "stringTableCalibrationIntervalValue" : "Wert des Kalibrierungsintervalls",
 
-    "stringTableConcentration" : "CO2-Konzentration",
     "stringTableConcentrationStatus" : "Status CO2-Konzentration",
     "lblAutoCalibration" : "Automatische Kalibrierung",
 
-    "diagramValueTypeCONCENTRATION" : "CO2-Konzentration",
+    "stringTableMountingOrientation" : "Displayausrichtung",
+
+    "stringTableConditionSwitchTransmitterParticulateMatter" : "Feinstaubsensor",
 
     "noMoreKeys" : ""
   }
 });
 
+
+langJSON.de.diagramValueTypeCONCENTRATION_CO2 = langJSON.de.lblCO2Concentration;
+langJSON.de.stringTableConcentration = langJSON.de.lblCO2Concentration;
+langJSON.de.diagramValueTypeCONCENTRATION = langJSON.de.lblCO2Concentration;
+
+langJSON.de.stringTableOpticalSignalReceiver = langJSON.de.stringTableDimmerTitle;
+
+langJSON.de.stringTableAbsoluteAngle = langJSON.de.lblTilt;
+langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
 langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
 langJSON.de.stringTableColorBehaviourOn = langJSON.de.optionColorON;
 langJSON.de.stringTableColorBehaviourBlinkingSlow = langJSON.de.blinkSlow;

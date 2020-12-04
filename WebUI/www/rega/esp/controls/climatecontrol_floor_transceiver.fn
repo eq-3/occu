@@ -7,6 +7,7 @@ function ::CreateClimateControlFloorTransceiver()
   object objEmergencyOperation = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.EMERGENCY_OPERATION");
   object objFrostProtection = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.FROST_PROTECTION");
   object objState = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.STATE");
+  object objLevelStatus = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.LEVEL_STATUS");
   object objLevel = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.LEVEL");
 
   string classStateActive = "";
@@ -37,12 +38,27 @@ function ::CreateClimateControlFloorTransceiver()
 
   ! The max value is 1 although the current channeldescription of the FALMOT-C12 says it is 1.005
   if (objLevel) {
-    if (objLevel.Value() != "") {
+    if (objLevel.Value() >= 0) {
       real level = objLevel.Value() * 100;
-      stateSwitchingStatus = level.ToString(2)#"%";
-      if (level > 0) {
+      stateSwitchingStatus = level.ToString(1)#" %";
+      if (level >= 0) {
         classStateActive = "btnActive";
       }
+    } else {
+      if (objLevelStatus) {
+        ! Status 0 == Normal
+        if (objLevelStatus.State() == 0) {
+          stateSwitchingStatus = "0.0 %";
+          classStateActive = "btnActive";
+        }
+      }
+    }
+  }
+
+  if (objLevelStatus) {
+    ! Status 1 = UNKNOWN, 4 = ERROR
+    if (objLevelStatus.Value() == 4) {
+      stateSwitchingStatus = "${lblError}";
     }
   }
 

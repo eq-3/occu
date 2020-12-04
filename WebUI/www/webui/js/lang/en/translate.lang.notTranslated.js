@@ -1,100 +1,115 @@
 jQuery.extend(true, langJSON, {
   "en": {
-    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "en* Kommunikation Staubsensor: OK",
-    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "en* Kommunikation Staubsensor: gest&ouml;rt",
 
-    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "en* Kommunikation Temp.-Luftfeuchtesensor: OK",
-    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "en* Kommunikation Temp.-Luftfeuchtesensor: gest&ouml;rt",
+    "comment" : "Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
+    "stringTableAutoRelockDelay" : "Verz%F6gerung autom. Verschlie%DFen",
+    "stringTableDoorLockDirection" : "Drehrichtung zum Schlie%DFen",
+    "stringTableDoorLockNeutralPos" : "Neutrale Position",
+    "stringTableDoorLockTurns" : "Anzhahl der Umdrehungen zum Schlie%DFen",
+    "lblVertical" : "Vertikal",
+    "lblHorizontal" : "Horizontal",
+    "comment" : "END comment",
 
-    "stringTableErrorParticulateMatterMeasurementFalse" : "en* Messung Staubsensor: OK",
-    "stringTableErrorParticulateMatterMeasurementTrue" : "en* Messung Staubsensor: gest&ouml;rt",
-
-    "stringTableErrorTempOrHumidityMeasurementFalse" : "en* Messung Temp.-Luftfeuchte: OK",
-    "stringTableErrorTempOrHumidityMeasurementTrue" : "en* Messung Temp.-Luftfeuchte: gest&ouml;rt",
-
-    "lblTilt" : "en* Neigung",
-
-    "stringTableAutoHydraulicAdjustment" : "en* Hydraulischer Ventilabgleich",
-
-    "hintSetReadyWeeklyProgram" : "en* Zum konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
-
-    "stringTableAutoRelockDelay" : "en* AutoRelockDelay",
-    "stringTableDoorLockDirection" : "en* Drehrichtung zum Schlie%DFen",
-    "stringTableDoorLockNeutralPos" : "en* Neutrale Position",
-    "stringTableDoorLockTurns" : "en* Anzhahl der Umdrehungen zum Schlie%DFen",
-    "lblVertical" : "en* Vertikal",
-    "lblHorizontal" : "en* Horizontal",
-
-    "comment" : "Diese Keys nach MASTER_LANG/HmIPWeeklyDeviceProgram.js",
-    "optionDoorLockAction" : "en* Ger%E4te-Verhalten",
-    "optionDoorLockUser" : "en* Benutzerberechtigung",
-    "optionDLDAction1" : "en* Verriegeln + Auto-Relock Ende",
-    "optionDLDAction2" : "en* 100% Verriegeln + Auto-Relock Beginn mit On-Time aus AutoRelockDelay",
-    "optionDLDAction3" : "en* Entriegeln + Auto-Relock Ende",
-    "optionDLDAction4" : "en* Auto-Relock Ende",
+    "comment" : "Diese Keys nach MASTER_LANG/HmIPWeeklyDeviceProgram.js - Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
+    "optionDoorLockAction" : "Ger%E4te-Verhalten",
+    "optionDoorLockUser" : "Benutzerberechtigung",
+    "optionDLDAction1" : "Verriegeln + Auto-Relock Ende",
+    "optionDLDAction2" : "100% Verriegeln + Auto-Relock Beginn mit On-Time aus AutoRelockDelay",
+    "optionDLDAction3" : "Entriegeln + Auto-Relock Ende",
+    "optionDLDAction4" : "Auto-Relock Ende",
     "comment" : "End HmIPWeeklyDeviceProgram.js",
 
-    "lblBehaviour" : "en* Verhalten",
 
-    "optionColorOFF" : "en* Beleuchtung Aus",
-    "optionColorON" : "en* Dauerhaft Ein",
-    "blinkSlow" : "en* Langsames Blinken",
-    "blinkMiddle" : "en* Mittleres Blinken",
-    "blinkFast" : "en* Schnelles Blinken",
-    "blinkFlashSlow" : "en* Langsames Blitzen",
-    "blinkFlashMiddle" : "en* Mittleres Blitzen",
-    "blinkFlashFast" : "en* Schnelles Blitzen",
-    "blinkBillowSlow" : "en* Langsames An-/Abschwellen",
-    "blinkBillowMiddle" : "en* Mittleres An-/Abschwellen",
-    "blinkBillowFast" : "en* Schnelles An-/Abschwellen",
+    "stringTableErrorCommunicationParticulateMatterSensor" : "Fehler Kommunikation Feinstaubsensor",
+    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Kommunikation Feinstaubsensor: OK",
+    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Kommunikation Feinstaubsensor: gest&ouml;rt",
 
-    "stringTableColorOldValue" : "en* Farbwert beibehalten",
-    "stringTableColorNoChange" : "en* Farbwert ignorieren",
+    "stringTableErrorCommunicationTempAndHumiditySensor" : "Fehler Kommunikation Temp.-Luftfeuchtesensor",
+    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "Kommunikation Temp.-Luftfeuchtesensor: OK",
+    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "Kommunikation Temp.-Luftfeuchtesensor: gest&ouml;rt",
 
-    "stringTableColorBehaviourOldValue" : "en* Verhalten beibehalten",
-    "stringTableColorBehaviourDoNotCare" : "en* Verhalten ignorieren",
+    "stringTableErrorParticulateMatterMeasurementFalse" : "Messung Feinstaubsensor: OK",
+    "stringTableErrorParticulateMatterMeasurementTrue" : "Messung Feinstaubsensor: gest&ouml;rt",
+
+    "stringTableErrorTempOrHumidityMeasurementFalse" : "Messung Temp.-Luftfeuchte: OK",
+    "stringTableErrorTempOrHumidityMeasurementTrue" : "Messung Temp.-Luftfeuchte: gest&ouml;rt",
+
+    "lblTilt" : "Neigung",
+
+    "stringTableAutoHydraulicAdjustment" : "Hydraulischer Ventilabgleich",
+
+    "hintSetReadyWeeklyProgram" : "Zum Konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
+
+
+
+    "lblBehaviour" : "Verhalten",
+
+    "optionColorOFF" : "Beleuchtung aus",
+    "optionColorON" : "Dauerhaft ein",
+    "blinkSlow" : "Langsames Blinken",
+    "blinkMiddle" : "Mittleres Blinken",
+    "blinkFast" : "Schnelles Blinken",
+    "blinkFlashSlow" : "Langsames Blitzen",
+    "blinkFlashMiddle" : "Mittleres Blitzen",
+    "blinkFlashFast" : "Schnelles Blitzen",
+    "blinkBillowSlow" : "Langsames Pulsieren",
+    "blinkBillowMiddle" : "Mittleres Pulsieren",
+    "blinkBillowFast" : "Schnelles Pulsieren",
+
+    "stringTableColorOldValue" : "Farbwert beibehalten",
+    "stringTableColorNoChange" : "Farbwert ignorieren",
+
+    "stringTableColorBehaviourOldValue" : "Verhalten beibehalten",
+    "stringTableColorBehaviourDoNotCare" : "Verhalten ignorieren",
 
     "stringTableColorBehaviourStatus" : "Status Verhalten",
 
-    "stringTableRampTimeOff" : "en* Ausschalt-Rampenzeit",
+    "stringTableRampTimeOff" : "Ausschalt-Rampenzeit",
 
     "helpCombinedParameterTimeLimit" :
-      "en* Eine nicht aktivierte Checkbox bedeutet dauerhaft Ein.<br/></br>" +
+      "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ein'.<br/></br>" +
       "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer bestimmen. " +
-      "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted dauerhaft Ein.",
+      "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ein'.",
 
     "helpCombinedParameterTimeLimitWithRampOff" :
-    "en* Eine nicht aktivierte Checkbox bedeutet dauerhaft Ein.<br/></br>" +
+    "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ein'.<br/></br>" +
     "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer, sowie die Ausschalt-Rampenzeit bestimmen. " +
-    "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted dauerhaft Ein.",
+    "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ein'.",
 
-    "diagramValueTypeCONCENTRATION_CO2" : "en* CO2 Konzentration",
-    "lblCO2Concentration" : "en* CO2 Konzentration",
 
-    "btnDirectFwUpload" : "en* Direkt auf CCU laden und installieren",
-    "dialogSettingsCMLblAlternateSoftwareUpdate" : "en* Alternative Vorgehensweise:",
+    "lblCO2Concentration" : "CO2-Konzentration",
 
-    "indoorAirQualityGood" : "en* Raumluftqualit%E4t: Gut",
-    "indoorAirQualityMediocre" : "en* Raumluftqualit%E4t: Mittelm%E4%DFig<br/><br/>Der Raum sollte gel%FCftet werden.",
-    "indoorAirQualityModerate" : "en* Raumluftqualit%E4t: M%E4%DFig<br/><br/>Der Raum sollte dringend gel%FCftet werden.",
-    "indoorAirQualityLow" : "en* Raumluftqualit%E4t: Niedrig<br/><br/>Der Raum sollte unbedingt gel%FCftet werden.",
+    "btnDirectFwUpload" : "Direkt auf CCU laden und installieren",
+    "dialogSettingsCMLblAlternateSoftwareUpdate" : "Alternative Vorgehensweise:",
 
-    "lblCalibrationValue" : "en* Kalibrierwert",
-    "lblCalibrationInterval" : "en* Kalibrierungsintervall",
-    "lblCalibrationInterval" : "en* Kalibrierungsintervall",
-    "stringTableCalibrationIntervalUnit" : "en* Einheit Kalibrierungsintervall",
-    "stringTableCalibrationIntervalValue" : "en* Wert des Kalibrierungsintervalls",
+    "indoorAirQualityGood" : "Raumluftqualit%E4t: Gut",
+    "indoorAirQualityMediocre" : "Raumluftqualit%E4t: Mittelm%E4%DFig<br/><br/>Der Raum sollte gel%FCftet werden.",
+    "indoorAirQualityModerate" : "Raumluftqualit%E4t: M%E4%DFig<br/><br/>Der Raum sollte dringend gel%FCftet werden.",
+    "indoorAirQualityLow" : "Raumluftqualit%E4t: Niedrig<br/><br/>Der Raum sollte unbedingt gel%FCftet werden.",
 
-    "stringTableConcentration" : "en* CO2-Konzentration",
-    "stringTableConcentrationStatus" : "en* Status CO2-Konzentration",
-    "lblAutoCalibration" : "en* Automatische Kalibrierung",
+    "lblCalibrationValue" : "Kalibrierwert",
+    "lblCalibrationInterval" : "Kalibrierungsintervall",
+    "stringTableCalibrationIntervalUnit" : "Einheit Kalibrierungsintervall",
+    "stringTableCalibrationIntervalValue" : "Wert des Kalibrierungsintervalls",
 
-    "diagramValueTypeCONCENTRATION" : "en* CO2-Konzentration",
+    "stringTableConcentrationStatus" : "Status CO2-Konzentration",
+    "lblAutoCalibration" : "Automatische Kalibrierung",
+
+    "stringTableMountingOrientation" : "Displayausrichtung",
+
+    "stringTableConditionSwitchTransmitterParticulateMatter" : "Feinstaubsensor",
 
     "noMoreKeys" : ""
   }
 });
 
+langJSON.en.diagramValueTypeCONCENTRATION_CO2 = langJSON.en.lblCO2Concentration;
+langJSON.en.stringTableConcentration = langJSON.en.lblCO2Concentration;
+langJSON.en.diagramValueTypeCONCENTRATION = langJSON.en.lblCO2Concentration;
+
+langJSON.en.stringTableOpticalSignalReceiver = langJSON.en.stringTableDimmerTitle;
+
+langJSON.en.stringTableAbsoluteAngle = langJSON.en.lblTilt;
 langJSON.en.stringTableColorBehaviourOff = langJSON.en.optionColorOFF;
 langJSON.en.stringTableColorBehaviourOn = langJSON.en.optionColorON;
 langJSON.en.stringTableColorBehaviourBlinkingSlow = langJSON.en.blinkSlow;

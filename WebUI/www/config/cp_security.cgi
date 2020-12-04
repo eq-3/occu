@@ -1214,28 +1214,30 @@ proc action_put_page {} {
         }
       }
       # automatic redirect to https
-      table_row {class="CLASS20806"} {
-        table_data {class="CLASS20807"} {
-          puts "\${cpSecurityHttpsRedirectTitle}"
-        }
-        table_data {class="CLASS20808"} {
-          division {} {
-            table {
-              table_row {
-                table_data {align="left"}  {
-                  puts "\${cpSecurityHttpsRedirectLabel}"
-                }
-                set checked ""
-                #set checked "checked=true"
-                table_data {class="CLASS21112"} {align="left"}  {
-                  cgi_checkbox httpsRedirectState=unknown {id="httpsRedirectActive"} {onClick=setHttpsRedirect();} $checked
+      if { [getProduct]  >= 3 } {
+        table_row {class="CLASS20806"} {
+          table_data {class="CLASS20807"} {
+            puts "\${cpSecurityHttpsRedirectTitle}"
+          }
+          table_data {class="CLASS20808"} {
+            division {} {
+              table {
+                table_row {
+                  table_data {align="left"}  {
+                    puts "\${cpSecurityHttpsRedirectLabel}"
+                  }
+                  set checked ""
+                  #set checked "checked=true"
+                  table_data {class="CLASS21112"} {align="left"}  {
+                    cgi_checkbox httpsRedirectState=unknown {id="httpsRedirectActive"} {onClick=setHttpsRedirect();} $checked
+                  }
                 }
               }
             }
           }
-        }
-        table_data {class="CLASS20808"} {
-          puts "\${cpSecurityHttpsRedirectDescription}"
+          table_data {class="CLASS20808"} {
+            puts "\${cpSecurityHttpsRedirectDescription}"
+          }
         }
       }
       # SNMP <-- may if getProduct check if needed for ccu2 too
