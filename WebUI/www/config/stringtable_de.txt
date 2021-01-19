@@ -1069,13 +1069,13 @@ ON_TIME	${stringTableDimmerOnTime}
 OPERATING_VOLTAGE	${stringTableOperationVoltage}
 OPERATING_VOLTAGE_STATUS	${stringTableOperationVoltage}
 OPERATING_VOLTAGE_STATUS=EXTERNAL	${lblValue} ${stringTableOperationVoltage}: ${lblExternal}
-OPERATING_VOLTAGE_STATUS=	${lblValue} ${stringTableOperationVoltageState}: ${lblExternal}
-OPERATING_VOLTAGE_STATUS=NORMAL	${lblValue} ${stringTableOperationVoltage}: ${lblNormal}
-OPERATING_VOLTAGE_STATUS=0	${lblValue} ${stringTableOperationVoltageState}: ${lblNormal}
-OPERATING_VOLTAGE_STATUS=UNKNOWN	${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}
-OPERATING_VOLTAGE_STATUS=1	${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}
-OPERATING_VOLTAGE_STATUS=OVERFLOW	${lblValue} ${stringTableOperationVoltageState}: ${lblOverflow}
-OPERATING_VOLTAGE_STATUS=2	${lblValue} ${stringTableOperationVoltageState}: ${lblOverflow}
+OPERATING_VOLTAGE_STATUS=3	${stringTableOperationVoltageState}: ${lblExternal}
+OPERATING_VOLTAGE_STATUS=NORMAL	${stringTableOperationVoltage}: ${lblNormal}
+OPERATING_VOLTAGE_STATUS=0	${stringTableOperationVoltageState}: ${lblNormal}
+OPERATING_VOLTAGE_STATUS=UNKNOWN	${stringTableOperationVoltageState}: ${lblUnknown}
+OPERATING_VOLTAGE_STATUS=1	${stringTableOperationVoltageState}: ${lblUnknown}
+OPERATING_VOLTAGE_STATUS=OVERFLOW	${stringTableOperationVoltageState}: ${lblOverflow}
+OPERATING_VOLTAGE_STATUS=2	${stringTableOperationVoltageState}: ${lblOverflow}
 OPTICAL_ALARM_SELECTION=BLINKING_ALTERNATELY_REPEATING	${stringTableAlarmBlinkingAlternatelyRepeating}
 OPTICAL_ALARM_SELECTION=BLINKING_BOTH_REPEATING	${stringTableAlarmBlinkingBothRepeating}
 OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_0	${stringTableAlarmConfirmingSignal0}

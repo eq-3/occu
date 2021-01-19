@@ -38,8 +38,8 @@ function ::CreateClimateControlFloorTransceiver()
 
   ! The max value is 1 although the current channeldescription of the FALMOT-C12 says it is 1.005
   if (objLevel) {
-    if (objLevel.Value() >= 0) {
-      real level = objLevel.Value() * 100;
+    if (objLevel.State() >= 0) {
+      real level = objLevel.State() * 100;
       stateSwitchingStatus = level.ToString(1)#" %";
       if (level >= 0) {
         classStateActive = "btnActive";

@@ -126,7 +126,7 @@ proc getMaintenance {chn p descr} {
   if { [info exists ps($param)] == 1  } {
     incr prn
     array_clear options
-    if {[string equal $devType "HmIP-eTRV-3"] == 1} {
+    if {([string equal $devType "HmIP-eTRV-3"] == 1) || ([string equal $devType "HmIP-eTRV-E"] == 1)} {
       for {set val 20} {$val <= 160} {incr val 20} {
           set options($val) "$val"
       }
@@ -4257,10 +4257,10 @@ proc getCarbonDioxideReceiver {chn p descr} {
         set param INTERVAL_UNIT
         array_clear options
         set options(0) "not active"
-        set options(3) "\${optionUnitH}"
-        set options(4) "\${optionUnitD}"
-        set options(5) "\${optionUnit7D}"
-        set options(6) "\${optionUnit28D}"
+        set options(4) "\${optionUnitH}"
+        set options(5) "\${optionUnitD}"
+        set options(6) "\${optionUnit7D}"
+        set options(7) "\${optionUnit28D}"
         append html "[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
       append html "</tr>"
 

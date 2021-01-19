@@ -4,8 +4,8 @@
 
 <script type="text/javascript">
 	var notAssignedVisible;
-	var diagramType;
-	var devType;
+	var diagramType = "";
+	var devType = "";
 
 	var jUnitElm = jQuery("#diagram_displayedUnit"),
 	jConsolidationElm = jQuery("#diagram_defaultConsolidationFunction");

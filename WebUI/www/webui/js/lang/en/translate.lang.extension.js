@@ -955,7 +955,7 @@ jQuery.extend(true, langJSON, {
     "unknown" : "unknown",
     "lblDewPointAlarm" :  "Dew point alarm",
     "lblEmergencyOperation" : "Connection failure with room control unit",
-    "lblExternalClock" :  "Energy-saving temperature mode",
+    "lblExternalClock" :  "Energy-saving temp. mode",
     "lblFrostProtection" :  "Frost protection",
     "lblHumidityLimiter" :  "Humidity limit",
     "lblSwitchingStatus" :  "Controlling",

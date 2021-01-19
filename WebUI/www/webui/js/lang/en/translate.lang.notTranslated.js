@@ -20,84 +20,84 @@ jQuery.extend(true, langJSON, {
     "comment" : "End HmIPWeeklyDeviceProgram.js",
 
 
-    "stringTableErrorCommunicationParticulateMatterSensor" : "Fehler Kommunikation Feinstaubsensor",
-    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Kommunikation Feinstaubsensor: OK",
-    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Kommunikation Feinstaubsensor: gest&ouml;rt",
+    "stringTableErrorCommunicationParticulateMatterSensor" : "Fine dust sensor communication error",
+    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Fine dust sensor communication: OK",
+    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Fine dust sensor communication: failed",
 
-    "stringTableErrorCommunicationTempAndHumiditySensor" : "Fehler Kommunikation Temp.-Luftfeuchtesensor",
-    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "Kommunikation Temp.-Luftfeuchtesensor: OK",
-    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "Kommunikation Temp.-Luftfeuchtesensor: gest&ouml;rt",
+    "stringTableErrorCommunicationTempAndHumiditySensor" : "Temperature/Humidity sensor communication error",
+    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "Temperature/Humidity sensor communication: OK",
+    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "Temperature/Humidity sensor communication: failed",
 
-    "stringTableErrorParticulateMatterMeasurementFalse" : "Messung Feinstaubsensor: OK",
-    "stringTableErrorParticulateMatterMeasurementTrue" : "Messung Feinstaubsensor: gest&ouml;rt",
+    "stringTableErrorParticulateMatterMeasurementFalse" : "Fine dust sensor measurement: OK",
+    "stringTableErrorParticulateMatterMeasurementTrue" : "Fine dust sensor measurement: failed",
 
-    "stringTableErrorTempOrHumidityMeasurementFalse" : "Messung Temp.-Luftfeuchte: OK",
-    "stringTableErrorTempOrHumidityMeasurementTrue" : "Messung Temp.-Luftfeuchte: gest&ouml;rt",
+    "stringTableErrorTempOrHumidityMeasurementFalse" : "Temperature/Humidity measurement: OK",
+    "stringTableErrorTempOrHumidityMeasurementTrue" : "Temperature/Humidity measurement: failed",
 
-    "lblTilt" : "Neigung",
+    "lblTilt" : "Tilt",
 
-    "stringTableAutoHydraulicAdjustment" : "Hydraulischer Ventilabgleich",
+    "stringTableAutoHydraulicAdjustment" : "Hydraulic valve adjustment",
 
-    "hintSetReadyWeeklyProgram" : "Zum Konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
+    "hintSetReadyWeeklyProgram" : "Please press the Finish button to configure the week program and then access the device in the device list.",
 
 
 
-    "lblBehaviour" : "Verhalten",
+    "lblBehaviour" : "Response",
 
-    "optionColorOFF" : "Beleuchtung aus",
-    "optionColorON" : "Dauerhaft ein",
-    "blinkSlow" : "Langsames Blinken",
-    "blinkMiddle" : "Mittleres Blinken",
-    "blinkFast" : "Schnelles Blinken",
-    "blinkFlashSlow" : "Langsames Blitzen",
-    "blinkFlashMiddle" : "Mittleres Blitzen",
-    "blinkFlashFast" : "Schnelles Blitzen",
-    "blinkBillowSlow" : "Langsames Pulsieren",
-    "blinkBillowMiddle" : "Mittleres Pulsieren",
-    "blinkBillowFast" : "Schnelles Pulsieren",
+    "optionColorOFF" : "Back light off",
+    "optionColorON" : "Permanently on",
+    "blinkSlow" : "Slow flashing",
+    "blinkMiddle" : "Medium flashing",
+    "blinkFast" : "Fast flashing",
+    "blinkFlashSlow" : "Slow lighting",
+    "blinkFlashMiddle" : "Medium lighting",
+    "blinkFlashFast" : "Fast lighting",
+    "blinkBillowSlow" : "Slow pulsing",
+    "blinkBillowMiddle" : "Medium pulsing",
+    "blinkBillowFast" : "Fast pulsing",
 
-    "stringTableColorOldValue" : "Farbwert beibehalten",
-    "stringTableColorNoChange" : "Farbwert ignorieren",
+    "stringTableColorOldValue" : "Retain colour value",
+    "stringTableColorNoChange" : "Ignore colour value",
 
-    "stringTableColorBehaviourOldValue" : "Verhalten beibehalten",
-    "stringTableColorBehaviourDoNotCare" : "Verhalten ignorieren",
+    "stringTableColorBehaviourOldValue" : "Retain response",
+    "stringTableColorBehaviourDoNotCare" : "Ignore response",
 
-    "stringTableColorBehaviourStatus" : "Status Verhalten",
+    "stringTableColorBehaviourStatus" : "Status response",
 
-    "stringTableRampTimeOff" : "Ausschalt-Rampenzeit",
+    "stringTableRampTimeOff" : "Ramp off time",
 
     "helpCombinedParameterTimeLimit" :
-      "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ein'.<br/></br>" +
-      "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer bestimmen. " +
-      "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ein'.",
+      "A non-activated checkbox indicates 'permanently on'.<br/></br>" +
+      "When you activate this checkbox, you can then determine the switch-on time.  " +
+      "Please note that the switch-on time is limited to 30 hours. A value of 31 hours means 'permanently on'.",
 
     "helpCombinedParameterTimeLimitWithRampOff" :
-    "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ein'.<br/></br>" +
-    "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer, sowie die Ausschalt-Rampenzeit bestimmen. " +
-    "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ein'.",
+    "A non-activated checkbox indicates 'permanently on'.<br/></br>" +
+    "When you activate this checkbox, you can then determine the switch-on time as well as the ramp time switch-off. " +
+    "Please note that the switch-on time is limited to 30 hours. A value of 31 hours means 'permanently on'. ",
 
 
-    "lblCO2Concentration" : "CO2-Konzentration",
+    "lblCO2Concentration" : "CO2 concentration",
 
-    "btnDirectFwUpload" : "Direkt auf CCU laden und installieren",
-    "dialogSettingsCMLblAlternateSoftwareUpdate" : "Alternative Vorgehensweise:",
+    "btnDirectFwUpload" : "Load directly to CCU and install",
+    "dialogSettingsCMLblAlternateSoftwareUpdate" : "Alternative procedure:",
 
-    "indoorAirQualityGood" : "Raumluftqualit%E4t: Gut",
-    "indoorAirQualityMediocre" : "Raumluftqualit%E4t: Mittelm%E4%DFig<br/><br/>Der Raum sollte gel%FCftet werden.",
-    "indoorAirQualityModerate" : "Raumluftqualit%E4t: M%E4%DFig<br/><br/>Der Raum sollte dringend gel%FCftet werden.",
-    "indoorAirQualityLow" : "Raumluftqualit%E4t: Niedrig<br/><br/>Der Raum sollte unbedingt gel%FCftet werden.",
+    "indoorAirQualityGood" : "Room air quality: Good",
+    "indoorAirQualityMediocre" : "Room air quality: Fair<br/><br/>The room should be ventilated.",
+    "indoorAirQualityModerate" : "Room air quality: Average<br/><br/>The room should be ventilated as soon as possible.",
+    "indoorAirQualityLow" : "Room air quality: Poor<br/><br/>The room should be ventilated immediately.",
 
-    "lblCalibrationValue" : "Kalibrierwert",
-    "lblCalibrationInterval" : "Kalibrierungsintervall",
-    "stringTableCalibrationIntervalUnit" : "Einheit Kalibrierungsintervall",
-    "stringTableCalibrationIntervalValue" : "Wert des Kalibrierungsintervalls",
+    "lblCalibrationValue" : "Calibration value",
+    "lblCalibrationInterval" : "Calibration interval",
+    "stringTableCalibrationIntervalUnit" : "Unit calibration interval",
+    "stringTableCalibrationIntervalValue" : "Value calibration interval",
 
-    "stringTableConcentrationStatus" : "Status CO2-Konzentration",
-    "lblAutoCalibration" : "Automatische Kalibrierung",
+    "stringTableConcentrationStatus" : "CO2 concentration status",
+    "lblAutoCalibration" : "Automatic calibration",
 
-    "stringTableMountingOrientation" : "Displayausrichtung",
+    "stringTableMountingOrientation" : "Display orientation",
 
-    "stringTableConditionSwitchTransmitterParticulateMatter" : "Feinstaubsensor",
+    "stringTableConditionSwitchTransmitterParticulateMatter" : "Fine dust sensor",
 
     "noMoreKeys" : ""
   }

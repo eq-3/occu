@@ -1873,43 +1873,52 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
 };
 
 addHintHeatingGroupDevice = function (address) {
-  var devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
-      inHeatingGroup = homematic("Interface.getMetadata", {"objectId" : devId, "dataId" : "inHeatingGroup"}),
+  if (typeof DeviceList.getDeviceByAddress() != "undefined" ) {
+    var devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
+      inHeatingGroup = homematic("Interface.getMetadata", {
+        "objectId": devId,
+        "dataId": "inHeatingGroup"
+      }),
       hint = "<div class='attention' style='width:100%; height:50px; line-height: 25px; background-color: white; text-align: center; position:fixed; z-index: 188;'>" + translateKey('hintGroupDevice') + "</div>";
 
-  if (inHeatingGroup != "null") {   // MetaData available?
-    conInfo("MetaData available", "inHeatingGroup: " + inHeatingGroup);
-    if (inHeatingGroup == "true") {
-      jQuery("#content").prepend(hint);
-      jQuery("#ic_deviceparameters").animate({"margin-top" : "50px"});
-    }
-  } else { // Read /etc/congig/groups.gson (fallback if no meta data available (migration))
-    conInfo("MetaData not available");
-    var allowedGroupMembers = [
-      "RADIATOR_THERMOSTAT",
-      "WALLMOUNTED_THERMOSTAT",
-      "HM-CC-RT-DN",
-      "HM-TC-IT-WM-W-EU"
-      ],
-      showHint = false,
-      devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
-      groupList = JSON.parse(homematic("CCU.getHeatingGroupList",{}));
+    if (inHeatingGroup != "null") {   // MetaData available?
+      conInfo("MetaData available", "inHeatingGroup: " + inHeatingGroup);
+      if (inHeatingGroup == "true") {
+        jQuery("#content").prepend(hint);
+        jQuery("#ic_deviceparameters").animate({"margin-top": "50px"});
+      }
+    } else { // Read /etc/congig/groups.gson (fallback if no meta data available (migration))
+      conInfo("MetaData not available");
+      var allowedGroupMembers = [
+          "RADIATOR_THERMOSTAT",
+          "WALLMOUNTED_THERMOSTAT",
+          "HM-CC-RT-DN",
+          "HM-TC-IT-WM-W-EU"
+        ],
+        showHint = false,
+        devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
+        groupList = JSON.parse(homematic("CCU.getHeatingGroupList", {}));
 
-    if (groupList != -1 && typeof groupList == "object") {
-      jQuery.each(groupList, function (index, groups) {
-        jQuery.each(groups, function (index, group) {
-          jQuery.each(group.groupMembers, function (index, groupMember) {
-            if ((groupMember.id == address) && (jQuery.inArray(groupMember.memberType.id, allowedGroupMembers) != -1)) {
-              showHint = true;
-              homematic("Interface.setMetadata", {"objectId": devId, "dataId": "inHeatingGroup", "value" : "true"});
-            }
+      if (groupList != -1 && typeof groupList == "object") {
+        jQuery.each(groupList, function (index, groups) {
+          jQuery.each(groups, function (index, group) {
+            jQuery.each(group.groupMembers, function (index, groupMember) {
+              if ((groupMember.id == address) && (jQuery.inArray(groupMember.memberType.id, allowedGroupMembers) != -1)) {
+                showHint = true;
+                homematic("Interface.setMetadata", {
+                  "objectId": devId,
+                  "dataId": "inHeatingGroup",
+                  "value": "true"
+                });
+              }
+            });
           });
         });
-      });
-    }
-    if (showHint) {
-      jQuery("#content").prepend(hint);
-      jQuery("#ic_deviceparameters").animate({"margin-top" : "50px"});
+      }
+      if (showHint) {
+        jQuery("#content").prepend(hint);
+        jQuery("#ic_deviceparameters").animate({"margin-top": "50px"});
+      }
     }
   }
 };

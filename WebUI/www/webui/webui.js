@@ -4951,13 +4951,13 @@ elvST['ON_TIME'] = '${stringTableDimmerOnTime}';
 elvST['OPERATING_VOLTAGE'] = '${stringTableOperationVoltage}';
 elvST['OPERATING_VOLTAGE_STATUS'] = '${stringTableOperationVoltage}';
 elvST['OPERATING_VOLTAGE_STATUS=EXTERNAL'] = '${lblValue} ${stringTableOperationVoltage}: ${lblExternal}';
-elvST['OPERATING_VOLTAGE_STATUS='] = '${lblValue} ${stringTableOperationVoltageState}: ${lblExternal}';
-elvST['OPERATING_VOLTAGE_STATUS=NORMAL'] = '${lblValue} ${stringTableOperationVoltage}: ${lblNormal}';
-elvST['OPERATING_VOLTAGE_STATUS=0'] = '${lblValue} ${stringTableOperationVoltageState}: ${lblNormal}';
-elvST['OPERATING_VOLTAGE_STATUS=UNKNOWN'] = '${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}';
-elvST['OPERATING_VOLTAGE_STATUS=1'] = '${lblValue} ${stringTableOperationVoltageState}: ${lblUnknown}';
-elvST['OPERATING_VOLTAGE_STATUS=OVERFLOW'] = '${lblValue} ${stringTableOperationVoltageState}: ${lblOverflow}';
-elvST['OPERATING_VOLTAGE_STATUS=2'] = '${lblValue} ${stringTableOperationVoltageState}: ${lblOverflow}';
+elvST['OPERATING_VOLTAGE_STATUS=3'] = '${stringTableOperationVoltageState}: ${lblExternal}';
+elvST['OPERATING_VOLTAGE_STATUS=NORMAL'] = '${stringTableOperationVoltage}: ${lblNormal}';
+elvST['OPERATING_VOLTAGE_STATUS=0'] = '${stringTableOperationVoltageState}: ${lblNormal}';
+elvST['OPERATING_VOLTAGE_STATUS=UNKNOWN'] = '${stringTableOperationVoltageState}: ${lblUnknown}';
+elvST['OPERATING_VOLTAGE_STATUS=1'] = '${stringTableOperationVoltageState}: ${lblUnknown}';
+elvST['OPERATING_VOLTAGE_STATUS=OVERFLOW'] = '${stringTableOperationVoltageState}: ${lblOverflow}';
+elvST['OPERATING_VOLTAGE_STATUS=2'] = '${stringTableOperationVoltageState}: ${lblOverflow}';
 elvST['OPTICAL_ALARM_SELECTION=BLINKING_ALTERNATELY_REPEATING'] = '${stringTableAlarmBlinkingAlternatelyRepeating}';
 elvST['OPTICAL_ALARM_SELECTION=BLINKING_BOTH_REPEATING'] = '${stringTableAlarmBlinkingBothRepeating}';
 elvST['OPTICAL_ALARM_SELECTION=CONFIRMATION_SIGNAL_0'] = '${stringTableAlarmConfirmingSignal0}';
@@ -37861,7 +37861,8 @@ DetermineParameterValue = function(iface, address, ps_id, param_id, html_inputel
 
 ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
 {
-  var valElm = $(srcid);
+  var srcElm = $(srcid);
+  var dstElm = $(dstid);
 
   // Falls das Tasten-Event nicht mit übergeben wurde ....
   var keyCode = 0,
@@ -37872,38 +37873,35 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
   }
 
   var ok = true;
-    
+
   if (! min) min = 0;
   if (! max) max = 100;
   if (! dstValueFactor) dstValueFactor = 0.01;//dstValue = value/100
-  
+
   var value = $F(srcid);
 
   // Check if float is allowed
-  if (min.indexOf(".") == -1 && max.indexOf(".") == -1) {
+  if (min.toString().indexOf(".") == -1 && max.toString().indexOf(".") == -1) {
     min = parseInt(min);
     max = parseInt(max);
     value = (roundValue05(parseInt(value))).toString();
-    valElm.value = value;
   } else {
     min = parseFloat(min);
     max = parseFloat(max);
-    valElm.value = parseFloat(value);
+    srcElm.value = parseFloat(value);
   }
 
   //replace , by .
   if (value.indexOf(',') >= 0)
   {
     var tokens = value.split(",");
-    
+
     value = "";
     if (tokens[0]) value += tokens[0];
     value += '.';
     if (tokens[1]) value += tokens[1];
-
-    valElm.value = value;
+    srcElm.value = value;
   }
-
 
   //User is already editing?
   if ((value.charAt(value.length-1) == '.') && (value.split(".")[1].length > 0) ) return;
@@ -37940,24 +37938,26 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
 
   if (ok)
   {
-    //valElm.style.backgroundColor = "white"; // problem with firefox 69.0.3 (64-bit)
-    valElm.style.backgroundColor = "#fffffe";
-    valElm.value = value * dstValueFactor;
-    valElm.setAttribute("valvalid", "true");
+    srcElm.style.backgroundColor = "#fffffe";
+    dstElm.value = value * dstValueFactor;
+    srcElm.setAttribute("valvalid", "true");
+
     // Cursortasten abfangen, ansonsten springt der Cursor im Texteingabefeld
     // beim IE (Version 8 u. 9) mit jedem Druck auf eine Cursortaste ans Ende des Wertes.
     // Man kann nicht mittels Cursor-Links nach links wandern, da der Cursor immer ans Ende springt.
     // [HM-1293]
-    if ((keyCode) < 37 && (keyCode > 40) ) {    
-      valElm.value = value;
+    if ((keyCode) < 37 && (keyCode > 40) ) {
+      //valElm.value = value;
+      srcElm.value = value;
     }
   }
   else
   {
-    valElm.setAttribute("valvalid", "false");
-    valElm.style.backgroundColor = "red";
-    valElm.value = finalVal * dstValueFactor;
-    window.setTimeout(function(){valElm.style.backgroundColor = "white";},1000);
+    srcElm.setAttribute("valvalid", "false");
+    srcElm.style.backgroundColor = "red";
+    dstElm.value = finalVal * dstValueFactor;
+    srcElm.value = dstElm.value;
+    window.setTimeout(function(){srcElm.style.backgroundColor = "white";},1000);
   }
 };
 
@@ -43642,43 +43642,52 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
 };
 
 addHintHeatingGroupDevice = function (address) {
-  var devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
-      inHeatingGroup = homematic("Interface.getMetadata", {"objectId" : devId, "dataId" : "inHeatingGroup"}),
+  if (typeof DeviceList.getDeviceByAddress() != "undefined" ) {
+    var devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
+      inHeatingGroup = homematic("Interface.getMetadata", {
+        "objectId": devId,
+        "dataId": "inHeatingGroup"
+      }),
       hint = "<div class='attention' style='width:100%; height:50px; line-height: 25px; background-color: white; text-align: center; position:fixed; z-index: 188;'>" + translateKey('hintGroupDevice') + "</div>";
 
-  if (inHeatingGroup != "null") {   // MetaData available?
-    conInfo("MetaData available", "inHeatingGroup: " + inHeatingGroup);
-    if (inHeatingGroup == "true") {
-      jQuery("#content").prepend(hint);
-      jQuery("#ic_deviceparameters").animate({"margin-top" : "50px"});
-    }
-  } else { // Read /etc/congig/groups.gson (fallback if no meta data available (migration))
-    conInfo("MetaData not available");
-    var allowedGroupMembers = [
-      "RADIATOR_THERMOSTAT",
-      "WALLMOUNTED_THERMOSTAT",
-      "HM-CC-RT-DN",
-      "HM-TC-IT-WM-W-EU"
-      ],
-      showHint = false,
-      devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
-      groupList = JSON.parse(homematic("CCU.getHeatingGroupList",{}));
+    if (inHeatingGroup != "null") {   // MetaData available?
+      conInfo("MetaData available", "inHeatingGroup: " + inHeatingGroup);
+      if (inHeatingGroup == "true") {
+        jQuery("#content").prepend(hint);
+        jQuery("#ic_deviceparameters").animate({"margin-top": "50px"});
+      }
+    } else { // Read /etc/congig/groups.gson (fallback if no meta data available (migration))
+      conInfo("MetaData not available");
+      var allowedGroupMembers = [
+          "RADIATOR_THERMOSTAT",
+          "WALLMOUNTED_THERMOSTAT",
+          "HM-CC-RT-DN",
+          "HM-TC-IT-WM-W-EU"
+        ],
+        showHint = false,
+        devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
+        groupList = JSON.parse(homematic("CCU.getHeatingGroupList", {}));
 
-    if (groupList != -1 && typeof groupList == "object") {
-      jQuery.each(groupList, function (index, groups) {
-        jQuery.each(groups, function (index, group) {
-          jQuery.each(group.groupMembers, function (index, groupMember) {
-            if ((groupMember.id == address) && (jQuery.inArray(groupMember.memberType.id, allowedGroupMembers) != -1)) {
-              showHint = true;
-              homematic("Interface.setMetadata", {"objectId": devId, "dataId": "inHeatingGroup", "value" : "true"});
-            }
+      if (groupList != -1 && typeof groupList == "object") {
+        jQuery.each(groupList, function (index, groups) {
+          jQuery.each(groups, function (index, group) {
+            jQuery.each(group.groupMembers, function (index, groupMember) {
+              if ((groupMember.id == address) && (jQuery.inArray(groupMember.memberType.id, allowedGroupMembers) != -1)) {
+                showHint = true;
+                homematic("Interface.setMetadata", {
+                  "objectId": devId,
+                  "dataId": "inHeatingGroup",
+                  "value": "true"
+                });
+              }
+            });
           });
         });
-      });
-    }
-    if (showHint) {
-      jQuery("#content").prepend(hint);
-      jQuery("#ic_deviceparameters").animate({"margin-top" : "50px"});
+      }
+      if (showHint) {
+        jQuery("#content").prepend(hint);
+        jQuery("#ic_deviceparameters").animate({"margin-top": "50px"});
+      }
     }
   }
 };

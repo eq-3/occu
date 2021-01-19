@@ -455,7 +455,7 @@ jQuery.extend(true,langJSON, {
     "TRIGGER_ANGLE" : "When used as position detection sensor, this parameter determines by how many degrees the angle of the top/bottom of the sensor has to change in relation to the horizontal, " +
       "to trigger an event.",
 
-    "TRIGGER_ANGLE_2" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wie viel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, damit der senkrechte Zustand  erreicht wird.",
+    "TRIGGER_ANGLE_2" : "When being used as a position detection sensor, this parameter determines by how many degrees the angle of the top/bottom side of the sensor must change in relation to the horizontal so that the vertical state is achieved.",
 
     "DIM_STEP" :
       "This parameter determines the number of steps to dim the brightness from 0% - 100% up, or from 100% - 0% down.<br/><br/>" +
@@ -500,10 +500,10 @@ jQuery.extend(true,langJSON, {
     "AUTO_HYDRAULIC_ADJUSTMENT" : "A hydraulic balancing is performed via the valves, which means that the flow rate at the valves is adjusted so that all rooms heat up at the same rate.",
 
     "CALIBRATION_PPM" :
-      "Bei der automatischen Kalibrierung des CO2-Sensors wird der niedrigste Messwert innerhalb vordefinierter Kalibrierintervalle als neue Referenz angenommen. " +
-      "Frische Au%DFenluft hat einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung wird angenommen, dass die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht. " +
-      "<br/><br/>Die Kalibrierung ben%F6tig mindestens drei Kalibrierintervalle, um den Endwert sicher zu bestimmen." +
-      "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden. Eine Kalibrierung sollte in dem Fall alle 1-2 Jahre manuell durchgef%FChrt werden.",
+      "The lowest measured value within pre-defined calibration intervals is used as a new reference for the automatic calibration of the CO2 sensor. " +
+      "Fresh outside air has a typical value of approx. 400 ppm. For normal use indoors, it is accepted that the indoor air will reach the level of fresh outdoor air at least once within a period of one week." +
+      "<br/><br/>The calibration requires at least three calibration intervals for the reliable determination of the maximum value.\n" +
+      "<br/><br/>This function must be deactivated for rooms with a 24/7 permanent occupancy. In this case, a manual calibration should be performed every 1-2 years.",
 
     "MOUNTING_ORIENTATION" : "This parameter makes it possible to rotate the display content by 180 degrees.",
 
