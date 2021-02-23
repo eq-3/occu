@@ -5,25 +5,31 @@ function ::CreateAccessReceiver()
 
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
-
+  string lblPermission = "<span>${permissionUnknown}</span>";
+  string colorIndicator = "background-color:#ff8000";
 
   WriteLine("<td>");
 
-    WriteLine("<table style='margin: 0 auto;'>");
+    !WriteLine("<table style='margin: 0 auto;'>");
+    WriteLine("<table>");
       WriteLine("<tr>");
-        WriteLine("<td colspan='3'><div class='controlHeader'>tr Berechtigung</div></td>");
+        WriteLine("<td colspan='3'><div class='controlHeader'>${optionDoorLockUser}</div></td>");
+        WriteLine("<td><img src='/ise/img/help.png' style='curor: pointer; width:18px; height:18px;' onclick='showParamHelp(translateKey(\"helpAccessReceiverUserAccessAuth\"), 450, 100);'></td>");
+
       WriteLine("</tr>");
       WriteLine("<tr>");
         if (objAuth) {
           WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div id='permissionOFF_"#chnId#"' class='CLASS02550 ControlBtnOff' align='center' onclick=\"setDpState("#objAuth.ID()#", 0);\">${stringTableOFF}</div>");
-            WriteLine("<div id='permissionON_"#chnId#"' class='CLASS02550 ControlBtnOff' align='center' onclick=\"setDpState("#objAuth.ID()#", 1);\">${stringTableON}</div>");
+            WriteLine("<div id='permissionOFF_"#chnId#"' class='CLASS02550 ControlBtnOff' align='center' style='margin-bottom:3px;' onclick=\"setBtnPress(this.id);setDpState("#objAuth.ID()#", 0);\">${stringTableOFF}</div>");
+            WriteLine("<div id='permissionON_"#chnId#"' class='CLASS02550 ControlBtnOff' align='center' onclick=\"setBtnPress(this.id);setDpState("#objAuth.ID()#", 1);\">${stringTableON}</div>");
           WriteLine("</td>");
           WriteLine("<td style='width:50px;'></td>");
         }
         if (objState) {
+          if (objState.Value() == true) {lblPermission = "<span>${permissionTrue}</span>"; colorIndicator = 'background-color:green';}
+          if (objState.Value() == false) {lblPermission = "<span>${permissionFalse}</span>"; colorIndicator = 'background-color:red';}
           WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div class='ControlBtnInfo'>${lblPermission}: "#objState.Value()#"</div>");
+            WriteLine("<div class='ControlBtnInfo' style='"#colorIndicator#"'>"#lblPermission#"</div>");
           WriteLine("</td>");
         }
       WriteLine("</tr>");

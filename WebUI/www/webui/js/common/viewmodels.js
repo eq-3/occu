@@ -15,13 +15,21 @@ function GroupDevice(id, serialNumber, type)
   conInfo(self.device);
   self.type = type;
   self.devType = translateKey(type);
+  self.name = "";
+  self.extDescr = "";
   if(typeof self.device == "undefined")
   {
     self.name = type +" "+ self.serialNumber;    
   }
   else
   {
-    self.name = self.device.getName();
+    var chn = DeviceList.getChannelByAddress(serialNumber);
+    if (typeof chn != "undefined") {
+      self.name = chn.getName();
+      self.extDescr = (typeof chn.nameExtention != "undefined") ? chn.nameExtention : "";
+    } else {
+      self.name = self.device.getName();
+    }
   }
   
   self.getConfigPending = function()

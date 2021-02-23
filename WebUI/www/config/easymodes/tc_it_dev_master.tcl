@@ -302,7 +302,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureComfort}</td>"
       append HTML_PARAMS(separate_1)  "<td>[getTextField $DEVICE $param $ps($param) $prn]&nbsp;[getUnit psDescr $param]&nbsp;[getMinMaxValueDescr psDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
       append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue psDescr $param], [getMaxValue psDescr $param], 1);isEcoLTComfort(this.name);});"
+        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, '[getMinValue psDescr $param]', '[getMaxValue psDescr $param]', 1);isEcoLTComfort(this.name);});"
       append HTML_PARAMS(separate_1) "</script>"
 
 
@@ -312,7 +312,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<td>\${stringTableTemperatureLowering}</td>"
       append HTML_PARAMS(separate_1)  "<td>[getTextField $DEVICE $param $ps($param) $prn]&nbsp;[getUnit psDescr $param]&nbsp;[getMinMaxValueDescr psDescr $param]<input id=\"ecoOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
       append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue psDescr $param], [getMaxValue psDescr $param], 1);isEcoLTComfort(this.name);});"
+        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, '[getMinValue psDescr $param]', '[getMaxValue psDescr $param]', 1);isEcoLTComfort(this.name);});"
       append HTML_PARAMS(separate_1) "</script>"
       append HTML_PARAMS(separate_1) "</tr>"
 

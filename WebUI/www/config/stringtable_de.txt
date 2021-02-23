@@ -17,7 +17,14 @@ ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG	${stringTableTiltSensorMsgPosB2}
 ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=OPEN	${stringTableTiltSensorMsgPosB3}
 ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW	${stringTableAccelerationTransceiverNotificationSoundTypeHighToLow}
 ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH	${stringTableAccelerationTransceiverNotificationSoundTypeLowToHigh}
-ACCELERATION_TRANSCEIVER|TRIGGER_ANGLE	${stringTableAccelerationTransceiverTriggerAngle}
+
+ACCESS_RECEIVER	${stringTableAccessReceiverTitle}
+ACCESS_RECEIVER|STATE=FALSE	${stringTableAccessReceiverStateFalse}
+ACCESS_RECEIVER|STATE=TRUE	${stringTableAccessReceiverStateTrue}
+
+ACCESS_RECEIVER|ACCESS_AUTHORIZATION=ENABLE	${stringTableAccessReceiverAccessAuthorizationTrue}
+ACCESS_RECEIVER|ACCESS_AUTHORIZATION=DISABLE	${stringTableAccessReceiverAccessAuthorizationFalse}
+
 ACOUSTIC_ALARM_ACTIVE=FALSE	${stringTableAcousticAlarmActiveFalse}
 ACOUSTIC_ALARM_ACTIVE=TRUE	${stringTableAcousticAlarmActiveTrue}
 OPTICAL_ALARM_ACTIVE=FALSE	${stringTableOpticalAlarmActiveFalse}
@@ -636,8 +643,19 @@ DOOR_COMMAND=OPEN	${stringTableDoorCommandOpen}
 DOOR_COMMAND=PARTIAL_OPEN	${stringTableDoorCommandPartialOpen}
 DOOR_COMMAND=STOP	${stringTableDoorCommandStop}
 
-DOOR_RECEIVER	${stringTableDoorReceiverTitle}
+DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=LOCKED	${stringTableDoorLockStateTransmitterLockStateLocked}
+DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=UNLOCKED	${stringTableDoorLockStateTransmitterLockStateUnlocked}
+DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=UNKNOWN	${stringTableDoorLockStateTransmitterLockStateUnknown}
+DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=DOWN	${stringTableDoorLockStateTransmitterActivityStateDown}
+DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=UNKNOWN	${stringTableDoorLockStateTransmitterActivityStateUnknown}
+DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=STABLE	${stringTableDoorLockStateTransmitterActivityStateStable}
+DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=UP	${stringTableDoorLockStateTransmitterActivityStateUp}
 
+DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=LOCKED	${stringTableDoorLockStateTransmitterLockTargetLevelLocked}
+DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=UNLOCKED	${stringTableDoorLockStateTransmitterLockTargetLevelUnlocked}
+DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=OPEN	${stringTableDoorLockStateTransmitterLockTargetLevelOpen}
+
+DOOR_RECEIVER	${stringTableDoorReceiverTitle}
 DOOR_STATE=CLOSED	${stringTableDoorStateClose}
 DOOR_STATE=OPEN	${stringTableDoorStateOpen}
 DOOR_STATE=POSITION_UNKNOWN	${stringTableDoorStateUnknown}
@@ -672,10 +690,10 @@ ENERGIE_METER_TRANSMITTER|FREQUENCY	${stringTablePowerMeterFrequency}
 ENERGIE_METER_TRANSMITTER|POWER	${stringTablePowerMeterPower}
 ENERGIE_METER_TRANSMITTER|POWER_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}
 ENERGIE_METER_TRANSMITTER|POWER_STATUS=0	${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}
+ENERGIE_METER_TRANSMITTER|POWER_STATUS=UNKNOWN	${lblValue} ${stringTablePowerMeterPower}: ${lblUnknown}
+ENERGIE_METER_TRANSMITTER|POWER_STATUS=1	${lblValue} ${stringTablePowerMeterPower}: ${lblUnknown}
 ENERGIE_METER_TRANSMITTER|POWER_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}
-ENERGIE_METER_TRANSMITTER|POWER_STATUS=1	${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}
-ENERGIE_METER_TRANSMITTER|POWER_STATUS=UNDERFLOW	${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}
-ENERGIE_METER_TRANSMITTER|POWER_STATUS=2	${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}
+ENERGIE_METER_TRANSMITTER|POWER_STATUS=2	${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}
 ENERGIE_METER_TRANSMITTER|TX_THRESHOLD_POWER	${stringTablePowerMeterTxThresholdPower}
 ERROR	${stringTableError}
 ERROR=NO_ERROR	${stringTableErrorNoError}
@@ -697,6 +715,7 @@ ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=TRUE	${stringTableErrorCommunicatio
 ERROR_COPROCESSOR	${stringTableErrorCoProcessor}
 ERROR_COPROCESSOR=TRUE	${stringTableErrorCoprocessorTrue}
 ERROR_COPROCESSOR=FALSE	${stringTableErrorCoprocessorFalse}
+ERROR_DEGRADED_CHAMBER	${stringTableErrorDegradedChamber}
 ERROR_NON_FLAT_POSITIONING	${stringTableErrorNonFlatPositioning}
 ERROR_NON_FLAT_POSITIONING=FALSE	${stringTableErrorNonFlatPositioningFalse}
 ERROR_NON_FLAT_POSITIONING=TRUE	${stringTableErrorNonFlatPositioningTrue}
@@ -1213,6 +1232,7 @@ PRESS_LONG=TRUE	${stringTableKeyPressLongTrue}
 PRESS_SHORT	${stringTableKeyPressShort}
 PRESS_SHORT=TRUE	${stringTableKeyPressShortTrue}
 PROCESS=NOT_STABLE	${stringTableProcessNotStableGeneric}
+PROCESS=STABLE	${stringTableProcessStableGeneric}
 PROCESS=STABLE	${stringTableProcessStableGeneric}
 PULSE_SENSOR	${stringTablePulseSensorTitle}
 PULSE_SENSOR|SEQUENCE_OK	${stringTablePulseSensorSequenceOk}
@@ -1821,6 +1841,11 @@ WINMATIC|STATE_UNCERTAIN=FALSE	${stringTableWinMaticStateUncertainFalse}
 WINMATIC|STATE_UNCERTAIN=TRUE	${stringTableWinMaticStateUncertainTrue}
 WINMATIC|STOP	${stringTableWinMaticStop}
 WINMATIC|TILT_MAX	${stringTableWinMaticTiltMax}
+
+WP_OPTIONS=NOP	${stringTableWPOptionsNop}
+WP_OPTIONS=OFF	${stringTableWPOptionsOff}
+WP_OPTIONS=ON	${stringTableWPOptionsOn}
+
 WS_CS	${stringTableWSCS}
 WS_TH	${stringTableWSTH}
 minutes	${stringTableMinute}

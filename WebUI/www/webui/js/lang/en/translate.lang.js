@@ -693,7 +693,7 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsExtraSoftwareBtnStartInstallSoftware" : "Start installation",
     "dialogSettingsExtraSoftwareLblSelectExtraSoftware" : "Select additional software:",
 
-    "dialogSettingsExtraSoftwareHintSelectExtraSoftware" : "<b>Please note:</b><br/>Additional software installed by the user can lead to unexpected results, data loss or even system instability.<br/>eQ-3 AG does not assume any liability for additional software installed by the user.<br/><br/>To finish installation, the CCU will be restarted automatically.",
+    "dialogSettingsExtraSoftwareHintSelectExtraSoftware" : "<b>Please note:</b><br/>Additional software installed by the user can lead to unexpected results, data loss or even system instability.<br/><br/><b><u>eQ-3 AG does not assume any liability for additional software installed by the user.</u></b><br/><br/>To finish installation, the CCU will be restarted automatically.",
 
     "dialogSettingsExtraSoftwareInstallMessageBoxTitle" : "Firmware update - confirmation",
     "dialogSettingsExtraSoftwareInstallMessageBoxContent" : "The additional software has been uploaded. You can now start the installation by click on the button below.",

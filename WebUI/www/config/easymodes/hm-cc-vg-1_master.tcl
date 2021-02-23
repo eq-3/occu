@@ -45,7 +45,7 @@ proc getTextField {type param value prn} {
   if {[llength [split $value "."]] == 2} {
     set value [format {%1.2f} $value]
   }
-  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=\"$param\" onblur=\"ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1)\"/>"
+  set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=\"$param\" onblur=\"ProofAndSetValue(this.id, this.id, '[getMinValue $param]', '[getMaxValue $param]', 1)\"/>"
   return $s
 }
 
@@ -330,7 +330,7 @@ set comment {
       append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureComfort}</td>"
       append HTML_PARAMS(separate_1)  "<td>[getTextField $DEVICE $param $ps($param) $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
       append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+       append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {isEcoLTComfort(this.name);});"
       append HTML_PARAMS(separate_1) "</script>"
 
 
@@ -340,7 +340,7 @@ set comment {
       append HTML_PARAMS(separate_1) "<td>\${stringTableTemperatureLowering}</td>"
       append HTML_PARAMS(separate_1)  "<td>[getTextField $DEVICE $param $ps($param) $prn]&nbsp;[getUnit  $param]&nbsp;[getMinMaxValueDescr $param]<input id=\"ecoOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
       append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+       append HTML_PARAMS(separate_1) "jQuery(\"#separate_$DEVICE\_$prn\").bind(\"blur\",function() {isEcoLTComfort(this.name);});"
       append HTML_PARAMS(separate_1) "</script>"
       append HTML_PARAMS(separate_1) "</tr>"
 
@@ -454,7 +454,7 @@ set comment {
           append HTML_PARAMS(separate_1) "</select> : "
       	# Decalcification minute
           append HTML_PARAMS(separate_1) "<select id='decalcMin' onChange='setDecalcTime($prn);'>"
-              append HTML_PARAMS(separate_1) "<option value='00'>00</option>"
+              append HTML_PARAMS(separate_1) "<option value='0'>00</option>"
               append HTML_PARAMS(separate_1) "<option value='30'>30</option>"
           append HTML_PARAMS(separate_1) "</select>"
           append HTML_PARAMS(separate_1) "[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]"

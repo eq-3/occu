@@ -1,0 +1,5 @@
+"switch_unlocked" : "Unlock",
+"switch_locked" : "Lock",
+"switch_open" : "Open",
+
+"toggle" : "Toggle",

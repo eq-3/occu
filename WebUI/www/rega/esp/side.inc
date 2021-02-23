@@ -23,6 +23,11 @@
   string hmip_mp3p = "HmIP-MP3P";
   string hmip_bsl = "HmIP-BSL";
 
+  string hmipwID = "HmIPW-";
+  string hmipw_wrc6 = "HmIPW-WRC6";
+
+
+
   string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
 
   string acousticSignalVirtualReceiver = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER";
@@ -31,6 +36,8 @@
   string switchVirtualReceiver = "SWITCH_VIRTUAL_RECEIVER";
   string alarmSwitchVirtualReceiver = "ALARM_SWITCH_VIRTUAL_RECEIVER";
   string opticalSignaReceiver = "OPTICAL_SIGNAL_RECEIVER";
+  string accessReceiver = "ACCESS_RECEIVER";
+  string maintenance = "MAINTENANCE";
 
   ! e. g. DIMMER_WEEK_PROFILE, SWITCH_WEEK_PROFILE
   string hmIPWeekProfile = "_WEEK_PROFILE";
@@ -351,6 +358,12 @@
         }
       }
       Write( '</select> ' );
+
+      ! Help for the channel type ACCESS_RECEIVER (DLD)
+      if (oCH.HssType().Find(accessReceiver) != -1) {
+        Write( "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp(translateKey('helpPrgAccessReceiver'), 400, 150)\">" );
+      }
+
       if( (!bFound) && (iFirstID != ID_ERROR) )
       {
         oSD.DestinationDP( iFirstID );
@@ -501,6 +514,7 @@
             integer i_blindVirtualReceiver = oCH.HssType().Find(blindVirtualReceiver);
             integer i_hmip_mp3p = chLabel.Find(hmip_mp3p);
             integer i_hmip_WeekProfile = oCH.HssType().Find(hmIPWeekProfile);
+            integer i_maintenance = oCH.HssType().Find(maintenance);
 
             integer ePaperAcousticDisplay = chLabel.Find(hmip_wrcd);
 
@@ -517,7 +531,8 @@
               || (i_dimmerVirtualReceiver != -1)
               || (i_opticalSignalReceiver != -1)
               || (i_switchVirtualReceiver != -1)
-              || (i_hmip_WeekProfile != -1))
+              || (i_hmip_WeekProfile != -1)
+              || (i_maintenance != -1))
               ) {
               if (statusDisplayDevice != -1) {
                 if(iV == "0") {
@@ -631,7 +646,7 @@
                 if (iV.Find("S=") == -1) {
                   iV = "S=true";
                 }
-                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setCombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\', \'switchState\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if (((i_blindVirtualReceiver != -1)) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
@@ -641,8 +656,22 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setBlindLevelController('#oSD.ID()#',\'COMBINED_PARAMETER\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
+              ! SPHM-767
+              if ((oCH.Label().Find(hmipwID) != -1) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                ! IMTL(evel) 0 = OFF - 1 = ON
+                ! Some devices have no a display (e. g. HmIPW-WRC6). Therefore we check for a key visual (IMKV)
+                if (iV.Find("IMKV=") == -1) {
+                  if (oCH.Label().Find(hmipw_wrc6) == -1) {
+                    iV = "IMLB=true,IMKV=true,IMTL=1,IMDU=60";
+                  } else {
+                    iV = "IMKV=true,IMTL=1,IMDU=60";
+                  }
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setCombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\', \'wiredDisplaySysKey\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
             } else {
-              Write('<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" />< ' );
+              Write('<input id="prgStringOptionValue'#oSD.ID()#'" type="text" class="SelectBox" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" />' );
             }
 
             if((ouled16 == -1)
@@ -664,6 +693,7 @@
               && (i_opticalSignalReceiver == -1)
               && (i_switchVirtualReceiver == -1)
               && (i_hmip_WeekProfile == -1)
+              && (((i_maintenance == -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") == -1)))
               ) {
               Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
             } else {
@@ -718,7 +748,7 @@
               }
 
               if ((i_switchVirtualReceiver != - 1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
-                Write( '<span id="setSwitchVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
+                ! Write( '<span id="setSwitchVirtualReceiver'#oSD.ID()#'" class="CLASS02401" onclick="setSwitchStateController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');"><img src="/ise/img/notepad.png" /></span>' );
               }
             }
           }

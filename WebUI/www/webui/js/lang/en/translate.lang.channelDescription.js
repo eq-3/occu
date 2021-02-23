@@ -1,6 +1,7 @@
 jQuery.extend(true,langJSON, {
   "en" : {
 
+    "chType_ACCESS_RECEIVER" : "User",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_1" : "Homematic IP Wired Bus Channel 1",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_2" : "Homematic IP Wired Bus Channel 2",
     "chType_ACTOR_SECURITY" : "Ventilation lock channel",
@@ -53,6 +54,7 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",
     "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Weekly program",
+    "chType_DOOR_LOCK_STATE_TRANSMITTER" : "Lock",
     "chType_DOOR_RECEIVER_MOD_HO" : "Door drive",
     "chType_DOOR_RECEIVER_MOD_TM" : "Door drive",
     "chType_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
@@ -129,6 +131,7 @@ jQuery.extend(true,langJSON, {
     "SENSOR_WINDOW" : "Homematic IP Window state detection",
     "SWITCH_ACTUATOR" : "Homematic IP Switch actuator",
     "WALLMOUNTED_THERMOSTAT" : "Homematic IP Wall thermostat",
+    "FLOOR_HEATING" : "Homematic IP Floor Heating Actuator",
 
     "theEnd" : ""
   }

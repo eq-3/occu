@@ -75,12 +75,12 @@ proc _getMinMaxValueDescr {param} {
   set min $param_descr(MIN)
   set max $param_descr(MAX)
 
-  if {[string equal $param "VALVE_OFFSET"] != -1} {
+  if {[string equal $param VALVE_OFFSET] != 0} {
     return "(0 - 100)"
   }
 
   # Limit float to 2 decimal places
-  if {[llength [split $min "."]] == 1} {
+  if {[llength [split $min "."]] != 1} {
     set min [format {%1.1f} $min]
     set max [format {%1.1f} $max]
   }
@@ -232,7 +232,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<tr><td>\${ecoCoolingTemperature}</td>"
       append HTML_PARAMS(separate_1)  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
       append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, '[_getMinValue $param]', '[_getMaxValue $param]', 1);});"
       append HTML_PARAMS(separate_1) "</script>"
 
       # right
@@ -241,7 +241,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<td>\${ecoHeatingTemperature}</td>"
       append HTML_PARAMS(separate_1)  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"ecoOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
       append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+        append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, '[_getMinValue $param]', '[_getMaxValue $param]', 1);});"
       append HTML_PARAMS(separate_1) "</script>"
       append HTML_PARAMS(separate_1) "</tr>"
 
@@ -297,7 +297,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
     append HTML_PARAMS(separate_1)  "<td colspan=\"2\">[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">"
-    append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [_getMinValue $param], [_getMaxValue $param], 1);isEcoLTComfort(this.name);});"
+    append HTML_PARAMS(separate_1) "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, '[_getMinValue $param]', '[_getMaxValue $param]', 1);});"
     append HTML_PARAMS(separate_1) "</script>"
     append HTML_PARAMS(separate_1) "</tr>"
 

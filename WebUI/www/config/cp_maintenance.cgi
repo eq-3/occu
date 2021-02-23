@@ -39,9 +39,9 @@ set HS485D_URL "bin://127.0.0.1:$portnumber"
 
 
 if {[getProduct] < 3} {
-  set REMOTE_FIRMWARE_SCRIPT "http://update.homematic.com/firmware/download"
+  set REMOTE_FIRMWARE_SCRIPT "https://update.homematic.com/firmware/download"
 } else {
-  set REMOTE_FIRMWARE_SCRIPT "http://ccu3-update.homematic.com/firmware/download"
+  set REMOTE_FIRMWARE_SCRIPT "https://ccu3-update.homematic.com/firmware/download"
 }
 
 proc action_acceptEula {} {
@@ -325,7 +325,7 @@ proc put_message {title msg args} {
         if { [llength $args] < 1 } { set args {{"Zur&uuml;ck" "PopupClose();"}}}
         # - - - wernerf - - -
         # Wenn die Liste leer ($args == "_empty_") ist, dann sollen keine Schalt-
-        # flächen ausgegeben werden
+        # flï¿½chen ausgegeben werden
         if {"_empty_" == $args} { set args "" }
         # - - - wernerf - - -
         foreach b $args {
@@ -389,14 +389,14 @@ proc action_put_page {} {
                 puts "\${dialogSettingsCMLblAvailableSoftwareVersion}"
               }
               table_data {id="availableSWVersion"} {
-                # This doesn´t work properly
+                # This doesnï¿½t work properly
                 # puts [iframe "$REMOTE_FIRMWARE_SCRIPT?cmd=check_version&version=$cur_version&serial=$serial&lang=de&product=HM-CCU2" marginheight=0 marginwidth=0 frameborder=0 width=100 height=20 {scrolling="no"} ]
                 # The available version will be set further down with "jQuery('#availableSWVersion').html(homematic.com.getLatestVersion());"
               }
             }
             table_row {
               table_data {align="left"} {colspan="3"} {
-                #puts "[bold "Software-Update durchführen"]"
+                #puts "[bold "Software-Update durchfï¿½hren"]"
                 puts "<b>\${dialogSettingsCMLblPerformSoftwareUpdate}</b>"
               }
             }
@@ -1107,7 +1107,7 @@ proc action_reboot_confirm {} {
     puts "dlgPopup.readaptSize();"
     puts "translatePage('#messagebox')"
   }
-# Speichern wird beim Neustart durchgeführt, siehe action_reboot  
+# Speichern wird beim Neustart durchgefï¿½hrt, siehe action_reboot  
 #  rega system.Save()
 }
 

@@ -2661,6 +2661,7 @@ proc devIsPowerMeter {devType} {
         hmip-fsm  {return true}
         hmip-fsm16  {return true}
         hmip-psm  {return true}
+        hmip-usbsm  {return true}
       default {return false}
     }
 }

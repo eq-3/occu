@@ -255,6 +255,14 @@ jQuery.extend(true,langJSON, {
 
     "MOUNTING_ORIENTATION" : "Dieser Parameter erm%FCglicht es, den Displayinhalt um 180 Grad zu drehen.",
 
+    "POWERUP_ONTIME_UNIT" :
+      "W%E4hlen Sie die Wartezeit bis zum <i>Auto Relock</i>, nachdem das T%FCrschloss entriegelt oder ge%F6ffnet wurde.<br/><br/>" +
+      "Um <i>Auto Relock</i> zu nutzen, muss au%DFerdem mindestens ein entsprechender Eintrag vom Typ 'Modus f%FCr den T%FCrschlossantrieb' im Wochenprogramm vorgenommen werden.",
+    
+    "DOOR_LOCK_DIRECTION" : "W%E4hlen Sie aus, auf welcher Seite sich das T%FCrschloss und der T%FCrschlossantrieb befinden, wenn Sie von innen auf die T%FCr schauen.",
+    "DOOR_LOCK_TURNS" : "W%E4hlen Sie aus, wieviele Umdrehungen notwendig sind, um die T%FCr vollst%E4ndig zu verriegeln.",
+    "DOOR_LOCK_NEUTRAL_POS" : "Geben Sie die Position an, in welcher der Schl%FCssel eingesteckt bzw. herausgezogen werden kann, wenn der Zylinder nicht verriegelt ist.",
+
     "noMoreHelp" : ""
   },
 
@@ -506,6 +514,14 @@ jQuery.extend(true,langJSON, {
       "<br/><br/>This function must be deactivated for rooms with a 24/7 permanent occupancy. In this case, a manual calibration should be performed every 1-2 years.",
 
     "MOUNTING_ORIENTATION" : "This parameter makes it possible to rotate the display content by 180 degrees.",
+
+    "POWERUP_ONTIME_UNIT" :
+      "Select the delay time until <i>Auto Relock</i> is executed after the door lock has been unlocked or opened.<br/><br/>" +
+      "In order to use <i>Auto Relock</i>, at least one corresponding entry of the type 'Mode for the door lock drive' must also be entered in the week progam.",
+
+    "DOOR_LOCK_DIRECTION" : "Select on which side the door lock and the door lock drive are located when you look at the door from the inside.",
+    "DOOR_LOCK_TURNS" : "W%E4hlen Sie aus, wieviele Umdrehungen notwendig sind, um die T%FCr vollst%E4ndig zu verriegeln.",
+    "DOOR_LOCK_NEUTRAL_POS" : "Select the position in which the key can be inserted or removed when the cylinder is not locked.",
 
     "noMoreHelp" : ""
     }

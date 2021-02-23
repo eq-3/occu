@@ -18,14 +18,29 @@ proc getMaxValue {param} {
   return "$max"
 }
 
-proc getUserDefinedMaxValue {devType} {
-  switch [string tolower $devType] {
-      hmip-psm  {return 3680}
-      hmip-fsm16 {return 3680}
-      hmip-bsm  {return 1150}
-      hmip-fsm  {return 1150}
-    default {return "<span class=\"attention\">max value not available</span>"}
+proc getUserDefinedMaxValue {devType {extraparam ""}} {
+  if {[string equal $extraparam "TX_THRESHOLD_POWER"] == 1} {
+    switch [string tolower $devType] {
+        hmip-psm -
+        hmip-fsm16 {return 3680.0}
+        hmip-bsm -
+        hmip-fsm  {return 1150.0}
+        hmip-usbsm  {return 60.0}
+       default {return "<span class=\"attention\">max value not available</span>"}
+    }
   }
+
+  if {([string equal $extraparam "COND_TX_THRESHOLD_LO"] == 1) || ([string equal $extraparam "COND_TX_THRESHOLD_HI"] == 1)} {
+    switch [string tolower $devType] {
+        hmip-psm -
+        hmip-fsm16 {return 3680}
+        hmip-bsm -
+        hmip-fsm  {return 1150}
+        hmip-usbsm  {return 60}
+       default {return "<span class=\"attention\">max value not available</span>"}
+    }
+  }
+
 }
 
 proc getMinMaxValueDescr {param} {
@@ -59,10 +74,10 @@ proc getMinMaxValueDescr {param} {
     set max [format %.0f [expr $max * 100]]
   }
 
-  # Limit float to 2 decimal places
-  if {[llength [split $min "."]] == 2} {
-    set min [format {%1.2f} $min]
-    set max [format {%1.2f} $max]
+  # Limit float to 1 decimal places
+  if {([llength [split $min "."]] == 2) || ([llength [split $max "."]] == 2)} {
+    set min [format {%1.1f} $min]
+    set max [format {%1.1f} $max]
   }
 
   if {[string equal $dev_descr(TYPE) "HmIP-MIO16-PCB"] == 1} {
@@ -125,14 +140,19 @@ proc getCondTXThresholdUnit {devType chn} {
 }
 
 
-proc getUserDefinedCondTXThresholdUnitMinMaxDescr {devType chn} {
+proc getUserDefinedCondTXThresholdUnitMinMaxDescr {devType param} {
    switch [string tolower $devType] {
-        hmip-psm  {return "W (0 - [getUserDefinedMaxValue $devType])"}
-        hmip-fsm16  {return "W (0 - [getUserDefinedMaxValue $devType])"}
-        hmip-bsm  {return "W (0 - [getUserDefinedMaxValue $devType])"}
-        hmip-fsm  {return "W (0 - [getUserDefinedMaxValue $devType])"}
+      hmip-psm -
+      hmip-fsm16 -
+      hmip-bsm -
+      hmip-fsm -
+      hmip-usbsm
+       {
+        if {$param == "TX_THRESHOLD_POWER"} {return "W (0.0 - [getUserDefinedMaxValue $devType $param])"}
+        if {($param == "COND_TX_THRESHOLD_LO") || ($param == "COND_TX_THRESHOLD_HI")} {return "W (0 - [getUserDefinedMaxValue $devType $param])"}
+      }
       default {return "<span class=\"attention\">missing description</span>"}
-    }
+   }
 }
 
 proc getTextField {param value chn prn {extraparam ""}} {
@@ -152,7 +172,9 @@ proc getTextField {param value chn prn {extraparam ""}} {
   }
 
   if {[devIsPowerMeter $dev_descr(TYPE)]} {
-    set maxValue [getUserDefinedMaxValue $dev_descr(TYPE)]
+    if {[string equal $param "TX_THRESHOLD_POWER"] == 1} {
+      set maxValue [getUserDefinedMaxValue $dev_descr(TYPE) $param]
+    }
   }
 
   # SPHM-118 (the max value of the DRBL4 = autoconfig which isn't supported by this device)
@@ -1593,4 +1615,21 @@ proc addHintHeatingGroupDevice {address} {
     append html "<script type='text/javascript'>"
     append html "addHintHeatingGroupDevice('$address');"
     append html "</script>"
+}
+
+proc addHintCondTransmitterLinkAvailable {iface address} {
+  upvar prn prn
+  upvar special_input_id special_input_id
+  set chn [getChannel $special_input_id]
+  set linkCount [getLinkCountByAddress $iface "$address:$chn"]
+  if {$linkCount > 0} {
+    set result "<tr><td><span id='hint_$chn\_$prn' class='attention hidden'><b>\${hintCondTransmitterLinkAvailable}</b><span></td></tr>"
+    append result "<script type=\"text/javascript\">"
+      append result "var elm = jQuery('\#separate_CHANNEL_$chn\_$prn');"
+      append result "if (elm.prop('checked') == false) {"
+        append result "window.setTimeout(function() {jQuery('#hint_$chn\_$prn').show();},100);"
+      append result "}"
+    append result "</script>"
+    return $result
+  }
 }

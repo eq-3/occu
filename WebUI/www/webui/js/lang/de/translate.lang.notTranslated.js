@@ -1,24 +1,7 @@
 jQuery.extend(true, langJSON, {
   "de": {
 
-    "comment" : "Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
-    "stringTableAutoRelockDelay" : "Verz%F6gerung autom. Verschlie%DFen",
-    "stringTableDoorLockDirection" : "Drehrichtung zum Schlie%DFen",
-    "stringTableDoorLockNeutralPos" : "Neutrale Position",
-    "stringTableDoorLockTurns" : "Anzhahl der Umdrehungen zum Schlie%DFen",
-    "lblVertical" : "Vertikal",
-    "lblHorizontal" : "Horizontal",
-    "comment" : "END comment",
-
-    "comment" : "Diese Keys nach MASTER_LANG/HmIPWeeklyDeviceProgram.js - Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
-    "optionDoorLockAction" : "Ger%E4te-Verhalten",
-    "optionDoorLockUser" : "Benutzerberechtigung",
-    "optionDLDAction1" : "Verriegeln + Auto-Relock Ende",
-    "optionDLDAction2" : "100% Verriegeln + Auto-Relock Beginn mit On-Time aus AutoRelockDelay",
-    "optionDLDAction3" : "Entriegeln + Auto-Relock Ende",
-    "optionDLDAction4" : "Auto-Relock Ende",
-    "comment" : "End HmIPWeeklyDeviceProgram.js",
-
+    "comment" : "***** Reviewed *****",
 
     "stringTableErrorCommunicationParticulateMatterSensor" : "Fehler Kommunikation Feinstaubsensor",
     "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Kommunikation Feinstaubsensor: OK",
@@ -98,6 +81,87 @@ jQuery.extend(true, langJSON, {
     "stringTableMountingOrientation" : "Displayausrichtung",
 
     "stringTableConditionSwitchTransmitterParticulateMatter" : "Feinstaubsensor",
+
+    "comment" : "***** END Reviewed *****",
+
+
+
+
+
+    "comment" : "This if for the Release A/2021",
+    "stringTableAutoRelockDelay" : "Wartezeit vor Auto Relock",
+    "stringTableDoorLockDirection" : "Drehrichtung zum Verriegeln",
+    "stringTableDoorLockNeutralPos" : "Neutrale Position",
+    "stringTableDoorLockTurns" : "Anzahl der Umdrehungen zum Verriegeln",
+    "lblVertical" : "Vertikal",
+    "lblHorizontal" : "Horizontal",
+    "permissionTrue" : "Berechtigung<br/>erteilt",
+    "permissionFalse" : "Berechtigung<br/>nicht erteilt",
+    "permissionUnknown" : "Berechtigung<br/>unbekannt",
+
+    "lblDoorLock" : "T%FCrschlossantrieb",
+
+    "optionDoorLockAction" : "Modus f%FCr T%FCrschlossantrieb",
+    "optionDoorLockUser" : "Benutzerberechtigung",
+
+    "comment" : "Diese Keys geh%F6ren nach MASTER_LANG/HmIPWeeklyDeviceProgram.js",
+    "optionDLDAction1" : "Verriegeln + Auto-Relock Ende",
+    "optionDLDAction2" : "Verriegeln + Auto-Relock Beginn",
+    "optionDLDAction3" : "Entriegeln + Auto-Relock Ende",
+    "optionDLDAction4" : "Auto-Relock Ende",
+    "comment" : "End HmIPWeeklyDeviceProgram.js",
+
+    "lblSelectTargetUser" : "Benutzer<br /> w%E4hlen",
+
+    "stringTableDoorLockStateTransmitterActivityStateDown" : "T%FCrschloss schlie%DFt",
+    "stringTableDoorLockStateTransmitterActivityStateUnknown" : "T%FCrschloss Aktivit%E4t unbekannt",
+    "stringTableDoorLockStateTransmitterActivityStateUp" : "T%FCrschloss %F6ffnet",
+
+    "stringTableDoorLockStateTransmitterLockStateLocked" : "T%FCrschloss ist verriegelt",
+    "stringTableDoorLockStateTransmitterLockStateUnlocked" : "T%FCrschloss ist entriegelt",
+    "stringTableDoorLockStateTransmitterLockStateUnknown" : "T%FCrschloss Position unbekannt",
+
+    "stringTableAccessReceiverStateFalse" : "Benutzer berechtigt: Nein",
+    "stringTableAccessReceiverStateTrue" : "Benutzer berechtigt: Ja",
+
+    "stringTableAccessReceiverAccessAuthorizationFalse" : " dauerhaft sperren",
+    "stringTableAccessReceiverAccessAuthorizationTrue" : " dauerhaft berechtigen",
+
+    "stringTableDoorLockStateTransmitterLockTargetLevelLocked" : "T%FCrschloss verriegeln",
+    "stringTableDoorLockStateTransmitterLockTargetLevelUnlocked" : "T%FCrschloss entriegeln",
+    "stringTableDoorLockStateTransmitterLockTargetLevelOpen" : "T%FCrschloss %D6ffnen",
+
+    "stringTableWPOptionsNop" : "Wochenprogramm ignorieren",
+    "stringTableWPOptionsOff" : "Wochenprogramm aktivieren",
+    "stringTableWPOptionsOn" : "Wochenprogramm deaktivieren",
+    "stringTableAccessReceiverTitle" : "T%FCrschlossantrieb",
+
+    "lblOpen" : "%D6ffnen",
+    "lblLock" : "Verriegeln",
+    "lblUnlock" : "Entriegeln",
+
+    "lblTypePointOfTime" : "Zeitpunkt-Typ",
+
+    "helpAccessReceiverUserAccessAuth" :
+      "Bei manueller %C4nderung der Berechtigung schaltet der Benutzerkanal in den Manu-Modus. " +
+      "Die Steuerung der Berechtigung durch das Wochenprogramm ist dann deaktiviert. Der Wechsel zur%FCck in den Auto-Modus kann im Wochenprogramm wieder aktiviert werden.",
+
+    "helpPrgAccessReceiver" : "Durch diese Aktionen wird das Wochenprogramm f%FCr diesen Benutzerkanal deaktiviert (=Manu-Modus).<br/><br/>" +
+      "<u><b>Hinweis:</b></u><br/><br/>" +
+      "Zum Wechsel in den Auto-Modus kann im Zentralenprogramm unter 'Aktivit%E4t' der Wochenprogrammkanal genutzt werden.",
+
+    "helpWeeklyProgramDlg" :
+      "Bei Verwendung des Auto-Modus m%FCssen entsprechende Wochenprogramm-Eintr%E4ge vorhanden sein. " +
+      "Das Wochenprogramm k%F6nnen Sie am Ger%E4t unter Einstellungen/Ger%E4te konfigurieren.",
+
+    "stringTableErrorDegradedChamber"  : "Verschmutzte Rauchkammer",
+
+    "lblDisplay"  : "Display",
+    "lblSystemKey" : "Systemtaste",
+
+    "comment" : "new text",
+
+    "lblReadings" : "Messwert(e)",
 
     "noMoreKeys" : ""
   }

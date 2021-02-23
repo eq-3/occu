@@ -27,7 +27,8 @@ function ::CreateWeeklyProgram()
   WriteLine("<tr id='weekprg_"#chnId#"' class='hidden'>");
     WriteLine("<td>");
 
-      WriteLine("<table style='margin:auto'>");
+      ! WriteLine("<table style='margin:auto'>");
+      WriteLine("<table>");
         WriteLine("<tr>");
           WriteLine("<td style='border:1px solid #000000; color:black;'>");
             WriteLine("<div id='anchor_"#chnId#"' style='background-color:#89989b;'></div>");
@@ -56,8 +57,11 @@ function ::CreateWeeklyProgram()
     WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
     WriteLine("opts.channelLocks = "#iChannelLocks#";");
     WriteLine("opts.userEasyLinkMode = "#user.UserEasyLinkMode()#";");
-
-    WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgram("#chnId#", opts);");
+    if (cObj.Label() != "HmIP-DLD") {
+      WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgram("#chnId#", opts);");
+    } else {
+      WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgramAccessReceiver("#chnId#", opts);");
+    }
   WriteLine("</script>");
   return;
 }

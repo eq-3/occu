@@ -75,8 +75,8 @@
 "YELLOW" : "Gelb",
 "WHITE" : "Weiss",
 
-"optionColorOFF" : "Beleuchtung Aus",
-"optionColorON" : "Dauerhaft Ein",
+"optionColorOFF" : "Beleuchtung aus",
+"optionColorON" : "Dauerhaft ein",
 "blinkSlow" : "Langsames Blinken",
 "blinkMiddle" : "Mittleres Blinken",
 "blinkFast" : "Schnelles Blinken",

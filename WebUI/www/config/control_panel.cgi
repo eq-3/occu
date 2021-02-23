@@ -233,51 +233,53 @@ if { "[read_var /etc/config/tweaks CP_DEVCONFIG]" != "" } {
 
 array set addons [::HomeMatic::Addon::GetAll]
 foreach addonId [array names addons] {
-  array set addon $addons($addonId)
+  if {($addonId != "mediola") || ($addonId == "mediola") && ([file exists "/etc/config/neoDisabled"] != 1)} {
+    array set addon $addons($addonId)
 
-  array set arrDESCR $addon(CONFIG_DESCRIPTION)
+    array set arrDESCR $addon(CONFIG_DESCRIPTION)
 
-  puts "<td>"
-    puts "<div class='cpButton'>"
-      puts "<div class=\"StdTableBtn CLASS21701\" onclick=\"window.open('$addon(CONFIG_URL)?sid=$sid');\">$addon(CONFIG_NAME)</div>"
-      puts "<div id=\"btnAddOn_$addonId\" class=\"StdTableBtnHelp j_addOn\"><img id=\"showAddonInfo_$addonId\" src=\"/ise/img/help.png\"></div>"
+    puts "<td>"
+      puts "<div class='cpButton'>"
+        puts "<div class=\"StdTableBtn CLASS21701\" onclick=\"window.open('$addon(CONFIG_URL)?sid=$sid');\">$addon(CONFIG_NAME)</div>"
+        puts "<div id=\"btnAddOn_$addonId\" class=\"StdTableBtnHelp j_addOn\"><img id=\"showAddonInfo_$addonId\" src=\"/ise/img/help.png\"></div>"
 
-      #puts "<ul id=\"description_$addonId\" style=\"display:none\">$addon(CONFIG_DESCRIPTION)</ul>"
-      puts "<ul id=\"description_$addonId\" style=\"display:none\"></ul>"
-    puts "</div>"
-  puts "</td>"
+        #puts "<ul id=\"description_$addonId\" style=\"display:none\">$addon(CONFIG_DESCRIPTION)</ul>"
+        puts "<ul id=\"description_$addonId\" style=\"display:none\"></ul>"
+      puts "</div>"
+    puts "</td>"
 
-   puts "<script type=\"text/javascript\">"
+     puts "<script type=\"text/javascript\">"
 
-     puts "var lang = getLang();"
-     puts "var addOnDescr = \{\};"
-     foreach key [array names arrDESCR] {
-       puts "addOnDescr\['$key'\] = '$arrDESCR($key)';"
-     }
-     puts "var descr = addOnDescr\[lang\];"
+       puts "var lang = getLang();"
+       puts "var addOnDescr = \{\};"
+       foreach key [array names arrDESCR] {
+         puts "addOnDescr\['$key'\] = '$arrDESCR($key)';"
+       }
+       puts "var descr = addOnDescr\[lang\];"
 
-     puts "if (descr == null || typeof descr == 'undefined'){"
-      puts "descr = addOnDescr\[getDefaultLang()\];"
-     puts "}"
+       puts "if (descr == null || typeof descr == 'undefined'){"
+        puts "descr = addOnDescr\[getDefaultLang()\];"
+       puts "}"
 
-     puts "if (descr != null && typeof descr != 'undefined') {"
-      puts "jQuery('#description_$addonId').html(descr);"
-     puts "} else { jQuery('#description_$addonId').html(''); }"
+       puts "if (descr != null && typeof descr != 'undefined') {"
+        puts "jQuery('#description_$addonId').html(descr);"
+       puts "} else { jQuery('#description_$addonId').html(''); }"
 
-   puts "</script>"
+     puts "</script>"
 
 
-  incr i 
-  if { $i == $COL_COUNT } {
-    puts {
-      <td class="_CLASS21702"></td>
-      </tr>
-      <tr>
+    incr i
+    if { $i == $COL_COUNT } {
+      puts {
+        <td class="_CLASS21702"></td>
+        </tr>
+        <tr>
+      }
+      set i 0
     }
-    set i 0
-  }
 
-  array_clear addon
+    array_clear addon
+  }
 }
 
 if { $i != 0 } {

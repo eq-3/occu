@@ -7,7 +7,7 @@ sourceOnce common.tcl
 load tclrpc.so
 load tclrega.so
 
-set REMOTE_CERT_SCRIPT "http://www.homematic.com/sslcert/ssl.php"
+set REMOTE_CERT_SCRIPT "https://www.homematic.com/sslcert/ssl.php"
 
 proc action_get_cert {} {
   global env REMOTE_CERT_SCRIPT sid

@@ -1873,12 +1873,9 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
 };
 
 addHintHeatingGroupDevice = function (address) {
-  if (typeof DeviceList.getDeviceByAddress() != "undefined" ) {
+  if (typeof DeviceList.getDeviceByAddress() != "undefined") {
     var devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
-      inHeatingGroup = homematic("Interface.getMetadata", {
-        "objectId": devId,
-        "dataId": "inHeatingGroup"
-      }),
+      inHeatingGroup = homematic("Interface.getMetadata", {"objectId": devId, "dataId": "inHeatingGroup"}),
       hint = "<div class='attention' style='width:100%; height:50px; line-height: 25px; background-color: white; text-align: center; position:fixed; z-index: 188;'>" + translateKey('hintGroupDevice') + "</div>";
 
     if (inHeatingGroup != "null") {   // MetaData available?
@@ -1905,11 +1902,7 @@ addHintHeatingGroupDevice = function (address) {
             jQuery.each(group.groupMembers, function (index, groupMember) {
               if ((groupMember.id == address) && (jQuery.inArray(groupMember.memberType.id, allowedGroupMembers) != -1)) {
                 showHint = true;
-                homematic("Interface.setMetadata", {
-                  "objectId": devId,
-                  "dataId": "inHeatingGroup",
-                  "value": "true"
-                });
+                homematic("Interface.setMetadata", {"objectId": devId, "dataId": "inHeatingGroup", "value": "true"});
               }
             });
           });

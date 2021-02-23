@@ -490,6 +490,8 @@ function ::CreatePowermeterPSMControl() {
           WriteLine("</td>");
         WriteLine("</tr>");
 
+        WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
         ! Voltage & Current
         WriteLine("<tr>");
           WriteLine("<td>");
@@ -557,6 +559,8 @@ function ::CreatePowermeterPSMControl() {
             WriteLine("</table>");
           WriteLine("</td>");
           WriteLine("<td>");
+
+          if (oFrequency) {
             WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
                 WriteLine("<tr>");
                   WriteLine("<td>");
@@ -575,6 +579,7 @@ function ::CreatePowermeterPSMControl() {
                   WriteLine("</td>");
                 WriteLine("</tr>");
             WriteLine("</table>");
+          }
           WriteLine("</td>");
         WriteLine("</tr>");
 
@@ -603,9 +608,11 @@ function ::CreatePowermeterPSMControl() {
     WriteLine("opts.idVoltage = "#oVoltage.ID()#";");
     WriteLine("opts.valVoltage = "#oVoltage.Value()#";");
     WriteLine("opts.unitVoltage = '"#oVoltage.ValueUnit()#"';");
-    WriteLine("opts.idFrequency = "#oFrequency.ID()#";");
-    WriteLine("opts.valFrequency = "#oFrequency.Value()#";");
-    WriteLine("opts.unitFrequency = '"#oFrequency.ValueUnit()#"';");
+    if (oFrequency) {
+      WriteLine("opts.idFrequency = "#oFrequency.ID()#";");
+      WriteLine("opts.valFrequency = "#oFrequency.Value()#";");
+      WriteLine("opts.unitFrequency = '"#oFrequency.ValueUnit()#"';");
+    }
     WriteLine("opts.devFirmwareMajor = '"#devFwMajor#"';");
     WriteLine("opts.devFirmwareMinor = '"#devFwMinor#"';");
     WriteLine("opts.devFirmwarePatch = '"#devFwPatch#"';");

@@ -367,7 +367,7 @@ proc action_put_page {} {
                   table {
                     table_row {
                       table_data {
-                        division {class="CLASS21412"} {onClick="document.upload_form.submit();"} {
+                        division {class="CLASS21412"} {onClick="installAddon();"} {
                           #puts "Installieren"
                           puts "\${dialogSettingsExtraSoftwareBtnInstallSoftware}"
                         }
@@ -400,6 +400,15 @@ proc action_put_page {} {
   
   puts ""
   cgi_javascript {
+
+    puts "installAddon = function() {"
+      puts "var dlg = new YesNoDialog(translateKey('dialogHint'), translateKey('dialogSettingsExtraSoftwareHintSelectExtraSoftware'), function(result) {"
+        puts "if (result == 1) \{document.upload_form.submit();\}"
+      puts "},'html');"
+      puts "dlg.btnTextNo(translateKey('btnCancel'));"
+      puts "dlg.btnTextYes(translateKey('btnOk'));"
+    puts "}"
+
     puts "var url = \"$env(SCRIPT_NAME)?sid=\" + SessionId;"
     puts {
       operation = function(op, script, op_name) {
@@ -422,9 +431,10 @@ proc action_put_page {} {
         {
           new YesNoDialog(translateKey("dialogSafetyCheck"), translateKey("dialogQuestionRemoveExtraSoftware"), function(result) {
           if (result == YesNoDialog.RESULT_YES)
-          {
-            new Ajax.Request(url, opts);
-          }
+            {
+              addOnUninstall = true;
+              new Ajax.Request(url, opts);
+            }
           });
         }
         else

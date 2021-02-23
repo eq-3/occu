@@ -1,0 +1,5 @@
+"switch_unlocked" : "Entriegeln",
+"switch_locked" : "Verriegeln",
+"switch_open" : "%D6ffnen",
+
+"toggle" : "Toggle",

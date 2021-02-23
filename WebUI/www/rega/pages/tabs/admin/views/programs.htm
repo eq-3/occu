@@ -459,7 +459,7 @@
     });
   };
 
-  setSwitchStateController = function (regaDialogID, deviceType, chnAddress) {
+  _setSwitchStateController = function (regaDialogID, deviceType, chnAddress) {
     var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
       url = "/pages/msg/setSwitchVirtualReceiverCombinedParam.htm";
     jQuery(elm).prop("disabled", true);
@@ -487,36 +487,97 @@
     });
   };
 
-   setHmIPWeeklyProgramController = function(regaDialogID, chAddress, userNoExpert) {
-    var chn = DeviceList.getChannelByAddress(chAddress);
-    var chnInterface = "HmIP-RF";
-    var elm = jQuery("#prgStringOptionValue" + regaDialogID);
+  setHmIPWeeklyProgramController = function(regaDialogID, chAddress, userNoExpert) {
+    var chn = DeviceList.getChannelByAddress(chAddress),
+    chnInterface = "HmIP-RF",
+    elm = jQuery("#prgStringOptionValue" + regaDialogID),
+    dialog;
+
     jQuery(elm).prop("disabled", true);
 
     var inputElm = jQuery(elm).prev(); // this is the element which contains the relevant string to transmit
 
-     // ToDo HmIPWeeklyProgramController erstellen
-     var opts = {"deviceID": chn.device.id, "deviceLabel":chn.typeName, "chnAddress":chn.address, "chInterface":chnInterface, "channelLocks":"channelLocks", "userEasyLinkMode":userNoExpert};
-     //var dialog = new HmIPWeeklyProgramController(translateKey("titleConfigDialog"), htmlContent, jQuery(elm).val(), function(result) {
-     var dialog = new iseHmIPWeeklyProgram(regaDialogID, opts , function(result) {
-       jQuery(elm).prop("disabled", false);
-       if (result != 0) {
-         conInfo("HmIPWeeklyProgramController: Yes pressed");
-         var inputElm = jQuery(elm);
-         var cfgString = this.getConfigString();
-         conInfo(cfgString);
-         inputElm.val(cfgString);
-         inputElm.change();
-       }
-     }, "html");
-     dialog.getModeDialog();
-     window.setTimeout(function(){
-       dialog.modeElm = jQuery("#wpChannelMode_" + regaDialogID);
-       dialog.chnElems = jQuery("[name='wpChannelSel_"+regaDialogID+"']");
-     },500);
+    function callBack (result) {
+      jQuery(elm).prop("disabled", false);
+      if (result != 0) {
+        conInfo("HmIPWeeklyProgramController: Yes pressed");
+        var inputElm = jQuery(elm);
+        var cfgString = this.getConfigString();
+        conInfo(cfgString);
+        inputElm.val(cfgString);
+        inputElm.change();
+      }
+    }
 
-     //dialog.btnTextNo(translateKey("footerBtnCancel"));
-     //dialog.btnTextYes(translateKey("footerBtnOk"));
+    var opts = {"deviceID": chn.device.id, "deviceLabel":chn.typeName, "chnAddress":chn.address, "chInterface":chnInterface, "channelLocks":"channelLocks", "userEasyLinkMode":userNoExpert};
+    if (chn.deviceType.id.toLowerCase() == "hmip-dld") {
+      dialog = new iseHmIPWeeklyProgramAccessReceiver(regaDialogID, opts, callBack);
+    } else {
+      dialog = new iseHmIPWeeklyProgram(regaDialogID, opts, callBack);
+    }
+    dialog.getModeDialog();
+    window.setTimeout(function(){
+     dialog.modeElm = jQuery("#wpChannelMode_" + regaDialogID);
+     dialog.chnElems = jQuery("[name='wpChannelSel_"+regaDialogID+"']");
+    },500);
+  };
+
+  setCombinedParameter = function (regaDialogID, deviceType, chnAddress, type) {
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
+        dialog,
+        url = "";
+
+    switch (type) {
+      case "switchState" :
+        url = "/pages/msg/setSwitchVirtualReceiverCombinedParam.htm";
+      break;
+      case "wiredDisplaySysKey" :
+        url = "/pages/msg/setWiredDisplayKeyCombinedParam.htm";
+        break;
+    }
+
+    jQuery(elm).prop("disabled", true);
+
+    var req = jQuery.ajax({
+      url: url + "?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function (htmlContent) {
+      switch (type) {
+        case "switchState" :
+          dialog = new SwitchCombinedParamDialog(translateKey("titleConfigDialog"), htmlContent, deviceType, chnAddress, jQuery(elm).val(), function (result) {
+              jQuery(elm).prop("disabled", false);
+              if (result != this.RESULT_NO) {
+                conInfo("SwitchCombinedParamDialog: Yes pressed");
+                var cfgString = this.getConfigString(type);
+                conInfo(cfgString);
+                elm.val(cfgString);
+                elm.change();
+              }
+
+            }, "html");
+            dialog.setWidth(400);
+            break;
+        case "wiredDisplaySysKey" :
+          dialog = new WiredDisplaySystemKey(translateKey("titleConfigDialog"), htmlContent, deviceType, chnAddress, jQuery(elm).val(), function (result) {
+            jQuery(elm).prop("disabled", false);
+            if (result != this.RESULT_NO) {
+              conInfo("WiredDisplaySystemKey: Yes pressed");
+              var cfgString = this.getConfigString(type);
+              conInfo(cfgString);
+              elm.val(cfgString);
+              elm.change();
+            }
+
+          }, "html");
+          dialog.setWidth(400);
+          break;
+      }
+      dialog.btnTextNo(translateKey("footerBtnCancel"));
+      dialog.btnTextYes(translateKey("footerBtnOk"));
+
+    });
   };
 
   ChangeDelayUnit = function( sdid )

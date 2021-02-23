@@ -76,4 +76,9 @@ function ::ShowExtDesc() {
     showExtDesc = true;
   }
 
+  if ((chn.HssType() == "ACCESS_RECEIVER") && (chn.Label() == "HmIP-DLD"))  {
+    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_RECEIVER} "#(chNumber - 1)#"</span>");
+    showExtDesc = true;
+  }
+
 }

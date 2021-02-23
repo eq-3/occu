@@ -127,8 +127,10 @@ proc getMaintenance {chn p descr} {
     incr prn
     array_clear options
     if {([string equal $devType "HmIP-eTRV-3"] == 1) || ([string equal $devType "HmIP-eTRV-E"] == 1)} {
-      for {set val 20} {$val <= 160} {incr val 20} {
-          set options($val) "$val"
+      set optVal 1
+      for {set val 1} {$val <= 16} {incr val} {
+          if {$val > 1} {incr optVal 2}
+          set options($optVal) "$val"
       }
     } else {
       # This is currently in use for the HmIPW-DRAP
@@ -2066,23 +2068,13 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
         # left
         incr prn
         append html "<tr><td>\${ecoCoolingTemperature}</td>"
-        # append html  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
-
-        append html "<script type=\"text/javascript\">"
-          append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
-        append html "</script>"
 
         # right
         incr prn
         set param TEMPERATURE_LOWERING
         append html "<td>\${ecoHeatingTemperature}</td>"
-        # append html  "<td>[_getTextField $CHANNEL $param $ps($param) $prn]&nbsp;[_getUnit $param]&nbsp;[_getMinMaxValueDescr $param]<input id=\"ecoOld\" type=\"hidden\" value=\"$ps($param)\"></td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-
-        append html "<script type=\"text/javascript\">"
-          append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
-        append html "</script>"
         append html "</tr>"
 
         append html "<tr id=\"errorRow\" class=\"hidden\"> <td></td> <td colspan=\"2\"><span id=\"errorComfort\" class=\"attention\"></span></td> <td colspan=\"2\"><span id=\"errorEco\" class=\"attention\"></span></td> </tr>"
@@ -2182,10 +2174,6 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       incr prn
       append html "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
-
-        append html "<script type=\"text/javascript\">"
-          append html "jQuery(\"#separate_$CHANNEL\_$prn\").bind(\"blur\",function() {ProofAndSetValue(this.id, this.id, [getMinValue $param], [getMaxValue $param], 1);isEcoLTComfort(this.name);});"
-        append html "</script>"
       append html "</tr>"
     }
   append html "</table>"
@@ -2409,7 +2397,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
     append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prnTmp "onchange=\"test(this, '$prn');\""]</td>"
     if {[devIsPowerMeter $devType]} {
-      append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]</span></td>"
+      append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]</span></td>"
     } else {
       append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</span></td>"
     }
@@ -2450,7 +2438,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
 proc getCondSwitchTransmitter {chn p descr} {
 
-  global dev_descr
+  global iface dev_descr
 
   upvar $p ps
   upvar $descr psDescr
@@ -2476,6 +2464,10 @@ proc getCondSwitchTransmitter {chn p descr} {
       append html "<td>\${stringTableCondTxFalling}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param $helpDlgWidth $helpDlgHeight]</td>"
     append html "</tr>"
+
+    # Show hint when this channel has links
+    append html [addHintCondTransmitterLinkAvailable $iface $dev_descr(ADDRESS)]
+
   }
 
   set param COND_TX_CYCLIC_BELOW
@@ -2514,6 +2506,9 @@ proc getCondSwitchTransmitter {chn p descr} {
       append html "<td>\${stringTableCondTxRising}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param  $helpDlgWidth $helpDlgHeight]</td>"
     append html "</tr>"
+
+    # Show hint when this channel has links
+    append html [addHintCondTransmitterLinkAvailable $iface $dev_descr(ADDRESS)]
   }
 
   set param COND_TX_CYCLIC_ABOVE
@@ -2573,7 +2568,7 @@ proc getCondSwitchTransmitter {chn p descr} {
         append html "<td>\${stringTableCondThresholdLo}</td>"
         append html "<td>"
 
-          append html "<input id=\"thresLo_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
+          append html "<input id=\"thresLo_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType $param], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]"
           append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
 
         append html "</td>"
@@ -2587,7 +2582,7 @@ proc getCondSwitchTransmitter {chn p descr} {
         append html "<td>\${stringTableCondThresholdHi}</td>"
         append html "<td>"
 
-          append html "<input id=\"thresHi_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $chn]"
+          append html "<input id=\"thresHi_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType $param], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]"
           append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
 
        append html "</td>"
@@ -4064,7 +4059,7 @@ proc getDoorLockStateTransmitter {chn p descr} {
 
   append html "[getHorizontalLine]"
 
-  set param POWERUP_ONTIME
+  set param POWERUP_ONTIME_UNIT
   if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
@@ -4094,20 +4089,25 @@ proc getDoorLockStateTransmitter {chn p descr} {
       array_clear options
       set options(0) "\${lblRight}"
       set options(1) "\${lblLeft}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 170]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 75]</td>"
     append html "</tr>"
   }
 
   set param DOOR_LOCK_TURNS
   if { [info exists ps($param)] == 1 } {
+
+    # convert float to int (0.0 = 0)
+    set min [expr {int([expr [getMinValue $param]])}]
+    set max [expr {int([expr [getMaxValue $param]])}]
+
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableDoorLockTurns}</td>"
       array_clear options
-      for {set val 0} {$val <= 15} {incr val} {
+      for {set val $min} {$val <= $max} {incr val 1} {
           set options($val) "$val"
       }
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 170]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 75]</td>"
     append html "</tr>"
   }
 
@@ -4119,7 +4119,7 @@ proc getDoorLockStateTransmitter {chn p descr} {
       array_clear options
       set options(0) "\${lblVertical}"
       set options(1) "\${lblHorizontal}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 170]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 75]</td>"
     append html "</tr>"
   }
   return $html

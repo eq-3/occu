@@ -85,6 +85,9 @@ jQuery.extend(true,langJSON, {
     "PMSwChannel2Hint_Frequency" : "oder die Frequenz um",
     "PMSwChannel2Hint_Footer" : "ge&auml;ndert hat.",
     "PMSwChannel2MinDelay" : "Mindestpause nach<br/>der letzten Sendung",
+
+    "hintCondTransmitterLinkAvailable" : "Es existiert eine Verkn&uuml;pfung mit diesem Kanal.<br/> Damit diese korrekt ausgef&uuml;hrt werden kann, muss der obige Parameter aktiviert werden.",
+
     "dummy" : ""
   },
 
@@ -173,6 +176,9 @@ jQuery.extend(true,langJSON, {
     "PMSwChannel2Hint_Frequency" : "or the frequency has changed by",
     "PMSwChannel2Hint_Footer" : "",
     "PMSwChannel2MinDelay" : "Minimum pause after<br/>last transmission",
+
+    "hintCondTransmitterLinkAvailable" : "There is a link with this channel.<br/> To execute this correctly, the above parameter must be activated.",
+
     "dummy" : ""
   }
 });

@@ -3620,6 +3620,12 @@ DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1_Key"] = [4, 0.25, 0.33, 0.04, 0.044];
 DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2_Key"] = [4, 0.328, 0.33, 0.04, 0.044];
 DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["1"] = [5, '1_Arrow', '1_Key'];
 DEV_HIGHLIGHT["HM-LC-Dim2L-SM-2"]["2"] = [5, '2_Arrow', '2_Key'];
+DEV_LIST.push('HmIP-USBSM');
+DEV_DESCRIPTION["HmIP-USBSM"] = "HmIP-USBSM";
+DEV_PATHS["HmIP-USBSM"] = new Object();
+DEV_PATHS["HmIP-USBSM"]["50"] = "/config/img/devices/50/217_hmip-usbsm_thumb.png";
+DEV_PATHS["HmIP-USBSM"]["250"] = "/config/img/devices/250/217_hmip-usbsm.png";
+DEV_HIGHLIGHT["HmIP-USBSM"] = new Object();
 DEV_LIST.push('HM-LC-Sw2-FM');
 DEV_DESCRIPTION["HM-LC-Sw2-FM"] = "HM-LC-Sw2-FM";
 DEV_PATHS["HM-LC-Sw2-FM"] = new Object();
@@ -3914,7 +3920,11 @@ elvST['ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG'] = '${stringTableTiltSenso
 elvST['ACCELERATION_TRANSCEIVER|MSG_FOR_POS_B=OPEN'] = '${stringTableTiltSensorMsgPosB3}';
 elvST['ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_HIGH_TO_LOW'] = '${stringTableAccelerationTransceiverNotificationSoundTypeHighToLow}';
 elvST['ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH'] = '${stringTableAccelerationTransceiverNotificationSoundTypeLowToHigh}';
-elvST['ACCELERATION_TRANSCEIVER|TRIGGER_ANGLE'] = '${stringTableAccelerationTransceiverTriggerAngle}';
+elvST['ACCESS_RECEIVER'] = '${stringTableAccessReceiverTitle}';
+elvST['ACCESS_RECEIVER|STATE=FALSE'] = '${stringTableAccessReceiverStateFalse}';
+elvST['ACCESS_RECEIVER|STATE=TRUE'] = '${stringTableAccessReceiverStateTrue}';
+elvST['ACCESS_RECEIVER|ACCESS_AUTHORIZATION=ENABLE'] = '${stringTableAccessReceiverAccessAuthorizationTrue}';
+elvST['ACCESS_RECEIVER|ACCESS_AUTHORIZATION=DISABLE'] = '${stringTableAccessReceiverAccessAuthorizationFalse}';
 elvST['ACOUSTIC_ALARM_ACTIVE=FALSE'] = '${stringTableAcousticAlarmActiveFalse}';
 elvST['ACOUSTIC_ALARM_ACTIVE=TRUE'] = '${stringTableAcousticAlarmActiveTrue}';
 elvST['OPTICAL_ALARM_ACTIVE=FALSE'] = '${stringTableOpticalAlarmActiveFalse}';
@@ -4524,6 +4534,16 @@ elvST['DOOR_COMMAND=NOP'] = '${stringTableDoorCommandNOP}';
 elvST['DOOR_COMMAND=OPEN'] = '${stringTableDoorCommandOpen}';
 elvST['DOOR_COMMAND=PARTIAL_OPEN'] = '${stringTableDoorCommandPartialOpen}';
 elvST['DOOR_COMMAND=STOP'] = '${stringTableDoorCommandStop}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=LOCKED'] = '${stringTableDoorLockStateTransmitterLockStateLocked}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=UNLOCKED'] = '${stringTableDoorLockStateTransmitterLockStateUnlocked}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=UNKNOWN'] = '${stringTableDoorLockStateTransmitterLockStateUnknown}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=DOWN'] = '${stringTableDoorLockStateTransmitterActivityStateDown}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=UNKNOWN'] = '${stringTableDoorLockStateTransmitterActivityStateUnknown}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=STABLE'] = '${stringTableDoorLockStateTransmitterActivityStateStable}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=UP'] = '${stringTableDoorLockStateTransmitterActivityStateUp}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=LOCKED'] = '${stringTableDoorLockStateTransmitterLockTargetLevelLocked}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=UNLOCKED'] = '${stringTableDoorLockStateTransmitterLockTargetLevelUnlocked}';
+elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=OPEN'] = '${stringTableDoorLockStateTransmitterLockTargetLevelOpen}';
 elvST['DOOR_RECEIVER'] = '${stringTableDoorReceiverTitle}';
 elvST['DOOR_STATE=CLOSED'] = '${stringTableDoorStateClose}';
 elvST['DOOR_STATE=OPEN'] = '${stringTableDoorStateOpen}';
@@ -4558,10 +4578,10 @@ elvST['ENERGIE_METER_TRANSMITTER|FREQUENCY'] = '${stringTablePowerMeterFrequency
 elvST['ENERGIE_METER_TRANSMITTER|POWER'] = '${stringTablePowerMeterPower}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=0'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=UNKNOWN'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblUnknown}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=1'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblUnknown}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=OVERFLOW'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}';
-elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=1'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}';
-elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=UNDERFLOW'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}';
-elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=2'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblUnderflow}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=2'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblOverflow}';
 elvST['ENERGIE_METER_TRANSMITTER|TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
 elvST['ERROR'] = '${stringTableError}';
 elvST['ERROR=NO_ERROR'] = '${stringTableErrorNoError}';
@@ -4583,6 +4603,7 @@ elvST['ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=TRUE'] = '${stringTableError
 elvST['ERROR_COPROCESSOR'] = '${stringTableErrorCoProcessor}';
 elvST['ERROR_COPROCESSOR=TRUE'] = '${stringTableErrorCoprocessorTrue}';
 elvST['ERROR_COPROCESSOR=FALSE'] = '${stringTableErrorCoprocessorFalse}';
+elvST['ERROR_DEGRADED_CHAMBER'] = '${stringTableErrorDegradedChamber}';
 elvST['ERROR_NON_FLAT_POSITIONING'] = '${stringTableErrorNonFlatPositioning}';
 elvST['ERROR_NON_FLAT_POSITIONING=FALSE'] = '${stringTableErrorNonFlatPositioningFalse}';
 elvST['ERROR_NON_FLAT_POSITIONING=TRUE'] = '${stringTableErrorNonFlatPositioningTrue}';
@@ -5087,6 +5108,7 @@ elvST['PRESS_LONG=TRUE'] = '${stringTableKeyPressLongTrue}';
 elvST['PRESS_SHORT'] = '${stringTableKeyPressShort}';
 elvST['PRESS_SHORT=TRUE'] = '${stringTableKeyPressShortTrue}';
 elvST['PROCESS=NOT_STABLE'] = '${stringTableProcessNotStableGeneric}';
+elvST['PROCESS=STABLE'] = '${stringTableProcessStableGeneric}';
 elvST['PROCESS=STABLE'] = '${stringTableProcessStableGeneric}';
 elvST['PULSE_SENSOR'] = '${stringTablePulseSensorTitle}';
 elvST['PULSE_SENSOR|SEQUENCE_OK'] = '${stringTablePulseSensorSequenceOk}';
@@ -5673,6 +5695,9 @@ elvST['WINMATIC|STATE_UNCERTAIN=FALSE'] = '${stringTableWinMaticStateUncertainFa
 elvST['WINMATIC|STATE_UNCERTAIN=TRUE'] = '${stringTableWinMaticStateUncertainTrue}';
 elvST['WINMATIC|STOP'] = '${stringTableWinMaticStop}';
 elvST['WINMATIC|TILT_MAX'] = '${stringTableWinMaticTiltMax}';
+elvST['WP_OPTIONS=NOP'] = '${stringTableWPOptionsNop}';
+elvST['WP_OPTIONS=OFF'] = '${stringTableWPOptionsOff}';
+elvST['WP_OPTIONS=ON'] = '${stringTableWPOptionsOn}';
 elvST['WS_CS'] = '${stringTableWSCS}';
 elvST['WS_TH'] = '${stringTableWSTH}';
 elvST['minutes'] = '${stringTableMinute}';
@@ -11682,8 +11707,8 @@ ChannelChooser = Singleton.create({
       addressFilter    : this.AddressFilter,
       roomFilter       : this.RoomFilter,
       funcFilter       : this.FuncFilter,
-      //channels         : this.sort(this.filter(this.channels)) // causes problems with (multi)channelchooser.jst
-      channels         : this.filter(this.channels)
+      channels         : this.sort(this.filter(this.channels))
+      //channels         : this.filter(this.channels)
     });
 
     if (! userIsNoExpert) {
@@ -19155,6 +19180,228 @@ SwitchCombinedParamDialog = Class.create({
       self.durationValueElm.keyup();
     });
 
+  },
+  
+  close: function(result)
+  {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) { this.m_callback(result); }
+  },
+  
+  yes: function()
+  {
+    this.close(YesNoDialog.RESULT_YES);
+  },
+  
+  no: function()
+  {
+    this.close(YesNoDialog.RESULT_NO);
+  },
+
+  btnTextYes: function(btnTxt) {
+    jQuery(".YesNoDialog_yesButton").text(btnTxt);
+  },
+
+  btnYesHide: function() {
+    jQuery("#btnYes").addClass("hidden");
+  },
+
+  btnYesShow: function() {
+    jQuery("#btnYes").removeClass("hidden");
+  },
+
+  btnTextNo: function(btnTxt) {
+    jQuery(".YesNoDialog_noButton").text(btnTxt);
+  },
+
+  btnNoHide: function() {
+    jQuery("#btnNo").addClass("hidden");
+  },
+
+  btnNoShow: function() {
+    jQuery("#btnNo").removeClass("hidden");
+  },
+
+  setHeight: function() {
+    var heightContentWrapper = jQuery(".YesNoDialogContentWrapper").height(),
+      yesNoElm = jQuery(".YesNoDialog"),
+      footerElm = jQuery(".YesNoDialogFooter");
+
+    yesNoElm.css("height", heightContentWrapper + 78);
+    footerElm.css("top", heightContentWrapper + 26);
+    yesNoElm.css("top", (window.innerHeight / 2) - (yesNoElm.height() / 2));
+  },
+
+  resetHeight: function() {
+    this.setHeight();
+  },
+
+  setWidth: function(dlgWidth) {
+    var defaultWith = 600,
+      offsetWidth = 4,
+      offsetPosYesButton = 109,
+      offsetDialogHeight = 78,
+      offsetDialogFooterHeight = 26;
+
+    var width = dlgWidth - offsetWidth,
+      yesButtonPos = dlgWidth - offsetPosYesButton,
+      position = jQuery(".YesNoDialog").position();
+
+    // dlgWidth = (defaultWith < dlgWidth) ? defaultWith : dlgWidth;
+
+    jQuery(".YesNoDialog").width(dlgWidth).css({left: position.left + ((defaultWith - dlgWidth) / 2)});
+    jQuery(".YesNoDialogTitle").width(width);
+    jQuery(".YesNoDialogContentWrapper").width(width);
+    jQuery(".YesNoDialogFooter").width(width);
+    jQuery(".YesNoDialog_yesButton").css("left", yesButtonPos);
+
+    //Dialoghöhe an Content anpassen.
+    jQuery(".YesNoDialog").css("height", jQuery(".YesNoDialogContentWrapper").height() + offsetDialogHeight);
+    jQuery(".YesNoDialogFooter").css("top", jQuery(".YesNoDialogContentWrapper").height() + offsetDialogFooterHeight);
+  }
+  
+});
+WiredDisplaySystemKey = Class.create({
+ 
+  initialize: function(title, content, deviceType, chnAddress, value, callback, contentType)
+  {
+
+    var _this_ = this;
+
+    this.iface = "HmIP-RF";
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer"; 
+
+    this.RESULT_NO = 0;
+    this.RESULT_YES = 1;
+
+    this.deviceType = deviceType;
+    this.chnAddress = chnAddress;
+    this.initValue = value;
+
+    this.hasDisplay = false;
+    this.checkIfDisplay();
+
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+    
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    //titleElement.appendChild(document.createTextNode(title));
+    titleElement.appendChild(document.createTextNode(deviceType + " - " + chnAddress));
+    titleElement.onmousedown = function(event) { new Drag(this.parentNode, event); };
+    dialog.appendChild(titleElement);
+    
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+    
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+    
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className= "YesNoDialogFooter";
+    
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('dialogYes')));
+    yesButton.onclick = function() { _this_.yes(); };
+    yesButton.id="btnYes";
+    footer.appendChild(yesButton);
+    
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('dialogNo')));
+    noButton.onclick = function() { _this_.no(); };
+    noButton.id = "btnNo";
+    footer.appendChild(noButton);
+    
+    dialog.appendChild(footer);
+    
+    this.m_layer.appendChild(dialog);
+    Layer.add(this.m_layer);
+
+    translatePage(".YesNoDialog");
+
+    this.setHeight();
+    this.fetchDialogElements();
+    this.initDialog();
+  },
+
+  fetchDialogElements: function() {
+    this.displayElems = jQuery("[name='display']");
+    this.displayChkBox = jQuery("#display");
+    this.sysKeyChkBox = jQuery("#sysKey");
+    this.durationSelect = jQuery("#duration");
+  },
+
+  getConfigString: function(type) {
+   /*
+    See SPHM-769
+    IDENTIFICATION_MODE_LCD_BACKLIGHT -> IMLB
+    IDENTIFICATION_MODE_KEY_VISUAL -> IMKV
+    IDENTIFY_TARGET_LEVEL -> IMTL  --> can only be 0 (Off) or > 0 (On)
+    IDENTIFY_DURATION -> IMDU
+    */
+
+    var result,
+      onDisplay = this.displayChkBox.prop("checked"),
+      onSysKey = this.sysKeyChkBox.prop("checked"),
+      brightness = (onDisplay || onSysKey) ? 1 : 0,
+      durationSelect = this.durationSelect.val();
+    if (this.hasDisplay) {
+      result = "IMLB=" + onDisplay + ",IMKV=" + onSysKey + ",IMTL=" + brightness + ",IMDU=" + durationSelect;
+    } else {
+      result = "IMKV=" + onSysKey + ",IMTL=" + brightness + ",IMDU=" + durationSelect;
+    }
+    return result;
+  },
+
+  checkIfDisplay: function() {
+    var self = this;
+    var devDescr =  homematic("Interface.getParamsetDescription", {"interface": this.iface, "address": this.chnAddress, "paramsetKey": "VALUES"});
+    jQuery.each(devDescr, function(index, val) {
+      if (val.NAME == "IDENTIFICATION_MODE_LCD_BACKLIGHT") {
+        self.hasDisplay = true;
+        return; // leave each loop
+      }
+    });
+  },
+
+  initDialog: function() {
+    var self = this,
+      arElmValues = this.initValue.split(","),
+      valBacklight, valKeyVisual, valTargetLevel, valDuration;
+
+    if (this.hasDisplay) {
+      this.displayElems.show();
+
+      valBacklight = (arElmValues[0].split("=")[1] == "true") ? true : false;
+      valKeyVisual = (arElmValues[1].split("=")[1] == "true") ? true : false;
+      valDuration = arElmValues[3].split("=")[1];
+
+      this.displayChkBox.prop("checked", valBacklight);
+      this.sysKeyChkBox.prop("checked", valKeyVisual);
+      this.durationSelect.val(valDuration);
+    } else {
+      valKeyVisual = (arElmValues[0].split("=")[1] == "true") ? true : false;
+      valDuration = arElmValues[2].split("=")[1];
+
+      this.sysKeyChkBox.prop("checked", valKeyVisual);
+      this.durationSelect.val(valDuration);
+    }
   },
   
   close: function(result)
@@ -29840,9 +30087,10 @@ showInterfaces = function()
 };
 
 setReGaBtn = function() {
-  var result = homematic("ReGa.isPresent");
-  console.log("ReGa is present: " + result + " - typeof result: " + typeof result);
-  jQuery("#btnRestartReGa").children().first().css("color", "red");
+  homematic("ReGa.isPresent", null, function(result) {
+    //console.log("ReGa is present: " + result + " - typeof result: " + typeof result);
+    jQuery("#btnRestartReGa").children().first().css("color", "red").html("ReGa<br/>Ready");
+  });
 };
 
 showHmAPITools = function()
@@ -29858,9 +30106,8 @@ showHmAPITools = function()
     }
     jQuery("#btnRestartReGa").bind("click", function () {
       jQuery(this).children().first().css("color", "green");
-      homematic("CCU.restartReGa", {}, function(result) {
+      homematic("CCU.restartReGa");
       setReGaBtn();
-     });
     });
   }
 };
@@ -30243,6 +30490,18 @@ getExtendedDescription = function(oChannelDescr) {
     result = (channelIndex < 13) ? translateKey("chType_OPTICAL_SIGNAL_RECEIVER") : translateKey("chType_OPTICAL_SIGNAL_RECEIVERA");
   }
 
+  if (chType == "ACCESS_RECEIVER") {
+    if (deviceType.toLowerCase() == "hmip-dld") {
+      result = translateKey("chType_ACCESS_RECEIVER") + " " + (channelIndex - 1);
+    }
+  }
+
+  if (chType == "DOOR_LOCK_STATE_TRANSMITTER") {
+    if (deviceType.toLowerCase() == "hmip-dld") {
+      result = translateKey("chType_DOOR_LOCK_STATE_TRANSMITTER");
+    }
+  }
+
   /* Uncomment this to hide the channel description of a particular channel type
   if (chType == "KEY") {
     result = noDescrNecessary;
@@ -30501,7 +30760,7 @@ setNewDevicePos2SystemPos = function(oDevice) {
       utcOffsetDST = arUtcOffset[1] * 60;
 
     var iFace = oDevice.iface;
-    if (iFace.toLowerCase() == "hmip-rf" && (oDevice.type.toLowerCase() != "hmip-rcv-50")) {
+    if (iFace.toLowerCase() == "hmip-rf" && (oDevice.type.toLowerCase() != "hmip-rcv-50")  && (oDevice.type.toLowerCase() != "hmip-dld")) {
       // Check if the device has the channel *_WEEK_PROFILE
       jQuery.each(oDevice.chnTypes, function (index, channelType) {
         if (channelType.indexOf("_WEEK_PROFILE") != -1) {
@@ -36381,20 +36640,17 @@ iseHmIPWeeklyProgram.prototype = {
     html += "<table>";
 
 
-        html += "<thead>";
-          if (! this.isDeviceType("_HmIP-DLD")) {
-            // channel number
-            html += "<tr>";
-            html += "<td></td>";
-            jQuery.each(this.relevantChn, function (index, val) {
-              html += "<td>" + val + "</td>";
-            });
-            html += "</tr>";
-          }
-        html += "</thead>";
+      html += "<thead>";
+        // channel number
+        html += "<tr>";
+        html += "<td></td>";
+        jQuery.each(this.relevantChn, function (index, val) {
+          html += "<td>" + val + "</td>";
+        });
+        html += "</tr>";
+      html += "</thead>";
 
       html += "<tbody>";
-
         // row auto
         html += "<tr>";
           html += "<td>"+translateKey("stringTableClimateControlRTTransceiverAutoMode")+"</td>";
@@ -36427,7 +36683,6 @@ iseHmIPWeeklyProgram.prototype = {
             html += "</td>";
           });
         html += "</tr>";
-
       html += "</tbody>";
     html += "</table>";
 
@@ -36453,7 +36708,6 @@ iseHmIPWeeklyProgram.prototype = {
         html+= "</td>";
       html += "</tr>";
 
-    if (! this.isDeviceType("_HmIP-DLD")) {
       html += "<tr>";
       html += "<td>" + translateKey("btnChooseChannel") + ": </td>";
       html += "<td>";
@@ -36475,15 +36729,6 @@ iseHmIPWeeklyProgram.prototype = {
       });
       html += "</td>";
       html += "</tr>";
-    } else {
-      //The HmIP-DLD (Door Lock Drive) has no virtual channels and no target channels to select from.
-      // We have only one channel which is always selected and therefore hidden.
-      html += "<tr class='hidden'>";
-        html += "<td>";
-        html += "<input name='wpChannelSel_" + self.id + "' value='1' type='checkbox' checked>";
-        html += "<td>";
-      html += "<tr>";
-    }
     html += "</table>";
 
     return html;
@@ -36577,6 +36822,300 @@ iseHmIPWeeklyProgram.prototype = {
       }
       bVal = tmp;
     }
+    return bVal;
+  },
+
+  reverseString: function (str) {
+    return str.split("").reverse().join("");
+  },
+
+  getConfigString: function() {
+    var arMode = ["MANU_MODE", "AUTO_MODE_WITH_RESET", "AUTO_MODE_WITHOUT_RESET"];
+    return "WPTCLS="+this.selectedCh+",WPTCL="+arMode.indexOf(this.modeElm.val());
+  }
+
+};
+/**
+ * Created by grobelnik on 04.12.2020.
+ */
+
+
+iseHmIPWeeklyProgramAccessReceiver = Class.create();
+
+iseHmIPWeeklyProgramAccessReceiver.prototype = {
+  initialize: function (id, opts, callback) {
+    var self = this;
+
+    virtChnCounterWP = 0;
+    //conInfo(opts);
+    this.callback = callback;
+    this.opts = opts;
+    this.id = id;
+    this.devLabel = opts.deviceLabel;
+    this.iface = this.opts.chInterface;
+
+    this.doorLockStateTransmitterID = "DOOR_LOCK_STATE_TRANSMITTER";
+    this.accessReceiverID  = "ACCESS_RECEIVER";
+
+    this.expert = (! this.opts.userEasyLinkMode) ? true : false;
+
+    this.chAddress = this.opts.chnAddress;
+
+    this.device = this.getDevice(this.opts.deviceID);
+    this.relevantChn = this.getRelevantChannels();
+
+    // This can be used for later devices that require special treatment.
+    /*if (this.isDeviceType("HmIP-XXX")) {
+      this.relevantChn = (this.expert) ? [4, 5, 6] : [4];
+    }*/
+
+    this.anchor = jQuery("#anchor_"+this.id);
+    this.anchor.html(this.getMainHtml(this.doorLockStateTransmitterID) + this.getMainHtml(this.accessReceiverID));
+
+    this.initChannelState();
+
+    jQuery("#weekprg_"+this.id).show();
+    window.setTimeout(function() {delete virtChnCounterWP;},5000);
+    this.initBtnEvents();
+  },
+
+  initBtnEvents: function() {
+    var that = this;
+    jQuery("#setChannelMode_"+this.id).click(function(){
+      var self = this;
+      jQuery(this).toggleClass("ControlBtnOn");
+      window.setTimeout(function(){jQuery(self).toggleClass("ControlBtnOn");},500);
+      that.getModeDialog();
+      window.setTimeout(function(){
+        that.modeElm = jQuery("#wpChannelMode_" + that.id);
+        that.chnElems = jQuery("[name='wpChannelSel_"+that.id+"']");
+      },500);
+
+    });
+  },
+
+  getModeDialog: function() {
+    var that = this;
+    var sOutput = this.getDialogHtml(this.doorLockStateTransmitterID) + this.getDialogHtml(this.accessReceiverID);
+
+     var dlg = new YesNoDialog(translateKey("dialogSetWPModeTitle"), sOutput, function(result) {
+      var selectedMode = that.modeElm.val(),
+        selectedCh = 0;
+      if (result == YesNoDialog.RESULT_YES) {
+        jQuery.each(that.chnElems, function(index,elm){
+          if (jQuery(elm).is(":checked")) {
+            selectedCh += parseInt(jQuery(elm).val());
+          }
+        });
+        that.selectedCh = selectedCh;
+        conInfo("iface: " + that.iface + " - address: " + that.chAddress);
+        conInfo("selectedMode: " + selectedMode + " - selectedCh: " + selectedCh);
+
+        if (typeof that.callback == "undefined" ) {
+          homematic("Interface.putParamset", {
+            'interface': that.iface,
+            'address': that.chAddress,
+            'paramsetKey': 'VALUES',
+            'set':
+              [
+                {name: 'WEEK_PROGRAM_TARGET_CHANNEL_LOCK', type: 'string', value: selectedMode},
+                {name: 'WEEK_PROGRAM_TARGET_CHANNEL_LOCKS', type: 'int', value: selectedCh}
+              ]
+          }, function (result) {
+            conInfo(result);
+          });
+        }
+      }
+
+      if (that.callback) {that.callback(result);}
+    },"html");
+
+   dlg.btnTextNo(translateKey("btnCancel"));
+   dlg.btnTextYes(translateKey("btnOk"));
+  },
+
+
+  initChannelState: function() {
+    var self = this,
+      binChannelState = this.getBinChannelState(),
+      chState;
+
+    jQuery.each(this.relevantChn, function(index, value){
+      chState = (binChannelState[index]) ? binChannelState[index] : "0";
+
+      if (chState == "1") {
+        jQuery("#"+self.id+"_bit"+(index+1)+"1").attr("checked",true);
+      } else {
+        jQuery("#"+self.id+"_bit"+(index+1)+"0").attr("checked",true);
+      }
+    });
+  },
+
+  getMainHtml: function(chnType) {
+    var self = this,
+    html = "",
+    valCheckBox,
+    tmpVal;
+
+    var chType = this.getChannelOfType(chnType);
+
+    if (chnType == this.accessReceiverID) {
+      html += "<hr>";
+      html += "<div style='color:white;'><u>"+translateKey('optionDoorLockUser')+"</u></div>";
+    } else if (chnType == this.doorLockStateTransmitterID) {
+      html += "<div style='color:white;'><u>"+translateKey('optionDoorLockAction')+"</u></div>";
+    }
+
+    html += "<table style='width: 100%'>";
+      html += "<thead>";
+        // channel number
+        html += "<tr>";
+        if (chnType == this.accessReceiverID) {
+          html += "<td style='text-align: left'>"+translateKey('lblUser')+"</td>";
+          jQuery.each(chType, function (index, val) {
+            html += "<td>" + (parseInt(val) - 1) + "</td>";
+          });
+        }
+        html += "</tr>";
+      html += "</thead>";
+
+      html += "<tbody>";
+        // row auto
+        html += "<tr>";
+          html += "<td style='text-align: left; width: 1%; white-space: nowrap;'>"+translateKey("stringTableClimateControlRTTransceiverAutoMode")+"</td>";
+          jQuery.each(chType, function(index,val){
+            html += "<td style='text-align: left;'>";
+            html += "<input id='"+self.id+"_bit"+val+"0'  type='radio' name='"+self.id+"_bit"+val+"' value=0 disabled='disabled'>";
+            html += "</td>";
+          });
+        html += "</tr>";
+
+        // row manu
+        html += "<tr>";
+          html += "<td style='text-align: left; width: 1%; white-space: nowrap'>"+translateKey("stringTableClimateControlRTTransceiverManuMode")+"</td>";
+          // This works if only one doorLockStateTransmitter channel is available.
+          // For new devices with more of this channels this must be reworked.
+          jQuery.each(chType, function(index,val){
+            if (chnType == self.doorLockStateTransmitterID) {
+              valCheckBox = 1; //
+            } else if (chnType == self.accessReceiverID) {
+              valCheckBox = Math.pow(2, (index + 1));
+            }
+            html += "<td style='text-align: left;'>";
+            html += "<input id='"+self.id+"_bit"+val+"1'  type='radio' name='"+self.id+"_bit"+val+"' value="+valCheckBox+" disabled='disabled'>";
+            html += "</td>";
+          });
+        html += "</tr>";
+      html += "</tbody>";
+    html += "</table>";
+    return html;
+  },
+
+  getDialogHtml: function(chnType) {
+
+    var self = this,
+    html = "";
+
+    var valCheckBox,
+    tmpVal;
+
+    if (chnType == this.doorLockStateTransmitterID) {
+      html += "<table align='center'>";
+      html += "<tr>";
+      html += "<td>" + translateKey("lblMode") + ": </td>";
+      html += "<td>";
+      html += "<select id='wpChannelMode_" + self.id + "'>";
+      html += "<option value='MANU_MODE'>" + translateKey("stringTableClimateControlRTTransceiverManuMode") + "</option>";
+      //html += "<option value='AUTO_MODE_WITH_RESET'>AUTO_WITH_RESET</option>";
+      html += "<option value='AUTO_MODE_WITHOUT_RESET'>" + translateKey("stringTableClimateControlRTTransceiverAutoMode") + "</option>";
+      html += "</select>";
+      html += "<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick=showParamHelp(translateKey('helpWeeklyProgramDlg'),450,100)>";
+      html += "</td>";
+      html += "</tr>";
+    }
+
+    html += "<tr>";
+    if (chnType == this.doorLockStateTransmitterID) {
+      html += "<td>" + translateKey("lblDoorLock") + ": </td>";
+    } else if (chnType == this.accessReceiverID) {
+      html += "<td>" + translateKey("lblUser") + ": </td>";
+    }
+    html += "<td>";
+    if (chnType == this.doorLockStateTransmitterID) {
+      html += "<input name='wpChannelSel_" + self.id + "' value='1' type='checkbox'>";
+    } else {
+      jQuery.each(this.relevantChn, function (index, val) {
+        if (index > 0) {
+          valCheckBox = Math.pow(2, index);
+          html += "<input name='wpChannelSel_" + self.id + "' value='" + valCheckBox + "' type='checkbox'>";
+          html += "<label for='wpChannelSel_" + self.id + "'>" + (parseInt(val) - 1) + "</label>";
+        }
+      });
+    }
+
+    html += "</td>";
+    html += "</tr>";
+
+    if (chnType == this.accessReceiverID) {
+      html += "</table>";
+    }
+
+    return html;
+  },
+
+  getDevice: function(id) {
+    var device = DeviceList.getDevice(this.opts.deviceID);
+    if (typeof device != "object") {
+      device = homematic("Device.get", {"id": id});
+    }
+    return device;
+  },
+
+  getRelevantChannels: function() {
+    var self = this,
+    result = [],
+    AccessReceiverID = "ACCESS_RECEIVER", // HmIP-DLD :2 - :9 = User access
+    DoorLockTransmitterID = "DOOR_LOCK_STATE_TRANSMITTER"; // HmIP-DLD :1 = Device behaviour
+
+    jQuery.each(this.device.channels, function(index,chn) {
+      if (
+        (chn.channelType.indexOf(AccessReceiverID) !== -1)
+        || (chn.channelType.indexOf(DoorLockTransmitterID) !== -1)
+      ) {
+          result.push(index);
+      }
+    });
+    return result;
+  },
+
+  // The chType should be ACCESS_RECEIVER or DOOR_LOCK_STATE_TRANSMITTER
+  getChannelOfType: function(chType) {
+    var result = [];
+    jQuery.each(this.device.channels, function(index,chn) {
+      if (chn.channelType.indexOf(chType) != -1) {
+        result.push(index);
+      }
+    });
+    return result;
+  },
+
+  // Checks if the device type is of a particular kind
+  // This is useful for the treatment of special cases (e.g. the HmIP-BSL which is a DIMMER_WEEKLY_PROFILE but must be treated as a SWITCH_WEEKLY_PROFILE
+  isDeviceType: function(devType) {
+    return (this.devLabel == devType) ? true : false;
+  },
+
+  getBinChannelState: function() {
+    var missingZero = "",
+    tmp = "",
+    bVal = this.opts.channelLocks.toString(2);
+
+    jQuery.each(this.relevantChn, function(index, value) {
+      missingZero += "0";
+    });
+
+    bVal = missingZero.substr(bVal.length)+bVal;
+    bVal = this.reverseString(bVal);
     return bVal;
   },
 
@@ -37865,12 +38404,14 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
   var dstElm = $(dstid);
 
   // Falls das Tasten-Event nicht mit übergeben wurde ....
+  /*
   var keyCode = 0,
     finalVal;
 
   if (event) {
     keyCode = event.keyCode;
   }
+  */
 
   var ok = true;
 
@@ -37879,17 +38420,6 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
   if (! dstValueFactor) dstValueFactor = 0.01;//dstValue = value/100
 
   var value = $F(srcid);
-
-  // Check if float is allowed
-  if (min.toString().indexOf(".") == -1 && max.toString().indexOf(".") == -1) {
-    min = parseInt(min);
-    max = parseInt(max);
-    value = (roundValue05(parseInt(value))).toString();
-  } else {
-    min = parseFloat(min);
-    max = parseFloat(max);
-    srcElm.value = parseFloat(value);
-  }
 
   //replace , by .
   if (value.indexOf(',') >= 0)
@@ -37903,35 +38433,37 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
     srcElm.value = value;
   }
 
-  //User is already editing?
-  if ((value.charAt(value.length-1) == '.') && (value.split(".")[1].length > 0) ) return;
+  // Check if float is allowed
+  try {
+    if (min.toString().indexOf(".") == -1 && max.toString().indexOf(".") == -1) {
+      min = parseInt(min);
+      max = parseInt(max);
+      value = (roundValue05(parseInt(value)));
+    } else {
+      min = parseFloat(min).toFixed(1);
+      max = parseFloat(max).toFixed(1);
+      value = parseFloat(value);
+      srcElm.value = parseFloat(value);
+    }
+  } catch(e) {conInfo(e);}
 
   if (! value)
   {
-    //alert("Keine Zahl.");
-    //value = 0;
-    //$(dstid).value = min;
     finalVal = min;
     ok = false;
   }
   else if (isNaN(value))
   {
-    //alert("Keine Zahl.");
-    //value = min;
     finalVal = min;
     ok = false;
   }
   else if (value < min)
   {
-    //alert("Der kleinste Wert ist 0.");
-    //value = min;
     finalVal = min;
     ok = false;
   }
   else if (value > max)
   {
-    //alert("Der größte Wert ist 100.");
-    //value = max;
     finalVal = max;
     ok = false;
   }
@@ -37940,16 +38472,8 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
   {
     srcElm.style.backgroundColor = "#fffffe";
     dstElm.value = value * dstValueFactor;
+    srcElm.value = dstElm.value;
     srcElm.setAttribute("valvalid", "true");
-
-    // Cursortasten abfangen, ansonsten springt der Cursor im Texteingabefeld
-    // beim IE (Version 8 u. 9) mit jedem Druck auf eine Cursortaste ans Ende des Wertes.
-    // Man kann nicht mittels Cursor-Links nach links wandern, da der Cursor immer ans Ende springt.
-    // [HM-1293]
-    if ((keyCode) < 37 && (keyCode > 40) ) {
-      //valElm.value = value;
-      srcElm.value = value;
-    }
   }
   else
   {
@@ -41451,6 +41975,10 @@ CreateCPPopup = function(src, pb) {
 
   PopupClose = function() {
     dlgPopup.close();
+    if (typeof addOnUninstall != "undefined") {
+      reloadPage();
+      delete addOnUninstall;
+    }
   };
   
   PopupReload = function() {
@@ -43642,12 +44170,9 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
 };
 
 addHintHeatingGroupDevice = function (address) {
-  if (typeof DeviceList.getDeviceByAddress() != "undefined" ) {
+  if (typeof DeviceList.getDeviceByAddress() != "undefined") {
     var devId = DeviceList.getDeviceByAddress(address.split(":")[0]).id,
-      inHeatingGroup = homematic("Interface.getMetadata", {
-        "objectId": devId,
-        "dataId": "inHeatingGroup"
-      }),
+      inHeatingGroup = homematic("Interface.getMetadata", {"objectId": devId, "dataId": "inHeatingGroup"}),
       hint = "<div class='attention' style='width:100%; height:50px; line-height: 25px; background-color: white; text-align: center; position:fixed; z-index: 188;'>" + translateKey('hintGroupDevice') + "</div>";
 
     if (inHeatingGroup != "null") {   // MetaData available?
@@ -43674,11 +44199,7 @@ addHintHeatingGroupDevice = function (address) {
             jQuery.each(group.groupMembers, function (index, groupMember) {
               if ((groupMember.id == address) && (jQuery.inArray(groupMember.memberType.id, allowedGroupMembers) != -1)) {
                 showHint = true;
-                homematic("Interface.setMetadata", {
-                  "objectId": devId,
-                  "dataId": "inHeatingGroup",
-                  "value": "true"
-                });
+                homematic("Interface.setMetadata", {"objectId": devId, "dataId": "inHeatingGroup", "value": "true"});
               }
             });
           });

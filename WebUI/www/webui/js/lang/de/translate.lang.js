@@ -688,7 +688,7 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsExtraSoftwareBtnInstallSoftware" : "Installieren",
     "dialogSettingsExtraSoftwareBtnStartInstallSoftware" : "Installation starten",
     "dialogSettingsExtraSoftwareLblSelectExtraSoftware" : "Zusatzsoftware ausw%E4hlen:",
-    "dialogSettingsExtraSoftwareHintSelectExtraSoftware" : "<b>Hinweis:</b><br/>Vom Anwender installierte Zusatzsoftware kann zu unerw%FCnschten Ergebnissen bis hin zu Datenverlust und Systeminstabilit%E4ten f%FChren.<br/>F%FCr vom Anwender installierte Zusatzsoftware %FCbernimmt die eQ-3 AG keine Haftung.<br/><br/>Zum Abschlu%DF der Installation wird die Zentrale automatisch neu gestartet.",
+    "dialogSettingsExtraSoftwareHintSelectExtraSoftware" : "<b>Hinweis:</b><br/>Vom Anwender installierte Zusatzsoftware kann zu unerw%FCnschten Ergebnissen bis hin zu Datenverlust und Systeminstabilit%E4ten f%FChren.<br/><br/><b><u>F%FCr vom Anwender installierte Zusatzsoftware %FCbernimmt die eQ-3 AG keine Haftung.</u></b><br/><br/>Zum Abschlu%DF der Installation wird die Zentrale automatisch neu gestartet.",
     "dialogSettingsExtraSoftwareInstallMessageBoxTitle" : "Firmware-Update - Best%E4tigung",
     "dialogSettingsExtraSoftwareInstallMessageBoxContent" : "Die Zusatzsoftware wurde hochgeladen. Sie k%F6nnen jetzt durch Klick auf die Schaltfl%E4che unten die Installation starten.",
     "dialogSettingsExtraSoftwareInstallMessageBoxHintLowBat_a" : "Achtung!<br/>Der Ladezustand der Batterien betr%E4gt nur noch ",

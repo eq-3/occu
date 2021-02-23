@@ -61,10 +61,18 @@ jQuery.extend(true,langJSON, {
       "<b>7: Das Fr%FChere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>zuerst</b> erreicht wird.<br/><br/>" +
       "<b>8: Das Sp%E4tere von Astro oder fester Uhrzeit</b><br/>Es wird entweder zur Astro- oder zur gew%E4hlten Uhrzeit geschaltet, abh%E4ngig davon welcher Zeitpunkt <b>sp%E4ter</b> erreicht wird.",
 
-    "DLD_Mode" : "Hilfe DLD_Mode",
-    "DLD_LockMode" : "Hilfe Geraeteverhalten",
-    "DLD_UserMode" : "Hilfe Benutzerberechtigung",
-    "DLD_TargetChannels" : "Hilfe Zielkanaele",
+    "DLD_Mode" :
+      "W%E4hlen Sie aus, ob Sie diesen Wochenprogramm-Eintrag f%FCr die Zeitsteuerung des T%FCrschlossantriebs oder f%FCr die zeitgesteuerten Benutzerrechte verwenden wollen.",
+
+    "DLD_LockMode" : "W%E4hlen Sie aus, welche Aktion der T%FCrschlossantrieb ausf%FChren soll, und/oder wie sich die Funktion <i>Auto Relock (Automatisches Verriegeln)</i> verhalten soll.<br/><br/>" +
+      "Ist die Funktion <i>Auto Relock</i> aktiviert, wird das T%FCrschloss automatisch wieder verriegelt, nachdem es entriegelt oder ge%F6ffnet wurde. Die Wartezeit vor dem <i>Auto Relock</i>  " +
+      "muss dazu am Kanal <i>T%FCrschlossantrieb</i> eingestellt werden." ,
+
+    "DLD_UserMode" : 
+      "W%E4hlen Sie aus, ob die ausgew%E4hlten Benutzerkan%E4le im Zeitraum ab diesem Zeitpunkt berechtigt oder gesperrt werden sollen.<br/><br/>" +
+      "<u><b>Hinweis:</b></u><br/><br/>" +
+      "Die Steuerung durch das Wochenprogramm funktioniert nur, wenn der Benutzerkanal im Auto-Modus ist (siehe <i>Status und Bedienung</i>). " +
+      "Wenn eine Berechtigung %FCber die Benutzer-Oberfl%E4che oder andere Programme ver%E4ndert wird, schaltet der Benutzerkanal von selbst in den Manu-Modus.",
 
     "dummy" : ""
   },
@@ -107,8 +115,8 @@ jQuery.extend(true,langJSON, {
     "optionWeekPrgLatestOfFixedAndAstro" : "8: Whatever occurs last between astro and fixed time of day",
     "optionStateOFF": "Off",
     "optionStateON": "On",
-    "optionPermissionTrue" : "en* Erteilt",
-    "optionPermisionFalse" : "en* Nicht erteilt",
+    "optionPermissionTrue" : "Granted",
+    "optionPermisionFalse" : "Not granted",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",
@@ -131,10 +139,18 @@ jQuery.extend(true,langJSON, {
       "<b>7: Whatever occurs first between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>first</b>.<br/><br/>" +
       "<b>8: Whatever occurs last between astro and fixed time of day</b><br/>Switching occurs either at astro or time of day, depending which one is reached <b>last</b>.",
 
-    "DLD_Mode" : "en* HELP DLD_Mode",
-    "DLD_LockMode" : "en* HELP Geraeteverhalten",
-    "DLD_UserMode" : "en* HELP Benutzerberechtigung",
-    "DLD_TargetChannels" : "en* HELP Zielkanaele",
+    "DLD_Mode" :
+      "Select whether you want to use this week progam entry for the time control of the door lock drive or for the time-controlled user rights.",
+
+    "DLD_LockMode" : "Select which action the door lock drive should carry out and/or how the <i>Auto Relock (automatic locking)</i> function should operate.<br/><br/>" +
+      "If the <i>Auto Relock</i> function is activated, the door lock is automatically locked again after it has been unlocked or opened. The waiting time before <i>Auto Relock</i> " +
+      "must therefore be adjusted at the <i>door lock drive</i> channel.",
+
+    "DLD_UserMode" :
+      "Define whether the selected user channels are to be authorised or not during the specified period.<br/><br/>" +
+      "<u><b>Note:</b></u><br/>Control via the week program only works if the user channel is in auto mode (see <i>Status and operation</i>). " +
+      "If an authorisation is changed via status and operation or by central control unit programs, the user channel automatically switches to manu mode.",
+
     "dummy" : ""
   }
 });

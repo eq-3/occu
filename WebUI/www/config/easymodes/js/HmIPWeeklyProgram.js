@@ -194,7 +194,9 @@ HmIPWeeklyProgram.prototype = {
               // If the expert target channel is set, switch to the expert mode
               if (isBitSet(val, index)) {
                 self.sessionIsExpert = 1;
-                self.showHintExpertTargetChannel = true;
+                if (! self.ignoreExpertMode.includes(self.device.deviceType.id)) {
+                  self.showHintExpertTargetChannel = true;
+                }
                 return false; // leave each loop
               }
             }
@@ -424,7 +426,12 @@ HmIPWeeklyProgram.prototype = {
 
             // TARGET CHANNELS
             programEntry += "<tr name='panelTargetChannel_"+number+"'>";
-            programEntry += "<td>" + translateKey('lblWPTargetChannels') + "</td>";
+
+            if (! this.isDoorLockDrive) {
+              programEntry += "<td>" + translateKey('lblWPTargetChannels') + "</td>";
+            } else {
+              programEntry += "<td>" + translateKey('lblUser') + "</td>";
+            }
             programEntry += "<td colspan='3'>" + this._getTargetChannels(number) + "</td>";
             programEntry += "</tr>";
 
@@ -445,7 +452,11 @@ HmIPWeeklyProgram.prototype = {
           programEntry += "</tr>";
 
           programEntry += "<tr name='panelTargetChannel_"+number+"'>";
-            programEntry += "<td>" + translateKey('lblSelectTargetChannels') + "</td>";
+            if (! this.isDoorLockDrive) {
+              programEntry += "<td>" + translateKey('lblSelectTargetChannels') + "</td>";
+            } else {
+              programEntry += "<td>" + translateKey('lblSelectTargetUser') + "</td>";
+            }
             programEntry += "<td>" + this._getPanelSelectTargetChannels(this.chn, number, this.prn) + "</td>";
           programEntry += "</tr>";
         }
@@ -702,13 +713,13 @@ HmIPWeeklyProgram.prototype = {
     var sel0 = (selectedMode == this.defaultDoorLockMode) ? 'selected' : '',
       sel1 = (selectedMode == this.userDoorLockMode) ? 'selected' : '';
 
-    var result = "<td>"+translateKey('lblMode')+"</td>";
+    var result = "<td>"+translateKey('lblTypePointOfTime')+"</td>";
     result += "<td>";
       result += "<select id='doorLockDriveModeElm_"+number+"' onchange='setDoorLockDriveMode("+number+", this.value)'>";
         result += "<option value='"+this.defaultDoorLockMode+"' "+sel0+">"+translateKey('optionDoorLockAction')+"</option>";
         result += "<option value='"+this.userDoorLockMode+"' "+sel1+" >"+translateKey('optionDoorLockUser')+"</option>";
       result += "</select>";
-      result += "&nbsp;<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showParamHelp(\""+this._getHelp('DLD_Mode')+"\", 600, 400)'>";
+      result += "&nbsp;<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showParamHelp(\""+this._getHelp('DLD_Mode')+"\", 600, 70)'>";
     result += "</td>";
     return result;
   },
@@ -722,8 +733,8 @@ HmIPWeeklyProgram.prototype = {
 
       actionElm.html(translateKey("lblWPAction"));
       actionSelectBoxElm.empty().append("" +
-        "<option value='0'>"+translateKey('optionDLDAction1')+"</option>" +
         "<option value='1'>"+translateKey('optionDLDAction2')+"</option>" +
+        "<option value='0' selected>"+translateKey('optionDLDAction1')+"</option>" +
         "<option value='2'>"+translateKey('optionDLDAction3')+"</option>" +
         "<option value='3'>"+translateKey('optionDLDAction4')+"</option>"
       );
@@ -738,7 +749,7 @@ HmIPWeeklyProgram.prototype = {
       actionSelectBoxHelpElm.removeAttr("onclick");
       actionSelectBoxHelpElm.unbind("click");
       actionSelectBoxHelpElm.bind("click", function() {
-        showParamHelp(self._getHelp("DLD_LockMode"), 600, 400);
+        showParamHelp(self._getHelp("DLD_LockMode"), 600, 120);
       });
 
       this.DoorLockWPMode[this.devAddress][number] = this.defaultDoorLockMode;
@@ -763,7 +774,7 @@ HmIPWeeklyProgram.prototype = {
       permissionSelectBoxHelpElm.removeAttr("onclick");
       permissionSelectBoxHelpElm.unbind("click");
       permissionSelectBoxHelpElm.bind("click", function() {
-        showParamHelp(self._getHelp("DLD_UserMode"), 600, 400);
+        showParamHelp(self._getHelp("DLD_UserMode"), 600, 170);
       });
 
       this.DoorLockWPMode[this.devAddress][number] = this.userDoorLockMode;
@@ -892,9 +903,8 @@ HmIPWeeklyProgram.prototype = {
             if (tmpWPLevel == 1 && tmpWPDurBase == 7 && tmpWPDurFactor == 31) {sel0 = "", sel1 = "", sel2 = "selected='selected'", sel3 = "";}
             if (tmpWPLevel == 1.01 && tmpWPDurBase == 7 && tmpWPDurFactor == 31) {sel0 = "", sel1 = "", sel2 = "", sel3 = "selected='selected'";}
 
-
-            result += "<option value='0' "+sel0+">"+opt0+"</option>";
             result += "<option value='1' "+sel1+">"+opt1+"</option>";
+            result += "<option value='0' "+sel0+">"+opt0+"</option>";
             result += "<option value='2' "+sel2+">"+opt2+"</option>";
             result += "<option value='3' "+sel3+">"+opt3+"</option>";
 
@@ -904,15 +914,13 @@ HmIPWeeklyProgram.prototype = {
 
     result += "</select>";
 
-
-
     if (this.isDoorLockDrive) {
       var durationBaseID = number + "_WP_DURATION_BASE",
         durationFactorID = number + "_WP_DURATION_FACTOR";
       if (this.DoorLockWPMode[this.devAddress][number] == this.defaultDoorLockMode) {
-        result += "&nbsp;<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showParamHelp(\""+this._getHelp('DLD_LockMode')+"\", 600, 400)'>";
+        result += "&nbsp;<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showParamHelp(\""+this._getHelp('DLD_LockMode')+"\", 600, 120)'>";
       } else {
-        result += "&nbsp;<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showParamHelp(\""+this._getHelp('DLD_UserMode')+"\", 600, 400)'>";
+        result += "&nbsp;<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showParamHelp(\""+this._getHelp('DLD_UserMode')+"\", 600, 140)'>";
       }
       result +=
         "<input type='text' class='hidden' id='separate_CHANNEL_" + this.chn + "_" + this.prn + "' name='" + paramID + "' value="+this.ps[paramID]+">" +
@@ -920,9 +928,6 @@ HmIPWeeklyProgram.prototype = {
         "<input type='text' class='hidden' id='separate_CHANNEL_" + this.chn + "_" + (parseInt(this.prn) +2) + "' name='"+number+"_WP_DURATION_FACTOR' value="+this.ps[durationFactorID]+">";
       this.prn += 2;
     }
-
-
-
     result += "<script type='text/javascript'>";
     result += "window.setTimeout(function(){";
     result += "showHideDuration(" + val + "," + number + ");";
@@ -1342,7 +1347,12 @@ HmIPWeeklyProgram.prototype = {
           valCheckBox = Math.pow(2, index);
         }
         result += "<td>";
-          result += "<label for='targetChannel"+number+"_"+index+"' style='background-color:"+cssColor+"; display:block; text-align:center;'>"+self.virtualChannels[index]+"</label>";
+          if (! self.isDoorLockDrive) {
+            result += "<label for='targetChannel" + number + "_" + index + "' style='background-color:" + cssColor + "; display:block; text-align:center;'>" + self.virtualChannels[index] + "</label>";
+          } else {
+            result += "<label for='targetChannel" + number + "_" + index + "' style='background-color:" + cssColor + "; display:block; text-align:center;'>" + index + "</label>";
+          }
+
           if (self.chnType == self.BLIND) {
             result += "<input id='targetChannel" + number + "_" + index + "' data='" + self.targetChannelTypesVirtualBlind[index] + "' name='targetChannel" + self.chn + "_" + number + "' type='checkbox' value='" + valCheckBox + "' onchange='setWPTargetChannels(this," + self.chn + "," + self.prn + ");blindAvailable(this," + number + ");'>";
           } else if (self.device.channels[self.chn].channelType == self.DIMMER_OUTPUT_BEHAVIOUR) {

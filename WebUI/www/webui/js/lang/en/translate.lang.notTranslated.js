@@ -1,24 +1,7 @@
 jQuery.extend(true, langJSON, {
   "en": {
 
-    "comment" : "Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
-    "stringTableAutoRelockDelay" : "Verz%F6gerung autom. Verschlie%DFen",
-    "stringTableDoorLockDirection" : "Drehrichtung zum Schlie%DFen",
-    "stringTableDoorLockNeutralPos" : "Neutrale Position",
-    "stringTableDoorLockTurns" : "Anzhahl der Umdrehungen zum Schlie%DFen",
-    "lblVertical" : "Vertikal",
-    "lblHorizontal" : "Horizontal",
-    "comment" : "END comment",
-
-    "comment" : "Diese Keys nach MASTER_LANG/HmIPWeeklyDeviceProgram.js - Wird noch nicht übersetzt, ist noch nicht im Release C/2020 enthalten",
-    "optionDoorLockAction" : "Ger%E4te-Verhalten",
-    "optionDoorLockUser" : "Benutzerberechtigung",
-    "optionDLDAction1" : "Verriegeln + Auto-Relock Ende",
-    "optionDLDAction2" : "100% Verriegeln + Auto-Relock Beginn mit On-Time aus AutoRelockDelay",
-    "optionDLDAction3" : "Entriegeln + Auto-Relock Ende",
-    "optionDLDAction4" : "Auto-Relock Ende",
-    "comment" : "End HmIPWeeklyDeviceProgram.js",
-
+    "comment" : "***** Reviewed *****",
 
     "stringTableErrorCommunicationParticulateMatterSensor" : "Fine dust sensor communication error",
     "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Fine dust sensor communication: OK",
@@ -98,6 +81,85 @@ jQuery.extend(true, langJSON, {
     "stringTableMountingOrientation" : "Display orientation",
 
     "stringTableConditionSwitchTransmitterParticulateMatter" : "Fine dust sensor",
+
+    "comment" : "***** END Reviewed *****",
+
+
+
+
+    "comment" : "This if for the Release A/2021",
+
+    "stringTableAutoRelockDelay" : "Delay time before Auto Relock",
+    "stringTableDoorLockDirection" : "Rotation direction for locking",
+    "stringTableDoorLockNeutralPos" : "Neutral position",
+    "stringTableDoorLockTurns" : "Number of rotations for locking",
+    "lblVertical" : "Vertical",
+    "lblHorizontal" : "Horizontal",
+    "permissionTrue" : "Authorisation<br/>granted",
+    "permissionFalse" : "Authorisation<br/>not granted",
+    "permissionUnknown" : "Authorisation<br/>unknown",
+
+    "lblDoorLock" : "Door lock drive",
+
+    "optionDoorLockAction" : "Mode for door lock drive",
+    "optionDoorLockUser" : "User authorisation",
+
+    "comment" : "Diese Keys gehören nach MASTER_LANG/HmIPWeeklyDeviceProgram.js",
+    "optionDLDAction1" : "Lock + Auto Relock end",
+    "optionDLDAction2" : "Lock + Auto Relock start",
+    "optionDLDAction3" : "Unlock + Auto Relock end",
+    "optionDLDAction4" : "Auto Relock end",
+    "comment" : "End HmIPWeeklyDeviceProgram.js",
+
+    "lblSelectTargetUser" : "Select<br /> user",
+
+    "stringTableDoorLockStateTransmitterActivityStateDown" : "Door lock is locking",
+    "stringTableDoorLockStateTransmitterActivityStateUnknown" : "Door lock activity unknown",
+    "stringTableDoorLockStateTransmitterActivityStateUp" : "Door lock is opening",
+
+    "stringTableDoorLockStateTransmitterLockStateLocked" : "Door lock is locked",
+    "stringTableDoorLockStateTransmitterLockStateUnlocked" : "Door lock is unlocked",
+    "stringTableDoorLockStateTransmitterLockStateUnknown" : "Door lock position unknown",
+
+    "stringTableAccessReceiverStateFalse" : "User authorised: No",
+    "stringTableAccessReceiverStateTrue" : "User authorised: Yes",
+
+    "stringTableAccessReceiverAccessAuthorizationFalse" : "  permanently block",
+    "stringTableAccessReceiverAccessAuthorizationTrue" : " permanently authorise",
+
+    "stringTableDoorLockStateTransmitterLockTargetLevelLocked" : "Lock the door lock",
+    "stringTableDoorLockStateTransmitterLockTargetLevelUnlocked" : "Unlock the door lock",
+    "stringTableDoorLockStateTransmitterLockTargetLevelOpen" : "Open the door lock",
+
+    "stringTableWPOptionsNop" : "Ignore week program",
+    "stringTableWPOptionsOff" : "Activate week program",
+    "stringTableWPOptionsOn" : "Deactivate week program",
+
+    "stringTableAccessReceiverTitle" : "Door lock drive",
+
+    "lblOpen" : "Open",
+    "lblLock" : "Lock",
+    "lblUnlock" : "Unlock",
+
+    "lblTypePointOfTime" : "Type of time point",
+
+    "helpAccessReceiverUserAccessAuth" :
+      "If the authorisation is changed manually, the user channel switches to manu mode. " +
+      "Control of the authorisation by the week progam is then deactivated. Switching back to auto mode can be activated again via the week progam.",
+
+    "helpPrgAccessReceiver" : "These actions deactivate the week progam for this user channel (=manu mode).<br/><br/>" +
+      "<u><b>Note:</b></u><br/><br/>" +
+      "To change to auto mode, the week progam channel can be used in the central control unit program under 'Activity'.",
+
+    "helpWeeklyProgramDlg" :
+      "When using the auto mode, corresponding week progam entries must be available. " +
+      "You can configure the week progam for the device under 'Settings/devices'.",
+
+    "stringTableErrorDegradedChamber"  : "Polluted smoke chamber",
+
+    "lblDisplay"  : "Display",
+    "lblSystemKey" : "System button",
+    "lblReadings" : "measured value(s)",
 
     "noMoreKeys" : ""
   }

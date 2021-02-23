@@ -34,8 +34,13 @@ function ::CreateAccessPointGenericReceiver()
 
       WriteLine("<tr>");
         if (objCurrent) {
+          string currentVal = "< 100.0";
+          if (objCurrent.Value() >= 100) {
+            currentVal = objCurrent.Value().ToString(1);
+          }
+
           WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCurrentPowerConsumption}<br/>"#objCurrent.Value().ToString(1)#" "#objCurrent.ValueUnit()#"</div>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCurrentPowerConsumption}<br/>"#currentVal#" "#objCurrent.ValueUnit()#"</div>");
           WriteLine("</td>");
         }
         if (objCurrentStatus) {
