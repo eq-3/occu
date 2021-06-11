@@ -1012,11 +1012,14 @@ jQuery.extend(true,langJSON, {
     "commentStringTableEnd" : "***********************************************",
 
     "btnSysConfSecurity" : "Security",
-    "lblSysConfSecurity1" : "Create / import system backups",
-    "lblSysConfSecurity2" : "Run system reset",
-    "lblSysConfSecurity3" : "Set / change security key",
+    "lblSysConfSecurity1" : "Set / change security key",
+    "lblSysConfSecurity2" : "Create / import system backups",
+    "lblSysConfSecurity3" : "Run system reset",
     "lblSysConfSecurity4" : "Set timeout",
     "lblSysConfSecurity5" : "Set SSH account",
+    "lblSysConfSecurity6" : "Authentication (CCU3)",
+    "lblSysConfSecurity7" : "HTTPS redirection (CCU3)",
+    "lblSysConfSecurity8" : "SNMP (CCU3)",
 
     "btnSysConfTimePosSettings" : "Time-/<br/>position settings",
     "lblSysConfTimePosSettings1" : "Set date and time",
@@ -1033,8 +1036,6 @@ jQuery.extend(true,langJSON, {
     "btnSysConfNetworkConfig" : "Network settings",
     "lblSysConfNetworkConfig1" : "Configure IP settings",
     "lblSysConfNetworkConfig2" : "Configure host name",
-    "lblSysConfNetworkConfig3" : "Configure name server",
-    "lblSysConfNetworkConfig4" : "Create remote access",
 
     "btnSysConfFirewallConfig" : "Configure firewall",
     "lblSysConfFirewallConfig1" : "Set access rights for remote APIs",

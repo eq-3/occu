@@ -149,6 +149,8 @@ jQuery.extend(true, langJSON, {
   }
 });
 
+langJSON.de.diagramValueTypeCONCENTRATION_CO2 = langJSON.de.lblCO2Concentration;
+langJSON.de.diagramValueTypeCONCENTRATION = langJSON.de.lblCO2Concentration;
 
 window.setTimeout(function () {
   if (typeof WEBUI_VERSION != "undefined") {

@@ -78,7 +78,7 @@ jQuery.extend(true,langJSON, {
       "</ul>",
 
     "hintPERMANENT_FULL_RX" :
-      "Bitte beachten Sie:<br/>"+
+      "<b><u>Bitte beachten Sie:</u></b><br/>"+
       "Im Batteriebetrieb ist dieses Ger%E4t nicht in st%E4ndiger H%F6rbereitschaft. In diesem Fall kann die Unterdr%FCckung der Bewegungserkennung (Empfangskanal) " +
       "nicht in einer Verkn%FCpfung verwendet werden. Im Batteriebetrieb ist dieses nur mit den ger%E4teeigenen Tasten des HmIP-SMI55 m%F6glich. "+
       "Gleiches gilt in Programmen f%FCr das Ein-/Ausschalten der Bewegungserkennung.",
@@ -171,7 +171,7 @@ jQuery.extend(true,langJSON, {
         "",
 
     "PWM_AT_LOW_VALVE_POSITION" :
-      "Der Parameter sollte aktiviert werden, wenn sich in einem Raum mit mehreren Heizkreisen, bei kleiner Ventilposition unterschiedliche Temperaturen auf der Oberfl%E4che des Fu%DFbodens einstellen.<br/><br/>" +
+      "Der Parameter sollte aktiviert werden, wenn sich in einem Raum mit mehreren Heizkreisen, bei kleiner Ventilposition (< 15%) unterschiedliche Temperaturen auf der Oberfl%E4che des Fu%DFbodens einstellen.<br/><br/>" +
       "Des Weiteren kann der Parameter aktiviert werden, wenn es bei kleinen Ventilpositionen zu Ger%E4uschentwicklungen am Heizkreisverteiler kommt. In diesem Fall ist zus%E4tzlich ein Wert bei " +
       "Parameter 'Ventilpositionen Umschaltwert' auszuw%E4hlen.",
 
@@ -245,6 +245,9 @@ jQuery.extend(true,langJSON, {
       "Dieser Parameter erm%F6glicht es, die Ausg%E4nge zu tauschen. AUF/ZU bzw. HOCH/RUNTER wird dann zu ZU/AUF bzw. RUNTER/HOCH.<br/><br/>" +
       "Dies kann z. B. dazu genutzt werden, um Fehler bei der Installation zu korrigieren.",
 
+    "OUTPUT_SWAP_Servo" :
+      "Dieser Parameter erm%F6glicht es, die Ausg%E4nge zu tauschen.",
+
     "AUTO_HYDRAULIC_ADJUSTMENT" : "%DCber die Ventile wird ein hydraulischer Abgleich durchgef%FChrt, d.h. die Durchflussmenge an den Ventilen wird so eingestellt, dass sich alle R%E4ume mit der gleichen Geschwindigkeit erw%E4rmen.",
 
     "CALIBRATION_PPM" :
@@ -260,8 +263,26 @@ jQuery.extend(true,langJSON, {
       "Um <i>Auto Relock</i> zu nutzen, muss au%DFerdem mindestens ein entsprechender Eintrag vom Typ 'Modus f%FCr den T%FCrschlossantrieb' im Wochenprogramm vorgenommen werden.",
     
     "DOOR_LOCK_DIRECTION" : "W%E4hlen Sie aus, auf welcher Seite sich das T%FCrschloss und der T%FCrschlossantrieb befinden, wenn Sie von innen auf die T%FCr schauen.",
+    "DOOR_LOCK_DIRECTION_1" : "W%E4hlen Sie aus, auf welcher Seite sich das T%FCrschloss und der T%FCrschlosssensor befinden, wenn Sie von innen auf die T%FCr schauen.",
     "DOOR_LOCK_TURNS" : "W%E4hlen Sie aus, wieviele Umdrehungen notwendig sind, um die T%FCr vollst%E4ndig zu verriegeln.",
     "DOOR_LOCK_NEUTRAL_POS" : "Geben Sie die Position an, in welcher der Schl%FCssel eingesteckt bzw. herausgezogen werden kann, wenn der Zylinder nicht verriegelt ist.",
+
+    "DEVICE_SENSOR_SENSITIVITY" :
+      "Mit der Sensor-Empfindlichkeit k%F6nnen Sie den Sensors auf die, f%FCr den jeweiligen Einsatzort passende, Empfindlichkeit einstellen.<br/><br/>" +
+      "Abh%E4ngig von Material und Dicke der Sensorfl%E4che muss die Empfindlichkeit entsprechend angepasst werden, um eine eindeutige Bet%E4tigung %FCber die Sensorfl%E4chen zu gew%E4hrleisten.<br/><br/>" +
+      "Der Wert 1 entspricht der geringsten, w%E4hrend der Wert 5 der h%F6chsten Empfindlichkeit entspricht.",
+
+    "PIR_SENSITIVITY" :
+      "Mit diesem Parameter stellt man die Erfassungsdistanz und - empfindlichkeit f%FCr die Bewegungserkennung ein. " +
+      "Dabei enstpricht<br/>" +
+      "<ul>" +
+        "<li><pre>&nbsp;&nbsp;&nbsp;&nbsp;0% = Unempfindlich / Geringe Distanz</pre></li>" +
+        "<li>100% = Hochempfindlich /Hohe Distanz<br/></li>" +
+      "</ul>"+
+      "<b><u>Achtung:</u></b><br/>" +
+      "Unter bestimmten Umgebungsbedingungen kann ein Verstellen, hin zu hohen Empfindlichkeiten, Fehlausl%F6sungen verursachen. " +
+      "Passen Sie somit bei Bedarf diese Einstellung entsprechend an. " +
+      "Es stehen Ihnen zudem der Parameter Empfindlichkeit zur Verf%FCgung um hier eine geeignete Konfiguration vorzunehmen.",
 
     "noMoreHelp" : ""
   },
@@ -343,7 +364,7 @@ jQuery.extend(true,langJSON, {
 
 
     "hintPERMANENT_FULL_RX" :
-      "Please note:<br/>"+
+      "<b><u>Please note:</u></b><br/>"+
       "In battery mode, this device is not permanently listening. In this case, muting of motion detection (receiver channel) " +
       "cannot be used in a connection. In battery mode, this is only possible using the push-buttons of HmIP-SMI55. The same applies to programmes for switching motion detection on or off.",
 
@@ -430,7 +451,7 @@ jQuery.extend(true,langJSON, {
       "The status, i.e. the average value of the input voltage present shortly before transmission, is transmitted at a certain interval. You can influence this parameter using the parameter ‘Cyclical status message' of channel 0. Please read the corresponding help text.<br/><br/>",
 
     "PWM_AT_LOW_VALVE_POSITION" :
-      "The parameter should be activated if different temperatures occur with a small valve position on the surface of the floor in a room with several heating circuits.<br/><br/>" +
+      "The parameter should be activated if different temperatures occur with a small valve position (< 15%) on the surface of the floor in a room with several heating circuits.<br/><br/>" +
       "Furthermore, the parameter can be activated if with small valve positions noise develops at the heating circuit distributor. " +
       "In this case, an additional value must be selected for the 'Valve positions changeover value' parameter." ,
 
@@ -505,6 +526,9 @@ jQuery.extend(true,langJSON, {
       "This parameter can be used to swap the outputs. OPEN/CLOSED or UP/DOWN will then be changed into CLOSED/OPEN or DOWN/UP.<br/><br/>" +
       "It can be used, for example, to correct errors during installation.",
 
+    "OUTPUT_SWAP_Servo" :
+      "en* Dieser Parameter erm%F6glicht es, die Ausg%E4nge zu tauschen.",
+
     "AUTO_HYDRAULIC_ADJUSTMENT" : "A hydraulic balancing is performed via the valves, which means that the flow rate at the valves is adjusted so that all rooms heat up at the same rate.",
 
     "CALIBRATION_PPM" :
@@ -520,8 +544,26 @@ jQuery.extend(true,langJSON, {
       "In order to use <i>Auto Relock</i>, at least one corresponding entry of the type 'Mode for the door lock drive' must also be entered in the week progam.",
 
     "DOOR_LOCK_DIRECTION" : "Select on which side the door lock and the door lock drive are located when you look at the door from the inside.",
+    "DOOR_LOCK_DIRECTION_1" : "Select on which side the door lock and the door lock sensor are located when you look at the door from the inside.",
     "DOOR_LOCK_TURNS" : "W%E4hlen Sie aus, wieviele Umdrehungen notwendig sind, um die T%FCr vollst%E4ndig zu verriegeln.",
     "DOOR_LOCK_NEUTRAL_POS" : "Select the position in which the key can be inserted or removed when the cylinder is not locked.",
+
+    "DEVICE_SENSOR_SENSITIVITY" :
+      "en* Mit der Sensor-Empfindlichkeit k%F6nnen Sie den Sensors auf die, f%FCr den jeweiligen Einsatzort passende, Empfindlichkeit einstellen.<br/><br/>" +
+      "Abh%E4ngig von Material und Dicke der Sensorfl%E4che muss die Empfindlichkeit entsprechend angepasst werden, um eine eindeutige Bet%E4tigung %FCber die Sensorfl%E4chen zu gew%E4hrleisten.<br/><br/>" +
+      "Der Wert 1 entspricht der geringsten, w%E4hrend der Wert 5 der h%F6chsten Empfindlichkeit entspricht.",
+
+    "PIR_SENSITIVITY" :
+      "en* Mit diesem Parameter stellt man die Erfassungsdistanz und - empfindlichkeit f%FCr die Bewegungserkennung ein. " +
+      "Dabei enstpricht<br/>" +
+      "<ul>" +
+      "<li><pre>&nbsp;&nbsp;&nbsp;&nbsp;0% = Unempfindlich / Geringe Distanz</pre></li>" +
+      "<li>100% = Hochempfindlich /Hohe Distanz<br/></li>" +
+      "</ul>"+
+      "<b><u>Achtung:</u></b><br/>" +
+      "Unter bestimmten Umgebungsbedingungen kann ein Verstellen, hin zu hohen Empfindlichkeiten, Fehlausl%F6sungen verursachen. " +
+      "Passen Sie somit bei Bedarf diese Einstellung entsprechend an. " +
+      "Es stehen Ihnen zudem der Parameter Empfindlichkeit zur Verf%FCgung um hier eine geeignete Konfiguration vorzunehmen.",
 
     "noMoreHelp" : ""
     }

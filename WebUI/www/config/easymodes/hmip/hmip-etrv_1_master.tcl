@@ -379,46 +379,48 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_1) "</tr>"
 
     # left
-    incr prn
     set param DECALCIFICATION_WEEKDAY
-    array_clear options
-    set i 0
-    set comment {
-      foreach day {\${optionSat} \${optionSun} \${optionMon} \${optionTue} \${optionWed} \${optionThu} \${optionFri}} {
-        set options($i) $day
-        incr i
+    if { [info exists ps($param)] == 1 } {
+      incr prn
+      array_clear options
+      set i 0
+      set comment {
+        foreach day {\${optionSat} \${optionSun} \${optionMon} \${optionTue} \${optionWed} \${optionThu} \${optionFri}} {
+          set options($i) $day
+          incr i
+        }
       }
+      append HTML_PARAMS(separate_1) "<tr><td>\${stringTableClimateControlRegDecalcDay}</td>"
+      #append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+
+      append HTML_PARAMS(separate_1) "<td>"
+         append HTML_PARAMS(separate_1) "<select id='separate_$CHANNEL\_$prn' class='SUNDAY' name='DECALCIFICATION_WEEKDAY'>"
+          append HTML_PARAMS(separate_1) "<option value='0'>\${optionSun}</option>"
+          append HTML_PARAMS(separate_1) "<option value='1'>\${optionMon}</option>"
+          append HTML_PARAMS(separate_1) "<option value='2'>\${optionTue}</option>"
+          append HTML_PARAMS(separate_1) "<option value='3'>\${optionWed}</option>"
+          append HTML_PARAMS(separate_1) "<option value='4'>\${optionThu}</option>"
+          append HTML_PARAMS(separate_1) "<option value='5'>\${optionFri}</option>"
+          append HTML_PARAMS(separate_1) "<option value='6'>\${optionSat}</option>"
+        append HTML_PARAMS(separate_1) "</select>"
+
+      append HTML_PARAMS(separate_1) "</td>"
+      append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">jQuery('\#separate_$CHANNEL\_$prn\').val($ps($param));</script>"
+
+      # right
+      incr prn
+      set param  DECALCIFICATION_TIME
+      array_clear options
+      for {set i 0} {$i <= 23} {incr i} {
+        set hour $i
+        if {$i < 10} {set hour "0$i"}
+        set options([expr $i * 2]) "$hour:00"
+      }
+      append HTML_PARAMS(separate_1) "<td>\${stringTableClimateControlRegDecalcTime}</td>"
+      append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+
+      append HTML_PARAMS(separate_1) "</tr>"
     }
-    append HTML_PARAMS(separate_1) "<tr><td>\${stringTableClimateControlRegDecalcDay}</td>"
-    #append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
-
-    append HTML_PARAMS(separate_1) "<td>"
-       append HTML_PARAMS(separate_1) "<select id='separate_$CHANNEL\_$prn' class='SUNDAY' name='DECALCIFICATION_WEEKDAY'>"
-        append HTML_PARAMS(separate_1) "<option value='0'>\${optionSun}</option>"
-        append HTML_PARAMS(separate_1) "<option value='1'>\${optionMon}</option>"
-        append HTML_PARAMS(separate_1) "<option value='2'>\${optionTue}</option>"
-        append HTML_PARAMS(separate_1) "<option value='3'>\${optionWed}</option>"
-        append HTML_PARAMS(separate_1) "<option value='4'>\${optionThu}</option>"
-        append HTML_PARAMS(separate_1) "<option value='5'>\${optionFri}</option>"
-        append HTML_PARAMS(separate_1) "<option value='6'>\${optionSat}</option>"
-      append HTML_PARAMS(separate_1) "</select>"
-
-    append HTML_PARAMS(separate_1) "</td>"
-    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">jQuery('\#separate_$CHANNEL\_$prn\').val($ps($param));</script>"
-
-    # right
-    incr prn
-    set param  DECALCIFICATION_TIME
-    array_clear options
-    for {set i 0} {$i <= 23} {incr i} {
-      set hour $i
-      if {$i < 10} {set hour "0$i"}
-      set options([expr $i * 2]) "$hour:00"
-    }
-    append HTML_PARAMS(separate_1) "<td>\${stringTableClimateControlRegDecalcTime}</td>"
-    append HTML_PARAMS(separate_1) "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
-
-    append HTML_PARAMS(separate_1) "</tr>"
 
     append HTML_PARAMS(separate_1) "<tr>"
       array_clear options

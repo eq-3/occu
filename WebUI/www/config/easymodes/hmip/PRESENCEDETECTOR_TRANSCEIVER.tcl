@@ -46,7 +46,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
    set xmlCatchError [catch {set brightness [format "%.0f" [xmlrpc $iface_url($iface) getValue [list string $address] [list string CURRENT_ILLUMINATION]]]}]
 
   set hlpBoxWidth 450
-  set hlpBoxHeight 80
+  set hlpBoxHeight 100
 
 ###
 
@@ -241,11 +241,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
           set options(90) "50%"
           set options(75) "60%"
           set options(60) "70%"
-          set options(45) "80%"
+          set options(48) "80%" ; # Was previously 45. Changed according to B. Schmidt
           set options(25) "90%" ; # 25 is the default
           set options(10) "100%"
 
-          append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]</td>"
+          append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
         append HTML_PARAMS(separate_1) "</tr>"
       }
 

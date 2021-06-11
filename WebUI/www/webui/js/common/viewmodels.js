@@ -149,6 +149,9 @@ function VirtualGroup(id, name, groupTypeLabel, virtualDeviceType)
   selfGroup.configureVirtualDevice = function()
   {
   ShowWaitAnim();
+    DeviceListPage.showConfiguration(false, 'DEVICE', selfGroup.device.id);
+    HideWaitAnim();
+    /*
     jQuery.get( "/config/ic_deviceparameters.cgi?sid="+SessionId+"&iface=VirtualDevices&address="+selfGroup.virtualDeviceSerialNumber+"&redirect_url=GO_BACK",
     function( data ) {
       WebUI.previousPage        = WebUI.currentPage;
@@ -157,6 +160,7 @@ function VirtualGroup(id, name, groupTypeLabel, virtualDeviceType)
       HideWaitAnim();
       jQuery("#content").html(data);
     });
+    */
   };
 
   selfGroup.operateVirtualDevice = function()

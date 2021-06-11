@@ -1,5 +1,6 @@
 [
   {
+    "optionActive" : "Active",
     "optionNotActive" : "Not active",
     "optionUnit100MS" : "100ms",
     "optionUnit200MS" : "200ms",

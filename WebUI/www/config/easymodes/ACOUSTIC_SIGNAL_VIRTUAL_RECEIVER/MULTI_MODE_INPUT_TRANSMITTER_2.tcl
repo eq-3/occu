@@ -306,7 +306,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 # die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('MULTI_MODE_INPUT_TRANSMITTER_2', '$dev_descr_receiver(TYPE)');</script>"
-
   puts "<script type=\"text/javascript\">getLangInfo_Special('HmIP_DEVICES.txt');</script>"
 
   set prn 0

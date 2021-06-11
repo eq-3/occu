@@ -62,9 +62,10 @@
 "helpBtnChannelConfigurationMotionDetectorB" : "eingestellt. Das heisst, erkannte Bewegungen werden alle ",
 "helpBtnChannelConfigurationMotionDetectorC" : "an den Aktor gemeldet. Die Einschaltdauer des Aktors sollte deshalb immer gr%F6sser als ",
 "helpBtnChannelConfigurationMotionDetectorD" : "sein, damit das Profil erwartungsgem%E4%DF arbeitet. ",
-"helpBtnChannelConfigurationMotionDetectorE" : "Ausserdem sollte darauf geachtet werden, dass der Kanalparameter 'Innerhalb des Sendeabstandes erkannte Bewegung senden' aktiviert ist.<br/><br/>",
+"helpBtnChannelConfigurationMotionDetectorE" : "Ausserdem sollte darauf geachtet werden, dass der Kanalparameter 'Innerhalb des Sendeabstandes erkannte Bewegung senden' aktiviert ist.",
+"helpBtnChannelConfigurationMotionDetectorF" : "<span name='extensionMinimal' class='hidden'><br/><br/>Wird der Aktor mittels eines anderen Sensors, oder auch einer Fernbedienung, aktiviert, hat deren Einschaltdauer Priorit%E4t.</span>",
 
-"helpGotoChannelConfiguration" : "Die Einstellungen des Sensors k%F6nnen von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.",
+"helpGotoChannelConfiguration" : "<br/><br/>Die Einstellungen des Sensors k%F6nnen von hier aus aufgerufen werden, indem die Taste 'Sender-Kanaleinstellung Bearbeiten' bet&auml;tigt wird.",
 
 "BLACK" : "Aus",
 "BLUE" : "Blau",

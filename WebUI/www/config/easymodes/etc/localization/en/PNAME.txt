@@ -55,7 +55,7 @@
 "ON_TIME" : "<span class=\"translated\">Switch-on time (duration in status \"on\")</span>",
 "ON_TIME_BASE" : "<span class=\"translated\">Unit switch-on time</span>",
 "ON_TIME_FACTOR" : "<span class=\"translated\">Value switch-on time</span>",
-"ON_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-on time (duration in status \"on\")</span>",
+"ON_TIME_FACTOR_DESCR" : "<span name=\"onTimeFactorDescr\" class=\"translated\">Switch-on time (duration in status \"on\")</span>",
 "ON_TIME_MODE" : "<span class=\"translated\">Type of duration</span>",
 "OPEN_WHEN" : "<span class=\"translated\">Open if</span>",
 "OUTPUT_BEHAVIOUR_color" : "<span class=\"translated\">Color</span>",

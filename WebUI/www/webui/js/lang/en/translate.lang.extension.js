@@ -96,11 +96,14 @@ jQuery.extend(true, langJSON, {
     "dialogSimulateKeyPressError": "Simulation could not be performed.<br/><br/>Please check in your service messages if the device communication is disturbed.",
     "errorMessageUnknownCommand": "Error. Unknown command:",
     "dialogCreateLinkTitle": "Connection and program status",
+
     "dialogCreateLinkErrorContent1": "An error occurred during transmission of data to the device. Please select:",
     "dialogCreateLinkErrorContent2": "\"Check again\", if you would like to finish the transmission to the device. Please make sure that",
     "dialogCreateLinkErrorContent3": "the device is located within the wireless range and active",
     "dialogCreateLinkErrorContent4": "the device is in teach-in mode.",
     "dialogCreateLinkErrorContent5": "\"Ignore\", if the Central Control Unit shall transmit the data to the device at the next opportunity. Until then, the configuration procedure will be displayed as open service message.",
+    "dialogCreateLinkErrorContent6" : "en* <u>Achtung</u><br/> Es besteht auch die M%FCglichkeit, dass die maximale Anzahl der erlaubten Verkn%FCpfungen erreicht wurde.",
+
     "dialogCreateLinkErrorUnknownDevice": "An error occurred during transmission, because the device is unknown.",
     "dialogCreateLinkHintLinkExists": "Attention! The connection already exists and will be overwritten.",
     "dialogCreateLinkMsgLinkExistsA": "You are about to ",
@@ -329,8 +332,7 @@ jQuery.extend(true, langJSON, {
     "dialogScriptExecuterHelloWorld" : "Hello world!",
     "deviceAndChannelParamsBtnOpenParamList" : "Open parameter list",
     "hintLinkExists" : "There is at least one connection. Thus, some functions are disabled.",
-    "genericBtnTxtHelp" : "Help",
-    "genericBtnTxtHelpOff" : "Disable help",
+
     "simulateKeyPressBtnTxt" : "Simulate button press",
     "simulateKeyPressBtnTxtNotPossible" : "Simulation not possible!",
     "lblChannelNotLinkable" : "no connection possible",
@@ -602,7 +604,7 @@ jQuery.extend(true, langJSON, {
     "lblPowerCost" : "Price/kWh",
     "lblCurrency" : "Currency",
     "btnSave" : "Save",
-    "helpPowerCost" : "Here you can set the price per kWh of your electricity provider.",
+
     "stringTableDeviceInBootloader": "The device is in bootloader.",
     "stringTableUpdatePending" : "Firmware update ready for transmission.",
     "stringTableUpdatePendingFalse" : "No Firmware update ready for transmission.",
@@ -700,6 +702,7 @@ jQuery.extend(true, langJSON, {
     "lblSwitchingState" : "Switching state",
     "lblRampTime" : "Ramp time",
     "lblOnTime" : "Switch-on time",
+    "lblMinOnTime" : "Minimum switch-on time",
     "lblOnTimeLimited" : "Switch-on time limited",
     "lblColorValueMin" : "Color value start",
     "lblcolorValueMax" : "Color value end",
@@ -713,26 +716,7 @@ jQuery.extend(true, langJSON, {
     "dialogShowDeviceFirmwareTHCurFw": "Current",
     "dialogShowDeviceFirmwareTHNewFw": "New",
     "dialogShowDeviceFirmwareLinkDownload": "To download area",
-    "diagramHelpCustomModeTitle" : "Description of the values for longer periods",
-    "diagramHelpCustomModeContent" :
-      "<ul>" +
-       "<li class='diagramHelpCustomModeLi1'>Average values" +
-          "<ul>" +
-            "<li>In the view, the average values of subordinated time periods are displayed.</li>" +
-          "</ul>"+
-        "</li>" +
-        "<li class='diagramHelpCustomModeLi1'>Minimum values" +
-           "<ul>" +
-             "<li>In the view, the minimum values of subordinated time periods are displayed.</li>" +
-           "</ul>"+
-         "</li>" +
-        "<li class='diagramHelpCustomModeLi1'>Maximum values" +
-           "<ul>" +
-             "<li>In the view, the maximum values of subordinated time periods are displayed.</li>" +
-           "</ul>"+
-         "</li>" +
-      "</ul>" +
-      "<div>This setting only effects larger time periods (week/month/year).</div>",
+
 
     "lblSettingsDeviceFirmwareMain0" : "Device firmware overview",
     "lblSettingsDeviceFirmwareMain1" : "Perform device firmware update",
@@ -1007,8 +991,7 @@ jQuery.extend(true, langJSON, {
     "btnScanDevices" :  "Search devices",
     "timeoutAddNewDevices" : "Timeout addNewDevices",
     "unknownError" : "Unknown Error",
-    "helpOsramLightify" : "You can create the pairing between the "+HMIdentifier.en.CCUShortName+" and <b>OSRAM Lightify</b> here. Please find further information here:",
-    "helpPhilipsHue" : "You can create the pairing between the "+HMIdentifier.en.CCUShortName+" and <b>Philips Hue</b> here. Please find further information here:",
+
     "msgNoGatewayFound" : "No Gateway found",
 
     "dialogDeleteCertificateTitle" : "Delete certificate",
@@ -1035,7 +1018,6 @@ jQuery.extend(true, langJSON, {
     "btnPresenceDetectionTrue" :                 "Switch off presence detection",
     "btnResetPresence" :                         "Reset status",
     "lblTDRegaVersion" :                         "Logic tier<br/>version",
-    "lblTDReGaVersionHelp" :                     "Here you can define, which logic layer version of the CCU should be used. You can change to <b>Compatibility mode</b> if you have problems with older Homematic scripts.",
 
     "optionReGaNORMAL" :                         "Compatibility mode",
     "optionReGaLEGACY" :                         "Legacy",
@@ -1069,39 +1051,14 @@ jQuery.extend(true, langJSON, {
     "btnMotionDetectionTrue" : " Deactivate motion detection",
     "btnResetMotion" : "Reset status",
     "lblTimeDelay" : "Time delay",
-    "helpPartyModeWithinPrograms" : "If you select the holiday mode, you have to set the following parameters as well:",
-    "dialogSettingsCMHintSoftwareUpdate3a" : "Update any additional modules installed to the latest version before installation of the update!",
+
     "lblToday" : "Today",
     "lblYesterday" : "Yesterday",
     "btnResetSunshineDuration" : "Reset hours of sunshine",
     "btnResetRainCounter" : "Reset rainfall counter",
     "teachInUserMessage" : "For teaching-in, confirm the teach-in button of the gateway.",
 
-    "helpOsramLightifyToolTip" :
-      "<h1>Please note:</h1>" +
-      "<ul>"+
-        "<li>Only one OSRAM gateway may be connected to your network.</li>" +
-        "<li>The gateway should always receive the same IP address from the DHCP server (WLAN router)!</li>" +
-        "<li>To make sure that the OSRAM gateway can be found using the button <b>Start</b>,<br/>" +
-          "it has to be available for the "+HMIdentifier.en.CCUShortName+".</li>" +
-        "<li>If searching was successful, the IP address of the gateway is displayed and all connected<br/>" +
-          "lights and lamps are available as devices in the CCU.</li>" +
-      "</ul>",
 
-    "helpPhilipsHueToolTip" :
-      "<h1>Please note:</h1>" +
-    "<ul>" +
-      "<li>The connection with Philips Hue is in beta status.</li>" +
-      "<li>The gateway is found using an Internet service of Philips (NUPNP).<br/>" +
-            "Therefore, the" +HMIdentifier.en.CCUShortName+" and the Philips Gateway require Internet connection.</li>" +
-      "<li>Only one Philips Gateway may be available in the system.</li>" +
-      "<li>The gateway should always receive the same IP address from the DHCP server (WLAN router)!</li>" +
-      "<li>To make sure that the Philips gateway can be found successfully via the <b>Start</b> button,<br/>" +
-          "it has to be available for the" +HMIdentifier.en.CCUShortName+".</li>" +
-      "<li>After successful search, the IP address of the gateway is displayed and all lights and lamps<br/>" +
-          "connected to the gateway are available as devices within the" +HMIdentifier.en.CCUShortName+".</li>" +
-      "<li>Only the new Philips Hue Bridge (square model) is supported.</li>" +
-      "</ul>",
 
     "lblPassageDetectorNoParams" : "No parameters available.<br/>Please use channel 2 for status display.",
 
@@ -1256,10 +1213,6 @@ jQuery.extend(true, langJSON, {
     "Before you put your CCU into operation, you need to enter a password. " +
       "Be sure to choose a password that you can easily remember and do not share it with anyone else.<br/><br/>",
 
-    "showHelpSecurityHigh" : "<h1><h1>Maximum security level</h1><p><ul><li>Firewall ports: Closed as standard (incoming connections)</li></ul></p>",
-    "showHelpSecurityMid" : "<h1>Standard security level</h1> <p><ul><li>Firewall ports: Closed as standard (incoming connections)</li><li>Authentication for Homematic XML-RPC API and Remote Homematic Script API: Activated</li><li>Remote access to Homematic XML-RPC API: Restricted</li><li>Remote access to Homematic Script API: Restricted</li></ul></p>",
-    "showHelpSecurityLow" : "<h1>Minimum security level</h1> <p><ul><li>Firewall ports: Open as standard</li><li>Authentication for Homematic XML-RPC API and Remote Homematic Script API: Deactivated</li><li>Remote access to Homematic XML-RPC API: Full access</li><li>Remote access to Homematic Script API: Restricted</li></ul></p>",
-    "showHelpSecurityCustom": "<h1>Custom security level</h1> <p>One or more settings deviate from the default settings for the security levels.<br>If &quot;Custom&quot; is retained here, no settings are changed.</p>",
 
     "secLevelHigh" : "Maximum security",
     "secLevelMid" : "Restricted",
@@ -1321,8 +1274,7 @@ jQuery.extend(true, langJSON, {
     "dialogSettingsStorageSettingsLblAlarmLed" : "Alarm messages:",
     "dialogSettingsStorageHintLEDS" : "Switching the Info LED flashing on or off in case of service and alarm messages",
 
-    "HmIPWPSlatPosHelpTitle" : "Information about slats position",
-    "HmIPWPSlatPosHelp" : "Please note that the slats position can be used only for blind actuators and not for shutter actuators.",
+
 
     "dialogSettingsSecurityTDSNMP" : "SNMP",
     "dialogSettingsSecurityLblActivateSNMP" : "SNMP active:",
@@ -1365,21 +1317,10 @@ jQuery.extend(true, langJSON, {
     "lbDisplayBacklight" : "Lighting<br/>Display",
     "lblLightingKeyVisual" : "Lighting<br/>System key",
 
-    "helpAccessPointOffline" :
-    "An internet connection is needed to <u>commission</u> the Homematic IP Wired Access Point.<br/><br/>" +
-    "Following successful commissioning (the system key is lit turquoise) the system can be operated offline. Operation then no longer requires an internet connection.<br/><br/>" +
-    "If you would like to use offline operation and train additional wired devices, use the training dialogue in the field <b>" + langJSON.en.dialogNewDevicesHmIPWithoutInternet + "</b>" +
-    "Enter the KEY and the SGTIN from the device label.",
 
     "drapMaxCurrentBus" : "Maximum current consumption by the bus",
 
-    "drapHelpMaxCurrentBus" :
-      "This value must be configured depending on the power supply unit used. " +
-      "The value depends on the output current of the power supply unit. It is necessary for a correct start of the bus system.",
-
     "drapBusConfig" : "Bus configuration",
-
-    "drapHelpBusConfig" : "Select the bus topology you have installed here.",
 
     "AccessPointConfigurationFinished" : "Settings successfully saved.",
     "dialogMigrationRCV50Title" : langJSON.en.dialogHint,
@@ -1399,28 +1340,7 @@ jQuery.extend(true, langJSON, {
 
     "hintLinkParamOnOffNotActive" : "Note!<br/><br/>The 'ON and OFF time' parameters must not both be set to 'Not active'.",
 
-    "dialogHelpAcousticDisplayReceiverTitle" : "Note on text entry",
-    "dialogHelpAcousticDisplayReceiverContent" :
-      "Depending on the character width (e.g. an 'I' takes up less space than a 'W'), up to 15 characters can be displayed in one line.<br/><br/>" +
-      "To delete a text line, please enter a space.<br/><br/>" +
-      "Since only a limited character set is available, some characters cannot be used and are replaced by other characters.<br/><br/>" +
-      "<table style=\"margin-left:auto; margin-right:auto\">" +
-      "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
-      "<tr><td  style='text-align:center;'><span>[</span></td><td  style='text-align:center;'><span>%C4</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>#</span></td><td  style='text-align:center;'><span>%D6</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>$</span></td><td  style='text-align:center;'><span>%DC</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>{</span></td><td  style='text-align:center;'><span>%E4</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>|</span></td><td  style='text-align:center;'><span>%F6</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>}</span></td><td  style='text-align:center;'><span>%FC</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>_</span></td><td  style='text-align:center;'><span>%DF</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>]</span></td><td  style='text-align:center;'><span>&</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span>'</span></td><td  style='text-align:center;'><span>=</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span> ; </span></td><td  style='text-align:center;'><span>Sanduhr</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span> < </span></td><td  style='text-align:center;'><span>Arrow down</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span> = </span></td><td  style='text-align:center;'><span>Arrow up</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span> > </span></td><td  style='text-align:center;'><span>Arrow up to right</span></td></tr>" +
-      "<tr><td  style='text-align:center;'><span> @ </span></td><td  style='text-align:center;'><span>Arrow down to right</span></td></tr>" +
-       "</table>",
+
 
     "lblVibration" : "Vibration",
     "lblPosition" : "Position",
@@ -1464,9 +1384,7 @@ jQuery.extend(true, langJSON, {
     "hintWeeklyProgramActiveExpertChannel" :
       "The expert mode is not active. However, since at least one expert target channel is activated for at least one switching time, " +
       "the target channels are still displayed in expert mode.",
-    "helpBlindParamLevel2" :
-      "In order for a change in the slat position to take effect at this point, <u>also</u> the shutter height must be defined as the second parameter.<br/><br/>" +
-      "If you only want to change the slat position, use the parameter 'Channel action' and select the value 'Ignore' for the shutter height.",
+
     "alertUsernameForbiddenChars" : "The user name shall not contain a space character.",
     "addFirmwareFailedMinCCUVersion" : "This device-firmware update is not supported by the firmware of your CCU. Please update the CCU firmware first.",
     "lblStopRunningLink" : "Cancel old transmissions<br/>of this buttons",
@@ -1491,9 +1409,7 @@ jQuery.extend(true, langJSON, {
     "rotationDirRightSlow" : "Slow clockwise rotation",
     "rainDetectorSampleInterval" : "Time between the single measurements<br/>(rain detection interval)",
 
-    "helpAlarmSwitchParamDurationValue":
-      "Due to legal regulations, the duration of the alarm is limited to 10 minutes. " +
-      "This means that an entered value greater than 10 minutes or 600 seconds is ignored.",
+
 
     "cpSecurityHttpsRedirectTitle" : "Automatic forwarding to HTTPS",
     "cpSecurityHttpsRedirectLabel" : "Forwarding to HTTPS active:",
@@ -1582,6 +1498,49 @@ jQuery.extend(true, langJSON, {
 
     "lbl24Average" : "24h Average",
 
+    "optionColorOFF" : "Back light off",
+    "optionColorON" : "Permanently on",
+    "blinkSlow" : "Slow flashing",
+    "blinkMiddle" : "Medium flashing",
+    "blinkFast" : "Fast flashing",
+    "blinkFlashSlow" : "Slow lighting",
+    "blinkFlashMiddle" : "Medium lighting",
+    "blinkFlashFast" : "Fast lighting",
+    "blinkBillowSlow" : "Slow pulsing",
+    "blinkBillowMiddle" : "Medium pulsing",
+    "blinkBillowFast" : "Fast pulsing",
+
+    "lblTilt" : "Tilt",
+    "hintSetReadyWeeklyProgram" : "Please press the Finish button to configure the week program and then access the device in the device list.",
+    "lblBehaviour" : "Response",
+
+    "lblCO2Concentration" : "CO2 concentration",
+    "btnDirectFwUpload" : "Load directly to CCU and install",
+    "dialogSettingsCMLblAlternateSoftwareUpdate" : "Alternative procedure:",
+    "indoorAirQualityGood" : "Room air quality: Good",
+    "indoorAirQualityMediocre" : "Room air quality: Fair<br/><br/>The room should be ventilated.",
+    "indoorAirQualityModerate" : "Room air quality: Average<br/><br/>The room should be ventilated as soon as possible.",
+    "indoorAirQualityLow" : "Room air quality: Poor<br/><br/>The room should be ventilated immediately.",
+    "lblCalibrationValue" : "Calibration value",
+    "lblCalibrationInterval" : "Calibration interval",
+    "lblAutoCalibration" : "Automatic calibration",
+    "lblVertical" : "Vertical",
+    "lblHorizontal" : "Horizontal",
+    "permissionTrue" : "Authorisation<br/>granted",
+    "permissionFalse" : "Authorisation<br/>not granted",
+    "permissionUnknown" : "Authorisation<br/>unknown",
+    "lblDoorLock" : "Door lock drive",
+    "optionDoorLockAction" : "Mode for door lock drive",
+    "optionDoorLockUser" : "User authorisation",
+    "lblSelectTargetUser" : "Select<br /> user",
+    "lblOpen" : "Open",
+    "lblLock" : "Lock",
+    "lblUnlock" : "Unlock",
+    "lblTypePointOfTime" : "Type of time point",
+
+    "lblDisplay"  : "Display",
+    "lblSystemKey" : "System button",
+    "lblReadings" : "measured value(s)",
     "theEnd" : ""
   }
 });

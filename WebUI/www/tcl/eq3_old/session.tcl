@@ -677,46 +677,6 @@ proc session_putsessiontimedout {url} {
 	}
 }
 
-proc session_putloginpage {sid {extramsg ""}} {
-
-	global sidname
-
-	html {
-		head {
-    		title "HomeMatic Konfiguration - Anmeldung"
-    		puts "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">"
-  		}
-  		body {
-			if {$extramsg != ""} then { h2 $extramsg }
-    		puts "<div id=\"loginBox\">"
-      		puts "  <form id=\"gwlogin\" method=\"post\" action=\"./verifysid.cgi\">"
-			puts "    <input name=\"$sidname\" type=\"hidden\" value=\"$sid\">"
-        	puts "    <div id=\"loginHeaderBox\">"
-          	puts "      <span id=\"loginHeaderTitle\">HomeMatic Konfiguration - Anmeldung</span>"
-        	puts "    </div>"
-        	puts "    <div id=\"loginUserBox\">"
-          	puts "      <span id=\"loginUserTitle\">Benutzername: </span>"
-          	puts "      <br />"
-          	puts "      <input id=\"loginUserText\" name=\"tbUsername\" type=\"text\" tabindex=\"1\" />"
-        	puts "    </div>"
-        	puts "    <div id=\"loginPassBox\">"
-          	puts "      <span id=\"loginPassTitle\">Passwort: </span>"
-          	puts "      <br />"
-          	puts "      <input id=\"loginPassText\" name=\"tbPassword\" type=\"password\" tabindex=\"2\" />"
-        	puts "    </div>"
-        	puts "    <div id=\"loginSubmitBox\">"
-          	puts "      <input id=\"loginSubmitButton\" name=\"btnSubmitNAME\" type=\"submit\" value=\"Anmelden\" tabindex=\"3\" />"
-        	puts "    </div>"
-      		puts "  </form>"
-    		puts "</div>"
-    		puts "<script language=\"javascript\" type=\"text/javascript\">"
-      		puts "  document.getElementById('loginUserText').focus();"
-      		puts "  document.getElementById('loginUserText').select();"
-    		puts "</script>"
-		}
-	}
-}
-
 #   -2: uid konnte nicht bestimmt werden zur aktuellen Session
 #   -1: upl nicht gefunden
 #>=  0: upl des users
@@ -751,23 +711,16 @@ proc session_requestisvalid {needed_upl} {
 
 	if {$uid == -3} then {
 		#-3: "keine sid in der url"
-	
-		set newsid [session_generatesession]
-
-		if { [string equal $newsid "-1"] } then {
-			
-			session_puttoomuchsessions
-
-		} else {
-		
-			set url [session_geturlnewsid $newsid] 
-
-			session_setredirect_sid $url $newsid
-			write_sessions
-	
-			session_putloginpage $newsid
+		html {
+			head {
+				title "HomeMatic WebUI"
+				puts "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">"
+			}
+			body {
+				h2 "Unauthorized"
+				h2 [url "Back" "javascript:history.back()"]
+			}
 		}
-	
 	} elseif {$uid == -2 || $uid == -1 || $uid == 0} then {
 		#-2: "session ist nicht existent"
 		#-1: "session timed out"

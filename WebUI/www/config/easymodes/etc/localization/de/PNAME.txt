@@ -55,7 +55,7 @@
 "ON_TIME" : "<span class=\"translated\">Verweildauer im Zustand \"ein\"</span>",
 "ON_TIME_BASE": "<span class=\"translated\">Einheit Einschaltdauer</span>",
 "ON_TIME_FACTOR" : "<span class=\"translated\">Wert Einschaltdauer</span>",
-"ON_TIME_FACTOR_DESCR" : "<span class=\"translated\">Einschaltdauer</span>",
+"ON_TIME_FACTOR_DESCR" : "<span name=\"onTimeFactorDescr\" class=\"translated\">Einschaltdauer</span>",
 "ON_TIME_MODE" : "<span class=\"translated\">Art der Verweildauer</span>",
 "OPEN_WHEN" : "<span class=\"translated\">&Ouml;ffnen bei&nbsp;</span>",
 "OUTPUT_BEHAVIOUR_color" : "<span class=\"translated\">Farbe</span>",

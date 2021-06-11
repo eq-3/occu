@@ -157,9 +157,9 @@ proc cmd_addLink {} {
 
   #puts "<script type=\"text/javascript\">if (ProgressBar) ProgressBar.IncCounter(\"Verknuepfung wurde angelegt.\");</script>"
   puts "<script type=\"text/javascript\">if (ProgressBar) ProgressBar.IncCounter(translateKey(\"dialogCreateLinkSuccessProgressBar\"));</script>"
-  cmd_ShowConfigPendingMsg
+  cmd_ShowConfigPendingMsg "ADD_LINK"
 }
-proc cmd_ShowConfigPendingMsg {} {
+proc cmd_ShowConfigPendingMsg {{extraParam ""}} {
 
   global iface_url sid sidname dev_descr_sender  
   
@@ -252,7 +252,7 @@ proc cmd_ShowConfigPendingMsg {} {
     puts "try \{"
     puts "  ConfigPendingFrm.ResetTable();"
     puts "\} catch (e) \{"
-    puts "  ConfigPendingFrm = new ConfigPendingMsgBox(800, 600);"
+    puts "  ConfigPendingFrm = new ConfigPendingMsgBox(800, 600, '$extraParam');"
     puts "\}"
 
     if { $sender_has_configpending == 1 } then {

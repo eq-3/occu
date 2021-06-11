@@ -267,8 +267,8 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
     set help 'help_active_GE_LO'
   }
 
-  set brightnessHas2beConverted 0
-  set paramType BRIGHTNESS
+  set brightnessHas2beConverted 1
+  set paramType CURRENT_ILLUMINATION
   set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string $paramType]]}]
 
   if {$xmlCatch != 0} {
@@ -277,17 +277,17 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
     if {$xmlCatch == 0} {
       set brightnessHas2beConverted 1
     } else {
-      set paramType CURRENT_ILLUMINATION
+      set paramType BRIGHTNESS
       set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string $paramType]]}]
       if {$xmlCatch == 0} {
-        set brightnessHas2beConverted 1
+        set brightnessHas2beConverted 0
       }
     }
   }
 
-  puts "<script type=\"text/javascript\">"
-    puts "MD_catchBrightness('$url', '$sender_address', '$receiver_address','$brightness', '$brightnessHas2beConverted', '$paramType', 'false', '$id','','')"
-  puts "</script>"
+  #puts "<script type=\"text/javascript\">"
+    #puts "MD_catchBrightness('$url', '$sender_address', '$receiver_address','$brightness', '$brightnessHas2beConverted', '$paramType', 'false', '$id','','')"
+  #puts "</script>"
 
   append HTML_PARAMS(separate_$profile) "<table id=\"bright\_$profile\" class=\"ProfileTbl\" style=\"visibility:hidden\">"
   append HTML_PARAMS(separate_$profile) "<tr><td></td></tr><tr><td id=\"param\_$profile\_a\"><textarea id=\"profile\_$profile\_a\" style=\"display:none\">\${BRIGHTNESS_CONTROL}</textarea></td>"
@@ -325,7 +325,7 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
 
   append HTML_PARAMS(separate_$profile) "<tr><td>"
   # Falls noch kein aktueller Helligkeitswert zur VerfÃ¼gung steht, soll  folgendes nicht sichtbar sein
-  append HTML_PARAMS(separate_$profile) "<div id=\"brightDescr\_$profile\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$profile) "<div id=\"brightDescr\_$profile\" style=\"_display:none\">"
   append HTML_PARAMS(separate_$profile) "<div id=\"div_bright\_$profile\"><textarea id=\"text_bright\_$profile\" style=\"display:none\">"
   append HTML_PARAMS(separate_$profile) "\${GET_CURRENT_BRIGHTNESS}"
   append HTML_PARAMS(separate_$profile) "</textarea></div></td>"
@@ -335,7 +335,7 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
 
   append HTML_PARAMS(separate_$profile) "<td><input type=\"hidden\" id=\"$id\_tmp\" size=\"3\" name=\"$param\_tmp\" value=\"$vdescr($param)\"> "
   # Falls noch kein aktueller Helligkeitswert zur VerfÃ¼gung steht, soll  folgendes nicht sichtbar sein
-  append HTML_PARAMS(separate_$profile) "<div id=\"okButton_$profile\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$profile) "<div id=\"okButton_$profile\" style=\"_display:none\">"
   append HTML_PARAMS(separate_$profile) "<input id=\"ok_brightness_$profile\" type=\"button\" name=\"catchBrightness\" value=\"OK\" onclick=\"MD_catchBrightness('$url', '$sender_address', '$receiver_address', '$brightness', '$brightnessHas2beConverted', '$paramType', 'true', '$id','setEasymode','');\">"
   # Ende unsichtbar
   append HTML_PARAMS(separate_$profile) "</div>"

@@ -66,7 +66,8 @@ getOnlyExpertChannels = function(channelType, channelNr) {
       channelType == "SWITCH_VIRTUAL_RECEIVER" ||
       channelType == "BLIND_VIRTUAL_RECEIVER" ||
       channelType == "SHUTTER_VIRTUAL_RECEIVER" ||
-      channelType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER"
+      channelType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" ||
+      channelType == "SERVO_VIRTUAL_RECEIVER"
     ) {
       virtChnCounterWP = (virtChnCounterWP >= 3) ? 0 : virtChnCounterWP;
       virtChnCounterWP++;
@@ -124,6 +125,7 @@ HmIPWeeklyProgram.prototype = {
     this.DIMMER_OUTPUT_BEHAVIOUR = "DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE";
     this.SWITCH = "SWITCH_WEEK_PROFILE";
     this.BLIND = "BLIND_WEEK_PROFILE";
+    this.SERVO = "SERVO_WEEK_PROFILE";
 
     this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6"]; //DoorLockDrive....
     this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6"];
@@ -351,15 +353,15 @@ HmIPWeeklyProgram.prototype = {
 
             // RAMPTIME / LEVEL
             programEntry += "<tr id='trLevel_"+number+"'>";
-              if (this.chnType == this.DIMMER) {
+              if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
                 // RAMPTIME
                 programEntry += "<td id='lblWPRamptime_" + number + "'>" + translateKey('lblWPRamptime') + "</td>";
                 programEntry += "<td>" + this._getRampTime(number) + "</td>";
               }
 
               // LEVEL
-              if ((this.chnType == this.DIMMER)) {
-                programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>";
+              if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
+                programEntry += (this.chnType == this.DIMMER) ? "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>" : "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
               } else if (this.chnType == this.SWITCH) {
                 if (! this.isDoorLockDrive) {
                   programEntry += "<td>" + translateKey('lblWPState') + "</td>"; // Is Level, but we call it here state because it's only on/off
@@ -404,7 +406,7 @@ HmIPWeeklyProgram.prototype = {
             programEntry += "</tr>";
 
             // DURATION
-            if (this.chnType == this.DIMMER || ((this.chnType == this.SWITCH) && (! this.isDoorLockDrive))) {
+            if (this.chnType == this.DIMMER || (this.chnType == this.SERVO) || ((this.chnType == this.SWITCH) && (! this.isDoorLockDrive))) {
               programEntry += "<tr id='trDurationMode"+number+"'>";
               programEntry += "<td>" + translateKey('lblWPDuration') + "</td>";
               programEntry += "<td>" + this._getDurationMode(number) + "</td>";
@@ -794,7 +796,9 @@ HmIPWeeklyProgram.prototype = {
       trDurationModeElm = jQuery('#trDurationMode'+elmNr),
       trDurationValueElm = jQuery('#trDurationValue'+elmNr);
 
-      if ((val == "0") || (val == "0.000")) {
+      // For the servo control, the value 0 corresponds to the right position, while 100 corresponds to the left position.
+      // Therefore, for the servo control, we don't hide the ON_TIME element at a value of 0
+      if (((val == "0") || (val == "0.000")) && self.chnType != self.SERVO) {
         trDurationModeElm.hide();
         trDurationValueElm.hide();
       } else {
@@ -803,6 +807,32 @@ HmIPWeeklyProgram.prototype = {
           trDurationValueElm.show();
         }
       }
+    };
+
+    showFreeValue = function(val, nr) {
+      var freeValElm = jQuery("[name='dimFreeValue" + self.chn + "_" + self._addLeadingZero(nr) + "']");
+      if (val == "freeVal" || ((val != 1.005) && (val != 1.010) && (((val * 100) % 5) != 0))) {
+        freeValElm.val(100);
+        if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6"))) {
+          freeValElm.css("display", "block");
+        } else {
+          freeValElm.show();
+        }
+      } else freeValElm.hide();
+    };
+
+    setDimFreeVal = function (val, prn, nr) {
+      var freeOptionElm = document.getElementById("dimOptionFreeValue" + self.chn + "_" + prn), // Don't use jQuery because of the dirty flag
+      freeValElm = jQuery("[name='dimFreeValue" + self.chn + "_" + self._addLeadingZero(nr) + "']");
+
+      val = parseInt(val);
+      val = (isNaN(val) || (val > 100)) ? 100 : val;
+      val = (val < 0) ? 0 : val;
+
+      jQuery(freeValElm[0]).val(val);
+      freeOptionElm.value = (val / 100);
+      freeOptionElm.defaultSelected = false;
+      freeOptionElm.selected = true;
     };
 
     setDoorLockPermissionValues = function (number, value) {
@@ -848,7 +878,7 @@ HmIPWeeklyProgram.prototype = {
 
     this.prn++;
     if (! this.isDoorLockDrive) {
-      result += "<select id='separate_CHANNEL_" + this.chn + "_" + this.prn + "' name='" + paramID + "' onchange='showHideDuration(this.value, " + number + ");'>";
+      result += "<select id='separate_CHANNEL_" + this.chn + "_" + this.prn + "' name='" + paramID + "' onchange='showHideDuration(this.value, " + number + ");showFreeValue(this.value, "+number+");'>";
     } else {
       if (this.DoorLockWPMode[this.devAddress][number] == this.userDoorLockMode) {
         result += "<select id='doorLockPermissionActionSelector" + this.chn + "_" + number + "' onchange='setDoorLockPermissionValues("+number+", this.value);'>";
@@ -856,16 +886,39 @@ HmIPWeeklyProgram.prototype = {
         result += "<select id='doorLockPermissionActionSelector" + this.chn + "_" + number + "' onchange='setDoorLockActionValues("+number+", this.value);'>";
       }
     }
-      if ((this.chnType == this.DIMMER) || (this.chnType == this.BLIND)) {
+      if ((this.chnType == this.DIMMER)  || (this.chnType == this.SERVO) || (this.chnType == this.BLIND)) {
         var loop;
-        if ((this.chnType == this.DIMMER)) {
-          result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
-          for (loop = 5; loop <= 100; loop += 5) {
-            optionVal = (loop / 100).toFixed(3);
-            result += (val == optionVal) ?  "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
+        if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
+          if (this.chnType == this.DIMMER) {
+            result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
+            for (loop = 5; loop <= 100; loop += 5) {
+              optionVal = (loop / 100).toFixed(3);
+              result += (val == optionVal) ? "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
+            }
+            result += (val == 1.005) ? "<option value='1.005' selected='selected'>" + translateKey('optionOldLevel') + "</option>" : "<option value='1.005'>" + translateKey('optionOldLevel') + "</option>";
+            result += (val == 1.01) ? "<option value='1.010' selected='selected'>" + translateKey('optionNoChange') + "</option>" : "<option value='1.010'>" + translateKey('optionNoChange') + "</option>";
+            // SPHM. 786
+            if ((val != 1.005) && (val != 1.010) && (((val * 100) % 5) != 0)) {
+              result += "<option id='dimOptionFreeValue" + this.chn + "_" + this.prn + "' value="+val+" selected='selected'>"+translateKey('optionEnterValue')+"</option>";
+              window.setTimeout(function() {
+                if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6"))) {
+                  jQuery("[name='dimFreeValue" + self.chn + "_" + number + "']").css('display', 'block').val(parseInt(val * 100));
+                } else {
+                  jQuery("[name='dimFreeValue" + self.chn + "_" + number + "']").show().val(parseInt(val * 100));
+                }
+              },100);
+            } else {
+              result += "<option id='dimOptionFreeValue" + this.chn + "_" + this.prn + "' value='freeVal'>"+translateKey('optionEnterValue')+"</option>";
+            }
           }
-          result += (val == 1.005) ? "<option value='1.005' selected='selected'>"+translateKey('optionOldLevel')+"</option>" : "<option value='1.005'>"+translateKey('optionOldLevel')+"</option>";
-          result += (val == 1.01) ? "<option value='1.010' selected='selected'>"+translateKey('optionNoChange')+"</option>" : "<option value='1.010'>"+translateKey('optionNoChange')+"</option>";
+
+          if (this.chnType == this.SERVO) {
+            for (loop = 0; loop <= 100; loop += 5) {
+              optionVal = (loop / 100).toFixed(3);
+              result += (val == optionVal) ? "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
+            }
+          }
+
         } else {
           for (loop = 0; loop <= 100; loop += 5) {
             optionVal = (loop / 100).toFixed(3);
@@ -913,6 +966,11 @@ HmIPWeeklyProgram.prototype = {
       }
 
     result += "</select>";
+
+    if (this.chnType == this.DIMMER) {
+      result += "<input name='dimFreeValue" + this.chn + "_" + number + "' type='text' size='2' class='hidden' onchange='setDimFreeVal(this.value,"+this.prn+","+number+");'> ";
+      result += "<span name='dimFreeValue" + this.chn + "_" + number + "' class='hidden'>% (0 - 100)</span>";
+    }
 
     if (this.isDoorLockDrive) {
       var durationBaseID = number + "_WP_DURATION_BASE",
@@ -1646,7 +1704,6 @@ HmIPWeeklyProgram.prototype = {
       factorMax = "",
       valBaseID,
       valFactorID;
-
     switch (mode) {
       case "duration":
         factorMin = this.psDescr.DURATION_FACTOR_MIN;
@@ -1700,12 +1757,13 @@ HmIPWeeklyProgram.prototype = {
 
     //return 75;
 
-    if (this._isDeviceType("HmIP-MP3P") || (this._isDeviceType("HmIPW-WRC6")) ) {return 69;}
+    if ((this._isDeviceType("HmIP-MP3P")) || (this._isDeviceType("HmIPW-WRC6")) ) {return 69;}
 
     switch (this.chnType) {
       case this.DIMMER:
       case this.SWITCH:
       case this.BLIND:
+      case this.SERVO:
         return 75;
       default: return -1;
     }

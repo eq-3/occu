@@ -122,14 +122,27 @@ proc getMaintenance {chn p descr} {
     }
   }
 
+  set param DEVICE_SENSOR_SENSITIVITY
+  if { [info exists ps($param)] == 1} {
+    incr prn
+    # HmIP-STI = 0 - 4
+    for {set val 0} {$val <= 4} {incr val} {
+           set options($val) "[expr $val + 1]"
+    }
+    append html "<tr>"
+      append html "<td>\${stringTableDeviceSensorSensibility}</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+
   set param DISPLAY_CONTRAST
   if { [info exists ps($param)] == 1  } {
     incr prn
     array_clear options
     if {([string equal $devType "HmIP-eTRV-3"] == 1) || ([string equal $devType "HmIP-eTRV-E"] == 1)} {
-      set optVal 1
+      set optVal 0
       for {set val 1} {$val <= 16} {incr val} {
-          if {$val > 1} {incr optVal 2}
+          if {$val < 7} {incr optVal 5} elseif {$val < 14} {incr optVal 10} else {incr optVal 20}
           set options($optVal) "$val"
       }
     } else {
@@ -183,32 +196,72 @@ proc getMaintenance {chn p descr} {
     array_clear options
     set options(0) "\${operationModeBattery}"
     set options(1) "\${operationModeMains}"
-    append html "<td>\${powerSupply}</td>"
-      if {[string equal $devType "HmIP-SMI55"] == 1} {
-        append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)] [getHelpIcon $param]</td>"
-      } else {
-        append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)]</td>"
-      }
+    append html "<tr>"
+      append html "<td>\${powerSupply}</td>"
+        if {[string equal $devType "HmIP-SMI55"] == 1} {
+          append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=paramPermanentFullRXChanged(this.id\,this.value)] [getHelpIcon $param]</td><td id='placeHolder' style='width:55%'></td>"
+        } else {
+          append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)]</td>"
+        }
+    append html "</tr>"
 
-    if {[string equal $devType "! HmIP-MP3P"] == 1} {
+    if {[string equal $devType "HmIP-SMI55"] == 1} {
       append html "<tr id=\"hint_separate_$CHANNEL\_$prn\">"
-        append html "<td colspan=\"2\">\${hintPERMANENT_FULL_RX}<td>"
+        append html "<td colspan='3'>\${hintPERMANENT_FULL_RX}</td>"
       append html "</tr>"
+    } else {
+      append html "[getHorizontalLine]"
     }
-    append html "[getHorizontalLine]"
 
     append html "<script type='text/javascript'>"
+
+      append html "var setMetaPermanentFullRx = false;"
+
+      append html "paramPermanentFullRXChanged = function(elmID, value) {"
+        append html "showParameterHint(elmID, value);"
+        append html "setMetaPermanentFullRx = true;"
+        append html ""
+      append html "};"
+
       append html " showParameterHint = function(elmID, value) { "
-        append html " var elm = jQuery(\"#hint_\"+elmID); "
+        append html " var elm = jQuery(\"#hint_\"+elmID), "
+        append html " placeHolder = jQuery(\"#placeHolder\"); "
         append html " if (parseInt(value) == 0) { "
           append html " elm.show(); "
+          append html " placeHolder.show(); "
         append html "} else {"
           append html " elm.hide(); "
+          append html " placeHolder.hide(); "
         append html " } "
       append html " }; "
 
-     append html " var elm = jQuery('#separate_$CHANNEL\_$prn');"
-     append html " showParameterHint('separate_$CHANNEL\_$prn', elm.val());"
+      append html " var elm = jQuery('#separate_$CHANNEL\_$prn');"
+      append html " showParameterHint('separate_$CHANNEL\_$prn', elm.val());"
+
+      append html " storeModePermanentFullRx = function() { "
+        append html " if (setMetaPermanentFullRx) { "
+          append html " var elm = jQuery('\[name=\"PERMANENT_FULL_RX\"\]')\[0\],"
+          append html " dev = DeviceList.getDeviceByAddress('$dev_descr(ADDRESS)'); "
+
+          append html " if (typeof elm != 'undefined') \{ "
+            append html " homematic('Interface.setMetadata', {'objectId': dev.id, 'dataId': 'permanentFullRX', 'value': jQuery(elm).val()}); "
+          append html " \} "
+
+        append html " } else { "
+          # Check if the meta data permanentFullRX is available (it's not with new devices)
+          append html " var permanentFullRXAvailable = homematic('Interface.getMetadata', {'objectId': 12604, 'dataId': 'permanentFullRX'});"
+          append html " if (permanentFullRXAvailable != 0 && permanentFullRXAvailable != 1) { "
+            # Setting the meta data to the default value which is 0
+            append html " homematic('Interface.setMetadata', {'objectId': dev.id, 'dataId': 'permanentFullRX', 'value': 0}); "
+          append html " } "
+        append html " } "
+      append html " }; "
+
+      # Extend the footer buttons
+      append html " window.setTimeout(function() { "
+       append html " var elm = jQuery('#footerButtonOK, #footerButtonTake'); "
+       append html " elm.off('click').click(function() {storeModePermanentFullRx();}); "
+      append html " },1200); "
 
     append html "</script>"
   }
@@ -261,6 +314,19 @@ proc getKeyTransceiver {chn p descr} {
   set html ""
   set specialParam 0
   set prn 1
+
+
+  set param CHANNEL_OPERATION_MODE
+  if { [info exists ps($param)] == 1 } {
+    append html "<tr>"
+      append html "<td>\${lblChannelActivInactiv}</td>"
+      array_clear options
+      set options(0) "\${optionInactiv}"
+      set options(1) "\${optionActiv}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+    incr prn
+  }
 
 set comment {
   # Intruduced with the DBB but currently not supported
@@ -344,24 +410,48 @@ set comment {
 
   set param REPEATED_LONG_PRESS_TIMEOUT_UNIT
   if { [info exists ps($param)] == 1  } {
-    append html "<tr>"
-    append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
-    append html [getComboBox $chn $prn "$specialID" "timeOnOffShort"]
-    append html "</tr>"
+    if {[string equal $dev_descr(TYPE) "HmIP-STI"] == 0} {
+      append html "<tr>"
+      append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
+      append html [getComboBox $chn $prn "$specialID" "timeOnOffShort"]
+      append html "</tr>"
 
-    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+      append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
 
-    incr prn
-    set param REPEATED_LONG_PRESS_TIMEOUT_VALUE
-    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableKeyLongPressTimeOutValue}</td>"
+      incr prn
+      set param REPEATED_LONG_PRESS_TIMEOUT_VALUE
+      append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+      append html "<td>\${stringTableKeyLongPressTimeOutValue}</td>"
 
-    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
-    append html "</tr>"
-    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      append html "</tr>"
+      append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    } else {
+      append html "<tr>"
+        append html "<td>\${stringTableKeyLongPressTimeOut}</td>"
+        set param REPEATED_LONG_PRESS_TIMEOUT_VALUE
+        # append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+        append html "<td>"
+          append html "<input id='$param\_$chn\_$prn' type='text' size='5' value=[expr [format {%1.1f} $ps($param)] / 10] onblur=\"ProofAndSetValue(this.id, this.id, '0.0', '6.0', 1); setVal(this.value, $chn, $prn);\">&nbsp[getUnit $param]"
+          append html "<input id='separate_CHANNEL_$chn\_$prn' name='$param' type='text' class='hidden'>"
+        append html "</td>"
+      append html "</tr>"
+
+      append html "<script type=\"text/javascript\">"
+        append html "var chn=$chn,prn=$prn;"
+       append html "setVal = function (val, chn, prn) \{"
+         append html "jQuery('#\separate_CHANNEL_'+chn+'_'+prn).val(parseInt(val * 10));"
+       append html "\};"
+
+       append html "setTimeout(function() {setVal(jQuery('#'+'$param\_$chn\_$prn').val(), chn, prn);},50);"
+
+      append html "</script>"
+    }
   }
+
   # append html "[getAlarmPanel ps]"
 
 
@@ -387,7 +477,6 @@ set comment {
       append html "addAbortEventSendingChannels('$chn','$prn', '$dev_descr(ADDRESS)', $ps($param));"
     append html "</script>"
   }
-
   return $html
 }
 
@@ -433,7 +522,7 @@ proc getGenericInputTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param DBL_PRESS_TIME
@@ -571,7 +660,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
 # ** KEY **
@@ -841,7 +930,7 @@ proc getSwitchTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -863,7 +952,7 @@ proc getSwitchTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param LED_DISABLE_CHANNELSTATE
@@ -955,7 +1044,7 @@ proc getBlindTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -977,7 +1066,7 @@ proc getBlindTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param CHANGE_OVER_DELAY
@@ -1239,7 +1328,7 @@ proc getShutterTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -1261,7 +1350,7 @@ proc getShutterTransmitter {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param CHANGE_OVER_DELAY
@@ -1492,7 +1581,7 @@ proc getDimmerTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -1511,7 +1600,7 @@ proc getDimmerTransmitter {chn p descr} {
     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param FUSE_DELAY
@@ -1564,7 +1653,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -1586,7 +1675,7 @@ proc getAlarmSwitchVirtualReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   return $html
@@ -2326,7 +2415,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -2348,7 +2437,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param TX_MINDELAY_UNIT
@@ -2370,7 +2459,7 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
   append html [getHorizontalLine]
 
@@ -2626,7 +2715,7 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   append html "</tr>"
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
   incr prn
   append html "<tr>"
@@ -2646,7 +2735,7 @@ proc getCondSwitchTransmitter {chn p descr} {
 
   append html "</tr>"
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   
   return $html
 }
@@ -2697,7 +2786,7 @@ proc getAccelerationTransceiver {chn p descr address} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param CHANNEL_OPERATION_MODE
@@ -2923,77 +3012,110 @@ proc getClimateControlFloorDirectTransmitter {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  set CHANNEL $special_input_id
+
   set html ""
+  set prn 0
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-FAL_MIOB.js');</script>"
 
   set param COOLING_DISABLE
-  append html "<tr>"
-    append html "<td>\${stringTableCoolingDisable}</td>"
-    option OPTION_DISABLE_ENABLE
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableCoolingDisable}</td>"
+      option OPTION_DISABLE_ENABLE
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param HEATING_DISABLE
-  append html "<tr>"
-    append html "<td>\${stringTableHeatingDisable}</td>"
-    option OPTION_DISABLE_ENABLE
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableHeatingDisable}</td>"
+      option OPTION_DISABLE_ENABLE
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param FLOOR_HEATING_MODE
-  append html "<tr>"
-    append html "<td>\${stringTableFloorHeatingMode}</td>"
-    option FLOOR_HEATING_MODE
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableFloorHeatingMode}</td>"
+      option FLOOR_HEATING_MODE
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param HEATING_MODE_SELECTION
-  append html "<tr>"
-    append html "<td>\${stringTableHeatingModeSelection}</td>"
-    option HEATING_MODE_SELECTION
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableHeatingModeSelection}</td>"
+      option HEATING_MODE_SELECTION
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param FROST_PROTECTION_TEMPERATURE
-  append html "<tr>"
-    append html "<td>\${stringTableFrostProtectionTemperature}</td>"
-    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    set min [expr {[expr [getMinValue $param]]}]
+    set max [expr {[expr [getMaxValue $param]]}]
 
-  incr prn
+    array_clear options
+    set options(1.5) \${optionNotActive}
+    for {set val $min} {$val <= $max} {set val [expr $val + 0.5]} {
+      if {$val != 1.5} {
+        set options($val) "$val"
+      }
+    }
+
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableFrostProtectionTemperature}</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getUnit $param]</td>"
+    append html "</tr>"
+  }
+
   set param HEATING_VALVE_TYPE
-  append html "<tr>"
-    append html "<td>\${stringTableHeatingValveType}</td>"
-    option HEATING_VALVE_TYPE
-    append html  "<td>[getOptionBox $param options $ps($param) $chn $prn]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableHeatingValveType}</td>"
+      option HEATING_VALVE_TYPE
+      append html  "<td>[getOptionBox $param options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param HUMIDITY_LIMIT_DISABLE
-  append html "<tr>"
-    append html "<td>\${stringTableHumidityLimitDisable}</td>"
-    option OPTION_DISABLE_ENABLE
-    append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableHumidityLimitDisable}</td>"
+      option OPTION_DISABLE_ENABLE
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param HUMIDITY_LIMIT_VALUE
-  append html "<tr>"
-    append html "<td>\${stringTableHumidityLimitValue}</td>"
-    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableHumidityLimitValue}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
 
-  incr prn
   set param MINIMAL_FLOOR_TEMPERATURE
-  append html "<tr>"
-    append html "<td>\${stringTableMinimalFloorTemperature}</td>"
-    append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
-  append html "</tr>"
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableMinimalFloorTemperature}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
 
 #######################################################################################
   append html "[getHorizontalLine]"
@@ -3086,7 +3208,7 @@ proc getShutterContact {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_FILTER_NUMBER
@@ -3590,7 +3712,7 @@ proc getWaterDetectionTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_FILTER_NUMBER
@@ -3763,7 +3885,7 @@ proc getDoorReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -3785,7 +3907,7 @@ proc getDoorReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 }
 
@@ -3819,7 +3941,7 @@ proc getSimpleSwitchReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -3841,7 +3963,7 @@ proc getSimpleSwitchReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 }
 
@@ -3875,7 +3997,7 @@ proc getAcousticSignalTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -3897,7 +4019,7 @@ proc getAcousticSignalTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 }
 
@@ -3972,7 +4094,7 @@ proc getRainDetectionTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param SAMPLE_INTERVAL
@@ -4032,7 +4154,7 @@ proc getDoorLockStateTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -4054,7 +4176,7 @@ proc getDoorLockStateTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   append html "[getHorizontalLine]"
@@ -4125,6 +4247,139 @@ proc getDoorLockStateTransmitter {chn p descr} {
   return $html
 }
 
+proc getDoorLockStateTranseiver {chn p descr} {
+
+  global env dev_descr
+  # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar special_input_id special_input_id
+
+  set CHANNEL $special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+  set specialParam 0
+  set prn 0
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  append html "[getHorizontalLine]"
+
+
+  set param DOOR_LOCK_DIRECTION
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableDoorLockDirection}</td>"
+      array_clear options
+      set options(0) "\${lblRight}"
+      set options(1) "\${lblLeft}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_1 320 75]</td>"
+    append html "</tr>"
+  }
+
+  set param DOOR_LOCK_TURNS
+  if { [info exists ps($param)] == 1 } {
+
+    # convert float to int (0.0 = 0)
+    set min [expr {int([expr [getMinValue $param]])}]
+    set max [expr {int([expr [getMaxValue $param]])}]
+
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableDoorLockTurns}</td>"
+      array_clear options
+      for {set val $min} {$val <= $max} {incr val 1} {
+          set options($val) "$val"
+      }
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 75]</td>"
+    append html "</tr>"
+  }
+
+  set param DOOR_LOCK_NEUTRAL_POS
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableDoorLockNeutralPos}</td>"
+      array_clear options
+      set options(0) "\${lblVertical}"
+      set options(1) "\${lblHorizontal}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 75]</td>"
+    append html "</tr>"
+  }
+
+    set param MSG_FOR_POS_A
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+        array_clear options
+        set options(0) "\${stringTableTiltSensorMsgPosA2}"
+        set options(1) "\${stringTableDoorLockStateTransmitterLockStateLocked}"
+        set options(2) "\${stringTableDoorLockStateTransmitterLockStateUnlocked}"
+        append html "<tr><td>\${stringTableDoorLockStateTransceiverMsgPosA}</td><td>"
+        append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
+      append html "</td></tr>"
+    }
+
+    set param MSG_FOR_POS_B
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+        array_clear options
+        set options(0) "\${stringTableTiltSensorMsgPosA2}"
+        set options(1) "\${stringTableDoorLockStateTransmitterLockStateLocked}"
+        set options(2) "\${stringTableDoorLockStateTransmitterLockStateUnlocked}"
+        append html "<tr><td>\${stringTableDoorLockStateTransceiverMsgPosB}</td><td>"
+        append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
+      append html "</td></tr>"
+    }
+
+  return $html
+}
+
 proc getOpticalSignalReceiver {chn p descr} {
   global env dev_descr
   # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
@@ -4158,7 +4413,7 @@ proc getOpticalSignalReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param EVENT_RANDOMTIME_UNIT
@@ -4180,7 +4435,7 @@ proc getOpticalSignalReceiver {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   append html "[getHorizontalLine]"
@@ -4213,7 +4468,7 @@ proc getCarbonDioxideReceiver {chn p descr} {
     append html "<tr>"
       append html "<td>\${lblAutoCalibration}</td>"
       # append html  "<td>[getCheckBox 'autoCalibration' $ps($param) $chn $prn onchange=setCO2AutoCalibration(this);]</td>"
-      append html  "<td><input type='checkbox' id='autoCal' onchange=setCO2AutoCalibration();></td>"
+      append html  "<td><input type='checkbox' id='autoCal' onchange=setCO2AutoCalibration();>&nbsp;[getHelpIcon CALIBRATION_PPM]</td>"
     append html "</tr>"
 
 
@@ -4309,6 +4564,160 @@ proc getCarbonDioxideReceiver {chn p descr} {
   return $html
 }
 
+proc getServoTransmitter {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+  set html ""
+  set prn 0
+
+  set CHANNEL $special_input_id
+
+  set param CHANNEL_OPERATION_MODE
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    array_clear options
+    set options(0) "\${optionInactiv}"
+    set options(1) "\${optionActiv}"
+    append html "<tr><td>\${lblChannelActivInactiv}</td><td>"
+    append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"showDecisionValue(this.value,$chn)\"]
+    append html "</td></tr>"
+  }
+
+  append html "[getHorizontalLine]"
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param FUSE_DELAY
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableDimmerFuseDelay}</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  set param OVERTEMP_LEVEL
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableDimmerOverTempLevel}</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  append html "[getHorizontalLine]"
+
+  set param OUTPUT_SWAP
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    array_clear options
+    set options(0) "\${optionOutputNotSwapped}"
+    set options(1) "\${optionOutputSwapped}"
+    append html "<tr><td>\${lblOutputSwap}</td><td>"
+    append html "[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]&nbsp;[getHelpIcon $param\_Servo]"
+    append html "</td></tr>"
+  }
+
+  set param POWER_OFFDELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableServoPowerOff}</td>"
+    append html "[getComboBox $chn $prn "$specialID" "timeOnOff"]"
+    append html "</tr>"
+
+    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param POWER_OFFDELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableOffDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+  return $html
+}
+
+proc getServoVirtualReceiver {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+  set html ""
+  set prn 0
+
+  set CHANNEL $special_input_id
+
+  if {[session_is_expert]} {
+    set param "LOGIC_COMBINATION"
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableLogicCombination}</td>"
+        option LOGIC_COMBINATION
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+      append html "</tr>"
+      append html "[getHorizontalLine]"
+    }
+  }
+
+  set param POWERUP_JUMPTARGET
+  if { [info exists ps($param)] == 1  } {
+    append html [getPowerUpSelector $chn ps $special_input_id]
+  }
+
+  return $html
+}
 
 proc getNoParametersToSet {} {
   set html "<tr><td name=\"noParamElm\" class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"

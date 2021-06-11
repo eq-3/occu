@@ -1160,7 +1160,7 @@ jQuery.extend(true,langJSON, {
     "stringTableAcousticSignalVirtualReceiverTitle" : "MP3-Player",
     "stringTableOptimumStartStop" : "Optimum Start/Stopp",
     "stringTableDisplayContrast" : "Displaykontrast",
-     "stringTableErrorRestartNeeded" : "Es ist ein Neutstart des Ger%E4tes n%F6tig.",
+    "stringTableErrorRestartNeeded" : "Es ist ein Neutstart des Ger%E4tes n%F6tig.",
     "stringTableErrorBadRechargeableBatteryHealthFalse" : "Akkuzustand: OK",
     "stringTableErrorBadRechargeableBatteryHealthTrue" : "Akkuzustand: nicht OK",
     "stringTablePowerUpAction" : "Aktion bei Spannungszufuhr",
@@ -1215,6 +1215,67 @@ jQuery.extend(true,langJSON, {
     "stringTableOldValue" : "Alter Wert",
     "stringTableNoChange" : "Ignorieren",
 
+    "stringTableErrorCommunicationParticulateMatterSensor" : "Fehler Kommunikation Feinstaubsensor",
+    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Kommunikation Feinstaubsensor: OK",
+    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Kommunikation Feinstaubsensor: gest&ouml;rt",
+    "stringTableErrorCommunicationTempAndHumiditySensor" : "Fehler Kommunikation Temp.-Luftfeuchtesensor",
+    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "Kommunikation Temp.-Luftfeuchtesensor: OK",
+    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "Kommunikation Temp.-Luftfeuchtesensor: gest&ouml;rt",
+    "stringTableErrorParticulateMatterMeasurementFalse" : "Messung Feinstaubsensor: OK",
+    "stringTableErrorParticulateMatterMeasurementTrue" : "Messung Feinstaubsensor: gest&ouml;rt",
+    "stringTableErrorTempOrHumidityMeasurementFalse" : "Messung Temp.-Luftfeuchte: OK",
+    "stringTableErrorTempOrHumidityMeasurementTrue" : "Messung Temp.-Luftfeuchte: gest&ouml;rt",
+    "stringTableAutoHydraulicAdjustment" : "Hydraulischer Ventilabgleich",
+    "stringTableColorOldValue" : "Farbwert beibehalten",
+    "stringTableColorNoChange" : "Farbwert ignorieren",
+    "stringTableColorBehaviourOldValue" : "Verhalten beibehalten",
+    "stringTableColorBehaviourDoNotCare" : "Verhalten ignorieren",
+    "stringTableColorBehaviourStatus" : "Status Verhalten",
+    "stringTableRampTimeOff" : "Ausschalt-Rampenzeit",
+    "stringTableCalibrationIntervalUnit" : "Einheit Kalibrierungsintervall",
+    "stringTableCalibrationIntervalValue" : "Wert des Kalibrierungsintervalls",
+    "stringTableConcentrationStatus" : "Status CO2-Konzentration",
+    "stringTableMountingOrientation" : "Displayausrichtung",
+    "stringTableConditionSwitchTransmitterParticulateMatter" : "Feinstaubsensor",
+    "stringTableAutoRelockDelay" : "Wartezeit vor Auto Relock",
+    "stringTableDoorLockDirection" : "Drehrichtung zum Verriegeln",
+    "stringTableDoorLockNeutralPos" : "Neutrale Position",
+    "stringTableDoorLockTurns" : "Anzahl der Umdrehungen zum Verriegeln",
+    "stringTableDoorLockStateTransmitterActivityStateDown" : "T%FCrschloss schlie%DFt",
+    "stringTableDoorLockStateTransmitterActivityStateUnknown" : "T%FCrschloss Aktivit%E4t unbekannt",
+    "stringTableDoorLockStateTransmitterActivityStateUp" : "T%FCrschloss %F6ffnet",
+    "stringTableDoorLockStateTransmitterLockStateLocked" : "T%FCrschloss ist verriegelt",
+    "stringTableDoorLockStateTransmitterLockStateUnlocked" : "T%FCrschloss ist entriegelt",
+    "stringTableDoorLockStateTransmitterLockStateUnknown" : "T%FCrschloss Position unbekannt",
+    "stringTableAccessReceiverStateFalse" : "Benutzer berechtigt: Nein",
+    "stringTableAccessReceiverStateTrue" : "Benutzer berechtigt: Ja",
+    "stringTableAccessReceiverAccessAuthorizationFalse" : " dauerhaft sperren",
+    "stringTableAccessReceiverAccessAuthorizationTrue" : " dauerhaft berechtigen",
+    "stringTableDoorLockStateTransmitterLockTargetLevelLocked" : "T%FCrschloss verriegeln",
+    "stringTableDoorLockStateTransmitterLockTargetLevelUnlocked" : "T%FCrschloss entriegeln",
+    "stringTableDoorLockStateTransmitterLockTargetLevelOpen" : "T%FCrschloss %D6ffnen",
+    "stringTableWPOptionsNop" : "Wochenprogramm ignorieren",
+    "stringTableWPOptionsOff" : "Wochenprogramm aktivieren",
+    "stringTableWPOptionsOn" : "Wochenprogramm deaktivieren",
+    "stringTableAccessReceiverTitle" : "T%FCrschlossantrieb",
+    "stringTableErrorDegradedChamber"  : "Verschmutzte Rauchkammer",
+    "stringTableDoorLockStateTransmitterTitle" : "T%FCrschlosssensor",
     "noMoreKeys" : ""
   }
 });
+
+langJSON.de.stringTableConcentration = langJSON.de.lblCO2Concentration;
+langJSON.de.stringTableOpticalSignalReceiver = langJSON.de.stringTableDimmerTitle;
+langJSON.de.stringTableAbsoluteAngle = langJSON.de.lblTilt;
+langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
+langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
+langJSON.de.stringTableColorBehaviourOn = langJSON.de.optionColorON;
+langJSON.de.stringTableColorBehaviourBlinkingSlow = langJSON.de.blinkSlow;
+langJSON.de.stringTableColorBehaviourBlinkingMiddle = langJSON.de.blinkMiddle;
+langJSON.de.stringTableColorBehaviourBlinkingFast = langJSON.de.blinkFast;
+langJSON.de.stringTableColorBehaviourFlashSlow = langJSON.de.blinkFlashSlow;
+langJSON.de.stringTableColorBehaviourFlashMiddle = langJSON.de.blinkFlashMiddle;
+langJSON.de.stringTableColorBehaviourFlashFast = langJSON.de.blinkFlashFast;
+langJSON.de.stringTableColorBehaviourBillowSlow = langJSON.de.blinkBillowSlow;
+langJSON.de.stringTableColorBehaviourBillowMiddle = langJSON.de.blinkBillowMiddle;
+langJSON.de.stringTableColorBehaviourBillowFast = langJSON.de.blinkBillowFast;

@@ -208,6 +208,7 @@ function ::CreateHeatingControlHmIP() {
   object oTemperature = cObj.DPByControl("HEATING_CONTROL_HMIP.TEMPERATURE");
   object oSetPoint = cObj.DPByControl("HEATING_CONTROL_HMIP.SETPOINT");
   object oWindowState = cObj.DPByControl("HEATING_CONTROL_HMIP.WINDOW_STATE");
+  object oLevel = cObj.DPByControl("HEATING_CONTROL_HMIP.LEVEL");
 
   object oActiveProfile = cObj.DPByControl("HEATING_CONTROL_HMIP.ACTIVE_PROFILE");
   object oHumidity = cObj.DPByControl("HEATING_CONTROL_HMIP.HUMIDITY");
@@ -250,16 +251,29 @@ function ::CreateHeatingControlHmIP() {
 
   WriteLine("</tr>");
 
-    WriteLine("<tr>");
-      WriteLine("<td id='"#chnId#"tdWINDOW_STATE' >");
+  WriteLine("<tr>");
+
+    WriteLine("<td id='"#chnId#"tdWINDOW_STATE' >");
+      WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
+        WriteLine("<tr>");
+          WriteLine("<td  id='"#chnId#"WINDOW_STATE'>${stringTableWindowState}: </td>");
+          WriteLine("<td><span id='"#chnId#"valWINDOW_STATE'></span></td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+
+    if ((oLevel) && (oLevel.State() >= 0)) {
+      var level = oLevel.Value() * 100;
+       WriteLine("<td id='"#chnId#"tdLEVEL' >");
         WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
           WriteLine("<tr>");
-            WriteLine("<td  id='"#chnId#"WINDOW_STATE'>${stringTableWindowState}: </td>");
-            WriteLine("<td><span id='"#chnId#"valWINDOW_STATE'></span></td>");
+            WriteLine("<td  >${diagramValueTypeLEVEL}: </td>");
+            WriteLine("<td><span>"#level.ToString(0)#" %</span></td>");
           WriteLine("</tr>");
         WriteLine("</table>");
       WriteLine("</td>");
-    WriteLine("</tr>");
+    }
+  WriteLine("</tr>");
 
  ! SLIDER
 

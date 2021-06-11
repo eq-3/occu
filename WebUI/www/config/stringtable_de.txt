@@ -643,6 +643,18 @@ DOOR_COMMAND=OPEN	${stringTableDoorCommandOpen}
 DOOR_COMMAND=PARTIAL_OPEN	${stringTableDoorCommandPartialOpen}
 DOOR_COMMAND=STOP	${stringTableDoorCommandStop}
 
+DOOR_LOCK_STATE_TRANSCEIVER	${stringTableDoorLockStateTransmitterTitle}
+DOOR_LOCK_STATE_TRANSCEIVER|LOCK_STATE=LOCKED	${stringTableDoorLockStateTransmitterLockStateLocked}
+DOOR_LOCK_STATE_TRANSCEIVER|LOCK_STATE=UNLOCKED	${stringTableDoorLockStateTransmitterLockStateUnlocked}
+DOOR_LOCK_STATE_TRANSCEIVER|LOCK_STATE=UNKNOWN	${stringTableDoorLockStateTransmitterLockStateUnknown}
+
+DOOR_LOCK_STATE_TRANSCEIVER|MSG_FOR_POS_A=NO_MSG	${stringTableTiltSensorMsgPosA2}
+DOOR_LOCK_STATE_TRANSCEIVER|MSG_FOR_POS_A=LOCKED	${stringTableDoorLockStateTransmitterLockStateLocked}
+DOOR_LOCK_STATE_TRANSCEIVER|MSG_FOR_POS_A=UNLOCKED	${stringTableDoorLockStateTransmitterLockStateUnlocked}
+DOOR_LOCK_STATE_TRANSCEIVER|MSG_FOR_POS_B=NO_MSG	${stringTableTiltSensorMsgPosB2}
+DOOR_LOCK_STATE_TRANSCEIVER|MSG_FOR_POS_B=LOCKED	${stringTableDoorLockStateTransmitterLockStateLocked}
+DOOR_LOCK_STATE_TRANSCEIVER|MSG_FOR_POS_B=UNLOCKED	${stringTableDoorLockStateTransmitterLockStateUnlocked}
+
 DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=LOCKED	${stringTableDoorLockStateTransmitterLockStateLocked}
 DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=UNLOCKED	${stringTableDoorLockStateTransmitterLockStateUnlocked}
 DOOR_LOCK_STATE_TRANSMITTER|LOCK_STATE=UNKNOWN	${stringTableDoorLockStateTransmitterLockStateUnknown}
@@ -1427,6 +1439,14 @@ SENSOR_WINDOW|WINDOW_TYPE=TIPTRONIC_UNKNOWN_WINDOW_TYPE	${stringTableSensorWindo
 SENSOR_WINDOW|WIN_RELEASE=FALSE	${stringTableActorWindowReleaseFalse}
 SENSOR_WINDOW|WIN_RELEASE=TRUE	${stringTableActorWindowReleaseTrue}
 SENSOR|INPUT_LOCKED	${stringTableSensorInputLocked}
+
+SERVO_TRANSMITTER|LEVEL	${stringTableServoLevel}
+SERVO_TRANSMITTER|ACTIVITY_STATE=DOWN	${stringTableServoActivityStateDown}
+SERVO_TRANSMITTER|ACTIVITY_STATE=UNKNOWN	${stringTableServoActivityStateUnknown}
+SERVO_TRANSMITTER|ACTIVITY_STATE=UP	${stringTableServoActivityStateUp}
+
+SERVO_VIRTUAL_RECEIVER|LEVEL	${stringTableServoLevel}
+
 SET_TEMPERATURE	${stringTableClimateControlRTTransceiverSetTemperature}
 SHUTTER_CONTACT	${stringTableShutterContactTitle}
 SHUTTER_CONTACT_HMIP	${stringTableShutterContactTitle}

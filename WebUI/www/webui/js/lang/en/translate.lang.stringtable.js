@@ -1215,6 +1215,68 @@ jQuery.extend(true,langJSON, {
     "stringTableOldValue" : "Old Value",
     "stringTableNoChange" : "Ignore",
 
+    "stringTableErrorCommunicationParticulateMatterSensor" : "Fine dust sensor communication error",
+    "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Fine dust sensor communication: OK",
+    "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Fine dust sensor communication: failed",
+    "stringTableErrorCommunicationTempAndHumiditySensor" : "Temperature/Humidity sensor communication error",
+    "stringTableErrorCommunicationTempAndHumiditySensorFalse" : "Temperature/Humidity sensor communication: OK",
+    "stringTableErrorCommunicationTempAndHumiditySensorTrue" : "Temperature/Humidity sensor communication: failed",
+    "stringTableErrorParticulateMatterMeasurementFalse" : "Fine dust sensor measurement: OK",
+    "stringTableErrorParticulateMatterMeasurementTrue" : "Fine dust sensor measurement: failed",
+    "stringTableErrorTempOrHumidityMeasurementFalse" : "Temperature/Humidity measurement: OK",
+    "stringTableErrorTempOrHumidityMeasurementTrue" : "Temperature/Humidity measurement: failed",
+    "stringTableAutoHydraulicAdjustment" : "Hydraulic valve adjustment",
+    "stringTableColorOldValue" : "Retain colour value",
+    "stringTableColorNoChange" : "Ignore colour value",
+    "stringTableColorBehaviourOldValue" : "Retain response",
+    "stringTableColorBehaviourDoNotCare" : "Ignore response",
+    "stringTableColorBehaviourStatus" : "Status response",
+    "stringTableRampTimeOff" : "Ramp off time",
+    "stringTableCalibrationIntervalUnit" : "Unit calibration interval",
+    "stringTableCalibrationIntervalValue" : "Value calibration interval",
+    "stringTableConcentrationStatus" : "CO2 concentration status",
+    "stringTableMountingOrientation" : "Display orientation",
+    "stringTableConditionSwitchTransmitterParticulateMatter" : "Fine dust sensor",
+    "stringTableAutoRelockDelay" : "Delay time before Auto Relock",
+    "stringTableDoorLockDirection" : "Rotation direction for locking",
+    "stringTableDoorLockNeutralPos" : "Neutral position",
+    "stringTableDoorLockTurns" : "Number of rotations for locking",
+    "stringTableDoorLockStateTransmitterActivityStateDown" : "Door lock is locking",
+    "stringTableDoorLockStateTransmitterActivityStateUnknown" : "Door lock activity unknown",
+    "stringTableDoorLockStateTransmitterActivityStateUp" : "Door lock is opening",
+    "stringTableDoorLockStateTransmitterLockStateLocked" : "Door lock is locked",
+    "stringTableDoorLockStateTransmitterLockStateUnlocked" : "Door lock is unlocked",
+    "stringTableDoorLockStateTransmitterLockStateUnknown" : "Door lock position unknown",
+    "stringTableAccessReceiverStateFalse" : "User authorised: No",
+    "stringTableAccessReceiverStateTrue" : "User authorised: Yes",
+    "stringTableAccessReceiverAccessAuthorizationFalse" : "  permanently block",
+    "stringTableAccessReceiverAccessAuthorizationTrue" : " permanently authorise",
+    "stringTableDoorLockStateTransmitterLockTargetLevelLocked" : "Lock the door lock",
+    "stringTableDoorLockStateTransmitterLockTargetLevelUnlocked" : "Unlock the door lock",
+    "stringTableDoorLockStateTransmitterLockTargetLevelOpen" : "Open the door lock",
+    "stringTableWPOptionsNop" : "Ignore week program",
+    "stringTableWPOptionsOff" : "Activate week program",
+    "stringTableWPOptionsOn" : "Deactivate week program",
+    "stringTableAccessReceiverTitle" : "Door lock drive",
+    "stringTableErrorDegradedChamber"  : "Polluted smoke chamber",
+
+    "stringTableDoorLockStateTransmitterTitle" : "Door Lock Sensor",
+
     "noMoreKeys" : ""
   }
 });
+
+langJSON.en.stringTableConcentration = langJSON.en.lblCO2Concentration;
+langJSON.en.stringTableOpticalSignalReceiver = langJSON.en.stringTableDimmerTitle;
+langJSON.en.stringTableAbsoluteAngle = langJSON.en.lblTilt;
+langJSON.en.stringTableColorBehaviourOff = langJSON.en.optionColorOFF;
+langJSON.en.stringTableColorBehaviourOn = langJSON.en.optionColorON;
+langJSON.en.stringTableColorBehaviourBlinkingSlow = langJSON.en.blinkSlow;
+langJSON.en.stringTableColorBehaviourBlinkingMiddle = langJSON.en.blinkMiddle;
+langJSON.en.stringTableColorBehaviourBlinkingFast = langJSON.en.blinkFast;
+langJSON.en.stringTableColorBehaviourFlashSlow = langJSON.en.blinkFlashSlow;
+langJSON.en.stringTableColorBehaviourFlashMiddle = langJSON.en.blinkFlashMiddle;
+langJSON.en.stringTableColorBehaviourFlashFast = langJSON.en.blinkFlashFast;
+langJSON.en.stringTableColorBehaviourBillowSlow = langJSON.en.blinkBillowSlow;
+langJSON.en.stringTableColorBehaviourBillowMiddle = langJSON.en.blinkBillowMiddle;
+langJSON.en.stringTableColorBehaviourBillowFast = langJSON.en.blinkBillowFast;

@@ -49,7 +49,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set xmlCatchError [catch {set brightness [format "%.0f" [xmlrpc $iface_url($iface) getValue [list string $address] [list string CURRENT_ILLUMINATION]]]}]
 
   set hlpBoxWidth 450
-  set hlpBoxHeight 80
+  set hlpBoxHeight 100
 
 ###
 
@@ -107,9 +107,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr prn; #4
       append HTML_PARAMS(separate_1) "<tr><td>$PROFILE_PNAME(J)</td>"
       if {$dev_descr(LED_DISABLE_CHANNELSTATE) == 1} {
-        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param checked=\"checked\"></td></tr>"
+        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param checked=\"checked\">[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td></tr>"
       } else {
-        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param></td></tr>"
+        append HTML_PARAMS(separate_1) "<td><input type=\"checkbox\" id=\"separate\_${special_input_id}_$prn\" name=$param>[getHelpIcon $param $hlpBoxWidth $hlpBoxHeight]</td></tr>"
       }
     }
 
@@ -163,6 +163,29 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         append HTML_PARAMS(separate_1) [get_ComboBox options $param separate_${special_input_id}_$prn ps $param "onchange=\"showEcoModeElement(this);\""]
       append HTML_PARAMS(separate_1) "</td>"
     append HTML_PARAMS(separate_1) "</tr>"
+
+    set param PIR_SENSITIVITY
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append HTML_PARAMS(separate_1) "[getHorizontalLine]"
+
+      append HTML_PARAMS(separate_1) "<tr>"
+        append HTML_PARAMS(separate_1) "<td>\${stringTableSensorSensivity}</td>"
+        array_clear options
+        set options(150) "10%"
+        set options(135) "20%"
+        set options(120) "30%"
+        set options(105) "40%"
+        set options(90) "50%"
+        set options(75) "60%"
+        set options(60) "70%"
+        set options(48) "80%" ; # 48 is the default
+        set options(25) "90%"
+        set options(10) "100%"
+
+        append HTML_PARAMS(separate_1)  "<td>[get_ComboBox options $param separate_${special_input_id}_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
+      append HTML_PARAMS(separate_1) "</tr>"
+    }
 
     incr prn; #9
     set param COND_TX_THRESHOLD_LO

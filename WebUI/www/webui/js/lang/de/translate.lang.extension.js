@@ -96,11 +96,14 @@ jQuery.extend(true,langJSON, {
     "dialogSimulateKeyPressError" : "Die Simulation konnte leider nicht durchgef%FChrt werden!<br/><br/>Pr%FCfen Sie bitte anhand der Servicemeldungen, ob die Ger%E4tekommunikation eventuell gest%F6rt ist.",
     "errorMessageUnknownCommand" : "Fehler. Unbekannter Befehl:",
     "dialogCreateLinkTitle" : "Verkn%FCpfungs- und Programmstatus",
+
     "dialogCreateLinkErrorContent1" : "Die %DCbertragung der Daten zum Ger%E4t konnte nicht ordnungsgem%E4%DF durchgef%FChrt werden. W%E4hlen Sie:",
     "dialogCreateLinkErrorContent2" : "\"Erneut pr%FCfen\", wenn Sie die %DCbertragung zum Ger%E4t jetzt abschlie%DFen m%F6chten. Sorgen Sie dazu bitte daf%FCr, dass sich",
     "dialogCreateLinkErrorContent3" : "das Ger%E4t innerhalb der Funkreichweite befindet und aktiv ist,",
     "dialogCreateLinkErrorContent4" : "das Ger%E4t im Anlernmodus befindet.",
     "dialogCreateLinkErrorContent5" : "\"Ignorieren\", wenn die Zentrale die %DCbertragung zum Ger%E4t bei n%E4chster Gelegenheit selbstst%E4ndig durchf%FChren soll. Bis dahin ist dieser Konfigurationsvorgang als offene Servicemeldung sichtbar.",
+    "dialogCreateLinkErrorContent6" : "<u>Achtung</u><br/> Es besteht auch die M%FCglichkeit, dass die maximale Anzahl der erlaubten Verkn%FCpfungen erreicht wurde.",
+
     "dialogCreateLinkErrorUnknownDevice" : "%DCbertragung nicht erfolgt, weil das Ger%E4t unbekannt ist.",
     "dialogCreateLinkHintLinkExists" : "Achtung! Die Verkn%FCpfung existiert bereits und wird %FCberschrieben.",
     "dialogCreateLinkMsgLinkExistsA" : "Sie sind dabei ",
@@ -329,8 +332,6 @@ jQuery.extend(true,langJSON, {
     "dialogScriptExecuterHelloWorld" : "Hallo Welt!",
     "deviceAndChannelParamsBtnOpenParamList" : "Parameterliste<br/>%F6ffnen",
     "hintLinkExists" : "Es besteht mindestens eine Verkn%FCpfung. Daher sind einige Funktionen gesperrt.",
-    "genericBtnTxtHelp" : "Hilfe",
-    "genericBtnTxtHelpOff" : "Hilfe aus",
     "simulateKeyPressBtnTxt" : "Simuliere Tastendruck",
     "simulateKeyPressBtnTxtNotPossible" : "Simulation nicht m%F6glich!",
     "lblChannelNotLinkable" : "nicht verkn%FCpfbar",
@@ -602,7 +603,6 @@ jQuery.extend(true,langJSON, {
     "lblPowerCost" : "Preis/kWh",
     "lblCurrency" : "W%E4hrung",
     "btnSave" : "Speichern",
-    "helpPowerCost" : "Hier k%F6nnen Sie den Preis pro kWh Ihres Energieanbieters eintragen.",
     "stringTableDeviceInBootloader": "Das Ger%E4t befindet sich im Bootloader",
     "stringTableUpdatePending" : "Ein Firmware-Update steht zur %DCbertragung an.",
     "stringTableUpdatePendingFalse" : "Es steht kein Firmware-Update zur %DCbertragung an.",
@@ -701,6 +701,7 @@ jQuery.extend(true,langJSON, {
     "lblSwitchingState" : "Schaltzustand",
     "lblRampTime" : "Rampenzeit",
     "lblOnTime" : "Einschaltdauer",
+    "lblMinOnTime" : "Mindest-Einschaltdauer",
     "lblOnTimeLimited" : "Einschaltdauer begrenzt",
     "lblColorValueMin" : "Farbwert Start",
     "lblcolorValueMax" : "Farbwert Ende",
@@ -714,27 +715,6 @@ jQuery.extend(true,langJSON, {
     "dialogShowDeviceFirmwareTHCurFw": "Aktuell",
     "dialogShowDeviceFirmwareTHNewFw": "Neu",
     "dialogShowDeviceFirmwareLinkDownload": "Zum Downloadbereich",
-    "diagramHelpCustomModeTitle" : "Beschreibung der Werte f%FCr gr%F6%DFere Zeitr%E4ume",
-    "diagramHelpCustomModeContent" :
-      "<ul>" +
-       "<li class='diagramHelpCustomModeLi1'>Durchschnittswerte" +
-          "<ul>" +
-            "<li>Bei dieser Ansicht werden die Durchschnittswerte von untergeordneten Zeitr%E4umen dargestellt.</li>" +
-          "</ul>"+
-        "</li>" +
-        "<li class='diagramHelpCustomModeLi1'>Minimalwerte" +
-           "<ul>" +
-             "<li>Bei dieser Ansicht werden immer die minimalen Werte von untergeordneten Zeitr%E4umen dargestellt.</li>" +
-           "</ul>"+
-         "</li>" +
-        "<li class='diagramHelpCustomModeLi1'>Maximalwerte" +
-           "<ul>" +
-             "<li>Bei dieser Ansicht werden immer die maximalen Werte von untergeordneten Zeitr%E4umen dargestellt.</li>" +
-           "</ul>"+
-         "</li>" +
-      "</ul>" +
-      "<div>Diese Einstellung hat nur Auswirkungen auf gro&szlig;e Zeitr%E4ume (Woche/Monat/Jahr)</div>",
-
     "lblSettingsDeviceFirmwareMain0" : "Ger%E4te-Firmware %DCbersicht",
     "lblSettingsDeviceFirmwareMain1" : "Firmware Update durchf%FChren",
     "lblSettingsDeviceFirmware0" : "%DCbersicht installierter Ger%E4te-Firmware-Dateien",
@@ -1008,8 +988,6 @@ jQuery.extend(true,langJSON, {
     "btnScanDevices" :  "Suche Ger%E4te",
     "timeoutAddNewDevices" : "Timeout addNewDevices",
     "unknownError" : "Unbekannter Fehler",
-    "helpOsramLightify" : "Hier stellen Sie die Kopplung zwischen "+HMIdentifier.de.CCUShortName+" und <b>OSRAM-Lightify</b> her. Mehr Informationen finden Sie hier:",
-    "helpPhilipsHue" : "Hier stellen Sie die Kopplung zwischen "+HMIdentifier.de.CCUShortName+" und <b>Philips-Hue</b> her. Mehr Informationen finden Sie hier:",
 
     "msgNoGatewayFound" : "Kein Gateway gefunden",
 
@@ -1037,7 +1015,7 @@ jQuery.extend(true,langJSON, {
     "btnPresenceDetectionTrue" :                 "Pr%E4senzerkennung ausschalten",
     "btnResetPresence" :                         "Reset Status",
     "lblTDRegaVersion" :                         "Logikschicht<br/>Version",
-    "lblTDReGaVersionHelp" :                     "Hier k%F6nnen Sie festlegen, welche Version der Logikschicht in der CCU verwendet werden soll. Wechseln Sie zur Version <b>Kompatibilit%E4tsmodus</b>, wenn Sie Probleme mit %E4lteren Homematic Skripten haben.",
+
 
     "optionReGaNORMAL" :                         "Kompatibilit%E4tsmodus",
     "optionReGaLEGACY" :                         "Legacy",
@@ -1071,38 +1049,13 @@ jQuery.extend(true,langJSON, {
     "btnMotionDetectionTrue" :                 "Bewegungserkennung ausschalten",
     "btnResetMotion" :                         "Reset Status",
     "lblTimeDelay" : "Zeitverz%F6gerung",
-    "helpPartyModeWithinPrograms" : "Wenn Sie den Urlaubsmodus w%E4hlen, m%FCssen Sie zus%E4tzlich folgende Parameter setzen:",
-    "dialogSettingsCMHintSoftwareUpdate3a" : "Bringen Sie eventuell installierte Zusatzmodule vor dem Update auf die aktuelle Version!",
+
     "lblToday" : "Heute",
     "lblYesterday" : "Gestern",
     "btnResetSunshineDuration" : "Reset Sonnenscheindauer",
     "btnResetRainCounter" : "Reset Regenz%E4hler",
 
-    "helpOsramLightifyToolTip" :
-      "<h1>Bitte beachten Sie:</h1>" +
-      "<ul>"+
-        "<li>Es darf nur ein OSRAM-Gateway im Netzwerk vorhanden sein.</li>" +
-        "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
-        "<li>Damit das OSRAM-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
-          "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
-        "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
-          "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
-      "</ul>",
 
-    "helpPhilipsHueToolTip" :
-      "<h1>Bitte beachten Sie:</h1>" +
-      "<ul>"+
-        "<li>Die Philips Hue Kopplung hat Beta-Status.</li>" +
-        "<li>Das Gateway wird unter Zuhilfenahme eines Internetdienstens von Philips gefunden (NUPNP).<br/>" +
-           "Die "+HMIdentifier.de.CCUShortName+" und das Philips-Gateway ben%F6tigen daher Zugang zum Internet.</li>" +
-        "<li>Es darf nur ein Philips-Gateway im Netzwerk vorhanden sein.</li>" +
-        "<li>Das Gateway sollte vom DHCP-Server (WLAN-Router) immer die gleiche IP-Adresse bekommen!</li>" +
-        "<li>Damit das Philips-Gateway durch den Button <b>Start</b> erfolgreich gefunden werden kann,<br/>" +
-          "muss es von der "+HMIdentifier.de.CCUShortName+" erreichbar sein.</li>" +
-        "<li>Nach erfolgreicher Suche wird die IP-Adresse des Gateways angezeigt und alle am Gateway<br/>" +
-          "angelernten Leuchtmittel und Lampen stehen innerhalb der "+HMIdentifier.de.CCUShortName+" als Ger&auml;te zur Verf&uuml;gung.</li>" +
-        "<li>Es wird nur die neue Philips Hue Bridge (quadratisches Modell) unterst&uuml;tzt.</li>" +
-      "</ul>",
 
     "teachInUserMessage" : "Zum Anlernen bet%E4tigen Sie bitte den Anlernknopf des Gateways.",
 
@@ -1262,10 +1215,6 @@ jQuery.extend(true,langJSON, {
       "Bevor Sie Ihre CCU in Betrieb nehmen, vergeben Sie bitte ein Passwort. " +
         "Merken Sie sich das Passwort gut und geben es nicht weiter!<br/><br/>",
 
-    "showHelpSecurityHigh" : "<h1>H%F6chste Sicherheitsstufe</h1> <p><ul><li>Firewall Ports: Standardm%E4%DFig geschlossen (eingehende Verbindungen)</li></ul></p>",
-    "showHelpSecurityMid" : "<h1>Mittlere Sicherheitsstufe</h1> <p><ul><li>Firewall Ports: Standardm%E4%DFig geschlossen (eingehende Verbindungen)</li><li>Authentifizierung f%FCr Homematic XML-RPC API und Remote Homematic Script API: Aktiviert</li><li>Remote Zugriff auf Homematic XML-RPC API: Eingeschr%E4nkt</li><li>Remote Zugriff auf Homematic-Script API: Eingeschr%E4nkt</li></ul></p>",
-    "showHelpSecurityLow" : "<h1>Geringste Sicherheitsstufe</h1> <p><ul><li>Firewall Ports: Standardm%E4%DFig offen</li><li>Authentifizierung f%FCr Homematic XMLRPC-API und Remote Homematic Script API: Deaktiviert</li><li>Remote Zugriff auf Homematic XML-RPC API: Vollzugriff</li><li>Remote Zugriff auf Homematic Script API: Eingeschr%E4nkt</li></ul></p>",
-    "showHelpSecurityCustom": "<h1>Benutzerdefinierte Sicherheitsstufe</h1><p>Eine oder mehrere Einstellungen weichen von denen der Voreinstellungen der Sicherheitsstufen ab.<br>Wird &quot;Benutzerdefiniert&quot; hier beibehalten, werden keine Einstellungen ver%E4ndert.</p>",
 
     "secLevelHigh" : "Maximal gesichert",
     "secLevelMid" : "Restriktiv",
@@ -1327,8 +1276,6 @@ jQuery.extend(true,langJSON, {
     "dialogSettingsStorageSettingsLblAlarmLed" : "Alarmmeldungen:",
     "dialogSettingsStorageHintLEDS" : "Ein- bzw. Ausschalten des Blinkens der Info-LED bei Service- und Alarmmeldungen",
 
-    "HmIPWPSlatPosHelpTitle" : "Hinweis zur Lamellenposition",
-    "HmIPWPSlatPosHelp" : "Bitte beachten Sie, dass die Lamellenposition nur f%FCr Jalousieaktoren und nicht f%FCr Rollladenaktoren genutzt werden kann.",
 
     "dialogSettingsSecurityTDSNMP" : "SNMP",
     "dialogSettingsSecurityLblActivateSNMP" : "SNMP aktiv:",
@@ -1372,21 +1319,7 @@ jQuery.extend(true,langJSON, {
     "lbDisplayBacklight" : "Beleuchtung<br/>Display",
     "lblLightingKeyVisual" : "Beleuchtung<br/>Systemtaste",
 
-    "helpAccessPointOffline" :
-      "F%FCr die <u>Inbetriebnahme</u> des Homematic IP Access Points wird eine Internetverbindung ben%F6tigt.<br/><br/>" +
-      "Nach erfolgreicher Inbetriebnahme (die Systemtaste leuchtet t%FCrkis), kann der Offlinebetrieb genutzt werden. " +
-      "F%FCr den weiteren Betrieb wird nun keine Internetverbindung mehr ben%F6tigt.<br/><br/>" +
-      "Wenn Sie den Offlinebetrieb nutzen und weitere Wired Ger%E4te anlernen m%F6chten, verwenden Sie im Anlerndialog das Feld <b>" + langJSON.de.dialogNewDevicesHmIPWithoutInternet +"</b>" +
-      "Geben Sie den KEY und die SGTIN des Ger%E4teaufklebers ein.",
-
     "drapMaxCurrentBus" : "Maximale Stromaufnahme<br/>des Bus",
-
-    "drapHelpMaxCurrentBus" :
-      "Dieser Wert muss in Abh%E4ngigkeit des verwendeten Netzteils konfiguriert werden. " +
-      "Der Wert richtet sich nach dem Ausgangsstrom des verwendeten Netzteils. Dies ist f%FCr einen reibungslosen Start des Bussystem erforderlich.",
-
-    "drapBusConfig" : "Buskonfiguration",
-    "drapHelpBusConfig" : "W%E4hlen Sie hier die von Ihnen installierte Bustopologie aus.",
 
     "AccessPointConfigurationFinished" : "Die Einstellungen wurden erfolgreich %FCbernommen.",
     "dialogMigrationRCV50Title" : langJSON.de.dialogHint,
@@ -1406,29 +1339,7 @@ jQuery.extend(true,langJSON, {
 
     "hintLinkParamOnOffNotActive" : "Hinweis!<br/><br/>Die Parameter Ein- und Ausschaltdauer d%FCrfen nicht gemeinsam auf 'Nicht aktiv' gestellt werden.",
 
-    "dialogHelpAcousticDisplayReceiverTitle" : "Hinweis zur Texteingabe",
-    "dialogHelpAcousticDisplayReceiverContent" :
-      "Abh%E4ngig von der Zeichenbreite (ein 'I' nimmt z. B. weniger Platz ein, als ein 'W'), k%F6nnen bis zu 15 Zeichen in einer Zeile dargestellt werden.<br/><br/>" +
-      "Um eine Textzeile zu l%F6schen, geben Sie f%FCr die Zeile bitte ein Leerzeichen ein.<br/><br/>" +
-      "Da nur ein eingeschr%E4nkter Zeichensatz zur Verf%FCgung steht, k%F6nnen einige Zeichen nicht verwendet werden " +
-      "und werden durch andere Zeichen ausgetauscht.<br/><br/>" +
-        "<table style=\"margin-left:auto; margin-right:auto\">" +
-        "<tr><th align='center'>Zeichen</th><th align='center'>ersetzt durch</th></tr>" +
-        "<tr><td  style='text-align:center;'><span>[</span></td><td  style='text-align:center;'><span>%C4</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>#</span></td><td  style='text-align:center;'><span>%D6</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>$</span></td><td  style='text-align:center;'><span>%DC</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>{</span></td><td  style='text-align:center;'><span>%E4</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>|</span></td><td  style='text-align:center;'><span>%F6</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>}</span></td><td  style='text-align:center;'><span>%FC</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>_</span></td><td  style='text-align:center;'><span>%DF</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>]</span></td><td  style='text-align:center;'><span>&</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span>'</span></td><td  style='text-align:center;'><span>=</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span> ; </span></td><td  style='text-align:center;'><span>Sanduhr</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span> < </span></td><td  style='text-align:center;'><span>Pfeil nach unten</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span> = </span></td><td  style='text-align:center;'><span>Pfeil nach oben</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span> > </span></td><td  style='text-align:center;'><span>Pfeil nach oben rechts</span></td></tr>" +
-        "<tr><td  style='text-align:center;'><span> @ </span></td><td  style='text-align:center;'><span>Pfeil nach unten rechts</span></td></tr>" +
-        "</table>",
+
 
     "lblVibration" : "Ersch%FCtterung",
     "lblPosition" : "Lage",
@@ -1472,9 +1383,7 @@ jQuery.extend(true,langJSON, {
      "hintWeeklyProgramActiveExpertChannel" :
        "Der Expertenmodus ist nicht aktiv. Da jedoch bei mindestens einem Schaltzeitpunkt zumindest ein Experten-Zielkanal aktiviert ist, " +
        "werden die Zielkan%E4le dennoch im Expertenmodus dargestellt.",
-     "helpBlindParamLevel2" :
-       "Damit eine %C4nderung der Lamellenposition an dieser Stelle wirksam wird, muss <u>zus%E4tzlich</u> als zweiter Parameter die Behangh%F6he festgelegt werden.<br/><br/>" +
-       "M%F6chten Sie nur die Lamellenposition %E4ndern, verwenden Sie den Parameter Kanalaktion und w%E4hlen f%FCr die Behangh%F6he den Wert 'Ignorieren'.",
+
      "alertUsernameForbiddenChars" : "Der Benutzername darf kein Leerzeichen enthalten.",
      "addFirmwareFailedMinCCUVersion" : "Dieses Ger%E4te-Firmware Update wird von der Firmware Ihrer CCU nicht unterst%FCtzt. Bitte aktualisieren Sie zun%E4chst Ihre CCU Firmware.",
      "lblStopRunningLink" : "Alte Sendevorg%E4nge<br/>dieser Tasten abbrechen",
@@ -1499,9 +1408,7 @@ jQuery.extend(true,langJSON, {
      "rotationDirRightSlow" : "Langsames Drehen nach rechts",
      "rainDetectorSampleInterval" : "Zeitspanne zwischen den einzelnen Messungen<br/>(Regenerkennungsintervall)",
 
-    "helpAlarmSwitchParamDurationValue":
-      "Aufrund gesetzlicher Vorgaben ist die Zeitdauer des Alarms auf 10 Minuten begrenzt.  " +
-      "Das hei%DFt, eine Eingabe von Werten gr%F6sser 10 Minuten bzw. 600 Sekunden wird ignoriert.",
+
 
     "cpSecurityHttpsRedirectTitle" : "Automatische Umleitung auf HTTPS",
     "cpSecurityHttpsRedirectLabel" : "Umleitung auf HTTPS aktiv:",
@@ -1595,6 +1502,51 @@ jQuery.extend(true,langJSON, {
     "drapRescueUpdateSuccessful" : "Das Zwischenupdate wurde erfolgreich abgeschlossen.</br>Warten Sie, bis die LED des HmIP-DRAP blau blinkt, bzw. t%FCrkis leuchtet. Starten Sie dann das eigentliche Update, indem Sie erneut den &ldquo;Update&rdquo; Button klicken.",
 
     "lbl24Average" : "24h Durchschnitt",
+
+    "optionColorOFF" : "Beleuchtung aus",
+    "optionColorON" : "Dauerhaft ein",
+    "blinkSlow" : "Langsames Blinken",
+    "blinkMiddle" : "Mittleres Blinken",
+    "blinkFast" : "Schnelles Blinken",
+    "blinkFlashSlow" : "Langsames Blitzen",
+    "blinkFlashMiddle" : "Mittleres Blitzen",
+    "blinkFlashFast" : "Schnelles Blitzen",
+    "blinkBillowSlow" : "Langsames Pulsieren",
+    "blinkBillowMiddle" : "Mittleres Pulsieren",
+    "blinkBillowFast" : "Schnelles Pulsieren",
+
+    "lblTilt" : "Neigung",
+    "hintSetReadyWeeklyProgram" : "Zum Konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
+    "lblBehaviour" : "Verhalten",
+
+
+    "lblCO2Concentration" : "CO2-Konzentration",
+    "btnDirectFwUpload" : "Direkt auf CCU laden und installieren",
+    "dialogSettingsCMLblAlternateSoftwareUpdate" : "Alternative Vorgehensweise:",
+    "indoorAirQualityGood" : "Raumluftqualit%E4t: Gut",
+    "indoorAirQualityMediocre" : "Raumluftqualit%E4t: Mittelm%E4%DFig<br/><br/>Der Raum sollte gel%FCftet werden.",
+    "indoorAirQualityModerate" : "Raumluftqualit%E4t: M%E4%DFig<br/><br/>Der Raum sollte dringend gel%FCftet werden.",
+    "indoorAirQualityLow" : "Raumluftqualit%E4t: Niedrig<br/><br/>Der Raum sollte unbedingt gel%FCftet werden.",
+    "lblCalibrationValue" : "Kalibrierwert",
+    "lblCalibrationInterval" : "Kalibrierungsintervall",
+    "lblAutoCalibration" : "Automatische Kalibrierung",
+    "lblVertical" : "Vertikal",
+    "lblHorizontal" : "Horizontal",
+    "permissionTrue" : "Berechtigung<br/>erteilt",
+    "permissionFalse" : "Berechtigung<br/>nicht erteilt",
+    "permissionUnknown" : "Berechtigung<br/>unbekannt",
+    "lblDoorLock" : "T%FCrschlossantrieb",
+    "optionDoorLockAction" : "Modus f%FCr T%FCrschlossantrieb",
+    "optionDoorLockUser" : "Benutzerberechtigung",
+    "lblSelectTargetUser" : "Benutzer<br /> w%E4hlen",
+    "lblOpen" : "%D6ffnen",
+    "lblLock" : "Verriegeln",
+    "lblUnlock" : "Entriegeln",
+    "lblTypePointOfTime" : "Zeitpunkt-Typ",
+
+    "lblDisplay"  : "Display",
+    "lblSystemKey" : "Systemtaste",
+    "lblReadings" : "Messwert(e)",
 
     "theEnd" : ""
   }

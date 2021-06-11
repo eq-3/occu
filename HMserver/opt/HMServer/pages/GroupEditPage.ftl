@@ -292,6 +292,11 @@
         self.configureVirtualDevice = function()
         {
             ShowWaitAnim();
+
+            DeviceListPage.showConfiguration(false, 'DEVICE', selfGroup.device.id);
+            HideWaitAnim();
+
+            /*
             jQuery.get( "/config/ic_deviceparameters.cgi?sid="+SessionId+"&iface=VirtualDevices&address="+self.virtualDeviceSerialNumber()+"&redirect_url=GO_BACK",
                     function( data ) {
                     WebUI.previousPage        = WebUI.currentPage;
@@ -300,6 +305,7 @@
                     HideWaitAnim();
                     jQuery("#content").html(data);
             });
+            */
         };
 
         self.operateVirtualDevice = function()

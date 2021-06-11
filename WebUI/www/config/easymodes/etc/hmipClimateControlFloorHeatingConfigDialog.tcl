@@ -107,11 +107,23 @@ proc getMaintenanceFloorHeating {chn p descr} {
   }
 
   set param FROST_PROTECTION_TEMPERATURE
-  if { [info exists ps($param)] == 1} {
+  if { [info exists ps($param)] == 1 } {
+
+    set min [expr {[expr [getMinValue $param]]}]
+    set max [expr {[expr [getMaxValue $param]]}]
+
+    array_clear options
+    set options(1.5) \${optionNotActive}
+    for {set val $min} {$val <= $max} {set val [expr $val + 0.5]} {
+      if {$val != 1.5} {
+        set options($val) "$val"
+      }
+    }
+
     incr prn
     append html "<tr>"
-      append html "<td>\${lblFrostProtectionTemperature}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>\${stringTableFrostProtectionTemperature}</td>"
+      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getUnit $param]</td>"
     append html "</tr>"
   }
 
@@ -152,7 +164,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTablePWMatLowValvePosition}</td>"
-      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn onchange=setOnMinLevel();]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
   }
 
@@ -164,6 +176,17 @@ proc getMaintenanceFloorHeating {chn p descr} {
       append html "<td>\${stringTableOnMinLevel}</td>"
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
+
+    append html "<script>"
+      append html "setOnMinLevel = function () \{"
+        append html "var pwmAtLowValvePositionElm = jQuery(\"\[name='PWM_AT_LOW_VALVE_POSITION'\]\")\[0\],"
+        append html "onMinLevelElm = jQuery(\"\[name='ON_MIN_LEVEL'\]\")\[0\],"
+        append html "pwmAtLowValvePosition = jQuery(pwmAtLowValvePositionElm).prop('checked');"
+        append html "jQuery(onMinLevelElm).prop('disabled', ! pwmAtLowValvePosition);"
+      append html "\};"
+      append html "setOnMinLevel();"
+    append html "</script>"
+
   }
 
   set param AUTO_HYDRAULIC_ADJUSTMENT

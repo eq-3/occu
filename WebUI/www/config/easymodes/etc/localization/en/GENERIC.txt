@@ -59,9 +59,10 @@
 "helpBtnChannelConfigurationMotionDetectorB" : ".  All movements detected are reported every ",
 "helpBtnChannelConfigurationMotionDetectorC" : "to the actuator. The switch-on duration of the actuator should therefore always be longer than ",
 "helpBtnChannelConfigurationMotionDetectorD" : ", to ensure the correct operation of the profile. ",
-"helpBtnChannelConfigurationMotionDetectorE" : "Also, make sure that the channel parameter 'Send detected motion within transmission interval' is activated.<br/><br/>",
+"helpBtnChannelConfigurationMotionDetectorE" : "Also, make sure that the channel parameter 'Send detected motion within transmission interval' is activated.",
+"helpBtnChannelConfigurationMotionDetectorF" : "<span name='extensionMinimal' class='hidden'>en* <br/><br/>Wird der Aktor mittels eines anderen Sensors, oder auch einer Fernbedienung, aktiviert, hat deren Einschaltdauer Priorit%E4t.</span>",
 
-"helpGotoChannelConfiguration" : "The settings can be adjusted here via the button 'Sender channel settings Edit'",
+"helpGotoChannelConfiguration" : "<br/><br/>The settings can be adjusted here via the button 'Sender channel settings Edit'",
 
 "BLACK" : "Off",
 "BLUE" : "Blue",

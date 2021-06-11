@@ -25,6 +25,7 @@
 
   string hmipwID = "HmIPW-";
   string hmipw_wrc6 = "HmIPW-WRC6";
+  string hmip_smi55 = "HmIP-SMI55";
 
 
 
@@ -275,6 +276,7 @@
                       }
                     }
                   }
+                  Call("/esp/functions.fn::getSpecialTranslationPrgDest()");
                   Write( sValue );
                   Write( '</option>' );
                   if( (oDP.ID() == iDP) && (iV == 0) ) { sSelected = " selected"; } else { sSelected = ""; }
@@ -294,6 +296,7 @@
                       }
                     }
                   }
+                  Call("/esp/functions.fn::getSpecialTranslationPrgDest()");
                   Write( sValue );
                   Write( '</option>' );
                 }
@@ -331,6 +334,7 @@
                         }
                       }
                     }
+                    Call("/esp/functions.fn::getSpecialTranslationPrgDest()");
                     Write( sValue );
                     Write( '</option>' );
                   }
@@ -358,6 +362,14 @@
         }
       }
       Write( '</select> ' );
+
+      ! Help for the channel type MOTIONDETECTOR_TRANSCEIVER, config parameter PERMANENT_FULL_RX (SMI55)
+      if (oCH.Label().Find(hmip_smi55) != -1) {
+        object dev = dom.GetObject(oCH.Device());
+        if (dev.MetaData("permanentFullRX") != 1) {
+          Write( "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp(translateKey('helpPrgPermanentFullRX'), 400, 150)\">" );
+        }
+      }
 
       ! Help for the channel type ACCESS_RECEIVER (DLD)
       if (oCH.HssType().Find(accessReceiver) != -1) {

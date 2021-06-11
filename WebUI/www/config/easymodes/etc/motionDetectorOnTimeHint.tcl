@@ -1,6 +1,6 @@
 #!/bin/tclsh
 
-proc getMotionDetectorOnTimeHint {} {
+proc getMotionDetectorOnTimeHint {{prn 99}} {
 
   global url dev_descr_sender sender_address
 
@@ -23,12 +23,13 @@ proc getMotionDetectorOnTimeHint {} {
 
   set html ""
 
-  append html "<tr><td colspan=\"2\"><hr></td></tr>"
-  append html "<tr>"
+  append html "<tr name=\"hintOnTime_$prn\"><td colspan=\"2\"><hr></td></tr>"
+  append html "<tr name=\"hintOnTime_$prn\">"
     append html "<td colspan=\"2\">"
       append html "<div>"
         if {$senderAvailable} {
           append html "\${helpBtnChannelConfigurationMotionDetectorA} $timeUnits($minInterval) \${helpBtnChannelConfigurationMotionDetectorB} $timeUnits($minInterval) \${helpBtnChannelConfigurationMotionDetectorC} $timeUnits($minInterval) \${helpBtnChannelConfigurationMotionDetectorD} \${helpBtnChannelConfigurationMotionDetectorE}"
+          append html "\${helpBtnChannelConfigurationMotionDetectorF}"
           append html "\${helpGotoChannelConfiguration}"
         } else {
           append html "\${helpBtnChannelConfigurationMotionDetectorGeneric} \${helpBtnChannelConfigurationMotionDetectorE}"
@@ -38,7 +39,7 @@ proc getMotionDetectorOnTimeHint {} {
     append html "</td>"
   append html "</tr>"
 
-  append html "<tr>"
+  append html "<tr name=\"hintOnTime_$prn\">"
     append html "<td>\${SENDER_CHANNEL_SETTINGS}</td>"
     append html "<td><input type=\"button\" value=\${btnEdit} onclick=\"WebUI.enter(DeviceConfigPage, {'iface': 'HmIP-RF','address': '$dev_descr_sender(ADDRESS)', 'redirect_url': 'IC_SETPROFILES'});\" ></td>"
   append html "</tr>"

@@ -64,7 +64,7 @@ proc put_page {} {
       puts "  s += \"<tr>\";"
       puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div class='FooterButton' onclick='CloseDeviceParameters();'>\"+translateKey('footerBtnCancel')+\"</div></td>\";"
       puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div id='footerButtonTake' class='FooterButton' onclick='goBack=true; SaveDeviceParameters();'>\"+translateKey('footerBtnTransfer')+\"</div></td>\";"
-      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div id='footerButtonOK' class='FooterButton' onclick='SaveDeviceParameters();'>\"+translateKey('footerBtnOk')+\"</div></td>\";"
+      puts "  s += \"<td style='text-align:center; vertical-align:middle;'><div id='footerButtonOK' class='FooterButton' onclick='goBack=false; SaveDeviceParameters();'>\"+translateKey('footerBtnOk')+\"</div></td>\";"
       puts "  s += \"</tr>\";"
       puts "  s += \"</table>\";"
       puts "  setFooter(s);"
@@ -585,12 +585,12 @@ proc isExpertChannel {devType chType chNr} {
   set devType [string tolower $devType]
 
   set arChType [list "DIMMER_TRANSMITTER" "SWITCH_TRANSMITTER" "BLIND_TRANSMITTER" "SHUTTER_TRANSMITTER" "ACOUSTIC_SIGNAL_TRANSMITTER"]
-  set arChVirtType [list "DIMMER_VIRTUAL_RECEIVER" "SWITCH_VIRTUAL_RECEIVER" "BLIND_VIRTUAL_RECEIVER" "SHUTTER_VIRTUAL_RECEIVER" "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER"]
+  set arChVirtType [list "DIMMER_VIRTUAL_RECEIVER" "SWITCH_VIRTUAL_RECEIVER" "BLIND_VIRTUAL_RECEIVER" "SHUTTER_VIRTUAL_RECEIVER" "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" "SERVO_VIRTUAL_RECEIVER"]
 
   set result "false"
 
 set comment {
-  This hides the real channel. Not necessary anymofe
+  This hides the real channel. Not necessary anymore
   foreach val $arChType {
     if {$chType == $val} {
       set result "true"

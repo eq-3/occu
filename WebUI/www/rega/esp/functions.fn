@@ -370,6 +370,7 @@ function ::showHideHmIPChannel() {
       && (oDevHssType != "HmIP-DBB")
       && (oDevHssType != "HmIP-RCB1")
       && (oDevHssType != "HmIP-WRCR")
+      && (oDevHssType != "HmIP-STI")
       && (oDevHssType != "HmIPW-WRC2")
       && (oDevHssType != "HmIPW-BRC2")
       && (oDevHssType != "HmIP-RCV-50")
@@ -440,6 +441,7 @@ function ::showHideHmIPChannel() {
         || (chn.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1)
         || (chn.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1)
         || (chn.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1)
+        || (chn.HssType().Find("SERVO_VIRTUAL_RECEIVER") != -1)
         ) {
           if (virtChnCounter >= 3) {virtChnCounter = 0;}
           virtChnCounter = virtChnCounter + 1;
@@ -490,7 +492,6 @@ function ::conditionIsParameterVisible() {
     || (oCC.HssType().Find("SHUTTER_VIRTUAL_RECEIVER") != -1)
     || (oCC.HssType().Find("DOOR_LOCK_STATE_TRANSMITTER") != -1)
     ) {
-
       if ( oDP.HSSID().Find("ACTIVITY_STATE") != -1 ) {
         if ( sVLValue.Find("STABLE") != -1 ) {
           showChannelParam = false;
@@ -502,7 +503,7 @@ function ::conditionIsParameterVisible() {
       return;
     }
 
-    !MP3P
+    !e. g. MP3P
     if (
     (oCC.HssType().Find("ACOUSTIC_SIGNAL_TRANSMITTER") != -1)
     || (oCC.HssType().Find("ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") != -1)
@@ -514,6 +515,17 @@ function ::conditionIsParameterVisible() {
         showChannelParam = false;
       }
     }
+
+    ! e. g. HmIP-WSC
+    if (
+      (oCC.HssType().Find("SERVO_VIRTUAL_RECEIVER") != -1)
+      || (oCC.HssType().Find("SERVO_TRANSMITTER") != -1)
+    ) {
+      if (oDP.HSSID().Find("ACTIVITY_STATE") != -1) {
+        showChannelParam = false;
+      }
+    }
+
 
     !RAIN_DETECTION_TRANSMITTER
     if ((oCC.HssType().Find("RAIN_DETECTION_TRANSMITTER") != -1)) {
@@ -884,5 +896,17 @@ function ::getSpecialTranslationPrgDest() {
     }
   }
 
+  ! SMI55 (SPHM-725)
+  if (oCH.Label().Find("HmIP-SMI55") != -1) {
+    object dev = dom.GetObject(oCH.Device());
+    if (dev.MetaData("permanentFullRX") != 1) {
+      if ((sValue.Find("stringTableMotionDetectorMotionDetectionActiveTrue") != -1 )
+      || (sValue.Find("stringTableMotionDetectorMotionDetectionActiveFalse") != - 1)
+      || (sValue.Find("stringTableResetStatus") != -1)) {
+        sValue = sValue#" ${modeBatNotSupported}";
+      }
+
+    }
+  }
   return;
 }

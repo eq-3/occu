@@ -10,6 +10,7 @@ jQuery.extend(true,langJSON, {
     "lblWPDuration1" : "Dauer",
     "lblWPRamptime" : "Rampenzeit",
     "lblWPBrightness" : "Helligkeit",
+    "lblWPServoPos" : "Servoposition",
     "lblWPState" : "Schaltzustand",
     "lblWPPermission" : "Berechtigung",
     "lblWPAction" : "Aktion",
@@ -74,6 +75,11 @@ jQuery.extend(true,langJSON, {
       "Die Steuerung durch das Wochenprogramm funktioniert nur, wenn der Benutzerkanal im Auto-Modus ist (siehe <i>Status und Bedienung</i>). " +
       "Wenn eine Berechtigung %FCber die Benutzer-Oberfl%E4che oder andere Programme ver%E4ndert wird, schaltet der Benutzerkanal von selbst in den Manu-Modus.",
 
+    "optionDLDAction1" : "Verriegeln + Auto-Relock Ende",
+    "optionDLDAction2" : "Verriegeln + Auto-Relock Beginn",
+    "optionDLDAction3" : "Entriegeln + Auto-Relock Ende",
+    "optionDLDAction4" : "Auto-Relock Ende",
+
     "dummy" : ""
   },
 
@@ -88,6 +94,7 @@ jQuery.extend(true,langJSON, {
     "lblWPDuration1" : "Duration",
     "lblWPRamptime" : "Ramp time",
     "lblWPBrightness" : "Brightness",
+    "lblWPServoPos" : "en* Servoposition",
     "lblWPState" : "Switching status",
     "lblWPPermission" : "Permission",
     "lblWPAction" : "Action",
@@ -150,6 +157,11 @@ jQuery.extend(true,langJSON, {
       "Define whether the selected user channels are to be authorised or not during the specified period.<br/><br/>" +
       "<u><b>Note:</b></u><br/>Control via the week program only works if the user channel is in auto mode (see <i>Status and operation</i>). " +
       "If an authorisation is changed via status and operation or by central control unit programs, the user channel automatically switches to manu mode.",
+
+    "optionDLDAction1" : "Lock + Auto Relock end",
+    "optionDLDAction2" : "Lock + Auto Relock start",
+    "optionDLDAction3" : "Unlock + Auto Relock end",
+    "optionDLDAction4" : "Auto Relock end",
 
     "dummy" : ""
   }

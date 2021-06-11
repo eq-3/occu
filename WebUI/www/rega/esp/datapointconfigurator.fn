@@ -114,6 +114,7 @@ function ::dcCreate()
     var CN_DIGITAL_STATE      = "DIGITAL_STATE.";
     var CN_DIMMER          = "DIMMER.";
     var CN_DIMMER_REAL     = "DIMMER_REAL.";
+    var CN_DOOR_LOCK_STATE_TRANSCEIVER = "DOOR_LOCK_STATE_TRANSCEIVER.";
     var CN_DOOR_LOCK_STATE_TRANSMITTER = "DOOR_LOCK_STATE_TRANSMITTER.";
     var CN_DOOR_OPENER     = "DOOROPENER.";
     var CN_DOOR_RECEIVER     = "DOOR_RECEIVER.";
@@ -143,6 +144,10 @@ function ::dcCreate()
     var CN_RGBW_AUTOMATIC  = "RGBW_AUTOMATIC.";
     var CN_RGBW_COLOR       = "RGBW_COLOR.";
     var CN_RHS             = "RHS.";
+    var CN_SERVO_TRANSMITTER  = "SERVO_TRANSMITTER.";
+
+    var CN_SERVO_VIRTUAL_RECEIVER  = "SERVO_VIRTUAL_RECEIVER.";
+
     var CN_SHUTTER_TRANSMITTER      = "SHUTTER_TRANSMITTER.";
     var CN_SHUTTER_VIRTUAL_RECEIVER = "SHUTTER_VIRTUAL_RECEIVER.";
     var CN_SIMPLE_SWITCH_RECEIVER = "SIMPLE_SWITCH_RECEIVER.";
@@ -494,6 +499,16 @@ function ::dcCreate()
             Call("/esp/controls/dimmer.fn::CreateDimmerRealInfoControl()");
           }
 
+          !# DOOR_LOCK_STATE_TRANSCEIVER
+          bIsControl = ( sControlName.Find(CN_DOOR_LOCK_STATE_TRANSCEIVER) > -1 );
+          if( bIsControl && (sLastControlName != CN_DOOR_LOCK_STATE_TRANSCEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_DOOR_LOCK_STATE_TRANSCEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_DOOR_LOCK_STATE_TRANSCEIVER;
+            Call("/esp/controls/door_opener.fn::CreateDoorLockStateTranseiver()");
+          }
+
           !# DOOR_LOCK_STATE_TRANSMITTER
           bIsControl = ( sControlName.Find(CN_DOOR_LOCK_STATE_TRANSMITTER) > -1 );
           if( bIsControl && (sLastControlName != CN_DOOR_LOCK_STATE_TRANSMITTER) )
@@ -619,17 +634,18 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName!=CN_HMIP_BUTTON) )
           {
             object ch = dom.GetObject(chnId);
-            ! if ((ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") || ((ch.HssType() == "MULTI_MODE_INPUT_TRANSMITTER") && (ch.MetaData("channelMode") != 3))) {
-            if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") {
               WriteLine( "<script>conInfo('Control CN_HMIP_BUTTON found.');</script>" );
               isKnownControl = true;
               sLastControlName = CN_HMIP_BUTTON;
-              if (ch.Label().Substr(5,7) != "MOD-RC8") {
+            if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") {
+               if (ch.Label().Substr(5,7) != "MOD-RC8") {
                 Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
               } else {
                 WriteLine( "<script>conInfo('HmIP-MOD-RC8 found');</script>" );
                 Call("/esp/controls/key_switch_sc.fn::CreateContent()");
               }
+            } else {
+              Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
             }
           }
 
@@ -855,6 +871,26 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_RHS;
             Call("/esp/controls/rhs.fn::CreateWndRotSensor()");
+          }
+
+          !# CN_SERVO_TRANSMITTER (e. g. WSC - Servo Steuerung)
+          bIsControl = ( sControlName.Find(CN_SERVO_TRANSMITTER) > -1 );
+          if( bIsControl && (sLastControlName!=CN_SERVO_TRANSMITTER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_SERVO_TRANSMITTER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_SERVO_TRANSMITTER;
+            Call("/esp/controls/servo.fn::CreateServoTransmitter()");
+          }
+
+          !# CN_SERVO_VIRTUAL_RECEIVER (e. g. WSC - Servo Steuerung)
+          bIsControl = ( sControlName.Find(CN_SERVO_VIRTUAL_RECEIVER) > -1 );
+          if( bIsControl && (sLastControlName!=CN_SERVO_VIRTUAL_RECEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_SERVO_VIRTUAL_RECEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_SERVO_VIRTUAL_RECEIVER;
+            Call("/esp/controls/servo.fn::CreateServoVirtualReceiver()");
           }
 
           !# CN_SHUTTER_TRANSMITTER
