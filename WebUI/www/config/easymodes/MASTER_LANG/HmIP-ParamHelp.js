@@ -246,7 +246,7 @@ jQuery.extend(true,langJSON, {
       "Dies kann z. B. dazu genutzt werden, um Fehler bei der Installation zu korrigieren.",
 
     "OUTPUT_SWAP_Servo" :
-      "Dieser Parameter erm%F6glicht es, die Ausg%E4nge zu tauschen.",
+      "Dieser Parameter erm%F6glicht das Tauschen der Ausg%E4nge.",
 
     "AUTO_HYDRAULIC_ADJUSTMENT" : "%DCber die Ventile wird ein hydraulischer Abgleich durchgef%FChrt, d.h. die Durchflussmenge an den Ventilen wird so eingestellt, dass sich alle R%E4ume mit der gleichen Geschwindigkeit erw%E4rmen.",
 
@@ -268,21 +268,21 @@ jQuery.extend(true,langJSON, {
     "DOOR_LOCK_NEUTRAL_POS" : "Geben Sie die Position an, in welcher der Schl%FCssel eingesteckt bzw. herausgezogen werden kann, wenn der Zylinder nicht verriegelt ist.",
 
     "DEVICE_SENSOR_SENSITIVITY" :
-      "Mit der Sensor-Empfindlichkeit k%F6nnen Sie den Sensors auf die, f%FCr den jeweiligen Einsatzort passende, Empfindlichkeit einstellen.<br/><br/>" +
-      "Abh%E4ngig von Material und Dicke der Sensorfl%E4che muss die Empfindlichkeit entsprechend angepasst werden, um eine eindeutige Bet%E4tigung %FCber die Sensorfl%E4chen zu gew%E4hrleisten.<br/><br/>" +
+      "Mit der Sensor-Empfindlichkeit k%F6nnen Sie den Sensor auf die, f%FCr den jeweiligen Einsatzort passende, Empfindlichkeit einstellen.<br/><br/>" +
+      "Abh%E4ngig von Material und St%E4rke der Sensorfl%E4che, muss die Empfindlichkeit entsprechend angepasst werden, um eine eindeutige Bet%E4tigung %FCber die Sensorfl%E4chen zu gew%E4hrleisten.<br/><br/>" +
       "Der Wert 1 entspricht der geringsten, w%E4hrend der Wert 5 der h%F6chsten Empfindlichkeit entspricht.",
 
     "PIR_SENSITIVITY" :
-      "Mit diesem Parameter stellt man die Erfassungsdistanz und - empfindlichkeit f%FCr die Bewegungserkennung ein. " +
+      "Mit diesem Parameter kann die Erfassungsdistanz und - empfindlichkeit f%FCr die Bewegungserkennung eingestellt werden. " +
       "Dabei enstpricht<br/>" +
       "<ul>" +
-        "<li><pre>&nbsp;&nbsp;&nbsp;&nbsp;0% = Unempfindlich / Geringe Distanz</pre></li>" +
-        "<li>100% = Hochempfindlich /Hohe Distanz<br/></li>" +
+        "<li><pre>&nbsp;&nbsp;&nbsp;&nbsp;0% = Unempfindlich/Geringe Distanz</pre></li>" +
+        "<li>100% = Hochempfindlich/Hohe Distanz<br/></li>" +
       "</ul>"+
       "<b><u>Achtung:</u></b><br/>" +
-      "Unter bestimmten Umgebungsbedingungen kann ein Verstellen, hin zu hohen Empfindlichkeiten, Fehlausl%F6sungen verursachen. " +
-      "Passen Sie somit bei Bedarf diese Einstellung entsprechend an. " +
-      "Es stehen Ihnen zudem der Parameter Empfindlichkeit zur Verf%FCgung um hier eine geeignete Konfiguration vorzunehmen.",
+      "Unter bestimmten Umgebungsbedingungen kann eine hoch eingestellte Empfindlichkeit Fehlausl%F6sungen verursachen. " +
+      "Passen Sie diese Einstellung bei Bedarf entsprechend an. " +
+      "%DCber den Parameter 'Empfindlichkeit' kann eine geeignete Konfiguration vorgenommen werden.",
 
     "noMoreHelp" : ""
   },
@@ -527,7 +527,7 @@ jQuery.extend(true,langJSON, {
       "It can be used, for example, to correct errors during installation.",
 
     "OUTPUT_SWAP_Servo" :
-      "en* Dieser Parameter erm%F6glicht es, die Ausg%E4nge zu tauschen.",
+      "This parameter enables you to exchange the outputs.",
 
     "AUTO_HYDRAULIC_ADJUSTMENT" : "A hydraulic balancing is performed via the valves, which means that the flow rate at the valves is adjusted so that all rooms heat up at the same rate.",
 
@@ -545,25 +545,25 @@ jQuery.extend(true,langJSON, {
 
     "DOOR_LOCK_DIRECTION" : "Select on which side the door lock and the door lock drive are located when you look at the door from the inside.",
     "DOOR_LOCK_DIRECTION_1" : "Select on which side the door lock and the door lock sensor are located when you look at the door from the inside.",
-    "DOOR_LOCK_TURNS" : "W%E4hlen Sie aus, wieviele Umdrehungen notwendig sind, um die T%FCr vollst%E4ndig zu verriegeln.",
+    "DOOR_LOCK_TURNS" : "Please select the number of turns that are necessary in order to completely lock the door.",
     "DOOR_LOCK_NEUTRAL_POS" : "Select the position in which the key can be inserted or removed when the cylinder is not locked.",
 
     "DEVICE_SENSOR_SENSITIVITY" :
-      "en* Mit der Sensor-Empfindlichkeit k%F6nnen Sie den Sensors auf die, f%FCr den jeweiligen Einsatzort passende, Empfindlichkeit einstellen.<br/><br/>" +
-      "Abh%E4ngig von Material und Dicke der Sensorfl%E4che muss die Empfindlichkeit entsprechend angepasst werden, um eine eindeutige Bet%E4tigung %FCber die Sensorfl%E4chen zu gew%E4hrleisten.<br/><br/>" +
-      "Der Wert 1 entspricht der geringsten, w%E4hrend der Wert 5 der h%F6chsten Empfindlichkeit entspricht.",
+      "You can set the correct sensor sensitivity value for the respective installation site using Sensor sensitivity.<br/><br/>" +
+      "The sensitivity must be adjusted accordingly depending on the material and thickness to ensure unique activation via the sensor surfaces.<br/><br/>" +
+      "Value 1 corresponds to the lowest level, while value 5 is the highest sensitivity level.",
 
     "PIR_SENSITIVITY" :
-      "en* Mit diesem Parameter stellt man die Erfassungsdistanz und - empfindlichkeit f%FCr die Bewegungserkennung ein. " +
-      "Dabei enstpricht<br/>" +
+      "The detection distance and sensitivity for motion detection can be set using this parameter. " +
+      "This means<br/>" +
       "<ul>" +
-      "<li><pre>&nbsp;&nbsp;&nbsp;&nbsp;0% = Unempfindlich / Geringe Distanz</pre></li>" +
-      "<li>100% = Hochempfindlich /Hohe Distanz<br/></li>" +
+      "<li><pre>&nbsp;&nbsp;&nbsp;&nbsp;0% = insensitive/short distance</pre></li>" +
+      "<li>100% = high sensitivity/long distance<br/></li>" +
       "</ul>"+
-      "<b><u>Achtung:</u></b><br/>" +
-      "Unter bestimmten Umgebungsbedingungen kann ein Verstellen, hin zu hohen Empfindlichkeiten, Fehlausl%F6sungen verursachen. " +
-      "Passen Sie somit bei Bedarf diese Einstellung entsprechend an. " +
-      "Es stehen Ihnen zudem der Parameter Empfindlichkeit zur Verf%FCgung um hier eine geeignete Konfiguration vorzunehmen.",
+      "<b><u>Attention:</u></b><br/>" +
+      "A high sensitivity level can cause false triggering under specific circumstances. " +
+      "This setting should be adjusted accordingly as needed. " +
+      "A suitable configuration can be made via the 'Sensitivity' parameter.",
 
     "noMoreHelp" : ""
     }

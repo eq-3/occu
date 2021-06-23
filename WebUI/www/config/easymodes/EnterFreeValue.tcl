@@ -237,7 +237,7 @@ proc EnterBrightness {profile pref special_input_id ps ps_descr param} {
 
 proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condActive} {
 
-  global url receiver_address sender_address dev_descr_sender
+  global url receiver_address sender_address dev_descr_sender brightness brightnessHas2beConverted paramType
 
   upvar HTML_PARAMS HTML_PARAMS
   upvar ps_descr descr
@@ -260,31 +260,35 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
   array set param_descr $descr($param)
   set min $param_descr(MIN)
   set max $param_descr(MAX)
-  set brightness -1
+  # set brightness -1
   set help 'help_active_LT_LO'
 
   if {$condActive == "help_active_GE_LO"} {
     set help 'help_active_GE_LO'
   }
 
-  set brightnessHas2beConverted 1
-  set paramType CURRENT_ILLUMINATION
-  set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string $paramType]]}]
+  if {! [info exists brightness]} {
+    set brightness -1
+    set paramType CURRENT_ILLUMINATION
+    set brightnessHas2beConverted 1
+  }
 
-  if {$xmlCatch != 0} {
-    set paramType ILLUMINATION
+  if {$brightness == -1} {
     set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string $paramType]]}]
-    if {$xmlCatch == 0} {
-      set brightnessHas2beConverted 1
-    } else {
-      set paramType BRIGHTNESS
+    if {$xmlCatch != 0} {
+      set paramType ILLUMINATION
       set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string $paramType]]}]
       if {$xmlCatch == 0} {
-        set brightnessHas2beConverted 0
+        set brightnessHas2beConverted 1
+      } else {
+        set paramType BRIGHTNESS
+        set xmlCatch [catch {set brightness [xmlrpc $url getValue [list string $sender_address] [list string $paramType]]}]
+        if {$xmlCatch == 0} {
+          set brightnessHas2beConverted 0
+        }
       }
     }
   }
-
   #puts "<script type=\"text/javascript\">"
     #puts "MD_catchBrightness('$url', '$sender_address', '$receiver_address','$brightness', '$brightnessHas2beConverted', '$paramType', 'false', '$id','','')"
   #puts "</script>"

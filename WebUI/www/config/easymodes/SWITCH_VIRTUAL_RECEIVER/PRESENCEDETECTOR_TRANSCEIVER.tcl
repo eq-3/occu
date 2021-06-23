@@ -65,7 +65,7 @@ set PROFILE_2(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_BASE) {5 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {1 range 0 - 31}
-set PROFILE_2(SHORT_ON_TIME_MODE) 0
+set PROFILE_2(SHORT_ON_TIME_MODE) {0 1}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet.<br />"
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
@@ -120,7 +120,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
   puts "<script type=\"text/javascript\">getLangInfo_Special('HmIP_DEVICES.txt');</script>"
 
-  set prn 0  
+  set prn 0
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) [cmd_link_paramset2 $iface $address ps_descr ps "LINK" ${special_input_id}_$prn]
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
@@ -148,21 +148,52 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # Brightness
   EnterBrightnessHmIP $prn $pref ${special_input_id} ps ps_descr SHORT_COND_VALUE_LO help_active_GE_LO
 
-#2  Treppenhauslicht
+  #2  Treppenhauslicht
   incr prn
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  set pref 0
-  # ONDELAY
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
+  set pref 1
+
+  append HTML_PARAMS(separate_$prn)  "<tr><td>\${ON_TIME_MODE}</td><td>"
+  array_clear options
+  set options(0) "\${absolute}"
+  set options(1) "\${minimal}"
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME_MODE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME_MODE "onchange=\"changeHint(parseInt(this.value), $prn);\""]
+  append HTML_PARAMS(separate_$prn) "&nbsp<input type=\"button\"  value=\${help} onclick=\"MD_link_help();\">"
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
-  append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint]"
+  # ONDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
+
+  append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint $prn]"
+
+  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">"
+    append HTML_PARAMS(separate_$prn) "changeHint = function(mode, prn) {"
+      append HTML_PARAMS(separate_$prn) "var hintElm = jQuery(\"\[name='hintOnTime_\"+prn+\"'\]\"),"
+      append HTML_PARAMS(separate_$prn) "onTimeModeDescrElm = jQuery(\"\[name='onTimeFactorDescr'\]\"),"
+      append HTML_PARAMS(separate_$prn) "extensionMinimalElm = jQuery(\"\[name='extensionMinimal'\]\").eq([expr $prn - 1]);"
+
+      append HTML_PARAMS(separate_$prn) "if (mode == 0) {"
+        append HTML_PARAMS(separate_$prn) "extensionMinimalElm.hide();"
+        append HTML_PARAMS(separate_$prn) "onTimeModeDescrElm.text(translateKey('lblOnTime'));"
+      append HTML_PARAMS(separate_$prn) "} else {"
+        append HTML_PARAMS(separate_$prn) "extensionMinimalElm.show();"
+        append HTML_PARAMS(separate_$prn) "onTimeModeDescrElm.text(translateKey('lblMinOnTime'));"
+      append HTML_PARAMS(separate_$prn) "}"
+    append HTML_PARAMS(separate_$prn) "};"
+
+    append HTML_PARAMS(separate_$prn) "var mode=parseInt($ps(SHORT_ON_TIME_MODE)), _prn=$prn;"
+
+    append HTML_PARAMS(separate_$prn) "window.setTimeout(function(){"
+      append HTML_PARAMS(separate_$prn) "changeHint(mode, _prn);"
+    append HTML_PARAMS(separate_$prn) "},50);"
+  append HTML_PARAMS(separate_$prn) "</script>"
 
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

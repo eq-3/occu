@@ -95,7 +95,7 @@ set PROFILE_2(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_2(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.005}
 set PROFILE_2(SHORT_ON_TIME_BASE) {5 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {1 range 0 - 31}
-set PROFILE_2(SHORT_ON_TIME_MODE) 0
+set PROFILE_2(SHORT_ON_TIME_MODE) {0 1}
 set PROFILE_2(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_RAMPON_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
@@ -215,15 +215,24 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  set pref 0
+  set pref 1
+
+  append HTML_PARAMS(separate_$prn)  "<tr><td>\${ON_TIME_MODE}</td><td>"
+  array_clear options
+  set options(0) "\${absolute}"
+  set options(1) "\${minimal}"
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME_MODE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME_MODE "onchange=\"changeHint(parseInt(this.value), $prn);\""]
+  append HTML_PARAMS(separate_$prn) "&nbsp<input type=\"button\"  value=\${help} onclick=\"MD_link_help();\">"
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+
   # ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
-
-  # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
@@ -251,6 +260,28 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
 
   append HTML_PARAMS(separate_$prn) "[getMotionDetectorOnTimeHint]"
+
+    append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">"
+      append HTML_PARAMS(separate_$prn) "changeHint = function(mode, prn) {"
+        append HTML_PARAMS(separate_$prn) "var hintElm = jQuery(\"\[name='hintOnTime_\"+prn+\"'\]\"),"
+        append HTML_PARAMS(separate_$prn) "onTimeModeDescrElm = jQuery(\"\[name='onTimeFactorDescr'\]\"),"
+        append HTML_PARAMS(separate_$prn) "extensionMinimalElm = jQuery(\"\[name='extensionMinimal'\]\").eq([expr $prn - 1]);"
+
+        append HTML_PARAMS(separate_$prn) "if (mode == 0) {"
+          append HTML_PARAMS(separate_$prn) "extensionMinimalElm.hide();"
+          append HTML_PARAMS(separate_$prn) "onTimeModeDescrElm.text(translateKey('lblOnTime'));"
+        append HTML_PARAMS(separate_$prn) "} else {"
+          append HTML_PARAMS(separate_$prn) "extensionMinimalElm.show();"
+          append HTML_PARAMS(separate_$prn) "onTimeModeDescrElm.text(translateKey('lblMinOnTime'));"
+        append HTML_PARAMS(separate_$prn) "}"
+      append HTML_PARAMS(separate_$prn) "};"
+
+      append HTML_PARAMS(separate_$prn) "var mode=parseInt($ps(SHORT_ON_TIME_MODE)), _prn=$prn;"
+
+      append HTML_PARAMS(separate_$prn) "window.setTimeout(function(){"
+        append HTML_PARAMS(separate_$prn) "changeHint(mode, _prn);"
+      append HTML_PARAMS(separate_$prn) "},50);"
+    append HTML_PARAMS(separate_$prn) "</script>"
 
   append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

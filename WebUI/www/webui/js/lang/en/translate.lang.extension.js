@@ -102,7 +102,7 @@ jQuery.extend(true, langJSON, {
     "dialogCreateLinkErrorContent3": "the device is located within the wireless range and active",
     "dialogCreateLinkErrorContent4": "the device is in teach-in mode.",
     "dialogCreateLinkErrorContent5": "\"Ignore\", if the Central Control Unit shall transmit the data to the device at the next opportunity. Until then, the configuration procedure will be displayed as open service message.",
-    "dialogCreateLinkErrorContent6" : "en* <u>Achtung</u><br/> Es besteht auch die M%FCglichkeit, dass die maximale Anzahl der erlaubten Verkn%FCpfungen erreicht wurde.",
+    "dialogCreateLinkErrorContent6" : "<u>Attention</u><br/> It is possible that the maximum number of allowed connections have been reached.",
 
     "dialogCreateLinkErrorUnknownDevice": "An error occurred during transmission, because the device is unknown.",
     "dialogCreateLinkHintLinkExists": "Attention! The connection already exists and will be overwritten.",

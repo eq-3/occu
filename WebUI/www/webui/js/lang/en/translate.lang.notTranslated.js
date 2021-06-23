@@ -1,29 +1,28 @@
 jQuery.extend(true, langJSON, {
   "en": {
 
-    "stringTableDoorLockStateTransceiverMsgPosA" : "en* Meldung, wenn entriegelt",
-    "stringTableDoorLockStateTransceiverMsgPosB" : "en* Meldung, wenn verriegelt",
-    "stringTableDoorLockStateTransmitterActivityStateStable" : "en* Zustand stabil",
+    "stringTableDoorLockStateTransceiverMsgPosA" : "Message if unlocked",
+    "stringTableDoorLockStateTransceiverMsgPosB" : "Message if locked",
+    "stringTableDoorLockStateTransmitterActivityStateStable" : "Status stable",
 
-    "modeBatNotSupported" : "en* (nicht unterst%FCtzt, da Batteriebetrieb)",
+    "modeBatNotSupported" : "(not supported because battery operation)",
 
     "helpPrgPermanentFullRX" :
-      "en* Diese Punkte arbeiten nur korrekt, wenn als Spannungsversorgung 'Netzbetrieb' gew%E4hlt wird. Zur Zeit ist jedoch 'Batteriebetrieb' eingestellt.<br/></br>" +
-      "Wenn Sie diese Funktionalit%E4t ben%F6tigen, schalten Sie den Parameter 'Spannungsverorgung' in der Ger%E4teeinstellung (Kanal 0) auf 'Netzbetrieb'.",
+      "These functions can only performed when 'Mains operation' is selected as the power supply. 'Battery operation' is currently set.<br/></br>" +
+      "If you require this functionality, then switch the 'Power supply' parameter under Device settings (channel 0) to 'Mains operation'.",
 
-    "stringTableServoPowerOff" : "en* Einschaltdauer Servo",
+    "stringTableServoPowerOff" : "Servo switch-on time",
 
-    "stringTableServoLevel" : "en* Servoposition",
-    "lblRestartNeeded" : "en* Neustart erforderlich",
+    "stringTableServoLevel" : "Servo position",
+    "lblRestartNeeded" : "Restart required",
 
-    "stringTableServoActivityStateDown" : "en* Rampe herunter",
-    "stringTableServoActivityStateUnknown" : "en* Servo Aktivit%E4t unbekannt",
-    "stringTableServoActivityStateUp" : "en* Rampe hoch",
-    "stringTableServoLevel" : "en* Servoposition",
+    "stringTableServoActivityStateDown" : "Ramp down",
+    "stringTableServoActivityStateUnknown" : "Servo activity unknown",
+    "stringTableServoActivityStateUp" : "Ramp up",
 
-    "stringTableServoRamp" : "en* Geschwindigkeit",
+    "stringTableServoRamp" : "Speed",
 
-    "stringTableDeviceSensorSensibility" : "en* Sensor-Empfindlichkeit",
+    "stringTableDeviceSensorSensibility" : "Sensor sensitivity",
 
     "noMoreKeys" : ""
   }
