@@ -1,5 +1,11 @@
 "switch_unlocked" : "Entriegeln",
 "switch_locked" : "Verriegeln",
 "switch_open" : "%D6ffnen",
-
 "toggle" : "Toggle",
+
+"weeklyProgram" : "Wochenprogramm",
+
+"optionIgnore" : "Profil nicht aktiv",
+"optionOn" : "Auto-Modus",
+"optionOff" : "Manu-Modus",
+

@@ -41,8 +41,15 @@ cgi_eval {
     "setEasymode"   {
         # Der Wert wird nur in der Weboberfläche gesetzt, aber nicht zum MotionDetector übertragen
         # puts "document.getElementById('$id\_tmp').value = \'$brightness\'"
-        if {$set_value == "true"} {puts "document.getElementById('$id').value = \'$brightness\'"}
-        
+
+        puts "var id = \"$id\","
+        puts "arCndValElmLO = id.split(\"_\"),"
+        puts "cndValElmIdHI = arCndValElmLO\[0\]+\"_\"+arCndValElmLO\[1\]+\"_\"+arCndValElmLO\[2\]+\"_\"+(parseInt(arCndValElmLO\[3\]) + 1);"
+
+        if {$set_value == "true"} {
+          puts "document.getElementById('$id').value = \'$brightness\'"
+          puts "document.getElementById(cndValElmIdHI).value = \'$brightness\'"
+        }
       }
   
     "set"   {

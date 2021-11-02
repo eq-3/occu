@@ -90,7 +90,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   upvar $pps          ps      
   upvar $pps_descr    ps_descr
 
-
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
   }
@@ -103,6 +102,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set ps(SHORT_CT_OFFDELAY) 0
     set ps(SHORT_CT_ON) 0
   }
+
 
   #global SUBSETS
   set name "x"

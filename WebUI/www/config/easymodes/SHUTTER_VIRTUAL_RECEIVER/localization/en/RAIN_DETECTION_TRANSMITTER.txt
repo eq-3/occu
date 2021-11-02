@@ -1,8 +1,8 @@
-"description_1" : "<span class=\"translated\">The awning / shutter is moved according to the selected switching command. If a lifting delay is set the blind / shutter will be moved after the delay time has expired.</span><br/><br/>",
-
-"description_2" : "<span class=\"translated\">If the selected switching command is detected, the awning / shutter is entirely raised or lowered alternately (toggle function). If a delay is set, the awning / shutter will be moved to the desired position after the delay time has expired.</span><br/><br/></span><br/><br/>",
-
-"description_3" : "<span class=\"translated\">The profile is not active.</span>",
+"description_1" : "<span class=\"translated\">According to the selected switching command the awning / shutter will be moved up completely for the set time. If an up-delay is set the awning / shutter will be moved up after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">According to the selected switching command the awning / shutter will be moved down completely for the set time. If a down-delay is set the awning / shutter will be moved down after the delay time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">According to the selected switching command the awning / shutter will be moved up completely or down completely (toggle function). If a delay is set the awning / shutter is moved after the delay time has expired.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">According to the selected switching command the awning / shutter will be moved to the required position for the set time. If a delay is set the awning / shutter will be moved after the delay time has expired.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">The profile is not active.</span>",
 
 "subset_1" : "moved up",
 "subset_2" : "moved down",

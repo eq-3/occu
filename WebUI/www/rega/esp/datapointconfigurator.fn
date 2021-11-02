@@ -91,6 +91,7 @@ function ::dcCreate()
     var CN_ACCELERATION_TRANSCEIVER = "ACCELERATION_TRANSCEIVER.";
     var CN_ACCESSPOINT_GENERIC_RECEIVER = "ACCESSPOINT_GENERIC_RECEIVER.";
     var CN_ACCESS_RECEIVER = "ACCESS_RECEIVER.";
+    var CN_ACCESS_TRANSCEIVER = "ACCESS_TRANSCEIVER.";
     var CN_ACOUSTIC_DISPLAY_RECEIVER = "ACOUSTIC_DISPLAY_RECEIVER.";
     var CN_ACOUSTIC_SIGNAL_TRANSMITTER = "ACOUSTIC_SIGNAL_TRANSMITTER.";
     var CN_ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER.";
@@ -226,6 +227,17 @@ function ::dcCreate()
             sLastControlName = CN_ACCESS_RECEIVER;
             Call("/esp/controls/accessreceiver.fn::CreateAccessReceiver()");
           }
+
+          !#ACCESS_TRANSCEIVER
+          bIsControl = ( sControlName.Find(CN_ACCESS_TRANSCEIVER) > -1 );
+          if( bIsControl && (sLastControlName != CN_ACCESS_TRANSCEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_ACCESS_TRANSCEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_ACCESS_TRANSCEIVER;
+            Call("/esp/controls/accessreceiver.fn::CreateAccessTransceiver()");
+          }
+
           !#ACOUSTIC_DISPLAY_RECEIVER
           bIsControl = ( sControlName.Find(CN_ACOUSTIC_DISPLAY_RECEIVER) > -1 );
           if( bIsControl && (sLastControlName != CN_ACOUSTIC_DISPLAY_RECEIVER) )
@@ -650,13 +662,15 @@ function ::dcCreate()
           }
 
           !# CN_IDENTIFICATION - HmIPW Identification
-          bIsControl = ( sControlName.Find(CN_IDENTIFICATION) > -1 );
-          if( bIsControl && (sLastControlName != CN_IDENTIFICATION) )
-          {
-            WriteLine( "<script>conInfo('Control CN_IDENTIFICATION found.');</script>" );
-            isKnownControl = true;
-            sLastControlName = CN_IDENTIFICATION;
-            Call("/esp/controls/hmipw_identification.fn::CreateIdentification()");
+          if (ch.Label() != "HmIPW-DRAP") {
+            bIsControl = ( sControlName.Find(CN_IDENTIFICATION) > -1 );
+            if( bIsControl && (sLastControlName != CN_IDENTIFICATION) )
+            {
+              WriteLine( "<script>conInfo('Control CN_IDENTIFICATION found.');</script>" );
+              isKnownControl = true;
+              sLastControlName = CN_IDENTIFICATION;
+              Call("/esp/controls/hmipw_identification.fn::CreateIdentification()");
+            }
           }
 
           !# CN_JALOUSIE
@@ -705,6 +719,21 @@ function ::dcCreate()
               isKnownControl = true;
               Call("/esp/controls/coProcessor.fn::CreateCoPro()");
             }
+
+            if (ch.Label() == "HmIP-FWI") {
+              WriteLine( "<script>conInfo('Create FWI MAINTENANCE Control.');</script>" );
+              sLastControlName = CN_MAINTENANCE;
+              isKnownControl = true;
+              Call("/esp/controls/maintenanceFWI.fn::CreateMaintenance()");
+            }
+
+            if (ch.Label() == "HmIP-WKP") {
+              WriteLine( "<script>conInfo('Create WKP MAINTENANCE Control.');</script>" );
+              sLastControlName = CN_MAINTENANCE;
+              isKnownControl = true;
+              Call("/esp/controls/maintenanceWKP.fn::CreateMaintenance()");
+            }
+
           }
 
           !# CN_MOTIONDETECTOR

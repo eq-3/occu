@@ -1,4 +1,5 @@
 ! Create a special channel description for certain channels
+
 function ::ShowExtDesc() {
 
   if ((chn.HssType() == "SWITCH_TRANSMITTER") && (chn.Label() == "HmIP-MOD-OC8") ) {
@@ -79,6 +80,28 @@ function ::ShowExtDesc() {
   if ((chn.HssType() == "ACCESS_RECEIVER") && (chn.Label() == "HmIP-DLD"))  {
     Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_RECEIVER} "#(chNumber - 1)#"</span>");
     showExtDesc = true;
+  }
+
+  if (chn.HssType() == "ACCESS_TRANSCEIVER")  {
+    if (chn.Label() == "HmIP-FWI") {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_TRANSCEIVER} "#chNumber#"</span>");
+      showExtDesc = true;
+    }
+
+    if (chn.Label() == "HmIP-WKP") {
+      integer tmpChn = (chNumber + 1) / 2;
+    !  string lockUnlock = "";
+
+    !  if (((tmpChn - chNumber) * -1) == tmpChn) {
+    !    lockUnlock = "${chType_ACCESS_TRANSCEIVER_UNLOCk}";
+    !  } else {
+    !    lockUnlock = "${chType_ACCESS_TRANSCEIVER_LOCk}";
+    !  }
+    !
+    !  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_TRANSCEIVER} "#tmpChn#" "#lockUnlock#"</span>");
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_TRANSCEIVER} "#tmpChn#"</span>");
+      showExtDesc = true;
+    !}
   }
 
 }

@@ -20,9 +20,201 @@ jQuery.extend(true, langJSON, {
     "stringTableServoActivityStateUnknown" : "Servo activity unknown",
     "stringTableServoActivityStateUp" : "Ramp up",
 
-    "stringTableServoRamp" : "Speed",
-
     "stringTableDeviceSensorSensibility" : "Sensor sensitivity",
+
+    "comment" : "Translated by the software department",
+
+    "stringTableServoRamp" : "Speed/driving time",
+
+    "lblRotationSwap" : "Swap direction of rotation",
+
+    "optionNormallyClose" : "NC (normally closed)",
+    "optionNormallyOpen" : "NO (normally open)",
+
+    "stringTableBlockingOnSabotage" : "Lock on sabotage",
+    "stringTableSabotageContactType" : "Type of sabotage contact",
+
+    "stringTableBlockingPermanent" : "Number of further incorrect entries for complete lock "+
+      "after temporary input lock",
+    "stringTableBlockingTemporary" : "Number of incorrect entries for temporary locking",
+
+    "helpServoRampTime" :
+      "With value 0, the travel time is only dependent on the actuating time of the servo.<br/><br/>" +
+      "The speed/travel time only influences the travel time if this is greater than the travel time caused by the actuating time of the servo.",
+
+    "stringTableAbortEventSendingChannelsAccessTransceiver" : "Faster response by cancelling all sending operations of the following channels",
+    "lblStopRunningLinkAccessTransceiver" : "Canceling old sending operations<br/>of this channel",
+
+    "stringTableBlockedPermanently" : "Permanently locked",
+    "stringTableBlockedTemporarily" : "Temporarily locked",
+
+    "codeInUse" : "Codes used",
+
+    "codeIdle" : "--",
+    "codeKnownCodeIDReceived" : "Code ID received",
+    "codeUnKnownCodeIDReceived" : "Unknown",
+    "codeLearnModeForCodeIDStarted" : "Code is being learned",
+    "codeLearnModeExitForCodeWithSuccess" : "Code successfully learned",
+    "codeLearnModeExitForCodeWithTimeout" : "Timeout when learning code",
+    "codeLearnModeExitForCodeWithErrorDuplicateCode" : "Code already exists",
+    "codeCodeErased" : "Code deleted",
+
+    "codeManagement" : "Code<br/>Management",
+    "clearStatusMessages" : "Reset<br/>locks",
+
+    "lblCodeReceived" : "Received code",
+
+    "lblFWISetCodeCommand" : "Action",
+    "lblFWIClearError" : "Reset lock",
+
+    "codeStartOfLearn" : "Learn code",
+    "codeStopOfLearn" : "End learning",
+    "codeErase" : "Delete code",
+
+    "clearAll" : "All",
+
+    "hintFWITargetNotPossible" :
+      "\n\nChannels 1 - 8 do not support the Astro function.\n\n" +
+      "Use the condition  \"Fixed time of day\"\n\n",
+
+    "dialogCodeCommandTitle" : "Code Management",
+    "dialogClearErrorTitle" : "Reset locks",
+
+    "channelRights" : "Channel authorisation",
+
+    "stringTableAccessTransceiverTitle" : "Access authorisation",
+    "stringTableAccessTransceiverStateFalse" : "Channel authorised: No",
+    "stringTableAccessTransceiverStateTrue" : "Channel authorised: Yes",
+    "stringTableAccessTransceiverAccessAuthorizationTrue" : "Permission granted",
+    "stringTableAccessTransceiverAccessAuthorizationFalse" : "Permission not granted",
+
+    "stringTableBlockedPermanentFalse" : "Input permanently locked: No",
+    "stringTableBlockedPermanentTrue" : "Input permanently locked: Yes",
+    "stringTableBlockedTemporaryFalse" : "Input temporarily locked: No",
+    "stringTableBlockedTemporaryTrue" : "Input temporarily locked: Yes",
+    "stringTableAccessTransCodeID" : "Code ID",
+    "stringTableAccessTransCodeStateCodeErased" : "Code deleted",
+    "stringTableAccessTransCodeStateIdle" : "Idle mode",
+    "stringTableAccessTransCodeStateKnownCodeIDReceived" : "Code ID received",
+    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithErrorDuplicateCode" : "Error during code learning: code present",
+    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithSuccess" : "Code successfully learned",
+    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithTimeout" : "Error during code learning: Timeout",
+    "stringTableAccessTransCodeStateLearnModeForCodeIDStarted" : "Learning process started",
+    "stringTableAccessTransCodeStateUnknownCodeDetected" : "Code unknown",
+
+    "stringTableAccessTransCodeSCodeUsed01False" : "Code 1 not active",
+    "stringTableAccessTransCodeSCodeUsed01True" : "Code 1 active",
+    "stringTableAccessTransCodeSCodeUsed02False" : "Code 2 not active",
+    "stringTableAccessTransCodeSCodeUsed02True" : "Code 2 active",
+    "stringTableAccessTransCodeSCodeUsed03False" : "Code 3 not active",
+    "stringTableAccessTransCodeSCodeUsed03True" : "Code 3 active",
+    "stringTableAccessTransCodeSCodeUsed04False" : "Code 4 not active",
+    "stringTableAccessTransCodeSCodeUsed04True" : "Code 4 active",
+    "stringTableAccessTransCodeSCodeUsed05False" : "Code 5 not active",
+    "stringTableAccessTransCodeSCodeUsed05True" : "Code 5 active",
+    "stringTableAccessTransCodeSCodeUsed06False" : "Code 6 not active",
+    "stringTableAccessTransCodeSCodeUsed06True" : "Code 6 active",
+    "stringTableAccessTransCodeSCodeUsed07False" : "Code 7 not active",
+    "stringTableAccessTransCodeSCodeUsed07True" : "Code 7 active",
+    "stringTableAccessTransCodeSCodeUsed08False" : "Code 8 not active",
+    "stringTableAccessTransCodeSCodeUsed08True" : "Code 8 active",
+    "stringTableAccessTransCodeSCodeUsed09False" : "Code 9 not active",
+    "stringTableAccessTransCodeSCodeUsed09True" : "Code 9 active",
+    "stringTableAccessTransCodeSCodeUsed10False" : "Code 10 not active",
+    "stringTableAccessTransCodeSCodeUsed10True" : "Code 10 active",
+    "stringTableAccessTransCodeSCodeUsed11False" : "Code 11 not active",
+    "stringTableAccessTransCodeSCodeUsed11True" : "Code 11 active",
+    "stringTableAccessTransCodeSCodeUsed12False" : "Code 12 not active",
+    "stringTableAccessTransCodeSCodeUsed12True" : "Code 12 active",
+    "stringTableAccessTransCodeSCodeUsed13False" : "Code 13 not active",
+    "stringTableAccessTransCodeSCodeUsed13True" : "Code 13 active",
+    "stringTableAccessTransCodeSCodeUsed14False" : "Code 14 not active",
+    "stringTableAccessTransCodeSCodeUsed14True" : "Code 14 active",
+    "stringTableAccessTransCodeSCodeUsed15False" : "Code 15 not active",
+    "stringTableAccessTransCodeSCodeUsed15True" : "Code 15 active",
+    "stringTableAccessTransCodeSCodeUsed16False" : "Code 16 not active",
+    "stringTableAccessTransCodeSCodeUsed16True" : "Code 16 active",
+    "stringTableAccessTransCodeSCodeUsed17False" : "Code 17 not active",
+    "stringTableAccessTransCodeSCodeUsed17True" : "Code 17 active",
+    "stringTableAccessTransCodeSCodeUsed18False" : "Code 18 not active",
+    "stringTableAccessTransCodeSCodeUsed18True" : "Code 108active",
+    "stringTableAccessTransCodeSCodeUsed19False" : "Code 19 not active",
+    "stringTableAccessTransCodeSCodeUsed19True" : "Code 19 active",
+    "stringTableAccessTransCodeSCodeUsed20False" : "Code 20 not active",
+    "stringTableAccessTransCodeSCodeUsed20True" : "Code 20 active",
+
+    "stringTableSabotageSticky" : "Sabotage attempt",
+    "stringTableSabotageStickyFalse" : "Sabotage attempt: No",
+    "stringTableSabotageStickyTrue" : "Sabotage attempt: Yes",
+    "stringTableClearErrorAll" : "Delete error: All",
+    "stringTableClearErrorBlockedPermanent" : "Delete error: permanently locked",
+    "stringTableClearErrorBlockedTemporary" : "Delete Error: temporarily locked",
+    "stringTableClearErrorSabotage" : "Delete Error: Sabotage",
+    "stringTableClearErrorSabotageSticky" : "Delete Error: Sabotage attempt",
+    "stringTableCodeCommandErase" : "Delete code",
+    "stringTableCodeCommandStartOfLearn" : "Start learning for code",
+    "stringTableCodeCommandStopOfLearn" : "Cancel the learning process",
+
+    "stringTableDisableDoorLockAcousticChannelState" : "Deactivate acoustic feedback",
+    "hintDoorLockHoldTime" : "Please note that a longer holding time has a negative effect on the battery life of the door lock drive.",
+
+    "stringTableDoorLockHoldTime" : "Holding time when opening",
+
+    "stringTableErrorJammed" : "Locking mechanism blocked",
+
+    "optionOpenOnly" : "Open only",
+    "optionNormal" : "Normal",
+    "optionLong" : "Long",
+    "optionExtraLong" : "Extra long",
+
+    "stringTableBurstLimit" : "Burst limit",
+    "stringTableBurstLimitFalse" : "Burst limit not reached",
+    "stringTableBurstLimitTrue" : "Burst limit reached",
+
+    "stringTableNumericPinCode" : "PIN code",
+
+    "dialogAskCreateBakupCheckboxText" : "Create a system backup before the update.",
+    "dialogAskCreateBakupText" : "The backup is created and downloaded directly before the installation. This process may take a few minutes",
+
+    "unitNumericPinCode" : "(max. 8 digits from 0-9)",
+
+    "stringTableUserAuthorization01false" : "User 1 authorised: No",
+    "stringTableUserAuthorization01true" : "User 1 authorised: Yes",
+    "stringTableUserAuthorization02false" : "User 2 authorised: No",
+    "stringTableUserAuthorization02true" : "User 2 authorised: Yes",
+    "stringTableUserAuthorization03false" : "User 3 authorised: No",
+    "stringTableUserAuthorization03true" : "User 3 authorised: Yes",
+    "stringTableUserAuthorization04false" : "User 4 authorised: No",
+    "stringTableUserAuthorization04true" : "User 4 authorised: Yes",
+    "stringTableUserAuthorization05false" : "User 5 authorised: No",
+    "stringTableUserAuthorization05true" : "User 5 authorised: Yes",
+    "stringTableUserAuthorization06false" : "User 6 authorised: No",
+    "stringTableUserAuthorization06true" : "User 6 authorised: Yes",
+    "stringTableUserAuthorization07false" : "User 7 authorised: No",
+    "stringTableUserAuthorization07true" : "User 7 authorised: Yes",
+    "stringTableUserAuthorization08false" : "User 8 authorised: No",
+    "stringTableUserAuthorization08true" : "User 8 authorised: Yes",
+
+    "lblPinOfChannelLockA" : "The channel PIN code is used 'User",
+    "lblPinOfChannelLockB" : "Locking'",
+
+    "stringTableKeyPressLongRelease" : "Start long key press",
+    "stringTableKeyPressLongStart" : "Stop long key press",
+
+    "lblChannelActivInactivWhenNoOutput" : "Unit inactive or standby<br/>at 0% output voltage",
+    "optionRelayInactive" : "Device not active",
+    "optionRelayOffDelay05S" : "Standby after 0.5 s.",
+    "optionRelayOffDelay1S" : "Standby after 1s s.",
+    "optionRelayOffDelay10S" : "Standby after 10 s.",
+
+    "optionModeConsumption" : "Consumption mode",
+    "optionModeFeeding" : "Feeding mode",
+
+    "comment" : "This has yet to be translated",
+    "hintSetReadyNotComplete" : "To completely configure the channel, press the Done button and then call up the device in the device list",
+
+    "lblCode" : "Code",
+    "lblBellButton" : "Bell button",
 
     "noMoreKeys" : ""
   }

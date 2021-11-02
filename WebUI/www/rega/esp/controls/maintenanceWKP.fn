@@ -1,0 +1,164 @@
+function ::CreateMaintenance()
+{
+  object oDevice = dom.GetObject(cObj.Device());
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+  integer chInterfaceID = ch.Interface();
+  object chInterface = dom.GetObject(chInterfaceID);
+
+  object objBlockedPermanent = cObj.DPByControl("MAINTENANCE.BLOCKED_PERMANENT");
+  object objBlockedTemporary = cObj.DPByControl("MAINTENANCE.BLOCKED_TEMPORARY");
+  object objClearError = cObj.DPByControl("MAINTENANCE.CLEAR_ERROR");
+  object objCodeID = cObj.DPByControl("MAINTENANCE.CODE_ID");
+  object objCodeState = cObj.DPByControl("MAINTENANCE.CODE_STATE");
+
+  object objUserAuth01 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_01");
+  boolean valUserAuth01 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_01").Value();
+  boolean valUserAuth02 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_02").Value();
+  boolean valUserAuth03 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_03").Value();
+  boolean valUserAuth04 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_04").Value();
+  boolean valUserAuth05 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_05").Value();
+  boolean valUserAuth06 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_06").Value();
+  boolean valUserAuth07 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_07").Value();
+  boolean valUserAuth08 = cObj.DPByControl("MAINTENANCE.USER_AUTHORIZATION_08").Value();
+
+  ! object objErrorCode = cObj.DPByControl("MAINTENANCE.ERROR_CODE");
+  object objSabotage = cObj.DPByControl("MAINTENANCE.SABOTAGE");
+  object objSabotageSticky = cObj.DPByControl("MAINTENANCE.SABOTAGE_STICKY");
+
+  string valBlockedPermanent = "${lblNo}";
+  string valBlockedTemporary = "${lblNo}";
+
+  WriteLine("<td>");
+    WriteLine("<table align='center'>");
+
+      WriteLine("<tr>");
+
+        if (objBlockedPermanent) {
+          boolean blockedPermanent = objBlockedPermanent.Value();
+
+          if (blockedPermanent == true) {
+            valBlockedPermanent = "${lblYes}";
+          }
+
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableBlockedPermanently}:<br/>"#valBlockedPermanent#"</div>");
+          WriteLine("</td>");
+        }
+
+        if (objBlockedTemporary) {
+          boolean blockedTemporary = objBlockedTemporary.Value();
+
+          if (blockedTemporary == true) {
+            valBlockedTemporary = "${lblYes}";
+          }
+
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableBlockedTemporarily}:<br/>"#valBlockedTemporary#"</div>");
+          WriteLine("</td>");
+        }
+
+      WriteLine("</tr>");
+
+      if ((objSabotage) || (objSabotageSticky)) {
+        WriteLine("<tr>");
+          if (objSabotage) {
+            boolean valSabotage = objSabotage.Value();
+            string sabotageMsg = "${stringTableSabotageContactOk}";
+            if (valSabotage == true) {sabotageMsg = "${stringTableSabotageMsg}";}
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>"#sabotageMsg#"</div>");
+            WriteLine("</td>");
+          }
+
+          if (objSabotageSticky) {
+            boolean valSabotageSticky = objSabotageSticky.Value();
+            string sabotageStickyMsg = "${stringTableSabotageStickyFalse}";
+            if (valSabotageSticky == true) {sabotageStickyMsg = "${stringTableSabotageStickyTrue}";}
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>"#sabotageStickyMsg#"</div>");
+            WriteLine("</td>");
+          }
+       WriteLine("</tr>");
+      }
+
+      WriteLine("<tr>");
+        if (objCodeState) {
+          integer codeState = objCodeState.Value();
+          string curState = "--";
+          if (codeState == 0) {curState = "${codeIdle}";}
+          if (codeState == 1) {curState = "${lblUser}: "#objCodeID.Value() + 1;}
+          if (codeState == 2) {curState = "${codeUnKnownCodeIDReceived}";}
+          if (codeState == 3) {curState = "${codeLearnModeForCodeIDStarted}";}
+          if (codeState == 4) {curState = "${codeLearnModeExitForCodeWithSuccess}";}
+          if (codeState == 5) {curState = "${codeLearnModeExitForCodeWithTimeout}";}
+          if (codeState == 6) {curState = "${codeLearnModeExitForCodeWithErrorDuplicateCode}";}
+          if (codeState == 7) {curState = "${codeCodeErased}";}
+
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCodeReceived}:<br/>"#curState#"</div>");
+          WriteLine("</td>");
+        }
+
+      WriteLine("</tr>");
+
+      ! Check only if objUserAuth01 is available. Then we assume the other objUserAuthxx are also present.
+      if (objUserAuth01) {
+        WriteLine("<tr><td colspan='2'><div class='controlHeader'>${optionDoorLockUser}</div></td></tr>");
+        
+        string sUserAuth =
+        valUserAuth01#
+        "\t"#valUserAuth02#
+        "\t"#valUserAuth03#
+        "\t"#valUserAuth04#
+        "\t"#valUserAuth05#
+        "\t"#valUserAuth06#
+        "\t"#valUserAuth07#
+        "\t"#valUserAuth08;
+        string val;
+        string checked;
+        integer loop = 1;
+
+        loop = 1;
+        WriteLine("<tr>");
+          WriteLine("<td colspan='2'><table align='center'><tr>");
+            foreach(val, sUserAuth) {
+              if (val == "true") {checked = "checked";} else {checked = "";}
+              WriteLine("<td>");
+                WriteLine("<input type='radio' id='userAuth_"#loop#"' value="#val#" disabled='disabled' "#checked#">");
+                WriteLine("<label for='userAuth_"#loop#"' style='color:black;'>"#loop#"</label>");
+              WriteLine("</td>");
+              loop = loop + 1;
+            }
+          WriteLine("</tr></table></td>");
+        WriteLine("</tr>");
+      }
+
+      WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          ! btn clear error
+          WriteLine("<div id='anchorClearError_"#chnId#"' class='CLASS02551 ControlBtnOff'>${clearStatusMessages}</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine("var opts = {};");
+    WriteLine("opts.deviceType = '"#oDevice.Label()#"';");
+    WriteLine("opts.chnID = '"#chnId#"';");
+    WriteLine("opts.chnAddress = '"#chnAddress#"';");
+    WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
+    if (objCodeID) {WriteLine("opts.idCodeID = '"#objCodeID.ID()#"';");} else {WriteLine("opts.idCodeID = '--';");}
+    if (objCodeID) {WriteLine("opts.idCodeVal = '"#objCodeID.Value()#"';");} else {WriteLine("opts.idCodeVal = '--';");}
+    WriteLine("ibs"#cObj.ID()#" = new iseHmIPWiegandIface(opts);" );
+
+  WriteLine("</script>");
+  return;
+}
+

@@ -121,7 +121,11 @@ jQuery.extend(true, langJSON, {
 
     "helpAccessReceiverUserAccessAuth" :
       "Bei manueller %C4nderung der Berechtigung schaltet der Benutzerkanal in den Manu-Modus. " +
-      "Die Steuerung der Berechtigung durch das Wochenprogramm ist dann deaktiviert. Der Wechsel zur%FCck in den Auto-Modus kann im Wochenprogramm wieder aktiviert werden.",
+      "Die Steuerung der Berechtigung durch das Wochenprogramm ist dann deaktiviert. Der Wechsel zur%FCck in den Auto-Modus kann im Kanal Wochenprogramm wieder aktiviert werden.",
+
+    "helpAccessTransceiverUserAccessAuth" :
+      "Bei manueller %C4nderung der Berechtigung schaltet dieser Kanal in den Manu-Modus. " +
+      "Die Steuerung der Berechtigung durch das Wochenprogramm ist dann deaktiviert. Der Wechsel zur%FCck in den Auto-Modus kann im Kanal Wochenprogramm wieder aktiviert werden.",
 
     "helpPrgAccessReceiver" : "Durch diese Aktionen wird das Wochenprogramm f%FCr diesen Benutzerkanal deaktiviert (=Manu-Modus).<br/><br/>" +
       "<u><b>Hinweis:</b></u><br/><br/>" +
@@ -130,6 +134,24 @@ jQuery.extend(true, langJSON, {
     "helpWeeklyProgramDlg" :
       "Bei Verwendung des Auto-Modus m%FCssen entsprechende Wochenprogramm-Eintr%E4ge vorhanden sein. " +
       "Das Wochenprogramm k%F6nnen Sie am Ger%E4t unter Einstellungen/Ger%E4te konfigurieren.",
+
+    "helpFWICodeCommand" :
+      "Das Wiegand-Interface erlaubt die Verwendung von bis zu 20 unterschiedlichen Wiegand-Codes. " +
+      "Um einen neuen Wiegand-Code anzulernen ist eine freie Code-Nummer auszuw%E4hlen und \'Code anlernen\' zu aktivieren. " +
+      "Es bleiben 60 Sekunden um einen g%FCltigen Wiegand-Code an das Interface zu %FCbertragen. " +
+      "Der Anlernvorgang kann jederzeit %FCber \'Anlernen beenden\' abgebrochen werden.<br/><br/>" +
+      "Um einen Wiegand-Code zu l%F6schen ist die entsprechende Code-Nummer auszuw%E4hlen und \'Code l%F6schen\' zu aktivieren.",
+
+
+    "helpFWIClearError" :
+      "Wurde der Sabotagekontakt ausgel%F6st oder durch die %DCbertragung ung%FCltiger Wiegand-Codes die tempor%E4re oder permanente Sperrung von Codes aktiviert, " +
+      "ist das Wiegand-Interface tempor%E4r oder permanent gesperrt.<br/><br/>" +
+      "%DCber \'Sperrung zur%FCcksetzen\' kann die Sperrung aufgehoben werden.",
+
+    "helpClearError" :
+      "Wurde der Sabotagekontakt ausgel%F6st oder durch die %DCbertragung ung%FCltiger Codes die tempor%E4re oder permanente Sperrung aktiviert, " +
+      "ist das Ger%E4t tempor%E4r oder permanent gesperrt.<br/><br/>" +
+      "%DCber \'Sperrung zur%FCcksetzen\' kann die Sperrung jederzeit aufgehoben werden.",
 
     "END" : ""
   }

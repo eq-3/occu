@@ -44,6 +44,8 @@
     "optionUnit30D": "30 days",
     "stringTablePermanent" : "continuously",
     "stringTableEnterValue" : "Enter value",
+
+    "optionServoSpeed" : "Maximal",
   }
 ]
 

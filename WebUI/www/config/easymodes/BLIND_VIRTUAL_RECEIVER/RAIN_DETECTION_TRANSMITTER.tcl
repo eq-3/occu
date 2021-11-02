@@ -18,8 +18,8 @@ set REFOFF 8
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${OpenClose_UpDown}"
 set PROFILES_MAP(2)  "\${Toggle}"
-#set PROFILES_MAP(3)  "\${TargetPosition}"
-set PROFILES_MAP(3)  "\${no_action}"
+set PROFILES_MAP(3)  "\${TargetPosition}"
+set PROFILES_MAP(4)  "\${no_action}"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
@@ -107,7 +107,6 @@ set PROFILE_2(UI_DESCRIPTION) ""
 set PROFILE_2(UI_TEMPLATE)  $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 
-set comment {
 set PROFILE_3(SHORT_COND_VALUE_HI) 100
 set PROFILE_3(SHORT_COND_VALUE_LO) 50
 set PROFILE_3(SHORT_CT_OFF) {0 2 5}
@@ -147,16 +146,16 @@ set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(UI_DESCRIPTION) ""
 set PROFILE_3(UI_TEMPLATE)  $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
-}
-set PROFILE_3(SHORT_JT_OFF)      0
-set PROFILE_3(SHORT_JT_ON)      0
-set PROFILE_3(SHORT_JT_OFFDELAY)  0
-set PROFILE_3(SHORT_JT_ONDELAY)    0
-set PROFILE_3(SHORT_JT_RAMPOFF) 0
-set PROFILE_3(SHORT_JT_RAMPON) 0
-set PROFILE_3(UI_DESCRIPTION)  "Der Bewegungsmelder ist au&szlig;er Betrieb."
-set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
-set PROFILE_3(UI_HINT)  3
+
+set PROFILE_4(SHORT_JT_OFF)      0
+set PROFILE_4(SHORT_JT_ON)      0
+set PROFILE_4(SHORT_JT_OFFDELAY)  0
+set PROFILE_4(SHORT_JT_ONDELAY)    0
+set PROFILE_4(SHORT_JT_RAMPOFF) 0
+set PROFILE_4(SHORT_JT_RAMPON) 0
+set PROFILE_4(UI_DESCRIPTION)  "Der Bewegungsmelder ist au&szlig;er Betrieb."
+set PROFILE_4(UI_TEMPLATE)    $PROFILE_4(UI_DESCRIPTION)
+set PROFILE_4(UI_HINT)  4
 
 # hier folgen die eventuellen Subsets
 #set SUBSET_1(NAME)          "Hochgefahren"
@@ -435,7 +434,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
-set comment {
+
 #3 jalousie target position
   incr prn
   set pref 1
@@ -516,9 +515,9 @@ set comment {
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
   append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_$prn\_2');jalousieShowSlatInputElem('separate_${special_input_id}_$prn\_2', $ch);},200)</script>"
-}
 
-#3
+
+#4
   incr prn
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"

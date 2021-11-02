@@ -1,5 +1,10 @@
 "switch_unlocked" : "Unlock",
 "switch_locked" : "Lock",
 "switch_open" : "Open",
-
 "toggle" : "Toggle",
+
+"weeklyProgram" : "Weekly program",
+
+"optionIgnore" : "Profile not active",
+"optionOn" : "Auto mode",
+"optionOff" : "Manual mode",

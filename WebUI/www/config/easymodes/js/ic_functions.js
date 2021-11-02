@@ -1840,30 +1840,36 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
 
     valElm.val(val);
   };
+  if (typeof device != "undefined") {
+    jQuery.each(device.channels, function (index, channel) {
 
-  jQuery.each(device.channels, function(index,channel) {
+      if (channel.channelType == "KEY_TRANSCEIVER" || channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER" || channel.channelType == "ACCESS_TRANSCEIVER") {
 
-    if (channel.channelType == "KEY_TRANSCEIVER" || channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER" ) {
+        html = (counter == 0 || counter == 16) ? "" : html;
 
-      html = (counter == 0 || counter == 16) ? "" : html;
+        html += "<td style='text-align:center;'>";
+        html += "<label for='abortEventSendingCh_" + chn + "_" + counter + "' style='background-color:white; display:block; text-align:center;'>" + channel.index + "</label>";
+        if (isBitSet(value, counter)) {
+          html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' checked onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+        } else {
+          html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+        }
+        html += "</td>";
 
-      html += "<td style='text-align:center;'>";
-      html += "<label for='abortEventSendingCh_" + chn + "_" + counter + "' style='background-color:white; display:block; text-align:center;'>" + channel.index + "</label>";
-      if (isBitSet(value, counter)) {
-        html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' checked onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
-      } else {
-        html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+        if (counter <= 15) {
+          html_1 = html;
+        } else if (counter <= 31) {
+          html_2 = html;
+        }
+        counter++;
       }
-      html += "</td>";
-
-      if (counter <= 15) {
-        html_1  = html;
-      } else if( counter <= 31) {
-        html_2 = html;
-      }
-      counter++;
-    }
-  });
+    });
+  } else {
+    // SPHM-884
+    var mainElm = jQuery("[name='abortEventSendingChannels']");
+    mainElm.children(":first-child").text(translateKey("hintSetReadyNotComplete"));
+    mainElm.next().hide();
+  }
   html_1 += "<td><input type='text' class='hidden' id='separate_CHANNEL_"+chn+"_"+prn+"' size='6' name='ABORT_EVENT_SENDING_CHANNELS' value='"+value+"'></td>";
   hookElm_1.html(html_1);
 

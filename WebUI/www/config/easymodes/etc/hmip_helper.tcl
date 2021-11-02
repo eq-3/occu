@@ -3,7 +3,7 @@
 
 # type = 'delay' or 'timeOnOff'
 # base = Unit, factor = value
-proc getComboBox {prn pref specialElement type} {
+proc getComboBox {prn pref specialElement type {extraparam ""}} {
     global psDescr
     upvar ps ps
     set s ""
@@ -59,7 +59,7 @@ proc getComboBox {prn pref specialElement type} {
 
 
       "rampOnOff" {
-        append s [getRampOnOff $prn $pref $specialElement]
+        append s [getRampOnOff $prn $pref $specialElement $extraparam]
       }
 
       "switchingInterval" {
@@ -1245,11 +1245,15 @@ proc getTimeOnOff {prn pref specialElement} {
       return $s
 }
 
-proc getRampOnOff {prn pref specialElement} {
+proc getRampOnOff {prn pref specialElement {extraparam ""}} {
       set s ""
       append s "<td>"
       append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setRampOnOffValues(this.id, $prn, $pref, \'$specialElement\')\">"
-        append s "<option value=\"0\">\${optionNotActive}</option>"
+        if {[string equal $extraparam "SERVOSPEED"] == 0} {
+          append s "<option value=\"0\">\${optionNotActive}</option>"
+        } else {
+          append s "<option value=\"0\">\${optionServoSpeed}</option>"
+        }
         append s "<option value=\"1\">\${optionUnit200MS}</option>"
         append s "<option value=\"2\">\${optionUnit500MS}</option>"
         append s "<option value=\"3\">\${optionUnit1S}</option>"

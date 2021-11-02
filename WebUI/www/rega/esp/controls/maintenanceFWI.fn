@@ -1,0 +1,187 @@
+function ::CreateMaintenance()
+{
+  object oDevice = dom.GetObject(cObj.Device());
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+  integer chInterfaceID = ch.Interface();
+  object chInterface = dom.GetObject(chInterfaceID);
+
+  object objBlockedPermanent = cObj.DPByControl("MAINTENANCE.BLOCKED_PERMANENT");
+  object objBlockedTemporary = cObj.DPByControl("MAINTENANCE.BLOCKED_TEMPORARY");
+  object objClearError = cObj.DPByControl("MAINTENANCE.CLEAR_ERROR");
+  object objCodeCommand = cObj.DPByControl("MAINTENANCE.CODE_COMMAND");
+  object objCodeID = cObj.DPByControl("MAINTENANCE.CODE_ID");
+  object objCodeState = cObj.DPByControl("MAINTENANCE.CODE_STATE");
+
+  object objCodeUsed01 = cObj.DPByControl("MAINTENANCE.CODE_USED_01");
+  boolean valCodeUsed01 = cObj.DPByControl("MAINTENANCE.CODE_USED_01").Value();
+  boolean valCodeUsed02 = cObj.DPByControl("MAINTENANCE.CODE_USED_02").Value();
+  boolean valCodeUsed03 = cObj.DPByControl("MAINTENANCE.CODE_USED_03").Value();
+  boolean valCodeUsed04 = cObj.DPByControl("MAINTENANCE.CODE_USED_04").Value();
+  boolean valCodeUsed05 = cObj.DPByControl("MAINTENANCE.CODE_USED_05").Value();
+  boolean valCodeUsed06 = cObj.DPByControl("MAINTENANCE.CODE_USED_06").Value();
+  boolean valCodeUsed07 = cObj.DPByControl("MAINTENANCE.CODE_USED_07").Value();
+  boolean valCodeUsed08 = cObj.DPByControl("MAINTENANCE.CODE_USED_08").Value();
+  boolean valCodeUsed09 = cObj.DPByControl("MAINTENANCE.CODE_USED_09").Value();
+  boolean valCodeUsed10 = cObj.DPByControl("MAINTENANCE.CODE_USED_10").Value();
+  boolean valCodeUsed11 = cObj.DPByControl("MAINTENANCE.CODE_USED_11").Value();
+  boolean valCodeUsed12 = cObj.DPByControl("MAINTENANCE.CODE_USED_12").Value();
+  boolean valCodeUsed13 = cObj.DPByControl("MAINTENANCE.CODE_USED_13").Value();
+  boolean valCodeUsed14 = cObj.DPByControl("MAINTENANCE.CODE_USED_14").Value();
+  boolean valCodeUsed15 = cObj.DPByControl("MAINTENANCE.CODE_USED_15").Value();
+  boolean valCodeUsed16 = cObj.DPByControl("MAINTENANCE.CODE_USED_16").Value();
+  boolean valCodeUsed17 = cObj.DPByControl("MAINTENANCE.CODE_USED_17").Value();
+  boolean valCodeUsed18 = cObj.DPByControl("MAINTENANCE.CODE_USED_18").Value();
+  boolean valCodeUsed19 = cObj.DPByControl("MAINTENANCE.CODE_USED_19").Value();
+  boolean valCodeUsed20 = cObj.DPByControl("MAINTENANCE.CODE_USED_20").Value();
+
+  ! object objErrorCode = cObj.DPByControl("MAINTENANCE.ERROR_CODE");
+  object objSabotage = cObj.DPByControl("MAINTENANCE.SABOTAGE");
+
+  string valBlockedPermanent = "${lblNo}";
+  string valBlockedTemporary = "${lblNo}";
+
+  WriteLine("<td>");
+    WriteLine("<table align='center'>");
+
+      WriteLine("<tr>");
+
+        if (objBlockedPermanent) {
+          boolean blockedPermanent = objBlockedPermanent.Value();
+
+          if (blockedPermanent == true) {
+            valBlockedPermanent = "${lblYes}";
+          }
+
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableBlockedPermanently}:<br/>"#valBlockedPermanent#"</div>");
+          WriteLine("</td>");
+        }
+
+        if (objBlockedTemporary) {
+          boolean blockedTemporary = objBlockedTemporary.Value();
+
+          if (blockedTemporary == true) {
+            valBlockedTemporary = "${lblYes}";
+          }
+
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableBlockedTemporarily}:<br/>"#valBlockedTemporary#"</div>");
+          WriteLine("</td>");
+        }
+
+      WriteLine("</tr>");
+
+      WriteLine("<tr>");
+        if (objCodeState) {
+          integer codeState = objCodeState.Value();
+          string curState = "--";
+          if (codeState == 0) {curState = "${codeIdle}";}
+          if (codeState == 1) {curState = "${lblUser}: "#objCodeID.Value() + 1;}
+          if (codeState == 2) {curState = "${codeUnKnownCodeIDReceived}";}
+          if (codeState == 3) {curState = "${codeLearnModeForCodeIDStarted}";}
+          if (codeState == 4) {curState = "${codeLearnModeExitForCodeWithSuccess}";}
+          if (codeState == 5) {curState = "${codeLearnModeExitForCodeWithTimeout}";}
+          if (codeState == 6) {curState = "${codeLearnModeExitForCodeWithErrorDuplicateCode}";}
+          if (codeState == 7) {curState = "${codeCodeErased}";}
+
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCodeReceived}:<br/>"#curState#"</div>");
+          WriteLine("</td>");
+        }
+
+        if (objSabotage) {
+          boolean sabotage = objSabotage.Value();
+          string sabotageMsg = "${stringTableSabotageContactOk}";
+          if (sabotage == true) {sabotageMsg = "${stringTableSabotageMsg}";}
+          WriteLine("<td class='CLASS02518' colspan='1'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>"#sabotageMsg#"</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+
+      ! Check only if objCodeUsed01 is available. Then we assume the other objCodeUsedxx are also present.
+      if (objCodeUsed01) {
+
+        WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+        string sCodeUsed =
+        valCodeUsed01#
+        "\t"#valCodeUsed02#
+        "\t"#valCodeUsed03#
+        "\t"#valCodeUsed04#
+        "\t"#valCodeUsed05#
+        "\t"#valCodeUsed06#
+        "\t"#valCodeUsed07#
+        "\t"#valCodeUsed08#
+        "\t"#valCodeUsed09#
+        "\t"#valCodeUsed10#
+        "\t"#valCodeUsed11#
+        "\t"#valCodeUsed12#
+        "\t"#valCodeUsed13#
+        "\t"#valCodeUsed14#
+        "\t"#valCodeUsed15#
+        "\t"#valCodeUsed16#
+        "\t"#valCodeUsed17#
+        "\t"#valCodeUsed18#
+        "\t"#valCodeUsed19#
+        "\t"#valCodeUsed20;
+        string val;
+        string checked;
+        integer loop = 1;
+        WriteLine("<tr><td colspan='2'><div class='controlHeader'>${codeInUse}</div></td></tr>");
+        WriteLine("<tr><td colspan='2'><table>");
+
+          WriteLine("<tr>");
+             foreach(val, sCodeUsed) {
+              WriteLine("<td><span style='color:black;'>"#loop#"</span></td>");
+              loop = loop + 1;
+            }
+          WriteLine("</tr>");
+
+          loop = 1;
+          WriteLine("<tr>");
+            foreach(val, sCodeUsed) {
+              if (val == "true") {checked = "checked";} else {checked = "";}
+              WriteLine("<td><input type='radio' id='CodeUsed_"#loop#"' value="#val#" disabled='disabled' "#checked#"></td>");
+              loop = loop + 1;
+            }
+          WriteLine("</tr>");
+
+        WriteLine("</table></td></tr>");
+      }
+
+      WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+      WriteLine("<tr>");
+        WriteLine("<td style='text-align:center;'>");
+          ! btn code command
+          WriteLine("<div id='anchorCodeCommand_"#chnId#"' class='CLASS02551 ControlBtnOff' style='margin: 0 auto;'>${codeManagement}</div>");
+        WriteLine("</td>");
+
+        WriteLine("<td style='text-align:center;'>");
+          ! btn clear error
+          WriteLine("<div id='anchorClearError_"#chnId#"' class='CLASS02551 ControlBtnOff' style='margin: 0 auto;'>${clearStatusMessages}</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine("var opts = {};");
+    WriteLine("opts.deviceType = '"#oDevice.Label()#"';");
+    WriteLine("opts.chnID = '"#chnId#"';");
+    WriteLine("opts.chnAddress = '"#chnAddress#"';");
+    WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
+    if (objClearError) {WriteLine("opts.idClearError = '"#objClearError.ID()#"';");} else {WriteLine("opts.idClearError = '--';");}
+    if (objCodeCommand) {WriteLine("opts.idCodeCommand = '"#objCodeCommand.ID()#"';");} else {WriteLine("opts.idCodeCommand = '--';");}
+    if (objCodeID) {WriteLine("opts.idCodeID = '"#objCodeID.ID()#"';");} else {WriteLine("opts.idCodeID = '--';");}
+    WriteLine("ibs"#cObj.ID()#" = new iseHmIPWiegandIface(opts );" );
+
+  WriteLine("</script>");
+  return;
+}
+

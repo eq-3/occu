@@ -92,6 +92,10 @@ proc getMinMaxValueDescr {param} {
     set min "<span id='minTriggerAngle' >$triggerAngle</span>"
   }
 
+  if {$param == "NUMERIC_PIN_CODE"} {
+    return "\${unitNumericPinCode}"
+  }
+
   return "($min - $max)"
 }
 
@@ -160,6 +164,9 @@ proc getUserDefinedCondTXThresholdUnitMinMaxDescr {devType param} {
 }
 
 proc getTextField {param value chn prn {extraparam ""}} {
+
+  if {[string equal $value ""] == 1} {set value ''}
+
   global psDescr dev_descr
   upvar psDescr descr
   array_clear param_descr
@@ -242,7 +249,13 @@ proc getTextField {param value chn prn {extraparam ""}} {
       }
     }
   } else {
-    set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1)\" $extraparam>"
+    if {$param == "NUMERIC_PIN_CODE"} {
+      set minValue "0"
+      set maxValue "99999999"
+      set s "<input id=$elemId type=\"text\" size=\"5\" maxlength=\"8\" value=$value name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\} else \{ ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\}\" $extraparam>"
+    } else {
+      set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1)\" $extraparam>"
+    }
   }
 
   return $s
@@ -425,10 +438,17 @@ proc getHelpIcon {topic {x 0} {y 0}} {
   # Set the size for known parameters
   switch $topic {
    "ABORT_EVENT_SENDING_CHANNELS" {set x 500; set y 140}
+   "ABORT_EVENT_SENDING_CHANNELS_ACCESS_TRANSCEIVER" {set x 500; set y 160}
    "AUTO_HYDRAULIC_ADJUSTMENT" {set x 500; set y 75}
    "BLIND_AUTOCALIBRATION" {set x 450; set y 75}
    "BLIND_REFERENCE_RUNNING_TIME" {set x 450; set y 160}
+   "BLOCKING_ON_SABOTAGE" {set x 450; set y 100}
    "BLOCKING_PERIOD" {set x 450; set y 100}
+   "BLOCKING_PERMANENT" {set x 450; set y 150}
+   "BLOCKING_PERMANENT_WKP" {set x 450; set y 180}
+   "BLOCKING_PERMANENT_FWI" {set x 450; set y 150}
+   "BLOCKING_TEMPORARY" {set x 450; set y 150}
+   "BLOCKING_TEMPORARY_FWI" {set x 450; set y 150}
    "BOOST_TIME_PERIOD" {set x 450; set y 120}
    "CALIBRATION_PPM" {set x 500; set y 250}
    "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
@@ -447,7 +467,9 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "MOUNTING_ORIENTATION" {set x 450; set y 75}
    "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
+   "PSM_CHANNEL_OPERATION_MODE" {set x 450; set y 100}
    "OUTPUT_SWAP" {set x 450; set y 100}
+   "OUTPUT_SWAP_SERVO" {set x 450; set y 50}
    "PERMANENT_FULL_RX" {set x 500; set y 160}
    "PIR_SENSITIVITY" {set x 500; set y 210}
    "PWM_AT_LOW_VALVE_POSITION" {set x 500; set y 130}
@@ -458,7 +480,6 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "TWO_POINT_HYSTERESIS" {set x 450; set y 160}
    "WEEK_PROGRAM_POINTER" {set x 400; set y 100}
    "WEEK_PROGRAM_POINTER_group" {set x 400; set y 100}
-
   }
 
   set ret "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp('$topic', '$x', '$y')\">"
@@ -498,15 +519,19 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
   set timeBaseParam "$timebase\_BASE"
   set timeFactorParam "$timebase\_FACTOR"
 
-  set paramBaseDescr [_getParamDescrKey $timeBaseParam]
-  set paramFactorDescr [_getParamDescrKey $timeFactorParam]
-
+  if {[string equal $extraparam "SERVOSPEED"] == 0} {
+    set paramBaseDescr [_getParamDescrKey $timeBaseParam]
+    set paramFactorDescr [_getParamDescrKey $timeFactorParam]
+  } else {
+    set paramBaseDescr "SERVO_SPEED_UNIT"
+    set paramFactorDescr "SERVO_SPEED_FACTOR"
+  }
   set javascriptDelay 100
 
   incr pref
   append html "<tr $extraparam>"
   append html "<td>\${$paramDescr}</td>"
-  append html [getComboBox $prn $pref $special_input_id $type] ;# hmip_helper
+  append html [getComboBox $prn $pref $special_input_id $type $extraparam] ;# hmip_helper
   append html "</tr>"
 
   append html "<tr id=\"timeBase\_$prn\_$pref\" class=\"hidden\"><td>\${$paramBaseDescr}</td><td>"

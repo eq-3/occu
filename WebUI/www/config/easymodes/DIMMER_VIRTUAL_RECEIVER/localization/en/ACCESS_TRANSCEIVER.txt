@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the light is switched on to the specified brightness value.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the light is switched off.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When authorisation is granted and the correct code is entered, the light alternates between the set brightness value and &quot;off&quot;.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">The light is switched on for the specified duration when authorisation is granted and the correct code is entered. In the switch-off delay, the level is lowered slightly as a warning, and then slowly dimmed down to &quot;off&quot;.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",

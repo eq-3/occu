@@ -67,105 +67,107 @@ function ::CreateDrap()
       if (objErrorPowerShortCircuitDataLineBus2.Value() == 1) {errPowerShortCircuitDataLineBus2 = "${stringTableErrorShortCircuitDataLineBus2True}"; bError = true; bErrorPowerShortCircuitDataLineBus2 = true;}
     }
 
+    WriteLine("<tr>");
+      WriteLine("<td>");
+        WriteLine("<table align='center'>");
 
-    WriteLine("<td>");
-      WriteLine("<table align='center'>");
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518' colspan='2'>");
+              WriteLine("<div class='ControlBtnInfo'><b><u>"#cObj.Label()#"</u></b></div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+
+          Call("/esp/controls/hmipw_identification.fn::CreateIdentification()");
+
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblIPAddress}<br/>"#objIPAddress.Value()#"</div>");
+            WriteLine("</td>");
+
+            WriteLine("<td class='CLASS02518' colspan='1'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>"#commState#"</div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
 
         WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518' colspan='2'>");
-            WriteLine("<div class='ControlBtnInfo'><b><u>"#cObj.Label()#"</u></b></div>");
-          WriteLine("</td>");
+          if (objVoltage) {
+            WriteLine("<td class='CLASS02518'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCurrentOperatingVoltage}<br/>"#objVoltage.Value().ToString(1)#" "#objVoltage.ValueUnit()#"</div>");
+            WriteLine("</td>");
+          }
+          if (objVoltageStatus) {
+            WriteLine("<td class='CLASS02518'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableOperationVoltageState}<br/>${lblVoltageStatus_"#objVoltageStatus.Value()#"}</div>");
+            WriteLine("</td>");
+          }
         WriteLine("</tr>");
 
         WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518' colspan='1'>");
-            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblIPAddress}<br/>"#objIPAddress.Value()#"</div>");
-          WriteLine("</td>");
-
-          WriteLine("<td class='CLASS02518' colspan='1'>");
-            WriteLine("<div class='ControlBtnInfo CLASS02532'>"#commState#"</div>");
-          WriteLine("</td>");
+          if (objTemperature) {
+            WriteLine("<td class='CLASS02518'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblOperationTemp}<br/>"#objTemperature.Value().ToString(1)#objTemperature.ValueUnit()#"</div>");
+            WriteLine("</td>");
+          }
+          if (objErrorOverHeat) {
+            WriteLine("<td class='CLASS02518'>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>"#overTemp#"</div>");
+            WriteLine("</td>");
+          }
         WriteLine("</tr>");
 
-      WriteLine("<tr>");
-        if (objVoltage) {
-          WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCurrentOperatingVoltage}<br/>"#objVoltage.Value().ToString(1)#" "#objVoltage.ValueUnit()#"</div>");
-          WriteLine("</td>");
+        if (bError) {WriteLine("<tr><td colspan='2'><hr></td></tr>");}
+
+        if (bErrorBusConfigMismatch) {
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+              WriteLine("<div class='ControlBtnInfo'>"#errBusConfigMismatch#"</div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
         }
-        if (objVoltageStatus) {
-          WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableOperationVoltageState}<br/>${lblVoltageStatus_"#objVoltageStatus.Value()#"}</div>");
-          WriteLine("</td>");
+
+        if (bErrorPowerShortCurcuitBus1) {
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+              WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitBus1#"</div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
         }
-      WriteLine("</tr>");
 
-      WriteLine("<tr>");
-        if (objTemperature) {
-          WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblOperationTemp}<br/>"#objTemperature.Value().ToString(1)#objTemperature.ValueUnit()#"</div>");
-          WriteLine("</td>");
+        if (bErrorPowerShortCurcuitBus2) {
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+              WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitBus2#"</div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
         }
-        if (objErrorOverHeat) {
-          WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div class='ControlBtnInfo CLASS02532'>"#overTemp#"</div>");
-          WriteLine("</td>");
+
+        if (bErrorPowerShortCircuitDataLineBus1) {
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+              WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitDataLineBus1#"</div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
         }
-      WriteLine("</tr>");
 
-      if (bError) {WriteLine("<tr><td colspan='2'><hr></td></tr>");}
+        if (bErrorPowerShortCircuitDataLineBus2) {
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+              WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitDataLineBus2#"</div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+        }
 
-      if (bErrorBusConfigMismatch) {
-        WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
-            WriteLine("<div class='ControlBtnInfo'>"#errBusConfigMismatch#"</div>");
-          WriteLine("</td>");
-        WriteLine("</tr>");
-      }
+        if (bErrorUnderVoltage) {
+          WriteLine("<tr>");
+            WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
+              WriteLine("<div class='ControlBtnInfo'>"#underVoltage#"</div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+        }
 
-      if (bErrorPowerShortCurcuitBus1) {
-        WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
-            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitBus1#"</div>");
-          WriteLine("</td>");
-        WriteLine("</tr>");
-      }
-
-      if (bErrorPowerShortCurcuitBus2) {
-        WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
-            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitBus2#"</div>");
-          WriteLine("</td>");
-        WriteLine("</tr>");
-      }
-
-      if (bErrorPowerShortCircuitDataLineBus1) {
-        WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
-            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitDataLineBus1#"</div>");
-          WriteLine("</td>");
-        WriteLine("</tr>");
-      }
-
-      if (bErrorPowerShortCircuitDataLineBus2) {
-        WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
-            WriteLine("<div class='ControlBtnInfo'>"#errPowerShortCircuitDataLineBus2#"</div>");
-          WriteLine("</td>");
-        WriteLine("</tr>");
-      }
-
-      if (bErrorUnderVoltage) {
-        WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518 controlRedBorder' colspan='2'>");
-            WriteLine("<div class='ControlBtnInfo'>"#underVoltage#"</div>");
-          WriteLine("</td>");
-        WriteLine("</tr>");
-      }
-
-      WriteLine("</table>");
-    WriteLine("</td>");
-
+        WriteLine("</table>");
+      WriteLine("</td>");
+    WriteLine("</tr>");
   return;
 }
 

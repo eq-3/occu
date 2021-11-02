@@ -9,9 +9,14 @@ jQuery.extend(true,langJSON, {
     "lblWPDuration" : "Einschaltdauer",
     "lblWPDuration1" : "Dauer",
     "lblWPRamptime" : "Rampenzeit",
+    "lblWPServoRamptime" : "Geschwindigkeit/Fahrzeit",
     "lblWPBrightness" : "Helligkeit",
     "lblWPServoPos" : "Servoposition",
     "lblWPState" : "Schaltzustand",
+
+    "lblWPState_Access" : "Schaltzustand/<br/>Zugriffsberechtigung",
+    "lblWP_Access" : "Zugriffsberechtigung",
+
     "lblWPPermission" : "Berechtigung",
     "lblWPAction" : "Aktion",
     "lblWPBlindLevel" : "Behangh%F6he",
@@ -80,6 +85,11 @@ jQuery.extend(true,langJSON, {
     "optionDLDAction3" : "Entriegeln + Auto-Relock Ende",
     "optionDLDAction4" : "Auto-Relock Ende",
 
+    "set comment" : "SERVO_Duration not in use",
+    "SERVO_Duration" : "Help for SERVO_Duration",
+
+    "hintAccessControlAstroNotWorking" : "<span class='attention'><b>Achtung!</b> Die Astrofunktion wirkt nur f%FCr Schaltaktoren.</span>",
+
     "dummy" : ""
   },
 
@@ -93,9 +103,14 @@ jQuery.extend(true,langJSON, {
     "lblWPDuration" : "Switch-on time",
     "lblWPDuration1" : "Duration",
     "lblWPRamptime" : "Ramp time",
+    "lblWPServoRamptime" : "Speed/driving time",
     "lblWPBrightness" : "Brightness",
-    "lblWPServoPos" : "en* Servoposition",
+    "lblWPServoPos" : "Servo position",
     "lblWPState" : "Switching status",
+
+    "lblWPState_Access" : "Switching status/<br/>Access authorisation",
+    "lblWP_Access" : "Access authorisation",
+
     "lblWPPermission" : "Permission",
     "lblWPAction" : "Action",
     "lblWPBlindLevel" : "Height of blinds",
@@ -162,6 +177,11 @@ jQuery.extend(true,langJSON, {
     "optionDLDAction2" : "Lock + Auto Relock start",
     "optionDLDAction3" : "Unlock + Auto Relock end",
     "optionDLDAction4" : "Auto Relock end",
+
+    "set comment" : "SERVO_Duration not in use",
+    "SERVO_Duration" : "Help for SERVO_Duration",
+
+    "hintAccessControlAstroNotWorking" : "<span class='attention'><b>Attention!</b> The astro function only works for switch actuators.</span>",
 
     "dummy" : ""
   }

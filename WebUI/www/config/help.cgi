@@ -109,7 +109,7 @@ proc action_put_page {} {
       puts "s += \"<table cellspacing='8' >\";"
       puts "s += \"<tbody>\";"
       puts "s += \"<tr>\";"
-      puts "s += \"<td style=\"vertical-align:middle;\" >\";"
+      puts "s += \"<td style='vertical-align:middle;'>\";"
       puts "s += \"<div class='FooterButton' onclick='goStart()'  style='text-align:center;'>Zur&uuml;ck\";"
       puts "s += \"</div>\";"
       puts "s += \"</td>\";"

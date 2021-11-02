@@ -1,8 +1,7 @@
 "description_1" : "<span class=\"translated\">The blind is moved according to the selected switching command. If a lifting delay is set the blind / shutter will be moved after the delay time has expired.</span><br/><br/>",
-
 "description_2" : "<span class=\"translated\">If the selected switching command is detected, the blind is entirely raised or lowered alternately (toggle function). If a lifting delay is set the blind / shutter will be moved after the delay time has expired.</span><br/><br/>",
-
-"description_3" : "<span class=\"translated\">The profile is not active.</span>",
+"description_3" : "<span class=\"translated\">If the selected switching command is detected, the blind will be moved for the set time to a required position. If a delay is set the blind will be moved after the delay time has expired.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">The profile is not active.</span>",
 
 "subset_1" : "moved up",
 "subset_2" : "moved down",

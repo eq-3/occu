@@ -1772,32 +1772,354 @@ THE POSSIBILITY OF SUCH DAMAGE.
   
   
     <!-- HMIPServer / Java Source OSS Licence information -->
-  <h2><a name="HMIPServer">HMIPServer</a></h2>
-  <a href="#ApacheLicense2">Apache 2.0</a>, <a href="#LGPLV21">LGPLv2.1</a>, <a href="#BSD3">BSD 3-Clause</a>, <a href="#PublicDomain">Public Domain</a>, <a href="#MIT">MIT</a>, <a href="#CDCL1.0">COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0</a>, <a href="#EPL1">Eclipse Public License - Version 1.0</a>
-  <p>
-  HMIPServer itself is not Open Source software (OSS), but makes use of Open Source Software libraries. 
-  Please note the list of OSS used by HMIPServer as well as their particular licenses in the following.
+    <h2><a name="HMIPServer">HMIPServer</a></h2>
+    <a href="#ApacheLicense2">Apache 2.0</a>, <a href="#LGPLV21">LGPLv2.1</a>, <a href="#BSD3">BSD 3-Clause</a>, <a href="#PublicDomain">Public Domain</a>, <a href="#MIT">MIT</a>, <a href="#CDCL1.0">COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0</a>, <a href="#EPL1">Eclipse Public License - Version 1.0</a>
+    <p>
+    HMIPServer itself is not Open Source software (OSS), but makes use of Open Source Software libraries. 
+    Please note the list of OSS used by HMIPServer as well as their particular licenses in the following.
+    <pre>
+      (Public Domain) AOP alliance (aopalliance:aopalliance:1.0 - http://aopalliance.sourceforge.net)
+      (Bouncy Castle License) Legion of the Bouncy Castle Java Cryptography APIs (bouncycastle:bcprov-jdk16:140 - http://www.bouncycastle.org/java.html)
+      (New BSD License) Kryo (com.esotericsoftware.kryo:kryo:2.22 - http://code.google.com/p/kryo/)
+      (The Apache Software License, Version 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.7.0 - http://github.com/FasterXML/jackson)
+      (The Apache Software License, Version 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.7.4 - https://github.com/FasterXML/jackson-core)
+      (The Apache Software License, Version 2.0) jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.7.4 - http://github.com/FasterXML/jackson)
+      (The Apache Software License, Version 2.0) Jackson-dataformat-XML (com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.4 - http://wiki.fasterxml.com/JacksonExtensionXmlDataBinding)
+      (The Apache Software License, Version 2.0) Jackson-module-JAXB-annotations (com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.7.4 - http://github.com/FasterXML/jackson-module-jaxb-annotations)
+      (The Apache Software License, Version 2.0) Gson (com.google.code.gson:gson:2.2.4 - http://code.google.com/p/google-gson/)
+      (Apache 2.0) Gson (com.google.code.gson:gson:2.7 - https://github.com/google/gson/gson)
+      (The Apache Software License, Version 2.0) Guava: Google Core Libraries for Java (com.google.guava:guava:19.0 - https://github.com/google/guava/guava)
+      (The Apache Software License, Version 2.0) Google Guice - Core Library (com.google.inject:guice:3.0 - http://code.google.com/p/google-guice/guice/)
+      (The Apache License, Version 2.0) NRJavaSerial (org.bidib.com.neuronrobotics:nrjavaserial:3.12.0 - http://neuronrobotics.com)
+      (The Apache Software License, Version 2.0) Apache Commons Codec (commons-codec:commons-codec:1.9 - http://commons.apache.org/proper/commons-codec/)
+      (Apache License, Version 2.0) Apache Commons Collections (commons-collections:commons-collections:3.2.2 - http://commons.apache.org/collections/)
+      (The Apache Software License, Version 2.0) Commons IO (commons-io:commons-io:2.4 - http://commons.apache.org/io/)
+      (Apache License, Version 2.0) Apache Commons IO (commons-io:commons-io:2.5 - http://commons.apache.org/proper/commons-io/)
+      (The Apache Software License, Version 2.0) Commons Lang (commons-lang:commons-lang:2.6 - http://commons.apache.org/lang/)
+      (The Apache Software License, Version 2.0) Apache Commons Logging (commons-logging:commons-logging:1.2 - http://commons.apache.org/proper/commons-logging/)
+      (The Apache Software License, Version 2.0) Commons Net (commons-net:commons-net:3.3 - http://commons.apache.org/proper/commons-net/)
+      (Apache License 2.0) Metrics Core (io.dropwizard.metrics:metrics-core:3.1.2 - http://metrics.codahale.com/metrics-core/)
+      (Apache License, Version 2.0) Netty/Buffer (io.netty:netty-buffer:4.1.8.Final - http://netty.io/netty-buffer/)
+      (Apache License, Version 2.0) Netty/Codec (io.netty:netty-codec:4.1.8.Final - http://netty.io/netty-codec/)
+      (Apache License, Version 2.0) Netty/Codec/DNS (io.netty:netty-codec-dns:4.1.8.Final - http://netty.io/netty-codec-dns/)
+      (Apache License, Version 2.0) Netty/Codec/HTTP (io.netty:netty-codec-http:4.1.8.Final - http://netty.io/netty-codec-http/)
+      (Apache License, Version 2.0) Netty/Codec/HTTP2 (io.netty:netty-codec-http2:4.1.8.Final - http://netty.io/netty-codec-http2/)
+      (Apache License, Version 2.0) Netty/Codec/Socks (io.netty:netty-codec-socks:4.1.8.Final - http://netty.io/netty-codec-socks/)
+      (Apache License, Version 2.0) Netty/Common (io.netty:netty-common:4.1.8.Final - http://netty.io/netty-common/)
+      (Apache License, Version 2.0) Netty/Handler (io.netty:netty-handler:4.1.8.Final - http://netty.io/netty-handler/)
+      (Apache License, Version 2.0) Netty/Handler/Proxy (io.netty:netty-handler-proxy:4.1.8.Final - http://netty.io/netty-handler-proxy/)
+      (Apache License, Version 2.0) Netty/Resolver (io.netty:netty-resolver:4.1.8.Final - http://netty.io/netty-resolver/)
+      (Apache License, Version 2.0) Netty/Resolver/DNS (io.netty:netty-resolver-dns:4.1.8.Final - http://netty.io/netty-resolver-dns/)
+      (Apache License, Version 2.0) Netty/Transport (io.netty:netty-transport:4.1.8.Final - http://netty.io/netty-transport/)
+      (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) vertx-auth-common (io.vertx:vertx-auth-common:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-ext/vertx-ext-parent/vertx-auth/vertx-auth-common)
+      (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) Vert.x Core (io.vertx:vertx-core:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-core)
+      (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) Vert.x Dropwizard Metrics (io.vertx:vertx-dropwizard-metrics:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-ext/vertx-ext-parent/vertx-dropwizard-metrics)
+      (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) vertx-web (io.vertx:vertx-web:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-ext/vertx-ext-parent/vertx-web-parent/vertx-web)
+      (The Apache Software License, Version 2.0) javax.inject (javax.inject:javax.inject:1 - http://code.google.com/p/atinject/)
+      (Common Public License Version 1.0) JUnit (junit:junit:4.11 - http://junit.org)
+      (Common Public License Version 1.0) JUnit (junit:junit:4.8.2 - http://junit.org)
+      (The Apache Software License, Version 2.0) Apache Log4j (log4j:log4j:1.2.17 - http://logging.apache.org/log4j/1.2/)
+      (Apache 2) opencsv (net.sf.opencsv:opencsv:2.3 - http://opencsv.sf.net)
+      (Apache License, Version 2.0) Apache HttpClient (org.apache.httpcomponents:httpclient:4.5.2 - http://hc.apache.org/httpcomponents-client)
+      (Apache License, Version 2.0) Apache HttpCore (org.apache.httpcomponents:httpcore:4.4.4 - http://hc.apache.org/httpcomponents-core-ga)
+      (The BSD License) Stax2 API (org.codehaus.woodstox:stax2-api:3.1.4 - http://wiki.fasterxml.com/WoodstoxStax2)
+      (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Asynchronous HTTP Client (org.eclipse.jetty:jetty-client:9.4.7.v20170914 - http://www.eclipse.org/jetty)
+      (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Http Utility (org.eclipse.jetty:jetty-http:9.4.7.v20170914 - http://www.eclipse.org/jetty)
+      (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: IO Utility (org.eclipse.jetty:jetty-io:9.4.7.v20170914 - http://www.eclipse.org/jetty)
+      (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Utilities (org.eclipse.jetty:jetty-util:9.4.7.v20170914 - http://www.eclipse.org/jetty)
+      (Apache License, Version 2.0) Apache FreeMarker (org.freemarker:freemarker-gae:2.3.26-incubating - http://freemarker.org/)
+      (New BSD License) Hamcrest Core (org.hamcrest:hamcrest-core:1.3 - https://github.com/hamcrest/JavaHamcrest/hamcrest-core)
+      (Apache License, Version 2.0) JmDNS (org.jmdns:jmdns:3.5.1 - http://jmdns.org)
+      (CDDL 1.0) jUPnP Core Library (org.jupnp:org.jupnp:2.6.0 - http://jupnp.org/bundles/org.jupnp)
+      (The Apache Software License, Version 2.0) mapdb (org.mapdb:mapdb:1.0.9 - http://www.mapdb.org)
+      (The Apache Software License, Version 2.0) (please note remarks below) rrd4j-ccu2 (org.rrd4j:rrd4j-ccu2:3.1 - no url defined)
+      (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.21 - http://www.slf4j.org)
+      (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.22 - http://www.slf4j.org)
+      (MIT License) SLF4J LOG4J-12 Binding (org.slf4j:slf4j-log4j12:1.7.22 - http://www.slf4j.org)
+      (Apache Software License) JTar (org.xeustechnologies:jtar:1.1 - http://nexus.sonatype.org/oss-repository-hosting.html/jtar)
+      (Public Domain) DejaVu Fonts (see below for license and copyright remarks)       
+      </pre>
+    </p>
+  
+    <p>
+      Bouncy Castle License
+    
+      <pre>
+    License
+    
+    Copyright (c) 2000 - 2019 The Legion of the Bouncy Castle Inc. (https://www.bouncycastle.org)
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+      </pre>
+    </p>
+  
+    <p>
+  RRD4J License:</br>
+  ----------------------------------------------------------------------------------
+    
   <pre>
+    /*
+   * Copyright 2011 The RRD4J Authors.
+   *
+   * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+   * use this file except in compliance with the License. You may obtain a copy of
+   * the License at
+   *
+   * http://www.apache.org/licenses/LICENSE-2.0
+   *
+   * Unless required by applicable law or agreed to in writing, software
+   * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+   * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+   * License for the specific language governing permissions and limitations under
+   * the License.
+   */
+  
+   //Original JRobin Code Base:
+  
+  /******************************************************************************
+  * Copyright (c) 2001-2005 Sasa Markovic and Ciaran Treanor.
+  * Copyright (c) 2011 The OpenNMS Group, Inc.
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Lesser General Public
+  * License as published by the Free Software Foundation; either
+  * version 2.1 of the License, or (at your option) any later version.
+  *
+  * This library is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+  * Lesser General Public License for more details.
+  *
+  * You should have received a copy of the GNU Lesser General Public
+  * License along with this library; if not, write to the Free Software
+  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301 USA
+  ******************************************************************************/
+  </pre>
+  ----------------------------------------------------------------------------------
+  </p>
+  <p>
+  DejaVu Fonts - License:</br>
+  <pre>
+    Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
+    Glyphs imported from Arev fonts are (c) Tavmjong Bah (see below)
+    
+    
+    Bitstream Vera Fonts Copyright
+    ------------------------------
+    
+    Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is
+    a trademark of Bitstream, Inc.
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of the fonts accompanying this license ("Fonts") and associated
+    documentation files (the "Font Software"), to reproduce and distribute the
+    Font Software, including without limitation the rights to use, copy, merge,
+    publish, distribute, and/or sell copies of the Font Software, and to permit
+    persons to whom the Font Software is furnished to do so, subject to the
+    following conditions:
+    
+    The above copyright and trademark notices and this permission notice shall
+    be included in all copies of one or more of the Font Software typefaces.
+    
+    The Font Software may be modified, altered, or added to, and in particular
+    the designs of glyphs or characters in the Fonts may be modified and
+    additional glyphs or characters may be added to the Fonts, only if the fonts
+    are renamed to names not containing either the words "Bitstream" or the word
+    "Vera".
+    
+    This License becomes null and void to the extent applicable to Fonts or Font
+    Software that has been modified and is distributed under the "Bitstream
+    Vera" names.
+    
+    The Font Software may be sold as part of a larger software package but no
+    copy of one or more of the Font Software typefaces may be sold by itself.
+    
+    THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,
+    TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME
+    FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING
+    ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,
+    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
+    THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE
+    FONT SOFTWARE.
+    
+    Except as contained in this notice, the names of Gnome, the Gnome
+    Foundation, and Bitstream Inc., shall not be used in advertising or
+    otherwise to promote the sale, use or other dealings in this Font Software
+    without prior written authorization from the Gnome Foundation or Bitstream
+    Inc., respectively. For further information, contact: fonts at gnome dot
+    org.
+    
+    Arev Fonts Copyright
+    ------------------------------
+    
+    Copyright (c) 2006 by Tavmjong Bah. All Rights Reserved.
+    
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of the fonts accompanying this license ("Fonts") and
+    associated documentation files (the "Font Software"), to reproduce
+    and distribute the modifications to the Bitstream Vera Font Software,
+    including without limitation the rights to use, copy, merge, publish,
+    distribute, and/or sell copies of the Font Software, and to permit
+    persons to whom the Font Software is furnished to do so, subject to
+    the following conditions:
+    
+    The above copyright and trademark notices and this permission notice
+    shall be included in all copies of one or more of the Font Software
+    typefaces.
+    
+    The Font Software may be modified, altered, or added to, and in
+    particular the designs of glyphs or characters in the Fonts may be
+    modified and additional glyphs or characters may be added to the
+    Fonts, only if the fonts are renamed to names not containing either
+    the words "Tavmjong Bah" or the word "Arev".
+    
+    This License becomes null and void to the extent applicable to Fonts
+    or Font Software that has been modified and is distributed under the 
+    "Tavmjong Bah Arev" names.
+    
+    The Font Software may be sold as part of a larger software package but
+    no copy of one or more of the Font Software typefaces may be sold by
+    itself.
+    
+    THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
+    OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL
+    TAVMJONG BAH BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+    INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
+    DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
+    OTHER DEALINGS IN THE FONT SOFTWARE.
+    
+    Except as contained in this notice, the name of Tavmjong Bah shall not
+    be used in advertising or otherwise to promote the sale, use or other
+    dealings in this Font Software without prior written authorization
+    from Tavmjong Bah. For further information, contact: tavmjong @ free
+    . fr.
+    
+    TeX Gyre DJV Math
+    -----------------
+    Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
+    
+    Math extensions done by B. Jackowski, P. Strzelczyk and P. Pianowski
+    (on behalf of TeX users groups) are in public domain.
+    
+    Letters imported from Euler Fraktur from AMSfonts are (c) American
+    Mathematical Society (see below).
+    Bitstream Vera Fonts Copyright
+    Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera
+    is a trademark of Bitstream, Inc.
+    
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of the fonts accompanying this license (˜Fonts˜) and associated
+    documentation
+    files (the ˜Font Software˜), to reproduce and distribute the Font Software,
+    including without limitation the rights to use, copy, merge, publish,
+    distribute,
+    and/or sell copies of the Font Software, and to permit persons  to whom
+    the Font Software is furnished to do so, subject to the following
+    conditions:
+    
+    The above copyright and trademark notices and this permission notice
+    shall be
+    included in all copies of one or more of the Font Software typefaces.
+    
+    The Font Software may be modified, altered, or added to, and in particular
+    the designs of glyphs or characters in the Fonts may be modified and
+    additional
+    glyphs or characters may be added to the Fonts, only if the fonts are
+    renamed
+    to names not containing either the words ˜Bitstream˜ or the word ˜Vera˜.
+    
+    This License becomes null and void to the extent applicable to Fonts or
+    Font Software
+    that has been modified and is distributed under the ˜Bitstream Vera˜
+    names.
+    
+    The Font Software may be sold as part of a larger software package but
+    no copy
+    of one or more of the Font Software typefaces may be sold by itself.
+    
+    THE FONT SOFTWARE IS PROVIDED ˜AS IS˜, WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,
+    TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME
+    FOUNDATION
+    BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL,
+    SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN
+    ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR
+    INABILITY TO USE
+    THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
+    Except as contained in this notice, the names of GNOME, the GNOME
+    Foundation,
+    and Bitstream Inc., shall not be used in advertising or otherwise to promote
+    the sale, use or other dealings in this Font Software without prior written
+    authorization from the GNOME Foundation or Bitstream Inc., respectively.
+    For further information, contact: fonts at gnome dot org.
+    
+    AMSFonts (v. 2.2) copyright
+    
+    The PostScript Type 1 implementation of the AMSFonts produced by and
+    previously distributed by Blue Sky Research and Y&Y, Inc. are now freely
+    available for general use. This has been accomplished through the
+    cooperation
+    of a consortium of scientific publishers with Blue Sky Research and Y&Y.
+    Members of this consortium include:
+    
+    Elsevier Science IBM Corporation Society for Industrial and Applied
+    Mathematics (SIAM) Springer-Verlag American Mathematical Society (AMS)
+    
+    In order to assure the authenticity of these fonts, copyright will be
+    held by
+    the American Mathematical Society. This is not meant to restrict in any way
+    the legitimate use of the fonts, such as (but not limited to) electronic
+    distribution of documents containing these fonts, inclusion of these fonts
+    into other public domain or commercial font collections or computer
+    applications, use of the outline data to create derivative fonts and/or
+    faces, etc. However, the AMS does require that the AMS copyright notice be
+    removed from any derivative versions of the fonts which have been altered in
+    any way. In addition, to ensure the fidelity of TeX documents using Computer
+    Modern fonts, Professor Donald Knuth, creator of the Computer Modern faces,
+    has requested that any alterations which yield different font metrics be
+    given a different name.
+    
+    $Id$
+    
+  </pre>
+  </p>
+  
+    </p>
+    </br>
+  
+  <!-- ESHBridge.jar -->
+  <h2><a name="ESHBridge">ESHBridge</a></h2>
+  <a href="#ApacheLicense2">Apache 2.0</a>, <a href="#BSD3">BSD 3-Clause</a>, <a href="#PublicDomain">Public Domain</a>, <a href="#MIT">MIT</a>, <a href="#CDCL1.0">COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0</a>, <a href="#EPL1">Eclipse Public License - Version 1.0</a>
+  <p>The ESHBridge(.jar) itself is not Open Source software (OSS), but makes use of Open Source Software libraries. 
+    Please note the list of OSS used by ESHBridge as well as their particular licenses in the following.</p>
+    <!-- Insert licences list from maven here -->
+    <pre>
     (Public Domain) AOP alliance (aopalliance:aopalliance:1.0 - http://aopalliance.sourceforge.net)
-    (Bouncy Castle License) Legion of the Bouncy Castle Java Cryptography APIs (bouncycastle:bcprov-jdk16:140 - http://www.bouncycastle.org/java.html)
-    (New BSD License) Kryo (com.esotericsoftware.kryo:kryo:2.22 - http://code.google.com/p/kryo/)
     (The Apache Software License, Version 2.0) Jackson-annotations (com.fasterxml.jackson.core:jackson-annotations:2.7.0 - http://github.com/FasterXML/jackson)
     (The Apache Software License, Version 2.0) Jackson-core (com.fasterxml.jackson.core:jackson-core:2.7.4 - https://github.com/FasterXML/jackson-core)
     (The Apache Software License, Version 2.0) jackson-databind (com.fasterxml.jackson.core:jackson-databind:2.7.4 - http://github.com/FasterXML/jackson)
     (The Apache Software License, Version 2.0) Jackson-dataformat-XML (com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.4 - http://wiki.fasterxml.com/JacksonExtensionXmlDataBinding)
     (The Apache Software License, Version 2.0) Jackson-module-JAXB-annotations (com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.7.4 - http://github.com/FasterXML/jackson-module-jaxb-annotations)
     (The Apache Software License, Version 2.0) Gson (com.google.code.gson:gson:2.2.4 - http://code.google.com/p/google-gson/)
-    (Apache 2.0) Gson (com.google.code.gson:gson:2.7 - https://github.com/google/gson/gson)
     (The Apache Software License, Version 2.0) Guava: Google Core Libraries for Java (com.google.guava:guava:19.0 - https://github.com/google/guava/guava)
     (The Apache Software License, Version 2.0) Google Guice - Core Library (com.google.inject:guice:3.0 - http://code.google.com/p/google-guice/guice/)
-    (The Apache License, Version 2.0) NRJavaSerial (com.neuronrobotics:nrjavaserial:5.2.1 - http://neuronrobotics.com)
     (The Apache Software License, Version 2.0) Apache Commons Codec (commons-codec:commons-codec:1.9 - http://commons.apache.org/proper/commons-codec/)
     (Apache License, Version 2.0) Apache Commons Collections (commons-collections:commons-collections:3.2.2 - http://commons.apache.org/collections/)
-    (The Apache Software License, Version 2.0) Commons IO (commons-io:commons-io:2.4 - http://commons.apache.org/io/)
     (Apache License, Version 2.0) Apache Commons IO (commons-io:commons-io:2.5 - http://commons.apache.org/proper/commons-io/)
     (The Apache Software License, Version 2.0) Commons Lang (commons-lang:commons-lang:2.6 - http://commons.apache.org/lang/)
     (The Apache Software License, Version 2.0) Apache Commons Logging (commons-logging:commons-logging:1.2 - http://commons.apache.org/proper/commons-logging/)
-    (The Apache Software License, Version 2.0) Commons Net (commons-net:commons-net:3.3 - http://commons.apache.org/proper/commons-net/)
     (Apache License 2.0) Metrics Core (io.dropwizard.metrics:metrics-core:3.1.2 - http://metrics.codahale.com/metrics-core/)
     (Apache License, Version 2.0) Netty/Buffer (io.netty:netty-buffer:4.1.8.Final - http://netty.io/netty-buffer/)
     (Apache License, Version 2.0) Netty/Codec (io.netty:netty-codec:4.1.8.Final - http://netty.io/netty-codec/)
@@ -1811,15 +2133,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
     (Apache License, Version 2.0) Netty/Resolver (io.netty:netty-resolver:4.1.8.Final - http://netty.io/netty-resolver/)
     (Apache License, Version 2.0) Netty/Resolver/DNS (io.netty:netty-resolver-dns:4.1.8.Final - http://netty.io/netty-resolver-dns/)
     (Apache License, Version 2.0) Netty/Transport (io.netty:netty-transport:4.1.8.Final - http://netty.io/netty-transport/)
-    (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) vertx-auth-common (io.vertx:vertx-auth-common:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-ext/vertx-ext-parent/vertx-auth/vertx-auth-common)
     (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) Vert.x Core (io.vertx:vertx-core:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-core)
     (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) Vert.x Dropwizard Metrics (io.vertx:vertx-dropwizard-metrics:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-ext/vertx-ext-parent/vertx-dropwizard-metrics)
-    (Eclipse Public License - v 1.0) (The Apache Software License, Version 2.0) vertx-web (io.vertx:vertx-web:3.4.1 - http://nexus.sonatype.org/oss-repository-hosting.html/vertx-parent/vertx-ext/vertx-ext-parent/vertx-web-parent/vertx-web)
     (The Apache Software License, Version 2.0) javax.inject (javax.inject:javax.inject:1 - http://code.google.com/p/atinject/)
-    (Common Public License Version 1.0) JUnit (junit:junit:4.11 - http://junit.org)
-    (Common Public License Version 1.0) JUnit (junit:junit:4.8.2 - http://junit.org)
     (The Apache Software License, Version 2.0) Apache Log4j (log4j:log4j:1.2.17 - http://logging.apache.org/log4j/1.2/)
-    (Apache 2) opencsv (net.sf.opencsv:opencsv:2.3 - http://opencsv.sf.net)
     (Apache License, Version 2.0) Apache HttpClient (org.apache.httpcomponents:httpclient:4.5.2 - http://hc.apache.org/httpcomponents-client)
     (Apache License, Version 2.0) Apache HttpCore (org.apache.httpcomponents:httpcore:4.4.4 - http://hc.apache.org/httpcomponents-core-ga)
     (The BSD License) Stax2 API (org.codehaus.woodstox:stax2-api:3.1.4 - http://wiki.fasterxml.com/WoodstoxStax2)
@@ -1827,283 +2144,20 @@ THE POSSIBILITY OF SUCH DAMAGE.
     (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Http Utility (org.eclipse.jetty:jetty-http:9.4.7.v20170914 - http://www.eclipse.org/jetty)
     (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: IO Utility (org.eclipse.jetty:jetty-io:9.4.7.v20170914 - http://www.eclipse.org/jetty)
     (Apache Software License - Version 2.0) (Eclipse Public License - Version 1.0) Jetty :: Utilities (org.eclipse.jetty:jetty-util:9.4.7.v20170914 - http://www.eclipse.org/jetty)
-    (Apache License, Version 2.0) Apache FreeMarker (org.freemarker:freemarker-gae:2.3.26-incubating - http://freemarker.org/)
-    (New BSD License) Hamcrest Core (org.hamcrest:hamcrest-core:1.3 - https://github.com/hamcrest/JavaHamcrest/hamcrest-core)
     (Apache License, Version 2.0) JmDNS (org.jmdns:jmdns:3.5.1 - http://jmdns.org)
-    (CDDL 1.0) jUPnP Core Library (org.jupnp:org.jupnp:2.2.0 - http://jupnp.org/bundles/org.jupnp)
+    (CDDL 1.0) jUPnP Core Library (org.jupnp:org.jupnp:2.6.0 - http://jupnp.org/bundles/org.jupnp)
     (The Apache Software License, Version 2.0) mapdb (org.mapdb:mapdb:1.0.9 - http://www.mapdb.org)
-    (The Apache Software License, Version 2.0) (please note remarks below) rrd4j-ccu2 (org.rrd4j:rrd4j-ccu2:3.1 - no url defined)
     (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.21 - http://www.slf4j.org)
-    (MIT License) SLF4J API Module (org.slf4j:slf4j-api:1.7.22 - http://www.slf4j.org)
     (MIT License) SLF4J LOG4J-12 Binding (org.slf4j:slf4j-log4j12:1.7.22 - http://www.slf4j.org)
-    (Apache Software License) JTar (org.xeustechnologies:jtar:1.1 - http://nexus.sonatype.org/oss-repository-hosting.html/jtar)
-    (Public Domain) DejaVu Fonts (see below for license and copyright remarks)       
-    </pre>
-    <!-- HMIPServer makes use of classes of EclipseSmartHome, which are NOT managed by maven -->
-    <pre>
+  </pre>
+    <!-- Additional license information, not managed by maven -->
+    <p><pre>
+    (The Apache Software License, Version 2.0) jlightify (Copyright 2014 Mikael Magnusson) (https://github.com/mikma/jlightify)
     (Eclipse Public License - Version 1.0) Eclipse SmartHome (git tag: ref-0.9.0.b6 - https://github.com/eclipse/smarthome/tree/ref-0.9.0.b6)
     (Eclipse Public License - Version 1.0) JDT Core/Null Analysis (org.eclipse.jdt.annotation) 
-    </pre>
-    
-
-
-<p>
-  Bouncy Castle License
-
-  <pre>
-License
-
-Copyright (c) 2000 - 2019 The Legion of the Bouncy Castle Inc. (https://www.bouncycastle.org)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
-  </pre>
-</p>
-
-  <p>
-RRD4J License:</br>
-----------------------------------------------------------------------------------
+    </pre></p>
   
-<pre>
-  /*
- * Copyright 2011 The RRD4J Authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
-
- //Original JRobin Code Base:
-
-/******************************************************************************
-* Copyright (c) 2001-2005 Sasa Markovic and Ciaran Treanor.
-* Copyright (c) 2011 The OpenNMS Group, Inc.
-*
-* This library is free software; you can redistribute it and/or
-* modify it under the terms of the GNU Lesser General Public
-* License as published by the Free Software Foundation; either
-* version 2.1 of the License, or (at your option) any later version.
-*
-* This library is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-* Lesser General Public License for more details.
-*
-* You should have received a copy of the GNU Lesser General Public
-* License along with this library; if not, write to the Free Software
-* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-02110-1301 USA
-******************************************************************************/
-</pre>
-----------------------------------------------------------------------------------
-</p>
-<p>
-DejaVu Fonts - License:</br>
-<pre>
-  Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
-  Glyphs imported from Arev fonts are (c) Tavmjong Bah (see below)
-  
-  
-  Bitstream Vera Fonts Copyright
-  ------------------------------
-  
-  Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera is
-  a trademark of Bitstream, Inc.
-  
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of the fonts accompanying this license ("Fonts") and associated
-  documentation files (the "Font Software"), to reproduce and distribute the
-  Font Software, including without limitation the rights to use, copy, merge,
-  publish, distribute, and/or sell copies of the Font Software, and to permit
-  persons to whom the Font Software is furnished to do so, subject to the
-  following conditions:
-  
-  The above copyright and trademark notices and this permission notice shall
-  be included in all copies of one or more of the Font Software typefaces.
-  
-  The Font Software may be modified, altered, or added to, and in particular
-  the designs of glyphs or characters in the Fonts may be modified and
-  additional glyphs or characters may be added to the Fonts, only if the fonts
-  are renamed to names not containing either the words "Bitstream" or the word
-  "Vera".
-  
-  This License becomes null and void to the extent applicable to Fonts or Font
-  Software that has been modified and is distributed under the "Bitstream
-  Vera" names.
-  
-  The Font Software may be sold as part of a larger software package but no
-  copy of one or more of the Font Software typefaces may be sold by itself.
-  
-  THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-  OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,
-  TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME
-  FOUNDATION BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING
-  ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES,
-  WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF
-  THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE
-  FONT SOFTWARE.
-  
-  Except as contained in this notice, the names of Gnome, the Gnome
-  Foundation, and Bitstream Inc., shall not be used in advertising or
-  otherwise to promote the sale, use or other dealings in this Font Software
-  without prior written authorization from the Gnome Foundation or Bitstream
-  Inc., respectively. For further information, contact: fonts at gnome dot
-  org.
-  
-  Arev Fonts Copyright
-  ------------------------------
-  
-  Copyright (c) 2006 by Tavmjong Bah. All Rights Reserved.
-  
-  Permission is hereby granted, free of charge, to any person obtaining
-  a copy of the fonts accompanying this license ("Fonts") and
-  associated documentation files (the "Font Software"), to reproduce
-  and distribute the modifications to the Bitstream Vera Font Software,
-  including without limitation the rights to use, copy, merge, publish,
-  distribute, and/or sell copies of the Font Software, and to permit
-  persons to whom the Font Software is furnished to do so, subject to
-  the following conditions:
-  
-  The above copyright and trademark notices and this permission notice
-  shall be included in all copies of one or more of the Font Software
-  typefaces.
-  
-  The Font Software may be modified, altered, or added to, and in
-  particular the designs of glyphs or characters in the Fonts may be
-  modified and additional glyphs or characters may be added to the
-  Fonts, only if the fonts are renamed to names not containing either
-  the words "Tavmjong Bah" or the word "Arev".
-  
-  This License becomes null and void to the extent applicable to Fonts
-  or Font Software that has been modified and is distributed under the 
-  "Tavmjong Bah Arev" names.
-  
-  The Font Software may be sold as part of a larger software package but
-  no copy of one or more of the Font Software typefaces may be sold by
-  itself.
-  
-  THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
-  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT
-  OF COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL
-  TAVMJONG BAH BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-  INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
-  DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-  FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
-  OTHER DEALINGS IN THE FONT SOFTWARE.
-  
-  Except as contained in this notice, the name of Tavmjong Bah shall not
-  be used in advertising or otherwise to promote the sale, use or other
-  dealings in this Font Software without prior written authorization
-  from Tavmjong Bah. For further information, contact: tavmjong @ free
-  . fr.
-  
-  TeX Gyre DJV Math
-  -----------------
-  Fonts are (c) Bitstream (see below). DejaVu changes are in public domain.
-  
-  Math extensions done by B. Jackowski, P. Strzelczyk and P. Pianowski
-  (on behalf of TeX users groups) are in public domain.
-  
-  Letters imported from Euler Fraktur from AMSfonts are (c) American
-  Mathematical Society (see below).
-  Bitstream Vera Fonts Copyright
-  Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved. Bitstream Vera
-  is a trademark of Bitstream, Inc.
-  
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of the fonts accompanying this license (“Fonts”) and associated
-  documentation
-  files (the “Font Software”), to reproduce and distribute the Font Software,
-  including without limitation the rights to use, copy, merge, publish,
-  distribute,
-  and/or sell copies of the Font Software, and to permit persons  to whom
-  the Font Software is furnished to do so, subject to the following
-  conditions:
-  
-  The above copyright and trademark notices and this permission notice
-  shall be
-  included in all copies of one or more of the Font Software typefaces.
-  
-  The Font Software may be modified, altered, or added to, and in particular
-  the designs of glyphs or characters in the Fonts may be modified and
-  additional
-  glyphs or characters may be added to the Fonts, only if the fonts are
-  renamed
-  to names not containing either the words “Bitstream” or the word “Vera”.
-  
-  This License becomes null and void to the extent applicable to Fonts or
-  Font Software
-  that has been modified and is distributed under the “Bitstream Vera”
-  names.
-  
-  The Font Software may be sold as part of a larger software package but
-  no copy
-  of one or more of the Font Software typefaces may be sold by itself.
-  
-  THE FONT SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS
-  OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF COPYRIGHT, PATENT,
-  TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL BITSTREAM OR THE GNOME
-  FOUNDATION
-  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, INCLUDING ANY GENERAL,
-  SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES, WHETHER IN AN
-  ACTION
-  OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF THE USE OR
-  INABILITY TO USE
-  THE FONT SOFTWARE OR FROM OTHER DEALINGS IN THE FONT SOFTWARE.
-  Except as contained in this notice, the names of GNOME, the GNOME
-  Foundation,
-  and Bitstream Inc., shall not be used in advertising or otherwise to promote
-  the sale, use or other dealings in this Font Software without prior written
-  authorization from the GNOME Foundation or Bitstream Inc., respectively.
-  For further information, contact: fonts at gnome dot org.
-  
-  AMSFonts (v. 2.2) copyright
-  
-  The PostScript Type 1 implementation of the AMSFonts produced by and
-  previously distributed by Blue Sky Research and Y&Y, Inc. are now freely
-  available for general use. This has been accomplished through the
-  cooperation
-  of a consortium of scientific publishers with Blue Sky Research and Y&Y.
-  Members of this consortium include:
-  
-  Elsevier Science IBM Corporation Society for Industrial and Applied
-  Mathematics (SIAM) Springer-Verlag American Mathematical Society (AMS)
-  
-  In order to assure the authenticity of these fonts, copyright will be
-  held by
-  the American Mathematical Society. This is not meant to restrict in any way
-  the legitimate use of the fonts, such as (but not limited to) electronic
-  distribution of documents containing these fonts, inclusion of these fonts
-  into other public domain or commercial font collections or computer
-  applications, use of the outline data to create derivative fonts and/or
-  faces, etc. However, the AMS does require that the AMS copyright notice be
-  removed from any derivative versions of the fonts which have been altered in
-  any way. In addition, to ensure the fidelity of TeX documents using Computer
-  Modern fonts, Professor Donald Knuth, creator of the Computer Modern faces,
-  has requested that any alterations which yield different font metrics be
-  given a different name.
-  
-  $Id$
-  
-</pre>
-</p>
-
-  </p>
-  </br>
+    </br>
 
   <!-- jqPlot -->
   <h2><a name="jqPlot">jqPlot</a></h2>

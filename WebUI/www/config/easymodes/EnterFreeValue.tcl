@@ -244,6 +244,7 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
   upvar ps vdescr
 
   set id "separate\_$special_input_id\_$profile\_$pref"
+  set idHI "separate\_$special_input_id\_$profile\_[expr $pref + 1]"
 
   set devHmIPWired 0 ; # false
   if {[string first "HmIPW-" $dev_descr_sender(PARENT_TYPE)] == 0} {
@@ -255,6 +256,9 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
   set fwMajor [expr [lindex $fwMajorMinorPatch 0] * 1]
   # set fwMinor [expr [lindex $fwMajorMinorPatch 1] * 1]
   # set fwPatch [expr [lindex $fwMajorMinorPatch 2] * 1]
+
+  set splitParam [split $param _]
+  set paramSCVH "[lindex $splitParam 0]_[lindex $splitParam 1]_[lindex $splitParam 2]_HI"; # SHORT_COND_VALUE_HI
 
   array_clear param_descr
   array set param_descr $descr($param)
@@ -298,6 +302,7 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
 
   append HTML_PARAMS(separate_$profile) "<td><input type=\"text\" id=\"$id\" size=\"3\" name=\"$param\" value=\"$vdescr($param)\" style=\"text-align:center\" onchange=\"MD_init('$id', $min, $max);\"> "
   append HTML_PARAMS(separate_$profile) "<input id=\"help_brightness\_$profile\" type=\"button\" name=\"Help\" value=\"Help\" onclick=\"MD_catchBrightness('$url', '$sender_address', '$receiver_address', '$brightness', '$brightnessHas2beConverted', '$paramType', 'true', '$id', $help, '$min $max')\"></td></tr>"
+  append HTML_PARAMS(separate_$profile) "<td><input type=\"text\" id=\"$idHI\" size=\"3\" name=\"$paramSCVH\" value=\"$vdescr($param)\" class=\"hidden\" style=\"text-align:center\"> "
 
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
@@ -313,14 +318,20 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
     append HTML_PARAMS(separate_$profile) "</td>"
 
       append HTML_PARAMS(separate_$profile) "<script type=\"text/javascript\">"
-        append HTML_PARAMS(separate_$profile) "setUsrDefBrightness = function(cndValElmId, profile) \{"
+        append HTML_PARAMS(separate_$profile) "setUsrDefBrightness = function(cndValElmIdLO, profile) \{"
           append HTML_PARAMS(separate_$profile) "var usrVal = jQuery(\"\#usrDefBrightness_\"+profile).val(),"
-          append HTML_PARAMS(separate_$profile) "cndValElm = jQuery(\"\#\"+cndValElmId);"
+          append HTML_PARAMS(separate_$profile) "arCndValElmLO = cndValElmIdLO.split(\"_\"),"
+          append HTML_PARAMS(separate_$profile) "cndValElmIdHI = arCndValElmLO\[0\]+\"_\"+arCndValElmLO\[1\]+\"_\"+arCndValElmLO\[2\]+\"_\"+(parseInt(arCndValElmLO\[3\]) + 1),"
+          append HTML_PARAMS(separate_$profile) "cndValElmLO = jQuery(\"\#\"+cndValElmIdLO),"
+          append HTML_PARAMS(separate_$profile) "cndValElmHI = jQuery(\"\#\"+cndValElmIdHI);"
+
           append HTML_PARAMS(separate_$profile) "if(Number.isNaN(parseInt(usrVal))) {usrVal = 0;}"
           if {$devHmIPWired == 1 || [expr $fwMajor * 1] >= 2 } {
-            append HTML_PARAMS(separate_$profile) "jQuery(cndValElm).val(MD_convertIlluminationToDecisionValue_V2(usrVal));"
+            append HTML_PARAMS(separate_$profile) "jQuery(cndValElmLO).val(MD_convertIlluminationToDecisionValue_V2(usrVal));"
+            append HTML_PARAMS(separate_$profile) "jQuery(cndValElmHI).val(jQuery(cndValElmLO).val());"
           } else {
-            append HTML_PARAMS(separate_$profile) "jQuery(cndValElm).val(MD_convertIlluminationToDecisionValue(usrVal, \"$dev_descr_sender(PARENT_TYPE)\", \"$dev_descr(FIRMWARE)\"));"
+            append HTML_PARAMS(separate_$profile) "jQuery(cndValElmLO).val(MD_convertIlluminationToDecisionValue(usrVal, \"$dev_descr_sender(PARENT_TYPE)\", \"$dev_descr(FIRMWARE)\"));"
+            append HTML_PARAMS(separate_$profile) "jQuery(cndValElmHI).val(jQuery(cndValElmLO).val());"
           }
         append HTML_PARAMS(separate_$profile) "\};"
       append HTML_PARAMS(separate_$profile) "</script>"

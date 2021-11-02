@@ -118,13 +118,35 @@ jQuery.extend(true, langJSON, {
 
     "helpAccessReceiverUserAccessAuth" :
       "If the authorisation is changed manually, the user channel switches to manu mode. " +
-      "Control of the authorisation by the week progam is then deactivated. Switching back to auto mode can be activated again via the week progam.",
+      "Control of the authorisation by the week progam is then deactivated. Switching back to auto mode can be activated again via the channel week progam.",
+
+    "helpAccessTransceiverUserAccessAuth" :
+      "If the authorisation is changed manually, this channel switches to manu mode. " +
+      "Control of the authorisation by the week progam is then deactivated. Switching back to auto mode can be activated again via the channel week progam.",
+
     "helpPrgAccessReceiver" : "These actions deactivate the week progam for this user channel (=manu mode).<br/><br/>" +
       "<u><b>Note:</b></u><br/><br/>" +
       "To change to auto mode, the week progam channel can be used in the central control unit program under 'Activity'.",
     "helpWeeklyProgramDlg" :
       "When using the auto mode, corresponding week progam entries must be available. " +
       "You can configure the week progam for the device under 'Settings/devices'.",
+
+    "helpFWICodeCommand" :
+      "The Wiegand interface allows the use of up to 20 different Wiegand codes. " +
+      "To learn a new Wiegand code, select a free code number and activate \'Start learning for code\'. " +
+      "There are 60 seconds left to transmit a valid Wiegand code to the interface. " +
+      "The learning process can be cancelled at any time via \'Cancel the learning process\'.<br/><br/>" +
+      "To delete a Wiegand code, select the corresponding code number and activate \'Delete code\'.",
+
+    "helpFWIClearError" :
+      "If the sabotage contact has been activated or the temporary or permanent blocking of codes has been activated by the transmission of invalid Wiegand codes, " +
+      "the Wiegand interface is temporarily or permanently locked.<br/><br/>" +
+      "The locking can be cancelled via \'Reset locks\'.",
+
+    "helpClearError" :
+      "If the sabotage contact was triggered or the temporary or permanent lock was activated by transmitting invalid codes, " +
+      "the device is temporarily or permanently locked.<br/><br/>" +
+      "The lock can be cancelled at any time via \'Reset locks\'.",
 
     "END" : ""
   }

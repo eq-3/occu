@@ -21,9 +21,14 @@ ACCELERATION_TRANSCEIVER|NOTIFICATION_SOUND_TYPE_LOW_TO_HIGH	${stringTableAccele
 ACCESS_RECEIVER	${stringTableAccessReceiverTitle}
 ACCESS_RECEIVER|STATE=FALSE	${stringTableAccessReceiverStateFalse}
 ACCESS_RECEIVER|STATE=TRUE	${stringTableAccessReceiverStateTrue}
-
 ACCESS_RECEIVER|ACCESS_AUTHORIZATION=ENABLE	${stringTableAccessReceiverAccessAuthorizationTrue}
 ACCESS_RECEIVER|ACCESS_AUTHORIZATION=DISABLE	${stringTableAccessReceiverAccessAuthorizationFalse}
+
+ACCESS_TRANSCEIVER	${stringTableAccessTransceiverTitle}
+ACCESS_TRANSCEIVER|STATE=FALSE	${stringTableAccessTransceiverStateFalse}
+ACCESS_TRANSCEIVER|STATE=TRUE	${stringTableAccessTransceiverStateTrue}
+ACCESS_TRANSCEIVER|ACCESS_AUTHORIZATION=ENABLE	${stringTableAccessTransceiverAccessAuthorizationTrue}
+ACCESS_TRANSCEIVER|ACCESS_AUTHORIZATION=DISABLE	${stringTableAccessTransceiverAccessAuthorizationFalse}
 
 ACOUSTIC_ALARM_ACTIVE=FALSE	${stringTableAcousticAlarmActiveFalse}
 ACOUSTIC_ALARM_ACTIVE=TRUE	${stringTableAcousticAlarmActiveTrue}
@@ -269,6 +274,9 @@ BRIGHTNESS	${stringTableBrightness}
 BRIGHTNESS_FILTER	${stringTableBrightnessFilter}
 BRIGHTNESS_TRANSMITTER|FILTER_SIZE	${stringTableBrightnessFilterSize}
 BURST_RX	${stringTableBurstRX}
+BURST_LIMIT_WARNING	${stringTableBurstLimit}
+BURST_LIMIT_WARNING=FALSE	${stringTableBurstLimitFalse}
+BURST_LIMIT_WARNING=TRUE	${stringTableBurstLimitTrue}
 BUTTON_LOCK	${stringTableButtonLock}
 BUTTON_RESPONSE_WITHOUT_BACKLIGHT	${stringTableButtonResponseWithoutBacklight}
 CAPACITIVE_FILLING_LEVEL_SENSOR	${stringTableCapacitiveFillingSensorTitle}
@@ -1037,9 +1045,77 @@ LOWEST_ILLUMINATION_STATUS=OVERFLOW	${lblValue} ${stringTableLowestIllumination}
 LOWEST_ILLUMINATION_STATUS=2	${lblValue} ${stringTableLowestIllumination}: ${lblOverflow}
 LUX	${stringTableLux}
 MAINS_POWERED	${stringTableMainsPowered}
+
+MAINTENANCE|BLOCKED_PERMANENT=FALSE	${stringTableBlockedPermanentFalse}
+MAINTENANCE|BLOCKED_PERMANENT=TRUE	${stringTableBlockedPermanentTrue}
+MAINTENANCE|BLOCKED_TEMPORARY=FALSE	${stringTableBlockedTemporaryFalse}
+MAINTENANCE|BLOCKED_TEMPORARY=TRUE	${stringTableBlockedTemporaryTrue}
+
+MAINTENANCE|CLEAR_ERROR=ALL	${stringTableClearErrorAll}
+MAINTENANCE|CLEAR_ERROR=BLOCKED_PERMANENT	${stringTableClearErrorBlockedPermanent}
+MAINTENANCE|CLEAR_ERROR=BLOCKED_TEMPORARY	${stringTableClearErrorBlockedTemporary}
+MAINTENANCE|CLEAR_ERROR=SABOTAGE	${stringTableClearErrorSabotage}
+MAINTENANCE|CLEAR_ERROR=SABOTAGE_STICKY	${stringTableClearErrorSabotageSticky}
+
+MAINTENANCE|CODE_COMMAND=ERASE	${stringTableCodeCommandErase}
+MAINTENANCE|CODE_COMMAND=START_OF_LEARN	${stringTableCodeCommandStartOfLearn}
+MAINTENANCE|CODE_COMMAND=STOP_OF_LEARN	${stringTableCodeCommandStopOfLearn}
+
+MAINTENANCE|CODE_ID	${stringTableAccessTransCodeID}
+MAINTENANCE|CODE_STATE=CODE_ERASED	${stringTableAccessTransCodeStateCodeErased}
+MAINTENANCE|CODE_STATE=IDLE	${stringTableAccessTransCodeStateIdle}
+MAINTENANCE|CODE_STATE=KNOWN_CODE_ID_RECEIVED	${stringTableAccessTransCodeStateKnownCodeIDReceived}
+MAINTENANCE|CODE_STATE=LEARN_MODE_EXIT_FOR_CODE_WITH_ERROR_DUPLICATE_CODE	${stringTableAccessTransCodeStateLearnModeLearnModeExitWithErrorDuplicateCode}
+MAINTENANCE|CODE_STATE=LEARN_MODE_EXIT_FOR_CODE_WITH_SUCCESS	${stringTableAccessTransCodeStateLearnModeLearnModeExitWithSuccess}
+MAINTENANCE|CODE_STATE=LEARN_MODE_EXIT_FOR_CODE_WITH_TIMEOUT	${stringTableAccessTransCodeStateLearnModeLearnModeExitWithTimeout}
+MAINTENANCE|CODE_STATE=LEARN_MODE_FOR_CODE_ID_STARTED	${stringTableAccessTransCodeStateLearnModeForCodeIDStarted}
+MAINTENANCE|CODE_STATE=UNKNOWN_CODE_DETECTED	${stringTableAccessTransCodeStateUnknownCodeDetected}
+
+MAINTENANCE|CODE_USED_01=FALSE	${stringTableAccessTransCodeSCodeUsed01False}
+MAINTENANCE|CODE_USED_01=TRUE	${stringTableAccessTransCodeSCodeUsed01True}
+MAINTENANCE|CODE_USED_02=FALSE	${stringTableAccessTransCodeSCodeUsed02False}
+MAINTENANCE|CODE_USED_02=TRUE	${stringTableAccessTransCodeSCodeUsed02True}
+MAINTENANCE|CODE_USED_03=FALSE	${stringTableAccessTransCodeSCodeUsed03False}
+MAINTENANCE|CODE_USED_03=TRUE	${stringTableAccessTransCodeSCodeUsed03True}
+MAINTENANCE|CODE_USED_04=FALSE	${stringTableAccessTransCodeSCodeUsed04False}
+MAINTENANCE|CODE_USED_04=TRUE	${stringTableAccessTransCodeSCodeUsed04rue}
+MAINTENANCE|CODE_USED_05=FALSE	${stringTableAccessTransCodeSCodeUsed05False}
+MAINTENANCE|CODE_USED_05=TRUE	${stringTableAccessTransCodeSCodeUsed05True}
+MAINTENANCE|CODE_USED_06=FALSE	${stringTableAccessTransCodeSCodeUsed06False}
+MAINTENANCE|CODE_USED_06=TRUE	${stringTableAccessTransCodeSCodeUsed06True}
+MAINTENANCE|CODE_USED_07=FALSE	${stringTableAccessTransCodeSCodeUsed07False}
+MAINTENANCE|CODE_USED_07=TRUE	${stringTableAccessTransCodeSCodeUsed07True}
+MAINTENANCE|CODE_USED_08=FALSE	${stringTableAccessTransCodeSCodeUsed08False}
+MAINTENANCE|CODE_USED_08=TRUE	${stringTableAccessTransCodeSCodeUsed08True}
+MAINTENANCE|CODE_USED_09=FALSE	${stringTableAccessTransCodeSCodeUsed09False}
+MAINTENANCE|CODE_USED_09=TRUE	${stringTableAccessTransCodeSCodeUsed09True}
+MAINTENANCE|CODE_USED_10=FALSE	${stringTableAccessTransCodeSCodeUsed10False}
+MAINTENANCE|CODE_USED_10=TRUE	${stringTableAccessTransCodeSCodeUsed10True}
+MAINTENANCE|CODE_USED_11=FALSE	${stringTableAccessTransCodeSCodeUsed11False}
+MAINTENANCE|CODE_USED_11=TRUE	${stringTableAccessTransCodeSCodeUsed11True}
+MAINTENANCE|CODE_USED_12=FALSE	${stringTableAccessTransCodeSCodeUsed12False}
+MAINTENANCE|CODE_USED_12=TRUE	${stringTableAccessTransCodeSCodeUsed12True}
+MAINTENANCE|CODE_USED_13=FALSE	${stringTableAccessTransCodeSCodeUsed13False}
+MAINTENANCE|CODE_USED_13=TRUE	${stringTableAccessTransCodeSCodeUsed13True}
+MAINTENANCE|CODE_USED_14=FALSE	${stringTableAccessTransCodeSCodeUsed14False}
+MAINTENANCE|CODE_USED_14=TRUE	${stringTableAccessTransCodeSCodeUsed14True}
+MAINTENANCE|CODE_USED_15=FALSE	${stringTableAccessTransCodeSCodeUsed15False}
+MAINTENANCE|CODE_USED_15=TRUE	${stringTableAccessTransCodeSCodeUsed15True}
+MAINTENANCE|CODE_USED_16=FALSE	${stringTableAccessTransCodeSCodeUsed16False}
+MAINTENANCE|CODE_USED_16=TRUE	${stringTableAccessTransCodeSCodeUsed16True}
+MAINTENANCE|CODE_USED_17=FALSE	${stringTableAccessTransCodeSCodeUsed17False}
+MAINTENANCE|CODE_USED_17=TRUE	${stringTableAccessTransCodeSCodeUsed17True}
+MAINTENANCE|CODE_USED_18=FALSE	${stringTableAccessTransCodeSCodeUsed18False}
+MAINTENANCE|CODE_USED_18=TRUE	${stringTableAccessTransCodeSCodeUsed18True}
+MAINTENANCE|CODE_USED_19=FALSE	${stringTableAccessTransCodeSCodeUsed19False}
+MAINTENANCE|CODE_USED_19=TRUE	${stringTableAccessTransCodeSCodeUsed19True}
+MAINTENANCE|CODE_USED_20=FALSE	${stringTableAccessTransCodeSCodeUsed20False}
+MAINTENANCE|CODE_USED_20=TRUE	${stringTableAccessTransCodeSCodeUsed20True}
+
 MAINTENANCE|CONFIG_PENDING	${stringTableConfigPending}
 MAINTENANCE|ERROR_BATTERY=BATTERY_DEFECT	${stringTableBatteryFailure}
 MAINTENANCE|ERROR_BATTERY=NO_ERROR	${stringTableBatteryOk}
+MAINTENANCE|ERROR_JAMMED	${stringTableErrorJammed}
 MAINTENANCE|ERROR_OVERHEAT	${stringTableErrorOverheatTrue}
 MAINTENANCE|HMW_STICKY_UNREACH	${stringTableStickyUnreach}
 MAINTENANCE|LOWBAT	${stringTableBatteryLow}
@@ -1047,6 +1123,11 @@ MAINTENANCE|LOW_BAT	${stringTableBatteryLow}
 MAINTENANCE|ON_MIN_LEVEL	${stringTableOnMinLevel}
 MAINTENANCE|PWM_AT_LOW_VALVE_POSITION	${stringTablePWMatLowValvePosition}
 MAINTENANCE|SABOTAGE	${stringTableSabotage}
+MAINTENANCE|SABOTAGE	${stringTableSabotage}
+MAINTENANCE|SABOTAGE_STICKY	${stringTableSabotageSticky}
+MAINTENANCE|SABOTAGE_STICKY=FALSE	${stringTableSabotageStickyFalse}
+MAINTENANCE|SABOTAGE_STICKY=TRUE	${stringTableSabotageStickyTrue}
+
 MAINTENANCE|STICKY_BATTERY=BATTERY_DEFECT	${stringTableBatteryFailure}
 MAINTENANCE|STICKY_BATTERY=BATTERY_WAS_DEFECT	${stringTableBatteryWasDefect}
 MAINTENANCE|STICKY_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
@@ -1055,6 +1136,32 @@ MAINTENANCE|STICKY_SABOTAGE=SABOTAGE	${stringTableSabotage}
 MAINTENANCE|STICKY_SABOTAGE=WAS_SABOTAGED	${stringTableSabotageContactWasActive}
 MAINTENANCE|STICKY_UNREACH	${stringTableStickyUnreach}
 MAINTENANCE|UNREACH	${stringTableUnreach}
+
+MAINTENANCE|USER_AUTHORIZATION_01	${stringTableUserAuthorization01}
+MAINTENANCE|USER_AUTHORIZATION_01=FALSE	${stringTableUserAuthorization01false}
+MAINTENANCE|USER_AUTHORIZATION_01=TRUE	${stringTableUserAuthorization01true}
+MAINTENANCE|USER_AUTHORIZATION_02	${stringTableUserAuthorization02}
+MAINTENANCE|USER_AUTHORIZATION_02=FALSE	${stringTableUserAuthorization02false}
+MAINTENANCE|USER_AUTHORIZATION_02=TRUE	${stringTableUserAuthorization02true}
+MAINTENANCE|USER_AUTHORIZATION_03	${stringTableUserAuthorization03}
+MAINTENANCE|USER_AUTHORIZATION_03=FALSE	${stringTableUserAuthorization03false}
+MAINTENANCE|USER_AUTHORIZATION_03=TRUE	${stringTableUserAuthorization03true}
+MAINTENANCE|USER_AUTHORIZATION_04	${stringTableUserAuthorization04}
+MAINTENANCE|USER_AUTHORIZATION_04=FALSE	${stringTableUserAuthorization04false}
+MAINTENANCE|USER_AUTHORIZATION_04=TRUE	${stringTableUserAuthorization04true}
+MAINTENANCE|USER_AUTHORIZATION_05	${stringTableUserAuthorization05}
+MAINTENANCE|USER_AUTHORIZATION_05=FALSE	${stringTableUserAuthorization05false}
+MAINTENANCE|USER_AUTHORIZATION_05=TRUE	${stringTableUserAuthorization05true}
+MAINTENANCE|USER_AUTHORIZATION_06	${stringTableUserAuthorization06}
+MAINTENANCE|USER_AUTHORIZATION_06=FALSE	${stringTableUserAuthorization06false}
+MAINTENANCE|USER_AUTHORIZATION_06=TRUE	${stringTableUserAuthorization06true}
+MAINTENANCE|USER_AUTHORIZATION_07	${stringTableUserAuthorization07}
+MAINTENANCE|USER_AUTHORIZATION_07=FALSE	${stringTableUserAuthorization07false}
+MAINTENANCE|USER_AUTHORIZATION_07=TRUE	${stringTableUserAuthorization07true}
+MAINTENANCE|USER_AUTHORIZATION_08	${stringTableUserAuthorization08}
+MAINTENANCE|USER_AUTHORIZATION_08=FALSE	${stringTableUserAuthorization08false}
+MAINTENANCE|USER_AUTHORIZATION_08=TRUE	${stringTableUserAuthorization08true}
+
 MANU_MODE	${stringTableClimateControlRTTransceiverManuMode}
 MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE	${stringTableMinMaxNotRelevantForManuMode}
 MIOB_DIN_CONFIG	${stringTableMiobDinConfig}
@@ -1098,10 +1205,10 @@ NOT_USED	${stringTableNotUsed}
 OLD_LEVEL	${stringTableDimmerOldLevel}
 ON_TIME	${stringTableDimmerOnTime}
 OPERATING_VOLTAGE	${stringTableOperationVoltage}
-OPERATING_VOLTAGE_STATUS	${stringTableOperationVoltage}
-OPERATING_VOLTAGE_STATUS=EXTERNAL	${lblValue} ${stringTableOperationVoltage}: ${lblExternal}
+OPERATING_VOLTAGE_STATUS	${stringTableOperationVoltageState}
+OPERATING_VOLTAGE_STATUS=EXTERNAL	${lblValue} ${stringTableOperationVoltageState}: ${lblExternal}
 OPERATING_VOLTAGE_STATUS=3	${stringTableOperationVoltageState}: ${lblExternal}
-OPERATING_VOLTAGE_STATUS=NORMAL	${stringTableOperationVoltage}: ${lblNormal}
+OPERATING_VOLTAGE_STATUS=NORMAL	${stringTableOperationVoltageState}: ${lblNormal}
 OPERATING_VOLTAGE_STATUS=0	${stringTableOperationVoltageState}: ${lblNormal}
 OPERATING_VOLTAGE_STATUS=UNKNOWN	${stringTableOperationVoltageState}: ${lblUnknown}
 OPERATING_VOLTAGE_STATUS=1	${stringTableOperationVoltageState}: ${lblUnknown}
@@ -1241,6 +1348,8 @@ PRESENCE_DETECTION_STATE=FALSE	${stringTablePresenceDetectionStateFalse}
 PRESENCE_DETECTION_STATE=TRUE	${stringTablePresenceDetectionStateTrue}
 PRESS_LONG	${stringTableKeyPressLong}
 PRESS_LONG=TRUE	${stringTableKeyPressLongTrue}
+PRESS_LONG_RELEASE	${stringTableKeyPressLongRelease}
+PRESS_LONG_START	${stringTableKeyPressLongStart}
 PRESS_SHORT	${stringTableKeyPressShort}
 PRESS_SHORT=TRUE	${stringTableKeyPressShortTrue}
 PROCESS=NOT_STABLE	${stringTableProcessNotStableGeneric}
@@ -1446,6 +1555,7 @@ SERVO_TRANSMITTER|ACTIVITY_STATE=UNKNOWN	${stringTableServoActivityStateUnknown}
 SERVO_TRANSMITTER|ACTIVITY_STATE=UP	${stringTableServoActivityStateUp}
 
 SERVO_VIRTUAL_RECEIVER|LEVEL	${stringTableServoLevel}
+SERVO_VIRTUAL_RECEIVER|RAMP_TIME	${stringTableServoRamp}
 
 SET_TEMPERATURE	${stringTableClimateControlRTTransceiverSetTemperature}
 SHUTTER_CONTACT	${stringTableShutterContactTitle}

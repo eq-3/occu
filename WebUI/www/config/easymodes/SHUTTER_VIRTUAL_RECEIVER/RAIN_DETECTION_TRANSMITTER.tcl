@@ -16,48 +16,49 @@ set REFON 7
 set REFOFF 8
 
 set PROFILES_MAP(0)  "\${expert}"
-set PROFILES_MAP(1)  "\${OpenClose_UpDown}"
-set PROFILES_MAP(2)  "\${DefaultToggle}"
-# set PROFILES_MAP(3)  "\${TargetPosition}"
-set PROFILES_MAP(3)  "\${no_action}"
+set PROFILES_MAP(1)  "\${OpenUp}"
+set PROFILES_MAP(2)  "\${CloseDown}"
+set PROFILES_MAP(3)  "\${OpenClose_UpDown}"
+set PROFILES_MAP(4)  "\${TargetPosition}"
+set PROFILES_MAP(5)  "\${no_action}"
+
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)  "Expertenprofil"
 
-
-set PROFILE_1(SHORT_COND_VALUE_HI) 101
+set PROFILE_1(SHORT_COND_VALUE_HI) 100
 set PROFILE_1(SHORT_COND_VALUE_LO) 50
-set PROFILE_1(SHORT_CT_OFF) {0 2}
-set PROFILE_1(SHORT_CT_OFFDELAY) {0 2}
-set PROFILE_1(SHORT_CT_ON) {0 2}
-set PROFILE_1(SHORT_CT_ONDELAY) {0 2}
-set PROFILE_1(SHORT_CT_RAMPOFF) {0 2}
-set PROFILE_1(SHORT_CT_RAMPON) {0 2}
-set PROFILE_1(SHORT_CT_REFOFF) 4
-set PROFILE_1(SHORT_CT_REFON) 4
+set PROFILE_1(SHORT_CT_OFF) {1 2 5}
+set PROFILE_1(SHORT_CT_OFFDELAY) {1 2 5}
+set PROFILE_1(SHORT_CT_ON) {1 2 5}
+set PROFILE_1(SHORT_CT_ONDELAY) {1 2 5}
+set PROFILE_1(SHORT_CT_RAMPOFF) {1 2 5}
+set PROFILE_1(SHORT_CT_RAMPON) {1 2 5}
+set PROFILE_1(SHORT_CT_REFOFF) 0
+set PROFILE_1(SHORT_CT_REFON) 0
 set PROFILE_1(SHORT_DRIVING_MODE) {0 1 2 3}
-set PROFILE_1(SHORT_JT_OFF)       [subst {$ON_DELAY $OFF_DELAY}]
-set PROFILE_1(SHORT_JT_OFFDELAY)  [subst {$ON $OFF}]
-set PROFILE_1(SHORT_JT_ON)        [subst {$ON_DELAY $OFF_DELAY}]
-set PROFILE_1(SHORT_JT_ONDELAY)   [subst {$ON $OFF}]
-set PROFILE_1(SHORT_JT_RAMPOFF)   [subst {$ON_DELAY $OFF_DELAY}]
-set PROFILE_1(SHORT_JT_RAMPON)    [subst {$ON_DELAY $OFF_DELAY}]
-set PROFILE_1(SHORT_JT_REFOFF)    $NOP
-set PROFILE_1(SHORT_JT_REFON)     $NOP
+set PROFILE_1(SHORT_JT_OFF)       $ON_DELAY
+set PROFILE_1(SHORT_JT_OFFDELAY)  $ON
+set PROFILE_1(SHORT_JT_ON)        $ON_DELAY
+set PROFILE_1(SHORT_JT_ONDELAY)   $ON_DELAY
+set PROFILE_1(SHORT_JT_RAMPOFF)   $OFF
+set PROFILE_1(SHORT_JT_RAMPON)    $ON
+set PROFILE_1(SHORT_JT_REFOFF)    $REFOFF
+set PROFILE_1(SHORT_JT_REFON)     $REFON
 set PROFILE_1(SHORT_MAX_TIME_FIRST_DIR) 25.500000
 set PROFILE_1(SHORT_MULTIEXECUTE) 0
 set PROFILE_1(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_1(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.0}
-#set PROFILE_1(SHORT_OFF_LEVEL_2) 1.010000
+set PROFILE_1(SHORT_OFF_LEVEL) 0.000000
+set PROFILE_1(SHORT_OFF_LEVEL_2) 1.010000
 set PROFILE_1(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_OFF_TIME_MODE) 0
 set PROFILE_1(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_1(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_1(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.0}
-#set PROFILE_1(SHORT_ON_LEVEL_2) 1.010000
+set PROFILE_1(SHORT_ON_LEVEL) 1.000000
+set PROFILE_1(SHORT_ON_LEVEL_2) 1.010000
 set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
@@ -66,39 +67,38 @@ set PROFILE_1(UI_DESCRIPTION) ""
 set PROFILE_1(UI_TEMPLATE)  $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
-
 set PROFILE_2(SHORT_COND_VALUE_HI) 100
 set PROFILE_2(SHORT_COND_VALUE_LO) 50
-set PROFILE_2(SHORT_CT_OFF) {0 1 2 5}
-set PROFILE_2(SHORT_CT_OFFDELAY) {0 1 2 5}
-set PROFILE_2(SHORT_CT_ON) {0 1 2 5}
-set PROFILE_2(SHORT_CT_ONDELAY) {0 1 2 5}
-set PROFILE_2(SHORT_CT_RAMPOFF) {0 1 2 5}
-set PROFILE_2(SHORT_CT_RAMPON) {0 1 2 5}
+set PROFILE_2(SHORT_CT_OFF) {1 2 5}
+set PROFILE_2(SHORT_CT_OFFDELAY) {1 2 5}
+set PROFILE_2(SHORT_CT_ON) {1 2 5}
+set PROFILE_2(SHORT_CT_ONDELAY) {1 2 5}
+set PROFILE_2(SHORT_CT_RAMPOFF) {1 2 5}
+set PROFILE_2(SHORT_CT_RAMPON) {1 2 5}
 set PROFILE_2(SHORT_CT_REFOFF) 0
 set PROFILE_2(SHORT_CT_REFON) 0
 set PROFILE_2(SHORT_DRIVING_MODE) {0 1 2 3}
-set PROFILE_2(SHORT_JT_OFF)       [subst {$ON_DELAY}]
-set PROFILE_2(SHORT_JT_OFFDELAY)  [subst {$OFF_DELAY $REFOFF $ON}]
-set PROFILE_2(SHORT_JT_ON)        [subst {$OFF_DELAY $ON_DELAY}]
-set PROFILE_2(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $REFON}]
-set PROFILE_2(SHORT_JT_RAMPOFF)   [subst {$OFF_DELAY $OFF}]
-set PROFILE_2(SHORT_JT_RAMPON)    [subst {$ON_DELAY $ON}]
-set PROFILE_2(SHORT_JT_REFOFF)    [subst {$NOP $OFF}]
-set PROFILE_2(SHORT_JT_REFON)     [subst {$NOP $ON}]
+set PROFILE_2(SHORT_JT_OFF)       $OFF_DELAY
+set PROFILE_2(SHORT_JT_OFFDELAY)  $OFF_DELAY
+set PROFILE_2(SHORT_JT_ON)        $OFF_DELAY
+set PROFILE_2(SHORT_JT_ONDELAY)   $OFF
+set PROFILE_2(SHORT_JT_RAMPOFF)   $OFF
+set PROFILE_2(SHORT_JT_RAMPON)    $ON
+set PROFILE_2(SHORT_JT_REFOFF)    $REFOFF
+set PROFILE_2(SHORT_JT_REFON)     $REFON
 set PROFILE_2(SHORT_MAX_TIME_FIRST_DIR) 25.500000
 set PROFILE_2(SHORT_MULTIEXECUTE) 0
 set PROFILE_2(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_2(SHORT_OFF_LEVEL) 0.000000
-#set PROFILE_2(SHORT_OFF_LEVEL_2) {1.01 0.0}
+set PROFILE_2(SHORT_OFF_LEVEL_2) 1.010000
 set PROFILE_2(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_OFF_TIME_MODE) 0
 set PROFILE_2(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_2(SHORT_ON_LEVEL) 1.000000
-#set PROFILE_2(SHORT_ON_LEVEL_2) 1.010000
+set PROFILE_2(SHORT_ON_LEVEL_2) 1.010000
 set PROFILE_2(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
@@ -107,39 +107,38 @@ set PROFILE_2(UI_DESCRIPTION) ""
 set PROFILE_2(UI_TEMPLATE)  $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 
-set comment {
 set PROFILE_3(SHORT_COND_VALUE_HI) 100
 set PROFILE_3(SHORT_COND_VALUE_LO) 50
-set PROFILE_3(SHORT_CT_OFF) {0 2 5}
-set PROFILE_3(SHORT_CT_OFFDELAY) {0 2 5}
-set PROFILE_3(SHORT_CT_ON) {0 2 5}
-set PROFILE_3(SHORT_CT_ONDELAY) {0 2 5}
-set PROFILE_3(SHORT_CT_RAMPOFF) {0 2 5}
-set PROFILE_3(SHORT_CT_RAMPON) {0 2 5}
+set PROFILE_3(SHORT_CT_OFF) {0 1 2 5}
+set PROFILE_3(SHORT_CT_OFFDELAY) {0 1 2 5}
+set PROFILE_3(SHORT_CT_ON) {0 1 2 5}
+set PROFILE_3(SHORT_CT_ONDELAY) {0 1 2 5}
+set PROFILE_3(SHORT_CT_RAMPOFF) {0 1 2 5}
+set PROFILE_3(SHORT_CT_RAMPON) {0 1 2 5}
 set PROFILE_3(SHORT_CT_REFOFF) 0
 set PROFILE_3(SHORT_CT_REFON) 0
 set PROFILE_3(SHORT_DRIVING_MODE) {0 1 2 3}
-set PROFILE_3(SHORT_JT_OFF)       [subst {$ON_DELAY $OFF_DELAY}]
-set PROFILE_3(SHORT_JT_OFFDELAY)  [subst {$ON $OFF_DELAY}]
-set PROFILE_3(SHORT_JT_ON)        [subst {$ON_DELAY $OFF_DELAY}]
-set PROFILE_3(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $OFF}]
-set PROFILE_3(SHORT_JT_RAMPOFF)   $OFF_DELAY
-set PROFILE_3(SHORT_JT_RAMPON)    $ON_DELAY
-set PROFILE_3(SHORT_JT_REFOFF)    $NOP
-set PROFILE_3(SHORT_JT_REFON)     $NOP
+set PROFILE_3(SHORT_JT_OFF)       [subst {$ON_DELAY}]
+set PROFILE_3(SHORT_JT_OFFDELAY)  [subst {$OFF_DELAY $REFOFF $ON}]
+set PROFILE_3(SHORT_JT_ON)        [subst {$OFF_DELAY $ON_DELAY}]
+set PROFILE_3(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $REFON}]
+set PROFILE_3(SHORT_JT_RAMPOFF)   $OFF
+set PROFILE_3(SHORT_JT_RAMPON)    $ON
+set PROFILE_3(SHORT_JT_REFOFF)    [subst {$REFON $REFOFF $OFF}]
+set PROFILE_3(SHORT_JT_REFON)     [subst {$REFOFF $REFON $ON}]
 set PROFILE_3(SHORT_MAX_TIME_FIRST_DIR) 25.500000
 set PROFILE_3(SHORT_MULTIEXECUTE) 0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_3(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.01}
-#set PROFILE_3(SHORT_OFF_LEVEL_2) {1.01 range 0.0 - 1.01}
+set PROFILE_3(SHORT_OFF_LEVEL) 0.000000
+set PROFILE_3(SHORT_OFF_LEVEL_2) {1.01 0.0}
 set PROFILE_3(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_OFF_TIME_MODE) 0
 set PROFILE_3(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_3(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.01}
-#set PROFILE_3(SHORT_ON_LEVEL_2) {1.01 range 0.0 - 1.01}
+set PROFILE_3(SHORT_ON_LEVEL) 1.000000
+set PROFILE_3(SHORT_ON_LEVEL_2) 1.010000
 set PROFILE_3(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
@@ -147,31 +146,69 @@ set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(UI_DESCRIPTION) ""
 set PROFILE_3(UI_TEMPLATE)  $PROFILE_3(UI_DESCRIPTION)
 set PROFILE_3(UI_HINT)  3
-}
 
-set PROFILE_3(SHORT_JT_OFF)      0
-set PROFILE_3(SHORT_JT_ON)      0
-set PROFILE_3(SHORT_JT_OFFDELAY)  0
-set PROFILE_3(SHORT_JT_ONDELAY)    0
-set PROFILE_3(SHORT_JT_RAMPOFF) 0
-set PROFILE_3(SHORT_JT_RAMPON) 0
-set PROFILE_3(UI_DESCRIPTION)  "Der Bewegungsmelder ist au&szlig;er Betrieb."
-set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
-set PROFILE_3(UI_HINT)  3
+set PROFILE_4(SHORT_COND_VALUE_HI) 100
+set PROFILE_4(SHORT_COND_VALUE_LO) 50
+set PROFILE_4(SHORT_CT_OFF) {0 2 5}
+set PROFILE_4(SHORT_CT_OFFDELAY) {0 2 5}
+set PROFILE_4(SHORT_CT_ON) {0 2 5}
+set PROFILE_4(SHORT_CT_ONDELAY) {0 2 5}
+set PROFILE_4(SHORT_CT_RAMPOFF) {0 2 5}
+set PROFILE_4(SHORT_CT_RAMPON) {0 2 5}
+set PROFILE_4(SHORT_CT_REFOFF) 0
+set PROFILE_4(SHORT_CT_REFON) 0
+set PROFILE_4(SHORT_DRIVING_MODE) {0 1 2 3}
+set PROFILE_4(SHORT_JT_OFF)       [subst {$ON_DELAY $OFF_DELAY}]
+set PROFILE_4(SHORT_JT_OFFDELAY)  [subst {$ON $OFF_DELAY}]
+set PROFILE_4(SHORT_JT_ON)        [subst {$ON_DELAY $OFF_DELAY}]
+set PROFILE_4(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $OFF}]
+set PROFILE_4(SHORT_JT_RAMPOFF)   $OFF
+set PROFILE_4(SHORT_JT_RAMPON)    $ON
+set PROFILE_4(SHORT_JT_REFOFF)    $REFOFF
+set PROFILE_4(SHORT_JT_REFON)     $REFON
+set PROFILE_4(SHORT_MAX_TIME_FIRST_DIR) 25.500000
+set PROFILE_4(SHORT_MULTIEXECUTE) 0
+set PROFILE_4(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.01}
+set PROFILE_4(SHORT_OFF_LEVEL_2) {1.01 range 0.0 - 1.01}
+set PROFILE_4(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
+set PROFILE_4(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_4(SHORT_OFF_TIME_MODE) 0
+set PROFILE_4(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
+set PROFILE_4(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
+set PROFILE_4(SHORT_ON_LEVEL) {1.0 range 0.0 - 1.01}
+set PROFILE_4(SHORT_ON_LEVEL_2) {1.01 range 0.0 - 1.01}
+set PROFILE_4(SHORT_ON_TIME_BASE) {7 range 0 - 7}
+set PROFILE_4(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
+set PROFILE_4(SHORT_ON_TIME_MODE) 0
+set PROFILE_4(SHORT_PROFILE_ACTION_TYPE) 1
+set PROFILE_4(UI_DESCRIPTION) ""
+set PROFILE_4(UI_TEMPLATE)  $PROFILE_4(UI_DESCRIPTION)
+set PROFILE_4(UI_HINT)  4
+
+set PROFILE_5(SHORT_JT_OFF)      0
+set PROFILE_5(SHORT_JT_ON)      0
+set PROFILE_5(SHORT_JT_OFFDELAY)  0
+set PROFILE_5(SHORT_JT_ONDELAY)    0
+set PROFILE_5(SHORT_JT_RAMPOFF) 0
+set PROFILE_5(SHORT_JT_RAMPON) 0
+set PROFILE_5(UI_DESCRIPTION)  "Der Bewegungsmelder ist au&szlig;er Betrieb."
+set PROFILE_5(UI_TEMPLATE)    $PROFILE_5(UI_DESCRIPTION)
+set PROFILE_5(UI_HINT)  5
 
 # hier folgen die eventuellen Subsets
 #set SUBSET_1(NAME)          "Hochgefahren"
 set SUBSET_1(NAME)          "\${subset_1}"
 set SUBSET_1(SUBSET_OPTION_VALUE)  1
-
 set SUBSET_1(SHORT_JT_OFF)      $ON_DELAY
 set SUBSET_1(SHORT_JT_OFFDELAY) $ON
 set SUBSET_1(SHORT_JT_ON)       $ON_DELAY
 set SUBSET_1(SHORT_JT_ONDELAY)  $ON_DELAY
-set SUBSET_1(SHORT_JT_RAMPOFF)  $OFF_DELAY
-set SUBSET_1(SHORT_JT_RAMPON)   $ON_DELAY
-set SUBSET_1(SHORT_JT_REFOFF)   $NOP
-set SUBSET_1(SHORT_JT_REFON)    $NOP
+set SUBSET_1(SHORT_JT_RAMPOFF)  $OFF
+set SUBSET_1(SHORT_JT_RAMPON)   $ON
+set SUBSET_1(SHORT_JT_REFOFF)   $REFOFF
+set SUBSET_1(SHORT_JT_REFON)    $REFON
 
 #set SUBSET_2(NAME)          "Runtergefahren"
 set SUBSET_2(NAME)          "\${subset_2}"
@@ -180,10 +217,10 @@ set SUBSET_2(SHORT_JT_OFF)       $OFF_DELAY
 set SUBSET_2(SHORT_JT_OFFDELAY)  $OFF_DELAY
 set SUBSET_2(SHORT_JT_ON)        $OFF_DELAY
 set SUBSET_2(SHORT_JT_ONDELAY)   $OFF
-set SUBSET_2(SHORT_JT_RAMPOFF)   $OFF_DELAY
-set SUBSET_2(SHORT_JT_RAMPON)    $ON_DELAY
-set SUBSET_2(SHORT_JT_REFOFF)    $NOP
-set SUBSET_2(SHORT_JT_REFON)     $NOP
+set SUBSET_2(SHORT_JT_RAMPOFF)   $OFF
+set SUBSET_2(SHORT_JT_RAMPON)    $ON
+set SUBSET_2(SHORT_JT_REFOFF)    $REFOFF
+set SUBSET_2(SHORT_JT_REFON)     $REFON
 
 
 #set SUBSET_3(NAME)          "Hoch-/Runtergefahren im Wechsel"
@@ -193,51 +230,31 @@ set SUBSET_3(SHORT_JT_OFF)      $ON_DELAY
 set SUBSET_3(SHORT_JT_OFFDELAY) $OFF_DELAY
 set SUBSET_3(SHORT_JT_ON)       $OFF_DELAY
 set SUBSET_3(SHORT_JT_ONDELAY)  $ON_DELAY
-set SUBSET_3(SHORT_JT_RAMPOFF)  $OFF_DELAY
-set SUBSET_3(SHORT_JT_RAMPON)   $ON_DELAY
-set SUBSET_3(SHORT_JT_REFOFF)   $NOP
-set SUBSET_3(SHORT_JT_REFON)    $NOP
+set SUBSET_3(SHORT_JT_RAMPOFF)  $OFF
+set SUBSET_3(SHORT_JT_RAMPON)   $ON
+set SUBSET_3(SHORT_JT_REFOFF)   $REFOFF
+set SUBSET_3(SHORT_JT_REFON)    $REFON
 
 ##
 #set SUBSET_4(NAME)                                          "Offen-Aus/Zu-Ein"
 set SUBSET_4(NAME)                                          "\${subset_4}"
 set SUBSET_4(SUBSET_OPTION_VALUE) 4
-set SUBSET_4(SHORT_CT_OFF)        2
-set SUBSET_4(SHORT_CT_OFFDELAY)   2
-set SUBSET_4(SHORT_CT_ON)         0
-set SUBSET_4(SHORT_CT_ONDELAY)    0
-set SUBSET_4(SHORT_CT_RAMPOFF)    2
-set SUBSET_4(SHORT_CT_RAMPON)     0
-set SUBSET_4(SHORT_CT_REFOFF)     4
-set SUBSET_4(SHORT_CT_REFON)      4
-set SUBSET_4(SHORT_JT_OFF)        $ON_DELAY
-set SUBSET_4(SHORT_JT_OFFDELAY)   $ON
-set SUBSET_4(SHORT_JT_ON)         $OFF_DELAY
-set SUBSET_4(SHORT_JT_ONDELAY)    $OFF
-set SUBSET_4(SHORT_JT_RAMPOFF)    $ON_DELAY
-set SUBSET_4(SHORT_JT_RAMPON)     $OFF_DELAY
-set SUBSET_4(SHORT_JT_REFOFF)     $NOP
-set SUBSET_4(SHORT_JT_REFON)      $NOP
+set SUBSET_4(SHORT_CT_OFF)  2
+set SUBSET_4(SHORT_CT_OFFDELAY) 2
+set SUBSET_4(SHORT_CT_ON) 0
+set SUBSET_4(SHORT_CT_ONDELAY)  0
+set SUBSET_4(SHORT_CT_RAMPOFF)  2
+set SUBSET_4(SHORT_CT_RAMPON) 0
 
 #set SUBSET_5(NAME)                                          "Offen-Ein/Zu-Aus"
 set SUBSET_5(NAME)                                          "\${subset_5}"
 set SUBSET_5(SUBSET_OPTION_VALUE) 5
-set SUBSET_5(SHORT_CT_OFF)        0
-set SUBSET_5(SHORT_CT_OFFDELAY)   0
-set SUBSET_5(SHORT_CT_ON)         2
-set SUBSET_5(SHORT_CT_ONDELAY)    2
-set SUBSET_5(SHORT_CT_RAMPOFF)    0
-set SUBSET_5(SHORT_CT_RAMPON)     2
-set SUBSET_5(SHORT_CT_REFOFF)     4
-set SUBSET_5(SHORT_CT_REFON)      4
-set SUBSET_5(SHORT_JT_OFF)        $ON_DELAY
-set SUBSET_5(SHORT_JT_OFFDELAY)   $ON
-set SUBSET_5(SHORT_JT_ON)         $OFF_DELAY
-set SUBSET_5(SHORT_JT_ONDELAY)    $OFF
-set SUBSET_5(SHORT_JT_RAMPOFF)    $ON_DELAY
-set SUBSET_5(SHORT_JT_RAMPON)     $OFF_DELAY
-set SUBSET_5(SHORT_JT_REFOFF)     $NOP
-set SUBSET_5(SHORT_JT_REFON)      $NOP
+set SUBSET_5(SHORT_CT_OFF)  0
+set SUBSET_5(SHORT_CT_OFFDELAY) 2
+set SUBSET_5(SHORT_CT_ON) 2
+set SUBSET_5(SHORT_CT_ONDELAY) 0
+set SUBSET_5(SHORT_CT_RAMPOFF) 2
+set SUBSET_5(SHORT_CT_RAMPON) 0
 
 #set SUBSET_6(NAME)                                          "Schlieﬂen"
 set SUBSET_6(NAME)                                          "\${subset_6}"
@@ -288,7 +305,6 @@ set SUBSET_10(SHORT_CT_ON) 2
 set SUBSET_10(SHORT_CT_ONDELAY)  2
 set SUBSET_10(SHORT_CT_RAMPOFF)  2
 set SUBSET_10(SHORT_CT_RAMPON) 2
-
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   global dev_descr_sender dev_descr_receiver
@@ -339,54 +355,15 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_COMMAND} \${_at}</td><td>"
-  # append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_9 SUBSET_10  SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_4 SUBSET_5} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_COMMAND}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_9 SUBSET_10  SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DRIVING_MODE}</td><td>"
-  array_clear options
-  set options(0) "\${driving_mode_0}"
-  set options(1) "\${driving_mode_1}"
-  set options(2) "\${driving_mode_2}"
-  set options(3) "\${driving_mode_3}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DRIVING_MODE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_DRIVING_MODE]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
-
-  # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
-
-  #ONDELAY
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${UP_LEVEL}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>"
-  option BLIND_LEVEL
-  #set options(1.005) "\${lastValue}"
-  #set options(1.010) "\${noModification}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
-
-  append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
 
   # OFF_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   #OFFDELAY
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
-
-  incr pref
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${DOWN_LEVEL}</td>"
-  append HTML_PARAMS(separate_$prn) "<td>"
-  option BLIND_LEVEL
-  #set options(1.005) "\${lastValue}"
-  #set options(1.010) "\${noModification}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL]
-  append HTML_PARAMS(separate_$prn) "</td></tr>"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -398,19 +375,30 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_COMMAND} \${_at}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_COMMAND}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_9 SUBSET_10  SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
-
   # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
 
-  # ONDELAY
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
+  #ONDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
-  append HTML_PARAMS(separate_$prn) "<tr><td colspan =\"2\"><hr></td></tr>"
+  append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
+
+
+#3
+  incr prn
+  set pref 1
+  if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
+  append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_COMMAND}</td><td>"
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # OFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
@@ -418,10 +406,17 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
+  # ON_TIME
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+
+  # ONDELAY
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
+
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
-set comment {
-#3 jalousie target position
+
+#4 jalousie target position
   incr prn
   set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
@@ -430,7 +425,7 @@ set comment {
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
   # parameter
-  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_COMMAND} \${_at}</td><td>"
+  append HTML_PARAMS(separate_$prn) "<tr><td>\${SWITCH_COMMAND}</td><td>"
   append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_6 SUBSET_7 SUBSET_8} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -478,18 +473,18 @@ set comment {
 
   # OFFDELAY_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG id=\"downDelayTime_${special_input_id}_$prn\_2\"]"
-  append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
-}
+
   # parameter end
 
-#3
+  append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
+
+  append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_$prn\_2');jalousieShowSlatInputElem('separate_${special_input_id}_$prn\_2', $ch);},200)</script>"
+
+#5
   incr prn
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
-
-  #append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_$prn\_2');jalousieShowSlatInputElem('separate_${special_input_id}_$prn\_2', $ch);},200)</script>"
-  #append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_$prn\_2');},200)</script>"
 
 }
 

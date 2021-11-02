@@ -71,6 +71,16 @@
 "RAMPON_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch-on ramp time</span>",
 "REPETITION" : "<span class=\"translated\">Repetitions</span>",
 "SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender channel settings</span>",
+
+"SERVO_LIMIT_POSITION_A" : "<span class=\"translated\">Level limitation position A</span>",
+"SERVO_LIMIT_POSITION_B" : "<span class=\"translated\">Level limitation position B</span>",
+"SERVO_POSITION_A" : "<span class=\"translated\">Position A</span>",
+"SERVO_POSITION_B" : "<span class=\"translated\">Position B</span>",
+"SERVO_SPEED_A" : "<span class=\"translated\">Speed/driving time posistion A</span>",
+"SERVO_SPEED_B" : "<span class=\"translated\">Speed/driving time position. A</span>",
+"SERVO_SPEED_UNIT" : "<span class=\"translated\">Unit speed/driving time </span>",
+"SERVO_SPEED_FACTOR" : "<span class=\"translated\">Value speed/driving time </span>",
+
 "SWITCHING_INTERVAL_BASE" : "Unit of interval",
 "SWITCHING_INTERVAL_FACTOR" : "Value of interval",
 "SWITCHING_INTERVAL_FACTOR_DESCR" : "Interval of pump protection function",

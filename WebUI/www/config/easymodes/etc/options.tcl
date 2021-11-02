@@ -372,7 +372,7 @@ proc option {type} {
      set options(1) "\${optionGlobalPumpControl}"
     }
 
-    "HEATING_VALVE_TYPE" {
+    "NORMALLY_CLOSE_OPEN" {
      set options(0) "\${optionNormallyClose}"
      set options(1) "\${optionNormallyOpen}"
     }
@@ -402,6 +402,25 @@ proc option {type} {
     "OPTION_DISABLE_ENABLE" {
       set options(0) "\${optionDisable}"
       set options(1) "\${optionEnable}"
+    }
+
+    "DOOR_LOCK_ANGLE_RANGE" {
+      set options(0) "0°..135°"
+      set options(1) "45°..180°"
+      set options(2) "90°..225°"
+      set options(3) "135°..270°"
+      set options(4) "180°..315°"
+      set options(5) "225°..360°"
+      set options(6) "1 + 0°..135°"
+      set options(7) "1 + 45°..180°"
+      set options(8) "1 + 90°..225°"
+      set options(9) "1 + 135°..270°"
+      set options(10) "1 + 180°..315°"
+      set options(11) "1 + 225°..360°"
+      set options(12) "2 + 0°..135°"
+      set options(13) "2 + 45°..180°"
+      set options(14) "2 + 90°..225°"
+      set options(15) "2 + 135°..270°"
     }
 
   }

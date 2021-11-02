@@ -226,10 +226,10 @@
           stopPolling(bindingId);
           showGatewayIPAddress(ipAddressPort[bindingId], bindingId);
           conInfo(bindingId +" - All devices are available now so we can refresh the config data");
-          ConfigData.destroy();
-          ConfigData.check(function() {
-            conInfo("Config data refreshed");
-          });
+          ConfigData.reload( function() {
+             ConfigData.handleReloadDone();
+               conInfo("Config data refreshed");
+             });
         } else {
           conInfo(bindingId + " - Not all devices are known yet - continue scan for devices");
           if (maxPollNumberReached(loopCounter[bindingId])) {

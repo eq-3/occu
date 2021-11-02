@@ -38,6 +38,7 @@
   string alarmSwitchVirtualReceiver = "ALARM_SWITCH_VIRTUAL_RECEIVER";
   string opticalSignaReceiver = "OPTICAL_SIGNAL_RECEIVER";
   string accessReceiver = "ACCESS_RECEIVER";
+  string servoVirtualReceiver = "SERVO_VIRTUAL_RECEIVER";
   string maintenance = "MAINTENANCE";
 
   ! e. g. DIMMER_WEEK_PROFILE, SWITCH_WEEK_PROFILE
@@ -487,8 +488,12 @@
                 } else {
                   Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
                   Write( sUnit );
-                  Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
-                  ! See SPHM-692 Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"></span>' );
+
+                  ! Hide the notepad for e. g. HmIP-WSC
+                  if ((oCH.HssType().Find(servoVirtualReceiver) == -1) || (oDP.HSSID().Find("RAMP_TIME") == -1)) {
+                    ! See SPHM-692
+                    Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                  }
 
                   ! SPHM-365 - Help for the LEVEL_2 parameter of blind actors
                   if ((oCH.HssType().Find(blindVirtualReceiver) != -1) && (oDP.HSSID().Find("LEVEL_2") != -1)) {

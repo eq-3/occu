@@ -4,6 +4,12 @@ jQuery.extend(true,langJSON, {
     "chType_ACCESS_RECEIVER" : "Benutzer",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_1" : "Homematic IP Wired Bus Kanal 1",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_2" : "Homematic IP Wired Bus Kanal 2",
+
+    "chType_ACCESS_TRANSCEIVER" : "Benutzer",
+
+    "chType_ACCESS_TRANSCEIVER_UNLOCk" : "Entriegeln",
+    "chType_ACCESS_TRANSCEIVER_LOCk" : "Verriegeln",
+
     "chType_ACTOR_SECURITY" : "L%FCftungssperre-Kanal",
     "chType_ACTOR_WINDOW" : "Aktor-Kanal",
     "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Statusmitteilung MP3-Player",

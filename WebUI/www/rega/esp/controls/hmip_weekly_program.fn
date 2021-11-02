@@ -56,7 +56,11 @@ function ::CreateWeeklyProgram()
     WriteLine("opts.chnAddress = '"#chnAddress#"';");
     WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
     WriteLine("opts.channelLocks = "#iChannelLocks#";");
-    WriteLine("opts.userEasyLinkMode = "#user.UserEasyLinkMode()#";");
+    if (cObj.Label() == "HmIP-WKP") {
+      WriteLine("opts.userEasyLinkMode = false;");
+    } else {
+      WriteLine("opts.userEasyLinkMode = "#user.UserEasyLinkMode()#";");
+    }
     if (cObj.Label() != "HmIP-DLD") {
       WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgram("#chnId#", opts);");
     } else {

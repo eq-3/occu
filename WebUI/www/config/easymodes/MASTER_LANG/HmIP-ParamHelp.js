@@ -184,6 +184,13 @@ jQuery.extend(true,langJSON, {
       "Bei Tastenpaaren, z. B. f%FCr Hochfahren und Runterfahren, sollten dazu jeweils beide Auswahlfelder an beiden Tastenkan%E4len aktiviert werden.<br/><br/>" +
       "Bei Verwendung als Einzeltaste sollte jeweils nur das Auswahlfeld mit der Nummer des eigenen Tastenkanals ausgew%E4hlt werden.",
 
+    "ABORT_EVENT_SENDING_CHANNELS_ACCESS_TRANSCEIVER" :
+      "Damit das Ger%E4t unverz%FCglich auf einen g%FCltig empfangenden Wiegand-Codes reagieren kann, " +
+      "kann ein noch laufender Sendevorgang eines vorhergehenden Wiegand-Codes abgebrochen werden.<br/><br/>" +
+      "Ist ein Wiegand-Code f%FCr mehr als einen Kanal g%FCltig, sollten dazu jeweils die Auswahlfelder der Kan%E4le ausgew%E4hlt werden. " +
+      "Wird der Wiegand-Code nur f%FCr einen Kanal genutzt, sollte jeweils nur das Auswahlfeld mit der Nummer des genutzten Kanals ausgew%E4hlt werden.",
+
+
     "POSITION_SAVE_TIME" :
     "Zeit, nach der die aktuelle Position als 'alter Wert' gewertet wird.",
 
@@ -245,8 +252,8 @@ jQuery.extend(true,langJSON, {
       "Dieser Parameter erm%F6glicht es, die Ausg%E4nge zu tauschen. AUF/ZU bzw. HOCH/RUNTER wird dann zu ZU/AUF bzw. RUNTER/HOCH.<br/><br/>" +
       "Dies kann z. B. dazu genutzt werden, um Fehler bei der Installation zu korrigieren.",
 
-    "OUTPUT_SWAP_Servo" :
-      "Dieser Parameter erm%F6glicht das Tauschen der Ausg%E4nge.",
+    "OUTPUT_SWAP_SERVO" :
+      "Dieser Parameter erm%F6glicht das Tauschen der Drehrichtung.",
 
     "AUTO_HYDRAULIC_ADJUSTMENT" : "%DCber die Ventile wird ein hydraulischer Abgleich durchgef%FChrt, d.h. die Durchflussmenge an den Ventilen wird so eingestellt, dass sich alle R%E4ume mit der gleichen Geschwindigkeit erw%E4rmen.",
 
@@ -267,6 +274,11 @@ jQuery.extend(true,langJSON, {
     "DOOR_LOCK_TURNS" : "W%E4hlen Sie aus, wieviele Umdrehungen notwendig sind, um die T%FCr vollst%E4ndig zu verriegeln.",
     "DOOR_LOCK_NEUTRAL_POS" : "Geben Sie die Position an, in welcher der Schl%FCssel eingesteckt bzw. herausgezogen werden kann, wenn der Zylinder nicht verriegelt ist.",
 
+    "DOOR_LOCK_END_STOP_OFFSET_OPEN" : "Winkelbereich des mechanischen Endanschlags ausgehend von Neutralstellung Entriegelt in Richtung %D6ffnen f%FCr die Zustandserkennung",
+    "DOOR_LOCK_END_STOP_OFFSET_LOCKED" : "Winkelbereich des mechanischen Endanschlags ausgehend von Neutralstellung Verriegelt in Richtung Endanschlag geschlossen f%FCr die Zustandserkennung",
+    "DOOR_LOCK_HOLD_TIME" : "Haltezeit der Schlossfalle beim %D6ffnen",
+    "DOOR_LOCK_DISABLE_ACOUSTIC_CHANNELSTATE" : "Deaktiviert die akustische R%FCckmeldung am Ende einer motorischen Fahrt. Das akustische Signal bei geringer Batteriespannung bleibt unver%E4ndert.",
+
     "DEVICE_SENSOR_SENSITIVITY" :
       "Mit der Sensor-Empfindlichkeit k%F6nnen Sie den Sensor auf die, f%FCr den jeweiligen Einsatzort passende, Empfindlichkeit einstellen.<br/><br/>" +
       "Abh%E4ngig von Material und St%E4rke der Sensorfl%E4che, muss die Empfindlichkeit entsprechend angepasst werden, um eine eindeutige Bet%E4tigung %FCber die Sensorfl%E4chen zu gew%E4hrleisten.<br/><br/>" +
@@ -283,6 +295,41 @@ jQuery.extend(true,langJSON, {
       "Unter bestimmten Umgebungsbedingungen kann eine hoch eingestellte Empfindlichkeit Fehlausl%F6sungen verursachen. " +
       "Passen Sie diese Einstellung bei Bedarf entsprechend an. " +
       "%DCber den Parameter 'Empfindlichkeit' kann eine geeignete Konfiguration vorgenommen werden.",
+
+    "BLOCKING_ON_SABOTAGE" : "<b>Bei Sabotage sperren.</b><br/></br>" +
+      "Solange %FCber den Sabotagekontakt Sabotage ausgel%F6st ist, werden eingehende Codes nicht akzeptiert",
+
+    "BLOCKING_ON_SABOTAGE_FWI" : "<b>Bei Sabotage sperren.</b><br/></br>" +
+      "Solange %FCber den Sabotagekontakt Sabotage ausgel%F6st ist, werden eingehende Wiegand-Codes nicht akzeptiert",
+
+    "BLOCKING_PERMANENT" : "<b>Anzahl der Fehleingaben f%FCr vollst%E4ndiges Blockieren.</b><br/></br>" +
+      "%DCber diesen Parameter kann festgelegt werden, nach wieviel fehlerhaften Codes das Ger%E4t vollst%E4ndig blockiert, " +
+      "also eingehende Befehle dauerhaft nicht akzeptiert werden.<br/></br>" +
+      "Die erneute Freigabe ist manuell %DCber die Zentrale unter \'Status und Bedienung\' vorzunehmen.",
+
+    "BLOCKING_PERMANENT_WKP" : "<b>Anzahl der weiteren Fehleingaben f%FCr permanente Eingabesperre nach tempor%E4rer Eingabesperre</b><br/></br>" +
+      "Nachdem das Ger%E4t durch fehlerhafte Codes tempor%E4r gesperrt wurde, kann %DCber diesen Parameter festgelegt werden, nach wieviel weiteren fehlerhaften Codes das Ger%E4t permanent gesperrt, " +
+      "also eingehende Befehle dauerhaft nicht akzeptiert werden.<br/></br>" +
+      "Die erneute Freigabe ist manuell %FCber die Zentrale unter \'Status und Bedienung\' vorzunehmen.",
+
+    "BLOCKING_TEMPORARY" : "<b>Anzahl fehlerhafter Codeeingaben f%FCr tempor%E4res Sperren.</b></br></br>" +
+      "%DCber diesen Parameter kann festgelegt werden, nach wieviel fehlerhaften Codes das Ger%E4t tempor%E4r gesperrt wird. "+
+      "D. h., eingehende Befehle werden eine Zeit lang akzeptiert.<br/><br/>" +
+      "Wurde die tempor%E4re Sperrung aktiviert, f%FChrt jede weitere ung%FCltige Codeeingabe zur Verl%E4ngerung der zeitlichen Sperrung.",
+
+    "BLOCKING_PERMANENT_FWI" : "<b>Anzahl der Wiegand-Code-Sabotageversuche f%FCr permanentes Sperren.</b><br/></br>" +
+      "%DCber diesen Parameter kann festgelegt werden, ab wann das Wiegand-Interface permanent sperrt, " +
+      "also eingehende Wiegand-Codes dauerhaft nicht akzeptiert werden.<br/></br>" +
+      "Die erneute Freigabe ist manuell %FCber die Zentrale unter \'Status und Bedienung\' vorzunehmen.",
+
+    "BLOCKING_TEMPORARY_FWI" : "<b>Anzahl fehlerhafter Wiegand-Codeeingaben f%FCr tempor%E4res Sperren</b></br></br>" +
+      "%DCber diesen Parameter kann festgelegt werden, ab wann das Wiegand-Interface tempor%E4r gesperrt wird. "+
+      "D. h. eingehende Wiegand-Codes werden eine Zeit lang nicht akzeptiert.<br/><br/>" +
+      "Wurde die tempor%E4re Sperre aktiviert, f%FChrt jede weitere ung%FCltige Codeeingabe zur Verl%E4ngerung der Sperrung.",
+
+    "PSM_CHANNEL_OPERATION_MODE" :
+      "<b>${optionModeConsumption}:</br> Misst angeschlossene Verbraucher" +
+      "<b>${optionModeFeeding}:</br> Misst eingespeiste Leistung, z. B. f%FCr kleine PV-Anlagen.",
 
     "noMoreHelp" : ""
   },
@@ -372,8 +419,8 @@ jQuery.extend(true,langJSON, {
       "You can adjust the sensitivity of the motion detection here. A higher value is equal to a higher sensitivity level.",
 
     "ALARM_MODE_ZONE_1 - currently not in use" :
-      "en* F%FCr den Fall, dass die "+ HMIdentifier.en.CCUShortName + " aus irgendwelchen Gr%FCnden nicht erreichbar ist, k%F6nnen Sie hier die Zonen w%E4hlen, " +
-      "die dann ............",
+      "In case the "+ HMIdentifier.en.CCUShortName + " is not accessible for any reason, you can select the zones here, " +
+      "which then ............",
     "MIN_INTERVAL" :
       "The motion detector reports the first detected movement immediately, then further movements again after the time selected here.",
     "MIN_INTERVAL_PRESENCE" :
@@ -463,6 +510,12 @@ jQuery.extend(true,langJSON, {
       "For key pairs, e.g. for moving up and down, both selection fields on both key channels should be activated.<br/><br/>" +
       "When using as a single key, only the selection field with the number of your own key channel should be selected." ,
 
+    "ABORT_EVENT_SENDING_CHANNELS_ACCESS_TRANSCEIVER" :
+      "In order for the device to be able to react immediately to a Wiegand code that is being received correctly, " +
+      "a transmission of a preceding Wiegand code that is still in progress can be cancelled.<br/><br/>" +
+      "If a Wiegand code is valid for more than one channel, the selection fields of the channels should be selected.  " +
+      "If the Wiegand code is only used for one channel, only the selection field with the number of the channel used should be selected.",
+
     "POSITION_SAVE_TIME" :
     "Time after which the current position is interpreted as 'old value'.",
 
@@ -526,8 +579,8 @@ jQuery.extend(true,langJSON, {
       "This parameter can be used to swap the outputs. OPEN/CLOSED or UP/DOWN will then be changed into CLOSED/OPEN or DOWN/UP.<br/><br/>" +
       "It can be used, for example, to correct errors during installation.",
 
-    "OUTPUT_SWAP_Servo" :
-      "This parameter enables you to exchange the outputs.",
+    "OUTPUT_SWAP_SERVO" :
+      "This parameter enables you to change the direction of rotation.",
 
     "AUTO_HYDRAULIC_ADJUSTMENT" : "A hydraulic balancing is performed via the valves, which means that the flow rate at the valves is adjusted so that all rooms heat up at the same rate.",
 
@@ -548,6 +601,12 @@ jQuery.extend(true,langJSON, {
     "DOOR_LOCK_TURNS" : "Please select the number of turns that are necessary in order to completely lock the door.",
     "DOOR_LOCK_NEUTRAL_POS" : "Select the position in which the key can be inserted or removed when the cylinder is not locked.",
 
+    "DOOR_LOCK_END_STOP_OFFSET_OPEN" : "Angular range of the mechanical end stop starting from neutral position Unlocked in the direction of opening for status detection",
+    "DOOR_LOCK_END_STOP_OFFSET_LOCKED" : "Angular range of the mechanical end stop starting from neutral position Locked in direction of end stop closed for status detection",
+    "DOOR_LOCK_HOLD_TIME" : "Holding time of the lock latch when opening",
+    "DOOR_LOCK_DISABLE_ACOUSTIC_CHANNELSTATE" : "Deactivates the acoustic feedback at the end of a motorised trip. The acoustic signal at low battery voltage remains unchanged.",
+
+
     "DEVICE_SENSOR_SENSITIVITY" :
       "You can set the correct sensor sensitivity value for the respective installation site using Sensor sensitivity.<br/><br/>" +
       "The sensitivity must be adjusted accordingly depending on the material and thickness to ensure unique activation via the sensor surfaces.<br/><br/>" +
@@ -564,6 +623,41 @@ jQuery.extend(true,langJSON, {
       "A high sensitivity level can cause false triggering under specific circumstances. " +
       "This setting should be adjusted accordingly as needed. " +
       "A suitable configuration can be made via the 'Sensitivity' parameter.",
+
+    "BLOCKING_ON_SABOTAGE" : "<b>Lock in case of sabotage.</b><br/></br>" +
+      "Incoming codes are not accepted as long as sabotage is triggered via the sabotage contact",
+
+    "BLOCKING_ON_SABOTAGE_FWI" : "<b>Lock in case of sabotage.</b><br/></br>" +
+      "Incoming Wiegand codes are not accepted as long as sabotage is triggered via the sabotage contact.",
+
+    "BLOCKING_PERMANENT" : "<b>Anzahl der Fehleingaben f%FCr vollst%E4ndiges Blockieren.</b><br/></br>" +
+      "%DCber diesen Parameter kann festgelegt werden, nach wieviel fehlerhaften Codes das Ger%E4t vollst%E4ndig blockiert, " +
+      "also eingehende Befehle dauerhaft nicht akzeptiert werden.<br/></br>" +
+      "Die erneute Freigabe ist manuell %DCber die Zentrale unter \'Status und Bedienung\' vorzunehmen.",
+
+    "BLOCKING_PERMANENT_WKP" : "<b>Number of further incorrect entries for permanent input lock after temporary input lock</b><br/></br>." +
+      "After the device has been temporarily locked by erroneous codes, this parameter can be used to determine after how many further erroneous codes the device will be permanently locked,  " +
+      "This means that incoming commands are not accepted permanently.<br/></br>" +
+      "The new release is to be carried out manually via the page \'Status&Control\'",
+
+    "BLOCKING_TEMPORARY" : "<b>Number of incorrect code entries for temporary locking.</b></br></br>" +
+      "This parameter can be used to define after how many incorrect codes the unit is temporarily locked. "+
+      "This means that incoming commands are accepted for a time.<br/><br/>" +
+      "If the temporary locking was activated, each further invalid code entry leads to an extension of the temporary locking.",
+
+    "BLOCKING_PERMANENT_FWI" : "<b>Number of Wiegand code sabotage attempts for permanent blocking.</b><br/></br>" +
+      "This parameter can be used to define the point at which the Wiegand interface is permanently blocked. " +
+      "This means that incoming Wiegand codes are permanently not accepted.<br/></br>" +
+      "Re-enabling must be done manually via the control panel under 'Status&Control'",
+
+    "BLOCKING_TEMPORARY_FWI" : "<b>Number of incorrect Wiegand code entries for temporary blocking</b></br></br>" +
+      "This parameter can be used to define when the Wiegand interface is temporarily blocked. "+
+      "This means that incoming Wiegand codes are not accepted for a certain period of time.<br/><br/>" +
+      "If the temporary blocking was activated, each further invalid code entry leads to an extension of the blocking.",
+
+    "PSM_CHANNEL_OPERATION_MODE" :
+      "<b>${optionModeConsumption}:</br> Measures connected consumers" +
+      "<b>${optionModeFeeding}:</br> Measures fed-in power, e.g. for small PV systems",
 
     "noMoreHelp" : ""
     }

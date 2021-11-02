@@ -71,6 +71,16 @@
 "RAMPON_TIME_FACTOR_DESCR" : "<span class=\"translated\">Rampenzeit beim Einschalten</span>",
 "REPETITION" : "<span class=\"translated\">Wiederholungen</span>",
 "SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender-Kanaleinstellungen</span>",
+
+"SERVO_LIMIT_POSITION_A" : "<span class=\"translated\">Pegelbegrenzung Position A</span>",
+"SERVO_LIMIT_POSITION_B" : "<span class=\"translated\">Pegelbegrenzung Position B</span>",
+"SERVO_POSITION_A" : "<span class=\"translated\">Position A</span>",
+"SERVO_POSITION_B" : "<span class=\"translated\">Position B</span>",
+"SERVO_SPEED_A" : "<span class=\"translated\">Geschwindigkeit/Fahrzeit Pos. A</span>",
+"SERVO_SPEED_B" : "<span class=\"translated\">Geschwindigkeit/Fahrzeit Pos. B</span>",
+"SERVO_SPEED_UNIT" : "<span class=\"translated\">Einheit Geschwindigkeit/Fahrzeit </span>",
+"SERVO_SPEED_FACTOR" : "<span class=\"translated\">Wert Geschwindigkeit/Fahrzeit </span>",
+
 "SWITCHING_INTERVAL_BASE" : "Einheit des Intervalls",
 "SWITCHING_INTERVAL_FACTOR" : "Wert des Intervalls",
 "SWITCHING_INTERVAL_FACTOR_DESCR" : "Intervall der Pumpenschutzfunktion",

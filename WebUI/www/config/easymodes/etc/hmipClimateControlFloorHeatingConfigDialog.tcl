@@ -152,7 +152,7 @@ proc getMaintenanceFloorHeating {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblHeatingValveType}</td>"
-      option HEATING_VALVE_TYPE
+      option NORMALLY_CLOSE_OPEN
       append html  "<td>[getOptionBox $param options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }

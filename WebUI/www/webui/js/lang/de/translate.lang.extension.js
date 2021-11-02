@@ -1354,7 +1354,7 @@ jQuery.extend(true,langJSON, {
          "Bedenken Sie, dass es dann wegen des erh%F6hten Funkaufkommens eventuell zu Kommunikationsst%F6rungen kommen kann.",
      "dialogSettingsTimePositionMessageSetPositionSucceedIncludingAllDevices" :
        "Positionsangabe wurde gespeichert.<br/><br/>" +
-         "Die Standortdaten der enstprechenden HmIP-Ger%E4te werden angepasst.",
+         "Die Standortdaten der entsprechenden HmIP-Ger%E4te werden angepasst.",
      "lblDutyCycleBidCosRF" : "Duty Cycle BidCos:",
      "lblDutyCycleHmIP" : "Duty Cycle HmIP: ",
      "lblDutyCycle" : "Duty Cycle CCU: ",

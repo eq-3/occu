@@ -2,4 +2,6 @@
 "description_2" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird das T%FCrschloss entriegelt.</span><br/><br/>",
 "description_3" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird das T%FCrschloss verriegelt.</span><br/><br/>",
 "description_4" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck wird die T%FCr ge%F6ffnet.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Mit einem kurzen oder langen Tastendruck kann das Wochenprogramm aktiviert/deaktiviert werden.</span><br/><br/>",
+
 

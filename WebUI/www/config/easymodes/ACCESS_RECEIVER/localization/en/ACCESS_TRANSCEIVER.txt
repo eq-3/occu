@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the door lock is set to the opposite state (locked or unlocked).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the door lock is unlocked.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the door lock is locked.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the door is opened.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">If authorisation has been granted and the correct code has been entered, the weekly programme can be activated/deactivated.</span><br/><br/>",

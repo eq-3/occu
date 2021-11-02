@@ -1,0 +1,8 @@
+"description_1" : "<span class=\"translated\">If authorization is granted and the correct code is entered the blind will be moved up completely for the set time. If an up-delay is set the blind will be moved up after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">If authorization is granted and the correct code is entered the blind will be moved down completely for the set time. If a down-delay is set the blind will be moved down after the delay time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">If authorization is granted and the correct code is entered the blind will alternate between being moved up completely and down completely (toggle function). If a delay is set the shutter is moved after the delay time has expired.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">If authorization is granted and the correct code is entered the blind will be moved for the set time to a required position. If a delay is set the shutter will be moved after the delay time has expired.</span><br/><br/>",
+
+"subset_1" : "moved up",
+"subset_2" : "moved down",
+"subset_3" : "changing between moved up and moved down",
