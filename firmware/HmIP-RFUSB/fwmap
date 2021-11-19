@@ -1,4 +1,5 @@
 #Type           Filename                Version
 
 #Coprozessor
-CCU2                    hmip_coprocessor_update.eq3                          	2.8.6 		# HmIP Only CoProzessor RPI-RF-MOD
+CCU2			hmip_coprocessor_update.eq3				2.8.6		#HmIP Only CoProzessor HmIP-RFUSB
+#CCU2			dualcopro_update_blhmip-4.2.14.eq3			4.2.14		# Dual CoProzessor HmIP-RFUSB
