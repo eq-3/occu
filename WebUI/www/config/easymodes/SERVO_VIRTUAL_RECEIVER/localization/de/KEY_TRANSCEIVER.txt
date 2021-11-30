@@ -1,4 +1,4 @@
-"description_1" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Servo abwechselnd auf die jeweils festgelegte Position gefahren. Ein langer Tastendruck f&auml;hrt das Servo abwechselnd schrittweise bis zur gew&auml;hlten Pegelbegrenzung.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">Mit einem kurzen Tastendruck f%E4hrt das Servo abwechselnd auf die jeweils festgelegte Position gefahren. Ein langer Tastendruck f&auml;hrt das Servo abwechselnd schrittweise bis zur gew&auml;hlten Pegelbegrenzung.</span><br/><br/>",
 "description_2" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
 
 

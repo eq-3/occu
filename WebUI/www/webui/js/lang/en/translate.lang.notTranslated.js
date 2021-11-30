@@ -16,34 +16,31 @@ jQuery.extend(true, langJSON, {
     "stringTableServoLevel" : "Servo position",
     "lblRestartNeeded" : "Restart required",
 
-    "stringTableServoActivityStateDown" : "Ramp down",
     "stringTableServoActivityStateUnknown" : "Servo activity unknown",
-    "stringTableServoActivityStateUp" : "Ramp up",
-
     "stringTableDeviceSensorSensibility" : "Sensor sensitivity",
 
     "comment" : "Translated by the software department",
 
     "stringTableServoRamp" : "Speed/driving time",
 
-    "lblRotationSwap" : "Swap direction of rotation",
+    "lblRotationSwap" : "Change direction of rotation",
 
     "optionNormallyClose" : "NC (normally closed)",
     "optionNormallyOpen" : "NO (normally open)",
 
-    "stringTableBlockingOnSabotage" : "Lock on sabotage",
+    "stringTableBlockingOnSabotage" : "Lock in case of sabotage",
     "stringTableSabotageContactType" : "Type of sabotage contact",
 
-    "stringTableBlockingPermanent" : "Number of further incorrect entries for complete lock "+
+    "stringTableBlockingPermanent" : "Number of further faulty entries for complete locking "+
       "after temporary input lock",
-    "stringTableBlockingTemporary" : "Number of incorrect entries for temporary locking",
+    "stringTableBlockingTemporary" : "Number of faulty entries for temporary locking",
 
     "helpServoRampTime" :
-      "With value 0, the travel time is only dependent on the actuating time of the servo.<br/><br/>" +
-      "The speed/travel time only influences the travel time if this is greater than the travel time caused by the actuating time of the servo.",
+      "With value 0, the driving time is only dependent on the positioning time of the servo.<br/><br/>" +
+      "The speed/driving time only affects the driving time if it is greater than the driving time caused by the positioning time of the servo.",
 
-    "stringTableAbortEventSendingChannelsAccessTransceiver" : "Faster response by cancelling all sending operations of the following channels",
-    "lblStopRunningLinkAccessTransceiver" : "Canceling old sending operations<br/>of this channel",
+    "stringTableAbortEventSendingChannelsAccessTransceiver" : "Faster reaction by cancelling all transmissions of the following channels",
+    "lblStopRunningLinkAccessTransceiver" : "Cancel old transmissions<br/>of these channels",
 
     "stringTableBlockedPermanently" : "Permanently locked",
     "stringTableBlockedTemporarily" : "Temporarily locked",
@@ -53,13 +50,13 @@ jQuery.extend(true, langJSON, {
     "codeIdle" : "--",
     "codeKnownCodeIDReceived" : "Code ID received",
     "codeUnKnownCodeIDReceived" : "Unknown",
-    "codeLearnModeForCodeIDStarted" : "Code is being learned",
-    "codeLearnModeExitForCodeWithSuccess" : "Code successfully learned",
-    "codeLearnModeExitForCodeWithTimeout" : "Timeout when learning code",
+    "codeLearnModeForCodeIDStarted" : "Code is being taught in",
+    "codeLearnModeExitForCodeWithSuccess" : "Code successfully taught in",
+    "codeLearnModeExitForCodeWithTimeout" : "Timeout during code teach-in",
     "codeLearnModeExitForCodeWithErrorDuplicateCode" : "Code already exists",
     "codeCodeErased" : "Code deleted",
 
-    "codeManagement" : "Code<br/>Management",
+    "codeManagement" : "Code<br/>management",
     "clearStatusMessages" : "Reset<br/>locks",
 
     "lblCodeReceived" : "Received code",
@@ -67,14 +64,14 @@ jQuery.extend(true, langJSON, {
     "lblFWISetCodeCommand" : "Action",
     "lblFWIClearError" : "Reset lock",
 
-    "codeStartOfLearn" : "Learn code",
-    "codeStopOfLearn" : "End learning",
+    "codeStartOfLearn" : "Teach in code",
+    "codeStopOfLearn" : "End teach-in",
     "codeErase" : "Delete code",
 
     "clearAll" : "All",
 
     "hintFWITargetNotPossible" :
-      "\n\nChannels 1 - 8 do not support the Astro function.\n\n" +
+      "\n\nChannels 1 - 8 do not support the astro function.\n\n" +
       "Use the condition  \"Fixed time of day\"\n\n",
 
     "dialogCodeCommandTitle" : "Code Management",
@@ -85,8 +82,8 @@ jQuery.extend(true, langJSON, {
     "stringTableAccessTransceiverTitle" : "Access authorisation",
     "stringTableAccessTransceiverStateFalse" : "Channel authorised: No",
     "stringTableAccessTransceiverStateTrue" : "Channel authorised: Yes",
-    "stringTableAccessTransceiverAccessAuthorizationTrue" : "Permission granted",
-    "stringTableAccessTransceiverAccessAuthorizationFalse" : "Permission not granted",
+    "stringTableAccessTransceiverAccessAuthorizationTrue" : "Authorisation granted",
+    "stringTableAccessTransceiverAccessAuthorizationFalse" : "Authorisation not granted",
 
     "stringTableBlockedPermanentFalse" : "Input permanently locked: No",
     "stringTableBlockedPermanentTrue" : "Input permanently locked: Yes",
@@ -94,12 +91,13 @@ jQuery.extend(true, langJSON, {
     "stringTableBlockedTemporaryTrue" : "Input temporarily locked: Yes",
     "stringTableAccessTransCodeID" : "Code ID",
     "stringTableAccessTransCodeStateCodeErased" : "Code deleted",
-    "stringTableAccessTransCodeStateIdle" : "Idle mode",
-    "stringTableAccessTransCodeStateKnownCodeIDReceived" : "Code ID received",
-    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithErrorDuplicateCode" : "Error during code learning: code present",
-    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithSuccess" : "Code successfully learned",
-    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithTimeout" : "Error during code learning: Timeout",
-    "stringTableAccessTransCodeStateLearnModeForCodeIDStarted" : "Learning process started",
+    "stringTableAccessTransCodeStateIdle" : "Idle state",
+    "stringTableAccessTransCodeStateKnownCodeIDReceived" : "Code ID received"
+    ,
+    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithErrorDuplicateCode" : "Error during teach-in: code exists",
+    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithSuccess" : "Code successfully taught in",
+    "stringTableAccessTransCodeStateLearnModeLearnModeExitWithTimeout" : "Error during code teach-in: Timeout",
+    "stringTableAccessTransCodeStateLearnModeForCodeIDStarted" : "Teach-in process started",
     "stringTableAccessTransCodeStateUnknownCodeDetected" : "Code unknown",
 
     "stringTableAccessTransCodeSCodeUsed01False" : "Code 1 not active",
@@ -146,14 +144,15 @@ jQuery.extend(true, langJSON, {
     "stringTableSabotageSticky" : "Sabotage attempt",
     "stringTableSabotageStickyFalse" : "Sabotage attempt: No",
     "stringTableSabotageStickyTrue" : "Sabotage attempt: Yes",
-    "stringTableClearErrorAll" : "Delete error: All",
-    "stringTableClearErrorBlockedPermanent" : "Delete error: permanently locked",
-    "stringTableClearErrorBlockedTemporary" : "Delete Error: temporarily locked",
-    "stringTableClearErrorSabotage" : "Delete Error: Sabotage",
-    "stringTableClearErrorSabotageSticky" : "Delete Error: Sabotage attempt",
+    "stringTableClearErrorAll" : "Clear error: All",
+
+    "stringTableClearErrorBlockedPermanent" : "Clear error: permanently locked",
+    "stringTableClearErrorBlockedTemporary" : "Clear Error: temporarily locked",
+    "stringTableClearErrorSabotage" : "Clear Error: Sabotage",
+    "stringTableClearErrorSabotageSticky" : "Clear Error: Sabotage attempt",
     "stringTableCodeCommandErase" : "Delete code",
-    "stringTableCodeCommandStartOfLearn" : "Start learning for code",
-    "stringTableCodeCommandStopOfLearn" : "Cancel the learning process",
+    "stringTableCodeCommandStartOfLearn" : "Start teach-in process for code",
+    "stringTableCodeCommandStopOfLearn" : "Cancel teach-in process",
 
     "stringTableDisableDoorLockAcousticChannelState" : "Deactivate acoustic feedback",
     "hintDoorLockHoldTime" : "Please note that a longer holding time has a negative effect on the battery life of the door lock drive.",
@@ -167,16 +166,16 @@ jQuery.extend(true, langJSON, {
     "optionLong" : "Long",
     "optionExtraLong" : "Extra long",
 
-    "stringTableBurstLimit" : "Burst limit",
-    "stringTableBurstLimitFalse" : "Burst limit not reached",
-    "stringTableBurstLimitTrue" : "Burst limit reached",
+    "stringTableBurstLimit" : "Burst-limit",
+    "stringTableBurstLimitFalse" : "Burst-limit not reached",
+    "stringTableBurstLimitTrue" : "Burst-limit reached",
 
     "stringTableNumericPinCode" : "PIN code",
 
-    "dialogAskCreateBakupCheckboxText" : "Create a system backup before the update.",
+    "dialogAskCreateBakupCheckboxText" : "Create system backup before update.",
     "dialogAskCreateBakupText" : "The backup is created and downloaded directly before the installation. This process may take a few minutes",
 
-    "unitNumericPinCode" : "(max. 8 digits from 0-9)",
+    "unitNumericPinCode" : "(max. 8 digits from 0 to 9)",
 
     "stringTableUserAuthorization01false" : "User 1 authorised: No",
     "stringTableUserAuthorization01true" : "User 1 authorised: Yes",
@@ -195,13 +194,13 @@ jQuery.extend(true, langJSON, {
     "stringTableUserAuthorization08false" : "User 8 authorised: No",
     "stringTableUserAuthorization08true" : "User 8 authorised: Yes",
 
-    "lblPinOfChannelLockA" : "The channel PIN code is used 'User",
-    "lblPinOfChannelLockB" : "Locking'",
+    "lblPinOfChannelLockA" : "The PIN code of the channel 'User",
+    "lblPinOfChannelLockB" : "Lock' is used.",
 
     "stringTableKeyPressLongRelease" : "Start long key press",
     "stringTableKeyPressLongStart" : "Stop long key press",
 
-    "lblChannelActivInactivWhenNoOutput" : "Unit inactive or standby<br/>at 0% output voltage",
+    "lblChannelActivInactivWhenNoOutput" : "Device inactive or in standby<br/>at 0% output voltage",
     "optionRelayInactive" : "Device not active",
     "optionRelayOffDelay05S" : "Standby after 0.5 s.",
     "optionRelayOffDelay1S" : "Standby after 1s s.",
@@ -211,10 +210,12 @@ jQuery.extend(true, langJSON, {
     "optionModeFeeding" : "Feeding mode",
 
     "comment" : "This has yet to be translated",
-    "hintSetReadyNotComplete" : "To completely configure the channel, press the Done button and then call up the device in the device list",
+    "hintSetReadyNotComplete" : "Click on 'Done' to complete the channel configuration then access the device in the device list.",
 
     "lblCode" : "Code",
     "lblBellButton" : "Bell button",
+
+    "stringTableServoTitle" : "Servo Control",
 
     "noMoreKeys" : ""
   }

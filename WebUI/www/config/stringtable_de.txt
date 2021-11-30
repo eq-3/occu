@@ -816,6 +816,19 @@ FREQUENCY_LOWON_LONGOFF_HIGHON_LONGOFF	${stringTableAlarmFrequencyLowOnLongOffHi
 FREQUENCY_LOWON_OFF_HIGHON_OFF	${stringTableAlarmFrequencyLowOnOffHighonOff}
 FREQUENCY_RISING	${stringTableAlarmFrequencyRising}
 FREQUENCY_RISING_AND_FALLING	${stringTableAlarmFrequencyRisingAndFalling}
+
+FREQUENCY	${stringTablePowerMeterFrequency}
+FREQUENCY_STATUS=ERROR 	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
+FREQUENCY_STATUS=4 	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
+FREQUENCY_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}
+FREQUENCY_STATUS=0	${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}
+FREQUENCY_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterFrequency}: ${lblOverflow}
+FREQUENCY_STATUS=2	${lblValue} ${stringTablePowerMeterFrequency}: ${lblOverflow}
+FREQUENCY_STATUS=UNDERFLOW	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnderflow}
+FREQUENCY_STATUS=3	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnderflow}
+FREQUENCY_STATUS=UNKNOWN	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnknown}
+FREQUENCY_STATUS=1	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnknown}
+
 FROST_PROTECTION=FALSE	${stringTableFrostProtectionFalse}
 FROST_PROTECTION=TRUE	${stringTableFrostProtectionTrue}
 FROST_PROTECTION_TEMPERATURE	${stringTableFrostProtectionTemperature}
@@ -1046,8 +1059,10 @@ LOWEST_ILLUMINATION_STATUS=2	${lblValue} ${stringTableLowestIllumination}: ${lbl
 LUX	${stringTableLux}
 MAINS_POWERED	${stringTableMainsPowered}
 
+MAINTENANCE|BLOCKED_PERMANENT	${stringTableBlockedPermanently}
 MAINTENANCE|BLOCKED_PERMANENT=FALSE	${stringTableBlockedPermanentFalse}
 MAINTENANCE|BLOCKED_PERMANENT=TRUE	${stringTableBlockedPermanentTrue}
+MAINTENANCE|BLOCKED_TEMPORARY	${stringTableBlockedTemporarily}
 MAINTENANCE|BLOCKED_TEMPORARY=FALSE	${stringTableBlockedTemporaryFalse}
 MAINTENANCE|BLOCKED_TEMPORARY=TRUE	${stringTableBlockedTemporaryTrue}
 
@@ -1078,7 +1093,7 @@ MAINTENANCE|CODE_USED_02=TRUE	${stringTableAccessTransCodeSCodeUsed02True}
 MAINTENANCE|CODE_USED_03=FALSE	${stringTableAccessTransCodeSCodeUsed03False}
 MAINTENANCE|CODE_USED_03=TRUE	${stringTableAccessTransCodeSCodeUsed03True}
 MAINTENANCE|CODE_USED_04=FALSE	${stringTableAccessTransCodeSCodeUsed04False}
-MAINTENANCE|CODE_USED_04=TRUE	${stringTableAccessTransCodeSCodeUsed04rue}
+MAINTENANCE|CODE_USED_04=TRUE	${stringTableAccessTransCodeSCodeUsed04True}
 MAINTENANCE|CODE_USED_05=FALSE	${stringTableAccessTransCodeSCodeUsed05False}
 MAINTENANCE|CODE_USED_05=TRUE	${stringTableAccessTransCodeSCodeUsed05True}
 MAINTENANCE|CODE_USED_06=FALSE	${stringTableAccessTransCodeSCodeUsed06False}
@@ -1290,16 +1305,6 @@ POWERMETER|AVERAGING	${stringTablePowerMeterAveraging}
 POWERMETER|CURRENT	${stringTableCurrent}
 POWERMETER|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
 POWERMETER|FREQUENCY	${stringTablePowerMeterFrequency}
-POWERMETER|FREQUENCY_STATUS=ERROR 	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
-POWERMETER|FREQUENCY_STATUS=4 	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
-POWERMETER|FREQUENCY_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}
-POWERMETER|FREQUENCY_STATUS=0	${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}
-POWERMETER|FREQUENCY_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterFrequency}: ${lblOverflow}
-POWERMETER|FREQUENCY_STATUS=2	${lblValue} ${stringTablePowerMeterFrequency}: ${lblOverflow}
-POWERMETER|FREQUENCY_STATUS=UNDERFLOW	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnderflow}
-POWERMETER|FREQUENCY_STATUS=3	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnderflow}
-POWERMETER|FREQUENCY_STATUS=UNKNOWN	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnknown}
-POWERMETER|FREQUENCY_STATUS=1	${lblValue} ${stringTablePowerMeterFrequency}: ${lblUnknown}
 POWERMETER|POWER	${stringTablePowerMeterPower}
 POWERMETER|TX_MINDELAY	${stringTablePowerMeterTxMinDelay}
 POWERMETER|TX_THRESHOLD_CURRENT	${stringTablePowerMeterTxThresholdCurrent}
@@ -1550,10 +1555,12 @@ SENSOR_WINDOW|WIN_RELEASE=TRUE	${stringTableActorWindowReleaseTrue}
 SENSOR|INPUT_LOCKED	${stringTableSensorInputLocked}
 
 SERVO_TRANSMITTER|LEVEL	${stringTableServoLevel}
-SERVO_TRANSMITTER|ACTIVITY_STATE=DOWN	${stringTableServoActivityStateDown}
+SERVO_TRANSMITTER|ACTIVITY_STATE=DOWN	${stringTableDimmerActivityStateDown}
 SERVO_TRANSMITTER|ACTIVITY_STATE=UNKNOWN	${stringTableServoActivityStateUnknown}
-SERVO_TRANSMITTER|ACTIVITY_STATE=UP	${stringTableServoActivityStateUp}
+SERVO_TRANSMITTER|ACTIVITY_STATE=UP	${stringTableDimmerActivityStateUp}
+SERVO_TRANSMITTER|ACTIVITY_STATE=STABLE	${stringTableProcessStableBlindDimmerTransmitter}
 
+SERVO_VIRTUAL_RECEIVER	${stringTableServoTitle}
 SERVO_VIRTUAL_RECEIVER|LEVEL	${stringTableServoLevel}
 SERVO_VIRTUAL_RECEIVER|RAMP_TIME	${stringTableServoRamp}
 

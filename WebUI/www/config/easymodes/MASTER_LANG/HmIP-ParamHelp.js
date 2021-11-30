@@ -185,10 +185,10 @@ jQuery.extend(true,langJSON, {
       "Bei Verwendung als Einzeltaste sollte jeweils nur das Auswahlfeld mit der Nummer des eigenen Tastenkanals ausgew%E4hlt werden.",
 
     "ABORT_EVENT_SENDING_CHANNELS_ACCESS_TRANSCEIVER" :
-      "Damit das Ger%E4t unverz%FCglich auf einen g%FCltig empfangenden Wiegand-Codes reagieren kann, " +
-      "kann ein noch laufender Sendevorgang eines vorhergehenden Wiegand-Codes abgebrochen werden.<br/><br/>" +
-      "Ist ein Wiegand-Code f%FCr mehr als einen Kanal g%FCltig, sollten dazu jeweils die Auswahlfelder der Kan%E4le ausgew%E4hlt werden. " +
-      "Wird der Wiegand-Code nur f%FCr einen Kanal genutzt, sollte jeweils nur das Auswahlfeld mit der Nummer des genutzten Kanals ausgew%E4hlt werden.",
+      "Damit das Ger%E4t unverz%FCglich auf einen g%FCltig empfangenden Code reagieren kann, " +
+      "kann ein noch laufender Sendevorgang eines vorhergehenden Code abgebrochen werden.<br/><br/>" +
+      "Ist ein Code f%FCr mehr als einen Kanal g%FCltig, sollten dazu jeweils die Auswahlfelder der Kan%E4le ausgew%E4hlt werden. " +
+      "Wird der Code nur f%FCr einen Kanal genutzt, sollte jeweils nur das Auswahlfeld mit der Nummer des genutzten Kanals ausgew%E4hlt werden.",
 
 
     "POSITION_SAVE_TIME" :
@@ -303,7 +303,7 @@ jQuery.extend(true,langJSON, {
       "Solange %FCber den Sabotagekontakt Sabotage ausgel%F6st ist, werden eingehende Wiegand-Codes nicht akzeptiert",
 
     "BLOCKING_PERMANENT" : "<b>Anzahl der Fehleingaben f%FCr vollst%E4ndiges Blockieren.</b><br/></br>" +
-      "%DCber diesen Parameter kann festgelegt werden, nach wieviel fehlerhaften Codes das Ger%E4t vollst%E4ndig blockiert, " +
+      "%DCber diesen Parameter kann festgelegt werden, nach wieviel fehlerhaften Codes das Ger%E4t vollst%E4ndig gesperrt wird, " +
       "also eingehende Befehle dauerhaft nicht akzeptiert werden.<br/></br>" +
       "Die erneute Freigabe ist manuell %DCber die Zentrale unter \'Status und Bedienung\' vorzunehmen.",
 
@@ -317,7 +317,7 @@ jQuery.extend(true,langJSON, {
       "D. h., eingehende Befehle werden eine Zeit lang akzeptiert.<br/><br/>" +
       "Wurde die tempor%E4re Sperrung aktiviert, f%FChrt jede weitere ung%FCltige Codeeingabe zur Verl%E4ngerung der zeitlichen Sperrung.",
 
-    "BLOCKING_PERMANENT_FWI" : "<b>Anzahl der Wiegand-Code-Sabotageversuche f%FCr permanentes Sperren.</b><br/></br>" +
+    "BLOCKING_PERMANENT_FWI" : "<b>Anzahl fehlerhafter Wiegand-Codeeingaben f%FCr permanentes Sperren</b><br/></br>" +
       "%DCber diesen Parameter kann festgelegt werden, ab wann das Wiegand-Interface permanent sperrt, " +
       "also eingehende Wiegand-Codes dauerhaft nicht akzeptiert werden.<br/></br>" +
       "Die erneute Freigabe ist manuell %FCber die Zentrale unter \'Status und Bedienung\' vorzunehmen.",
@@ -511,10 +511,10 @@ jQuery.extend(true,langJSON, {
       "When using as a single key, only the selection field with the number of your own key channel should be selected." ,
 
     "ABORT_EVENT_SENDING_CHANNELS_ACCESS_TRANSCEIVER" :
-      "In order for the device to be able to react immediately to a Wiegand code that is being received correctly, " +
-      "a transmission of a preceding Wiegand code that is still in progress can be cancelled.<br/><br/>" +
-      "If a Wiegand code is valid for more than one channel, the selection fields of the channels should be selected.  " +
-      "If the Wiegand code is only used for one channel, only the selection field with the number of the channel used should be selected.",
+      "In order for the device to be able to react immediately to a code that is being received correctly, " +
+      "a transmission of a preceding code that is still in progress can be cancelled.<br/><br/>" +
+      "If a code is valid for more than one channel, the selection fields of the channels should be selected.  " +
+      "If the code is only used for one channel, only the selection field with the number of the channel used should be selected.",
 
     "POSITION_SAVE_TIME" :
     "Time after which the current position is interpreted as 'old value'.",
@@ -601,10 +601,10 @@ jQuery.extend(true,langJSON, {
     "DOOR_LOCK_TURNS" : "Please select the number of turns that are necessary in order to completely lock the door.",
     "DOOR_LOCK_NEUTRAL_POS" : "Select the position in which the key can be inserted or removed when the cylinder is not locked.",
 
-    "DOOR_LOCK_END_STOP_OFFSET_OPEN" : "Angular range of the mechanical end stop starting from neutral position Unlocked in the direction of opening for status detection",
-    "DOOR_LOCK_END_STOP_OFFSET_LOCKED" : "Angular range of the mechanical end stop starting from neutral position Locked in direction of end stop closed for status detection",
-    "DOOR_LOCK_HOLD_TIME" : "Holding time of the lock latch when opening",
-    "DOOR_LOCK_DISABLE_ACOUSTIC_CHANNELSTATE" : "Deactivates the acoustic feedback at the end of a motorised trip. The acoustic signal at low battery voltage remains unchanged.",
+    "DOOR_LOCK_END_STOP_OFFSET_OPEN" : "Angle range of the mechanical end position starting from an 'unlocked' neutral position towards the open position for detecting states",
+    "DOOR_LOCK_END_STOP_OFFSET_LOCKED" : "Angle range of the mechanical end position starting from a 'locked' neutral position towards the closed position for detecting states",
+    "DOOR_LOCK_HOLD_TIME" : "Holding time for the lock latch when the door is opened",
+    "DOOR_LOCK_DISABLE_ACOUSTIC_CHANNELSTATE" : "Deactivates the acoustic feedback at the end of a motorised movement. The acoustic signal for low battery voltage remains unchanged.",
 
 
     "DEVICE_SENSOR_SENSITIVITY" :
@@ -625,38 +625,38 @@ jQuery.extend(true,langJSON, {
       "A suitable configuration can be made via the 'Sensitivity' parameter.",
 
     "BLOCKING_ON_SABOTAGE" : "<b>Lock in case of sabotage.</b><br/></br>" +
-      "Incoming codes are not accepted as long as sabotage is triggered via the sabotage contact",
+      "As long as sabotage is triggered via the sabotage contact, incoming codes are not accepted.",
 
     "BLOCKING_ON_SABOTAGE_FWI" : "<b>Lock in case of sabotage.</b><br/></br>" +
-      "Incoming Wiegand codes are not accepted as long as sabotage is triggered via the sabotage contact.",
+      "As long as sabotage is triggered via the sabotage contact, incoming Wiegand codes are not accepted.",
 
-    "BLOCKING_PERMANENT" : "<b>Anzahl der Fehleingaben f%FCr vollst%E4ndiges Blockieren.</b><br/></br>" +
-      "%DCber diesen Parameter kann festgelegt werden, nach wieviel fehlerhaften Codes das Ger%E4t vollst%E4ndig blockiert, " +
-      "also eingehende Befehle dauerhaft nicht akzeptiert werden.<br/></br>" +
-      "Die erneute Freigabe ist manuell %DCber die Zentrale unter \'Status und Bedienung\' vorzunehmen.",
+    "BLOCKING_PERMANENT" : "<b>Number of faulty code entries for complete locking.</b><br/></br>" +
+      "This parameter can be used to define after how many incorrect codes the device is completely locked,  " +
+      "i. e. incoming commands are not accepted permanently.<br/></br>" +
+      "Re-enabling must be done manually via the page \'Status&Control\'",
 
     "BLOCKING_PERMANENT_WKP" : "<b>Number of further incorrect entries for permanent input lock after temporary input lock</b><br/></br>." +
       "After the device has been temporarily locked by erroneous codes, this parameter can be used to determine after how many further erroneous codes the device will be permanently locked,  " +
       "This means that incoming commands are not accepted permanently.<br/></br>" +
-      "The new release is to be carried out manually via the page \'Status&Control\'",
+      "The new release must be done manually via the page \'Status&Control\'",
 
-    "BLOCKING_TEMPORARY" : "<b>Number of incorrect code entries for temporary locking.</b></br></br>" +
-      "This parameter can be used to define after how many incorrect codes the unit is temporarily locked. "+
-      "This means that incoming commands are accepted for a time.<br/><br/>" +
-      "If the temporary locking was activated, each further invalid code entry leads to an extension of the temporary locking.",
+    "BLOCKING_TEMPORARY" : "<b>Number of faulty code entries for temporary locking.</b></br></br>" +
+      "This parameter can be used to define after how many incorrect codes the device is temporarily locked, "+
+      "i.e. incoming commands are not accepted for a while.<br/><br/>" +
+      "If temporary locking has been activated, each further invalid code entry leads to an extension of the temporary lock.",
 
-    "BLOCKING_PERMANENT_FWI" : "<b>Number of Wiegand code sabotage attempts for permanent blocking.</b><br/></br>" +
-      "This parameter can be used to define the point at which the Wiegand interface is permanently blocked. " +
-      "This means that incoming Wiegand codes are permanently not accepted.<br/></br>" +
-      "Re-enabling must be done manually via the control panel under 'Status&Control'",
+    "BLOCKING_PERMANENT_FWI" : "<b>Number of faulty Wiegand code entries for complete locking.</b><br/></br>" +
+      "This parameter can be used to define the point at which the Wiegand interface is permanently locked. " +
+      "This means that incoming Wiegand codes are not accepted permanently.<br/></br>" +
+      "Re-enabling must be done manually via the page \'Status&Control\'",
 
-    "BLOCKING_TEMPORARY_FWI" : "<b>Number of incorrect Wiegand code entries for temporary blocking</b></br></br>" +
-      "This parameter can be used to define when the Wiegand interface is temporarily blocked. "+
-      "This means that incoming Wiegand codes are not accepted for a certain period of time.<br/><br/>" +
-      "If the temporary blocking was activated, each further invalid code entry leads to an extension of the blocking.",
+    "BLOCKING_TEMPORARY_FWI" : "<b>Number of faulty Wiegand code entries for temporary locking</b></br></br>" +
+      "This parameter can be used to define the point at which the Wiegand interface is temporarily locked, "+
+      " i.e. incoming Wiegand codes are not accepted for a while.<br/><br/>" +
+      "If the temporary lock has been activated, each further invalid code entry leads to an extension of the lock.",
 
     "PSM_CHANNEL_OPERATION_MODE" :
-      "<b>${optionModeConsumption}:</br> Measures connected consumers" +
+      "<b>${optionModeConsumption}:</br> Measures connected loads" +
       "<b>${optionModeFeeding}:</br> Measures fed-in power, e.g. for small PV systems",
 
     "noMoreHelp" : ""

@@ -16,10 +16,7 @@ jQuery.extend(true, langJSON, {
     "stringTableServoLevel" : "Servoposition",
     "lblRestartNeeded" : "Neustart erforderlich",
 
-    "stringTableServoActivityStateDown" : "Rampe herunter",
     "stringTableServoActivityStateUnknown" : "Servo Aktivit%E4t unbekannt",
-    "stringTableServoActivityStateUp" : "Rampe hoch",
-
     "stringTableDeviceSensorSensibility" : "Sensor-Empfindlichkeit",
 
 
@@ -212,10 +209,12 @@ jQuery.extend(true, langJSON, {
     "optionModeFeeding" : "Einspeisemodus",
 
     "comment" : "This has yet to be translated",
-    "hintSetReadyNotComplete" : "Zum vollst%E4ndigen Konfigurieren des Kanals bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
+    "hintSetReadyNotComplete" : "Klicken Sie auf Fertig, um den Kanal vollst%E4ndig zu konfigurieren und rufen Sie das Ger%E4t anschlie%DFend in der Ger%E4teliste auf.",
 
     "lblCode" : "Code",
     "lblBellButton" : "Klingeltaster",
+
+    "stringTableServoTitle" : "Servo Steuerung",
 
     "noMoreKeys" : ""
   }

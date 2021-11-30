@@ -7,4 +7,4 @@
 
 "optionIgnore" : "Profile not active",
 "optionOn" : "Auto mode",
-"optionOff" : "Manual mode",
+"optionOff" : "Manu mode",

@@ -133,18 +133,18 @@ jQuery.extend(true, langJSON, {
 
     "helpFWICodeCommand" :
       "The Wiegand interface allows the use of up to 20 different Wiegand codes. " +
-      "To learn a new Wiegand code, select a free code number and activate \'Start learning for code\'. " +
-      "There are 60 seconds left to transmit a valid Wiegand code to the interface. " +
-      "The learning process can be cancelled at any time via \'Cancel the learning process\'.<br/><br/>" +
+      "To teach in a new Wiegand code, select a free code number and activate \'Teach in code\'. " +
+      "You have 60 seconds to transmit a valid Wiegand code to the interface. " +
+      "The teach-in process can be cancelled at any time via \'Cancel the teach-in process\'.<br/><br/>" +
       "To delete a Wiegand code, select the corresponding code number and activate \'Delete code\'.",
 
     "helpFWIClearError" :
-      "If the sabotage contact has been activated or the temporary or permanent blocking of codes has been activated by the transmission of invalid Wiegand codes, " +
+      "If the sabotage contact has been triggered, or codes have been temporarily or permanently locked by the transmission of invalid Wiegand codes, " +
       "the Wiegand interface is temporarily or permanently locked.<br/><br/>" +
-      "The locking can be cancelled via \'Reset locks\'.",
+      "The lock can be cancelled using \'Reset locks\'.",
 
     "helpClearError" :
-      "If the sabotage contact was triggered or the temporary or permanent lock was activated by transmitting invalid codes, " +
+      "If the sabotage contact has been triggered, or codes have been temporarily or permanently locked by the transmission of invalid codes, " +
       "the device is temporarily or permanently locked.<br/><br/>" +
       "The lock can be cancelled at any time via \'Reset locks\'.",
 

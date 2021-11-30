@@ -65,6 +65,12 @@ proc getMinMaxValueDescr {param} {
     if {$param == "CALIBRATION_PPM_VAL"} {set max 10000}
   }
 
+  set comment {
+    if {[string equal $dev_descr(TYPE) "HmIP-WUA"] == 1} {
+      if {$param == "VOLTAGE_0"} {set max 99.5}
+      if {$param == "VOLTAGE_100"} {set min 0.5}
+    }
+  }
   set unit "noUnit"
 
   catch {set unit $param_descr(UNIT)}
@@ -253,8 +259,10 @@ proc getTextField {param value chn prn {extraparam ""}} {
       set minValue "0"
       set maxValue "99999999"
       set s "<input id=$elemId type=\"text\" size=\"5\" maxlength=\"8\" value=$value name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\} else \{ ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\}\" $extraparam>"
+    } elseif {($param == "VOLTAGE_0") || ($param == "VOLTAGE_100")} {
+        set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);$extraparam\">"
     } else {
-      set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1)\" $extraparam>"
+      set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\" $extraparam>"
     }
   }
 
@@ -654,7 +662,7 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
 }
 
 proc getPowerUpSelector {chn p special_input_id} {
-  global psDescr dev_descr
+  global psDescr dev_descr ch_descr
   upvar psDescr psDescr
   upvar $p ps
   upvar prn prn
@@ -723,8 +731,9 @@ proc getPowerUpSelector {chn p special_input_id} {
     if { [info exists ps($param)] == 1  } {
       incr prn
       set powerUpLevelPRN $prn
+
       append html "<tr>"
-      if {[string equal $dev_descr(TYPE) HmIP-WSC] == 1} {
+      if {[string equal $ch_descr(TYPE) SERVO_VIRTUAL_RECEIVER] == 1} {
         append html "<td>\${stringTableServoLevel}</td>"
       } else {
         append html "<td>\${stringTableDimmerLevel}</td>"

@@ -108,7 +108,7 @@ jQuery.extend(true,langJSON, {
     "lblWPServoPos" : "Servo position",
     "lblWPState" : "Switching status",
 
-    "lblWPState_Access" : "Switching status/<br/>Access authorisation",
+    "lblWPState_Access" : "Switching state/<br/>access authorisation",
     "lblWP_Access" : "Access authorisation",
 
     "lblWPPermission" : "Permission",
@@ -181,7 +181,7 @@ jQuery.extend(true,langJSON, {
     "set comment" : "SERVO_Duration not in use",
     "SERVO_Duration" : "Help for SERVO_Duration",
 
-    "hintAccessControlAstroNotWorking" : "<span class='attention'><b>Attention!</b> The astro function only works for switch actuators.</span>",
+    "hintAccessControlAstroNotWorking" : "<span class='attention'><b>Important!</b> The astro function only works for switch actuators.</span>",
 
     "dummy" : ""
   }
