@@ -142,7 +142,7 @@ proc getMaintenance {chn p descr} {
   if { [info exists ps($param)] == 1  } {
     incr prn
     array_clear options
-    if {([string equal $devType "HmIP-eTRV-3"] == 1) || ([string equal $devType "HmIP-eTRV-E"] == 1)} {
+    if {([string equal $devType "HmIP-eTRV-3"] == 1) || ([string equal $devType "HmIP-eTRV-E"] == 1) || ([string equal $devType "HmIP-eTRV-E-S"] == 1) } {
       set optVal 0
       for {set val 1} {$val <= 16} {incr val} {
           if {$val < 7} {incr optVal 5} elseif {$val < 14} {incr optVal 10} else {incr optVal 20}

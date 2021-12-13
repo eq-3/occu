@@ -818,8 +818,8 @@ FREQUENCY_RISING	${stringTableAlarmFrequencyRising}
 FREQUENCY_RISING_AND_FALLING	${stringTableAlarmFrequencyRisingAndFalling}
 
 FREQUENCY	${stringTablePowerMeterFrequency}
-FREQUENCY_STATUS=ERROR 	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
-FREQUENCY_STATUS=4 	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
+FREQUENCY_STATUS=ERROR	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
+FREQUENCY_STATUS=4	${lblValue} ${stringTablePowerMeterFrequency}: ${lblError}
 FREQUENCY_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}
 FREQUENCY_STATUS=0	${lblValue} ${stringTablePowerMeterFrequency}: ${lblNormal}
 FREQUENCY_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterFrequency}: ${lblOverflow}
