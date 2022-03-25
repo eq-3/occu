@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">A clockwise rotation ramps up the output voltage according to the selected settings.</span><br/><br/>",
+
+"description_2" : "<span class=\"translated\">A clockwise rotation ramps down the output voltage according to the selected settings.</span><br/><br/>",
+
+"description_3" : "<span class=\"translated\">With a quick clockwise rotation, the output voltage changes between the defined value and &quot;off&quot;. A slow clockwise rotation ramps up or down the output voltage.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",

@@ -110,7 +110,7 @@ function ::dcCreate()
     var CN_CLIMATE_CONTROL_FLOOR_TRANSCEIVER = "CLIMATECONTROL_FLOOR_TRANSCEIVER.";
     var CN_COLORTEMP = "COLORTEMP.";
     var CN_COND_SWITCH_TRANSMITTER_TEMPERATURE = "COND_SWITCH_TRANSMITTER_TEMPERATURE.";
-    var CN_DANGER          = "DANGER.";
+    var CN_DANGER          = "_DANGER.";
     var CN_DIGITAL_ANALOG_OUTPUT      = "DIGITAL_ANALOG_OUTPUT.";
     var CN_DIGITAL_STATE      = "DIGITAL_STATE.";
     var CN_DIMMER          = "DIMMER.";
@@ -146,9 +146,7 @@ function ::dcCreate()
     var CN_RGBW_COLOR       = "RGBW_COLOR.";
     var CN_RHS             = "RHS.";
     var CN_SERVO_TRANSMITTER  = "SERVO_TRANSMITTER.";
-
     var CN_SERVO_VIRTUAL_RECEIVER  = "SERVO_VIRTUAL_RECEIVER.";
-
     var CN_SHUTTER_TRANSMITTER      = "SHUTTER_TRANSMITTER.";
     var CN_SHUTTER_VIRTUAL_RECEIVER = "SHUTTER_VIRTUAL_RECEIVER.";
     var CN_SIMPLE_SWITCH_RECEIVER = "SIMPLE_SWITCH_RECEIVER.";
@@ -455,14 +453,15 @@ function ::dcCreate()
           }
 
          !# DANGER
-          bIsControl = ( sControlName.Find(CN_DANGER) > -1 );
-          if( bIsControl && (sLastControlName!=CN_DANGER) )
-          {
-            WriteLine( "<script>conInfo('Control DANGER-Sensor found.');</script>" );
-            isKnownControl = true;
-            sLastControlName = CN_DANGER;
-            Call("/esp/controls/danger.fn::CreateDangerSensor()");
-          }
+         !  bIsControl = ( sControlName.Find(CN_DANGER) > -1 );
+         ! object ch = dom.GetObject(chnId);
+         ! if( bIsControl && (sLastControlName!=CN_DANGER) && (ch.Label() != "HmIP-SWSD-2"))
+         ! {
+         !   WriteLine( "<script>conInfo('Control DANGER-Sensor found.');</script>" );
+         !   isKnownControl = true;
+         !   sLastControlName = CN_DANGER;
+         !   Call("/esp/controls/danger.fn::CreateDangerSensor()");
+         ! }
 
           !# FREQUENCY
           bIsControl = ( sControlName.Find(CN_DIGITAL_ANALOG_OUTPUT) > -1 );
@@ -734,6 +733,13 @@ function ::dcCreate()
               Call("/esp/controls/maintenanceWKP.fn::CreateMaintenance()");
             }
 
+            if (ch.Label() == "HmIP-SWSD-2") {
+              WriteLine( "<script>conInfo('Create SWSD-2 MAINTENANCE Control.');</script>" );
+              sLastControlName = CN_MAINTENANCE;
+              isKnownControl = true;
+              Call("/esp/controls/maintenanceSmokeDetector.fn::CreateMaintenance()");
+            }
+
           }
 
           !# CN_MOTIONDETECTOR
@@ -958,9 +964,10 @@ function ::dcCreate()
 
           !# CN_SMOKE_DETECTOR
           bIsControl = ( sControlName.Find(CN_SMOKE_DETECTOR) > -1 );
-          if( bIsControl && (sLastControlName != CN_SMOKE_DETECTOR) )
+          if( bIsControl && (sLastControlName != CN_SMOKE_DETECTOR))
           {
             WriteLine( "<script>conInfo('Control CN_SMOKE_DETECTOR found.');</script>" );
+            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_SMOKE_DETECTOR;
             Call("/esp/controls/smokedetector.fn::CreateSmokeDetectorControl()");

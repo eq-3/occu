@@ -65,12 +65,12 @@ proc getMinMaxValueDescr {param} {
     if {$param == "CALIBRATION_PPM_VAL"} {set max 10000}
   }
 
-  set comment {
+
     if {[string equal $dev_descr(TYPE) "HmIP-WUA"] == 1} {
       if {$param == "VOLTAGE_0"} {set max 99.5}
       if {$param == "VOLTAGE_100"} {set min 0.5}
     }
-  }
+
   set unit "noUnit"
 
   catch {set unit $param_descr(UNIT)}
@@ -171,6 +171,8 @@ proc getUserDefinedCondTXThresholdUnitMinMaxDescr {devType param} {
 
 proc getTextField {param value chn prn {extraparam ""}} {
 
+  # exec echo "getTextField: $extraparam" >> /tmp/textField.log
+
   if {[string equal $value ""] == 1} {set value ''}
 
   global psDescr dev_descr
@@ -198,6 +200,13 @@ proc getTextField {param value chn prn {extraparam ""}} {
   if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
     if {($param == "REFERENCE_RUNNING_TIME_TOP_BOTTOM_VALUE") ||  ($param == "REFERENCE_RUNNING_TIME_BOTTOM_TOP_VALUE")} {
       set maxValue [expr $param_descr(MAX) - 1]
+    }
+  }
+
+  if {[string equal $dev_descr(TYPE) "HmIPW-WGD"] == 1} {
+    if {$param == "MAIN_TEXT" || $param == "SUB_TEXT"} {
+      set minValue "stringUTF8"
+      set maxValue "stringUTF8"
     }
   }
 
@@ -256,11 +265,11 @@ proc getTextField {param value chn prn {extraparam ""}} {
     }
   } else {
     if {$param == "NUMERIC_PIN_CODE"} {
-      set minValue "0"
-      set maxValue "99999999"
-      set s "<input id=$elemId type=\"text\" size=\"5\" maxlength=\"8\" value=$value name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\} else \{ ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\}\" $extraparam>"
+      set s "<input id=$elemId type=\"text\" size=\"5\" maxlength=\"8\" value=$value name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\}\" $extraparam>"
     } elseif {($param == "VOLTAGE_0") || ($param == "VOLTAGE_100")} {
         set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);$extraparam\">"
+    } elseif {$minValue == "stringUTF8"} {
+        set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" name=$param>"
     } else {
       set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\" $extraparam>"
     }
@@ -347,9 +356,9 @@ proc getCheckBoxCyclicInfoMsg {param value chn prn {extraparam ""}} {
 }
 
 proc getButton {id btnTxt callBack} {
-  set s "&nbsp<input id='$id' type=button onclick=$callBack>"
+  set s "<input id='$id' type=button onclick=$callBack>"
   # This translates the text of the button to the parameter btnTxt
-  puts "<script type=\"text/javascript\">translateAttribute(\"#$id\", \"value\", $btnTxt);</script>"
+  puts "<script type=\"text/javascript\">translateAttribute(\"\#$id\", \"value\", $btnTxt);</script>"
   return $s
 }
 
@@ -459,11 +468,14 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "BLOCKING_TEMPORARY_FWI" {set x 450; set y 150}
    "BOOST_TIME_PERIOD" {set x 450; set y 120}
    "CALIBRATION_PPM" {set x 500; set y 250}
+   "CLIMATE_CONTROL_TYPE" {set x 500; set y 75}
+   "CLIMATE_FUNCTION" {set x 450; set y 75}
    "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
    "CONTACT_BOOST" {set x 450; set y 180}
    "DELAY_COMPENSATION" {set x 450; set y 100}
    "DEVICE_SENSOR_SENSITIVITY" {set x 450; set y 180}
    "DIM_STEP" {set x 500; set y 150}
+   "DISABLE_DEVICE_ALIVE_SIGNAL" {set x 500; set y 75 }
    "DURATION_5MIN" {set x 500; set y 160}
    "ENABLE_ROUTING" {set x 500; set y 120}
    "EVENT_FILTER_NUMBER_motionDetect" {set x 400; set y 60}
@@ -471,6 +483,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "EVENT_FILTER_TIME" {set x 400; set y 90}
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
+   "HUMIDITY_LIMIT_VALUE" {set x 450; set y 85}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
    "MOUNTING_ORIENTATION" {set x 450; set y 75}
    "ON_MIN_LEVEL" {set x 400; set y 80}
@@ -481,11 +494,16 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "PERMANENT_FULL_RX" {set x 500; set y 160}
    "PIR_SENSITIVITY" {set x 500; set y 210}
    "PWM_AT_LOW_VALVE_POSITION" {set x 500; set y 130}
+   "REPEAT_ENABLE" {set x 500; set y 210}
    "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
    "SPDR_CHANNEL_MODE" {set x 600; set y 600}
    "TEMPERATURE_OFFSET" {set x 500; set y 160}
    "TEMPERATURE_OFFSET_STE2" {set x 500; set y 130}
    "TWO_POINT_HYSTERESIS" {set x 450; set y 160}
+   "TWO_POINT_HYSTERESIS_A" {set x 500; set y 160}
+   "TWO_POINT_HYSTERESIS_HUMIDITY" {set x 500; set y 160}
+   "VOLTAGE_0" {set x 450; set y 120}
+   "VOLTAGE_100" {set x 450; set y 120}
    "WEEK_PROGRAM_POINTER" {set x 400; set y 100}
    "WEEK_PROGRAM_POINTER_group" {set x 400; set y 100}
   }
@@ -733,11 +751,17 @@ proc getPowerUpSelector {chn p special_input_id} {
       set powerUpLevelPRN $prn
 
       append html "<tr>"
-      if {[string equal $ch_descr(TYPE) SERVO_VIRTUAL_RECEIVER] == 1} {
-        append html "<td>\${stringTableServoLevel}</td>"
-      } else {
-        append html "<td>\${stringTableDimmerLevel}</td>"
-      }
+        if {[string equal $ch_descr(TYPE) SERVO_VIRTUAL_RECEIVER] == 1} {
+          append html "<td>\${stringTableServoLevel}</td>"
+        } else {
+          # Device TYPE == DIMMER
+          if {([string equal $dev_descr(TYPE) HmIP-WUA] != 1) && ([string equal $dev_descr(TYPE) ELV-SH-WUA] != 1)} {
+            append html "<td>\${stringTableDimmerLevel}</td>"
+          } else {
+            # Device TYPE == DIMMER but is no dimmer but a univeral actor (0 - 10V) - WUA
+            append html "<td>\${lblOperatingVoltage}</td>"
+          }
+        }
         option RAW_0_100Percent
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
       append html "</tr>"

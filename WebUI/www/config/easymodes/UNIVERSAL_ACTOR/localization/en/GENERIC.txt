@@ -1,0 +1,16 @@
+"dim_down" : "Decrease output voltage",
+"dim_up" : "Increase output voltage",
+"dimmer_off" : "Output voltage - off",
+"dimmer_off_darker" : "Output voltage - off/decrease",
+"dimmer_on" : "Output voltage - on",
+"dimmer_on_brighter" : "Output voltage - on/increse",
+"dimmer_on_off" : "Output voltage - on/off",
+"dimmer_on_off_b_d" : "Output voltage - on/off &amp; increase/decrease",
+"sleep_well" : "Slowly decrease output voltage",
+"wake_up_light" : "Slowly decrease output voltage",
+"dimmer_toggle" : "Toggle",
+"dimmer_on_when_change_signal" : "Output voltage on when change signal",
+
+"noRepetitions" : "No repetitions",
+"infiniteRepetitions" : "Continuously",
+

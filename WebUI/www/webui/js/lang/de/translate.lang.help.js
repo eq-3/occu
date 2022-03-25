@@ -146,12 +146,19 @@ jQuery.extend(true, langJSON, {
     "helpFWIClearError" :
       "Wurde der Sabotagekontakt ausgel%F6st oder durch die %DCbertragung ung%FCltiger Wiegand-Codes die tempor%E4re oder permanente Sperrung von Codes aktiviert, " +
       "ist das Wiegand-Interface tempor%E4r oder permanent gesperrt.<br/><br/>" +
-      "%DCber \'Sperrung zur%FCcksetzen\' kann die Sperrung aufgehoben werden.",
+      "%DCber \'Sperrung zur%FCcksetzen\' kann die Sperrung aufgehoben werden. " +
+      "Bet%E4tigen Sie die Entriegelungstaste des zugewiesenen Keypads, um die Konfigurationsdaten zu %FCbertragen.",
 
     "helpClearError" :
       "Wurde der Sabotagekontakt ausgel%F6st oder durch die %DCbertragung ung%FCltiger Codes die tempor%E4re oder permanente Sperrung aktiviert, " +
       "ist das Ger%E4t tempor%E4r oder permanent gesperrt.<br/><br/>" +
-      "%DCber \'Sperrung zur%FCcksetzen\' kann die Sperrung jederzeit aufgehoben werden.",
+      "%DCber \'Sperrung zur%FCcksetzen\' kann die Sperrung jederzeit aufgehoben werden. " +
+      "Bet%E4tigen Sie die Entriegelungstaste des zugewiesenen Keypads, um die Konfigurationsdaten zu %FCbertragen.",
+
+    "helpPrgPermanentFullRX" :
+      "Diese Funktionen k%F6nnen nur korrekt ausgef%FChrt werden, wenn als Spannungsversorgung 'Netzbetrieb' ausgew%E4hlt wird. Aktuell ist jedoch 'Batteriebetrieb' eingestellt.<br/></br>" +
+      "Wenn Sie diese Funktionalit%E4t ben%F6tigen, schalten Sie den Parameter 'Spannungsverorgung' unter Ger%E4teeinstellung (Kanal 0) auf 'Netzbetrieb'.",
+
 
     "END" : ""
   }

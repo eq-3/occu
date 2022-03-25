@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">If the sabotage contact is triggered, the desired alarm is activated for the specified time.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The sabotage contact is not in use for this link.</span><br/><br/>",

@@ -141,12 +141,18 @@ jQuery.extend(true, langJSON, {
     "helpFWIClearError" :
       "If the sabotage contact has been triggered, or codes have been temporarily or permanently locked by the transmission of invalid Wiegand codes, " +
       "the Wiegand interface is temporarily or permanently locked.<br/><br/>" +
-      "The lock can be cancelled using \'Reset locks\'.",
+      "The lock can be cancelled using \'Reset locks\'. " +
+      "Press the unlock button of the assigned keypad to transmit the configuration data.",
 
     "helpClearError" :
       "If the sabotage contact has been triggered, or codes have been temporarily or permanently locked by the transmission of invalid codes, " +
       "the device is temporarily or permanently locked.<br/><br/>" +
-      "The lock can be cancelled at any time via \'Reset locks\'.",
+      "The lock can be cancelled at any time via \'Reset locks\'. " +
+      "Press the unlock button of the assigned keypad to transmit the configuration data.",
+
+    "helpPrgPermanentFullRX" :
+      "These functions can only performed when 'Mains operation' is selected as the power supply. 'Battery operation' is currently set.<br/></br>" +
+      "If you require this functionality, then switch the 'Power supply' parameter under Device settings (channel 0) to 'Mains operation'.",
 
     "END" : ""
   }

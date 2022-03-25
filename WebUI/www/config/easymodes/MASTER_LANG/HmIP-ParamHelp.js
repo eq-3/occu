@@ -331,6 +331,29 @@ jQuery.extend(true,langJSON, {
       "<b>${optionModeConsumption}:</br> Misst angeschlossene Verbraucher" +
       "<b>${optionModeFeeding}:</br> Misst eingespeiste Leistung, z. B. f%FCr kleine PV-Anlagen.",
 
+    "GROUP_SMOKE_DETECTOR" :
+      "<div class='MultiChannelChooserRow'>" +
+      "Ist keine Gruppe ausgew%E4hlt, ist die Alarmierung kompatibel mit allen Rauchwarnmeldern des gleichen Typs (HmIP-SWSD).<br/>" +
+      "Bei Aktivierung einer oder mehrerer Gruppen, ist die Alarmierung nur bei Rauchwarnmeldern mit %FCbereinstimmender Gruppenauswahl aktiv.<br/>" +
+      "</div>",
+
+    "DISABLE_DEVICE_ALIVE_SIGNAL" : "Dieser Parameter erm%F6glicht, das rote Blinken der %DCberwachungs-LED alle 45 s im %DCberwachungszustand zu deaktivieren.",
+
+    "REPEAT_ENABLE" :
+    "Ist diese Checkbox aktiviert, arbeitet der Rauchwarnmelder als Repeater f%FCr Funk-Telegramme anderer Rauchwarnmelder innerhalb der Installation bzw. Gruppe, um die Alarmierungsreichweite zu erh%F6hen.<br/><br/>" +
+    "Bereits wiederholte Telegramme werden nicht erneut wiederholt. Eine Verkettung von Repeatern ist also nicht m%F6glich.<br/><br/>" +
+    "Diese Funktion ist nur f%FCr die Funk-Kommunikation von Rauchwarnmeldern untereinander vorgesehen, um auch bei Stromausfall noch eine zuverl%E4ssige Alarmierung abgelegener Rauchwarnmelder zu erm%F6glichen.",
+
+    "VOLTAGE_0" :
+      "Mit diesem Parameter k%F6nnen Sie die Ausgangsspannung beeinflussen.<br/><br/>" +
+      "Beispiel: Wert der Ausgangsspannung im ausgeschaltetem Zustand (0 %):<br/><br/>" +
+      "50 % -> 5 V oder 10 % -> 1 V",
+
+    "VOLTAGE_100" :
+      "Mit diesem Parameter k%F6nnen Sie die Ausgangsspannung beeinflussen.<br/><br/>" +
+      "Beisplel: Wert der Ausgangsspannung im eingeschaltetem Zustand (100 %):<br/><br/>" +
+      "100 % -> 10 V oder 50 % -> 5 V",
+
     "noMoreHelp" : ""
   },
 
@@ -658,6 +681,31 @@ jQuery.extend(true,langJSON, {
     "PSM_CHANNEL_OPERATION_MODE" :
       "<b>${optionModeConsumption}:</br> Measures connected loads" +
       "<b>${optionModeFeeding}:</br> Measures fed-in power, e.g. for small PV systems",
+
+    "GROUP_SMOKE_DETECTOR" :
+      "<div class='MultiChannelChooserRow'>" +
+      "If no group is selected, the alarm is compatible with all smoke detectors of the same type (HmIP-SWSD).<br/>" +
+      "If one or more groups are activated, the alarm is only active with smoke detectors with matching group selection.<br/>" +
+      "</div>",
+
+    "DISABLE_DEVICE_ALIVE_SIGNAL" : "This parameter allows you to deactivate the monitoring LED’s flashing red every 45 sec in the monitoring state.",
+
+    "REPEAT_ENABLE" :
+      "If this check box is activated, the smoke alarm works as a repeater for wireless telegrams from other smoke alarms within the installation or group to increase the alerting range.<br/><br/>" +
+      "Telegrams that have already been repeated are not repeated again. It is therefore not possible to daisy chain repeaters.<br/><br/>" +
+      "This function is only intended to allow smoke alarms to communicate wirelessly with each other, so that remote smoke alarms can be reliably alerted even in case of power failure.",
+
+    "VOLTAGE_0" :
+      "Use this parameter to influence the output voltage.<br/><br/>" +
+      "Example: value of the output voltage when switched off (0 %):<br/><br/>" +
+      "50 % -> 5 V oder 10 % -> 1 V",
+
+    "VOLTAGE_100" :
+      "Use this parameter to influence the output voltage.<br/><br/>" +
+      "Example: value of the output voltage when switched on (100 %):<br/><br/>" +
+      "100 % -> 10 V oder 50 % -> 5 V",
+
+
 
     "noMoreHelp" : ""
     }

@@ -1088,6 +1088,30 @@ proc put_channel_parameters {} {
            set styleVirtChn "virtualChannelBckGnd"
     }
 
+    if {([string equal $ch_descr(TYPE) "DISPLAY_INPUT_TRANSMITTER"]) || ([string equal $ch_descr(TYPE) "DISPLAY_LEVEL_INPUT_TRANSMITTER"]) } {
+      # For better differentiation, the background of the channel cell of these channels is shown slightly darker.
+      array set chnDarkBckGnd {
+        0 1
+        1 2
+        2 5
+        3 6
+        4 9
+        5 10
+        6 13
+        7 14
+        8 17
+        9 18
+        10 21
+        11 22
+        12 25
+      }
+      foreach index [array names chnDarkBckGnd] {
+        if {$ch_descr(INDEX) == $chnDarkBckGnd($index)} {
+          set styleVirtChn "virtualChannelBckGnd"
+        }
+      }
+    }
+
     puts "<tr [expr {$hide_channel==1?"style=\"visibility: hidden; display: none\"":""} ] >"
     puts "<td class=\"alignCenter\"><span onmouseover=\"picDivShow(jg_250, '$ch_descr(PARENT_TYPE)', 250, $ch_descr(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $ch_name]</span><span id=\"chDescr_$ch_descr(INDEX)\"></span></td>"
     puts "<td class=\"alignCenter $styleVirtChn\" >Ch.: $ch_descr(INDEX)</td>"
@@ -1193,7 +1217,7 @@ proc put_Header {} {
 
           "NEW_FIRMWARE_AVAILABLE" -
           "DELIVER_FIRMWARE_IMAGE" {
-            if {[string equal $dev_descr(TYPE) "HmIP-SWSD"] == 1} {
+            if {([string equal $dev_descr(TYPE) "HmIP-SWSD"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-SWSD-2"] == 1)} {
               set fw_update_rows "<tr><td class=\"CLASS22008\"><div>\${lblDeviceFwDeliverFwImage}</div><div class=\"StdTableBtnHelp\"><img id=\"hmIPDeliverFirmwareHelp\" height=\"24\" width=\"24\"src=\"/ise/img/help.png\"></div></td></tr>"
             }
           }
@@ -1212,7 +1236,7 @@ proc put_Header {} {
           }
 
           "UP_TO_DATE" {
-            if {[string equal $dev_descr(TYPE) "HmIP-SWSD"] == 1} {
+            if {([string equal $dev_descr(TYPE) "HmIP-SWSD"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-SWSD-2"] == 1)} {
               append fw_update_rows "<tr id=\"swsdHintCheckDevice\" class=\"hidden\"><td colspan=\"2\"><span class=\"attention\">\${checkSmokeDetectorSelfTest}</span></td></tr>"
 
               append fw_update_rows "<script \"type=text/javascript\">"

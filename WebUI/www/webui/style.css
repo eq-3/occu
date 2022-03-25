@@ -5259,6 +5259,13 @@ application {
 	border:1px solid $_(black); /* black */
 }
 
+.CLASS02525a {
+	height:100px;
+	width:100px;
+	background-color:$_(okSignal);
+	border:1px solid $_(black); /* black */
+}
+
 .CLASS02525b {
 	height:96px;
 	width:96px;
@@ -5500,6 +5507,13 @@ application {
 	width:98%;
 }
 
+.CLASS02551c {
+	cursor:pointer;
+	height:35px;
+	width:100px;
+	margin-left: 11%;
+}
+
 .CLASS02552 {
 	border:solid 1px $_(black); /* black */
 }
@@ -5531,6 +5545,13 @@ application {
 .CLASS02557 {
 	height:96px;
 	width:96px;
+	background-color:$_(clickable);
+	border:1px solid $_(black); /* black */
+}
+
+.CLASS02557A {
+	height:100px;
+	width:100px;
 	background-color:$_(clickable);
 	border:1px solid $_(black); /* black */
 }

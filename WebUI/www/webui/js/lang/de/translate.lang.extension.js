@@ -1090,7 +1090,7 @@ jQuery.extend(true,langJSON, {
     "colorStateNormal" : "Farbstatus normal",
     "colorStateUnknown" : "Farbstatus unbekannt",
 
-    "lblPressSystemButton" : "Bitte bet%E4tigen Sie die Bedientaste und bringen das Ger%E4t in Funkreichweite.",
+    "lblPressSystemButton" : "Bitte bringen Sie das Ger%E4t in Funkreichweite und bet%E4tigen die Bedientaste.",
 
     "btnAccessPointSettings" : "Homematic IP<br/>Access Points",
     "lblAccessPointSettings1" : "Verwaltung der Homematic IPAccess Points",
@@ -1210,12 +1210,9 @@ jQuery.extend(true,langJSON, {
       "Bevor Sie Ihre CCU in Betrieb nehmen, vergeben Sie ein Administrator-Passwort. " +
         "Merken Sie sich das Passwort gut und geben es nicht weiter!<br/><br/>" +
         "Weitere Benutzer mit eingeschr%E4nkten Rechten k%F6nnen %FCber die Benutzerverwaltung der CCU eingerichtet werden.",
-
     "dlgUserPasswdHint1" :
       "Bevor Sie Ihre CCU in Betrieb nehmen, vergeben Sie bitte ein Passwort. " +
         "Merken Sie sich das Passwort gut und geben es nicht weiter!<br/><br/>",
-
-
     "secLevelHigh" : "Maximal gesichert",
     "secLevelMid" : "Restriktiv",
     "secLevelLow" : "Relaxed",
@@ -1225,69 +1222,54 @@ jQuery.extend(true,langJSON, {
     "secLevelMidCaption" : "Bei dieser Sicherheitsstufe ist der Zugriff auf Schnittstellen, Zusatzsoftware und die Mediola-Software verf%FCgbar. ",
     "secLevelLowCaptionA" : "Ich kenne mich gut genug damit aus, die CCU gegen Zugriff Unbefugter sch&uuml;tzen zu k&ouml;nnen.",
     "secLevelUserHint" : "Eine Sicherheitsstufe verhindert nicht das nachtr&auml;gliche %D6ffnen von z. B. Ports in der Firewall-Einstellung. Die Sicherheitsstufe springt dann z. B. von 'Maximal gesichert' auf 'Benutzerdefiniert'.",
-
     "dialogSetSecurityLevelExpress"  : "Express",
     "dialogSetSecurityLevelUserDefined"  : "Benutzerdefiniert",
     "dlgSecurityLevelHeader" : "Sicherheitsstufe",
     "noPasswdSet" : "Kein Passwort gesetzt!",
     "passwdNotIdentical" : "Passw%F6rter nicht identisch!",
-
     "adminPasswordTitle" : "<u>Administrator Passwort</u>",
     "userPasswordTitle" : "<u>Benutzer Passwort</u>",
     "portEnablingTitle" : "<b>Port-Freigabe:</b>",
     "portEnablingCaption" : "Hier k%F6nnen ben%F6tigte Ports freigegeben werden. Geben Sie die Ports durch ein ';' getrennt ein.",
-
     "securitySettingsTitle" : HMIdentifier.de.CCUShortName + " Sicherheitseinstellung",
     "btnSecuritySettings" : "Sicherheits-<br/>Assistent",
     "lblSecuritySettings1" : "Express",
     "lblSecuritySettings2" : "Benutzerdefiniert",
-
     "dialogSettingsFirewallLblFWPolicy" : "<b>Firewall-Richtlinie:</b>",
     "dialogSettingsFirewallLblPortAccess" : "<b>Port Zugriff:</b>",
     "dialogSettingsFirewallLblPortsRestricted" : "Ports blockiert",
     "dialogSettingsFirewallLblPortsOpen" : "Ports offen",
     "dialogSettingsFirewallLblHintPortAccess" : "Zugriffseinstellungen der Ports",
-
     "lblSetting" : "Einstellung",
-
     "dialogSettingsFirewallLblMediola" : "<b>Mediola-Zugriff:</b>",
     "dialogSettingsFirewallLblHintMediola" : "Erm%F6glicht den Zugriff auf den Mediola-Service",
-
     "toolTipFirewallAccessModes" : "<ul>" +
       "<li>Vollzugriff: Remote und lokaler Zugriff erlaubt</li>" +
       "<li>Eingeschr%E4nkt: Nur lokaler Zugriff erlaubt</li>" +
       "<li>Kein Zugriff: Zugriff nicht gestattet</li>" +
     "<ul>",
-
     "dialogSettingsFirewallLblHintIPAddresses" : "Sie k%F6nnen den Zugriff f%FCr einzelne IP-Adressen oder ganze Adressbereiche sowohl f%FCr IPv4 als auch f%FCr IPv6 freigeben. Geben Sie die Adressen durch ein ';' getrennt ein.",
     "dialogSettingsFirewallLblHintIPAddressesWithoutIPv6" : "Sie k%F6nnen den Zugriff f%FCr einzelne IP-Adressen (z. B. 192.168.0.1) oder ganze Adressbereiche (z. B. 192.168.0.0/16) f%FCr IPv4 freigeben. Geben Sie die Adressen durch ein ';' getrennt ein.",
-
     "dglUserNewFwSettingsTitle" : "Bitte beachten!",
     "dglUserNewFwSettingsContent" : "Die Firewalleinstellungen wurden ge%E4ndert. Bei Problemen, z. B. mit Zusatzsoftware, wenden Sie sich bitte an den Administrator.",
-
     "stringTableContactBoost" : "Korrosionsschutz",
     "lblJalousieBlind" : "Betriebsmodus Jalousie / Rolllade",
     "optionBlind" : "Jalousie",
     "optionShutter" : "Rolllade",
      "hintBlindModeChanged" : "%DCbertragen Sie die Konfiguration, bevor Sie fortfahren.",
-
     "dialogSettingsStorageTitleLEDS" : "Info-LED",
     "dialogSettingsStorageSettingsLblServiceLed" : "Servicemeldungen:",
     "dialogSettingsStorageSettingsLblAlarmLed" : "Alarmmeldungen:",
     "dialogSettingsStorageHintLEDS" : "Ein- bzw. Ausschalten des Blinkens der Info-LED bei Service- und Alarmmeldungen",
-
-
     "dialogSettingsSecurityTDSNMP" : "SNMP",
     "dialogSettingsSecurityLblActivateSNMP" : "SNMP aktiv:",
     "dialogSettingsSecurityTDSNMPExplanation" : "Bei Aktivierung ist der SNMP Dienst aktiv. Unterst%FCtzt wird ausschlie%DFlich SNMPv3 mit SHA und AES.",
     "dialogSettingsSecurityPasswordHint" : "Bitte beachten Sie, dass das Passwort mindestens 8 Zeichen lang sein muss.",
     "dialogSettingsSecurityUserHint" : "Bitte geben Sie einen Benutzernamen ein.",
-
     "hintWiredBlindLinksAvailable" : "Achtung: Es bestehen Verkn%Fcpfungen. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
     "hintWiredBlindProgramsAvailable" : "Achtung: Es bestehen Programme. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
     "hintWiredBlindLinksAndProgramsAvailable" : "Achtung: Es bestehen Verkn%FCpfungen und Programme. Der Betriebsmodus kann daher nicht ge%E4ndert werden.",
     "hintCheckChannels" : "<br/>Pr%FCfen Sie bitte folgende Kan%E4le: ",
-
     "lblSoundFileNr" : "MP3-Datei",
     "lblColorNr" : "Farbe",
     "lblColorSongNr" : "MP3-Datei<br/>Farbe",
@@ -1296,31 +1278,23 @@ jQuery.extend(true,langJSON, {
     "soundOldValue" : "Zuletzt gespielte MP3-Datei",
     "colorOldValue" : "Zuletzt gew%E4hlte Farbe",
     "blinkOldValue" : "Zuletzt gew%E4hltes Verhalten",
-
     "soundColorOldValue" : "MP3-Datei/Farbe = letzter Wert",
     "soundColorRandomPlayback" : "MP3-Datei/Farbe = Zufallswiedergabe",
     "soundColorInternal" : "Interner Sound/keine Farbe",
     "hintSoundFileRandom20" : "Zuf%E4llige Wiedergabe einer der ersten 20 MP3-Dateien.",
-
     "***"  : "***",
-
     "checkSmokeDetectorSelfTest" : "Bitte vergewissern Sie sich, dass der Rauchmelder korrekt arbeitet, indem Sie einen Selbsttest durch Druck auf die Bedientaste durchf%FChren!",
     "hintActivateDetectorSelfTest" : "Das Firmware-Update wurde erfolgreich aufgespielt. ",
     "hintReInclusionDetectorFailed" : "Beim Firmware-Update ist ein Problem aufgetreten.  ",
-
     "lblRename" : "Umbenennen",
     "askRenameAllChannels" : "Standard-Kanalnamen automatisiert vergeben?",
     "lblDeviceName" : "Ger%E4tename",
     "lblChannelNames" : "Vorschau Kanalnamen",
-
     "dialogFirmwareUpdateUnknownError" : "Es ist ein unbekannter Fehler aufgetreten<br/><br/>Bitte %FCberpr%FCfen Sie, ob das Ger%E4t erreichbar ist.",
-
     "lblHmIPWIdentification" : "Identifizierung",
     "lbDisplayBacklight" : "Beleuchtung<br/>Display",
     "lblLightingKeyVisual" : "Beleuchtung<br/>Systemtaste",
-
     "drapMaxCurrentBus" : "Maximale Stromaufnahme<br/>des Bus",
-
     "AccessPointConfigurationFinished" : "Die Einstellungen wurden erfolgreich %FCbernommen.",
     "dialogMigrationRCV50Title" : langJSON.de.dialogHint,
     "dialogMigrationRCV50" : "Ab diesem Release ist es erstmals m%F6glich, auch f%FCr Homematic IP 50 virtuelle Fernbedienungskan%E4le zu nutzen.<br/><br/>" +
@@ -1332,15 +1306,10 @@ jQuery.extend(true,langJSON, {
     "lblQueryConfig" : "Konfiguration abfragen",
     "lblSetConfig" : "Konfiguration speichern",
     "lblConfigNotChanged" : "Es wurde keine %C4nderung an der Konfiguration vorgenommen.",
-
     "configureDisplay" : "Display-Konfiguration",
     "resetDisplay" : "Display-Reset",
     "resetDevice" : "Ger%E4te-Reset",
-
     "hintLinkParamOnOffNotActive" : "Hinweis!<br/><br/>Die Parameter Ein- und Ausschaltdauer d%FCrfen nicht gemeinsam auf 'Nicht aktiv' gestellt werden.",
-
-
-
     "lblVibration" : "Ersch%FCtterung",
     "lblPosition" : "Lage",
     "lblHorizontal" : "Waagerecht",
@@ -1348,7 +1317,6 @@ jQuery.extend(true,langJSON, {
     "lblNonHorizontal" : "Geneigt",
     "lblYes" : "Ja",
     "lblNo" : "Nein",
-
     "setAllHmIPDevices" :
        "Soll diese Position auf die entsprechenden HmIP-Ger%E4te %FCbertragen werden?\n\n"  +
          "Bedenken Sie, dass es dann wegen des erh%F6hten Funkaufkommens eventuell zu Kommunikationsst%F6rungen kommen kann.",
@@ -1383,7 +1351,6 @@ jQuery.extend(true,langJSON, {
      "hintWeeklyProgramActiveExpertChannel" :
        "Der Expertenmodus ist nicht aktiv. Da jedoch bei mindestens einem Schaltzeitpunkt zumindest ein Experten-Zielkanal aktiviert ist, " +
        "werden die Zielkan%E4le dennoch im Expertenmodus dargestellt.",
-
      "alertUsernameForbiddenChars" : "Der Benutzername darf kein Leerzeichen enthalten.",
      "addFirmwareFailedMinCCUVersion" : "Dieses Ger%E4te-Firmware Update wird von der Firmware Ihrer CCU nicht unterst%FCtzt. Bitte aktualisieren Sie zun%E4chst Ihre CCU Firmware.",
      "lblStopRunningLink" : "Alte Sendevorg%E4nge<br/>dieser Tasten abbrechen",
@@ -1407,80 +1374,55 @@ jQuery.extend(true,langJSON, {
      "rotationDirLeftSlow" : "Langsames Drehen nach links",
      "rotationDirRightSlow" : "Langsames Drehen nach rechts",
      "rainDetectorSampleInterval" : "Zeitspanne zwischen den einzelnen Messungen<br/>(Regenerkennungsintervall)",
-
-
-
     "cpSecurityHttpsRedirectTitle" : "Automatische Umleitung auf HTTPS",
     "cpSecurityHttpsRedirectLabel" : "Umleitung auf HTTPS aktiv:",
     "cpSecurityHttpsRedirectDescription" : "Ist die Funktion aktiviert, erfolgt bei Zugriff auf die WebUI %FCber HTTP eine automatische Umleitung auf HTTPS",
     "lblBus": "BUS",
-
     "lblOperatingVoltage": "Ausgangsspannung",
     "lblOperatingVoltageStatus": "Status Ausgangsspannung",
     "lblOperationPowerConsumptionState": "Status Stromaufnahme",
-
     "lblCurrentPowerConsumption": "Aktuelle Stromaufnahme",
     "lblCurrentOperatingVoltage": "Aktuelle Betriebsspannung",
-
     "lblVoltageStatus_0": "Normal",
     "lblVoltageStatus_1": "Unbekannt",
     "lblVoltageStatus_2": "%DCberspannung",
     "lblVoltageStatus_3": "Ext. Spannungsversorgung",
-
-
     "lblPowerConsumptionStatus_0": "Normal",
     "lblPowerConsumptionStatus_1": "Unbekannt",
     "lblPowerConsumptionStatus_2": "Stromaufnahme zu hoch",
-
     "stringTableOperationPowerConsumptionState": "Status Stromaufnahme",
     "lblOperationTemp": "Betriebstemperatur",
-
     "lblDutyCycle": "Duty Cycle",
     "lblCarrierSense": "Carrier Sense",
-
     "headerDrapUpdateNecessary":
       "Mit diesem Update wird durch Advanced Routing eine verbesserte Kommunikation zwischen den Homematic IP Funk- und den Homematic IP Wired-Komponenten etabliert. " +
       "Dazu ist es erforderlich, dass ein Firmware-Update des Homematic IP Wired Access Point durchgef%FChrt wird.<br><br>Der Homematic IP Wired Access Point befindet sich " +
       "nach diesem Update im Posteingang und muss dort konfiguriert werden.<br>Alle bereits angelernten und konfigurierten Wired-Ger%E4te in der Installation arbeiten nach dem Update wie gewohnt weiter.",
-
     "drapUpdateNecessary": "Folgende Wired Access Points mit einer inkompatiblen Firmware wurden gefunden und m%FCssen aktualisiert werden:<br/><br/>",
-
     "lblSeeServiceMessage": "Siehe Servicemeldung!",
-
     "lblAllChannelsVisible": "Alle Kan%E4le sichtbar:",
-
     "thAvailableVersion": "Verf%FCgbare Version",
     "thInstalledVersion": "Installierte Version",
     "btnReload": "Neu laden",
-
     "btnAccessPoints": "Access Points mit</br>inkompatibler FW updaten",
     "lblShowAllAPs": "Access Points mit inkompatibler FW updaten",
     "lblGotoUpdate" : "Zum Update",
-
     "apSearchMigrationDescription":
       "F%FCr die Aktualisierung werden das Passwort des Homematic IP Access Points sowie eine aktive Internetverbindung ben%F6tigt. Das Passwort (PW) finden Sie auf dem Aufkleber am Ger%E4t.",
-
     "apSearchDescription": "F%FCr die Aktualisierung wird das Passwort des Homematic IP Access Points ben%F6tigt. Das Passwort (PW) finden Sie auf dem Aufkleber am Ger%E4t.",
-
     "password": "Passwort",
     "apSearchWaitText": "Access Points werden im Netzwerk gesucht. Bitte warten Sie, bis die Suche abgeschlossen ist.",
     "apMigrationNoApToUpdate" : "Es wurden keine Access Points gefunden, deren Firmware aktualisiert werden muss.",
-
     "apMigrationConfigureForUpdateFailed" : "Beim Starten des Access Point-Updates ist ein Fehler aufgetreten. Bitte %FCberpr%FCfen Sie das Passwort und versuchen Sie es erneut.",
-
     "apMigrationUpdateSuccessful" : "Die Aktualisierung der Firmware wurde erfolgreich abgeschlossen.",
     "apMigrationUpdateSuccessfulTitle" : "Firmware aktualisisert",
-
     "apMigrationErrorOrTimeout" : "Bei dem Firmware-Update ist ein Fehler aufgetreten. Bitte aktualisieren Sie die Ansicht und versuchen Sie es erneut.",
-
     "apMigrationUpdateSuccessfulAddition" : "Sie k%F6nnen den Access Point jetzt %FCber &ldquo;Ger%E4te anlernen&rdquo; anlernen.",
     "apMigrationUpdateSuccessfulAdditionMigrationMode" : "Der Access Point befindet sich jetzt im Posteingang.",
-
     "hintDeviceDoesNotSupportAction" : "Die aktuell installierte GerÃ¤te-Firmware unterstÃ¼tzt diese Funktion nicht.",
     "lblDifferentialTemperature": "Differenz-Temperatur T1 - T2",
     "noUpdateNeeded" : "Kein Update erforderlich.",
     "notCompatible" : "Nicht kompatibel",
-
     "aqiGood" : "Gut",
     "aqiModerate" : "M%E4%DFig",
     "aqiUnhealty1" : "Ungesund f%FCr empf. Personen",
@@ -1488,7 +1430,6 @@ jQuery.extend(true,langJSON, {
     "aqiUnhealty3" : "Sehr ungesund",
     "aqiHazardous" : "Gesundheitsgef%E4hrdend",
     "lblLocationA" : "Standort",
-
     "hintGroupDevice" : "Achtung! Dieses Ger%E4t ist Teil einer Heizgruppe.<br/>Anpassungen an den Temperaturprofilen sollten in der Gruppe vorgenommen werden.",
     "lblChnNotAllowedInRoom" : "Dieser Kanal kann keinem Raum zugewiesen werden!",
     "lblChnNotAllowedInFunc" : "Dieser Kanal kann keinem Gewerk zugewiesen werden!",
@@ -1500,9 +1441,7 @@ jQuery.extend(true,langJSON, {
     "drapRescueIntroTitle" : "HmIP-DRAP Vorbereitungsupdate",
     "drapRescueIntroText" : "Dieser HmIP-DRAP mit der Firmware Version 2.0.16 erfordert ein Zwischenupdate, bevor das eigentliche Update ausgef%FChrt werden kann.</br>Geben Sie hierf%FCr das auf dem HmIP-DRAP aufgedruckte Passwort (PW) ein und klicken Sie anschlie%DFend auf &bdquo;OK&ldquo;",
     "drapRescueUpdateSuccessful" : "Das Zwischenupdate wurde erfolgreich abgeschlossen.</br>Warten Sie, bis die LED des HmIP-DRAP blau blinkt, bzw. t%FCrkis leuchtet. Starten Sie dann das eigentliche Update, indem Sie erneut den &ldquo;Update&rdquo; Button klicken.",
-
     "lbl24Average" : "24h Durchschnitt",
-
     "optionColorOFF" : "Beleuchtung aus",
     "optionColorON" : "Dauerhaft ein",
     "blinkSlow" : "Langsames Blinken",
@@ -1514,12 +1453,9 @@ jQuery.extend(true,langJSON, {
     "blinkBillowSlow" : "Langsames Pulsieren",
     "blinkBillowMiddle" : "Mittleres Pulsieren",
     "blinkBillowFast" : "Schnelles Pulsieren",
-
     "lblTilt" : "Neigung",
     "hintSetReadyWeeklyProgram" : "Zum Konfigurieren des Wochenprogramms bitte den Fertig Button bet%E4tigen und das Ger%E4t anschlie%DFend in der Ger%E4teliste aufrufen.",
     "lblBehaviour" : "Verhalten",
-
-
     "lblCO2Concentration" : "CO2-Konzentration",
     "btnDirectFwUpload" : "Direkt auf CCU laden und installieren",
     "dialogSettingsCMLblAlternateSoftwareUpdate" : "Alternative Vorgehensweise:",
@@ -1543,10 +1479,62 @@ jQuery.extend(true,langJSON, {
     "lblLock" : "Verriegeln",
     "lblUnlock" : "Entriegeln",
     "lblTypePointOfTime" : "Zeitpunkt-Typ",
-
     "lblDisplay"  : "Display",
     "lblSystemKey" : "Systemtaste",
     "lblReadings" : "Messwert(e)",
+    "modeBatNotSupported" : "(nicht unterst%FCtzt, da Batteriebetrieb)",
+    "lblRestartNeeded" : "Neustart erforderlich",
+    "lblRotationSwap" : "Drehrichtung tauschen",
+    "optionNormallyClose" : "NC (normally closed)",
+    "optionNormallyOpen" : "NO (normally open)",
+    "helpServoRampTime" :
+      "Bei Wert 0 ist die Fahrzeit nur von der Stellzeit des Servos abh%E4ngig.<br/><br/>" +
+      "Die Geschwindigkeit/Fahrzeit beeinflusst die Fahrzeit erst, wenn diese gr%F6%DFer ist, als die durch die Stellzeit des Servos bedingte Fahrzeit.",
+    "lblStopRunningLinkAccessTransceiver" : "Alte Sendevorg%E4nge<br/>dieser Kan%E4le abbrechen",
+    "codeInUse" : "Verwendete Codes",
+    "codeIdle" : "--",
+    "codeKnownCodeIDReceived" : "Code ID empfangen",
+    "codeUnKnownCodeIDReceived" : "Unbekannt",
+    "codeLearnModeForCodeIDStarted" : "Code wird angelernt",
+    "codeLearnModeExitForCodeWithSuccess" : "Code erfolgreich angelernt",
+    "codeLearnModeExitForCodeWithTimeout" : "Timeout beim Code anlernen",
+    "codeLearnModeExitForCodeWithErrorDuplicateCode" : "Code schon vorhanden",
+    "codeCodeErased" : "Code gel%F6scht",
+    "codeManagement" : "Code<br/>Management",
+    "clearStatusMessages" : "Sperren<br/>zur%FCcksetzen",
+    "lblCodeReceived" : "Empfangener Code",
+    "lblFWISetCodeCommand" : "Aktion",
+    "lblFWIClearError" : "Sperrung zur%FCcksetzen",
+    "codeStartOfLearn" : "Code anlernen",
+    "codeStopOfLearn" : "Anlernen beenden",
+    "codeErase" : "Code l%F6schen",
+    "clearAll" : "Alle",
+    "hintFWITargetNotPossible" :
+      "\n\nDie Kan%E4le 1 - 8 unterst%FCtzen die Astrofunktion nicht.\n\n" +
+      "Nutzen Sie die Bedingung \"Feste Uhrzeit\"\n\n",
+    "dialogCodeCommandTitle" : "Code Management",
+    "dialogClearErrorTitle" : "Sperren zur%FCcksetzen",
+    "channelRights" : "Kanalberechtigung",
+    "hintDoorLockHoldTime" : "Beachten Sie, dass sich eine l%E4ngere Haltezeit negativ<br/>auf die Batterielaufzeit des T%FCrschlossantriebes auswirkt.",
+    "optionOpenOnly" : "Nur %F6ffnen",
+    "optionNormal" : "Normal",
+    "optionLong" : "Lange",
+    "optionExtraLong" : "Extra lange",
+    "dialogAskCreateBakupCheckboxText" : "System-Backup vor dem Update erstellen.",
+    "dialogAskCreateBakupText" : "Das Backup wird direkt vor der Installation erstellt und heruntergeladen. Dieser Vorgang kann einige Minuten dauern.",
+    "unitNumericPinCode" : "(max. 8 Ziffern von 0-9)",
+    "lblPinOfChannelLockA" : "Verwendet wird der PIN-Code des Kanals 'Benutzer",
+    "lblPinOfChannelLockB" : "Verriegeln'",
+    "lblChannelActivInactivWhenNoOutput" : "Ger%E4t inaktiv oder Standby<br/>bei 0% Ausgangsspannung",
+    "optionRelayInactive" : "Ger%E4t nicht aktiv",
+    "optionRelayOffDelay05S" : "Standby nach 0,5 s.",
+    "optionRelayOffDelay1S" : "Standby nach 1s s.",
+    "optionRelayOffDelay10S" : "Standby nach 10 s.",
+    "optionModeConsumption" : "Verbrauchsmodus",
+    "optionModeFeeding" : "Einspeisemodus",
+    "hintSetReadyNotComplete" : "Klicken Sie auf Fertig, um den Kanal vollst%E4ndig zu konfigurieren und rufen Sie das Ger%E4t anschlie%DFend in der Ger%E4teliste auf.",
+    "lblCode" : "Code",
+    "lblBellButton" : "Klingeltaster",
 
     "theEnd" : ""
   }

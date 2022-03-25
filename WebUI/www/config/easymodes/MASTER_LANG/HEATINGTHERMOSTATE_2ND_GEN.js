@@ -98,6 +98,14 @@ jQuery.extend(true,langJSON, {
     "optionETRVNormalMode" : "Normalbetrieb",
     "optionETRVSilentMode" : "Fl%FCsterbetrieb",
     "lblAcousticAlarmSignal" : "Akustischer Alarm",
+
+    "optionDrying" : "Trocknen",
+    "optionMoistening" : "Befeuchten",
+    "optionDryingMoistening" : "Trocknen/Befeuchten",
+    "optionHeating" : "Heizen",
+    "optionCooling" : "K%FChlen",
+    "optionHeatingCooling" : "Heizen/K%FChlen",
+
     "dummy" : ""
   },
 
@@ -199,6 +207,13 @@ jQuery.extend(true,langJSON, {
     "optionETRVNormalMode" : "Normal mode",
     "optionETRVSilentMode" : "Whisper mode",
     "lblAcousticAlarmSignal" : "Audible alarm",
+
+    "optionDrying" : "Dry",
+    "optionMoistening" : "Humidify",
+    "optionDryingMoistening" : "Dry/Humidify",
+    "optionHeating" : "Heat",
+    "optionCooling" : "Cool",
+    "optionHeatingCooling" : "Heat/Cool",
 
     "dummy" : ""
   }

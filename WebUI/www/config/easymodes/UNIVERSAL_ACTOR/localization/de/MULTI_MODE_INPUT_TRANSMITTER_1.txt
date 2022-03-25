@@ -1,0 +1,11 @@
+"description_1" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird die Ausgangsspannung auf den festgelegten Wert eingeschaltet. Ein langer Tastendruck f%auml;hrt die Ausgangsspannung hoch.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird die Ausgangsspannung ausgeschaltet. Ein langer Tastendruck f%auml;hrt die Ausgangsspannung herunter.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Mit einem kurzen Tastendruck wechselt die Ausgangsspannung zwischen dem festgelegten Wert und &quot;aus&quot;. Ein langer Tastendruck f%auml;hrt die Ausgangsspannung abwechselnd hoch- und herunter.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Die Ausgangsspannung wird durch kurzen oder langen Tastendruck f&uuml;r die festgelegte Zeit eingeschaltet. In der Ausschaltverz&ouml;gerung wird der Pegel zur Vorwarnung leicht abgesenkt, um anschlie&szlig;end langsam bis auf &quot;aus&quot; herunter zu fahren.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Die interne Ger&auml;tetaste ist nicht aktiv.</span><br/><br/>",
+
+"description_noLong_1" : "<span class=\"translated\">Mit einem Tastendruck wird die Ausgangsspannung auf den festgelegten Wert eingeschaltet.</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">Mit einem Tastendruck wird die Ausgangsspannung ausgeschaltet.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">Mit einem Tastendruck wechselt die Ausgangsspannung zwischen dem festgelegten Wert und &quot;aus&quot;.</span><br/><br/>",
+"description_noLong_4" : "<span class=\"translated\">Die Ausgangsspannung wird durch einen Tastendruck f&uuml;r die festgelegte Zeit eingeschaltet. In der Ausschaltverz&ouml;gerung wird der Pegel zur Vorwarnung leicht abgesenkt, um anschlie&szlig;end langsam bis auf &quot;aus&quot; herunter zu fahren.</span><br/><br/>",
+"description_noLong_5" : "<span class=\"translated\">Die interne Ger&auml;tetaste ist nicht aktiv.</span><br/><br/>",

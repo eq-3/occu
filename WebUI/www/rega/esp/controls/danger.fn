@@ -2,12 +2,23 @@ function ::CreateDangerSensor()
 {
   object objDangerState = cObj.DPByControl("DANGER.STATE");
   string deviceType = cObj.HssType();
-  string sDangerState = objDangerState.Value();
+
+  string sDangerState = "0";
+
+  if( objDangerState ) {string sDangerState = objDangerState.Value();}
+
   string sFontColorClassName = "CLASS02526";
   string sFontColorDangerClassName = "CLASS02527";
-  string sBgColorClassName = "CLASS02525b";
-  string sBgColorDangerClassName = "CLASS02557";
+  string sBgColorClassName = "";
+  string sBgColorDangerClassName = "";
 
+  if ((ch.Label() == "HmIP-SWSD") || (ch.Label() == "HmIP-SWSD-2")) {
+    sBgColorClassName = "CLASS02525a";
+    sBgColorDangerClassName = "CLASS02557A";
+  } else {
+    sBgColorClassName = "CLASS02525b";
+    sBgColorDangerClassName = "CLASS02557";
+  }
   ! Determine the name of the interface
   integer iFaceID = cObj.Interface();
   object oIface = dom.GetObject(iFaceID);
@@ -19,37 +30,46 @@ function ::CreateDangerSensor()
     sBgColorClassName = "CLASS02525";
     sBgColorDangerClassName = "CLASS02558";
   }
-  if( objDangerState )
+
+
+  if ( objDangerState )
   {
-    WriteLine("<td>");
-      WriteLine("<table id='"#chnId#"danger' class='" # sBgColorClassName # "'>");
+    WriteLine("<tr><td colspan='2'>");
+      WriteLine("<table class='ctrlTbl CLASS02520'>");
         WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div align='center'>");
-              WriteLine("<img id='"#chnId#"checkItem' src='/ise/img/danger/check.png' width='80' height='80' />");
-            WriteLine("</div>");
+          WriteLine("<td>");
+            WriteLine("<table id='"#chnId#"danger' class='" # sBgColorClassName # "'>");
+              WriteLine("<tr>");
+                WriteLine("<td class='CLASS02518'>");
+                  WriteLine("<div align='center'>");
+                    WriteLine("<img id='"#chnId#"checkItem' src='/ise/img/danger/check.png' width='80' height='80' />");
+                  WriteLine("</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr><td class='" # sFontColorClassName # "' align='center'>O.K.</td></tr>");
+            WriteLine("</table>");
+           WriteLine("</td>");
+          WriteLine("<td>");
+            WriteLine("<table id='"#chnId#"dangerState' class='" # sBgColorDangerClassName # "'>");
+              WriteLine("<tr>");
+                WriteLine("<td class='CLASS02518'>");
+                  WriteLine("<div align='center'>");
+                    WriteLine("<img id='"#chnId#"dangerItem' src='/ise/img/danger/danger.png' width='80' height='80' />");
+                  WriteLine("</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+              WriteLine("<tr><td style='text-align:center;' id='"#chnId#"_dangerTxt' class='j_translate " # sFontColorDangerClassName # "'>Gefahr</td></tr>");
+            WriteLine("</table>");
           WriteLine("</td>");
+          WriteLine("<td class='CLASS02528'>&nbsp;</td>");
         WriteLine("</tr>");
-        WriteLine("<tr><td class='" # sFontColorClassName # "' align='center'>O.K.</td></tr>");
       WriteLine("</table>");
-    WriteLine("</td>");
-    WriteLine("<td>");
-      WriteLine("<table id='"#chnId#"dangerState' class='" # sBgColorDangerClassName # "'>");
-        WriteLine("<tr>");
-          WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div align='center'>");
-              WriteLine("<img id='"#chnId#"dangerItem' src='/ise/img/danger/danger.png' width='80' height='80' />");
-            WriteLine("</div>");
-          WriteLine("</td>");
-        WriteLine("</tr>");
-        WriteLine("<tr><td style='text-align:center;' id='"#chnId#"_dangerTxt' class='j_translate " # sFontColorDangerClassName # "'>Gefahr</td></tr>");
-      WriteLine("</table>");
-    WriteLine("</td>");
-    WriteLine("<td class='CLASS02528'>&nbsp;</td>");
+    WriteLine("</td></tr>");
   }
 
+
   Write("<script type='text/javascript'>");
-    Write("jQuery('#"#chnId# "_dangerTxt').html(translateKey('infoStatusControlLblDanger'));");
+  Write("jQuery('#"#chnId# "_dangerTxt').html(translateKey('infoStatusControlLblDanger'));");
   Write("</script>");
 
   return;

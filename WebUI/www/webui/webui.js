@@ -46,6 +46,12 @@ DEV_HIGHLIGHT["HMW-LC-Bl1-DR"] = new Object();
 DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["1"] = [2, 0.452, 0.772, 0.044, 0.06];
 DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["2"] = [2, 0.5, 0.772, 0.048, 0.06];
 DEV_HIGHLIGHT["HMW-LC-Bl1-DR"]["3"] = [2, 0.452, 0.388, 0.096, 0.06];
+DEV_LIST.push('HmIP-WTH-B-2');
+DEV_DESCRIPTION["HmIP-WTH-B-2"] = "HmIP-WTH-B";
+DEV_PATHS["HmIP-WTH-B-2"] = new Object();
+DEV_PATHS["HmIP-WTH-B-2"]["50"] = "/config/img/devices/50/200_hmip-wth-b_thumb.png";
+DEV_PATHS["HmIP-WTH-B-2"]["250"] = "/config/img/devices/250/200_hmip-wth-b.png";
+DEV_HIGHLIGHT["HmIP-WTH-B-2"] = new Object();
 DEV_LIST.push('HmIPW-STH');
 DEV_DESCRIPTION["HmIPW-STH"] = "HmIPW-STH";
 DEV_PATHS["HmIPW-STH"] = new Object();
@@ -424,6 +430,12 @@ DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
 DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
 DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
 DEV_HIGHLIGHT["HM-LC-Sw4-PCB"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
+DEV_LIST.push('HmIP-eTRV-B-2');
+DEV_DESCRIPTION["HmIP-eTRV-B-2"] = "TRV-B";
+DEV_PATHS["HmIP-eTRV-B-2"] = new Object();
+DEV_PATHS["HmIP-eTRV-B-2"]["50"] = "/config/img/devices/50/180_hmip-etrv-b_thumb.png";
+DEV_PATHS["HmIP-eTRV-B-2"]["250"] = "/config/img/devices/250/180_hmip-etrv-b.png";
+DEV_HIGHLIGHT["HmIP-eTRV-B-2"] = new Object();
 DEV_LIST.push('HM-ES-PMSw1-Pl-DN-R4');
 DEV_DESCRIPTION["HM-ES-PMSw1-Pl-DN-R4"] = "HM-ES-PMSw1-Pl-DN-R4";
 DEV_PATHS["HM-ES-PMSw1-Pl-DN-R4"] = new Object();
@@ -871,6 +883,12 @@ DEV_PATHS["HM-Sec-MDIR-3"] = new Object();
 DEV_PATHS["HM-Sec-MDIR-3"]["50"] = "/config/img/devices/50/124_hm-sec-mdir_thumb.png";
 DEV_PATHS["HM-Sec-MDIR-3"]["250"] = "/config/img/devices/250/124_hm-sec-mdir.png";
 DEV_HIGHLIGHT["HM-Sec-MDIR-3"] = new Object();
+DEV_LIST.push('HmIP-SWSD-2');
+DEV_DESCRIPTION["HmIP-SWSD-2"] = "SWSD";
+DEV_PATHS["HmIP-SWSD-2"] = new Object();
+DEV_PATHS["HmIP-SWSD-2"]["50"] = "/config/img/devices/50/104_hm-sec-sd-2_thumb.png";
+DEV_PATHS["HmIP-SWSD-2"]["250"] = "/config/img/devices/250/104_hm-sec-sd-2.png";
+DEV_HIGHLIGHT["HmIP-SWSD-2"] = new Object();
 DEV_LIST.push('HmIP-PMFS');
 DEV_DESCRIPTION["HmIP-PMFS"] = "HmIP-PMFS";
 DEV_PATHS["HmIP-PMFS"] = new Object();
@@ -1822,12 +1840,6 @@ DEV_PATHS["HmIP-PS"] = new Object();
 DEV_PATHS["HmIP-PS"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
 DEV_PATHS["HmIP-PS"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
 DEV_HIGHLIGHT["HmIP-PS"] = new Object();
-DEV_LIST.push('HmIP-eTRV-E');
-DEV_DESCRIPTION["HmIP-eTRV-E"] = "TRV-E";
-DEV_PATHS["HmIP-eTRV-E"] = new Object();
-DEV_PATHS["HmIP-eTRV-E"]["50"] = "/config/img/devices/50/216_hmip-etrv-3_thumb.png";
-DEV_PATHS["HmIP-eTRV-E"]["250"] = "/config/img/devices/250/216_hmip-etrv-3.png";
-DEV_HIGHLIGHT["HmIP-eTRV-E"] = new Object();
 DEV_LIST.push('HmIP-PCBS2');
 DEV_DESCRIPTION["HmIP-PCBS2"] = "HmIP-PCBS2";
 DEV_PATHS["HmIP-PCBS2"] = new Object();
@@ -2509,12 +2521,6 @@ DEV_PATHS["HmIP-WRCD"]["250"] = "/config/img/devices/250/194_hmip-wrcd.png";
 DEV_HIGHLIGHT["HmIP-WRCD"] = new Object();
 DEV_HIGHLIGHT["HmIP-WRCD"]["1"] = [1, 0.525, 0.690, 0.025];
 DEV_HIGHLIGHT["HmIP-WRCD"]["2"] = [1, 0.510, 0.360, 0.025];
-DEV_LIST.push('HmIP-WTH-B');
-DEV_DESCRIPTION["HmIP-WTH-B"] = "HmIP-WTH-B";
-DEV_PATHS["HmIP-WTH-B"] = new Object();
-DEV_PATHS["HmIP-WTH-B"]["50"] = "/config/img/devices/50/200_hmip-wth-b_thumb.png";
-DEV_PATHS["HmIP-WTH-B"]["250"] = "/config/img/devices/250/200_hmip-wth-b.png";
-DEV_HIGHLIGHT["HmIP-WTH-B"] = new Object();
 DEV_LIST.push('HM-OU-LED16');
 DEV_DESCRIPTION["HM-OU-LED16"] = "HM-OU-LED16";
 DEV_PATHS["HM-OU-LED16"] = new Object();
@@ -2658,6 +2664,12 @@ DEV_HIGHLIGHT["HmIP-BSL"]["14"] = [1, 0.525, 0.650, 0.025];
 DEV_HIGHLIGHT["HmIP-BSL"]["8"] = [1, 0.510, 0.360, 0.025];
 DEV_HIGHLIGHT["HmIP-BSL"]["9"] = [1, 0.510, 0.360, 0.025];
 DEV_HIGHLIGHT["HmIP-BSL"]["10"] = [1, 0.510, 0.360, 0.025];
+DEV_LIST.push('HmIP-WTH-B');
+DEV_DESCRIPTION["HmIP-WTH-B"] = "HmIP-WTH-B";
+DEV_PATHS["HmIP-WTH-B"] = new Object();
+DEV_PATHS["HmIP-WTH-B"]["50"] = "/config/img/devices/50/200_hmip-wth-b_thumb.png";
+DEV_PATHS["HmIP-WTH-B"]["250"] = "/config/img/devices/250/200_hmip-wth-b.png";
+DEV_HIGHLIGHT["HmIP-WTH-B"] = new Object();
 DEV_LIST.push('HM-LC-DDC1-PCB');
 DEV_DESCRIPTION["HM-LC-DDC1-PCB"] = "HM-LC-DDC1-PCB";
 DEV_PATHS["HM-LC-DDC1-PCB"] = new Object();
@@ -2676,6 +2688,17 @@ DEV_PATHS["VIR-LG-ONOFF"] = new Object();
 DEV_PATHS["VIR-LG-ONOFF"]["50"] = "/config/img/devices/50/coupling/hm-coupling-onoff.png";
 DEV_PATHS["VIR-LG-ONOFF"]["250"] = "/config/img/devices/250/coupling/hm-coupling-onoff.png";
 DEV_HIGHLIGHT["VIR-LG-ONOFF"] = new Object();
+DEV_LIST.push('HmIPW-WGD');
+DEV_DESCRIPTION["HmIPW-WGD"] = "HmIPW-WGD";
+DEV_PATHS["HmIPW-WGD"] = new Object();
+DEV_PATHS["HmIPW-WGD"]["50"] = "/config/img/devices/50/222_hmipw-wgd_thumb.png";
+DEV_PATHS["HmIPW-WGD"]["250"] = "/config/img/devices/250/222_hmipw-wgd.png";
+DEV_HIGHLIGHT["HmIPW-WGD"] = new Object();
+DEV_HIGHLIGHT["HmIPW-WGD"]["Icon"] = [3, 0.092, 0.6, 'Icon_folgt', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HmIPW-WGD"]["1_channel"] = [3, 0.44, 0.232, '1', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HmIPW-WGD"]["1"] = [5, '1_channel', 'Icon'];
+DEV_HIGHLIGHT["HmIPW-WGD"]["2_channel"] = [3, 0.44, 0.232, '2', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HmIPW-WGD"]["2"] = [5, '2_channel', 'Icon'];
 DEV_LIST.push('HM-Sec-RHS-2');
 DEV_DESCRIPTION["HM-Sec-RHS-2"] = "HM-Sec-RHS";
 DEV_PATHS["HM-Sec-RHS-2"] = new Object();
@@ -3114,6 +3137,12 @@ DEV_PATHS["HM-LC-DW-WM"] = new Object();
 DEV_PATHS["HM-LC-DW-WM"]["50"] = "/config/img/devices/50/150_hm-lc-dw-wm_thumb.png";
 DEV_PATHS["HM-LC-DW-WM"]["250"] = "/config/img/devices/250/150_hm-lc-dw-wm.png";
 DEV_HIGHLIGHT["HM-LC-DW-WM"] = new Object();
+DEV_LIST.push('HmIP-eTRV-B-UK-2');
+DEV_DESCRIPTION["HmIP-eTRV-B-UK-2"] = "TRV-B-UK";
+DEV_PATHS["HmIP-eTRV-B-UK-2"] = new Object();
+DEV_PATHS["HmIP-eTRV-B-UK-2"]["50"] = "/config/img/devices/50/209_hmip-etrv-b-uk_thumb.png";
+DEV_PATHS["HmIP-eTRV-B-UK-2"]["250"] = "/config/img/devices/250/209_hmip-etrv-b-uk.png";
+DEV_HIGHLIGHT["HmIP-eTRV-B-UK-2"] = new Object();
 DEV_LIST.push('HM-RC-Key4-2');
 DEV_DESCRIPTION["HM-RC-Key4-2"] = "HM-RC-Key4-2";
 DEV_PATHS["HM-RC-Key4-2"] = new Object();
@@ -3544,6 +3573,12 @@ DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["1"] = [5, 'Channel1', '1_val', 'Circle1'];
 DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["2"] = [5, 'Channel2', '2_val', 'Circle2'];
 DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["3"] = [5, 'Channel3', '3_val', 'Circle3'];
 DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
+DEV_LIST.push('HmIP-eTRV-E');
+DEV_DESCRIPTION["HmIP-eTRV-E"] = "TRV-E";
+DEV_PATHS["HmIP-eTRV-E"] = new Object();
+DEV_PATHS["HmIP-eTRV-E"]["50"] = "/config/img/devices/50/216_hmip-etrv-3_thumb.png";
+DEV_PATHS["HmIP-eTRV-E"]["250"] = "/config/img/devices/250/216_hmip-etrv-3.png";
+DEV_HIGHLIGHT["HmIP-eTRV-E"] = new Object();
 DEV_LIST.push('HmIP-STHD');
 DEV_DESCRIPTION["HmIP-STHD"] = "HmIP-STHD";
 DEV_PATHS["HmIP-STHD"] = new Object();
@@ -3635,6 +3670,12 @@ DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"] = new Object();
 DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1"] = [2, 0.192, 0.660, 0.524, 0.12];
 DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["2"] = [2, 0.192, 0.252, 0.524, 0.12];
 DEV_HIGHLIGHT["HM-Sen-MDIR-WM55"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HmIP-SWDM-2');
+DEV_DESCRIPTION["HmIP-SWDM-2"] = "HmIP-SWDM";
+DEV_PATHS["HmIP-SWDM-2"] = new Object();
+DEV_PATHS["HmIP-SWDM-2"]["50"] = "/config/img/devices/50/181_hmip-swdm_thumb.png";
+DEV_PATHS["HmIP-SWDM-2"]["250"] = "/config/img/devices/250/181_hmip-swdm.png";
+DEV_HIGHLIGHT["HmIP-SWDM-2"] = new Object();
 DEV_LIST.push('HM-Sen-DB-PCB');
 DEV_DESCRIPTION["HM-Sen-DB-PCB"] = "HM-Sen-DB-PCB";
 DEV_PATHS["HM-Sen-DB-PCB"] = new Object();
@@ -3783,6 +3824,15 @@ DEV_PATHS["HM-WDS10-TH-O"] = new Object();
 DEV_PATHS["HM-WDS10-TH-O"]["50"] = "/config/img/devices/50/TH_CS_thumb.png";
 DEV_PATHS["HM-WDS10-TH-O"]["250"] = "/config/img/devices/250/TH_CS.png";
 DEV_HIGHLIGHT["HM-WDS10-TH-O"] = new Object();
+DEV_LIST.push('ELV-SH-BS2');
+DEV_DESCRIPTION["ELV-SH-BS2"] = "HmIP-BS2";
+DEV_PATHS["ELV-SH-BS2"] = new Object();
+DEV_PATHS["ELV-SH-BS2"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["ELV-SH-BS2"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["ELV-SH-BS2"] = new Object();
+DEV_HIGHLIGHT["ELV-SH-BS2"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["ELV-SH-BS2"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["ELV-SH-BS2"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('ZEL STG RM FSS UP3');
 DEV_DESCRIPTION["ZEL STG RM FSS UP3"] = "ZEL_STG_RM_FSS_UP3";
 DEV_PATHS["ZEL STG RM FSS UP3"] = new Object();
@@ -4563,6 +4613,7 @@ elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNDERFLOW'] = '${lblValue} ${stringT
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=3'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}';
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNKNOWN'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}';
 elvST['DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=1'] = '${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}';
+elvST['DIRT_LEVEL'] = '${stringTableDirtLevel}';
 elvST['DISABLE_ACOUSTIC_CHANNELSTATE'] = '${stringTableDisableAcousticChannelState}';
 elvST['DISABLE_ACOUSTIC_SENDSTATE'] = '${stringTableDisableAcousticSendState}';
 elvST['DISPLAY_BACKLIGHT_MODE'] = '${stringTableDisplayBacklightMode}';
@@ -4635,6 +4686,32 @@ elvST['DISPLAY|UNIT=NONE'] = '${stringTableDisplayUnitNone}';
 elvST['DISPLAY|UNIT=PERCENT'] = '${stringTableDisplayUnitPercent}';
 elvST['DISPLAY|UNIT=WATT'] = '${stringTableDisplayUnitWatt}';
 elvST['DISPLAY|WINDOW'] = '${stringTableDisplayWindow}';
+elvST['DISPLAY_UPDATE_REQUEST_0=FALSE'] = '${stringTableDisplayUpdateRequest} 0: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_0=TRUE'] = '${stringTableDisplayUpdateRequest} 0: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_01=FALSE'] = '${stringTableDisplayUpdateRequest} 1: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_01=TRUE'] = '${stringTableDisplayUpdateRequest} 1: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_03=FALSE'] = '${stringTableDisplayUpdateRequest} 3: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_03=TRUE'] = '${stringTableDisplayUpdateRequest} 3: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_05=FALSE'] = '${stringTableDisplayUpdateRequest} 5: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_05=TRUE'] = '${stringTableDisplayUpdateRequest} 5: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_07=FALSE'] = '${stringTableDisplayUpdateRequest} 7: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_07=TRUE'] = '${stringTableDisplayUpdateRequest} 7: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_09=FALSE'] = '${stringTableDisplayUpdateRequest} 9: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_09=TRUE'] = '${stringTableDisplayUpdateRequest} 9: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_11=FALSE'] = '${stringTableDisplayUpdateRequest} 11: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_11=TRUE'] = '${stringTableDisplayUpdateRequest} 11: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_13=FALSE'] = '${stringTableDisplayUpdateRequest} 13: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_13=TRUE'] = '${stringTableDisplayUpdateRequest} 13: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_15=FALSE'] = '${stringTableDisplayUpdateRequest} 15: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_15=TRUE'] = '${stringTableDisplayUpdateRequest} 15: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_17=FALSE'] = '${stringTableDisplayUpdateRequest} 17: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_17=TRUE'] = '${stringTableDisplayUpdateRequest} 17: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_19=FALSE'] = '${stringTableDisplayUpdateRequest} 19: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_19=TRUE'] = '${stringTableDisplayUpdateRequest} 19: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_21=FALSE'] = '${stringTableDisplayUpdateRequest} 21: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_21=TRUE'] = '${stringTableDisplayUpdateRequest} 21: ${lblYes}';
+elvST['DISPLAY_UPDATE_REQUEST_23=FALSE'] = '${stringTableDisplayUpdateRequest} 23: ${lblNo}';
+elvST['DISPLAY_UPDATE_REQUEST_23=TRUE'] = '${stringTableDisplayUpdateRequest} 23: ${lblYes}';
 elvST['DOOR_COMMAND=CLOSE'] = '${stringTableDoorCommandClose}';
 elvST['DOOR_COMMAND=NOP'] = '${stringTableDoorCommandNOP}';
 elvST['DOOR_COMMAND=OPEN'] = '${stringTableDoorCommandOpen}';
@@ -4720,6 +4797,8 @@ elvST['ERROR_COPROCESSOR'] = '${stringTableErrorCoProcessor}';
 elvST['ERROR_COPROCESSOR=TRUE'] = '${stringTableErrorCoprocessorTrue}';
 elvST['ERROR_COPROCESSOR=FALSE'] = '${stringTableErrorCoprocessorFalse}';
 elvST['ERROR_DEGRADED_CHAMBER'] = '${stringTableErrorDegradedChamber}';
+elvST['ERROR_DEGRADED_CHAMBER=FALSE'] = '${stringTableErrorDegradedChamberFalse}';
+elvST['ERROR_DEGRADED_CHAMBER=TRUE'] = '${stringTableErrorDegradedChamberTrue}';
 elvST['ERROR_NON_FLAT_POSITIONING'] = '${stringTableErrorNonFlatPositioning}';
 elvST['ERROR_NON_FLAT_POSITIONING=FALSE'] = '${stringTableErrorNonFlatPositioningFalse}';
 elvST['ERROR_NON_FLAT_POSITIONING=TRUE'] = '${stringTableErrorNonFlatPositioningTrue}';
@@ -5103,6 +5182,8 @@ elvST['MAINTENANCE|CONFIG_PENDING'] = '${stringTableConfigPending}';
 elvST['MAINTENANCE|ERROR_BATTERY=BATTERY_DEFECT'] = '${stringTableBatteryFailure}';
 elvST['MAINTENANCE|ERROR_BATTERY=NO_ERROR'] = '${stringTableBatteryOk}';
 elvST['MAINTENANCE|ERROR_JAMMED'] = '${stringTableErrorJammed}';
+elvST['MAINTENANCE|ERROR_JAMMED=FALSE'] = '${stringTableErrorJammedFalse}';
+elvST['MAINTENANCE|ERROR_JAMMED=TRUE'] = '${stringTableErrorJammedTrue}';
 elvST['MAINTENANCE|ERROR_OVERHEAT'] = '${stringTableErrorOverheatTrue}';
 elvST['MAINTENANCE|HMW_STICKY_UNREACH'] = '${stringTableStickyUnreach}';
 elvST['MAINTENANCE|LOWBAT'] = '${stringTableBatteryLow}';
@@ -5654,6 +5735,7 @@ elvST['SMOKE_DETECTOR|STATE=FALSE'] = '${stringTableSmokeDetectorStateFalse}';
 elvST['SMOKE_DETECTOR|STATE=TRUE'] = '${stringTableSmokeDetectorStateTrue}';
 elvST['SOFTONOFF'] = '${stringTableSoftOnOff}';
 elvST['SOUND_ID'] = '${stringTableSoundID}';
+elvST['SMOKE_LEVEL'] = '${stringTableSmokeLevel}';
 elvST['SOUND_LONG'] = '${stringTableSoundLong}';
 elvST['SOUND_LONG_LONG'] = '${stringTableSoundLongLong}';
 elvST['SOUND_LONG_SHORT'] = '${stringTableSoundLongShort}';
@@ -11248,10 +11330,14 @@ YesNoDialog = Class.create({
   {
     var _this_ = this;
 
+    this.RESULT_NO = 0;
+    this.RESULT_YES = 1;
+
     this.m_contentType = contentType;
     this.m_callback = callback;
     this.m_layer = document.createElement("div");
-    this.m_layer.className = "YesNoDialogLayer"; 
+    this.m_layer.className = "YesNoDialogLayer";
+    this.content = content;
 
     var dialog = document.createElement("div");
     dialog.className = "YesNoDialog";
@@ -11300,12 +11386,17 @@ YesNoDialog = Class.create({
     this.m_layer.appendChild(dialog);
     Layer.add(this.m_layer);
 
-    translatePage(".YesNoDialog");
+    this.run();
 
+    translatePage(".YesNoDialog");
     this.setHeight();
+  },
+
+  //This is the starting point
+  run: function() {
 
   },
-    
+
   close: function(result)
   {
     Layer.remove(this.m_layer);
@@ -18705,6 +18796,8 @@ DimmerCombinedParamDialog = Class.create({
     });
     */
 
+    this.isUniversalActor = ((this.deviceType == "HmIP-WUA") || (this.deviceType == "ELV-SH-WUA")) ? true : false;
+    this.isServoController = ((this.deviceType == "HmIP-WSC") || (this.deviceType == "ELV-SH-WSC")) ? true : false;
     this.arNoOntimeAvailable = ["HmIP-MP3P", "HmIP-BSL", "HmIPW-WRC6"];
     this.showRampTimeOffElm = ["HmIPW-WRC6"];
     this.showColorElms = ["HmIP-MP3P", "HmIP-BSL", "HmIPW-WRC6"];
@@ -18783,6 +18876,8 @@ DimmerCombinedParamDialog = Class.create({
     this.selectColorElm = jQuery("#combinedParam_Color");
     this.selectBehaviourElm = jQuery("#combinedParam_Behaviour");
     this.levelElm = jQuery("#combinedParam_Level");
+    this.lblBrightnessLevelElm = jQuery("#lblBrightnessLevel");
+    this.lblRampTimeElm = jQuery("#lblRampTime");
     this.chkBoxTimeLimitElm = jQuery("#chkBoxTimeLimit");
     this.durationValueElm = jQuery("#combinedParam_DurationValue");
     this.durationUnitElm = jQuery("#combinedParam_DurationUnit");
@@ -18791,6 +18886,7 @@ DimmerCombinedParamDialog = Class.create({
     this.rampTimeValueElm = jQuery("#combinedParam_RampTimeValue");
     this.rampTimeOffUnitElm = jQuery("#combinedParam_RampTimeOffUnit");
     this.rampTimeOffValueElm = jQuery("#combinedParam_RampTimeOffValue");
+
   },
   
   // For those devices who are able to change the color show the color selector.
@@ -18877,10 +18973,24 @@ DimmerCombinedParamDialog = Class.create({
     return result;
   },
 
+  hideOnTimeElems: function() {
+    jQuery("[name='trRampTime']").first().nextAll().hide();
+    this.setHeight();
+  },
+
+
   initDialog: function() {
     var self = this;
 
     var arElmValues, valueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueC, valueCB, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration;
+    if (this.isUniversalActor) { // WUA
+      this.lblBrightnessLevelElm.text(translateKey("lblOperatingVoltage"));
+    } else if (this.isServoController) {
+      this.hideOnTimeElems();
+      this.lblBrightnessLevelElm.text(translateKey("stringTableServoLevel"));
+      this.levelElm.find("option[value='0']").text("0 %");
+      this.lblRampTimeElm .text(translateKey("stringTableServoRamp"));
+    }
 
     this._showColorElm();
     this._showBehaviourElm();
@@ -18899,7 +19009,8 @@ DimmerCombinedParamDialog = Class.create({
         valueDV = valueDVtmp;
       }
 
-      valueRTVtmp = arElmValues[2].split("=")[1];
+      valueRTVtmp = (! this.isServoController) ? arElmValues[2].split("=")[1] : arElmValues[1].split("=")[1] ;
+
       valueRTU = this._getUnitInDU4RampTime(valueRTVtmp);
 
       if (valueRTU == 3) {
@@ -19123,17 +19234,26 @@ DimmerCombinedParamDialog = Class.create({
       if (this.isOntimeAvailable()) {
         if (this.chkBoxTimeLimitElm.prop("checked") == false) {
           var _rampTimeValue = parseInt(this._getRampTimeVal(ramptimeValue, ramptimeUnit));
-          if (_rampTimeValue > 0) {
-            result = "L=" + level + ",OT="+this.maxOnTime+",RT=" + _rampTimeValue; // ON_TIME = permanently ON
-          } else {
-            result = "L=" + level + ",OT=0,RT=0";
-          }
 
-        } else {
-          if (durationValue == 0) {
-            result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0" ;
+          if (this.isServoController) {
+            result = "L=" + level + ",RT=" + _rampTimeValue; // ON_TIME is for the Hmip-WSC not allowed (see SPHM-942)
           } else {
-            result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit);
+            if (_rampTimeValue > 0) {
+              result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue; // ON_TIME = permanently ON
+            } else {
+              result = "L=" + level + ",OT=0,RT=0";
+            }
+          }
+        } else {
+          if (this.isServoController) {
+            var _rampTimeValue = parseInt(this._getRampTimeVal(ramptimeValue, ramptimeUnit));
+            result = "L=" + level + ",RT=" + _rampTimeValue; // ON_TIME is for the Hmip-WSC not allowed (see SPHM-942)
+          } else {
+            if (durationValue == 0) {
+              result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0";
+            } else {
+              result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit);
+            }
           }
         }
       } else {
@@ -19895,6 +20015,109 @@ WiredDisplaySystemKey = Class.create({
   
 });
 
+var
+  getWGDImagePath = function() {
+    return "/ise/img/icons_hmipw_wgd/";
+  },
+  getWGDDefaultImage = function() {
+    return "_0000_fallback.png";
+  },
+  getWGDImageCollection = function() {
+  var image = {
+    0 : ["_000_000_lightbulb0.png",1],
+    1 : ["_001_000_tablelamp0.png",12],
+    2 : ["_002_000_spotoff.png",23],
+    3 : ["_010_000_socket_off.png",25],
+    4 : ["_020_000_shutter0.png",27],
+    5 : ["_050_20_windows_closed.png",43],
+    6 : ["_050_64_window_closed.png",52]
+  };
+  return image;
+};
+
+
+WGDSelectIconDialog = Class.create(YesNoDialog,{
+
+  run: function () {
+    var self = this;
+    this.selectedIconNo = 0;
+    this.selectedIcon = "";
+    this.activeIcon = 0;
+    this.imagePath = getWGDImagePath();
+
+    jQuery(".YesNoDialogContentWrapper").css("background-color", "grey");
+
+    window.setTimeout(function() {
+      self._initIconPreview();
+    }, 50);
+  },
+
+  _initIconPreview: function() {
+    var previewElm = jQuery("#anchor_"+ this.chn);
+
+    previewElm.html(this._getHTML());
+
+    this.resetHeight();
+  },
+
+  _getHTML: function() {
+    var self = this,
+      result ="",
+      radioBoxSelected = "",
+      rows = 8, rowCounter=0;
+
+    setSelectedIconNo = function(iconNo) {
+      self.selectedIconNo = iconNo;
+
+    };
+
+    setSelectedIcon = function(icon) {
+      self.selectedIcon = icon;
+    };
+
+    //console.log(image[1][0]); // prints the name of the first image
+    result += "<table style='width:100%'>";
+      result += "<tr>";
+        jQuery.each(getWGDImageCollection(), function(index, val) {
+          if ((radioBoxSelected == "") && (self.activeIcon == val[1])) {
+              radioBoxSelected = "checked";
+              setSelectedIcon(self.imagePath + val[0]);
+              setSelectedIconNo(val[1]);
+          } else {
+            radioBoxSelected = "";
+          }
+          if (index / rows == Math.floor(index / rows)) {
+            result += "<tr>";
+          }
+          rowCounter++;
+          result += "<td style='border: 1px solid #999;' onclick='jQuery(\"#imgSel_"+index+"\").prop(\"checked\", true);setSelectedIconNo("+val[1]+");setSelectedIcon(\"" + self.imagePath + val[0] + "\");'><table><tr>";
+          result += "<td>";
+          result += "<img src='" + self.imagePath + val[0] + "' alt='' style='height:24px;'>";
+          result += "</td>";
+          result += "<td>";
+          result += "<input id='imgSel_"+index+"' type='radio' name='image' "+radioBoxSelected+" value='" + val[1] + "' onclick='setSelectedIconNo(this.value);setSelectedIcon(\"" + self.imagePath + val[0] + "\");'>";
+          result += "</td>";
+          result += "</tr></table></td>";
+
+          if (rowCounter == rows * 2) {
+            result += "</tr>";
+            rowCounter = 0;
+          }
+        });
+      result += "</tr>";
+    result += "</table>";
+    return result;
+  },
+
+  getSelectedIconNo: function() {
+    return this.selectedIconNo;
+  },
+
+  getSelectedIcon: function() {
+    return this.selectedIcon;
+  }
+
+});
 /**
  * Kopfleiste
  **/
@@ -20424,6 +20647,8 @@ StartPage = Singleton.create(Page, {
         self.newFwCounter++;
       }
     } else if((deviceType == "HmIPW-DRAP" || deviceType == "HmIP-HAP") && self.devList[self.devIndex].availableFirmware && (self.devList[self.devIndex].availableFirmware != self.devList[self.devIndex].firmware)) {
+      //In development environment this case may be hit when the fw on ccu is newer than fw on update server. This feels like a bug at first, but it does not matter under normal circumstances.
+      //Please read SPHM-989 for details.
       var devAddress = self.devList[self.devIndex].address,
         curFw = self.devList[self.devIndex].firmware,
         availableFW = self.devList[self.devIndex].availableFirmware;
@@ -30644,6 +30869,18 @@ getExtendedDescription = function(oChannelDescr) {
   }
   */
 
+  if (chType == "DIMMER_TRANSMITTER") {
+    if (deviceType == "HmIP-WUA" || deviceType == "ELV-SH-WUA") {
+      result = translateKey("chType_UNIVERSAL_ACTOR_TRANSMITTER_010V");
+    }
+  }
+
+  if (chType == "DIMMER_VIRTUAL_RECEIVER") {
+    if (deviceType == "HmIP-WUA" || deviceType == "ELV-SH-WUA") {
+      result = translateKey("chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V");
+    }
+  }
+
   if (chType == "SWITCH_VIRTUAL_RECEIVER") {
     if ((deviceType.toLowerCase() == "hmip-ps"
       || deviceType.toLowerCase() == "hmip-psm"
@@ -30839,6 +31076,45 @@ getExtendedDescription = function(oChannelDescr) {
       }
       //result += (channelIndex % 2 == 0) ? translateKey("chType_ACCESS_TRANSCEIVER_UNLOCk") : translateKey("chType_ACCESS_TRANSCEIVER_LOCk");
     }
+  }
+
+  if ((chType == "DISPLAY_INPUT_TRANSMITTER") && (deviceType.toLowerCase() == "hmipw-wgd")) {
+    var oddChn = [1,3,5,7,9,11,13,15,17,19,21,23,25];
+    jQuery.each(oddChn, function(index, value) {
+      if (channelIndex == value) {
+        if (channelIndex <=7) {
+          result = translateKey("chType_DISPLAY_INPUT_TRANSMITTER_A") + " 1 - " + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_B") + " " + (index + 1) + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_C");
+          return; // leave each loop
+        } else if (channelIndex >=9 && channelIndex <= 15) {
+          result = translateKey("chType_DISPLAY_INPUT_TRANSMITTER_A") + " 2 - " + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_B") + " " + (index -3) + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_C");
+          return; // leave each loop
+        } else if (channelIndex >=17 && channelIndex <= 23) {
+          result = translateKey("chType_DISPLAY_INPUT_TRANSMITTER_A") + " 3 - " + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_B") + " " + (index - 7) + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_C");
+          return; // leave each loop
+        } else if (channelIndex == 25) {
+          result = translateKey(("chType_DISPLAY_INPUT_TRANSMITTER_D"));
+        }
+      }
+    });
+  }
+
+  if ((chType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") && (deviceType.toLowerCase() == "hmipw-wgd")) {
+    var evenChn = [2,4,6,8,10,12,14,16,18,20,22,24];
+
+    jQuery.each(evenChn, function(index, value) {
+      if (channelIndex == value) {
+        if (channelIndex <=8) {
+          result = translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A") + " 1 - " + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B") + " " + (index + 1) + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C");
+          return; // leave each loop
+        } else if (channelIndex >=10 && channelIndex <= 16) {
+          result = translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A") + " 2 - " + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B") + " " + (index - 3) + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C");
+          return; // leave each loop
+        } else if (channelIndex >=18 && channelIndex <= 24) {
+          result = translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A") + " 3 - " + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B") + " " + (index - 7) + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C");
+          return; // leave each loop
+        }
+      }
+    });
   }
 
   /* Uncomment this to hide the channel description of a particular channel type
@@ -32802,6 +33078,8 @@ iseThermostat_2ndGen = Class.create(iseThermostat, {
         if (result == 1) {
           conInfo("SET PARTYMODE");
           var oPartyMode = this.getPartyModeObject();
+          conInfo("iseThermostat_2ndGen - oPartyMode: ");
+          conInfo(oPartyMode);
           homematic("Interface.putThermParamset",{'interface': self.chn["interface"], 'address' : self.chn["address"], 'set':
             [
               {name:'PARTY_TEMPERATURE', type: 'string', value: oPartyMode.temp},
@@ -33298,6 +33576,8 @@ iseThermostatHMIP.prototype = {
             oPartyMode.startYear + "_" + oPartyMode.startMonth + "_" + oPartyMode.startDay + " " + oPartyMode.startHour + ":" + oPartyMode.startMin,
           partyTimeEnd =
             oPartyMode.stopYear + "_" + oPartyMode.stopMonth + "_" + oPartyMode.stopDay + " " + oPartyMode.stopHour + ":" + oPartyMode.stopMin;
+
+          conInfo("iseThermostatHMIP - partyTimeStart: " + partyTimeStart + " - partyTimeEnd: " + partyTimeEnd + " - temp: " + oPartyMode.temp);
 
           homematic("Interface.putParamset",{'interface': iface, 'address' : chAddress, 'paramsetKey' : 'VALUES', 'set':
             [
@@ -44184,6 +44464,22 @@ ProofFreeValue = function(id, min, max)
   input.value = wert;
 };
 
+proofMinMax4Voltage_X = function(param) {
+  var voltage0 = "VOLTAGE_0",
+    voltage100= "VOLTAGE_100",
+    voltage0Elm = jQuery("[name='"+voltage0+"']")[0],
+    voltage100Elm = jQuery("[name='"+voltage100+"']")[0],
+    val0 = roundValue05(parseFloat(jQuery(voltage0Elm).val())),
+    val100 = roundValue05(parseFloat(jQuery(voltage100Elm).val()));
+
+  if (param == voltage0) {
+    jQuery(voltage0Elm).val((val0 >= val100) ? val100 - 0.5 : val0);
+  }
+  if (param == voltage100) {
+    jQuery(voltage100Elm).val((val100 <= val0) ? val0 +0.5 : val100);
+  }
+};
+
 add_HMW_onchange_ = function(ch_type)
 {  
   switch (ch_type) { 
@@ -44833,6 +45129,20 @@ showParamHelp = function(topic, x , y) {
  MessageBox.show(translateKey("HelpTitle"), translateKey(topic), "", width, height);
 };
 
+selectWGDIcon = function(chn, elmId, activeIcon) {
+  var dlg = new WGDSelectIconDialog(translateKey("lblBaseImage"), "<div id='anchor_" + chn + "'></div>", function(btnPress) {
+    if (btnPress == this.RESULT_YES) {
+      jQuery("#" + elmId).val(this.getSelectedIconNo());
+      jQuery("#image_" + chn ).attr("src", this.getSelectedIcon());
+    }
+  }, "html");
+  dlg.btnTextNo(translateKey("btnCancel"));
+  dlg.btnTextYes(translateKey("btnOk"));
+  dlg.chn = chn;
+  dlg.activeIcon = parseInt(activeIcon);
+};
+
+
 // Test
 rfd_test = function() {
   homematic('Interface.isPresent', {"interface": "BidCos-RF"}, function(result, error) {
@@ -44911,7 +45221,11 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
   if (typeof device != "undefined") {
     jQuery.each(device.channels, function (index, channel) {
 
-      if (channel.channelType == "KEY_TRANSCEIVER" || channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER" || channel.channelType == "ACCESS_TRANSCEIVER") {
+      if (
+        channel.channelType == "KEY_TRANSCEIVER"
+        || channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER"
+        || channel.channelType == "ACCESS_TRANSCEIVER"
+       ) {
 
         html = (counter == 0 || counter == 16) ? "" : html;
 
@@ -44944,6 +45258,54 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
   if (html_2) {
     hookElm_2.html(html_2);
   }
+};
+
+addAbortEventSendingChannels4WGD = function(chn, prn, devAddress, value) {
+  var hookElm_1 = jQuery("#hookAbortEventSendingChannels_1_"+ chn),
+    hookElm_2 = jQuery("#hookAbortEventSendingChannels_2_"+ chn),
+    device = DeviceList.getDeviceByAddress(devAddress),
+    chnIsOdd = (parseInt(chn) % 2 != 0) ? true : false,
+    counter = (chnIsOdd) ? 0 : 1, // determine the odd and even channels
+    html;
+
+
+
+  setAbortEventSendingChannels = function(chn, prn) {
+    var valElm = jQuery("#separate_CHANNEL_" + chn+ "_" + prn),
+      arChkBoxes = jQuery("[name='abortEventSendingCh_"+chn+"']"),
+      val = 0;
+
+    jQuery.each(arChkBoxes, function(index, chkBox) {
+      if(chkBox.checked) {
+        val += parseInt(chkBox.value);
+      }
+    });
+
+    valElm.val(val);
+  };
+  if (typeof device != "undefined") {
+    jQuery.each(device.channels, function (index, channel) {
+
+      if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") && (chnIsOdd)) || ((channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") && (! chnIsOdd))) {
+        html += "<td style='text-align:center;'>";
+        html += "<label for='abortEventSendingCh_" + chn + "_" + counter + "' style='background-color:white; display:block; text-align:center;'>" + channel.index + "</label>";
+        if (isBitSet(value, counter)) {
+          html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' checked onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+        } else {
+          html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+        }
+        html += "</td>";
+        counter+=2;
+      }
+    });
+  } else {
+    // SPHM-884
+    var mainElm = jQuery("[name='abortEventSendingChannels']");
+    mainElm.children(":first-child").text(translateKey("hintSetReadyNotComplete"));
+    mainElm.next().hide();
+  }
+  html += "<td><input type='text' class='hidden' id='separate_CHANNEL_"+chn+"_"+prn+"' size='6' name='ABORT_EVENT_SENDING_CHANNELS' value='"+value+"'></td>";
+  hookElm_1.html(html);
 };
 
 addHintHeatingGroupDevice = function (address) {

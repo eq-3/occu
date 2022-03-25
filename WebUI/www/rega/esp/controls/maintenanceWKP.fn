@@ -31,7 +31,7 @@ function ::CreateMaintenance()
   string valBlockedTemporary = "${lblNo}";
 
   WriteLine("<td>");
-    WriteLine("<table align='center'>");
+    WriteLine("<table align='_center'>");
 
       WriteLine("<tr>");
 
@@ -88,7 +88,7 @@ function ::CreateMaintenance()
           integer codeState = objCodeState.Value();
           string curState = "--";
           if (codeState == 0) {curState = "${codeIdle}";}
-          if (codeState == 1) {curState = "${lblUser}: "#objCodeID.Value() + 1;}
+          if (codeState == 1) {curState = "${lblUser}: "#objCodeID.Value();}
           if (codeState == 2) {curState = "${codeUnKnownCodeIDReceived}";}
           if (codeState == 3) {curState = "${codeLearnModeForCodeIDStarted}";}
           if (codeState == 4) {curState = "${codeLearnModeExitForCodeWithSuccess}";}
@@ -140,7 +140,7 @@ function ::CreateMaintenance()
       WriteLine("<tr>");
         WriteLine("<td>");
           ! btn clear error
-          WriteLine("<div id='anchorClearError_"#chnId#"' class='CLASS02551 ControlBtnOff'>${clearStatusMessages}</div>");
+          WriteLine("<div id='anchorClearError_"#chnId#"' class='CLASS02551c ControlBtnOff'>${clearStatusMessages}</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
 

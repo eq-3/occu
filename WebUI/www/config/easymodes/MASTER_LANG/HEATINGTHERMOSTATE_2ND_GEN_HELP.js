@@ -34,7 +34,39 @@ jQuery.extend(true,langJSON, {
     "ACOUSTIC_ALARM_SIGNAL" : "Mit diesem Parameter k%F6nnen Sie festlegen, ob eine fehlgeschlagene Adaptionsfahrt akustisch signalisiert werden soll.",
     "CHANNEL_OPERATION_MODE" :
       "Durch den Fl%FCsterbetrieb fahren die Heizk%F6rperthermostate langsamer und damit leiser.<br/><br/>" +
-      "Diese Funktion bewirkt einen 15-20 Prozent h%F6heren Stromverbrauch des jeweiligen Ger%E4ts."
+      "Diese Funktion bewirkt einen 15-20 Prozent h%F6heren Stromverbrauch des jeweiligen Ger%E4ts.",
+
+    "CLIMATE_FUNCTION" : "Dieser Parameter bestimmt, ob das Ger%E4t als Thermostat-Schalter oder als Hygrostat-Schalter eingesetzt werden soll.",
+
+    "TWO_POINT_HYSTERESIS_A" :
+      "Im Heizmodus schaltet der Aktor bei Unterschreiten der Soll-Temperatur ein. Im K%FChlmodus wird er beim %DCberschreiten der Soll-Temperatur eingeschaltet.<br/><br/>" +
+      "Mit der Hysterese kann gesteuert werden, um wie viel K die Solltemperatur %FCber- bzw. unterschritten werden muss, damit der Aktor wieder ausschaltet.<br/><br/>" +
+      "Dieser Parameter dient zur Festlegung der Hysterese im Bereich von 0,2 K bis 2,0 K.",
+
+    "TWO_POINT_HYSTERESIS_HUMIDITY" :
+      "Im Modus 'Befeuchten' schaltet der Aktor bei Unterschreiten der eingestellten Luftfeuchtigkeitssschwelle ein. Im Modus 'Trocknen' wird er entsprechend beim %DCberschreiten der eingestellten Luftfeuchtigkeitsschwelle eingeschaltet.<br/><br/>" +
+      "Mit der Hysterese kann gesteuert werden, um wie viel % rF die Soll-Temperatur %FCber- bzw. unterschritten werden muss, damit der Aktor wieder ausschaltet.<br/><br/>" +
+      "Dieser Parameter dient zur Festlegung der Hysterese im Bereich von 1 % bis 10 %.",
+
+    "HEATING_COOLING_A" :
+      "Ist der Wandthermostat als Thermostat-Schalter konfiguriert, kann das Ger%E4t in Verbindung mit einem Schaltaktor als Zweipunktregler f%FCr eine Temperaturregelung eingesetzt werden. " +
+      "Mit diesem Parameter wird festgelegt, ob das Ger%E4t im Heiz-Modus oder im K%FChl-Modus betrieben werden soll. " +
+      "Im Modus 'Heizen' wird der Schaltaktor bei Unterschreiten der Soll-Temperatur eingeschaltet. Im Modus 'K%FChlen' wird er bei %FCberschreiten der Soll-Temperatur eingeschaltet. " +
+      "Ist 'Heizen' und 'K%FChlen' ausgew%E4hlt, kann der Modus %FCber ein Zentralen-Programm gesteuert und ge%E4ndert werden.<br/><br/>" +
+      "Ist der Wandthermostat als Hygrostat-Schalter konfiguriert, kann das Ger%E4t in Verbindung mit einem Schaltaktor als Zweipunktregler f%DCr eine Luftfeuchtigkeitsregelung genutzt werden. Mit diesem Parameter wird festgelegt, ob das Ger%E4t im Trocknen-Modus oder im Befeuchten-Modus betrieben werden soll. " +
+      "Im Modes 'Trocknen' wird der Schaltaktor bei %DCberschreiten der eingestellten Luftfeuchtigkeitsschwelle eingeschaltet. Im Modus 'Befeuchten' wird er bei Unterschreiten der Luftfeuchtigkeitsschwelle eingeschaltet. " +
+      "Ist 'Trocknen' und 'Befeuchten' ausgew%E4hlt, kann der Modus %DCber ein Zentralen-Programm gesteuert und ge%E4ndert werden.",
+
+    "HUMIDITY_LIMIT_VALUE" :
+      "Wird das Ger%E4t als Hygrostat-Schalter verwendet, kann mit diesem Parameter die Luftfeuchtigkeitsschwelle eingestellt werden.<br/><br/>" +
+      "Beachten Sie hierzu auch den Parameter zur Hysterese.",
+
+    "CLIMATE_CONTROL_TYPE" :
+      "Mit diesem Parameter legen Sie die Art der Fu%DFboden-Temperaturregelung fest.<br/><br/>" +
+      "Zur Auswahl stehen die klassische Zweipunktregelung und die PWM-Regelung." ,
+
+    "noMore" : ""
+
   },
 
   "en" : {
@@ -71,7 +103,36 @@ jQuery.extend(true,langJSON, {
     "ACOUSTIC_ALARM_SIGNAL" : "With this parameter you can determine whether a failed adaptation run is to be signalled acoustically.",
     "CHANNEL_OPERATION_MODE" :
     "The radiator thermostats operate slower and therefore more quietly in whisper mode.<br/><br/>" +
-    "This function results in 15–20 percent higher power consumption for the respective device. "
+    "This function results in 15–20 percent higher power consumption for the respective device. ",
+
+    "CLIMATE_FUNCTION" : "This parameter determines whether the device is to be used as a thermostat or humidistat switch.",
+
+    "TWO_POINT_HYSTERESIS_A" :
+      "In heating mode, the actuator switches on when the temperature falls below the setpoint temperature. In cooling mode, it is switched on when the setpoint temperature is exceeded.<br/><br/>" +
+      "The hysteresis can be used to control by how many K a reading must exceed or fall below the setpoint temperature for the actuator to switch off again.<br/><br/>" +
+      "This parameter is used to define the hysteresis in the range from 0.2 K to 2.0 K.",
+
+    "TWO_POINT_HYSTERESIS_HUMIDITY" :
+      "In 'Humidify' mode, the actuator switches on when the air humidity falls below the set threshold. In 'Dry' mode, it is switched on when the set humidity threshold is exceeded.<br/><br/>" +
+      "The hysteresis can be used to control by how much % RH a reading must exceed or fall below the setpoint temperature for the actuator to switch off again.<br/><br/>" +
+      "This parameter is used to define the hysteresis in the range from 1 % to 10 %.",
+
+    "HEATING_COOLING_A" :
+      "If the wall thermostat is configured as a thermostat switch, the device can be used in conjunction with a switching actuator as a two-point controller for temperature control. This parameter determines whether the device is to be operated in heating or cooling mode. "  +
+      "In 'Heat' mode, the switching actuator is switched on when the temperature falls below the setpoint temperature. In 'Cool' mode, it is switched on when the setpoint temperature is exceeded. " +
+      "If 'Heat / Cool' is selected, the mode can be controlled and changed via a central program.<br/><br/>" +
+      "If the wall thermostat is configured as a humidistat switch, the device can be used in conjunction with a switching actuator as a two-point controller for humidity control. This parameter determines whether the device is to be operated in drying mode or in humidifying mode. " +
+      "In 'Dry' mode, the switching actuator is switched on when the set humidity threshold is exceeded. In 'Humidify' mode, it is switched on when the air humidity drops below the threshold.<br/><br/>" +
+      "If 'Dry / Humidify' is selected, the mode can be controlled and changed via a central program.",
+
+    "HUMIDITY_LIMIT_VALUE" :
+      "If the device is used as a humidistat switch, the humidity threshold can be set with this parameter.<br/><br/>" +
+      "Take into account the parameter for hysteresis.",
+
+    "CLIMATE_CONTROL_TYPE" :
+      "With this parameter, you define the type of floor temperature control.<br/><br/>" +
+      "You can choose between the classic two-point control and PWM control." ,
+    "noMore" : ""
 
   }
 });

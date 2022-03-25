@@ -572,6 +572,7 @@ DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNDERFLOW	${lblValue} ${stringTableDimmerLe
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=3	${lblValue} ${stringTableDimmerLevel}: ${lblUnderflow}
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=UNKNOWN	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
 DIMMER_VIRTUAL_RECEIVER|LEVEL_STATUS=1	${lblValue} ${stringTableDimmerLevel}: ${lblUnknown}
+DIRT_LEVEL	${stringTableDirtLevel}
 DISABLE_ACOUSTIC_CHANNELSTATE	${stringTableDisableAcousticChannelState}
 DISABLE_ACOUSTIC_SENDSTATE	${stringTableDisableAcousticSendState}
 DISPLAY_BACKLIGHT_MODE	${stringTableDisplayBacklightMode}
@@ -644,6 +645,33 @@ DISPLAY|UNIT=NONE	${stringTableDisplayUnitNone}
 DISPLAY|UNIT=PERCENT	${stringTableDisplayUnitPercent}
 DISPLAY|UNIT=WATT	${stringTableDisplayUnitWatt}
 DISPLAY|WINDOW	${stringTableDisplayWindow}
+
+DISPLAY_UPDATE_REQUEST_0=FALSE	${stringTableDisplayUpdateRequest} 0: ${lblNo}
+DISPLAY_UPDATE_REQUEST_0=TRUE	${stringTableDisplayUpdateRequest} 0: ${lblYes}
+DISPLAY_UPDATE_REQUEST_01=FALSE	${stringTableDisplayUpdateRequest} 1: ${lblNo}
+DISPLAY_UPDATE_REQUEST_01=TRUE	${stringTableDisplayUpdateRequest} 1: ${lblYes}
+DISPLAY_UPDATE_REQUEST_03=FALSE	${stringTableDisplayUpdateRequest} 3: ${lblNo}
+DISPLAY_UPDATE_REQUEST_03=TRUE	${stringTableDisplayUpdateRequest} 3: ${lblYes}
+DISPLAY_UPDATE_REQUEST_05=FALSE	${stringTableDisplayUpdateRequest} 5: ${lblNo}
+DISPLAY_UPDATE_REQUEST_05=TRUE	${stringTableDisplayUpdateRequest} 5: ${lblYes}
+DISPLAY_UPDATE_REQUEST_07=FALSE	${stringTableDisplayUpdateRequest} 7: ${lblNo}
+DISPLAY_UPDATE_REQUEST_07=TRUE	${stringTableDisplayUpdateRequest} 7: ${lblYes}
+DISPLAY_UPDATE_REQUEST_09=FALSE	${stringTableDisplayUpdateRequest} 9: ${lblNo}
+DISPLAY_UPDATE_REQUEST_09=TRUE	${stringTableDisplayUpdateRequest} 9: ${lblYes}
+DISPLAY_UPDATE_REQUEST_11=FALSE	${stringTableDisplayUpdateRequest} 11: ${lblNo}
+DISPLAY_UPDATE_REQUEST_11=TRUE	${stringTableDisplayUpdateRequest} 11: ${lblYes}
+DISPLAY_UPDATE_REQUEST_13=FALSE	${stringTableDisplayUpdateRequest} 13: ${lblNo}
+DISPLAY_UPDATE_REQUEST_13=TRUE	${stringTableDisplayUpdateRequest} 13: ${lblYes}
+DISPLAY_UPDATE_REQUEST_15=FALSE	${stringTableDisplayUpdateRequest} 15: ${lblNo}
+DISPLAY_UPDATE_REQUEST_15=TRUE	${stringTableDisplayUpdateRequest} 15: ${lblYes}
+DISPLAY_UPDATE_REQUEST_17=FALSE	${stringTableDisplayUpdateRequest} 17: ${lblNo}
+DISPLAY_UPDATE_REQUEST_17=TRUE	${stringTableDisplayUpdateRequest} 17: ${lblYes}
+DISPLAY_UPDATE_REQUEST_19=FALSE	${stringTableDisplayUpdateRequest} 19: ${lblNo}
+DISPLAY_UPDATE_REQUEST_19=TRUE	${stringTableDisplayUpdateRequest} 19: ${lblYes}
+DISPLAY_UPDATE_REQUEST_21=FALSE	${stringTableDisplayUpdateRequest} 21: ${lblNo}
+DISPLAY_UPDATE_REQUEST_21=TRUE	${stringTableDisplayUpdateRequest} 21: ${lblYes}
+DISPLAY_UPDATE_REQUEST_23=FALSE	${stringTableDisplayUpdateRequest} 23: ${lblNo}
+DISPLAY_UPDATE_REQUEST_23=TRUE	${stringTableDisplayUpdateRequest} 23: ${lblYes}
 
 DOOR_COMMAND=CLOSE	${stringTableDoorCommandClose}
 DOOR_COMMAND=NOP	${stringTableDoorCommandNOP}
@@ -736,6 +764,8 @@ ERROR_COPROCESSOR	${stringTableErrorCoProcessor}
 ERROR_COPROCESSOR=TRUE	${stringTableErrorCoprocessorTrue}
 ERROR_COPROCESSOR=FALSE	${stringTableErrorCoprocessorFalse}
 ERROR_DEGRADED_CHAMBER	${stringTableErrorDegradedChamber}
+ERROR_DEGRADED_CHAMBER=FALSE	${stringTableErrorDegradedChamberFalse}
+ERROR_DEGRADED_CHAMBER=TRUE	${stringTableErrorDegradedChamberTrue}
 ERROR_NON_FLAT_POSITIONING	${stringTableErrorNonFlatPositioning}
 ERROR_NON_FLAT_POSITIONING=FALSE	${stringTableErrorNonFlatPositioningFalse}
 ERROR_NON_FLAT_POSITIONING=TRUE	${stringTableErrorNonFlatPositioningTrue}
@@ -1131,6 +1161,10 @@ MAINTENANCE|CONFIG_PENDING	${stringTableConfigPending}
 MAINTENANCE|ERROR_BATTERY=BATTERY_DEFECT	${stringTableBatteryFailure}
 MAINTENANCE|ERROR_BATTERY=NO_ERROR	${stringTableBatteryOk}
 MAINTENANCE|ERROR_JAMMED	${stringTableErrorJammed}
+
+MAINTENANCE|ERROR_JAMMED=FALSE	${stringTableErrorJammedFalse}
+MAINTENANCE|ERROR_JAMMED=TRUE	${stringTableErrorJammedTrue}
+
 MAINTENANCE|ERROR_OVERHEAT	${stringTableErrorOverheatTrue}
 MAINTENANCE|HMW_STICKY_UNREACH	${stringTableStickyUnreach}
 MAINTENANCE|LOWBAT	${stringTableBatteryLow}
@@ -1707,6 +1741,7 @@ SMOKE_DETECTOR|STATE=FALSE	${stringTableSmokeDetectorStateFalse}
 SMOKE_DETECTOR|STATE=TRUE	${stringTableSmokeDetectorStateTrue}
 SOFTONOFF	${stringTableSoftOnOff}
 SOUND_ID	${stringTableSoundID}
+SMOKE_LEVEL	${stringTableSmokeLevel}
 SOUND_LONG	${stringTableSoundLong}
 SOUND_LONG_LONG	${stringTableSoundLongLong}
 SOUND_LONG_SHORT	${stringTableSoundLongShort}

@@ -1,0 +1,2 @@
+"description_1" : "<span class=\"translated\">A short key press moves the servo alternately to the specified position. A long key press moves the servo alternately step by step to the selected level limit.n. Ein langer Tastendruck f&auml;hrt das Servo abwechselnd schrittweise bis zur gew&auml;hlten Pegelbegrenzung.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The profile is not active</span>",

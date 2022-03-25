@@ -13,6 +13,10 @@ if {$dev_descr_sender(PARENT) == $dev_descr_receiver(PARENT)} {
   # set internal "_INTERNAL"
 }
 
+if {($dev_descr_receiver(PARENT_TYPE)) == "HmIP-WUA" || ($dev_descr_receiver(PARENT_TYPE)) == "ELV-SH-WUA"}  {
+  set dev_descr_receiver(TYPE) "UNIVERSAL_ACTOR"
+  set ACTOR $dev_descr_receiver(TYPE)
+}
 
 if {[catch {set x $dev_descr_sender(TYPE)}] == 0} {
 

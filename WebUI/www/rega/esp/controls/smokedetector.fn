@@ -1,42 +1,89 @@
 function ::CreateSmokeDetectorControl()
 {
   object objDangerState = cObj.DPByControl("DANGER.STATE");
-
-  if (objDangerState) {
-    string sDangerState = objDangerState.Value();
-  } else {
-    string sDangerState = "unknown";
-  }
+  object objSmokeLevel = cObj.DPByControl("SMOKE_DETECTOR.SMOKE_LEVEL");
+  object objDirtLevel = cObj.DPByControl("SMOKE_DETECTOR.DIRT_LEVEL");
   object objState = cObj.DPByControl("SMOKE_DETECTOR.COMMAND");
 
-  if( objState )
-  {
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table>");
+        if (objSmokeLevel || objDirtLevel) {
+          WriteLine("<tr>");
+            if (objSmokeLevel) {
+              string valSmokeLevel = objSmokeLevel.Value();
+              string unitSmokeLevel = objSmokeLevel.ValueUnit();
+              if (unitSmokeLevel == "100%") {
+                valSmokeLevel = valSmokeLevel * 100;
+                valSmokeLevel = valSmokeLevel.ToString(0);
+                unitSmokeLevel = "%";
+              }
 
-    WriteLine("<tr>");
-      WriteLine("<td colspan='2'>");
-        WriteLine("<hr>");
-        WriteLine("<div style='color:black'>${lblIntrusionAlarm}</div>");
-      WriteLine("</td>");
-    WriteLine("</tr>");
+              WriteLine("<td class='CLASS02518'>");
+                WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableSmokeLevel}<br/>"#valSmokeLevel#unitSmokeLevel#"</div>");
+              WriteLine("</td>");
+            }
+            if (objDirtLevel) {
+              string valDirtLevel = objDirtLevel.Value();
+              string unitDirtLevel = objDirtLevel.ValueUnit();
+              if (unitDirtLevel == "100%") {
+                valDirtLevel = valDirtLevel * 100;
+                valDirtLevel = valDirtLevel.ToString(0);
+                unitDirtLevel = "%";
+              }
+              WriteLine("<td class='CLASS02518'>");
+                WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableDirtLevel}<br/>"#valDirtLevel#unitDirtLevel#"</div>");
+              WriteLine("</td>");
+            }
+          WriteLine("</tr>");
+        }
 
-    WriteLine("<tr>");
-      WriteLine("<td class='CLASS02521'>");
-        WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02522 j_translate'>${actionStatusControlLblOff}</div>");
-      WriteLine("</td>");
+        if (objDangerState) {
+          string sDangerState = objDangerState.Value();
+        } else {
+          string sDangerState = "unknown";
+        }
+        if( objState )
+        {
+          WriteLine("<tr>");
+            WriteLine("<td><table>");
 
-      WriteLine("<td class='CLASS02521'>");
-        WriteLine("<div id='"#chnId#"On' class='ControlBtnOff CLASS02522 j_translate'>${actionStatusControlLblOn}</div>");
-      WriteLine("</td>");
-      WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
-    WriteLine("</tr>");
+              WriteLine("<tr>");
+                WriteLine("<td colspan='2'>");
+                if (objSmokeLevel || objDirtLevel) {
+                    WriteLine("<hr>");
+                }
+                WriteLine("<div style='color:black'>${lblIntrusionAlarm}</div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
 
-    WriteLine("<script type='text/javascript'>");
-      WriteLine("ibs"#cObj.ID()#" = new iseSmokeDetectorHmIP("#cObj.ID()#", "#objState.ID()#", "#sDangerState#");");
+              WriteLine("<tr>");
+                WriteLine("<td class='CLASS02521'>");
+                  WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02522 j_translate'>${actionStatusControlLblOff}</div>");
+                WriteLine("</td>");
 
-      Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlLblOff')).show();");
-      Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlLblOn')).show();");
+                WriteLine("<td class='CLASS02521'>");
+                  WriteLine("<div id='"#chnId#"On' class='ControlBtnOff CLASS02522 j_translate'>${actionStatusControlLblOn}</div>");
+                WriteLine("</td>");
+                WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
+              WriteLine("</tr>");
 
-    WriteLine("</script>");
-  }
+              Call("/esp/controls/danger.fn::CreateDangerSensor()");
+
+            WriteLine("</table></td>");
+          WriteLine("</tr>");
+
+          WriteLine("<script type='text/javascript'>");
+            WriteLine("ibs"#cObj.ID()#" = new iseSmokeDetectorHmIP("#cObj.ID()#", "#objState.ID()#", "#sDangerState#");");
+
+            Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlLblOff')).show();");
+            Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlLblOn')).show();");
+          WriteLine("</script>");
+        }
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
   return;
 }
+

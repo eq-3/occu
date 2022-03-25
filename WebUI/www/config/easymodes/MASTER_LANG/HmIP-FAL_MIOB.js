@@ -1,5 +1,6 @@
 jQuery.extend(true,langJSON, {
   "de" : {
+    "lblOperationMode" : "Betriebsmodus",
     "lblCoolingEmergencyPWMSignal": "Notbetrieb K%FChlen",
     "lblHeatingEmergencyPWMSignal": "Notbetrieb Heizen",
     "lblFrostProtectionTemperature": "Frostschutzfunktion aktiv ab: ",
@@ -9,16 +10,22 @@ jQuery.extend(true,langJSON, {
     "lblDecalcificationInterval": "Intervall der Entkalkungsfahrt bei Nichtbenutzung",
     "lblLeadTime" : "Vorlaufzeit",
     "lblFollowUpTime" : "Nachlaufzeit",
+    "optionHygrostat" : "Hygrostat",
     "optionLoadBalancing": "Lastausgleich",
     "optionLoadCollection": "Lastsammlung",
     "optionLocalPumpControl": "Ansteuerung Umw%E4lzpumpe",
     "optionGlobalPumpControl": "Ansteuerung Heizventil",
     "optionNormallyClose": "NC (normally closed)",
     "optionNormallyOpen": "NO (normally open)",
+    "optionPWMControl": "PWM-Regelung",
+    "optionThermostat" : "Thermostat",
+    "optionTwoPointControl": "Zweipunktregelung",
+
 
     "" : ""
   },
   "en" : {
+    "lblOperationMode" : "Operating mode",
     "lblCoolingEmergencyPWMSignal": "Emergency operation cooling",
     "lblHeatingEmergencyPWMSignal": "Emergency operation heating",
     "lblFrostProtectionTemperature": "Frost protection function activated from: ",
@@ -28,13 +35,16 @@ jQuery.extend(true,langJSON, {
     "lblDecalcificationInterval": "Descaling run interval during inactivity",
     "lblLeadTime" : "Lead time",
     "lblFollowUpTime" : "Follow-up time",
+    "optionHygrostat" : "Humidistat",
     "optionLoadBalancing": "Load balancing",
     "optionLoadCollection": "Load collection",
     "optionLocalPumpControl": "Heating pump control",
     "optionGlobalPumpControl": "Heating valve control",
     "optionNormallyClose": "NC (normally closed)",
     "optionNormallyOpen": "NO (normally open)",
-
+    "optionPWMControl": "PWM control",
+    "optionThermostat" : "Thermostat",
+    "optionTwoPointControl": "Two-point control",
     "" : ""
   }
 });

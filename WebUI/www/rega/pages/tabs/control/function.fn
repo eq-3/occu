@@ -7,6 +7,16 @@ function ::ShowExtDesc() {
     showExtDesc = true;
   }
 
+  if ((chn.HssType() == "DIMMER_TRANSMITTER") && ((chn.Label() == "HmIP-WUA") || (chn.Label() == "ELV-SH-WUA")) ) {
+    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_UNIVERSAL_ACTOR_TRANSMITTER_010V}</span>");
+    showExtDesc = true;
+  }
+
+  if ((chn.HssType() == "DIMMER_VIRTUAL_RECEIVER") && ((chn.Label() == "HmIP-WUA") || (chn.Label() == "ELV-SH-WUA")) ) {
+    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V}</span>");
+    showExtDesc = true;
+  }
+
   if ((chn.HssType() == "DOOR_RECEIVER") && (chn.Label() == "HmIP-MOD-HO") ) {
     Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_MOD_HO}</span>");
     showExtDesc = true;
@@ -90,18 +100,65 @@ function ::ShowExtDesc() {
 
     if (chn.Label() == "HmIP-WKP") {
       integer tmpChn = (chNumber + 1) / 2;
-    !  string lockUnlock = "";
-
-    !  if (((tmpChn - chNumber) * -1) == tmpChn) {
-    !    lockUnlock = "${chType_ACCESS_TRANSCEIVER_UNLOCk}";
-    !  } else {
-    !    lockUnlock = "${chType_ACCESS_TRANSCEIVER_LOCk}";
-    !  }
-    !
-    !  Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_TRANSCEIVER} "#tmpChn#" "#lockUnlock#"</span>");
       Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_TRANSCEIVER} "#tmpChn#"</span>");
       showExtDesc = true;
-    !}
+    }
+  }
+
+  if (chn.HssType() == "DISPLAY_INPUT_TRANSMITTER")  {
+    if (chn.Label() == "HmIPW-WGD") {
+      string oddChannels = "1,3,5,7,9,11,13,15,17,19,21,23,25";
+      string chNo = chNumber.ToString();
+      integer index = 0;
+      foreach (tmp, oddChannels.Split(",")) {
+        index = index + 1;
+        if (chNo == tmp) {
+          if (chNumber <= 7) {
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_DISPLAY_INPUT_TRANSMITTER_A} 1 - ${chType_DISPLAY_INPUT_TRANSMITTER_B} "#index#"${chType_DISPLAY_INPUT_TRANSMITTER_C}</span>");
+            showExtDesc = true;
+          }
+          if ((chNumber >= 9) && (chNumber <= 15)) {
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_DISPLAY_INPUT_TRANSMITTER_A} 2 - ${chType_DISPLAY_INPUT_TRANSMITTER_B} "#index#"${chType_DISPLAY_INPUT_TRANSMITTER_C}</span>");
+            showExtDesc = true;
+          }
+          if ((chNumber >= 17) && (chNumber <= 23)) {
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_DISPLAY_INPUT_TRANSMITTER_A} 3 - ${chType_DISPLAY_INPUT_TRANSMITTER_B} "#index#"${chType_DISPLAY_INPUT_TRANSMITTER_C}</span>");
+            showExtDesc = true;
+          }
+          if (chNumber == 25) {
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_DISPLAY_INPUT_TRANSMITTER_D} </span>");
+            showExtDesc = true;
+          }
+        }
+        if (index == 4) {index = 0;}
+      }
+    }
+  }
+
+  if (chn.HssType() == "DISPLAY_LEVEL_INPUT_TRANSMITTER")  {
+    if (chn.Label() == "HmIPW-WGD") {
+      string evenChannels = "2,4,6,8,10,12,14,16,18,20,22,24";
+      string chNo = chNumber.ToString();
+      integer index = 0;
+      foreach (tmp, evenChannels.Split(",")) {
+        index = index + 1;
+        if (chNo == tmp) {
+          if (chNumber <= 8) {
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A} 1 - ${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B} "#index#"${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C}</span>");
+            showExtDesc = true;
+          }
+          if ((chNumber >= 10) && (chNumber <= 16)) {
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A} 2 - ${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B} "#index#"${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C}</span>");
+            showExtDesc = true;
+          }
+          if ((chNumber >= 18) && (chNumber <= 24)) {
+            Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A} 3 - ${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B} "#index#"${chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C}</span>");
+            showExtDesc = true;
+          }
+        }
+        if (index == 4) {index = 0;}
+      }
+    }
   }
 
 }

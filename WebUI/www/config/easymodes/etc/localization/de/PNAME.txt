@@ -16,6 +16,7 @@
 "DIM_MAX_LEVEL_mp3" : "<span class=\"translated\">Maximale Lautst&auml;rke</span>",
 "DIM_MIN_LEVEL" : "<span class=\"translated\">Pegelbegrenzung beim Herunterdimmen</span>",
 "DIM_MIN_LEVEL_mp3" : "<span class=\"translated\">Minimale Lautst&auml;rke</span>",
+"DIM_STEP" : "<span class=\"translated\">Schrittweite</span>",
 "DOWN_DELAY_TIME" : "<span class=\"translated\">Herunterfahrverz&ouml;gerungszeit</span>",
 "DOWN_LEVEL" : "<span class=\"translated\">Heruntergefahren-Position</span>",
 "DOWN_TIME" : "<span class=\"translated\">Verweildauer im Zustand &quot;Unten&quot;</span>",

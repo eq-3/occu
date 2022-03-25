@@ -1116,6 +1116,22 @@ ProofFreeValue = function(id, min, max)
   input.value = wert;
 };
 
+proofMinMax4Voltage_X = function(param) {
+  var voltage0 = "VOLTAGE_0",
+    voltage100= "VOLTAGE_100",
+    voltage0Elm = jQuery("[name='"+voltage0+"']")[0],
+    voltage100Elm = jQuery("[name='"+voltage100+"']")[0],
+    val0 = roundValue05(parseFloat(jQuery(voltage0Elm).val())),
+    val100 = roundValue05(parseFloat(jQuery(voltage100Elm).val()));
+
+  if (param == voltage0) {
+    jQuery(voltage0Elm).val((val0 >= val100) ? val100 - 0.5 : val0);
+  }
+  if (param == voltage100) {
+    jQuery(voltage100Elm).val((val100 <= val0) ? val0 +0.5 : val100);
+  }
+};
+
 add_HMW_onchange_ = function(ch_type)
 {  
   switch (ch_type) { 
@@ -1765,6 +1781,20 @@ showParamHelp = function(topic, x , y) {
  MessageBox.show(translateKey("HelpTitle"), translateKey(topic), "", width, height);
 };
 
+selectWGDIcon = function(chn, elmId, activeIcon) {
+  var dlg = new WGDSelectIconDialog(translateKey("lblBaseImage"), "<div id='anchor_" + chn + "'></div>", function(btnPress) {
+    if (btnPress == this.RESULT_YES) {
+      jQuery("#" + elmId).val(this.getSelectedIconNo());
+      jQuery("#image_" + chn ).attr("src", this.getSelectedIcon());
+    }
+  }, "html");
+  dlg.btnTextNo(translateKey("btnCancel"));
+  dlg.btnTextYes(translateKey("btnOk"));
+  dlg.chn = chn;
+  dlg.activeIcon = parseInt(activeIcon);
+};
+
+
 // Test
 rfd_test = function() {
   homematic('Interface.isPresent', {"interface": "BidCos-RF"}, function(result, error) {
@@ -1843,7 +1873,11 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
   if (typeof device != "undefined") {
     jQuery.each(device.channels, function (index, channel) {
 
-      if (channel.channelType == "KEY_TRANSCEIVER" || channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER" || channel.channelType == "ACCESS_TRANSCEIVER") {
+      if (
+        channel.channelType == "KEY_TRANSCEIVER"
+        || channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER"
+        || channel.channelType == "ACCESS_TRANSCEIVER"
+       ) {
 
         html = (counter == 0 || counter == 16) ? "" : html;
 
@@ -1876,6 +1910,54 @@ addAbortEventSendingChannels = function(chn, prn, devAddress, value) {
   if (html_2) {
     hookElm_2.html(html_2);
   }
+};
+
+addAbortEventSendingChannels4WGD = function(chn, prn, devAddress, value) {
+  var hookElm_1 = jQuery("#hookAbortEventSendingChannels_1_"+ chn),
+    hookElm_2 = jQuery("#hookAbortEventSendingChannels_2_"+ chn),
+    device = DeviceList.getDeviceByAddress(devAddress),
+    chnIsOdd = (parseInt(chn) % 2 != 0) ? true : false,
+    counter = (chnIsOdd) ? 0 : 1, // determine the odd and even channels
+    html;
+
+
+
+  setAbortEventSendingChannels = function(chn, prn) {
+    var valElm = jQuery("#separate_CHANNEL_" + chn+ "_" + prn),
+      arChkBoxes = jQuery("[name='abortEventSendingCh_"+chn+"']"),
+      val = 0;
+
+    jQuery.each(arChkBoxes, function(index, chkBox) {
+      if(chkBox.checked) {
+        val += parseInt(chkBox.value);
+      }
+    });
+
+    valElm.val(val);
+  };
+  if (typeof device != "undefined") {
+    jQuery.each(device.channels, function (index, channel) {
+
+      if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") && (chnIsOdd)) || ((channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") && (! chnIsOdd))) {
+        html += "<td style='text-align:center;'>";
+        html += "<label for='abortEventSendingCh_" + chn + "_" + counter + "' style='background-color:white; display:block; text-align:center;'>" + channel.index + "</label>";
+        if (isBitSet(value, counter)) {
+          html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' checked onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+        } else {
+          html += "<input id='abortEventSendingCh_" + chn + "_" + counter + "' name='abortEventSendingCh_" + chn + "' type='checkbox' value='" + Math.pow(2, counter) + "' onclick='setAbortEventSendingChannels(" + chn + "," + prn + ");'>";
+        }
+        html += "</td>";
+        counter+=2;
+      }
+    });
+  } else {
+    // SPHM-884
+    var mainElm = jQuery("[name='abortEventSendingChannels']");
+    mainElm.children(":first-child").text(translateKey("hintSetReadyNotComplete"));
+    mainElm.next().hide();
+  }
+  html += "<td><input type='text' class='hidden' id='separate_CHANNEL_"+chn+"_"+prn+"' size='6' name='ABORT_EVENT_SENDING_CHANNELS' value='"+value+"'></td>";
+  hookElm_1.html(html);
 };
 
 addHintHeatingGroupDevice = function (address) {

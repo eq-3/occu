@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">When receiving the defined decision value the output voltage is switched on or off to the defined value (toggle function). </span><br/><br/>",
+"description_2" : "<span class=\"translated\">When receiving the defined decision value the output voltage is switched on to the defined value. </span><br/><br/>",
+"description_3" : "<span class=\"translated\">When receiving the defined decision value the output voltage is switched off. </span><br/><br/>",
+
+"subset_1" : "Lower value falls below threshold",
+"subset_2" : "Upper threshold exceeded",
+"subset_3" : "Lower threshold value/upper threshold value exceeded",

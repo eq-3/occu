@@ -26,6 +26,7 @@
   string hmipwID = "HmIPW-";
   string hmipw_wrc6 = "HmIPW-WRC6";
   string hmip_smi55 = "HmIP-SMI55";
+  string hmip_smi55_2 = "HmIP-SMI55-2";
 
 
 
@@ -365,7 +366,7 @@
       Write( '</select> ' );
 
       ! Help for the channel type MOTIONDETECTOR_TRANSCEIVER, config parameter PERMANENT_FULL_RX (SMI55)
-      if (oCH.Label().Find(hmip_smi55) != -1) {
+      if ((oCH.Label().Find(hmip_smi55) != -1) || (oCH.Label().Find(hmip_smi55_2) != -1)) {
         object dev = dom.GetObject(oCH.Device());
         if (dev.MetaData("permanentFullRX") != 1) {
           Write( "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp(translateKey('helpPrgPermanentFullRX'), 400, 150)\">" );
@@ -529,6 +530,7 @@
             integer i_opticalSignalReceiver = oCH.HssType().Find(opticalSignaReceiver);
             integer i_switchVirtualReceiver = oCH.HssType().Find(switchVirtualReceiver);
             integer i_blindVirtualReceiver = oCH.HssType().Find(blindVirtualReceiver);
+            integer i_servoVirtualReceiver = oCH.HssType().Find(servoVirtualReceiver);
             integer i_hmip_mp3p = chLabel.Find(hmip_mp3p);
             integer i_hmip_WeekProfile = oCH.HssType().Find(hmIPWeekProfile);
             integer i_maintenance = oCH.HssType().Find(maintenance);
@@ -548,6 +550,7 @@
               || (i_dimmerVirtualReceiver != -1)
               || (i_opticalSignalReceiver != -1)
               || (i_switchVirtualReceiver != -1)
+              || (i_servoVirtualReceiver != -1)
               || (i_hmip_WeekProfile != -1)
               || (i_maintenance != -1))
               ) {
@@ -672,6 +675,14 @@
                 }
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setBlindLevelController('#oSD.ID()#',\'COMBINED_PARAMETER\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
+
+              if ((i_servoVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                if (iV.Find("L=") == -1) {
+                  iV = "L=100,RT=0";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
 
               ! SPHM-767
               if ((oCH.Label().Find(hmipwID) != -1) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {

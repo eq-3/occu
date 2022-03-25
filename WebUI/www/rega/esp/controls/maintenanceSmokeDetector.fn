@@ -1,0 +1,47 @@
+function ::CreateMaintenance()
+{
+  object objErrorDegradedChamber = cObj.DPByControl("MAINTENANCE.ERROR_DEGRADED_CHAMBER");
+
+  string chamberState = "${stringTableSmokeDetectorSmokeChamberOKbr}";
+
+  WriteLine("<td>");
+    WriteLine("<table>");
+
+    if (objErrorDegradedChamber) {
+
+      if (objErrorDegradedChamber.Value() == true)  {chamberState = "${stringTableSmokeDetectorSmokeChamberFailurebr} ";}
+
+      WriteLine("<tr>");
+        WriteLine("<td class='CLASS02518'>");
+          WriteLine("<div class='ControlBtnInfo CLASS02532'>" # chamberState # "<div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    }
+    WriteLine("</table>");
+    Call("/esp/controls/maintenanceSmokeDetector.fn::CreateOperationVoltage()");
+  WriteLine("</td>");
+}
+
+function ::CreateOperationVoltage()
+{
+  object objVoltage = cObj.DPByControl("MAINTENANCE.OPERATING_VOLTAGE");
+  object objVoltageStatus = cObj.DPByControl("MAINTENANCE.OPERATING_VOLTAGE_STATUS");
+
+  if (objVoltage || objVoltageStatus) {
+    WriteLine("<table>");
+      WriteLine("<td colspan='2'><hr></td>");
+      WriteLine("<tr>");
+        if (objVoltage) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblCurrentOperatingVoltage}<br/>"#objVoltage.Value().ToString(1)#" "#objVoltage.ValueUnit()#"</div>");
+          WriteLine("</td>");
+        }
+        if (objVoltageStatus) {
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div class='ControlBtnInfo CLASS02532'>${stringTableOperationVoltageState}<br/>${lblVoltageStatus_"#objVoltageStatus.Value()#"}</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  }
+}

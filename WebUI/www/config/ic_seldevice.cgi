@@ -214,19 +214,18 @@ proc put_PreviousStep {} {
   set SENTRY(LINKDESC)     "&nbsp;"
   set SENTRY(WARNINGS)     ""
 
-
   if {$receiver_address != ""} then {
     set SENTRY(RECEIVERADDR) $receiver_address
     if { [catch { set SENTRY(RECEIVERNAME) $ise_CHANNELNAMES($iface;$receiver_address)} ] } then {
-         set SENTRY(RECEIVERNAME) "$iface"
-         append SENTRY(RECEIVERNAME) ".$receiver_address"
+      set SENTRY(RECEIVERNAME) "$iface"
+      append SENTRY(RECEIVERNAME) ".$receiver_address"
     }
 
     if {[test_space $SENTRY(RECEIVERNAME)] == 1} {
-    set SENTRY(RECEIVERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_receiver(PARENT_TYPE)', 250, $dev_descr_receiver(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">$SENTRY(RECEIVERNAME)</div>"
+      set SENTRY(RECEIVERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_receiver(PARENT_TYPE)', 250, $dev_descr_receiver(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">$SENTRY(RECEIVERNAME)</div>"
     } else {
-    set SENTRY(RECEIVERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_receiver(PARENT_TYPE)', 250, $dev_descr_receiver(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $SENTRY(RECEIVERNAME)]</div>"
-  }
+      set SENTRY(RECEIVERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_receiver(PARENT_TYPE)', 250, $dev_descr_receiver(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $SENTRY(RECEIVERNAME)]</div>"
+    }
     
   }
 
@@ -234,30 +233,29 @@ proc put_PreviousStep {} {
   if {$sender_address != ""} then {
     set SENTRY(SENDERADDR) $sender_address
     if { [catch { set SENTRY(SENDERNAME) $ise_CHANNELNAMES($iface;$sender_address)} ] } then {
-         set SENTRY(SENDERNAME) "$iface"
-         append SENTRY(SENDERNAME) ".$sender_address"
+      set SENTRY(SENDERNAME) "$iface"
+      append SENTRY(SENDERNAME) ".$sender_address"
     }
     
     if {[test_space $SENTRY(SENDERNAME)] == 1 } {
-    set SENTRY(SENDERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender(PARENT_TYPE)', 250, $dev_descr_sender(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">$SENTRY(SENDERNAME)</div>"
+      set SENTRY(SENDERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender(PARENT_TYPE)', 250, $dev_descr_sender(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">$SENTRY(SENDERNAME)</div>"
     } else {
-    set SENTRY(SENDERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender(PARENT_TYPE)', 250, $dev_descr_sender(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $SENTRY(SENDERNAME)]</div>"
-  }
+      set SENTRY(SENDERNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender(PARENT_TYPE)', 250, $dev_descr_sender(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $SENTRY(SENDERNAME)]</div>"
+    }
   }
 
   if {$sender_group != ""} then {
     set SENTRY(SENDERGROUPADDR) $sender_group
     if { [catch { set SENTRY(SENDERGROUPNAME) $ise_CHANNELNAMES($iface;$sender_group)} ] } then {
-         set SENTRY(SENDERGROUPNAME) "$iface"
-         append SENTRY(SENDERGROUPNAME) ".$sender_group"
+      set SENTRY(SENDERGROUPNAME) "$iface"
+      append SENTRY(SENDERGROUPNAME) ".$sender_group"
     }
     
     if {[test_space $SENTRY(SENDERGROUPNAME)] == 1} {
-    set SENTRY(SENDERGROUPNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender_group(PARENT_TYPE)', 250, $dev_descr_sender_group(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">$SENTRY(SENDERGROUPNAME)</div>"
-    } else {
-    set SENTRY(SENDERGROUPNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender_group(PARENT_TYPE)', 250, $dev_descr_sender_group(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $SENTRY(SENDERGROUPNAME)]</div>"
-  }
-
+      set SENTRY(SENDERGROUPNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender_group(PARENT_TYPE)', 250, $dev_descr_sender_group(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">$SENTRY(SENDERGROUPNAME)</div>"
+      } else {
+      set SENTRY(SENDERGROUPNAME_DISPLAY) "<div class=\"CLASS21912\" onmouseover=\"picDivShow(jg_250, '$dev_descr_sender_group(PARENT_TYPE)', 250, $dev_descr_sender_group(INDEX), this);\" onmouseout=\"picDivHide(jg_250);\">[cgi_quote_html $SENTRY(SENDERGROUPNAME)]</div>"
+      }
     }
 
   if {$step < 3} then {
@@ -271,7 +269,6 @@ proc put_PreviousStep {} {
 
     set description1 ""
     set description2 ""
-    
     catch {set description1 "\${lblStandardLink} $dev_descr_sender(TYPE) - $dev_descr_receiver(TYPE)"}
     catch {set description2 "Standardverknüpfung $dev_descr_sender(TYPE) - $dev_descr_receiver(TYPE)"}
     #catch {set description2 "\${lblStandardLink} $dev_descr_sender(TYPE) - $dev_descr_receiver(TYPE)"}

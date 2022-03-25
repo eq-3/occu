@@ -59,6 +59,16 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",
     "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Weekly program",
+
+    "chType_DISPLAY_INPUT_TRANSMITTER_A": "en* Screen",
+    "chType_DISPLAY_INPUT_TRANSMITTER_B": "Kachel",
+    "chType_DISPLAY_INPUT_TRANSMITTER_C": "<br/>KEY",
+
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A": "en* Screen",
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B": "Kachel",
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C": "<br/>LEVEL",
+    "chType_DISPLAY_INPUT_TRANSMITTER_D": "UNKNOWN",
+
     "chType_DOOR_LOCK_STATE_TRANSMITTER" : "Door lock drive ",
     "chType_DOOR_RECEIVER_MOD_HO" : "Door drive",
     "chType_DOOR_RECEIVER_MOD_TM" : "Door drive",
@@ -124,6 +134,10 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_WEEK_PROFILE" : "Weekly program",
     "chType_COND_SWITCH_TRANSMITTER_TEMPERATURE_DIFF" : "Connection partner<br/>Differential temperature",
     "chType_THERMALCONTROL_TRANSMIT" : "Connection partner<br/>radiator thermostat",
+
+    "chType_UNIVERSAL_ACTOR_TRANSMITTER_010V" : "Status report<br/>Universal Actuator 0-10 V",
+    "chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V" : "Universal Actuator 0-10 V",
+
     "chType_VIRTUAL_DIMMER" : "Dimmer actuator",
     "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",
     "chType_VIRTUAL_DUAL_WHITE_COLOR" : "Colour channel",

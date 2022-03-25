@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the output voltage is switched on to the specified value.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the output voltage is switched off.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the output voltage alternates between the defined value and &quot;off&quot;.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the output voltage is switched on for the defined duration. In the switch-off delay, the value is lowered slightly as a warning then slowly ramps down to &quot;off&quot;.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",

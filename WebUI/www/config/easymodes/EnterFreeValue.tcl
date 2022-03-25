@@ -300,7 +300,7 @@ proc EnterBrightnessHmIP {profile pref special_input_id ps ps_descr param condAc
   append HTML_PARAMS(separate_$profile) "<table id=\"bright\_$profile\" class=\"ProfileTbl\" style=\"visibility:hidden\">"
   append HTML_PARAMS(separate_$profile) "<tr><td></td></tr><tr><td id=\"param\_$profile\_a\"><textarea id=\"profile\_$profile\_a\" style=\"display:none\">\${BRIGHTNESS_CONTROL}</textarea></td>"
 
-  append HTML_PARAMS(separate_$profile) "<td><input type=\"text\" id=\"$id\" size=\"3\" name=\"$param\" value=\"$vdescr($param)\" style=\"text-align:center\" onchange=\"MD_init('$id', $min, $max);\"> "
+  append HTML_PARAMS(separate_$profile) "<td><input type=\"text\" id=\"$id\" size=\"3\" name=\"$param\" value=\"$vdescr($param)\" style=\"text-align:center\" onchange=\"MD_init('$id', $min, $max);jQuery('\#$idHI').val(this.value)\"> "
   append HTML_PARAMS(separate_$profile) "<input id=\"help_brightness\_$profile\" type=\"button\" name=\"Help\" value=\"Help\" onclick=\"MD_catchBrightness('$url', '$sender_address', '$receiver_address', '$brightness', '$brightnessHas2beConverted', '$paramType', 'true', '$id', $help, '$min $max')\"></td></tr>"
   append HTML_PARAMS(separate_$profile) "<td><input type=\"text\" id=\"$idHI\" size=\"3\" name=\"$paramSCVH\" value=\"$vdescr($param)\" class=\"hidden\" style=\"text-align:center\"> "
 

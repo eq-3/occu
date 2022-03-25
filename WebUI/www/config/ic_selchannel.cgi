@@ -296,11 +296,14 @@ proc put_PreviousStep {} {
       }
     }
 
-    if {[string equal $dev_descr_sender(PARENT_TYPE) "HmIP-MOD-RC8"] == 0} {
-      # This is for all links where the sender is no HmIP-MOD-RC8
-      catch {set description1 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
+    if {[string equal $dev_descr_sender(PARENT_TYPE) "HmIP-MOD-RC8"] == 1} {
+      # This is for all links where the sender is a HmIP-MOD-RC8
+      catch {set description1 "\${lblStandardLink} HmIP-MOD-RC8 - $dev_descr_receiver(TYPE) $extReceiverDescr"}
+    } elseif {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-WUA"] == 1) || ([string equal $dev_descr_receiver(PARENT_TYPE) "ELV-SH-WUA"] == 1)} {
+      catch {set description1 "\${lblStandardLink} \${lblLinkDescrWUA} - $dev_descr_receiver(TYPE) $extReceiverDescr"}
     } else {
-      catch {set description1 "\${lblStandardLink} HmIP-MOD-RC8 $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
+      # Default for all other links
+      catch {set description1 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
     }
     catch {set description2 "\${lblStandardLink} $dev_descr_sender(TYPE) $extSenderDescr - $dev_descr_receiver(TYPE) $extReceiverDescr"}
 

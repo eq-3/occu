@@ -1,0 +1,12 @@
+"description_1" : "<span class=\"translated\">When the water detection sensor is triggered the universal actuator is switched for the desired time into the opposite status (toggle function). If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the water detection sensor is triggered the universal actuator is switched on for the desired time.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the water detection sensor is triggered the universal actuator is switched off for the desired time.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">When the water detection sensor is triggered the output voltage continuously changes in a defined interval between the two values.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">The profile is not active</span>",
+
+"switchMode" : "Switching at",
+
+"subset_1": "Humidity",
+"subset_2": "Water",
+"subset_3": "Humidity or water",
+"subset_4": "Draught",

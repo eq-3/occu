@@ -150,6 +150,21 @@ proc option {type} {
         set options(99999998)  "\${enterValue}"
     }
 
+    "DIM_STEP" {
+        set options(0.05) "5$p"
+        set options(0.10) "10$p"
+        set options(0.20) "20$p"
+        set options(0.30) "30$p"
+        set options(0.40) "40$p"
+        set options(0.50) "50$p"
+        set options(0.60) "60$p"
+        set options(0.70) "70$p"
+        set options(0.80) "80$p"
+        set options(0.90) "90$p"
+        set options(1.005) "\${lastValue}"
+        set options(99999998)  "\${enterValue}"
+    }
+
     "RAW_0_100Percent" {
         set options(0) "0$p"
         set options(10) "10$p"

@@ -122,6 +122,13 @@ HmIPWeeklyProgram = Class.create();
 HmIPWeeklyProgram.prototype = {
   initialize: function (address, ps, psDescr, sessionIsExpert) {
     self = this;
+
+    this.address = address;
+    this.arAddress = this.address.split(":");
+    this.devAddress = this.arAddress[0];
+    this.chn = this.arAddress[1];
+    this.device = DeviceList.getDeviceByAddress(this.devAddress);
+
     virtChnCounterWP = 0;
     modeWP_DELETE = false;
     this.DIMMER = "DIMMER_WEEK_PROFILE";
@@ -132,22 +139,16 @@ HmIPWeeklyProgram.prototype = {
 
     this.ACCESS_TRANSMITTER_HmIP_FWI = "HmIP-FWI";
     this.ACCESS_TRANSCEIVER_HmIP_WKP = "HmIP-WKP";
+    this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
     this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-WKP"]; //DoorLockDrive....
     this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-FWI", "HmIP-WKP"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
 
-    this.address = address;
-    this.arAddress = this.address.split(":");
-    this.devAddress = this.arAddress[0];
-    this.chn = this.arAddress[1];
-
     this.anchor = jQuery("#weeklyProgram_" + this.chn);
 
-    this.device = DeviceList.getDeviceByAddress(this.devAddress);
-
-    // The device is still in the device inbox
+     // The device is still in the device inbox
     if (typeof this.device == "undefined") {
       this.anchor.css({"text-align": "center"});
       this.anchor.html(translateKey("hintSetReadyWeeklyProgram"));
@@ -415,7 +416,18 @@ HmIPWeeklyProgram.prototype = {
 
     // LEVEL
     if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
-      programEntry += (this.chnType == this.DIMMER) ? "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>" : "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
+      // programEntry += (this.chnType == this.DIMMER) ? "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>" : "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
+
+      if (this.chnType == this.DIMMER) {
+        if (this.DIMMER_WEEK_PROFILE_HmIP_WUA == "") {
+          programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>";
+        } else {
+          programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPWUALevel') + "</td>";
+        }
+      } else if (this.chnType == this.SERVO) {
+         programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
+      }
+
     } else if (this.chnType == this.SWITCH) {
       if (!this.isDoorLockDrive) {
         if ((! this.isAccessTransmitterHmIP_FWI) && (! this.isAccessTransceiver_WKP)) {

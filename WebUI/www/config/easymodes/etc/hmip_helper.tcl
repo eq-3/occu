@@ -2593,6 +2593,10 @@ proc getDescription {param {extraparam ""}} {
   set desc(POWERUP_ONTIME_UNIT) "stringTableOnTimeUnit"
   set desc(POWERUP_OFFTIME_UNIT) "stringTableOffTimeUnit"
   set desc(ON_TIME_BASE) "stringTableOnTimeUnit"
+
+  set desc(OFFDELAY_TIME_BASE) "stringTableOffDelayUnit"
+  set desc(ONDELAY_TIME_BASE) "stringTableOnDelayUnit"
+
   set desc(SWITCHING_INTERVAL_BASE) "stringTableSwitchingIntervalBase"
   set desc(TX_MINDELAY_UNIT) "stringTableTxMinDelayUnit"
   set desc(REFERENCE_RUNNING_TIME_BOTTOM_TOP_UNIT) "stringTableTimeBottomTopUnit"

@@ -60,6 +60,16 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmaktor",
     "chType_DIMMER_WEEK_PROFILE" : "Wochenprogramm",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Wochenprogramm",
+
+    "chType_DISPLAY_INPUT_TRANSMITTER_A": "Screen",
+    "chType_DISPLAY_INPUT_TRANSMITTER_B": "Kachel",
+    "chType_DISPLAY_INPUT_TRANSMITTER_C": "<br/>KEY",
+    "chType_DISPLAY_INPUT_TRANSMITTER_D": "UNKNOWN",
+
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A": "Screen",
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B": "Kachel",
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C": "<br/>LEVEL",
+
     "chType_DOOR_LOCK_STATE_TRANSMITTER" : "T%FCrschlossantrieb",
     "chType_DOOR_RECEIVER_MOD_HO" : "Torantrieb",
     "chType_DOOR_RECEIVER_MOD_TM" : "Torantrieb",
@@ -125,6 +135,11 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_WEEK_PROFILE" : "Wochenprogramm",
     "chType_COND_SWITCH_TRANSMITTER_TEMPERATURE_DIFF" : "Verkn%FCpfungspartner<br/>Differenztemperatur",
     "chType_THERMALCONTROL_TRANSMIT" : "Verkn%FCpfungspartner<br/>Heizungsthermostat",
+
+    "chType_UNIVERSAL_ACTOR_TRANSMITTER_010V" : "Statusmitteilung Universalaktor 0-10&nbsp;V",
+    "chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V" : "Universalaktor 0-10&nbsp;V",
+
+
     "chType_VIRTUAL_DIMMER" : "Dimmaktor",
     "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Helligkeitskanal",
     "chType_VIRTUAL_DUAL_WHITE_COLOR" : "Farbkanal",

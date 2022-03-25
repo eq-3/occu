@@ -1,0 +1,13 @@
+"description_1" : "<span class=\"translated\">With a short or long button press the selected MP3 file is played at the defined volume. You can use this for the front door bell, for example.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the button is pressed briefly, the selected MP3 file is played at the defined volume. Pressing and holding the button increases the volume.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the button is pressed briefly, the MP3 file stops being played. Pressing and holding the button decreases the volume.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">When the button is pressed briefly, the selected MP3 file is played at the set volume and switched off in turn. Pressing and holding the button increases or decreases the volume in turn.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+
+
+
+"description_noLong_1" : "<span class=\"translated\">When the button is pressed, the selected MP3 file is played at the defined volume.</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">When the button is pressed, the MP3 file stops being played.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">When the button is pressed, the MP3 file is played at the set volume and switched off in turn.</span><br/><br/>",
+"_description_noLong_4" : "<span class=\"translated\">When the button is pressed, the selected MP3 file is played for the defined time.</span><br/><br/>",
+"description_noLong_4" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",

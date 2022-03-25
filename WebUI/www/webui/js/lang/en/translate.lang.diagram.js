@@ -87,6 +87,10 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeNUMBER_CONCENTRATION_PM_1" : "Quantity concentration PM1.0",
     "diagramValueTypeNUMBER_CONCENTRATION_PM_2_5" : "Quantity concentration PM2.5",
     "diagramValueTypeNUMBER_CONCENTRATION_PM_10" : "Quantity concentration PM10",
+
+    "diagramValueTypeSMOKE_LEVEL" : "Smoke gas detected",
+    "diagramValueTypeDIRT_LEVEL" : "Degree of sensor contamination",
+
     "diagramColorFF0000": "Red",
     "diagramColor00FF00": "Green",
     "diagramColor0000FF": "Blue",

@@ -16,6 +16,7 @@
 "DIM_MAX_LEVEL_mp3" : "<span class=\"translated\">Maximum volume</span>",
 "DIM_MIN_LEVEL" : "<span class=\"translated\">Minimum dim level</span>",
 "DIM_MIN_LEVEL_mp3" : "<span class=\"translated\">Minimum volume</span>",
+"DIM_STEP" : "<span class=\"translated\">Step width</span>",
 "DOWN_DELAY_TIME" : "<span class=\"translated\">Down-delay time</span>",
 "DOWN_LEVEL" : "<span class=\"translated\">Down position</span>",
 "DOWN_TIME" : "<span class=\"translated\">Duration for status &quot;down&quot;</span>",

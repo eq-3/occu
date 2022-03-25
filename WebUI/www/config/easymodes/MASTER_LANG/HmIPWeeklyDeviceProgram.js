@@ -13,6 +13,7 @@ jQuery.extend(true,langJSON, {
     "lblWPBrightness" : "Helligkeit",
     "lblWPServoPos" : "Servoposition",
     "lblWPState" : "Schaltzustand",
+    "lblWPWUALevel" : "Ausgangsspannung",
 
     "lblWPState_Access" : "Schaltzustand/<br/>Zugriffsberechtigung",
     "lblWP_Access" : "Zugriffsberechtigung",
@@ -107,6 +108,7 @@ jQuery.extend(true,langJSON, {
     "lblWPBrightness" : "Brightness",
     "lblWPServoPos" : "Servo position",
     "lblWPState" : "Switching status",
+    "lblWPWUALevel" : "Output voltage",
 
     "lblWPState_Access" : "Switching state/<br/>access authorisation",
     "lblWP_Access" : "Access authorisation",

@@ -1,0 +1,5 @@
+"description_noLong_1" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird die Ausgangsspannung auf den festgelegten Wert eingeschaltet.</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird die Ausgangsspannung ausgeschaltet.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wechselt die Ausgangsspannung zwischen dem festgelegten Wert und &quot;aus&quot;.</span><br/><br/>",
+"description_noLong_4" : "<span class=\"translated\">Die Ausgangsspannung wird durch Bet%E4tigung des Schalters f&uuml;r die festgelegte Zeit eingeschaltet. In der Ausschaltverz&ouml;gerung wird der Pegel zur Vorwarnung leicht abgesenkt, um anschlie&szlig;end langsam bis auf &quot;aus&quot; herunter zu fahren.</span><br/><br/>",
+"description_noLong_5" : "<span class=\"translated\">Die interne Ger&auml;tetaste ist nicht aktiv.</span><br/><br/>",

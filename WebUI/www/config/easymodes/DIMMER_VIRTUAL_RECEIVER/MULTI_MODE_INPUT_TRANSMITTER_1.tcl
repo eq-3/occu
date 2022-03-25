@@ -30,7 +30,7 @@ set PROFILE_1(LONG_CT_RAMPOFF) 0
 set PROFILE_1(LONG_CT_RAMPON) 0
 set PROFILE_1(LONG_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_1(LONG_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_1(LONG_DIM_STEP) 0.050000
+set PROFILE_1(LONG_DIM_STEP) {0.05 range 0.00 - 1.00}
 set PROFILE_1(LONG_JT_OFF) 1
 set PROFILE_1(LONG_JT_OFFDELAY) 2
 set PROFILE_1(LONG_JT_ON) 2
@@ -126,7 +126,7 @@ set PROFILE_2(LONG_CT_RAMPOFF) 0
 set PROFILE_2(LONG_CT_RAMPON) 0
 set PROFILE_2(LONG_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_2(LONG_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_2(LONG_DIM_STEP) 0.050000
+set PROFILE_2(LONG_DIM_STEP) {0.05 range 0.00 - 1.00}
 set PROFILE_2(LONG_JT_OFF) 6
 set PROFILE_2(LONG_JT_OFFDELAY) 5
 set PROFILE_2(LONG_JT_ON) 4
@@ -220,7 +220,7 @@ set PROFILE_3(LONG_CT_RAMPOFF) 0
 set PROFILE_3(LONG_CT_RAMPON) 0
 set PROFILE_3(LONG_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_3(LONG_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_3(LONG_DIM_STEP) 0.050000
+set PROFILE_3(LONG_DIM_STEP) {0.05 range 0.00 - 1.00}
 set PROFILE_3(LONG_JT_OFF) 1
 set PROFILE_3(LONG_JT_OFFDELAY) 5
 set PROFILE_3(LONG_JT_ON) 4
@@ -515,6 +515,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+    set param LONG_DIM_STEP
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_STEP}</td><td>"
+      option DIM_STEP
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
+
     set param LONG_OUTPUT_BEHAVIOUR
     if {[info exists ps($param)] == 1} {
       incr pref
@@ -584,6 +594,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    set param LONG_DIM_STEP
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_STEP}</td><td>"
+      option DIM_STEP
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
 
     set param LONG_OUTPUT_BEHAVIOUR
     if {[info exists ps($param)] == 1} {
@@ -691,6 +711,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    set param LONG_DIM_STEP
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_STEP}</td><td>"
+      option DIM_STEP
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
 
     set param LONG_OUTPUT_BEHAVIOUR
     if {[info exists ps($param)] == 1} {

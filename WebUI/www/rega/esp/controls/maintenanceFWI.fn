@@ -43,7 +43,7 @@ function ::CreateMaintenance()
   string valBlockedTemporary = "${lblNo}";
 
   WriteLine("<td>");
-    WriteLine("<table align='center'>");
+    WriteLine("<table align='_center'>");
 
       WriteLine("<tr>");
 
@@ -78,7 +78,14 @@ function ::CreateMaintenance()
           integer codeState = objCodeState.Value();
           string curState = "--";
           if (codeState == 0) {curState = "${codeIdle}";}
-          if (codeState == 1) {curState = "${lblUser}: "#objCodeID.Value() + 1;}
+          ! SPHM-909
+          if (codeState == 1) {
+            if ((objCodeID.Value() == 21) || (objCodeID.Value() == "21")) {
+              curState = "${lblBellButton}";
+            } else {
+              curState = objCodeID.Value();
+            }
+          }
           if (codeState == 2) {curState = "${codeUnKnownCodeIDReceived}";}
           if (codeState == 3) {curState = "${codeLearnModeForCodeIDStarted}";}
           if (codeState == 4) {curState = "${codeLearnModeExitForCodeWithSuccess}";}
@@ -157,12 +164,12 @@ function ::CreateMaintenance()
       WriteLine("<tr>");
         WriteLine("<td style='text-align:center;'>");
           ! btn code command
-          WriteLine("<div id='anchorCodeCommand_"#chnId#"' class='CLASS02551 ControlBtnOff' style='margin: 0 auto;'>${codeManagement}</div>");
+          WriteLine("<div id='anchorCodeCommand_"#chnId#"' class='CLASS02551c ControlBtnOff' style='margin: 0 auto;'>${codeManagement}</div>");
         WriteLine("</td>");
 
         WriteLine("<td style='text-align:center;'>");
           ! btn clear error
-          WriteLine("<div id='anchorClearError_"#chnId#"' class='CLASS02551 ControlBtnOff' style='margin: 0 auto;'>${clearStatusMessages}</div>");
+          WriteLine("<div id='anchorClearError_"#chnId#"' class='CLASS02551c ControlBtnOff' style='margin: 0 auto;'>${clearStatusMessages}</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
 

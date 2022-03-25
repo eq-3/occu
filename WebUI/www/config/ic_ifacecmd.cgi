@@ -438,7 +438,7 @@ proc cmd_firmware_update {} {
       puts "ShowInfoMsg(translateKey('$userHint'));"
       
       # This is for the HmIP-SWSD
-      if {[string equal $devDescr(TYPE) "HmIP-SWSD"] == 1} {
+      if {([string equal $devDescr(TYPE) "HmIP-SWSD"] == 1) || ([string equal $devDescr(TYPE) "HmIP-SWSD-2"] == 1)} {
         puts "var iface = \"$iface\","
         puts "address = \"$address\";"
         puts "var devDescr = homematic(\"Interface.getDeviceDescription\", {\"interface\": iface, \"address\": address});"
