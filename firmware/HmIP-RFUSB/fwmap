@@ -2,4 +2,4 @@
 
 #Coprozessor
 CCU2			hmip_coprocessor_update.eq3				2.8.6		#HmIP Only CoProzessor HmIP-RFUSB
-#CCU2			dualcopro_update_blhmip-4.2.14.eq3			4.2.14		# Dual CoProzessor HmIP-RFUSB
+#CCU2			dualcopro_update_blhmip-4.4.18.eq3			4.4.18		# Dual CoProzessor HmIP-RFUSB
