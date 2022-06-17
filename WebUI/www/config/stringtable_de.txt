@@ -29,6 +29,8 @@ ACCESS_TRANSCEIVER|STATE=FALSE	${stringTableAccessTransceiverStateFalse}
 ACCESS_TRANSCEIVER|STATE=TRUE	${stringTableAccessTransceiverStateTrue}
 ACCESS_TRANSCEIVER|ACCESS_AUTHORIZATION=ENABLE	${stringTableAccessTransceiverAccessAuthorizationTrue}
 ACCESS_TRANSCEIVER|ACCESS_AUTHORIZATION=DISABLE	${stringTableAccessTransceiverAccessAuthorizationFalse}
+ACCESS_TRANSCEIVER|PRESS_LOCK	${stringTableKeyAccessTransceiverPressLock}
+ACCESS_TRANSCEIVER|PRESS_UNLOCK	${stringTableKeyAccessTransceiverPressUnLock}
 
 ACOUSTIC_ALARM_ACTIVE=FALSE	${stringTableAcousticAlarmActiveFalse}
 ACOUSTIC_ALARM_ACTIVE=TRUE	${stringTableAcousticAlarmActiveTrue}
@@ -392,14 +394,14 @@ CLIMATECONTROL_VENT_DRIVE|ERROR=VALVE_DRIVE_LOOSE	${stringTableClimateControlVen
 CLIMATECONTROL_VENT_DRIVE|VALVE_ERROR_POSITION	${stringTableClimateControlVentDriveValveErrorPos}
 CLIMATECONTROL_VENT_DRIVE|VALVE_OFFSET_VALUE	${stringTableClimateControlVentDriveValveOffsetVal}
 CLIMATECONTROL_VENT_DRIVE|VALVE_STATE	${stringTableClimateControlVentDriveValveState}
-COLOR=BLACK	${colorBLACK}
-COLOR=BLUE	${colorBLUE}
-COLOR=GREEN	${colorGREEN}
-COLOR=TURQUOISE	${colorTURQUOISE}
-COLOR=RED	${colorRED}
-COLOR=PURPLE	${colorPURPLE}
-COLOR=YELLOW	${colorYELLOW}
-COLOR=WHITE	${colorWHITE}
+COLOR=BLACK	${optionColorBLACK}
+COLOR=BLUE	${optionColorBLUE}
+COLOR=GREEN	${optionColorGREEN}
+COLOR=TURQUOISE	${optionColorTURQUOISE}
+COLOR=RED	${optionColorRED}
+COLOR=PURPLE	${optionColorPURPLE}
+COLOR=YELLOW	${optionColorYELLOW}
+COLOR=WHITE	${optionColorWHITE}
 COLOR=LEVEL	${stringTableBrightness}
 COLOR=OLD_VALUE	${stringTableColorOldValue}
 COLOR=DO_NOT_CARE	${stringTableColorNoChange}
@@ -418,8 +420,8 @@ COLOR_BEHAVIOUR=OLD_VALUE	${stringTableColorBehaviourOldValue}
 COLOR_BEHAVIOUR=DO_NOT_CARE	${stringTableColorBehaviourDoNotCare}
 COLOR_BEHAVIOUR_STATUS=NORMAL	${stringTableColorBehaviourStatus}: ${lblNormal}
 COLOR_BEHAVIOUR_STATUS=UNKNOWN	${stringTableColorBehaviourStatus}: ${lblUnknown}
-COLOR_STATUS=NORMAL	${colorStateNormal}
-COLOR_STATUS=UNKNOWN	${colorStateUnknown}
+COLOR_STATUS=NORMAL	${optionColorStateNormal}
+COLOR_STATUS=UNKNOWN	${optionColorStateUnknown}
 COMBINED_PARAMETER	${stringTableSubmit}
 COMFORT_MODE	${stringTableClimateControlRTTransceiverComfortMode}
 COMMUNICATION_REPORTING	${stringTableCommunicatingReporting}
@@ -812,6 +814,7 @@ ERROR_TEMP_OR_HUMIDITY_MEASUREMENT=TRUE	${stringTableErrorTempOrHumidityMeasurem
 ERROR_UNDERVOLTAGE	${stringTableErrorUndervoltageTrue}
 ERROR_UNDERVOLTAGE=FALSE	${stringTableErrorUndervoltageFalse}
 ERROR_UNDERVOLTAGE=TRUE	${stringTableErrorUndervoltageTrue}
+ERROR_UPDATE	${stringTableErrorUpdateTrue}
 ERROR_UPDATE=TRUE	${stringTableErrorUpdateTrue}
 ERROR_UPDATE=FALSE	${stringTableErrorUpdateFalse}
 ERROR_WIND_COMMUNICATION=FALSE	${stringTableErrorWindCommunicationFalse}
@@ -1504,6 +1507,7 @@ ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=TILTED	${stringTableRHSMsgPosTilted}
 ROTARY_HANDLE_TRANSCEIVER|STATE=CLOSED	${stringTableRHSStateClosed}
 ROTARY_HANDLE_TRANSCEIVER|STATE=OPEN	${stringTableRHSStateOpen}
 ROTARY_HANDLE_TRANSCEIVER|STATE=TILTED	${stringTableRHSStateTilted}
+ROTARY_HANDLE_TRANSCEIVER|STATE=UNKNOWN	${stringTableRHSStateUnknown}
 ROUTER_MODULE_ENABLED	${stringTableRouterModuleEnabled}
 RS485_IDLE_TIME	${stringTableRS485IdleTime}
 
@@ -1989,8 +1993,13 @@ WEEK_PROGRAM_TARGET_CHANNEL_LOCKS	${stringTableWeekProgramTargetChannelLocks}
 WEEK_PROGRAM_TARGET_CHANNEL_LOCK=MANU_MODE	${stringTableWeekProgramTargetChannelLockManu}
 WEEK_PROGRAM_TARGET_CHANNEL_LOCK=AUTO_MODE_WITH_RESET	${stringTableWeekProgramTargetChannelLockAutoReset}
 WEEK_PROGRAM_TARGET_CHANNEL_LOCK=AUTO_MODE_WITHOUT_RESET	${stringTableWeekProgramTargetChannelLockAuto}
-
 WHITE	${stringTableColorTemperature}
+
+WINDOW_DRIVE_RECEIVER	${stringTableDoorWindowDriveReceiverTitle}
+
+WINDOW_DRIVE_RECEIVER|STOP	${stringTableDoorCommandStop}
+WINDOW_DRIVE_RECEIVER|LEVEL=NO_VENTILATION	${stringTableWindowStateClosed}
+WINDOW_DRIVE_RECEIVER|LEVEL=VENTILATION	${stringTableWindowStateOpen}
 WINDOW_OPEN_REPORTING	${stringTableWindowOpenReporting}
 WINDOW_OPEN_REPORTING=FALSE	${stringTableWindowOpenReportingFalse}
 WINDOW_OPEN_REPORTING=TRUE	${stringTableWindowOpenReportingTrue}

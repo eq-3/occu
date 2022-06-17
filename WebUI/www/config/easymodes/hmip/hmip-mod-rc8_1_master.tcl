@@ -1,7 +1,8 @@
 #!/bin/tclsh
 
-source [file join /www/config/easymodes/em_common.tcl]
-source [file join /www/config/easymodes/etc/hmipMOD-RC8.tcl]
+
+sourceOnce [file join /www/config/easymodes/em_common.tcl]
+sourceOnce [file join /www/config/easymodes/etc/hmipMOD-RC8.tcl]
 
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {

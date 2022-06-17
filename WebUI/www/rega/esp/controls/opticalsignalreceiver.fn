@@ -62,7 +62,7 @@ function ::CreateOpticalSignalReceiver()
       WriteLine("<tr>");
         if (oColor) {
           ! string listColor = "black\tblue\tgreen\tturquoise\tred\tpurple\tyellow\twhite";
-          string listColor = "${lblOff}\t${colorBLUE}\t${colorGREEN}\t${colorTURQUOISE}\t${colorRED}\t${colorPURPLE}\t${colorYELLOW}\t${colorWHITE}";
+          string listColor = "${lblOff}\t${optionColorBLUE}\t${optionColorGREEN}\t${optionColorTURQUOISE}\t${optionColorRED}\t${optionColorPURPLE}\t${optionColorYELLOW}\t${optionColorWHITE}";
           string sColor;
           WriteLine("<td style='_background-color:#89989b'>");
             WriteLine("<div class='ControlBtnOff'>");
@@ -88,7 +88,7 @@ function ::CreateOpticalSignalReceiver()
         }
 
         if (oBehaviour) {
-          string listBehaviour = "${optionColorOFF}\t${optionColorON}\t${blinkSlow}\t${blinkMiddle}\t${blinkFast}\t${blinkFlashSlow}\t${blinkFlashMiddle}\t${blinkFlashFast}\t${blinkBillowSlow}\t${blinkBillowMiddle}\t${blinkBillowFast}";
+          string listBehaviour = "${optionColorOFF}\t${optionColorON}\t${optionBlinkSlow}\t${optionBlinkMiddle}\t${optionBlinkFast}\t${optionBlinkFlashSlow}\t${optionBlinkFlashMiddle}\t${optionBlinkFlashFast}\t${optionBlinkBillowSlow}\t${optionBlinkBillowMiddle}\t${optionBlinkBillowFast}";
           string sBehaviour;
           WriteLine("<td colspan='2' style='_background-color:#89989b'>");
             WriteLine("<div class='ControlBtnOff'>");

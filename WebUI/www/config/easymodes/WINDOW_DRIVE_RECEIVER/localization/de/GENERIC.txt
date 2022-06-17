@@ -1,0 +1,5 @@
+"switch_off" : "Fenster schlie%DFen",
+"switch_on" : "Fenster %F6ffnen",
+"switch_on_off" : "Fenster %F6ffnen/schlie%DFen",
+"switch_toggle" : "Toggle",
+

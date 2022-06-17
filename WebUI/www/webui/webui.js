@@ -561,6 +561,12 @@ DEV_PATHS["HM-LC-Bl1-FM"] = new Object();
 DEV_PATHS["HM-LC-Bl1-FM"]["50"] = "/config/img/devices/50/7_hm-lc-bl1-fm_thumb.png";
 DEV_PATHS["HM-LC-Bl1-FM"]["250"] = "/config/img/devices/250/7_hm-lc-bl1-fm.png";
 DEV_HIGHLIGHT["HM-LC-Bl1-FM"] = new Object();
+DEV_LIST.push('HmIP-eTRV-CL');
+DEV_DESCRIPTION["HmIP-eTRV-CL"] = "TRV-CL";
+DEV_PATHS["HmIP-eTRV-CL"] = new Object();
+DEV_PATHS["HmIP-eTRV-CL"]["50"] = "/config/img/devices/50/224_hmip-etrv-cl_thumb.png";
+DEV_PATHS["HmIP-eTRV-CL"]["250"] = "/config/img/devices/250/224_hmip-etrv-cl.png";
+DEV_HIGHLIGHT["HmIP-eTRV-CL"] = new Object();
 DEV_LIST.push('HM-LC-Sw1PBU-FM');
 DEV_DESCRIPTION["HM-LC-Sw1PBU-FM"] = "HM-LC-Sw1PBU-FM";
 DEV_PATHS["HM-LC-Sw1PBU-FM"] = new Object();
@@ -1420,6 +1426,12 @@ DEV_PATHS["HmIP-SMI55"]["250"] = "/config/img/devices/250/168_hmip-smi55.png";
 DEV_HIGHLIGHT["HmIP-SMI55"] = new Object();
 DEV_HIGHLIGHT["HmIP-SMI55"]["2"] = [4, 0.540, 0.188, 0.04, 0.044];
 DEV_HIGHLIGHT["HmIP-SMI55"]["1"] = [4, 0.540, 0.820, 0.04, 0.044];
+DEV_LIST.push('HmIP-MOD-WD-VK');
+DEV_DESCRIPTION["HmIP-MOD-WD-VK"] = "HmIP-MOD-WD-VK";
+DEV_PATHS["HmIP-MOD-WD-VK"] = new Object();
+DEV_PATHS["HmIP-MOD-WD-VK"]["50"] = "/config/img/devices/50/223_hmip-mod-wd-vk_thumb.png";
+DEV_PATHS["HmIP-MOD-WD-VK"]["250"] = "/config/img/devices/250/223_hmip-mod-wd-vk.png";
+DEV_HIGHLIGHT["HmIP-MOD-WD-VK"] = new Object();
 DEV_LIST.push('HM-LC-Sw4-DR');
 DEV_DESCRIPTION["HM-LC-Sw4-DR"] = "HM-LC-Sw4-DR";
 DEV_PATHS["HM-LC-Sw4-DR"] = new Object();
@@ -3017,6 +3029,15 @@ DEV_PATHS["HmIP-PDT"] = new Object();
 DEV_PATHS["HmIP-PDT"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
 DEV_PATHS["HmIP-PDT"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
 DEV_HIGHLIGHT["HmIP-PDT"] = new Object();
+DEV_LIST.push('HmIP-BROLL-2');
+DEV_DESCRIPTION["HmIP-BROLL-2"] = "HmIP-BROLL-2";
+DEV_PATHS["HmIP-BROLL-2"] = new Object();
+DEV_PATHS["HmIP-BROLL-2"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BROLL-2"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HmIP-BROLL-2"] = new Object();
+DEV_HIGHLIGHT["HmIP-BROLL-2"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BROLL-2"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BROLL-2"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('HM-Sec-WDS');
 DEV_DESCRIPTION["HM-Sec-WDS"] = "HM-Sec-WDS";
 DEV_PATHS["HM-Sec-WDS"] = new Object();
@@ -3777,6 +3798,12 @@ DEV_PATHS["ELV-SH-WSC"] = new Object();
 DEV_PATHS["ELV-SH-WSC"]["50"] = "/config/img/devices/50/220_hmip-wsc_thumb.png";
 DEV_PATHS["ELV-SH-WSC"]["250"] = "/config/img/devices/250/220_hmip-wsc.png";
 DEV_HIGHLIGHT["ELV-SH-WSC"] = new Object();
+DEV_LIST.push('HmIP-WTH-1');
+DEV_DESCRIPTION["HmIP-WTH-1"] = "HmIP-WTH-2";
+DEV_PATHS["HmIP-WTH-1"] = new Object();
+DEV_PATHS["HmIP-WTH-1"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HmIP-WTH-1"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HmIP-WTH-1"] = new Object();
 DEV_LIST.push('HM-LC-Dim1T-CV-2');
 DEV_DESCRIPTION["HM-LC-Dim1T-CV-2"] = "HM-LC-Dim1T-CV";
 DEV_PATHS["HM-LC-Dim1T-CV-2"] = new Object();
@@ -3818,6 +3845,15 @@ DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"] = new Object();
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R2_thumb.png";
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R2.png";
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R2"] = new Object();
+DEV_LIST.push('HmIP-BBL-2');
+DEV_DESCRIPTION["HmIP-BBL-2"] = "HmIP-BBL-2";
+DEV_PATHS["HmIP-BBL-2"] = new Object();
+DEV_PATHS["HmIP-BBL-2"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BBL-2"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HmIP-BBL-2"] = new Object();
+DEV_HIGHLIGHT["HmIP-BBL-2"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL-2"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL-2"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('HmIP-STHO-A');
 DEV_DESCRIPTION["HmIP-STHO-A"] = "HmIP-STHO";
 DEV_PATHS["HmIP-STHO-A"] = new Object();
@@ -4084,6 +4120,8 @@ elvST['ACCESS_TRANSCEIVER|STATE=FALSE'] = '${stringTableAccessTransceiverStateFa
 elvST['ACCESS_TRANSCEIVER|STATE=TRUE'] = '${stringTableAccessTransceiverStateTrue}';
 elvST['ACCESS_TRANSCEIVER|ACCESS_AUTHORIZATION=ENABLE'] = '${stringTableAccessTransceiverAccessAuthorizationTrue}';
 elvST['ACCESS_TRANSCEIVER|ACCESS_AUTHORIZATION=DISABLE'] = '${stringTableAccessTransceiverAccessAuthorizationFalse}';
+elvST['ACCESS_TRANSCEIVER|PRESS_LOCK'] = '${stringTableKeyAccessTransceiverPressLock}';
+elvST['ACCESS_TRANSCEIVER|PRESS_UNLOCK'] = '${stringTableKeyAccessTransceiverPressUnLock}';
 elvST['ACOUSTIC_ALARM_ACTIVE=FALSE'] = '${stringTableAcousticAlarmActiveFalse}';
 elvST['ACOUSTIC_ALARM_ACTIVE=TRUE'] = '${stringTableAcousticAlarmActiveTrue}';
 elvST['OPTICAL_ALARM_ACTIVE=FALSE'] = '${stringTableOpticalAlarmActiveFalse}';
@@ -4439,14 +4477,14 @@ elvST['CLIMATECONTROL_VENT_DRIVE|ERROR=VALVE_DRIVE_LOOSE'] = '${stringTableClima
 elvST['CLIMATECONTROL_VENT_DRIVE|VALVE_ERROR_POSITION'] = '${stringTableClimateControlVentDriveValveErrorPos}';
 elvST['CLIMATECONTROL_VENT_DRIVE|VALVE_OFFSET_VALUE'] = '${stringTableClimateControlVentDriveValveOffsetVal}';
 elvST['CLIMATECONTROL_VENT_DRIVE|VALVE_STATE'] = '${stringTableClimateControlVentDriveValveState}';
-elvST['COLOR=BLACK'] = '${colorBLACK}';
-elvST['COLOR=BLUE'] = '${colorBLUE}';
-elvST['COLOR=GREEN'] = '${colorGREEN}';
-elvST['COLOR=TURQUOISE'] = '${colorTURQUOISE}';
-elvST['COLOR=RED'] = '${colorRED}';
-elvST['COLOR=PURPLE'] = '${colorPURPLE}';
-elvST['COLOR=YELLOW'] = '${colorYELLOW}';
-elvST['COLOR=WHITE'] = '${colorWHITE}';
+elvST['COLOR=BLACK'] = '${optionColorBLACK}';
+elvST['COLOR=BLUE'] = '${optionColorBLUE}';
+elvST['COLOR=GREEN'] = '${optionColorGREEN}';
+elvST['COLOR=TURQUOISE'] = '${optionColorTURQUOISE}';
+elvST['COLOR=RED'] = '${optionColorRED}';
+elvST['COLOR=PURPLE'] = '${optionColorPURPLE}';
+elvST['COLOR=YELLOW'] = '${optionColorYELLOW}';
+elvST['COLOR=WHITE'] = '${optionColorWHITE}';
 elvST['COLOR=LEVEL'] = '${stringTableBrightness}';
 elvST['COLOR=OLD_VALUE'] = '${stringTableColorOldValue}';
 elvST['COLOR=DO_NOT_CARE'] = '${stringTableColorNoChange}';
@@ -4465,8 +4503,8 @@ elvST['COLOR_BEHAVIOUR=OLD_VALUE'] = '${stringTableColorBehaviourOldValue}';
 elvST['COLOR_BEHAVIOUR=DO_NOT_CARE'] = '${stringTableColorBehaviourDoNotCare}';
 elvST['COLOR_BEHAVIOUR_STATUS=NORMAL'] = '${stringTableColorBehaviourStatus}: ${lblNormal}';
 elvST['COLOR_BEHAVIOUR_STATUS=UNKNOWN'] = '${stringTableColorBehaviourStatus}: ${lblUnknown}';
-elvST['COLOR_STATUS=NORMAL'] = '${colorStateNormal}';
-elvST['COLOR_STATUS=UNKNOWN'] = '${colorStateUnknown}';
+elvST['COLOR_STATUS=NORMAL'] = '${optionColorStateNormal}';
+elvST['COLOR_STATUS=UNKNOWN'] = '${optionColorStateUnknown}';
 elvST['COMBINED_PARAMETER'] = '${stringTableSubmit}';
 elvST['COMFORT_MODE'] = '${stringTableClimateControlRTTransceiverComfortMode}';
 elvST['COMMUNICATION_REPORTING'] = '${stringTableCommunicatingReporting}';
@@ -4849,6 +4887,7 @@ elvST['ERROR_TEMP_OR_HUMIDITY_MEASUREMENT=TRUE'] = '${stringTableErrorTempOrHumi
 elvST['ERROR_UNDERVOLTAGE'] = '${stringTableErrorUndervoltageTrue}';
 elvST['ERROR_UNDERVOLTAGE=FALSE'] = '${stringTableErrorUndervoltageFalse}';
 elvST['ERROR_UNDERVOLTAGE=TRUE'] = '${stringTableErrorUndervoltageTrue}';
+elvST['ERROR_UPDATE'] = '${stringTableErrorUpdateTrue}';
 elvST['ERROR_UPDATE=TRUE'] = '${stringTableErrorUpdateTrue}';
 elvST['ERROR_UPDATE=FALSE'] = '${stringTableErrorUpdateFalse}';
 elvST['ERROR_WIND_COMMUNICATION=FALSE'] = '${stringTableErrorWindCommunicationFalse}';
@@ -5513,6 +5552,7 @@ elvST['ROTARY_HANDLE_TRANSCEIVER|MSG_FOR_POS_C=TILTED'] = '${stringTableRHSMsgPo
 elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=CLOSED'] = '${stringTableRHSStateClosed}';
 elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=OPEN'] = '${stringTableRHSStateOpen}';
 elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=TILTED'] = '${stringTableRHSStateTilted}';
+elvST['ROTARY_HANDLE_TRANSCEIVER|STATE=UNKNOWN'] = '${stringTableRHSStateUnknown}';
 elvST['ROUTER_MODULE_ENABLED'] = '${stringTableRouterModuleEnabled}';
 elvST['RS485_IDLE_TIME'] = '${stringTableRS485IdleTime}';
 elvST['RSSI_DEVICE'] = '${stringTableRSSIDevice}';
@@ -5980,6 +6020,10 @@ elvST['WEEK_PROGRAM_TARGET_CHANNEL_LOCK=MANU_MODE'] = '${stringTableWeekProgramT
 elvST['WEEK_PROGRAM_TARGET_CHANNEL_LOCK=AUTO_MODE_WITH_RESET'] = '${stringTableWeekProgramTargetChannelLockAutoReset}';
 elvST['WEEK_PROGRAM_TARGET_CHANNEL_LOCK=AUTO_MODE_WITHOUT_RESET'] = '${stringTableWeekProgramTargetChannelLockAuto}';
 elvST['WHITE'] = '${stringTableColorTemperature}';
+elvST['WINDOW_DRIVE_RECEIVER'] = '${stringTableDoorWindowDriveReceiverTitle}';
+elvST['WINDOW_DRIVE_RECEIVER|STOP'] = '${stringTableDoorCommandStop}';
+elvST['WINDOW_DRIVE_RECEIVER|LEVEL=NO_VENTILATION'] = '${stringTableWindowStateClosed}';
+elvST['WINDOW_DRIVE_RECEIVER|LEVEL=VENTILATION'] = '${stringTableWindowStateOpen}';
 elvST['WINDOW_OPEN_REPORTING'] = '${stringTableWindowOpenReporting}';
 elvST['WINDOW_OPEN_REPORTING=FALSE'] = '${stringTableWindowOpenReportingFalse}';
 elvST['WINDOW_OPEN_REPORTING=TRUE'] = '${stringTableWindowOpenReportingTrue}';
@@ -9612,7 +9656,10 @@ Channel = Class.create({
     window.setTimeout(function() {delete virtChCounter;},15000); // Fallback to ensure this global var is being deleted after not in use anymore.
 
 
-    if ((device.deviceType.description.indexOf("HmIPW-DRBL4") != -1)  || (device.deviceType.description.indexOf("HmIP-DRBLI4") != -1)) {
+    if ((device.deviceType.description.indexOf("HmIPW-DRBL4") != -1)
+      || (device.deviceType.description.indexOf("HmIP-DRBLI4") != -1)
+      || (device.deviceType.description.indexOf("HmIP-BBL-2") != -1)
+    ) {
       if (chType.indexOf("BLIND_TRANSMITTER") != -1 || chType.indexOf("BLIND_VIRTUAL_RECEIVER") != -1) {
         if (typeof devToConfigure != "undefined" || typeof blindChAddress == "undefined" || blindChAddress != devAddress) {
           blindChAddress = devAddress;
@@ -9776,7 +9823,11 @@ Channel = Class.create({
   },
 
   m_setWiredBlind: function() {
-    if (((this.typeDescription.indexOf("HmIPW-") != -1) && (this.channelType.indexOf("BLIND_") != -1)) || this.typeDescription.toLocaleLowerCase() == "hmip-drbli4" ) {
+    if (((this.typeDescription.indexOf("HmIPW-") != -1) && (this.channelType.indexOf("BLIND_") != -1))
+      || (this.typeDescription.toLocaleLowerCase() == "hmip-drbli4")
+      || (this.typeDescription.toLocaleLowerCase() == "hmip-bbl-2")
+      ) {
+
       if (this.channelType.indexOf("BLIND_WEEK_PROFILE") == -1) {
         var curType = "";
 
@@ -14787,21 +14838,21 @@ StatusDisplayDialog = Class.create({
     var options = "";
     options += "<option value='-1'>"+translateKey("stringTableNotUsed")+"</option>";
     for (var loop = 0; loop <= 19; loop++) {
-      options += "<option value='"+loop+"'>"+ translateKey("statusDisplayOptionText")+ " " +(loop + 1)+"</option>";
+      options += "<option value='"+loop+"'>"+ translateKey("optionStatusDisplayText")+ " " +(loop + 1)+"</option>";
     }
-    options += "<option value='99'>"+translateKey("statusDisplayOptionFreeText")+"</option>";
+    options += "<option value='99'>"+translateKey("optionStatusDisplayFreeText")+"</option>";
     return options;
   },
 
   // Creates the options for the color selector
   _getColorOptions: function() {
     var arColors =[
-      translateKey("statusDisplayOptionWhite"),
-      translateKey("statusDisplayOptionRed"),
-      translateKey("statusDisplayOptionOrange"),
-      translateKey("statusDisplayOptionYellow"),
-      translateKey("statusDisplayOptionGreen"),
-      translateKey("statusDisplayOptionBlue")
+      translateKey("optionStatusDisplayWhite"),
+      translateKey("optionStatusDisplayRed"),
+      translateKey("optionStatusDisplayOrange"),
+      translateKey("optionStatusDisplayYellow"),
+      translateKey("optionStatusDisplayGreen"),
+      translateKey("optionStatusDisplayBlue")
     ];
 
     var options = "";
@@ -15627,8 +15678,8 @@ StatusDisplayDialogAcousticEPaper = Class.create({
 
   _getBgColorElm: function(no) {
     var html = "<select class='centerSelect' id='bgColor_"+no+"'>";
-      html += "<option value='WHITE'>"+translateKey('colorWHITE')+"</option>";
-      html += "<option value='BLACK'>"+translateKey('colorBLACK_A')+"</option>";
+      html += "<option value='WHITE'>"+translateKey('optionColorWHITE')+"</option>";
+      html += "<option value='BLACK'>"+translateKey('optionColorBLACK_A')+"</option>";
       // html += "<option value='RED'>"+translateKey('colorRED')+"</option>";
     html += "</select>";
     return html;
@@ -15636,8 +15687,8 @@ StatusDisplayDialogAcousticEPaper = Class.create({
 
   _getTextColorElm: function(no) {
     var html = "<select class='centerSelect' id='textColor_"+no+"'>";
-      html += "<option value='WHITE'>"+translateKey('colorWHITE')+"</option>";
-      html += "<option value='BLACK' selected>"+translateKey('colorBLACK_A')+"</option>";
+      html += "<option value='WHITE'>"+translateKey('optionColorWHITE')+"</option>";
+      html += "<option value='BLACK' selected>"+translateKey('optionColorBLACK_A')+"</option>";
      // html += "<option value='RED'>"+translateKey('colorRED')+"</option>";
     html += "</select>";
     return html;
@@ -19383,6 +19434,8 @@ SwitchCombinedParamDialog = Class.create({
     this.chnAddress = chnAddress;
     this.initValue = value;
 
+    this.windowDrive = "HmIP-MOD-WD-VK";
+
     this.arNoOntimeAvailable = []; // here we can add devices with Value and Unit instead of Ontime in seconds
 
     var dialog = document.createElement("div");
@@ -19440,6 +19493,10 @@ SwitchCombinedParamDialog = Class.create({
     this.initDialog();
   },
 
+  _deviceIsWindowDrive: function() {
+    return (this.deviceType == this.windowDrive) ? true : false;
+  },
+
   _getOnTimeVal: function(val, unit) {
     var result;
 
@@ -19490,9 +19547,18 @@ SwitchCombinedParamDialog = Class.create({
 
       if (this.isOntimeAvailable()) {
         if ((this.chkBoxTimeLimitElm.prop("checked") == false) || (durationValue == 0) || (durationValue == 31)) {
-          result = "S=" + state;
+          if (! this._deviceIsWindowDrive()) {
+            result = "S=" + state;
+          } else {
+            result = "VL=" + state;
+          }
+
         } else {
-          result = "S=" + state + ",OT=" + this._getOnTimeVal(durationValue, durationUnit);
+          if (! this._deviceIsWindowDrive()) {
+            result = "S=" + state + ",OT=" + this._getOnTimeVal(durationValue, durationUnit);
+          } else {
+            result = "VL=" + state + ",OT=" + this._getOnTimeVal(durationValue, durationUnit);
+          }
         }
       } else {
         result = "S=" + state + ",DV=" + durationValue + ",DU=" + durationUnit;
@@ -30987,7 +31053,10 @@ getExtendedDescription = function(oChannelDescr) {
     result = translateKey("chType_MULTI_MODE_INPUT_TRANSMITTER" + typeExt);
   }
 
-  if (((deviceType.indexOf("HmIPW-") != -1) && (chType.indexOf("BLIND_") != -1)) || (deviceType.toLowerCase() == "hmip-drbli4")) {
+  if (((deviceType.indexOf("HmIPW-") != -1) && (chType.indexOf("BLIND_") != -1))
+    || (deviceType.toLowerCase() == "hmip-drbli4")
+    || (deviceType.toLowerCase() == "hmip-bbl-2")
+    ) {
 
     if (chType == "BLIND_WEEK_PROFILE") {
       result = translateKey("chType_BLIND_WEEK_PROFILE");
@@ -31407,7 +31476,73 @@ setNewDevicePos2SystemPos = function(oDevice) {
     }
   });
 };
-/**
+
+setColorWebUI = function() {
+  var colorKeys = [
+    "background",
+    "activeBackground",
+    "contentBackground",
+    "white"
+  ];
+
+  var counter = 0,
+    copyFile = 0;
+
+  var modifiyColorMap = function () {
+    copyFile = ((counter + 1) == dlg.key.length) ? 1 : 0;
+    homematic("WebUI.setWebUIColors", {"key": colorKeys[counter], "color": dlg.key[counter], "cpFile" : copyFile}, function (result) {
+      counter++;
+      if (counter == colorKeys.length) {
+        window.location.reload();
+      } else {
+        modifiyColorMap();
+      }
+    });
+  };
+
+  var html = "<table>";
+  jQuery.each(colorKeys, function(index, val) {
+    html += "<tr><td>"+val+"</td><td><input id='colorPicker_" + val +"' class='_hidden' size='5'/></td></tr>";
+  });
+
+  html += "</table>";
+
+  dlg = new YesNoDialog(translateKey("SetWebUIScheme"), html, function(result) {
+    if ((result == YesNoDialog.RESULT_YES)) {
+      modifiyColorMap();
+    }
+  }, "html");
+
+  dlg.key = [];
+  dlg.btnYesHide();
+  dlg.btnTextNo(translateKey("btnCancel"));
+  dlg.btnTextYes(translateKey("btnOk"));
+
+  dlg.run = function() {
+    jQuery.each(colorKeys, function(index, val) {
+      jQuery("#colorPicker_"+val).spectrum({
+        preferredFormat: 'hex',
+        //showInput: true,
+        color: WebUI.getColor(val),
+        //showPalette: true,
+        cancelText: translateKey('btnCancel'),
+        chooseText: translateKey('btnOk'),
+
+        show: function () {
+          jQuery("#colorPicker_" + val).val(WebUI.getColor(val));
+          dlg.btnYesHide();
+        },
+        hide: function (color) {
+          dlg.changeColor = true;
+          dlg.btnYesShow();
+          dlg.key[index] = color.toHexString();
+        }
+      });
+    });
+  };
+  dlg.run();
+  dlg.resetHeight();
+};/**
  * Created by grobelnik on 01.08.2016.
  */
 
@@ -37164,8 +37299,8 @@ iseHmIPWeeklyProgram.prototype = {
     this.chAddress = this.opts.chnAddress;
 
     this.wiegandInterface = (this.isDeviceType("HmIP-FWI")) ? true : false;
-
     this.deviceIsHmIPWKP = this.isDeviceType("HmIP-WKP");
+    this.deviceIsHmIP_MOD_WD_VK = this.isDeviceType("HmIP-MOD-WD-VK");
 
     this.device = this.getDevice(this.opts.deviceID);
     this.relevantChn = this.getRelevantChannels();
@@ -37177,6 +37312,10 @@ iseHmIPWeeklyProgram.prototype = {
 
     if (this.deviceIsHmIPWKP) {
       this.relevantChn = [1, 3, 5, 7, 9, 11, 13, 15];
+    }
+
+    if (this.deviceIsHmIP_MOD_WD_VK) {
+      this.relevantChn = [2];
     }
 
     this.anchor = jQuery("#anchor_"+this.id);
@@ -37282,13 +37421,15 @@ iseHmIPWeeklyProgram.prototype = {
           html += "<td>"+translateKey('lblUser')+"</td>";
         }
 
-        jQuery.each(this.relevantChn, function (index, val) {
-          if (!self.deviceIsHmIPWKP) {
-            html += "<td>" + val + "</td>";
-          } else {
-            html += "<td>" + (index +1) + "</td>";
-          }
-        });
+        if (! this.deviceIsHmIP_MOD_WD_VK) {
+          jQuery.each(this.relevantChn, function (index, val) {
+            if (!self.deviceIsHmIPWKP) {
+              html += "<td>" + val + "</td>";
+            } else {
+              html += "<td>" + (index + 1) + "</td>";
+            }
+          });
+        }
         html += "</tr>";
       html += "</thead>";
 
@@ -37380,50 +37521,63 @@ iseHmIPWeeklyProgram.prototype = {
         html+= "</td>";
       html += "</tr>";
 
-      html += "<tr>";
-      if (!this.deviceIsHmIPWKP) {
-        html += "<td>" + translateKey("btnChooseChannel") + ": </td>";
-      } else {
-        html += "<td>" + translateKey("lblUser") + ": </td>";
-      }
-      html += "<td>";
-      jQuery.each(this.relevantChn, function (index, val) {
-        if (! self.wiegandInterface) {
-          if (self.expert) {
-            valCheckBox = Math.pow(2, index);
-          } else {
-            if (index == 0) {
-              valCheckBox = 1;
-              tmpVal = 1;
-            } else {
-              valCheckBox = tmpVal << 3;
-              tmpVal = valCheckBox;
-            }
-          }
+        if (! self.deviceIsHmIP_MOD_WD_VK) {
+          html += "<tr>";
         } else {
-          // Wiegand
-          if (self.expert) {
-            if (index <= 7) {tmpVal = index + 3;} else {tmpVal = index - 8;}
-            valCheckBox = Math.pow(2,tmpVal);
+          html += "<tr class='hidden'>";
+        }
+        if (! this.deviceIsHmIPWKP) {
+          html += "<td>" + translateKey("btnChooseChannel") + ": </td>";
+        } else {
+          html += "<td>" + translateKey("lblUser") + ": </td>";
+        }
+        html += "<td>";
+        jQuery.each(this.relevantChn, function (index, val) {
+          if (!self.wiegandInterface) {
+            if (self.expert) {
+              valCheckBox = Math.pow(2, index);
+            } else {
+              if (index == 0) {
+                valCheckBox = 1;
+                tmpVal = 1;
+              } else {
+                valCheckBox = tmpVal << 3;
+                tmpVal = valCheckBox;
+              }
+            }
           } else {
-            if (index <= 7) {
-              tmpVal = index + 3;
+            // Wiegand
+            if (self.expert) {
+              if (index <= 7) {
+                tmpVal = index + 3;
+              } else {
+                tmpVal = index - 8;
+              }
               valCheckBox = Math.pow(2, tmpVal);
             } else {
-              tmpVal = index - 8;
-              valCheckBox = 1;
+              if (index <= 7) {
+                tmpVal = index + 3;
+                valCheckBox = Math.pow(2, tmpVal);
+              } else {
+                tmpVal = index - 8;
+                valCheckBox = 1;
+              }
             }
           }
-        }
-        html += "<input name='wpChannelSel_" + self.id + "' value='" + valCheckBox + "' type='checkbox'>";
-        if (!self.deviceIsHmIPWKP) {
-          html += "<label for='wpChannelSel_" + self.id + "'>" + val + "</label>";
-        } else {
-          html += "<label for='wpChannelSel_" + self.id + "'>" + (index + 1) + "</label>";
-        }
-      });
-      html += "</td>";
-      html += "</tr>";
+          if (! self.deviceIsHmIP_MOD_WD_VK) {
+            html += "<input name='wpChannelSel_" + self.id + "' value='" + valCheckBox + "' type='checkbox'>";
+          } else {
+            html += "<input name='wpChannelSel_" + self.id + "' value='" + valCheckBox + "' type='checkbox' checked>";
+          }
+          if (!self.deviceIsHmIPWKP) {
+            html += "<label for='wpChannelSel_" + self.id + "'>" + val + "</label>";
+          } else {
+            html += "<label for='wpChannelSel_" + self.id + "'>" + (index + 1) + "</label>";
+          }
+        });
+        html += "</td>";
+        html += "</tr>";
+
     html += "</table>";
 
     return html;
@@ -43797,7 +43951,8 @@ MD_catchBrightness = function(url, sender_address, receiver_address, brightness,
     jQuery("#okButton_"+arID[2]).css("display", "inline");
 
     if (! commando.includes("help_active_")) {
-      jQuery("#usrDefBrightness_" + arID[2]).val(brightness);
+      //jQuery("#usrDefBrightness_" + arID[2]).val(brightness);
+       jQuery("#usrDefBrightness_" + arID[2]+ "_" + arID[3]).val(brightness);
     }
 
     if (convertValue == 1) {

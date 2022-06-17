@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird ein geschlossenes Fenster f&uuml;r die festgelegte Zeit ge%F6ffnet bzw. ein g&ouml;ffnetes Fenster geschlossen (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt das %D6ffnen/Schlie%DFen erst nach Ablauf dieser Zeit.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Fenster f&uuml;r die festgelegte Zeit je nach Einstellung des Parameters 'Entscheidungswert' ge&ouml;ffnet oder geschlossen.</span><br/><br/>",
+
+
+"subset_1" : "Oberer Grenzwert &uuml;berschritten - &ouml;ffnen / Unterer Grenzwert unterschritten - schliessen",
+"subset_2" : "Oberer Grenzwert &uuml;berschritten - schliessen / Unterer Grenzwert unterschritten - &ouml;ffnen",
+
+"subset_3" : "Oberer Grenzwert &uuml;berschritten",
+"subset_4" : "Unterer Grenzwert unterschritten",
+"subset_5" : "Unterer Grenzwert unter- / oberer Grenzwert &uuml;berschritten",

@@ -15,7 +15,7 @@ function ::CreateCoPro()
         WriteLine("<tr>");
           if (objLevelDutyCycle) {
             WriteLine("<td class='CLASS02518' colspan='1'>");
-              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblDutyCycle}<br/>"#objLevelDutyCycle.Value().ToInteger()#" "#objLevelDutyCycle.ValueUnit()#"</div>");
+              WriteLine("<div class='ControlBtnInfo CLASS02532'>${lblDutyCycleA}<br/>"#objLevelDutyCycle.Value().ToInteger()#" "#objLevelDutyCycle.ValueUnit()#"</div>");
             WriteLine("</td>");
           }
 

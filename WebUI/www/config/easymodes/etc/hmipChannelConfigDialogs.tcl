@@ -208,13 +208,25 @@ set comment {
   set param MOUNTING_ORIENTATION
   if { [info exists ps($param)] == 1 } {
     incr prn
-    append html "<tr>"
-      append html "<td>\${stringTableMountingOrientation}</td>"
-    array_clear options
-    set options(0) "\${stringTableWinMaticMountSideLeft}"
-    set options(1) "\${stringTableWinMaticMountSideRight}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
-    append html "</tr>"
+    if {([string first "HmIP-BBL" $devType] == -1) && ([string first "HmIP-BROLL" $devType] == -1) } {
+      append html "<tr>"
+        append html "<td>\${lblMountingOrientation}</td>"
+          array_clear options
+          set options(0) "\${stringTableWinMaticMountSideLeft}"
+          set options(1) "\${stringTableWinMaticMountSideRight}"
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+      append html "</tr>"
+    } else {
+      append html "<tr>"
+        append html "<td>\${lblMountingOrientationA}</td>"
+          array_clear options
+          set options(0) "\${option0Degree}"
+          set options(1) "\${option90Degree}"
+          set options(2) "\${option180Degree}"
+          set options(3) "\${option270Degree}"
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_A]</td>"
+      append html "</tr>"
+    }
   }
 
   set param PERMANENT_FULL_RX
@@ -603,6 +615,16 @@ proc getGenericInputTransmitter {chn p descr} {
       append html "<td>\${stringTableMiobDinConfig}</td>"
       option MIOB_DIN_CONFIG
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn "onchange=\"showHideKeyParams($chn);\""]</td>"
+    append html "</tr>"
+  }
+
+  set param MIOB_DIN_MODE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableMiobDinMode}</td>"
+      option NORMALLY_OPEN_CLOSE
+      append html  "<td>[getOptionBox $param options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
 
@@ -1191,6 +1213,15 @@ proc getBlindTransmitter {chn p descr address} {
     append html "</tr>"
   }
 
+  set param POSITION_SAVE_TIME
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTablePositionSaveTime}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
+    append html "</tr>"
+  }
+
   set param ENDPOSITION_AUTO_DETECT
   if { [info exists ps($param)] == 1 } {
     incr prn
@@ -1472,6 +1503,15 @@ proc getShutterTransmitter {chn p descr address} {
     append html "<tr>"
       append html "<td>\${stringTableBlindRefRunCounter}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  set param POSITION_SAVE_TIME
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTablePositionSaveTime}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
     append html "</tr>"
   }
 
@@ -2377,6 +2417,23 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       }
 
       # left
+      set comment {
+        # After a talk with the developer (B. B.) we decided not to show this parameter
+        set param ADAPTIVE_REGULATION
+        if { [info exists ps($param)] == 1 } {
+          incr prn
+          array_clear options
+          set options(0) "\${stringTableAdaptiveRegulationOpt0}"
+          set options(1) "\${stringTableAdaptiveRegulationOpt1}"
+          set options(2) "\${stringTableAdaptiveRegulationOpt2}"
+          append html "<tr>"
+          append html "<td name=\"expertParam\" class=\"hidden\">\${stringTableAdaptiveRegulation}</td><td>"
+          append html "<td name=\"expertParam\" class=\"hidden\">[get_ComboBox options $param separate_CHANNEL\_$prn ps $param]</td>"
+          append html "</td>"
+          append html "</tr>"
+        }
+      }
+
       set param BUTTON_RESPONSE_WITHOUT_BACKLIGHT
       if { [info exists ps($param)] == 1  } {
         incr prn
@@ -2914,7 +2971,7 @@ proc getCondSwitchTransmitter {chn p descr} {
         append html "<td>\${stringTableCondThresholdLo}</td>"
         append html "<td>"
 
-          append html "<input id=\"thresLo_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType $param], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]"
+          append html "<input id=\"thresLo_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, '0.0', [getUserDefinedMaxValue $devType $param], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]"
           append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
 
         append html "</td>"
@@ -2928,7 +2985,7 @@ proc getCondSwitchTransmitter {chn p descr} {
         append html "<td>\${stringTableCondThresholdHi}</td>"
         append html "<td>"
 
-          append html "<input id=\"thresHi_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, 0, [getUserDefinedMaxValue $devType $param], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]"
+          append html "<input id=\"thresHi_$chn\_$prn\" type=\"text\" size=\"5\" value=\"[expr $ps($param). / 100]\" onblur=\"ProofAndSetValue(this.id, this.id, '0.0', [getUserDefinedMaxValue $devType $param], 1); jQuery(this).next().val(this.value * 100)\"/>&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]"
           append html "[getTextField $param $ps($param) $chn $prn class=\"hidden\"]"
 
        append html "</td>"
@@ -4591,8 +4648,8 @@ proc getDoorLockStateTransmitter {chn p descr} {
     append html "<tr>"
       append html "<td>\${stringTableDoorLockNeutralPos}</td>"
       array_clear options
-      set options(0) "\${lblVertical}"
-      set options(1) "\${lblHorizontal}"
+      set options(0) "\${lblVerticalA}"
+      set options(1) "\${lblHorizontalA}"
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 75]</td>"
     append html "</tr>"
   }
@@ -4637,7 +4694,7 @@ proc getDoorLockStateTransmitter {chn p descr} {
         array_clear options
         set options(0) "\${optionOpenOnly}"
         #set options(1) "\${optionNormal}"
-        set options(30) "\${optionLong}"
+        set options(30) "\${optionLongA}"
         set options(50) "\${optionExtraLong}"
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn onchange=\"showHintHoldTime($prn)\"]&nbsp;[getHelpIcon DOOR_LOCK_$param 320 75]</td>"
       append html "</tr>"
@@ -5289,6 +5346,7 @@ proc getSmokeDetector {chn p descr} {
 
     set param "REPEAT_ENABLE"
     if { [info exists ps($param)] == 1  } {
+      incr prn
       if { [info exists ps(GROUP_1)] == 1  } {
         append html "<tr><td colspan='3'><hr></td></tr>"
       }
@@ -5299,6 +5357,67 @@ proc getSmokeDetector {chn p descr} {
 
   append html "</td></tr></table></td>"
   return $html
+}
+
+proc getWindowDriveReceiver {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+  set html ""
+  set prn 0
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param POWERUP_JUMPTARGET
+  if { [info exists ps($param)] == 1  } {
+    append html "[getHorizontalLine]"
+    append html [getPowerUpSelector $chn ps $special_input_id]
+  }
+
 }
 
 proc getNoParametersToSet {} {

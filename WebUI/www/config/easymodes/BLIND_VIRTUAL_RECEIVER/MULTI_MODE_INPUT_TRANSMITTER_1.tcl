@@ -60,6 +60,7 @@ set PROFILE_1(LONG_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_MODE) 0
 set PROFILE_1(LONG_PROFILE_ACTION_TYPE) 1
+set PROFILE_1(LONG_SLATS_MOVEMENTS_TO_SKIP) {0 1 2 3}
 set PROFILE_1(SHORT_COND_VALUE_HI) 100
 set PROFILE_1(SHORT_COND_VALUE_LO) 50
 set PROFILE_1(SHORT_CT_OFF)       {1 2 5}
@@ -136,6 +137,7 @@ set PROFILE_2(LONG_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(LONG_ON_TIME_MODE) 0
 set PROFILE_2(LONG_PROFILE_ACTION_TYPE) 1
+set PROFILE_2(LONG_SLATS_MOVEMENTS_TO_SKIP) {0 1 2 3}
 set PROFILE_2(SHORT_COND_VALUE_HI) 100
 set PROFILE_2(SHORT_COND_VALUE_LO) 50
 set PROFILE_2(SHORT_CT_OFF) {1 2 5}
@@ -200,18 +202,19 @@ set PROFILE_3(LONG_MULTIEXECUTE) 1
 set PROFILE_3(LONG_OFFDELAY_TIME_BASE) 0
 set PROFILE_3(LONG_OFFDELAY_TIME_FACTOR) 0
 set PROFILE_3(LONG_OFF_LEVEL) 0.000000
-set PROFILE_3(LONG_OFF_LEVEL_2) 1.010000
+set PROFILE_3(LONG_OFF_LEVEL_2) {0 1.010000}
 set PROFILE_3(LONG_OFF_TIME_BASE) 7
 set PROFILE_3(LONG_OFF_TIME_FACTOR) 31
 set PROFILE_3(LONG_OFF_TIME_MODE) 0
 set PROFILE_3(LONG_ONDELAY_TIME_BASE) 0
 set PROFILE_3(LONG_ONDELAY_TIME_FACTOR) 0
 set PROFILE_3(LONG_ON_LEVEL) 1.000000
-set PROFILE_3(LONG_ON_LEVEL_2) 1.010000
+set PROFILE_3(LONG_ON_LEVEL_2) {1 1.010000}
 set PROFILE_3(LONG_ON_TIME_BASE) 7
 set PROFILE_3(LONG_ON_TIME_FACTOR) 31
 set PROFILE_3(LONG_ON_TIME_MODE) 0
 set PROFILE_3(LONG_PROFILE_ACTION_TYPE) {5 1}
+set PROFILE_3(LONG_SLATS_MOVEMENTS_TO_SKIP) {0 1 2 3}
 set PROFILE_3(SHORT_COND_VALUE_HI) 100
 set PROFILE_3(SHORT_COND_VALUE_LO) 50
 set PROFILE_3(SHORT_CT_OFF) {0 1 2 5}
@@ -236,14 +239,14 @@ set PROFILE_3(SHORT_MULTIEXECUTE) 0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_3(SHORT_OFF_LEVEL) 0.000000
-set PROFILE_3(SHORT_OFF_LEVEL_2) 1.010000
+set PROFILE_3(SHORT_OFF_LEVEL_2) {0 1.010000}
 set PROFILE_3(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_OFF_TIME_MODE) 0
 set PROFILE_3(SHORT_ONDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_3(SHORT_ON_LEVEL) 1.000000
-set PROFILE_3(SHORT_ON_LEVEL_2) 1.010000
+set PROFILE_3(SHORT_ON_LEVEL_2) {1 1.010000}
 set PROFILE_3(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
@@ -288,6 +291,7 @@ set PROFILE_4(LONG_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_4(LONG_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_4(LONG_ON_TIME_MODE) 0
 set PROFILE_4(LONG_PROFILE_ACTION_TYPE) 1
+set PROFILE_4(LONG_SLATS_MOVEMENTS_TO_SKIP) {0 1 2 3}
 set PROFILE_4(SHORT_COND_VALUE_HI) 100
 set PROFILE_4(SHORT_COND_VALUE_LO) 50
 set PROFILE_4(SHORT_CT_OFF) 0
@@ -452,6 +456,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
+  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+    array_clear options
+    set options(0)    "\${option0}"
+    set options(1)    "\${option1}"
+    set options(2)    "\${option2}"
+    set options(3)    "\${option3}"
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
+
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+  }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 #2
@@ -466,6 +482,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   #ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
+
+  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+    array_clear options
+    set options(0)    "\${option0}"
+    set options(1)    "\${option1}"
+    set options(2)    "\${option2}"
+    set options(3)    "\${option3}"
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
+
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+  }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -489,7 +518,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
+  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+    array_clear options
+    set options(0)    "\${option0}"
+    set options(1)    "\${option1}"
+    set options(2)    "\${option2}"
+    set options(3)    "\${option3}"
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
 
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+  }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 
@@ -564,7 +604,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL_2 "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+    array_clear options
+    set options(0)    "\${option0}"
+    set options(1)    "\${option1}"
+    set options(2)    "\${option2}"
+    set options(3)    "\${option3}"
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
 
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+  }
   # parameter end
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

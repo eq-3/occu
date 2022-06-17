@@ -72,7 +72,7 @@ function ::CreateDimmingActuator()
 
         if (oColor) {
           ! string listColor = "black\tblue\tgreen\tturquoise\tred\tpurple\tyellow\twhite";
-          string listColor = "${lblOff}\t${colorBLUE}\t${colorGREEN}\t${colorTURQUOISE}\t${colorRED}\t${colorPURPLE}\t${colorYELLOW}\t${colorWHITE}";
+          string listColor = "${lblOff}\t${optionColorBLUE}\t${optionColorGREEN}\t${optionColorTURQUOISE}\t${optionColorRED}\t${optionColorPURPLE}\t${optionColorYELLOW}\t${optionColorWHITE}";
           string sColor;
           WriteLine("<td style='_background-color:#89989b'>");
             WriteLine("<div class='ControlBtnOff'>");
@@ -154,7 +154,7 @@ function ::CreateDimmerRealInfoControl() {
   WriteLine("</td>");
 
   if ( oColorReal ) {
-    string arColor = "lblOff,colorBLUE,colorGREEN,colorTURQUOISE,colorRED,colorPURPLE,colorYELLOW,colorWHITE";
+    string arColor = "lblOff,optionColorBLUE,optionColorGREEN,optionColorTURQUOISE,optionColorRED,optionColorPURPLE,optionColorYELLOW,optionColorWHITE";
     integer colorReal = oColorReal.Value();
     WriteLine("<td>");
       WriteLine("<table class='ControlBtnInfo'>");

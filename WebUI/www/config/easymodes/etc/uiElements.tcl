@@ -33,10 +33,10 @@ proc getUserDefinedMaxValue {devType {extraparam ""}} {
   if {([string equal $extraparam "COND_TX_THRESHOLD_LO"] == 1) || ([string equal $extraparam "COND_TX_THRESHOLD_HI"] == 1)} {
     switch [string tolower $devType] {
         hmip-psm -
-        hmip-fsm16 {return 3680}
+        hmip-fsm16 {return "3680.0"}
         hmip-bsm -
-        hmip-fsm  {return 1150}
-        hmip-usbsm  {return 60}
+        hmip-fsm  {return "1150.0"}
+        hmip-usbsm  {return "60.0"}
        default {return "<span class=\"attention\">max value not available</span>"}
     }
   }
@@ -486,6 +486,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "HUMIDITY_LIMIT_VALUE" {set x 450; set y 85}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
    "MOUNTING_ORIENTATION" {set x 450; set y 75}
+   "MOUNTING_ORIENTATION_A" {set x 450; set y 75}
    "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
    "PSM_CHANNEL_OPERATION_MODE" {set x 450; set y 100}
@@ -685,6 +686,10 @@ proc getPowerUpSelector {chn p special_input_id} {
   upvar $p ps
   upvar prn prn
 
+  set chType $ch_descr(TYPE)
+
+  set idWindowDriveReceiver WINDOW_DRIVE_RECEIVER
+
   set specialID "[getSpecialID $special_input_id]"
 
   set param POWERUP_JUMPTARGET
@@ -692,35 +697,40 @@ proc getPowerUpSelector {chn p special_input_id} {
   set powerupModePrn $prn
   set html "<tr>"
     append html "<td>\${stringTableDimmerPowerUpAction}</td>"
-    option POWERUP_JUMPTARGET_HMIP
+    if {[string equal $chType $idWindowDriveReceiver] != 1} {
+      option POWERUP_JUMPTARGET_HMIP
+    } else {
+      option POWERUP_JUMPTARGET_WINDOW_DRIVE_RECEIVER_OnOff
+    }
     append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn "onchange=\"powerUP_showRelevantData($chn, this.value,true);\""]</td>"
   append html "</tr>"
 
   append html "<tr id=\"powerUpPanelON_$chn\"><td colspan=\"2\"><table>"
     ###
-    incr prn
-    append html "<tr>"
-    append html "<td>\${stringTableOnDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShort"]
-    append html "</tr>"
+    if {[string equal $chType $idWindowDriveReceiver] != 1} {
+      incr prn
+      append html "<tr>"
+      append html "<td>\${stringTableOnDelay}</td>"
+      append html [getComboBox $chn $prn "$specialID" "delayShort"]
+      append html "</tr>"
 
-    set param POWERUP_ONDELAY_UNIT
-    if { [info exists ps($param)] == 1  } {
+      set param POWERUP_ONDELAY_UNIT
+      if { [info exists ps($param)] == 1 } {
 
-        append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+          append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
 
-        incr prn
-        set param POWERUP_ONDELAY_VALUE
-        append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-        append html "<td>\${stringTableOnDelayValue}</td>"
+          incr prn
+          set param POWERUP_ONDELAY_VALUE
+          append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+          append html "<td>\${stringTableOnDelayValue}</td>"
 
-        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+          append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 
-        append html "</tr>"
-        append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-       append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+          append html "</tr>"
+          append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+         append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      }
     }
-
     ###
     set param POWERUP_ONTIME_UNIT
     if { [info exists ps($param)] == 1  } {
@@ -770,7 +780,7 @@ proc getPowerUpSelector {chn p special_input_id} {
     set param POWERUP_OPTICAL_SIGNAL_COLOR
     if { [info exists ps($param)] == 1 } {
       set tmp $ps($param)
-      set listColor "colorBLACK  colorBLUE colorGREEN colorTURQUOISE colorRED colorPURPLE colorYELLOW colorWHITE"
+      set listColor "optionColorBLACK  optionColorBLUE optionColorGREEN optionColorTURQUOISE optionColorRED optionColorPURPLE optionColorYELLOW optionColorWHITE"
       set select ""
       incr prn
       append html "<tr>"
@@ -791,7 +801,7 @@ proc getPowerUpSelector {chn p special_input_id} {
     set param POWERUP_OPTICAL_SIGNAL_BEHAVIOUR
     if { [info exists ps($param)] == 1 } {
       set tmp $ps($param)
-      set listBehaviour "optionColorOFF optionColorON blinkSlow blinkMiddle blinkFast blinkFlashSlow blinkFlashMiddle blinkFlashFast blinkBillowSlow blinkBillowMiddle blinkBillowFast"
+      set listBehaviour "optionColorOFF optionColorON optionBlinkSlow optionBlinkMiddle optionBlinkFast optionBlinkFlashSlow optionBlinkFlashMiddle optionBlinkFlashFast optionBlinkBillowSlow optionBlinkBillowMiddle optionBlinkBillowFast"
       set select ""
       incr prn
       append html "<tr>"
@@ -814,8 +824,8 @@ proc getPowerUpSelector {chn p special_input_id} {
     if { [info exists ps($param)] == 1 } {
       if {[string equal $dev_descr(TYPE) HmIP-MP3P] == 1} {
         set tmp $ps($param)
-        # set listColor "colorBLACK  colorBLUE colorGREEN colorTURQUOISE colorRED colorPURPLE colorYELLOW colorWHITE randomPlayback colorOldValue lblIgnore"
-        set listColor "colorBLACK  colorBLUE colorGREEN colorTURQUOISE colorRED colorPURPLE colorYELLOW colorWHITE"
+        # set listColor "optionColorBLACK  optionColorBLUE optionColorGREEN optionColorTURQUOISE optionColorRED optionColorPURPLE optionColorYELLOW optionColorWHITE randomPlayback colorOldValue lblIgnore"
+        set listColor "optionColorBLACK  optionColorBLUE optionColorGREEN optionColorTURQUOISE optionColorRED optionColorPURPLE optionColorYELLOW optionColorWHITE"
         set select ""
         incr prn
         append html "<tr>"
@@ -1363,8 +1373,8 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
           if {$valBgColor == 1} {set colorBlack  "selected=\"selected\"" }
           append html "<td>"
             append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_BACKGROUND_COLOR'>"
-              append html "<option value='0' $colorWhite >\${colorWHITE}</option>"
-              append html "<option value='1' $colorBlack>\${colorBLACK_A}</option>"
+              append html "<option value='0' $colorWhite >\${optionColorWHITE}</option>"
+              append html "<option value='1' $colorBlack>\${optionColorBLACK_A}</option>"
             append html "</select>"
           append html "</td>"
           append html "<script type=\"text/javascript\">"
@@ -1380,8 +1390,8 @@ proc getAcousticdDisplayReceiverConfig {special_input_id chn valText valAlignmen
           if {$valTextColor == 1} {set colorBlack  "selected=\"selected\"" }
           append html "<td>"
             append html "<select class='centerSelect' id='separate_$special_input_id\_$prn' name='TEXT_COLOR'>"
-              append html "<option value='0' $colorWhite >\${colorWHITE}</option>"
-              append html "<option value='1' $colorBlack>\${colorBLACK_A}</option>"
+              append html "<option value='0' $colorWhite >\${optionColorWHITE}</option>"
+              append html "<option value='1' $colorBlack>\${optionColorBLACK_A}</option>"
             append html "</select>"
           append html "</td>"
           append html "<script type=\"text/javascript\">"

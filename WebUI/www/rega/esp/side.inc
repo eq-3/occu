@@ -40,6 +40,9 @@
   string opticalSignaReceiver = "OPTICAL_SIGNAL_RECEIVER";
   string accessReceiver = "ACCESS_RECEIVER";
   string servoVirtualReceiver = "SERVO_VIRTUAL_RECEIVER";
+
+  string windowDriveReceiver = "WINDOW_DRIVE_RECEIVER";
+
   string maintenance = "MAINTENANCE";
 
   ! e. g. DIMMER_WEEK_PROFILE, SWITCH_WEEK_PROFILE
@@ -532,6 +535,7 @@
             integer i_blindVirtualReceiver = oCH.HssType().Find(blindVirtualReceiver);
             integer i_servoVirtualReceiver = oCH.HssType().Find(servoVirtualReceiver);
             integer i_hmip_mp3p = chLabel.Find(hmip_mp3p);
+            integer i_windowDriveReceiver = oCH.HssType().Find(windowDriveReceiver);
             integer i_hmip_WeekProfile = oCH.HssType().Find(hmIPWeekProfile);
             integer i_maintenance = oCH.HssType().Find(maintenance);
 
@@ -551,6 +555,7 @@
               || (i_opticalSignalReceiver != -1)
               || (i_switchVirtualReceiver != -1)
               || (i_servoVirtualReceiver != -1)
+              || (i_windowDriveReceiver != -1)
               || (i_hmip_WeekProfile != -1)
               || (i_maintenance != -1))
               ) {
@@ -683,6 +688,12 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
+              if ((i_windowDriveReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                if (iV.Find("VL=") == -1) {
+                  iV = "VL=1,OT=0";
+                }
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setWindowDriveReceiverLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="10" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
 
               ! SPHM-767
               if ((oCH.Label().Find(hmipwID) != -1) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {

@@ -1,8 +1,8 @@
 #!/bin/tclsh
 
-#Kanal-EasyMode!
 
-source [file join /www/config/easymodes/em_common.tcl]
+
+sourceOnce [file join /www/config/easymodes/em_common.tcl]
 
 proc hasLinks {chn} {
   global iface dev_descr
@@ -49,10 +49,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
     # A wired blind cannot only be a blind but a shutter as well!!
-    if {([string equal $devIface HmIPW] == 1) || ([string equal $devType HmIP-DRBLI4] == 1)} {
+    if {([string equal $devIface HmIPW] == 1) || ([string equal $devType HmIP-DRBLI4] == 1) || ([string equal $devType HmIP-BBL-2] == 1)} {
 
       # The config parameter CHANNEL_OPERATION_MODE is only avaliable for devices with a firmware >= 1.6
-     set channelOperationMode [info exists ps(CHANNEL_OPERATION_MODE)]
+      set channelOperationMode [info exists ps(CHANNEL_OPERATION_MODE)]
 
       # Determine the current channelMode
       set devMode [xmlrpc $url getMetadata [list string $address] channelMode]

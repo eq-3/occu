@@ -162,6 +162,7 @@ function ::dcCreate()
     var CN_WIN_SC_SECURE   = "WIN_SC_SECURE.";
     var CN_WIN_SC_SENSOR   = "WIN_SC_SENSOR.";
     var CN_WINDOW          = "WINDOW.";
+    var CN_WINDOW_DRIVE_RECEIVER          = "WINDOW_DRIVE_RECEIVER.";
 
     var CN_EVENT_INTERFACE = "EVENT_INTERFACE.";
     var CN_NOT_ACTIVE = "CHANNEL_NOT_ACTIVE";
@@ -316,7 +317,7 @@ function ::dcCreate()
 
             object ch = dom.GetObject(chnId);
 
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL-2")) {
               Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -337,7 +338,7 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_BLIND_VIRTUAL_RECEIVER;
             object ch = dom.GetObject(chnId);
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL-2")) {
               Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -1090,6 +1091,19 @@ function ::dcCreate()
             sLastControlName = CN_WIN_SC_SENSOR;
             Call("/esp/controls/win_sc_sensor.fn::CreateWin_SC_SENSOR()");
           }
+
+          !# CN_WINDOW_DRIVE_RECEIVER
+          bIsControl = ( sControlName.Find(CN_WINDOW_DRIVE_RECEIVER) > -1 );
+          if( bIsControl && (sLastControlName!=CN_WINDOW_DRIVE_RECEIVER) )
+          {
+            !WriteLine( "<script>conInfo('Control CN_WINDOW_DRIVE_RECEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_WINDOW_DRIVE_RECEIVER;
+            Call("/esp/controls/win_sc_sensor.fn::CreateWindowDriveReceiver()");
+          }
+
+
+
         }
         else
         {

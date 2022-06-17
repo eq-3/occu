@@ -1,0 +1,36 @@
+<table id="dialogContent" style="margin: 0 auto;">
+  <tbody>
+    <tr>
+      <td>${lblWindow}: </td>
+      <td>
+        <select id="combinedParam_State">
+          <option value="0">${optionWindowDriveLevelOff}</option>
+          <option value="1">${optionWindowDriveLevelOn}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>${stringTableActorWindowOnTimeLimit}:</td>
+      <td>
+        <input id="chkBoxTimeLimit" type="checkbox">
+        <img src="/ise/img/help.png" style="cursor: pointer; width: 18px; height:18px;" alt="" onclick="showHelp('helpCombinedParameterTimeLimitWindowDrive', 450,120);">
+      </td>
+    </tr>
+
+    <tr name="trDuration">
+      <td>${stringTableDuration}: </td>
+      <td>
+        <input id="combinedParam_DurationValue" type="text" size="5" style="text-align: left;" value="0">
+      </td>
+      <td style="text-align:center;">x</td>
+      <td>
+        <select id="combinedParam_DurationUnit"  style="text-align: center;">
+          <!-- <option value="3">${optionUnit10MS}</option>-->
+          <option value="0">${Sec}</option>
+          <option value="1">${Min}</option>
+          <option value="2">${Hou}</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -5,6 +5,7 @@
 "AUTO_LOCK_TIME" : "<span class=\"translated\">Automatisch wieder verriegeln</span>",
 "AUTO_UNLOCK_TIME" : "<span class=\"translated\">Automatisch wieder entriegeln</span>",
 "BRIGHTNESS_CONTROL" : "<span class=\"translated\">Helligkeitsschwelle</span>",
+"BRIGHTNESS_CONTROLHI" : "<span class=\"translated\">Helligkeitsschwelle bei<br/>eingeschaltetem Licht</span>",
 "CHANGE_SIGNAL" : "<span class=\"translated\">&Auml;nderungssignal</span>",
 "DECISION_VALUE" : "<span class=\"translated\">Entscheidungswert</span>",
 "DECISION_VALUE_PASSAGE" : "<span class=\"translated\">Entscheidungswert Durchgang</span>",
@@ -100,6 +101,10 @@
 "UP_TIME_DELAY_FACTOR_DESCR" : "<span class=\"translated\">Hochfahrverz%F6gerungszeit</span>",
 "UP_TIME_FACTOR" : "<span class=\"translated\">Einheit der Verweildauer</span>",
 "UP_TIME_FACTOR_DESCR" : "<span class=\"translated\">Verweildauer im Zustand \"Oben\"</span>",
+
+"WINDOW_ONDELAY_TIME_FACTOR_DESCR" : "<span class=\"translated\">Verz%F6gerung</span>",
+"WINDOW_ONTIME_FACTOR_DESCR" : "<span class=\"translated\">Dauer</span>",
+
 "WINDOW_OPEN_LEVEL" : "<span class=\"translated\">Kippen auf Kippweite</span>",
 "WINDOW_OPEN_TIME" : "<span class=\"translated\">Verweildauer im Zustand &quot;Gekippt&quot;</span>",
 "WINDOW_RUNNING_SPEED" : "<span class=\"translated\">Fahrgeschwindigkeit</span>",

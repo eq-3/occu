@@ -353,6 +353,17 @@
 				<p> ${"$"}{dialogSettingsStorageHintLEDS} </p>
 			</td>
 		</tr>
+
+  <tr id='setWebUIColor' class='hidden'>
+    <td>WebUI Color Scheme</td>
+    <td class='CLASS21115'>
+      <div class="StdButton CLASS04907" onClick="setColorWebUI();"">Set Color </div>   	
+    </td>
+    <td class='CLASS21115'></td>
+  </tr>
+
+
+
 	</table>
 </div>
 
@@ -365,3 +376,10 @@
 		</tr>
 	</table>
 </div>
+
+<script type='text/javascript'>
+   var setWebUIColor = homematic("system.getTweak", {"key":"SET_COLOR_WEBUI"});
+   if (setWebUIColor == true) {
+     jQuery('#setWebUIColor').show();	
+   }
+</script>

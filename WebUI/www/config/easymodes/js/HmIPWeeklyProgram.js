@@ -136,6 +136,7 @@ HmIPWeeklyProgram.prototype = {
     this.SWITCH = "SWITCH_WEEK_PROFILE";
     this.BLIND = "BLIND_WEEK_PROFILE";
     this.SERVO = "SERVO_WEEK_PROFILE";
+    this.WINDOW_DRIVE_RECEIVER = (this._isDeviceType("HmIP-MOD-WD-VK")) ? true : false;
 
     this.ACCESS_TRANSMITTER_HmIP_FWI = "HmIP-FWI";
     this.ACCESS_TRANSCEIVER_HmIP_WKP = "HmIP-WKP";
@@ -243,6 +244,10 @@ HmIPWeeklyProgram.prototype = {
 
     if (this._isDeviceType("HmIP-WKP")) {
       this.virtualChannels =  [1, 3, 5, 7, 9, 11, 13, 15];
+    }
+
+    if (this.WINDOW_DRIVE_RECEIVER) {
+      this.virtualChannels = [2];
     }
 
     this._getTargetChannelTypes();
@@ -407,7 +412,7 @@ HmIPWeeklyProgram.prototype = {
 
     // RAMPTIME / LEVEL
     programEntry += "<tr id='trLevel_" + number + "'>";
-    if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
+    if (((this.chnType == this.DIMMER) && (! this.WINDOW_DRIVE_RECEIVER)) || (this.chnType == this.SERVO)) {
       // RAMPTIME
       var lblRamptime = (this.chnType == this.SERVO) ? "lblWPServoRamptime" : "lblWPRamptime";
       programEntry += "<td id='lblWPRamptime_" + number + "'>" + translateKey(lblRamptime) + "</td>";
@@ -419,10 +424,14 @@ HmIPWeeklyProgram.prototype = {
       // programEntry += (this.chnType == this.DIMMER) ? "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>" : "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
 
       if (this.chnType == this.DIMMER) {
-        if (this.DIMMER_WEEK_PROFILE_HmIP_WUA == "") {
-          programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>";
+        if (! this.WINDOW_DRIVE_RECEIVER) {
+          if (this.DIMMER_WEEK_PROFILE_HmIP_WUA == "") {
+            programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>";
+          } else {
+            programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPWUALevel') + "</td>";
+          }
         } else {
-          programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPWUALevel') + "</td>";
+          programEntry += "<td>" + translateKey('lblWPPosWindow') + "</td>";
         }
       } else if (this.chnType == this.SERVO) {
          programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
@@ -483,7 +492,13 @@ HmIPWeeklyProgram.prototype = {
     // DURATION
     if (this.chnType == this.DIMMER || ((this.chnType == this.SWITCH) && (!this.isDoorLockDrive))) {
       programEntry += "<tr id='trDurationMode" + number + "'>";
-      programEntry += "<td>" + translateKey('lblWPDuration') + "</td>";
+
+      if (! this.WINDOW_DRIVE_RECEIVER) {
+        programEntry += "<td>" + translateKey('lblWPDuration') + "</td>";
+      } else {
+        programEntry += "<td>" + translateKey('lblWPDuration1') + "</td>";
+      }
+
       programEntry += "<td>" + this._getDurationMode(number) + "</td>";
       programEntry += "</tr>";
 
@@ -512,8 +527,8 @@ HmIPWeeklyProgram.prototype = {
     programEntry += "<td colspan='3'>" + this._getTargetChannels(number) + "</td>";
     programEntry += "</tr>";
 
-    if (this.isDoorLockDrive) {
-      var switchPointMode = this.DoorLockWPMode[this.devAddress][number];  //DoorLockMode or UserMode
+    if (this.isDoorLockDrive || this.WINDOW_DRIVE_RECEIVER) {
+      var switchPointMode = (! this.WINDOW_DRIVE_RECEIVER) ? this.DoorLockWPMode[this.devAddress][number] : "";  //DoorLockMode or UserMode
       window.setTimeout(function () {
         self._showHideTargetChannels(number, switchPointMode);
       }, 1000);
@@ -1016,7 +1031,7 @@ HmIPWeeklyProgram.prototype = {
     if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO) || (this.chnType == this.BLIND)) {
       var loop;
       if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
-        if (this.chnType == this.DIMMER) {
+        if ((this.chnType == this.DIMMER) && (! this.WINDOW_DRIVE_RECEIVER) ) {
           result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
           for (loop = 5; loop <= 100; loop += 5) {
             optionVal = (loop / 100).toFixed(3);
@@ -1037,6 +1052,12 @@ HmIPWeeklyProgram.prototype = {
           } else {
             result += "<option id='dimOptionFreeValue" + this.chn + "_" + this.prn + "' value='freeVal'>" + translateKey('optionEnterValue') + "</option>";
           }
+        } else if (this.WINDOW_DRIVE_RECEIVER) {
+          val = parseInt(val);
+          optOff = translateKey('optionWindowClosed');
+          optOn = translateKey('optionWindowOpenTilt');
+          result += (val == 0) ? "<option value='0' selected='selected'>" + optOff + "</option>" : "<option value='0'>" + optOff + "</option>";
+          result += (val == 1) ? "<option value='1' selected='selected'>" + optOn + "</option>" : "<option value='1'>" + optOn + "</option>";
         }
 
         if (this.chnType == this.SERVO) {
@@ -1134,25 +1155,25 @@ HmIPWeeklyProgram.prototype = {
     return (index == 0)
       ?
       [
-        translateKey("colorBLACK"),
-        translateKey("colorBLUE"),
-        translateKey("colorGREEN"),
-        translateKey("colorTURQUOISE"),
-        translateKey("colorRED"),
-        translateKey("colorPURPLE"),
-        translateKey("colorYELLOW"),
-        translateKey("colorWHITE")
+        translateKey("optionColorBLACK"),
+        translateKey("optionColorBLUE"),
+        translateKey("optionColorGREEN"),
+        translateKey("optionColorTURQUOISE"),
+        translateKey("optionColorRED"),
+        translateKey("optionColorPURPLE"),
+        translateKey("optionColorYELLOW"),
+        translateKey("optionColorWHITE")
       ]
       :
       [
         "",
-        translateKey("colorBLUE"),
-        translateKey("colorGREEN"),
-        translateKey("colorTURQUOISE"),
-        translateKey("colorRED"),
-        translateKey("colorPURPLE"),
-        translateKey("colorYELLOW"),
-        translateKey("colorWHITE")
+        translateKey("optionColorBLUE"),
+        translateKey("optionColorGREEN"),
+        translateKey("optionColorTURQUOISE"),
+        translateKey("optionColorRED"),
+        translateKey("optionColorPURPLE"),
+        translateKey("optionColorYELLOW"),
+        translateKey("optionColorWHITE")
       ];
   },
 
@@ -1160,15 +1181,15 @@ HmIPWeeklyProgram.prototype = {
     return [
       translateKey("optionColorOFF"),
       translateKey("optionColorON"),
-      translateKey("blinkSlow"),
-      translateKey("blinkMiddle"),
-      translateKey("blinkFast"),
-      translateKey("blinkFlashSlow"),
-      translateKey("blinkFlashMiddle"),
-      translateKey("blinkFlashFast"),
-      translateKey("blinkBillowSlow"),
-      translateKey("blinkBillowMiddle"),
-      translateKey("blinkBillowFast")
+      translateKey("optionBlinkSlow"),
+      translateKey("optionBlinkMiddle"),
+      translateKey("optionBlinkFast"),
+      translateKey("optionBlinkFlashSlow"),
+      translateKey("optionBlinkFlashMiddle"),
+      translateKey("optionBlinkFlashFast"),
+      translateKey("optionBlinkBillowSlow"),
+      translateKey("optionBlinkBillowMiddle"),
+      translateKey("optionBlinkBillowFast")
     ];
   },
 
@@ -1609,7 +1630,7 @@ HmIPWeeklyProgram.prototype = {
     result += "var bSelectedChn = iSelectedChn.toString(2);";
     result += "var reversedBinary = reverseString(bSelectedChn);";
     result += "var counter = 1;";
-    result += "var tmpLoop;"
+    result += "var tmpLoop;";
 
     if (this.sessionIsExpert) {
       if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
@@ -1621,7 +1642,7 @@ HmIPWeeklyProgram.prototype = {
         // The first 3 bits belong to the last 3 checkboxes
         // Bit 4 - 12 are for the first 8 checkboxes
         result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-        result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}"
+        result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
         result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
         result += "}";
       }
@@ -1637,7 +1658,7 @@ HmIPWeeklyProgram.prototype = {
         // The first 3 bits belong to the last 3 checkboxes
         // Bit 4 - 12 are for the first 8 checkboxes
         result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-        result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}"
+        result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
         result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
         result += "}";
       }

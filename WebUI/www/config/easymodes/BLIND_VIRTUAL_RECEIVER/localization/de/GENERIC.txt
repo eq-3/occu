@@ -10,3 +10,9 @@
 "driving_mode_3" : "&uuml;ber die n&auml;chste Endlage (Genauigkeitsfahrt)",
 "up_equal_down" : "<div style=\"padding:10\"><br/>Die Einschaltdauer f&uuml;r &quot;Oben&quot; und &quot;Unten&quot;<br/>k&ouml;nnen nicht gleichzeitig gesetzt sein!</div>",
 
+"lblSpeed" : "Geschwindigkeit",
+
+"option0" : "Normal",
+"option1" : "Langsam",
+"option2" : "Sehr langsam",
+"option3" : "Besonders langsam",

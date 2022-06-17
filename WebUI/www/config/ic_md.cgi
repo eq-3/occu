@@ -5,6 +5,7 @@
 source once.tcl
 sourceOnce [file join $env(DOCUMENT_ROOT) cgi.tcl]
 sourceOnce [file join $env(DOCUMENT_ROOT) common.tcl]
+sourceOnce [file join $env(DOCUMENT_ROOT) session.tcl]
 
 
 cgi_eval {
@@ -48,7 +49,7 @@ cgi_eval {
 
         if {$set_value == "true"} {
           puts "document.getElementById('$id').value = \'$brightness\'"
-          puts "document.getElementById(cndValElmIdHI).value = \'$brightness\'"
+          # puts "document.getElementById(cndValElmIdHI).value = \'$brightness\'"
         }
       }
   
@@ -56,8 +57,10 @@ cgi_eval {
         if {$brightnessAvailable == 1} then {
           if {$set_value == "true"} {puts "document.getElementById('$id').value = \'$brightness\'"}
           set first_start "{SHORT_COND_VALUE_LO {int $brightness}}"
-          puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $first_start]]"
-          set brightness_set "true"
+         	if { [session_requestisvalid 8 ] > 0 } {
+		        puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $first_start]]"
+            set brightness_set "true"
+	        }
         } else {
           #dieser Zweig sollte nie aufgerufen werden.
           puts "alert('Es ist noch kein aktueller Helligkeitswert vorhanden.');"

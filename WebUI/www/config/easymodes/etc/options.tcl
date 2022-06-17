@@ -366,6 +366,13 @@ proc option {type} {
       set options(3) "\${stringTableBlindLevelOffDelay}"
     }
 
+    "POWERUP_JUMPTARGET_WINDOW_DRIVE_RECEIVER_OnOff" {
+      set options(0) "\${optionWindowDriveLevelOff}"
+      # set options(1) "\${optionWindowDriveLevelOnDelay}" ; not necessary
+      set options(2) "\${optionWindowDriveLevelOn}"
+      # set options(3) "\${optionWindowDriveLevelOffDelay}" ; not necessary
+    }
+
     "SHORT_LONG" {
       set options(1) "\${short}"
       set options(2) "\${long}"
@@ -390,6 +397,11 @@ proc option {type} {
     "NORMALLY_CLOSE_OPEN" {
      set options(0) "\${optionNormallyClose}"
      set options(1) "\${optionNormallyOpen}"
+    }
+
+    "NORMALLY_OPEN_CLOSE" {
+     set options(0) "\${optionNormallyOpen}"
+     set options(1) "\${optionNormallyClose}"
     }
 
     "MIOB_DIN_CONFIG" {

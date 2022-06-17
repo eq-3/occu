@@ -128,3 +128,33 @@ function ::CreateWin_SC_SENSOR()
   }
   return;
 }
+
+function ::CreateWindowDriveReceiver()
+{
+  object oLevel = cObj.DPByControl("WINDOW_DRIVE_RECEIVER.LEVEL");
+  object oOnTime = cObj.DPByControl("WINDOW_DRIVE_RECEIVER.ON_TIME");
+  object oStop = cObj.DPByControl("WINDOW_DRIVE_RECEIVER.STOP");
+
+  WriteLine("<td><table>");
+    if (oLevel || oStop) {
+      WriteLine("<tr><td colspan='3'><div class='controlHeader'>${lblWindow}</div></td></tr>");
+      WriteLine("<tr>");
+        if (oLevel) {
+          WriteLine("<td>");
+            WriteLine("<div id='"#chnId#"On' class='ControlBtnOff CLASS02551 j_translate' style='line-height:35px;' onclick=\"setBtnPress(this.id);setDpState("#oLevel.ID()#",1);\">${optionWindowDriveLevelOn}</div>");
+          WriteLine("</td>");
+
+          WriteLine("<td>");
+            WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02551 j_translate' style='line-height:35px;' onclick=\"setBtnPress(this.id);setDpState("#oLevel.ID()#",0);\">${optionWindowDriveLevelOff}</div>");
+          WriteLine("</td>");
+        }
+
+        if (oStop) {
+          WriteLine("<td>");
+            WriteLine("<div id='"#chnId#"Stop' class='ControlBtnOff CLASS02551 j_translate' style='line-height:35px;' onclick=\"setBtnPress(this.id);setDpState("#oStop.ID()#",1);\">${actionStatusControlStop}</div>");
+          WriteLine("</td>");
+        }
+      WriteLine("</tr>");
+    }
+  WriteLine("</table></td>");
+}

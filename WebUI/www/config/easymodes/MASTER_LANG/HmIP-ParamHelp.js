@@ -264,6 +264,7 @@ jQuery.extend(true,langJSON, {
       "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden. Eine Kalibrierung sollte in dem Fall alle 1-2 Jahre manuell durchgef%FChrt werden.",
 
     "MOUNTING_ORIENTATION" : "Dieser Parameter erm%FCglicht es, den Displayinhalt um 180 Grad zu drehen.",
+    "MOUNTING_ORIENTATION_A" : "Dieser Parameter erm%FCglicht es, die Tastereinheit des Jalousie-/Rolladenaktors im gew%FCnschten Winkel einzusetzen. ",
 
     "POWERUP_ONTIME_UNIT" :
       "W%E4hlen Sie die Wartezeit bis zum <i>Auto Relock</i>, nachdem das T%FCrschloss entriegelt oder ge%F6ffnet wurde.<br/><br/>" +
@@ -614,6 +615,7 @@ jQuery.extend(true,langJSON, {
       "<br/><br/>This function must be deactivated for rooms with a 24/7 permanent occupancy. In this case, a manual calibration should be performed every 1-2 years.",
 
     "MOUNTING_ORIENTATION" : "This parameter makes it possible to rotate the display content by 180 degrees.",
+    "MOUNTING_ORIENTATION_A" : "en* Dieser Parameter erm%FCglicht es, die Tastereinheit des Jalousie-/Rolladenaktors im gew%FCnschten Winkel einzusetzen.",
 
     "POWERUP_ONTIME_UNIT" :
       "Select the delay time until <i>Auto Relock</i> is executed after the door lock has been unlocked or opened.<br/><br/>" +

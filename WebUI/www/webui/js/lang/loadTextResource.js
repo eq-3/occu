@@ -115,7 +115,9 @@ function loadTextResource() {
     "translate.lang.system.js",
     "translate.lang.channelDescription.js",
     "translate.lang.help.js",
-    "translate.lang.notTranslated.js",
+    "translate.lang.option.js",
+    "translate.lang.label.js",
+    "translate.lang.notTranslated.js"
   ];
   var url = "/webui/js/lang/" + getLang() + "/";
 

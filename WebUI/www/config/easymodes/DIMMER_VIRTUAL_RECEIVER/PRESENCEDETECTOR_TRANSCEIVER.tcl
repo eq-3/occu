@@ -21,10 +21,13 @@ set PROFILE_0(UI_TEMPLATE)    "Expertenprofil"
 
 set PROFILE_1(SHORT_COND_VALUE_HI) {150 range 0 - 255}
 set PROFILE_1(SHORT_COND_VALUE_LO) {50 range 0 - 255}
-set PROFILE_1(SHORT_CT_OFF) 0
-set PROFILE_1(SHORT_CT_OFFDELAY) 0
-set PROFILE_1(SHORT_CT_ON) 0
-set PROFILE_1(SHORT_CT_ONDELAY) 0
+
+# SPHM-833
+set PROFILE_1(SHORT_CT_OFF) {2 0}
+set PROFILE_1(SHORT_CT_OFFDELAY) {3 0}
+set PROFILE_1(SHORT_CT_ON) {3 0}
+set PROFILE_1(SHORT_CT_ONDELAY) {2 0}
+
 set PROFILE_1(SHORT_CT_RAMPOFF) 0
 set PROFILE_1(SHORT_CT_RAMPON) 0
 set PROFILE_1(SHORT_DIM_MAX_LEVEL) 1.000000
@@ -72,10 +75,13 @@ set PROFILE_1(UI_HINT)  1
 
 set PROFILE_2(SHORT_COND_VALUE_HI) {150 range 0 - 255}
 set PROFILE_2(SHORT_COND_VALUE_LO) {50 range 0 - 255}
+
+# SPHM-833
 set PROFILE_2(SHORT_CT_OFF) 2
-set PROFILE_2(SHORT_CT_OFFDELAY) 2
-set PROFILE_2(SHORT_CT_ON) 2
+set PROFILE_2(SHORT_CT_OFFDELAY) 3
+set PROFILE_2(SHORT_CT_ON) 3
 set PROFILE_2(SHORT_CT_ONDELAY) 2
+
 set PROFILE_2(SHORT_CT_RAMPOFF) 2
 set PROFILE_2(SHORT_CT_RAMPON) 2
 set PROFILE_2(SHORT_JT_OFF) 1
@@ -207,6 +213,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   incr pref
   # Brightness
   EnterBrightnessHmIP $prn $pref ${special_input_id} ps ps_descr SHORT_COND_VALUE_LO help_active_GE_LO
+  incr pref
+  EnterBrightnessHmIP $prn $pref ${special_input_id} ps ps_descr SHORT_COND_VALUE_HI help_active_LT_LO HI
 
   #2  Treppenhauslicht
   incr prn
@@ -289,6 +297,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   incr pref
   # Brightness
   EnterBrightnessHmIP $prn $pref ${special_input_id} ps ps_descr SHORT_COND_VALUE_LO help_active_LT_LO
+  incr pref
+  EnterBrightnessHmIP $prn $pref ${special_input_id} ps ps_descr SHORT_COND_VALUE_HI help_active_LT_LO HI
 
 #3
   incr prn

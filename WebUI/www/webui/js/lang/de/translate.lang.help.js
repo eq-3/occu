@@ -95,6 +95,7 @@ jQuery.extend(true, langJSON, {
       "<tr><td  style='text-align:center;'><span>_</span></td><td  style='text-align:center;'><span>%DF</span></td></tr>" +
       "<tr><td  style='text-align:center;'><span>]</span></td><td  style='text-align:center;'><span>&</span></td></tr>" +
       "<tr><td  style='text-align:center;'><span>'</span></td><td  style='text-align:center;'><span>=</span></td></tr>" +
+      "<tr><td  style='text-align:center;'><span> ^ </span></td><td  style='text-align:center;'><span>%B0</span></td></tr>" +
       "<tr><td  style='text-align:center;'><span> ; </span></td><td  style='text-align:center;'><span>Sanduhr</span></td></tr>" +
       "<tr><td  style='text-align:center;'><span> < </span></td><td  style='text-align:center;'><span>Pfeil nach unten</span></td></tr>" +
       "<tr><td  style='text-align:center;'><span> = </span></td><td  style='text-align:center;'><span>Pfeil nach oben</span></td></tr>" +
@@ -118,6 +119,11 @@ jQuery.extend(true, langJSON, {
       "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ein'.<br/></br>" +
       "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die Einschaltdauer, sowie die Ausschalt-Rampenzeit bestimmen. " +
       "Zu beachten ist, dass die Einschaltdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ein'.",
+
+    "helpCombinedParameterTimeLimitWindowDrive" :
+      "Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ge%F6ffnet'.<br/></br>" +
+      "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die %D6ffnungsdauer bestimmen. " +
+      "Zu beachten ist, dass die %D6ffnungsdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ge%F6ffnet'.",
 
     "helpAccessReceiverUserAccessAuth" :
       "Bei manueller %C4nderung der Berechtigung schaltet der Benutzerkanal in den Manu-Modus. " +

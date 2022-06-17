@@ -1,6 +1,7 @@
 #!/bin/tclsh
 
-source [file join /www/config/easymodes/em_common.tcl]
+
+sourceOnce [file join /www/config/easymodes/em_common.tcl]
 
 proc _getCheckBox {type param value prn} {
   set checked ""

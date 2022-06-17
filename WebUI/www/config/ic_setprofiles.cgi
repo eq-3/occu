@@ -852,6 +852,13 @@ cgi_eval {
     }
     array set sender_ps   [xmlrpc $url getParamset [list string $sender_address]   [list string $receiver_address]]
     array set receiver_ps [xmlrpc $url getParamset [list string $receiver_address] [list string $sender_address]]
+
+    set comment {
+      # This creates the link params of the receiver. Useful for initializing a new easymode
+      foreach val [array names receiver_ps] {
+        exec echo "$val: $receiver_ps($val)" >> /tmp/link.log
+      }
+    }
     #---------------------------------------------------------------
 
     #Informationen über den Sender Teil 2/2-------------------------

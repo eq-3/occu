@@ -1,9 +1,9 @@
 #!/bin/tclsh
 
+
 #Kanal-EasyMode!
 
-#source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
-source [file join /www/config/easymodes/em_common.tcl]
+sourceOnce [file join /www/config/easymodes/em_common.tcl]
 
 #Namen der EasyModes tauchen nicht mehr auf. Der Durchgängkeit werden sie hier noch definiert.
 set PROFILES_MAP(0)  "Experte"

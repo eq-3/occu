@@ -14,6 +14,7 @@ jQuery.extend(true,langJSON, {
     "lblWPServoPos" : "Servoposition",
     "lblWPState" : "Schaltzustand",
     "lblWPWUALevel" : "Ausgangsspannung",
+    "lblWPPosWindow" : "Fensterposition",
 
     "lblWPState_Access" : "Schaltzustand/<br/>Zugriffsberechtigung",
     "lblWP_Access" : "Zugriffsberechtigung",
@@ -89,6 +90,9 @@ jQuery.extend(true,langJSON, {
     "set comment" : "SERVO_Duration not in use",
     "SERVO_Duration" : "Help for SERVO_Duration",
 
+    "optionWindowClosed" : "geschlossen",
+    "optionWindowOpenTilt" : "offen/gekippt",
+
     "hintAccessControlAstroNotWorking" : "<span class='attention'><b>Achtung!</b> Die Astrofunktion wirkt nur f%FCr Schaltaktoren.</span>",
 
     "dummy" : ""
@@ -109,6 +113,7 @@ jQuery.extend(true,langJSON, {
     "lblWPServoPos" : "Servo position",
     "lblWPState" : "Switching status",
     "lblWPWUALevel" : "Output voltage",
+    "lblWPPosWindow" : "en* Fensterposition",
 
     "lblWPState_Access" : "Switching state/<br/>access authorisation",
     "lblWP_Access" : "Access authorisation",
@@ -182,6 +187,9 @@ jQuery.extend(true,langJSON, {
 
     "set comment" : "SERVO_Duration not in use",
     "SERVO_Duration" : "Help for SERVO_Duration",
+
+    "optionWindowClosed" : "en* geschlossen",
+    "optionWindowOpenTilt" : "en* offen/gekippt",
 
     "hintAccessControlAstroNotWorking" : "<span class='attention'><b>Important!</b> The astro function only works for switch actuators.</span>",
 

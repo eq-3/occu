@@ -560,7 +560,7 @@ jQuery.extend(true,langJSON, {
     "stringTableMinMaxNotRelevantForManuMode" : "Ignoriere min./max. Temperatur im Manu-Mode",
     "stringTableMinimalFloorTemperature" : "Minimale Bodentemperatur",
     "stringTableMinute" : "min",
-    "stringTableMiobDinConfig" :  "Modus digitaler Eingang",
+    "stringTableMiobDinMode" :  "Modus digitaler Eingang",
     "stringTableCaptureWithinInterval" : "Innerhalb des Sendeabstandes erkannte Bewegung senden:",
     "stringTableMotionDetectorErrorSabotage" : "Sabotage",
     "stringTableMotionDetectorMinInterval" : "Mindestsendeabstand",
@@ -1237,7 +1237,6 @@ jQuery.extend(true,langJSON, {
     "stringTableCalibrationIntervalUnit" : "Einheit Kalibrierungsintervall",
     "stringTableCalibrationIntervalValue" : "Wert des Kalibrierungsintervalls",
     "stringTableConcentrationStatus" : "Status CO2-Konzentration",
-    "stringTableMountingOrientation" : "Displayausrichtung",
     "stringTableConditionSwitchTransmitterParticulateMatter" : "Feinstaubsensor",
     "stringTableAutoRelockDelay" : "Wartezeit vor Auto Relock",
     "stringTableDoorLockDirection" : "Drehrichtung zum Verriegeln",
@@ -1388,12 +1387,12 @@ langJSON.de.stringTableAbsoluteAngle = langJSON.de.lblTilt;
 langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
 langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
 langJSON.de.stringTableColorBehaviourOn = langJSON.de.optionColorON;
-langJSON.de.stringTableColorBehaviourBlinkingSlow = langJSON.de.blinkSlow;
-langJSON.de.stringTableColorBehaviourBlinkingMiddle = langJSON.de.blinkMiddle;
-langJSON.de.stringTableColorBehaviourBlinkingFast = langJSON.de.blinkFast;
-langJSON.de.stringTableColorBehaviourFlashSlow = langJSON.de.blinkFlashSlow;
-langJSON.de.stringTableColorBehaviourFlashMiddle = langJSON.de.blinkFlashMiddle;
-langJSON.de.stringTableColorBehaviourFlashFast = langJSON.de.blinkFlashFast;
-langJSON.de.stringTableColorBehaviourBillowSlow = langJSON.de.blinkBillowSlow;
-langJSON.de.stringTableColorBehaviourBillowMiddle = langJSON.de.blinkBillowMiddle;
-langJSON.de.stringTableColorBehaviourBillowFast = langJSON.de.blinkBillowFast;
+langJSON.de.stringTableColorBehaviourBlinkingSlow = langJSON.de.optionBlinkSlow;
+langJSON.de.stringTableColorBehaviourBlinkingMiddle = langJSON.de.optionBlinkMiddle;
+langJSON.de.stringTableColorBehaviourBlinkingFast = langJSON.de.optionBlinkFast;
+langJSON.de.stringTableColorBehaviourFlashSlow = langJSON.de.optionBlinkFlashSlow;
+langJSON.de.stringTableColorBehaviourFlashMiddle = langJSON.de.optionBlinkFlashMiddle;
+langJSON.de.stringTableColorBehaviourFlashFast = langJSON.de.optionBlinkFlashFast;
+langJSON.de.stringTableColorBehaviourBillowSlow = langJSON.de.optionBlinkBillowSlow;
+langJSON.de.stringTableColorBehaviourBillowMiddle = langJSON.de.optionBlinkBillowMiddle;
+langJSON.de.stringTableColorBehaviourBillowFast = langJSON.de.optionBlinkBillowFast;

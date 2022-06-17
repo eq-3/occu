@@ -1,9 +1,10 @@
 #!/bin/tclsh
 
-source [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
-source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
+
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
 set PROFILE_PNAME(A) "\${stringTableEventFilterNumber}"
 set PROFILE_PNAME(B) "\${stringTableEventFilterPeriod}"
