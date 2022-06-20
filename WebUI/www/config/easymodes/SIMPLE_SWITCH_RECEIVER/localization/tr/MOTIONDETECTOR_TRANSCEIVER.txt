@@ -1,7 +1,0 @@
-"description_1" : "<span class=\"translated\">When triggering the sensor, the light of the garage door drive is switched into the opposite status (toggle function).</span><br/><br/>",
-"description_2" : "<span class=\"translated\">When triggering the sensor, the light of the garage door drive is switched on.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">When triggering the sensor, the light of the garage door drive is switched off.</span><br/><br/>",
-
-"description_4" : "<span class=\"translated\">The motion detector is not active.</span>",
-
-"hintOnTime" : "<span class=\"translated\">The switch-on time of the light is defined be the garage door drive. Please refer to the manual of the drive.</span><br/><br/>",

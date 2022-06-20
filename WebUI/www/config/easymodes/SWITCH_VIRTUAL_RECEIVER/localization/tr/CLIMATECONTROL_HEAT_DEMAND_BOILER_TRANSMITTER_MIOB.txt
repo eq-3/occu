@@ -1,1 +1,0 @@
-"description_1" : "<span class=\"translated\">If the sensor signals heat demand, the actuator will be switched on. If the sensor does not signal any heat demand, the actuator will be switched off.</span><br/><br/>",

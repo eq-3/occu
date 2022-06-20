@@ -1,8 +1,0 @@
-"description_1" : "<span class=\"translated\">With each opening / closing of the window handle sensor the awning / shutter will be moved up completely for the set time. If an up-delay is set the blind / shutter will be moved up after the delay time has expired.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">With each opening / closing of the window handle sensor the awning / shutter will be moved down completely for the set time. If a down-delay is set the blind / shutter will be moved down after the delay time has expired.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">With each opening / closing of the window handle sensor the awning / shutter will be moved up completely or down completely (toggle function). If a delay is set the shutter is moved after the delay time has expired.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">With each opening / closing of the window handle sensor the awning / shutter will be moved to the required position for the set time. If a delay is set the shutter will be moved after the delay time has expired.</span><br/><br/>",
-
-"subset_1" : "moved up",
-"subset_2" : "moved down",
-"subset_3" : "changing between moved up and moved down",

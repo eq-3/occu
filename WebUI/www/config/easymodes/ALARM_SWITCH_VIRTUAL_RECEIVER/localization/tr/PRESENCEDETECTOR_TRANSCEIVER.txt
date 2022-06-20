@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">When the sensor is triggered the alarm actuator will be switched on for the time set.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">The profile is not active</span>",

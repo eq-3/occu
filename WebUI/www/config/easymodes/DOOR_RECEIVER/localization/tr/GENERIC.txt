@@ -1,5 +1,0 @@
-"switch_open_close" : "Opening / Closing",
-"switch_open" : "Opening",
-"switch_close" : "Closing",
-"switch_partialOpen" : "Ventilation",
-"switch_stop" : "Stop",

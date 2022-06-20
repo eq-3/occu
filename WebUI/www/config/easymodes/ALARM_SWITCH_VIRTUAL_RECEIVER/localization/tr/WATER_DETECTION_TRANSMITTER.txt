@@ -1,9 +1,0 @@
-"description_1" : "<span class=\"translated\">When the water detection sensor is triggered the alarm actuator will be switched on for the time set.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">The profile is not active</span>",
-
-"switchMode" : "Switching command in case of ",
-
-"subset_1": "Humidity",
-"subset_2": "Water",
-"subset_3": "Humidity or water",
-"subset_4": "Draught",

@@ -1,6 +1,0 @@
-[
-	{
-		"hintCaseForm" : "Hazne sekliyle ilgili bilgi",
-		"lblActive" : "etkin",
-	}
-]
