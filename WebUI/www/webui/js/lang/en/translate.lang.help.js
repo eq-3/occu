@@ -118,9 +118,9 @@ jQuery.extend(true, langJSON, {
       "Please note that the switch-on time is limited to 30 hours. A value of 31 hours means 'permanently on'. ",
 
     "helpCombinedParameterTimeLimitWindowDrive" :
-      "en* Eine nicht aktivierte Checkbox bedeutet 'dauerhaft ge%F6ffnet'.<br/></br>" +
-      "Wenn Sie diese Checkbox aktivieren, k%F6nnen Sie die %D6ffnungsdauer bestimmen. " +
-      "Zu beachten ist, dass die %D6ffnungsdauer auf 30 Stunden begrenzt ist. Ein Wert von 31 Stunden bedeuted 'dauerhaft ge%F6ffnet'.",
+      "A non-activated checkbox indicates ‘permanently open’.<br/></br>" +
+      "When you activate this checkbox, you can then determine the open time. " +
+      "Please note that the switch-on time is limited to 30 hours. A value of 31 hours means 'permanently open'.",
 
     "helpAccessReceiverUserAccessAuth" :
       "If the authorisation is changed manually, the user channel switches to manu mode. " +

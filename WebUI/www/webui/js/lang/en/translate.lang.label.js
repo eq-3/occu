@@ -1,5 +1,5 @@
 jQuery.extend(true,langJSON, {
-  "de" : {
+  "en" : {
 
     "lbl24Average" : "24h Average",
     "lblAccessPointSettings1" : "Administration of Homematic IP Access Points",
@@ -214,7 +214,7 @@ jQuery.extend(true,langJSON, {
     "lblSecuritySettings2" : "Custom",
     "lblSeeQRCodeSticker" : "(see QR code sticker)",
     "lblSeeServiceMessage": "See service message!",
-    "lblSelectLanguage": "Language:",
+    "lblSelectLanguage" : "Language:",
     "lblSelectTargetChannels" : "Select<br /> target channels",
     "lblSelectTargetUser" : "Select<br /> user",
     "lblSetConfig" : "Save configuration",

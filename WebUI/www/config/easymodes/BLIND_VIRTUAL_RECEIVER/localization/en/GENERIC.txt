@@ -10,9 +10,9 @@
 "driving_mode_3" : "above the next final position (accuracy run)",
 "up_equal_down" : "<div style=\"padding:10\"><br/>The switch-on times for &quot;Up&quot; and &quot;Down&quot;<br/>can not be selected at the same time!</div>",
 
-"lblSpeed" : "en* Geschwindigkeit",
+"lblSpeed" : "Speed",
 
-"option0" : "en* Normal",
-"option1" : "en* Langsam",
-"option2" : "en* Sehr langsam",
-"option3" : "en* Besonders langsam",
+"option0" : "Normal",
+"option1" : "Slow",
+"option2" : "Very slow",
+"option3" : "Extra slow",

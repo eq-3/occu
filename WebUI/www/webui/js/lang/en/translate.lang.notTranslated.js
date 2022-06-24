@@ -16,31 +16,31 @@ jQuery.extend(true, langJSON, {
     "stringTableDisplayUpdateRequest" : "Display Update Request",
 
     "comment" : "Relase B/2022",
-    "stringTableMiobDinConfig" : "en* Betriebsart digitaler Eingang",
+    "stringTableMiobDinConfig" : "Digital input operating mode",
 
-    "lblAbortEventSendingChannel" : "en* Alten Sendevorgang abbrechen",
+    "lblAbortEventSendingChannel" : "Cancel old transmission",
 
-    "lblWindow" : "en* Fenster",
-    "stringTableActorWindowOnTimeLimit" : "en* %D6ffnungsdauer begrenzt",
+    "lblWindow" : "Window",
+    "stringTableActorWindowOnTimeLimit" : "Opening time limited",
 
-    "stringTableKeyAccessTransceiverPressLock" : "en* Bet%E4tigung Taste verriegeln",
-    "stringTableKeyAccessTransceiverPressUnLock" : "en* Bet%E4tigung Taste entriegeln",
+    "stringTableKeyAccessTransceiverPressLock" : "Lock button operation",
+    "stringTableKeyAccessTransceiverPressUnLock" : "Unlock button operation",
 
-    "stringTableRHSStateUnknown" : "en* Fensterzustand: unbekannt",
+    "stringTableRHSStateUnknown" : "Window status: unknown",
 
     "stringTableDoorWindowDriveReceiverTitle" : "HmIP-MOD-WD-VK",
 
-    "lblMountingOrientationA" : "Montage",
+    "lblMountingOrientationA" : "Installation",
 
-    "option0Degree" : "en* 0 Grad",
-    "option90Degree" : "en* 90 Grad",
-    "option180Degree" : "en* 180 Grad",
-    "option270Degree" : "en* 270 Grad",
+    "option0Degree" : "0 degrees",
+    "option90Degree" : "90 degrees",
+    "option180Degree" : "180 degrees",
+    "option270Degree" : "270 degrees",
 
-    "optionWindowDriveLevelOff" : "en* Schlie%DFen",
-    "optionWindowDriveLevelOnDelay" : "en* Verz%F6gert %F6ffnen",
-    "optionWindowDriveLevelOn" : "en* %D6ffnen",
-    "optionWindowDriveLevelOffDelay" : "en* Verz%F6gert schlie%DFen",
+    "optionWindowDriveLevelOff" : "Close",
+    "optionWindowDriveLevelOnDelay" : "Delayed opening",
+    "optionWindowDriveLevelOn" : "Open",
+    "optionWindowDriveLevelOffDelay" : "Delayed closing",
 
     "noMoreKeys" : ""
   }

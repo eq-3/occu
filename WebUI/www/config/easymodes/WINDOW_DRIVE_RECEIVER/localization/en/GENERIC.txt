@@ -1,5 +1,5 @@
-"switch_off" : "en* Fenster schlie%DFen",
-"switch_on" : "en* Fenster %F6ffnen",
-"switch_on_off" : "en* Fenster %F6ffnen/schlie%DFen",
-"switch_toggle" : "en* Toggle",
+"switch_off" : "Close window",
+"switch_on" : "Open window",
+"switch_on_off" : "Open/Close window",
+"switch_toggle" : "Toggle",
 

@@ -60,12 +60,12 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Weekly program",
 
-    "chType_DISPLAY_INPUT_TRANSMITTER_A": "en* Screen",
-    "chType_DISPLAY_INPUT_TRANSMITTER_B": "Kachel",
+    "chType_DISPLAY_INPUT_TRANSMITTER_A": "Screen",
+    "chType_DISPLAY_INPUT_TRANSMITTER_B": "Tile",
     "chType_DISPLAY_INPUT_TRANSMITTER_C": "<br/>KEY",
 
-    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A": "en* Screen",
-    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B": "Kachel",
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A": "Screen",
+    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B": "Tile",
     "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C": "<br/>LEVEL",
     "chType_DISPLAY_INPUT_TRANSMITTER_D": "UNKNOWN",
 
@@ -137,6 +137,9 @@ jQuery.extend(true,langJSON, {
 
     "chType_UNIVERSAL_ACTOR_TRANSMITTER_010V" : "Status report<br/>Universal Actuator 0-10 V",
     "chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V" : "Universal Actuator 0-10 V",
+
+    "chType_UNIVERSAL_LIGHT_RECEIVER" : "en* tr UNIVERSAL LIGHT RECEIVER",
+    "chType_UNIVERSAL_LIGHT_WEEK_PROFILE" : "Weekly program",
 
     "chType_VIRTUAL_DIMMER" : "Dimmer actuator",
     "chType_VIRTUAL_DUAL_WHITE_BRIGHTNESS" : "Brightness channel",

@@ -1755,32 +1755,34 @@ createNecessarySysVarsAndPrograms = function (oDevice) {
 
 changeBlind2Shutter = function(oDevice) {
   ShowWaitAnim();
-  HideWaitAnimAutomatically();
-  if (oDevice.type == "HmIPW-DRBL4" || oDevice.type == "HmIP-DRBLI4") {
-    var hasChannelOperationMode,
-    devMode = "--";
-    jQuery.each(oDevice.channels, function (index, channel) {
-      if ((channel.channelType == "BLIND_TRANSMITTER") || (channel.channelType == "BLIND_VIRTUAL_RECEIVER")) {
-        if (typeof hasChannelOperationMode == "undefined") {
-          hasChannelOperationMode = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": channel.address, "valueKey": "CHANNEL_OPERATION_MODE"});
-        }
-        devMode =  (hasChannelOperationMode) ? "shutter" : "blind";
+  HideWaitAnimAutomatically(60);
 
-        homematic("Interface.setMetadata_crRFD", {
-          "interface" : "HmIP-RF",
-          "objectId" : channel.address,
-          "dataId" :  "channelMode",
-          "value" : devMode
-        });
-
-        homematic("Interface.setMetadata", {
-          "objectId" : channel.address,
-          "dataId" : "channelMode",
-          "value" : devMode
-        });
+  var channelModes = ["shutter", "blind"],
+    channelOperationMode,
+  devMode = "--";
+  jQuery.each(oDevice.channels, function (index, channel) {
+    if ((channel.channelType == "BLIND_TRANSMITTER") || (channel.channelType == "BLIND_VIRTUAL_RECEIVER")) {
+      if (typeof channelOperationMode == "undefined") {
+        channelOperationMode = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": channel.address, "valueKey": "CHANNEL_OPERATION_MODE"});
       }
-    });
-  }
+
+      devMode = ((channelOperationMode == 0) || (channelOperationMode == 1)) ? channelModes[channelOperationMode] : "blind";
+
+      homematic("Interface.setMetadata_crRFD", {
+        "interface" : "HmIP-RF",
+        "objectId" : channel.address,
+        "dataId" :  "channelMode",
+        "value" : devMode
+      });
+
+      homematic("Interface.setMetadata", {
+        "objectId" : channel.address,
+        "dataId" : "channelMode",
+        "value" : devMode
+      });
+    }
+  });
+
   HideWaitAnim();
 };
 

@@ -102,8 +102,8 @@
 "UP_TIME_FACTOR" : "<span class=\"translated\">Unit of the duration</span>",
 "UP_TIME_FACTOR_DESCR" : "<span class=\"translated\">Duration while in state \"up\"</span>",
 
-"WINDOW_ONDELAY_TIME_FACTOR_DESCR" : "<span class=\"translated\">en* Verz%F6gerung</span>",
-"WINDOW_ONTIME_FACTOR_DESCR" : "<span class=\"translated\">en* Dauer</span>",
+"WINDOW_ONDELAY_TIME_FACTOR_DESCR" : "<span class=\"translated\">Delay</span>",
+"WINDOW_ONTIME_FACTOR_DESCR" : "<span class=\"translated\">Duration</span>",
 
 "WINDOW_OPEN_LEVEL" : "<span class=\"translated\">Tilt to tilt level</span>",
 "WINDOW_OPEN_TIME" : "<span class=\"translated\">Duration for status &quot;Tilt&quot;</span>",

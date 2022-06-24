@@ -615,7 +615,7 @@ jQuery.extend(true,langJSON, {
       "<br/><br/>This function must be deactivated for rooms with a 24/7 permanent occupancy. In this case, a manual calibration should be performed every 1-2 years.",
 
     "MOUNTING_ORIENTATION" : "This parameter makes it possible to rotate the display content by 180 degrees.",
-    "MOUNTING_ORIENTATION_A" : "en* Dieser Parameter erm%FCglicht es, die Tastereinheit des Jalousie-/Rolladenaktors im gew%FCnschten Winkel einzusetzen.",
+    "MOUNTING_ORIENTATION_A" : "This parameter enables the push-button unit of the blind/roller shutter actuator to be placed at the required angle.",
 
     "POWERUP_ONTIME_UNIT" :
       "Select the delay time until <i>Auto Relock</i> is executed after the door lock has been unlocked or opened.<br/><br/>" +

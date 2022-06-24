@@ -2,9 +2,9 @@
 "description_2" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Fenster f&uuml;r die festgelegte Zeit je nach Einstellung des Parameters 'Entscheidungswert' ge&ouml;ffnet oder geschlossen.</span><br/><br/>",
 
 
-"subset_1" : "Oberer Grenzwert &uuml;berschritten - &ouml;ffnen / Unterer Grenzwert unterschritten - schliessen",
-"subset_2" : "Oberer Grenzwert &uuml;berschritten - schliessen / Unterer Grenzwert unterschritten - &ouml;ffnen",
+"subset_1" : "Oberer Grenzwert &uuml;berschritten - &ouml;ffnen/Unterer Grenzwert unterschritten - schliessen",
+"subset_2" : "Oberer Grenzwert &uuml;berschritten - schliessen/Unterer Grenzwert unterschritten - &ouml;ffnen",
 
 "subset_3" : "Oberer Grenzwert &uuml;berschritten",
 "subset_4" : "Unterer Grenzwert unterschritten",
-"subset_5" : "Unterer Grenzwert unter- / oberer Grenzwert &uuml;berschritten",
+"subset_5" : "Unterer Grenzwert unter-/oberer Grenzwert &uuml;berschritten",

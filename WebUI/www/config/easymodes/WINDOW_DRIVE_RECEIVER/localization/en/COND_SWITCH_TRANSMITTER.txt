@@ -1,10 +1,10 @@
-"description_1" : "<span class=\"translated\">en* Bei Empfang des gew&auml;hlten Entscheidungswertes wird ein geschlossenes Fenster f&uuml;r die festgelegte Zeit ge%F6ffnet bzw. ein g&ouml;ffnetes Fenster geschlossen (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt das %D6ffnen/Schlie%DFen erst nach Ablauf dieser Zeit.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">en* Bei Empfang des gew&auml;hlten Entscheidungswertes wird das Fenster f&uuml;r die festgelegte Zeit je nach Einstellung des Parameters 'Entscheidungswert' ge&ouml;ffnet oder geschlossen.</span><br/><br/>",
+"description_1" : "<span class=\"translated\">When receiving the selected decision value, a closed window is opened for the specified time or an open window is closed (toggle function). If a delay time is set, opening/closing will be performed only after this time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When receiving the selected decision value, the window is opened or closed for the specified time according to the setting of the 'Decision value' parameter.</span><br/><br/>",
 
 
-"subset_1" : "en* Oberer Grenzwert &uuml;berschritten - &ouml;ffnen / Unterer Grenzwert unterschritten - schliessen",
-"subset_2" : "en* Oberer Grenzwert &uuml;berschritten - schliessen / Unterer Grenzwert unterschritten - &ouml;ffnen",
+"subset_1" : "Above upper limit value – open / Below lower limit value – close",
+"subset_2" : "Above upper limit value – close / Below lower limit value – open",
 
-"subset_3" : "en* Oberer Grenzwert &uuml;berschritten",
-"subset_4" : "en* Unterer Grenzwert unterschritten",
-"subset_5" : "en* Unterer Grenzwert unter- / oberer Grenzwert &uuml;berschritten",
+"subset_3" : "Above upper limit value",
+"subset_4" : "Below lower limit value",
+"subset_5" : "Below lower limit value/Above upper limit value",
