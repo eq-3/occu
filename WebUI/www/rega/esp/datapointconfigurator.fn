@@ -706,7 +706,7 @@ function ::dcCreate()
               Call("/esp/controls/drap.fn::CreateDrap()");
             }
 
-            if (ch.Label() == "HmIP-HAP") {
+            if ((ch.Label() == "HmIP-HAP") || (ch.Label() == "HmIP-HAP-B1")) {
               WriteLine( "<script>conInfo('Create HAP Control.');</script>" );
               sLastControlName = CN_MAINTENANCE;
               isKnownControl = true;

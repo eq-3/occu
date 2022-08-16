@@ -94,7 +94,7 @@ proc getMaintenance {chn p descr} {
      append html "</tr>"
   }
 
-  if {([string equal $devType "HmIPW-DRAP"] != 1) && ([string equal $devType "HmIP-HAP"] != 1)} {
+  if {([string equal $devType "HmIPW-DRAP"] != 1) && ([string equal $devType "HmIP-HAP"] != 1) && ([string equal $devType "HmIP-HAP-B1"] != 1)} {
     set param ROUTER_MODULE_ENABLED
     if { [info exists ps($param)] == 1  } {
        incr prn
@@ -307,7 +307,7 @@ set comment {
   }
 
   # DRAP/HAP Integration #
-  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1)} {
+  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1) || ([string equal $devType "HmIP-HAP-B1"] == 1)} {
     append html "[getDRAP_HAPMaintenance $chn ps psDescr]"
   }
   # End DRAP/HAP Integration #
@@ -2235,7 +2235,7 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
 
       append html "if (parseInt(selectedMode) == 1) \{"
         append html "humidityLimitValueElm.show();"
-        append html "heatingCoolingElm.val(\"1\");"
+        # append html "heatingCoolingElm.val(\"1\");" SPHM-1015
         append html "heatingTwoPointHysteresisElm.hide();"
         append html "heatingTwoPointHysteresisHumidityElm.show();"
         append html "heatingCoolingElmOption0.html(translateKey('optionDrying'));"
@@ -2248,7 +2248,7 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr} {
         append html "valTwoPointHysteresisElm.val('0.0');"
       append html "\} else \{"
         append html "humidityLimitValueElm.hide();"
-        append html "heatingCoolingElm.val(\"0\");"
+        # append html "heatingCoolingElm.val(\"0\");" SPHM-1015
         append html "heatingTwoPointHysteresisElm.show();"
         append html "heatingTwoPointHysteresisHumidityElm.hide();"
         append html "heatingCoolingElmOption0.html(translateKey('optionHeating'));"

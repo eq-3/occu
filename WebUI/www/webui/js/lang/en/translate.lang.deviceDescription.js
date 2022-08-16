@@ -199,6 +199,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-FSI16" : "Homematic IP Switch Actuator with Push-button Input (16 A) - flush-mount",
     "HmIP-FWI" : "Homematic IP Wiegand Interface",
     "HmIP-HAP" : "LAN ROUTER",
+    "HmIP-HAP-B1" : "LAN ROUTER",
     "HmIP-KRCK" : "Homematic IP Key Ring Remote Control - access control",
     "HmIP-MIO16-PCB" : "Homematic IP Multi IO Module Board - 4x4",
     "HmIP-MOD-HO" : "Homematic IP Module for Hoermann drives",
