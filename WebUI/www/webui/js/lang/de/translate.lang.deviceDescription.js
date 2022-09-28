@@ -200,6 +200,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-FWI" : "Homematic IP Wiegand-Schnittstelle",
     "HmIP-HAP" : "LAN ROUTER",
     "HmIP-HAP-B1" : "LAN ROUTER",
+    "HmIP-HAP JS1" : "LAN ROUTER",
     "HmIP-KRCK" : "Homematic IP Schl%FCsselbundfernbedienung - Zutritt",
     "HmIP-MIO16-PCB" : "Homematic IP Multi IO Modulpatine - 4x4",
     "HmIP-MOD-HO" : "Homematic IP Modul f%FCr H%F6rmann-Antriebe",

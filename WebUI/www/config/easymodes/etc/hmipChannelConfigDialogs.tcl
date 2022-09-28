@@ -94,7 +94,7 @@ proc getMaintenance {chn p descr} {
      append html "</tr>"
   }
 
-  if {([string equal $devType "HmIPW-DRAP"] != 1) && ([string equal $devType "HmIP-HAP"] != 1) && ([string equal $devType "HmIP-HAP-B1"] != 1)} {
+  if {([string equal $devType "HmIPW-DRAP"] != 1) && ([string equal $devType "HmIP-HAP"] != 1) && ([string equal $devType "HmIP-HAP-B1"] != 1) && ([string equal $devType "HmIP-HAP JS1"] != 1)} {
     set param ROUTER_MODULE_ENABLED
     if { [info exists ps($param)] == 1  } {
        incr prn
@@ -167,7 +167,7 @@ set comment {
   if { [info exists ps($param)] == 1  } {
     incr prn
     array_clear options
-    if {([string equal $devType "HmIP-eTRV-3"] == 1) || ([string equal $devType "HmIP-eTRV-E"] == 1) || ([string equal $devType "HmIP-eTRV-E-S"] == 1) } {
+    if {([string equal $devType "HmIP-eTRV-3"] == 1) || ([string equal $devType "HmIP-eTRV-E"] == 1) || ([string equal $devType "HmIP-eTRV-E-S"] == 1) || ([string equal $devType "HmIP-eTRV-E-A"] == 1) } {
       set optVal 0
       for {set val 1} {$val <= 16} {incr val} {
           if {$val < 7} {incr optVal 5} elseif {$val < 14} {incr optVal 10} else {incr optVal 20}
@@ -307,7 +307,7 @@ set comment {
   }
 
   # DRAP/HAP Integration #
-  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1) || ([string equal $devType "HmIP-HAP-B1"] == 1)} {
+  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1) || ([string equal $devType "HmIP-HAP JS1"] == 1)} {
     append html "[getDRAP_HAPMaintenance $chn ps psDescr]"
   }
   # End DRAP/HAP Integration #
@@ -3640,6 +3640,16 @@ proc getShutterContact {chn p descr} {
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentEventFilterTime($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param SAMPLE_INTERVAL
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${genericSampleInterval}</td>"
+     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+     append html "<td>[getHelpIcon $param]</td>"
+    append html "</tr>"
   }
 
   set param MSG_FOR_POS_A

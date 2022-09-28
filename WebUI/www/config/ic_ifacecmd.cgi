@@ -324,6 +324,7 @@ proc cmd_firmware_update {} {
   set HmIPDRAPIdentifier "HmIPW-DRAP"
   set HmIPHAPIdentififier "HmIP-HAP"
   set HmIPHAPB1Identififier "HmIP-HAP-B1"
+  set HmIPHAPJS1Identififier "HmIP-HAP JS1"
 
   catch { import iface }
   catch { import address }
@@ -342,7 +343,7 @@ proc cmd_firmware_update {} {
 
   puts "<script type=\"text/javascript\">if (ProgressBar) ProgressBar.IncCounter(translateKey(\"dialogFirmwareUpdateCheckSuccess\"));</script>"
   if { $result == 1 } then {
-    set hapOrDrapDate [ expr {[string equal $devDescr(TYPE) $HmIPDRAPIdentifier] == 1 || [string equal $devDescr(TYPE) $HmIPHAPIdentififier] == 1 || [string equal $devDescr(TYPE) HmIPHAPB1Identififier] == 1} ]
+    set hapOrDrapDate [ expr {[string equal $devDescr(TYPE) $HmIPDRAPIdentifier] == 1 || [string equal $devDescr(TYPE) $HmIPHAPIdentififier] == 1 || [string equal $devDescr(TYPE) HmIPHAPB1Identififier] == 1 || [string equal $devDescr(TYPE) HmIPHAPJS1Identififier] == 1} ]
     if {$hapOrDrapDate == 1 } {
         #This is for HAP and DRAP updates, which must be treated differently
         #Since the update was started successfully and the update is performed asynchronously, we need to check for the update state here

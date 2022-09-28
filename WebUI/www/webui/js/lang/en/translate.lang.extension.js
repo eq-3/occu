@@ -956,6 +956,7 @@ jQuery.extend(true, langJSON, {
     "rotationDirLeftSlow" : "Slow anti-clockwise rotation",
     "rotationDirRightSlow" : "Slow clockwise rotation",
     "rainDetectorSampleInterval" : "Time between the single measurements<br/>(rain detection interval)",
+    "genericSampleInterval" : "Time between the single measurements",
     "cpSecurityHttpsRedirectTitle" : "Automatic forwarding to HTTPS",
     "cpSecurityHttpsRedirectLabel" : "Forwarding to HTTPS active:",
     "cpSecurityHttpsRedirectDescription" : "If this function is activated, automatic forwarding to HTTPS takes place when accessing the WebUI via HTTP.",

@@ -355,6 +355,13 @@ jQuery.extend(true,langJSON, {
       "Beisplel: Wert der Ausgangsspannung im eingeschaltetem Zustand (100 %):<br/><br/>" +
       "100 % -> 10 V oder 50 % -> 5 V",
 
+    "SAMPLE_INTERVAL" :
+      "Dieser Wert definiert die Zeitspanne, in welcher der Status des Fensters %FCberpr%FCft wird (ge%F6ffnet oder geschlossen).<br/><br/>" +
+      "Die in dem Datenblatt und der Bedienungsanleitung angegebene Batterielaufzeit bezieht sich auf eine Abtastrate von 0,5 Sekunden." +
+      "Durch ein Heraufsetzen dieser Abtastrate kann die Batterielaufzeit deutlich verl%E4ngert werden.<br/><br/>" +
+      "Bedenken Sie die ggf. verz%F6gerte Ausl%F6sung je nach Anwendungsfall. So ist eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch. " +
+      "Bei einer Sicherheitsl%F6sung zur Alarmmeldung sollte die Abtastrate k%FCrzer eingestellt werden.",
+
     "noMoreHelp" : ""
   },
 
@@ -707,6 +714,12 @@ jQuery.extend(true,langJSON, {
       "Example: value of the output voltage when switched on (100 %):<br/><br/>" +
       "100 % -> 10 V oder 50 % -> 5 V",
 
+    "SAMPLE_INTERVAL" :
+      "en* Dieser Wert definiert die Zeitspanne, in welcher der Status des Fensters %FCberpr%FCft wird (ge%F6ffnet oder geschlossen).<br/><br/>" +
+      "Die in dem Datenblatt und der Bedienungsanleitung angegebene Batterielaufzeit bezieht sich auf eine Abtastrate von 0,5 Sekunden." +
+      "Durch ein Heraufsetzen dieser Abtastrate kann die Batterielaufzeit deutlich verl%E4ngert werden.<br/><br/>" +
+      "Bedenken Sie die ggf. verz%F6gerte Ausl%F6sung je nach Anwendungsfall. So ist eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch. " +
+      "Bei einer Sicherheitsl%F6sung zur Alarmmeldung sollte die Abtastrate k%FCrzer eingestellt werden.",
 
 
     "noMoreHelp" : ""
