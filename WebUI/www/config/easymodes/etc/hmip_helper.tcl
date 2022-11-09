@@ -27,7 +27,7 @@ proc getComboBox {prn pref specialElement type {extraparam ""}} {
       }
 
       "eventDelay" {
-        append s [getPanelA $prn $pref $specialElement]
+        append s [getPanelA $prn $pref $specialElement "eventDelay"]
       }
 
       "eventFilterTime" {
@@ -35,7 +35,7 @@ proc getComboBox {prn pref specialElement type {extraparam ""}} {
       }
 
       "eventRandomTime" {
-        append s [getPanelA $prn $pref $specialElement]
+        append s [getPanelA $prn $pref $specialElement "eventRandomTime"]
       }
 
       "txMinDelay" {
@@ -99,7 +99,7 @@ proc getComboBox {prn pref specialElement type {extraparam ""}} {
     return $s
 }
 
-proc getPanelA {prn pref specialElement} {
+proc getPanelA {prn pref specialElement {paramType ""}} {
       set s ""
       append s "<td>"
       append s  "<select id=\"timeDelayA\_$prn\_$pref\" onchange=\"setPanelAValues(this.id, $prn, $pref, \'$specialElement\')\">"
@@ -118,6 +118,15 @@ proc getPanelA {prn pref specialElement} {
         append s "<option value=\"12\">\${optionUnit1H}</option>"
         append s "<option value=\"13\">\${stringTableEnterValue}</option>"
       append s "/<select>"
+
+      if {$paramType == "eventDelay"} {
+        append s "&nbsp;[getHelpIcon EVENT_DELAY 450 75]"
+      }
+
+      if {$paramType == "eventRandomTime"} {
+        append s "&nbsp;[getHelpIcon EVENT_RANDOMTIME 450 75]"
+      }
+
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -830,7 +839,11 @@ proc getDelay {prn pref specialElement} {
           append s "factorElem = jQuery(\"#separate_\" +specialElement + \"_\"+ prn +\"_\" + (parseInt(pref) + 1)),"
           append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
           append s "timeFactorTRElem = jQuery(\"#timeFactor_\"+prn+\"_\" + (parseInt(pref) + 1)),"
-          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1)),"
+          append s "trBlinkElm = jQuery('#'+elmID).parent().parent().next().next().next().next(),"
+          append s "blinkElm = jQuery(trBlinkElm).find('select').first();"
+
+          append s "if ((value == 0) && (blinkElm\[0\].name.indexOf('_BLINK') > -1)) {trBlinkElm.hide();blinkElm.val(0);} else {trBlinkElm.show();}"
 
           append s "timeBaseTRElem.hide();"
           append s "timeFactorTRElem.hide();"

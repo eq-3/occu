@@ -17,7 +17,7 @@ proc _option {type} {
   switch $type {
 
     "TIMEBASE_SHORT" {
-        set options(0)    "100mS"
+        set options(0)    "100ms"
         set options(1)    "$s"
         set options(2)    "$m"
         set options(3)    "$h"
@@ -25,7 +25,7 @@ proc _option {type} {
     }
 
     "TIMEBASE_LONG" {
-      set options(0) "100mS"
+      set options(0) "100ms"
       set options(1) "1$s"
       set options(2) "5$s"
       set options(3) "10$s"

@@ -362,6 +362,52 @@ jQuery.extend(true,langJSON, {
       "Bedenken Sie die ggf. verz%F6gerte Ausl%F6sung je nach Anwendungsfall. So ist eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch. " +
       "Bei einer Sicherheitsl%F6sung zur Alarmmeldung sollte die Abtastrate k%FCrzer eingestellt werden.",
 
+    "SCREEN_MANAGEMENT" :
+      "<b><u>Screen Management</u></b><br/>" +
+      "W%E4hlen Sie hier die Reihenfolge, in der die m%F6glichen Screens des Displays durchgebl%E4ttert werden. " +
+      "Nachdem Sie das Display an die CCU angelernt haben, steht zun%E4chst 1 Screen zur Verf%FCgung. Das ist Screen 1. "+
+      "Um weitere Screens zu aktivieren, gehen Sie folgenderma%DFen vor: <br/><br/>" +
+      "F%FCr jeden Screen gibt es 2 Auswahlboxen, mit denen Sie jeweils den linken und rechten Nachbarscreen w%E4hlen k%F6nnen. "+
+      "Das wird durch die Sympole <b><</b> und <b>></b> gekennzeichnet. Um nun z. B. den zweiten Screen zu aktivieren, w%E4hlen Sie als rechten Nachbar " +
+      "mit der Auswahlbox <b>></b> unter Screen 1 den Wert 2 aus. Um von Screen 2 wieder zur%FCck zu Screen 1 zu gelangen, aktivieren Sie in der Auswahlbox <b><</b> unter Screen 2 den Wert 1. ",
+
+    "DEVICE_OPERATION_MODE_RGBW" :
+      "Der HmIP-RGBW kann in vier verschiedenen Modi betrieben werden:<br/><br/>" +
+      " - RGBW: Betrieb mit einem Rot, Gr%FCn, Blau, Wei%DF - Strip<br/>" +
+      " - RGB: Betrieb mit einem Rot, Gr%FCn, Blau -Strip<br/>" +
+      " - Tunable White: Betrieb mit bis zu zwei Tunable White Stips (bestehend aus Kaltwei%DF- und Warmwei%DF-LEDs)<br/>" +
+      " - PWM: Betrieb von bis zu vier Pulsweitenmodulierten Ausgangskan%E4len.<br/></br>" +
+      "Ge%E4ndert werden kann der Modus nur, wenn keine Verkn%FCpfungen oder Programme bestehen, die das Ger%E4t verwenden.",
+
+    "POWERUP_JUMPTARGET_RGBW" :
+      "Verhalten des Ausgangskanal nach Zufuhr der Versorgungsspannung.",
+
+    "POWERUP_ON_HUE" :
+      "Farbton nach Zufuhr der Versorgungsspannung.<br/><br/>" +
+      "(360 = letzter 'Ein'-Wert); 361 = keine %C4nderung)",
+
+    "POWERUP_ON_SATURATION":
+      "Farbs%E4ttigung nach Zufuhr der Versorgungsspannung.<br/><br/>" +
+      "(100.5 = letzter 'Ein'-Wert; 101 = keine %C4nderung)",
+
+    "POWERUP_ON_COLOR_TEMPERATURE_RGBW":
+      "Farbtemperatur nach Zufuhr der Versorgungsspannung",
+
+    "EVENT_DELAY" :
+      "Verz%F6gerungszeit, bis ein stabiler Kanalzustand der Zentrale %FCbermittelt wird.",
+
+    "EVENT_RANDOMTIME" :
+    "Maximal zuf%E4llige Zeit, die zur Eventverz%F6gerung addiert wird.",
+
+    "ON_MIN_LEVEL_RGBW" :
+      "Pegelsprung von OFF zu ON, um Bereiche ohne Leuchten des Leuchtmittels zu %FCberspringen.",
+
+    "HARDWARE_COLOR_TEMPERATURE_WARM_WHITE" :
+      "Farbtemperatur der warmwei%DFen LED des angeschlossenen Tunable-White-Strips.",
+
+    "HARDWARE_COLOR_TEMPERATURE_COLD_WHITE" :
+      "Farbtemperatur der kaltwei%DFen LED des angeschlossenen Tunable-White-Strips.",
+
     "noMoreHelp" : ""
   },
 
@@ -721,6 +767,51 @@ jQuery.extend(true,langJSON, {
       "Bedenken Sie die ggf. verz%F6gerte Ausl%F6sung je nach Anwendungsfall. So ist eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch. " +
       "Bei einer Sicherheitsl%F6sung zur Alarmmeldung sollte die Abtastrate k%FCrzer eingestellt werden.",
 
+    "SCREEN_MANAGEMENT" :
+      "en* <b><u>Screen Management</u></b><br/>" +
+      "en* W%E4hlen Sie hier die Reihenfolge, in der die m%F6glichen Screens des Displays durchgebl%E4ttert werden. " +
+      "Nachdem Sie das Display an die CCU angelernt haben, steht zun%E4chst 1 Screen zur Verf%FCgung. Das ist Screen 1. "+
+      "Um weitere Screens zu aktivieren, gehen Sie folgenderma%DFen vor: <br/><br/>" +
+      "F%FCr jeden Screen gibt es 2 Auswahlboxen, mit denen Sie jeweils den linken und rechten Nachbarscreen w%E4hlen k%F6nnen. "+
+      "Das wird durch die Sympole <b><</b> und <b>></b> gekennzeichnet. Um nun z. B. den zweiten Screen zu aktivieren, w%E4hlen Sie als rechten Nachbar " +
+      "mit der Auswahlbox <b>></b> unter Screen 1 den Wert 2 aus. Um von Screen 2 wieder zur%FCck zu Screen 1 zu gelangen, aktivieren Sie in der Auswahlbox <b><</b> unter Screen 2 den Wert 1. ",
+
+    "DEVICE_OPERATION_MODE_RGBW" :
+      "en* Der HmIP-RGBW kann in vier verschiedenen Modi betrieben werden:<br/><br/>" +
+      " - RGBW: Betrieb mit einem Rot, Gr%FCn, Blau, Wei%DF - Strip<br/>" +
+      " - RGB: Betrieb mit einem Rot, Gr%FCn, Blau -Strip<br/>" +
+      " - Tunable White: Betrieb mit bis zu zwei Tunable White Stips (bestehend aus Kaltwei%DF- und Warmwei%DF-LEDs)<br/>" +
+      " - PWM: Betrieb von bis zu vier Pulsweitenmodulierten Ausgangskan%E4len.<br/></br>" +
+      "Ge%E4ndert werden kann der Modus nur, wenn keine Verkn%FCpfungen oder Programme bestehen, die das Ger%E4t verwenden.",
+
+    "POWERUP_JUMPTARGET_RGBW" :
+      "en* Verhalten des Ausgangskanal nach Zufuhr der Versorgungsspannung.",
+
+    "POWERUP_ON_HUE" :
+      "en* Farbton nach Zufuhr der Versorgungsspannung.<br/><br/>" +
+      "(360 = letzter 'Ein'-Wert); 361 = keine %C4nderung)",
+
+    "POWERUP_ON_SATURATION":
+      "en* Farbs%E4ttigung nach Zufuhr der Versorgungsspannung.<br/><br/>" +
+      "(100.5 = letzter 'Ein'-Wert; 101 = keine %C4nderung)",
+
+    "POWERUP_ON_COLOR_TEMPERATURE_RGBW":
+    "en* Farbtemperatur nach Zufuhr der Versorgungsspannung",
+
+    "EVENT_DELAY" :
+      "en* Verz%F6gerungszeit, bis ein stabiler Kanalzustand der Zentrale %FCbermittelt wird.",
+
+    "EVENT_RANDOMTIME" :
+      "en* Maximal zuf%E4llige Zeit, die zur Eventverz%F6gerung addiert wird.",
+
+    "ON_MIN_LEVEL_RGBW" :
+      "en* Pegelsprung von OFF zu ON, um Bereiche ohne Leuchten des Leuchtmittels zu %FCberspringen.",
+
+    "HARDWARE_COLOR_TEMPERATURE_WARM_WHITE" :
+      "en* Farbtemperatur der warmwei%DFen LED des angeschlossenen Tunable-White-Strips.",
+
+    "HARDWARE_COLOR_TEMPERATURE_COLD_WHITE" :
+      "en* Farbtemperatur der kaltwei%DFen LED des angeschlossenen Tunable-White-Strips.",
 
     "noMoreHelp" : ""
     }

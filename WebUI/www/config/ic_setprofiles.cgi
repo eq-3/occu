@@ -856,7 +856,7 @@ cgi_eval {
     set comment {
       # This creates the link params of the receiver. Useful for initializing a new easymode
       foreach val [array names receiver_ps] {
-        exec echo "$val: $receiver_ps($val)" >> /tmp/link.log
+        exec echo "set PROFILE_1($val) $receiver_ps($val)" >> /tmp/link.log
       }
     }
     #---------------------------------------------------------------

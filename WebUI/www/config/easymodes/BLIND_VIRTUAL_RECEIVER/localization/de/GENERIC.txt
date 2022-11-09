@@ -13,6 +13,6 @@
 "lblSpeed" : "Geschwindigkeit",
 
 "option0" : "Normal",
-"option1" : "Langsam",
-"option2" : "Sehr langsam",
-"option3" : "Besonders langsam",
+"option1" : "M&auml;&szlig;ig",
+"option2" : "langsam",
+"option3" : "Sehr langsam",

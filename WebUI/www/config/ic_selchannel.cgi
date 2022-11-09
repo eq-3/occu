@@ -19,6 +19,8 @@ ise_getChannelFunctions ise_FUNCTIONS
 array set ise_ROOMS ""
 ise_getChannelRooms ise_ROOMS
 
+set visibleChnsWGD ""
+
 #=====
 
 proc put_page {} {
@@ -196,6 +198,86 @@ proc getExtendedLinkDescription {channelType channel} {
     }
   }
   return $result
+}
+
+# Hmip-RGBW - Mode RGBW=0 / RGW=1 / TunableWhite=2 / PWM=3
+proc getRGBWDeviceMode {} {
+  # Fetch the selected mode of the device
+  array_clear result
+  array set result [rega_script {
+    string dev_id;
+    string chnID;
+    string metaDevMode = "-";
+
+    foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs()){
+      object dev=dom.GetObject(dev_id);
+      if((dev.Interface() != 65535) && (dev.Address() != "") && (dev.Address() != "BidCoS-RF") && (dev.Address() != "BidCoS-Wir") && (dev.Address() != "System") && (dev.HssType() == "HmIP-RGBW")) {
+        !devs = devs # " " # dev.Address() # " {" # dev.ID() # "} ";
+        object device = dom.GetObject(dev.ID());
+        object channel;
+        string  chnId;
+        string maintenanceID = "";
+        foreach(chnId, device.Channels())  {
+          if (maintenanceID == "") {
+            maintenanceID = chnId;
+            channel = dom.GetObject(maintenanceID);
+            metaDevMode = channel.MetaData("deviceMode");
+          }
+        }
+
+      }
+    }
+  }]
+
+  # Mode RGBW=0 / RGW=1 / TunableWhite=2 / PWM=3
+  return $result(metaDevMode)
+}
+
+# Hmip-WGD(-PL) -
+proc getWGDScreenOrder {devType} {
+  # Fetch the active screens of the device
+  array_clear result
+
+  if {$devType == "HMIPW-WGD"} {
+    array set result [rega_script {
+      string dev_id;
+      string metaScreenOrder = "-";
+      integer loop = 0;
+      foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs()){
+        if (metaScreenOrder == "-") {
+          object dev=dom.GetObject(dev_id);
+          if((dev.Interface() != 65535) && (dev.Address() != "") && (dev.Address() != "BidCoS-RF") && (dev.Address() != "BidCoS-Wir") && (dev.Address() != "System") && (dev.HssType() == "HmIPW-WGD")) {
+            object device = dom.GetObject(dev.ID());
+            metaScreenOrder = device.MetaData("screenOrder");
+          }
+        }
+        return;
+        loop = loop + 1;
+      }
+    }]
+  }
+  if {$devType == "HMIPW-WGD-PL"} {
+
+    array set result [rega_script {
+      string dev_id;
+      string metaScreenOrder = "-";
+      integer loop = 0;
+      foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs()){
+        if (metaScreenOrder == "-") {
+          object dev=dom.GetObject(dev_id);
+          if((dev.Interface() != 65535) && (dev.Address() != "") && (dev.Address() != "BidCoS-RF") && (dev.Address() != "BidCoS-Wir") && (dev.Address() != "System") && (dev.HssType() == "HmIPW-WGD-PL")) {
+            object device = dom.GetObject(dev.ID());
+            metaScreenOrder = device.MetaData("screenOrder");
+          }
+        }
+        return;
+        loop = loop + 1;
+      }
+    }]
+  }
+
+  # Screen order
+  return $result(metaScreenOrder)
 }
 
 proc put_PreviousStep {} {
@@ -697,6 +779,123 @@ proc showHmIPChannel {devType direction address chType} {
   # The sabotage channel of the HmIP-ASIR is not yet in use, so we can't use it for links
   if {([string first "HMIP-ASIR" $devType] != -1) && ($chType == "KEY_TRANSCEIVER")} {
    # don't show the channel
+    return 0
+  }
+
+  # HmIP-RGBW - show only the relevant channels for each mode.
+  if {($devType == "HMIP-RGBW") && ($chType == "UNIVERSAL_LIGHT_RECEIVER")} {
+
+    # selectedMode RGBW=0 / RGW=1 / TunableWhite=2 / PWM=3
+    set selectedMode [getRGBWDeviceMode]
+
+    # return 0 = hide the channel
+    # return 1 = show the channel
+
+    switch $selectedMode {
+     "0" {# show only ch 1
+        if {$ch == 1} {return 1} else {return 0}
+      }
+     "1" {# show only ch 1
+        if {$ch == 1} {return 1} else {return 0}
+      }
+     "2" {# show ch 1 and 2
+        if {($ch == 1) || ($ch == 2)} {return 1} else {return 0}
+      }
+     "3" {# show all channels
+        return 1
+      }
+    }
+  }
+
+  # HmIPW-WGD(-PL)
+  # - Show only the relevant channels according to the selected screens
+
+  if {(($devType == "HMIPW-WGD") || ($devType == "HMIPW-WGD-PL")) && (($chType == "DISPLAY_INPUT_TRANSMITTER") || ($chType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || ($chType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER"))} {
+
+    # Quick Motion channel is always visible
+    if {$ch == 41} {return 1}
+
+    # screenOrder and visibleChnsWGD are global because they were determined only with the first channel (chn. 1) and then used for all other channels of the device
+    global iface_url screenOrder visibleChnsWGD
+    set endID "END"
+
+    # - Do this only once and use it for all other channels
+    # - For this we check only on channel 1
+    if {$ch == 1} {
+      set screenOrder [getWGDScreenOrder $devType]
+      set visibleChnsWGD ""
+    }
+
+    if {[info exists screenOrder]} {
+      set arScreenOrder [split $screenOrder ","]
+      set arUsedScreens ""
+      set numberOfScreens [expr [llength $arScreenOrder] - 1]
+      set indexEndScreen [lsearch $arScreenOrder $endID]
+      if {$numberOfScreens == 5} {set firstTileOfChannel "1 9 17 25 33"}
+      if {$numberOfScreens == 10} {set firstTileOfChannel "1 9 17 25 33 42 44 46 48 50"}
+
+
+      # Here we set the first and last tile of each selected screen depending on the number of selected tiles
+      # - Do this only once and use it for all other channels
+      if {$ch == 1} {
+        # get the number of tiles per screen
+        set devAddress [lindex [split $address ":"] 0]
+        set url $iface_url(HmIP-RF)
+        array set ch_ps [xmlrpc $url getParamset [list string $devAddress:0] [list string MASTER]]
+        for {set loop 1} {$loop <= $numberOfScreens} {incr loop} {
+          set activeTilesWGD(SCREEN_LAYOUT_TILE_LAYOUT_$loop) $ch_ps(SCREEN_LAYOUT_TILE_LAYOUT_$loop)
+        }
+
+        # get the screens in use
+        for {set loop 0} {$loop < $indexEndScreen} {incr loop} {
+          lappend arUsedScreens [lindex $arScreenOrder $loop]
+        }
+
+        # sort the list
+        set usedScreensWGD [lsort $arUsedScreens]
+
+        # determine the first and last ch of the screen depending on the number of selected tiles
+        foreach scrn $usedScreensWGD {
+          set visibleTiles $activeTilesWGD(SCREEN_LAYOUT_TILE_LAYOUT_[expr $scrn + 1])
+
+          if {([expr $scrn + 1] <= 5) || ($numberOfScreens == 5)} {
+            # Default value
+            set chnCounter 7
+            if {$visibleTiles == 0} {
+              set chnCounter 1
+            } elseif {$visibleTiles == 1} {
+              set chnCounter 3
+            } elseif {$visibleTiles == 2} {
+              set chnCounter 7
+            }
+          } elseif {([expr $scrn + 1] > 5) && ($numberOfScreens == 10)} {
+            # Default value
+            set chnCounter 1
+              if {$visibleTiles == 0} {
+                set chnCounter 0
+              } elseif {$visibleTiles == 1} {
+                set chnCounter 1
+              }
+          }
+
+          set  firstTile [lindex $firstTileOfChannel $scrn]
+          set  lastTile [expr $firstTile + $chnCounter]
+
+          # visibleChnsWGD contains a list with visible channels. Channels not in this list are not displayed
+          for {set loop $firstTile } {$loop <= $lastTile} {incr loop} {
+            lappend visibleChnsWGD $loop
+          }
+        }
+      }
+
+      # puts "<script type='text/javascript'>console.log('$devType -  visibleChnsWGD: $visibleChnsWGD');</script>"
+
+      if {[lsearch $visibleChnsWGD $ch] != -1} {
+        # return 1 = show the channel
+        return 1
+      }
+    }
+    # return 0 = hide the channel
     return 0
   }
 

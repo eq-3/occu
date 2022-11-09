@@ -134,7 +134,21 @@ proc option {type} {
         set options(1.005) "\${lastValue}"
         set options(99999998)  "\${enterValue}"
     }
-    
+
+    "DIM_LEVELwoLastValue" {
+        set options(0.1) "10$p"
+        set options(0.2) "20$p"
+        set options(0.3) "30$p"
+        set options(0.4) "40$p"
+        set options(0.5) "50$p"
+        set options(0.6) "60$p"
+        set options(0.7) "70$p"
+        set options(0.8) "80$p"
+        set options(0.9) "90$p"
+        set options(1.0) "100$p"
+        set options(99999998)  "\${enterValue}"
+    }
+
     "DIM_OFFLEVEL" {
         set options(0.0) "0$p"
         set options(0.1) "10$p"
@@ -147,6 +161,20 @@ proc option {type} {
         set options(0.8) "80$p"
         set options(0.9) "90$p"
         set options(1.005) "\${lastValue}"
+        set options(99999998)  "\${enterValue}"
+    }
+
+    "DIM_OFFLEVELwoLastValue" {
+        set options(0.0) "0$p"
+        set options(0.1) "10$p"
+        set options(0.2) "20$p"
+        set options(0.3) "30$p"
+        set options(0.4) "40$p"
+        set options(0.5) "50$p"
+        set options(0.6) "60$p"
+        set options(0.7) "70$p"
+        set options(0.8) "80$p"
+        set options(0.9) "90$p"
         set options(99999998)  "\${enterValue}"
     }
 
@@ -163,6 +191,59 @@ proc option {type} {
         set options(0.90) "90$p"
         set options(1.005) "\${lastValue}"
         set options(99999998)  "\${enterValue}"
+    }
+
+    "DIM_STEPwoLastValue_5-90" {
+        set options(0.05) "5$p"
+        set options(0.10) "10$p"
+        set options(0.20) "20$p"
+        set options(0.30) "30$p"
+        set options(0.40) "40$p"
+        set options(0.50) "50$p"
+        set options(0.60) "60$p"
+        set options(0.70) "70$p"
+        set options(0.80) "80$p"
+        set options(0.90) "90$p"
+        set options(99999998)  "\${enterValue}"
+    }
+
+    "DIM_STEPwoLastValue_5-100" {
+        set options(0.05) "5$p"
+        set options(0.10) "10$p"
+        set options(0.20) "20$p"
+        set options(0.30) "30$p"
+        set options(0.40) "40$p"
+        set options(0.50) "50$p"
+        set options(0.60) "60$p"
+        set options(0.70) "70$p"
+        set options(0.80) "80$p"
+        set options(0.90) "90$p"
+        set options(1.00) "100$p"
+        set options(99999998)  "\${enterValue}"
+    }
+
+    "COLOR_TEMPERATURE_STEP" {
+        set options(10) "10 K"
+        set options(50) "50 K"
+        set options(100) "100 K"
+        set options(200) "200 K"
+        set options(300) "300 K"
+        set options(400) "400 K"
+        set options(500) "500 K"
+        set options(1000) "1000 K"
+        set options(2000) "2000 K"
+        set options(99999990)  "\${enterValue}"
+    }
+
+    "HUE_STEP" {
+        set options(5) "5"
+        set options(10) "10"
+        set options(20) "20"
+        set options(30) "30"
+        set options(40) "40"
+        set options(50) "50"
+        set options(60) "60"
+        set options(99999990)  "\${enterValue}"
     }
 
     "RAW_0_100Percent" {
@@ -371,6 +452,11 @@ proc option {type} {
       # set options(1) "\${optionWindowDriveLevelOnDelay}" ; not necessary
       set options(2) "\${optionWindowDriveLevelOn}"
       # set options(3) "\${optionWindowDriveLevelOffDelay}" ; not necessary
+    }
+
+    "POWERUP_JUMPTARGET_wo_ONDELAY" {
+      set options(0) "\${stringTableStateFalse}"
+      set options(2) "\${stringTableStateTrue}"
     }
 
     "SHORT_LONG" {

@@ -1,0 +1,24 @@
+"dimmer_on_brighter" : "Helligkeit - ein/heller",
+"dimmer_off_darker" : "Helligkeit - aus/dunkler",
+"dimmer_on_off_b_d" : "Helligkeit - ein/aus &amp; heller/dunkler",
+"colortemp_up" : "Farbtemperatur - hoch",
+"colortemp_down" : "Farbtemperatur - runter",
+"colortemp_up_down" : "Farbtemperatur - hoch/runter",
+
+"hcl_on_up" : "HCL - ein/heller",
+"hcl_off_down" : "HCL - aus/dunkler",
+"hcl_on_of_up_down" : "HCL - ein/aus / heller/dunkler",
+
+"dim2warm_on_up" : "Dim2Warm - ein/heller",
+"dim2warm_off_down" : "Dim2Warm - aus/dunkler",
+"dim2warm_on_of_up_down" : "Dim2Warm - ein/aus & heller/dunkler",
+
+"COLOR_TEMP" : "Farbtemperatur",
+"COLOR_TEMP_ON" : "Farbtemperatur im Zustand 'ein'",
+"COLOR_TEMP_OFF" : "Farbtemperatur im Zustand 'aus'",
+"MIN_COLOR_TEMP" : "Minimale Farbtemperatur",
+"MAX_COLOR_TEMP" : "Maximale Farbtemperatur",
+
+"unitKelvin" : "K",
+
+

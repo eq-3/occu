@@ -534,12 +534,7 @@ jQuery.extend(true,langJSON, {
     "delDevFirmwareSuccessB" : " gel%F6scht.",
     "delDevFirmwareMsgTitle" :"Best%E4tigung",
     "delDevFirmwareMsgBody" : "Wollen Sie die Firmware wirklich vom System entfernen?",
-    "fwUpdatePressConfigKey" :
-      "Bringen Sie das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" und dr%FCcken Sie die Konfigurations-Taste. "+
-      "Anschlie%DFend startet das Firmwareupdate.",
-    "fwUpdatePressSystemKey" :
-      "Bringen Sie das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" und dr%FCcken Sie die Bedientaste. "+
-      "Anschlie%DFend startet das Firmwareupdate.",
+
     "partyModeDialogTitle" : "Hier k%F6nnen Sie den Party-/Urlaubsmodus einstellen.",
     "partyStart" : "Startzeit",
     "partyEnd" : "Endzeit",

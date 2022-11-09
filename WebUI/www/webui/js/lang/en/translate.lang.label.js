@@ -146,6 +146,7 @@ jQuery.extend(true,langJSON, {
     "lblMinOnTime" : "Minimum switch-on time",
     "lblMinutes" : "minutes",
     "lblMode" : "Mode",
+    "lblOperatingMode" : "Operating mode",
     "lblMountingOrientation" : "Display orientation",
     "lblNewDeviceFirmwareAvailable" : "New device firmware available",
     "lblNewFunction": "new function",
@@ -279,6 +280,25 @@ jQuery.extend(true,langJSON, {
     "lblYellowShort" : "Yellow short",
     "lblYes" : "Yes",
     "lblYesterday" : "Yesterday",
+
+    "comment" : "Relase C/2022",
+    "lblPowerUpOnLevel" : "en* Einschaltpegel",
+    "lblPowerUpOnColorTemperature" : "en* Farbtemperatur",
+    "lblPowerUpOFFColorTemperature" : "en* Farbtemperatur",
+    "lblPowerUpOnSaturation" : "en* Farbs%E4ttigung (Saturation)",
+    "lblPowerUpOnHue" : "en* Farbton (Hue)",
+    "lblPowerUpOffHue" : "en* Farbton (Hue)",
+    "lblHardwareColorTemperatureColdWhite" : "en* Farbtemperatur Kalt-Wei%DF",
+    "lblHardwareColorTemperatureWarmWhite" : "en* Farbtemperatur Warm-Wei%DF",
+    "lblLimitationFactorR" : "not in use en* LIMITATION_FACTOR_R",
+    "lblLimitationFactorG" : "not in use en* LIMITATION_FACTOR_B",
+    "lblLimitationFactorB" : "not in use en* LIMITATION_FACTOR_G",
+    "lblWhiteValueR" : "not in use en* WHITE_VALUE_R",
+    "lblWhiteValueG" : "not in use en* WHITE_VALUE_G",
+    "lblWhiteValueB" : "not in use en* WHITE_VALUE_B",
+
+    "lblDimmerOnMinLevel" : "en* Minimaler Pegel<br/>im Zustand EIN",
+
     "noMOreKeys" : ""
   }
 });

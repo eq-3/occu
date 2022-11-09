@@ -547,29 +547,58 @@ function ::CreateHeatingControlHmIPa() {
 }
 
 function ::CreateBWTHSwitchState() {
-    object oValveState = cObj.DPByControl("SWITCH.STATE");
+  object oValveState = cObj.DPByControl("SWITCH.STATE");
 
-    string lblValveState = "${stringTableValveStateNotAvailable}";
-    boolean valveState = false;
+  ! Determine the name of the interface
+  integer iFaceID = cObj.Interface();
+  object oIface = dom.GetObject(iFaceID);
+  string sInterface = oIface.Name();
 
-    if (oValveState) {
-      valveState = oValveState.Value();
+  object oChannel = dom.GetObject(chnId);
+  string chAddress = oChannel.Address();
+  string devAddress = chnAddress.StrValueByIndex(":",0);
+  string ch8Address = devAddress#":8";
 
-      if (valveState) {
-        lblValveState = "${stringTableValveStateTrue}";
-      } else {
-        lblValveState = "${stringTableValveStateFalse}";
-      }
+  boolean valveState = false;
 
-    }
+  if (oValveState) {
+    valveState = oValveState.Value();
+  }
 
-    WriteLine("<td>");
-      WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
-        WriteLine("<tr>");
-          WriteLine("<td>"#lblValveState#"</td>");
-        WriteLine("</tr>");
-      WriteLine("</table>");
-    WriteLine("</td>");
-  WriteLine("</tr>");
+  WriteLine("<td>");
+    WriteLine("<table class='ControlBtnInfo' style='width:200px'>");
+      WriteLine("<tr>");
+        WriteLine("<td><div id='idValveState'></div></td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  ! SPHM-1021
+  WriteLine("<script type='text/javascript'>");
+    WriteLine("var chn8Description = homematic('Interface.getParamset', {'interface':'"#sInterface#"', 'address':'"#ch8Address#"', 'paramsetKey': 'MASTER'}),");
+    WriteLine("state = "#valveState#",");
+    WriteLine("lblValveState = translateKey('stringTableValveStateNotAvailable');");
+
+    WriteLine("if (parseInt(chn8Description.HEATING_VALVE_TYPE) == 0) {" );
+
+      WriteLine("if (state == true) {");
+        WriteLine("lblValveState = translateKey('stringTableValveStateTrue');");
+      WriteLine("} else if (state == false) {");
+        WriteLine("lblValveState = translateKey('stringTableValveStateFalse');");
+      WriteLine("}");
+
+    WriteLine("} else if (parseInt(chn8Description.HEATING_VALVE_TYPE) == 1) {");
+
+      WriteLine("if (state == true) {");
+        WriteLine("lblValveState = translateKey('stringTableValveStateFalse');");
+      WriteLine("} else if (state == false) {");
+        WriteLine("lblValveState = translateKey('stringTableValveStateTrue');");
+      WriteLine("}");
+
+    WriteLine("}");
+
+    WriteLine("jQuery('#idValveState').text(lblValveState);");
+
+  WriteLine("</script>");
 
 }

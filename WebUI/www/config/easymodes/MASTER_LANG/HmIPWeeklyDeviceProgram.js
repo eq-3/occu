@@ -26,7 +26,13 @@ jQuery.extend(true,langJSON, {
     "lblWPWeekday" : "Wochentag",
     "lblWPTargetChannels" : "Zielkan%E4le",
     "lblAddSwitchPoint" : "Schaltzeitpunkt hinzuf%FCgen",
+
+    "lblColorTemp" : "Farbtemperatur",
+    "lblColorValue" : "Farbwert",
+
     "lblDelSwitchPoint" : "Schaltzeitpunkt entfernen",
+
+    "lblHueSat" : "Hue/Saturation",
 
     "optionPermanent" : "Dauerhaft",
     "optionEnterValue" : "Wert eingeben",
@@ -47,6 +53,8 @@ jQuery.extend(true,langJSON, {
     "optionStateON": "Ein",
     "optionPermissionTrue" : "Erteilt",
     "optionPermisionFalse" : "Nicht erteilt",
+    "optionHueSaturation" : "Hue/Saturation",
+    "optionColorTemp" : "Farbtemperatur",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 Sekunde",
@@ -125,7 +133,13 @@ jQuery.extend(true,langJSON, {
     "lblWPWeekday" : "Day of the week",
     "lblWPTargetChannels" : "Target channels",
     "lblAddSwitchPoint" : "Add switching time",
+
+    "lblColorTemp" : "en* Color temperature",
+    "lblColorValue" : "en* Color value",
+
     "lblDelSwitchPoint" : "Remove switching time",
+
+    "lblHueSat" : "en* Hue/Saturation",
 
     "optionPermanent" : "Permanent",
     "optionEnterValue" : "Enter value",
@@ -146,6 +160,8 @@ jQuery.extend(true,langJSON, {
     "optionStateON": "On",
     "optionPermissionTrue" : "Granted",
     "optionPermisionFalse" : "Not granted",
+    "optionHueSaturation" : "en* Hue/Saturation",
+    "optionColorTemp" : "en* Farbtemperatur",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",

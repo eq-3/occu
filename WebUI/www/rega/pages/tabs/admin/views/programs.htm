@@ -459,6 +459,62 @@
     });
   };
 
+  setHmipRGBWTunableWhiteController = function(regaDialogID, deviceType, chnAddress) {
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
+      url = "/pages/msg/setRGBWTunableWhiteCombinedParam.htm";
+    jQuery(elm).prop("disabled", true);
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+      var dialog = new RGBWTunableWhiteControllerDialog(translateKey("titleConfigDialog"), htmlContent, deviceType, chnAddress ,jQuery(elm).val(), function(result) {
+        jQuery(elm).prop("disabled", false);
+        if (result != 0) {
+          conInfo("setRGBWTunableWhiteController: Yes pressed");
+          var cfgString = this.getConfigString();
+          conInfo(cfgString);
+          elm.val(cfgString);
+          elm.change();
+        }
+
+      }, "html");
+      dialog.btnTextNo(translateKey("footerBtnCancel"));
+      dialog.btnTextYes(translateKey("footerBtnOk"));
+      dialog.setWidth(500);
+    });
+  };
+
+  setHmipRGBWController = function(regaDialogID, deviceType, chnAddress) {
+    var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
+      url = "/pages/msg/setRGBWCombinedParam.htm";
+    jQuery(elm).prop("disabled", true);
+
+    var req = jQuery.ajax({
+      url : url +"?sid=" + SessionId,
+      dataType: "html"
+    });
+
+    req.done(function(htmlContent) {
+      var dialog = new hmipRGBWControllerDialog(translateKey("titleConfigDialog"), htmlContent, deviceType, chnAddress ,jQuery(elm).val(), function(result) {
+        jQuery(elm).prop("disabled", false);
+        if (result != 0) {
+          conInfo("setHmipRGBWController: Yes pressed");
+          var cfgString = this.getConfigString();
+          conInfo(cfgString);
+          elm.val(cfgString);
+          elm.change();
+        }
+
+      }, "html");
+      dialog.btnTextNo(translateKey("footerBtnCancel"));
+      dialog.btnTextYes(translateKey("footerBtnOk"));
+      dialog.setWidth(500);
+    });
+  };
+
   setWindowDriveReceiverLevelController = function(regaDialogID, deviceType, chnAddress) {
     var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
       url = "/pages/msg/setWindowDriveCombinedParam.htm";

@@ -27,14 +27,15 @@
   string hmipw_wrc6 = "HmIPW-WRC6";
   string hmip_smi55 = "HmIP-SMI55";
   string hmip_smi55_2 = "HmIP-SMI55-2";
-
-
+  string hmip_wgd = "HmIPW-WGD";
+  string hmip_wgd_pl = "HmIPW-WGD-PL";
 
   string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
 
   string acousticSignalVirtualReceiver = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER";
   string blindVirtualReceiver = "BLIND_VIRTUAL_RECEIVER";
   string dimmerVirtualReceiver = "DIMMER_VIRTUAL_RECEIVER";
+  string universalLightReceiver = "UNIVERSAL_LIGHT_RECEIVER";
   string switchVirtualReceiver = "SWITCH_VIRTUAL_RECEIVER";
   string alarmSwitchVirtualReceiver = "ALARM_SWITCH_VIRTUAL_RECEIVER";
   string opticalSignaReceiver = "OPTICAL_SIGNAL_RECEIVER";
@@ -66,16 +67,25 @@
 
   string excludeHmIPCDT =  "CONTROL_DIFFERENTIAL_TEMPERATURE";
   string excludeHmIPSmokeDetCommandReservedAlarmOff = "SMOKE_DETECTOR_COMMAND=RESERVED_ALARM_OFF";
-
-  ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
-  ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
   string excludeHmIPLevel2 = "xx";
+
   object oCH = dom.GetObject( iCH );
   if (oCH) {
+    ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
+    ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
     if (oCH.HssType().Find("BLIND_VIRTUAL_RECEIVER") != -1) {
       object oMode = dom.GetObject(oCH.Address());
       if (oMode.MetaData("channelMode") == "shutter") {
         string excludeHmIPLevel2 = "LEVEL_2";
+      }
+    }
+
+    if (oCH.HssType().Find("UNIVERSAL_LIGHT_RECEIVER") != -1) {
+      object oDevice = dom.GetObject(oCH.Device());
+      object oMaintenance = dom.GetObject(oDevice.Channels().GetAt(0));
+
+      if (oMaintenance.MetaData("deviceMode") == 3) {
+        dimmerVirtualReceiver = "UNIVERSAL_LIGHT_RECEIVER";
       }
     }
   }
@@ -530,6 +540,7 @@
             integer jalousieActor = chLabel.Find(hm_jalousieActor);
             integer i_acousticSignalVirtualReceiver = oCH.HssType().Find(acousticSignalVirtualReceiver);
             integer i_dimmerVirtualReceiver = oCH.HssType().Find(dimmerVirtualReceiver);
+            integer i_universalLightReceiver = oCH.HssType().Find(universalLightReceiver);
             integer i_opticalSignalReceiver = oCH.HssType().Find(opticalSignaReceiver);
             integer i_switchVirtualReceiver = oCH.HssType().Find(switchVirtualReceiver);
             integer i_blindVirtualReceiver = oCH.HssType().Find(blindVirtualReceiver);
@@ -552,6 +563,7 @@
               || (i_hmip_mp3p != -1)
               || (i_blindVirtualReceiver != -1)
               || (i_dimmerVirtualReceiver != -1)
+              || (i_universalLightReceiver != -1)
               || (i_opticalSignalReceiver != -1)
               || (i_switchVirtualReceiver != -1)
               || (i_servoVirtualReceiver != -1)
@@ -656,6 +668,25 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
+              if ((i_universalLightReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                object oDevice = dom.GetObject(oCH.Device());
+                object oMaintenance = dom.GetObject(oDevice.Channels().GetAt(0));
+
+                if ((oMaintenance.MetaData("deviceMode") == 0) || (oMaintenance.MetaData("deviceMode") == 1)) {
+                  if (iV.Find("L=") == -1) {
+                      iV = "L=100,OT=0,RT=0,H=0,SAT=100,RTTDV=0,RTTDU=0";
+                  }
+                  Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setHmipRGBWController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="45" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                }
+
+                if (oMaintenance.MetaData("deviceMode") == 2) {
+                  if (iV.Find("L=") == -1) {
+                      iV = "L=100,OT=0,RT=0,TC=4500,RTTDV=0,RTTDU=0";
+                  }
+                  Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setHmipRGBWTunableWhiteController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                }
+              }
+
               if ((i_opticalSignalReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("L=") == -1) {
                   if ((oCH.Label().Find(hmip_mp3p) == -1) && (oCH.Label().Find(hmip_bsl) == -1)) {
@@ -700,7 +731,7 @@
                 ! IMTL(evel) 0 = OFF - 1 = ON
                 ! Some devices have no a display (e. g. HmIPW-WRC6). Therefore we check for a key visual (IMKV)
                 if (iV.Find("IMKV=") == -1) {
-                  if (oCH.Label().Find(hmipw_wrc6) == -1) {
+                  if ((oCH.Label().Find(hmipw_wrc6) == -1) && (oCH.Label().Find(hmip_wgd) == -1) && (oCH.Label().Find(hmip_wgd_pl) == -1)) {
                     iV = "IMLB=true,IMKV=true,IMTL=1,IMDU=60";
                   } else {
                     iV = "IMKV=true,IMTL=1,IMDU=60";

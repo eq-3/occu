@@ -4,9 +4,9 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipDRAP_HAPMaintenance.tcl]
 # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
-proc getMaintenance {chn p descr} {
+proc getMaintenance {chn p descr address} {
 
-  global dev_descr env
+  global dev_descr env iface
 
   upvar $p ps
   upvar $descr psDescr
@@ -62,6 +62,79 @@ proc getMaintenance {chn p descr} {
 
   if {$cyclicInfo == "true"} {
     append html "[getHorizontalLine]"
+  }
+
+  if {[string equal $devType "HmIP-RGBW"] != 1} {
+    set param OVERTEMP_LEVEL
+    if { [info exists ps($param)] == 1 } {
+      incr prn
+      append html "<tr name=\"expertParam\" class=\"hidden\">"
+        append html "<td>\${stringTableDimmerOverTempLevel}</td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "</tr>"
+    }
+  }
+
+  set param DEVICE_OPERATION_MODE
+  if {[info exists ps($param)] == 1} {
+    if {[string equal $devType "HmIP-RGBW"] == 1} {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${lblMode}</td>"
+          array_clear options
+          set options(0) "\${optionRGBW}"
+          set options(1) "\${optionRGB}"
+          set options(2) "\${option2xTunableWhite}"
+          set options(3) "\${option4xPWM}"
+        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_RGBW]</td>"
+
+      append html "</tr>"
+
+      # Check if links or programs exist
+      set linksAvailable 0
+      set parentAddress $dev_descr(ADDRESS)
+
+      for {set loop 1} {$loop <= 4} {incr loop} {
+        set chnAddress "$parentAddress:[expr $chn + $loop]"
+        if {[getLinkCountByAddress $iface $chnAddress] > 0} {
+          set linksAvailable 1
+          break;
+        }
+      }
+
+      append html "<tr><td colspan='3'>"
+        append html "<span id='hintLinksPrograms' class='attention hidden'></span>"
+      append html "</td></tr>"
+
+      append html "<script type=\"text/javascript\">"
+        append html "var hint = '';"
+        append html "var hasLinks = ($linksAvailable == 1) ? true : false;"
+        append html "var oDevice = DeviceList.getDeviceByAddress('$parentAddress');"
+        append html "var hasPrograms = homematic('Device.hasPrograms', {'id': oDevice.id});"
+
+        append html "if (hasPrograms || hasLinks) \{"
+          append html "jQuery('\[name=\"DEVICE_OPERATION_MODE\"\]').first().prop('disabled', true);"
+          append html "hint = (hasPrograms && hasLinks) ? translateKey('hintWiredBlindLinksAndProgramsAvailable') : (hasPrograms)  ? translateKey('hintWiredBlindProgramsAvailable') : (hasLinks)  ? translateKey('hintWiredBlindLinksAvailable') : '';"
+          append html "jQuery('#hintLinksPrograms').html(hint).show();"
+        append html "\}"
+      append html "</script>"
+
+      append html "<script type=\"text/javascript\">"
+        append html " oChn = DeviceList.getChannelByAddress('$address'); "
+        append html "storeRGBWDeviceMode = function() {"
+          append html "var mode = jQuery('\[name=\"DEVICE_OPERATION_MODE\"\]').first().val();"
+          append html " homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'deviceMode', 'value': mode}); "
+        append html "};"
+
+        # Extend the footer buttons
+        append html " window.setTimeout(function() { "
+         append html " var elm = jQuery('#footerButtonOK, #footerButtonTake'); "
+         append html " elm.off('click').click(function() {storeRGBWDeviceMode();}); "
+        append html " },10); "
+      append html "</script>"
+
+      append html "[getHorizontalLine]"
+    }
   }
 
   set param LOW_BAT_LIMIT
@@ -307,7 +380,7 @@ set comment {
   }
 
   # DRAP/HAP Integration #
-  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1) || ([string equal $devType "HmIP-HAP JS1"] == 1)} {
+  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1) || ([string equal $devType "HmIP-HAP-B1"] == 1) || ([string equal $devType "HmIP-HAP JS1"] == 1)} {
     append html "[getDRAP_HAPMaintenance $chn ps psDescr]"
   }
   # End DRAP/HAP Integration #
@@ -2591,7 +2664,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
         array_clear options
         set options(0) "\${optionETRVNormalMode}"
         set options(1) "\${optionETRVSilentMode}"
-        append html "<tr><td>\${lblMode}</td><td>"
+        append html "<tr><td>\${lblOperatingMode}</td><td>"
         append html "[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"alert(this.value,$chn)\"]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.75]]"
         append html "</td></tr>"
       }

@@ -43,8 +43,6 @@ proc getWeeklyProgramHeating {address p} {
       append html "P1_tomHmIP.writeDayHmIPWeekProgramOnOff('$day');"
     }
 
-    # TODO - Set the weekly program only visible while certain modes are active.
-    # This has to be clarified with the developer of the device
     append html  "jQuery('#Timeouts_Area').show();"
 
     append html "</script>"

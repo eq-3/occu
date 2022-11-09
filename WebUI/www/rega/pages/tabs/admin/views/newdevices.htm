@@ -1748,6 +1748,31 @@ createNecessarySysVarsAndPrograms = function (oDevice) {
         CreateSysVarHmIPModRC8(channel);
       }
       */
+
+    if (oDevice.type == "HmIP-RGBW" ) {
+      if (channel.index == 0) {
+        homematic("Interface.setMetadata", {
+          "objectId" : channel.id,
+          "dataId" : "deviceMode",
+          "value" : 0 // Default Modus RGBW
+        });
+      }
+    }
+
+      if (oDevice.type == "HmIPW-WGD" ) {
+        if (channel.index == 0) {
+          var screenOrder = "0,1,2,3,4,END";
+          homematic("Interface.setMetadata", {"objectId": oDevice.id, "dataId": "screenOrder", "value": screenOrder});
+        }
+      }
+
+      if (oDevice.type == "HmIPW-WGD-PL" ) {
+        if (channel.index == 0) {
+          var screenOrder = "0,1,2,3,4,5,6,7,8,9,END";
+          homematic("Interface.setMetadata", {"objectId": oDevice.id, "dataId": "screenOrder", "value": screenOrder});
+        }
+      }
+
     });
     HideWaitAnim();
   }

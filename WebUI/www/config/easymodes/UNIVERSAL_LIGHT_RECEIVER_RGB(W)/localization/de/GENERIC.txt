@@ -1,0 +1,12 @@
+"dimmer_on_brighter" : "Helligkeit (V) - ein/heller",
+"dimmer_off_darker" : "Helligkeit (V) - aus/dunkler",
+"dimmer_on_off_b_d" : "Helligkeit (V) - ein/aus &amp; heller/dunkler",
+"color_up" : "Farbwert (H) - hoch",
+"color_down" : "Farbwert (H) -  runter",
+"color_up_down" : "Farbwert (H) -  hoch / runter",
+
+"saturation_up" : "S&auml;ttigung (S) - hoch",
+"saturation_down" : "S&auml;ttigung (S) -  runter",
+"saturation_up_down" : "S&auml;ttigung (S) -  hoch / runter",
+
+"optionColorVal" : "Farbwert",

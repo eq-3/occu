@@ -1,20 +1,20 @@
 jQuery.extend(true,langJSON, {
   "de" : {
-    "lblScreenLayoutPageNumber1" : "Layout Screen 1",
-    "lblScreenLayoutPageNumber2" : "Layout Screen 2",
-    "lblScreenLayoutPageNumber3" : "Layout Screen 3",
+    "lblOrderOfScreens" : "Reihenfolge der Screens",
 
-    "lblScreenScreenLayoutRightNeighbour1" : "Layout 1. Nachbar rechts",
-    "lblScreenScreenLayoutRightNeighbour2" : "Layout 2. Nachbar rechts",
-    "lblScreenScreenLayoutRightNeighbour3" : "Layout 3. Nachbar rechts",
-
-    "lblScreenScreenLayoutLeftNeighbour1" : "Layout 1. Nachbar links",
-    "lblScreenScreenLayoutLeftNeighbour2" : "Layout 2. Nachbar links",
-    "lblScreenScreenLayoutLeftNeighbour3" : "Layout 3. Nachbar links",
-
+    "lblLayoutScreenTile" : "Taster Screen Layout",
     "lblLayoutScreenTile1" : "Layout Screen 1",
     "lblLayoutScreenTile2" : "Layout Screen 2",
     "lblLayoutScreenTile3" : "Layout Screen 3",
+    "lblLayoutScreenTile4" : "Layout Screen 4",
+    "lblLayoutScreenTile5" : "Layout Screen 5",
+
+    "lblLayoutScreenClimateTile" : "Klima Screen Layout",
+    "lblLayoutScreenClimateTile6" : "Layout Klima Screen 6",
+    "lblLayoutScreenClimateTile7" : "Layout Klima Screen 7",
+    "lblLayoutScreenClimateTile8" : "Layout Klima Screen 8",
+    "lblLayoutScreenClimateTile9" : "Layout Klima Screen 9",
+    "lblLayoutScreenClimateTile10" : "Layout Klima Screen 10",
 
     "lblLanguage" : "Sprache",
     "lblDetectionRange" : "Empfindlichkeit der<br/>LCD-Aktivierung",
@@ -30,6 +30,7 @@ jQuery.extend(true,langJSON, {
     "optionLangFR" : "Franz%F6sisch",
     "optionLangES" : "Spanisch",
     "optionLangIT" : "Italienisch",
+    "optionLangNL" : "Niederl%E4ndisch",
 
     "lblBaseImage" : "Basis Icon",
     "lblChannelOperationMode" : "Kanalverhalten",
@@ -37,33 +38,38 @@ jQuery.extend(true,langJSON, {
     "lblControlRepresentation" : "Representation",
     "lblMainText" : "Text 1",
     "lblSubText" : "Text 2",
+    "lblScreen" : "Screen",
+    "lblScreenManagement" : "Screen Management",
     "optionDimmActor" : "Dimmer",
     "optionShutterContact" : "T%FCr-/Fensterkontakt",
+    "optionShutterBlind" : "Rollladen/Jalousie",
     "optionSwitchActor" : "Schaltaktor",
     "optionKeyBehaviour" : "Taster",
     "optionLevelKeyBehaviour" : "Taster",
     "optionCCULogic" : "CCU",
     "optionCloudLogic" : "Cloud",
 
+
+
     "noMoreKeys" : ""
   },
 
   "en" : {
-    "lblScreenLayoutPageNumber1" : "en* Layout Screen 1",
-    "lblScreenLayoutPageNumber2" : "en* Layout Screen 2",
-    "lblScreenLayoutPageNumber3" : "en* Layout Screen 3",
+    "lblOrderOfScreens" : "en* Reihenfolge der Screens",
 
-    "lblScreenScreenLayoutRightNeighbour1" : "en* Layout 1. Nachbar rechts",
-    "lblScreenScreenLayoutRightNeighbour2" : "en* Layout 2. Nachbar rechts",
-    "lblScreenScreenLayoutRightNeighbour3" : "en* Layout 3. Nachbar rechts",
-
-    "lblScreenScreenLayoutLeftNeighbour1" : "en* Layout 1. Nachbar links",
-    "lblScreenScreenLayoutLeftNeighbour2" : "en* Layout 2. Nachbar links",
-    "lblScreenScreenLayoutLeftNeighbour3" : "en* Layout 3. Nachbar links",
-
+    "lblLayoutScreenTile" : "en* Taster Screen Layout",
     "lblLayoutScreenTile1" : "en* Layout Screen 1",
     "lblLayoutScreenTile2" : "en* Layout Screen 2",
     "lblLayoutScreenTile3" : "en* Layout Screen 3",
+    "lblLayoutScreenTile4" : "en* Layout Screen 4",
+    "lblLayoutScreenTile5" : "en* Layout Screen 5",
+
+    "lblLayoutScreenClimateTile" : "en* Klima Screen Layout",
+    "lblLayoutScreenClimateTile6" : "en* Layout Klima Screen 6",
+    "lblLayoutScreenClimateTile7" : "en* Layout Klima Screen 7",
+    "lblLayoutScreenClimateTile8" : "en* Layout Klima Screen 8",
+    "lblLayoutScreenClimateTile9" : "en* Layout Klima Screen 9",
+    "lblLayoutScreenClimateTile10" : "en* Layout Klima Screen 10",
 
     "lblLanguage" : "en* Sprache",
     "lblDetectionRange" : "en* Empfindlichkeit der<br/>LCD-Aktivierung",
@@ -79,6 +85,7 @@ jQuery.extend(true,langJSON, {
     "optionLangFR" : "en* Franz%F6sisch",
     "optionLangES" : "en* Spanisch",
     "optionLangIT" : "en* Italienisch",
+    "optionLangNL" : "en* Niederl%E4ndisch",
 
     "lblBaseImage" : "en* Basis Icon",
     "lblChannelOperationMode" : "en* Kanalverhalten",
@@ -86,8 +93,11 @@ jQuery.extend(true,langJSON, {
     "lblControlRepresentation" : "en* Representation",
     "lblMainText" : "en* Text 1",
     "lblSubText" : "en* Text 2",
+    "lblScreen" : "Screen",
+    "lblScreenManagement" : "en* Screen Management",
     "optionDimmActor" : "en* Dimmer",
     "optionShutterContact" : "en* T%FCr-/Fensterkontakt",
+    "optionShutterBlind" : "en* Rollladen/Jalousie",
     "optionSwitchActor" : "en* Schaltaktor",
     "optionKeyBehaviour" : "en* Taster",
     "optionLevelKeyBehaviour" : "en* Taster",

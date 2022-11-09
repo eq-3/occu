@@ -648,6 +648,11 @@ DISPLAY|UNIT=PERCENT	${stringTableDisplayUnitPercent}
 DISPLAY|UNIT=WATT	${stringTableDisplayUnitWatt}
 DISPLAY|WINDOW	${stringTableDisplayWindow}
 
+DISPLAY_INPUT_TRANSMITTER	${stringTableDisplayInputTransmitterTitle}
+DISPLAY_INPUT_TRANSMITTER|DISPLAY_DATA_STRING	${stringTableWGDDisplayDataString}
+DISPLAY_LEVEL_INPUT_TRANSMITTER	${stringTableDisplayInputLevelTransmitterTitle}
+DISPLAY_THERMOSTAT_INPUT_TRANSMITTER	${stringTableDisplayInputThermostatTransmitterTitle}
+
 DISPLAY_UPDATE_REQUEST_0=FALSE	${stringTableDisplayUpdateRequest} 0: ${lblNo}
 DISPLAY_UPDATE_REQUEST_0=TRUE	${stringTableDisplayUpdateRequest} 0: ${lblYes}
 DISPLAY_UPDATE_REQUEST_01=FALSE	${stringTableDisplayUpdateRequest} 1: ${lblNo}
@@ -1835,11 +1840,15 @@ TX_MINDELAY_UNIT=S	${optionUnitS}
 TX_MINDELAY_VALUE	${stringTableTxMinDelayValue}
 TX_THRESHOLD_PERCENT	${stringTableTxThresholdPercent}
 TX_THRESHOLD_POWER	${stringTablePowerMeterTxThresholdPower}
+
+UNIVERSAL_LIGTH_RECEIVER|LEVEL	${lblColorBrightness}
+
 UNREACH=FALSE	${stringTableUnreachFalse}
 UNREACH=TRUE	${stringTableUnreachTrue}
 UPDATE_PENDING	${stringTableUpdatePending}
 UPDATE_PENDING=FALSE	${stringTableUpdatePendingFalse}
 UPDATE_PENDING=TRUE	${stringTableUpdatePendingTrue}
+UNIVERSAL_LIGHT_RECEIVER	${stringTableUniversalLightReceiverTitle}
 USER_COLOR	${stringTableSubmit}
 USER_PROGRAM	${stringTableSubmit}
 
@@ -2034,6 +2043,15 @@ minutes	${stringTableMinute}
 30Min	${optionUnit30M}
 60Min	${optionUnit60M}
 120Min	${optionUnit120M}
+
+ACTIVITY_STATE=DOWN	${stringTableActivityStateDown}
+ACTIVITY_STATE=UNKNOWN	${stringTableActivityStateUnknown}
+ACTIVITY_STATE=UP	${stringTableActivityStateUp}
+ACTIVITY_STATE=STABLE	${stringTableActivityStable}
+
+COLOR_TEMPERATURE	${optionColorTemperature}
+HUE	${optionHue}
+SATURATION	${optionSaturation}
 
 SOUNDFILE=INTERNAL_SOUNDFILE	${stringTableInternalSoundFile}
 SOUNDFILE=RANDOM_SOUNDFILE	${stringTableRandomSoundFile}

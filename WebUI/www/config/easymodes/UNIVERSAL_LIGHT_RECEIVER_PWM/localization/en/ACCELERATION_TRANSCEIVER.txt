@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">According to the selected switching mode the light will be switched on for the desired time to the defined brightness value. The light will be switched off after the next motion detected (toggle function). </span><br/><br/>",
+"description_2" : "<span class=\"translated\">According to the selected switching mode the light will be switched on for the desired time.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">According to the selected switching mode the light will be switched off for the desired time.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">According to the selected switching mode the light will be switched.</span><br/><br/>",
+
+"subset_1": "Motion/Tilted",
+"subset_2": "Standby/Horizontal",
+"subset_3": "Every change",
+"subset_4": "Motion/Tilted on / No motion/Horizontal off",
+"subset_5": "Motion/Tilted off / No motion/Horizontal on",

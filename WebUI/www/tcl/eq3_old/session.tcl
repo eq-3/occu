@@ -9,8 +9,8 @@ set sidname "icsessionid"
 set SESSIONS_FILE "/var/SESSIONS.dat"
 
 #Nur für Entwicklung auf 6000 gesetzt.
-set session_timeout 6000
-#set session_timeout 600
+#set session_timeout 6000
+set session_timeout 900
 
 set sid_length 10
 set MAX_SESSIONS 10

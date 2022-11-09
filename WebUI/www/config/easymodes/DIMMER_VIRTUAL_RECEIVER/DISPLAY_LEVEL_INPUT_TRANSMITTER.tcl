@@ -88,7 +88,7 @@ set PROFILE_1(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_1(SHORT_DIM_STEP) 0.050000
 set PROFILE_1(SHORT_JT_OFF) 1
 set PROFILE_1(SHORT_JT_OFFDELAY) 3
-set PROFILE_1(SHORT_JT_ON) 3
+set PROFILE_1(SHORT_JT_ON) {1 3}
 set PROFILE_1(SHORT_JT_ONDELAY) 1
 set PROFILE_1(SHORT_JT_RAMPOFF) 2
 set PROFILE_1(SHORT_JT_RAMPON) 2
@@ -183,7 +183,7 @@ set PROFILE_2(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_2(SHORT_DIM_STEP) 0.050000
 set PROFILE_2(SHORT_JT_OFF) 6
 set PROFILE_2(SHORT_JT_OFFDELAY) 5
-set PROFILE_2(SHORT_JT_ON) 4
+set PROFILE_2(SHORT_JT_ON) {1 4}
 set PROFILE_2(SHORT_JT_ONDELAY) 6
 set PROFILE_2(SHORT_JT_RAMPOFF) 6
 set PROFILE_2(SHORT_JT_RAMPON) 4
@@ -278,7 +278,7 @@ set PROFILE_3(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_3(SHORT_DIM_STEP) 0.050000
 set PROFILE_3(SHORT_JT_OFF) 1
 set PROFILE_3(SHORT_JT_OFFDELAY) 5
-set PROFILE_3(SHORT_JT_ON) 4
+set PROFILE_3(SHORT_JT_ON) {1 4}
 set PROFILE_3(SHORT_JT_ONDELAY) 2
 set PROFILE_3(SHORT_JT_RAMPOFF) 6
 set PROFILE_3(SHORT_JT_RAMPON) 3
@@ -375,7 +375,7 @@ set PROFILE_4(SHORT_DIM_MIN_LEVEL) 0.000000
 set PROFILE_4(SHORT_DIM_STEP) 0.050000
 set PROFILE_4(SHORT_JT_OFF) 1
 set PROFILE_4(SHORT_JT_OFFDELAY) 2
-set PROFILE_4(SHORT_JT_ON) 2
+set PROFILE_4(SHORT_JT_ON) {1 2}
 set PROFILE_4(SHORT_JT_ONDELAY) 2
 set PROFILE_4(SHORT_JT_RAMPOFF) 2
 set PROFILE_4(SHORT_JT_RAMPON) 2
@@ -774,6 +774,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
     }
 
+  }
+  # The value of the parameter SHORT_JT_ON must always be 1 (ON_DELAY)
+  if {$ps(SHORT_JT_ON) != 1} {
+        # Set SHORT_JT_ON always to 1 = ON_DELAY - requirement of the developer US
+        set shortJTON "{SHORT_JT_ON {int 1}}"
+        set ps(SHORT_JT_ON) 1
+        catch {puts "[xmlrpc $url putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $shortJTON]]"}
+        puts "<script type='text/javascript'>"
+          puts "window.setTimeout(function() \{"
+            puts "var expertJTON = jQuery(\"\[name='SHORT_JT_ON'\]\").first().val(1);"
+          puts "\},100);"
+        puts "</script>"
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 

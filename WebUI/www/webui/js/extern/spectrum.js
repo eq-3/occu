@@ -124,9 +124,9 @@
                         "<input id='sp-input' class='sp-input hidden' type='text' spellcheck='false'  />",
 
                         "<table align='left'>",
-                          "<tr><td><div>${statusDisplayOptionRed}</div></td><td><input id='inputRed' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
-                          "<tr><td><div>${statusDisplayOptionGreen}</div></td><td><input id='inputGreen' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
-                          "<tr><td><div>${statusDisplayOptionBlue}</div></td><td><input id='inputBlue' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
+                          "<tr><td><div>${lblColorHSVValue}</div></td><td><input id='inputRed' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
+                          "<tr><td><div>${lblColorSaturation}</div></td><td><input id='inputGreen' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
+                          "<tr><td><div>${lblColorBrightness}</div></td><td><input id='inputBlue' class='sp-input' type='text' spellcheck='false' size='3' style='text-align: center'/></td></tr>",
                         "</table>",
 
                     "</div>",

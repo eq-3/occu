@@ -1088,8 +1088,11 @@ proc put_channel_parameters {} {
            set styleVirtChn "virtualChannelBckGnd"
     }
 
-    if {([string equal $ch_descr(TYPE) "DISPLAY_INPUT_TRANSMITTER"]) || ([string equal $ch_descr(TYPE) "DISPLAY_LEVEL_INPUT_TRANSMITTER"]) } {
-      # For better differentiation, the background of the channel cell of these channels is shown slightly darker.
+    if {([string equal $ch_descr(TYPE) "DISPLAY_INPUT_TRANSMITTER"]) || ([string equal $ch_descr(TYPE) "DISPLAY_LEVEL_INPUT_TRANSMITTER"]) || ([string equal $ch_descr(TYPE) "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER"])} {
+      # For a better differentiation, the background of the channel cell of each second channel pair is shown slightly darker.
+
+      # ATTENTION - Channel 41 (index 20) is special (Quick Motion).  So it's set to -1
+
       array set chnDarkBckGnd {
         0 1
         1 2
@@ -1104,6 +1107,20 @@ proc put_channel_parameters {} {
         10 21
         11 22
         12 25
+        13 26
+        14 29
+        15 30
+        16 33
+        17 34
+        18 37
+        19 38
+        20 -1
+        21 42
+        22 43
+        23 46
+        24 47
+        25 50
+        26 51
       }
       foreach index [array names chnDarkBckGnd] {
         if {$ch_descr(INDEX) == $chnDarkBckGnd($index)} {

@@ -153,6 +153,115 @@ _encodeString = function(elem)
   $(elem).value = outString;
 };
 
+
+
+ActivateFreeValue = function(selectelem, pref, internalKey)
+{
+  var pnr = selectelem.options[selectelem.selectedIndex].value; //1
+  var upnr = pnr.split(".")[1];
+  var intkey = selectelem.id.split("_")[0].slice(8);
+  var val2d, val_tmp, exists_valarr, free_val;
+
+
+  //2
+  if (isNaN(upnr) == true) {
+    // var special_input_id = selectelem.id.split("_")[0]; //3
+    var arrSpecialInputId = selectelem.id.split("_");
+    var special_input_id = arrSpecialInputId[0];
+
+    if (internalKey) {
+      special_input_id = getInternalKeySpecialInputId(arrSpecialInputId);
+    }
+
+    var selectedvalue = document.getElementById("separate_" + special_input_id + "_" + pnr + "_" + pref).value; //4
+    var parameter = document.getElementById("separate_" + special_input_id + "_" + pnr + "_" + pref).name; //5
+    var val = document.getElementById("vis_val_" + pnr + "_" + pref + "_" + special_input_id);
+    var x_max = selectelem.length + 1;
+    //6
+    if (pnr > x_max) {x_max = parseInt(pnr) + 1;}
+    var y_max = 15;
+
+    //7
+    if (exists_valarr != "ok" || val_tmp != x_max)
+    {
+      //8
+      val2d = [];
+      for (i = 0; i < x_max; ++i)
+        val2d[i] = [];
+      exists_valarr = "ok";
+      val_tmp = x_max; //9
+    }
+    val2d[pnr][pref] = 0;
+
+    prefix[parameter + special_input_id] = pnr + "_" + pref + "_" + special_input_id;
+
+    if (selectedvalue == "99999990" )
+    {
+      if (intkey == "" && !internalKey) {
+        document.getElementById("NewProfileTemplate_receiver").style.visibility = "hidden";
+        document.getElementById(special_input_id +  "_profiles").options[selectelem.selectedIndex].style.color = "gray";
+        if (CheckGroup()) document.getElementById("NewProfileTemplate_receivergroup").style.visibility = "hidden";
+      }
+      val2d[pnr][pref] = 1; //10
+      val.style.display = "inline";
+
+    } else {
+      if (free_time != 1 && free_val != 1 && free_temp != 1) {
+        if (intkey == "" && !internalKey) {
+          document.getElementById("NewProfileTemplate_receiver").style.visibility = "visible";
+          if (CheckGroup()) document.getElementById("NewProfileTemplate_receivergroup").style.visibility = "visible";
+        }
+      } else  document.getElementById(special_input_id + "_profiles").options[selectelem.selectedIndex].style.color = TextColor(_textcolor);
+
+      val2d[pnr][pref] = 0; //11
+      val.style.display = "none";
+    }
+
+    free_val = 0; //12
+    for (var loopx = 0; loopx < x_max; loopx++){
+      for (var loopy = 0; loopy < y_max; loopy++){
+        if (val2d[loopx][loopy] == 1) {free_val = 1; break;}
+      }
+    }
+    for (loopy = 0; loopy <= y_max; loopy++) {
+      if (val2d[pnr][loopy] == 1)   {perc_textcolor = 1; break;}
+      else perc_textcolor = 0;
+    }
+
+    if (time_textcolor == 0 && perc_textcolor == 0 && temp_textcolor == 0) _textcolor = 0;
+    else _textcolor = 1;
+    document.getElementById(special_input_id + "_profiles").options[selectelem.selectedIndex].style.color = TextColor(_textcolor);
+
+    if (free_time == 0 && free_val == 0 && free_temp == 0) {
+      if (intkey == "" && !internalKey) {
+        document.getElementById("NewProfileTemplate_receiver").style.visibility = "visible";
+        if (CheckGroup()) document.getElementById("NewProfileTemplate_receivergroup").style.visibility = "visible";
+      }
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ActivateFreePercent4InternalKey = function(selectelem, pref)
 {
   ActivateFreePercent(selectelem, pref, true);   

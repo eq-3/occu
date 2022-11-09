@@ -150,7 +150,7 @@ set PROFILE_2(SHORT_CT_REFON) 0
 set PROFILE_2(SHORT_DRIVING_MODE) 0
 set PROFILE_2(SHORT_JT_OFF)       $OFF_DELAY
 set PROFILE_2(SHORT_JT_OFFDELAY)  $OFF_DELAY
-set PROFILE_2(SHORT_JT_ON)        $OFF_DELAY
+set PROFILE_2(SHORT_JT_ON)        [subst {$ON_DELAY $OFF_DELAY}]
 set PROFILE_2(SHORT_JT_ONDELAY)   $OFF
 set PROFILE_2(SHORT_JT_RAMPOFF)   $OFF
 set PROFILE_2(SHORT_JT_RAMPON)    $ON
@@ -226,7 +226,7 @@ set PROFILE_3(SHORT_CT_REFON) 0
 set PROFILE_3(SHORT_DRIVING_MODE) 0
 set PROFILE_3(SHORT_JT_OFF)       [subst {$ON_DELAY $OFF_DELAY}]
 set PROFILE_3(SHORT_JT_OFFDELAY)  [subst {$OFF_DELAY $REFOFF $ON_DELAY}]
-set PROFILE_3(SHORT_JT_ON)        [subst {$OFF_DELAY $ON_DELAY}]
+set PROFILE_3(SHORT_JT_ON)        [subst {$ON_DELAY $OFF_DELAY}]
 set PROFILE_3(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $OFF_DELAY $REFON}]
 set PROFILE_3(SHORT_JT_RAMPOFF)   [subst {$OFF $RAMP_OFF}]
 set PROFILE_3(SHORT_JT_RAMPON)    [subst {$ON $RAMP_ON}]
@@ -379,7 +379,7 @@ set PROFILE_5(SHORT_CT_REFON) 0
 set PROFILE_5(SHORT_DRIVING_MODE) 0
 set PROFILE_5(SHORT_JT_OFF)       [subst {$ON_DELAY $OFF_DELAY}]
 set PROFILE_5(SHORT_JT_OFFDELAY)  [subst {$OFF_DELAY $REFOFF $ON_DELAY}]
-set PROFILE_5(SHORT_JT_ON)        [subst {$OFF_DELAY $ON_DELAY}]
+set PROFILE_5(SHORT_JT_ON)        [subst {$ON_DELAY $OFF_DELAY}]
 set PROFILE_5(SHORT_JT_ONDELAY)   [subst {$ON_DELAY $OFF_DELAY $REFON}]
 set PROFILE_5(SHORT_JT_RAMPOFF)   [subst {$OFF $RAMP_OFF}]
 set PROFILE_5(SHORT_JT_RAMPON)    [subst {$ON $RAMP_ON}]
@@ -440,7 +440,7 @@ set SUBSET_2(LONG_JT_REFOFF)     $REFOFF
 set SUBSET_2(LONG_JT_REFON)      $REFON
 set SUBSET_2(SHORT_JT_OFF)       $OFF_DELAY
 set SUBSET_2(SHORT_JT_OFFDELAY)  $OFF_DELAY
-set SUBSET_2(SHORT_JT_ON)        $OFF_DELAY
+set SUBSET_2(SHORT_JT_ON)        [subst {$ON_DELAY $OFF_DELAY}]
 set SUBSET_2(SHORT_JT_ONDELAY)   $OFF
 set SUBSET_2(SHORT_JT_RAMPOFF)   $OFF
 set SUBSET_2(SHORT_JT_RAMPON)    $ON
@@ -460,7 +460,7 @@ set SUBSET_3(LONG_JT_REFOFF)   $REFOFF
 set SUBSET_3(LONG_JT_REFON)    $REFON
 set SUBSET_3(SHORT_JT_OFF)      $ON_DELAY
 set SUBSET_3(SHORT_JT_OFFDELAY) $OFF_DELAY
-set SUBSET_3(SHORT_JT_ON)       $OFF_DELAY
+set SUBSET_3(SHORT_JT_ON)       [subst {$ON_DELAY $OFF_DELAY}]
 set SUBSET_3(SHORT_JT_ONDELAY)  $ON_DELAY
 set SUBSET_3(SHORT_JT_RAMPOFF)  $OFF
 set SUBSET_3(SHORT_JT_RAMPON)   $ON
@@ -469,7 +469,8 @@ set SUBSET_3(SHORT_JT_REFON)    $REFON
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-  global dev_descr_sender dev_descr_receiver url receiver_address sender_address
+  global iface_url dev_descr_sender dev_descr_receiver url receiver_address sender_address
+  set url $iface_url($iface)
 
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
@@ -660,6 +661,20 @@ set comment {
 
   #incr pref
   #append HTML_PARAMS(separate_$prn) "<tr class=\"hidden\"><td><input type=\"text\" id=\"separate_receiver_$prn\_$pref\" name=\"LONG_MAX_TIME_FIRST_DIR\"></input></td></tr>"
+
+  # The value of the parameter SHORT_JT_ON must always be 1 (ON_DELAY)
+  if {$ps(SHORT_JT_ON) != 1} {
+        # Set SHORT_JT_ON always to 1 = ON_DELAY - requirement of the developer US
+        set shortJTON "{SHORT_JT_ON {int 1}}"
+        set ps(SHORT_JT_ON) 1
+        catch {puts "[xmlrpc $url putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $shortJTON]]"}
+        puts "<script type='text/javascript'>"
+          puts "window.setTimeout(function() \{"
+            puts "var expertJTON = jQuery(\"\[name='SHORT_JT_ON'\]\").first().val(1);"
+          puts "\},100);"
+        puts "</script>"
+  }
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
 }

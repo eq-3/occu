@@ -84,6 +84,23 @@ proc EnterPercent {profile pref special_input_id ps_descr param} {
 
 }
 
+proc EnterFreeValue {profile pref special_input_id ps_descr param {unit ""}} {
+  upvar HTML_PARAMS HTML_PARAMS
+  upvar ps_descr descr
+
+  set id "$profile\_$pref\_$special_input_id"
+
+  array_clear param_descr
+  array set param_descr $descr($param)
+  set min $param_descr(MIN)
+  set max $param_descr(MAX)
+
+  append HTML_PARAMS(separate_$profile) "<div id=\"vis_val_$id\" style=\"display:none\" name=\"vis_val_$id\">"
+  append HTML_PARAMS(separate_$profile) "<input type=\"text\" id=\"val_$id\" size=\"2\" name=\"val_$id\" value=\"$min\" style=\"text-align:center\" onchange=\"ProofFreeValue(this.id, $min, $max);\"> "
+  append HTML_PARAMS(separate_$profile) "$unit </div>"
+
+}
+
 proc EnterTemp {profile pref special_input_id ps_descr unit_cf param} {
   # unit_cf = 0 = Grad Celsius
   # unit_cf = 1 = Grad Fahrenheit

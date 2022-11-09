@@ -18,7 +18,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
     set prn 1
-    append HTML_PARAMS(separate_1) "[getMaintenance $chn ps psDescr]"
+    append HTML_PARAMS(separate_1) "[getMaintenance $chn ps psDescr $address]"
 
     incr prn
     append HTML_PARAMS(separate_1) "[getDSTPanel ps psDescr]"

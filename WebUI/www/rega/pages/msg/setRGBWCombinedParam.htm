@@ -1,0 +1,114 @@
+<table id="dialogContent" style="margin: 0 auto;">
+  <tbody>
+
+
+    <tr>
+      <td id="lblBrightnessLevel">${lblBrightnessLevel}: </td>
+      <td>
+        <select id="combinedParam_Level">
+          <option value="0">${lblOff}</option>
+          <option value="10">10%</option>
+          <option value="20">20%</option>
+          <option value="30">30%</option>
+          <option value="40">40%</option>
+          <option value="50">50%</option>
+          <option value="60">60%</option>
+          <option value="70">70%</option>
+          <option value="80">80%</option>
+          <option value="90">90%</option>
+          <option value="100">100%</option>
+          <option value="100.5">${optionLastValue}</option>
+          <option value="101">${lblIgnore}</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr name="trRampTime">
+      <td id="lblRampTime">${stringTableRampTime}: </td>
+      <td>
+        <input id="combinedParam_RampTimeValue" type="text" size="5" style="text-align: left;" value="0">
+      </td>
+      <td style="text-align:center;">x</td>
+      <td>
+        <select id="combinedParam_RampTimeUnit" style="text-align: center;">
+          <option value="3">${optionUnit10MS}</option>
+          <option value="0">${Sec}</option>
+          <option value="1">${Min}</option>
+          <!-- <option value="2">${Hou}</option> Ramptime hour disabled-->
+        </select>
+      </td>
+    </tr>
+
+    <tr><td colspan="4"><hr></td></tr>
+
+    <tr>
+      <td></td>
+      <td colspan="2"><div id="colorPicker"></div></td>
+      <td>
+        <table>
+          <tr>
+            <td><span>H</span></td>
+            <td><input id="hueElm" type="text" size="3" class="alignCenter"></td>
+            <td><span>°</span></td>
+          </tr>
+          <tr>
+            <td><span>S</span></td>
+            <td><input id="satElm" type="text" size="3" class="alignCenter"></td>
+            <td><span>%</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><div id="bckGndElm" style='width:auto;'>&nbsp;</div></td>
+            <td></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+
+    <tr><td colspan="4"><hr></td></tr>
+
+    <tr>
+      <td>${lblOnTimeLimited}:</td>
+      <td>
+        <input id="chkBoxTimeLimit" type="checkbox">&nbsp;
+        <img src="/ise/img/help.png" style="cursor: pointer; width: 18px; height:18px;" onclick="showHelp('helpCombinedParameterTimeLimit', 450,120);">
+      </td>
+    </tr>
+
+    <tr name="trDuration">
+      <td>${stringTableDuration}: </td>
+      <td>
+        <input id="combinedParam_DurationValue" type="text" size="5" style="text-align: left;" value="0">
+      </td>
+      <td style="text-align:center;">x</td>
+      <td>
+        <select id="combinedParam_DurationUnit"  style="text-align: center;">
+          <!-- <option value="3">${optionUnit10MS}</option>-->
+          <option value="0">${Sec}</option>
+          <option value="1">${Min}</option>
+          <option value="2">${Hou}</option>
+        </select>
+      </td>
+    </tr>
+
+    <tr id="trRampTimeOff" class="visibilityHidden">
+      <td>${stringTableRampTimeOff}: </td>
+      <td>
+        <input id="combinedParam_RampTimeOffValue" type="text" size="5" style="text-align: left;" value="0">
+      </td>
+      <td style="text-align:center;">x</td>
+      <td>
+        <select id="combinedParam_RampTimeOffUnit" style="text-align: center;">
+          <option value="3">${optionUnit10MS}</option>
+          <option value="0">${Sec}</option>
+          <option value="1">${Min}</option>
+          <!-- <option value="2">${Hou}</option> Ramptime hour disabled-->
+        </select>
+      </td>
+    </tr>
+
+    <tr class="visibilityHidden"><td>placeholder</td><td>placeholder</td></tr>
+
+  </tbody>
+</table>

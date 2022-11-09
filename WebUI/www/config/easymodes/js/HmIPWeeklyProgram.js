@@ -27,8 +27,8 @@ checkWPMinMaxValue = function(thisElm, min, max) {
 
 setWPWeekday = function(thisElm, chn, prn) {
   var targetElm = jQuery("#separate_CHANNEL_"+chn+"_"+prn),
-  iActiveWeekdays = parseInt(targetElm.val()),
-  selectedVal = parseInt(thisElm.value);
+    iActiveWeekdays = parseInt(targetElm.val()),
+    selectedVal = parseInt(thisElm.value);
 
   if (thisElm.checked) {
     iActiveWeekdays += selectedVal;
@@ -43,7 +43,7 @@ setWPWeekday = function(thisElm, chn, prn) {
 };
 
 reverseString = function (str) {
-    return str.split("").reverse().join("");
+  return str.split("").reverse().join("");
 };
 
 setWPTargetChannels = function(targetChkBoxName, chn, prn) {
@@ -61,29 +61,30 @@ setWPTargetChannels = function(targetChkBoxName, chn, prn) {
 
 getOnlyExpertChannels = function(channelType, channelNr) {
   var result = null;
-    if (
-      channelType == "DIMMER_VIRTUAL_RECEIVER" ||
-      channelType == "SWITCH_VIRTUAL_RECEIVER" ||
-      channelType == "BLIND_VIRTUAL_RECEIVER" ||
-      channelType == "SHUTTER_VIRTUAL_RECEIVER" ||
-      channelType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" ||
-      channelType == "SERVO_VIRTUAL_RECEIVER"
-    ) {
-      virtChnCounterWP = (virtChnCounterWP >= 3) ? 0 : virtChnCounterWP;
-      virtChnCounterWP++;
-      if (virtChnCounterWP == 1) {
-        return channelNr;
-      } else {
-        return null;
-      }
-    } else if (
-      (channelType == "ACCESS_RECEIVER")
-      || (channelType == "ACCESS_TRANSCEIVER")
-      || (channelType == "DOOR_LOCK_STATE_TRANSMITTER")
-      || (channelType == "OPTICAL_SIGNAL_RECEIVER")
-    ) {
+  if (
+    channelType == "DIMMER_VIRTUAL_RECEIVER" ||
+    //channelType == "UNIVERSAL_LIGHT_RECEIVER" ||
+    channelType == "SWITCH_VIRTUAL_RECEIVER" ||
+    channelType == "BLIND_VIRTUAL_RECEIVER" ||
+    channelType == "SHUTTER_VIRTUAL_RECEIVER" ||
+    channelType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" ||
+    channelType == "SERVO_VIRTUAL_RECEIVER"
+  ) {
+    virtChnCounterWP = (virtChnCounterWP >= 3) ? 0 : virtChnCounterWP;
+    virtChnCounterWP++;
+    if (virtChnCounterWP == 1) {
       return channelNr;
+    } else {
+      return null;
     }
+  } else if (
+    (channelType == "ACCESS_RECEIVER")
+    || (channelType == "ACCESS_TRANSCEIVER")
+    || (channelType == "DOOR_LOCK_STATE_TRANSMITTER")
+    || (channelType == "OPTICAL_SIGNAL_RECEIVER")
+  ) {
+    return channelNr;
+  }
   return result;
 };
 
@@ -107,7 +108,7 @@ getWPVirtualChannels = function(channels, expert) {
       if (expert == 1) {
         result.push(index);
       } else {
-       expertChn = getOnlyExpertChannels(chn.channelType, index);
+        expertChn = getOnlyExpertChannels(chn.channelType, index);
         if (expertChn) {
           result.push(expertChn);
         }
@@ -122,7 +123,7 @@ HmIPWeeklyProgram = Class.create();
 HmIPWeeklyProgram.prototype = {
   initialize: function (address, ps, psDescr, sessionIsExpert) {
     self = this;
-
+    this.hmIPIFace = "HmIP-RF";
     this.address = address;
     this.arAddress = this.address.split(":");
     this.devAddress = this.arAddress[0];
@@ -132,6 +133,7 @@ HmIPWeeklyProgram.prototype = {
     virtChnCounterWP = 0;
     modeWP_DELETE = false;
     this.DIMMER = "DIMMER_WEEK_PROFILE";
+    this.UNIVERSAL_LIGHT_RECEIVER = "UNIVERSAL_LIGHT_WEEK_PROFILE";
     this.DIMMER_OUTPUT_BEHAVIOUR = "DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE";
     this.SWITCH = "SWITCH_WEEK_PROFILE";
     this.BLIND = "BLIND_WEEK_PROFILE";
@@ -140,16 +142,19 @@ HmIPWeeklyProgram.prototype = {
 
     this.ACCESS_TRANSMITTER_HmIP_FWI = "HmIP-FWI";
     this.ACCESS_TRANSCEIVER_HmIP_WKP = "HmIP-WKP";
+    this.UNIVERSAL_LIGHT_RECEIVER_RGBW = "HmIP-RGBW";
+
     this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
-    this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-WKP"]; //DoorLockDrive....
-    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-FWI", "HmIP-WKP"];
+    this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-WKP", "HmIP-RGBW"];
+    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
+    this.selectedMode_RGBW = "";
 
     this.anchor = jQuery("#weeklyProgram_" + this.chn);
 
-     // The device is still in the device inbox
+    // The device is still in the device inbox
     if (typeof this.device == "undefined") {
       this.anchor.css({"text-align": "center"});
       this.anchor.html(translateKey("hintSetReadyWeeklyProgram"));
@@ -171,7 +176,7 @@ HmIPWeeklyProgram.prototype = {
     }
     this.ps = ps;
     this.psDescr = psDescr;
-    this.sessionIsExpert = sessionIsExpert;
+    this.sessionIsExpert = (! this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW)) ? sessionIsExpert : 1;
     this.prn = 0;
     this.prnHiddenField = [];
     this.weekDayID = [];
@@ -182,6 +187,7 @@ HmIPWeeklyProgram.prototype = {
     this.curTargetChannels = 0;
     this.targetChannelTypes = {};
     this.showHintExpertTargetChannel = false;
+    this.ulrPrn = []; // Stores the help prn for the UNIVERSAL LIGHT RECEIVER (e. g. HmIP-RGBW)
 
     this.targetChannelTypesVirtualBlind = [];  // only in use for some wired blinds which can be used as a shutter
 
@@ -224,7 +230,7 @@ HmIPWeeklyProgram.prototype = {
         var val;
         for (var x = 1; x <= this.maxEntries; x++) {
           if (this.sessionIsExpert == 1) {
-            break; // leave for loop
+            break; // leave the loop
           }
           val = this.ps[this._addLeadingZero(x) + "_WP_TARGET_CHANNELS"]; // Get the value of the selected target channels
           if (isBitSet(val, 1) || isBitSet(val, 2)) { // The virtual channels 2 and 3 of the HmIP-FWI
@@ -250,6 +256,27 @@ HmIPWeeklyProgram.prototype = {
       this.virtualChannels = [2];
     }
 
+    if (this._isDeviceType("HmIP-RGBW")) {
+      // get selected mode - deviceMode
+      var chnId = DeviceList.getChannelByAddress(address.split(":")[0] + ":0").id;
+      this.selectedMode_RGBW = parseInt(homematic("Interface.getMetadata", {"objectId": chnId, "dataId": "deviceMode"}));
+      switch (this.selectedMode_RGBW) {
+        case 0:
+        case 1:
+          this.virtualChannels = [1];
+          break;
+        case 2:
+          this.virtualChannels = [1,2];
+          var chnDescription = homematic("Interface.getParamset", {"interface":this.hmIPIFace, "address": this.devAddress + ":1", "paramsetKey": "MASTER"});
+          this.sliderTempMin = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
+          this.sliderTempMax = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
+          break;
+        default:
+          this.virtualChannels = [1, 2, 3, 4];
+          this.chnType = this.DIMMER;
+      }
+    }
+
     this._getTargetChannelTypes();
 
     this.devHasVirtualBlindReceiver = (this.isWired) ? this.hasActiveVirtualBlindReceiver() : true;
@@ -268,16 +295,6 @@ HmIPWeeklyProgram.prototype = {
 
     this.anchor.html(table);
 
-    if ((this.numberOfActiveEntries > 0) && (this.activeEntries["01"] == true)) {
-      window.setTimeout(function () {
-        jQuery("#weeklyProgramNotActive").hide();
-        jQuery("#btnAddNewEntry0").hide();
-      }, 250);
-    } else if ((this.numberOfActiveEntries > 0) && (this.activeEntries["01"] == false)) {
-      window.setTimeout(function () {
-        jQuery("#weeklyProgramNotActive").hide();
-      }, 250);
-    }
     if (this.showHintExpertTargetChannel) {
       window.setTimeout(function () {
         jQuery("[name='hintWeeklyProgramActiveExpertChannel']").show();
@@ -289,6 +306,19 @@ HmIPWeeklyProgram.prototype = {
 
     this._extendFooterButtons();
 
+  },
+
+  hideShowNotActive: function() {
+    if ((this.numberOfActiveEntries == 1) && (this.activeEntries["01"] == true)) {
+      window.setTimeout(function () {
+        jQuery("#weeklyProgramNotActive").hide();
+        jQuery("#btnAddNewEntry0").hide();
+      }, 250);
+    } else if ((this.numberOfActiveEntries == 1) && (this.activeEntries["01"] == false)) {
+      window.setTimeout(function () {
+        jQuery("#weeklyProgramNotActive").hide();
+      }, 250);
+    }
   },
 
   hasActiveVirtualBlindReceiver: function () {
@@ -339,6 +369,7 @@ HmIPWeeklyProgram.prototype = {
     if (this.activeEntries[number] == true) {
       entryVisibilityCSS = "";
       this.numberOfActiveEntries++;
+      this.hideShowNotActive();
     }
 
 
@@ -389,7 +420,7 @@ HmIPWeeklyProgram.prototype = {
     programEntry += "</tr>";
 
     programEntry += "<tr id='hintAstroNotWorking_"+number+"' class='hidden'>";
-      programEntry += "<td></td><td colspan='4'>"+translateKey("hintAccessControlAstroNotWorking")+"</td>";
+    programEntry += "<td></td><td colspan='4'>"+translateKey("hintAccessControlAstroNotWorking")+"</td>";
     programEntry += "</tr>";
     programEntry += "</tr>";
 
@@ -397,9 +428,9 @@ HmIPWeeklyProgram.prototype = {
       window.setTimeout(function () {
         var hintAstroNotWorkingElm = jQuery("#hintAstroNotWorking_" + number),
           conditionElm = jQuery("[name='"+number+"_WP_CONDITION']").first();
-          if (parseInt(conditionElm.val()) > 0) {
-            hintAstroNotWorkingElm.show();
-          }
+        if (parseInt(conditionElm.val()) > 0) {
+          hintAstroNotWorkingElm.show();
+        }
       }, 500);
     }
 
@@ -412,7 +443,7 @@ HmIPWeeklyProgram.prototype = {
 
     // RAMPTIME / LEVEL
     programEntry += "<tr id='trLevel_" + number + "'>";
-    if (((this.chnType == this.DIMMER) && (! this.WINDOW_DRIVE_RECEIVER)) || (this.chnType == this.SERVO)) {
+    if (((this.chnType == this.DIMMER) && (! this.WINDOW_DRIVE_RECEIVER)) || (this.chnType == this.SERVO) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
       // RAMPTIME
       var lblRamptime = (this.chnType == this.SERVO) ? "lblWPServoRamptime" : "lblWPRamptime";
       programEntry += "<td id='lblWPRamptime_" + number + "'>" + translateKey(lblRamptime) + "</td>";
@@ -420,10 +451,10 @@ HmIPWeeklyProgram.prototype = {
     }
 
     // LEVEL
-    if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
+    if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
       // programEntry += (this.chnType == this.DIMMER) ? "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>" : "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
 
-      if (this.chnType == this.DIMMER) {
+      if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
         if (! this.WINDOW_DRIVE_RECEIVER) {
           if (this.DIMMER_WEEK_PROFILE_HmIP_WUA == "") {
             programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>";
@@ -434,7 +465,7 @@ HmIPWeeklyProgram.prototype = {
           programEntry += "<td>" + translateKey('lblWPPosWindow') + "</td>";
         }
       } else if (this.chnType == this.SERVO) {
-         programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
+        programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
       }
 
     } else if (this.chnType == this.SWITCH) {
@@ -461,6 +492,7 @@ HmIPWeeklyProgram.prototype = {
     }
 
     programEntry += "<td>" + this._getLevel(number) + "</td>";
+
 
     // SLAT LEVEL for Blinds
     if (this.chnType == this.BLIND && this.devHasVirtualBlindReceiver) {
@@ -490,7 +522,7 @@ HmIPWeeklyProgram.prototype = {
     programEntry += "</tr>";
 
     // DURATION
-    if (this.chnType == this.DIMMER || ((this.chnType == this.SWITCH) && (!this.isDoorLockDrive))) {
+    if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || ((this.chnType == this.SWITCH) && (!this.isDoorLockDrive))) {
       programEntry += "<tr id='trDurationMode" + number + "'>";
 
       if (! this.WINDOW_DRIVE_RECEIVER) {
@@ -507,6 +539,18 @@ HmIPWeeklyProgram.prototype = {
       programEntry += "<td>" + this._getDuration(number) + "</td>";
       programEntry += "</tr>";
     }
+
+
+    // Here we add the color picker only for active visible entries. The other color picker are added only when a new entry is created
+    if (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) {
+      this.ulrPrn[number] = this.prn;
+      this.prn += 3;
+      programEntry += "<tr id='rowColorSelector_" + number + "'>";
+      if (this.activeEntries[number] == true) {
+        this._getColorTempAndEffect(number);
+      }
+    }
+
 
     programEntry += this._getHR();
 
@@ -798,6 +842,330 @@ HmIPWeeklyProgram.prototype = {
     return this._getDurationRamptimeHTML("ramptime", number);
   },
 
+  _getColorTempAndEffect: function(number) {
+    //var currentEffectType = this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE"],
+    var currentEffectType = (this.selectedMode_RGBW < 2) ? 0 : 1,
+      currentEffectValue = this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE"],
+      currentLevel = this.ps[number + "_WP_LEVEL"];
+
+    var PRN = this.ulrPrn[number];
+    var self = this;
+
+
+    setEffectType = function(val, no, chn, prn) {
+      var nr = addLeadingZero(no),
+        hueSaturationElm = jQuery("[name='wpHueSaturation_" + nr +"']"),
+        colorTempElm = jQuery("[name='wpColorTemp_" + nr +"']"),
+        //effectElm = jQuery("[name='wpEffect_" + nr +"']"),
+        lblBrightnessElm = jQuery("#lblWPBrightness_" + nr),
+        optionBrightnessElm = jQuery(lblBrightnessElm).next().children("select:first"), // option field LEVEL
+        freeValueBrightnessElm = jQuery(optionBrightnessElm).nextAll().not(':last'), // Enter free value field LEVEL
+        textBrightnessElm = jQuery("#separate_CHANNEL_" + chn + "_" + (parseInt(prn) + 1)), // text LEVEL
+        nameBrightnessElm = nr + "_WP_LEVEL";
+
+      var colorHueSatEffectElm = jQuery("[name='"+nr+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE']").first(),
+        colorLevelElm = jQuery("[name='"+nr+"_WP_LEVEL']").first();
+
+      jQuery("#separate_CHANNEL_"+chn+"_"+prn).val(val);
+
+      val = parseInt(val);
+
+      switch (val) {
+        case 0: // Hue/Saturation
+          if ((parseInt(colorHueSatEffectElm.val()) < 0) || ((parseInt(colorHueSatEffectElm.val()) > 362 * 256))) {colorHueSatEffectElm.val(0);}
+          jQuery("#valHue_" + nr).val(parseInt(parseInt(colorHueSatEffectElm.val()) / 256));
+          jQuery("#valSaturation_" + nr).val(parseInt(parseInt(colorHueSatEffectElm.val()) % 256 / 2));
+          jQuery("#valLevel_" + nr).val(parseInt(colorLevelElm.val() * 100));
+
+          jQuery("#tdHueSaturation_" + nr).show().prev().text(translateKey("lblColorValue"));
+          //jQuery("#tdHueSaturation_" + nr).prev().text(translateKey("lblColorValue"));
+          jQuery("#tdColorTempSlider_" + nr).hide();
+
+          hueSaturationElm.show();
+          colorTempElm.hide();
+          //effectElm.hide();  currently not in use
+          lblBrightnessElm.hide();
+          optionBrightnessElm.attr('name','').hide();freeValueBrightnessElm.hide();
+          textBrightnessElm.attr('name',nameBrightnessElm);
+
+          jQuery("#trDurationMode" + nr).show();
+          if (parseInt(jQuery("#durationMode" + nr).val()) != 0) {
+            jQuery("#trDurationValue" + nr).show();
+          }
+
+          break;
+        case 1: // Color Temp
+          if ((parseInt(colorHueSatEffectElm.val()) < 1000) || ((parseInt(colorHueSatEffectElm.val()) > 10000))) {colorHueSatEffectElm.val(1000);}
+          jQuery("#valColorTemp_" + nr).val(colorHueSatEffectElm.val());
+
+          jQuery("#tdHueSaturation_" + nr).hide();
+          jQuery("#tdColorTempSlider_" + nr).show();
+
+          hueSaturationElm.hide();
+          colorTempElm.show();
+          //effectElm.hide();  currently not in use
+          lblBrightnessElm.show();
+          //optionBrightnessElm.attr('name', nameBrightnessElm).val(0).change().show();//freeValueBrightnessElm.show();
+          textBrightnessElm.attr('name','');
+          break;
+        case 2: // Effect
+          if ((parseInt(colorHueSatEffectElm.val()) < 0) || ((parseInt(colorHueSatEffectElm.val()) > 10))) {colorHueSatEffectElm.val(1);}
+          jQuery("#valEffectSelector_" + nr).val(colorHueSatEffectElm.val());
+          hueSaturationElm.hide();
+          colorTempElm.hide();
+          //effectElm.show();  currently not in use
+          lblBrightnessElm.show();
+          optionBrightnessElm.attr("name", nameBrightnessElm).val(0).change().show();//freeValueBrightnessElm.show();
+          textBrightnessElm.attr('name','');
+          break;
+        default:
+          // Show all elements - no valid value!
+          conInfo("ERROR: setEffectType - no valid value");
+          hueSaturationElm.show();
+          colorTempElm.show();
+          //effectElm.show();  currently not in use
+          lblBrightnessElm.show();
+          optionBrightnessElm.attr("name", nameBrightnessElm).show();//freeValueBrightnessElm.show();
+          textBrightnessElm.attr('name','');
+      }
+
+    };
+
+    setHueSatValue2Transmit = function(number, chn, prn) {
+      var val2SendElm = jQuery("#separate_CHANNEL_" + chn + "_" + (parseInt(prn) + 2)),
+        valHueElm = jQuery("#valHue_" + self._addLeadingZero(number)),
+        valSaturationElm = jQuery("#valSaturation_" + self._addLeadingZero(number)),
+        valHue = (isNaN(parseInt(valHueElm.val()))) ? 0 : (parseInt(valHueElm.val())),
+        valSaturation = (isNaN(parseInt(valSaturationElm.val()))) ? 0 : (parseInt(valSaturationElm.val()));
+
+      valHue =  (valHue > 360) ? 360 : valHue;
+      valSaturation =  (valSaturation > 100) ? 100 : valSaturation;
+      valHueElm.val(valHue);
+      valSaturationElm.val(valSaturation);
+
+      val2SendElm.val((valHue * 256) + (valSaturation * 2));
+    };
+
+    setLevelValue2Transmit = function(number, chn, prn, value) {
+      var val2SendElm = jQuery("#separate_CHANNEL_" + chn + "_" + prn),
+        valLevelElm = jQuery("#valLevel_" + self._addLeadingZero(number)),
+        valLevel = (isNaN(parseInt(valLevelElm.val()))) ? 0 : (parseInt(valLevelElm.val()));
+
+      valLevel =  (valLevel > 100) ? 100 : valLevel;
+      valLevelElm.val(valLevel);
+
+      val2SendElm.val(valLevel / 100);
+    };
+
+    var result = "";
+
+    PRN++;
+    result += "<td>"+translateKey('lblColorTemp')+"</td>";
+/*
+    result += "<td style=''>";
+      result += "<select id='separate_CHANNEL_"+this.chn+"_"+PRN+"' value='"+currentEffectType+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE' onchange='setEffectType(this.value,"+number+");'>";
+        result += "<option value='0'>"+ translateKey('optionHueSaturation')+"</option>";
+        result += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
+        //result += "<option value='2'>Effect</option>";
+      result += "</select>";
+    result += "</td>";
+*/
+    // Here we collect the value hue/saturation, color or effect
+    result += "<td id='tdHueSaturation_" + number +"' name='wpHueSaturation_" +  number + "' class='hidden'><table><tr>";
+    //result += "<td><input id='colorPicker_" + number + "' class='basic'></td>"; // Anchor Spectrum Color Picker
+    result += "<td style='padding-right:20px;'><div id='colorPicker_" + number + "' class='basic'></div></td>"; // Anchor Iro Color Picker
+
+    result += "<td style='padding-bottom:35px;'><table style='padding:10px;' class='infoBckGnd'>";
+    result += "<tr>";
+    result += "<td class='alignRight infoBckGnd'>H</td>";
+    result += "<td class='infoBckGnd'>";
+    result += "<input id='valHue_" + number +"' type='text' class='alignCenter' size='5' onchange='setHueSatValue2Transmit("+number+","+this.chn+","+PRN+");'>";// Bit 8 -19
+    result += "</td>";
+    result += "<td class='alignLeft infoBckGnd'>&deg;</td>";
+    result += "</tr>";
+    result += "<tr>";
+    result += "<td class='alignRight infoBckGnd'>S</td>";
+    result += "<td class='infoBckGnd'>";
+    result += "<input id='valSaturation_" +number + "' type='text' class='alignCenter' size='5' onchange='setHueSatValue2Transmit("+number+","+this.chn+","+PRN+");'>"; // Bit 0 - 7
+    result += "</td>";
+    result += "<td class='alignLeft infoBckGnd'>%</td>";
+    result += "</tr>";
+    result += "</tr>";
+    PRN++;
+    result += "<td class='alignRight infoBckGnd'>V</td>";
+    result += "<td class='infoBckGnd'>";
+    result += "<input id='valLevel_" +number + "' type='text' class='alignCenter' size='5' onchange='setLevelValue2Transmit("+number+","+this.chn+","+PRN+",this.value);'>";
+    result += "</td>";
+    result += "<td class='alignLeft infoBckGnd'>%</td>";
+
+
+    result += "<td class='hidden alignRight infoBckGnd'>V</td>";
+    result += "<td class='hidden infoBckGnd'>";
+    result += "<input type='text' id='separate_CHANNEL_"+this.chn+"_"+PRN+"' name='" + number + "_WP_LEVEL' value='"+currentLevel+"' class='alignCenter' size='5'>";
+    result += "</td>";
+
+    result += "</tr>";
+
+    result += "</table></td>";
+
+    result += "</tr></table></td>";
+
+    result += "<td id='tdColorTempSlider_"+number+"' class='hidden'><div id='colorTempSlider_"+number+"'></div>";
+
+    result += "<td colspan='3' name='wpColorTemp_" +  number + "'><table><tr>";
+    result += "<td name='_wpColorTemp_" +  number + "'>&nbsp;</td>";
+    result += "<td name='_wpColorTemp_" +  number + "'>";
+      result += "<input id='valColorTemp_"+number+"' type='text' class='alignCenter' size='3' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value)'>&nbspK ("+this.sliderTempMin+" K - "+this.sliderTempMax+" K)";
+    result += "</tr></table></td>";
+
+    /* currently not in use
+    result += "<td colspan='2' name='wpEffect_" +  number + "'><table><tr>";
+    result += "<td name='_wpEffect_" +  number + "'>Effect</td>";
+    result += "<td name='_wpEffect_" +  number + "'>";
+      result += "<select id='valEffectSelector_"+number+"' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value)'>";
+      for (var loop = 1; loop <= 10; loop++) {
+        result += "<option value='" +loop+ "'>"+loop+"</option>";
+      }
+      result += "</select>";
+    result += "</td>";
+    result += "</tr></table></td>";
+    */
+
+    result += "<td class='hidden'>";
+    result += "<select id='separate_CHANNEL_"+this.chn+"_"+(PRN - 1)+"' value='"+currentEffectType+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE' onchange='setEffectType(this.value,"+number+");'>";
+    result += "<option value='0'>"+ translateKey('optionHueSaturation')+"</option>";
+    result += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
+    //result += "<option value='2'>Effect</option>";
+    result += "</select>";
+    result += "</td>";
+    // Hidden field, which contains the volue of either the hue/saturation, the color or the effect
+    PRN++;
+    result += "<td class='hidden'><span>To send</span><input id='separate_CHANNEL_"+this.chn+"_"+PRN+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE' value='"+currentEffectValue+"' size='5'></td>";
+
+    result += "<script type='text/javascript'>";
+    if(this.activeEntries[number] == true) {
+
+      result +=
+        "window.setTimeout(function() {" +
+        "setEffectType(" + currentEffectType + ", " + number + ", " + this.chn + ", " + (parseInt(PRN) - 2) + "); " +
+
+        // Color temp slider"
+        "var valColorTempElm = jQuery('#valColorTemp_"+number+"');" +
+
+        "var sliderOpts = {};" +
+        "sliderOpts.animate = 'fast';" +
+        "sliderOpts.min = "+this.sliderTempMin+";" +
+        "sliderOpts.max = "+this.sliderTempMax+";" +
+        "sliderOpts.value = parseInt(valColorTempElm.val());" +
+        "sliderOpts.step = 50;" +
+        "sliderOpts.orientation = 'horizontal';" +
+
+
+        "var sliderElm = jQuery('#colorTempSlider_"+number+"').slider(sliderOpts)," +
+        "sliderHandleElm = jQuery('.ui-slider-handle');" +
+
+        "sliderHandleElm.addClass('ui-state-active');" + // color the slider handle blue
+
+        "sliderElm.on('slide', function (event, ui) {" +
+          "valColorTempElm.val(ui.value).change();" +
+        "});" +
+
+        "sliderElm.on('slidestop', function (event, ui) {" +
+          "sliderHandleElm.addClass('ui-state-active');" +
+        "});" +
+
+        "valColorTempElm.keyup(function(event) {" +
+          "var val, newVal;" +
+           "val = parseInt(jQuery(this).val());" +
+          "if (event.keyCode == 13) {" +
+            "if (isNaN(val) || val < sliderOpts.min) {newVal = sliderOpts.min;} else if (val > sliderOpts.max) {newVal = sliderOpts.max;} else {newVal = val;}" +
+            "val = parseInt(jQuery(this).val(newVal));" +
+            "jQuery(this).change();" +
+            "sliderElm.slider('value', parseInt(newVal));" +
+          "}" +
+        "});" +
+
+        "valColorTempElm.blur(function(event) {" +
+          "var val, newVal;" +
+          "val = parseInt(jQuery(this).val());" +
+          "if (isNaN(val) || val < sliderOpts.min) {newVal = sliderOpts.min;} else if (val > sliderOpts.max) {newVal = sliderOpts.max;} else {newVal = val;}" +
+          "val = parseInt(jQuery(this).val(newVal));" +
+          "jQuery(this).change();" +
+          "sliderElm.slider('value', parseInt(newVal));" +
+        "});" +
+
+        //  Color picker
+        "var colorHueSatEffectElm = jQuery(\"[name='" + number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE']\").first()," +
+
+        "valHueElm = jQuery('#valHue_" + number + "')," +
+        "valSaturationElm = jQuery('#valSaturation_" + number + "')," +
+        "valLevelElm = jQuery('#valLevel_" + number + "')," +
+
+        "valHue = parseInt(parseInt(colorHueSatEffectElm.val()) / 256)," +
+        "valSat = parseInt(colorHueSatEffectElm.val()) % 256 / 2," +
+        "valLevel = " + (parseInt(parseFloat(self.ps[number + '_WP_LEVEL']) * 100)) + ";" +
+
+        "var colorPicker = new iro.ColorPicker('#colorPicker_" + number + "', {"+
+
+        "width: 90," +
+        "color: {h: valHue, s: valSat, v: valLevel}," +
+        "wheelLightness: false," +
+
+        "handleRadius: 4" +
+        "});" +
+
+        "colorPicker.on('input:end', function(color) {"+
+        "var valHue = color.$.h, valSat = color.$.s, valLevel = color.$.v;" +
+        "valHueElm.val(valHue).change();" +
+        "valSaturationElm.val(valSat).change();" +
+        "valLevelElm.val(Math.round(valLevel)).change();" +
+        "});" +
+
+        "valHueElm.keyup(function(event) {" +
+        "if (event.keyCode == 13) {" +
+        "jQuery(this).change();" +
+        "colorPicker.color.hsv = {h: valHueElm.val(), s: valSaturationElm.val(), v: valLevelElm.val()}" +
+        "}" +
+        "});" +
+
+        "valHueElm.blur(function(event) {" +
+        "jQuery(this).change();" +
+        "colorPicker.color.hsv = {h: valHueElm.val(), s: valSaturationElm.val(), v: valLevelElm.val()}" +
+        "});" +
+
+        "valSaturationElm.keyup(function(event) {" +
+        "if (event.keyCode == 13) {" +
+        "jQuery(this).change();" +
+        "colorPicker.color.hsv = {h: valHueElm.val(), s: valSaturationElm.val(), v: valLevelElm.val()}" +
+        "}" +
+        "});" +
+
+        "valSaturationElm.blur(function(event) {" +
+        "jQuery(this).change();" +
+        "colorPicker.color.hsv = {h: valHueElm.val(), s: valSaturationElm.val(), v: valLevelElm.val()}" +
+        "});" +
+
+        "valLevelElm.keyup(function(event) {" +
+        "if (event.keyCode == 13) {" +
+        "jQuery(this).change();" +
+        "colorPicker.color.hsv = {h: valHueElm.val(), s: valSaturationElm.val(), v: valLevelElm.val()}" +
+        "}" +
+        "});" +
+
+        "valLevelElm.blur(function(event) {" +
+        "jQuery(this).change();" +
+        "colorPicker.color.hsv = {h: valHueElm.val(), s: valSaturationElm.val(), v: valLevelElm.val()}" +
+        "});" +
+
+        "}, 100);";
+
+    }
+    result += "</script>";
+
+    window.setTimeout(function() {jQuery("#rowColorSelector_" + number).html(result);},100);
+    //return result;
+  },
+
   _showHideWPLevel: function (number, mode) {
     var wpLevelElm = jQuery("[name='" + number + "_WP_LEVEL']");
 
@@ -1028,10 +1396,10 @@ HmIPWeeklyProgram.prototype = {
         result += "<select id='doorLockPermissionActionSelector" + this.chn + "_" + number + "' onchange='setDoorLockActionValues(" + number + ", this.value);'>";
       }
     }
-    if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO) || (this.chnType == this.BLIND)) {
+    if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.chnType == this.SERVO) || (this.chnType == this.BLIND)) {
       var loop;
-      if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO)) {
-        if ((this.chnType == this.DIMMER) && (! this.WINDOW_DRIVE_RECEIVER) ) {
+      if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.chnType == this.SERVO)) {
+        if (((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) ) && (! this.WINDOW_DRIVE_RECEIVER) ) {
           result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
           for (loop = 5; loop <= 100; loop += 5) {
             optionVal = (loop / 100).toFixed(3);
@@ -1123,7 +1491,7 @@ HmIPWeeklyProgram.prototype = {
 
     result += "</select>";
 
-    if (this.chnType == this.DIMMER) {
+    if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
       result += "<input name='dimFreeValue" + this.chn + "_" + number + "' type='text' size='2' class='hidden' onchange='setDimFreeVal(this.value," + this.prn + "," + number + ");'> ";
       result += "<span name='dimFreeValue" + this.chn + "_" + number + "' class='hidden'>% (0 - 100)</span>";
     }
@@ -1400,6 +1768,7 @@ HmIPWeeklyProgram.prototype = {
     result += "</td>";
     result += "</tr></tbody></table>";
 
+
     // Init checkboxes
     result += "<script type='text/javascript'>";
     result += "window.setTimeout(function(){";
@@ -1421,7 +1790,7 @@ HmIPWeeklyProgram.prototype = {
     result += "jQuery('#weekDayFR" + number + "').prop('checked', (bSelectedDays[1] == '1') ? true : false );";
     result += "jQuery('#weekDaySAT" + number + "').prop('checked', (bSelectedDays[0] == '1') ? true : false );";
     result += "jQuery('#weekDaySUN" + number + "').prop('checked', (bSelectedDays[6] == '1') ? true : false );";
-    result += "},50);";
+    result += "},15);";
     result += "</script>";
 
     return result;
@@ -1782,7 +2151,7 @@ HmIPWeeklyProgram.prototype = {
   // Check if one of the target channels of a given type is active (checked)
   isTargetChOfType: function(chType) {
     var self = this,
-    result = false;
+      result = false;
 
     jQuery.each(this.virtualChannels,function(index, chn){
       if (self.targetChannelTypes[chn] == chType) {
@@ -1799,8 +2168,8 @@ HmIPWeeklyProgram.prototype = {
 
   _getDelAddElm: function(mode, number) {
     var self = this,
-    classAddElm = "",
-    classDelElm = "";
+      classAddElm = "",
+      classDelElm = "";
 
     deleteEntry = function(number) {
       self.numberOfActiveEntries--;
@@ -1810,12 +2179,12 @@ HmIPWeeklyProgram.prototype = {
       }
 
       if (self.numberOfActiveEntries >= 1) {
-          number = self._addLeadingZero(number);
-          jQuery("#weeklyProgramNotActive").hide();
-          jQuery("#entry" + number).fadeOut();
-          self.activeEntries[number] = false;
-          jQuery("#separate_CHANNEL_" + self.weekDayID[number]).val(0);
-          jQuery("#btnAddNewEntry" + (self._addLeadingZero(parseInt(number) - 1))).show();
+        number = self._addLeadingZero(number);
+        jQuery("#weeklyProgramNotActive").hide();
+        jQuery("#entry" + number).fadeOut();
+        self.activeEntries[number] = false;
+        jQuery("#separate_CHANNEL_" + self.weekDayID[number]).val(0);
+        jQuery("#btnAddNewEntry" + (self._addLeadingZero(parseInt(number) - 1))).show();
       } else {
         self.numberOfActiveEntries = 0;
         number = self._addLeadingZero(number);
@@ -1849,14 +2218,13 @@ HmIPWeeklyProgram.prototype = {
       if(self.activeEntries["01"] == true) {
         jQuery("#btnAddNewEntry0").hide();
       }
-
       jQuery("#btnAddNewEntry" + (self._addLeadingZero(parseInt(number)))).hide();
       jQuery("#entry"+self._addLeadingZero(nextNumber)).show();
 
       jQuery("#separate_CHANNEL_" + self.weekDayID[self._addLeadingZero(nextNumber)]).val(127);
       jQuery("[name='weekDay"+self.chn+"_"+self._addLeadingZero(nextNumber)+"']").prop("checked", true);
 
-      window.setTimeout(function() {self._initTargetChannels(number);},500);
+      window.setTimeout(function() {self._initTargetChannels(number);},50);
 
       if ( (! self._isNextEntryInUse(nextNumber)) && (parseInt(nextNumber) < self.maxEntries)) {
         jQuery("#btnAddNewEntry" + (self._addLeadingZero(parseInt(nextNumber)))).show();
@@ -1864,6 +2232,16 @@ HmIPWeeklyProgram.prototype = {
         jQuery("#btnAddNewEntry" + (self._addLeadingZero(parseInt(nextNumber)))).hide();
       }
       jQuery("#btnDelEntry"+self._addLeadingZero(nextNumber)).get(0).scrollIntoView({behavior:'smooth', block:'end'});
+
+      if ((self.chnType == self.UNIVERSAL_LIGHT_RECEIVER) && (self.ps[self._addLeadingZero(parseInt(nextNumber)) + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE"] == 0)) {
+        showHideDuration(1.0, parseInt(nextNumber));
+        showFreeValue(1.0, parseInt(nextNumber) );
+      }
+
+      if (self.chnType == self.UNIVERSAL_LIGHT_RECEIVER) {
+        self._getColorTempAndEffect(self._addLeadingZero(nextNumber));
+      }
+
     };
 
     if (mode == "DEL") {
@@ -1877,8 +2255,8 @@ HmIPWeeklyProgram.prototype = {
       addElm = "<td id='btnAddNewEntry"+number+"' class='"+classAddElm+"'><img src='/ise/img/add.png' title='"+translateKey('lblAddSwitchPoint')+"' alt='Add entry' style='width: 24px; height: 24px; cursor: pointer;' onclick='addEntry(this,"+number+");'></td>";
 
     panel += "<tr>";
-      panel += delElm;
-      panel += addElm;
+    panel += delElm;
+    panel += addElm;
     panel += "</tr>";
     return panel;
   },
@@ -1914,7 +2292,7 @@ HmIPWeeklyProgram.prototype = {
         arTargetChannels.prop("checked", true).change();
       }
     }
- },
+  },
 
   _getDurationRamptimeHTML: function(mode, number) {
     var result = "",
@@ -1927,13 +2305,13 @@ HmIPWeeklyProgram.prototype = {
         factorMin = this.psDescr.DURATION_FACTOR_MIN;
         factorMax = this.psDescr.DURATION_FACTOR_MAX;
         valBaseID = number +"_WP_DURATION_BASE",
-        valFactorID = number +"_WP_DURATION_FACTOR";
+          valFactorID = number +"_WP_DURATION_FACTOR";
         break;
       case "ramptime":
         factorMin = this.psDescr.RAMP_TIME_FACTOR_MIN;
         factorMax = this.psDescr.RAMP_TIME_FACTOR_MAX;
         valBaseID = number +"_WP_RAMP_TIME_BASE",
-        valFactorID = number +"_WP_RAMP_TIME_FACTOR";
+          valFactorID = number +"_WP_RAMP_TIME_FACTOR";
         break;
       default:
         console.log("HmIPWeeklyProgram - _getDurationRamptimeHTML: an error occured");
@@ -1957,13 +2335,13 @@ HmIPWeeklyProgram.prototype = {
 
     this.prn++;
     result += "<select id='separate_CHANNEL_"+this.chn+"_"+this.prn+"' name='"+valBaseID+"'>";
-      jQuery.each(arOptions, function(index, value) {
-        if (index != valBase) {
-          result += "<option value='" + index + "'>" + translateKey(value) + "</options>";
-        } else {
-          result += "<option selected='selected' value='" + index + "'>" + translateKey(value) + "</options>";
-        }
-      });
+    jQuery.each(arOptions, function(index, value) {
+      if (index != valBase) {
+        result += "<option value='" + index + "'>" + translateKey(value) + "</options>";
+      } else {
+        result += "<option selected='selected' value='" + index + "'>" + translateKey(value) + "</options>";
+      }
+    });
     result += "</select>";
 
     return result;
@@ -1979,6 +2357,7 @@ HmIPWeeklyProgram.prototype = {
 
     switch (this.chnType) {
       case this.DIMMER:
+      case this.UNIVERSAL_LIGHT_RECEIVER:
       case this.SWITCH:
       case this.BLIND:
       case this.SERVO:
@@ -1992,7 +2371,7 @@ HmIPWeeklyProgram.prototype = {
   _setEntryVisibility: function(number) {
     var val = parseInt(this.ps[number +"_WP_WEEKDAY"]);
     this.activeEntries[number] = (val == 0) ? false : true ;
-   },
+  },
 
   _addLeadingZero: function(val) {
     return (parseInt(val) < 10) ? "0"+val : val;

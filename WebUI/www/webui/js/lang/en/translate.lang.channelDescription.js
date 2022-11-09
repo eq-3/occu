@@ -60,14 +60,12 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Weekly program",
 
-    "chType_DISPLAY_INPUT_TRANSMITTER_A": "Screen",
-    "chType_DISPLAY_INPUT_TRANSMITTER_B": "Tile",
-    "chType_DISPLAY_INPUT_TRANSMITTER_C": "<br/>KEY",
-
-    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A": "Screen",
-    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B": "Tile",
-    "chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C": "<br/>LEVEL",
-    "chType_DISPLAY_INPUT_TRANSMITTER_D": "UNKNOWN",
+    "chType_DISPLAY_SCREEN" : "Screen",
+    "chType_DISPLAY_TILE" : "Tile",
+    "chType_DISPLAY_KEY" : "<br/>Key",
+    "chType_DISPLAY_LEVEL" : "<br/>Level",
+    "chType_DISPLAY_CLIMATE" : "<br/>Room climate",
+    "chType_DISPLAY_UNKNOWN" : "<br/>Quick Motion",
 
     "chType_DOOR_LOCK_STATE_TRANSMITTER" : "Door lock drive ",
     "chType_DOOR_RECEIVER_MOD_HO" : "Door drive",
@@ -138,7 +136,7 @@ jQuery.extend(true,langJSON, {
     "chType_UNIVERSAL_ACTOR_TRANSMITTER_010V" : "Status report<br/>Universal Actuator 0-10 V",
     "chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V" : "Universal Actuator 0-10 V",
 
-    "chType_UNIVERSAL_LIGHT_RECEIVER" : "en* tr UNIVERSAL LIGHT RECEIVER",
+    "chType_UNIVERSAL_LIGHT_RECEIVER" : "LED Controller",
     "chType_UNIVERSAL_LIGHT_WEEK_PROFILE" : "Weekly program",
 
     "chType_VIRTUAL_DIMMER" : "Dimmer actuator",

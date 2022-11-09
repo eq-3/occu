@@ -546,8 +546,8 @@ DEV_PATHS["HmIP-BS2"] = new Object();
 DEV_PATHS["HmIP-BS2"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
 DEV_PATHS["HmIP-BS2"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
 DEV_HIGHLIGHT["HmIP-BS2"] = new Object();
-DEV_HIGHLIGHT["HmIP-BS2"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HmIP-BS2"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BS2"]["1"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BS2"]["2"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["HmIP-BS2"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('HM-Sen-Wa-Od');
 DEV_DESCRIPTION["HM-Sen-Wa-Od"] = "HM-Sen-Wa-Od";
@@ -1820,6 +1820,12 @@ DEV_PATHS["HM-LC-Dim1T-FM"] = new Object();
 DEV_PATHS["HM-LC-Dim1T-FM"]["50"] = "/config/img/devices/50/65_hm-lc-dim1t-fm_thumb.png";
 DEV_PATHS["HM-LC-Dim1T-FM"]["250"] = "/config/img/devices/250/65_hm-lc-dim1t-fm.png";
 DEV_HIGHLIGHT["HM-LC-Dim1T-FM"] = new Object();
+DEV_LIST.push('HmIP-RGBW');
+DEV_DESCRIPTION["HmIP-RGBW"] = "HmIP-RGBW";
+DEV_PATHS["HmIP-RGBW"] = new Object();
+DEV_PATHS["HmIP-RGBW"]["50"] = "/config/img/devices/50/225_hmip-rgbw_thumb.png";
+DEV_PATHS["HmIP-RGBW"]["250"] = "/config/img/devices/250/225_hmip-rgbw.png";
+DEV_HIGHLIGHT["HmIP-RGBW"] = new Object();
 DEV_LIST.push('HMIP-WRC2');
 DEV_DESCRIPTION["HMIP-WRC2"] = "WRC2";
 DEV_PATHS["HMIP-WRC2"] = new Object();
@@ -2754,11 +2760,6 @@ DEV_PATHS["HmIPW-WGD"] = new Object();
 DEV_PATHS["HmIPW-WGD"]["50"] = "/config/img/devices/50/222_hmipw-wgd_thumb.png";
 DEV_PATHS["HmIPW-WGD"]["250"] = "/config/img/devices/250/222_hmipw-wgd.png";
 DEV_HIGHLIGHT["HmIPW-WGD"] = new Object();
-DEV_HIGHLIGHT["HmIPW-WGD"]["Icon"] = [3, 0.092, 0.6, 'Icon_folgt', 0.14, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HmIPW-WGD"]["1_channel"] = [3, 0.44, 0.232, '1', 0.18, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HmIPW-WGD"]["1"] = [5, '1_channel', 'Icon'];
-DEV_HIGHLIGHT["HmIPW-WGD"]["2_channel"] = [3, 0.44, 0.232, '2', 0.18, 'verdana', Font.BOLD];
-DEV_HIGHLIGHT["HmIPW-WGD"]["2"] = [5, '2_channel', 'Icon'];
 DEV_LIST.push('HM-Sec-RHS-2');
 DEV_DESCRIPTION["HM-Sec-RHS-2"] = "HM-Sec-RHS";
 DEV_PATHS["HM-Sec-RHS-2"] = new Object();
@@ -2972,6 +2973,12 @@ DEV_HIGHLIGHT["HmIP-RCV-50"]["47"] = [5, 'S47'];
 DEV_HIGHLIGHT["HmIP-RCV-50"]["48"] = [5, 'S48'];
 DEV_HIGHLIGHT["HmIP-RCV-50"]["49"] = [5, 'S49'];
 DEV_HIGHLIGHT["HmIP-RCV-50"]["50"] = [5, 'S50'];
+DEV_LIST.push('Wired-LAN-Sniffer');
+DEV_DESCRIPTION["Wired-LAN-Sniffer"] = "Wired-LAN-Sniffer";
+DEV_PATHS["Wired-LAN-Sniffer"] = new Object();
+DEV_PATHS["Wired-LAN-Sniffer"]["50"] = "/config/img/devices/50/162_hmipw-drap_thumb.png";
+DEV_PATHS["Wired-LAN-Sniffer"]["250"] = "/config/img/devices/250/162_hmipw-drap.png";
+DEV_HIGHLIGHT["Wired-LAN-Sniffer"] = new Object();
 DEV_LIST.push('HM-Sec-SD-2');
 DEV_DESCRIPTION["HM-Sec-SD-2"] = "HM-Sec-SD";
 DEV_PATHS["HM-Sec-SD-2"] = new Object();
@@ -3382,6 +3389,12 @@ DEV_PATHS["263 167"] = new Object();
 DEV_PATHS["263 167"]["50"] = "/config/img/devices/50/51_hm-sec-sd_thumb.png";
 DEV_PATHS["263 167"]["250"] = "/config/img/devices/250/51_hm-sec-sd.png";
 DEV_HIGHLIGHT["263 167"] = new Object();
+DEV_LIST.push('HmIPW-WGD-PL');
+DEV_DESCRIPTION["HmIPW-WGD-PL"] = "HmIPW-WGD-PL";
+DEV_PATHS["HmIPW-WGD-PL"] = new Object();
+DEV_PATHS["HmIPW-WGD-PL"]["50"] = "/config/img/devices/50/222_hmipw-wgd_thumb.png";
+DEV_PATHS["HmIPW-WGD-PL"]["250"] = "/config/img/devices/250/222_hmipw-wgd.png";
+DEV_HIGHLIGHT["HmIPW-WGD-PL"] = new Object();
 DEV_LIST.push('HM-SwI-3-FM');
 DEV_DESCRIPTION["HM-SwI-3-FM"] = "HM-SwI-3-FM";
 DEV_PATHS["HM-SwI-3-FM"] = new Object();
@@ -3672,6 +3685,12 @@ DEV_PATHS["HmIP-FAL24-C6"] = new Object();
 DEV_PATHS["HmIP-FAL24-C6"]["50"] = "/config/img/devices/50/137_hmip-fal-c6_thumb.png";
 DEV_PATHS["HmIP-FAL24-C6"]["250"] = "/config/img/devices/250/137_hmip-fal-c6.png";
 DEV_HIGHLIGHT["HmIP-FAL24-C6"] = new Object();
+DEV_LIST.push('RF-LAN-Sniffer');
+DEV_DESCRIPTION["RF-LAN-Sniffer"] = "RF-LAN-Sniffer";
+DEV_PATHS["RF-LAN-Sniffer"] = new Object();
+DEV_PATHS["RF-LAN-Sniffer"]["50"] = "/config/img/devices/50/CCU2_thumb.png";
+DEV_PATHS["RF-LAN-Sniffer"]["250"] = "/config/img/devices/250/CCU2.png";
+DEV_HIGHLIGHT["RF-LAN-Sniffer"] = new Object();
 DEV_LIST.push('HmIP-SAM');
 DEV_DESCRIPTION["HmIP-SAM"] = "HmIP-SAM";
 DEV_PATHS["HmIP-SAM"] = new Object();
@@ -3926,8 +3945,8 @@ DEV_PATHS["ELV-SH-BS2"] = new Object();
 DEV_PATHS["ELV-SH-BS2"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
 DEV_PATHS["ELV-SH-BS2"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
 DEV_HIGHLIGHT["ELV-SH-BS2"] = new Object();
-DEV_HIGHLIGHT["ELV-SH-BS2"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["ELV-SH-BS2"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["ELV-SH-BS2"]["1"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["ELV-SH-BS2"]["2"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["ELV-SH-BS2"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('ZEL STG RM FSS UP3');
 DEV_DESCRIPTION["ZEL STG RM FSS UP3"] = "ZEL_STG_RM_FSS_UP3";
@@ -4784,6 +4803,10 @@ elvST['DISPLAY|UNIT=NONE'] = '${stringTableDisplayUnitNone}';
 elvST['DISPLAY|UNIT=PERCENT'] = '${stringTableDisplayUnitPercent}';
 elvST['DISPLAY|UNIT=WATT'] = '${stringTableDisplayUnitWatt}';
 elvST['DISPLAY|WINDOW'] = '${stringTableDisplayWindow}';
+elvST['DISPLAY_INPUT_TRANSMITTER'] = '${stringTableDisplayInputTransmitterTitle}';
+elvST['DISPLAY_INPUT_TRANSMITTER|DISPLAY_DATA_STRING'] = '${stringTableWGDDisplayDataString}';
+elvST['DISPLAY_LEVEL_INPUT_TRANSMITTER'] = '${stringTableDisplayInputLevelTransmitterTitle}';
+elvST['DISPLAY_THERMOSTAT_INPUT_TRANSMITTER'] = '${stringTableDisplayInputThermostatTransmitterTitle}';
 elvST['DISPLAY_UPDATE_REQUEST_0=FALSE'] = '${stringTableDisplayUpdateRequest} 0: ${lblNo}';
 elvST['DISPLAY_UPDATE_REQUEST_0=TRUE'] = '${stringTableDisplayUpdateRequest} 0: ${lblYes}';
 elvST['DISPLAY_UPDATE_REQUEST_01=FALSE'] = '${stringTableDisplayUpdateRequest} 1: ${lblNo}';
@@ -5923,11 +5946,13 @@ elvST['TX_MINDELAY_UNIT=S'] = '${optionUnitS}';
 elvST['TX_MINDELAY_VALUE'] = '${stringTableTxMinDelayValue}';
 elvST['TX_THRESHOLD_PERCENT'] = '${stringTableTxThresholdPercent}';
 elvST['TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
+elvST['UNIVERSAL_LIGTH_RECEIVER|LEVEL'] = '${lblColorBrightness}';
 elvST['UNREACH=FALSE'] = '${stringTableUnreachFalse}';
 elvST['UNREACH=TRUE'] = '${stringTableUnreachTrue}';
 elvST['UPDATE_PENDING'] = '${stringTableUpdatePending}';
 elvST['UPDATE_PENDING=FALSE'] = '${stringTableUpdatePendingFalse}';
 elvST['UPDATE_PENDING=TRUE'] = '${stringTableUpdatePendingTrue}';
+elvST['UNIVERSAL_LIGHT_RECEIVER'] = '${stringTableUniversalLightReceiverTitle}';
 elvST['USER_COLOR'] = '${stringTableSubmit}';
 elvST['USER_PROGRAM'] = '${stringTableSubmit}';
 elvST['VALVE_MAXIMUM_POSITION'] = '${stringTableValveMaximumPosition}';
@@ -6110,6 +6135,13 @@ elvST['15Min'] = '${optionUnit15M}';
 elvST['30Min'] = '${optionUnit30M}';
 elvST['60Min'] = '${optionUnit60M}';
 elvST['120Min'] = '${optionUnit120M}';
+elvST['ACTIVITY_STATE=DOWN'] = '${stringTableActivityStateDown}';
+elvST['ACTIVITY_STATE=UNKNOWN'] = '${stringTableActivityStateUnknown}';
+elvST['ACTIVITY_STATE=UP'] = '${stringTableActivityStateUp}';
+elvST['ACTIVITY_STATE=STABLE'] = '${stringTableActivityStable}';
+elvST['COLOR_TEMPERATURE'] = '${optionColorTemperature}';
+elvST['HUE'] = '${optionHue}';
+elvST['SATURATION'] = '${optionSaturation}';
 elvST['SOUNDFILE=INTERNAL_SOUNDFILE'] = '${stringTableInternalSoundFile}';
 elvST['SOUNDFILE=RANDOM_SOUNDFILE'] = '${stringTableRandomSoundFile}';
 elvST['SOUNDFILE=OLD_VALUE'] = '${stringTableOldValueSoundFile}';
@@ -11874,13 +11906,31 @@ ChannelChooser = Singleton.create({
   SHOW_EVENTABLE: 0x4,    // zeigt Kanäle mit Ereignisbehandlung an
   SHOW_ALL: 0x7,    // zeigt alle Kanäle an
 
+  FAV_CHANNELS: 0,
   PRG_CONDITION: 1,
   PRG_ACTIVITY: 2,
     
   SORT_FN:  {
     NAME       : function(channels, reverse) { return channels.ex_sortBy("name", reverse); },
     DESCRIPTION: function(channels, reverse) { return channels.ex_sortBy("typeDescription", reverse); },
-    ADDRESS    : function(channels, reverse) { return channels.ex_sortBy("address", reverse); },
+    //ADDRESS    : function(channels, reverse) { return channels.ex_sortBy("address", reverse); },
+
+    // Sorting by serial number changed.
+    ADDRESS    : function(channels, reverse) {
+      var arSortedChannels = [];
+      jQuery.each(channels.sort(function(a,b) {
+          var ar1 = a.address.split(":"),
+            ar2 = b.address.split(":");
+
+          if (ar1[0] == ar2[0]) {
+            return (parseInt(ar1[1]) - parseInt(ar2[1]));
+          }
+        }), function(index, ch) {
+          arSortedChannels.push(ch);
+      });
+        return arSortedChannels;
+    },
+
     ROOM_NAMES : function(channels, reverse) {
       channels.sort(function(a, b) { return Object.ex_compare(a.rooms.ex_joinItem("name"), b.rooms.ex_joinItem("name")); });
       return (reverse) ? channels.reverse() : channels;
@@ -11901,11 +11951,20 @@ ChannelChooser = Singleton.create({
   initialize: function()
   {
     this.HmIPIdentifier = "HmIP-RF";
-    this.HmIPWIdentifier = "HmIP-Wired";
+    this.HmIPWIdentifier = "HmIP-RF";
     this.VirtualDevicesIdentifier = "VirtualDevices";
     this.template = TrimPath.parseTemplate(CHANNELCHOOSER_JST);
+    this.arWGDScreenOrder = [];
+    this.WGDStartChannelPerScreen = {};
+    this.WGDChannelInUse = [];
+    this.WGDdevice = "";
+    this.arWGDTiles = [];
   },
-    
+
+  sortByAddress: function(channels) {
+    console.log("channels", channels);
+  },
+
   /**
    * Wendet alle Filter auf einen Kanal an.
    **/
@@ -11924,12 +11983,17 @@ ChannelChooser = Singleton.create({
   },
 
   filterHmIPChannels4ProgramConditions: function(channel, arChannels) {
-    var channelTypeName = channel.typeName.toLowerCase();
+    var channelTypeName = channel.typeName.toLowerCase(),
+    oDevice, oMaintChannel, deviceMode, endOfScreens = false;
 
     conInfo("filterHmIPChannels4ProgramConditions");
     // If the channel is visible and no KEY_TRANSCEIVER or *_WEEK_PROFILE then show the channel
     if (channel.isVisible
       && (channel.channelType != "KEY_TRANSCEIVER")
+      && (channel.channelType != "UNIVERSAL_LIGHT_RECEIVER")
+      && (channel.channelType != "DISPLAY_INPUT_TRANSMITTER")
+      && (channel.channelType != "DISPLAY_LEVEL_INPUT_TRANSMITTER")
+      && (channel.channelType != "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")
       && (channel.channelType.indexOf("_WEEK_PROFILE") == -1)
       ) { arChannels.push(channel);}
 
@@ -11944,19 +12008,137 @@ ChannelChooser = Singleton.create({
       && (channelTypeName != "hmip-pcbs")
       ) {arChannels.push(channel);}
 
+    if ((channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") && (channelTypeName == "hmip-rgbw")) {
+      oMaintChannel = DeviceList.getChannelByAddress(channel.address.split(":")[0] + ":0"); // The maintenance channel stores the deviceMode
+      deviceMode = parseInt(homematic("Interface.getMetadata", {"objectId": oMaintChannel.id, "dataId": "deviceMode"}));
+
+      switch (deviceMode) {
+        case 0:
+        case 1:
+          // RGB/RGBW Mode
+          if (channel.index == 1) {arChannels.push(channel);}
+          break;
+        case 2:
+          // Tunable White Mode
+          if (channel.index == 1 || channel.index == 2) {arChannels.push(channel);}
+          break;
+        default:
+          // PWM Mode - all channels visible
+          arChannels.push(channel);
+      }
+    }
+
+    if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) && ((channelTypeName == "hmipw-wgd") || (channelTypeName == "hmipw-wgd-pl"))) {
+      var  wgdScreenOrder, screenEndID = "END",  counter, chnDescription, curDevice, tilesA = [1,3,7], tilesB = [0,1], loop,
+        self = this;
+      if (channel.index == 41) {
+        arChannels.push(channel);
+      } else {
+        curDevice = channel.device.address; // Do this only once per device
+        if (this.WGDdevice != curDevice) {
+          this.WGDdevice = channel.device.address;
+          oDevice = DeviceList.getDeviceByAddress(channel.address.split(":")[0]); // The device stores the screen order
+          wgdScreenOrder = homematic("Interface.getMetadata", {"objectId": oDevice.id, "dataId": "screenOrder"});
+          this.arWGDScreenOrder = wgdScreenOrder.split(",");
+          this.WGDStartChannelPerScreen = (this.arWGDScreenOrder.length < 10) ? {0: 1, 1: 9, 2: 17, 3: 25, 4: 33} : {0: 1, 1: 9, 2: 17, 3: 25, 4: 33, 5: 42, 6: 44, 7: 46, 8: 48, 9: 50};
+          this.WGDChannelInUse = [];
+          this.arWGDTiles = [];
+
+          // Get number of tiles
+          chnDescription = homematic("Interface.getParamset", {"interface": "HmIP-RF", "address": curDevice + ":0", "paramsetKey": "MASTER"});
+          loop = ((this.arWGDScreenOrder.length < 10)) ? 5 : 10;
+
+          for(var loopx = 1; loopx <= loop; loopx++) {
+            this.arWGDTiles.push(chnDescription["SCREEN_LAYOUT_TILE_LAYOUT_" + loopx]);
+          }
+
+          jQuery.each(this.arWGDScreenOrder, function(index,screen) {
+            if ((! endOfScreens) && (screen != screenEndID)) {
+              counter = (screen <= 4) ? tilesA[self.arWGDTiles[screen]] : tilesB[self.arWGDTiles[screen]];
+              for (loop = self.WGDStartChannelPerScreen[screen]; loop <= (self.WGDStartChannelPerScreen[screen] + counter); loop++) {
+                self.WGDChannelInUse.push(loop);
+              }
+            } else {endOfScreens = true;} // return false doesn't work because of a problem with the build-system
+          });
+        }
+
+        if (this.WGDChannelInUse.indexOf(channel.index) != -1) {
+          arChannels.push(channel);
+        }
+      }
+    }
     return arChannels;
   },
 
   filterHmIPChannels4ProgramActivities: function(channel, arChannels) {
     conInfo("filterHmIPChannels4ProgramActivities");
-    var channelTypeName = channel.typeName.toLowerCase();
+    var channelTypeName = channel.typeName.toLowerCase(),
+    oMaintChannel, deviceMode, endOfScreens = false;
+
     if (channel.isVisible) {
-      if (channelTypeName != "hmip-wkp") {
-        arChannels.push(channel);
-      } else {
+      if (channelTypeName == "hmip-wkp") {
         if ((channel.channelType == "MAINTENANCE") || ((channel.channelType == "ACCESS_TRANSCEIVER") && (channel.index % 2 != 0))) {
           arChannels.push(channel);
         }
+      } else if ((channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") && (channelTypeName == "hmip-rgbw")) {
+        oMaintChannel = DeviceList.getChannelByAddress(channel.address.split(":")[0] + ":0"); // The maintenance channel stores the deviceMode
+        deviceMode = parseInt(homematic("Interface.getMetadata", {"objectId": oMaintChannel.id, "dataId": "deviceMode"}));
+
+        switch (deviceMode) {
+          case 0:
+          case 1:
+            // RGB/RGBW Mode
+            if (channel.index == 1) {arChannels.push(channel);}
+            break;
+          case 2:
+            // Tunable White Mode
+            if (channel.index == 1 || channel.index == 2) {arChannels.push(channel);}
+            break;
+          default:
+            // PWM Mode - all channels visible
+            arChannels.push(channel);
+        }
+
+      } else if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) && ((channelTypeName == "hmipw-wgd") || (channelTypeName == "hmipw-wgd-pl"))) {
+        var  wgdScreenOrder, screenEndID = "END",  counter, chnDescription, curDevice, tilesA = [1,3,7], tilesB = [0,1], loop,
+          self = this;
+        if (channel.index == 41) {
+          arChannels.push(channel);
+        } else {
+          curDevice = channel.device.address; // Do this only once per device
+          if (this.WGDdevice != curDevice) {
+            this.WGDdevice = channel.device.address;
+            oDevice = DeviceList.getDeviceByAddress(channel.address.split(":")[0]); // The device stores the screen order
+            wgdScreenOrder = homematic("Interface.getMetadata", {"objectId": oDevice.id, "dataId": "screenOrder"});
+            this.arWGDScreenOrder = wgdScreenOrder.split(",");
+            this.WGDStartChannelPerScreen = (this.arWGDScreenOrder.length < 10) ? {0: 1, 1: 9, 2: 17, 3: 25, 4: 33} : {0: 1, 1: 9, 2: 17, 3: 25, 4: 33, 5: 42, 6: 44, 7: 46, 8: 48, 9: 50};
+            this.WGDChannelInUse = [];
+            this.arWGDTiles = [];
+
+            // Get number of tiles
+            chnDescription = homematic("Interface.getParamset", {"interface": "HmIP-RF", "address": curDevice + ":0", "paramsetKey": "MASTER"});
+            loop = ((this.arWGDScreenOrder.length < 10)) ? 5 : 10;
+
+            for(var loopx = 1; loopx <= loop; loopx++) {
+              this.arWGDTiles.push(chnDescription["SCREEN_LAYOUT_TILE_LAYOUT_" + loopx]);
+            }
+
+            jQuery.each(this.arWGDScreenOrder, function(index,screen) {
+              if ((! endOfScreens) && (screen != screenEndID)) {
+                counter = (screen <= 4) ? tilesA[self.arWGDTiles[screen]] : tilesB[self.arWGDTiles[screen]];
+                for (loop = self.WGDStartChannelPerScreen[screen]; loop <= (self.WGDStartChannelPerScreen[screen] + counter); loop++) {
+                  self.WGDChannelInUse.push(loop);
+                }
+              } else {endOfScreens = true;} // return false doesn't work because of a problem with the build-system
+            });
+          }
+
+          if (this.WGDChannelInUse.indexOf(channel.index) != -1) {
+            arChannels.push(channel);
+          }
+        }
+      } else {
+        arChannels.push(channel);
       }
     }
     return arChannels;
@@ -11990,7 +12172,7 @@ ChannelChooser = Singleton.create({
       if (this.match(channel)) {
 
         if ((channel.device.interfaceName == this.HmIPIdentifier) || (channel.device.interfaceName == this.HmIPWIdentifier)) {
-          if (this.src == this.PRG_CONDITION) {
+          if ((this.src == this.PRG_CONDITION) || (this.src == this.FAV_CHANNELS)) {
             this.filterHmIPChannels4ProgramConditions(channel, result);
           } else if (this.src == this.PRG_ACTIVITY) {
             this.filterHmIPChannels4ProgramActivities(channel, result);
@@ -12217,7 +12399,24 @@ MultiChannelChooser = Singleton.create({
   SORT_FN: {
     NAME       : function(channels, reverse) { return channels.ex_sortBy("name", reverse); },
     DESCRIPTION: function(channels, reverse) { return channels.ex_sortBy("typeDescription", reverse); },
-    ADDRESS    : function(channels, reverse) { return channels.ex_sortBy("address", reverse); },
+    //ADDRESS    : function(channels, reverse) { return channels.ex_sortBy("address", reverse); },
+
+    // Sorting by serial number changed.
+    ADDRESS    : function(channels, reverse) {
+      var arSortedChannels = [];
+      jQuery.each(channels.sort(function(a,b) {
+        var ar1 = a.address.split(":"),
+          ar2 = b.address.split(":");
+
+        if (ar1[0] == ar2[0]) {
+          return (parseInt(ar1[1]) - parseInt(ar2[1]));
+        }
+      }), function(index, ch) {
+        arSortedChannels.push(ch);
+      });
+      return arSortedChannels;
+    },
+
     ROOM_NAMES : function(channels, reverse)
     {
       channels.sort(function(a, b) { return Object.ex_compare(a.rooms.ex_joinItem("name"), b.rooms.ex_joinItem("name")); });
@@ -12240,6 +12439,11 @@ MultiChannelChooser = Singleton.create({
     this.HmIPIdentifier = "HmIP-RF";
     this.HmIPWIdentifier = "HmIP-Wired";
     this.template = TrimPath.parseTemplate(MULTI_CHANNELCHOOSER_JST);
+    this.arWGDScreenOrder = [];
+    this.WGDStartChannelPerScreen = {};
+    this.WGDChannelInUse = [];
+    this.WGDdevice = "";
+    this.arWGDTiles = [];
   },
   
   /**
@@ -12263,8 +12467,56 @@ MultiChannelChooser = Singleton.create({
 
   filterHmIPChannels: function(channel, arChannels) {
     conInfo("filterHmIPChannels");
-    //if ((channel.channelType != "_KEY_TRANSCEIVER") && channel.isVisible) {arChannels.push(channel);}
-    if (channel.isVisible && (channel.channelType != "ACCESSPOINT_GENERIC_RECEIVER")) {arChannels.push(channel);}
+    var channelTypeName = channel.typeName.toLowerCase();
+
+    if (channel.isVisible
+      && (channel.channelType != "ACCESSPOINT_GENERIC_RECEIVER")
+      && (channel.channelType != "DISPLAY_INPUT_TRANSMITTER")
+      && (channel.channelType != "DISPLAY_LEVEL_INPUT_TRANSMITTER")
+      && (channel.channelType != "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")
+    ) {arChannels.push(channel);}
+
+    if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) && ((channelTypeName == "hmipw-wgd")) || ((channelTypeName == "hmipw-wgd-pl"))) {
+
+      var  wgdScreenOrder, screenEndID = "END",  counter, chnDescription, curDevice, tilesA = [1,3,7], tilesB = [0,1], loop, endOfScreens = false,
+        self = this;
+      if (channel.index == 41) {
+        arChannels.push(channel);
+      } else {
+        curDevice = channel.device.address; // Do this only once per device
+        if (this.WGDdevice != curDevice) {
+          this.WGDdevice = channel.device.address;
+          oDevice = DeviceList.getDeviceByAddress(channel.address.split(":")[0]); // The device stores the screen order
+          wgdScreenOrder = homematic("Interface.getMetadata", {"objectId": oDevice.id, "dataId": "screenOrder"});
+          this.arWGDScreenOrder = wgdScreenOrder.split(",");
+          this.WGDStartChannelPerScreen = (this.arWGDScreenOrder.length < 10) ? {0: 1, 1: 9, 2: 17, 3: 25, 4: 33} : {0: 1, 1: 9, 2: 17, 3: 25, 4: 33, 5: 42, 6: 44, 7: 46, 8: 48, 9: 50};
+          this.WGDChannelInUse = [];
+          this.arWGDTiles = [];
+
+          // Get number of tiles
+          chnDescription = homematic("Interface.getParamset", {"interface": "HmIP-RF", "address": curDevice + ":0", "paramsetKey": "MASTER"});
+          loop = ((this.arWGDScreenOrder.length < 10)) ? 5 : 10;
+
+          for(var loopx = 1; loopx <= loop; loopx++) {
+            this.arWGDTiles.push(chnDescription["SCREEN_LAYOUT_TILE_LAYOUT_" + loopx]);
+          }
+
+          jQuery.each(this.arWGDScreenOrder, function(index,screen) {
+            if ((! endOfScreens) && (screen != screenEndID)) {
+              counter = (screen <= 4) ? tilesA[self.arWGDTiles[screen]] : tilesB[self.arWGDTiles[screen]];
+              for (loop = self.WGDStartChannelPerScreen[screen]; loop <= (self.WGDStartChannelPerScreen[screen] + counter); loop++) {
+                self.WGDChannelInUse.push(loop);
+              }
+            } else {endOfScreens = true;} // return false doesn't work because of a problem with the build-system
+          });
+        }
+
+        if (this.WGDChannelInUse.indexOf(channel.index) != -1) {
+          arChannels.push(channel);
+        }
+      }
+    }
+
     return arChannels;
   },
 
@@ -19940,7 +20192,7 @@ WiredDisplaySystemKey = Class.create({
       this.durationSelect.val(valDuration);
     } else {
       valKeyVisual = (arElmValues[0].split("=")[1] == "true") ? true : false;
-      valDuration = arElmValues[2].split("=")[1];
+      valDuration = arElmValues[arElmValues.length - 1].split("=")[1]; // the last entry of the string should be IMDU = IDENTIFY_DURATION
 
       this.sysKeyChkBox.prop("checked", valKeyVisual);
       this.durationSelect.val(valDuration);
@@ -20150,13 +20402,16 @@ var
   },
   getWGDImageCollection = function() {
   var image = {
-    0 : ["_000_000_lightbulb0.png",1],
-    1 : ["_001_000_tablelamp0.png",12],
-    2 : ["_002_000_spotoff.png",23],
-    3 : ["_010_000_socket_off.png",25],
-    4 : ["_020_000_shutter0.png",27],
+    0 : ["_0000_fallback.png",0],
+    1 : ["_000_000_lightbulb0.png",1],
+    2 : ["_001_000_tablelamp0.png",12],
+    3 : ["_002_000_spotoff.png",23],
+    4 : ["_010_000_socket_off.png",25],
+    5 : ["_020_000_shutter0.png",27]
+    /*  Not desired according to discussion with PM and Developer.
     5 : ["_050_20_windows_closed.png",43],
     6 : ["_050_64_window_closed.png",52]
+     */
   };
   return image;
 };
@@ -20241,6 +20496,1185 @@ WGDSelectIconDialog = Class.create(YesNoDialog,{
 
   getSelectedIcon: function() {
     return this.selectedIcon;
+  }
+
+});
+
+// TODO Check if this class is still necessary!
+UniveralLightReceiverDialog = Class.create(YesNoDialog,{
+
+  run: function () {
+    this.durationValElm = jQuery("#durationVal");
+    this.durationUnitElm = jQuery("#durationUnit");
+    this.rampTimeValElm = jQuery("#rampTimeVal");
+    this.rampTimeUnitElm = jQuery("#rampTimeUnit");
+    this.rampTimeOffValElm = jQuery("#rampTimeOffVal");
+    this.rampTimeOffUnitElm = jQuery("#rampTimeOffUnit");
+  },
+
+  initColorPicker: function(chnId, oInitColor, dlg) {
+    //this.initEventHandler(dlg);
+    var hsvColorString = "hsv(" + oInitColor.hue + "," + oInitColor.saturation + "%," + oInitColor.level + "%)",
+      colorPickerElm = jQuery("#colorPicker");
+      colorPickerElm.val(hsvColorString);
+
+    jQuery(colorPickerElm).spectrum({
+      preferredFormat: "hsv",
+      showInput: false,
+      color: hsvColorString,
+      //showPalette: true,
+      //disabled: pickerState,
+      //palette: palette,
+      cancelText: translateKey("btnCancel"),
+      chooseText: translateKey("btnOk"),
+      show: function() {dlg.btnYesHide();},
+      hide: function(color) {
+        selectedRGBColor = tinycolor(color).toRgbString();
+        selectedColor =  tinycolor(color).toHsv();
+        dlg.btnYesShow();
+      }
+    });
+  }
+});hmipRGBWControllerDialog = Class.create({
+  initialize: function(title, content, deviceType, chnAddress, value, callback, contentType)
+  {
+    showRamptimeOff = false; // This we need among other things for certain COMBINED_PARAMETER help dialogs.
+    var _this_ = this;
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer";
+
+    this.RESULT_NO = 0;
+    this.RESULT_YES = 1;
+
+    this.iface = "HmIP-RF";
+
+    this.deviceType = deviceType;
+    this.chnAddress = chnAddress;
+    this.initValue = value;
+
+    this.maxOnTime = 111600;
+
+
+    this.arNoOntimeAvailable = [];
+    this.showRampTimeOffElm = ["HmIP-RGBW"];
+
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    //titleElement.appendChild(document.createTextNode(title + " " + deviceType + " - " + chnAddress));
+    titleElement.appendChild(document.createTextNode(deviceType + " - " + chnAddress));
+    titleElement.onmousedown = function(event) { new Drag(this.parentNode, event); };
+    dialog.appendChild(titleElement);
+
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className= "YesNoDialogFooter";
+
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('dialogYes')));
+    yesButton.onclick = function() { _this_.yes(); };
+    yesButton.id="btnYes";
+    footer.appendChild(yesButton);
+
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('dialogNo')));
+    noButton.onclick = function() { _this_.no(); };
+    noButton.id = "btnNo";
+    footer.appendChild(noButton);
+
+    dialog.appendChild(footer);
+
+    this.m_layer.appendChild(dialog);
+    Layer.add(this.m_layer);
+
+    translatePage(".YesNoDialog");
+
+    this.setHeight();
+
+    this.setDialogElements();
+    this.initDialog();
+
+  },
+
+  isOntimeAvailable: function() {
+    return (this.arNoOntimeAvailable.indexOf(this.deviceType) == -1) ? true : false;
+  },
+
+  setDialogElements: function() {
+    var self = this;
+    this.trDurationElms = jQuery("[name='trDuration']");
+    this.trRampTimeElms = jQuery("[name='trRampTime']");
+    this.trRampTimeOff = jQuery("#trRampTimeOff");
+    this.levelElm = jQuery("#combinedParam_Level");
+    this.lblBrightnessLevelElm = jQuery("#lblBrightnessLevel");
+    this.lblRampTimeElm = jQuery("#lblRampTime");
+    this.chkBoxTimeLimitElm = jQuery("#chkBoxTimeLimit");
+    this.durationValueElm = jQuery("#combinedParam_DurationValue");
+    this.durationUnitElm = jQuery("#combinedParam_DurationUnit");
+    this.rampTimeUnitElm = jQuery("#combinedParam_RampTimeUnit");
+    this.rampTimeValueElm = jQuery("#combinedParam_RampTimeValue");
+    this.rampTimeOffUnitElm = jQuery("#combinedParam_RampTimeOffUnit");
+    this.rampTimeOffValueElm = jQuery("#combinedParam_RampTimeOffValue");
+
+    this.colorPreviewElm = jQuery("#bckGndElm");
+
+    this.colorPicker;
+    this.colorPickerInit = {}; // level, hue, saturation
+
+    this.hueElm = jQuery("#hueElm");
+    this.satElm = jQuery("#satElm");
+    this.HUE;
+    this.SATURATION;
+
+    this.colorTemperature = 0;
+
+  },
+
+  _getOnTimeVal: function(val, unit) {
+    var result;
+
+    if (parseInt(val) >= 31 && parseInt(unit) == 2) {
+      return 0;
+    }
+
+    if (unit == 0) {
+      result = val;
+    } else if (unit == 1) {
+      result = val * 60;
+    } else if (unit == 2) {
+      result = val * 3600;
+    }
+    return parseInt(result);
+  },
+
+  _getRampTimeVal: function(val, unit) {
+    var result;
+    if (unit == 0) {
+      result = val;
+    } else if (unit == 1) {
+      result = parseInt(val * 60);
+    } else if (unit == 3) {
+      result = parseFloat(val / 100);
+    }
+    return result;
+  },
+
+  _getUnitInDU4OnTime: function(time) {
+    var result = 0,
+      hr = time / 3600,
+      min= time / 60;
+
+    if (hr == parseInt(hr)) {
+      result = 2;
+    } else if  (min == parseInt(min)) {
+      result = 1;
+    }
+    return result;
+  },
+
+  _getUnitInDU4RampTime: function(time) {
+    var t = parseFloat(time),
+      result = 0,
+      min = t / 60;
+
+    if (parseInt(time) == 0) {
+      return 0;
+    }
+
+    if (min == parseInt(min)) {
+      result = 1;
+    } else if ((Number(t) === t) && (t % 1 !== 0)) {
+      // time in float
+      result = 3;
+    }
+    return result;
+  },
+
+  hideOnTimeElems: function() {
+    jQuery("[name='trRampTime']").first().nextAll().hide();
+    this.setHeight();
+  },
+
+
+  initDialog: function() {
+    var self = this;
+
+    var arElmValues, valueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration;
+
+    if (this.isOntimeAvailable()) {
+      arElmValues = this.initValue.split(",");
+
+      valueL = arElmValues[0].split("=")[1];
+      valueDVtmp = arElmValues[1].split("=")[1];
+      valueDU = this._getUnitInDU4OnTime(valueDVtmp);
+
+
+      this.colorPickerInit.level = parseInt(arElmValues[0].split("=")[1]);
+      this.colorPickerInit.hue = parseInt(arElmValues[3].split("=")[1]);
+      this.colorPickerInit.saturation = parseInt(arElmValues[4].split("=")[1]);
+
+      this.HUE = this.colorPickerInit.hue;
+      this.SATURATION = this.colorPickerInit.saturation;
+
+
+
+      if (valueDU == 2) {
+        valueDV = parseInt(valueDVtmp / 3600);
+      } else if (valueDU == 1) {
+        valueDV = parseInt(valueDVtmp / 60);
+      } else {
+        valueDV = valueDVtmp;
+      }
+
+      valueRTVtmp = arElmValues[2].split("=")[1];
+
+      valueRTU = this._getUnitInDU4RampTime(valueRTVtmp);
+
+      if (valueRTU == 3) {
+        valueRTV = valueRTVtmp * 100;
+      } else if (valueRTU == 1) {
+        valueRTV = parseInt(valueRTVtmp / 60);
+      } else {
+        valueRTV = valueRTVtmp;
+      }
+
+      permanentHR = 31;
+      permanentHR_0 = 0;
+      minDuration = 0;
+      maxDuration = 16343;
+    }
+    // RAMPTIME_OFF
+    if (arElmValues.length >= 7) {
+      valueRTTOV = arElmValues[5].split("=")[1];
+      valueRTTOU = arElmValues[6].split("=")[1];
+      this.rampTimeOffUnitElm.val(valueRTTOU);
+      this.rampTimeOffValueElm.val(valueRTTOV);
+    }
+
+    this.levelElm.val(valueL);
+    this.durationValueElm.val(valueDV);
+    this.durationUnitElm.val(valueDU);
+
+    this.rampTimeUnitElm.val(valueRTU);
+    this.rampTimeValueElm.val(valueRTV);
+
+    this.hueElm.val(this.HUE);
+    this.satElm.val(this.SATURATION);
+
+    if ((this.durationValueElm.val() == permanentHR && this.durationUnitElm.val() == 2) || (this.isOntimeAvailable() && valueDV == 0)) {
+      this.chkBoxTimeLimitElm.prop("checked", false);
+      this.durationValueElm.prop('disabled', true);
+      this.durationUnitElm.prop('disabled', true);
+      this.trDurationElms.css("visibility", "visible");
+      this.trRampTimeElms.css("visibility", "visible");
+      this.trDurationElms.css("opacity", "0.2");
+      if (this.showRampTimeOffElm.indexOf(this.deviceType) != -1) {
+        this.trRampTimeOff.css("visibility", "visible").css("opacity", "0.2");
+        showRamptimeOff = true;
+      }
+    } else {
+      this.chkBoxTimeLimitElm.prop("checked", true);
+      this.durationValueElm.prop('disabled', false);
+      this.durationUnitElm.prop('disabled', false);
+      this.trDurationElms.css("visibility", "visible");
+      this.trRampTimeElms.css("visibility", "visible");
+      if (this.showRampTimeOffElm.indexOf(this.deviceType) != -1) {
+        this.trRampTimeOff.css("visibility", "visible");
+        showRamptimeOff = true;
+      }
+    }
+
+    this.chkBoxTimeLimitElm.bind("change", function() {
+      if (this.checked) {
+        self.durationValueElm.prop('disabled', false);
+        self.durationUnitElm.prop('disabled', false);
+        self.trDurationElms.fadeTo(1000, 1);
+        self.trRampTimeElms.fadeTo(1000, 1);
+        if (self.showRampTimeOffElm.indexOf(self.deviceType) != -1) {
+          self.trRampTimeOff.fadeTo(1000,1);
+        }
+      } else {
+        self.durationValueElm.prop('disabled', true);
+        self.durationUnitElm.prop('disabled', true);
+        self.rampTimeValueElm.prop('disabled', false); //.val(0);
+        self.rampTimeUnitElm.prop('disabled', false); //.val(0);
+        self.trDurationElms.fadeTo(1000, 0.2);
+        self.trRampTimeElms.fadeTo(1000, 1);
+
+        if (self.showRampTimeOffElm.indexOf(self.deviceType) != -1) {
+          self.trRampTimeOff.fadeTo(1000,0.2);
+        }
+
+        if (self.isOntimeAvailable()) {
+          self.durationValueElm.val(permanentHR_0);
+        } else {
+          self.durationValueElm.val(permanentHR);
+          self.rampTimeOffUnitElm.val(3);
+          self.rampTimeOffValueElm.val(0);
+        }
+        self.durationUnitElm.val(2);
+      }
+    });
+
+    this.durationValueElm.bind("keyup", function() {
+      var min = minDuration,
+        max = (parseInt(self.durationUnitElm.val()) == 2) ? permanentHR: maxDuration;
+      this.value = self.checkValidity(this.value,min,max);
+      if (parseInt(this.value) == 31) {
+        self.rampTimeOffValueElm.val(min);
+        self.rampTimeOffUnitElm.val(3); // = 10ms
+      }
+    });
+
+    this.durationValueElm.bind("blur", function() {
+      var val = parseInt(this.value);
+
+      if (isNaN(val)) {
+        this.value = (parseInt(self.durationUnitElm.val()) == 2) ? permanentHR :  maxDuration;
+      } else {
+        this.value = val;
+      }
+      self.durationValueElm.keyup();
+    });
+
+    this.durationUnitElm.bind("change", function(){
+      self.durationValueElm.keyup();
+    });
+
+    this.rampTimeValueElm.bind("keyup", function() {
+      var min = minDuration,
+        max = maxDuration;
+      this.value = self.checkValidity(this.value,min,max);
+    });
+
+    this.rampTimeValueElm.bind("blur", function() {
+      var val = parseInt(this.value);
+
+      if (isNaN(val)) {
+        this.value = maxDuration;
+      } else {
+        this.value = val;
+      }
+    });
+
+    this.rampTimeUnitElm.bind("change", function(){
+      self.rampTimeValueElm.keyup();
+    });
+
+    /**********************/
+    this.rampTimeOffValueElm.bind("keyup", function() {
+      var min = minDuration,
+        max = maxDuration;
+      this.value = self.checkValidity(this.value,min,max);
+    });
+
+    this.rampTimeOffValueElm.bind("blur", function() {
+      var val = parseInt(this.value);
+
+      if (isNaN(val)) {
+        this.value = maxDuration;
+      } else {
+        this.value = (parseInt(self.durationValueElm.val()) <= 30) ? val : minDuration;
+        if (parseInt(self.durationValueElm.val()) >= 31) {
+          self.rampTimeOffUnitElm.val(3); // 10ms
+        }
+      }
+    });
+
+    this.rampTimeUnitElm.bind("change", function(){
+      self.rampTimeOffValueElm.keyup();
+    });
+
+    this.hueElm.keyup(function(event) {
+      var val;
+      if (event.keyCode == 13) {
+        val = parseInt(jQuery(this).val());
+        if (val < 0 || isNaN(val)) {self.HUE = 0;} else if (val > 360) {self.HUE = 360;} else {self.HUE = val;};
+        jQuery(this).val(self.HUE);
+        self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
+        self.setColorPreviewElm(self.HUE, self.SATURATION);
+      }
+    });
+
+    this.hueElm.blur(function(event) {
+      var val;
+      val = parseInt(jQuery(this).val());
+      if (val < 0 || isNaN(val)) {self.HUE = 0;} else if (val > 360) {self.HUE = 360;} else {self.HUE = val;};
+      jQuery(this).val(self.HUE);
+      self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
+      self.setColorPreviewElm(self.HUE, self.SATURATION);
+    });
+
+
+    this.satElm.keyup(function(event) {
+      var val;
+      if (event.keyCode == 13) {
+        val = parseInt(jQuery(this).val());
+        if (val < 0 || isNaN(val)) {self.SATURATION = 0;} else if (val > 100) {self.SATURATION = 100;} else {self.SATURATION = val;};
+        jQuery(this).val(parseInt(self.SATURATION));
+        self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
+        self.setColorPreviewElm(self.HUE, self.SATURATION);
+      }
+    });
+
+    this.satElm.blur(function(event) {
+      var val;
+      val = parseInt(jQuery(this).val());
+      if (val < 0 || isNaN(val)) {self.SATURATION = 0;} else if (val > 100) {self.SATURATION = 100;} else {self.SATURATION = val;};
+      jQuery(this).val(parseInt(self.SATURATION));
+      self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
+      self.setColorPreviewElm(self.HUE, self.SATURATION);
+    });
+    /**********************/
+
+    this.colorPicker = new iro.ColorPicker("#colorPicker", {
+        // Set the size of the color picker
+        width: 90,
+        color: {h: self.colorPickerInit.hue, s: self.colorPickerInit.saturation, v: self.colorPickerInit.level},
+        wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
+        layout: [{component: iro.ui.Wheel}], // don't show the V slider below the wheel - this value comes from the dimmer slider
+        handleRadius: 4
+      }
+    );
+
+    this.colorPicker.on("mount", function(color) {
+      self.setColorPreviewElm(self.colorPickerInit.hue, self.colorPickerInit.saturation);
+    });
+
+    this.colorPicker.on("input:end", function(color) {
+      var hsv_H = color.hsv.h,
+        hsv_S,
+        hsv_S_Percent = parseInt(color.hsv.s);
+
+      self.hueElm.val(hsv_H);
+      self.HUE = hsv_H;
+
+      self.satElm.val(hsv_S_Percent);
+      self.SATURATION = hsv_S_Percent;
+
+      self.setColorPreviewElm(color.hsv.h, color.hsv.s);
+
+    });
+  },
+
+  setColorPreviewElm: function(hue, sat) {
+    var rgbVal;
+    rgbVal = hsvToRgb(hue, sat, 100);
+    this.colorPreviewElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+  },
+
+  checkValidity: function(val, min, max) {
+    var result = val;
+    if (val == "") {result = "";}
+
+    if (parseInt(val) < 0) {result = min;}
+    if (parseInt(val) > max) {result = max;}
+    return result;
+  },
+
+  getConfigString: function() {
+    var self = this,
+      result,
+      level = this.levelElm.val(),
+      durationUnit = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 2 : this.durationUnitElm.val(), // 2  = unit hour
+      durationValue = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 31 : this.durationValueElm.val(),
+      ramptimeUnit = this.rampTimeUnitElm.val(),
+      ramptimeValue = this.rampTimeValueElm.val(),
+      hueValue = this.HUE,
+      satValue = this.SATURATION;
+
+
+
+    if (this.isOntimeAvailable()) {
+      if (this.chkBoxTimeLimitElm.prop("checked") == false) {
+        var _rampTimeValue = parseInt(this._getRampTimeVal(ramptimeValue, ramptimeUnit));
+
+        if (_rampTimeValue > 0) {
+          result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue + ",H=" + hueValue + ",SAT=" + satValue; // ON_TIME = permanently ON
+        } else {
+          result = "L=" + level + ",OT=0,RT=0,H=" + hueValue + ",SAT=" + satValue;
+        }
+
+      } else {
+        if (durationValue == 0) {
+          result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0,H=" + hueValue + ",SAT=" + satValue;
+        } else {
+          result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit) + ",H=" + hueValue + ",SAT=" + satValue;
+        }
+      }
+    } else {
+      result = "L=" + level + ",DV=" + durationValue + ",DU=" + durationUnit + ",RTV=" + ramptimeValue + ",RTU=" + ramptimeUnit + ",H=" + hueValue + ",SAT=" + satValue;
+    }
+
+    jQuery.each(this.showRampTimeOffElm, function(index, val) {
+      if (self.deviceType == val) {
+        return false; // leave each loop
+      }
+    });
+
+    if (showRamptimeOff) {
+      result += ",RTTOV=" + this.rampTimeOffValueElm.val() + ",RTTOU=" + this.rampTimeOffUnitElm.val();
+    }
+    return result;
+  },
+
+  close: function(result)
+  {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) { this.m_callback(result); }
+    if (showRamptimeOff) {window.setTimeout(function() {delete showRamptimeOff;},100);}
+  },
+
+  yes: function()
+  {
+    this.close(YesNoDialog.RESULT_YES);
+  },
+
+  no: function()
+  {
+    this.close(YesNoDialog.RESULT_NO);
+  },
+
+  btnTextYes: function(btnTxt) {
+    jQuery(".YesNoDialog_yesButton").text(btnTxt);
+  },
+
+  btnYesHide: function() {
+    jQuery("#btnYes").addClass("hidden");
+  },
+
+  btnYesShow: function() {
+    jQuery("#btnYes").removeClass("hidden");
+  },
+
+  btnTextNo: function(btnTxt) {
+    jQuery(".YesNoDialog_noButton").text(btnTxt);
+  },
+
+  btnNoHide: function() {
+    jQuery("#btnNo").addClass("hidden");
+  },
+
+  btnNoShow: function() {
+    jQuery("#btnNo").removeClass("hidden");
+  },
+
+  setHeight: function() {
+    var heightContentWrapper = jQuery(".YesNoDialogContentWrapper").height(),
+      yesNoElm = jQuery(".YesNoDialog"),
+      footerElm = jQuery(".YesNoDialogFooter");
+
+    yesNoElm.css("height", heightContentWrapper + 78);
+    footerElm.css("top", heightContentWrapper + 26);
+    yesNoElm.css("top", (window.innerHeight / 2) - (yesNoElm.height() / 2));
+  },
+
+  resetHeight: function() {
+    this.setHeight();
+  },
+
+  setWidth: function(dlgWidth) {
+    var yesNoDialogElm = jQuery(".YesNoDialog"),
+      yesNoDialogContentWrapperElm = jQuery(".YesNoDialogContentWrapper"),
+      yesNoDialogFooterElm = jQuery(".YesNoDialogFooter"),
+      yesNoDialogTitleElm = jQuery(".YesNoDialogTitle"),
+      yesNoDialogYesButton = jQuery(".YesNoDialog_yesButton");
+
+    var defaultWith = 600,
+      offsetWidth = 4,
+      offsetPosYesButton = 109,
+      offsetDialogHeight = 78,
+      offsetDialogFooterHeight = 26;
+
+    var width = dlgWidth - offsetWidth,
+      yesButtonPos = dlgWidth - offsetPosYesButton,
+      position = yesNoDialogElm.position();
+
+    // dlgWidth = (defaultWith < dlgWidth) ? defaultWith : dlgWidth;
+
+    yesNoDialogElm.width(dlgWidth).css({left: position.left + ((defaultWith - dlgWidth) / 2)});
+    yesNoDialogTitleElm.width(width);
+    yesNoDialogContentWrapperElm.width(width);
+    yesNoDialogFooterElm.width(width);
+    yesNoDialogYesButton.css("left", yesButtonPos);
+
+    //Dialoghöhe an Content anpassen.
+    yesNoDialogElm.css("height", yesNoDialogContentWrapperElm.height() + offsetDialogHeight);
+    yesNoDialogFooterElm.css("top", yesNoDialogContentWrapperElm.height() + offsetDialogFooterHeight);
+  }
+
+});RGBWTunableWhiteControllerDialog = Class.create({
+  initialize: function(title, content, deviceType, chnAddress, value, callback, contentType)
+  {
+    showRamptimeOff = false; // This we need among other things for certain COMBINED_PARAMETER help dialogs.
+    var _this_ = this;
+
+    this.m_contentType = contentType;
+    this.m_callback = callback;
+    this.m_layer = document.createElement("div");
+    this.m_layer.className = "YesNoDialogLayer";
+
+    this.RESULT_NO = 0;
+    this.RESULT_YES = 1;
+
+    this.iFace = "HmIP-RF";
+
+    this.deviceType = deviceType;
+    this.chnAddress = chnAddress;
+    this.initValue = value;
+
+    this.maxOnTime = 111600;
+
+    this.valHCL = 10200;
+    this.valDim2Warm = 10150;
+
+    this.arNoOntimeAvailable = [];
+    this.showRampTimeOffElm = ["HmIP-RGBW"];
+
+    var dialog = document.createElement("div");
+    dialog.className = "YesNoDialog";
+
+    var titleElement = document.createElement("div");
+    titleElement.className = "YesNoDialogTitle";
+    //titleElement.appendChild(document.createTextNode(title + " " + deviceType + " - " + chnAddress));
+    titleElement.appendChild(document.createTextNode(deviceType + " - " + chnAddress));
+    titleElement.onmousedown = function(event) { new Drag(this.parentNode, event); };
+    dialog.appendChild(titleElement);
+
+    var contentWrapper = document.createElement("div");
+    contentWrapper.className = "YesNoDialogContentWrapper";
+
+    var contentElement = document.createElement("div");
+    contentElement.className = "YesNoDialogContent";
+
+    if (this.m_contentType == "html") {
+      contentElement.innerHTML = content;
+    } else {
+      contentElement.appendChild(document.createTextNode(content));
+    }
+
+    contentWrapper.appendChild(contentElement);
+
+    dialog.appendChild(contentWrapper);
+
+    var footer = document.createElement("div");
+    footer.className= "YesNoDialogFooter";
+
+    var yesButton = document.createElement("div");
+    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
+    yesButton.appendChild(document.createTextNode(translateKey('dialogYes')));
+    yesButton.onclick = function() { _this_.yes(); };
+    yesButton.id="btnYes";
+    footer.appendChild(yesButton);
+
+    var noButton = document.createElement("div");
+    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
+    noButton.appendChild(document.createTextNode(translateKey('dialogNo')));
+    noButton.onclick = function() { _this_.no(); };
+    noButton.id = "btnNo";
+    footer.appendChild(noButton);
+
+    dialog.appendChild(footer);
+
+    this.m_layer.appendChild(dialog);
+    Layer.add(this.m_layer);
+
+    translatePage(".YesNoDialog");
+
+    this.setHeight();
+
+    this.setDialogElements();
+    this.initDialog();
+
+  },
+
+  isOntimeAvailable: function() {
+    return (this.arNoOntimeAvailable.indexOf(this.deviceType) == -1) ? true : false;
+  },
+
+  setDialogElements: function() {
+    var self = this;
+    this.trDurationElms = jQuery("[name='trDuration']");
+    this.trRampTimeElms = jQuery("[name='trRampTime']");
+    this.trRampTimeOff = jQuery("#trRampTimeOff");
+    this.levelElm = jQuery("#combinedParam_Level");
+    this.lblBrightnessLevelElm = jQuery("#lblBrightnessLevel");
+    this.lblRampTimeElm = jQuery("#lblRampTime");
+    this.chkBoxTimeLimitElm = jQuery("#chkBoxTimeLimit");
+    this.durationValueElm = jQuery("#combinedParam_DurationValue");
+    this.durationUnitElm = jQuery("#combinedParam_DurationUnit");
+    this.rampTimeUnitElm = jQuery("#combinedParam_RampTimeUnit");
+    this.rampTimeValueElm = jQuery("#combinedParam_RampTimeValue");
+    this.rampTimeOffUnitElm = jQuery("#combinedParam_RampTimeOffUnit");
+    this.rampTimeOffValueElm = jQuery("#combinedParam_RampTimeOffValue");
+
+    this.sliderElm = jQuery("#twSlider");
+    this.sliderInfoElm = jQuery("#tcInfoField");
+    this.btnHCLElm = jQuery("#btnHCL");
+    this.btnDim2WarmElm = jQuery("#btnDim2Warm");
+    this.colorTemperature = 0;
+
+  },
+
+  _getOnTimeVal: function(val, unit) {
+    var result;
+
+    if (parseInt(val) >= 31 && parseInt(unit) == 2) {
+      return 0;
+    }
+
+    if (unit == 0) {
+      result = val;
+    } else if (unit == 1) {
+      result = val * 60;
+    } else if (unit == 2) {
+      result = val * 3600;
+    }
+    return parseInt(result);
+  },
+
+  _getRampTimeVal: function(val, unit) {
+    var result;
+    if (unit == 0) {
+      result = val;
+    } else if (unit == 1) {
+      result = parseInt(val * 60);
+    } else if (unit == 3) {
+      result = parseFloat(val / 100);
+    }
+    return result;
+  },
+
+  _getUnitInDU4OnTime: function(time) {
+    var result = 0,
+      hr = time / 3600,
+      min= time / 60;
+
+    if (hr == parseInt(hr)) {
+      result = 2;
+    } else if  (min == parseInt(min)) {
+      result = 1;
+    }
+    return result;
+  },
+
+  _getUnitInDU4RampTime: function(time) {
+    var t = parseFloat(time),
+      result = 0,
+      min = t / 60;
+
+    if (parseInt(time) == 0) {
+      return 0;
+    }
+
+    if (min == parseInt(min)) {
+      result = 1;
+    } else if ((Number(t) === t) && (t % 1 !== 0)) {
+      // time in float
+      result = 3;
+    }
+    return result;
+  },
+
+  hideOnTimeElems: function() {
+    jQuery("[name='trRampTime']").first().nextAll().hide();
+    this.setHeight();
+  },
+
+
+  initDialog: function() {
+    var self = this;
+
+    var arElmValues, valueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueC, valueSlider, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration;
+
+    if (this.isOntimeAvailable()) {
+      arElmValues = this.initValue.split(",");
+
+      valueL = arElmValues[0].split("=")[1];
+      valueDVtmp = arElmValues[1].split("=")[1];
+      valueDU = this._getUnitInDU4OnTime(valueDVtmp);
+
+      valueSlider = parseInt(arElmValues[3].split("=")[1]);
+
+      if (valueDU == 2) {
+        valueDV = parseInt(valueDVtmp / 3600);
+      } else if (valueDU == 1) {
+        valueDV = parseInt(valueDVtmp / 60);
+      } else {
+        valueDV = valueDVtmp;
+      }
+
+      valueRTVtmp = arElmValues[2].split("=")[1];
+
+      valueRTU = this._getUnitInDU4RampTime(valueRTVtmp);
+
+      if (valueRTU == 3) {
+        valueRTV = valueRTVtmp * 100;
+      } else if (valueRTU == 1) {
+        valueRTV = parseInt(valueRTVtmp / 60);
+      } else {
+        valueRTV = valueRTVtmp;
+      }
+
+      valueC = 7;
+      permanentHR = 31;
+      permanentHR_0 = 0;
+      minDuration = 0;
+      maxDuration = 16343;
+    }
+    // RAMPTIME_OFF
+    if (arElmValues.length >= 6) {
+      valueRTTOV = arElmValues[4].split("=")[1];
+      valueRTTOU = arElmValues[5].split("=")[1];
+      this.rampTimeOffUnitElm.val(valueRTTOU);
+      this.rampTimeOffValueElm.val(valueRTTOV);
+    }
+
+    this.levelElm.val(valueL);
+    this.durationValueElm.val(valueDV);
+    this.durationUnitElm.val(valueDU);
+
+    this.rampTimeUnitElm.val(valueRTU);
+    this.rampTimeValueElm.val(valueRTV);
+
+    if ((this.durationValueElm.val() == permanentHR && this.durationUnitElm.val() == 2) || (this.isOntimeAvailable() && valueDV == 0)) {
+      this.chkBoxTimeLimitElm.prop("checked", false);
+      this.durationValueElm.prop('disabled', true);
+      this.durationUnitElm.prop('disabled', true);
+      this.trDurationElms.css("visibility", "visible");
+      this.trRampTimeElms.css("visibility", "visible");
+      this.trDurationElms.css("opacity", "0.2");
+      if (this.showRampTimeOffElm.indexOf(this.deviceType) != -1) {
+        this.trRampTimeOff.css("visibility", "visible").css("opacity", "0.2");
+        showRamptimeOff = true;
+      }
+    } else {
+      this.chkBoxTimeLimitElm.prop("checked", true);
+      this.durationValueElm.prop('disabled', false);
+      this.durationUnitElm.prop('disabled', false);
+      this.trDurationElms.css("visibility", "visible");
+      this.trRampTimeElms.css("visibility", "visible");
+      if (this.showRampTimeOffElm.indexOf(this.deviceType) != -1) {
+        this.trRampTimeOff.css("visibility", "visible");
+        showRamptimeOff = true;
+      }
+    }
+
+    this.chkBoxTimeLimitElm.bind("change", function() {
+      if (this.checked) {
+        self.durationValueElm.prop('disabled', false);
+        self.durationUnitElm.prop('disabled', false);
+        self.trDurationElms.fadeTo(1000, 1);
+        self.trRampTimeElms.fadeTo(1000, 1);
+        if (self.showRampTimeOffElm.indexOf(self.deviceType) != -1) {
+          self.trRampTimeOff.fadeTo(1000,1);
+        }
+      } else {
+        self.durationValueElm.prop('disabled', true);
+        self.durationUnitElm.prop('disabled', true);
+        self.rampTimeValueElm.prop('disabled', false); //.val(0);
+        self.rampTimeUnitElm.prop('disabled', false); //.val(0);
+        self.trDurationElms.fadeTo(1000, 0.2);
+        self.trRampTimeElms.fadeTo(1000, 1);
+
+        if (self.showRampTimeOffElm.indexOf(self.deviceType) != -1) {
+          self.trRampTimeOff.fadeTo(1000,0.2);
+        }
+
+        if (self.isOntimeAvailable()) {
+          self.durationValueElm.val(permanentHR_0);
+        } else {
+          self.durationValueElm.val(permanentHR);
+          self.rampTimeOffUnitElm.val(3);
+          self.rampTimeOffValueElm.val(0);
+        }
+        self.durationUnitElm.val(2);
+      }
+    });
+
+    this.durationValueElm.bind("keyup", function() {
+      var min = minDuration,
+        max = (parseInt(self.durationUnitElm.val()) == 2) ? permanentHR: maxDuration;
+      this.value = self.checkValidity(this.value,min,max);
+      if (parseInt(this.value) == 31) {
+        self.rampTimeOffValueElm.val(min);
+        self.rampTimeOffUnitElm.val(3); // = 10ms
+      }
+    });
+
+    this.durationValueElm.bind("blur", function() {
+      var val = parseInt(this.value);
+
+      if (isNaN(val)) {
+        this.value = (parseInt(self.durationUnitElm.val()) == 2) ? permanentHR :  maxDuration;
+      } else {
+        this.value = val;
+      }
+      self.durationValueElm.keyup();
+    });
+
+    this.durationUnitElm.bind("change", function(){
+      self.durationValueElm.keyup();
+    });
+
+    this.rampTimeValueElm.bind("keyup", function() {
+      var min = minDuration,
+        max = maxDuration;
+      this.value = self.checkValidity(this.value,min,max);
+    });
+
+    this.rampTimeValueElm.bind("blur", function() {
+      var val = parseInt(this.value);
+
+      if (isNaN(val)) {
+        this.value = maxDuration;
+      } else {
+        this.value = val;
+      }
+    });
+
+    this.rampTimeUnitElm.bind("change", function(){
+      self.rampTimeValueElm.keyup();
+    });
+
+    /**********************/
+    this.rampTimeOffValueElm.bind("keyup", function() {
+      var min = minDuration,
+        max = maxDuration;
+      this.value = self.checkValidity(this.value,min,max);
+    });
+
+    this.rampTimeOffValueElm.bind("blur", function() {
+      var val = parseInt(this.value);
+
+      if (isNaN(val)) {
+        this.value = maxDuration;
+      } else {
+        this.value = (parseInt(self.durationValueElm.val()) <= 30) ? val : minDuration;
+        if (parseInt(self.durationValueElm.val()) >= 31) {
+          self.rampTimeOffUnitElm.val(3); // 10ms
+        }
+      }
+    });
+
+    this.rampTimeUnitElm.bind("change", function(){
+      self.rampTimeOffValueElm.keyup();
+    });
+    /**********************/
+
+    this.btnHCLElm.bind("click", function() {
+      JControlBtn.on(jQuery(this));
+      JControlBtn.off(jQuery(self.btnDim2WarmElm));
+      window.setTimeout(function() {jQuery(".ui-slider-handle").removeClass("ui-state-active");},100);
+      self.colorTemperature = self.valHCL;
+      self.sliderInfoElm.val("--");
+    });
+
+    this.btnDim2WarmElm.bind("click", function() {
+      JControlBtn.on(jQuery(this));
+      JControlBtn.off(jQuery(self.btnHCLElm));
+      window.setTimeout(function() {jQuery(".ui-slider-handle").removeClass("ui-state-active");},100);
+      self.colorTemperature = self.valDim2Warm;
+      self.sliderInfoElm.val("--");
+    });
+
+    this.sliderElm.slider(this.getSliderOpts());
+
+
+    this.sliderInfoElm.val(valueSlider);
+    this.sliderElm.val(valueSlider);
+    this.sliderElm.slider('value', valueSlider);
+    this.colorTemperature = valueSlider;
+
+    this.sliderElm.on("slide", function (event, ui) {
+       self.sliderInfoElm.val(ui.value);
+    });
+
+    this.sliderElm.on("slidestop", function(event, ui){
+      JControlBtn.off(jQuery(self.btnDim2WarmElm));
+      JControlBtn.off(jQuery(self.btnHCLElm));
+      window.setTimeout(function() {jQuery(".ui-slider-handle").addClass("ui-state-active");},100);
+      self.colorTemperature = ui.value;
+    });
+
+    if (valueSlider < 10000) {jQuery(".ui-slider-handle").addClass("ui-state-active");} else {jQuery(".ui-slider-handle").removeClass("ui-state-active");}
+    if (valueSlider == this.valHCL) {jQuery(".ui-slider-handle").removeClass("ui-state-active"); JControlBtn.on(this.btnHCLElm);this.sliderInfoElm.val("--");}
+    if (valueSlider == this.valDim2Warm) {jQuery(".ui-slider-handle").removeClass("ui-state-active"); JControlBtn.on(this.btnDim2WarmElm);this.sliderInfoElm.val("--");}
+
+
+  },
+
+  getSliderOpts: function() {
+
+    var chnDescription = homematic("Interface.getParamset", {'interface': this.iFace, 'address': this.chnAddress, 'paramsetKey': 'MASTER'});
+
+    var opts = {};
+    opts.animate = "fast";
+    opts.min = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
+    opts.max = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
+    opts.value = ((opts.max - opts.min) / 2);
+    opts.step = 50;
+    opts.orientation = "horizontal";
+    return opts;
+  },
+
+  checkValidity: function(val, min, max) {
+    var result = val;
+    if (val == "") {result = "";}
+
+    if (parseInt(val) < 0) {result = min;}
+    if (parseInt(val) > max) {result = max;}
+    return result;
+  },
+
+  getConfigString: function() {
+    var self = this,
+      result,
+      level = this.levelElm.val(),
+      durationUnit = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 2 : this.durationUnitElm.val(), // 2  = unit hour
+      durationValue = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 31 : this.durationValueElm.val(),
+      ramptimeUnit = this.rampTimeUnitElm.val(),
+      ramptimeValue = this.rampTimeValueElm.val(),
+      colorTemperature =  this.colorTemperature;
+
+    if (this.isOntimeAvailable()) {
+      if (this.chkBoxTimeLimitElm.prop("checked") == false) {
+        var _rampTimeValue = parseInt(this._getRampTimeVal(ramptimeValue, ramptimeUnit));
+
+        if (_rampTimeValue > 0) {
+          result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue + ",TC=" + colorTemperature; // ON_TIME = permanently ON
+        } else {
+          result = "L=" + level + ",OT=0,RT=0,TC=" + colorTemperature;
+        }
+
+      } else {
+        if (durationValue == 0) {
+          result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0,TC=" + colorTemperature;
+        } else {
+          result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit) + ",TC=" + colorTemperature;
+        }
+      }
+    } else {
+      result = "L=" + level + ",DV=" + durationValue + ",DU=" + durationUnit + ",RTV=" + ramptimeValue + ",RTU=" + ramptimeUnit + ",TC=" + colorTemperature;
+    }
+
+    jQuery.each(this.showRampTimeOffElm, function(index, val) {
+      if (self.deviceType == val) {
+        return false; // leave each loop
+      }
+    });
+
+    if (showRamptimeOff) {
+      result += ",RTTOV=" + this.rampTimeOffValueElm.val() + ",RTTOU=" + this.rampTimeOffUnitElm.val();
+    }
+    return result;
+  },
+
+  close: function(result)
+  {
+    Layer.remove(this.m_layer);
+    if (this.m_callback) { this.m_callback(result); }
+    if (showRamptimeOff) {window.setTimeout(function() {delete showRamptimeOff;},100);}
+  },
+
+  yes: function()
+  {
+    this.close(YesNoDialog.RESULT_YES);
+  },
+
+  no: function()
+  {
+    this.close(YesNoDialog.RESULT_NO);
+  },
+
+  btnTextYes: function(btnTxt) {
+    jQuery(".YesNoDialog_yesButton").text(btnTxt);
+  },
+
+  btnYesHide: function() {
+    jQuery("#btnYes").addClass("hidden");
+  },
+
+  btnYesShow: function() {
+    jQuery("#btnYes").removeClass("hidden");
+  },
+
+  btnTextNo: function(btnTxt) {
+    jQuery(".YesNoDialog_noButton").text(btnTxt);
+  },
+
+  btnNoHide: function() {
+    jQuery("#btnNo").addClass("hidden");
+  },
+
+  btnNoShow: function() {
+    jQuery("#btnNo").removeClass("hidden");
+  },
+
+  setHeight: function() {
+    var heightContentWrapper = jQuery(".YesNoDialogContentWrapper").height(),
+      yesNoElm = jQuery(".YesNoDialog"),
+      footerElm = jQuery(".YesNoDialogFooter");
+
+    yesNoElm.css("height", heightContentWrapper + 78);
+    footerElm.css("top", heightContentWrapper + 26);
+    yesNoElm.css("top", (window.innerHeight / 2) - (yesNoElm.height() / 2));
+  },
+
+  resetHeight: function() {
+    this.setHeight();
+  },
+
+  setWidth: function(dlgWidth) {
+    var yesNoDialogElm = jQuery(".YesNoDialog"),
+      yesNoDialogContentWrapperElm = jQuery(".YesNoDialogContentWrapper"),
+      yesNoDialogFooterElm = jQuery(".YesNoDialogFooter"),
+      yesNoDialogTitleElm = jQuery(".YesNoDialogTitle"),
+      yesNoDialogYesButton = jQuery(".YesNoDialog_yesButton");
+
+    var defaultWith = 600,
+      offsetWidth = 4,
+      offsetPosYesButton = 109,
+      offsetDialogHeight = 78,
+      offsetDialogFooterHeight = 26;
+
+    var width = dlgWidth - offsetWidth,
+      yesButtonPos = dlgWidth - offsetPosYesButton,
+      position = yesNoDialogElm.position();
+
+    // dlgWidth = (defaultWith < dlgWidth) ? defaultWith : dlgWidth;
+
+    yesNoDialogElm.width(dlgWidth).css({left: position.left + ((defaultWith - dlgWidth) / 2)});
+    yesNoDialogTitleElm.width(width);
+    yesNoDialogContentWrapperElm.width(width);
+    yesNoDialogFooterElm.width(width);
+    yesNoDialogYesButton.css("left", yesButtonPos);
+
+    //Dialoghöhe an Content anpassen.
+    yesNoDialogElm.css("height", yesNoDialogContentWrapperElm.height() + offsetDialogHeight);
+    yesNoDialogFooterElm.css("top", yesNoDialogContentWrapperElm.height() + offsetDialogFooterHeight);
   }
 
 });
@@ -28980,7 +30414,7 @@ writeDeviceAction = function(tdParent, includeChecks, bIsDev, bDelBtn, obj, bIsG
   tdSub = Builder.node('td');
   
   s = "";
-  if ((obj['type'] != "HmIPW-DRBL4") && (obj['type'] != "HmIP-DRBLI4")) {
+  if ((obj['type'] != "HmIPW-DRBL4") && (obj['type'] != "HmIP-DRBLI4") && (obj['type'] != "HmIP-RGBW") && (obj['type'] != "HmIPW-WGD") && (obj['type'] != "HmIPW-WGD-PL")) {
     if (bIsDev) {
       s = "WebUI.enter(DeviceConfigPage, {'iface': '" + obj['iface'] + "', 'address': '" + obj['sn'] + "', 'redirect_url':'GO_BACK'});";
     } else {
@@ -30382,6 +31816,17 @@ isBitSet = function (val, bit) {
   return ((val>>bit) % 2 != 0);
 };
 
+// another way to check the bit
+_isBitSet = function(no, index) {
+  var bin = no.toString(2);
+  // Convert to Binary
+
+  index = bin.length - index;
+  // Reverse the index, start from right to left
+
+  return bin[index] == 1;
+};
+
 /**
  * Entfernt einen Kanal aus einem Raum.
  **/
@@ -31223,41 +32668,72 @@ getExtendedDescription = function(oChannelDescr) {
     }
   }
 
-  if ((chType == "DISPLAY_INPUT_TRANSMITTER") && (deviceType.toLowerCase() == "hmipw-wgd")) {
-    var oddChn = [1,3,5,7,9,11,13,15,17,19,21,23,25];
+  if ((chType == "DISPLAY_INPUT_TRANSMITTER") && (deviceType.toLowerCase() == "hmipw-wgd" || deviceType.toLowerCase() == "hmipw-wgd-pl")) {
+    var oddChn = [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39, 41];
     jQuery.each(oddChn, function(index, value) {
       if (channelIndex == value) {
         if (channelIndex <=7) {
-          result = translateKey("chType_DISPLAY_INPUT_TRANSMITTER_A") + " 1 - " + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_B") + " " + (index + 1) + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_C");
+          result = translateKey("chType_DISPLAY_SCREEN") + " 1 - " + translateKey("chType_DISPLAY_TILE") + " " + (index + 1) + translateKey("chType_DISPLAY_KEY");
           return; // leave each loop
         } else if (channelIndex >=9 && channelIndex <= 15) {
-          result = translateKey("chType_DISPLAY_INPUT_TRANSMITTER_A") + " 2 - " + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_B") + " " + (index -3) + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_C");
+          result = translateKey("chType_DISPLAY_SCREEN") + " 2 - " + translateKey("chType_DISPLAY_TILE") + " " + (index -3) + translateKey("chType_DISPLAY_KEY");
           return; // leave each loop
         } else if (channelIndex >=17 && channelIndex <= 23) {
-          result = translateKey("chType_DISPLAY_INPUT_TRANSMITTER_A") + " 3 - " + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_B") + " " + (index - 7) + translateKey("chType_DISPLAY_INPUT_TRANSMITTER_C");
+          result = translateKey("chType_DISPLAY_SCREEN") + " 3 - " + translateKey("chType_DISPLAY_TILE") + " " + (index - 7) + translateKey("chType_DISPLAY_KEY");
           return; // leave each loop
-        } else if (channelIndex == 25) {
-          result = translateKey(("chType_DISPLAY_INPUT_TRANSMITTER_D"));
+        } else if (channelIndex >=25 && channelIndex <= 31) {
+          result = translateKey("chType_DISPLAY_SCREEN") + " 4 - " + translateKey("chType_DISPLAY_TILE") + " " + (index - 11) + translateKey("chType_DISPLAY_KEY");
+          return; // leave each loop
+        } else if (channelIndex >=33 && channelIndex <= 39) {
+          result = translateKey("chType_DISPLAY_SCREEN") + " 5 - " + translateKey("chType_DISPLAY_TILE") + " " + (index - 15) + translateKey("chType_DISPLAY_KEY");
+          return; // leave each loop
+        } else if (channelIndex == 41) {
+          result = translateKey(("chType_DISPLAY_UNKNOWN"));
         }
       }
     });
   }
 
-  if ((chType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") && (deviceType.toLowerCase() == "hmipw-wgd")) {
-    var evenChn = [2,4,6,8,10,12,14,16,18,20,22,24];
+  if ((chType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") && (deviceType.toLowerCase() == "hmipw-wgd" || deviceType.toLowerCase() == "hmipw-wgd-pl")) {
+    var evenChn = [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40];
 
     jQuery.each(evenChn, function(index, value) {
       if (channelIndex == value) {
-        if (channelIndex <=8) {
-          result = translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A") + " 1 - " + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B") + " " + (index + 1) + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C");
+        if (channelIndex <= 8) {
+          result = translateKey("chType_DISPLAY_SCREEN") + " 1 - " + translateKey("chType_DISPLAY_TILE") + " " + (index + 1) + translateKey("chType_DISPLAY_LEVEL");
           return; // leave each loop
-        } else if (channelIndex >=10 && channelIndex <= 16) {
-          result = translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A") + " 2 - " + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B") + " " + (index - 3) + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C");
+        } else if (channelIndex >= 10 && channelIndex <= 16) {
+          result = translateKey("chType_DISPLAY_SCREEN") + " 2 - " + translateKey("chType_DISPLAY_TILE") + " " + (index - 3) + translateKey("chType_DISPLAY_LEVEL");
           return; // leave each loop
-        } else if (channelIndex >=18 && channelIndex <= 24) {
-          result = translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_A") + " 3 - " + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_B") + " " + (index - 7) + translateKey("chType_DISPLAY_LEVEL_INPUT_TRANSMITTER_C");
+        } else if (channelIndex >= 18 && channelIndex <= 24) {
+          result = translateKey("chType_DISPLAY_SCREEN") + " 3 - " + translateKey("chType_DISPLAY_TILE") + " " + (index - 7) + translateKey("chType_DISPLAY_LEVEL");
+          return; // leave each loop
+        } else if (channelIndex >= 26 && channelIndex <= 32) {
+          result = translateKey("chType_DISPLAY_SCREEN") + " 4 - " + translateKey("chType_DISPLAY_TILE") + " " + (index - 11) + translateKey("chType_DISPLAY_LEVEL");
+          return; // leave each loop
+        } else if (channelIndex >= 34 && channelIndex <= 40) {
+          result = translateKey("chType_DISPLAY_SCREEN") + " 5 - " + translateKey("chType_DISPLAY_TILE") + " " + (index - 15) + translateKey("chType_DISPLAY_LEVEL");
           return; // leave each loop
         }
+      }
+    });
+  }
+
+  if ((chType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER") && (deviceType.toLowerCase() == "hmipw-wgd" || deviceType.toLowerCase() == "hmipw-wgd-pl")) {
+    var oddChn = [43,45,47,49,51],
+      evenChn = [42,44,46,48,50];
+
+    jQuery.each(oddChn, function(index, value) {
+      if (channelIndex == value) {
+        result = translateKey("chType_DISPLAY_SCREEN") + " " + (index + 6) + " - " + translateKey("chType_DISPLAY_TILE") + " 2" + translateKey("chType_DISPLAY_CLIMATE");
+        return; // leave each loop
+      }
+    });
+
+    jQuery.each(evenChn, function(index, value) {
+      if (channelIndex == value) {
+        result = translateKey("chType_DISPLAY_SCREEN") + " " + (index + 6) + " - " + translateKey("chType_DISPLAY_TILE") + " 1" + translateKey("chType_DISPLAY_CLIMATE");
+        return; // leave each loop
       }
     });
   }
@@ -31612,6 +33088,68 @@ setColorWebUI = function() {
   };
   dlg.run();
   dlg.resetHeight();
+};
+
+
+/**
+ *
+ * Tmporarily introduced with the HmIP-RGBW - this may not be the best place here
+ *
+ */
+
+// `hsvToRgb`
+// Converts an HSV color value to RGB.
+// *Assumes:* h is contained in [0, 1] or [0, 360] and s and v are contained in [0, 1] or [0, 100]
+// *Returns:* { r, g, b } in the set [0, 255]
+
+function isOnePointZero(n) {
+  return typeof n == "string" && n.indexOf('.') != -1 && parseFloat(n) === 1;
+}
+
+// Check to see if string passed in is a percentage
+function isPercentage(n) {
+  return typeof n === "string" && n.indexOf('%') != -1;
+};
+
+
+function bound01(n, max) {
+  if (isOnePointZero(n)) { n = "100%"; }
+
+  var processPercent = isPercentage(n);
+  n = Math.min(max, Math.max(0, parseFloat(n)));
+
+  // Automatically convert percentage into number
+  if (processPercent) {
+    n = parseInt(n * max, 10) / 100;
+  }
+
+  // Handle floating point rounding errors
+  if ((Math.abs(n - max) < 0.000001)) {
+    return 1;
+  }
+
+  // Convert into [0, 1] range if it isn't already
+  return (n % max) / parseFloat(max);
+};
+
+
+function hsvToRgb(h, s, v) {
+
+  h = bound01(h, 360) * 6;
+  s = bound01(s, 100);
+  v = bound01(v, 100);
+
+  var i = Math.floor(h),
+    f = h - i,
+    p = v * (1 - s),
+    q = v * (1 - f * s),
+    t = v * (1 - (1 - f) * s),
+    mod = i % 6,
+    r = [v, q, p, p, t, v][mod],
+    g = [t, v, v, q, p, p][mod],
+    b = [p, p, t, v, v, q][mod];
+
+  return { r: r * 255, g: g * 255, b: b * 255 };
 };/**
  * Created by grobelnik on 01.08.2016.
  */
@@ -37371,6 +38909,7 @@ iseHmIPWeeklyProgram.prototype = {
     this.wiegandInterface = (this.isDeviceType("HmIP-FWI")) ? true : false;
     this.deviceIsHmIPWKP = this.isDeviceType("HmIP-WKP");
     this.deviceIsHmIP_MOD_WD_VK = this.isDeviceType("HmIP-MOD-WD-VK");
+    this.deviceIsHmIP_RGBW = this.isDeviceType("HmIP-RGBW");
 
     this.device = this.getDevice(this.opts.deviceID);
     this.relevantChn = this.getRelevantChannels();
@@ -37386,6 +38925,29 @@ iseHmIPWeeklyProgram.prototype = {
 
     if (this.deviceIsHmIP_MOD_WD_VK) {
       this.relevantChn = [2];
+    }
+
+    if (this.deviceIsHmIP_RGBW) {
+      var oChannel = DeviceList.getChannelByAddress(this.chAddress),
+      oMaintChannel = DeviceList.getChannelByAddress(this.chAddress.split(":")[0] + ":0"), // The maintenance channel stores the deviceMode
+      deviceMode = parseInt(homematic("Interface.getMetadata", {"objectId": oMaintChannel.id, "dataId": "deviceMode"}));
+
+      if (oChannel.channelType == "UNIVERSAL_LIGHT_WEEK_PROFILE") {
+        switch (deviceMode) {
+          case 0:
+          case 1:
+            // RGB/RGBW Mode
+            this.relevantChn = [1];
+            break;
+          case 2:
+            // Tunable White Mode
+            this.relevantChn = [1, 2];
+            break;
+          default:
+            // PWM Mode - all channels visible
+            this.relevantChn = [1, 2, 3, 4];
+        }
+      }
     }
 
     this.anchor = jQuery("#anchor_"+this.id);
@@ -37669,6 +39231,7 @@ iseHmIPWeeklyProgram.prototype = {
     AccessTransceiverID = "ACCESS_TRANSCEIVER", // HmIP-FWI (Wiegand Iface)
     DoorLockTransmitterID = "DOOR_LOCK_STATE_TRANSMITTER", // HmIP-DLD
     OpticalSignalID = "OPTICAL_SIGNAL_RECEIVER", // HmIPW-WRC6
+    UniversalLightReceiver = "UNIVERSAL_LIGHT_RECEIVER", // HmIP-RGBW
     expertChn;
 
     jQuery.each(this.device.channels, function(index,chn) {
@@ -37678,6 +39241,7 @@ iseHmIPWeeklyProgram.prototype = {
         || (chn.channelType.indexOf(AccessTransceiverID) !== -1)
         || (chn.channelType.indexOf(DoorLockTransmitterID) !== -1)
         || (chn.channelType.indexOf(OpticalSignalID) !== -1)
+        || (chn.channelType.indexOf(UniversalLightReceiver) !== -1)
       ) {
         if (self.expert) {
           result.push(index);
@@ -37714,9 +39278,11 @@ iseHmIPWeeklyProgram.prototype = {
         channelType == "ACCESS_RECEIVER"
         || channelType == "ACCESS_TRANSCEIVER"
         || channelType == "DOOR_LOCK_STATE_TRANSMITTER"
-        || channelType == "OPTICAL_SIGNAL_RECEIVER") {
-        return channelNr;
-      }
+        || channelType == "OPTICAL_SIGNAL_RECEIVER"
+        || channelType == "UNIVERSAL_LIGHT_RECEIVER")
+        {
+          return channelNr;
+        }
 
     return result;
   },
@@ -38485,7 +40051,307 @@ iseHmIPWiegandIface.prototype = {
     return result;
 
   }
-};/**
+};iseUniversalLightReceiver = Class.create();
+iseUniversalLightReceiver.prototype = {
+
+  initialize: function(chnId, opts) {
+    conInfo("opts", opts);
+    var self = this;
+    this.oDimmerElm = opts.oDimmerSlider;
+    this.colorPicker;
+    selectedColor = "not set";
+    this.chnId = chnId;
+    this.iface = opts.iface;
+    this.chAddress = opts.chAddress;
+    this.HUE = opts.hue;
+    this.SATURATION = opts.saturation;
+    this.LEVEL = opts.level;
+    this.DURATION_VALUE = 31;
+    this.DURATION_UNIT = 2; // hour
+
+    this.colorPickerInit = {
+      hue : parseInt(opts.hue),
+      saturation : parseInt((opts.saturation*100)),
+      level : parseInt((opts.level * 100) )
+    };
+
+    this.percLevelElm = jQuery("#"+this.chnId+"Perc");
+
+    this.hueElm = jQuery("#hueElmId_"+ chnId);
+    this.satElm = jQuery("#satElmId_"+ chnId);
+    this.bckGndlm = jQuery("#bckGndlmId_"+ chnId);
+    //this.btnOkElm = jQuery("#btnOkElmId_"+ chnId);
+    this.setKeyHandler();
+    this.getColorPicker();
+  },
+
+  setKeyHandler: function() {
+    var self = this;
+
+    this.hueElm.keyup(function(event) {
+      var val;
+      if (event.keyCode == 13) {
+        val = parseInt(jQuery(this).val());
+        if (val < 0 || isNaN(val)) {self.HUE = 0;} else if (val > 360) {self.HUE = 360;} else {self.HUE = val;};
+        jQuery(this).val(self.HUE);
+        self.saveColor();
+      }
+    });
+
+    this.hueElm.blur(function(event) {
+      var val;
+        val = parseInt(jQuery(this).val());
+        if (val < 0 || isNaN(val)) {self.HUE = 0;} else if (val > 360) {self.HUE = 360;} else {self.HUE = val;};
+        jQuery(this).val(self.HUE);
+        self.saveColor();
+    });
+
+    this.satElm.keyup(function(event) {
+      var val;
+      if (event.keyCode == 13) {
+        val = (parseInt(jQuery(this).val()) / 100);
+        if (val < 0 || isNaN(val)) {self.SATURATION = 0;} else if (val > 1) {self.SATURATION = 1;} else {self.SATURATION = val;};
+        jQuery(this).val(parseInt((self.SATURATION * 100)));
+        self.saveColor();
+      }
+    });
+
+    this.satElm.blur(function(event) {
+      var val;
+      val = (parseInt(jQuery(this).val()) / 100);
+      if (val < 0 || isNaN(val)) {self.SATURATION = 0;} else if (val > 1) {self.SATURATION = 1;} else {self.SATURATION = val;};
+      jQuery(this).val(parseInt((self.SATURATION * 100)));
+      self.saveColor();
+    });
+
+  },
+
+  onPercChange: function() {
+    conInfo("***** onPercChange *****");
+  },
+
+  onHandleClick: function() {
+    this.LEVEL = (parseInt(this.percLevelElm.val()) / 100);
+    //this.saveColor();
+    //this.btnOkElm.click();
+  },
+
+  getColorPicker: function() {
+    var self = this;
+    this.hueElm.val(this.colorPickerInit.hue);
+    this.satElm.val(this.colorPickerInit.saturation);
+
+    this.oDimmerElm.percChange = this.onPercChange.bindAsEventListener(this);
+    Event.observe($(this.chnId + "Perc"), 'change', this.oDimmerElm.percChange);
+
+    this.oDimmerElm.handleClick = this.onHandleClick.bindAsEventListener(this);
+    Event.observe($("slidCtrl" + this.chnId), 'mouseup', this.oDimmerElm.handleClick);
+
+    this.colorPicker = new iro.ColorPicker("#colorPicker_" + this.chnId, {
+      // Set the size of the color picker
+      width: 90,
+      color: {h: self.colorPickerInit.hue, s: self.colorPickerInit.saturation, v: self.colorPickerInit.level},
+      wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
+      layout: [{component: iro.ui.Wheel}], // don't show the V slider below the wheel - this value comes from the dimmer slider
+      handleRadius: 4
+      }
+    );
+
+    this.colorPicker.on("mount", function(color) {
+      //var rgbVal = hsvToRgb(self.colorPickerInit.hue, self.colorPickerInit.saturation, self.colorPickerInit.level);
+      var rgbVal = hsvToRgb(self.colorPickerInit.hue, self.colorPickerInit.saturation, 100);
+      self.bckGndlm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+    });
+
+    this.colorPicker.on("input:end", function(color) {
+      var hsv_H = color.hsv.h,
+        hsv_S,
+        hsv_S_Percent = parseInt(color.hsv.s),
+        rgbVal;
+
+      hsv_S = (parseInt(color.hsv.s) / 100);
+
+      self.hueElm.val(hsv_H);
+      self.HUE = hsv_H;
+
+      self.satElm.val(hsv_S_Percent);
+      self.SATURATION = hsv_S;
+
+      rgbVal = hsvToRgb(color.hsv.h, color.hsv.s, 100);
+      self.bckGndlm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+
+      self.saveColor();
+    });
+
+    /*
+    this.btnOkElm.click(function() {
+      self.saveColor();
+    });
+    */
+  },
+
+  saveColor: function() {
+    var self = this;
+    conInfo(
+      "saveColor - HUE: " + self.HUE +
+      " - SAT: " + self.SATURATION +
+      " - LEVEL: " + this.LEVEL
+    );
+
+    homematic("Interface.putParamset", {
+      'interface': self.iface,
+      'address': self.chAddress,
+      'paramsetKey': 'VALUES',
+      'set':
+        [
+          {name: 'LEVEL', type: 'double', value: self.LEVEL},
+          {name: 'HUE', type: 'int', value: self.HUE},
+          {name: 'SATURATION', type: 'double', value: self.SATURATION},
+          {name: 'DURATION_VALUE', type: 'int', value: self.DURATION_VALUE},
+          {name: 'DURATION_UNIT', type: 'int', value: self.DURATION_UNIT}
+
+        ]
+    }, function (result) {
+      conInfo("saveColor: ",result);
+    });
+  }
+};
+iseHmIPUniversalLightRGBWSlider = Class.create();
+iseHmIPUniversalLightRGBWSlider.prototype = {
+
+
+  initialize: function (chnId, opts) {
+    var self = this;
+    conInfo("opts", opts);
+
+    this.iface = opts.iface;
+    this.chAddress = opts.chAddress;
+    this.chnId = chnId;
+
+
+    this.colorTempID = opts.colorTempID;
+    this.colorTempMin = opts.colorTempMin;
+    this.colorTempMax = opts.colorTempMax;
+    this.colorTemp = parseInt(opts.colorTemp);
+
+    this.valHCLVal = 10200;
+    this.valDim2WarmVal = 10150;
+
+    this.valHCL =  (opts.hcl == 'true') ? true : false;
+    this.valDim2Warm = (opts.dim2Warm == 'true') ? true : false;
+
+    this.hideSliderPanel = (this.valHCL || this.valDim2Warm) ? true : false;
+
+    this.colorTemp = (this.colorTemp < this.colorTempMin) ? this.colorTempMin : this.colorTemp ;
+
+
+    window.setTimeout(function() {
+      self.btnColorTemp = jQuery("#btnColorTemp" + self.chnId);
+      self.trBtnColorTemp = jQuery("#trBtnColorTemp" + self.chnId);
+      self.btnHCL = jQuery("#btnHCL" + self.chnId);
+      self.btnDim2Warm = jQuery("#btnDim2Warm" + self.chnId);
+      self.sliderPanel = jQuery("#sliderPanel" + self.chnId);
+      self.trSliderPanel = jQuery("#trSliderPanel" + self.chnId);
+      self.sliderInfoElm = jQuery("#infoSliderPos" + self.chnId);
+      self.sliderElm = opts.oSlider;
+
+      self.initButtons();
+      self.initSlider();
+    },20);
+  },
+
+  showHideSliderPanel: function () {
+    if (this.hideSliderPanel) {
+      this.trSliderPanel.hide();
+      this.trBtnColorTemp.show();
+    } else {
+      this.trBtnColorTemp.hide();
+      this.trSliderPanel.show();
+    }
+  },
+
+  initButtons: function() {
+    var self = this;
+
+    if (self.valHCL) {
+      self.setElmColorActive("hcl");
+    } else if (self.valDim2Warm) {
+      self.setElmColorActive("dim2Warm");
+    } else {
+      self.setElmColorActive("sliderPanel");
+    }
+    self.showHideSliderPanel();
+
+    this.btnColorTemp.click(function() {
+      self.hideSliderPanel = false;
+      setDpState(self.colorTempID,self.colorTemp);
+      self.sliderElm.slider('value', self.colorTemp);
+      self.sliderInfoElm.val(self.colorTemp);
+      self.setElmColorActive("sliderPanel");
+      self.showHideSliderPanel();
+    });
+
+    this.btnHCL.click(function() {
+      self.hideSliderPanel = true;
+      setDpState(self.colorTempID,self.valHCLVal);
+      self.setElmColorActive("hcl");
+      self.showHideSliderPanel();
+    });
+
+    this.btnDim2Warm.click(function() {
+      self.hideSliderPanel = true;
+      setDpState(self.colorTempID,self.valDim2WarmVal);
+      self.setElmColorActive("dim2Warm");
+      self.showHideSliderPanel();
+    });
+  },
+
+  setElmColorActive: function (activeElm) {
+    jQuery(this.btnHCL).removeClass("ControlBtnOn").addClass("ControlBtnOff");
+    jQuery(this.btnDim2Warm).removeClass("ControlBtnOn").addClass("ControlBtnOff");
+    jQuery(this.sliderPanel).removeClass("ControlBtnOn").addClass("ControlBtnOff");
+
+    switch (activeElm) {
+      case "hcl" :
+        this.btnHCL.addClass("ControlBtnOn");
+        break;
+      case "dim2Warm" :
+        this.btnDim2Warm.addClass("ControlBtnOn");
+        break;
+      case "sliderPanel" :
+        this.sliderPanel.addClass("ControlBtnOn");
+        break;
+    }
+  },
+
+  initSlider: function () {
+
+    if (this.colorTemp == "-1") {this.colorTemp = this.colorTempMin;}
+    var self = this;
+
+    this.sliderInfoElm.val(this.colorTemp);
+
+    this.sliderElm.on("slide", function (event, ui) {
+      self.onSliderChange(ui.value);
+    });
+
+    this.sliderElm.on("slidestop", function(event, ui){
+      self.onSliderStop(ui.value);
+    });
+  },
+
+  onSliderChange: function (val) {
+    this.sliderInfoElm.val(val);
+    this.colorTemp = val;
+  },
+
+  onSliderStop: function(val) {
+    this.setElmColorActive("sliderPanel");
+    setDpState(this.colorTempID,this.colorTemp);
+  }
+
+};
+/**
  * ic_gd.js
  **/
 
@@ -38811,6 +40677,12 @@ AddParam = function(elem)
           poststr += "&SEQUENCE_PULSE_4=0" ; 
           poststr += "&SEQUENCE_PULSE_5=0" ;
           poststr += "&SEQUENCE_TOLERANCE=0.496" ; 
+        }
+        else if (elem.value == "99999990" )
+        {
+          var freeVal = document.getElementById("val_" + prefix[elem.name + type]);
+          free_options = freeVal.value;
+          poststr += elem.name + "=" + parseFloat(free_options);
         }
       
         //else   poststr += elem.name + "=" + elem.value;
@@ -39713,8 +41585,8 @@ ProofAndSetValue = function(srcid, dstid, min, max, dstValueFactor, event)
       max = parseInt(max);
       value = (roundValue05(parseInt(value)));
     } else {
-      min = parseFloat(min).toFixed(1);
-      max = parseFloat(max).toFixed(1);
+      min = parseFloat(min).toFixed(2);
+      max = parseFloat(max).toFixed(2);
       value = parseFloat(value);
       srcElm.value = parseFloat(value);
     }
@@ -40795,7 +42667,18 @@ SortTable = function(tableid, colNr)
     valueMap[value].push(tr_list[i]); //Liste gleicher values nimmt Zeile auf
   }
 
-  valueList.sort(compareStrings_globalsettings); //Liste sortieren
+  // ColNr 4 = Sort by serial number
+  if (colNr == 4) {
+      valueList.sort(function (a, b) {
+        var ar1 = a.split(":"),
+          ar2 = b.split(":");
+        if (ar1[0] == ar2[0]) {
+          return (!SORT_DESC) ? (parseInt(ar1[1]) - parseInt(ar2[1])) : (parseInt(ar2[1]) - parseInt(ar1[1]));
+        }
+      });
+  } else {
+    valueList.sort(compareStrings_globalsettings); //Sort list
+  }
 
   var rowList;
   var headerlen = tr_list[0].rowIndex;
@@ -42227,7 +44110,6 @@ SetParameters = function(iface, address, special_input_id)
       tomIsSet = true;
     }
 
-    // ToDo - check if necessary
     if(!tomIsSet) {
       AddSeparateSettings('separate_' + special_input_id, '');
     }
@@ -43730,6 +45612,115 @@ _encodeString = function(elem)
 
   $(elem).value = outString;
 };
+
+
+
+ActivateFreeValue = function(selectelem, pref, internalKey)
+{
+  var pnr = selectelem.options[selectelem.selectedIndex].value; //1
+  var upnr = pnr.split(".")[1];
+  var intkey = selectelem.id.split("_")[0].slice(8);
+  var val2d, val_tmp, exists_valarr, free_val;
+
+
+  //2
+  if (isNaN(upnr) == true) {
+    // var special_input_id = selectelem.id.split("_")[0]; //3
+    var arrSpecialInputId = selectelem.id.split("_");
+    var special_input_id = arrSpecialInputId[0];
+
+    if (internalKey) {
+      special_input_id = getInternalKeySpecialInputId(arrSpecialInputId);
+    }
+
+    var selectedvalue = document.getElementById("separate_" + special_input_id + "_" + pnr + "_" + pref).value; //4
+    var parameter = document.getElementById("separate_" + special_input_id + "_" + pnr + "_" + pref).name; //5
+    var val = document.getElementById("vis_val_" + pnr + "_" + pref + "_" + special_input_id);
+    var x_max = selectelem.length + 1;
+    //6
+    if (pnr > x_max) {x_max = parseInt(pnr) + 1;}
+    var y_max = 15;
+
+    //7
+    if (exists_valarr != "ok" || val_tmp != x_max)
+    {
+      //8
+      val2d = [];
+      for (i = 0; i < x_max; ++i)
+        val2d[i] = [];
+      exists_valarr = "ok";
+      val_tmp = x_max; //9
+    }
+    val2d[pnr][pref] = 0;
+
+    prefix[parameter + special_input_id] = pnr + "_" + pref + "_" + special_input_id;
+
+    if (selectedvalue == "99999990" )
+    {
+      if (intkey == "" && !internalKey) {
+        document.getElementById("NewProfileTemplate_receiver").style.visibility = "hidden";
+        document.getElementById(special_input_id +  "_profiles").options[selectelem.selectedIndex].style.color = "gray";
+        if (CheckGroup()) document.getElementById("NewProfileTemplate_receivergroup").style.visibility = "hidden";
+      }
+      val2d[pnr][pref] = 1; //10
+      val.style.display = "inline";
+
+    } else {
+      if (free_time != 1 && free_val != 1 && free_temp != 1) {
+        if (intkey == "" && !internalKey) {
+          document.getElementById("NewProfileTemplate_receiver").style.visibility = "visible";
+          if (CheckGroup()) document.getElementById("NewProfileTemplate_receivergroup").style.visibility = "visible";
+        }
+      } else  document.getElementById(special_input_id + "_profiles").options[selectelem.selectedIndex].style.color = TextColor(_textcolor);
+
+      val2d[pnr][pref] = 0; //11
+      val.style.display = "none";
+    }
+
+    free_val = 0; //12
+    for (var loopx = 0; loopx < x_max; loopx++){
+      for (var loopy = 0; loopy < y_max; loopy++){
+        if (val2d[loopx][loopy] == 1) {free_val = 1; break;}
+      }
+    }
+    for (loopy = 0; loopy <= y_max; loopy++) {
+      if (val2d[pnr][loopy] == 1)   {perc_textcolor = 1; break;}
+      else perc_textcolor = 0;
+    }
+
+    if (time_textcolor == 0 && perc_textcolor == 0 && temp_textcolor == 0) _textcolor = 0;
+    else _textcolor = 1;
+    document.getElementById(special_input_id + "_profiles").options[selectelem.selectedIndex].style.color = TextColor(_textcolor);
+
+    if (free_time == 0 && free_val == 0 && free_temp == 0) {
+      if (intkey == "" && !internalKey) {
+        document.getElementById("NewProfileTemplate_receiver").style.visibility = "visible";
+        if (CheckGroup()) document.getElementById("NewProfileTemplate_receivergroup").style.visibility = "visible";
+      }
+    }
+  }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ActivateFreePercent4InternalKey = function(selectelem, pref)
 {

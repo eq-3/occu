@@ -57,10 +57,14 @@ cgi_eval {
         if {$brightnessAvailable == 1} then {
           if {$set_value == "true"} {puts "document.getElementById('$id').value = \'$brightness\'"}
           set first_start "{SHORT_COND_VALUE_LO {int $brightness}}"
-         	if { [session_requestisvalid 8 ] > 0 } {
-		        puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $first_start]]"
-            set brightness_set "true"
-	        }
+           if { [session_requestisvalid 8 ] > 0 } {
+            #check url first
+            if { [regexp {(xmlrpc(_bin)?)|(https?)://(\d\d?\d?\.){3}\d\d?\d?\:(3?20(0|1)(0|1)|39292)} $url] == 1 } {
+              # call putParamset
+              puts "[xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $first_start]]"
+              set brightness_set "true"
+            }
+          }
         } else {
           #dieser Zweig sollte nie aufgerufen werden.
           puts "alert('Es ist noch kein aktueller Helligkeitswert vorhanden.');"
