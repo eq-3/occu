@@ -7,8 +7,8 @@ sourceOnce user.tcl
 sourceOnce common.tcl
 sourceOnce ic_metadata.tcl
 
-source $env(DOCUMENT_ROOT)/config/easymodes/EnterFreeValue.tcl
-source $env(DOCUMENT_ROOT)/config/easymodes/etc/getStatusDisplayHelp.tcl
+source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/getStatusDisplayHelp.tcl]
 
 
 #Flags für xmlrpc Aufruf "getLinks"
@@ -29,7 +29,7 @@ if { ![info exists env(CONFIG_ROOT)] } {
     set env(CONFIG_ROOT) "/opt/hm/etc/config"
 }
 
-set USERPROFILESPATH "$env(CONFIG_ROOT)/userprofiles"
+set USERPROFILESPATH [file join $env(CONFIG_ROOT) userprofiles]
 catch { file mkdir $USERPROFILESPATH }
 
 set wired "n.a"
@@ -42,7 +42,7 @@ array set nav_th ""
 array set nav_td ""
 array set TYPE_MAP { "BOOL" "bool" "ENUM" "int" "INTEGER" "int" "FLOAT" "double" "STRING" "string"}
 
-set IC_SETTINGS_CONF_FILE "$env(CONFIG_ROOT)/ic_settings.dat"
+set IC_SETTINGS_CONF_FILE [file join $env(CONFIG_ROOT) ic_settings.dat]
 array set IC_SETTINGS_VALUES ""
 #Defaults (werden von der Settings-Datei überschrieben):
 set IC_SETTINGS_VALUES(EXPERTMODE) "off"
@@ -358,10 +358,10 @@ proc put_linkimage_dev {} {
 
   puts "<table cellspacing=\"10\" border=\"0\">"
   puts "<tr>"
-  puts "<td align=\"center\">$img_devi</td>"
+  puts "<td style=\"text-align:center;\">$img_devi</td>"
   puts "</tr>"
   puts "<tr>"
-  puts "<td align=\"center\">$devi_descr(TYPE)</td>"
+  puts "<td style=\"text-align:center;\">$devi_descr(TYPE)</td>"
   puts "</tr>"
   puts "</table>"
 }
@@ -399,14 +399,14 @@ proc put_linkimages {} {
 
   puts "<table cellspacing=\"10\" border=\"0\">"
   puts "<tr>"
-  puts "<td align=\"center\">$img_devi</td>"
-  puts "<td align=\"center\">===</td>"
-  puts "<td align=\"center\">$img_peer</td>"
+  puts "<td style=\"text-align:center;\">$img_devi</td>"
+  puts "<td style=\"text-align:center;\">===</td>"
+  puts "<td style=\"text-align:center;\">$img_peer</td>"
   puts "</tr>"
     puts "<tr>"
-  puts "<td align=\"center\">$devi_descr(TYPE)</td>"
-  puts "<td align=\"center\">&nbsp;</td>"
-  puts "<td align=\"center\">$peer_descr(TYPE)</td>"
+  puts "<td style=\"text-align:center;\">$devi_descr(TYPE)</td>"
+  puts "<td style=\"text-align:center;\">&nbsp;</td>"
+  puts "<td style=\"text-align:center;\">$peer_descr(TYPE)</td>"
   puts "</tr>"
   puts "</table>"
 }
@@ -770,7 +770,7 @@ proc put_picDiv {} {
   puts "<div id=\"picDiv\" style=\"position:absolute; left:0px; top:0px; width:200px; height:200px; z-index:1; display:none;\">"
   puts "  <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"CLASS21804\">"
   puts "    <tr>"
-  puts "      <td style=\"CLASS21807\" align=\"center\" valign=\"middle\"><img width=\"200\" alt=\"Loading...\" src=\"img/loading.gif\" id=\"picDivImg\" /></td>"
+  puts "      <td style=\"CLASS21807\"  style=\"text-align:center; vertical-align:middle;\"\"><img width=\"200\" alt=\"Loading...\" src=\"img/loading.gif\" id=\"picDivImg\" /></td>"
   puts "    </tr>"
   puts "  </table>"
   puts "</div>"
@@ -815,7 +815,7 @@ proc put_picDiv_wz { {width 250} {height 250} } {
   #puts "<div id=\"picDiv\" style=\"position:absolute; left:0px; top:0px; width:$css_w height:$css_h; z-index:1; visibility: hidden; margin: 0; padding: 0; background-color: white;\">"
   #puts "  <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\" style=\"width:$css_w; height:$css_h; border: 1px solid #000066\">"
   #puts "    <tr>"
-  #puts "      <td bgcolor=\"#FFFFFF\" align=\"center\" valign=\"middle\"><img alt=\"Loading...\" src=\"img/loading.gif\" id=\"picDivImg\" /></td>"
+  #puts "      <td bgcolor=\"#FFFFFF\"  style=\"text-align:center; vertical-align:middle;\"><img alt=\"Loading...\" src=\"img/loading.gif\" id=\"picDivImg\" /></td>"
   #puts "    </tr>"
   #puts "  </table>"
   #puts "<img alt=\"Loading...\" src=\"img/loading.gif\" id=\"picDivImg\" />"
@@ -850,28 +850,31 @@ proc get_cur_profile2 {pps pPROFILES_MAP pPROFILE_TMP peer_type} {
   if { (![info exist env(IC_OPTIONS)]) || ([string first NO_PROFILE_MAPPING $env(IC_OPTIONS)] < 0) } {
       # Verknuepfungen dem array map_link zuweisen
       read_links
-  
-      # Handelt es sich um ein Profil der Firmwareversion 1.4?
-      if {[info exists map_link($sender_address-$receiver_address)]} {
-        set new_profile_is_set "true"
-      }
-  
-      #1
 
-      # Wenn noch nicht geschehen, dann die Profile beim Wechsel von 
-      # Firmwareversionen < 1.4 auf die neue Profilstruktur in >= 1.4 mappen 
-      if {$cur_profile != "" && $new_profile_is_set == ""} then {
-      upvar PROFILE_$cur_profile PROFILE
-  
-        if {! [catch {set map_prn $PROFILE(UI_MAP)}]}  {
-          set cur_profile $map_prn
-          set mapped_profile $map_prn
-        #  puts "<p style=\"color:red; text-decoration:blink\">Mapped profile!<p>"
-        }  
+      catch {
+          # Handelt es sich um ein Profil der Firmwareversion 1.4?
+          if {[info exists map_link($sender_address-$receiver_address)]} {
+            set new_profile_is_set "true"
+          }
+
+
+        #1
+
+        # Wenn noch nicht geschehen, dann die Profile beim Wechsel von
+        # Firmwareversionen < 1.4 auf die neue Profilstruktur in >= 1.4 mappen
+        if {$cur_profile != "" && $new_profile_is_set == ""} then {
+        upvar PROFILE_$cur_profile PROFILE
+
+          if {! [catch {set map_prn $PROFILE(UI_MAP)}]}  {
+            set cur_profile $map_prn
+            set mapped_profile $map_prn
+          #  puts "<p style=\"color:red; text-decoration:blink\">Mapped profile!<p>"
+          }
+        }
+
+        if {$mapped_profile != "unset"} {set cur_profile $mapped_profile}
+        # end mapping....
       }
-  
-      if {$mapped_profile != "unset"} {set cur_profile $mapped_profile}
-      # end mapping.... 
   }
 
   if {$cur_profile != ""} then {
@@ -1067,9 +1070,14 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
   #Evtl. irgendwann umbauen.
   global iface_url
   set channel_type ""
+  set chn ""
+
+  set hmDisEPIdentifier "HM-Dis-EP-WM55"
+  set hmDisWM55Identifier "HM-Dis-WM55"
 
   if { ! [catch { array set ch_descr [xmlrpc $iface_url($iface) getDeviceDescription [list string $address]] } ] } then {
     set channel_type $ch_descr(TYPE)
+    catch {set chn $ch_descr(INDEX)}
     set parent_type ""
     catch {set parent_type $ch_descr(PARENT_TYPE)}
   }
@@ -1106,6 +1114,10 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
 
     if {[info exists unit] == 0} {
      set unit ""
+    } else {
+      if {($unit == "??C") || ($unit == "Â°C")} {
+        set unit "&#176;C"
+      }
     }
 
     # omit internal and invisible parameters
@@ -1123,7 +1135,14 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
     if {$ps_type == "MASTER" && $parent_type == "" } then {
       append s "<td><span class=\"stringtable_value\">${param_id}</span></td>"
     } elseif {$ps_type == "MASTER" || $ps_type == "VALUES"} then {
-      append s "<td><span class=\"stringtable_value\">$channel_type|${param_id}</span></td>"
+      # We have to rename the translation of the parameters for the channels >=4 of the HM-Dis-EP-WM55 (Text Zeile x > Text Block x)
+      if {($parent_type != $hmDisEPIdentifier) || ($chn < 4)} {
+        # original translation
+        append s "<td><span class=\"stringtable_value\">$channel_type|${param_id}</span></td>"
+      } else {
+        # new translation
+        append s "<td><span>\${lblTextBlock}</span></td>"
+      }
     } else {
 
       # Nötig, zum übersetzen der Parameter auf der Senderseite (wie PEER_NEEDS_BURST, oder EXPECT_AES)
@@ -1149,17 +1168,40 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
         } else {
           puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/KEY_4Dis.js');</script>"
           set helpText [getStatusDisplayHelp]
-          array set dev_descr [xmlrpc $url getDeviceDescription [list string $address]]
-          set chn $dev_descr(INDEX)
-          if {$param_id == "TEXTLINE_1"} {
-            # Fortlaufende Nummerierung der Textblöcke hinzufügen.
-            # Berechnung:
-            # 1. Parameter = Kanalnummer * 2 - 1
-            append s "<td>[expr $chn * 2 - 1]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" onblur=\"encodeStringStatusDisplay('$idval', true);\" value=\"$value\" $id $access /></td>"
+
+          # The parameter numbering of the channels 1 and 2 are the same as from the HM-Dis-WM55
+          if {($parent_type != $hmDisEPIdentifier) || ($chn < 4)} {
+            if {$param_id == "TEXTLINE_1"} {
+              # Fortlaufende Nummerierung der Textblöcke hinzufügen.
+              # Berechnung:
+              # 1. Parameter = Kanalnummer * 2 - 1
+              if {($parent_type != $hmDisEPIdentifier) && ($parent_type != $hmDisWM55Identifier)} {
+                append s "<td>[expr $chn * 2 - 1]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" maxlength=\"12\" onblur=\"encodeStringStatusDisplay('$idval', true);\" value=\"$value\" $id $access /></td>"
+              } else {
+                append s "<td>[expr $chn * 2 - 1]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" maxlength=\"12\" onblur=\"encodeStringStatusDisplay('$idval', true, '_');\" value=\"$value\" $id $access /></td>"
+              }
+            } else {
+              # 2. Parameter = Kanalnummer * 2
+              if {($parent_type != $hmDisEPIdentifier) && ($parent_type != $hmDisWM55Identifier)} {
+                append s "<td>[expr $chn * 2]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" maxlength=\"12\" onblur=\"encodeStringStatusDisplay('$idval', true);\" value=\"$value\" $id $access /></td>"
+              } else {
+                append s "<td>[expr $chn * 2]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" maxlength=\"12\" onblur=\"encodeStringStatusDisplay('$idval', true, '_');\" value=\"$value\" $id $access /></td>"
+              }
+
+              append s "<td><img src=\"/ise/img/help.png\"/ size=\"24\" width=\"24\" onclick=\"MessageBox.show(translateKey('dialogHelpTitle'), '$helpText', '', 450, 375) ;\"></td>"
+            }
           } else {
-            # 2. Parameter = Kanalnummer * 2
-            append s "<td>[expr $chn * 2]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" value=\"$value\" $id $access /></td>"
-            append s "<td><img src=\"/ise/img/help.png\"/ size=\"24\" width=\"24\" onclick=\"MessageBox.show(translateKey('dialogHelpTitle'), '$helpText', '', 450, 320) ;\"></td>"
+            # Here we set the parameter numbering for the channels 4 - 8 of the HM-Dis-EP-WM55
+            if {$param_id == "TEXTLINE_1"} {
+              # Fortlaufende Nummerierung der Textblöcke hinzufügen.
+              # Berechnung:
+              # 1. Parameter = Kanalnummer * 2 - 7
+              append s "<td>[expr $chn * 2 - 7]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" maxlength=\"12\" onblur=\"encodeStringStatusDisplay('$idval', true, '_');\" value=\"$value\" $id $access /></td>"
+            } else {
+              # 2. Parameter = Kanalnummer * 2 -6
+              append s "<td>[expr $chn * 2 - 6]&nbsp;&nbsp;<input type=\"text\" name=\"$param_id\" maxlength=\"12\" onblur=\"encodeStringStatusDisplay('$idval', true, '_');\" value=\"$value\" $id $access /></td>"
+              append s "<td><img src=\"/ise/img/help.png\"/ size=\"24\" width=\"24\" onclick=\"MessageBox.show(translateKey('dialogHelpTitle'), '$helpText', '', 450, 375) ;\"></td>"
+            }
           }
         }
         append s "<td>$unit</td>"
@@ -1248,8 +1290,8 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
 
           append s "<input type=\"hidden\" name=\"$param_id\"   value=\"$value_orig\" $id                 $access style=\"visibility:hidden;display:none;\" />"
           append s "<input type=\"text\"   name=\"__$param_id\" value=\"$value\"       id=\"$input_idval\" $access $hidden"
-          append s "  onkeyup=\"ProofAndSetValue('$input_idval', '${idval}', parseInt($min), parseInt($max), parseFloat([expr 1 / $factor]));\" /></td>"
-          append s "<td><div id=\"${input_idval}_unit\" $hidden class=\"stringtable_value\">$unit ($min-$max)</div></td>"
+          append s "  onblur=\"ProofAndSetValue('$input_idval', '${idval}', parseInt($min), parseInt($max), parseFloat([expr 1 / $factor]));\" /></td>"
+          append s "<td><div id=\"${input_idval}_unit\" $hidden class=\"_stringtable_value\">$unit ($min-$max)</div></td>"
       }
       "FLOAT" {
         set input_idval   ${idval}_temp
@@ -1263,6 +1305,18 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
 
         set value_orig $value
         set formatString "%.1f"
+
+        if {$iface == "HmIP-RF"} {
+          # SPHM-801
+          if {([string first "_LEVEL" $param_id] != -1) || ([string first "_SATURATION" $param_id] != -1)} {
+            set formatString "%.3f"
+          }
+
+          # SPHM-845
+          if {[string first "RAMP_START_STEP" $param_id] != -1} {
+            set formatString "%.2f"
+          }
+        }
 
         set value         [format $formatString [expr $value         * $factor]]
         
@@ -1339,9 +1393,9 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
             append s "</select>"
           }
 
-          append s "<input type=\"hidden\" name=\"$param_id\"   value=\"$value_orig\" $id                 $access style=\"visibility:hidden;display:none;\" />"
+          append s "<input type=\"hidden\" name=\"$param_id\"   value=\"$value_orig\" $id $access style=\"visibility:hidden;display:none;\" />"
           append s "<input type=\"text\"   name=\"__$param_id\" value=\"$value\"       id=\"$input_idval\" $access $hidden"
-          append s "  onkeyup=\" ProofAndSetValue('$input_idval', '${idval}', parseFloat($min), parseFloat($max), parseFloat([expr 1 / $factor]));\" /></td>"
+          append s "  onblur=\" ProofAndSetValue('$input_idval', '${idval}', [expr $min + 0.001], [expr $max + 0.001], parseFloat([expr 1 / $factor]));\" /></td>"
           append s "<td><div id=\"${input_idval}_unit\" $hidden>$unit ($min-$max)</div></td>"
       }
       "ENUM" {
@@ -1493,6 +1547,16 @@ proc ConvTime {value} {
   
 }
 
+proc ConvFreeValue {param value} {
+  set freeValue $value
+  set unit ""
+  if {[string first "DIM_STEP_COLOR_TEMPERATURE" $param] != -1} {
+    set unit "K"
+  }
+  append freeValue " $unit"
+  return $freeValue
+}
+
 proc ConvPercent {value} {
 
   global unit_perc
@@ -1551,6 +1615,7 @@ proc get_ComboBox2 {val_arr name id selectedvalue {extraparam ""}} {
     "99999999"  { if {$doppelt == "false"} {set arr($selectedvalue) [ConvTime $selectedvalue]}} 
     "99999998"  { if {$doppelt == "false"} {set arr($selectedvalue) [ConvPercent $selectedvalue]}}
     "99999997"  { if {$doppelt == "false"} {set arr($selectedvalue) [ConvTemp $selectedvalue]}}  
+    "99999990"  { if {$doppelt == "false"} {set arr($selectedvalue) [ConvFreeValue $name $selectedvalue]}}
     }
   }  
   set s "<select class=\"$selectedvalue\" name=\"$name\" id=\"$id\" $extraparam [expr {[array size arr]<=1?"disabled=\"disabled\" ":" "} ]>"
@@ -1691,7 +1756,9 @@ proc get_InputElem {name id ps_arr pname {extraparam ""}} {
   upvar $ps_arr ps
   set pname $name 
   set s ""
-  set value $ps($pname)
+  # change because of HmIP
+  # set value $ps($pname)
+  set value [lindex $ps($pname) 0]
 
   if {[string first "." $value] >= 0} then {
     set value [format "%.1f" $value]
@@ -1866,7 +1933,13 @@ proc getExistingParamId {paramids} {
   if {$paramids != ""} then {
     foreach filename $paramids {
 
-      if { [file exists easymodes/$filename.tcl] } then {
+      # This is because nowadays a device type identifier can contain a whitespace - which is quite silly
+      set arFilename [split $filename =]
+      if {[llength $arFilename] == 2} {
+        set filename [lindex $arFilename 1]
+      }
+
+      if { [file exists easymodes/$filename.tcl] || [file exists easymodes/hmip/$filename.tcl] } then {
         set paramid $filename
         break
       }

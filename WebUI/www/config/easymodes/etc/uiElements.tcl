@@ -183,6 +183,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
   array set param_descr $descr($param)
   set minValue $param_descr(MIN)
   set maxValue $param_descr(MAX)
+  set maxLength ""
 
   if {[string first "." $param_descr(MIN)] != -1} {
     set minValue [format {%1.1f} $minValue]
@@ -209,6 +210,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
     if {$param == "MAIN_TEXT" || $param == "SUB_TEXT"} {
       set minValue "stringUTF8"
       set maxValue "stringUTF8"
+      set maxLength "maxLength=16"
     }
   }
 
@@ -271,7 +273,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
     } elseif {($param == "VOLTAGE_0") || ($param == "VOLTAGE_100")} {
         set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);$extraparam\">"
     } elseif {$minValue == "stringUTF8"} {
-        set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" name=$param>"
+        set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" $maxLength name=$param>"
     } else {
       set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\" $extraparam>"
     }
@@ -558,7 +560,7 @@ proc getTimeSelector {paramDescr p profile type prn special_input_id timebase op
     set paramFactorDescr "SERVO_SPEED_FACTOR"
   }
 
-  set javascriptDelay 100
+  set javascriptDelay 10
 
   incr pref
   append html "<tr $extraparam>"
@@ -756,7 +758,7 @@ proc getPowerUpSelector {chn p special_input_id} {
 
       append html "</tr>"
       append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 50)</script>"
     }
 
     ###
@@ -946,7 +948,7 @@ proc getPowerUpSelector {chn p special_input_id} {
 
           append html "</tr>"
           append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-          append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+          append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 50)</script>"
         }
 
         ###
@@ -1096,7 +1098,7 @@ proc getPowerUpSelectorAcousticSignal {chn p special_input_id} {
 
       append html "</tr>"
       append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 50)</script>"
     }
 
     ###
@@ -1716,7 +1718,7 @@ proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode} {
 
       append html "</tr>"
       append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 50)</script>"
     }
 
     set param POWERUP_ON_COLOR_TEMPERATURE

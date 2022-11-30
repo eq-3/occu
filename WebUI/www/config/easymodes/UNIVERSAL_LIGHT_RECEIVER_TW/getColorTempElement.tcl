@@ -88,7 +88,7 @@ proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""}} {
     append html "window.setTimeout(function() {"
       append html "getColorTempSlider($prn, $sliderPref, '$onlyOn_or_Off');"
       append html "jQuery('#selectOnColorTemp_$prn$onlyOn_or_Off').change();"
-    append html "},50);"
+    append html "},10);"
   append html "</script>"
 
   return $html
@@ -109,14 +109,32 @@ proc getColorTempSliderMinMax {pps keyPress minMax} {
 
   append html "<td>&nbsp;&nbsp;</td>"
 
-  append html "<td class='_hidden'>"
-    append html "<input id='separate_receiver_$prn\_$pref' name='$keyPress\_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps($keyPress\_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
-  append html "</td>"
+  if {$keyPress == "SHORT_LONG"} {
+      append html "<td class='_hidden'>"
+      append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps(SHORT_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
+    append html "</td>"
+
+    incr pref
+    append html "<td class='hidden'>"
+      append html "<input id='separate_receiver_$prn\_$pref' name='LONG_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps(LONG_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
+    append html "</td>"
+
+    append html "<script text/javascript>"
+      append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, [expr $pref -1], '$keyPress');},50);"
+    append html "</script>"
+
+  } else {
+    append html "<td class='_hidden'>"
+      append html "<input id='separate_receiver_$prn\_$pref' name='$keyPress\_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps($keyPress\_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
+    append html "</td>"
+
+    append html "<script text/javascript>"
+      append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, $pref, '$keyPress');},50);"
+    append html "</script>"
+
+  }
 
 
-  append html "<script text/javascript>"
-    append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, $pref);},50);"
-  append html "</script>"
 
   return $html
 

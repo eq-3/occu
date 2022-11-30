@@ -637,7 +637,7 @@ function ::conditionIsParameterVisible() {
           }
         }
         if (devMode == 2) {
-          if ( (oDP.HSSID().Find("HUE") != -1) || (oDP.HSSID().Find("SATURATION") != -1)) {
+          if ((oDP.HSSID().Find("HUE") != -1) || (oDP.HSSID().Find("SATURATION") != -1)) {
               showChannelParam = false;
           }
         }
@@ -1023,7 +1023,7 @@ function ::getSpecialTranslationPrgCond() {
 
       if ((devMode == 0) || (devMode == 1)) {
         if ( sShortKey.Find("LEVEL") != -1 ) {
-            sValue = "${optionColorValue}";
+            sValue = "${lblColorBrightness}";
         }
       }
       if (devMode == 2) {

@@ -408,6 +408,13 @@ jQuery.extend(true,langJSON, {
     "HARDWARE_COLOR_TEMPERATURE_COLD_WHITE" :
       "Farbtemperatur der kaltwei%DFen LED des angeschlossenen Tunable-White-Strips.",
 
+    "CONTROL_REPRESENTATION" :
+      "Mit der Representation kann f%FCr die Kachel ein weiterer Kanal zur direkten Ansteuerung eines Ziellevels %FCber zwei zus%E4tzliche Tasten auf der Kachel aktiviert werden.<br/><br/>" +
+      "<b>Keine</b>: Zus%E4tzliche Levelansteuerung deaktiviert.<br/><br/>" +
+      "<b>Dimmer</b>: %DCber die Tasten Plus und Minus kann ein Ziellevel eingestellt werden.<br/><br/>" +
+      "<b>Rolladen/Jalousie</b>: %DCber Tasten Rauf und Runter kann ein Ziellevel eingestellt werden.<br/><br/>" +
+      "<b>Schaltaktor</b>: %DCber die Tasten f%FCr Ein und Aus kann der Ziellevel 100% bzw 0% eingestellt werden.<br/><br/>",
+
     "noMoreHelp" : ""
   },
 
@@ -812,6 +819,13 @@ jQuery.extend(true,langJSON, {
 
     "HARDWARE_COLOR_TEMPERATURE_COLD_WHITE" :
       "en* Farbtemperatur der kaltwei%DFen LED des angeschlossenen Tunable-White-Strips.",
+
+    "CONTROL_REPRESENTATION" :
+      "en* <b>Keine</b>: Zus%E4tzliche Levelansteuerung deaktiviert.<br/><br/>" +
+      "en* Mit der Representation kann f%FCr die Kachel ein weiterer Kanal zur direkten Ansteuerung eines Ziellevels %FCber zwei zus%E4tzliche Tasten auf der Kachel aktiviert werden.<br/><br/>" +
+      "en* <b>Dimmer</b>: %DCber die Tasten Plus und Minus kann ein Ziellevel eingestellt werden.<br/><br/>" +
+      "en* <b>Rolladen/Jalousie</b>: %DCber Tasten Rauf und Runter kann ein Ziellevel eingestellt werden.<br/><br/>" +
+      "en* <b>Schaltaktor</b>: %DCber die Tasten f%FCr Ein und Aus kann der Ziellevel 100% bzw 0% eingestellt werden.<br/><br/>",
 
     "noMoreHelp" : ""
     }

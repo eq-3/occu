@@ -34,6 +34,7 @@ jQuery.extend(true, langJSON, {
     "optionColorYELLOW" : "Gelb",
     "optionConvectorActive" : "Aktiver Konvektor (mit L&uuml;fter)",
     "optionConvectorPassiv" : "Passiver Konvektor",
+    "optionDeactivated" : "Deaktiviert",
     "optionDisable" : "Nicht aktiv",
     "optionDoorLockAction" : "Modus f%FCr T%FCrschlossantrieb",
     "optionDoorLockUser" : "Benutzerberechtigung",
@@ -153,6 +154,7 @@ jQuery.extend(true, langJSON, {
     "optionUnit60M": "60 Minuten",
     "optionUnit60S" : "60 Sekunden",
     "optionUnit6M": "6 Minuten",
+    "optionUnit7S" : "7 Sekunden",
     "optionUnit7D" : "7 Tage",
     "optionUnit8D" : "8 Tage",
     "optionUnit8H" : "8 Stunden",
@@ -173,7 +175,7 @@ jQuery.extend(true, langJSON, {
     "optionRGBW" : "RGBW",
     "optionRGB" : "RGB",
     "option2xTunableWhite" : "TunableWhite",
-    "option4xPWM" : "PWM",
+    "option4xPWM" : "Einzelkan%E4le",
 
     "noMoreKeys" : ""
   }

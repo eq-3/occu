@@ -864,6 +864,7 @@ jQuery.extend(true,langJSON, {
     "stringTableUnreachTrueBR" : "Ger%E4tekommunikation<br/> gest%F6rt",
     "stringTableValveAdaptionFalse" : "Adaptionsfahrt nicht aktiv",
     "stringTableValveAdaptionTrue" : "Adaptionsfahrt aktiv",
+
     "stringTableValveStateAdaptionDone" : "Adaptionsfahrt durchgef%FChrt",
     "stringTableValveStateAdaptionInProgress" : "Adaptionsfahrt aktiv",
     "stringTableValveStateAdjToSmall" : "Ventilstellbereich zu klein",
@@ -875,6 +876,17 @@ jQuery.extend(true,langJSON, {
     "stringTableValveStateToTight" : "Ventil schwerg%E4ngig / Ventil klemmt",
     "stringTableValveStateTrue" : "Heizventil ge%F6ffnet",
     "stringTableValveStateWaitForAdaption" : "Warte auf Adaptionsfahrt",
+
+    "stringTableValveState_0" : "${stringTableValveStateNotAvailable}",
+    "stringTableValveState_1" : "${stringTableValveStateRunToStart}",
+    "stringTableValveState_2" : "${stringTableValveStateWaitForAdaption}",
+    "stringTableValveState_3" : "${stringTableValveStateAdaptionInProgress}",
+    "stringTableValveState_4" : "${stringTableValveStateAdaptionDone}",
+    "stringTableValveState_5" : "${stringTableValveStateToTight}",
+    "stringTableValveState_6" : "${stringTableValveStateAdjTooBig}",
+    "stringTableValveState_7" : "${stringTableValveStateAdjToSmall}",
+    "stringTableValveState_8" : "${stringTableValveStateErrorPosition}",
+
     "stringTableVentClosed" : "Ventil schlie%DFen",
     "stringTableVentOpen" : "Ventil %F6ffnen",
     "stringTableVirtualDimmerErrorLoadFailure" : "Lastfehler",

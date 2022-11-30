@@ -103,6 +103,8 @@ proc cmd_addLink {} {
   set group_name         ""
   set group_description  ""
   set redirect_url       ""
+  set actorDeviceTypeId  ""
+  set specialVal ""
 
   set HmIPIdentifier "HmIP-RF"
   set HmIPWiredIdentifier "HmIP-Wired"
@@ -116,6 +118,8 @@ proc cmd_addLink {} {
   catch { import group_name }
   catch { import group_description }
   catch { import redirect_url }
+  catch { import actorDeviceTypeId }
+  catch { import specialVal }
 
   set url $iface_url($iface)
 
@@ -126,6 +130,22 @@ proc cmd_addLink {} {
 
     #Verkn�pfung erfolgreich angelegt. Namen und Beschreibungen noch nicht gesetzt.
     set ret 1
+
+    if {$actorDeviceTypeId == "HmIP-RGBW"} {
+
+      # Mode RGBW/RGB
+      if {($specialVal == 0) || ($specialVal == 1)} {
+        set param "{LONG_DIM_MIN_HUE {int 0}}"
+        xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]
+      }
+
+      # Mode Tunable White
+      if {$specialVal == 2} {
+        array set masterParamset [xmlrpc $url getParamset [list string $receiver_address] [list string MASTER]]
+        set param "{LONG_DIM_STEP_COLOR_TEMPERATURE {int 500}} {SHORT_ON_COLOR_TEMPERATURE {int $masterParamset(HARDWARE_COLOR_TEMPERATURE_COLD_WHITE)}} {SHORT_OFF_COLOR_TEMPERATURE {int $masterParamset(HARDWARE_COLOR_TEMPERATURE_WARM_WHITE)}}"
+        xmlrpc $url putParamset [list string $receiver_address] [list string $sender_address] [list struct $param]
+      }
+    }
 
     if { $description != "" || $name != "" } then {
 
@@ -343,7 +363,7 @@ proc cmd_firmware_update {} {
 
   puts "<script type=\"text/javascript\">if (ProgressBar) ProgressBar.IncCounter(translateKey(\"dialogFirmwareUpdateCheckSuccess\"));</script>"
   if { $result == 1 } then {
-    set hapOrDrapDate [ expr {[string equal $devDescr(TYPE) $HmIPDRAPIdentifier] == 1 || [string equal $devDescr(TYPE) $HmIPHAPIdentififier] == 1 || [string equal $devDescr(TYPE) HmIPHAPB1Identififier] == 1 || [string equal $devDescr(TYPE) HmIPHAPJS1Identififier] == 1} ]
+    set hapOrDrapDate [ expr {[string equal $devDescr(TYPE) $HmIPDRAPIdentifier] == 1 || [string equal $devDescr(TYPE) $HmIPHAPIdentififier] == 1 || [string equal $devDescr(TYPE) $HmIPHAPB1Identififier] == 1 || [string equal $devDescr(TYPE) $HmIPHAPJS1Identififier] == 1} ]
     if {$hapOrDrapDate == 1 } {
         #This is for HAP and DRAP updates, which must be treated differently
         #Since the update was started successfully and the update is performed asynchronously, we need to check for the update state here

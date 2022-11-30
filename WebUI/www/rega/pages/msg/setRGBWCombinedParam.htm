@@ -40,31 +40,35 @@
     </tr>
 
     <tr><td colspan="4"><hr></td></tr>
-
+    <tr>
+      <td colspan="4" class="controlHeader alignCenter"><span>Farbwert und S&auml;ttigung</span></td>
+    </tr>
     <tr>
       <td></td>
-      <td colspan="2"><div id="colorPicker"></div></td>
+      <td colspan="2"><div id="anchorColorPicker"></div></td>
       <td>
         <table>
+          <tr><td><span>${optionLastValue}</span></td></tr>
           <tr>
-            <td><span>H</span></td>
+           <!-- <td><span>H</span></td> -->
+            <td style="text-align: center">H <input id="lastValHue" type="checkbox"></td>
             <td><input id="hueElm" type="text" size="3" class="alignCenter"></td>
             <td><span>°</span></td>
           </tr>
           <tr>
-            <td><span>S</span></td>
+           <!-- <td><span>S</span></td> -->
+            <td style="text-align: center">S <input id="lastValSat" type="checkbox"></td>
             <td><input id="satElm" type="text" size="3" class="alignCenter"></td>
             <td><span>%</span></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><div id="bckGndElm" style='width:auto;'>&nbsp;</div></td>
-            <td></td>
           </tr>
         </table>
       </td>
     </tr>
-
+    <tr>
+      <td></td>
+      <td><div id="bckGndElm" style='width:90px;'>&nbsp;</div></td>
+      <td></td>
+    </tr>
 
     <tr><td colspan="4"><hr></td></tr>
 
@@ -112,3 +116,12 @@
 
   </tbody>
 </table>
+
+<!-- Custom handle for the slider -->
+<svg class='hidden'>
+  <defs>
+    <g id='handle'>
+      <rect x='0' y='-2' width='6' height='20' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)'></rect>
+    </g>
+  </defs>
+</svg>

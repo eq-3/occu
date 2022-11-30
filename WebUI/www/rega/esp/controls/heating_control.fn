@@ -219,6 +219,7 @@ function ::CreateHeatingControlHmIP() {
   object oPartyEnd = cObj.DPByControl("HEATING_CONTROL_HMIP.PARTY_TIME_END");
   object oPartySetPointTemp = cObj.DPByControl("HEATING_CONTROL_HMIP.PARTY_SETPOINT_TEMP");
   object oPartyMode = cObj.DPByControl("HEATING_CONTROL_HMIP.PARTY_MODE");
+  object oValveState = cObj.DPByControl("HEATING_CONTROL_HMIP.VALVE_STATE");
 
   string sReadOnly = "";
   rState = oSetPoint.Value();
@@ -274,6 +275,18 @@ function ::CreateHeatingControlHmIP() {
       WriteLine("</td>");
     }
   WriteLine("</tr>");
+
+  if (oValveState) {
+    integer valveState = oValveState.Value();
+
+    WriteLine("<tr>");
+      WriteLine("<td>");
+        WriteLine("<table class='ControlBtnInfo' style='width:200px'><tr>");
+          WriteLine("<td><div>${stringTableClimateControlVentDriveValveState}:<br/>${stringTableValveState_"#valveState#"}</div></td>");
+        WriteLine("</tr></table>");
+      WriteLine("</td>");
+    WriteLine("</tr>");
+ }
 
  ! SLIDER
 

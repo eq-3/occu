@@ -93,7 +93,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 
   # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
@@ -119,7 +119,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
-    option DIM_ONLEVEL
+    option DIM_LEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -128,7 +128,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -191,7 +191,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
 
     incr pref
-    option DIM_OFFLEVEL
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -200,7 +200,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -229,7 +229,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 
   # ON_TIME
-  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
+  append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
@@ -270,14 +270,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
-    option DIM_ONLEVEL
+    option DIM_LEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
-    option DIM_OFFLEVEL
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -286,17 +286,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
 
-    set param _LONG_OUTPUT_BEHAVIOUR
-    if {[info exists ps($param)] == 1} {
-      incr pref
-      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
-    }
     # profile 3
     append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
       append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
@@ -343,7 +338,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option COLOR_TEMPERATURE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_COLOR_TEMPERATURE "K"
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
 
@@ -391,7 +387,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option COLOR_TEMPERATURE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_COLOR_TEMPERATURE K
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
 
@@ -454,7 +451,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option COLOR_TEMPERATURE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_COLOR_TEMPERATURE K
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
 
@@ -477,6 +475,20 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
 
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
@@ -511,7 +523,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
-    option DIM_ONLEVEL
+    option DIM_LEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -520,7 +532,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -546,6 +558,20 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
 
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
@@ -583,7 +609,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
 
     incr pref
-    option DIM_OFFLEVEL
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -592,7 +618,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -615,6 +641,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
 
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
@@ -658,14 +699,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
-    option DIM_ONLEVEL
+    option DIM_LEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
-    option DIM_OFFLEVEL
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -674,7 +715,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -697,6 +738,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
 
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
@@ -731,7 +787,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
-    option DIM_ONLEVEL
+    option DIM_LEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -740,7 +796,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -764,6 +820,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
 
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
@@ -801,7 +872,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
 
     incr pref
-    option DIM_OFFLEVEL
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -810,7 +881,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -833,6 +904,22 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
+
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 
@@ -880,14 +967,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
-    option DIM_ONLEVEL
+    option DIM_LEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
-    option DIM_OFFLEVEL
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -896,7 +983,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     if {[info exists ps($param)] == 1} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
-      option DIM_STEP
+      option DIM_STEPwoLastValue_5-90
       append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"

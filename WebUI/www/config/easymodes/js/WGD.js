@@ -29,7 +29,6 @@ setInitialScreenValues = function(devAddress) {
 
     var arScreenOrder = screenOrder.split(","),
     cssBold = "font-weight: bold";
-    console.log("screenOrder: " + screenOrder);
 
   // When screenOrder is not set, we use the default which is 1, 2, 3, ...., END
   if (screenOrder != "null") {

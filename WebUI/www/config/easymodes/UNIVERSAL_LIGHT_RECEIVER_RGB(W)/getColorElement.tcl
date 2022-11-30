@@ -29,7 +29,7 @@ proc getColorPicker {pps keyPress} {
   set valHUE $ps($keyPress\_ON_HUE)
   set valSAT $ps($keyPress\_ON_SATURATION)
 
-  if {$valHUE > 360} {set valHUE 0}
+  if {$valHUE > 360} {set valHUE 361}
 
   append html "<tr>"
     append html "<td>\${ON_COLOR}</td>"
@@ -174,7 +174,7 @@ proc getHueSlider {pps onOff {sliderOn_sliderOff false}} {
   append html "<svg class='hidden'>"
     append html "<defs>"
       append html "<g id='handle'>"
-        append html "<rect x='0' y='10' width='4' height='16' style='fill:rgb(255,255,255);stroke-width:1;stroke:rgb(0,0,0)'></rect>"
+        append html "<rect x='0' y='-2' width='6' height='20' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)'></rect>"
       append html "</g>"
     append html "</defs>"
   append html "</svg>"

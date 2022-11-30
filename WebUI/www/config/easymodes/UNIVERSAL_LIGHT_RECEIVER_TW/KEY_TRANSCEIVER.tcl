@@ -365,7 +365,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # RAMPOFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMP_ONTIME_COLOR_TEMP_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
 
-  # SHORT/LONG_ON_COLOR_TEMPERATURE
+  # SHORT/LONG_OFF_COLOR_TEMPERATURE
   incr pref
   append HTML_PARAMS(separate_$prn) "[getColorTempSlider ps SHORT OFF]"
 
@@ -476,6 +476,20 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 
@@ -545,6 +559,20 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
@@ -613,6 +641,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
 
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
@@ -696,6 +739,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
 
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
+
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 
@@ -762,6 +820,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
 
   # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
@@ -831,6 +904,22 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #append HTML_PARAMS(separate_$prn) "\${description_$prn}"
   append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+  # LONG_DIM_MIN_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MIN_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MIN]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  # LONG_DIM_MAX_COLOR_TEMPERATURE
+  incr pref
+  append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td><span>\${MAX_COLOR_TEMP}</span></td>"
+    append HTML_PARAMS(separate_$prn) "[getColorTempSliderMinMax ps SHORT_LONG MAX]"
+  append HTML_PARAMS(separate_$prn) "</tr>"
+
+  append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr></td>"
+
+
   # RAMPON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPON_TIME ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPON_TIME TIMEBASE_LONG]"
 

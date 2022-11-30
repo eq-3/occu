@@ -59,7 +59,7 @@ set PROFILE_1(SHORT_ON_MIN_LEVEL) {0.1 range 0.0 - 1.0}
 set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
-set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 7}
 set PROFILE_1(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
 set PROFILE_1(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_1(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
@@ -110,7 +110,7 @@ set PROFILE_2(SHORT_ON_TIME_FACTOR) {1 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) {0 1}
 set PROFILE_2(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
 set PROFILE_2(SHORT_RAMPON_TIME_FACTOR) {5 range 0 - 31}
-set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
+set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {0 range 0 - 7}
 set PROFILE_2(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
 set PROFILE_2(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_2(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
@@ -197,7 +197,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  set param SHORT_OUTPUT_BEHAVIOUR
+  set param _SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
@@ -268,7 +268,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  set param SHORT_OUTPUT_BEHAVIOUR
+  set param _SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]

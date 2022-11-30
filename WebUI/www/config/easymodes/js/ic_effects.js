@@ -335,14 +335,15 @@ getColorHueSlider = function(prn, pref, onOff, sliderOnOffavail) {
 
   var colorPicker = new iro.ColorPicker(anchorHueSlider, {
     width: 120,
-    sliderSize: 25, // height
+    sliderSize: 20, // height
     color: {h: hue, s: 100, v: 100},
     handleSvg: '#handle',
     layout: [
       {
         component: iro.ui.Slider,
         options: {
-          sliderType: 'hue'
+          sliderType: 'hue',
+          edgeRadius: 0
         }
       }
     ]
@@ -529,13 +530,17 @@ getColorTempSlider = function(prn, pref, onOroff) {
 };
 
 
-getColorTempSliderMinMax = function(prn, pref) {
+getColorTempSliderMinMax = function(prn, pref, keypress) {
   var anchorSlider = jQuery("#colorTempSliderMinMax_"+prn+"_"+pref),
     receiverAddress = jQuery("#global_receiver_address").val(),
     iface = jQuery("#global_iface").val(),
     sliderOpts = {},
     chnDescription = homematic("Interface.getParamset", {"interface":iface, "address": receiverAddress, "paramsetKey": "MASTER"}),
     val2SendElm = jQuery("#separate_receiver_"+prn+"_" + pref);
+
+  if (keypress == "SHORT_LONG") {
+    var valLongElm = jQuery("#separate_receiver_"+prn+"_" + (parseInt(pref) + 1));
+  }
 
   sliderOpts.animate = 'fast';
   sliderOpts.min = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
@@ -555,12 +560,14 @@ getColorTempSliderMinMax = function(prn, pref) {
 
   sliderElm.on("slide", function (event, ui) {
     val2SendElm.val(ui.value);
+    if (valLongElm) {valLongElm.val(val2SendElm.val());};
   });
 
   sliderElm.on("slidestop", function(event, ui) {
     var sliderVal = parseInt(ui.value);
     sliderElm.slider("value", sliderVal);
     val2SendElm.val(sliderVal);
+    if (valLongElm) {valLongElm.val(val2SendElm.val());};
   });
 
   val2SendElm.keyup(function(event) {
@@ -570,6 +577,7 @@ getColorTempSliderMinMax = function(prn, pref) {
       val = parseInt(jQuery(this).val());
       if (val < sliderOpts.min || isNaN(val)) {newVal = sliderOpts.min;} else if (val > sliderOpts.max) {newVal = sliderOpts.max;} else {newVal = val;}
       jQuery(this).val(newVal);
+      if (valLongElm) {valLongElm.val(val2SendElm.val());};
       sliderElm.slider("value", parseInt(newVal));
     }
   });
@@ -579,7 +587,10 @@ getColorTempSliderMinMax = function(prn, pref) {
     val = parseInt(jQuery(this).val());
     if (val < sliderOpts.min || isNaN(val)) {newVal = sliderOpts.min;} else if (val > sliderOpts.max) {newVal = sliderOpts.max;} else {newVal = val;}
     jQuery(this).val(newVal);
+    if (valLongElm) {valLongElm.val(val2SendElm.val());};
     sliderElm.slider("value", parseInt(newVal));
   });
+
+  val2SendElm.trigger("blur");
 
 };

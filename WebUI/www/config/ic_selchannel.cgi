@@ -735,7 +735,7 @@ proc showHmIPChannel {devType direction address chType} {
 
   set major 0
 
-  if {[string toupper $devType] == "HMIP-PSM"} {
+  if {[string equal -nocase -length 8 $devType "HMIP-PSM"] == 1} {
     set parentAddress [lindex [split $address ":"] 0]
     set url $iface_url(HmIP-RF)
     array set dev_descr [xmlrpc $url getDeviceDescription [list string $parentAddress]]
@@ -755,11 +755,6 @@ proc showHmIPChannel {devType direction address chType} {
     || ([string equal -nocase -length 8 $devType "HMIP-PDT"] == 1)
     || ([string equal -nocase -length 9 $devType "HMIP-PCBS"] == 1)
     ) && $direction == 1} { #; channel is sender
-
-    if {$chType == "COND_SWITCH_TRANSMITTER"} {
-      # show the channel
-      # return 1
-    }
 
     # don't show the channel
     return 0

@@ -391,9 +391,23 @@ proc getMaintenance {chn p descr} {
   set param DISPLAY_ON_TIME
   if { [info exists ps($param)] == 1  } {
     incr prn
+    array_clear options
+    set options(0) "\${optionDeactivated}"
+    set options(1) "\${optionUnit1S}"
+    set options(2) "\${optionUnit2S}"
+    set options(3) "\${optionUnit3S}"
+    set options(5) "\${optionUnit5S}"
+    set options(7) "\${optionUnit7S}"
+    set options(10) "\${optionUnit10S}"
+    set options(30) "\${optionUnit30S}"
+    set options(60) "\${optionUnit1M}"
+    set options(120) "\${optionUnit2M}"
+    set options(180) "\${optionUnit3M}"
+    set options(240) "\${optionUnit4M}"
+    set options(255) "\${optionColorON}"
     append html "<tr>"
       append html "<td>\${lblDisplayOnTime}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]</td>"
     append html "</tr>"
   }
 
@@ -480,7 +494,7 @@ proc getDisplayInputTransmitter {chn p descr} {
       set options(1) "\${optionDimmActor}"
       set options(2) "\${optionShutterBlind}"
       set options(3) "\${optionSwitchActor}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 550 200]</td>"
     append html "</tr>"
   }
 

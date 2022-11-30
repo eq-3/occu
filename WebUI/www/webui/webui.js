@@ -20624,6 +20624,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
   setDialogElements: function() {
     var self = this;
+    this.anchorColorPicker = jQuery("#anchorColorPicker");
     this.trDurationElms = jQuery("[name='trDuration']");
     this.trRampTimeElms = jQuery("[name='trRampTime']");
     this.trRampTimeOff = jQuery("#trRampTimeOff");
@@ -20647,6 +20648,9 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     this.satElm = jQuery("#satElm");
     this.HUE;
     this.SATURATION;
+
+    this.lastValHueElm = jQuery("#lastValHue");
+    this.lastValSatElm = jQuery("#lastValSat");
 
     this.colorTemperature = 0;
 
@@ -20738,6 +20742,8 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       this.HUE = this.colorPickerInit.hue;
       this.SATURATION = this.colorPickerInit.saturation;
 
+      if (this.HUE > 360) {this.hueElm.hide();this.hueElm.parent().next().hide();this.lastValHueElm.prop("checked", true);}
+      if (this.SATURATION > 100) {this.satElm.hide(); this.satElm.parent().next().hide();this.lastValSatElm.prop("checked", true);}
 
 
       if (valueDU == 2) {
@@ -20949,22 +20955,59 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     });
     /**********************/
 
-    this.colorPicker = new iro.ColorPicker("#colorPicker", {
-        // Set the size of the color picker
-        width: 90,
-        color: {h: self.colorPickerInit.hue, s: self.colorPickerInit.saturation, v: self.colorPickerInit.level},
-        wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
-        layout: [{component: iro.ui.Wheel}], // don't show the V slider below the wheel - this value comes from the dimmer slider
-        handleRadius: 4
-      }
-    );
 
+
+    this.showHideColorPicker();
+
+    this.lastValHueElm.click(function() {
+      var selected = jQuery(this).prop("checked");
+
+      self.showHideColorPicker();
+
+      if (selected) {
+        self.HUE = 361;
+        self.hueElm.val(self.HUE);
+        self.hueElm.hide();self.hueElm.parent().next().hide();
+      } else {
+        self.HUE = 0;
+        self.hueElm.val(self.HUE);
+        self.hueElm.show();self.hueElm.parent().next().show();
+        self.colorPicker.color.hsv = {h: self.HUE, s: 100, v: 100};
+      }
+      self.setColorPreviewElm(self.HUE, 100);
+      self.resetHeight();
+    });
+
+    this.lastValSatElm.click(function() {
+      var selected = jQuery(this).prop("checked");
+
+      self.showHideColorPicker();
+
+      if (selected) {
+        self.SATURATION = 101;
+        self.satElm.val(self.SATURATION);
+        self.satElm.hide();self.satElm.parent().next().hide();
+        self.colorPicker.color.hsv = {h: self.HUE, s: 100, v: 100};
+      } else {
+        self.SATURATION = 100;
+        self.satElm.val(self.SATURATION);
+        self.satElm.show();self.satElm.parent().next().show();
+        self.colorPicker.color.hsv = {h: self.HUE, s: 100, v: 100};
+      }
+      self.setColorPreviewElm(self.HUE, 100);
+      self.resetHeight();
+    });
+
+  },
+
+  initColorPickerEvents: function() {
+    var self = this;
     this.colorPicker.on("mount", function(color) {
       self.setColorPreviewElm(self.colorPickerInit.hue, self.colorPickerInit.saturation);
     });
 
     this.colorPicker.on("input:end", function(color) {
-      var hsv_H = color.hsv.h,
+      var hsv_H = parseInt(color.hsv.h),
         hsv_S,
         hsv_S_Percent = parseInt(color.hsv.s);
 
@@ -20977,6 +21020,66 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       self.setColorPreviewElm(color.hsv.h, color.hsv.s);
 
     });
+  },
+
+  getHSVColorPicker: function() {
+    var self = this;
+    jQuery("#anchorColorPicker").html("");
+
+    this.colorPicker = new iro.ColorPicker("#anchorColorPicker", {
+        // Set the size of the color picker
+        width: 90,
+        color: {h: self.colorPickerInit.hue, s: self.colorPickerInit.saturation, v: self.colorPickerInit.level},
+        wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
+        layout: [{component: iro.ui.Wheel}], // don't show the V slider below the wheel - this value comes from the dimmer slider
+        handleRadius: 4
+      }
+    );
+    this.initColorPickerEvents();
+  },
+
+  getHSVColorSlider: function() {
+    var self = this;
+    jQuery("#anchorColorPicker").html("");
+
+    this.colorPicker = new iro.ColorPicker("#anchorColorPicker", {
+      width: 90,
+      sliderSize: 20, // height
+      color: {h: self.colorPickerInit.hue, s: 100, v: 100},
+      handleSvg: '#handle',
+      layout: [
+        {
+          component: iro.ui.Slider,
+          options: {
+            sliderType: 'hue',
+            edgeRadius: 0
+          }
+        }
+      ]
+    });
+    this.initColorPickerEvents();
+  },
+
+  showHideColorPicker: function () {
+    var hueLastValue = this.lastValHueElm.prop("checked"),
+      satLastValue = this.lastValSatElm.prop("checked");
+
+    if (hueLastValue && satLastValue) {
+      this.anchorColorPicker.hide();
+      this.colorPreviewElm.hide();
+    } else if (hueLastValue && ! satLastValue) {
+      this.anchorColorPicker.hide();
+      this.colorPreviewElm.hide();
+    } else if (! hueLastValue && satLastValue) {
+      this.getHSVColorSlider();
+      this.anchorColorPicker.show();
+      this.colorPreviewElm.show();
+     } else {
+      this.getHSVColorPicker();
+      this.anchorColorPicker.show();
+      this.colorPreviewElm.show();
+    }
+    this.resetHeight();
   },
 
   setColorPreviewElm: function(hue, sat) {
@@ -21002,10 +21105,10 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       durationValue = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 31 : this.durationValueElm.val(),
       ramptimeUnit = this.rampTimeUnitElm.val(),
       ramptimeValue = this.rampTimeValueElm.val(),
-      hueValue = this.HUE,
-      satValue = this.SATURATION;
-
-
+      lastValueHueSelected = this.lastValHueElm.prop("checked"),
+      lastValueSatSelected = this.lastValSatElm.prop("checked"),
+      hueValue = (lastValueHueSelected) ? 361 : this.HUE,
+      satValue = (lastValueSatSelected) ? 101 : this.SATURATION;
 
     if (this.isOntimeAvailable()) {
       if (this.chkBoxTimeLimitElm.prop("checked") == false) {
@@ -34452,7 +34555,7 @@ iseButtonsDimmer.prototype = {
     if (this.OnOffEqualsSwitch) {
 
       window.setTimeout(function() {
-        if (parseInt(self.state) > 0) {
+        if (self.state > 0) {
           ControlBtn.on($(self.id + "On"));
           ControlBtn.off($(self.id + "Off"));
         } else {
@@ -43019,7 +43122,16 @@ SizeTable = function()
 AddLink = function(iface, sender_address, sender_group, receiver_address, name, description, group_name, group_description, redirect_url)
 {
   ResetPostString();
-  
+
+  var dev = DeviceList.getDeviceByAddress(receiver_address.split(":")[0]),
+    specialVal = "";
+
+  if (dev.deviceType.id == "HmIP-RGBW") {
+    // Determine the device mode (RGBW, RGB, TW or PWM)
+    var maintenanceChannel = DeviceList.getChannelByAddress(receiver_address.split(":")[0] + ":0");
+    specialVal = homematic("Interface.getMetadata", {"objectId": maintenanceChannel.id, "dataId": "deviceMode"});
+  }
+
   AddParam($('global_sid'));
 
   poststr += "&redirect_url="       +redirect_url;
@@ -43031,6 +43143,8 @@ AddLink = function(iface, sender_address, sender_group, receiver_address, name, 
   poststr += "&description="        +description;
   poststr += "&group_name="         +encodeURIComponent(group_name);
   poststr += "&group_description="  +group_description;
+  poststr += "&actorDeviceTypeId="  +dev.deviceType.id;
+  poststr += "&specialVal="  +specialVal;
   poststr += "&cmd=addLink";
 
   //ProgressBar = new ProgressBarMsgBox("Verknüpfung wird erstellt...", 1);
@@ -43236,6 +43350,33 @@ ShowEasyMode = function (selectelem, iface) {
   var receiver = $('dev_descr_receiver_tmp').value.split("-")[0];
 
   var _iface = (typeof iface == "undefined") ? "" : iface;
+
+  // Special treatment for the UNIVERSAL_LIGHT_RECEIVER, when in TW MODE (SPHM-954)
+  if (receiver == "UNIVERSAL_LIGHT_RECEIVER_TW") {
+    var defaultProfile = parseInt(jQuery(selectelem).attr('class')),
+      choosenProfile = parseInt(jQuery(selectelem).val()),
+      defaultISchoosen = (defaultProfile == choosenProfile) ? true : false,
+      profileISColorTemperature = (choosenProfile >= 4 && choosenProfile <= 6) ? true : false;
+
+    if (!defaultISchoosen && profileISColorTemperature) {
+      var chnDescription = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": jQuery("#global_receiver_address").val(), "paramsetKey": "MASTER"});
+      var sliderTempMin = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE),
+      sliderTempMax = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
+
+      switch (choosenProfile) {
+        case 4:
+          jQuery("#separate_receiver_"+choosenProfile+"_5").val(sliderTempMax).blur();
+          break;
+        case 5:
+          jQuery("#separate_receiver_"+choosenProfile+"_3").val(sliderTempMin).blur();
+          break;
+        case 6:
+          jQuery("#separate_receiver_"+choosenProfile+"_5").val(sliderTempMax).blur();
+          jQuery("#separate_receiver_"+choosenProfile+"_9").val(sliderTempMin).blur();
+          break;
+      }
+    }
+  }
 
   // Senderseitiges Speichern der Profilevorlage verhindern, Funktion wird noch nicht unterstuetzt
   document.getElementById("NewProfileTemplate_sender").onclick = new Function("alert(unescape(localized[0]['no_userProfile']))");

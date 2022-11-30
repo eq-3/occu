@@ -875,6 +875,17 @@ jQuery.extend(true,langJSON, {
     "stringTableValveStateToTight" : "Valve sluggish/blocked",
     "stringTableValveStateTrue" : "Heating valve open",
     "stringTableValveStateWaitForAdaption" : "Waiting for adaption run",
+
+    "stringTableValveState_0" : "${stringTableValveStateNotAvailable}",
+    "stringTableValveState_1" : "${stringTableValveStateRunToStart}",
+    "stringTableValveState_2" : "${stringTableValveStateWaitForAdaption}",
+    "stringTableValveState_3" : "${stringTableValveStateAdaptionInProgress}",
+    "stringTableValveState_4" : "${stringTableValveStateAdaptionDone}",
+    "stringTableValveState_5" : "${stringTableValveStateToTight}",
+    "stringTableValveState_6" : "${stringTableValveStateAdjTooBig}",
+    "stringTableValveState_7" : "${stringTableValveStateAdjToSmall}",
+    "stringTableValveState_8" : "${stringTableValveStateErrorPosition}",
+
     "stringTableVentClosed" : "Close valve",
     "stringTableVentOpen" : "Open valve",
     "stringTableVirtualDimmerErrorLoadFailure" : "Load error",

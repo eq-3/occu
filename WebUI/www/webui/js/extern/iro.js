@@ -5,6 +5,27 @@
  * github.com/jaames/iro.js
  */
 
+/*
+Modified by A.G. - eQ-3 GmbH
+  November 17, 2022
+  Search for AG eQ-3 in this source code
+
+  It's now possible to specify the radius of the corners of the vertical/horizontal color slider.
+  To do this, pass the attribute edgeRadius to the layout property in the constructor of the color picker:
+
+      layout: [
+          {
+              component: iro.ui.Slider,
+              options: {
+              sliderType: 'hue',
+              edgeRadius: 0
+              }
+          }
+      ]
+
+  The value of edgeRadius is specified in pixels. 0 means no round corners.
+*/
+
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
@@ -737,9 +758,12 @@
       };
     } else {
       return {
-        handleStart: sliderSize / 2,
-        handleRange: width - sliderSize,
-        radius: sliderSize / 2,
+        //AG eQ-3 handleStart: sliderSize / 2,
+        handleStart: (typeof props.edgeRadius == "undefined") ? sliderSize / 2 : sliderSize / 3,
+        // AG eQ-3 handleRange: width - sliderSize,
+        handleRange: (typeof props.edgeRadius == "undefined") ? width - sliderSize : width - (sliderSize / 3),
+        // AG eQ-3 radius: sliderSize / 2,
+        radius: (typeof props.edgeRadius == "undefined") ? sliderSize / 2 : parseInt(props.edgeRadius),
         x: 0,
         y: 0,
         width: ishorizontal ? sliderSize : width,
