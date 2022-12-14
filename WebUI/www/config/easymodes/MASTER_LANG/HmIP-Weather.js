@@ -54,7 +54,7 @@ jQuery.extend(true,langJSON, {
     "condSwitchTransmitterWindSpeedFilterSelect" : "Calculation of wind velocity",
     "optionSwitchTransmitterWindSpeedFilterSelectCurrentValue" : "Current value",
     "optionSwitchTransmitterWindSpeedFilterSelectMinValue" : "Minimum value",
-    "optionSwitchTransmitterWindSpeedFilterSelectMaxValue" : "Minimum value",
+    "optionSwitchTransmitterWindSpeedFilterSelectMaxValue" : "Maximum value",
     "optionSwitchTransmitterWindSpeedFilterSelectAverageValue" : "Average value",
     "condSwitchTransmitterWindSpeedChannelOperationMode" : "Mode",
     "condSwitchTransmitterWindSpeedChannelOperationModeWindGustDirect" : "Direct wind measuring",

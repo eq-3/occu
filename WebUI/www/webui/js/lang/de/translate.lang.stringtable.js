@@ -877,15 +877,7 @@ jQuery.extend(true,langJSON, {
     "stringTableValveStateTrue" : "Heizventil ge%F6ffnet",
     "stringTableValveStateWaitForAdaption" : "Warte auf Adaptionsfahrt",
 
-    "stringTableValveState_0" : "${stringTableValveStateNotAvailable}",
-    "stringTableValveState_1" : "${stringTableValveStateRunToStart}",
-    "stringTableValveState_2" : "${stringTableValveStateWaitForAdaption}",
-    "stringTableValveState_3" : "${stringTableValveStateAdaptionInProgress}",
-    "stringTableValveState_4" : "${stringTableValveStateAdaptionDone}",
-    "stringTableValveState_5" : "${stringTableValveStateToTight}",
-    "stringTableValveState_6" : "${stringTableValveStateAdjTooBig}",
-    "stringTableValveState_7" : "${stringTableValveStateAdjToSmall}",
-    "stringTableValveState_8" : "${stringTableValveStateErrorPosition}",
+
 
     "stringTableVentClosed" : "Ventil schlie%DFen",
     "stringTableVentOpen" : "Ventil %F6ffnen",
@@ -1412,3 +1404,13 @@ langJSON.de.stringTableColorBehaviourFlashFast = langJSON.de.optionBlinkFlashFas
 langJSON.de.stringTableColorBehaviourBillowSlow = langJSON.de.optionBlinkBillowSlow;
 langJSON.de.stringTableColorBehaviourBillowMiddle = langJSON.de.optionBlinkBillowMiddle;
 langJSON.de.stringTableColorBehaviourBillowFast = langJSON.de.optionBlinkBillowFast;
+
+langJSON.de.stringTableValveState_0 = langJSON.de.stringTableValveStateNotAvailable;
+langJSON.de.stringTableValveState_1 = langJSON.de.stringTableValveStateRunToStart;
+langJSON.de.stringTableValveState_2 = langJSON.de.stringTableValveStateWaitForAdaption;
+langJSON.de.stringTableValveState_3 = langJSON.de.stringTableValveStateAdaptionInProgress;
+langJSON.de.stringTableValveState_4 = langJSON.de.stringTableValveStateAdaptionDone;
+langJSON.de.stringTableValveState_5 = langJSON.de.stringTableValveStateToTight;
+langJSON.de.stringTableValveState_6 = langJSON.de.stringTableValveStateAdjTooBig;
+langJSON.de.stringTableValveState_7 = langJSON.de.stringTableValveStateAdjToSmall;
+langJSON.de.stringTableValveState_8 = langJSON.de.stringTableValveStateErrorPosition;

@@ -278,15 +278,17 @@ function ::CreateHeatingControlHmIP() {
 
   if (oValveState) {
     integer valveState = oValveState.Value();
-
-    WriteLine("<tr>");
-      WriteLine("<td>");
-        WriteLine("<table class='ControlBtnInfo' style='width:200px'><tr>");
-          WriteLine("<td><div>${stringTableClimateControlVentDriveValveState}:<br/>${stringTableValveState_"#valveState#"}</div></td>");
-        WriteLine("</tr></table>");
-      WriteLine("</td>");
-    WriteLine("</tr>");
- }
+    ! 4 is the default, which we don't show
+    if (valveState != 4) {
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnInfo' style='width:200px'><tr>");
+              WriteLine("<td><div>${stringTableClimateControlVentDriveValveState}:<br/>${stringTableValveState_"#valveState#"}</div></td>");
+          WriteLine("</tr></table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    }
+  }
 
  ! SLIDER
 
@@ -343,14 +345,14 @@ function ::CreateHeatingControlHmIP() {
         WriteLine("<tr>");
            ! OFF
           WriteLine("<td>");
-            WriteLine("<div class='ControlBtnOff CLASS02551 hidden_' style='line-height:35px' id='"#chnId#"Off'>${actionStatusControlLblOff}</div>");
+            WriteLine("<div class='ControlBtnOff CLASS02551 hidden' style='line-height:35px' id='"#chnId#"Off'>${actionStatusControlLblOff}</div>");
           WriteLine("</td>");
         WriteLine("</tr>");
 
         WriteLine("<tr>");
          ! ON
           WriteLine("<td>");
-            WriteLine("<div class='ControlBtnOff CLASS02551 hidden_' style='line-height:35px' id='"#chnId#"On'>${actionStatusControlLblOn}</div>");
+            WriteLine("<div class='ControlBtnOff CLASS02551 hidden' style='line-height:35px' id='"#chnId#"On'>${actionStatusControlLblOn}</div>");
           WriteLine("</td>");
         WriteLine("</tr>");
 

@@ -1,13 +1,12 @@
-"dimmer_on_brighter" : "en* Helligkeit (V) - ein/heller",
-"dimmer_off_darker" : "en* Helligkeit (V) - aus/dunkler",
-"dimmer_on_off_b_d" : "en* Helligkeit (V) - ein/aus &amp; heller/dunkler",
-"color_up" : "en* Farbwert (H) - hoch",
-"color_down" : "en* Farbwert (H) -  runter",
-"color_up_down" : "en* Farbwert (H) -  hoch / runter",
+"dimmer_on_brighter" : "Brightness (V) - on/brighter",
+"dimmer_off_darker" : "Brightness (V) - off/darker",
+"dimmer_on_off_b_d" : "Helligkeit (V) - on/off &amp; brighter/darker",
+"color_up" : "Colour value (H) - up",
+"color_down" : "Colour value (H) - down",
+"color_up_down" : "Colour value (H) - up/down",
 
-"saturation_up" : "en* S&auml;ttigung (S) - hoch",
-"saturation_down" : "en* S&auml;ttigung (S) -  runter",
-"saturation_up_down" : "en* S&auml;ttigung (S) -  hoch / runter",
+"saturation_up" : "Saturation (S) - up",
+"saturation_down" : "Saturation (S) -  down",
+"saturation_up_down" : "Saturation (S) -  up/down",
 
-
-"optionColorOn" : "en* Farbwert",
+"optionColorVal" : "Colour value",

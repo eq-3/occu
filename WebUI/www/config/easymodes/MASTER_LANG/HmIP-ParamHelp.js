@@ -356,11 +356,11 @@ jQuery.extend(true,langJSON, {
       "100 % -> 10 V oder 50 % -> 5 V",
 
     "SAMPLE_INTERVAL" :
-      "Dieser Wert definiert die Zeitspanne, in welcher der Status des Fensters %FCberpr%FCft wird (ge%F6ffnet oder geschlossen).<br/><br/>" +
-      "Die in dem Datenblatt und der Bedienungsanleitung angegebene Batterielaufzeit bezieht sich auf eine Abtastrate von 0,5 Sekunden." +
-      "Durch ein Heraufsetzen dieser Abtastrate kann die Batterielaufzeit deutlich verl%E4ngert werden.<br/><br/>" +
-      "Bedenken Sie die ggf. verz%F6gerte Ausl%F6sung je nach Anwendungsfall. So ist eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch. " +
-      "Bei einer Sicherheitsl%F6sung zur Alarmmeldung sollte die Abtastrate k%FCrzer eingestellt werden.",
+      "Dieser Wert definiert die Zeitspanne f%FCr die %DCberpr%FCfung von T%FCr- bzw. Fensterkontakten (T%FCr/Fenster ge%F6ffnet oder geschlossen).<br/><br/>" +
+      "Die Batterielaufzeit des Ger%E4ts bezieht sich auf eine Abtastrate von 0,5 Sekunden. " +
+      "Durch eine Verl%E4ngerung der Zeitspanne, z. B. durch Heraufsetzen der Abtastrate auf 1 Sekunde, kann die Batterielaufzeit deutlich erh%F6ht werden.<br/><br/>" +
+      "Je nach Anwendungsfall, ist eine Verl%E4ngerung der Zeitspanne sinnvoll. W%E4hrend eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch ist, " +
+      "sollte bei einer Sicherheitsl%F6sung zur Alarmmeldung die Abtastrate k%FCrzer eingestellt werden.",
 
     "SCREEN_MANAGEMENT" :
       "<b><u>Screen Management</u></b><br/>" +
@@ -376,7 +376,7 @@ jQuery.extend(true,langJSON, {
       " - RGBW: Betrieb mit einem Rot, Gr%FCn, Blau, Wei%DF - Strip<br/>" +
       " - RGB: Betrieb mit einem Rot, Gr%FCn, Blau -Strip<br/>" +
       " - Tunable White: Betrieb mit bis zu zwei Tunable White Stips (bestehend aus Kaltwei%DF- und Warmwei%DF-LEDs)<br/>" +
-      " - PWM: Betrieb von bis zu vier Pulsweitenmodulierten Ausgangskan%E4len.<br/></br>" +
+      " - Einzelkan%E4le: Betrieb von bis zu vier einzelnen Ausgangskan%E4len.<br/></br>" +
       "Ge%E4ndert werden kann der Modus nur, wenn keine Verkn%FCpfungen oder Programme bestehen, die das Ger%E4t verwenden.",
 
     "POWERUP_JUMPTARGET_RGBW" :
@@ -768,64 +768,64 @@ jQuery.extend(true,langJSON, {
       "100 % -> 10 V oder 50 % -> 5 V",
 
     "SAMPLE_INTERVAL" :
-      "en* Dieser Wert definiert die Zeitspanne, in welcher der Status des Fensters %FCberpr%FCft wird (ge%F6ffnet oder geschlossen).<br/><br/>" +
-      "Die in dem Datenblatt und der Bedienungsanleitung angegebene Batterielaufzeit bezieht sich auf eine Abtastrate von 0,5 Sekunden." +
-      "Durch ein Heraufsetzen dieser Abtastrate kann die Batterielaufzeit deutlich verl%E4ngert werden.<br/><br/>" +
-      "Bedenken Sie die ggf. verz%F6gerte Ausl%F6sung je nach Anwendungsfall. So ist eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch. " +
-      "Bei einer Sicherheitsl%F6sung zur Alarmmeldung sollte die Abtastrate k%FCrzer eingestellt werden.",
+      "This value defines the time taken for checking door or window contacts (door/window open or closed).<br/><br/>" +
+      "The battery runtime is based on a scanning frequency of 0.5 seconds." +
+      "By lengthening the time take, e.g., by reducing the scanning frequency to 1 second, the battery runtime can be greatly increased.<br/><br/>" +
+      "Depending on the application, it makes sense to lengthen the time taken.  Whereas a longer scanning frequency is uncritical in a heating solution, " +
+      "the scanning frequency should be made shorter in a security solution for the alarm response.",
 
     "SCREEN_MANAGEMENT" :
-      "en* <b><u>Screen Management</u></b><br/>" +
-      "en* W%E4hlen Sie hier die Reihenfolge, in der die m%F6glichen Screens des Displays durchgebl%E4ttert werden. " +
-      "Nachdem Sie das Display an die CCU angelernt haben, steht zun%E4chst 1 Screen zur Verf%FCgung. Das ist Screen 1. "+
-      "Um weitere Screens zu aktivieren, gehen Sie folgenderma%DFen vor: <br/><br/>" +
-      "F%FCr jeden Screen gibt es 2 Auswahlboxen, mit denen Sie jeweils den linken und rechten Nachbarscreen w%E4hlen k%F6nnen. "+
-      "Das wird durch die Sympole <b><</b> und <b>></b> gekennzeichnet. Um nun z. B. den zweiten Screen zu aktivieren, w%E4hlen Sie als rechten Nachbar " +
-      "mit der Auswahlbox <b>></b> unter Screen 1 den Wert 2 aus. Um von Screen 2 wieder zur%FCck zu Screen 1 zu gelangen, aktivieren Sie in der Auswahlbox <b><</b> unter Screen 2 den Wert 1. ",
+      "<b><u>Screen Management</u></b><br/>" +
+      "Select the order in which the possible screens of the display are scrolled through here. " +
+      "After you have taught the display to the CCU, 1 screen is initially available. This is Screen 1. " +
+      "To activate further screens, proceed as follows:   <br/><br/>" +
+      "For each screen there are 2 selection boxes, with which you can select the left and right neighboring screen respectively. "+
+      "This is indicated by the symbols < and >. To activate the second screen, for example, select the following as the right neighbor " +
+      "using the > selection box under Screen 1. To return from Screen 2 to Screen 1, activate the value 1 in the < selection box under Screen 2.",
 
     "DEVICE_OPERATION_MODE_RGBW" :
-      "en* Der HmIP-RGBW kann in vier verschiedenen Modi betrieben werden:<br/><br/>" +
-      " - RGBW: Betrieb mit einem Rot, Gr%FCn, Blau, Wei%DF - Strip<br/>" +
-      " - RGB: Betrieb mit einem Rot, Gr%FCn, Blau -Strip<br/>" +
-      " - Tunable White: Betrieb mit bis zu zwei Tunable White Stips (bestehend aus Kaltwei%DF- und Warmwei%DF-LEDs)<br/>" +
-      " - PWM: Betrieb von bis zu vier Pulsweitenmodulierten Ausgangskan%E4len.<br/></br>" +
-      "Ge%E4ndert werden kann der Modus nur, wenn keine Verkn%FCpfungen oder Programme bestehen, die das Ger%E4t verwenden.",
+      "The Homematic IP LED Controller – RGBW can be operated in four different modes:<br/><br/>" +
+      " - RGBW: Operation with a Red, Green, Blue, White Strip<br/>" +
+      " - RGB: Operation with a Red, Green, Blue Strip<br/>" +
+      " - Tunable White: Operation with up to two Tunable White Strips (comprising cold white and warm white LEDs)<br/>" +
+      " - Single Channels: Operation of up to four single output channels.<br/></br>" +
+      "The mode can be changed only if there are no links or programs using the device.",
 
     "POWERUP_JUMPTARGET_RGBW" :
-      "en* Verhalten des Ausgangskanal nach Zufuhr der Versorgungsspannung.",
+      "Behaviour of the output channel after feeding the supply voltage.",
 
     "POWERUP_ON_HUE" :
-      "en* Farbton nach Zufuhr der Versorgungsspannung.<br/><br/>" +
-      "(360 = letzter 'Ein'-Wert); 361 = keine %C4nderung)",
+      "Colour shade after feeding the supply voltage.<br/><br/>" +
+      "(360 = last 'on' value); 361 = no change)",
 
     "POWERUP_ON_SATURATION":
-      "en* Farbs%E4ttigung nach Zufuhr der Versorgungsspannung.<br/><br/>" +
-      "(100.5 = letzter 'Ein'-Wert; 101 = keine %C4nderung)",
+      "Colour saturation after feeding the supply voltage.<br/><br/>" +
+      "(100.5 = last 'on' value; 101 = no change)",
 
     "POWERUP_ON_COLOR_TEMPERATURE_RGBW":
-    "en* Farbtemperatur nach Zufuhr der Versorgungsspannung",
+    "Colour temperature after feeding the supply voltage.",
 
     "EVENT_DELAY" :
-      "en* Verz%F6gerungszeit, bis ein stabiler Kanalzustand der Zentrale %FCbermittelt wird.",
+      "Delay until a stable channel status is transmitted to the switchboard.",
 
     "EVENT_RANDOMTIME" :
-      "en* Maximal zuf%E4llige Zeit, die zur Eventverz%F6gerung addiert wird.",
+      "Maximum random time added to the event delay.",
 
     "ON_MIN_LEVEL_RGBW" :
-      "en* Pegelsprung von OFF zu ON, um Bereiche ohne Leuchten des Leuchtmittels zu %FCberspringen.",
+      "Level change from OFF to ON to skip areas of the lamp without luminaires.",
 
     "HARDWARE_COLOR_TEMPERATURE_WARM_WHITE" :
-      "en* Farbtemperatur der warmwei%DFen LED des angeschlossenen Tunable-White-Strips.",
+      "Colour temperature of the warm white LED of the connected Tunable White Strip.",
 
     "HARDWARE_COLOR_TEMPERATURE_COLD_WHITE" :
-      "en* Farbtemperatur der kaltwei%DFen LED des angeschlossenen Tunable-White-Strips.",
+      "Colour temperature of the cold white LED of the connected Tunable White Strip.",
 
     "CONTROL_REPRESENTATION" :
-      "en* <b>Keine</b>: Zus%E4tzliche Levelansteuerung deaktiviert.<br/><br/>" +
-      "en* Mit der Representation kann f%FCr die Kachel ein weiterer Kanal zur direkten Ansteuerung eines Ziellevels %FCber zwei zus%E4tzliche Tasten auf der Kachel aktiviert werden.<br/><br/>" +
-      "en* <b>Dimmer</b>: %DCber die Tasten Plus und Minus kann ein Ziellevel eingestellt werden.<br/><br/>" +
-      "en* <b>Rolladen/Jalousie</b>: %DCber Tasten Rauf und Runter kann ein Ziellevel eingestellt werden.<br/><br/>" +
-      "en* <b>Schaltaktor</b>: %DCber die Tasten f%FCr Ein und Aus kann der Ziellevel 100% bzw 0% eingestellt werden.<br/><br/>",
+      "<b>None</b>: Additional level control disabled.<br/><br/>" +
+      " With the representation, another channel for direct control of a target level can be activated for the tile via two additional keys on the tile.<br/><br/>" +
+      "<b>Dimmer</b>: Via the keys Plus and Minus a target level can be set.<br/><br/>" +
+      "<b>Shutter/blind</b>: A target level can be set via the Up and Down keys.<br/><br/>" +
+      "<b>Switch actuator</b>: The target level 100% and 0% can be set via the keys for On and Off.<br/><br/>",
 
     "noMoreHelp" : ""
     }

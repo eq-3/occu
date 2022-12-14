@@ -282,14 +282,14 @@ jQuery.extend(true,langJSON, {
     "lblYesterday" : "Yesterday",
 
     "comment" : "Relase C/2022",
-    "lblPowerUpOnLevel" : "en* Einschaltpegel",
-    "lblPowerUpOnColorTemperature" : "en* Farbtemperatur",
-    "lblPowerUpOFFColorTemperature" : "en* Farbtemperatur",
-    "lblPowerUpOnSaturation" : "en* Farbs%E4ttigung (Saturation)",
-    "lblPowerUpOnHue" : "en* Farbton (Hue)",
-    "lblPowerUpOffHue" : "en* Farbton (Hue)",
-    "lblHardwareColorTemperatureColdWhite" : "en* Farbtemperatur Kalt-Wei%DF",
-    "lblHardwareColorTemperatureWarmWhite" : "en* Farbtemperatur Warm-Wei%DF",
+    "lblPowerUpOnLevel" : "Switch-on level",
+    "lblPowerUpOnColorTemperature" : "Colour temperature",
+    "lblPowerUpOFFColorTemperature" : "Colour temperature",
+    "lblPowerUpOnSaturation" : "Colour saturation (saturation)",
+    "lblPowerUpOnHue" : "Colour shade (hue)",
+    "lblPowerUpOffHue" : "Colour shade (hue)",
+    "lblHardwareColorTemperatureColdWhite" : "Colour temperature cold white",
+    "lblHardwareColorTemperatureWarmWhite" : "Colour temperature warm white",
     "lblLimitationFactorR" : "not in use en* LIMITATION_FACTOR_R",
     "lblLimitationFactorG" : "not in use en* LIMITATION_FACTOR_B",
     "lblLimitationFactorB" : "not in use en* LIMITATION_FACTOR_G",
@@ -297,7 +297,7 @@ jQuery.extend(true,langJSON, {
     "lblWhiteValueG" : "not in use en* WHITE_VALUE_G",
     "lblWhiteValueB" : "not in use en* WHITE_VALUE_B",
 
-    "lblDimmerOnMinLevel" : "en* Minimaler Pegel<br/>im Zustand EIN",
+    "lblDimmerOnMinLevel" : "Minimum level<br/>in status ON",
 
     "noMOreKeys" : ""
   }

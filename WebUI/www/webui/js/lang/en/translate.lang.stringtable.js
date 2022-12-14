@@ -875,17 +875,6 @@ jQuery.extend(true,langJSON, {
     "stringTableValveStateToTight" : "Valve sluggish/blocked",
     "stringTableValveStateTrue" : "Heating valve open",
     "stringTableValveStateWaitForAdaption" : "Waiting for adaption run",
-
-    "stringTableValveState_0" : "${stringTableValveStateNotAvailable}",
-    "stringTableValveState_1" : "${stringTableValveStateRunToStart}",
-    "stringTableValveState_2" : "${stringTableValveStateWaitForAdaption}",
-    "stringTableValveState_3" : "${stringTableValveStateAdaptionInProgress}",
-    "stringTableValveState_4" : "${stringTableValveStateAdaptionDone}",
-    "stringTableValveState_5" : "${stringTableValveStateToTight}",
-    "stringTableValveState_6" : "${stringTableValveStateAdjTooBig}",
-    "stringTableValveState_7" : "${stringTableValveStateAdjToSmall}",
-    "stringTableValveState_8" : "${stringTableValveStateErrorPosition}",
-
     "stringTableVentClosed" : "Close valve",
     "stringTableVentOpen" : "Open valve",
     "stringTableVirtualDimmerErrorLoadFailure" : "Load error",
@@ -1410,3 +1399,13 @@ langJSON.en.stringTableColorBehaviourFlashFast = langJSON.en.optionBlinkFlashFas
 langJSON.en.stringTableColorBehaviourBillowSlow = langJSON.en.optionBlinkBillowSlow;
 langJSON.en.stringTableColorBehaviourBillowMiddle = langJSON.en.optionBlinkBillowMiddle;
 langJSON.en.stringTableColorBehaviourBillowFast = langJSON.en.optionBlinkBillowFast;
+
+langJSON.en.stringTableValveState_0 = langJSON.en.stringTableValveStateNotAvailable;
+langJSON.en.stringTableValveState_1 = langJSON.en.stringTableValveStateRunToStart;
+langJSON.en.stringTableValveState_2 = langJSON.en.stringTableValveStateWaitForAdaption;
+langJSON.en.stringTableValveState_3 = langJSON.en.stringTableValveStateAdaptionInProgress;
+langJSON.en.stringTableValveState_4 = langJSON.en.stringTableValveStateAdaptionDone;
+langJSON.en.stringTableValveState_5 = langJSON.en.stringTableValveStateToTight;
+langJSON.en.stringTableValveState_6 = langJSON.en.stringTableValveStateAdjTooBig;
+langJSON.en.stringTableValveState_7 = langJSON.en.stringTableValveStateAdjToSmall;
+langJSON.en.stringTableValveState_8 = langJSON.en.stringTableValveStateErrorPosition;

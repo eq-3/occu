@@ -35064,11 +35064,17 @@ iseThermostatHMIP.prototype = {
     this.statusON = "ON";
     this.activeProfileID = this.opts.activeProfileID;
 
-    // Todo Retrieve min, max and unit from the devicedescription
-    this.min = 5;
-    this.max = 30;
-    this.off = 4.5;
-    this.on = 30.5;
+    var paramSetMaster = homematic('Interface.getParamset', {"interface": this.iface, "address" : this.chAddress, "paramsetKey" : "MASTER"});
+
+    this.confTempMin = parseFloat(paramSetMaster["TEMPERATURE_MINIMUM"]); // Configured min temp (device settings)
+    this.confTempMax = parseFloat(paramSetMaster["TEMPERATURE_MAXIMUM"]); // Configured max temp (device settings);
+
+    this.offTemp = 4.5;
+    this.onTemp = 30.5;
+    this.min = (this.confTempMin < 5) ? 5 : this.confTempMin;
+    this.max = (this.confTempMax > 30) ? 30 : this.confTempMax;
+    this.off = (this.confTempMin < 5) ? this.offTemp : this.confTempMin;
+    this.on = (this.confTempMax > 30) ? this.onTemp : this.confTempMax;
     this.unit = "°C";
     this.factor = 100/(this.max-this.min);
     this.iViewOnly = false;
@@ -35134,6 +35140,11 @@ iseThermostatHMIP.prototype = {
   },
 
   initElements: function() {
+
+    if (this.confTempMin == this.offTemp) {this.btnOFF.show().text(translateKey("actionStatusControlLblOff"));} else {this.btnOFF.show().html(translateKey("minTemp")).css("line-height", "");}
+    if (this.confTempMax == this.onTemp) {this.btnON.show().text(translateKey("actionStatusControlLblOn"));} else {this.btnON.show().html(translateKey("maxTemp")).css("line-height", "");}
+
+
     if (this.BOOST_MODE) {
       JControlBtn.on(this.btnBoost);
     } else {
@@ -35168,6 +35179,7 @@ iseThermostatHMIP.prototype = {
     } else {
       JControlBtn.off(this.btnOFF);
       JControlBtn.off(this.btnON);
+      this.percentElem.val(parseFloat(this.state).toFixed(1));
     }
 
     switch (this.percentElem.val()) {
@@ -35282,9 +35294,8 @@ iseThermostatHMIP.prototype = {
       {
         if( event.data.that.hasRampClicked )
         {
-          conInfo( "iseThermostat: onMouseOut() ["+relTarg.id+"], wanna set: " + ( (event.data.that.slider.n_value/event.data.that.factor) + event.data.that.min)  );
           event.data.that.hasRampClicked = false;
-          event.data.that.state = (event.data.that.slider.n_value/event.data.that.factor) + event.data.that.min;
+          event.data.that.state = event.data.that.percentElem.val();
           event.data.that.refresh(event.data.that.setPointID);
         }
       }
@@ -35298,8 +35309,7 @@ iseThermostatHMIP.prototype = {
   onClickUp: function(event)
   {
     conInfo( "iseThermostat: onClickUp()" );
-    // this.state = (this.slider.n_value/this.factor);
-    event.data.that.state = Math.round(event.data.that.state  + 1);
+    event.data.that.state = (parseFloat(event.data.that.state) + 1);
     if (event.data.that.state > event.data.that.max)
       event.data.that.state = event.data.that.max;
     event.data.that.refresh(event.data.that.setPointID);
@@ -35308,8 +35318,7 @@ iseThermostatHMIP.prototype = {
   onClickDown: function(event)
   {
     conInfo( "iseThermostat: onClickDown()" );
-    // this.state = (this.slider.n_value/this.factor);
-    event.data.that.state = Math.round(event.data.that.state - 1);
+    event.data.that.state = (parseFloat(event.data.that.state) -1);
     if (event.data.that.state < event.data.that.min)
       event.data.that.state = event.data.that.min;
     event.data.that.refresh(event.data.that.setPointID);
@@ -35378,7 +35387,7 @@ iseThermostatHMIP.prototype = {
   },
 
   onClickModeOFF: function(event) {
-    conInfo("clickModeOFF");
+    conInfo("clickModeOFF - SET_POINT_TEMPERATURE: " + this.off);
     //setDpState(event.data.that.setPointID, event.data.that.off);
     //JControlBtn.off(event.data.that.btnON);
 
@@ -35519,10 +35528,10 @@ iseThermostatHMIP.prototype = {
     if(this.state < this.min) { this.state = this.min; }
     if (this.state > this.max) { this.state = this.max; }
     this.slider.f_setValue((this.state -this.min) * this.factor, true);
+    this.percentElem.val(parseFloat(this.state).toFixed(1));
     conInfo("refresh: setting DP "+this.setPointID+" State -------> " + this.state);
     setDpState(setPointID, this.state);
   }
-
 };/**
  * ise/iseFrequency.js
  **/

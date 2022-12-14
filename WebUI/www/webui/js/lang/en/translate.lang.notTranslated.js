@@ -44,37 +44,37 @@ jQuery.extend(true, langJSON, {
 
     "comment" : "Release C/2022",
 
-    "lblColorHSVValue" : "en* Farbton",
-    "lblColorSaturation" : "en* S%E4ttigung",
-    "lblColorBrightness" : "en* Helligkeit",
+    "lblColorHSVValue" : "Colour shade",
+    "lblColorSaturation" : "Saturation",
+    "lblColorBrightness" : "Brightness",
 
-    "btnHCL" : "en* HCL",
-    "btnDim2Warm" : "en* Dim2Warm",
+    "btnHCL" : "HCL",
+    "btnDim2Warm" : "Dim2Warm",
 
-    "stringTableActivityStateDown" : "en* Rampe herunter",
-    "stringTableActivityStateUnknown" : "en* Aktivit%E4t unbekannt",
-    "stringTableActivityStateUp" : "en* Rampe hoch",
-    "stringTableActivityStable" : "en* Zustand stabil",
+    "stringTableActivityStateDown" : "Ramp down",
+    "stringTableActivityStateUnknown" : "Activity unknown",
+    "stringTableActivityStateUp" : "Ramp up",
+    "stringTableActivityStable" : "Status stable",
 
-    "stringTableWGDDisplayDataString" : "en* Display Text",
+    "stringTableWGDDisplayDataString" : "Display text",
 
-    "optionColorValue" : "en* Farbwert",
-    "optionColorTemperature" : "en* Farbtemperatur",
-    "optionHue" : "en* Hue",
-    "optionSaturation" : "en* S%E4ttigung",
-
-    "comment: " : "Release C/2022 - not yet translated",
+    "optionColorValue" : "Colour value",
+    "optionColorTemperature" : "Colour temperature",
+    "optionHue" : "Hue",
+    "optionSaturation" : "Saturation",
 
     "fwUpdatePressConfigKey" :
-      "en* Stellen Sie sicher, dass das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" ist.  Dr%FCcken sie ggf. die Systemtaste am Ger%E4t<br/><br/>"+
-      "Bei allen Homematic IP Sensoren, wie z. B. die Wettersensoren, ist ein Dr%FCcken der Taste nicht zwingend erforderlich. " +
-      "Die Ger%E4te melden sich automatisch im Verlauf eines Tages und beginnen dann selbstst%E4ndig mit dem Update.",
+      "Make sure that the device is within radio range of the "+HMIdentifier.de.CCUShortName+".  If necessary, press the system button on the device.<br/><br/>"+
+      "For all Homematic IP sensors, such as the weather sensors, pressing the button is not mandatory. " +
+      "The devices automatically report in the course of a day and then start the update on their own.",
 
     "fwUpdatePressSystemKey" :
-      "en* Stellen Sie sicher, dass das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" ist.  Dr%FCcken sie ggf. die Systemtaste am Ger%E4t<br/><br/>"+
-      "Bei allen Homematic IP Sensoren, wie z. B. die Wettersensoren, ist ein Dr%FCcken der Taste nicht zwingend erforderlich. " +
-      "Die Ger%E4te melden sich automatisch im Verlauf eines Tages und beginnen dann selbstst%E4ndig mit dem Update.",
+      "Make sure that the device is within radio range of the "+HMIdentifier.de.CCUShortName+".  If necessary, press the system button on the device.<br/><br/>"+
+      "For all Homematic IP sensors, such as the weather sensors, pressing the button is not mandatory. " +
+      "The devices automatically report in the course of a day and then start the update on their own.",
 
+    "minTemp" : "min.<br/>Temp",
+    "maxTemp" : "max.<br/>Temp",
 
     "noMoreKeys" : ""
   }

@@ -172,10 +172,10 @@ jQuery.extend(true, langJSON, {
     "optionWeeklyProfile6" : "6",
 
     "comment" : "Relase C/2022",
-    "optionRGBW" : "en* RGBW",
-    "optionRGB" : "en* RGB",
-    "option2xTunableWhite" : "en* TunableWhite",
-    "option4xPWM" : "en* Single channels",
+    "optionRGBW" : "RGBW",
+    "optionRGB" : "RGB",
+    "option2xTunableWhite" : "Tunable White",
+    "option4xPWM" : "Single Channels",
 
     "noMoreKeys" : ""
   }

@@ -134,12 +134,12 @@ jQuery.extend(true,langJSON, {
     "lblWPTargetChannels" : "Target channels",
     "lblAddSwitchPoint" : "Add switching time",
 
-    "lblColorTemp" : "en* Color temperature",
-    "lblColorValue" : "en* Color value",
+    "lblColorTemp" : "Color temperature",
+    "lblColorValue" : "Color value",
 
     "lblDelSwitchPoint" : "Remove switching time",
 
-    "lblHueSat" : "en* Hue/Saturation",
+    "lblHueSat" : "Hue/Saturation",
 
     "optionPermanent" : "Permanent",
     "optionEnterValue" : "Enter value",
@@ -160,8 +160,8 @@ jQuery.extend(true,langJSON, {
     "optionStateON": "On",
     "optionPermissionTrue" : "Granted",
     "optionPermisionFalse" : "Not granted",
-    "optionHueSaturation" : "en* Hue/Saturation",
-    "optionColorTemp" : "en* Farbtemperatur",
+    "optionHueSaturation" : "Hue/Saturation",
+    "optionColorTemp" : "Color temperature",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",

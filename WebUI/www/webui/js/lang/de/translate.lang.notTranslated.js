@@ -77,6 +77,9 @@ jQuery.extend(true, langJSON, {
       "Bei allen Homematic IP Sensoren, wie z. B. die Wettersensoren, ist ein Dr%FCcken der Taste nicht zwingend erforderlich. " +
       "Die Ger%E4te melden sich automatisch im Verlauf eines Tages und beginnen dann selbstst%E4ndig mit dem Update.",
 
+    "minTemp" : "min.<br/>Temp",
+    "maxTemp" : "max.<br/>Temp",
+
     "noMoreKeys" : ""
   }
 });

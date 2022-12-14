@@ -174,7 +174,7 @@ jQuery.extend(true, langJSON, {
     "comment" : "Relase C/2022",
     "optionRGBW" : "RGBW",
     "optionRGB" : "RGB",
-    "option2xTunableWhite" : "TunableWhite",
+    "option2xTunableWhite" : "Tunable White",
     "option4xPWM" : "Einzelkan%E4le",
 
     "noMoreKeys" : ""
