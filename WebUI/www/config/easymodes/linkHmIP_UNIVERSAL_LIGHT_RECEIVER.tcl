@@ -2,39 +2,61 @@
 
 # dev_descr_sender(TYPE) enthaelt den Sendertype (KEY, WATERDETECTIONSENSOR usw.)
 
-global url dev_descr_receiver dev_descr_sender receiver_address
+global url dev_descr_receiver dev_descr_sender receiver_address UNIVERSAL_LIGHT_ACTOR
 
 set multilingual 1
 set internal ""
 set ACTOR $dev_descr_receiver(TYPE) 
+set UNIVERSAL_LIGHT_ACTOR $dev_descr_receiver(PARENT_TYPE)
 
+if {$dev_descr_receiver(PARENT_TYPE) == "HmIP-RGBW"} {
 
-# Get the mode of the device
+  # Get the mode of the device
+  set addrMaintenance "[lindex [split $receiver_address :] 0]:0"
+  array set dev_ps [xmlrpc $url getParamset $addrMaintenance MASTER]
 
-set addrMaintenance "[lindex [split $receiver_address :] 0]:0"
+  set devMode $dev_ps(DEVICE_OPERATION_MODE); # 0 = RGBW, 1 = RGB, 2 = Tuneable White, 3 = PWM
 
-array set dev_ps [xmlrpc $url getParamset $addrMaintenance MASTER]
-set devMode $dev_ps(DEVICE_OPERATION_MODE); # 0 = RGBW, 1 = RGB, 2 = Tuneable White, 3 = PWM
+  set dev_descr_receiver(ORIG_TYPE) $dev_descr_receiver(TYPE)
 
+  if {($devMode == 0) || ($devMode == 1)} {
+    set ACTOR "UNIVERSAL_LIGHT_RECEIVER_RGB(W)"
+    set dev_descr_receiver(TYPE) $ACTOR
+  }
 
-# TODO Check if the mode is correct and set the var ACTOR accordingly
+  if {$devMode == 2} {
+    set ACTOR "UNIVERSAL_LIGHT_RECEIVER_TW"
+    set dev_descr_receiver(TYPE) $ACTOR
+  }
 
+  if {$devMode == 3} {
+    set ACTOR "UNIVERSAL_LIGHT_RECEIVER_PWM"
+    set dev_descr_receiver(TYPE) $ACTOR
+  }
+} elseif {$dev_descr_receiver(PARENT_TYPE) == "HmIP-DRG-DALI"} {
+  # Get the mode of the device
+  array set dev_ps [xmlrpc $url getParamset $receiver_address MASTER]
+  set devMode $dev_ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES); # 0 = Switch, 1 = Dimmer (PWM), 2 = Tuneable White, 3 = RGB + Tunable White
 
-set dev_descr_receiver(ORIG_TYPE) $dev_descr_receiver(TYPE)
+  if {$devMode == 0} {
+    set ACTOR "SWITCH_VIRTUAL_RECEIVER"
+    set dev_descr_receiver(TYPE) $ACTOR
+  }
 
-if {($devMode == 0) || ($devMode == 1)} {
-  set ACTOR "UNIVERSAL_LIGHT_RECEIVER_RGB(W)"
-  set dev_descr_receiver(TYPE) $ACTOR
-}
+  if {$devMode == 1} {
+    set ACTOR "UNIVERSAL_LIGHT_RECEIVER_PWM"
+    set dev_descr_receiver(TYPE) $ACTOR
+  }
 
-if {$devMode == 2} {
-  set ACTOR "UNIVERSAL_LIGHT_RECEIVER_TW"
-  set dev_descr_receiver(TYPE) $ACTOR
-}
+   if {$devMode == 2} {
+     set ACTOR "UNIVERSAL_LIGHT_RECEIVER_TW"
+     set dev_descr_receiver(TYPE) $ACTOR
+   }
 
-if {$devMode == 3} {
-  set ACTOR "UNIVERSAL_LIGHT_RECEIVER_PWM"
-  set dev_descr_receiver(TYPE) $ACTOR
+  if {$devMode == 3} {
+    set ACTOR "UNIVERSAL_LIGHT_RECEIVER_RGBW_DALI"
+    set dev_descr_receiver(TYPE) $ACTOR
+  }
 }
 
 
@@ -56,6 +78,21 @@ if {[catch {set x $dev_descr_sender(TYPE)}] == 0} {
         set dev_descr_sender(TYPE) $x
       }
     }
+  }
+
+  if {$dev_descr_sender(TYPE) == "LEVEL_COMMAND_TRANSMITTER_CO2"} {
+    set x "COND_SWITCH_TRANSMITTER"
+    set dev_descr_sender(TYPE) $x
+  }
+
+  if {$dev_descr_sender(TYPE) == "LEVEL_COMMAND_TRANSMITTER_HUMIDITY"} {
+    set x "COND_SWITCH_TRANSMITTER_HUMIDITY"
+    set dev_descr_sender(TYPE) $x
+  }
+
+  if {$dev_descr_sender(TYPE) == "LEVEL_COMMAND_TRANSMITTER_TEMPERATURE"} {
+    set x "COND_SWITCH_TRANSMITTER_TEMPERATURE"
+    set dev_descr_sender(TYPE) $x
   }
 
   catch {puts "<input type=\"hidden\" id=\"dev_descr_sender_tmp\" value=\"$dev_descr_sender(TYPE)-$dev_descr_sender(PARENT)\">"}

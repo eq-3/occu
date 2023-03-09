@@ -22,6 +22,10 @@ function ::CreateWeeklyProgram()
 
   if (objChannelLocks) {
     iChannelLocks = objChannelLocks.Value(); ! can be ''
+
+    if (iChannelLocks == "") {
+      iChannelLocks = -1;
+    }
   }
 
   WriteLine("<tr id='weekprg_"#chnId#"' class='hidden'>");

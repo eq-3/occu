@@ -1842,6 +1842,9 @@ TX_THRESHOLD_PERCENT	${stringTableTxThresholdPercent}
 TX_THRESHOLD_POWER	${stringTablePowerMeterTxThresholdPower}
 
 UNIVERSAL_LIGTH_RECEIVER|LEVEL	${lblColorBrightness}
+UNIVERSAL_LIGTH_RECEIVER|ERROR_LIMIT	${stringTableErrorLimitULR}
+UNIVERSAL_LIGTH_RECEIVER|ERROR_LIMIT=FALSE	${stringTableErrorLimitULR_False}
+UNIVERSAL_LIGTH_RECEIVER|ERROR_LIMIT=TRUE	${stringTableErrorLimitULR_True}
 
 UNREACH=FALSE	${stringTableUnreachFalse}
 UNREACH=TRUE	${stringTableUnreachTrue}

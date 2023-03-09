@@ -141,7 +141,7 @@ set PROFILE_3(SHORT_CT_ON)                    {0 2}
 set PROFILE_3(SHORT_CT_ONDELAY)               0
 set PROFILE_3(SHORT_JT_OFF)                   {1 3}
 set PROFILE_3(SHORT_JT_OFFDELAY)              6
-set PROFILE_3(SHORT_JT_ON)                    {4 6}
+set PROFILE_3(SHORT_JT_ON)                    {4 6 3}
 set PROFILE_3(SHORT_JT_ONDELAY)               3
 set PROFILE_3(SHORT_MULTIEXECUTE)             0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
@@ -186,6 +186,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
 
   set parentType [string tolower $dev_descr_receiver(PARENT_TYPE)]
+  set senderParentType [string tolower $dev_descr_sender(PARENT_TYPE)]
+
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
   
 #  die Texte der Platzhalter einlesen
@@ -300,6 +302,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     # OFF_TIME
     append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
+
+    if {($senderParentType == "hmipw-wgd") || (($senderParentType == "hmipw-wgd-pl"))} {
+      # SPHM-1107
+      incr pref;
+      append HTML_PARAMS(separate_$prn) "<tr class='hidden'>"
+        append HTML_PARAMS(separate_$prn) "<td>Only for WGD(-PL)</td>"
+        set id "separate_${special_input_id}_$prn\_$pref"
+        append HTML_PARAMS(separate_$prn) "<td><input type=\"text\" id=\"$id\" name=\"SHORT_JT_ON\" value=\"$ps(SHORT_JT_ON)\" size=5 ></td>"
+        append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">"
+          append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
+            append HTML_PARAMS(separate_$prn) "document.getElementById('$id').value = 3;"
+          append HTML_PARAMS(separate_$prn) "},100);"
+        append HTML_PARAMS(separate_$prn) "</script>"
+      append HTML_PARAMS(separate_$prn) "</tr>"
+    }
 
     if {$longKeypressAvailable} {
       # *** LONG KEYPRESS ***

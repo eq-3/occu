@@ -706,7 +706,6 @@ jQuery.extend(true,langJSON, {
     "msgNoGatewayFound" : "Kein Gateway gefunden",
     "dialogDeleteCertificateTitle" : "Zertifikat l%F6schen",
     "dialogSettingsNetworkLblDeleteCertificate" : "Zertifikat von der CCU entfernen",
-    "confirmCertificationPurgeA" : "Wenn Sie das Zertifikat l%F6schen, k%F6nnen Sie anschlie%DFend keine gesicherte Verbindung zu Ihrer "+HMIdentifier.de.CCUShortName+" mehr aufbauen.",
     "confirmCertificationPurgeB" : "M%F6chten Sie das Zertifikat wirklich von der "+HMIdentifier.de.CCUShortName+" entfernen?",
     "dialogRestartWebserverTitle" : "Lighttpd Restart",
     "dialogRestartWebserverContent" : "Der Webserver wird jetzt neu gestartet.",
@@ -958,11 +957,6 @@ jQuery.extend(true,langJSON, {
     "cpSecurityHttpsRedirectLabel" : "Umleitung auf HTTPS aktiv:",
     "cpSecurityHttpsRedirectDescription" : "Ist die Funktion aktiviert, erfolgt bei Zugriff auf die WebUI %FCber HTTP eine automatische Umleitung auf HTTPS",
     "stringTableOperationPowerConsumptionState": "Status Stromaufnahme",
-    "headerDrapUpdateNecessary":
-      "Mit diesem Update wird durch Advanced Routing eine verbesserte Kommunikation zwischen den Homematic IP Funk- und den Homematic IP Wired-Komponenten etabliert. " +
-      "Dazu ist es erforderlich, dass ein Firmware-Update des Homematic IP Wired Access Point durchgef%FChrt wird.<br><br>Der Homematic IP Wired Access Point befindet sich " +
-      "nach diesem Update im Posteingang und muss dort konfiguriert werden.<br>Alle bereits angelernten und konfigurierten Wired-Ger%E4te in der Installation arbeiten nach dem Update wie gewohnt weiter.",
-    "drapUpdateNecessary": "Folgende Wired Access Points mit einer inkompatiblen Firmware wurden gefunden und m%FCssen aktualisiert werden:<br/><br/>",
     "thAvailableVersion": "Verf%FCgbare Version",
     "thInstalledVersion": "Installierte Version",
     "btnReload": "Neu laden",

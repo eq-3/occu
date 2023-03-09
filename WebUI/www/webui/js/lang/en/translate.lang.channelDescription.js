@@ -86,6 +86,10 @@ jQuery.extend(true,langJSON, {
     "chType_JALOUSIE" : "Jalousie actuator",
     "chType_KEY" : "Push button",
     "chType_KEY_TRANSCEIVER" : "Push button",
+    "chType_KWL_CONTROLLER_TRANSMITTER" : "",
+    "chType_LEVEL_COMMAND_TRANSMITTER_CO2" : "Condition CO2",
+    "chType_LEVEL_COMMAND_TRANSMITTER_HUMIDITY" : "Condition humidity",
+    "chType_LEVEL_COMMAND_TRANSMITTER_TEMPERATURE" : "Condition temperature",
     "chType_LUXMETER" : "Brightness sensor",
     "chType_MOD_EM8BIT_TRANSMITTER" : "Transmitter for<br/>8 bit decision value",
     "chType_MOD_RC8" : "Key, Switch<br/>door/window contact",
@@ -136,6 +140,7 @@ jQuery.extend(true,langJSON, {
     "chType_UNIVERSAL_ACTOR_TRANSMITTER_010V" : "Status report<br/>Universal Actuator 0-10 V",
     "chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V" : "Universal Actuator 0-10 V",
 
+    "chType_DALI_UNIVERSAL_LIGHT_RECEIVER" : "DALI Gateway",
     "chType_UNIVERSAL_LIGHT_RECEIVER" : "LED Controller",
     "chType_UNIVERSAL_LIGHT_WEEK_PROFILE" : "Weekly program",
 

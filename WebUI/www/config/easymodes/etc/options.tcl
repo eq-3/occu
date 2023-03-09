@@ -120,6 +120,22 @@ proc option {type} {
         set options(1.01) "\${lblIgnore}"
     }
 
+    "DIM_0-100" {
+        set options(0.0) "0$p"
+        set options(0.1) "10$p"
+        set options(0.2) "20$p"
+        set options(0.3) "30$p"
+        set options(0.4) "40$p"
+        set options(0.5) "50$p"
+        set options(0.6) "60$p"
+        set options(0.7) "70$p"
+        set options(0.8) "80$p"
+        set options(0.9) "90$p"
+        set options(1.0) "100$p"
+        set options(1.005) "\${lastValue}"
+        set options(99999998)  "\${enterValue}"
+    }
+
     "DIM_ONLEVEL" {
         set options(0.1) "10$p"
         set options(0.2) "20$p"
@@ -534,6 +550,16 @@ proc option {type} {
       set options(13) "2 + 45°..180°"
       set options(14) "2 + 90°..225°"
       set options(15) "2 + 135°..270°"
+    }
+
+    "DALI_EFFECTS" {
+      set options(1) "\${optionNoEffect}"
+      set options(3) "\${optionRainbow}"
+      set options(5) "\${optionSunrise}"
+      set options(7) "\${optionSunset}"
+      set options(11) "\${optionForrest}"
+      set options(17) "\${optionSignalingRed}"
+      set options(19) "\${optionGreenBillow}"
     }
 
   }

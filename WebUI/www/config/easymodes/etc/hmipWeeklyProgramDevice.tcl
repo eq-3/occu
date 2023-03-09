@@ -49,9 +49,13 @@ proc getHmIPWeeklyProgram {address chn p descr devType {extraparam ""}} {
     append html "<div id=\"weeklyProgram_$chn\"></div>"
 
     append html "<script type=\"text/javascript\">"
-    append html "window.setTimeout(function() {"
-      append html "var weeklyProgram = new HmIPWeeklyProgram('$address', $objPS, $objPSDescr, [session_is_expert]);"
+      if {[string equal $extraparam dali] == 1} {
+        # global var within the weekly program for the dali targetchannels
+        append html "if (typeof daliTargetChannels == 'undefined') {daliTargetChannels = null;}"
+      }
 
+      append html "window.setTimeout(function() {"
+        append html "var weeklyProgram = new HmIPWeeklyProgram('$address', $objPS, $objPSDescr, [session_is_expert]);"
       append html "},100)"
     append html "</script>"
 

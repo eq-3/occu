@@ -706,7 +706,6 @@ jQuery.extend(true, langJSON, {
     "msgNoGatewayFound" : "No Gateway found",
     "dialogDeleteCertificateTitle" : "Delete certificate",
     "dialogSettingsNetworkLblDeleteCertificate" : "Remove certificate from CCU",
-    "confirmCertificationPurgeA" : "If the certificate is deleted, you can no longer establish a secured connection to your "+HMIdentifier.en.CCUShortName+".",
     "confirmCertificationPurgeB" : "Do you really want to delete the certificate from the "+HMIdentifier.en.CCUShortName +"?",
     "dialogRestartWebserverTitle" : "Lighttpd Restart",
     "dialogRestartWebserverContent" : "The web server will now be restarted.",
@@ -956,11 +955,6 @@ jQuery.extend(true, langJSON, {
     "cpSecurityHttpsRedirectLabel" : "Forwarding to HTTPS active:",
     "cpSecurityHttpsRedirectDescription" : "If this function is activated, automatic forwarding to HTTPS takes place when accessing the WebUI via HTTP.",
     "stringTableOperationPowerConsumptionState": "Status current consumption",
-    "headerDrapUpdateNecessary":
-    "This update uses Advanced Routing to establish improved communication between the Homematic IP wireless and wired components. " +
-      "This requires a firmware update of the Homematic IP Wired Access Point.<br><br>After the update, the Homematic IP Wired Access Point is moved into the inbox and must be configured there.<br>" +
-      "All wired devices in the installation that have already been connected and configured will continue to work as usual after the update.",
-    "drapUpdateNecessary": "The following Wired Access Points with an incompatible firmware were found and must be updated:<br/><br/>",
     "thAvailableVersion": "Available version",
     "thInstalledVersion": "Installed version",
     "btnReload": "Reload",

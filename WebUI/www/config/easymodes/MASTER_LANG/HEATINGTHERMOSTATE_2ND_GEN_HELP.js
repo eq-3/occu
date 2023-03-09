@@ -24,7 +24,7 @@ jQuery.extend(true,langJSON, {
     "WEEK_PROGRAM_POINTER" : "Hier k&ouml;nnen Sie das zu editierende Wochenprogramm w&auml;hlen.",
     "WEEK_PROGRAM_POINTER_group" : "Hier k&ouml;nnen Sie das zu editierende Wochenprogramm w&auml;hlen.<br/><br/>Bitte beachten Sie, dass die Wochenprofile 4 - 6 nicht allen Ger%E4ten zur Ver%FCgung stehen.",
     "TWO_POINT_HYSTERESIS" : "Der Wandthermostat kann in Verbindung mit einem Schaltaktor als Zweipunktregler genutzt werden.<br/><br/>Die Regelung erfolgt in Abh&auml;ngigkeit der Soll- und Ist-Temperatur sowie der hier festgelegten Hysterese.",
-    "HEATING_COOLING" : "Wenn der Wandthermostat als Zweipunktregler genutzt wird, ist hier festgelegt, ob die Regelung 'Heizen' oder 'K&uuml;hlen' soll.<br/><br/>Im Heiz-Betrieb wird der Schaltaktor bei Unterschreiten der Soll-Temperatur eingeschaltet, im K&uuml;hl-Betrieb wird er bei &Uuml;berschreiten eingeschaltet.",
+    "HEATING_COOLING" : "Wenn der Wandthermostat als Zweipunktregler genutzt wird, ist hier festgelegt, ob die Regelung 'Heizen' oder 'K&uuml;hlen' soll.<br/><br/>Im Heiz-Betrieb wird der Schaltaktor bei Unterschreiten des Soll-Wertes eingeschaltet, im K&uuml;hl-Betrieb wird er bei &Uuml;berschreiten eingeschaltet.",
 
     "HUMIDITY_LIMIT_DISABLE" : "Mit diesem Parameter kann gew&auml;hlt werden, ob die K&uuml;hlung w&auml;hrend des K&uuml;hlbetriebes bei &Uuml;berschreitung der Luftfeuchtigkeitsschwelle unterbrochen wird. Dadurch kann verhindert werden, dass die Luftfeuchtigkeit weiter ansteigt.",
 
@@ -46,7 +46,7 @@ jQuery.extend(true,langJSON, {
     "TWO_POINT_HYSTERESIS_HUMIDITY" :
       "Im Modus 'Befeuchten' schaltet der Aktor bei Unterschreiten der eingestellten Luftfeuchtigkeitssschwelle ein. Im Modus 'Trocknen' wird er entsprechend beim %DCberschreiten der eingestellten Luftfeuchtigkeitsschwelle eingeschaltet.<br/><br/>" +
       "Mit der Hysterese kann gesteuert werden, um wie viel % rF die Soll-Temperatur %FCber- bzw. unterschritten werden muss, damit der Aktor wieder ausschaltet.<br/><br/>" +
-      "Dieser Parameter dient zur Festlegung der Hysterese im Bereich von 1 % bis 10 %.",
+      "Dieser Parameter dient zur Festlegung der Hysterese im Bereich von 2 % bis 20 %.",
 
     "HEATING_COOLING_A" :
       "Ist der Wandthermostat als Thermostat-Schalter konfiguriert, kann das Ger%E4t in Verbindung mit einem Schaltaktor als Zweipunktregler f%FCr eine Temperaturregelung eingesetzt werden. " +
@@ -55,6 +55,11 @@ jQuery.extend(true,langJSON, {
       "Ist 'Heizen' und 'K%FChlen' ausgew%E4hlt, kann der Modus %FCber ein Zentralen-Programm gesteuert und ge%E4ndert werden.<br/><br/>" +
       "Ist der Wandthermostat als Hygrostat-Schalter konfiguriert, kann das Ger%E4t in Verbindung mit einem Schaltaktor als Zweipunktregler f%DCr eine Luftfeuchtigkeitsregelung genutzt werden. Mit diesem Parameter wird festgelegt, ob das Ger%E4t im Trocknen-Modus oder im Befeuchten-Modus betrieben werden soll. " +
       "Im Modes 'Trocknen' wird der Schaltaktor bei %DCberschreiten der eingestellten Luftfeuchtigkeitsschwelle eingeschaltet. Im Modus 'Befeuchten' wird er bei Unterschreiten der Luftfeuchtigkeitsschwelle eingeschaltet. " +
+      "Ist 'Trocknen' und 'Befeuchten' ausgew%E4hlt, kann der Modus %DCber ein Zentralen-Programm gesteuert und ge%E4ndert werden.",
+
+    "HEATING_COOLING_B" :
+      "Ist der Wandthermostat als Hygrostat-Schalter konfiguriert, kann das Ger%E4t in Verbindung mit einem Schaltaktor als Zweipunktregler f%DCr eine Luftfeuchtigkeitsregelung genutzt werden. Mit diesem Parameter wird festgelegt, ob das Ger%E4t im Trocknen-Modus oder im Befeuchten-Modus betrieben werden soll.<br/><br/>" +
+      "Im Modes 'Trocknen' wird der Schaltaktor bei %DCberschreiten der eingestellten Luftfeuchtigkeitsschwelle eingeschaltet. Im Modus 'Befeuchten' wird er bei Unterschreiten der Luftfeuchtigkeitsschwelle eingeschaltet.<br/><br/>" +
       "Ist 'Trocknen' und 'Befeuchten' ausgew%E4hlt, kann der Modus %DCber ein Zentralen-Programm gesteuert und ge%E4ndert werden.",
 
     "HUMIDITY_LIMIT_VALUE" :
@@ -93,7 +98,7 @@ jQuery.extend(true,langJSON, {
     "WEEK_PROGRAM_POINTER" : "Please select the weekly program you want to edit here.",
     "WEEK_PROGRAM_POINTER_group" : "Please select the weekly program you want to edit here.<br/><br/>Please note that the week profiles 4 - 6 are not available for all devices.",
     "TWO_POINT_HYSTERESIS" : "In connection with a switch actuator, the room thermostat can be used as on-off control.<br/><br/>The on-off control depends on the setpoint and actual temperature as well as the defined hysteresis.",
-    "HEATING_COOLING" : "If the room thermostat is used as on-off control, you can define here whether you want to set the 'heating' or 'cooling' mode.<br/><br/>In heating mode, the switch actuator will be switched on if the setpoint temperature falls below threshold, in cooling mode the actuator will be switched on if the threshold is exceeded.",
+    "HEATING_COOLING" : "If the room thermostat is used as on-off control, you can define here whether you want to set the 'heating' or 'cooling' mode.<br/><br/>In heating mode, the switch actuator will be switched on if the setpoint value falls below threshold, in cooling mode the actuator will be switched on if the threshold is exceeded.",
 
     "HUMIDITY_LIMIT_DISABLE" : "With this parameter you can define, if the cooling should be interrupted during cooling mode, as soon as the humidity threshold is exceeded. This stops the humidity value from increasing further.",
 
@@ -115,13 +120,18 @@ jQuery.extend(true,langJSON, {
     "TWO_POINT_HYSTERESIS_HUMIDITY" :
       "In 'Humidify' mode, the actuator switches on when the air humidity falls below the set threshold. In 'Dry' mode, it is switched on when the set humidity threshold is exceeded.<br/><br/>" +
       "The hysteresis can be used to control by how much % RH a reading must exceed or fall below the setpoint temperature for the actuator to switch off again.<br/><br/>" +
-      "This parameter is used to define the hysteresis in the range from 1 % to 10 %.",
+      "This parameter is used to define the hysteresis in the range from 2 % to 20 %.",
 
     "HEATING_COOLING_A" :
       "If the wall thermostat is configured as a thermostat switch, the device can be used in conjunction with a switching actuator as a two-point controller for temperature control. This parameter determines whether the device is to be operated in heating or cooling mode. "  +
       "In 'Heat' mode, the switching actuator is switched on when the temperature falls below the setpoint temperature. In 'Cool' mode, it is switched on when the setpoint temperature is exceeded. " +
       "If 'Heat / Cool' is selected, the mode can be controlled and changed via a central program.<br/><br/>" +
       "If the wall thermostat is configured as a humidistat switch, the device can be used in conjunction with a switching actuator as a two-point controller for humidity control. This parameter determines whether the device is to be operated in drying mode or in humidifying mode. " +
+      "In 'Dry' mode, the switching actuator is switched on when the set humidity threshold is exceeded. In 'Humidify' mode, it is switched on when the air humidity drops below the threshold.<br/><br/>" +
+      "If 'Dry / Humidify' is selected, the mode can be controlled and changed via a central program.",
+
+    "HEATING_COOLING_B" :
+      "If the wall thermostat is configured as a humidistat switch, the device can be used in conjunction with a switching actuator as a two-point controller for humidity control. This parameter determines whether the device is to be operated in drying mode or in humidifying mode.<br/><br/>" +
       "In 'Dry' mode, the switching actuator is switched on when the set humidity threshold is exceeded. In 'Humidify' mode, it is switched on when the air humidity drops below the threshold.<br/><br/>" +
       "If 'Dry / Humidify' is selected, the mode can be controlled and changed via a central program.",
 

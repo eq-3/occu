@@ -62,6 +62,9 @@
 "ON_LEVEL" : "<span class=\"translated\">Level in status \"on\"</span>",
 "ON_LEVEL_COLOR_VALUE" : "<span class=\"translated\">Color value in status \"on\"</span>",
 "ON_LEVEL_mp3" : "<span class=\"translated\">Volume in status \"on\"</span>",
+
+"ON_LEVEL_EFFECT" : "<span class=\"translated\">Brightness</span>",
+
 "ON_THRESHOLD" : "<span class=\"translated\">Switch on if</span>",
 "ON_TIME" : "<span class=\"translated\">Switch-on time (duration in status \"on\")</span>",
 "ON_TIME_BASE" : "<span class=\"translated\">Unit switch-on time</span>",

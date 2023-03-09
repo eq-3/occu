@@ -65,8 +65,6 @@ jQuery.extend(true, langJSON, {
     "optionHue" : "Hue",
     "optionSaturation" : "S%E4ttigung",
 
-    "comment: " : "Release C/2022 - not yet translated",
-
     "fwUpdatePressConfigKey" :
       "Stellen Sie sicher, dass das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" ist.  Dr%FCcken sie ggf. die Systemtaste am Ger%E4t<br/><br/>"+
       "Bei allen Homematic IP Sensoren, wie z. B. die Wettersensoren, ist ein Dr%FCcken der Taste nicht zwingend erforderlich. " +
@@ -80,6 +78,34 @@ jQuery.extend(true, langJSON, {
     "minTemp" : "min.<br/>Temp",
     "maxTemp" : "max.<br/>Temp",
 
+"comment: " : "Release A/2023 - not yet translated",
+
+    "lblNumberOfChannels" : "Anzahl der Kan%E4le",
+
+    "optionNoEffect" : "Effekt beenden",
+    "optionRainbow" : "Regenbogen",
+    "optionSunrise" : "Sonnenaufgang",
+    "optionSunset" : "Sonnenuntergang",
+    "optionForrest" : "Waldstimmung",
+    "optionSignalingRed" : "Signal rot",
+    "optionGreenBillow" : "Gr%FCnes Pulsieren",
+
+    "optionEffect" : "Effekt",
+
+    "errorStateCoProcessor" : "Zustand Co-Prozessor",
+    "errorCoProcessorFalse" : "<br/>OK",
+    "errorCoProcessorTrue" : "<br/>Fehler",
+
+    "stateDaliBus" : "Zustand DALI-Bus",
+    "stateDaliBus_0" : "<br/>OK",
+    "stateDaliBus_1" : "<br/>Kurzschluss",
+    "stateDaliBus_2" : "<br/>%DCberlast",
+
+    "stringTableErrorLimitULR" : "Limit Fehler",
+    "stringTableErrorLimitULR_False" : "Limit Fehler: Ja",
+    "stringTableErrorLimitULR_True" : "Limit-Fehler: Nein",
+
     "noMoreKeys" : ""
   }
 });
+

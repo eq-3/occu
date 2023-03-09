@@ -1,0 +1,40 @@
+"dimmer_on_brighter" : "Helligkeit (V) - ein/heller",
+"dimmer_off_darker" : "Helligkeit (V) - aus/dunkler",
+"dimmer_on_off_b_d" : "Helligkeit (V) - ein/aus &amp; heller/dunkler",
+"color_up" : "Farbwert (H) - hoch",
+"color_down" : "Farbwert (H) -  runter",
+"color_up_down" : "Farbwert (H) -  hoch / runter",
+
+"saturation_up" : "S&auml;ttigung (S) - hoch",
+"saturation_down" : "S&auml;ttigung (S) -  runter",
+"saturation_up_down" : "S&auml;ttigung (S) -  hoch / runter",
+
+"optionColorVal" : "Farbwert",
+
+"comment": "This is for the Tunable White mode of the DALI device",
+
+"TW_dimmer_on_brighter" : "Helligkeit (TW) - ein/heller",
+"TW_dimmer_off_darker" : "Helligkeit (TW) - aus/dunkler",
+"TW_dimmer_on_off_b_d" : "Helligkeit (TW) - ein/aus &amp; heller/dunkler",
+"TW_colortemp_up" : "Farbtemperatur - hoch",
+"TW_colortemp_down" : "Farbtemperatur - runter",
+"TW_colortemp_up_down" : "Farbtemperatur - hoch/runter",
+
+"TW_hcl_on_up" : "HCL - ein/heller",
+"TW_hcl_off_down" : "HCL - aus/dunkler",
+"TW_hcl_on_of_up_down" : "HCL - ein/aus / heller/dunkler",
+
+"TW_dim2warm_on_up" : "Dim2Warm - ein/heller",
+"TW_dim2warm_off_down" : "Dim2Warm - aus/dunkler",
+"TW_dim2warm_on_of_up_down" : "Dim2Warm - ein/aus & heller/dunkler",
+
+"Effect" : "Effekt",
+
+"COLOR_TEMP" : "Farbtemperatur",
+"COLOR_TEMP_ON" : "Farbtemperatur im Zustand 'ein'",
+"COLOR_TEMP_OFF" : "Farbtemperatur im Zustand 'aus'",
+"MIN_COLOR_TEMP" : "Minimale Farbtemperatur",
+"MAX_COLOR_TEMP" : "Maximale Farbtemperatur",
+
+"unitKelvin" : "K",
+

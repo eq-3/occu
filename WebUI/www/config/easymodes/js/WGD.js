@@ -138,7 +138,11 @@ createSortable = function(numberOfScreens, devAddress) {
             } else {
               jQuery("[name='SCREEN_LAYOUT_LEFT_NEIGHBOUR_" + scrIndex + "']").first().val(arValues[(index - 1)]);
             }
-            jQuery("[name='SCREEN_LAYOUT_RIGHT_NEIGHBOUR_" + scrIndex + "']").first().val((arValues[(index + 1)] != "END") ? arValues[(index + 1)] : arValues[index]);
+            // See SPHM-1119 - this is the old version
+            //jQuery("[name='SCREEN_LAYOUT_RIGHT_NEIGHBOUR_" + scrIndex + "']").first().val((arValues[(index + 1)] != "END") ? arValues[(index + 1)] : arValues[index]);
+
+            // This is the new version
+            jQuery("[name='SCREEN_LAYOUT_RIGHT_NEIGHBOUR_" + scrIndex + "']").first().val((arValues[(index + 1)] != "END") ? arValues[(index + 1)] : arValues[0]);
 
           } else {
             if (scrIndex != 99) {

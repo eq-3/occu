@@ -1,6 +1,29 @@
 <table id="dialogContent" style="margin: 0 auto;">
   <tbody>
 
+    <tr>
+      <td class="alignCenter" colspan="4">
+        <table style="margin: 0 auto;">
+          <colgroup>
+            <col style="width:120px;"/>
+            <col style="width:auto;"/>
+            <col style="width:120px;"/>
+            <col style="width:auto;"/>
+            <col style="width:120px;"/>
+          </colgroup>
+          <tr>
+            <td><div id="dialogColor" class="ControlBtnOff">${optionColorValue}</div></td>
+            <td></td>
+            <td><div id="dialogColorTemp" class="ControlBtnOff">${optionColorTemperature}</div></td>
+            <td></td>
+            <td><div id="dialogEffect"  class="ControlBtnOff">${optionEffect}</div></td>
+
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td colspan="4"><hr></td></tr>
 
     <tr>
       <td id="lblBrightnessLevel">${lblBrightnessLevel}: </td>
@@ -40,10 +63,10 @@
     </tr>
 
     <tr><td colspan="4"><hr></td></tr>
-    <tr>
+    <tr class="j_trColor">
       <td colspan="4" class="controlHeader alignCenter"><span>Farbwert und S&auml;ttigung</span></td>
     </tr>
-    <tr>
+    <tr class="j_trColor">
       <td></td>
       <td colspan="2"><div id="anchorColorPicker"></div></td>
       <td>
@@ -64,15 +87,54 @@
         </table>
       </td>
     </tr>
-    <tr>
+    <tr class="j_trColor">
       <td></td>
       <td><div id="bckGndElm" style='width:90px;'>&nbsp;</div></td>
       <td></td>
     </tr>
 
-    <tr><td colspan="4"><hr></td></tr>
+    <tr class="j_trColor"><td colspan="4"><hr></td></tr>
 
-    <tr>
+    <!-- TW slider -->
+    <tr name="trTWSlider" class="hidden">
+      <td></td><td></td><td></td>
+      <td class="alignRight">
+        <input id="tcInfoField" type="text" class="alignCenter" size="4" disabled>
+      </td>
+    </tr>
+    <tr name="trTWSlider" class="hidden">
+      <td>Farbtemperatur</td>
+      <td colspan="3"><div id="twSlider"></div></td>
+    </tr>
+    <tr name="trTWSlider" class="hidden">
+      <td class="alignRight"><div id="btnHCL" class="ControlBtnOff">HCL</div></td>
+      <td class="alignRight" colspan="2"><div id="btnDim2Warm" class="ControlBtnOff">Dim2Warm</div></td>
+    </tr>
+
+    <tr name="trTWSlider" class="trTWSlider hidden"><td colspan="4"><hr></td></tr>
+    <!-- End TW slider -->
+
+    <!-- Effects -->
+    <tr name="trEffects" class="hidden">
+      <td>${optionEffect}</td>
+      <td>
+        <select id="effectSelBox" style="text-align: center;">
+          <option value="0">${optionNoEffect}</option>
+          <option value="3">${optionRainbow}</option>
+          <option value="5">${optionSunrise}</option>
+          <option value="7">${optionSunset}</option>
+          <option value="11">${optionForrest}</option>
+          <option value="18">${optionSignalingRed}</option>
+          <option value="20">${optionGreenBillow}</option>
+        </select>
+      </td>
+    </tr>
+    <tr name="trEffects" class="hidden"><td colspan="4"><hr></td></tr>
+    <!-- End Effects -->
+
+
+
+    <tr class="j_trOnTimePanel">
       <td>${lblOnTimeLimited}:</td>
       <td>
         <input id="chkBoxTimeLimit" type="checkbox">&nbsp;
@@ -80,7 +142,7 @@
       </td>
     </tr>
 
-    <tr name="trDuration">
+    <tr name="trDuration" class="j_trOnTimePanel">
       <td>${stringTableDuration}: </td>
       <td>
         <input id="combinedParam_DurationValue" type="text" size="5" style="text-align: left;" value="0">
@@ -96,7 +158,7 @@
       </td>
     </tr>
 
-    <tr id="trRampTimeOff" class="visibilityHidden">
+    <tr id="trRampTimeOff" class="visibilityHidden j_trOnTimePanel">
       <td>${stringTableRampTimeOff}: </td>
       <td>
         <input id="combinedParam_RampTimeOffValue" type="text" size="5" style="text-align: left;" value="0">

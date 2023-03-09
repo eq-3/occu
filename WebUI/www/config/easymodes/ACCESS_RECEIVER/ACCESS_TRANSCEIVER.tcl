@@ -27,7 +27,7 @@ set PROFILE_1(SHORT_COND_VALUE_HI) 150
 set PROFILE_1(SHORT_COND_VALUE_LO) 50
 set PROFILE_1(SHORT_CT_OFF) 0
 set PROFILE_1(SHORT_CT_ON) 0
-set PROFILE_1(SHORT_JT_OFF) $RAMP_ON
+set PROFILE_1(SHORT_JT_OFF) {1 3}
 set PROFILE_1(SHORT_JT_ON)  $RAMP_OFF
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(SHORT_WP_OPTIONS) 0
@@ -120,6 +120,11 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
 
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+  array_clear options
+  set options(1) "\${optionLocked}"
+  set options(3) "\${optionOpen}"
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_JT_OFF|LONG_JT_OFF separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_JT_OFF]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
   
 #2

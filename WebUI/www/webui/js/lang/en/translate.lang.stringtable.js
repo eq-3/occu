@@ -1086,7 +1086,7 @@ jQuery.extend(true,langJSON, {
     "stringTableWaterLevelDetectedFalse" : "Water level detected: No",
     "stringTableWaterLevelDetectedTrue" : "Water level detected: Yes",
     "stringTableMoistureDetectedFalse" : "Humidity detected: No",
-    "stringTableMoistureDetectedTrue" : "Water level detected: Yes",
+    "stringTableMoistureDetectedTrue" : "Humidity detected: Yes",
     "stringTableStateUnknown" : "Status unknown",
     "stringTableWeatherTransmitAlarmEventFalse" : "Humidity or water level detected: No",
     "stringTableWeatherTransmitAlarmEventTrue" : "Humidity or water level detected: Yes",

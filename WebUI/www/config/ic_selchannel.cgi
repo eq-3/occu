@@ -747,13 +747,15 @@ proc showHmIPChannel {devType direction address chType} {
   set devType [string toupper $devType]
 
   # The internal device button of some devices aren`t allowed for external links
-  # The next code filters e. g. a HMIP-PSM AND a HMIP-PSM-UK or a HmIP-PCBS AND a HmIP-PCBS-BAT
+  # The next code filters e. g. a HMIP-PSM AND a HMIP-PSM-UK or a HmIP-PCBS AND HmIP-PCBS-BAT as well as ELV-SH-SW1-BAT
+  # Also don't show the channel COND_SWITCH_TRANSMITTER for PSM's with a fw. < 2.x.y (see TWIST-1648)
   if {(
     ($devType == "HMIP-PS")
     || (([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1) && ($major < 2))
     || (([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1) && ($chType == "KEY_TRANSCEIVER"))
     || ([string equal -nocase -length 8 $devType "HMIP-PDT"] == 1)
     || ([string equal -nocase -length 9 $devType "HMIP-PCBS"] == 1)
+    || ([string equal -nocase $devType "ELV-SH-SW1-BAT"] == 1)
     ) && $direction == 1} { #; channel is sender
 
     # don't show the channel
@@ -893,6 +895,23 @@ proc showHmIPChannel {devType direction address chType} {
     # return 0 = hide the channel
     return 0
   }
+
+  # HmIP-DRG-DALI
+  # - Show only the relevant channels according to the connected hardware
+  if {$devType == "HMIP-DRG-DALI"} {
+    set url $iface_url(HmIP-RF)
+    array set ch_ps [xmlrpc $url getParamset [list string $address] [list string MASTER]]
+
+    if {[info exists ch_ps(DALI_ADDRESS)] == 1} {
+      if {$ch_ps(DALI_ADDRESS) == 255} {return 0} else {return 1}
+    } elseif  {($ch >= 33) && ($ch <=48)} {
+      if {$ch_ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES) == 5} {
+        # hide the channel
+        return 0
+      }
+    }
+  }
+
 
   # Hide the virtual channel 2 and 3 of HmIP devices when the expert mode is not activated.
   if {! [session_is_expert]} {

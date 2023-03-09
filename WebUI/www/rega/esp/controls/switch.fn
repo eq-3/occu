@@ -9,6 +9,7 @@ function ::CreateBinaryActuator()
   string sInterface = oIface.Name();
 
   object objState = cObj.DPByControl("SWITCH.STATE");
+
   if( objState )
   {
     WriteLine("<td class='CLASS02521'>");
@@ -68,8 +69,19 @@ function ::CreateVIR-LG-ONOFF_Actuator()
   object oIface = dom.GetObject(cObj.Interface());
   string sInterface = oIface.Name();
 
-  object objState = cObj.DPByControl("DIMMER.LEVEL");
-  if( objState )
+  if (chnLabel != "HmIP-DRG-DALI") {
+    object objState = cObj.DPByControl("DIMMER.LEVEL");
+  } else {
+    object objState = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.LEVEL");
+  }
+
+  if (objState.Value().ToString() == "") {
+    string stateValue = "0";
+  } else {
+    string stateValue = objState.Value().ToString();
+  }
+
+  if( cObj && objState && ch && oIface )
   {
     WriteLine("<td class='CLASS02521'>");
       !WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02522'>Aus</div>");
@@ -83,7 +95,7 @@ function ::CreateVIR-LG-ONOFF_Actuator()
     WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
 
     WriteLine("<script type='text/javascript'>");
-      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", "#system.GetVar("iStatusOnly")#", '"#chnAddress#"', '"#chnLabel#"', '"#sInterface#"');");
+      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#stateValue#", "#objState.ID()#", "#system.GetVar("iStatusOnly")#", '"#chnAddress#"', '"#chnLabel#"', '"#sInterface#"');");
       Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlLblOff')).show();");
       Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlLblOn')).show();");
 

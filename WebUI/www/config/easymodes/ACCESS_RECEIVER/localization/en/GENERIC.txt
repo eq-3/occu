@@ -8,3 +8,6 @@
 "optionIgnore" : "Profile not active",
 "optionOn" : "Auto mode",
 "optionOff" : "Manu mode",
+
+"optionLocked" : "Unlock",
+"optionOpen" : "Open",

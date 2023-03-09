@@ -7,6 +7,22 @@ global dev_descr_receiver dev_descr_sender
 set multilingual 1
 set ACTOR $dev_descr_receiver(TYPE) 
 
+
+  if {$dev_descr_sender(TYPE) == "LEVEL_COMMAND_TRANSMITTER_CO2"} {
+    set x "COND_SWITCH_TRANSMITTER"
+    set dev_descr_sender(TYPE) $x
+  }
+
+  if {$dev_descr_sender(TYPE) == "LEVEL_COMMAND_TRANSMITTER_HUMIDITY"} {
+    set x "COND_SWITCH_TRANSMITTER_HUMIDITY"
+    set dev_descr_sender(TYPE) $x
+  }
+
+  if {$dev_descr_sender(TYPE) == "LEVEL_COMMAND_TRANSMITTER_TEMPERATURE"} {
+    set x "COND_SWITCH_TRANSMITTER_TEMPERATURE"
+    set dev_descr_sender(TYPE) $x
+  }
+
 catch {puts "<input type=\"hidden\" id=\"dev_descr_sender_tmp\" value=\"$dev_descr_sender(TYPE)-$dev_descr_sender(PARENT)\">"} 
 catch {puts "<input type=\"hidden\" id=\"dev_descr_receiver_tmp\" value=\"$ACTOR\">"} 
 

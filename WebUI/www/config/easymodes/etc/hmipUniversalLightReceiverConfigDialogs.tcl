@@ -1,3 +1,10 @@
+proc getNoParametersToSet {} {
+  set html "<tr><td name=\"noParamElm\" class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"
+  # center content
+  append html "<script type=\"text/javascript\">window.setTimeout(function(){jQuery(\"\[name='noParamElm'\]\").parent().parent().parent().width(\"100%\");},100);</script>"
+  return $html
+}
+
 proc getUniversalLightReceiver {chn p descr} {
 
   upvar $p ps
@@ -203,4 +210,213 @@ set comment { # not visible for the user (K.Beck)
   }
 }
   return $html
+}
+
+
+proc getUniversalLightReceiverDali {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+  set specialID "[getSpecialID $special_input_id]"
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
+  set param DALI_ADDRESS
+  # A channel with the DALI_ADDRESS 255 has nothing connected.
+  if {(([info exists ps($param)] == 1) && ($ps($param) == 255)) || (([info exists ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES)] == 1) && ($ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES) == 5)) } {
+    append html "[getNoParametersToSet]"
+  } else {
+    # devMode 0 - Switch, 1 = Dimmer 1Ch, 2 = TuneableWhite, 3 = RGB, 4 = RGBW
+    set devMode $ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES)
+    set dali 1
+
+    # append html "<tr><td><span class='attention'>UNIVERSAL_LIGHT_MAX_CAPABILITIES: $devMode</td></tr>"; # this is for development only
+
+    set prn 0
+
+    set param POWERUP_JUMPTARGET
+    if { [info exists ps($param)] == 1  } {
+      append html [getPowerUpSelectorUniversalLightReceiver $chn ps $special_input_id $devMode $dali]
+      append html "[getHorizontalLine]"
+    }
+
+    set param EVENT_DELAY_UNIT
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+      append html "<td>\${stringTableEventDelay}</td>"
+      append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+      append html "</tr>"
+
+      append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+      incr prn
+      set param EVENT_DELAY_VALUE
+      append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+      append html "<td>\${stringTableEventDelayValue}</td>"
+
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+      append html "</tr>"
+      append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    }
+
+    set param EVENT_RANDOMTIME_UNIT
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+      append html "<td>\${stringTableRandomTime}</td>"
+      append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+      append html "</tr>"
+
+      append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+      incr prn
+      set param EVENT_RANDOMTIME_VALUE
+      append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+      append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+      append html "</tr>"
+      append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+      append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    }
+
+    if {$devMode != 0} {
+        set param ON_MIN_LEVEL
+        if { [info exists ps($param)] == 1  } {
+          incr prn
+          append html "<tr>"
+            append html "<td>\${lblDimmerOnMinLevel}</td>"
+            #append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+            option RAW_0_100Percent
+            append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
+          append html "</tr>"
+        }
+    }
+
+    if {($devMode == 2) || ($devMode == 3)} {
+      append html "[getHorizontalLine]"
+      set param HARDWARE_COLOR_TEMPERATURE_WARM_WHITE
+      if { [info exists ps($param)] == 1 } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${lblHardwareColorTemperatureWarmWhite}</td>"
+          append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param 475 75]</td>"
+        append html "</tr>"
+      }
+
+      set param HARDWARE_COLOR_TEMPERATURE_COLD_WHITE
+      if { [info exists ps($param)] == 1 } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${lblHardwareColorTemperatureColdWhite}</td>"
+          append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 475 75]</td>"
+        append html "</tr>"
+      }
+    }
+
+    set hl 0 ;# horizhontal line already set?
+    set param DALI_DT8_CONFIG_NUMBER_PRIMARY_COLORS
+    if {[info exists ps($param)] == 1} {
+      if {$ps(DALI_DT8_NUMBER_PRIMARY_COLORS) == 4}  {
+        append html "[getHorizontalLine]"
+        set hl 1
+        incr prn
+        append html "<tr>"
+          array_clear options
+          set options(3) "3 - \${optionRGB}"
+          set options(4) "4 - \${optionRGBW}"
+          append html "<td>\${lblNumberOfChannels}</td>"
+          append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
+          # this is for development only
+          # append html "<td><span class='attention'>$param: $ps($param)</td>"
+        append html "</tr>"
+      } else {
+        # this is for development only
+        append html "[getHorizontalLine]"
+        set hl 1
+        # this is for development only
+        # append html "<tr><td><span class='attention'>$param: $ps($param)</td></tr>"
+     }
+    }
+
+    set param DALI_DT8_CONFIG_NUMBER_RGBWAF_COLORS
+    if {[info exists ps($param)] == 1} {
+      if {$ps(DALI_DT8_NUMBER_RGBWAF_COLORS) == 4}  {
+        if {$hl == 0} {append html "[getHorizontalLine]"}
+        incr prn
+        append html "<tr>"
+          array_clear options
+          set options(3) "3 - \${optionRGB}"
+          set options(4) "4 - \${optionRGBW}"
+          append html "<td>\${lblNumberOfChannels}</td>"
+          append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
+          # this is for development only
+          # append html "<td><span class='attention'>$param: $ps($param)</td>"
+        append html "</tr>"
+      } else {
+        # this is for development only
+        if {$hl == 0} {append html "[getHorizontalLine]"}
+        # this is for development only
+        # append html "<tr><td><span class='attention'>$param: $ps($param)</td></tr>"
+      }
+    }
+
+      set param DALI_GROUP
+      if { [info exists ps($param)] == 1 } {
+        incr prn
+        append html "<tr>"
+            append html "<td>\${lblGroup}</td>"
+            append html "<td>"
+              append html "<table>"
+                append html "<tr>"
+                  for {set i 0} {$i <= 15} {incr i} {
+                    append html "<td>"
+                      append html "<label for='groupID_$chn\_$i' style='background-color:white; display:block; text-align:center;'>[expr {$i + 1}]</label>"
+                      append html "<input id='groupID_$chn\_$i' type='checkbox' value='[expr {int(pow(2,$i))}]' name='$param\_$chn' onchange='setSelectedGroups(this.name, $chn, $prn);'/>"
+                    append html "</td>"
+                  }
+                  append html "<td>[getHelpIcon $param 475 125]</td>"
+                  append html "<td class='hidden'>[getTextField $param $ps($param) $chn $prn]</td>"
+                append html "</tr>"
+              append html "</table>"
+            append html "</td>"
+        append html "</tr>"
+
+        # javascript to set the groups
+        append html "<script type='text/javascript'>"
+          append html "var valChnGroupSelector = parseInt(jQuery('\#separate_CHANNEL_$chn\_$prn').val()),"
+          append html "arGrpChkBoxes = jQuery(\"\[name='DALI_GROUP_$chn'\]\");"
+          append html "for (var loop = 0; loop <=15; loop++) \{"
+            append html "if (isBitSet(valChnGroupSelector, loop)) \{"
+              append html "jQuery(arGrpChkBoxes\[loop\]).prop('checked', true);"
+            append html "\}"
+          append html "\};"
+
+          append html "setSelectedGroups = function(grpChkBox, chn, prn) {"
+            append html "var arChkBoxes = jQuery(\"\[name=\" + grpChkBox+ \"\]\"),"
+            append html "valChnGroupSelector = jQuery('\#separate_CHANNEL_'+chn+'_'+prn),"
+            append html "grpVal = 0;"
+
+            append html "jQuery.each(arChkBoxes, function(index, elm) {"
+              append html "if (jQuery(elm).prop('checked')) \{"
+                append html "grpVal += parseInt(jQuery(elm).val());"
+              append html "\}"
+            append html "});"
+
+            append html "jQuery(valChnGroupSelector).val(grpVal);"
+
+          append html "}"
+
+        append html "</script>"
+      }
+      return $html
+  }
+
 }

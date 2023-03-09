@@ -89,3 +89,14 @@
 "optionBlinkBillowFast" : "Schnelles An-/Abschwellen",
 "optionBlinkBehaviourOldValue" : "Verhalten beibehalten",
 "optionBlinkBehaviourDoNotCare" : "Verhalten ignorieren",
+
+"optionON" : "Ein",
+"optionOFF" : "Aus",
+
+"optionNoEffect" : "Effekt beenden",
+"optionRainbow" : "Regenbogen",
+"optionSunrise" : "Sonnenaufgang",
+"optionSunset" : "Sonnenuntergang",
+"optionForrest" : "Waldstimmung",
+"optionSignalingRed" : "Signal rot",
+"optionGreenBillow" : "Gr%fcnes Pulsieren",

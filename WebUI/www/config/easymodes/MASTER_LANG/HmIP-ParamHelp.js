@@ -245,7 +245,7 @@ jQuery.extend(true,langJSON, {
       "Wir empfehlen die Einstellung mit deaktivierten Parameter, sofern dies nicht aus den oben genannten Gr%FCnden erforderlich ist.",
 
     "LED_DISABLE_CHANNELSTATE" : 
-      "Durch Aktivieren dieses Parameters ist die interne LED wie im Funktionstest bei jeder Bewegung aktiv.<br/><br/>" +
+      "Durch Deaktivieren dieses Parameters ist die interne LED wie im Funktionstest bei jeder Bewegung aktiv.<br/><br/>" +
        "Achtung, dies hat deutlichen Einfluss auf die Batterielebensdauer. Nutzen Sie diese Funktion daher nur tempor%E4r, um den Erfassungsbereich zu optimieren.",
 
     "OUTPUT_SWAP" :
@@ -384,7 +384,7 @@ jQuery.extend(true,langJSON, {
 
     "POWERUP_ON_HUE" :
       "Farbton nach Zufuhr der Versorgungsspannung.<br/><br/>" +
-      "(360 = letzter 'Ein'-Wert); 361 = keine %C4nderung)",
+      "(360 = letzter 'Ein'-Wert; 361 = keine %C4nderung)",
 
     "POWERUP_ON_SATURATION":
       "Farbs%E4ttigung nach Zufuhr der Versorgungsspannung.<br/><br/>" +
@@ -414,6 +414,11 @@ jQuery.extend(true,langJSON, {
       "<b>Dimmer</b>: %DCber die Tasten Plus und Minus kann ein Ziellevel eingestellt werden.<br/><br/>" +
       "<b>Rolladen/Jalousie</b>: %DCber Tasten Rauf und Runter kann ein Ziellevel eingestellt werden.<br/><br/>" +
       "<b>Schaltaktor</b>: %DCber die Tasten f%FCr Ein und Aus kann der Ziellevel 100% bzw 0% eingestellt werden.<br/><br/>",
+
+    "DALI_GROUP" :
+      "Hier%FCber kann das DALI-Ger%E4t bis zu 16 DALI-Gruppen zugeordnet werden. " +
+      "Die DALI-Gruppen k%F6nnen wie einzelne Kan%E4le angesprochen werden.<br/><br/>" +
+      "Zu beachten ist, dass die Funktionalit%E4t der DALI-Gruppe der Funktionalit%E4t der DALI-Leuchte entspricht, die der Gruppe zugeordnet ist und die niedrigste Kanalnummer hat.",
 
     "noMoreHelp" : ""
   },
@@ -656,7 +661,7 @@ jQuery.extend(true,langJSON, {
       "We recommend the setting with deactivated parameters, unless this is necessary for the reasons mentioned above.",
 
     "LED_DISABLE_CHANNELSTATE" :
-      "By activating this parameter, the internal LED is active with every movement just like in the function test.<br/><br/>" +
+      "By deactivating this parameter, the internal LED is active with every movement just like in the function test.<br/><br/>" +
       "Please note that this will influence on the battery lifetime. Therefore, only use this function temporarily to optimise the detection range.",
 
     "OUTPUT_SWAP" :
@@ -796,7 +801,7 @@ jQuery.extend(true,langJSON, {
 
     "POWERUP_ON_HUE" :
       "Colour shade after feeding the supply voltage.<br/><br/>" +
-      "(360 = last 'on' value); 361 = no change)",
+      "(360 = last 'on' value; 361 = no change)",
 
     "POWERUP_ON_SATURATION":
       "Colour saturation after feeding the supply voltage.<br/><br/>" +
@@ -826,6 +831,11 @@ jQuery.extend(true,langJSON, {
       "<b>Dimmer</b>: Via the keys Plus and Minus a target level can be set.<br/><br/>" +
       "<b>Shutter/blind</b>: A target level can be set via the Up and Down keys.<br/><br/>" +
       "<b>Switch actuator</b>: The target level 100% and 0% can be set via the keys for On and Off.<br/><br/>",
+
+    "DALI_GROUP" :
+      "Here, the DALI device can be assigned to up to 16 groups. " +
+      "The DALI groups can be addressed like individual channels.<br/><br/> " +
+      "Make sure that the functionality of the DALI group corresponds to the functionality of the DALI luminaire that is assigned to the group and has the lowest channel number.",
 
     "noMoreHelp" : ""
     }

@@ -26,7 +26,7 @@ set PROFILE_1(LONG_COND_VALUE_HI) 150
 set PROFILE_1(LONG_COND_VALUE_LO) 50
 set PROFILE_1(LONG_CT_OFF) 0
 set PROFILE_1(LONG_CT_ON) 0
-set PROFILE_1(LONG_JT_OFF) $RAMP_ON
+set PROFILE_1(LONG_JT_OFF) {1 3}
 set PROFILE_1(LONG_JT_ON) $RAMP_OFF
 set PROFILE_1(LONG_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(LONG_WP_OPTIONS) 0
@@ -34,7 +34,7 @@ set PROFILE_1(SHORT_COND_VALUE_HI) 150
 set PROFILE_1(SHORT_COND_VALUE_LO) 50
 set PROFILE_1(SHORT_CT_OFF) 0
 set PROFILE_1(SHORT_CT_ON) 0
-set PROFILE_1(SHORT_JT_OFF) $RAMP_ON
+set PROFILE_1(SHORT_JT_OFF) {1 3}
 set PROFILE_1(SHORT_JT_ON)  $RAMP_OFF
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(SHORT_WP_OPTIONS) 0
@@ -127,7 +127,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
-  upvar $pps          ps      
+  upvar $pps          ps
   upvar $pps_descr    ps_descr
 
   set url $iface_url($iface)
@@ -138,7 +138,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set parentType [string tolower $dev_descr_receiver(PARENT_TYPE)]
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
-  
+
 #  die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
   puts "<script type=\"text/javascript\">getLangInfo_Special('HmIP_DEVICES.txt');</script>"
@@ -155,8 +155,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "\${description_$prn}"
 
   append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+  array_clear options
+  set options(1) "\${optionLocked}"
+  set options(3) "\${optionOpen}"
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_JT_OFF|LONG_JT_OFF separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_JT_OFF]
+  append HTML_PARAMS(separate_$prn) "</td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
-  
+
 #2
   incr prn
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}

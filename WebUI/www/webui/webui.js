@@ -454,6 +454,12 @@ DEV_PATHS["HM-MOD-EM-8Bit"] = new Object();
 DEV_PATHS["HM-MOD-EM-8Bit"]["50"] = "/config/img/devices/50/142_hm-mod-em-8bit_thumb.png";
 DEV_PATHS["HM-MOD-EM-8Bit"]["250"] = "/config/img/devices/250/142_hm-mod-em-8bit.png";
 DEV_HIGHLIGHT["HM-MOD-EM-8Bit"] = new Object();
+DEV_LIST.push('HmIP-PDT-PE');
+DEV_DESCRIPTION["HmIP-PDT-PE"] = "PDT-PE";
+DEV_PATHS["HmIP-PDT-PE"] = new Object();
+DEV_PATHS["HmIP-PDT-PE"]["50"] = "/config/img/devices/50/113_hmip-psm-pe_thumb.png";
+DEV_PATHS["HmIP-PDT-PE"]["250"] = "/config/img/devices/250/113_hmip-psm-pe.png";
+DEV_HIGHLIGHT["HmIP-PDT-PE"] = new Object();
 DEV_LIST.push('BRC-H');
 DEV_DESCRIPTION["BRC-H"] = "BRC-H";
 DEV_PATHS["BRC-H"] = new Object();
@@ -2537,6 +2543,12 @@ DEV_HIGHLIGHT["263 147"] = new Object();
 DEV_HIGHLIGHT["263 147"]["1a"] = [2, 0.244, 0.312, 0.428, 0.168];
 DEV_HIGHLIGHT["263 147"]["1b"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["263 147"]["1"] = [5, '1a', '1b'];
+DEV_LIST.push('HmIP-PSM-PE-2');
+DEV_DESCRIPTION["HmIP-PSM-PE-2"] = "PSM-PE";
+DEV_PATHS["HmIP-PSM-PE-2"] = new Object();
+DEV_PATHS["HmIP-PSM-PE-2"]["50"] = "/config/img/devices/50/215_hmip-psm-pe-2_thumb.png";
+DEV_PATHS["HmIP-PSM-PE-2"]["250"] = "/config/img/devices/250/215_hmip-psm-pe-2.png";
+DEV_HIGHLIGHT["HmIP-PSM-PE-2"] = new Object();
 DEV_LIST.push('HM-WS550STH-O');
 DEV_DESCRIPTION["HM-WS550STH-O"] = "HM-WS550STH-O";
 DEV_PATHS["HM-WS550STH-O"] = new Object();
@@ -2730,6 +2742,12 @@ DEV_HIGHLIGHT["HmIP-BSL"]["14"] = [1, 0.525, 0.650, 0.025];
 DEV_HIGHLIGHT["HmIP-BSL"]["8"] = [1, 0.510, 0.360, 0.025];
 DEV_HIGHLIGHT["HmIP-BSL"]["9"] = [1, 0.510, 0.360, 0.025];
 DEV_HIGHLIGHT["HmIP-BSL"]["10"] = [1, 0.510, 0.360, 0.025];
+DEV_LIST.push('HmIP-PDT-CH');
+DEV_DESCRIPTION["HmIP-PDT-CH"] = "PDT-CH";
+DEV_PATHS["HmIP-PDT-CH"] = new Object();
+DEV_PATHS["HmIP-PDT-CH"]["50"] = "/config/img/devices/50/113_hmip-psm-ch_thumb.png";
+DEV_PATHS["HmIP-PDT-CH"]["250"] = "/config/img/devices/250/113_hmip-psm-ch.png";
+DEV_HIGHLIGHT["HmIP-PDT-CH"] = new Object();
 DEV_LIST.push('HmIP-WTH-B');
 DEV_DESCRIPTION["HmIP-WTH-B"] = "HmIP-WTH-B";
 DEV_PATHS["HmIP-WTH-B"] = new Object();
@@ -2742,6 +2760,12 @@ DEV_PATHS["HM-LC-DDC1-PCB"] = new Object();
 DEV_PATHS["HM-LC-DDC1-PCB"]["50"] = "/config/img/devices/50/54a_lc-ddc1_thumb.png";
 DEV_PATHS["HM-LC-DDC1-PCB"]["250"] = "/config/img/devices/250/54a_lc-ddc1-pcb.png";
 DEV_HIGHLIGHT["HM-LC-DDC1-PCB"] = new Object();
+DEV_LIST.push('HmIP-PSM-CH-2');
+DEV_DESCRIPTION["HmIP-PSM-CH-2"] = "PSM-CH";
+DEV_PATHS["HmIP-PSM-CH-2"] = new Object();
+DEV_PATHS["HmIP-PSM-CH-2"]["50"] = "/config/img/devices/50/216_hmip-psm-ch-2_thumb.png";
+DEV_PATHS["HmIP-PSM-CH-2"]["250"] = "/config/img/devices/250/216_hmip-psm-ch-2.png";
+DEV_HIGHLIGHT["HmIP-PSM-CH-2"] = new Object();
 DEV_LIST.push('HmIP-STV');
 DEV_DESCRIPTION["HmIP-STV"] = "HmIP-STV";
 DEV_PATHS["HmIP-STV"] = new Object();
@@ -2973,6 +2997,12 @@ DEV_HIGHLIGHT["HmIP-RCV-50"]["47"] = [5, 'S47'];
 DEV_HIGHLIGHT["HmIP-RCV-50"]["48"] = [5, 'S48'];
 DEV_HIGHLIGHT["HmIP-RCV-50"]["49"] = [5, 'S49'];
 DEV_HIGHLIGHT["HmIP-RCV-50"]["50"] = [5, 'S50'];
+DEV_LIST.push('ELV-SH-SW1-BAT');
+DEV_DESCRIPTION["ELV-SH-SW1-BAT"] = "HmIP-PCBS-BAT";
+DEV_PATHS["ELV-SH-SW1-BAT"] = new Object();
+DEV_PATHS["ELV-SH-SW1-BAT"]["50"] = "/config/img/devices/50/151_hmip-pcbs-bat_thumb.png";
+DEV_PATHS["ELV-SH-SW1-BAT"]["250"] = "/config/img/devices/250/151_hmip-pcbs-bat.png";
+DEV_HIGHLIGHT["ELV-SH-SW1-BAT"] = new Object();
 DEV_LIST.push('Wired-LAN-Sniffer');
 DEV_DESCRIPTION["Wired-LAN-Sniffer"] = "Wired-LAN-Sniffer";
 DEV_PATHS["Wired-LAN-Sniffer"] = new Object();
@@ -3078,6 +3108,15 @@ DEV_PATHS["HmIP-DRDI3"] = new Object();
 DEV_PATHS["HmIP-DRDI3"]["50"] = "/config/img/devices/50/204_hmip-drdi3_thumb.png";
 DEV_PATHS["HmIP-DRDI3"]["250"] = "/config/img/devices/250/204_hmip-drdi3.png";
 DEV_HIGHLIGHT["HmIP-DRDI3"] = new Object();
+DEV_LIST.push('HmIP-BBL-I');
+DEV_DESCRIPTION["HmIP-BBL-I"] = "BBL";
+DEV_PATHS["HmIP-BBL-I"] = new Object();
+DEV_PATHS["HmIP-BBL-I"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BBL-I"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HmIP-BBL-I"] = new Object();
+DEV_HIGHLIGHT["HmIP-BBL-I"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL-I"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL-I"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('HmIP-PDT');
 DEV_DESCRIPTION["HmIP-PDT"] = "PDT";
 DEV_PATHS["HmIP-PDT"] = new Object();
@@ -3126,6 +3165,12 @@ DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
 DEV_HIGHLIGHT["HM-LC-Dim1T-Pl"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HmIP-DRG-DALI');
+DEV_DESCRIPTION["HmIP-DRG-DALI"] = "HmIP-DRG-DALI";
+DEV_PATHS["HmIP-DRG-DALI"] = new Object();
+DEV_PATHS["HmIP-DRG-DALI"]["50"] = "/config/img/devices/50/211_hmip-drg-dali_thumb.png";
+DEV_PATHS["HmIP-DRG-DALI"]["250"] = "/config/img/devices/250/211_hmip-drg-dali.png";
+DEV_HIGHLIGHT["HmIP-DRG-DALI"] = new Object();
 DEV_LIST.push('HM-LC-Dim2T-SM-644');
 DEV_DESCRIPTION["HM-LC-Dim2T-SM-644"] = "HM-LC-Dim2T-SM";
 DEV_PATHS["HM-LC-Dim2T-SM-644"] = new Object();
@@ -3371,6 +3416,12 @@ DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["18"] = [2, 0.204, 0.244, 0.556, 0.12];
 DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["17"] = [2, 0.204, 0.68, 0.556, 0.12];
 DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["20"] = [2, 0.204, 0.244, 0.556, 0.12];
 DEV_HIGHLIGHT["ZEL STG RM DWT 10"]["19"] = [2, 0.204, 0.68, 0.556, 0.12];
+DEV_LIST.push('HmIPW-SCTHD');
+DEV_DESCRIPTION["HmIPW-SCTHD"] = "HmIPW-SCTHD";
+DEV_PATHS["HmIPW-SCTHD"] = new Object();
+DEV_PATHS["HmIPW-SCTHD"]["50"] = "/config/img/devices/50/212_hmipw-scthd_thumb.png";
+DEV_PATHS["HmIPW-SCTHD"]["250"] = "/config/img/devices/250/212_hmipw-scthd.png";
+DEV_HIGHLIGHT["HmIPW-SCTHD"] = new Object();
 DEV_LIST.push('HM-TC-IT-WM-W-EU');
 DEV_DESCRIPTION["HM-TC-IT-WM-W-EU"] = "HM-TC-IT-WM-W-EU";
 DEV_PATHS["HM-TC-IT-WM-W-EU"] = new Object();
@@ -5947,6 +5998,9 @@ elvST['TX_MINDELAY_VALUE'] = '${stringTableTxMinDelayValue}';
 elvST['TX_THRESHOLD_PERCENT'] = '${stringTableTxThresholdPercent}';
 elvST['TX_THRESHOLD_POWER'] = '${stringTablePowerMeterTxThresholdPower}';
 elvST['UNIVERSAL_LIGTH_RECEIVER|LEVEL'] = '${lblColorBrightness}';
+elvST['UNIVERSAL_LIGTH_RECEIVER|ERROR_LIMIT'] = '${stringTableErrorLimitULR}';
+elvST['UNIVERSAL_LIGTH_RECEIVER|ERROR_LIMIT=FALSE'] = '${stringTableErrorLimitULR_False}';
+elvST['UNIVERSAL_LIGTH_RECEIVER|ERROR_LIMIT=TRUE'] = '${stringTableErrorLimitULR_True}';
 elvST['UNREACH=FALSE'] = '${stringTableUnreachFalse}';
 elvST['UNREACH=TRUE'] = '${stringTableUnreachTrue}';
 elvST['UPDATE_PENDING'] = '${stringTableUpdatePending}';
@@ -7052,6 +7106,8 @@ ConfigData = Singleton.create({
       window.setTimeout(function() {jQuery("#PagePath").css('color',"white");},100);
       ConfigData.isPresent = true;
       if (ConfigData.showMessage) { this.hideMessage(); }
+      showDutyCycleHmIP(); // The DeviceList is now available for displaying the duty cycle and carrier sense of the HAP's
+      showCarrierSense();
       if (ConfigData.callback) { ConfigData.callback(); }
     });
   },
@@ -7190,6 +7246,7 @@ WebUI = Singleton.create({
     if(typeof dcTimeout == "undefined") {
       dcTimeout = window.setTimeout(function () {
         showDutyCycle();
+        showCarrierSense();
         delete dcTimeout;
       }, 10);
     }
@@ -7419,14 +7476,13 @@ WebUI = Singleton.create({
         showDutyCycle();
       }, 1);
 
-      // Check the dutyCycle periodically
+      // Check the dutyCycle and carrierSense periodically
       new PeriodicalExecuter(function () {
         showDutyCycle();
+        showCarrierSense();
       }, checkDutyCycleInterval);
 
       if (getProduct() >= 3) {
-
-        drapMigration();
 
         /* See SPHM-566
         if (!homematic('CCU.existsFile', {'file': LegacyAPIMigrationDialog.CONFIRM_FILE})) {
@@ -9718,6 +9774,27 @@ Channel = Class.create({
     devMode, arBlindFW;
 
 
+    // Set the master parameter UNIVERSAL_LIGHT_MAX_CAPABILITIES of the HmIP-DRG-DALI Gateway as meta data
+    // Channels 1 - 32 = connected dali devices. Here we need only set the meta data for those channels where a device is connected.
+    // The first channel with no connected device has the UNIVERSAL_LIGHT_MAX_CAPABILITIES set to 5. All following channels don't have a device connected, so we can skip the rest.
+    //
+    // For the group channels 33 - 48 we need all UNIVERSAL_LIGHT_MAX_CAPABILITIES.
+    if ((device.typeName == "HmIP-DRG-DALI")) {
+      if ((data.channelType == "UNIVERSAL_LIGHT_RECEIVER") && (((data.index < 33) && (typeof noMoreDaliDevices == "undefined"))  || (data.index >= 33)))  {
+        var maxCap = homematic("Interface.getMasterValue", {
+          "interface": "HmIP-RF",
+          "address": data.address,
+          "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"
+        });
+        homematic("Interface.setMetadata", {"objectId": data.id, "dataId": "maxCap", "value": maxCap});
+        if ((data.index < 33) && (maxCap == 5)) {
+           noMoreDaliDevices = true;
+        }
+        this.daliMaxCapabilities = maxCap; // currently used for determining the target channels of the weekly program.
+      }
+    }
+
+
     this.updateEvent = new eQ3.Event();
 
     var chType = data["channelType"];
@@ -11900,7 +11977,9 @@ EulaDialog.RESULT_YES = 1;
 /**
  * Einfache Kanalauswahl.
  **/
+
 ChannelChooser = Singleton.create({
+
   SHOW_READABLE: 0x1,    // zeigt lesbare Kanäle an
   SHOW_WRITABLE: 0x2,    // zeigt schreibbare Kanäle an
   SHOW_EVENTABLE: 0x4,    // zeigt Kanäle mit Ereignisbehandlung an
@@ -11959,6 +12038,7 @@ ChannelChooser = Singleton.create({
     this.WGDChannelInUse = [];
     this.WGDdevice = "";
     this.arWGDTiles = [];
+    this.noMoreDaliChannels = false;
   },
 
   sortByAddress: function(channels) {
@@ -11980,6 +12060,10 @@ ChannelChooser = Singleton.create({
       (this.AddressFilter.match(channel.address))             &&
       (this.RoomFilter.matchArray(channel.rooms))             &&
       (this.FuncFilter.matchArray(channel.subsections)));     
+  },
+
+  setMetaData: function(objectId, dataId, val) {
+    homematic("Interface.setMetadata", {"objectId": objectId, "dataId": dataId, "value": val});
   },
 
   filterHmIPChannels4ProgramConditions: function(channel, arChannels) {
@@ -12008,23 +12092,58 @@ ChannelChooser = Singleton.create({
       && (channelTypeName != "hmip-pcbs")
       ) {arChannels.push(channel);}
 
-    if ((channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") && (channelTypeName == "hmip-rgbw")) {
-      oMaintChannel = DeviceList.getChannelByAddress(channel.address.split(":")[0] + ":0"); // The maintenance channel stores the deviceMode
-      deviceMode = parseInt(homematic("Interface.getMetadata", {"objectId": oMaintChannel.id, "dataId": "deviceMode"}));
+    if (channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") {
+      if (channelTypeName == "hmip-rgbw") {
+        oMaintChannel = DeviceList.getChannelByAddress(channel.address.split(":")[0] + ":0"); // The maintenance channel stores the deviceMode
+        deviceMode = parseInt(homematic("Interface.getMetadata", {
+          "objectId": oMaintChannel.id,
+          "dataId": "deviceMode"
+        }));
 
-      switch (deviceMode) {
-        case 0:
-        case 1:
-          // RGB/RGBW Mode
-          if (channel.index == 1) {arChannels.push(channel);}
-          break;
-        case 2:
-          // Tunable White Mode
-          if (channel.index == 1 || channel.index == 2) {arChannels.push(channel);}
-          break;
-        default:
-          // PWM Mode - all channels visible
+        switch (deviceMode) {
+          case 0:
+          case 1:
+            // RGB/RGBW Mode
+            if (channel.index == 1) {
+              arChannels.push(channel);
+            }
+            break;
+          case 2:
+            // Tunable White Mode
+            if (channel.index == 1 || channel.index == 2) {
+              arChannels.push(channel);
+            }
+            break;
+          default:
+            // PWM Mode - all channels visible
+            arChannels.push(channel);
+        }
+      }
+
+      if (channelTypeName == "hmip-drg-dali") {
+        if ((channel.index != 0) && (channel.index <= 32)) {
+          // Dali channels 1 - 32
+        if (this.noMoreDaliChannels == false) {
+          chnDescription = homematic("Interface.getParamset", {
+            "interface": "HmIP-RF",
+            "address": channel.address,
+            "paramsetKey": "MASTER"
+          });
+
+          if (parseInt(chnDescription["DALI_ADDRESS"]) != 255) {
+            arChannels.push(channel);
+            // Store UNIVERSAL_LIGHT_MAX_CAPABILITIES as meta data
+            // Because the user might have connected another DALI device to this channel we must set the meta data each time
+            //this is not necessary anymore - this.setMetaData(channel.id, "maxCap", chnDescription["UNIVERSAL_LIGHT_MAX_CAPABILITIES"]);
+           } else {
+            this.noMoreDaliChannels = true;
+          }
+        }
+
+        } else if ((channel.index == 0) || (channel.id >=33)) {
+          // Maintenance and group channels
           arChannels.push(channel);
+        }
       }
     }
 
@@ -12080,23 +12199,58 @@ ChannelChooser = Singleton.create({
         if ((channel.channelType == "MAINTENANCE") || ((channel.channelType == "ACCESS_TRANSCEIVER") && (channel.index % 2 != 0))) {
           arChannels.push(channel);
         }
-      } else if ((channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") && (channelTypeName == "hmip-rgbw")) {
-        oMaintChannel = DeviceList.getChannelByAddress(channel.address.split(":")[0] + ":0"); // The maintenance channel stores the deviceMode
-        deviceMode = parseInt(homematic("Interface.getMetadata", {"objectId": oMaintChannel.id, "dataId": "deviceMode"}));
+      } else if (channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") {
+        if (channelTypeName == "hmip-rgbw") {
+          oMaintChannel = DeviceList.getChannelByAddress(channel.address.split(":")[0] + ":0"); // The maintenance channel stores the deviceMode
+          deviceMode = parseInt(homematic("Interface.getMetadata", {
+            "objectId": oMaintChannel.id,
+            "dataId": "deviceMode"
+          }));
 
-        switch (deviceMode) {
-          case 0:
-          case 1:
-            // RGB/RGBW Mode
-            if (channel.index == 1) {arChannels.push(channel);}
-            break;
-          case 2:
-            // Tunable White Mode
-            if (channel.index == 1 || channel.index == 2) {arChannels.push(channel);}
-            break;
-          default:
-            // PWM Mode - all channels visible
+          switch (deviceMode) {
+            case 0:
+            case 1:
+              // RGB/RGBW Mode
+              if (channel.index == 1) {
+                arChannels.push(channel);
+              }
+              break;
+            case 2:
+              // Tunable White Mode
+              if (channel.index == 1 || channel.index == 2) {
+                arChannels.push(channel);
+              }
+              break;
+            default:
+              // PWM Mode - all channels visible
+              arChannels.push(channel);
+          }
+        }
+
+        if (channelTypeName == "hmip-drg-dali") {
+          if ((channel.index != 0) && (channel.index <= 32)) {
+            // Dali channels 1 - 32
+            if (this.noMoreDaliChannels == false) {
+              chnDescription = homematic("Interface.getParamset", {
+                "interface": "HmIP-RF",
+                "address": channel.address,
+                "paramsetKey": "MASTER"
+              });
+
+              if (parseInt(chnDescription["DALI_ADDRESS"]) != 255) {
+                arChannels.push(channel);
+                // Store UNIVERSAL_LIGHT_MAX_CAPABILITIES as meta data if not yet available
+                // Because the user might have connected another DALI device to this channel we must set the meta data each time
+                //this is not necessary anymore - this.setMetaData(channel.id, "maxCap", chnDescription["UNIVERSAL_LIGHT_MAX_CAPABILITIES"]);
+              } else {
+                this.noMoreDaliChannels = true;
+              }
+            }
+
+          } else if ((channel.index == 0) || (channel.id >=33)) {
+            // Maintenance and group channels
             arChannels.push(channel);
+          }
         }
 
       } else if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) && ((channelTypeName == "hmipw-wgd") || (channelTypeName == "hmipw-wgd-pl"))) {
@@ -12165,6 +12319,7 @@ ChannelChooser = Singleton.create({
    **/
   filter: function(channels)
   {
+    this.noMoreDaliChannels = false;
     var result = new Array();
 
     channels.each(function(channel) {
@@ -12444,6 +12599,7 @@ MultiChannelChooser = Singleton.create({
     this.WGDChannelInUse = [];
     this.WGDdevice = "";
     this.arWGDTiles = [];
+    this.noMoreDaliChannels = false;
   },
   
   /**
@@ -12463,21 +12619,25 @@ MultiChannelChooser = Singleton.create({
       (this.RoomFilter.matchArray(channel.rooms))             &&
       (this.FuncFilter.matchArray(channel.subsections)));     
   },
-  
+
+  setMetaData: function(objectId, dataId, val) {
+    homematic("Interface.setMetadata", {"objectId": objectId, "dataId": dataId, "value": val});
+  },
 
   filterHmIPChannels: function(channel, arChannels) {
     conInfo("filterHmIPChannels");
-    var channelTypeName = channel.typeName.toLowerCase();
+    var channelTypeName = channel.typeName.toLowerCase(),
+      oMaintChannel, deviceMode;
 
     if (channel.isVisible
       && (channel.channelType != "ACCESSPOINT_GENERIC_RECEIVER")
       && (channel.channelType != "DISPLAY_INPUT_TRANSMITTER")
       && (channel.channelType != "DISPLAY_LEVEL_INPUT_TRANSMITTER")
       && (channel.channelType != "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")
+      && (channel.channelType != "UNIVERSAL_LIGHT_RECEIVER")
     ) {arChannels.push(channel);}
 
     if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) && ((channelTypeName == "hmipw-wgd")) || ((channelTypeName == "hmipw-wgd-pl"))) {
-
       var  wgdScreenOrder, screenEndID = "END",  counter, chnDescription, curDevice, tilesA = [1,3,7], tilesB = [0,1], loop, endOfScreens = false,
         self = this;
       if (channel.index == 41) {
@@ -12517,11 +12677,67 @@ MultiChannelChooser = Singleton.create({
       }
     }
 
+    if (channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") {
+      if (channelTypeName == "hmip-rgbw") {
+        oMaintChannel = DeviceList.getChannelByAddress(channel.address.split(":")[0] + ":0"); // The maintenance channel stores the deviceMode
+        deviceMode = parseInt(homematic("Interface.getMetadata", {
+          "objectId": oMaintChannel.id,
+          "dataId": "deviceMode"
+        }));
+
+        switch (deviceMode) {
+          case 0:
+          case 1:
+            // RGB/RGBW Mode
+            if (channel.index == 1) {
+              arChannels.push(channel);
+            }
+            break;
+          case 2:
+            // Tunable White Mode
+            if (channel.index == 1 || channel.index == 2) {
+              arChannels.push(channel);
+            }
+            break;
+          default:
+            // PWM Mode - all channels visible
+            arChannels.push(channel);
+        }
+      }
+
+      if (channelTypeName == "hmip-drg-dali") {
+        if ((channel.index != 0) && (channel.index <= 32)) {
+          // Dali channels 1 - 32
+          if (this.noMoreDaliChannels == false) {
+            chnDescription = homematic("Interface.getParamset", {
+              "interface": "HmIP-RF",
+              "address": channel.address,
+              "paramsetKey": "MASTER"
+            });
+
+            if (parseInt(chnDescription["DALI_ADDRESS"]) != 255) {
+              arChannels.push(channel);
+              // Store UNIVERSAL_LIGHT_MAX_CAPABILITIES as meta data
+              // Because the user might have connected another DALI device to this channel we must set the meta data each time
+              //this is not necessary anymore - this.setMetaData(channel.id, "maxCap", chnDescription["UNIVERSAL_LIGHT_MAX_CAPABILITIES"]);
+            } else {
+              this.noMoreDaliChannels = true;
+            }
+          }
+
+        } else if ((channel.index == 0) || (channel.id >=33)) {
+          // Maintenance and group channels
+          arChannels.push(channel);
+        }
+      }
+    }
+
     return arChannels;
   },
 
   filter: function(channels)
   {
+    this.noMoreDaliChannels = false;
     var result = new Array();
 
     channels.each(function(channel) {
@@ -19741,6 +19957,7 @@ SwitchCombinedParamDialog = Class.create({
     this.initValue = value;
 
     this.windowDrive = "HmIP-MOD-WD-VK";
+    this.dali = "HmIP-DRG-DALI";
 
     this.arNoOntimeAvailable = []; // here we can add devices with Value and Unit instead of Ontime in seconds
 
@@ -19803,6 +20020,10 @@ SwitchCombinedParamDialog = Class.create({
     return (this.deviceType == this.windowDrive) ? true : false;
   },
 
+  _deviceIsDali: function() {
+    return (this.deviceType == this.dali) ? true : false;
+  },
+
   _getOnTimeVal: function(val, unit) {
     var result;
 
@@ -19854,14 +20075,27 @@ SwitchCombinedParamDialog = Class.create({
       if (this.isOntimeAvailable()) {
         if ((this.chkBoxTimeLimitElm.prop("checked") == false) || (durationValue == 0) || (durationValue == 31)) {
           if (! this._deviceIsWindowDrive()) {
-            result = "S=" + state;
+            if (! this._deviceIsDali()) {
+              result = "S=" + state;
+            } else {
+              // The DALI STATE is LEVEL
+              state = (state == "true") ? 100 : 0;
+              result = "L=" + state;
+            }
           } else {
             result = "VL=" + state;
           }
 
         } else {
           if (! this._deviceIsWindowDrive()) {
-            result = "S=" + state + ",OT=" + this._getOnTimeVal(durationValue, durationUnit);
+            if (! this._deviceIsDali()) {
+              result = "S=" + state + ",OT=" + this._getOnTimeVal(durationValue, durationUnit);
+            } else {
+              // The DALI STATE is LEVEL
+              state = (state == "true") ? 100 : 0;
+              result = "L=" + state + ",OT=" + this._getOnTimeVal(durationValue, durationUnit);
+            }
+
           } else {
             result = "VL=" + state + ",OT=" + this._getOnTimeVal(durationValue, durationUnit);
           }
@@ -19919,6 +20153,10 @@ SwitchCombinedParamDialog = Class.create({
       permanentHR = 31;
       minDuration = 0;
       maxDuration = 16343;
+    }
+
+    if (this._deviceIsDali()) {
+      valueS = (valueS == "100") ? "true" : "false";
     }
 
     this.stateElm.val(valueS);
@@ -20278,121 +20516,6 @@ WiredDisplaySystemKey = Class.create({
   }
   
 });
-/**
- * forcedDRAPupdate.js
- **/
-  ForcedDRAPUpdate = Class.create(YesNoDialog,{
- 
-  initialize: function(oDraps2Update, callback)
-  {
-
-    this.RESULT_NO = 0;
-    this.RESULT_YES = 1;
-
-    var _this_ = this;
-
-    this.title = translateKey("dialogHint");
-
-    this.arDraps = oDraps2Update;
-
-    this.content = this._getHTML();
-
-    this.m_contentType = "html";
-    this.m_callback = callback;
-    this.m_layer = document.createElement("div");
-    this.m_layer.className = "YesNoDialogLayer"; 
-
-    var dialog = document.createElement("div");
-    dialog.className = "YesNoDialog";
-    
-    var titleElement = document.createElement("div");
-    titleElement.className = "YesNoDialogTitle";
-    titleElement.appendChild(document.createTextNode(this.title));
-    titleElement.onmousedown = function(event) { new Drag(this.parentNode, event); };
-    dialog.appendChild(titleElement);
-    
-    var contentWrapper = document.createElement("div");
-    contentWrapper.className = "YesNoDialogContentWrapper";
-    
-    var contentElement = document.createElement("div");
-    contentElement.className = "YesNoDialogContent";
-
-    if (this.m_contentType == "html") {
-      contentElement.innerHTML = this.content;
-    } else {
-      contentElement.appendChild(document.createTextNode(this.content));
-    }
-
-    contentWrapper.appendChild(contentElement);
-    
-    dialog.appendChild(contentWrapper);
-
-    var footer = document.createElement("div");
-    footer.className= "YesNoDialogFooter";
-    
-    var yesButton = document.createElement("div");
-    yesButton.className = "YesNoDialog_yesButton borderRadius5px colorGradient50px";
-    yesButton.appendChild(document.createTextNode(translateKey('dialogYes')));
-    yesButton.onclick = function() { _this_.yes(); };
-    yesButton.id="btnYes";
-    footer.appendChild(yesButton);
-    
-    var noButton = document.createElement("div");
-    noButton.className = "YesNoDialog_noButton borderRadius5px colorGradient50px";
-    noButton.appendChild(document.createTextNode(translateKey('dialogNo')));
-    noButton.onclick = function() { _this_.no(); };
-    noButton.id = "btnNo";
-    footer.appendChild(noButton);
-    
-    dialog.appendChild(footer);
-    
-    this.m_layer.appendChild(dialog);
-    Layer.add(this.m_layer);
-
-    this.btnTextYes(translateKey("lblGotoUpdate"));
-    this.btnTextNo(translateKey("btnCancel"));
-
-    translatePage(".YesNoDialog");
-
-    this.setHeight();
-    this.setWidth(600);
-
-  },
-
-  _getHTML: function() {
-    var html = "";
-
-    html += translateKey("headerDrapUpdateNecessary");
-
-    html += "<hr>";
-
-    html += translateKey("drapUpdateNecessary");
-
-    html += "<table class='alignCenter' align='center'>";
-    html += "<tr>";
-      html += "<th style='margin-right: 50px;'>Seriennummer</th>";
-      html += "<th style='width:50px;'></th>";
-      html += "<th>Firmwareversion</th>";
-    html += "</tr>";
-    jQuery.each(this.arDraps, function(index, drap) {
-            html += "<tr>";
-              html += "<td class='alignCenter'>";
-                html += "<span style='font-weight: normal; font-size: 0.8em !important;'>"+drap.address+"</span>";
-              html += "</td>";
-              html += "<td></td>";
-              html += "<td class='alignCenter'>";
-                html += "<span style='font-weight: normal; font-size: 0.8em !important;''>"+drap.curFW+"</span>";
-              html += "</td>";
-
-            html += "</tr>";
-
-    });
-    html += "</table>";
-    return html;
-  }
-  
-});
-
 var
   getWGDImagePath = function() {
     return "/ise/img/icons_hmipw_wgd/";
@@ -20551,15 +20674,21 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
     this.iface = "HmIP-RF";
 
+    this.rgbw = "HmIP-RGBW";
+    this.drgDali = "HmIP-DRG-DALI";
+
     this.deviceType = deviceType;
     this.chnAddress = chnAddress;
     this.initValue = value;
 
     this.maxOnTime = 111600;
 
+    this.valHCL = 10200;
+    this.valDim2Warm = 10150;
+
 
     this.arNoOntimeAvailable = [];
-    this.showRampTimeOffElm = ["HmIP-RGBW"];
+    this.showRampTimeOffElm = [this.rgbw, this.drgDali];
 
     var dialog = document.createElement("div");
     dialog.className = "YesNoDialog";
@@ -20624,7 +20753,13 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
   setDialogElements: function() {
     var self = this;
+    this.activeDialog = "color"; // default = color - valid values: color, colorTemp, effect
+    this.btnColorDialog = jQuery("#dialogColor");
+    this.btnColorTempDialog = jQuery("#dialogColorTemp");
+    this.btnEffectDialog = jQuery("#dialogEffect");
+
     this.anchorColorPicker = jQuery("#anchorColorPicker");
+    this.trColor = jQuery(".j_trColor");
     this.trDurationElms = jQuery("[name='trDuration']");
     this.trRampTimeElms = jQuery("[name='trRampTime']");
     this.trRampTimeOff = jQuery("#trRampTimeOff");
@@ -20639,6 +20774,9 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     this.rampTimeOffUnitElm = jQuery("#combinedParam_RampTimeOffUnit");
     this.rampTimeOffValueElm = jQuery("#combinedParam_RampTimeOffValue");
 
+    this.onTimePanel = jQuery(".j_trOnTimePanel");
+
+
     this.colorPreviewElm = jQuery("#bckGndElm");
 
     this.colorPicker;
@@ -20646,14 +20784,24 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
     this.hueElm = jQuery("#hueElm");
     this.satElm = jQuery("#satElm");
+
     this.HUE;
     this.SATURATION;
 
     this.lastValHueElm = jQuery("#lastValHue");
     this.lastValSatElm = jQuery("#lastValSat");
 
+    // TW
+    this.trTWSlider = jQuery("[name='trTWSlider']");
+    this.sliderElm = jQuery("#twSlider");
+    this.sliderInfoElm = jQuery("#tcInfoField");
+    this.btnHCLElm = jQuery("#btnHCL");
+    this.btnDim2WarmElm = jQuery("#btnDim2Warm");
     this.colorTemperature = 0;
 
+    // Effects
+    this.trEffects = jQuery("[name='trEffects']");
+    this.effectSelBox = jQuery("#effectSelBox");
   },
 
   _getOnTimeVal: function(val, unit) {
@@ -20721,30 +20869,81 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     this.setHeight();
   },
 
+  getActiveDialog: function() {return this.activeDialog;},
+
+  initSubDialogs: function() {
+    var self = this;
+    this.btnColorDialog.click(function() {
+      JControlBtn.on(jQuery(this));
+      JControlBtn.off(jQuery(self.btnColorTempDialog));
+      JControlBtn.off(jQuery(self.btnEffectDialog));
+      self.trTWSlider.hide();
+      self.trEffects.hide();
+      self.trRampTimeElms.show();
+      self.trColor.show();
+      self.onTimePanel.show();
+      self.resetHeight();
+      self.activeDialog = "color";
+    });
+
+    this.btnColorTempDialog.click(function() {
+      JControlBtn.on(jQuery(this));
+      JControlBtn.off(jQuery(self.btnColorDialog));
+      JControlBtn.off(jQuery(self.btnEffectDialog));
+      self.trColor.hide();
+      self.trEffects.hide();
+      self.trRampTimeElms.show();
+      self.trTWSlider.show();
+      self.onTimePanel.show();
+      self.resetHeight();
+      self.activeDialog = "colorTemp";
+    });
+
+    this.btnEffectDialog.click(function() {
+      JControlBtn.on(jQuery(this));
+      JControlBtn.off(jQuery(self.btnColorDialog));
+      JControlBtn.off(jQuery(self.btnColorTempDialog));
+      self.trRampTimeElms.hide();
+      self.trColor.hide();
+      self.trTWSlider.hide();
+      self.onTimePanel.hide();
+      self.trEffects.show();
+      self.resetHeight();
+      self.activeDialog = "effect";
+    });
+  },
 
   initDialog: function() {
     var self = this;
+    var arElmValues, valueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueSlider, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration, effect;
 
-    var arElmValues, valueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration;
+    this.initSubDialogs();
 
     if (this.isOntimeAvailable()) {
       arElmValues = this.initValue.split(",");
 
-      valueL = arElmValues[0].split("=")[1];
-      valueDVtmp = arElmValues[1].split("=")[1];
+      valueL = this.getConfigStringValue("L");
+      valueDVtmp = this.getConfigStringValue("OT");
       valueDU = this._getUnitInDU4OnTime(valueDVtmp);
 
 
-      this.colorPickerInit.level = parseInt(arElmValues[0].split("=")[1]);
-      this.colorPickerInit.hue = parseInt(arElmValues[3].split("=")[1]);
-      this.colorPickerInit.saturation = parseInt(arElmValues[4].split("=")[1]);
+      this.colorPickerInit.level = parseInt(valueL);
+      this.colorPickerInit.hue = parseInt(this.getConfigStringValue("H"));
+      this.colorPickerInit.saturation = parseInt(this.getConfigStringValue("SAT"));
+      this.colorTemperature = parseInt(this.getConfigStringValue("TC"));
 
       this.HUE = this.colorPickerInit.hue;
       this.SATURATION = this.colorPickerInit.saturation;
 
-      if (this.HUE > 360) {this.hueElm.hide();this.hueElm.parent().next().hide();this.lastValHueElm.prop("checked", true);}
-      if (this.SATURATION > 100) {this.satElm.hide(); this.satElm.parent().next().hide();this.lastValSatElm.prop("checked", true);}
-
+      if ((this.colorTemperature == -1) || (this.colorTemperature == 0)) {
+        if (this.HUE > 360) {this.hueElm.hide();this.hueElm.parent().next().hide();this.lastValHueElm.prop("checked", true);}
+        if (this.SATURATION > 100) {this.satElm.hide(); this.satElm.parent().next().hide();this.lastValSatElm.prop("checked", true);}
+      } else {
+        this.HUE = 0;
+        this.SATURATION = 0;
+        this.colorPickerInit.hue = this.HUE;
+        this.colorPickerInit.saturation = this.SATURATION;
+      }
 
       if (valueDU == 2) {
         valueDV = parseInt(valueDVtmp / 3600);
@@ -20754,7 +20953,8 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
         valueDV = valueDVtmp;
       }
 
-      valueRTVtmp = arElmValues[2].split("=")[1];
+      //valueRTVtmp = arElmValues[2].split("=")[1];
+      valueRTVtmp = this.getConfigStringValue("RT");
 
       valueRTU = this._getUnitInDU4RampTime(valueRTVtmp);
 
@@ -20772,9 +20972,14 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       maxDuration = 16343;
     }
     // RAMPTIME_OFF
+
     if (arElmValues.length >= 7) {
-      valueRTTOV = arElmValues[5].split("=")[1];
-      valueRTTOU = arElmValues[6].split("=")[1];
+      valueRTTOV = this.getConfigStringValue("RTTOV");
+      valueRTTOV = (valueRTTOV == -1 ) ? this.getConfigStringValue("RTTDV") : valueRTTOV;
+
+      valueRTTOU = this.getConfigStringValue("RTTOU");
+      valueRTTOU = (valueRTTOU == -1 ) ? this.getConfigStringValue("RTTDU") : valueRTTOU;
+
       this.rampTimeOffUnitElm.val(valueRTTOU);
       this.rampTimeOffValueElm.val(valueRTTOV);
     }
@@ -20921,6 +21126,9 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
         jQuery(this).val(self.HUE);
         self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
         self.setColorPreviewElm(self.HUE, self.SATURATION);
+
+        // Set the TW slider to --
+        self.resetColorTemp();
       }
     });
 
@@ -20931,6 +21139,9 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       jQuery(this).val(self.HUE);
       self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
       self.setColorPreviewElm(self.HUE, self.SATURATION);
+
+      // Set the TW slider to --
+      self.resetColorTemp();
     });
 
 
@@ -20942,6 +21153,9 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
         jQuery(this).val(parseInt(self.SATURATION));
         self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
         self.setColorPreviewElm(self.HUE, self.SATURATION);
+
+        // Set the TW slider to --
+        self.resetColorTemp();
       }
     });
 
@@ -20952,10 +21166,11 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       jQuery(this).val(parseInt(self.SATURATION));
       self.colorPicker.color.hsv = {h: self.HUE, s: self.SATURATION, v: 0};
       self.setColorPreviewElm(self.HUE, self.SATURATION);
+
+      // Set the TW slider to --
+      self.resetColorTemp();
     });
     /**********************/
-
-
 
     this.showHideColorPicker();
 
@@ -20968,12 +21183,14 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
         self.HUE = 361;
         self.hueElm.val(self.HUE);
         self.hueElm.hide();self.hueElm.parent().next().hide();
+        self.resetColorTemp();
       } else {
         self.HUE = 0;
         self.hueElm.val(self.HUE);
         self.hueElm.show();self.hueElm.parent().next().show();
         self.colorPicker.color.hsv = {h: self.HUE, s: 100, v: 100};
       }
+      self.freezeColorTemp();
       self.setColorPreviewElm(self.HUE, 100);
       self.resetHeight();
     });
@@ -20988,16 +21205,85 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
         self.satElm.val(self.SATURATION);
         self.satElm.hide();self.satElm.parent().next().hide();
         self.colorPicker.color.hsv = {h: self.HUE, s: 100, v: 100};
+        self.resetColorTemp();
       } else {
         self.SATURATION = 100;
         self.satElm.val(self.SATURATION);
         self.satElm.show();self.satElm.parent().next().show();
         self.colorPicker.color.hsv = {h: self.HUE, s: 100, v: 100};
       }
+      self.freezeColorTemp();
       self.setColorPreviewElm(self.HUE, 100);
       self.resetHeight();
     });
 
+    // TW Slider
+
+    this.btnHCLElm.bind("click", function() {
+      JControlBtn.on(jQuery(this));
+      JControlBtn.off(jQuery(self.btnDim2WarmElm));
+      window.setTimeout(function() {jQuery(".ui-slider-handle").removeClass("ui-state-active");},100);
+      self.colorTemperature = self.valHCL;
+      self.sliderInfoElm.val("--");
+      self.sliderElm.slider('value', 0);
+      self.resetColorPicker();
+    });
+
+    this.btnDim2WarmElm.bind("click", function() {
+      JControlBtn.on(jQuery(this));
+      JControlBtn.off(jQuery(self.btnHCLElm));
+      window.setTimeout(function() {jQuery(".ui-slider-handle").removeClass("ui-state-active");},100);
+      self.colorTemperature = self.valDim2Warm;
+      self.sliderInfoElm.val("--");
+      self.sliderElm.slider('value', 0);
+      self.resetColorPicker();
+    });
+
+    // TW Slider
+    //var tcValueElm = this.getConfigStringValue("TC");
+    this.sliderElm.slider(this.getSliderOpts());
+
+    valueSlider = parseInt(this.getConfigStringValue("TC"));
+    valueSlider = (valueSlider != -1) ? valueSlider : 0;
+
+    this.sliderInfoElm.val((valueSlider == 0) ? "--" : valueSlider);
+    this.sliderElm.val(valueSlider);
+    this.sliderElm.slider('value', (valueSlider > 10100) ? 0 : valueSlider);
+    this.colorTemperature = valueSlider;
+
+    this.sliderElm.on("slide", function (event, ui) {
+      self.sliderInfoElm.val(ui.value);
+    });
+
+    this.sliderElm.on("slidestop", function(event, ui){
+      JControlBtn.off(jQuery(self.btnDim2WarmElm));
+      JControlBtn.off(jQuery(self.btnHCLElm));
+      window.setTimeout(function() {jQuery(".ui-slider-handle").addClass("ui-state-active");},100);
+      self.colorTemperature = ui.value;
+
+      // Set Hue and Saturation to 0
+      self.resetColorPicker();
+
+    });
+
+    if ((valueSlider > 0) && (valueSlider < 10000)) {jQuery(".ui-slider-handle").addClass("ui-state-active");} else {jQuery(".ui-slider-handle").removeClass("ui-state-active");}
+    if (valueSlider == this.valHCL) {jQuery(".ui-slider-handle").removeClass("ui-state-active"); JControlBtn.on(this.btnHCLElm);this.sliderInfoElm.val("--");}
+    if (valueSlider == this.valDim2Warm) {jQuery(".ui-slider-handle").removeClass("ui-state-active"); JControlBtn.on(this.btnDim2WarmElm);this.sliderInfoElm.val("--");}
+    this.TWEvents = jQuery("[name='trTWSlider']").css("pointer-events");
+
+    // Effects
+    effect = parseInt(this.getConfigStringValue("E"));
+    effect = (effect != -1) ? effect : 0; // 0 = default (No Effect)
+    this.effectSelBox.val(effect);
+
+    // SShow the appropriate dialog (Color, Color Temp, Effect)
+    if ((effect != 0) ||((valueL == 0) && (arElmValues.length == 1))) {
+      this.btnEffectDialog.click();
+    } else if (parseInt(this.getConfigStringValue("TC")) > 0) {
+      this.btnColorTempDialog.click();
+    } else {
+      this.btnColorDialog.click();
+    }
   },
 
   initColorPickerEvents: function() {
@@ -21019,7 +21305,36 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
       self.setColorPreviewElm(color.hsv.h, color.hsv.s);
 
+      // Set the TW slider to --
+      self.resetColorTemp();
+
     });
+  },
+
+  resetColorPicker: function() {
+    // Set Hue and Saturation to 0
+    this.hueElm.val(0); this.HUE = 0;
+    this.satElm.val(0); this.SATURATION = 0;
+    this.colorPicker.color.hsv = {h: this.HUE, s: this.SATURATION, v: 0};
+    this.setColorPreviewElm(this.HUE, this.SATURATION);
+  },
+
+  resetColorTemp: function() {
+    JControlBtn.off(jQuery(this.btnHCLElm));
+    JControlBtn.off(jQuery(this.btnDim2WarmElm));
+    window.setTimeout(function() {jQuery(".ui-slider-handle").removeClass("ui-state-active");},100);
+    this.colorTemperature = 0;
+    this.sliderInfoElm.val("--");
+    this.sliderElm.val(this.colorTemperature);
+    this.sliderElm.slider('value', this.colorTemperature);
+  },
+
+  freezeColorTemp: function() {
+    if ((this.HUE == 361) || (this.SATURATION == 101)) {
+      this.trTWSlider.css("pointer-events","none"); // freeze the tw slider
+    } else {
+      this.trTWSlider.css("pointer-events",this.TWEvents); // unfreeze the tw slider
+    }
   },
 
   getHSVColorPicker: function() {
@@ -21060,6 +21375,20 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     this.initColorPickerEvents();
   },
 
+  getSliderOpts: function() {
+
+    var chnDescription = homematic("Interface.getParamset", {'interface': this.iface, 'address': this.chnAddress, 'paramsetKey': 'MASTER'});
+
+    var opts = {};
+    opts.animate = "fast";
+    opts.min = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
+    opts.max = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
+    opts.value = ((opts.max - opts.min) / 2);
+    opts.step = 50;
+    opts.orientation = "horizontal";
+    return opts;
+  },
+
   showHideColorPicker: function () {
     var hueLastValue = this.lastValHueElm.prop("checked"),
       satLastValue = this.lastValSatElm.prop("checked");
@@ -21074,7 +21403,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       this.getHSVColorSlider();
       this.anchorColorPicker.show();
       this.colorPreviewElm.show();
-     } else {
+    } else {
       this.getHSVColorPicker();
       this.anchorColorPicker.show();
       this.colorPreviewElm.show();
@@ -21107,8 +21436,32 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       ramptimeValue = this.rampTimeValueElm.val(),
       lastValueHueSelected = this.lastValHueElm.prop("checked"),
       lastValueSatSelected = this.lastValSatElm.prop("checked"),
-      hueValue = (lastValueHueSelected) ? 361 : this.HUE,
-      satValue = (lastValueSatSelected) ? 101 : this.SATURATION;
+      hueValue = (lastValueHueSelected || (this.colorTemperature > 0)) ? 361 : this.HUE,
+      satValue = (lastValueSatSelected  || (this.colorTemperature > 0)) ? 101 : this.SATURATION,
+      colorTemperature =  this.colorTemperature,
+      tempColorID = "",
+      effectID = "",
+      effect = this.effectSelBox.val(),
+      activeDialog = "color";
+
+    if (this.deviceType == this.drgDali) {
+      tempColorID = ",TC=" + colorTemperature;
+      effectID = ",E=" + effect;
+    }
+
+    if (this.btnColorTempDialog.hasClass("ControlBtnOn")) {
+      activeDialog = "colorTemp";
+    } else if (this.btnEffectDialog.hasClass("ControlBtnOn")) {
+      activeDialog = "effect";
+      if (effect == 0) {
+        result = "L=0";
+      } else {
+        result = "L=" + level + ",E=" + effect;
+      }
+      return result;
+    }
+
+
 
     if (this.isOntimeAvailable()) {
       if (this.chkBoxTimeLimitElm.prop("checked") == false) {
@@ -21140,7 +21493,26 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     if (showRamptimeOff) {
       result += ",RTTOV=" + this.rampTimeOffValueElm.val() + ",RTTOU=" + this.rampTimeOffUnitElm.val();
     }
+
+    if (this.deviceType == this.drgDali) {
+      result += tempColorID;
+    }
     return result;
+  },
+
+  // Get the value of a given shortcut of the config string
+  // Example config string > "L=100,OT=0,RT=0,H=0,SAT=0,RTTOV=0,RTTOU=0,TC=10150"
+  getConfigStringValue: function(sShortCut) {
+    var arElmValues = this.initValue.split(","),
+      result = "-1", arKey;
+
+    jQuery.each(arElmValues, function(index,val) {
+      arKey = val.split("=");
+      if (arKey[0] == sShortCut) {
+        result = arKey[1];
+      }
+    });
+    return (result == -1) ? 0 : result;
   },
 
   close: function(result)
@@ -21254,7 +21626,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     this.valDim2Warm = 10150;
 
     this.arNoOntimeAvailable = [];
-    this.showRampTimeOffElm = ["HmIP-RGBW"];
+    this.showRampTimeOffElm = ["HmIP-RGBW", "HmIP-DRG-DALI"];
 
     var dialog = document.createElement("div");
     dialog.className = "YesNoDialog";
@@ -22180,7 +22552,7 @@ StartPage = Singleton.create(Page, {
 
   },
 
-  evalVersionAGreaterThanB: function(a, b) {
+  /*evalVersionAGreaterThanB: function(a, b) {
     var aSplit = a.split(".", 3);
     var bSplit = b.split(".", 3);
     if( Array.isArray(aSplit) && aSplit.length == 3) {
@@ -22203,7 +22575,7 @@ StartPage = Singleton.create(Page, {
         } else { return true; }
     } else { return false; }
     return false;
-  },
+  },*/
 
   showAllDeviceFirmware: function() {
     var self = this;
@@ -22303,12 +22675,6 @@ StartPage = Singleton.create(Page, {
         resultMajorMinor,
         newFW = fwVersion;
 
-      if(deviceType == "HmIPW-DRAP" || deviceType == "HmIP-HAP" || deviceType == "HmIP-HAP-B1" || deviceType == "HmIP-HAP JS1") {
-        if(self.evalVersionAGreaterThanB(availableFW, newFW)) {
-          newFW = availableFW;
-        }
-      }
-
       // The current fw for BidCos devices has no patch version
       if (arCurFw.length == 2) {
         arResultMajorMinorPatch = fwVersion.split(".");
@@ -22325,14 +22691,6 @@ StartPage = Singleton.create(Page, {
         }
         self.newFwCounter++;
       }
-    } else if((deviceType == "HmIPW-DRAP" || deviceType == "HmIP-HAP" || deviceType == "HmIP-HAP-B1" || deviceType == "HmIP-HAP JS1")  && self.devList[self.devIndex].availableFirmware && (self.devList[self.devIndex].availableFirmware != "0.0.0") && (self.devList[self.devIndex].availableFirmware != self.devList[self.devIndex].firmware)) {
-      //In development environment this case may be hit when the fw on ccu is newer than fw on update server. This feels like a bug at first, but it does not matter under normal circumstances.
-      //Please read SPHM-989 for details.
-      var devAddress = self.devList[self.devIndex].address,
-        curFw = self.devList[self.devIndex].firmware,
-        availableFW = self.devList[self.devIndex].availableFirmware;
-      self.messageBoxHTML += "<tr><td  style='text-align:left;' height='15px'>" + deviceType + "</td><td>" + devAddress + "</td></td><td style='text-align:center;'>" + curFw + "</td><td style='text-align:center;' class='UILink' onClick=alert(translateKey('hintDevFwAlreadyUploaded'));>" + availableFW + "</td></tr>";
-      self.newFwCounter++;
     }
     self.devIndex++;
     if (self.devIndex < self.devList.length) {
@@ -31913,13 +32271,13 @@ convertMin2Hour = function(valMin) {
   return hours + ' h : ' + ((minutes <= 9) ? "0"+minutes+" m" : minutes+" m");
 };
 
-// Check if a bit is set in val
+// Check if a bit is set in val (max. 32 bit operation)
 // Returns true/false
 isBitSet = function (val, bit) {
   return ((val>>bit) % 2 != 0);
 };
 
-// another way to check the bit
+// another way to check the bit (64 bit operation possible)
 _isBitSet = function(no, index) {
   var bin = no.toString(2);
   // Convert to Binary
@@ -32004,73 +32362,6 @@ changeRoomOrSubsection = function(id)
 };
 
 
-drapMigration = function() {
-  // The file /etc/config/crRFD/data/drapAvailable will be created by the HmIPServer, when at least one drap is found in the system.
-  var fileDrapAvailable = "/etc/config/crRFD/data/drapAvailable";
-  if (homematic('CCU.existsFile', {'file': fileDrapAvailable})) {
-    // Show a prompt that forces the user to update all old DRAPs
-    conInfo("DRAP available");
-
-    homematic('CCU.getListOfDraps',{'pathOfFile' : fileDrapAvailable}, function(result) {
-      var arDevDescr = [],
-      arDrap2Update = [],
-        arFW = [],
-        fwMajor, fwMinor, fwPatch,
-        dummyFw = "0.0.1", // SPHM-558
-        minFW = {
-          "major" : 2,
-          "minor" : 1,
-          "patch" : 0
-        };
-
-      // Get the device description of all DRAPs
-      jQuery.each(result.split("\n"), function(index, drapSN) {
-        if (drapSN != "") {
-          arDevDescr[index] = homematic("Interface.getDeviceDescription", {
-            "interface": "HmIP-RF",
-            "address": drapSN
-          });
-        }
-      });
-      // Fetch all DRAPs with a not compatible firmware version
-      jQuery.each(arDevDescr, function(index, drap) {
-        // When a SGTIN in the drapAvailable file is available
-        // but the DRAP isn't available in the system anymore, the drap object is null
-        if (drap) {
-          arFW = drap.firmware.split(".");
-          fwMajor = parseInt(arFW[0]);
-          fwMinor = parseInt(arFW[1]);
-          fwPatch = parseInt(arFW[2]);
-
-          // Firmware has to be >= 2.1.0
-          if ((fwMajor < minFW.major) || ((fwMajor == minFW.major) && (fwMinor < minFW.minor)) || ((fwMajor == minFW.major) && (fwMinor == minFW.minor) && (fwPatch < minFW.patch))) {
-            arDrap2Update.push({
-              "address": drap.address,
-              "curFW": (drap.firmware != dummyFw) ? drap.firmware : translateKey("notCompatible")
-            });
-          }
-        }
-      });
-
-      if (arDrap2Update.length > 0) {
-        dlgfDU = new ForcedDRAPUpdate(arDrap2Update, function (btnPress) {
-          if (btnPress == this.RESULT_YES) {
-            conInfo("Goto DRAP update");
-            showCCUAP(arDrap2Update);
-          } else {
-            conInfo("User canceled DRAP update");
-          }
-        });
-      }
-    });
-
-  } else {
-    conInfo("Found no DRAP in the system.");
-  }
-
-};
-
-
 showDutyCycle = function() {
   if (jQuery("#PagePathSpan").text() == translateKey("startPage")) {
     var ifaceBidCosRF = "BidCos-RF",
@@ -32088,6 +32379,7 @@ showDutyCycle = function() {
           linkElem
             .addClass("UILink")
             .on("click", function () {
+              showDutyCycle(); // actualize the dc value of the start page
               showDCAllInterfaces();
             });
         }
@@ -32118,7 +32410,9 @@ showDutyCycle = function() {
               value = width - (width / 100 * arInterfaceDutyCycle[ifaceBidCosRF]);
 
               window.setTimeout(function () {
-                dutyCycleProgressBarElm.css("width", value + "px");
+                //dutyCycleProgressBarElm.css("width", value + "px");
+                dutyCycleProgressBarElm.css("margin-left", (width - parseInt(value)) + "px");
+
               }, 25);
 
               if (arInterfaceDutyCycle[ifaceBidCosRF] > dcAlarm) {
@@ -32140,18 +32434,101 @@ showDutyCycle = function() {
           }
         });
       }
+      showDutyCycleHmIP();
     });
   }
 };
 
-// Show the duty cycle of all relevant interfaces
-showDCAllInterfaces = function() {
+showDutyCycleHmIP = function() {
+  // Currently only in use for HAPs. Here we collect the available HAP addresses.
+  // The display of the HAP-DutyCycle is done in showDCAllInterfaces()
+  if (jQuery("#PagePathSpan").text() == translateKey("startPage")) {
+    var linkElem = jQuery("#iFaceShowAll"),
+      arRelevantAddresses = [];
+
+    jQuery.each(DeviceList.devices, function(index, dev) {
+      //if ((dev.typeName == "HmIP-CCU3") || (dev.typeName.indexOf("HmIP-HAP") > -1)) {
+      // We fetch only the HAP addresses
+      if (dev.typeName.indexOf("HmIP-HAP") > -1) {
+        arRelevantAddresses.push(dev.channels[0].address.split(":")[0]);
+      }
+    });
+
+    if ((arRelevantAddresses.length > 0) && (!linkElem.hasClass("UILink"))) {
+      linkElem
+        .addClass("UILink")
+        .on("click", function () {
+          showDutyCycle(); // actualize the dc value of the start page
+          showDCAllInterfaces(arRelevantAddresses);
+        });
+    }
+  }
+};
+
+//Attention: To work properly Adapter.Local.Device.Enabled of the crRFD.conf must be set to true
+showCarrierSense = function() {
+  if (jQuery("#PagePathSpan").text() == translateKey("startPage")) {
+    var ccuAddress = homematic("CCU.getSerial"),
+      linkElem = jQuery("#lblCarrierSense"),
+      arHAPAddresses = [];
+
+    jQuery.each(DeviceList.devices, function(index, dev) {
+      if (dev.typeName.indexOf("HmIP-HAP") > -1) {
+        arHAPAddresses.push(dev.channels[0].address.split(":")[0]);
+      }
+    });
+
+    if ((arHAPAddresses.length > 0) && (!linkElem.hasClass("UILink"))) {
+      linkElem
+        .addClass("UILink")
+        .on("click", function () {
+          showCarrierSense(); // actualize the cs value of the start page
+          showAllCarrierSense(ccuAddress, arHAPAddresses);
+        });
+    }
+
+    if ((typeof ccuAddress != "undefined") && (ccuAddress != "")) {
+      homematic("Interface.getValue", {
+        "interface": "HmIP-RF",
+        "address": ccuAddress + ":0",
+        "valueKey": "CARRIER_SENSE_LEVEL"
+      }, function (result) {
+        if (result != null) {
+          var carrierSenseProgressElm = jQuery("#carrierSenseProgress"),
+            carrierSenseProgressBarElm = jQuery("#carrierSenseProgressBar"),
+            carrierSenseValElm = jQuery("#carrierSenseVal"),
+            trCarrierSense = jQuery("[name='trCarrierSense']"),
+            csUnit = "%",
+            csVal = parseInt(result),
+            width, value;
+
+          if ((typeof csVal == "number") && ((csVal >= 0) && (csVal <= 100))) {
+            trCarrierSense.css("visibility", "visible");
+
+            width = parseInt(carrierSenseProgressElm.css("width"));
+            value = width - (width / 100 * csVal);
+
+            carrierSenseValElm.text(csVal + csUnit);
+            carrierSenseProgressBarElm.css("margin-left", (width - parseInt(value)) + "px");
+
+          } else {
+            trCarrierSense.css("visibility", "hidden");
+          }
+        }
+      });
+    }
+  }
+};
+
+// Show the duty cycle of all relevant interfaces and available HAPs
+showDCAllInterfaces = function(arRelevantAddresses) {
   var ifaceBidCosRF = "BidCos-RF",
     arInterfaceDutyCycle = {},
     showPartingLine = false,
     dcUnit = "%",
     dcNotAvailable = -1,
     dcAlarm = 89,  // Attention when dc >= 90%
+    elmCounter = 0,
     html = "",
     dlg;
 
@@ -32160,6 +32537,7 @@ showDCAllInterfaces = function() {
 
     jQuery.each(BidCosIFaces, function(index, iFace){
       var dcVal = (typeof iFace.dutyCycle != 'undefined') ? parseInt(iFace.dutyCycle) : 'unknown';
+      elmCounter = index;
       html += "<tr>";
         html += "<td>";
           html += "<table class='center'>";
@@ -32214,14 +32592,162 @@ showDCAllInterfaces = function() {
       }, 50);
     });
 
+    /* Show HmIP HAPs */
+    if (typeof arRelevantAddresses == "object" && (arRelevantAddresses.length > 0)) {
+      var dc = [], counter = [],
+        lastIndex = elmCounter + 1;
+
+      jQuery.each(arRelevantAddresses, function (index, address) {
+        counter[index] = lastIndex + index;
+        dc[index] = parseInt(homematic("Interface.getValue", {
+          "interface": "HmIP-RF",
+          "address": address + ":0",
+          "valueKey": "DUTY_CYCLE_LEVEL"
+        }));
+
+        if (!isNaN(dc[index])) {
+          html += "<tr>";
+            html += "<td>";
+              html += "<table class='center'>";
+                html += "<tr><td><hr></td></tr>";
+                html += "<tr class='alignCenter'>";
+                 html += "<td><h2>" + translateKey('HmIP-HAP') + "  - " + translateKey('dialogSettingsBidCosRFLblSN') + ": " + address + "</h2></td>";
+                html += "</tr>";
+                html += "<tr class='alignCenter'>";
+                  html += "<td><div id='dutyCycleVal_" + counter[index] + "'>" + dc[index] + dcUnit + "</div></td>";
+                html += "</tr>";
+              html += "</table>";
+            html += "</td>";
+          html += "</tr>";
+          html += "<tr>";
+            html += "<td> <div><div id='dutyCycleProgress_" + counter[index] + "' class='dutyCycleProgress' align='right' style='margin-left: auto; margin-right: auto;'><div id='dutyCycleProgressBar_" + counter[index] + "' class='dutyCycleProgressBar' style='width:100%;'></div></div><div></td>";
+          html += "</tr>";
+
+          window.setTimeout(function () {
+            var dutyCycleProgressElem = jQuery("#dutyCycleProgress_" + counter[index]),
+              dutyCycleProgressBarElm = jQuery("#dutyCycleProgressBar_" + counter[index]),
+              dutyCycleValElm = jQuery("#dutyCycleVal" + counter[index]),
+              trDutyCycle = jQuery("[name='trDutyCycle']"),
+              dcVal = parseInt(dc[index]),
+              width, value;
+
+            dcVal = ((dcVal >= 0) && (dcVal <= 100)) ? dcVal : dcNotAvailable;
+
+            if (dcVal != dcNotAvailable) {
+              dutyCycleValElm.text(dcVal + dcUnit);
+
+              width = parseInt(dutyCycleProgressElem.css("width"));
+              value = width - (width / 100 * dcVal);
+
+              dutyCycleProgressBarElm.css("width", value + "px");
+            }
+          }, 50);
+        }
+      });
+    }
+    /* END HAP's */
+
     html += "</table>";
 
-    dlg = new YesNoDialog(translateKey("dialogAllRFInterfacesTitle"), html, "", "html");
+    dlg = new YesNoDialog(translateKey("lblDutyCycle"), html, "", "html");
     dlg.btnNoHide();
     dlg.btnTextYes(translateKey("btnOk"));
   });
 };
 
+// Show the Carrier Sense of the CCU and all available HAPs
+showAllCarrierSense = function(ccuAddress, arHapAddress) {
+  var csCCU = null,
+    csHap = null,
+    csHAPs = [],
+    csUnit = "%",
+    html = "",
+    dlg;
+
+  if ((typeof ccuAddress != "undefined") && (ccuAddress != "")) {
+   csCCU = homematic("Interface.getValue", {
+      "interface": "HmIP-RF",
+      "address": ccuAddress + ":0",
+      "valueKey": "CARRIER_SENSE_LEVEL"
+    });
+  }
+
+  jQuery.each(arHapAddress, function(index, hapAddress) {
+    csHap =  homematic("Interface.getValue", {
+      "interface": "HmIP-RF",
+      "address": hapAddress + ":0",
+      "valueKey": "CARRIER_SENSE_LEVEL"
+    });
+    csHAPs.push(csHap);
+  });
+
+  var getHtml = function(index, address, csVal) {
+
+    var csValUnknown = "--";
+
+    var lblDev = (index == 0) ? translateKey("LabelCCU") : translateKey('HmIP-HAP');
+    lblDev += " - " + translateKey('dialogSettingsBidCosRFLblSN') + ": " + address;
+
+    var csValue = (! isNaN(parseInt(csVal))) ? parseInt(csVal) : csValUnknown,
+    html = "";
+
+    if (csValue == csValUnknown) {csUnit = "";}
+
+    html += "<tr>";
+    html += "<td>";
+    html += "<table class='center'>";
+
+    html += "<tr class='alignCenter'>";
+    html += "<td><h2>"+ lblDev +"</h2></td>";
+    html += "</tr>";
+
+    html += "<tr class='alignCenter'>";
+    html += "<td><div id='carrierSenceVal_"+index+"'>" + csValue + csUnit + "</div></td>"; // CCU Carrier Sense
+    html += "</tr>";
+
+    html += "</table>";
+    html += "</td>";
+    html += "</tr>";
+
+    html += "<tr>";
+    html += "<td> <div><div id='carrierSenseProgress_"+index+"' class='dutyCycleProgress' align='right' style='margin-left: auto; margin-right: auto;'><div id='carrierSenseProgressBar_"+index+"' class='dutyCycleProgressBar' style='width:100%;'></div></div><div></td>";
+    html += "</tr>";
+
+    html += "<tr><td><hr></td></tr>";
+
+    window.setTimeout(function() {
+      var carrierSenseProgressElem = jQuery("#carrierSenseProgress_" + index),
+        carrierSenseProgressBarElm = jQuery("#carrierSenseProgressBar_" + index),
+        carrierSenseValElm = jQuery("#carrierSenseVal" + index),
+        width, value;
+
+
+      carrierSenseValElm.text(csValue + csUnit);
+
+      width = parseInt(carrierSenseProgressElem.css("width"));
+      value = (csValue != csValUnknown) ? width - (width / 100 * csValue) : width;
+
+      carrierSenseProgressBarElm.css("width", value + "px");
+
+    }, 50);
+
+    return html;
+  };
+
+  html += "<table class='center' style='width: 75%;'>";
+    html += getHtml(0, ccuAddress, csCCU);
+
+    jQuery.each(arHapAddress, function(index, hapAddress) {
+      html += getHtml(index + 1, hapAddress, csHAPs[index]);
+    });
+
+  html += "</table>";
+
+  dlg = new YesNoDialog(translateKey("lblCarrierSense"), html, "", "html");
+  dlg.btnNoHide();
+  dlg.btnTextYes(translateKey("btnOk"));
+
+};
 
 encodeStringStatusDisplay = function(elmID, is4Dis, specialSZ)
 {
@@ -32612,6 +33138,18 @@ getExtendedDescription = function(oChannelDescr) {
     }
   }
 
+  if (chType == "LEVEL_COMMAND_TRANSMITTER_CO2") {
+    result = translateKey("chType_COND_CO2");
+  }
+
+  if (chType == "LEVEL_COMMAND_TRANSMITTER_HUMIDITY") {
+    result = translateKey("chType_COND_HUMIDITY");
+  }
+
+  if (chType == "LEVEL_COMMAND_TRANSMITTER_TEMPERATURE") {
+    result = translateKey("chType_COND_TEMPERATURE");
+  }
+
   if (chType == "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") {
     if (channelIndex == 2) result = translateKey("chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL");
     if (channelIndex == 3) result = translateKey("chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR");
@@ -32839,6 +33377,13 @@ getExtendedDescription = function(oChannelDescr) {
         return; // leave each loop
       }
     });
+  }
+
+  if ((deviceType.toLowerCase() == "hmip-drg-dali") && ((chType == "MAINTENANCE") || (chType == "UNIVERSAL_LIGHT_RECEIVER"))) {
+    result = translateKey("chType_DALI_UNIVERSAL_LIGHT_RECEIVER");
+    if (channelIndex > 32) {
+      result += "<br/>" + translateKey("lblGroup") + " " + (channelIndex - 32);
+    }
   }
 
   /* Uncomment this to hide the channel description of a particular channel type
@@ -34077,6 +34622,7 @@ iseButtonsSwitch.prototype = {
     this.HmIPInterfaceID = "HmIP-RF";
     this.labelGarageDoorController = "HmIP-WGC";
     this.labelVIR_LG_ONOFF = "VIR-LG-ONOFF";
+    this.labeldrgDali = "HmIP-DRG-DALI";
 
     this.garageDoorControllerOnTime = 0.5;
     
@@ -34097,7 +34643,7 @@ iseButtonsSwitch.prototype = {
   onClickOff: function() {
     ControlBtn.pushed(this.divOff);
     //this.state = false;
-    if (this.chnLabel != this.labelVIR_LG_ONOFF) {
+    if ((this.chnLabel != this.labelVIR_LG_ONOFF) && (this.chnLabel != this.labeldrgDali)) {
       setDpState(this.idDpState, 0, true);
     } else {
       setDpState(this.idDpState,0);
@@ -34112,7 +34658,7 @@ iseButtonsSwitch.prototype = {
   onClickOn: function() {
     ControlBtn.pushed(this.divOn);
     if (this.chnLabel != this.labelGarageDoorController) {
-      if (this.chnLabel != this.labelVIR_LG_ONOFF) {
+      if ((this.chnLabel != this.labelVIR_LG_ONOFF) && (this.chnLabel != this.labeldrgDali)) {
         setDpState(this.idDpState, 1, true);
       } else {
         setDpState(this.idDpState,1);
@@ -39005,7 +39551,7 @@ iseHmIPWeeklyProgram = Class.create();
 iseHmIPWeeklyProgram.prototype = {
   initialize: function (id, opts, callback) {
     var self = this;
-
+    conInfo("opts", opts);
     virtChnCounterWP = 0;
     //conInfo(opts);
     this.callback = callback;
@@ -39022,6 +39568,7 @@ iseHmIPWeeklyProgram.prototype = {
     this.deviceIsHmIPWKP = this.isDeviceType("HmIP-WKP");
     this.deviceIsHmIP_MOD_WD_VK = this.isDeviceType("HmIP-MOD-WD-VK");
     this.deviceIsHmIP_RGBW = this.isDeviceType("HmIP-RGBW");
+    this.deviceIsHmIP_DALI = this.isDeviceType("HmIP-DRG-DALI");
 
     this.device = this.getDevice(this.opts.deviceID);
     this.relevantChn = this.getRelevantChannels();
@@ -39062,6 +39609,48 @@ iseHmIPWeeklyProgram.prototype = {
       }
     }
 
+    if (this.deviceIsHmIP_DALI) {
+
+      /*
+       Das erste angeschlossene DAlI Gerät belegt Kanal 1, das nächste DALI Gerät bekommt Kanal 2 usw.
+       Es können 32 DAlI Geräte angeschlossen werden, d. h. Kanal 1 - 32
+       Angezeigt werden nur die Kanäle, welche auch benutzt werden. Damit kein XML-RPC Aufruf für ungenutzte Kanäle gemacht wird,
+       wird die Variable lastUsedDaliChn eingesetzt.
+       Die Kanäle 33 - 48 sind Gruppenkanäle und werden immer angezeigt.
+
+       The first DAlI device connected occupies channel 1, the next DALI device gets channel 2, etc.
+       32 DAlI devices can be connected, i.e. channel 1 - 32.
+       Only those channels are displayed which are actually used. So that no XML-RPC call is made for unused channels,
+       the variable lastUsedDaliChn is used.
+       Channels 33 - 48 are group channels and are always displayed.
+      */
+
+      var self = this,
+        oDevice = DeviceList.getDeviceByAddress(this.chAddress.split(":")[0]),
+        lastUsedDaliChn = false,
+        maxCap;
+
+      this.relevantChn = [];
+
+      jQuery.each(oDevice.channels, function(index, chn) {
+
+        if (chn.channelType == "UNIVERSAL_LIGHT_RECEIVER") {
+          if (index < 33) {
+            if (! lastUsedDaliChn) {
+              maxCap = parseInt(homematic("Interface.getMetadata", {"objectId": chn.id, "dataId": "maxCap"}));
+            }
+            if ((!isNaN(maxCap)) && (maxCap < 5)) {
+              self.relevantChn.push(index);
+            } else {
+              lastUsedDaliChn = true;
+            }
+          } else {
+            self.relevantChn.push(index);
+          }
+        }
+      });
+    }
+
     this.anchor = jQuery("#anchor_"+this.id);
     this.anchor.html(this.getMainHtml());
 
@@ -39090,7 +39679,7 @@ iseHmIPWeeklyProgram.prototype = {
   getModeDialog: function() {
     var that = this;
     var sOutput = this.getDialogHtml();
-    new YesNoDialog(translateKey("dialogSetWPModeTitle"), sOutput, function(result) {
+    var dlg = new YesNoDialog(translateKey("dialogSetWPModeTitle"), sOutput, function(result) {
       var selectedMode = that.modeElm.val(),
         selectedCh = 0;
       if (result == YesNoDialog.RESULT_YES) {
@@ -39121,6 +39710,11 @@ iseHmIPWeeklyProgram.prototype = {
 
       if (that.callback) {that.callback(result);}
     },"html");
+
+    if(that.deviceIsHmIP_DALI) {
+      dlg.setWidth(700);
+    }
+
   },
 
 
@@ -39138,10 +39732,18 @@ iseHmIPWeeklyProgram.prototype = {
     jQuery.each(relevantChn, function (index, value) {
       //debugger;
       chState = (binChannelState[index]) ? binChannelState[index] : "0";
-      if (chState == "1") {
-        jQuery("#" + self.id + "_bit" + index + "1").attr("checked", true);
+      if (! self.deviceIsHmIP_DALI) {
+        if (chState == "1") {
+          jQuery("#" + self.id + "_bit" + index + "1").attr("checked", true);
+        } else {
+          jQuery("#" + self.id + "_bit" + index + "0").attr("checked", true);
+        }
       } else {
-        jQuery("#" + self.id + "_bit" + index + "0").attr("checked", true);
+        if (chState == "1") {
+          jQuery("#" + self.id + "_bit" + (value - 1) + "1").attr("checked", true);
+        } else {
+          jQuery("#" + self.id + "_bit" + (value - 1) + "0").attr("checked", true);
+        }
       }
     });
   },
@@ -39153,102 +39755,168 @@ iseHmIPWeeklyProgram.prototype = {
     var valCheckBox,
     tmpVal;
 
-    html += "<table>";
+    function getHTML(selectedChannels) {
+      var html = "",  relevantChn;
 
+      if (selectedChannels) {
+        relevantChn = selectedChannels;
+        html += "<div><hr></div>";
+      } else {
+        relevantChn = self.relevantChn;
+      }
 
+      html += "<table>";
       html += "<thead>";
-        // channel number
-        html += "<tr>";
-        if (!this.deviceIsHmIPWKP) {
-          html += "<td></td>";
-        } else {
-          html += "<td>"+translateKey('lblUser')+"</td>";
-        }
 
-        if (! this.deviceIsHmIP_MOD_WD_VK) {
-          jQuery.each(this.relevantChn, function (index, val) {
-            if (!self.deviceIsHmIPWKP) {
-              html += "<td>" + val + "</td>";
-            } else {
-              html += "<td>" + (index + 1) + "</td>";
-            }
-          });
-        }
-        html += "</tr>";
+      // channel number
+      html += "<tr>";
+      if (!self.deviceIsHmIPWKP) {
+        html += "<td></td>";
+      } else {
+        html += "<td>" + translateKey('lblUser') + "</td>";
+      }
+
+      if (!self.deviceIsHmIP_MOD_WD_VK) {
+        jQuery.each(relevantChn, function (index, val) {
+          if (!self.deviceIsHmIPWKP) {
+            html += "<td>" + val + "</td>";
+          } else {
+            html += "<td>" + (index + 1) + "</td>";
+          }
+        });
+      }
+      html += "</tr>";
       html += "</thead>";
 
       html += "<tbody>";
-        // row auto
-        html += "<tr>";
-          html += "<td>"+translateKey("stringTableClimateControlRTTransceiverAutoMode")+"</td>";
-          var _tmpIndex;
-          jQuery.each(this.relevantChn, function(index,val){
+      // row auto
+      html += "<tr>";
+      html += "<td>" + translateKey("stringTableClimateControlRTTransceiverAutoMode") + "</td>";
+      var _tmpIndex;
+      jQuery.each(relevantChn, function (index, val) {
 
-            if (self.wiegandInterface) {
-              // index 0 - 7 = 3 - 10 - index 9 - 10 = 0 - 2
-              if (index <= 7) {_tmpIndex = index + 3;} else {_tmpIndex = index - 8;}
-              html += "<td>";
-              html += "<input id='"+self.id+"_bit"+_tmpIndex+"0'  type='radio' name='"+self.id+"_bit"+_tmpIndex+"' value=0 disabled='disabled'>";
-              html += "</td>";
+        if (self.wiegandInterface) {
+          // index 0 - 7 = 3 - 10 - index 9 - 10 = 0 - 2
+          if (index <= 7) {
+            _tmpIndex = index + 3;
+          } else {
+            _tmpIndex = index - 8;
+          }
+          html += "<td>";
+          html += "<input id='" + self.id + "_bit" + _tmpIndex + "0'  type='radio' name='" + self.id + "_bit" + _tmpIndex + "' value=0 disabled='disabled'>";
+          html += "</td>";
+        } else if (self.deviceIsHmIP_DALI) {
+           html += "<td>";
+          html += "<input id='" + self.id + "_bit" + (val-1) + "0'  type='radio' name='" + self.id + "_bit" + (val-1) + "' value=0 disabled='disabled'>";
+          html += "</td>";
+        } else {
+          html += "<td>";
+          html += "<input id='" + self.id + "_bit" + index + "0'  type='radio' name='" + self.id + "_bit" + index + "' value=0 disabled='disabled'>";
+          html += "</td>";
+        }
+
+      });
+      html += "</tr>";
+
+      // row manu
+      html += "<tr>";
+      html += "<td>" + translateKey("stringTableClimateControlRTTransceiverManuMode") + "</td>";
+      jQuery.each(relevantChn, function (index, val) {
+        if (self.wiegandInterface) {
+          //******************
+          if (self.expert) {
+            // index 0 - 7 = 3 - 10 - index 9 - 10 = 0 - 2
+            if (index <= 7) {
+              _tmpIndex = index + 3;
             } else {
-              html += "<td>";
-              html += "<input id='"+self.id+"_bit"+index+"0'  type='radio' name='"+self.id+"_bit"+index+"' value=0 disabled='disabled'>";
-              html += "</td>";
+              _tmpIndex = index - 8;
             }
-
-          });
-        html += "</tr>";
-
-        // row manu
-        html += "<tr>";
-          html += "<td>"+translateKey("stringTableClimateControlRTTransceiverManuMode")+"</td>";
-          jQuery.each(this.relevantChn, function(index,val){
-            if (self.wiegandInterface) {
-              //******************
-              if (self.expert) {
-                // index 0 - 7 = 3 - 10 - index 9 - 10 = 0 - 2
-                if (index <= 7) {_tmpIndex = index + 3;} else {_tmpIndex = index - 8;}
-                valCheckBox = Math.pow(2, _tmpIndex);
-              } else {
-                if (index <= 7) {
-                  _tmpIndex = index + 3;
-                  valCheckBox = Math.pow(2, _tmpIndex);
-                } else {
-                  _tmpIndex = index - 8;
-                  valCheckBox = 1;
-                }
-              }
-              html += "<td>";
-              html += "<input id='" + self.id + "_bit" + _tmpIndex + "1'  type='radio' name='" + self.id + "_bit" + _tmpIndex + "' value=" + valCheckBox + " disabled='disabled'>";
-              html += "</td>";
-              //******************
+            valCheckBox = Math.pow(2, _tmpIndex);
+          } else {
+            if (index <= 7) {
+              _tmpIndex = index + 3;
+              valCheckBox = Math.pow(2, _tmpIndex);
             } else {
-              if (self.expert) {
-                valCheckBox = Math.pow(2, index);
-              } else {
-                if (index == 0) {
-                  valCheckBox = 1;
-                  tmpVal = 1;
-                } else {
-                  valCheckBox = tmpVal << 3;
-                  tmpVal = valCheckBox;
-                }
-              }
-              html += "<td>";
-              html += "<input id='" + self.id + "_bit" + index + "1'  type='radio' name='" + self.id + "_bit" + index + "' value=" + valCheckBox + " disabled='disabled'>";
-              html += "</td>";
+              _tmpIndex = index - 8;
+              valCheckBox = 1;
             }
-          });
-        html += "</tr>";
+          }
+          html += "<td>";
+          html += "<input id='" + self.id + "_bit" + _tmpIndex + "1'  type='radio' name='" + self.id + "_bit" + _tmpIndex + "' value=" + valCheckBox + " disabled='disabled'>";
+          html += "</td>";
+          //******************
+        } else if (self.deviceIsHmIP_DALI) {
+          valCheckBox = Math.pow(2, (val-1));
+          html += "<td>";
+          html += "<input id='" + self.id + "_bit" + (val-1) + "1'  type='radio' name='" + self.id + "_bit" + (val-1) + "' value=" + valCheckBox + " disabled='disabled'>";
+          html += "</td>";
+        } else {
+          if (self.expert) {
+            valCheckBox = Math.pow(2, index);
+          } else {
+            if (index == 0) {
+              valCheckBox = 1;
+              tmpVal = 1;
+            } else {
+              valCheckBox = tmpVal << 3;
+              tmpVal = valCheckBox;
+            }
+          }
+          html += "<td>";
+          html += "<input id='" + self.id + "_bit" + index + "1'  type='radio' name='" + self.id + "_bit" + index + "' value=" + valCheckBox + " disabled='disabled'>";
+          html += "</td>";
+        }
+      });
+      html += "</tr>";
       html += "</tbody>";
-    html += "</table>";
+      html += "</table>";
 
+      return html;
+
+    };
+
+    if (! this.deviceIsHmIP_DALI) {
+      html += getHTML();
+    } else {
+    // DALI - Create one row for the normal channels and one row for the group channels.
+    var self = this,
+      oDevice = DeviceList.getDeviceByAddress(this.chAddress.split(":")[0]),
+      lastUsedDaliChn = false,
+      maxCap;
+
+      var chnInUse = [];
+
+      jQuery.each(oDevice.channels, function(index, chn) {
+
+        if (chn.channelType == "UNIVERSAL_LIGHT_RECEIVER") {
+          if (index < 33) {
+            if (! lastUsedDaliChn) {
+              maxCap = parseInt(homematic("Interface.getMetadata", {"objectId": chn.id, "dataId": "maxCap"}));
+            }
+            if ((!isNaN(maxCap)) && (maxCap < 5)) {
+              chnInUse.push(index);
+            } else {
+              lastUsedDaliChn = true;
+            }
+          }
+        }
+      });
+
+      html += getHTML(chnInUse);
+      // DALI group channels
+      chnInUse = [];
+      for (var i = 33; i <= 48; i++) {
+        chnInUse.push(i);
+      }
+      html += getHTML(chnInUse);
+    }
     return html;
   },
 
   getDialogHtml: function() {
     var self = this,
-    html = "";
+      newTR = false,
+      html = "";
 
     var valCheckBox,
     tmpVal;
@@ -39318,12 +39986,21 @@ iseHmIPWeeklyProgram.prototype = {
           } else {
             html += "<label for='wpChannelSel_" + self.id + "'>" + (index + 1) + "</label>";
           }
+
+          if (newTR == false) {
+            if ((self.deviceIsHmIP_DALI) && (self.relevantChn[(index + 1)] - 32 > 0)) {
+              html += "</td>";
+              html += "</tr>";
+              html += "<tr><td>"+translateKey('btnSettingsGroups')+"</td><td>";
+              newTR = true;
+            }
+          }
         });
+
         html += "</td>";
         html += "</tr>";
 
     html += "</table>";
-
     return html;
   },
 
@@ -40178,6 +40855,7 @@ iseUniversalLightReceiver.prototype = {
     this.HUE = opts.hue;
     this.SATURATION = opts.saturation;
     this.LEVEL = opts.level;
+    this.EFFECT = opts.effect;
     this.DURATION_VALUE = 31;
     this.DURATION_UNIT = 2; // hour
 
@@ -40328,6 +41006,36 @@ iseUniversalLightReceiver.prototype = {
     });
   }
 };
+
+function setULREffectToolTips (chnId) {
+  jQuery("#ulrEffect_0_"+chnId).powerTip({placement: "ne"}).data("powertip", "Effekt <b>Beenden</b>");
+  for (var loop = 1; loop <= 10; loop++) {
+    jQuery("#ulrEffect_"+loop+"_"+chnId).powerTip({placement: "ne"}).data("powertip", "Effekt Nr: <b>"+loop+"</b>");
+  }
+}
+
+function setULREffect (elm, effectNr, chnAddress, level) {
+
+  var effectLevel = (effectNr == 0) ? 0.0 : parseFloat(level / 100).toFixed(2) ;
+
+  jQuery(elm).switchClass('ControlBtnOff', 'ControlBtnOn', 0);
+  window.setTimeout(function() {jQuery(elm).switchClass('ControlBtnOn', 'ControlBtnOff', 0);}, 500);
+
+  homematic("Interface.putParamset", {
+    'interface': "HmIP-RF",
+    'address': chnAddress,
+    'paramsetKey': 'VALUES',
+    'set':
+      [
+        {name: 'LEVEL', type: 'double', value: effectLevel},
+        {name: 'EFFECT', type: 'int', value: effectNr}
+      ]
+  }, function (result) {
+    conInfo("setULREffect: ",result);
+  });
+}
+
+
 iseHmIPUniversalLightRGBWSlider = Class.create();
 iseHmIPUniversalLightRGBWSlider.prototype = {
 
@@ -40345,6 +41053,7 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
     this.colorTempMin = opts.colorTempMin;
     this.colorTempMax = opts.colorTempMax;
     this.colorTemp = parseInt(opts.colorTemp);
+    this.colorTempUnknown = (this.colorTemp < this.colorTempMin) ? true : false;
 
     this.valHCLVal = 10200;
     this.valDim2WarmVal = 10150;
@@ -40354,8 +41063,9 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
 
     this.hideSliderPanel = (this.valHCL || this.valDim2Warm) ? true : false;
 
-    this.colorTemp = (this.colorTemp < this.colorTempMin) ? this.colorTempMin : this.colorTemp ;
+    this.colorTemp = (this.colorTemp < this.colorTempMin) ? this.colorTempMin : this.colorTemp;
 
+    this.devIsDali = (opts.devLabel == "HmIP-DRG-DALI") ? true : false;
 
     window.setTimeout(function() {
       self.btnColorTemp = jQuery("#btnColorTemp" + self.chnId);
@@ -40441,8 +41151,15 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
     if (this.colorTemp == "-1") {this.colorTemp = this.colorTempMin;}
     var self = this;
 
-    this.sliderInfoElm.val(this.colorTemp);
-
+    if (! self.devIsDali) {
+      this.sliderInfoElm.val(this.colorTemp);
+    } else  {
+      if (this.colorTempUnknown) {
+        this.sliderInfoElm.val("--");
+      } else {
+        this.sliderInfoElm.val(this.colorTemp);
+      }
+    }
     this.sliderElm.on("slide", function (event, ui) {
       self.onSliderChange(ui.value);
     });
@@ -44221,6 +44938,31 @@ SetParameters = function(iface, address, special_input_id)
       }
     }
 
+    // After setting the config parameters of a dali device, we have to store the UNIVERSAL_LIGHT_MAX_CAPABILITIES of each group channel as mata data.
+   // Otherwise ReGa can't determne the correct value on the page Status/Control, especially when changing a group.
+    var channel = DeviceList.getChannelByAddress(address);
+    if ((channel.typeName == "HmIP-DRG-DALI") && (typeof MetaDaliGroupHasBeenSet == "undefined")) {
+      // After 5 seconds we can determine the new UNIVERSAL_LIGHT_MAX_CAPABILITIES of the DALI group channels and store them as meta data
+      window.setTimeout(function() {
+        var devAddress = channel.device.address,
+        grpChannel;
+
+        for (var loop = 33; loop <= 48; loop++) {
+         var maxCap = homematic("Interface.getMasterValue", {
+           "interface": "HmIP-RF",
+           "address": devAddress + ":" + loop,
+           "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"
+         });
+         grpChannel = DeviceList.getChannelByAddress(devAddress + ":" + loop);
+         homematic("Interface.setMetadata", {"objectId": grpChannel.id , "dataId" : "maxCap", "value": maxCap});
+        }
+        window.setTimeout(function() {delete MetaDaliGroupHasBeenSet;},5000);
+      },5000);
+      MetaDaliGroupHasBeenSet = true;
+    }
+
+
+
     if ((special_input_id == "TIMEOUTMANAGER") && (typeof tom == "object") && (tom.iface == iface) && (tom.address == address) && (tom.tom_isDirty()))
     {
       poststr += tom.tom_getPostStr();
@@ -44282,6 +45024,18 @@ SetParameters = function(iface, address, special_input_id)
     if (channel) { device = channel.device; }
   }
   */
+
+  // This prevents an non-existing string for MAIN_/SUB_TEXT for e. g.  the HmIPW-WGD(-PL)
+  if ((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) {
+    arPostStr = poststr.split("&");
+    jQuery.each(arPostStr, function (index, val) {
+      if (val == "MAIN_TEXT=" || val == "SUB_TEXT=") {
+        // %24 = $
+        poststr = poststr.replace(val, val + "%24%24%24%24%24");
+      }
+    });
+  }
+
   SendRequest('ic_ifacecmd.cgi', null, function() {
     if (device)
     {
@@ -45269,18 +46023,6 @@ showMaintenanceCP = function()
 
 showNewFirmwareDownload = function() {
   CreateCPPopup("/config/cp_maintenance.cgi", "downloadOnly=1");
-};
-
-showCCUAP = function(arDrap2Update) {
-  var drapSGtin = "";
-  jQuery.each(arDrap2Update, function(index, data) {
-    drapSGtin += data.address + ",";
-  });
-  CreateCPPopup("/pages/jpages/hmip/AccessPoint/show", "draps="+drapSGtin.slice(0,-1) );
-};
-
-showAccessPoint = function() {
-  CreateCPPopup("/pages/jpages/hmip/AccessPoint/show");
 };
 
 CreateCPPopup = function(src, pb) {

@@ -1,0 +1,40 @@
+"dimmer_on_brighter" : "Brightness (V) - on/brighter",
+"dimmer_off_darker" : "Brightness (V) - off/darker",
+"dimmer_on_off_b_d" : "Helligkeit (V) - on/off &amp; brighter/darker",
+"color_up" : "Colour value (H) - up",
+"color_down" : "Colour value (H) - down",
+"color_up_down" : "Colour value (H) - up/down",
+
+"saturation_up" : "Saturation (S) - up",
+"saturation_down" : "Saturation (S) -  down",
+"saturation_up_down" : "Saturation (S) -  up/down",
+
+"optionColorVal" : "Colour value",
+
+
+"comment" : "This is for the Tunable White mode of the DALI device",
+
+"TW_dimmer_on_brighter" : "Brightness (TW) - on/brighter",
+"TW_dimmer_off_darker" : "Brightness (TW) - off/darker",
+"TW_dimmer_on_off_b_d" : "Brightness - (TW) on/off &amp; brighter/darker",
+"TW_colortemp_up" : "Colour temperature - up",
+"TW_colortemp_down" : "Colour temperature - down",
+"TW_colortemp_up_down" : "Colour temperature - up/down",
+
+"TW_hcl_on_up" : "HCL - on/brighter",
+"TW_hcl_off_down" : "HCL - off/darker",
+"TW_hcl_on_of_up_down" : "HCL - on/off / brighter/darker",
+
+"TW_dim2warm_on_up" : "Dim2Warm - on/brighter",
+"TW_dim2warm_off_down" : "Dim2Warm - off/darker",
+"TW_dim2warm_on_of_up_down" : "Dim2Warm - on/off & brighter/darker",
+
+"Effect" : "EffeCt",
+
+"COLOR_TEMP" : "Colour temperature",
+"COLOR_TEMP_ON" : "Colour temperature in status 'on'",
+"COLOR_TEMP_OFF" : "Colour temperature in status 'off'",
+"MIN_COLOR_TEMP" : "Minimum colour temperature",
+"MAX_COLOR_TEMP" : "Maximum colour temperature",
+
+"unitKelvin" : "K",

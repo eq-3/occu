@@ -9,3 +9,6 @@
 "optionOn" : "Auto-Modus",
 "optionOff" : "Manu-Modus",
 
+"optionLocked" : "Entriegeln",
+"optionOpen" : "%D6ffnen",
+

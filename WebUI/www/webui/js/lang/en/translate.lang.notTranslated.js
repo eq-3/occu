@@ -76,6 +76,34 @@ jQuery.extend(true, langJSON, {
     "minTemp" : "min.<br/>Temp",
     "maxTemp" : "max.<br/>Temp",
 
+
+    "comment: " : "Release A/2023 - not yet translated",
+
+    "lblNumberOfChannels": "Number of channels",
+
+    "optionNoEffect" : "End effect",
+    "optionRainbow" : "Rainbow",
+    "optionSunrise" : "Sunrise",
+    "optionSunset" : "Sunset",
+    "optionForrest" : "Forest atmosphere",
+    "optionSignalingRed" : "Signal red",
+    "optionGreenBillow" : "Green pulsation",
+
+    "optionEffect" : "Effect",
+
+    "errorStateCoProcessor" : "State co-processor",
+    "errorCoProcessorFalse" : "<br/>OK",
+    "errorCoProcessorTrue" : "<br/>Error",
+
+    "stateDaliBus" : "DALI bus status",
+    "stateDaliBus_0" : "<br/>OK",
+    "stateDaliBus_1" : "<br/>Short circuit",
+    "stateDaliBus_2" : "<br/>Overload",
+
+    "stringTableErrorLimitULR" : "Limit error",
+    "stringTableErrorLimitULR_False" : "Limit error: Yes",
+    "stringTableErrorLimitULR_True" : "Limit error: No",
+
     "noMoreKeys" : ""
   }
 });

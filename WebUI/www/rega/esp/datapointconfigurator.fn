@@ -194,9 +194,9 @@ function ::dcCreate()
         ! WriteLine( "<script>console.log('oE.ID(): "#oE.ID()#"');</script>" );
 
         sControlName = oE.MetaData("CONTROL");
-
         if( sControlName )
         {
+          object ch = dom.GetObject(chnId);
           ! WriteLine( "<script>conInfo('sControlName: "#sControlName#"');</script>" );
 
           !#ACCELERATION_TRANSCEIVER
@@ -315,9 +315,6 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_TRANSMITTER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_TRANSMITTER;
-
-            object ch = dom.GetObject(chnId);
-
             if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL-2")) {
               Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
             } else {
@@ -338,7 +335,6 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_VIRTUAL_RECEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_VIRTUAL_RECEIVER;
-            object ch = dom.GetObject(chnId);
             if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL-2")) {
               Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
             } else {
@@ -392,13 +388,15 @@ function ::dcCreate()
           }
 
           !# CN_CARBON_DIOXIDE_RECEIVER
-          bIsControl = ( sControlName.Find(CN_CARBON_DIOXIDE_RECEIVER) > -1 );
-          if( bIsControl && (sLastControlName!=CN_CARBON_DIOXIDE_RECEIVER) )
-          {
-            WriteLine( "<script>conInfo('Control CARBON_DIOXIDE_RECEIVER found.');</script>" );
-            isKnownControl = true;
-            sLastControlName = CN_CARBON_DIOXIDE_RECEIVER;
-            Call("/esp/controls/weather_sensor.fn::CreateCarbonDioxideReceiver()");
+          if (ch.Label() != "HmIPW-SCTHD") {
+            bIsControl = ( sControlName.Find(CN_CARBON_DIOXIDE_RECEIVER) > -1 );
+            if( bIsControl && (sLastControlName!=CN_CARBON_DIOXIDE_RECEIVER) )
+            {
+              WriteLine( "<script>conInfo('Control CARBON_DIOXIDE_RECEIVER found.');</script>" );
+              isKnownControl = true;
+              sLastControlName = CN_CARBON_DIOXIDE_RECEIVER;
+              Call("/esp/controls/weather_sensor.fn::CreateCarbonDioxideReceiver()");
+            }
           }
 
           !# CHANNEL_NOT_ACTIVE
@@ -436,7 +434,6 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_COLORTEMP) )
           {
             WriteLine( "<script>conInfo('Control CN_COLORTEMP found.');</script>" );
-            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_COLORTEMP;
             if (ch.Label().Substr(0,7) == "VIR-LG-") {
@@ -456,7 +453,6 @@ function ::dcCreate()
 
          !# DANGER
          !  bIsControl = ( sControlName.Find(CN_DANGER) > -1 );
-         ! object ch = dom.GetObject(chnId);
          ! if( bIsControl && (sLastControlName!=CN_DANGER) && (ch.Label() != "HmIP-SWSD-2"))
          ! {
          !   WriteLine( "<script>conInfo('Control DANGER-Sensor found.');</script>" );
@@ -488,7 +484,6 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_DIMMER) > -1 );
           if( bIsControl && (sLastControlName!=CN_DIMMER) )
           {
-            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_DIMMER;
             if (ch.Label().Substr(0,12) != "VIR-LG-ONOFF") {
@@ -556,7 +551,6 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_DOOR_SENSOR) > -1 );
           if( bIsControl && (sLastControlName!=CN_DOOR_SENSOR) )
           {
-            object ch = dom.GetObject(chnId);
             if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") {
               WriteLine( "<script>conInfo('Control DOOR_WINDOW_CONTACT found.');</script>" );
               isKnownControl = true;
@@ -632,7 +626,6 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_HEATING_CONTROL_HMIP) )
           {
             WriteLine( "<script>conInfo('Control CN_HEATING_CONTROL_HMIP found.');</script>" );
-            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_HEATING_CONTROL_HMIP;
             if (ch.Label() == "ALPHA-IP-RBGa") {
@@ -646,7 +639,6 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_HMIP_BUTTON) > -1 );
           if( bIsControl && (sLastControlName!=CN_HMIP_BUTTON) )
           {
-            object ch = dom.GetObject(chnId);
               WriteLine( "<script>conInfo('Control CN_HMIP_BUTTON found.');</script>" );
               isKnownControl = true;
               sLastControlName = CN_HMIP_BUTTON;
@@ -699,7 +691,6 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_MAINTENANCE) )
           {
             WriteLine( "<script>conInfo('Control CN_MAINTENANCE found.');</script>" );
-            object ch = dom.GetObject(chnId);
             if (ch.Label() == "HmIPW-DRAP") {
               WriteLine( "<script>conInfo('Create DRAP Control.');</script>" );
               sLastControlName = CN_MAINTENANCE;
@@ -741,8 +732,7 @@ function ::dcCreate()
               isKnownControl = true;
               Call("/esp/controls/maintenanceSmokeDetector.fn::CreateMaintenance()");
             }
-
-          }
+         }
 
           !# CN_MOTIONDETECTOR
           bIsControl = ( sControlName.Find(CN_MOTIONDETECTOR) > -1 );
@@ -776,7 +766,6 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_PDDT) > -1 );
           if( bIsControl && (sLastControlName != CN_PDDT) )
           {
-            object ch = dom.GetObject(chnId);
             WriteLine( "<script>conInfo('Control CN_PDDT (PASSAGE_DETECTOR_DIRECTION_TRANSMITTER) found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_PDDT;
@@ -868,7 +857,6 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_RGBW_COLOR) )
           {
             WriteLine( "<script>conInfo('Control CN_RGBW_COLOR found.');</script>" );
-            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_RGBW_COLOR;
 
@@ -887,7 +875,6 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_RGB_COLOR) )
           {
             WriteLine( "<script>conInfo('Control CN_RGB_COLOR found.');</script>" );
-            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_RGB_COLOR;
             if (ch.Label().Substr(0,7) == "VIR-LG-") {
@@ -932,7 +919,6 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_SHUTTER_TRANSMITTER) > -1 );
           if( bIsControl && (sLastControlName!=CN_SHUTTER_TRANSMITTER) )
           {
-            object ch = dom.GetObject(chnId);
             object mode = dom.GetObject(ch.Address());
             WriteLine( "<script>conInfo('Control SHUTTER_TRANSMITTER found.');</script>" );
             isKnownControl = true;
@@ -944,7 +930,6 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_SHUTTER_VIRTUAL_RECEIVER) > -1 );
           if( bIsControl && (sLastControlName!=CN_SHUTTER_VIRTUAL_RECEIVER) )
           {
-            object ch = dom.GetObject(chnId);
             object mode = dom.GetObject(ch.Address());
             WriteLine( "<script>conInfo('Control SHUTTER_VIRTUAL_RECEIVER found.');</script>" );
             isKnownControl = true;
@@ -967,7 +952,6 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_SMOKE_DETECTOR))
           {
             WriteLine( "<script>conInfo('Control CN_SMOKE_DETECTOR found.');</script>" );
-            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_SMOKE_DETECTOR;
             Call("/esp/controls/smokedetector.fn::CreateSmokeDetectorControl()");
@@ -977,7 +961,6 @@ function ::dcCreate()
           bIsControl = ( sControlName.Find(CN_SWITCH) > -1 );
           if( bIsControl && (sLastControlName != CN_SWITCH) )
           {
-            object ch = dom.GetObject(chnId);
             isKnownControl = true;
             sLastControlName = CN_SWITCH;
             if (ch.Label().Substr(5,4) != "BWTH") {
@@ -1022,35 +1005,59 @@ function ::dcCreate()
 
           !# UNIVERSAL_LIGHT_RECEIVER
           bIsControl = ( sControlName.Find(CN_UNIVERSAL_LIGHT_RECEIVER) > -1 );
-          if( bIsControl && (sLastControlName!=CN_UNIVERSAL_LIGHT_RECEIVER))
+          if( bIsControl && (sLastControlName != CN_UNIVERSAL_LIGHT_RECEIVER))
           {
-            WriteLine( "<script>conInfo('Control CN_UNIVERSAL_LIGHT_RECEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_UNIVERSAL_LIGHT_RECEIVER;
 
             object oDevice = dom.GetObject(cObj.Device());
             object oMaintenance = dom.GetObject(oDevice.Channels().GetAt(0));
-            object ch = dom.GetObject(chnId);
             string chnAddress = ch.Address();
             integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
 
-            if ((oMaintenance.MetaData("deviceMode") == 0) || (oMaintenance.MetaData("deviceMode") == 1)) {
-              if (chnNumber == 1) {
-                Call("/esp/controls/univisal_light_receiver.fn::CreateRGBWControlMode01()");
-              } else {
-                Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+            if (ch.Label() != "HmIP-DRG-DALI") {
+              WriteLine( "<script>conInfo('Control CN_UNIVERSAL_LIGHT_RECEIVER found.');</script>" );
+              if ((oMaintenance.MetaData("deviceMode") == 0) || (oMaintenance.MetaData("deviceMode") == 1)) {
+                if (chnNumber == 1) {
+                  Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode01()");
+                } else {
+                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                }
               }
-            }
-            if (oMaintenance.MetaData("deviceMode") == 2) {
+              if (oMaintenance.MetaData("deviceMode") == 2) {
 
-              if ((chnNumber == 1) || (chnNumber == 2) ) {
-                Call("/esp/controls/univisal_light_receiver.fn::CreateRGBWControlMode2()");
+                if ((chnNumber == 1) || (chnNumber == 2) ) {
+                  Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode2()");
+                } else {
+                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                }
+              }
+              if (oMaintenance.MetaData("deviceMode") == 3) {
+                Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode3()");
+              }
+            } else {
+              ! HmIP-DRG-DALI
+
+              integer maxCap = ch.MetaData('maxCap');
+
+              if ((maxCap != null) && (maxCap < 5)) {
+                ! Switch
+                if (maxCap == 0) {Call("/esp/controls/switch.fn::CreateVIR-LG-ONOFF_Actuator()");}
+
+                ! Dimmer
+                if (maxCap == 1) {Call("/esp/controls/dimmer.fn::CreateDALIDimmingActuator()");}
+
+                ! Tunable White
+                if (maxCap == 2) {Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode2()");}
+
+                ! RGB
+                if (maxCap == 3) {
+                  Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode_RGB_TW()");
+                }
               } else {
+                ! No parameter to set
                 Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
               }
-            }
-            if (oMaintenance.MetaData("deviceMode") == 3) {
-              Call("/esp/controls/univisal_light_receiver.fn::CreateRGBWControlMode3()");
             }
           }
 
@@ -1133,9 +1140,6 @@ function ::dcCreate()
             sLastControlName = CN_WINDOW_DRIVE_RECEIVER;
             Call("/esp/controls/win_sc_sensor.fn::CreateWindowDriveReceiver()");
           }
-
-
-
         }
         else
         {

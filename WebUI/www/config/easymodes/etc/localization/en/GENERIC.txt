@@ -86,3 +86,14 @@
 "optionBlinkBillowFast" : "Fast increase/decrease",
 "optionBlinkBehaviourOldValue" : "Maintain behaviour",
 "optionBlinkBehaviourDoNotCare" : "Ignore behaviour",
+
+"optionON" : "On",
+"optionOFF" : "Off",
+
+"optionNoEffect" : "End effect",
+"optionRainbow" : "Rainbow",
+"optionSunrise" : "Sunrise",
+"optionSunset" : "Sunset",
+"optionForrest" : "Forest atmosphere",
+"optionSignalingRed" : "Signal red",
+"optionGreenBillow" : "Green pulsation",

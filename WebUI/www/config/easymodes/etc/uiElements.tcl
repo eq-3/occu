@@ -175,7 +175,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
 
   # exec echo "getTextField: $extraparam" >> /tmp/textField.log
 
-  if {[string equal $value ""] == 1} {set value ''}
+  if {[string equal $value ''] == 1} {set value '*'}
 
   global psDescr dev_descr
   upvar psDescr descr
@@ -1645,7 +1645,10 @@ proc getPowerUpSelectorShutterBlind {chn p special_input_id model} {
   return $html
 }
 
-proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode} {
+proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode {isDALI 0}} {
+
+  # isDALI should be 1 for the HmIP-DRG-DALI
+
   global psDescr dev_descr ch_descr
   upvar psDescr psDescr
   upvar $p ps
@@ -1670,10 +1673,14 @@ proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode} {
     if { [info exists ps($param)] == 1  } {
       incr prn
       append html "<tr>"
-        append html "<td>\${lblPowerUpOnLevel}</td>"
-        #append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-        option RAW_0_100Percent
-        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        if {$mode == 0} {
+          # The actor acts as switch actor (ON/OFF). Here we set the ON value to 100%. This is invisible for the user.
+          append html "<td class='hidden'>[getTextField $param 100 $chn $prn]</td>"
+        } else {
+          append html "<td>\${lblPowerUpOnLevel}</td>"
+          option RAW_0_100Percent
+          append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+        }
       append html "</tr>"
     }
 
@@ -1723,7 +1730,8 @@ proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode} {
 
     set param POWERUP_ON_COLOR_TEMPERATURE
     # mode 2 = DIMMER_TUNABLE_WHITE
-    if { ([info exists ps($param)] == 1)  && ($mode == 2) } {
+    # The RGB mode (mode 3) of the DALI device is capable of TUNABLE_WHITE - the HmIP-RGBW is not.
+    if { ([info exists ps($param)] == 1)  && (($mode == 2) || (($isDALI == 1) && ($mode == 3))) } {
       incr prn
       append html "<tr>"
         append html "<td>\${lblPowerUpOnColorTemperature}</td>"

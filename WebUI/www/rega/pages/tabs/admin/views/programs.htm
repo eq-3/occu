@@ -487,6 +487,53 @@
     });
   };
 
+  setDALI_CombinedParameter = function(regaDialogID, deviceType, chnAddress) {
+    // maxCap > 0 = SWITCH, 1 = DIMMER, 2 = Tunable White, 3 = RGB + Tunable White
+    var optionString = "",
+      maxCap = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": chnAddress, "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"}),
+      optionElm = jQuery("#prgStringOptionValue" + regaDialogID);
+
+    //console.log("setDALI_CombinedParameter", "chn: " + chnAddress + " maxCap: " +maxCap + " - optionElm.text(): " + optionElm.val());
+
+    switch (parseInt(maxCap)) {
+      case 0:
+        // Switch
+        optionString = optionElm.val();
+        if (optionString == "0") {
+          optionElm.val("S=true");
+        }
+        setCombinedParameter(regaDialogID,deviceType,chnAddress,"switchState");
+        break;
+      case 1:
+        // Dimmer
+        optionString = optionElm.val();
+        if (optionString == "0") {
+          optionElm.val("L=100,DV=31,DU=2,RTV=0,RTU=1,C=7");
+        }
+        setDimmerLevelController(regaDialogID,deviceType,chnAddress);
+        break;
+      case 2:
+        // Tunable White;
+        optionString = optionElm.val();
+        if (optionString == "0") {
+          optionElm.val("L=100,OT=0,RT=0,TC=4500,RTTDV=0,RTTDU=0");
+        }
+        setHmipRGBWTunableWhiteController(regaDialogID, deviceType, chnAddress);
+        break;
+      case 3:
+        // RGB + Tunable White;
+        optionString = optionElm.val();
+        if (optionString == "0") {
+          optionElm.val( "L=100,OT=0,RT=0,H=0,SAT=100");
+        }
+        setHmipRGBWController(regaDialogID,deviceType,chnAddress);
+        break;
+      default :
+        console.log("setDALI_CombinedParameter: ERROR");
+        break;
+    }
+  };
+
   setHmipRGBWController = function(regaDialogID, deviceType, chnAddress) {
     var elm = jQuery("#prgStringOptionValue" + regaDialogID), // this is the element which contains the relevant string to transmit
       url = "/pages/msg/setRGBWCombinedParam.htm";

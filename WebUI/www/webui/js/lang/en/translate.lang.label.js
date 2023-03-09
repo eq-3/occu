@@ -32,6 +32,7 @@ jQuery.extend(true,langJSON, {
     "lblCalibrationInterval" : "Calibration interval",
     "lblCalibrationValue" : "Calibration value",
     "lblCarrierSense": "Carrier Sense",
+    "lblCarrierSenseA": "Carrier Sense CCU",
     "lblChannelActivInactiv" : "Channel active / inactive:",
     "lblChannelActivInactivWhenNoOutput" : "Device inactive or in standby<br/>at 0% output voltage",
     "lblChannelNames" : "Preview of channel names",
@@ -74,6 +75,7 @@ jQuery.extend(true,langJSON, {
     "lblDutyCycleA" : "Duty Cycle CCU",
     "lblDutyCycleBidCosRF" : "Duty Cycle BidCos:",
     "lblDutyCycleHmIP" : "Duty Cycle HmIP: ",
+    "lblEffect" : "Effect",
     "lblEmergencyOperation" : "Connection failure with room control unit",
     "lblEmpty": "empty",
     "lblError" : "Error",
@@ -230,7 +232,6 @@ jQuery.extend(true,langJSON, {
     "lblSettingsFavorites1User" : "Overview of the favorites assigned to the logged in user",
     "lblSettingsFavorites2User" : "Create and edit new favorites",
     "lblSettingsUserAdministrationUser" : "Edit your own user account including changing the password",
-    "lblShowAllAPs": "Update Access Points with incompatible FW",
     "lblSoundFileNr" : "MP3 file",
     "lblSoundfileList" : "Title list",
     "lblStandardLink": "Default connection",
@@ -297,7 +298,7 @@ jQuery.extend(true,langJSON, {
     "lblWhiteValueG" : "not in use en* WHITE_VALUE_G",
     "lblWhiteValueB" : "not in use en* WHITE_VALUE_B",
 
-    "lblDimmerOnMinLevel" : "Minimum level<br/>in status ON",
+    "lblDimmerOnMinLevel" : "Minimum level<br/>in ON state",
 
     "noMOreKeys" : ""
   }

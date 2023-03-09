@@ -17,7 +17,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set url $iface_url($iface)
 
   array set dev_ps [xmlrpc $url getParamset $maintenanceAdress MASTER]
-  set devMode $dev_ps(DEVICE_OPERATION_MODE); # 0 = RGBW, 1 = RGB, 2 = Tuneable White, 3 = PWM
+
+  if { [info exists dev_ps(DEVICE_OPERATION_MODE)] == 1  } {
+    # HmIP-RGB(W)
+    set devMode $dev_ps(DEVICE_OPERATION_MODE); # 0 = RGBW, 1 = RGB, 2 = Tuneable White, 3 = PWM
+  } else {
+    # DALI
+    set devMode 4
+  }
+
+
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
   switch $devMode {
@@ -44,6 +53,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     }
     3 {
         append HTML_PARAMS(separate_1) "[getUniversalLightReceiver $chn ps psDescr]"
+    }
+    4 {
+        # DALI
+        append HTML_PARAMS(separate_1) "[getUniversalLightReceiverDali $chn ps psDescr]"
     }
   }
   append HTML_PARAMS(separate_1) "</table>"

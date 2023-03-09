@@ -143,15 +143,16 @@ HmIPWeeklyProgram.prototype = {
     this.ACCESS_TRANSMITTER_HmIP_FWI = "HmIP-FWI";
     this.ACCESS_TRANSCEIVER_HmIP_WKP = "HmIP-WKP";
     this.UNIVERSAL_LIGHT_RECEIVER_RGBW = "HmIP-RGBW";
+    this.UNIVERSAL_LIGHT_RECEIVER_DALI = "HmIP-DRG-DALI";
 
     this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
-    this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-WKP", "HmIP-RGBW"];
-    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW"];
+    this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
+    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
     this.selectedMode_RGBW = "";
-
+    this.currentLevel = [];
     this.anchor = jQuery("#weeklyProgram_" + this.chn);
 
     // The device is still in the device inbox
@@ -256,7 +257,7 @@ HmIPWeeklyProgram.prototype = {
       this.virtualChannels = [2];
     }
 
-    if (this._isDeviceType("HmIP-RGBW")) {
+    if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW)) {
       // get selected mode - deviceMode
       var chnId = DeviceList.getChannelByAddress(address.split(":")[0] + ":0").id;
       this.selectedMode_RGBW = parseInt(homematic("Interface.getMetadata", {"objectId": chnId, "dataId": "deviceMode"}));
@@ -274,6 +275,32 @@ HmIPWeeklyProgram.prototype = {
         default:
           this.virtualChannels = [1, 2, 3, 4];
           this.chnType = this.DIMMER;
+      }
+    }
+
+    // Collect the target channels. Group channels are always visible. Non group channels are only visible when a DALI device is connected.
+    if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+      var chnDescr = homematic("Interface.getParamset", {"interface":this.hmIPIFace, "address": this.devAddress + ":1", "paramsetKey": "MASTER"});
+      this.sliderTempMin = parseInt(chnDescr.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
+      this.sliderTempMax = parseInt(chnDescr.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
+
+      if (daliTargetChannels == null) {
+        jQuery.each(this.device.channels, function(index, channel) {
+          if (typeof channel.daliMaxCapabilities != "undefined") {
+            if (parseInt(channel.daliMaxCapabilities) < 5) {
+              self.virtualChannels.push(channel.index);
+            } else {
+              return false; // leave each loop
+            }
+          }
+        });
+
+        for (var loop = 33; loop <= 48; loop++) {
+          this.virtualChannels.push(loop);
+        }
+        daliTargetChannels = this.virtualChannels;
+      } else {
+        this.virtualChannels = daliTargetChannels;
       }
     }
 
@@ -545,7 +572,23 @@ HmIPWeeklyProgram.prototype = {
     if (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) {
       this.ulrPrn[number] = this.prn;
       this.prn += 3;
-      programEntry += "<tr id='rowColorSelector_" + number + "'>";
+      if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+
+        programEntry += this._getHR();
+        programEntry += "<tr id='rowDaliEffectSelector_" + number + "' class='hidden'>";
+        programEntry += "<td>"+translateKey('lblDaliMode')+"</td>";
+        programEntry += "<td>";
+          programEntry += "<select id='daliEffectSelector_"+number+"'>";
+            programEntry += "<option value='3'>"+translateKey('optionSwitch')+"</option>";
+            programEntry += "<option value='4'>"+translateKey('optionDimmer')+"</option>";
+            programEntry += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
+            programEntry += "<option value='0'>"+translateKey('optionHueSaturation')+"</option>";
+            programEntry += "<option value='2'>"+translateKey('optionEffect')+"</option>";
+            //programEntry += "<option value='0'>tr RGBW</option>";
+          programEntry += "</select>";
+        programEntry += "</td>";
+      }
+      programEntry += "<tr id='rowColorSelector_" + number + "'></tr>";
       if (this.activeEntries[number] == true) {
         this._getColorTempAndEffect(number);
       }
@@ -845,47 +888,69 @@ HmIPWeeklyProgram.prototype = {
   _getColorTempAndEffect: function(number) {
     //var currentEffectType = this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE"],
     var currentEffectType = (this.selectedMode_RGBW < 2) ? 0 : 1,
-      currentEffectValue = this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE"],
-      currentLevel = this.ps[number + "_WP_LEVEL"];
+      currentEffectValue = parseInt(this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE"]),
+      selectedWPMode_DALI;
+
+    this.currentLevel[number] = this.ps[number + "_WP_LEVEL"];
+
+    //console.log(this.ps);
 
     var PRN = this.ulrPrn[number];
     var self = this;
 
+    setDaliWPMode = function (val, number) {
+      homematic("Interface.setMetadata", {
+        "objectId": self.device.id,
+        "dataId": "daliWPMode_" + number,
+        "value": val
+      });
+    };
 
     setEffectType = function(val, no, chn, prn) {
       var nr = addLeadingZero(no),
+
+        trColorSelector = jQuery("#rowColorSelector_" + nr),
+
+        trRampAndLevel = jQuery("#trLevel_" + nr),
+
         hueSaturationElm = jQuery("[name='wpHueSaturation_" + nr +"']"),
         colorTempElm = jQuery("[name='wpColorTemp_" + nr +"']"),
-        //effectElm = jQuery("[name='wpEffect_" + nr +"']"),
+        colorTempSwitchElm = jQuery("#colorTempSwitch_" + nr),
+        tdEffect = jQuery("[name='wpEffect_" + nr +"']"),
         lblBrightnessElm = jQuery("#lblWPBrightness_" + nr),
         optionBrightnessElm = jQuery(lblBrightnessElm).next().children("select:first"), // option field LEVEL
         freeValueBrightnessElm = jQuery(optionBrightnessElm).nextAll().not(':last'), // Enter free value field LEVEL
         textBrightnessElm = jQuery("#separate_CHANNEL_" + chn + "_" + (parseInt(prn) + 1)), // text LEVEL
-        nameBrightnessElm = nr + "_WP_LEVEL";
+        nameBrightnessElm = nr + "_WP_LEVEL",
+        brightnessElm = jQuery("[name='" + nameBrightnessElm + "']"),
+        valBrightness;
 
-      var colorHueSatEffectElm = jQuery("[name='"+nr+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE']").first(),
-        colorLevelElm = jQuery("[name='"+nr+"_WP_LEVEL']").first();
+      var colorHueSatEffectElm = jQuery("[name='"+nr+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE']").first();
+
+      colorTempSwitchElm.val( (parseInt(self.currentLevel[nr] * 100) == 0) ? 0 : 1 );
 
       jQuery("#separate_CHANNEL_"+chn+"_"+prn).val(val);
 
       val = parseInt(val);
-
       switch (val) {
         case 0: // Hue/Saturation
+          brightnessElm.attr("disabled", false);
+          trColorSelector.show();
           if ((parseInt(colorHueSatEffectElm.val()) < 0) || ((parseInt(colorHueSatEffectElm.val()) > 362 * 256))) {colorHueSatEffectElm.val(0);}
           jQuery("#valHue_" + nr).val(parseInt(parseInt(colorHueSatEffectElm.val()) / 256));
           jQuery("#valSaturation_" + nr).val(parseInt(parseInt(colorHueSatEffectElm.val()) % 256 / 2));
-          jQuery("#valLevel_" + nr).val(parseInt(colorLevelElm.val() * 100));
+          jQuery("#valLevel_" + nr).val(parseInt(textBrightnessElm.val() * 100));
 
           jQuery("#tdHueSaturation_" + nr).show().prev().text(translateKey("lblColorValue"));
-          //jQuery("#tdHueSaturation_" + nr).prev().text(translateKey("lblColorValue"));
           jQuery("#tdColorTempSlider_" + nr).hide();
+          jQuery("#tdColorTempSwitch_" + nr).hide();
+          tdEffect.hide();
 
           hueSaturationElm.show();
           colorTempElm.hide();
-          //effectElm.hide();  currently not in use
-          lblBrightnessElm.hide();
-          optionBrightnessElm.attr('name','').hide();freeValueBrightnessElm.hide();
+          //lblBrightnessElm.hide();
+          trRampAndLevel.hide();
+          optionBrightnessElm.attr('name',''); //.hide();freeValueBrightnessElm.hide();
           textBrightnessElm.attr('name',nameBrightnessElm);
 
           jQuery("#trDurationMode" + nr).show();
@@ -895,35 +960,107 @@ HmIPWeeklyProgram.prototype = {
 
           break;
         case 1: // Color Temp
-          if ((parseInt(colorHueSatEffectElm.val()) < 1000) || ((parseInt(colorHueSatEffectElm.val()) > 10000))) {colorHueSatEffectElm.val(1000);}
-          jQuery("#valColorTemp_" + nr).val(colorHueSatEffectElm.val());
 
+          jQuery("#lblEffectType_" + nr).text(translateKey("lblColorTemp"));
+          brightnessElm.attr("disabled", false);
+
+          trColorSelector.show();
+          trRampAndLevel.show();
+          lblBrightnessElm.show();
+          lblBrightnessElm.next().show();
+          //if ((parseInt(colorHueSatEffectElm.val()) < 1000) || ((parseInt(colorHueSatEffectElm.val()) > 10000))) {colorHueSatEffectElm.val(self.sliderTempMin);}
+          if ((parseInt(colorHueSatEffectElm.val()) < 50) || ((parseInt(colorHueSatEffectElm.val()) > 200))) {colorHueSatEffectElm.val(self.sliderTempMin / 50);}
+          //jQuery("#valColorTemp_" + nr).show().val(colorHueSatEffectElm.val()).blur();
+          jQuery("#valColorTemp_" + nr).show().val((parseInt(colorHueSatEffectElm.val()) * 50)).blur();
           jQuery("#tdHueSaturation_" + nr).hide();
+          jQuery("#tdColorTempSwitch_" + nr).hide();
           jQuery("#tdColorTempSlider_" + nr).show();
+          jQuery("[name='wpColorTemp_" + nr + "']").show();
 
           hueSaturationElm.hide();
           colorTempElm.show();
-          //effectElm.hide();  currently not in use
+          tdEffect.hide();
           lblBrightnessElm.show();
-          //optionBrightnessElm.attr('name', nameBrightnessElm).val(0).change().show();//freeValueBrightnessElm.show();
+
+          valBrightness = (self.activeEntries[nr] == true) ? (1 * self.ps[nameBrightnessElm]).toFixed(3) : "0.000";
+          if (parseInt(parseFloat(valBrightness * 1000)) == 0) {
+            valBrightness = "0";
+          }
+          optionBrightnessElm.attr('name', nameBrightnessElm).val(valBrightness).change().show();
+
+          freeValueBrightnessElm.val(parseInt(valBrightness * 100));
           textBrightnessElm.attr('name','');
           break;
         case 2: // Effect
-          if ((parseInt(colorHueSatEffectElm.val()) < 0) || ((parseInt(colorHueSatEffectElm.val()) > 10))) {colorHueSatEffectElm.val(1);}
+
+          if ((currentEffectValue == 0) || (currentEffectValue > 20)) {
+            colorHueSatEffectElm.val("1");
+          }
+
+          trColorSelector.show();
+          jQuery("#lblEffectType_" + nr).text(translateKey("lblEffect"));
           jQuery("#valEffectSelector_" + nr).val(colorHueSatEffectElm.val());
+
           hueSaturationElm.hide();
           colorTempElm.hide();
-          //effectElm.show();  currently not in use
-          lblBrightnessElm.show();
-          optionBrightnessElm.attr("name", nameBrightnessElm).val(0).change().show();//freeValueBrightnessElm.show();
+          jQuery("#tdColorTempSwitch_" + nr).hide();
+          jQuery("#tdColorTempSlider_" + nr).hide();
+          trRampAndLevel.show();
+          tdEffect.show();
+
+          valBrightness = (self.activeEntries[nr] == true) ? (1 * self.ps[nameBrightnessElm]).toFixed(3) : "0.000";
+          if (parseInt(parseFloat(valBrightness * 1000)) == 0) {
+            valBrightness = "0";
+          }
+          optionBrightnessElm.attr('name', nameBrightnessElm).val(valBrightness).change().show();
+
+          freeValueBrightnessElm.val(parseInt(valBrightness * 100));
           textBrightnessElm.attr('name','');
+          setEffectBrightness(nr);
+          break;
+        case 3: // Switch
+          brightnessElm.attr("disabled", false);
+          jQuery("#lblEffectType_" + nr).text(translateKey("lblSwitchingState"));
+          //lblBrightnessElm.hide();
+          //lblBrightnessElm.next().hide();
+          trColorSelector.show();
+          trRampAndLevel.hide();
+          jQuery("#valColorTemp_" + nr).hide();
+          jQuery("[name='wpColorTemp_" + nr + "']").hide();
+          jQuery("#tdHueSaturation_" + nr).hide();
+          jQuery("#tdColorTempSlider_" + nr).hide();
+          tdEffect.hide();
+          jQuery("#tdColorTempSwitch_" + nr).change().show();
+
+          valBrightness = (self.activeEntries[nr] == true) ? (1 * self.ps[nameBrightnessElm]).toFixed(3) : "0.000";
+          optionBrightnessElm.attr('name', nameBrightnessElm).val(valBrightness).change().show();
+          freeValueBrightnessElm.val(parseInt(valBrightness * 100));
+          setSwitchStatus(nr, self.currentLevel[nr]);
+
+          textBrightnessElm.attr('name','');
+          break;
+        case 4: // Dimmer
+          brightnessElm.attr("disabled", false);
+          trColorSelector.hide();
+          trRampAndLevel.show();
+
+          valBrightness = (self.activeEntries[nr] == true) ? (1 * self.ps[nameBrightnessElm]).toFixed(3) : "0.000";
+          if (parseInt(parseFloat(valBrightness * 1000)) == 0) {
+            valBrightness = "0";
+          }
+          optionBrightnessElm.attr('name', nameBrightnessElm).val(valBrightness).change().show();
+
+          freeValueBrightnessElm.val(parseInt(valBrightness * 100));
+          textBrightnessElm.attr('name','');
+
           break;
         default:
           // Show all elements - no valid value!
           conInfo("ERROR: setEffectType - no valid value");
+          console.log("ERROR: setEffectType - no valid value");
           hueSaturationElm.show();
           colorTempElm.show();
-          //effectElm.show();  currently not in use
+          //tdEffect.show();  currently not in use
           lblBrightnessElm.show();
           optionBrightnessElm.attr("name", nameBrightnessElm).show();//freeValueBrightnessElm.show();
           textBrightnessElm.attr('name','');
@@ -957,10 +1094,63 @@ HmIPWeeklyProgram.prototype = {
       val2SendElm.val(valLevel / 100);
     };
 
-    var result = "";
+    setSwitchStatus = function(number, value) {
+      //01_WP_LEVEL
+      //var brighnessElm = jQuery("[name="+self._addLeadingZero(number)+"_WP_LEVEL]");
+      var brighnessElm = document.getElementsByName(self._addLeadingZero(number)+"_WP_LEVEL");
 
+      if (typeof brighnessElm[0] != "undefined") {
+        brighnessElm[0].value = (parseInt(value) == 0) ? "0" : "1.000";
+      } else {console.log("ERROR",self._addLeadingZero(number)+"_WP_LEVEL -- not found");}
+    };
+
+    setEffectBrightness = function(number) {
+      var number = self._addLeadingZero(number),
+        val2Send = parseInt(jQuery("[name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE']").first().val()),
+        brightnessElm = jQuery("#lblWPBrightness_" + number).next().children("select:first");
+
+      if (val2Send == 1) {
+        brightnessElm.val("0").attr("disabled", true); // option field LEVEL
+      } else {
+        brightnessElm.val("1.000").attr("disabled", false);
+      }
+    };
+
+    // The Tunable White value of the RGB and DALI devices has to be diveded by 50
+    adaptValue = function(elm, number) {
+      var no = self._addLeadingZero(number);
+      if (parseInt(jQuery("#daliEffectSelector_" + no).val()) == 1) {
+        var valColorTempElm = jQuery("[name="+no+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE]").first();
+        valColorTempElm.val((parseInt(elm.value) / 50));
+      }
+    };
+
+    if (self._isDeviceType(self.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+      // modes 0=RGB, 1=Tunable White, 3=SWITCH, 4=DIMMER  > 0 and 1 displays the same elements as the HmIP-RGB, 2 (RGBW) is not in use for DALI. 3 and 4 are DALI only
+       selectedWPMode_DALI = parseInt(homematic("Interface.getMetadata", {
+        "objectId": this.device.id,
+        "dataId": "daliWPMode_" + number
+      }));
+
+      if (isNaN( selectedWPMode_DALI)) {
+        selectedWPMode_DALI = 0;
+        setDaliWPMode( selectedWPMode_DALI, number);
+      }
+      currentEffectType = selectedWPMode_DALI;
+      window.setTimeout(function() {
+        jQuery("#daliEffectSelector_" +number).val(selectedWPMode_DALI).unbind().change(function() {
+          currentEffectType = parseInt(this.value);
+          setDaliWPMode( parseInt(this.value), number);
+          setEffectType(parseInt(this.value), parseInt(number), self.chn, (PRN - 2));
+        }).change();
+          jQuery("#rowDaliEffectSelector_" + number).show();
+      },100);
+    }
+
+    var result = "";
     PRN++;
-    result += "<td>"+translateKey('lblColorTemp')+"</td>";
+    result += (currentEffectType < 3) ? "<td id='lblEffectType_"+number+"'>" + translateKey('lblColorTemp') + "</td>" : "<td id='lblEffectType_"+number+"'>" + translateKey('lblSwitchingState') + "</td>";
+
 /*
     result += "<td style=''>";
       result += "<select id='separate_CHANNEL_"+this.chn+"_"+PRN+"' value='"+currentEffectType+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE' onchange='setEffectType(this.value,"+number+");'>";
@@ -971,76 +1161,102 @@ HmIPWeeklyProgram.prototype = {
     result += "</td>";
 */
     // Here we collect the value hue/saturation, color or effect
-    result += "<td id='tdHueSaturation_" + number +"' name='wpHueSaturation_" +  number + "' class='hidden'><table><tr>";
-    //result += "<td><input id='colorPicker_" + number + "' class='basic'></td>"; // Anchor Spectrum Color Picker
-    result += "<td style='padding-right:20px;'><div id='colorPicker_" + number + "' class='basic'></div></td>"; // Anchor Iro Color Picker
+    result += "<td id='tdHueSaturation_" + number +"' name='wpHueSaturation_" +  number + "' class='hidden'>";
+      result += "<table>";
+        result += "<tr>";
 
-    result += "<td style='padding-bottom:35px;'><table style='padding:10px;' class='infoBckGnd'>";
-    result += "<tr>";
-    result += "<td class='alignRight infoBckGnd'>H</td>";
-    result += "<td class='infoBckGnd'>";
-    result += "<input id='valHue_" + number +"' type='text' class='alignCenter' size='5' onchange='setHueSatValue2Transmit("+number+","+this.chn+","+PRN+");'>";// Bit 8 -19
+          //result += "<td><input id='colorPicker_" + number + "' class='basic'></td>"; // Anchor Spectrum Color Picker
+          result += "<td style='padding-right:20px;'><div id='colorPicker_" + number + "' class='basic'></div></td>"; // Anchor Iro Color Picker
+
+          result += "<td style='padding-bottom:35px;'>";
+            result += "<table style='padding:10px;' class='infoBckGnd'>";
+
+              result += "<tr>";
+                result += "<td class='alignRight infoBckGnd'>H</td>";
+                result += "<td class='infoBckGnd'>";
+                  result += "<input id='valHue_" + number +"' type='text' class='alignCenter' size='5' onchange='setHueSatValue2Transmit("+number+","+this.chn+","+PRN+");'>";// Bit 8 -19
+                result += "</td>";
+                result += "<td class='alignLeft infoBckGnd'>&deg;</td>";
+              result += "</tr>";
+
+              result += "<tr>";
+                result += "<td class='alignRight infoBckGnd'>S</td>";
+                result += "<td class='infoBckGnd'>";
+                  result += "<input id='valSaturation_" +number + "' type='text' class='alignCenter' size='5' onchange='setHueSatValue2Transmit("+number+","+this.chn+","+PRN+");'>"; // Bit 0 - 7
+                result += "</td>";
+                result += "<td class='alignLeft infoBckGnd'>%</td>";
+              result += "</tr>";
+
+              result += "<tr>";
+                PRN++;
+                result += "<td class='alignRight infoBckGnd'>V</td>";
+                result += "<td class='infoBckGnd'>";
+                  result += "<input id='valLevel_" +number + "' type='text' class='alignCenter' size='5' onchange='setLevelValue2Transmit("+number+","+this.chn+","+PRN+",this.value);'>";
+                result += "</td>";
+                result += "<td class='alignLeft infoBckGnd'>%</td>";
+                result += "<td class='hidden alignRight infoBckGnd'>V</td>";
+                result += "<td class='hidden infoBckGnd'>";
+                  result += "<input type='text' id='separate_CHANNEL_"+this.chn+"_"+PRN+"' name='"+number+"_WP_LEVEL' value='"+this.currentLevel[number]+"' class='alignCenter' size='5'>";
+                result += "</td>";
+              result += "</tr>";
+
+            result += "</table>";
+          result += "</td>";
+        result += "</tr>";
+      result += "</table>";
     result += "</td>";
-    result += "<td class='alignLeft infoBckGnd'>&deg;</td>";
-    result += "</tr>";
-    result += "<tr>";
-    result += "<td class='alignRight infoBckGnd'>S</td>";
-    result += "<td class='infoBckGnd'>";
-    result += "<input id='valSaturation_" +number + "' type='text' class='alignCenter' size='5' onchange='setHueSatValue2Transmit("+number+","+this.chn+","+PRN+");'>"; // Bit 0 - 7
-    result += "</td>";
-    result += "<td class='alignLeft infoBckGnd'>%</td>";
-    result += "</tr>";
-    result += "</tr>";
-    PRN++;
-    result += "<td class='alignRight infoBckGnd'>V</td>";
-    result += "<td class='infoBckGnd'>";
-    result += "<input id='valLevel_" +number + "' type='text' class='alignCenter' size='5' onchange='setLevelValue2Transmit("+number+","+this.chn+","+PRN+",this.value);'>";
-    result += "</td>";
-    result += "<td class='alignLeft infoBckGnd'>%</td>";
-
-
-    result += "<td class='hidden alignRight infoBckGnd'>V</td>";
-    result += "<td class='hidden infoBckGnd'>";
-    result += "<input type='text' id='separate_CHANNEL_"+this.chn+"_"+PRN+"' name='" + number + "_WP_LEVEL' value='"+currentLevel+"' class='alignCenter' size='5'>";
-    result += "</td>";
-
-    result += "</tr>";
-
-    result += "</table></td>";
-
-    result += "</tr></table></td>";
 
     result += "<td id='tdColorTempSlider_"+number+"' class='hidden'><div id='colorTempSlider_"+number+"'></div>";
 
-    result += "<td colspan='3' name='wpColorTemp_" +  number + "'><table><tr>";
-    result += "<td name='_wpColorTemp_" +  number + "'>&nbsp;</td>";
-    result += "<td name='_wpColorTemp_" +  number + "'>";
-      result += "<input id='valColorTemp_"+number+"' type='text' class='alignCenter' size='3' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value)'>&nbspK ("+this.sliderTempMin+" K - "+this.sliderTempMax+" K)";
-    result += "</tr></table></td>";
+    result += "<td colspan='3' name='wpColorTemp_" +  number + "'>";
+      result += "<table>";
+        result += "<tr>";
+          result += "<td name='_wpColorTemp_" +  number + "'>&nbsp;</td>";
+          result += "<td name='_wpColorTemp_" +  number + "'>";
+            result += "<input id='valColorTemp_"+number+"' type='text' class='alignCenter' size='3' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value); adaptValue(this, "+number+")'>&nbspK ("+this.sliderTempMin+" K - "+this.sliderTempMax+" K)";
+          result += "</td>";
+        result += "</tr>";
+      result += "</table>";
+    result += "</td>";
 
-    /* currently not in use
-    result += "<td colspan='2' name='wpEffect_" +  number + "'><table><tr>";
-    result += "<td name='_wpEffect_" +  number + "'>Effect</td>";
-    result += "<td name='_wpEffect_" +  number + "'>";
-      result += "<select id='valEffectSelector_"+number+"' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value)'>";
-      for (var loop = 1; loop <= 10; loop++) {
-        result += "<option value='" +loop+ "'>"+loop+"</option>";
-      }
+
+    // Effect Selector
+    result += "<td colspan='2' name='wpEffect_" +  number + "' class='_hidden'><table><tr>";
+    //result += "<td name='_wpEffect_" +  number + "' class='_hidden'>Effect</td>";
+    result += "<td name='_wpEffect_" +  number + "' class='_hidden'>";
+      result += "<select id='valEffectSelector_"+number+"' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value);setEffectBrightness("+number+");'>";
+        result += "<option value='1'>"+translateKey('optionNoEffect')+"</option>";
+        result += "<option value='3'>"+translateKey('optionRainbow')+"</option>";
+        result += "<option value='5'>"+translateKey('Sonnenaufgang')+"</option>";
+        result += "<option value='7'>"+translateKey('optionSunset')+"</option>";
+        result += "<option value='11'>"+translateKey('optionForrest')+"</option>";
       result += "</select>";
     result += "</td>";
     result += "</tr></table></td>";
-    */
+    /* END EFFECT */
+
+    // SWITCH
+    result += "<td id='tdColorTempSwitch_"+number+"'>";
+      result += "<select id='colorTempSwitch_" + number + "' onchange='setSwitchStatus("+number+", this.value);' >";
+        result += "<option value='0'>" +translateKey('lblOff')+ "</option>";
+        result += "<option value='1'>" +translateKey('lblOn')+ "</option>";
+      result += "</select>";
+    result += "</td>";
+    // END SWITCH
 
     result += "<td class='hidden'>";
-    result += "<select id='separate_CHANNEL_"+this.chn+"_"+(PRN - 1)+"' value='"+currentEffectType+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE' onchange='setEffectType(this.value,"+number+");'>";
-    result += "<option value='0'>"+ translateKey('optionHueSaturation')+"</option>";
-    result += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
-    //result += "<option value='2'>Effect</option>";
-    result += "</select>";
+      result += "<select id='separate_CHANNEL_"+this.chn+"_"+(PRN - 1)+"' value='"+currentEffectType+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE' onchange='setEffectType(this.value,"+number+");'>";
+        result += "<option value='0'>"+ translateKey('optionHueSaturation')+"</option>";
+        result += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
+        result += "<option value='2'>"+translateKey('optionEffect')+"</option>";
+        result += "<option value='3'>Switch</option>";
+        result += "<option value='4'>Dimmer</option>";
+        //result += "<option value='2'>Effect</option>";
+      result += "</select>";
     result += "</td>";
     // Hidden field, which contains the volue of either the hue/saturation, the color or the effect
     PRN++;
-    result += "<td class='hidden'><span>To send</span><input id='separate_CHANNEL_"+this.chn+"_"+PRN+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE' value='"+currentEffectValue+"' size='5'></td>";
+    result += "<td class='hidden'><span>To send</span><input id='separate_CHANNEL_"+this.chn+"_"+PRN+"' name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE' value='"+ currentEffectValue +"' size='5'></td>";
 
     result += "<script type='text/javascript'>";
     if(this.activeEntries[number] == true) {
@@ -1056,7 +1272,7 @@ HmIPWeeklyProgram.prototype = {
         "sliderOpts.animate = 'fast';" +
         "sliderOpts.min = "+this.sliderTempMin+";" +
         "sliderOpts.max = "+this.sliderTempMax+";" +
-        "sliderOpts.value = parseInt(valColorTempElm.val());" +
+        "sliderOpts.value = parseInt(valColorTempElm.val()) ;" +
         "sliderOpts.step = 50;" +
         "sliderOpts.orientation = 'horizontal';" +
 
@@ -1321,7 +1537,7 @@ HmIPWeeklyProgram.prototype = {
 
     showFreeValue = function (val, nr) {
       var freeValElm = jQuery("[name='dimFreeValue" + self.chn + "_" + self._addLeadingZero(nr) + "']");
-      if (val == "freeVal" || ((val != 1.005) && (val != 1.010) && (((val * 100) % 5) != 0))) {
+      if (val == "freeVal" || ((val != 1.005) && (val != 1.010) && ((parseInt(val * 100) % 5) != 0))) {
         freeValElm.val(100);
         if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6"))) {
           freeValElm.css("display", "block");
@@ -1408,7 +1624,7 @@ HmIPWeeklyProgram.prototype = {
           result += (val == 1.005) ? "<option value='1.005' selected='selected'>" + translateKey('optionOldLevel') + "</option>" : "<option value='1.005'>" + translateKey('optionOldLevel') + "</option>";
           result += (val == 1.01) ? "<option value='1.010' selected='selected'>" + translateKey('optionNoChange') + "</option>" : "<option value='1.010'>" + translateKey('optionNoChange') + "</option>";
           // SPHM. 786
-          if ((val != 1.005) && (val != 1.010) && (((val * 100) % 5) != 0)) {
+          if ((val != 1.005) && (val != 1.010) && ((parseInt(val * 100) % 5) != 0)) {
             result += "<option id='dimOptionFreeValue" + this.chn + "_" + this.prn + "' value=" + val + " selected='selected'>" + translateKey('optionEnterValue') + "</option>";
             window.setTimeout(function () {
               if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6"))) {
@@ -1938,6 +2154,9 @@ HmIPWeeklyProgram.prototype = {
         } else {
           cssColor = "white";
         }
+      } else if (self._isDeviceType(self.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+        //console.log("self.virtualChannels["+index+"]:" + Math.pow(2,(self.virtualChannels[index] -1)));
+        valCheckBox = Math.pow(2,(self.virtualChannels[index] -1));
       } else {
 
         if (self._isDeviceType(self.ACCESS_TRANSCEIVER_HmIP_WKP)) {
@@ -1979,6 +2198,8 @@ HmIPWeeklyProgram.prototype = {
           }
         }
         result += "<input id='targetChannel" + number + "_" + index + "' data='" + self.targetChannelTypes[value] + "' name='targetChannel" + self.chn + "_" + number + "' type='checkbox' value='" + valCheckBox + "' " + click + ">";
+      } else if (self._isDeviceType(self.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+        result += "<input id='targetChannel" + number + "_" + index + "' data='" + self.targetChannelTypes[value] + "' name='targetChannel" + self.chn + "_" + number + "' type='checkbox' value='" + valCheckBox + "' onchange='setWPTargetChannels(this.name," + self.chn + "," + self.prn + ");'>";
       } else {
         result += "<input id='targetChannel" + number + "_" + index + "' data='" + self.targetChannelTypes[value] + "' name='targetChannel" + self.chn + "_" + number + "' type='checkbox' value='" + valCheckBox + "' onchange='setWPTargetChannels(this.name," + self.chn + "," + self.prn + ");'>";
       }
@@ -2001,37 +2222,52 @@ HmIPWeeklyProgram.prototype = {
     result += "var counter = 1;";
     result += "var tmpLoop;";
 
-    if (this.sessionIsExpert) {
-      if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
-        result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-        result += "jQuery('#targetChannel" + number + "_'+loop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-        result += "}";
+    if (!this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+      if (this.sessionIsExpert) {
+        if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
+          result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
+          result += "jQuery('#targetChannel" + number + "_'+loop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+          result += "}";
+        } else {
+          // Special handling for e. g. HmIP-FWI
+          // The first 3 bits belong to the last 3 checkboxes
+          // Bit 4 - 12 are for the first 8 checkboxes
+          result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
+          result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
+          result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+          result += "}";
+        }
       } else {
-        // Special handling for e. g. HmIP-FWI
-        // The first 3 bits belong to the last 3 checkboxes
-        // Bit 4 - 12 are for the first 8 checkboxes
-        result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-        result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
-        result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-        result += "}";
+        if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
+          result += "jQuery('#targetChannel" + number + "_0').prop('checked', (reversedBinary[0] == '1') ? true : false );";
+          result += "for (var loop = 3; loop < reversedBinary.length; loop+=3) {";
+          result += "jQuery('#targetChannel" + number + "_'+counter).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+          result += "counter++";
+          result += "}";
+        } else {
+          // Special handling for e. g. HmIP-FWI
+          // The first 3 bits belong to the last 3 checkboxes
+          // Bit 4 - 12 are for the first 8 checkboxes
+          result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
+          result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
+          result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+          result += "}";
+        }
       }
     } else {
-      if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
-        result += "jQuery('#targetChannel" + number + "_0').prop('checked', (reversedBinary[0] == '1') ? true : false );";
-        result += "for (var loop = 3; loop < reversedBinary.length; loop+=3) {";
-        result += "jQuery('#targetChannel" + number + "_'+counter).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-        result += "counter++";
-        result += "}";
-      } else {
-        // Special handling for e. g. HmIP-FWI
-        // The first 3 bits belong to the last 3 checkboxes
-        // Bit 4 - 12 are for the first 8 checkboxes
-        result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-        result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
-        result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-        result += "}";
+      // UNIVERSAL_LIGHT_RECEIVER_DALI
+      if (this.activeEntries[number]) {
+        result += "var arTargetChn = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']\"),";
+        result += "valTargetChn = jQuery(\"[name='" + number + "_WP_TARGET_CHANNELS']\").val();";
+        result += "jQuery.each(arTargetChn, function(index, chkBox) {";
+          result += "var bit = (parseInt(jQuery(this).prev().text()));"; // In this case the label of the checkbox equals the equivalent bit.
+          result += "if (_isBitSet(parseInt(valTargetChn), bit)) {"; // 64 bit possible - using _isBitSet() is necessary (instead of isBitSet())
+            result += "jQuery(this).prop('checked', true);";
+          result += "}";
+        result += "});";
       }
     }
+
     if (this.isWired && this.activeEntries[number]) {
       // This should make LEVEL_2 invisible when no active target channel of the type BLIND available.
       result += "var arActiveChkBox = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']:checked\");";
@@ -2374,6 +2610,10 @@ HmIPWeeklyProgram.prototype = {
   },
 
   _addLeadingZero: function(val) {
+    if (typeof val == "string") {
+      if (val[0] == "0") {return val;}
+    }
+
     return (parseInt(val) < 10) ? "0"+val : val;
   },
 

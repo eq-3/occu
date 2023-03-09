@@ -30,6 +30,8 @@ jQuery.extend(true,langJSON, {
     "lblColorTemp" : "Farbtemperatur",
     "lblColorValue" : "Farbwert",
 
+    "lblDaliMode" : "Modus",
+
     "lblDelSwitchPoint" : "Schaltzeitpunkt entfernen",
 
     "lblHueSat" : "Hue/Saturation",
@@ -55,6 +57,8 @@ jQuery.extend(true,langJSON, {
     "optionPermisionFalse" : "Nicht erteilt",
     "optionHueSaturation" : "Hue/Saturation",
     "optionColorTemp" : "Farbtemperatur",
+    "optionSwitch" : "Schaltaktor",
+    "optionDimmer" : "Dimmaktor",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 Sekunde",
@@ -137,6 +141,8 @@ jQuery.extend(true,langJSON, {
     "lblColorTemp" : "Color temperature",
     "lblColorValue" : "Color value",
 
+    "lblDaliMode" : "Mode",
+
     "lblDelSwitchPoint" : "Remove switching time",
 
     "lblHueSat" : "Hue/Saturation",
@@ -162,6 +168,8 @@ jQuery.extend(true,langJSON, {
     "optionPermisionFalse" : "Not granted",
     "optionHueSaturation" : "Hue/Saturation",
     "optionColorTemp" : "Color temperature",
+    "optionSwitch" : "Switch actuator",
+    "optionDimmer" : "Dimmer actuator",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",

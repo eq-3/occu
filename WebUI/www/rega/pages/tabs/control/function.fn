@@ -40,7 +40,8 @@ function ::ShowExtDesc() {
   if ((chn.HssType() == "PASSAGE_DETECTOR_DIRECTION_TRANSMITTER") && (chn.Label() == "HmIP-SPDR")) {
     ! Show the device address instead of the channel address because channel 2 and 3 are summarized together in channel 2.
     ! Channel 3 is not visible.
-    Write(chn.Label()#"<br/>&nbsp;"#oDev.Address()#"&nbsp;");
+    ! - See SPHM-1030 - Write(chn.Label()#"<br/>&nbsp;"#oDev.Address()#"&nbsp;");
+    Write(oDev.Name()#"<br/>&nbsp;"#oDev.Address()#"&nbsp;");
     showExtDesc = true;
   }
 
@@ -164,6 +165,13 @@ function ::ShowExtDesc() {
         }
         if (index == 4) {index = 0;}
       }
+    }
+  }
+
+  if ((chn.HssType() == "UNIVERSAL_LIGHT_RECEIVER") && (chn.Label() == "HmIP-DRG-DALI"))  {
+    if ((chNumber >= 33) && (chNumber <= 48)) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${lblGroup} "#(chNumber - 32)#"</span>");
+      showExtDesc = true;
     }
   }
 

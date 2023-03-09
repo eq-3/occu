@@ -82,6 +82,12 @@ function ::CreateIdentification() {
       if (ch.Label() != "HmIPW-DRAP") {
         Call("/esp/controls/maintenance.fn::CreateOperationVoltage()");
       }
+
+      if (ch.Label() == "HmIP-DRG-DALI") {
+        Call("/esp/controls/maintenance.fn::CreateSystemStatusPanelDali()");
+      }
+
+
     WriteLine("</td>");
   WriteLine("</tr>");
 

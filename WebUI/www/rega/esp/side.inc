@@ -22,6 +22,7 @@
   string hmip_wrcd = "HmIP-WRCD";
   string hmip_mp3p = "HmIP-MP3P";
   string hmip_bsl = "HmIP-BSL";
+  string hmip_drg_dali = "HmIP-DRG-DALI";
 
   string hmipwID = "HmIPW-";
   string hmipw_wrc6 = "HmIPW-WRC6";
@@ -70,6 +71,7 @@
   string excludeHmIPLevel2 = "xx";
 
   object oCH = dom.GetObject( iCH );
+
   if (oCH) {
     ! A wired blind actor (e. g. HmIPW-DRBL4) can act as a shutter or a blind.
     ! When acting as a shutter the parameter slat position (LEVEL_2) shouldn't be visible
@@ -687,7 +689,8 @@
                 }
               }
 
-              if ((i_opticalSignalReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+              ! Exclude HmIP-DRG-DALI
+              if ((oCH.Label().Find(hmip_drg_dali) == -1) && (i_opticalSignalReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("L=") == -1) {
                   if ((oCH.Label().Find(hmip_mp3p) == -1) && (oCH.Label().Find(hmip_bsl) == -1)) {
                     iV = "L=100,DV=31,DU=2,RTV=0,RTU=0,C=7,CB=1,RTTOV=0,RTTOU=3";
@@ -696,6 +699,23 @@
                   }
                 }
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
+              ! HmIP-DRG-DALI
+              if ((oCH.Label().Find(hmip_drg_dali) != -1) && (i_universalLightReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                 string chnAddress = oCH.Address();
+                 integer chnIndex = chnAddress.StrValueByIndex(":",1).ToInteger();
+                 if ((chnIndex > 0) && (chnIndex <= 48)) {
+                   integer maxCap = oCH.MetaData("maxCap").ToInteger();
+                   if (maxCap >= 0) {
+                     if (maxCap == 0) {if (iV.Find("L=") == -1) {iV = "L=100";}}
+                     if (maxCap == 1) {if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0";}}
+                     if (maxCap == 2) {if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0,TC=4500,RTTDV=0,RTTDU=0";}}
+                     if (maxCap == 3) {if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0,H=0,SAT=100";}}
+                   } else {iV = 0;}
+                 }
+
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDALI_CombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
               if ((i_switchVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
@@ -727,8 +747,8 @@
               }
 
               ! SPHM-767
-              if ((oCH.Label().Find(hmipwID) != -1) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
-                ! IMTL(evel) 0 = OFF - 1 = ON
+              if (((oCH.Label().Find(hmipwID) != -1) || (oCH.Label().Find(hmip_drg_dali) != -1)) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+                ! IMTL(Level) 0 = OFF - 1 = ON
                 ! Some devices have no a display (e. g. HmIPW-WRC6). Therefore we check for a key visual (IMKV)
                 if (iV.Find("IMKV=") == -1) {
                   if ((oCH.Label().Find(hmipw_wrc6) == -1) && (oCH.Label().Find(hmip_wgd) == -1) && (oCH.Label().Find(hmip_wgd_pl) == -1)) {
