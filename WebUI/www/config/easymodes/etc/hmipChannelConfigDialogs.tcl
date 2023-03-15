@@ -1661,10 +1661,11 @@ proc getShutterTransmitter {chn p descr address} {
     append html "</tr>"
   }
 
-  append html "[getHorizontalLine]"
-
   set param DELAY_COMPENSATION
   if { [info exists ps($param)] == 1 } {
+
+    append html "[getHorizontalLine]"
+
     # The max value represents the automatic modus.
     set autoDelayCompensation 0
     incr prn
@@ -1688,8 +1689,17 @@ proc getShutterTransmitter {chn p descr address} {
 
     append html "<script type=\"text/javascript\">"
 
-      # SPHM-118 / SPHM-410
-      if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1)} {
+      set comment {
+        # We now check if the parameter ENDPOSITION_AUTO_DETECT is available. If not, autocompesantion is not available.
+
+        # SPHM-118 / SPHM-410 / SPHM-1082
+        if {([string equal $dev_descr(TYPE) "HmIPW-DRBL4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-DRBLI4"] == 1) || ([string equal $dev_descr(TYPE) "HmIP-FROLL"] == 1)} {
+          append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
+        }
+      }
+
+      # Show the checkbox 'Auto discover' only when the parameter ENDPOSITION_AUTO_DETECT is available
+      if { [info exists ps(ENDPOSITION_AUTO_DETECT)] != 1 } {
         append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
       }
 

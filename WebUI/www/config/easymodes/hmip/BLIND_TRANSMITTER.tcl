@@ -49,7 +49,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
 
     # A wired blind cannot only be a blind but a shutter as well!!
-    if {([string equal $devIface HmIPW] == 1) || ([string equal $devType HmIP-DRBLI4] == 1) || ([string equal $devType HmIP-BBL-2] == 1)} {
+    if {
+        ([string equal $devIface HmIPW] == 1)
+      || ([string equal $devType HmIP-DRBLI4] == 1)
+      || ([string equal $devType HmIP-BBL] == 1)
+      || ([string equal $devType HmIP-BBL-2] == 1)
+      || ([string equal $devType HmIP-BBL-I] == 1)
+      || ([string equal $devType HmIP-FBL] == 1)
+      } {
 
       # The config parameter CHANNEL_OPERATION_MODE is only avaliable for devices with a firmware >= 1.6
       set channelOperationMode [info exists ps(CHANNEL_OPERATION_MODE)]

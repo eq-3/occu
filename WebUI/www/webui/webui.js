@@ -1747,6 +1747,15 @@ DEV_HIGHLIGHT["HM-PB-2-WM"] = new Object();
 DEV_HIGHLIGHT["HM-PB-2-WM"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
 DEV_HIGHLIGHT["HM-PB-2-WM"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
 DEV_HIGHLIGHT["HM-PB-2-WM"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
+DEV_LIST.push('HmIP-BBL-I');
+DEV_DESCRIPTION["HmIP-BBL-I"] = "HmIP-BBL";
+DEV_PATHS["HmIP-BBL-I"] = new Object();
+DEV_PATHS["HmIP-BBL-I"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
+DEV_PATHS["HmIP-BBL-I"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
+DEV_HIGHLIGHT["HmIP-BBL-I"] = new Object();
+DEV_HIGHLIGHT["HmIP-BBL-I"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL-I"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
+DEV_HIGHLIGHT["HmIP-BBL-I"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('VIR-LG-WHITE-DIM');
 DEV_DESCRIPTION["VIR-LG-WHITE-DIM"] = "VIR-LG-WHITE-DIM";
 DEV_PATHS["VIR-LG-WHITE-DIM"] = new Object();
@@ -3108,15 +3117,6 @@ DEV_PATHS["HmIP-DRDI3"] = new Object();
 DEV_PATHS["HmIP-DRDI3"]["50"] = "/config/img/devices/50/204_hmip-drdi3_thumb.png";
 DEV_PATHS["HmIP-DRDI3"]["250"] = "/config/img/devices/250/204_hmip-drdi3.png";
 DEV_HIGHLIGHT["HmIP-DRDI3"] = new Object();
-DEV_LIST.push('HmIP-BBL-I');
-DEV_DESCRIPTION["HmIP-BBL-I"] = "BBL";
-DEV_PATHS["HmIP-BBL-I"] = new Object();
-DEV_PATHS["HmIP-BBL-I"]["50"] = "/config/img/devices/50/PushButton-2ch-wm_thumb.png";
-DEV_PATHS["HmIP-BBL-I"]["250"] = "/config/img/devices/250/PushButton-2ch-wm.png";
-DEV_HIGHLIGHT["HmIP-BBL-I"] = new Object();
-DEV_HIGHLIGHT["HmIP-BBL-I"]["2"] = [2, 0.244, 0.312, 0.428, 0.168];
-DEV_HIGHLIGHT["HmIP-BBL-I"]["1"] = [2, 0.244, 0.56, 0.428, 0.168];
-DEV_HIGHLIGHT["HmIP-BBL-I"]["1+2"] = [2, 0.244, 0.308, 0.428, 0.416];
 DEV_LIST.push('HmIP-PDT');
 DEV_DESCRIPTION["HmIP-PDT"] = "PDT";
 DEV_PATHS["HmIP-PDT"] = new Object();
@@ -9821,7 +9821,10 @@ Channel = Class.create({
 
     if ((device.deviceType.description.indexOf("HmIPW-DRBL4") != -1)
       || (device.deviceType.description.indexOf("HmIP-DRBLI4") != -1)
+      || (device.deviceType.description.indexOf("HmIP-BBL") != -1)
       || (device.deviceType.description.indexOf("HmIP-BBL-2") != -1)
+      || (device.deviceType.description.indexOf("HmIP-BBL-I") != -1)
+      || (device.deviceType.description.indexOf("HmIP-FBL") != -1)
     ) {
       if (chType.indexOf("BLIND_TRANSMITTER") != -1 || chType.indexOf("BLIND_VIRTUAL_RECEIVER") != -1) {
         if (typeof devToConfigure != "undefined" || typeof blindChAddress == "undefined" || blindChAddress != devAddress) {
@@ -20873,6 +20876,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
   initSubDialogs: function() {
     var self = this;
+
     this.btnColorDialog.click(function() {
       JControlBtn.on(jQuery(this));
       JControlBtn.off(jQuery(self.btnColorTempDialog));
@@ -20886,19 +20890,22 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       self.activeDialog = "color";
     });
 
-    this.btnColorTempDialog.click(function() {
-      JControlBtn.on(jQuery(this));
-      JControlBtn.off(jQuery(self.btnColorDialog));
-      JControlBtn.off(jQuery(self.btnEffectDialog));
-      self.trColor.hide();
-      self.trEffects.hide();
-      self.trRampTimeElms.show();
-      self.trTWSlider.show();
-      self.onTimePanel.show();
-      self.resetHeight();
-      self.activeDialog = "colorTemp";
-    });
-
+    if (this.deviceType == this.drgDali) {
+      this.btnColorTempDialog.click(function () {
+        JControlBtn.on(jQuery(this));
+        JControlBtn.off(jQuery(self.btnColorDialog));
+        JControlBtn.off(jQuery(self.btnEffectDialog));
+        self.trColor.hide();
+        self.trEffects.hide();
+        self.trRampTimeElms.show();
+        self.trTWSlider.show();
+        self.onTimePanel.show();
+        self.resetHeight();
+        self.activeDialog = "colorTemp";
+      });
+    } else {
+      this.btnColorTempDialog.hide();
+    }
     this.btnEffectDialog.click(function() {
       JControlBtn.on(jQuery(this));
       JControlBtn.off(jQuery(self.btnColorDialog));

@@ -10,5 +10,8 @@
 "description_8" : "<span class=\"translated\">With a brief press of the button, the light is set to the preset colour saturation. A long press of the button reduces the colour saturation.</span><br/><br/>",
 "description_9" : "<span class=\"translated\">With a brief press of the button, the light changes between the two preset colour saturations. A long press of the button moves the colour saturation alternately up and down.</span><br/><br/>",
 
-"description_10" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+"description_10" : "<span class=\"translated\">A short or long keystroke activates the selected effect.</span><br/><br/>",
+
+
+"description_11" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
 

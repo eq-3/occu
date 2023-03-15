@@ -179,6 +179,7 @@ function ::CreateRGBWControlMode01()
       WriteLine("</tr>");
     WriteLine("</table>");
     ! HmIP-RGBW - doesn't work properly - Call("/esp/controls/universal_light_receiver.fn::getEffectPanel()");
+    Call("/esp/controls/universal_light_receiver.fn::getEffectPanel()");
   WriteLine("</td>");
 
   WriteLine("<script type='text/javascript'>");

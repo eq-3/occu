@@ -9,5 +9,7 @@
 "description_7" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht auf die eingestellte Farbs&auml;ttigung gesetzt. Ein langer Tastendruck erh&ouml;ht die Farbs&auml;ttigung.</span><br/><br/>",
 "description_8" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht auf die eingestellte Farbs&auml;ttigung gesetzt. Ein langer Tastendruck verringert die Farbs&auml;ttigung.</span><br/><br/>",
 "description_9" : "<span class=\"translated\">Mit einem kurzen Tastendruck wechselt das Licht zwischen den beiden festgelegten Farbs&auml;ttigungen. Ein langer Tastendruck f&auml;hrt die Farbs&auml;ttigung abwechselnd hoch und herunter.</span><br/><br/>",
-"description_10" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
+"description_10" : "<span class=\"translated\">Ein kurzer oder langer Tastendruck aktiviert den gew&auml;hlten Effekt.</span><br/><br/>",
+
+"description_11" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
 

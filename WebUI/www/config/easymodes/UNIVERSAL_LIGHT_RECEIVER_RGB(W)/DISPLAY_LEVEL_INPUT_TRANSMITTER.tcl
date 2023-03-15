@@ -18,7 +18,11 @@ set PROFILES_MAP(6)  "\${color_up_down}"
 set PROFILES_MAP(7)  "\${saturation_up}"
 set PROFILES_MAP(8)  "\${saturation_down}"
 set PROFILES_MAP(9)  "\${saturation_up_down}"
-set PROFILES_MAP(10)  "\${not_active}"
+
+# Effect
+set PROFILES_MAP(10)  "\${Effect}"
+
+set PROFILES_MAP(11)  "\${not_active}"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
@@ -1016,7 +1020,56 @@ set comment {
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
-#10
+
+  # 10 Effect
+  incr prn
+  set pref 0
+  if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
+  append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  # append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
+  append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${OUTPUT_BEHAVIOUR_effect}</td><td>"
+    option DALI_EFFECTS
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OUTPUT_BEHAVIOUR|LONG_OUTPUT_BEHAVIOUR separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OUTPUT_BEHAVIOUR "onchange=\"stopEffect(this, $prn, $pref);\""]
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
+
+        append HTML_PARAMS(separate_$prn) "var effectElm = jQuery(\"#separate_receiver_$prn\_$pref\");"
+
+        append HTML_PARAMS(separate_$prn) "stopEffect = function(effectElm, prn, pref) \{"
+          append HTML_PARAMS(separate_$prn) "console.log('stopEffect');"
+          append HTML_PARAMS(separate_$prn) "var levelElm = jQuery(\"#separate_receiver_\"+prn+\"_\"+(parseInt(pref) + 1)),"
+          append HTML_PARAMS(separate_$prn) "trLevel = jQuery(\"\#trOnLevel_\"+ prn);"
+          append HTML_PARAMS(separate_$prn) "if (jQuery(effectElm).val() == '1') \{;"
+            append HTML_PARAMS(separate_$prn) "trLevel.hide();"
+            append HTML_PARAMS(separate_$prn) "levelElm.val('0.0');"
+          append HTML_PARAMS(separate_$prn) "\} else \{"
+            append HTML_PARAMS(separate_$prn) "trLevel.show();"
+            append HTML_PARAMS(separate_$prn) "levelElm.val('1.0');"
+          append HTML_PARAMS(separate_$prn) "\}"
+        append HTML_PARAMS(separate_$prn) "\};"
+
+        append HTML_PARAMS(separate_$prn) "effectElm.change();"
+
+
+    append HTML_PARAMS(separate_$prn) "</script>"
+
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr id='trOnLevel_$prn'><td>\${ON_LEVEL_EFFECT}</td><td>"
+    option DIM_0-100
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+  append HTML_PARAMS(separate_$prn) "</table>"
+
+  append HTML_PARAMS(separate_$prn) "</textarea></div>"
+
+
+
+#11
   incr prn
   set pref 1
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}

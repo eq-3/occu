@@ -29,7 +29,7 @@
 "TW_dim2warm_off_down" : "Dim2Warm - off/darker",
 "TW_dim2warm_on_of_up_down" : "Dim2Warm - on/off & brighter/darker",
 
-"Effect" : "EffeCt",
+"Effect" : "Effect",
 
 "COLOR_TEMP" : "Colour temperature",
 "COLOR_TEMP_ON" : "Colour temperature in status 'on'",

@@ -843,7 +843,9 @@ proc getDelay {prn pref specialElement} {
           append s "trBlinkElm = jQuery('#'+elmID).parent().parent().next().next().next().next(),"
           append s "blinkElm = jQuery(trBlinkElm).find('select').first();"
 
-          append s "if ((value == 0) && (blinkElm\[0\].name.indexOf('_BLINK') > -1)) {trBlinkElm.hide();blinkElm.val(0);} else {trBlinkElm.show();}"
+          append s "if(typeof blinkElm\[0\] != 'undefined') {"
+            append s "if ((value == 0) && (blinkElm\[0\].name.indexOf('_BLINK') > -1)) {trBlinkElm.hide();blinkElm.val(0);} else {trBlinkElm.show();}"
+          append s "}"
 
           append s "timeBaseTRElem.hide();"
           append s "timeFactorTRElem.hide();"

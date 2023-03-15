@@ -27,6 +27,6 @@
 "description_20" : "<span class=\"translated\">The light is switched off with a brief press of the button. A long press of the button dims the light.</span><br/><br/>",
 "description_21" : "<span class=\"translated\">With a brief press of the button, the light in Dim2Warm mode switches between the preset brightness value and 'off'. A long press of the button brightens/dims the light alternately.</span><br/><br/>",
 
-"description_22" : "<span class=\"translated\">tr Ein kurzer oder langer Tastendruck aktiviert den gew&auml;hlten Effekt.</span><br/><br/>",
+"description_22" : "<span class=\"translated\">A short or long keystroke activates the selected effect.</span><br/><br/>",
 
 "description_notActive" : "<span class=\"translated\">The profile is not active</span><br/><br/>",

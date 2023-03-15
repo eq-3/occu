@@ -11,6 +11,8 @@
 
 "optionColorVal" : "Farbwert",
 
+"Effect" : "Effekt",
+
 "comment": "This is for the Tunable White mode of the DALI device",
 
 "TW_dimmer_on_brighter" : "Helligkeit - ein/heller",
