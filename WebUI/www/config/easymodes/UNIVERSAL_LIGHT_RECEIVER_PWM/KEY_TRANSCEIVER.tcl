@@ -427,10 +427,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
 
-    set param LONG_OUTPUT_BEHAVIOUR
-    if {[info exists ps($param)] == 1} {
-      incr pref
-      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    if {$dev_descr_receiver(PARENT_TYPE) == "HmIP-RGBW"} {
+      set param LONG_OUTPUT_BEHAVIOUR
+      if {[info exists ps($param)] == 1} {
+        incr pref
+        append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+      }
     }
 
     set param LONG_PROFILE_REPETITIONS
@@ -524,10 +526,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
 
-    set param LONG_OUTPUT_BEHAVIOUR
-    if {[info exists ps($param)] == 1} {
-      incr pref
-      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    if {$dev_descr_receiver(PARENT_TYPE) == "HmIP-RGBW"} {
+      set param LONG_OUTPUT_BEHAVIOUR
+      if {[info exists ps($param)] == 1} {
+        incr pref
+        append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+      }
     }
 
     set param LONG_OPTICAL_SIGNAL_COLOR
@@ -641,10 +645,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
 
-    set param LONG_OUTPUT_BEHAVIOUR
-    if {[info exists ps($param)] == 1} {
-      incr pref
-      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    if {$dev_descr_receiver(PARENT_TYPE) == "HmIP-RGBW"} {
+      set param LONG_OUTPUT_BEHAVIOUR
+      if {[info exists ps($param)] == 1} {
+        incr pref
+        append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+      }
     }
 
     set param LONG_PROFILE_REPETITIONS

@@ -175,7 +175,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
 
   # exec echo "getTextField: $extraparam" >> /tmp/textField.log
 
-  if {[string equal $value ''] == 1} {set value '*'}
+  if {[string equal $value ""] == 1} {set value ''}
 
   global psDescr dev_descr
   upvar psDescr descr
@@ -269,7 +269,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
     }
   } else {
     if {$param == "NUMERIC_PIN_CODE"} {
-      set s "<input id=$elemId type=\"text\" size=\"5\" maxlength=\"8\" value=$value name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\}\" $extraparam>"
+       set s "<input id=$elemId type=\"text\" size=\"5\" maxlength=\"8\" value=\"$value\" name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\}\" $extraparam>"
     } elseif {($param == "VOLTAGE_0") || ($param == "VOLTAGE_100")} {
         set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);$extraparam\">"
     } elseif {$minValue == "stringUTF8"} {
