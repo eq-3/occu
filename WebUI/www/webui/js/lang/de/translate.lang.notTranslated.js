@@ -78,8 +78,6 @@ jQuery.extend(true, langJSON, {
     "minTemp" : "min.<br/>Temp",
     "maxTemp" : "max.<br/>Temp",
 
-"comment: " : "Release A/2023 - not yet translated",
-
     "lblNumberOfChannels" : "Anzahl der Kan%E4le",
 
     "optionNoEffect" : "Effekt beenden",
@@ -104,6 +102,12 @@ jQuery.extend(true, langJSON, {
     "stringTableErrorLimitULR" : "Limit Fehler",
     "stringTableErrorLimitULR_False" : "Limit Fehler: Ja",
     "stringTableErrorLimitULR_True" : "Limit-Fehler: Nein",
+
+    "comment: " : "Bugfix Release A/2023 - not yet translated",
+    "lblRefreshDaliDevices" : "Suche neue DALI-Ger%E4te",
+    "btnSearchDaliDevices" : "Suche aktivieren",
+    "titleSearchDaliDevices" : "Suche DALI-Ger%E4te",
+    "lblPleaseWaitAMoment" : "Einen kleinen Augenblick noch ...",
 
     "noMoreKeys" : ""
   }

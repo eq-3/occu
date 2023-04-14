@@ -488,7 +488,7 @@
   };
 
   setDALI_CombinedParameter = function(regaDialogID, deviceType, chnAddress) {
-    // maxCap > 0 = SWITCH, 1 = DIMMER, 2 = Tunable White, 3 = RGB + Tunable White
+    // maxCap > 0 = SWITCH, 1 = DIMMER, 2 = Tunable White, 3 = RGB + Tunable White, 4 = RGBW + Tunable White
     var optionString = "",
       maxCap = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": chnAddress, "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"}),
       optionElm = jQuery("#prgStringOptionValue" + regaDialogID);
@@ -521,6 +521,7 @@
         setHmipRGBWTunableWhiteController(regaDialogID, deviceType, chnAddress);
         break;
       case 3:
+      case 4:
         // RGB + Tunable White;
         optionString = optionElm.val();
         if (optionString == "0") {

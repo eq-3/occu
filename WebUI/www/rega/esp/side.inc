@@ -711,7 +711,7 @@
                      if (maxCap == 0) {if (iV.Find("L=") == -1) {iV = "L=100";}}
                      if (maxCap == 1) {if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0";}}
                      if (maxCap == 2) {if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0,TC=4500,RTTDV=0,RTTDU=0";}}
-                     if (maxCap == 3) {if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0,H=0,SAT=100";}}
+                     if ((maxCap == 3) || (maxCap == 4)) {if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0,H=0,SAT=100";}}
                    } else {iV = 0;}
                  }
 

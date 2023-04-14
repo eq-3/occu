@@ -572,13 +572,31 @@ HmIPWeeklyProgram.prototype = {
     if (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) {
       this.ulrPrn[number] = this.prn;
       this.prn += 3;
+
+      if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW)) {
+
+        programEntry += this._getHR();
+        // rowULRModeSelector >> ULR = UNIVERSAL_LIGHT_RECEIVER
+        programEntry += "<tr id='rowULRModeSelector_" + number + "' class='_hidden'>";
+        programEntry += "<td>"+translateKey('lblDaliMode')+"</td>";
+        programEntry += "<td>";
+        programEntry += "<select id='ulrEffectSelector_"+number+"'>";
+        programEntry += "<option value='0'>"+translateKey('optionHueSaturation')+"</option>";
+        programEntry += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
+        programEntry += "<option value='2'>"+translateKey('optionEffect')+"</option>";
+        //programEntry += "<option value='0'>tr RGBW</option>";
+        programEntry += "</select>";
+        programEntry += "</td>";
+      }
+
       if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
 
         programEntry += this._getHR();
-        programEntry += "<tr id='rowDaliEffectSelector_" + number + "' class='hidden'>";
+        // rowULRModeSelector >> ULR = UNIVERSAL_LIGHT_RECEIVER
+        programEntry += "<tr id='rowULRModeSelector_" + number + "' class='hidden'>";
         programEntry += "<td>"+translateKey('lblDaliMode')+"</td>";
         programEntry += "<td>";
-          programEntry += "<select id='daliEffectSelector_"+number+"'>";
+          programEntry += "<select id='ulrEffectSelector_"+number+"'>";
             programEntry += "<option value='3'>"+translateKey('optionSwitch')+"</option>";
             programEntry += "<option value='4'>"+translateKey('optionDimmer')+"</option>";
             programEntry += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
@@ -889,7 +907,7 @@ HmIPWeeklyProgram.prototype = {
     //var currentEffectType = this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE"],
     var currentEffectType = (this.selectedMode_RGBW < 2) ? 0 : 1,
       currentEffectValue = parseInt(this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE"]),
-      selectedWPMode_DALI;
+      selectedWPMode;
 
     this.currentLevel[number] = this.ps[number + "_WP_LEVEL"];
 
@@ -898,7 +916,7 @@ HmIPWeeklyProgram.prototype = {
     var PRN = this.ulrPrn[number];
     var self = this;
 
-    setDaliWPMode = function (val, number) {
+    setSelectedWPMode = function (val, number) {
       homematic("Interface.setMetadata", {
         "objectId": self.device.id,
         "dataId": "daliWPMode_" + number,
@@ -1119,31 +1137,31 @@ HmIPWeeklyProgram.prototype = {
     // The Tunable White value of the RGB and DALI devices has to be diveded by 50
     adaptValue = function(elm, number) {
       var no = self._addLeadingZero(number);
-      if (parseInt(jQuery("#daliEffectSelector_" + no).val()) == 1) {
+      if (parseInt(jQuery("#ulrEffectSelector_" + no).val()) == 1) {
         var valColorTempElm = jQuery("[name="+no+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE]").first();
         valColorTempElm.val((parseInt(elm.value) / 50));
       }
     };
 
-    if (self._isDeviceType(self.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+    if ((self._isDeviceType(self.UNIVERSAL_LIGHT_RECEIVER_DALI)) || (self._isDeviceType(self.UNIVERSAL_LIGHT_RECEIVER_RGBW))) {
       // modes 0=RGB, 1=Tunable White, 3=SWITCH, 4=DIMMER  > 0 and 1 displays the same elements as the HmIP-RGB, 2 (RGBW) is not in use for DALI. 3 and 4 are DALI only
-       selectedWPMode_DALI = parseInt(homematic("Interface.getMetadata", {
+       selectedWPMode = parseInt(homematic("Interface.getMetadata", {
         "objectId": this.device.id,
         "dataId": "daliWPMode_" + number
       }));
 
-      if (isNaN( selectedWPMode_DALI)) {
-        selectedWPMode_DALI = 0;
-        setDaliWPMode( selectedWPMode_DALI, number);
+      if (isNaN( selectedWPMode)) {
+        selectedWPMode = 0;
+        setSelectedWPMode( selectedWPMode, number);
       }
-      currentEffectType = selectedWPMode_DALI;
+      currentEffectType = selectedWPMode;
       window.setTimeout(function() {
-        jQuery("#daliEffectSelector_" +number).val(selectedWPMode_DALI).unbind().change(function() {
+        jQuery("#ulrEffectSelector_" +number).val(selectedWPMode).unbind().change(function() {
           currentEffectType = parseInt(this.value);
-          setDaliWPMode( parseInt(this.value), number);
+          setSelectedWPMode( parseInt(this.value), number);
           setEffectType(parseInt(this.value), parseInt(number), self.chn, (PRN - 2));
         }).change();
-          jQuery("#rowDaliEffectSelector_" + number).show();
+        jQuery("#rowULRModeSelector_" + number).show();
       },100);
     }
 

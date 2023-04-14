@@ -1051,7 +1051,7 @@ function ::dcCreate()
                 if (maxCap == 2) {Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode2()");}
 
                 ! RGB
-                if (maxCap == 3) {
+                if ((maxCap == 3) || (maxCap == 4)) {
                   Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode_RGB_TW()");
                 }
               } else {

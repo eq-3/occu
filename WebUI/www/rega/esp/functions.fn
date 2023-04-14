@@ -653,6 +653,7 @@ function ::conditionIsParameterVisible() {
         integer maxCap = oCC.MetaData("maxCap");
         ! maxCap 0 = Switch / 1 = Dimmer / 2 = TW only
         ! maxCap = 3 > this is the RGB + TW mode. Here are all parameters available.
+        ! maxCap = 4 > this is the RGBW + TW mode. Here are all parameters available.
 
         if (maxCap == 0) {
           ! Switch

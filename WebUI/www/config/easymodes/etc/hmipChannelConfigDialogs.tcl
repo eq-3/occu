@@ -31,6 +31,15 @@ proc getMaintenance {chn p descr address} {
     return $html
   }
 
+  if {[string equal $devType "HmIP-DRG-DALI"] == 1} {
+      append html "<tr>"
+        append html "<td>\${lblRefreshDaliDevices}</td>"
+        append html "<td><input id=\"btnDaliRefreshDevices\" type=\"button\" name=\"btnSearchDaliDevices\"  onclick=\"daliRefreshDevices('$dev_descr(ADDRESS)');\"></td>"
+      append html "</tr>"
+      append html "[getHorizontalLine]"
+      append html "<script type=\"text/javascript\">translateButtons(\"btnSearchDaliDevices\");</script>"
+  }
+
   set param CYCLIC_INFO_MSG
   if { [info exists ps($param)] == 1  } {
     set cyclicInfo true

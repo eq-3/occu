@@ -11467,7 +11467,12 @@ MessageBox = Class.create({
     this.m_content.setText(text);
     return this;
   },
-  
+
+  centerText: function()
+  {
+    jQuery(".UIText").addClass("alignCenter");
+  },
+
   setHtml: function(html)
   {
     this.m_content.setHtml(html);
@@ -11528,6 +11533,18 @@ MessageBox.show = function(title, content, callback, width, height, id, barGraph
     this.msgBox.centerBarGraph(barGraphId);
   }
 
+};
+
+MessageBox.setText = function(txt) {
+  this.msgBox.setText(txt);
+};
+
+MessageBox.centerText = function() {
+  this.msgBox.centerText();
+};
+
+MessageBox.setHtml = function(html) {
+  this.msgBox.setHtml(html);
 };
 
 MessageBox.close = function() {
@@ -44962,6 +44979,7 @@ SetParameters = function(iface, address, special_input_id)
          });
          grpChannel = DeviceList.getChannelByAddress(devAddress + ":" + loop);
          homematic("Interface.setMetadata", {"objectId": grpChannel.id , "dataId" : "maxCap", "value": maxCap});
+         DeviceList.channels[grpChannel.id].daliMaxCapabilities = maxCap;
         }
         window.setTimeout(function() {delete MetaDaliGroupHasBeenSet;},5000);
       },5000);
@@ -48472,7 +48490,42 @@ addHintHeatingGroupDevice = function (address) {
     }
   }
 };
-// language = getLang();//"de";
+
+
+daliRefreshDevices = function(address) {
+  var device = DeviceList.getDeviceByAddress(address);
+
+  MessageBox.show(translateKey('titleSearchDaliDevices'),'' +' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>','','320','60','msgBckID', 'msgBoxBarGraph');
+
+  homematic("Interface.searchDaliDevices", {"interface": "HmIP-RF", "address": address, "valueKey": "DALI_ADDRESS", "type": "string", "value": "refreshDaliDevices"}, function (result) {
+    if (result) {
+      MessageBox.setText(translateKey("lblPleaseWaitAMoment"));
+      MessageBox.centerText();
+
+      // Store the UNIVERSAL_LIGHT_MAX_CAPABILITIES of the DALI channels as meta data
+      window.setTimeout(function() {
+        var devAddress = address,
+          daliChannel;
+
+        for (var loop = 1; loop <= 48; loop++) {
+          var maxCap = homematic("Interface.getMasterValue", {
+            "interface": "HmIP-RF",
+            "address": devAddress + ":" + loop,
+            "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"
+          });
+          daliChannel = DeviceList.getChannelByAddress(devAddress + ":" + loop);
+          homematic("Interface.setMetadata", {"objectId": daliChannel.id , "dataId" : "maxCap", "value": maxCap});
+        }
+        MessageBox.close();
+        reloadPage();
+      },500);
+
+    } else {
+      MessageBox.close();
+      alert(translateKey("dialogSettingsSecuritySSHMsgBoxErrorTitle")); // An error occurred
+    }
+  });
+};// language = getLang();//"de";
 
 setLanguage = function(lang)
 {
