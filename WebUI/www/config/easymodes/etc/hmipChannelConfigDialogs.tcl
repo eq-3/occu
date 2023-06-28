@@ -126,6 +126,7 @@ proc getMaintenance {chn p descr address} {
           append html "hint = (hasPrograms && hasLinks) ? translateKey('hintWiredBlindLinksAndProgramsAvailable') : (hasPrograms)  ? translateKey('hintWiredBlindProgramsAvailable') : (hasLinks)  ? translateKey('hintWiredBlindLinksAvailable') : '';"
           append html "jQuery('#hintLinksPrograms').html(hint).show();"
         append html "\}"
+
       append html "</script>"
 
       append html "<script type=\"text/javascript\">"
@@ -235,13 +236,23 @@ set comment {
   set param DEVICE_SENSOR_SENSITIVITY
   if { [info exists ps($param)] == 1} {
     incr prn
-    # HmIP-STI = 0 - 4
-    for {set val 0} {$val <= 4} {incr val} {
-           set options($val) "[expr $val + 1]"
+    if {[string equal $devType "HmIP-STI"] != 1} {
+      option RAW_0_100Percent
+    } else {
+      # HmIP-STI = 0 - 4
+      for {set val 0} {$val <= 4} {incr val} {
+             set options($val) "[expr $val + 1]"
+      }
     }
+
     append html "<tr>"
       append html "<td>\${stringTableDeviceSensorSensibility}</td>"
-      append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
+      if {[string equal $devType "HmIP-STI"] != 1} {
+        append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+      } else {
+        # HmIP-STI
+        append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]&nbsp;[getHelpIcon $param]</td>"
+      }
     append html "</tr>"
   }
 
@@ -290,7 +301,11 @@ set comment {
   set param MOUNTING_ORIENTATION
   if { [info exists ps($param)] == 1 } {
     incr prn
-    if {([string first "HmIP-BBL" $devType] == -1) && ([string first "HmIP-BROLL" $devType] == -1) } {
+    if {
+      ([string first "HmIP-BBL" $devType] == -1)
+      && ([string first "HmIP-BROLL" $devType] == -1)
+      && ([string first "HmIP-BDT" $devType] == -1)
+      } {
       append html "<tr>"
         append html "<td>\${lblMountingOrientation}</td>"
           array_clear options
@@ -320,14 +335,14 @@ set comment {
     set options(1) "\${operationModeMains}"
     append html "<tr>"
       append html "<td>\${powerSupply}</td>"
-        if {([string equal $devType "HmIP-SMI55"] == 1) || ([string equal $devType "HmIP-SMI55-2"] == 1)} {
+        if {([string equal $devType "HmIP-SMI55"] == 1) || ([string equal $devType "HmIP-SMI55-A"] == 1) || ([string equal $devType "HmIP-SMI55-2"] == 1)} {
           append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=paramPermanentFullRXChanged(this.id\,this.value)] [getHelpIcon $param]</td><td id='placeHolder' style='width:55%'></td>"
         } else {
           append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showParameterHint(this.id\,this.value)]</td>"
         }
     append html "</tr>"
 
-    if {([string equal $devType "HmIP-SMI55"] == 1) || ([string equal $devType "HmIP-SMI55-2"] == 1)} {
+    if {([string equal $devType "HmIP-SMI55"] == 1) || ([string equal $devType "HmIP-SMI55-A"] == 1) || ([string equal $devType "HmIP-SMI55-2"] == 1)} {
       append html "<tr id=\"hint_separate_$CHANNEL\_$prn\">"
         append html "<td colspan='3'>\${hintPERMANENT_FULL_RX}</td>"
       append html "</tr>"
@@ -361,9 +376,11 @@ set comment {
       append html " showParameterHint('separate_$CHANNEL\_$prn', elm.val());"
 
       append html " storeModePermanentFullRx = function() { "
+        append html " var dev = DeviceList.getDeviceByAddress('$dev_descr(ADDRESS)'); "
         append html " if (setMetaPermanentFullRx) { "
-          append html " var elm = jQuery('\[name=\"PERMANENT_FULL_RX\"\]')\[0\],"
-          append html " dev = DeviceList.getDeviceByAddress('$dev_descr(ADDRESS)'); "
+
+          append html " var elm = jQuery('\[name=\"PERMANENT_FULL_RX\"\]')\[0\];"
+
 
           append html " if (typeof elm != 'undefined') \{ "
             append html " homematic('Interface.setMetadata', {'objectId': dev.id, 'dataId': 'permanentFullRX', 'value': jQuery(elm).val()}); "
@@ -395,7 +412,7 @@ set comment {
   # End DRAP/HAP Integration #
 
 
-  if {[string equal $devType "HmIP-DLD"] != 1} {
+  if {([string equal $devType "HmIP-DLD"]) != 1 && ([string equal $devType "HmIP-SMO230"] != 1)} {
     set param LONGITUDE
     if { [info exists ps($param)] == 1  } {
       incr prn
@@ -970,7 +987,6 @@ proc getMultiModeInputTransmitter {chn p descr address} {
       append html "addAbortEventSendingChannels('$chn','$prn', '$dev_descr(ADDRESS)', $ps($param));"
     append html "</script>"
   }
-
 
 
   append html "<script type=\"text/javascript\">"
@@ -1784,6 +1800,8 @@ proc getDimmerTransmitter {chn p descr} {
 
   set html ""
 
+  set _chn $chn
+
   set prn 0
 
   set param CHANNEL_OPERATION_MODE
@@ -1797,6 +1815,7 @@ proc getDimmerTransmitter {chn p descr} {
     if {! $isWUA} {
       set options(0) "\${optionInactiv}"
       set options(1) "\${optionActiv}"
+      set options(2) "\${optionAdjustDimmerLevel}"
     } else {
       set options(0) "\${optionRelayInactive}"
       set options(1) "\${optionRelayOffDelay05S}"
@@ -1807,9 +1826,30 @@ proc getDimmerTransmitter {chn p descr} {
     }
 
     append html "<tr><td>$lblActivInactiv</td><td>"
-    append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"showDecisionValue(this.value,$chn)\"]
+    append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"showAdjustDimmingRange(this.value,$chn)\"]
     append html "</td></tr>"
   }
+
+  set param DIM_LEVEL_LOWEST
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr name='adjustDimLevel_$chn'>"
+      append html "<td>\${stringTableDimmerLevelLowest}</td>"
+      append html "<td class='j_dimLevelLowest_$chn'>[getTextField $param $ps($param) $chn $prn $ps(ON_MIN_LEVEL) onchange=checkDimLevelLowest(this)]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+
+  set param DIM_LEVEL_HIGHEST
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr name='adjustDimLevel_$chn'>"
+      append html "<td>\${stringTableDimmerLevelHighest}</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+    append html "<tr name='adjustDimLevel_$chn'><td colspan='2'><hr></td></tr>"
+  }
+
+
 
   set param VOLTAGE_0
   if { [info exists ps($param)] == 1 } {
@@ -1875,6 +1915,15 @@ proc getDimmerTransmitter {chn p descr} {
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
+  set param ON_MIN_LEVEL
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblDimmerOnMinLevel}</td>"
+      append html "<td class='j_onMinLevel_$chn'>[getTextField $param $ps($param) $chn $prn onchange=setDimmerLevelLowest(this.value)]&nbsp;%&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
+    append html "</tr>"
+  }
+
   set param FUSE_DELAY
   if { [info exists ps($param)] == 1 } {
     incr prn
@@ -1892,6 +1941,40 @@ proc getDimmerTransmitter {chn p descr} {
     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
     append html "</tr>"
   }
+
+  append html "<script type=\"text/javascript\">"
+
+    append html "checkDimLevelLowest = function(elm) {"
+      append html "var onMinLevelElm = jQuery(\".j_onMinLevel_$chn\").children().first(),"
+      append html "valOnMinLevel = parseFloat(onMinLevelElm.val()),"
+      append html "elmValue = parseFloat(elm.value);"
+
+      append html "if ((isNaN(elmValue)) || (elmValue < valOnMinLevel)) {"
+        append html "window.setTimeout(function() {"
+        append html "elm.value = (valOnMinLevel < 0.5) ? 0.5 : valOnMinLevel;"
+        append html "},50);"
+      append html "}"
+    append html "};"
+
+    append html "setDimmerLevelLowest = function(value) {"
+      append html "var dimLevelLowestElm = jQuery(\".j_dimLevelLowest_$chn\").children().first(),"
+      append html "valLevelLowestElm = dimLevelLowestElm.val();"
+      append html " if (parseFloat(value) > parseFloat(valLevelLowestElm)) {"
+        append html "dimLevelLowestElm.val(value).blur();"
+      append html "}"
+    append html "};"
+
+    append html "showAdjustDimmingRange = function(value, chn) {"
+      append html "var adjustDimmLevelElms = jQuery(\"\[name='adjustDimLevel_$chn'\]\");"
+      append html "if (value != 2) {"
+        append html "adjustDimmLevelElms.hide();"
+      append html "} else {"
+        append html "adjustDimmLevelElms.show();"
+      append html "}"
+    append html "};"
+    append html "showAdjustDimmingRange(jQuery(\"#separate_$CHANNEL\_1\").val(), $chn);"
+  append html "</script>"
+
   return $html
 }
 

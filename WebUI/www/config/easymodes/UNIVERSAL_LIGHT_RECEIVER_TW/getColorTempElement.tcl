@@ -18,7 +18,7 @@ proc getSelectEffectElement {p special_input_id param} {
   return $html
 }
 
-proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""}} {
+proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""} {colorAB ""}}  {
   global url receiver_address
   upvar $pps ps
   upvar prn prn
@@ -55,7 +55,7 @@ proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""}} {
   append html "</tr>"
 
   append html "<tr id='trColorTempSlider_$prn\_$pref' class='hidden'>"
-    append html "<td><span>\${COLOR_TEMP}</span></td>"
+    append html "<td><span>\${COLOR_TEMP} $colorAB</span></td>"
 
     append html "<td>"
       set sliderPref $pref

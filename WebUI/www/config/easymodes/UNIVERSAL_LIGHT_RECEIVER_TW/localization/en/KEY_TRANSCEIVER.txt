@@ -1,6 +1,6 @@
 "description_1" : "<span class=\"translated\">With a brief press of the button, the light is switched on at the preset brightness value or the colour temperature. A long press of the button brightens the light.</span><br/><br/>",
 "description_2" : "<span class=\"translated\">The light is switched off with a brief press of the button. A long press of the button dims the light.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">With a brief press of the button, the light changes between the preset brightness value and &quot;aus&quot;. A long press of the button brightens/dims the light alternately.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a brief press of the button, the light changes between the preset brightness value and &quot;off&quot;. A long press of the button brightens/dims the light alternately.</span><br/><br/>",
 
 "description_4" : "<span class=\"translated\">With a brief press of the button, the light is set to the preset colour temperature. A long press of the button increases the colour temperature.</span><br/><br/>",
 "description_5" : "<span class=\"translated\">With a brief press of the button, the light is set to the preset colour temperature. A long press of the button reduces the colour temperature.</span><br/><br/>",
@@ -14,6 +14,7 @@
 "description_11" : "<span class=\"translated\">The light is switched off with a brief press of the button. A long press of the button dims the light.</span><br/><br/>",
 "description_12" : "<span class=\"translated\">With a brief press of the button, the light in Dim2Warm mode switches between the preset brightness value and 'off'. A long press of the button brightens/dims the light alternately.</span><br/><br/>",
 
+"description_13" : "<span class=\"translated\">A short or long keystroke activates the selected effect.</span><br/><br/>",
 
-"description_13" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+"description_14" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
 

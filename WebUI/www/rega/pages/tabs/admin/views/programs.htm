@@ -493,8 +493,6 @@
       maxCap = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": chnAddress, "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"}),
       optionElm = jQuery("#prgStringOptionValue" + regaDialogID);
 
-    //console.log("setDALI_CombinedParameter", "chn: " + chnAddress + " maxCap: " +maxCap + " - optionElm.text(): " + optionElm.val());
-
     switch (parseInt(maxCap)) {
       case 0:
         // Switch
@@ -518,7 +516,8 @@
         if (optionString == "0") {
           optionElm.val("L=100,OT=0,RT=0,TC=4500,RTTDV=0,RTTDU=0");
         }
-        setHmipRGBWTunableWhiteController(regaDialogID, deviceType, chnAddress);
+        //setHmipRGBWTunableWhiteController(regaDialogID, deviceType, chnAddress);
+        setHmipRGBWController(regaDialogID,deviceType,chnAddress);
         break;
       case 3:
       case 4:

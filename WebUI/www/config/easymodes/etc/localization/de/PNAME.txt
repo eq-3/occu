@@ -1,4 +1,6 @@
 "at" : "<span class=\"translated\">on</span>",
+"A_LEVEL_COLOR_VALUE" : "<span class=\"translated\">Farbwert A</span>",
+"B_LEVEL_COLOR_VALUE" : "<span class=\"translated\">Farbwert B</span>",
 "ACTION" : "<span class=\"translated\">Aktion</span>",
 "ACT_NUM" : "<span class=\"translated\">Anzahl der Signale</span>",
 "ACT_TYPE" : "<span class=\"translated\">Signalart</span>",
@@ -101,8 +103,11 @@
 "SATURATION_CHANGE_DELAY" : "<span class=\"translated\">S&auml;ttigungwechselverz&ouml;gerung</span>",
 "SATURATION_MAX_LEVEL" : "<span class=\"translated\">S&auml;ttigungsbegrenzung beim Hochdimmen</span>",
 "SATURATION_MIN_LEVEL" : "<span class=\"translated\">S&auml;ttigungsbegrenzung beim Runterdimmen</span>",
+
 "SATURATION_OFF_LEVEL" : "<span class=\"translated\">S&auml;ttigung im Zustand 'aus'</span>",
+"SATURATION_OFF_LEVEL_A" : "<span class=\"translated\">S&auml;ttigung B</span>",
 "SATURATION_ON_LEVEL" : "<span class=\"translated\">S&auml;ttigung im Zustand 'ein'</span>",
+"SATURATION_ON_LEVEL_A" : "<span class=\"translated\">S&auml;ttigung A</span>",
 
 "SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender-Kanaleinstellungen</span>",
 "SERVO_LIMIT_POSITION_A" : "<span class=\"translated\">Pegelbegrenzung Position A</span>",

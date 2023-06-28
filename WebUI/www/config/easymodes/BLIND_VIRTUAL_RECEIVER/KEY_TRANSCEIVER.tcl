@@ -20,6 +20,7 @@ set PROFILES_MAP(1)  "\${OpenUp}"
 set PROFILES_MAP(2)  "\${CloseDown}"
 set PROFILES_MAP(3)  "\${OpenClose_UpDown}"
 set PROFILES_MAP(4)  "\${TargetPosition}"
+set PROFILES_MAP(5)  "tr LamellenPosition"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
@@ -332,6 +333,33 @@ set PROFILE_4(UI_DESCRIPTION) ""
 set PROFILE_4(UI_TEMPLATE)  $PROFILE_4(UI_DESCRIPTION)
 set PROFILE_4(UI_HINT)  4
 
+
+set PROFILE_5(LONG_DRIVING_MODE)  0
+set PROFILE_5(LONG_JT_OFF)        1
+set PROFILE_5(LONG_JT_OFFDELAY)   8
+set PROFILE_5(LONG_JT_ON)         4
+set PROFILE_5(LONG_JT_ONDELAY)    7
+set PROFILE_5(LONG_JT_RAMPOFF)    6
+set PROFILE_5(LONG_JT_RAMPON)     3
+set PROFILE_5(LONG_JT_REFOFF)     6
+set PROFILE_5(LONG_JT_REFON)      3
+set PROFILE_5(LONG_MAX_TIME_FIRST_DIR)       0.1
+set PROFILE_5(LONG_MAX_TIME_FIRST_DIR_SLATS) 0.1
+set PROFILE_5(LONG_MULTIEXECUTE)  1
+set PROFILE_5(LONG_OFF_LEVEL)     0.0
+set PROFILE_5(LONG_OFF_LEVEL_2)   1.005
+set PROFILE_5(LONG_ON_LEVEL)      1.0
+set PROFILE_5(LONG_ON_LEVEL_2)    1.005
+set PROFILE_5(LONG_SLATS_MOVEMENTS_TO_SKIP) {0 1 2 3}
+set PROFILE_5(SHORT_OFF_LEVEL)    1.005
+set PROFILE_5(SHORT_OFF_LEVEL_2)  {1.0 range 0.0 - 1.0}
+set PROFILE_5(SHORT_ON_LEVEL)     1.005
+set PROFILE_5(SHORT_ON_LEVEL_2)   {1.0 range 0.0 - 1.0}
+set PROFILE_5(UI_DESCRIPTION) ""
+set PROFILE_5(UI_TEMPLATE)  $PROFILE_5(UI_DESCRIPTION)
+set PROFILE_5(UI_HINT)  5
+
+
 # hier folgen die eventuellen Subsets
 #set SUBSET_1(NAME)          "Hochgefahren"
 set SUBSET_1(NAME)          "\${subset_1}"
@@ -392,6 +420,8 @@ set SUBSET_3(SHORT_JT_RAMPOFF)  $OFF
 set SUBSET_3(SHORT_JT_RAMPON)   $ON
 set SUBSET_3(SHORT_JT_REFOFF)   $REFOFF
 set SUBSET_3(SHORT_JT_REFON)    $REFON
+
+
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
@@ -609,11 +639,26 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "</td></tr>"
   }
   # parameter end
-
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
-
   append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_$prn\_1');jalousieShowSlatInputElem('separate_${special_input_id}_$prn\_1', $ch);},200)</script>"
 
+
+#5 jalousie lamelle position
+  incr prn
+  set pref 1
+  if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
+  append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
+  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+  append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${JALOUSIE_SLAT_POS}</td><td>"
+    option BLIND_LEVEL
+    # set options(1.005) "\${lastValue}"
+    # set options(1.010) "\${noModification}"
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL_2|SHORT_OFF_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL_2 "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+  append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 }
 
 constructor

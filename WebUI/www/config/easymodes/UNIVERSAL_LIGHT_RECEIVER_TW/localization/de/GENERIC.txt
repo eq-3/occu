@@ -14,11 +14,33 @@
 "dim2warm_on_of_up_down" : "Dim2Warm - ein/aus & heller/dunkler",
 
 "COLOR_TEMP" : "Farbtemperatur",
+"COLOR_TEMP_A" : "Farbtemperatur A",
+"COLOR_TEMP_B" : "Farbtemperatur B",
 "COLOR_TEMP_ON" : "Farbtemperatur im Zustand 'ein'",
 "COLOR_TEMP_OFF" : "Farbtemperatur im Zustand 'aus'",
 "MIN_COLOR_TEMP" : "Minimale Farbtemperatur",
 "MAX_COLOR_TEMP" : "Maximale Farbtemperatur",
 
 "unitKelvin" : "K",
+
+"Effect" : "Effekt",
+
+"dimmer_on" : "Helligkeit - ein",
+"dimmer_off" : "Helligkeit - aus",
+"dimmer_on_off" : "Helligkeit - ein/aus",
+
+"colortemp_a" : "Farbtemperatur - A",
+"colortemp_b" : "Farbtemperatur - B",
+"colortemp_a_b" : "Farbtemperatur - A/B",
+
+"hcl_on" : "HCL - ein",
+"hcl_off" : "HCL - aus",
+"hcl_on_off" : "HCL - ein/aus",
+
+"dim2warm_on" : "Dim2Warm - ein",
+"dim2warm_off" : "Dim2Warm - aus",
+"dim2warm_on_off" : "Dim2Warm - ein/aus",
+
+"lblResorePreviousStatus" : langJSON.de.lblResorePreviousStatus,
 
 

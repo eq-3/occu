@@ -1963,44 +1963,128 @@ set comment {
   set pref 0
   if {$cur_profile == $prn} then {array set PROFILE_$prn [array get ps]}
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
-  append HTML_PARAMS(separate_$prn) "\${description_$prn}"
-  # append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
-  append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
-    incr pref
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${OUTPUT_BEHAVIOUR_effect}</td><td>"
-    option DALI_EFFECTS
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OUTPUT_BEHAVIOUR|LONG_OUTPUT_BEHAVIOUR separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OUTPUT_BEHAVIOUR "onchange=\"stopEffect(this, $prn, $pref);\""]
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
+    append HTML_PARAMS(separate_$prn) "\${description_$prn}"
+    # append HTML_PARAMS(separate_$prn) "[getDescription $longKeypressAvailable $prn]"
+    append HTML_PARAMS(separate_$prn) "<table class=\"ProfileTbl\">"
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr>"
+        append HTML_PARAMS(separate_$prn) "<td id='lblEffect'>\${OUTPUT_BEHAVIOUR_effect}</td>"
+        append HTML_PARAMS(separate_$prn) "<td>"
+          # option DALI_EFFECTS
+          array_clear options
+          set options(0) "\${optionNoEffect}"
+          for {set effect 1} {$effect <= 19} {set effect [expr $effect + 2]} {
+            set options($effect) ""
+          }
+         # append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OUTPUT_BEHAVIOUR|LONG_OUTPUT_BEHAVIOUR separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OUTPUT_BEHAVIOUR "onchange=\"stopEffect(this, $prn, $pref);\""]
+          append HTML_PARAMS(separate_$prn) [get_ComboBox options dummy effect_$prn\_$pref PROFILE_$prn SHORT_OUTPUT_BEHAVIOUR "onchange=\"setSelectedEffect(this); stopEffect(this, $prn, $pref);\""]
+        append HTML_PARAMS(separate_$prn) "</td>"
 
-    append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
+        append HTML_PARAMS(separate_$prn) "<td>"
 
-        append HTML_PARAMS(separate_$prn) "var effectElm = jQuery(\"#separate_receiver_$prn\_$pref\");"
+          append HTML_PARAMS(separate_$prn) "<input type='text' id='separate_${special_input_id}_$prn\_$pref' name='SHORT_OUTPUT_BEHAVIOUR|LONG_OUTPUT_BEHAVIOUR' class='$ps(SHORT_OUTPUT_BEHAVIOUR) hidden' value='$ps(SHORT_OUTPUT_BEHAVIOUR)'>"
 
-        append HTML_PARAMS(separate_$prn) "stopEffect = function(effectElm, prn, pref) \{"
-          append HTML_PARAMS(separate_$prn) "console.log('stopEffect');"
-          append HTML_PARAMS(separate_$prn) "var levelElm = jQuery(\"#separate_receiver_\"+prn+\"_\"+(parseInt(pref) + 1)),"
-          append HTML_PARAMS(separate_$prn) "trLevel = jQuery(\"\#trOnLevel_\"+ prn);"
-          append HTML_PARAMS(separate_$prn) "if (jQuery(effectElm).val() == '1') \{;"
-            append HTML_PARAMS(separate_$prn) "trLevel.hide();"
-            append HTML_PARAMS(separate_$prn) "levelElm.val('0.0');"
-          append HTML_PARAMS(separate_$prn) "\} else \{"
-            append HTML_PARAMS(separate_$prn) "trLevel.show();"
-            append HTML_PARAMS(separate_$prn) "levelElm.val('1.0');"
+        append HTML_PARAMS(separate_$prn) "</td>"
+
+      append HTML_PARAMS(separate_$prn) "</tr>"
+
+      append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
+          set prefEffect $pref
+          append HTML_PARAMS(separate_$prn) "var effectOptionElm = jQuery(\"#lblEffect\").next().children().first(),"
+          append HTML_PARAMS(separate_$prn) "effectOptions = jQuery('#' + effectOptionElm.prop('id') + ' option'),"
+          append HTML_PARAMS(separate_$prn) "oDevice = DeviceList.getDeviceByAddress('$dev_descr_receiver(PARENT)'),"
+          append HTML_PARAMS(separate_$prn) "oChannel = DeviceList.getChannelByAddress('$address'),"
+          append HTML_PARAMS(separate_$prn) "effectName = '';"
+
+          append HTML_PARAMS(separate_$prn) "curEffect = parseInt(jQuery('\#separate_receiver_$prn\_$pref').val()),"
+          append HTML_PARAMS(separate_$prn) "effectModeLink = ((curEffect != 0) && ((curEffect % 2) == 0)) ? true : false;"
+
+          append HTML_PARAMS(separate_$prn) "if (curEffect == 0) \{"
+            append HTML_PARAMS(separate_$prn) "jQuery(\"\#trOnLevel_$prn\").hide();"
+            append HTML_PARAMS(separate_$prn) "jQuery(\"\#trEffectMode_$prn\").hide();"
           append HTML_PARAMS(separate_$prn) "\}"
-        append HTML_PARAMS(separate_$prn) "\};"
 
-        append HTML_PARAMS(separate_$prn) "effectElm.change();"
+          append HTML_PARAMS(separate_$prn) "if (effectModeLink) \{"
+            append HTML_PARAMS(separate_$prn) "var optionValue = (curEffect - 1);"
+            append HTML_PARAMS(separate_$prn) "effectOptionElm.find('option\[value='+optionValue+'\]').attr('selected', 'selected').prop('class',optionValue);"
+          append HTML_PARAMS(separate_$prn) "\}"
 
+          append HTML_PARAMS(separate_$prn) "jQuery.each(effectOptions, function(index, option) {"
+            append HTML_PARAMS(separate_$prn) "if (index > 0) {"
+              append HTML_PARAMS(separate_$prn) "effectName = homematic(\"Interface.getMetadata\", \{'objectId' : oDevice.id, 'dataId': 'effectName_' + index\});"
+              append HTML_PARAMS(separate_$prn) "if ((effectName == \"\") || (effectName == \"null\")) {effectName = translateKey(\"lblEffect\") + \" \" + index;}"
+              append HTML_PARAMS(separate_$prn) "jQuery(effectOptions\[index\]).text(effectName);"
+            append HTML_PARAMS(separate_$prn) "}"
+          append HTML_PARAMS(separate_$prn) "});"
 
-    append HTML_PARAMS(separate_$prn) "</script>"
+          append HTML_PARAMS(separate_$prn) "setEffectModeLink = function(elm, prn, pref) \{"
+            append HTML_PARAMS(separate_$prn) "var val2SendElm = jQuery('\#separate_receiver_$prn\_$pref'),"
+            append HTML_PARAMS(separate_$prn) " effectModeLink = (jQuery(elm).is(':checked')) ? true : false;"
 
-    incr pref
-    append HTML_PARAMS(separate_$prn) "<tr id='trOnLevel_$prn'><td>\${ON_LEVEL_EFFECT}</td><td>"
-    option DIM_0-100
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
-    EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
-  append HTML_PARAMS(separate_$prn) "</table>"
+            append HTML_PARAMS(separate_$prn) "if (effectModeLink) \{"
+              append HTML_PARAMS(separate_$prn) "val2SendElm.val(parseInt(val2SendElm.val()) + 1);"
+            append HTML_PARAMS(separate_$prn) "\} else \{"
+              append HTML_PARAMS(separate_$prn) "val2SendElm.val(parseInt(val2SendElm.val()) - 1);"
+            append HTML_PARAMS(separate_$prn) "\}"
+
+          append HTML_PARAMS(separate_$prn) "\};"
+
+          append HTML_PARAMS(separate_$prn) "setSelectedEffect = function(elm) \{"
+            append HTML_PARAMS(separate_$prn) "var oChannel = DeviceList.getChannelByAddress('$address');"
+            append HTML_PARAMS(separate_$prn) "jQuery(elm).parent().next().children().first().val(elm.value);"
+            append HTML_PARAMS(separate_$prn) "jQuery('\#chkBoxEffectModeLink_$prn').prop('checked', false);"
+            append HTML_PARAMS(separate_$prn) "homematic('Interface.setMetadata', {'objectId': oChannel.id, 'dataId': 'effectModeLink', 'value': 'false'});"
+          append HTML_PARAMS(separate_$prn) "\};"
+
+          append HTML_PARAMS(separate_$prn) "var effectElm = jQuery(\"#separate_receiver_$prn\_$pref\");"
+          append HTML_PARAMS(separate_$prn) "stopEffect = function(effectElm, prn, pref) \{"
+            append HTML_PARAMS(separate_$prn) "var levelElm = jQuery(\"#separate_receiver_\"+prn+\"_\"+(parseInt(pref) + 1)),"
+            append HTML_PARAMS(separate_$prn) "trLevel = jQuery(\"\#trOnLevel_\"+ prn),"
+            append HTML_PARAMS(separate_$prn) "trEffectMode = jQuery(\"\#trEffectMode_\"+ prn);"
+
+            append HTML_PARAMS(separate_$prn) "if (jQuery(effectElm).val() == '0') \{;"
+              append HTML_PARAMS(separate_$prn) "trLevel.hide();"
+              append HTML_PARAMS(separate_$prn) "trEffectMode.hide();"
+              append HTML_PARAMS(separate_$prn) "levelElm.val('0.0');"
+            append HTML_PARAMS(separate_$prn) "\} else \{"
+              append HTML_PARAMS(separate_$prn) "trLevel.show();"
+              append HTML_PARAMS(separate_$prn) "trEffectMode.show();"
+              append HTML_PARAMS(separate_$prn) "levelElm.val('1.0');"
+            append HTML_PARAMS(separate_$prn) "\}"
+          append HTML_PARAMS(separate_$prn) "\};"
+
+          append HTML_PARAMS(separate_$prn) "effectElm.change();"
+      append HTML_PARAMS(separate_$prn) "</script>"
+
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr id='trOnLevel_$prn'><td>\${ON_LEVEL_EFFECT}</td><td>"
+      option DIM_0-100
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+      append HTML_PARAMS(separate_$prn) "<tr id='trEffectMode_$prn'>"
+        append HTML_PARAMS(separate_$prn) "<td>"
+          append HTML_PARAMS(separate_$prn) "<div style='width:200px;'>\${lblResorePreviousStatus}</div>"
+        append HTML_PARAMS(separate_$prn) "</td>"
+        append HTML_PARAMS(separate_$prn) "<td>"
+          append HTML_PARAMS(separate_$prn) "<input type='checkbox' id='chkBoxEffectModeLink_$prn' onchange='setEffectModeLink(this, $prn, $pref)'>"
+        append HTML_PARAMS(separate_$prn) "</td>"
+      append HTML_PARAMS(separate_$prn) "</tr>"
+
+      append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
+
+        append HTML_PARAMS(separate_$prn) "var oChannel = DeviceList.getChannelByAddress('$address'),"
+        append HTML_PARAMS(separate_$prn) "curEffect = parseInt(jQuery('\#separate_receiver_$prn\_$prefEffect').val()),"
+        append HTML_PARAMS(separate_$prn) "effectModeLink = ((curEffect != 0) && ((curEffect % 2) == 0)) ? true : false,"
+        append HTML_PARAMS(separate_$prn) "chkBoxEffectModeLinkElm = jQuery('\#chkBoxEffectModeLink_$prn');"
+
+        append HTML_PARAMS(separate_$prn) "chkBoxEffectModeLinkElm.attr('checked', effectModeLink);"
+        append HTML_PARAMS(separate_$prn) "homematic('Interface.setMetadata', {'objectId': oChannel.id, 'dataId': 'effectModeLink', 'value': effectModeLink});"
+
+      append HTML_PARAMS(separate_$prn) "</script>"
+
+    append HTML_PARAMS(separate_$prn) "</table>"
 
   append HTML_PARAMS(separate_$prn) "</textarea></div>"
 

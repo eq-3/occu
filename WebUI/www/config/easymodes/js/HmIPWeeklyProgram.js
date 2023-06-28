@@ -147,8 +147,8 @@ HmIPWeeklyProgram.prototype = {
 
     this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
-    this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
-    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
+    this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
+    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
     this.selectedMode_RGBW = "";
@@ -255,6 +255,10 @@ HmIPWeeklyProgram.prototype = {
 
     if (this.WINDOW_DRIVE_RECEIVER) {
       this.virtualChannels = [2];
+    }
+
+    if (this._isDeviceType("HmIP-SMO230")) {
+      this.virtualChannels =  [10, 11, 12];
     }
 
     if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW)) {
@@ -532,12 +536,12 @@ HmIPWeeklyProgram.prototype = {
     }
 
     // Song no. and color of channel type DIMMER_OUTPUT_BEHAVIOUR
-    if ((this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) && (!this._isDeviceType("HmIPW-WRC6"))) {
+    if ((this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) && (!this._isDeviceType("HmIPW-WRC6")) && (!this._isDeviceType("HmIPW-WRC6-A")) ) {
       this.prn++;
       programEntry += "<td name='lblWPColorSelector_" + number + "' class='hidden'>" + translateKey('lblColorNr') + ": </td></td><td name='lblWPColorSelector_" + number + "' class='hidden'>" + this._getColorSelector(number) + "</td>";
       programEntry += "<td name='lblWPSoundSelector_" + number + "' class='hidden'>" + translateKey('lblSoundFileNr') + ": </td><td name='lblWPSoundSelector_" + number + "' class='hidden'>" + this._getSoundSelector(number) + "</td>";
       programEntry += "<td name='lblWPColorSoundSelector_" + number + "' class='hidden'>" + translateKey('lblColorSongNr') + ": </td><td name='lblWPColorSoundSelector_" + number + "' class='hidden'>" + this._getColorSoundSelector(number) + "</td>";
-    } else if ((this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) && (this._isDeviceType("HmIPW-WRC6"))) {
+    } else if ((this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) && ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A")))) {
       // This is for the HmIPW-WRC6
       this.prn++;
       programEntry += "<td>" + this._getColorSelectorA(number, this.chn, this.prn) + "</td>";
@@ -1130,7 +1134,7 @@ HmIPWeeklyProgram.prototype = {
       if (val2Send == 1) {
         brightnessElm.val("0").attr("disabled", true); // option field LEVEL
       } else {
-        brightnessElm.val("1.000").attr("disabled", false);
+        brightnessElm.attr("disabled", false);
       }
     };
 
@@ -1557,7 +1561,7 @@ HmIPWeeklyProgram.prototype = {
       var freeValElm = jQuery("[name='dimFreeValue" + self.chn + "_" + self._addLeadingZero(nr) + "']");
       if (val == "freeVal" || ((val != 1.005) && (val != 1.010) && ((parseInt(val * 100) % 5) != 0))) {
         freeValElm.val(100);
-        if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6"))) {
+        if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6")) || (self._isDeviceType("HmIPW-WRC6-A"))) {
           freeValElm.css("display", "block");
         } else {
           freeValElm.show();
@@ -1645,7 +1649,7 @@ HmIPWeeklyProgram.prototype = {
           if ((val != 1.005) && (val != 1.010) && ((parseInt(val * 100) % 5) != 0)) {
             result += "<option id='dimOptionFreeValue" + this.chn + "_" + this.prn + "' value=" + val + " selected='selected'>" + translateKey('optionEnterValue') + "</option>";
             window.setTimeout(function () {
-              if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6"))) {
+              if ((self._isDeviceType("HmIP-MP3P")) || (self._isDeviceType("HmIPW-WRC6")) || (self._isDeviceType("HmIPW-WRC6-A"))) {
                 jQuery("[name='dimFreeValue" + self.chn + "_" + number + "']").css('display', 'block').val(parseInt(val * 100));
               } else {
                 jQuery("[name='dimFreeValue" + self.chn + "_" + number + "']").show().val(parseInt(val * 100));
@@ -1805,7 +1809,7 @@ HmIPWeeklyProgram.prototype = {
     }
 
     result += "<select id='separate_CHANNEL_" + this.chn + "_" + this.prn + "' name='" + paramID + "' dataid='color_" + number + "'>";
-    if (!this._isDeviceType("HmIPW-WRC6")) {
+    if ((!this._isDeviceType("HmIPW-WRC6")) && (!this._isDeviceType("HmIPW-WRC6-A"))) {
       result += (val == 253) ? "<option value='253' selected='selected'>" + translateKey("randomPlayback") + "</option>" : "<option value='253'>" + translateKey("randomPlayback") + "</option>";
     }
     result += (val == 254) ? "<option value='254' selected='selected'>" + translateKey("colorOldValue") + "</option>" : "<option value='254'>" + translateKey("colorOldValue") + "</option>";
@@ -2105,7 +2109,7 @@ HmIPWeeklyProgram.prototype = {
         }
       });
 
-      if (self._isDeviceType("HmIPW-WRC6")) {
+      if ((self._isDeviceType("HmIPW-WRC6")) || (self._isDeviceType("HmIPW-WRC6-A"))) {
         hasOpticalSignalReceiver = true;
       }
 
@@ -2317,7 +2321,7 @@ HmIPWeeklyProgram.prototype = {
       result += "if (chType == 'DIMMER_VIRTUAL_RECEIVER') {hasDimmerVirtReceiver = true;}";
       result += "if (chType == 'ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER') {hasAcousticVirtReceiver = true;}";
       result += "});";
-      if (this._isDeviceType("HmIPW-WRC6")) {
+      if ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A"))) {
         result += "hasOpticalSignalReceiver = true;";
       }
       result += "var colorSelector = jQuery(\"[dataid='color_" + number + "']\");";
@@ -2607,7 +2611,7 @@ HmIPWeeklyProgram.prototype = {
 
     //return 75;
 
-    if ((this._isDeviceType("HmIP-MP3P")) || (this._isDeviceType("HmIPW-WRC6")) ) {return 69;}
+    if ((this._isDeviceType("HmIP-MP3P")) || (this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A"))) {return 69;}
 
     switch (this.chnType) {
       case this.DIMMER:

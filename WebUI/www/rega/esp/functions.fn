@@ -360,8 +360,10 @@ function ::showHideHmIPChannel() {
          (oDevHssType != "HmIP-RC8")
       && (oDevHssType != "HMIP-WRC2")
       && (oDevHssType != "HmIP-WRC2")
+      && (oDevHssType != "HmIP-WRC2-A")
       && (oDevHssType != "HmIP-WRCC2")
       && (oDevHssType != "HmIP-WRC6")
+      && (oDevHssType != "HmIP-WRC6-A")
       && (oDevHssType != "HmIP-KRCA")
       && (oDevHssType != "HmIP-KRCK")
       && (oDevHssType != "HmIP-KRC4")
@@ -372,6 +374,7 @@ function ::showHideHmIPChannel() {
       && (oDevHssType != "HmIP-WRCR")
       && (oDevHssType != "HmIP-STI")
       && (oDevHssType != "HmIPW-WRC2")
+      && (oDevHssType != "HmIPW-WRC2-A")
       && (oDevHssType != "HmIPW-BRC2")
       && (oDevHssType != "HmIP-RCV-50")
       )
@@ -763,7 +766,7 @@ function ::destinationIsParameterVisible() {
   }
 
   ! Hide the parameter ON_TIME for channels of type PRESENCEDETECTOR_TRANSCEIVER and MOTIONDETECTOR_TRANSCEIVER (SPHM-289)
-  if ((oCH.HssType().Find("MOTIONDETECTOR_TRANSCEIVER") != -1) || (oCH.HssType().Find("PRESENCEDETECTOR_TRANSCEIVER") != -1)) {
+  if ((oCH.HssType().Find("MOTIONDETECTOR_TRANSCEIVER") != -1) || (oCH.HssType().Find("MOTIONDETECTOR_VIRTUAL_TRANSCEIVER") != -1) || (oCH.HssType().Find("PRESENCEDETECTOR_TRANSCEIVER") != -1)) {
     if (oDP.HSSID().Find("ON_TIME") != -1)  {
       showChannelParam = false;
     }
@@ -814,8 +817,8 @@ function ::destinationIsParameterVisible() {
 
   if ( oCH.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
 
-    !HmIP-FWI (Wiegand Interface)
-    if (oCH.Label() == "HmIP-FWI") {
+    !e. g. HmIP-FWI (Wiegand Interface)
+    if ((oCH.Label() == "HmIP-FWI") || (oCH.Label() == "HmIP-SMO230")) {
       if ( oDP.HSSID().Find("ON_TIME") != -1 ) {
         showChannelParam = false;
       }
@@ -1111,7 +1114,7 @@ function ::getSpecialTranslationPrgDest() {
   }
 
   ! SMI55 (SPHM-725)
-  if ((oCH.Label().Find("HmIP-SMI55") != -1) || (oCH.Label().Find("HmIP-SMI55-2") != -1)) {
+  if ((oCH.Label().Find("HmIP-SMI55") != -1) || (oCH.Label().Find("HmIP-SMI55-A") != -1) || (oCH.Label().Find("HmIP-SMI55-2") != -1)) {
     object dev = dom.GetObject(oCH.Device());
     if (dev.MetaData("permanentFullRX") != 1) {
       if ((sValue.Find("stringTableMotionDetectorMotionDetectionActiveTrue") != -1 )

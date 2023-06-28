@@ -171,7 +171,7 @@ proc getUserDefinedCondTXThresholdUnitMinMaxDescr {devType param} {
    }
 }
 
-proc getTextField {param value chn prn {extraparam ""}} {
+proc getTextField {param value chn prn {extraparam ""} {superExtra ""}} {
 
   # exec echo "getTextField: $extraparam" >> /tmp/textField.log
 
@@ -219,11 +219,21 @@ proc getTextField {param value chn prn {extraparam ""}} {
     if {$param == "CALIBRATION_PPM_VAL"} {set maxValue 10000}
   }
 
+set comment {
+  if {$param == "DIM_LEVEL_LOWEST"} {
+    set onMinLevel [expr $extraparam * 1.0]
+    if {($onMinLevel < 0.5)} {
+      set minValue $minValue
+    } else {
+      set minValue $onMinLevel
+    }
+  }
+}
   set elemId 'separate_CHANNEL\_$chn\_$prn'
 
   # Limit float to 2 decimal places
   if {[llength [split $value "."]] == 2} {
-    set value [format {%1.1f} $value]
+    catch {set value [format {%1.1f} $value]}
   }
 
   # Convert float to int - sometimes the parameter UTC_* comes as float instead of int (for whatever reason). This will cause an error.
@@ -275,7 +285,7 @@ proc getTextField {param value chn prn {extraparam ""}} {
     } elseif {$minValue == "stringUTF8"} {
         set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" $maxLength name=$param>"
     } else {
-      set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\" $extraparam>"
+      set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\" $extraparam $superExtra>"
     }
   }
 
@@ -479,6 +489,8 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "DELAY_COMPENSATION" {set x 450; set y 100}
    "DEVICE_OPERATION_MODE_RGBW" {set x 650; set y 200}
    "DEVICE_SENSOR_SENSITIVITY" {set x 450; set y 180}
+   "DIM_LEVEL_HIGHEST" {set x 450; set y 55}
+   "DIM_LEVEL_LOWEST" {set x 450; set y 125}
    "DIM_STEP" {set x 500; set y 150}
    "DISABLE_DEVICE_ALIVE_SIGNAL" {set x 500; set y 75 }
    "DURATION_5MIN" {set x 500; set y 160}
@@ -495,6 +507,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "ON_MIN_LEVEL" {set x 400; set y 80}
    "OPTIMUM_START_STOP" {set x 450; set y 80}
    "PSM_CHANNEL_OPERATION_MODE" {set x 450; set y 100}
+   "PYRO_CHANNEL_OPERATION_MODE" {set x 500; set y 375}
    "OUTPUT_SWAP" {set x 450; set y 100}
    "OUTPUT_SWAP_SERVO" {set x 450; set y 50}
    "PERMANENT_FULL_RX" {set x 500; set y 160}

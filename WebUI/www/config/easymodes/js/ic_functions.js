@@ -690,6 +690,7 @@ MD_init = function(id, min, max)
   if (ausdr_int.test(input.value)) {var wert_int = ausdr_int.exec(input.value); wert_int = wert_int[0];}
   var wert     = min;
   var channel = id.split("_")[2];
+  var txtIndex = (parseInt(id.split("_")[3]) + 1);
 
   if (! wert_int) {wert = min;} //1 
   if (! isNaN(wert_int)) {wert = wert_int;}
@@ -701,7 +702,7 @@ MD_init = function(id, min, max)
 
   if (input.name == "EVENT_FILTER_NUMBER")
   {
-    var efn = document.getElementsByClassName('event_filter_number');
+    var efn = document.getElementsByClassName('event_filter_number_' + channel);
     if (wert == 1) 
     {
       //input.options[0].text = "jedem";
@@ -710,7 +711,7 @@ MD_init = function(id, min, max)
       efn[0].firstChild.data = translateKey("motionDetectorEventFilterNumberB");
       efn[1].firstChild.data = " ";
 
-      $('separate_CHANNEL_' + channel + '_2').style.display = "none";
+      $('separate_CHANNEL_' + channel + '_' + txtIndex).style.display = "none";
     } else
     {
       input.options[0].text = "1";
@@ -718,13 +719,14 @@ MD_init = function(id, min, max)
       efn[0].firstChild.data = translateKey("motionDetectorEventFilterNumberC");
       //efn[1].firstChild.data = " Sekunden";
       efn[1].firstChild.data = translateKey("motionDetectorEventFilterNumberD");
-      $('separate_CHANNEL_' + channel + '_2').style.display = "inline";
+      $('separate_CHANNEL_' + channel + '_'+ txtIndex).style.display = "inline";
     }
   }
 
   if (input.name == "BRIGHTNESS_FILTER")
   {
-    var brightness = document.getElementsByClassName('brightness')[0];
+   // var brightness = document.getElementsByClassName('brightness')[0];
+    var brightness = document.getElementsByClassName('brightness_' + channel)[0];
     //if (wert == 0)   brightness.firstChild.data = "der zuletzt ermittelte Wert";
     if (wert == 0)   brightness.firstChild.data = translateKey("motionDetectorMinumumOfLastValuesB0");
     //else brightness.firstChild.data = "das Minimum der letzten " + (parseInt(input.value) + 1) + " Werte";
@@ -1366,22 +1368,40 @@ HMW_WebUIsetChannel = function(id, ch_type)
 
 showHintPrgLink = function(channel, prgExists) {
   var channel = parseInt(channel),
+  classMultiMode = jQuery(".j_multiMode_" + channel)[0],
   tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel],
-  elm = jQuery("#separate_CHANNEL_" + channel + "_1");
+  elm = jQuery(".j_multiMode_" + channel). find("[name='CHANNEL_OPERATION_MODE']")[0];
 
   jQuery(elm).prop("disabled", true);
-  if (prgExists) {
-    jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintPrgExists")+"</div>");
+
+  if (typeof classMultiMode == "object") {
+    if (prgExists) {
+      jQuery(classMultiMode).after("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintPrgExists") + "</div>");
+    } else {
+      arChnHasLinks[channel] = true;
+      jQuery(classMultiMode).after("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintLinkExists") + "</div>");
+    }
   } else {
-    arChnHasLinks[channel] = true;
-    jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintLinkExists")+"</div>");
+    if (prgExists) {
+      jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintPrgExists") + "</div>");
+    } else {
+      arChnHasLinks[channel] = true;
+      jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintLinkExists") + "</div>");
+    }
   }
 };
 
 showHintInternalLink = function(channel) {
   var channel = parseInt(channel),
-    tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel];
-    jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>"+translateKey("hintInternalLinkExists")+"</div>");
+    classMultiMode = jQuery(".j_multiMode_" + channel)[0],
+    txtHint = "<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintInternalLinkExists") + "</div>";
+
+  if (typeof classMultiMode == "object") {
+    jQuery(classMultiMode).after(txtHint);
+  } else {
+    var tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel];
+    jQuery(tableElm).append(txtHint);
+  }
 };
 
 ShowHintIfProgramExists = function(id, ch) {
@@ -1390,7 +1410,7 @@ ShowHintIfProgramExists = function(id, ch) {
       showHintPrgLink(ch, true);
     } else {
       if(arChnHasLinks[parseInt(ch)] != true) {
-        var elm = jQuery("#separate_CHANNEL_" + ch + "_1");
+        var elm = jQuery(".j_multiMode_" + ch). find("[name='CHANNEL_OPERATION_MODE']")[0];
         jQuery(elm).prop("disabled", false);
       }
     }
@@ -1411,7 +1431,7 @@ RF_existsLink = function(deviceType, ch, ch_type, internalLinkOnly) {
 
   switch(ch_type) {
     case "MULTI_MODE_INPUT_TRANSMITTER":
-      arDevMultiModeException = ["HmIP-FSI16", "HmIP-DRDI3"];
+      arDevMultiModeException = ["HmIP-FSI16", "HmIP-DRDI3", "HmIP-BDT-I"];
       if ((arDevMultiModeException.indexOf(deviceType) == -1) || (internalLinkOnly == 0)) {
         showHintPrgLink(ch, false);
       } else {

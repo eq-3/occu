@@ -1,13 +1,26 @@
 "dimmer_on_brighter" : "Brightness (V) - on/brighter",
 "dimmer_off_darker" : "Brightness (V) - off/darker",
 "dimmer_on_off_b_d" : "Helligkeit (V) - on/off &amp; brighter/darker",
+
+"dimmer_on" : "Brightness (V) - on",
+"dimmer_off" : "Brightness (V) - off",
+"dimmer_on_off" : "Brightness (V) - on/off",
+
+"color_a" : "Colour value (H) - A",
+"color_b" : "Colour value (H) - B",
+"color_a_b" : "Colour value (H) - A / B",
+
 "color_up" : "Colour value (H) - up",
 "color_down" : "Colour value (H) - down",
 "color_up_down" : "Colour value (H) - up/down",
 
+"saturation_a" : "Saturation (S) - A",
+"saturation_b" : "Saturation (S) - B",
+"saturation_a_b" : "Saturation (S) - A / B",
+
 "saturation_up" : "Saturation (S) - up",
-"saturation_down" : "Saturation (S) -  down",
-"saturation_up_down" : "Saturation (S) -  up/down",
+"saturation_down" : "Saturation (S) - down",
+"saturation_up_down" : "Saturation (S) - up/down",
 
 "optionColorVal" : "Colour value",
 
@@ -35,5 +48,7 @@
 "COLOR_TEMP_OFF" : "Colour temperature in status 'off'",
 "MIN_COLOR_TEMP" : "Minimum colour temperature",
 "MAX_COLOR_TEMP" : "Maximum colour temperature",
+
+"lblResorePreviousStatus" : langJSON.en.lblResorePreviousStatus,
 
 "unitKelvin" : "K",

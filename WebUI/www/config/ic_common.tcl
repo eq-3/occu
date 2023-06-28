@@ -1603,8 +1603,7 @@ proc get_ComboBox2 {val_arr name id selectedvalue {extraparam ""}} {
   set selectedvalue [lindex $selectedvalue 0]
   
   foreach option [array names arr ] {
-  
-    if {$option == $selectedvalue} {set doppelt "true"} ; # prüfen, ob es den Menüeintrag schon gibt. 
+    if {$option == $selectedvalue} {set doppelt "true"} ; # prüfen, ob es den Menüeintrag schon gibt.
   }  
 
   foreach option [array names arr] {

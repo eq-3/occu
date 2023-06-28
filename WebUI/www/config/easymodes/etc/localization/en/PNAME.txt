@@ -1,4 +1,6 @@
 "at" : "<span class=\"translated\">on</span>",
+"A_LEVEL_COLOR_VALUE" : "<span class=\"translated\">Color value A</span>",
+"B_LEVEL_COLOR_VALUE" : "<span class=\"translated\">Color value B</span>",
 "ACTION" : "<span class=\"translated\">Activity</span>",
 "ACT_NUM" : "<span class=\"translated\">Number of signals</span>",
 "ACT_TYPE" : "<span class=\"translated\">Signal type</span>",
@@ -101,8 +103,11 @@
 "SATURATION_CHANGE_DELAY" : "<span class=\"translated\">Saturation change delay</span>",
 "SATURATION_MAX_LEVEL" : "<span class=\"translated\">Saturation limit when brightening</span>",
 "SATURATION_MIN_LEVEL" : "<span class=\"translated\">Saturation limit when dimming</span>",
+
 "SATURATION_OFF_LEVEL" : "<span class=\"translated\">Saturation in status 'off'</span>",
+"SATURATION_OFF_LEVEL_A" : "<span class=\"translated\">Saturation B</span>",
 "SATURATION_ON_LEVEL" : "<span class=\"translated\">Saturation in status 'on'</span>",
+"SATURATION_ON_LEVEL_A" : "<span class=\"translated\">Saturation A</span>",
 
 "SENDER_CHANNEL_SETTINGS" : "<span class=\"translated\">Sender channel settings</span>",
 "SERVO_LIMIT_POSITION_A" : "<span class=\"translated\">Level limitation position A</span>",

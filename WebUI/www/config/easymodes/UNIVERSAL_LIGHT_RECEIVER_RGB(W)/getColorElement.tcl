@@ -130,7 +130,7 @@ proc getColorPicker {pps keyPress} {
 
 }
 
-proc getHueSlider {pps onOff {sliderOn_sliderOff false}} {
+proc getHueSlider {pps onOff {sliderOn_sliderOff false} {colorAB ""}} {
   upvar $pps ps
   upvar prn prn
   upvar pref pref
@@ -144,7 +144,11 @@ proc getHueSlider {pps onOff {sliderOn_sliderOff false}} {
 
 
   append html "<tr id='trColorPicker_$prn\_$pref'>"
-     append html "<td>\${$onOff\_LEVEL_COLOR_VALUE}</td>"
+    if {$colorAB == ""} {
+       append html "<td>\${$onOff\_LEVEL_COLOR_VALUE}</td>"
+    } else {
+      append html "<td>\${$colorAB\_LEVEL_COLOR_VALUE}</td>"
+    }
     append html "<td>"
       append html "<div id='anchorColorHueSlider_$prn\_$pref'></div>"
     append html "</td>"

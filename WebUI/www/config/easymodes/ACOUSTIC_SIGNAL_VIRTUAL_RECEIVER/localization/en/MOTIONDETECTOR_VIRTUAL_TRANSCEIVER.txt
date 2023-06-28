@@ -1,0 +1,4 @@
+"description_1" : "<span class=\"translated\">When the sensor is triggered, the selected MP3 file is played and stopped in turn (toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the sensor is triggered, the selected MP3 file is switched on for the defined time.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+

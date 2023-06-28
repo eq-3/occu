@@ -24,8 +24,8 @@ set PROFILE_1(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 
 # SPHM-833
 set PROFILE_1(SHORT_CT_OFF) {2 0}
-set PROFILE_1(SHORT_CT_OFFDELAY) {3 0}
-set PROFILE_1(SHORT_CT_ON) {3 0}
+set PROFILE_1(SHORT_CT_OFFDELAY) {3 0 2}
+set PROFILE_1(SHORT_CT_ON) {3 0 2}
 set PROFILE_1(SHORT_CT_ONDELAY) {2 0}
 
 set PROFILE_1(SHORT_CT_RAMPOFF) 0
@@ -68,7 +68,7 @@ set PROFILE_1(SHORT_RAMPOFF_TIME_FACTOR) 5
 set PROFILE_1(SHORT_RAMPON_TIME_BASE) 0
 set PROFILE_1(SHORT_RAMPON_TIME_FACTOR) 5
 set PROFILE_1(SHORT_RAMP_START_STEP) 0.050000
-set PROFILE_1(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Schalter erst nach Ablauf dieser Zeit eingeschaltet.<br /> "
+set PROFILE_1(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Dimmer mindestens f&uuml;r die eingestellte Zeit eingeschaltet."
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
@@ -78,10 +78,9 @@ set PROFILE_2(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 
 # SPHM-833
 set PROFILE_2(SHORT_CT_OFF) 2
-set PROFILE_2(SHORT_CT_OFFDELAY) 3
-set PROFILE_2(SHORT_CT_ON) 3
+set PROFILE_2(SHORT_CT_OFFDELAY) {3 2}
+set PROFILE_2(SHORT_CT_ON) {3 2}
 set PROFILE_2(SHORT_CT_ONDELAY) 2
-
 set PROFILE_2(SHORT_CT_RAMPOFF) 2
 set PROFILE_2(SHORT_CT_RAMPON) 2
 set PROFILE_2(SHORT_JT_OFF) 1
@@ -108,7 +107,7 @@ set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_2(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
 set PROFILE_2(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
-set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet.<br />"
+set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Dimmer mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet."
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 

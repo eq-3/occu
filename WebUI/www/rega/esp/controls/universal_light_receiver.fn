@@ -1,6 +1,9 @@
 function ::getEffectPanel()
 {
 
+  object oDevice = dom.GetObject(cObj.Device());
+
+  string controlBtn_1 = "ControlBtnOff";
   string controlBtn_3 = "ControlBtnOff";
   string controlBtn_5 = "ControlBtnOff";
   string controlBtn_7 = "ControlBtnOff";
@@ -12,6 +15,7 @@ function ::getEffectPanel()
   string controlBtn_19 = "ControlBtnOff";
 
   if (iEffect) {
+    if (iEffect == 1) {controlBtn_1 = "ControlBtnOn";}
     if (iEffect == 3) {controlBtn_3 = "ControlBtnOn";}
     if (iEffect == 5) {controlBtn_5 = "ControlBtnOn";}
     if (iEffect == 7) {controlBtn_7 = "ControlBtnOn";}
@@ -25,56 +29,104 @@ function ::getEffectPanel()
 
     WriteLine("<table style='margin: 0 auto;'>");
       WriteLine("<tr>");
-        WriteLine("<td colspan='3'><hr></td>");
+        WriteLine("<td colspan='5'><hr></td>");
       WriteLine("</tr>");
       WriteLine("<tr>");
-        WriteLine("<td colspan='3'>");
+        WriteLine("<td colspan='5'>");
           WriteLine("<div class='controlHeader'>${lblEffect}</div>");
         WriteLine("</td>");
       WriteLine("</tr>");
 
       WriteLine("<tr>");
-      !  WriteLine("<td>");
-      !    WriteLine("<div id='ulrEffect_0_"#chnId#"' class='CLASS02550e "#controlBtn#"' align='center' onclick=\"setULREffect(this, 0, '"#chnAddress#"', "#iState#");\">Aus</div>");
-      !  WriteLine("</td>");
+
       ! WriteLine("<td>");
-      !  WriteLine("<div id='ulrEffect_1_"#chnId#"' class='CLASS02550e "#controlBtn#"' align='center' onclick=\"setULREffect(this, 1, '"#chnAddress#"', "#iState#");\">1</div>");
+      !    WriteLine("<div id='ulrEffect_0_"#chnId#"' class='CLASS02550e "#controlBtn_0#"' align='center' onclick=\"setULREffect(this, 0, '"#chnAddress#"');\">Aus</div>");
       !  WriteLine("</td>");
+
+        string effectName = oDevice.MetaData("effectName_1");
+        if (! effectName) {effectName = "${lblEffect} 1";}
         WriteLine("<td>");
-          WriteLine("<div id='ulrEffect_2_"#chnId#"' class='CLASS02550e "#controlBtn_3#"' align='center' onclick=\"setULREffect(this, 3, '"#chnAddress#"', "#iState#");\">${optionRainbow}</div>");
+          WriteLine("<div id='ulrEffect_1_"#chnId#"' class='CLASS02550e "#controlBtn_1#"' align='center' onclick=\"setULREffect(this, 1, '"#chnAddress#"');\">"#effectName#"</div>");
         WriteLine("</td>");
+
+
+        string effectName = oDevice.MetaData("effectName_2");
+        if (! effectName) {effectName = "${lblEffect} 2";}
         WriteLine("<td>");
-          WriteLine("<div id='ulrEffect_3_"#chnId#"' class='CLASS02550e "#controlBtn_5#"' align='center' onclick=\"setULREffect(this, 5, '"#chnAddress#"', "#iState#");\">${optionSunrise}</div>");
+          WriteLine("<div id='ulrEffect_2_"#chnId#"' class='CLASS02550e "#controlBtn_3#"' align='center' onclick=\"setULREffect(this, 3, '"#chnAddress#"');\">"#effectName#"</div>");
         WriteLine("</td>");
+
+        string effectName = oDevice.MetaData("effectName_3");
+        if (! effectName) {effectName = "${lblEffect} 3";}
         WriteLine("<td>");
-          WriteLine("<div id='ulrEffect_4_"#chnId#"' class='CLASS02550e "#controlBtn_7#"' align='center' onclick=\"setULREffect(this, 7, '"#chnAddress#"', "#iState#");\">${optionSunset}</div>");
+          WriteLine("<div id='ulrEffect_3_"#chnId#"' class='CLASS02550e "#controlBtn_5#"' align='center' onclick=\"setULREffect(this, 5, '"#chnAddress#"');\">"#effectName#"</div>");
         WriteLine("</td>");
-      !  WriteLine("<td>");
-      !    WriteLine("<div id='ulrEffect_5_"#chnId#"' class='CLASS02550e "#controlBtn_9#"' align='center' onclick=\"setULREffect(this, 9, '"#chnAddress#"', "#iState#");\">5</div>");
-      !  WriteLine("</td>");
+
+        string effectName = oDevice.MetaData("effectName_4");
+        if (! effectName) {effectName = "${lblEffect} 4";}
+        WriteLine("<td>");
+          WriteLine("<div id='ulrEffect_4_"#chnId#"' class='CLASS02550e "#controlBtn_7#"' align='center' onclick=\"setULREffect(this, 7, '"#chnAddress#"');\">"#effectName#"</div>");
+        WriteLine("</td>");
+
+        string effectName = oDevice.MetaData("effectName_5");
+        if (! effectName) {effectName = "${lblEffect} 5";}
+        WriteLine("<td>");
+          WriteLine("<div id='ulrEffect_5_"#chnId#"' class='CLASS02550e "#controlBtn_9#"' align='center' onclick=\"setULREffect(this, 9, '"#chnAddress#"');\">"#effectName#"</div>");
+        WriteLine("</td>");
+
       WriteLine("</tr>");
       WriteLine("<tr>");
+
+      string effectName = oDevice.MetaData("effectName_6");
+      if (! effectName) {effectName = "${lblEffect} 6";}
         WriteLine("<td>");
-          WriteLine("<div id='ulrEffect_6_"#chnId#"' class='CLASS02550e "#controlBtn_11#"' align='center' onclick=\"setULREffect(this, 11, '"#chnAddress#"', "#iState#");\">${optionForrest}</div>");
+          WriteLine("<div id='ulrEffect_6_"#chnId#"' class='CLASS02550e "#controlBtn_11#"' align='center' onclick=\"setULREffect(this, 11, '"#chnAddress#"');\">"#effectName#"</div>");
         WriteLine("</td>");
-      !  WriteLine("<td>");
-      !    WriteLine("<div id='ulrEffect_7_"#chnId#"' class='CLASS02550e "#controlBtn_13#"' align='center' onclick=\"setULREffect(this, 13, '"#chnAddress#"', "#iState#");\">7</div>");
-      !  WriteLine("</td>");
-      !  WriteLine("<td>");
-      !    WriteLine("<div id='ulrEffect_8_"#chnId#"' class='CLASS02550e "#controlBtn_15#"' align='center' onclick=\"setULREffect(this, 15, '"#chnAddress#"', "#iState#");\">8</div>");
-      !  WriteLine("</td>");
+
+      string effectName = oDevice.MetaData("effectName_7");
+      if (! effectName) {effectName = "${lblEffect} 7";}
         WriteLine("<td>");
-          WriteLine("<div id='ulrEffect_9_"#chnId#"' class='CLASS02550e "#controlBtn_17#"' align='center' onclick=\"setULREffect(this, 17, '"#chnAddress#"', "#iState#");\">${optionSignalingRed}</div>");
+          WriteLine("<div id='ulrEffect_7_"#chnId#"' class='CLASS02550e "#controlBtn_13#"' align='center' onclick=\"setULREffect(this, 13, '"#chnAddress#"');\">"#effectName#"</div>");
         WriteLine("</td>");
         WriteLine("<td>");
-          WriteLine("<div id='ulrEffect_10_"#chnId#"' class='CLASS02550e "#controlBtn_19#"' align='center' onclick=\"setULREffect(this, 19, '"#chnAddress#"', "#iState#");\">${optionGreenBillow}</div>");
+
+      string effectName = oDevice.MetaData("effectName_8");
+      if (! effectName) {effectName = "${lblEffect} 8";}
+          WriteLine("<div id='ulrEffect_8_"#chnId#"' class='CLASS02550e "#controlBtn_15#"' align='center' onclick=\"setULREffect(this, 15, '"#chnAddress#"');\">"#effectName#"</div>");
         WriteLine("</td>");
+
+      string effectName = oDevice.MetaData("effectName_9");
+      if (! effectName) {effectName = "${lblEffect} 9";}
+        WriteLine("<td>");
+          WriteLine("<div id='ulrEffect_9_"#chnId#"' class='CLASS02550e "#controlBtn_17#"' align='center' onclick=\"setULREffect(this, 17, '"#chnAddress#"');\">"#effectName#"</div>");
+        WriteLine("</td>");
+
+      string effectName = oDevice.MetaData("effectName_10");
+      if (! effectName) {effectName = "${lblEffect} 10";}
+        WriteLine("<td>");
+          WriteLine("<div id='ulrEffect_10_"#chnId#"' class='CLASS02550e "#controlBtn_19#"' align='center' onclick=\"setULREffect(this, 19, '"#chnAddress#"');\">"#effectName#"</div>");
+        WriteLine("</td>");
+
       WriteLine("</tr>");
+
+      string effectMode = cObj.MetaData("effectMode");
+      WriteLine("<tr>");
+        WriteLine("<td colspan='5'><div class='ControlBtnOff'>");
+          WriteLine("${lblResorePreviousStatus}");
+        if (effectMode == 'true') {
+          WriteLine("<input id='effectMode_"#chnId#"' type='checkbox' checked='checked' onchange='setULReffectMode(this, "#chnId#");'>");
+        } else {
+          WriteLine("<input id='effectMode_"#chnId#"' type='checkbox' onchange='setULReffectMode(this, "#chnId#");'>");
+        }
+        WriteLine("</div></td>");
+      WriteLine("</tr>");
+
     WriteLine("</table>");
 
-  !  WriteLine("<script type='text/javascript'>");
-  !    WriteLine("setULREffectToolTips("#chnId#")");
-  !  WriteLine("</script>");
+    WriteLine("<script type='text/javascript'>");
+  !   WriteLine("setULREffectToolTips("#chnId#");");
+      WriteLine("setURLEffectBtnActive("#chnId#",'"#oDevice.Address()#":0');");
+    WriteLine("</script>");
 }
 
 
@@ -86,12 +138,20 @@ function ::CreateRGBWControlMode01()
   object oIface = dom.GetObject(iFaceID);
   string sInterface = oIface.Name();
 
+  object oDevice = dom.GetObject(cObj.Device());
+  object oEffect = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.EFFECT");
   object oChannel = dom.GetObject(chnId);
   string chAddress = oChannel.Address();
 
   integer iLvlDpId = 0;
   integer iOldLvlDpId = 0;
   integer iState = 0;
+
+  integer iEffect = 0;
+
+  if ((oEffect) && (oEffect.Value() != "")) {
+    iEffect = oEffect.Value();
+  }
 
   object oHue = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUE");
   object oSaturation = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.SATURATION");
@@ -178,7 +238,6 @@ function ::CreateRGBWControlMode01()
         WriteLine("</td>");
       WriteLine("</tr>");
     WriteLine("</table>");
-    ! HmIP-RGBW - doesn't work properly - Call("/esp/controls/universal_light_receiver.fn::getEffectPanel()");
     Call("/esp/controls/universal_light_receiver.fn::getEffectPanel()");
   WriteLine("</td>");
 
@@ -224,14 +283,19 @@ function ::CreateRGBWControlMode2()
   object oChannel = dom.GetObject(chnId);
   string chAddress = oChannel.Address();
 
+  object oEffect = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.EFFECT");
+
   ! Dimmer control & slider for the color temperature
 
   integer iLvlDpId = 0;
   integer iOldLvlDpId = 0;
   integer iState = 0;
-
-
   integer colorTempID = -1;
+
+  integer iEffect = 0;
+  if ((oEffect) && (oEffect.Value() != "")) {
+    iEffect = oEffect.Value();
+  }
 
   object oLevel = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.LEVEL");
   object oColorTemp = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.COLOR_TEMPERATURE");
@@ -370,6 +434,7 @@ function ::CreateRGBWControlMode2()
       WriteLine("</tr>");
 
     WriteLine("</table>");
+    Call("/esp/controls/universal_light_receiver.fn::getEffectPanel()");
   WriteLine("</td>");
 
   WriteLine("<script type='text/javascript'>");

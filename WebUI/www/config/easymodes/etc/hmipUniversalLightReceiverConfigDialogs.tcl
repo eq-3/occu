@@ -103,9 +103,9 @@ proc getUniversalLightReceiver {chn p descr} {
       incr prn
       append html "<tr>"
         append html "<td>\${lblDimmerOnMinLevel}</td>"
-        #append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
-        option RAW_0_100Percent
-        append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;%&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
+        # option RAW_0_100Percent
+        # append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
       append html "</tr>"
     }
 

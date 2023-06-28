@@ -18,13 +18,13 @@ function ::CreateWeeklyProgram()
   object objTargetChannelLock = cObj.DPByControl("WEEK_PROFILE.TARGET_CHANNEL_LOCK");
   object objTargetChannelLocks = cObj.DPByControl("WEEK_PROFILE.TARGET_CHANNEL_LOCKS");
 
-  integer iChannelLocks = -1;
+  integer iChannelLocks = 0; ! Auto = default
 
   if (objChannelLocks) {
     iChannelLocks = objChannelLocks.Value(); ! can be ''
 
     if (iChannelLocks == "") {
-      iChannelLocks = -1;
+      iChannelLocks = 0; ! Auto = default
     }
   }
 

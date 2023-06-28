@@ -14,6 +14,8 @@
 "dim2warm_on_of_up_down" : "Dim2Warm - on/off & brighter/darker",
 
 "COLOR_TEMP" : "Colour temperature",
+"COLOR_TEMP A" : "Colour temperature A",
+"COLOR_TEMP B" : "Colour temperature B",
 "COLOR_TEMP_ON" : "Colour temperature in status 'on'",
 "COLOR_TEMP_OFF" : "Colour temperature in status 'off'",
 "MIN_COLOR_TEMP" : "Minimum colour temperature",
@@ -21,4 +23,22 @@
 
 "unitKelvin" : "K",
 
+"Effect" : "Effect",
 
+"dimmer_on" : "Brightness - on",
+"dimmer_off" : "Brightness - off",
+"dimmer_on_off" : "Brightness - on/off",
+
+"colortemp_a" : "Colour temperature - A",
+"colortemp_b" : "Colour temperature - B",
+"colortemp_a_b" : "Colour temperature - A/B",
+
+"hcl_on" : "HCL - on",
+"hcl_off" : "HCL - off",
+"hcl_on_off" : "HCL - on/off",
+
+"dim2warm_on" : "Dim2Warm - on",
+"dim2warm_off" : "Dim2Warm - off",
+"dim2warm_on_off" : "Dim2Warm - on/off",
+
+"lblResorePreviousStatus" : langJSON.en.lblResorePreviousStatus,

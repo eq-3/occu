@@ -62,7 +62,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     }
 
     append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_NUMBER separate_${special_input_id}_1 ps EVENT_FILTER_NUMBER "onchange=\"MD_init(\'separate_${special_input_id}_1\', 1, 15)\"" ]
-    append HTML_PARAMS(separate_1) "<span class=\"event_filter_number\"> Sensor-Impulsen innerhalb <span>"
+    append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\"> Sensor-Impulsen innerhalb <span>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 1, 15)</script>"
 
     array_clear options
@@ -84,7 +84,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr prn; #2
     append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_PERIOD separate_${special_input_id}_$prn ps EVENT_FILTER_PERIOD]
-    append HTML_PARAMS(separate_1) "<span class=\"event_filter_number\">&nbsp;Sekunden</span></td></tr>"
+    append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\">&nbsp;Sekunden</span></td></tr>"
 
     incr prn; #3
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(C)</span></td><td>"
@@ -145,7 +145,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     }
 
     append HTML_PARAMS(separate_1) [get_ComboBox options BRIGHTNESS_FILTER separate_${special_input_id}_$prn ps BRIGHTNESS_FILTER "onchange=\"MD_init(\'separate_${special_input_id}_$prn\', 0, 15)\""]
-    append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
+    append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness_$chn\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
     append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 0, 15)</script>"
 
     incr prn; #8

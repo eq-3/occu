@@ -1,14 +1,15 @@
 "description_1" : "<span class=\"translated\">With a brief press of the button, the light is switched on at the preset brightness value/colour value. A long press of the button brightens the light.</span><br/><br/>",
 "description_2" : "<span class=\"translated\">The light is switched off with a brief press of the button. A long press of the button dims the light.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">With a brief press of the button, the light changes between the preset brightness value/colour value and &quot;aus&quot;. A long press of the button brightens/dims the light alternately.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a brief press of the button, the light changes between the preset brightness value/colour value and &quot;off&quot;. A long press of the button brightens/dims the light alternately.</span><br/><br/>",
 
 "description_4" : "<span class=\"translated\">With a brief press of the button, the light is set to the preset colour value. A long press of the button moves the colour value up the colour scale.</span><br/><br/>",
 "description_5" : "<span class=\"translated\">With a brief press of the button, the light is set to the preset colour value. A long press of the button moves the colour value down the colour scale.</span><br/><br/>",
-"description_6" : "<span class=\"translated\">With a brief press of the button, the light changes between the preset colour values. A long press of the button moves the colour value alternately up and down the colour scale.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">With a brief press of the button, the light changes between the two preset colour values. A long press of the button moves the colour value alternately up and down the colour scale.</span><br/><br/>",
 
 "description_7" : "<span class=\"translated\">With a brief press of the button, the light is set to the preset colour saturation. A long press of the button increases the colour saturation.</span><br/><br/>",
 "description_8" : "<span class=\"translated\">With a brief press of the button, the light is set to the preset colour saturation. A long press of the button reduces the colour saturation.</span><br/><br/>",
-"description_9" : "<span class=\"translated\">With a brief press of the button, the light changes between the preset colour saturations. A long press of the button moves the colour saturation alternately up and down.</span><br/><br/>",
+"description_9" : "<span class=\"translated\">With a brief press of the button, the light changes between the two preset colour saturations. A long press of the button moves the colour saturation alternately up and down.</span><br/><br/>",
+
 "description_10" : "<span class=\"translated\">A short or long keystroke activates the selected effect.</span><br/><br/>",
 
 "description_11" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",

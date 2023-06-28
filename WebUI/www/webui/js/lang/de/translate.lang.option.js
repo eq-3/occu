@@ -2,6 +2,7 @@ jQuery.extend(true, langJSON, {
   "de": {
 
     "optionActiv" : "Aktiv",
+    "optionAdjustDimmerLevel" : "Aktiv / Dimmbereich anpassen",
     "optionBaud1200" : "1200 Baud",
     "optionBaud19200" : "19200 Baud",
     "optionBaud2400" : "2400 Baud",
@@ -67,6 +68,7 @@ jQuery.extend(true, langJSON, {
     "optionPassageCounterDetectionL" : "Durchgangsz%E4hlung rechts nach links",
     "optionPassageCounterDetectionLR" : "Durchgangsz%E4hlung beide Richtungen",
     "optionPassageCounterDetectionR" : "Durchgangsz%E4hlung links nach rechts",
+    "optionPermanently" : "Dauerhaft",
     "optionRGBWControllerPrg0" : "Aus",
     "optionRGBWControllerPrg1" : "Langsamer Durchlauf",
     "optionRGBWControllerPrg2" : "Normaler Durchlauf",

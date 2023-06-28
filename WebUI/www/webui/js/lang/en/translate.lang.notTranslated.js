@@ -98,15 +98,58 @@ jQuery.extend(true, langJSON, {
     "stateDaliBus_2" : "<br/>Overload",
 
     "stringTableErrorLimitULR" : "Limit error",
-    "stringTableErrorLimitULR_False" : "Limit error: Yes",
-    "stringTableErrorLimitULR_True" : "Limit error: No",
+    "stringTableErrorLimitULR_False" : "Limit error: No",
+    "stringTableErrorLimitULR_True" : "Limit error",
+    "stringTableErrorLampFailureULR" : "Lamp Failure",
+    "stringTableErrorLampFailureULR_False" : "Lamp Failure: No",
+    "stringTableErrorLampFailureULR_True" : "Lamp Failure",
+    "stringTableErrorDaliBus" : "Error DALI-Bus",
+    "stringTableErrorDaliBusFalse" : "Error DALI-Bus: No",
+    "stringTableErrorDaliBusTrue" : "Error DALI-Bus",
 
-    "comment: " : "Bugfix Release A/2023 - not yet translated",
+    "stringTableErrorGearFailure" : "Gear Failure",
+    "stringTableErrorGearFailure_False" : "Gear Failure: No",
+    "stringTableErrorGearFailure_True" : "Gear Failure",
 
-    "lblRefreshDaliDevices" : "Search new DALI devices",
-    "btnSearchDaliDevices" : "Activate search",
-    "titleSearchDaliDevices" : "Search new DALI devices",
+    "lblRefreshDaliDevices" : "Check channels of the<br/>DALI gateway for changes",
+    "btnSearchDaliDevices" : "Check",
+    "titleSearchDaliDevices" : "Check channels",
     "lblPleaseWaitAMoment" : "Just a little moment ...",
+
+    "lblEffectNotActive" : "en* Der Effekt ist nicht aktiv!",
+
+    "comment" : "Release B/2023",
+
+    "lblDetectionZones" : "en* Erfassungszonen",
+
+    "optionPyro1" : "en* Zone 1",
+    "optionPyro2" : "en* Zone 2",
+    "optionPyro12" : "en* Zone 1 und 2",
+    "optionPyro3" : "en* Zone 3",
+    "optionPyro13" : "en* Zone 1 und 3",
+    "optionPyro23" : "en* Zone 2 und 3",
+    "optionPyro123" : "en* Zone 1,2 und 3",
+
+    "lblBetaTest" : "en* Feld-Tester",
+    "showDeviceBetaFw" : "en* Zeige unver%F6ffentlichte Ger%E4te-Fw.",
+    "hintDeviceBetaFw" :
+      "en* Bei aktiviertem Parameter werden einer geschlossenen Benutzergruppe auf der Startseite unter dem Punkt 'Ger%E4e-Update' " +
+      "Vorabversionen geplanter Ger%E4te-Firmware Updates angeboten.",
+
+    "lblResorePreviousStatus" : "en* Vorherigen Zustand nach Ablauf des Effekts wieder herstellen: ",
+
+    "stringTableDimmerLevelLowest" : "en* Untere Grenze des<br/>angepassten Dimmbereichs",
+    "stringTableDimmerLevelHighest" : "en* Obere Grenze des<br/>angepassten Dimmbereichs",
+
+    "comment" : "Release C/2023",
+
+    "lblEnergyCounterToday" : "en* Energie heute:",
+    "lblEnergyCounterYesterday" : "en* Energie gestern:",
+    "lblEnergyCounter7d" : "en* Energie vergangene 7 Tage:",
+    "lblEnergyCounter30d" : "en* Energie vergangene 30 Tage:",
+
+    "lblSetEnergyCounter" : "en* Z%E4hlerstand eingeben",
+    "lblEnergyConsumptionInWatt" : "en* Wert in Wh",
 
     "noMoreKeys" : ""
   }

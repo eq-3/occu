@@ -650,7 +650,9 @@ function ::dcCreate()
                 Call("/esp/controls/key_switch_sc.fn::CreateContent()");
               }
             } else {
-              Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+              if (sLastControlName != CN_HMIP_BUTTON) {
+                Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+              }
             }
           }
 

@@ -1,13 +1,26 @@
 "dimmer_on_brighter" : "Helligkeit (V) - ein/heller",
 "dimmer_off_darker" : "Helligkeit (V) - aus/dunkler",
 "dimmer_on_off_b_d" : "Helligkeit (V) - ein/aus &amp; heller/dunkler",
+
+"dimmer_on" : "Helligkeit (V) - ein",
+"dimmer_off" : "Helligkeit (V) - aus",
+"dimmer_on_off" : "Helligkeit (V) - ein/aus",
+
+"color_a" : "Farbwert (H) - A",
+"color_b" : "Farbwert (H) - B",
+"color_a_b" : "Farbwert (H) - A / B",
+
 "color_up" : "Farbwert (H) - hoch",
-"color_down" : "Farbwert (H) -  runter",
-"color_up_down" : "Farbwert (H) -  hoch / runter",
+"color_down" : "Farbwert (H) - runter",
+"color_up_down" : "Farbwert (H) - hoch / runter",
+
+"saturation_a" : "S&auml;ttigung (S) - A",
+"saturation_b" : "S&auml;ttigung (S) - B",
+"saturation_a_b" : "S&auml;ttigung (S) - A / B",
 
 "saturation_up" : "S&auml;ttigung (S) - hoch",
-"saturation_down" : "S&auml;ttigung (S) -  runter",
-"saturation_up_down" : "S&auml;ttigung (S) -  hoch / runter",
+"saturation_down" : "S&auml;ttigung (S) - runter",
+"saturation_up_down" : "S&auml;ttigung (S) - hoch / runter",
 
 "optionColorVal" : "Farbwert",
 
@@ -35,6 +48,8 @@
 "COLOR_TEMP_OFF" : "Farbtemperatur im Zustand 'aus'",
 "MIN_COLOR_TEMP" : "Minimale Farbtemperatur",
 "MAX_COLOR_TEMP" : "Maximale Farbtemperatur",
+
+"lblResorePreviousStatus" : langJSON.de.lblResorePreviousStatus,
 
 "unitKelvin" : "K",
 

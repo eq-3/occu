@@ -23,8 +23,8 @@ set PROFILE_1(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 
 # SPHM-833
 set PROFILE_1(SHORT_CT_OFF) {2 0}
-set PROFILE_1(SHORT_CT_OFFDELAY) {3 0}
-set PROFILE_1(SHORT_CT_ON) {3 0}
+set PROFILE_1(SHORT_CT_OFFDELAY) {3 0 2}
+set PROFILE_1(SHORT_CT_ON) {3 0 2}
 set PROFILE_1(SHORT_CT_ONDELAY) {2 0}
 set PROFILE_1(SHORT_JT_OFF) {1 3}
 set PROFILE_1(SHORT_JT_OFFDELAY) 6
@@ -42,7 +42,7 @@ set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
-set PROFILE_1(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Schalter erst nach Ablauf dieser Zeit eingeschaltet.<br /> "
+set PROFILE_1(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit eingeschaltet."
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
@@ -51,8 +51,8 @@ set PROFILE_2(SHORT_COND_VALUE_HI) {150 range 0 - 255}
 set PROFILE_2(SHORT_COND_VALUE_LO) {50 range 0 - 255}
 # SPHM-833
 set PROFILE_2(SHORT_CT_OFF) 2
-set PROFILE_2(SHORT_CT_OFFDELAY) 3
-set PROFILE_2(SHORT_CT_ON) 3
+set PROFILE_2(SHORT_CT_OFFDELAY) {3 2}
+set PROFILE_2(SHORT_CT_ON) {3 2}
 set PROFILE_2(SHORT_CT_ONDELAY) 2
 set PROFILE_2(SHORT_JT_OFF) 1
 set PROFILE_2(SHORT_JT_OFFDELAY) 3
@@ -70,7 +70,7 @@ set PROFILE_2(SHORT_ON_TIME_BASE) {5 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {1 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) {0 1}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
-set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet.<br />"
+set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet."
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 

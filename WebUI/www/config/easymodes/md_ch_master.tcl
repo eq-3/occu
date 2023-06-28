@@ -26,8 +26,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   upvar HTML_PARAMS   HTML_PARAMS
   upvar PROFILE_PNAME PROFILE_PNAME
   upvar $pps          ps
-     upvar $pps_descr  ps_descr
-  
+  upvar $pps_descr  ps_descr
+
+  set chn [lindex [split $special_input_id _] 1]
+
   set url $iface_url($iface)
   array set dev_descr [xmlrpc $url getParamset [list string $address] MASTER]
   set capture_within_interval  $dev_descr(CAPTURE_WITHIN_INTERVAL)  
@@ -55,7 +57,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set options(14) "14"
   set options(15) "15"
   append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_NUMBER separate_${special_input_id}_1 ps EVENT_FILTER_NUMBER "onchange=\"MD_init(\'separate_${special_input_id}_1\', 1, 15)\"" ] 
-  append HTML_PARAMS(separate_1) "<span class=\"event_filter_number\"> Sensor-Impulsen innerhalb <span>"
+  append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\"> Sensor-Impulsen innerhalb <span>"
   append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_1\', 1, 15)</script>"    
 
   array_clear options
@@ -75,7 +77,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set options(7.0) "7.0"
   set options(7.5) "7.5"
   append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_PERIOD separate_${special_input_id}_2 ps EVENT_FILTER_PERIOD] 
-  append HTML_PARAMS(separate_1) "<span class=\"event_filter_number\">&nbsp;Sekunden</span></td></tr>"
+  append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\">&nbsp;Sekunden</span></td></tr>"
   
   append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_proofClassic(\'separate_${special_input_id}_3\');</script>"
 
@@ -113,7 +115,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set options(6) "7"
   set options(7) "8"
   append HTML_PARAMS(separate_1) [get_ComboBox options BRIGHTNESS_FILTER separate_${special_input_id}_6 ps BRIGHTNESS_FILTER "onchange=\"MD_init(\'separate_${special_input_id}_6\', 0, 7)\""]
-  append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
+  append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness _$chn\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
   append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_6\', 0, 7)</script>"  
 
 #  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"

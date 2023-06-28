@@ -6,6 +6,8 @@
 
 "description_4" : "<span class=\"translated\">With a short button press the blind will be moved for the set time to a required position. If a delay is set the shutter will be moved after the delay time has expired. With a long button press the blind will be moved up or down in 100ms steps. This allows the adjustment of the slats position.</span><br/><br/>",
 
+"description_5" : "<span class=\"translated\">With a short button press, the slat will be moved to the desired position. With a long button press the blind will alternate between being moved up in 100ms steps and down in 100ms steps (toggle function). This allows the adjustment of the slats position.</span><br/><br/>",
+
 "subset_1" : "moved up",
 "subset_2" : "moved down",
 "subset_3" : "changing between moved up and moved down",

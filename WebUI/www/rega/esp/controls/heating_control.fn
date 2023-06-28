@@ -466,6 +466,7 @@ function ::CreateHeatingControlHmIP() {
                   && (chnLabel != "HmIP-eTRV-B-UK")
                   && (chnLabel != "HmIP-eTRV-B1")
                   && (chnLabel != "HmIP-WTH")
+                  && (chnLabel != "HmIP-WTH-A")
                   && (chnLabel != "HMIP-WTH")
                   && (chnLabel != "HmIP-eTRV-C")
                   && (chnLabel != "HmIP-eTRV-C-2")
@@ -475,7 +476,7 @@ function ::CreateHeatingControlHmIP() {
                   && (chnLabel != "HmIP-eTRV-E-S")
                   && (chnLabel != "HmIP-eTRV-E-A")
                 )
-                || (((chnLabel == "HmIP-WTH") || (chnLabel == "HMIP-WTH")) && ((devFwMajor > 1) || ((devFwMajor == 1) && (devFwMinor >= 6))))
+                || (((chnLabel == "HmIP-WTH") || (chnLabel == "HMIP-WTH") || (chnLabel == "HmIP-WTH-A")) && ((devFwMajor > 1) || ((devFwMajor == 1) && (devFwMinor >= 6))))
                ) {
                   WriteLine("<option value='4'>${optionWeeklyProfile4}</option>");
                   WriteLine("<option value='5'>${optionWeeklyProfile5}</option>");

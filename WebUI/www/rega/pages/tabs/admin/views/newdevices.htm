@@ -1749,15 +1749,31 @@ createNecessarySysVarsAndPrograms = function (oDevice) {
       }
       */
 
-    if (oDevice.type == "HmIP-RGBW" ) {
-      if (channel.index == 0) {
-        homematic("Interface.setMetadata", {
-          "objectId" : channel.id,
-          "dataId" : "deviceMode",
-          "value" : 0 // Default Modus RGBW
-        });
+      if (oDevice.type == "HmIP-RGBW" ) {
+        if (channel.index == 0) {
+          homematic("Interface.setMetadata", {
+            "objectId" : channel.id,
+            "dataId" : "deviceMode",
+            "value" : 0 // Default Modus RGBW
+          });
+        }
       }
-    }
+
+      if ((oDevice.type == "HmIP-RGBW") || (oDevice.type == "HmIP-DRG-DALI")) {
+        if (channel.index == 0) {
+          var defaultEffectName, effectNo;
+          var arDefaultEffectName = ["--", translateKey("optionRainbow"), translateKey("optionSunrise"), translateKey("optionSunset"), "--", translateKey("optionForrest"), "--", "--", translateKey("optionSignalingRed"), translateKey("optionGreenBillow")];
+          jQuery.each(arDefaultEffectName, function (index, value) {
+            effectNo = (index + 1);
+            defaultEffectName = (value == "--") ? translateKey("lblEffect") + " " + effectNo : value;
+            homematic("Interface.setMetadata", {
+              "objectId": oDevice.id,
+              "dataId": "effectName_" + effectNo,
+              "value": defaultEffectName
+            });
+          });
+        }
+      }
 
       if (oDevice.type == "HmIPW-WGD" ) {
         if (channel.index == 0) {

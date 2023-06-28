@@ -2,6 +2,7 @@ jQuery.extend(true, langJSON, {
   "en": {
 
     "optionActiv" : "Active",
+    "optionAdjustDimmerLevel" : "Active / Adjust dimming range",
     "optionBaud1200" : "1200 baud",
     "optionBaud19200" : "19200 baud",
     "optionBaud2400" : "2400 baud",
@@ -67,6 +68,7 @@ jQuery.extend(true, langJSON, {
     "optionPassageCounterDetectionL" : "Passage counting right to left",
     "optionPassageCounterDetectionLR" : "Passage counting both directions",
     "optionPassageCounterDetectionR" : "Passage counting left to right",
+    "optionPermanently" : "Permanent",
     "optionRGBWControllerPrg0" : "Off",
     "optionRGBWControllerPrg1" : "Slow cycle",
     "optionRGBWControllerPrg2" : "Normal cycle",

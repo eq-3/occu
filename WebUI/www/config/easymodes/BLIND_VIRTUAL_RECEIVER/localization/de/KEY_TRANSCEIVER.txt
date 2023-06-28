@@ -6,11 +6,8 @@
 
 "description_4" : "<span class=\"translated\">Mit einem kurzen Tastendruck f&auml;hrt die Jalousie f&uuml;r die festgelegte Zeit zur gew&uuml;nschten Position. Ist eine entsprechende Verz&ouml;gerungszeit eingestellt, wird die Beschattung erst nach Ablauf dieser Zeit gefahren. Mit einem langen Tastendruck f&auml;hrt die Jalousie in 100ms-Schritten hoch bzw. herunter. Damit kann die Position der Lamellen eingestellt werden.</span><br/><br/>",
 
+"description_5" : "<span class=\"translated\">Mit einem kurzen Tastendruck f&auml;hrt die Lamelle auf die gew&uuml;nschte Position. Mit einem langen Tastendruck f&auml;hrt die Jalousie in 100ms-Schritten hoch bzw. herunter. Damit kann die Position der Lamellen eingestellt werden.</span><br/><br/>",
+
 "subset_1" : "hochgefahren",
 "subset_2" : "heruntergefahren",
 "subset_3" : "hoch- / heruntergefahren im Wechsel",
-
-
-
-
-

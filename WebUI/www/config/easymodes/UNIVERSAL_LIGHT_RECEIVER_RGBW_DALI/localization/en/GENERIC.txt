@@ -37,4 +37,6 @@
 "MIN_COLOR_TEMP" : "Minimum colour temperature",
 "MAX_COLOR_TEMP" : "Maximum colour temperature",
 
+"lblResorePreviousStatus" : langJSON.en.lblResorePreviousStatus,
+
 "unitKelvin" : "K",

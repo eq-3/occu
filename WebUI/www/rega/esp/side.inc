@@ -26,7 +26,9 @@
 
   string hmipwID = "HmIPW-";
   string hmipw_wrc6 = "HmIPW-WRC6";
+  string hmipw_wrc6_a = "HmIPW-WRC6-A";
   string hmip_smi55 = "HmIP-SMI55";
+  string hmip_smi55_a = "HmIP-SMI55-A";
   string hmip_smi55_2 = "HmIP-SMI55-2";
   string hmip_wgd = "HmIPW-WGD";
   string hmip_wgd_pl = "HmIPW-WGD-PL";
@@ -381,7 +383,7 @@
       Write( '</select> ' );
 
       ! Help for the channel type MOTIONDETECTOR_TRANSCEIVER, config parameter PERMANENT_FULL_RX (SMI55)
-      if ((oCH.Label().Find(hmip_smi55) != -1) || (oCH.Label().Find(hmip_smi55_2) != -1)) {
+      if ((oCH.Label().Find(hmip_smi55) != -1) || (oCH.Label().Find(hmip_smi55_a) != -1) || (oCH.Label().Find(hmip_smi55_2) != -1)) {
         object dev = dom.GetObject(oCH.Device());
         if (dev.MetaData("permanentFullRX") != 1) {
           Write( "<img src=\"/ise/img/help.png\" style=\"cursor: pointer; width:18px; height:18px; position:relative; top:2px\" onclick=\"showParamHelp(translateKey('helpPrgPermanentFullRX'), 400, 150)\">" );
@@ -685,7 +687,9 @@
                   if (iV.Find("L=") == -1) {
                       iV = "L=100,OT=0,RT=0,TC=4500,RTTDV=0,RTTDU=0";
                   }
-                  Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setHmipRGBWTunableWhiteController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                  ! Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setHmipRGBWTunableWhiteController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                  Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDALI_CombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+
                 }
               }
 
@@ -751,7 +755,7 @@
                 ! IMTL(Level) 0 = OFF - 1 = ON
                 ! Some devices have no a display (e. g. HmIPW-WRC6). Therefore we check for a key visual (IMKV)
                 if (iV.Find("IMKV=") == -1) {
-                  if ((oCH.Label().Find(hmipw_wrc6) == -1) && (oCH.Label().Find(hmip_wgd) == -1) && (oCH.Label().Find(hmip_wgd_pl) == -1)) {
+                  if (((oCH.Label().Find(hmipw_wrc6) == -1) || (oCH.Label().Find(hmipw_wrc6_a) == -1)) && (oCH.Label().Find(hmip_wgd) == -1) && (oCH.Label().Find(hmip_wgd_pl) == -1)) {
                     iV = "IMLB=true,IMKV=true,IMTL=1,IMDU=60";
                   } else {
                     iV = "IMKV=true,IMTL=1,IMDU=60";

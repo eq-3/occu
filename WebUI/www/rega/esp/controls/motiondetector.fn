@@ -77,7 +77,7 @@ function ::CreateMotionDetector() {
           WriteLine("</td>");
 
           if (oMotionDetectionActive) {
-            if ((cObj.Label() == "HmIP-SMI55") || (cObj.Label() == "HmIP-SMI55-2")) {
+            if ((cObj.Label() == "HmIP-SMI55") || (cObj.Label() == "HmIP-SMI55-A") || (cObj.Label() == "HmIP-SMI55-2")) {
               ! The SMI55 can be configured as a non-permanent listener. If this is the case this button should not be visible
               ! The check if the device is configured as a non-permanent or a permanent listener happens below in the javascript section
               WriteLine("<td id='tdBtnTransmitterOnOff"#chnId#"' class='hidden'>");
