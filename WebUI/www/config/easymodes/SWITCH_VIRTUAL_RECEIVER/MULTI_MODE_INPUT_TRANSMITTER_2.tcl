@@ -15,6 +15,8 @@ set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)    "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)      "Expertenprofil"
 
+set PROFILE_1(LONG_PROFILE_ACTION_TYPE)      1
+set PROFILE_1(LONG_MULTIEXECUTE)             0
 set PROFILE_1(SHORT_COND_VALUE_HI)           150
 set PROFILE_1(SHORT_COND_VALUE_LO)           {0 50}
 set PROFILE_1(SHORT_CT_OFF)                   0
@@ -41,7 +43,8 @@ set PROFILE_1(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird de
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
-
+set PROFILE_2(LONG_PROFILE_ACTION_TYPE)      1
+set PROFILE_2(LONG_MULTIEXECUTE)             0
 set PROFILE_2(SHORT_COND_VALUE_HI)           150
 set PROFILE_2(SHORT_COND_VALUE_LO)           {0 50}
 set PROFILE_2(SHORT_CT_OFF)                   0
@@ -68,6 +71,8 @@ set PROFILE_2(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird de
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)  
 set PROFILE_2(UI_HINT)  2
 
+set PROFILE_3(LONG_PROFILE_ACTION_TYPE)       {1 5}
+set PROFILE_3(LONG_MULTIEXECUTE)             {0 1}
 set PROFILE_3(SHORT_COND_VALUE_HI)           150
 set PROFILE_3(SHORT_COND_VALUE_LO)           {0 50}
 set PROFILE_3(SHORT_CT_OFF)                   0
@@ -75,9 +80,9 @@ set PROFILE_3(SHORT_CT_OFFDELAY)              {0 2}
 set PROFILE_3(SHORT_CT_ON)                    {0 2}
 set PROFILE_3(SHORT_CT_ONDELAY)               0
 set PROFILE_3(SHORT_JT_OFF)                   {1 3}
-set PROFILE_3(SHORT_JT_OFFDELAY)              6
+set PROFILE_3(SHORT_JT_OFFDELAY)              {6 5}
 set PROFILE_3(SHORT_JT_ON)                    {4 6}
-set PROFILE_3(SHORT_JT_ONDELAY)               3
+set PROFILE_3(SHORT_JT_ONDELAY)               {3 2}
 set PROFILE_3(SHORT_MULTIEXECUTE)             0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR)     {0 range 0 - 31}

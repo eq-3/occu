@@ -116,30 +116,30 @@ jQuery.extend(true, langJSON, {
     "titleSearchDaliDevices" : "Check channels",
     "lblPleaseWaitAMoment" : "Just a little moment ...",
 
-    "lblEffectNotActive" : "en* Der Effekt ist nicht aktiv!",
+    "lblEffectNotActive" : "The effect is not active!",
 
     "comment" : "Release B/2023",
 
     "lblDetectionZones" : "en* Erfassungszonen",
 
-    "optionPyro1" : "en* Zone 1",
-    "optionPyro2" : "en* Zone 2",
-    "optionPyro12" : "en* Zone 1 und 2",
-    "optionPyro3" : "en* Zone 3",
-    "optionPyro13" : "en* Zone 1 und 3",
-    "optionPyro23" : "en* Zone 2 und 3",
-    "optionPyro123" : "en* Zone 1,2 und 3",
+    "optionPyro1" : "Zone 1",
+    "optionPyro2" : "Zone 2",
+    "optionPyro12" : "Zone 1 and 2",
+    "optionPyro3" : "Zone 3",
+    "optionPyro13" : "Zone 1 and 3",
+    "optionPyro23" : "Zone 2 and 3",
+    "optionPyro123" : "Zone 1,2 and 3",
 
-    "lblBetaTest" : "en* Feld-Tester",
-    "showDeviceBetaFw" : "en* Zeige unver%F6ffentlichte Ger%E4te-Fw.",
+    "lblBetaTest" : "Field tester",
+    "showDeviceBetaFw" : "Show unpublished device firmware.",
     "hintDeviceBetaFw" :
-      "en* Bei aktiviertem Parameter werden einer geschlossenen Benutzergruppe auf der Startseite unter dem Punkt 'Ger%E4e-Update' " +
-      "Vorabversionen geplanter Ger%E4te-Firmware Updates angeboten.",
+      "When the parameter is activated, a closed user group is offered advance versions of planned "+
+      "device firmware updates on the start page under the heading 'Device Update'.",
 
-    "lblResorePreviousStatus" : "en* Vorherigen Zustand nach Ablauf des Effekts wieder herstellen: ",
+    "lblResorePreviousStatus" : "Restore previous status after the end of the effect:  ",
 
-    "stringTableDimmerLevelLowest" : "en* Untere Grenze des<br/>angepassten Dimmbereichs",
-    "stringTableDimmerLevelHighest" : "en* Obere Grenze des<br/>angepassten Dimmbereichs",
+    "stringTableDimmerLevelLowest" : "Lower limit of the adjusted dimming range",
+    "stringTableDimmerLevelHighest" : "Upper limit of the adjusted dimming range",
 
     "comment" : "Release C/2023",
 

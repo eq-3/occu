@@ -5,9 +5,17 @@
 "color_down" : "Colour value (H) - down",
 "color_up_down" : "Colour value (H) - up/down",
 
+"color_a" : "Colour value (H) - A",
+"color_b" : "Colour value (H) - B",
+"color_a_b" : "Colour value (H) - A / B",
+
 "saturation_up" : "Saturation (S) - up",
 "saturation_down" : "Saturation (S) -  down",
 "saturation_up_down" : "Saturation (S) -  up/down",
+
+"saturation_a" : "Saturation (S) - A",
+"saturation_b" : "Saturation (S) - B",
+"saturation_a_b" : "Saturation (S) - A / B",
 
 "optionColorVal" : "Colour value",
 

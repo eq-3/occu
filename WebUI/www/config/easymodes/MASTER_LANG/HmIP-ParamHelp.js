@@ -866,20 +866,20 @@ jQuery.extend(true,langJSON, {
       "Make sure that the functionality of the DALI group corresponds to the functionality of the DALI luminaire that is assigned to the group and has the lowest channel number.",
 
     "PYRO_CHANNEL_OPERATION_MODE" :
-      "en* W%E4hlen Sie hier eine der drei m%F6glichen Erfassungszonen, die f%FCr diesen Kanal genutzt werden sollen.<br/><br/>" +
+      "Here, select one of the three possible detection zones that should be used for this channel.<br/><br/>" +
 
-      "<u>Welche Zone befindet sich wo am Ger%E4t?</u><br/><br/>" +
+      "<u>Which zone is located where on the device?</u><br/><br/>" +
 
-      "Bei Frontalansicht auf das Ger%E4t ist<br/><br/>" +
+      "With a frontal view of the device<br/><br/>" +
 
       "<ul>" +
-        "<li>Zone 1 = Der gesamte 90%B0-Winkelbereich rechts</li>" +
-        "<li>Zone 2 = Der gesamte 90%B0-Winkelbereich links</li>" +
-        "<li>Zone 3 = Der gesamte 360%B0-Winkelbereich unterhalb des Ger%E4tes</li>" +
+        "<li>Zone 1 = The entire 90%B0 angle area on the right</li>" +
+        "<li>Zone 2 = The entire 90%B0 angle area on the left</li>" +
+        "<li>Zone 3 = Zone 3 = The entire 360%B0 angle area below the device</li>" +
       "</ul><br/><br/> " +
 
-      "<b><u>Achtung</u></b><br/><br/>" +
-      "Folgende Parameter der Kan%E4le 1 bis 3 beeinflussen die jeweilige Zone 1 - 3:<br><br/>" +
+      "<b><u>Important!</u></b><br/><br/>" +
+      "The following parameters of channels 1 to 3 influence the relevant Zone 1 - 3.:<br><br/>" +
 
       "<ul>" +
         "<li>${stringTableSensivity}</li>" +
@@ -888,10 +888,10 @@ jQuery.extend(true,langJSON, {
       "</ul>",
 
     "DIM_LEVEL_LOWEST" :
-      "en* Dimmlevel, ab dem das Leuchtmittel zu leuchten beginnt bzw. beginnt, heller zu werden.<br/><br/>" +
-      "Zu beachten ist, dass dieser Wert nicht kleiner sein kann, als der Wert, der beim Parameter <i>Minimaler Pegel im Zustand EIN</i> eingestellt ist.",
+      "Dimming level from which the lamp starts to light up or starts to become brighter.<br/><br/>" +
+      "It must be noted that this value cannot be lower than the value that is set in the parameter <i>Minimum level in ON state<i>.",
 
-    "DIM_LEVEL_HIGHEST" : "en* Dimmlevel ab dem das Leuchtmittel die maximale Helligkeit erreicht hat.",
+    "DIM_LEVEL_HIGHEST" : "Dimming level from which the lamp has reached maximum brightness.",
 
     "noMoreHelp" : ""
     }

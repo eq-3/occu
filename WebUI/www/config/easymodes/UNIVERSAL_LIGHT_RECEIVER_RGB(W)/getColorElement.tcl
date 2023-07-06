@@ -69,10 +69,7 @@ proc getColorPicker {pps keyPress} {
             incr pref
             append html "<input id='separate_receiver_$prn\_$pref' name='LONG_ON_HUE' class='alignCenter hidden' value='$ps(LONG_ON_HUE)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_HUE' class='alignCenter hidden' value='$ps(LONG_OFF_HUE)' size='4'>"
-          append html "</td>"
-          append html "<td>"
-            append html "°"
+            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_HUE' class='alignCenter hidden' value='$ps(LONG_OFF_HUE)' size='4'>&nbsp;°"
           append html "</td>"
         append html "</tr>"
 
@@ -158,11 +155,7 @@ proc getHueSlider {pps onOff {sliderOn_sliderOff false} {colorAB ""}} {
     append html "</td>"
 
     append html "<td>"
-      append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_$onOff\_HUE' class='alignCenter' value='$valHUE' size='4'>"
-    append html "</td>"
-
-    append html "<td>"
-      append html "°"
+      append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_$onOff\_HUE' class='alignCenter' value='$valHUE' size='4'>&nbsp;°"
     append html "</td>"
   append html "</tr>"
 

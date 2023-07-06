@@ -17,6 +17,8 @@ set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)    "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)      "Expertenprofil"
 
+set PROFILE_1(LONG_PROFILE_ACTION_TYPE)       1
+set PROFILE_1(LONG_MULTIEXECUTE)              0
 set PROFILE_1(SHORT_COND_VALUE_HI)          150
 set PROFILE_1(SHORT_COND_VALUE_LO)           50
 set PROFILE_1(SHORT_CT_OFF)      {0 2}
@@ -42,6 +44,8 @@ set PROFILE_1(UI_DESCRIPTION)  "Beim Öffnen toggelt wird der Schaltaktor in den 
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
+set PROFILE_2(LONG_PROFILE_ACTION_TYPE)     {1 5}
+set PROFILE_2(LONG_MULTIEXECUTE)            {0 1}
 set PROFILE_2(SHORT_COND_VALUE_HI)          150
 set PROFILE_2(SHORT_COND_VALUE_LO)           50
 set PROFILE_2(SHORT_CT_OFF)      {0 2}
@@ -67,6 +71,8 @@ set PROFILE_2(UI_DESCRIPTION)  "Beim &Ouml;ffnen des Schaltkontaktes wird der Sc
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
 set PROFILE_2(UI_HINT)  2
 
+set PROFILE_3(LONG_PROFILE_ACTION_TYPE)       1
+set PROFILE_3(LONG_MULTIEXECUTE)              0
 set PROFILE_3(SHORT_COND_VALUE_HI)          151
 set PROFILE_3(SHORT_COND_VALUE_LO)           50
 set PROFILE_3(SHORT_CT_OFF)                   {0 2 5}

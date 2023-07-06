@@ -6,6 +6,6 @@
 
 "description_noLong_1" : "<span class=\"translated\">Mit einem Tastendruck wird die gew&auml;hlte MP3-Datei in der festgelegten Lautst&auml;rke abgespielt.</span><br/><br/>",
 "description_noLong_2" : "<span class=\"translated\">Mit einem Tastendruck wird das Abspielen der MP3-Datei beendet.</span><br/><br/>",
-"description_noLong_3" : "<span class=\"translated\">Mit einem Tastendruck wird die MP3-Datei abwechselnd in der eingestellten Lautst&uml;rke abgespielt und ausgeschaltet.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">Mit einem Tastendruck wird die MP3-Datei abwechselnd in der eingestellten Lautst&auml;rke abgespielt und ausgeschaltet.</span><br/><br/>",
 "_description_noLong_4" : "<span class=\"translated\">Mit einem Tastendruck wird die gew&auml;hlte MP3-Datei f&uuml;r die festgelegte Zeit abgespielt.</span><br/><br/>",
 "description_noLong_4" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",

@@ -5,9 +5,17 @@
 "color_down" : "Farbwert (H) -  runter",
 "color_up_down" : "Farbwert (H) -  hoch / runter",
 
+"color_a" : "Farbwert (H) - A",
+"color_b" : "Farbwert (H) - B",
+"color_a_b" : "Farbwert (H) - A / B",
+
 "saturation_up" : "S&auml;ttigung (S) - hoch",
 "saturation_down" : "S&auml;ttigung (S) -  runter",
 "saturation_up_down" : "S&auml;ttigung (S) -  hoch / runter",
+
+"saturation_a" : "S&auml;ttigung (S) - A",
+"saturation_b" : "S&auml;ttigung (S) - B",
+"saturation_a_b" : "S&auml;ttigung (S) - A / B",
 
 "optionColorVal" : "Farbwert",
 

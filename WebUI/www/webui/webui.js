@@ -26871,7 +26871,7 @@ homematic.com =
     this.preURL = (this.m_ccuProduct < 3) ? "" : "ccu3-";
     this.m_product ="HM-CCU" + this.m_ccuProduct;
     this.m_URLServer = (isHTTPS) ? "https://"+this.preURL+"update.homematic.com:8443" : "http://"+this.preURL+"update.homematic.com";
-    this.m_fieldTestURLServer =  "http://fieldtest-ccu3-update.homematic.com";
+    this.m_fieldTestURLServer = (isHTTPS) ? "https://fieldtest-ccu3-update.homematic.com" : "http://fieldtest-ccu3-update.homematic.com";
 
     this.serial = homematic("CCU.getSerial");
     this.serial = ((this.serial != "") && (typeof this.serial != "undefined") && (this.serial != null)) ? this.serial : "0";

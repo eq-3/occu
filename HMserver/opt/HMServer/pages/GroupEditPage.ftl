@@ -27,7 +27,7 @@
   	<tr>
   		<td class="tBodyCell">${"$"}{groupGroupType}</td>
         <td class="tBodyCell" colspan="2">
-	        <select size="1" data-bind="options: possibleGroupTypes, value: groupType, optionsText: 'label',  enable: isNew">
+	        <select id="grpSelector" size="1" data-bind="options: possibleGroupTypes, value: groupType, optionsText: 'label',  enable: isNew">
 	        </select>
         </td>
     </tr>
@@ -163,6 +163,8 @@
 
 <script type="text/javascript">
 
+      window.setTimeout(function() {jQuery("#grpSelector").prop("selectedIndex",1).change();},1);
+
      this.groupNameHasChanged = false;
     // TWIST-589
     // Replaces the char " by '
@@ -225,6 +227,8 @@
 
         self.possibleGroupTypes = [];
         <#list possibleGroupTypes as deviceType>self.possibleGroupTypes.push(new GroupType("${deviceType.getId()}", translateKey('${deviceType.getLabel()}')));</#list>
+
+
 
         ko.utils.arrayForEach(self.possibleGroupTypes, function(item) {
             if(item.id == "${groupType.getId()}") {

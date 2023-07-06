@@ -69,10 +69,7 @@ proc getColorPicker {pps keyPress} {
             incr pref
             append html "<input id='separate_receiver_$prn\_$pref' name='LONG_ON_HUE' class='alignCenter hidden' value='$ps(LONG_ON_HUE)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_HUE' class='alignCenter hidden' value='$ps(LONG_OFF_HUE)' size='4'>"
-          append html "</td>"
-          append html "<td>"
-            append html "°"
+            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_HUE' class='alignCenter hidden' value='$ps(LONG_OFF_HUE)' size='4'>&nbsp;°"
           append html "</td>"
         append html "</tr>"
 
@@ -130,7 +127,7 @@ proc getColorPicker {pps keyPress} {
 
 }
 
-proc getHueSlider {pps onOff {sliderOn_sliderOff false}} {
+proc getHueSlider {pps onOff {sliderOn_sliderOff false} {colorAB ""}} {
   upvar $pps ps
   upvar prn prn
   upvar pref pref
@@ -144,7 +141,11 @@ proc getHueSlider {pps onOff {sliderOn_sliderOff false}} {
 
 
   append html "<tr id='trColorPicker_$prn\_$pref'>"
-     append html "<td>\${$onOff\_LEVEL_COLOR_VALUE}</td>"
+    if {$colorAB == ""} {
+       append html "<td>\${$onOff\_LEVEL_COLOR_VALUE}</td>"
+    } else {
+      append html "<td>\${$colorAB\_LEVEL_COLOR_VALUE}</td>"
+    }
     append html "<td>"
       append html "<div id='anchorColorHueSlider_$prn\_$pref'></div>"
     append html "</td>"
@@ -154,11 +155,7 @@ proc getHueSlider {pps onOff {sliderOn_sliderOff false}} {
     append html "</td>"
 
     append html "<td>"
-      append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_$onOff\_HUE' class='alignCenter' value='$valHUE' size='4'>"
-    append html "</td>"
-
-    append html "<td>"
-      append html "°"
+      append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_$onOff\_HUE' class='alignCenter' value='$valHUE' size='4'>&nbsp;°"
     append html "</td>"
   append html "</tr>"
 
