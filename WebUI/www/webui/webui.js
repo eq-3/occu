@@ -22651,7 +22651,11 @@ var preURL = (WEBUI_VERSION.split(".")[0] < 3) ? "" : "ccu3-";
 
 StartPage = Singleton.create(Page, {
   MAINMENU_ID: "MAINMENU_STARTPAGE",
-  downloadURL: (isHTTPS) ? "https://"+preURL+"update.homematic.com:8443/firmware/download?cmd=download" : "http://"+preURL+"update.homematic.com/firmware/download?cmd=download",
+  downloadURLServer: (isHTTPS) ? "https://"+preURL+"update.homematic.com:8443/firmware/download?cmd=download" : "http://"+preURL+"update.homematic.com/firmware/download?cmd=download",
+  fieldTestURLServer: (isHTTPS) ? "https://fieldtest-ccu3-update.homematic.com/firmware/download?cmd=download" : "http://fieldtest-ccu3-update.homematic.com/firmware/download?cmd=download",
+  fieldTestActive: "/etc/config/fieldTestActive",
+  downloadURL : "",
+  prevDownloadURL : "",
   devList: [],
   devIndex: 0,
   newFwCounter: 0,
@@ -22704,6 +22708,25 @@ StartPage = Singleton.create(Page, {
       default:
         break;
     }
+
+    this.serial = homematic("CCU.getSerial");
+
+    if (homematic('CCU.existsFile', {'file': this.fieldTestActive})) {
+      this.downloadURL = this.fieldTestURLServer;
+    } else {
+      this.downloadURL = this.downloadURLServer;
+    }
+
+    if (this.prevDownloadURL != this.downloadURL) {
+      this.devList = [];
+      this.devIndex = 0;
+      this.newFwCounter = 0;
+      this.fetchDeviceList = false;
+      this.knownTypes = [];
+      this.numberOfKnownTypes = 0;
+    }
+    this.prevDownloadURL = this.downloadURL;
+    conInfo("Device Fw. downloadURL: " + this.downloadURL);
   },
   
   /**
@@ -22892,7 +22915,7 @@ StartPage = Singleton.create(Page, {
       if (devIsUpdatable && fwVersion && (fwVersion != "n/a") && (newFW != curFw)) {
         // FW not yet available on the CCU
         if (availableFW != newFW) {
-          self.messageBoxHTML += "<tr><td  style='text-align:left;' height='15px'>" + deviceType + "</td><td>" + devAddress + "</td></td><td style='text-align:center;'>" + curFw + "</td><td style='text-align:center;' class='UILink' onClick=\"window.location.href='" + self.downloadURL + "&serial=0&product=" + deviceTypeForUrl + "'\">" + fwVersion + "</td></tr>";
+          self.messageBoxHTML += "<tr><td  style='text-align:left;' height='15px'>" + deviceType + "</td><td>" + devAddress + "</td></td><td style='text-align:center;'>" + curFw + "</td><td style='text-align:center;' class='UILink' onClick=\"window.location.href='" + self.downloadURL + "&serial="+self.serial+"&product=" + deviceTypeForUrl + "'\">" + fwVersion + "</td></tr>";
         } else {
           self.messageBoxHTML += "<tr><td  style='text-align:left;' height='15px'>" + deviceType + "</td><td>" + self.devList[self.devIndex].address + "</td></td><td style='text-align:center;'>" + curFw + "</td><td style='text-align:center;' class='UILink' onClick=alert(translateKey('hintDevFwAlreadyUploaded'));>" + fwVersion + "</td></tr>";
         }

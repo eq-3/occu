@@ -162,8 +162,10 @@
  </table>
 
 <script type="text/javascript">
-
-      window.setTimeout(function() {jQuery("#grpSelector").prop("selectedIndex",1).change();},1);
+       
+      // Belongs to SPHM-1040 
+      // This apparently causes problems when editing existing groups.       
+      //window.setTimeout(function() {jQuery("#grpSelector").prop("selectedIndex",1).change();},1);
 
      this.groupNameHasChanged = false;
     // TWIST-589
