@@ -33,3 +33,48 @@ function ::CreateGenericInputTransmitter() {
     }
   WriteLine("</tr>");
 }
+
+function ::CreateGenericMeasuringTransmitter() {
+
+  object objMeasuredValue = cObj.DPByControl("GENERIC_MEASURING_TRANSMITTER.MEASURED_VALUE");
+  object objMeasuredValueStatus = cObj.DPByControl("GENERIC_MEASURING_TRANSMITTER.MEASURED_VALUE_STATUS");
+
+  string _unit = cObj.MetaData("measurementUnit");
+  string unit = '';
+  string _unitDecPl = cObj.MetaData("measurementUnitDecimalPlaces");
+  string unitDecPl = 0;
+  string measuredVal = "--";
+
+  ! status 0 = NORMAL, 1 = UNKNOWN, 2 = OVERFLOW, 3 = UNDERFLOW, 4 = ERROR
+  integer status = 1; ! UNKNOWN
+
+  if (objMeasuredValueStatus) {
+    status = objMeasuredValueStatus.Value().ToInteger();
+
+    !WriteLine( "<script>console.log('status: "#status#"');</script>" );
+
+    if (status == 1) {measuredVal = '--';}
+    if (status == 2) {measuredVal = '${lblOverflow}';}
+    if (status == 3) {measuredVal = '${lblUnderflow}';}
+    if (status == 4) {measuredVal = '${lblError}';}
+  }
+
+  if (objMeasuredValue && (status == 0)) {
+    measuredVal = objMeasuredValue.Value();
+
+    if (_unit) {
+      unit = _unit;
+    }
+
+    if (_unitDecPl) {
+        unitDecPl = _unitDecPl;
+    }
+
+  }
+
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<div class='ControlBtnInfo CLASS02532a' style='text-align:center; height:30px;'>${lblReading}:<br/>"#measuredVal.ToString(unitDecPl)#" "#unit#"</div>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+}

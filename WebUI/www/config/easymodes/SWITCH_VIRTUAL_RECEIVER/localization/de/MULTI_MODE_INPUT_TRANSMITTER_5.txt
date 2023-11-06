@@ -1,0 +1,10 @@
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird der Schalter in den entgegengesetzten Zustand geschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird der Schalter ein- bzw. ausgeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird der Schalter f&uuml;r eine festgelegte Zeit eingeschaltet.</span><br/><br/>",
+
+"subset_1" : "Oberer Grenzwert &uuml;berschritten - ein / Unterer Grenzwert unterschritten - aus",
+"subset_2" : "Oberer Grenzwert &uuml;berschritten - aus / Unterer Grenzwert unterschritten - ein",
+
+"subset_3" : "Oberer Grenzwert &uuml;berschritten",
+"subset_4" : "Unterer Grenzwert unterschritten",
+"subset_5" : "Unterer Grenzwert unter- / oberer Grenzwert &uuml;berschritten",

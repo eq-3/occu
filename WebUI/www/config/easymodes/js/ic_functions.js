@@ -2169,3 +2169,179 @@ daliRefreshDevices = function(address) {
     }
   });
 };
+
+powerIdentSensor = function(address) {
+  var counter = 0, maxCount = 45,
+    chnValueDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "VALUES"}),
+    curSelfCalibrationResult = chnValueDescr.SELF_CALIBRATION_RESULT, // the current sensor type
+    device = DeviceList.getDeviceByAddress(address.split(":")[0]),
+    intervalId = setInterval(getSelfCalibrationResult, 1000);
+
+  function getSelfCalibrationResult() {
+    var chnValueDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "VALUES"}),
+      newSelfCalibrationResult = chnValueDescr.SELF_CALIBRATION_RESULT;
+
+    counter++;
+    if (curSelfCalibrationResult != newSelfCalibrationResult) {
+      clearInterval(intervalId);
+      //reloadPage();
+
+      window.setTimeout(function() {
+        DeviceListPage.showConfiguration(false, 'DEVICE', device.id);
+      },1500);
+
+    }
+
+    if (counter > maxCount) {
+      clearInterval(intervalId);
+    }
+
+  };
+
+};
+
+
+_powerIdentSensor = function(address) {
+  // Store current mode
+  var chnDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "MASTER"}),
+    msgBox = "";
+
+
+  if (chnDescr != null) {
+    var curMode = chnDescr.CHANNEL_OPERATION_MODE,
+      counter = 0;
+
+    msgBox =  MessageBox.show(translateKey('btnSensorDetection'), '' + ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>', '', '320', '60', 'msgBckID', 'msgBoxBarGraph');
+    ShowWaitAnim();
+
+    homematic("Interface.putParamset", {
+      'interface': "HmIP-RF",
+      'address': address,
+      'paramsetKey': 'VALUES',
+      'set':
+        [
+          {name: 'SELF_CALIBRATION', type: 'int', value: 1}
+        ]
+    }, function (result) {
+      if (result) {
+        var intervalId = setInterval(getOperationMode, 1000);
+
+        // A Get OPERATION_MODE
+        function getOperationMode() {
+          ShowWaitAnim();
+          counter++;
+          var chnDescr = homematic("Interface.getParamset", {
+            "interface": "HmIP-RF",
+            "address": address,
+            "paramsetKey": "MASTER"
+          });
+
+          if (chnDescr != null) {
+            if ((chnDescr.CHANNEL_OPERATION_MODE != curMode) || (counter >= 45)) {
+              clearInterval(intervalId);
+              HideWaitAnim();
+              if (msgBox != "") {MessageBox.close();}
+              reloadPage();
+            }
+          } else {
+            HideWaitAnim();
+            if (msgBox != "") {MessageBox.close();}
+            alert(translateKey("hintProblemSensorIdent"));
+          }
+        };
+      } else {
+        HideWaitAnim();
+        if (msgBox != "") {MessageBox.close();}
+        alert(translateKey("hintPressSysKeyTryAgain"));
+      }
+    });
+  //  HideWaitAnimAutomatically(5);
+  //  if (MessageBox) {window.setTimeout(function() {MessageBox.close();},45000);};
+  } else {
+    alert(translateKey("hintProblemSensorIdent"));
+  }
+};
+
+getAndSavePowerIdentSensor = function(address) {
+  // Store current mode
+  var chnDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "MASTER"}),
+    msgBox = "";
+
+
+  if (chnDescr != null) {
+
+    var curMode = chnDescr.CHANNEL_OPERATION_MODE,
+      counter = 0;
+
+    msgBox = MessageBox.show(translateKey('btnSensorDetection'), '' + ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>', '', '320', '60', 'msgBckID', 'msgBoxBarGraph');
+    ShowWaitAnim();
+
+    homematic("Interface.putParamset", {
+      'interface': "HmIP-RF",
+      'address': address,
+      'paramsetKey': 'VALUES',
+      'set':
+        [
+          {name: 'SELF_CALIBRATION', type: 'int', value: 1}
+        ]
+    }, function (result) {
+      if (result) {
+        var intervalId = setInterval(getOperationMode, 1000),
+          arSensorTypes = ['SENSOR_UNKNOWN', 'SENSOR_ES_GAS', 'SENSOR_ES_LED', 'SENSOR_ES_IEC', 'SENSOR_ES_IEC_SML', 'SENSOR_ES_IEC_SML_WH', 'SENSOR_ES_IEC_D0_A', 'SENSOR_ES_IEC_D0_B', 'SENSOR_ES_IEC_D0_C', 'SENSOR_ES_IEC_D0_D'];
+
+        // A Get OPERATION_MODE
+        function getOperationMode() {
+          ShowWaitAnim();
+          counter++;
+          var chnDescr = homematic("Interface.getParamset", {
+            "interface": "HmIP-RF",
+            "address": address,
+            "paramsetKey": "MASTER"
+          });
+
+          if (chnDescr != null) {
+            if ((chnDescr.CHANNEL_OPERATION_MODE != curMode) || (counter >= 45)) {
+              clearInterval(intervalId);
+
+              var device = DeviceList.getDeviceByAddress(address.split(':')[0]);
+              var paramSet = homematic('Interface.getParamset', {
+                'interface': "HmIP-RF",
+                'address': address,
+                'paramsetKey': 'MASTER'
+              });
+
+              jQuery.each(device.channels, function (index, channel) {
+                if (channel.channelType != 'MAINTENANCE') {
+                  homematic('Interface.setMetadata', {
+                    'objectId': channel.id,
+                    'dataId': 'sensor',
+                    'value': arSensorTypes[parseInt(paramSet.CHANNEL_OPERATION_MODE)]
+                  }, function (result) {
+                    if (channel.index == (device.channels.length - 1)) {
+                      reloadPage();
+                    }
+                  });
+                }
+              });
+              HideWaitAnim();
+              if (msgBox != "") {MessageBox.close();}
+              reloadPage();
+            }
+          } else {
+            HideWaitAnim();
+            if (msgBox != "") {MessageBox.close();}
+            alert(translateKey("hintProblemSensorIdent"));
+          }
+        };
+      } else {
+        HideWaitAnim();
+        if (msgBox != "") {MessageBox.close();}
+        alert(translateKey("hintPressSysKeyTryAgain"));
+      }
+    });
+   // HideWaitAnimAutomatically(5);
+   // if (MessageBox) {window.setTimeout(function() {MessageBox.close();},45000);};
+  } else {
+    alert(translateKey("hintProblemSensorIdent"));
+  }
+};

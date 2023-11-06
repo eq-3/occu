@@ -251,7 +251,7 @@ proc getCondSwitchTransmitterTemperature {chn p descr} {
     incr prn
     set param TX_MINDELAY_VALUE
     append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
-    append html "<td>\${stringTableRamdomTimeValue}</td>"
+    append html "<td>\${stringTableTxMinDelayValue}</td>"
 
     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
 

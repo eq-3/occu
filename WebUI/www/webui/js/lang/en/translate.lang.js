@@ -230,6 +230,7 @@ jQuery.extend(true,langJSON, {
     "lblFavDescription" : "Favourite description",
     "lblControl" : "Control",
     "lblStatus" : "Status",
+    "lblDevStatus" : "Device status",
     "lblSensorStatus" : "Sensor status",
     "lblChannelsAndSysVarOnFavPage" : "Channels and system variables in favourite page",
     "lblEnterUserName" : "Please enter your <br/>user name.",

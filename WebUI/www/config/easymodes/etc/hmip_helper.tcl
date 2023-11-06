@@ -2711,6 +2711,23 @@ proc getDevFwMajorMinorPatch {} {
   return $fw
 }
 
+proc getReceiverFw {} {
+  global url receiver_address dev_descr_receiver
+  array set dev_descr [xmlrpc $url getDeviceDescription $dev_descr_receiver(PARENT)]
+
+  # Firmware (wthFw) = x.y.z
+  set wthFw $dev_descr(FIRMWARE)
+  set fwMajorMinorPatch [split $wthFw .]
+
+  set fw {}
+
+  lappend fw [expr [lindex $fwMajorMinorPatch 0] * 1]
+  lappend fw [expr [lindex $fwMajorMinorPatch 1] * 1]
+  lappend fw [expr [lindex $fwMajorMinorPatch 2] * 1]
+
+  return $fw
+}
+
 
 # This can be used to return the original parameter name of a translation key
 proc extractParamFromTranslationKey {key} {

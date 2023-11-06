@@ -57,7 +57,7 @@ function ::CreateAccessTransceiver()
     WriteLine("<table>");
       WriteLine("<tr>");
         WriteLine("<td colspan='3'><div class='controlHeader150px'>${channelRights}</div></td>");
-        WriteLine("<td><img src='/ise/img/help.png' style='curor: pointer; width:18px; height:18px;' onclick='showParamHelp(translateKey(\"helpAccessTransceiverUserAccessAuth\"), 450, 100);'></td>");
+        WriteLine("<td><img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px;' onclick='showParamHelp(translateKey(\"helpAccessTransceiverUserAccessAuth\"), 450, 100);'></td>");
 
       WriteLine("</tr>");
       WriteLine("<tr>");

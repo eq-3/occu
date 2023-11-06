@@ -20,6 +20,11 @@ function ::CreateWeeklyProgram()
 
   integer iChannelLocks = 0; ! Auto = default
 
+  integer devFwMajor = 0;
+  integer devFwMinor = 0;
+  integer devFwPatch = 0;
+  Call("/esp/functions.fn::getFirmwareVersion()");
+
   if (objChannelLocks) {
     iChannelLocks = objChannelLocks.Value(); ! can be ''
 
@@ -60,12 +65,16 @@ function ::CreateWeeklyProgram()
     WriteLine("opts.chnAddress = '"#chnAddress#"';");
     WriteLine("opts.chInterface = '"#chInterface.Name()#"';");
     WriteLine("opts.channelLocks = "#iChannelLocks#";");
+    WriteLine("opts.fwMajor = "#devFwMajor#";");
+    WriteLine("opts.fwMinor = "#devFwMinor#";");
+    WriteLine("opts.fwPatch = "#devFwPatch#";");
+
     if (cObj.Label() == "HmIP-WKP") {
       WriteLine("opts.userEasyLinkMode = false;");
     } else {
       WriteLine("opts.userEasyLinkMode = "#user.UserEasyLinkMode()#";");
     }
-    if (cObj.Label() != "HmIP-DLD") {
+    if ((cObj.Label() != "HmIP-DLD") && (cObj.Label() != "HmIP-DLD-A") && (cObj.Label() != "HmIP-DLD-S")) {
       WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgram("#chnId#", opts);");
     } else {
       WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgramAccessReceiver("#chnId#", opts);");

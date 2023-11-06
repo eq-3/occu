@@ -82,8 +82,13 @@ proc getMinMaxValueDescr {param} {
 
   # Limit float to 1 decimal places
   if {([llength [split $min "."]] == 2) || ([llength [split $max "."]] == 2)} {
-    set min [format {%1.1f} $min]
-    set max [format {%1.1f} $max]
+    if {$param != "METER_CONSTANT_VOLUME"} {
+      set min [format {%1.1f} $min]
+      set max [format {%1.1f} $max]
+    } else {
+      set min [format {%1.2f} $min]
+      set max [format {%1.2f} $max]
+    }
   }
 
   if {[string equal $dev_descr(TYPE) "HmIP-MIO16-PCB"] == 1} {
@@ -136,6 +141,14 @@ proc getUnit {param} {
     set unit "s (0.0 - 6.0)"
   }
 
+  if {[string equal $param "METER_CONSTANT_VOLUME"] == 1} {
+     set unit "m<sup>3</sup>/Imp"
+  }
+
+  if {[string equal $param "METER_CONSTANT_ENERGY"] == 1} {
+     set unit "Imp/kWh"
+  }
+
   return "$unit"
 }
 
@@ -184,6 +197,7 @@ proc getTextField {param value chn prn {extraparam ""} {superExtra ""}} {
   set minValue $param_descr(MIN)
   set maxValue $param_descr(MAX)
   set maxLength ""
+  set sizeTextfield 5
 
   if {[string first "." $param_descr(MIN)] != -1} {
     set minValue [format {%1.1f} $minValue]
@@ -214,6 +228,15 @@ proc getTextField {param value chn prn {extraparam ""} {superExtra ""}} {
     }
   }
 
+  if {([string equal $dev_descr(TYPE) "HmIP-ESI"] == 1)} {
+    if {$param == "METER_OBIS_SEARCH_STRING"} {
+      set minValue "stringUTF8"
+      set maxValue "stringUTF8"
+      set maxLength "maxLength=16"
+      set sizeTextfield 16
+    }
+  }
+
   if {[string equal $dev_descr(TYPE) "HmIP-SCTH230"] == 1} {
     if {$param == "INTERVAL_VALUE"} {set minValue 1}
     if {$param == "CALIBRATION_PPM_VAL"} {set maxValue 10000}
@@ -233,7 +256,11 @@ set comment {
 
   # Limit float to 2 decimal places
   if {[llength [split $value "."]] == 2} {
-    catch {set value [format {%1.1f} $value]}
+    if {$param != "METER_CONSTANT_VOLUME"} {
+      catch {set value [format {%1.1f} $value]}
+    } else {
+      catch {set value [format {%1.2f} $value]}
+    }
   }
 
   # Convert float to int - sometimes the parameter UTC_* comes as float instead of int (for whatever reason). This will cause an error.
@@ -248,7 +275,7 @@ set comment {
 
   if {$param == "TRIGGER_ANGLE" && [info exists descr(TRIGGER_ANGLE_2)] == 1} {
     upvar valTriggerAngle2 triggerAngle2
-    set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"SetTriggerAngle2(this.value, $triggerAngle2);ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\" $extraparam>"
+    set s "<input id=$elemId type=\"text\" size=\"$sizeTextfield\" value=$value name=$param onblur=\"SetTriggerAngle2(this.value, $triggerAngle2);ProofAndSetValue(this.id, this.id, $minValue, $maxValue, 1)\" $extraparam>"
     cgi_javascript {
       puts "var maxTriggerAngle = parseInt($maxValue), minTriggerAngle = parseInt($minValue);"
       puts {
@@ -279,13 +306,13 @@ set comment {
     }
   } else {
     if {$param == "NUMERIC_PIN_CODE"} {
-       set s "<input id=$elemId type=\"text\" size=\"5\" maxlength=\"8\" value=\"$value\" name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\}\" $extraparam>"
+       set s "<input id=$elemId type=\"text\" size=\"$sizeTextfield\" maxlength=\"8\" value=\"$value\" name=$param onblur=\"if (! isNumber(this.value)) \{this.value = '';\}\" $extraparam>"
     } elseif {($param == "VOLTAGE_0") || ($param == "VOLTAGE_100")} {
-        set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);$extraparam\">"
+        set s "<input id=$elemId type=\"text\" size=\"$sizeTextfield\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);$extraparam\">"
     } elseif {$minValue == "stringUTF8"} {
-        set s "<input id=$elemId type=\"text\" size=\"5\" value=\"$value\" $maxLength name=$param>"
+        set s "<input id=$elemId type=\"text\" size=\"$sizeTextfield\" value=\"$value\" $maxLength name=$param>"
     } else {
-      set s "<input id=$elemId type=\"text\" size=\"5\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\" $extraparam $superExtra>"
+      set s "<input id=$elemId type=\"text\" size=\"$sizeTextfield\" value=$value name=$param onblur=\"ProofAndSetValue(this.id, this.id, '$minValue', '$maxValue', 1);\" $extraparam $superExtra>"
     }
   }
 
@@ -501,6 +528,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "HUMIDITY_LIMIT_VALUE" {set x 450; set y 85}
+   "INPUT_COPRO_ENABLED" {set x 500; set y 250}
    "LOCAL_RESET_DISABLED" {set x 500; set y 130}
    "MOUNTING_ORIENTATION" {set x 450; set y 75}
    "MOUNTING_ORIENTATION_A" {set x 450; set y 75}
@@ -1744,7 +1772,8 @@ proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode {isDA
     set param POWERUP_ON_COLOR_TEMPERATURE
     # mode 2 = DIMMER_TUNABLE_WHITE
     # The RGB mode (mode 3) of the DALI device is capable of TUNABLE_WHITE - the HmIP-RGBW is not.
-    if { ([info exists ps($param)] == 1)  && (($mode == 2) || (($isDALI == 1) && ($mode == 3))) } {
+    # mode 5 = HmIP-LSS
+    if { ([info exists ps($param)] == 1)  && (($mode == 2) || ($mode == 5) || (($isDALI == 1) && ($mode == 3))) } {
       incr prn
       append html "<tr>"
         append html "<td>\${lblPowerUpOnColorTemperature}</td>"
@@ -1753,18 +1782,18 @@ proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode {isDA
     }
 
     set param POWERUP_ON_HUE
-    # mode 3 = DIMMER_RGB - mode 4 = DIMMER_RGBW
-    if { ([info exists ps($param)] == 1) && (($mode == 3)  || ($mode == 4)) } {
+    # mode 3 = DIMMER_RGB - mode 4 = DIMMER_RGBW mode5 = HmIP-LSS
+    if { ([info exists ps($param)] == 1) && (($mode == 3) || ($mode == 4) || ($mode == 5)) } {
       incr prn
       append html "<tr>"
         append html "<td>\${lblPowerUpOnHue}</td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 450 75]</td>"
       append html "</tr>"
-    }
+    } else {puts "($param exists: [info exists ps($param)]  - mode: $mode"}
 
     # The device documentations describes this parameter as POWERUP_ON_LEVEL_2
     set param POWERUP_ON_SATURATION
-    if { ([info exists ps($param)] == 1) && (($mode == 3)  || ($mode == 4)) } {
+    if { ([info exists ps($param)] == 1) && (($mode == 3)  || ($mode == 4) || ($mode == 5)) } {
       incr prn
       append html "<tr>"
         append html "<td>\${lblPowerUpOnSaturation}</td>"

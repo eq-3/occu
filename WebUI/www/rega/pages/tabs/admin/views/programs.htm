@@ -493,6 +493,8 @@
       maxCap = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": chnAddress, "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"}),
       optionElm = jQuery("#prgStringOptionValue" + regaDialogID);
 
+    if (deviceType == "HmIP-LSS") {maxCap = 3;}
+
     switch (parseInt(maxCap)) {
       case 0:
         // Switch
@@ -640,7 +642,7 @@
     }
 
     var opts = {"deviceID": chn.device.id, "deviceLabel":chn.typeName, "chnAddress":chn.address, "chInterface":chnInterface, "channelLocks":"channelLocks", "userEasyLinkMode":userNoExpert};
-    if (chn.deviceType.id.toLowerCase() == "hmip-dld") {
+    if ((chn.deviceType.id.toLowerCase() == "hmip-dld") || (chn.deviceType.id.toLowerCase() == "hmip-dld-a") || (chn.deviceType.id.toLowerCase() == "hmip-dld-s")) {
       dialog = new iseHmIPWeeklyProgramAccessReceiver(regaDialogID, opts, callBack);
     } else {
       dialog = new iseHmIPWeeklyProgram(regaDialogID, opts, callBack);

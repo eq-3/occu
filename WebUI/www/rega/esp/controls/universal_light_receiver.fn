@@ -846,3 +846,144 @@ function ::CreateRGBWControlMode_RGB_TW()
   WriteLine("</script>");
 }
 
+function ::CreateRGBWControlModeLSI()
+{
+
+  ! Determine the name of the interface
+  integer iFaceID = cObj.Interface();
+  object oIface = dom.GetObject(iFaceID);
+  string sInterface = oIface.Name();
+
+  object oDevice = dom.GetObject(cObj.Device());
+  object oEffect = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.EFFECT");
+  object oChannel = dom.GetObject(chnId);
+  string chAddress = oChannel.Address();
+
+  integer iLvlDpId = 0;
+  integer iOldLvlDpId = 0;
+  integer iState = 0;
+
+  integer iEffect = 0;
+
+  if ((oEffect) && (oEffect.Value() != "")) {
+    iEffect = oEffect.Value();
+  }
+
+  object oHue = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUE");
+  object oSaturation = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.SATURATION");
+  object oLevel = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.LEVEL");
+
+  if( oLevel )
+  {
+    iLvlDpId = oLevel.ID();
+    iState = oLevel.Value() * 100;
+  }
+
+  WriteLine("<td>");
+    WriteLine("<table>")
+      WriteLine("<tr>");
+       ! The usual dimmer element
+        WriteLine("<td>");
+          WriteLine("<table>");
+            WriteLine("<tr>");
+              !****************
+              WriteLine("<td colspan='1' id='slidCtrl"#cObj.ID()#"' class='CLASS02529'></td>");
+              WriteLine("<td class='CLASS02529'>");
+                WriteLine("<div class='PercBtn' >");
+                  WriteLine("<table width='100%' height='100%'>");
+                    WriteLine("<tr class='CLASS02531'>");
+                      string sReadOnly = "";
+                      if( system.GetVar("iStatusOnly") == 1 )
+                      {
+                        sReadOnly = "readonly";
+                      }
+                      WriteLine("<td colspan='2' class='CLASS02541'><input id='"#chnId#"Perc' type='text' value='"#iState#"' size='3' class='CLASS02542' "#sReadOnly#" /><span style='color:white'><b>%</b></span></td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td style='text-align: center' class='CLASS02544'>");
+                      WriteLine("<table cellspacing='0' cellpadding='0'><tr><td><img id='"#chnId#"Up' height='12px' width='40px' src='/ise/img/up.png' class='CLASS02543'/></td></tr><tr><td><img id='"#chnId#"Down' height='12px' width='40px' src='/ise/img/down.png' class='CLASS02543' /></td></tr></table>");
+                      WriteLine("</td><td style='text-align: center' class='CLASS02544'><img src='/ise/img/enter.png' width='40px' height='25px' class='CLASS02543' /></td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</div>");
+              WriteLine("</td>");
+
+              WriteLine("<td class='CLASS02529'>");
+                WriteLine("<table width='100%' height='100%' cellspacing='10'>");
+                  WriteLine("<tr><td><div id='"#chnId#"On'  class='ControlBtnOn CLASS02545 j_translate'>${actionStatusControlLblOn}</div></td></tr>");
+                  WriteLine("<tr><td><div id='"#chnId#"Off' class='ControlBtnOff CLASS02545 j_translate'>${actionStatusControlLblOff}</div></td></tr>");
+                WriteLine("</table>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+
+        ! Color picker
+        WriteLine("<td style='width:90px;'>");
+          WriteLine("<div id='colorPicker_"#chnId#"' ></div>");
+        WriteLine("</td>");
+
+        ! Inputs of the color picker
+        WriteLine("<td>");
+          WriteLine("<table class='ControlBtnInfo'>");
+
+            WriteLine("<tr>");
+                WriteLine("<td><span style='color:white'>H</span></td>");
+              WriteLine("<td>");
+                WriteLine("<input id='hueElmId_"#chnId#"' type='text' size='3' style='text-align:center'>");
+              WriteLine("</td>");
+                WriteLine("<td><span style='color:white'>°</span></td>");
+            WriteLine("</tr>");
+
+            WriteLine("<tr>");
+                WriteLine("<td><span style='color:white'>S</span></td>");
+              WriteLine("<td>");
+                WriteLine("<input id='satElmId_"#chnId#"' type='text' size='3' style='text-align:center'>");
+              WriteLine("</td>");
+                WriteLine("<td><span style='color:white'>%</span></td>");
+            WriteLine("</tr>");
+
+            WriteLine("<tr>");
+              WriteLine("<td></td>");
+              WriteLine("<td>");
+                WriteLine("<div id='bckGndlmId_"#chnId#"' style='width:auto;' >&nbsp;</div>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+    Call("/esp/controls/universal_light_receiver.fn::getEffectPanel()");
+  WriteLine("</td>");
+
+  WriteLine("<script type='text/javascript'>");
+    if (oHue.Value()) {
+      WriteLine("var hueValue = '" #oHue.Value()#"';");
+      WriteLine("if (hueValue == '') {hueValue = 0;}");
+    } else {WriteLine("hueValue = 0;");}
+
+    if (oSaturation) {
+      WriteLine("var satValue = '" #oSaturation.Value()#"';");
+      WriteLine("if (satValue == '') {satvalue = 0;}");
+    } else {WriteLine("satvalue = 0;");}
+
+    if (oLevel) {
+      WriteLine("var levelValue = '" #oLevel.Value()#"';");
+      WriteLine("if (levelValue == '') {levelValue = 0;}");
+    } else {WriteLine("levelValue = 0;");}
+
+    WriteLine("var opts = {};");
+    WriteLine("opts.iface = '"#sInterface#"';");
+    WriteLine("opts.chAddress = '"#chAddress#"';");
+    WriteLine("opts.hue = hueValue;");
+    WriteLine("opts.saturation = satValue;");
+    WriteLine("opts.level = levelValue;");
+
+    WriteLine("ibd"#chnId#" = new iseButtonsDimmer("#chnId#", "#iState#", "#iLvlDpId#", "#iOldLvlDpId#", "#system.GetVar("iStatusOnly")#", "#system.GetVar('bSliderFlag')#", '"#cObj.Label()#"' );");
+    WriteLine("opts.oDimmerSlider= ibd"#chnId); ! Slider of the usual dimmer control
+
+   WriteLine("ipm"#chnId#" = new iseUniversalLightReceiver("#chnId#", opts);");
+
+  WriteLine("</script>");
+}

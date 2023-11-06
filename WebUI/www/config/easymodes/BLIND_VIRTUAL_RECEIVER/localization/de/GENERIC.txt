@@ -16,3 +16,6 @@
 "option1" : "M&auml;&szlig;ig",
 "option2" : "langsam",
 "option3" : "Sehr langsam",
+
+"condThresholdLo" : "Unterer Grenzwert",
+"condThresholdHi" : "Oberer Grenzwert",

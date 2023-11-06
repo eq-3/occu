@@ -30,7 +30,7 @@ set PROFILE_1(LONG_CT_RAMPOFF) 0
 set PROFILE_1(LONG_CT_RAMPON) 0
 set PROFILE_1(LONG_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_1(LONG_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_1(LONG_DIM_STEP) {0.05 range 0.00 - 1.00}
+set PROFILE_1(LONG_DIM_STEP)  {0.05 range 0.00 - 1.00}
 set PROFILE_1(LONG_JT_OFF) 1
 set PROFILE_1(LONG_JT_OFFDELAY) 2
 set PROFILE_1(LONG_JT_ON) 2
@@ -77,12 +77,12 @@ set PROFILE_1(SHORT_CT_RAMPON) 0
 set PROFILE_1(SHORT_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_1(SHORT_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
 set PROFILE_1(SHORT_DIM_STEP) 0.050000
-set PROFILE_1(SHORT_JT_OFF) 1
-set PROFILE_1(SHORT_JT_OFFDELAY) 3
-set PROFILE_1(SHORT_JT_ON) 3
-set PROFILE_1(SHORT_JT_ONDELAY) 1
+set PROFILE_1(SHORT_JT_OFF) {1 2}
+set PROFILE_1(SHORT_JT_OFFDELAY) {3 2}
+set PROFILE_1(SHORT_JT_ON) {3 2}
+set PROFILE_1(SHORT_JT_ONDELAY) {1 2}
 set PROFILE_1(SHORT_JT_RAMPOFF) 2
-set PROFILE_1(SHORT_JT_RAMPON) 2
+set PROFILE_1(SHORT_JT_RAMPON) {2 3}
 set PROFILE_1(SHORT_MULTIEXECUTE) 0
 set PROFILE_1(SHORT_OFFDELAY_BLINK) {0 1}
 set PROFILE_1(SHORT_OFFDELAY_BLINK_PERIOD_OFFDELAYLEVEL) 4
@@ -126,7 +126,7 @@ set PROFILE_2(LONG_CT_RAMPOFF) 0
 set PROFILE_2(LONG_CT_RAMPON) 0
 set PROFILE_2(LONG_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_2(LONG_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_2(LONG_DIM_STEP) {0.05 range 0.00 - 1.00}
+set PROFILE_2(LONG_DIM_STEP)  {0.05 range 0.00 - 1.00}
 set PROFILE_2(LONG_JT_OFF) 6
 set PROFILE_2(LONG_JT_OFFDELAY) 5
 set PROFILE_2(LONG_JT_ON) 4
@@ -220,7 +220,7 @@ set PROFILE_3(LONG_CT_RAMPOFF) 0
 set PROFILE_3(LONG_CT_RAMPON) 0
 set PROFILE_3(LONG_DIM_MAX_LEVEL) {1.0 range 0.0 - 1.0}
 set PROFILE_3(LONG_DIM_MIN_LEVEL) {0.0 range 0.0 - 1.0}
-set PROFILE_3(LONG_DIM_STEP) {0.05 range 0.00 - 1.00}
+set PROFILE_3(LONG_DIM_STEP)  {0.05 range 0.00 - 1.00}
 set PROFILE_3(LONG_JT_OFF) 1
 set PROFILE_3(LONG_JT_OFFDELAY) 5
 set PROFILE_3(LONG_JT_ON) 4
@@ -280,7 +280,7 @@ set PROFILE_3(SHORT_OFFDELAY_BLINK_PERIOD_OLDLEVEL) 4
 set PROFILE_3(SHORT_OFFDELAY_STEP) 0.050000
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_3(SHORT_OFF_LEVEL) 0.000000
+set PROFILE_3(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.005}
 set PROFILE_3(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_OFF_TIME_MODE) 0
@@ -294,7 +294,9 @@ set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
 set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_3(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_3(SHORT_OPTICAL_SIGNAL_OFF_COLOR) {7 range 0 - 7}
 set PROFILE_3(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
+set PROFILE_3(SHORT_OPTICAL_SIGNAL_OFF_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_3(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
@@ -318,7 +320,7 @@ set PROFILE_4(LONG_CT_RAMPOFF) 0
 set PROFILE_4(LONG_CT_RAMPON) 0
 set PROFILE_4(LONG_DIM_MAX_LEVEL) 1.000000
 set PROFILE_4(LONG_DIM_MIN_LEVEL) 0.000000
-set PROFILE_4(LONG_DIM_STEP) 0.050000
+set PROFILE_4(LONG_DIM_STEP)  {0.05 range 0.00 - 1.00}
 set PROFILE_4(LONG_JT_OFF) 1
 set PROFILE_4(LONG_JT_OFFDELAY) 2
 set PROFILE_4(LONG_JT_ON) 2
@@ -393,8 +395,8 @@ set PROFILE_4(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_4(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
 set PROFILE_4(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_4(SHORT_PROFILE_ACTION_TYPE) 1
-set PROFILE_4(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
-set PROFILE_4(SHORT_RAMPOFF_TIME_FACTOR) {5 range 0 - 31}
+set PROFILE_4(SHORT_RAMPOFF_TIME_BASE) {1 range 0 - 7}
+set PROFILE_4(SHORT_RAMPOFF_TIME_FACTOR) {30 range 0 - 31}
 set PROFILE_4(SHORT_RAMPON_TIME_BASE) {0 range 0 - 7}
 set PROFILE_4(SHORT_RAMPON_TIME_FACTOR) {5 range 0 - 31}
 set PROFILE_4(SHORT_RAMP_START_STEP) 0.050000
@@ -431,8 +433,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set device $dev_descr_sender(TYPE)
   set ch $dev_descr_sender(INDEX)
 
+  set isBSL20 false
+
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
+  }
+
+  set Fw [getReceiverFw]
+  set fwMajor [lindex $Fw 0]
+  # set fwMinor [lindex $Fw 1]
+  # set fwPatch [lindex $Fw 2]
+
+  if {($dev_descr_receiver(PARENT_TYPE)  == "HmIP-BSL") && ($fwMajor >= 2)} {
+    set isBSL20 true
   }
 
   set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
@@ -440,7 +453,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 
 # die Texte der Platzhalter einlesen
-  # puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
   puts "<script type=\"text/javascript\">getLangInfo('MULTI_MODE_INPUT_TRANSMITTER_1', '$dev_descr_receiver(TYPE)');</script>"
   puts "<script type=\"text/javascript\">getLangInfo_Special('HmIP_DEVICES.txt');</script>"
 
@@ -580,16 +592,33 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # RAMPOFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
 
-  if {$longKeypressAvailable} {
+  set param SHORT_OUTPUT_BEHAVIOUR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
 
+  set param SHORT_OPTICAL_SIGNAL_COLOR
+  if {[info exists ps($param)] == 1} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+    set param SHORT_OPTICAL_SIGNAL_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+  if {$longKeypressAvailable} {
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 
     # Long key press activ/inactive
     append HTML_PARAMS(separate_$prn) [getDeactivateLongKeypress ps PROFILE_$prn separate_receiver $prn 0 4]
 
-    incr pref
     append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
 
+    incr pref
     option DIM_OFFLEVEL
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
@@ -640,6 +669,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
+
+#
+  if {$isBSL20} {
+    append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
+  }
+
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
@@ -662,16 +697,43 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "[getTimeSelector OFF_TIME_FACTOR_DESCR ps PROFILE_$prn blink0 $prn $special_input_id SHORT_OFF_TIME TIMEBASE_LONG]"
   }
 
+#
   set param SHORT_OPTICAL_SIGNAL_COLOR
   if {[info exists ps($param)] == 1} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
   }
 
+#
   set param SHORT_OPTICAL_SIGNAL_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  if {$isBSL20} {
+    append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
+
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_LEVEL}</td><td>"
+    option DIM_OFFLEVEL
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    set param SHORT_OPTICAL_SIGNAL_OFF_COLOR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+    set param SHORT_OPTICAL_SIGNAL_OFF_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+    append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
   }
 
   # OFFDELAY

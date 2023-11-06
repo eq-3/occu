@@ -124,7 +124,6 @@ jQuery.extend(true, langJSON, {
 
     "lblDetectionZones" : "Erfassungszonen",
 
-
     "optionPyro1" : "Zone 1",
     "optionPyro2" : "Zone 2",
     "optionPyro12" : "Zone 1 und 2",
@@ -136,7 +135,7 @@ jQuery.extend(true, langJSON, {
     "lblBetaTest" : "Feld-Tester",
     "showDeviceBetaFw" : "Zeige unver%F6ffentlichte Ger%E4te-Fw.",
     "hintDeviceBetaFw" :
-      "Bei aktiviertem Parameter werden einer geschlossenen Benutzergruppe auf der Startseite unter dem Punkt 'Ger%E4e-Update' " +
+      "Bei aktiviertem Parameter werden einer geschlossenen Benutzergruppe auf der Startseite unter dem Punkt 'Ger%E4te-Update' " +
       "Vorabversionen geplanter Ger%E4te-Firmware Updates angeboten.",
 
     "lblResorePreviousStatus" : "Vorherigen Zustand nach Ablauf des Effekts wieder herstellen: ",
@@ -146,13 +145,65 @@ jQuery.extend(true, langJSON, {
 
     "comment" : "Release C/2023",
 
-    "lblEnergyCounterToday" : "Energie heute:",
-    "lblEnergyCounterYesterday" : "Energie gestern:",
-    "lblEnergyCounter7d" : "Energie vergangene 7 Tage:",
-    "lblEnergyCounter30d" : "Energie vergangene 30 Tage:",
+    "lblEnergyCounterToday" : "Verbrauch heute:",
+    "lblEnergyCounterYesterday" : "Verbrauch gestern:",
+    "lblEnergyCounter7d" : "Verbrauch vergangene 7 Tage:",
+    "lblEnergyCounter30d" : "Verbrauch vergangene 30 Tage:",
+
+    "lblGetEnergyCounterToday" : "Bezug heute:",
+    "lblGetEnergyCounterYesterday" : "Bezug gestern:",
+    "lblGetnergyCounter7d" : "Bezug vergangene 7 Tage:",
+    "lblGetnergyCounter30d" : "Bezug vergangene 30 Tage:",
+
+    "lblSentEnergyCounterToday" : "Lieferung heute:",
+    "lblSentEnergyCounterYesterday" : "Lieferung gestern:",
+    "lblSentEnergyCounter7d" : "Lieferung vergangene 7 Tage:",
+    "lblSentEnergyCounter30d" : "Lieferung vergangene 30 Tage:",
+
+    "powerMeasurementA" : "Durchfluss",
+    "powerMeasurementB" : "Energie Bezug HT",
+    "powerMeasurementC" : "Energie Bezug NT",
+    "powerMeasurementD" : "Energie Lieferung",
 
     "lblSetEnergyCounter" : "Z%E4hlerstand eingeben",
     "lblEnergyConsumptionInWatt" : "Wert in Wh",
+    "lblUnitWh" : "Wh",
+    "lblUnitkWh" : "kWh",
+    "lblUnitm3" : "m<sup>3</sup>",
+
+    "lblGenericUnit" : "Einheit",
+    "lblNoOfDecimalPlaces" : "Anzahl der</br>Dezimalstellen",
+
+    "stringTableKeyTransceiverChannelOperationModeLevelKeyBehavior" : "Level",
+    "stringTableKeyTransceiverChannelOperationModeConditionalBehavior" : "Bedingung",
+
+    "lblPowerMeterSensorIdentification" : "", // this is correct (placeholder)
+    "lblSetStartValue" : "Startwert setzen",
+    "lblStartValue" : "Startwert",
+    "lblSensorMode" : "Sensor",
+
+    "btnSensorDetection" : "Sensorerkennung",
+    "stringTablePowerMeterConstant" : "Ger%E4tekonstante",
+
+    "hintPressSysKeyTryAgain" : "Bet%E4tigen Sie die Systemtaste und versuchen Sie es noch einmal.",
+
+    "hintProblemSensorIdent" : "Bei der Erkennung des Sensors ist ein Fehler aufgetreten.",
+
+    "stringTablePowerMeterGasFlow" : "Gasdurchfluss",
+    "stringTablePowerMeterGasVolume" : "Gasverbrauch",
+
+    "optionStopEffect" : "Effekt beenden",
+
+    "stringTableErrorCommunicationSensor" : "Keine oder unvollst%E4ndige Daten vom Z%E4hler",
+    "stringTableErrorCommunicationSensorFalse" : "Kommunikation Sensor: OK",
+    "stringTableErrorCommunicationSensorTrue" : "Kommunikation Sensor: gest&ouml;rt",
+
+    "stringTableSensorError" : "Kein Sensor erkannt",
+
+    "msgStartValueInvalid_A" : "Der vergebene Startwert f%FCr Kanal ",
+    "msgStartValueInvalid_B" : " ist ung%FCltig!\n\nEs wird 0.000 verwendet.",
+
+    "stringTableMeterObisSearchString" : "OBIS String",
 
    "noMoreKeys" : ""
   }

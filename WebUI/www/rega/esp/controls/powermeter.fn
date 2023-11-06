@@ -409,8 +409,16 @@ function ::CreatePowermeterPSMControl() {
   object oIface = dom.GetObject(iFaceID);
   string sInterface = oIface.Name();
 
-
   var energyCounter = "unknown";
+
+  string energyCounter30Days = oChannel.MetaData("energyCounter30Days");
+
+  if (energyCounter30Days) {
+    real energyToday = oChannel.MetaData("energy0").ToString(2);
+    real energyYesterday = oChannel.MetaData("energy1").ToString(2);
+    real energyWeek = oChannel.MetaData("energy7").ToString(2);
+    real energyMonth = oChannel.MetaData("energy30").ToString(2);
+  }
 
   if (sysVarEnergyCounter) {
     energyCounter = sysVarEnergyCounter.Value().ToString(2)#" "#oEnergyCounter.ValueUnit();
@@ -459,7 +467,7 @@ function ::CreatePowermeterPSMControl() {
             WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
               WriteLine("<tr>");
                 WriteLine("<td>");
-                  WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px' id='"#chnId#"resetEnergyCounter' >Reset</div>");
+                  WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px' id='"#chnId#"resetEnergyCounter' >Set</div>");
                 WriteLine("</td>");
               WriteLine("</tr>");
             WriteLine("</table>");
@@ -491,6 +499,101 @@ function ::CreatePowermeterPSMControl() {
         WriteLine("</tr>");
 
         WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+        if (energyCounter30Days) {
+          ! Energy today and yesterday
+          WriteLine("<tr>");
+
+            WriteLine("<td>");
+              WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                WriteLine("<tr>");
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounterToday}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#energyToday#" "#oEnergyCounter.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</td>");
+
+            WriteLine("<td>");
+              WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                WriteLine("<tr>");
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounterYesterday}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#energyYesterday#" "#oEnergyCounter.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+
+          ! Energy last 7 days and last 31 days
+          WriteLine("<tr>");
+
+            WriteLine("<td>");
+              WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                WriteLine("<tr>");
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounter7d}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#energyWeek#" "#oEnergyCounter.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</td>");
+
+            WriteLine("<td>");
+              WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                WriteLine("<tr>");
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounter30d}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#energyMonth#" "#oEnergyCounter.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+          WriteLine("<tr><td colspan='2'><hr></td></tr>");
+        }
 
         ! Voltage & Current
         WriteLine("<tr>");
@@ -847,6 +950,632 @@ function ::CreatePowermeterIECControl() {
     WriteLine("ipm"#chnId#" = new isePowerMeter("#chnId#",opts);");
 
   WriteLine("</script>")
+
+  return;
+}
+
+
+! POWERMETER_ESI
+
+function ::SensorSearchBtnShow() {
+
+  ! Determine the name of the interface
+  integer iFaceID = cObj.Interface();
+  object oIface = dom.GetObject(iFaceID);
+  string sInterface = oIface.Name();
+  object oChannel = dom.GetObject(chnId);
+  string chAddress = oChannel.Address();
+
+  object oSelfCalibration = cObj.DPByControl("POWERMETER_PSM.SELF_CALIBRATION");
+  if (oSelfCalibration) {
+    WriteLine("<tr>");
+      WriteLine("<td>");
+        WriteLine("<table cellspacing='4' style='min-width:240px;'><tr><td>");
+          WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px; width:100%;' id='"#chnId#"startSelfCalibration' onclick=buttonPressed(this);searchSensor('"#sInterface#"','"#chAddress#"');>${btnSensorDetection}</div>");
+        WriteLine("</td></tr></table>");
+      WriteLine("</td>");
+    WriteLine("</tr>");
+  } else {
+    WriteLine("<tr>");
+      WriteLine("<td>");
+        WriteLine("<table cellspacing='4' style='min-width:240px;'><tr><td>");
+          WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px; width:100%;'>${lblErrorSensor}</div>");
+        WriteLine("</td></tr></table>");
+      WriteLine("</td>");
+    WriteLine("</tr>");
+  }
+
+  WriteLine("<script type='text/javascript'>");
+
+    WriteLine( "buttonPressed = function(btn) {" );
+      WriteLine( "var elem = jQuery(btn);" );
+      WriteLine( "elem.addClass('ControlBtnOn').removeClass('ControlBtnOff');" );
+      WriteLine( "setTimeout(function() {" );
+        WriteLine( "elem.addClass('ControlBtnOff').removeClass('ControlBtnOn');" );
+      WriteLine( "}, 500);" );
+    WriteLine( "};" );
+
+    WriteLine("searchSensor = function(sInterface, chAddress) {");
+      WriteLine("getAndSavePowerIdentSensor(chAddress)");
+    WriteLine("}");
+
+  WriteLine("</script>");
+
+  return;
+}
+
+! POWERMETER_ESI Chn 1
+function ::CreatePowermeterESIControl_CurConsumption() {
+
+  string arDeviceState = "${lblOK},${lblUnknown},${},${lblOverflow}lblUnderflow";
+
+  string unit = "--";
+  string curConsumption = "--";
+  string curStatus = "${lblUnknown}";
+  string lblHeader = "";
+
+  if (esiSensor != "SENSOR_ES_GAS") {
+    object oEnergy = cObj.DPByControl("POWERMETER_PSM.POWER");
+    object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.POWER_STATUS");
+    unit = "W";
+    lblHeader = "${lblInfoStatusControlPower}";
+    if (oEnergy) {curConsumption = oEnergy.State().ToString(2);}
+    if (oEnergyStatus) {
+      curStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());
+
+      if (esiSensor.Substr(0,13) != "SENSOR_ES_IEC") {
+        if (oEnergyStatus.Value() > 0) {
+          curConsumption = curStatus;
+          unit = "";
+        }
+      } else {
+        if (oEnergyStatus.Value() > 1) {
+          curConsumption = curStatus;
+          unit = "";
+        }
+      }
+    }
+  } else {
+    object oEnergy = cObj.DPByControl("POWERMETER_PSM.GAS_FLOW");
+    object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.GAS_FLOW_STATUS");
+    unit = "m<sup>3</sup>/h";
+    lblHeader = "${powerMeasurementA}";
+    if (oEnergy) {curConsumption = oEnergy.State().ToString(2);}
+    if (oEnergyStatus) {
+      curStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());
+      if (oEnergyStatus.Value() > 0) {
+        curConsumption = curStatus;
+        unit = "";
+      }
+    }
+  }
+
+  if (curConsumption == "") {curConsumption = "--"; unit = "";}
+
+  ! html
+  ! The sensor search button should not be visible on this page but only on the configuration page
+  ! Call("/esp/controls/powermeter.fn::SensorSearchBtnShow()");
+  ! WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+  WriteLine("<td>");
+    WriteLine("<table>");
+      WriteLine("<tr name='curConsumptionPanel_"#chnId#"'>");
+        WriteLine("<td>");
+          WriteLine("<table width='100%' cellspacing='4'>");
+            WriteLine("<tr>");
+              if (oEnergy) {
+
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>"#lblHeader#"</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>"#curConsumption#" "#unit#"</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+
+              }
+              if (oEnergyStatus) {
+                !STATUS
+                WriteLine("<td class='hidden'>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<tr>");
+                          WriteLine("<td>");
+                            WriteLine("<span>${lblDevStatus}</span>");
+                           WriteLine("</td>");
+                        WriteLine("</tr>");
+
+                        WriteLine("<tr>");
+                          WriteLine("<td>");
+                            WriteLine("<span>"#curStatus#"</span>");
+                          WriteLine("</td>");
+                        WriteLine("</tr>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              }
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    WriteLine("</table>");
+  WriteLine("</td>");
+
+  ! end html
+
+  return;
+}
+
+! POWERMETER_ESI Chn 2, 3, 4
+function ::CreatePowermeterESIControl_TotalConsumption() {
+
+  string arDeviceState = "${lblOK},${lblUnknown},${},${lblOverflow}lblUnderflow";
+
+  object oChannel = dom.GetObject(chnId);
+  string chAddress = oChannel.Address();
+
+  object oEnergyCounter = cObj.DPByControl("POWERMETER_PSM.ENERGY_COUNTER");
+  object oEnergyCounterGas = cObj.DPByControl("POWERMETER_PSM.GAS_VOLUME");
+
+  object sysVarEnergyCounter = dom.GetObject("svEnergyCounter_"#chnId#"_"#chAddress);
+
+  ! Determine the name of the interface
+  integer iFaceID = cObj.Interface();
+  object oIface = dom.GetObject(iFaceID);
+  string sInterface = oIface.Name();
+
+  string energyCounter30Days = oChannel.MetaData("energyCounter30Days");
+
+  integer divider = 1000;
+  integer decimalPlace = 3;
+
+  string unit = "--";
+  string sysUnit = "";
+  string totalConsumption = "--";
+  integer totalConsumptionStatus = "${lblUnknown}";
+  string energyCounter = "--";
+
+  if (! esiSensor) {string esiSensor = _esiSensor;}
+
+  if (esiSensor != "SENSOR_ES_GAS") {
+    object oEnergy = cObj.DPByControl("POWERMETER_PSM.ENERGY_COUNTER");
+    object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.ENERGY_COUNTER_STATUS");
+    unit = "${lblUnitkWh}";
+    sysUnit = "${lblUnitkWh}";
+
+    ! This is the device value which is currently not in use. Instead we use the CCU Value.
+    if (oEnergy) {totalConsumption = (oEnergy.Value() / divider).ToString(3);}
+
+    if (oEnergyStatus) {totalConsumptionStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());}
+  } else {
+    object oEnergy = cObj.DPByControl("POWERMETER_PSM.GAS_VOLUME");
+    object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.GAS_VOLUME_STATUS");
+    unit = "${lblUnitm3}";
+    sysUnit = "${lblUnitm3}";
+    decimalPlace = 3;
+    divider = 1;
+    ! This is the device value which is currently not in use. Instead we use the CCU Value.
+    if (oEnergy) {totalConsumption = oEnergy.Value().ToString(3);}
+
+    if (oEnergyStatus) {totalConsumptionStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());}
+
+ }
+
+  if (sysVarEnergyCounter) {
+    energyCounter = (sysVarEnergyCounter.Value() / divider).ToString(decimalPlace)#" "#unit;
+
+    if ((oEnergyStatus) && (oEnergyStatus.Value() > 0)) {
+      energyCounter = totalConsumptionStatus;
+      unit = "";
+    }
+  }
+
+
+  if (energyCounter30Days) {
+    real energyToday = (oChannel.MetaData("energy0").ToFloat() / divider).ToString(decimalPlace);
+    real energyYesterday = (oChannel.MetaData("energy1").ToFloat() / divider).ToString(decimalPlace);
+    real energyWeek = (oChannel.MetaData("energy7").ToFloat() / divider).ToString(decimalPlace);
+    real energyMonth = (oChannel.MetaData("energy30").ToFloat() / divider).ToString(decimalPlace);
+  }
+
+  ! html
+  ! EnergyCounter CCU - We display this CCU value instead of the raw device counter value because we can set a start value for this counter as config parameter
+    WriteLine("<td>");
+      WriteLine("<table>");
+        if (oEnergy) {
+          WriteLine("<tr name='curConsumptionPanel_"#chnId#"'>");
+            WriteLine("<td>");
+              WriteLine("<table width='100%' cellspacing='4'>");
+
+                WriteLine("<tr>");
+
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${powerMeasurement}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#energyCounter#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+
+                  !TEST Counter DEVICE
+               !   WriteLine("<td>");
+               !     WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+               !       WriteLine("<tr>");
+               !         WriteLine("<td>");
+               !           WriteLine("<span>${powerMeasurement}</span>");
+               !         WriteLine("</td>");
+               !       WriteLine("</tr>");
+               !       WriteLine("<tr>");
+               !         WriteLine("<td>");
+               !           WriteLine("<span>"#oEnergyCounterGas.Value()#"</span>");
+               !         WriteLine("</td>");
+               !       WriteLine("</tr>");
+               !     WriteLine("</table>");
+               !   WriteLine("</td>");
+
+                  !STATUS
+                  WriteLine("<td class='hidden'>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                      if (oEnergy) {
+                        WriteLine("<tr>");
+                          WriteLine("<td>");
+                              WriteLine("<tr>");
+                                WriteLine("<td>");
+                                  WriteLine("<span>${lblDevStatus}</span>");
+                                 WriteLine("</td>");
+                              WriteLine("</tr>");
+
+                              WriteLine("<tr>");
+                                WriteLine("<td>");
+                                  WriteLine("<span>"#totalConsumptionStatus#"</span>");
+                                WriteLine("</td>");
+                              WriteLine("</tr>");
+                          WriteLine("</td>");
+                        WriteLine("</tr>");
+                     }
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+
+                WriteLine("</tr>");
+
+                WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+                if (energyCounter30Days) {
+                  ! Energy today and yesterday
+                  if (energyToday && energyYesterday) {
+                    WriteLine("<tr>");
+                      if (energyToday) {
+                        WriteLine("<td>");
+                          WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>${lblEnergyCounterToday}</span>");
+                              WriteLine("</td>");
+                            WriteLine("</tr>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>"#energyToday#" "#sysUnit#"</span>");
+                             WriteLine("</td>");
+                            WriteLine("</tr>");
+                          WriteLine("</table>");
+                        WriteLine("</td>");
+                      }
+                      if (energyYesterday) {
+
+                        WriteLine("<td>");
+                          WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>${lblEnergyCounterYesterday}</span>");
+                              WriteLine("</td>");
+                            WriteLine("</tr>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>"#energyYesterday#" "#sysUnit#"</span>");
+                             WriteLine("</td>");
+                            WriteLine("</tr>");
+                          WriteLine("</table>");
+                        WriteLine("</td>");
+                      }
+                    WriteLine("</tr>");
+                  }
+
+                  ! Energy last 7 days and last 31 days
+                  if (energyWeek && energyMonth) {
+                    WriteLine("<tr>");
+                      if (energyWeek) {
+                        WriteLine("<td>");
+                          WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>${lblEnergyCounter7d}</span>");
+                              WriteLine("</td>");
+                            WriteLine("</tr>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>"#energyWeek#" "#sysUnit#"</span>");
+                             WriteLine("</td>");
+                            WriteLine("</tr>");
+                          WriteLine("</table>");
+                        WriteLine("</td>");
+                      }
+                      if (energyMonth) {
+                        WriteLine("<td>");
+                          WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>${lblEnergyCounter30d}</span>");
+                              WriteLine("</td>");
+                            WriteLine("</tr>");
+                            WriteLine("<tr>");
+                              WriteLine("<td>");
+                                WriteLine("<span>"#energyMonth#" "#sysUnit#"</span>");
+                             WriteLine("</td>");
+                            WriteLine("</tr>");
+                          WriteLine("</table>");
+                        WriteLine("</td>");
+                      }
+                    WriteLine("</tr>");
+                  }
+                }
+              WriteLine("</table>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+        }
+      WriteLine("</table>");
+    WriteLine("</td>");
+
+  ! end html
+
+  return;
+}
+
+! POWERMETER_ESI IEC
+function ::CreatePowermeterESIControl_ESI_IEC() {
+
+  string arDeviceState = "${lblOK},${lblUnknown},${lblOverflow}lblUnderflow";
+
+  object oChannel = dom.GetObject(chnId);
+  string chAddress = oChannel.Address();
+
+  string unit = "--";
+  string sysUnit = "${lblUnitkWh}";
+  string totalConsumption = "--";
+  string energyCounter = "--";
+  integer energyStatus = "${lblUnknown}";
+
+  object oEnergy = cObj.DPByControl("POWERMETER_PSM.ENERGY_COUNTER");
+  object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.ENERGY_COUNTER_STATUS");
+  object sysVarEnergyCounter = dom.GetObject("svEnergyCounter_"#chnId#"_"#chAddress);
+
+  integer divider = 1000;
+
+  string energyCounter30Days = oChannel.MetaData("energyCounter30Days");
+
+  if (energyCounter30Days) {
+    real energyToday = (oChannel.MetaData("energy0").ToFloat() / 1000).ToString(3);
+    real energyYesterday = (oChannel.MetaData("energy1").ToFloat() / 1000).ToString(3);
+    real energyWeek = (oChannel.MetaData("energy7").ToFloat() / 1000).ToString(3);
+    real energyMonth = (oChannel.MetaData("energy30").ToFloat() / 1000).ToString(3);
+  }
+
+  unit = "${lblUnitkWh}";
+
+  ! This is the device value which is currently not in use. Instead we use the CCU Value.
+  if (oEnergy) {totalConsumption = (oEnergy.Value() / divider).ToString(3);}
+
+  if (oEnergyStatus) {energyStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());}
+
+  if (sysVarEnergyCounter) {
+    energyCounter = (sysVarEnergyCounter.Value() / divider).ToString(3)#" "#unit;
+
+    if ((oEnergyStatus) && (oEnergyStatus.Value() > 0)) {
+      if (oEnergyStatus.Value() == 1) {
+        energyCounter = "--";
+        unit = "";
+      } else {
+        energyCounter = energyStatus;
+        unit = "";
+      }
+    }
+
+  }
+
+  ! html
+  ! EnergyCounter CCU - We display this CCU value instead of the raw device counter value because we can set a start value for this counter as config parameter
+  WriteLine("<td>");
+    WriteLine("<table>");
+      if (oEnergy) {
+        WriteLine("<tr id='power_"#chnId#"' name='curConsumptionPanel_"#chnId#"'>");
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        if (chnNumber == 2) {
+                          WriteLine("<span>${powerMeasurementB}</span>");
+                        } elseif (chnNumber == 3) {
+                          WriteLine("<span>${powerMeasurementC}</span>");
+                        } elseif (chnNumber == 4) {
+                          WriteLine("<span>${powerMeasurementD}</span>");
+                        }
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span id='"#chnId#"Power'>"#energyCounter#"</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+
+          !STATUS
+          WriteLine("<td class='hidden'>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>${lblDevStatus}</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>"#energyStatus#"</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+        WriteLine("<tr><td colspan='2'><hr></td></tr>");
+
+        if (energyCounter30Days) {
+          ! Energy today and yesterday
+          if (energyToday && energyYesterday) {
+            WriteLine("<tr>");
+              if (energyToday) {
+                WriteLine("<td>");
+                  WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                            if (chnNumber != 4) {
+                                WriteLine("<span>${lblGetEnergyCounterToday}</span>");
+                            } else {
+                                WriteLine("<span>${lblSentEnergyCounterToday}</span>");
+                            }
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                              WriteLine("<span>"#energyToday#" "#sysUnit#"</span>");
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                        WriteLine("</table>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              }
+              if (energyYesterday) {
+                WriteLine("<td>");
+                  WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                              if (chnNumber != 4) {
+                                  WriteLine("<span>${lblGetEnergyCounterYesterday}</span>");
+                              } else {
+                                  WriteLine("<span>${lblSentEnergyCounterYesterday}</span>");
+                              }
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                              WriteLine("<span>"#energyYesterday#" "#sysUnit#"</span>");
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                        WriteLine("</table>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              }
+            WriteLine("</tr>");
+          }
+
+          ! Energy last 7 days and last 31 days
+          if (energyWeek && energyMonth) {
+            WriteLine("<tr>");
+              if (energyWeek) {
+                WriteLine("<td>");
+                  WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                              if (chnNumber != 4) {
+                                  WriteLine("<span>${lblGetnergyCounter7d}</span>");
+                              } else {
+                                  WriteLine("<span>${lblSentEnergyCounter7d}</span>");
+                              }
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                              WriteLine("<span>"#energyWeek#" "#sysUnit#"</span>");
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                        WriteLine("</table>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              }
+              if (energyMonth) {
+                WriteLine("<td>");
+                  WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                              if (chnNumber != 4) {
+                                  WriteLine("<span>${lblGetnergyCounter30d}</span>");
+                              } else {
+                                  WriteLine("<span>${lblSentEnergyCounter30d}</span>");
+                              }
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                          WriteLine("<tr>");
+                            WriteLine("<td>");
+                              WriteLine("<span>"#energyMonth#" "#sysUnit#"</span>");
+                            WriteLine("</td>");
+                          WriteLine("</tr>");
+                        WriteLine("</table>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              }
+            WriteLine("</tr>");
+          }
+        }
+      }
+    WriteLine("</table>");
+  WriteLine("</td>");
+  ! end html
 
   return;
 }

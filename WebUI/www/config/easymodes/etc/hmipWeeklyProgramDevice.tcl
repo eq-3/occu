@@ -55,7 +55,7 @@ proc getHmIPWeeklyProgram {address chn p descr devType {extraparam ""}} {
       }
 
       append html "window.setTimeout(function() {"
-        append html "var weeklyProgram = new HmIPWeeklyProgram('$address', $objPS, $objPSDescr, [session_is_expert]);"
+        append html "weeklyProgram = new HmIPWeeklyProgram('$address', $objPS, $objPSDescr, [session_is_expert], '[getDevFirmware]');"
       append html "},100)"
     append html "</script>"
 

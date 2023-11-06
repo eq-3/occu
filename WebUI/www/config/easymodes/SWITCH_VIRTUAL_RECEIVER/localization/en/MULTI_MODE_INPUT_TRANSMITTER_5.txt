@@ -1,0 +1,9 @@
+"description_1" : "<span class=\"translated\">When receiving the decision value defined, the switch actuator is switched into the opposite status.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When receiving the decision value defined, the switch actuator is switched on or off.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When receiving the decision value defined the switch actuator is switched on for the desired time.</span><br/><br/>",
+
+"subset_1" : "Upper threshold exceeded - on / lower value falls below threshold - off",
+"subset_2" : "Upper threshold exceeded - off / lower value falls below threshold - on",
+"subset_3" : "Upper threshold exceeded",
+"subset_4" : "Lower value falls below threshold",
+"subset_5" : "Lower threshold value/upper threshold value exceeded",

@@ -52,6 +52,8 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeENERGY_COUNTER": "Energy meter<br/>Sensor: Power",
     "diagramValueTypeIEC_ENERGY_COUNTER": "Energy meter<br/>Sensor: IEC",
     "diagramValueTypeGAS_ENERGY_COUNTER": "Energy meter<br/>Sensor: Gas",
+    "diagramValueTypeGAS_FLOW": "Gas flow meter<br/>Sensor: Gas",
+    "diagramValueTypeGAS_VOLUME": "Consumption<br/>Sensor: Gas",
     "diagramValueTypePOWER": "Power<br/>Sensor: Power",
     "diagramValueTypeIEC_POWER": "Power<br/>Sensor: IEC",
     "diagramValueTypeGAS_POWER": "Power<br/>Sensor: Gas",
@@ -147,6 +149,9 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeCURRENT_ILLUMINATION" : langJSON.en.stringTableCurrentIllumination,
     "diagramValueTypeLOWEST_ILLUMINATION" : langJSON.en.stringTableLowestIllumination,
     "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.en.stringTableAverageIllumination,
+
+    "diagramValueTypeVALUE_8BIT" : "Value",
+    "diagramValueTypeMEASURED_VALUE" : "Measurement",
 
     "diagramExternalStorageDataloggingNotInitialised": "There is no USB memory for saving the diagram data or it could not be accessed. External USB memory is required to store the diagram data."
 

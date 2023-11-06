@@ -177,7 +177,7 @@ proc getMaintenance {chn p descr address} {
      append html "</tr>"
   }
 
-  if {([string equal $devType "HmIPW-DRAP"] != 1) && ([string equal $devType "HmIP-HAP"] != 1) && ([string equal $devType "HmIP-HAP-B1"] != 1) && ([string equal $devType "HmIP-HAP JS1"] != 1)} {
+  if {([string equal $devType "HmIPW-DRAP"] != 1) && ([string equal $devType "HmIP-HAP"] != 1) && ([string equal $devType "HmIP-HAP-A"] != 1) && ([string equal $devType "HmIP-HAP-B1"] != 1) && ([string equal $devType "HmIP-HAP JS1"] != 1)} {
     set param ROUTER_MODULE_ENABLED
     if { [info exists ps($param)] == 1  } {
        incr prn
@@ -205,6 +205,21 @@ proc getMaintenance {chn p descr address} {
          append html "<td>\${stringTableEnableRouting}</td>"
          append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
        append html "</tr>"
+    }
+  }
+
+  # INPUT_1_COPRO_ENABLED - INPUT_X_COPRO_ENABLED
+  if {[string equal $devType "ELV-SH-BM-S"] == 1} {
+    for {set loop 1} {$loop <= 4} {incr loop} {
+      if {[info exists ps(INPUT_$loop\_COPRO_ENABLED)] == 1} {
+        if {$loop == 1} {append html "[getHorizontalLine]"}
+        incr prn
+        append html "<tr>"
+          append html "<td>\${stringTableInputCoProEnabled_$loop}</td>"
+          append html  "<td>[getCheckBox 'INPUT_$loop\_COPRO_ENABLED' $ps(INPUT_$loop\_COPRO_ENABLED) $chn $prn]&nbsp;[getHelpIcon INPUT_COPRO_ENABLED]</td>"
+        append html "</tr>"
+        if {$loop == 4} {append html "[getHorizontalLine]"}
+      }
     }
   }
 
@@ -406,13 +421,13 @@ set comment {
   }
 
   # DRAP/HAP Integration #
-  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1) || ([string equal $devType "HmIP-HAP-B1"] == 1) || ([string equal $devType "HmIP-HAP JS1"] == 1)} {
+  if {([string equal $devType "HmIPW-DRAP"] == 1) || ([string equal $devType "HmIP-HAP"] == 1) || ([string equal $devType "HmIP-HAP-A"] == 1) || ([string equal $devType "HmIP-HAP-B1"] == 1) || ([string equal $devType "HmIP-HAP JS1"] == 1)} {
     append html "[getDRAP_HAPMaintenance $chn ps psDescr]"
   }
   # End DRAP/HAP Integration #
 
 
-  if {([string equal $devType "HmIP-DLD"]) != 1 && ([string equal $devType "HmIP-SMO230"] != 1)} {
+  if {([string equal $devType "HmIP-DLD"] != 1) && ([string equal $devType "HmIP-DLD-A"] != 1) && ([string equal $devType "HmIP-DLD-S"] != 1) && ([string equal $devType "HmIP-SMO230"] != 1)} {
     set param LONGITUDE
     if { [info exists ps($param)] == 1  } {
       incr prn
@@ -845,6 +860,15 @@ proc getMultiModeInputTransmitter {chn p descr address} {
      append html "</tr>"
   }
 
+  set param LED_DISABLE_SENDSTATE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableLEDDisableSendState}</td>"
+      append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
   set param CHANNEL_OPERATION_MODE
   if { [info exists ps($param)] == 1 } {
     set valueListIndex [expr [lsearch $psDescr($param) VALUE_LIST] +1]
@@ -860,6 +884,15 @@ proc getMultiModeInputTransmitter {chn p descr address} {
       if {[lsearch $valueList BINARY_BEHAVIOR] != -1} {
         set options(3) "\${stringTableKeyTransceiverChannelOperationModeBinaryBehavior}"
       }
+
+      if {[lsearch $valueList LEVEL_KEY_BEHAVIOR ] != -1} {
+        set options(4) "\${stringTableKeyTransceiverChannelOperationModeLevelKeyBehavior}"
+      }
+
+      if {[lsearch $valueList CONDITIONAL_BEHAVIOR ] != -1} {
+        set options(5) "\${stringTableKeyTransceiverChannelOperationModeConditionalBehavior}"
+      }
+
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn onchange=\"channelOperationModeChange(this.value,'$address')\"]</td>"
     append html "</tr>"
   }
@@ -972,7 +1005,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
     append html "[getHorizontalLine]"
 
     append html "<tr>"
-      append html "<td colspan='2'  style='text-align:center;'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
+      append html "<td colspan='3'  style='text-align:center;'>\${stringTableAbortEventSendingChannels}&nbsp;[getHelpIcon $param]</td>"
     append html "</tr>"
 
     append html "<tr>"
@@ -1002,6 +1035,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
 
       append html "switch(parseInt(mode)) {"
         append html "case 0:"
+        append html "case 5:"
           append html "elmEventDelay.hide();"
           append html "elmEventDelayTimeBase.hide();"
           append html "elmEventDelayTimeFactor.hide();"
@@ -1011,6 +1045,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
           append html "break;"
 
         append html "case 1:"
+        append html "case 4:"
           append html "elmEventDelay.hide();"
           append html "elmKey.show();"
           append html "elmBinary.hide();"
@@ -1053,7 +1088,7 @@ proc getMultiModeInputTransmitter {chn p descr address} {
     append html "};"
 
     append html "window.setTimeout(function() {"
-      append html "var elmOperationMode = jQuery(\"#separate_$CHANNEL\_1\"),"
+      append html "var elmOperationMode = jQuery(\"#separate_$CHANNEL\_2\"),"
       append html "mode = elmOperationMode.val(),"
       append html "chn = elmOperationMode.prop(\"id\").split(\"_\")\[2\];"
       append html "showHideKeyParams(mode, chn);"
@@ -1112,7 +1147,7 @@ proc getAnalogOutputTransceiver {chn p descr} {
 }
 
 proc getSwitchTransmitter {chn p descr} {
-  
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -2190,12 +2225,28 @@ proc getDimmerVirtualReceiver {chn p descr} {
 }
 
 proc getBlindVirtualReceiver {chn p descr} {
+
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
   upvar special_input_id special_input_id
 
   set specialID "[getSpecialID $special_input_id]"
+
+  set devType $dev_descr(TYPE)
+
+  set showPosSaveTime 1
+
+  set Fw [getDevFwMajorMinorPatch]
+  set fwMajor [lindex $Fw 0]
+  set fwMinor [lindex $Fw 1]
+  set fwPatch [lindex $Fw 2]
+
+  if { ([string equal "HmIP-BBL" $devType] == 1) && (($fwMajor == 1) && ($fwMinor >= 10)) || ($fwMajor >= 2)} {
+    set showPosSaveTime 0
+  }
 
   puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
 
@@ -2224,14 +2275,16 @@ proc getBlindVirtualReceiver {chn p descr} {
     }
   }
 
-  set param POSITION_SAVE_TIME
-  if { [info exists ps($param)] == 1  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTablePositionSaveTime}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
-    append html "</tr>"
-    append html "[getHorizontalLine]"
+  if {$showPosSaveTime == 1} {
+    set param POSITION_SAVE_TIME
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTablePositionSaveTime}</td>"
+        append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
+      append html "</tr>"
+      append html "[getHorizontalLine]"
+    }
   }
 
   set param POWERUP_JUMPTARGET
@@ -2254,6 +2307,9 @@ proc getBlindVirtualReceiver {chn p descr} {
 }
 
 proc getShutterVirtualReceiver {chn p descr} {
+
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -2261,7 +2317,21 @@ proc getShutterVirtualReceiver {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
 
+  set devType $dev_descr(TYPE)
+
   puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
+
+  set showPosSaveTime 1
+
+  set Fw [getDevFwMajorMinorPatch]
+  set fwMajor [lindex $Fw 0]
+  set fwMinor [lindex $Fw 1]
+  set fwPatch [lindex $Fw 2]
+
+  if { ([string equal "HmIP-BBL" $devType] == 1) && (($fwMajor == 1) && ($fwMinor >= 10)) || ($fwMajor >= 2)} {
+    set showPosSaveTime 0
+  }
 
   set html ""
 
@@ -2281,14 +2351,16 @@ proc getShutterVirtualReceiver {chn p descr} {
     }
   }
 
-  set param POSITION_SAVE_TIME
-  if { [info exists ps($param)] == 1  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTablePositionSaveTime}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 50]</td>"
-    append html "</tr>"
-    append html "[getHorizontalLine]"
+  if {$showPosSaveTime == 1} {
+    set param POSITION_SAVE_TIME
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTablePositionSaveTime}</td>"
+        append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 50]</td>"
+      append html "</tr>"
+      append html "[getHorizontalLine]"
+    }
   }
 
   set param POWERUP_JUMPTARGET
@@ -2982,52 +3054,375 @@ proc getEnergieMeterTransmitter {chn p descr} {
 
   append html "<tr><td colspan='2'><br/><br/>\${PMSwChannel2HintHeader}</td></tr>"
 
-  incr prn
   set param TX_THRESHOLD_POWER
-  append html "<tr>"
-    append html  "<td>\${PMSwChannel2Hint_Power}</td>"
-    array_clear option
-    set option(0) "\${stringTableNotUsed}"
-    set option(1) "\${optionEnterValue}"
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html  "<td>\${PMSwChannel2Hint_Power}</td>"
+      array_clear option
+      set option(0) "\${stringTableNotUsed}"
+      set option(1) "\${optionEnterValue}"
 
-    append prnTmp $prn _tmp
+      append prnTmp $prn _tmp
 
-    append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prnTmp "onchange=\"test(this, '$prn');\""]</td>"
-    if {[devIsPowerMeter $devType]} {
-      append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]</span></td>"
-    } else {
-      append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</span></td>"
-    }
-
-  append html "</tr>"
-  append html "<script type=\"text/javascript\">"
-    append html "if ($ps($param) > 0) {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[1\].selected = true;document.getElementById('field_$prn').style.visibility='visible';} else {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[0\].selected = true;document.getElementById('field_$prn').style.visibility='hidden';}"
-  append html "</script>"
-
-
-
-  incr prn
-  set param TX_THRESHOLD_ENERGY
-  append html "<tr>"
-  append html  "<td>\${PMSwChannel2Hint_Energy}</td>"
-    array_clear option
-    set option(0) "\${stringTableNotUsed}"
-    set option(1) "\${optionEnterValue}"
-    append prnTmp $prn _tmp
-    append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prnTmp "onchange=\"test(this, '$prn');\""]</td>"
-    append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</span></td>"
-  append html "</tr>"
+      append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prnTmp "onchange=\"test(this, '$prn');\""]</td>"
+      if {[devIsPowerMeter $devType]} {
+        append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUserDefinedCondTXThresholdUnitMinMaxDescr $devType $param]</span></td>"
+      } else {
+        append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</span></td>"
+      }
+    append html "</tr>"
     append html "<script type=\"text/javascript\">"
       append html "if ($ps($param) > 0) {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[1\].selected = true;document.getElementById('field_$prn').style.visibility='visible';} else {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[0\].selected = true;document.getElementById('field_$prn').style.visibility='hidden';}"
     append html "</script>"
+  }
 
-  append html "<tr><td>\${PMSwChannel2Hint_Footer}<br/><br/></td></tr>"
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    set param TX_THRESHOLD_ENERGY
+    append html "<tr>"
+    append html  "<td>\${PMSwChannel2Hint_Energy}</td>"
+      array_clear option
+      set option(0) "\${stringTableNotUsed}"
+      set option(1) "\${optionEnterValue}"
+      append prnTmp $prn _tmp
+      append html  "<td>[getOptionBox '$param' option $ps($param) $chn $prnTmp "onchange=\"test(this, '$prn');\""]</td>"
+      append html "<td><span id=\"field_$prn\">[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</span></td>"
+    append html "</tr>"
+      append html "<script type=\"text/javascript\">"
+        append html "if ($ps($param) > 0) {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[1\].selected = true;document.getElementById('field_$prn').style.visibility='visible';} else {document.getElementById('separate_CHANNEL_$chn\_$prnTmp').options\[0\].selected = true;document.getElementById('field_$prn').style.visibility='hidden';}"
+      append html "</script>"
 
-  append html "<script type=\"text/javascript\">"
-  append html "test = function(elm, prn) \{"
-    append html "document.getElementById('field_' + prn).style.visibility=(elm.selectedIndex < 1)?'hidden':'visible';document.getElementById('separate_CHANNEL_$chn\_' +prn).value=parseFloat(elm.options\[elm.selectedIndex\].value);"
-  append html "\};"
+    append html "<tr><td>\${PMSwChannel2Hint_Footer}<br/><br/></td></tr>"
 
+    append html "<script type=\"text/javascript\">"
+    append html "test = function(elm, prn) \{"
+      append html "document.getElementById('field_' + prn).style.visibility=(elm.selectedIndex < 1)?'hidden':'visible';document.getElementById('separate_CHANNEL_$chn\_' +prn).value=parseFloat(elm.options\[elm.selectedIndex\].value);"
+    append html "\};"
+
+  append html "</script>"
+  }
+  return $html
+}
+
+proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
+  global dev_descr
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set CHANNEL $special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+
+  set devType $dev_descr(TYPE)
+
+  set sensorUnknown  0
+  set sensorGas 1
+  set sensorLED 2
+  set sensorIEC 3
+
+  set chnOperationMode 0
+
+  set html ""
+
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js')</script>"
+
+  set comment {
+    if {$chn == 1} {
+      append html "<tr>"
+        append html "<td>\${lblPowerMeterSensorIdentification}</td>"
+        append html "<td><input id=\"btnSensorIdent\" type=\"button\" name=\"btnSensorDetection\" onclick=\"powerIdentSensor('$chnAddress');\"></td>"
+      append html "</tr>"
+      append html "<script type=\"text/javascript\">"
+        append html "translateButtons(\"btnSensorDetection\");"
+      append html "</script>"
+    }
+  }
+
+  set param CHANNEL_OPERATION_MODE
+  if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
+    incr prn
+
+    set chnOperationMode $ps($param)
+
+    # for testing
+    # append html "<tr><td><div class='attention'>CHANNEL_OPERATION_MODE: $chnOperationMode</div></td></tr>"
+
+    array_clear options
+    set options(0) "\${optionSensorUnknown}"
+    set options(1) "\${optionSensorGas}"
+    set options(2) "\${optionSensorLED}"
+    set options(3) "\${optionSensorIEC}"
+    set options(4) "\${optionSensorIEC_SML}"
+    set options(5) "\${optionSensorIEC_SML_WH}"
+    set options(6) "\${optionSensorIEC_D0_A}"
+    set options(7) "\${optionSensorIEC_D0_B}"
+    set options(8) "\${optionSensorIEC_D0_C}"
+    set options(9) "\${optionSensorIEC_D0_D}"
+    append html "<tr><td>\${lblSensorMode}</td>"
+   # append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=showSensorType(this.value);]&nbsp;[getHelpIcon ESI_$param]</td>"
+    append html "<td class='hidden'>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param disabled=true]</td>"
+    append html "<td><div id='lblSensorType' style='background-color:\#d9d9d9; text-align:center'></div></td><td>&nbsp;[getHelpIcon ESI_$param 450 100]</td>"
+    append html "</tr>"
+
+   # append html "[getHorizontalLine]"
+  }
+
+  set param METER_CONSTANT_VOLUME
+  if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
+    incr prn
+    append html "<tr class='j_esiSensorGas j_sensorType hidden'>"
+    #  append html "<td>\${stringTablePowerMeterConstantVolume}</td>"
+      append html "<td>\${stringTablePowerMeterConstant}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  set param METER_CONSTANT_ENERGY
+  if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
+    incr prn
+    append html "<tr class='j_esiSensorLED j_sensorType hidden'>"
+    #  append html "<td>\${stringTablePowerMeterConstantEnergy}</td>"
+      append html "<td>\${stringTablePowerMeterConstant}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  set param METER_OBIS_SEARCH_STRING
+  if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
+    set paramValue $ps($param)
+    if {$paramValue == "$$$$$"} {
+      set paramValue " "
+    }
+    incr prn
+    append html "<tr class='_j_esiSensorIEC _j_sensorType _hidden'>"
+      append html "<td>\${stringTableMeterObisSearchString}</td>"
+      # append html "<td>[getTextField $param $paramValue $chn $prn]&nbsp;&nbsp;[getMinMaxValueDescr $param]</td>"
+      append html "<td>[getTextField $param $paramValue $chn $prn]&nbsp;[getHelpIcon ESI_$param 450 180]</td>"
+    append html "</tr>"
+  }
+
+  if {$html == ""} {
+    append html [getNoParametersToSet]
+  } else {
+    append html "<script type='text/javascript'>"
+
+      if {[info exists ps(CHANNEL_OPERATION_MODE)] == 1} {
+        append html "var sensor = $ps(CHANNEL_OPERATION_MODE),"
+        append html "arSensorTypes = \['SENSOR_UNKNOWN', 'SENSOR_ES_GAS', 'SENSOR_ES_LED', 'SENSOR_ES_IEC', 'SENSOR_ES_IEC_SML', 'SENSOR_ES_IEC_SML_WH', 'SENSOR_ES_IEC_D0_A', 'SENSOR_ES_IEC_D0_B', 'SENSOR_ES_IEC_D0_C', 'SENSOR_ES_IEC_D0_D'\],"
+        append html "arTranslationSensorTypes = \['optionSensorUnknown', 'optionSensorGas', 'optionSensorLED', 'optionSensorIEC', 'optionSensorIEC_SML', 'optionSensorIEC_SML_WH', 'optionSensorIEC_D0_A', 'optionSensorIEC_D0_B', 'optionSensorIEC_D0_C', 'optionSensorIEC_D0_D'  \];"
+
+        append html "jQuery('\#lblSensorType').text(translateKey(arTranslationSensorTypes\[sensor\]));"
+
+        append html " oChn = DeviceList.getChannelByAddress('$chnAddress'); "
+        set devAddress [lindex [split $chnAddress :] 0]
+        append html " oDev = DeviceList.getDeviceByAddress('$devAddress'); "
+
+        append html "jQuery.each(oDev.channels, function(index, channel) { "
+          append html " if (channel.channelType != 'MAINTENANCE') { "
+            append html " homematic('Interface.setMetadata', {'objectId': channel.id, 'dataId': 'sensor', 'value': arSensorTypes\[sensor\]}); "
+            append html " homematic('Interface.setMetadata', {'objectId': channel.id, 'dataId': 'ChnOpMode', 'value': parseInt(sensor)}); "
+          append html " } "
+        append html " }); "
+
+      }
+
+      append html "showSensorType = function(val) {"
+        append html "jQuery('.j_sensorType').hide();"
+        append html "if (val >= $sensorIEC) {"
+          append html "jQuery('.j_esiSensorIEC').show();"
+        append html "} else if (val == $sensorGas) {"
+          append html "jQuery('.j_esiSensorGas').show();"
+        append html "} else if (val == $sensorLED) {"
+          append html "jQuery('.j_esiSensorLED').show();"
+        append html "}"
+
+        append html "footerElm = jQuery('#footerButtonOK, #footerButtonTake');"
+
+        # If val = 0 then start the sensor searching
+        append html "if (parseInt(val) == 0) {"
+  #        append html "powerIdentSensor('$chnAddress');"
+           append html " footerElm.off('click').click(function() {powerIdentSensor('$chnAddress');});"
+
+        append html "} else {"
+          append html "footerElm.off('click').click(function() {});"
+        append html "}"
+
+      append html "};"
+
+      if {$chn == 1} {
+        append html "window.setTimeout(function() {"
+          append html "showSensorType('$chnOperationMode');"
+        append html "},50);"
+     }
+
+    append html "</script>"
+  }
+
+  return $html
+}
+
+proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} {
+  global dev_descr
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set CHANNEL $special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+
+  set devType $dev_descr(TYPE)
+
+  set startValue "0.000"
+
+  append html "<tr>"
+    append html "<td>\${lblSetStartValue}</td>"
+    append html "<td>"
+      append html "<input id='showStartVal_$chn' type='checkbox' class='j_chkBoxStartVal' onclick='hideShowStartVal(this,$chn)'>"
+    append html "</td>"
+  append html "</tr>"
+
+  append html "<tr class='j_setStartVal_$chn hidden'>"
+    append html "<td>\${lblStartValue}</td>"
+    append html "<td><input id=\"esiCounterStartVal_$chn\" type=\"text\" size=\"10\" value=\"$startValue\"></td>"
+  append html "</tr>"
+  # append html "<tr class='j_setStartVal_$chn hidden'><td colspan='2'><hr></td></tr>"
+
+  if {($chn == 1 || $chn == 2) && ($chnOpMode == 1 || $chnOpMode == 2) || ($chnOpMode > 3)} {
+    set param METER_OBIS_SEARCH_STRING
+    if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
+      set paramValue $ps($param)
+      if {$paramValue == "$$$$$"} {
+        set paramValue " "
+      }
+
+      append html "<tr><td colspan='2'><hr></td></tr>"
+
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTableMeterObisSearchString}</td>"
+        # append html "<td>[getTextField $param $paramValue $chn $prn]&nbsp;&nbsp;[getMinMaxValueDescr $param]</td>"
+        append html "<td>[getTextField $param $paramValue $chn $prn]&nbsp;[getHelpIcon ESI_$param 450 180]</td>"
+      append html "</tr>"
+    }
+  }
+  append html "<script type='text/javascript'>"
+
+    append html "var selectedSensor = parseInt(jQuery('\#separate_CHANNEL_1_1').val()),"
+    append html "arStartValueElms = jQuery('.j_chkBoxStartVal').parent().parent(),"
+    append html "noParamsAvailable = '<td name=\"noParamElm\" class=\"CLASS22003\"><div>\${deviceAndChannelParamsLblNoParamsToSet}</div></td>',"
+    append html "chnDescr = DeviceList.getChannelByAddress('$chnAddress'),"
+    append html "chnID = chnDescr.id,"
+    append html "chnIndex = parseInt(chnDescr.index),"
+    append html "startValue = -1;"
+
+    append html "var chn1_ps = homematic('Interface.getParamset', {'interface':'HmIP-RF', 'address': '$dev_descr(ADDRESS):1', 'paramsetKey': 'MASTER'}),"
+    append html "sensor = chn1_ps.CHANNEL_OPERATION_MODE;"
+
+    append html "if (chnIndex == 2) {"
+      append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValA'});"
+    append html "} else if (chnIndex == 3) {"
+      append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValB'});"
+    append html "} else if (chnIndex == 4) {"
+      append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValC'});"
+    append html "}"
+
+    append html "if (isNaN(startValue)) {"
+      append html "startValue = 0.000;"
+    append html "}"
+
+    append html "if ((startValue != -1) && (startValue != 'null')) {"
+      append html "startValue = startValue / 1000;"
+      append html "jQuery('#esiCounterStartVal_' + chnIndex).val(startValue.toFixed(3));"
+    append html "} else if (sensor >= 3) {"
+      # sensor >= 3 = IEC-Sensor
+      append html "var chValueParamSet = homematic('Interface.getParamset', {'interface':'HmIP-RF', 'address': '$chnAddress', 'paramsetKey': 'VALUES'}),"
+      append html "energyCounter = chValueParamSet.ENERGY_COUNTER;"
+      append html "if (energyCounter == '') {energyCounter = 0.000}"
+      append html "startValue = energyCounter;"
+      append html "jQuery('#esiCounterStartVal_' + chnIndex).val(parseFloat(startValue).toFixed(3));"
+    append html "}"
+
+    append html "if (selectedSensor < 3) {"
+      append html "if (selectedSensor == 0) {"
+        append html "jQuery(arStartValueElms).html(noParamsAvailable);"
+      append html "} else {"
+        append html "jQuery(arStartValueElms\[1\]).html(noParamsAvailable);"
+        append html "jQuery(arStartValueElms\[2\]).html(noParamsAvailable);"
+      append html "}"
+    append html "}"
+
+
+    append html "storeCounterStartValue = function() {"
+      set devAddress [lindex [split $chnAddress :] 0]
+      set chnAddressA "$devAddress:2"
+      set chnAddressB "$devAddress:3"
+      set chnAddressC "$devAddress:4"
+
+      append html "var selectedSensor = parseInt(jQuery('\#separate_CHANNEL_1_1').val()),"
+      append html "multiplier = (selectedSensor == 1) ? 1 : 1000;"
+
+      append html "jQuery.each(jQuery('.j_chkBoxStartVal:checked'), function(index, chkBox) {"
+        append html "var chn = chkBox.id.split('_')\[1\];"
+        append html "switch (chn) {"
+          append html "case '2':"
+            append html "var startValA = (parseFloat(jQuery('\#esiCounterStartVal_2').val().replace(',','.')) * multiplier),"
+            append html "oChnA = DeviceList.getChannelByAddress('$chnAddressA'),"
+            append html "energyCounterIDA = 'svEnergyCounter_' + oChnA.id + '_' + oChnA.address;"
+            append html "if (isNaN(startValA)) {"
+              append html "alert(translateKey('msgStartValueInvalid_A') + chn + translateKey('msgStartValueInvalid_B'));"
+              append html "startValA = 0.000;"
+            append html "}"
+            append html "homematic('SysVar.setFloat', {'name': energyCounterIDA, 'value': startValA});"
+            append html "homematic('Interface.setMetadata', {'objectId': oChnA.id, 'dataId': 'startValA', 'value': startValA});"
+          append html "break;"
+          append html "case '3':"
+            append html "var startValB = (parseFloat(jQuery('\#esiCounterStartVal_3').val().replace(',','.')) * multiplier),"
+            append html "oChnB = DeviceList.getChannelByAddress('$chnAddressB'),"
+            append html "energyCounterIDB = 'svEnergyCounter_' + oChnB.id + '_' + oChnB.address;"
+            append html "if (isNaN(startValB)) {"
+              append html "alert(translateKey('msgStartValueInvalid_A') + chn + translateKey('msgStartValueInvalid_B'));"
+              append html "startValB = 0.000;"
+            append html "}"
+            append html "homematic('SysVar.setFloat', {'name': energyCounterIDB, 'value': startValB});"
+            append html "homematic('Interface.setMetadata', {'objectId': oChnB.id, 'dataId': 'startValB', 'value': startValB});"
+          append html "break;"
+          append html "case '4':"
+            append html "var startValC = (parseFloat(jQuery('\#esiCounterStartVal_4').val().replace(',','.')) * multiplier),"
+            append html "oChnC = DeviceList.getChannelByAddress('$chnAddressC'),"
+            append html "energyCounterIDC = 'svEnergyCounter_' + oChnC.id + '_' + oChnC.address;"
+            append html "if (isNaN(startValC)) {"
+              append html "alert(translateKey('msgStartValueInvalid_A') + chn + translateKey('msgStartValueInvalid_B'));"
+              append html "startValC = 0.000;"
+            append html "}"
+            append html "homematic('SysVar.setFloat', {'name': energyCounterIDC, 'value': startValC});"
+            append html "homematic('Interface.setMetadata', {'objectId': oChnC.id, 'dataId': 'startValC', 'value': startValC});"
+          append html "break;"
+        append html "}"
+      append html "});"
+    append html "};"
+
+    append html "hideShowStartVal = function(elm, chn) {"
+      append html "var startValElms = jQuery('.j_setStartVal_' + chn),"
+      append html "footerElm = jQuery('#footerButtonOK, #footerButtonTake');"
+      append html "if (jQuery(elm).is(':checked')) {"
+        append html "startValElms.show();"
+
+        append html "if(jQuery('.j_chkBoxStartVal:checked').length == 1) {"
+          # append html "console.log('Extend the footer clicks');"
+          append html " footerElm.off('click').click(function() {storeCounterStartValue();});"
+        append html "}"
+      append html "} else {;"
+        append html "startValElms.hide();"
+        append html "if(jQuery('.j_chkBoxStartVal:checked').length == 0) {"
+         # append html "console.log('Clear the extended footer clicks');"
+          append html "footerElm.off('click').click(function() {});"
+        append html "}"
+      append html "}"
+    append html "};"
   append html "</script>"
 
   return $html
@@ -3244,7 +3639,7 @@ proc getCondSwitchTransmitter {chn p descr} {
   append html "</tr>"
   append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
-  
+
   return $html
 }
 
@@ -3918,7 +4313,7 @@ proc getClimateControlFloorDirectTransmitter {chn p descr} {
   append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentSwitchingIntervalOnTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
   # END ON_TIME_BASE and ON_TIME_FACTOR
-  
+
   return $html
 }
 
@@ -4090,7 +4485,7 @@ proc getShutterContact {chn p descr} {
   }
 
   # append html "[getAlarmPanel ps]"
-  
+
   return $html
 }
 
@@ -5666,8 +6061,6 @@ proc getAccessTransceiver {chn p descr} {
       append html "</td>"
     append html "</tr>"
 
-
-
       append html "<script type=\"text/javascript\">"
         append html "setInputSelectField = function(chn) \{"
           append html "var arChkBox = jQuery(\"\[name='INPUT_SELECT_FIELD_\"+chn+\"'\]:checked\"),"
@@ -5839,6 +6232,85 @@ proc getWindowDriveReceiver {chn p descr} {
     append html [getPowerUpSelector $chn ps $special_input_id]
   }
 
+}
+
+proc getGenericMeasuringTransmitter {chn p descr address} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+  set html ""
+  set prn 0
+
+  # Add Textbox for the Unit
+  append html "<tr>"
+    append html "<td>\${lblGenericUnit}</td>"
+    append html "<td><input type='text' id='genMeasureUnit_$chn' name='genMeasureUnit' data-address='$address' size='3' class='alignCenter'>&nbsp;[getHelpIcon GENERIC_UNIT] </td>"
+  append html "</tr>"
+
+  # Add Selectbox for the number of decimal places
+  append html "<tr>"
+    append html "<td>\${lblNoOfDecimalPlaces}</td>"
+    append html "<td>"
+      append html "<select id='noOfDecPlaces_$chn' name='noOfDecPlaces' data-address='$address'>"
+        append html "<option value='0'>0</option>"
+        append html "<option value='1'>1</option>"
+        append html "<option value='2'>2</option>"
+        append html "<option value='3'>3</option>"
+      append html "</select>"
+    append html "</td>"
+  append html "</tr>"
+
+  # Store and read the unit as meta data
+  append html "<script type=\"text/javascript\">"
+    append html "var elm = jQuery('\#genMeasureUnit_$chn'),"
+    append html "elmNoOfDecPl = jQuery('\#noOfDecPlaces_$chn'),"
+    append html "oChn = DeviceList.getChannelByAddress(elm.data('address')),"
+    append html "chnUnit, chnDecPl;"
+
+    # Read the stored measurementUnit
+    append html " chnUnit = homematic('Interface.getMetadata', {'objectId': oChn.id, 'dataId': 'measurementUnit'});"
+    append html "if (chnUnit == 'null') {"
+      # If no data available the unit is ''
+      append html "chnUnit = '';"
+    append html "}"
+
+    # Read the stored decimal places
+    append html " chnDecPl = homematic('Interface.getMetadata', {'objectId': oChn.id, 'dataId': 'measurementUnitDecimalPlaces'});"
+    append html "if (chnDecPl == 'null') {"
+      # If no data available the chnDecPl is 0
+      append html "chnDecPl = '0';"
+    append html "}"
+
+
+    # Then set the value of the appropriate text field to the unit
+    append html "elm.val(chnUnit);"
+    append html "elmNoOfDecPl.val(chnDecPl);"
+
+    # When pressing the Apply or OK button of the footer store the value of the units
+    append html "storeMeasurementUnit = function() {"
+      append html "var arElm = jQuery(\"\[name='genMeasureUnit'\]\"),"
+      append html "arElmDecPl = jQuery(\"\[name='noOfDecPlaces'\]\");"
+      append html "jQuery.each(arElm,function(index, elm) {"
+        append html "oChn = DeviceList.getChannelByAddress(elm.dataset.address);"
+        append html "homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'measurementUnit', 'value': jQuery(elm).val()});"
+      append html "});"
+
+      append html "jQuery.each(arElmDecPl,function(index, elm) {"
+        append html "oChn = DeviceList.getChannelByAddress(elm.dataset.address);"
+        append html "homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'measurementUnitDecimalPlaces', 'value': jQuery(elm).val()});"
+      append html "});"
+
+    append html "};"
+
+    # Extend the footer buttons
+    append html " window.setTimeout(function() { "
+     append html " var elm = jQuery('#footerButtonOK, #footerButtonTake'); "
+     append html " elm.off('click').click(function() {storeMeasurementUnit();}); "
+    append html " },10); "
+  append html "</script>"
+  return $html
 }
 
 proc getNoParametersToSet {} {

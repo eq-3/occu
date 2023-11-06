@@ -17,3 +17,6 @@
 
 "noRepetitions" : "Keine Wiederholung",
 "infiniteRepetitions" : "Unendlich",
+
+"condThresholdLo" : "Unterer Grenzwert",
+"condThresholdHi" : "Oberer Grenzwert",

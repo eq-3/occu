@@ -120,7 +120,7 @@ jQuery.extend(true, langJSON, {
 
     "comment" : "Release B/2023",
 
-    "lblDetectionZones" : "en* Erfassungszonen",
+    "lblDetectionZones" : "Detection zones",
 
     "optionPyro1" : "Zone 1",
     "optionPyro2" : "Zone 2",
@@ -143,13 +143,65 @@ jQuery.extend(true, langJSON, {
 
     "comment" : "Release C/2023",
 
-    "lblEnergyCounterToday" : "en* Energie heute:",
-    "lblEnergyCounterYesterday" : "en* Energie gestern:",
-    "lblEnergyCounter7d" : "en* Energie vergangene 7 Tage:",
-    "lblEnergyCounter30d" : "en* Energie vergangene 30 Tage:",
+    "lblEnergyCounterToday" : "Consumption today:",
+    "lblEnergyCounterYesterday" : "Consumption yesterday:",
+    "lblEnergyCounter7d" : "Consumption over the last 7 days:",
+    "lblEnergyCounter30d" : "Consumption over the last 30 days:",
 
-    "lblSetEnergyCounter" : "en* Z%E4hlerstand eingeben",
-    "lblEnergyConsumptionInWatt" : "en* Wert in Wh",
+    "lblGetEnergyCounterToday" : "Incoming supply today:",
+    "lblGetEnergyCounterYesterday" : "Incoming supply yesterday:",
+    "lblGetnergyCounter7d" : "Incoming supply over the last 7 days:",
+    "lblGetnergyCounter30d" : "Incoming supply over the last 30 days:",
+
+    "lblSentEnergyCounterToday" : "Outgoing supply today:",
+    "lblSentEnergyCounterYesterday" : "Outgoing supply yesterday:",
+    "lblSentEnergyCounter7d" : "Outgoing supply over the last 7 days:",
+    "lblSentEnergyCounter30d" : "Outgoing supply over the last 30 days:",
+
+    "powerMeasurementA" : "Flow",
+    "powerMeasurementB" : "Peak incoming energy supply",
+    "powerMeasurementC" : "Off-peak incoming energy supply",
+    "powerMeasurementD" : "Outgoing energy supply",
+
+    "lblSetEnergyCounter" : "Enter meter reading",
+    "lblEnergyConsumptionInWatt" : "Value in Wh",
+    "lblUnitWh" : "Wh",
+    "lblUnitkWh" : "kWh",
+    "lblUnitm3" : "m<sup>3</sup>",
+
+    "lblGenericUnit" : "Unit",
+    "lblNoOfDecimalPlaces" : "Number of</br>decimal places",
+
+    "stringTableKeyTransceiverChannelOperationModeLevelKeyBehavior" : "Level",
+    "stringTableKeyTransceiverChannelOperationModeConditionalBehavior" : "Condition",
+
+    "lblPowerMeterSensorIdentification" : "", // this is correct (placeholder)
+    "lblSetStartValue" : "Set start value",
+    "lblStartValue" : "Start value",
+    "lblSensorMode" : "Sensor",
+
+    "btnSensorDetection" : "Sensor detection",
+    "stringTablePowerMeterConstant" : "Device constant",
+
+    "hintPressSysKeyTryAgain" : "Press the system button and try again.",
+
+    "hintProblemSensorIdent" : "An error has occurred when detecting the sensor.",
+
+    "stringTablePowerMeterGasFlow" : "Gas flow",
+    "stringTablePowerMeterGasVolume" : "Gas consumption",
+
+    "optionStopEffect" : "End effect",
+
+    "stringTableErrorCommunicationSensor" : "Data from the meter non-existent or incomplete",
+    "stringTableErrorCommunicationSensorFalse" : "Sensor communication: OK",
+    "stringTableErrorCommunicationSensorTrue" : "Sensor communication: Failure",
+
+    "stringTableSensorError" : "No sensor recognized",
+
+    "msgStartValueInvalid_A" : "The start value assigned for the channel",
+    "msgStartValueInvalid_B" : " is invalid!\n\n0.000 will be used.",
+
+    "stringTableMeterObisSearchString" : "OBIS string",
 
     "noMoreKeys" : ""
   }

@@ -1,3 +1,5 @@
+arBSLMode = [];
+
 checkWPFixedTime = function(thisElm, chn, prn) {
   var sTime = thisElm.value,
     arTime = sTime.split(":"),
@@ -88,6 +90,62 @@ getOnlyExpertChannels = function(channelType, channelNr) {
   return result;
 };
 
+setBSLMode = function(elm, devId,  number, chn, isExpert) {
+  var nr = addLeadingZero(number),
+    oMode = {},
+    selectedVal = parseInt(elm.value),
+    colorElm = jQuery("#trLevel_" + nr),
+    switchElm = jQuery("#trBSLSwitch_" + nr),
+    wpLevelElm = jQuery("[name='"+nr+"_WP_LEVEL']").first(),
+    bslOnOffElm = jQuery("#bslOnOff_" + nr),
+    arTargetChannels = jQuery("[name='targetChannel"+chn+"_"+nr+"']");
+
+  arTargetChannels.hide();
+  jQuery(arTargetChannels).prev().hide();
+  jQuery(arTargetChannels).prop("checked", false);
+  jQuery("[name='"+nr+"_WP_TARGET_CHANNELS']").val(0);
+
+  oMode.number = nr;
+  oMode.mode = selectedVal;
+
+  arBSLMode.push(oMode);
+
+  if (selectedVal == 0) {
+    var x = (isExpert) ? 3 : 1;
+    for (var i = 0; i < x; i++) {
+      jQuery(arTargetChannels[i]).prev().show();
+      arTargetChannels[i].show();
+    }
+    colorElm.hide();
+    switchElm.show();
+    wpLevelElm.val("0");
+    bslOnOffElm.val("0");
+    showHideDuration("0", nr);
+  } else {
+    for (var i = (isExpert) ? 3 : 1; i < arTargetChannels.length; i++) {
+      jQuery(arTargetChannels[i]).prev().show();
+      arTargetChannels[i].show();
+    }
+    colorElm.show();
+    switchElm.hide();
+  }
+
+
+};
+
+setBSLWPLevel = function(val, number) {
+  jQuery("[name='"+addLeadingZero(number)+"_WP_LEVEL']").first().val(val);
+
+  if (parseInt(val) > 0) {
+    jQuery("#trDurationMode" + addLeadingZero(number)).show();
+    jQuery("#durationMode" + addLeadingZero(number)).val("0").change();
+  } else {
+    jQuery("#trDurationMode" + addLeadingZero(number)).hide();
+    jQuery("#trDurationValue" + addLeadingZero(number)).hide();
+  }
+};
+
+
 getWPVirtualChannels = function(channels, expert) {
   var result = [];
 
@@ -121,7 +179,7 @@ getWPVirtualChannels = function(channels, expert) {
 HmIPWeeklyProgram = Class.create();
 
 HmIPWeeklyProgram.prototype = {
-  initialize: function (address, ps, psDescr, sessionIsExpert) {
+  initialize: function (address, ps, psDescr, sessionIsExpert, fwVersion) {
     self = this;
     this.hmIPIFace = "HmIP-RF";
     this.address = address;
@@ -129,6 +187,7 @@ HmIPWeeklyProgram.prototype = {
     this.devAddress = this.arAddress[0];
     this.chn = this.arAddress[1];
     this.device = DeviceList.getDeviceByAddress(this.devAddress);
+    this.fwVersion = fwVersion;
 
     virtChnCounterWP = 0;
     modeWP_DELETE = false;
@@ -144,11 +203,17 @@ HmIPWeeklyProgram.prototype = {
     this.ACCESS_TRANSCEIVER_HmIP_WKP = "HmIP-WKP";
     this.UNIVERSAL_LIGHT_RECEIVER_RGBW = "HmIP-RGBW";
     this.UNIVERSAL_LIGHT_RECEIVER_DALI = "HmIP-DRG-DALI";
+    this.isHmIPLSS = false;
+
+    if (this._isDeviceType("HmIP-LSS")) {
+      this.UNIVERSAL_LIGHT_RECEIVER_DALI = "HmIP-LSS";
+      this.isHmIPLSS = true;
+    }
 
     this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
-    this.ignoreExpertMode = ["HmIP-DLD", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
-    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI"];
+    this.ignoreExpertMode = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSS"];
+    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSS"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
     this.selectedMode_RGBW = "";
@@ -167,11 +232,11 @@ HmIPWeeklyProgram.prototype = {
     this.chnType = (this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) ? this.DIMMER : this.device.channels[this.chn].channelType;
 
     // The device type of the HmIP-BSL is DIMMER_WEEK_PROFILE but the weekly program should act as a SWITCH_WEEK_PROFILE
-    this.chnType = (this._isDeviceType("HmIP-BSL")) ? this.SWITCH : this.chnType;
+    this.chnType = (this._isDeviceType("HmIP-BSL") && (this._getFwMajor() < 2)) ? this.SWITCH : this.chnType;
 
     this.isAccessTransmitterHmIP_FWI = this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI);
     this.isAccessTransceiver_WKP = this._isDeviceType(this.ACCESS_TRANSCEIVER_HmIP_WKP);
-    this.isDoorLockDrive = this._isDeviceType("HmIP-DLD");
+    this.isDoorLockDrive = (this._isDeviceType("HmIP-DLD") || this._isDeviceType("HmIP-DLD-A") || this._isDeviceType("HmIP-DLD-S")) ? true : false;
     if (this.isDoorLockDrive) {
       this.arDoorLockMetaData = [];
     }
@@ -246,7 +311,11 @@ HmIPWeeklyProgram.prototype = {
 
     // The HmIP-BSL consists of SWITCH and DIMMER channels. For the weekly program we are currently using only the SWITCH channels.
     if (this._isDeviceType("HmIP-BSL")) {
-      this.virtualChannels = (this.sessionIsExpert) ? [4, 5, 6] : [4];
+      if (this._getFwMajor() < 2) {
+        this.virtualChannels = (this.sessionIsExpert) ? [4, 5, 6] : [4];
+      } else {
+        this.virtualChannels = (this.sessionIsExpert) ? [4, 5, 6, 8, 9, 10, 12, 13, 14] : [4, 8, 12];
+      }
     }
 
     if (this._isDeviceType("HmIP-WKP")) {
@@ -283,7 +352,7 @@ HmIPWeeklyProgram.prototype = {
     }
 
     // Collect the target channels. Group channels are always visible. Non group channels are only visible when a DALI device is connected.
-    if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+    if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI) && (! this.isHmIPLSS)) {
       var chnDescr = homematic("Interface.getParamset", {"interface":this.hmIPIFace, "address": this.devAddress + ":1", "paramsetKey": "MASTER"});
       this.sliderTempMin = parseInt(chnDescr.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
       this.sliderTempMax = parseInt(chnDescr.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
@@ -306,6 +375,11 @@ HmIPWeeklyProgram.prototype = {
       } else {
         this.virtualChannels = daliTargetChannels;
       }
+    } else if (this.isHmIPLSS) {
+      var chnDescr = homematic("Interface.getParamset", {"interface":this.hmIPIFace, "address": this.devAddress + ":1", "paramsetKey": "MASTER"});
+      this.sliderTempMin = parseInt(chnDescr.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
+      this.sliderTempMax = parseInt(chnDescr.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
+      this.virtualChannels = [1];
     }
 
     this._getTargetChannelTypes();
@@ -472,6 +546,35 @@ HmIPWeeklyProgram.prototype = {
       programEntry += "<tr>" + this._getDoorLockDriveModeElem(number) + "</tr>";
     }
 
+    if ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() >= 2)) {
+      programEntry += "<tr>";
+        programEntry += "<td>"+translateKey('lblMode')+"</td>";
+        programEntry += "<td>";
+          programEntry += "<select id='bslModeSelector_"+number+"' onchange='setBSLMode(this,"+this.device.id+" ,"+number+","+ this.chn +", "+this.sessionIsExpert+");'>";
+          programEntry += "<option value='0'>"+translateKey('optionSwitch')+"</option>";
+          programEntry += "<option value='1'>"+translateKey('optionColorSignal')+"</option>";
+          programEntry += "</select>";
+        programEntry += "</td>";
+      programEntry += "</tr>";
+
+    // This is for the BSL Fw. >= 2.x.x - Here we can select if the program entry acts for the switch or color mode
+      programEntry += "<tr id='trBSLSwitch_" + number + "'>";
+        programEntry += "<td>" + translateKey('lblWPState') + "</td>"; // Is Level, but we call it here state because it's only on/off
+        programEntry += "<td>";
+        programEntry += "<select id='bslOnOff_"+ number +"'  onchange='setBSLWPLevel(this.value, "+number+");'>";
+          programEntry += "<option value='0'>"+translateKey('lblOff')+"</option>" ;
+          programEntry += "<option value='1.000'>"+translateKey('lblOn')+"</option>" ;
+        programEntry += "</select>";
+        programEntry += "</td>";
+      programEntry += "</tr>";
+
+      if (this.activeEntries[number] == true) {
+        window.setTimeout(function () {
+          self._setBSLPanel(number);
+        }, 1);
+      }
+    }
+
     // RAMPTIME / LEVEL
     programEntry += "<tr id='trLevel_" + number + "'>";
     if (((this.chnType == this.DIMMER) && (! this.WINDOW_DRIVE_RECEIVER)) || (this.chnType == this.SERVO) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
@@ -536,12 +639,20 @@ HmIPWeeklyProgram.prototype = {
     }
 
     // Song no. and color of channel type DIMMER_OUTPUT_BEHAVIOUR
-    if ((this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) && (!this._isDeviceType("HmIPW-WRC6")) && (!this._isDeviceType("HmIPW-WRC6-A")) ) {
+    if (
+      (this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR)
+      && (!this._isDeviceType("HmIPW-WRC6"))
+      && (!this._isDeviceType("HmIPW-WRC6-A"))
+      && (!this._isDeviceType("HmIP-BSL"))
+    ) {
       this.prn++;
       programEntry += "<td name='lblWPColorSelector_" + number + "' class='hidden'>" + translateKey('lblColorNr') + ": </td></td><td name='lblWPColorSelector_" + number + "' class='hidden'>" + this._getColorSelector(number) + "</td>";
       programEntry += "<td name='lblWPSoundSelector_" + number + "' class='hidden'>" + translateKey('lblSoundFileNr') + ": </td><td name='lblWPSoundSelector_" + number + "' class='hidden'>" + this._getSoundSelector(number) + "</td>";
       programEntry += "<td name='lblWPColorSoundSelector_" + number + "' class='hidden'>" + translateKey('lblColorSongNr') + ": </td><td name='lblWPColorSoundSelector_" + number + "' class='hidden'>" + this._getColorSoundSelector(number) + "</td>";
-    } else if ((this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) && ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A")))) {
+    } else if (
+      (this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR)
+      && ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A")) || ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() >= 2)))
+      ) {
       // This is for the HmIPW-WRC6
       this.prn++;
       programEntry += "<td>" + this._getColorSelectorA(number, this.chn, this.prn) + "</td>";
@@ -582,7 +693,7 @@ HmIPWeeklyProgram.prototype = {
         programEntry += this._getHR();
         // rowULRModeSelector >> ULR = UNIVERSAL_LIGHT_RECEIVER
         programEntry += "<tr id='rowULRModeSelector_" + number + "' class='_hidden'>";
-        programEntry += "<td>"+translateKey('lblDaliMode')+"</td>";
+        programEntry += "<td>"+translateKey('lblMode')+"</td>";
         programEntry += "<td>";
         programEntry += "<select id='ulrEffectSelector_"+number+"'>";
         programEntry += "<option value='0'>"+translateKey('optionHueSaturation')+"</option>";
@@ -598,11 +709,13 @@ HmIPWeeklyProgram.prototype = {
         programEntry += this._getHR();
         // rowULRModeSelector >> ULR = UNIVERSAL_LIGHT_RECEIVER
         programEntry += "<tr id='rowULRModeSelector_" + number + "' class='hidden'>";
-        programEntry += "<td>"+translateKey('lblDaliMode')+"</td>";
+        programEntry += "<td>"+translateKey('lblMode')+"</td>";
         programEntry += "<td>";
           programEntry += "<select id='ulrEffectSelector_"+number+"'>";
-            programEntry += "<option value='3'>"+translateKey('optionSwitch')+"</option>";
-            programEntry += "<option value='4'>"+translateKey('optionDimmer')+"</option>";
+            if (! this.isHmIPLSS) {
+              programEntry += "<option value='3'>" + translateKey('optionSwitch') + "</option>";
+              programEntry += "<option value='4'>" + translateKey('optionDimmer') + "</option>";
+            }
             programEntry += "<option value='1'>"+translateKey('optionColorTemp')+"</option>";
             programEntry += "<option value='0'>"+translateKey('optionHueSaturation')+"</option>";
             programEntry += "<option value='2'>"+translateKey('optionEffect')+"</option>";
@@ -610,7 +723,7 @@ HmIPWeeklyProgram.prototype = {
           programEntry += "</select>";
         programEntry += "</td>";
       }
-      programEntry += "<tr id='rowColorSelector_" + number + "'></tr>";
+      programEntry += "<tr id='rowColorSelector_" + number + "' class='hidden'></tr>";
       if (this.activeEntries[number] == true) {
         this._getColorTempAndEffect(number);
       }
@@ -654,9 +767,9 @@ HmIPWeeklyProgram.prototype = {
 
       programEntry += "<tr name='panelTargetChannel_" + number + "'>";
       if (!this.isAccessTransmitterHmIP_FWI) {
-        if ((!this.isDoorLockDrive) && (!this.isAccessTransceiver_WKP)) {
+        if ((!this.isDoorLockDrive) && (!this.isAccessTransceiver_WKP) && ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() < 2))  ) {
           programEntry += "<td>" + translateKey('lblSelectTargetChannels') + "</td>";
-        } else {
+        } else if (! this._isDeviceType("HmIP-BSL")) {
           programEntry += "<td>" + translateKey('lblSelectTargetUser') + "</td>";
         }
       }
@@ -907,6 +1020,81 @@ HmIPWeeklyProgram.prototype = {
     return this._getDurationRamptimeHTML("ramptime", number);
   },
 
+  // This sets the Panel according to the mode (SWITCH or COLOR)
+  _setBSLPanel: function(number) {
+      var val2clear = 0;
+      var WPTargetChannelsElm = jQuery("[name='"+number+"_WP_TARGET_CHANNELS']"),
+        bslModeSelectorElm = jQuery("#bslModeSelector_" + number),
+        trLevelElm = jQuery("#trLevel_" + number),
+        trBSLSwitchElm = jQuery("#trBSLSwitch_" + number),
+        bslOnOffElm = jQuery("#bslOnOff_" + number);
+
+      var selectedBSLMode = parseInt(homematic("Interface.getMetadata", {
+        "objectId": self.device.id,
+        "dataId": "bslMode" + number
+      }));
+      var wpState = (parseInt(self.ps[number + "_WP_LEVEL"]) == "0.000000") ? "0" : "1.000";
+      var arTargetChn = jQuery("[name='targetChannel"+self.chn+"_"+number+"']");
+      if (! isNaN(selectedBSLMode)) {
+        bslModeSelectorElm.val(selectedBSLMode);
+        if (selectedBSLMode == 0) { //  mode SWITCH
+          trLevelElm.hide();
+
+          var x = (this.sessionIsExpert) ? 3 : 1;
+          for (var i = x; i < arTargetChn.length; i++) {
+            jQuery(arTargetChn[i]).prev().hide(); // label of the checkbox
+            if (jQuery(arTargetChn[i]).is(':checked')) {val2clear += arTargetChn[i].val();}
+            if (isBitSet(parseInt(WPTargetChannelsElm.val()),i)) {
+              val2clear += parseInt(jQuery(arTargetChn[i]).val());
+            }
+            arTargetChn[i].hide(); // the checkbox itself
+          }
+          WPTargetChannelsElm.val(parseInt(WPTargetChannelsElm.val()) - val2clear);
+          trBSLSwitchElm.show();
+          bslOnOffElm.val(wpState);
+        } else { // mode COLOR DIMMER
+          if (this.sessionIsExpert) {
+            for (var i = 0; i < 3; i++) {
+              if (jQuery(arTargetChn[i]).is(':checked')) {
+                val2clear += arTargetChn[i].val();
+              }
+              if (isBitSet(parseInt(WPTargetChannelsElm.val()), i)) {
+                val2clear += parseInt(jQuery(arTargetChn[i]).val());
+              }
+              jQuery(arTargetChn[i]).prev().hide(); // label
+              arTargetChn[i].hide();  // ceckbox
+            }
+          } else {
+            jQuery(arTargetChn[0]).prev().hide(); // label
+            arTargetChn[0].hide();  // ceckbox
+          }
+
+          WPTargetChannelsElm.val(parseInt(WPTargetChannelsElm.val()) - val2clear);
+          trLevelElm.show();
+          trBSLSwitchElm.hide();
+        }
+      } else { // Default mode SWITCH (when metadata is still not set)
+        bslModeSelectorElm.val(0);
+        trLevelElm.hide();
+
+        bslOnOffElm.val(wpState);
+
+        if (! this.sessionIsExpert) {
+          jQuery(arTargetChn).prev().hide(); // label
+          arTargetChn.hide();
+
+          jQuery(arTargetChn[0]).prev().show(); // label
+          arTargetChn[0].show();
+        }
+
+        for (var i = 3; i < arTargetChn.length; i++) {
+          jQuery(arTargetChn[i]).prev().hide(); // label
+          arTargetChn[i].hide();  // checkbox
+        }
+        trBSLSwitchElm.show();
+      }
+  },
+
   _getColorTempAndEffect: function(number) {
     //var currentEffectType = this.ps[number + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_TYPE"],
     var currentEffectType = (this.selectedMode_RGBW < 2) ? 0 : 1,
@@ -914,8 +1102,6 @@ HmIPWeeklyProgram.prototype = {
       selectedWPMode;
 
     this.currentLevel[number] = this.ps[number + "_WP_LEVEL"];
-
-    //console.log(this.ps);
 
     var PRN = this.ulrPrn[number];
     var self = this;
@@ -945,7 +1131,8 @@ HmIPWeeklyProgram.prototype = {
         textBrightnessElm = jQuery("#separate_CHANNEL_" + chn + "_" + (parseInt(prn) + 1)), // text LEVEL
         nameBrightnessElm = nr + "_WP_LEVEL",
         brightnessElm = jQuery("[name='" + nameBrightnessElm + "']"),
-        valBrightness;
+        valBrightness,
+        currentEffectValue = parseInt(self.ps[nr + "_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE"]);
 
       var colorHueSatEffectElm = jQuery("[name='"+nr+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE']").first();
 
@@ -957,7 +1144,6 @@ HmIPWeeklyProgram.prototype = {
       switch (val) {
         case 0: // Hue/Saturation
           brightnessElm.attr("disabled", false);
-          trColorSelector.show();
           if ((parseInt(colorHueSatEffectElm.val()) < 0) || ((parseInt(colorHueSatEffectElm.val()) > 362 * 256))) {colorHueSatEffectElm.val(0);}
           jQuery("#valHue_" + nr).val(parseInt(parseInt(colorHueSatEffectElm.val()) / 256));
           jQuery("#valSaturation_" + nr).val(parseInt(parseInt(colorHueSatEffectElm.val()) % 256 / 2));
@@ -975,6 +1161,8 @@ HmIPWeeklyProgram.prototype = {
           optionBrightnessElm.attr('name',''); //.hide();freeValueBrightnessElm.hide();
           textBrightnessElm.attr('name',nameBrightnessElm);
 
+          trColorSelector.show();
+
           jQuery("#trDurationMode" + nr).show();
           if (parseInt(jQuery("#durationMode" + nr).val()) != 0) {
             jQuery("#trDurationValue" + nr).show();
@@ -982,11 +1170,9 @@ HmIPWeeklyProgram.prototype = {
 
           break;
         case 1: // Color Temp
-
           jQuery("#lblEffectType_" + nr).text(translateKey("lblColorTemp"));
           brightnessElm.attr("disabled", false);
 
-          trColorSelector.show();
           trRampAndLevel.show();
           lblBrightnessElm.show();
           lblBrightnessElm.next().show();
@@ -1004,6 +1190,8 @@ HmIPWeeklyProgram.prototype = {
           tdEffect.hide();
           lblBrightnessElm.show();
 
+          trColorSelector.show();
+
           valBrightness = (self.activeEntries[nr] == true) ? (1 * self.ps[nameBrightnessElm]).toFixed(3) : "0.000";
           if (parseInt(parseFloat(valBrightness * 1000)) == 0) {
             valBrightness = "0";
@@ -1014,12 +1202,12 @@ HmIPWeeklyProgram.prototype = {
           textBrightnessElm.attr('name','');
           break;
         case 2: // Effect
-
           if ((currentEffectValue == 0) || (currentEffectValue > 20)) {
             colorHueSatEffectElm.val("1");
+          } else {
+            colorHueSatEffectElm.val(currentEffectValue);
           }
 
-          trColorSelector.show();
           jQuery("#lblEffectType_" + nr).text(translateKey("lblEffect"));
           jQuery("#valEffectSelector_" + nr).val(colorHueSatEffectElm.val());
 
@@ -1029,6 +1217,8 @@ HmIPWeeklyProgram.prototype = {
           jQuery("#tdColorTempSlider_" + nr).hide();
           trRampAndLevel.show();
           tdEffect.show();
+
+          trColorSelector.show();
 
           valBrightness = (self.activeEntries[nr] == true) ? (1 * self.ps[nameBrightnessElm]).toFixed(3) : "0.000";
           if (parseInt(parseFloat(valBrightness * 1000)) == 0) {
@@ -1045,7 +1235,6 @@ HmIPWeeklyProgram.prototype = {
           jQuery("#lblEffectType_" + nr).text(translateKey("lblSwitchingState"));
           //lblBrightnessElm.hide();
           //lblBrightnessElm.next().hide();
-          trColorSelector.show();
           trRampAndLevel.hide();
           jQuery("#valColorTemp_" + nr).hide();
           jQuery("[name='wpColorTemp_" + nr + "']").hide();
@@ -1053,6 +1242,8 @@ HmIPWeeklyProgram.prototype = {
           jQuery("#tdColorTempSlider_" + nr).hide();
           tdEffect.hide();
           jQuery("#tdColorTempSwitch_" + nr).change().show();
+
+          trColorSelector.show();
 
           valBrightness = (self.activeEntries[nr] == true) ? (1 * self.ps[nameBrightnessElm]).toFixed(3) : "0.000";
           optionBrightnessElm.attr('name', nameBrightnessElm).val(valBrightness).change().show();
@@ -1131,7 +1322,7 @@ HmIPWeeklyProgram.prototype = {
         val2Send = parseInt(jQuery("[name='"+number+"_WP_HUE_SATURATION_COLOR_TEMPERATURE_EFFECT_VALUE']").first().val()),
         brightnessElm = jQuery("#lblWPBrightness_" + number).next().children("select:first");
 
-      if (val2Send == 1) {
+      if (val2Send == 0) {
         brightnessElm.val("0").attr("disabled", true); // option field LEVEL
       } else {
         brightnessElm.attr("disabled", false);
@@ -1228,14 +1419,14 @@ HmIPWeeklyProgram.prototype = {
       result += "</table>";
     result += "</td>";
 
-    result += "<td id='tdColorTempSlider_"+number+"' class='hidden'><div id='colorTempSlider_"+number+"'></div>";
+    result += "<td id='tdColorTempSlider_"+number+"' class='hidden'><div id='colorTempSlider_"+number+"'></div></td>";
 
-    result += "<td colspan='3' name='wpColorTemp_" +  number + "'>";
+    result += "<td colspan='3' name='wpColorTemp_" +  number + "' class='hidden'>";
       result += "<table>";
         result += "<tr>";
           result += "<td name='_wpColorTemp_" +  number + "'>&nbsp;</td>";
           result += "<td name='_wpColorTemp_" +  number + "'>";
-            result += "<input id='valColorTemp_"+number+"' type='text' class='alignCenter' size='3' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value); adaptValue(this, "+number+")'>&nbspK ("+this.sliderTempMin+" K - "+this.sliderTempMax+" K)";
+            result += "<input id='valColorTemp_"+number+"' type='text' class='alignCenter hidden' size='3' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value); adaptValue(this, "+number+")'>&nbspK ("+this.sliderTempMin+" K - "+this.sliderTempMax+" K)";
           result += "</td>";
         result += "</tr>";
       result += "</table>";
@@ -1243,7 +1434,7 @@ HmIPWeeklyProgram.prototype = {
 
 
     // Effect Selector
-    result += "<td colspan='2' name='wpEffect_" +  number + "' class='_hidden'><table><tr>";
+    result += "<td colspan='2' name='wpEffect_" +  number + "' class='hidden'><table><tr>";
     //result += "<td name='_wpEffect_" +  number + "' class='_hidden'>Effect</td>";
     result += "<td name='_wpEffect_" +  number + "' class='_hidden'>";
       result += "<select id='valEffectSelector_"+number+"' onchange='jQuery(\"#separate_CHANNEL_"+this.chn+"_"+(parseInt(PRN) + 1)+"\").val(this.value);setEffectBrightness("+number+");'>";
@@ -1258,7 +1449,7 @@ HmIPWeeklyProgram.prototype = {
     /* END EFFECT */
 
     // SWITCH
-    result += "<td id='tdColorTempSwitch_"+number+"'>";
+    result += "<td id='tdColorTempSwitch_"+number+"' class='hidden'>";
       result += "<select id='colorTempSwitch_" + number + "' onchange='setSwitchStatus("+number+", this.value);' >";
         result += "<option value='0'>" +translateKey('lblOff')+ "</option>";
         result += "<option value='1'>" +translateKey('lblOn')+ "</option>";
@@ -1285,6 +1476,19 @@ HmIPWeeklyProgram.prototype = {
 
       result +=
         "window.setTimeout(function() {" +
+
+        "var oDevice = DeviceList.getDeviceByAddress('"+this.devAddress+"')," +
+        "effectName, effectNo," +
+        "arEffectValue = [0,1,3,5,7,9,11,13,15,17,19]," +
+        "effectSelectorElm = jQuery('#valEffectSelector_"+number+"');" +
+
+        "effectSelectorElm.empty().append('<option value=0>"+translateKey('optionStopEffect')+"</option>');" +
+        "for (effectNo = 1; effectNo <= 10; effectNo++) {" +
+          "effectName =  homematic('Interface.getMetadata', {'objectId': oDevice.id, 'dataId': 'effectName_' + effectNo});" +
+          "if ((effectName == '') || (effectName == 'null')) {effectName = translateKey('lblEffect') + ' ' + effectNo;}"+
+          "effectSelectorElm.append(\"<option value='\"+arEffectValue[effectNo]+\"'>\"+effectName+\"</option>\");" +
+        "}  "+
+
         "setEffectType(" + currentEffectType + ", " + number + ", " + this.chn + ", " + (parseInt(PRN) - 2) + "); " +
 
         // Color temp slider"
@@ -1395,12 +1599,12 @@ HmIPWeeklyProgram.prototype = {
         "colorPicker.color.hsv = {h: valHueElm.val(), s: valSaturationElm.val(), v: valLevelElm.val()}" +
         "});" +
 
-        "}, 100);";
+        "}, 10);";
 
     }
     result += "</script>";
 
-    window.setTimeout(function() {jQuery("#rowColorSelector_" + number).html(result);},100);
+    window.setTimeout(function() {jQuery("#rowColorSelector_" + number).html(result).hide();},50);
     //return result;
   },
 
@@ -1888,6 +2092,10 @@ HmIPWeeklyProgram.prototype = {
     });
     result += "</select>";
 
+    if (this.sessionIsExpert && ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() >= 2))) {
+      result += "&nbsp;<img src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px' onclick='showParamHelp(\"" + this._getHelp('ColorBehaviour') + "\", 450, 60)'>";
+    }
+
     return result;
   },
 
@@ -2109,7 +2317,7 @@ HmIPWeeklyProgram.prototype = {
         }
       });
 
-      if ((self._isDeviceType("HmIPW-WRC6")) || (self._isDeviceType("HmIPW-WRC6-A"))) {
+      if ((self._isDeviceType("HmIPW-WRC6")) || (self._isDeviceType("HmIPW-WRC6-A")) || ((self._isDeviceType("HmIP-BSL")) && (self._getFwMajor() >= 2))) {
         hasOpticalSignalReceiver = true;
       }
 
@@ -2321,7 +2529,7 @@ HmIPWeeklyProgram.prototype = {
       result += "if (chType == 'DIMMER_VIRTUAL_RECEIVER') {hasDimmerVirtReceiver = true;}";
       result += "if (chType == 'ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER') {hasAcousticVirtReceiver = true;}";
       result += "});";
-      if ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A"))) {
+      if ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A")) || ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() == 2))) {
         result += "hasOpticalSignalReceiver = true;";
       }
       result += "var colorSelector = jQuery(\"[dataid='color_" + number + "']\");";
@@ -2389,10 +2597,10 @@ HmIPWeeklyProgram.prototype = {
       arTargetChannels.prop("checked", false).change();
     };
 
-    if (this.sessionIsExpert && (!this.ignoreExpertMode.includes(this.device.deviceType.id)) && (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI))) {
+    if (this.sessionIsExpert && (!this.ignoreExpertMode.includes(this.device.deviceType.id)) && ((!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) && ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() < 2))) ) {
       result += "<input id='btnSelect1stVirtual_" + chn + "' type='button' value='" + translateKey('btnSelect1stVirTargetChannels') + "' style='margin-right: 10px;' onclick='selectTargetChannel1stVirt(" + chn + ", " + number + ", " + prn + ");'>";
     }
-    if (! this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
+    if ((!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) && ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() < 2))) {
       result += "<input type='button' value='" + translateKey('btnSelectAllTargetChannels') + "' style='margin-right: 10px;' onclick='selectTargetChannelAll(" + chn + ", " + number + ", " + prn + ");'>";
       result += "<input type='button' value='" + translateKey('btnSelectNoTargetChannels') + "' onclick='selectTargetChannelNone(" + chn + ", " + number + ", " + prn + ");'>";
     }
@@ -2500,6 +2708,10 @@ HmIPWeeklyProgram.prototype = {
         self._getColorTempAndEffect(self._addLeadingZero(nextNumber));
       }
 
+      if ((self._isDeviceType("HmIP-BSL")) && (self._getFwMajor() >= 2)) {
+        self._setBSLPanel(self._addLeadingZero(nextNumber));
+      }
+
     };
 
     if (mode == "DEL") {
@@ -2530,13 +2742,15 @@ HmIPWeeklyProgram.prototype = {
         // At first unset all target channels
         jQuery(elm).prop('checked', false);
 
-        // SPHM-367 - activate only the first virtual channel
-        if (!self.sessionIsExpert || virtChnCounter == 0) {
-          jQuery(elm).prop('checked', true);
-          targetValue += parseInt(jQuery(elm).val());
+        if ((! self._isDeviceType("HmIP-BSL")) || ((self._isDeviceType("HmIP-BSL")) && (self._getFwMajor() < 2))) {
+          // SPHM-367 - activate only the first virtual channel
+          if (!self.sessionIsExpert || virtChnCounter == 0) {
+            jQuery(elm).prop('checked', true);
+            targetValue += parseInt(jQuery(elm).val());
+          }
+          virtChnCounter++;
+          virtChnCounter = (virtChnCounter >= 3) ? 0 : virtChnCounter;
         }
-        virtChnCounter++;
-        virtChnCounter = (virtChnCounter >= 3) ? 0 : virtChnCounter;
       });
       elmTargetValue.val(targetValue);
     } else {
@@ -2606,12 +2820,22 @@ HmIPWeeklyProgram.prototype = {
 
   },
 
+  _getFwMajor: function() {
+    return parseInt(this.fwVersion.split(".")[0]);
+  },
+
   _getMaxEntries: function() {
     // return 5; // Set the value for testing reasons to a low level - remove this after testing
 
     //return 75;
 
-    if ((this._isDeviceType("HmIP-MP3P")) || (this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A"))) {return 69;}
+    if (
+      (this._isDeviceType("HmIP-MP3P"))
+      || (this._isDeviceType("HmIPW-WRC6"))
+      || (this._isDeviceType("HmIPW-WRC6-A"))
+      || ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() == 2)) // BSL with Fw. 2.x.x
+
+    ) {return 69;}
 
     switch (this.chnType) {
       case this.DIMMER:
@@ -2651,6 +2875,8 @@ HmIPWeeklyProgram.prototype = {
         return translateKey("DLD_TargetChannels");
       case "SERVO_Duration":
         return translateKey("SERVO_Duration");
+      case "ColorBehaviour":
+        return translateKey("helpColorBehaviour");
       default:
         return translateKey("noHelpAvailable") + "<br/><br/>helpID: <b>" + helpID + "</b>";
     }
@@ -2668,6 +2894,19 @@ HmIPWeeklyProgram.prototype = {
         });
 
       });
+    } else if (this._isDeviceType("HmIP-BSL") && (this._getFwMajor() >= 2)) {
+
+      jQuery("#footerButtonTake, #footerButtonOK").click(function () {
+        // Store the selected mode of the BSL (Fw. >= 2.x.x)
+        jQuery.each(arBSLMode, function(index,data) {
+          homematic("Interface.setMetadata", {
+            "objectId": self.device.id,
+            "dataId": "bslMode" + data.number,
+            "value": data.mode
+          });
+        });
+      });
     }
   }
 };
+

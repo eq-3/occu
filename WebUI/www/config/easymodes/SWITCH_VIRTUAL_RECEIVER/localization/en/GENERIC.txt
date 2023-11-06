@@ -9,3 +9,6 @@
 "actor_on" : "Actor on",
 "actor_on_off" : "Actor  on / off",
 "actor_toggle" : "Actor toggle",
+
+"condThresholdLo" : "Lower limit",
+"condThresholdHi" : "Upper limit",

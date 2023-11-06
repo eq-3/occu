@@ -7,6 +7,8 @@ proc getNoParametersToSet {} {
 
 proc getUniversalLightReceiver {chn p descr} {
 
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -19,6 +21,11 @@ proc getUniversalLightReceiver {chn p descr} {
 
   # devMode 1 = PWM, 2 = TuneableWhite, 3 = RGB, 4 = RGBW
   set devMode $ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES)
+
+  if {[string first "HmIP-LSS" $dev_descr(TYPE)] != -1} {
+    set devMode 5
+  }
+
 
   set prn 0
 
@@ -419,4 +426,108 @@ proc getUniversalLightReceiverDali {chn p descr} {
       return $html
   }
 
+}
+
+proc getUniversalLightReceiverLSS {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+  set specialID "[getSpecialID $special_input_id]"
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
+  # UNIVERSAL_LIGHT_MAX_CAPABILITIES is always 0 with the HmIP-LSS which is the same as the UNIVERSAL_LIGHT_MAX_CAPABILITIES = 3 of the HmIP-DRG-DALI
+  # Therefore we have to set devMode to 3
+  # set devMode $ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES)
+  set devMode 3
+  set dali 1
+
+  # append html "<tr><td><span class='attention'>UNIVERSAL_LIGHT_MAX_CAPABILITIES: $devMode</td></tr>"; # this is for development only
+
+  set prn 0
+
+  set param POWERUP_JUMPTARGET
+  if { [info exists ps($param)] == 1  } {
+    append html [getPowerUpSelectorUniversalLightReceiver $chn ps $special_input_id $devMode $dali]
+    append html "[getHorizontalLine]"
+  }
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+
+  set param ON_MIN_LEVEL
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblDimmerOnMinLevel}</td>"
+      #append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+      option RAW_0_100Percent
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_RGBW 450 75]</td>"
+    append html "</tr>"
+  }
+
+  append html "[getHorizontalLine]"
+  set param HARDWARE_COLOR_TEMPERATURE_WARM_WHITE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblHardwareColorTemperatureWarmWhite}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param][getHelpIcon $param 475 75]</td>"
+    append html "</tr>"
+  }
+
+  set param HARDWARE_COLOR_TEMPERATURE_COLD_WHITE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblHardwareColorTemperatureColdWhite}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 475 75]</td>"
+    append html "</tr>"
+  }
+  return $html
 }

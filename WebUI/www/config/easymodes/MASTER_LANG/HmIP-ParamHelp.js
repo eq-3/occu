@@ -448,6 +448,26 @@ jQuery.extend(true,langJSON, {
 
     "DIM_LEVEL_HIGHEST" : "Dimmlevel ab dem das Leuchtmittel die maximale Helligkeit erreicht hat.",
 
+    "INPUT_COPRO_ENABLED" :
+      "Bei Aktivierung dieses Parameters wird der Kanal %FCber den CoProzessor ausgewertet, anstatt %FCber den HmIP-Prozessor.<br/><br/>" +
+      "Im Normalfall sollte die Auswertung %FCber den Coprozessor nicht aktiviert werden, " +
+      "da z. B. die Kan%E4le 1 und 2 nicht direkt vom Coprozessor auswertbar sind und die Auswertung %FCber den HmIP-Prozessor stromsparender ist. " +
+      "Aktivieren Sie diesen Parameter daher nur, wenn es in der Anleitung eines Applikationsmoduls gefordert wird.<br/></br>" +
+      "Je nach verwendetem Applikationsmodul kann es erforderlich sein, die Auswertung %FCber den Coprozessor laufen zu lassen, " +
+      "um z.B. Schaltbefehle mit Bedingung oder Level nutzen zu k%F6nnen.<br/><br/>" +
+      "N%E4heres entnehmen Sie der Anleitung der jeweiligen Applikation.",
+
+    "ESI_CHANNEL_OPERATION_MODE" :
+      "Der HmIP-ESI bestimmt den Sensortyp und das Protokoll automatisch. Das Ergebnis ist in diesem Feld eingetragen. " +
+      "Um den Vorgang der automatischen Erkennung nach einem Tausch vom Sensor oder Z%E4hler erneut zu starten, l%F6schen Sie das Ger%E4t und lernen es wieder an.",
+
+    "ESI_METER_OBIS_SEARCH_STRING" :
+      "Anhand der OBIS-Kennzahlen identifiziert der HmIP-ESI die relevanten Daten vom Z%E4hler. Sie werden automatisch ermittelt. Liefert die automatische Ermittlung nicht die gew%FCnschten Werte, " +
+      "so k%F6nnen andere Kennzahlen im OBIS-Wertegruppenformat C.D.E eingetragen werden.<br/><br/>" +
+      "Mehrere Werte lassen sich zusammenfassen:<br/><br/>" +
+      "1.8.1+2+3 z. B. addiert 1.8.1 + 1.8.2 + 1.8.3<br/><br/>" +
+      "1 - 2.7.0 z. B. subtrahiert 1.7.0 - 2.7.0.",
+
     "noMoreHelp" : ""
   },
 
@@ -892,6 +912,27 @@ jQuery.extend(true,langJSON, {
       "It must be noted that this value cannot be lower than the value that is set in the parameter <i>Minimum level in ON state<i>.",
 
     "DIM_LEVEL_HIGHEST" : "Dimming level from which the lamp has reached maximum brightness.",
+
+    "INPUT_COPRO_ENABLED" :
+      "When this parameter is activated, the channel is evaluated via the co-processor instead of the HmIP processor.<br/><br/>" +
+      "Under normal circumstances, evaluation via the co-processor should not be activated, " +
+      "as channels 1 and 2, for example, cannot be evaluated by the co-processor directly, plus evaluation via the HmIP processor is more energy-efficient. " +
+      "Therefore, you should only activate this parameter if so instructed in the manual for an application module.<br/></br>" +
+      "Depending on which application module you use, it may be necessary to conduct the evaluation via the co-processor " +
+      "in order to use switching commands with a condition or level.<br/><br/>" +
+      "Please refer to your application's manual for more information.",
+
+
+    "ESI_CHANNEL_OPERATION_MODE" :
+      "The HmIP-ESI determines the sensor type and the protocol automatically. The result is entered in this field. " +
+      "To restart the automatic detection process after replacing the sensor or meter, delete the device and teach it in again.",
+
+    "ESI_METER_OBIS_SEARCH_STRING" :
+      "The HmIP-ESI identifies the relevant data from the meter based on the OBIS identification numbers. The data is determined automatically. If the automatic determination process does not deliver the required values, " +
+      "you can enter other identification numbers in the OBIS value group format C.D.E.<br/><br/>" +
+      "Multiple values can be grouped together:<br/><br/>" +
+      "1.8.1+2+3, for example, denotes addition: 1.8.1 + 1.8.2 + 1.8.3<br/><br/>" +
+      "1 - 2.7.0, for example, denotes subtraction: 1.7.0 - 2.7.0.",
 
     "noMoreHelp" : ""
     }

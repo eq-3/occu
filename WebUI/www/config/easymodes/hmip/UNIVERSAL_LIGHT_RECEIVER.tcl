@@ -5,7 +5,7 @@ sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipUniversalLigh
 sourceOnce [file join /www/config/easymodes/em_common.tcl]
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
-  global env iface_url psDescr
+  global env iface_url psDescr dev_descr
 
   upvar HTML_PARAMS   HTML_PARAMS
   upvar $pps          ps
@@ -18,7 +18,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   array set dev_ps [xmlrpc $url getParamset $maintenanceAdress MASTER]
 
-  if { [info exists dev_ps(DEVICE_OPERATION_MODE)] == 1  } {
+  if {[info exists dev_ps(DEVICE_OPERATION_MODE)] == 1} {
     # HmIP-RGB(W)
     set devMode $dev_ps(DEVICE_OPERATION_MODE); # 0 = RGBW, 1 = RGB, 2 = Tuneable White, 3 = PWM
   } else {
@@ -26,7 +26,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set devMode 4
   }
 
-
+  if {[string first "HmIP-LSS" $dev_descr(TYPE)] != -1} {
+    set devMode 5
+  }
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
   switch $devMode {
@@ -55,8 +57,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         append HTML_PARAMS(separate_1) "[getUniversalLightReceiver $chn ps psDescr]"
     }
     4 {
-        # DALI
+        # HmIP-DRG-DALI
         append HTML_PARAMS(separate_1) "[getUniversalLightReceiverDali $chn ps psDescr]"
+    }
+    5 {
+        # HmIP-LSS
+        append HTML_PARAMS(separate_1) "[getUniversalLightReceiverLSS $chn ps psDescr]"
     }
   }
   append HTML_PARAMS(separate_1) "</table>"

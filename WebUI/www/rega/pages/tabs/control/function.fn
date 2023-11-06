@@ -7,14 +7,28 @@ function ::ShowExtDesc() {
     showExtDesc = true;
   }
 
-  if ((chn.HssType() == "DIMMER_TRANSMITTER") && ((chn.Label() == "HmIP-WUA") || (chn.Label() == "ELV-SH-WUA")) ) {
-    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_UNIVERSAL_ACTOR_TRANSMITTER_010V}</span>");
-    showExtDesc = true;
+  if (chn.HssType() == "DIMMER_TRANSMITTER") {
+    if (((chn.Label() == "HmIP-WUA") || (chn.Label() == "ELV-SH-WUA"))) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_UNIVERSAL_ACTOR_TRANSMITTER_010V}</span>");
+      showExtDesc = true;
+    }
+
+    if (chn.Label() == "HmIP-BSL") {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_OPTICAL_SIGNAL_RECEIVERB}</span>");
+      showExtDesc = true;
+    }
   }
 
-  if ((chn.HssType() == "DIMMER_VIRTUAL_RECEIVER") && ((chn.Label() == "HmIP-WUA") || (chn.Label() == "ELV-SH-WUA")) ) {
-    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V}</span>");
-    showExtDesc = true;
+  if (chn.HssType() == "DIMMER_VIRTUAL_RECEIVER") {
+    if (((chn.Label() == "HmIP-WUA") || (chn.Label() == "ELV-SH-WUA"))) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V}</span>");
+      showExtDesc = true;
+    }
+
+    if (chn.Label() == "HmIP-BSL") {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_OPTICAL_SIGNAL_RECEIVER}</span>");
+      showExtDesc = true;
+    }
   }
 
   if ((chn.HssType() == "DOOR_RECEIVER") && (chn.Label() == "HmIP-MOD-HO") ) {
@@ -94,7 +108,7 @@ function ::ShowExtDesc() {
     showExtDesc = true;
   }
 
-  if ((chn.HssType() == "ACCESS_RECEIVER") && (chn.Label() == "HmIP-DLD"))  {
+  if ((chn.HssType() == "ACCESS_RECEIVER") && ((chn.Label() == "HmIP-DLD") || (chn.Label() == "HmIP-DLD-A") || (chn.Label() == "HmIP-DLD-S")))  {
     Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_ACCESS_RECEIVER} "#(chNumber - 1)#"</span>");
     showExtDesc = true;
   }

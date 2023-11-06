@@ -1381,6 +1381,11 @@ jQuery.extend(true,langJSON, {
     "stringTableKeyPressLongRelease" : "Stop long key press",
     "stringTableServoTitle" : "Servo Control",
 
+    "stringTableInputCoProEnabled_1" : "Channel 1 active via co-pro",
+    "stringTableInputCoProEnabled_2" : "Channel 2 active via co-pro",
+    "stringTableInputCoProEnabled_3" : "Channel 3 active via co-pro",
+    "stringTableInputCoProEnabled_4" : "Channel 4 active via co-pro",
+
     "noMoreKeys" : ""
   }
 });

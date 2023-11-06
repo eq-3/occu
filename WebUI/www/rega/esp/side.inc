@@ -23,6 +23,7 @@
   string hmip_mp3p = "HmIP-MP3P";
   string hmip_bsl = "HmIP-BSL";
   string hmip_drg_dali = "HmIP-DRG-DALI";
+  string hmip_lss = "HmIP-LSS";
 
   string hmipwID = "HmIPW-";
   string hmipw_wrc6 = "HmIPW-WRC6";
@@ -722,6 +723,12 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDALI_CombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
+             ! HmIP-LSS
+             if ((oCH.Label().Find(hmip_lss) != -1) && (i_universalLightReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+               if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0,H=0,SAT=100";}
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDALI_CombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+             }
+
               if ((i_switchVirtualReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("S=") == -1) {
                   iV = "S=true";
@@ -751,7 +758,7 @@
               }
 
               ! SPHM-767
-              if (((oCH.Label().Find(hmipwID) != -1) || (oCH.Label().Find(hmip_drg_dali) != -1)) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+              if (((oCH.Label().Find(hmipwID) != -1) || (oCH.Label().Find(hmip_drg_dali) != -1) || (oCH.Label().Find(hmip_bsl) != -1)) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 ! IMTL(Level) 0 = OFF - 1 = ON
                 ! Some devices have no a display (e. g. HmIPW-WRC6). Therefore we check for a key visual (IMKV)
                 if (iV.Find("IMKV=") == -1) {

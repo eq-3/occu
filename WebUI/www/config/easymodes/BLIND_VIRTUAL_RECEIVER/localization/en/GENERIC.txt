@@ -16,3 +16,6 @@
 "option1" : "Moderate",
 "option2" : "Slow",
 "option3" : "Very slow",
+
+"condThresholdLo" : "Lower limit",
+"condThresholdHi" : "Upper limit",

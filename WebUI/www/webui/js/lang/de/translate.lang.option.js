@@ -179,6 +179,19 @@ jQuery.extend(true, langJSON, {
     "option2xTunableWhite" : "Tunable White",
     "option4xPWM" : "Einzelkan%E4le",
 
+    "optionSensorUnknown" : "Sensor-Identifikation ausstehend",
+    "optionSensorGas" : "ES-GAS",
+    "optionSensorLED" : "ES-LED",
+    "optionSensorIEC" : "ES-IEC (Protokollerkennung ausstehend)",
+    "optionSensorIEC_SML" : "ES-IEC (SML)",
+    "optionSensorIEC_SML_WH" : "ES-IEC (SML mit Handshake)",
+    "optionSensorIEC_D0_A" : "ES-IEC (D0-A)",
+    "optionSensorIEC_D0_B" : "ES-IEC (D0-B)",
+    "optionSensorIEC_D0_C" : "ES-IEC (D0-C)",
+    "optionSensorIEC_D0_D" : "ES-IEC (D0-D)",
+
+
     "noMoreKeys" : ""
   }
 });
+

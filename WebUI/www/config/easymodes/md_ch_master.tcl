@@ -115,7 +115,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set options(6) "7"
   set options(7) "8"
   append HTML_PARAMS(separate_1) [get_ComboBox options BRIGHTNESS_FILTER separate_${special_input_id}_6 ps BRIGHTNESS_FILTER "onchange=\"MD_init(\'separate_${special_input_id}_6\', 0, 7)\""]
-  append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness _$chn\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
+  append HTML_PARAMS(separate_1) " \${motionDetectorMinumumOfLastValuesA} <span class=\"brightness_$chn\">\${motionDetectorMinumumOfLastValuesB1} [expr $ps(BRIGHTNESS_FILTER) + 1] \${motionDetectorMinumumOfLastValuesC}</span> \${motionDetectorMinumumOfLastValuesD}</td></tr>"
   append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_6\', 0, 7)</script>"  
 
 #  append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"

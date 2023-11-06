@@ -30,7 +30,7 @@ jQuery.extend(true,langJSON, {
     "lblColorTemp" : "Farbtemperatur",
     "lblColorValue" : "Farbwert",
 
-    "lblDaliMode" : "Modus",
+    "lblMode" : "Modus",
 
     "lblDelSwitchPoint" : "Schaltzeitpunkt entfernen",
 
@@ -59,6 +59,7 @@ jQuery.extend(true,langJSON, {
     "optionColorTemp" : "Farbtemperatur",
     "optionSwitch" : "Schaltaktor",
     "optionDimmer" : "Dimmaktor",
+    "optionColorSignal" : "Farbsignal",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 Sekunde",
@@ -141,7 +142,7 @@ jQuery.extend(true,langJSON, {
     "lblColorTemp" : "Color temperature",
     "lblColorValue" : "Color value",
 
-    "lblDaliMode" : "Mode",
+    "lblMode" : "Mode",
 
     "lblDelSwitchPoint" : "Remove switching time",
 
@@ -170,6 +171,7 @@ jQuery.extend(true,langJSON, {
     "optionColorTemp" : "Color temperature",
     "optionSwitch" : "Switch actuator",
     "optionDimmer" : "Dimmer actuator",
+    "optionColorSignal" : "Colour signal",
 
     "BASE_100_MS" : "100 ms",
     "BASE_1_S" : "1 second",

@@ -25,7 +25,7 @@ if {($devFwMajor > 1) || ($devFwMajor == 1 && $devFwMinor > 5)} {
 # Determine the current channelMode
 set chnMode [xmlrpc $url getMetadata [list string $dev_descr_receiver(ADDRESS)] channelMode]
 
-if {($fwVersionOk == 1) && ( ([string equal [lindex [split $dev_descr_receiver(PARENT_TYPE) -] 0] HmIPW] == 1) || ([string equal $dev_descr_receiver(PARENT_TYPE) HmIP-DRBLI4] == 1) )} {
+if {($fwVersionOk == 1) && ( ([string equal [lindex [split $dev_descr_receiver(PARENT_TYPE) -] 0] HmIPW] == 1) || ([string equal $dev_descr_receiver(PARENT_TYPE) HmIP-DRBLI4] == 1) || ([string equal $dev_descr_receiver(PARENT_TYPE) HmIP-FBL] == 1))} {
   if {[string equal $chnMode ""] == 1 || [string equal $chnMode "shutter"] == 1} {
     set dev_descr_receiver(TYPE) "SHUTTER_VIRTUAL_RECEIVER"
   } else {

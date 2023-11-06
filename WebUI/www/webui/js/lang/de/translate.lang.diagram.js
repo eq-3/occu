@@ -53,6 +53,8 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeENERGY_COUNTER": "Energiez%E4hler<br/>Sensor: Strom",
     "diagramValueTypeIEC_ENERGY_COUNTER": "Energiez%E4hler<br/>Sensor: IEC",
     "diagramValueTypeGAS_ENERGY_COUNTER": "Energiez%E4hler<br/>Sensor: Gas",
+    "diagramValueTypeGAS_FLOW": "Durchfluss<br/>Sensor: Gas",
+    "diagramValueTypeGAS_VOLUME": "Verbrauch<br/>Sensor: Gas",
     "diagramValueTypePOWER": "Leistung<br/>Sensor: Strom",
     "diagramValueTypeIEC_POWER": "Leistung<br/>Sensor: IEC",
     "diagramValueTypeGAS_POWER": "Leistung<br/>Sensor: Gas",
@@ -148,6 +150,9 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeCURRENT_ILLUMINATION" : langJSON.de.stringTableCurrentIllumination,
     "diagramValueTypeLOWEST_ILLUMINATION" : langJSON.de.stringTableLowestIllumination,
     "diagramValueTypeAVERAGE_ILLUMINATION" : langJSON.de.stringTableAverageIllumination,
+
+    "diagramValueTypeVALUE_8BIT" : "Wert",
+    "diagramValueTypeMEASURED_VALUE" : "Messwert",
 
     "diagramExternalStorageDataloggingNotInitialised": "Es ist kein USB-Speicher f%FCr die Speicherung der Diagrammdaten vorhanden oder auf diesen konnte nicht zugegriffen werden. Um die Diagrammdaten zu speichern, ist externer USB-Speicher erforderlich."
   }

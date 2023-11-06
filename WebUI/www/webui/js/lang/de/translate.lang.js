@@ -231,6 +231,7 @@ jQuery.extend(true,langJSON, {
     "lblFavDescription" : "Favoritenbeschreibung",
     "lblControl" : "Bedienung",
     "lblStatus" : "Status",
+    "lblDevStatus" : "Ger%E4testatus",
     "lblSensorStatus" : "Sensor-Status",
     "lblChannelsAndSysVarOnFavPage" : "Kan%E4le und Systemvariable in der Favoritenseite",
     "lblEnterUserName" : "Bitte geben Sie Ihren<br/>Benutzernamen ein.",

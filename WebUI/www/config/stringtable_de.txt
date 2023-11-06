@@ -739,9 +739,24 @@ EMERGENCY_OPERATION=TRUE	${stringTableEmergencyOperationTrue}
 ENABLE_ROUTING	${stringTableEnableRouting}
 ENERGIE_METER_TRANSMITTER|AVERAGING	${stringTablePowerMeterAveraging}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
+ENERGIE_METER_TRANSMITTER|POWER	${stringTablePowerMeterPower}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=NORMAL	${lblStatus} ${chType_POWERMETER}: ${lblNormal}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=0	${lblStatus} ${chType_POWERMETER}: ${lblNormal}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=UNKNOWN	${lblStatus} ${chType_POWERMETER}: ${lblUnknown}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=1	${lblStatus} ${chType_POWERMETER}: ${lblUnknown}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=OVERFLOW	${lblStatus} ${chType_POWERMETER}: ${lblOverflow}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=2	${lblStatus} ${chType_POWERMETER}: ${lblOverflow}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=FALSE	${stringTablePowerMeterOverflowFalse}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=TRUE	${stringTablePowerMeterOverflowTrue}
 ENERGIE_METER_TRANSMITTER|FREQUENCY	${stringTablePowerMeterFrequency}
+ENERGIE_METER_TRANSMITTER|GAS_FLOW	${stringTablePowerMeterGasFlow}
+ENERGIE_METER_TRANSMITTER|GAS_FLOW_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterGasFlow}: ${lblNormal}
+ENERGIE_METER_TRANSMITTER|GAS_FLOW_STATUS=UNKNOWN	${lblValue} ${stringTablePowerMeterGasFlow}: ${lblUnknown}
+ENERGIE_METER_TRANSMITTER|GAS_FLOW_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterGasFlow}: ${lblOverflow}
+ENERGIE_METER_TRANSMITTER|GAS_VOLUME	${stringTablePowerMeterGasVolume}
+ENERGIE_METER_TRANSMITTER|GAS_VOLUME_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterGasVolume}: ${lblNormal}
+ENERGIE_METER_TRANSMITTER|GAS_VOLUME_STATUS=UNKNOWN	${lblValue} ${stringTablePowerMeterGasVolume}: ${lblUnknown}
+ENERGIE_METER_TRANSMITTER|GAS_VOLUME_STATUS=OVERFLOW	${lblValue} ${stringTablePowerMeterGasVolume}: ${lblOverflow}
 ENERGIE_METER_TRANSMITTER|POWER	${stringTablePowerMeterPower}
 ENERGIE_METER_TRANSMITTER|POWER_STATUS=NORMAL	${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}
 ENERGIE_METER_TRANSMITTER|POWER_STATUS=0	${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}
@@ -764,6 +779,9 @@ ERROR_CODE	${stringTableErrorCode}
 ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR	${stringTableErrorCommunicationParticulateMatterSensor}
 ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR=FALSE	${stringTableErrorCommunicationParticulateMatterSensorFalse}
 ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR=TRUE	${stringTableErrorCommunicationParticulateMatterSensorTrue}
+ERROR_COMMUNICATION_SENSOR	${stringTableErrorCommunicationSensor}
+ERROR_COMMUNICATION_SENSOR=TRUE	${stringTableErrorCommunicationSensorTrue}
+ERROR_COMMUNICATION_SENSOR=FALSE	${stringTableErrorCommunicationSensorFalse}
 ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR	${stringTableErrorCommunicationTempAndHumiditySensor}
 ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=FALSE	${stringTableErrorCommunicationTempAndHumiditySensorFalse}
 ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=TRUE	${stringTableErrorCommunicationTempAndHumiditySensorTrue}
@@ -1187,7 +1205,7 @@ MAINTENANCE|SABOTAGE	${stringTableSabotage}
 MAINTENANCE|SABOTAGE_STICKY	${stringTableSabotageSticky}
 MAINTENANCE|SABOTAGE_STICKY=FALSE	${stringTableSabotageStickyFalse}
 MAINTENANCE|SABOTAGE_STICKY=TRUE	${stringTableSabotageStickyTrue}
-
+MAINTENANCE|SENSOR_ERROR	${stringTableSensorError}
 MAINTENANCE|STICKY_BATTERY=BATTERY_DEFECT	${stringTableBatteryFailure}
 MAINTENANCE|STICKY_BATTERY=BATTERY_WAS_DEFECT	${stringTableBatteryWasDefect}
 MAINTENANCE|STICKY_POWER=POWER_FAILURE	${stringTablePowerNotAvailable}
@@ -1221,8 +1239,13 @@ MAINTENANCE|USER_AUTHORIZATION_07=TRUE	${stringTableUserAuthorization07true}
 MAINTENANCE|USER_AUTHORIZATION_08	${stringTableUserAuthorization08}
 MAINTENANCE|USER_AUTHORIZATION_08=FALSE	${stringTableUserAuthorization08false}
 MAINTENANCE|USER_AUTHORIZATION_08=TRUE	${stringTableUserAuthorization08true}
-
 MANU_MODE	${stringTableClimateControlRTTransceiverManuMode}
+MEASURED_VALUE	${lblReading}
+MEASURED_VALUE_STATUS=ERROR	${lblReading}: ${lblError}
+MEASURED_VALUE_STATUS=NORMAL	${lblReading}: ${lblNormal}
+MEASURED_VALUE_STATUS=OVERFLOW	${lblReading}: ${lblOverflow}
+MEASURED_VALUE_STATUS=UNDERFLOW	${lblReading}: ${lblUnderflow}
+MEASURED_VALUE_STATUS=UNKNOWN	${lblReading}: ${lblUnknown}
 MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE	${stringTableMinMaxNotRelevantForManuMode}
 MIOB_DIN_CONFIG	${stringTableMiobDinConfig}
 MOD_EM8BIT_TRANSMITTER	${stringTable8BitTransmitterTitle}

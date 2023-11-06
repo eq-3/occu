@@ -1385,6 +1385,11 @@ jQuery.extend(true,langJSON, {
     "stringTableKeyPressLongRelease" : "Stopp langer Tastendruck",
     "stringTableServoTitle" : "Servo Steuerung",
 
+    "stringTableInputCoProEnabled_1" : "Kanal 1 %FCber CoPro aktiv",
+    "stringTableInputCoProEnabled_2" : "Kanal 2 %FCber CoPro aktiv",
+    "stringTableInputCoProEnabled_3" : "Kanal 3 %FCber CoPro aktiv",
+    "stringTableInputCoProEnabled_4" : "Kanal 4 %FCber CoPro aktiv",
+
     "noMoreKeys" : ""
   }
 });

@@ -14,3 +14,6 @@
 "noRepetitions" : "No repetitions",
 "infiniteRepetitions" : "Continuously",
 
+"condThresholdLo" : "Lower limit",
+"condThresholdHi" : "Upper limit",
+

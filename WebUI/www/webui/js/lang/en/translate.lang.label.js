@@ -203,6 +203,7 @@ jQuery.extend(true,langJSON, {
     "lblRampTime" : "Ramp time",
     "lblRangeOfValue" : "Value range",
     "lblReadings" : "measured value(s)",
+    "lblReading" : "measured value",
     "lblRedLong" : "Red long",
     "lblRedShort" : "Red short",
     "lblRename" : "Rename",
@@ -299,6 +300,11 @@ jQuery.extend(true,langJSON, {
     "lblWhiteValueB" : "not in use en* WHITE_VALUE_B",
 
     "lblDimmerOnMinLevel" : "Minimum level<br/>in ON state",
+
+    "lblInfoStatusControlGasFlow" : "Gas flow",
+    "lblInfoStatusControlGasVolume" : "Gas meter CCU",
+
+    "lblOK" : "OK",
 
     "noMOreKeys" : ""
   }

@@ -2,7 +2,7 @@ CHANNELCHOOSER_JST = "{macro printHead(name, id, transKey)}\n  {if id != sortId}
 CHANNEL_CONFIG_DIALOG_JST = "<div id=\"ChannelConfigDialog\">\n<div id=\"ChannelConfigDialogTitle\" onmousedown=\"new Drag($(\'ChannelConfigDialog\'), event);\"><span name=\"generalChannelConfigTitle\">Allgemeine Kanaleinstellungen:<\/span> ${channel.address}<\/div>\n<div id=\"ChannelConfigDialogContent\">\n\n  <div id=\"ChannelConfigDialogContentLeft\">\n    <div  class=\"ChannelConfigDialogSection\">\n      <div class=\"CLASS11000\">\n        <div class=\"CLASS11001\">${channel.imageHTML}<\/div>\n      <\/div>\n      <div class=\"CLASS11002\">${channel.typeName}<\/div>\n    <\/div>\n    \n    {if channel.supportsComTest()}\n    <div id=\"channelFunctionTestPanel\" class=\"ChannelConfigDialogSection\">\n      <div class=\"CLASS11003\" name=\"generalDeviceChannelConfigLblFuncTest\">Funktionstest<\/div>\n      <hr \/>\n      <div>\n        <table border=\"0\"  class=\"ChannelConfigDialogTable\" width=\"250px\">\n          <tr>\n            <td width=\"50%\"><div id=\"ChannelConfigDialogTestButton\" class=\"StdButton\" name=\"generalDeviceChannelConfigBtnFuncTest\" onclick=\"ChannelConfigDialog.startTest();\">Test starten<\/div><\/td>\n            <td width=\"50%\"><div id=\"ChannelConfigDialogTestResult\">--:--:--<\/div><\/td>\n          <\/tr>\n        <\/table>\n        <div class=\"CLASS11004\">\n          <p name=\"generalChannelConfigHint\">\n            Im Rahmen des Funktionstests wird gepr&uuml;ft, ob die Kommunikation mit dem Kanal fehlerfrei funktioniert.\n          <\/p>\n          {if channel.category == Channel.CATEGORY.SENDER}<p name=\"generalChannelConfigHintSender\">Bei Sensoren wartet die HomeMatic Zentrale, bis diese sich melden. Eine Fernbedienung meldet sich z.B. erst dann, wenn sie manuell betätigt wird.<\/p>{\/if}\n          {if channel.category == Channel.CATEGORY.RECEIVER}<p name=\"generalChannelConfigHintReceiver\">Bei Aktoren wird dazu in der Regel ein Schaltbefehl ausgelöst.<\/p>{\/if}\n          <\/div>\n      <\/div>\n    <\/div>\n    {\/if}\n  <\/div>\n\n  <div id=\"ChannelConfigDialogContentMain\">\n    <div class=\"ChannelConfigDialogSection\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"2px\"  class=\"ChannelConfigDialogTable\">\n        <tr><td name=\"generalDeviceChannelConfigLblName\">Name:<\/td><td><input id=\"ChannelConfigDialog_ChannelName\" class=\"CLASS11005\" type=\"text\" value=\"${channel.name}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTypeDescription\">Typenbezeichnung:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${channel.typeName}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblSerialNumber\">Seriennummer:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${channel.address}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblCategory\">Kategorie:<\/td><td><input class=\"CLASS11005\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" \n            {if channel.category == Channel.CATEGORY.SENDER} value=\"Sender (Sensor)\" id=\"generalChannelConfigLblSender\" {\/if}\n            {if channel.category == Channel.CATEGORY.RECEIVER} value=\"Empf&auml;nger (Aktor)\" id=\"generalChannelConfigLblReceiver\" {\/if}\n            {if channel.category == Channel.CATEGORY.NONE} value=\"nicht verkn&uuml;pfbar\" id=\"generalChannelConfigLblNone\"{\/if}\n            \/>\n        <\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTransmitMode\">&Uuml;bertragungsmodus:<\/td>\n          <td>\n            <select id=\"ChannelConfigDialog_Mode\" class=\"CLASS11005\" {if !channel.isAesAvailable} disabled=\"disabled\" readonly=\"readonly\" {\/if}>\n              <option value=\"Standard\" name=\"lblStandard\" {if channel.mode == translateKey(Channel.MODE.DEFAULT)} selected=\"selected\" {\/if} >Standard<\/option>\n              <option value=\"Gesichert\" name=\"lblSecured\" {if channel.mode == translateKey(Channel.MODE.AES)} selected=\"selected\" {\/if} >Gesichert<\/option>\n            <\/select>\n          <\/td>\n        <\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblUsable\">Bedienbar:<\/td><td><input id=\"ChannelConfigDialog_isUsable\" type=\"checkbox\" {if channel.isUsable} checked=\"checked\" {\/if} {if !channel.isWritable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblVisible\">Sichtbar:<\/td><td><input id=\"ChannelConfigDialog_isVisible\" type=\"checkbox\" {if channel.isVisible} checked=\"checked\" {\/if}\/><\/td><\/tr>\n        <tr id=\"btnEnableChannelLogging\"><td name=\"generalDeviceChannelConfigLblLogged\">Protokolliert:<\/td><td><input id=\"ChannelConfigDialog_isLogged\" type=\"checkbox\" {if channel.isLogged} checked=\"checked\" {\/if} {if !channel.isLogable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n      <\/table>\n    <\/div>\n    \n    <div  id=\"ChannelConfigDialogSectionRoom\" class=\"ChannelConfigDialogSection\">\n      <img src=\"{if !isRoomListVisible}\/ise\/img\/plus.png{else}\/ise\/img\/minus.png{\/if}\" class=\"CLASS11006\" width=\"16px\" height=\"16px\" onclick=\"ChannelConfigDialog.toggleRooms(this);\">\n      <div class=\"CLASS11007\" name=\"generalChannelConfigLblRooms\">R&auml;ume<\/div>\n      <hr \/>\n      <form id=\"ChannelConfigDialogRooms\" {if !isRoomListVisible} style=\"display:none\" {\/if} >\n        <table class=\"ChannelConfigDialogTable\">\n          {for room in rooms}\n          <tr>\n            <td><input type=\"checkbox\" name=\"values\" value=\"${room.id}\" {if room.contains(channel.id)} checked=\"checked\" {\/if}\/><\/td><td>${room.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/table>\n      <\/form>\n    <\/div>\n    \n    <div id=\"ChannelConfigDialogSectionFunc\" class=\"ChannelConfigDialogSection\">\n      <img src=\"{if !isSubsectionListVisible}\/ise\/img\/plus.png{else}\/ise\/img\/minus.png{\/if}\" class=\"CLASS11006\" width=\"16px\" height=\"16px\" onclick=\"ChannelConfigDialog.toggleFuncs(this);\">\n      <div class=\"CLASS11007\" name=\"generalChannelConfigLblFunctions\">Gewerke<\/div>\n      <hr \/>\n      <form id=\"ChannelConfigDialogFuncs\" {if !isSubsectionListVisible} style=\"display:none\" {\/if}>\n        <table class=\"ChannelConfigDialogTable\">\n          {for func in funcs}\n          <tr>\n            <td><input type=\"checkbox\" name=\"values\" value=\"${func.id}\" {if func.contains(channel.id)} checked=\"checked\" {\/if}\/><\/td><td>${func.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/table>\n      <\/form>\n    <\/div>\n    \n  <\/div>\n<\/div>\n<div id=\"ChannelConfigDialogFooter\">\n  <div class=\"ChannelConfigDialogButton FooterButton\" name=\"btnCancel\" id=\"ChannelConfigDialogAbortButton\" onclick=\"ChannelConfigDialog.abort();\">Abbrechen<\/div>\n  <div class=\"ChannelConfigDialogButton FooterButton\" name=\"btnOk\" id=\"ChannelConfigDialogOkButton\" onclick=\"ChannelConfigDialog.ok();\">OK<\/div>\n<\/div>\n<\/div>\n";
 DEVICE_CONFIG_DIALOG_JST = "<div id=\"DeviceConfigDialog\">\n<div id=\"DeviceConfigDialogTitle\" onmousedown=\"new Drag($(\'DeviceConfigDialog\'), event);\"><span name=\"generalDeviceConfigTitle\">Allgemeine Geräteeinstellungen:<\/span> ${device.address}<\/div>\n<div id=\"DeviceConfigDialogContent\">\n\n  <div id=\"DeviceConfigDialogContentLeft\">\n    <div  class=\"DeviceConfigDialogSection\">\n      <div class=\"CLASS10800\">\n        <div class=\"CLASS10801\">${device.imageHTML}<\/div>\n      <\/div>\n      <div class=\"CLASS10802\">${device.typeName}<\/div>\n    <\/div>\n  <\/div>\n\n  <div id=\"DeviceConfigDialogContentMain\">\n    <div class=\"DeviceConfigDialogSection\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"2px\"  class=\"DeviceConfigDialogTable\">\n        <tr><td name=\"generalDeviceChannelConfigLblName\">Name:<\/td><td><input id=\"DeviceConfigDialog_DeviceName\" class=\"CLASS10803\" type=\"text\" value=\"${device.name}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblTypeDescription\">Typenbezeichnung:<\/td><td><input class=\"CLASS10803\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${device.typeName}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblSerialNumber\">Seriennummer:<\/td><td><input class=\"CLASS10803\" disabled=\"disabled\" readonly=\"readonly\" type=\"text\" value=\"${device.address}\"\/><\/td><\/tr>\n        <tr><td name=\"generalDeviceChannelConfigLblUsable\">Bedienbar:<\/td><td><input id=\"DeviceConfigDialog_isUsable\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isUsabilityChanged=true;\" {if device.isUsable} checked=\"checked\" {\/if} {if !device.isWritable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n        <!-- <tr id=\"trAllChnVisible\" class=\"hidden\"><td name=\"generalDeviceChannelConfigLblVisible\">Sichtbar:<\/td><td><input id=\"DeviceConfigDialog_isVisible\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isVisibilityChanged=true;\" {if device.isVisible} checked=\"checked\" {\/if}\/><\/td><\/tr> -->\n        <tr id=\"btnEnableDeviceLogging\"><td name=\"generalDeviceChannelConfigLblLogged\">Protokolliert:<\/td><td><input id=\"DeviceConfigDialog_isLogged\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isLoggingChanged=true;\" {if device.isLogged} checked=\"checked\" {\/if} {if !device.isLogable} disabled=\"disabled\" readonly=\"readonly\" {\/if}\/><\/td><\/tr>\n\n        <tr id=\"trAllChnVisible\" class=\"hidden\"><td name=\"lblAllChannelsVisible\">Alle Kan%E4le sichtbar:<\/td><td><input id=\"DeviceConfigDialog_isVisible\" type=\"checkbox\" onclick=\"DeviceConfigDialog.isVisibilityChanged=true;\"\/><\/td><\/tr>\n      <\/table>\n    <\/div>\n    \n    <div id=\"deviceFunctionTestPanel\" class=\"DeviceConfigDialogSection\">\n      <div class=\"CLASS10804\" name=\"generalDeviceChannelConfigLblFuncTest\">Funktionstest<\/div>\n      <hr \/>\n      <div>\n        <table border=\"0\"  class=\"DeviceConfigDialogTable\" width=\"250px\">\n          <tr>\n            <td width=\"50%\"><div id=\"DeviceConfigDialogTestButton\" class=\"StdButton\" name=\"generalDeviceChannelConfigBtnFuncTest\" onclick=\"DeviceConfigDialog.startTest();\">Test starten<\/div><\/td>\n            <td width=\"50%\"><div id=\"DeviceConfigDialogTestResult\">--:--:--<\/div><\/td>\n          <\/tr>\n        <\/table>\n        <div class=\"CLASS10805\" name=\"generalDeviceConfigHint\">\n          Im Rahmen des Funktionstests wird geprüft, ob die Kommunikation mit dem Gerät fehlerfrei funktioniert. Der Test gilt als bestanden, sobald die erste Rückmeldung von dem Gerät empfangen wurde. <br \/> Dazu werden an alle Aktoren des Geräts Schaltbefehle gesendet, die deren Zustand ändern. Sensoren, wie z.B. Fernbedienungen, melden sich im Allgemeinen erst dann, wenn sie durch ein entsprechendes Ereignis ausgelöst wurden.\n        <\/div>\n      <\/div>\n    <\/div>\n\n  <\/div>\n<\/div>\n<div id=\"DeviceConfigDialogFooter\">\n  <div class=\"DeviceConfigDialogButton FooterButton\" name=\"btnCancel\" id=\"DeviceConfigDialogAbortButton\" onclick=\"DeviceConfigDialog.abort();\">Abbrechen<\/div>\n  <div class=\"DeviceConfigDialogButton FooterButton\" name=\"btnOk\" id=\"DeviceConfigDialogOkButton\" onclick=\"DeviceConfigDialog.ok();\">Ok<\/div>\n<\/div>\n<\/div>\n";
 DEVICELIST_FLAT_JST = "{macro printHead(name, id)}\n  {if id != sortId}\n    <th class=\"DeviceListHead clickable\" name=\"${name}\" onclick=\"DeviceListPage.sortBy(\'${id}\');\">${name}<\/th>\n  {else}\n    <th class=\"DeviceListHead_Active clickable\" name=\"${name}\" onclick=\"DeviceListPage.sortBy(\'${id}\');\">\n      ${name}&#160;\n      {if sortDescend}\n        <img src=\"\/ise\/img\/arrow_down.gif\" \/>\n      {else}\n        <img src=\"\/ise\/img\/arrow_up.gif\" \/>\n      {\/if}\n    <\/th>\n  {\/if}\n{\/macro}\n<table id=\"DeviceListTable\" width=\"97%\"  border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <colgroup>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:55px;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:11%;\"\"\/>\n  <\/colgroup>\n  <thead>\n    <tr>\n      ${printHead(\"thName\", \"NAME\")}\n      ${printHead(\"thTypeDescriptor\", \"TYPE_NAME\")}\n      <th class=\"DeviceListHead\" name=\"thPicture\">Bild<\/th>\n      ${printHead(\"thDescriptor\", \"DESCRIPTION\")}\n      ${printHead(\"thSerialNumber\", \"ADDRESS\")}\n      ${printHead(\"thInterfaceCategory\", \"CATEGORY\")}\n      ${printHead(\"thTransmitMode\", \"MODE\")}\n      ${printHead(\"thFuncs\", \"FUNC_NAMES\")}\n      ${printHead(\"thRooms\", \"ROOM_NAMES\")}\n      <th class=\"DeviceListHead\"><img name=\"lblVisible\" src=\"\/ise\/img\/visible.png\" width=\"24px\" height=\"24px\" alt=\"sichtbar\" title=\"sichtbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblUsable\" src=\"\/ise\/img\/usable.png\" width=\"24px\" height=\"24px\" alt=\"bedienbar\" title=\"bedienbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblRecorded\" src=\"\/ise\/img\/logged.png\" width=\"24px\" height=\"24px\" alt=\"protokolliert\" title=\"protokolliert\"\/><\/th>\n      <th class=\"DeviceListHead\" name=\"thActions\">Flat Aktionen<\/th>\n    <\/tr>\n    <tr>\n      ${nameFilter.getHTML()}\n      ${typeNameFilter.getHTML()}\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      ${descriptionFilter.getHTML()}\n      ${addressFilter.getHTML()}\n      ${categoryFilter.getHTML()}\n      ${modeFilter.getHTML()}\n      ${funcFilter.getHTML()}\n      ${roomFilter.getHTML()}\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n      <th class=\"Filter CLASS10700\" >&nbsp;<\/th>\n    <\/tr>\n  <\/thead>\n  <tbody>\n    {for channel in channels}\n      <tr class=\"DeviceListRow\" id=\"${PREFIX}${channel.Id}\"  onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" onmouseover=\"this.className = \'DeviceListRow_Highlight\';\" onmouseout=\"this.className = \'DeviceListRow\';\">\n        <td class=\"DeviceListCell\">${channel.name}<\/td>\n        <td class=\"DeviceListCell\">${channel.typeName}<\/td>\n        <td class=\"DeviceListThumbnail\"><div class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n        <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n        <td class=\"DeviceListCell\">${channel.address}<\/td>\n        <td class=\"DeviceListCell\">${channel.category}<\/td>\n        <td class=\"DeviceListCell j_chMode\">${channel.mode}<\/td>\n        <td class=\"DeviceListCell j_function\">\n          {for subsection in channel.subsections}\n            ${subsection.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n        <td class=\"DeviceListCell j_rooms\">\n          {for room in channel.rooms}\n            ${room.name}<br \/>\n          {forelse}\n            &#160;\n          {\/for}\n        <\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n        <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n        <td class=\"DeviceListCell\">\n          <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n          <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n          <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n        <\/td>\n      <\/tr>\n    {forelse}\n      <tr class=\"DeviceListRow\">\n        <td class=\"DeviceListCell\" name=\"noChannelsAvailable\" colspan=\"13\">Keine Kan&auml;le verf&uuml;gbar<\/td>\n      <\/tr>\n    {\/for}\n  <\/tbody>\n<\/table>\n\n";
-DEVICELIST_TREE_JST = "<table id=\"DeviceListTable\" width=\"97%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <colgroup>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:55px;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:11%;\"\/>\n  <\/colgroup>\n  <thead>\n    <tr>\n      <!-- Alle Elemente mit Name-Attribut werden übersetzt. Der Wert des Name-Attributs ist der Key f. die Übersetzungsdatei -->\n      <th class=\"DeviceListCell_Invisible\"><div class=\"CLASS10900\">&nbsp;<\/div><\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thName\" colspan=\"3\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Name<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thTypeDescriptor\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Typen- Bezeichnung<\/th>\n      <th class=\"DeviceListHead\" name=\"thPicture\">Bild<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thDescriptor\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Bezeichnung<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thSerialNumber\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Serien- Nummer<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thInterfaceCategory\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Interface \/ Kategorie<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thTransmitMode\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">&Uuml;bertragungsmodus<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thFuncs\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Gewerke<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thRooms\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">R&auml;ume<\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblVisible\" src=\"\/ise\/img\/visible.png\" width=\"24px\" height=\"24px\" alt=\"sichtbar\" title=\"sichtbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblUsable\" src=\"\/ise\/img\/usable.png\" width=\"24px\" height=\"24px\" alt=\"bedienbar\" title=\"bedienbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblRecorded\" src=\"\/ise\/img\/logged.png\" width=\"24px\" height=\"24px\" alt=\"protokolliert\" title=\"protokolliert\"\/><\/th>\n      <th class=\"DeviceListHead\" name=\"thActions\" >Aktionen<\/th>\n    <\/tr>\n    <tr>\n      <th class=\"DeviceListCell_Invisible CLASS10901\" ><div class=\"CLASS10900\">&nbsp;<\/div><\/th>\n      ${nameFilter.getHTML(3)}\n      ${typeNameFilter.getHTML()}\n      <th class=\"Filter CLASS10901\" >&nbsp;<\/th>\n      ${descriptionFilter.getHTML()}\n      ${addressFilter.getHTML()}\n      ${interfaceFilter.getHTML()}\n      ${modeFilter.getHTML()}\n      ${funcFilter.getHTML()}\n      ${roomFilter.getHTML()}\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n    <\/tr>\n  <\/thead>\n  <tbody>\n    {for device in devices}\n      {if !device.inInbox}\n        <tr id=\"${PREFIX}${device.id}\" class=\"DeviceListRow\" onclick=\"DeviceListPage.selectDevice(\'${device.id}\');\" onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n          {if (device.typeName != \"HmIP-CCU3\") && (device.typeName != \"RPI-RF-MOD\")  && (device.typeName != \"HmIP-HAP\")  && (device.typeName != \"HmIP-HAP-B1\") && (device.typeName != \"HmIP-HAP JS1\")}\n            <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">\n              <img id=\"${PREFIX}${device.id}PLUS\" onclick=\"DeviceListPage.expandDevice(event, \'${device.id}\');\" src=\"\/ise\/img\/plus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le anzeigen\" title=\"Kan&auml;le anzeigen\" {if device._expanded} style=\"display:none;\"{\/if}\/>\n              <img id=\"${PREFIX}${device.id}MINUS\" onclick=\"DeviceListPage.collapseDevice(event, \'${device.id}\');\" src=\"\/ise\/img\/minus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le verbergen\" title=\"Kan&auml;le verbergen\" {if !device._expanded} style=\"display:none;\"{\/if}\/>\n            <\/td>\n            {else}\n             <td class=\"DeviceListCell_Invisible\" \/>\n          {\/if}\n          <td class=\"DeviceListCell\" colspan=\"3\">${device.name}<\/td>\n          <td class=\"DeviceListCell\" >${device.typeName}<\/td>\n          <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${device.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${device.deviceType.id}\', 250, \'\', this);\" onmouseout=\"picDivHide(jg_250);\">${device.getThumbnailHTML()}<\/div><\/td>\n          <td class=\"DeviceListCell\" name=\"${device.typeDescription}\" >${device.typeDescription}<\/td>\n          <td class=\"DeviceListCell\" >${device.address}${device.rfAddress}<\/td>\n          <td class=\"DeviceListCell\" >${device.interfaceName}<\/td>\n          <td class=\"DeviceListCell j_chMode\" >{for name in device.modes}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell j_functions\" >{for subsection in device.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell j_rooms\" >{for room in device.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isVisible}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isUsable}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isLogged}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\" >\n            <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'DEVICE\', \'${device.id}\');\">Einstellen<\/div>\n            {if device.isDeletable}\n              <div class=\"DeviceListButton\" name=\"btnRemove\" onclick=\"DeviceListPage.deleteDevice(event, \'${device.id}\');\">L&ouml;schen<\/div>\n            {else}\n              <div class=\"DeviceListButton CLASS10902\" name=\"btnRemove\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\" >L&ouml;schen<\/div>\n            {\/if}\n            <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'DEVICE\', \'${device.id}\');\">Direkte<\/div>\n            <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'DEVICE\', \'${device.id}\');\">Programme<\/div>\n          <\/td>\n        <\/tr>\n        {for group in device.groups}\n          <tr id=\"${PREFIX}${group.id}\"class=\"DeviceListRow\" {if !device._expanded}style=\"display:none;\"{\/if}>\n            <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n            <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">\n              <img id=\"${PREFIX}${group.id}PLUS\" onclick=\"DeviceListPage.expandGroup(event, \'${group.id}\');\" src=\"\/ise\/img\/plus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le anzeigen\" title=\"Kan&auml;le anzeigen\" {if group._expanded} style=\"display:none;\"{\/if}\/>\n              <img id=\"${PREFIX}${group.id}MINUS\" onclick=\"DeviceListPage.collapseGroup(event, \'${group.id}\');\" src=\"\/ise\/img\/minus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le verbergen\" title=\"Kan&auml;le verbergen\" {if !group._expanded} style=\"display:none;\"{\/if}\/>\n            <\/td>\n            <td class=\"DeviceListCell\" colspan=\"2\">${group.name}<\/td>\n            <td class=\"DeviceListCell\" >${group.typeName}<\/td>\n            <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${group.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${group.device.deviceType.id}\', 250, \'${group.formName}\', this);\" onmouseout=\"picDivHide(jg_250);\">${group.thumbnailHTML}<\/div><\/td>\n            <td class=\"DeviceListCell\" name=\"${group.typeDescription}\" >${group.typeDescription}<\/td>\n            <td class=\"DeviceListCell\" >${group.address}<\/td>\n            <td class=\"DeviceListCell\" >{for name in group.categories}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell j_chMode\" >{for name in group.modes}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\" >{for subsection in group.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\" >{for room in group.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isVisible}checked=\"checked\"{\/if}\/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isUsable}checked=\"checked\"{\/if}\/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isLogged}checked=\"checked\"{\/if}\/><\/td>\n            <td class=\"DeviceListCell\" >\n              <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'GROUP\', \'${group.id}\');\">Einstellen<\/div>\n              <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'GROUP\', \'${group.id}\');\">Direkte<\/div>\n              <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'GROUP\', \'${group.id}\');\">Programme<\/div>\n            <\/td>\n          <\/tr>\n          {for channel in group.channels}\n            <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow\" {if (!group._expanded) | (!device._expanded)}style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n              <td class=\"DeviceListCell_Invisible\" colspan=\"3\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n              <td class=\"DeviceListCell\" >${channel.name}<br\/>${channel.nameExtention}<\/td>\n              <td class=\"DeviceListCell\" >${channel.typeName}<\/td>\n              <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${channel.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n              <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n              <td class=\"DeviceListCell\" >${channel.address}<\/td>\n              <td class=\"DeviceListCell\" >${channel.category}<\/td>\n              <td class=\"DeviceListCell j_chMode\" >${channel.mode}<\/td>\n              <td class=\"DeviceListCell\" >{for subsection in channel.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\" >{for room in channel.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\" >\n                <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n                <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n                <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n              <\/td>\n            <\/tr>\n          {\/for}\n        {\/for}\n        {for channel in device.singles}\n\n        {if channel._isVisible}\n            {if channel.highlightChannel}\n              <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow virtualChannelBckGndA\" {if !device._expanded} style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow virtualChannelBckGndA\';\">\n            {else}\n              <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow\" {if !device._expanded} style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n            {\/if}\n\n              <td class=\"DeviceListCell_Invisible\" colspan=\"2\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n              <td class=\"DeviceListCell\" colspan=\"2\">${channel.name}<br\/>${channel.nameExtention}<\/td>\n              <td class=\"DeviceListCell\" >${channel.typeName}<\/td>\n              <td class=\"DeviceListThumbnail\" ><div  id=\"${PREFIX}${channel.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n              <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n              <td class=\"DeviceListCell\" >${channel.address}<\/td>\n              <td class=\"DeviceListCell\" >${channel.category}<\/td>\n              <td class=\"DeviceListCell j_chMode\" >${channel.mode}<\/td>\n              <td class=\"DeviceListCell\" >{for subsection in channel.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\" >{for room in channel.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\" >\n                <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n                <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n                <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n              <\/td>\n            <\/tr>\n         {\/if}\n        {\/if}\n      {\/for}\n    {forelse}\n      <tr class=\"DeviceListRow\">\n        <td class=\"DeviceListCell_Invisible\">&#160;<\/td>\n        <td class=\"DeviceListCell\" name=\"noDevicesAvailable\" colspan=\"15\">Keine Ger&auml;te verf&uuml;gbar<\/td>\n      <\/tr>\n    {\/for}\n  <\/tbody>\n  <tfoot>\n    <tr class=\"CLASS10903\">\n      <td class=\"DeviceListCell_Invisible CLASS10903\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10906\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10907\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10908\" ><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10909\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n    <\/tr>  \n  <\/tfoot>\n<\/table>\n";
+DEVICELIST_TREE_JST = "<table id=\"DeviceListTable\" width=\"97%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <colgroup>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:55px;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:11%;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:25px;\"\/>\n    <col style=\"width:11%;\"\/>\n  <\/colgroup>\n  <thead>\n    <tr>\n      <!-- Alle Elemente mit Name-Attribut werden übersetzt. Der Wert des Name-Attributs ist der Key f. die Übersetzungsdatei -->\n      <th class=\"DeviceListCell_Invisible\"><div class=\"CLASS10900\">&nbsp;<\/div><\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thName\" colspan=\"3\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Name<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thTypeDescriptor\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Typen- Bezeichnung<\/th>\n      <th class=\"DeviceListHead\" name=\"thPicture\">Bild<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thDescriptor\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Bezeichnung<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thSerialNumber\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Serien- Nummer<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thInterfaceCategory\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Interface \/ Kategorie<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thTransmitMode\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">&Uuml;bertragungsmodus<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thFuncs\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">Gewerke<\/th>\n      <th class=\"DeviceListHead clickable\" name=\"thRooms\" onclick=\"DeviceListPage.sortBy(\'NAME\');\">R&auml;ume<\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblVisible\" src=\"\/ise\/img\/visible.png\" width=\"24px\" height=\"24px\" alt=\"sichtbar\" title=\"sichtbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblUsable\" src=\"\/ise\/img\/usable.png\" width=\"24px\" height=\"24px\" alt=\"bedienbar\" title=\"bedienbar\"\/><\/th>\n      <th class=\"DeviceListHead\"><img name=\"lblRecorded\" src=\"\/ise\/img\/logged.png\" width=\"24px\" height=\"24px\" alt=\"protokolliert\" title=\"protokolliert\"\/><\/th>\n      <th class=\"DeviceListHead\" name=\"thActions\" >Aktionen<\/th>\n    <\/tr>\n    <tr>\n      <th class=\"DeviceListCell_Invisible CLASS10901\" ><div class=\"CLASS10900\">&nbsp;<\/div><\/th>\n      ${nameFilter.getHTML(3)}\n      ${typeNameFilter.getHTML()}\n      <th class=\"Filter CLASS10901\" >&nbsp;<\/th>\n      ${descriptionFilter.getHTML()}\n      ${addressFilter.getHTML()}\n      ${interfaceFilter.getHTML()}\n      ${modeFilter.getHTML()}\n      ${funcFilter.getHTML()}\n      ${roomFilter.getHTML()}\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n      <th class=\"Filter CLASS10901\">&nbsp;<\/th>\n    <\/tr>\n  <\/thead>\n  <tbody>\n    {for device in devices}\n      {if !device.inInbox}\n        <tr id=\"${PREFIX}${device.id}\" class=\"DeviceListRow\" onclick=\"DeviceListPage.selectDevice(\'${device.id}\');\" onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n          {if (device.typeName != \"HmIP-CCU3\") && (device.typeName != \"RPI-RF-MOD\")  && (device.typeName != \"HmIP-HAP\") && (device.typeName != \"HmIP-HAP-A\") && (device.typeName != \"HmIP-HAP-B1\") && (device.typeName != \"HmIP-HAP JS1\")}\n            <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">\n              <img id=\"${PREFIX}${device.id}PLUS\" onclick=\"DeviceListPage.expandDevice(event, \'${device.id}\');\" src=\"\/ise\/img\/plus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le anzeigen\" title=\"Kan&auml;le anzeigen\" {if device._expanded} style=\"display:none;\"{\/if}\/>\n              <img id=\"${PREFIX}${device.id}MINUS\" onclick=\"DeviceListPage.collapseDevice(event, \'${device.id}\');\" src=\"\/ise\/img\/minus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le verbergen\" title=\"Kan&auml;le verbergen\" {if !device._expanded} style=\"display:none;\"{\/if}\/>\n            <\/td>\n            {else}\n             <td class=\"DeviceListCell_Invisible\" \/>\n          {\/if}\n          <td class=\"DeviceListCell\" colspan=\"3\">${device.name}<\/td>\n          <td class=\"DeviceListCell\" >${device.typeName}<\/td>\n          <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${device.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${device.deviceType.id}\', 250, \'\', this);\" onmouseout=\"picDivHide(jg_250);\">${device.getThumbnailHTML()}<\/div><\/td>\n          <td class=\"DeviceListCell\" name=\"${device.typeDescription}\" >${device.typeDescription}<\/td>\n          <td class=\"DeviceListCell\" >${device.address}${device.rfAddress}<\/td>\n          <td class=\"DeviceListCell\" >${device.interfaceName}<\/td>\n          <td class=\"DeviceListCell j_chMode\" >{for name in device.modes}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell j_functions\" >{for subsection in device.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell j_rooms\" >{for room in device.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isVisible}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isUsable}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if device.isLogged}checked=\"checked\"{\/if}\/><\/td>\n          <td class=\"DeviceListCell\" >\n            <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'DEVICE\', \'${device.id}\');\">Einstellen<\/div>\n            {if device.isDeletable}\n              <div class=\"DeviceListButton\" name=\"btnRemove\" onclick=\"DeviceListPage.deleteDevice(event, \'${device.id}\');\">L&ouml;schen<\/div>\n            {else}\n              <div class=\"DeviceListButton CLASS10902\" name=\"btnRemove\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\" >L&ouml;schen<\/div>\n            {\/if}\n            <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'DEVICE\', \'${device.id}\');\">Direkte<\/div>\n            <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'DEVICE\', \'${device.id}\');\">Programme<\/div>\n          <\/td>\n        <\/tr>\n        {for group in device.groups}\n          <tr id=\"${PREFIX}${group.id}\"class=\"DeviceListRow\" {if !device._expanded}style=\"display:none;\"{\/if}>\n            <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n            <td class=\"DeviceListCell_Invisible\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">\n              <img id=\"${PREFIX}${group.id}PLUS\" onclick=\"DeviceListPage.expandGroup(event, \'${group.id}\');\" src=\"\/ise\/img\/plus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le anzeigen\" title=\"Kan&auml;le anzeigen\" {if group._expanded} style=\"display:none;\"{\/if}\/>\n              <img id=\"${PREFIX}${group.id}MINUS\" onclick=\"DeviceListPage.collapseGroup(event, \'${group.id}\');\" src=\"\/ise\/img\/minus.png\" width=\"16px\" height=\"16px\" alt=\"Kan&auml;le verbergen\" title=\"Kan&auml;le verbergen\" {if !group._expanded} style=\"display:none;\"{\/if}\/>\n            <\/td>\n            <td class=\"DeviceListCell\" colspan=\"2\">${group.name}<\/td>\n            <td class=\"DeviceListCell\" >${group.typeName}<\/td>\n            <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${group.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${group.device.deviceType.id}\', 250, \'${group.formName}\', this);\" onmouseout=\"picDivHide(jg_250);\">${group.thumbnailHTML}<\/div><\/td>\n            <td class=\"DeviceListCell\" name=\"${group.typeDescription}\" >${group.typeDescription}<\/td>\n            <td class=\"DeviceListCell\" >${group.address}<\/td>\n            <td class=\"DeviceListCell\" >{for name in group.categories}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell j_chMode\" >{for name in group.modes}${name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\" >{for subsection in group.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\" >{for room in group.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isVisible}checked=\"checked\"{\/if}\/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isUsable}checked=\"checked\"{\/if}\/><\/td>\n            <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if group.isLogged}checked=\"checked\"{\/if}\/><\/td>\n            <td class=\"DeviceListCell\" >\n              <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'GROUP\', \'${group.id}\');\">Einstellen<\/div>\n              <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'GROUP\', \'${group.id}\');\">Direkte<\/div>\n              <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'GROUP\', \'${group.id}\');\">Programme<\/div>\n            <\/td>\n          <\/tr>\n          {for channel in group.channels}\n            <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow\" {if (!group._expanded) | (!device._expanded)}style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n              <td class=\"DeviceListCell_Invisible\" colspan=\"3\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n              <td class=\"DeviceListCell\" >${channel.name}<br\/>${channel.nameExtention}<\/td>\n              <td class=\"DeviceListCell\" >${channel.typeName}<\/td>\n              <td class=\"DeviceListThumbnail\" ><div id=\"${PREFIX}${channel.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n              <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n              <td class=\"DeviceListCell\" >${channel.address}<\/td>\n              <td class=\"DeviceListCell\" >${channel.category}<\/td>\n              <td class=\"DeviceListCell j_chMode\" >${channel.mode}<\/td>\n              <td class=\"DeviceListCell\" >{for subsection in channel.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\" >{for room in channel.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\" >\n                <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n                <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n                <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n              <\/td>\n            <\/tr>\n          {\/for}\n        {\/for}\n        {for channel in device.singles}\n\n        {if channel._isVisible}\n            {if channel.highlightChannel}\n              <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow virtualChannelBckGndA\" {if !device._expanded} style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow virtualChannelBckGndA\';\">\n            {else}\n              <tr id=\"${PREFIX}${channel.id}\" onclick=\"DeviceListPage.selectChannel(\'${channel.id}\');\" class=\"DeviceListRow\" {if !device._expanded} style=\"display:none;\"{\/if} onmouseover=\"this.className=\'DeviceListRow_Highlight\';\" onmouseout=\"this.className=\'DeviceListRow\';\">\n            {\/if}\n\n              <td class=\"DeviceListCell_Invisible\" colspan=\"2\" onclick=\"if (event) { Event.stop(event); } else { Event.stop(window.event); }\">&#160;<\/td>\n              <td class=\"DeviceListCell\" colspan=\"2\">${channel.name}<br\/>${channel.nameExtention}<\/td>\n              <td class=\"DeviceListCell\" >${channel.typeName}<\/td>\n              <td class=\"DeviceListThumbnail\" ><div  id=\"${PREFIX}${channel.id}Thumbnail\" class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.device.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n              <td class=\"DeviceListCell\" name=\"${channel.typeDescription}\" >${channel.typeDescription}<\/td>\n              <td class=\"DeviceListCell\" >${channel.address}<\/td>\n              <td class=\"DeviceListCell\" >${channel.category}<\/td>\n              <td class=\"DeviceListCell j_chMode\" >${channel.mode}<\/td>\n              <td class=\"DeviceListCell\" >{for subsection in channel.subsections}${subsection.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\" >{for room in channel.rooms}${room.name}<br \/>{forelse}&#160;{\/for}<\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isVisible}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isUsable}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\"><input type=\"checkbox\" disabled=\"disabled\" readonly=\"readyonly\" {if channel.isLogged}checked=\"checked\"{\/if} \/><\/td>\n              <td class=\"DeviceListCell\" >\n                <div class=\"DeviceListButton\" name=\"btnConfigure\" onclick=\"DeviceListPage.showConfiguration(event, \'CHANNEL\', \'${channel.id}\');\">Einstellen<\/div>\n                <div class=\"DeviceListButton\" name=\"btnDirectLinks\" onclick=\"DeviceListPage.showDirectLinks(event, \'CHANNEL\', \'${channel.id}\');\">Direkte<\/div>\n                <div class=\"DeviceListButton\" name=\"btnPrograms\" onclick=\"DeviceListPage.showPrograms(event, \'CHANNEL\', \'${channel.id}\');\">Programme<\/div>\n              <\/td>\n            <\/tr>\n         {\/if}\n        {\/if}\n      {\/for}\n    {forelse}\n      <tr class=\"DeviceListRow\">\n        <td class=\"DeviceListCell_Invisible\">&#160;<\/td>\n        <td class=\"DeviceListCell\" name=\"noDevicesAvailable\" colspan=\"15\">Keine Ger&auml;te verf&uuml;gbar<\/td>\n      <\/tr>\n    {\/for}\n  <\/tbody>\n  <tfoot>\n    <tr class=\"CLASS10903\">\n      <td class=\"DeviceListCell_Invisible CLASS10903\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10906\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10907\" ><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot CLASS10908\" ><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10909\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10904\" \/><\/td>\n      <td class=\"DeviceListFoot\"><div class=\"CLASS10905\" \/><\/td>\n    <\/tr>  \n  <\/tfoot>\n<\/table>\n";
 LISTFILTER_JST = "<th class=\"{if isSet}Filter_Active{else}Filter{\/if}\">\n  <div class=\"FilterCaption\" name=\"thFilter\" onclick=\"Element.show(\'${id}\');\">Filter<\/div>\n  <div class=\"FilterBodyWrapper\" id=\"${id}\" style=\"display:none\">\n    <form class=\"FilterBody\" id=\"${formId}\">\n      <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n        <tbody>\n          {for item in list}\n          <tr>\n            <td class=\"FilterBodyCell\"><input type=\"checkbox\" name=\"values\" value=\"${item.id}\" {if true === item._selected}checked=\"\"{\/if}\/><td>\n            <td class=\"FilterBodyCell j_Filter_${item.id}\">${item.name}<\/td>\n          <\/tr>\n          {\/for}\n        <\/tbody>\n      <\/table>\n      <div class=\"FilterButton\" name=\"filterSet\" onclick=\"${name}.set();\">Setzen<\/div>\n      <div class=\"FilterButton\" name=\"filterClose\" onclick=\"${name}.close();\">Schlie&szlig;en<\/div>\n    <\/form>\n  <\/div>\n<\/th>\n";
 MULTI_CHANNELCHOOSER_JST = "{macro printHead(name, id, langKey)}\n  {if id != sortId}\n    <th class=\"MultiChannelChooserHead clickable\" name=${langKey} onclick=\"MultiChannelChooser.sortBy(\'${id}\');\">${name}<\/th>\n  {else}\n    <th class=\"MultiChannelChooserHead_Active clickable\" name=${langKey} onclick=\"MultiChannelChooser.sortBy(\'${id}\');\">\n      ${name}&#160;\n      {if sortDescend}\n        <img src=\"\/ise\/img\/arrow_down.gif\" \/>\n      {else}\n        <img src=\"\/ise\/img\/arrow_up.gif\" \/>\n      {\/if}\n    <\/th>\n  {\/if}\n{\/macro}\n<div id=\"MultiChannelChooserDialog\">\n<div id=\"MultiChannelChooserTitle\" onmousedown=\"new Drag($(\'MultiChannelChooserDialog\'), event);\"><span name=\"dialogChooseChannel\">Kanalauswahl<\/span>: ${title}<\/div>\n<div id=\"MultiChannelChooserContent\">\n  <table id=\"MultiChannelChooserTable\" width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n    <colgroup>\n      <col style=\"width:5%;\"\/>\n      <col style=\"width:19%;\"\/>\n      <col style=\"width:55px;\"\/>\n      <col style=\"width:30%;\"\/>\n      <col style=\"width:12%;\"\/>\n      <col style=\"width:17%;\"\/>\n      <col style=\"width:17%;\"\/>\n    <\/colgroup>\n    <thead>\n      <tr> <!-- Überschriften -->\n        <th class=\"MultiChannelChooserHead\">&nbsp;<\/th>\n        ${printHead(\"Name\", \"NAME\", \"thName\")}\n        <th class=\"MultiChannelChooserHead\" name=\"thPicture\">Bild<\/th>\n        ${printHead(\"Beschreibung\", \"DESCRIPTION\", \"thDescription\")}\n        ${printHead(\"Seriennummer\", \"ADDRESS\", \"thSerialNumber\")}\n        ${printHead(\"Gewerke\", \"FUNC_NAMES\", \"thFunc\")}\n        ${printHead(\"R&auml;ume\", \"ROOM_NAMES\", \"thRooms\")}\n      <\/tr>\n      <tr> <!-- Filter -->\n        <th class=\"Filter\">&nbsp;<\/th>\n        ${nameFilter.getHTML()}\n        <th class=\"Filter\">&nbsp;<\/th>\n        <th class=\"Filter\">&nbsp;<\/th>\n        <!-- ${descriptionFilter.getHTML()} -->\n        ${addressFilter.getHTML()}\n        ${funcFilter.getHTML()}\n        ${roomFilter.getHTML()}\n      <\/tr>      \n    <\/thead>\n    <tbody>\n      {eval}actualDeviceAddress = \"\";{\/eval}\n      {for channel in channels}\n        {if channel.device.inInbox != true}\n          {var virtualChannel = \"\"}\n          {var classExpertOnly = \"hidden j_expertChannel\"}\n          {var channelTypeID = channel.deviceType.id.toUpperCase()}\n\n          {if channel.channelType == \"VIRTUAL_DIMMER\"} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n          {if (channel.channelType == \"VIRTUAL_DUAL_WHITE_BRIGHTNESS\") || (channel.channelType == \"VIRTUAL_DUAL_WHITE_COLOR\")} {var virtualChannel = \"hidden j_expertChannel\"} {\/if}\n\n          {if (channelTypeID != \"HMIP-MIOB\") && (channelTypeID != \"HMIP-WHS2\")}\n            {if (channel.channelType == \"DIMMER_TRANSMITTER\")\n              || (channel.channelType == \"SWITCH_TRANSMITTER\")\n              || (channel.channelType == \"BLIND_TRANSMITTER\")\n              || (channel.channelType == \"SHUTTER_TRANSMITTER\")\n              || (channel.channelType == \"ACOUSTIC_SIGNAL_TRANSMITTER\")}\n              {var virtualChannel = classExpertOnly;}\n            {\/if}\n            {if (channel.channelType == \"DIMMER_VIRTUAL_RECEIVER\")\n              || (channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\")\n              || (channel.channelType == \"BLIND_VIRTUAL_RECEIVER\")\n              || (channel.channelType == \"SHUTTER_VIRTUAL_RECEIVER\")\n              || (channel.channelType == \"ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER\")\n              || (channel.channelType == \"SERVO_VIRTUAL_RECEIVER\")}\n              {if actualDeviceAddress != channel.device.address}\n                {eval}\n                  actualDeviceAddress = channel.device.address;\n                  if (userIsNoExpert) {\n                    if ((typeof channel.virtChCounter != \"undefined\") && (channel.virtChCounter != 1)) {\n                      virtualChannel = classExpertOnly;\n                    }\n                  }\n                {\/eval}\n              {\/if}\n              {eval}if ((typeof channel.virtChCounter != \"undefined\") && (channel.virtChCounter != 1)) {virtualChannel = classExpertOnly;}{\/eval}\n            {\/if}\n          {\/if}\n\n          {if (channelTypeID == \"HMIP-MIOB\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") && ((channel.index != 3) && (channel.index != 7))))} {var virtualChannel = classExpertOnly} {\/if}\n\n          {if ((channelTypeID == \"HMIP-WHS2\") && ((channel.channelType == \"SWITCH_TRANSMITTER\") || ((channel.channelType == \"SWITCH_VIRTUAL_RECEIVER\") &&\n            ((channel.index == 2) || (channel.index == 4) || (channel.index == 6) || (channel.index == 8))\n          )))} {var virtualChannel = classExpertOnly} {\/if}\n\n          {if channel.channelType == \"VIR-OL-GTW-CH\"} {var virtualChannel = \"hidden\"} {\/if}\n          {if channel.channelType == \"VIR-HUE-GTW-CH\"} {var virtualChannel = \"hidden\"} {\/if}\n\n          {if channel._selected == true} {var virtualChannel = \"\"} {\/if}\n\n        <tr class=\"MultiChannelChooserRow ${virtualChannel}\" id=\"${PREFIX}${channel.id}\" onmouseover=\"this.className=\'MultiChannelChooserRow_Highlight\';\" onmouseout=\"this.className=\'MultiChannelChooserRow\';\">\n          <td class=\"MultiChannelChooserCell_Active\"><input type=\"checkbox\" onclick=\"MultiChannelChooser.select(\'${channel.id}\', this);\" {if true === channel._selected}checked=\"\"{\/if}\/><\/td>\n          <td class=\"MultiChannelChooserCell\">${channel.name}<br\/><span class=\"j_extChnDescr\">${channel.nameExtention}<\/span><\/td>\n          <td class=\"MultiChannelChooserThumbnail\"><div class=\"thumbnail\" onmouseover=\"picDivShow(jg_250, \'${channel.deviceType.id}\', 250, \'${channel.index}\', this);\" onmouseout=\"picDivHide(jg_250);\">${channel.thumbnailHTML}<\/div><\/td>\n          <td class=\"MultiChannelChooserCell\">${channel.typeDescription}<br\/>${channel.device.name}<\/td>\n          <td class=\"MultiChannelChooserCell\">${channel.address}<\/td>\n          <td class=\"MultiChannelChooserCell\">\n            {for subsection in channel.subsections}\n              ${subsection.name}<br \/>\n            {forelse}\n              &#160;\n            {\/for}\n          <\/td>\n          <td class=\"MultiChannelChooserCell\">\n            {for room in channel.rooms}\n              ${room.name}<br \/>\n            {forelse}\n              &#160;\n            {\/for}\n          <\/td>\n        <\/tr>\n        {forelse}\n        <tr class=\"MultiChannelChooserRow\">\n          <td colspan=\"10\" class=\"MultiChannelChooserCell\" name=\"hintMultiChannelChooserNoChannelsAvailable\">Keine Kan&auml;le verf&uuml;gbar<\/td>\n        <\/tr>\n      {\/if}\n    {\/for}\n    <\/tbody>\n  <\/table>\n<\/div>\n<div id=\"MultiChannelChooserFooter\">\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserAbortButton\" name=\"footerBtnCancel\" onclick=\"MultiChannelChooser.abort();\">Abbrechen<\/div>\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserOkButton\" name=\"footerBtnOk\" onclick=\"MultiChannelChooser.ok();\">OK<\/div>\n  <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserResetFiltersButton\" name=\"footerBtnResetFilterWOLineBreak\" onclick=\"MultiChannelChooser.resetFilters();\">Filter zur&uuml;cksetzen<\/div>\n  {if false === showVirtual}\n    <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsShow\" onclick=\"MultiChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le anzeigen<\/div>\n  {else}\n    <div class=\"MultiChannelChooserButton colorGradient50px\" id=\"MultiChannelChooserVirtualButton\" name=\"footerBtnVirtualChannelsHide\" onclick=\"MultiChannelChooser.toggleVirtualChannels();\">virtuelle Kan&auml;le ausblenden<\/div>\n  {\/if}\n<\/div>\n<\/div>";
 RF_CONFIG_JST = "<div class=\"CLASS10500\">\n<form name=\"RFConfig_Interfaces\">\n<table class=\"RFConfig_InterfacesTable\" width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"5\">\n  <colgroup>\n    <col style=\"width:10%;\"\/>\n    <col style=\"width:30%;\" colspan=\"3\" \/>\n  <\/colgroup>\n  <tr>\n    <th>Auswahl<\/th>\n    <th>Seriennummer<\/th>\n    <th>Zugriffscode<\/th>\n    <th>IP Adresse<\/td>\n  <\/tr>\n\t{for gateway in m_gateways}\n  <tr class=\"RFConfig_InterfacesTable_tr\" onmouseover=\"this.className=\'RFConfig_InterfacesTable_tr_hover\';\" onmouseout=\"this.className=\'RFConfig_InterfacesTable_tr\';\">\n    <td><input id=\"${gateway.id}\" name=\"${gateway.id}\" type=\"checkbox\" \/><\/td>\n    <td onclick=\"RFConfigDialog.changeGateway(${m_dialogId}, \'${gateway.id}\');\">${gateway.serial}&nbsp;<\/td>\n    <td onclick=\"RFConfigDialog.changeGateway(${m_dialogId}, \'${gateway.id}\');\">${gateway.key}&nbsp;<\/td>\n    <td onclick=\"RFConfigDialog.changeGateway(${m_dialogId}, \'${gateway.id}\');\">${gateway.ip}&nbsp;<\/td>\n  <\/tr>\n\t{forelse}\n\t<tr class=\"RFConfig_InterfacesTable_tr\">\n    <td colspan=\"4\" style=\"text-align:center; vertical-align:middle;\">Momentan sind keine Funk-LAN-Gateways verfügbar.<\/td>\n  <\/tr>\n\t{\/for}\n<\/table>\n<\/div>\n<\/form>";
@@ -164,6 +164,12 @@ DEV_PATHS["HmIP-STHO"] = new Object();
 DEV_PATHS["HmIP-STHO"]["50"] = "/config/img/devices/50/148_hmip-stho_thumb.png";
 DEV_PATHS["HmIP-STHO"]["250"] = "/config/img/devices/250/148_hmip-stho.png";
 DEV_HIGHLIGHT["HmIP-STHO"] = new Object();
+DEV_LIST.push('ELV-SH-BM-S');
+DEV_DESCRIPTION["ELV-SH-BM-S"] = "ELV-SH-BM-S";
+DEV_PATHS["ELV-SH-BM-S"] = new Object();
+DEV_PATHS["ELV-SH-BM-S"]["50"] = "/config/img/devices/50/229_elv-sh-bm-s_thumb.png";
+DEV_PATHS["ELV-SH-BM-S"]["250"] = "/config/img/devices/250/229_elv-sh-bm-s.png";
+DEV_HIGHLIGHT["ELV-SH-BM-S"] = new Object();
 DEV_LIST.push('HM-Sec-SC-2');
 DEV_DESCRIPTION["HM-Sec-SC-2"] = "HM-Sec-SC-2";
 DEV_PATHS["HM-Sec-SC-2"] = new Object();
@@ -1483,6 +1489,12 @@ DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["1"] = [4, 0.088, 0.556, 0.048, 0.04];
 DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["2"] = [4, 0.280, 0.556, 0.048, 0.04];
 DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["3"] = [4, 0.472, 0.556, 0.048, 0.04];
 DEV_HIGHLIGHT["HM-LC-Sw4-DR"]["4"] = [4, 0.656, 0.556, 0.048, 0.04];
+DEV_LIST.push('HmIP-SWDO-A');
+DEV_DESCRIPTION["HmIP-SWDO-A"] = "HmIP-SWDO";
+DEV_PATHS["HmIP-SWDO-A"] = new Object();
+DEV_PATHS["HmIP-SWDO-A"]["50"] = "/config/img/devices/50/118_hmip-swdo_thumb.png";
+DEV_PATHS["HmIP-SWDO-A"]["250"] = "/config/img/devices/250/118_hmip-swdo.png";
+DEV_HIGHLIGHT["HmIP-SWDO-A"] = new Object();
 DEV_LIST.push('HM-LC-Sw1-Pl-OM54');
 DEV_DESCRIPTION["HM-LC-Sw1-Pl-OM54"] = "HM-LC-Sw1-Pl-OM54";
 DEV_PATHS["HM-LC-Sw1-Pl-OM54"] = new Object();
@@ -1566,6 +1578,12 @@ DEV_PATHS["HmIP-WKP"] = new Object();
 DEV_PATHS["HmIP-WKP"]["50"] = "/config/img/devices/50/221_hmip-wkp_thumb.png";
 DEV_PATHS["HmIP-WKP"]["250"] = "/config/img/devices/250/221_hmip-wkp.png";
 DEV_HIGHLIGHT["HmIP-WKP"] = new Object();
+DEV_LIST.push('HmIP-DLD-A');
+DEV_DESCRIPTION["HmIP-DLD-A"] = "HmIP-DLD";
+DEV_PATHS["HmIP-DLD-A"] = new Object();
+DEV_PATHS["HmIP-DLD-A"]["50"] = "/config/img/devices/50/214_hmip-dld_thumb.png";
+DEV_PATHS["HmIP-DLD-A"]["250"] = "/config/img/devices/250/214_hmip-dld.png";
+DEV_HIGHLIGHT["HmIP-DLD-A"] = new Object();
 DEV_LIST.push('HmIP-WRC6');
 DEV_DESCRIPTION["HmIP-WRC6"] = "WRC6";
 DEV_PATHS["HmIP-WRC6"] = new Object();
@@ -2015,6 +2033,12 @@ DEV_PATHS["HmIP-SWDM"] = new Object();
 DEV_PATHS["HmIP-SWDM"]["50"] = "/config/img/devices/50/181_hmip-swdm_thumb.png";
 DEV_PATHS["HmIP-SWDM"]["250"] = "/config/img/devices/250/181_hmip-swdm.png";
 DEV_HIGHLIGHT["HmIP-SWDM"] = new Object();
+DEV_LIST.push('HmIP-WTH-B-A');
+DEV_DESCRIPTION["HmIP-WTH-B-A"] = "HmIP-WTH-B";
+DEV_PATHS["HmIP-WTH-B-A"] = new Object();
+DEV_PATHS["HmIP-WTH-B-A"]["50"] = "/config/img/devices/50/200_hmip-wth-b_thumb.png";
+DEV_PATHS["HmIP-WTH-B-A"]["250"] = "/config/img/devices/250/200_hmip-wth-b.png";
+DEV_HIGHLIGHT["HmIP-WTH-B-A"] = new Object();
 DEV_LIST.push('HmIP-SPI');
 DEV_DESCRIPTION["HmIP-SPI"] = "HmIP-SPI";
 DEV_PATHS["HmIP-SPI"] = new Object();
@@ -2081,6 +2105,17 @@ DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
 DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
 DEV_HIGHLIGHT["HM-LC-Dim1L-Pl-644"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HmIP-LSS');
+DEV_DESCRIPTION["HmIP-LSS"] = "HmIP-LSS";
+DEV_PATHS["HmIP-LSS"] = new Object();
+DEV_PATHS["HmIP-LSS"]["50"] = "/config/img/devices/50/unknown_device_thumb.png";
+DEV_PATHS["HmIP-LSS"]["250"] = "/config/img/devices/250/unknown_device.png";
+DEV_HIGHLIGHT["HmIP-LSS"] = new Object();
+DEV_HIGHLIGHT["HmIP-LSS"]["Icon"] = [3, 0.092, 0.6, 'Icon_folgt', 0.14, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HmIP-LSS"]["1_channel"] = [3, 0.44, 0.232, '1', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HmIP-LSS"]["1"] = [5, '1_channel', 'Icon'];
+DEV_HIGHLIGHT["HmIP-LSS"]["2_channel"] = [3, 0.44, 0.232, '2', 0.18, 'verdana', Font.BOLD];
+DEV_HIGHLIGHT["HmIP-LSS"]["2"] = [5, '2_channel', 'Icon'];
 DEV_LIST.push('HmIP-MOD-TM');
 DEV_DESCRIPTION["HmIP-MOD-TM"] = "HmIP-MOD-TM";
 DEV_PATHS["HmIP-MOD-TM"] = new Object();
@@ -2793,7 +2828,7 @@ DEV_HIGHLIGHT["HmIP-SMI55-2"] = new Object();
 DEV_HIGHLIGHT["HmIP-SMI55-2"]["2"] = [4, 0.540, 0.188, 0.04, 0.044];
 DEV_HIGHLIGHT["HmIP-SMI55-2"]["1"] = [4, 0.540, 0.820, 0.04, 0.044];
 DEV_LIST.push('HmIP-HAP');
-DEV_DESCRIPTION["HmIP-HAP"] = "HmIP-HAP";
+DEV_DESCRIPTION["HmIP-HAP"] = "HmIP-HAP-A";
 DEV_PATHS["HmIP-HAP"] = new Object();
 DEV_PATHS["HmIP-HAP"]["50"] = "/config/img/devices/50/CCU3_thumb.png";
 DEV_PATHS["HmIP-HAP"]["250"] = "/config/img/devices/250/CCU3.png";
@@ -2854,6 +2889,12 @@ DEV_PATHS["HmIP-BWTH-A"] = new Object();
 DEV_PATHS["HmIP-BWTH-A"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
 DEV_PATHS["HmIP-BWTH-A"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
 DEV_HIGHLIGHT["HmIP-BWTH-A"] = new Object();
+DEV_LIST.push('HmIP-ESI');
+DEV_DESCRIPTION["HmIP-ESI"] = "HmIP-ESI";
+DEV_PATHS["HmIP-ESI"] = new Object();
+DEV_PATHS["HmIP-ESI"]["50"] = "/config/img/devices/50/226_hmip-esi_thumb.png";
+DEV_PATHS["HmIP-ESI"]["250"] = "/config/img/devices/250/226_hmip-esi.png";
+DEV_HIGHLIGHT["HmIP-ESI"] = new Object();
 DEV_LIST.push('HmIP-STV');
 DEV_DESCRIPTION["HmIP-STV"] = "HmIP-STV";
 DEV_PATHS["HmIP-STV"] = new Object();
@@ -3133,6 +3174,12 @@ DEV_PATHS["HM-LC-Bl1-SM"] = new Object();
 DEV_PATHS["HM-LC-Bl1-SM"]["50"] = "/config/img/devices/50/6_hm-lc-bl1-sm_thumb.png";
 DEV_PATHS["HM-LC-Bl1-SM"]["250"] = "/config/img/devices/250/6_hm-lc-bl1-sm.png";
 DEV_HIGHLIGHT["HM-LC-Bl1-SM"] = new Object();
+DEV_LIST.push('HmIP-HAP');
+DEV_DESCRIPTION["HmIP-HAP"] = "HmIP-HAP-A";
+DEV_PATHS["HmIP-HAP"] = new Object();
+DEV_PATHS["HmIP-HAP"]["50"] = "/config/img/devices/50/CCU3_thumb.png";
+DEV_PATHS["HmIP-HAP"]["250"] = "/config/img/devices/250/CCU3.png";
+DEV_HIGHLIGHT["HmIP-HAP"] = new Object();
 DEV_LIST.push('HmIP-PSM-2');
 DEV_DESCRIPTION["HmIP-PSM-2"] = "PSM";
 DEV_PATHS["HmIP-PSM-2"] = new Object();
@@ -3471,6 +3518,18 @@ DEV_PATHS["HmIP-STE2-PCB"] = new Object();
 DEV_PATHS["HmIP-STE2-PCB"]["50"] = "/config/img/devices/50/210_hmip-ste2-pcb_thumb.png";
 DEV_PATHS["HmIP-STE2-PCB"]["250"] = "/config/img/devices/250/210_hmip-ste2-pcb.png";
 DEV_HIGHLIGHT["HmIP-STE2-PCB"] = new Object();
+DEV_LIST.push('HmIP-STH-A');
+DEV_DESCRIPTION["HmIP-STH-A"] = "STH";
+DEV_PATHS["HmIP-STH-A"] = new Object();
+DEV_PATHS["HmIP-STH-A"]["50"] = "/config/img/devices/50/146_hmip-sth_thumb.png";
+DEV_PATHS["HmIP-STH-A"]["250"] = "/config/img/devices/250/146_hmip-sth.png";
+DEV_HIGHLIGHT["HmIP-STH-A"] = new Object();
+DEV_LIST.push('HmIPW-STHD-A');
+DEV_DESCRIPTION["HmIPW-STHD-A"] = "HmIPW-STHD";
+DEV_PATHS["HmIPW-STHD-A"] = new Object();
+DEV_PATHS["HmIPW-STHD-A"]["50"] = "/config/img/devices/50/147_hmip-sthd_thumb.png";
+DEV_PATHS["HmIPW-STHD-A"]["250"] = "/config/img/devices/250/147_hmip-sthd.png";
+DEV_HIGHLIGHT["HmIPW-STHD-A"] = new Object();
 DEV_LIST.push('HM-Sec-Key-O');
 DEV_DESCRIPTION["HM-Sec-Key-O"] = "HM-Sec-Key-O";
 DEV_PATHS["HM-Sec-Key-O"] = new Object();
@@ -3515,6 +3574,12 @@ DEV_PATHS["HM-TC-IT-WM-W-EU"] = new Object();
 DEV_PATHS["HM-TC-IT-WM-W-EU"]["50"] = "/config/img/devices/50/96_hm-tc-it-wm-w-eu_thumb.png";
 DEV_PATHS["HM-TC-IT-WM-W-EU"]["250"] = "/config/img/devices/250/96_hm-tc-it-wm-w-eu.png";
 DEV_HIGHLIGHT["HM-TC-IT-WM-W-EU"] = new Object();
+DEV_LIST.push('HmIPW-STH-A');
+DEV_DESCRIPTION["HmIPW-STH-A"] = "HmIPW-STH";
+DEV_PATHS["HmIPW-STH-A"] = new Object();
+DEV_PATHS["HmIPW-STH-A"]["50"] = "/config/img/devices/50/146_hmip-sth_thumb.png";
+DEV_PATHS["HmIPW-STH-A"]["250"] = "/config/img/devices/250/146_hmip-sth.png";
+DEV_HIGHLIGHT["HmIPW-STH-A"] = new Object();
 DEV_LIST.push('HM-Sec-Key-S');
 DEV_DESCRIPTION["HM-Sec-Key-S"] = "HM-Sec-Key-S";
 DEV_PATHS["HM-Sec-Key-S"] = new Object();
@@ -3960,6 +4025,12 @@ DEV_PATHS["HM-LC-Dim1L-CV-644"] = new Object();
 DEV_PATHS["HM-LC-Dim1L-CV-644"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
 DEV_PATHS["HM-LC-Dim1L-CV-644"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
 DEV_HIGHLIGHT["HM-LC-Dim1L-CV-644"] = new Object();
+DEV_LIST.push('HmIP-DLD-S');
+DEV_DESCRIPTION["HmIP-DLD-S"] = "HmIP-DLD";
+DEV_PATHS["HmIP-DLD-S"] = new Object();
+DEV_PATHS["HmIP-DLD-S"]["50"] = "/config/img/devices/50/214_hmip-dld_thumb.png";
+DEV_PATHS["HmIP-DLD-S"]["250"] = "/config/img/devices/250/214_hmip-dld.png";
+DEV_HIGHLIGHT["HmIP-DLD-S"] = new Object();
 DEV_LIST.push('HmIP-WTH-A');
 DEV_DESCRIPTION["HmIP-WTH-A"] = "HmIP-WTH-2";
 DEV_PATHS["HmIP-WTH-A"] = new Object();
@@ -3972,6 +4043,12 @@ DEV_PATHS["263 132"] = new Object();
 DEV_PATHS["263 132"]["50"] = "/config/img/devices/50/2_hm-lc-dim1l-cv_thumb.png";
 DEV_PATHS["263 132"]["250"] = "/config/img/devices/250/2_hm-lc-dim1l-cv.png";
 DEV_HIGHLIGHT["263 132"] = new Object();
+DEV_LIST.push('HmIP-STHD-A');
+DEV_DESCRIPTION["HmIP-STHD-A"] = "HmIP-STHD";
+DEV_PATHS["HmIP-STHD-A"] = new Object();
+DEV_PATHS["HmIP-STHD-A"]["50"] = "/config/img/devices/50/147_hmip-sthd_thumb.png";
+DEV_PATHS["HmIP-STHD-A"]["250"] = "/config/img/devices/250/147_hmip-sthd.png";
+DEV_HIGHLIGHT["HmIP-STHD-A"] = new Object();
 DEV_LIST.push('HM-Sec-RHS');
 DEV_DESCRIPTION["HM-Sec-RHS"] = "HM-Sec-RHS";
 DEV_PATHS["HM-Sec-RHS"] = new Object();
@@ -5042,9 +5119,24 @@ elvST['EMERGENCY_OPERATION=TRUE'] = '${stringTableEmergencyOperationTrue}';
 elvST['ENABLE_ROUTING'] = '${stringTableEnableRouting}';
 elvST['ENERGIE_METER_TRANSMITTER|AVERAGING'] = '${stringTablePowerMeterAveraging}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
+elvST['ENERGIE_METER_TRANSMITTER|POWER'] = '${stringTablePowerMeterPower}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=NORMAL'] = '${lblStatus} ${chType_POWERMETER}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=0'] = '${lblStatus} ${chType_POWERMETER}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=UNKNOWN'] = '${lblStatus} ${chType_POWERMETER}: ${lblUnknown}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=1'] = '${lblStatus} ${chType_POWERMETER}: ${lblUnknown}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=OVERFLOW'] = '${lblStatus} ${chType_POWERMETER}: ${lblOverflow}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=2'] = '${lblStatus} ${chType_POWERMETER}: ${lblOverflow}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=FALSE'] = '${stringTablePowerMeterOverflowFalse}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_OVERFLOW=TRUE'] = '${stringTablePowerMeterOverflowTrue}';
 elvST['ENERGIE_METER_TRANSMITTER|FREQUENCY'] = '${stringTablePowerMeterFrequency}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_FLOW'] = '${stringTablePowerMeterGasFlow}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_FLOW_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterGasFlow}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_FLOW_STATUS=UNKNOWN'] = '${lblValue} ${stringTablePowerMeterGasFlow}: ${lblUnknown}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_FLOW_STATUS=OVERFLOW'] = '${lblValue} ${stringTablePowerMeterGasFlow}: ${lblOverflow}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_VOLUME'] = '${stringTablePowerMeterGasVolume}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_VOLUME_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterGasVolume}: ${lblNormal}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_VOLUME_STATUS=UNKNOWN'] = '${lblValue} ${stringTablePowerMeterGasVolume}: ${lblUnknown}';
+elvST['ENERGIE_METER_TRANSMITTER|GAS_VOLUME_STATUS=OVERFLOW'] = '${lblValue} ${stringTablePowerMeterGasVolume}: ${lblOverflow}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER'] = '${stringTablePowerMeterPower}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=NORMAL'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER_STATUS=0'] = '${lblValue} ${stringTablePowerMeterPower}: ${lblNormal}';
@@ -5067,6 +5159,9 @@ elvST['ERROR_CODE'] = '${stringTableErrorCode}';
 elvST['ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR'] = '${stringTableErrorCommunicationParticulateMatterSensor}';
 elvST['ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR=FALSE'] = '${stringTableErrorCommunicationParticulateMatterSensorFalse}';
 elvST['ERROR_COMMUNICATION_PARTICULATE_MATTER_SENSOR=TRUE'] = '${stringTableErrorCommunicationParticulateMatterSensorTrue}';
+elvST['ERROR_COMMUNICATION_SENSOR'] = '${stringTableErrorCommunicationSensor}';
+elvST['ERROR_COMMUNICATION_SENSOR=TRUE'] = '${stringTableErrorCommunicationSensorTrue}';
+elvST['ERROR_COMMUNICATION_SENSOR=FALSE'] = '${stringTableErrorCommunicationSensorFalse}';
 elvST['ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR'] = '${stringTableErrorCommunicationTempAndHumiditySensor}';
 elvST['ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=FALSE'] = '${stringTableErrorCommunicationTempAndHumiditySensorFalse}';
 elvST['ERROR_COMMUNICATION_TEMP_AND_HUMIDITY_SENSOR=TRUE'] = '${stringTableErrorCommunicationTempAndHumiditySensorTrue}';
@@ -5476,6 +5571,7 @@ elvST['MAINTENANCE|SABOTAGE'] = '${stringTableSabotage}';
 elvST['MAINTENANCE|SABOTAGE_STICKY'] = '${stringTableSabotageSticky}';
 elvST['MAINTENANCE|SABOTAGE_STICKY=FALSE'] = '${stringTableSabotageStickyFalse}';
 elvST['MAINTENANCE|SABOTAGE_STICKY=TRUE'] = '${stringTableSabotageStickyTrue}';
+elvST['MAINTENANCE|SENSOR_ERROR'] = '${stringTableSensorError}';
 elvST['MAINTENANCE|STICKY_BATTERY=BATTERY_DEFECT'] = '${stringTableBatteryFailure}';
 elvST['MAINTENANCE|STICKY_BATTERY=BATTERY_WAS_DEFECT'] = '${stringTableBatteryWasDefect}';
 elvST['MAINTENANCE|STICKY_POWER=POWER_FAILURE'] = '${stringTablePowerNotAvailable}';
@@ -5509,6 +5605,12 @@ elvST['MAINTENANCE|USER_AUTHORIZATION_08'] = '${stringTableUserAuthorization08}'
 elvST['MAINTENANCE|USER_AUTHORIZATION_08=FALSE'] = '${stringTableUserAuthorization08false}';
 elvST['MAINTENANCE|USER_AUTHORIZATION_08=TRUE'] = '${stringTableUserAuthorization08true}';
 elvST['MANU_MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
+elvST['MEASURED_VALUE'] = '${lblReading}';
+elvST['MEASURED_VALUE_STATUS=ERROR'] = '${lblReading}: ${lblError}';
+elvST['MEASURED_VALUE_STATUS=NORMAL'] = '${lblReading}: ${lblNormal}';
+elvST['MEASURED_VALUE_STATUS=OVERFLOW'] = '${lblReading}: ${lblOverflow}';
+elvST['MEASURED_VALUE_STATUS=UNDERFLOW'] = '${lblReading}: ${lblUnderflow}';
+elvST['MEASURED_VALUE_STATUS=UNKNOWN'] = '${lblReading}: ${lblUnknown}';
 elvST['MIN_MAX_VALUE_NOT_RELEVANT_FOR_MANU_MODE'] = '${stringTableMinMaxNotRelevantForManuMode}';
 elvST['MIOB_DIN_CONFIG'] = '${stringTableMiobDinConfig}';
 elvST['MOD_EM8BIT_TRANSMITTER'] = '${stringTable8BitTransmitterTitle}';
@@ -12202,7 +12304,7 @@ ChannelChooser = Singleton.create({
 
   filterHmIPChannels4ProgramConditions: function(channel, arChannels) {
     var channelTypeName = channel.typeName.toLowerCase(),
-    oDevice, oMaintChannel, deviceMode, endOfScreens = false;
+      oDevice, oMaintChannel, deviceMode, endOfScreens = false;
 
     conInfo("filterHmIPChannels4ProgramConditions");
     // If the channel is visible and no KEY_TRANSCEIVER or *_WEEK_PROFILE then show the channel
@@ -12212,8 +12314,11 @@ ChannelChooser = Singleton.create({
       && (channel.channelType != "DISPLAY_INPUT_TRANSMITTER")
       && (channel.channelType != "DISPLAY_LEVEL_INPUT_TRANSMITTER")
       && (channel.channelType != "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")
+      && (channel.channelType != "MULTI_MODE_INPUT_TRANSMITTER")
       && (channel.channelType.indexOf("_WEEK_PROFILE") == -1)
-      ) { arChannels.push(channel);}
+    ) {
+      arChannels.push(channel);
+    }
 
     // If the channel is a KEY_TRANSCEIVER and the device type no HmIP-PS / PSM (-IT/-CH/-PE/-UK) / PDT /PCBS then show the channel
     // A key press of the internal button doesn't work for the above-named devices
@@ -12224,7 +12329,9 @@ ChannelChooser = Singleton.create({
       && (channelTypeName != "hmip-pdt")
       && (channelTypeName != "hmip-pdt-uk")
       && (channelTypeName != "hmip-pcbs")
-      ) {arChannels.push(channel);}
+    ) {
+      arChannels.push(channel);
+    }
 
     if (channel.channelType == "UNIVERSAL_LIGHT_RECEIVER") {
       if (channelTypeName == "hmip-rgbw") {
@@ -12257,24 +12364,24 @@ ChannelChooser = Singleton.create({
       if (channelTypeName == "hmip-drg-dali") {
         if ((channel.index != 0) && (channel.index <= 32)) {
           // Dali channels 1 - 32
-        if (this.noMoreDaliChannels == false) {
-          chnDescription = homematic("Interface.getParamset", {
-            "interface": "HmIP-RF",
-            "address": channel.address,
-            "paramsetKey": "MASTER"
-          });
+          if (this.noMoreDaliChannels == false) {
+            chnDescription = homematic("Interface.getParamset", {
+              "interface": "HmIP-RF",
+              "address": channel.address,
+              "paramsetKey": "MASTER"
+            });
 
-          if (parseInt(chnDescription["DALI_ADDRESS"]) != 255) {
-            arChannels.push(channel);
-            // Store UNIVERSAL_LIGHT_MAX_CAPABILITIES as meta data
-            // Because the user might have connected another DALI device to this channel we must set the meta data each time
-            //this is not necessary anymore - this.setMetaData(channel.id, "maxCap", chnDescription["UNIVERSAL_LIGHT_MAX_CAPABILITIES"]);
-           } else {
-            this.noMoreDaliChannels = true;
+            if (parseInt(chnDescription["DALI_ADDRESS"]) != 255) {
+              arChannels.push(channel);
+              // Store UNIVERSAL_LIGHT_MAX_CAPABILITIES as meta data
+              // Because the user might have connected another DALI device to this channel we must set the meta data each time
+              //this is not necessary anymore - this.setMetaData(channel.id, "maxCap", chnDescription["UNIVERSAL_LIGHT_MAX_CAPABILITIES"]);
+            } else {
+              this.noMoreDaliChannels = true;
+            }
           }
-        }
 
-        } else if ((channel.index == 0) || (channel.id >=33)) {
+        } else if ((channel.index == 0) || (channel.id >= 33)) {
           // Maintenance and group channels
           arChannels.push(channel);
         }
@@ -12282,7 +12389,8 @@ ChannelChooser = Singleton.create({
     }
 
     if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) && ((channelTypeName == "hmipw-wgd") || (channelTypeName == "hmipw-wgd-pl"))) {
-      var  wgdScreenOrder, screenEndID = "END",  counter, chnDescription, curDevice, tilesA = [1,3,7], tilesB = [0,1], loop,
+      var wgdScreenOrder, screenEndID = "END", counter, chnDescription, curDevice, tilesA = [1, 3, 7], tilesB = [0, 1],
+        loop,
         self = this;
       if (channel.index == 41) {
         arChannels.push(channel);
@@ -12293,25 +12401,37 @@ ChannelChooser = Singleton.create({
           oDevice = DeviceList.getDeviceByAddress(channel.address.split(":")[0]); // The device stores the screen order
           wgdScreenOrder = homematic("Interface.getMetadata", {"objectId": oDevice.id, "dataId": "screenOrder"});
           this.arWGDScreenOrder = wgdScreenOrder.split(",");
-          this.WGDStartChannelPerScreen = (this.arWGDScreenOrder.length < 10) ? {0: 1, 1: 9, 2: 17, 3: 25, 4: 33} : {0: 1, 1: 9, 2: 17, 3: 25, 4: 33, 5: 42, 6: 44, 7: 46, 8: 48, 9: 50};
+          this.WGDStartChannelPerScreen = (this.arWGDScreenOrder.length < 10) ? {
+            0: 1,
+            1: 9,
+            2: 17,
+            3: 25,
+            4: 33
+          } : {0: 1, 1: 9, 2: 17, 3: 25, 4: 33, 5: 42, 6: 44, 7: 46, 8: 48, 9: 50};
           this.WGDChannelInUse = [];
           this.arWGDTiles = [];
 
           // Get number of tiles
-          chnDescription = homematic("Interface.getParamset", {"interface": "HmIP-RF", "address": curDevice + ":0", "paramsetKey": "MASTER"});
+          chnDescription = homematic("Interface.getParamset", {
+            "interface": "HmIP-RF",
+            "address": curDevice + ":0",
+            "paramsetKey": "MASTER"
+          });
           loop = ((this.arWGDScreenOrder.length < 10)) ? 5 : 10;
 
-          for(var loopx = 1; loopx <= loop; loopx++) {
+          for (var loopx = 1; loopx <= loop; loopx++) {
             this.arWGDTiles.push(chnDescription["SCREEN_LAYOUT_TILE_LAYOUT_" + loopx]);
           }
 
-          jQuery.each(this.arWGDScreenOrder, function(index,screen) {
-            if ((! endOfScreens) && (screen != screenEndID)) {
+          jQuery.each(this.arWGDScreenOrder, function (index, screen) {
+            if ((!endOfScreens) && (screen != screenEndID)) {
               counter = (screen <= 4) ? tilesA[self.arWGDTiles[screen]] : tilesB[self.arWGDTiles[screen]];
               for (loop = self.WGDStartChannelPerScreen[screen]; loop <= (self.WGDStartChannelPerScreen[screen] + counter); loop++) {
                 self.WGDChannelInUse.push(loop);
               }
-            } else {endOfScreens = true;} // return false doesn't work because of a problem with the build-system
+            } else {
+              endOfScreens = true;
+            } // return false doesn't work because of a problem with the build-system
           });
         }
 
@@ -12320,7 +12440,22 @@ ChannelChooser = Singleton.create({
         }
       }
     }
-    return arChannels;
+
+    if (channel.channelType == "MULTI_MODE_INPUT_TRANSMITTER") {
+      if (channelTypeName == "elv-sh-bm-s") {
+        var channelMode = parseInt(homematic("Interface.getMetadata", {
+          "objectId": channel.id,
+          "dataId": "channelMode"
+        }));
+        if (channelMode != 0) {
+          arChannels.push(channel);
+        }
+      } else {
+        arChannels.push(channel);
+      }
+      return arChannels;
+    }
+
   },
 
   filterHmIPChannels4ProgramActivities: function(channel, arChannels) {
@@ -12387,6 +12522,11 @@ ChannelChooser = Singleton.create({
           }
         }
 
+        if ((channelTypeName == "hmip-lss") && (channel.index == 1)) {
+          arChannels.push(channel);
+        }
+
+
       } else if (((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_LEVEL_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER")) && ((channelTypeName == "hmipw-wgd") || (channelTypeName == "hmipw-wgd-pl"))) {
         var  wgdScreenOrder, screenEndID = "END",  counter, chnDescription, curDevice, tilesA = [1,3,7], tilesB = [0,1], loop,
           self = this;
@@ -12426,7 +12566,9 @@ ChannelChooser = Singleton.create({
           }
         }
       } else {
-        arChannels.push(channel);
+        if (channelTypeName != "hmip-esi") {
+          arChannels.push(channel);
+        }
       }
     }
     return arChannels;
@@ -13510,6 +13652,135 @@ DeviceConfigDialog = Singleton.create({
  * deletedevicedialog.js
  **/
 
+hasDeviceInternalProgramOrSysvar  = function(device) {
+  var result = {"id": 0, "address" : "", "type": "" };
+  try {
+    jQuery.each(device.channels, function(index, channel) {
+      if (
+        (channel.channelType == "POWERMETER")
+        || (channel.channelType == "POWERMETER_IEC1")
+        || (channel.channelType == "ENERGIE_METER_TRANSMITTER")
+        || (channel.channelType == "WEATHER_TRANSMIT" /*HmIP-SWO*/)
+        || (channel.channelType == "KEY_TRANSCEIVER") /*HnmIP-MOD-RC8*/
+      ) {
+        result.id = channel.id;
+        result.address = channel.address;
+        result.type = channel.channelType;
+        return; // leave each loop
+      }
+    });
+  } catch(e) {}
+
+  return result;
+};
+
+deleteProgSysvarPOWERMETER = function(chId, chAddress) {
+  try {
+    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress}, function () {
+      homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterOldVal_" + chId}, function () {
+        homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_RESET"}, function () {
+          homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
+            homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
+              homematic("Program.deleteProgramByName", {"name": "prgEnergyCounter_" + chId + "_" + chAddress}, function () {
+                conInfo(chAddress + " ProgSysvarPOWERMETER deleted - next: save ObjectModel");
+                window.setTimeout(function(){saveObjectModel();},5000);
+              });
+            });
+          });
+        });
+      });
+    });
+  } catch(e) {console.log(e);}
+};
+
+deleteProgSysvarPOWERMETER_ESI = function(device) {
+  try {
+    jQuery.each(device.channels, function (index, chn) {
+      if (chn.index >= 1) {
+        homematic("Program.deleteProgramByName", {"name": "prgEnergyCounter_" + chn.id + "_" + chn.address});
+        homematic("Program.deleteProgramByName", {"name": "prgGasCounter_" + chn.id + "_" + chn.address});
+        homematic("Program.deleteProgramByName", {"name": "prgSetEnergyValuesAtMidnight" + chn.id});
+        homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chn.id + "_" + chn.address});
+        homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterOldVal_" + chn.id});
+      }
+    });
+  } catch(e) {console.log(e);}
+
+  conInfo(device.typeName + ": All relevant programs and sysvars deleted - next: save ObjectModel");
+  window.setTimeout(function(){saveObjectModel();},5000);
+};
+
+
+deleteProgSysvarPOWERMETER_IGL = function(chId, chAddress) {
+  try {
+    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress}, function () {
+      homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGasOldVal_" + chId}, function () {
+        homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_RESET"}, function () {
+          homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
+            homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
+              homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterGAS_" + chId + "_" + chAddress}, function () {
+                conInfo(chAddress + " ProgSysvarPOWERMETER_IGL deleted - next: ProgSysvarPOWERMETER");
+                deleteProgSysvarPOWERMETER(chId, chAddress);
+              });
+            });
+          });
+        });
+      });
+    });
+  } catch(e) {console.log(e);}
+};
+
+deleteProgSysvarPOWERMETER_IEC = function(chId, chAddress) {
+  try {
+    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
+      homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIECOldVal_" + chId}, function () {
+        homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
+          conInfo(chAddress + " ProgSysvarPOWERMETER_IEC deleted - next: ProgSysvarPOWERMETER_IGL");
+          deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
+        });
+      });
+    });
+  } catch(e) {console.log(e);}
+};
+
+deleteProgSysvarHmIPWeatherTransmitRainSunshine = function(chId, chAddress) {
+  try {
+    homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounter_" + chId + "_" + chAddress}, function () {
+      homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounterOldVal_" + chId}, function () {
+        homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounterYesterday_" + chId}, function () {
+          homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounterToday_" + chId}, function () {
+            homematic("Program.deleteProgramByName", {"name": "prgRainCounter_" + chId + "_" + chAddress}, function () {
+              homematic("Program.deleteProgramByName", {"name": "prgDailySunshineRainCounter_" + chId}, function () {
+                conInfo(chAddress + "prgDailySunshineRainCounter and prgHmIPRainCounter deleted - next: delete prgHmIPSunshineCounter");
+                deleteProgSysvarHmIPWeatherTransmitSunshine(chId,chAddress);
+              });
+            });
+          });
+        });
+      });
+    });
+  } catch(e) {console.log(e);}
+};
+
+deleteProgSysvarHmIPWeatherTransmitSunshine = function(chId, chAddress) {
+  try {
+    homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounter_" + chId + "_" + chAddress}, function () {
+      homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounterOldVal_" + chId}, function () {
+        homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounterYesterday_" + chId}, function () {
+          homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounterToday_" + chId}, function () {
+            homematic("Program.deleteProgramByName", {"name": "prgSunshineCounter_" + chId + "_" + chAddress}, function () {
+              conInfo(chAddress + " prgHmIPSunshineCounter deleted - next: save ObjectModel");
+              window.setTimeout(function () {
+                saveObjectModel();
+              }, 5000);
+            });
+          });
+        });
+      });
+    });
+  } catch(e) {console.log(e);}
+};
+
 
 /**
  * Ablauf:
@@ -13790,6 +14061,37 @@ DeleteDeviceWindow = Class.create({
     Layer.add(this.m_layer);
 
     device.remove(this.m_flags, onResultHandler);
+
+    if (flags == 5) {
+      // Prüfen, ob ein Kanal des Gerätes ein HmIP-Wettersensor ist, als Energy-Counter oder ob das Gerät ein HmIP-MOD-RC8 ist dient.
+      // Wenn ja, müssen beim Löschen die dazugehörigen Systemvariablen
+      // sowie das enstprechende Systemprogramm zum aktualisieren der Systemvariablen entfernt werden.
+      var oChnIdAndAddress = hasDeviceInternalProgramOrSysvar(this.m_device),
+        chId = oChnIdAndAddress.id,
+        chAddress= oChnIdAndAddress.address;
+      if (chId != 0) {
+        if (oChnIdAndAddress.type == "POWERMETER" || oChnIdAndAddress.type == "ENERGIE_METER_TRANSMITTER") {
+          if (this.m_device.typeName.toLowerCase() != "hmip-esi") {
+            deleteProgSysvarPOWERMETER(chId, chAddress);
+          } else {
+            deleteProgSysvarPOWERMETER_ESI(this.m_device);
+          }
+        } else if (oChnIdAndAddress.type == "POWERMETER_IGL")  {
+          deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
+        } else if (oChnIdAndAddress.type == "POWERMETER_IEC1") {
+          deleteProgSysvarPOWERMETER_IEC(chId, chAddress);
+        } else if ((this.m_device.typeName.toLowerCase() == "hmip-swo-b") && (oChnIdAndAddress.type == "WEATHER_TRANSMIT")) {
+          deleteProgSysvarHmIPWeatherTransmitSunshine(chId, chAddress);
+        } else if (((this.m_device.typeName.toLowerCase() == "hmip-swo-pl") || (this.m_device.typeName.toLowerCase() == "hmip-swo-pr"))  && (oChnIdAndAddress.type == "WEATHER_TRANSMIT"))  {
+          deleteProgSysvarHmIPWeatherTransmitRainSunshine(chId, chAddress);
+        } /*currently not in use else if (this.m_device.typeName.toLowerCase() == "hmip-mod-rc8") {
+          this.m_deleteSysvarHmIPModRC8();
+        }*/
+      } else if ((typeof this.m_device.typeName != "undefined") && (this.m_device.typeName.toLowerCase() == "hmipw-drbl4")) {
+        this.m_deleteMetaDataHmIPWBlind();
+      }
+    }
+
   },
   
   m_onResult: function(result, error)
@@ -13942,7 +14244,37 @@ ErrorOnDeleteWindow = Class.create({
     }
 
     Layer.remove(this.m_layer);
-    
+
+    if (result == null && this.m_flags == 1 && this.m_errorCode == 507) {
+      // Prüfen, ob ein Kanal des Gerätes ein HmIP-Wettersensor ist, als Energy-Counter oder ob das Gerät ein HmIP-MOD-RC8 ist dient.
+      // Wenn ja, müssen beim Löschen die dazugehörigen Systemvariablen
+      // sowie das enstprechende Systemprogramm zum aktualisieren der Systemvariablen entfernt werden.
+      var oChnIdAndAddress = hasDeviceInternalProgramOrSysvar(this.m_device),
+        chId = oChnIdAndAddress.id,
+        chAddress= oChnIdAndAddress.address;
+      if (chId != 0) {
+        if (oChnIdAndAddress.type == "POWERMETER" || oChnIdAndAddress.type == "ENERGIE_METER_TRANSMITTER") {
+          if (this.m_device.typeName.toLowerCase() != "hmip-esi") {
+            deleteProgSysvarPOWERMETER(chId, chAddress);
+          } else {
+            deleteProgSysvarPOWERMETER_ESI(this.m_device);
+          }
+        } else if (oChnIdAndAddress.type == "POWERMETER_IGL")  {
+          deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
+        } else if (oChnIdAndAddress.type == "POWERMETER_IEC1") {
+          deleteProgSysvarPOWERMETER_IEC(chId, chAddress);
+        } else if ((this.m_device.typeName.toLowerCase() == "hmip-swo-b") && (oChnIdAndAddress.type == "WEATHER_TRANSMIT")) {
+          deleteProgSysvarHmIPWeatherTransmitSunshine(chId, chAddress);
+        } else if (((this.m_device.typeName.toLowerCase() == "hmip-swo-pl") || (this.m_device.typeName.toLowerCase() == "hmip-swo-pr"))  && (oChnIdAndAddress.type == "WEATHER_TRANSMIT"))  {
+          deleteProgSysvarHmIPWeatherTransmitRainSunshine(chId, chAddress);
+        } /*currently not in use else if (this.m_device.typeName.toLowerCase() == "hmip-mod-rc8") {
+          this.m_deleteSysvarHmIPModRC8();
+        }*/
+      } else if ((typeof this.m_device.typeName != "undefined") && (this.m_device.typeName.toLowerCase() == "hmipw-drbl4")) {
+        this.m_deleteMetaDataHmIPWBlind();
+      }
+    }
+
     if (this.m_callback) { this.m_callback(result); }
   },
   
@@ -13965,21 +14297,6 @@ ErrorOnDeleteWindow = Class.create({
 
 ErrorOnDeleteWindow.CONTENT_WIDTH = 400;
 ErrorOnDeleteWindow.CONTENT_HEIGHT = 260;
-/*
-ErrorOnDeleteWindow.TITLE = translateKey("ErrorOnDeleteWindowTitle");
-ErrorOnDeleteWindow.DELETE_OPTIONS = translateKey("ErrorOnDeleteWindowDeleteOptions");
-ErrorOnDeleteWindow.RETRY = translateKey("ErrorOnDeleteWindowRetry");
-ErrorOnDeleteWindow.RETRY_DESCRIPTION = translateKey("ErrorOnDeleteWindowRetryDescription");
-ErrorOnDeleteWindow.DEFER = translateKey("ErrorOnDeleteWindowDefer");
-ErrorOnDeleteWindow.DEFER_DESCRIPTION = translateKey("ErrorOnDeleteWindowDeferDescription");
-ErrorOnDeleteWindow.FORCE = translateKey("ErrorOnDeleteWindowForce");
-ErrorOnDeleteWindow.FORCE_DESCRIPTION = translateKey("ErrorOnDeleteWindowForceDescription");
-ErrorOnDeleteWindow.DEVICE_NOT_REACHABLE = translateKey("ErrorOnDeleteWindowDeviceNotReachable");
-ErrorOnDeleteWindow.UNKNOWN_DEVICE = translateKey("ErrorOnDeleteWindowUnknownDevice");
-ErrorOnDeleteWindow.UKNOWN_ERROR = translateKey("ErrorOnDeleteWindowUnknownError");
-ErrorOnDeleteWindow.ABORT_BUTTON = translateKey("ErrorOnDeleteWindowAbortButton");
-ErrorOnDeleteWindow.DELETE_BUTTON = translateKey("ErrorOnDeleteWindowDeleteButton");
-*/
 
 /**
  * Dialogbox zum Löschen eines Geräts
@@ -14024,108 +14341,6 @@ DeleteDeviceDialog = Class.create({
     }
   },
 
-  m_hasDeviceInternalProgramOrSysvar: function() {
-    var result = {"id": 0, "address" : "", "type": "" };
-    try {
-      jQuery.each(this.m_device.channels, function(index, channel) {
-        if (
-          (channel.channelType == "POWERMETER")
-          || (channel.channelType == "POWERMETER_IEC1")
-          || (channel.channelType == "ENERGIE_METER_TRANSMITTER")
-          || (channel.channelType == "WEATHER_TRANSMIT" /*HmIP-SWO*/)
-          || (channel.channelType == "KEY_TRANSCEIVER") /*HnmIP-MOD-RC8*/
-          ) {
-          result.id = channel.id;
-          result.address = channel.address;
-          result.type = channel.channelType;
-          return; // leave each loop
-        }
-      });
-    } catch(e) {}
-
-    return result;
-  },
-
-  m_deleteProgSysvarPOWERMETER: function(chId, chAddress) {
-    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress}, function () {
-      homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterOldVal_" + chId}, function () {
-        homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_RESET"}, function () {
-          homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
-            homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
-              homematic("Program.deleteProgramByName", {"name": "prgEnergyCounter_" + chId + "_" + chAddress}, function () {
-                conInfo(chAddress + " ProgSysvarPOWERMETER deleted - next: save ObjectModel");
-                window.setTimeout(function(){saveObjectModel();},5000);
-              });
-            });
-          });
-        });
-      });
-    });
-  },
-
-  m_deleteProgSysvarPOWERMETER_IGL: function(chId, chAddress) {
-    var self = this;
-    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress}, function () {
-      homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGasOldVal_" + chId}, function () {
-        homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_RESET"}, function () {
-          homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
-            homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterGas_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
-              homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterGAS_" + chId + "_" + chAddress}, function () {
-                conInfo(chAddress + " ProgSysvarPOWERMETER_IGL deleted - next: ProgSysvarPOWERMETER");
-                self.m_deleteProgSysvarPOWERMETER(chId, chAddress);
-              });
-            });
-          });
-        });
-      });
-    });
-  },
-
-  m_deleteProgSysvarPOWERMETER_IEC: function(chId, chAddress) {
-    var self = this;
-    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
-      homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterIECOldVal_" + chId}, function () {
-        homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterIEC_" + chId + "_" + chAddress}, function () {
-          conInfo(chAddress + " ProgSysvarPOWERMETER_IEC deleted - next: ProgSysvarPOWERMETER_IGL");
-          self.m_deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
-        });
-      });
-    });
-  },
-
-  m_deleteProgSysvarHmIPWeatherTransmitRainSunshine: function(chId, chAddress) {
-    var self = this;
-    homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounter_" + chId + "_" + chAddress}, function () {
-      homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounterOldVal_" + chId}, function () {
-        homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounterYesterday_" + chId}, function () {
-          homematic("SysVar.deleteSysVarByName", {"name": "svHmIPRainCounterToday_" + chId}, function () {
-            homematic("Program.deleteProgramByName", {"name": "prgRainCounter_" + chId + "_" + chAddress}, function () {
-                homematic("Program.deleteProgramByName", {"name": "prgDailySunshineRainCounter_" + chId}, function () {
-                  conInfo(chAddress + "prgDailySunshineRainCounter and prgHmIPRainCounter deleted - next: delete prgHmIPSunshineCounter");
-                  self.m_deleteProgSysvarHmIPWeatherTransmitSunshine(chId,chAddress);
-              });
-            });
-          });
-        });
-      });
-    });
-  },
-
-  m_deleteProgSysvarHmIPWeatherTransmitSunshine: function(chId, chAddress) {
-    homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounter_" + chId + "_" + chAddress}, function () {
-      homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounterOldVal_" + chId}, function () {
-        homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounterYesterday_" + chId}, function () {
-          homematic("SysVar.deleteSysVarByName", {"name": "svHmIPSunshineCounterToday_" + chId}, function () {
-            homematic("Program.deleteProgramByName", {"name": "prgSunshineCounter_" + chId + "_" + chAddress}, function () {
-              conInfo(chAddress + " prgHmIPSunshineCounter deleted - next: save ObjectModel");
-              window.setTimeout(function(){saveObjectModel();},5000);
-            });
-          });
-        });
-      });
-    });
-  },
-
   m_deleteSysvarHmIPModRC8: function() {
     var numberOfKeyTransceiver = 8;
 
@@ -14161,20 +14376,24 @@ DeleteDeviceDialog = Class.create({
       // Prüfen, ob ein Kanal des Gerätes ein HmIP-Wettersensor ist, als Energy-Counter oder ob das Gerät ein HmIP-MOD-RC8 ist dient.
       // Wenn ja, müssen beim Löschen die dazugehörigen Systemvariablen
       // sowie das enstprechende Systemprogramm zum aktualisieren der Systemvariablen entfernt werden.
-      var oChnIdAndAddress = this.m_hasDeviceInternalProgramOrSysvar(),
+      var oChnIdAndAddress = hasDeviceInternalProgramOrSysvar(this.m_device),
         chId = oChnIdAndAddress.id,
         chAddress= oChnIdAndAddress.address;
       if (chId != 0) {
         if (oChnIdAndAddress.type == "POWERMETER" || oChnIdAndAddress.type == "ENERGIE_METER_TRANSMITTER") {
-          this.m_deleteProgSysvarPOWERMETER(chId, chAddress);
+          if (this.m_device.typeName.toLowerCase() != "hmip-esi") {
+            deleteProgSysvarPOWERMETER(chId, chAddress);
+          } else {
+            deleteProgSysvarPOWERMETER_ESI(this.m_device);
+          }
         } else if (oChnIdAndAddress.type == "POWERMETER_IGL")  {
-          this.m_deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
+          deleteProgSysvarPOWERMETER_IGL(chId, chAddress);
         } else if (oChnIdAndAddress.type == "POWERMETER_IEC1") {
-          this.m_deleteProgSysvarPOWERMETER_IEC(chId, chAddress);
+          deleteProgSysvarPOWERMETER_IEC(chId, chAddress);
         } else if ((this.m_device.typeName.toLowerCase() == "hmip-swo-b") && (oChnIdAndAddress.type == "WEATHER_TRANSMIT")) {
-          this.m_deleteProgSysvarHmIPWeatherTransmitSunshine(chId, chAddress);
+          deleteProgSysvarHmIPWeatherTransmitSunshine(chId, chAddress);
         } else if (((this.m_device.typeName.toLowerCase() == "hmip-swo-pl") || (this.m_device.typeName.toLowerCase() == "hmip-swo-pr"))  && (oChnIdAndAddress.type == "WEATHER_TRANSMIT"))  {
-          this.m_deleteProgSysvarHmIPWeatherTransmitRainSunshine(chId, chAddress);
+          deleteProgSysvarHmIPWeatherTransmitRainSunshine(chId, chAddress);
         } /*currently not in use else if (this.m_device.typeName.toLowerCase() == "hmip-mod-rc8") {
           this.m_deleteSysvarHmIPModRC8();
         }*/
@@ -20820,6 +21039,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
     this.rgbw = "HmIP-RGBW";
     this.drgDali = "HmIP-DRG-DALI";
+    this.lss = "HmIP-LSS";
 
     this.deviceType = deviceType;
     this.chnAddress = chnAddress;
@@ -20834,10 +21054,12 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
 
     this.arNoOntimeAvailable = [];
-    this.showRampTimeOffElm = [this.rgbw, this.drgDali];
+    this.showRampTimeOffElm = [this.rgbw, this.drgDali, this.lss];
 
     this.chnDescription = homematic("Interface.getParamset", {'interface': this.iface, 'address': this.chnAddress, 'paramsetKey': 'MASTER'});
-    this.maxCap = parseInt(this.chnDescription.UNIVERSAL_LIGHT_MAX_CAPABILITIES);
+    this.maxCap = (this.deviceType != this.lss) ? parseInt(this.chnDescription.UNIVERSAL_LIGHT_MAX_CAPABILITIES) : 3;
+
+
 
     this.effectModePrg = "unknown";
 
@@ -21039,7 +21261,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       self.activeDialog = "color";
     });
 
-    if ((this.deviceType == this.drgDali) || (this.deviceType == this.rgbw)) {
+    if ((this.deviceType == this.drgDali) || (this.deviceType == this.rgbw) || (this.deviceType == this.lss)) {
       this.btnColorTempDialog.click(function () {
         JControlBtn.on(jQuery(this));
         JControlBtn.off(jQuery(self.btnColorDialog));
@@ -21062,7 +21284,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       }
     }
 
-    if (this.deviceType == this.rgbw) {
+    if ((this.deviceType == this.rgbw)) {
       switch (this.maxCap) {
         case 2:
           this.btnColorDialog.hide();
@@ -21093,7 +21315,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
      effectName, effectNo,
       arEffectValue = [0,1,3,5,7,9,11,13,15,17,19];
 
-    this.effectSelBox.empty().append("<option value='0'>Effect beenden</option>");
+    this.effectSelBox.empty().append("<option value='0'>"+translateKey('optionStopEffect')+"</option>");
     for (effectNo = 1; effectNo <= 10; effectNo++) {
       effectName =  homematic("Interface.getMetadata", {"objectId": oDevice.id, "dataId": "effectName_" + effectNo});
       if ((effectName == "") || (effectName == "null")) {effectName = translateKey("lblEffect") + " " + effectNo;}
@@ -21652,7 +21874,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
     effect =  (this.effectModePrg == true)  ? (effect + 1) : effect;
 
-    if ((this.deviceType == this.drgDali) || ((this.deviceType == this.rgbw) && ((this.maxCap == 2) || (this.maxCap == 4)))) {
+    if ((this.deviceType == this.drgDali) || (this.deviceType == this.lss) || ((this.deviceType == this.rgbw) && ((this.maxCap == 2) || (this.maxCap == 4)))) {
       tempColorID = ",TC=" + colorTemperature;
       effectID = ",E=" + effect;
     }
@@ -21700,7 +21922,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       result += ",RTTOV=" + this.rampTimeOffValueElm.val() + ",RTTOU=" + this.rampTimeOffUnitElm.val();
     }
 
-    if ((this.deviceType == this.drgDali) || ((this.deviceType == this.rgbw) && ((this.maxCap == 2) || (this.maxCap == 4)))) {
+    if ((this.deviceType == this.drgDali) || (this.deviceType == this.lss) || ((this.deviceType == this.rgbw) && ((this.maxCap == 2) || (this.maxCap == 4)))) {
       result += tempColorID;
     }
 
@@ -31113,7 +31335,7 @@ writeDeviceAction = function(tdParent, includeChecks, bIsDev, bDelBtn, obj, bIsG
   tdSub = Builder.node('td');
   
   s = "";
-  if ((obj['type'] != "HmIPW-DRBL4") && (obj['type'] != "HmIP-DRBLI4") && (obj['type'] != "HmIP-RGBW") && (obj['type'] != "HmIPW-WGD") && (obj['type'] != "HmIPW-WGD-PL")) {
+  if ((obj['type'] != "HmIPW-DRBL4") && (obj['type'] != "HmIP-DRBLI4") && (obj['type'] != "HmIP-RGBW") && (obj['type'] != "HmIPW-WGD") && (obj['type'] != "HmIPW-WGD-PL") && (obj['type'] != "HmIP-ESI")) {
     if (bIsDev) {
       s = "WebUI.enter(DeviceConfigPage, {'iface': '" + obj['iface'] + "', 'address': '" + obj['sn'] + "', 'redirect_url':'GO_BACK'});";
     } else {
@@ -33173,6 +33395,20 @@ getProduct = function() {
  return WEBUI_VERSION.split(".")[0];
 };
 
+getDevFirmware = function(addr, iface) {
+  if (typeof addr == "undefined" ) {
+    return "x.y.z";
+  }
+  var iFace = (typeof iface == "undefined") ? "HmIP-RF" : iface,
+    devAddress = addr.split(":")[0],
+    devDescr = homematic("Interface.getDeviceDescription", {
+      "interface" : iFace,
+      "address" : devAddress
+    });
+
+  return devDescr.firmware;
+};
+
 showAllAPITools = function() {
   var self = this;
   var url = "/tools/HomeMatic-API.html";
@@ -33327,11 +33563,20 @@ getExtendedDescription = function(oChannelDescr) {
     if (deviceType == "HmIP-WUA" || deviceType == "ELV-SH-WUA") {
       result = translateKey("chType_UNIVERSAL_ACTOR_TRANSMITTER_010V");
     }
+
+    if (deviceType == "HmIP-BSL") {
+      result = translateKey("chType_OPTICAL_SIGNAL_RECEIVERB");
+    }
   }
 
   if (chType == "DIMMER_VIRTUAL_RECEIVER") {
     if (deviceType == "HmIP-WUA" || deviceType == "ELV-SH-WUA") {
       result = translateKey("chType_UNIVERSAL_ACTOR_VIRTUAL_RECEIVER_010V");
+    }
+
+    if (deviceType == "HmIP-BSL") {
+      // console.log("B firmware:q! " + getDevFirmware(channelAddress));
+      result = translateKey("chType_OPTICAL_SIGNAL_RECEIVER");
     }
   }
 
@@ -33490,13 +33735,13 @@ getExtendedDescription = function(oChannelDescr) {
   }
 
   if (chType == "ACCESS_RECEIVER") {
-    if (deviceType.toLowerCase() == "hmip-dld") {
+    if ((deviceType.toLowerCase() == "hmip-dld") || (deviceType.toLowerCase() == "hmip-dld-a") || (deviceType.toLowerCase() == "hmip-dld-s")  ) {
       result = translateKey("chType_ACCESS_RECEIVER") + " " + (channelIndex - 1);
     }
   }
 
   if (chType == "DOOR_LOCK_STATE_TRANSMITTER") {
-    if (deviceType.toLowerCase() == "hmip-dld") {
+    if ((deviceType.toLowerCase() == "hmip-dld") || (deviceType.toLowerCase() == "hmip-dld-a") || (deviceType.toLowerCase() == "hmip-dld-s") ) {
       result = translateKey("chType_DOOR_LOCK_STATE_TRANSMITTER");
     }
   }
@@ -33823,7 +34068,7 @@ setPositionAllDevices = function(lon, lat, timeZone) {
 
     jQuery.each(DeviceList.devices, function (index, device) {
       var iFace = device.interfaceName;
-      if ((iFace.toLowerCase() == "hmip-rf") && (device.typeName.toLowerCase() != "hmip-rcv-50") && (device.typeName.toLowerCase() != "hmip-dld")) {
+      if ((iFace.toLowerCase() == "hmip-rf") && (device.typeName.toLowerCase() != "hmip-rcv-50") && (device.typeName.toLowerCase() != "hmip-dld") && (device.typeName.toLowerCase() != "hmip-dld-a") && (device.typeName.toLowerCase() != "hmip-dld-s") ) {
         // Check if the device has the channel *_WEEK_PROFILE
         jQuery.each(device.channels, function (index, channel) {
           if (channel.channelType.indexOf("_WEEK_PROFILE") != -1) {
@@ -33882,7 +34127,7 @@ setNewDevicePos2SystemPos = function(oDevice) {
       utcOffsetDST = arUtcOffset[1] * 60;
 
     var iFace = oDevice.iface;
-    if (iFace.toLowerCase() == "hmip-rf" && (oDevice.type.toLowerCase() != "hmip-rcv-50")  && (oDevice.type.toLowerCase() != "hmip-dld")) {
+    if (iFace.toLowerCase() == "hmip-rf" && (oDevice.type.toLowerCase() != "hmip-rcv-50") && (oDevice.type.toLowerCase() != "hmip-dld") && (oDevice.type.toLowerCase() != "hmip-dld-a") && (oDevice.type.toLowerCase() != "hmip-dld-s")) {
       // Check if the device has the channel *_WEEK_PROFILE
       jQuery.each(oDevice.chnTypes, function (index, channelType) {
         if (channelType.indexOf("_WEEK_PROFILE") != -1) {
@@ -36506,7 +36751,7 @@ iseFrequency.prototype = {
 
 /**
  * @class
- **/ 
+ **/
 iseButtonsDoorContact = Class.create();
 
 iseButtonsDoorContact.prototype = {
@@ -36520,12 +36765,12 @@ iseButtonsDoorContact.prototype = {
     this.state = this.convertInitState(initState);
     this.divOpen = $(this.id + "Open");
     this.divClosed = $(this.id + "Closed");
-    
+
     if( this.state > 0 )
     {
       ControlBtn.on(this.divOpen);
     }
-    else 
+    else
     {
       ControlBtn.on(this.divClosed);
     }
@@ -36539,6 +36784,7 @@ iseButtonsDoorContact.prototype = {
       case "CLOSED":
         return 0;
       case "1":
+      case "200":
       case "true":
       case "OPEN":
         return 1;
@@ -38452,6 +38698,7 @@ isePowerMeter.prototype = {
 
   bindEvents: function() {
     var self = this;
+    /*
     jQuery("#"+ this.id + "resetEnergyCounter").bind("click", function(){
       conInfo("Reset EnergyCounter.");
       self.buttonPressed(this);
@@ -38463,26 +38710,28 @@ isePowerMeter.prototype = {
       self.setEnergyCounterPanel();
       self.showEnergyCost();
     });
+    */
 
-    /*
-    jQuery("#"+ this.id + "setEnergyCounter").bind("click", function(){
+
+    jQuery("#"+ this.id + "resetEnergyCounter").bind("click", function(){
       conInfo("Set EnergyCounter");
-      var dlgContent = "<table align='center'><tr><td><input type='text' id='meterReading'></td></tr></table>",
+      var dlgContent = "<table align='center'><tr><td>"+translateKey('lblEnergyConsumptionInWatt')+"<td><td><input type='text' id='meterReading'></td></tr></table>",
         valMeterReading;
 
-      setEnergyCounterDlg = new YesNoDialog("trans Enter meter readings", dlgContent, function(result) {
+      setEnergyCounterDlg = new YesNoDialog(translateKey("lblSetEnergyCounter"), dlgContent, function(result) {
         if (result == YesNoDialog.RESULT_YES) {
-          valMeterReading = jQuery("#meterReading").val();
-          // TODO check if the value is a valid float
+          valMeterReading = parseFloat(jQuery("#meterReading").val());
 
           // This removes the dialog from the screen
           Layer.remove(this.m_layer);
 
-          // This sets the new value of the power meter
-          homematic("SysVar.setFloat", {"name" : self.EnergyCounterID, "value" : valMeterReading}, function() {
-            self.setEnergyCounterPanel();
-            self.showEnergyCost();
-          });
+          if (! isNaN(valMeterReading)) {
+            // This sets the new value of the power meter
+            homematic("SysVar.setFloat", {"name": self.EnergyCounterID, "value": valMeterReading}, function () {
+              self.setEnergyCounterPanel();
+              self.showEnergyCost();
+            });
+          }
         } else {
           // NO pressed
           // This removes the dialog from the screen
@@ -38490,13 +38739,15 @@ isePowerMeter.prototype = {
         }
       }, "html");
 
+      setEnergyCounterDlg.btnTextNo(translateKey("dialogBack"));
+      setEnergyCounterDlg.btnTextYes(translateKey("btnOk"));
+
       // Overwrites the original close method
       setEnergyCounterDlg.close = function(result) {
         if (this.m_callback) { this.m_callback(result); }
       };
 
     });
-    */
   },
 
   /**
@@ -38556,6 +38807,7 @@ isePowerMeter.prototype = {
     this.summedUpEnergy = parseFloat(homematic("SysVar.getValue", {"id" : this.EnergyCounterID})).toFixed(decimalPlace);
     conInfo("setEnergyCounterPanel - this.summedUpEnergy: " + this.summedUpEnergy);
 
+    this.kiloPrefix = "";
     if (this.summedUpEnergy >= 1000.0 && (this.measurementType != this.sensorTypeID.gas) && (this.measurementType != this.sensorTypeID.iec)) {
       this.kiloPrefix = "k";
       this.summedUpEnergy = this.changeToKilo();
@@ -38635,7 +38887,313 @@ isePowerMeter.prototype = {
 };
 
 
-// This class is currently not in use
+isePowerMeterESI = Class.create();
+
+isePowerMeterESI.prototype = {
+
+  initialize: function(id, opts) {
+    //console.log(opts);
+    var self = this;
+
+    this.iface = "HmIP-RF";
+    this.id = id;
+    this.opts = opts;
+
+    this.powerMeter = "POWERMETER"; // e. g. Hm-ES-PMSw1-PL-DN-R1
+    this.POWERMETER_IEC = "POWERMETER_IEC"; // e. g. Hm-ES-TX-WM
+
+    this.energyMeterTransmitter = "ENERGIE_METER_TRANSMITTER"; // e. g. HmIP-PSM
+    this.sensorTypeID = {};
+    this.sensorTypeID.gas = "Gas";
+    this.sensorTypeID.eletricity = "Electricity";
+    this.sensorTypeID.iec = "IEC";
+    this.sensorTypeID.unknown = "Unknown";
+    this.kiloPrefix = "";
+
+    this.idBtnSelfCalibration = this.opts.idBtnSelfCalibration;
+
+    this.chn = parseInt(this.opts.chn);
+
+    this.summedUpEnergy = 0.0;
+
+    this.arSensorTypes = [
+      "SENSOR_UNKNOWN",
+      "SENSOR_ES_GAS",
+      "SENSOR_ES_LED",
+      "SENSOR_ES_IEC",
+      "SENSOR_ES_IEC_SML",
+      "SENSOR_ES_IEC_SML_WH",
+      "SENSOR_ES_IEC_D0_A",
+      "SENSOR_ES_IEC_D0_B",
+      "SENSOR_ES_IEC_D0_C",
+      "SENSOR_ES_IEC_D0_D"
+    ];
+
+    this.measurementType = this.getSensorType(); // Connected Sensor
+
+    if (this.chn == 1) {
+      this.sensor =  homematic("Interface.getMetadata", {"objectId": this.id, "dataId": "sensor"});
+      console.log("this.measurementType: " + this.measurementType ,"this.sensor: " + this.sensor);
+
+      this.showPowerGasFlowPanel();
+
+      if (this.measurementType != this.sensor) {
+        console.log("set MetaData sensor: " + this.measurementType);
+        homematic("Interface.setMetadata", {"objectId": this.id, "dataId": "sensor", "value": this.measurementType});
+      }
+
+    }
+
+    this.EnergyPrice = "unknown";
+
+    this.bindEvents();
+
+    jQuery("[name = '" + this.id + "EnergyCostDeviceUnit']").html(this.opts.unitEnergyCounter).show();
+    this.setEnergyCounterPanel();
+
+    this.energyConfig = homematic("system.getEnergyPrice", {}, function (result) {
+      self.energyConfig = result;
+      // When the energy price config is available and it´s a known sensor (electricity or gas)
+      // then show the energy cost
+      if (result && (self.measurementType != self.sensorTypeID.unknown)) {
+        self.showEnergyCost();
+      }
+    });
+    jQuery("[name = '" + this.id + "sensor" + this.getSensorExtension() + "']").show();
+    conInfo("Interface: " + this.opts.iface);
+    conInfo("MeasurementType: " + this.measurementType);
+
+  },
+
+
+  showPowerGasFlowPanel: function() {
+    var panelElm = jQuery("[name='curConsumptionPanel_"+this.id+"']"),
+      noSensorElm = jQuery("#noSensorAvailable_" + this.id),
+      sensorGas = jQuery("#gasFlow_" + this.id),
+      sensorElec = jQuery("#power_" + this.id);
+
+    // console.log("showPowerGasFlowPanel", "this.measurementType: " + this.measurementType);
+
+    if ((typeof this.measurementType == "undefined") || (this.measurementType == null) ) {
+      panelElm.hide();
+      noSensorElm.show();
+      return;
+    }
+
+    switch (this.measurementType) {
+      case this.arSensorTypes[0]:  // SENSOR_UNKNOWN
+        panelElm.hide();
+        noSensorElm.show();
+        break;
+      case this.arSensorTypes[1]: // SENSOR_ES_GAS
+        noSensorElm.hide();
+        panelElm.show();
+        sensorElec.hide();
+        sensorGas.show();
+        break;
+      default:
+        noSensorElm.hide(); // SENSOR_ES_LED and all SENSOR_ES_IEC sensors (e. g. SENSOR_ES_IEC_SML)
+        panelElm.show();
+        sensorGas.hide();
+        sensorElec.show();
+    }
+  },
+
+  getSensorType: function() {
+    var paramSet = homematic("Interface.getParamset", {"interface": this.opts.iface, "address" : this.opts.chAddress, "paramsetKey" :"MASTER"});
+
+    // With the HmIP-ESI only channel 1 has the parameter CHANNEL_OPERATION_MODE
+    return (typeof paramSet.CHANNEL_OPERATION_MODE == "undefined") ? -1 : this.arSensorTypes[parseInt(paramSet.CHANNEL_OPERATION_MODE)];
+  },
+
+  buttonPressed: function(btn) {
+    var elem = jQuery(btn);
+    elem.addClass("ControlBtnOn").removeClass("ControlBtnOff");
+    setTimeout(function() {
+      elem.addClass('ControlBtnOff').removeClass('ControlBtnOn');
+    }, 500);
+
+  },
+
+  bindEvents: function() {
+    var self = this;
+
+    jQuery("#"+ this.id + "startSelfCalibration").bind("click", function() {
+      // self.searchSensor(self.idBtnSelfCalibration); for setDpState
+      self.searchSensor(self.iface, self.opts.chAddress);
+    });
+
+
+    jQuery("#"+ this.id + "resetEnergyCounter").bind("click", function() {
+      conInfo("Set EnergyCounter");
+      var dlgContent = "<table align='center'><tr><td>"+translateKey('lblEnergyConsumptionInWatt')+"<td><td><input type='text' id='meterReading'></td></tr></table>",
+        valMeterReading;
+
+      setEnergyCounterDlg = new YesNoDialog(translateKey("lblSetEnergyCounter"), dlgContent, function(result) {
+        if (result == YesNoDialog.RESULT_YES) {
+          valMeterReading = parseFloat(jQuery("#meterReading").val());
+
+          // This removes the dialog from the screen
+          Layer.remove(this.m_layer);
+
+          if (! isNaN(valMeterReading)) {
+            // This sets the new value of the power meter
+            homematic("SysVar.setFloat", {"name": self.EnergyCounterID, "value": valMeterReading}, function () {
+              self.setEnergyCounterPanel();
+              self.showEnergyCost();
+            });
+          }
+        } else {
+          // NO pressed
+          // This removes the dialog from the screen
+          Layer.remove(this.m_layer);
+        }
+      }, "html");
+
+      setEnergyCounterDlg.btnTextNo(translateKey("dialogBack"));
+      setEnergyCounterDlg.btnTextYes(translateKey("btnOk"));
+
+      // Overwrites the original close method
+      setEnergyCounterDlg.close = function(result) {
+        if (this.m_callback) { this.m_callback(result); }
+      };
+
+    });
+  },
+
+  /**
+   * Returns the jQuery element of a given parameter
+   * @param {string} elem The name of the desired element
+   * @return {object} The desired element
+   */
+  getJElemByID: function(elem) {
+    return jQuery("#" + this.id + elem);
+  },
+
+  getJElemsByName: function(elem) {
+    return jQuery("[name='" + this.id + elem + "']");
+  },
+
+  getSensorExtension: function() {
+    switch (this.measurementType) {
+      case  this.sensorTypeID.gas:
+        return this.sensorTypeID.gas;
+      case this.sensorTypeID.iec:
+        return this.sensorTypeID.iec;
+      default: return "";
+    }
+  },
+
+  changeToKilo: function() {
+    return (this.summedUpEnergy/1000).toFixed(3);
+  },
+
+  setEnergyCounterPanel: function() {
+    var j_panel = this.getJElemByID("EnergyCounter");
+    // For a Hm-ES-TX-WM (POWERMETER_IEC) with a firmware >= 2.0.0 show 4 decimal places
+    var decimalPlace = ((this.opts.chType.indexOf(this.POWERMETER_IEC) != -1) && (parseInt(this.opts.devFirmwareMajor) >= 2))  ? 4 : 2;
+    this.summedUpEnergy = parseFloat(homematic("SysVar.getValue", {"id" : this.EnergyCounterID})).toFixed(decimalPlace);
+    conInfo("setEnergyCounterPanel - this.summedUpEnergy: " + this.summedUpEnergy);
+
+    this.kiloPrefix = "";
+    if (this.summedUpEnergy >= 1000.0 && (this.measurementType != this.sensorTypeID.gas) && (this.measurementType != this.sensorTypeID.iec)) {
+      this.kiloPrefix = "k";
+      this.summedUpEnergy = this.changeToKilo();
+    }
+
+    j_panel.html(this.summedUpEnergy + " " + this.kiloPrefix + this.opts.unitEnergyCounter);
+  },
+
+  getEnergyConsumption: function(sType) {
+    // Electricity sensor
+    if ((this.measurementType == this.sensorTypeID.eletricity )) {
+      if (sType == "CCU")  return this.summedUpEnergy;
+      if (sType == "Device") return this.opts.valEnergyCounter;
+    }
+
+    // Gas sensor
+    if (this.measurementType == this.sensorTypeID.gas) {
+      if (sType == "CCU")  return (this.summedUpEnergy * this.energyConfig.gasHeatingValue * this.energyConfig.gasConditionNumber) ;
+      if (sType == "Device") return (this.opts.valEnergyCounterGas * this.energyConfig.gasHeatingValue * this.energyConfig.gasConditionNumber);
+    }
+
+    // IEC sensor
+    if ((this.measurementType == this.sensorTypeID.iec)) {
+      if (sType == "CCU")  return this.summedUpEnergy;
+      if (sType == "Device") return this.opts["valEnergyCounter" + this.getSensorExtension()];
+    }
+
+  },
+
+  // Some channels aren't allowed to show the energy cost
+  // E. g. the channel POWERMETER_IEC2 measures the energy which a client feeds into the power supply system (solar, wind or so)
+  isChannelValid2ShowEnergyCost: function() {
+    return (this.opts.chType == "POWERMETER_IEC2") ? false : true;
+  },
+
+  showEnergyCost: function() {
+    if (this.energyConfig && (this.measurementType != this.sensorTypeID.unknown) && ( this.isChannelValid2ShowEnergyCost()) ) {
+      var unitFactorCCU = 1000,
+        unitFactorDevice = 1000,
+        kWh = " kWh";
+
+      if (this.kiloPrefix == "k") {
+        unitFactorCCU = 1;
+      }
+
+      if ((this.measurementType == this.sensorTypeID.iec)) {
+        unitFactorCCU = 1;
+        unitFactorDevice = 1;
+      }
+
+      if (this.measurementType == this.sensorTypeID.gas) {
+        this.EnergyPrice = this.energyConfig.gasPrice;
+        unitFactorCCU = 1;
+        unitFactorDevice = 1;
+      }
+      if (this.measurementType == this.sensorTypeID.eletricity || this.measurementType == this.sensorTypeID.iec) this.EnergyPrice = this.energyConfig.curPrice;
+
+      if (this.EnergyPrice != "unknown" && this.energyConfig.currency != null) {
+        var j_energyCostCCU = this.getJElemByID("EnergyCostCCU"),
+          j_energyCostDevice = this.getJElemByID("EnergyCostDevice"+this.getSensorExtension()),
+          energyConsumptionCCU = this.getEnergyConsumption("CCU"),
+          energyConsumptionDevice = this.getEnergyConsumption("Device"),
+          energyCostCCU = ((energyConsumptionCCU * this.EnergyPrice) / unitFactorCCU).toFixed(2) + " " + this.energyConfig.currency,
+          energyCostDevice = ((energyConsumptionDevice * this.EnergyPrice) / unitFactorDevice).toFixed(2) + " " + this.energyConfig.currency;
+        if (this.measurementType == this.sensorTypeID.gas) {
+          j_energyCostCCU.text(energyConsumptionCCU.toFixed(1) + kWh + " = " + energyCostCCU).show();
+          j_energyCostDevice.text(energyConsumptionDevice.toFixed(1) + kWh + " = " + energyCostDevice).show();
+        } else {
+          j_energyCostCCU.text(energyCostCCU).show();
+          j_energyCostDevice.text(energyCostDevice).show();
+        }
+      } else {
+        conInfo("Unknown energy price");
+      }
+    }
+  },
+
+  searchSensor: function(iface, chnAddress) {
+    conInfo("searchSensor");
+    ShowWaitAnim();
+    homematic("Interface.putParamset",{'interface': iface, 'address' : chnAddress, 'paramsetKey' : 'VALUES', 'set':
+        [
+          {name:'SELF_CALIBRATION', type: 'int', value: 1}
+        ]
+    },function(result){
+      if (result) {
+        window.setTimeout(function() {
+          HideWaitAnim();
+          reloadPage();
+        },1000);
+      } else {
+        HideWaitAnim();
+        alert("Please press the system button and try again.");
+      }
+    });
+    HideWaitAnimAutomatically(5);
+  }
+};// This class is currently not in use
 // See esp/controls/rgbw.fn - CreateRGBWAutomaticControl
 
 iseRGBWController = Class.create();
@@ -39810,6 +40368,11 @@ iseHmIPWeeklyProgram.prototype = {
     this.callback = callback;
     this.opts = opts;
     this.id = id;
+
+    this.fwMajor = opts.fwMajor;
+    this.fwMinor = opts.fwMinor;
+    this.fwPatch = opts.fwPatch;
+
     this.devLabel = opts.deviceLabel;
     this.iface = this.opts.chInterface;
 
@@ -39827,8 +40390,18 @@ iseHmIPWeeklyProgram.prototype = {
     this.relevantChn = this.getRelevantChannels();
 
     // The HmIP-BSL consists of SWITCH and DIMMER channels. For the weekly program we are currently using only the SWITCH channels.
+    /*
     if (this.isDeviceType("HmIP-BSL")) {
       this.relevantChn = (this.expert) ? [4, 5, 6] : [4];
+    }
+    */
+
+    if (this.isDeviceType("HmIP-BSL")) {
+      if (this.fwMajor < 2) {
+        this.relevantChn = (this.expert) ? [4, 5, 6] : [4];
+      } else {
+        this.relevantChn = (this.expert) ? [4, 5, 6, 8, 9, 10, 12, 13, 14] : [4, 8, 12];
+      }
     }
 
     if (this.deviceIsHmIPWKP) {
@@ -40377,7 +40950,6 @@ iseHmIPWeeklyProgram.prototype = {
     var arMode = ["MANU_MODE", "AUTO_MODE_WITH_RESET", "AUTO_MODE_WITHOUT_RESET"];
     return "WPTCLS="+this.selectedCh+",WPTCL="+arMode.indexOf(this.modeElm.val());
   }
-
 };
 /**
  * Created by grobelnik on 04.12.2020.
@@ -45338,10 +45910,10 @@ SetParameters = function(iface, address, special_input_id)
   */
 
   // This prevents an non-existing string for MAIN_/SUB_TEXT for e. g.  the HmIPW-WGD(-PL)
-  if ((typeof channel !== "undefined") && ((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER"))) {
+  if ((typeof channel !== "undefined") && ((channel.channelType == "DISPLAY_INPUT_TRANSMITTER") || (channel.channelType == "DISPLAY_THERMOSTAT_INPUT_TRANSMITTER") || (channel.channelType == "ENERGIE_METER_TRANSMITTER"))) {
     arPostStr = poststr.split("&");
     jQuery.each(arPostStr, function (index, val) {
-      if (val == "MAIN_TEXT=" || val == "SUB_TEXT=") {
+      if (val == "MAIN_TEXT=" || val == "SUB_TEXT=" || val == "METER_OBIS_SEARCH_STRING=") {
         // %24 = $
         poststr = poststr.replace(val, val + "%24%24%24%24%24");
       }
@@ -48832,6 +49404,182 @@ daliRefreshDevices = function(address) {
       alert(translateKey("dialogSettingsSecuritySSHMsgBoxErrorTitle")); // An error occurred
     }
   });
+};
+
+powerIdentSensor = function(address) {
+  var counter = 0, maxCount = 45,
+    chnValueDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "VALUES"}),
+    curSelfCalibrationResult = chnValueDescr.SELF_CALIBRATION_RESULT, // the current sensor type
+    device = DeviceList.getDeviceByAddress(address.split(":")[0]),
+    intervalId = setInterval(getSelfCalibrationResult, 1000);
+
+  function getSelfCalibrationResult() {
+    var chnValueDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "VALUES"}),
+      newSelfCalibrationResult = chnValueDescr.SELF_CALIBRATION_RESULT;
+
+    counter++;
+    if (curSelfCalibrationResult != newSelfCalibrationResult) {
+      clearInterval(intervalId);
+      //reloadPage();
+
+      window.setTimeout(function() {
+        DeviceListPage.showConfiguration(false, 'DEVICE', device.id);
+      },1500);
+
+    }
+
+    if (counter > maxCount) {
+      clearInterval(intervalId);
+    }
+
+  };
+
+};
+
+
+_powerIdentSensor = function(address) {
+  // Store current mode
+  var chnDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "MASTER"}),
+    msgBox = "";
+
+
+  if (chnDescr != null) {
+    var curMode = chnDescr.CHANNEL_OPERATION_MODE,
+      counter = 0;
+
+    msgBox =  MessageBox.show(translateKey('btnSensorDetection'), '' + ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>', '', '320', '60', 'msgBckID', 'msgBoxBarGraph');
+    ShowWaitAnim();
+
+    homematic("Interface.putParamset", {
+      'interface': "HmIP-RF",
+      'address': address,
+      'paramsetKey': 'VALUES',
+      'set':
+        [
+          {name: 'SELF_CALIBRATION', type: 'int', value: 1}
+        ]
+    }, function (result) {
+      if (result) {
+        var intervalId = setInterval(getOperationMode, 1000);
+
+        // A Get OPERATION_MODE
+        function getOperationMode() {
+          ShowWaitAnim();
+          counter++;
+          var chnDescr = homematic("Interface.getParamset", {
+            "interface": "HmIP-RF",
+            "address": address,
+            "paramsetKey": "MASTER"
+          });
+
+          if (chnDescr != null) {
+            if ((chnDescr.CHANNEL_OPERATION_MODE != curMode) || (counter >= 45)) {
+              clearInterval(intervalId);
+              HideWaitAnim();
+              if (msgBox != "") {MessageBox.close();}
+              reloadPage();
+            }
+          } else {
+            HideWaitAnim();
+            if (msgBox != "") {MessageBox.close();}
+            alert(translateKey("hintProblemSensorIdent"));
+          }
+        };
+      } else {
+        HideWaitAnim();
+        if (msgBox != "") {MessageBox.close();}
+        alert(translateKey("hintPressSysKeyTryAgain"));
+      }
+    });
+  //  HideWaitAnimAutomatically(5);
+  //  if (MessageBox) {window.setTimeout(function() {MessageBox.close();},45000);};
+  } else {
+    alert(translateKey("hintProblemSensorIdent"));
+  }
+};
+
+getAndSavePowerIdentSensor = function(address) {
+  // Store current mode
+  var chnDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "MASTER"}),
+    msgBox = "";
+
+
+  if (chnDescr != null) {
+
+    var curMode = chnDescr.CHANNEL_OPERATION_MODE,
+      counter = 0;
+
+    msgBox = MessageBox.show(translateKey('btnSensorDetection'), '' + ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>', '', '320', '60', 'msgBckID', 'msgBoxBarGraph');
+    ShowWaitAnim();
+
+    homematic("Interface.putParamset", {
+      'interface': "HmIP-RF",
+      'address': address,
+      'paramsetKey': 'VALUES',
+      'set':
+        [
+          {name: 'SELF_CALIBRATION', type: 'int', value: 1}
+        ]
+    }, function (result) {
+      if (result) {
+        var intervalId = setInterval(getOperationMode, 1000),
+          arSensorTypes = ['SENSOR_UNKNOWN', 'SENSOR_ES_GAS', 'SENSOR_ES_LED', 'SENSOR_ES_IEC', 'SENSOR_ES_IEC_SML', 'SENSOR_ES_IEC_SML_WH', 'SENSOR_ES_IEC_D0_A', 'SENSOR_ES_IEC_D0_B', 'SENSOR_ES_IEC_D0_C', 'SENSOR_ES_IEC_D0_D'];
+
+        // A Get OPERATION_MODE
+        function getOperationMode() {
+          ShowWaitAnim();
+          counter++;
+          var chnDescr = homematic("Interface.getParamset", {
+            "interface": "HmIP-RF",
+            "address": address,
+            "paramsetKey": "MASTER"
+          });
+
+          if (chnDescr != null) {
+            if ((chnDescr.CHANNEL_OPERATION_MODE != curMode) || (counter >= 45)) {
+              clearInterval(intervalId);
+
+              var device = DeviceList.getDeviceByAddress(address.split(':')[0]);
+              var paramSet = homematic('Interface.getParamset', {
+                'interface': "HmIP-RF",
+                'address': address,
+                'paramsetKey': 'MASTER'
+              });
+
+              jQuery.each(device.channels, function (index, channel) {
+                if (channel.channelType != 'MAINTENANCE') {
+                  homematic('Interface.setMetadata', {
+                    'objectId': channel.id,
+                    'dataId': 'sensor',
+                    'value': arSensorTypes[parseInt(paramSet.CHANNEL_OPERATION_MODE)]
+                  }, function (result) {
+                    if (channel.index == (device.channels.length - 1)) {
+                      reloadPage();
+                    }
+                  });
+                }
+              });
+              HideWaitAnim();
+              if (msgBox != "") {MessageBox.close();}
+              reloadPage();
+            }
+          } else {
+            HideWaitAnim();
+            if (msgBox != "") {MessageBox.close();}
+            alert(translateKey("hintProblemSensorIdent"));
+          }
+        };
+      } else {
+        HideWaitAnim();
+        if (msgBox != "") {MessageBox.close();}
+        alert(translateKey("hintPressSysKeyTryAgain"));
+      }
+    });
+   // HideWaitAnimAutomatically(5);
+   // if (MessageBox) {window.setTimeout(function() {MessageBox.close();},45000);};
+  } else {
+    alert(translateKey("hintProblemSensorIdent"));
+  }
 };// language = getLang();//"de";
 
 setLanguage = function(lang)

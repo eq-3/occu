@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">When the selected decision value is received, the selected MP3 file is played and stopped in turn (toggle function).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When the selected decision value is received, the selected MP3 file is played depending on the settings selected.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the selected decision value is received, the selected MP3 file is stopped depending on the settings selected.</span><br/><br/>",
+
+"subset_1" : "Lower threshold value exceeded / Upper threshold value falls below threshold",
+"subset_2" : "Upper threshold exceeded",
+"subset_3" : "Lower threshold value exceeded",

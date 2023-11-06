@@ -12,27 +12,27 @@ function ::dcCreateTable()
       WriteLine('<div class="CLASS02502">' # sName # '</div>');
       WriteLine('<td>');
     WriteLine('</tr>');
-  
+
     WriteLine('<tr>');
       WriteLine('<td class="CLASS02503"><div class="CLASS02504" style="visibility:hidden;"></div></td>');
     WriteLine('</tr>');
-  
+
     WriteLine('<tr>');
       WriteLine('<td id="dpc'#cId#'" class="CLASS02505">');
         Call("/esp/datapointconfigurator.fn::dcCreate()");
       WriteLine('</td>');
     WriteLine('</tr>');
-  
+
     WriteLine('<tr>');
       WriteLine('<td class="CLASS02503"><div class="CLASS02504" style="visibility:hidden;"></div></td>');
     WriteLine('</tr>');
   }
-  
+
   if( iFavNamePosition == 0 )
   {
     integer iLength = 9;
     Call("/esp/datapointconfigurator.fn::StringCut()");
-  
+
     WriteLine('<tr>');
       WriteLine('<td class="CLASS02507">');
       WriteLine('<div class="CLASS02509">'#sName#'</div></td>');
@@ -40,7 +40,7 @@ function ::dcCreateTable()
         Call("/esp/datapointconfigurator.fn::dcCreate()");
       WriteLine('</td>');
     WriteLine('</tr>');
-  
+
   }
   WriteLine('</table>');
 }
@@ -54,7 +54,7 @@ function ::dcCreate()
   integer chnId = system.GetVar("cId");
   boolean ctrlReqUpdate = false;
   object cObj = dom.GetObject( system.GetVar("cId") );
-  
+
   if( cObj.IsTypeOf( OT_PROGRAM ) )
   {
     ictCH = 0;
@@ -63,7 +63,7 @@ function ::dcCreate()
     string viewstatus = "";
     Call("/esp/system.fn::writeProgCtrl()");
   }
-  
+
   if( cObj.IsTypeOf( OT_DP ) )
   {
     ictCH = 0;
@@ -85,7 +85,7 @@ function ::dcCreate()
       WriteLine( '</table>' );
     }
   }
-    
+
   if( cObj.IsTypeOf( OT_CHANNEL ) )
   {
     var CN_ACCELERATION_TRANSCEIVER = "ACCELERATION_TRANSCEIVER.";
@@ -123,6 +123,7 @@ function ::dcCreate()
     var CN_DUAL_WHITE_BRIGHTNESS = "DUAL_WHITE_BRIGHTNESS";
     var CN_DUAL_WHITE_COLOR = "DUAL_WHITE_COLOR";
     var CN_GENERIC_INPUT_TRANSMITTER = "GENERIC_INPUT_TRANSMITTER.";
+    var CN_GENERIC_MEASURING_TRANSMITTER = "GENERIC_MEASURING_TRANSMITTER.";
     var CN_HEATING_CONTROL = "HEATING_CONTROL.";
     var CN_HEATING_CONTROL_HMIP     = "HEATING_CONTROL_HMIP.";
     var CN_HMIP_BUTTON     = "BUTTON_NO_FUNCTION.";
@@ -178,12 +179,18 @@ function ::dcCreate()
     boolean bSV = false;
     boolean bIsControl = false;
 
+    integer devFwMajor = 0;
+    integer devFwMinor = 0;
+    integer devFwPatch = 0;
+    Call("/esp/functions.fn::getFirmwareVersion()");
+
     ictCH = cObj.ChannelType();
     WriteLine("<table id='ctrl"#chnId#"tbl' class='ctrlTbl CLASS02520' border='0' >");
     WriteLine("<tr>");
 
     string sE;
     string oEName;
+    string style = "-";
 
     foreach( sE, cObj.DPs().EnumEnabledVisibleIDs() )
     {
@@ -315,7 +322,7 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_TRANSMITTER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_TRANSMITTER;
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL-2")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL")) {
               Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -335,7 +342,7 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_VIRTUAL_RECEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_VIRTUAL_RECEIVER;
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL-2")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL")) {
               Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -488,7 +495,11 @@ function ::dcCreate()
             sLastControlName = CN_DIMMER;
             if (ch.Label().Substr(0,12) != "VIR-LG-ONOFF") {
               WriteLine( "<script>conInfo('Control DIMMER found.');</script>" );
-              Call("/esp/controls/dimmer.fn::CreateDimmingActuator()");
+              if ((ch.Label() == "HmIP-BSL") && (devFwMajor >= 2)) {
+                Call("/esp/controls/dimmer.fn::CreateOpticalSignalReceiver()");
+              } else {
+                Call("/esp/controls/dimmer.fn::CreateDimmingActuator()");
+              }
             } else {
               ! This is because the device VIR_LG_ONOFF claims it is a DIMMER instead of a SWITCH
               WriteLine( "<script>conInfo('Control VIR_LG_ONOFF (OSRAM, PHILIPS.....) found.');</script>" );
@@ -611,6 +622,16 @@ function ::dcCreate()
             Call("/esp/controls/generic_input_transmitter.fn::CreateGenericInputTransmitter()");
           }
 
+          !# CN_GENERIC_MEASURING_TRANSMITTER - HmIP
+          bIsControl = ( sControlName.Find(CN_GENERIC_MEASURING_TRANSMITTER) > -1 );
+          if( bIsControl && (sLastControlName != CN_GENERIC_MEASURING_TRANSMITTER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_GENERIC_MEASURING_TRANSMITTER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_GENERIC_MEASURING_TRANSMITTER;
+            Call("/esp/controls/generic_input_transmitter.fn::CreateGenericMeasuringTransmitter()");
+          }
+
           !# HEATING_CONTROL
           bIsControl = ( sControlName.Find(CN_HEATING_CONTROL) > -1 );
           if( bIsControl && (sLastControlName != CN_HEATING_CONTROL) )
@@ -642,9 +663,14 @@ function ::dcCreate()
               WriteLine( "<script>conInfo('Control CN_HMIP_BUTTON found.');</script>" );
               isKnownControl = true;
               sLastControlName = CN_HMIP_BUTTON;
-            if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") {
+            if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER" || (ch.Label() == "ELV-SH-BM-S")) {
                if (ch.Label().Substr(5,7) != "MOD-RC8") {
-                Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                if ((ch.Label() == "ELV-SH-BM-S")) {
+                  WriteLine( "<script>conInfo('ELV-SH-BM-S found');</script>" );
+                  Call("/esp/controls/key_switch_sc.fn::CreateContentA()");
+                } else {
+                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                }
               } else {
                 WriteLine( "<script>conInfo('HmIP-MOD-RC8 found');</script>" );
                 Call("/esp/controls/key_switch_sc.fn::CreateContent()");
@@ -700,7 +726,7 @@ function ::dcCreate()
               Call("/esp/controls/drap.fn::CreateDrap()");
             }
 
-            if ((ch.Label() == "HmIP-HAP") || (ch.Label() == "HmIP-HAP-B1") || (ch.Label() == "HmIP-HAP JS1")) {
+            if ((ch.Label() == "HmIP-HAP")  || (ch.Label() == "HmIP-HAP-A") || (ch.Label() == "HmIP-HAP-B1") || (ch.Label() == "HmIP-HAP JS1")) {
               WriteLine( "<script>conInfo('Create HAP Control.');</script>" );
               sLastControlName = CN_MAINTENANCE;
               isKnownControl = true;
@@ -819,9 +845,77 @@ function ::dcCreate()
           if( bIsControl && (sLastControlName != CN_POWERMETER_PSM) )
           {
             WriteLine( "<script>conInfo('Control CN_POWERMETER_PSM found.');</script>" );
+
+            string chnAddress = ch.Address();
+            integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
+            string chn1Address = chnAddress.StrValueByIndex(":",0) # ":1";
+
             isKnownControl = true;
             sLastControlName = CN_POWERMETER_PSM;
-            Call("/esp/controls/powermeter.fn::CreatePowermeterPSMControl()");
+
+            if (ch.Label() != "HmIP-ESI") {
+              Call("/esp/controls/powermeter.fn::CreatePowermeterPSMControl()");
+            } else {
+              string sensorState = "SENSOR_UNKNOWN,SENSOR_ES_GAS,SENSOR_ES_LED,SENSOR_ES_IEC,SENSOR_ES_IEC_SML,SENSOR_ES_IEC_SML_WH,SENSOR_ES_IEC_D0_A,SENSOR_ES_IEC_D0_B,SENSOR_ES_IEC_D0_C,SENSOR_ES_IEC_D0_D";
+              ! integer ChnOpMode = 0;
+
+              if (chnNumber == 1) {
+
+                WriteLine("<script>");
+                  WriteLine(" var arSensorState = ['SENSOR_UNKNOWN','SENSOR_ES_GAS','SENSOR_ES_LED','SENSOR_ES_IEC','SENSOR_ES_IEC_SML','SENSOR_ES_IEC_SML_WH','SENSOR_ES_IEC_D0_A','SENSOR_ES_IEC_D0_B','SENSOR_ES_IEC_D0_C','SENSOR_ES_IEC_D0_D',] ");
+                  WriteLine(" var paramSet = homematic('Interface.getParamset', {'interface': 'HmIP-RF', 'address': '"#chnAddress#"', 'paramsetKey': 'MASTER' }); ");
+                  WriteLine(" chnOpMode = parseInt(paramSet.CHANNEL_OPERATION_MODE); ");
+                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'sensor', 'value': arSensorState[chnOpMode]}); ");
+                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'ChnOpMode', 'value': chnOpMode}); ");
+                WriteLine("</script>" );
+
+                integer ChnOpMode = ch.MetaData("ChnOpMode");
+                string esiSensor = sensorState.StrValueByIndex(',',ChnOpMode);
+
+                !WriteLine( "<script>console.log('A esiSensor: "#esiSensor#"');</script>" );
+
+                if (!esiSensor) {esiSensor = "SENSOR_UNKNOWN";}
+
+                if (esiSensor == "_SENSOR_UNKNOWN") {
+                  Call("/esp/controls/powermeter.fn::SensorSearchBtnShow()");;
+                } else {
+                 Call("/esp/controls/powermeter.fn::CreatePowermeterESIControl_CurConsumption()");
+                }
+              } else {
+
+                WriteLine("<script>");
+                  WriteLine(" var arSensorState = ['SENSOR_UNKNOWN','SENSOR_ES_GAS','SENSOR_ES_LED','SENSOR_ES_IEC','SENSOR_ES_IEC_SML','SENSOR_ES_IEC_SML_WH','SENSOR_ES_IEC_D0_A','SENSOR_ES_IEC_D0_B','SENSOR_ES_IEC_D0_C','SENSOR_ES_IEC_D0_D',] ");
+                  WriteLine(" var paramSet = homematic('Interface.getParamset', {'interface': 'HmIP-RF', 'address': '"#chn1Address#"', 'paramsetKey': 'MASTER' }); ");
+                  WriteLine(" chnOpMode = parseInt(paramSet.CHANNEL_OPERATION_MODE); ");
+                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'sensor', 'value': arSensorState[chnOpMode]}); ");
+                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'ChnOpMode', 'value': chnOpMode}); ");
+                WriteLine("</script>" );
+
+                 ChnOpMode = ch.MetaData("ChnOpMode");
+                 string esiSensor = sensorState.StrValueByIndex(',',ChnOpMode);
+                 string _esiSensor = esiSensor;
+                 !WriteLine( "<script>console.log('B esiSensor: "#esiSensor#"');</script>" );
+
+                if ((esiSensor == "SENSOR_UNKNOWN") || (esiSensor == "SENSOR_ES_IEC")) {
+                  string style = "style='margin-left:8px;'";
+                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                } else {
+                  if (esiSensor.Substr(0,13) != "SENSOR_ES_IEC") {
+                    if (chnNumber == 2) {
+                      ! Create GAS or LED Control
+                      Call("/esp/controls/powermeter.fn::CreatePowermeterESIControl_TotalConsumption()");
+                    } else {
+                      ! Wenn kein IEC, Kanal 3 und 4 = noParam
+                      string style = "style='margin-left:8px;'";
+                      Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                    }
+                  } else {
+                    ! Create IEC Control
+                    Call("/esp/controls/powermeter.fn::CreatePowermeterESIControl_ESI_IEC()");
+                  }
+                }
+              }
+            }
           }
 
           !# RAIN_DETECTION_TRANSMITTER - HmIP
@@ -1019,23 +1113,30 @@ function ::dcCreate()
 
             if (ch.Label() != "HmIP-DRG-DALI") {
               WriteLine( "<script>conInfo('Control CN_UNIVERSAL_LIGHT_RECEIVER found.');</script>" );
-              if ((oMaintenance.MetaData("deviceMode") == 0) || (oMaintenance.MetaData("deviceMode") == 1)) {
-                if (chnNumber == 1) {
-                  Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode01()");
-                } else {
-                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+              if (ch.Label() != "HmIP-LSS") {
+                if ((oMaintenance.MetaData("deviceMode") == 0) || (oMaintenance.MetaData("deviceMode") == 1)) {
+                  if (chnNumber == 1) {
+                    Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode01()");
+                  } else {
+                    Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                  }
                 }
-              }
-              if (oMaintenance.MetaData("deviceMode") == 2) {
+                if (oMaintenance.MetaData("deviceMode") == 2) {
 
-                if ((chnNumber == 1) || (chnNumber == 2) ) {
-                  Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode2()");
-                } else {
-                  Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                  if ((chnNumber == 1) || (chnNumber == 2) ) {
+                    Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode2()");
+                  } else {
+                    Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
+                  }
                 }
-              }
-              if (oMaintenance.MetaData("deviceMode") == 3) {
-                Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode3()");
+                if (oMaintenance.MetaData("deviceMode") == 3) {
+                  Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode3()");
+                }
+              } else {
+                ! HmIP-LSS
+                ! isKnownControl = false;
+                ! sLastControlName = "";
+                Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode_RGB_TW()");
               }
             } else {
               ! HmIP-DRG-DALI
@@ -1192,7 +1293,7 @@ function ::dcCreate()
     } else {
       WriteLine("updateChannelControl(" # chnId # ", '" # sLastTime # "');");
     }    WriteLine("</script>");
-  }  
+  }
 
     !WriteLine("<script type='text/javascript'>");
       !WriteLine("translatePage('#content')");
@@ -1202,7 +1303,7 @@ function ::dcCreate()
 }
 
 function ::StringCut()
-{ 
+{
   if(((sName.Find(" ") == -1) || (sName.Find(" ") >= 9)) && (sName.Length()>9) && (sName.Find("${") == -1))
   {
     string sI = "";
@@ -1231,19 +1332,19 @@ function ::CreateEventInterface()
   if( objEvent )
   {
     WriteLine("<td>");
-      WriteLine("<table class='ControlBtnOff CLASS02511' id='"#chnId#"event' >"); 
+      WriteLine("<table class='ControlBtnOff CLASS02511' id='"#chnId#"event' >");
         WriteLine("<tr>");
           WriteLine("<td  class='CLASS02513'>");
             WriteLine("<div align='center'>");
               WriteLine("<img id='btn"#chnId#"s' src='/ise/img/btn_no_press.png' width='80' height='80' />");
-            WriteLine("</div>");            
+            WriteLine("</div>");
           WriteLine("</td>");
         WriteLine("</tr>");
         WriteLine("<tr><td id='"#chnId#"Txt'>Betätigen</td></tr>");
       WriteLine("</table>");
     WriteLine("</td>");
     WriteLine("<td class='CLASS02524'>&nbsp;</td>");
-    
+
     WriteLine("<script type='text/javascript'>");
       WriteLine("ibk"#cObj.ID()#" = new iseButtonsEvent("#cObj.ID()#", "#objEvent.ID()#", "#system.GetVar("iStatusOnly")#");");
       Write("jQuery('#"#chnId#"Txt').html(translateKey('actionStatusControlActivate'));");
@@ -1270,8 +1371,14 @@ function ::CreateChannelNotActive()
 
 function ::CreateNoFunction()
 {
+
+  string _style = "";
+  if (style != "-") {
+    _style = style;
+  }
+
   WriteLine("<td class=\"GrayBkg\">");
-    WriteLine("<table class=\"ControlBtnInfo\">");
+     WriteLine("<table class=\"ControlBtnInfo\" "#_style#">");
       WriteLine("<tr>");
         WriteLine("<td>");
           WriteLine("<div>");
@@ -1293,7 +1400,7 @@ function ::CreateUnknown()
     WriteLine( '<tr>');
     integer i = 0;
     string sEnum = "";
-    
+
     if( (cObj.IsTypeOf( OT_VARDP )) || (cObj.IsTypeOf( OT_ALARMDP)) )
     {
       sEnum = cObj.ID().ToString();
@@ -1302,7 +1409,7 @@ function ::CreateUnknown()
     {
       sEnum = cObj.DPs().EnumEnabledVisibleIDs();
     }
-    
+
     string sKnownControls = "NONE.SWITCH.DIMMER.BLIND.WINDOW.LOCK.BUTTON.RC19_DISPLAY.DOOR_SENSOR.RHS.TEMP.ANALOG_OUTPUT.";
     string s;
     foreach( s, sEnum )
@@ -1590,12 +1697,12 @@ function ::ConvWindDir() {
 
 ! --- Konvertierung der Gradanzeige in Himmelsrichtungen ---
 
- integer iValue = sValue.ToInteger() ; 
- 
+ integer iValue = sValue.ToInteger() ;
+
  sValueh = "no value";
- 
- if ( (iValue >= 346) || (iValue <= 15) ) 
- { 
+
+ if ( (iValue >= 346) || (iValue <= 15) )
+ {
   sValueh = "N";
   return;
  }
@@ -1642,11 +1749,11 @@ function ::CreateSysVar()
 {
   WriteLine( '<td class="CLASS02537">' );
     WriteLine( '<div class="ControlBtnInfo CLASS02538" >' );
-      
+
       string sSysVarVal = '';
       object cObjTmp = cObj;
       Call( "/esp/system.fn::getSysVarValAsString()" );
-  
+
       WriteLine( '<span id="sysvs'#cObj.ID()#'" class="CLASS02535">'#sSysVarVal#'</span>' );
     WriteLine( '</div>' );
   WriteLine( '</td>' );
@@ -1671,7 +1778,7 @@ function ::CreateSysVars()
         WriteLine( '<td class="CLASS02540">' );
           WriteLine( '<div class="ControlBtnInfo CLASS02538" >' );
             WriteLine( '<span class="CLASS02534">'#oSV.Name()#':</span>' );
-            
+
             string sSysVarVal = "";
             object cObjTmp = oSV;
             integer iVT = cObjTmp.ValueType();
@@ -1683,7 +1790,7 @@ function ::CreateSysVars()
             boolean bString = ( (iVT==ivtString)  && (iST==istChar8859));
             boolean bSysVar = ( bLogic || bList || bNumber || bAlarm || bString);
             Call( "/esp/system.fn::getSysVarValAsString()" );
-        
+
             WriteLine( '<span class="CLASS02535">'#sSysVarVal#'</span>' );
           WriteLine( '</div>' );
         WriteLine( '</td>' );
@@ -1695,7 +1802,7 @@ function ::CreateSysVars()
   WriteLine( '</tr>' );
   WriteLine( '</table>' );
   WriteLine( '</td>' );
-  
+
   return;
 }
 

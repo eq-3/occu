@@ -14,15 +14,6 @@ set PROFILES_MAP(3)   "\${dimmer_on_off_b_d}"
 set PROFILES_MAP(4)   "\${light_stairway}"
 set PROFILES_MAP(5)  "\${not_active}"
 
-#set PROFILES_MAP(5)   "\${sleep_well}"
-#set PROFILES_MAP(6)   "\${blink}"
-#set PROFILES_MAP(7)   "\${wake_up_light}"
-#set PROFILES_MAP(8)   "\${dimmer_on}"
-#set PROFILES_MAP(9)   "\${dimmer_off}"
-#set PROFILES_MAP(10)  "\${dim_up}"
-#set PROFILES_MAP(11)  "\${dim_down}"
-#set PROFILES_MAP(12)  "\${not_active}"
-
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)  "Expertenprofil"
@@ -289,7 +280,7 @@ set PROFILE_3(SHORT_OFFDELAY_BLINK_PERIOD_OLDLEVEL) 4
 set PROFILE_3(SHORT_OFFDELAY_STEP) 0.050000
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE) {0 range 0 - 7}
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR) {0 range 0 - 31}
-set PROFILE_3(SHORT_OFF_LEVEL) 0.000000
+set PROFILE_3(SHORT_OFF_LEVEL) {0.0 range 0.0 - 1.005}
 set PROFILE_3(SHORT_OFF_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_OFF_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_OFF_TIME_MODE) 0
@@ -303,7 +294,9 @@ set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
 set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR) {7 range 0 - 7}
 set PROFILE_3(SHORT_OPTICAL_SIGNAL_COLOR) {7 range 0 - 7}
+set PROFILE_3(SHORT_OPTICAL_SIGNAL_OFF_COLOR) {7 range 0 - 7}
 set PROFILE_3(SHORT_OPTICAL_SIGNAL_BEHAVIOUR) {1 range 0 - 12}
+set PROFILE_3(SHORT_OPTICAL_SIGNAL_OFF_BEHAVIOUR) {1 range 0 - 12}
 set PROFILE_3(SHORT_PROFILE_REPETITIONS) {0 range 0 - 255}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(SHORT_RAMPOFF_TIME_BASE) {0 range 0 - 7}
@@ -439,6 +432,16 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set device $dev_descr_sender(TYPE)
   set ch $dev_descr_sender(INDEX)
+  set isBSL20 false
+
+  set Fw [getReceiverFw]
+  set fwMajor [lindex $Fw 0]
+  # set fwMinor [lindex $Fw 1]
+  # set fwPatch [lindex $Fw 2]
+
+  if {($dev_descr_receiver(PARENT_TYPE)  == "HmIP-BSL") && ($fwMajor >= 2)} {
+    set isBSL20 true
+  }
 
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
@@ -665,6 +668,10 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
+  if {$isBSL20} {
+    append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
+  }
+
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
@@ -697,6 +704,31 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   if {[info exists ps($param)] == 1} {
     incr pref
     append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+  }
+
+  if {$isBSL20} {
+    append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
+
+    incr pref
+    append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_LEVEL}</td><td>"
+    option DIM_OFFLEVEL
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
+    append HTML_PARAMS(separate_$prn) "</td></tr>"
+
+    set param SHORT_OPTICAL_SIGNAL_OFF_COLOR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectColorElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+    set param SHORT_OPTICAL_SIGNAL_OFF_BEHAVIOUR
+    if {[info exists ps($param)] == 1} {
+      incr pref
+      append HTML_PARAMS(separate_$prn) [getSelectBehaviourElement PROFILE_$prn ${special_input_id} $param]
+    }
+
+    append HTML_PARAMS(separate_$prn) "[getHorizontalLine]"
   }
 
   # OFFDELAY
