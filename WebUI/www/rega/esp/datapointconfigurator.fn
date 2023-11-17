@@ -856,45 +856,30 @@ function ::dcCreate()
             if (ch.Label() != "HmIP-ESI") {
               Call("/esp/controls/powermeter.fn::CreatePowermeterPSMControl()");
             } else {
+              string esiSensor;
               string sensorState = "SENSOR_UNKNOWN,SENSOR_ES_GAS,SENSOR_ES_LED,SENSOR_ES_IEC,SENSOR_ES_IEC_SML,SENSOR_ES_IEC_SML_WH,SENSOR_ES_IEC_D0_A,SENSOR_ES_IEC_D0_B,SENSOR_ES_IEC_D0_C,SENSOR_ES_IEC_D0_D";
-              ! integer ChnOpMode = 0;
+
+              object oDevice = dom.GetObject(cObj.Device());
+              object oChnOne = dom.GetObject(oDevice.Channels().GetAt(1));
+              object oChannelOpMode = oChnOne.DPByControl("POWERMETER_PSM.CHANNEL_OPERATION_MODE");
+
+              if (oChannelOpMode) {
+                integer sensorIndex = oChannelOpMode.Value().ToInteger();
+                esiSensor = sensorState.StrValueByIndex(',',sensorIndex);
+              } else {
+                esiSensor = sensorState.StrValueByIndex(',',0);
+              }
+
+              WriteLine( "<script>conInfo('HmIP-ESI - sensor: "#esiSensor#"');</script>" );
 
               if (chnNumber == 1) {
-
-                WriteLine("<script>");
-                  WriteLine(" var arSensorState = ['SENSOR_UNKNOWN','SENSOR_ES_GAS','SENSOR_ES_LED','SENSOR_ES_IEC','SENSOR_ES_IEC_SML','SENSOR_ES_IEC_SML_WH','SENSOR_ES_IEC_D0_A','SENSOR_ES_IEC_D0_B','SENSOR_ES_IEC_D0_C','SENSOR_ES_IEC_D0_D',] ");
-                  WriteLine(" var paramSet = homematic('Interface.getParamset', {'interface': 'HmIP-RF', 'address': '"#chnAddress#"', 'paramsetKey': 'MASTER' }); ");
-                  WriteLine(" chnOpMode = parseInt(paramSet.CHANNEL_OPERATION_MODE); ");
-                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'sensor', 'value': arSensorState[chnOpMode]}); ");
-                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'ChnOpMode', 'value': chnOpMode}); ");
-                WriteLine("</script>" );
-
-                integer ChnOpMode = ch.MetaData("ChnOpMode");
-                string esiSensor = sensorState.StrValueByIndex(',',ChnOpMode);
-
-                !WriteLine( "<script>console.log('A esiSensor: "#esiSensor#"');</script>" );
-
-                if (!esiSensor) {esiSensor = "SENSOR_UNKNOWN";}
-
                 if (esiSensor == "_SENSOR_UNKNOWN") {
                   Call("/esp/controls/powermeter.fn::SensorSearchBtnShow()");;
                 } else {
                  Call("/esp/controls/powermeter.fn::CreatePowermeterESIControl_CurConsumption()");
                 }
               } else {
-
-                WriteLine("<script>");
-                  WriteLine(" var arSensorState = ['SENSOR_UNKNOWN','SENSOR_ES_GAS','SENSOR_ES_LED','SENSOR_ES_IEC','SENSOR_ES_IEC_SML','SENSOR_ES_IEC_SML_WH','SENSOR_ES_IEC_D0_A','SENSOR_ES_IEC_D0_B','SENSOR_ES_IEC_D0_C','SENSOR_ES_IEC_D0_D',] ");
-                  WriteLine(" var paramSet = homematic('Interface.getParamset', {'interface': 'HmIP-RF', 'address': '"#chn1Address#"', 'paramsetKey': 'MASTER' }); ");
-                  WriteLine(" chnOpMode = parseInt(paramSet.CHANNEL_OPERATION_MODE); ");
-                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'sensor', 'value': arSensorState[chnOpMode]}); ");
-                  WriteLine(" homematic('Interface.setMetadata', {'objectId': "#ch.ID()#", 'dataId': 'ChnOpMode', 'value': chnOpMode}); ");
-                WriteLine("</script>" );
-
-                 ChnOpMode = ch.MetaData("ChnOpMode");
-                 string esiSensor = sensorState.StrValueByIndex(',',ChnOpMode);
-                 string _esiSensor = esiSensor;
-                 !WriteLine( "<script>console.log('B esiSensor: "#esiSensor#"');</script>" );
+                string _esiSensor = esiSensor;
 
                 if ((esiSensor == "SENSOR_UNKNOWN") || (esiSensor == "SENSOR_ES_IEC")) {
                   string style = "style='margin-left:8px;'";
@@ -1113,7 +1098,7 @@ function ::dcCreate()
 
             if (ch.Label() != "HmIP-DRG-DALI") {
               WriteLine( "<script>conInfo('Control CN_UNIVERSAL_LIGHT_RECEIVER found.');</script>" );
-              if (ch.Label() != "HmIP-LSS") {
+              if (ch.Label() != "HmIP-LSC") {
                 if ((oMaintenance.MetaData("deviceMode") == 0) || (oMaintenance.MetaData("deviceMode") == 1)) {
                   if (chnNumber == 1) {
                     Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode01()");
@@ -1133,7 +1118,7 @@ function ::dcCreate()
                   Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode3()");
                 }
               } else {
-                ! HmIP-LSS
+                ! HmIP-LSC
                 ! isKnownControl = false;
                 ! sLastControlName = "";
                 Call("/esp/controls/universal_light_receiver.fn::CreateRGBWControlMode_RGB_TW()");

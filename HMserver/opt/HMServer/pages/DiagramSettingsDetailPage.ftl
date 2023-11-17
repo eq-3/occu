@@ -120,7 +120,9 @@
     channel = DeviceList.getChannelByAddress(chnAddress.split("_")[0]);
 
     if (channel.typeName == "HmIP-ESI") {
-      var sensor = parseInt(homematic("Interface.getMetadata", {"objectId": channel.id, "dataId": "ChnOpMode"}));
+      var adrChnOne = channel.address.split(":")[0] + ":1",
+      sensor = parseInt(homematic("Interface.getValue", {"interface": "HmIP-RF", "address": adrChnOne, "valueKey": "CHANNEL_OPERATION_MODE"}));
+
       if (isNaN(sensor)) {sensor = 0;}
 
       var valTypeElm = jQuery("#notAssignedValType${i}");
@@ -324,7 +326,9 @@ background-color:#${colors[x]};
         channel = DeviceList.getChannelByAddress(chnAddress.split("_")[0]);
 
         if (channel.typeName == "HmIP-ESI") {
-          var sensor = parseInt(homematic("Interface.getMetadata", {"objectId": channel.id, "dataId": "ChnOpMode"}));
+          var adrChnOne = channel.address.split(":")[0] + ":1",
+          sensor = parseInt(homematic("Interface.getValue", {"interface": "HmIP-RF", "address": adrChnOne, "valueKey": "CHANNEL_OPERATION_MODE"}));
+
           if (isNaN(sensor)) {sensor = 0;}
 
           var valTypeElm = jQuery("#assignedValType${i}");

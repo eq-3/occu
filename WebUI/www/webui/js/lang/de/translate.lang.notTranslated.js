@@ -165,6 +165,7 @@ jQuery.extend(true, langJSON, {
     "powerMeasurementC" : "Energie Bezug NT",
     "powerMeasurementD" : "Energie Lieferung",
 
+    "lblMeterReading" : "Z%E4hlerstand",
     "lblSetEnergyCounter" : "Z%E4hlerstand eingeben",
     "lblEnergyConsumptionInWatt" : "Wert in Wh",
     "lblUnitWh" : "Wh",

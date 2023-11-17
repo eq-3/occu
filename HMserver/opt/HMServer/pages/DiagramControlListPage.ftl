@@ -998,8 +998,9 @@
       chnAddress = oldLabel.split("_")[0];
 
       if (devType = "HmIP-ESI") {
-        var oChn = DeviceList.getChannelByAddress(chnAddress),
-        sensor = parseInt(homematic("Interface.getMetadata", {"objectId": oChn.id, "dataId": "ChnOpMode"}));
+        var oChn = DeviceList.getChannelByAddress(chnAddress);
+        var adrChnOne = oChn.address.split(":")[0] + ":1",
+        sensor = parseInt(homematic("Interface.getValue", {"interface": "HmIP-RF", "address": adrChnOne, "valueKey": "CHANNEL_OPERATION_MODE"}));
 
         // GAS-Sensor
         if (sensor == 1) {

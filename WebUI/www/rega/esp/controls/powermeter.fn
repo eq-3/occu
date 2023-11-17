@@ -1007,47 +1007,52 @@ function ::SensorSearchBtnShow() {
 ! POWERMETER_ESI Chn 1
 function ::CreatePowermeterESIControl_CurConsumption() {
 
+  object oEnergy = cObj.DPByControl("POWERMETER_PSM.POWER");
+  object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.POWER_STATUS");
+
   string arDeviceState = "${lblOK},${lblUnknown},${},${lblOverflow}lblUnderflow";
 
-  string unit = "--";
+  string unit = "";
   string curConsumption = "--";
   string curStatus = "${lblUnknown}";
-  string lblHeader = "";
+  string lblHeader = "${lblInfoStatusControlPower}";
 
-  if (esiSensor != "SENSOR_ES_GAS") {
-    object oEnergy = cObj.DPByControl("POWERMETER_PSM.POWER");
-    object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.POWER_STATUS");
-    unit = "W";
-    lblHeader = "${lblInfoStatusControlPower}";
-    if (oEnergy) {curConsumption = oEnergy.State().ToString(2);}
-    if (oEnergyStatus) {
-      curStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());
+  if (esiSensor != "SENSOR_UNKNOWN") {
+    if (esiSensor != "SENSOR_ES_GAS") {
+      unit = "W";
 
-      if (esiSensor.Substr(0,13) != "SENSOR_ES_IEC") {
-        if (oEnergyStatus.Value() > 0) {
-          curConsumption = curStatus;
-          unit = "";
+      if (oEnergy) {curConsumption = oEnergy.State().ToString(2);}
+      if (oEnergyStatus) {
+        curStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());
+
+        if (esiSensor.Substr(0,13) != "SENSOR_ES_IEC") {
+          if (oEnergyStatus.Value() > 0) {
+            curConsumption = curStatus;
+            unit = "";
+          }
+        } else {
+          if (oEnergyStatus.Value() > 1) {
+            curConsumption = curStatus;
+            unit = "";
+          }
         }
-      } else {
-        if (oEnergyStatus.Value() > 1) {
+      }
+    } else {
+      oEnergy = cObj.DPByControl("POWERMETER_PSM.GAS_FLOW");
+      oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.GAS_FLOW_STATUS");
+      unit = "m<sup>3</sup>/h";
+      lblHeader = "${powerMeasurementA}";
+      if (oEnergy) {curConsumption = oEnergy.State().ToString(2);}
+      if (oEnergyStatus) {
+        curStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());
+        if (oEnergyStatus.Value() > 0) {
           curConsumption = curStatus;
           unit = "";
         }
       }
     }
   } else {
-    object oEnergy = cObj.DPByControl("POWERMETER_PSM.GAS_FLOW");
-    object oEnergyStatus = cObj.DPByControl("POWERMETER_PSM.GAS_FLOW_STATUS");
-    unit = "m<sup>3</sup>/h";
-    lblHeader = "${powerMeasurementA}";
-    if (oEnergy) {curConsumption = oEnergy.State().ToString(2);}
-    if (oEnergyStatus) {
-      curStatus = arDeviceState.StrValueByIndex(',',oEnergyStatus.Value());
-      if (oEnergyStatus.Value() > 0) {
-        curConsumption = curStatus;
-        unit = "";
-      }
-    }
+    curConsumption = "${lblUnknown}";
   }
 
   if (curConsumption == "") {curConsumption = "--"; unit = "";}
@@ -1202,7 +1207,7 @@ function ::CreatePowermeterESIControl_TotalConsumption() {
                     WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
                       WriteLine("<tr>");
                         WriteLine("<td>");
-                          WriteLine("<span>${powerMeasurement}</span>");
+                          WriteLine("<span>${lblMeterReading}</span>");
                         WriteLine("</td>");
                       WriteLine("</tr>");
                       WriteLine("<tr>");
@@ -1214,20 +1219,20 @@ function ::CreatePowermeterESIControl_TotalConsumption() {
                   WriteLine("</td>");
 
                   !TEST Counter DEVICE
-               !   WriteLine("<td>");
-               !     WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
-               !       WriteLine("<tr>");
-               !         WriteLine("<td>");
-               !           WriteLine("<span>${powerMeasurement}</span>");
-               !         WriteLine("</td>");
-               !       WriteLine("</tr>");
-               !       WriteLine("<tr>");
-               !         WriteLine("<td>");
-               !           WriteLine("<span>"#oEnergyCounterGas.Value()#"</span>");
-               !         WriteLine("</td>");
-               !       WriteLine("</tr>");
-               !     WriteLine("</table>");
-               !   WriteLine("</td>");
+                !  WriteLine("<td>");
+                !    WriteLine("<table class='ControlBtnInfo' style='min-width: 240px;'>");
+                !      WriteLine("<tr>");
+                !        WriteLine("<td>");
+                !          WriteLine("<span>Device ${powerMeasurement}</span>");
+                !        WriteLine("</td>");
+                !      WriteLine("</tr>");
+                !      WriteLine("<tr>");
+                !        WriteLine("<td>");
+                !          WriteLine("<span>"#oEnergyCounter.Value()#"</span>");
+                !        WriteLine("</td>");
+                !      WriteLine("</tr>");
+                !    WriteLine("</table>");
+                !  WriteLine("</td>");
 
                   !STATUS
                   WriteLine("<td class='hidden'>");
@@ -1394,7 +1399,12 @@ function ::CreatePowermeterESIControl_ESI_IEC() {
         unit = "";
       }
     }
+  }
 
+  ! At the first start we use the device counter
+  if (! cObj.MetaData("firstStart")) {
+    energyCounter = totalConsumption#" "#unit;
+    cObj.AddMetaData("firstStart",0);
   }
 
   ! html

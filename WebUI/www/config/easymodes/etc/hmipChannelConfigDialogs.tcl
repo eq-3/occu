@@ -3191,7 +3191,7 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
   }
 
   set param METER_OBIS_SEARCH_STRING
-  if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
+  if { ([info exists ps($param)] == 1) && ($ps(CHANNEL_OPERATION_MODE) >= 3) } {
     set paramValue $ps($param)
     if {$paramValue == "$$$$$"} {
       set paramValue " "
@@ -3216,16 +3216,7 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
 
         append html "jQuery('\#lblSensorType').text(translateKey(arTranslationSensorTypes\[sensor\]));"
 
-        append html " oChn = DeviceList.getChannelByAddress('$chnAddress'); "
-        set devAddress [lindex [split $chnAddress :] 0]
-        append html " oDev = DeviceList.getDeviceByAddress('$devAddress'); "
 
-        append html "jQuery.each(oDev.channels, function(index, channel) { "
-          append html " if (channel.channelType != 'MAINTENANCE') { "
-            append html " homematic('Interface.setMetadata', {'objectId': channel.id, 'dataId': 'sensor', 'value': arSensorTypes\[sensor\]}); "
-            append html " homematic('Interface.setMetadata', {'objectId': channel.id, 'dataId': 'ChnOpMode', 'value': parseInt(sensor)}); "
-          append html " } "
-        append html " }); "
 
       }
 
@@ -3291,7 +3282,7 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
   append html "</tr>"
   # append html "<tr class='j_setStartVal_$chn hidden'><td colspan='2'><hr></td></tr>"
 
-  if {($chn == 1 || $chn == 2) && ($chnOpMode == 1 || $chnOpMode == 2) || ($chnOpMode > 3)} {
+  if {$chnOpMode > 3} {
     set param METER_OBIS_SEARCH_STRING
     if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
       set paramValue $ps($param)
@@ -3330,19 +3321,29 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
       append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValC'});"
     append html "}"
 
-    append html "if (isNaN(startValue)) {"
+    append html "if (isNaN(startValue) && (sensor < 3)) {"
       append html "startValue = 0.000;"
     append html "}"
 
     append html "if ((startValue != -1) && (startValue != 'null')) {"
-      append html "startValue = startValue / 1000;"
+
+      append html "if (sensor == 1) {"
+        append html "startValue = parseFloat(startValue);"
+      append html "} else {"
+        append html "startValue = startValue / 1000;"
+      append html "}"
+
       append html "jQuery('#esiCounterStartVal_' + chnIndex).val(startValue.toFixed(3));"
     append html "} else if (sensor >= 3) {"
       # sensor >= 3 = IEC-Sensor
       append html "var chValueParamSet = homematic('Interface.getParamset', {'interface':'HmIP-RF', 'address': '$chnAddress', 'paramsetKey': 'VALUES'}),"
       append html "energyCounter = chValueParamSet.ENERGY_COUNTER;"
       append html "if (energyCounter == '') {energyCounter = 0.000}"
-      append html "startValue = energyCounter;"
+      # append html "startValue = energyCounter;"
+
+      append html "if (isNaN(startValue)) {startValue = energyCounter;}"
+      append html "if (isNaN(startValue)) {startValue = 0;}"
+
       append html "jQuery('#esiCounterStartVal_' + chnIndex).val(parseFloat(startValue).toFixed(3));"
     append html "}"
 

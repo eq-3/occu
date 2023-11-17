@@ -1890,6 +1890,7 @@ UPDATE_PENDING=TRUE	${stringTableUpdatePendingTrue}
 USER_COLOR	${stringTableSubmit}
 USER_PROGRAM	${stringTableSubmit}
 
+VALUE_8BIT	${lblValue}
 VALVE_MAXIMUM_POSITION	${stringTableValveMaximumPosition}
 
 VALVE_STATE	${stringTableClimateControlRTTransceiverVentPos}

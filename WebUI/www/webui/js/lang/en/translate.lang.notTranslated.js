@@ -163,6 +163,7 @@ jQuery.extend(true, langJSON, {
     "powerMeasurementC" : "Off-peak incoming energy supply",
     "powerMeasurementD" : "Outgoing energy supply",
 
+    "lblMeterReading" : "Meter reading",
     "lblSetEnergyCounter" : "Enter meter reading",
     "lblEnergyConsumptionInWatt" : "Value in Wh",
     "lblUnitWh" : "Wh",

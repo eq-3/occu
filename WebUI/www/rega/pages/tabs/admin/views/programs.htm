@@ -493,7 +493,7 @@
       maxCap = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": chnAddress, "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"}),
       optionElm = jQuery("#prgStringOptionValue" + regaDialogID);
 
-    if (deviceType == "HmIP-LSS") {maxCap = 3;}
+    if (deviceType == "HmIP-LSC") {maxCap = 3;}
 
     switch (parseInt(maxCap)) {
       case 0:

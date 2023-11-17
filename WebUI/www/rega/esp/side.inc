@@ -23,7 +23,7 @@
   string hmip_mp3p = "HmIP-MP3P";
   string hmip_bsl = "HmIP-BSL";
   string hmip_drg_dali = "HmIP-DRG-DALI";
-  string hmip_lss = "HmIP-LSS";
+  string hmip_lsc = "HmIP-LSC";
 
   string hmipwID = "HmIPW-";
   string hmipw_wrc6 = "HmIPW-WRC6";
@@ -723,8 +723,8 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDALI_CombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
-             ! HmIP-LSS
-             if ((oCH.Label().Find(hmip_lss) != -1) && (i_universalLightReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+             ! HmIP-LSC
+             if ((oCH.Label().Find(hmip_lsc) != -1) && (i_universalLightReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                if (iV.Find("L=") == -1) {iV = "L=100,OT=0,RT=0,H=0,SAT=100";}
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDALI_CombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="35" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
              }
