@@ -1,0 +1,90 @@
+"dimmer_on_brighter" : "Brightness (V) - on/brighter",
+"dimmer_off_darker" : "Brightness (V) - off/darker",
+"dimmer_on_off_b_d" : "Helligkeit (V) - on/off &amp; brighter/darker",
+
+"dimmer_on_v" : "Brightness (V) - on",
+"dimmer_off_v" : "Brightness (V) - off",
+"dimmer_on_off_v" : "Brightness (V) - on/off",
+
+"color_a" : "Colour value (H) - A",
+"color_b" : "Colour value (H) - B",
+"color_a_b" : "Colour value (H) - A / B",
+
+"color_up" : "Colour value (H) - up",
+"color_down" : "Colour value (H) - down",
+"color_up_down" : "Colour value (H) - up/down",
+
+"saturation_a" : "Saturation (S) - A",
+"saturation_b" : "Saturation (S) - B",
+"saturation_a_b" : "Saturation (S) - A / B",
+
+"saturation_up" : "Saturation (S) - up",
+"saturation_down" : "Saturation (S) - down",
+"saturation_up_down" : "Saturation (S) - up/down",
+
+"dimmer_on" : "Helligkeit - ein",
+"dimmer_off" : "Helligkeit - aus",
+"dimmer_on_off" : "Helligkeit - ein/aus",
+
+"colortemp_a" : "Farbtemperatur - A",
+"colortemp_b" : "Farbtemperatur - B",
+"colortemp_a_b" : "Farbtemperatur - A/B",
+
+"hcl_on" : "HCL - ein",
+"hcl_off" : "HCL - aus",
+"hcl_on_off" : "HCL - ein/aus",
+
+"dim2warm_on" : "Dim2Warm - ein",
+"dim2warm_off" : "Dim2Warm - aus",
+"dim2warm_on_off" : "Dim2Warm - ein/aus",
+
+"optionColorVal" : "Colour value",
+
+"colortemp_up" : "Colour temperature - up",
+"colortemp_down" : "Colour temperature - down",
+"colortemp_up_down" : "Colour temperature - up/down",
+
+"hcl_on_up" : "HCL - on/brighter",
+"hcl_off_down" : "HCL - off/darker",
+"hcl_on_of_up_down" : "HCL - on/off / brighter/darker",
+
+"dim2warm_on_up" : "Dim2Warm - on/brighter",
+"dim2warm_off_down" : "Dim2Warm - off/darker",
+"dim2warm_on_of_up_down" : "Dim2Warm - on/off & brighter/darker",
+
+"COLOR_TEMP" : "Colour temperature",
+"COLOR_TEMP A" : "Colour temperature A",
+"COLOR_TEMP B" : "Colour temperature B",
+"COLOR_TEMP_ON" : "Colour temperature in status 'on'",
+"COLOR_TEMP_OFF" : "Colour temperature in status 'off'",
+"MIN_COLOR_TEMP" : "Minimum colour temperature",
+"MAX_COLOR_TEMP" : "Maximum colour temperature",
+
+"unitKelvin" : "K",
+
+"Effect" : "Effect",
+
+"TW_dimmer_on_brighter" : "Brightness (TW) - on/brighter",
+"TW_dimmer_off_darker" : "Brightness (TW) - off/darker",
+"TW_dimmer_on_off_b_d" : "Brightness - (TW) on/off &amp; brighter/darker",
+"TW_colortemp_up" : "Colour temperature - up",
+"TW_colortemp_down" : "Colour temperature - down",
+"TW_colortemp_up_down" : "Colour temperature - up/down",
+
+"TW_hcl_on_up" : "HCL - on/brighter",
+"TW_hcl_off_down" : "HCL - off/darker",
+"TW_hcl_on_of_up_down" : "HCL - on/off / brighter/darker",
+
+"TW_dim2warm_on_up" : "Dim2Warm - on/brighter",
+"TW_dim2warm_off_down" : "Dim2Warm - off/darker",
+"TW_dim2warm_on_of_up_down" : "Dim2Warm - on/off & brighter/darker",
+
+"COLOR_TEMP" : "Colour temperature",
+"COLOR_TEMP_ON" : "Colour temperature in status 'on'",
+"COLOR_TEMP_OFF" : "Colour temperature in status 'off'",
+"MIN_COLOR_TEMP" : "Minimum colour temperature",
+"MAX_COLOR_TEMP" : "Maximum colour temperature",
+
+"lblResorePreviousStatus" : langJSON.en.lblResorePreviousStatus,
+
+"unitKelvin" : "K",

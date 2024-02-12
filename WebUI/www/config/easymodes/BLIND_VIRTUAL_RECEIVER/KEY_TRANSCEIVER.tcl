@@ -20,7 +20,7 @@ set PROFILES_MAP(1)  "\${OpenUp}"
 set PROFILES_MAP(2)  "\${CloseDown}"
 set PROFILES_MAP(3)  "\${OpenClose_UpDown}"
 set PROFILES_MAP(4)  "\${TargetPosition}"
-set PROFILES_MAP(5)  "tr LamellenPosition"
+set PROFILES_MAP(5)  "\${JalousieSlatsLevel}"
 
 set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
@@ -478,17 +478,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
-  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
-    incr pref
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
-    array_clear options
-    set options(0)    "\${option0}"
-    set options(1)    "\${option1}"
-    set options(2)    "\${option2}"
-    set options(3)    "\${option3}"
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
+  catch {
+    if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+      array_clear options
+      set options(0)    "\${option0}"
+      set options(1)    "\${option1}"
+      set options(2)    "\${option2}"
+      set options(3)    "\${option3}"
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
 
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -505,17 +507,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   #ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector DOWN_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
-  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
-    incr pref
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
-    array_clear options
-    set options(0)    "\${option0}"
-    set options(1)    "\${option1}"
-    set options(2)    "\${option2}"
-    set options(3)    "\${option3}"
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
+  catch {
+    if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+      array_clear options
+      set options(0)    "\${option0}"
+      set options(1)    "\${option1}"
+      set options(2)    "\${option2}"
+      set options(3)    "\${option3}"
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
 
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
   }
 
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
@@ -540,17 +544,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector UP_TIME_DELAY_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"
 
-  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
-    incr pref
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
-    array_clear options
-    set options(0)    "\${option0}"
-    set options(1)    "\${option1}"
-    set options(2)    "\${option2}"
-    set options(3)    "\${option3}"
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
+  catch {
+    if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+      array_clear options
+      set options(0)    "\${option0}"
+      set options(1)    "\${option1}"
+      set options(2)    "\${option2}"
+      set options(3)    "\${option3}"
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
 
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
   }
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
@@ -626,17 +632,19 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL_2 "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
-    incr pref
-    append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
-    array_clear options
-    set options(0)    "\${option0}"
-    set options(1)    "\${option1}"
-    set options(2)    "\${option2}"
-    set options(3)    "\${option3}"
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
+  catch {
+    if { [info exists ps(LONG_SLATS_MOVEMENTS_TO_SKIP)] == 1  } {
+      incr pref
+      append HTML_PARAMS(separate_$prn) "<tr><td>\${lblSpeed}</td><td>"
+      array_clear options
+      set options(0)    "\${option0}"
+      set options(1)    "\${option1}"
+      set options(2)    "\${option2}"
+      set options(3)    "\${option3}"
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_SLATS_MOVEMENTS_TO_SKIP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_SLATS_MOVEMENTS_TO_SKIP]
 
-    append HTML_PARAMS(separate_$prn) "</td></tr>"
+      append HTML_PARAMS(separate_$prn) "</td></tr>"
+    }
   }
   # parameter end
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"

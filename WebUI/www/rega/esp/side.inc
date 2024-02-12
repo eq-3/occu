@@ -486,20 +486,20 @@
                 ! Add more exceptions
                 if (hmipWth != -1) {
                   boolean showGenericElem = true;
-                  if ((hmipWth != -1) ) {
 
-                    if ((oDP.HSSID().Find("CONTROL_MODE") != -1) || (oDP.HSSID().Find("SET_POINT_MODE") != -1)) {
-                      ! The maximal valid value is 3, but 3 is reserved (AUTO,MANU,PARTY,RESERVED), so we restrict the maximal value to 2
-                      ! Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox alignCenter" size="6" value="'#iV#'" onfocus="SetWTHControlMode('#oSD.ID()#',\''#oDP.HSSID()#'\');" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#',2);" />' );
-                      Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="CLASS02401 SelectBox alignCenter" size="6" value="'#iV#'" onfocus="SetWTHControlMode('#oSD.ID()#',\''#oDP.HSSID()#'\');" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');"/>' );
-                      Write('<span id="wthControlMode'#oSD.ID()#'" class="CLASS02401" onclick="SetWTHControlMode('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
+                  if ((oDP.HSSID().Find("CONTROL_MODE") != -1) || (oDP.HSSID().Find("SET_POINT_MODE") != -1)) {
+                    ! The maximal valid value is 3, but 3 is reserved (AUTO,MANU,PARTY,RESERVED), so we restrict the maximal value to 2
+                    ! Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox alignCenter" size="6" value="'#iV#'" onfocus="SetWTHControlMode('#oSD.ID()#',\''#oDP.HSSID()#'\');" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#',2);" />' );
+                    Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="CLASS02401 SelectBox alignCenter" size="6" value="'#iV#'" onfocus="SetWTHControlMode('#oSD.ID()#',\''#oDP.HSSID()#'\');" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');"/>' );
+                    Write('<span id="wthControlMode'#oSD.ID()#'" class="CLASS02401" onclick="SetWTHControlMode('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
 
-                      showGenericElem = false;
-                    }
+                    showGenericElem = false;
+                  }
 
-                    if (showGenericElem) {
-                      Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
-                      Write( sUnit );
+                  if (showGenericElem) {
+                    Write( '<input id="valSD_'#oSD.ID()#'" type="text" class="A SelectBox" size="6" value="'#iV#'" onchange="iseSingleDestination.SetValueMinMax('#oSD.ID()#',this.value,\''#sUnit#'\','#oDP.ValueMin()#','#oDP.ValueMax()#');" />' );
+                    Write( sUnit );
+                    if (oDP.HSSID().Find("ACTIVE_PROFILE") == -1) {
                       Write( '<span class="CLASS02401" onclick="ChangeDestinationValue('#oSD.ID()#');"><img src="/ise/img/notepad.png" /></span>' );
                     }
                   }

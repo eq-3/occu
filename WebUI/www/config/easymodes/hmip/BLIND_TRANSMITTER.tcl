@@ -59,7 +59,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       } {
 
       # The config parameter CHANNEL_OPERATION_MODE is only avaliable for devices with a firmware >= 1.6
-      set channelOperationMode [info exists ps(CHANNEL_OPERATION_MODE)]
+      set channelOperationModeExists [info exists ps(CHANNEL_OPERATION_MODE)]
 
       # Determine the current channelMode
       set devMode [xmlrpc $url getMetadata [list string $address] channelMode]
@@ -71,7 +71,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         set virtChAddressB "$devAddress:[expr $chn + 2]"
         set virtChAddressC "$devAddress:[expr $chn + 3]"
 
-        if {$channelOperationMode == 1} {
+        if {$channelOperationModeExists == 1} {
           set devMode "shutter"
         } else {
           set devMode "blind"
@@ -122,8 +122,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
           puts "\}"
 
-
-
           puts "var hintIndicator = 0;"
 
           puts "var virChnAddressA = oChannel.device.address + \":\" + (oChannel.index + 1),"
@@ -134,11 +132,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
           puts "oChannelVirtB = DeviceList.getChannelByAddress(virChnAddressB),"
           puts "oChannelVirtC = DeviceList.getChannelByAddress(virChnAddressC);"
 
-          if {$channelOperationMode != 1} {
-            puts "if (0 != $chnHasLinks) {"
-               puts "hintIndicator += 1;"
-            puts "}"
-          }
+          puts "if (0 != $chnHasLinks) {"
+             puts "hintIndicator += 1;"
+          puts "}"
 
           puts "if ((oChannel.hasProgramIds()) || (oChannelVirtA.hasProgramIds()) || (oChannelVirtB.hasProgramIds()) || (oChannelVirtC.hasProgramIds())) {"
             puts "hintIndicator += 2;"
@@ -156,11 +152,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
             puts "jQuery(\"#hintLinksProgramsAvailable_$chn\").html(translateKey(arHints\[hintIndicator\]) + translateKey(\"hintCheckChannels\") + hintAffectedChannels);"
             puts "jQuery(\"#hintLinksProgramsHR_$chn\").show();"
 
-            if {$channelOperationMode != 1 } {
-              puts "jQuery(\"#modeSelector_\"+oChannel.device.address+\"_$chn\").prop(\"disabled\", true);"
-            } else {
-              puts "if (hintIndicator > 1) {jQuery(\"#modeSelector_\"+oChannel.device.address+\"_$chn\").prop(\"disabled\", true);}"
-            }
+            puts "jQuery(\"#modeSelector_\"+oChannel.device.address+\"_$chn\").prop(\"disabled\", true);"
 
           puts "}"
 
@@ -171,7 +163,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
           puts "if ((devMode == '--') || (devMode == 'null') || (typeof devMode == 'undefined')) \{"
 
             puts "var devAddress = oChannel.device.address,"
-            if {$channelOperationMode == 1} {
+            if {$channelOperationModeExists == 1} {
               # Device firmware >= 1.6
               puts "devMode = 'shutter',"
             } else {
@@ -279,7 +271,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
               DeviceList.beginUpdateDevice(device.id);
             });"
 
-             if {$channelOperationMode == 1} {
+             if {$channelOperationModeExists == 1} {
                puts "var arModi = \['shutter','blind',\]"
                puts "homematic(\"Interface.putParamset\", {'interface': 'HmIP-RF', 'address': chAddress, 'paramsetKey' : 'MASTER', 'set' : \[\{name:'CHANNEL_OPERATION_MODE', type : 'integer', value : arModi.indexOf(elmVal)\}\] }, function() \{\});"
              }

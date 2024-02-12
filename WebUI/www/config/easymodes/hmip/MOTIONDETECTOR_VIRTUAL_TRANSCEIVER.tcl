@@ -81,7 +81,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "[getHorizontalLine]"
     }
 
-    if {[string equal $devType HmIP-SMO230] != 1} {
+    if {([string equal $devType HmIP-SMO230] != 1) && ([string equal $devType HmIP-SMO230-A] != 1) } {
       append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(A)</span></td><td id=\"Hm\">\${mdTrigger}"
       array_clear options
       incr prn

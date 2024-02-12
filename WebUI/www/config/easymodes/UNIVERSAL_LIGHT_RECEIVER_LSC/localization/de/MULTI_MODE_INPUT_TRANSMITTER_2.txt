@@ -1,0 +1,27 @@
+"description_1" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Licht auf den festgelegten Helligkeitswert/Farbwert eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Licht ausgeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wechselt das Licht zwischen dem festgelegten Helligkeitswert/Farbwert und &quot;aus&quot;.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Licht auf den eingestellten Farbwert gesetzt.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Licht auf den eingestellten Farbwert gesetzt.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wechselt das Licht zwischen den beiden festgelegten Farbwerten.</span><br/><br/>",
+
+"description_7" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Licht auf die eingestellte Farbs&auml;ttigung gesetzt.</span><br/><br/>",
+"description_8" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wird das Licht auf die eingestellte Farbs&auml;ttigung gesetzt.</span><br/><br/>",
+"description_9" : "<span class=\"translated\">Bei Bet%E4tigung des Schalters wechselt das Licht zwischen den beiden festgelegten Farbs&auml;ttigungen.</span><br/><br/>",
+
+"description_10" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht auf die festgelegte Farbtemperatur gesetzt. Ein langer Tastendruck erh&ouml;ht die Farbtemperatur.</span><br/><br/>",
+"description_11" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht auf die festgelegte Farbtemperatur gesetzt. Ein langer Tastendruck vermindert die Farbtemperatur.</span><br/><br/>",
+"description_12" : "<span class=\"translated\">Mit einem kurzen Tastendruck wechselt das Licht zwischen den beiden festgelegten Farbtemperaturen. Ein langer Tastendruck f&auml;hrt die Farbtemperatur abwechselnd hoch und herunter.</span><br/><br/>",
+
+"description_13" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht als dynamisches Tageslicht (Human Centric Lightning (HCL)) eingeschaltet. Ein langer Tastendruck dimmt das Licht hoch.</span><br/><br/>",
+"description_14" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht ausgeschaltet. Ein langer Tastendruck dimmt das Licht herunter.</span><br/><br/>",
+"description_15" : "<span class=\"translated\">Mit einem kurzen Tastendruck wechselt das Licht als dynamisches Tageslicht (Human Centric Lightning (HCL) zwischen dem festgelegten Helligkeitswert und 'aus'. Ein langer Tastendruck dimmt das Licht abwechselnd hoch und herunter.</span><br/><br/>",
+
+"description_16" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht im Dim2Warm Modus eingeschaltet. Ein langer Tastendruck dimmt das Licht hoch.</span><br/><br/>",
+"description_17" : "<span class=\"translated\">Mit einem kurzen Tastendruck wird das Licht ausgeschaltet. Ein langer Tastendruck dimmt das Licht herunter.</span><br/><br/>",
+"description_18" : "<span class=\"translated\">Mit einem kurzen Tastendruck wechselt das Licht im Dim2Warm Modus zwischen dem festgelegten Helligkeitswert und 'aus'. Ein langer Tastendruck dimmt das Licht abwechselnd hoch und herunter.</span><br/><br/>",
+
+"description_19" : "<span class=\"translated\">Ein kurzer oder langer Tastendruck aktiviert den gew&auml;hlten Effekt.</span><br/><br/>",
+"description_20" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
+

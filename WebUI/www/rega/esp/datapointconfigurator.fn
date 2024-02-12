@@ -12,27 +12,27 @@ function ::dcCreateTable()
       WriteLine('<div class="CLASS02502">' # sName # '</div>');
       WriteLine('<td>');
     WriteLine('</tr>');
-
+  
     WriteLine('<tr>');
       WriteLine('<td class="CLASS02503"><div class="CLASS02504" style="visibility:hidden;"></div></td>');
     WriteLine('</tr>');
-
+  
     WriteLine('<tr>');
       WriteLine('<td id="dpc'#cId#'" class="CLASS02505">');
         Call("/esp/datapointconfigurator.fn::dcCreate()");
       WriteLine('</td>');
     WriteLine('</tr>');
-
+  
     WriteLine('<tr>');
       WriteLine('<td class="CLASS02503"><div class="CLASS02504" style="visibility:hidden;"></div></td>');
     WriteLine('</tr>');
   }
-
+  
   if( iFavNamePosition == 0 )
   {
     integer iLength = 9;
     Call("/esp/datapointconfigurator.fn::StringCut()");
-
+  
     WriteLine('<tr>');
       WriteLine('<td class="CLASS02507">');
       WriteLine('<div class="CLASS02509">'#sName#'</div></td>');
@@ -40,7 +40,7 @@ function ::dcCreateTable()
         Call("/esp/datapointconfigurator.fn::dcCreate()");
       WriteLine('</td>');
     WriteLine('</tr>');
-
+  
   }
   WriteLine('</table>');
 }
@@ -54,7 +54,7 @@ function ::dcCreate()
   integer chnId = system.GetVar("cId");
   boolean ctrlReqUpdate = false;
   object cObj = dom.GetObject( system.GetVar("cId") );
-
+  
   if( cObj.IsTypeOf( OT_PROGRAM ) )
   {
     ictCH = 0;
@@ -63,7 +63,7 @@ function ::dcCreate()
     string viewstatus = "";
     Call("/esp/system.fn::writeProgCtrl()");
   }
-
+  
   if( cObj.IsTypeOf( OT_DP ) )
   {
     ictCH = 0;
@@ -85,7 +85,7 @@ function ::dcCreate()
       WriteLine( '</table>' );
     }
   }
-
+    
   if( cObj.IsTypeOf( OT_CHANNEL ) )
   {
     var CN_ACCELERATION_TRANSCEIVER = "ACCELERATION_TRANSCEIVER.";
@@ -663,7 +663,7 @@ function ::dcCreate()
               WriteLine( "<script>conInfo('Control CN_HMIP_BUTTON found.');</script>" );
               isKnownControl = true;
               sLastControlName = CN_HMIP_BUTTON;
-            if (ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER" || (ch.Label() == "ELV-SH-BM-S")) {
+            if ((ch.HssType() != "MULTI_MODE_INPUT_TRANSMITTER") || (ch.Label() == "ELV-SH-BM-S")) {
                if (ch.Label().Substr(5,7) != "MOD-RC8") {
                 if ((ch.Label() == "ELV-SH-BM-S")) {
                   WriteLine( "<script>conInfo('ELV-SH-BM-S found');</script>" );
@@ -674,10 +674,6 @@ function ::dcCreate()
               } else {
                 WriteLine( "<script>conInfo('HmIP-MOD-RC8 found');</script>" );
                 Call("/esp/controls/key_switch_sc.fn::CreateContent()");
-              }
-            } else {
-              if (sLastControlName != CN_HMIP_BUTTON) {
-                Call("/esp/datapointconfigurator.fn::CreateNoFunction()");
               }
             }
           }
@@ -873,11 +869,7 @@ function ::dcCreate()
               WriteLine( "<script>conInfo('HmIP-ESI - sensor: "#esiSensor#"');</script>" );
 
               if (chnNumber == 1) {
-                if (esiSensor == "_SENSOR_UNKNOWN") {
-                  Call("/esp/controls/powermeter.fn::SensorSearchBtnShow()");;
-                } else {
                  Call("/esp/controls/powermeter.fn::CreatePowermeterESIControl_CurConsumption()");
-                }
               } else {
                 string _esiSensor = esiSensor;
 
@@ -1278,7 +1270,7 @@ function ::dcCreate()
     } else {
       WriteLine("updateChannelControl(" # chnId # ", '" # sLastTime # "');");
     }    WriteLine("</script>");
-  }
+  }  
 
     !WriteLine("<script type='text/javascript'>");
       !WriteLine("translatePage('#content')");
@@ -1288,7 +1280,7 @@ function ::dcCreate()
 }
 
 function ::StringCut()
-{
+{ 
   if(((sName.Find(" ") == -1) || (sName.Find(" ") >= 9)) && (sName.Length()>9) && (sName.Find("${") == -1))
   {
     string sI = "";
@@ -1317,19 +1309,19 @@ function ::CreateEventInterface()
   if( objEvent )
   {
     WriteLine("<td>");
-      WriteLine("<table class='ControlBtnOff CLASS02511' id='"#chnId#"event' >");
+      WriteLine("<table class='ControlBtnOff CLASS02511' id='"#chnId#"event' >"); 
         WriteLine("<tr>");
           WriteLine("<td  class='CLASS02513'>");
             WriteLine("<div align='center'>");
               WriteLine("<img id='btn"#chnId#"s' src='/ise/img/btn_no_press.png' width='80' height='80' />");
-            WriteLine("</div>");
+            WriteLine("</div>");            
           WriteLine("</td>");
         WriteLine("</tr>");
         WriteLine("<tr><td id='"#chnId#"Txt'>Betätigen</td></tr>");
       WriteLine("</table>");
     WriteLine("</td>");
     WriteLine("<td class='CLASS02524'>&nbsp;</td>");
-
+    
     WriteLine("<script type='text/javascript'>");
       WriteLine("ibk"#cObj.ID()#" = new iseButtonsEvent("#cObj.ID()#", "#objEvent.ID()#", "#system.GetVar("iStatusOnly")#");");
       Write("jQuery('#"#chnId#"Txt').html(translateKey('actionStatusControlActivate'));");
@@ -1385,7 +1377,7 @@ function ::CreateUnknown()
     WriteLine( '<tr>');
     integer i = 0;
     string sEnum = "";
-
+    
     if( (cObj.IsTypeOf( OT_VARDP )) || (cObj.IsTypeOf( OT_ALARMDP)) )
     {
       sEnum = cObj.ID().ToString();
@@ -1394,7 +1386,7 @@ function ::CreateUnknown()
     {
       sEnum = cObj.DPs().EnumEnabledVisibleIDs();
     }
-
+    
     string sKnownControls = "NONE.SWITCH.DIMMER.BLIND.WINDOW.LOCK.BUTTON.RC19_DISPLAY.DOOR_SENSOR.RHS.TEMP.ANALOG_OUTPUT.";
     string s;
     foreach( s, sEnum )
@@ -1682,12 +1674,12 @@ function ::ConvWindDir() {
 
 ! --- Konvertierung der Gradanzeige in Himmelsrichtungen ---
 
- integer iValue = sValue.ToInteger() ;
-
+ integer iValue = sValue.ToInteger() ; 
+ 
  sValueh = "no value";
-
- if ( (iValue >= 346) || (iValue <= 15) )
- {
+ 
+ if ( (iValue >= 346) || (iValue <= 15) ) 
+ { 
   sValueh = "N";
   return;
  }
@@ -1734,11 +1726,11 @@ function ::CreateSysVar()
 {
   WriteLine( '<td class="CLASS02537">' );
     WriteLine( '<div class="ControlBtnInfo CLASS02538" >' );
-
+      
       string sSysVarVal = '';
       object cObjTmp = cObj;
       Call( "/esp/system.fn::getSysVarValAsString()" );
-
+  
       WriteLine( '<span id="sysvs'#cObj.ID()#'" class="CLASS02535">'#sSysVarVal#'</span>' );
     WriteLine( '</div>' );
   WriteLine( '</td>' );
@@ -1763,7 +1755,7 @@ function ::CreateSysVars()
         WriteLine( '<td class="CLASS02540">' );
           WriteLine( '<div class="ControlBtnInfo CLASS02538" >' );
             WriteLine( '<span class="CLASS02534">'#oSV.Name()#':</span>' );
-
+            
             string sSysVarVal = "";
             object cObjTmp = oSV;
             integer iVT = cObjTmp.ValueType();
@@ -1775,7 +1767,7 @@ function ::CreateSysVars()
             boolean bString = ( (iVT==ivtString)  && (iST==istChar8859));
             boolean bSysVar = ( bLogic || bList || bNumber || bAlarm || bString);
             Call( "/esp/system.fn::getSysVarValAsString()" );
-
+        
             WriteLine( '<span class="CLASS02535">'#sSysVarVal#'</span>' );
           WriteLine( '</div>' );
         WriteLine( '</td>' );
@@ -1787,7 +1779,7 @@ function ::CreateSysVars()
   WriteLine( '</tr>' );
   WriteLine( '</table>' );
   WriteLine( '</td>' );
-
+  
   return;
 }
 

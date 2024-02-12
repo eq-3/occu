@@ -366,8 +366,11 @@ function ::showHideHmIPChannel() {
       && (oDevHssType != "HmIP-WRC6")
       && (oDevHssType != "HmIP-WRC6-A")
       && (oDevHssType != "HmIP-KRCA")
+      && (oDevHssType != "HmIP-KRCA-2")
       && (oDevHssType != "HmIP-KRCK")
+      && (oDevHssType != "HmIP-KRCK-2")
       && (oDevHssType != "HmIP-KRC4")
+      && (oDevHssType != "HmIP-KRC4-2")
       && (oDevHssType != "HmIP-MOD-RC8")
       && (oDevHssType != "HmIP-BRC2")
       && (oDevHssType != "HmIP-DBB")
@@ -835,7 +838,7 @@ function ::destinationIsParameterVisible() {
   if ( oCH.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
 
     !e. g. HmIP-FWI (Wiegand Interface)
-    if ((oCH.Label() == "HmIP-FWI") || (oCH.Label() == "HmIP-SMO230")) {
+    if ((oCH.Label() == "HmIP-FWI") || (oCH.Label() == "HmIP-SMO230")  || (oCH.Label() == "HmIP-SMO230-A")) {
       if ( oDP.HSSID().Find("ON_TIME") != -1 ) {
         showChannelParam = false;
       }
@@ -1109,13 +1112,16 @@ function ::getSpecialTranslationPrgCond() {
 }
 
 function ::getSpecialTranslationPrgDest() {
-  ! ASIR - Adds the string "Alarmsignal: " to the original value.
-  if (oDP.HSSID() == "ACOUSTIC_ALARM_SELECTION") {
-    sValue = "${acousticAlarm}: "#sValue;
-  }
-  ! ASIR - Adds the string "Alarmsignal: " to the original value.
-  if (oDP.HSSID() == "OPTICAL_ALARM_SELECTION") {
-    sValue = "${opticalAlarm}: "#sValue;
+
+  if (oCH.Label().Find("HmIP-ASIR") != -1) {
+    ! ASIR - Adds the string "Alarmsignal: " to the original value.
+    if (oDP.HSSID().Find("ACOUSTIC_ALARM_SELECTION") != -1) {
+      sValue = "${acousticAlarm}: "#sValue;
+    }
+    ! ASIR - Adds the string "Alarmsignal: " to the original value.
+    if (oDP.HSSID().Find("OPTICAL_ALARM_SELECTION") != -1) {
+      sValue = "${opticalAlarm}: "#sValue;
+    }
   }
 
   if (oCH.HssType() == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER") {

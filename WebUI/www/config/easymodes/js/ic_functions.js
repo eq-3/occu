@@ -543,7 +543,7 @@ MD_catchBrightness = function(url, sender_address, receiver_address, brightness,
   // Each profile of the easymode needs the brightness, so we store the value for 500 ms in the var knownBrightness
   if (typeof knownBrightness == "undefined") {
     var curBrightness = homematic("Interface.getValue", {"interface": "HmIP-RF", "address": sender_address, "valueKey": paramType});
-    brightness =  (curBrightness) ? Math.round(curBrightness) : Math.round(brightness);
+    brightness =  (curBrightness) ? parseFloat(curBrightness).toFixed(2) : parseFloat(brightness).toFixed(2);
 
     conInfo("sender_address: " + sender_address +" - paramType: " + paramType + " - current brightness via getValue: " + curBrightness + " - calculated brightness: " + brightness);
 
@@ -2170,178 +2170,139 @@ daliRefreshDevices = function(address) {
   });
 };
 
+// Resets the history data of a specific channel
+resetChnMetaEnergyCounter = function(chn, opMode) {
+      /*
+        initialVal
+        Values for the last 30 days. The first 0 is yesterday......
+        This is being used to store the values of the last 30 days.
+      */
+      var arDataID = ["","","startValA","startValB","startValC"];
+
+      var initialVal = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0";
+      homematic("Interface.setMetadata", {
+        "objectId": chn.id,
+        "dataId": "energyCounter30Days",
+        "value": initialVal
+      });
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy0", "value": 0}); // Today
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy1", "value": 0}); // Yesterday
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy7", "value": 0}); // 1 Week
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy30", "value": 0}); // 1 Month
+};
+
+// Resets the history data and the start value of all relevant channels
+resetAllMetaEnergyCounter = function(dev, opMode) {
+  var arStartDataID = ["","","startValA","startValB","startValC"],
+    arTimeDataID = ["","","startTimeA","startTimeB","startTimeC"];
+
+  jQuery.each(dev.channels,function(index,chn) {
+    if (chn.index > 1) {
+      /*
+        initialVal
+        Values for the last 30 days. The first 0 is yesterday......
+        This is being used to store the values of the last 30 days.
+      */
+      var initialVal = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0";
+      homematic("Interface.setMetadata", {
+        "objectId": chn.id,
+        "dataId": "energyCounter30Days",
+        "value": initialVal
+      });
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy0", "value": 0}); // Today
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy1", "value": 0}); // Yesterday
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy7", "value": 0}); // 1 Week
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy30", "value": 0}); // 1 Month
+
+      if (opMode < 3) {
+        homematic('Interface.setMetadata', {'objectId': chn.id, 'dataId': arStartDataID[chn.index], 'value': 0}); // Reset start value
+        homematic('SysVar.setFloat', {'name': 'svEnergyCounter_' + chn.id + '_' + chn.address, 'value': 0});
+        homematic('SysVar.setFloat', {'name': 'svEnergyCounterOldVal_' + chn.id, 'value': 0});
+        homematic('Interface.setMetadata', {'objectId': chn.id, 'dataId': arTimeDataID[chn.index], 'value': getEsiStartTime()}); // Reset time stamp
+
+      } else {
+        var devCounter = homematic("Interface.getValue", {'interface': 'HmIP-RF', 'address' : chn.address, 'valueKey': 'ENERGY_COUNTER'});
+
+        //if (devCounter == "") {devCounter = "0.000";}
+
+        homematic('Interface.setMetadata', {'objectId': chn.id, 'dataId': arStartDataID[chn.index], 'value': devCounter}); // Reset start value
+        homematic('SysVar.setFloat', {'name': 'svEnergyCounter_' + chn.id + '_' + chn.address, 'value': devCounter});
+        homematic('SysVar.setFloat', {'name': 'svEnergyCounterOldVal_' + chn.id, 'value': devCounter});
+        homematic('Interface.setMetadata', {'objectId': chn.id, 'dataId': arTimeDataID[chn.index], 'value': getEsiStartTime()}); // Reset time stamp
+        homematic('Interface.setMetadata', {'objectId': chn.id, 'dataId': 'firstStart', 'value' : 1});
+      }
+    }
+  });
+};
+
 powerIdentSensor = function(address) {
-  var counter = 0, maxCount = 45,
-    chnValueDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "VALUES"}),
-    curSelfCalibrationResult = chnValueDescr.SELF_CALIBRATION_RESULT, // the current sensor type
-    device = DeviceList.getDeviceByAddress(address.split(":")[0]),
-    intervalId = setInterval(getSelfCalibrationResult, 1000);
+  var device = DeviceList.getDeviceByAddress(address.split(":")[0]);
 
-  function getSelfCalibrationResult() {
-    var chnValueDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "VALUES"}),
-      newSelfCalibrationResult = chnValueDescr.SELF_CALIBRATION_RESULT;
+  var dlgYesNo = new YesNoDialog(translateKey("btnSensorDetection"), translateKey("dialogEsiSearchButtonContent"), function(result) {
+    if (result == YesNoDialog.RESULT_YES) {
+      var opMode = -1, counter = 0, cntNoSensorFound = 0,
+      intervalId = setInterval(getOperationMode, 1000);
 
-    counter++;
-    if (curSelfCalibrationResult != newSelfCalibrationResult) {
-      clearInterval(intervalId);
-      //reloadPage();
+      homematic("Interface.putParamset", {
+        'interface': "HmIP-RF",
+        'address': address,
+        'paramsetKey': 'MASTER',
+        'set':
+          [
+            {name: 'CHANNEL_OPERATION_MODE', type: 'int', value: 0}
+          ]
+      });
 
-      window.setTimeout(function() {
-        DeviceListPage.showConfiguration(false, 'DEVICE', device.id);
-      },1500);
+      DeviceListPage.showConfiguration(false, 'DEVICE', device.id);
 
-    }
-
-    if (counter > maxCount) {
-      clearInterval(intervalId);
-    }
-
-  };
-
-};
-
-
-_powerIdentSensor = function(address) {
-  // Store current mode
-  var chnDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "MASTER"}),
-    msgBox = "";
-
-
-  if (chnDescr != null) {
-    var curMode = chnDescr.CHANNEL_OPERATION_MODE,
-      counter = 0;
-
-    msgBox =  MessageBox.show(translateKey('btnSensorDetection'), '' + ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>', '', '320', '60', 'msgBckID', 'msgBoxBarGraph');
-    ShowWaitAnim();
-
-    homematic("Interface.putParamset", {
-      'interface': "HmIP-RF",
-      'address': address,
-      'paramsetKey': 'VALUES',
-      'set':
-        [
-          {name: 'SELF_CALIBRATION', type: 'int', value: 1}
-        ]
-    }, function (result) {
-      if (result) {
-        var intervalId = setInterval(getOperationMode, 1000);
-
-        // A Get OPERATION_MODE
-        function getOperationMode() {
-          ShowWaitAnim();
-          counter++;
-          var chnDescr = homematic("Interface.getParamset", {
-            "interface": "HmIP-RF",
-            "address": address,
-            "paramsetKey": "MASTER"
-          });
-
-          if (chnDescr != null) {
-            if ((chnDescr.CHANNEL_OPERATION_MODE != curMode) || (counter >= 45)) {
-              clearInterval(intervalId);
-              HideWaitAnim();
-              if (msgBox != "") {MessageBox.close();}
-              reloadPage();
-            }
+      function getOperationMode() {
+        var chnPS = homematic("Interface.getParamset", {
+          "interface": "HmIP-RF",
+          "address": address,
+          "paramsetKey": "MASTER"
+        });
+        opMode = chnPS.CHANNEL_OPERATION_MODE;
+        if (typeof opMode != "undefined") {
+          if ((opMode != -1) && (opMode != 0)) {
+            clearInterval(intervalId);
+            DeviceListPage.showConfiguration(false, 'DEVICE', device.id);
+            resetAllMetaEnergyCounter(device, opMode);
           } else {
-            HideWaitAnim();
-            if (msgBox != "") {MessageBox.close();}
-            alert(translateKey("hintProblemSensorIdent"));
-          }
-        };
-      } else {
-        HideWaitAnim();
-        if (msgBox != "") {MessageBox.close();}
-        alert(translateKey("hintPressSysKeyTryAgain"));
-      }
-    });
-  //  HideWaitAnimAutomatically(5);
-  //  if (MessageBox) {window.setTimeout(function() {MessageBox.close();},45000);};
-  } else {
-    alert(translateKey("hintProblemSensorIdent"));
-  }
-};
-
-getAndSavePowerIdentSensor = function(address) {
-  // Store current mode
-  var chnDescr = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address": address, "paramsetKey": "MASTER"}),
-    msgBox = "";
-
-
-  if (chnDescr != null) {
-
-    var curMode = chnDescr.CHANNEL_OPERATION_MODE,
-      counter = 0;
-
-    msgBox = MessageBox.show(translateKey('btnSensorDetection'), '' + ' <br/><br/><img id="msgBoxBarGraph" src="/ise/img/anim_bargraph.gif"><br/>', '', '320', '60', 'msgBckID', 'msgBoxBarGraph');
-    ShowWaitAnim();
-
-    homematic("Interface.putParamset", {
-      'interface': "HmIP-RF",
-      'address': address,
-      'paramsetKey': 'VALUES',
-      'set':
-        [
-          {name: 'SELF_CALIBRATION', type: 'int', value: 1}
-        ]
-    }, function (result) {
-      if (result) {
-        var intervalId = setInterval(getOperationMode, 1000),
-          arSensorTypes = ['SENSOR_UNKNOWN', 'SENSOR_ES_GAS', 'SENSOR_ES_LED', 'SENSOR_ES_IEC', 'SENSOR_ES_IEC_SML', 'SENSOR_ES_IEC_SML_WH', 'SENSOR_ES_IEC_D0_A', 'SENSOR_ES_IEC_D0_B', 'SENSOR_ES_IEC_D0_C', 'SENSOR_ES_IEC_D0_D'];
-
-        // A Get OPERATION_MODE
-        function getOperationMode() {
-          ShowWaitAnim();
-          counter++;
-          var chnDescr = homematic("Interface.getParamset", {
-            "interface": "HmIP-RF",
-            "address": address,
-            "paramsetKey": "MASTER"
-          });
-
-          if (chnDescr != null) {
-            if ((chnDescr.CHANNEL_OPERATION_MODE != curMode) || (counter >= 45)) {
-              clearInterval(intervalId);
-
-              var device = DeviceList.getDeviceByAddress(address.split(':')[0]);
-              var paramSet = homematic('Interface.getParamset', {
-                'interface': "HmIP-RF",
-                'address': address,
-                'paramsetKey': 'MASTER'
-              });
-
-              jQuery.each(device.channels, function (index, channel) {
-                if (channel.channelType != 'MAINTENANCE') {
-                  homematic('Interface.setMetadata', {
-                    'objectId': channel.id,
-                    'dataId': 'sensor',
-                    'value': arSensorTypes[parseInt(paramSet.CHANNEL_OPERATION_MODE)]
-                  }, function (result) {
-                    if (channel.index == (device.channels.length - 1)) {
-                      reloadPage();
-                    }
-                  });
+            counter++;
+            if (counter > 120) {
+              // If on the config page of this device, after 2 minutes stop the search and show a message that the system button of the device has to be pressed.
+              // After the message has been confirmed start the search again.
+              // Do this 3 times (6 minutes). After that, stop the search. There is probably no sensor connected.
+              if ((jQuery("#btnSensorIdent").length == 1) && (cntNoSensorFound < 3)) {
+                alert("Please press the system button of the device\n\n" + device.name + "."); // ToDo - translate
+                counter = 0;
+                cntNoSensorFound++;
+              } else {
+                // If not on the config page, stop the search.
+                clearInterval(intervalId);
+                if (cntNoSensorFound > 2) {
+                  alert("No sensor found."); // ToDo translate
                 }
-              });
-              HideWaitAnim();
-              if (msgBox != "") {MessageBox.close();}
-              reloadPage();
+              }
             }
-          } else {
-            HideWaitAnim();
-            if (msgBox != "") {MessageBox.close();}
-            alert(translateKey("hintProblemSensorIdent"));
           }
-        };
-      } else {
-        HideWaitAnim();
-        if (msgBox != "") {MessageBox.close();}
-        alert(translateKey("hintPressSysKeyTryAgain"));
+        } else {
+          clearInterval(intervalId);
+          console.log("Problem: CHANNEL_OPERATION_MODE not found!");
+        }
       }
-    });
-   // HideWaitAnimAutomatically(5);
-   // if (MessageBox) {window.setTimeout(function() {MessageBox.close();},45000);};
-  } else {
-    alert(translateKey("hintProblemSensorIdent"));
-  }
+    }
+  },"html");
+  dlgYesNo.btnTextNo(translateKey("dialogBack"));
+  dlgYesNo.btnTextYes(translateKey("btnNext"));
+  dlgYesNo.setContentClass("YesNoDialogContentNoBold");
+  dlgYesNo.resetHeight();
+};
+
+getEsiStartTime = function() {
+  var d = new Date(),
+  dateString = ("0" + d.getDate()).slice(-2) + "." + ("0"+(d.getMonth()+1)).slice(-2) + "." +
+    d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+
+  return dateString;
 };

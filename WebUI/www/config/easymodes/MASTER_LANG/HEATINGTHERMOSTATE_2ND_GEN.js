@@ -106,6 +106,9 @@ jQuery.extend(true,langJSON, {
     "optionCooling" : "K%FChlen",
     "optionHeatingCooling" : "Heizen/K%FChlen",
 
+    "lblTemperatureWindowOpenHeating" : "Fenster-Auf-Temperatur<br/>im Heiz-Modus",
+    "lblTemperatureWindowOpenCooling" : "Fenster-Auf-Temperatur<br/>im K%FChl-Modus",
+
     "dummy" : ""
   },
 
@@ -214,6 +217,9 @@ jQuery.extend(true,langJSON, {
     "optionHeating" : "Heat",
     "optionCooling" : "Cool",
     "optionHeatingCooling" : "Heat/Cool",
+
+    "lblTemperatureWindowOpenHeating" : "Open-window temperature<br/>in heating mode",
+    "lblTemperatureWindowOpenCooling" : "Open-window temperature<br/>in cooling mode",
 
     "dummy" : ""
   }

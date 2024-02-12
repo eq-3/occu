@@ -261,7 +261,12 @@ set comment {
     }
 
     append html "<tr>"
-      append html "<td>\${stringTableDeviceSensorSensibility}</td>"
+      if {([string first "HmIP-SMO230" $devType] != -1)} {
+        append html "<td>\${stringTableDeviceSensorSensibilitySabotage}</td>"
+      } else {
+        append html "<td>\${stringTableDeviceSensorSensibility}</td>"
+      }
+
       if {[string equal $devType "HmIP-STI"] != 1} {
         append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
       } else {
@@ -427,7 +432,7 @@ set comment {
   # End DRAP/HAP Integration #
 
 
-  if {([string equal $devType "HmIP-DLD"] != 1) && ([string equal $devType "HmIP-DLD-A"] != 1) && ([string equal $devType "HmIP-DLD-S"] != 1) && ([string equal $devType "HmIP-SMO230"] != 1)} {
+  if {([string equal $devType "HmIP-DLD"] != 1) && ([string equal $devType "HmIP-DLD-A"] != 1) && ([string equal $devType "HmIP-DLD-S"] != 1) && ([string equal $devType "HmIP-SMO230"] != 1)  && ([string equal $devType "HmIP-SMO230-A"] != 1)} {
     set param LONGITUDE
     if { [info exists ps($param)] == 1  } {
       incr prn
@@ -1347,12 +1352,14 @@ proc getBlindTransmitter {chn p descr address} {
   }
 
   set param POSITION_SAVE_TIME
-  if { [info exists ps($param)] == 1  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTablePositionSaveTime}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
-    append html "</tr>"
+  catch {
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTablePositionSaveTime}</td>"
+        append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
+      append html "</tr>"
+    }
   }
 
   set param ENDPOSITION_AUTO_DETECT
@@ -1640,12 +1647,14 @@ proc getShutterTransmitter {chn p descr address} {
   }
 
   set param POSITION_SAVE_TIME
-  if { [info exists ps($param)] == 1  } {
-    incr prn
-    append html "<tr>"
-      append html "<td>\${stringTablePositionSaveTime}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
-    append html "</tr>"
+  catch {
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${stringTablePositionSaveTime}</td>"
+        append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
+      append html "</tr>"
+    }
   }
 
   set param ENDPOSITION_AUTO_DETECT
@@ -2277,13 +2286,15 @@ proc getBlindVirtualReceiver {chn p descr} {
 
   if {$showPosSaveTime == 1} {
     set param POSITION_SAVE_TIME
-    if { [info exists ps($param)] == 1  } {
-      incr prn
-      append html "<tr>"
-        append html "<td>\${stringTablePositionSaveTime}</td>"
-        append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
-      append html "</tr>"
-      append html "[getHorizontalLine]"
+    catch {
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${stringTablePositionSaveTime}</td>"
+          append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param  320 50]</td>"
+        append html "</tr>"
+        append html "[getHorizontalLine]"
+      }
     }
   }
 
@@ -2353,15 +2364,18 @@ proc getShutterVirtualReceiver {chn p descr} {
 
   if {$showPosSaveTime == 1} {
     set param POSITION_SAVE_TIME
-    if { [info exists ps($param)] == 1  } {
-      incr prn
-      append html "<tr>"
-        append html "<td>\${stringTablePositionSaveTime}</td>"
-        append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 50]</td>"
-      append html "</tr>"
-      append html "[getHorizontalLine]"
+    catch {
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+        append html "<tr>"
+          append html "<td>\${stringTablePositionSaveTime}</td>"
+          append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 50]</td>"
+        append html "</tr>"
+        append html "[getHorizontalLine]"
+      }
     }
   }
+
 
   set param POWERUP_JUMPTARGET
   if { [info exists ps($param)] == 1  } {
@@ -2531,8 +2545,33 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
     if { [info exists ps(CLIMATE_FUNCTION)] == 1  } {
      append html "showRelevantParams($ps(CLIMATE_FUNCTION));"
     }
-
   append html "</script>"
+
+  if {([info exists ps(COOLING_ENABLE)] == 1) && ([info exists ps(HEATING_ENABLE)] == 1)} {
+    append html "<tr>"
+
+      array_clear options
+      set options(0) "\${optionInactiv}"
+      set options(1) "\${optionActiv}"
+
+      # left
+      incr prn
+      set param COOLING_ENABLE
+      append html "<td>\${lblCoolingDisable}</td>"
+     # append html "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+
+    append html "<tr>"
+      # right
+      incr prn
+      set param HEATING_ENABLE
+
+      append html "<td>\${lblHeatingDisable}</td>"
+     # append html "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 
   return $html
 }
@@ -2827,10 +2866,24 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     set param TEMPERATURE_WINDOW_OPEN
     if { [info exists ps($param)] == 1  } {
       incr prn
-      append html "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
+      if { [info exists ps(TEMPERATURE_WINDOW_OPEN_COOLING)] == 1  } {
+        append html "<tr><td>\${lblTemperatureWindowOpenHeating}</td>"
+      } else {
+        append html "<tr><td>\${stringTableTemperatureFallWindowOpen}</td>"
+      }
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
       append html "</tr>"
     }
+
+    #left
+    set param TEMPERATURE_WINDOW_OPEN_COOLING
+    if { [info exists ps($param)] == 1  } {
+      incr prn
+      append html "<tr><td>\${lblTemperatureWindowOpenCooling}</td>"
+        append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]<input id=\"comfortOld\" type=\"hidden\" value=\"$ps($param)\"</td>"
+      append html "</tr>"
+    }
+
   append html "</table>"
 
   append html "<hr>"
@@ -3129,17 +3182,17 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
 
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js')</script>"
 
-  set comment {
-    if {$chn == 1} {
-      append html "<tr>"
-        append html "<td>\${lblPowerMeterSensorIdentification}</td>"
-        append html "<td><input id=\"btnSensorIdent\" type=\"button\" name=\"btnSensorDetection\" onclick=\"powerIdentSensor('$chnAddress');\"></td>"
-      append html "</tr>"
-      append html "<script type=\"text/javascript\">"
-        append html "translateButtons(\"btnSensorDetection\");"
-      append html "</script>"
-    }
+
+  if {$chn == 1} {
+    append html "<tr>"
+      append html "<td>\${lblPowerMeterSensorIdentification}</td>"
+      append html "<td><input id=\"btnSensorIdent\" type=\"button\" name=\"btnSensorDetection\" onclick=\"powerIdentSensor('$chnAddress');\"></td>"
+    append html "</tr>"
+    append html "<script type=\"text/javascript\">"
+      append html "translateButtons(\"btnSensorDetection\");"
+    append html "</script>"
   }
+
 
   set param CHANNEL_OPERATION_MODE
   if { ([info exists ps($param)] == 1) && ($chn >= 1) } {
@@ -3215,9 +3268,6 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
         append html "arTranslationSensorTypes = \['optionSensorUnknown', 'optionSensorGas', 'optionSensorLED', 'optionSensorIEC', 'optionSensorIEC_SML', 'optionSensorIEC_SML_WH', 'optionSensorIEC_D0_A', 'optionSensorIEC_D0_B', 'optionSensorIEC_D0_C', 'optionSensorIEC_D0_D'  \];"
 
         append html "jQuery('\#lblSensorType').text(translateKey(arTranslationSensorTypes\[sensor\]));"
-
-
-
       }
 
       append html "showSensorType = function(val) {"
@@ -3232,14 +3282,13 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
 
         append html "footerElm = jQuery('#footerButtonOK, #footerButtonTake');"
 
-        # If val = 0 then start the sensor searching
-        append html "if (parseInt(val) == 0) {"
-  #        append html "powerIdentSensor('$chnAddress');"
-           append html " footerElm.off('click').click(function() {powerIdentSensor('$chnAddress');});"
-
-        append html "} else {"
-          append html "footerElm.off('click').click(function() {});"
-        append html "}"
+        # If val = 0 then start the sensor searching (because we now have a button for searching the sensor this is not necessary anymore)
+      #  append html "if (parseInt(val) == 0) {"
+      #     append html " footerElm.off('click').click(function() {powerIdentSensor('$chnAddress');});"
+      #
+      #  append html "} else {"
+      #    append html "footerElm.off('click').click(function() {});"
+      #  append html "}"
 
       append html "};"
 
@@ -3267,7 +3316,7 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
 
   set devType $dev_descr(TYPE)
 
-  set startValue "0.000"
+  # set startValue "0.000"
 
   append html "<tr>"
     append html "<td>\${lblSetStartValue}</td>"
@@ -3278,9 +3327,14 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
 
   append html "<tr class='j_setStartVal_$chn hidden'>"
     append html "<td>\${lblStartValue}</td>"
-    append html "<td><input id=\"esiCounterStartVal_$chn\" type=\"text\" size=\"10\" value=\"$startValue\"></td>"
+    # append html "<td><input id=\"esiCounterStartVal_$chn\" type=\"text\" size=\"10\" value=\"$startValue\"></td>"
+    append html "<td><input id=\"esiCounterStartVal_$chn\" type=\"text\" size=\"10\"></td>"
   append html "</tr>"
-  # append html "<tr class='j_setStartVal_$chn hidden'><td colspan='2'><hr></td></tr>"
+
+  append html "<tr class='j_setStartVal_$chn hidden'>"
+    append html "<td></td>"
+    append html "<td id='esiStartTime_$chn'>TIME</td>"
+  append html "</tr>"
 
   if {$chnOpMode > 3} {
     set param METER_OBIS_SEARCH_STRING
@@ -3313,12 +3367,37 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
     append html "var chn1_ps = homematic('Interface.getParamset', {'interface':'HmIP-RF', 'address': '$dev_descr(ADDRESS):1', 'paramsetKey': 'MASTER'}),"
     append html "sensor = chn1_ps.CHANNEL_OPERATION_MODE;"
 
+
     append html "if (chnIndex == 2) {"
       append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValA'});"
+      append html "startTime = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startTimeA'});"
+      append html "if (startTime == 'null') {"
+        append html "startTime = homematic('Interface.setMetadata', {'objectId': chnDescr.id, 'dataId': 'startTimeA', 'value' : getEsiStartTime()});"
+        append html "jQuery('#esiStartTime_' + chnIndex).text(getEsiStartTime());"
+      append html "} else {"
+        append html "jQuery('#esiStartTime_' + chnIndex).text(startTime);"
+      append html "}"
+
     append html "} else if (chnIndex == 3) {"
       append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValB'});"
+      append html "startTime = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startTimeB'});"
+      append html "if (startTime == 'null') {"
+        append html "startTime = homematic('Interface.setMetadata', {'objectId': chnDescr.id, 'dataId': 'startTimeB', 'value' : getEsiStartTime()});"
+        append html "jQuery('#esiStartTime_' + chnIndex).text(getEsiStartTime());"
+      append html "} else {"
+        append html "jQuery('#esiStartTime_' + chnIndex).text(startTime);"
+      append html "}"
+
     append html "} else if (chnIndex == 4) {"
-      append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValC'});"
+    append html "startValue = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startValC'});"
+        append html "startTime = homematic('Interface.getMetadata', {'objectId': chnDescr.id, 'dataId': 'startTimeC'});"
+        append html "if (startTime == 'null') {"
+          append html "startTime = homematic('Interface.setMetadata', {'objectId': chnDescr.id, 'dataId': 'startTimeC', 'value' : getEsiStartTime()});"
+          append html "jQuery('#esiStartTime_' + chnIndex).text(getEsiStartTime());"
+        append html "} else {"
+          append html "jQuery('#esiStartTime_' + chnIndex).text(startTime);"
+        append html "}"
+
     append html "}"
 
     append html "if (isNaN(startValue) && (sensor < 3)) {"
@@ -3332,19 +3411,20 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
       append html "} else {"
         append html "startValue = startValue / 1000;"
       append html "}"
-
       append html "jQuery('#esiCounterStartVal_' + chnIndex).val(startValue.toFixed(3));"
     append html "} else if (sensor >= 3) {"
       # sensor >= 3 = IEC-Sensor
       append html "var chValueParamSet = homematic('Interface.getParamset', {'interface':'HmIP-RF', 'address': '$chnAddress', 'paramsetKey': 'VALUES'}),"
       append html "energyCounter = chValueParamSet.ENERGY_COUNTER;"
-      append html "if (energyCounter == '') {energyCounter = 0.000}"
-      # append html "startValue = energyCounter;"
 
-      append html "if (isNaN(startValue)) {startValue = energyCounter;}"
-      append html "if (isNaN(startValue)) {startValue = 0;}"
+      append html "if (energyCounter != '') {"
+        append html "if (isNaN(startValue)) {startValue = energyCounter;}"
+        append html "if (isNaN(startValue)) {startValue = 0;}"
+          append html "jQuery('#esiCounterStartVal_' + chnIndex).val(parseFloat(startValue).toFixed(3));"
+      append html "} else {"
+        append html "jQuery('#esiCounterStartVal_' + chnIndex).val(energyCounter);"
+      append html "}"
 
-      append html "jQuery('#esiCounterStartVal_' + chnIndex).val(parseFloat(startValue).toFixed(3));"
     append html "}"
 
     append html "if (selectedSensor < 3) {"
@@ -3357,69 +3437,82 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
     append html "}"
 
 
+    append html "function storeCounterStartValue4Chn(chnNo, chnAddress, multiplier, dataID, sensor) {"
+
+            append html "var rawStartVal = jQuery('\#esiCounterStartVal_' + chnNo).val(),"
+            append html "startVal = (parseFloat(rawStartVal.replace(',','.')) * multiplier),"
+            append html "oChn = DeviceList.getChannelByAddress(chnAddress),"
+            append html "energyCounterID = 'svEnergyCounter_' + oChn.id + '_' + oChn.address,"
+            append html "energyCounterOldValID = 'svEnergyCounterOldVal_' + oChn.id,"
+            append html "metaStartVal = homematic('Interface.getMetadata', {'objectId': oChn.id, 'dataId': dataID}),"
+            append html "metaStartTime = dataID.replace('Val','Time');"
+
+            append html "if (rawStartVal.length != 0) {"
+              append html "if (isNaN(startVal)) {"
+                append html "alert(translateKey('msgStartValueInvalid_A') + oChn.index + translateKey('msgStartValueInvalid_B'));"
+                append html "startVal = 0.000;"
+              append html "}"
+
+              append html "if (parseInt(startVal) != parseInt(metaStartVal)) {"
+               append html "homematic('SysVar.setFloat', {'name': energyCounterID, 'value': startVal});"
+               append html "homematic('SysVar.setFloat', {'name': energyCounterOldValID, 'value': startVal});"
+               append html "homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': dataID, 'value': startVal});"
+                append html "resetChnMetaEnergyCounter(oChn, sensor);"
+                append html "startTime = homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': metaStartTime, 'value' : getEsiStartTime()});"
+                append html "if (sensor > 3) {"
+                  append html "homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'iecPrgFirstStart', 'value' : 0});"
+                  append html "homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'firstStart', 'value' : 0});"
+                append html "}"
+              append html "}"
+            append html "}"
+
+
+    append html "}"
+
+
     append html "storeCounterStartValue = function() {"
       set devAddress [lindex [split $chnAddress :] 0]
       set chnAddressA "$devAddress:2"
       set chnAddressB "$devAddress:3"
       set chnAddressC "$devAddress:4"
 
-      append html "var selectedSensor = parseInt(jQuery('\#separate_CHANNEL_1_1').val()),"
+      append html "var oChn = DeviceList.getChannelByAddress('$chnAddress'),"
+      append html "selectedSensor = parseInt(jQuery('\#separate_CHANNEL_1_1').val()),"
       append html "multiplier = (selectedSensor == 1) ? 1 : 1000;"
 
       append html "jQuery.each(jQuery('.j_chkBoxStartVal:checked'), function(index, chkBox) {"
-        append html "var chn = chkBox.id.split('_')\[1\];"
-        append html "switch (chn) {"
+        append html "var chnId = chkBox.id.split('_')\[1\];"
+
+        append html "switch (chnId) {"
           append html "case '2':"
-            append html "var startValA = (parseFloat(jQuery('\#esiCounterStartVal_2').val().replace(',','.')) * multiplier),"
-            append html "oChnA = DeviceList.getChannelByAddress('$chnAddressA'),"
-            append html "energyCounterIDA = 'svEnergyCounter_' + oChnA.id + '_' + oChnA.address;"
-            append html "if (isNaN(startValA)) {"
-              append html "alert(translateKey('msgStartValueInvalid_A') + chn + translateKey('msgStartValueInvalid_B'));"
-              append html "startValA = 0.000;"
-            append html "}"
-            append html "homematic('SysVar.setFloat', {'name': energyCounterIDA, 'value': startValA});"
-            append html "homematic('Interface.setMetadata', {'objectId': oChnA.id, 'dataId': 'startValA', 'value': startValA});"
-          append html "break;"
+            append html "storeCounterStartValue4Chn(chnId,'$chnAddressA', multiplier, 'startValA', selectedSensor);"
+            append html "if (selectedSensor > 3) {homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'firstStart', 'value' : 1});}"
+            append html "break;"
           append html "case '3':"
-            append html "var startValB = (parseFloat(jQuery('\#esiCounterStartVal_3').val().replace(',','.')) * multiplier),"
-            append html "oChnB = DeviceList.getChannelByAddress('$chnAddressB'),"
-            append html "energyCounterIDB = 'svEnergyCounter_' + oChnB.id + '_' + oChnB.address;"
-            append html "if (isNaN(startValB)) {"
-              append html "alert(translateKey('msgStartValueInvalid_A') + chn + translateKey('msgStartValueInvalid_B'));"
-              append html "startValB = 0.000;"
-            append html "}"
-            append html "homematic('SysVar.setFloat', {'name': energyCounterIDB, 'value': startValB});"
-            append html "homematic('Interface.setMetadata', {'objectId': oChnB.id, 'dataId': 'startValB', 'value': startValB});"
-          append html "break;"
+            append html "storeCounterStartValue4Chn(chnId,'$chnAddressB', multiplier, 'startValB', selectedSensor);"
+            append html "if (selectedSensor > 3) {homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'firstStart', 'value' : 1});}"
+            append html "break;"
           append html "case '4':"
-            append html "var startValC = (parseFloat(jQuery('\#esiCounterStartVal_4').val().replace(',','.')) * multiplier),"
-            append html "oChnC = DeviceList.getChannelByAddress('$chnAddressC'),"
-            append html "energyCounterIDC = 'svEnergyCounter_' + oChnC.id + '_' + oChnC.address;"
-            append html "if (isNaN(startValC)) {"
-              append html "alert(translateKey('msgStartValueInvalid_A') + chn + translateKey('msgStartValueInvalid_B'));"
-              append html "startValC = 0.000;"
-            append html "}"
-            append html "homematic('SysVar.setFloat', {'name': energyCounterIDC, 'value': startValC});"
-            append html "homematic('Interface.setMetadata', {'objectId': oChnC.id, 'dataId': 'startValC', 'value': startValC});"
-          append html "break;"
+            append html "storeCounterStartValue4Chn(chnId,'$chnAddressC', multiplier, 'startValC', selectedSensor);"
+            append html "if (selectedSensor > 3) {homematic('Interface.setMetadata', {'objectId': oChn.id, 'dataId': 'firstStart', 'value' : 1});}"
+            append html "break;"
+          append html "default: console.log('storeCounterStartValue; Error');"
         append html "}"
       append html "});"
     append html "};"
 
-    append html "hideShowStartVal = function(elm, chn) {"
-      append html "var startValElms = jQuery('.j_setStartVal_' + chn),"
+    append html "hideShowStartVal = function(elm, chnId) {"
+      append html "var startValElms = jQuery('.j_setStartVal_' + chnId),"
       append html "footerElm = jQuery('#footerButtonOK, #footerButtonTake');"
       append html "if (jQuery(elm).is(':checked')) {"
         append html "startValElms.show();"
 
         append html "if(jQuery('.j_chkBoxStartVal:checked').length == 1) {"
-          # append html "console.log('Extend the footer clicks');"
           append html " footerElm.off('click').click(function() {storeCounterStartValue();});"
         append html "}"
       append html "} else {;"
         append html "startValElms.hide();"
         append html "if(jQuery('.j_chkBoxStartVal:checked').length == 0) {"
-         # append html "console.log('Clear the extended footer clicks');"
           append html "footerElm.off('click').click(function() {});"
         append html "}"
       append html "}"

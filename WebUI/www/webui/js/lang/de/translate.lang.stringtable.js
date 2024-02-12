@@ -1278,6 +1278,7 @@ jQuery.extend(true,langJSON, {
     "stringTableServoLevel" : "Servoposition",
     "stringTableServoActivityStateUnknown" : "Servo Aktivit%E4t unbekannt",
     "stringTableDeviceSensorSensibility" : "Sensor-Empfindlichkeit",
+    "stringTableDeviceSensorSensibilitySabotage" : "Sensor-Empfindlichkeit Sabotage",
     "stringTableServoRamp" : "Geschwindigkeit/Fahrzeit",
     "stringTableBlockingOnSabotage" : "Bei Sabotage sperren",
     "stringTableSabotageContactType" : "Typ des Sabotagekontaktes",

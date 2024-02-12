@@ -201,7 +201,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
 
     incr pref
-    option DIM_LEVELwoLastValue
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
@@ -304,7 +304,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
-    option DIM_LEVELwoLastValue
+    option DIM_OFFLEVELwoLastValue
     append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"

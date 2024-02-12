@@ -1274,6 +1274,7 @@ jQuery.extend(true,langJSON, {
     "stringTableServoLevel" : "Servo position",
     "stringTableServoActivityStateUnknown" : "Servo activity unknown",
     "stringTableDeviceSensorSensibility" : "Sensor sensitivity",
+    "stringTableDeviceSensorSensibilitySabotage" : "Sensor sensitivity sabotage",
     "stringTableServoRamp" : "Speed/driving time",
     "stringTableBlockingOnSabotage" : "Lock in case of sabotage",
     "stringTableSabotageContactType" : "Type of sabotage contact",

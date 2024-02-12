@@ -854,6 +854,15 @@ a img {
   min-height: 30px;
 }
 
+.ControlBtnInfoActive {
+  background-color: $_(active);
+  color: $_(textColorA); /* white */
+  border: solid 1px $_(black); /* black */
+  padding: 5px;
+  font-weight: bold;
+  min-height: 30px;
+}
+
 .ControlBtnPushed {
   background-color: $_(clickable);
   color: $_(textColorB); /* black */
@@ -3351,6 +3360,11 @@ html, body {
   color: $_(textColorB); /* black */
 }
 
+.YesNoDialogContentNoBold {
+  padding:5px;
+  color: $_(textColorB); /* black */
+}
+
 
 .YesNoDialogFooter, .YesNoDialogFooterA {
   position: absolute;
@@ -5348,6 +5362,12 @@ application {
 	clear: both;
 	display: inline-block;
   line-height:25px;
+}
+
+.CLASS02532d {
+	font-size: 10px;
+	width:220px;
+	color: $_(white) ! important;
 }
 
 .CLASS02533 {

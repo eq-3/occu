@@ -204,6 +204,19 @@ jQuery.extend(true, langJSON, {
 
     "stringTableMeterObisSearchString" : "OBIS string",
 
+    "comment" : "Release A/2024 - not yet translated",
+
+    "dialogEsiSearchButtonContent" :
+      "en* Starten Sie hier die Sensorerkennung.<br/><br/>" +
+      "<b>Bevor</b> Sie fortfahren, stellen Sie sicher, dass ein Sensor am Energiemessger%E4t angeschlossen ist.<br/><br/>" +
+      "<b>Nachdem</b> Sie die Sensorerkennung gestartet haben, bet%E4tigen Sie die Systemtaste des Ger%E4tes. " +
+      "Der Sensor wird jetzt ermittelt. Wenn Sie diese Seite nicht verlassen, wird sie anschlie%DFend neu aufgerufen und der gefundene Sensor angezeigt.<br/><br/>" +
+      "<u>Achtung:</u><br/>" +
+      "Bei einem Wechsel des Sensors, werden die bisher erfassten Verbrauchswerte (Heute, Gestern usw.) zur%FCck auf 0 gesetzt.<br/><br/>" +
+      "Sollten Sie die Sensorsuche ohne angeschlossenen Sensor gestartet haben, schlie%DFen Sie einen Sensor an und machen Sie einen Werksreset des Energiemessger%E4ts.<br/><br/>" ,
+
+     "lblErrorMessageActive" : "en* Fehlermeldung aktiv",
+
     "noMoreKeys" : ""
   }
 });

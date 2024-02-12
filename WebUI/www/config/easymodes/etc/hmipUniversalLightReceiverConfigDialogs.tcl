@@ -22,7 +22,7 @@ proc getUniversalLightReceiver {chn p descr} {
   # devMode 1 = PWM, 2 = TuneableWhite, 3 = RGB, 4 = RGBW
   set devMode $ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES)
 
-  if {[string first "HmIP-LSS" $dev_descr(TYPE)] != -1} {
+  if {[string first "HmIP-LSC" $dev_descr(TYPE)] != -1} {
     set devMode 5
   }
 
@@ -439,7 +439,7 @@ proc getUniversalLightReceiverLSS {chn p descr} {
   set specialID "[getSpecialID $special_input_id]"
   puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
 
-  # UNIVERSAL_LIGHT_MAX_CAPABILITIES is always 0 with the HmIP-LSS which is the same as the UNIVERSAL_LIGHT_MAX_CAPABILITIES = 3 of the HmIP-DRG-DALI
+  # UNIVERSAL_LIGHT_MAX_CAPABILITIES is always 0 with the HmIP-LSC which is the same as the UNIVERSAL_LIGHT_MAX_CAPABILITIES = 3 of the HmIP-DRG-DALI
   # Therefore we have to set devMode to 3
   # set devMode $ps(UNIVERSAL_LIGHT_MAX_CAPABILITIES)
   set devMode 3

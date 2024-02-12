@@ -26,7 +26,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set devMode 4
   }
 
-  if {[string first "HmIP-LSS" $dev_descr(TYPE)] != -1} {
+  if {[string first "HmIP-LSC" $dev_descr(TYPE)] != -1} {
     set devMode 5
   }
 
@@ -61,7 +61,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         append HTML_PARAMS(separate_1) "[getUniversalLightReceiverDali $chn ps psDescr]"
     }
     5 {
-        # HmIP-LSS
+        # HmIP-LSC
         append HTML_PARAMS(separate_1) "[getUniversalLightReceiverLSS $chn ps psDescr]"
     }
   }

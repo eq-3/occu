@@ -428,8 +428,8 @@ jQuery.extend(true,langJSON, {
       "Bei Frontalansicht auf das Ger%E4t ist<br/><br/>" +
 
       "<ul>" +
-        "<li>Zone 1 = Der gesamte 90%B0-Winkelbereich rechts</li>" +
-        "<li>Zone 2 = Der gesamte 90%B0-Winkelbereich links</li>" +
+        "<li>Zone 1 = Der gesamte 90%B0-Winkelbereich links</li>" +
+        "<li>Zone 2 = Der gesamte 90%B0-Winkelbereich rechts</li>" +
         "<li>Zone 3 = Der gesamte 360%B0-Winkelbereich unterhalb des Ger%E4tes</li>" +
       "</ul><br/><br/> " +
 
@@ -468,6 +468,9 @@ jQuery.extend(true,langJSON, {
       "1.8.1+2+3 z. B. addiert 1.8.1 + 1.8.2 + 1.8.3<br/><br/>" +
       "1 - 2.7.0 z. B. subtrahiert 1.7.0 - 2.7.0.",
 
+    "CHANNEL_ACTIVE_CLIMATECONTROL" : 
+      "Diese Checkbox dient dazu, Fehlermeldungen an unbenutzten Kan%E4len auf der Seite Status/Bedienung zu vermeiden. Aktivieren Sie diese Checkbox daher nur, wenn der Kanal auch benutzt wird.",
+    
     "noMoreHelp" : ""
   },
 
@@ -893,8 +896,8 @@ jQuery.extend(true,langJSON, {
       "With a frontal view of the device<br/><br/>" +
 
       "<ul>" +
-        "<li>Zone 1 = The entire 90%B0 angle area on the right</li>" +
-        "<li>Zone 2 = The entire 90%B0 angle area on the left</li>" +
+        "<li>Zone 1 = The entire 90%B0 angle area on the left</li>" +
+        "<li>Zone 2 = The entire 90%B0 angle area on the right</li>" +
         "<li>Zone 3 = Zone 3 = The entire 360%B0 angle area below the device</li>" +
       "</ul><br/><br/> " +
 
@@ -933,6 +936,10 @@ jQuery.extend(true,langJSON, {
       "Multiple values can be grouped together:<br/><br/>" +
       "1.8.1+2+3, for example, denotes addition: 1.8.1 + 1.8.2 + 1.8.3<br/><br/>" +
       "1 - 2.7.0, for example, denotes subtraction: 1.7.0 - 2.7.0.",
+
+    "CHANNEL_ACTIVE_CLIMATECONTROL" :
+      "en* Diese Checkbox dient dazu, Fehlermeldungen an unbenutzten Kan%E4len auf der Seite Status/Bedienung zu vermeiden. Aktivieren Sie diese Checkbox daher nur, wenn der Kanal auch benutzt wird.",
+
 
     "noMoreHelp" : ""
     }

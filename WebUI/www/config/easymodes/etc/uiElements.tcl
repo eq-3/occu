@@ -1772,7 +1772,7 @@ proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode {isDA
     set param POWERUP_ON_COLOR_TEMPERATURE
     # mode 2 = DIMMER_TUNABLE_WHITE
     # The RGB mode (mode 3) of the DALI device is capable of TUNABLE_WHITE - the HmIP-RGBW is not.
-    # mode 5 = HmIP-LSS
+    # mode 5 = HmIP-LSC
     if { ([info exists ps($param)] == 1)  && (($mode == 2) || ($mode == 5) || (($isDALI == 1) && ($mode == 3))) } {
       incr prn
       append html "<tr>"
@@ -1782,14 +1782,14 @@ proc getPowerUpSelectorUniversalLightReceiver {chn p special_input_id mode {isDA
     }
 
     set param POWERUP_ON_HUE
-    # mode 3 = DIMMER_RGB - mode 4 = DIMMER_RGBW mode5 = HmIP-LSS
+    # mode 3 = DIMMER_RGB - mode 4 = DIMMER_RGBW mode5 = HmIP-LSC
     if { ([info exists ps($param)] == 1) && (($mode == 3) || ($mode == 4) || ($mode == 5)) } {
       incr prn
       append html "<tr>"
         append html "<td>\${lblPowerUpOnHue}</td>"
         append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 450 75]</td>"
       append html "</tr>"
-    } else {puts "($param exists: [info exists ps($param)]  - mode: $mode"}
+    }
 
     # The device documentations describes this parameter as POWERUP_ON_LEVEL_2
     set param POWERUP_ON_SATURATION

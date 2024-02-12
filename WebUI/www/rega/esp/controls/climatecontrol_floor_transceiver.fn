@@ -9,10 +9,18 @@ function ::CreateClimateControlFloorTransceiver()
   object objState = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.STATE");
   object objLevelStatus = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.LEVEL_STATUS");
   object objLevel = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.LEVEL");
+  object oValveState = cObj.DPByControl("CLIMATECONTROL_FLOOR_TRANSCEIVER.VALVE_STATE");
+
+  var chActive = ch.MetaData("chnActive");
+
+  if (chActive != true) {
+    chActive = false;
+  }
 
   string classStateActive = "";
   string classHumidityLimiterActive = "";
   string classExternalClockActive = "";
+  boolean showValveState = false;
 
   string classDewPoint = "hidden";
   string classEmergencyMode = "hidden";
@@ -55,8 +63,13 @@ function ::CreateClimateControlFloorTransceiver()
     }
   }
 
-  if (objLevelStatus) {
-    ! Status 1 = UNKNOWN, 4 = ERROR
+  if (objLevelStatus && oValveState) {
+    ! Status 0 = NORMAL, 1 = UNKNOWN, 4 = ERROR
+
+    if (chActive) {
+      showValveState = true;
+    }
+
     if (objLevelStatus.Value() == 4) {
       stateSwitchingStatus = "${lblError}";
     }
@@ -88,6 +101,19 @@ function ::CreateClimateControlFloorTransceiver()
     classFrostProtection = "";
     stateFrostProtection = "${lblActiv}";
   }
+
+  if (oValveState && (showValveState == true)) {
+    integer valveState = oValveState.Value();
+    ! 4 is the default, which we don't show
+    if (valveState != 4) {
+      WriteLine("<tr>");
+        WriteLine("<td>");
+          WriteLine("<div class='ControlBtnInfo CLASS02532d'>${stringTableClimateControlVentDriveValveState}:<br/>${stringTableValveState_"#valveState#"}</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    }
+  }
+
 
   WriteLine("<tr>");
     WriteLine("<td>");

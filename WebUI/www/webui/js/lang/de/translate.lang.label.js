@@ -50,6 +50,8 @@ jQuery.extend(true,langJSON, {
     "lblColorValueMax" : "Farbwert Ende",
     "lblColorValueMin" : "Farbwert Start",
     "lblConfigNotChanged" : "Es wurde keine %C4nderung an der Konfiguration vorgenommen.",
+    "lblCoolingDisable" : "Im K&uuml;hlmodus",
+    "lblHeatingDisable" : "Im Heizmodus",
     "lblCurPassageDetectionLR" : "Links nach rechts",
     "lblCurPassageDetectionRL" : "Rechts nach links",
     "lblCurrency" : "W%E4hrung",

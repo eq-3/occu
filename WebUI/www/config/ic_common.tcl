@@ -1110,7 +1110,7 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
     set max  $param_descr(MAX)
     set flags $param_descr(FLAGS)
     set operations $param_descr(OPERATIONS)
-    set value ""
+    set value $min
 
     if {[info exists unit] == 0} {
      set unit ""
@@ -1128,9 +1128,9 @@ proc cmd_link_paramset2 {iface address pps_descr pps ps_type {pnr 0}} {
     set idval "separate_${pnr}_$j"
 
     if { ! ($operations & 3) } then { continue }
-    if {    $operations & 1  } then { set value $ps($param_id) }
+    if {    $operations & 1  } then { catch {set value $ps($param_id)} }
     if {    $operations & 2  } then { set access "" } else { set access "disabled=\"disabled\"" }
-        
+
     append s "<tr>"
     if {$ps_type == "MASTER" && $parent_type == "" } then {
       append s "<td><span class=\"stringtable_value\">${param_id}</span></td>"

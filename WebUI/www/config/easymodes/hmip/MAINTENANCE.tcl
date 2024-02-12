@@ -26,7 +26,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     if {([string first "HmIP-DRG-DALI" $dev_descr(TYPE)] != -1)
     || ([string first "HmIP-RGBW" $dev_descr(TYPE)] != -1)
-    || ([string first "HmIP-LSS" $dev_descr(TYPE)] != -1)
+    || ([string first "HmIP-LSC" $dev_descr(TYPE)] != -1)
 
     } {
       append HTML_PARAMS(separate_1) [getUniversalLightEffects ps psDescr]

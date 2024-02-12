@@ -1,0 +1,32 @@
+"description_1" : "<span class=\"translated\">When opening the contact, the light is switched on at the preset brightness value/colour value.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The light is switched off when opening the contact.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When opening the contact, the light changes between the preset brightness value/colour value and &quot;off&quot;.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">When opening the contact, the light is set to the preset colour value.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">When opening the contact, the light is set to the preset colour value.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">When opening the contact, the light changes between the two preset colour values.</span><br/><br/>",
+
+"description_7" : "<span class=\"translated\">When opening the contact, the light is set to the preset colour saturation.</span><br/><br/>",
+"description_8" : "<span class=\"translated\">When opening the contact, the light is set to the preset colour saturation.</span><br/><br/>",
+"description_9" : "<span class=\"translated\">When opening the contact, the light changes between the two preset colour saturations.</span><br/><br/>",
+
+"description_10" : "<span class=\"translated\">When opening the contact, the light is switched on at the preset brightness value or the colour temperature.</span><br/><br/>",
+"description_11" : "<span class=\"translated\">The light is switched off when opening the contact.</span><br/><br/>",
+"description_12" : "<span class=\"translated\">When opening the contact, the light changes between the preset brightness value and &quot;off&quot;.</span><br/><br/>",
+
+"description_13" : "<span class=\"translated\">When opening the contact, the light is set to the preset colour temperature.</span><br/><br/>",
+"description_14" : "<span class=\"translated\">When opening the contact, the light is set to the preset colour temperature.</span><br/><br/>",
+"description_15" : "<span class=\"translated\">When opening the contact, the light changes between the two preset colour temperatures.</span><br/><br/>",
+
+"description_16" : "<span class=\"translated\">When opening the contact, the light is switched on as dynamic daylight (Human Centric Lightning (HCL)).</span><br/><br/>",
+"description_17" : "<span class=\"translated\">The light is switched off when opening the contact.</span><br/><br/>",
+"description_18" : "<span class=\"translated\">When opening the contact, the light as dynamic daylight (Human Centric Lightning (HCL)) changes between the present brightness value and 'off'.</span><br/><br/>",
+
+"description_19" : "<span class=\"translated\">When opening the contact, the light is switched on in Dim2Warm mode.</span><br/><br/>",
+"description_20" : "<span class=\"translated\">The light is switched off when opening the contact.</span><br/><br/>",
+"description_21" : "<span class=\"translated\">When opening the contact, the light in Dim2Warm mode switches between the preset brightness value and 'off'.</span><br/><br/>",
+
+"description_22" : "<span class=\"translated\">Opening the contact activates the selected effect.</span><br/><br/>",
+
+"description_23" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+

@@ -957,52 +957,7 @@ function ::CreatePowermeterIECControl() {
 
 ! POWERMETER_ESI
 
-function ::SensorSearchBtnShow() {
 
-  ! Determine the name of the interface
-  integer iFaceID = cObj.Interface();
-  object oIface = dom.GetObject(iFaceID);
-  string sInterface = oIface.Name();
-  object oChannel = dom.GetObject(chnId);
-  string chAddress = oChannel.Address();
-
-  object oSelfCalibration = cObj.DPByControl("POWERMETER_PSM.SELF_CALIBRATION");
-  if (oSelfCalibration) {
-    WriteLine("<tr>");
-      WriteLine("<td>");
-        WriteLine("<table cellspacing='4' style='min-width:240px;'><tr><td>");
-          WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px; width:100%;' id='"#chnId#"startSelfCalibration' onclick=buttonPressed(this);searchSensor('"#sInterface#"','"#chAddress#"');>${btnSensorDetection}</div>");
-        WriteLine("</td></tr></table>");
-      WriteLine("</td>");
-    WriteLine("</tr>");
-  } else {
-    WriteLine("<tr>");
-      WriteLine("<td>");
-        WriteLine("<table cellspacing='4' style='min-width:240px;'><tr><td>");
-          WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px; width:100%;'>${lblErrorSensor}</div>");
-        WriteLine("</td></tr></table>");
-      WriteLine("</td>");
-    WriteLine("</tr>");
-  }
-
-  WriteLine("<script type='text/javascript'>");
-
-    WriteLine( "buttonPressed = function(btn) {" );
-      WriteLine( "var elem = jQuery(btn);" );
-      WriteLine( "elem.addClass('ControlBtnOn').removeClass('ControlBtnOff');" );
-      WriteLine( "setTimeout(function() {" );
-        WriteLine( "elem.addClass('ControlBtnOff').removeClass('ControlBtnOn');" );
-      WriteLine( "}, 500);" );
-    WriteLine( "};" );
-
-    WriteLine("searchSensor = function(sInterface, chAddress) {");
-      WriteLine("getAndSavePowerIdentSensor(chAddress)");
-    WriteLine("}");
-
-  WriteLine("</script>");
-
-  return;
-}
 
 ! POWERMETER_ESI Chn 1
 function ::CreatePowermeterESIControl_CurConsumption() {
@@ -1058,10 +1013,6 @@ function ::CreatePowermeterESIControl_CurConsumption() {
   if (curConsumption == "") {curConsumption = "--"; unit = "";}
 
   ! html
-  ! The sensor search button should not be visible on this page but only on the configuration page
-  ! Call("/esp/controls/powermeter.fn::SensorSearchBtnShow()");
-  ! WriteLine("<tr><td colspan='2'><hr></td></tr>");
-
   WriteLine("<td>");
     WriteLine("<table>");
       WriteLine("<tr name='curConsumptionPanel_"#chnId#"'>");
@@ -1391,20 +1342,20 @@ function ::CreatePowermeterESIControl_ESI_IEC() {
     energyCounter = (sysVarEnergyCounter.Value() / divider).ToString(3)#" "#unit;
 
     if ((oEnergyStatus) && (oEnergyStatus.Value() > 0)) {
-      if (oEnergyStatus.Value() == 1) {
-        energyCounter = "--";
-        unit = "";
-      } else {
-        energyCounter = energyStatus;
-        unit = "";
-      }
+      energyCounter = energyStatus;
+      unit = "";
     }
   }
 
   ! At the first start we use the device counter
-  if (! cObj.MetaData("firstStart")) {
+  if ((oEnergy.Value() != "") && ((! cObj.MetaData("firstStart")) || (cObj.MetaData("firstStart") == 1))) {
+
+    if (! cObj.MetaData("firstStart")) {
+      cObj.AddMetaData("firstStart",0);
+    } else {
+      cObj.MetaData("firstStart",0);
+    }
     energyCounter = totalConsumption#" "#unit;
-    cObj.AddMetaData("firstStart",0);
   }
 
   ! html

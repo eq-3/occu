@@ -156,6 +156,13 @@ function ::CreateRGBWControlMode01()
   object oHue = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUE");
   object oSaturation = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.SATURATION");
   object oLevel = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.LEVEL");
+  object oHueStatus = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUE_STATUS");
+
+  boolean hueStatus = 0;
+
+  if (oHueStatus) {
+    hueStatus = oHueStatus.Value();
+  }
 
   if( oLevel )
   {
@@ -230,7 +237,7 @@ function ::CreateRGBWControlMode01()
             WriteLine("<tr>");
               WriteLine("<td></td>");
               WriteLine("<td>");
-                WriteLine("<div id='bckGndlmId_"#chnId#"' style='width:auto;' >&nbsp;</div>");
+                WriteLine("<div id='bckGndlmId_"#chnId#"' style='cursor:pointer; width:auto;' >&nbsp;</div>");
               WriteLine("</td>");
             WriteLine("</tr>");
 
@@ -262,6 +269,7 @@ function ::CreateRGBWControlMode01()
     WriteLine("opts.chAddress = '"#chAddress#"';");
     WriteLine("opts.hue = hueValue;");
     WriteLine("opts.saturation = satValue;");
+    WriteLine("opts.hueStatus = '"#hueStatus#"';");
     WriteLine("opts.level = levelValue;");
 
     WriteLine("ibd"#chnId#" = new iseButtonsDimmer("#chnId#", "#iState#", "#iLvlDpId#", "#iOldLvlDpId#", "#system.GetVar("iStatusOnly")#", "#system.GetVar('bSliderFlag')#", '"#cObj.Label()#"' );");
@@ -573,13 +581,20 @@ function ::CreateRGBWControlMode_RGB_TW()
   object oHCL = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUMAN_CENTRIC_LIGHT_STATE");
   object oDim2Warm = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.DIM2WARM_STATE");
 
+  object oHueStatus = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUE_STATUS");
+
   object oEffect = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.EFFECT");
 
   boolean hcl = 0;
   boolean dim2Warm = 0;
+  boolean hueStatus = 0;
 
   string classBtnColorTemp = "";
   string classSliderPanel = "";
+
+  if (oHueStatus) {
+    hueStatus = oHueStatus.Value();
+  }
 
   if (oHCL) {
     if (oHCL.Value().ToString() == "") {
@@ -700,7 +715,7 @@ function ::CreateRGBWControlMode_RGB_TW()
 
         ! Inputs of the color picker
         WriteLine("<td>");
-          WriteLine("<table class='ControlBtnInfo'>");
+          WriteLine("<table class='ControlBtnInfo j_ControlBtnInfo'>");
 
             WriteLine("<tr>");
                 WriteLine("<td><span style='color:white'>H</span></td>");
@@ -721,7 +736,7 @@ function ::CreateRGBWControlMode_RGB_TW()
             WriteLine("<tr>");
               WriteLine("<td></td>");
               WriteLine("<td>");
-                WriteLine("<div id='bckGndlmId_"#chnId#"' style='width:auto;' >&nbsp;</div>");
+                WriteLine("<div id='bckGndlmId_"#chnId#"' style='cursor:pointer; width:auto;' >&nbsp;</div>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
@@ -802,6 +817,7 @@ function ::CreateRGBWControlMode_RGB_TW()
     WriteLine("opts.chAddress = '"#chAddress#"';");
     WriteLine("opts.hue = hueValue;");
     WriteLine("opts.saturation = satValue;");
+    WriteLine("opts.hueStatus = '"#hueStatus#"';");
     WriteLine("opts.level = levelValue;");
     WriteLine("opts.effect = effectValue;");
 
@@ -826,6 +842,7 @@ function ::CreateRGBWControlMode_RGB_TW()
     WriteLine("opts.colorTempMax = parseInt(chnDescription.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);");
     WriteLine("opts.hcl = '"#hcl#"';");
     WriteLine("opts.dim2Warm = '"#dim2Warm#"';");
+    WriteLine("opts.hueStatus = '"#hueStatus#"';");
     WriteLine("opts.devLabel = '"#cObj.Label()#"';");
 
     WriteLine("sliderOpts = {};");
@@ -871,7 +888,14 @@ function ::CreateRGBWControlModeLSI()
 
   object oHue = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUE");
   object oSaturation = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.SATURATION");
+  object oHueStatus = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.HUE_STATUS");
   object oLevel = cObj.DPByControl("UNIVERSAL_LIGHT_RECEIVER.LEVEL");
+
+  boolean hueStatus = 0;
+
+  if (oHueStatus) {
+    hueStatus = oHueStatus.Value();
+  }
 
   if( oLevel )
   {
@@ -925,7 +949,7 @@ function ::CreateRGBWControlModeLSI()
 
         ! Inputs of the color picker
         WriteLine("<td>");
-          WriteLine("<table class='ControlBtnInfo'>");
+          WriteLine("<table class='ControlBtnInfo j_ControlBtnInfo'>");
 
             WriteLine("<tr>");
                 WriteLine("<td><span style='color:white'>H</span></td>");
@@ -946,7 +970,7 @@ function ::CreateRGBWControlModeLSI()
             WriteLine("<tr>");
               WriteLine("<td></td>");
               WriteLine("<td>");
-                WriteLine("<div id='bckGndlmId_"#chnId#"' style='width:auto;' >&nbsp;</div>");
+                WriteLine("<div id='bckGndlmId_"#chnId#"' style='cursor:pointer; width:auto;' >&nbsp;</div>");
               WriteLine("</td>");
             WriteLine("</tr>");
 
@@ -978,6 +1002,7 @@ function ::CreateRGBWControlModeLSI()
     WriteLine("opts.chAddress = '"#chAddress#"';");
     WriteLine("opts.hue = hueValue;");
     WriteLine("opts.saturation = satValue;");
+    WriteLine("opts.hueStatus = '"#hueStatus#"';");
     WriteLine("opts.level = levelValue;");
 
     WriteLine("ibd"#chnId#" = new iseButtonsDimmer("#chnId#", "#iState#", "#iLvlDpId#", "#iOldLvlDpId#", "#system.GetVar("iStatusOnly")#", "#system.GetVar('bSliderFlag')#", '"#cObj.Label()#"' );");

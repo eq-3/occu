@@ -189,4 +189,38 @@ function ::ShowExtDesc() {
     }
   }
 
+  if ((chn.Label() == "HmIP-SMO230") || (chn.Label() == "HmIP-230-A")) {
+    if (chNumber == 1) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_LEFT}</span>");
+      showExtDesc = true;
+    }
+    if (chNumber == 2) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_RIGHT}</span>");
+      showExtDesc = true;
+    }
+    if (chNumber == 3) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_BOTTOM}</span>");
+      showExtDesc = true;
+    }
+    if (chNumber == 4) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_VIRTUEL}</span>");
+      showExtDesc = true;
+    }
+    if (chNumber == 5) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_ZONE1}</span>");
+      showExtDesc = true;
+    }
+    if (chNumber == 6) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_ZONE2}</span>");
+      showExtDesc = true;
+    }
+    if (chNumber == 7) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_ZONE3}</span>");
+      showExtDesc = true;
+    }
+    if (chNumber == 8) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_VIRTUEL}</span>");
+      showExtDesc = true;
+    }
+  }
 }

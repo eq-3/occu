@@ -164,8 +164,14 @@
 <script type="text/javascript">
        
       // Belongs to SPHM-1040 
-      // This apparently causes problems when editing existing groups.       
-      //window.setTimeout(function() {jQuery("#grpSelector").prop("selectedIndex",1).change();},1);
+      window.setTimeout(function() {
+        var grpSelectorElm = jQuery("#grpSelector");
+        // Execute this only when creating a new group
+        if (! grpSelectorElm.prop("disabled")) {
+          grpSelectorElm.prop("selectedIndex",1).change();
+        }
+      },100);
+
 
      this.groupNameHasChanged = false;
     // TWIST-589
@@ -361,6 +367,7 @@
         self.activeLeftoverDeviceListHeader = self.leftoverDeviceHeaders[0];
 
         self.sortDeviceList = function(deviceList, lastHeader, header, event){
+
             if(lastHeader === header) {
                 header.asc = !header.asc;
             } else {
