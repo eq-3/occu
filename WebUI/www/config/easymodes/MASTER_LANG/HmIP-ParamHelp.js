@@ -938,7 +938,7 @@ jQuery.extend(true,langJSON, {
       "1 - 2.7.0, for example, denotes subtraction: 1.7.0 - 2.7.0.",
 
     "CHANNEL_ACTIVE_CLIMATECONTROL" :
-      "en* Diese Checkbox dient dazu, Fehlermeldungen an unbenutzten Kan%E4len auf der Seite Status/Bedienung zu vermeiden. Aktivieren Sie diese Checkbox daher nur, wenn der Kanal auch benutzt wird.",
+      "This checkbox is used to avoid error messages for unused channels on the status/operation screen. Therefore, only activate this checkbox if the channel is actually being used.",
 
 
     "noMoreHelp" : ""

@@ -2268,6 +2268,7 @@ powerIdentSensor = function(address) {
             DeviceListPage.showConfiguration(false, 'DEVICE', device.id);
             resetAllMetaEnergyCounter(device, opMode);
           } else {
+            conInfo("ESI - searching sensor: " + counter);
             counter++;
             if (counter > 120) {
               // If on the config page of this device, after 2 minutes stop the search and show a message that the system button of the device has to be pressed.

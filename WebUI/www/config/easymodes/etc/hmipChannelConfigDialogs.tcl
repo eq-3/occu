@@ -3250,7 +3250,7 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
       set paramValue " "
     }
     incr prn
-    append html "<tr class='_j_esiSensorIEC _j_sensorType _hidden'>"
+    append html "<tr class='j_esiSensorIEC j_sensorType hidden'>"
       append html "<td>\${stringTableMeterObisSearchString}</td>"
       # append html "<td>[getTextField $param $paramValue $chn $prn]&nbsp;&nbsp;[getMinMaxValueDescr $param]</td>"
       append html "<td>[getTextField $param $paramValue $chn $prn]&nbsp;[getHelpIcon ESI_$param 450 180]</td>"
@@ -3272,7 +3272,7 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
 
       append html "showSensorType = function(val) {"
         append html "jQuery('.j_sensorType').hide();"
-        append html "if (val >= $sensorIEC) {"
+        append html "if (val > $sensorIEC) {"
           append html "jQuery('.j_esiSensorIEC').show();"
         append html "} else if (val == $sensorGas) {"
           append html "jQuery('.j_esiSensorGas').show();"
@@ -3281,14 +3281,6 @@ proc getEnergieMeterTransmitterESI {chn p descr chnAddress} {
         append html "}"
 
         append html "footerElm = jQuery('#footerButtonOK, #footerButtonTake');"
-
-        # If val = 0 then start the sensor searching (because we now have a button for searching the sensor this is not necessary anymore)
-      #  append html "if (parseInt(val) == 0) {"
-      #     append html " footerElm.off('click').click(function() {powerIdentSensor('$chnAddress');});"
-      #
-      #  append html "} else {"
-      #    append html "footerElm.off('click').click(function() {});"
-      #  append html "}"
 
       append html "};"
 

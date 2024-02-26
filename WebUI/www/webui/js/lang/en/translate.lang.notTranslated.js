@@ -207,13 +207,12 @@ jQuery.extend(true, langJSON, {
     "comment" : "Release A/2024 - not yet translated",
 
     "dialogEsiSearchButtonContent" :
-      "en* Starten Sie hier die Sensorerkennung.<br/><br/>" +
-      "<b>Bevor</b> Sie fortfahren, stellen Sie sicher, dass ein Sensor am Energiemessger%E4t angeschlossen ist.<br/><br/>" +
-      "<b>Nachdem</b> Sie die Sensorerkennung gestartet haben, bet%E4tigen Sie die Systemtaste des Ger%E4tes. " +
-      "Der Sensor wird jetzt ermittelt. Wenn Sie diese Seite nicht verlassen, wird sie anschlie%DFend neu aufgerufen und der gefundene Sensor angezeigt.<br/><br/>" +
-      "<u>Achtung:</u><br/>" +
-      "Bei einem Wechsel des Sensors, werden die bisher erfassten Verbrauchswerte (Heute, Gestern usw.) zur%FCck auf 0 gesetzt.<br/><br/>" +
-      "Sollten Sie die Sensorsuche ohne angeschlossenen Sensor gestartet haben, schlie%DFen Sie einen Sensor an und machen Sie einen Werksreset des Energiemessger%E4ts.<br/><br/>" ,
+      "Start detection of sensor here.<br/><br/>" +
+      "<b>Once</b> you have started sensor detection, press the system button of the device. " +
+      "The sensor is detected now. If you do not close this window, it will be opened again and the sensor found will be displayed.<br/><br/>" +
+      "<u>Note:</u><br/>" +
+      "If you change the sensor, the previously recorded consumption values (today, yesterday, etc.) will be reset to 0.<br/><br/>" +
+      "If you have started the sensor detection without a sensor connected, connect a sensor and carry out a factory reset of the energy meter.<br/><br/>",
 
      "lblErrorMessageActive" : "en* Fehlermeldung aktiv",
 

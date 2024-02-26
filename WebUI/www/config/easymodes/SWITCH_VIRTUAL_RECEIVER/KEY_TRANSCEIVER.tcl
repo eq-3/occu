@@ -36,7 +36,7 @@ set PROFILE_1(LONG_ONDELAY_TIME_FACTOR)       {0 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_BASE)              {7 range 0 - 7}
 set PROFILE_1(LONG_ON_TIME_FACTOR)            {31 range 0 - 31}
 set PROFILE_1(LONG_ON_TIME_MODE)              0
-set PROFILE_1(LONG_PROFILE_ACTION_TYPE)       {1 0}
+set PROFILE_1(LONG_PROFILE_ACTION_TYPE)       {1 0 5}
 set PROFILE_1(SHORT_COND_VALUE_HI)          150
 set PROFILE_1(SHORT_COND_VALUE_LO)           50
 set PROFILE_1(SHORT_CT_OFF)                   0
@@ -84,7 +84,7 @@ set PROFILE_2(LONG_ONDELAY_TIME_FACTOR)       {0 range 0 - 31}
 set PROFILE_2(LONG_ON_TIME_BASE)              7
 set PROFILE_2(LONG_ON_TIME_FACTOR)            31
 set PROFILE_2(LONG_ON_TIME_MODE)              0
-set PROFILE_2(LONG_PROFILE_ACTION_TYPE)       {1 0}
+set PROFILE_2(LONG_PROFILE_ACTION_TYPE)       {1 0 5}
 set PROFILE_2(SHORT_COND_VALUE_HI)          150
 set PROFILE_2(SHORT_COND_VALUE_LO)           50
 set PROFILE_2(SHORT_CT_OFF)                   0

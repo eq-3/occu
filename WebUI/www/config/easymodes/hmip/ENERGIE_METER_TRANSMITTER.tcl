@@ -18,19 +18,6 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set prn 0
     if {[string equal $devType HmIP-ESI] == 1} {
       if {$chn == 1} {
-
-        set comment {
-          array set valueDescr [xmlrpc $url getParamset [list string $address] VALUES]
-          set param "{CHANNEL_OPERATION_MODE {int $valueDescr(SELF_CALIBRATION_RESULT)}}"
-          catch {[xmlrpc $url putParamset [list string $address] [list string MASTER] [list struct $param]]}
-
-          if { ([info exists valueDescr(SELF_CALIBRATION_RESULT)] == 1)} {
-            set ps(CHANNEL_OPERATION_MODE) $valueDescr(SELF_CALIBRATION_RESULT)
-          } else {
-            set ps(CHANNEL_OPERATION_MODE) 0
-          }
-        }
-
         append HTML_PARAMS(separate_1) "[getEnergieMeterTransmitterESI $chn ps psDescr $address]"
       } else {
         set chnDescr(CHANNEL_OPERATION_MODE) -1

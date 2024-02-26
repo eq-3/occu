@@ -19815,6 +19815,8 @@ DimmerCombinedParamDialog = Class.create({
     showRamptimeOff = false; // This we need among other things for certain COMBINED_PARAMETER help dialogs.
     var _this_ = this;
 
+    this.iFace = "HmIP-RF";
+
     this.m_contentType = contentType;
     this.m_callback = callback;
     this.m_layer = document.createElement("div");
@@ -19829,16 +19831,15 @@ DimmerCombinedParamDialog = Class.create({
 
     this.maxOnTime = 111600;
 
-    /*
-    this.devDescr =  homematic("Interface.getParamsetDescription", {'interface': 'HmIP-RF', 'address': this.chnAddress, 'paramsetKey': 'VALUES'}, function(result) {
-      jQuery.each(result, function(index,value){
-        if (value.NAME == "ON_TIME") {
-          _this_.maxOnTime = parseInt(value.MAX);
-          return; // leave the each loop
-        }
-      });
+    this.devDescr = homematic("Interface.getDeviceDescription", {
+      "interface" : this.iFace,
+      "address" : this.chnAddress.split(":")[0]
     });
-    */
+
+    this.devFirmware = this.devDescr.firmware.split(".");
+    this.fwMajor = parseInt(this.devFirmware[0]);
+    // this.fwMinor = parseInt(this.devFirmware[1]); // currently not in use
+    // this.fwPatch = parseInt(this.devFirmware[2]); // currently not in use
 
     this.isUniversalActor = ((this.deviceType == "HmIP-WUA") || (this.deviceType == "ELV-SH-WUA")) ? true : false;
     this.isServoController = ((this.deviceType == "HmIP-WSC") || (this.deviceType == "ELV-SH-WSC")) ? true : false;
@@ -19846,6 +19847,11 @@ DimmerCombinedParamDialog = Class.create({
     this.showRampTimeOffElm = ["HmIPW-WRC6", "HmIPW-WRC6-A"];
     this.showColorElms = ["HmIP-MP3P", "HmIP-BSL", "HmIPW-WRC6", "HmIPW-WRC6-A"];
     this.showBehaviourElms = ["HmIPW-WRC6", "HmIPW-WRC6-A"];
+
+    // SPHM-1268
+    if ((this.deviceType == "HmIP-BSL") && (this.fwMajor >= 2)) {
+      this.showBehaviourElms.push(this.deviceType);
+    }
 
     var dialog = document.createElement("div");
     dialog.className = "YesNoDialog";
@@ -49701,6 +49707,7 @@ powerIdentSensor = function(address) {
             DeviceListPage.showConfiguration(false, 'DEVICE', device.id);
             resetAllMetaEnergyCounter(device, opMode);
           } else {
+            conInfo("ESI - searching sensor: " + counter);
             counter++;
             if (counter > 120) {
               // If on the config page of this device, after 2 minutes stop the search and show a message that the system button of the device has to be pressed.
