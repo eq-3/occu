@@ -178,7 +178,7 @@ jQuery.extend(true, langJSON, {
     "stringTableKeyTransceiverChannelOperationModeLevelKeyBehavior" : "Level",
     "stringTableKeyTransceiverChannelOperationModeConditionalBehavior" : "Bedingung",
 
-    "lblPowerMeterSensorIdentification" : "", // this is correct (placeholder)
+    "lblPowerMeterSensorIdentification" : "<span style='visibility:hidden'>Startwert setzen</span>",
     "lblSetStartValue" : "Startwert setzen",
     "lblStartValue" : "Startwert",
     "lblSensorMode" : "Sensor",

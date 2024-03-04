@@ -1848,6 +1848,11 @@ proc getDimmerTransmitter {chn p descr} {
 
   set prn 0
 
+  set Fw [getDevFwMajorMinorPatch]
+  set fwMajor [lindex $Fw 0]
+  set fwMinor [lindex $Fw 1]
+  set fwPatch [lindex $Fw 2]
+
   set param CHANNEL_OPERATION_MODE
   if { [info exists ps($param)] == 1  } {
     incr prn
@@ -1859,7 +1864,11 @@ proc getDimmerTransmitter {chn p descr} {
     if {! $isWUA} {
       set options(0) "\${optionInactiv}"
       set options(1) "\${optionActiv}"
-      set options(2) "\${optionAdjustDimmerLevel}"
+
+      if { ($fwMajor >= 2) ||  (($fwMajor == 2) && ($fwMinor >= 1)) || (($fwMajor == 2) && ($fwMinor == 1) && ($fwPatch >= 12)) } {
+        set options(2) "\${optionAdjustDimmerLevel}"
+      }
+
     } else {
       set options(0) "\${optionRelayInactive}"
       set options(1) "\${optionRelayOffDelay05S}"

@@ -53,7 +53,7 @@ if {$dev_descr_receiver(PARENT_TYPE) == "HmIP-RGBW"} {
      set dev_descr_receiver(TYPE) $ACTOR
    }
 
-  if {$devMode == 3} {
+  if {($devMode == 3) || ($devMode == 4)} {
     set ACTOR "UNIVERSAL_LIGHT_RECEIVER_RGBW_DALI"
     set dev_descr_receiver(TYPE) $ACTOR
   }
