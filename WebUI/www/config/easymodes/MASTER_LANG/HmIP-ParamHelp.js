@@ -264,7 +264,7 @@ jQuery.extend(true,langJSON, {
       "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden. Eine Kalibrierung sollte in dem Fall alle 1-2 Jahre manuell durchgef%FChrt werden.",
 
     "MOUNTING_ORIENTATION" : "Dieser Parameter erm%FCglicht es, den Displayinhalt um 180 Grad zu drehen.",
-    "MOUNTING_ORIENTATION_A" : "Dieser Parameter erm%F6glicht es, die Tastereinheit des Aktors im gew%FCnschten Winkel einzusetzen. ",
+    "MOUNTING_ORIENTATION_A" : "Dieser Parameter erm%F6glicht es, den Aktor im gew%FCnschten Winkel einzusetzen. ",
 
     "POWERUP_ONTIME_UNIT" :
       "W%E4hlen Sie die Wartezeit bis zum <i>Auto Relock</i>, nachdem das T%FCrschloss entriegelt oder ge%F6ffnet wurde.<br/><br/>" +
@@ -470,7 +470,16 @@ jQuery.extend(true,langJSON, {
 
     "CHANNEL_ACTIVE_CLIMATECONTROL" : 
       "Diese Checkbox dient dazu, Fehlermeldungen an unbenutzten Kan%E4len auf der Seite Status/Bedienung zu vermeiden. Aktivieren Sie diese Checkbox daher nur, wenn der Kanal auch benutzt wird.",
-    
+
+    "DISPLAY_MODE" :
+      "Mit diesem Parameter kann zwischen folgenden beiden Display-Layouts gew%E4hlt werden:<br/><br/>" +
+      "<b><u>Reduzierter Modus</u></b><br>" +
+      "Die Informationen im Display sind auf ein Minimum reduziert, bei besonders gro%DFer Anzeige der Soll-Temperatur.<br/><br/>" +
+      "\"<b><u>Funktioneller Modus</u></b><br/>" +
+      "Im funktionellen Modus werden mehr Informationen auf dem Display dargestellt.<br/>",
+
+      "DISPLAY_INVERTED_COLORS"  : "Mit diesem Parameter w%E4hlen Sie f%FCr das Display die normale Anzeige oder den Dunkelmodus.",
+
     "noMoreHelp" : ""
   },
 
@@ -731,7 +740,7 @@ jQuery.extend(true,langJSON, {
       "<br/><br/>This function must be deactivated for rooms with a 24/7 permanent occupancy. In this case, a manual calibration should be performed every 1-2 years.",
 
     "MOUNTING_ORIENTATION" : "This parameter makes it possible to rotate the display content by 180 degrees.",
-    "MOUNTING_ORIENTATION_A" : "This parameter enables the push-button unit of the actuator to be placed at the required angle.",
+    "MOUNTING_ORIENTATION_A" : "This parameter enables the actuator to be placed at the required angle.",
 
     "POWERUP_ONTIME_UNIT" :
       "Select the delay time until <i>Auto Relock</i> is executed after the door lock has been unlocked or opened.<br/><br/>" +
@@ -940,6 +949,14 @@ jQuery.extend(true,langJSON, {
     "CHANNEL_ACTIVE_CLIMATECONTROL" :
       "This checkbox is used to avoid error messages for unused channels on the status/operation screen. Therefore, only activate this checkbox if the channel is actually being used.",
 
+    "DISPLAY_MODE" :
+      "en* Mit diesem Parameter kann zwischen folgenden beiden Display-Layouts gew%E4hlt werden:<br/><br/>" +
+      "<b><u>Reduzierter Modus</u></b><br>" +
+      "Die Informationen im Display sind auf ein Minimum reduziert, bei besonders gro%DFer Anzeige der Soll-Temperatur.<br/><br/>" +
+      "\"<b><u>Funktioneller Modus</u></b><br/>" +
+      "Im funktionellen Modus werden mehr Informationen auf dem Display dargestellt.<br/>",
+
+    "DISPLAY_INVERTED_COLORS"  : "en* Mit diesem Parameter w%E4hlen Sie f%FCr das Display die normale Anzeige oder den Dunkelmodus.",
 
     "noMoreHelp" : ""
     }

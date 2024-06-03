@@ -45,6 +45,7 @@ jQuery.extend(true,langJSON, {
     "motionDetectorSensorSensivity" : "Empfindlichkeit des Sensors bei Ersch%FCtterung",
     "motionDetectorTriggerAngle" : "Winkel f%FCr die Lageerkennung",
     "motionDetectorTriggerAngle2" : "Winkel f%FCr die Neigungserkennung",
+    "motionDetectorTriggerAngleHysteresis" : "Hysterese der Lageerkennung",
 
     "motionDetectorOptionNoMessage" : "Keine Meldung",
     "motionDetectorOptionMotion_1": "Bewegung",
@@ -103,7 +104,9 @@ jQuery.extend(true,langJSON, {
     "motionDetectorNotificationNoMovement_2" : "<span name=\"NotiNoMovement\">Sound notification horizontal</span>",
 
     "motionDetectorSensorSensivity" : "Sensor sensitivity during vibration",
-    "motionDetectorTriggerAngle" : "Angle for position detection",
+    "motionDetectorTriggerAngle" : "Angle of position detection",
+    "motionDetectorTriggerAngle2" : "Angel of tilt detection",
+    "motionDetectorTriggerAngleHysteresis" : "Hysteresis of position detection",
 
     "motionDetectorOptionNoMessage" : "No message",
     "motionDetectorOptionMotion_1": "Motion",

@@ -6,6 +6,8 @@ jQuery.extend(true,langJSON, {
     "thTypeDescriptorWOLineBreak" : "Typenbezeichnung",
     "ruleConditionSelectValue" : "Wert",
     "ruleConditionSelectText" : "Text",
+    "ruleConditionLblIsEqual" : "gleich ",
+    "ruleDescrHexString" : "Parameterzeichenkette",
     "btnChoice" : "Auswahl",
     "btnAutoDetect" : "Automatisch ermitteln",
     "btnSelectRoomOrFunctionNew" : "Neu...",
@@ -556,6 +558,10 @@ jQuery.extend(true,langJSON, {
     "temperatureMeasurement" : "Temperaturmessung",
     "energyMeasurement" : "Energiemessung",
     "powerMeasurement" : "Verbrauch",
+    "powerMeasurementA" : "Durchfluss",
+    "powerMeasurementB" : "Energie Bezug HT",
+    "powerMeasurementC" : "Energie Bezug NT",
+    "powerMeasurementD" : "Energie Lieferung",
     "userSpecific" : "Benutzerspezifisch",
     "diagramPeriodToday" : "Heute",
     "diagramPeriodThisWeek" : "Diese Woche",
@@ -604,7 +610,6 @@ jQuery.extend(true,langJSON, {
     "iconBell" : "Benachrichtigung",
     "iconClock" : "Uhr",
     "statusDisplayDialogTitle" : "Display Konfiguration",
-    "ruleDescrHexString" : "Parameterzeichenkette",
     "dialogChangeLogTitle" : "Changelog",
     "btnChangelog" : "Changelog",
     "errorReadChangelog": "Fehler beim Lesen des Changelogs....",
@@ -1027,6 +1032,45 @@ jQuery.extend(true,langJSON, {
     "dialogAskCreateBakupText" : "Das Backup wird direkt vor der Installation erstellt und heruntergeladen. Dieser Vorgang kann einige Minuten dauern.",
     "unitNumericPinCode" : "(max. 8 Ziffern von 0-9)",
     "hintSetReadyNotComplete" : "Klicken Sie auf Fertig, um den Kanal vollst%E4ndig zu konfigurieren und rufen Sie das Ger%E4t anschlie%DFend in der Ger%E4teliste auf.",
+
+    "btnHCL" : "HCL",
+    "btnDim2Warm" : "Dim2Warm",
+    "fwUpdatePressConfigKey" :
+      "Stellen Sie sicher, dass das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" ist.  Dr%FCcken sie ggf. die Systemtaste am Ger%E4t<br/><br/>"+
+      "Bei allen Homematic IP Sensoren, wie z. B. die Wettersensoren, ist ein Dr%FCcken der Taste nicht zwingend erforderlich. " +
+      "Die Ger%E4te melden sich automatisch im Verlauf eines Tages und beginnen dann selbstst%E4ndig mit dem Update.",
+    "fwUpdatePressSystemKey" :
+      "Stellen Sie sicher, dass das Ger%E4t in Funkreichweite der "+HMIdentifier.de.CCUShortName+" ist.  Dr%FCcken sie ggf. die Systemtaste am Ger%E4t<br/><br/>"+
+      "Bei allen Homematic IP Sensoren, wie z. B. die Wettersensoren, ist ein Dr%FCcken der Taste nicht zwingend erforderlich. " +
+      "Die Ger%E4te melden sich automatisch im Verlauf eines Tages und beginnen dann selbstst%E4ndig mit dem Update.",
+    "minTemp" : "min.<br/>Temp",
+    "maxTemp" : "max.<br/>Temp",
+    "errorStateCoProcessor" : "Zustand Co-Prozessor",
+    "errorCoProcessorFalse" : "<br/>OK",
+    "errorCoProcessorTrue" : "<br/>Fehler",
+    "stateDaliBus" : "Zustand DALI-Bus",
+    "stateDaliBus_0" : "<br/>OK",
+    "stateDaliBus_1" : "<br/>Kurzschluss",
+    "stateDaliBus_2" : "<br/>%DCberlast",
+    "btnSearchDaliDevices" : "Pr%FCfen",
+    "titleSearchDaliDevices" : "Pr%FCfe Kan%E4le",
+    "showDeviceBetaFw" : "Zeige unver%F6ffentlichte Ger%E4te-Fw.",
+    "hintDeviceBetaFw" :
+      "Bei aktiviertem Parameter werden einer geschlossenen Benutzergruppe auf der Startseite unter dem Punkt 'Ger%E4te-Update' " +
+      "Vorabversionen geplanter Ger%E4te-Firmware Updates angeboten.",
+    "btnSensorDetection" : "Sensorerkennung",
+    "hintPressSysKeyTryAgain" : "Bet%E4tigen Sie die Systemtaste und versuchen Sie es noch einmal.",
+    "hintProblemSensorIdent" : "Bei der Erkennung des Sensors ist ein Fehler aufgetreten.",
+    "msgStartValueInvalid_A" : "Der vergebene Startwert f%FCr Kanal ",
+    "msgStartValueInvalid_B" : " ist ung%FCltig!\n\nEs wird 0.000 verwendet.",
+    "dialogEsiSearchButtonContent" :
+      "Starten Sie hier die Sensorerkennung.<br/><br/>" +
+      "<b>Nachdem</b> Sie die Sensorerkennung gestartet haben, bet%E4tigen Sie die Systemtaste des Ger%E4tes. " +
+      "Der Sensor wird jetzt ermittelt. Wenn Sie diese Seite nicht verlassen, wird sie anschlie%DFend neu aufgerufen und der gefundene Sensor angezeigt.<br/><br/>" +
+      "<u>Achtung:</u><br/>" +
+      "Bei einem Wechsel des Sensors werden die bisher erfassten Verbrauchswerte (heute, gestern usw.) zur%FCck auf 0 gesetzt.<br/><br/>" +
+      "Sollten Sie die Sensorsuche ohne angeschlossenen Sensor gestartet haben, schlie%DFen Sie einen Sensor an und f%FChren Sie einen Werksreset des Energiemessger%E4ts durch.<br/><br/>" ,
+
     "theEnd" : ""
   }
 });

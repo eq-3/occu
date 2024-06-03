@@ -61,6 +61,7 @@
 "ONDELAY_TIME_FACTOR_DESCR" : "<span class=\"translated\">Einschaltverz&ouml;gerung</span>",
 "ON_AIRING" : "<span class=\"translated\">L&uuml;ften bei</span>",
 "ON_COLOR" : "<span class=\"translated\">Farbe im Zustand \"ein\"</span>",
+"ONOFF_COLOR" : "<span class=\"translated\">Farbe</span>",
 "ON_LEVEL" : "<span class=\"translated\">Pegel im Zustand \"ein\"</span>",
 "ON_LEVEL_COLOR_VALUE" : "<span class=\"translated\">Farbwert im Zustand \"ein\"</span>",
 "ON_LEVEL_mp3" : "<span class=\"translated\">Lautst&auml;rke im Zustand \"ein\"</span>",

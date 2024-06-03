@@ -1138,7 +1138,7 @@ proc put_channel_parameters {} {
     incr tr_count
 
     # Due to performance reasons we spare the MULTI_MODE_INPUT_TRANSMITTER
-    if {! [string equal $ch_descr(TYPE) "MULTI_MODE_INPUT_TRANSMITTER"]} {
+    if {(! [string equal $ch_descr(TYPE) "MULTI_MODE_INPUT_TRANSMITTER"]) || ([string equal $dev_descr(TYPE) "HmIP-FLC"]) || ([string equal $dev_descr(TYPE) "HmIP-FDC"])  } {
       puts "<script type='text/javascript'>"
         puts "var ext = getExtendedDescription(\{\"deviceType\" : \"$ch_descr(PARENT_TYPE)\", \"channelType\" : \"$ch_descr(TYPE)\" ,\"channelIndex\" : \"$ch_descr(INDEX)\", \"channelAddress\" : \"$ch_descr(ADDRESS)\" \});"
         puts "jQuery(\"#chDescr_$ch_descr(INDEX)\").html(\"<br/><br/>\" + ext);"

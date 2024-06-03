@@ -2,7 +2,7 @@
 
 function ::ShowExtDesc() {
 
-  if ((chn.HssType() == "SWITCH_TRANSMITTER") && (chn.Label() == "HmIP-MOD-OC8") ) {
+  if ((chn.HssType() == "SWITCH_TRANSMITTER") && ((chn.Label() == "HmIP-MOD-OC8") || (chn.Label() == "ELV-SH-SB8"))) {
     Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_OC}</span>");
     showExtDesc = true;
   }
@@ -103,6 +103,13 @@ function ::ShowExtDesc() {
     }
   }
 
+  if (chn.HssType() == "CLIMATE_TRANSCEIVER") {
+    if (chn.Label() == "ELV-SH-TACO") {
+        Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_CLIMATE_TRANSCEIVER_TEMP}</span>");
+        showExtDesc = true;
+    }
+  }
+
   if ( (chn.HssType() == "COND_SWITCH_TRANSMITTER_TEMPERATURE") && (chn.Label() == "HmIP-STE2-PCB") && (chNumber == 3) ) {
     Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_COND_SWITCH_TRANSMITTER_TEMPERATURE_DIFF}</span>");
     showExtDesc = true;
@@ -189,7 +196,7 @@ function ::ShowExtDesc() {
     }
   }
 
-  if ((chn.Label() == "HmIP-SMO230") || (chn.Label() == "HmIP-230-A")) {
+  if ((chn.Label() == "HmIP-SMO230") || (chn.Label() == "HmIP-SMO230-A") || (chn.Label() == "HmIPW-SMO230") || (chn.Label() == "HmIPW-SMO230-A")) {
     if (chNumber == 1) {
       Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_LEFT}</span>");
       showExtDesc = true;

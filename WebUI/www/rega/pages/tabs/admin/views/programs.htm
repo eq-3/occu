@@ -398,11 +398,16 @@
     var ch = DeviceList.getChannelByAddress(chAddress),
       virtChannelType = (typeof ch.virtChannelType != "undefined") ? ch.virtChannelType : "";
 
+    if (virtChannelType == "") {
+      if (ch.multiMode == "blind") {virtChannelType = "BLIND_VIRTUAL_RECEIVER";}
+      if (ch.multiMode == "shutter") {virtChannelType = "SHUTTER_VIRTUAL_RECEIVER";}
+    }
+
     var elm = jQuery("#prgStringOptionValue" + regaDialogID); // this is the element which contains the relevant string to transmit
 
     if (virtChannelType == "SHUTTER_VIRTUAL_RECEIVER") {
       var url = "/pages/msg/setShutterVirtualReceiverCombinedParam.htm";
-      elm.val(elm.val().split(",")[0]);
+      // see SPHM-1302 - elm.val(elm.val().split(",")[0]);
     } else {
       var url = "/pages/msg/setBlindVirtualReceiverCombinedParam.htm";
     }

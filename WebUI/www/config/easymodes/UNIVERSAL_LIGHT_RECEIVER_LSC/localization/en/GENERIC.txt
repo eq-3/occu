@@ -39,6 +39,7 @@
 "dim2warm_on_off" : "Dim2Warm - ein/aus",
 
 "optionColorVal" : "Colour value",
+"optionColorTemperature" : "Colour temperature",
 
 "colortemp_up" : "Colour temperature - up",
 "colortemp_down" : "Colour temperature - down",
@@ -82,9 +83,15 @@
 "COLOR_TEMP" : "Colour temperature",
 "COLOR_TEMP_ON" : "Colour temperature in status 'on'",
 "COLOR_TEMP_OFF" : "Colour temperature in status 'off'",
-"MIN_COLOR_TEMP" : "Minimum colour temperature",
+"MIN_COLOR_TEMP""lblMode" : "Modus", : "Minimum colour temperature",
 "MAX_COLOR_TEMP" : "Maximum colour temperature",
 
 "lblResorePreviousStatus" : langJSON.en.lblResorePreviousStatus,
-
+"lblMode" : "Mode",
+"lblModeOn" : "Mode \"on\"",
+"lblModeOff" : "Mode \"off\"",
 "unitKelvin" : "K",
+
+"optionHueSaturation" : "Hue/Saturation",
+"optionColorTemp" : "Colour temperature",
+"optionLastValue" : "Last Value",

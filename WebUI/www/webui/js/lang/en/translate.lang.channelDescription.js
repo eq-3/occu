@@ -1,14 +1,12 @@
 jQuery.extend(true,langJSON, {
   "en" : {
-
+    "chType_ACCELERATION_TRANSCEIVER" : "en* Lage-/Beschleunigungssensor",
     "chType_ACCESS_RECEIVER" : "User",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_1" : "Homematic IP Wired Bus Channel 1",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_2" : "Homematic IP Wired Bus Channel 2",
-
     "chType_ACCESS_TRANSCEIVER" : "Access Control",
     "chType_ACCESS_TRANSCEIVER_UNLOCk" : "Unlock",
     "chType_ACCESS_TRANSCEIVER_LOCk" : "Lock",
-
     "chType_ACTOR_SECURITY" : "Ventilation lock channel",
     "chType_ACTOR_WINDOW" : "Actor channel",
     "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Status report MP3-Player",
@@ -36,6 +34,7 @@ jQuery.extend(true,langJSON, {
     "chType_CLIMATECONTROL_RECEIVER" : "Connection partner<br/>wall thermostat",
     "chType_CLIMATECONTROL_RT_RECEIVER" : "Connection partner<br/>radiator thermostat<br/>receiver",
     "chType_CLIMATECONTROL_RT_TRANSCEIVER" : "Connection partner<br/>radiator thermostat<br/>transmitter",
+    "chType_CLIMATE_TRANSCEIVER_TEMP" :"Temperature sensor",
     "chType_CONDITION_CURRENT" : "Current sensor",
     "chType_CONDITION_FREQUENCY" : "Frequency sensor",
     "chType_CONDITION_POWER" : "Power sensor",
@@ -59,14 +58,12 @@ jQuery.extend(true,langJSON, {
     "chType_DIMMER_VIRTUAL_RECEIVER" : "Dimmer actuator",
     "chType_DIMMER_WEEK_PROFILE" : "Weekly program",
     "chType_DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE" : "Weekly program",
-
     "chType_DISPLAY_SCREEN" : "Screen",
     "chType_DISPLAY_TILE" : "Tile",
     "chType_DISPLAY_KEY" : "<br/>Key",
     "chType_DISPLAY_LEVEL" : "<br/>Level",
     "chType_DISPLAY_CLIMATE" : "<br/>Room climate",
     "chType_DISPLAY_UNKNOWN" : "<br/>Quick Motion",
-
     "chType_DOOR_LOCK_STATE_TRANSMITTER" : "Door lock drive ",
     "chType_DOOR_RECEIVER_MOD_HO" : "Door drive",
     "chType_DOOR_RECEIVER_MOD_TM" : "Door drive",
@@ -113,6 +110,7 @@ jQuery.extend(true,langJSON, {
     "chType_PASSAGE_DETECTOR_COUNTER_TRANSMITTER" : "Passage counter",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR" : "Passage detection<br/>left to right",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL" : "Passage detection<br/>right to left",
+    "chType_PERMISSION_TRANSCEIVER" : "Permission",
     "chType_POWERMETER" : "Measurement channel",
     "chType_PRESENCEDETECTOR_TRANSCEIVER" : "Presence sensor",
     "chType_RAINDETECTOR" : "Rain sensor",
@@ -142,6 +140,7 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_PANIC" : "Panic alarm",
     "chType_SWITCH_SENSOR_Ext" : "External alarm",
     "chType_SWITCH_SENSOR_Int" : "Internal alarm",
+    "chType_SWITCH_TRANSCEIVER" : "Switch actuator",
     "chType_SWITCH_TRANSMIT" : "Connection partner<br/>switch actuator",
     "chType_SWITCH_TRANSMITTER" : "Status report output",
     "chType_SWITCH_TRANSMITTER_OC" : "Status report relay OC-Output",

@@ -61,6 +61,7 @@
 "ONDELAY_TIME_FACTOR_DESCR" : "<span class=\"translated\">Switch on delay</span>",
 "ON_AIRING" : "<span class=\"translated\">Ventilation if</span>",
 "ON_COLOR" : "<span class=\"translated\">Color in status \"on\"</span>",
+"ONOFF_COLOR" : "<span class=\"translated\">Color</span>",
 "ON_LEVEL" : "<span class=\"translated\">Level in status \"on\"</span>",
 "ON_LEVEL_COLOR_VALUE" : "<span class=\"translated\">Color value in status \"on\"</span>",
 "ON_LEVEL_mp3" : "<span class=\"translated\">Volume in status \"on\"</span>",

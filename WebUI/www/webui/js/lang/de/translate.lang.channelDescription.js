@@ -1,15 +1,13 @@
 jQuery.extend(true,langJSON, {
   "de" : {
 
+    "chType_ACCELERATION_TRANSCEIVER" : "Lage-/Beschleunigungssensor",
     "chType_ACCESS_RECEIVER" : "Benutzer",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_1" : "Homematic IP Wired Bus Kanal 1",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_2" : "Homematic IP Wired Bus Kanal 2",
-
     "chType_ACCESS_TRANSCEIVER" : "Benutzer",
-
     "chType_ACCESS_TRANSCEIVER_UNLOCk" : "Entriegeln",
     "chType_ACCESS_TRANSCEIVER_LOCk" : "Verriegeln",
-
     "chType_ACTOR_SECURITY" : "L%FCftungssperre-Kanal",
     "chType_ACTOR_WINDOW" : "Aktor-Kanal",
     "chType_ACOUSTIC_SIGNAL_TRANSMITTER" : "Statusmitteilung MP3-Player",
@@ -37,6 +35,7 @@ jQuery.extend(true,langJSON, {
     "chType_CLIMATECONTROL_RECEIVER" : "Verkn%FCpfungspartner<br/>Wandthermostat",
     "chType_CLIMATECONTROL_RT_RECEIVER" : "Verkn%FCpfungspartner<br/>Heizungsthermostat<br/>Empf%E4nger",
     "chType_CLIMATECONTROL_RT_TRANSCEIVER" : "Verkn%FCpfungspartner<br/>Heizungsthermostat<br/>Sender",
+    "chType_CLIMATE_TRANSCEIVER_TEMP" :"Temperatursensor",
     "chType_CONDITION_CURRENT" : "Strom-Sensor",
     "chType_CONDITION_FREQUENCY" : "Frequenz-Sensor",
     "chType_CONDITION_POWER" : "Leistungs-Sensor",
@@ -114,6 +113,7 @@ jQuery.extend(true,langJSON, {
     "chType_PASSAGE_DETECTOR_COUNTER_TRANSMITTER" : "Durchgangsz%E4hler",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_LR" : "Durchgangserkennung<br/>Links nach Rechts",
     "chType_PASSAGE_DETECTOR_DIRECTION_TRANSMITTER_RL" : "Durchgangserkennung<br/>Rechts nach Links",
+    "chType_PERMISSION_TRANSCEIVER" : "Berechtigung",
     "chType_POWERMETER" : "Messwert-Kanal",
     "chType_PRESENCEDETECTOR_TRANSCEIVER" : "Pr%E4senzmelder",
     "chType_RAINDETECTOR" : "Regensensor",
@@ -143,6 +143,7 @@ jQuery.extend(true,langJSON, {
     "chType_SWITCH_PANIC" : "Panik Alarm",
     "chType_SWITCH_SENSOR_Ext" : "Externer Alarm",
     "chType_SWITCH_SENSOR_Int" : "Interner Alarm",
+    "chType_SWITCH_TRANSCEIVER" : "Schaltaktor",
     "chType_SWITCH_TRANSMIT" : "Verkn%FCpfungspartner<br/>Schaltaktor",
     "chType_SWITCH_TRANSMITTER" : "Statusmitteilung Schaltausgang",
     "chType_SWITCH_TRANSMITTER_OC" : "Statusmitteilung OC-Ausgang",

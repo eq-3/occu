@@ -864,7 +864,6 @@ jQuery.extend(true,langJSON, {
     "stringTableUnreachTrueBR" : "Ger%E4tekommunikation<br/> gest%F6rt",
     "stringTableValveAdaptionFalse" : "Adaptionsfahrt nicht aktiv",
     "stringTableValveAdaptionTrue" : "Adaptionsfahrt aktiv",
-
     "stringTableValveStateAdaptionDone" : "Adaptionsfahrt durchgef%FChrt",
     "stringTableValveStateAdaptionInProgress" : "Adaptionsfahrt aktiv",
     "stringTableValveStateAdjToSmall" : "Ventilstellbereich zu klein",
@@ -876,9 +875,6 @@ jQuery.extend(true,langJSON, {
     "stringTableValveStateToTight" : "Ventil schwerg%E4ngig / Ventil klemmt",
     "stringTableValveStateTrue" : "Heizventil ge%F6ffnet",
     "stringTableValveStateWaitForAdaption" : "Warte auf Adaptionsfahrt",
-
-
-
     "stringTableVentClosed" : "Ventil schlie%DFen",
     "stringTableVentOpen" : "Ventil %F6ffnen",
     "stringTableVirtualDimmerErrorLoadFailure" : "Lastfehler",
@@ -1211,7 +1207,6 @@ jQuery.extend(true,langJSON, {
     "stringTableErrorCoProcessor": "Der Kanal ist nicht erreichbar. Bitte pr%FCfen Sie die Spannungsversorgung des Kanals oder deaktivieren Sie diesen in der WebUI.",
     "stringTableTempHumidityParticulateMatterUnit" : "Einheit der automatischen Sensorreinigung",
     "stringTableTempHumidityParticulateMatterValue" : "Wert der automatischen Sensorreinigung",
-
     "stringTableMassConc10" : "Massenkonzentration PM1.0",
     "stringTableMassConc25" : "Massenkonzentration PM2.5",
     "stringTableMassConc100" : "Massenkonzentration PM10",
@@ -1219,12 +1214,9 @@ jQuery.extend(true,langJSON, {
     "stringTableNumberConc25" : "Mengenkonzentration PM2.5",
     "stringTableNumberConc100" : "Mengenkonzentration PM10",
     "stringTableTypicalParticelSize" : "Typische Partikelgr%F6%DFe",
-
     "stringTableMulticastRouterModuleEnabled" : "MultiCast-Routing",
-
     "stringTableOldValue" : "Alter Wert",
     "stringTableNoChange" : "Ignorieren",
-
     "stringTableErrorCommunicationParticulateMatterSensor" : "Fehler Kommunikation Feinstaubsensor",
     "stringTableErrorCommunicationParticulateMatterSensorFalse" : "Kommunikation Feinstaubsensor: OK",
     "stringTableErrorCommunicationParticulateMatterSensorTrue" : "Kommunikation Feinstaubsensor: gest&ouml;rt",
@@ -1385,11 +1377,50 @@ jQuery.extend(true,langJSON, {
     "stringTableKeyPressLongStart" : "Start langer Tastendruck",
     "stringTableKeyPressLongRelease" : "Stopp langer Tastendruck",
     "stringTableServoTitle" : "Servo Steuerung",
-
     "stringTableInputCoProEnabled_1" : "Kanal 1 %FCber CoPro aktiv",
     "stringTableInputCoProEnabled_2" : "Kanal 2 %FCber CoPro aktiv",
     "stringTableInputCoProEnabled_3" : "Kanal 3 %FCber CoPro aktiv",
     "stringTableInputCoProEnabled_4" : "Kanal 4 %FCber CoPro aktiv",
+    "stringtableDehumidifying" : "Entfeuchten",
+    "stringTableSmokeLevel" : "Erkannte Rauchgasentwicklung",
+    "stringTableDirtLevel" : "Verschmutzungsgrad des Sensors",
+    "stringTableDisableDeviceAliveSignal" : "%DCberwachungssignal deaktivieren",
+    "stringTableDisplayUpdateRequest" : "Display Update Request",
+    "stringTableMiobDinConfig" : "Betriebsart digitaler Eingang",
+    "stringTableActorWindowOnTimeLimit" : "%D6ffnungsdauer begrenzt",
+    "stringTableKeyAccessTransceiverPressLock" : "Bet%E4tigung Taste verriegeln",
+    "stringTableKeyAccessTransceiverPressUnLock" : "Bet%E4tigung Taste entriegeln",
+    "stringTableRHSStateUnknown" : "Fensterzustand: unbekannt",
+    "stringTableDoorWindowDriveReceiverTitle" : "HmIP-MOD-WD-VK",
+    "stringTableActivityStateDown" : "Rampe herunter",
+    "stringTableActivityStateUnknown" : "Aktivit%E4t unbekannt",
+    "stringTableActivityStateUp" : "Rampe hoch",
+    "stringTableActivityStable" : "Zustand stabil",
+    "stringTableWGDDisplayDataString" : "Display Text",
+    "stringTableErrorLimitULR" : "Limit Fehler",
+    "stringTableErrorLimitULR_False" : "Limit Fehler: Nein",
+    "stringTableErrorLimitULR_True" : "Limit-Fehler",
+    "stringTableErrorLampFailureULR" : "Fehler DALI-Leuchte",
+    "stringTableErrorLampFailureULR_False" : "Fehler DALI-Leuchte: Nein",
+    "stringTableErrorLampFailureULR_True" : "Fehler DALI-Leuchte",
+    "stringTableErrorDaliBus" : "Fehler DALI-Bus",
+    "stringTableErrorDaliBusFalse" : "Fehler DALI-Bus",
+    "stringTableErrorDaliBusTrue" : "Fehler DALI-Bus: Ja",
+    "stringTableErrorGearFailure" : "Ger%E4te Fehler",
+    "stringTableErrorGearFailure_False" : "Ger%E4te Fehler: Nein",
+    "stringTableErrorGearFailure_True" : "Ger%E4te Fehler",
+    "stringTableDimmerLevelLowest" : "Untere Grenze des<br/>angepassten Dimmbereichs",
+    "stringTableDimmerLevelHighest" : "Obere Grenze des<br/>angepassten Dimmbereichs",
+    "stringTableKeyTransceiverChannelOperationModeLevelKeyBehavior" : "Level",
+    "stringTableKeyTransceiverChannelOperationModeConditionalBehavior" : "Bedingung",
+    "stringTablePowerMeterConstant" : "Ger%E4tekonstante",
+    "stringTablePowerMeterGasFlow" : "Gasdurchfluss",
+    "stringTablePowerMeterGasVolume" : "Gasverbrauch",
+    "stringTableErrorCommunicationSensor" : "Keine oder unvollst%E4ndige Daten vom Z%E4hler",
+    "stringTableErrorCommunicationSensorFalse" : "Kommunikation Sensor: OK",
+    "stringTableErrorCommunicationSensorTrue" : "Kommunikation Sensor: gest&ouml;rt",
+    "stringTableSensorError" : "Kein Sensor erkannt",
+    "stringTableMeterObisSearchString" : "OBIS String",
 
     "noMoreKeys" : ""
   }
@@ -1398,7 +1429,6 @@ jQuery.extend(true,langJSON, {
 langJSON.de.stringTableConcentration = langJSON.de.lblCO2Concentration;
 langJSON.de.stringTableOpticalSignalReceiver = langJSON.de.stringTableDimmerTitle;
 langJSON.de.stringTableAbsoluteAngle = langJSON.de.lblTilt;
-langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
 langJSON.de.stringTableColorBehaviourOff = langJSON.de.optionColorOFF;
 langJSON.de.stringTableColorBehaviourOn = langJSON.de.optionColorON;
 langJSON.de.stringTableColorBehaviourBlinkingSlow = langJSON.de.optionBlinkSlow;

@@ -2,6 +2,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipDRAP_HAPMaintenance.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipHeatingClimateControlTransceiverEffect.tcl]
 # source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipAlarmPanel.tcl]
 
 proc getMaintenance {chn p descr address} {
@@ -261,7 +262,7 @@ set comment {
     }
 
     append html "<tr>"
-      if {([string first "HmIP-SMO230" $devType] != -1)} {
+      if {([string first "HmIP-SMO230" $devType] != -1) || ([string first "HmIPW-SMO230" $devType] != -1)} {
         append html "<td>\${stringTableDeviceSensorSensibilitySabotage}</td>"
       } else {
         append html "<td>\${stringTableDeviceSensorSensibility}</td>"
@@ -325,6 +326,7 @@ set comment {
       ([string first "HmIP-BBL" $devType] == -1)
       && ([string first "HmIP-BROLL" $devType] == -1)
       && ([string first "HmIP-BDT" $devType] == -1)
+      && ([string first "HmIP-eTRV-F" $devType] == -1)
       } {
       append html "<tr>"
         append html "<td>\${lblMountingOrientation}</td>"
@@ -344,6 +346,30 @@ set comment {
         append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_A]</td>"
       append html "</tr>"
     }
+  }
+
+  set param DISPLAY_MODE
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblDisplayModeETRV}</td>"
+        array_clear options
+        set options(0) "\${optionReducedMode}"
+        set options(1) "\${optionFunctionalMode}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+
+  set param DISPLAY_INVERTED_COLORS
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblDisplayColor}</td>"
+        array_clear options
+        set options(0) "\${optionNormalColors}"
+        set options(1) "\${optionInvertedColors}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
   }
 
   set param PERMANENT_FULL_RX
@@ -432,7 +458,7 @@ set comment {
   # End DRAP/HAP Integration #
 
 
-  if {([string equal $devType "HmIP-DLD"] != 1) && ([string equal $devType "HmIP-DLD-A"] != 1) && ([string equal $devType "HmIP-DLD-S"] != 1) && ([string equal $devType "HmIP-SMO230"] != 1)  && ([string equal $devType "HmIP-SMO230-A"] != 1)} {
+  if {([string equal $devType "HmIP-DLD"] != 1) && ([string equal $devType "HmIP-DLD-A"] != 1) && ([string equal $devType "HmIP-DLD-S"] != 1) && ([string equal $devType "HmIP-SMO230"] != 1)  && ([string equal $devType "HmIP-SMO230-A"] != 1) && ([string equal $devType "HmIPW-SMO230"] != 1) && ([string equal $devType "HmIPW-SMO230-A"] != 1)} {
     set param LONGITUDE
     if { [info exists ps($param)] == 1  } {
       incr prn
@@ -1228,6 +1254,75 @@ proc getSwitchTransmitter {chn p descr} {
   }
   return $html
 }
+
+proc getSwitchTransceiver {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+##  set CHANNEL $special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+##  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HEATINGTHERMOSTATE_2ND_GEN_HELP.js');</script>"
+
+  set param POWERUP_JUMPTARGET
+  if { [info exists ps($param)] == 1  } {
+    append html [getPowerUpSelector $chn ps $special_input_id]
+  }
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  return $html
+}
+
+
+
 
 proc getClimateReceiver {chn p descr} {
   upvar $p ps
@@ -2475,10 +2570,18 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
     incr prn
     if {$climateFunction == 1} {set paramVisibility ''} else {set paramVisibility 'hidden'}
     array_clear options
-    # See SPHM-1079
-    for {set val 2} {$val <= 20} {set val [expr $val + 2]} {
-      set options([expr $val / 2]) "[expr $val] % rF"
+    set comment {
+      # See SPHM-1079
+      for {set val 2} {$val <= 20} {set val [expr $val + 2]} {
+        set options([expr $val / 2]) "[expr $val] % rF"
+      }
     }
+
+    # See SPHM-1293
+    for {set val 0} {$val <= 10} {incr val} {
+      set options($val) "$val % rF"
+    }
+
     append html "<tr id='twoPointHysteresisHumidity' class=$paramVisibility>"
       append html "<td>\${stringTableSwitchTransmitTwoPointHysteresis}</td>"
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
@@ -2910,7 +3013,8 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "</tr>"
   append html "</table>"
 
-  if { (! [catch {set tmp $ps(CHANNEL_OPERATION_MODE)}]) || (! [catch {set tmp $ps(ACOUSTIC_ALARM_SIGNAL)}])  } {
+  # if { (! [catch {set tmp $ps(CHANNEL_OPERATION_MODE)}]) || (! [catch {set tmp $ps(ACOUSTIC_ALARM_SIGNAL)}]) || ([info exists ps(EFFECT_ADAPTION_FADE_OUT_TIME_FACTOR)] == 1)  }
+  if { ([info exists ps(CHANNEL_OPERATION_MODE)] == 1) || ([info exists ps(ACOUSTIC_ALARM_SIGNAL)] == 1) || ([info exists ps(EFFECT_ADAPTION_FADE_OUT_TIME_FACTOR)] == 1)  } {
     append html "<hr>"
     append html "<table class=\"ProfileTbl\">"
       set param CHANNEL_OPERATION_MODE
@@ -2920,7 +3024,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
         set options(0) "\${optionETRVNormalMode}"
         set options(1) "\${optionETRVSilentMode}"
         append html "<tr><td>\${lblOperatingMode}</td><td>"
-        append html "[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param onchange=\"alert(this.value,$chn)\"]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.75]]"
+        append html "[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param ]&nbsp;[getHelpIcon $param $hlpBoxWidth [expr $hlpBoxHeight * 0.75]]"
         append html "</td></tr>"
       }
 
@@ -2934,6 +3038,21 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
           append html "</td>"
         append html "</tr>"
       }
+
+      set param EFFECT_ADAPTION_FADE_OUT_TIME_FACTOR
+      if { [info exists ps($param)] == 1  } {
+        append html "<tr>"
+          append html "<td>"
+            append html "\${lblSignalColor}"
+          append html "</td>"
+          append html "<td><input id=\"btnShowEtrvEffects\" type=\"button\" name=\"btnShowEtrvEffects\" onclick=\"jQuery('.j_effectPanel').toggle();\"></td>"
+          append html "<script type=\"text/javascript\">translateButtons(\"btnShowEtrvEffects\");</script>"
+        append html "</tr>"
+      }
+    append html "</table>"
+
+    append html "<table class='ProfileTbl j_effectPanel hidden'>"
+      append html "[getHeatingControlEffects $chn]"
     append html "</table>"
   }
 
@@ -2947,7 +3066,8 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       append html "jQuery(\"\[name='expertParam'\]\").hide();"
     append html "</script>"
   }
-  append html "<script type=\"text/javascript\">setDisplayMode(jQuery(\"\[name='SHOW_SET_TEMPERATURE'\]\").first());</script>"
+  append html "<script type=\"text/javascript\">"
+  append html "setDisplayMode(jQuery(\"\[name='SHOW_SET_TEMPERATURE'\]\").first());</script>"
 
   return $html
 }
@@ -3958,6 +4078,8 @@ proc getLevelCommandTransmitter_CO2 {chn p descr} {
 # ACCELERATION_TRANSCEIVER
 proc getAccelerationTransceiver {chn p descr address} {
 
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -3974,8 +4096,9 @@ proc getAccelerationTransceiver {chn p descr address} {
   set fwMinor [lindex $Fw 1]
   # not needed - set fwPatch [lindex $Fw 2]
 
+  set devType $dev_descr(TYPE)
 
-  if {$fwMajor > 1 || ($fwMajor == 1 && $fwMinor >= 2)} {
+  if {($fwMajor > 1 || ($fwMajor == 1 && $fwMinor >= 2) ) || ([string equal $devType "ELV-SH-TACO"] == 1)} {
     set newFw true
   }
 
@@ -4200,6 +4323,17 @@ proc getAccelerationTransceiver {chn p descr address} {
     append html "</tr>"
   }
 
+  set param TRIGGER_ANGLE_HYSTERESIS
+  if { [info exists ps($param)] == 1 } {
+
+    incr prn
+    append html "<tr>"
+      append html "<td>\${motionDetectorTriggerAngleHysteresis}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 100]</td>"
+    append html "</tr>"
+  }
+
+
   set param TRIGGER_ANGLE_2
   if { [info exists ps($param)] == 1 } {
     global valTriggerAngle
@@ -4214,6 +4348,15 @@ proc getAccelerationTransceiver {chn p descr address} {
       append html "<td>\${motionDetectorTriggerAngle2}</td>"
       append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param 320 100]</td>"
     append html "</tr>"
+  }
+
+  set param LED_DISABLE_CHANNELSTATE
+  if { [info exists ps($param)] == 1  } {
+     incr prn
+     append html "<tr>"
+       append html "<td>\${stringTableLEDDisableChannelState}</td>"
+       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn]</td>"
+     append html "</tr>"
   }
 
   return $html
@@ -4440,7 +4583,7 @@ proc getClimateHeatDemandBoilerTransmitter {chn p descr} {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableOnDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShortA"]
+    append html [getComboBox $chn $prn "$specialID" "delay0To20M_step2M"]
     append html "</tr>"
 
     append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
@@ -4454,13 +4597,13 @@ proc getClimateHeatDemandBoilerTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
     # OFFDELAY_TIME_BASE / OFFDELAY_TIME_FACTOR
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableOffDelay}</td>"
-    append html [getComboBox $chn $prn "$specialID" "delayShortA"]
+    append html [getComboBox $chn $prn "$specialID" "delay0To20M_step2M"]
     append html "</tr>"
 
     set param OFFDELAY_TIME_BASE
@@ -4475,7 +4618,7 @@ proc getClimateHeatDemandBoilerTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setDelay0to20M_step2MOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   } else {
     append html "[getNoParametersToSet]"
   }

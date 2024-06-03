@@ -155,6 +155,8 @@ getWPVirtualChannels = function(channels, expert) {
       AccessTransceiverID = "ACCESS_TRANSCEIVER", // e. g.HmIP-FWI
       DoorLockTransmitterID = "DOOR_LOCK_STATE_TRANSMITTER", // HmIP-DLD
       OpticalSignalID = "OPTICAL_SIGNAL_RECEIVER", // HmIPW-WRC6
+      PermissionTranseiverID = "PERMISSION_TRANSCEIVER", // HmIP-FLC/FLD
+      SwitchTranseiverID = "SWITCH_TRANSCEIVER", // HmIP-FLC/FLD
       expertChn;
     if (
       (chn.channelType.indexOf(virtualChID) !== -1)
@@ -162,6 +164,8 @@ getWPVirtualChannels = function(channels, expert) {
       || (chn.channelType.indexOf(AccessTransceiverID) !== -1)
       || (chn.channelType.indexOf(DoorLockTransmitterID) !== -1)
       || (chn.channelType.indexOf(OpticalSignalID) !== -1)
+      || (chn.channelType.indexOf(PermissionTranseiverID) !== -1)
+      || (chn.channelType.indexOf(SwitchTranseiverID) !== -1)
     ) {
       if (expert == 1) {
         result.push(index);
@@ -212,11 +216,13 @@ HmIPWeeklyProgram.prototype = {
 
     this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
-    this.ignoreExpertMode = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC"];
-    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC"];
+    this.ignoreExpertMode = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC"];
+    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
     this.selectedMode_RGBW = "";
+    this.selectedMode_FLC = [];
+    //this.arChangedMode_FLC = [];
     this.currentLevel = [];
     this.anchor = jQuery("#weeklyProgram_" + this.chn);
 
@@ -242,7 +248,12 @@ HmIPWeeklyProgram.prototype = {
     }
     this.ps = ps;
     this.psDescr = psDescr;
-    this.sessionIsExpert = (! this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW)) ? sessionIsExpert : 1;
+    this.sessionIsExpert = (
+      (! this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW))
+      && (! this._isDeviceType("HmIP-FLC"))
+      && (! this._isDeviceType("HmIP-FDC"))
+    ) ? sessionIsExpert : 1;
+
     this.prn = 0;
     this.prnHiddenField = [];
     this.weekDayID = [];
@@ -326,7 +337,7 @@ HmIPWeeklyProgram.prototype = {
       this.virtualChannels = [2];
     }
 
-    if ((this._isDeviceType("HmIP-SMO230")) || (this._isDeviceType("HmIP-SMO230-A")) ) {
+    if ((this._isDeviceType("HmIP-SMO230")) || (this._isDeviceType("HmIP-SMO230-A")) || (this._isDeviceType("HmIPW-SMO230")) || (this._isDeviceType("HmIPW-SMO230-A"))) {
       this.virtualChannels =  [10, 11, 12];
     }
 
@@ -575,6 +586,10 @@ HmIPWeeklyProgram.prototype = {
       }
     }
 
+    if ((this._isDeviceType("HmIP-FLC")) || (this._isDeviceType("HmIP-FDC"))) {
+      programEntry += this._getFLCModeSelector(number);
+    }
+
     // RAMPTIME / LEVEL
     programEntry += "<tr id='trLevel_" + number + "'>";
     if (((this.chnType == this.DIMMER) && (! this.WINDOW_DRIVE_RECEIVER)) || (this.chnType == this.SERVO) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
@@ -605,7 +620,7 @@ HmIPWeeklyProgram.prototype = {
     } else if (this.chnType == this.SWITCH) {
       if (!this.isDoorLockDrive) {
         if ((! this.isAccessTransmitterHmIP_FWI) && (! this.isAccessTransceiver_WKP)) {
-          programEntry += "<td>" + translateKey('lblWPState') + "</td>"; // Is Level, but we call it here state because it's only on/off
+          programEntry += "<td id='lblState_" +number+"'>" + translateKey('lblWPState') + "</td>"; // Is Level, but we call it here state because it's only on/off
         } else {
           if (this.isAccessTransmitterHmIP_FWI) {
             programEntry += "<td>" + translateKey('lblWPState_Access') + "</td>";
@@ -626,7 +641,6 @@ HmIPWeeklyProgram.prototype = {
     }
 
     programEntry += "<td>" + this._getLevel(number) + "</td>";
-
 
     // SLAT LEVEL for Blinds
     if (this.chnType == this.BLIND && this.devHasVirtualBlindReceiver) {
@@ -765,16 +779,18 @@ HmIPWeeklyProgram.prototype = {
       programEntry += "<td colspan='5'>" + translateKey('hintWeeklyProgramActiveExpertChannel') + "</td>";
       programEntry += "</tr>";
 
-      programEntry += "<tr name='panelTargetChannel_" + number + "'>";
-      if (!this.isAccessTransmitterHmIP_FWI) {
-        if ((!this.isDoorLockDrive) && (!this.isAccessTransceiver_WKP)) {
-          programEntry += "<td>" + translateKey('lblSelectTargetChannels') + "</td>";
-        } else {
-          programEntry += "<td>" + translateKey('lblSelectTargetUser') + "</td>";
+      if ((! this._isDeviceType("HmIP-FLC")) && (! this._isDeviceType("HmIP-FDC"))) {
+        programEntry += "<tr name='panelTargetChannel_" + number + "'>";
+        if (!this.isAccessTransmitterHmIP_FWI) {
+          if ((!this.isDoorLockDrive) && (!this.isAccessTransceiver_WKP)) {
+            programEntry += "<td>" + translateKey('lblSelectTargetChannels') + "</td>";
+          } else {
+            programEntry += "<td>" + translateKey('lblSelectTargetUser') + "</td>";
+          }
         }
+        programEntry += "<td>" + this._getPanelSelectTargetChannels(this.chn, number, this.prn) + "</td>";
+        programEntry += "</tr>";
       }
-      programEntry += "<td>" + this._getPanelSelectTargetChannels(this.chn, number, this.prn) + "</td>";
-      programEntry += "</tr>";
     }
     programEntry += this._getHR();
 
@@ -1606,6 +1622,79 @@ HmIPWeeklyProgram.prototype = {
 
     window.setTimeout(function() {jQuery("#rowColorSelector_" + number).html(result).hide();},50);
     //return result;
+  },
+
+  _getFLCModeSelector: function(number) {
+    var self = this,
+      result = "",
+      selectedMode, switchSelected = "", permissionSelected = "",
+      lblState0 = translateKey("lblSwitchingState"), lblState1 = translateKey("lblPermission"),
+      lblMode = translateKey("lblMode");
+
+
+    setFLCMode = function(val, no) {
+      // val = 0 > Switch Actor channels, val = 1 > Permission channels
+      var nr = self._addLeadingZero(no),
+        lblStateElm = jQuery("#lblState_" + nr),
+        WPTargetChannelsElm = jQuery("[name='"+nr+"_WP_TARGET_CHANNELS']"),
+        arTargetChn = jQuery("[name='targetChannel"+self.chn+"_"+nr+"']"),
+        val2Send = 0,
+        jChn;
+
+      self.selectedMode_FLC[no] = (val == 0) ? "SWITCH" : "PERMISSION";
+
+      // At first unset all target channels
+      arTargetChn.prop('checked', false);
+      WPTargetChannelsElm.val(0);
+
+      jQuery.each(arTargetChn, function(i, chn) {
+        jChn = jQuery(chn);
+        if (val == 0) {
+          if (chn.attributes.data.value == "SWITCH_TRANSCEIVER") {
+            //  lblMode = "SWITCH";
+            lblStateElm.text(lblState0);
+            jChn.parent().show();
+          } else {
+            jChn.parent().hide();
+          }
+        } else if (val == 1) {
+          if (chn.attributes.data.value == "PERMISSION_TRANSCEIVER") {
+            //  lblMode = "PERMISSION";
+            lblStateElm.text(lblState1);
+            jChn.parent().show();
+          } else {
+            jChn.parent().hide();
+          }
+        }
+
+        window.setTimeout(function () {
+          if (chn.checked) {
+            val2Send += parseInt(chn.value);
+          }
+          WPTargetChannelsElm.val(val2Send);
+        },50);
+      });
+    };
+    if ((this.activeEntries[number] == true)) {
+      selectedMode = homematic("Interface.getMetadata", {"objectId": self.device.id, "dataId": "wpMode_" + number});
+      switchSelected =  (selectedMode != "PERMISSION") ? "selected='selected'" : "";
+      permissionSelected =  (selectedMode == "PERMISSION") ? "selected='selected'" : "";
+    }
+    result += "<tr>";
+      result += "<td>"+lblMode+"</td>";
+      result += "<td>";
+        result += "<select id='flcModeSelector_"+number+"' onchange='setFLCMode(parseInt(this.value),"+number+")'>";
+          result += "<option value='0' " +switchSelected+ "+>Schaltaktor</option>";
+          result += "<option value='1' " +permissionSelected+ ">Berechtigung</option>";
+        result += "</select>";
+      result += "</td>";
+    result += "</tr>";
+
+    window.setTimeout(function() {
+      jQuery("#flcModeSelector_" + number).change();
+    },50);
+
+    return result;
   },
 
   _showHideWPLevel: function (number, mode) {
@@ -2713,7 +2802,6 @@ HmIPWeeklyProgram.prototype = {
       if ((self._isDeviceType("HmIP-BSL")) && (self._getFwMajor() >= 2)) {
         self._setBSLPanel(self._addLeadingZero(nextNumber));
       }
-
     };
 
     if (mode == "DEL") {
@@ -2734,12 +2822,12 @@ HmIPWeeklyProgram.prototype = {
   },
 
   _initTargetChannels: function(number) {
-    if (! self.ignoreVirtualChannels.includes(self.device.deviceType.id)) {
-      var arTargetChannels = jQuery("[name='targetChannel" + this.chn + "_" + this._addLeadingZero(parseInt(number + 1)) + "']"),
-        elmTargetValue = jQuery("[name='" + this._addLeadingZero(parseInt(number + 1)) + "_WP_TARGET_CHANNELS']"),
-        targetValue = 0,
-        virtChnCounter = 0;
+    var arTargetChannels = jQuery("[name='targetChannel" + this.chn + "_" + this._addLeadingZero(parseInt(number + 1)) + "']"),
+      elmTargetValue = jQuery("[name='" + this._addLeadingZero(parseInt(number + 1)) + "_WP_TARGET_CHANNELS']"),
+      targetValue = 0,
+      virtChnCounter = 0;
 
+    if (! self.ignoreVirtualChannels.includes(self.device.deviceType.id)) {
       jQuery.each(arTargetChannels, function (index, elm) {
         // At first unset all target channels
         jQuery(elm).prop('checked', false);
@@ -2763,7 +2851,19 @@ HmIPWeeklyProgram.prototype = {
         arTargetChannels.first().prop("checked", true).change(); //Set channel 1 active - this is the door lock channel
         arTargetChannels.not(":eq(0)").prop("checked", false).change(); //Set all other channels inactive - the user action channels aren't active
       } else {
-        arTargetChannels.prop("checked", true).change();
+        if (this._isDeviceType("HmIP-FLC") || this._isDeviceType("HmIP-FDC")) {
+          var arTargetChannels = jQuery("[name='targetChannel" + this.chn + "_" + this._addLeadingZero(parseInt(number) + 1) + "']"),
+            initVal = 0;
+          jQuery.each(arTargetChannels, function(index, chn) {
+            if (chn.attributes.data.value == "SWITCH_TRANSCEIVER") {
+              jQuery(chn).prop("checked",true);
+              initVal += parseInt(jQuery(chn).val());
+            }
+          });
+          elmTargetValue.val(initVal);
+        } else {
+          arTargetChannels.prop("checked", true).change();
+        }
       }
     }
   },
@@ -2907,6 +3007,20 @@ HmIPWeeklyProgram.prototype = {
             "value": data.mode
           });
         });
+      });
+    } else if ((this._isDeviceType("HmIP-FLC")) || (this._isDeviceType("HmIP-FDC"))) {
+      jQuery("#footerButtonTake, #footerButtonOK").click(function () {
+        window.setTimeout(function() {
+          jQuery.each(self.selectedMode_FLC, function (index, val) {
+            if (val != undefined) {
+            var x =  homematic("Interface.setMetadata", {
+                "objectId": self.device.id,
+                "dataId": "wpMode_" + self._addLeadingZero(index),
+                "value": val
+              },function(result) {});
+            }
+          });
+        },100);
       });
     }
   }

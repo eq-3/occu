@@ -52,7 +52,7 @@ proc getDescription {longAvailable prn} {
 }
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
-  global iface_url sender_address dev_descr_sender dev_descr_receiver
+  global iface_url sender_address receiver_address dev_descr_sender dev_descr_receiver
 
   upvar PROFILES_MAP  PROFILES_MAP
   upvar HTML_PARAMS   HTML_PARAMS
@@ -68,6 +68,8 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
   }
+
+  set timer 20
 
   set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
 
@@ -100,14 +102,50 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   incr pref
+  set tmpPref $pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  if {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-LSC"] == 1)} {
+    # Select Color or Color Temperature
+    append HTML_PARAMS(separate_$prn) "<tr>"
+      append HTML_PARAMS(separate_$prn) "<td>\${lblMode}</td>"
+
+      append HTML_PARAMS(separate_$prn) "<td>"
+        append HTML_PARAMS(separate_$prn) "<select id=\"satColorTempType_$prn\" style=\"width:100%\" onchange=\"setColorOrColorTemp(this.value, $prn, parseInt($pref), '$sender_address', '$receiver_address', true);\">"
+          append HTML_PARAMS(separate_$prn) "<option value='0'>\${optionHueSaturation}</option>"
+          append HTML_PARAMS(separate_$prn) "<option value='1'>\${optionColorTemp}</option>"
+          append HTML_PARAMS(separate_$prn) "<option value='2'>\${optionLastValue}</option>"
+        append HTML_PARAMS(separate_$prn) "</select>"
+      append HTML_PARAMS(separate_$prn) "</td>"
+    append HTML_PARAMS(separate_$prn) "<tr>"
+  }
+
   incr pref
-  append HTML_PARAMS(separate_$prn) "[getColorPicker ps SHORT]"
+  set cPpref $pref
+  set showLastValue 0
+  append HTML_PARAMS(separate_$prn) "[getColorPicker ps SHORT $showLastValue]"
+
+  # Only for HmIP-LSC
+  if {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-LSC"] == 1)} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) "[getColorTempSlider ps SHORT ON]"
+
+    if {($ps(SHORT_ON_COLOR_TEMPERATURE) == 10100) && ($ps(SHORT_ON_HUE) == 361) && ($ps(SHORT_ON_SATURATION) == 1.010)} {
+      set val 2
+    } else {set val -1}
+
+   append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
+     append HTML_PARAMS(separate_$prn) "jQuery('#trColorPicker_$prn\_$cPpref').hide();"
+     append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
+       append HTML_PARAMS(separate_$prn) "setColorOrColorTemp('$val', '$prn', parseInt('$tmpPref'), '$sender_address', '$receiver_address', false);"
+     append HTML_PARAMS(separate_$prn) "},$timer);"
+   append HTML_PARAMS(separate_$prn) "</script>"
+
+  }
 
   if {$longKeypressAvailable} {
     append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
@@ -151,7 +189,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
         append HTML_PARAMS(separate_$prn) "jQuery('#separate_receiver_$prn\_$tmpPref').change();"
         append HTML_PARAMS(separate_$prn) "initChkDimInfinitive($prn);"
-      append HTML_PARAMS(separate_$prn) "},50);"
+      append HTML_PARAMS(separate_$prn) "},$timer);"
 
     append HTML_PARAMS(separate_$prn) "</script>"
   }
@@ -172,6 +210,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
   incr pref
+  set tmpPref $pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${OFFDELAY_BLINK}</td><td>"
   array_clear options
   set options(0) "\${off}"
@@ -181,6 +220,44 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   # RAMPOFF_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector RAMPOFF_TIME_FACTOR_DESCR ps PROFILE_$prn rampOnOff $prn $special_input_id SHORT_RAMPOFF_TIME TIMEBASE_LONG]"
+
+  if {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-LSC"] == 1)} {
+    # Select Color or Color Temperature
+    append HTML_PARAMS(separate_$prn) "<tr>"
+      append HTML_PARAMS(separate_$prn) "<td>\${lblMode}</td>"
+
+      append HTML_PARAMS(separate_$prn) "<td>"
+        append HTML_PARAMS(separate_$prn) "<select id=\"satColorTempType_$prn\" style=\"width:100%\" onchange=\"setColorOrColorTemp(this.value, $prn, parseInt($pref), '$sender_address', '$receiver_address', true);\">"
+          append HTML_PARAMS(separate_$prn) "<option value='0'>\${optionHueSaturation}</option>"
+          append HTML_PARAMS(separate_$prn) "<option value='1'>\${optionColorTemp}</option>"
+          append HTML_PARAMS(separate_$prn) "<option value='2'>\${optionLastValue}</option>"
+        append HTML_PARAMS(separate_$prn) "</select>"
+      append HTML_PARAMS(separate_$prn) "</td>"
+    append HTML_PARAMS(separate_$prn) "<tr>"
+  }
+
+  incr pref
+  set cPpref $pref
+  set showLastValue 0
+  append HTML_PARAMS(separate_$prn) "[getColorPicker ps SHORT $showLastValue OFF]"
+
+  # Only for HmIP-LSC
+  if {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-LSC"] == 1)} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) "[getColorTempSlider ps SHORT ON]"
+
+    if {($ps(SHORT_ON_COLOR_TEMPERATURE) == 10100) && ($ps(SHORT_ON_HUE) == 361) && ($ps(SHORT_ON_SATURATION) == 1.010)} {
+      set val 2
+    } else {set val -1}
+
+    append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
+     append HTML_PARAMS(separate_$prn) "jQuery('#trColorPicker_$prn\_$cPpref').hide();"
+     append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
+       append HTML_PARAMS(separate_$prn) "setColorOrColorTemp('$val', '$prn', parseInt('$tmpPref'), '$sender_address', '$receiver_address', false);"
+     append HTML_PARAMS(separate_$prn) "},$timer);"
+    append HTML_PARAMS(separate_$prn) "</script>"
+
+  }
 
   set param _SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
@@ -231,7 +308,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
         append HTML_PARAMS(separate_$prn) "jQuery('#separate_receiver_$prn\_$tmpPref').change();"
         append HTML_PARAMS(separate_$prn) "initChkDimInfinitive($prn);"
-      append HTML_PARAMS(separate_$prn) "},50);"
+      append HTML_PARAMS(separate_$prn) "},$timer);"
 
     append HTML_PARAMS(separate_$prn) "</script>"
 
@@ -253,16 +330,55 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
   incr pref
+  set tmpPref $pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
   append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
+  if {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-LSC"] == 1)} {
+    # Select Color or Color Temperature
+    append HTML_PARAMS(separate_$prn) "<tr>"
+      append HTML_PARAMS(separate_$prn) "<td>\${lblMode}</td>"
+
+      append HTML_PARAMS(separate_$prn) "<td>"
+        append HTML_PARAMS(separate_$prn) "<select id=\"satColorTempType_$prn\" style=\"width:100%\" onchange=\"setColorOrColorTemp(this.value, $prn, parseInt($pref), '$sender_address', '$receiver_address', true, 'ON');\">"
+          append HTML_PARAMS(separate_$prn) "<option value='0'>\${optionHueSaturation}</option>"
+          append HTML_PARAMS(separate_$prn) "<option value='1'>\${optionColorTemp}</option>"
+          append HTML_PARAMS(separate_$prn) "<option value='2'>\${optionLastValue}</option>"
+        append HTML_PARAMS(separate_$prn) "</select>"
+      append HTML_PARAMS(separate_$prn) "</td>"
+    append HTML_PARAMS(separate_$prn) "<tr>"
+  }
+
+
   incr pref
+  set cPpref $pref
+  set showLastValue 0
   append HTML_PARAMS(separate_$prn) "<tr><td><span class='hidden'>{HSV_COLOR}</span></td>"
-    append HTML_PARAMS(separate_$prn) "[getColorPicker ps SHORT]"
+    append HTML_PARAMS(separate_$prn) "[getColorPicker ps SHORT $showLastValue ON_OFF]"
   append HTML_PARAMS(separate_$prn) "</tr>"
+
+    # Only for HmIP-LSC
+  if {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-LSC"] == 1)} {
+    incr pref
+    append HTML_PARAMS(separate_$prn) "[getColorTempSlider ps SHORT ON]"
+
+    if {($ps(SHORT_ON_COLOR_TEMPERATURE) == 10100) && ($ps(SHORT_ON_HUE) == 361) && ($ps(SHORT_ON_SATURATION) == 1.010)} {
+      set val 2
+    } else {set val -1}
+
+   append HTML_PARAMS(separate_$prn) "<script type='text/javascript'>"
+     append HTML_PARAMS(separate_$prn) "jQuery('#trColorPicker_$prn\_$cPpref').hide();"
+     append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
+       append HTML_PARAMS(separate_$prn) "setColorOrColorTemp('$val', '$prn', parseInt('$tmpPref'), '$sender_address', '$receiver_address', false, 'ON');"
+     append HTML_PARAMS(separate_$prn) "},$timer);"
+   append HTML_PARAMS(separate_$prn) "</script>"
+
+  }
+
+
 
   set param _SHORT_OUTPUT_BEHAVIOUR
   if {[info exists ps($param)] == 1} {
@@ -329,7 +445,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_$prn) "window.setTimeout(function() {"
         append HTML_PARAMS(separate_$prn) "jQuery('#separate_receiver_$prn\_$tmpPref').change();"
         append HTML_PARAMS(separate_$prn) "initChkDimInfinitive($prn);"
-      append HTML_PARAMS(separate_$prn) "},50);"
+      append HTML_PARAMS(separate_$prn) "},$timer);"
 
     append HTML_PARAMS(separate_$prn) "</script>"
   }

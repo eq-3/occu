@@ -109,6 +109,23 @@ jQuery.extend(true,langJSON, {
     "lblTemperatureWindowOpenHeating" : "Fenster-Auf-Temperatur<br/>im Heiz-Modus",
     "lblTemperatureWindowOpenCooling" : "Fenster-Auf-Temperatur<br/>im K%FChl-Modus",
 
+    "lblSignalColor" : "Signalfarben",
+
+    "btnShowEtrvEffects" : "Konfigurieren",
+    "titleHeatingClimateControlTransEffect" : "Signalfarben",
+    "HCCTransEffectAdaption" : "Signalfarben w%E4hrend der Adaptionsfahrt",
+    "HCCTransEffectBoost" : "Signalfarben w%E4hrend der Boostphase",
+
+    "lbl_fade_out_time" : "Rammpenzeit 1",
+    "lbl_off_hold_time" : "Haltezeit 1",
+    "lbl_off_color" : "Farbe 1",
+    "lbl_off_level" : "Helligkeit 1",
+
+    "lbl_fade_in_time" : "Rampenzeit 2",
+    "lbl_on_hold_time" : "Haltezeit 2",
+    "lbl_on_color" : "Farbe 2",
+    "lbl_on_level" : "Helligkeit 2",
+
     "dummy" : ""
   },
 
@@ -220,6 +237,23 @@ jQuery.extend(true,langJSON, {
 
     "lblTemperatureWindowOpenHeating" : "Open-window temperature<br/>in heating mode",
     "lblTemperatureWindowOpenCooling" : "Open-window temperature<br/>in cooling mode",
+
+    "lblSignalColor" : "en* Signalfarben",
+
+    "btnShowEtrvEffects" : "Configure",
+    "titleHeatingClimateControlTransEffect" : "en* Signalfarben",
+    "HCCTransEffectAdaption" : "en* Signalfarben w%E4hrend der Adaptionsfahrt",
+    "HCCTransEffectBoost" : "en* Signalfarben w%E4hrend der Boostphase",
+
+    "lbl_fade_out_time" : "en* Rammpenzeit 1",
+    "lbl_off_hold_time" : "en* Haltezeit 1",
+    "lbl_off_color" : "en* Farbe 1",
+    "lbl_off_level" : "en* Helligkeit 1",
+
+    "lbl_fade_in_time" : "en* Rampenzeit 2",
+    "lbl_on_hold_time" : "en* Haltezeit 2",
+    "lbl_on_color" : "en* Farbe 2",
+    "lbl_on_level" : "en* Helligkeit 2",
 
     "dummy" : ""
   }

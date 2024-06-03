@@ -723,6 +723,14 @@ function ::conditionIsParameterVisible() {
         }
       }
     }
+
+    if ((oCC.Label() == "HmIP-FLC") || (oCC.Label() == "HmIP-FDC")) {
+      if ( oCC.HssType().Find("MAINTENANCE") != -1) {
+        if ( (oDP.HSSID().Find("ACTUAL_TEMPERATURE") != -1)  || (oDP.HSSID().Find("ACTUAL_TEMPERATURE_STATUS") != -1) ) {
+          showChannelParam = false;
+        }
+      }
+    }
   }
 
   if ( sInterface == hmIPVirtualDevIdentifier ) {
@@ -838,7 +846,7 @@ function ::destinationIsParameterVisible() {
   if ( oCH.HssType().Find("SWITCH_VIRTUAL_RECEIVER") != -1) {
 
     !e. g. HmIP-FWI (Wiegand Interface)
-    if ((oCH.Label() == "HmIP-FWI") || (oCH.Label() == "HmIP-SMO230")  || (oCH.Label() == "HmIP-SMO230-A")) {
+    if ((oCH.Label() == "HmIP-FWI") || (oCH.Label() == "HmIP-SMO230")  || (oCH.Label() == "HmIP-SMO230-A") || (oCH.Label() == "HmIPW-SMO230") || (oCH.Label() == "HmIPW-SMO230-A")) {
       if ( oDP.HSSID().Find("ON_TIME") != -1 ) {
         showChannelParam = false;
       }

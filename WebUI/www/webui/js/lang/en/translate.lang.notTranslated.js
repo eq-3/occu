@@ -1,220 +1,35 @@
 jQuery.extend(true, langJSON, {
   "en": {
+    "comment" : "Release B/2024 - not yet translated",
 
-    "comment" : "RELEASE A/2022",
-    "lblLinkDescrWUA" : "Universal Actuator 0-10 V",
-    "stringtableDehumidifying" : "Dehumidify",
+    "lblCampfire" : "en* Lagerfeuer",
+    "lblRainbow" : "en* Regenbogen",
+    "lblSunrise" : "en* Sonnenaufgang",
+    "lblSunset" : "en* Sonnenuntergang",
+    "lblWaterfall" : "en* Wasserfall",
+    "lblForest" : "en* Wald",
+    "lblEffect7" : "en* Effekt 7",
+    "lblEffect8" : "en* Effekt 8",
+    "lblRedFlashing" : "en* rotes Blinken",
+    "lblGreenWobble" : "en* gr%FCnes Wabern",
 
-    "lblGroup" : "Group",
+    "lblDisplayModeETRV" : "en* Displaymodus",
+    "optionReducedMode" : "en* Reduzierter Modus",
+    "optionFunctionalMode" : "en* Funktioneller Modus",
 
-    "stringTableSmokeLevel" : "Smoke gas detected",
-    "stringTableDirtLevel" : "Degree of sensor contamination",
-    "stringTableDisableDeviceAliveSignal" : "Deactivate monitoring signal",
+    "lblDisplayColor" : "en* Displayfarbe",
+    "optionNormalColors" : "en* Normal",
+    "optionInvertedColors" : "en Invertiert",
 
-    "ruleConditionLblIsEqual" : "equal to ",
+    "optionAllowed" : "en* Berechtigt",
+    "optionNotAllowed" : "en* Nicht berechtigt",
 
-    "stringTableDisplayUpdateRequest" : "Display Update Request",
+    "lblPermission" : "en* Berechtigung",
 
-    "comment" : "Release B/2022",
-    "stringTableMiobDinConfig" : "Digital input operating mode",
+    "stringTablePermissionStateFalse" : "en* Kanal nicht berechtigt",
+    "stringTablePermissionStateTrue" : "en* Kanal berechtigt",
 
-    "lblAbortEventSendingChannel" : "Cancel old transmission",
-
-    "lblWindow" : "Window",
-    "stringTableActorWindowOnTimeLimit" : "Opening time limited",
-
-    "stringTableKeyAccessTransceiverPressLock" : "Lock button operation",
-    "stringTableKeyAccessTransceiverPressUnLock" : "Unlock button operation",
-
-    "stringTableRHSStateUnknown" : "Window status: unknown",
-
-    "stringTableDoorWindowDriveReceiverTitle" : "HmIP-MOD-WD-VK",
-
-    "lblMountingOrientationA" : "Installation",
-
-    "option0Degree" : "0 degrees",
-    "option90Degree" : "90 degrees",
-    "option180Degree" : "180 degrees",
-    "option270Degree" : "270 degrees",
-
-    "optionWindowDriveLevelOff" : "Close",
-    "optionWindowDriveLevelOnDelay" : "Delayed opening",
-    "optionWindowDriveLevelOn" : "Open",
-    "optionWindowDriveLevelOffDelay" : "Delayed closing",
-
-    "comment" : "Release C/2022",
-
-    "lblColorHSVValue" : "Colour shade",
-    "lblColorSaturation" : "Saturation",
-    "lblColorBrightness" : "Brightness",
-
-    "btnHCL" : "HCL",
-    "btnDim2Warm" : "Dim2Warm",
-
-    "stringTableActivityStateDown" : "Ramp down",
-    "stringTableActivityStateUnknown" : "Activity unknown",
-    "stringTableActivityStateUp" : "Ramp up",
-    "stringTableActivityStable" : "Status stable",
-
-    "stringTableWGDDisplayDataString" : "Display text",
-
-    "optionColorValue" : "Colour value",
-    "optionColorTemperature" : "Colour temperature",
-    "optionHue" : "Hue",
-    "optionSaturation" : "Saturation",
-
-    "fwUpdatePressConfigKey" :
-      "Make sure that the device is within radio range of the "+HMIdentifier.de.CCUShortName+".  If necessary, press the system button on the device.<br/><br/>"+
-      "For all Homematic IP sensors, such as the weather sensors, pressing the button is not mandatory. " +
-      "The devices automatically report in the course of a day and then start the update on their own.",
-
-    "fwUpdatePressSystemKey" :
-      "Make sure that the device is within radio range of the "+HMIdentifier.de.CCUShortName+".  If necessary, press the system button on the device.<br/><br/>"+
-      "For all Homematic IP sensors, such as the weather sensors, pressing the button is not mandatory. " +
-      "The devices automatically report in the course of a day and then start the update on their own.",
-
-    "minTemp" : "min.<br/>Temp",
-    "maxTemp" : "max.<br/>Temp",
-
-    "lblNumberOfChannels": "Number of channels",
-
-    "optionNoEffect" : "End effect",
-    "optionRainbow" : "Rainbow",
-    "optionSunrise" : "Sunrise",
-    "optionSunset" : "Sunset",
-    "optionForrest" : "Forest atmosphere",
-    "optionSignalingRed" : "Signal red",
-    "optionGreenBillow" : "Green pulsation",
-
-    "optionEffect" : "Effect",
-
-    "errorStateCoProcessor" : "State co-processor",
-    "errorCoProcessorFalse" : "<br/>OK",
-    "errorCoProcessorTrue" : "<br/>Error",
-
-    "stateDaliBus" : "DALI bus status",
-    "stateDaliBus_0" : "<br/>OK",
-    "stateDaliBus_1" : "<br/>Short circuit",
-    "stateDaliBus_2" : "<br/>Overload",
-
-    "stringTableErrorLimitULR" : "Limit error",
-    "stringTableErrorLimitULR_False" : "Limit error: No",
-    "stringTableErrorLimitULR_True" : "Limit error",
-    "stringTableErrorLampFailureULR" : "Lamp Failure",
-    "stringTableErrorLampFailureULR_False" : "Lamp Failure: No",
-    "stringTableErrorLampFailureULR_True" : "Lamp Failure",
-    "stringTableErrorDaliBus" : "Error DALI-Bus",
-    "stringTableErrorDaliBusFalse" : "Error DALI-Bus: No",
-    "stringTableErrorDaliBusTrue" : "Error DALI-Bus",
-
-    "stringTableErrorGearFailure" : "Gear Failure",
-    "stringTableErrorGearFailure_False" : "Gear Failure: No",
-    "stringTableErrorGearFailure_True" : "Gear Failure",
-
-    "lblRefreshDaliDevices" : "Check channels of the<br/>DALI gateway for changes",
-    "btnSearchDaliDevices" : "Check",
-    "titleSearchDaliDevices" : "Check channels",
-    "lblPleaseWaitAMoment" : "Just a little moment ...",
-
-    "lblEffectNotActive" : "The effect is not active!",
-
-    "comment" : "Release B/2023",
-
-    "lblDetectionZones" : "Detection zones",
-
-    "optionPyro1" : "Zone 1",
-    "optionPyro2" : "Zone 2",
-    "optionPyro12" : "Zone 1 and 2",
-    "optionPyro3" : "Zone 3",
-    "optionPyro13" : "Zone 1 and 3",
-    "optionPyro23" : "Zone 2 and 3",
-    "optionPyro123" : "Zone 1,2 and 3",
-
-    "lblBetaTest" : "Field tester",
-    "showDeviceBetaFw" : "Show unpublished device firmware.",
-    "hintDeviceBetaFw" :
-      "When the parameter is activated, a closed user group is offered advance versions of planned "+
-      "device firmware updates on the start page under the heading 'Device Update'.",
-
-    "lblResorePreviousStatus" : "Restore previous status after the end of the effect:  ",
-
-    "stringTableDimmerLevelLowest" : "Lower limit of the adjusted dimming range",
-    "stringTableDimmerLevelHighest" : "Upper limit of the adjusted dimming range",
-
-    "comment" : "Release C/2023",
-
-    "lblEnergyCounterToday" : "Consumption today:",
-    "lblEnergyCounterYesterday" : "Consumption yesterday:",
-    "lblEnergyCounter7d" : "Consumption over the last 7 days:",
-    "lblEnergyCounter30d" : "Consumption over the last 30 days:",
-
-    "lblGetEnergyCounterToday" : "Incoming supply today:",
-    "lblGetEnergyCounterYesterday" : "Incoming supply yesterday:",
-    "lblGetnergyCounter7d" : "Incoming supply over the last 7 days:",
-    "lblGetnergyCounter30d" : "Incoming supply over the last 30 days:",
-
-    "lblSentEnergyCounterToday" : "Outgoing supply today:",
-    "lblSentEnergyCounterYesterday" : "Outgoing supply yesterday:",
-    "lblSentEnergyCounter7d" : "Outgoing supply over the last 7 days:",
-    "lblSentEnergyCounter30d" : "Outgoing supply over the last 30 days:",
-
-    "powerMeasurementA" : "Flow",
-    "powerMeasurementB" : "Peak incoming energy supply",
-    "powerMeasurementC" : "Off-peak incoming energy supply",
-    "powerMeasurementD" : "Outgoing energy supply",
-
-    "lblMeterReading" : "Meter reading",
-    "lblSetEnergyCounter" : "Enter meter reading",
-    "lblEnergyConsumptionInWatt" : "Value in Wh",
-    "lblUnitWh" : "Wh",
-    "lblUnitkWh" : "kWh",
-    "lblUnitm3" : "m<sup>3</sup>",
-
-    "lblGenericUnit" : "Unit",
-    "lblNoOfDecimalPlaces" : "Number of</br>decimal places",
-
-    "stringTableKeyTransceiverChannelOperationModeLevelKeyBehavior" : "Level",
-    "stringTableKeyTransceiverChannelOperationModeConditionalBehavior" : "Condition",
-
-    "lblPowerMeterSensorIdentification" : "<span style='visibility:hidden'>Set start value</span>",
-    "lblSetStartValue" : "Set start value",
-    "lblStartValue" : "Start value",
-    "lblSensorMode" : "Sensor",
-
-    "btnSensorDetection" : "Sensor detection",
-    "stringTablePowerMeterConstant" : "Device constant",
-
-    "hintPressSysKeyTryAgain" : "Press the system button and try again.",
-
-    "hintProblemSensorIdent" : "An error has occurred when detecting the sensor.",
-
-    "stringTablePowerMeterGasFlow" : "Gas flow",
-    "stringTablePowerMeterGasVolume" : "Gas consumption",
-
-    "optionStopEffect" : "End effect",
-
-    "stringTableErrorCommunicationSensor" : "Data from the meter non-existent or incomplete",
-    "stringTableErrorCommunicationSensorFalse" : "Sensor communication: OK",
-    "stringTableErrorCommunicationSensorTrue" : "Sensor communication: Failure",
-
-    "stringTableSensorError" : "No sensor recognized",
-
-    "msgStartValueInvalid_A" : "The start value assigned for the channel",
-    "msgStartValueInvalid_B" : " is invalid!\n\n0.000 will be used.",
-
-    "stringTableMeterObisSearchString" : "OBIS string",
-
-    "comment" : "Release A/2024 - not yet translated",
-
-    "dialogEsiSearchButtonContent" :
-      "Start detection of sensor here.<br/><br/>" +
-      "<b>Once</b> you have started sensor detection, press the system button of the device. " +
-      "The sensor is detected now. If you do not close this window, it will be opened again and the sensor found will be displayed.<br/><br/>" +
-      "<u>Note:</u><br/>" +
-      "If you change the sensor, the previously recorded consumption values (today, yesterday, etc.) will be reset to 0.<br/><br/>" +
-      "If you have started the sensor detection without a sensor connected, connect a sensor and carry out a factory reset of the energy meter.<br/><br/>",
-
-     "lblErrorMessageActive" : "en* Fehlermeldung aktiv",
+    "lblAngle" : "en* Winkel",
 
     "noMoreKeys" : ""
   }

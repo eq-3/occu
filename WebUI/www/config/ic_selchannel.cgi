@@ -201,82 +201,56 @@ proc getExtendedLinkDescription {channelType channel} {
 }
 
 # Hmip-RGBW - Mode RGBW=0 / RGW=1 / TunableWhite=2 / PWM=3
-proc getRGBWDeviceMode {} {
+proc getRGBWDeviceMode {devAddress} {
   # Fetch the selected mode of the device
   array_clear result
-  array set result [rega_script {
-    string dev_id;
-    string chnID;
-    string metaDevMode = "-";
 
-    foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs()){
-      object dev=dom.GetObject(dev_id);
-      if((dev.Interface() != 65535) && (dev.Address() != "") && (dev.Address() != "BidCoS-RF") && (dev.Address() != "BidCoS-Wir") && (dev.Address() != "System") && (dev.HssType() == "HmIP-RGBW")) {
-        !devs = devs # " " # dev.Address() # " {" # dev.ID() # "} ";
-        object device = dom.GetObject(dev.ID());
-        object channel;
-        string  chnId;
-        string maintenanceID = "";
-        foreach(chnId, device.Channels())  {
-          if (maintenanceID == "") {
-            maintenanceID = chnId;
-            channel = dom.GetObject(maintenanceID);
-            metaDevMode = channel.MetaData("deviceMode");
-          }
-        }
+  set iseScript "string dev_id;"
+  append iseScript "string chnID;"
+  append iseScript "string metaDevMode = \"-\";"
+  append iseScript "foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs())\{"
+    append iseScript "object dev=dom.GetObject(dev_id);"
+    append iseScript "if((dev.Interface() != 65535) && (dev.Address() != \"\") && (dev.Address() != \"BidCoS-RF\") && (dev.Address() != \"BidCoS-Wir\") && (dev.Address() != \"System\") && ((dev.HssType() == \"HmIP-RGBW\") && (dev.Address() == \"$devAddress\")) ) \{"
+      append iseScript "object device = dom.GetObject(dev.ID());"
+      append iseScript "object channel;"
+      append iseScript "string  chnId;"
+      append iseScript "string channelFound = \"\";"
+      append iseScript "foreach(chnId, device.Channels())\{"
+        append iseScript "if (channelFound == \"\") \{"
+         append iseScript "channelFound = chnId;"
+         append iseScript "channel = dom.GetObject(channelFound);"
+          append iseScript "metaDevMode = channel.MetaData(\"deviceMode\");"
+        append iseScript "\}"
+      append iseScript "\}"
+    append iseScript "\}"
+  append iseScript "\}"
 
-      }
-    }
-  }]
+  array set result [rega_script $iseScript]
 
   # Mode RGBW=0 / RGW=1 / TunableWhite=2 / PWM=3
   return $result(metaDevMode)
 }
 
-# Hmip-WGD(-PL) -
-proc getWGDScreenOrder {devType} {
+# Hmip-WGD(-PL)
+proc getWGDScreenOrder {devType devAddress} {
   # Fetch the active screens of the device
   array_clear result
+  puts "$devType "
 
-  if {$devType == "HMIPW-WGD"} {
-    array set result [rega_script {
-      string dev_id;
-      string metaScreenOrder = "-";
-      integer loop = 0;
-      foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs()){
-        if (metaScreenOrder == "-") {
-          object dev=dom.GetObject(dev_id);
-          if((dev.Interface() != 65535) && (dev.Address() != "") && (dev.Address() != "BidCoS-RF") && (dev.Address() != "BidCoS-Wir") && (dev.Address() != "System") && (dev.HssType() == "HmIPW-WGD")) {
-            object device = dom.GetObject(dev.ID());
-            metaScreenOrder = device.MetaData("screenOrder");
-          }
-        }
-        return;
-        loop = loop + 1;
-      }
-    }]
-  }
-  if {$devType == "HMIPW-WGD-PL"} {
-
-    array set result [rega_script {
-      string dev_id;
-      string metaScreenOrder = "-";
-      integer loop = 0;
-      foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs()){
-        if (metaScreenOrder == "-") {
-          object dev=dom.GetObject(dev_id);
-          if((dev.Interface() != 65535) && (dev.Address() != "") && (dev.Address() != "BidCoS-RF") && (dev.Address() != "BidCoS-Wir") && (dev.Address() != "System") && (dev.HssType() == "HmIPW-WGD-PL")) {
-            object device = dom.GetObject(dev.ID());
-            metaScreenOrder = device.MetaData("screenOrder");
-          }
-        }
-        return;
-        loop = loop + 1;
-      }
-    }]
-  }
+    set iseScript "string dev_id;"
+    append iseScript "string metaScreenOrder = \"-\";"
+    append iseScript "integer loop = 0;"
+    append iseScript "foreach(dev_id, dom.GetObject(ID_DEVICES).EnumUsedIDs()){"
+      append iseScript "if (metaScreenOrder == \"-\") {"
+        append iseScript "object dev=dom.GetObject(dev_id);"
+        append iseScript "if( (dev.Interface() != 65535) && (dev.Address() == \"$devAddress\") && (dev.Address() != \"\") && (dev.Address() != \"BidCoS-RF\") && (dev.Address() != \"BidCoS-Wir\") && (dev.Address() != \"System\") && ((dev.HssType() == \"HmIPW-WGD-PL\") || (dev.HssType() == \"HmIPW-WGD\"))) {"
+            append iseScript "metaScreenOrder = dev.MetaData(\"screenOrder\") ;"
+       append iseScript "}"
+      append iseScript "}"
+    append iseScript "}"
 
   # Screen order
+  array set result [rega_script $iseScript]
   return $result(metaScreenOrder)
 }
 
@@ -731,12 +705,13 @@ proc showHmIPChannel {devType direction address chType} {
 
   upvar virtChnCounter virtChnCounter
 
+  set parentAddress [lindex [split $address ":"] 0]
   set ch [lindex [split $address ":"] 1]
 
   set major 0
 
   if {[string equal -nocase -length 8 $devType "HMIP-PSM"] == 1} {
-    set parentAddress [lindex [split $address ":"] 0]
+    # set parentAddress [lindex [split $address ":"] 0]
     set url $iface_url(HmIP-RF)
     array set dev_descr [xmlrpc $url getDeviceDescription [list string $parentAddress]]
     set firmware $dev_descr(FIRMWARE)
@@ -783,7 +758,7 @@ proc showHmIPChannel {devType direction address chType} {
   if {($devType == "HMIP-RGBW") && ($chType == "UNIVERSAL_LIGHT_RECEIVER")} {
 
     # selectedMode RGBW=0 / RGW=1 / TunableWhite=2 / PWM=3
-    set selectedMode [getRGBWDeviceMode]
+    set selectedMode [getRGBWDeviceMode $parentAddress]
 
     # return 0 = hide the channel
     # return 1 = show the channel
@@ -819,7 +794,7 @@ proc showHmIPChannel {devType direction address chType} {
     # - Do this only once and use it for all other channels
     # - For this we check only on channel 1
     if {$ch == 1} {
-      set screenOrder [getWGDScreenOrder $devType]
+      set screenOrder [getWGDScreenOrder $devType $parentAddress]
       set visibleChnsWGD ""
     }
 

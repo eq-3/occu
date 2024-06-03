@@ -6,6 +6,8 @@ jQuery.extend(true, langJSON, {
     "thTypeDescriptorWOLineBreak": "Type description",
     "ruleConditionSelectValue": "Value",
     "ruleConditionSelectText": "Text",
+    "ruleConditionLblIsEqual" : "equal to ",
+    "ruleDescrHexString" : "parameter string",
     "btnChoice": "Selection",
     "btnAutoDetect": "Auto discover",
     "btnSelectRoomOrFunctionNew": "New...",
@@ -556,6 +558,10 @@ jQuery.extend(true, langJSON, {
     "temperatureMeasurement" : "Temperature measurement",
     "energyMeasurement" : "Energy measurement",
     "powerMeasurement" : "Consumption",
+    "powerMeasurementA" : "Flow",
+    "powerMeasurementB" : "Peak incoming energy supply",
+    "powerMeasurementC" : "Off-peak incoming energy supply",
+    "powerMeasurementD" : "Outgoing energy supply",
     "userSpecific" : "User specific",
     "diagramPeriodToday" : "Today",
     "diagramPeriodThisWeek" : "This week",
@@ -604,7 +610,6 @@ jQuery.extend(true, langJSON, {
     "iconBell" : "Notification",
     "iconClock" : "Clock",
     "statusDisplayDialogTitle" : "Display configuration",
-    "ruleDescrHexString" : "parameter string",
     "dialogChangeLogTitle" : "Changelog",
     "btnChangelog" : "Changelog",
     "errorReadChangelog": "Error, can%60t read the changelog...",
@@ -1023,6 +1028,45 @@ jQuery.extend(true, langJSON, {
     "dialogAskCreateBakupText" : "The backup is created and downloaded directly before the installation. This process may take a few minutes",
     "unitNumericPinCode" : "(max. 8 digits from 0 to 9)",
     "hintSetReadyNotComplete" : "Click on 'Done' to complete the channel configuration then access the device in the device list.",
+
+    "btnHCL" : "HCL",
+    "btnDim2Warm" : "Dim2Warm",
+    "fwUpdatePressConfigKey" :
+      "Make sure that the device is within radio range of the "+HMIdentifier.de.CCUShortName+".  If necessary, press the system button on the device.<br/><br/>"+
+      "For all Homematic IP sensors, such as the weather sensors, pressing the button is not mandatory. " +
+      "The devices automatically report in the course of a day and then start the update on their own.",
+    "fwUpdatePressSystemKey" :
+      "Make sure that the device is within radio range of the "+HMIdentifier.de.CCUShortName+".  If necessary, press the system button on the device.<br/><br/>"+
+      "For all Homematic IP sensors, such as the weather sensors, pressing the button is not mandatory. " +
+      "The devices automatically report in the course of a day and then start the update on their own.",
+    "minTemp" : "min.<br/>Temp",
+    "maxTemp" : "max.<br/>Temp",
+    "errorStateCoProcessor" : "State co-processor",
+    "errorCoProcessorFalse" : "<br/>OK",
+    "errorCoProcessorTrue" : "<br/>Error",
+    "stateDaliBus" : "DALI bus status",
+    "stateDaliBus_0" : "<br/>OK",
+    "stateDaliBus_1" : "<br/>Short circuit",
+    "stateDaliBus_2" : "<br/>Overload",
+    "btnSearchDaliDevices" : "Check",
+    "titleSearchDaliDevices" : "Check channels",
+    "showDeviceBetaFw" : "Show unpublished device firmware.",
+    "hintDeviceBetaFw" :
+      "When the parameter is activated, a closed user group is offered advance versions of planned "+
+      "device firmware updates on the start page under the heading 'Device Update'.",
+    "btnSensorDetection" : "Sensor detection",
+    "hintPressSysKeyTryAgain" : "Press the system button and try again.",
+    "hintProblemSensorIdent" : "An error has occurred when detecting the sensor.",
+    "msgStartValueInvalid_A" : "The start value assigned for the channel",
+    "msgStartValueInvalid_B" : " is invalid!\n\n0.000 will be used.",
+    "dialogEsiSearchButtonContent" :
+      "Start detection of sensor here.<br/><br/>" +
+      "<b>Once</b> you have started sensor detection, press the system button of the device. " +
+      "The sensor is detected now. If you do not close this window, it will be opened again and the sensor found will be displayed.<br/><br/>" +
+      "<u>Note:</u><br/>" +
+      "If you change the sensor, the previously recorded consumption values (today, yesterday, etc.) will be reset to 0.<br/><br/>" +
+      "If you have started the sensor detection without a sensor connected, connect a sensor and carry out a factory reset of the energy meter.<br/><br/>",
+
     "theEnd" : ""
   }
 });

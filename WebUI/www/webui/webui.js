@@ -128,6 +128,12 @@ DEV_HIGHLIGHT["HmIP-KRC4"]["3"] = [5, '4_Arrow'];
 DEV_HIGHLIGHT["HmIP-KRC4"]["4"] = [5, '3_Arrow'];
 DEV_HIGHLIGHT["HmIP-KRC4"]["1+2"] = [5, '1_Arrow', '2_Arrow'];
 DEV_HIGHLIGHT["HmIP-KRC4"]["3+4"] = [5, '3_Arrow', '4_Arrow'];
+DEV_LIST.push('HmIP-FLC');
+DEV_DESCRIPTION["HmIP-FLC"] = "HmIP-FLC";
+DEV_PATHS["HmIP-FLC"] = new Object();
+DEV_PATHS["HmIP-FLC"]["50"] = "/config/img/devices/50/233_hmip-flc_thumb.png";
+DEV_PATHS["HmIP-FLC"]["250"] = "/config/img/devices/250/233_hmip-flc.png";
+DEV_HIGHLIGHT["HmIP-FLC"] = new Object();
 DEV_LIST.push('HmIP-MOD-OC8');
 DEV_DESCRIPTION["HmIP-MOD-OC8"] = "HmIP-MOD-OC8";
 DEV_PATHS["HmIP-MOD-OC8"] = new Object();
@@ -1111,8 +1117,8 @@ DEV_HIGHLIGHT["HM-WS550STH-I"] = new Object();
 DEV_LIST.push('HmIP-eTRV-E-S');
 DEV_DESCRIPTION["HmIP-eTRV-E-S"] = "TRV-E";
 DEV_PATHS["HmIP-eTRV-E-S"] = new Object();
-DEV_PATHS["HmIP-eTRV-E-S"]["50"] = "/config/img/devices/50/216_hmip-etrv-3_thumb.png";
-DEV_PATHS["HmIP-eTRV-E-S"]["250"] = "/config/img/devices/250/216_hmip-etrv-3.png";
+DEV_PATHS["HmIP-eTRV-E-S"]["50"] = "/config/img/devices/50/216_hmip-etrv-e_thumb.png";
+DEV_PATHS["HmIP-eTRV-E-S"]["250"] = "/config/img/devices/250/216_hmip-etrv-e.png";
 DEV_HIGHLIGHT["HmIP-eTRV-E-S"] = new Object();
 DEV_LIST.push('HMIP-SWDO');
 DEV_DESCRIPTION["HMIP-SWDO"] = "HmIP-SWDO";
@@ -1286,6 +1292,12 @@ DEV_PATHS["HM-WS550ST-IO"] = new Object();
 DEV_PATHS["HM-WS550ST-IO"]["50"] = "/config/img/devices/50/IP65_G201_thumb.png";
 DEV_PATHS["HM-WS550ST-IO"]["250"] = "/config/img/devices/250/IP65_G201.png";
 DEV_HIGHLIGHT["HM-WS550ST-IO"] = new Object();
+DEV_LIST.push('HmIP-FDC');
+DEV_DESCRIPTION["HmIP-FDC"] = "HmIP-FLC";
+DEV_PATHS["HmIP-FDC"] = new Object();
+DEV_PATHS["HmIP-FDC"]["50"] = "/config/img/devices/50/233_hmip-flc_thumb.png";
+DEV_PATHS["HmIP-FDC"]["250"] = "/config/img/devices/250/233_hmip-flc.png";
+DEV_HIGHLIGHT["HmIP-FDC"] = new Object();
 DEV_LIST.push('HmIP-eTRV-C-2');
 DEV_DESCRIPTION["HmIP-eTRV-C-2"] = "TRV-C";
 DEV_PATHS["HmIP-eTRV-C-2"] = new Object();
@@ -1774,6 +1786,12 @@ DEV_PATHS["HmIP-SMO230-A"] = new Object();
 DEV_PATHS["HmIP-SMO230-A"]["50"] = "/config/img/devices/50/213_hmip-smo230_thumb.png";
 DEV_PATHS["HmIP-SMO230-A"]["250"] = "/config/img/devices/250/213_hmip-smo230.png";
 DEV_HIGHLIGHT["HmIP-SMO230-A"] = new Object();
+DEV_LIST.push('ELV-SH-CTH');
+DEV_DESCRIPTION["ELV-SH-CTH"] = "HmIP-STHO";
+DEV_PATHS["ELV-SH-CTH"] = new Object();
+DEV_PATHS["ELV-SH-CTH"]["50"] = "/config/img/devices/50/231_elv-sh-cth_thumb.png";
+DEV_PATHS["ELV-SH-CTH"]["250"] = "/config/img/devices/250/231_elv-sh-cth.png";
+DEV_HIGHLIGHT["ELV-SH-CTH"] = new Object();
 DEV_LIST.push('HMW-IO-12-FM');
 DEV_DESCRIPTION["HMW-IO-12-FM"] = "HMW-IO-12-FM";
 DEV_PATHS["HMW-IO-12-FM"] = new Object();
@@ -1970,6 +1988,12 @@ DEV_PATHS["HmIP-WRCC2"]["250"] = "/config/img/devices/250/112_hmip-wrc2.png";
 DEV_HIGHLIGHT["HmIP-WRCC2"] = new Object();
 DEV_HIGHLIGHT["HmIP-WRCC2"]["2"] = [4, 0.540, 0.366, 0.04, 0.044];
 DEV_HIGHLIGHT["HmIP-WRCC2"]["1"] = [4, 0.540, 0.622, 0.04, 0.044];
+DEV_LIST.push('HmIPW-SMO230-A');
+DEV_DESCRIPTION["HmIPW-SMO230-A"] = "SMO";
+DEV_PATHS["HmIPW-SMO230-A"] = new Object();
+DEV_PATHS["HmIPW-SMO230-A"]["50"] = "/config/img/devices/50/213_hmip-smo230_thumb.png";
+DEV_PATHS["HmIPW-SMO230-A"]["250"] = "/config/img/devices/250/213_hmip-smo230.png";
+DEV_HIGHLIGHT["HmIPW-SMO230-A"] = new Object();
 DEV_LIST.push('HmIP-SMO-A-2');
 DEV_DESCRIPTION["HmIP-SMO-A-2"] = "SMO";
 DEV_PATHS["HmIP-SMO-A-2"] = new Object();
@@ -2059,8 +2083,8 @@ DEV_HIGHLIGHT["HmIP-PS"] = new Object();
 DEV_LIST.push('HmIP-eTRV-E-A');
 DEV_DESCRIPTION["HmIP-eTRV-E-A"] = "TRV-E";
 DEV_PATHS["HmIP-eTRV-E-A"] = new Object();
-DEV_PATHS["HmIP-eTRV-E-A"]["50"] = "/config/img/devices/50/216_hmip-etrv-3_thumb.png";
-DEV_PATHS["HmIP-eTRV-E-A"]["250"] = "/config/img/devices/250/216_hmip-etrv-3.png";
+DEV_PATHS["HmIP-eTRV-E-A"]["50"] = "/config/img/devices/50/216_hmip-etrv-e_thumb.png";
+DEV_PATHS["HmIP-eTRV-E-A"]["250"] = "/config/img/devices/250/216_hmip-etrv-e.png";
 DEV_HIGHLIGHT["HmIP-eTRV-E-A"] = new Object();
 DEV_LIST.push('HmIPW-SMI55-A');
 DEV_DESCRIPTION["HmIPW-SMI55-A"] = "HmIPW-SMI55";
@@ -2299,6 +2323,12 @@ DEV_PATHS["ZEL STG RM FWT"] = new Object();
 DEV_PATHS["ZEL STG RM FWT"]["50"] = "/config/img/devices/50/42_hm-cc-tc_thumb.png";
 DEV_PATHS["ZEL STG RM FWT"]["250"] = "/config/img/devices/250/42_hm-cc-tc.png";
 DEV_HIGHLIGHT["ZEL STG RM FWT"] = new Object();
+DEV_LIST.push('ELV-SH-TACO');
+DEV_DESCRIPTION["ELV-SH-TACO"] = "ELV-SH-TACO";
+DEV_PATHS["ELV-SH-TACO"] = new Object();
+DEV_PATHS["ELV-SH-TACO"]["50"] = "/config/img/devices/50/232_elv-sh-taco_thumb.png";
+DEV_PATHS["ELV-SH-TACO"]["250"] = "/config/img/devices/250/232_elv-sh-taco.png";
+DEV_HIGHLIGHT["ELV-SH-TACO"] = new Object();
 DEV_LIST.push('VIR-OL-GTW');
 DEV_DESCRIPTION["VIR-OL-GTW"] = "VIR-OL-GTW";
 DEV_PATHS["VIR-OL-GTW"] = new Object();
@@ -3340,8 +3370,8 @@ DEV_HIGHLIGHT["HM-Sec-WDS"] = new Object();
 DEV_LIST.push('HmIP-eTRV-3');
 DEV_DESCRIPTION["HmIP-eTRV-3"] = "TRV";
 DEV_PATHS["HmIP-eTRV-3"] = new Object();
-DEV_PATHS["HmIP-eTRV-3"]["50"] = "/config/img/devices/50/216_hmip-etrv-3_thumb.png";
-DEV_PATHS["HmIP-eTRV-3"]["250"] = "/config/img/devices/250/216_hmip-etrv-3.png";
+DEV_PATHS["HmIP-eTRV-3"]["50"] = "/config/img/devices/50/234_hmip-etrv-3_thumb.png";
+DEV_PATHS["HmIP-eTRV-3"]["250"] = "/config/img/devices/250/234_hmip-etrv-3.png";
 DEV_HIGHLIGHT["HmIP-eTRV-3"] = new Object();
 DEV_LIST.push('HM-CC-SCD');
 DEV_DESCRIPTION["HM-CC-SCD"] = "HM-CC-SCD";
@@ -3552,6 +3582,12 @@ DEV_PATHS["HmIPW-DRD3"] = new Object();
 DEV_PATHS["HmIPW-DRD3"]["50"] = "/config/img/devices/50/166_hmipw-drd3_thumb.png";
 DEV_PATHS["HmIPW-DRD3"]["250"] = "/config/img/devices/250/166_hmipw-drd3.png";
 DEV_HIGHLIGHT["HmIPW-DRD3"] = new Object();
+DEV_LIST.push('ELV-SH-SB8');
+DEV_DESCRIPTION["ELV-SH-SB8"] = "ELV-SH-SB8";
+DEV_PATHS["ELV-SH-SB8"] = new Object();
+DEV_PATHS["ELV-SH-SB8"]["50"] = "/config/img/devices/50/unknown_device_thumb.png";
+DEV_PATHS["ELV-SH-SB8"]["250"] = "/config/img/devices/250/unknown_device.png";
+DEV_HIGHLIGHT["ELV-SH-SB8"] = new Object();
 DEV_LIST.push('WS550');
 DEV_DESCRIPTION["WS550"] = "Funk- Wetterstation";
 DEV_PATHS["WS550"] = new Object();
@@ -3826,6 +3862,12 @@ DEV_PATHS["HmIP-SMO230"] = new Object();
 DEV_PATHS["HmIP-SMO230"]["50"] = "/config/img/devices/50/213_hmip-smo230_thumb.png";
 DEV_PATHS["HmIP-SMO230"]["250"] = "/config/img/devices/250/213_hmip-smo230.png";
 DEV_HIGHLIGHT["HmIP-SMO230"] = new Object();
+DEV_LIST.push('HmIPW-SMO230');
+DEV_DESCRIPTION["HmIPW-SMO230"] = "SMO";
+DEV_PATHS["HmIPW-SMO230"] = new Object();
+DEV_PATHS["HmIPW-SMO230"]["50"] = "/config/img/devices/50/213_hmip-smo230_thumb.png";
+DEV_PATHS["HmIPW-SMO230"]["250"] = "/config/img/devices/250/213_hmip-smo230.png";
+DEV_HIGHLIGHT["HmIPW-SMO230"] = new Object();
 DEV_LIST.push('HM-CCU-1');
 DEV_DESCRIPTION["HM-CCU-1"] = "HM-CCU-1";
 DEV_PATHS["HM-CCU-1"] = new Object();
@@ -3958,8 +4000,8 @@ DEV_HIGHLIGHT["HM-LC-Sw4-WM"]["4"] = [5, 'Channel4', '4_val', 'Circle4'];
 DEV_LIST.push('HmIP-eTRV-E');
 DEV_DESCRIPTION["HmIP-eTRV-E"] = "TRV-E";
 DEV_PATHS["HmIP-eTRV-E"] = new Object();
-DEV_PATHS["HmIP-eTRV-E"]["50"] = "/config/img/devices/50/216_hmip-etrv-3_thumb.png";
-DEV_PATHS["HmIP-eTRV-E"]["250"] = "/config/img/devices/250/216_hmip-etrv-3.png";
+DEV_PATHS["HmIP-eTRV-E"]["50"] = "/config/img/devices/50/216_hmip-etrv-e_thumb.png";
+DEV_PATHS["HmIP-eTRV-E"]["250"] = "/config/img/devices/250/216_hmip-etrv-e.png";
 DEV_HIGHLIGHT["HmIP-eTRV-E"] = new Object();
 DEV_LIST.push('HmIP-STHD');
 DEV_DESCRIPTION["HmIP-STHD"] = "HmIP-STHD";
@@ -5796,6 +5838,8 @@ elvST['PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_BELOW'] = '${string
 elvST['PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_HI'] = '${stringTablePassageDetectorCounterTransmitterCondTxThresholdHi}';
 elvST['PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_LO'] = '${stringTablePassageDetectorCounterTransmitterCondTxThresholdLo}';
 elvST['PASSAGE_DETECTOR_DIRECTION_TRANSMITTER'] = '${stringTablePassageDetectorDirectionTitle}';
+elvST['PERMISSION_STATE=FALSE'] = '${stringTablePermissionStateFalse}';
+elvST['PERMISSION_STATE=TRUE'] = '${stringTablePermissionStateTrue}';
 elvST['PEER_NEEDS_BURST'] = '${stringTablePeerNeedsBurst}';
 elvST['PIR_OPERATION_MODE'] = '${stringTablePirOperationMode}';
 elvST['PIR_SENSITIVITY'] = '${stringTableSensorSensivity}';
@@ -10206,7 +10250,8 @@ Channel = Class.create({
    **/
   update: function(device, data)
   {
-    var deviceType = device.deviceType;
+    var deviceType = device.deviceType,
+     chnMultiMode;
 
     if ((device) && (data))
     {
@@ -10243,6 +10288,15 @@ Channel = Class.create({
           this.multiMode = this.changedMultiMode;
         }
       }
+
+      if ((this.channelType == "MULTI_MODE_INPUT_TRANSMITTER")) {
+        chnMultiMode = parseInt(homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": this.address, "valueKey": "CHANNEL_OPERATION_MODE"}));
+        if (! isNaN(chnMultiMode)) {
+          this.multiMode = chnMultiMode;
+          homematic("Interface.setMetadata", {"objectId": this.id, "dataId": "channelMode", "value": chnMultiMode});
+        }
+      }
+
       this.isUsable = (this.isWritable && data["isUsable"]);
       this.thumbnailHTML = deviceType.getThumbnailHTML(this.index);
       this.imageHTML = deviceType.getImageHTML(this.index);
@@ -10257,7 +10311,7 @@ Channel = Class.create({
   },
 
   m_extendName: function() {
-    var ext = getExtendedDescription({"deviceType":this.typeName,"channelType": this.channelType,"channelID": this.id, "channelIndex" : this.index, "isVisible" : this.isVisible, "multiMode" : this.multiMode});
+    var ext = getExtendedDescription({"deviceType":this.typeName,"channelType": this.channelType,"channelID": this.id, "channelAddress": this.address,"channelIndex" : this.index, "isVisible" : this.isVisible, "multiMode" : this.multiMode});
     if (ext.length > 0) {
       this.nameExtention += "<br/>" + ext;
     }
@@ -10313,6 +10367,7 @@ Channel = Class.create({
           "deviceType": this.typeName,
           "channelType": this.virtChannelType,
           "channelID": this.id,
+          "channelAddress": this.address,
           "channelIndex": this.index,
           "isVisible": this.isVisible
         });
@@ -12547,6 +12602,17 @@ ChannelChooser = Singleton.create({
         if (channelMode != 0) {
           arChannels.push(channel);
         }
+      } else if ((channelTypeName == "hmip-flc") || (channelTypeName == "hmip-fdc")) {
+        var channelMode = parseInt(homematic("Interface.getMasterValue", {
+          "interface": this.HmIPIdentifier,
+          "address": channel.address,
+          "valueKey": "CHANNEL_OPERATION_MODE"
+        }));
+
+        if (channelMode != 0) {
+          arChannels.push(channel);
+        }
+
       } else {
         arChannels.push(channel);
       }
@@ -19716,7 +19782,10 @@ BlindCombinedParamDialog = Class.create({
       var valL2 = this.elmLevel2.val();
       result = "L="+valL+",L2="+valL2;
     } else {
-      result = "L="+valL;
+      // See SPHM-1302 result = "L="+valL;
+
+      // New with SPHM-1302
+      result = "L="+valL+",L2="+valL;
     }
 
     Layer.remove(this.m_layer);
@@ -21159,6 +21228,8 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
     this.valHCL = 10200;
     this.valDim2Warm = 10150;
+    this.ColorTempDefaultMin = 2000;
+    this.ColorTempDefaultMax = 6500;
 
 
     this.arNoOntimeAvailable = [];
@@ -21813,14 +21884,19 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
 
     this.effectSelBox.val(effect);
 
-    // SShow the appropriate dialog (Color, Color Temp, Effect)
-    if ((effect != 0) ||((valueL == 0) && (arElmValues.length == 1))) {
+    // Show the appropriate dialog (Color, Color Temp, Effect)
+    if ((effect != 0) || ((valueL == 0) && (arElmValues.length == 1))) {
       this.btnEffectDialog.click();
     } else if (parseInt(this.getConfigStringValue("TC")) > 0) {
       this.btnColorTempDialog.click();
     } else {
-      this.btnColorDialog.click();
+      if ((this.deviceType == this.lss) && (this.initValue.includes("TC="))) { //
+        this.btnColorTempDialog.click();
+      } else {
+        this.btnColorDialog.click();
+      }
     }
+
   },
 
   initColorPickerEvents: function() {
@@ -21916,7 +21992,9 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     var opts = {};
     opts.animate = "fast";
     opts.min = parseInt(this.chnDescription.HARDWARE_COLOR_TEMPERATURE_WARM_WHITE);
+    opts.min = (!isNaN(opts.min)) ? opts.min : this.ColorTempDefaultMin;
     opts.max = parseInt(this.chnDescription.HARDWARE_COLOR_TEMPERATURE_COLD_WHITE);
+    opts.max = (!isNaN(opts.max)) ? opts.max : this.ColorTempDefaultMax;
     opts.value = ((opts.max - opts.min) / 2);
     opts.step = 50;
     opts.orientation = "horizontal";
@@ -22000,20 +22078,58 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     }
 
     if (this.isOntimeAvailable()) {
+
       if (this.chkBoxTimeLimitElm.prop("checked") == false) {
         var _rampTimeValue = parseInt(this._getRampTimeVal(ramptimeValue, ramptimeUnit));
 
         if (_rampTimeValue > 0) {
-          result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue + ",H=" + hueValue + ",SAT=" + satValue; // ON_TIME = permanently ON
+          if (this.deviceType == this.lss) {
+            if (this.getActiveDialog() == "color") {
+              result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue + ",H=" + hueValue + ",SAT=" + satValue;
+            } else {
+              // This is for the HmIP-LSS colorTemp
+              result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue;
+            }
+          } else {
+            result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue + ",H=" + hueValue + ",SAT=" + satValue;
+          }
         } else {
-          result = "L=" + level + ",OT=0,RT=0,H=" + hueValue + ",SAT=" + satValue;
+          if (this.deviceType == this.lss) {
+            if (this.getActiveDialog() == "color") {
+              result = "L=" + level + ",OT=0,RT=0,H=" + hueValue + ",SAT=" + satValue;
+            } else {
+              // this ist for the HmIP-LSS color temp
+              result = "L=" + level + ",OT=0,RT=0";
+            }
+          } else {
+            result = "L=" + level + ",OT=0,RT=0,H=" + hueValue + ",SAT=" + satValue;
+          }
         }
 
       } else {
         if (durationValue == 0) {
-          result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0,H=" + hueValue + ",SAT=" + satValue;
+
+          if (this.deviceType == this.lss) {
+            if (this.getActiveDialog() == "color") {
+              result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0,H=" + hueValue + ",SAT=" + satValue;
+            } else {
+              // this ist for the HmIP-LSS color temp
+              result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0";
+            }
+          } else {
+            result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0,H=" + hueValue + ",SAT=" + satValue;
+          }
         } else {
-          result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit) + ",H=" + hueValue + ",SAT=" + satValue;
+          if (this.deviceType == this.lss) {
+            if (this.getActiveDialog() == "color") {
+              result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit) + ",H=" + hueValue + ",SAT=" + satValue;
+            } else {
+              // this ist for the HmIP-LSS color temp
+              result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit);
+            }
+          } else {
+            result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=" + this._getRampTimeVal(ramptimeValue, ramptimeUnit) + ",H=" + hueValue + ",SAT=" + satValue;
+          }
         }
       }
     } else {
@@ -22030,7 +22146,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       result += ",RTTOV=" + this.rampTimeOffValueElm.val() + ",RTTOU=" + this.rampTimeOffUnitElm.val();
     }
 
-    if ((this.deviceType == this.drgDali) || (this.deviceType == this.lss) || ((this.deviceType == this.rgbw) && ((this.maxCap == 2) || (this.maxCap == 4)))) {
+    if ((this.deviceType == this.drgDali) || ((this.deviceType == this.lss) && (this.getActiveDialog() == "colorTemp")) || ((this.deviceType == this.rgbw) && ((this.maxCap == 2) || (this.maxCap == 4)))) {
       result += tempColorID;
     }
 
@@ -33655,7 +33771,7 @@ getExtendedDescription = function(oChannelDescr) {
   }
 
   if (chType == "SWITCH_TRANSMITTER") {
-    if (deviceType.toLowerCase() == "hmip-mod-oc8") {
+    if ((deviceType.toLowerCase() == "hmip-mod-oc8") || (deviceType.toLowerCase() == "elv-sh-sb8")) {
       result = translateKey("chType_SWITCH_TRANSMITTER_OC");
     }
   }
@@ -33717,6 +33833,7 @@ getExtendedDescription = function(oChannelDescr) {
     switch (tmpDev) {
       case "hmip-stho":
       case "hmip-stho-a":
+      case "elv-sh-cth":
         if (channelIndex == 2) result = translateKey("chType_COND_TEMPERATURE");
         if (channelIndex == 3) result = translateKey("chType_COND_HUMIDITY");
         break;
@@ -33790,11 +33907,17 @@ getExtendedDescription = function(oChannelDescr) {
       if ((multiMode != "--") && (typeof multiMode != "undefined")) {
         typeExt = "_" + multiMode;
       } else {
-        // API Call getMetaData channelMode
-        //typeExt = "_" + homematic("Interface.getMetadata", {"objectId": channelRegaID, "dataId": "channelMode"});
-        //if (typeExt == "_null") {
+        if (channelAddress != "undefined") {
+          var chn = DeviceList.getChannelByAddress(channelAddress),
+          chnMode = parseInt(chn.multiMode);
+          if (! isNaN(chnMode)) {
+            typeExt = "_" + chnMode;
+          } else {
+            typeExt = "";
+          }
+        } else {
           typeExt = "_1";
-        //}
+        }
       }
     }
     result = translateKey("chType_MULTI_MODE_INPUT_TRANSMITTER" + typeExt);
@@ -33977,11 +34100,17 @@ getExtendedDescription = function(oChannelDescr) {
     }
   }
 
-  if (deviceType.toLowerCase().includes("hmip-smo230")) {
+  if ((deviceType.toLowerCase().includes("hmip-smo230")) || (deviceType.toLowerCase().includes("hmipw-smo230"))) {
     var arAppendix = ["", "LEFT", "RIGHT", "BOTTOM", "VIRTUEL", "ZONE1", "ZONE2", "ZONE3", "VIRTUEL"];
 
     if ((channelIndex >= 1) && (channelIndex <= 8)) {
       result = translateKey("chType_" + chType + "_" + arAppendix[channelIndex]);
+    }
+  }
+
+  if (chType == "CLIMATE_TRANSCEIVER") {
+    if (deviceType == "ELV-SH-TACO") {
+      result = translateKey("chType_CLIMATE_TRANSCEIVER_TEMP");
     }
   }
 
@@ -40215,7 +40344,8 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
     },function(result){conInfo(result);});
   },
 
-  saveValue: function() {
+  // See SPHM-1301 - this was the previous version
+  _saveValue: function() {
     var level2Value;
 
     this.state = (this.state != -1) ? this.state : 0;
@@ -40228,7 +40358,6 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
       } else if (this.pressedUpDown == "UP") {
         level2Value = 1;
       }
-
 
       // twist-1551
       if ((this.pressedUpDown != "") && (typeof level2Value != "undefined") ) {
@@ -40244,24 +40373,33 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
 
         setDpState(this.dpLevel, this.state / 100);
 
-        /*
-        homematic("Interface.putParamset", {
-          'interface': this.Interface, 'address': this.opts.chnAddress, 'paramsetKey': 'VALUES', 'set': [
-            {name: 'LEVEL', type: 'double', value: this.state / 100}
-            //{name: 'LEVEL_2', type: 'double', value: 1.005} LEVEL_2 wird intern vom Realkanal durch den crRFD ermittelt.
-          ]
-        }, function (result) {
-          conInfo(result);
-        });
-        */
-
       }
-
-
     } else {
       setDpState(this.dpLevel, this.state / 100);
     }
+  },
+
+  // See SPHM-1301
+  saveValue: function() {
+    var level2Value;
+    this.state = (this.state != -1) ? this.state : 0;
+      blindLevelDestination[this.id] = this.state;
+      if (this.pressedUpDown == "DOWN") {
+        level2Value = 0;
+      } else if (this.pressedUpDown == "UP") {
+        level2Value = 1;
+      }
+      level2Value = (typeof level2Value == "undefined") ? 0 : level2Value;
+      homematic("Interface.putParamset", {
+        'interface': this.Interface, 'address': this.opts.chnAddress, 'paramsetKey': 'VALUES', 'set': [
+          {name: 'LEVEL', type: 'double', value: this.state / 100},
+          {name: 'LEVEL_2', type: 'double', value: level2Value}
+        ]
+      }, function (result) {
+        conInfo(result);
+      });
   }
+
 });
 iseDualWhiteColorController = Class.create();
 
@@ -40491,9 +40629,6 @@ iseHmIPWeeklyProgram.prototype = {
 
     this.devLabel = opts.deviceLabel;
     this.iface = this.opts.chInterface;
-
-    this.expert = (! this.opts.userEasyLinkMode) ? true : false;
-
     this.chAddress = this.opts.chnAddress;
 
     this.wiegandInterface = (this.isDeviceType("HmIP-FWI")) ? true : false;
@@ -40501,6 +40636,9 @@ iseHmIPWeeklyProgram.prototype = {
     this.deviceIsHmIP_MOD_WD_VK = this.isDeviceType("HmIP-MOD-WD-VK");
     this.deviceIsHmIP_RGBW = this.isDeviceType("HmIP-RGBW");
     this.deviceIsHmIP_DALI = this.isDeviceType("HmIP-DRG-DALI");
+    this.deviceIsHmIP_FLC = (this.isDeviceType("HmIP-FLC") || (this.isDeviceType("HmIP-FDC")));
+
+    this.expert = (! this.opts.userEasyLinkMode || this.deviceIsHmIP_FLC) ? true : false;
 
     this.device = this.getDevice(this.opts.deviceID);
     this.relevantChn = this.getRelevantChannels();
@@ -40528,7 +40666,7 @@ iseHmIPWeeklyProgram.prototype = {
       this.relevantChn = [2];
     }
 
-    if ((this.isDeviceType("HmIP-SMO230")) || (this.isDeviceType("HmIP-SMO230-A")) ) {
+    if ((this.isDeviceType("HmIP-SMO230")) || (this.isDeviceType("HmIP-SMO230-A")) || (this.isDeviceType("HmIPW-SMO230")) || (this.isDeviceType("HmIPW-SMO230-A"))) {
       this.relevantChn =  [10, 11, 12];
     }
 
@@ -40967,6 +41105,8 @@ iseHmIPWeeklyProgram.prototype = {
     DoorLockTransmitterID = "DOOR_LOCK_STATE_TRANSMITTER", // HmIP-DLD
     OpticalSignalID = "OPTICAL_SIGNAL_RECEIVER", // HmIPW-WRC6
     UniversalLightReceiver = "UNIVERSAL_LIGHT_RECEIVER", // HmIP-RGBW
+    PermissionTranseiverID = "PERMISSION_TRANSCEIVER", // HmIP-FLC/FLD
+    SwitchTranseiverID = "SWITCH_TRANSCEIVER", // HmIP-FLC/FLD
     expertChn;
 
     jQuery.each(this.device.channels, function(index,chn) {
@@ -40977,6 +41117,8 @@ iseHmIPWeeklyProgram.prototype = {
         || (chn.channelType.indexOf(DoorLockTransmitterID) !== -1)
         || (chn.channelType.indexOf(OpticalSignalID) !== -1)
         || (chn.channelType.indexOf(UniversalLightReceiver) !== -1)
+        || (chn.channelType.indexOf(PermissionTranseiverID) !== -1)
+        || (chn.channelType.indexOf(SwitchTranseiverID) !== -1)
       ) {
         if (self.expert) {
           result.push(index);
@@ -41014,7 +41156,9 @@ iseHmIPWeeklyProgram.prototype = {
         || channelType == "ACCESS_TRANSCEIVER"
         || channelType == "DOOR_LOCK_STATE_TRANSMITTER"
         || channelType == "OPTICAL_SIGNAL_RECEIVER"
-        || channelType == "UNIVERSAL_LIGHT_RECEIVER")
+        || channelType == "UNIVERSAL_LIGHT_RECEIVER"
+        || channelType == "PERMISSION_TRANSCEIVER"
+        || channelType == "SWITCH_TRANSCEIVER")
         {
           return channelNr;
         }
@@ -41409,38 +41553,46 @@ iseMOD_RC8.prototype = {
     });
 
   }
-};
-
-iseAccelerationTransceiver = Class.create();
-
+};iseAccelerationTransceiver = Class.create();
 iseAccelerationTransceiver.prototype = {
-  initialize: function (chnId, valMotion, chnAddress, tiltAngle, tiltAngleUnit) {
+  initialize: function (chnId, valMotion, chnAddress, tiltAngle, tiltAngleUnit, position) {
+
+    //console.log("valMotion: " + valMotion + " - tiltAngle: " + tiltAngle + " - tiltAngleUnit: " + tiltAngleUnit + " - position: " + position );
+
     var self = this;
     this.chnId = chnId;
     this.valMotion = valMotion;
     this.chnAddress = chnAddress;
+    this.position = position; // 0 waagerecht, 1 geneigt, 2 senkrecht
     this.tiltAngle = tiltAngle;
     this.tiltAngleUnit = tiltAngleUnit;
 
     var tmp = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": this.chnAddress, "valueKey": "CHANNEL_OPERATION_MODE"},function(result) {
-      var outputElm = jQuery("#accelerationState" + chnId);
-      var arMessage = ["",translateKey("lblVibration"),translateKey("lblPosition"), translateKey("lblTilt")],
-      arMotion = [translateKey("lblNo"), translateKey("lblYes")],
-      arPosition = [translateKey("lblHorizontal"), translateKey("lblNonHorizontal")],
-      res = "--";
+      var firstElm = jQuery("#firstElm" + chnId),
+        secondElm = jQuery("#secondElm" + chnId),
+        angleElm = jQuery("#angleElm" + chnId),
+        arMessage = ["",translateKey("lblVibration"),translateKey("lblPosition"), translateKey("lblPositionA")],
+        arMotion = [translateKey("lblNo"), translateKey("lblYes")],
+        arPosition = ["waagerecht","geneigt" ,"senkrecht"],
+        arPositionA = ["waagerecht","geneigt" ,"geneigt"],
+        lblAngle = translateKey("lblAngle") + ":<br/>",
+        motion = (self.valMotion == "false") ? arMotion[0] : arMotion[1];
+
+
 
       switch (parseInt(result)) {
         case 1:
-          res = (self.valMotion == "false") ? arMotion[0] : arMotion[1];
+          firstElm.html(arMessage[result] + "<br/>" +  motion );
           break;
         case 2:
-          res = (self.valMotion == "false") ? arPosition[0] : arPosition[1];
+          firstElm.html(arMessage[result]  + ":<br/>" + arPositionA[position]);
           break;
         case 3:
-          res = self.tiltAngle + self.tiltAngleUnit;
+          firstElm.html(arMessage[result]  + ":<br/>" + arPosition[position]);
           break;
       }
-      outputElm.html(arMessage[result] + ":<br/>"+ res );
+      angleElm.html(lblAngle + self.tiltAngle + self.tiltAngleUnit);
+
     });
   }
 };
@@ -41814,18 +41966,34 @@ iseUniversalLightReceiver.prototype = {
 
     this.percLevelElm = jQuery("#"+this.chnId+"Perc");
 
-    this.hueElm = jQuery("#hueElmId_"+ chnId);
-    this.satElm = jQuery("#satElmId_"+ chnId);
-    this.bckGndElm = jQuery("#bckGndlmId_"+ chnId);
-    //this.btnOkElm = jQuery("#btnOkElmId_"+ chnId);
+    this.hueElm = jQuery("#hueElmId_"+ this.chnId);
+    this.satElm = jQuery("#satElmId_"+ this.chnId);
+    this.bckGndElm = jQuery("#bckGndlmId_"+ this.chnId);
+    this.setActiveElm();
     this.setKeyHandler();
     this.getColorPicker();
   },
+
+  setActiveElm: function() {
+    if (this.EFFECT > 0) {
+      jQuery(".j_ControlBtnInfo").first().removeClass("ControlBtnInfoActive").addClass("ControlBtnInfo");
+
+      // set the active effect button blue
+      var btnEffect = jQuery("#ulrEffect_"+(parseInt(parseInt(this.EFFECT + (this.EFFECT % 2)) / 2))+"_" + this.chnId);
+      jQuery("[name='urlEffect_"+this.chnId+"']").switchClass("ControlBtnOn","ControlBtnOff", 0); // deactivate all effect buttons
+      btnEffect.switchClass('ControlBtnOff', 'ControlBtnOn', 0); // activate the active effect button
+
+    } else {
+      jQuery(".j_ControlBtnInfo").first().removeClass("ControlBtnInfo").addClass("ControlBtnInfoActive");
+    }
+  },
+
 
   setKeyHandler: function() {
     var self = this;
 
     this.bckGndElm.click(function(event) {
+      self.activateColorPicker();
       jQuery(this).change();
       self.saveColor();
     });
@@ -41841,6 +42009,7 @@ iseUniversalLightReceiver.prototype = {
     });
 
     this.hueElm.blur(function(event) {
+      self.activateColorPicker();
       var val;
         val = parseInt(jQuery(this).val());
         if (val < 0 || isNaN(val)) {self.HUE = 0;} else if (val > 360) {self.HUE = 360;} else {self.HUE = val;};
@@ -41859,6 +42028,7 @@ iseUniversalLightReceiver.prototype = {
     });
 
     this.satElm.blur(function(event) {
+      self.activateColorPicker();
       var val;
       val = (parseInt(jQuery(this).val()) / 100);
       if (val < 0 || isNaN(val)) {self.SATURATION = 0;} else if (val > 1) {self.SATURATION = 1;} else {self.SATURATION = val;};
@@ -41882,40 +42052,46 @@ iseUniversalLightReceiver.prototype = {
     var self = this,
       lastHueSat;
 
-    if (this.hueStatus == 0) {
-      this.hueElm.val(this.colorPickerInit.hue);
-      this.satElm.val(this.colorPickerInit.saturation);
+      if (this.hueStatus == 0) {
+        this.hueElm.val(this.colorPickerInit.hue);
+        this.satElm.val(this.colorPickerInit.saturation);
 
-      homematic("Interface.setMetadata", {"objectId" : self.chnId, "dataId" : "lastValHueSat", "value" : "HUE:" + self.HUE + ",SAT:" + self.SATURATION * 100
-      }, function(result) {
-        conInfo("iseUniversalLightReceiver getColorPicker - Metadata set: " +  result);
-      });
+        homematic("Interface.setMetadata", {
+          "objectId": self.chnId,
+          "dataId": "lastValHueSat",
+          "value": "HUE:" + self.HUE + ",SAT:" + self.SATURATION * 100
+        }, function (result) {
+          conInfo("iseUniversalLightReceiver getColorPicker - Metadata set: " + result);
+        });
 
-    } else {
-      lastHueSat = homematic("Interface.getMetadata", {"objectId" : this.chnId, "dataId" : "lastValHueSat"});
+      } else {
+        lastHueSat = homematic("Interface.getMetadata", {
+          "objectId": this.chnId,
+          "dataId": "lastValHueSat"
+        });
 
-      // get the meta data HUE and SAT
-      var arHueSat = [],
-        valHUE = 0,
-        valSATPercent = 0,
-        valSAT = 0;
+        // get the meta data HUE and SAT
+        var arHueSat = [],
+          valHUE = 0,
+          valSATPercent = 0,
+          valSAT = 0;
 
-      if (lastHueSat != "null") {
-        arHueSat = lastHueSat.split(",");
-        valHUE = arHueSat[0].split(":")[1];
-        valSATPercent = parseInt(arHueSat[1].split(":")[1]);
-        valSAT = valSATPercent / 100;
+        if (lastHueSat != "null") {
+          arHueSat = lastHueSat.split(",");
+          valHUE = arHueSat[0].split(":")[1];
+          valSATPercent = parseInt(arHueSat[1].split(":")[1]);
+          valSAT = valSATPercent / 100;
+        }
+
+        this.HUE = valHUE;
+        this.SATURATION = valSAT;
+        this.hueElm.val(this.HUE);
+        this.satElm.val(valSATPercent);
+
+        this.colorPickerInit.hue = this.HUE;
+        this.colorPickerInit.saturation = valSATPercent;
       }
 
-      this.HUE = valHUE;
-      this.SATURATION = valSAT;
-      this.hueElm.val(this.HUE);
-      this.satElm.val(valSATPercent);
-
-      this.colorPickerInit.hue = this.HUE;
-      this.colorPickerInit.saturation = valSATPercent;
-
-    }
 
     this.oDimmerElm.percChange = this.onPercChange.bindAsEventListener(this);
     Event.observe($(this.chnId + "Perc"), 'change', this.oDimmerElm.percChange);
@@ -41958,12 +42134,11 @@ iseUniversalLightReceiver.prototype = {
 
       self.saveColor();
     });
+  },
 
-    /*
-    this.btnOkElm.click(function() {
-      self.saveColor();
-    });
-    */
+  activateColorPicker: function() {
+    jQuery("[name='urlEffect_"+this.chnId+"']").switchClass("ControlBtnOn","ControlBtnOff", 0); // deactivate all effect buttons
+    jQuery(".j_ControlBtnInfo").first().removeClass("ControlBtnInfoNotActive").addClass("ControlBtnInfoActive");
   },
 
   saveColor: function() {
@@ -42052,23 +42227,18 @@ function setULReffectMode(chkBox, chnId) {
   homematic("Interface.setMetadata", {"objectId": chnId, "dataId": "effectMode", "value": mode});
 }
 
-function setULREffect (elm, effectNr, chnAddress) {
-  var effectLevel,
+function setULREffect (elm, effectNr, chnAddress, level) {
+  var effectLevel = level,
   chnId = elm.id.split("_")[2],
   saveOldStatus = homematic("Interface.getMetadata", {"objectId": chnId, "dataId": "effectMode"});
+  jQuery(".j_Button_"+chnId).switchClass("ControlBtnOn","ControlBtnOff", 0); // deactivate the color temp slider and the buttons HCL / Dim2Warm
+  jQuery(".ControlBtnInfoActive").switchClass("ControlBtnInfoActive","ControlBtnInfoNotActive", 0); // deactivate the colorpicker panel for the H and S value
+
+  jQuery("[name='urlEffect_"+chnId+"']").switchClass("ControlBtnOn","ControlBtnOff", 0); // deactivate all effect buttons
+  jQuery(elm).switchClass('ControlBtnOff', 'ControlBtnOn', 0); // activate the selected button.
 
   // saveOldStatus 'true' will determine if the old status will be restored. Otherwise the light will be switched off.
   if (saveOldStatus == "true") {effectNr++;}
-
-  // When effect active, then the next click on the button will switch the effect off
-  // Off = The effect no. + 1
-  if (jQuery(elm).hasClass("ControlBtnOn")) {
-    jQuery(elm).switchClass('ControlBtnOn', 'ControlBtnOff', 0);
-    effectLevel = 0.0;
-  } else {
-    jQuery(elm).switchClass('ControlBtnOff', 'ControlBtnOn', 0);
-    effectLevel = 1.0;
-  }
 
   homematic("Interface.putParamset", {
     'interface': "HmIP-RF",
@@ -42096,11 +42266,13 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
     this.iface = opts.iface;
     this.chAddress = opts.chAddress;
     this.chnId = chnId;
-
+    this.defaultColorTmpMin = 2000;
+    this.defaultColorTmpMax = 6500;
 
     this.colorTempID = opts.colorTempID;
-    this.colorTempMin = opts.colorTempMin;
-    this.colorTempMax = opts.colorTempMax;
+    this.colorTempMin = (!isNaN(opts.colorTempMin)) ? opts.colorTempMin : this.defaultColorTmpMin;
+    this.colorTempMax = (!isNaN(opts.colorTempMax)) ? opts.colorTempMax : this.defaultColorTmpMax;
+
     this.colorTemp = parseInt(opts.colorTemp);
     this.colorTempUnknown = (this.colorTemp < this.colorTempMin) ? true : false;
 
@@ -42118,6 +42290,8 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
 
     this.devIsDali = (opts.devLabel == "HmIP-DRG-DALI") ? true : false;
 
+    this.effect = opts.effect;
+
     window.setTimeout(function() {
       self.btnColorTemp = jQuery("#btnColorTemp" + self.chnId);
       self.trBtnColorTemp = jQuery("#trBtnColorTemp" + self.chnId);
@@ -42131,6 +42305,14 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
       self.hueElm = jQuery("#hueElmId_" + self.chnId);
       self.satElm = jQuery("#satElmId_" + self.chnId);
       self.bckGndElm = jQuery("#bckGndlmId_"+ self.chnId);
+
+      homematic("Interface.setMetadata", {
+        "objectId": this.chnId,
+        "dataId": "lastValColorTemp",
+        "value": this.colorTemp
+      }, function (result) {
+        conInfo("iseUniversalLightReceiver setColorTemp - Metadata set: " + result);
+      });
 
       self.initButtons();
       self.initSlider();
@@ -42150,13 +42332,21 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
   initButtons: function() {
     var self = this;
 
-    if (self.valHCL) {
-      self.setElmColorActive("hcl");
-    } else if (self.valDim2Warm) {
-      self.setElmColorActive("dim2Warm");
+    if (this.effect == 0) {
+      if (self.valHCL) {
+        self.setElmColorActive("hcl");
+      } else if (self.valDim2Warm) {
+        self.setElmColorActive("dim2Warm");
+      } else {
+        self.setElmColorActive("sliderPanel");
+      }
     } else {
-      self.setElmColorActive("sliderPanel");
+      // set the active effect button blue
+      var btnEffect = jQuery("#ulrEffect_"+(parseInt(parseInt(self.effect + (self.effect % 2)) / 2))+"_" + self.chnId);
+      jQuery("[name='urlEffect_"+self.chnId+"']").switchClass("ControlBtnOn","ControlBtnOff", 0); // deactivate all effect buttons
+      btnEffect.switchClass('ControlBtnOff', 'ControlBtnOn', 0); // activate the active effect button
     }
+
     self.showHideSliderPanel();
 
     this.hueElm.change(function() {
@@ -42170,6 +42360,11 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
     });
 
     this.bckGndElm.change(function() {
+      self.setAll2Off();
+      jQuery(self.colorSetElm).removeClass("ControlBtnInfo").addClass("ControlBtnInfoActive");
+    });
+
+    this.bckGndElm.click(function() {
       self.setAll2Off();
       jQuery(self.colorSetElm).removeClass("ControlBtnInfo").addClass("ControlBtnInfoActive");
     });
@@ -42206,6 +42401,7 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
     jQuery(this.btnHCL).removeClass("ControlBtnOn").addClass("ControlBtnOff");
     jQuery(this.btnDim2Warm).removeClass("ControlBtnOn").addClass("ControlBtnOff");
     jQuery(this.sliderPanel).removeClass("ControlBtnOn").addClass("ControlBtnOff");
+    jQuery("[name='urlEffect_"+this.chnId+"']").switchClass("ControlBtnOn","ControlBtnOff", 0); // deactivate all effect buttons
   },
 
   setElmColorActive: function (activeElm) {
@@ -42230,11 +42426,19 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
 
   initSlider: function () {
 
-    if (this.colorTemp == "-1") {this.colorTemp = this.colorTempMin;}
+    var metaColorTemp = homematic("Interface.getMetadata", {
+      "objectId": this.chnId,
+      "dataId": "lastValColorTemp"
+    });
+
+    if ((metaColorTemp == "-1") || (metaColorTemp== "null") || (metaColorTemp == null) || (isNaN(metaColorTemp))) {this.colorTemp = this.colorTempMin;}
+
     var self = this;
 
     if (! self.devIsDali) {
       this.sliderInfoElm.val(this.colorTemp);
+      this.sliderElm.slider('value', this.colorTemp);
+
     } else  {
       if (this.colorTempUnknown) {
         this.sliderInfoElm.val("--");
@@ -42261,6 +42465,15 @@ iseHmIPUniversalLightRGBWSlider.prototype = {
     this.setAll2Off();
     this.setElmColorActive("sliderPanel");
     setDpState(this.colorTempID,this.colorTemp);
+
+    homematic("Interface.setMetadata", {
+      "objectId": this.chnId,
+      "dataId": "lastValColorTemp",
+      "value": this.colorTemp
+    }, function (result) {
+      conInfo("iseUniversalLightReceiver setColorTemp - Metadata set: " + result);
+    });
+
   }
 
 };
@@ -45355,7 +45568,12 @@ SetEasyMode = function (iface, address, peer, special_input_id, paramid) {
     var fileExtension = "";
     var _sender = $F('dev_descr_sender_tmp').split('-')[0];
     if (_sender == "MULTI_MODE_INPUT_TRANSMITTER") {
-      fileExtension = "_" + mode_MULTI_MODE_INPUT_TRANSMITTER;
+      var chn = DeviceList.getChannelByAddress(address);
+      if (chn.typeName == "HmIP-FDC") {
+        fileExtension = "_" + mode_MULTI_MODE_INPUT_TRANSMITTER + "_FDC";
+      } else {
+        fileExtension = "_" + mode_MULTI_MODE_INPUT_TRANSMITTER;
+      }
     }
     poststr += "&new_profilepath=" + is_newProfile(paramid).split('-')[0] + fileExtension;
   }
@@ -49654,6 +49872,7 @@ resetAllMetaEnergyCounter = function(dev, opMode) {
       homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy1", "value": 0}); // Yesterday
       homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy7", "value": 0}); // 1 Week
       homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "energy30", "value": 0}); // 1 Month
+      homematic("Interface.setMetadata", {"objectId": chn.id, "dataId": "iecPrgFirstStart","value": 1});
 
       if (opMode < 3) {
         homematic('Interface.setMetadata', {'objectId': chn.id, 'dataId': arStartDataID[chn.index], 'value': 0}); // Reset start value

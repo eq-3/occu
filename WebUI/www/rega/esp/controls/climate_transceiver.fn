@@ -1,0 +1,39 @@
+function ::CreateClimateTransceiver()
+{
+  object oActualTemperature = cObj.DPByControl("CLIMATE_TRANSCEIVER.ACTUAL_TEMPERATURE");
+  object oHumidity = cObj.DPByControl("CLIMATE_TRANSCEIVER.HUMIDITY");
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+
+  WriteLine("<td><table align='center'><tr>");
+      if( oActualTemperature)
+      {
+        WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black'>");
+          WriteLine("<table style='border:none'>");
+            WriteLine("<tr>");
+              WriteLine("<td class='ctrlTbl CLASS02520' style='text-align:left'>");
+                WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableWeatherTemperature}: </span><span class='CLASS02535' style='color:white'>"#oActualTemperature.Value().ToString(1)#" "#oActualTemperature.ValueUnit()#"</span></div>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      }
+
+      if( oHumidity)
+      {
+        WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black'>");
+          WriteLine("<table style='border:none'>");
+            WriteLine("<tr>");
+              WriteLine("<td class='ctrlTbl CLASS02520' style='text-align:left'>");
+                WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableHeatingHumidity}: </span><span class='CLASS02535' style='color:white'>"#oHumidity.Value().ToString(0)#" "#oHumidity.ValueUnit()#"</span></div>");
+              WriteLine("</td>");
+            WriteLine("</tr>");
+          WriteLine("</table>");
+        WriteLine("</td>");
+      }
+  WriteLine("</tr></table></td>");
+
+  return;
+}
+

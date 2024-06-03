@@ -1802,11 +1802,9 @@ CheckAndCreateSysVarEnergyCounter = function(chn) {
         chnLabel = response;
 
         if (chnLabel.indexOf('HmIP-ESI') !== -1) {
-          conInfo("CreateSysVarEnergyCounterScriptESI");
-          CreateSysVarEnergyCounterScriptESI(chn);
-          CreateSysVarGasCounterScriptESI(chn);
-          //Set the values of the last 31 days at midnight (00:00).
           if (chn.index != 1) {
+            CreateSysVarEnergyCounterScriptESI(chn);
+            CreateSysVarGasCounterScriptESI(chn);
             CreateMetaEnergyCounter(chn);
             storeEnergyValuesAtMidnight(chn);
           }

@@ -1343,9 +1343,9 @@ PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_ABOVE	${stringTablePassage
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_DECISION_BELOW	${stringTablePassageDetectorCounterTransmitterCondTxCondTXDecisionBelow}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_HI	${stringTablePassageDetectorCounterTransmitterCondTxThresholdHi}
 PASSAGE_DETECTOR_COUNTER_TRANSMITTER|COND_TX_THRESHOLD_LO	${stringTablePassageDetectorCounterTransmitterCondTxThresholdLo}
-
 PASSAGE_DETECTOR_DIRECTION_TRANSMITTER	${stringTablePassageDetectorDirectionTitle}
-
+PERMISSION_STATE=FALSE	${stringTablePermissionStateFalse}
+PERMISSION_STATE=TRUE	${stringTablePermissionStateTrue}
 PEER_NEEDS_BURST	${stringTablePeerNeedsBurst}
 PIR_OPERATION_MODE	${stringTablePirOperationMode}
 PIR_SENSITIVITY	${stringTableSensorSensivity}
@@ -1353,10 +1353,8 @@ PIR_OPERATION_MODE_ECO	${pirOperationModeEco}
 PIR_OPERATION_MODE_NORMAL	${pirOperationModeNormal}
 PIR_OPERATION_MODE_OFF	${lblOff}
 POSITION_SAVE_TIME	${stringTablePositionSaveTime}
-
 POWER_MAINS_FAILURE=FALSE	${stringTablePowerMainsFailureFalse}
 POWER_MAINS_FAILURE=TRUE	${stringTablePowerMainsFailureTrue}
-
 POWERMETER_IEC1|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
 POWERMETER_IEC1|GAS_ENERGY_COUNTER	${stringTablePowerMeterEnergyCounterGas}
 POWERMETER_IEC1|GAS_POWER	${stringTableGasConsumption}

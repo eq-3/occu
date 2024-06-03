@@ -185,21 +185,22 @@ selectOnColorTemp = function(value, prn, pref, valCT_Son, valCT_Lon, valCT_Soff,
 
 getHSV_ColorPicker = function(prn, pref) {
 
-  var shortOnHueElm = jQuery("#separate_receiver_"+prn +"_"+ pref),
-    shortOffHueElm = jQuery("#separate_receiver_"+prn +"_"+ parseInt(pref +1)),
-    longOnHueElm = jQuery("#separate_receiver_"+prn +"_"+ parseInt(pref +2)),
-    longOffHueElm = jQuery("#separate_receiver_"+prn +"_"+ parseInt(pref +3)),
-    shortOnSatElm = jQuery("#separate_receiver_"+prn+"_" + (parseInt(pref) + 4)),
-    shortOffSatElm = jQuery("#separate_receiver_"+prn+"_" + (parseInt(pref) + 5)),
-    longOnSatElm = jQuery("#separate_receiver_"+prn+"_" + (parseInt(pref) + 6)),
-    longOffSatElm = jQuery("#separate_receiver_"+prn+"_" + (parseInt(pref) + 7)),
+  var shortOnHueElm = jQuery(".j_shortOnHue_" +prn).first(),
+    shortOffHueElm = jQuery(".j_shortOffHue_" +prn).first(),
+    longOnHueElm = jQuery(".j_longOnHue_" +prn).first(),
+    longOffHueElm = jQuery(".j_longOffHue_" +prn).first(),
 
-    tmpShortOnSatElm = jQuery("#tmp_SHORT_ON_SATURATION_"+prn+"_" + (parseInt(pref) +4)),
-    tmpShortOffSatElm = jQuery("#tmp_SHORT_OFF_SATURATION_"+prn+"_" + (parseInt(pref) +5)),
-    tmpLongOnSatElm = jQuery("#tmp_LONG_ON_SATURATION_"+prn+"_" + (parseInt(pref) +6)),
-    tmpLongOffSatElm = jQuery("#tmp_LONG_OFF_SATURATION_"+prn+"_" + (parseInt(pref) +7)),
+    shortOnSatElm = jQuery(".j_shortOnSat_" +prn).first(),
+    shortOffSatElm = jQuery(".j_shortOffSat_" +prn).first(),
+    longOnSatElm = jQuery(".j_longOnSat_" +prn).first(),
+    longOffSatElm = jQuery(".j_longOffSat_" +prn).first(),
 
-    selectedColorIndicatorElm = jQuery("#selectedColor_"+prn+ "_" + (parseInt(pref) +7));
+    tmpShortOnSatElm = jQuery(".j_tmpShortOnSat_" +prn).first(),
+    tmpShortOffSatElm = jQuery(".j_tmpShortOffSat_" +prn).first(),
+    tmpLongOnSatElm = jQuery(".j_tmpLongOnSat_" +prn).first(),
+    tmpLongOffSatElm = jQuery(".j_tmpLongOffSat_" +prn).first(),
+
+    selectedColorIndicatorElm = jQuery(".j_selectedColor_" + prn).first();
 
   var hue = shortOnHueElm.val(), saturation = shortOnSatElm.val();
 
@@ -248,7 +249,7 @@ getHSV_ColorPicker = function(prn, pref) {
     var val, HUE, rgbVal;
     if (event.keyCode == 13) {
       val = parseInt(jQuery(this).val());
-      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val > 360) {HUE = 360;} else {HUE = val;};
+      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val > 360) {HUE = 360;} else {HUE = val;}
       jQuery(this).val(HUE);
       shortOffHueElm.val(HUE);
       longOnHueElm.val(HUE);
@@ -263,7 +264,7 @@ getHSV_ColorPicker = function(prn, pref) {
   shortOnHueElm.blur(function(event) {
     var val, HUE, rgbVal;
     val = parseInt(jQuery(this).val());
-    if (val < 0 || isNaN(val)) {HUE = 0;} else if (val > 360) {HUE = 360;} else {HUE = val;};
+    if (val < 0 || isNaN(val)) {HUE = 0;} else if (val > 360) {HUE = 360;} else {HUE = val;}
     jQuery(this).val(HUE);
     shortOffHueElm.val(HUE);
     longOnHueElm.val(HUE);
@@ -279,7 +280,7 @@ getHSV_ColorPicker = function(prn, pref) {
 
     if (event.keyCode == 13) {
       val = parseInt(jQuery(this).val());
-      if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val > 100) {SATURATION = 100;} else {SATURATION = val;};
+      if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val > 100) {SATURATION = 100;} else {SATURATION = val;}
       satDiv100 = SATURATION / 100;
       jQuery(this).val(SATURATION);
       tmpShortOffSatElm.val(SATURATION);
@@ -301,7 +302,7 @@ getHSV_ColorPicker = function(prn, pref) {
   tmpShortOnSatElm.blur(function(event) {
     var val, SATURATION, rgbVal, satDiv100;
     val = parseInt(jQuery(this).val());
-    if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val > 100) {SATURATION = 100;} else {SATURATION = val;};
+    if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val > 100) {SATURATION = 100;} else {SATURATION = val;}
     satDiv100 = SATURATION / 100;
     jQuery(this).val(SATURATION);
     tmpShortOffSatElm.val(SATURATION);
@@ -318,6 +319,96 @@ getHSV_ColorPicker = function(prn, pref) {
     selectedColorIndicatorElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
   });
 };
+
+
+// eTRV-F
+
+getHSV_ColorPicker_eTRV = function(prn, pref) {
+
+  var hueElm = jQuery("#hue_" + pref),
+    saturationElm = jQuery("#saturation_" + pref),
+
+    selectedColorIndicatorElm = jQuery("#selectedColor_" + pref);
+
+  var hue = hueElm.val(), saturation = saturationElm.val();
+
+  var colorPicker = new iro.ColorPicker("#anchorColorPicker_" + prn + "_" + pref, {
+      // Set the size of the color picker
+      width: 90,
+      color: {h: hue, s: parseInt(saturation * 100), v: 100},
+      wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
+      layout: [{component: iro.ui.Wheel}], // Don't show the V slider below the wheel - this value is the LEVEL Parameter of the profile
+      handleRadius: 4
+    }
+  );
+
+  colorPicker.on("mount", function(color) {
+    var rgbVal = hsvToRgb(hue, parseInt(saturation * 100), 100);
+
+    console.log("colorPicker mount - rgbVal: ", rgbVal);
+
+    selectedColorIndicatorElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+  });
+
+  colorPicker.on("input:end", function(color) {
+
+    console.log("colorPicker color: ", color);
+
+    var hsv_H = color.hsv.h,
+      hsv_S,
+      hsv_S_Percent = parseInt(color.hsv.s),
+      rgbVal;
+
+    hsv_S = (parseInt(color.hsv.s) / 100);
+    hueElm.val(hsv_H);
+    saturationElm.val(hsv_S);
+
+
+
+    rgbVal = hsvToRgb(color.hsv.h, color.hsv.s, 100);
+    selectedColorIndicatorElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+  });
+
+  hueElm.keyup(function(event) {
+    var val, HUE, rgbVal;
+    if (event.keyCode == 13) {
+      val = parseInt(jQuery(this).val());
+      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val > 360) {HUE = 360;} else {HUE = val;}
+      jQuery(this).val(HUE);
+
+      colorPicker.color.hsv = {h: HUE, s: parseInt(saturationElm.val() * 100), v: 100};
+      rgbVal = hsvToRgb(colorPicker.color.hsv.h,colorPicker.color.hsv.s, 100);
+      selectedColorIndicatorElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+    }
+  });
+
+  hueElm.blur(function(event) {
+    var val, HUE, rgbVal;
+    val = parseInt(jQuery(this).val());
+    if (val < 0 || isNaN(val)) {HUE = 0;} else if (val > 360) {HUE = 360;} else {HUE = val;}
+    jQuery(this).val(HUE);
+
+    colorPicker.color.hsv = {h: HUE, s: parseInt(saturationElm.val() * 100), v: 100};
+    rgbVal = hsvToRgb(colorPicker.color.hsv.h,colorPicker.color.hsv.s, 100);
+    selectedColorIndicatorElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+  });
+
+
+};
+
+
+// END eTRV-F
+
+
+
+
+
+
+
+
+
+
+
 
 // onOff = either ON or OFF
 // sliderOnOffavail false = on color slider, true = 2 color slider (one for ON, one for OFF)
@@ -395,7 +486,7 @@ getColorHueSlider = function(prn, pref, onOff, sliderOnOffavail) {
     var val, HUE, rgbVal,infinitiveDimActive = jQuery("#chkDimInfinitive_"+prn).is(':checked');
     if (event.keyCode == 13) {
       val = parseInt(jQuery(this).val());
-      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;};
+      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;}
       jQuery(this).val(HUE);
 
       setValues2Send(infinitiveDimActive,sliderOnOffavail,onOff,HUE);
@@ -409,7 +500,7 @@ getColorHueSlider = function(prn, pref, onOff, sliderOnOffavail) {
   shortOnHueElm.blur(function(event) {
     var val, HUE, rgbVal, infinitiveDimActive = jQuery("#chkDimInfinitive_"+prn).is(':checked');
     val = parseInt(jQuery(this).val());
-    if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;};
+    if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;}
     jQuery(this).val(HUE);
 
     setValues2Send(infinitiveDimActive,sliderOnOffavail,onOff,HUE);
@@ -530,16 +621,24 @@ getColorTempSlider = function(prn, pref, onOroff) {
 };
 
 
-getColorTempSliderMinMax = function(prn, pref, keypress) {
+getColorTempSliderMinMax = function(prn, pref, keypress, minMax, extraParam) {
+  //console.log("getColorTempSliderMinMax: prn:  " + prn + " - pref: " + pref + " - keypress: " + keypress + " - minMax: " + minMax + " - extraParam: " + extraParam);
+
   var anchorSlider = jQuery("#colorTempSliderMinMax_"+prn+"_"+pref),
     receiverAddress = jQuery("#global_receiver_address").val(),
     iface = jQuery("#global_iface").val(),
     sliderOpts = {},
     chnDescription = homematic("Interface.getParamset", {"interface":iface, "address": receiverAddress, "paramsetKey": "MASTER"}),
-    val2SendElm = jQuery("#separate_receiver_"+prn+"_" + pref);
+    //val2SendElm = jQuery("#separate_receiver_"+prn+"_" + pref);
+    val2SendElm = jQuery(".j_shortDim"+minMax+"_"+prn);
+
+  if (extraParam == "setOnOffTC") {
+    var shortOnOffTempElm = jQuery(".j_shortOnOffColorTemp"+minMax+"_"+ prn).first(),
+     longOnOffTempElm = jQuery(".j_longOnOffColorTemp"+minMax+"_" + prn).first();
+  }
 
   if (keypress == "SHORT_LONG") {
-    var valLongElm = jQuery("#separate_receiver_"+prn+"_" + (parseInt(pref) + 1));
+     var valLongElm = jQuery(".j_longDim"+minMax+"_"+prn);
   }
 
   sliderOpts.animate = 'fast';
@@ -560,14 +659,18 @@ getColorTempSliderMinMax = function(prn, pref, keypress) {
 
   sliderElm.on("slide", function (event, ui) {
     val2SendElm.val(ui.value);
-    if (valLongElm) {valLongElm.val(val2SendElm.val());};
+    if (valLongElm) {valLongElm.val(val2SendElm.val());}
+    if (shortOnOffTempElm) {shortOnOffTempElm.val(val2SendElm.val());}
+    if (longOnOffTempElm) {longOnOffTempElm.val(val2SendElm.val());}
   });
 
   sliderElm.on("slidestop", function(event, ui) {
     var sliderVal = parseInt(ui.value);
     sliderElm.slider("value", sliderVal);
     val2SendElm.val(sliderVal);
-    if (valLongElm) {valLongElm.val(val2SendElm.val());};
+    if (valLongElm) {valLongElm.val(val2SendElm.val());}
+    if (shortOnOffTempElm) {shortOnOffTempElm.val(val2SendElm.val());}
+    if (longOnOffTempElm) {longOnOffTempElm.val(val2SendElm.val());}
   });
 
   val2SendElm.keyup(function(event) {
@@ -577,7 +680,9 @@ getColorTempSliderMinMax = function(prn, pref, keypress) {
       val = parseInt(jQuery(this).val());
       if (val < sliderOpts.min || isNaN(val)) {newVal = sliderOpts.min;} else if (val > sliderOpts.max) {newVal = sliderOpts.max;} else {newVal = val;}
       jQuery(this).val(newVal);
-      if (valLongElm) {valLongElm.val(val2SendElm.val());};
+      if (valLongElm) {valLongElm.val(val2SendElm.val());}
+      if (shortOnOffTempElm) {shortOnOffTempElm.val(val2SendElm.val());}
+      if (longOnOffTempElm) {longOnOffTempElm.val(val2SendElm.val());}
       sliderElm.slider("value", parseInt(newVal));
     }
   });
@@ -587,7 +692,9 @@ getColorTempSliderMinMax = function(prn, pref, keypress) {
     val = parseInt(jQuery(this).val());
     if (val < sliderOpts.min || isNaN(val)) {newVal = sliderOpts.min;} else if (val > sliderOpts.max) {newVal = sliderOpts.max;} else {newVal = val;}
     jQuery(this).val(newVal);
-    if (valLongElm) {valLongElm.val(val2SendElm.val());};
+    if (valLongElm) {valLongElm.val(val2SendElm.val());}
+    if (shortOnOffTempElm) {shortOnOffTempElm.val(val2SendElm.val()); }
+    if (longOnOffTempElm) {longOnOffTempElm.val(val2SendElm.val());}
     sliderElm.slider("value", parseInt(newVal));
   });
 
@@ -595,7 +702,176 @@ getColorTempSliderMinMax = function(prn, pref, keypress) {
 
 };
 
-// HmIP-RGBW and HmIP-DRG-DALI Effects
+setColorOrColorTemp = function(val, prn, pref, senderAddress, receiverAddress, userActivated, onOff) {
+  // val == 0 = optionHueSaturation
+  // val == 1 = optionColorTemp
+  val = parseInt(val);
+
+  onOff = (typeof onOff == "undefined") ? "--" : onOff; // onOff can be 'ON' or 'OFF' and determines if only the ON_* or OFF_* parameters are affected
+
+  var paramSet = homematic("Interface.getParamset", {"interface":"HmIP-RF", "address" : receiverAddress , "paramsetKey" : senderAddress});
+
+  var modeSelectorElm = jQuery("#satColorTempType_" + prn);
+
+  var colorPickerElm = jQuery("[name='j_trColorPicker_" + prn + "']"),
+      lblColorPickerElm = colorPickerElm.prev(),
+      colorTempSliderElm = jQuery("[name='j_trColorTempSlider_" + prn + "']"),
+      lblColorTempSliderElm = colorTempSliderElm.prev(),
+      selectOnColorPickerModeElm = jQuery("#selectOnColor_" + prn),
+      selectOnColorTempModeElm = jQuery("#selectOnColorTemp_" + prn);
+
+  lblColorPickerElm.hide();
+  colorPickerElm.hide();
+  lblColorTempSliderElm.hide();
+  colorTempSliderElm.hide();
+
+  var shortOnHueElm = jQuery(".j_shortOnHue_" + prn).first(),
+    shortOffHueElm =  jQuery(".j_shortOffHue_" + prn).first(),
+    longOnHueElm =  jQuery(".j_longOnHue_" + prn).first(),
+    longOffHueElm = jQuery(".j_longOffHue_" + prn).first(),
+
+    shortOnSatElm = jQuery(".j_shortOnSat_" + prn).first(),
+    shortOffSatElm = jQuery(".j_shortOffSat_" + prn).first(),
+    longOnSatElm = jQuery(".j_longOnSat_" + prn).first(),
+    longOffSatElm = jQuery(".j_longOffSat_" + prn).first(),
+
+    tmpShortOnSatElm =  jQuery(".j_tmpShortOnSat_" + prn).first(),
+    tmpShortOffSatElm = jQuery(".j_tmpShortOffSat_" + prn).first(),
+    tmpLongOnSatElm =  jQuery(".j_tmpLongOnSat_" + prn).first(),
+    tmpLongOffSatElm = jQuery(".j_tmpLongOffSat_" + prn).first(),
+
+    shortOnColorTempElm = jQuery(".j_shortOnColorTemp_" + prn).first(),
+    longOnColorTempElm = jQuery(".j_longOnColorTemp_" + prn).first(),
+    shortOffColorTempElm = jQuery(".j_shortOffColorTemp_" + prn).first(),
+    longOffColorTempElm = jQuery(".j_longOffColorTemp_" +prn).first();
+
+  var hueInactive = 361, saturationInactive = 101, colorTempInactive = 10100,
+    curValHue = paramSet["SHORT_ON_HUE"],
+    hueMax = 360,
+    curValSat = paramSet["SHORT_ON_SATURATION"],
+    curValSat100 = parseInt((parseFloat(curValSat) + 1) * 100 - 100),
+    curValColorTemp = paramSet["SHORT_ON_COLOR_TEMPERATURE"],
+    colorTempMax = 6500;
+
+  //console.log("modeSelectorElm: " + modeSelectorElm.val(), "val: " + val);
+
+  if (val == -1) {
+    val =  (curValColorTemp == colorTempInactive) ? 0 : 1;
+  }
+
+  modeSelectorElm.val(val);
+
+
+  switch (val) {
+    case 0:
+      /* optionHueSaturation
+        Set SHORT/LONG_ON/OFF_COLOR_TEMPERATURE to 10200
+      */
+      if (userActivated && (curValHue == hueInactive)) {
+        curValHue = hueMax;
+      }
+      shortOnColorTempElm.val(colorTempInactive);
+      longOnColorTempElm.val(colorTempInactive);
+      shortOffColorTempElm.val(colorTempInactive);
+      longOffColorTempElm.val(colorTempInactive);
+
+      shortOnHueElm.val(curValHue);
+      longOnHueElm.val(curValHue);
+      shortOffHueElm.val(curValHue);
+      longOffHueElm.val(curValHue);
+
+      shortOnSatElm.val(curValSat);
+      longOnSatElm.val(curValSat);
+      shortOffSatElm.val(curValSat);
+      longOffSatElm.val(curValSat);
+
+      tmpShortOnSatElm.val(curValSat100);
+      tmpLongOnSatElm.val(curValSat100);
+      tmpShortOffSatElm.val(curValSat100);
+      tmpLongOffSatElm.val(curValSat100);
+
+      lblColorTempSliderElm.hide();
+      colorTempSliderElm.hide();
+
+      if (userActivated) {
+        shortOnHueElm.blur();
+      }
+
+        lblColorPickerElm.show();
+      if (selectOnColorPickerModeElm.val() == "setColor") {
+        selectOnColorPickerModeElm.hide();
+        colorPickerElm.show();
+      }
+
+    break;
+    case 1:
+    /* optionColorTemp
+      Set SHORT/LONG_ON/OFF_HUE to 361
+      Set tmp_SHORT/LONG_ON/OFF_SATURATION to 101
+      Set SHORT/LONG_ON/OFF_SATURATION  to 1.01 > can probably archieved by a change event of the before mentioned tmp_* elements
+    */
+
+      shortOnHueElm.val(hueInactive);
+      longOnHueElm.val(hueInactive);
+      shortOffHueElm.val(hueInactive);
+      longOffHueElm.val(hueInactive);
+
+      shortOnSatElm.val(saturationInactive / 100);
+      longOnSatElm.val(saturationInactive / 100);
+      shortOffSatElm.val(saturationInactive / 100);
+      longOffSatElm.val(saturationInactive / 100);
+
+      tmpShortOnSatElm.val(saturationInactive);
+      tmpLongOnSatElm.val(saturationInactive);
+      tmpShortOffSatElm.val(saturationInactive);
+      tmpLongOffSatElm.val(saturationInactive);
+
+      if (userActivated && (curValColorTemp == colorTempInactive)) {
+        curValColorTemp = colorTempMax;
+      }
+
+      shortOnColorTempElm.val(curValColorTemp);
+      longOnColorTempElm.val(curValColorTemp);
+      shortOffColorTempElm.val(curValColorTemp);
+      longOffColorTempElm.val(curValColorTemp);
+
+      if (userActivated) {
+        shortOnColorTempElm.blur();
+      }
+
+      lblColorPickerElm.hide();
+      colorPickerElm.hide();
+      lblColorTempSliderElm.show();
+
+      if (selectOnColorTempModeElm.val() == "setColorTemp") {
+        selectOnColorTempModeElm.parent().parent().hide();
+        colorTempSliderElm.show();
+      }
+      break;
+    case 2:
+      shortOnHueElm.val(hueInactive);
+      longOnHueElm.val(hueInactive);
+      shortOffHueElm.val(hueInactive);
+      longOffHueElm.val(hueInactive);
+
+      shortOnSatElm.val(saturationInactive / 100);
+      longOnSatElm.val(saturationInactive / 100);
+      shortOffSatElm.val(saturationInactive / 100);
+      longOffSatElm.val(saturationInactive / 100);
+
+      tmpShortOnSatElm.val(saturationInactive);
+      tmpLongOnSatElm.val(saturationInactive);
+      tmpShortOffSatElm.val(saturationInactive);
+      tmpLongOffSatElm.val(saturationInactive);
+
+      shortOnColorTempElm.val(colorTempInactive);
+      longOnColorTempElm.val(colorTempInactive);
+      shortOffColorTempElm.val(colorTempInactive);
+      longOffColorTempElm.val(colorTempInactive);
+      break;
+
+  }
+};
 
 addLeadingZero = function(val) {
   if (typeof val == "string") {
@@ -616,7 +892,7 @@ convertSeconds2Option = function(sec) {
     seconds = parseFloat(seconds).toFixed(1);
   }
 
-  if (hours > 30) {return translateKey("optionPermanently")};
+  if (hours > 30) {return translateKey("optionPermanently");}
   if ((hours == 0) && (minutes == 0) && (seconds != 0)) {return seconds + " " + translateKey("optionUnitS");}
   if ((hours == 0) && (minutes != 0) && (seconds == 0)) {return minutes + " " + translateKey("optionUnitM");}
   if ((hours != 0) && (minutes == 0) && (seconds == 0)) {return hours + " " + translateKey("optionUnitH");}
@@ -702,7 +978,7 @@ getHTMLEffectLevel = function() {
         html += "<input type='text' id='effectLevel' class='alignCenter' size='5' onchange='proofUserEffectLevel(this)'>";
       html += "</td>";
     html += "</tr>";
-  html += "</table>"
+  html += "</table>";
 
   return html;
 
@@ -764,7 +1040,7 @@ setEffectTime = function(elm, mode, effectNo, subEffectNo) {
         el.html(getSortedOptions(el));
         el.val(8); // User defined value
 
-        _setEffectTime(elm, mode, effectNo, subEffectNo)
+        _setEffectTime(elm, mode, effectNo, subEffectNo);
 
       }
     }, "html");
@@ -1097,7 +1373,7 @@ getHTMLEffectName = function (curText) {
         html += "<input type='text' id='effectName' class='alignCenter' size='15' maxlength='15' value="+curText+">";
       html += "</td>";
     html += "</tr>";
-  html += "</table>"
+  html += "</table>";
 
   return html;
 };
@@ -1123,6 +1399,9 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
   }, "html");
 
   dlg.setWidth(450);
+  dlg.btnTextNo(translateKey("btnCancel"));
+  dlg.btnTextYes(translateKey("btnOk"));
+
   dlg.run = function() {
     var self = this,
      hueElm = jQuery("#hueElm"),
@@ -1133,7 +1412,7 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
      curHueValBin, curSatValBin,
      valHUE, valSAT, valLevel;
 
-    if (curHueSatTempBin == "0") {curHueSatTempBin = "0000000000000000";};
+    if (curHueSatTempBin == "0") {curHueSatTempBin = "0000000000000000";}
 
     curHueValBin = curHueSatTempBin.substr(0, curHueSatTempBin.length - 8);
     if (curHueValBin.length == 0) {curHueValBin = "0";}
@@ -1183,7 +1462,7 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
       var val, HUE, rgbVal;
       if (event.keyCode == 13) {
         val = parseInt(jQuery(this).val());
-        if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;};
+        if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;}
         jQuery(this).val(HUE);
         self.HUE = HUE;
         effectColorPicker.color.hsv = {h: parseInt(HUE), s: parseInt(self.SATURATION / 2), v: 100};
@@ -1196,7 +1475,7 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
     hueElm.blur(function(event) {
       var val, HUE, rgbVal;
       val = parseInt(jQuery(this).val());
-      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;};
+      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;}
       jQuery(this).val(HUE);
       self.HUE = HUE;
       effectColorPicker.color.hsv = {h: parseInt(HUE), s: parseInt(self.SATURATION / 2), v: 100};
@@ -1210,7 +1489,7 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
       var val, SATURATION, rgbVal;
       if (event.keyCode == 13) {
         val = parseInt(jQuery(this).val());
-        if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val >= 100) {SATURATION = 100;} else {SATURATION = val;};
+        if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val >= 100) {SATURATION = 100;} else {SATURATION = val;}
         jQuery(this).val(SATURATION);
         self.SATURATION = parseInt(SATURATION * 2);
 
@@ -1224,7 +1503,7 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
     satElm.blur(function(event) {
       var val, SATURATION, rgbVal;
         val = parseInt(jQuery(this).val());
-        if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val >= 100) {SATURATION = 100;} else {SATURATION = val;};
+        if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val >= 100) {SATURATION = 100;} else {SATURATION = val;}
         jQuery(this).val(SATURATION);
         self.SATURATION = parseInt(SATURATION * 2);
 
@@ -1252,7 +1531,7 @@ initSatColorTemp = function() {
       curVal = parseInt(jQuery("[name='"+effectNo+"_EFFECT_"+subEffectNo+"_COLOR_HUE_SATURATION_COLOR_TEMPERATURE_VALUE']").first().val());
 
       curHueSatTempBin = curVal.toString(2);
-      if (curHueSatTempBin == "0") {curHueSatTempBin = "0000000000000000";};
+      if (curHueSatTempBin == "0") {curHueSatTempBin = "0000000000000000";}
 
       curHueValBin = curHueSatTempBin.substr(0, curHueSatTempBin.length - 8);
       if (curHueValBin.length == 0) {curHueValBin = "0";}
@@ -1284,6 +1563,8 @@ setEffectColorTemp = function(elm, effectNo, subEffectNo) {
       jQuery("#color_" + effectNo + "_" + subEffectNo).text((parseInt(this.COLOR_TEMP) * 50) + " K");
     }
   }, "html");
+  dlg.btnTextNo(translateKey("btnCancel"));
+  dlg.btnTextYes(translateKey("btnOk"));
 
   dlg.run = function() {
     var self = this;
@@ -1339,10 +1620,12 @@ initColorTemp = function () {
 
 getEffectName = function (effectNr, devAddress) {
   var oDevice = DeviceList.getDeviceByAddress(devAddress),
-    effectName = homematic("Interface.getMetadata", {"objectId": oDevice.id, "dataId": "effectName_" + effectNr}); // null when not available
+    effectName = homematic("Interface.getMetadata", {"objectId": oDevice.id, "dataId": "effectName_" + effectNr}), // null when not available
+    defaultEffect = ["", "lblCampfire", "lblRainbow", "lblSunrise", "lblSunset", "lblWaterfall", "lblForest", "lblEffect7", "lblEffect8", "lblRedFlashing", "lblGreenWobble" ];
 
   if ((effectName == "null") || (effectName == "")) {
-    effectName = translateKey("lblEffect") + " " + effectNr;
+    effectName = translateKey(defaultEffect[effectNr]);
+    homematic("Interface.setMetadata", {"objectId": oDevice.id, "dataId": "effectName_" + effectNr, "value": effectName}, function(result){console.log(result);});
   }
 
   return effectName;
@@ -1375,4 +1658,170 @@ storeEffectName = function(devAddress) {
     homematic("Interface.setMetadata", {"objectId": oDevice.id , "dataId" : "effectName_" + arValue[0], "value": arValue[1]});
   });
   delete arNewEffectName;
+};
+
+// HCCT = HEATING_CLIMATE_CONTROL_TRANSCEIVER (e. g. eTRV-F)
+setColorHCCT = function(elm, prn, pref, param) {
+  var colorSelectElm = jQuery("#bckGndElm_" + pref),
+    // 01_EFFECT_01_COLOR_HUE_SATURATION_COLOR_TEMPERATURE_VALUE
+    hueSatTempElm = jQuery("[name='"+param+"']").first(),
+    binHue, binSat;
+
+  var dlg = new YesNoDialog("", getHTMLHueSatPicker(), function(result) {
+    var binColor;
+
+    if (result == 1) {
+      colorSelectElm.css("background-color", this.CSS_COLOR_ELM);
+
+      binHue = get8BitString(parseInt(this.HUE).toString(2));
+      binSat = get8BitString(parseInt(this.SATURATION).toString(2));
+
+      binColor = binHue + binSat;
+      hueSatTempElm.val(parseInt(binColor,2));
+    }
+  }, "html");
+
+  dlg.setWidth(450);
+  dlg.btnTextNo(translateKey("btnCancel"));
+  dlg.btnTextYes(translateKey("btnOk"));
+
+  dlg.run = function() {
+    var self = this,
+      hueElm = jQuery("#hueElm"),
+      satElm = jQuery("#satElm"),
+      bckGndElm = jQuery("#bckGndlm"),
+      curHueSatTempVal = parseInt(jQuery("[name='"+param+"']").first().val()), // EFFECT_ADAPTION_ON_HUE_SAT_VALUE
+      curHueSatTempBin = curHueSatTempVal.toString(2),
+      curHueValBin, curSatValBin,
+      valHUE, valSAT, valLevel;
+
+    if (curHueSatTempBin == "0") {curHueSatTempBin = "0000000000000000";}
+
+    curHueValBin = curHueSatTempBin.substr(0, curHueSatTempBin.length - 8);
+    if (curHueValBin.length == 0) {curHueValBin = "0";}
+    curSatValBin = curHueSatTempBin.slice(-8);
+
+    valLevel = 100;
+    valHUE = parseInt(curHueValBin,2);
+    valSAT = (parseInt(curSatValBin,2) / 2);
+
+    this.HUE = valHUE;
+    this.SATURATION = parseInt(valSAT * 2);
+
+    var effectColorPicker = new iro.ColorPicker("#effectColorPicker", {
+      // Set the size of the color picker
+      width: 90,
+      color: {h: valHUE, s: valSAT, v: valLevel},
+      wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
+      layout: [{component: iro.ui.Wheel}], // don't show the V slider below the wheel - this value has an own parameter
+      handleRadius: 4
+    });
+
+    effectColorPicker.on("mount", function(color) {
+      var rgbVal = hsvToRgb(valHUE, valSAT, 100);
+      hueElm.val(valHUE); satElm.val(valSAT);
+      bckGndElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+      self.CSS_COLOR_ELM = bckGndElm.css("background-color");
+    });
+
+    effectColorPicker.on("input:end", function(color) {
+      var hsv_H = color.hsv.h,
+        hsv_S = parseInt(color.hsv.s),
+        rgbVal;
+
+      hueElm.val(hsv_H);
+      self.HUE = hsv_H;
+
+      satElm.val(hsv_S);
+      self.SATURATION = parseInt(hsv_S * 2);
+
+      rgbVal = hsvToRgb(color.hsv.h, color.hsv.s, 100);
+      bckGndElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+      self.CSS_COLOR_ELM = bckGndElm.css("background-color");
+    });
+
+    // User input HUE
+    hueElm.keyup(function(event) {
+      var val, HUE, rgbVal;
+      if (event.keyCode == 13) {
+        val = parseInt(jQuery(this).val());
+        if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;}
+        jQuery(this).val(HUE);
+        self.HUE = HUE;
+        effectColorPicker.color.hsv = {h: parseInt(HUE), s: parseInt(self.SATURATION / 2), v: 100};
+        rgbVal = hsvToRgb(effectColorPicker.color.hsv.h, parseInt(self.SATURATION / 2), 100);
+        bckGndElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+        self.CSS_COLOR_ELM = bckGndElm.css("background-color");
+      }
+    });
+
+    hueElm.blur(function(event) {
+      var val, HUE, rgbVal;
+      val = parseInt(jQuery(this).val());
+      if (val < 0 || isNaN(val)) {HUE = 0;} else if (val >= 360) {HUE = 359;} else {HUE = val;}
+      jQuery(this).val(HUE);
+      self.HUE = HUE;
+      effectColorPicker.color.hsv = {h: parseInt(HUE), s: parseInt(self.SATURATION / 2), v: 100};
+      rgbVal = hsvToRgb(effectColorPicker.color.hsv.h, parseInt(self.SATURATION / 2), 100);
+      bckGndElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+      self.CSS_COLOR_ELM = bckGndElm.css("background-color");
+    });
+
+    // User input SATURATION
+    satElm.keyup(function(event) {
+      var val, SATURATION, rgbVal;
+      if (event.keyCode == 13) {
+        val = parseInt(jQuery(this).val());
+        if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val >= 100) {SATURATION = 100;} else {SATURATION = val;}
+        jQuery(this).val(SATURATION);
+        self.SATURATION = parseInt(SATURATION * 2);
+
+        effectColorPicker.color.hsv = {h: parseInt(self.HUE), s: parseInt(SATURATION), v: 100};
+        rgbVal = hsvToRgb(effectColorPicker.color.hsv.h, parseInt(SATURATION), 100);
+        bckGndElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+        self.CSS_COLOR_ELM = bckGndElm.css("background-color");
+      }
+    });
+
+    satElm.blur(function(event) {
+      var val, SATURATION, rgbVal;
+      val = parseInt(jQuery(this).val());
+      if (val < 0 || isNaN(val)) {SATURATION = 0;} else if (val >= 100) {SATURATION = 100;} else {SATURATION = val;}
+      jQuery(this).val(SATURATION);
+      self.SATURATION = parseInt(SATURATION * 2);
+
+      effectColorPicker.color.hsv = {h: parseInt(self.HUE), s: parseInt(SATURATION), v: 100};
+      rgbVal = hsvToRgb(effectColorPicker.color.hsv.h, parseInt(SATURATION), 100);
+      bckGndElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+      self.CSS_COLOR_ELM = bckGndElm.css("background-color");
+    });
+
+  };
+  dlg.effectNo = prn;
+  dlg.subEffectNo = pref;
+  dlg.run();
+  dlg.resetHeight();
+
+};
+
+initColorHCCT = function(pref, param) {
+  var colorSelectElm = jQuery("#bckGndElm_" + pref),
+    hue = 0, sat = 100,
+    curVal = parseInt(jQuery("[name='"+param+"']").first().val()),
+    curHueSatTempBin = curVal.toString(2),
+    curHueValBin,curSatValBin, valHUE, valSAT, rgbVal;
+
+  if (curHueSatTempBin == "0") {curHueSatTempBin = "0000000000000000";}
+
+  curHueValBin = curHueSatTempBin.substr(0, curHueSatTempBin.length - 8);
+  if (curHueValBin.length == 0) {curHueValBin = "0";}
+
+  curSatValBin = curHueSatTempBin.slice(-8);
+  valHUE = parseInt(curHueValBin,2);
+  valSAT = (parseInt(curSatValBin,2) / 2);
+
+  rgbVal = hsvToRgb(valHUE, valSAT, 100);
+
+  colorSelectElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
+
 };

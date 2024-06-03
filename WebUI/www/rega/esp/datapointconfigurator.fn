@@ -108,6 +108,7 @@ function ::dcCreate()
     var CN_CARBON_DIOXIDE_RECEIVER = "CARBON_DIOXIDE_RECEIVER.";
     var CN_CLIMATE_CONTROL_FLOOR_PUMP_TRANSCEIVER = "CLIMATECONTROL_FLOOR_PUMP_TRANSCEIVER.";
     var CN_CLIMATE_CONTROL_FLOOR_TRANSCEIVER = "CLIMATECONTROL_FLOOR_TRANSCEIVER.";
+    var CN_CLIMATE_TRANSCEIVER = "CLIMATE_TRANSCEIVER.";
     var CN_COLORTEMP = "COLORTEMP.";
     var CN_COND_SWITCH_TRANSMITTER_TEMPERATURE = "COND_SWITCH_TRANSMITTER_TEMPERATURE.";
     var CN_DANGER          = "_DANGER.";
@@ -322,7 +323,7 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_TRANSMITTER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_TRANSMITTER;
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL") && (ch.Label() != "HmIP-BBL-I")) {
               Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -331,7 +332,6 @@ function ::dcCreate()
               } else {
                 Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
               }
-
             }
           }
 
@@ -342,7 +342,7 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_VIRTUAL_RECEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_VIRTUAL_RECEIVER;
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL") && (ch.Label() != "HmIP-BBL-I")) {
               Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -414,6 +414,16 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_NOT_ACTIVE;
             Call("/esp/datapointconfigurator.fn::CreateChannelNotActive()");
+          }
+
+          !# CLIMATE_TRANSCEIVER
+          bIsControl = ( sControlName.Find(CN_CLIMATE_TRANSCEIVER) > -1 );
+          if( bIsControl && (sLastControlName != CN_CLIMATE_TRANSCEIVER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_CLIMATE_TRANSCEIVER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_CLIMATE_TRANSCEIVER;
+            Call("/esp/controls/climate_transceiver.fn::CreateClimateTransceiver()");
           }
 
           !# CN_CLIMATE_CONTROL_FLOOR_PUMP_TRANSCEIVER - HmIP

@@ -2,12 +2,20 @@ function ::CreateAccelerationTransceiver()
 {
   object objMotion = cObj.DPByControl("ACCELERATION_TRANSCEIVER.MOTION");
   object objTiltAngle = cObj.DPByControl("ACCELERATION_TRANSCEIVER.ABSOLUTE_ANGLE");
+  object objTiltState = cObj.DPByControl("ACCELERATION_TRANSCEIVER.STATE");
+  object objTiltAngleStatus = cObj.DPByControl("ACCELERATION_TRANSCEIVER.ABSOLUTE_ANGLE_STATUS");
 
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
 
+  integer tiltState = -1;
   integer tiltAngle = -1;
   string tiltUnit = "";
+
+  if (objTiltState)
+  {
+    tiltState = objTiltState.Value();
+  }
 
   if( objTiltAngle )
   {
@@ -21,7 +29,12 @@ function ::CreateAccelerationTransceiver()
       WriteLine("<table align='center'>");
         WriteLine("<tr>");
           WriteLine("<td class='CLASS02518'>");
-            WriteLine("<div id='accelerationState"#chnId#"' class='ControlBtnInfo CLASS02532'>--</div>");
+            WriteLine("<div id='firstElm"#chnId#"' class='ControlBtnInfo CLASS02532'>--</div>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+        WriteLine("<tr> ");
+          WriteLine("<td class='CLASS02518'>");
+            WriteLine("<div id='angleElm"#chnId#"' class='ControlBtnInfo CLASS02532'>--</div>");
           WriteLine("</td>");
         WriteLine("</tr>");
       WriteLine("</table>");
@@ -30,7 +43,7 @@ function ::CreateAccelerationTransceiver()
 
   WriteLine("<script type='text/javascript'>");
     WriteLine("console.log('"#objMotion#"','"#objTiltAngle#"');");
-    WriteLine("its"#chnId#" = new iseAccelerationTransceiver('"#chnId#"', '"#objMotion.Value()#"', '"#chnAddress#"', '"#tiltAngle#"', '"#tiltUnit#"');");
+    WriteLine("its"#chnId#" = new iseAccelerationTransceiver('"#chnId#"', '"#objMotion.Value()#"', '"#chnAddress#"', '"#tiltAngle#"', '"#tiltUnit#"',"#tiltState#");");
   WriteLine("</script>");
 
   return;

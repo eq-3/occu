@@ -1060,23 +1060,24 @@ proc getTimeOnOff {prn pref specialElement} {
         append s "<option value=\"1\">\${optionUnit100MS}</option>"
         append s "<option value=\"2\">\${optionUnit1S}</option>"
         append s "<option value=\"3\">\${optionUnit2S}</option>"
-        append s "<option value=\"4\">\${optionUnit5S}</option>"
-        append s "<option value=\"5\">\${optionUnit10S}</option>"
-        append s "<option value=\"6\">\${optionUnit30S}</option>"
-        append s "<option value=\"7\">\${optionUnit1M}</option>"
-        append s "<option value=\"8\">\${optionUnit2M}</option>"
-        append s "<option value=\"9\">\${optionUnit5M}</option>"
-        append s "<option value=\"10\">\${optionUnit10M}</option>"
-        append s "<option value=\"11\">\${optionUnit30M}</option>"
-        append s "<option value=\"12\">\${optionUnit1H}</option>"
-        append s "<option value=\"13\">\${optionUnit2H}</option>"
-        append s "<option value=\"14\">\${optionUnit3H}</option>"
-        append s "<option value=\"15\">\${optionUnit5H}</option>"
-        append s "<option value=\"16\">\${optionUnit8H}</option>"
-        append s "<option value=\"17\">\${optionUnit12H}</option>"
-        append s "<option value=\"18\">\${optionUnit24H}</option>"
-        append s "<option value=\"19\">\${stringTablePermanent}</option>"
-        append s "<option value=\"20\">\${stringTableEnterValue}</option>"
+        append s "<option value=\"4\">\${optionUnit3S}</option>"
+        append s "<option value=\"5\">\${optionUnit5S}</option>"
+        append s "<option value=\"6\">\${optionUnit10S}</option>"
+        append s "<option value=\"7\">\${optionUnit30S}</option>"
+        append s "<option value=\"8\">\${optionUnit1M}</option>"
+        append s "<option value=\"9\">\${optionUnit2M}</option>"
+        append s "<option value=\"10\">\${optionUnit5M}</option>"
+        append s "<option value=\"11\">\${optionUnit10M}</option>"
+        append s "<option value=\"12\">\${optionUnit30M}</option>"
+        append s "<option value=\"13\">\${optionUnit1H}</option>"
+        append s "<option value=\"14\">\${optionUnit2H}</option>"
+        append s "<option value=\"15\">\${optionUnit3H}</option>"
+        append s "<option value=\"16\">\${optionUnit5H}</option>"
+        append s "<option value=\"17\">\${optionUnit8H}</option>"
+        append s "<option value=\"18\">\${optionUnit12H}</option>"
+        append s "<option value=\"19\">\${optionUnit24H}</option>"
+        append s "<option value=\"20\">\${stringTablePermanent}</option>"
+        append s "<option value=\"21\">\${stringTableEnterValue}</option>"
       append s "/<select>"
       append s "</td>"
 
@@ -1093,37 +1094,38 @@ proc getTimeOnOff {prn pref specialElement} {
           append s "optionMap\[\"01\"\] = 1;"
           append s "optionMap\[\"11\"\] = 2;"
           append s "optionMap\[\"12\"\] = 3;"
-          append s "optionMap\[\"21\"\] = 4;"
-          append s "optionMap\[\"31\"\] = 5;"
-          append s "optionMap\[\"33\"\] = 6;"
-          append s "optionMap\[\"41\"\] = 7;"
-          append s "optionMap\[\"42\"\] = 8;"
-          append s "optionMap\[\"45\"\] = 9;" ;# 5 Minutes - floor terminal block 6 or 10 channels
-          append s "optionMap\[\"51\"\] = 9;" ;# 5 Minutes - all other devices
-          append s "optionMap\[\"61\"\] = 10;"
-          append s "optionMap\[\"63\"\] = 11;"
-          append s "optionMap\[\"71\"\] = 12;"
-          append s "optionMap\[\"72\"\] = 13;"
-          append s "optionMap\[\"73\"\] = 14;"
-          append s "optionMap\[\"75\"\] = 15;"
-          append s "optionMap\[\"78\"\] = 16;"
-          append s "optionMap\[\"712\"\] = 17;"
-          append s "optionMap\[\"724\"\] = 18;"
-          append s "optionMap\[\"731\"\] = 19;"
+          append s "optionMap\[\"13\"\] = 4;"
+          append s "optionMap\[\"21\"\] = 5;"
+          append s "optionMap\[\"31\"\] = 6;"
+          append s "optionMap\[\"33\"\] = 7;"
+          append s "optionMap\[\"41\"\] = 8;"
+          append s "optionMap\[\"42\"\] = 9;"
+          append s "optionMap\[\"45\"\] = 10;" ;# 5 Minutes - floor terminal block 6 or 10 channels
+          append s "optionMap\[\"51\"\] = 10;" ;# 5 Minutes - all other devices
+          append s "optionMap\[\"61\"\] = 11;"
+          append s "optionMap\[\"63\"\] = 12;"
+          append s "optionMap\[\"71\"\] = 13;"
+          append s "optionMap\[\"72\"\] = 14;"
+          append s "optionMap\[\"73\"\] = 15;"
+          append s "optionMap\[\"75\"\] = 16;"
+          append s "optionMap\[\"78\"\] = 17;"
+          append s "optionMap\[\"712\"\] = 18;"
+          append s "optionMap\[\"724\"\] = 19;"
+          append s "optionMap\[\"731\"\] = 20;"
 
           append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() :jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
           append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
 
 
           append s "currentVal = baseVal+factorVal,"
-          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 20;"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 21;"
           append s "window.setTimeout(function() {jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal).change();}, 10);"
 
           #append s "console.log(\"ONTIME baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
 
 
           # Enter user value
-          append s "if (optionVal == 20) {"
+          append s "if (optionVal == 21) {"
             append s "timeBaseTRElem.show();"
             append s "timeFactorTRElem.show();"
             append s "spaceTRElem.show();"
@@ -1165,88 +1167,93 @@ proc getTimeOnOff {prn pref specialElement} {
               append s "baseElem.val(1);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 4:"
+            append s "case4:"
+              # 3 s
+              append s "baseElem.val(1);"
+              append s "factorElem.val(3);"
+              append s "break;"
+            append s "case 5:"
               # 5 s
               append s "baseElem.val(2);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 5:"
+            append s "case 6:"
               # 10 s
               append s "baseElem.val(3);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 6:"
+            append s "case 7:"
               # 30 s
               append s "baseElem.val(3);"
               append s "factorElem.val(3);"
               append s "break;"
-            append s "case 7:"
+            append s "case 8:"
               # 1 m
               append s "baseElem.val(4);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 8:"
+            append s "case 9:"
               # 2 m
               append s "baseElem.val(4);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 9:"
+            append s "case 10:"
               # 5 m
               append s "baseElem.val(5);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 10:"
+            append s "case 11:"
               # 10 m
               append s "baseElem.val(6);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 11:"
+            append s "case 12:"
               # 30 m
               append s "baseElem.val(6);"
               append s "factorElem.val(3);"
               append s "break;"
 
-            append s "case 12:"
+            append s "case 13:"
               # 1 h
               append s "baseElem.val(7);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 13:"
+            append s "case 14:"
               # 2 h
               append s "baseElem.val(7);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 14:"
+            append s "case 15:"
               # 3 h
               append s "baseElem.val(7);"
               append s "factorElem.val(3);"
               append s "break;"
-            append s "case 15:"
+            append s "case 16:"
               # 5 h
               append s "baseElem.val(7);"
               append s "factorElem.val(5);"
               append s "break;"
-            append s "case 16:"
+            append s "case 17:"
               # 8 h
               append s "baseElem.val(7);"
               append s "factorElem.val(8);"
               append s "break;"
-            append s "case 17:"
+            append s "case 18:"
               # 12 h
               append s "baseElem.val(7);"
               append s "factorElem.val(12);"
               append s "break;"
-            append s "case 18:"
+            append s "case 19:"
               # 24 h
               append s "baseElem.val(7);"
               append s "factorElem.val(24);"
               append s "break;"
-            append s "case 19:"
+            append s "case 20:"
               # Unendlich
               append s "baseElem.val(7);"
               append s "factorElem.val(31);"
               append s "break;"
-            append s "case 20:"
+            append s "case 21:"
               # Wert eingeben
                append s "timeBaseTRElem.show();"
                append s "timeFactorTRElem.show();"
@@ -1398,7 +1405,7 @@ proc getSwitchingInterval {prn pref specialElement} {
       set s ""
       append s "<td>"
       append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setSwitchingIntervalValues(this.id, $prn, $pref, \'$specialElement\')\">"
-        append s "<option value=\"0\">\${optionNotActive}</option>"
+      # SPHM-1282  append s "<option value=\"0\">\${optionNotActive}</option>"
         append s "<option value=\"1\">\${optionUnit1D}</option>"
         append s "<option value=\"2\">\${optionUnit7D}</option>"
         append s "<option value=\"3\">\${optionUnit14D}</option>"
@@ -2680,14 +2687,18 @@ proc isLongKeypressAvailable {sender sender_address url} {
 }
 
 proc devIsPowerMeter {devType} {
-   switch [string tolower $devType] {
-        hmip-bsm  {return true}
-        hmip-fsm  {return true}
-        hmip-fsm16  {return true}
-        hmip-psm  {return true}
-        hmip-usbsm  {return true}
-      default {return false}
-    }
+  # puts "devType: $devType<br/>"
+
+  switch [string tolower $devType] {
+    hmip-bsm  {return true}
+    hmip-fsm  {return true}
+    hmip-fsm16  {return true}
+    hmip-psm  {return true}
+    hmip-psm-2  {return true}
+    "hmip-psm-2 qhj"  {return true}
+    hmip-usbsm  {return true}
+    default {return false}
+  }
 }
 
 proc getDevFirmware {} {

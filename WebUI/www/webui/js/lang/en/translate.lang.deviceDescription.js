@@ -26,6 +26,8 @@ jQuery.extend(true,langJSON, {
     "BSM": "Homematic IP Switch Actuator with power measurement",
     "DEVICE": "Unknown device",
     "ELV-SH-BM-S" : "ELV Smart Home Sensor-Base",
+    "ELV-SH-SB8" : "ELV Switch Actuator with OC-Output",
+    "ELV-SH-TACO" : "ELV Smart Home<br/>Temperature and Acceleration Sensor<br/>Outdoor",
     "FDT": "Homematic IP Dimming Actuator, flush-mount",
     "FSM": "Homematic IP Switch Actuator with power measurement, flush-mount",
     "FSM16": "Homematic IP Switch Actuator with power measurement, flush-mount",
@@ -198,6 +200,9 @@ jQuery.extend(true,langJSON, {
     "HmIP-FBL": "Homematic IP Blinds Actuator - flush-mount",
     "HmIP-FCI1": "Homematic IP Contact Interface flush-mount - 1 channel",
     "HmIP-FCI6": "Homematic IP Contact Interface flush-mount - 6 channels",
+
+    "HmIP-FLC" : "Homematic IP Universal Lock Controller",
+
     "HmIP-FROLL": "Homematic IP Blind Actuator, flush-mount",
     "HmIP-FSI16" : "Homematic IP Switch Actuator with Push-button Input (16 A) - flush-mount",
     "HmIP-FWI" : "Homematic IP Wiegand Interface",
