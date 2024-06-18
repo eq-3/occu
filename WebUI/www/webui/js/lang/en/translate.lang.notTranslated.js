@@ -2,34 +2,34 @@ jQuery.extend(true, langJSON, {
   "en": {
     "comment" : "Release B/2024 - not yet translated",
 
-    "lblCampfire" : "en* Lagerfeuer",
-    "lblRainbow" : "en* Regenbogen",
-    "lblSunrise" : "en* Sonnenaufgang",
-    "lblSunset" : "en* Sonnenuntergang",
-    "lblWaterfall" : "en* Wasserfall",
-    "lblForest" : "en* Wald",
-    "lblEffect7" : "en* Effekt 7",
-    "lblEffect8" : "en* Effekt 8",
-    "lblRedFlashing" : "en* rotes Blinken",
-    "lblGreenWobble" : "en* gr%FCnes Wabern",
+    "lblCampfire" : "Campfire",
+    "lblRainbow" : "Rainbow",
+    "lblSunrise" : "Sunrise",
+    "lblSunset" : "Sunset",
+    "lblWaterfall" : "Waterfall",
+    "lblForest" : "Forest",
+    "lblEffect7" : "Effect 7",
+    "lblEffect8" : "Effect 8",
+    "lblRedFlashing" : "red flashing",
+    "lblGreenWobble" : "green swirls",
 
-    "lblDisplayModeETRV" : "en* Displaymodus",
-    "optionReducedMode" : "en* Reduzierter Modus",
-    "optionFunctionalMode" : "en* Funktioneller Modus",
+    "lblDisplayModeETRV" : "Display mode",
+    "optionReducedMode" : "Reduced mode",
+    "optionFunctionalMode" : "Functional mode",
 
-    "lblDisplayColor" : "en* Displayfarbe",
-    "optionNormalColors" : "en* Normal",
-    "optionInvertedColors" : "en Invertiert",
+    "lblDisplayColor" : "Display colour",
+    "optionNormalColors" : "Normal",
+    "optionInvertedColors" : "Inverted",
 
-    "optionAllowed" : "en* Berechtigt",
-    "optionNotAllowed" : "en* Nicht berechtigt",
+    "optionAllowed" : "Authorised",
+    "optionNotAllowed" : "Not authorised",
 
-    "lblPermission" : "en* Berechtigung",
+    "lblPermission" : "Authorisation",
 
-    "stringTablePermissionStateFalse" : "en* Kanal nicht berechtigt",
-    "stringTablePermissionStateTrue" : "en* Kanal berechtigt",
+    "stringTablePermissionStateFalse" : "Channel not authorised",
+    "stringTablePermissionStateTrue" : "Channel authorised",
 
-    "lblAngle" : "en* Winkel",
+    "lblAngle" : "Angle",
 
     "noMoreKeys" : ""
   }

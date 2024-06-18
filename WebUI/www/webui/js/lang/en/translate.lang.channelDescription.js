@@ -1,6 +1,6 @@
 jQuery.extend(true,langJSON, {
   "en" : {
-    "chType_ACCELERATION_TRANSCEIVER" : "en* Lage-/Beschleunigungssensor",
+    "chType_ACCELERATION_TRANSCEIVER" : "Position/Acceleration sensor",
     "chType_ACCESS_RECEIVER" : "User",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_1" : "Homematic IP Wired Bus Channel 1",
     "chType_ACCESSPOINT_GENERIC_RECEIVER_2" : "Homematic IP Wired Bus Channel 2",

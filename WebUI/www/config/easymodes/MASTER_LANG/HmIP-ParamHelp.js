@@ -472,13 +472,13 @@ jQuery.extend(true,langJSON, {
       "Diese Checkbox dient dazu, Fehlermeldungen an unbenutzten Kan%E4len auf der Seite Status/Bedienung zu vermeiden. Aktivieren Sie diese Checkbox daher nur, wenn der Kanal auch benutzt wird.",
 
     "DISPLAY_MODE" :
-      "Mit diesem Parameter kann zwischen folgenden beiden Display-Layouts gew%E4hlt werden:<br/><br/>" +
+      "Mit diesem Parameter kann zwischen folgenden Display-Layouts gew%E4hlt werden:<br/><br/>" +
       "<b><u>Reduzierter Modus</u></b><br>" +
-      "Die Informationen im Display sind auf ein Minimum reduziert, bei besonders gro%DFer Anzeige der Soll-Temperatur.<br/><br/>" +
-      "\"<b><u>Funktioneller Modus</u></b><br/>" +
-      "Im funktionellen Modus werden mehr Informationen auf dem Display dargestellt.<br/>",
+      "Die Informationen im Display sind auf ein Minimum reduziert, die Soll-Temperatur wird groﬂ dargestellt.<br/><br/>" +
+      "<b><u>Funktioneller Modus</u></b><br/>" +
+      "Im funktionellen Modus werden zus‰tzliche Informationen auf dem Display dargestellt.<br/>",
 
-      "DISPLAY_INVERTED_COLORS"  : "Mit diesem Parameter w%E4hlen Sie f%FCr das Display die normale Anzeige oder den Dunkelmodus.",
+      "DISPLAY_INVERTED_COLORS"  : "Mit diesem Parameter w%E4hlen Sie die Standard-Anzeige im Lightmode oder den Darkmode f%FCr das Display aus.",
 
     "noMoreHelp" : ""
   },
@@ -950,13 +950,13 @@ jQuery.extend(true,langJSON, {
       "This checkbox is used to avoid error messages for unused channels on the status/operation screen. Therefore, only activate this checkbox if the channel is actually being used.",
 
     "DISPLAY_MODE" :
-      "en* Mit diesem Parameter kann zwischen folgenden beiden Display-Layouts gew%E4hlt werden:<br/><br/>" +
-      "<b><u>Reduzierter Modus</u></b><br>" +
-      "Die Informationen im Display sind auf ein Minimum reduziert, bei besonders gro%DFer Anzeige der Soll-Temperatur.<br/><br/>" +
-      "\"<b><u>Funktioneller Modus</u></b><br/>" +
-      "Im funktionellen Modus werden mehr Informationen auf dem Display dargestellt.<br/>",
+      "This parameter can be used to select between the following display layouts:<br/><br/>" +
+      "<b><u>Reduced mode</u></b><br>" +
+      "The information in the display is reduced to a minimum, the set temperature is shown in large letters.<br/><br/>" +
+      "<b><u>Functional mode</u></b><br/>" +
+      "In functional mode, additional information is shown on the display.<br/>",
 
-    "DISPLAY_INVERTED_COLORS"  : "en* Mit diesem Parameter w%E4hlen Sie f%FCr das Display die normale Anzeige oder den Dunkelmodus.",
+    "DISPLAY_INVERTED_COLORS"  : "Use this parameter to select the standard display in light mode or dark mode for the display.",
 
     "noMoreHelp" : ""
     }

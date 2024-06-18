@@ -116,7 +116,7 @@ jQuery.extend(true,langJSON, {
     "HCCTransEffectAdaption" : "Signalfarben w%E4hrend der Adaptionsfahrt",
     "HCCTransEffectBoost" : "Signalfarben w%E4hrend der Boostphase",
 
-    "lbl_fade_out_time" : "Rammpenzeit 1",
+    "lbl_fade_out_time" : "Rampenzeit 1",
     "lbl_off_hold_time" : "Haltezeit 1",
     "lbl_off_color" : "Farbe 1",
     "lbl_off_level" : "Helligkeit 1",
@@ -238,22 +238,22 @@ jQuery.extend(true,langJSON, {
     "lblTemperatureWindowOpenHeating" : "Open-window temperature<br/>in heating mode",
     "lblTemperatureWindowOpenCooling" : "Open-window temperature<br/>in cooling mode",
 
-    "lblSignalColor" : "en* Signalfarben",
+    "lblSignalColor" : "Signal colours",
 
     "btnShowEtrvEffects" : "Configure",
-    "titleHeatingClimateControlTransEffect" : "en* Signalfarben",
-    "HCCTransEffectAdaption" : "en* Signalfarben w%E4hrend der Adaptionsfahrt",
-    "HCCTransEffectBoost" : "en* Signalfarben w%E4hrend der Boostphase",
+    "titleHeatingClimateControlTransEffect" : "Signal colours",
+    "HCCTransEffectAdaption" : "Signal colours during the adaptation drive",
+    "HCCTransEffectBoost" : "Signal colours during the boost phase",
 
-    "lbl_fade_out_time" : "en* Rammpenzeit 1",
-    "lbl_off_hold_time" : "en* Haltezeit 1",
-    "lbl_off_color" : "en* Farbe 1",
-    "lbl_off_level" : "en* Helligkeit 1",
+    "lbl_fade_out_time" : "Ramp time 1",
+    "lbl_off_hold_time" : "Hold time 1",
+    "lbl_off_color" : "Colour 1",
+    "lbl_off_level" : "Brightness 1",
 
-    "lbl_fade_in_time" : "en* Rampenzeit 2",
-    "lbl_on_hold_time" : "en* Haltezeit 2",
-    "lbl_on_color" : "en* Farbe 2",
-    "lbl_on_level" : "en* Helligkeit 2",
+    "lbl_fade_in_time" : "Ramp time 2",
+    "lbl_on_hold_time" : "Hold time 2",
+    "lbl_on_color" : "Colour 2",
+    "lbl_on_level" : "Brightness 2",
 
     "dummy" : ""
   }
