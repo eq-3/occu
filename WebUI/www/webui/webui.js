@@ -40381,7 +40381,7 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
 
   // See SPHM-1301
   saveValue: function() {
-    var level2Value;
+    var self=this, level2Value;
     this.state = (this.state != -1) ? this.state : 0;
       blindLevelDestination[this.id] = this.state;
       if (this.pressedUpDown == "DOWN") {
@@ -40396,10 +40396,18 @@ iseHmIPJalousieShutter = Class.create(iseButtonsShutter, {
           {name: 'LEVEL_2', type: 'double', value: level2Value}
         ]
       }, function (result) {
-        conInfo(result);
-      });
+        conInfo("1st try: " + result);
+        if (result == null) {
+          homematic("Interface.putParamset", {
+            'interface': self.Interface, 'address': self.opts.chnAddress, 'paramsetKey': 'VALUES', 'set': [
+              {name: 'LEVEL', type: 'double', value: self.state / 100}
+            ]
+          }, function (result) {
+            conInfo("2nd try: " + result);
+          });
+        }
+     });
   }
-
 });
 iseDualWhiteColorController = Class.create();
 
@@ -41555,10 +41563,40 @@ iseMOD_RC8.prototype = {
   }
 };iseAccelerationTransceiver = Class.create();
 iseAccelerationTransceiver.prototype = {
+  initialize: function (chnId, valMotion, chnAddress, tiltAngle, tiltAngleUnit) {
+    var self = this;
+    this.chnId = chnId;
+    this.valMotion = valMotion;
+    this.chnAddress = chnAddress;
+    this.tiltAngle = tiltAngle;
+    this.tiltAngleUnit = tiltAngleUnit;
+
+    var tmp = homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": this.chnAddress, "valueKey": "CHANNEL_OPERATION_MODE"},function(result) {
+      var outputElm = jQuery("#accelerationState" + chnId);
+      var arMessage = ["",translateKey("lblVibration"),translateKey("lblPosition"), translateKey("lblTilt")],
+      arMotion = [translateKey("lblNo"), translateKey("lblYes")],
+      arPosition = [translateKey("lblHorizontal"), translateKey("lblNonHorizontal")],
+      res = "--";
+
+      switch (parseInt(result)) {
+        case 1:
+          res = (self.valMotion == "false") ? arMotion[0] : arMotion[1];
+          break;
+        case 2:
+          res = (self.valMotion == "false") ? arPosition[0] : arPosition[1];
+          break;
+        case 3:
+          res = self.tiltAngle + self.tiltAngleUnit;
+          break;
+      }
+      outputElm.html(arMessage[result] + ":<br/>"+ res );
+    });
+  }
+};
+
+iseAccelerationTransceiverTaco = Class.create();
+iseAccelerationTransceiverTaco.prototype = {
   initialize: function (chnId, valMotion, chnAddress, tiltAngle, tiltAngleUnit, position) {
-
-    //console.log("valMotion: " + valMotion + " - tiltAngle: " + tiltAngle + " - tiltAngleUnit: " + tiltAngleUnit + " - position: " + position );
-
     var self = this;
     this.chnId = chnId;
     this.valMotion = valMotion;

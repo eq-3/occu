@@ -3013,7 +3013,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
     append html "</tr>"
   append html "</table>"
 
-  if { ($iface != "VirtualDevices") && (([info exists ps(CHANNEL_OPERATION_MODE)] == 1) || ([info exists ps(ACOUSTIC_ALARM_SIGNAL)] == 1) || ([info exists ps(EFFECT_ADAPTION_FADE_OUT_TIME_FACTOR)] == 1))  } {
+  if { ([info exists ps(CHANNEL_OPERATION_MODE)] == 1) || ([info exists ps(ACOUSTIC_ALARM_SIGNAL)] == 1) || ([info exists ps(EFFECT_ADAPTION_FADE_OUT_TIME_FACTOR)] == 1)  } {
     append html "<hr>"
     append html "<table class=\"ProfileTbl\">"
       set param CHANNEL_OPERATION_MODE
@@ -3050,9 +3050,11 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       }
     append html "</table>"
 
-    append html "<table class='ProfileTbl j_effectPanel hidden'>"
-     append html "[getHeatingControlEffects $chn]"
-    append html "</table>"
+    if { [info exists ps($param)] == 1  } {
+      append html "<table class='ProfileTbl j_effectPanel hidden'>"
+       append html "[getHeatingControlEffects $chn]"
+      append html "</table>"
+    }
   }
 
   if {[session_is_expert]} {
@@ -4136,7 +4138,7 @@ proc getAccelerationTransceiver {chn p descr address} {
       set options(1) "\${motionDetectorChannelOperationModeAnyMotion}"
       set options(2) "\${motionDetectorChannelOperationModeFlat}"
 
-      if {$newFw} {
+      if {$newFw && ([string equal $devType "HmIP-SAM"] != 1) } {
         set options(3) "\${motionDetectorChannelOperationModeTilt}"
       }
 

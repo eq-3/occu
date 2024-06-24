@@ -214,7 +214,11 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control CN_ACCELERATION_TRANSCEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_ACCELERATION_TRANSCEIVER;
-            Call("/esp/controls/acceleration_transceiver.fn::CreateAccelerationTransceiver()");
+            if (ch.Label() == "ELV-SH-TACO") {
+              Call("/esp/controls/acceleration_transceiver.fn::CreateAccelerationTransceiverTaco()");
+            } else {
+              Call("/esp/controls/acceleration_transceiver.fn::CreateAccelerationTransceiver()");
+            }
           }
 
           !#ACCESSPOINT_GENERIC_RECEIVER
