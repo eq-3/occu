@@ -474,9 +474,9 @@ jQuery.extend(true,langJSON, {
     "DISPLAY_MODE" :
       "Mit diesem Parameter kann zwischen folgenden Display-Layouts gew%E4hlt werden:<br/><br/>" +
       "<b><u>Reduzierter Modus</u></b><br>" +
-      "Die Informationen im Display sind auf ein Minimum reduziert, die Soll-Temperatur wird groﬂ dargestellt.<br/><br/>" +
+      "Die Informationen im Display sind auf ein Minimum reduziert, die Soll-Temperatur wird gro%DF dargestellt.<br/><br/>" +
       "<b><u>Funktioneller Modus</u></b><br/>" +
-      "Im funktionellen Modus werden zus‰tzliche Informationen auf dem Display dargestellt.<br/>",
+      "Im funktionellen Modus werden zus%E4tzliche Informationen auf dem Display dargestellt.<br/>",
 
       "DISPLAY_INVERTED_COLORS"  : "Mit diesem Parameter w%E4hlen Sie die Standard-Anzeige im Lightmode oder den Darkmode f%FCr das Display aus.",
 

@@ -77,9 +77,9 @@ proc getChannelFunction {param prn special_input_id} {
     set options(1) "\${stringTableKeySwitchBehavior}"
     set options(2) "\${stringTableKeyBinaryBehavior}"
     set options(3) "\${stringTableKeyInactive}"
-    append s "[get_ComboBox options $param separate_${special_input_id}_$prn ps $param onchange=\"onChangeChannelFunction(this.id)\");]"
-
-    puts "<script type=\"text/javascript\">origRemoteModEM8Val\[$ch\] = $ps($param);jQuery('#separate_${special_input_id}_$prn').prop('disabled', true);</script>"
+    append s "[get_ComboBox options $param separate_${special_input_id}_$prn ps $param onchange=\"onChangeChannelFunction(this.id)\";]"
+    # puts "<script type=\"text/javascript\">origRemoteModEM8Val\[$ch\] = $ps($param);jQuery('#separate_${special_input_id}_$prn').prop('disabled', true);</script>"
+    puts "<script type=\"text/javascript\">origRemoteModEM8Val\[$ch\] = $ps($param);</script>"
 
     return $s
 }
