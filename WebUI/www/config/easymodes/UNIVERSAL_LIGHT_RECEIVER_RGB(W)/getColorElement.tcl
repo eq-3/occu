@@ -18,7 +18,9 @@ proc getSelectEffectElement {p special_input_id param} {
   return $html
 }
 
-proc getColorPicker {pps keyPress} {
+proc getColorPicker {pps keyPress {showLastValue 1} {onOff "ON"}} {
+  global dev_descr_receiver dev_descr_receiver
+
   upvar $pps ps
   upvar prn prn
   upvar pref pref
@@ -32,7 +34,14 @@ proc getColorPicker {pps keyPress} {
   if {$valHUE > 360} {set valHUE 361}
 
   append html "<tr>"
-    append html "<td>\${ON_COLOR}</td>"
+    if {$onOff == "ON"} {
+      append html "<td>\${ON_COLOR}</td>"
+    } elseif {$onOff == "ON_OFF"} {
+      append html "<td>\${ONOFF_COLOR}</td>"
+    } else {
+      append html "<td>\${OFF_COLOR}</td>"
+    }
+
     append html "<td>"
       append html "<select id='selectOnColor_$prn' onchange='selectOnColor(this.value, $prn, $pref, $valHUE, $valSAT)'>"
 
@@ -42,15 +51,20 @@ proc getColorPicker {pps keyPress} {
         } else {
           set selectedLastVAl ""
           set selectedColor "selected='selected'"
-       }
-
-        append html "<option value='lastValue' $selectedLastVAl>\${lastValue}</option>"
+        }
+        if {([string equal $dev_descr_receiver(PARENT_TYPE) "HmIP-LSC"] != 1)} {
+         append html "<option value='lastValue' $selectedLastVAl>\${lastValue}</option>"
+        } else {
+          if {$showLastValue == 1} {
+            append html "<option value='lastValue' $selectedLastVAl>\${lastValue}</option>"
+          }
+        }
         append html "<option value='setColor' $selectedColor>\${optionColorVal}</option>"
       append html "</select>"
     append html "</td>"
   append html "</tr>"
 
-  append html "<tr id='trColorPicker_$prn\_$pref'>"
+  append html "<tr id='trColorPicker_$prn\_$pref' name='j_trColorPicker_$prn'>"
     append html "<td> </td>"
     append html "<td>"
       append html "<div id='anchorColorPicker_$prn\_$pref'></div>"
@@ -63,13 +77,13 @@ proc getColorPicker {pps keyPress} {
             append html "H"
           append html "</td>"
           append html "<td>"
-            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_ON_HUE' class='alignCenter' value='$ps(SHORT_ON_HUE)' size='4'>"
+            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_ON_HUE' class='alignCenter j_shortOnHue_$prn' value='$ps(SHORT_ON_HUE)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_OFF_HUE' class='alignCenter hidden' value='$ps(SHORT_OFF_HUE)' size='4'>"
+            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_OFF_HUE' class='alignCenter hidden j_shortOffHue_$prn' value='$ps(SHORT_OFF_HUE)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_ON_HUE' class='alignCenter hidden' value='$ps(LONG_ON_HUE)' size='4'>"
+            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_ON_HUE' class='alignCenter hidden j_longOnHue_$prn' value='$ps(LONG_ON_HUE)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_HUE' class='alignCenter hidden' value='$ps(LONG_OFF_HUE)' size='4'>&nbsp;°"
+            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_HUE' class='alignCenter hidden j_longOffHue_$prn' value='$ps(LONG_OFF_HUE)' size='4'>&nbsp;°"
           append html "</td>"
         append html "</tr>"
 
@@ -80,13 +94,13 @@ proc getColorPicker {pps keyPress} {
 
           append html "<td>"
             incr pref
-            append html "<input id='tmp_SHORT_ON_SATURATION_$prn\_$pref' class='alignCenter' value='[expr int([expr $ps(SHORT_ON_SATURATION) * 100])]' size='4'>"
+            append html "<input id='tmp_SHORT_ON_SATURATION_$prn\_$pref' class='alignCenter j_tmpShortOnSat_$prn' value='[expr int([expr $ps(SHORT_ON_SATURATION) * 100])]' size='4'>"
             incr pref
-            append html "<input id='tmp_SHORT_OFF_SATURATION_$prn\_$pref' class='alignCenter hidden' value='[expr int([expr $ps(SHORT_OFF_SATURATION) * 100])]' size='4'>"
+            append html "<input id='tmp_SHORT_OFF_SATURATION_$prn\_$pref' class='alignCenter hidden j_tmpShortOffSat_$prn' value='[expr int([expr $ps(SHORT_OFF_SATURATION) * 100])]' size='4'>"
             incr pref
-            append html "<input id='tmp_LONG_ON_SATURATION_$prn\_$pref' class='alignCenter hidden' value='[expr int([expr $ps(LONG_ON_SATURATION) * 100])]' size='4'>"
+            append html "<input id='tmp_LONG_ON_SATURATION_$prn\_$pref' class='alignCenter hidden j_tmpLongOnSat_$prn' value='[expr int([expr $ps(LONG_ON_SATURATION) * 100])]' size='4'>"
             incr pref
-            append html "<input id='tmp_LONG_OFF_SATURATION_$prn\_$pref' class='alignCenter hidden' value='[expr int([expr $ps(LONG_OFF_SATURATION) * 100])]' size='4'>"
+            append html "<input id='tmp_LONG_OFF_SATURATION_$prn\_$pref' class='alignCenter hidden j_tmpLongOffSat_$prn' value='[expr int([expr $ps(LONG_OFF_SATURATION) * 100])]' size='4'>"
           append html "</td>"
 
           append html "<td>"
@@ -94,13 +108,13 @@ proc getColorPicker {pps keyPress} {
           append html "</td>"
           set pref [expr int([expr $pref - 3])]
           append html "<td class='hidden'>"
-            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_ON_SATURATION' value='$ps(SHORT_ON_SATURATION)' size='4'>"
+            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_ON_SATURATION' class='j_shortOnSat_$prn' value='$ps(SHORT_ON_SATURATION)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_OFF_SATURATION' value='$ps(SHORT_OFF_SATURATION)' size='4'>"
+            append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_OFF_SATURATION' class='j_shortOffSat_$prn' value='$ps(SHORT_OFF_SATURATION)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_ON_SATURATION' value='$ps(LONG_ON_SATURATION)' size='4'>"
+            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_ON_SATURATION' class='j_longOnSat_$prn' value='$ps(LONG_ON_SATURATION)' size='4'>"
             incr pref
-            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_SATURATION' value='$ps(LONG_OFF_SATURATION)' size='4'>"
+            append html "<input id='separate_receiver_$prn\_$pref' name='LONG_OFF_SATURATION' class='j_longOffSat_$prn' value='$ps(LONG_OFF_SATURATION)' size='4'>"
           append html "</td>"
 
         append html "</tr>"
@@ -108,7 +122,7 @@ proc getColorPicker {pps keyPress} {
         append html "<tr>"
           append html "<td></td>"
           append html "<td>"
-            append html "<div id='selectedColor_$prn\_$pref' style='width:auto;'>&nbsp;</div>"
+            append html "<div id='selectedColor_$prn\_$pref' style='width:auto;' class='j_selectedColor_$prn'>&nbsp;</div>"
           append html "</td>"
         append html "</tr>"
 
@@ -120,7 +134,7 @@ proc getColorPicker {pps keyPress} {
     append html "window.setTimeout(function() {"
       append html "getHSV_ColorPicker($prn, $_pref);"
       append html "jQuery('#selectOnColor_$prn').change();"
-    append html "},50);"
+    append html "},10);"
   append html "</script>"
 
   return $html
@@ -140,7 +154,7 @@ proc getHueSlider {pps onOff {sliderOn_sliderOff false} {colorAB ""}} {
 
 
 
-  append html "<tr id='trColorPicker_$prn\_$pref'>"
+  append html "<tr id='trColorPicker_$prn\_$pref' name='j_trColorPicker_$prn'>"
     if {$colorAB == ""} {
        append html "<td>\${$onOff\_LEVEL_COLOR_VALUE}</td>"
     } else {

@@ -80,12 +80,6 @@
 "TW_dim2warm_off_down" : "Dim2Warm - aus/dunkler",
 "TW_dim2warm_on_of_up_down" : "Dim2Warm - ein/aus & heller/dunkler",
 
-"COLOR_TEMP" : "Farbtemperatur",
-"COLOR_TEMP_ON" : "Farbtemperatur im Zustand 'ein'",
-"COLOR_TEMP_OFF" : "Farbtemperatur im Zustand 'aus'",
-"MIN_COLOR_TEMP" : "Minimale Farbtemperatur",
-"MAX_COLOR_TEMP" : "Maximale Farbtemperatur",
-
 "lblResorePreviousStatus" : langJSON.de.lblResorePreviousStatus,
 "lblMode" : "Modus",
 "lblModeOn" : "Modus \"ein\"",

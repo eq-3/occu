@@ -351,7 +351,7 @@ proc getCondSwitchTransmitterBrightness {chn p descr} {
   }
 
   append html "<tr>"
-    append html "<td colspan='2' style=\"text-align:center; background-color:$bckColor\">\${calculation} \${brightnessThresholdVAL} * 10<sup>\${brightnessThresholdEXP}</sup> * 0.1</td>"
+    append html "<td colspan='2' style=\"text-align:center; background-color:$bckColor\">\${calculation} \${brightnessThresholdVAL} * 10<sup>\${brightnessThresholdEXP}</sup> * 0.01</td>"
   append html "</tr>"
 
   append html "[getHorizontalLine]"

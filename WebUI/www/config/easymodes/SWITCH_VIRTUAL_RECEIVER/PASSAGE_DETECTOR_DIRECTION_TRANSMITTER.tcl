@@ -123,7 +123,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   if {($cur_profile == 1) && ($dev_descr_receiver(PARENT_TYPE) == "HmIP-WHS2")} {
     set modifiedCondType  "{SHORT_CT_OFFDELAY {int 0}} {SHORT_CT_ON {int 0}}"
-    puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"
+    catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"}
     set ps(SHORT_CT_OFFDELAY) 0
     set ps(SHORT_CT_ON) 0
   }
@@ -156,7 +156,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     set scvlh SHORT_COND_VALUE_LO
   }
 
-  puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"
+  catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValue]]"}
 
 #  die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"

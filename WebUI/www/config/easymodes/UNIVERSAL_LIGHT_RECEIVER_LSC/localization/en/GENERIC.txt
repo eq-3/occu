@@ -80,12 +80,6 @@
 "TW_dim2warm_off_down" : "Dim2Warm - off/darker",
 "TW_dim2warm_on_of_up_down" : "Dim2Warm - on/off & brighter/darker",
 
-"COLOR_TEMP" : "Colour temperature",
-"COLOR_TEMP_ON" : "Colour temperature in status 'on'",
-"COLOR_TEMP_OFF" : "Colour temperature in status 'off'",
-"MIN_COLOR_TEMP""lblMode" : "Modus", : "Minimum colour temperature",
-"MAX_COLOR_TEMP" : "Maximum colour temperature",
-
 "lblResorePreviousStatus" : langJSON.en.lblResorePreviousStatus,
 "lblMode" : "Mode",
 "lblModeOn" : "Mode \"on\"",

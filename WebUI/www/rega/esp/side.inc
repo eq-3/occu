@@ -962,9 +962,9 @@
         }
         if( oDP.ValueSubType() == istGeneric )
         {
-          Write( ' <input id="dest'#oSD.ID()#'" type="hidden" class="SelectBox" size="6" value="'#oSD.DestinationValue().ToString(2)#'" onchange="SetSysVarDestValue('#oSD.ID()#',this.value,'#oDP.ValueMin()#','#oDP.ValueMax()#',\''#oDP.ValueUnit()#'\');" /> ' );
+          Write('<input id="dest'#oSD.ID()#'" type="hidden" class="SelectBox" size="6" value="'#oSD.DestinationValue().ToString(2)#'" onchange="SetSysVarDestValue('#oSD.ID()#' ,this.value,'#oDP.ValueMin()#' ,'#oDP.ValueMax()#', \''#oDP.ValueUnit()#'\', '#oDP.IsTypeOf( OT_VARDP )#');" /> ' );
           real percVal = oSD.DestinationValue();
-          if (oDP.ValueUnit() == "%") {
+          if ((! oDP.IsTypeOf( OT_VARDP )) && (oDP.ValueUnit() == "%")) {
             percVal = oSD.DestinationValue() * 100;
           }
           Write( ' <input id="source'#oSD.ID()#'" type="text" class="SelectBox" size="6" value="'#percVal.ToString(2)#'" onchange="ConvertValueToPercent('#oSD.ID()#');" /> ' );

@@ -174,7 +174,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set decisionValues "
    {SHORT_COND_VALUE_HI {int $condTXDecisionAbove}}
    {SHORT_COND_VALUE_LO {int $condTXDecisionBelow}}"
-  puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValues]]"
+  catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $address] [list string $dev_descr_sender(ADDRESS)] [list struct $decisionValues]]"}
   set ps(SHORT_COND_VALUE_HI) $condTXDecisionAbove
   set ps(SHORT_COND_VALUE_LO) $condTXDecisionBelow
 

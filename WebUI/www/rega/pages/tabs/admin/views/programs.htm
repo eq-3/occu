@@ -22,8 +22,10 @@
     destElm.change();
   };
 
-  SetSysVarDestValue = function( id, value, min, max, unit)
+  SetSysVarDestValue = function( id, value, min, max, unit, isSysVar)
   {
+    isSysVar = (typeof isSysVar == "undefined") ? false : isSysVar;
+
     var iPos = value.indexOf(":");
     if( iPos == -1 )
     {
@@ -34,7 +36,7 @@
       {
         //alert( id +'.........'+ value );
         iseSingleDestination.reload = true;
-        iseSingleDestination.SetValue( id, value, unit );
+        iseSingleDestination.SetValue( id, value, unit, isSysVar );
       }
       else
       {
@@ -48,7 +50,7 @@
       //alert( value.substr(0,iPos) +'::::::'+ value.substr(iPos+1) );
       iseSingleDestination.reload = true;
       //value.substr(0,iPos)
-      iseSingleDestination.SetValue( id, value.substr(iPos+1), '' );
+      iseSingleDestination.SetValue( id, value.substr(iPos+1), '', isSysVar);
     }    
   };
   

@@ -623,6 +623,7 @@ jQuery.extend(true,langJSON, {
     "stringTablePowerMeterAveraging" : "Mittelwertbildung &uuml;ber",
     "stringTableCurrent": "Strom",
     "stringTablePowerMeterEnergyCounter": "Energie-Z%E4hler Ger%E4t",
+    "stringTablePowerMeterEnergyCounterFeedIn": "Energie Einspeisung",
     "stringTablePowerMeterEnergyCounterGas" : "Energie Gas-Z%E4hler Ger%E4t",
     "stringTablePowerMeterFrequency": "Frequenz",
     "stringTablePowerMeterIECEnergyCounter": "IEC Energie-Z%E4hler Ger%E4t",

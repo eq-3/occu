@@ -739,6 +739,7 @@ EMERGENCY_OPERATION=TRUE	${stringTableEmergencyOperationTrue}
 ENABLE_ROUTING	${stringTableEnableRouting}
 ENERGIE_METER_TRANSMITTER|AVERAGING	${stringTablePowerMeterAveraging}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER	${stringTablePowerMeterEnergyCounter}
+ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_FEED_IN	${stringTablePowerMeterEnergyCounterFeedIn}
 ENERGIE_METER_TRANSMITTER|POWER	${stringTablePowerMeterPower}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=NORMAL	${lblStatus} ${chType_POWERMETER}: ${lblNormal}
 ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=0	${lblStatus} ${chType_POWERMETER}: ${lblNormal}
@@ -1420,7 +1421,9 @@ PRESENCE_DETECTION_STATE=TRUE	${stringTablePresenceDetectionStateTrue}
 PRESS_LONG	${stringTableKeyPressLong}
 PRESS_LONG=TRUE	${stringTableKeyPressLongTrue}
 PRESS_LONG_RELEASE	${stringTableKeyPressLongRelease}
+PRESS_LONG_RELEASE=TRUE	${stringTableKeyPressLongRelease}
 PRESS_LONG_START	${stringTableKeyPressLongStart}
+PRESS_LONG_START=TRUE	${stringTableKeyPressLongStart}
 PRESS_SHORT	${stringTableKeyPressShort}
 PRESS_SHORT=TRUE	${stringTableKeyPressShortTrue}
 PROCESS=NOT_STABLE	${stringTableProcessNotStableGeneric}

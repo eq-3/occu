@@ -60,8 +60,6 @@ proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""} {colorAB ""}
       append html "</td>"
     append html "</tr>"
 
-
-
   append html "<tr id='trColorTempSlider_$prn\_$pref' name='j_trColorTempSlider_$prn' class='_hidden'>"
     if {$displayModeSelector == "false"}  {
       append html "<td>\${COLOR_TEMP_$onOff}</td>"
@@ -97,13 +95,12 @@ proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""} {colorAB ""}
 
   set displayModeSelector true
 
-  append html "<script text/javascript>"
+  append html "<script type='text/javascript'>"
     append html "window.setTimeout(function() {"
       append html "getColorTempSlider($prn, $sliderPref, '$onlyOn_or_Off');"
       append html "jQuery('#selectOnColorTemp_$prn$onlyOn_or_Off').change();"
     append html "},20);"
   append html "</script>"
-
 
   return $html
 
@@ -133,7 +130,7 @@ proc getColorTempSliderMinMax {pps keyPress minMax {specialParam ""}} {
       append html "<input id='separate_receiver_$prn\_$pref' name='LONG_DIM_$minMax\_COLOR_TEMPERATURE' class='j_longDim$minMax\_$prn' value='$ps(LONG_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>"
     append html "</td>"
 
-    append html "<script text/javascript>"
+    append html "<script type='text/javascript'>"
       append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, [expr $_pref], '$keyPress', '$minMax', '$specialParam');},50);"
     append html "</script>"
 
@@ -142,7 +139,7 @@ proc getColorTempSliderMinMax {pps keyPress minMax {specialParam ""}} {
       append html "<input id='separate_receiver_$prn\_$pref' name='$keyPress\_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps($keyPress\_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
     append html "</td>"
 
-    append html "<script text/javascript>"
+    append html "<script type='text/javascript'>"
       append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, $pref, '$keyPress', '$minMax', '$specialParam');},50);"
     append html "</script>"
 

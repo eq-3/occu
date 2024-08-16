@@ -73,6 +73,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set timer 20
   set longKeypressAvailable 0
+  set showModeSelector true
 
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
 

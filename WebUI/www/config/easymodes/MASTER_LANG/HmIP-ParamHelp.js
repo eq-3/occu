@@ -260,10 +260,10 @@ jQuery.extend(true,langJSON, {
     "CALIBRATION_PPM" :
       "Bei der automatischen Kalibrierung des CO2-Sensors wird der niedrigste Messwert innerhalb vordefinierter Kalibrierintervalle als neue Referenz angenommen. " +
       "Frische Au%DFenluft hat einen typischen Wert von zirka 400 ppm. Bei normaler Innenraumnutzung wird angenommen, dass die Innenraumluft innerhalb eines Zeitraums von einer Woche mindestens einmal das Niveau von frischer Au%DFenluft erreicht. " +
-      "<br/><br/>Die Kalibrierung ben%F6tig mindestens drei Kalibrierintervalle, um den Endwert sicher zu bestimmen." +
+      "<br/><br/>Die Kalibrierung ben%F6tigt mindestens drei Kalibrierintervalle, um den Endwert sicher zu bestimmen." +
       "<br/><br/>F%FCr R%E4ume mit Dauerbelegung 24/7 muss diese Funktion deaktiviert werden. Eine Kalibrierung sollte in dem Fall alle 1-2 Jahre manuell durchgef%FChrt werden.",
 
-    "MOUNTING_ORIENTATION" : "Dieser Parameter erm%FCglicht es, den Displayinhalt um 180 Grad zu drehen.",
+    "MOUNTING_ORIENTATION" : "Dieser Parameter erm%F6glicht es, den Displayinhalt um 180 Grad zu drehen.",
     "MOUNTING_ORIENTATION_A" : "Dieser Parameter erm%F6glicht es, den Aktor im gew%FCnschten Winkel einzusetzen. ",
 
     "POWERUP_ONTIME_UNIT" :
@@ -329,7 +329,7 @@ jQuery.extend(true,langJSON, {
       "Wurde die tempor%E4re Sperre aktiviert, f%FChrt jede weitere ung%FCltige Codeeingabe zur Verl%E4ngerung der Sperrung.",
 
     "PSM_CHANNEL_OPERATION_MODE" :
-      "<b>${optionModeConsumption}:</br> Misst angeschlossene Verbraucher" +
+      "<b>${optionModeConsumption}:</br> Misst angeschlossene Verbraucher.<br/><br/>" +
       "<b>${optionModeFeeding}:</br> Misst eingespeiste Leistung, z. B. f%FCr kleine PV-Anlagen.",
 
     "GROUP_SMOKE_DETECTOR" :
@@ -479,6 +479,10 @@ jQuery.extend(true,langJSON, {
       "Im funktionellen Modus werden zus%E4tzliche Informationen auf dem Display dargestellt.<br/>",
 
       "DISPLAY_INVERTED_COLORS"  : "Mit diesem Parameter w%E4hlen Sie die Standard-Anzeige im Lightmode oder den Darkmode f%FCr das Display aus.",
+
+    "DIM_CHANNEL_OPERATION_MODE" :
+      "Sollen bei angeschlossenem LED-Leuchtmittel niedrigere Werte als 10% bzw. 5% (variiert je nach Dimmer) f%FCr die Einschalthelligkeit verwendet werden, " +
+      "muss bei den vorhandenen Verkn%FCpfungen der Parameter <b>Minimaler Pegel im Zustand 'ein'</b> entsprechend angepasst werden.",
 
     "noMoreHelp" : ""
   },
@@ -806,7 +810,7 @@ jQuery.extend(true,langJSON, {
       "If the temporary lock has been activated, each further invalid code entry leads to an extension of the lock.",
 
     "PSM_CHANNEL_OPERATION_MODE" :
-      "<b>${optionModeConsumption}:</br> Measures connected loads" +
+      "<b>${optionModeConsumption}:</br> Measures connected loads.<br/><br/>" +
       "<b>${optionModeFeeding}:</br> Measures fed-in power, e.g. for small PV systems",
 
     "GROUP_SMOKE_DETECTOR" :
@@ -957,6 +961,10 @@ jQuery.extend(true,langJSON, {
       "In functional mode, additional information is shown on the display.<br/>",
 
     "DISPLAY_INVERTED_COLORS"  : "Use this parameter to select the standard display in light mode or dark mode for the display.",
+
+    "DIM_CHANNEL_OPERATION_MODE" :
+      "en* Sollen bei angeschlossenem LED-Leuchtmittel niedrigere Werte als 10% bzw. 5% (variiert je nach Dimmer) f%FCr die Einschalthelligkeit verwendet werden, " +
+      "muss bei den vorhandenen Verkn%FCpfungen der Parameter <b>Minimaler Pegel im Zustand 'ein'</b> entsprechend angepasst werden.",
 
     "noMoreHelp" : ""
     }

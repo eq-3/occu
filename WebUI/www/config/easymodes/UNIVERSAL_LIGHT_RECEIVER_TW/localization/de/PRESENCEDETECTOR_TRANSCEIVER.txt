@@ -1,0 +1,20 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf den festgelegten Helligkeitswert bzw. die Farbtemperatur eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht ausgeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht zwischen dem festgelegten Helligkeitswert und &quot;aus&quot;.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf die festgelegte Farbtemperatur gesetzt.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf die festgelegte Farbtemperatur gesetzt.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht zwischen den beiden festgelegten Farbtemperaturen.</span><br/><br/>",
+
+"description_7" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht als dynamisches Tageslicht (Human Centric Lightning (HCL)) eingeschaltet.</span><br/><br/>",
+"description_8" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht ausgeschaltet.</span><br/><br/>",
+"description_9" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht als dynamisches Tageslicht (Human Centric Lightning (HCL) zwischen dem festgelegten Helligkeitswert und 'aus'.</span><br/><br/>",
+
+"description_10" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht im Dim2Warm Modus eingeschaltet.</span><br/><br/>",
+"description_11" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht ausgeschaltet.</span><br/><br/>",
+"description_12" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht im Dim2Warm Modus zwischen dem festgelegten Helligkeitswert und 'aus'.</span><br/><br/>",
+
+"description_13" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird der gew&auml;hlte Effekt aktiviert.</span><br/><br/>",
+
+"description_14" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
+

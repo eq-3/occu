@@ -95,6 +95,7 @@ function ::SetValue()
     if( oTmp )
     {
       var val;
+      boolean bIsSysVar = system.GetVar("isSysVar");
       string sVal = system.GetVar("value");
       sCInfo = sCInfo#"Found value ["#sVal#"], ";
       string sUnit = "";
@@ -110,7 +111,7 @@ function ::SetValue()
           sCInfo = sCInfo#"Found unit ["#sUnit#"], ";
           real fVal = system.GetVar("value").ToFloat();
           sCInfo = sCInfo#"Found real value ["#fVal#"], ";
-          if( sUnit == "%" )
+          if((! bIsSysVar) && (sUnit == "%") )
           {
             sCInfo = sCInfo#"div by 100, ";
             fVal = fVal / 100;

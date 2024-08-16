@@ -18,7 +18,7 @@ proc getSelectEffectElement {p special_input_id param} {
   return $html
 }
 
-proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""}} {
+proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""} {colorAB ""}}  {
   global url receiver_address
   upvar $pps ps
   upvar prn prn
@@ -55,7 +55,7 @@ proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""}} {
   append html "</tr>"
 
   append html "<tr id='trColorTempSlider_$prn\_$pref' class='hidden'>"
-    append html "<td><span>\${COLOR_TEMP}</span></td>"
+    append html "<td><span>\${COLOR_TEMP} $colorAB</span></td>"
 
     append html "<td>"
       set sliderPref $pref
@@ -95,7 +95,7 @@ proc getColorTempSlider {pps keyPress {onOff ""} {onlyOn_or_Off ""}} {
 
 }
 
-proc getColorTempSliderMinMax {pps keyPress minMax} {
+proc getColorTempSliderMinMax {pps keyPress minMax {specialParam ""}} {
   upvar $pps ps
   upvar prn prn
   upvar pref pref
@@ -110,26 +110,26 @@ proc getColorTempSliderMinMax {pps keyPress minMax} {
   append html "<td>&nbsp;&nbsp;</td>"
 
   if {$keyPress == "SHORT_LONG"} {
-      append html "<td class='_hidden'>"
-      append html "<input id='separate_receiver_$prn\_$pref' name='SHORT_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps(SHORT_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
+     append html "<td class='_hidden'>"
+      append html "<input id='separate_receiver_$prn\_$pref'  name='SHORT_DIM_$minMax\_COLOR_TEMPERATURE' class='j_shortDim$minMax\_$prn' value='$ps(SHORT_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
     append html "</td>"
 
     incr pref
     append html "<td class='hidden'>"
-      append html "<input id='separate_receiver_$prn\_$pref' name='LONG_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps(LONG_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
+      append html "<input id='separate_receiver_$prn\_$pref' name='LONG_DIM_$minMax\_COLOR_TEMPERATURE' class='j_longDim$minMax\_$prn' value='$ps(LONG_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>"
     append html "</td>"
 
     append html "<script text/javascript>"
-      append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, [expr $pref -1], '$keyPress');},50);"
+      append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, [expr $_pref], '$keyPress', '$minMax', '$specialParam');},50);"
     append html "</script>"
 
   } else {
     append html "<td class='_hidden'>"
-      append html "<input id='separate_receiver_$prn\_$pref' name='$keyPress\_DIM_$minMax\_COLOR_TEMPERATURE' value='$ps($keyPress\_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
+      append html "<input id='separate_receiver_$prn\_$pref' name='$keyPress\_DIM_$minMax\_COLOR_TEMPERATURE' class='j_shortDim$minMax\_$prn' value='$ps($keyPress\_DIM_$minMax\_COLOR_TEMPERATURE)' size='4'>&nbsp;\${unitKelvin}"
     append html "</td>"
 
     append html "<script text/javascript>"
-      append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, $pref, '$keyPress');},50);"
+     append html "window.setTimeout(function() {getColorTempSliderMinMax($prn, $pref, '$keyPress', '$minMax', '$specialParam');},50);"
     append html "</script>"
 
   }

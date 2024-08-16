@@ -1,0 +1,15 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf den festgelegten Helligkeitswert/Farbwert eingeschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht ausgeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht zwischen dem festgelegten Helligkeitswert/Farbwert und &quot;aus&quot;.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf den eingestellten Farbwert gesetzt.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf den eingestellten Farbwert gesetzt.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht zwischen den beiden festgelegten Farbwerten.</span><br/><br/>",
+
+"description_7" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf die eingestellte Farbs&auml;ttigung gesetzt.</span><br/><br/>",
+"description_8" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wird das Licht auf die eingestellte Farbs&auml;ttigung gesetzt.</span><br/><br/>",
+"description_9" : "<span class=\"translated\">Beim Ausl&ouml;sen des Sensors wechselt das Licht zwischen den beiden festgelegten Farbs&auml;ttigungen.</span><br/><br/>",
+"description_10" : "<span class=\"translated\">Das Ausl&ouml;sen des Sensors aktiviert den gew&auml;hlten Effekt.</span><br/><br/>",
+
+"description_11" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
+

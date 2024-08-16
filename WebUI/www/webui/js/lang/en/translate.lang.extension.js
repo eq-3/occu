@@ -562,6 +562,7 @@ jQuery.extend(true, langJSON, {
     "powerMeasurementB" : "Peak incoming energy supply",
     "powerMeasurementC" : "Off-peak incoming energy supply",
     "powerMeasurementD" : "Outgoing energy supply",
+    "powerMeasurementFeedIn" : "Feed in",
     "userSpecific" : "User specific",
     "diagramPeriodToday" : "Today",
     "diagramPeriodThisWeek" : "This week",

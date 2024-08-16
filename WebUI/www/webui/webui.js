@@ -1634,6 +1634,12 @@ DEV_PATHS["HmIP-WKP"] = new Object();
 DEV_PATHS["HmIP-WKP"]["50"] = "/config/img/devices/50/221_hmip-wkp_thumb.png";
 DEV_PATHS["HmIP-WKP"]["250"] = "/config/img/devices/250/221_hmip-wkp.png";
 DEV_HIGHLIGHT["HmIP-WKP"] = new Object();
+DEV_LIST.push('ELV-SH-CTV');
+DEV_DESCRIPTION["ELV-SH-CTV"] = "ELV-SH-CTV";
+DEV_PATHS["ELV-SH-CTV"] = new Object();
+DEV_PATHS["ELV-SH-CTV"]["50"] = "/config/img/devices/50/237_elv-sh-ctv_thumb.png";
+DEV_PATHS["ELV-SH-CTV"]["250"] = "/config/img/devices/250/237_elv-sh-ctv.png";
+DEV_HIGHLIGHT["ELV-SH-CTV"] = new Object();
 DEV_LIST.push('HmIP-DLD-A');
 DEV_DESCRIPTION["HmIP-DLD-A"] = "HmIP-DLD";
 DEV_PATHS["HmIP-DLD-A"] = new Object();
@@ -2581,6 +2587,12 @@ DEV_PATHS["HmIP-FROLL"] = new Object();
 DEV_PATHS["HmIP-FROLL"]["50"] = "/config/img/devices/50/145_hmip-froll_hmip-fbl_thumb.png";
 DEV_PATHS["HmIP-FROLL"]["250"] = "/config/img/devices/250/145_hmip-froll_hmip-fbl.png";
 DEV_HIGHLIGHT["HmIP-FROLL"] = new Object();
+DEV_LIST.push('HmIP-PSMCO');
+DEV_DESCRIPTION["HmIP-PSMCO"] = "PSMCO";
+DEV_PATHS["HmIP-PSMCO"] = new Object();
+DEV_PATHS["HmIP-PSMCO"]["50"] = "/config/img/devices/50/235_hmip-psmco_thumb.png";
+DEV_PATHS["HmIP-PSMCO"]["250"] = "/config/img/devices/250/235_hmip-psmco.png";
+DEV_HIGHLIGHT["HmIP-PSMCO"] = new Object();
 DEV_LIST.push('HM-ES-PMSw1-Pl');
 DEV_DESCRIPTION["HM-ES-PMSw1-Pl"] = "HM-ES-PMSw1-Pl";
 DEV_PATHS["HM-ES-PMSw1-Pl"] = new Object();
@@ -3582,12 +3594,6 @@ DEV_PATHS["HmIPW-DRD3"] = new Object();
 DEV_PATHS["HmIPW-DRD3"]["50"] = "/config/img/devices/50/166_hmipw-drd3_thumb.png";
 DEV_PATHS["HmIPW-DRD3"]["250"] = "/config/img/devices/250/166_hmipw-drd3.png";
 DEV_HIGHLIGHT["HmIPW-DRD3"] = new Object();
-DEV_LIST.push('ELV-SH-SB8');
-DEV_DESCRIPTION["ELV-SH-SB8"] = "ELV-SH-SB8";
-DEV_PATHS["ELV-SH-SB8"] = new Object();
-DEV_PATHS["ELV-SH-SB8"]["50"] = "/config/img/devices/50/unknown_device_thumb.png";
-DEV_PATHS["ELV-SH-SB8"]["250"] = "/config/img/devices/250/unknown_device.png";
-DEV_HIGHLIGHT["ELV-SH-SB8"] = new Object();
 DEV_LIST.push('WS550');
 DEV_DESCRIPTION["WS550"] = "Funk- Wetterstation";
 DEV_PATHS["WS550"] = new Object();
@@ -4003,6 +4009,12 @@ DEV_PATHS["HmIP-eTRV-E"] = new Object();
 DEV_PATHS["HmIP-eTRV-E"]["50"] = "/config/img/devices/50/216_hmip-etrv-e_thumb.png";
 DEV_PATHS["HmIP-eTRV-E"]["250"] = "/config/img/devices/250/216_hmip-etrv-e.png";
 DEV_HIGHLIGHT["HmIP-eTRV-E"] = new Object();
+DEV_LIST.push('ELV-SH-SB8');
+DEV_DESCRIPTION["ELV-SH-SB8"] = "ELV-SH-SB8";
+DEV_PATHS["ELV-SH-SB8"] = new Object();
+DEV_PATHS["ELV-SH-SB8"]["50"] = "/config/img/devices/50/236_elv-sh-sb8_thumb.png";
+DEV_PATHS["ELV-SH-SB8"]["250"] = "/config/img/devices/250/236_elv-sh-sb8.png";
+DEV_HIGHLIGHT["ELV-SH-SB8"] = new Object();
 DEV_LIST.push('HmIP-STHD');
 DEV_DESCRIPTION["HmIP-STHD"] = "HmIP-STHD";
 DEV_PATHS["HmIP-STHD"] = new Object();
@@ -4523,7 +4535,7 @@ DEV_getImageHighlight = function(type, form)
   // The position of the channel number adapted to the housing of the CCU3
   var product = WEBUI_VERSION.split(".")[0];
   if (product >= 3 && (type == "HM-RCV-50" || type == "HMW-RCV-50")) {
-    if (form.length > 2) {
+    if (form && form.length > 2) {
       form[2] = 0.57; // y-position
     }
   }
@@ -5252,6 +5264,7 @@ elvST['EMERGENCY_OPERATION=TRUE'] = '${stringTableEmergencyOperationTrue}';
 elvST['ENABLE_ROUTING'] = '${stringTableEnableRouting}';
 elvST['ENERGIE_METER_TRANSMITTER|AVERAGING'] = '${stringTablePowerMeterAveraging}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER'] = '${stringTablePowerMeterEnergyCounter}';
+elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_FEED_IN'] = '${stringTablePowerMeterEnergyCounterFeedIn}';
 elvST['ENERGIE_METER_TRANSMITTER|POWER'] = '${stringTablePowerMeterPower}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=NORMAL'] = '${lblStatus} ${chType_POWERMETER}: ${lblNormal}';
 elvST['ENERGIE_METER_TRANSMITTER|ENERGY_COUNTER_STATUS=0'] = '${lblStatus} ${chType_POWERMETER}: ${lblNormal}';
@@ -5914,7 +5927,9 @@ elvST['PRESENCE_DETECTION_STATE=TRUE'] = '${stringTablePresenceDetectionStateTru
 elvST['PRESS_LONG'] = '${stringTableKeyPressLong}';
 elvST['PRESS_LONG=TRUE'] = '${stringTableKeyPressLongTrue}';
 elvST['PRESS_LONG_RELEASE'] = '${stringTableKeyPressLongRelease}';
+elvST['PRESS_LONG_RELEASE=TRUE'] = '${stringTableKeyPressLongRelease}';
 elvST['PRESS_LONG_START'] = '${stringTableKeyPressLongStart}';
+elvST['PRESS_LONG_START=TRUE'] = '${stringTableKeyPressLongStart}';
 elvST['PRESS_SHORT'] = '${stringTableKeyPressShort}';
 elvST['PRESS_SHORT=TRUE'] = '${stringTableKeyPressShortTrue}';
 elvST['PROCESS=NOT_STABLE'] = '${stringTableProcessNotStableGeneric}';
@@ -7450,7 +7465,9 @@ ConfigData = Singleton.create({
 
 
   load: function() {
+    if ((typeof measureLoadingConfigData != "undefined") && (measureLoadingConfigData == true)) {console.log("Start ConfigDataLoader"); console.time(); }
     this.configDataLoader = new ConfigDataLoader(function() {
+      if ((typeof measureLoadingConfigData != "undefined") && (measureLoadingConfigData == true)) {console.timeEnd(); }
       conInfo("Config data ready to use");
       jQuery("#PagePath").css('color',"white");
       // With a CCU without devices the elem PagePath isn't available sometimes at this point,
@@ -10170,13 +10187,13 @@ Channel = Class.create({
 
     window.setTimeout(function() {delete virtChCounter;},15000); // Fallback to ensure this global var is being deleted after not in use anymore.
 
-
     if ((device.deviceType.description.indexOf("HmIPW-DRBL4") != -1)
       || (device.deviceType.description.indexOf("HmIP-DRBLI4") != -1)
       || (device.deviceType.description.indexOf("HmIP-BBL") != -1)
       || (device.deviceType.description.indexOf("HmIP-BBL-2") != -1)
       || (device.deviceType.description.indexOf("HmIP-BBL-I") != -1)
       || (device.deviceType.description.indexOf("HmIP-FBL") != -1)
+
     ) {
       if (chType.indexOf("BLIND_TRANSMITTER") != -1 || chType.indexOf("BLIND_VIRTUAL_RECEIVER") != -1) {
         if (typeof devToConfigure != "undefined" || typeof blindChAddress == "undefined" || blindChAddress != devAddress) {
@@ -10242,6 +10259,7 @@ Channel = Class.create({
     } else {
       this.changedMultiMode = "";
     }
+
     this.update(device, data);
   },
 
@@ -10289,11 +10307,10 @@ Channel = Class.create({
         }
       }
 
-      if ((this.channelType == "MULTI_MODE_INPUT_TRANSMITTER")) {
-        chnMultiMode = parseInt(homematic("Interface.getMasterValue", {"interface": "HmIP-RF", "address": this.address, "valueKey": "CHANNEL_OPERATION_MODE"}));
-        if (! isNaN(chnMultiMode)) {
-          this.multiMode = chnMultiMode;
-          homematic("Interface.setMetadata", {"objectId": this.id, "dataId": "channelMode", "value": chnMultiMode});
+      if ((ConfigData.isPresent) && (this.channelType == "MULTI_MODE_INPUT_TRANSMITTER")) {
+        if (! isNaN(this.multiMode)) {
+          data.multiMode = this.multiMode;
+          homematic("Interface.setMetadata", {"objectId": data.id, "dataId": "channelMode", "value": this.multiMode});
         }
       }
 
@@ -13842,7 +13859,7 @@ hasDeviceInternalProgramOrSysvar  = function(device) {
   return result;
 };
 
-deleteProgSysvarPOWERMETER = function(chId, chAddress) {
+deleteProgSysvarPOWERMETER = function(chId, chAddress, devLabel) {
   try {
     homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress}, function () {
       homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterOldVal_" + chId}, function () {
@@ -13850,12 +13867,41 @@ deleteProgSysvarPOWERMETER = function(chId, chAddress) {
           homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
             homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
               homematic("Program.deleteProgramByName", {"name": "prgEnergyCounter_" + chId + "_" + chAddress}, function () {
-                conInfo(chAddress + " ProgSysvarPOWERMETER deleted - next: save ObjectModel");
-                window.setTimeout(function(){saveObjectModel();},5000);
+                homematic("Program.deleteProgramByName", {"name": "prgSetEnergyValuesAtMidnight" + chId}, function () {
+                  if ((typeof devLabel == "undefined") || (devLabel != "hmip-psmco")) {
+                    conInfo(chAddress + " ProgSysvarPOWERMETER deleted - next: save ObjectModel");
+                    window.setTimeout(function () {
+                      saveObjectModel();
+                    }, 5000);
+                  } else {
+                    deleteProgSysvarPOWERMETER_FeedIn(chId, chAddress);
+                  }
+                });
               });
             });
           });
         });
+      });
+    });
+  } catch(e) {console.log(e);}
+};
+
+deleteProgSysvarPOWERMETER_FeedIn = function(chId, chAddress) {
+  try {
+    homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterFeedIn_" + chId + "_" + chAddress}, function () {
+      homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounterOldValFeedIn_" + chId}, function () {
+        //homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_RESET"}, function () {
+          //homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_DEVICE_RESET"}, function () {
+            //homematic("SysVar.deleteSysVarByName", {"name": "svEnergyCounter_" + chId + "_" + chAddress + "_TMP_OLDVAL"}, function () {
+            homematic("Program.deleteProgramByName", {"name": "prgEnergyCounterFeedIn_" + chId + "_" + chAddress}, function () {
+              homematic("Program.deleteProgramByName", {"name": "prgSetEnergyValuesAtMidnightFeedIn" + chId}, function () {
+                conInfo(chAddress + " ProgSysvarPOWERMETER + FeedIn deleted - next: save ObjectModel");
+                window.setTimeout(function(){saveObjectModel();},5000);
+              });
+            });
+            //});
+          //});
+        //});
       });
     });
   } catch(e) {console.log(e);}
@@ -14240,7 +14286,7 @@ DeleteDeviceWindow = Class.create({
       if (chId != 0) {
         if (oChnIdAndAddress.type == "POWERMETER" || oChnIdAndAddress.type == "ENERGIE_METER_TRANSMITTER") {
           if (this.m_device.typeName.toLowerCase() != "hmip-esi") {
-            deleteProgSysvarPOWERMETER(chId, chAddress);
+            deleteProgSysvarPOWERMETER(chId, chAddress, this.m_device.typeName.toLowerCase());
           } else {
             deleteProgSysvarPOWERMETER_ESI(this.m_device);
           }
@@ -14423,7 +14469,7 @@ ErrorOnDeleteWindow = Class.create({
       if (chId != 0) {
         if (oChnIdAndAddress.type == "POWERMETER" || oChnIdAndAddress.type == "ENERGIE_METER_TRANSMITTER") {
           if (this.m_device.typeName.toLowerCase() != "hmip-esi") {
-            deleteProgSysvarPOWERMETER(chId, chAddress);
+            deleteProgSysvarPOWERMETER(chId, chAddress, this.m_device.typeName.toLowerCase());
           } else {
             deleteProgSysvarPOWERMETER_ESI(this.m_device);
           }
@@ -14550,7 +14596,7 @@ DeleteDeviceDialog = Class.create({
       if (chId != 0) {
         if (oChnIdAndAddress.type == "POWERMETER" || oChnIdAndAddress.type == "ENERGIE_METER_TRANSMITTER") {
           if (this.m_device.typeName.toLowerCase() != "hmip-esi") {
-            deleteProgSysvarPOWERMETER(chId, chAddress);
+            deleteProgSysvarPOWERMETER(chId, chAddress, this.m_device.typeName.toLowerCase());
           } else {
             deleteProgSysvarPOWERMETER_ESI(this.m_device);
           }
@@ -19995,6 +20041,11 @@ DimmerCombinedParamDialog = Class.create({
     this.selectColorElm = jQuery("#combinedParam_Color");
     this.selectBehaviourElm = jQuery("#combinedParam_Behaviour");
     this.levelElm = jQuery("#combinedParam_Level");
+
+    this.levelFreeValElm = jQuery("#prgDimmerEnterFreeLevel");
+    this.divLevelFreeValElm = jQuery("#divLevelEnterFreeValue");
+    this.levelFreeValActive = false;
+
     this.lblBrightnessLevelElm = jQuery("#lblBrightnessLevel");
     this.lblRampTimeElm = jQuery("#lblRampTime");
     this.chkBoxTimeLimitElm = jQuery("#chkBoxTimeLimit");
@@ -20097,11 +20148,37 @@ DimmerCombinedParamDialog = Class.create({
     this.setHeight();
   },
 
+  showHideLevelFreeValue: function() {
+    if (this.levelElm.val() == "99999998") {
+      this.divLevelFreeValElm.show();
+      this.levelFreeValActive = true;
+      this.setHeight();
+    } else {
+      this.divLevelFreeValElm.hide();
+      this.levelFreeValActive = false;
+      this.setHeight();
+    }
+
+  },
+
+  isLevelValid: function(elm) {
+    var val = parseInt(elm.value);
+    if ((isNaN(val) || val < 0)) {val = 0;} else if (val > 100) {val = 100;}
+    elm.value = val;
+  },
 
   initDialog: function() {
     var self = this;
 
-    var arElmValues, valueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueC, valueCB, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration;
+    this.levelElm.change(function() {self.showHideLevelFreeValue();});
+    this.levelFreeValElm.blur(function() {self.isLevelValid(this);});
+
+    var arElmValues, valueL, iValueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueC, valueCB, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration;
+
+    arElmValues = this.initValue.split(",");
+    valueL = arElmValues[0].split("=")[1];
+    iValueL = parseInt(valueL) / 10;
+
     if (this.isUniversalActor) { // WUA
       this.lblBrightnessLevelElm.text(translateKey("lblOperatingVoltage"));
     } else if (this.isServoController) {
@@ -20111,12 +20188,16 @@ DimmerCombinedParamDialog = Class.create({
       this.lblRampTimeElm .text(translateKey("stringTableServoRamp"));
     }
 
+    // iValueL !== (iValueL | 0) = check if the value is not 0% - 100%
+    if ( (iValueL !== (iValueL | 0)) && (valueL != "100.5") && (valueL != "101")) {
+      this.levelFreeValActive = true;
+      this.levelFreeValElm.val(valueL);
+      this.divLevelFreeValElm.show();
+    }
+
     this._showColorElm();
     this._showBehaviourElm();
     if (this.isOntimeAvailable()) {
-      arElmValues = this.initValue.split(",");
-
-      valueL = arElmValues[0].split("=")[1];
       valueDVtmp = arElmValues[1].split("=")[1];
       valueDU = this._getUnitInDU4OnTime(valueDVtmp);
 
@@ -20146,8 +20227,6 @@ DimmerCombinedParamDialog = Class.create({
       minDuration = 0;
       maxDuration = 16343;
     } else {
-      arElmValues = this.initValue.split(",");
-      valueL = arElmValues[0].split("=")[1];
       valueDV = arElmValues[1].split("=")[1];
       valueDU = arElmValues[2].split("=")[1];
       valueRTV = arElmValues[3].split("=")[1];
@@ -20178,7 +20257,12 @@ DimmerCombinedParamDialog = Class.create({
       this.rampTimeOffValueElm.val(valueRTTOV);
     }
 
-    this.levelElm.val(valueL);
+    if (this.levelFreeValActive) {
+      this.levelElm.val("99999998");
+    } else {
+      this.levelElm.val(valueL);
+    }
+
     this.durationValueElm.val(valueDV);
     this.durationUnitElm.val(valueDU);
 
@@ -20325,13 +20409,16 @@ DimmerCombinedParamDialog = Class.create({
   getConfigString: function() {
     var self = this,
       result,
-      level = this.levelElm.val(),
+      level,
       durationUnit = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 2 : this.durationUnitElm.val(), // 2  = unit hour
       durationValue = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 31 : this.durationValueElm.val(),
       ramptimeUnit = this.rampTimeUnitElm.val(),
       ramptimeValue = this.rampTimeValueElm.val(),
       valColor = "",
       valBehaviour = "";
+
+      level = (this.levelFreeValActive) ? this.levelFreeValElm.val() : this.levelElm.val();
+
     if (this.colorElmVisible || this.behaviourElmVisible) {
       if (this.colorElmVisible && ! this.behaviourElmVisible) {
         valColor = this.selectColorElm.val();
@@ -21316,6 +21403,11 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     this.trRampTimeElms = jQuery("[name='trRampTime']");
     this.trRampTimeOff = jQuery("#trRampTimeOff");
     this.levelElm = jQuery("#combinedParam_Level");
+
+    this.levelFreeValElm = jQuery("#prgDimmerEnterFreeLevel");
+    this.divLevelFreeValElm = jQuery("#divLevelEnterFreeValue");
+    this.levelFreeValActive = false;
+
     this.lblBrightnessLevelElm = jQuery("#lblBrightnessLevel");
     this.lblRampTimeElm = jQuery("#lblRampTime");
     this.chkBoxTimeLimitElm = jQuery("#chkBoxTimeLimit");
@@ -21508,9 +21600,47 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
     homematic("Interface.setMetadata", {"objectId": this.oChannel.id, "dataId": "effectModePrg", "value": this.effectModePrg});
   },
 
+
+  showHideLevelFreeValue: function() {
+    if (this.levelElm.val() == "99999998") {
+      this.divLevelFreeValElm.show();
+      this.levelFreeValActive = true;
+      this.setHeight();
+    } else {
+      this.divLevelFreeValElm.hide();
+      this.levelFreeValActive = false;
+      this.setHeight();
+    }
+
+  },
+
+  isLevelValid: function(elm) {
+    var val = parseInt(elm.value);
+    if ((isNaN(val) || val < 0)) {val = 0;} else if (val > 100) {val = 100;}
+    elm.value = val;
+  },
+
   initDialog: function() {
     var self = this;
+
+    this.levelElm.change(function() {self.showHideLevelFreeValue();});
+    this.levelFreeValElm.blur(function() {self.isLevelValid(this);});
+
+    var arElmValues, valueL, iValueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueC, valueCB, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration;
+
+    arElmValues = this.initValue.split(",");
+    valueL = arElmValues[0].split("=")[1];
+    iValueL = parseInt(valueL) / 10;
+
+
     var arElmValues, valueL, valueDV, valueDVtmp, valueDU, valueRTV, valueRTVtmp, valueRTU, valueSlider, valueRTTOU, valueRTTOV, permanentHR, permanentHR_0, minDuration, maxDuration, effect;
+
+    // iValueL !== (iValueL | 0) = check if the value is not 0% - 100%
+    if ( (iValueL !== (iValueL | 0)) && (valueL != "100.5") && (valueL != "101")) {
+      this.levelFreeValActive = true;
+      this.levelFreeValElm.val(valueL);
+      this.divLevelFreeValElm.show();
+    }
 
     this.initSubDialogs();
 
@@ -21579,7 +21709,12 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       this.rampTimeOffValueElm.val(valueRTTOV);
     }
 
-    this.levelElm.val(valueL);
+    if (this.levelFreeValActive) {
+      this.levelElm.val("99999998");
+    } else {
+      this.levelElm.val(valueL);
+    }
+
     this.durationValueElm.val(valueDV);
     this.durationUnitElm.val(valueDU);
 
@@ -22041,7 +22176,7 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
   getConfigString: function() {
     var self = this,
       result,
-      level = this.levelElm.val(),
+      level,
       durationUnit = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 2 : this.durationUnitElm.val(), // 2  = unit hour
       durationValue = (this.chkBoxTimeLimitElm.prop("checked") == false) ? 31 : this.durationValueElm.val(),
       ramptimeUnit = this.rampTimeUnitElm.val(),
@@ -22055,6 +22190,8 @@ UniveralLightReceiverDialog = Class.create(YesNoDialog,{
       effectID = "",
       effect = parseInt(this.effectSelBox.val()),
       activeDialog = "color";
+
+    level = (this.levelFreeValActive) ? this.levelFreeValElm.val() : this.levelElm.val();
 
     this.setULReffectModePrg();
 
@@ -23222,10 +23359,13 @@ StartPage = Singleton.create(Page, {
     //jQuery("#currentFirmware").text(WEBUI_VERSION);
 
     homematic("Interface.getDeviceDescription", {"interface": "BidCos-RF", "address": "BidCoS-RF"}, function(result) {
-      WEBUI_VERSION = result.firmware;
+      if (result != null) {
+        WEBUI_VERSION = result.firmware;
+      } else {
+        WEBUI_VERSION = "0.0.0";
+      }
       jQuery("#currentFirmware").text(WEBUI_VERSION);
     });
-
   },
 
   /*evalVersionAGreaterThanB: function(a, b) {
@@ -29141,13 +29281,16 @@ ise.SingleDestination.prototype =
     };
     new Ajax.Request(url,opts);    
   },
-  SetValue: function(id,value,unit)
+  SetValue: function(id,value,unit, isSysVar)
   {
+    isSysVar = (typeof isSysVar == "undefined") ? false : true;
+
 		var url = "/esp/side.htm?sid="+SessionId;
     var pb = '';
     pb += 'string action = "SetValue";';
     pb += 'string id = "'+id+'";';
     pb += 'string value = "'+value+'";';
+    pb += 'boolean isSysVar = "'+isSysVar+'";';
     if( typeof( unit ) != "undefined" )
     {
       pb += 'string unit = "'+unit+'";';
@@ -36337,6 +36480,7 @@ iseThermostatHMIP.prototype = {
     conInfo(opts);
     var self = this;
     this.opts = opts;
+    this.devId = opts.devID;
     this.chId = this.opts.chID;
     this.chAddress = this.opts.chAddress;
     this.iface = this.opts.chInterface;
@@ -36379,21 +36523,25 @@ iseThermostatHMIP.prototype = {
     this.btnParty = this.getElemByID("Party");
     this.btnON = this.getElemByID("On");
     this.btnOFF = this.getElemByID("Off");
+
+    this.btnHeating = this.getElemByID("Heating");
+    this.btnCooling = this.getElemByID("Cooling");
+
     this.activeProfileElm = this.getElemByID("ActiveProfile");
     this.unitDegree = this.getElemByID("unitDegree");
     this.unknownState = "--";
 
+    this.heatingCoolingAllowed = (this.iface != 'VirtualDevices') ? true : false;
+    this.checkIfHeatingCoolingAllowed();
 
-    //homematic('Interface.getParamset', {"interface": this.iface, "address" : this.chAddress, "paramsetKey" : "VALUES"}, function(result) {
-      self.setResult(opts);
-      self.setSControl("ACTUAL_TEMPERATURE", self.ACTUAL_TEMPERATURE);
-      self.setSControl("HUMIDITY", self.HUMIDITY);
-      self.setSControl("WINDOW_STATE", self.WINDOW_STATE);
-      self.setSlider();
-      self.initElements();
-      self.bindEvents();
-    //});
 
+    this.setResult(opts);
+    this.setSControl("ACTUAL_TEMPERATURE", this.ACTUAL_TEMPERATURE);
+    this.setSControl("HUMIDITY", this.HUMIDITY);
+    this.setSControl("WINDOW_STATE", this.WINDOW_STATE);
+    this.setSlider();
+    this.initElements();
+    this.bindEvents();
   },
 
   setResult: function(opts) {
@@ -36710,8 +36858,6 @@ iseThermostatHMIP.prototype = {
     });
 
     req.done(function(htmlContent) {
-
-      //partyModeDialog = new PartyModeDialog(translateKey("partyModeDialogTitle"), htmlContent, event.data.that.opts,function(result) {
       partyModeDialog = new PartyModeDialog(translateKey("partyModeDialogTitle"), htmlContent, oPartyValues,function(result) {
 
         var self = event.data.that;
@@ -36820,7 +36966,43 @@ iseThermostatHMIP.prototype = {
     this.percentElem.val(parseFloat(this.state).toFixed(1));
     conInfo("refresh: setting DP "+this.setPointID+" State -------> " + this.state);
     setDpState(setPointID, this.state);
+  },
+
+  // SPHM-1231 - When a link between a CLIMATECONTROL_FLOOR_TRANSMITTER (eg. WTH chn. 7) and a CLIMATECONTROL_FLOOR_TRANSCEIVER (e. g. FALMOT-C12 chn. 1 - 12) exists,
+  // the buttons Heating and Cooling must be only readable.
+  checkIfHeatingCoolingAllowed: function () {
+    var self = this;
+    if (this.heatingCoolingAllowed) {
+      var dev, chn, arLinkPeers = [];
+
+      dev = DeviceList.getDeviceByAddress(this.chAddress.split(":")[0]);
+
+      jQuery.each(dev.channels, function (index, chn) {
+        //  if (!self.heatingCoolingAllowed) {return false;} // exit the loop  -- this will cause a problem with the build process
+
+        if (self.heatingCoolingAllowed) {
+          if (chn.channelType == "CLIMATECONTROL_FLOOR_TRANSMITTER") {
+            arLinkPeers = homematic("Interface.getLinkPeers", {'interface': self.iface, 'address': chn.address});
+            jQuery.each(arLinkPeers, function (index, chnAddress) {
+              chn = DeviceList.getChannelByAddress(chnAddress);
+              if (chn.channelType == "CLIMATECONTROL_FLOOR_TRANSCEIVER") {
+                self.heatingCoolingAllowed = false;
+              }
+            });
+          }
+        }
+      });
+    }
+
+    if (! this.heatingCoolingAllowed) {
+      this.btnHeating.prop("onclick", null);
+      this.btnCooling.prop("onclick", null);
+      this.btnHeating.unbind("click").click(function() {MessageBox.show(translateKey("dialogHint"),translateKey("hintHeatingCoolngNotAllowed"), function() {loadChannels(self.devId);}, 500, 125);}).css("cursor", "default");
+      this.btnCooling.unbind("click").click(function() {MessageBox.show(translateKey("dialogHint"),translateKey("hintHeatingCoolngNotAllowed"), function() {loadChannels(self.devId);}, 500, 125);}).css("cursor", "default");
+    }
+
   }
+
 };/**
  * ise/iseFrequency.js
  **/
@@ -38822,6 +39004,7 @@ isePowerMeter.prototype = {
   initialize: function(id, opts) {
     conInfo("PowerMeter");
     var self = this;
+    this.opts = opts;
     this.powerMeter = "POWERMETER"; // e. g. Hm-ES-PMSw1-PL-DN-R1
     this.POWERMETER_IEC = "POWERMETER_IEC"; // e. g. Hm-ES-TX-WM
     this.energyMeterTransmitter = "ENERGIE_METER_TRANSMITTER"; // e. g. HmIP-PSM
@@ -38832,10 +39015,11 @@ isePowerMeter.prototype = {
     this.sensorTypeID.iec = "IEC";
     this.sensorTypeID.unknown = "Unknown";
     this.kiloPrefix = "";
+    this.hasFeedIn = (this.opts.chLabel == "HmIP-PSMCO") ? true : false;
 
     this.id = id;
-    this.opts = opts;
     this.summedUpEnergy = 0.0;
+    this.summedUpFeedIn = 0.0;
     this.measurementType = this.getSensorType();
     conInfo("Identified sensor: " + this.measurementType);
 
@@ -38856,6 +39040,8 @@ isePowerMeter.prototype = {
     this.EnergyCounterOldValID = "svEnergyCounter" + this.getSensorExtension() + "OldVal_" + this.id;
     this.EnergyPrice = "unknown";
 
+    this.EnergyCounterFeedInID = "svEnergyCounterFeedIn_" + this.id + "_" + this.opts.chAddress;
+
     this.bindEvents();
 
     this.setGenericInfoPanels(this.getVisibleInfoPanels());
@@ -38874,6 +39060,10 @@ isePowerMeter.prototype = {
     }
     jQuery("[name = '" + this.id + "EnergyCostDeviceUnit']").html(this.opts.unitEnergyCounter).show();
     this.setEnergyCounterPanel();
+
+    if (this.hasFeedIn) {
+      this.setEnergyCounterFeedInPanel();
+    }
 
     this.energyConfig = homematic("system.getEnergyPrice", {}, function (result) {
       self.energyConfig = result;
@@ -38943,19 +39133,6 @@ isePowerMeter.prototype = {
 
   bindEvents: function() {
     var self = this;
-    /*
-    jQuery("#"+ this.id + "resetEnergyCounter").bind("click", function(){
-      conInfo("Reset EnergyCounter.");
-      self.buttonPressed(this);
-      homematic("SysVar.setFloat", {"name" : self.EnergyCounterID, "value" : 0});
-      homematic("SysVar.setBool", {"name" : self.EnergyCounterRESETID, "value" : true});
-      if (self.opts.chType == "POWERMETER_IGL") {
-        homematic("SysVar.setFloat", {"name": self.EnergyCounterOldValID, "value": 0});
-      }
-      self.setEnergyCounterPanel();
-      self.showEnergyCost();
-    });
-    */
 
 
     jQuery("#"+ this.id + "resetEnergyCounter").bind("click", function(){
@@ -38993,6 +39170,44 @@ isePowerMeter.prototype = {
       };
 
     });
+
+    // Feed In
+    jQuery("#"+ this.id + "resetFeedInCounter").bind("click", function(){
+      conInfo("Set Feed In Counter");
+      var dlgContent = "<table align='center'><tr><td>"+translateKey('lblEnergyConsumptionInWatt')+"<td><td><input type='text' id='meterReading'></td></tr></table>",
+        valMeterReading;
+
+      setEnergyCounterDlg = new YesNoDialog(translateKey("lblSetEnergyCounter"), dlgContent, function(result) {
+        if (result == YesNoDialog.RESULT_YES) {
+          valMeterReading = parseFloat(jQuery("#meterReading").val());
+
+          // This removes the dialog from the screen
+          Layer.remove(this.m_layer);
+
+          if (! isNaN(valMeterReading)) {
+            // This sets the new value of the power meter
+            homematic("SysVar.setFloat", {"name": self.EnergyCounterFeedInID, "value": valMeterReading}, function () {
+              self.setEnergyCounterFeedInPanel();
+              //self.showEnergyCost();
+            });
+          }
+        } else {
+          // NO pressed
+          // This removes the dialog from the screen
+          Layer.remove(this.m_layer);
+        }
+      }, "html");
+
+      setEnergyCounterDlg.btnTextNo(translateKey("dialogBack"));
+      setEnergyCounterDlg.btnTextYes(translateKey("btnOk"));
+
+      // Overwrites the original close method
+      setEnergyCounterDlg.close = function(result) {
+        if (this.m_callback) { this.m_callback(result); }
+      };
+
+    });
+
   },
 
   /**
@@ -39041,8 +39256,13 @@ isePowerMeter.prototype = {
     }
   },
 
-  changeToKilo: function() {
-    return (this.summedUpEnergy/1000).toFixed(3);
+  changeToKilo: function(x) {
+    if (x == "summedUpFeedIn") {
+      return (this.summedUpFeedIn/1000).toFixed(3);
+    } else {
+      return (this.summedUpEnergy/1000).toFixed(3);
+    }
+
   },
 
   setEnergyCounterPanel: function() {
@@ -39055,10 +39275,26 @@ isePowerMeter.prototype = {
     this.kiloPrefix = "";
     if (this.summedUpEnergy >= 1000.0 && (this.measurementType != this.sensorTypeID.gas) && (this.measurementType != this.sensorTypeID.iec)) {
       this.kiloPrefix = "k";
-      this.summedUpEnergy = this.changeToKilo();
+      this.summedUpEnergy = this.changeToKilo('summedUpEnergy');
     }
 
     j_panel.html(this.summedUpEnergy + " " + this.kiloPrefix + this.opts.unitEnergyCounter);
+  },
+
+  setEnergyCounterFeedInPanel: function() {
+    var j_panel = this.getJElemByID("energyCounterFeedIn");
+    var decimalPlace = 2;
+
+    this.summedUpFeedIn = parseFloat(homematic("SysVar.getValue", {"id" : this.EnergyCounterFeedInID})).toFixed(decimalPlace);
+    conInfo("setEnergyCounterFeedInPanel - this.summedUpFeedIn: " + this.summedUpFeedIn);
+
+    this.kiloPrefix = "";
+    if (this.summedUpFeedIn >= 1000.0) {
+      this.kiloPrefix = "k";
+      this.summedUpFeedIn = this.changeToKilo('summedUpFeedIn');
+    }
+
+    j_panel.html(this.summedUpFeedIn + " " + this.kiloPrefix + this.opts.unitEnergyCounter);
   },
 
   getEnergyConsumption: function(sType) {

@@ -345,14 +345,14 @@ getHSV_ColorPicker_eTRV = function(prn, pref) {
   colorPicker.on("mount", function(color) {
     var rgbVal = hsvToRgb(hue, parseInt(saturation * 100), 100);
 
-    console.log("colorPicker mount - rgbVal: ", rgbVal);
+    //console.log("colorPicker mount - rgbVal: ", rgbVal);
 
     selectedColorIndicatorElm.css("background-color", "rgb("+rgbVal.r+","+rgbVal.g+","+rgbVal.b+")");
   });
 
   colorPicker.on("input:end", function(color) {
 
-    console.log("colorPicker color: ", color);
+    //console.log("colorPicker color: ", color);
 
     var hsv_H = color.hsv.h,
       hsv_S,
@@ -675,7 +675,6 @@ getColorTempSliderMinMax = function(prn, pref, keypress, minMax, extraParam) {
 
   val2SendElm.keyup(function(event) {
     var val, newVal;
-
     if (event.keyCode == 13) {
       val = parseInt(jQuery(this).val());
       if (val < sliderOpts.min || isNaN(val)) {newVal = sliderOpts.min;} else if (val > sliderOpts.max) {newVal = sliderOpts.max;} else {newVal = val;}
@@ -1283,13 +1282,17 @@ setSatColorTempValue = function(elm, effectNo, subEffectNo) {
   }
 };
 
-getHTMLHueSatPicker = function() {
-  var html = "";
+getHTMLHueSatPicker = function(w) {
+  var html = "", wid = 90;
+
+  if (typeof w != "undefined") {
+    wid = w;
+  }
 
   html += "<table class='center'>";
     html += "<tr>";
 
-      html += "<td style='width:90px;'>";
+      html += "<td style='width:"+ wid+"px;'>";
         html += "<div id='effectColorPicker'></div>";
       html += "</td>";
 
@@ -1384,7 +1387,7 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
     hueSatTempElm = jQuery("[name='"+effectNo+"_EFFECT_"+subEffectNo+"_COLOR_HUE_SATURATION_COLOR_TEMPERATURE_VALUE']").first(),
     binHue, binSat;
 
-  var dlg = new YesNoDialog("", getHTMLHueSatPicker(), function(result) {
+  var dlg = new YesNoDialog("", getHTMLHueSatPicker(200), function(result) {
     var binColor;
 
     if (result == 1) {
@@ -1427,7 +1430,7 @@ setEffectHueSat = function(elm, effectNo, subEffectNo) {
 
     var effectColorPicker = new iro.ColorPicker("#effectColorPicker", {
       // Set the size of the color picker
-      width: 90,
+      width: 150,
       color: {h: valHUE, s: valSAT, v: valLevel},
       wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
       layout: [{component: iro.ui.Wheel}], // don't show the V slider below the wheel - this value has an own parameter
@@ -1667,7 +1670,7 @@ setColorHCCT = function(elm, prn, pref, param) {
     hueSatTempElm = jQuery("[name='"+param+"']").first(),
     binHue, binSat;
 
-  var dlg = new YesNoDialog("", getHTMLHueSatPicker(), function(result) {
+  var dlg = new YesNoDialog("", getHTMLHueSatPicker(200), function(result) {
     var binColor;
 
     if (result == 1) {
@@ -1710,7 +1713,7 @@ setColorHCCT = function(elm, prn, pref, param) {
 
     var effectColorPicker = new iro.ColorPicker("#effectColorPicker", {
       // Set the size of the color picker
-      width: 90,
+      width: 150,
       color: {h: valHUE, s: valSAT, v: valLevel},
       wheelLightness: false, // If set to false, the color wheel will not fade to black when the lightness decreases.
       layout: [{component: iro.ui.Wheel}], // don't show the V slider below the wheel - this value has an own parameter

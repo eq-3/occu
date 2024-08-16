@@ -1,7 +1,5 @@
 jQuery.extend(true, langJSON, {
   "en": {
-    "comment" : "Release B/2024 - not yet translated",
-
     "lblCampfire" : "Campfire",
     "lblRainbow" : "Rainbow",
     "lblSunrise" : "Sunrise",
@@ -30,6 +28,19 @@ jQuery.extend(true, langJSON, {
     "stringTablePermissionStateTrue" : "Channel authorised",
 
     "lblAngle" : "Angle",
+
+
+    "comment" : "Release C/2024 - not yet translated",
+
+    "lblInfoStatusControlDeviceFeedIn" : "en* Einspeisung Z%E4hler Ger%E4t",
+    "lblInfoStatusControlFeedInCounter" : "en* Einspeisung Z%E4hler CCU",
+
+    "hintHeatingCoolngNotAllowed" :
+      "en* Die Anzeigefelder Heizen / K%FChlen zeigen den aktuell eingestellten Modus an.<br/><br/>" +
+      "Ist <b><u>keine</u></b> Verkn%FCpfung zwischen einem HmIP Wandthermostaten und einem HmIP Fu%DFbodenheizungscontroller vorhanden, " +
+      "l%E4%DFt sich der Modus hiermit auch aktiv wechseln.<br/><br/>" +
+      "<b>In Heizungsgruppen dienen die beiden Felder nur zur Anzeige des eingestellten Modus. " +
+      "Hier ist ein Wechsel nicht m%F6glich.</b>",
 
     "noMoreKeys" : ""
   }

@@ -1,0 +1,20 @@
+"description_1" : "<span class=\"translated\">When the sensor is triggered, the light is switched on at the preset brightness value or the colour temperature.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">The light is switched off when the sensor is triggered.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When the sensor is triggered, the light changes between the preset brightness value and &quot;off&quot;.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">When the sensor is triggered, the light is set to the preset colour temperature.</span><br/><br/>",
+"description_5" : "<span class=\"translated\">When the sensor is triggered, the light is set to the preset colour temperature.</span><br/><br/>",
+"description_6" : "<span class=\"translated\">When the sensor is triggered, the light changes between the two preset colour temperatures.</span><br/><br/>",
+
+"description_7" : "<span class=\"translated\">When the sensor is triggered, the light is switched on as dynamic daylight (Human Centric Lightning (HCL)).</span><br/><br/>",
+"description_8" : "<span class=\"translated\">The light is switched off when the sensor is triggered.</span><br/><br/>",
+"description_9" : "<span class=\"translated\">When the sensor is triggered, the light as dynamic daylight (Human Centric Lightning (HCL)) changes between the present brightness value and 'off'.</span><br/><br/>",
+
+"description_10" : "<span class=\"translated\">When the sensor is triggered, the light is switched on in Dim2Warm mode.</span><br/><br/>",
+"description_11" : "<span class=\"translated\">The light is switched off when the sensor is triggered.</span><br/><br/>",
+"description_12" : "<span class=\"translated\">When the sensor is triggered, the light in Dim2Warm mode switches between the preset brightness value and 'off'.</span><br/><br/>",
+
+"description_13" : "<span class=\"translated\">Triggering the sensor activates the selected effect.</span><br/><br/>",
+
+"description_14" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+

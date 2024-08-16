@@ -229,7 +229,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 set comment {
   if {($cur_profile == 1) && ($dev_descr_receiver(PARENT_TYPE) == "HmIP-WHS2")} {
     set modifiedCondType  "{SHORT_CT_OFF {int 5}} {SHORT_CT_OFFDELAY {int 5}} {SHORT_CT_ON {int 5}} {SHORT_CT_ONDELAY {int 5}}"
-    puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"
+    catch {puts "[xmlrpc $iface_url($iface) putParamset [list string $receiver_address] [list string $sender_address] [list struct $modifiedCondType]]"}
     set ps(SHORT_CT_OFF) 5
     set ps(SHORT_CT_OFFDELAY) 5
     set ps(SHORT_CT_ON) 5

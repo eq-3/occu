@@ -76,9 +76,9 @@ set PROFILE_3(SHORT_CT_OFFDELAY)              {0 2}
 set PROFILE_3(SHORT_CT_ON)                    {0 2}
 set PROFILE_3(SHORT_CT_ONDELAY)               {0 2}
 set PROFILE_3(SHORT_JT_OFF)                   {1 3}
-set PROFILE_3(SHORT_JT_OFFDELAY)              6
+set PROFILE_3(SHORT_JT_OFFDELAY)              {6 3}
 set PROFILE_3(SHORT_JT_ON)                    {4 6}
-set PROFILE_3(SHORT_JT_ONDELAY)               3
+set PROFILE_3(SHORT_JT_ONDELAY)               {3 6}
 set PROFILE_3(SHORT_MULTIEXECUTE)             0
 set PROFILE_3(SHORT_OFFDELAY_TIME_BASE)       {0 range 0 - 7}
 set PROFILE_3(SHORT_OFFDELAY_TIME_FACTOR)     {0 range 0 - 31}
@@ -118,6 +118,30 @@ set SUBSET_2(SHORT_CT_OFF)      2
 set SUBSET_2(SHORT_CT_OFFDELAY)    2
 set SUBSET_2(SHORT_CT_ON)      2
 set SUBSET_2(SHORT_CT_ONDELAY)    2
+
+# > = ON - < = OFF
+set SUBSET_3(NAME)          "\${subset_3}"
+set SUBSET_3(SUBSET_OPTION_VALUE)  3
+set SUBSET_3(SHORT_CT_OFF)      0
+set SUBSET_3(SHORT_CT_OFFDELAY)    0
+set SUBSET_3(SHORT_CT_ON)      2
+set SUBSET_3(SHORT_CT_ONDELAY)    2
+set SUBSET_3(SHORT_JT_OFF)        1
+set SUBSET_3(SHORT_JT_OFFDELAY)   3
+set SUBSET_3(SHORT_JT_ON)         4
+set SUBSET_3(SHORT_JT_ONDELAY)    6
+
+# > = OFF - < = ON
+set SUBSET_4(NAME)          "\${subset_4}"
+set SUBSET_4(SUBSET_OPTION_VALUE)  4
+set SUBSET_4(SHORT_CT_OFF)        2
+set SUBSET_4(SHORT_CT_OFFDELAY)   2
+set SUBSET_4(SHORT_CT_ON)         0
+set SUBSET_4(SHORT_CT_ONDELAY)    0
+set SUBSET_4(SHORT_JT_OFF)        1
+set SUBSET_4(SHORT_JT_OFFDELAY)   3
+set SUBSET_4(SHORT_JT_ON)         4
+set SUBSET_4(SHORT_JT_ONDELAY)    6
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
@@ -209,7 +233,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [getButtonChannelConfiguration helpBtnSenderConf]
   set pref 1
   append HTML_PARAMS(separate_$prn) "<tr><td>\${switchPoint}</td><td>"
-  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
+  append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
   # ONDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ONDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_ONDELAY_TIME TIMEBASE_LONG]"

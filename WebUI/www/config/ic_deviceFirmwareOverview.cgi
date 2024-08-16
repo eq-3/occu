@@ -67,8 +67,8 @@ proc getFilterElement {param} {
   append html "<div class=\"FilterBodyWrapper\" id=\"filter_$param\" style=\"display:none;\">"
     append html "<div class=\"FilterBody\">"
       append html "<input class=\"FilterText\" id=\"searchText_$param\"  name=\"DeviceListPage.NameFilterText\" value=\"\" type=\"text\" onkeypress=\"checkEnterEsc(this.id, event.keyCode);\">"
-      append html "<div class=\"FilterButton\" name=\"filterSet\" onclick=\"setFilter('filter_$param');\">Setzen</div>"
-      append html "<div class=\"FilterButton\" name=\"filterClose\" onclick=\"closeFilter('filter_$param');\">Schliessen</div>"
+      append html "<div class=\"FilterButton\" name=\"filterSet\" onclick=\"setFilter('filter_$param');\">\${filterSet}</div>"
+      append html "<div class=\"FilterButton\" name=\"filterClose\" onclick=\"closeFilter('filter_$param');\">\${filterClose}</div>"
     append html "</div>"
   append html "</div>"
   return $html

@@ -108,7 +108,7 @@ jQuery.extend(true,langJSON, {
     "ACOUSTIC_ALARM_SIGNAL" : "With this parameter you can determine whether a failed adaptation run is to be signalled acoustically.",
     "CHANNEL_OPERATION_MODE" :
     "The radiator thermostats operate slower and therefore more quietly in whisper mode.<br/><br/>" +
-    "This function results in 15–20 percent higher power consumption for the respective device. ",
+    "This function results in 15-20 percent higher power consumption for the respective device. ",
 
     "CLIMATE_FUNCTION" : "This parameter determines whether the device is to be used as a thermostat or humidistat switch.",
 

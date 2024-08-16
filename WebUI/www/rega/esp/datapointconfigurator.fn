@@ -204,6 +204,7 @@ function ::dcCreate()
         sControlName = oE.MetaData("CONTROL");
         if( sControlName )
         {
+          object oDevice = dom.GetObject(cObj.Device());
           object ch = dom.GetObject(chnId);
           ! WriteLine( "<script>conInfo('sControlName: "#sControlName#"');</script>" );
 
@@ -327,7 +328,7 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_TRANSMITTER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_TRANSMITTER;
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL") && (ch.Label() != "HmIP-BBL-I")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4") && (ch.Label() != "HmIP-BBL") && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL") && (ch.Label() != "HmIP-BBL-I")) {
               Call("/esp/controls/blind.fn::CreateBlindTransmitter()");
             } else {
               object mode = dom.GetObject(ch.Address());
@@ -346,7 +347,7 @@ function ::dcCreate()
             WriteLine( "<script>conInfo('Control BLIND_VIRTUAL_RECEIVER found.');</script>" );
             isKnownControl = true;
             sLastControlName = CN_BLIND_VIRTUAL_RECEIVER;
-            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL") && (ch.Label() != "HmIP-BBL-I")) {
+            if ((ch.Label().Substr(0,6) != "HmIPW-") && (ch.Label() != "HmIP-DRBLI4")  && (ch.Label() != "HmIP-BBL") && (ch.Label() != "HmIP-BBL-2") && (ch.Label() != "HmIP-FBL") && (ch.Label() != "HmIP-BBL-I")) {
               Call("/esp/controls/blind.fn::CreateBlindVirtualReceiver()");
             } else {
               object mode = dom.GetObject(ch.Address());

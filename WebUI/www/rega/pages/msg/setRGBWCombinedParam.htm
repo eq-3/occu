@@ -42,9 +42,21 @@
           <option value="100">100%</option>
           <option value="100.5">${optionLastValue}</option>
           <option value="101">${lblIgnore}</option>
+          <option value="99999998">${stringTableEnterValue}</option>
         </select>
       </td>
     </tr>
+
+    <tr><td></td>
+      <td>
+        <div id="divLevelEnterFreeValue" class="hidden">
+          <input id="prgDimmerEnterFreeLevel" type="text" value="0" size="2" style="text-align: center">&nbsp;%
+        </div>
+      </td>
+    </tr>
+
+    <!-- place holder -->
+    <tr><td><div style="height:10px;"></div></td></tr>
 
     <tr name="trRampTime">
       <td id="lblRampTime">${stringTableRampTime}: </td>
