@@ -11,7 +11,7 @@ set PROFILES_MAP(1) "\${dimmer_on} / \${light_stairway}"
 set PROFILES_MAP(2) "\${no_action}" 
 
 
-set PROFILE_0(UI_HINT)  0
+set PROFILE_0(UI_HINT) 0
 set PROFILE_0(UI_DESCRIPTION) "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)    "Expertenprofil"
 
@@ -36,8 +36,8 @@ set PROFILE_1(SHORT_JT_RAMPOFF)   2
 set PROFILE_1(SHORT_JT_RAMPON)    0
 set PROFILE_1(SHORT_OFFDELAY_BLINK) {1 0}
 set PROFILE_1(SHORT_ON_LEVEL)   {1.0 range 0.0 - 1.005}
-set PROFILE_1(SHORT_RAMPON_TIME)  {0.5 range 0.0 - 111600}
-set PROFILE_1(SHORT_RAMPOFF_TIME) {0.5 range 0.0 - 111600}
+set PROFILE_1(SHORT_RAMPON_TIME)  {0.5 range 0.0 - 111600.0}
+set PROFILE_1(SHORT_RAMPOFF_TIME) {0.5 range 0.0 - 111600.0}
 set PROFILE_1(UI_DESCRIPTION) "Beim Ausl&ouml;sen des Sensors wird das Licht mindestens f&uuml;r die eingestellte Zeit eingeschaltet.&nbsp;"
 set PROFILE_1(UI_TEMPLATE)  $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
@@ -74,7 +74,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
       
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
-  
+
   #global SUBSETS
   set name "x"
   set i 1

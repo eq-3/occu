@@ -297,7 +297,9 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   upvar PROFILE_PNAME PROFILE_PNAME
   upvar $pps          ps      
   upvar $pps_descr    ps_descr
-  
+
+  set ch $dev_descr_sender(INDEX)
+
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
   }

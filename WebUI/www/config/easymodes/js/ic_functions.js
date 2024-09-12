@@ -576,6 +576,8 @@ MD_catchBrightness = function(url, sender_address, receiver_address, brightness,
     brightness = knownBrightness;
   }
 
+  if (brightness < 0) {brightness = 0.0;}
+
   ResetPostString();
   poststr += "&url=" +url;
   poststr += "&sender_address="   +sender_address;
