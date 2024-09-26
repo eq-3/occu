@@ -484,6 +484,11 @@ jQuery.extend(true,langJSON, {
       "Sollen bei angeschlossenem LED-Leuchtmittel niedrigere Werte als 10% bzw. 5% (variiert je nach Dimmer) f%FCr die Einschalthelligkeit verwendet werden, " +
       "muss bei den vorhandenen Verkn%FCpfungen der Parameter <b>Minimaler Pegel im Zustand 'ein'</b> entsprechend angepasst werden.",
 
+    "TRIGGER_ANGLE_HYSTERESIS" :
+      "Ausl%DFsewinkel Hysterese (+/-):<br/><br/>" +
+      "Grenze zum n%E4chsten Winkelbereich muss um diesen Betrag %FCberschritten werden, " +
+      "um in den Zustand des n%E4chsten Winkelbereichs zu wechseln.",
+
     "noMoreHelp" : ""
   },
 
@@ -965,6 +970,11 @@ jQuery.extend(true,langJSON, {
     "DIM_CHANNEL_OPERATION_MODE" :
       "en* Sollen bei angeschlossenem LED-Leuchtmittel niedrigere Werte als 10% bzw. 5% (variiert je nach Dimmer) f%FCr die Einschalthelligkeit verwendet werden, " +
       "muss bei den vorhandenen Verkn%FCpfungen der Parameter <b>Minimaler Pegel im Zustand 'ein'</b> entsprechend angepasst werden.",
+
+    "TRIGGER_ANGLE_HYSTERESIS" :
+      "en* Ausl%DFsewinkel Hysterese (+/-):<br/><br/>" +
+      "Grenze zum n%E4chsten Winkelbereich muss um diesen Betrag %FCberschritten werden, " +
+      "um in den Zustand des n%E4chsten Winkelbereichs zu wechseln.",
 
     "noMoreHelp" : ""
     }

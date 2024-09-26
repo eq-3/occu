@@ -41,6 +41,8 @@ jQuery.extend(true, langJSON, {
       "<b>In Heizungsgruppen dienen die beiden Felder nur zur Anzeige des eingestellten Modus. " +
       "Hier ist ein Wechsel nicht m%F6glich.</b>",
 
+    "stringTableAbsoluteAngleStatus" : "Status",
+
     "noMoreKeys" : ""
   }
 });
