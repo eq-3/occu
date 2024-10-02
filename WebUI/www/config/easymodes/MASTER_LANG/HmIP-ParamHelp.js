@@ -481,11 +481,11 @@ jQuery.extend(true,langJSON, {
       "DISPLAY_INVERTED_COLORS"  : "Mit diesem Parameter w%E4hlen Sie die Standard-Anzeige im Lightmode oder den Darkmode f%FCr das Display aus.",
 
     "DIM_CHANNEL_OPERATION_MODE" :
-      "Sollen bei angeschlossenem LED-Leuchtmittel niedrigere Werte als 10% bzw. 5% (variiert je nach Dimmer) f%FCr die Einschalthelligkeit verwendet werden, " +
-      "muss bei den vorhandenen Verkn%FCpfungen der Parameter <b>Minimaler Pegel im Zustand 'ein'</b> entsprechend angepasst werden.",
+      "Sollen bei angeschlossenem LED-Leuchtmittel niedrigere Werte als 10 % bzw. 5 % (variiert je nach Dimmer) f%FCr die Einschalthelligkeit verwendet werden, " +
+      "muss bei den vorhandenen Verkn%FCpfungen der Parameter Minimaler Pegel im Zustand'ein'</b> entsprechend angepasst werden.",
 
     "TRIGGER_ANGLE_HYSTERESIS" :
-      "Ausl%DFsewinkel Hysterese (+/-):<br/><br/>" +
+      "Ausl%F6sewinkel Hysterese (+/-):<br/><br/>" +
       "Grenze zum n%E4chsten Winkelbereich muss um diesen Betrag %FCberschritten werden, " +
       "um in den Zustand des n%E4chsten Winkelbereichs zu wechseln.",
 
@@ -968,13 +968,13 @@ jQuery.extend(true,langJSON, {
     "DISPLAY_INVERTED_COLORS"  : "Use this parameter to select the standard display in light mode or dark mode for the display.",
 
     "DIM_CHANNEL_OPERATION_MODE" :
-      "en* Sollen bei angeschlossenem LED-Leuchtmittel niedrigere Werte als 10% bzw. 5% (variiert je nach Dimmer) f%FCr die Einschalthelligkeit verwendet werden, " +
-      "muss bei den vorhandenen Verkn%FCpfungen der Parameter <b>Minimaler Pegel im Zustand 'ein'</b> entsprechend angepasst werden.",
+      "If you want to use values lower than 10 % or 5 % (varies depending on the dimmer) for the switch-on brightness with an LED lamp connected, " +
+      "you will need to adjust the parameter ‘Minimum level in the 'on'</b> state in the existing links." ,
 
     "TRIGGER_ANGLE_HYSTERESIS" :
-      "en* Ausl%DFsewinkel Hysterese (+/-):<br/><br/>" +
-      "Grenze zum n%E4chsten Winkelbereich muss um diesen Betrag %FCberschritten werden, " +
-      "um in den Zustand des n%E4chsten Winkelbereichs zu wechseln.",
+      "Trigger angle hysteresis  (+/-):<br/><br/>" +
+      "The limit for the next angle range must be exceeded by this amount in order to change to the state of the next angle range." ,
+
 
     "noMoreHelp" : ""
     }

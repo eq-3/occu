@@ -32,15 +32,13 @@ jQuery.extend(true, langJSON, {
 
     "comment" : "Release C/2024 - not yet translated",
 
-    "lblInfoStatusControlDeviceFeedIn" : "en* Einspeisung Z%E4hler Ger%E4t",
-    "lblInfoStatusControlFeedInCounter" : "en* Einspeisung Z%E4hler CCU",
+    "lblInfoStatusControlDeviceFeedIn" : "Feed-in meter device",
+    "lblInfoStatusControlFeedInCounter" : "Feed-in meter CCU",
 
     "hintHeatingCoolngNotAllowed" :
-      "en* Die Anzeigefelder Heizen / K%FChlen zeigen den aktuell eingestellten Modus an.<br/><br/>" +
-      "Ist <b><u>keine</u></b> Verkn%FCpfung zwischen einem HmIP Wandthermostaten und einem HmIP Fu%DFbodenheizungscontroller vorhanden, " +
-      "l%E4%DFt sich der Modus hiermit auch aktiv wechseln.<br/><br/>" +
-      "<b>In Heizungsgruppen dienen die beiden Felder nur zur Anzeige des eingestellten Modus. " +
-      "Hier ist ein Wechsel nicht m%F6glich.</b>",
+      "The heating/cooling display fields show the currently set mode.<br/><br/>" +
+      "If there is <b><u>no</u></b> link between an Homematic IP wall thermostat and an Homematic IP heating controller, the mode can also be actively changed.<br/><br/>" +
+      "<b>In heating groups, the two fields only display the set mode. A change is not possible.</b>",
 
     "noMoreKeys" : ""
   }

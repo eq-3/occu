@@ -3,7 +3,17 @@
 function ::ShowExtDesc() {
 
   if ((chn.HssType() == "SWITCH_TRANSMITTER") && ((chn.Label() == "HmIP-MOD-OC8") || (chn.Label() == "ELV-SH-SB8"))) {
-    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_OC}</span>");
+
+    if ((chn.Label() == "ELV-SH-SB8")) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_LED}</span>");
+    } else {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_OC}</span>");
+    }
+    showExtDesc = true;
+  }
+
+  if ((chn.HssType() == "SWITCH_VIRTUAL_RECEIVER") && (chn.Label() == "ELV-SH-SB8")) {
+    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_LED}</span>");
     showExtDesc = true;
   }
 

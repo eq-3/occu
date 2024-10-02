@@ -37,7 +37,7 @@ jQuery.extend(true, langJSON, {
     "hintHeatingCoolngNotAllowed" :
       "Die Anzeigefelder Heizen / K%FChlen zeigen den aktuell eingestellten Modus an.<br/><br/>" +
       "Ist <b><u>keine</u></b> Verkn%FCpfung zwischen einem HmIP Wandthermostaten und einem HmIP Fu%DFbodenheizungscontroller vorhanden, " +
-      "l%E4%DFt sich der Modus hiermit auch aktiv wechseln.<br/><br/>" +
+      "l%E4%DFt sich der Modus hiermit aktiv wechseln.<br/><br/>" +
       "<b>In Heizungsgruppen dienen die beiden Felder nur zur Anzeige des eingestellten Modus. " +
       "Hier ist ein Wechsel nicht m%F6glich.</b>",
 
