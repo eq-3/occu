@@ -52,6 +52,7 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeENERGY_COUNTER": "Energy meter<br/>Sensor: Power",
     "diagramValueTypeIEC_ENERGY_COUNTER": "Energy meter<br/>Sensor: IEC",
     "diagramValueTypeGAS_ENERGY_COUNTER": "Energy meter<br/>Sensor: Gas",
+    "diagramValueTypeENERGY_COUNTER_FEED_IN" : "Energy feed-in",
     "diagramValueTypeGAS_FLOW": "Gas flow meter<br/>Sensor: Gas",
     "diagramValueTypeGAS_VOLUME": "Consumption<br/>Sensor: Gas",
     "diagramValueTypePOWER": "Power<br/>Sensor: Power",

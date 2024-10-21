@@ -2159,6 +2159,7 @@ daliRefreshDevices = function(address) {
             "valueKey": "UNIVERSAL_LIGHT_MAX_CAPABILITIES"
           });
           daliChannel = DeviceList.getChannelByAddress(devAddress + ":" + loop);
+          daliChannel.daliMaxCapabilities = maxCap;
           homematic("Interface.setMetadata", {"objectId": daliChannel.id , "dataId" : "maxCap", "value": maxCap});
         }
         MessageBox.close();
