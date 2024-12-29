@@ -898,7 +898,9 @@ static int eq3loop_open(struct inode *inode, struct file *filp)
 
 static struct file_operations eq3loop_fops = {
 	.owner		= THIS_MODULE,
-	.llseek		= no_llseek,
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(6, 0, 0))
+ 	.llseek = no_llseek,
+#endif
 	.read		= eq3loop_read,
 	.write		= eq3loop_write,
 	.open		= eq3loop_open,
