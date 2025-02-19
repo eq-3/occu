@@ -1,0 +1,240 @@
+! FLOW_METER_TRANSMITTER
+function ::CreateFlowMeterTransmitter() {
+  object oChannel = dom.GetObject(chnId);
+  string chAddress = oChannel.Address();
+
+  object oWaterFlow = cObj.DPByControl("FLOW_METER_TRANSMITTER.WATER_FLOW");  ! WATER_FLOW DEVICE       Unit L/h
+  object oWaterVolume = cObj.DPByControl("FLOW_METER_TRANSMITTER.WATER_VOLUME");                      ! Unit L
+  object oWaterVolumeSinceOpen = cObj.DPByControl("FLOW_METER_TRANSMITTER.WATER_VOLUME_SINCE_OPEN");  ! Unit L
+
+  object sysVarCounter = dom.GetObject("svCounter_"#chnId#"_"#chAddress); ! WATER_VOLUME CCU
+  object sysVarCounterOldVal = dom.GetObject("svCounterOldVal_"#chnId);
+
+  string flowCounter = "unknown";
+  string waterVolume = "unknown";
+  string waterVolumeSinceOpen = "unknown";
+
+  if (oWaterFlow) {
+    flowCounter = oWaterFlow.Value().ToString(2)#" "#oWaterFlow.ValueUnit();
+  } else {
+    flowCounter = "--";
+  }
+
+  if (oWaterVolume && sysVarCounter) {
+    waterVolume = sysVarCounter.Value().ToString(2)#" "#oWaterVolume.ValueUnit();
+  } else {
+    waterVolume = "--";
+  }
+
+  if (oWaterVolumeSinceOpen) {
+    waterVolumeSinceOpen = oWaterVolumeSinceOpen.Value().ToString(2)#" "#oWaterVolumeSinceOpen.ValueUnit();
+  } else {
+    waterVolumeSinceOpen = "--";
+  }
+
+  string counter30Days = oChannel.MetaData("counter30Days");
+
+  if (counter30Days) {
+    real counterToday = oChannel.MetaData("counter0").ToString(2);
+    real counterYesterday = oChannel.MetaData("counter1").ToString(2);
+    real counterWeek = oChannel.MetaData("counter7").ToString(2);
+    real counterMonth = oChannel.MetaData("counter30").ToString(2);
+  }
+
+  ! html
+
+  ! Current water flow
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table>");
+
+        ! Water Flow Counter
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>${stringTableWaterFlow}</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span id='"#chnId#"FlowCounter'>"#flowCounter#"</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+
+  ! Water volume and volume since open
+  WriteLine("<tr>");
+    WriteLine("<td>");
+      WriteLine("<table>");
+        WriteLine("<tr>");
+          WriteLine("<td>");
+            WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+              WriteLine("<tr>");
+                ! Water volume - using the ccu counter instead of the device counter
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>${stringTableWaterVolume}</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span id='"#chnId#"waterVolume'>"#waterVolume#"</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+
+              !  if (oWaterVolume) {
+              !    ! Device Value - for testing only. We are using the above ccu water volume
+              !    WriteLine("<td>");
+              !      WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+              !        WriteLine("<tr>");
+              !          WriteLine("<td>");
+              !            WriteLine("<span>A ${stringTableWaterVolume}</span>");
+              !          WriteLine("</td>");
+              !        WriteLine("</tr>");
+              !        WriteLine("<tr>");
+              !          WriteLine("<td>");
+              !            WriteLine("<span>"#oWaterVolume.Value()#"</span>");
+              !          WriteLine("</td>");
+              !        WriteLine("</tr>");
+              !      WriteLine("</table>");
+              !    WriteLine("</td>");
+              !  }
+
+               ! Reset flow counter
+                WriteLine("<td>");
+                  WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<div class='ControlBtnOff CLASS02550' style='line-height:35px' id='"#chnId#"resetFlowCounter' onclick='resetCounter(\""#sysVarCounter.ID()#"\", \""#chnId#"\", \""#oWaterVolume.ValueUnit()#"\");'>${btnReset}</div>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+
+                ! Water volume since open
+              WriteLine("<tr>");
+                WriteLine("<td>");
+                  WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span>${stringTableWaterVolumeSinceOpen}</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                    WriteLine("<tr>");
+                      WriteLine("<td>");
+                        WriteLine("<span id='"#chnId#"waterVolumeSinceOpen'>"#waterVolumeSinceOpen#"</span>");
+                      WriteLine("</td>");
+                    WriteLine("</tr>");
+                  WriteLine("</table>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+
+              if (counter30Days) {
+                WriteLine("<tr><td colspan='8'><div class='controlHeader'>${powerMeasurement}</div><td></tr>");
+
+                ! Water volume today and yesterday
+                WriteLine("<tr>");
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounterToday}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#counterToday#" "#oWaterVolume.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounterYesterday}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#counterYesterday#" "#oWaterVolume.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+
+                ! Water volume last 7 days and last 30 days
+                WriteLine("<tr>");
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounter7d}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#counterWeek#" "#oWaterVolume.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+
+                  WriteLine("<td>");
+                    WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>${lblEnergyCounter30d}</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                      WriteLine("<tr>");
+                        WriteLine("<td>");
+                          WriteLine("<span>"#counterMonth#" "#oWaterVolume.ValueUnit()#"</span>");
+                        WriteLine("</td>");
+                      WriteLine("</tr>");
+                    WriteLine("</table>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+              }
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+
+      WriteLine("</table>");
+    WriteLine("</td>");
+  WriteLine("</tr>");
+
+  WriteLine("<script type=\"javascript\">");
+
+    WriteLine("resetCounter=function(sysVarId, chnId, unit) {");
+      WriteLine("var doIt = confirm(translateKey('msgResetWaterCounter'));");
+      WriteLine("if (doIt) {");
+        WriteLine("homematic('SysVar.setFloat', {'name' : sysVarId, 'value' : '0.00 '});");
+        WriteLine("jQuery('#' + chnId + 'waterVolume').text('0.00 ' + unit);");
+      WriteLine("}");
+    WriteLine("};");
+
+  WriteLine("</script>");
+
+}

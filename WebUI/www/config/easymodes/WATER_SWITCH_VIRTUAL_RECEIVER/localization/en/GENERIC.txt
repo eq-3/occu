@@ -1,0 +1,14 @@
+"switch_off" : "Irrigation actuator - off",
+"switch_on" : "Irrigation actuator - on",
+"switch_on_off" : "Irrigation actuator - on / off",
+"switch_toggle" : "Irrigation actuator toggle",
+"change_signal_on" : "When changing on",
+"change_signal_off" : "When changing off",
+
+"actor_off" : "Actor off",
+"actor_on" : "Actor on",
+"actor_on_off" : "Actor  on / off",
+"actor_toggle" : "Actor toggle",
+
+"condThresholdLo" : "Lower limit",
+"condThresholdHi" : "Upper limit",

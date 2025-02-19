@@ -489,6 +489,15 @@ jQuery.extend(true,langJSON, {
       "Grenze zum n%E4chsten Winkelbereich muss um diesen Betrag %FCberschritten werden, " +
       "um in den Zustand des n%E4chsten Winkelbereichs zu wechseln.",
 
+    "helpAcitveLevelMode" :
+      "Helligkeit, die nach der Aktivierung des Ger%E4tes durch einen initialen Tastendruck f%FCr eine festgelegte Dauer eingeschaltet wird.",
+
+    "ACTIVATE_LEVEL_VALUE" :
+      "Mit diesem Parameter stellen Sie die Helligkeit ein, die nach der Aktivierung des Ger%E4tes durch einen initialen Tastendruck " +
+      "f%FCr die festgelegte Dauer eingeschaltet wird.<br/><br/>Die Dauer wird durch den n%E4chsten Parameter '${lblOnTime}' eingestellt.",
+
+    "FEEDBACK_LEVEL_VALUE" : "Mit diesem Parameter stellen Sie die Helligkeit der bet%E4tigten Taste ein.",
+
     "noMoreHelp" : ""
   },
 
@@ -975,6 +984,14 @@ jQuery.extend(true,langJSON, {
       "Trigger angle hysteresis  (+/-):<br/><br/>" +
       "The limit for the next angle range must be exceeded by this amount in order to change to the state of the next angle range." ,
 
+    "helpAcitveLevelMode" :
+      "en* Helligkeit, die nach der Aktivierung des Ger%E4tes durch einen initialen Tastendruck f%FCr eine festgelegte Dauer eingeschaltet wird.",
+
+    "ACTIVATE_LEVEL_VALUE" :
+      "en* Mit diesem Parameter stellen Sie die Helligkeit ein, die nach der Aktivierung des Ger%E4tes durch einen initialen Tastendruck " +
+      "f%FCr die festgelegte Dauer eingeschaltet wird.<br/><br/>Die Dauer wird durch den n%E4chsten Parameter '${lblOnTime}' eingestellt.",
+
+    "FEEDBACK_LEVEL_VALUE" : "en* Mit diesem Parameter stellen Sie die Helligkeit der bet%E4tigten Taste ein.",
 
     "noMoreHelp" : ""
     }

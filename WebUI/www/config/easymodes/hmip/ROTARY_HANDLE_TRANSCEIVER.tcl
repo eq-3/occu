@@ -23,6 +23,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set specialID "[getSpecialID $special_input_id]"
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
+
     set prn 1
     append HTML_PARAMS(separate_1) "<tr>"
       append HTML_PARAMS(separate_1) "<td>\${stringTableEventDelay}</td>"
@@ -39,7 +40,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
     append HTML_PARAMS(separate_1) "</tr>"
     append HTML_PARAMS(separate_1) "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelB($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
 
     set param MSG_FOR_POS_B
     if { [info exists ps($param)] == 1 } {

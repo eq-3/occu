@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Bei erteilter Berechtigung und Eingabe des korrekten Codes wird der Bew&auml;sserungsaktor f&uuml;r die festgelegte Zeit eingeschaltet. Ist eine Verz&oumlgerungszeit eingestellt, erfolgt das Schalten erst nach Ablauf dieser Zeit.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei erteilter Berechtigung und Eingabe des korrekten Codes wird der Bew&auml;sserungsaktor f&uuml;r die festgelegte Zeit ausgeschaltet. Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt das Schalten erst nach Ablauf dieser Zeit.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei erteilter Berechtigung und Eingabe des korrekten Codes wird der Bew&auml;sserungsaktor f&uuml;r die festgelegte Zeit ein- oder ausgeschaltet (Toggle-Funktion). Ist eine Verz&ouml;gerungszeit eingestellt, erfolgt das Schalten erst nach Ablauf dieser Zeit.</span><br/><br/>",
+
+"hint_hmip_wgc" : "Wenn das Ger&auml;t mit Batterien betrieben wird, sollte keine lange Einschaltdauer gew&auml;hlt werden, da das angezogene Relais die Batterien sehr schnell entleeren w&uuml;rde.<br/><br/>",

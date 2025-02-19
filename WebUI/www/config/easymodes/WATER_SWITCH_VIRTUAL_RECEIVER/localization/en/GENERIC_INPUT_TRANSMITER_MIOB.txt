@@ -1,0 +1,1 @@
+"description_1" : "<span class=\"translated\">If the switch/push-button input is triggered, the actuator will be switched on or off.</span><br/><br/>",

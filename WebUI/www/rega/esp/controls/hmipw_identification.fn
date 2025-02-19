@@ -79,7 +79,7 @@ function ::CreateIdentification() {
           WriteLine("</tr>");
         }
       WriteLine("</table>");
-      if ((ch.Label() != "HmIPW-DRAP") && (ch.Label() != "HmIP-BSL")) {
+      if ((ch.Label() != "HmIPW-DRAP") && (ch.Label().Find("HmIP-BSL") == -1 ) && (ch.Label().Find("HmIP-WGS") == -1 ) && (ch.Label().Find("HmIP-WGT") == -1)) {
         Call("/esp/controls/maintenance.fn::CreateOperationVoltage()");
       }
 

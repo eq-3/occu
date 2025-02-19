@@ -117,7 +117,7 @@ proc getPanelA {prn pref specialElement {paramType ""}} {
         append s "<option value=\"11\">\${optionUnit15M}</option>"
         append s "<option value=\"12\">\${optionUnit1H}</option>"
         append s "<option value=\"13\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
 
       if {$paramType == "eventDelay"} {
         append s "&nbsp;[getHelpIcon EVENT_DELAY 450 75]"
@@ -282,7 +282,7 @@ proc getPanelB {prn pref specialElement {paramType ""}} {
         append s "<option value=\"10\">\${optionUnit4M}</option>"
         append s "<option value=\"11\">\${optionUnit15M}</option>"
         append s "<option value=\"12\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
 
       if {$paramType == "eventDelay"} {
         append s "&nbsp;[getHelpIcon EVENT_DELAY 450 75]"
@@ -442,7 +442,7 @@ proc getDelayShort {prn pref specialElement} {
         append s "<option value=\"10\">\${optionUnit15M}</option>"
         append s "<option value=\"11\">\${optionUnit1H}</option>"
         append s "<option value=\"12\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -583,7 +583,7 @@ proc getDelayShortA {prn pref specialElement} {
         append s "<option value=\"4\">\${optionUnit5M}</option>"
         append s "<option value=\"5\">\${optionUnit15M}</option>"
         append s "<option value=\"6\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -688,7 +688,7 @@ proc getEventFilterTime {prn pref specialElement} {
         append s "<option value=\"6\">\${optionUnit60S}</option>"
         append s "<option value=\"7\">\${optionUnit105S}</option>"
         append s "<option value=\"8\">\${stringTableEnterValue}</option>"
-      append s "/<select>&nbsp;&nbsp;"
+      append s "</select>&nbsp;&nbsp;"
 
       append s [getHelpIcon $helpEvemtFilterTime]
 
@@ -811,7 +811,7 @@ proc getDelay0to20M_step2M {prn pref specialElement} {
         append s "<option value=\"10\">\${optionUnit20M}</option>"
 
         # append s "<option value=\"5\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -952,7 +952,7 @@ proc getDelay {prn pref specialElement} {
         append s "<option value=\"9\">\${optionUnit30M}</option>"
         append s "<option value=\"10\">\${optionUnit1H}</option>"
         append s "<option value=\"11\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -1092,12 +1092,13 @@ proc getTimeOnOffShort {prn pref specialElement {extraparam ""}} {
         append s "<option value=\"2\">\${optionUnit300MS}</option>"
         append s "<option value=\"3\">\${optionUnit1S}</option>"
         append s "<option value=\"4\">\${optionUnit3S}</option>"
-        append s "<option value=\"5\">\${optionUnit30S}</option>"
-        append s "<option value=\"6\">\${optionUnit1M}</option>"
-        append s "<option value=\"7\">\${optionUnit2M}</option>"
-        append s "<option value=\"8\">\${optionUnit1H}</option>"
-        append s "<option value=\"9\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+        append s "<option value=\"5\">\${optionUnit20S}</option>"
+        append s "<option value=\"6\">\${optionUnit30S}</option>"
+        append s "<option value=\"7\">\${optionUnit1M}</option>"
+        append s "<option value=\"8\">\${optionUnit2M}</option>"
+        append s "<option value=\"9\">\${optionUnit1H}</option>"
+        append s "<option value=\"10\">\${stringTableEnterValue}</option>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -1114,16 +1115,17 @@ proc getTimeOnOffShort {prn pref specialElement {extraparam ""}} {
           append s "optionMap\[\"03\"\] = 2;"
           append s "optionMap\[\"11\"\] = 3;"
           append s "optionMap\[\"030\"\] = 4;"
-          append s "optionMap\[\"130\"\] = 5;"
-          append s "optionMap\[\"21\"\] = 6;"
-          append s "optionMap\[\"22\"\] = 7;"
-          append s "optionMap\[\"31\"\] = 8;"
+          append s "optionMap\[\"120\"\] = 5;"
+          append s "optionMap\[\"130\"\] = 6;"
+          append s "optionMap\[\"21\"\] = 7;"
+          append s "optionMap\[\"22\"\] = 8;"
+          append s "optionMap\[\"31\"\] = 9;"
 
           append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
           append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
 
           append s "currentVal = baseVal+factorVal,"
-          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 9;"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 10;"
           append s "window.setTimeout(function() {jQuery(\"#timeOnOff_\" + prn + \"_\" + pref).val(optionVal).change();}, 10);"
 
           #append s "console.log(\"ONTIME baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
@@ -1177,26 +1179,31 @@ proc getTimeOnOffShort {prn pref specialElement {extraparam ""}} {
               append s "factorElem.val(30);"
               append s "break;"
             append s "case 5:"
+              # 20 s
+              append s "baseElem.val(1);"
+              append s "factorElem.val(20);"
+              append s "break;"
+            append s "case 6:"
               # 30 s
               append s "baseElem.val(1);"
               append s "factorElem.val(30);"
               append s "break;"
-            append s "case 6:"
+            append s "case 7:"
               # 1 min
               append s "baseElem.val(2);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 7:"
+            append s "case 8:"
               # 2 min
               append s "baseElem.val(2);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case 8:"
+            append s "case 9:"
               # 1 h
               append s "baseElem.val(3);"
               append s "factorElem.val(1);"
               append s "break;"
-            append s "case 9:"
+            append s "case 10:"
               # Wert eingeben
                append s "timeBaseTRElem.show();"
                append s "timeFactorTRElem.show();"
@@ -1238,7 +1245,7 @@ proc getTimeOnOff {prn pref specialElement} {
         append s "<option value=\"19\">\${optionUnit24H}</option>"
         append s "<option value=\"20\">\${stringTablePermanent}</option>"
         append s "<option value=\"21\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -1445,7 +1452,7 @@ proc getRampOnOff {prn pref specialElement {extraparam ""}} {
         append s "<option value=\"7\">\${optionUnit20S}</option>"
         append s "<option value=\"8\">\${optionUnit30S}</option>"
         append s "<option value=\"9\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -1572,7 +1579,7 @@ proc getSwitchingInterval {prn pref specialElement} {
         append s "<option value=\"4\">\${optionUnit24D}</option>"
 
         # append s "<option value=\"5\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -1671,7 +1678,7 @@ proc getInterval_1D_7D_14D_28D {prn pref specialElement} {
         append s "<option value=\"4\">\${optionDisable}</option>"
         append s "<option value=\"5\">\${stringTableEnterValue}</option>"
 
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -1767,7 +1774,7 @@ proc getSwitchingIntervalOnTime {prn pref specialElement} {
         append s "<option value=\"4\">\${optionUnit10M}</option>"
 
         # append s "<option value=\"5\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -1868,7 +1875,7 @@ proc getAutoInterval {prn pref specialElement} {
         append s "<option value=\"4\">\${optionUnit7D}</option>"
         # append s "<option value=\"5\">\${stringTableEnterValue}</option>"
 
-      append s "/<select>"
+      append s "</select>"
 
       append s "&nbsp;[getHelpIcon AUTO_SENSOR_CLEANING 600 150]"
 
@@ -1973,7 +1980,7 @@ proc getBlindRunningTime {prn pref specialElement} {
           append s "<option value=\"3\">\${optionUnit90S}</option>"
           append s "<option value=\"4\">\${stringTableEnterValue}</option>"
 
-        append s "/<select> "
+        append s "</select> "
         append s [getHelpIcon $helpRunningTime]
       append s "</td>"
 
@@ -2072,7 +2079,7 @@ proc getSlatRunningTime {prn pref specialElement} {
         append s "<option value=\"9\">\${optionUnit30S}</option>"
         append s "<option value=\"10\">\${stringTableEnterValue}</option>"
 
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -2199,7 +2206,7 @@ proc getMin_10_15_20_25_30 {prn pref specialElement} {
         append s "<option value=\"4\">\${optionUnit30M}</option>"
 
         append s "<option value=\"5\">\${stringTableEnterValue}</option>"
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"
@@ -2306,7 +2313,7 @@ proc getAlarmTimeMax10Min {prn pref specialElement} {
 
     # Hide the next value because the max value should not exceed 10 minutes
     # append s "<option value=\"12\">\${stringTableEnterValue}</option>"
-  append s "/<select>"
+  append s "</select>"
   append s "</td>"
 
   append s "<script type=\"text/javascript\">"
@@ -2455,7 +2462,7 @@ proc getBlink {prn pref specialElement} {
         append s "<option value=\"5\">\${optionUnit5S}</option>"
         append s "<option value=\"6\">\${stringTableEnterValue}</option>"
 
-      append s "/<select>"
+      append s "</select>"
       append s "</td>"
 
       append s "<script type=\"text/javascript\">"

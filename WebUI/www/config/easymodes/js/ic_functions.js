@@ -20,6 +20,7 @@ perc_tmp = "";
 temp_tmp = "";
 exists_bib = [] ;
 arChnHasLinks = [];
+wgtHasLinksOrPrograms = false;
 
 getInternalKeySpecialInputId = function(arrId) 
 {
@@ -1367,28 +1368,38 @@ HMW_WebUIsetChannel = function(id, ch_type)
   }  
 };
 
-
 showHintPrgLink = function(channel, prgExists) {
   var channel = parseInt(channel),
-  classMultiMode = jQuery(".j_multiMode_" + channel)[0],
-  tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel],
-  elm = jQuery(".j_multiMode_" + channel). find("[name='CHANNEL_OPERATION_MODE']")[0];
+    classMultiMode = jQuery(".j_multiMode_" + channel)[0],
+    tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel],
+    wgtModeSelectorElm = jQuery("#wgtModeSelector"),
+    dataAttr = jQuery(classMultiMode).attr("data"),
+    elm = (typeof wgtModeSelectorElm == "object") ? wgtModeSelectorElm : jQuery(".j_multiMode_" + channel).find("[name='CHANNEL_OPERATION_MODE']")[0],
+    hintPrgExists = "hintPrgExists",
+    hintLinkExists = "hintLinkExists";
 
   jQuery(elm).prop("disabled", true);
+  wgtHasLinksOrPrograms = true;
 
   if (typeof classMultiMode == "object") {
     if (prgExists) {
+      if (typeof dataAttr != "undefined" && dataAttr == "hmip-wgt") {
+        hintPrgExists = "hintPrgExists_WGT";
+      }
       jQuery(classMultiMode).after("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintPrgExists") + "</div>");
     } else {
       arChnHasLinks[channel] = true;
-      jQuery(classMultiMode).after("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintLinkExists") + "</div>");
+      if (typeof dataAttr != "undefined" && dataAttr == "hmip-wgt") {
+        hintLinkExists = "hintLinkExists_WGT";
+      }
+      jQuery(classMultiMode).after("<div class=\"attention\" style='padding: 2px;'>" + translateKey(hintLinkExists) + "</div>");
     }
   } else {
     if (prgExists) {
-      jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintPrgExists") + "</div>");
+      jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>" + translateKey(hintPrgExists) + "</div>");
     } else {
       arChnHasLinks[channel] = true;
-      jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>" + translateKey("hintLinkExists") + "</div>");
+      jQuery(tableElm).append("<div class=\"attention\" style='padding: 2px;'>" + translateKey(hintLinkExists) + "</div>");
     }
   }
 };
@@ -1411,8 +1422,8 @@ ShowHintIfProgramExists = function(id, ch) {
     if (result) {
       showHintPrgLink(ch, true);
     } else {
-      if(arChnHasLinks[parseInt(ch)] != true) {
-        var elm = jQuery(".j_multiMode_" + ch). find("[name='CHANNEL_OPERATION_MODE']")[0];
+      if((arChnHasLinks[parseInt(ch)] != true) && (! wgtHasLinksOrPrograms)) {
+        var elm = jQuery(".j_multiMode_" + ch).find("[name='CHANNEL_OPERATION_MODE']")[0];
         jQuery(elm).prop("disabled", false);
       }
     }
@@ -1420,12 +1431,23 @@ ShowHintIfProgramExists = function(id, ch) {
 };
 
 RF_existsLink = function(deviceType, ch, ch_type, internalLinkOnly) {
-  var arDevMultiModeException = [];
+  var arDevMultiModeException = [],
+    dataAttr = jQuery(jQuery(".j_multiMode_" + ch)[0]).attr("data");
 
-  // The ch_type of a HM-MOD-EM-8 is KEY which is very generic. Therefore, for this device we have to check the device type.
+  if ((typeof dataAttr != "undefined") && dataAttr == "hmip-wgt") {
+    deviceType = "HmIP-WGT";
+  }
+
   switch(deviceType) {
     case "HM-MOD-EM-8":
-      showHintPrgLink(ch, false);
+    case "HmIP-WGT":
+      if (deviceType == "HmIP-WGT") {
+        if (ch_type == "SWITCH_VIRTUAL_RECEIVER") {
+          showHintPrgLink(ch, false);
+        }
+      } else {
+        showHintPrgLink(ch, false);
+      }
       break;
     default:
       break;

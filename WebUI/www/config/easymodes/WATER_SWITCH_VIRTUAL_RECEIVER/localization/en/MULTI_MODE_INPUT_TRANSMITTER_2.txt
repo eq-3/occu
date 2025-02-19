@@ -1,0 +1,5 @@
+"description_noLong_1" : "<span class=\"translated\">When actuating the switch the irrigation actuator will be switched on for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_noLong_2" : "<span class=\"translated\">When actuating the switch the irrigation actuator will be switched off for the set time. If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
+"description_noLong_3" : "<span class=\"translated\">When actuating the switch the irrigation actuator will be switched on or off for the time set (toggle function). If a delay time is set switching will be performed after the time has expired.</span><br/><br/>",
+"description_noLong_4" : "<span class=\"translated\">When actuating the switch the irrigation actuator will be switched on or off for the time set.</span><br/><br/>",
+"description_noLong_5" : "<span class=\"translated\">When actuating the switch the irrigation actuator will be switched off or on for the time set.</span><br/><br/>",

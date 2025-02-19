@@ -928,21 +928,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPON_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -950,7 +950,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MAX_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
@@ -965,7 +965,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${OFFDELAY_TIME}</td><td>"
 	option DELAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr LONG_OFFDELAY_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -980,7 +980,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPOFF_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPOFF_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -988,7 +988,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	append HTML_PARAMS(separate_$prn) "<td colspan =\"2\"><hr>\${description_longkey}</td>"
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
 	option DIM_OFFLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DIM_MIN_LEVEL|LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DIM_MIN_LEVEL|LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
@@ -1003,28 +1003,28 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPON_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 4
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${OFFDELAY_TIME}</td><td>"
 	option DELAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr LONG_OFFDELAY_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1039,7 +1039,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	incr pref ;# 6
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPOFF_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPOFF_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1048,7 +1048,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	incr pref ;# 7
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MAX_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1063,28 +1063,28 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPON_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPON_TIME|LONG_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPON_TIME|LONG_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
 	incr pref ;# 4
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${OFFDELAY_TIME}</td><td>"
 	option DELAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFFDELAY_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1099,7 +1099,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	incr pref ;# 6
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPOFF_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPOFF_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1114,21 +1114,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPOFF_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPOFF_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1143,28 +1143,28 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option BLINK
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_TIME}</td><td>"
 	option BLINK
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_TIME|LONG_OFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_OFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_TIME|LONG_OFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_OFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_OFF_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	
 	incr pref ;# 4
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${OFF_LEVEL}</td><td>"
 	option DIM_OFFLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL|LONG_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL|LONG_OFF_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_OFF_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1179,21 +1179,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPON_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_RAMPON_TIME|SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_RAMPON_TIME|SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1208,21 +1208,21 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPON_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_RAMPON_TIME|SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_RAMPON_TIME|SHORT_RAMPON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPON_TIME 
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL|LONG_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1237,7 +1237,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${OFFDELAY_TIME}</td><td>"
 	option DELAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFFDELAY_TIME|LONG_OFFDELAY_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_OFFDELAY_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr LONG_OFFDELAY_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1252,7 +1252,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 	incr pref ;# 3
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${RAMPOFF_TIME}</td><td>"
 	option RAMPTIME
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_RAMPOFF_TIME|LONG_RAMPOFF_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn        SHORT_RAMPOFF_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_RAMPOFF_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1267,14 +1267,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_TIME}</td><td>"
 	option LENGTH_OF_STAY
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn         SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_TIME|LONG_ON_TIME separate_${special_input_id}_$prn\_$pref PROFILE_$prn         SHORT_ON_TIME "onchange=\"ActivateFreeTime4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterTime_h_m_s $prn $pref ${special_input_id} ps_descr SHORT_ON_TIME
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
 	incr pref ;# 2
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MAX_LEVEL}</td><td>"
 	option DIM_ONLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DIM_MAX_LEVEL|LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DIM_MAX_LEVEL|LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn        LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1289,7 +1289,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
 	append HTML_PARAMS(separate_$prn) "<tr><td>\${DIM_MIN_LEVEL}</td><td>"
 	option DIM_OFFLEVEL
-	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DIM_MIN_LEVEL|LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn         LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+	append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DIM_MIN_LEVEL|LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn         LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
 	EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
 	append HTML_PARAMS(separate_$prn) "</td></tr>"
 	

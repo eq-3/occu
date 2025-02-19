@@ -1,0 +1,15 @@
+"description_1" : "<span class=\"translated\">If the selected switching command is detected, the irrigation actuator is switched to the opposite state.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Theirrigation actuator is switched according to the selected switching command.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">The profile is not active.</span><br/><br/>",
+
+"subset_1" : "rain - on / dry conditions - off",
+"subset_2" : "rain - off / dry conditions - on",
+"subset_3" : "rain",
+"subset_4" : "dry conditions",
+"subset_5" : "each change",
+"subset_6" : "rain - on",
+"subset_7" : "rain - off",
+"subset_8" : "dry conditions - on",
+"subset_9" : "dry conditions - off",
+
+"_at" : "<span class=\"translated\">when</span>",

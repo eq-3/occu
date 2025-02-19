@@ -106,7 +106,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set tmpPref $pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -158,7 +158,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
     option DIM_LEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -167,7 +167,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -277,7 +277,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
     incr pref
     option DIM_OFFLEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -286,7 +286,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -334,7 +334,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set tmpPref $pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -413,14 +413,14 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
     option DIM_LEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
     option DIM_OFFLEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -429,7 +429,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -477,7 +477,7 @@ set comment { Request from KB (developer)
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 }
@@ -562,7 +562,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option HUE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_HUE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_HUE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_HUE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_HUE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);\""]
       EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_HUE
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -689,7 +689,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option HUE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_HUE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_HUE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_HUE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_HUE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);\""]
       EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_HUE
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -833,7 +833,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option HUE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_HUE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_HUE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_HUE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_HUE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);\""]
       EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_HUE
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -910,7 +910,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${SATURATION_ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_SATURATION
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -935,7 +935,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${SATURATION_MAX_LEVEL}</td><td>"
       option DIM_STEPwoLastValue_5-100
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr $param
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -945,7 +945,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr $param
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -993,7 +993,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${SATURATION_OFF_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_SATURATION
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1019,7 +1019,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${SATURATION_MIN_LEVEL}</td><td>"
       option DIM_OFFLEVELwoLastValue
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr $param
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1029,7 +1029,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr $param
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1077,7 +1077,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${SATURATION_ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_SATURATION
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1090,7 +1090,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${SATURATION_OFF_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_SATURATION separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_SATURATION "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_OFF_SATURATION
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1108,7 +1108,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${SATURATION_MIN_LEVEL}</td><td>"
       option DIM_OFFLEVELwoLastValue
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr $param
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1118,7 +1118,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${SATURATION_MAX_LEVEL}</td><td>"
       option DIM_STEPwoLastValue_5-100
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr $param
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1128,7 +1128,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options $param separate_${special_input_id}_$prn\_$pref PROFILE_$prn $param "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr $param
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1190,7 +1190,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option COLOR_TEMPERATURE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);\""]
       EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_COLOR_TEMPERATURE "K"
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1239,7 +1239,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option COLOR_TEMPERATURE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);\""]
       EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_COLOR_TEMPERATURE K
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1303,7 +1303,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option COLOR_TEMPERATURE_STEP
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP_COLOR_TEMPERATURE separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP_COLOR_TEMPERATURE "onchange=\"ActivateFreeValue(\$('${special_input_id}_profiles'),$pref);\""]
       EnterFreeValue $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP_COLOR_TEMPERATURE K
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1352,7 +1352,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1376,7 +1376,7 @@ set comment {
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
     option DIM_LEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1385,7 +1385,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1462,7 +1462,7 @@ set comment {
 
     incr pref
     option DIM_OFFLEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1471,7 +1471,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1518,7 +1518,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1552,14 +1552,14 @@ set comment {
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
     option DIM_LEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
     option DIM_OFFLEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1568,7 +1568,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1616,7 +1616,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1640,7 +1640,7 @@ set comment {
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
     option DIM_LEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1649,7 +1649,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1725,7 +1725,7 @@ set comment {
 
     incr pref
     option DIM_OFFLEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1734,7 +1734,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1781,7 +1781,7 @@ set comment {
   incr pref
   append HTML_PARAMS(separate_$prn) "<tr><td>\${ON_LEVEL}</td><td>"
   option DIM_ONLEVEL
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
   EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1820,14 +1820,14 @@ set comment {
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MAX_LEVEL}</td><td>"
     option DIM_LEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MAX_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MAX_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MAX_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
     incr pref
     append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_MIN_LEVEL}</td><td>"
     option DIM_OFFLEVELwoLastValue
-    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+    append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_MIN_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_MIN_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
     EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_MIN_LEVEL
     append HTML_PARAMS(separate_$prn) "</td></tr>"
 
@@ -1836,7 +1836,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr name='trLongParam_$prn' class='hidden'><td>\${DIM_STEP}</td><td>"
       option DIM_STEPwoLastValue_5-90
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options LONG_DIM_STEP separate_${special_input_id}_$prn\_$pref PROFILE_$prn LONG_DIM_STEP "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr LONG_DIM_STEP
       append HTML_PARAMS(separate_$prn) "</td></tr>"
     }
@@ -1954,7 +1954,7 @@ set comment {
       incr pref
       append HTML_PARAMS(separate_$prn) "<tr id='trOnLevel_$prn'><td>\${ON_LEVEL_EFFECT}</td><td>"
       option DIM_0-100
-      append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+      append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL "onchange=\"ActivateFreePercent4InternalKey(\$('${special_input_id}_profiles'),$pref);\""]
       EnterPercent $prn $pref ${special_input_id} ps_descr SHORT_ON_LEVEL
       append HTML_PARAMS(separate_$prn) "</td></tr>"
 

@@ -120,6 +120,18 @@ function ::ShowExtDesc() {
     }
   }
 
+  ! Currently not necessary for the ELV-SH-CAP. The status is sent via channel 1
+  !if ( (chn.HssType() == "COND_SWITCH_TRANSMITTER") && (chn.Label() == "ELV-SH-CAP") ) {
+  !  if (chNumber == 2) {
+  !    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_COND_TEMPERATURE}</span>");
+  !    showExtDesc = true;
+  !  }
+  !  if (chNumber == 3) {
+  !    Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_COND_AIR_PRESSURE}</span>");
+  !    showExtDesc = true;
+  !  }
+  !}
+
   if ( (chn.HssType() == "COND_SWITCH_TRANSMITTER_TEMPERATURE") && (chn.Label() == "HmIP-STE2-PCB") && (chNumber == 3) ) {
     Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_COND_SWITCH_TRANSMITTER_TEMPERATURE_DIFF}</span>");
     showExtDesc = true;

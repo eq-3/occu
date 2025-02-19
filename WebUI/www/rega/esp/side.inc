@@ -33,18 +33,21 @@
   string hmip_smi55_2 = "HmIP-SMI55-2";
   string hmip_wgd = "HmIPW-WGD";
   string hmip_wgd_pl = "HmIPW-WGD-PL";
+  string hmip_wgs = "HmIP-WGS";
 
   string heatingClimateControlTransceiver =  "HEATING_CLIMATECONTROL_TRANSCEIVER";
 
   string acousticSignalVirtualReceiver = "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER";
+  string accessReceiver = "ACCESS_RECEIVER";
+  string alarmSwitchVirtualReceiver = "ALARM_SWITCH_VIRTUAL_RECEIVER";
+  string backLightingReceiver = "BACKLIGHTING_RECEIVER";
   string blindVirtualReceiver = "BLIND_VIRTUAL_RECEIVER";
   string dimmerVirtualReceiver = "DIMMER_VIRTUAL_RECEIVER";
-  string universalLightReceiver = "UNIVERSAL_LIGHT_RECEIVER";
-  string switchVirtualReceiver = "SWITCH_VIRTUAL_RECEIVER";
-  string alarmSwitchVirtualReceiver = "ALARM_SWITCH_VIRTUAL_RECEIVER";
   string opticalSignaReceiver = "OPTICAL_SIGNAL_RECEIVER";
-  string accessReceiver = "ACCESS_RECEIVER";
   string servoVirtualReceiver = "SERVO_VIRTUAL_RECEIVER";
+  string switchVirtualReceiver = "SWITCH_VIRTUAL_RECEIVER";
+  string universalLightReceiver = "UNIVERSAL_LIGHT_RECEIVER";
+
 
   string windowDriveReceiver = "WINDOW_DRIVE_RECEIVER";
 
@@ -554,6 +557,7 @@
             integer i_windowDriveReceiver = oCH.HssType().Find(windowDriveReceiver);
             integer i_hmip_WeekProfile = oCH.HssType().Find(hmIPWeekProfile);
             integer i_maintenance = oCH.HssType().Find(maintenance);
+            integer i_backLightingReceiver = oCH.HssType().Find(backLightingReceiver);
 
             integer ePaperAcousticDisplay = chLabel.Find(hmip_wrcd);
 
@@ -571,6 +575,7 @@
               || (i_universalLightReceiver != -1)
               || (i_opticalSignalReceiver != -1)
               || (i_switchVirtualReceiver != -1)
+              || (i_backLightingReceiver != -1)
               || (i_servoVirtualReceiver != -1)
               || (i_windowDriveReceiver != -1)
               || (i_hmip_WeekProfile != -1)
@@ -736,6 +741,24 @@
                 Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setCombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\', \'switchState\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
               }
 
+             if ((i_backLightingReceiver != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+
+               if (iV.Find("L=") == -1) {
+                 if ((oCH.Label().Find(hmip_mp3p) == -1) && (oCH.Label().Find(hmip_bsl) == -1) && (oCH.Label().Find(hmip_wgs) == -1)) {
+                   iV = "L=100,DV=31,DU=2,RTV=0,RTU=0,C=7,CB=1,RTTOV=0,RTTOU=3";
+                 } else {
+                   if (oCH.Label().Find(hmip_wgs) == -1) {
+                    iV = "L=100,DV=31,DU=2,RTV=0, RTU=1,C=7";
+                   } else {
+                     iV = "L=100,OT=0";
+                   }
+                 }
+               }
+
+             !  Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setCombinedParameter('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\', \'switchState\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+                Write( '<input id="prgStringOptionValue'#oSD.ID()#'" onfocus="setDimmerLevelController('#oSD.ID()#',\''#oCH.Label()#'\',\''#oCH.Address()#'\');" type="text" class="SelectBox CLASS00012" size="20" value="'#iV#'" onchange="iseSingleDestination.SetValue('#oSD.ID()#',this.value,\'STRING\');" /> ' );
+              }
+
               if (((i_blindVirtualReceiver != -1)) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 if (iV.Find("L=") == -1) {
                   iV = "L=100,L2=100";
@@ -758,11 +781,11 @@
               }
 
               ! SPHM-767
-              if (((oCH.Label().Find(hmipwID) != -1) || (oCH.Label().Find(hmip_drg_dali) != -1) || (oCH.Label().Find(hmip_bsl) != -1)) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
+              if (((oCH.Label().Find(hmipwID) != -1) || (oCH.Label().Find(hmip_drg_dali) != -1) || (oCH.Label().Find(hmip_bsl) != -1) || (oCH.Label().Find(hmip_wgs) != -1) ) && (i_maintenance != -1) && (oDP.HSSID().Find("COMBINED_PARAMETER") != -1)) {
                 ! IMTL(Level) 0 = OFF - 1 = ON
-                ! Some devices have no a display (e. g. HmIPW-WRC6). Therefore we check for a key visual (IMKV)
+                ! Some devices doesn't habe a display (e. g. HmIPW-WRC6). Therefore we check for a key visual (IMKV)
                 if (iV.Find("IMKV=") == -1) {
-                  if (((oCH.Label().Find(hmipw_wrc6) == -1) || (oCH.Label().Find(hmipw_wrc6_a) == -1)) && (oCH.Label().Find(hmip_wgd) == -1) && (oCH.Label().Find(hmip_wgd_pl) == -1)) {
+                  if (((oCH.Label().Find(hmipw_wrc6) == -1) || (oCH.Label().Find(hmipw_wrc6_a) == -1)) && (oCH.Label().Find(hmip_wgd) == -1) && (oCH.Label().Find(hmip_wgd_pl) == -1) && (oCH.Label().Find(hmip_wgs) == -1)) {
                     iV = "IMLB=true,IMKV=true,IMTL=1,IMDU=60";
                   } else {
                     iV = "IMKV=true,IMTL=1,IMDU=60";

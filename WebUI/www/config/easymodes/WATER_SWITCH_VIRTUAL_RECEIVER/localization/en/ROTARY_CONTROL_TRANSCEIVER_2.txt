@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">With a slow or quick clockwise rotation the irrigation actuator will be toggled on for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a slow or quick clockwise rotation the irrigation actuator will be toggled off for the set time. If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a slow or quick clockwise rotation the irrigation actuator will be switched on or off for the set time (toggle function). If a delay is set switching will be performed after the delay time has expired.</span><br/><br/>",
+
+

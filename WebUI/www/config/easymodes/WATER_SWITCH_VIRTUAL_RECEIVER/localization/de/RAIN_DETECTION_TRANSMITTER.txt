@@ -1,0 +1,15 @@
+"description_1" : "<span class=\"translated\">Bei Erkennung des gew&aumlhlten Schaltbefehls wird der Bew&auml;sserungsaktor in den entgegengesetzten Zustand geschaltet.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Der Bew&auml;sserungsaktor wird entsprechend des gew&auml;hlten Schaltbefehls geschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span>",
+
+"subset_1" : "Regen - ein / Trockenheit - aus",
+"subset_2" : "Regen - aus / Trockenheit - ein",
+"subset_3" : "Regen",
+"subset_4" : "Trockenheit",
+"subset_5" : "jeder &Auml;nderung",
+"subset_6" : "Regen - ein",
+"subset_7" : "Regen - aus",
+"subset_8" : "Trockenheit - ein",
+"subset_9" : "Trockenheit - aus",
+
+"_at" : "<span class=\"translated\">bei</span>",

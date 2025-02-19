@@ -42,13 +42,21 @@ function ::CreateSwitchTansmitter()
   {
     WriteLine("<td>");
       WriteLine("<table class='ControlBtnInfo'>");
-        WriteLine("<tr style='height:40px;'>");
-          WriteLine("<td id='"#chnId#"State'>");
+        WriteLine("<tr>");
+          WriteLine("<td id='"#chnId#"State' style='height:40px; line-height:40px; min-width:100px;'>");
 
           if (objState.Value() == true) {
-            WriteLine("${stringTableStateTrue}");
+            if ((ch.Label() != "HmIP-WSM") && (ch.Label() != "ELV-SH-WSM")) {
+              WriteLine("${stringTableStateTrue}");
+            } else {
+              WriteLine("${lblValve}: ${btnWaterOn}");
+            }
           } else {
-            WriteLine("${stringTableStateFalse}");
+            if ((ch.Label() != "HmIP-WSM") && (ch.Label() != "ELV-SH-WSM")) {
+              WriteLine("${stringTableStateFalse}");
+            } else {
+              WriteLine("${lblValve}: ${btnWaterOff}");
+            }
           }
 
           WriteLine("</td>");
@@ -98,6 +106,39 @@ function ::CreateVIR-LG-ONOFF_Actuator()
       WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#stateValue#", "#objState.ID()#", "#system.GetVar("iStatusOnly")#", '"#chnAddress#"', '"#chnLabel#"', '"#sInterface#"');");
       Write("jQuery('#"#chnId#"Off').html(translateKey('actionStatusControlLblOff')).show();");
       Write("jQuery('#"#chnId#"On').html(translateKey('actionStatusControlLblOn')).show();");
+
+    WriteLine("</script>");
+  }
+  return;
+}
+
+function ::CreateWaterSwitch()
+{
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+  string chnLabel = ch.Label();
+
+  ! Determine the name of the interface
+  object oIface = dom.GetObject(cObj.Interface());
+  string sInterface = oIface.Name();
+
+  object objState = cObj.DPByControl("WATER_SWITCH.STATE");
+
+  if( objState )
+  {
+    WriteLine("<td class='CLASS02521'>");
+      WriteLine("<div id='"#chnId#"Off' class='ControlBtnOff CLASS02522 j_translate'>${btnWaterOff}</div>");
+    WriteLine("</td>");
+
+    WriteLine("<td class='CLASS02521'>");
+      WriteLine("<div id='"#chnId#"On' class='ControlBtnOff CLASS02522 j_translate'>${btnWaterOn}</div>");
+    WriteLine("</td>");
+    WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
+
+    WriteLine("<script type='text/javascript'>");
+      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", "#system.GetVar("iStatusOnly")#", '"#chnAddress#"', '"#chnLabel#"', '"#sInterface#"');");
+      Write("jQuery('#"#chnId#"Off').html(translateKey('btnWaterOff')).show();");
+      Write("jQuery('#"#chnId#"On').html(translateKey('btnWaterOn')).show();");
 
     WriteLine("</script>");
   }

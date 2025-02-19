@@ -46,6 +46,7 @@ jQuery.extend(true,langJSON, {
     "motionDetectorTriggerAngle" : "Winkel f%FCr die Lageerkennung",
     "motionDetectorTriggerAngle2" : "Winkel f%FCr die Neigungserkennung",
     "motionDetectorTriggerAngleHysteresis" : "Hysterese der Lageerkennung",
+    "motionDetectorTriggerAngleHysteresisA" : "Hysterese der Lage-/Neigungserkennung",
 
     "motionDetectorOptionNoMessage" : "Keine Meldung",
     "motionDetectorOptionMotion_1": "Bewegung",
@@ -107,6 +108,7 @@ jQuery.extend(true,langJSON, {
     "motionDetectorTriggerAngle" : "Angle of position detection",
     "motionDetectorTriggerAngle2" : "Angel of tilt detection",
     "motionDetectorTriggerAngleHysteresis" : "Hysteresis of position detection",
+    "motionDetectorTriggerAngleHysteresisA" : "Hysteresis of position or tilt detection",
 
     "motionDetectorOptionNoMessage" : "No message",
     "motionDetectorOptionMotion_1": "Motion",

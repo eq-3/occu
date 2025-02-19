@@ -519,7 +519,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set options(1) "\${driving_mode_1}"
   set options(2) "\${driving_mode_2}"
   set options(3) "\${driving_mode_3}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DRIVING_MODE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_DRIVING_MODE "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_DRIVING_MODE separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_DRIVING_MODE ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   incr pref ;# 3
@@ -528,7 +528,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   option BLIND_LEVEL
   #set options(1.005) "\${lastValue}"
   #set options(1.010) "\${noModification}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_3 PROFILE_$prn SHORT_ON_LEVEL "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL separate_${special_input_id}_$prn\_3 PROFILE_$prn SHORT_ON_LEVEL ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   incr pref ;# 4
@@ -537,7 +537,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   option BLIND_LEVEL
   #set options(1.005) "\${lastValue}"
   #set options(1.010) "\${noModification}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_4 PROFILE_$prn SHORT_OFF_LEVEL "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL separate_${special_input_id}_$prn\_4 PROFILE_$prn SHORT_OFF_LEVEL ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   # ON_TIME
@@ -558,7 +558,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   option BLIND_LEVEL
   # set options(1.005) "\${lastValue}"
   # set options(1.010) "\${noModification}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL_2 "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_OFF_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_OFF_LEVEL_2 ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
   incr pref ;# 10
@@ -566,7 +566,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   option BLIND_LEVEL
   # set options(1.005) "\${lastValue}"
   # set options(1.010) "\${noModification}"
-  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL_2 "onchange=\"Disable_SimKey($ch, $prn, '${special_input_id}');\""]
+  append HTML_PARAMS(separate_$prn) [get_ComboBox options SHORT_ON_LEVEL_2 separate_${special_input_id}_$prn\_$pref PROFILE_$prn SHORT_ON_LEVEL_2 ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
   append HTML_PARAMS(separate_$prn) "<script type=\"text/javascript\">window.setTimeout(function() {BLIND_setPosition('separate_${special_input_id}_$prn\_1');jalousieShowSlatInputElem('separate_${special_input_id}_$prn\_1', $ch);},200)</script>"

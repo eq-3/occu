@@ -1,0 +1,11 @@
+"description_1" : "<span class=\"translated\">Beim Ausl&ouml;sen des Wassermelders wird der Bew&auml;sserungsaktor f&uuml;r die festgelegte Zeit in den entgegengesetzten Zustand geschaltet (Toggle-Funktion). Ist eine Verz&oumlgerungszeit eingestellt, erfolgt eine Schaltung erst nach Ablauf dieser Zeit .</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Beim Ausl&ouml;sen des Wassermelders wird der Bew&auml;sserungsaktor f&uuml;r die festgelegte Zeit eingeschaltet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Beim Ausl&ouml;sen des Wassermelders wird der Bew&auml;sserungsaktor f&uuml;r die festgelegte Zeit ausgeschaltet.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Der Wassermelder ist nicht aktiv</span>",
+
+"switchMode" : "Schalten bei",
+
+"subset_1": "Feuchtigkeit",
+"subset_2": "Wasserstand",
+"subset_3": "Feuchtigkeit oder Wasserstand",
+"subset_4": "Trockenheit",

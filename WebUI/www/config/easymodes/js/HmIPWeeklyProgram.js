@@ -67,6 +67,7 @@ getOnlyExpertChannels = function(channelType, channelNr) {
     channelType == "DIMMER_VIRTUAL_RECEIVER" ||
     //channelType == "UNIVERSAL_LIGHT_RECEIVER" ||
     channelType == "SWITCH_VIRTUAL_RECEIVER" ||
+    channelType == "WATER_SWITCH_VIRTUAL_RECEIVER" ||
     channelType == "BLIND_VIRTUAL_RECEIVER" ||
     channelType == "SHUTTER_VIRTUAL_RECEIVER" ||
     channelType == "ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER" ||
@@ -145,6 +146,47 @@ setBSLWPLevel = function(val, number) {
   }
 };
 
+setWGSPanel = function(chn,number,val,prn, isExpert) {
+  var number = addLeadingZero(number),
+    levelElm = jQuery("[name='"+number+"_WP_LEVEL']").first(),
+    modeSelector = parseInt(val),
+    relevantElms = [],
+    tmpLoop;
+
+  jQuery("[name='targetChannel"+chn+"_"+number+"']").hide().prop("checked", false).prev().hide();
+
+  switch (modeSelector) {
+    case 0:
+      relevantElms = jQuery("[data='BACKLIGHTING_RECEIVER'][name='targetChannel"+chn+"_"+number+"']");
+      levelElm.empty();
+      levelElm.append(new Option("Aus",0));
+      for (var loop = 0.05; loop < 1; loop += 0.05) {
+        tmpLoop = parseInt(loop.toFixed(2) * 100);
+        levelElm.append(new Option((tmpLoop )+ " %", loop.toFixed(2)));
+      }
+      levelElm.append(new Option("100 %",1));
+      levelElm.append(new Option("Alter Wert",1.005));
+      levelElm.append(new Option("Ignorieren",1.01));
+      levelElm.append(new Option("Wert eingeben","freeVal"));
+      break;
+    case 1:
+      if (isExpert) {
+        relevantElms = jQuery("[data='SWITCH_VIRTUAL_RECEIVER'][name='targetChannel" + chn + "_" + number + "']");
+      } else {
+        relevantElms = jQuery("[data='SWITCH_VIRTUAL_RECEIVER'][name='targetChannel"+chn+"_"+number+"']").first();
+      }
+      levelElm.empty();
+      levelElm.append (new Option(translateKey("optionOFF"), 0)).append(new Option(translateKey("optionON"), 1));
+      break;
+    default: console.log("Hm, here we have a problem");
+  }
+
+  jQuery(relevantElms).show().prev().show();
+  //jQuery(relevantElms).first().prop("checked", true).change();
+  window.setTimeout(function() {jQuery(relevantElms).change();},100);
+  jQuery(levelElm).find("option").last().prop("id", "dimOptionFreeValue"+chn+"_" + prn);
+
+};
 
 getWPVirtualChannels = function(channels, expert) {
   var result = [];
@@ -183,8 +225,10 @@ getWPVirtualChannels = function(channels, expert) {
 HmIPWeeklyProgram = Class.create();
 
 HmIPWeeklyProgram.prototype = {
-  initialize: function (address, ps, psDescr, sessionIsExpert, fwVersion) {
+  initialize: function (address, ps, psDescr, sessionIsExpert, fwVersion, extraParam) {
+
     self = this;
+    this.extraParam = extraParam;
     this.hmIPIFace = "HmIP-RF";
     this.address = address;
     this.arAddress = this.address.split(":");
@@ -199,6 +243,7 @@ HmIPWeeklyProgram.prototype = {
     this.UNIVERSAL_LIGHT_RECEIVER = "UNIVERSAL_LIGHT_WEEK_PROFILE";
     this.DIMMER_OUTPUT_BEHAVIOUR = "DIMMER_OUTPUT_BEHAVIOUR_WEEK_PROFILE";
     this.SWITCH = "SWITCH_WEEK_PROFILE";
+    this.WATER_SWITCH = "WATER_SWITCH_WEEK_PROFILE";
     this.BLIND = "BLIND_WEEK_PROFILE";
     this.SERVO = "SERVO_WEEK_PROFILE";
     this.WINDOW_DRIVE_RECEIVER = (this._isDeviceType("HmIP-MOD-WD-VK")) ? true : false;
@@ -207,6 +252,12 @@ HmIPWeeklyProgram.prototype = {
     this.ACCESS_TRANSCEIVER_HmIP_WKP = "HmIP-WKP";
     this.UNIVERSAL_LIGHT_RECEIVER_RGBW = "HmIP-RGBW";
     this.UNIVERSAL_LIGHT_RECEIVER_DALI = "HmIP-DRG-DALI";
+    this.isWGS = (this.device.deviceType.id.includes("HmIP-WGS")) ? true : false;
+    this.isWGT = (this.device.deviceType.id.includes("HmIP-WGT")) ? true : false;
+    this.isWSM = ((this.device.deviceType.id.includes("HmIP-WSM")) || (this.device.deviceType.id.includes("ELV-SH-WSM")))? true : false;
+
+
+
     this.isHmIPLSS = false;
 
     if (this._isDeviceType("HmIP-LSC")) {
@@ -217,7 +268,7 @@ HmIPWeeklyProgram.prototype = {
     this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
     this.ignoreExpertMode = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC"];
-    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC"];
+    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC", "HmIP-WGS", "HmIP-WGS-A", "HmIP-WGT" , "HmIP-WGT-A"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
     this.selectedMode_RGBW = "";
@@ -238,7 +289,7 @@ HmIPWeeklyProgram.prototype = {
     this.chnType = (this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) ? this.DIMMER : this.device.channels[this.chn].channelType;
 
     // The device type of the HmIP-BSL is DIMMER_WEEK_PROFILE but the weekly program should act as a SWITCH_WEEK_PROFILE
-    this.chnType = (this._isDeviceType("HmIP-BSL") && (this._getFwMajor() < 2)) ? this.SWITCH : this.chnType;
+    this.chnType = ((this._isDeviceType("HmIP-BSL") && (this._getFwMajor() < 2)) || this.isWSM) ? this.SWITCH : this.chnType;
 
     this.isAccessTransmitterHmIP_FWI = this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI);
     this.isAccessTransceiver_WKP = this._isDeviceType(this.ACCESS_TRANSCEIVER_HmIP_WKP);
@@ -290,7 +341,7 @@ HmIPWeeklyProgram.prototype = {
             var y = index / 3;
             if ((y != 0) && (y != parseInt(y))) { // select target channels 1,2,4,5,7,8,10,11.... which are expert channels
               // If the expert target channel is set, switch to the expert mode
-              if (isBitSet(val, index)) {
+              if (isBitSet(val, index) && (! self.isWGS) && (! self.isWGT)) {
                 self.sessionIsExpert = 1;
                 if (!self.ignoreExpertMode.includes(self.device.deviceType.id)) {
                   self.showHintExpertTargetChannel = true;
@@ -339,6 +390,14 @@ HmIPWeeklyProgram.prototype = {
 
     if ((this._isDeviceType("HmIP-SMO230")) || (this._isDeviceType("HmIP-SMO230-A")) || (this._isDeviceType("HmIPW-SMO230")) || (this._isDeviceType("HmIPW-SMO230-A"))) {
       this.virtualChannels =  [10, 11, 12];
+    }
+
+    if (this.isWGS) {
+      this.virtualChannels = [7, 9, 10, 11];
+    }
+
+    if (this.isWGT) {
+      this.virtualChannels = [2, 4, 5, 6];
     }
 
     if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW)) {
@@ -639,8 +698,11 @@ HmIPWeeklyProgram.prototype = {
     } else if (this.chnType == this.BLIND) {
       programEntry += "<td>" + translateKey('lblWPBlindLevel') + "</td>";
     }
-
-    programEntry += "<td>" + this._getLevel(number) + "</td>";
+    if ((! this.isWGS) && (! this.isWGT)) {
+      programEntry += "<td>" + this._getLevel(number) + "</td>";
+    } else {
+      programEntry += "<td>" + this._getLevelWGS(number) + "</td>";
+    }
 
     // SLAT LEVEL for Blinds
     if (this.chnType == this.BLIND && this.devHasVirtualBlindReceiver) {
@@ -752,6 +814,20 @@ HmIPWeeklyProgram.prototype = {
     programEntry += "<td colspan='3'>" + this._getWeekDay(number) + "</td>";
     programEntry += "</tr>";
 
+    if (this.isWGS || this.isWGT) {
+      programEntry += "<tr>";
+      programEntry += "<td>Target Select</td>";
+        programEntry += "<td>";
+          programEntry += "<select id='wgsWPModeSelector" + this.chn + "_" + number + "' onchange='setWGSPanel("+this.chn+","+number+",this.value, "+(this.prn - 3)+","+this.sessionIsExpert+");'>";
+            programEntry += "<option value='0'>Backlight</option>";
+            if (this.extraParam != "showOnlyBackLightingReceiver") {
+              programEntry += "<option value='1'>Switchaktor</option>";
+            }
+            programEntry += "</select>";
+        programEntry += "</td>";
+      programEntry += "</tr>";
+    }
+
     // TARGET CHANNELS
     programEntry += "<tr name='panelTargetChannel_" + number + "'>";
 
@@ -760,6 +836,7 @@ HmIPWeeklyProgram.prototype = {
     } else {
       programEntry += "<td>" + translateKey('lblUser') + "</td>";
     }
+
     programEntry += "<td colspan='3'>" + this._getTargetChannels(number) + "</td>";
     programEntry += "</tr>";
 
@@ -779,7 +856,7 @@ HmIPWeeklyProgram.prototype = {
       programEntry += "<td colspan='5'>" + translateKey('hintWeeklyProgramActiveExpertChannel') + "</td>";
       programEntry += "</tr>";
 
-      if ((! this._isDeviceType("HmIP-FLC")) && (! this._isDeviceType("HmIP-FDC"))) {
+      if ((! this._isDeviceType("HmIP-FLC")) && (! this._isDeviceType("HmIP-FDC")) && (! this.isWGS) && (! this.isWGT)) {
         programEntry += "<tr name='panelTargetChannel_" + number + "'>";
         if (!this.isAccessTransmitterHmIP_FWI) {
           if ((!this.isDoorLockDrive) && (!this.isAccessTransceiver_WKP)) {
@@ -789,6 +866,7 @@ HmIPWeeklyProgram.prototype = {
           }
         }
         programEntry += "<td>" + this._getPanelSelectTargetChannels(this.chn, number, this.prn) + "</td>";
+
         programEntry += "</tr>";
       }
     }
@@ -1034,6 +1112,27 @@ HmIPWeeklyProgram.prototype = {
 
   _getRampTime: function (number) {
     return this._getDurationRamptimeHTML("ramptime", number);
+  },
+
+  _setWGSPanel: function(number) {
+    var valModeSelector = parseInt(jQuery("#wgsWPModeSelector" + self.chn + "_" + number).val()),
+      relevantElms = [];
+
+    var levelElm = jQuery("#" + number + "_WP_LEVEL");
+
+    jQuery("[name='targetChannel"+self.chn+"_"+number+"']").hide().prev().hide();
+
+    switch (valModeSelector) {
+      case 0:
+        relevantElms = jQuery("[data='BACKLIGHTING_RECEIVER'][name='targetChannel"+self.chn+"_"+number+"']");
+        break;
+      case 1:
+        relevantElms = jQuery("[data='SWITCH_VIRTUAL_RECEIVER'][name='targetChannel"+self.chn+"_"+number+"']");
+        break;
+      default: console.log("Hm, here we have a problem");
+    }
+
+    jQuery(relevantElms).show().prev().show();
   },
 
   // This sets the Panel according to the mode (SWITCH or COLOR)
@@ -1286,7 +1385,6 @@ HmIPWeeklyProgram.prototype = {
         default:
           // Show all elements - no valid value!
           conInfo("ERROR: setEffectType - no valid value");
-          console.log("ERROR: setEffectType - no valid value");
           hueSaturationElm.show();
           colorTempElm.show();
           //tdEffect.show();  currently not in use
@@ -2050,6 +2148,104 @@ HmIPWeeklyProgram.prototype = {
 
   },
 
+  _getLevelWGS: function(number) {
+    var result = "", self = this,
+      paramID = number + "_WP_LEVEL",
+      val = (this.activeEntries[number] == true) ? (1 * this.ps[paramID]).toFixed(3) : "0.000",
+      optionVal,
+      level;
+
+    window.setTimeout(function() {
+      if (self.activeEntries[number] == true) {
+        var optionFreeValElm = jQuery("[name='"+paramID+"']"),
+          modeLevelElm = jQuery("#wgsWPModeSelector"+self.chn+"_" + number),
+          //arTargetChannels = jQuery("[name='targetChannel" + self.chn + "_" + number + "']"),
+          valTargetChannels = parseInt(jQuery("[name='"+number+"_WP_TARGET_CHANNELS']").val()),
+          level = (1 * self.ps[paramID]).toFixed(2),
+          activeMode;
+
+        activeMode = (valTargetChannels == 1) ? 0 : 1;
+        modeLevelElm.val(activeMode).change();
+        if (level == "0.00") {level = "0";} else if (level == "1.00") {level = 1;}
+          jQuery("[name="+paramID+"]").first().val(level);
+        if (val == "freeVal" || ((val != 1.005) && (val != 1.010) && ((parseInt(val * 100) % 5) != 0))) {
+          optionFreeValElm.val("freeVal");
+        }
+      }
+    },100);
+
+    showHideDuration = function (val, elmNr) {
+      elmNr = self._addLeadingZero(elmNr);
+      var durationModeElm = jQuery('#durationMode' + elmNr),
+        trDurationModeElm = jQuery('#trDurationMode' + elmNr),
+        trDurationValueElm = jQuery('#trDurationValue' + elmNr);
+
+      if (((val == "0") || (val == "0.000"))) {
+        trDurationModeElm.hide();
+        trDurationValueElm.hide();
+      } else {
+        trDurationModeElm.show();
+        if (durationModeElm.val() != "0") {
+          trDurationValueElm.show();
+        }
+      }
+    };
+
+    showFreeValue = function (val, nr) {
+      var freeValElm = jQuery("[name='dimFreeValue" + self.chn + "_" + self._addLeadingZero(nr) + "']");
+
+      if (val == "freeVal" || ((val != 1.005) && (val != 1.010) && ((parseInt(val * 100) % 5) != 0))) {
+        freeValElm.val(100);
+        freeValElm.show();
+      } else freeValElm.hide();
+    };
+
+    setDimFreeVal = function (val, prn, nr) {
+      var freeOptionElm = document.getElementById("dimOptionFreeValue" + self.chn + "_" + prn), // Don't use jQuery because of the dirty flag
+        freeValElm = jQuery("[name='dimFreeValue" + self.chn + "_" + self._addLeadingZero(nr) + "']");
+
+      val = parseInt(val);
+      val = (isNaN(val) || (val > 100)) ? 100 : val;
+      val = (val < 0) ? 0 : val;
+
+      jQuery(freeValElm[0]).val(val);
+
+      var tmpVal = (val / 100);
+
+      freeOptionElm.value = (val / 100);;
+      freeOptionElm.defaultSelected = false;
+      freeOptionElm.selected = true;
+    };
+
+
+    this.prn++ ;
+    // result += "<select id='separate_CHANNEL_" + this.chn + "_" + this.prn + "' name='" + paramID + "' onchange='showHideDuration(this.value, " + number + ");showFreeValue(this.value, " + number + ");'>";
+    result += "<select id='separate_CHANNEL_" + this.chn + "_" + this.prn + "' name='" + paramID + "' onchange='showFreeValue(this.value, " + number + ");'>";
+      result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
+      for (loop = 5; loop <= 100; loop += 5) {
+        optionVal = (loop / 100).toFixed(3);
+        result += (val == optionVal) ? "<option value='" + optionVal + "' selected='selected'>" + loop + " %</options>" : "<option value='" + optionVal + "'>" + loop + " %</options>";
+      }
+      result += (val == 1.005) ? "<option value='1.005' selected='selected'>" + translateKey('optionOldLevel') + "</option>" : "<option value='1.005'>" + translateKey('optionOldLevel') + "</option>";
+      result += (val == 1.01) ? "<option value='1.010' selected='selected'>" + translateKey('optionNoChange') + "</option>" : "<option value='1.010'>" + translateKey('optionNoChange') + "</option>";
+
+      if ((val != 1.005) && (val != 1.010) && ((parseInt(val * 100) % 5) != 0)) {
+        result += "<option id='dimOptionFreeValue" + this.chn + "_" + this.prn + "' value=" + val + " selected='selected'>" + translateKey('optionEnterValue') + "</option>";
+        window.setTimeout(function () {
+            jQuery("[name='dimFreeValue" + self.chn + "_" + number + "']").show().val(parseInt(val * 100));
+        }, 100);
+      } else {
+        result += "<option id='dimOptionFreeValue" + this.chn + "_" + this.prn + "' value='freeVal'>" + translateKey('optionEnterValue') + "</option>";
+      }
+
+      result += "</select>";
+
+      result += "<input name='dimFreeValue" + this.chn + "_" + number + "' type='text' size='2' class='hidden' onchange='setDimFreeVal(this.value," + this.prn + "," + number + ");'> ";
+      result += "<span name='dimFreeValue" + this.chn + "_" + number + "' class='hidden'>% (0 - 100)</span>";
+
+    return result;
+  },
+
   _getArColor: function (index) {
     return (index == 0)
       ?
@@ -2343,7 +2539,6 @@ HmIPWeeklyProgram.prototype = {
     this.curTargetChannels = val;
     this.prn++;
 
-
     blindAvailable = function (elm, number) {
       window.setTimeout(function() {
         if (self.isWired) {
@@ -2455,7 +2650,8 @@ HmIPWeeklyProgram.prototype = {
       click = "";
 
     jQuery.each(this.virtualChannels, function (index, value) {
-      if (!self.ignoreExpertMode.includes(self.device.deviceType.id) && (self.device.deviceType.id != self.ACCESS_TRANSMITTER_HmIP_FWI)) {
+
+      if (!self.ignoreExpertMode.includes(self.device.deviceType.id) && (self.device.deviceType.id != self.ACCESS_TRANSMITTER_HmIP_FWI) && (! self.isWGS) && (! self.isWGT)) {
         if (self.sessionIsExpert) {
           valCheckBox = Math.pow(2, index);
         } else {
@@ -2467,7 +2663,7 @@ HmIPWeeklyProgram.prototype = {
             tmpVal = valCheckBox;
           }
         }
-        if (self.sessionIsExpert && (self.virtualChannels.length > 3)) {
+        if (((! self.isWGS) && (! self.isWGT)) && self.sessionIsExpert && (self.virtualChannels.length > 3)) {
           cssCounter = index / 3;
           if ((cssCounter != 0) && (cssCounter == parseInt(cssCounter))) {
             cssColor = (cssColor == colorLight) ? colorDark : colorLight;
@@ -2476,14 +2672,11 @@ HmIPWeeklyProgram.prototype = {
           cssColor = "white";
         }
       } else if (self._isDeviceType(self.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
-        //console.log("self.virtualChannels["+index+"]:" + Math.pow(2,(self.virtualChannels[index] -1)));
         valCheckBox = Math.pow(2,(self.virtualChannels[index] -1));
       } else {
-
         if (self._isDeviceType(self.ACCESS_TRANSCEIVER_HmIP_WKP)) {
           cssColor = (value % 2 == 0) ? colorVeryLight : colorDark;
         }
-
         if (!self._isDeviceType("HmIP-FWI")) {
           // e. g. HmIP-DLD or HmIPW-WRC6 - no virtual channels
           valCheckBox = Math.pow(2, index);
@@ -2537,119 +2730,121 @@ HmIPWeeklyProgram.prototype = {
     // Init checkboxes
     result += "<script type='text/javascript'>";
     result += "window.setTimeout(function(){";
-    result += "var iSelectedChn = " + parseInt(this.curTargetChannels) + ";";
-    result += "var bSelectedChn = iSelectedChn.toString(2);";
-    result += "var reversedBinary = reverseString(bSelectedChn);";
-    result += "var counter = 1;";
-    result += "var tmpLoop;";
+      result += "var iSelectedChn = " + parseInt(this.curTargetChannels) + ";";
+      result += "var bSelectedChn = iSelectedChn.toString(2);";
+      result += "var reversedBinary = reverseString(bSelectedChn);";
+      result += "var counter = 1;";
+      result += "var tmpLoop;";
 
-    if (!this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
-      if (this.sessionIsExpert) {
-        if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
-          result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-          result += "jQuery('#targetChannel" + number + "_'+loop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-          result += "}";
+      if (!this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_DALI)) {
+        if (this.sessionIsExpert) {
+          if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
+            result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
+            result += "jQuery('#targetChannel" + number + "_'+loop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+            result += "}";
+          } else {
+            // Special handling for e. g. HmIP-FWI
+            // The first 3 bits belong to the last 3 checkboxes
+            // Bit 4 - 12 are for the first 8 checkboxes
+            result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
+            result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
+            result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+            result += "}";
+          }
         } else {
-          // Special handling for e. g. HmIP-FWI
-          // The first 3 bits belong to the last 3 checkboxes
-          // Bit 4 - 12 are for the first 8 checkboxes
-          result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-          result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
-          result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-          result += "}";
+          if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI) && (! this.isWGS) && (! this.isWGT)) {
+            result += "jQuery('#targetChannel" + number + "_0').prop('checked', (reversedBinary[0] == '1') ? true : false );";
+            result += "for (var loop = 3; loop < reversedBinary.length; loop+=3) {";
+            result += "jQuery('#targetChannel" + number + "_'+counter).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+            result += "counter++";
+            result += "}";
+          } else if (this.isWGS || this.isWGT) {
+            result += "var mode = parseInt(jQuery('#wgsWPModeSelector"+self.chn+"_"+number+"').val());";
+            result += "jQuery('#targetChannel" + number + "_'+mode).prop('checked', (reversedBinary[mode] == '1') ? true : false );";
+          } else {
+            // Special handling for e. g. HmIP-FWI
+            // The first 3 bits belong to the last 3 checkboxes
+            // Bit 4 - 12 are for the first 8 checkboxes
+            result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
+            result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
+            result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
+            result += "}";
+          }
         }
       } else {
-        if (!this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI)) {
-          result += "jQuery('#targetChannel" + number + "_0').prop('checked', (reversedBinary[0] == '1') ? true : false );";
-          result += "for (var loop = 3; loop < reversedBinary.length; loop+=3) {";
-          result += "jQuery('#targetChannel" + number + "_'+counter).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-          result += "counter++";
-          result += "}";
-        } else {
-          // Special handling for e. g. HmIP-FWI
-          // The first 3 bits belong to the last 3 checkboxes
-          // Bit 4 - 12 are for the first 8 checkboxes
-          result += "for (var loop = 0; loop < reversedBinary.length; loop++) {";
-          result += "if (loop < 3) {tmpLoop = loop + 8;} else {tmpLoop = loop - 3;}";
-          result += "jQuery('#targetChannel" + number + "_'+tmpLoop).prop('checked', (reversedBinary[loop] == '1') ? true : false );";
-          result += "}";
+        // UNIVERSAL_LIGHT_RECEIVER_DALI
+        if (this.activeEntries[number]) {
+          result += "var arTargetChn = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']\"),";
+          result += "valTargetChn = jQuery(\"[name='" + number + "_WP_TARGET_CHANNELS']\").val();";
+          result += "jQuery.each(arTargetChn, function(index, chkBox) {";
+            result += "var bit = (parseInt(jQuery(this).prev().text()));"; // In this case the label of the checkbox equals the equivalent bit.
+            result += "if (_isBitSet(parseInt(valTargetChn), bit)) {"; // 64 bit possible - using _isBitSet() is necessary (instead of isBitSet())
+              result += "jQuery(this).prop('checked', true);";
+            result += "}";
+          result += "});";
         }
       }
-    } else {
-      // UNIVERSAL_LIGHT_RECEIVER_DALI
-      if (this.activeEntries[number]) {
-        result += "var arTargetChn = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']\"),";
-        result += "valTargetChn = jQuery(\"[name='" + number + "_WP_TARGET_CHANNELS']\").val();";
-        result += "jQuery.each(arTargetChn, function(index, chkBox) {";
-          result += "var bit = (parseInt(jQuery(this).prev().text()));"; // In this case the label of the checkbox equals the equivalent bit.
-          result += "if (_isBitSet(parseInt(valTargetChn), bit)) {"; // 64 bit possible - using _isBitSet() is necessary (instead of isBitSet())
-            result += "jQuery(this).prop('checked', true);";
-          result += "}";
+
+      if (this.isWired && this.activeEntries[number]) {
+        // This should make LEVEL_2 invisible when no active target channel of the type BLIND available.
+        result += "var arActiveChkBox = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']:checked\");";
+        result += "var elmSlatPos = jQuery(\"[name='elmSlatPos_" + number + "']\");";
+        result += "var showElmSlatPos = false;";
+        result += "jQuery.each(arActiveChkBox, function(index, elm) {";
+        result += "var chType = elm.attributes.data.value;";
+        result += "if (chType == 'BLIND_VIRTUAL_RECEIVER') {showElmSlatPos = true;}";
+        result += "if (showElmSlatPos) {elmSlatPos.show();} else {elmSlatPos.hide();}";
         result += "});";
       }
-    }
 
-    if (this.isWired && this.activeEntries[number]) {
-      // This should make LEVEL_2 invisible when no active target channel of the type BLIND available.
-      result += "var arActiveChkBox = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']:checked\");";
-      result += "var elmSlatPos = jQuery(\"[name='elmSlatPos_" + number + "']\");";
-      result += "var showElmSlatPos = false;";
-      result += "jQuery.each(arActiveChkBox, function(index, elm) {";
-      result += "var chType = elm.attributes.data.value;";
-      result += "if (chType == 'BLIND_VIRTUAL_RECEIVER') {showElmSlatPos = true;}";
-      result += "if (showElmSlatPos) {elmSlatPos.show();} else {elmSlatPos.hide();}";
-      result += "});";
-    }
+      if (this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) {
+        result += "var arActiveChkBox = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']:checked\"),";
+        result += "elmLblRamptime = jQuery('#lblWPRamptime_" + number + "'),";
+        result += "chType,";
+        result += "elmLblBrightness = jQuery('#lblWPBrightness_" + number + "'),";
 
-    if (this.device.channels[this.chn].channelType == this.DIMMER_OUTPUT_BEHAVIOUR) {
-      result += "var arActiveChkBox = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']:checked\"),";
-      result += "elmLblRamptime = jQuery('#lblWPRamptime_" + number + "'),";
-      result += "chType,";
-      result += "elmLblBrightness = jQuery('#lblWPBrightness_" + number + "'),";
+        result += "elmLblWPColorSelector = jQuery(\"[name='lblWPColorSelector_" + number + "']\"),";
+        result += "elmLblWPSoundSelector = jQuery(\"[name='lblWPSoundSelector_" + number + "']\"),";
+        result += "elmLblWPColorSoundSelector = jQuery(\"[name='lblWPColorSoundSelector_" + number + "']\"),";
 
-      result += "elmLblWPColorSelector = jQuery(\"[name='lblWPColorSelector_" + number + "']\"),";
-      result += "elmLblWPSoundSelector = jQuery(\"[name='lblWPSoundSelector_" + number + "']\"),";
-      result += "elmLblWPColorSoundSelector = jQuery(\"[name='lblWPColorSoundSelector_" + number + "']\"),";
+        result += "hasDimmerVirtReceiver = false,";
+        result += "hasAcousticVirtReceiver = false,";
+        result += "hasOpticalSignalReceiver = false;";
 
-      result += "hasDimmerVirtReceiver = false,";
-      result += "hasAcousticVirtReceiver = false,";
-      result += "hasOpticalSignalReceiver = false;";
+        result += "jQuery.each(arActiveChkBox, function(index, elm) {";
+        result += "chType = elm.attributes.data.value;";
+        result += "if (chType == 'DIMMER_VIRTUAL_RECEIVER') {hasDimmerVirtReceiver = true;}";
+        result += "if (chType == 'ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER') {hasAcousticVirtReceiver = true;}";
+        result += "});";
+        if ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A")) || ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() == 2))) {
+          result += "hasOpticalSignalReceiver = true;";
+        }
+        result += "var colorSelector = jQuery(\"[dataid='color_" + number + "']\");";
+        result += "var soundSelector = jQuery(\"[dataid='sound_" + number + "']\");";
+        result += "var colorSoundSelector = jQuery(\"[dataid='soundColor_" + number + "']\");";
+        result += "if ((hasDimmerVirtReceiver && hasAcousticVirtReceiver) || ((! hasDimmerVirtReceiver) && (! hasAcousticVirtReceiver) && (! hasOpticalSignalReceiver))) {";
+        result += "elmLblBrightness.html(translateKey('lblVolume') + '<br/>' + translateKey('stringTableBrightness'));";
+        result += "soundSelector.prop('id','noSound_" + number + "').prop('name','noSound_" + number + "');";
+        result += "colorSelector.prop('id','nocColor_" + number + "').prop('name','noColor_" + number + "');";
 
-      result += "jQuery.each(arActiveChkBox, function(index, elm) {";
-      result += "chType = elm.attributes.data.value;";
-      result += "if (chType == 'DIMMER_VIRTUAL_RECEIVER') {hasDimmerVirtReceiver = true;}";
-      result += "if (chType == 'ACOUSTIC_SIGNAL_VIRTUAL_RECEIVER') {hasAcousticVirtReceiver = true;}";
-      result += "});";
-      if ((this._isDeviceType("HmIPW-WRC6")) || (this._isDeviceType("HmIPW-WRC6-A")) || ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() == 2))) {
-        result += "hasOpticalSignalReceiver = true;";
+        result += "elmLblWPColorSoundSelector.show()";
+        result += "} else if (hasAcousticVirtReceiver) {";
+        result += "elmLblBrightness.html(translateKey('lblVolume'));";
+
+        result += "colorSelector.prop('id','noColor_" + number + "').prop('name','noColor_" + number + "');";
+        result += "colorSoundSelector.prop('id','noColorSound_" + number + "').prop('name','noColorSound_" + number + "');";
+
+        result += "elmLblWPSoundSelector.show();";
+        result += "} else {";
+        result += "elmLblBrightness.html(translateKey('stringTableBrightness'));";
+
+        result += "soundSelector.prop('id','noSound_" + number + "').prop('name','noSound_" + number + "');";
+        result += "colorSoundSelector.prop('id','noColorSound_" + number + "').prop('name','noColorSound_" + number + "');";
+
+        result += "elmLblWPColorSelector.show();";
+        result += "}";
+
       }
-      result += "var colorSelector = jQuery(\"[dataid='color_" + number + "']\");";
-      result += "var soundSelector = jQuery(\"[dataid='sound_" + number + "']\");";
-      result += "var colorSoundSelector = jQuery(\"[dataid='soundColor_" + number + "']\");";
-      result += "if ((hasDimmerVirtReceiver && hasAcousticVirtReceiver) || ((! hasDimmerVirtReceiver) && (! hasAcousticVirtReceiver) && (! hasOpticalSignalReceiver))) {";
-      result += "elmLblBrightness.html(translateKey('lblVolume') + '<br/>' + translateKey('stringTableBrightness'));";
-      result += "soundSelector.prop('id','noSound_" + number + "').prop('name','noSound_" + number + "');";
-      result += "colorSelector.prop('id','nocColor_" + number + "').prop('name','noColor_" + number + "');";
-
-      result += "elmLblWPColorSoundSelector.show()";
-      result += "} else if (hasAcousticVirtReceiver) {";
-      result += "elmLblBrightness.html(translateKey('lblVolume'));";
-
-      result += "colorSelector.prop('id','noColor_" + number + "').prop('name','noColor_" + number + "');";
-      result += "colorSoundSelector.prop('id','noColorSound_" + number + "').prop('name','noColorSound_" + number + "');";
-
-      result += "elmLblWPSoundSelector.show();";
-      result += "} else {";
-      result += "elmLblBrightness.html(translateKey('stringTableBrightness'));";
-
-      result += "soundSelector.prop('id','noSound_" + number + "').prop('name','noSound_" + number + "');";
-      result += "colorSoundSelector.prop('id','noColorSound_" + number + "').prop('name','noColorSound_" + number + "');";
-
-      result += "elmLblWPColorSelector.show();";
-      result += "}";
-
-    }
-
     result += "},100);";
 
     result += "</script>";
@@ -2802,6 +2997,11 @@ HmIPWeeklyProgram.prototype = {
       if ((self._isDeviceType("HmIP-BSL")) && (self._getFwMajor() >= 2)) {
         self._setBSLPanel(self._addLeadingZero(nextNumber));
       }
+
+      if (self.isWGS || self.isWGT) {
+        self._setWGSPanel(self._addLeadingZero(nextNumber));
+      }
+
     };
 
     if (mode == "DEL") {
@@ -2831,7 +3031,6 @@ HmIPWeeklyProgram.prototype = {
       jQuery.each(arTargetChannels, function (index, elm) {
         // At first unset all target channels
         jQuery(elm).prop('checked', false);
-
         if ((! self._isDeviceType("HmIP-BSL")) || ((self._isDeviceType("HmIP-BSL")) && (self._getFwMajor() < 2))) {
           // SPHM-367 - activate only the first virtual channel
           if (!self.sessionIsExpert || virtChnCounter == 0) {
@@ -2846,7 +3045,7 @@ HmIPWeeklyProgram.prototype = {
     } else {
       // This is for all devices without virtual channels
       var arTargetChannels = jQuery("[name='targetChannel" + this.chn + "_" + this._addLeadingZero(parseInt(number) + 1) + "']");
-      if (self.isDoorLockDrive) {
+      if (self.isDoorLockDrive || self.isWGS || self.isWGT) {
         var arDoorLockTargetCh = jQuery("[name='targetChannel" + this.chn + "_" + this._addLeadingZero(parseInt(number) + 1) + "']");
         arTargetChannels.first().prop("checked", true).change(); //Set channel 1 active - this is the door lock channel
         arTargetChannels.not(":eq(0)").prop("checked", false).change(); //Set all other channels inactive - the user action channels aren't active

@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the irrigation actuator is switched on for the defined time. If a delay time is set, switching will be performed after this time has expired.</span><br/><br/>",
+"description_2" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the irrigation actuator is switched off for the defined time. If a delay time is set, switching will be performed after this time has expired.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the irrigation actuator is switched on or off for the specified time (toggle function). If a delay time is set, switching will be performed after this time has expired.</span><br/><br/>",
+
+"hint_hmip_wgc" : "If the device is operated with batteries, a long on time should not be chosen because the energized relay would drain the batteries very quickly.<br/><br/>",
