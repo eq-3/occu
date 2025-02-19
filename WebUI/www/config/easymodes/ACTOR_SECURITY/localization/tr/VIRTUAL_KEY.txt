@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Havalandirma kilidi (g&uuml;venlik) tusa bir kere basildiginda etkinlesir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Havalandirma kilidi (g&uuml;venlik) tusa bir kere basildiginda devre disi kalir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Havalandirma kilidinin durumu (g&uuml;venlik) tusa bir kere basildiginda tersine cevrilir.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Bu direkt baglanti devre disi birakilir.</span>",

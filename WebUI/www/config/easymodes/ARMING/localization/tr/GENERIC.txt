@@ -1,3 +1,0 @@
-"alarm_off" : "Alarm disarmed",
-"alarm_on" : "Alarm armed",
-"alarm_on_off" : "Alarm armed / disarmed",

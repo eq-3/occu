@@ -1,4 +1,0 @@
-"description_1_s" : "<span class=\"translated\">Yangin alarminda",
-"description_1_e" : "secilen s&uuml;re boyunca acilir. Alarm onayi tetikleyenden ya da ayni gruptaki bir duman alarmindan onaylanirsa, alarm kapanir.</span><br/><br/>",
-"subset_1" : "sadece tetikleyen duman alarmi",
-"subset_2" : "Ayni gruba ait duman alarmi",

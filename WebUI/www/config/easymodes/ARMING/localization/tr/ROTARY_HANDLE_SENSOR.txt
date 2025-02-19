@@ -1,9 +1,0 @@
-"description_1" : "<span class=\"translated\">When the window is opened the siren will be disarmed and armed when the window is closed. This function can be reversed. You can set a delay time as well as a duration for activating the alarm.</span><br/><br/>",
-
-"subset_1" : "Opening - armed",
-"subset_2" : "Closing - armed",
-"subset_3" : "Changing",
-
-"lblIntExtAlarm" : "Mode",
-"armOutdoorSensors" : "Outdoor sensors armed",
-"armAllSensors" : "All sensors armed",

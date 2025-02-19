@@ -1,5 +1,0 @@
-"description_1" : "<span class=\"translated\">When moisture or water is detected the light will be switched to the defined value for \"High\”. In dry condition, the light will be switched to the defined value for \"Low\”. This function can be reversed.</span><br/><br/>",
-
-"subset_1" : "Wet/Water - Low / Dry condition - High",
-"subset_2" : "Wet/Water - High / Dry condition - Low",
-

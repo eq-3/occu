@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">Girilen r&uuml;zgar siddetine ulasildiktan sonra tente / panjur belirlenen s&uuml;re boyunca yukari kalkar.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Girilen r&uuml;zgar siddetine ulasildiktan sonra tente / panjur belirlenen s&uuml;re boyunca asagi iner.</span><br/><br/>",

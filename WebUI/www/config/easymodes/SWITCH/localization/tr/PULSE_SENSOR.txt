@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Degistirme komutu iletildiginde salter belirlenen s&uuml;re boyunca acik kalir. Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Degistirme komutu iletildiginde salter belirlenen s&uuml;re boyunca kapali kalir. Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_3" : "<span class=\"translated\">Degistirme komutu iletildiginde salter belirlenen s&uuml;re boyunca acik veya kapali kalir (toogle fonksiyonu). Bir gecikme s&uuml;resi ayarlanmissa degistirme islemi bu s&uuml;re dolduktan sonra gerceklesir.</span><br/><br/>",
-"description_4" : "<span class=\"translated\">Degistirme komutu iletildiginde salter en azindan belirlenen s&uuml;re boyunca acik kalir.</span><br/><br/>",

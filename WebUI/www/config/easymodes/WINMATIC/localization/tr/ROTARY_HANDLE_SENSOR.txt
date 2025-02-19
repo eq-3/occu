@@ -1,2 +1,0 @@
-"description_1" : "<span class=\"translated\">WinMatic pencere d&ouml;ner kulpundaki kontakla (RHS) kumanda edilir, bu sayede RHS tetiklendiginde pencere acilir veya kapanir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Pencere d&ouml;ner kulpu kontagi etkin degil.</span>",

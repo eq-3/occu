@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">When the contact is opened the light will be set to the defined value for \"High\”. When the contact is closed, the light will be set to the defined value for \"Low\”. This function can be reversed.</span><br/><br/>",
-
-"subset_1" : "Open - Low / Closed - High",
-"subset_2" : "Open - High / Closed - Low",

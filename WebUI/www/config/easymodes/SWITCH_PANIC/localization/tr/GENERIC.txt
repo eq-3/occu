@@ -1,9 +1,0 @@
-"switch_off" : "Salteri kapat",
-"switch_on" : "Salteri ac",
-"switch_on_off" : "Salteri ac/kapat",
-"switch_on_off_toggle" : "Salteri ac/kapat/toggle",
-
-"panic_off" : "Panic off",
-"panic_on" : "Panic on",
-"panic_change_signal" : "Change signal",
-"panic_on_off" : "Panic on / off",

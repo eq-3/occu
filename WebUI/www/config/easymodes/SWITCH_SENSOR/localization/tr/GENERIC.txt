@@ -1,3 +1,0 @@
-"switch_off" : "Switch - off",
-"switch_on" : "Switch - on",
-"switch_on_off" : "Switch - on/off",

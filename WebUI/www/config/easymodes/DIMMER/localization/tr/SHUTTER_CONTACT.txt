@@ -1,8 +1,0 @@
-"description_1" : "<span class=\"translated\">Kontak acildiginda isik belirlenen aydinlik derecesinde acilir ve pencere kapatildiginda kapanir. Bu fonksiyon tersine de cevrilebilir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">Acilip kapatildiginda isik belli bir s&uuml;re boyunca belirlenen aydinlik derecesinde acik kalir.</span><br/><br/>",
-"subset_1" : "Acik - kapat/kapali - ac",
-"subset_2" : "Acik - ac/kapali - kapat",
-"subset_3" : "Kapat",
-"subset_4" : "Acma",
-"subset_5" : "Degistir",
-"at" : "<span class=\"translated\">'da</span>",

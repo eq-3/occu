@@ -1,4 +1,0 @@
-"description_1" : "<span class=\"translated\">Odadaki havanin CO2 orani y&uuml;kselmisse ekran belirlenen s&uuml;re icin acilir.</span><br/><br/>",
-"description_2" : "<span class=\"translated\">CO2 sens&ouml;r&uuml; etkin degil.</span><br/><br/>",
-"CO2_low" : "hafif artmis CO2 konsantrasyonu",
-"CO2_high" : "cok artmis CO2 konsantrasyonu",
