@@ -67,17 +67,8 @@ jQuery.extend(true, langJSON, {
 
     "stringTableActivateLevelOnTime" : "Einheit Einschaltdauer",
 
-    "optionBacklightFirst" : "tr BacklightFirst",
-    "optionDirect" : "tr Direct",
-    "lblDeviceSwitchTriggeringMode" : "tr DeviceSwitchTriggeringMode",
-
-    "ACTIVATE_LEVEL_ONTIME_UNIT" : "tr ACTIVATE_LEVEL_ONTIME_UNIT",
-
     "stringTableErrorTempSensorFalse" : "Temperatursensor Ok",
     "stringTableErrorTempSensorTrue" : "Temperatursensor nicht Ok",
-
-    "stringTableErrorMountingModuleFalse" : "tr ERROR_MOUNTING_MODULE=FALSE",
-    "stringTableErrorMountingModuleTrue" : "tr ERROR_MOUNTING_MODULE=TRUE",
 
     "lblDisplayLayoutMode" : "Anzeigelayout",
 
@@ -112,6 +103,15 @@ jQuery.extend(true, langJSON, {
 
     "stringTableErrorWaterFailureFalse" : "Problem Wasserdurchfluss: Nein",
     "stringTableErrorWaterFailureTrue" : "Problem Wasserdurchfluss: Ja",
+
+    "stringTableValveStateErrorPositionFalse" : "Ventil in Fehlerposition: Nein",
+    "stringTableValveStateErrorPositionTrue" : "Ventil in Fehlerposition: Ja",
+    "stringTableValveStateTooTightFalse" : "Ventil schwerg%E4ngig / Ventil klemmt: Nein",
+    "stringTableValveStateTooTightTrue" : "Ventil schwerg%E4ngig / Ventil klemmt: Ja",
+    "stringTableValveStateAdjTooBigFalse" : "Ventilstellbereich zu gro%DF: Nein",
+    "stringTableValveStateAdjTooBigTrue" : "Ventilstellbereich zu gro%DF: Ja",
+    "stringTableValveStateAdjTooSmallFalse" : "Ventilstellbereich zu klein: Nein",
+    "stringTableValveStateAdjTooSmallTrue" : "Ventilstellbereich zu klein: Ja",
 
     "noMoreKeys" : ""
   }

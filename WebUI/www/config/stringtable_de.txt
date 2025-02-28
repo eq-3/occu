@@ -1920,6 +1920,14 @@ VALVE_STATE=RUN_TO_START	${stringTableValveStateRunToStart}
 VALVE_STATE=STATE_NOT_AVAILABLE	${stringTableValveStateNotAvailable}
 VALVE_STATE=TOO_TIGHT	${stringTableValveStateToTight}
 VALVE_STATE=WAIT_FOR_ADAPTION	${stringTableValveStateWaitForAdaption}
+VALVE_STATE_ERROR_POSITION=FALSE	${stringTableValveStateErrorPositionFalse}
+VALVE_STATE_ERROR_POSITION=TRUE	${stringTableValveStateErrorPositionTrue}
+VALVE_STATE_TOO_TIGHT=FALSE	${stringTableValveStateTooTightFalse}
+VALVE_STATE_TOO_TIGHT=TRUE	${stringTableValveStateTooTightTrue}
+VALVE_STATE_ADJUSTMENT_TOO_BIG=FALSE	${stringTableValveStateAdjTooBigFalse}
+VALVE_STATE_ADJUSTMENT_TOO_BIG=TRUE	${stringTableValveStateAdjTooBigTrue}
+VALVE_STATE_ADJUSTMENT_TOO_SMALL=FALSE	${stringTableValveStateAdjTooSmallFalse}
+VALVE_STATE_ADJUSTMENT_TOO_SMALL=TRUE	${stringTableValveStateAdjTooSmallTrue}
 VENT_CLOSED	${stringTableVentClosed}
 VENT_OPEN	${stringTableVentOpen}
 

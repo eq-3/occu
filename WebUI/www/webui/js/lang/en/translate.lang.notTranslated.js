@@ -40,8 +40,8 @@ jQuery.extend(true, langJSON, {
     "comment" : "Release A/2025 - not yet translated",
 
     "stringTableAltitude" : "en* H%F6he %FCber NN",
-    "stringTableAirPressure" : "en* Luftdruck",
-    "lblMeter" : "en* Meter",
+    "stringTableAirPressure" : "Air pressure",
+    "lblMeter" : "Meter",
 
     "optionOneBtn" : "en* 1 Taster",
     "optionTwoBtnLeftRRight" : "en* 2 Taster links/rechts",
@@ -61,32 +61,23 @@ jQuery.extend(true, langJSON, {
 
     "stringTableActivateLevelOnTime" : "en* Einheit Einschaltdauer",
 
-    "optionBacklightFirst" : "en* tr BacklightFirst",
-    "optionDirect" : "en* tr Direct",
-    "lblDeviceSwitchTriggeringMode" : "en* tr DeviceSwitchTriggeringMode",
-
-    "ACTIVATE_LEVEL_ONTIME_UNIT" : "en* tr ACTIVATE_LEVEL_ONTIME_UNIT",
-
     "stringTableErrorTempSensorFalse" : "en* Temperatursensor Ok",
     "stringTableErrorTempSensorTrue" : "en* Temperatursensor nicht Ok",
-
-    "stringTableErrorMountingModuleFalse" : "en* tr ERROR_MOUNTING_MODULE=FALSE",
-    "stringTableErrorMountingModuleTrue" : "en* tr ERROR_MOUNTING_MODULE=TRUE",
 
     "lblDisplayLayoutMode" : "en* Anzeigelayout",
 
     "hintPrgExists_WGT" : "en* Es besteht mindestens ein Programm. Daher ist die Umschaltung des Modus (Kanal 4) gesperrt.",
     "hintLinkExists_WGT" : "en* Es besteht mindestens eine Verkn%FCpfung. Daher ist die Umschaltung des Modus (Kanal 4) gesperrt.",
 
-    "optionActual" : "en* Aktuelle Temperatur",
-    "optionSetpoint" : "en* Solltemperatur",
+    "optionActual" : "Current temperature",
+    "optionSetpoint" : "Setpoint temperature",
     "optionActualHumidity" : "en* Aktuelle Temperatur / Feuchtigkeit",
     "optionCO2" : "en* CO2",
     "optionActualHimidityCO2" : "en* Aktuelle Temperatur / Feuchtigkeit / CO2",
-    "optionHumidity" : "en* Feuchtigkeit",
+    "optionHumidity" : "Humidity",
 
-    "modeBWTH" : "en* Wandthermostat",
-    "modeSWITCH" : "en* Schaltaktor",
+    "modeBWTH" : "Wall Thermostat",
+    "modeSWITCH" : "eSwitch actuator",
 
     "stringTableWaterFlow" : "en* Momentaner Durchfluss",
     "stringTableWaterVolume" : "en* Gesamt-Wassermenge",
@@ -94,9 +85,9 @@ jQuery.extend(true, langJSON, {
 
     "msgResetWaterCounter" : "en* Hiermit setzten Sie den Z%E4hler der Gesamt-Wassermenge zur%FCck auf 0.00 L",
 
-    "lblValve" : "en* Ventil",
-    "btnWaterOff" : "en* Geschlossen",
-    "btnWaterOn" : "en* Ge%F6ffnet",
+    "lblValve" : "Valve",
+    "btnWaterOff" : "Closed",
+    "btnWaterOn" : "Open",
 
     "stringTableErrorErrorFrostProtectionFalse" : "en* Frostschutz-Fehlfunktion: Nein",
     "stringTableErrorErrorFrostProtectionTrue" : "en* Frostschutz-Fehlfunktion: Ja",
@@ -106,6 +97,15 @@ jQuery.extend(true, langJSON, {
 
     "stringTableErrorWaterFailureFalse" : "en* Problem Wasserdurchfluss: Nein",
     "stringTableErrorWaterFailureTrue" : "en* Problem Wasserdurchfluss: Ja",
+
+    "stringTableValveStateErrorPositionFalse" : "Valve in error position: No",
+    "stringTableValveStateErrorPositionTrue" : "Valve in error position: Yes",
+    "stringTableValveStateTooTightFalse" : "Valve sluggish/blocked: No",
+    "stringTableValveStateTooTightTrue" : "Valve sluggish/blocked: Yes",
+    "stringTableValveStateAdjTooBigFalse" : "Valve positioning range too large: No",
+    "stringTableValveStateAdjTooBigTrue" : "Valve positioning range too large: Yes",
+    "stringTableValveStateAdjTooSmallFalse" : "Valve positioning range too small: No",
+    "stringTableValveStateAdjTooSmallTrue" : "Valve positioning range too small: Yes",
 
     "noMoreKeys" : ""
   }

@@ -239,6 +239,8 @@ proc getMaintenance {chn p descr address} {
       append html "</tr>"
   }
 
+set comment {
+  # Currently not in use. Parameter is replaced by the next parameter BUTTON_RESPONSE_WITHOUT_BACKLIGHT
   set param DEVICE_SWITCH_TRIGGERING_MODE
   if { [info exists ps($param)] == 1  } {
     incr prn
@@ -249,6 +251,7 @@ proc getMaintenance {chn p descr address} {
     append html "[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]&nbsp;[getHelpIcon $param]"
     append html "</td></tr>"
   }
+}
 
   set param BUTTON_RESPONSE_WITHOUT_BACKLIGHT
   if { [info exists ps($param)] == 1  } {
@@ -6764,7 +6767,10 @@ proc getBacklightingReceiver {chn p descr} {
     incr prn
     append html "<tr>"
       append html "<td>\${stringTableDimmerLevel}</td>"
-      option RAW_0_100Percent
+      array_clear options
+      for {set val 0} {$val <= 100} {incr val 5} {
+        set options($val) "$val%"
+      }
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
     append html "</tr>"
   }
@@ -6865,6 +6871,8 @@ proc getBacklightingReceiver {chn p descr} {
     append html "</tr>"
   }
 
+set comment {
+    # Currently not in use
     set param _ACTIVATE_LEVEL_ONTIME_UNIT
     if { [info exists ps($param)] == 1  } {
       incr prn
@@ -6886,7 +6894,7 @@ proc getBacklightingReceiver {chn p descr} {
       append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
       append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeShortOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
     }
-
+}
     set param ACTIVATE_LEVEL_ONTIME_VALUE
     if { [info exists ps($param)] == 1  } {
       incr prn
