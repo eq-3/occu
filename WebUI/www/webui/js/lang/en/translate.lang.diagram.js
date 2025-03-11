@@ -154,8 +154,11 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeVALUE_8BIT" : "Value",
     "diagramValueTypeMEASURED_VALUE" : "Measurement",
 
-    "diagramExternalStorageDataloggingNotInitialised": "There is no USB memory for saving the diagram data or it could not be accessed. External USB memory is required to store the diagram data."
+    "diagramExternalStorageDataloggingNotInitialised": "There is no USB memory for saving the diagram data or it could not be accessed. External USB memory is required to store the diagram data.",
 
+    "diagramValueTypeWATER_VOLUME_SINCE_OPEN" : "Water volume since opening",
+    "diagramValueTypeWATER_FLOW" : "Current flow",
+    "diagramValueTypeWATER_VOLUME" : "Total water volume"
   }
 });
 

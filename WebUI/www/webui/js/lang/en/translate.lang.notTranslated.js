@@ -39,64 +39,65 @@ jQuery.extend(true, langJSON, {
 
     "comment" : "Release A/2025 - not yet translated",
 
-    "stringTableAltitude" : "en* H%F6he %FCber NN",
+    "stringTableAltitude" : "Height above sea level",
     "stringTableAirPressure" : "Air pressure",
     "lblMeter" : "Meter",
 
-    "optionOneBtn" : "en* 1 Taster",
-    "optionTwoBtnLeftRRight" : "en* 2 Taster links/rechts",
-    "optionTwoBtnUpDDown" : "en* 2 Taster oben/unten",
-    "optionFourBtn" : "en* 4 Taster",
+    "optionOneBtn" : "1 Button",
+    "optionTwoBtnLeftRRight" : "2 Buttons left/right",
+    "optionTwoBtnUpDDown" : "2 Buttons up/down",
+    "optionFourBtn" : "4 Buttons",
 
-    "lblHeaderFeedbackLevelMode" : "en* Feedback Helligkeit (Helligkeit der bet%E4tigten Taste)",
-    "lblFeedbackLevelMode" : "en* Feedback Mode",
-    "lblFeedbackLevelValue" : "en* Level Feedback",
+    "lblHeaderFeedbackLevelMode" : "Brightness feedback (brightness of the pressed button)",
+    "lblFeedbackLevelMode" : "Feedback mode",
+    "lblFeedbackLevelValue" : "Level feedback",
 
-    "lblHeaderActivateLevelMode" : "en* Aktive Helligkeit",
+    "lblHeaderActivateLevelMode" : "Active brightness",
 
-    "lblActivateLevelMode" : "en* Level Mode",
-    "lblActivateLevelValue" : "en* Level Aktive Helligkeit",
-    "optionAbsolut" : "en* Absolut",
-    "optionRelativ" : "en* Relativ",
+    "lblActivateLevelMode" : "Level mode",
+    "lblActivateLevelValue" : "Level active brightness",
+    "optionAbsolut" : "Absolute",
+    "optionRelativ" : "Relative",
 
-    "stringTableActivateLevelOnTime" : "en* Einheit Einschaltdauer",
+    "stringTableActivateLevelOnTime" : "Unit switch-on duration",
 
-    "stringTableErrorTempSensorFalse" : "en* Temperatursensor Ok",
-    "stringTableErrorTempSensorTrue" : "en* Temperatursensor nicht Ok",
+    "stringTableErrorTempSensorFalse" : "Temperature sensor ok",
+    "stringTableErrorTempSensorTrue" : "Temperature sensor not ok",
 
-    "lblDisplayLayoutMode" : "en* Anzeigelayout",
+    "lblDisplayLayoutMode" : "Display layout",
 
-    "hintPrgExists_WGT" : "en* Es besteht mindestens ein Programm. Daher ist die Umschaltung des Modus (Kanal 4) gesperrt.",
-    "hintLinkExists_WGT" : "en* Es besteht mindestens eine Verkn%FCpfung. Daher ist die Umschaltung des Modus (Kanal 4) gesperrt.",
+    "hintPrgExists_WGT" : "There is at least one program. Therefore, switching the mode (channel 4) is disabled.",
+    "hintLinkExists_WGT" : "There is at least one link. Therefore, switching the mode (channel 4) is disabled.",
 
     "optionActual" : "Current temperature",
     "optionSetpoint" : "Setpoint temperature",
-    "optionActualHumidity" : "en* Aktuelle Temperatur / Feuchtigkeit",
-    "optionCO2" : "en* CO2",
-    "optionActualHimidityCO2" : "en* Aktuelle Temperatur / Feuchtigkeit / CO2",
+    "optionActualHumidity" : "Current temperature/humidity",
+    "optionCO2" : "CO2",
+    "optionActualHimidityCO2" : "Current temperature/humidity/CO2",
     "optionHumidity" : "Humidity",
 
     "modeBWTH" : "Wall Thermostat",
     "modeSWITCH" : "eSwitch actuator",
 
-    "stringTableWaterFlow" : "en* Momentaner Durchfluss",
-    "stringTableWaterVolume" : "en* Gesamt-Wassermenge",
-    "stringTableWaterVolumeSinceOpen" : "en* Wassermenge seit %D6ffnung",
+    "stringTableWaterFlow" : "Current flow",
+    "stringTableWaterVolume" : "Total water volume",
+    "stringTableWaterVolumeSinceOpen" : "Water volume since opening",
 
-    "msgResetWaterCounter" : "en* Hiermit setzten Sie den Z%E4hler der Gesamt-Wassermenge zur%FCck auf 0.00 L",
+    "msgResetWaterCounter" : "Use this option to reset the total water volume counter to 0.00 L",
 
     "lblValve" : "Valve",
     "btnWaterOff" : "Closed",
     "btnWaterOn" : "Open",
 
-    "stringTableErrorErrorFrostProtectionFalse" : "en* Frostschutz-Fehlfunktion: Nein",
-    "stringTableErrorErrorFrostProtectionTrue" : "en* Frostschutz-Fehlfunktion: Ja",
+    "stringTableErrorErrorFrostProtection" : "Frost protection malfunction",
+    "stringTableErrorErrorFrostProtectionFalse" : "Frost protection malfunction: No",
+    "stringTableErrorErrorFrostProtectionTrue" : "Frost protection malfunction: Yes",
 
-    "stringTableErrorValveFailureFalse" : "en* Ventil-Fehlfunktion: Nein",
-    "stringTableErrorValveFailureTrue" : "en* Ventil-Fehlfunktion: Ja",
+    "stringTableErrorValveFailureFalse" : "Valve malfunction: No",
+    "stringTableErrorValveFailureTrue" : "Valve malfunction: Yes",
 
-    "stringTableErrorWaterFailureFalse" : "en* Problem Wasserdurchfluss: Nein",
-    "stringTableErrorWaterFailureTrue" : "en* Problem Wasserdurchfluss: Ja",
+    "stringTableErrorWaterFailureFalse" : "Water flow problem: No",
+    "stringTableErrorWaterFailureTrue" : "Water flow problem: Yes",
 
     "stringTableValveStateErrorPositionFalse" : "Valve in error position: No",
     "stringTableValveStateErrorPositionTrue" : "Valve in error position: Yes",

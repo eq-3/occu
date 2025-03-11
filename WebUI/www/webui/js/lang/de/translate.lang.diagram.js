@@ -155,7 +155,11 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeVALUE_8BIT" : "Wert",
     "diagramValueTypeMEASURED_VALUE" : "Messwert",
 
-    "diagramExternalStorageDataloggingNotInitialised": "Es ist kein USB-Speicher f%FCr die Speicherung der Diagrammdaten vorhanden oder auf diesen konnte nicht zugegriffen werden. Um die Diagrammdaten zu speichern, ist externer USB-Speicher erforderlich."
+    "diagramExternalStorageDataloggingNotInitialised": "Es ist kein USB-Speicher f%FCr die Speicherung der Diagrammdaten vorhanden oder auf diesen konnte nicht zugegriffen werden. Um die Diagrammdaten zu speichern, ist externer USB-Speicher erforderlich.",
+
+    "diagramValueTypeWATER_VOLUME_SINCE_OPEN" : "Wassermenge seit %D6ffnung",
+    "diagramValueTypeWATER_FLOW" : "Momentaner Durchfluss",
+    "diagramValueTypeWATER_VOLUME" : "Gesamt-Wassermenge"
   }
 });
 

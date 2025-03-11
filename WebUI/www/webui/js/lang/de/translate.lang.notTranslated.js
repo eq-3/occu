@@ -61,7 +61,7 @@ jQuery.extend(true, langJSON, {
     "lblHeaderActivateLevelMode" : "Aktive Helligkeit",
 
     "lblActivateLevelMode" : "Level Mode",
-    "lblActivateLevelValue" : "Level Aktive Helligkeit",
+    "lblActivateLevelValue" : "Level aktive Helligkeit",
     "optionAbsolut" : "Absolut",
     "optionRelativ" : "Relativ",
 
@@ -95,6 +95,7 @@ jQuery.extend(true, langJSON, {
     "btnWaterOff" : "Geschlossen",
     "btnWaterOn" : "Ge%F6ffnet",
 
+    "stringTableErrorErrorFrostProtection" : "Frostschutz-Fehlfunktion",
     "stringTableErrorErrorFrostProtectionFalse" : "Frostschutz-Fehlfunktion: Nein",
     "stringTableErrorErrorFrostProtectionTrue" : "Frostschutz-Fehlfunktion: Ja",
 

@@ -498,6 +498,8 @@ jQuery.extend(true,langJSON, {
 
     "FEEDBACK_LEVEL_VALUE" : "Mit diesem Parameter stellen Sie die Helligkeit der bet%E4tigten Taste ein.",
 
+    "DEVICE_INPUT_LAYOUT_MODE_WGS" : "Mit diesem Parameter stellen Sie das gew%FCnschte Layout der Anzeige ein.",
+
     "noMoreHelp" : ""
   },
 
@@ -985,13 +987,15 @@ jQuery.extend(true,langJSON, {
       "The limit for the next angle range must be exceeded by this amount in order to change to the state of the next angle range." ,
 
     "helpAcitveLevelMode" :
-      "en* Helligkeit, die nach der Aktivierung des Ger%E4tes durch einen initialen Tastendruck f%FCr eine festgelegte Dauer eingeschaltet wird.",
+      "Brightness that is switched on for a specified duration after the device is activated by pressing a button initially.",
 
     "ACTIVATE_LEVEL_VALUE" :
-      "en* Mit diesem Parameter stellen Sie die Helligkeit ein, die nach der Aktivierung des Ger%E4tes durch einen initialen Tastendruck " +
-      "f%FCr die festgelegte Dauer eingeschaltet wird.<br/><br/>Die Dauer wird durch den n%E4chsten Parameter '${lblOnTime}' eingestellt.",
+      "Use this parameter to set the brightness that is switched on for the specified duration after the device is activated by pressing an initial button.<br/><br/>" +
+      "The duration is set using the next parameter '${lblOnTime}'.",
 
-    "FEEDBACK_LEVEL_VALUE" : "en* Mit diesem Parameter stellen Sie die Helligkeit der bet%E4tigten Taste ein.",
+    "FEEDBACK_LEVEL_VALUE" : "Use this parameter to set the brightness of the button that is pressed.",
+
+    "DEVICE_INPUT_LAYOUT_MODE_WGS" : "Use this parameter to set the desired layout of the display.",
 
     "noMoreHelp" : ""
     }

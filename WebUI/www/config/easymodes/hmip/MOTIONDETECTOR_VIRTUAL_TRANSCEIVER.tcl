@@ -81,38 +81,36 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
       append HTML_PARAMS(separate_1) "[getHorizontalLine]"
     }
 
-    if {([string equal $devType HmIP-SMO230] != 1) && ([string equal $devType HmIP-SMO230-A] != 1) && ([string equal $devType HmIPW-SMO230] != 1) && ([string equal $devType HmIPW-SMO230-A] != 1)} {
-      append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(A)</span></td><td id=\"Hm\">\${mdTrigger}"
-      array_clear options
-      incr prn
-      for {set i 1} {$i <= 15} {incr i} {
-        set options($i) $i
-      }
-      append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_NUMBER separate_${special_input_id}_$prn ps EVENT_FILTER_NUMBER "onchange=\"MD_init(\'separate_${special_input_id}_$prn\', 1, 15)\"" ]
-      append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\"> Sensor-Impulsen innerhalb <span>"
-      append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 1, 15)</script>"
-
-      array_clear options
-      set options(0.5) "0.5"
-      set options(1.0) "1.0"
-      set options(1.5) "1.5"
-      set options(2.0) "2.0"
-      set options(2.5) "2.5"
-      set options(3.0) "3.0"
-      set options(3.5) "3.5"
-      set options(4.0) "4.0"
-      set options(4.5) "4.5"
-      set options(5.0) "5.0"
-      set options(5.5) "5.5"
-      set options(6.0) "6.0"
-      set options(6.5) "6.5"
-      set options(7.0) "7.0"
-      set options(7.5) "7.5"
-
-      incr prn
-      append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_PERIOD separate_${special_input_id}_$prn ps EVENT_FILTER_PERIOD]
-      append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\">&nbsp;Sekunden</span></td></tr>"
+    append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(A)</span></td><td id=\"Hm\">\${mdTrigger}"
+    array_clear options
+    incr prn
+    for {set i 1} {$i <= 15} {incr i} {
+      set options($i) $i
     }
+    append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_NUMBER separate_${special_input_id}_$prn ps EVENT_FILTER_NUMBER "onchange=\"MD_init(\'separate_${special_input_id}_$prn\', 1, 15)\"" ]
+    append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\"> Sensor-Impulsen innerhalb <span>"
+    append HTML_PARAMS(separate_1) "<script type=\"text/javascript\">MD_init(\'separate_${special_input_id}_$prn\', 1, 15)</script>"
+
+    array_clear options
+    set options(0.5) "0.5"
+    set options(1.0) "1.0"
+    set options(1.5) "1.5"
+    set options(2.0) "2.0"
+    set options(2.5) "2.5"
+    set options(3.0) "3.0"
+    set options(3.5) "3.5"
+    set options(4.0) "4.0"
+    set options(4.5) "4.5"
+    set options(5.0) "5.0"
+    set options(5.5) "5.5"
+    set options(6.0) "6.0"
+    set options(6.5) "6.5"
+    set options(7.0) "7.0"
+    set options(7.5) "7.5"
+
+    incr prn
+    append HTML_PARAMS(separate_1) [get_ComboBox options EVENT_FILTER_PERIOD separate_${special_input_id}_$prn ps EVENT_FILTER_PERIOD]
+    append HTML_PARAMS(separate_1) "<span class=\"event_filter_number_$chn\">&nbsp;Sekunden</span></td></tr>"
 
     incr prn
     append HTML_PARAMS(separate_1) "<tr><td><span class=\"stringtable_value\">$PROFILE_PNAME(C)</span></td><td>"
