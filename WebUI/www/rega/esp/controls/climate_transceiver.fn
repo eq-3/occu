@@ -42,7 +42,7 @@ function ::CreateClimateTransceiver()
           WriteLine("<table style='border:none'>");
             WriteLine("<tr>");
               WriteLine("<td class='ctrlTbl CLASS02520' style='text-align:left'>");
-                WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableAirPressure}: </span><span class='CLASS02535' style='color:white'>"#(oAirPressure.Value().ToFloat() / 100).ToString(2)#" "#oAirPressure.ValueUnit()#"</span></div>");
+                WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableAirPressure}: </span><span class='CLASS02535' style='color:white'>"#oAirPressure.Value().ToFloat().ToString(2)#" "#oAirPressure.ValueUnit()#"</span></div>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");
@@ -57,7 +57,7 @@ function ::CreateClimateTransceiver()
             WriteLine("<table style='border:none'>");
               WriteLine("<tr>");
                 WriteLine("<td class='ctrlTbl CLASS02520' style='text-align:left'>");
-                  WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableAirPressure}: </span><span class='CLASS02535' style='color:white'>"#(oAirPressure.Value().ToFloat() / 100).ToString(2)#" "#oAirPressure.ValueUnit()#"</span></div>");
+                  WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableAirPressure}: </span><span class='CLASS02535' style='color:white'>"#oAirPressure.Value().ToFloat().ToString(2)#" "#oAirPressure.ValueUnit()#"</span></div>");
                 WriteLine("</td>");
               WriteLine("</tr>");
             WriteLine("</table>");

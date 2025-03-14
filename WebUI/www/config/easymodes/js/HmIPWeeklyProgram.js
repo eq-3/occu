@@ -2164,7 +2164,7 @@ HmIPWeeklyProgram.prototype = {
           level = (1 * self.ps[paramID]).toFixed(2),
           activeMode;
 
-        activeMode = (valTargetChannels == 1) ? 0 : 1;
+        activeMode = (valTargetChannels > 1) ? 1 : 0;
         modeLevelElm.val(activeMode).change();
         if (level == "0.00") {level = "0";} else if (level == "1.00") {level = 1;}
           jQuery("[name="+paramID+"]").first().val(level);
