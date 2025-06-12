@@ -37,8 +37,6 @@ jQuery.extend(true, langJSON, {
       "If there is <b><u>no</u></b> link between an Homematic IP wall thermostat and an Homematic IP heating controller, the mode can also be actively changed.<br/><br/>" +
       "<b>In heating groups, the two fields only display the set mode. A change is not possible.</b>",
 
-    "comment" : "Release A/2025 - not yet translated",
-
     "stringTableAltitude" : "Height above sea level",
     "stringTableAirPressure" : "Air pressure",
     "lblMeter" : "Meter",
@@ -93,20 +91,38 @@ jQuery.extend(true, langJSON, {
     "stringTableErrorErrorFrostProtectionFalse" : "Frost protection malfunction: No",
     "stringTableErrorErrorFrostProtectionTrue" : "Frost protection malfunction: Yes",
 
+    "stringTableErrorValveFailure" : "Valve malfunction",
     "stringTableErrorValveFailureFalse" : "Valve malfunction: No",
     "stringTableErrorValveFailureTrue" : "Valve malfunction: Yes",
 
+    "stringTableErrorWaterFailure" : "Water flow problem",
     "stringTableErrorWaterFailureFalse" : "Water flow problem: No",
     "stringTableErrorWaterFailureTrue" : "Water flow problem: Yes",
 
+    "stringTableValveStateErrorPosition" : "Valve in error position",
     "stringTableValveStateErrorPositionFalse" : "Valve in error position: No",
     "stringTableValveStateErrorPositionTrue" : "Valve in error position: Yes",
+    "stringTableValveStateTooTight" : "Valve sluggish/blocked",
     "stringTableValveStateTooTightFalse" : "Valve sluggish/blocked: No",
     "stringTableValveStateTooTightTrue" : "Valve sluggish/blocked: Yes",
+    "stringTableValveStateAdjTooBig" : "Valve positioning range too large",
     "stringTableValveStateAdjTooBigFalse" : "Valve positioning range too large: No",
     "stringTableValveStateAdjTooBigTrue" : "Valve positioning range too large: Yes",
+    "stringTableValveStateAdjTooSmall" : "Valve positioning range too small",
     "stringTableValveStateAdjTooSmallFalse" : "Valve positioning range too small: No",
     "stringTableValveStateAdjTooSmallTrue" : "Valve positioning range too small: Yes",
+
+    "comment" : "Release B/2025 - not yet translated",
+    "stringTableSoilMoistureTransmitterFilterSize" : "en* Filtergr%F6%DFe",
+    "stringTableMeasurementInterval" : "en* Messintervall",
+    "stringTableMeasurementIntervalUnit" : "en* Einheit Messintervall",
+    "stringTableMeasurementIntervalValue" : "en* Wert des Messintervalls",
+    "stringTableRefMin0" : "en* Referenzwert 0 % Bodenfeuchte",
+    "stringTableRefMax100" : "en* Referenzwert 100 % Bodenfeuchte",
+
+    "stringTableSoilMoisture" : "en* Bodenfeuchte",
+    "stringTableSoilMoistureRaw" : "en* Rohwert Bodenfeuchte",
+    "stringTableSoilTemperature" : "en* Bodentemperatur",
 
     "noMoreKeys" : ""
   }

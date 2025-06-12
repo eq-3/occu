@@ -43,8 +43,6 @@ jQuery.extend(true, langJSON, {
 
     "stringTableAbsoluteAngleStatus" : "Status",
 
-    "comment" : "Release A/2025 - not yet translated",
-
     "stringTableAltitude" : "H%F6he %FCber NN",
     "stringTableAirPressure" : "Luftdruck",
     "lblMeter" : "Meter",
@@ -99,20 +97,39 @@ jQuery.extend(true, langJSON, {
     "stringTableErrorErrorFrostProtectionFalse" : "Frostschutz-Fehlfunktion: Nein",
     "stringTableErrorErrorFrostProtectionTrue" : "Frostschutz-Fehlfunktion: Ja",
 
+    "stringTableErrorValveFailure" : "Ventil-Fehlfunktion",
     "stringTableErrorValveFailureFalse" : "Ventil-Fehlfunktion: Nein",
     "stringTableErrorValveFailureTrue" : "Ventil-Fehlfunktion: Ja",
 
+    "stringTableErrorWaterFailure" : "Problem Wasserdurchfluss",
     "stringTableErrorWaterFailureFalse" : "Problem Wasserdurchfluss: Nein",
     "stringTableErrorWaterFailureTrue" : "Problem Wasserdurchfluss: Ja",
 
+    "stringTableValveStateErrorPosition" : "Ventil in Fehlerposition",
     "stringTableValveStateErrorPositionFalse" : "Ventil in Fehlerposition: Nein",
     "stringTableValveStateErrorPositionTrue" : "Ventil in Fehlerposition: Ja",
+    "stringTableValveStateTooTight" : "Ventil schwerg%E4ngig / Ventil klemmt",
     "stringTableValveStateTooTightFalse" : "Ventil schwerg%E4ngig / Ventil klemmt: Nein",
     "stringTableValveStateTooTightTrue" : "Ventil schwerg%E4ngig / Ventil klemmt: Ja",
+    "stringTableValveStateAdjTooBig" : "Ventilstellbereich zu gro%DF",
     "stringTableValveStateAdjTooBigFalse" : "Ventilstellbereich zu gro%DF: Nein",
     "stringTableValveStateAdjTooBigTrue" : "Ventilstellbereich zu gro%DF: Ja",
+    "stringTableValveStateAdjTooSmall" : "Ventilstellbereich zu klein",
     "stringTableValveStateAdjTooSmallFalse" : "Ventilstellbereich zu klein: Nein",
     "stringTableValveStateAdjTooSmallTrue" : "Ventilstellbereich zu klein: Ja",
+
+
+    "comment" : "Release B/2025 - not yet translated",
+    "stringTableSoilMoistureTransmitterFilterSize" : "Filtergr%F6%DFe",
+    "stringTableMeasurementInterval" : "Messintervall",
+    "stringTableMeasurementIntervalUnit" : "Einheit Messintervall",
+    "stringTableMeasurementIntervalValue" : "Wert des Messintervalls",
+    "stringTableRefMin0" : "Referenzwert 0 % Bodenfeuchte",
+    "stringTableRefMax100" : "Referenzwert 100 % Bodenfeuchte",
+
+    "stringTableSoilMoisture" : "Bodenfeuchte",
+    "stringTableSoilMoistureRaw" : "Rohwert Bodenfeuchte",
+    "stringTableSoilTemperature" : "Bodentemperatur",
 
     "noMoreKeys" : ""
   }

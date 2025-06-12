@@ -500,6 +500,24 @@ jQuery.extend(true,langJSON, {
 
     "DEVICE_INPUT_LAYOUT_MODE_WGS" : "Mit diesem Parameter stellen Sie das gew%FCnschte Layout der Anzeige ein.",
 
+    "FILTER_SIZE_SOIL_MOISTURE" : 
+      "Mit diesem Parameter w%E4hlen Sie die Anzahl der Messwerte f%FCr die Mittelwertbildung bei Mehrfachmessungen in kurzem Abstand.<br/><br/>"+
+      "Bitte beachten Sie, dass eine Erh%F6hung der Messwerte zu einer Erh%F6hung der durchschnittlichen Stromaufnahme f%FChrt.",
+
+    "INTERVAL_SOIL_MOISTURE" :
+      "Intervall der zyklischen Sensor-Messungen, welche unabh%E4ngig vom Sendeintervall durchgef%FChrt werden.<br/><br/>" +
+      "Kurze Messintervalle erh%F6hen die Stromaufnahme und verk%FCrzen die Batterielaufzeit.",
+
+    "REFERENCE_16BIT_MIN_SOIL_MOISTURE" :
+      "Rohwert-Referenzwert f%FCr <b>0% Bodenfeuchte</b>.<br/><br/>" +
+      "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
+      "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen.<br/><br/>",
+
+    "REFERENCE_16BIT_MAX_SOIL_MOISTURE" :
+      "Rohwert-Referenzwert f%FCr <b>100% Bodenfeuchte</b>.<br/><br/>" +
+      "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
+      "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen.<br/><br/>",
+
     "noMoreHelp" : ""
   },
 
@@ -996,6 +1014,24 @@ jQuery.extend(true,langJSON, {
     "FEEDBACK_LEVEL_VALUE" : "Use this parameter to set the brightness of the button that is pressed.",
 
     "DEVICE_INPUT_LAYOUT_MODE_WGS" : "Use this parameter to set the desired layout of the display.",
+
+    "FILTER_SIZE_SOIL_MOISTURE" :
+      "en* Mit diesem Parameter w%E4hlen Sie die Anzahl der Messwerte f%FCr die Mittelwertbildung bei Mehrfachmessungen in kurzem Abstand.<br/><br/>"+
+      "Bitte beachten Sie, dass eine Erh%F6hung der Messwerte zu einer Erh%F6hung der durchschnittlichen Stromaufnahme f%FChrt.",
+
+    "INTERVAL_SOIL_MOISTURE" :
+      "en* Intervall der zyklischen Sensor-Messungen, welche unabh%E4ngig vom Sendeintervall durchgef%FChrt werden." +
+      "Kurze Messintervalle erh%F6hen die Stromaufnahme und verk%FCrzen die Batterielaufzeit.",
+
+    "REFERENCE_16BIT_MIN_SOIL_MOISTURE" :
+      "en* Rohwert-Referenzwert f%FCr <b>0% Bodenfeuchte</b>.<br/><br/>" +
+      "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
+      "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen",
+
+    "REFERENCE_16BIT_MAX_SOIL_MOISTURE" :
+      "en* Rohwert-Referenzwert f%FCr <b>100% Bodenfeuchte</b>.<br/><br/>" +
+      "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
+      "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen",
 
     "noMoreHelp" : ""
     }

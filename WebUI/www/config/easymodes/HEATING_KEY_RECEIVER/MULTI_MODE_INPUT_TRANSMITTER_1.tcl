@@ -141,7 +141,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
   set cur_profile [get_cur_profile2 ps PROFILES_MAP PROFILE_TMP $peer_type]
-  
+
 #  die Texte der Platzhalter einlesen
   # puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
 

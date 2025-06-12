@@ -14,6 +14,10 @@ proc getComboBox {prn pref specialElement type {extraparam ""}} {
         append s [getAutoInterval $prn $pref $specialElement]
       }
 
+      "autoIntervalA" {
+        append s [getAutoIntervalA $prn $pref $specialElement $extraparam]
+      }
+
       "delay" {
         append s [getDelay $prn $pref $specialElement]
       }
@@ -1862,8 +1866,6 @@ proc getSwitchingIntervalOnTime {prn pref specialElement} {
       return $s
 }
 
-## START ##
-
 proc getAutoInterval {prn pref specialElement} {
       set s ""
       append s "<td>"
@@ -1966,7 +1968,109 @@ proc getAutoInterval {prn pref specialElement} {
       return $s
 }
 
-## END ##
+proc getAutoIntervalA {prn pref specialElement {extraparam ""}} {
+      set s ""
+      append s "<td>"
+      append s  "<select id=\"timeDelay\_$prn\_$pref\" onchange=\"setAutoIntervalAValues(this.id, $prn, $pref, \'$specialElement\')\">"
+        append s "<option value=\"0\">\${optionUnit10MShort}</option>"
+        append s "<option value=\"1\">\${optionUnit1H}</option>"
+        append s "<option value=\"2\">\${optionUnit12H}</option>"
+        append s "<option value=\"3\">\${optionUnit24H}</option>"
+        append s "<option value=\"4\">\${optionUnit7D}</option>"
+        append s "<option value=\"5\">\${stringTableEnterValue}</option>"
+
+      append s "</select>"
+
+      if {[string equal $extraparam "helpSoilMoisture"] == 1} {
+        append s "&nbsp;[getHelpIcon INTERVAL_SOIL_MOISTURE 600 75]"
+      }
+
+      append s "</td>"
+
+      append s "<script type=\"text/javascript\">"
+
+        append s "setCurrentAutoIntervalAOption = function(prn, pref, specialElement, baseValue, factorValue) {"
+          append s "var timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\" + pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\" + prn + \"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "var optionMap = \[\];"
+          append s "optionMap\[\"31\"\] = 0;"
+          append s "optionMap\[\"41\"\] = 1;"
+          append s "optionMap\[\"412\"\] = 2;"
+          append s "optionMap\[\"51\"\] = 3;"
+          append s "optionMap\[\"61\"\] = 4;"
+
+          append s "var baseVal = (typeof baseValue != 'undefined') ? baseValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + pref).val(),"
+          append s "factorVal = (typeof factorValue != 'undefined') ? factorValue.toString() : jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\" + (parseInt(pref) + 1)).val(),"
+
+          append s "currentVal = baseVal+factorVal,"
+          append s "optionVal = (optionMap\[currentVal\] != undefined) ? optionMap\[currentVal\] : 5;"
+          append s "window.setTimeout(function() {jQuery(\"#timeDelay_\" + prn + \"_\" + pref).val(optionVal).change();}, 10);"
+
+          # append s "console.log(\"DELAY baseVal: \" + baseVal + \" - factorVal: \" + factorVal + \" - currentVal: \" + currentVal + \" - optionVal: \" + optionVal);"
+
+          # Enter user value
+          append s "if (optionVal == 5) {"
+            append s "timeBaseTRElem.show();"
+            append s "timeFactorTRElem.show();"
+            append s "spaceTRElem.show();"
+          append s "}"
+
+        append s "};"
+
+        append s "setAutoIntervalAValues = function(elmID, prn, pref, specialElement) {"
+          append s "var value= parseInt(jQuery(\"#\"+elmID).val()),"
+          append s "baseElem = jQuery(\"#separate_\" + specialElement + \"_\" + prn + \"_\"+ pref),"
+          append s "factorElem = jQuery(\"#separate_\" +specialElement + \"_\"+ prn +\"_\" + (parseInt(pref) + 1)),"
+          append s "timeBaseTRElem = jQuery(\"#timeBase_\" + prn +\"_\"+ pref),"
+          append s "timeFactorTRElem = jQuery(\"#timeFactor_\"+prn+\"_\" + (parseInt(pref) + 1)),"
+          append s "spaceTRElem = jQuery(\"#space_\" + prn +\"_\"+ (parseInt(pref) + 1));"
+
+          append s "timeBaseTRElem.hide();"
+          append s "timeFactorTRElem.hide();"
+          append s "spaceTRElem.hide();"
+
+          append s "switch (value) \{"
+            append s "case 0:"
+              # keine Verzögerung
+              append s "baseElem.val(3);"
+              append s "factorElem.val(1);"
+              append s "break;"
+
+            append s "case 1:"
+              # 1 hour
+              append s "baseElem.val(4);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 2:"
+              # 12 hours
+              append s "baseElem.val(4);"
+              append s "factorElem.val(12);"
+              append s "break;"
+            append s "case 3:"
+              # 24 hours / 1 day
+              append s "baseElem.val(5);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 4:"
+              # 7 days
+              append s "baseElem.val(6);"
+              append s "factorElem.val(1);"
+              append s "break;"
+            append s "case 5:"
+              append s "timeBaseTRElem.show();"
+              append s "timeFactorTRElem.show();"
+              append s "spaceTRElem.show();"
+
+              append s "break;"
+            append s "default: conInfo(\"Problem\");"
+          append s "\}"
+        append s "};"
+      append s "</script>"
+
+      return $s
+}
 
 proc getBlindRunningTime {prn pref specialElement} {
       set helpRunningTime BLIND_REFERENCE_RUNNING_TIME
@@ -2845,6 +2949,10 @@ proc getDescription {param {extraparam ""}} {
   } else {
     # special for rain counter
     set desc(EVENT_TIMEOUT_BASE) "eventTimeoutBaseRainCounter"
+  }
+
+  if {[string equal $extraparam 'measurementInterval'] == 1} {
+    set desc(INTERVAL_UNIT) "stringTableMeasurementIntervalUnit"
   }
 
   if {[catch {set result $desc($param)}]} {

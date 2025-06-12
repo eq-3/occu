@@ -68,8 +68,68 @@ function ::CreateClimateTransceiver()
 
   WriteLine("</table></td>");
 
+  return;
+}
+
+function ::CreateSoilMoistureTransmitter()
+{
+  object oSoilMoisture = cObj.DPByControl("SOIL_MOISTURE_TRANSMITTER.SOIL_MOISTURE");
+  object oSoilTemperature = cObj.DPByControl("SOIL_MOISTURE_TRANSMITTER.SOIL_TEMPERATURE");
+  object oSoilMoistureRawValue = cObj.DPByControl("SOIL_MOISTURE_TRANSMITTER.SOIL_MOISTURE_RAW_VALUE");
+
+
+  WriteLine("<td><table align='center'>");
+    WriteLine("<tr>");
+
+      if(oSoilMoisture)
+      {
+        WriteLine("<tr>");
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black'>");
+            WriteLine("<table style='border:none'>");
+              WriteLine("<tr>");
+                WriteLine("<td class='ctrlTbl' style='text-align:left'>");
+                  WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableSoilMoisture}: </span><span class='CLASS02535' style='color:white'>"#oSoilMoisture.Value().ToString(1)#" "#oSoilMoisture.ValueUnit()#"</span></div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+      if(oSoilTemperature)
+      {
+         WriteLine("<tr>");
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black'>");
+            WriteLine("<table style='border:none'>");
+              WriteLine("<tr>");
+                WriteLine("<td class='ctrlTbl' style='text-align:left'>");
+                  WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableSoilTemperature}: </span><span class='CLASS02535' style='color:white'>"#oSoilTemperature.Value().ToString(1)#" "#oSoilTemperature.ValueUnit()#"</span></div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+         WriteLine("</tr>");
+      }
+
+      if(oSoilMoistureRawValue)
+      {
+        WriteLine("<tr>");
+          WriteLine("<td class='ControlBtnInfo' style='background-color:#89989b; border:solid 1px black'>");
+            WriteLine("<table style='border:none'>");
+              WriteLine("<tr>");
+                WriteLine("<td class='ctrlTbl' style='text-align:left'>");
+                  WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableSoilMoistureRaw}: </span><span class='CLASS02535' style='color:white'>"#oSoilMoistureRawValue.Value().ToString(1)#"</span></div>");
+                WriteLine("</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+        WriteLine("</tr>");
+      }
+
+    WriteLine("</tr>");
+  WriteLine("</table></td>");
+
 
 
   return;
 }
-
