@@ -95,6 +95,10 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeSMOKE_LEVEL" : "Erkannte Rauchgasentwicklung",
     "diagramValueTypeDIRT_LEVEL" : "Verschmutzungsgrad des Sensors",
 
+    "diagramValueTypeSOIL_TEMPERATURE" : "Bodentemperatur",
+    "diagramValueTypeSOIL_MOISTURE" : "Bodenfeuchte",
+    "diagramValueTypeSOIL_MOISTURE_RAW_VALUE" : "Rohwert Bodenfeuchte",
+
     "diagramColorFF0000": "Rot",
     "diagramColor00FF00": "Gr%FCn",
     "diagramColor0000FF": "Blau",

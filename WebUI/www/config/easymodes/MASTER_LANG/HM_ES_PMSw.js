@@ -129,11 +129,11 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxCyclicBelow" : "Send decision value cyclically",
     "stringTableSendSwitchCommandCyclically" : "Send switch command cyclically",
     "stringTableCondTxDecisionAbove" : "Sent decision value if upper limit is exceeded",
-    "stringTableCondTxDecisionAboveA" : "en* Gesendeter Entscheidungswert, wenn oberer Grenzwert erreicht, oder &uuml;berschritten wurde.",
+    "stringTableCondTxDecisionAboveA" : "Sent decision value, if upper limit value is reached, or has been exceeded.",
 
 
     "stringTableCondTxDecisionBelow" : "Sent decision value if lower limit falls below threshold",
-    "stringTableCondTxDecisionBelowA" : "en* Gesendeter Entscheidungswert, wenn unterer Grenzwert erreicht, oder unterschritten wurde.",
+    "stringTableCondTxDecisionBelowA" : "Sent decision value, if lower limit value is reached, os has been exceeded. ",
 
 
     "stringTableCondTxDecisionPassageRL_A" : "Sent decision value<br/>if number of passages right -> left reached",
@@ -145,8 +145,8 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxFalling" : "Send decision value if lower limit falls below threshold<br/>" +
        "and if the upper limit has been exceeded previously.",
 
-    "stringTableCondTxFallingC" : "en* Bei Erreichen oder Unterschreitung des unteren Grenzwertes Entscheidungswert senden,<br/>" +
-      "wenn vorher der obere Grenzwert erreicht, oder &uuml;berschritten wurde.",
+    "stringTableCondTxFallingC" : "Send when lower decisicion value is reached or exceeded,<br/>" +
+      "and upper limit value has already been reached or exceeded.",
 
     "stringTableCondTxFallingA" : "Send decision value (",
     "stringTableCondTxFallingB" : ") if lower limit falls below threshold<br/>and if the upper limit has been exceeded previously.",
@@ -156,8 +156,8 @@ jQuery.extend(true,langJSON, {
     "stringTableCondTxRising" : "Send decision value if upper limit is exceeded<br/>" +
       "and if the lower limit has fallen below threshold previously.",
 
-    "stringTableCondTxRisingC" : "en* Bei Erreichen oder &Uuml;berschreitung des oberen Grenzwertes Entscheidungswert senden,<br/>" +
-      "wenn vorher der untere Grenzwert erreicht, oder unterschritten wurde.",
+    "stringTableCondTxRisingC" : "Send when upper decisicion value is reached or exceeded,<br/>" +
+      "and lower limit value has already been reached or exceeded.",
 
     "stringTableCondTxRisingA" : "Send decision value (",
     "stringTableCondTxRisingB" : ") if upper limit is exceeded<br/>and if the lower limit has fallen below threshold previously.",

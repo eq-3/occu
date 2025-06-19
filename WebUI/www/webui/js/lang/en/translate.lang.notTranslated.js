@@ -113,16 +113,16 @@ jQuery.extend(true, langJSON, {
     "stringTableValveStateAdjTooSmallTrue" : "Valve positioning range too small: Yes",
 
     "comment" : "Release B/2025 - not yet translated",
-    "stringTableSoilMoistureTransmitterFilterSize" : "en* Filtergr%F6%DFe",
-    "stringTableMeasurementInterval" : "en* Messintervall",
-    "stringTableMeasurementIntervalUnit" : "en* Einheit Messintervall",
-    "stringTableMeasurementIntervalValue" : "en* Wert des Messintervalls",
-    "stringTableRefMin0" : "en* Referenzwert 0 % Bodenfeuchte",
-    "stringTableRefMax100" : "en* Referenzwert 100 % Bodenfeuchte",
+    "stringTableSoilMoistureTransmitterFilterSize" : "Filter size",
+    "stringTableMeasurementInterval" : "Measurement interval",
+    "stringTableMeasurementIntervalUnit" : "Unit measurement interval",
+    "stringTableMeasurementIntervalValue" : "Value measurement interval",
+    "stringTableRefMin0" : "Reference value 0% soil moisture",
+    "stringTableRefMax100" : "Reference value 100% soil moisture",
 
-    "stringTableSoilMoisture" : "en* Bodenfeuchte",
-    "stringTableSoilMoistureRaw" : "en* Rohwert Bodenfeuchte",
-    "stringTableSoilTemperature" : "en* Bodentemperatur",
+    "stringTableSoilMoisture" : "Soil moisture",
+    "stringTableSoilMoistureRaw" : "Raw value soil moisture",
+    "stringTableSoilTemperature" : "Soil temperature",
 
     "noMoreKeys" : ""
   }

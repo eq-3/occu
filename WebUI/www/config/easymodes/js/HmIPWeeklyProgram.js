@@ -234,6 +234,7 @@ HmIPWeeklyProgram = Class.create();
 HmIPWeeklyProgram.prototype = {
   initialize: function (address, ps, psDescr, sessionIsExpert, fwVersion, extraParam) {
 
+
     self = this;
     this.extraParam = extraParam;
     this.hmIPIFace = "HmIP-RF";
@@ -243,6 +244,15 @@ HmIPWeeklyProgram.prototype = {
     this.chn = this.arAddress[1];
     this.device = DeviceList.getDeviceByAddress(this.devAddress);
     this.fwVersion = fwVersion;
+
+    this.anchor = jQuery("#weeklyProgram_" + this.chn);
+
+    // The device is still in the device inbox
+    if (typeof this.device == "undefined") {
+      this.anchor.css({"text-align": "center"});
+      this.anchor.html(translateKey("hintSetReadyWeeklyProgram"));
+      return;
+    }
 
     virtChnCounterWP = 0;
     modeWP_DELETE = false;
@@ -282,14 +292,7 @@ HmIPWeeklyProgram.prototype = {
     this.selectedMode_FLC = [];
     //this.arChangedMode_FLC = [];
     this.currentLevel = [];
-    this.anchor = jQuery("#weeklyProgram_" + this.chn);
 
-    // The device is still in the device inbox
-    if (typeof this.device == "undefined") {
-      this.anchor.css({"text-align": "center"});
-      this.anchor.html(translateKey("hintSetReadyWeeklyProgram"));
-      return;
-    }
 
     this.isWired = (this.device.deviceType.id.split("-")[0] == "HmIPW") ? true : false;
 
@@ -2874,7 +2877,7 @@ HmIPWeeklyProgram.prototype = {
     selectTargetChannelAll = function (chn, number, prn) {
       number = (parseInt(number) < 10) ? "0" + number : number;
       var arTargetChannels;
-      arTargetChannels = jQuery("[name='targetChannel" + chn + "_" + number + "']");
+      arTargetChannels = jQuery("[name='targetChannel" + chn + "_" + number + "']:visible");
       jQuery("#separate_CHANNEL_" + chn + "_" + prn).val(0);
       if (!self.isDoorLockDrive) {
         arTargetChannels.prop("checked", true).change();

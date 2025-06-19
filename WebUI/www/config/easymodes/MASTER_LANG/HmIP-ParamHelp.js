@@ -509,12 +509,12 @@ jQuery.extend(true,langJSON, {
       "Kurze Messintervalle erh%F6hen die Stromaufnahme und verk%FCrzen die Batterielaufzeit.",
 
     "REFERENCE_16BIT_MIN_SOIL_MOISTURE" :
-      "Rohwert-Referenzwert f%FCr <b>0% Bodenfeuchte</b>.<br/><br/>" +
+      "<b>Rohwert-Referenzwert f%FCr <b>0% Bodenfeuchte</b>.<br/><br/>" +
       "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
       "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen.<br/><br/>",
 
     "REFERENCE_16BIT_MAX_SOIL_MOISTURE" :
-      "Rohwert-Referenzwert f%FCr <b>100% Bodenfeuchte</b>.<br/><br/>" +
+      "<b>Rohwert-Referenzwert f%FCr <b>100% Bodenfeuchte</b>.<br/><br/>" +
       "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
       "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen.<br/><br/>",
 
@@ -1016,22 +1016,22 @@ jQuery.extend(true,langJSON, {
     "DEVICE_INPUT_LAYOUT_MODE_WGS" : "Use this parameter to set the desired layout of the display.",
 
     "FILTER_SIZE_SOIL_MOISTURE" :
-      "en* Mit diesem Parameter w%E4hlen Sie die Anzahl der Messwerte f%FCr die Mittelwertbildung bei Mehrfachmessungen in kurzem Abstand.<br/><br/>"+
-      "Bitte beachten Sie, dass eine Erh%F6hung der Messwerte zu einer Erh%F6hung der durchschnittlichen Stromaufnahme f%FChrt.",
+      "Use this parameter to select the number of measured values for averaging multiple measurements at short intervals.<br/><br/>"+
+      "Please note that  an increased measured value leads to an increase in the average current consumption.",
 
     "INTERVAL_SOIL_MOISTURE" :
-      "en* Intervall der zyklischen Sensor-Messungen, welche unabh%E4ngig vom Sendeintervall durchgef%FChrt werden." +
-      "Kurze Messintervalle erh%F6hen die Stromaufnahme und verk%FCrzen die Batterielaufzeit.",
+      "Interval of the cyclical sensor measurements, which are carried out independently of the transmission interval.<br/><br/>" +
+      "Short measurement intervals increase the power consumption and shorten the battery life.",
 
     "REFERENCE_16BIT_MIN_SOIL_MOISTURE" :
-      "en* Rohwert-Referenzwert f%FCr <b>0% Bodenfeuchte</b>.<br/><br/>" +
-      "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
-      "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen",
+      "<b>Raw value-reference value for<b>0% soil moisture.</b>.<br/><br/>" +
+      "Determine the appropriate raw value by observing the status data under corresponding soil conditions,<br/>" +
+      "taking into account delays caused by the measurement and transmission interval.<br/><br/>",
 
     "REFERENCE_16BIT_MAX_SOIL_MOISTURE" :
-      "en* Rohwert-Referenzwert f%FCr <b>100% Bodenfeuchte</b>.<br/><br/>" +
-      "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
-      "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen",
+      "<b>Raw value-reference value for<b>100% soil moisture.</b>.<br/><br/>" +
+      "Determine the appropriate raw value by observing the status data under corresponding soil conditions,<br/>" +
+      "taking into account delays caused by the measurement and transmission interval.<br/><br/>",
 
     "noMoreHelp" : ""
     }

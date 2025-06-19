@@ -94,6 +94,10 @@ jQuery.extend(true, langJSON, {
     "diagramValueTypeSMOKE_LEVEL" : "Smoke gas detected",
     "diagramValueTypeDIRT_LEVEL" : "Degree of sensor contamination",
 
+    "diagramValueTypeSOIL_TEMPERATURE" : "Soil temperature",
+    "diagramValueTypeSOIL_MOISTURE" : "Soil moisture",
+    "diagramValueTypeSOIL_MOISTURE_RAW_VALUE" : "Raw value soil moisture",
+
     "diagramColorFF0000": "Red",
     "diagramColor00FF00": "Green",
     "diagramColor0000FF": "Blue",
