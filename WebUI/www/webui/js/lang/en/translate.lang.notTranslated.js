@@ -81,6 +81,12 @@ jQuery.extend(true, langJSON, {
     "stringTableWaterVolume" : "Total water volume",
     "stringTableWaterVolumeSinceOpen" : "Water volume since opening",
 
+    "stringTableWaterFlowStatus" : "Status currend flow",
+    "stringTableWaterFlowOverflowFalse" : "Counter overflow: No",
+    "stringTableWaterFlowOverflowTrue" : "Counter overflow: Yes",
+    "stringTableWaterVolumeSinceOpenOverflowFalse" : "Counter overflow since opening: no",
+    "stringTableWaterVolumeSinceOpenOverflowTrue" : "Counter overflow since opening: yes",
+
     "msgResetWaterCounter" : "Use this option to reset the total water volume counter to 0.00 L",
 
     "lblValve" : "Valve",
@@ -123,6 +129,8 @@ jQuery.extend(true, langJSON, {
     "stringTableSoilMoisture" : "Soil moisture",
     "stringTableSoilMoistureRaw" : "Raw value soil moisture",
     "stringTableSoilTemperature" : "Soil temperature",
+
+    "hintAutomaticDeviceUpdate" : "The update is carried out automatically in the background.",
 
     "noMoreKeys" : ""
   }
