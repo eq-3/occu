@@ -1,0 +1,6 @@
+"toggle" : "Toggle",
+"toggleOpen" : "Verriegeln / Entriegeln",
+"switch_open" : "T%FCr %F6ffnen",
+"switch_unlock" : "T%FCrschloss entriegeln",
+"switch_lock" : "T%FCrschloss verriegeln",
+"not_active" : "nicht aktiv",

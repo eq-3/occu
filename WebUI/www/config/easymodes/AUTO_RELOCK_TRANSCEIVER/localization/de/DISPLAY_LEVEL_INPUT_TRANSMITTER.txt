@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Ein kurzer oder langer Tastendruck toggelt den Auto-Relock Status (ein / aus).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Ein kurzer oder langer Tastendruck schaltet Auto-Relock ein.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Ein kurzer oder langer Tastendruck schaltet Auto-Relock aus.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",

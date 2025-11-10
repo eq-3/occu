@@ -35,11 +35,10 @@ function ::CreateWeeklyProgram()
 
   WriteLine("<tr id='weekprg_"#chnId#"' class='hidden'>");
     WriteLine("<td>");
-
-      ! WriteLine("<table style='margin:auto'>");
       WriteLine("<table>");
+
         WriteLine("<tr>");
-          WriteLine("<td style='border:1px solid #000000; color:black;'>");
+          WriteLine("<td>");
             WriteLine("<div id='anchor_"#chnId#"' style='background-color:#89989b;'></div>");
           WriteLine("</td>");
         WriteLine("</tr>");
@@ -51,7 +50,6 @@ function ::CreateWeeklyProgram()
         WriteLine("</tr>");
 
       WriteLine("</table>");
-
     WriteLine("</td>");
   WriteLine("</tr>");
 
@@ -74,7 +72,12 @@ function ::CreateWeeklyProgram()
     } else {
       WriteLine("opts.userEasyLinkMode = "#user.UserEasyLinkMode()#";");
     }
-    if ((cObj.Label() != "HmIP-DLD") && (cObj.Label() != "HmIP-DLD-A") && (cObj.Label() != "HmIP-DLD-S")) {
+    if ((cObj.Label() != "HmIP-DLD")
+      && (cObj.Label() != "HmIP-DLD-A")
+      && (cObj.Label() != "HmIP-DLD-S")
+      && (cObj.Label() != "HmIP-DLP")
+      && (cObj.Label() != "HmIP-DLP-A")
+      ) {
       WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgram("#chnId#", opts);");
     } else {
       WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgramAccessReceiver("#chnId#", opts);");

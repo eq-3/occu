@@ -79,7 +79,12 @@ function ::CreateIdentification() {
           WriteLine("</tr>");
         }
       WriteLine("</table>");
-      if ((ch.Label() != "HmIPW-DRAP") && (ch.Label().Find("HmIP-BSL") == -1 ) && (ch.Label().Find("HmIP-WGS") == -1 ) && (ch.Label().Find("HmIP-WGT") == -1)) {
+      if ((ch.Label() != "HmIPW-DRAP") && (ch.Label().Find("HmIP-BSL") == -1 )
+      && (ch.Label().Find("HmIP-WGS") == -1 )
+      && (ch.Label().Find("HmIP-WGT") == -1)
+      && (ch.Label().Find("HmIP-WGD") == -1)
+      && (ch.Label().Find("HmIP-UDI-PB2") == -1))
+      && (ch.Label().Find("HmIP-UDI-SMI55") == -1)) {
         Call("/esp/controls/maintenance.fn::CreateOperationVoltage()");
       }
 

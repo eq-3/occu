@@ -1374,9 +1374,16 @@ showHintPrgLink = function(channel, prgExists) {
     tableElm = jQuery(".ProfileTbl tbody").parent().parent()[channel],
     wgtModeSelectorElm = jQuery("#wgtModeSelector"),
     dataAttr = jQuery(classMultiMode).attr("data"),
-    elm = (typeof wgtModeSelectorElm == "object") ? wgtModeSelectorElm : jQuery(".j_multiMode_" + channel).find("[name='CHANNEL_OPERATION_MODE']")[0],
     hintPrgExists = "hintPrgExists",
-    hintLinkExists = "hintLinkExists";
+    hintLinkExists = "hintLinkExists",
+    elm;
+
+  if ((typeof wgtModeSelectorElm == "object") && (Object.entries(wgtModeSelectorElm).length > 0)) {
+    elm = wgtModeSelectorElm;
+  } else {
+    elm = jQuery(".j_multiMode_" + channel).find("[name='CHANNEL_OPERATION_MODE']")[0];
+  }
+
 
   jQuery(elm).prop("disabled", true);
   wgtHasLinksOrPrograms = true;
@@ -1455,7 +1462,7 @@ RF_existsLink = function(deviceType, ch, ch_type, internalLinkOnly) {
 
   switch(ch_type) {
     case "MULTI_MODE_INPUT_TRANSMITTER":
-      arDevMultiModeException = ["HmIP-FSI16", "HmIP-FSI16-2", "HmIP-DRDI3", "HmIP-BDT-I"];
+      arDevMultiModeException = ["HmIP-FSI16", "HmIP-FSI16-2", "HmIP-DRDI3", "HmIP-BDT-I", "HmIP-UDI-PB2", "HmIP-UDI-PB2-A", "HmIP-UDI-SMI55", "HmIP-UDI-SMI55-A"];
       if ((arDevMultiModeException.indexOf(deviceType) == -1) || (internalLinkOnly == 0)) {
         showHintPrgLink(ch, false);
       } else {
@@ -1935,13 +1942,18 @@ showParamHelp = function(topic, x , y) {
  MessageBox.show(translateKey("HelpTitle"), translateKey(topic), "", width, height);
 };
 
-selectWGDIcon = function(chn, elmId, activeIcon) {
+selectWGDIcon = function(chn, elmId, activeIcon, category, index) {
   var dlg = new WGDSelectIconDialog(translateKey("lblBaseImage"), "<div id='anchor_" + chn + "'></div>", function(btnPress) {
     if (btnPress == this.RESULT_YES) {
       jQuery("#" + elmId).val(this.getSelectedIconNo());
-      jQuery("#image_" + chn ).attr("src", this.getSelectedIcon());
+
+      if (typeof index == "undefined") {
+        jQuery("#image_" + chn).attr("src", this.getSelectedIcon());
+      } else {
+       jQuery("#image_" + index + "_" + chn).attr("src", this.getSelectedIcon());
+      }
     }
-  }, "html");
+  }, "html", category);
   dlg.btnTextNo(translateKey("btnCancel"));
   dlg.btnTextYes(translateKey("btnOk"));
   dlg.chn = chn;

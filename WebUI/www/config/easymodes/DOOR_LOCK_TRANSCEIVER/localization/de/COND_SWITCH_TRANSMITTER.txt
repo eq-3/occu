@@ -1,0 +1,7 @@
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes toggelt der Zustand des Schlosses (entriegelt / verriegelt).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird T%FCr ge%F6ffnet.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird das T%FCrschloss entriegelt.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes wird das T%FCrschloss verriegelt.</span><br/><br/>",
+
+"description_5" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",
+

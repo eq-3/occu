@@ -1,7 +1,7 @@
 #!/bin/tclsh
 
 
-sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipWGDConfigDialog.tcl]
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipWGDConfigDialogWired.tcl]
 sourceOnce [file join /www/config/easymodes/em_common.tcl]
 
 

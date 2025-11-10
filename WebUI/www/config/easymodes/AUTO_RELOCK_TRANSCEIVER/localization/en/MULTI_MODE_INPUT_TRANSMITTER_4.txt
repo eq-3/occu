@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">With a long button press, the status of Auto-Relock is toggling (on / off).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">With a short or long button press, Auto-Relock is switchted on.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">With a short or long button press, Auto-Relock is switchted off.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">The profile is not active</span>",

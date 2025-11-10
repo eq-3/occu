@@ -156,7 +156,7 @@ function ::ShowExtDesc() {
   }
 
   if (chn.HssType() == "DISPLAY_INPUT_TRANSMITTER")  {
-    if (chn.Label() == "HmIPW-WGD") {
+    if (chn.Label().Find("-WGD") != -1) {
       string oddChannels = "1,3,5,7,9,11,13,15,17,19,21,23,25";
       string chNo = chNumber.ToString();
       integer index = 0;
@@ -186,7 +186,7 @@ function ::ShowExtDesc() {
   }
 
   if (chn.HssType() == "DISPLAY_LEVEL_INPUT_TRANSMITTER")  {
-    if (chn.Label() == "HmIPW-WGD") {
+    if (chn.Label().Find("-WGD") != -1) {
       string evenChannels = "2,4,6,8,10,12,14,16,18,20,22,24";
       string chNo = chNumber.ToString();
       integer index = 0;

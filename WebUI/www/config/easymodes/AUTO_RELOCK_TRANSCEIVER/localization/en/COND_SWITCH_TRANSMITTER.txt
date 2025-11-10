@@ -1,0 +1,6 @@
+"description_1" : "<span class=\"translated\">When receiving the decision value defined, the status of Auto-Relock is toggling (on / off).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When receiving the decision value defined, Auto-Relock is switchted on.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When receiving the decision value defined, Auto-Relock is switched off.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">The profile is not active</span>",
+

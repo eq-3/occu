@@ -13,6 +13,8 @@ proc getMaintenance {chn p descr} {
 
   set prn 0
   set devType $dev_descr(TYPE)
+  set isWGD_PL 0 ; # default = no _PL
+  if {$devType == "HmIP-WGD-PL"} {set isWGD_PL 1}
 
   set cyclicInfo false
 
@@ -78,12 +80,12 @@ proc getMaintenance {chn p descr} {
 
   append html "[getHorizontalLine]"
 
-  # Check how many screens are available (5 or 10)
-  set availableScreens 5 ; # default 5
+  # Check how many screens are available (WGD 6 or WGD-PL 11)
+  set availableScreens 6 ; # default 6
 
-  set param SCREEN_LAYOUT_PAGE_NUMBER_10
+  set param SCREEN_LAYOUT_PAGE_NUMBER_11
   if { [info exists ps($param)] == 1  } {
-    set availableScreens 10
+    set availableScreens 11
   }
 
   append html "<tr class='hidden'>"
@@ -113,14 +115,17 @@ proc getMaintenance {chn p descr} {
           append html "<th colspan='2'>< Screen 2 ></th>"
           append html "<th colspan='2'>< Screen 3 ></th>"
           append html "<th colspan='2'>< Screen 4 ></th>"
-
+          if {$isWGD_PL == 0 } {
+            append html "<th colspan='2'>< Screen 5 ></th>"
+          }
         append html "<tr>"
-          for {set loopx 0} {$loopx <= 4} {incr loopx} {
+          if {$isWGD_PL == 0 } {set loopxMax 5} else {set loopxMax 4}
+          for {set loopx 0} {$loopx <= $loopxMax} {incr loopx} {
             set loop [expr $loopx + 1]
             incr prn
             append html "<td>"
               append html "<select type='text' id='separate_CHANNEL_$chn\_$prn' name='SCREEN_LAYOUT_LEFT_NEIGHBOUR_$loop' value='$ps(SCREEN_LAYOUT_LEFT_NEIGHBOUR_$loop)'>"
-              if {$availableScreens == 10} {set maxOption 9} else {set maxOption 4}
+              if {$availableScreens == 11} {set maxOption 10} else {set maxOption 5}
               append html "<option value='15'>15</option>"
               for {set option 0} {$option <= $maxOption} {incr option} {
                 if {$option == $ps(SCREEN_LAYOUT_LEFT_NEIGHBOUR_$loop)} {set selected "selected='selected'"} else {set selected ""}
@@ -132,7 +137,7 @@ proc getMaintenance {chn p descr} {
             incr prn
             append html "<td>"
             append html "<select type='text' id='separate_CHANNEL_$chn\_$prn' name='SCREEN_LAYOUT_RIGHT_NEIGHBOUR_$loop' value='$ps(SCREEN_LAYOUT_RIGHT_NEIGHBOUR_$loop)'>"
-              if {$availableScreens == 10} {set maxOption 9} else {set maxOption 4}
+              if {$availableScreens == 11} {set maxOption 10} else {set maxOption 5}
               for {set option 0} {$option <= $maxOption} {incr option} {
                 if {$option == $ps(SCREEN_LAYOUT_RIGHT_NEIGHBOUR_$loop)} {set selected "selected='selected'"} else {set selected ""}
                 append html "<option value='$option' $selected>$option</option>"
@@ -150,11 +155,12 @@ proc getMaintenance {chn p descr} {
     append html "<td>Page Number</td>"
       append html "<td>"
         append html "<table><tr>"
-          for {set loop 1} {$loop <= 5} {incr loop} {
+          if {$isWGD_PL == 0 } {set loopMax 6} else {set loopMax 5}
+          for {set loop 1} {$loop <= $loopMax} {incr loop} {
             incr prn
             append html "<td>"
               append html "<select id='separate_CHANNEL_$chn\_$prn' name='SCREEN_LAYOUT_PAGE_NUMBER_$loop' value='$ps(SCREEN_LAYOUT_PAGE_NUMBER_$loop)'>"
-                if {$availableScreens == 10} {set maxOption 9} else {set maxOption 4}
+                if {$availableScreens == 11} {set maxOption 10} else {set maxOption 5}
                 for {set option 0} {$option <= $maxOption} {incr option} {
                   if {$option == $ps(SCREEN_LAYOUT_PAGE_NUMBER_$loop)} {set selected "selected='selected'"} else {set selected ""}
                   append html "<option value='$option' $selected>$option</option>"
@@ -168,7 +174,7 @@ proc getMaintenance {chn p descr} {
   append html "</tr>"
 
 ####
-  if {$availableScreens == 10} {
+  if {$availableScreens == 11} {
     append html "<tr class='hidden'>"
       append html "<td>"
         append html "tr Nachbar Screens CLIMATE"
@@ -184,15 +190,16 @@ proc getMaintenance {chn p descr} {
             append html "<th colspan='2'>< Screen 7 ></th>"
             append html "<th colspan='2'>< Screen 8 ></th>"
             append html "<th colspan='2'>< Screen 9 ></th>"
+            append html "<th colspan='2'>< Screen 10 ></th>"
           append html "</tr>"
 
           append html "<tr>"
-            for {set loopx 5} {$loopx <= 9} {incr loopx} {
+            for {set loopx 5} {$loopx <= 10} {incr loopx} {
               set loop [expr $loopx + 1]
               incr prn
               append html "<td>"
                 append html "<select type='text' id='separate_CHANNEL_$chn\_$prn' name='SCREEN_LAYOUT_LEFT_NEIGHBOUR_$loop' value='$ps(SCREEN_LAYOUT_LEFT_NEIGHBOUR_$loop)'>"
-                  if {$availableScreens == 10} {set maxOption 9} else {set maxOption 4}
+                  if {$availableScreens == 11} {set maxOption 10} else {set maxOption 5}
                   append html "<option value='15'>15</option>"
                   for {set option 0} {$option <= $maxOption} {incr option} {
                     if {$option == $ps(SCREEN_LAYOUT_LEFT_NEIGHBOUR_$loop)} {set selected "selected='selected'"} else {set selected ""}
@@ -203,7 +210,7 @@ proc getMaintenance {chn p descr} {
               incr prn
               append html "<td>"
                 append html "<select type='text' id='separate_CHANNEL_$chn\_$prn' name='SCREEN_LAYOUT_RIGHT_NEIGHBOUR_$loop' value='$ps(SCREEN_LAYOUT_RIGHT_NEIGHBOUR_$loop)'>"
-                  if {$availableScreens == 10} {set maxOption 9} else {set maxOption 4}
+                  if {$availableScreens == 11} {set maxOption 10} else {set maxOption 5}
                   for {set option 0} {$option <= $maxOption} {incr option} {
                     if {$option == $ps(SCREEN_LAYOUT_RIGHT_NEIGHBOUR_$loop)} {set selected "selected='selected'"} else {set selected ""}
                     append html "<option value='$option' $selected>$option</option>"
@@ -222,11 +229,12 @@ proc getMaintenance {chn p descr} {
         append html "<td>Page Number</td>"
           append html "<td>"
             append html "<table><tr>"
-              for {set loop 6} {$loop <= 10} {incr loop} {
+
+              for {set loop 6} {$loop <= 11} {incr loop} {
                 incr prn
                 append html "<td>"
                   append html "<select id='separate_CHANNEL_$chn\_$prn' name='SCREEN_LAYOUT_PAGE_NUMBER_$loop' value='$ps(SCREEN_LAYOUT_PAGE_NUMBER_$loop)'>"
-                    if {$availableScreens == 10} {set maxOption 9} else {set maxOption 4}
+                    if {$availableScreens == 11} {set maxOption 10} else {set maxOption 5}
                     for {set option 0} {$option <= $maxOption} {incr option} {
                       if {$option == $ps(SCREEN_LAYOUT_PAGE_NUMBER_$loop)} {set selected "selected='selected'"} else {set selected ""}
                       append html "<option value='$option' $selected>$option</option>"
@@ -264,16 +272,16 @@ proc getMaintenance {chn p descr} {
         # Sortable Screen Elements
         append html "<tr>"
           append html "<td>"
-          if {$availableScreens == 5} {
-              append html "<div id='dragScreen' style='background-color:lightgrey; display: grid; grid-template-columns: repeat(6, auto); grid-column-gap: 10px; height: $sliderHeight;position:relative;'>"
-                for {set loop 0} {$loop <= 4} {incr loop} {
+          if {$availableScreens == 6} {
+              append html "<div id='dragScreen' style='background-color:lightgrey; display: grid; grid-template-columns: repeat(7, auto); grid-column-gap: 10px; height: $sliderHeight;position:relative;'>"
+                for {set loop 0} {$loop <= 5} {incr loop} {
                   append html "<div value='$loop' name='sortScreen' style=$btnStyle><span name='lblScreen' style='font-weight: bold;'>Screen [expr $loop + 1]</span></div>"
                 }
                 append html "<div value='END' name='sortScreen' style=$btnStyle><span name='lblScreen'>|</span></div>"
               append html "</div>"
-          } elseif {$availableScreens == 10} {
-            append html "<div id='dragScreen' style='background-color:lightgrey; display: grid; grid-template-columns: repeat(11, auto); grid-column-gap: 10px; height: $sliderHeight;position:relative;'>"
-              for {set loop 0} {$loop <= 9} {incr loop} {
+          } elseif {$availableScreens == 11} {
+            append html "<div id='dragScreen' style='background-color:lightgrey; display: grid; grid-template-columns: repeat(12, auto); grid-column-gap: 10px; height: $sliderHeight;position:relative;'>"
+              for {set loop 0} {$loop <= 10} {incr loop} {
                 append html "<div value='$loop' name='sortScreen' style=$btnStyle><span name='lblScreen' style='font-weight: bold;'>Screen [expr $loop + 1]</span></div>"
               }
               append html "<div value='END' name='sortScreen' style=$btnStyle><span name='lblScreen'>|</span></div>"
@@ -306,19 +314,23 @@ proc getMaintenance {chn p descr} {
     append html "<td>\${lblLayoutScreenTile}</td>"
     append html "<td><table>"
     append html "<tr>"
-      for {set loop 1} {$loop <= 5} {incr loop} {
+      if {$isWGD_PL == 0 } {set loopMax 6} else {set loopMax 5}
+      for {set loop 1} {$loop <= $loopMax} {incr loop} {
         append html "<th>Screen $loop</th>"
       }
     append html "</tr>"
 
     append html "<tr>"
-      for {set loop 1} {$loop <= 5} {incr loop} {
+      if {$isWGD_PL == 0 } {set loopMax 6} else {set loopMax 5}
+      for {set loop 1} {$loop <= $loopMax} {incr loop} {
         set param SCREEN_LAYOUT_TILE_LAYOUT_$loop
         incr prn
         array_clear options
         set options(0) "\${option1Tile}"
-        set options(1) "\${option2Tiles}"
-        set options(2) "\${option4Tiles}"
+        if {$loop < $loopMax} {
+          set options(1) "\${option2Tiles}"
+          set options(2) "\${option4Tiles}"
+        }
         append html "<td>"
           append html "[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]"
         append html "</td>"
@@ -326,24 +338,26 @@ proc getMaintenance {chn p descr} {
    append html "</tr></table></td>"
   append html "</tr>"
 
-  if {$availableScreens == 10} {
+  if {$availableScreens == 11} {
 
   append html "<tr>"
     append html "<td>\${lblLayoutScreenClimateTile}</td>"
     append html "<td><table>"
     append html "<tr>"
-      for {set loop 6} {$loop <= 10} {incr loop} {
+      for {set loop 6} {$loop <= 11} {incr loop} {
         append html "<th>Screen $loop</th>"
       }
     append html "</tr>"
 
     append html "<tr>"
-      for {set loop 6} {$loop <= 10} {incr loop} {
+      for {set loop 6} {$loop <= 11} {incr loop} {
         set param SCREEN_LAYOUT_TILE_LAYOUT_$loop
         incr prn
         array_clear options
         set options(0) "\${option1Tile}"
-        set options(1) "\${option2Tiles}"
+        if {$loop < 11} {
+          set options(1) "\${option2Tiles}"
+        }
         append html "<td>"
           append html "[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]"
         append html "</td>"
@@ -421,7 +435,6 @@ proc getMaintenance {chn p descr} {
 }
 
 proc getDisplayInputTransmitter {chn p descr} {
-
   global dev_descr env
 
   upvar $p ps
@@ -490,11 +503,21 @@ proc getDisplayInputTransmitter {chn p descr} {
     append html "<tr>"
       append html "<td>\${lblControlRepresentation}</td>"
       array_clear options
+
       set options(0) "\${optionNone}"
       set options(1) "\${optionDimmActor}"
-      set options(2) "\${optionShutterBlind}"
+      set options(2) "\${optionShutter}"
       set options(3) "\${optionSwitchActor}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 550 200]</td>"
+      set options(4) "\${optionBlind}"
+      set options(5) "\${optionShutterBlind}"
+      set options(6) "\${optionHSV}"
+      set options(7) "\${optionTW}"
+      set options(8) "\${optionHSVTW}"
+      set options(9) "\${optionAccessLockUnlock}"
+      set options(10) "\${optionAccessDayNight}"
+      set options(11) "\${optionAccessOpen}"
+
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_A 550 500]</td>"
     append html "</tr>"
   }
 
@@ -607,6 +630,100 @@ proc getDisplayThermostatInputTransmitter {chn p descr} {
   set param MAIN_TEXT
   if { [info exists ps($param)] == 1  } {
     incr prn
+    append html "<tr>"
+      append html "<td>\${lblMainText}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
+  set param SUB_TEXT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblSubText}</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
+  return $html
+
+}
+
+proc getWeatherDisplayReceiver {chn p descr} {
+
+  global dev_descr env
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar special_input_id special_input_id
+
+  set prn 0
+  set devType $dev_descr(TYPE)
+  set specialID "[getSpecialID $special_input_id]"
+  set html ""
+
+  set param BASE_IMAGE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblBaseImage} 1</td>"
+      append html "<td><table><tr>"
+        append html "<td style='border: 1px solid black;'><div style='background-color:gray; padding:5px; cursor: pointer;' onclick='selectWGDIcon(\"$chn\",\"separate_$special_input_id\_$prn\",\"$ps($param)\", \"weather\");'><img id=\"image_$chn\" width='24' height='24' src=''></div></td>"
+        # This textfield is necessary but should not be invisible.
+        append html  "<td class='hidden' style='padding-left:60px;'>[getTextField $param $ps($param) $chn $prn]&nbsp;<span class='attention'>(only visible for testing)</span></td>"
+      append html "</tr></table></td>"
+
+      append html "<script type=\"text/javascript\">"
+      append html "if (typeof imageCollection == 'undefined') {"
+        append html "imageCollection = getWGDImageCollection('weather');"
+      append html "}"
+      append html "jQuery.each(imageCollection, function(index, val) {"
+        append html "if (parseInt($ps($param)) == val\[1\]) {"
+          append html "jQuery(\"\#image_$chn\").attr(\"src\", getWGDImagePath('weather') + val\[0\]);"
+          append html "return false;" ;# return each loop
+        append html "} else {"
+          append html "jQuery(\"\#image_$chn\").attr(\"src\", getWGDImagePath('weather') + getWGDDefaultImage('weather'));"
+        append html "}"
+      append html "});"
+      append html "</script>"
+
+    append html "</tr>"
+  }
+
+  for {set loop 2} {$loop <= 8} {incr loop} {
+    set param BASE_IMAGE_$loop
+    if { [info exists ps($param)] == 1 } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${lblBaseImage} $loop</td>"
+        append html "<td><table><tr>"
+          append html "<td style='border: 1px solid black;'><div style='background-color:gray; padding:5px; cursor: pointer;' onclick='selectWGDIcon(\"$chn\",\"separate_$special_input_id\_$prn\",\"$ps($param)\", \"weather\", $loop);'><img id=\"image_$loop\_$chn\" width='24' height='24' src=''></div></td>"
+          # This textfield is necessary but should not be invisible.
+          append html  "<td class='hidden' style='padding-left:60px;'>[getTextField $param $ps($param) $chn $prn]&nbsp;<span class='attention'>(only visible for testing)</span></td>"
+        append html "</tr></table></td>"
+
+        append html "<script type=\"text/javascript\">"
+        append html "if (typeof imageCollection == 'undefined') {"
+          append html "imageCollection = getWGDImageCollection('weather');"
+        append html "}"
+        append html "jQuery.each(imageCollection, function(index, val) {"
+          append html "if (parseInt($ps($param)) == val\[1\]) {"
+            append html "jQuery(\"\#image_$loop\_$chn\").attr(\"src\", getWGDImagePath('weather') + val\[0\]);"
+            append html "return false;" ;# return each loop
+          append html "} else {"
+            append html "jQuery(\"\#image_$loop\_$chn\").attr(\"src\", getWGDImagePath('weather') + getWGDDefaultImage('weather'));"
+          append html "}"
+        append html "});"
+        append html "</script>"
+
+      append html "</tr>"
+    }
+  }
+
+  set param MAIN_TEXT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "[getHorizontalLine]"
     append html "<tr>"
       append html "<td>\${lblMainText}</td>"
       append html  "<td>[getTextField $param $ps($param) $chn $prn]</td>"

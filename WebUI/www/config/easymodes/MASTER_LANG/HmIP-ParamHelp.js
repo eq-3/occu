@@ -415,6 +415,27 @@ jQuery.extend(true,langJSON, {
       "<b>Rolladen/Jalousie</b>: %DCber Tasten Rauf und Runter kann ein Ziellevel eingestellt werden.<br/><br/>" +
       "<b>Schaltaktor</b>: %DCber die Tasten f%FCr Ein und Aus kann der Ziellevel 100% bzw 0% eingestellt werden.<br/><br/>",
 
+    "CONTROL_REPRESENTATION_A" :
+      "Mit der Representation kann f%FCr die Kachel ein weiterer Kanal zur direkten Ansteuerung eines Ziellevels %FCber zwei zus%E4tzliche Tasten auf der Kachel aktiviert werden.<br/><br/>" +
+      "<b>Keine</b>: Zus%E4tzliche Levelansteuerung deaktiviert.<br/><br/>" +
+      "<b>Dimmer</b>: %DCber die Tasten Plus und Minus kann ein Ziellevel eingestellt werden.<br/><br/>" +
+      "<b>Rolladen/Jalousie</b>: %DCber Tasten Rauf und Runter kann ein Ziellevel eingestellt werden.<br/><br/>" +
+      "<b>Schaltaktor</b>: %DCber die Tasten f%FCr Ein und Aus kann der Ziellevel 100% bzw 0% eingestellt werden.<br/><br/>" +
+
+      "<b>Jalousie</b>: %DCber die Testen Rauf und Runter kann der Lamellenwinkel eingestellt werden.<br/><br/>" +
+      "<b>Rollladen/Jalousie</b>: %DCber die Tasten Rauf und Runter kann die Behangh%F6he oder der Lamelenwinkel eingestellt werden. " +
+      "%DCber die Funktionstaste kann zwischen Behangh%F6he und Lamellenwinkel umgeschaltet werden (nicht bei der 1x1 Kachel).<br/><br/>" +
+      "<b>HSV</b>: %DCber die +/--Tasten kann Ziellevel eingestellt werden. " +
+      "Bei langem Tastendruck auf das Icon wird der Picker zur RGB-Farbauswahl aufgerufen.<br/><br/>" +
+      "<b>TW</b>: %DCber die +/--Tasten kann Ziellevel eingestellt werden. " +
+      "Bei langem Tastendruck auf das Icon wird der Picker zur Farbtemperatur aufgerufen.<br/><br/>" +
+      "<b>TW/RGB</b>: %DCber die +/--Tasten kann Ziellevel eingestellt werden. " +
+      "Bei langem Tastendruck auf das Icon wird der zwischen RGB und Farbtemperatur umschaltbare Picker aufgerufen.<br/><br/>" +
+      "<b>Ver-/Entriegeln</b>: %DCber die Schloss - Tasten erh%E4lt ein T%FCrschlossantrieb den Befehl zum Ver- bzw. Entriegeln.<br/><br/>" +
+      "<b>Tag/Nacht</b>: %DCber die Tag-Nacht-Tasten kann zwischen Tag und Nachtbetrieb der Zutrittsl%F6sung umgeschaltet werden.\n<br/><br/>" +
+      "<b>%D6ffnen</b>: %DCber Bet%E4tigung des T%FCr-Auf-Icons erh%E4lt ein T%FCrschlossantrieb den Befehl \"Falle ziehen\" um die T%FCr zu %F6ffnen.<br/><br/>",
+
+
     "DALI_GROUP" :
       "Hier%FCber kann das DALI-Ger%E4t bis zu 16 DALI-Gruppen zugeordnet werden. " +
       "Die DALI-Gruppen k%F6nnen wie einzelne Kan%E4le angesprochen werden.<br/><br/>" +
@@ -929,6 +950,28 @@ jQuery.extend(true,langJSON, {
       "<b>Dimmer</b>: Via the keys Plus and Minus a target level can be set.<br/><br/>" +
       "<b>Shutter/blind</b>: A target level can be set via the Up and Down keys.<br/><br/>" +
       "<b>Switch actuator</b>: The target level 100% and 0% can be set via the keys for On and Off.<br/><br/>",
+
+    "CONTROL_REPRESENTATION_A" :
+      "<b>None</b>: Additional level control disabled.<br/><br/>" +
+      " With the representation, another channel for direct control of a target level can be activated for the tile via two additional keys on the tile.<br/><br/>" +
+      "<b>Dimmer</b>: Via the keys Plus and Minus a target level can be set.<br/><br/>" +
+      "<b>Shutter/blind</b>: A target level can be set via the Up and Down keys.<br/><br/>" +
+      "<b>Switch actuator</b>: The target level 100% and 0% can be set via the keys for On and Off.<br/><br/>" +
+
+      "en* <b>Jalousie</b>: %DCber die Testen Rauf und Runter kann der Lamellenwinkel eingestellt werden.<br/><br/>" +
+      "en* <b>Rollladen/Jalousie</b>: %DCber die Tasten Rauf und Runter kann die Behangh%F6he oder der Lamelenwinkel eingestellt werden. " +
+      "%DCber die Funktionstaste kann zwischen Behangh%F6he und Lamellenwinkel umgeschaltet werden (nicht bei der 1x1 Kachel).<br/><br/>" +
+      "en* <b>HSV</b>: %DCber die +/--Tasten kann Ziellevel eingestellt werden. " +
+      " Bei langem Tastendruck auf das Icon wird der Picker zur RGB-Farbauswahl aufgerufen.<br/><br/>" +
+      "en* <b>TW</b>: %DCber die +/--Tasten kann Ziellevel eingestellt werden. " +
+      "Bei langem Tastendruck auf das Icon wird der Picker zur Farbtemperatur aufgerufen.<br/><br/>" +
+      "en* <b>TW/RGB</b>: %DCber die +/--Tasten kann Ziellevel eingestellt werden. " +
+      "Bei langem Tastendruck auf das Icon wird der zwischen RGB und Farbtemperatur umschaltbare Picker aufgerufen.<br/><br/>" +
+      "en* <b>Lock/Unlock</b>: %DCber die Schloss - Tasten erh%E4lt ein T%FCrschlossantrieb den Befehl zum Ver- bzw. Entriegeln.<br/><br/>" +
+      "en* <b>Day/Night</b>: %DCber die Tag-Nacht-Tasten kann zwischen Tag und Nachtbetrieb der Zutrittsl%F6sung umgeschaltet werden.\n<br/><br/>" +
+      "en* <b>Open</b>: %DCber Bet%E4tigung des T%FCr-Auf-Icons erh%E4lt ein T%FCrschlossantrieb den Befehl \"Falle ziehen\" um die T%FCr zu %F6ffnen.<br/><br/>",
+
+
 
     "DALI_GROUP" :
       "Here, the DALI device can be assigned to up to 16 groups. " +

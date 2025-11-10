@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes toggelt der Auto-Relock Status (ein / aus).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertes schaltet Auto-Relock ein.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">Bei Empfang des gew&auml;hlten Entscheidungswertesschaltet Auto-Relock aus.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">Das Profil ist nicht aktiv</span>",

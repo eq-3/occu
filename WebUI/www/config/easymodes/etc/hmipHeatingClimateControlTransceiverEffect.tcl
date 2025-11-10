@@ -130,7 +130,7 @@ proc getColorLevel {param chn prn OnOff} {
   append html "<td>\${$lblParam}</td>"
   array_clear options
   option RAW_0_100Percent_1
-  append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+  append html  "<td>[getOptionBox '$param' options [format %.1f $ps($param)] $chn $prn]</td>"
   append html "</tr>"
 
   return $html

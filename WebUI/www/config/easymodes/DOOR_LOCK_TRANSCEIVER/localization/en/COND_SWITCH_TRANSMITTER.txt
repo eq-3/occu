@@ -1,0 +1,9 @@
+"description_1" : "<span class=\"translated\">When receiving the decision value defined, the status of the lock toggles (unlocked/locked).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">When receiving the decision value defined, the door is opened</span><br/><br/>",
+"description_3" : "<span class=\"translated\">When receiving the decision value defined, the lock is unlocked.</span><br/><br/>",
+"description_4" : "<span class=\"translated\">When receiving the decision value defined, the lock is locked.</span><br/><br/>",
+
+"description_5" : "<span class=\"translated\">The profile is not active</span>",
+
+
+

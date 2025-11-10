@@ -48,8 +48,12 @@ jQuery.extend(true,langJSON, {
     "optionLevelKeyBehaviour" : "Taster",
     "optionCCULogic" : "CCU",
     "optionCloudLogic" : "Cloud",
-
-
+    "optionHSV" : "HSV",
+    "optionTW" : "TW",
+    "optionHSVTW" : "TW/RGB",
+    "optionAccessLockUnlock" : "Ver-/Entriegeln",
+    "optionAccessDayNight" : "Tag/Nacht",
+    "optionAccessOpen" : "%D6ffnen",
 
     "noMoreKeys" : ""
   },
@@ -103,6 +107,12 @@ jQuery.extend(true,langJSON, {
     "optionLevelKeyBehaviour" : "Key",
     "optionCCULogic" : "CCU",
     "optionCloudLogic" : "Cloud",
+    "optionHSV" : "HSV",
+    "optionTW" : "TW",
+    "optionHSVTW" : "TW/RGB",
+    "optionAccessLockUnlock" : "Lock/Unlock",
+    "optionAccessDayNight" : "Day/Night",
+    "optionAccessOpen" : "Open",
 
     "noMoreKeys" : ""
   }

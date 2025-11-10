@@ -3,7 +3,7 @@ sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipChannelConfig
 sourceOnce [file join /www/config/easymodes/em_common.tcl]
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
-  global env iface_url psDescr
+  global env iface_url psDescr dev_descr
 
   upvar HTML_PARAMS   HTML_PARAMS
   upvar $pps          ps
@@ -15,7 +15,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
     set prn 1
-    append HTML_PARAMS(separate_1) "[getAccelerationTransceiver $chn ps psDescr $address]"
+    if {([string first "HmIP-DLP" $dev_descr(TYPE)] == -1)} {
+      append HTML_PARAMS(separate_1) "[getAccelerationTransceiver $chn ps psDescr $address]"
+    } else {
+      append HTML_PARAMS(separate_1) "[getAccelerationTransceiver_A $chn ps psDescr $address]"
+    }
+
   append HTML_PARAMS(separate_1) "</table>"
 }
 

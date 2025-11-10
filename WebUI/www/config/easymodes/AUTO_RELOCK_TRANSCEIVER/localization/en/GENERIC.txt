@@ -1,0 +1,5 @@
+"toggle" : "Toggle",
+"autoRelockOn" : "On",
+"autoRelockOff" : "Off",
+
+"not_active" : "inactive",

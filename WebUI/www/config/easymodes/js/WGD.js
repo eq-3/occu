@@ -16,14 +16,15 @@ highlightActiveScreens = function() {
 setInitialScreenValues = function(devAddress) {
   var arScreenElements = jQuery("[name='sortScreen']"),
     device = DeviceList.getDeviceByAddress(devAddress),
-    screenOrder = homematic("Interface.getMetadata", {"objectId": device.id, "dataId": "screenOrder"}); // Retrieve the screen order
+    screenOrder = homematic("Interface.getMetadata", {"objectId": device.id, "dataId": "screenOrder"}), // Retrieve the screen order
+    isWired = (device.typeName.includes("HmIPW-")) ? true : false;
 
     // This shouldn't be happen. The screenOrder will be stored while teach in. So this is only a fallback.
     if (screenOrder == "null") {
-      if (device.typeName == "HmIPW-WGD") {
-        screenOrder = "0,1,2,3,4,END";
-      } else if (device.typeName == "HmIPW-WGD-PL") {
-        screenOrder = "0,1,2,3,4,5,6,7,8,9,END";
+      if ((device.typeName == "HmIPW-WGD") || (device.typeName == "HmIP-WGD")) {
+        screenOrder = (isWired) ? "0,1,2,3,4,END" : "0,1,2,3,4,5,END";
+      } else if ((device.typeName == "HmIPW-WGD-PL") || (device.typeName == "HmIP-WGD-PL")) {
+        screenOrder = (isWired) ? "0,1,2,3,4,5,6,7,8,9,END" : "0,1,2,3,4,5,6,7,8,9,10,END";
       }
     }
 
@@ -43,12 +44,12 @@ setInitialScreenValues = function(devAddress) {
       }
     });
   }
-  showOnlyActiveChannels(screenOrder);
+  showOnlyActiveChannels(screenOrder, isWired);
 };
 
 getRelevantCh = function(screen) {
   var activeTiles, result,
-    nrOfrelevantCh = (screen < 5) ? 7 : 1,
+    nrOfrelevantCh = (screen < 6) ? 7 : 1,
     screenID = screen + 1,
     indexA = [1,3,7], // Key channels - 3 tile variations = 2, 4 or 8 visible channels.
     indexB = [0,1]; // Climate channels - only 2 tile variations = 1 or 2 visible channels
@@ -64,17 +65,26 @@ getRelevantCh = function(screen) {
   return parseInt(result);
 };
 
-showOnlyActiveChannels = function(screenOrder) {
-  var arScreenOrder = screenOrder.split(","),
+showOnlyActiveChannels = function(screenOrder, wired) {
+  var
+    isWired = wired,
+    arScreenOrder = screenOrder.split(","),
     profileTableCells = jQuery(".ProfileTbl"),
-    screenChannels = (arScreenOrder.length < 10) ? {0:1, 1:9, 2:17, 3:25, 4:33} : {0:1, 1:9, 2:17, 3:25, 4:33, 5:42, 6:44, 7:46, 8: 48, 9:50},
+    screenChannels,
     nrOfrelevantCh,
     nomoreScreens = false,
+    quickMotionChannel = 41,
     loop;
+
+    if (isWired) {
+     screenChannels = (arScreenOrder.length < 10) ? {0:1, 1:9, 2:17, 3:25, 4:33} : {0:1, 1:9, 2:17, 3:25, 4:33, 5:42, 6:44, 7:46, 8: 48, 9:50};
+    } else {
+      screenChannels = (arScreenOrder.length < 11) ? {0:1, 1:9, 2:17, 3:25, 4:33, 5:42} : {0:1, 1:9, 2:17, 3:25, 4:33, 5:42, 6:44, 7:46, 8: 48, 9:50, 10:52};
+    }
 
   // Hide the config params of all channels except 0 and 41
   jQuery.each(profileTableCells, function(index,channelParam) {
-    if ((index != 0) && (index != 41)) { // Maintenance and Quick Motion always visible
+    if ((index != 0) && (index != quickMotionChannel)) { // Maintenance and Quick Motion always visible
       jQuery(channelParam).parent().parent().hide();
     }
   });
@@ -99,7 +109,7 @@ storeSelectedScreenOrder = function(devAddress) {
 
   var arScreenElements = jQuery("[name='sortScreen']");
   jQuery.each(arScreenElements, function (index, elm) {
-    screenOrder+=jQuery(elm).attr("value") + ","
+    screenOrder+=jQuery(elm).attr("value") + ",";
   });
 
   screenOrder = screenOrder.slice(0, -1); // remove the last comma
