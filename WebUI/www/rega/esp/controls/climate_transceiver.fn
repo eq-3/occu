@@ -6,7 +6,15 @@ function ::CreateClimateTransceiver()
 
   object ch = dom.GetObject(chnId);
   string chnAddress = ch.Address();
+  integer chnNumber = chnAddress.StrValueByIndex(":",1).ToInteger();
+
   string airPressureAlreadyVisible = false;
+
+  string lblTemperature = "${stringTableWeatherTemperature}";
+
+  if ((cObj.Label() == "ELV-SH-PTI2") && (chnNumber == 5)) {
+    lblTemperature = "${stringTableWeatherTemperatureDiff}";
+  }
 
   WriteLine("<td><table align='center'>");
     WriteLine("<tr>");
@@ -16,7 +24,7 @@ function ::CreateClimateTransceiver()
           WriteLine("<table style='border:none'>");
             WriteLine("<tr>");
               WriteLine("<td class='ctrlTbl CLASS02520' style='text-align:left'>");
-                WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>${stringTableWeatherTemperature}: </span><span class='CLASS02535' style='color:white'>"#oActualTemperature.Value().ToString(1)#" "#oActualTemperature.ValueUnit()#"</span></div>");
+                WriteLine("<div class='CLASS02532'><span class='CLASS02534 j_translate' style='float: none; display: inline;'>"#lblTemperature#": </span><span class='CLASS02535' style='color:white'>"#oActualTemperature.Value().ToString(1)#" "#oActualTemperature.ValueUnit()#"</span></div>");
               WriteLine("</td>");
             WriteLine("</tr>");
           WriteLine("</table>");

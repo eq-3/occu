@@ -882,8 +882,12 @@ ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2=FALSE	${stringTableErrorShortCircuitDataLine
 ERROR_SHORT_CIRCUIT_DATA_LINE_BUS_2=TRUE	${stringTableErrorShortCircuitDataLineBus2True}
 ERROR_TEMP_OR_HUMIDITY_MEASUREMENT=FALSE	${stringTableErrorTempOrHumidityMeasurementFalse}
 ERROR_TEMP_OR_HUMIDITY_MEASUREMENT=TRUE	${stringTableErrorTempOrHumidityMeasurementTrue}
+ERROR_TEMP_SENSOR	${stringTableErrorTempSensor}
 ERROR_TEMP_SENSOR=FALSE	${stringTableErrorTempSensorFalse}
 ERROR_TEMP_SENSOR=TRUE	${stringTableErrorTempSensorTrue}
+ERROR_TEMP_SENSOR_2	${stringTableErrorTempSensor2}
+ERROR_TEMP_SENSOR_2=FALSE	${stringTableErrorTempSensor2False}
+ERROR_TEMP_SENSOR_2=TRUE	${stringTableErrorTempSensor2True}
 ERROR_UNDERVOLTAGE	${stringTableErrorUndervoltageTrue}
 ERROR_UNDERVOLTAGE=FALSE	${stringTableErrorUndervoltageFalse}
 ERROR_UNDERVOLTAGE=TRUE	${stringTableErrorUndervoltageTrue}
