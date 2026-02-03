@@ -446,6 +446,12 @@ DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"] = new Object();
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part1"] = [2, 0.548, 0.468, 0.072, 0.052];
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1_part2"] = [2, 0.612, 0.452, 0.028, 0.056];
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-3"]["1"] = [5, '1_part1', '1_part2'];
+DEV_LIST.push('HmIP-DLP-WS');
+DEV_DESCRIPTION["HmIP-DLP-WS"] = "HmIP-DLP";
+DEV_PATHS["HmIP-DLP-WS"] = new Object();
+DEV_PATHS["HmIP-DLP-WS"]["50"] = "/config/img/devices/50/248_hmip-dlp_thumb.png";
+DEV_PATHS["HmIP-DLP-WS"]["250"] = "/config/img/devices/250/248_hmip-dlp.png";
+DEV_HIGHLIGHT["HmIP-DLP-WS"] = new Object();
 DEV_LIST.push('HmIP-KRCA-2');
 DEV_DESCRIPTION["HmIP-KRCA-2"] = "KRCA";
 DEV_PATHS["HmIP-KRCA-2"] = new Object();
@@ -1046,12 +1052,24 @@ DEV_PATHS["HmIPW-DRI32"] = new Object();
 DEV_PATHS["HmIPW-DRI32"]["50"] = "/config/img/devices/50/167_hmipw-dri32_thumb.png";
 DEV_PATHS["HmIPW-DRI32"]["250"] = "/config/img/devices/250/167_hmipw-dri32.png";
 DEV_HIGHLIGHT["HmIPW-DRI32"] = new Object();
+DEV_LIST.push('ELV-SH-CWD');
+DEV_DESCRIPTION["ELV-SH-CWD"] = "ELV-SH-CWD";
+DEV_PATHS["ELV-SH-CWD"] = new Object();
+DEV_PATHS["ELV-SH-CWD"]["50"] = "/config/img/devices/50/243_elv-sh-crc_thumb.png";
+DEV_PATHS["ELV-SH-CWD"]["250"] = "/config/img/devices/250/243_elv-sh-crc.png";
+DEV_HIGHLIGHT["ELV-SH-CWD"] = new Object();
 DEV_LIST.push('HM-Sys-sRP-Pl');
 DEV_DESCRIPTION["HM-Sys-sRP-Pl"] = "HM-Sys-sRP-Pl";
 DEV_PATHS["HM-Sys-sRP-Pl"] = new Object();
 DEV_PATHS["HM-Sys-sRP-Pl"]["50"] = "/config/img/devices/50/OM55_DimmerSwitch_thumb.png";
 DEV_PATHS["HM-Sys-sRP-Pl"]["250"] = "/config/img/devices/250/OM55_DimmerSwitch.png";
 DEV_HIGHLIGHT["HM-Sys-sRP-Pl"] = new Object();
+DEV_LIST.push('HmIP-M-TD15');
+DEV_DESCRIPTION["HmIP-M-TD15"] = "HmIP-M-TD15";
+DEV_PATHS["HmIP-M-TD15"] = new Object();
+DEV_PATHS["HmIP-M-TD15"]["50"] = "/config/img/devices/50/258_hmip-m-td15_thumb.png";
+DEV_PATHS["HmIP-M-TD15"]["250"] = "/config/img/devices/250/258_hmip-m-td15.png";
+DEV_HIGHLIGHT["HmIP-M-TD15"] = new Object();
 DEV_LIST.push('HmIPW-WTH-A');
 DEV_DESCRIPTION["HmIPW-WTH-A"] = "HmIPW-WTH";
 DEV_PATHS["HmIPW-WTH-A"] = new Object();
@@ -1216,6 +1234,12 @@ DEV_PATHS["HmIP-eTRV-E"] = new Object();
 DEV_PATHS["HmIP-eTRV-E"]["50"] = "/config/img/devices/50/216_hmip-etrv-e_thumb.png";
 DEV_PATHS["HmIP-eTRV-E"]["250"] = "/config/img/devices/250/216_hmip-etrv-e.png";
 DEV_HIGHLIGHT["HmIP-eTRV-E"] = new Object();
+DEV_LIST.push('HmIP-DLP-AS');
+DEV_DESCRIPTION["HmIP-DLP-AS"] = "HmIP-DLP";
+DEV_PATHS["HmIP-DLP-AS"] = new Object();
+DEV_PATHS["HmIP-DLP-AS"]["50"] = "/config/img/devices/50/248_hmip-dlp_thumb.png";
+DEV_PATHS["HmIP-DLP-AS"]["250"] = "/config/img/devices/250/248_hmip-dlp.png";
+DEV_HIGHLIGHT["HmIP-DLP-AS"] = new Object();
 DEV_LIST.push('HmIPW-SCTHD');
 DEV_DESCRIPTION["HmIPW-SCTHD"] = "HmIPW-SCTHD";
 DEV_PATHS["HmIPW-SCTHD"] = new Object();
@@ -1789,6 +1813,12 @@ DEV_PATHS["HmIP-WTH-A"] = new Object();
 DEV_PATHS["HmIP-WTH-A"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
 DEV_PATHS["HmIP-WTH-A"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
 DEV_HIGHLIGHT["HmIP-WTH-A"] = new Object();
+DEV_LIST.push('HmIP-WTH-3-A');
+DEV_DESCRIPTION["HmIP-WTH-3-A"] = "HmIP-WTH-2";
+DEV_PATHS["HmIP-WTH-3-A"] = new Object();
+DEV_PATHS["HmIP-WTH-3-A"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HmIP-WTH-3-A"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HmIP-WTH-3-A"] = new Object();
 DEV_LIST.push('HmIP-eTRV-B-UK-2');
 DEV_DESCRIPTION["HmIP-eTRV-B-UK-2"] = "TRV-B-UK";
 DEV_PATHS["HmIP-eTRV-B-UK-2"] = new Object();
@@ -2261,6 +2291,12 @@ DEV_PATHS["HmIP-FSI16"] = new Object();
 DEV_PATHS["HmIP-FSI16"]["50"] = "/config/img/devices/50/203_hmip-fsi16_thumb.png";
 DEV_PATHS["HmIP-FSI16"]["250"] = "/config/img/devices/250/203_hmip-fsi16.png";
 DEV_HIGHLIGHT["HmIP-FSI16"] = new Object();
+DEV_LIST.push('HmIP-WTH-3');
+DEV_DESCRIPTION["HmIP-WTH-3"] = "HmIP-WTH-2";
+DEV_PATHS["HmIP-WTH-3"] = new Object();
+DEV_PATHS["HmIP-WTH-3"]["50"] = "/config/img/devices/50/121_hmip-wth_thumb.png";
+DEV_PATHS["HmIP-WTH-3"]["250"] = "/config/img/devices/250/121_hmip-wth.png";
+DEV_HIGHLIGHT["HmIP-WTH-3"] = new Object();
 DEV_LIST.push('HM-MOD-EM-8Bit');
 DEV_DESCRIPTION["HM-MOD-EM-8Bit"] = "HM-MOD-EM-8Bit";
 DEV_PATHS["HM-MOD-EM-8Bit"] = new Object();
@@ -2854,6 +2890,12 @@ DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"] = new Object();
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["50"] = "/config/img/devices/50/107_hm-es-pmsw1-pl-R2_thumb.png";
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R2"]["250"] = "/config/img/devices/250/107_hm-es-pmsw1-pl-R2.png";
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R2"] = new Object();
+DEV_LIST.push('ELV-SH-DUSI');
+DEV_DESCRIPTION["ELV-SH-DUSI"] = "ELV-SH-DUSI";
+DEV_PATHS["ELV-SH-DUSI"] = new Object();
+DEV_PATHS["ELV-SH-DUSI"]["50"] = "/config/img/devices/50/259_elv-sh-dusi_thumb.png";
+DEV_PATHS["ELV-SH-DUSI"]["250"] = "/config/img/devices/250/259_elv-sh-dusi.png";
+DEV_HIGHLIGHT["ELV-SH-DUSI"] = new Object();
 DEV_LIST.push('HM-LC-Sw4-SM-ATmega168');
 DEV_DESCRIPTION["HM-LC-Sw4-SM-ATmega168"] = "HM-LC-Sw4-SM-ATmega168";
 DEV_PATHS["HM-LC-Sw4-SM-ATmega168"] = new Object();
@@ -5065,6 +5107,7 @@ elvST['ATC_OFF'] = '${stringTableOFF}';
 elvST['ATC_ON'] = '${stringTableON}';
 elvST['AUTO_HYDRAULIC_ADJUSTMENT'] = '${stringTableAutoHydraulicAdjustment}';
 elvST['AUTO_MODE'] = '${stringTableClimateControlRTTransceiverAutoMode}';
+elvST['AUTO_RELOCK_TRANSCEIVER'] = '${stringTableAutoRelockTransceiverTitle}';
 elvST['AUTO_RELOCK_TRANSCEIVER|AUTO_RELOCK_STATE=TRUE'] = '${stringTableAutoRelockState}: ${lblYes}';
 elvST['AUTO_RELOCK_TRANSCEIVER|AUTO_RELOCK_STATE=FALSE'] = '${stringTableAutoRelockState}: ${lblNo}';
 elvST['AVERAGE_ILLUMINATION'] = '${stringTableAverageIllumination}';
@@ -5562,6 +5605,7 @@ elvST['DISPLAY_UPDATE_REQUEST_21=FALSE'] = '${stringTableDisplayUpdateRequest} 2
 elvST['DISPLAY_UPDATE_REQUEST_21=TRUE'] = '${stringTableDisplayUpdateRequest} 21: ${lblYes}';
 elvST['DISPLAY_UPDATE_REQUEST_23=FALSE'] = '${stringTableDisplayUpdateRequest} 23: ${lblNo}';
 elvST['DISPLAY_UPDATE_REQUEST_23=TRUE'] = '${stringTableDisplayUpdateRequest} 23: ${lblYes}';
+elvST['DISTANCE'] = '${lblDistance}';
 elvST['DOOR_COMMAND=CLOSE'] = '${stringTableDoorCommandClose}';
 elvST['DOOR_COMMAND=NOP'] = '${stringTableDoorCommandNOP}';
 elvST['DOOR_COMMAND=OPEN'] = '${stringTableDoorCommandOpen}';
@@ -5587,17 +5631,18 @@ elvST['DOOR_LOCK_STATE_TRANSMITTER|ACTIVITY_STATE=UP'] = '${stringTableDoorLockS
 elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=LOCKED'] = '${stringTableDoorLockStateTransmitterLockTargetLevelLocked}';
 elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=UNLOCKED'] = '${stringTableDoorLockStateTransmitterLockTargetLevelUnlocked}';
 elvST['DOOR_LOCK_STATE_TRANSMITTER|LOCK_TARGET_LEVEL=OPEN'] = '${stringTableDoorLockStateTransmitterLockTargetLevelOpen}';
+elvST['DOOR_LOCK_TRANSCEIVER'] = '${stringTableAccessReceiverTitle}';
 elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=LOCKED'] = '${stringTableDoorLockStateTransmitterLockTargetLevelLocked}';
 elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=UNLOCKED'] = '${stringTableDoorLockStateTransmitterLockTargetLevelUnlocked}';
 elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=OPEN'] = '${stringTableDoorLockStateTransmitterLockTargetLevelOpen}';
-elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=RESET_TEACH_IN'] = '${stringTableDoorLockStateTransceiverLockTargetLevelResetTeachIn}';
-elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=SET_NEUTRAL_LOCKED'] = '${stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralLocked}';
-elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=SET_NEUTRAL_UNLOCKED'] = '${stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralUnlocked}';
-elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=TESTRUN_SAVE_LOCK_UNLOCK'] = '${stringTableDoorLockStateTransceiverLockTargetLevelTestrunSaveLockUnlock}';
+elvST['_DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=RESET_TEACH_IN'] = '${stringTableDoorLockStateTransceiverLockTargetLevelResetTeachIn}';
+elvST['_DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=SET_NEUTRAL_LOCKED'] = '${stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralLocked}';
+elvST['_DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=SET_NEUTRAL_UNLOCKED'] = '${stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralUnlocked}';
+elvST['_DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=TESTRUN_SAVE_LOCK_UNLOCK'] = '${stringTableDoorLockStateTransceiverLockTargetLevelTestrunSaveLockUnlock}';
 elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=TEACH_IN_DRIVE_OPEN_DOOR_NEUTRAL_UNLOCKED'] = '${stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralUnlocked}';
 elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=TEACH_IN_DRIVE_OPEN_DOOR_NEUTRAL_VERTICAL'] = '${stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralVertical}';
 elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=TEACH_IN_DRIVE_OPEN_DOOR_NEUTRAL_HORIZONTAL'] = '${stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralHorizontal}';
-elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=LOAD_CALIBRATION_CLOSED_DOOR'] = '${stringTableDoorLockStateTransceiverLockTargetLevelLoadCalibrationClosedDoor}';
+elvST['_DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=LOAD_CALIBRATION_CLOSED_DOOR'] = '${stringTableDoorLockStateTransceiverLockTargetLevelLoadCalibrationClosedDoor}';
 elvST['DOOR_LOCK_TRANSCEIVER|LOCK_TARGET_LEVEL=LOAD_CALIBRATION_OPEN_DOOR'] = '${stringTableDoorLockStateTransceiverLockTargetLevelLoadCalibrationOpenDoor}';
 elvST['DOOR_RECEIVER'] = '${stringTableDoorReceiverTitle}';
 elvST['DOOR_STATE=CLOSED'] = '${stringTableDoorStateClose}';
@@ -5705,6 +5750,8 @@ elvST['ERROR_NO_END_STOP_LOCK=TRUE'] = '${stringTableNoEndStopLock}: ${lblYes}';
 elvST['ERROR_NO_END_STOP_UNLOCK'] = '${stringTableNoEndStopUnLock}';
 elvST['ERROR_NO_END_STOP_UNLOCK=FALSE'] = '${stringTableNoEndStopUnLock}: ${lblNo}';
 elvST['ERROR_NO_END_STOP_UNLOCK=TRUE'] = '${stringTableNoEndStopUnLock}: ${lblYes}';
+elvST['ERROR_OBSTACLE=FALSE'] = '${stringTableErrorObstacleFalse}';
+elvST['ERROR_OBSTACLE=TRUE'] = '${stringTableErrorObstacleTrue}';
 elvST['ERROR_OVERHEAT'] = '${stringTableErrorOverheatTrue}';
 elvST['ERROR_OVERHEAT=FALSE'] = '${stringTableErrorOverheatFalse}';
 elvST['ERROR_OVERHEAT=TRUE'] = '${stringTableErrorOverheatTrue}';
@@ -5841,6 +5888,7 @@ elvST['HEATING_KEY_RECEIVER'] = '${stringTableHeatingKeyReceiverTitle}';
 elvST['HEATING_ROOM_TH_RECEIVER'] = '${stringTableHeatingRoomTHReceiverTitle}';
 elvST['HEATING_ROOM_TH_TRANSCEIVER'] = '${stringTableHeatingRoomTHTransceiverTitle}';
 elvST['HEATING_SHUTTER_CONTACT_RECEIVER'] = '${stringTableHeatingShutterContactReceiverTitle}';
+elvST['HEIGHT'] = '${lblHeight}';
 elvST['HIGHEST_ILLUMINATION'] = '${stringTableHighestIllumination}';
 elvST['HIGHEST_ILLUMINATION_STATUS=NORMAL'] = '${lblValue} ${stringTableHighestIllumination}: ${lblNormal}';
 elvST['HIGHEST_ILLUMINATION_STATUS=0'] = '${lblValue} ${stringTableHighestIllumination}: ${lblNormal}';
@@ -5990,32 +6038,31 @@ elvST['LOCAL_RESET_DISABLE'] = '${stringTableLocalResetDisable}';
 elvST['LOCAL_RESET_DISABLED'] = '${stringTableLocalResetDisable}';
 elvST['LOCK_TEACH_IN_STATE'] = '${stringTableLockTeachInState}';
 elvST['LOCK_TEACH_IN_STATE=TEACH_IN_INACTIVE'] = '${stringTableKeyInactive}';
-elvST['LOCK_TEACH_IN_STATE=NEUTRAL_POSITION_LOCKED_SET'] = '${neutralPositionLockedSet}';
-elvST['LOCK_TEACH_IN_STATE=NEUTRAL_POSITION_UNLOCKED_SET'] = '${neutralPositionUnlockedSet}';
-elvST['LOCK_TEACH_IN_STATE=NEUTRAL_POSITION_BOTH_SET'] = '${neutralPositionBothSet}';
+elvST[' _LOCK_TEACH_IN_STATE=NEUTRAL_POSITION_LOCKED_SET'] = '${neutralPositionLockedSet}';
+elvST[' _LOCK_TEACH_IN_STATE=NEUTRAL_POSITION_UNLOCKED_SET'] = '${neutralPositionUnlockedSet}';
+elvST[' _LOCK_TEACH_IN_STATE=NEUTRAL_POSITION_BOTH_SET'] = '${neutralPositionBothSet}';
 elvST['LOCK_TEACH_IN_STATE=TEACH_IN_DRIVE_RUNNING'] = '${teachInDriveRunning}';
 elvST['LOCK_TEACH_IN_STATE=TEACH_IN_SUCCESSFUL'] = '${teachInSuccessful}';
-elvST['LOCK_TEACH_IN_STATE=ERROR_NEUTRAL_POSITION_INCOMPLETE_TURNS'] = '${errorNeutralPositionIncomplete}';
+elvST[' _LOCK_TEACH_IN_STATE=ERROR_NEUTRAL_POSITION_INCOMPLETE_TURNS'] = '${errorNeutralPositionIncomplete}';
 elvST['LOCK_TEACH_IN_STATE=ERROR_NEUTRAL_POSITION_LESS_ONE_TURN'] = '${errorNeutralPositionLessOneTurn}';
-elvST['LOCK_TEACH_IN_STATE=ERROR_END_STOP_DRIVE_LOCK_BEFORE_NEUTRAL_POSITION'] = '${errorEndStopDriveLockBeforeNeutralPosition}';
-elvST['LOCK_TEACH_IN_STATE=ERROR_END_STOP_DRIVE_UNLOCK_BEFORE_NEUTRAL_POSITION'] = '${errorEndStopDriveUnlockBeforeNeutralPosition}';
+elvST[' _LOCK_TEACH_IN_STATE=ERROR_END_STOP_DRIVE_LOCK_BEFORE_NEUTRAL_POSITION'] = '${errorEndStopDriveLockBeforeNeutralPosition}';
+elvST[' _LOCK_TEACH_IN_STATE=ERROR_END_STOP_DRIVE_UNLOCK_BEFORE_NEUTRAL_POSITION'] = '${errorEndStopDriveUnlockBeforeNeutralPosition}';
 elvST['LOCK_TEACH_IN_STATE=ERROR_TEACH_IN_DRIVE_CANCELED'] = '${errorTeachInDriveCanceled}';
 elvST['LOCK_TEACH_IN_STATE=ERROR_TEACH_IN_DRIVE_BATTERY_LOW'] = '${errorTeachInDriveBatteryLow}';
 elvST['LOCK_TEACH_IN_STATE=TEACH_IN_ERROR'] = '${teachInError}';
 elvST['LOCK_STATE_REASON'] = '${stringTableLockStateReason}';
 elvST['LOCK_STATE_REASON=UNKNOWN'] = '${stringTableLockStateReason}: ${dlpLockStateReason_0}';
 elvST['LOCK_STATE_REASON=MOTOR'] = '${stringTableLockStateReason}: ${dlpLockStateReason_1}';
-elvST['LOCK_STATE_REASON=MOTOR_INTERNAL_KEY'] = '${stringTableLockStateReason}: ${dlpLockStateReason_2}';
-elvST['LOCK_STATE_REASON=MOTOR_INTERNAL_PROFILE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_3}';
-elvST['LOCK_STATE_REASON=MOTOR_AUTO_RELOCK_TIMER'] = '${stringTableLockStateReason}: ${dlpLockStateReason_4}';
-elvST['LOCK_STATE_REASON=MOTOR_AUTO_RELOCK_STATE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_5}';
-elvST['LOCK_STATE_REASON=MOTOR_AFTER_OPEN_ACKED'] = '${stringTableLockStateReason}: ${dlpLockStateReason_6}';
-elvST['LOCK_STATE_REASON=MOTOR_AFTER_OPEN'] = '${stringTableLockStateReason}: ${dlpLockStateReason_7}';
-elvST['LOCK_STATE_REASON=MOTOR_AFTER_OPEN_INTERNAL_KEY'] = '${stringTableLockStateReason}: ${dlpLockStateReason_8}';
-elvST['LOCK_STATE_REASON=MOTOR_AFTER_OPEN_INTERNAL_KEY'] = '${stringTableLockStateReason}: ${dlpLockStateReason_8}';
-elvST['LOCK_STATE_REASON=MANUAL_OUTSIDE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_9}';
-elvST['LOCK_STATE_REASON=MANUAL_INSIDE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_10}';
-elvST['LOCK_STATE_REASON=MANUAL'] = '${stringTableLockStateReason}: ${dlpLockStateReason_11}';
+elvST[' _LOCK_STATE_REASON=MOTOR_INTERNAL_KEY'] = '${stringTableLockStateReason}: ${dlpLockStateReason_2}';
+elvST[' _LOCK_STATE_REASON=MOTOR_INTERNAL_PROFILE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_3}';
+elvST[' _LOCK_STATE_REASON=MOTOR_AUTO_RELOCK_TIMER'] = '${stringTableLockStateReason}: ${dlpLockStateReason_4}';
+elvST[' _LOCK_STATE_REASON=MOTOR_AUTO_RELOCK_STATE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_5}';
+elvST['LOCK_STATE_REASON=MOTOR_AFTER_OPEN_ACKED'] = '${stringTableLockStateReason}: ${dlpLockStateReason_2}';
+elvST['LOCK_STATE_REASON=MOTOR_AFTER_OPEN'] = '${stringTableLockStateReason}: ${dlpLockStateReason_3}';
+elvST[' _LOCK_STATE_REASON=MOTOR_AFTER_OPEN_INTERNAL_KEY'] = '${stringTableLockStateReason}: ${dlpLockStateReason_8}';
+elvST['LOCK_STATE_REASON=MANUAL_OUTSIDE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_4}';
+elvST['LOCK_STATE_REASON=MANUAL_INSIDE'] = '${stringTableLockStateReason}: ${dlpLockStateReason_5}';
+elvST['LOCK_STATE_REASON=MANUAL'] = '${stringTableLockStateReason}: ${dlpLockStateReason_6}';
 elvST['LAST_LOCK_DRIVE_LOAD'] = '${stringTableLastLockDriveLoad}';
 elvST['LOCK_STATE'] = '${stringTableLockState}';
 elvST['LOCK_STATE=INVALID'] = '${stringTableLockState}: ${dlpLockState_3}';
@@ -13376,8 +13423,11 @@ ChannelChooser = Singleton.create({
           }
         }
       } else {
-        if (channelTypeName != "hmip-esi") {
-          arChannels.push(channel);
+        if (
+          channelTypeName != "hmip-esi" &&
+          ((channel.channelType != "SHUTTER_TRANSMITTER") || ((channel.channelType == "SHUTTER_TRANSMITTER") && (channelTypeName != "hmip-m-td15")))
+        ) {
+         arChannels.push(channel);
         }
       }
     }
@@ -39592,6 +39642,27 @@ shutterControl.prototype = {
     this.divShutter.style.height = parseInt(this.MAX_HEIGHT - (val * (this.MAX_HEIGHT / 100))) + "px";
   }
 };/**
+ * ise/shutterSelfCalibration.js
+ **/
+
+
+/**
+ * @class
+ **/
+
+
+shutterSelfCalibration = Class.create({
+  initialize: function () {
+    var title = "Self Calibration",
+      html ="Self Calibration";
+
+    var dlg = new YesNoDialog(title, html, "", "html");
+    dlg.btnTextNo(translateKey("btnCancel"));
+    dlg.btnTextYes(translateKey("btnOk"));
+  }
+});
+
+/**
  * ise/channelLoader.js
  **/
 
@@ -44218,7 +44289,7 @@ iseDoorLockTransceiver.prototype = {
         html += "<td>";
           html += "<span>Option: </span> <select id='"+this.id+"selOptionElem'>";
           jQuery.each(this.arOptions, function(index, opt) {
-            html += "<option value='"+(index + 7)+"'>"+opt+"</option>";
+            html += "<option value='"+(index + 3)+"'>"+opt+"</option>";
           });
           html += "</select>";
         html += "</td>";
@@ -44465,11 +44536,14 @@ AddProfileValues = function(prefix)
 
 AddSeparateSettings = function(prefix, pnr)
 {
-  var i = 1;
-  
+  var i = 1,
+  elem;
   while (document.getElementById(prefix + pnr + '_' + i))
   {
-    AddParam(document.getElementById(prefix + pnr + '_' + i));
+    elem = document.getElementById(prefix + pnr + '_' + i);
+    if (IsDirty(elem)) {
+      AddParam(document.getElementById(prefix + pnr + '_' + i));
+    }
     i++;
   }
 };

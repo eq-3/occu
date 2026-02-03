@@ -30,6 +30,11 @@ jQuery.extend(true,langJSON, {
     "ELV-SH-CRC" : "ELV smart home remote control compact",
     "ELV-SH-CTH" : "ELV Smart Home<br/>Temperature and Humidity Sensor<br/>Compact",
     "ELV-SH-CTV" : "ELV Smart Home<br/>Tilt and Vibration Sensor<br/>Compact",
+
+    "ELV-SH-CWD" : "ELV-SH-CWD",
+
+    "ELV-SH-DUSI" : "ELV-SH-DUSI",
+
     "ELV-SH-KRC" : "ELV smart home key ring remote control",
     "ELV-SH-KRCO" : "ELV smart home key ring remote control outdoor",
     "ELV-SH-PTI2" : "ELV Smart Home Temperature Sensor with external probes - 2 channels",
@@ -215,7 +220,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-FLC" : "Homematic IP Universal Lock Controller",
     "HmIP-FROLL": "Homematic IP Blind Actuator, flush-mount",
     "HmIP-FS" : "Homematic IP switch actuator - flush-mount",
-    "HmIP-FSI6" : "Homematic IP switch actuator with push-button input – flush-mount",
+    "HmIP-FSI6" : "Homematic IP switch actuator with push-button input - flush-mount",
     "HmIP-FSI16" : "Homematic IP Switch Actuator with Push-button Input (16 A) - flush-mount",
     "HmIP-FWI" : "Homematic IP Wiegand Interface",
     "HmIP-HAP" : "LAN ROUTER",
@@ -259,7 +264,7 @@ jQuery.extend(true,langJSON, {
     "HmIP-SWO-B": "Homematic IP Weather Sensor - basic",
     "HmIP-SWO-PL": "Homematic IP Weather Sensor - plus",
     "HmIP-SWO-PR": "Homematic IP Weather Sensor - pro",
-    "HmIP-UDI-PB2" : "Homematic IP Universal Dimming Control Element – push-button",
+    "HmIP-UDI-PB2" : "Homematic IP Universal Dimming Control Element - push-button",
     "HmIP-USBSM" : "Homematic IP Switch Actuator and Meter for USB",
     "HmIP-WGC": "Homematic IP Garage Door Controller",
     "HmIP-WGD" : "Homematic IP Wireless Glass Display",

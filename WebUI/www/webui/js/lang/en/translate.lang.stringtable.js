@@ -1241,6 +1241,7 @@ jQuery.extend(true,langJSON, {
     "stringTableConcentrationStatus" : "CO2 concentration status",
     "stringTableConditionSwitchTransmitterParticulateMatter" : "Fine dust sensor",
     "stringTableAutoRelockDelay" : "Delay time before Auto Relock",
+    "stringTableAutoRelockTransceiverTitle" : "Auto-Relock",
     "stringTableDoorLockDirection" : "Rotation direction for locking",
     "stringTableDoorLockNeutralPos" : "Neutral position",
     "stringTableDoorLockTurns" : "Number of rotations for locking",

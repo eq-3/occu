@@ -77,6 +77,8 @@ function ::CreateWeeklyProgram()
       && (cObj.Label() != "HmIP-DLD-S")
       && (cObj.Label() != "HmIP-DLP")
       && (cObj.Label() != "HmIP-DLP-A")
+      && (cObj.Label() != "HmIP-DLP-AS")
+      && (cObj.Label() != "HmIP-DLP-WS")
       ) {
       WriteLine("ibw"#cObj.ID()#" = new iseHmIPWeeklyProgram("#chnId#", opts);");
     } else {

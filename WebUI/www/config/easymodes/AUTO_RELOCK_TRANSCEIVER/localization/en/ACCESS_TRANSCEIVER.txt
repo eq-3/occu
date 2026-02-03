@@ -1,0 +1,5 @@
+"description_1" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, the status of Auto-Relock is toggling (on / off).</span><br/><br/>",
+"description_2" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, Auto-Relock is switchted on.</span><br/><br/>",
+"description_3" : "<span class=\"translated\">If authorisation is granted and the correct code is entered, Auto-Relock is switchted off.</span><br/><br/>",
+
+"description_4" : "<span class=\"translated\">The profile is not active</span>",

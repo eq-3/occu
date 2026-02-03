@@ -149,9 +149,204 @@ jQuery.extend(true, langJSON, {
     "optionTrailingEdge" : "Phasenabschnitt",
     "optionLeadingEdge" : "Phasenanschnitt",
 
+    "comment" : "Release A/2026 not yet translated",
+
+    "lblDoorLockDirection" : "Drehrichtung zum Verschlie%DFen",
+    "lblDoorEndStopOffsetLocked" : "Winkel von neutral unverschlossen nach geschlossen",
+    "lblDoorEndStopOffsetOpen" : "Winkel von neutral unverschlossen nach offen",
+    "lblDoorLockTurns" : "Umdrehungen von unverschlossen nach verschlossen",
+    "lblDoorLockNeutralPos" : "Neutrale Schl%FCsselposition",
+    "lblDoorOpeningDirection" : "%D6ffnungsrichtung",
+
+    "lblAutomaticLock" : "Automatisches Verriegeln",
+
+    "optionIgnoreDoorOpen" : "T%FCrzustand ignorieren",
+    "optionSkipHoldTimeOpening" : "Fallen-Haltezeit %FCberspringen",
+    "optionSkipRelockDelayClosing" : "Auto-Relock-Delay %FCberspringen",
+    "optionSkipHoldTimeOpeningRelockDelayClosing" : "Fallen-Haltezeit und Auto-Relock-Delay %FCberspringen ",
+
+    "optionInwards" : "nach innen",
+    "optionOutwards" : "nach au%DFen",
+
+    "btnAutoRelockOff" : "Auto-Relock Aus",
+    "btnAutoRelockOn" : "Auto-Relock Ein",
+
+    "dialogSetDLPTargetLevelTitle" : "T%FCrschloss anlernen",
+
+    "stringTableLoadTooLow" : "LoadTooLow",
+    "stringTableNoEndStopLock" : "NoEndStopLock",
+    "stringTableNoEndStopUnLock" : "NoEndStopUnLock",
+
+    "stringTableLockState" : "Schlosszustand",
+    "stringTableLockStateReason" : "Ausl%F6ser",
+
+    "stringTableLockTeachInState" : "Status der T%FCrschloss-Anlern-Prozedur",
+
+    "neutralPositionLockedSet" : "Neutralstellung Verriegelt vorgemerkt",
+    "neutralPositionUnlockedSet" : "Neutralstellung Entriegelt vorgemerkt",
+    "neutralPositionBothSet" : "beide Neutralstellungen vorgemerkt, bereit f%FCr Anlernfahrt",
+    "teachInDriveRunning" : "Anlernfahrt l%E4uft",
+    "teachInSuccessful" : "T%FCrschloss-Anlern-Prozedur erfolgreich abgeschlossen",
+    "errorNeutralPositionIncomplete" : "Neutralstellungen Fehler: keine ganzzahligen Umdrehungen zwischen Ver- und Entriegelt",
+    "errorNeutralPositionLessOneTurn" : "Neutralstellungen Fehler: weniger als 1 Umdrehung zwischen Ver- und Entriegelt",
+    "errorEndStopDriveLockBeforeNeutralPosition" : "Anlernfahrt Fehler: Endanschlag lock vor Neutralstellung Verriegelt",
+    "errorEndStopDriveUnlockBeforeNeutralPosition" : "Anlernfahrt Fehler: Endanschlag open vor Neutralstellung Entriegelt",
+    "errorTeachInDriveCanceled" : "Abbruch durch anderes Kommando / Ereignis",
+    "errorTeachInDriveBatteryLow" : "Batterien zu schwach",
+    "teachInError" : "T%FCrschloss-Anlern-Prozedur Fehler: sonstige",
+
+    "stringTableLastLockDriveLoad" : "Schlosslast der letzten Schlie%DFfahrt",
+
+    "dlpLockState_0" : "unbekannt",
+    "dlpLockState_1" : "verriegelt",
+    "dlpLockState_2" : "entriegelt",
+    "dlpLockState_3" : "ung%FCltig",
+
+    "dlpLockStateReason_0" : "unbekannt",
+    "dlpLockStateReason_1" : "Motorisch",
+//        "dlpLockStateReason_2" : "Motorisch, durch interne Taste",
+//        "dlpLockStateReason_3" : "Motorisch, durch Wochenprogramm",
+//        "dlpLockStateReason_4" : "Motorisch, durch Auto-Relock nach Timeout",
+//        "dlpLockStateReason_5" : "Motorisch, durch Auto-Relock nach T%FCrzustands%E4nderung",
+    "dlpLockStateReason_2" : "Motorisch, nach Open, ACKed (kein neues Open-Ereignis)",
+    "dlpLockStateReason_3" : "Motorisch nach Open",
+//        "dlpLockStateReason_8" : "Motorisch nach Open durch interne Taste",
+    "dlpLockStateReason_4" : "Manuell, von au%DFen",
+    "dlpLockStateReason_5" : "Manuell, von innen",
+    "dlpLockStateReason_6" : "Manuell",
+
+    "dlpLockTeachInState_0" : "T%FCrschloss-Anlern-Prozedur nicht (mehr) aktiv",
+    //  "dlpLockTeachInState_1" : "Neutralstellung Verriegelt vorgemerkt",
+    //  "dlpLockTeachInState_2" : "Neutralstellung Entriegelt vorgemerkt",
+    //  "dlpLockTeachInState_3" : "beide Neutralstellungen vorgemerkt, bereit f%FCr Endanschlagsfahrt",
+    "dlpLockTeachInState_1" : "Anlernfahrt l%E4uft",
+    "dlpLockTeachInState_2" : "T%FCrschloss-Anlern-Prozedur erfolgreich abgeschlossen (keine Aussage %FCber Parameter-%DCbertragung)",
+    //  "dlpLockTeachInState_6" : "Neutralstellungen Fehler: ganzzahliges Vielfaches von 360° zwischen Ver- und Entriegelt",
+    "dlpLockTeachInState_3" : "Neutralstellungen Fehler: weniger als 1 Umdrehung zwischen Ver- und Entriegelt",
+    //  "dlpLockTeachInState_8" : "Endanschlagsfahrt Fehler: Endanschlag lock vor Neutralstellung Verriegelt",
+    //  "dlpLockTeachInState_9" : "Endanschlagsfahrt Fehler: Endanschlag open vor Neutralstellung Entriegelt",
+    "dlpLockTeachInState_4" : "Anlernfahrt Fehler: Abbruch durch anderes Kommando / Ereignis",
+    "dlpLockTeachInState_5" : "Anlernfahrt Fehler: Batterien zu schwach",
+    "dlpLockTeachInState_6" : "T%FCrschloss-Anlern-Prozedur Fehler: sonstige",
+
+    "stringTableErrorDoorLockedWhileOpen" : "Verschlossen bei offener T%FCr",
+    "stringTableErrorDoorOpenedWhileLocked" : "T%FCr im verschlossenem Zustand ge%F6ffnet",
+    "stringTableSabotageAcceleration" : "Sabotage Beschleunigungssensor",
+    "stringTableSabotageBattery" : "Sabotage Batterie",
+    "stringTableSabotageMagneticField" : "Sabotage Magnetsensor",
+    "stringTableSabotageVertical" : "Sabotage Tilt-Sensor",
+
+    "stringTableDoorStateTransceiverCalibrate" : "Kalibrieren",
+
+    "stringTableDoorLockStateTransceiverLockTargetLevelResetTeachIn" : "T%FCrschloss-Anlern-Prozedur zur%FCcksetzen",
+    "stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralLocked" : "Vormerken als Neutralstellung Verriegelt",
+    "stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralUnlocked" : "Vormerken als Neutralstellung Entriegelt",
+    "stringTableDoorLockStateTransceiverLockTargetLevelTestrunSaveLockUnlock" : "Endanschl%E4ge pr%FCfen (Fahrt: lock, open) und als Konfiguration speichern",
+
+    "stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralUnlocked" : "Anlernfahrt starten bei ge%F6ffneter T%FCr (entriegelt)\n" +
+      "und Schloss aktuell in Neutralstellung",
+    "stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralVertical" : "Anlernfahrt  starten bei ge%F6ffneter T%FCr (entriegelt)\n" +
+      "und Schloss mit Neutralstellung vertikal",
+    "stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralHorizontal" : "Anlernfahrt starten bei ge%F6ffneter T%FCr (entriegelt)\n" +
+      "und Schloss mit Neutralstellung horizontal",
+    "stringTableDoorLockStateTransceiverLockTargetLevelLoadCalibrationClosedDoor" : "Anlernen der Schlosslast bei geschlossener T%FCr (entriegelt)",
+    "stringTableDoorLockStateTransceiverLockTargetLevelLoadCalibrationOpenDoor" : "Anlernen der Schlosslast bei ge%F6ffneter T%FCr (entriegelt)",
+
+    "stringTableAutoRelockState" : "Auto-Relock aktiv",
+
+    "optionPermission" : "Berechtigung",
+    "optionDoorLock" : "T%FCrschloss",
+    "optionAutoRelock" : "Auto-Relock",
+
+    "optionLocked" : "Verriegelt",
+    "optionUnlocked" : "Entriegelt",
+
+    "lblDoorClosed" : "T%FCr zu",
+    "lblDoorOpen" : "T%FCr offen",
+
+    "btnTeachInDoorLock" : "T%FCrschloss anlernen",
+    "btnInfo" : "Info",
+
+    "lblSabotage_A" : "Sabotage-Erkennung",
+    "lblEventDelay_A" : "Meldeverz%F6gerung f%FCr Lageerkennung",
+
+    "lblEventTimeOut_DLP" : "Meldedauer bei Ersch%FCtterung",
+
+    "lblTriggerAngle_DLP" : "Lagetoleranz",
+
+    "lblEventFilterPeriodB1" : "Meldungen bei ",
+    "lblEventFilterPeriodB2" : "Ersch%FCtterungen innerhalb ",
+
+    "optionPositionControl" : "Lage-%DCberwachung",
+    "optionVibrationControl" : "ErschFC%tterungs-%DCberwachung",
+    "optionPositionVibrationControl" : "Lage- und Ersch%FCtterungs-%DCberwachung",
+    "lblDeviceSensorSensibility_DLP" : "Ersch%FCtterungs-Empfindlichkeit",
+    "triggerAngleDLP" : "Lagetoleranz",
+
+    "stringTableEventFilterNumberDLP_A" : "Meldung bei",
+    "stringTableEventFilterNumberDLP_B" : "Ersch%FCtterungen",
+
+    "lblSensorSensibility_A" : "Schlosslast-Empfindlichkeit",
+
+    "optionAutoCalibration" : "Automatische Kalibrierung",
+    "optionDriftCompensationOn" : "Aktiv mit Driftkompensation",
+    "optionDriftCompensationAndCalibrationOn" : "Aktiv mit Driftkompensation und Kalibrierung nach Schlosslast-Erkennung",
+    "lblTableDeviceMagnetSensibility" : "Magnetfeld-Empfindlichkeit",
+
+    "lblSensorVoltage" : "Betriebsspannung",
+    "optionSensorVoltage_3_3" : "3.3V",
+    "optionSensorVoltage_5" : "5.0V",
+    "lblFilterSelect" : "Filter",
+    "optionFilterSelectCurrent" : "Momentanwert",
+    "optionSensoSelectMin" : "Minimaler Wert",
+    "optionSensoSelectMax" : "Maximaler Wert",
+    "optionSensoSelectAverage" : "Durchschnittswert",
+    "optionSensoSelectAverageWoExtrema" : "Durchschnittswert ohne Extreme",
+    "lblSensorReferenceHeight" : "Referenzh%F6he",
+    "lblHeight" : "H%F6he",
+    "lblDistance" : "Distanz",
+
+    "optionSensitive" : "Empfindlich",
+
+    "stringTableErrorObstacleFalse": "Kein Hindernis erkannt",
+    "stringTableErrorObstacleTrue": "Hindernis erkannt",
+
+    "lblDewPointControl" : "Taupunktkontrolle",
+    "lblDewPointTemp" : "Taupunkttemperatur",
+
     "noMoreKeys" : ""
   }
 });
 
+/*
+langJSON.de.helpLockTargetLevel_A = "A = " + langJSON.de.lblLock + "<br/>";
+langJSON.de.helpLockTargetLevel_B = "B = " + langJSON.de.lblUnlock + "<br/>";
+langJSON.de.helpLockTargetLevel_C = "C = " + langJSON.de.lblOpen + "<br/>";
+langJSON.de.helpLockTargetLevel_D = "D = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelResetTeachIn + "<br/>";
+langJSON.de.helpLockTargetLevel_E = "E = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralLocked + "<br/>";
+langJSON.de.helpLockTargetLevel_F = "F = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelSetNeutralUnlocked + "<br/>";
+langJSON.de.helpLockTargetLevel_G = "G = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelTestrunSaveLockUnlock + "<br/>";
+*/
+langJSON.de.helpLockTargetLevel_H = "A = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralUnlocked + "<br/>";
+langJSON.de.helpLockTargetLevel_I = "B = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralVertical + "<br/>";
+langJSON.de.helpLockTargetLevel_J = "C = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralHorizontal + "<br/>";
+//langJSON.de.helpLockTargetLevel_K = "D = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelLoadCalibrationClosedDoor + "<br/>";
+langJSON.de.helpLockTargetLevel_L = "D = " + langJSON.de.stringTableDoorLockStateTransceiverLockTargetLevelLoadCalibrationOpenDoor;
+
+langJSON.de.helpLockTargetLevel =
+  /*
+  langJSON.de.helpLockTargetLevel_A +
+  langJSON.de.helpLockTargetLevel_B +
+  langJSON.de.helpLockTargetLevel_C +
+  langJSON.de.helpLockTargetLevel_D +
+  langJSON.de.helpLockTargetLevel_E +
+  langJSON.de.helpLockTargetLevel_F +
+  langJSON.de.helpLockTargetLevel_G +
+  */
+  langJSON.de.helpLockTargetLevel_H +
+  langJSON.de.helpLockTargetLevel_I +
+  langJSON.de.helpLockTargetLevel_J +
+//  langJSON.de.helpLockTargetLevel_K;
+  langJSON.de.helpLockTargetLevel_L;
 
 

@@ -344,7 +344,8 @@ function ::CreateBlindVirtualReceiver()
   }
 
   WriteLine("<td style='"#controlOperable#"'>");
-    WriteLine("<table align='center'>");
+    ! WriteLine("<table align='center'>");
+    WriteLine("<table>");
 
 
       WriteLine("<tr>");
@@ -548,7 +549,8 @@ function ::CreateShutterVirtualReceiver()
   }
 
   WriteLine("<td>");
-    WriteLine("<table align='center'>");
+   ! WriteLine("<table align='center'>");
+    WriteLine("<table>");
       WriteLine("<tr>");
 
         WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
@@ -662,6 +664,13 @@ function ::CreateShutterTransmitter()
   object oLvl = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL");
   object oLvlStatus = cObj.DPByControl("SHUTTER_TRANSMITTER.LEVEL_STATUS");
 
+  ! new with HmIP-M-TD15
+  object oManuelSelfCalLevel = cObj.DPByControl("SHUTTER_TRANSMITTER.MANUAL_SELF_CALIBRATION_LEVEL");
+  object oManuelSelfCalDurUnit = cObj.DPByControl("SHUTTER_TRANSMITTER.MANUAL_SELF_CALIBRATION_DURATION_UNIT");
+  object oManuelSelfCalDurValue = cObj.DPByControl("SHUTTER_TRANSMITTER.MANUAL_SELF_CALIBRATION_DURATION_VALUE");
+  object oManuelSelfCal = cObj.DPByControl("SHUTTER_TRANSMITTER.MANUAL_SELF_CALIBRATION");
+
+
   if (mode) {
     if (mode.MetaData("channelMode") == "shutter") {
       object oLvl = cObj.DPByControl("BLIND_TRANSMITTER.LEVEL");
@@ -682,13 +691,26 @@ function ::CreateShutterTransmitter()
     }
   }
 
-  WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+  WriteLine("<td><table class='ctrlTbl CLASS02520'>");
+    WriteLine("<tr>");
+      WriteLine("<td colspan='2' id='shutter"#chnId#"' class='CLASS02549' >&nbsp;</td>");
+        if (oLvlStatus.Value() != 0) {
+          WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
+        } else {
+          WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#rLvl.ToInteger()#unitLevel#"</div></td>");
+        }
+    WriteLine("</tr>");
 
-  if (oLvlStatus.Value() != 0) {
-    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>${unknown}</div></td>");
-  } else {
-    WriteLine("<td><div class='ControlBtnInfo j_translate' style='color:white;width:220px;'>${lblInfoLevelReal} ${stringTableBlindLevel}<br/>"#rLvl.ToInteger()#unitLevel#"</div></td>");
-  }
+    if (oManuelSelfCal) {
+      WriteLine("<tr>");
+
+        WriteLine("<td>");
+          WriteLine("<div id='shutterSelfCal"#chnId#"' class='CLASS02550 ControlBtnOff' onclick='new shutterSelfCalibration(" # chnId # ");' >BTN</div>");
+        WriteLine("</td>");
+      WriteLine("</tr>");
+    }
+
+  WriteLine("</table></td>");
 
     WriteLine( "<script type='text/javascript'>" );
 
@@ -748,7 +770,6 @@ function ::CreateShutterTransmitter()
         WriteLine("}");
 
       WriteLine("},250)");
-
     WriteLine(" </script> ");
 
   return;

@@ -35,15 +35,15 @@ function ::CreateWaterDetectionTransmitter()
             WriteLine("</tr>");
           WriteLine("</table>");
         WriteLine("</td>");
-
-        WriteLine("<td>");
-          WriteLine("<table id='"#chnId#"moistureDetect' class='ControlBtnInfo minWidth230px'>");
-            WriteLine("<tr>");
-              WriteLine("<td style='text-align:center;'>"#msgMoisture#"</td>");
-            WriteLine("</tr>");
-          WriteLine("</table>");
-        WriteLine("</td>");
-
+      if (oMoistureDetected) {
+          WriteLine("<td>");
+            WriteLine("<table id='"#chnId#"moistureDetect' class='ControlBtnInfo minWidth230px'>");
+              WriteLine("<tr>");
+                WriteLine("<td style='text-align:center;'>"#msgMoisture#"</td>");
+              WriteLine("</tr>");
+            WriteLine("</table>");
+          WriteLine("</td>");
+      }
       WriteLine("</tr>");
     WriteLine("</table>");
 

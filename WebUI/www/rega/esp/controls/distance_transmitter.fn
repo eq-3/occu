@@ -1,0 +1,57 @@
+function ::CreateDistanceTransmitterControl()
+{
+
+  object objDistance = cObj.DPByControl("DISTANCE_TRANSMITTER.DISTANCE");
+  object objHeight = cObj.DPByControl("DISTANCE_TRANSMITTER.HEIGHT");
+  object objReferenceHeight = cObj.DPByControl("DISTANCE_TRANSMITTER.REFERENCE_HEIGHT");
+
+  real height = 0.0;
+
+  if (objDistance && objReferenceHeight) {
+    height = objReferenceHeight.Value() - objDistance.Value();
+  }
+
+  if( objDistance || objHeight || objReferenceHeight) {
+    WriteLine("<td>");
+      WriteLine("<table width='100%' _height='100%' cellspacing='4'>");
+        WriteLine("<tr>");
+          if (objDistance) {
+            WriteLine("<td>");
+              WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                WriteLine("<tr>");
+                    WriteLine("<td class='CLASS02521'>");
+                      WriteLine("${lblDistance}:<br/>"#objDistance.Value().ToString(1)#"&nbsp;"#objDistance.ValueUnit());
+                    WriteLine("</td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</td>");
+          }
+          if (objHeight) {
+            WriteLine("<td>");
+              WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                WriteLine("<tr>");
+                    WriteLine("<td class='CLASS02521'>");
+                      WriteLine("${lblHeight}:<br/>"#height.ToString(1)#"&nbsp;"#objHeight.ValueUnit());
+                    WriteLine("</td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</td>");
+          }
+        WriteLine("</tr>");
+        if (objReferenceHeight) {
+          WriteLine("<tr>");
+            WriteLine("<td>");
+              WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+                WriteLine("<tr>");
+                  WriteLine("<td class='CLASS02521'>");
+                    WriteLine("${lblSensorReferenceHeight}:<br/>"#objReferenceHeight.Value().ToString(1)#"&nbsp;"#objReferenceHeight.ValueUnit());
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+              WriteLine("</table>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+        }
+      WriteLine("</table>");
+    WriteLine("</td>");
+  }
+}

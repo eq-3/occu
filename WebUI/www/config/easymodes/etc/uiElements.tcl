@@ -590,6 +590,7 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "BLOCKING_TEMPORARY_FWI" {set x 450; set y 150}
    "BOOST_TIME_PERIOD" {set x 450; set y 120}
    "CALIBRATION_PPM" {set x 500; set y 250}
+   "CHANNEL_OPERATION_MODE_DISTANCE_TRANSMITTER" {set x 500; set y 150}
    "CLIMATE_CONTROL_TYPE" {set x 500; set y 75}
    "CLIMATE_FUNCTION" {set x 450; set y 75}
    "COND_TX_DECISION_ABOVE_BELOW" {set x 450; set y 80}
@@ -608,9 +609,8 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "EVENT_FILTER_NUMBER_motionDetect" {set x 400; set y 60}
    "EVENT_FILTER_PERIOD" {set x 450; set y 120}
    "EVENT_FILTER_TIME" {set x 400; set y 90}
-
    "FEEDBACK_LEVEL_VALUE" {set x 450; set y 55}
-
+   "FILTER_SELECT" {set x 450; set y 100}
    "HEATING_COOLING" {set x 450; set y 160}
    "HUMIDITY_LIMIT_DISABLE" {set x 500; set y 200}
    "HUMIDITY_LIMIT_VALUE" {set x 450; set y 85}
@@ -628,6 +628,9 @@ proc getHelpIcon {topic {x 0} {y 0}} {
    "PIR_SENSITIVITY" {set x 500; set y 210}
    "POWERUP_JUMPTARGET_RGBW" {set x 450; set y 75}
    "PWM_AT_LOW_VALVE_POSITION" {set x 500; set y 130}
+
+   "REFERENCE_HEIGHT" {set x 500; set y 100}
+
    "REPEAT_ENABLE" {set x 500; set y 210}
    "ROUTER_MODULE_ENABLED" {set x 500; set y 120}
    "SPDR_CHANNEL_MODE" {set x 600; set y 600}

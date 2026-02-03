@@ -1,0 +1,4 @@
+"profileDescr" : "<span class=\"translated\">Eine Linksdrehung regelt den LED-Stripe entsprechend der gew%E4hlten Einstellungen.</span><br/><br/>",
+
+"description_20" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
+

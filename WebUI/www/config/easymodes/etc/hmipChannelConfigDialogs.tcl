@@ -1806,6 +1806,17 @@ proc getShutterTransmitter {chn p descr address} {
   set fwMinor [lindex $Fw 1]
   set fwPatch [lindex $Fw 2]
 
+  set devType $dev_descr(TYPE)
+
+  set isMTD15 0
+  if {
+    ([string equal $dev_descr(TYPE) "HmIP-M-TD15"] == 1) ||
+    ([string equal $dev_descr(TYPE) "RM-110-45"] == 1)  ||
+    ([string equal $dev_descr(TYPE) "RM-110-15"] == 1)
+  } {
+    set isMTD15 1
+  }
+
   puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');load_JSFunc('/config/easymodes/js/BlindAutoCalibration.js')</script>"
 
   puts "<div id=\"page_$parent\" class=\"hidden\">$parent</div>"
@@ -1815,7 +1826,7 @@ proc getShutterTransmitter {chn p descr address} {
   set html ""
 
   set param OUTPUT_SWAP
-  if { [info exists ps($param)] == 1  } {
+  if {(! $isMTD15) && ([info exists ps($param)] == 1)  } {
     incr prn
     array_clear options
     set options(0) "\${optionOutputNotSwapped}"
@@ -1897,6 +1908,17 @@ proc getShutterTransmitter {chn p descr address} {
     }
   }
 
+  set param SENSOR_SENSITIVITY
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTableSensorSensivity}</td>"
+            set options(0) "\${optionNormal}"
+            set options(1) "\${optionSensitive}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_shutterTrans 450 160]</td>"
+    append html "</tr>"
+  }
+
   set param ENDPOSITION_AUTO_DETECT
   if { [info exists ps($param)] == 1 } {
     incr prn
@@ -1904,9 +1926,8 @@ proc getShutterTransmitter {chn p descr address} {
       append html "<td>\${stringTableBlindEndPositionAutoDetect}</td>"
       append html  "<td>[getCheckBox '$param' $ps($param) $chn $prn onchange=setVisibilityAutoCalibration(this);]</td>"
     append html "</tr>"
+    append html "[getHorizontalLine]"
   }
-
-  append html "[getHorizontalLine]"
 
   set cssAutoCalibration "hidden"
   if {$fwMajor == 1 && $fwMinor == 0 && $fwPatch <= 10 } {
@@ -1971,7 +1992,7 @@ proc getShutterTransmitter {chn p descr address} {
   }
 
   set param DELAY_COMPENSATION
-  if { [info exists ps($param)] == 1 } {
+  if {((! $isMTD15)) && ([info exists ps($param)] == 1)} {
 
     append html "[getHorizontalLine]"
 
@@ -2008,7 +2029,10 @@ proc getShutterTransmitter {chn p descr address} {
       }
 
       # Show the checkbox 'Auto discover' only when the parameter ENDPOSITION_AUTO_DETECT is available
-      if { [info exists ps(ENDPOSITION_AUTO_DETECT)] != 1 } {
+      if {
+        ([info exists ps(ENDPOSITION_AUTO_DETECT)] != 1) &&
+        (([string equal $dev_descr(TYPE) "HmIP-M-TD15"] != 1) && ([string equal $dev_descr(TYPE) "RM-110-45"] != 1)  && ([string equal $dev_descr(TYPE) "RM-110-15"] != 1))
+      } {
         append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
       }
 
@@ -2663,7 +2687,7 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
   upvar special_input_id special_input_id
 
   set specialID "[getSpecialID $special_input_id]"
-
+  set CHANNEL $special_input_id
   set html ""
 
   set climateFunction ""
@@ -2744,6 +2768,29 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
     append html "</tr>"
   }
 
+  ### DewPoint
+  set param DEW_POINT_CONTROL_ENABLED
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr id='dewPointControl' class=$paramVisibility>"
+      append html "<td>\${lblDewPointControl}</td>"
+      append html "<td>"
+      append html  "[getCheckBox '$param' $ps($param) $chn $prn]"
+      append html "</td>"
+    append html "</tr>"
+  }
+
+  set param DEW_POINT_TEMPERATURE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr id='dewPointTemp' class=$paramVisibility>"
+      append html "<td>\${lblDewPointTemp}</td>"
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  ### End DewPoint
+
   set param HEATING_COOLING
   if { [info exists ps($param)] == 1  } {
     incr prn
@@ -2780,12 +2827,17 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
       append html "heatingCoolingElmOption2 = heatingCoolingElm.find(\"option\[value='2'\]\"),"
       append html "heatingTwoPointHysteresisElm = jQuery(\"\#twoPointHysteresis\"),"
       append html "heatingTwoPointHysteresisHumidityElm = jQuery(\"\#twoPointHysteresisHumidity\");"
+      append html "dewPointControlElm = jQuery(\"\#dewPointControl\");"
+      append html "dewPointTempElm = jQuery(\"\#dewPointTemp\");"
 
       append html "if (parseInt(selectedMode) == 1) \{"
         append html "humidityLimitValueElm.show();"
         # append html "heatingCoolingElm.val(\"1\");" SPHM-1015
         append html "heatingTwoPointHysteresisElm.hide();"
         append html "heatingTwoPointHysteresisHumidityElm.show();"
+        append html "dewPointControlElm.show();"
+        append html "dewPointTempElm.show();"
+
         append html "heatingCoolingElmOption0.html(translateKey('optionDrying'));"
         append html "heatingCoolingElmOption1.html(translateKey('optionMoistening'));"
         append html "heatingCoolingElmOption2.html(translateKey('optionDryingMoistening'));"
@@ -2799,6 +2851,9 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
         # append html "heatingCoolingElm.val(\"0\");" SPHM-1015
         append html "heatingTwoPointHysteresisElm.show();"
         append html "heatingTwoPointHysteresisHumidityElm.hide();"
+        append html "dewPointControlElm.hide();"
+        append html "dewPointTempElm.hide();"
+
         append html "heatingCoolingElmOption0.html(translateKey('optionHeating'));"
         append html "heatingCoolingElmOption1.html(translateKey('optionCooling'));"
         append html "heatingCoolingElmOption2.html(translateKey('optionHeatingCooling'));"
@@ -5562,6 +5617,8 @@ proc getStateResetReceiver {chn p descr} {
 }
 
 proc getWaterDetectionTransmitter {chn p descr} {
+  global dev_descr
+
   upvar $p ps
   upvar $descr psDescr
   upvar prn prn
@@ -5569,6 +5626,8 @@ proc getWaterDetectionTransmitter {chn p descr} {
 
   set specialID "[getSpecialID $special_input_id]"
   set CHANNEL $special_input_id
+
+  set devType $dev_descr(TYPE)
 
   set hlpBoxWidth 450
   set hlpBoxHeight 160
@@ -5732,8 +5791,34 @@ proc getWaterDetectionTransmitter {chn p descr} {
         append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
       append html "</td></tr>"
     }
-
   }
+
+    if {[string equal $devType "ELV-SH-CWD"] == 1} {
+      set param MSG_FOR_POS_A ;# A = Waterlevel
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+          array_clear options
+          set options(0) "\${stringTableKeyMsgPosA1}"
+          set options(1) "\${stringTableMsg_Dry}"
+          set options(2) "\${stringTableMsg_Water}"
+          append html "<tr><td>\${lblWaterDetectorMsg_Water}</td><td>"
+          append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
+        append html "</td></tr>"
+      }
+
+      set param MSG_FOR_POS_B ;# B = Dry
+      if { [info exists ps($param)] == 1  } {
+        incr prn
+          array_clear options
+          set options(0) "\${stringTableKeyMsgPosA1}"
+          set options(1) "\${stringTableMsg_Dry}"
+          set options(2) "\${stringTableMsg_Water}"
+          append html "<tr><td>\${lblWaterDetectorMsg_Dry}</td><td>"
+          append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
+        append html "</td></tr>"
+      }
+
+    }
 
   # append html "[getAlarmPanel ps]"
 
@@ -5794,6 +5879,7 @@ proc getDoorReceiver {chn p descr} {
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
+  return $html
 }
 
 proc getSimpleSwitchReceiver {chn p descr} {
@@ -5850,6 +5936,7 @@ proc getSimpleSwitchReceiver {chn p descr} {
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
+  return $html
 }
 
 proc getAcousticSignalTransmitter {chn p descr} {
@@ -5906,6 +5993,7 @@ proc getAcousticSignalTransmitter {chn p descr} {
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
     append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
+  return $html
 }
 
 proc getAcousticSignalVirtualReceiver {chn p descr} {
@@ -6891,7 +6979,7 @@ proc getWindowDriveReceiver {chn p descr} {
     append html "[getHorizontalLine]"
     append html [getPowerUpSelector $chn ps $special_input_id]
   }
-
+  return $html
 }
 
 proc getGenericMeasuringTransmitter {chn p descr address} {
@@ -7261,8 +7349,6 @@ proc getSoilMoistureTransmitter {chn p descr} {
       append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_SOIL_MOISTURE 320 170]</td>"
     append html "</tr>"
   }
-
-
   return $html
 }
 
@@ -7276,15 +7362,12 @@ proc getDoorStateTranseiver {chn p descr} {
 
   set html ""
   set prn 0
-
   set param CHANNEL_OPERATION_MODE
   if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
       append html "<td>\${lblAutoCalibration}</td>"
       array_clear options
-      set options(0) "\${optionDisable}"
-
       set options(0) "\${optionDisable}"
       set options(1) "\${optionDriftCompensationOn}"
       set options(2) "\${optionDriftCompensationAndCalibrationOn}"
@@ -7309,6 +7392,7 @@ proc getDoorStateTranseiver {chn p descr} {
     append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_door_state]</td>"
     append html "</tr>"
   }
+  return $html
 }
 
 proc getDoorLockTranseiver {chn p descr} {
@@ -7536,7 +7620,95 @@ proc getDoorLockTranseiver {chn p descr} {
       append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_door_lock]</td>"
     append html "</tr>"
   }
+  return $html
+}
 
+proc getDistanceTransmitter {chn p descr} {
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  set prn 0
+
+  set param CHANNEL_OPERATION_MODE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblSensorVoltage}</td>"
+      array_clear options
+      set options(0) "\${optionSensorVoltage_3_3}"
+      set options(1) "\${optionSensorVoltage_5}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_DISTANCE_TRANSMITTER]</td>"
+    append html "</tr>"
+  }
+
+  set param FILTER_SELECT
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblFilterSelect}</td>"
+      array_clear options
+      set options(0) "\${optionFilterSelectCurrent}"
+      set options(1) "\${optionSensoSelectMin}"
+      set options(2) "\${optionSensoSelectMax}"
+      set options(3) "\${optionSensoSelectAverage}"
+      set options(4) "\${optionSensoSelectAverageWoExtrema}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+
+  set param FILTER_SIZE
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    set min [expr {int([expr [getMinValue $param]])}]
+    set max [expr {int([expr [getMaxValue $param]])}]
+    array_clear options
+    for {set val $min} {$val <= $max} {incr val} {
+        set options($val) "$val"
+    }
+
+    append html "<tr>"
+      append html "<td>\${stringTableSoilMoistureTransmitterFilterSize}</td>"
+      append html "<td>[get_ComboBox options $param separate_$special_input_id\_$prn ps $param]&nbsp;[getHelpIcon $param\_SOIL_MOISTURE 400 120]</td>"
+    append html "</tr>"
+  }
+
+  set param INTERVAL_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableMeasurementInterval}</td>"
+    append html [getComboBox $chn $prn "$specialID" "autoIntervalA" "helpSoilMoisture"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxC $param $ps($param) $chn $prn $special_input_id 'measurementInterval']
+
+    incr prn
+    set param INTERVAL_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableMeasurementIntervalValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentAutoIntervalAOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param REFERENCE_HEIGHT
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblSensorReferenceHeight}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param]</td>"
+    append html "</tr>"
+  }
+  return $html
 }
 
 proc getNoParametersToSet {} {

@@ -208,6 +208,12 @@ jQuery.extend(true,langJSON, {
     "Einstellung 100%: Es reicht ein kleiner Tropfen ( von ca. 70mm&sup3; ) f%FCr ein Ausl%F6sen des Sensors aus ( je nach Region mehr oder weniger ).<br/><br/>" +
     "<b>Achtung:</b><br/>Wenn f%FCr einen Test des Sensors Trinkwasser verwendet wird, reduziert sich die Menge an notwendigem Wasser f%FCr eine Ausl%F6sung, da dessen Leitwert i.d.R. um mehrere 10er Potenzen h%F6her liegt.",
 
+    "SENSOR_SENSITIVITY_shutterTrans" :
+      "Bei der Erkennung eines Hindernisses, h%E4lt der Aktor sofort an, um eine Besch%E4digung der Rollladen oder des Hindernisses zu vermeiden.<br/><br/>" +
+      "Mit diesem Parameter legen Sie die Empfindlichkeit der Hindernis-Erkennung fest. Im Normalfall sollte die Einstellung <b>Normal</b> gew%E4hlt werden.<br><br/>" +
+      "Wenn Sie der Meinung sind, dass das nicht ausreicht, w%E4hlen Sie die Einstellung <b>Empfindllich</b>. Hier besteht jedoch die M%F6glichkeit, dass der " +
+      "Aktor dann auch bei 'Nichtigkeiten' anh%E4lt.",
+
     "TRIGGER_ANGLE" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wieviel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, " +
       "damit ein Event ausgel%F6st wird.",
 
@@ -520,23 +526,41 @@ jQuery.extend(true,langJSON, {
 
     "DEVICE_INPUT_LAYOUT_MODE_WGS" : "Mit diesem Parameter stellen Sie das gew%FCnschte Layout der Anzeige ein.",
 
-    "FILTER_SIZE_SOIL_MOISTURE" : 
+    "FILTER_SIZE_SOIL_MOISTURE" :
+      "<b>Filtergr%F6%DFe</b><br/><br/>" +
       "Mit diesem Parameter w%E4hlen Sie die Anzahl der Messwerte f%FCr die Mittelwertbildung bei Mehrfachmessungen in kurzem Abstand.<br/><br/>"+
       "Bitte beachten Sie, dass eine Erh%F6hung der Messwerte zu einer Erh%F6hung der durchschnittlichen Stromaufnahme f%FChrt.",
 
     "INTERVAL_SOIL_MOISTURE" :
+      "<b>Messintervall</b><br/><br/>" +
       "Intervall der zyklischen Sensor-Messungen, welche unabh%E4ngig vom Sendeintervall durchgef%FChrt werden.<br/><br/>" +
       "Kurze Messintervalle erh%F6hen die Stromaufnahme und verk%FCrzen die Batterielaufzeit.",
 
     "REFERENCE_16BIT_MIN_SOIL_MOISTURE" :
-      "<b>Rohwert-Referenzwert f%FCr <b>0% Bodenfeuchte</b>.<br/><br/>" +
+      "<b>Rohwert-Referenzwert f%FCr 0% Bodenfeuchte</b>.<br/><br/>" +
       "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
       "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen.<br/><br/>",
 
     "REFERENCE_16BIT_MAX_SOIL_MOISTURE" :
-      "<b>Rohwert-Referenzwert f%FCr <b>100% Bodenfeuchte</b>.<br/><br/>" +
+      "<b>Rohwert-Referenzwert f%FCr 100% Bodenfeuchte</b>.<br/><br/>" +
       "Ermitteln Sie den passenden Rohwert durch Beobachtung der Status-Daten bei entsprechenden Bodenbedingungen,<br/>" +
       "dabei sind Verz%F6gerungen durch Mess- und Sendeintervall zu ber%FCcksichtigen.<br/><br/>",
+
+    "CHANNEL_OPERATION_MODE_DISTANCE_TRANSMITTER" :
+      "<b>Betriebsspannungsauswahl f%FCr den Sensor.</b><br/></br>" +
+      "Bei 5 V hat der Sensor seine maximale Detektionsreichweite, " +
+      "ben%F6tigt daf%FCr aber deutlich mehr Strom, was zu einer verk%FCrzten Batterielebensdauer f%FChrt.<br/><br/>" +
+      "Bei 3,3 V ist die Messreichweite eingeschr%E4nkt, der Strombedarf aber deutlich geringer. " +
+      "Sie sollten die Betriebsspannung daher nur auf 5 V stellen, wenn die Messreichweite bei 3,3 V nicht ausreicht.",
+
+    "FILTER_SELECT" :
+      "<b>Filter</b><br/><br/>" +
+      "Art der Ermittlung des Messwertes durch Mehrfachmessung und Filterung bzw. Mittelwertbildung.",
+
+    "REFERENCE_HEIGHT" :
+      "<b>Referenzh%F6he</b><br/><br/>" +
+      "Abstand des Sensors zum Referenzpunkt, welcher als H%F6he Null angezeigt werden soll. " + 
+      "Bei Montage an einer Decke mit Blickrichtung Boden wird hier im Normalfall die Distanz zwischen Sensor und Boden eingetragen.",
 
     "noMoreHelp" : ""
   },
@@ -739,6 +763,12 @@ jQuery.extend(true,langJSON, {
       "Setting 0%:   Almost the entire sensor surface must be covered with rainwater for the sensor to trigger.<br/><br/>" +
       "Setting 100%: A small drop (of approx. 70mm&sup3;) is sufficient to trigger the sensor (more or less, depending on the area).<br/><br/>" +
       "<b>Please note:</b><br/>If drinking water is used for a test of the sensor, the amount of water required for triggering is reduced, as its conductance value is usually several potencies of 10 higher.",
+
+    "SENSOR_SENSITIVITY_shutterTrans" :
+      "en* Bei der Erkennung eines Hindernisses, h%E4lt der Aktor sofort an, um eine Besch%E4digung der Rollladen oder des Hindernisses zu vermeiden.<br/><br/>" +
+      "Mit diesem Parameter legen Sie die Empfindlichkeit der Hindernis-Erkennung fest. Im Normalfall sollte die Einstellung <b>Normal</b> gew%E4hlt werden.<br><br/>" +
+      "Wenn Sie der Meinung sind, dass das nicht ausreicht, w%E4hlen Sie die Einstellung <b>Empfindllich</b>. Hier besteht jedoch die M%F6glichkeit, dass der " +
+      "Aktor dann auch bei 'Nichtigkeiten' anh%E4lt.",
 
 
     "TRIGGER_ANGLE" : "When used as position detection sensor, this parameter determines by how many degrees the angle of the top/bottom of the sensor has to change in relation to the horizontal, " +
@@ -1056,22 +1086,40 @@ jQuery.extend(true,langJSON, {
     "DEVICE_INPUT_LAYOUT_MODE_WGS" : "Use this parameter to set the desired layout of the display.",
 
     "FILTER_SIZE_SOIL_MOISTURE" :
+      "<b>Filter size</b><br/><br/>" +
       "Use this parameter to select the number of measured values for averaging multiple measurements at short intervals.<br/><br/>"+
       "Please note that  an increased measured value leads to an increase in the average current consumption.",
 
     "INTERVAL_SOIL_MOISTURE" :
+      "<b>Measurement interval</b><br/><br/>" +
       "Interval of the cyclical sensor measurements, which are carried out independently of the transmission interval.<br/><br/>" +
       "Short measurement intervals increase the power consumption and shorten the battery life.",
 
     "REFERENCE_16BIT_MIN_SOIL_MOISTURE" :
-      "<b>Raw value-reference value for<b>0% soil moisture.</b>.<br/><br/>" +
+      "<b>Raw value-reference value for 0% soil moisture.</b>.<br/><br/>" +
       "Determine the appropriate raw value by observing the status data under corresponding soil conditions,<br/>" +
       "taking into account delays caused by the measurement and transmission interval.<br/><br/>",
 
     "REFERENCE_16BIT_MAX_SOIL_MOISTURE" :
-      "<b>Raw value-reference value for<b>100% soil moisture.</b>.<br/><br/>" +
+      "<b>Raw value-reference value for 100% soil moisture.</b>.<br/><br/>" +
       "Determine the appropriate raw value by observing the status data under corresponding soil conditions,<br/>" +
       "taking into account delays caused by the measurement and transmission interval.<br/><br/>",
+
+    "CHANNEL_OPERATION_MODE_DISTANCE_TRANSMITTER" :
+      "<b>en* Betriebsspannungsauswahl f%FCr den Sensor.</b><br/></br>" +
+      "Bei 5 V hat der Sensor seine maximale Detektionsreichweite, " +
+      "ben%F6tigt daf%FCr aber deutlich mehr Strom, was zu einer verk%FCrzten Batterielebensdauer f%FChrt.<br/><br/>" +
+      "Bei 3,3 V ist die Messreichweite eingeschr%E4nkt, der Strombedarf aber deutlich geringer. " +
+      "Sie sollten die Betriebsspannung daher nur auf 5 V stellen, wenn die Messreichweite bei 3,3 V nicht ausreicht.",
+
+    "FILTER_SELECT" :
+      "<b>en* Filter</b><br/><br/>" +
+      "Art der Ermittlung des Messwertes durch Mehrfachmessung und Filterung bzw. Mittelwertbildung.",
+
+    "REFERENCE_HEIGHT" :
+      "<b>en* Referenzh%F6he</b><br/><br/>" +
+      "Abstand des Sensors zum Referenzpunkt, welcher als H%F6he Null angezeigt werden soll. " +
+      "Bei Montage an einer Decke mit Blickrichtung Boden wird hier im Normalfall die Distanz zwischen Sensor und Boden eingetragen.",
 
     "noMoreHelp" : ""
     }

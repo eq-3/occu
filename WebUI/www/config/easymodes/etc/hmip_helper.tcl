@@ -2001,7 +2001,7 @@ proc getAutoIntervalA {prn pref specialElement {extraparam ""}} {
       append s "</select>"
 
       if {[string equal $extraparam "helpSoilMoisture"] == 1} {
-        append s "&nbsp;[getHelpIcon INTERVAL_SOIL_MOISTURE 600 75]"
+        append s "&nbsp;[getHelpIcon INTERVAL_SOIL_MOISTURE 600 100]"
       }
 
       append s "</td>"

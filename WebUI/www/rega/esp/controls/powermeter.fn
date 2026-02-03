@@ -189,7 +189,7 @@ function ::CreatePowermeterControl() {
 
       WriteLine("</table>");
     WriteLine("</td>");
-  WriteLine("<tr>");
+  WriteLine("</tr>");
   ! end html
 
   WriteLine("<script type='text/javascript'>");

@@ -1,0 +1,4 @@
+"profileDescr" : "<span class=\"translated\">Turning the knob to the left adjusts the LED strip according to the selected settings.</span><br/><br/>",
+
+"description_20" : "<span class=\"translated\">Das Profil ist nicht aktiv.</span><br/><br/>",
+

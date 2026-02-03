@@ -118,6 +118,7 @@ function ::dcCreate()
     var CN_DIGITAL_STATE      = "DIGITAL_STATE.";
     var CN_DIMMER          = "DIMMER.";
     var CN_DIMMER_REAL     = "DIMMER_REAL.";
+    var CN_DISTANCE_TRANSMITTER     = "DISTANCE_TRANSMITTER.";
     var CN_DOOR_LOCK_STATE_TRANSCEIVER = "DOOR_LOCK_STATE_TRANSCEIVER.";
     var CN_DOOR_LOCK_STATE_TRANSMITTER = "DOOR_LOCK_STATE_TRANSMITTER.";
     var CN_DOOR_LOCK_TRANSCEIVER = "DOOR_LOCK_TRANSCEIVER.";
@@ -548,6 +549,16 @@ function ::dcCreate()
             isKnownControl = true;
             sLastControlName = CN_DIMMER_REAL;
             Call("/esp/controls/dimmer.fn::CreateDimmerRealInfoControl()");
+          }
+
+          !# CN_DISTANCE_TRANSMITTER
+          bIsControl = ( sControlName.Find(CN_DISTANCE_TRANSMITTER) > -1 );
+          if( bIsControl && (sLastControlName != CN_DISTANCE_TRANSMITTER) )
+          {
+            WriteLine( "<script>conInfo('Control CN_DISTANCE_TRANSMITTER found.');</script>" );
+            isKnownControl = true;
+            sLastControlName = CN_DISTANCE_TRANSMITTER;
+            Call("/esp/controls/distance_transmitter.fn::CreateDistanceTransmitterControl()");
           }
 
           !# DOOR_LOCK_STATE_TRANSCEIVER

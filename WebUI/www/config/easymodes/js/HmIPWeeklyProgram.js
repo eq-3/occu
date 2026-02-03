@@ -282,6 +282,9 @@ HmIPWeeklyProgram.prototype = {
     this.isWGTC = (this.device.deviceType.id.includes("HmIP-WGTC"))? true : false;
     this.isDLP = (this.device.deviceType.id.includes("HmIP-DLP"))? true : false;
 
+    // The device says the type of this channel is BLIND_WEEK_PROFILE but it's a SHUTTER device
+    this.isShutter = (this.device.deviceType.id.includes("HmIP-M-TD15"))? true : false;
+
     this.isHmIPLSS = false;
 
     if (this._isDeviceType("HmIP-LSC")) {
@@ -291,8 +294,8 @@ HmIPWeeklyProgram.prototype = {
 
     this.DIMMER_WEEK_PROFILE_HmIP_WUA = (this._isDeviceType("HmIP-WUA") || (this._isDeviceType("ELV-SH-WUA"))) ? "HmIP-WUA" : "";
 
-    this.ignoreExpertMode = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC", "HmIP-DLP", "HmIP-DLP-A"];
-    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC", "HmIP-WGS", "HmIP-WGS-A", "HmIP-WGT" , "HmIP-WGT-A", "HmIP-DLP", "HmIP-DLP-A"];
+    this.ignoreExpertMode = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC", "HmIP-DLP", "HmIP-DLP-A", "HmIP-DLP-AS", "HmIP-DLP-WS"];
+    this.ignoreVirtualChannels = ["HmIP-DLD", "HmIP-DLD-A", "HmIP-DLD-S", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A", "HmIP-FWI", "HmIP-WKP", "HmIP-RGBW", "HmIP-DRG-DALI", "HmIP-LSC", "HmIP-FLC", "HmIP-FDC", "HmIP-WGS", "HmIP-WGS-A", "HmIP-WGT" , "HmIP-WGT-A", "HmIP-DLP", "HmIP-DLP-A", "HmIP-DLP-AS", "HmIP-DLP-WS"];
     this.defaultDoorLockMode = "DoorLockMode";
     this.userDoorLockMode = "UserMode";
     this.selectedMode_RGBW = "";
@@ -731,7 +734,7 @@ HmIPWeeklyProgram.prototype = {
     }
 
     // SLAT LEVEL for Blinds
-    if (this.chnType == this.BLIND && this.devHasVirtualBlindReceiver) {
+    if ((this.chnType == this.BLIND) && (this.devHasVirtualBlindReceiver) && (! this.isShutter)) {
       programEntry += "<td name='elmSlatPos_" + number + "'>" + translateKey('lblWPSlatLevel') + "</td>";
       programEntry += "<td name='elmSlatPos_" + number + "'>" + this._getSlatLevel(number);
       if (this.isWired) {
@@ -1841,7 +1844,9 @@ HmIPWeeklyProgram.prototype = {
       // val = 0 > Switch Actor channels, val = 1 > Permission channels
       var nr = self._addLeadingZero(no),
         lblStateElm = jQuery("#lblState_" + nr),
-        onOffElm = jQuery("[name='"+nr+"_WP_LEVEL']"),
+        //onOffElm = jQuery("[name='"+nr+"_WP_LEVEL']"), doesn't work because the dirty flag will not be recognized
+        onOffElm = document.getElementsByName(nr+"_WP_LEVEL")[0],
+        valOnOffElm = onOffElm.value,
         WPTargetChannelsElm = jQuery("[name='"+nr+"_WP_TARGET_CHANNELS']"),
         arTargetChn = jQuery("[name='targetChannel"+self.chn+"_"+nr+"']"),
         val2Send = 0,
@@ -1852,20 +1857,28 @@ HmIPWeeklyProgram.prototype = {
         optLocked = translateKey("optionLocked"),
         optUnLocked = translateKey("optionUnlocked");
 
+
       switch (val) {
         case 0:
           self.metaSelectedMode[no] = "PERMISSION";
-          onOffElm.empty().append(new Option(optOff,0)).append(new Option(optOn,1));
+          //onOffElm.empty().append(new Option(optOff,"0")).append(new Option(optOn,"1")); // doesn't work properly because of the dirty flag
+          onOffElm.options[0].textContent = optOff;
+          onOffElm.options[1].textContent = optOn;
           break;
         case 1:
           self.metaSelectedMode[no] = "DOOR_LOCK";
-          onOffElm.empty().append(new Option(optLocked,0)).append(new Option(optUnLocked,1));
+          //onOffElm.empty().append(new Option(optLocked,"0")).append(new Option(optUnLocked,"1")); // doesn't work because of the dirty flag
+          onOffElm.options[0].textContent = optLocked;
+          onOffElm.options[1].textContent = optUnLocked;
           break;
         case 2:
           self.metaSelectedMode[no] = "AUTO_RELOCK";
-          onOffElm.empty().append(new Option(optOff,0)).append(new Option(optOn,1));
+          //onOffElm.empty().append(new Option(optOff,"0")).append(new Option(optOn,"1")); // doesn't work because of the dirty flag
+          onOffElm.options[0].textContent = optOff;
+          onOffElm.options[1].textContent = optOn;
           break;
       }
+      onOffElm.value = valOnOffElm;
 
       // At first unset all target channels
       arTargetChn.prop('checked', false);
@@ -1895,15 +1908,18 @@ HmIPWeeklyProgram.prototype = {
             jChn.parent().hide();
           }
         }
+      });
 
-        window.setTimeout(function () {
-          if (chn.checked) {
+      window.setTimeout(function () {
+        jQuery.each(jQuery("[name='targetChannel"+self.chn+"_"+nr+"']"), function(i, chn) {
+          if (jQuery(chn).prop("checked")) {
             val2Send += parseInt(chn.value);
           }
-          WPTargetChannelsElm.val(val2Send);
-        },50);
-      });
+        });
+        WPTargetChannelsElm.val(val2Send);
+      },150);
     };
+
     if ((this.activeEntries[number] == true)) {
       selectedMode = homematic("Interface.getMetadata", {"objectId": self.device.id, "dataId": "wpMode_" + number});
 
@@ -1932,13 +1948,8 @@ HmIPWeeklyProgram.prototype = {
     result += "</td>";
     result += "</tr>";
 
-    window.setTimeout(function() {
-      jQuery("#dlpModeSelector_" + number).change();
-    },50);
-
     return result;
   },
-
 
   _showHideWPLevel: function (number, mode) {
     var wpLevelElm = jQuery("[name='" + number + "_WP_LEVEL']");
@@ -1950,7 +1961,6 @@ HmIPWeeklyProgram.prototype = {
       wpLevelElm.show();
       wpLevelElm.parent().parent().show();
     }
-
   },
 
   _showHideTargetChannels: function (number, mode, setVal) {
@@ -2685,6 +2695,11 @@ HmIPWeeklyProgram.prototype = {
     var paramID = number + "_WP_TARGET_CHANNELS";
     var val = (this.activeEntries[number] == true) ? parseInt(this.ps[paramID]) : 0;
 
+    //console.log(this.activeEntries[number], number);
+    //console.log("_getTargetChannels val: " + val);
+    //console.log("parseInt(this.ps[paramID])",parseInt(this.ps[paramID]));
+
+
     var valCheckBox,
       tmpVal;
 
@@ -2790,6 +2805,7 @@ HmIPWeeklyProgram.prototype = {
         elmLblWPColorSoundSelector.hide();
       }
     };
+
 
     result += "<table><tbody><tr>";
 
@@ -2943,7 +2959,6 @@ HmIPWeeklyProgram.prototype = {
           result += "});";
         }
       }
-
       if (this.isWired && this.activeEntries[number]) {
         // This should make LEVEL_2 invisible when no active target channel of the type BLIND available.
         result += "var arActiveChkBox = jQuery(\"[name='targetChannel" + self.chn + "_" + number + "']:checked\");";
@@ -3007,7 +3022,6 @@ HmIPWeeklyProgram.prototype = {
     result += "},100);";
 
     result += "</script>";
-
     return result;
   },
 
@@ -3161,6 +3175,13 @@ HmIPWeeklyProgram.prototype = {
         self._setWGSPanel(self._addLeadingZero(nextNumber));
       }
 
+      if (self.isDLP) {
+        window.setTimeout(function() {
+          jQuery("#dlpModeSelector_" + self._addLeadingZero(parseInt(nextNumber))).change();
+      },50);
+
+      }
+
     };
 
     if (mode == "DEL") {
@@ -3284,9 +3305,7 @@ HmIPWeeklyProgram.prototype = {
   },
 
   _getMaxEntries: function() {
-    // return 5; // Set the value for testing reasons to a low level - remove this after testing
-
-    //return 75;
+    //return 2; // Set the value for testing reasons to a low level - remove this after testing
 
     if (
       (this._isDeviceType("HmIP-MP3P"))
@@ -3294,7 +3313,6 @@ HmIPWeeklyProgram.prototype = {
       || (this._isDeviceType("HmIPW-WRC6-A"))
       || (this.isWRC6230)
       || ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() == 2)) // BSL with Fw. 2.x.x
-
     ) {return 69;}
 
     switch (this.chnType) {
@@ -3313,6 +3331,15 @@ HmIPWeeklyProgram.prototype = {
   _setEntryVisibility: function(number) {
     var val = parseInt(this.ps[number +"_WP_WEEKDAY"]);
     this.activeEntries[number] = (val == 0) ? false : true ;
+
+    if (this.isDLP && (val > 0)) {
+      var iNumber = parseInt(number);
+      var delay = (iNumber < 5) ? 250 : 2000; //set the mode of the first 5 entries after 250 ms
+      window.setTimeout(function() {
+        jQuery("#dlpModeSelector_" + self._addLeadingZero(iNumber)).change();
+      },delay);
+
+    }
   },
 
   _addLeadingZero: function(val) {
