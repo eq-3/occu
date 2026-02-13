@@ -149,7 +149,7 @@ jQuery.extend(true, langJSON, {
     "optionTrailingEdge" : "Phasenabschnitt",
     "optionLeadingEdge" : "Phasenanschnitt",
 
-    "comment" : "Release A/2026 not yet translated",
+    "comment" : "Release A/2026",
 
     "lblDoorLockDirection" : "Drehrichtung zum Verschlie%DFen",
     "lblDoorEndStopOffsetLocked" : "Winkel von neutral unverschlossen nach geschlossen",
@@ -180,20 +180,20 @@ jQuery.extend(true, langJSON, {
     "stringTableLockState" : "Schlosszustand",
     "stringTableLockStateReason" : "Ausl%F6ser",
 
-    "stringTableLockTeachInState" : "Status der T%FCrschloss-Anlern-Prozedur",
+    "stringTableLockTeachInState" : "Status Anlernprozess T%FCrschloss",
 
     "neutralPositionLockedSet" : "Neutralstellung Verriegelt vorgemerkt",
     "neutralPositionUnlockedSet" : "Neutralstellung Entriegelt vorgemerkt",
     "neutralPositionBothSet" : "beide Neutralstellungen vorgemerkt, bereit f%FCr Anlernfahrt",
     "teachInDriveRunning" : "Anlernfahrt l%E4uft",
-    "teachInSuccessful" : "T%FCrschloss-Anlern-Prozedur erfolgreich abgeschlossen",
+    "teachInSuccessful" : "Anlernprozess T%FCrschloss erfolgreich abgeschlossen.",
     "errorNeutralPositionIncomplete" : "Neutralstellungen Fehler: keine ganzzahligen Umdrehungen zwischen Ver- und Entriegelt",
     "errorNeutralPositionLessOneTurn" : "Neutralstellungen Fehler: weniger als 1 Umdrehung zwischen Ver- und Entriegelt",
     "errorEndStopDriveLockBeforeNeutralPosition" : "Anlernfahrt Fehler: Endanschlag lock vor Neutralstellung Verriegelt",
     "errorEndStopDriveUnlockBeforeNeutralPosition" : "Anlernfahrt Fehler: Endanschlag open vor Neutralstellung Entriegelt",
     "errorTeachInDriveCanceled" : "Abbruch durch anderes Kommando / Ereignis",
     "errorTeachInDriveBatteryLow" : "Batterien zu schwach",
-    "teachInError" : "T%FCrschloss-Anlern-Prozedur Fehler: sonstige",
+    "teachInError" : "Anlernprozess T%FCrschloss Fehler: sonstige",
 
     "stringTableLastLockDriveLoad" : "Schlosslast der letzten Schlie%DFfahrt",
 
@@ -215,7 +215,7 @@ jQuery.extend(true, langJSON, {
     "dlpLockStateReason_5" : "Manuell, von innen",
     "dlpLockStateReason_6" : "Manuell",
 
-    "dlpLockTeachInState_0" : "T%FCrschloss-Anlern-Prozedur nicht (mehr) aktiv",
+    "dlpLockTeachInState_0" : "Anlernprozess T%FCrschloss nicht aktiv",
     //  "dlpLockTeachInState_1" : "Neutralstellung Verriegelt vorgemerkt",
     //  "dlpLockTeachInState_2" : "Neutralstellung Entriegelt vorgemerkt",
     //  "dlpLockTeachInState_3" : "beide Neutralstellungen vorgemerkt, bereit f%FCr Endanschlagsfahrt",
@@ -313,6 +313,9 @@ jQuery.extend(true, langJSON, {
 
     "lblDewPointControl" : "Taupunktkontrolle",
     "lblDewPointTemp" : "Taupunkttemperatur",
+
+    "lblSpeedSeclect_1" : "Geschwindigkeit f%FCr fremdausgel%F6ste Fahrten",
+    "lblSpeedSeclect_2" : "Geschwindigkeit f%FCr selbstausgel%F6ste Fahrten",
 
     "noMoreKeys" : ""
   }

@@ -7711,6 +7711,58 @@ proc getDistanceTransmitter {chn p descr} {
   return $html
 }
 
+proc getAutoRelockTransceiver {chn p descr} {
+
+  global env dev_descr
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar special_input_id special_input_id
+
+  set html ""
+  set prn 0
+
+  set param POWERUP_JUMPTARGET
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTablePowerUpAction}</td>"
+      array_clear options
+      set options(0) "\${optionOFF}"
+      set options(1) "\${optionON}"
+      set options(2) "\${optionDisable}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
+  set param SPEED_SELECT_1
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblSpeedSeclect_1}</td>"
+      array_clear options
+      set options(0) "\${optionNormal}"
+      set options(1) "\${optionWhisper}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon SPEED_SELECT_door_state]</td>"
+    append html "</tr>"
+  }
+
+  set param SPEED_SELECT_2
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblSpeedSeclect_2}</td>"
+      array_clear options
+      set options(0) "\${optionNormal}"
+      set options(1) "\${optionWhisper}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon SPEED_SELECT_door_state]</td>"
+    append html "</tr>"
+  }
+
+  return $html
+
+}
+
 proc getNoParametersToSet {} {
   set html "<tr><td name=\"noParamElm\" class=\"CLASS22003\"><div class=\"CLASS22004\">\${deviceAndChannelParamsLblNoParamsToSet}</div></td></tr>"
   # center content

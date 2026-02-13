@@ -3312,6 +3312,7 @@ HmIPWeeklyProgram.prototype = {
       || (this._isDeviceType("HmIPW-WRC6"))
       || (this._isDeviceType("HmIPW-WRC6-A"))
       || (this.isWRC6230)
+      || (this.WATER_SWITCH)
       || ((this._isDeviceType("HmIP-BSL")) && (this._getFwMajor() == 2)) // BSL with Fw. 2.x.x
     ) {return 69;}
 

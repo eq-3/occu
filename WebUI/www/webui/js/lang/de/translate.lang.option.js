@@ -215,6 +215,8 @@ jQuery.extend(true, langJSON, {
     "optionWindowDriveLevelOn" : "%D6ffnen",
     "optionWindowDriveLevelOnDelay" : "Verz%F6gert %F6ffnen",
 
+    "optionWhisper" : "Langsam",
+
     "noMoreKeys" : ""
   }
 });
