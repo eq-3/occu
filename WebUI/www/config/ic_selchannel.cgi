@@ -726,7 +726,7 @@ proc showHmIPChannel {devType direction address chType} {
   # Also don't show the channel COND_SWITCH_TRANSMITTER for PSM's with a fw. < 2.x.y (see TWIST-1648)
   if {(
     ($devType == "HMIP-PS")
-    || (([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1) && ($major < 2))
+    || ((([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1) && ($major < 2)) && (($devType != "HMIP-PSMCO") && ($devType != "ELV-SH-PSMCI")))
     || (([string equal -nocase -length 8 $devType "HMIP-PSM"] == 1) && ($chType == "KEY_TRANSCEIVER"))
     || ([string equal -nocase -length 8 $devType "HMIP-PDT"] == 1)
     || ([string equal -nocase -length 9 $devType "HMIP-PCBS"] == 1)

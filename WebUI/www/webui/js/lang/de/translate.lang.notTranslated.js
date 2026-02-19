@@ -278,7 +278,7 @@ jQuery.extend(true, langJSON, {
     "lblEventFilterPeriodB2" : "Ersch%FCtterungen innerhalb ",
 
     "optionPositionControl" : "Lage-%DCberwachung",
-    "optionVibrationControl" : "ErschFC%tterungs-%DCberwachung",
+    "optionVibrationControl" : "Ersch%FCtterungs-%DCberwachung",
     "optionPositionVibrationControl" : "Lage- und Ersch%FCtterungs-%DCberwachung",
     "lblDeviceSensorSensibility_DLP" : "Ersch%FCtterungs-Empfindlichkeit",
     "triggerAngleDLP" : "Lagetoleranz",

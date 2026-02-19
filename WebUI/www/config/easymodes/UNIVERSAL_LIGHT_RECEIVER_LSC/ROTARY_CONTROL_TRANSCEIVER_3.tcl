@@ -49,8 +49,6 @@ proc getDescription {longAvailable prn} {
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 
-  puts "This is the correct file<br/>"
-
   global iface_url sender_address receiver_address dev_descr_sender dev_descr_receiver
 
   upvar PROFILES_MAP  PROFILES_MAP

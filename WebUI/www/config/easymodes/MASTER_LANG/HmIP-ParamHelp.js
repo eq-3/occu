@@ -568,6 +568,10 @@ jQuery.extend(true,langJSON, {
     "Zu selbstausgel%F6sten Fahrten geh%F6ren Auto-Relock Fahrten und Fahrten, die durch das interne Wochenprogramm ausgel%F6st werden.<br/><br/>" +
     "Die eingestellte Geschwindigkeit kann auch ohne Auto-Relock-Funktion genutzt werden, indem die <i>Wartezeit vor Auto-Relock</i> auf <i>dauerhaft</i> eingestellt wird und <i>Automatisches Verriegeln</i> auf <i>T%FCrzustand ignorieren</i> (Kanal 12).",
 
+    "INTERVAL_UNIT_dusi" :
+      "Das nutzbare Messintervall ist im Interface auf den Bereich von 1 Minute bis 24 Stunden begrenzt. " +
+      "Zu gro%DF oder zu klein konfigurierte Werte werden im Interface auf den begrenzten Bereich angepasst.",
+
     "noMoreHelp" : ""
   },
 
@@ -1131,6 +1135,10 @@ jQuery.extend(true,langJSON, {
      "Externally triggered movements include movements triggered by incoming commands or by pressing a button.<br/><br/>" +
      "Self-triggered movements include auto-relock movements and movements triggered by the internal weekly programme.<br/><br/> " +
      "The set speed can also be used without the auto-relock function by setting the <i>Wait time before auto-relock</i> to <i>Permanent</i> and <i>Automatic locking<i> to <i>Ignore door status</i> (channel 12).",
+
+    "INTERVAL_UNIT_dusi" :
+      "The usable measurement interval is limited to a range of 1 minute to 24 hours in the interface. " +
+      "Values that are configured too large or too small are adjusted to the limited range in the interface.",
 
     "noMoreHelp" : ""
     }

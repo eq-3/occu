@@ -2768,8 +2768,9 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
     append html "</tr>"
   }
 
-  ### DewPoint
-  set param DEW_POINT_CONTROL_ENABLED
+  ### DewPoint - currently not active - see SPHM-1476 and - 1500
+
+  set param _DEW_POINT_CONTROL_ENABLED
   if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr id='dewPointControl' class=$paramVisibility>"
@@ -2780,7 +2781,7 @@ proc getHeatingClimateControlSwitchTransmitter {chn p descr {extraparam ""}} {
     append html "</tr>"
   }
 
-  set param DEW_POINT_TEMPERATURE
+  set param _DEW_POINT_TEMPERATURE
   if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr id='dewPointTemp' class=$paramVisibility>"
@@ -4744,8 +4745,8 @@ proc getAccelerationTransceiver_A {chn p descr address} {
     incr prn
     array_clear options
     set options(0) "\${optionInactiv}"
-    set options(1) "\${optionVibrationControl}"
-    set options(2) "\${optionPositionControl}"
+    set options(1) "\${optionPositionControl}"
+    set options(2) "\${optionVibrationControl}"
     set options(3) "\${optionPositionVibrationControl}"
     append html "<tr><td>\${lblSabotage_A}</td><td>"
       append html [get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]
@@ -7683,10 +7684,10 @@ proc getDistanceTransmitter {chn p descr} {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableMeasurementInterval}</td>"
-    append html [getComboBox $chn $prn "$specialID" "autoIntervalA" "helpSoilMoisture"]
+    append html [getComboBox $chn $prn "$specialID" "timeMin_1_5_10_15_30_60" "helpSoilMoisture"]
     append html "</tr>"
 
-    append html [getTimeUnitComboBoxC $param $ps($param) $chn $prn $special_input_id 'measurementInterval']
+    append html [getTimeUnitComboBoxE $param $ps($param) $chn $prn $special_input_id 'measurementInterval']
 
     incr prn
     set param INTERVAL_VALUE
@@ -7697,7 +7698,7 @@ proc getDistanceTransmitter {chn p descr} {
 
     append html "</tr>"
     append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
-    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentAutoIntervalAOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeMin_1_5_10_15_30_60Option($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
   }
 
   set param REFERENCE_HEIGHT
