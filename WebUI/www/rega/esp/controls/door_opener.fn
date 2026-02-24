@@ -406,10 +406,10 @@ function ::CreateDoorLockTranseiver() {
               WriteLine("<td>");
                 WriteLine("<table>");
                   WriteLine("<tr>");
-                    WriteLine("<td><div id='"#chnId#"lockTargetLevel' class='ControlBtnOff CLASS02550' style='width:125px; line-height:35px; cursor:pointer;'>${btnTeachInDoorLock}</div></td>");
+                    WriteLine("<td><div id='"#chnId#"lockTargetLevel' class='ControlBtnOff CLASS02550' style='width:150px; line-height:35px; cursor:pointer;'>${btnTeachInDoorLock}</div></td>");
                   WriteLine("</tr>");
                   WriteLine("<tr>");
-                    WriteLine("<td><div id='"#chnId#"showDLPInfoPanel' class='ControlBtnOff CLASS02550' style='width:125px; line-height:35px; cursor:pointer;'>${btnInfo}</div></td>");
+                    WriteLine("<td><div id='"#chnId#"showDLPInfoPanel' class='ControlBtnOff CLASS02550' style='width:150px; line-height:35px; cursor:pointer;'>${btnInfo}</div></td>");
                   WriteLine("</tr>");
                 WriteLine("</table>");
               WriteLine("</td>");

@@ -83,7 +83,7 @@ function ::CreateIdentification() {
       && (ch.Label().Find("HmIP-WGS") == -1 )
       && (ch.Label().Find("HmIP-WGT") == -1)
       && (ch.Label().Find("HmIP-WGD") == -1)
-      && (ch.Label().Find("HmIP-UDI-PB2") == -1))
+      && (ch.Label().Find("HmIP-UDI-PB2") == -1)
       && (ch.Label().Find("HmIP-UDI-SMI55") == -1)) {
         Call("/esp/controls/maintenance.fn::CreateOperationVoltage()");
       }
