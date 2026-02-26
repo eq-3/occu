@@ -15,6 +15,7 @@ jQuery.extend(true,langJSON, {
     "lblAttentionGroupNameChange" : "Attention, the virtual device-/channel names will be overwritten!",
     "lblAttentionNoPasswd" : "For security reasons, we recommend that you assign a password for the CCU!",
     "lblAutoCalibration" : "Automatic calibration",
+    "lblAutoCalibration_A" : "Door status detection",
     "lblAutoCalibrationActiv" :                  "Auto calibration active",
     "lblAvailableCapital": "Available",
     "lblAvailableFirmwareVersion": "Available version:",

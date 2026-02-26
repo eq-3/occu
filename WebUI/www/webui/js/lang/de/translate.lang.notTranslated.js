@@ -158,7 +158,7 @@ jQuery.extend(true, langJSON, {
     "lblDoorLockNeutralPos" : "Neutrale Schl%FCsselposition",
     "lblDoorOpeningDirection" : "%D6ffnungsrichtung",
 
-    "lblAutomaticLock" : "Automatisches Verriegeln",
+    "lblAutomaticLock" : "Reaktion auf T%FCrzustandssensor",
 
     "optionIgnoreDoorOpen" : "T%FCrzustand ignorieren",
     "optionSkipHoldTimeOpening" : "Fallen-Haltezeit %FCberspringen",
@@ -289,8 +289,8 @@ jQuery.extend(true, langJSON, {
     "lblSensorSensibility_A" : "Schlosslast-Empfindlichkeit",
 
     "optionAutoCalibration" : "Automatische Kalibrierung",
-    "optionDriftCompensationOn" : "Aktiv mit Driftkompensation",
-    "optionDriftCompensationAndCalibrationOn" : "Aktiv mit Driftkompensation und Kalibrierung nach Schlosslast-Erkennung",
+    "optionDriftCompensationOn" : "Aktiv",
+    "optionDriftCompensationAndCalibrationOn" : "Aktiv mit Kalibrierung nach Schlosslast-Erkennung",
     "lblTableDeviceMagnetSensibility" : "Magnetfeld-Empfindlichkeit",
 
     "lblSensorVoltage" : "Betriebsspannung",

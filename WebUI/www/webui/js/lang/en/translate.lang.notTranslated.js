@@ -152,7 +152,7 @@ jQuery.extend(true, langJSON, {
     "lblDoorLockNeutralPos" : "Neutral key position",
     "lblDoorOpeningDirection" : "Opening direction",
 
-    "lblAutomaticLock" : "Automatic locking",
+    "lblAutomaticLock" : "Response to door status sensor",
 
     "optionIgnoreDoorOpen" : "Ignore door status",
     "optionSkipHoldTimeOpening" : "Skip door latch hold time",
@@ -283,8 +283,8 @@ jQuery.extend(true, langJSON, {
     "lblSensorSensibility_A" : "Pre-load sensitivity",
 
     "optionAutoCalibration" : "Automatic calibration",
-    "optionDriftCompensationOn" : "Active with drift compensation",
-    "optionDriftCompensationAndCalibrationOn" : "Active with drift compensation and calibration after pre-load detection",
+    "optionDriftCompensationOn" : "Active",
+    "optionDriftCompensationAndCalibrationOn" : "Active with calibration after pre-load detection",
     "lblTableDeviceMagnetSensibility" : "Magnetic field sensitivity",
 
     "lblSensorVoltage" : "Operating voltage",

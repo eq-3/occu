@@ -15,6 +15,7 @@ jQuery.extend(true,langJSON, {
     "lblAttentionGroupNameChange" : "ACHTUNG, virtuelle Ger%E4te-/Kanalnamen werden %DCberschrieben!",
     "lblAttentionNoPasswd" : "Aus Sicherheitsgr%FCnden empfehlen wir,<br/>dass Sie ein Passwort f%FCr die CCU vergeben",
     "lblAutoCalibration" : "Automatische Kalibrierung",
+    "lblAutoCalibration_A" : "T%FCrzustands-Erkennung",
     "lblAutoCalibrationActiv" :                  "Auto-Kalibrierung aktiv",
     "lblAvailableCapital": "Verf%fcgbar",
     "lblAvailableFirmwareVersion" : "Verf%FCgbare Version:",

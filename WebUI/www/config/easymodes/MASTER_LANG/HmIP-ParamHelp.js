@@ -214,10 +214,35 @@ jQuery.extend(true,langJSON, {
       "Sollte eine sensiblere Einstellung notwendig sein, w%E4hlen Sie die Einstellung <b>Empfindllich</b>. "+
       "Hier besteht jedoch die M%F6glichkeit, dass der Aktor dann auch bei 'geringf%FCgigen Widerst%E4nden' anh%E4lt.",
 
+    "SENSOR_SENSITIVITY_DLP" :
+      "Dieser Parameter bestimmt die Empfindlichkeit der Ersch%FCtterungs-%DCberwachung.<br/><br/>" +
+      "Ein kleiner Wert bedeutet geringe Empfindlichkeit, so dass nur starke Ersch%FCtterungen erkannt werden.<br/><br/>" +
+      "Ein gro%DFer Wert bedeutet hohe Empfindlichkeit, so dass auch kleine Ersch%FCtterungen erkannt werden.<br/><br/>" +
+      "<b>Hinweis: Die Ersch%FCtterungs-%FCberwachung ist nur aktiv, wenn das T%FCrschloss verriegelt ist.</b>",
+
+    "SENSOR_SENSITIVITY_door_lock" :
+      "Parameter f%FCr die Schlosslast-Erkennung.<br/><br/>" +
+      "Beim motorischen Verriegeln wird der mechanische Widerstand (Drehmoment) gemessen. " +
+      "Ist das Drehmoment kleiner als erwartet, wird das als Fehler gemeldet. " +
+      "Diese Funktion ist optional bzw. alternativ zum T%FCrzustandssensor verwendbar.<br/><br/>" +
+      "Diese Funktion ist nur an T%FCren sinnvoll, bei denen das Drehmoment bei geschlossener T%FCr h%F6her ist als bei ge%F6ffneter T%FCr. " +
+      "Diese Funktion ist daher meistens nicht verwendbar, wenn die Falle schon die Kraft der T%FCrdichtung abf%E4ngt.<br/><br/>" +
+      "Ein kleiner Wert bedeutet geringe Empfindlichkeit, so dass nur schwerg%E4ngige Schl%F6sser erkannt werden. " +
+      "Ein gro%DFer Wert bedeutet hohe Empfindlichkeit, so dass auch leichtg%E4ngige Schl%F6sser erkannt werden. " +
+      "Bei 255 ist die Funktion deaktiviert.<br/><br/>" +
+      "Der Parameter sollte um etwa 3 niedriger eingestellt sein, als der gemessene Wert einer motorischen Verriegelungsfahrt bei ge%F6ffneter T%FCr. " +
+      "Der gemessene Wert ist unter Status und Bedienung zu finden. Ein gemessener Wert von 255 bedeutet ung%FCltig.",
+
+    "DOOR_OPENING_DIRECTION" :
+      "Hier kann eingestellt werden, ob sich die T%FCr nach innen (Normalfall) oder nach au%DFen %F6ffnet. " +
+      "Diese Einstellung ist relevant f%FCr den T%FCrzustandssensor.",
+
     "TRIGGER_ANGLE" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wieviel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, " +
       "damit ein Event ausgel%F6st wird.",
 
     "TRIGGER_ANGLE_2" : "Bei Verwendung als Lageerkennungssensor, bestimmt dieser Parameter, um wie viel Grad sich der Winkel der Ober-/Unterseite des Sensors in Bezug zur Waagerechten %E4ndern muss, damit der senkrechte Zustand  erreicht wird.",
+
+    "TRIGGER_ANGLE_DLP" : "Dieser Parameter bestimmt, um wieviel Grad sich der Winkel des Ger%E4tes in Bezug zur Senkrechten %E4ndern muss, damit ein Lage-Fehler erkannt wird.",
 
     "DIM_STEP" :
       "Dieser Parameter bestimmt die Anzahl der Stufen, um die Helligkeit von 0% - 100% hochzudimmen, bzw. von 100% - 0 % herunterzudimmen.<br/><br/>" +
@@ -367,6 +392,10 @@ jQuery.extend(true,langJSON, {
       "Durch eine Verl%E4ngerung der Zeitspanne, z. B. durch Heraufsetzen der Abtastrate auf 1 Sekunde, kann die Batterielaufzeit deutlich erh%F6ht werden.<br/><br/>" +
       "Je nach Anwendungsfall, ist eine Verl%E4ngerung der Zeitspanne sinnvoll. W%E4hrend eine l%E4ngere Abtastrate bei einer Heizungsl%F6sung unkritisch ist, " +
       "sollte bei einer Sicherheitsl%F6sung zur Alarmmeldung die Abtastrate k%FCrzer eingestellt werden.",
+
+    "SAMPLE_INTERVAL_door_state" :
+      "In dem eingestellten Intervall pr%FCft der T%FCrzustandssensor das Magnetfeld auf %C4nderung, wodurch dann eine T%FCrzustands%E4nderung erkannt werden kann.<br><br>" +
+      "Ein kleinerer Wert verk%FCrzt die Reaktionszeit, erh%F6ht aber auch den Stromverbrauch des Ger%E4tes.",
 
     "SCREEN_MANAGEMENT" :
       "<b><u>Screen Management</u></b><br/>" +
@@ -553,6 +582,22 @@ jQuery.extend(true,langJSON, {
       "Bei 3,3 V ist die Messreichweite eingeschr%E4nkt, der Strombedarf aber deutlich geringer. " +
       "Sie sollten die Betriebsspannung daher nur auf 5 V stellen, wenn die Messreichweite bei 3,3 V nicht ausreicht.",
 
+    "CHANNEL_OPERATION_MODE_door_state" :
+      "Der T%FCrzustandssensor kann mit Hilfe des externen Magneten feststellen, ob die T%FCr geschlossen oder ge%F6ffnet ist. " +
+      "Falls kein externer Magnet montiert ist oder die Funktion nicht gebraucht wird, sollte die T%FCrzustands-Erkennung deaktiviert werden, um den Stromverbrauch des Ger%E4tes zu reduzieren.<br/><br/>" +
+      "Das Kalibrieren nach Schlosslast-Erkennung ist normalerweise nicht n%F6tig, kann aber in Umgebungen mit magnetischen St%F6rungen helfen. " +
+      "In dieser Einstellung wird das Magnetfeld f%FCr geschlossene T%FCr immer dann gespeichert, wenn beim motorischen Verriegeln ein mechanischer Widerstand erkannt wurde. " +
+      "Dazu muss die Schlosslast-Erkennung entsprechend eingestellt sein.<br/><br/>" +
+      "<b>Hinweis: F%FCr die korrekte Funktion des T%FCrzustandssensors muss der mitgelieferte Magnet an der richtigen Position und Ausrichtung am T%FCrrahmen angebracht sein. " +
+      "Au%DFerdem muss die %F6ffnungsrichtung (Parameter) korrekt eingestellt sein.<b/>",
+
+    "CHANNEL_OPERATION_MODE_door_lock" :
+      "Wenn der T%FCrzustandssensor eine T%FCrzustands-%C4nderung erkennt, kann der Antrieb darauf reagieren.<br/><br/>" +
+      "Bei einer %C4nderung von geschlossen nach ge%F6ffnet kann die Fallen-Haltezeit %FCbersprungen werden. " +
+      "In dem Fall f%E4hrt die Falle beim %D6ffnen der T%FCr sofort wieder heraus, auch wenn eine l%E4ngere Haltezeit eingestellt ist.<br/><br/>" +
+      "Bei %C4nderung von ge%F6ffnet nach geschlossen kann die Wartezeit vor Auto Relock %FCbersprungen werden. " +
+      "In dem Fall wird das Schloss nach dem Schlie%DFen der T%FCr sofort wieder verriegelt, sofern Auto Relock aktiv ist, auch wenn eine l%E4ngere Wartezeit eingestellt ist.",
+
     "FILTER_SELECT" :
       "<b>Filter</b><br/><br/>" +
       "Art der Ermittlung des Messwertes durch Mehrfachmessung und Filterung bzw. Mittelwertbildung.",
@@ -675,7 +720,7 @@ jQuery.extend(true,langJSON, {
 
     "CONTACT_BOOST" : "In order to prevent corrosion and possible functional restrictions of the buttons or switches, the 'corrosion protection' can be activated. " +
     "This ensures that an increased current flows briefly through a connected pushbutton or switch when it is actuated. The current pulse counteracts corrosion.<br/><br/>" +
-    "This function should only be activated with mains voltage push-buttons and switches and under no circumstances with micro push-buttons or other contacts with low switching capacity..",
+    "This function should only be activated with mains voltage push-buttons and switches and under no circumstances with micro push-buttons or other contacts with low switching capacity.",
 
     "repetitionOffTimeSound" : "Select the pause between the repetitions with the off duration. If a permanent off time is selected, the Repeats parameter is ignored.",
     "repetitionOffTimeDimmer" : "Select the pause between the repetitions with the off duration. If a permanent on-time or off-time is selected, the Repeats parameter is ignored.",
@@ -780,11 +825,36 @@ jQuery.extend(true,langJSON, {
       "If a more sensitive setting is necessary, select the setting <b>Sensitivity</b>. " +
       "However, there is a possibility that the actuator will stop even if there is only 'slight resistance'.",
 
+    "SENSOR_SENSITIVITY_DLP" :
+      "This parameter determines the sensitivity of the vibration monitoring.<br/><br/>" +
+      "A low value means low sensitivity, so that only strong vibrations are detected.<br/><br/>" +
+      "A high value means high sensitivity, so that even small vibrations are detected.<br/><br/>" +
+      "<b>Note: Vibration monitoring is only active when the door lock is locked.</b>",
+
+    "SENSOR_SENSITIVITY_door_lock" :
+      "Parameter for lock load detection.<br/><br/>" +
+      "During motorised locking, the mechanical resistance (torque) is measured. " +
+      "If the torque is lower than expected, this is reported as an error. " +
+      "This function is optional or can be used as an alternative to the door status sensor.<br/><br/>" +
+      "This function is only useful on doors where the torque is higher when the door is closed than when it is open. " +
+      "This function is therefore usually not usable if the latch already absorbs the force of the door seal.<br/><br/>" +
+      "A small value means low sensitivity, so that only stiff locks are detected. " +
+      "A large value means high sensitivity, so that even smooth-running locks are detected. " +
+      "At 255, the function is deactivated.<br/><br/>" +
+      "The parameter should be set about 3 lower than the measured value of a motorised locking movement with the door open. " +
+      "The measured value can be found under Status and Operation. A measured value of 255 means invalid.",
+
+    "DOOR_OPENING_DIRECTION" :
+      "Here you can set whether the door opens inwards (normal case) or outwards. " +
+      "This setting is relevant for the door status sensor.",
 
     "TRIGGER_ANGLE" : "When used as position detection sensor, this parameter determines by how many degrees the angle of the top/bottom of the sensor has to change in relation to the horizontal, " +
       "to trigger an event.",
 
     "TRIGGER_ANGLE_2" : "When being used as a position detection sensor, this parameter determines by how many degrees the angle of the top/bottom side of the sensor must change in relation to the horizontal so that the vertical state is achieved.",
+
+    "TRIGGER_ANGLE_DLP" : "This parameter determines by how many degrees the angle of the device must change in relation to the vertical in order for a position error to be detected.",
+
 
     "DIM_STEP" :
       "This parameter determines the number of steps to dim the brightness from 0% - 100% up, or from 100% - 0% down.<br/><br/>" +
@@ -936,6 +1006,10 @@ jQuery.extend(true,langJSON, {
       "By lengthening the time take, e.g., by reducing the scanning frequency to 1 second, the battery runtime can be greatly increased.<br/><br/>" +
       "Depending on the application, it makes sense to lengthen the time taken.  Whereas a longer scanning frequency is uncritical in a heating solution, " +
       "the scanning frequency should be made shorter in a security solution for the alarm response.",
+
+    "SAMPLE_INTERVAL_door_state" :
+      "At the set interval, the door status sensor checks the magnetic field for changes, which then allows a change in door status to be detected.<br><br>" +
+      "A lower value shortens the response time but also increases the device's power consumption.",
 
     "SCREEN_MANAGEMENT" :
       "<b><u>Screen Management</u></b><br/>" +
@@ -1120,6 +1194,22 @@ jQuery.extend(true,langJSON, {
       "but requires significantly more power, which leads to a shorter battery life.<br/><br/>" +
       "At 3.3 V, the measuring range is limited, but the power consumption is significantly lower. "+
       "You should therefore only set the operating voltage to 5 V if the measuring range at 3.3 V is insufficient.",
+
+    "CHANNEL_OPERATION_MODE_door_state" :
+      "The door status sensor can use the external magnet to determine whether the door is closed or open. " +
+      "If no external magnet is installed or the function is not required, door status detection should be deactivated to reduce the device's power consumption.<br/><br/>" +
+      "Calibration after lock load detection is not normally necessary, but can help in environments with magnetic interference. " +
+      "In this setting, the magnetic field for a closed door is always saved when mechanical resistance is detected during motorised locking. " +
+      "To do this, the lock load detection must be set accordingly.<br/><br/>" +
+      "<b>Note: For the door status sensor to function correctly, the supplied magnet must be attached to the door frame in the correct position and orientation. " +
+      "In addition, the opening direction (parameter) must be set correctly.<b/>",
+
+    "CHANNEL_OPERATION_MODE_door_lock" :
+      "If the door status sensor detects a change in door status, the drive can respond accordingly.<br/><br/>" +
+      "When changing from closed to open, the latch hold time can be skipped. " +
+      "In this case, the latch extends again immediately when the door is opened, even if a longer hold time is set.<br/><br/>" +
+      "When changing from open to closed, the waiting time before auto relock can be skipped. " +
+      "In this case, the lock is immediately relocked after the door is closed, provided that auto relock is active, even if a longer waiting time is set.",
 
     "FILTER_SELECT" :
       "<b>Filter</b><br/><br/>" +

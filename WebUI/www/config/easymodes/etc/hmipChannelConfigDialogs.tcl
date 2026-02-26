@@ -4803,7 +4803,7 @@ proc getAccelerationTransceiver_A {chn p descr address} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblDeviceSensorSensibility_DLP}</td>"
-      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_DLP 320 100]</td>"
+      append html  "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_DLP 400 170]</td>"
     append html "</tr>"
   }
 
@@ -4833,7 +4833,7 @@ proc getAccelerationTransceiver_A {chn p descr address} {
     incr prn
     append html "<tr>"
       append html "<td>\${lblTriggerAngle_DLP}</td>"
-      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;<span id='triggerAngleMinMax'>[getMinMaxValueDescr $param]</span>&nbsp;[getHelpIcon $param 320 100]</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;<span id='triggerAngleMinMax'>[getMinMaxValueDescr $param]</span>&nbsp;[getHelpIcon $param\_DLP 320 100]</td>"
     append html "</tr>"
   }
 
@@ -7367,7 +7367,7 @@ proc getDoorStateTranseiver {chn p descr} {
   if { [info exists ps($param)] == 1 } {
     incr prn
     append html "<tr>"
-      append html "<td>\${lblAutoCalibration}</td>"
+      append html "<td>\${lblAutoCalibration_A}</td>"
       array_clear options
       set options(0) "\${optionDisable}"
       set options(1) "\${optionDriftCompensationOn}"
@@ -7381,7 +7381,7 @@ proc getDoorStateTranseiver {chn p descr} {
       incr prn
       append html "<tr>"
         append html "<td>\${genericSampleInterval}</td>"
-       append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_door_state]</td>"
+       append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_door_state 450 100 ]</td>"
       append html "</tr>"
     }
 
@@ -7608,7 +7608,7 @@ proc getDoorLockTranseiver {chn p descr} {
       array_clear options
       set options(0) "\${optionInwards}"
       set options(1) "\${optionOutwards}"
-      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param]</td>"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 450 100]</td>"
     append html "</tr>"
   }
 
