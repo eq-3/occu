@@ -1811,8 +1811,7 @@ proc getShutterTransmitter {chn p descr address} {
   set isMTD15 0
   if {
     ([string equal $dev_descr(TYPE) "HmIP-M-TD15"] == 1) ||
-    ([string equal $dev_descr(TYPE) "RM-110-45"] == 1)  ||
-    ([string equal $dev_descr(TYPE) "RM-110-15"] == 1)
+    ([string equal $dev_descr(TYPE) "RM-110-45/15"] == 1)
   } {
     set isMTD15 1
   }
@@ -1912,9 +1911,14 @@ proc getShutterTransmitter {chn p descr address} {
   if { [info exists ps($param)] == 1  } {
     incr prn
     append html "<tr>"
-      append html "<td>\${stringTableSensorSensivity}</td>"
-            set options(0) "\${optionNormal}"
-            set options(1) "\${optionSensitive}"
+      append html "<td>\${stringTableSensorSensivityObstacle}</td>"
+      set options(0) "\${optionOff}"
+      set options(1) "\${optionVeryInsensitive}"
+      set options(2) "\${optionInsensitive}"
+      set options(3) "\${optionStandard}"
+      set options(4) "\${optionSensitive}"
+      set options(5) "\${optionVerySensitive}"
+
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param\_shutterTrans 450 160]</td>"
     append html "</tr>"
   }
@@ -2031,7 +2035,7 @@ proc getShutterTransmitter {chn p descr address} {
       # Show the checkbox 'Auto discover' only when the parameter ENDPOSITION_AUTO_DETECT is available
       if {
         ([info exists ps(ENDPOSITION_AUTO_DETECT)] != 1) &&
-        (([string equal $dev_descr(TYPE) "HmIP-M-TD15"] != 1) && ([string equal $dev_descr(TYPE) "RM-110-45"] != 1)  && ([string equal $dev_descr(TYPE) "RM-110-15"] != 1))
+        (([string equal $dev_descr(TYPE) "HmIP-M-TD15"] != 1) || ([string equal $dev_descr(TYPE) "RM-110-45/15"] != 1))
       } {
         append html "jQuery(\"\[name='trAutoCompensate'\]\").hide();"
       }
@@ -3050,7 +3054,7 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
       if {[info exists ps($param)] == 1} {
         incr prn
         array_clear options
-        if {[string first "HmIP-WGTC" $devType ] != -1} {
+        if {[string first "-WGTC" $devType ] != -1} {
           set options(0) "\${optionActual}"
           set options(1) "\${optionSetpoint}"
           set options(2) "\${optionActualHumidity}"
@@ -3308,7 +3312,8 @@ proc getHeatingClimateControlTransceiver {chn p descr address {extraparam ""}} {
   return $html
 }
 
-proc getSwitchVirtualReceiver {chn p descr} {
+proc getSwitchVirtualReceiver {chn p descr {url ""} {address ""}} {
+  global dev_descr
 
   upvar $p ps
   upvar $descr psDescr
@@ -3318,10 +3323,102 @@ proc getSwitchVirtualReceiver {chn p descr} {
   puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
 
   set specialID "[getSpecialID $special_input_id]"
+  set devType $dev_descr(TYPE)
 
   set html ""
   set prn 0
   set hr 0
+
+set comment {
+  if { ([string first "HmIP-WSM" $devType] != -1) || ([string first "ELV-SH-WSM" $devType] != -1) } {
+    # create water switch duration (is a Value parameter)
+    set hasOutputBehaviour 0
+
+    catch {
+    # check if VALUE parameter OUTPUT_BEHAVIOUR is available
+      array set receiverPSDescr [xmlrpc $url getParamsetDescription $address VALUES]
+      foreach val [array names receiverPSDescr] {
+        if {$val == "OUTPUT_BEHAVIOUR"} {
+          set hasOutputBehaviour 1
+          break;
+        }
+      }
+    } e
+
+    if {$hasOutputBehaviour} {
+      set durationValue 0
+      catch {set durationValue [xmlrpc $url getValue [list string $address] DURATION_VALUE]}
+
+      set durationUnit 0
+      catch {set durationUnit [xmlrpc $url getValue [list string $address] DURATION_UNIT]}
+
+      set outputBehaviour 0
+      catch {set outputBehaviour [xmlrpc $url getValue [list string $address] OUTPUT_BEHAVIOUR]}
+
+      # flow control active/not active
+      append html "<tr>"
+        append html "<td>\${lblFlowControl}</td>"
+        append html "<td>"
+          append html "<select id='flowControl_$chn' onchange='setWSMVisibilityFlowControl(jQuery(this))'>"
+           append html "<option value='0'>\${optionDisable}</option>"
+           append html "<option value='1'>\${optionEnable}</option>"
+          append html "</select>"
+        append html "</td>"
+      append html "</tr>"
+
+      # time
+      append html "<tr name='trFlowControl_$chn'>"
+        append html "<td style='text-align:left;'>\${stringTableDuration}</td>"
+
+        # here we store the value of the parameter DURATION to be send
+        append html "<td>"
+          append html "<input type='text' id='durationValue_$chn' size=4 onblur=\"ProofAndSetValue(this.id, this.id, '0', '31', 1);setWSMOutputBehaviour('$chn');\">"
+          append html "<span> x </span>"
+          append html "<select id='durationUnit_$chn' onchange=\"setWSMOutputBehaviour('$chn');\">"
+            append html "<option value='0'>\${optionUnit1S}</option>"
+            append html "<option value='1'>\${optionUnit1M}</option>"
+            append html "<option value='2'>\${optionUnit1H}</option>"
+          append html "</select>"
+        append html "</td>"
+
+      append html "</tr>"
+
+      # flow in liters
+      append html "<tr name='trFlowControl_$chn'>"
+        append html "<td>\${powerMeasurementA}</td>"
+
+        # here we store the value of the parameter OUTPUT_BEHAVIOUR to be send
+        append html "<td>"
+          append html "<input type='text' id='outputFlowValue_$chn' size=4 onblur=\"ProofAndSetValue(this.id, this.id, '0', '31', 1);setWSMOutputBehaviour('$chn');\">"
+          append html "<span> x </span>"
+          append html "<select id='outputFlowUnit_$chn' onchange=\"setWSMOutputBehaviour('$chn');\">"
+            append html "<option value='0'>--</option>"
+            append html "<option value='32'>\${optionUnit1Ltr}</option>"
+            append html "<option value='64'>\${optionUnit10Ltr}</option>"
+            append html "<option value='128'>\${optionUnit100Ltr}</option>"
+            append html "<option value='192'>\${optionUnit1000Ltr}</option>"
+          append html "</select>"
+        append html "</td>"
+
+        #value of the parameter OUTPUT_BEHAVIOUR to send
+        append html "<td><input id='outputBehaviour_$chn' type='text' class='_hidden'</td>"
+      append html "</tr>"
+
+      append html "<script type=\"text/javascript\">"
+        append html "setWSMFlowControlState(jQuery('\#flowControl_$chn'), '$durationValue', '$durationUnit', '$outputBehaviour');"
+
+        # Extend the footer buttons
+        append html " window.setTimeout(function() { "
+         append html " var elm = jQuery('#footerButtonOK, #footerButtonTake'); "
+         append html " elm.off('click').click(function() {storeWSMOutputBehaviour('$address');});"
+        append html " },10); "
+
+      append html "</script>"
+
+      append html "[getHorizontalLine]"
+    }
+  }
+}
 
   if {[session_is_expert]} {
     set param "LOGIC_COMBINATION"
@@ -3875,6 +3972,91 @@ proc getEnergieMeterTransmitterESIStartValue {chn p descr chnAddress chnOpMode} 
       append html "}"
     append html "};"
   append html "</script>"
+
+  return $html
+}
+
+proc getEnergieMeterTransmitterESIInd {chn p descr chnAddress} {
+  global dev_descr
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set CHANNEL $special_input_id
+  set specialID "[getSpecialID $special_input_id]"
+
+  set devType $dev_descr(TYPE)
+
+  set html ""
+
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HM_ES_PMSw.js')</script>"
+
+  set param CHANNEL_OPERATION_MODE
+  if { [info exists ps($param)] == 1  } {
+    # The HmIP-ESI-IND can be uses for measuring Water or Gas.
+    # This is a user defined parameter, stored as meta data.
+    # This parameter determines the different text labels for Gas and Water.
+
+    append html "<tr>"
+      append html "<td>\${lblTypeOfMeasurement}</td>"
+      append html "<td>"
+        append html "<select id='selectGasWater_$chn' onchange='storeOptionGasWater(jQuery(this), \"$chnAddress\")'>"
+         append html "<option value='0'>\${optionGas}</option>"
+         append html "<option value='1'>\${optionWater}</option>"
+        append html "</select>"
+      append html "</td>"
+    append html "</tr>"
+
+    incr prn
+    array_clear options
+    set options(0) "\${optionSensorError}"
+    set options(1) "\${optionSensorConnected}"
+    append html "<tr><td>\${lblSensorStatus}</td>"
+    append html "<td>[get_ComboBox options $param separate_$CHANNEL\_$prn ps $param]</td>"
+    append html "</tr>"
+  }
+
+  set param METER_CONSTANT_VOLUME
+  if {[info exists ps($param)] == 1} {
+    incr prn
+    append html "<tr>"
+    #  append html "<td>\${stringTablePowerMeterConstantVolume}</td>"
+      append html "<td>\${stringTablePowerMeterConstant}</td>"
+      append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getUnit $param]&nbsp;[getMinMaxValueDescr $param]</td>"
+    append html "</tr>"
+  }
+
+  set param INTERVAL_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableMeasurementInterval}</td>"
+    append html [getComboBox $chn $prn "$specialID" "autoIntervalA" "helpSoilMoisture"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxC $param $ps($param) $chn $prn $special_input_id 'measurementInterval']
+
+    incr prn
+    set param INTERVAL_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableMeasurementIntervalValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentAutoIntervalAOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  if {$html != ""} {
+    append html "<script type=\"text/javascript\">"
+      # here we set the gas/water selectbox to the current value
+      append html "getOptionGasWater(\"$chnAddress\");"
+    append html "</script>"
+  } else {
+    append html [getNoParametersToSet]
+  }
 
   return $html
 }
@@ -7513,7 +7695,7 @@ proc getDoorLockTranseiver {chn p descr} {
     append html "<tr>"
       append html "<td>\${stringTableDoorLockNeutralPos}</td>"
       array_clear options
-      set options(0) "\${lblVerticalA}"
+      set options(0) "\${lblVerticalB}"
       set options(1) "\${lblHorizontalA}"
       append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]&nbsp;[getHelpIcon $param 320 75]</td>"
     append html "</tr>"
@@ -7762,6 +7944,362 @@ proc getAutoRelockTransceiver {chn p descr} {
 
   return $html
 
+}
+
+
+
+proc getValveActuatorReceiver {chn p descr {url ""} {address ""}} {
+  global dev_descr
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
+  set specialID "[getSpecialID $special_input_id]"
+  set devType $dev_descr(TYPE)
+
+  set html ""
+  set prn 0
+  set hr 0
+
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShortwoHour $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelB($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param POWERUP_JUMPTARGET
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${stringTablePowerUpAction}</td>"
+      array_clear options
+      set options(0) "\${optionWaterOff}"
+      set options(1) "\${optionWaterOn}"
+      set options(2) "\${optionDisable}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
+  set param POWERUP_ONTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${lblOnTime}</td>"
+    #append html "[getComboBox $chn $prn "$specialID" "timeOnOff"]<td>[getHelpIcon $param\_WSS 320 170]</td>"
+    append html "[getComboBox $chn $prn "$specialID" "timeOnOff"]"
+    append html "</tr>"
+
+    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param POWERUP_ONTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableOnTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param POWERUP_OFFTIME_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${lblOffTime}</td>"
+    #append html "[getComboBox $chn $prn "$specialID" "timeOnOff"]<td>[getHelpIcon $param\_WSS 320 170]</td>"
+    append html "[getComboBox $chn $prn "$specialID" "timeOnOff"]"
+    append html "</tr>"
+
+    append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param POWERUP_OFFTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableOffTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentTimeOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+}
+
+proc getAlarmActuatorReceiver {chn p descr} {
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  puts "<script type=\"text/javascript\">getLangInfo_Special('VIRTUAL_HELP.txt');</script>"
+
+  set specialID "[getSpecialID $special_input_id]"
+
+  set html ""
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1 } {
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShortwoHour $param $ps($param) $chn $prn $special_input_id]
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelB($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param EVENT_RANDOMTIME_UNIT
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableRandomTime}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventRandomTime"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShort $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_RANDOMTIME_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableRamdomTimeValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelA($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  return $html
+}
+
+proc getWaterFlowTransmitter {chn p descr} {
+  global dev_descr
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+  set CHANNEL $special_input_id
+
+  set devType $dev_descr(TYPE)
+
+  set hlpBoxWidth 450
+  set hlpBoxHeight 160
+
+  set prn 0
+  set html ""
+
+  # puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShortwoHour $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelB($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param CHANNEL_OPERATION_MODE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblTypeOfSensor}</td>"
+      array_clear options
+      set options(0) "\${optionNoSensor}"
+      set options(1) "\${optionFlowSensorGBCan}"
+      set options(2) "\${optionFlowSensorGBHW1}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
+
+  set param INTERVAL_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableMeasurementInterval}</td>"
+    append html [getComboBox $chn $prn "$specialID" "autoIntervalA" "helpSoilMoisture"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxC $param $ps($param) $chn $prn $special_input_id 'measurementInterval']
+
+    incr prn
+    set param INTERVAL_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableMeasurementIntervalValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentAutoIntervalAOption($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  if { [info exists ps(EVENT_BLINDTIME_BASE)] == 1  } {
+    append html "[getHorizontalLine]"
+
+    append html "<tr>"
+      append html "<td>\${lblEventBlindTime}</td>"
+
+      append html "<td>"
+        set param EVENT_BLINDTIME_VALUE
+        incr prn
+        append html "<input type='text' id='separate_$special_input_id\_$prn' name='$param' value='$ps($param)' size=4 onblur=\"ProofAndSetValue(this.id, this.id, '0', '63', 1);\">"
+        append html "<span> x </span>"
+
+        set param EVENT_BLINDTIME_BASE
+        incr prn
+        append html "<select id='separate_$special_input_id\_$prn' name='$param'>"
+          # append html "<option value='1'>\${optionUnit1S}</option>"
+          append html "<option value='2'>\${optionUnit1M}</option>"
+          append html "<option value='3'>\${optionUnit1H}</option>"
+        append html "</select>"
+
+        append html "&nbsp;[getHelpIcon $param\_WSS 320 100]"
+
+      append html "</td>"
+      append html "<script type='text/javascript'> jQuery('\#separate_$special_input_id\_$prn').val('$ps($param)');</script>"
+    append html "</tr>"
+
+  }
+
+    set param COND_TX_THRESHOLD_HI
+    if { [info exists ps($param)] == 1 } {
+      incr prn
+      append html "<tr>"
+        append html "<td>\${lblCondThresholdHi_WSS}</td>"
+       append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getCondTXThresholdUnit $devType $chn]&nbsp;[getMinMaxValueDescr $param]&nbsp;[getHelpIcon $param\_WSS 320 100]</td>"
+      append html "</tr>"
+    }
+
+}
+
+proc getWaterPressureTransmitter {chn p descr} {
+  global dev_descr
+
+  upvar $p ps
+  upvar $descr psDescr
+  upvar prn prn
+  upvar special_input_id special_input_id
+
+  set specialID "[getSpecialID $special_input_id]"
+  set CHANNEL $special_input_id
+
+  set devType $dev_descr(TYPE)
+
+  set hlpBoxWidth 450
+  set hlpBoxHeight 160
+
+  set prn 0
+  set html ""
+
+  # puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/MASTER_LANG/HmIP-ParamHelp.js');</script>"
+
+  set param EVENT_DELAY_UNIT
+  if { [info exists ps($param)] == 1  } {
+    incr prn
+    append html "<tr>"
+    append html "<td>\${stringTableEventDelay}</td>"
+    append html [getComboBox $chn $prn "$specialID" "eventDelay"]
+    append html "</tr>"
+
+    append html [getTimeUnitComboBoxShortwoHour $param $ps($param) $chn $prn $special_input_id]
+
+    incr prn
+    set param EVENT_DELAY_VALUE
+    append html "<tr id=\"timeFactor_$chn\_$prn\" class=\"hidden\">"
+    append html "<td>\${stringTableEventDelayValue}</td>"
+
+    append html "<td>[getTextField $param $ps($param) $chn $prn]&nbsp;[getMinMaxValueDescr $param]</td>"
+
+    append html "</tr>"
+    append html "<tr id=\"space_$chn\_$prn\" class=\"hidden\"><td><br/></td></tr>"
+    append html "<script type=\"text/javascript\">setTimeout(function() {setCurrentDelayShortOptionPanelB($chn, [expr $prn - 1], '$specialID');}, 100)</script>"
+  }
+
+  set param CHANNEL_OPERATION_MODE
+  if { [info exists ps($param)] == 1 } {
+    incr prn
+    append html "<tr>"
+      append html "<td>\${lblTypeOfSensor}</td>"
+      array_clear options
+      set options(0) "\${optionNoSensor}"
+      set options(1) "\${optionPressureSensorGBCan}"
+      set options(2) "\${optionPressureSensorGBHW1}"
+      append html  "<td>[getOptionBox '$param' options $ps($param) $chn $prn]</td>"
+    append html "</tr>"
+  }
 }
 
 proc getNoParametersToSet {} {

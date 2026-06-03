@@ -124,6 +124,11 @@ function ::CreateWaterSwitch()
 
   object objState = cObj.DPByControl("WATER_SWITCH.STATE");
 
+  object objDurValue = cObj.DPByControl("WATER_SWITCH.DURATION_VALUE");
+  object objDurUnit = cObj.DPByControl("WATER_SWITCH.DURATION_UNIT");
+  object objBehaviour = cObj.DPByControl("WATER_SWITCH.OUTPUT_BEHAVIOUR");
+
+
   if( objState )
   {
     WriteLine("<td class='CLASS02521'>");
@@ -135,11 +140,90 @@ function ::CreateWaterSwitch()
     WriteLine("</td>");
     WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
 
-    WriteLine("<script type='text/javascript'>");
-      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", "#system.GetVar("iStatusOnly")#", '"#chnAddress#"', '"#chnLabel#"', '"#sInterface#"');");
-      Write("jQuery('#"#chnId#"Off').html(translateKey('btnWaterOff')).show();");
-      Write("jQuery('#"#chnId#"On').html(translateKey('btnWaterOn')).show();");
+    if (objBehaviour && objDurValue && objDurUnit) {
+      WriteLine("<td class='CLASS02521'>");
+        WriteLine("<div id='"#chnId#"OnCond' class='ControlBtnOff CLASS02522 j_translate'>${btnWaterOnCond}</div>");
+      WriteLine("</td>");
+      WriteLine("<td class='CLASS02523'></td><td class='CLASS02523'></td><td class='CLASS02523'></td>");
 
+
+      string showFlowControl = "hidden";
+      if (objState.Value() == 1) {
+        !showFlowControl = "";
+      }
+
+      WriteLine("<td id='"#chnId#"tdFlowRate' class="#showFlowControl#">");
+        WriteLine("<table class='ControlBtnInfo' style='min-width: 205px;'>");
+
+          WriteLine("<tr>");
+            WriteLine("<td>");
+              WriteLine("<div><table>");
+                WriteLine("<tr>");
+                  WriteLine("<td style='text-align:left;'>${stringTableDuration}</td>");
+
+                  WriteLine("<td>");
+                    WriteLine("<input id='"#chnId#"durationValue' type='text' size=4 value='0' onblur=checkVal(this,parseInt("#objDurValue.MetaData('MAX')#"));>");
+                      WriteLine(" x ");
+                    WriteLine("<select id='"#chnId#"durationUnit'>");
+                    !  WriteLine("<option value='3'>${optionUnit10MS}</option>");
+                      WriteLine("<option value='0'>${optionUnitS}</option>");
+                      WriteLine("<option value='1'>${optionUnitM}</option>");
+                      WriteLine("<option value='2'>${optionUnitH}</option>");
+                    WriteLine("</select>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+                WriteLine("<tr><td></td><td><div style='font-size:0.8rem ! important; text-align:left;'>("#objDurValue.MetaData('MIN')#" - "#objDurValue.MetaData('MAX')#")</div></td></tr>")
+
+                WriteLine("<tr>");
+                  WriteLine("<td style='text-align:left;'>${powerMeasurementA}</td>");
+                  WriteLine("<td>");
+                    WriteLine("<input id='"#chnId#"valueLiters' type='text' size=4 value='0' onblur=checkVal(this,31);>");
+
+                    WriteLine(" x ");
+
+                     WriteLine("<select id='"#chnId#"unitLiters'>");
+                      WriteLine("<option value='0'>${optionUnit1Ltr}</option>");
+                      WriteLine("<option value='64'>${optionUnit10Ltr}</option>");
+                      WriteLine("<option value='128'>${optionUnit100Ltr}</option>");
+                      WriteLine("<option value='192'>${optionUnit1000Ltr}</option>");
+                    WriteLine("</select>");
+
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+                WriteLine("<tr><td></td><td><div style='font-size:0.8rem ! important; text-align:left;'>(0 - 31)</div></td></tr>")
+
+                WriteLine("<tr>");
+                  WriteLine("<td></td>");
+                  WriteLine("<td>");
+                    WriteLine("<div id='"#chnId#"Set' class='ControlBtnOff CLASS02550' style='width:100%;background-color:#aaaaaa;'>${btnSet}</div>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+                WriteLine("<tr><td colspan='2'><hr></td></tr>");
+                WriteLine("<tr>");
+                  WriteLine("<td colspan='2'>");
+                    WriteLine("<div id='"#chnId#"Help' class='ControlBtnOff' style='width:100%;background-color:#aaaaaa;' onclick='showParamHelp(translateKey(\"helpConditionWaterFlow\"), 450, 100);'>${genericBtnTxtHelp}</div>");
+                  WriteLine("</td>");
+                WriteLine("</tr>");
+
+              WriteLine("</table></div>");
+            WriteLine("</td>");
+          WriteLine("</tr>");
+
+        WriteLine("</table>");
+      WriteLine("</td>");
+    }
+
+    WriteLine("<script type='text/javascript'>");
+      WriteLine("checkVal = function(elm, maxVal) {");
+        WriteLine("var elem = jQuery(elm),");
+        WriteLine("val = parseInt(elem.val());");
+
+        WriteLine("if ((isNaN(val)) || (val < 0)) {elem.val(0);}");
+        WriteLine("if (val > maxVal) {elem.val(maxVal);}");
+
+      WriteLine("}");
+
+      WriteLine("ibs"#cObj.ID()#" = new iseButtonsSwitch("#cObj.ID()#", "#objState.Value()#", "#objState.ID()#", "#system.GetVar("iStatusOnly")#", '"#chnAddress#"', '"#chnLabel#"', '"#sInterface#"');");
     WriteLine("</script>");
   }
   return;

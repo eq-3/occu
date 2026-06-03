@@ -5,6 +5,7 @@ source [file join $env(DOCUMENT_ROOT) config/easymodes/EnterFreeValue.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/options.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmip_helper.tcl]
 source [file join $env(DOCUMENT_ROOT) config/easymodes/etc/uiElements.tcl]
+source [file join $env(DOCUMENT_ROOT) config/easymodes/WATER_SWITCH_VIRTUAL_RECEIVER/getOutputBehaviour.tcl]
 
 set PROFILES_MAP(0)  "\${expert}"
 set PROFILES_MAP(1)  "\${switch_toggle}"
@@ -39,6 +40,7 @@ set PROFILE_1(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_1(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_1(SHORT_ON_TIME_MODE) 0
+set PROFILE_1(SHORT_OUTPUT_BEHAVIOUR)        {0 range 0 - 255}
 set PROFILE_1(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_1(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit eingeschaltet. Ist eine Einschaltverz&ouml;gerungszeit eingestellt, so wird der Schalter erst nach Ablauf dieser Zeit eingeschaltet.<br /> "
 set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
@@ -66,6 +68,7 @@ set PROFILE_2(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_2(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_2(SHORT_ON_TIME_MODE) 0
+set PROFILE_2(SHORT_OUTPUT_BEHAVIOUR)        {0 range 0 - 255}
 set PROFILE_2(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_2(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet.<br />"
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)
@@ -92,6 +95,7 @@ set PROFILE_3(SHORT_ONDELAY_TIME_FACTOR) {0 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_BASE) {7 range 0 - 7}
 set PROFILE_3(SHORT_ON_TIME_FACTOR) {31 range 0 - 31}
 set PROFILE_3(SHORT_ON_TIME_MODE) 0
+set PROFILE_3(SHORT_OUTPUT_BEHAVIOUR)        {0 range 0 - 255}
 set PROFILE_3(SHORT_PROFILE_ACTION_TYPE) 1
 set PROFILE_3(UI_DESCRIPTION)  "Beim Ausl&ouml;sen des Sensors wird der Schalter mindestens f&uuml;r die eingestellte Zeit ohne Verz&ouml;gerung eingeschaltet.<br />"
 set PROFILE_3(UI_TEMPLATE)    $PROFILE_3(UI_DESCRIPTION)
@@ -156,6 +160,18 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   
   # set  min_interval 4
 
+  set hasOutputBehaviour false
+  set typeReceiver $dev_descr_receiver(PARENT_TYPE)
+
+  set Fw [getReceiverFw]
+  set fwMajor [lindex $Fw 0]
+  set fwMinor [lindex $Fw 1]
+  # set fwPatch [lindex $Fw 2]
+
+  if {(($typeReceiver  == "HmIP-WSM") || ($typeReceiver  == "ELV-SH-WSM")) && (($fwMajor >= 1) && ($fwMinor >= 4))} {
+    set hasOutputBehaviour true
+  }
+
   foreach pro [array names PROFILES_MAP] {
     upvar PROFILE_$pro PROFILE_$pro
   }
@@ -185,6 +201,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
 #  die Texte der Platzhalter einlesen
   puts "<script type=\"text/javascript\">getLangInfo('$dev_descr_sender(TYPE)', '$dev_descr_receiver(TYPE)');</script>"
   puts "<script type=\"text/javascript\">getLangInfo_Special('HmIP_DEVICES.txt');</script>"
+  puts "<script type=\"text/javascript\">load_JSFunc('/config/easymodes/WATER_SWITCH_VIRTUAL_RECEIVER/outputBehaviour.js');</script>"
 
   set prn 0  
   append HTML_PARAMS(separate_$prn) "<div id=\"param_$prn\"><textarea id=\"profile_$prn\" style=\"display:none\">"
@@ -209,6 +226,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
+  if {$hasOutputBehaviour} {
+    # OUTPUT_BEHAVIOUR
+    incr pref
+    append HTML_PARAMS(separate_$prn) "[getOutputBehaviourElement $ps(SHORT_OUTPUT_BEHAVIOUR) PROFILE_$prn ${special_input_id}]"
+  }
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
   #2  Schalter EIN
@@ -229,6 +252,12 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   # ON_TIME
   append HTML_PARAMS(separate_$prn) "[getTimeSelector ON_TIME_FACTOR_DESCR ps PROFILE_$prn timeOnOff $prn $special_input_id SHORT_ON_TIME TIMEBASE_LONG]"
 
+  if {$hasOutputBehaviour} {
+    # OUTPUT_BEHAVIOUR
+    incr pref
+    append HTML_PARAMS(separate_$prn) "[getOutputBehaviourElement $ps(SHORT_OUTPUT_BEHAVIOUR) PROFILE_$prn ${special_input_id}]"
+  }
+
   append HTML_PARAMS(separate_$prn) "</table></textarea></div>"
 
   #3  Schalter AUS
@@ -243,7 +272,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   append HTML_PARAMS(separate_$prn) [subset2combobox {SUBSET_1 SUBSET_2 SUBSET_3 SUBSET_4} subset_$prn\_$pref separate_${special_input_id}_$prn\_$pref PROFILE_$prn ]
   append HTML_PARAMS(separate_$prn) "</td></tr>"
 
-  # AFFDELAY
+  # OFFDELAY
   append HTML_PARAMS(separate_$prn) "[getTimeSelector OFFDELAY_TIME_FACTOR_DESCR ps PROFILE_$prn delay $prn $special_input_id SHORT_OFFDELAY_TIME TIMEBASE_LONG]"
 
   # OFF_TIME

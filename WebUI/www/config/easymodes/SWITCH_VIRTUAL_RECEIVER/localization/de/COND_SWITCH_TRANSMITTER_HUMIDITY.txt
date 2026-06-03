@@ -8,3 +8,5 @@
 "switchPoint" : "Schalten bei",
 "subset_1": "%DCberschreiten der oberen Feuchtigkeitsschwelle",
 "subset_2": "Unterschreiten der unteren Feuchtigkeitsschwelle",
+"subset_3": "Obere Feuchtigkeitsschwelle %FCberschritten ein / untere -schwelle unterschritten aus",
+"subset_4": "Obere Feuchtigkeitsschwelle %FCberschritten aus / untere -schwelle unterschritten ein",

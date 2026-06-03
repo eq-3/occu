@@ -8,3 +8,5 @@
 "switchPoint" : "Schalten bei",
 "subset_1": "%DCberschreiten der oberen Helligkeitsschwelle",
 "subset_2": "Unterschreiten der unteren Helligkeitsschwelle",
+"subset_3": "Obere Helligkeitsschwelle %FCberschritten ein / untere -schwelle unterschritten aus",
+"subset_4": "Obere Helligkeitsschwelle %FCberschritten aus / untere -schwelle unterschritten ein",

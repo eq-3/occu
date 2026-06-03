@@ -8,3 +8,5 @@
 "switchPoint" : "Schalten bei",
 "subset_1": "%DCberschreiten des oberen Wertes",
 "subset_2": "Unterschreiten des unteren Wertes",
+"subset_3": "Oberen Wert %FCberschritten ein / unteren Wert unterschritten aus",
+"subset_4": "Oberen Wert %FCberschritten aus / untere Wert unterschritten ein",

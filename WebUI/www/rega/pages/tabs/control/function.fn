@@ -102,6 +102,20 @@ function ::ShowExtDesc() {
     }
   }
 
+  if (chn.HssType() == "SHUTTER_TRANSMITTER") {
+    if ((chn.Label().Substr(0,9) == "HmIP-M-TD")) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TUBULAR_MOTOR}</span>");
+      showExtDesc = true;
+    }
+  }
+
+  if (chn.HssType() == "SHUTTER_VIRTUAL_RECEIVER") {
+    if ((chn.Label().Substr(0,9) == "HmIP-M-TD")) {
+      Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TUBULAR_MOTOR}</span>");
+      showExtDesc = true;
+    }
+  }
+
   if ((chn.HssType() == "ROTARY_CONTROL_TRANSCEIVER") && (chn.Label() == "HmIP-WRCR") ) {
     if (chNumber == 2) {
       Write(chn.Name()#"<br/><br><span name='hssType' class='hidden'>${chType_"#chn.HssType()#"_TR}</span>");

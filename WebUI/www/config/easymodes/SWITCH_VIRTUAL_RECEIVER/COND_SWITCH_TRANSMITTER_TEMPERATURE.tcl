@@ -16,8 +16,8 @@ set PROFILE_0(UI_HINT)  0
 set PROFILE_0(UI_DESCRIPTION)    "Expertenprofil"
 set PROFILE_0(UI_TEMPLATE)      "Expertenprofil"
 
-set PROFILE_1(SHORT_COND_VALUE_HI)          150
-set PROFILE_1(SHORT_COND_VALUE_LO)           50
+set PROFILE_1(SHORT_COND_VALUE_HI)            {150 range 0 - 255}
+set PROFILE_1(SHORT_COND_VALUE_LO)            {50 range 0 - 255}
 set PROFILE_1(SHORT_CT_OFF)                   {0 2}
 set PROFILE_1(SHORT_CT_OFFDELAY)              {0 2}
 set PROFILE_1(SHORT_CT_ON)                    {0 2}
@@ -43,8 +43,8 @@ set PROFILE_1(UI_TEMPLATE)    $PROFILE_1(UI_DESCRIPTION)
 set PROFILE_1(UI_HINT)  1
 
 
-set PROFILE_2(SHORT_COND_VALUE_HI)          150
-set PROFILE_2(SHORT_COND_VALUE_LO)           50
+set PROFILE_2(SHORT_COND_VALUE_HI)            {150 range 0 - 255}
+set PROFILE_2(SHORT_COND_VALUE_LO)            {50 range 0 - 255}
 set PROFILE_2(SHORT_CT_OFF)                   {0 2}
 set PROFILE_2(SHORT_CT_OFFDELAY)              {0 2}
 set PROFILE_2(SHORT_CT_ON)                    {0 2}
@@ -69,8 +69,8 @@ set PROFILE_2(UI_DESCRIPTION)  "Mit einem kurzen oder langen Tastendruck wird de
 set PROFILE_2(UI_TEMPLATE)    $PROFILE_2(UI_DESCRIPTION)  
 set PROFILE_2(UI_HINT)  2
 
-set PROFILE_3(SHORT_COND_VALUE_HI)          150
-set PROFILE_3(SHORT_COND_VALUE_LO)           50
+set PROFILE_3(SHORT_COND_VALUE_HI)            {150 range 0 - 255}
+set PROFILE_3(SHORT_COND_VALUE_LO)            {50 range 0 - 255}
 set PROFILE_3(SHORT_CT_OFF)                   {0 2}
 set PROFILE_3(SHORT_CT_OFFDELAY)              {0 2}
 set PROFILE_3(SHORT_CT_ON)                    {0 2}

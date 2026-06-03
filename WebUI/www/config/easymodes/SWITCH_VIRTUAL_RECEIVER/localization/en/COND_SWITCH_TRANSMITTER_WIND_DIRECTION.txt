@@ -9,3 +9,5 @@
 
 "subset_1": "Reaching the upper value",
 "subset_2": "Reaching the lower value",
+"subset_3": "Reaching the upper value threshold on - Value falls below lower threshold off",
+"subset_4": "Reaching the upper value threshold off - Value falls below lower threshold on",

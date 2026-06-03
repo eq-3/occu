@@ -12,3 +12,10 @@
 
 "condThresholdLo" : "Unterer Grenzwert",
 "condThresholdHi" : "Oberer Grenzwert",
+
+"wsmLinkOutputBehaviour" : "Durchfluss",
+
+"optionUnit1Ltr"    : "  1 Liter",
+"optionUnit10Ltr"   : " 10 Liter",
+"optionUnit100Ltr"  : " 100 Liter",
+"optionUnit1000Ltr" : "1000 Liter",

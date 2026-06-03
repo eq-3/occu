@@ -8,3 +8,5 @@
 "switchPoint" : "Schalten bei",
 "subset_1": "%DCberschreiten der oberen Feinstaubkonzentration",
 "subset_2": "Unterschreiten der unteren Feinstaubkonzentration",
+"subset_3": "Obere Feinstaubkonzentration %FCberschritten ein / untere -schwelle unterschritten aus",
+"subset_4": "Obere Feinstaubkonzentration %FCberschritten aus / untere -schwelle unterschritten ein",

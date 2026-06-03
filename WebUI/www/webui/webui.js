@@ -516,6 +516,12 @@ DEV_PATHS["HmIP-WGC"] = new Object();
 DEV_PATHS["HmIP-WGC"]["50"] = "/config/img/devices/50/144_hmip-wgc_thumb.png";
 DEV_PATHS["HmIP-WGC"]["250"] = "/config/img/devices/250/144_hmip-wgc.png";
 DEV_HIGHLIGHT["HmIP-WGC"] = new Object();
+DEV_LIST.push('RM-110-45/15');
+DEV_DESCRIPTION["RM-110-45/15"] = "RM-110-45";
+DEV_PATHS["RM-110-45/15"] = new Object();
+DEV_PATHS["RM-110-45/15"]["50"] = "/config/img/devices/50/258_hmip-m-td15_thumb.png";
+DEV_PATHS["RM-110-45/15"]["250"] = "/config/img/devices/250/258_hmip-m-td15.png";
+DEV_HIGHLIGHT["RM-110-45/15"] = new Object();
 DEV_LIST.push('HmIP-FDT');
 DEV_DESCRIPTION["HmIP-FDT"] = "FDT";
 DEV_PATHS["HmIP-FDT"] = new Object();
@@ -601,6 +607,12 @@ DEV_HIGHLIGHT["HM-RC-Key3-B"]["1"] = [4, 0.252, 0.2, 0.16, 0.18];
 DEV_HIGHLIGHT["HM-RC-Key3-B"]["2"] = [4, 0.492, 0.2, 0.16, 0.18];
 DEV_HIGHLIGHT["HM-RC-Key3-B"]["3"] = [4, 0.34, 0.484, 0.228, 0.252];
 DEV_HIGHLIGHT["HM-RC-Key3-B"]["1+2"] = [5, '1', '2'];
+DEV_LIST.push('HmIPW-WGS-A');
+DEV_DESCRIPTION["HmIPW-WGS-A"] = "HmIPW-WGS";
+DEV_PATHS["HmIPW-WGS-A"] = new Object();
+DEV_PATHS["HmIPW-WGS-A"]["50"] = "/config/img/devices/50/239_hmip-wgs-f_thumb.png";
+DEV_PATHS["HmIPW-WGS-A"]["250"] = "/config/img/devices/250/239_hmip-wgs-f.png";
+DEV_HIGHLIGHT["HmIPW-WGS-A"] = new Object();
 DEV_LIST.push('HmIP-ESI');
 DEV_DESCRIPTION["HmIP-ESI"] = "HmIP-ESI";
 DEV_PATHS["HmIP-ESI"] = new Object();
@@ -676,6 +688,12 @@ DEV_PATHS["HmIPW-DRI16"] = new Object();
 DEV_PATHS["HmIPW-DRI16"]["50"] = "/config/img/devices/50/164_hmipw-dri16_thumb.png";
 DEV_PATHS["HmIPW-DRI16"]["250"] = "/config/img/devices/250/164_hmipw-dri16.png";
 DEV_HIGHLIGHT["HmIPW-DRI16"] = new Object();
+DEV_LIST.push('HmIP-WSS');
+DEV_DESCRIPTION["HmIP-WSS"] = "HmIP-WSS";
+DEV_PATHS["HmIP-WSS"] = new Object();
+DEV_PATHS["HmIP-WSS"]["50"] = "/config/img/devices/50/260_hmip-wss_thump.png";
+DEV_PATHS["HmIP-WSS"]["250"] = "/config/img/devices/250/260_hmip-wss.png";
+DEV_HIGHLIGHT["HmIP-WSS"] = new Object();
 DEV_LIST.push('263 131');
 DEV_DESCRIPTION["263 131"] = "263_131";
 DEV_PATHS["263 131"] = new Object();
@@ -917,6 +935,12 @@ DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"] = new Object();
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"]["50"] = "/config/img/devices/50/93_hm-es-pmsw1-pl_thumb.png";
 DEV_PATHS["HM-LC-Sw1-Pl-DN-R1"]["250"] = "/config/img/devices/250/93_hm-es-pmsw1-pl.png";
 DEV_HIGHLIGHT["HM-LC-Sw1-Pl-DN-R1"] = new Object();
+DEV_LIST.push('HmIPW-WGTC');
+DEV_DESCRIPTION["HmIPW-WGTC"] = "HmIPW-WGTC";
+DEV_PATHS["HmIPW-WGTC"] = new Object();
+DEV_PATHS["HmIPW-WGTC"]["50"] = "/config/img/devices/50/240_hmip-wgtc-f_thumb.png";
+DEV_PATHS["HmIPW-WGTC"]["250"] = "/config/img/devices/250/240_hmip-wgtc-f.png";
+DEV_HIGHLIGHT["HmIPW-WGTC"] = new Object();
 DEV_LIST.push('HmIP-PDT-CH');
 DEV_DESCRIPTION["HmIP-PDT-CH"] = "PDT-CH";
 DEV_PATHS["HmIP-PDT-CH"] = new Object();
@@ -953,6 +977,12 @@ DEV_PATHS["ALPHA-IP-RBGa"] = new Object();
 DEV_PATHS["ALPHA-IP-RBGa"]["50"] = "/config/img/devices/50/141_alpha-ip-rgba_thumb.png";
 DEV_PATHS["ALPHA-IP-RBGa"]["250"] = "/config/img/devices/250/141_alpha-ip-rgba.png";
 DEV_HIGHLIGHT["ALPHA-IP-RBGa"] = new Object();
+DEV_LIST.push('HmIP-ESI-IND');
+DEV_DESCRIPTION["HmIP-ESI-IND"] = "HmIP-ESI";
+DEV_PATHS["HmIP-ESI-IND"] = new Object();
+DEV_PATHS["HmIP-ESI-IND"]["50"] = "/config/img/devices/50/226_hmip-esi_thumb.png";
+DEV_PATHS["HmIP-ESI-IND"]["250"] = "/config/img/devices/250/226_hmip-esi.png";
+DEV_HIGHLIGHT["HmIP-ESI-IND"] = new Object();
 DEV_LIST.push('HmIP-FDC');
 DEV_DESCRIPTION["HmIP-FDC"] = "HmIP-FLC";
 DEV_PATHS["HmIP-FDC"] = new Object();
@@ -1191,6 +1221,12 @@ DEV_PATHS["HmIP-WRC2-A"]["250"] = "/config/img/devices/250/112_hmip-wrc2.png";
 DEV_HIGHLIGHT["HmIP-WRC2-A"] = new Object();
 DEV_HIGHLIGHT["HmIP-WRC2-A"]["2"] = [4, 0.540, 0.366, 0.04, 0.044];
 DEV_HIGHLIGHT["HmIP-WRC2-A"]["1"] = [4, 0.540, 0.622, 0.04, 0.044];
+DEV_LIST.push('HmIPW-WGTC-A');
+DEV_DESCRIPTION["HmIPW-WGTC-A"] = "HmIPW-WGTC";
+DEV_PATHS["HmIPW-WGTC-A"] = new Object();
+DEV_PATHS["HmIPW-WGTC-A"]["50"] = "/config/img/devices/50/240_hmip-wgtc-f_thumb.png";
+DEV_PATHS["HmIPW-WGTC-A"]["250"] = "/config/img/devices/250/240_hmip-wgtc-f.png";
+DEV_HIGHLIGHT["HmIPW-WGTC-A"] = new Object();
 DEV_LIST.push('HmIP-WRC6-230');
 DEV_DESCRIPTION["HmIP-WRC6-230"] = "WRC6-230";
 DEV_PATHS["HmIP-WRC6-230"] = new Object();
@@ -2562,6 +2598,12 @@ DEV_PATHS["VIR-LG-GROUP"] = new Object();
 DEV_PATHS["VIR-LG-GROUP"]["50"] = "/config/img/devices/50/coupling/hm-coupling-group.png";
 DEV_PATHS["VIR-LG-GROUP"]["250"] = "/config/img/devices/250/coupling/hm-coupling-group.png";
 DEV_HIGHLIGHT["VIR-LG-GROUP"] = new Object();
+DEV_LIST.push('HmIPW-WGT');
+DEV_DESCRIPTION["HmIPW-WGT"] = "HmIPW-WGT";
+DEV_PATHS["HmIPW-WGT"] = new Object();
+DEV_PATHS["HmIPW-WGT"]["50"] = "/config/img/devices/50/241_hmip-wgt-f_thumb.png";
+DEV_PATHS["HmIPW-WGT"]["250"] = "/config/img/devices/250/241_hmip-wgt-f.png";
+DEV_HIGHLIGHT["HmIPW-WGT"] = new Object();
 DEV_LIST.push('HmIP-WRC2');
 DEV_DESCRIPTION["HmIP-WRC2"] = "HmIP-WRC2";
 DEV_PATHS["HmIP-WRC2"] = new Object();
@@ -2745,6 +2787,12 @@ DEV_PATHS["HmIP-SWDO-A"] = new Object();
 DEV_PATHS["HmIP-SWDO-A"]["50"] = "/config/img/devices/50/118_hmip-swdo_thumb.png";
 DEV_PATHS["HmIP-SWDO-A"]["250"] = "/config/img/devices/250/118_hmip-swdo.png";
 DEV_HIGHLIGHT["HmIP-SWDO-A"] = new Object();
+DEV_LIST.push('HmIPW-WGS');
+DEV_DESCRIPTION["HmIPW-WGS"] = "HmIPW-WGS";
+DEV_PATHS["HmIPW-WGS"] = new Object();
+DEV_PATHS["HmIPW-WGS"]["50"] = "/config/img/devices/50/239_hmip-wgs-f_thumb.png";
+DEV_PATHS["HmIPW-WGS"]["250"] = "/config/img/devices/250/239_hmip-wgs-f.png";
+DEV_HIGHLIGHT["HmIPW-WGS"] = new Object();
 DEV_LIST.push('HmIP-MIOB');
 DEV_DESCRIPTION["HmIP-MIOB"] = "MIOB";
 DEV_PATHS["HmIP-MIOB"] = new Object();
@@ -3393,6 +3441,12 @@ DEV_PATHS["HmIP-PSM-A"] = new Object();
 DEV_PATHS["HmIP-PSM-A"]["50"] = "/config/img/devices/50/113_hmip-psm_thumb.png";
 DEV_PATHS["HmIP-PSM-A"]["250"] = "/config/img/devices/250/113_hmip-psm.png";
 DEV_HIGHLIGHT["HmIP-PSM-A"] = new Object();
+DEV_LIST.push('HmIP-WSS-GB');
+DEV_DESCRIPTION["HmIP-WSS-GB"] = "HmIP-WSS";
+DEV_PATHS["HmIP-WSS-GB"] = new Object();
+DEV_PATHS["HmIP-WSS-GB"]["50"] = "/config/img/devices/50/260_hmip-wss_thump.png";
+DEV_PATHS["HmIP-WSS-GB"]["250"] = "/config/img/devices/250/260_hmip-wss.png";
+DEV_HIGHLIGHT["HmIP-WSS-GB"] = new Object();
 DEV_LIST.push('HM-Sec-Win');
 DEV_DESCRIPTION["HM-Sec-Win"] = "HM-Sec-Win";
 DEV_PATHS["HM-Sec-Win"] = new Object();
@@ -4120,6 +4174,12 @@ DEV_PATHS["HM-Sen-Wa-Od"] = new Object();
 DEV_PATHS["HM-Sen-Wa-Od"]["50"] = "/config/img/devices/50/82_hm-sen-wa-od_thumb.png";
 DEV_PATHS["HM-Sen-Wa-Od"]["250"] = "/config/img/devices/250/82_hm-sen-wa-od.png";
 DEV_HIGHLIGHT["HM-Sen-Wa-Od"] = new Object();
+DEV_LIST.push('HmIPW-WGT-A');
+DEV_DESCRIPTION["HmIPW-WGT-A"] = "HmIPW-WGT";
+DEV_PATHS["HmIPW-WGT-A"] = new Object();
+DEV_PATHS["HmIPW-WGT-A"]["50"] = "/config/img/devices/50/241_hmip-wgt-f_thumb.png";
+DEV_PATHS["HmIPW-WGT-A"]["250"] = "/config/img/devices/250/241_hmip-wgt-f.png";
+DEV_HIGHLIGHT["HmIPW-WGT-A"] = new Object();
 DEV_LIST.push('HM-LC-RGBW-WM');
 DEV_DESCRIPTION["HM-LC-RGBW-WM"] = "HM-LC-RGBW-WM";
 DEV_PATHS["HM-LC-RGBW-WM"] = new Object();
@@ -5200,6 +5260,8 @@ elvST['BOOST_MODE=FALSE'] = '${stringTableBoostModeFalse}';
 elvST['BOOST_MODE=TRUE'] = '${stringTableBoostModeTrue}';
 elvST['BOOST_STATE'] = '${stringTableBoostState}';
 elvST['BOOST_TIME'] = '${stringTableBoostTime}';
+elvST['BOOTED=FALSE'] = '${stringTableBootedFalse}';
+elvST['BOOTED=TRUE'] = '${stringTableBootedTrue}';
 elvST['BRIGHTNESS'] = '${stringTableBrightness}';
 elvST['BRIGHTNESS_FILTER'] = '${stringTableBrightnessFilter}';
 elvST['BRIGHTNESS_TRANSMITTER|FILTER_SIZE'] = '${stringTableBrightnessFilterSize}';
@@ -5739,6 +5801,8 @@ elvST['ERROR_JAMMED=TRUE'] = '${stringTableErrorJammed}: ${lblYes}';
 elvST['ERROR_LOAD_TOO_LOW'] = '${stringTableLoadTooLow}';
 elvST['ERROR_LOAD_TOO_LOW=FALSE'] = '${stringTableLoadTooLow}: ${lblNo}';
 elvST['ERROR_LOAD_TOO_LOW=TRUE'] = '${stringTableLoadTooLow}: ${lblYes}';
+elvST['ERROR_MAX_WATER_FLOW'] = '${stringTableErrorMaxWaterFlow}';
+elvST['ERROR_MAX_WATER_FLOW_DURATION'] = '${stringTableErrorMaxWaterFlowDuration}';
 elvST['ERROR_MOUNTING_MODULE=FALSE'] = '${stringTableErrorMountingModuleFalse}';
 elvST['ERROR_MOUNTING_MODULE=TRUE'] = '${stringTableErrorMountingModuleTrue}';
 elvST['ERROR_NON_FLAT_POSITIONING'] = '${stringTableErrorNonFlatPositioning}';
@@ -6022,6 +6086,9 @@ elvST['LED_STATUS=OFF'] = '${stringTableLEDStatusOff}';
 elvST['LED_STATUS=ORANGE'] = '${stringTableLEDStatusOrange}';
 elvST['LED_STATUS=RED'] = '${stringTableLEDStatusRed}';
 elvST['LEVEL'] = '${stringTableLevel}';
+elvST['LEVEL_COMMAND_TRANSMITTER_CO2'] = '${chType_LEVEL_COMMAND_TRANSMITTER_CO2}';
+elvST['LEVEL_COMMAND_TRANSMITTER_HUMIDITY'] = '${chType_LEVEL_COMMAND_TRANSMITTER_HUMIDITY}';
+elvST['LEVEL_COMMAND_TRANSMITTER_TEMPERATURE'] = '${chType_LEVEL_COMMAND_TRANSMITTER_TEMPERATURE}';
 elvST['LEVEL_REAL'] = '${stringTableLevelReal}';
 elvST['LEVEL_STATUS=ERROR'] = '${lblValue} ${stringTableLevelStatus}: ${lblError}';
 elvST['LEVEL_STATUS=4'] = '${lblValue} ${stringTableLevelStatus}: ${lblError}';
@@ -6241,6 +6308,10 @@ elvST['MAINTENANCE|USER_AUTHORIZATION_08'] = '${stringTableUserAuthorization08}'
 elvST['MAINTENANCE|USER_AUTHORIZATION_08=FALSE'] = '${stringTableUserAuthorization08false}';
 elvST['MAINTENANCE|USER_AUTHORIZATION_08=TRUE'] = '${stringTableUserAuthorization08true}';
 elvST['MANU_MODE'] = '${stringTableClimateControlRTTransceiverManuMode}';
+elvST['MANUAL_SELF_CALIBRATION_BOTTOM_POS_SET=FALSE'] = '${stringTableManualSelfCalibrationBottomPosSetFalse}';
+elvST['MANUAL_SELF_CALIBRATION_BOTTOM_POS_SET=TRUE'] = '${stringTableManualSelfCalibrationBottomPosSetTrue}';
+elvST['MANUAL_SELF_CALIBRATION_TOP_POS_SET=FALSE'] = '${stringTableManualSelfCalibrationTopPosSetFalse}';
+elvST['MANUAL_SELF_CALIBRATION_TOP_POS_SET=TRUE'] = '${stringTableManualSelfCalibrationTopPosSetTrue}';
 elvST['MEASURED_VALUE'] = '${lblReading}';
 elvST['MEASURED_VALUE_STATUS=ERROR'] = '${lblReading}: ${lblError}';
 elvST['MEASURED_VALUE_STATUS=NORMAL'] = '${lblReading}: ${lblNormal}';
@@ -11393,7 +11464,7 @@ Device = Class.create({
       this.isOperateGroupOnly = (data["operateGroupOnly"] == "true") ? true : false;
       this.deviceInputCheck = false;
 
-      if (this.typeName.indexOf("HmIP-WGS") != -1) {
+      if (this.typeName.indexOf("-WGS") != -1) {
         this.setPrevPic("HmIP-WGS");
       }
       this.thumbnailHTML = deviceType.getThumbnailHTML();
@@ -13120,7 +13191,7 @@ ChannelChooser = Singleton.create({
       && (channelTypeName != "hmip-pdt")
       && (channelTypeName != "hmip-pdt-uk")
       && (channelTypeName != "hmip-pcbs")
-      && ((channelTypeName != "hmip-wgs") && (channelTypeName != "hmip-wgs-a")) // the wgs gets a special treatment further down
+      && ((channelTypeName != "hmip-wgs") && (channelTypeName != "hmip-wgs-a") && (channelTypeName != "hmipw-wgs") && (channelTypeName != "hmip-wgs-a") && (channelTypeName != "hmipw-wgs-a")) // the wgs gets a special treatment further down
     ) {
       arChannels.push(channel);
     }
@@ -13271,7 +13342,7 @@ ChannelChooser = Singleton.create({
     }
 
     // Depending on the selected layout mode (1, 2 or 4 buttons) we have to filter some channels
-    if ((channel.channelType == "KEY_TRANSCEIVER") && ((channelTypeName == "hmip-wgs") || (channelTypeName == "hmip-wgs-a"))) {
+    if ((channel.channelType == "KEY_TRANSCEIVER") && ((channelTypeName == "hmip-wgs") || (channelTypeName == "hmip-wgs-a") || channelTypeName == "hmipw-wgs") || (channelTypeName == "hmipw-wgs-a")) {
       var curDevice, chnDescription, mode;
       curDevice = channel.device.address;
       chnDescription = homematic("Interface.getParamset", {
@@ -13302,6 +13373,13 @@ ChannelChooser = Singleton.create({
     oMaintChannel, deviceMode, endOfScreens = false;
 
     if (channel.isVisible) {
+
+      // Channel 1 of the hmip-esi-ind has only 1 parameter (SELF_CALIBRATION) for the use in a program condition but it's not in use
+      // Therefore we hide the channel
+      if (channelTypeName == "hmip-esi-ind") {
+        return arChannels;
+      }
+
       if (channelTypeName == "hmip-wkp") {
         if ((channel.channelType == "MAINTENANCE") || ((channel.channelType == "ACCESS_TRANSCEIVER") && (channel.index % 2 != 0))) {
           arChannels.push(channel);
@@ -13425,12 +13503,15 @@ ChannelChooser = Singleton.create({
       } else {
         if (
           channelTypeName != "hmip-esi" &&
-          ((channel.channelType != "SHUTTER_TRANSMITTER") || ((channel.channelType == "SHUTTER_TRANSMITTER") && (channelTypeName != "hmip-m-td15")))
+          ((channel.channelType != "SHUTTER_TRANSMITTER") || ((channelTypeName != "hmip-m-td15") && (channelTypeName != "rm-110-45/15")))
         ) {
          arChannels.push(channel);
         }
       }
     }
+
+
+
     return arChannels;
   },
 
@@ -20687,9 +20768,10 @@ DimmerCombinedParamDialog = Class.create({
 
     this.isUniversalActor = ((this.deviceType == "HmIP-WUA") || (this.deviceType == "ELV-SH-WUA")) ? true : false;
     this.isServoController = ((this.deviceType == "HmIP-WSC") || (this.deviceType == "ELV-SH-WSC")) ? true : false;
-    this.isWGS = ((this.deviceType == "HmIP-WGS") || (this.deviceType == "HmIP-WGS-A")) ? true : false;
+    this.isWGS = ((this.deviceType == "HmIP-WGS") || (this.deviceType == "HmIP-WGS-A") || (this.deviceType == "HmIPW-WGS") || (this.deviceType == "HmIPW-WGS-A")) ? true : false;
+    this.isWiredWGT = ((this.deviceType == "HmIPW-WGT") || (this.deviceType == "HmIPW-WGT-A") || (this.deviceType == "HmIPW-WGTC") || (this.deviceType == "HmIPW-WGTC-A") ) ? true : false;
     this.arNoOntimeAvailable = ["HmIP-MP3P", "HmIP-BSL", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A"];
-    this.arNoRamptimeAvailable = ["HmIP-WGS", "HmIP-WGS-A"];
+    this.arNoRamptimeAvailable = ["HmIP-WGS", "HmIP-WGS-A", "HmIPW-WGS", "HmIPW-WGS-A", "HmIPW-WGT", "HmIPW-WGT-A", "HmIPW-WGTC", "HmIPW-WGTC-A"];
     this.showRampTimeOffElm = ["HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A"];
     this.showColorElms = ["HmIP-MP3P", "HmIP-BSL", "HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A"];
     this.showBehaviourElms = ["HmIPW-WRC6", "HmIPW-WRC6-A", "HmIP-WRC6-230", "HmIP-WRC6-230-A"];
@@ -20755,7 +20837,7 @@ DimmerCombinedParamDialog = Class.create({
     this.behaviourElmVisible = false;
     this.setDialogElements();
 
-    if (! this.isWGS) {
+    if ((! this.isWGS) && (! this.isWiredWGT)) {
       this.initDialog();
     } else {
       this.initDialog_WGS();
@@ -21256,10 +21338,10 @@ DimmerCombinedParamDialog = Class.create({
           if (this.isServoController) {
             result = "L=" + level + ",RT=" + _rampTimeValue; // ON_TIME is for the Hmip-WSC not allowed (see SPHM-942)
           } else {
-            if ((! this.isWGS)  &&  (_rampTimeValue > 0) ) {
+            if ((! this.isWGS) && (! this.isWiredWGT)  &&  (_rampTimeValue > 0) ) {
               result = "L=" + level + ",OT=" + this.maxOnTime + ",RT=" + _rampTimeValue; // ON_TIME = permanently ON
             } else {
-              if (! this.isWGS) {
+              if ((! this.isWGS) && (! this.isWiredWGT)) {
                 result = "L=" + level + ",OT=0,RT=0";
               } else {
                 result = "L=" + level + ",OT=0";
@@ -21272,7 +21354,7 @@ DimmerCombinedParamDialog = Class.create({
             result = "L=" + level + ",RT=" + _rampTimeValue; // ON_TIME is for the Hmip-WSC not allowed (see SPHM-942)
           } else {
 
-            if (! this.isWGS) {
+            if ((! this.isWGS) && (! this.isWiredWGT)) {
               if (durationValue == 0) {
                 result = "L=" + level + ",OT=" + this._getOnTimeVal(durationValue, durationUnit) + ",RT=0";
               } else {
@@ -35253,6 +35335,18 @@ getExtendedDescription = function(oChannelDescr)  {
     }
   }
 
+  if (chType == "SHUTTER_TRANSMITTER") {
+    if (deviceType.toLowerCase().includes("hmip-m-td")) {
+      result = translateKey("chType_SHUTTER_TRANSMITTER_TUBULAR_MOTOR");
+    }
+  }
+
+  if (chType == "SHUTTER_VIRTUAL_RECEIVER") {
+    if (deviceType.toLowerCase().includes("hmip-m-td")) {
+      result = translateKey("chType_SHUTTER_VIRTUAL_RECEIVER_TUBULAR_MOTOR");
+    }
+  }
+
   /* Uncomment this to hide the channel description of a particular channel type
   if (chType == "KEY") {
     result = noDescrNecessary;
@@ -36472,18 +36566,6 @@ colorFilterBtns = function(fltObj)
   else filterBtn('btnFilterChn');
   
 };
-/**
- * ise/iseButtonsSwitch.js
- **/
-
-/**
- * @fileOverview ?
- * @author ise
- **/
-
-/**
- * @class
- **/
 iseButtonsSwitch = Class.create();
 
 iseButtonsSwitch.prototype = {
@@ -36493,6 +36575,7 @@ iseButtonsSwitch.prototype = {
    * idDpState = id of state-DP
    */
   initialize: function(id, initState, idDpState, iViewOnly, chnAddress, chnLabel, iFace) {
+    var self = this;
     this.id = id;
     this.state = initState;
     this.divOn = $(this.id + "On");
@@ -36519,9 +36602,62 @@ iseButtonsSwitch.prototype = {
       
       this.clickOn = this.onClickOn.bindAsEventListener(this);
       Event.observe(this.divOn, 'mousedown', this.clickOn);
+
+
+      if (this.chnLabel.indexOf("HmIP-WSM") != -1) {
+
+        this.durationValueElm = jQuery("#" + this.id + "durationValue");
+        this.durationUnitElm = jQuery("#" + this.id + "durationUnit");
+        this.valueLitersElm = jQuery("#" + this.id + "valueLiters");
+        this.unitLitersElm = jQuery("#" + this.id + "unitLiters");
+
+        this.divOnCond = jQuery("#" + this.id + "OnCond").on("click", function() {
+          jQuery("#" + self.id + "tdFlowRate").toggle();
+        });
+
+        this.setCondition = jQuery("#" + this.id + "Set").on("click", function() {
+          var elm = jQuery(this);
+          elm.removeClass("ControlBtnOff").addClass("ControlBtnOn");
+          window.setTimeout(function(){elm.removeClass("ControlBtnOn").addClass("ControlBtnOff");},500);
+          self.setConditionWaterFlow();
+        });
+      }
+
     }
   },
-  
+
+  setConditionWaterFlow: function() {
+
+    var durationValue = parseInt(this.durationValueElm.val()),
+      durationUnit = parseInt(this.durationUnitElm.val()),
+      valueLiters =  parseInt(this.valueLitersElm.val()),
+      unitLiters = parseInt(this.unitLitersElm.val());
+
+
+    if ((durationValue == 0) && (valueLiters > 0))  {
+      homematic("Interface.putParamset",{'interface': this.HmIPInterfaceID, 'address' : this.chnAddress, 'paramsetKey' : 'VALUES', 'set':
+        [
+          {name:'OUTPUT_BEHAVIOUR', type: 'int', value: (valueLiters + unitLiters) }
+        ]
+      },function(result){conInfo(result);});
+    } else if  ((durationValue > 0) && (valueLiters > 0)) {
+      homematic("Interface.putParamset",{'interface': this.HmIPInterfaceID, 'address' : this.chnAddress, 'paramsetKey' : 'VALUES', 'set':
+        [
+          {name:'DURATION_VALUE', type: 'int', value: durationValue},
+          {name:'DURATION_UNIT', type: 'int', value: durationUnit},
+          {name:'OUTPUT_BEHAVIOUR', type: 'int', value: (valueLiters + unitLiters) }
+        ]
+      },function(result){conInfo(result);});
+    } else if ((durationValue > 0) && (valueLiters == 0)) {
+      homematic("Interface.putParamset",{'interface': this.HmIPInterfaceID, 'address' : this.chnAddress, 'paramsetKey' : 'VALUES', 'set':
+        [
+          {name:'DURATION_VALUE', type: 'int', value: durationValue},
+          {name:'DURATION_UNIT', type: 'int', value: durationUnit}
+        ]
+      },function(result){conInfo(result);});
+    }
+  },
+
   onClickOff: function() {
     ControlBtn.pushed(this.divOff);
     //this.state = false;
@@ -36571,6 +36707,7 @@ iseButtonsSwitch.prototype = {
       ControlBtn.on(this.divOff);
     }
   }
+
 };
 
 /**
@@ -36697,7 +36834,6 @@ iseButtonsEvent.prototype = {
       pe.stop();
     }, 1);
   }
- 
 };/**
  * ise/iseButtonsDimmer.js
  **/
@@ -39641,28 +39777,395 @@ shutterControl.prototype = {
     this.state = val;
     this.divShutter.style.height = parseInt(this.MAX_HEIGHT - (val * (this.MAX_HEIGHT / 100))) + "px";
   }
-};/**
- * ise/shutterSelfCalibration.js
- **/
+};shutterSelfCalibration = Class.create();
+shutterSelfCalibration.prototype = {
+  initialize: function (chnId, iface, chAddress) {
+    self = this;
+
+    this.chnId = chnId;
+    this.iface = iface;
+    this.chAddress = chAddress;
+    this.chMaintenance = chAddress.split(":").first() + ":0";
+
+    this.dlg;
+
+    this.btnCalibration = jQuery("#shutterSelfCal" + chnId);
+    this.btnCalibrationElms = jQuery("[name='shutterSelfCal"+chnId+"']");
+
+    this.topElems;
+    this.bottomElems;
+
+    this.ManualSelfCalibration = {
+      CLEAR_SAVED_POSITIONS : 0,
+      SAVE_TOP_POSITION     : 1,
+      SAVE_BOTTOM_POSITION  : 2,
+      REVERSE_MOTION        : 3,
+      START_MOTION_WITH_LEVEL_SHORT : 4,
+      START_MOTION_WITH_LEVEL_LONG  : 5,
+      START_MOTION_WITH_LEVEL_AND_DURATION : 6,
+      STOP_MOTION           :7
+    };
+
+    this.getDialog();
+  },
+
+  getDialog: function() {
+
+    this.topSet = homematic("Interface.getValue", {'interface': this.iface, 'address' : this.chMaintenance, 'valueKey': 'MANUAL_SELF_CALIBRATION_TOP_POS_SET'});
+    this.bottomSet = homematic("Interface.getValue", {'interface': this.iface, 'address' : this.chMaintenance, 'valueKey': 'MANUAL_SELF_CALIBRATION_BOTTOM_POS_SET'});
 
 
-/**
- * @class
- **/
+    var title = ((this.topSet == 0) && (this.bottomSet == 0)) ? translateKey("btnSelfCalibration") : "";
+    var dlgWith = ((this.topSet == 0) || (this.bottomSet == 0)) ? 360 : 182;
+
+    this.dlg = new YesNoDialog(title, this.getHtml(), function(result) {
+      if (result == YesNoDialog.RESULT_NO) {
+        self.stopMotion();
+      } else {
+        //showHintSelfCalibration(self.chnId, self.chAddress, self.iface);
+        reloadPage();
+      }
+    }, "html");
+
+    this.dlg.btnTextNo(translateKey("btnCancel"));
+    this.dlg.btnTextYes(translateKey("btnReady"));
+    this.dlg.btnYesHide();
+    this.dlg.setWidth(dlgWith);
+
+    this.topElems = jQuery(".j_TopElm");
+    this.bottomElems = jQuery(".j_BottomElm");
+
+    this.initEventHandler();
+  },
+
+  initEventHandler: function () {
+    var saveTopPosElm = jQuery("#btnSaveUp"),
+      saveBottomPosElm = jQuery("#btnSaveDown"),
+
+      btnChangeMotorDirElm = jQuery("#btnChangeMotorDir"),
+      btnStopMotionElm = jQuery("#btnStopMotion"),
+      btnClearEndPosElm = jQuery("#btnClearPos"),
+
+      btnShutterUpElm = jQuery("#btnShutterUp"),
+      btnShutterDownElm = jQuery("#btnShutterDown"),
+      btnShutterUp100Elm = jQuery("#btnShutterUp100"),
+      btnShutterDown100Elm = jQuery("#btnShutterDown100"),
+      btnShutterUp400Elm = jQuery("#btnShutterUp400"),
+      btnShutterDown400Elm = jQuery("#btnShutterDown400"),
+      inputDurationElm = jQuery("#inputDuration");
 
 
-shutterSelfCalibration = Class.create({
-  initialize: function () {
-    var title = "Self Calibration",
-      html ="Self Calibration";
+    saveTopPosElm.click(function() {self.buttonPressed(this); self.saveTopPos();});
+    saveBottomPosElm.click(function() {self.buttonPressed(this); self.saveBottomPos();});
 
-    var dlg = new YesNoDialog(title, html, "", "html");
-    dlg.btnTextNo(translateKey("btnCancel"));
-    dlg.btnTextYes(translateKey("btnOk"));
+    btnShutterUpElm.click(function (){self.buttonPressed(this); self.upWithDuration();});
+    btnShutterDownElm.click(function (){self.buttonPressed(this); self.downWithDuration();});
+    btnShutterUp100Elm.click(function (){self.buttonPressed(this); self.up100ms();});
+    btnShutterDown100Elm.click(function (){self.buttonPressed(this); self.down100ms();});
+    btnShutterUp400Elm.click(function (){self.buttonPressed(this); self.up400ms();});
+    btnShutterDown400Elm.click(function (){self.buttonPressed(this); self.down400ms();});
+
+    btnChangeMotorDirElm.click(function (){self.buttonPressed(this); self.changeMotorDir();});
+    btnStopMotionElm.click(function (){self.buttonPressed(this); self.stopMotion();});
+    btnClearEndPosElm.click(function (){self.buttonPressed(this); self.clearEndPos();});
+
+    inputDurationElm.on("blur",function() {
+      self.checkVal(this);
+    });
+
+  },
+
+  getHtml: function() {
+    var topSetHidden = false;
+    var html = "<table class='center'>";
+    if (this.topSet == 0) {
+      // Change Motor Direction
+      html += "<tr>";
+      html += "<td colspan='4'>";
+      html += "<div id='btnChangeMotorDir' class='CLASS02550c ControlBtnOff'>" + translateKey('btnChangeMotorDir') + "</div>";
+      html += "</td>";
+      html += "</tr>";
+    } else {
+      topSetHidden = true;
+    }
+
+    // Clear all positions
+    html += "<tr class='j_finish'>";
+    html += "<td colspan='4'>";
+    html += "<div id='btnClearPos' class='CLASS02550c ControlBtnOff'>" + translateKey('btnClearPosition') + "</div>";
+    html += "</td>";
+    html += "</tr>";
+
+    if ((this.topSet == 0) || (this.bottomSet == 0)) {
+
+      html += "<tr class='j_finish'><td colspan='4'><hr></td></tr>";
+      // Up/Down with duration
+      html += "<tr class='j_finish'><td style='text-align:center;'><span>" + translateKey('lblMovementTime') + "</span></td></tr>";
+      html += "<tr  class='j_finish'>";
+      html += "<td>";
+      html += "<input id='inputDuration' type='text' class='CLASS02542' style='text-align:center;' size='3' value='0'>";
+      html += "<span style='margin-right:5px;'> " + translateKey('optionUnitS') + "</span>";
+      html += "</td>";
+      html += "<td>";
+      html += "<div id='btnShutterUp' class='CLASS02550 ControlBtnOff j_TopElm'>" + translateKey('actionStatusControlUp') + "</div>";
+      html += "</td>";
+
+      html += "<td>";
+      html += "<div id='btnShutterDown' class='CLASS02550 ControlBtnOff j_BottomElm _hidden'>" + translateKey('actionStatusControlDown') + "</div>";
+      html += "</td>";
+      html += "</tr>";
+
+      // Up/Down 100ms
+      html += "<tr class='j_finish'>";
+      html += "<td style='text-align:center;'>";
+      html += "<span>" + translateKey('optionUnit100MS') + "</span>";
+      html += "</td>";
+      html += "<td>";
+      html += "<div id='btnShutterUp100' class='CLASS02550 ControlBtnOff j_TopElm'>" + translateKey('actionStatusControlUp') + "</div>";
+      html += "</td>";
+
+      html += "<td>";
+      html += "<div id='btnShutterDown100' class='CLASS02550 ControlBtnOff j_BottomElm _hidden'>" + translateKey('actionStatusControlDown') + "</div>";
+      html += "</td>";
+      html += "</tr>";
+
+      // Up/Down 400ms
+      html += "<tr class='j_finish'>";
+      html += "<td style='text-align:center;'>";
+      html += "<span>" + translateKey('optionUnit400MS') + "</span>";
+      html += "</td>";
+      html += "<td>";
+      html += "<div id='btnShutterUp400' class='CLASS02550 ControlBtnOff j_TopElm'>" + translateKey('actionStatusControlUp') + "</div>";
+      html += "</td>";
+
+      html += "<td>";
+      html += "<div id='btnShutterDown400' class='CLASS02550 ControlBtnOff j_BottomElm _hidden'>" + translateKey('actionStatusControlDown') + "</div>";
+      html += "</td>";
+      html += "</tr>";
+
+      if (this.topSet == 0) {
+        html += "<tr>";
+        html += "<td></td>";
+        // Save Up Position
+        html += "<td colspan='2'>";
+        html += "<div id='btnSaveUp' class='CLASS02550 ControlBtnOff j_TopElm' style='width:auto;'>" + translateKey('btnSavePosTop') + "</div>";
+        html += "</td>";
+        html += "</tr>";
+      }
+      html += "<tr>";
+      // Save Down Position
+      html += "<td></td>";
+      html += "<td colspan='2'>";
+
+      if (this.topSet == 0) {
+        html += "<div id='btnSaveDown' class='CLASS02550 ControlBtnOff j_BottomElm hidden' style='width:auto;'>" + translateKey('btnSavePosBottom') + "</div>";
+      } else {
+        html += "<div id='btnSaveDown' class='CLASS02550 ControlBtnOff j_BottomElm' style='width:auto;'>" + translateKey('btnSavePosBottom') + "</div>";
+      }
+
+      html += "</td>";
+      html += "</tr>";
+
+      html += "<tr class='j_finish'><td colspan='4'><hr></td></tr>";
+
+      html += "<tr class='j_finish'><td colspan='4'><div id='btnStopMotion' class='CLASS02550c ControlBtnOff' style='cursor:default;'>" + translateKey('btnSTOP') + "</div></td></tr>";
+
+      html += "<tr class='j_ready hidden'><td>";
+      html += translateKey('hintEndPositionSaved');
+      html += "</td></tr>";
+    }
+
+    html += "</table>";
+
+    return html;
+  },
+
+  changeMotorDir: function() {
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+        [
+          {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.REVERSE_MOTION}
+        ]
+    },function(result){conInfo(result);});
+  },
+
+
+  saveTopPos: function() {
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+        [
+          {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.SAVE_TOP_POSITION}
+        ]
+    },function(result){
+      //self.topElems.hide();
+      //self.bottomElems.show();
+      jQuery("#btnChangeMotorDir").hide();
+      jQuery("#btnSaveUp").hide();
+      jQuery("#btnSaveDown").show();
+      self.dlg.resetHeight();
+    });
+  },
+
+  saveBottomPos: function() {
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+        [
+          {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.SAVE_BOTTOM_POSITION}
+        ]
+    },function(result){
+      //self.topElems.show();
+      self.dlg.btnYesShow();
+      self.dlg.btnNoHide();
+      self.topElems.hide();
+      self.bottomElems.hide();
+
+      jQuery(".j_finish").hide();
+      jQuery(".j_ready").show();
+
+
+      self.dlg.resetHeight();
+    });
+  },
+
+  upWithDuration: function() {
+    conInfo("upWithDuration");
+    var time = parseInt(jQuery("#inputDuration").val()),
+      unit = 0; // 0 = sec, 1 = min, 2 = hour, 3 = 10 ms
+
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.START_MOTION_WITH_LEVEL_AND_DURATION},
+        {name:'MANUAL_SELF_CALIBRATION_LEVEL', type: 'double', value: 1.0},
+        {name:'MANUAL_SELF_CALIBRATION_DURATION_VALUE', type: 'int', value: time},
+        {name:'MANUAL_SELF_CALIBRATION_DURATION_UNIT', type: 'int', value: unit}
+      ]
+    },function(result){
+      conInfo("result upWithDuration", result);
+    });
+  },
+
+  downWithDuration: function() {
+    conInfo("downWithDuration");
+    var time = parseInt(jQuery("#inputDuration").val()),
+      unit = 0; // 0 = sec, 1 = min, 2 = hour, 3 = 10 ms
+
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.START_MOTION_WITH_LEVEL_AND_DURATION},
+        {name:'MANUAL_SELF_CALIBRATION_LEVEL', type: 'double', value: 0.0},
+        {name:'MANUAL_SELF_CALIBRATION_DURATION_VALUE', type: 'int', value: time},
+        {name:'MANUAL_SELF_CALIBRATION_DURATION_UNIT', type: 'int', value: unit}
+      ]
+    },function(result){
+      conInfo("result downWithDuration", result);
+    });
+  },
+
+  up100ms: function() {
+    conInfo("up100ms");
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.START_MOTION_WITH_LEVEL_SHORT},
+        {name:'MANUAL_SELF_CALIBRATION_LEVEL', type: 'double', value: 1.0}
+      ]
+    },function(result){});
+  },
+
+  down100ms: function() {
+    conInfo("down100ms");
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.START_MOTION_WITH_LEVEL_SHORT},
+        {name:'MANUAL_SELF_CALIBRATION_LEVEL', type: 'double', value: 0.0}
+      ]
+    },function(result){});
+  },
+
+  up400ms: function() {
+    conInfo("up400ms");
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.START_MOTION_WITH_LEVEL_LONG},
+        {name:'MANUAL_SELF_CALIBRATION_LEVEL', type: 'double', value: 1.0}
+      ]
+    },function(result){});
+  },
+
+  down400ms: function() {
+    conInfo("down400ms");
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.START_MOTION_WITH_LEVEL_LONG},
+        {name:'MANUAL_SELF_CALIBRATION_LEVEL', type: 'double', value: 0.0}
+      ]
+    },function(result){});
+  },
+
+  stopMotion: function() {
+    conInfo("stopMotion");
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.STOP_MOTION}
+      ]
+    },function(result){});
+  },
+
+  clearEndPos: function() {
+    homematic("Interface.putParamset",{'interface': this.iface, 'address' : this.chAddress, 'paramsetKey' : 'VALUES', 'set':
+      [
+        {name:'MANUAL_SELF_CALIBRATION', type: 'int', value: self.ManualSelfCalibration.CLEAR_SAVED_POSITIONS}
+      ]
+    },function(result){
+      conInfo("clearEndPos: ", result);
+      self.dlg.close();
+      //self.btnCalibration.hide();
+      self.btnCalibrationElms.hide();
+      window.setTimeout(function() {
+        self.btnCalibrationElms.show();
+        //self.btnCalibration.show();
+        //reloadPage()
+        self.getDialog();
+      },500);
+    });
+  },
+
+  buttonPressed: function(btn) {
+    var elem = jQuery(btn);
+    elem.addClass("ControlBtnOn").removeClass("ControlBtnOff");
+    setTimeout(function() {
+      elem.addClass('ControlBtnOff').removeClass('ControlBtnOn');
+    }, 500);
+  },
+
+  checkVal: function(elm) {
+    var timeElm = jQuery(elm),
+      val = parseInt(timeElm.val());
+    if (isNaN(val) || val < 0) {timeElm.val(0);}
+    if (val > 30) {timeElm.val(30);}
   }
-});
 
-/**
+};
+
+showHintSelfCalibration = function (chnId, chAddress, iface) {
+
+  window.setTimeout(function() {
+    var chMaintenance = chAddress.split(":").first() + ":0",
+      topSet = homematic("Interface.getValue", {
+        'interface': iface,
+        'address': chMaintenance,
+        'valueKey': 'MANUAL_SELF_CALIBRATION_TOP_POS_SET'
+      }),
+      bottomSet = homematic("Interface.getValue", {
+        'interface': iface,
+        'address': chMaintenance,
+        'valueKey': 'MANUAL_SELF_CALIBRATION_BOTTOM_POS_SET'
+      }),
+      calHint = jQuery("#hintSelfCal" + chnId);
+
+    if ((parseInt(topSet) == 1) && (parseInt(bottomSet) == 1)) {
+      calHint.show();
+    } else {
+      calHint.hide();
+    }
+  },100);
+};/**
  * ise/channelLoader.js
  **/
 
@@ -41535,11 +42038,13 @@ iseButtonsShutter.prototype = {
     this.divUp = $(this.id + "Up");
     this.divDown = $(this.id + "Down");
 
-    this.shutter = new shutterControl(id, initState);
+     this.shutter = new shutterControl(id, initState);
 
     this.Perc.value = initState;
     this.shutter.setValue(initState);
     this.opts = opts;
+
+    this.chMaintenance = this.opts.devAddress + ":0";
 
     this.pressedUpDown = "";
 
@@ -41569,6 +42074,11 @@ iseButtonsShutter.prototype = {
       this.clickStop = this.onClickStop.bindAsEventListener(this);
       Event.observe(this.divStop, 'mousedown', this.clickStop);
     }
+
+    if (opts.chnLabel.includes("HmIP-M-TD"))  {
+      this.checkEndPos();
+    }
+
     this.initJalousie();
     this.initHmIPJalousieShutter();
 
@@ -41576,6 +42086,18 @@ iseButtonsShutter.prototype = {
 
   initJalousie: function() {},
   initHmIPJalousieShutter: function() {},
+
+  checkEndPos: function() {
+    this.topSet = parseInt(homematic("Interface.getValue", {'interface': this.opts.iface, 'address' : this.chMaintenance, 'valueKey': 'MANUAL_SELF_CALIBRATION_TOP_POS_SET'}));
+    this.bottomSet = parseInt(homematic("Interface.getValue", {'interface': this.opts.iface, 'address' : this.chMaintenance, 'valueKey': 'MANUAL_SELF_CALIBRATION_BOTTOM_POS_SET'}));
+
+    if ((this.topSet == 0) || (this.bottomSet == 0)) {
+      jQuery("#endPosNotSaved" + this.id).show();
+    } else {
+      jQuery("#endPosNotSaved" + this.id).hide();
+    }
+
+  },
 
   onClickShutter: function(ev) {
     var pos = Position.page(this.shutter.divShutterBg);
@@ -42233,7 +42755,11 @@ iseHmIPWeeklyProgram.prototype = {
     this.deviceIsHmIP_FLC = (this.isDeviceType("HmIP-FLC") || (this.isDeviceType("HmIP-FDC")));
 
     this.isWGS = (this.device.deviceType.id.includes("HmIP-WGS")) ? true : false;
+    this.isWiredWGS = (this.device.deviceType.id.includes("HmIPW-WGS")) ? true : false;
+
     this.isWGT = (this.device.deviceType.id.includes("HmIP-WGT")) ? true : false;
+    this.isWiredWGT = (this.device.deviceType.id.includes("HmIPW-WGT")) ? true : false;
+
 
     this.expert = (! this.opts.userEasyLinkMode || this.deviceIsHmIP_FLC) ? true : false;
 
@@ -42265,6 +42791,10 @@ iseHmIPWeeklyProgram.prototype = {
       this.relevantChn = (this.expert) ? [7, 9, 10, 11] : [7, 9];
     }
 
+    if (this.isWiredWGS) {
+      this.relevantChn = [6];
+    }
+
     if (this.isWGT) {
       var firstVirtSwitchChn = this.device.channels[4];
       if (firstVirtSwitchChn.channelMode == "modeBWTH") {
@@ -42272,6 +42802,10 @@ iseHmIPWeeklyProgram.prototype = {
       } else {
         this.relevantChn = (this.expert) ? [2, 4, 5, 6] : [2, 4];
       }
+    }
+
+    if (this.isWiredWGT) {
+      this.relevantChn = [2];
     }
 
     if (this.deviceIsHmIP_RGBW) {
@@ -44265,7 +44799,7 @@ iseDoorLockTransceiver.prototype = {
 
     dlg.btnTextNo(translateKey("dialogBack"));
     dlg.btnTextYes(translateKey("btnOk"));
-    dlg.setWidth(600);
+    dlg.setWidth(700);
 
   },
 
@@ -44526,26 +45060,31 @@ ResetPostString = function()
 AddProfileValues = function(prefix)
 {
   var i = 1;
-
-  while (document.getElementById(prefix + i))
+  var elem;
+  /*jsl:ignore*/
+  while (elem = document.getElementById(prefix + i))
   {
-    AddParam(document.getElementById(prefix + i));
+    AddParam(elem);
     i++;
   }
+  /*jsl:end*/ 
 };
 
 AddSeparateSettings = function(prefix, pnr)
 {
-  var i = 1,
-  elem;
-  while (document.getElementById(prefix + pnr + '_' + i))
+  var i = 1;
+  var elem;
+  /*jsl:ignore*/    
+  while (elem = document.getElementById(prefix + pnr + '_' + i))
   {
-    elem = document.getElementById(prefix + pnr + '_' + i);
-    if (IsDirty(elem)) {
-      AddParam(document.getElementById(prefix + pnr + '_' + i));
-    }
+    // add ALL parameters (do NOT use IsDirty()) because
+    // AddSeparateSettings is also used while modifiying
+    // device link paramaters which requires all parameters
+    // to be present.
+    AddParam(elem);
     i++;
   }
+  /*jsl:end*/ 
 };
 
 SubmitProfile = function(pnr, pname)
@@ -50381,10 +50920,11 @@ MD_proofClassic = function(id)
   if (min_interval.value == min_interval.length - 1) 
   {
     $(id).options[0].selected = true;
-
+    $(id).options[0].defaultSelected = true;
   } else 
   {
     $(id).options[1].selected = true;
+    $(id).options[1].defaultSelected = true;
   }
   
   MD_minInterval(id);
@@ -51881,7 +52421,140 @@ getEsiStartTime = function() {
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
 
   return dateString;
-};// language = getLang();//"de";
+};
+
+setWSMFlowControlState = function(elm, durationValue, durationUnit, outputBehaviour) {
+  var chn = elm.attr("id").split("_")[1],
+    selectedOption = parseInt(elm.val()),
+    durationValueElm = jQuery("#durationValue_"+chn),
+    durationUnitElm = jQuery("#durationUnit_"+chn),
+    outputFlowValueElm = jQuery("#outputFlowValue_"+chn),
+    outputFlowUnitElm = jQuery("#outputFlowUnit_"+chn),
+    outputBehaviourElm = jQuery("#outputBehaviour_"+chn);
+
+  if (parseInt(outputBehaviour) > 0) {
+    elm.val("1");
+    jQuery("[name='trFlowControl_"+chn+"']").show();
+    selectedOption = "1";
+  } else {
+    elm.val("0");
+    jQuery("[name='trFlowControl_"+chn+"']").hide();
+    selectedOption = 0;
+    outputBehaviour = 0;
+    jQuery(durationValueElm,durationUnitElm,outputFlowValueElm,outputFlowUnitElm,outputBehaviourElm).val(0);
+  }
+
+
+  durationValueElm.val(durationValue);
+  durationUnitElm.val(durationUnit);
+
+  // output behaviour
+  outputFlowValueElm.val(outputBehaviour & 31); // 31 = 0b11111 - jslint is complaining about this
+  outputFlowUnitElm.val(outputBehaviour & 224); // 224 = 0b11100000 - jslint is complaining about this
+  outputBehaviourElm.val(parseInt(outputFlowValueElm.val()) +  parseInt(outputFlowUnitElm.val()));
+
+};
+
+setWSMVisibilityFlowControl = function(elm) {
+  var chn = elm.attr("id").split("_")[1],
+    durationValueElm = jQuery("#durationValue_"+chn),
+    durationUnitElm = jQuery("#durationUnit_"+chn),
+    outputFlowValueElm = jQuery("#outputFlowValue_"+chn),
+    outputFlowUnitElm = jQuery("#outputFlowUnit_"+chn),
+    outputBehaviourElm = jQuery("#outputBehaviour_"+chn);
+
+  if ((parseInt(elm.val()) > 0) || (parseInt(durationValueElm.val()) > 0)) {
+    jQuery("[name='trFlowControl_"+chn+"']").show();
+  } else {
+    jQuery("[name='trFlowControl_"+chn+"']").hide();
+    jQuery(durationValueElm,durationUnitElm,outputFlowValueElm,outputFlowUnitElm,outputBehaviourElm).val(0);
+  }
+};
+
+setWSMOutputBehaviour = function(chn) {
+  var durationValueVal = parseInt(jQuery("#durationValue_"+chn).val()),
+    durationUnitVal = parseInt(jQuery("#durationUnit_"+chn).val()),
+    outputFlowValueVal = parseInt(jQuery("#outputFlowValue_"+chn).val()),
+    outputFlowUnitVal = parseInt(jQuery("#outputFlowUnit_"+chn).val()),
+    outputBehaviourElm = jQuery("#outputBehaviour_"+chn),
+    val2Send = 0;
+
+  val2Send = outputFlowValueVal + outputFlowUnitVal;
+  outputBehaviourElm.val(val2Send);
+};
+
+storeWSMOutputBehaviour = function(address) {
+  var arAddress = address.split(":"),
+    chn = parseInt(arAddress[1]),
+    durVal_A = jQuery("#durationValue_" + (chn-2)).val(),
+    durVal_B = jQuery("#durationValue_" + (chn-1)).val(),
+    durVal_C = jQuery("#durationValue_" + chn).val(),
+    durUnit_A = jQuery("#durationUnit_" + (chn-2)).val(),
+    durUnit_B = jQuery("#durationUnit_" + (chn-1)).val(),
+    durUnit_C = jQuery("#durationUnit_" + chn).val(),
+    outBehaviour_A = jQuery("#outputBehaviour_"+ (chn-2)).val(),
+    outBehaviour_B = jQuery("#outputBehaviour_"+ (chn-1)).val(),
+    outBehaviour_C = jQuery("#outputBehaviour_"+ chn).val();
+
+  homematic("Interface.putParamset", {
+    'interface': "HmIP-RF",
+    'address': arAddress[0] + ':' + parseInt(arAddress[1] - 2),
+    'paramsetKey': 'VALUES',
+    'set':
+      [
+        {
+          name: 'DURATION_VALUE', type: 'int', value: durVal_A,
+          name: 'DURATION_UNIT', type: 'int', value: durUnit_A,
+          name: 'OUTPUT_BEHAVIOUR', type: 'int', value: outBehaviour_A
+        }
+      ]
+  });
+
+  homematic("Interface.putParamset", {
+    'interface': "HmIP-RF",
+    'address': arAddress[0] + ':' + parseInt(arAddress[1] - 1),
+    'paramsetKey': 'VALUES',
+    'set':
+      [
+        {
+          name: 'DURATION_VALUE', type: 'int', value: durVal_B,
+          name: 'DURATION_UNIT', type: 'int', value: durUnit_B,
+          name: 'OUTPUT_BEHAVIOUR', type: 'int', value: outBehaviour_B
+        }
+      ]
+  });
+
+  homematic("Interface.putParamset", {
+    'interface': "HmIP-RF",
+    'address': arAddress[0] + ':' + parseInt(arAddress[1]),
+    'paramsetKey': 'VALUES',
+    'set':
+      [
+        {
+          name: 'DURATION_VALUE', type: 'int', value: durVal_C,
+          name: 'DURATION_UNIT', type: 'int', value: durUnit_C,
+          name: 'OUTPUT_BEHAVIOUR', type: 'int', value: outBehaviour_C
+        }
+      ]
+  });
+
+};
+
+storeOptionGasWater = function(elm, chnAddress) {
+  var devId = DeviceList.getDeviceByAddress(chnAddress.split(":")[0]).id;
+  homematic("Interface.setMetadata", {"objectId": devId, "dataId": "modeGasWater", "value": elm.val()});
+};
+
+getOptionGasWater = function (chnAddress) {
+  var devId = DeviceList.getDeviceByAddress(chnAddress.split(":")[0]).id,
+  optionGasWater = homematic("Interface.getMetadata", {"objectId": devId, "dataId": "modeGasWater"});
+
+  if (optionGasWater == "null") { // metadata null == string "null"
+    optionGasWater = 0;
+  }
+  jQuery("#selectGasWater_" + chnAddress.split(":")[1]).val(optionGasWater);
+};
+// language = getLang();//"de";
 
 setLanguage = function(lang)
 {

@@ -844,10 +844,11 @@ MD_proofClassic = function(id)
   if (min_interval.value == min_interval.length - 1) 
   {
     $(id).options[0].selected = true;
-
+    $(id).options[0].defaultSelected = true;
   } else 
   {
     $(id).options[1].selected = true;
+    $(id).options[1].defaultSelected = true;
   }
   
   MD_minInterval(id);
@@ -2344,4 +2345,136 @@ getEsiStartTime = function() {
     d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
 
   return dateString;
+};
+
+setWSMFlowControlState = function(elm, durationValue, durationUnit, outputBehaviour) {
+  var chn = elm.attr("id").split("_")[1],
+    selectedOption = parseInt(elm.val()),
+    durationValueElm = jQuery("#durationValue_"+chn),
+    durationUnitElm = jQuery("#durationUnit_"+chn),
+    outputFlowValueElm = jQuery("#outputFlowValue_"+chn),
+    outputFlowUnitElm = jQuery("#outputFlowUnit_"+chn),
+    outputBehaviourElm = jQuery("#outputBehaviour_"+chn);
+
+  if (parseInt(outputBehaviour) > 0) {
+    elm.val("1");
+    jQuery("[name='trFlowControl_"+chn+"']").show();
+    selectedOption = "1";
+  } else {
+    elm.val("0");
+    jQuery("[name='trFlowControl_"+chn+"']").hide();
+    selectedOption = 0;
+    outputBehaviour = 0;
+    jQuery(durationValueElm,durationUnitElm,outputFlowValueElm,outputFlowUnitElm,outputBehaviourElm).val(0);
+  }
+
+
+  durationValueElm.val(durationValue);
+  durationUnitElm.val(durationUnit);
+
+  // output behaviour
+  outputFlowValueElm.val(outputBehaviour & 31); // 31 = 0b11111 - jslint is complaining about this
+  outputFlowUnitElm.val(outputBehaviour & 224); // 224 = 0b11100000 - jslint is complaining about this
+  outputBehaviourElm.val(parseInt(outputFlowValueElm.val()) +  parseInt(outputFlowUnitElm.val()));
+
+};
+
+setWSMVisibilityFlowControl = function(elm) {
+  var chn = elm.attr("id").split("_")[1],
+    durationValueElm = jQuery("#durationValue_"+chn),
+    durationUnitElm = jQuery("#durationUnit_"+chn),
+    outputFlowValueElm = jQuery("#outputFlowValue_"+chn),
+    outputFlowUnitElm = jQuery("#outputFlowUnit_"+chn),
+    outputBehaviourElm = jQuery("#outputBehaviour_"+chn);
+
+  if ((parseInt(elm.val()) > 0) || (parseInt(durationValueElm.val()) > 0)) {
+    jQuery("[name='trFlowControl_"+chn+"']").show();
+  } else {
+    jQuery("[name='trFlowControl_"+chn+"']").hide();
+    jQuery(durationValueElm,durationUnitElm,outputFlowValueElm,outputFlowUnitElm,outputBehaviourElm).val(0);
+  }
+};
+
+setWSMOutputBehaviour = function(chn) {
+  var durationValueVal = parseInt(jQuery("#durationValue_"+chn).val()),
+    durationUnitVal = parseInt(jQuery("#durationUnit_"+chn).val()),
+    outputFlowValueVal = parseInt(jQuery("#outputFlowValue_"+chn).val()),
+    outputFlowUnitVal = parseInt(jQuery("#outputFlowUnit_"+chn).val()),
+    outputBehaviourElm = jQuery("#outputBehaviour_"+chn),
+    val2Send = 0;
+
+  val2Send = outputFlowValueVal + outputFlowUnitVal;
+  outputBehaviourElm.val(val2Send);
+};
+
+storeWSMOutputBehaviour = function(address) {
+  var arAddress = address.split(":"),
+    chn = parseInt(arAddress[1]),
+    durVal_A = jQuery("#durationValue_" + (chn-2)).val(),
+    durVal_B = jQuery("#durationValue_" + (chn-1)).val(),
+    durVal_C = jQuery("#durationValue_" + chn).val(),
+    durUnit_A = jQuery("#durationUnit_" + (chn-2)).val(),
+    durUnit_B = jQuery("#durationUnit_" + (chn-1)).val(),
+    durUnit_C = jQuery("#durationUnit_" + chn).val(),
+    outBehaviour_A = jQuery("#outputBehaviour_"+ (chn-2)).val(),
+    outBehaviour_B = jQuery("#outputBehaviour_"+ (chn-1)).val(),
+    outBehaviour_C = jQuery("#outputBehaviour_"+ chn).val();
+
+  homematic("Interface.putParamset", {
+    'interface': "HmIP-RF",
+    'address': arAddress[0] + ':' + parseInt(arAddress[1] - 2),
+    'paramsetKey': 'VALUES',
+    'set':
+      [
+        {
+          name: 'DURATION_VALUE', type: 'int', value: durVal_A,
+          name: 'DURATION_UNIT', type: 'int', value: durUnit_A,
+          name: 'OUTPUT_BEHAVIOUR', type: 'int', value: outBehaviour_A
+        }
+      ]
+  });
+
+  homematic("Interface.putParamset", {
+    'interface': "HmIP-RF",
+    'address': arAddress[0] + ':' + parseInt(arAddress[1] - 1),
+    'paramsetKey': 'VALUES',
+    'set':
+      [
+        {
+          name: 'DURATION_VALUE', type: 'int', value: durVal_B,
+          name: 'DURATION_UNIT', type: 'int', value: durUnit_B,
+          name: 'OUTPUT_BEHAVIOUR', type: 'int', value: outBehaviour_B
+        }
+      ]
+  });
+
+  homematic("Interface.putParamset", {
+    'interface': "HmIP-RF",
+    'address': arAddress[0] + ':' + parseInt(arAddress[1]),
+    'paramsetKey': 'VALUES',
+    'set':
+      [
+        {
+          name: 'DURATION_VALUE', type: 'int', value: durVal_C,
+          name: 'DURATION_UNIT', type: 'int', value: durUnit_C,
+          name: 'OUTPUT_BEHAVIOUR', type: 'int', value: outBehaviour_C
+        }
+      ]
+  });
+
+};
+
+storeOptionGasWater = function(elm, chnAddress) {
+  var devId = DeviceList.getDeviceByAddress(chnAddress.split(":")[0]).id;
+  homematic("Interface.setMetadata", {"objectId": devId, "dataId": "modeGasWater", "value": elm.val()});
+};
+
+getOptionGasWater = function (chnAddress) {
+  var devId = DeviceList.getDeviceByAddress(chnAddress.split(":")[0]).id,
+  optionGasWater = homematic("Interface.getMetadata", {"objectId": devId, "dataId": "modeGasWater"});
+
+  if (optionGasWater == "null") { // metadata null == string "null"
+    optionGasWater = 0;
+  }
+  jQuery("#selectGasWater_" + chnAddress.split(":")[1]).val(optionGasWater);
 };

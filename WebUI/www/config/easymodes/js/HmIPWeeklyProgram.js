@@ -276,14 +276,16 @@ HmIPWeeklyProgram.prototype = {
     this.UNIVERSAL_LIGHT_RECEIVER_RGBW = "HmIP-RGBW";
     this.UNIVERSAL_LIGHT_RECEIVER_DALI = "HmIP-DRG-DALI";
     this.isWGS = (this.device.deviceType.id.includes("HmIP-WGS")) ? true : false;
+    this.isWiredWGS = (this.device.deviceType.id.includes("HmIPW-WGS")) ? true : false;
     this.isWGT = (this.device.deviceType.id.includes("HmIP-WGT")) ? true : false;
+    this.isWiredWGT = (this.device.deviceType.id.includes("HmIPW-WGT")) ? true : false;
     this.isWSM = ((this.device.deviceType.id.includes("HmIP-WSM")) || (this.device.deviceType.id.includes("ELV-SH-WSM")))? true : false;
     this.isWRC6230 = (this.device.deviceType.id.includes("HmIP-WRC6-230"))? true : false;
     this.isWGTC = (this.device.deviceType.id.includes("HmIP-WGTC"))? true : false;
     this.isDLP = (this.device.deviceType.id.includes("HmIP-DLP"))? true : false;
 
     // The device says the type of this channel is BLIND_WEEK_PROFILE but it's a SHUTTER device
-    this.isShutter = (this.device.deviceType.id.includes("HmIP-M-TD15"))? true : false;
+    this.isShutter = ((this.device.deviceType.id.includes("HmIP-M-TD15")) || (this.device.deviceType.id.includes("RM-110-45/15"))) ? true : false;
 
     this.isHmIPLSS = false;
 
@@ -310,7 +312,6 @@ HmIPWeeklyProgram.prototype = {
 
     // The device type of the HmIP-BSL is DIMMER_WEEK_PROFILE but the weekly program should act as a SWITCH_WEEK_PROFILE
     this.chnType = ((this._isDeviceType("HmIP-BSL") && (this._getFwMajor() < 2)) || this.isWSM) ? this.SWITCH : this.chnType;
-
     this.isAccessTransmitterHmIP_FWI = this._isDeviceType(this.ACCESS_TRANSMITTER_HmIP_FWI);
     this.isAccessTransceiver_WKP = this._isDeviceType(this.ACCESS_TRANSCEIVER_HmIP_WKP);
     this.isDoorLockDrive = (this._isDeviceType("HmIP-DLD") || this._isDeviceType("HmIP-DLD-A") || this._isDeviceType("HmIP-DLD-S")) ? true : false;
@@ -417,8 +418,15 @@ HmIPWeeklyProgram.prototype = {
       this.virtualChannels = [7, 9, 10, 11];
     }
 
+    if (this.isWiredWGS) {
+      this.virtualChannels = [6];
+    }
+
     if (this.isWGT) {
       this.virtualChannels = [2, 4, 5, 6];
+    }
+    if (this.isWiredWGT) {
+      this.virtualChannels = [2];
     }
 
     if (this._isDeviceType(this.UNIVERSAL_LIGHT_RECEIVER_RGBW)) {
@@ -684,10 +692,10 @@ HmIPWeeklyProgram.prototype = {
     }
 
     // LEVEL
-    if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
+    if ((this.chnType == this.DIMMER) || (this.chnType == this.SERVO) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.isWiredWGS) || (this.isWiredWGT)) {
       // programEntry += (this.chnType == this.DIMMER) ? "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>" : "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPServoPos') + "</td>";
 
-      if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER)) {
+      if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.isWiredWGS) || (this.isWiredWGT)) {
         if (! this.WINDOW_DRIVE_RECEIVER) {
           if (this.DIMMER_WEEK_PROFILE_HmIP_WUA == "") {
             programEntry += "<td id='lblWPBrightness_" + number + "'>" + translateKey('lblWPBrightness') + "</td>";
@@ -731,6 +739,69 @@ HmIPWeeklyProgram.prototype = {
       programEntry += "<td>" + this._getLevel(number) + "</td>";
     } else {
       programEntry += "<td>" + this._getLevelWGS(number) + "</td>";
+    }
+
+    if (this.isWSM) {
+      var arWSMFw = this.fwVersion.split("."),
+       wsmFwMajor = parseInt(arWSMFw[0]),
+       wsmFwMinor = parseInt(arWSMFw[1]);
+
+      if ((wsmFwMajor >= 1) && (wsmFwMinor >= 4)) {
+        isValueValid = function (elm) {
+          if (parseInt(elm.value) > 31) {
+            elm.value = 31;
+          } else if (isNaN(parseInt(elm.value))) {
+            elm.value = 0;
+          }
+        }
+
+        showFlowControlHelp = function () {
+          var width = 500,
+            height = 75;
+          MessageBox.show(translateKey("HelpTitle"), translateKey("helpConditionWaterFlow"), "", width, height);
+        };
+
+        this.prn++;
+        var outputBehaviourVal = (this.activeEntries[number] == true) ? parseInt(this.ps[number + "_WP_OUTPUT_BEHAVIOUR"]) : 0,
+          litersVal = 0, litersUnit = 0, bit = 0;
+
+        for (bit = 0; bit <= 5; bit++) {
+          if ((bit == 0) && (isBitSet(outputBehaviourVal, bit))) {
+            litersVal += 1;
+          }
+          if ((bit == 1) && (isBitSet(outputBehaviourVal, bit))) {
+            litersVal += 2;
+          }
+          if ((bit >= 2) && (isBitSet(outputBehaviourVal, bit))) {
+            litersVal += Math.pow(2, bit);
+          }
+        }
+
+        for (bit = 6; bit <= 7; bit++) {
+          if (isBitSet(outputBehaviourVal, bit)) {
+            litersUnit += Math.pow(2, bit);
+          }
+        }
+
+        programEntry += "<td name='condWaterFlow" + number + "'>" + translateKey('powerMeasurementA') + "</td>";
+        programEntry += "<td><input type='text' id='valueLiters" + number + "' size='4' name='condWaterFlow" + number + "' class='alignCenter' onblur='isValueValid(this)' value='" + litersVal + "'><span name='condWaterFlow" + number + "'> x </span>";
+
+        programEntry += "<select id='unitLiters" + number + "' name='condWaterFlow" + number + "'>"
+        programEntry += "<option value='0'>" + translateKey('optionUnit1Ltr') + "</option>";
+        programEntry += "<option value='64'>" + translateKey('optionUnit10Ltr') + "</option>";
+        programEntry += "<option value='128'>" + translateKey('optionUnit100Ltr') + "</option>";
+        programEntry += "<option value='192'>" + translateKey('optionUnit1000Ltr') + "</option>";
+        programEntry += "</select>"
+
+        programEntry += "<img id='iconHelp_" + number + "' src='/ise/img/help.png' style='cursor: pointer; width:18px; height:18px; position:relative; top:2px;' alt='' onclick='showFlowControlHelp();'>";
+
+        programEntry += "<td><input type='text' id='separate_CHANNEL_" + this.chn + "_" + this.prn + "' name='" + number + "_WP_OUTPUT_BEHAVIOUR' value='" + outputBehaviourVal + "' size='2' class='hidden'></td>";
+        programEntry += "<script>jQuery('\#unitLiters" + number + "').val(" + litersUnit + ")</script>";
+
+        window.setTimeout(function () {
+          self._setWSMOutputBehaviour(number);
+        }, 50);
+      }
     }
 
     // SLAT LEVEL for Blinds
@@ -2090,15 +2161,20 @@ HmIPWeeklyProgram.prototype = {
         trDurationModeElm = jQuery('#trDurationMode' + elmNr),
         trDurationValueElm = jQuery('#trDurationValue' + elmNr);
 
+      var condWaterFlowElms = jQuery("[name='condWaterFlow"+elmNr+"']");
+
       // For the servo control, the value 0 corresponds to the right position, while 100 corresponds to the left position.
       // Therefore, for the servo control, we don't hide the ON_TIME element at a value of 0
       if (((val == "0") || (val == "0.000"))) {
         trDurationModeElm.hide();
         trDurationValueElm.hide();
+        condWaterFlowElms.hide();
       } else {
         trDurationModeElm.show();
+        condWaterFlowElms.show();
         if (durationModeElm.val() != "0") {
           trDurationValueElm.show();
+          condWaterFlowElms.show();
         }
       }
     };
@@ -2185,10 +2261,10 @@ HmIPWeeklyProgram.prototype = {
       }
     }
 
-    if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.chnType == this.SERVO) || (this.chnType == this.BLIND)) {
+    if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.chnType == this.SERVO) || (this.chnType == this.BLIND) || (this.isWiredWGS) || (this.isWiredWGT)) {
       var loop;
-      if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.chnType == this.SERVO)) {
-        if (((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) ) && (! this.WINDOW_DRIVE_RECEIVER) ) {
+      if ((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.isWiredWGS) || (this.isWiredWGT) || (this.chnType == this.SERVO)) {
+        if (((this.chnType == this.DIMMER) || (this.chnType == this.UNIVERSAL_LIGHT_RECEIVER) || (this.isWiredWGS) || (this.isWiredWGT)) && (! this.WINDOW_DRIVE_RECEIVER)) {
           result += (val == 0) ? "<option value='0' selected='selected'>" + translateKey('optionOFF') + "</option>" : "<option value='0'>" + translateKey('optionOFF') + "</option>";
           for (loop = 5; loop <= 100; loop += 5) {
             optionVal = (loop / 100).toFixed(3);
@@ -3297,6 +3373,35 @@ HmIPWeeklyProgram.prototype = {
     result += "</select>";
 
     return result;
+
+  },
+
+  _setWSMOutputBehaviour: function (number) {
+    var literElm = jQuery("#valueLiters" + number),
+      unitElem = jQuery("#unitLiters"+ number),
+      outputBehaviourElm = jQuery("[name='" + number + "_WP_OUTPUT_BEHAVIOUR']").first(),
+      levelElm = jQuery("[name='" + number + "_WP_LEVEL']").first(),
+      helpIcon = jQuery("#iconHelp_" + number);
+
+    if (parseInt(levelElm.val()) == 0) {
+      outputBehaviourElm.val(0);
+      helpIcon.hide();
+    } else {helpIcon.show();}
+
+    levelElm.on("change", function () {
+      if (parseInt(levelElm.val()) == 0) {
+        outputBehaviourElm.val(0);
+        helpIcon.hide();
+      } else {helpIcon.show();}
+    });
+
+    literElm.on("blur", function () {
+      outputBehaviourElm.val(parseInt(literElm.val()) + parseInt(unitElem.val()));
+    });
+
+    unitElem.on("change", function () {
+      outputBehaviourElm.val(parseInt(literElm.val()) + parseInt(unitElem.val()));
+    });
 
   },
 

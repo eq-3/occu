@@ -209,10 +209,10 @@ jQuery.extend(true,langJSON, {
     "<b>Achtung:</b><br/>Wenn f%FCr einen Test des Sensors Trinkwasser verwendet wird, reduziert sich die Menge an notwendigem Wasser f%FCr eine Ausl%F6sung, da dessen Leitwert i.d.R. um mehrere 10er Potenzen h%F6her liegt.",
 
     "SENSOR_SENSITIVITY_shutterTrans" :
-      "Bei der Erkennung eines Hindernisses, h%E4lt der Aktor sofort an, um eine Besch%E4digung der Rollladen oder des Hindernisses zu vermeiden.<br/><br/>" +
-      "Mit diesem Parameter legen Sie die Empfindlichkeit der Hindernis-Erkennung fest. Im Normalfall sollte die Einstellung <b>Normal</b> gew%E4hlt werden.<br><br/>" +
-      "Sollte eine sensiblere Einstellung notwendig sein, w%E4hlen Sie die Einstellung <b>Empfindllich</b>. "+
-      "Hier besteht jedoch die M%F6glichkeit, dass der Aktor dann auch bei 'geringf%FCgigen Widerst%E4nden' anh%E4lt.",
+      "Der Parameter erlaubt die Empfindlichkeit der Hinderniserkennung einzustellen bzw. diese abzuschalten. " +
+      "Es wird empfohlen zun%E4chst mit der Standardeinstellung zu arbeiten.<br><br/>" +
+      "Sollte der Rollladen h%E4ufig ohne Einwirkung eines Hindernis stehen bleiben, kann die Empfindlichkeit der Hinderniserkennung reduziert werden. "+
+      "Dieses sollte schrittweise passieren. Ebenso kann die Empfindlichkeit erh%F6ht werden, falls dieses erw%FCnscht ist.",
 
     "SENSOR_SENSITIVITY_DLP" :
       "Dieser Parameter bestimmt die Empfindlichkeit der Ersch%FCtterungs-%DCberwachung.<br/><br/>" +
@@ -297,7 +297,7 @@ jQuery.extend(true,langJSON, {
     "MOUNTING_ORIENTATION" : "Dieser Parameter erm%F6glicht es, den Displayinhalt um 180 Grad zu drehen.",
     "MOUNTING_ORIENTATION_A" : "Dieser Parameter erm%F6glicht es, den Aktor im gew%FCnschten Winkel einzusetzen. ",
 
-    "POWERUP_ONTIME_UNIT" :
+    "POWERUP_ONTIME_UNIT_AUTORELOCK" :
       "W%E4hlen Sie die Wartezeit bis zum <i>Auto Relock</i>, nachdem das T%FCrschloss entriegelt oder ge%F6ffnet wurde.<br/><br/>" +
       "Um <i>Auto Relock</i> zu nutzen, muss au%DFerdem mindestens ein entsprechender Eintrag vom Typ 'Modus f%FCr den T%FCrschlossantrieb' im Wochenprogramm vorgenommen werden.",
     
@@ -617,6 +617,14 @@ jQuery.extend(true,langJSON, {
       "Das nutzbare Messintervall ist im Interface auf den Bereich von 1 Minute bis 24 Stunden begrenzt. " +
       "Zu gro%DF oder zu klein konfigurierte Werte werden im Interface auf den begrenzten Bereich angepasst.",
 
+    "EVENT_BLINDTIME_BASE_WSS" :
+      "Legen Sie fest, wie lange Wasser dauerhaft flie%DFen darf, bevor eine Aktion ausgel%F6st wird.<br/><br/>" +
+      "Der Zeitraum kann zwischen 1 Minute und 63 Stunden eingestellt werden.",
+
+    "COND_TX_THRESHOLD_HI_WSS" :
+      "Legen Sie fest, wie viel Wasser flie%DFen darf, bevor eine Aktion ausgel%F6st wird.<br/><br/>" +
+      "Die Menge kann zwischen 0 und 1000 Liter pro Minute eingestellt werden.",
+
     "noMoreHelp" : ""
   },
 
@@ -820,10 +828,10 @@ jQuery.extend(true,langJSON, {
       "<b>Please note:</b><br/>If drinking water is used for a test of the sensor, the amount of water required for triggering is reduced, as its conductance value is usually several potencies of 10 higher.",
 
     "SENSOR_SENSITIVITY_shutterTrans" :
-      "When detecting an obstacle the actuator stops in order to prevent damage to the shutters and the obstacle.<br/><br/>" +
-      "With these parameters the sensitivity of the obstacle detection ist set. Normally the setting <b>Normal</b> should be selected.<br><br/>" +
-      "If a more sensitive setting is necessary, select the setting <b>Sensitivity</b>. " +
-      "However, there is a possibility that the actuator will stop even if there is only 'slight resistance'.",
+      "en* Der Parameter erlaubt die Empfindlichkeit der Hinderniserkennung einzustellen bzw. diese abzuschalten. " +
+      "Es wird empfohlen zun%E4chst mit der Standardeinstellung zu arbeiten.<br><br/>" +
+      "Sollte der Rollladen h%E4ufig ohne Einwirkung eines Hindernis stehen bleiben, kann die Empfindlichkeit der Hinderniserkennung reduziert werden. "+
+      "Dieses sollte schrittweise passieren. Ebenso kann die Empfindlichkeit erh%F6ht werden, falls dieses erw%FCnscht ist.",
 
     "SENSOR_SENSITIVITY_DLP" :
       "This parameter determines the sensitivity of the vibration monitoring.<br/><br/>" +
@@ -910,7 +918,7 @@ jQuery.extend(true,langJSON, {
     "MOUNTING_ORIENTATION" : "This parameter makes it possible to rotate the display content by 180 degrees.",
     "MOUNTING_ORIENTATION_A" : "This parameter enables the actuator to be placed at the required angle.",
 
-    "POWERUP_ONTIME_UNIT" :
+    "POWERUP_ONTIME_UNIT_AUTORELOCK" :
       "Select the delay time until <i>Auto Relock</i> is executed after the door lock has been unlocked or opened.<br/><br/>" +
       "In order to use <i>Auto Relock</i>, at least one corresponding entry of the type 'Mode for the door lock drive' must also be entered in the week progam.",
 
@@ -1229,6 +1237,14 @@ jQuery.extend(true,langJSON, {
     "INTERVAL_UNIT_dusi" :
       "The usable measurement interval is limited to a range of 1 minute to 24 hours in the interface. " +
       "Values that are configured too large or too small are adjusted to the limited range in the interface.",
+
+    "EVENT_BLINDTIME_BASE_WSS" :
+      "Specify how long water may flow continuously before an action is triggered.<br/><br/>" +
+      "The time period can be set between 1 minute and 63 hours.",
+
+    "COND_TX_THRESHOLD_HI_WSS" :
+      "Specify how much water may flow before an action is triggered.<br/><br/>" +
+      "The volume can be set between 0 and 1000 litres per minute.",
 
     "noMoreHelp" : ""
     }

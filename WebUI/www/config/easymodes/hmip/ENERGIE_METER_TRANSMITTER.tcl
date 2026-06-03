@@ -27,6 +27,13 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
         append HTML_PARAMS(separate_1) "[getEnergieMeterTransmitterESIStartValue $chn ps psDescr $address $chnDescr(CHANNEL_OPERATION_MODE)]"
       }
 
+    } elseif {[string equal $devType HmIP-ESI-IND] == 1} {
+      if {$chn ==1} {
+        append HTML_PARAMS(separate_1) "[getEnergieMeterTransmitterESIInd $chn ps psDescr $address]"
+      } elseif {$chn == 2} {
+        # make it possible to enter the startvalue of the channel
+        append HTML_PARAMS(separate_1) "[getEnergieMeterTransmitterESIStartValue $chn ps psDescr $address -1]"
+      }
     } else {
       append HTML_PARAMS(separate_1) "[getEnergieMeterTransmitter $chn ps psDescr]"
     }

@@ -16,7 +16,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   set devType $dev_descr(TYPE)
 
   append HTML_PARAMS(separate_1) "<table class=\"ProfileTbl\">"
-    append HTML_PARAMS(separate_1) "[getSwitchVirtualReceiver $chn ps psDescr]"
+    append HTML_PARAMS(separate_1) "[getSwitchVirtualReceiver $chn ps psDescr $url $address]"
   append HTML_PARAMS(separate_1) "</table>"
 }
 

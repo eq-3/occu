@@ -285,6 +285,8 @@ BOOST_MODE=FALSE	${stringTableBoostModeFalse}
 BOOST_MODE=TRUE	${stringTableBoostModeTrue}
 BOOST_STATE	${stringTableBoostState}
 BOOST_TIME	${stringTableBoostTime}
+BOOTED=FALSE	${stringTableBootedFalse}
+BOOTED=TRUE	${stringTableBootedTrue}
 BRIGHTNESS	${stringTableBrightness}
 BRIGHTNESS_FILTER	${stringTableBrightnessFilter}
 BRIGHTNESS_TRANSMITTER|FILTER_SIZE	${stringTableBrightnessFilterSize}
@@ -837,6 +839,8 @@ ERROR_JAMMED=TRUE	${stringTableErrorJammed}: ${lblYes}
 ERROR_LOAD_TOO_LOW	${stringTableLoadTooLow}
 ERROR_LOAD_TOO_LOW=FALSE	${stringTableLoadTooLow}: ${lblNo}
 ERROR_LOAD_TOO_LOW=TRUE	${stringTableLoadTooLow}: ${lblYes}
+ERROR_MAX_WATER_FLOW	${stringTableErrorMaxWaterFlow}
+ERROR_MAX_WATER_FLOW_DURATION	${stringTableErrorMaxWaterFlowDuration}
 ERROR_MOUNTING_MODULE=FALSE	${stringTableErrorMountingModuleFalse}
 ERROR_MOUNTING_MODULE=TRUE	${stringTableErrorMountingModuleTrue}
 ERROR_NON_FLAT_POSITIONING	${stringTableErrorNonFlatPositioning}
@@ -1124,8 +1128,10 @@ LED_STATUS=OFF	${stringTableLEDStatusOff}
 LED_STATUS=ORANGE	${stringTableLEDStatusOrange}
 LED_STATUS=RED	${stringTableLEDStatusRed}
 LEVEL	${stringTableLevel}
+LEVEL_COMMAND_TRANSMITTER_CO2	${chType_LEVEL_COMMAND_TRANSMITTER_CO2}
+LEVEL_COMMAND_TRANSMITTER_HUMIDITY	${chType_LEVEL_COMMAND_TRANSMITTER_HUMIDITY}
+LEVEL_COMMAND_TRANSMITTER_TEMPERATURE	${chType_LEVEL_COMMAND_TRANSMITTER_TEMPERATURE}
 LEVEL_REAL	${stringTableLevelReal}
-
 LEVEL_STATUS=ERROR	${lblValue} ${stringTableLevelStatus}: ${lblError}
 LEVEL_STATUS=4	${lblValue} ${stringTableLevelStatus}: ${lblError}
 LEVEL_STATUS=NORMAL	${lblValue} ${stringTableLevelStatus}: ${lblNormal}
@@ -1368,6 +1374,10 @@ MAINTENANCE|USER_AUTHORIZATION_08	${stringTableUserAuthorization08}
 MAINTENANCE|USER_AUTHORIZATION_08=FALSE	${stringTableUserAuthorization08false}
 MAINTENANCE|USER_AUTHORIZATION_08=TRUE	${stringTableUserAuthorization08true}
 MANU_MODE	${stringTableClimateControlRTTransceiverManuMode}
+MANUAL_SELF_CALIBRATION_BOTTOM_POS_SET=FALSE	${stringTableManualSelfCalibrationBottomPosSetFalse}
+MANUAL_SELF_CALIBRATION_BOTTOM_POS_SET=TRUE	${stringTableManualSelfCalibrationBottomPosSetTrue}
+MANUAL_SELF_CALIBRATION_TOP_POS_SET=FALSE	${stringTableManualSelfCalibrationTopPosSetFalse}
+MANUAL_SELF_CALIBRATION_TOP_POS_SET=TRUE	${stringTableManualSelfCalibrationTopPosSetTrue}
 MEASURED_VALUE	${lblReading}
 MEASURED_VALUE_STATUS=ERROR	${lblReading}: ${lblError}
 MEASURED_VALUE_STATUS=NORMAL	${lblReading}: ${lblNormal}

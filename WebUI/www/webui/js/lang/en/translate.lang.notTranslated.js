@@ -143,6 +143,9 @@ jQuery.extend(true, langJSON, {
     "optionTrailingEdge" : "Trailing edge",
     "optionLeadingEdge" : "Leading edge",
 
+    "stringTableDLPCalibration" : "Calibration door closed",
+
+
     "comment" : "Release A/2026",
 
     "lblDoorLockDirection" : "Direction of turning for closing ",
@@ -172,7 +175,7 @@ jQuery.extend(true, langJSON, {
     "stringTableNoEndStopUnLock" : "No end stop unLock",
 
     "stringTableLockState" : "Lock status",
-    "stringTableLockStateReason" : "Trigger",
+    "stringTableLockStateReason" : "Drive type",
 
     "stringTableLockTeachInState" : "Status pairing process door lock",
 
@@ -239,7 +242,7 @@ jQuery.extend(true, langJSON, {
 
     "stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralUnlocked" : "Start configuration drive with door open (unlocked) \\nand lock in neutral position",
 
-    "stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralVertical" : "Start configuration drive with door open (unlocked) \\nand lock with vertical neutral position",
+    "stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralVertical" : "Start configuration drive with door open (unlocked) \\nand lock with vertical neutral position or knob cylinder",
 
     "stringTableDoorLockStateTransceiverLockTargetLevelTeachInDriveOpenDoorNeutralHorizontal" : "Start configuration drive with door open (unlocked) \\nand lock with horizontal neutral position",
 
@@ -300,8 +303,6 @@ jQuery.extend(true, langJSON, {
     "lblHeight" : "Height",
     "lblDistance" : "Distance",
 
-    "optionSensitive" : "Sensitive",
-
     "stringTableErrorObstacleFalse": "No obstacle detected",
     "stringTableErrorObstacleTrue": "Obstacle detected",
 
@@ -310,6 +311,89 @@ jQuery.extend(true, langJSON, {
 
     "lblSpeedSeclect_1" : "Speed for externally triggered drive",
     "lblSpeedSeclect_2" : "Speed for self-triggered drive",
+
+    "comment" : "Release B/2026",
+    "btnSelfCalibration" : "en* Kalibrierung der Endlagen",
+    "btnChangeMotorDir" : "en* Drehrichtung des Motors wechseln",
+    "btnClearPosition" : "en* Endlagen l%F6schen",
+    "lblPositionSaved" : "en* Die Endlagen sind kalibriert",
+    "lblMovementTime" : "en* Fahrzeit",
+
+    "actionStatusControlUp100" : "en* Auf 100 ms",
+    "actionStatusControlDown100" : "en* Ab 100 ms",
+    "actionStatusControlUp400" : "en* Auf 400 ms",
+    "actionStatusControlDown400" : "en* Ab 400 ms",
+
+    "btnSavePosTop" : "en* Obere Endlage speichern",
+    "btnSavePosBottom" : "en* Untere Endlage speichern",
+
+    "btnSTOP" : "S T O P",
+
+    "hintEndPositionSaved" :
+      "en* Die Endlagen wurden gespeichert.<br><br>" +
+      "Der Rohrmotor kann nun genutzt werden.<br/><br/>",
+
+    "hintEndPositionNotSaved":
+      "en* Die Endlagen wurden noch nicht kalibriert.<br/>"+
+      "Der Rohrmotor kann daher nicht genutzt werden.",
+
+    "optionOff" : "en* Deaktiviert",
+    "optionVeryInsensitive" : "en* Sehr unempfindlich",
+    "optionInsensitive" : "en* Unempfindlich",
+    "optionStandard" : "en* Standard",
+    "optionSensitive" : "Sensitive",
+    "optionVerySensitive" : "en* Sehr empfindlich",
+
+    "helpHeatingCooling" :
+      "en* Damit das Homematic IP System zuverl%E4ssig funktioniert, m%FCssen immer alle Komponenten, welche miteinander verkn%FCpft sind, gemeinsam in den Heiz- bzw. K%FChlmodus gesetzt werden. " +
+      "Wenn dies nicht passiert, kann der Zustand durch eine andere Komponente wieder %FCberschrieben werden.<br/><br/>" +
+      "Beispielsweise verteilt die HmIP-MIOB diesen Zustand zyklisch an die Fu%DFbodenheizungsaktoren und diese verteilen die Information weiter an die Wandthermostate.",
+
+    "lblFlowControl" : "en* Durchfluss-Kontrolle",
+
+    "btnWaterOnCond" : "en* Bedingt ge%F6ffnet",
+
+    "optionWaterOn" : "en* Wasser ein",
+    "optionWaterOff" : "en* Wasser aus",
+
+    "optionUnit1Ltr"    : "en*   1 Liter",
+    "optionUnit10Ltr"   : "en*  10 Liter",
+    "optionUnit100Ltr"  : "en*  100 Liter",
+    "optionUnit1000Ltr" : "en* 1000 Liter",
+
+    "optionSensorError" : "en* Kein Sensor erkannt",
+    "optionSensorConnected" : "en* Sensor erkannt",
+    "lblSensorStatus" : "en* Sensor-Status",
+
+    "lblTypeOfMeasurement" : "en* Art der Messung",
+    "optionWater" : "en* Wasser",
+    "optionGas" : "en* Gas",
+
+    "lblTypeOfSensor" : "en* Sensor",
+    "optionNoSensor" : "en* Kein Sensor",
+    "optionFlowSensorGBCan" : "en* Gr%FCnbeck CAN FLOW",
+    "optionFlowSensorGBHW1" : "en* Gr%FCnbeck HW1",
+
+    "optionPressureSensorGBCan" : "en* Gr%FCnbeck CAN PRESSURE",
+    "optionPressureSensorGBHW1" : "en* Gr%FCnbeck HW1",
+
+    "lblEventBlindTime" : "Flow time monitoring",
+    "lblCondThresholdHi_WSS" : "Flow rate monitoring",
+    "unitLiters" : "en* Liters",
+
+    "stringTableErrorMaxWaterFlow" :
+      "Peak flow rate exceeded. Check it for leaks.",
+
+    "stringTableErrorMaxWaterFlowDuration" :
+      "Water flow time exceeded. Check it for leaks.",
+
+    "stringTableManualSelfCalibrationBottomPosSetFalse" : "en* Untere Endlage gesetzt: Nein",
+    "stringTableManualSelfCalibrationBottomPosSetTrue" : "en* Untere Endlage gesetzt: Ja",
+    "stringTableManualSelfCalibrationTopPosSetFalse" : "en* Obere Endlage gesetzt: Nein",
+    "stringTableManualSelfCalibrationTopPosSetTrue" : "en* Obere Endlage gesetzt: Ja",
+
+    "stringTableBootedFalse" : "en* Ger%E4t aktuell neu gestartet: Nein",
+    "stringTableBootedTrue" : "en* Ger%E4t aktuell neu gestartet: Ja",
 
     "noMoreKeys" : ""
   }
@@ -342,6 +426,6 @@ langJSON.en.helpLockTargetLevel =
   */
   langJSON.en.helpLockTargetLevel_H +
   langJSON.en.helpLockTargetLevel_I +
-  langJSON.en.helpLockTargetLevel_J +
+  langJSON.en.helpLockTargetLevel_J ;
 //  langJSON.en.helpLockTargetLevel_K ;
-  langJSON.en.helpLockTargetLevel_L;
+//  langJSON.en.helpLockTargetLevel_L;

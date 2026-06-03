@@ -30,7 +30,7 @@ if {[catch {set x $dev_descr_sender(TYPE)}] == 0} {
   }
 
   if {$dev_descr_sender(TYPE) == "LEVEL_COMMAND_TRANSMITTER_CO2"} {
-    set x "COND_SWITCH_TRANSMITTER"
+    set x "COND_SWITCH_TRANSMITTER_CO2"
     set dev_descr_sender(TYPE) $x
   }
 

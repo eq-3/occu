@@ -4,7 +4,10 @@
 "description_4" : "<span class=\"translated\">The profile is not active</span>",
 "switchPoint" : "Switching at",
 
+"switchPoint" : "Switching at",
 "subset_1": "Reaching the upper particulate matter threshold",
 "subset_2": "Value falls below lower particulate matter threshold",
+"subset_3": "Reaching the upper particulate matter threshold on - Value falls below lower threshold off",
+"subset_4": "Reaching the upper particulate matter threshold off - Value falls below lower threshold on",
 
 "helpBtnSenderConf" : "<span class=\"translated\">To enable correct operation of the profile, the channel parameters of the particulate matter sensor have to be configured accordingly. The settings can be adjusted here via the button 'Editing transmitter channel settings'.</span><br/><br/>",

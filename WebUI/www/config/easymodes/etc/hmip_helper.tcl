@@ -1270,7 +1270,7 @@ proc getTimeOnOff {prn pref specialElement {paramType ""}} {
         append s "</select>"
 
         if {$paramType == "autoRelock"} {
-          append s "&nbsp;[getHelpIcon POWERUP_ONTIME_UNIT 320 170]"
+          append s "&nbsp;[getHelpIcon POWERUP_ONTIME_UNIT_AUTORELOCK 320 170]"
         }
 
       append s "</td>"

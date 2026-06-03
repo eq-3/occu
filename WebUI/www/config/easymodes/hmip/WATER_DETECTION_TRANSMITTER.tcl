@@ -1,6 +1,6 @@
 #!/bin/tclsh
 
-
+sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/etc/hmipChannelConfigDialogs.tcl]
 sourceOnce [file join $env(DOCUMENT_ROOT) config/easymodes/em_common.tcl]
 
 proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {

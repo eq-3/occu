@@ -12,3 +12,10 @@
 
 "condThresholdLo" : "Lower limit",
 "condThresholdHi" : "Upper limit",
+
+"wsmLinkOutputBehaviour" : "en* Durchfluss",
+
+"optionUnit1Ltr"    : "  1 Litre",
+"optionUnit10Ltr"   : " 10 Litre",
+"optionUnit100Ltr"  : " 100 Litre",
+"optionUnit1000Ltr" : "1000 Litre",

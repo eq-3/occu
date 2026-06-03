@@ -4,6 +4,7 @@
 "description_4" : "<span class=\"translated\">The profile is not active</span>",
 "switchPoint" : "Switching at",
 
+"switchPoint" : "Switching at",
 "subset_1": "Reaching the upper temperature threshold",
 "subset_2": "Value falls below lower temperature threshold",
 "subset_3": "Reaching the upper temperature threshold on - Value falls below lower threshold off",

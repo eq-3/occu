@@ -9,3 +9,5 @@
 
 "subset_1": "Reaching the upper wind threshhold",
 "subset_2": "Reaching the lower wind threshold",
+"subset_3": "Reaching the upper wind threshold on - Value falls below lower threshold off",
+"subset_4": "Reaching the upper wind threshold off - Value falls below lower threshold on",

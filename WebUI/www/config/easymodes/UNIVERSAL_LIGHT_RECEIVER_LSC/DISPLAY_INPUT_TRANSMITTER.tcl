@@ -70,6 +70,7 @@ proc set_htmlParams {iface address pps pps_descr special_input_id peer_type} {
   }
 
   set timer 20
+  set showModeSelector true
 
   set longKeypressAvailable [isLongKeypressAvailable $dev_descr_sender(PARENT_TYPE) $sender_address $url]
 
