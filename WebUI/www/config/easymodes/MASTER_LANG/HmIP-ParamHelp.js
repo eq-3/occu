@@ -828,10 +828,10 @@ jQuery.extend(true,langJSON, {
       "<b>Please note:</b><br/>If drinking water is used for a test of the sensor, the amount of water required for triggering is reduced, as its conductance value is usually several potencies of 10 higher.",
 
     "SENSOR_SENSITIVITY_shutterTrans" :
-      "en* Der Parameter erlaubt die Empfindlichkeit der Hinderniserkennung einzustellen bzw. diese abzuschalten. " +
-      "Es wird empfohlen zun%E4chst mit der Standardeinstellung zu arbeiten.<br><br/>" +
-      "Sollte der Rollladen h%E4ufig ohne Einwirkung eines Hindernis stehen bleiben, kann die Empfindlichkeit der Hinderniserkennung reduziert werden. "+
-      "Dieses sollte schrittweise passieren. Ebenso kann die Empfindlichkeit erh%F6ht werden, falls dieses erw%FCnscht ist.",
+      "This parameter allows you to adjust the sensitivity of the obstacle detection or to disable it. " +
+      "It is recommended to start with the default setting.<br><br/>" +
+      "If the roller shutter frequently stops without encountering an obstacle, the sensitivity of the obstacle detection system can be reduced. "+
+      "This should be done gradually. Similarly, the sensitivity can be increased if required.",
 
     "SENSOR_SENSITIVITY_DLP" :
       "This parameter determines the sensitivity of the vibration monitoring.<br/><br/>" +

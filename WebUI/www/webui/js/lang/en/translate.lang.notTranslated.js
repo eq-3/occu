@@ -313,87 +313,87 @@ jQuery.extend(true, langJSON, {
     "lblSpeedSeclect_2" : "Speed for self-triggered drive",
 
     "comment" : "Release B/2026",
-    "btnSelfCalibration" : "en* Kalibrierung der Endlagen",
-    "btnChangeMotorDir" : "en* Drehrichtung des Motors wechseln",
-    "btnClearPosition" : "en* Endlagen l%F6schen",
-    "lblPositionSaved" : "en* Die Endlagen sind kalibriert",
-    "lblMovementTime" : "en* Fahrzeit",
+    "btnSelfCalibration" : "Calibration of the end positions",
+    "btnChangeMotorDir" : "Change the direction of rotation of the motor",
+    "btnClearPosition" : "Delete end positions",
+    "lblPositionSaved" : "The end positions are calibrated",
+    "lblMovementTime" : "Movement time",
 
-    "actionStatusControlUp100" : "en* Auf 100 ms",
-    "actionStatusControlDown100" : "en* Ab 100 ms",
-    "actionStatusControlUp400" : "en* Auf 400 ms",
-    "actionStatusControlDown400" : "en* Ab 400 ms",
+    "actionStatusControlUp100" : "Up 100 ms",
+    "actionStatusControlDown100" : "Down 100 ms",
+    "actionStatusControlUp400" : "Up 400 ms",
+    "actionStatusControlDown400" : "Down 400 ms",
 
-    "btnSavePosTop" : "en* Obere Endlage speichern",
-    "btnSavePosBottom" : "en* Untere Endlage speichern",
+    "btnSavePosTop" : "Save upper end position",
+    "btnSavePosBottom" : "Save lower end position",
 
     "btnSTOP" : "S T O P",
 
     "hintEndPositionSaved" :
-      "en* Die Endlagen wurden gespeichert.<br><br>" +
-      "Der Rohrmotor kann nun genutzt werden.<br/><br/>",
+      "The end positions have been saved.<br><br>" +
+      "The tubular motor can be used.",
 
     "hintEndPositionNotSaved":
-      "en* Die Endlagen wurden noch nicht kalibriert.<br/>"+
-      "Der Rohrmotor kann daher nicht genutzt werden.",
+      "The end positions have not been saved.<br><br><br/>"+
+      "The tubular motor therefore cannot be used.",
 
-    "optionOff" : "en* Deaktiviert",
-    "optionVeryInsensitive" : "en* Sehr unempfindlich",
-    "optionInsensitive" : "en* Unempfindlich",
-    "optionStandard" : "en* Standard",
+    "optionOff" : "Deactivated",
+    "optionVeryInsensitive" : "Very insensitive",
+    "optionInsensitive" : "Insensitive",
+    "optionStandard" : "Standard",
     "optionSensitive" : "Sensitive",
-    "optionVerySensitive" : "en* Sehr empfindlich",
+    "optionVerySensitive" : "Very sensitive",
 
     "helpHeatingCooling" :
-      "en* Damit das Homematic IP System zuverl%E4ssig funktioniert, m%FCssen immer alle Komponenten, welche miteinander verkn%FCpft sind, gemeinsam in den Heiz- bzw. K%FChlmodus gesetzt werden. " +
-      "Wenn dies nicht passiert, kann der Zustand durch eine andere Komponente wieder %FCberschrieben werden.<br/><br/>" +
-      "Beispielsweise verteilt die HmIP-MIOB diesen Zustand zyklisch an die Fu%DFbodenheizungsaktoren und diese verteilen die Information weiter an die Wandthermostate.",
+      "To ensure that the Homematic IP system operates reliably, all components that are linked to one another must always be set to heating or cooling mode at the same time. " +
+      "Otherwise, the status may be overridden by another component. <br/><br/>" +
+      "For example, the HmIP-MIOB distributes this status cyclically to the floor heating actuators, which in turn pass the information on to the wall thermostats.",
 
-    "lblFlowControl" : "en* Durchfluss-Kontrolle",
+    "lblFlowControl" : "Flow control",
 
-    "btnWaterOnCond" : "en* Bedingt ge%F6ffnet",
+    "btnWaterOnCond" : "Open with restrictions",
 
-    "optionWaterOn" : "en* Wasser ein",
-    "optionWaterOff" : "en* Wasser aus",
+    "optionWaterOn" : "Water ON",
+    "optionWaterOff" : "Water OFF",
 
-    "optionUnit1Ltr"    : "en*   1 Liter",
-    "optionUnit10Ltr"   : "en*  10 Liter",
-    "optionUnit100Ltr"  : "en*  100 Liter",
-    "optionUnit1000Ltr" : "en* 1000 Liter",
+    "optionUnit1Ltr"    : "1 litre",
+    "optionUnit10Ltr"   : "10 litre",
+    "optionUnit100Ltr"  : "100 litre",
+    "optionUnit1000Ltr" : "1000 litre",
 
-    "optionSensorError" : "en* Kein Sensor erkannt",
-    "optionSensorConnected" : "en* Sensor erkannt",
-    "lblSensorStatus" : "en* Sensor-Status",
+    "optionSensorError" : "No sensor detected",
+    "optionSensorConnected" : "Sensor detected",
+    "lblSensorStatus" : "Sensor status",
 
-    "lblTypeOfMeasurement" : "en* Art der Messung",
-    "optionWater" : "en* Wasser",
-    "optionGas" : "en* Gas",
+    "lblTypeOfMeasurement" : "Type of measurement",
+    "optionWater" : "Water",
+    "optionGas" : "Gas",
 
-    "lblTypeOfSensor" : "en* Sensor",
-    "optionNoSensor" : "en* Kein Sensor",
-    "optionFlowSensorGBCan" : "en* Gr%FCnbeck CAN FLOW",
-    "optionFlowSensorGBHW1" : "en* Gr%FCnbeck HW1",
+    "lblTypeOfSensor" : "Sensor",
+    "optionNoSensor" : "No Sensor",
+    "optionFlowSensorGBCan" : "Gr%FCnbeck CAN FLOW",
+    "optionFlowSensorGBHW1" : "Gr%FCnbeck HW1",
 
-    "optionPressureSensorGBCan" : "en* Gr%FCnbeck CAN PRESSURE",
-    "optionPressureSensorGBHW1" : "en* Gr%FCnbeck HW1",
+    "optionPressureSensorGBCan" : "Gr%FCnbeck CAN PRESSURE",
+    "optionPressureSensorGBHW1" : "Gr%FCnbeck HW1",
 
     "lblEventBlindTime" : "Flow time monitoring",
     "lblCondThresholdHi_WSS" : "Flow rate monitoring",
-    "unitLiters" : "en* Liters",
+    "unitLiters" : "Litre",
 
     "stringTableErrorMaxWaterFlow" :
-      "Peak flow rate exceeded. Check it for leaks.",
+      "Peak flow rate exceeded. Check for leaks.",
 
     "stringTableErrorMaxWaterFlowDuration" :
-      "Water flow time exceeded. Check it for leaks.",
+      "Water flow time exceeded. Check for leaks.",
 
-    "stringTableManualSelfCalibrationBottomPosSetFalse" : "en* Untere Endlage gesetzt: Nein",
-    "stringTableManualSelfCalibrationBottomPosSetTrue" : "en* Untere Endlage gesetzt: Ja",
-    "stringTableManualSelfCalibrationTopPosSetFalse" : "en* Obere Endlage gesetzt: Nein",
-    "stringTableManualSelfCalibrationTopPosSetTrue" : "en* Obere Endlage gesetzt: Ja",
+    "stringTableManualSelfCalibrationBottomPosSetFalse" : "Lower end position set: No",
+    "stringTableManualSelfCalibrationBottomPosSetTrue" : "Lower end position set: Yes",
+    "stringTableManualSelfCalibrationTopPosSetFalse" : "Upper end position set: No",
+    "stringTableManualSelfCalibrationTopPosSetTrue" : "Upper end position set: Yes",
 
-    "stringTableBootedFalse" : "en* Ger%E4t aktuell neu gestartet: Nein",
-    "stringTableBootedTrue" : "en* Ger%E4t aktuell neu gestartet: Ja",
+    "stringTableBootedFalse" : "The device has just been restarted: No",
+    "stringTableBootedTrue" : "The device has just been restarted: Yes",
 
     "noMoreKeys" : ""
   }

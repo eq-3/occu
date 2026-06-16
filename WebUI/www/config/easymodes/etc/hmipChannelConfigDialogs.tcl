@@ -6342,7 +6342,7 @@ proc getDoorLockStateTransmitter {chn p descr} {
     incr prn
     append html "<tr>"
     append html "<td>\${stringTableAutoRelockDelay}</td>"
-    append html "[getComboBox $chn $prn "$specialID" "timeOnOff"]<td>[getHelpIcon $param 320 170]</td>"
+    append html "[getComboBox $chn $prn "$specialID" "timeOnOff"]<td>[getHelpIcon $param\_AUTORELOCK 320 170]</td>"
     append html "</tr>"
 
     append html [getTimeUnitComboBox $param $ps($param) $chn $prn $special_input_id]

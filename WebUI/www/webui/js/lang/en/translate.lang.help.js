@@ -165,8 +165,8 @@ jQuery.extend(true, langJSON, {
     "helpColorBehaviour_12" : "The selected behaviour is only taken into account for channel 12!",
 
     "helpConditionWaterFlow" :
-      "en* Bestimmen Sie hier die %D6ffnungsdauer des Bew%E4sserungsaktors. Sie k%F6nnen zwischen der Zeitdauer und der Durchflussmenge w%E4hlen.<br/><br/>" +
-      "Wenn die Zeitdauer und die Durchflussmenge angegeben sind, wird gestoppt, sobald das Erste von beiden erreicht ist.",
+      "Set the duration of the watering actuator here. You can choose between the duration and the flow rate. <br/><br/>" +
+      "If both the duration and the flow rate are specified, the system will stop as soon as the first of the two is reached.",
 
     "END" : ""
   }

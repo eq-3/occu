@@ -1361,7 +1361,7 @@ proc getTimeOnOff {prn pref specialElement {paramType ""}} {
               append s "baseElem.val(1);"
               append s "factorElem.val(2);"
               append s "break;"
-            append s "case4:"
+            append s "case 4:"
               # 3 s
               append s "baseElem.val(1);"
               append s "factorElem.val(3);"
