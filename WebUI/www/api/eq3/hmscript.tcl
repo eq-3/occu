@@ -58,7 +58,12 @@ proc hmscript_runFromFile { filename {p_args -}} {
 }
 
 proc hmscript_escapeString { str } {
+  # Backslash MUST be escaped first, otherwise a backslash placed directly
+  # before a quote in user input would (after the quote is escaped to \")
+  # be read by ReGa as an escaped backslash, closing the string literal
+  # early and turning the rest of the input into executable HomeMatic Script.
   return [string map {
+    "\\" "\\\\"
     "\'" "\\\'"
     "\"" "\\\""
     "\n" "\\n"
