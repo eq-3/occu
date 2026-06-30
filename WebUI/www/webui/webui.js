@@ -42038,7 +42038,7 @@ iseButtonsShutter.prototype = {
     this.divUp = $(this.id + "Up");
     this.divDown = $(this.id + "Down");
 
-     this.shutter = new shutterControl(id, initState);
+    this.shutter = new shutterControl(id, initState);
 
     this.Perc.value = initState;
     this.shutter.setValue(initState);
@@ -42075,7 +42075,7 @@ iseButtonsShutter.prototype = {
       Event.observe(this.divStop, 'mousedown', this.clickStop);
     }
 
-    if (opts.chnLabel.includes("HmIP-M-TD"))  {
+    if ((opts.chnLabel.includes("HmIP-M-TD")) || (opts.chnLabel.includes("RM-110-45/15")))  {
       this.checkEndPos();
     }
 

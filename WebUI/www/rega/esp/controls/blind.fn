@@ -1,5 +1,9 @@
 function ::CreateShutterActuator()
 {
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+  string devAddress = chnAddress.StrValueByIndex(":",0);
+
   object oLvl = cObj.DPByControl("BLIND.LEVEL");
   object oStop = cObj.DPByControl("BLIND.STOP");
   integer oLvlId = 0;
@@ -79,7 +83,13 @@ function ::CreateShutterActuator()
 
   string sCtrlId = "shutter"#chnId;
   WriteLine("<script type='text/javascript'>");
-  WriteLine("ibs"#cObj.ID()#" = new iseButtonsShutter(" # chnId # ", " # iLvl # ", " # oLvlId # ", " # oStopId # ", " #system.GetVar("iStatusOnly")# " );" );
+
+  WriteLine("var opts = {");
+    WriteLine("chnLabel:'"#ch.Label()#"',");
+    WriteLine("devAddress:'"#devAddress#"'");
+  WriteLine("};");
+
+  WriteLine("ibs"#cObj.ID()#" = new iseButtonsShutter(" # chnId # ", " # iLvl # ", " # iLvlId # ", " # iStopId # ", " #system.GetVar("iStatusOnly")# ", opts );" );
   WriteLine("translatePage('#ctrl"#chnId#"tbl');");
   WriteLine("</script>");
   return;
@@ -87,6 +97,11 @@ function ::CreateShutterActuator()
 
 function ::CreateJalousieActuator()
 {
+
+  object ch = dom.GetObject(chnId);
+  string chnAddress = ch.Address();
+  string devAddress = chnAddress.StrValueByIndex(":",0);
+
   object oLvl = cObj.DPByControl("JALOUSIE.LEVEL");
   object oLvlSlats = cObj.DPByControl("JALOUSIE.LEVEL_SLATS");
   object oLvlCombined = cObj.DPByControl("JALOUSIE.LEVEL_COMBINED");
@@ -243,6 +258,8 @@ function ::CreateJalousieActuator()
   WriteLine("<script type='text/javascript'>");
 
     WriteLine("var opts = {");
+      WriteLine("chnLabel:'"#ch.Label()#"',");
+      WriteLine("devAddress:'"#devAddress#"',");
       WriteLine("levelD:"#iLvlId#",");
       WriteLine("levelValue:"#iLvl#",");
       WriteLine("levelSlatsID:"#iLvlSlatsId#",");
@@ -442,6 +459,8 @@ function ::CreateBlindVirtualReceiver()
     WriteLine("var opts = {");
       WriteLine("chnInterface:'"#chInterface.Name()#"',");
       WriteLine("chnAddress:'"#chnAddress#"',");
+      WriteLine("devAddress:'"#devAddress#"',");
+      WriteLine("chnLabel:'"#ch.Label()#"',");
       WriteLine("levelD:"#iLvlId#",");
       WriteLine("levelValue:"#iLvl#",");
       WriteLine("levelSlatsID:"#iLvlSlatsId#",");

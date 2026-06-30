@@ -385,7 +385,7 @@ jQuery.extend(true, langJSON, {
     "optionPressureSensorGBHW1" : "Gr%FCnbeck HW1",
 
     "lblEventBlindTime" : "Durchflusszeit %DCberwachung",
-    "lblCondThresholdHi_WSS" : "Durchflussmenge %DFberwachung",
+    "lblCondThresholdHi_WSS" : "Durchflussmenge %DCberwachung",
     "unitLiters" : "Liter",
 
     "stringTableErrorMaxWaterFlow" :
