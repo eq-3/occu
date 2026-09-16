@@ -12,6 +12,22 @@
 #   Objekt der Systemvariablen mit Name, ID, Wert.
 ##
 
+if { ![regexp {^[A-Za-z0-9_\-\.:]+$} $args(name)] } then {
+  jsonrpc_error 100 "Invalid name. Must match \[A-Za-z0-9_\-.:\]"
+}
+if {[catch { hmscript_assertFloat $args(minValue)} err]} {
+  jsonrpc_error 101 $err
+}
+if {[catch { hmscript_assertFloat $args(maxValue)} err]} {
+  jsonrpc_error 102 $err
+}
+if {[catch { hmscript_assertInteger $args(internal)} err]} {
+  jsonrpc_error 103 $err
+}
+if {[catch { hmscript_assertInteger $args(chnID)} err]} {
+  jsonrpc_error 104 $err
+}
+
 set script {
   if (chnID != -1) {
     object channel = dom.GetObject(chnID);

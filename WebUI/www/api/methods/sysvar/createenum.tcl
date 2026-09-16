@@ -11,6 +11,19 @@
 #   Objekt der Systemvariablen mit Name, ID, Wert.
 ##
 
+if { ![regexp {^[A-Za-z0-9_\-\.:]+$} $args(name)] } then {
+  jsonrpc_error 100 "Invalid name. Must match \[A-Za-z0-9_\-.:\]"
+}
+if { ![regexp {^[A-Za-z0-9_\-;,]+$} $args(valList)] } then {
+  jsonrpc_error 101 "Invalid valList. Expected format: Wert1;Wert2;Wert3;..."
+}
+if {[catch { hmscript_assertInteger $args(internal)} err]} {
+  jsonrpc_error 102 $err
+}
+if {[catch { hmscript_assertInteger $args(chnID)} err]} {
+  jsonrpc_error 103 $err
+}
+
 set script {
 
   if (chnID != -1) {
